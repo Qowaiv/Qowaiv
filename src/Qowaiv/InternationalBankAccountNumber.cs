@@ -1,0 +1,462 @@
+﻿using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+namespace Qowaiv
+{
+    ///<summary>The International Bank Account Number (IBAN) is an international standard
+    /// for identifying bank accounts across national borders with a minimal risk
+    /// of propagating transcription errors. It was originally adopted by the European
+    /// Committee for Banking Standards (ECBS), and was later adopted as an international
+    /// standard under ISO 13616:1997 and now as ISO 13616-1:2007.
+    /// </summary>
+    /// <remarks>
+    /// The official IBAN registrar under ISO 13616-2:2007 is SWIFT.
+    /// </remarks>
+    [DebuggerDisplay("{DebugToString()}")]
+    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an IBAN.")]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(String))]
+    [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
+    public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<InternationalBankAccountNumber>
+    {
+        /// <summary>Represents the pattern of a (potential) valid IBAN.</summary>
+        /// <remarks>
+        /// Pairs of IBAN characters can be devided by maximum 2 spacing characters.
+        /// </remarks>
+        public static readonly Regex Pattern = new Regex(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        /// <summary>Represents an empty/not set IBAN.</summary>
+        public static readonly InternationalBankAccountNumber Empty = new InternationalBankAccountNumber() { m_Value = default(String) };
+
+        /// <summary>Represents an unknown (but set) IBAN.</summary>
+        public static readonly InternationalBankAccountNumber Unknown = new InternationalBankAccountNumber() { m_Value = "ZZ" };
+
+        #region Properties
+
+        /// <summary>The inner value of the IBAN.</summary>
+        private String m_Value;
+
+        /// <summary>Gets the number of characters of IBAN.</summary>
+        public int Length { get { return IsEmptyOrUnknown() ? 0 : m_Value.Length; } }
+
+
+        /// <summary>Gets the country of IBAN.</summary>
+        public Country Country
+        {
+            get
+            {
+                if (m_Value == default(String)) { return Country.Empty; }
+                if (m_Value == Unknown.m_Value) { return Country.Unknown; }
+                return Country.Parse(m_Value.Substring(0, 2));
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>Returns true if the IBAN is empty, otherwise false.</summary>
+        public bool IsEmpty() { return m_Value == default(String); }
+        
+        /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
+        public bool IsEmptyOrUnknown() { return this == InternationalBankAccountNumber.Empty || this == InternationalBankAccountNumber.Unknown; }
+
+        #endregion
+
+        #region (XML) (De)serialization
+
+        /// <summary>Initializes a new instance of IBAN based on the serialization info.</summary>
+        /// <param name="info">The serialization info.</param>
+        /// <param name="context">The streaming context.</param>
+        private InternationalBankAccountNumber(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) { throw new ArgumentNullException("info"); }
+            m_Value = info.GetString("Value");
+        }
+
+        /// <summary>Adds the underlying propererty of IBAN to the serialization info.</summary>
+        /// <param name="info">The serialization info.</param>
+        /// <param name="context">The streaming context.</param>
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) { throw new ArgumentNullException("info"); }
+            info.AddValue("Value", m_Value);
+        }
+
+        /// <summary>Gets the xml schema to (de) xml serialize an IBAN.</summary>
+        /// <remarks>
+        /// Returns null as no schema is required.
+        /// </remarks>
+        XmlSchema IXmlSerializable.GetSchema() { return null; }
+
+        /// <summary>Reads the IBAN from an xml writer.</summary>
+        /// <remarks>
+        /// Uses the string parse function of IBAN.
+        /// </remarks>
+        /// <param name="reader">An xml reader.</param>
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+            var s = reader.ReadElementString();
+            var val = Parse(s);
+            m_Value = val.m_Value;
+        }
+
+        /// <summary>Writes the IBAN to an xml writer.</summary>
+        /// <remarks>
+        /// Uses the string representation of IBAN.
+        /// </remarks>
+        /// <param name="writer">An xml writer.</param>
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            writer.WriteString(ToUnformattedString());
+        }
+
+        #endregion
+        
+        #region (JSON) (De)serialization
+
+        /// <summary>Generates an IBAN from a JSON null object representation.</summary>
+        void IJsonSerializable.FromJson()
+        {
+            m_Value = default(String); 
+        }
+
+        /// <summary>Generates an IBAN from a JSON string representation.</summary>
+        /// <param name="jsonString">
+        /// The JSON string that represents the IBAN.
+        /// </param>
+        void IJsonSerializable.FromJson(String jsonString)
+        {
+            m_Value = Parse(jsonString).m_Value;
+        }
+
+        /// <summary>Generates an IBAN from a JSON integer representation.</summary>
+        /// <param name="jsonInteger">
+        /// The JSON integer that represents the IBAN.
+        /// </param>
+        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        
+        /// <summary>Generates an IBAN from a JSON number representation.</summary>
+        /// <param name="jsonNumber">
+        /// The JSON number that represents the IBAN.
+        /// </param>
+        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        
+        /// <summary>Generates an IBAN from a JSON date representation.</summary>
+        /// <param name="jsonDate">
+        /// The JSON Date that represents the IBAN.
+        /// </param>
+        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        
+        /// <summary>Converts an IBAN into its JSON object representation.</summary>
+        object IJsonSerializable.ToJson()
+        {
+            return  m_Value == default(String) ? null : ToUnformattedString();
+        }
+
+        #endregion
+
+        #region IFormattable / ToString
+
+        /// <summary>Returns a System.String that represents the current IBAN for debug purposes.</summary>
+        private string DebugToString()
+        {
+            if (m_Value == default(String)) { return "IBAN: (empty)"; }
+            if (m_Value == Unknown.m_Value) { return "IBAN: (unknown)"; }
+            return "IBAN: " + ToFormattedString();
+        }
+
+        /// <summary>Formats the IBAN without spaces..</summary>
+        private string ToUnformattedString()
+        {
+            if (m_Value == default(String)) { return string.Empty; }
+            if (m_Value == Unknown.m_Value) { return "?"; }
+            return m_Value;
+        }
+
+        /// <summary>Formats the IBAN with spaces.</summary>
+        private string ToFormattedString()
+        {
+            if (m_Value == default(String)) { return string.Empty; }
+            if (m_Value == Unknown.m_Value) { return "?"; }
+            return FormattedPattern.Replace(m_Value, "$0 ");
+        }
+        private static readonly Regex FormattedPattern = new Regex(@"\w{4}(?!$)", RegexOptions.Compiled);
+
+         /// <summary>Returns a System.String that represents the current IBAN.</summary>
+        public override string ToString()
+        {
+            return ToString(CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>Returns a formatted System.String that represents the current IBAN.</summary>
+        /// <param name="format">
+        /// The format that this describes the formatting.
+        /// </param>
+        public string ToString(string format)
+        {
+            return ToString(format, CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>Returns a formatted System.String that represents the current IBAN.</summary>
+        /// <param name="formatProvider">
+        /// The format provider.
+        /// </param>
+        public string ToString(IFormatProvider formatProvider)
+        {
+            return ToString("", formatProvider);
+        }
+
+        /// <summary>Returns a formatted System.String that represents the current IBAN.</summary>
+        /// <param name="format">
+        /// The format that this describes the formatting.
+        /// </param>
+        /// <param name="formatProvider">
+        /// The format provider.
+        /// </param>
+        /// <param name="formatProvider">
+        /// The format provider.
+        /// </param>
+        /// <remarks>
+        /// The formats:
+        /// 
+        /// u: as unformatted lowercase.
+        /// U: as unformated uppercase.
+        /// f: as formatted lowercase.
+        /// F: as formatted uppercase.
+        /// </remarks>
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            // If no format specified, use the default format.
+            if (String.IsNullOrEmpty(format)) { return ToUnformattedString(); }
+
+            // Apply the format.
+            return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
+        }
+
+        /// <summary>The format token instructions.</summary>
+        private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>()
+        {
+            { 'u', (svo, provider) => svo.ToUnformattedString().ToLowerInvariant() },
+            { 'U', (svo, provider) => svo.ToUnformattedString() },
+            { 'f', (svo, provider) => svo.ToFormattedString().ToLowerInvariant() },
+            { 'F', (svo, provider) => svo.ToFormattedString() },
+        };
+
+        #endregion
+        
+        #region IEquatable
+
+        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
+        /// <param name="obj">An object to compair with.</param>
+        public override bool Equals(object obj){ return base.Equals(obj); }
+
+        /// <summary>Returns the hash code for this IBAN.</summary>
+        /// <returns>
+        /// A 32-bit signed integer hash code.
+        /// </returns>
+        public override int GetHashCode() { return m_Value == null ? 0 : m_Value.GetHashCode(); }
+
+        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand</param>
+        public static bool operator ==(InternationalBankAccountNumber left, InternationalBankAccountNumber right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand</param>
+        public static bool operator !=(InternationalBankAccountNumber left, InternationalBankAccountNumber right)
+        {
+            return !(left == right);
+        }
+
+        #endregion
+
+        #region IComparable
+
+        /// <summary>Compares this instance with a specified System.Object and indicates whether
+        /// this instance precedes, follows, or appears in the same position in the sort
+        /// order as the specified System.Object.
+        /// </summary>
+        /// <param name="obj">
+        /// An object that evaluates to a IBAN.
+        /// </param>
+        /// <returns>
+        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
+        /// or appears in the same position in the sort order as the value parameter.Value
+        /// Condition Less than zero This instance precedes value. Zero This instance
+        /// has the same position in the sort order as value. Greater than zero This
+        /// instance follows value.-or- value is null.
+        /// </returns>
+        /// <exception cref="System.ArgumentException">
+        /// value is not a IBAN.
+        /// </exception>
+        public int CompareTo(object obj)
+        {
+            if (obj is InternationalBankAccountNumber)
+            {
+                return CompareTo((InternationalBankAccountNumber)obj);
+            }
+            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "an IBAN"), "obj");
+        }
+
+        /// <summary>Compares this instance with a specified IBAN and indicates
+        /// whether this instance precedes, follows, or appears in the same position
+        /// in the sort order as the specified IBAN.
+        /// </summary>
+        /// <param name="other">
+        /// The IBAN to compare with this instance.
+        /// </param>
+        /// <returns>
+        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
+        /// or appears in the same position in the sort order as the value parameter.
+        /// </returns>
+        public int CompareTo(InternationalBankAccountNumber other) { return (m_Value ?? String.Empty).CompareTo(other.m_Value ?? String.Empty); }
+
+        #endregion
+       
+        #region (Explicit) casting
+
+        /// <summary>Casts an IBAN to a System.String.</summary>
+        public static explicit operator string(InternationalBankAccountNumber val) { return val.ToString(CultureInfo.CurrentCulture); }
+        /// <summary>Casts a System.String to a IBAN.</summary>
+        public static explicit operator InternationalBankAccountNumber(string str) { return InternationalBankAccountNumber.Parse(str); }
+
+       
+        #endregion
+
+        #region Factory methods
+
+        /// <summary>Converts the string to an IBAN.</summary>
+        /// <param name="s">
+        /// A string containing an IBAN to convert.
+        /// </param>
+        /// <returns>
+        /// An IBAN.
+        /// </returns>
+        /// <exception cref="System.FormatException">
+        /// s is not in the correct format.
+        /// </exception>
+        public static InternationalBankAccountNumber Parse(string s)
+        {
+            InternationalBankAccountNumber val;
+            if (InternationalBankAccountNumber.TryParse(s, out val))
+            {
+                return val;
+            }
+            throw new FormatException(QowaivMessages.FormatExceptionInternationalBankAccountNumber);
+        }
+
+        /// <summary>Converts the string to an IBAN.
+        /// A return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="s">
+        /// A string containing an IBAN to convert.
+        /// </param>
+        /// <returns>
+        /// The IBAN if the string was converted successfully, otherwise InternationalBankAccountNumber.Empty.
+        /// </returns>
+        public static InternationalBankAccountNumber TryParse(string s)
+        {
+            InternationalBankAccountNumber val;
+            if (InternationalBankAccountNumber.TryParse(s, out val))
+            {
+                return val;
+            }
+            return InternationalBankAccountNumber.Empty;
+        }
+
+        /// <summary>Converts the string to an IBAN.
+        /// A return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="s">
+        /// A string containing an IBAN to convert.
+        /// </param>
+        /// <param name="result">
+        /// The result of the parsing.
+        /// </param>
+        /// <returns>
+        /// True if the string was converted successfully, otherwise false.
+        /// </returns>
+        public static bool TryParse(string s,  out InternationalBankAccountNumber result)
+        {
+            result = InternationalBankAccountNumber.Empty;
+            if (string.IsNullOrEmpty(s))
+            {
+                return true;
+            }
+            if (s == "?")
+            {
+                result = InternationalBankAccountNumber.Unknown;
+                return true;
+            }
+            if (s.Length > 11 && Pattern.IsMatch(s))
+            {
+                var str = Parsing.ClearSpacingToUpper(s);
+                var country = Country.TryParse(str.Substring(0, 2));
+
+                Regex localizedPattern;
+
+                if (!country.IsEmptyOrUnknown() &&
+                    (!LocalizedPatterns.TryGetValue(country, out localizedPattern) || localizedPattern.IsMatch(str)))
+                {
+                    var validation = Alphanumeric.Replace(str.Substring(4) + str.Substring(0, 4), AlphanumericToNumeric);
+
+                    int sum = 0;
+                    int exp = 1;
+
+                    for (int pos = validation.Length - 1; pos >= 0; pos--)
+                    {
+                        sum += exp * AlphanumericAndNumericLookup.IndexOf(validation[pos]);
+                        exp = (exp * 10) % 97;
+                    }
+                    if ((sum % 97) == 1)
+                    {
+                        result = new InternationalBankAccountNumber() { m_Value = str };
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region Validation
+
+        /// <summary>Returns true if the val represents a valid IBAN, otherwise false.</summary>
+        public static bool IsValid(string val)
+        {
+            InternationalBankAccountNumber iban;
+            return !String.IsNullOrEmpty(val) && val != "?" && TryParse(val, out iban);
+        }
+
+        /// <summary>Contains a lookup for alphanumeric and numeric chars.</summary>
+        private const string AlphanumericAndNumericLookup = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        /// <summary>Matches on Alphanumeric uppercase chars.</summary>
+        private static readonly Regex Alphanumeric = new Regex("[A-Z]", RegexOptions.Compiled);
+        
+        /// <summary>Replaces A by 11, B by 12 ect.</summary>
+        private static string AlphanumericToNumeric(Match match) 
+        {
+            return AlphanumericAndNumericLookup.IndexOf(match.Value).ToString(CultureInfo.InvariantCulture);
+        }
+
+        #endregion
+    }
+}

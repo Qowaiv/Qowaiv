@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">text/microsoft-resx</resheader>
+  <resheader name="version">2.0</resheader>
+  <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <data name="NotKnown">
+    <value>неизвестно</value>
+    <comment>Not known (default)</comment>
+  </data>
+  <data name="Male">
+    <value>мужчина</value>
+    <comment>Male (default)</comment>
+  </data>
+  <data name="Female">
+    <value>женщина</value>
+    <comment>Female (default)</comment>
+  </data>
+  <data name="NotApplicable">
+    <value>неприменимо</value>
+    <comment>Not applicable (default)</comment>
+  </data>
+</root>

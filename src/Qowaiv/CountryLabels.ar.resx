@@ -1,0 +1,1039 @@
+<?xml version="1.0"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">text/microsoft-resx</resheader>
+  <resheader name="version">2.0</resheader>
+  <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <data name="ZZ_DisplayName">
+    <value>مجهولة</value>
+    <comment>Unknown (ZZ)</comment>
+  </data>
+  <data name="AD_DisplayName">
+    <value>أندورا</value>
+    <comment>Andorra (AD)</comment>
+  </data>
+  <data name="AE_DisplayName">
+    <value>الإمارات</value>
+    <comment>United Arab Emirates (AE)</comment>
+  </data>
+  <data name="AF_DisplayName">
+    <value>أفغانستان</value>
+    <comment>Afghanistan (AF)</comment>
+  </data>
+  <data name="AG_DisplayName">
+    <value>أنتيغوا وباربودا</value>
+    <comment>Antigua And Barbuda (AG)</comment>
+  </data>
+  <data name="AI_DisplayName">
+    <value>أنغويلا</value>
+    <comment>Anguilla (AI)</comment>
+  </data>
+  <data name="AL_DisplayName">
+    <value>ألبانيا</value>
+    <comment>Albania (AL)</comment>
+  </data>
+  <data name="AM_DisplayName">
+    <value>أرمينيا</value>
+    <comment>Armenia (AM)</comment>
+  </data>
+  <data name="AO_DisplayName">
+    <value>أنغولا</value>
+    <comment>Angola (AO)</comment>
+  </data>
+  <data name="AQ_DisplayName">
+    <value>أنتاركتيكا</value>
+    <comment>Antarctica (AQ)</comment>
+  </data>
+  <data name="AR_DisplayName">
+    <value>الأرجنتين</value>
+    <comment>Argentina (AR)</comment>
+  </data>
+  <data name="AS_DisplayName">
+    <value>ساموا الأمريكية</value>
+    <comment>American Samoa (AS)</comment>
+  </data>
+  <data name="AT_DisplayName">
+    <value>النمسا</value>
+    <comment>Austria (AT)</comment>
+  </data>
+  <data name="AU_DisplayName">
+    <value>أستراليا</value>
+    <comment>Australia (AU)</comment>
+  </data>
+  <data name="AW_DisplayName">
+    <value>أروبا</value>
+    <comment>Aruba (AW)</comment>
+  </data>
+  <data name="AX_DisplayName">
+    <value>أولان</value>
+    <comment>Åland Islands (AX)</comment>
+  </data>
+  <data name="AZ_DisplayName">
+    <value>أذربيجان</value>
+    <comment>Azerbaijan (AZ)</comment>
+  </data>
+  <data name="BA_DisplayName">
+    <value>البوسنة والهرسك</value>
+    <comment>Bosnia And Herzegovina (BA)</comment>
+  </data>
+  <data name="BB_DisplayName">
+    <value>بربادوس</value>
+    <comment>Barbados (BB)</comment>
+  </data>
+  <data name="BD_DisplayName">
+    <value>بنغلاديش</value>
+    <comment>Bangladesh (BD)</comment>
+  </data>
+  <data name="BE_DisplayName">
+    <value>بلجيكا</value>
+    <comment>Belgium (BE)</comment>
+  </data>
+  <data name="BF_DisplayName">
+    <value>بوركينا فاسو</value>
+    <comment>Burkina Faso (BF)</comment>
+  </data>
+  <data name="BG_DisplayName">
+    <value>بلغاريا</value>
+    <comment>Bulgaria (BG)</comment>
+  </data>
+  <data name="BH_DisplayName">
+    <value>البحرين</value>
+    <comment>Bahrain (BH)</comment>
+  </data>
+  <data name="BI_DisplayName">
+    <value>بوروندي</value>
+    <comment>Burundi (BI)</comment>
+  </data>
+  <data name="BJ_DisplayName">
+    <value>بنين</value>
+    <comment>Benin (BJ)</comment>
+  </data>
+  <data name="BL_DisplayName">
+    <value>سان بارتليمي</value>
+    <comment>Saint Barthélemy (BL)</comment>
+  </data>
+  <data name="BM_DisplayName">
+    <value>جزر برمودا</value>
+    <comment>Bermuda (BM)</comment>
+  </data>
+  <data name="BN_DisplayName">
+    <value>بروناي</value>
+    <comment>Brunei Darussalam (BN)</comment>
+  </data>
+  <data name="BO_DisplayName">
+    <value>بوليفيا</value>
+    <comment>Bolivia (BO)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>الجزر_الكاريبية_الهولندية</value>
+    <comment>Bonaire (BQ)</comment>
+  </data>
+  <data name="BR_DisplayName">
+    <value>البرازيل</value>
+    <comment>Brazil (BR)</comment>
+  </data>
+  <data name="BS_DisplayName">
+    <value>البهاما</value>
+    <comment>Bahamas (BS)</comment>
+  </data>
+  <data name="BT_DisplayName">
+    <value>بوتان</value>
+    <comment>Bhutan (BT)</comment>
+  </data>
+  <data name="BV_DisplayName">
+    <value>جزيرة_بوفيه</value>
+    <comment>Bouvet Island (BV)</comment>
+  </data>
+  <data name="BW_DisplayName">
+    <value>بوتسوانا</value>
+    <comment>Botswana (BW)</comment>
+  </data>
+  <data name="BY_DisplayName">
+    <value>بيلاروسيا</value>
+    <comment>Belarus (BY)</comment>
+  </data>
+  <data name="BZ_DisplayName">
+    <value>بليز</value>
+    <comment>Belize (BZ)</comment>
+  </data>
+  <data name="CA_DisplayName">
+    <value>كندا</value>
+    <comment>Canada (CA)</comment>
+  </data>
+  <data name="CC_DisplayName">
+    <value>جزر كوكس</value>
+    <comment>Cocos (CC)</comment>
+  </data>
+  <data name="CD_DisplayName">
+    <value>الكونغو الديمقراطية</value>
+    <comment>Congo (CD)</comment>
+  </data>
+  <data name="CF_DisplayName">
+    <value>جمهورية أفريقيا الوسطى</value>
+    <comment>Central African Republic (CF)</comment>
+  </data>
+  <data name="CG_DisplayName">
+    <value>الكونغو</value>
+    <comment>Congo (CG)</comment>
+  </data>
+  <data name="CH_DisplayName">
+    <value>سويسرا</value>
+    <comment>Switzerland (CH)</comment>
+  </data>
+  <data name="CI_DisplayName">
+    <value>ساحل العاج</value>
+    <comment>Côte D'Ivoire (CI)</comment>
+  </data>
+  <data name="CK_DisplayName">
+    <value>جزر كوك</value>
+    <comment>Cook Islands (CK)</comment>
+  </data>
+  <data name="CL_DisplayName">
+    <value>تشيلي</value>
+    <comment>Chile (CL)</comment>
+  </data>
+  <data name="CM_DisplayName">
+    <value>الكاميرون</value>
+    <comment>Cameroon (CM)</comment>
+  </data>
+  <data name="CN_DisplayName">
+    <value>الصين</value>
+    <comment>China (CN)</comment>
+  </data>
+  <data name="CO_DisplayName">
+    <value>كولومبيا</value>
+    <comment>Colombia (CO)</comment>
+  </data>
+  <data name="CR_DisplayName">
+    <value>كوستاريكا</value>
+    <comment>Costa Rica (CR)</comment>
+  </data>
+  <data name="CU_DisplayName">
+    <value>كوبا</value>
+    <comment>Cuba (CU)</comment>
+  </data>
+  <data name="CV_DisplayName">
+    <value>الرأس الأخضر</value>
+    <comment>Cape Verde (CV)</comment>
+  </data>
+  <data name="CW_DisplayName">
+    <value>كوراساو</value>
+    <comment>Curaçao (CW)</comment>
+  </data>
+  <data name="CX_DisplayName">
+    <value>جزيرة عيد الميلاد</value>
+    <comment>Christmas Island (CX)</comment>
+  </data>
+  <data name="CY_DisplayName">
+    <value>قبرص</value>
+    <comment>Cyprus (CY)</comment>
+  </data>
+  <data name="CZ_DisplayName">
+    <value>جمهورية التشيك</value>
+    <comment>Czech Republic (CZ)</comment>
+  </data>
+  <data name="DE_DisplayName">
+    <value>ألمانيا</value>
+    <comment>Germany (DE)</comment>
+  </data>
+  <data name="DJ_DisplayName">
+    <value>جيبوتي</value>
+    <comment>Djibouti (DJ)</comment>
+  </data>
+  <data name="DK_DisplayName">
+    <value>الدنمارك</value>
+    <comment>Denmark (DK)</comment>
+  </data>
+  <data name="DM_DisplayName">
+    <value>دومينيكا</value>
+    <comment>Dominica (DM)</comment>
+  </data>
+  <data name="DO_DisplayName">
+    <value>جمهورية الدومينيكان</value>
+    <comment>Dominican Republic (DO)</comment>
+  </data>
+  <data name="DZ_DisplayName">
+    <value>الجزائر</value>
+    <comment>Algeria (DZ)</comment>
+  </data>
+  <data name="EC_DisplayName">
+    <value>إكوادور</value>
+    <comment>Ecuador (EC)</comment>
+  </data>
+  <data name="EE_DisplayName">
+    <value>إستونيا</value>
+    <comment>Estonia (EE)</comment>
+  </data>
+  <data name="EG_DisplayName">
+    <value>مصر</value>
+    <comment>Egypt (EG)</comment>
+  </data>
+  <data name="EH_DisplayName">
+    <value>الصحراء الغربية</value>
+    <comment>Western Sahara (EH)</comment>
+  </data>
+  <data name="ER_DisplayName">
+    <value>إرتيريا</value>
+    <comment>Eritrea (ER)</comment>
+  </data>
+  <data name="ES_DisplayName">
+    <value>إسبانيا</value>
+    <comment>Spain (ES)</comment>
+  </data>
+  <data name="ET_DisplayName">
+    <value>إثيوبيا</value>
+    <comment>Ethiopia (ET)</comment>
+  </data>
+  <data name="FI_DisplayName">
+    <value>فنلندا</value>
+    <comment>Finland (FI)</comment>
+  </data>
+  <data name="FJ_DisplayName">
+    <value>فيجي</value>
+    <comment>Fiji (FJ)</comment>
+  </data>
+  <data name="FK_DisplayName">
+    <value>قالب:معطيات</value>
+    <comment>Falkland Islands (FK)</comment>
+  </data>
+  <data name="FM_DisplayName">
+    <value>ولايات ميكرونيسيا المتحدة</value>
+    <comment>Micronesia (FM)</comment>
+  </data>
+  <data name="FO_DisplayName">
+    <value>جزر فارو</value>
+    <comment>Faroe Islands (FO)</comment>
+  </data>
+  <data name="FR_DisplayName">
+    <value>فرنسا</value>
+    <comment>France (FR)</comment>
+  </data>
+  <data name="GA_DisplayName">
+    <value>الغابون</value>
+    <comment>Gabon (GA)</comment>
+  </data>
+  <data name="GB_DisplayName">
+    <value>المملكة المتحدة</value>
+    <comment>United Kingdom (GB)</comment>
+  </data>
+  <data name="GD_DisplayName">
+    <value>جرينادا</value>
+    <comment>Grenada (GD)</comment>
+  </data>
+  <data name="GE_DisplayName">
+    <value>جورجيا</value>
+    <comment>Georgia (GE)</comment>
+  </data>
+  <data name="GF_DisplayName">
+    <value>جويانا الفرنسية</value>
+    <comment>French Guiana (GF)</comment>
+  </data>
+  <data name="GG_DisplayName">
+    <value>جزيرة جيرنزي</value>
+    <comment>Guernsey (GG)</comment>
+  </data>
+  <data name="GH_DisplayName">
+    <value>غانا</value>
+    <comment>Ghana (GH)</comment>
+  </data>
+  <data name="GI_DisplayName">
+    <value>جبل طارق</value>
+    <comment>Gibraltar (GI)</comment>
+  </data>
+  <data name="GL_DisplayName">
+    <value>جرينلاند</value>
+    <comment>Greenland (GL)</comment>
+  </data>
+  <data name="GM_DisplayName">
+    <value>غامبيا</value>
+    <comment>Gambia (GM)</comment>
+  </data>
+  <data name="GN_DisplayName">
+    <value>غينيا</value>
+    <comment>Guinea (GN)</comment>
+  </data>
+  <data name="GP_DisplayName">
+    <value>جزر جوادلوب</value>
+    <comment>Guadeloupe (GP)</comment>
+  </data>
+  <data name="GQ_DisplayName">
+    <value>غينيا الاستوائية</value>
+    <comment>Equatorial Guinea (GQ)</comment>
+  </data>
+  <data name="GR_DisplayName">
+    <value>اليونان</value>
+    <comment>Greece (GR)</comment>
+  </data>
+  <data name="GS_DisplayName">
+    <value>جورجيا الجنوبية وجزر ساندويتش الجنوبية</value>
+    <comment>South Georgia And The South Sandwich Islands (GS)</comment>
+  </data>
+  <data name="GT_DisplayName">
+    <value>غواتيمالا</value>
+    <comment>Guatemala (GT)</comment>
+  </data>
+  <data name="GU_DisplayName">
+    <value>غوام</value>
+    <comment>Guam (GU)</comment>
+  </data>
+  <data name="GW_DisplayName">
+    <value>غينيا بيساو</value>
+    <comment>Guinea-Bissau (GW)</comment>
+  </data>
+  <data name="GY_DisplayName">
+    <value>غويانا</value>
+    <comment>Guyana (GY)</comment>
+  </data>
+  <data name="HK_DisplayName">
+    <value>هونغ كونغ</value>
+    <comment>Hong Kong (HK)</comment>
+  </data>
+  <data name="HM_DisplayName">
+    <value>جزيرة هيرد وجزر ماكدونالد</value>
+    <comment>Heard Island And Mcdonald Islands (HM)</comment>
+  </data>
+  <data name="HN_DisplayName">
+    <value>هندوراس</value>
+    <comment>Honduras (HN)</comment>
+  </data>
+  <data name="HR_DisplayName">
+    <value>كرواتيا</value>
+    <comment>Croatia (HR)</comment>
+  </data>
+  <data name="HT_DisplayName">
+    <value>هايتي</value>
+    <comment>Haiti (HT)</comment>
+  </data>
+  <data name="HU_DisplayName">
+    <value>المجر</value>
+    <comment>Hungary (HU)</comment>
+  </data>
+  <data name="ID_DisplayName">
+    <value>إندونيسيا</value>
+    <comment>Indonesia (ID)</comment>
+  </data>
+  <data name="IE_DisplayName">
+    <value>أيرلندا</value>
+    <comment>Ireland (IE)</comment>
+  </data>
+  <data name="IL_DisplayName">
+    <value>إسرائيل</value>
+    <comment>Israel (IL)</comment>
+  </data>
+  <data name="IM_DisplayName">
+    <value>جزيرة مان</value>
+    <comment>Isle Of Man (IM)</comment>
+  </data>
+  <data name="IN_DisplayName">
+    <value>الهند</value>
+    <comment>India (IN)</comment>
+  </data>
+  <data name="IO_DisplayName">
+    <value>إقليم المحيط الهندي البريطاني</value>
+    <comment>British Indian Ocean Territory (IO)</comment>
+  </data>
+  <data name="IQ_DisplayName">
+    <value>العراق</value>
+    <comment>Iraq (IQ)</comment>
+  </data>
+  <data name="IR_DisplayName">
+    <value>إيران</value>
+    <comment>Iran (IR)</comment>
+  </data>
+  <data name="IS_DisplayName">
+    <value>أيسلندا</value>
+    <comment>Iceland (IS)</comment>
+  </data>
+  <data name="IT_DisplayName">
+    <value>إيطاليا</value>
+    <comment>Italy (IT)</comment>
+  </data>
+  <data name="JE_DisplayName">
+    <value>جزيرة جيرزي</value>
+    <comment>Jersey (JE)</comment>
+  </data>
+  <data name="JM_DisplayName">
+    <value>جامايكا</value>
+    <comment>Jamaica (JM)</comment>
+  </data>
+  <data name="JO_DisplayName">
+    <value>الأردن</value>
+    <comment>Jordan (JO)</comment>
+  </data>
+  <data name="JP_DisplayName">
+    <value>اليابان</value>
+    <comment>Japan (JP)</comment>
+  </data>
+  <data name="KE_DisplayName">
+    <value>كينيا</value>
+    <comment>Kenya (KE)</comment>
+  </data>
+  <data name="KG_DisplayName">
+    <value>قرغيزستان</value>
+    <comment>Kyrgyzstan (KG)</comment>
+  </data>
+  <data name="KH_DisplayName">
+    <value>كمبوديا</value>
+    <comment>Cambodia (KH)</comment>
+  </data>
+  <data name="KI_DisplayName">
+    <value>كيريباس</value>
+    <comment>Kiribati (KI)</comment>
+  </data>
+  <data name="KM_DisplayName">
+    <value>جزر القمر</value>
+    <comment>Comoros (KM)</comment>
+  </data>
+  <data name="KN_DisplayName">
+    <value>سانت كيتس ونيفيس</value>
+    <comment>Saint Kitts And Nevis (KN)</comment>
+  </data>
+  <data name="KP_DisplayName">
+    <value>كوريا الشمالية</value>
+    <comment>Korea (KP)</comment>
+  </data>
+  <data name="KR_DisplayName">
+    <value>كوريا الجنوبية</value>
+    <comment>Korea (KR)</comment>
+  </data>
+  <data name="KW_DisplayName">
+    <value>الكويت</value>
+    <comment>Kuwait (KW)</comment>
+  </data>
+  <data name="KY_DisplayName">
+    <value>جزر كايمان</value>
+    <comment>Cayman Islands (KY)</comment>
+  </data>
+  <data name="KZ_DisplayName">
+    <value>كازاخستان</value>
+    <comment>Kazakhstan (KZ)</comment>
+  </data>
+  <data name="LA_DisplayName">
+    <value>لاوس</value>
+    <comment>Lao People'S Democratic Republic (LA)</comment>
+  </data>
+  <data name="LB_DisplayName">
+    <value>لبنان</value>
+    <comment>Lebanon (LB)</comment>
+  </data>
+  <data name="LC_DisplayName">
+    <value>سانت لوسيا</value>
+    <comment>Saint Lucia (LC)</comment>
+  </data>
+  <data name="LI_DisplayName">
+    <value>ليختنشتاين</value>
+    <comment>Liechtenstein (LI)</comment>
+  </data>
+  <data name="LK_DisplayName">
+    <value>سريلانكا</value>
+    <comment>Sri Lanka (LK)</comment>
+  </data>
+  <data name="LR_DisplayName">
+    <value>ليبيريا</value>
+    <comment>Liberia (LR)</comment>
+  </data>
+  <data name="LS_DisplayName">
+    <value>ليسوتو</value>
+    <comment>Lesotho (LS)</comment>
+  </data>
+  <data name="LT_DisplayName">
+    <value>ليتوانيا</value>
+    <comment>Lithuania (LT)</comment>
+  </data>
+  <data name="LU_DisplayName">
+    <value>لوكسمبورغ</value>
+    <comment>Luxembourg (LU)</comment>
+  </data>
+  <data name="LV_DisplayName">
+    <value>لاتفيا</value>
+    <comment>Latvia (LV)</comment>
+  </data>
+  <data name="LY_DisplayName">
+    <value>ليبيا</value>
+    <comment>Libya (LY)</comment>
+  </data>
+  <data name="MA_DisplayName">
+    <value>المغرب</value>
+    <comment>Morocco (MA)</comment>
+  </data>
+  <data name="MC_DisplayName">
+    <value>موناكو</value>
+    <comment>Monaco (MC)</comment>
+  </data>
+  <data name="MD_DisplayName">
+    <value>مولدوفا</value>
+    <comment>Moldova (MD)</comment>
+  </data>
+  <data name="ME_DisplayName">
+    <value>الجبل الأسود</value>
+    <comment>Montenegro (ME)</comment>
+  </data>
+  <data name="MF_DisplayName">
+    <value>قالب:معطيات</value>
+    <comment>Saint Martin (MF)</comment>
+  </data>
+  <data name="MG_DisplayName">
+    <value>مدغشقر</value>
+    <comment>Madagascar (MG)</comment>
+  </data>
+  <data name="MH_DisplayName">
+    <value>جزر مارشال</value>
+    <comment>Marshall Islands (MH)</comment>
+  </data>
+  <data name="MK_DisplayName">
+    <value>مقدونيا</value>
+    <comment>Macedonia (MK)</comment>
+  </data>
+  <data name="ML_DisplayName">
+    <value>مالي</value>
+    <comment>Mali (ML)</comment>
+  </data>
+  <data name="MM_DisplayName">
+    <value>ميانمار</value>
+    <comment>Myanmar (MM)</comment>
+  </data>
+  <data name="MN_DisplayName">
+    <value>منغوليا</value>
+    <comment>Mongolia (MN)</comment>
+  </data>
+  <data name="MO_DisplayName">
+    <value>ماكاو</value>
+    <comment>Macao (MO)</comment>
+  </data>
+  <data name="MP_DisplayName">
+    <value>جزر ماريانا الشمالية</value>
+    <comment>Northern Mariana Islands (MP)</comment>
+  </data>
+  <data name="MQ_DisplayName">
+    <value>مارتينيك</value>
+    <comment>Martinique (MQ)</comment>
+  </data>
+  <data name="MR_DisplayName">
+    <value>موريتانيا</value>
+    <comment>Mauritania (MR)</comment>
+  </data>
+  <data name="MS_DisplayName">
+    <value>مونتسرات</value>
+    <comment>Montserrat (MS)</comment>
+  </data>
+  <data name="MT_DisplayName">
+    <value>مالطا</value>
+    <comment>Malta (MT)</comment>
+  </data>
+  <data name="MU_DisplayName">
+    <value>موريشيوس</value>
+    <comment>Mauritius (MU)</comment>
+  </data>
+  <data name="MV_DisplayName">
+    <value>مالديف</value>
+    <comment>Maldives (MV)</comment>
+  </data>
+  <data name="MW_DisplayName">
+    <value>مالاوي</value>
+    <comment>Malawi (MW)</comment>
+  </data>
+  <data name="MX_DisplayName">
+    <value>المكسيك</value>
+    <comment>Mexico (MX)</comment>
+  </data>
+  <data name="MY_DisplayName">
+    <value>ماليزيا</value>
+    <comment>Malaysia (MY)</comment>
+  </data>
+  <data name="MZ_DisplayName">
+    <value>موزامبيق</value>
+    <comment>Mozambique (MZ)</comment>
+  </data>
+  <data name="NA_DisplayName">
+    <value>ناميبيا</value>
+    <comment>Namibia (NA)</comment>
+  </data>
+  <data name="NC_DisplayName">
+    <value>كاليدونيا الجديدة</value>
+    <comment>New Caledonia (NC)</comment>
+  </data>
+  <data name="NE_DisplayName">
+    <value>النيجر</value>
+    <comment>Niger (NE)</comment>
+  </data>
+  <data name="NF_DisplayName">
+    <value>جزيرة نورفولك</value>
+    <comment>Norfolk Island (NF)</comment>
+  </data>
+  <data name="NG_DisplayName">
+    <value>نيجيريا</value>
+    <comment>Nigeria (NG)</comment>
+  </data>
+  <data name="NI_DisplayName">
+    <value>نيكاراغوا</value>
+    <comment>Nicaragua (NI)</comment>
+  </data>
+  <data name="NL_DisplayName">
+    <value>هولندا</value>
+    <comment>Netherlands (NL)</comment>
+  </data>
+  <data name="NO_DisplayName">
+    <value>النرويج</value>
+    <comment>Norway (NO)</comment>
+  </data>
+  <data name="NP_DisplayName">
+    <value>نيبال</value>
+    <comment>Nepal (NP)</comment>
+  </data>
+  <data name="NR_DisplayName">
+    <value>ناورو</value>
+    <comment>Nauru (NR)</comment>
+  </data>
+  <data name="NU_DisplayName">
+    <value>نييوي</value>
+    <comment>Niue (NU)</comment>
+  </data>
+  <data name="NZ_DisplayName">
+    <value>نيوزيلندا</value>
+    <comment>New Zealand (NZ)</comment>
+  </data>
+  <data name="OM_DisplayName">
+    <value>عمان</value>
+    <comment>Oman (OM)</comment>
+  </data>
+  <data name="PA_DisplayName">
+    <value>بنما</value>
+    <comment>Panama (PA)</comment>
+  </data>
+  <data name="PE_DisplayName">
+    <value>بيرو</value>
+    <comment>Peru (PE)</comment>
+  </data>
+  <data name="PF_DisplayName">
+    <value>بولينيزيا الفرنسية</value>
+    <comment>French Polynesia (PF)</comment>
+  </data>
+  <data name="PG_DisplayName">
+    <value>بابوا غينيا الجديدة</value>
+    <comment>Papua New Guinea (PG)</comment>
+  </data>
+  <data name="PH_DisplayName">
+    <value>الفلبين</value>
+    <comment>Philippines (PH)</comment>
+  </data>
+  <data name="PK_DisplayName">
+    <value>باكستان</value>
+    <comment>Pakistan (PK)</comment>
+  </data>
+  <data name="PL_DisplayName">
+    <value>بولندا</value>
+    <comment>Poland (PL)</comment>
+  </data>
+  <data name="PM_DisplayName">
+    <value>سان بيار وميكلون</value>
+    <comment>Saint Pierre And Miquelon (PM)</comment>
+  </data>
+  <data name="PN_DisplayName">
+    <value>جزر بيتكيرن</value>
+    <comment>Pitcairn (PN)</comment>
+  </data>
+  <data name="PR_DisplayName">
+    <value>بورتو ريكو</value>
+    <comment>Puerto Rico (PR)</comment>
+  </data>
+  <data name="PS_DisplayName">
+    <value>فلسطين</value>
+    <comment>Palestinian Territory (PS)</comment>
+  </data>
+  <data name="PT_DisplayName">
+    <value>البرتغال</value>
+    <comment>Portugal (PT)</comment>
+  </data>
+  <data name="PW_DisplayName">
+    <value>بالاو</value>
+    <comment>Palau (PW)</comment>
+  </data>
+  <data name="PY_DisplayName">
+    <value>باراغواي</value>
+    <comment>Paraguay (PY)</comment>
+  </data>
+  <data name="QA_DisplayName">
+    <value>قطر</value>
+    <comment>Qatar (QA)</comment>
+  </data>
+  <data name="RE_DisplayName">
+    <value>ريونيون</value>
+    <comment>Réunion (RE)</comment>
+  </data>
+  <data name="RO_DisplayName">
+    <value>رومانيا</value>
+    <comment>Romania (RO)</comment>
+  </data>
+  <data name="RS_DisplayName">
+    <value>صربيا</value>
+    <comment>Serbia (RS)</comment>
+  </data>
+  <data name="RU_DisplayName">
+    <value>روسيا</value>
+    <comment>Russian Federation (RU)</comment>
+  </data>
+  <data name="RW_DisplayName">
+    <value>رواندا</value>
+    <comment>Rwanda (RW)</comment>
+  </data>
+  <data name="SA_DisplayName">
+    <value>السعودية</value>
+    <comment>Saudi Arabia (SA)</comment>
+  </data>
+  <data name="SB_DisplayName">
+    <value>جزر سليمان</value>
+    <comment>Solomon Islands (SB)</comment>
+  </data>
+  <data name="SC_DisplayName">
+    <value>سيشيل</value>
+    <comment>Seychelles (SC)</comment>
+  </data>
+  <data name="SD_DisplayName">
+    <value>السودان</value>
+    <comment>Sudan (SD)</comment>
+  </data>
+  <data name="SE_DisplayName">
+    <value>السويد</value>
+    <comment>Sweden (SE)</comment>
+  </data>
+  <data name="SG_DisplayName">
+    <value>سنغافورة</value>
+    <comment>Singapore (SG)</comment>
+  </data>
+  <data name="SH_DisplayName">
+    <value>سانت هيلينا</value>
+    <comment>Saint Helena (SH)</comment>
+  </data>
+  <data name="SI_DisplayName">
+    <value>سلوفينيا</value>
+    <comment>Slovenia (SI)</comment>
+  </data>
+  <data name="SJ_DisplayName">
+    <value>سفالبارد</value>
+    <comment>Svalbard And Jan Mayen (SJ)</comment>
+  </data>
+  <data name="SK_DisplayName">
+    <value>سلوفاكيا</value>
+    <comment>Slovakia (SK)</comment>
+  </data>
+  <data name="SL_DisplayName">
+    <value>سيراليون</value>
+    <comment>Sierra Leone (SL)</comment>
+  </data>
+  <data name="SM_DisplayName">
+    <value>سان مارينو</value>
+    <comment>San Marino (SM)</comment>
+  </data>
+  <data name="SN_DisplayName">
+    <value>السنغال</value>
+    <comment>Senegal (SN)</comment>
+  </data>
+  <data name="SO_DisplayName">
+    <value>الصومال</value>
+    <comment>Somalia (SO)</comment>
+  </data>
+  <data name="SR_DisplayName">
+    <value>سورينام</value>
+    <comment>Suriname (SR)</comment>
+  </data>
+  <data name="SS_DisplayName">
+    <value>جنوب_السودان</value>
+    <comment>South Sudan (SS)</comment>
+  </data>
+  <data name="ST_DisplayName">
+    <value>ساو تومي وبرينسيب</value>
+    <comment>Sao Tome And Principe (ST)</comment>
+  </data>
+  <data name="SV_DisplayName">
+    <value>إلسالفادور</value>
+    <comment>El Salvador (SV)</comment>
+  </data>
+  <data name="SX_DisplayName">
+    <value>سينت_مارتن</value>
+    <comment>Sint Maarten (SX)</comment>
+  </data>
+  <data name="SY_DisplayName">
+    <value>سوريا</value>
+    <comment>Syrian Arab Republic (SY)</comment>
+  </data>
+  <data name="SZ_DisplayName">
+    <value>سوازيلاند</value>
+    <comment>Swaziland (SZ)</comment>
+  </data>
+  <data name="TC_DisplayName">
+    <value>جزر توركس وكايكوس</value>
+    <comment>Turks And Caicos Islands (TC)</comment>
+  </data>
+  <data name="TD_DisplayName">
+    <value>تشاد</value>
+    <comment>Chad (TD)</comment>
+  </data>
+  <data name="TF_DisplayName">
+    <value>أراضي فرنسية جنوبية وأنتارتيكية</value>
+    <comment>French Southern Territories (TF)</comment>
+  </data>
+  <data name="TG_DisplayName">
+    <value>توغو</value>
+    <comment>Togo (TG)</comment>
+  </data>
+  <data name="TH_DisplayName">
+    <value>تايلاند</value>
+    <comment>Thailand (TH)</comment>
+  </data>
+  <data name="TJ_DisplayName">
+    <value>طاجيكستان</value>
+    <comment>Tajikistan (TJ)</comment>
+  </data>
+  <data name="TK_DisplayName">
+    <value>توكلو</value>
+    <comment>Tokelau (TK)</comment>
+  </data>
+  <data name="TL_DisplayName">
+    <value>تيمور الشرقية</value>
+    <comment>Timor-Leste (TL)</comment>
+  </data>
+  <data name="TM_DisplayName">
+    <value>تركمانستان</value>
+    <comment>Turkmenistan (TM)</comment>
+  </data>
+  <data name="TN_DisplayName">
+    <value>تونس</value>
+    <comment>Tunisia (TN)</comment>
+  </data>
+  <data name="TO_DisplayName">
+    <value>تونغا</value>
+    <comment>Tonga (TO)</comment>
+  </data>
+  <data name="TR_DisplayName">
+    <value>تركيا</value>
+    <comment>Turkey (TR)</comment>
+  </data>
+  <data name="TT_DisplayName">
+    <value>ترينيداد وتوباغو</value>
+    <comment>Trinidad And Tobago (TT)</comment>
+  </data>
+  <data name="TV_DisplayName">
+    <value>توفالو</value>
+    <comment>Tuvalu (TV)</comment>
+  </data>
+  <data name="TW_DisplayName">
+    <value>تايوان</value>
+    <comment>Taiwan (TW)</comment>
+  </data>
+  <data name="TZ_DisplayName">
+    <value>تنزانيا</value>
+    <comment>Tanzania (TZ)</comment>
+  </data>
+  <data name="UA_DisplayName">
+    <value>أوكرانيا</value>
+    <comment>Ukraine (UA)</comment>
+  </data>
+  <data name="UG_DisplayName">
+    <value>أوغندا</value>
+    <comment>Uganda (UG)</comment>
+  </data>
+  <data name="UM_DisplayName">
+    <value>جزر_امريكا_البعيده_الصغيره</value>
+    <comment>United States Minor Outlying Islands (UM)</comment>
+  </data>
+  <data name="US_DisplayName">
+    <value>الولايات المتحدة</value>
+    <comment>United States (US)</comment>
+  </data>
+  <data name="UY_DisplayName">
+    <value>أوروغواي</value>
+    <comment>Uruguay (UY)</comment>
+  </data>
+  <data name="UZ_DisplayName">
+    <value>أوزبكستان</value>
+    <comment>Uzbekistan (UZ)</comment>
+  </data>
+  <data name="VA_DisplayName">
+    <value>قالب:معطيات</value>
+    <comment>Holy See (VA)</comment>
+  </data>
+  <data name="VC_DisplayName">
+    <value>سانت فينسنت والغرينادينز</value>
+    <comment>Saint Vincent And The Grenadines (VC)</comment>
+  </data>
+  <data name="VE_DisplayName">
+    <value>فنزويلا</value>
+    <comment>Venezuela (VE)</comment>
+  </data>
+  <data name="VG_DisplayName">
+    <value>قالب:معطيات</value>
+    <comment>Virgin Islands (VG)</comment>
+  </data>
+  <data name="VI_DisplayName">
+    <value>الجزر العذراء الأمريكية</value>
+    <comment>Virgin Islands (VI)</comment>
+  </data>
+  <data name="VN_DisplayName">
+    <value>فيتنام</value>
+    <comment>Viet Nam (VN)</comment>
+  </data>
+  <data name="VU_DisplayName">
+    <value>فانواتو</value>
+    <comment>Vanuatu (VU)</comment>
+  </data>
+  <data name="WF_DisplayName">
+    <value>والس وفوتونا</value>
+    <comment>Wallis And Futuna (WF)</comment>
+  </data>
+  <data name="WS_DisplayName">
+    <value>ساموا</value>
+    <comment>Samoa (WS)</comment>
+  </data>
+  <data name="YE_DisplayName">
+    <value>اليمن</value>
+    <comment>Yemen (YE)</comment>
+  </data>
+  <data name="YT_DisplayName">
+    <value>مايوت</value>
+    <comment>Mayotte (YT)</comment>
+  </data>
+  <data name="ZA_DisplayName">
+    <value>جنوب أفريقيا</value>
+    <comment>South Africa (ZA)</comment>
+  </data>
+  <data name="ZM_DisplayName">
+    <value>زامبيا</value>
+    <comment>Zambia (ZM)</comment>
+  </data>
+  <data name="ZW_DisplayName">
+    <value>زيمبابوي</value>
+    <comment>Zimbabwe (ZW)</comment>
+  </data>
+  <data name="ANHH_DisplayName">
+    <value>جزر_الأنتيل_الهولندية</value>
+    <comment>Netherlands Antilles (AN)</comment>
+  </data>
+  <data name="BUMM_DisplayName">
+    <value>ميانمار</value>
+    <comment>Burma (BU)</comment>
+  </data>
+  <data name="CSHH_DisplayName">
+    <value>تشيكوسلوفاكيا</value>
+    <comment>Czechoslovakia (CS)</comment>
+  </data>
+  <data name="CSXX_DisplayName">
+    <value>صربيا_والجبل_الأسود</value>
+    <comment>Serbia And Montenegro (CS)</comment>
+  </data>
+  <data name="DDDE_DisplayName">
+    <value>ألمانيا_الشرقية</value>
+    <comment>German Democratic Republic (DD)</comment>
+  </data>
+  <data name="SUHH_DisplayName">
+    <value>الاتحاد_السوفيتي</value>
+    <comment>Soviet Union (SU)</comment>
+  </data>
+  <data name="YUCS_DisplayName">
+    <value>يوغوسلافيا</value>
+    <comment>Yugoslavia (YU)</comment>
+  </data>
+  <data name="ZRCD_DisplayName">
+    <value>زائير</value>
+    <comment>Zaire (ZR)</comment>
+  </data>
+</root>

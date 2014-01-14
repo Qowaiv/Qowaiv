@@ -1,0 +1,5047 @@
+<?xml version="1.0"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">text/microsoft-resx</resheader>
+  <resheader name="version">2.0</resheader>
+  <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <data name="ZZ_DisplayName">
+    <value>Unknown</value>
+  </data>
+  <data name="ZZ_ISO">
+    <value>999</value>
+  </data>
+  <data name="ZZ_ISO2">
+    <value>ZZ</value>
+  </data>
+  <data name="ZZ_ISO3">
+    <value>ZZZ</value>
+  </data>
+  <data name="ZZ_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AD_DisplayName">
+    <value>Andorra</value>
+  </data>
+  <data name="AD_ISO">
+    <value>20</value>
+  </data>
+  <data name="AD_ISO2">
+    <value>AD</value>
+  </data>
+  <data name="AD_ISO3">
+    <value>AND</value>
+  </data>
+  <data name="AD_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AD_CallingCode">
+    <value>+376</value>
+  </data>
+  <data name="AE_DisplayName">
+    <value>United Arab Emirates</value>
+  </data>
+  <data name="AE_ISO">
+    <value>784</value>
+  </data>
+  <data name="AE_ISO2">
+    <value>AE</value>
+  </data>
+  <data name="AE_ISO3">
+    <value>ARE</value>
+  </data>
+  <data name="AE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AE_CallingCode">
+    <value>+971</value>
+  </data>
+  <data name="AE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="AF_DisplayName">
+    <value>Afghanistan</value>
+  </data>
+  <data name="AF_ISO">
+    <value>4</value>
+  </data>
+  <data name="AF_ISO2">
+    <value>AF</value>
+  </data>
+  <data name="AF_ISO3">
+    <value>AFG</value>
+  </data>
+  <data name="AF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AF_CallingCode">
+    <value>+93</value>
+  </data>
+  <data name="AF_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="AG_DisplayName">
+    <value>Antigua And Barbuda</value>
+  </data>
+  <data name="AG_ISO">
+    <value>28</value>
+  </data>
+  <data name="AG_ISO2">
+    <value>AG</value>
+  </data>
+  <data name="AG_ISO3">
+    <value>ATG</value>
+  </data>
+  <data name="AG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AG_CallingCode">
+    <value>+1 268</value>
+  </data>
+  <data name="AI_DisplayName">
+    <value>Anguilla</value>
+  </data>
+  <data name="AI_ISO">
+    <value>660</value>
+  </data>
+  <data name="AI_ISO2">
+    <value>AI</value>
+  </data>
+  <data name="AI_ISO3">
+    <value>AIA</value>
+  </data>
+  <data name="AI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AI_CallingCode">
+    <value>+1 264</value>
+  </data>
+  <data name="AL_DisplayName">
+    <value>Albania</value>
+  </data>
+  <data name="AL_ISO">
+    <value>8</value>
+  </data>
+  <data name="AL_ISO2">
+    <value>AL</value>
+  </data>
+  <data name="AL_ISO3">
+    <value>ALB</value>
+  </data>
+  <data name="AL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AL_CallingCode">
+    <value>+355</value>
+  </data>
+  <data name="AL_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="AM_DisplayName">
+    <value>Armenia</value>
+  </data>
+  <data name="AM_ISO">
+    <value>51</value>
+  </data>
+  <data name="AM_ISO2">
+    <value>AM</value>
+  </data>
+  <data name="AM_ISO3">
+    <value>ARM</value>
+  </data>
+  <data name="AM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AM_CallingCode">
+    <value>+374</value>
+  </data>
+  <data name="AM_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="AO_DisplayName">
+    <value>Angola</value>
+  </data>
+  <data name="AO_ISO">
+    <value>24</value>
+  </data>
+  <data name="AO_ISO2">
+    <value>AO</value>
+  </data>
+  <data name="AO_ISO3">
+    <value>AGO</value>
+  </data>
+  <data name="AO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AO_CallingCode">
+    <value>+244</value>
+  </data>
+  <data name="AQ_DisplayName">
+    <value>Antarctica</value>
+  </data>
+  <data name="AQ_ISO">
+    <value>10</value>
+  </data>
+  <data name="AQ_ISO2">
+    <value>AQ</value>
+  </data>
+  <data name="AQ_ISO3">
+    <value>ATA</value>
+  </data>
+  <data name="AQ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AR_DisplayName">
+    <value>Argentina</value>
+  </data>
+  <data name="AR_ISO">
+    <value>32</value>
+  </data>
+  <data name="AR_ISO2">
+    <value>AR</value>
+  </data>
+  <data name="AR_ISO3">
+    <value>ARG</value>
+  </data>
+  <data name="AR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AR_CallingCode">
+    <value>+54</value>
+  </data>
+  <data name="AR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="AS_DisplayName">
+    <value>American Samoa</value>
+  </data>
+  <data name="AS_ISO">
+    <value>16</value>
+  </data>
+  <data name="AS_ISO2">
+    <value>AS</value>
+  </data>
+  <data name="AS_ISO3">
+    <value>ASM</value>
+  </data>
+  <data name="AS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AS_CallingCode">
+    <value>+1 684</value>
+  </data>
+  <data name="AT_DisplayName">
+    <value>Austria</value>
+  </data>
+  <data name="AT_ISO">
+    <value>40</value>
+  </data>
+  <data name="AT_ISO2">
+    <value>AT</value>
+  </data>
+  <data name="AT_ISO3">
+    <value>AUT</value>
+  </data>
+  <data name="AT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AT_CallingCode">
+    <value>+43</value>
+  </data>
+  <data name="AT_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="AU_DisplayName">
+    <value>Australia</value>
+  </data>
+  <data name="AU_ISO">
+    <value>36</value>
+  </data>
+  <data name="AU_ISO2">
+    <value>AU</value>
+  </data>
+  <data name="AU_ISO3">
+    <value>AUS</value>
+  </data>
+  <data name="AU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AU_CallingCode">
+    <value>+61</value>
+  </data>
+  <data name="AU_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="AW_DisplayName">
+    <value>Aruba</value>
+  </data>
+  <data name="AW_ISO">
+    <value>533</value>
+  </data>
+  <data name="AW_ISO2">
+    <value>AW</value>
+  </data>
+  <data name="AW_ISO3">
+    <value>ABW</value>
+  </data>
+  <data name="AW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AW_CallingCode">
+    <value>+297</value>
+  </data>
+  <data name="AX_DisplayName">
+    <value>Åland Islands</value>
+  </data>
+  <data name="AX_ISO">
+    <value>248</value>
+  </data>
+  <data name="AX_ISO2">
+    <value>AX</value>
+  </data>
+  <data name="AX_ISO3">
+    <value>ALA</value>
+  </data>
+  <data name="AX_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AX_CallingCode">
+    <value>+358</value>
+  </data>
+  <data name="AZ_DisplayName">
+    <value>Azerbaijan</value>
+  </data>
+  <data name="AZ_ISO">
+    <value>31</value>
+  </data>
+  <data name="AZ_ISO2">
+    <value>AZ</value>
+  </data>
+  <data name="AZ_ISO3">
+    <value>AZE</value>
+  </data>
+  <data name="AZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AZ_CallingCode">
+    <value>+994</value>
+  </data>
+  <data name="AZ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BA_DisplayName">
+    <value>Bosnia And Herzegovina</value>
+  </data>
+  <data name="BA_ISO">
+    <value>70</value>
+  </data>
+  <data name="BA_ISO2">
+    <value>BA</value>
+  </data>
+  <data name="BA_ISO3">
+    <value>BIH</value>
+  </data>
+  <data name="BA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BA_CallingCode">
+    <value>+387</value>
+  </data>
+  <data name="BA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BB_DisplayName">
+    <value>Barbados</value>
+  </data>
+  <data name="BB_ISO">
+    <value>52</value>
+  </data>
+  <data name="BB_ISO2">
+    <value>BB</value>
+  </data>
+  <data name="BB_ISO3">
+    <value>BRB</value>
+  </data>
+  <data name="BB_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BB_CallingCode">
+    <value>+1 247</value>
+  </data>
+  <data name="BD_DisplayName">
+    <value>Bangladesh</value>
+  </data>
+  <data name="BD_ISO">
+    <value>50</value>
+  </data>
+  <data name="BD_ISO2">
+    <value>BD</value>
+  </data>
+  <data name="BD_ISO3">
+    <value>BGD</value>
+  </data>
+  <data name="BD_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BD_CallingCode">
+    <value>+880</value>
+  </data>
+  <data name="BD_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BE_DisplayName">
+    <value>Belgium</value>
+  </data>
+  <data name="BE_ISO">
+    <value>56</value>
+  </data>
+  <data name="BE_ISO2">
+    <value>BE</value>
+  </data>
+  <data name="BE_ISO3">
+    <value>BEL</value>
+  </data>
+  <data name="BE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BE_CallingCode">
+    <value>+32</value>
+  </data>
+  <data name="BE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BF_DisplayName">
+    <value>Burkina Faso</value>
+  </data>
+  <data name="BF_ISO">
+    <value>854</value>
+  </data>
+  <data name="BF_ISO2">
+    <value>BF</value>
+  </data>
+  <data name="BF_ISO3">
+    <value>BFA</value>
+  </data>
+  <data name="BF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BF_CallingCode">
+    <value>+226</value>
+  </data>
+  <data name="BG_DisplayName">
+    <value>Bulgaria</value>
+  </data>
+  <data name="BG_ISO">
+    <value>100</value>
+  </data>
+  <data name="BG_ISO2">
+    <value>BG</value>
+  </data>
+  <data name="BG_ISO3">
+    <value>BGR</value>
+  </data>
+  <data name="BG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BG_CallingCode">
+    <value>+359</value>
+  </data>
+  <data name="BG_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BH_DisplayName">
+    <value>Bahrain</value>
+  </data>
+  <data name="BH_ISO">
+    <value>48</value>
+  </data>
+  <data name="BH_ISO2">
+    <value>BH</value>
+  </data>
+  <data name="BH_ISO3">
+    <value>BHR</value>
+  </data>
+  <data name="BH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BH_CallingCode">
+    <value>+973</value>
+  </data>
+  <data name="BH_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BI_DisplayName">
+    <value>Burundi</value>
+  </data>
+  <data name="BI_ISO">
+    <value>108</value>
+  </data>
+  <data name="BI_ISO2">
+    <value>BI</value>
+  </data>
+  <data name="BI_ISO3">
+    <value>BDI</value>
+  </data>
+  <data name="BI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BI_CallingCode">
+    <value>+257</value>
+  </data>
+  <data name="BJ_DisplayName">
+    <value>Benin</value>
+  </data>
+  <data name="BJ_ISO">
+    <value>204</value>
+  </data>
+  <data name="BJ_ISO2">
+    <value>BJ</value>
+  </data>
+  <data name="BJ_ISO3">
+    <value>BEN</value>
+  </data>
+  <data name="BJ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BJ_CallingCode">
+    <value>+229</value>
+  </data>
+  <data name="BL_DisplayName">
+    <value>Saint Barthélemy</value>
+  </data>
+  <data name="BL_ISO">
+    <value>652</value>
+  </data>
+  <data name="BL_ISO2">
+    <value>BL</value>
+  </data>
+  <data name="BL_ISO3">
+    <value>BLM</value>
+  </data>
+  <data name="BL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BL_CallingCode">
+    <value>+590</value>
+  </data>
+  <data name="BM_DisplayName">
+    <value>Bermuda</value>
+  </data>
+  <data name="BM_ISO">
+    <value>60</value>
+  </data>
+  <data name="BM_ISO2">
+    <value>BM</value>
+  </data>
+  <data name="BM_ISO3">
+    <value>BMU</value>
+  </data>
+  <data name="BM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BM_CallingCode">
+    <value>+1 441</value>
+  </data>
+  <data name="BN_DisplayName">
+    <value>Brunei Darussalam</value>
+  </data>
+  <data name="BN_ISO">
+    <value>96</value>
+  </data>
+  <data name="BN_ISO2">
+    <value>BN</value>
+  </data>
+  <data name="BN_ISO3">
+    <value>BRN</value>
+  </data>
+  <data name="BN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BN_CallingCode">
+    <value>+673</value>
+  </data>
+  <data name="BN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BO_DisplayName">
+    <value>Bolivia</value>
+  </data>
+  <data name="BO_ISO">
+    <value>68</value>
+  </data>
+  <data name="BO_ISO2">
+    <value>BO</value>
+  </data>
+  <data name="BO_ISO3">
+    <value>BOL</value>
+  </data>
+  <data name="BO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BO_CallingCode">
+    <value>+591</value>
+  </data>
+  <data name="BO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>Bonaire</value>
+  </data>
+  <data name="BQ_ISO">
+    <value>535</value>
+  </data>
+  <data name="BQ_ISO2">
+    <value>BQ</value>
+  </data>
+  <data name="BQ_ISO3">
+    <value>BES</value>
+  </data>
+  <data name="BQ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BQ_CallingCode">
+    <value>+599</value>
+  </data>
+  <data name="BR_DisplayName">
+    <value>Brazil</value>
+  </data>
+  <data name="BR_ISO">
+    <value>76</value>
+  </data>
+  <data name="BR_ISO2">
+    <value>BR</value>
+  </data>
+  <data name="BR_ISO3">
+    <value>BRA</value>
+  </data>
+  <data name="BR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BR_CallingCode">
+    <value>+55</value>
+  </data>
+  <data name="BR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BS_DisplayName">
+    <value>Bahamas</value>
+  </data>
+  <data name="BS_ISO">
+    <value>44</value>
+  </data>
+  <data name="BS_ISO2">
+    <value>BS</value>
+  </data>
+  <data name="BS_ISO3">
+    <value>BHS</value>
+  </data>
+  <data name="BS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BS_CallingCode">
+    <value>+1 242</value>
+  </data>
+  <data name="BT_DisplayName">
+    <value>Bhutan</value>
+  </data>
+  <data name="BT_ISO">
+    <value>64</value>
+  </data>
+  <data name="BT_ISO2">
+    <value>BT</value>
+  </data>
+  <data name="BT_ISO3">
+    <value>BTN</value>
+  </data>
+  <data name="BT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BT_CallingCode">
+    <value>+975</value>
+  </data>
+  <data name="BV_DisplayName">
+    <value>Bouvet Island</value>
+  </data>
+  <data name="BV_ISO">
+    <value>74</value>
+  </data>
+  <data name="BV_ISO2">
+    <value>BV</value>
+  </data>
+  <data name="BV_ISO3">
+    <value>BVT</value>
+  </data>
+  <data name="BV_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BV_CallingCode">
+    <value>+47</value>
+  </data>
+  <data name="BW_DisplayName">
+    <value>Botswana</value>
+  </data>
+  <data name="BW_ISO">
+    <value>72</value>
+  </data>
+  <data name="BW_ISO2">
+    <value>BW</value>
+  </data>
+  <data name="BW_ISO3">
+    <value>BWA</value>
+  </data>
+  <data name="BW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BW_CallingCode">
+    <value>+267</value>
+  </data>
+  <data name="BY_DisplayName">
+    <value>Belarus</value>
+  </data>
+  <data name="BY_ISO">
+    <value>112</value>
+  </data>
+  <data name="BY_ISO2">
+    <value>BY</value>
+  </data>
+  <data name="BY_ISO3">
+    <value>BLR</value>
+  </data>
+  <data name="BY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BY_CallingCode">
+    <value>+375</value>
+  </data>
+  <data name="BY_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="BZ_DisplayName">
+    <value>Belize</value>
+  </data>
+  <data name="BZ_ISO">
+    <value>84</value>
+  </data>
+  <data name="BZ_ISO2">
+    <value>BZ</value>
+  </data>
+  <data name="BZ_ISO3">
+    <value>BLZ</value>
+  </data>
+  <data name="BZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BZ_CallingCode">
+    <value>+501</value>
+  </data>
+  <data name="BZ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="CA_DisplayName">
+    <value>Canada</value>
+  </data>
+  <data name="CA_ISO">
+    <value>124</value>
+  </data>
+  <data name="CA_ISO2">
+    <value>CA</value>
+  </data>
+  <data name="CA_ISO3">
+    <value>CAN</value>
+  </data>
+  <data name="CA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CA_CallingCode">
+    <value>+1</value>
+  </data>
+  <data name="CA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="CC_DisplayName">
+    <value>Cocos</value>
+  </data>
+  <data name="CC_ISO">
+    <value>166</value>
+  </data>
+  <data name="CC_ISO2">
+    <value>CC</value>
+  </data>
+  <data name="CC_ISO3">
+    <value>CCK</value>
+  </data>
+  <data name="CC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CC_CallingCode">
+    <value>+61 891</value>
+  </data>
+  <data name="CD_DisplayName">
+    <value>Congo</value>
+  </data>
+  <data name="CD_ISO">
+    <value>180</value>
+  </data>
+  <data name="CD_ISO2">
+    <value>CD</value>
+  </data>
+  <data name="CD_ISO3">
+    <value>COD</value>
+  </data>
+  <data name="CD_StartDate">
+    <value>1997-05-17</value>
+  </data>
+  <data name="CD_CallingCode">
+    <value>+243</value>
+  </data>
+  <data name="CF_DisplayName">
+    <value>Central African Republic</value>
+  </data>
+  <data name="CF_ISO">
+    <value>140</value>
+  </data>
+  <data name="CF_ISO2">
+    <value>CF</value>
+  </data>
+  <data name="CF_ISO3">
+    <value>CAF</value>
+  </data>
+  <data name="CF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CF_CallingCode">
+    <value>+236</value>
+  </data>
+  <data name="CG_DisplayName">
+    <value>Congo</value>
+  </data>
+  <data name="CG_ISO">
+    <value>178</value>
+  </data>
+  <data name="CG_ISO2">
+    <value>CG</value>
+  </data>
+  <data name="CG_ISO3">
+    <value>COG</value>
+  </data>
+  <data name="CG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CG_CallingCode">
+    <value>+242</value>
+  </data>
+  <data name="CH_DisplayName">
+    <value>Switzerland</value>
+  </data>
+  <data name="CH_ISO">
+    <value>756</value>
+  </data>
+  <data name="CH_ISO2">
+    <value>CH</value>
+  </data>
+  <data name="CH_ISO3">
+    <value>CHE</value>
+  </data>
+  <data name="CH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CH_CallingCode">
+    <value>+41</value>
+  </data>
+  <data name="CH_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="CI_DisplayName">
+    <value>Côte D'Ivoire</value>
+  </data>
+  <data name="CI_ISO">
+    <value>384</value>
+  </data>
+  <data name="CI_ISO2">
+    <value>CI</value>
+  </data>
+  <data name="CI_ISO3">
+    <value>CIV</value>
+  </data>
+  <data name="CI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CI_CallingCode">
+    <value>+225</value>
+  </data>
+  <data name="CK_DisplayName">
+    <value>Cook Islands</value>
+  </data>
+  <data name="CK_ISO">
+    <value>184</value>
+  </data>
+  <data name="CK_ISO2">
+    <value>CK</value>
+  </data>
+  <data name="CK_ISO3">
+    <value>COK</value>
+  </data>
+  <data name="CK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CK_CallingCode">
+    <value>+682</value>
+  </data>
+  <data name="CL_DisplayName">
+    <value>Chile</value>
+  </data>
+  <data name="CL_ISO">
+    <value>152</value>
+  </data>
+  <data name="CL_ISO2">
+    <value>CL</value>
+  </data>
+  <data name="CL_ISO3">
+    <value>CHL</value>
+  </data>
+  <data name="CL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CL_CallingCode">
+    <value>+56</value>
+  </data>
+  <data name="CL_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="CM_DisplayName">
+    <value>Cameroon</value>
+  </data>
+  <data name="CM_ISO">
+    <value>120</value>
+  </data>
+  <data name="CM_ISO2">
+    <value>CM</value>
+  </data>
+  <data name="CM_ISO3">
+    <value>CMR</value>
+  </data>
+  <data name="CM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CM_CallingCode">
+    <value>+237</value>
+  </data>
+  <data name="CN_DisplayName">
+    <value>China</value>
+  </data>
+  <data name="CN_ISO">
+    <value>156</value>
+  </data>
+  <data name="CN_ISO2">
+    <value>CN</value>
+  </data>
+  <data name="CN_ISO3">
+    <value>CHN</value>
+  </data>
+  <data name="CN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CN_CallingCode">
+    <value>+86</value>
+  </data>
+  <data name="CN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="CO_DisplayName">
+    <value>Colombia</value>
+  </data>
+  <data name="CO_ISO">
+    <value>170</value>
+  </data>
+  <data name="CO_ISO2">
+    <value>CO</value>
+  </data>
+  <data name="CO_ISO3">
+    <value>COL</value>
+  </data>
+  <data name="CO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CO_CallingCode">
+    <value>+57</value>
+  </data>
+  <data name="CO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="CR_DisplayName">
+    <value>Costa Rica</value>
+  </data>
+  <data name="CR_ISO">
+    <value>188</value>
+  </data>
+  <data name="CR_ISO2">
+    <value>CR</value>
+  </data>
+  <data name="CR_ISO3">
+    <value>CRI</value>
+  </data>
+  <data name="CR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CR_CallingCode">
+    <value>+506</value>
+  </data>
+  <data name="CR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="CU_DisplayName">
+    <value>Cuba</value>
+  </data>
+  <data name="CU_ISO">
+    <value>192</value>
+  </data>
+  <data name="CU_ISO2">
+    <value>CU</value>
+  </data>
+  <data name="CU_ISO3">
+    <value>CUB</value>
+  </data>
+  <data name="CU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CU_CallingCode">
+    <value>+53</value>
+  </data>
+  <data name="CV_DisplayName">
+    <value>Cape Verde</value>
+  </data>
+  <data name="CV_ISO">
+    <value>132</value>
+  </data>
+  <data name="CV_ISO2">
+    <value>CV</value>
+  </data>
+  <data name="CV_ISO3">
+    <value>CPV</value>
+  </data>
+  <data name="CV_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CV_CallingCode">
+    <value>+238</value>
+  </data>
+  <data name="CW_DisplayName">
+    <value>Curaçao</value>
+  </data>
+  <data name="CW_ISO">
+    <value>531</value>
+  </data>
+  <data name="CW_ISO2">
+    <value>CW</value>
+  </data>
+  <data name="CW_ISO3">
+    <value>CUW</value>
+  </data>
+  <data name="CW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CW_CallingCode">
+    <value>+599 9</value>
+  </data>
+  <data name="CX_DisplayName">
+    <value>Christmas Island</value>
+  </data>
+  <data name="CX_ISO">
+    <value>162</value>
+  </data>
+  <data name="CX_ISO2">
+    <value>CX</value>
+  </data>
+  <data name="CX_ISO3">
+    <value>CXR</value>
+  </data>
+  <data name="CX_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CX_CallingCode">
+    <value>+61</value>
+  </data>
+  <data name="CY_DisplayName">
+    <value>Cyprus</value>
+  </data>
+  <data name="CY_ISO">
+    <value>196</value>
+  </data>
+  <data name="CY_ISO2">
+    <value>CY</value>
+  </data>
+  <data name="CY_ISO3">
+    <value>CYP</value>
+  </data>
+  <data name="CY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CY_CallingCode">
+    <value>+357</value>
+  </data>
+  <data name="CZ_DisplayName">
+    <value>Czech Republic</value>
+  </data>
+  <data name="CZ_ISO">
+    <value>203</value>
+  </data>
+  <data name="CZ_ISO2">
+    <value>CZ</value>
+  </data>
+  <data name="CZ_ISO3">
+    <value>CZE</value>
+  </data>
+  <data name="CZ_StartDate">
+    <value>1993-01-01</value>
+  </data>
+  <data name="CZ_CallingCode">
+    <value>+420</value>
+  </data>
+  <data name="CZ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="DE_DisplayName">
+    <value>Germany</value>
+  </data>
+  <data name="DE_ISO">
+    <value>276</value>
+  </data>
+  <data name="DE_ISO2">
+    <value>DE</value>
+  </data>
+  <data name="DE_ISO3">
+    <value>DEU</value>
+  </data>
+  <data name="DE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DE_CallingCode">
+    <value>+49</value>
+  </data>
+  <data name="DE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="DJ_DisplayName">
+    <value>Djibouti</value>
+  </data>
+  <data name="DJ_ISO">
+    <value>262</value>
+  </data>
+  <data name="DJ_ISO2">
+    <value>DJ</value>
+  </data>
+  <data name="DJ_ISO3">
+    <value>DJI</value>
+  </data>
+  <data name="DJ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DJ_CallingCode">
+    <value>+253</value>
+  </data>
+  <data name="DK_DisplayName">
+    <value>Denmark</value>
+  </data>
+  <data name="DK_ISO">
+    <value>208</value>
+  </data>
+  <data name="DK_ISO2">
+    <value>DK</value>
+  </data>
+  <data name="DK_ISO3">
+    <value>DNK</value>
+  </data>
+  <data name="DK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DK_CallingCode">
+    <value>+45</value>
+  </data>
+  <data name="DK_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="DM_DisplayName">
+    <value>Dominica</value>
+  </data>
+  <data name="DM_ISO">
+    <value>212</value>
+  </data>
+  <data name="DM_ISO2">
+    <value>DM</value>
+  </data>
+  <data name="DM_ISO3">
+    <value>DMA</value>
+  </data>
+  <data name="DM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DM_CallingCode">
+    <value>+1 767</value>
+  </data>
+  <data name="DO_DisplayName">
+    <value>Dominican Republic</value>
+  </data>
+  <data name="DO_ISO">
+    <value>214</value>
+  </data>
+  <data name="DO_ISO2">
+    <value>DO</value>
+  </data>
+  <data name="DO_ISO3">
+    <value>DOM</value>
+  </data>
+  <data name="DO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DO_CallingCode">
+    <value>+1 809</value>
+  </data>
+  <data name="DO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="DZ_DisplayName">
+    <value>Algeria</value>
+  </data>
+  <data name="DZ_ISO">
+    <value>12</value>
+  </data>
+  <data name="DZ_ISO2">
+    <value>DZ</value>
+  </data>
+  <data name="DZ_ISO3">
+    <value>DZA</value>
+  </data>
+  <data name="DZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DZ_CallingCode">
+    <value>+213</value>
+  </data>
+  <data name="DZ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="EC_DisplayName">
+    <value>Ecuador</value>
+  </data>
+  <data name="EC_ISO">
+    <value>218</value>
+  </data>
+  <data name="EC_ISO2">
+    <value>EC</value>
+  </data>
+  <data name="EC_ISO3">
+    <value>ECU</value>
+  </data>
+  <data name="EC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="EC_CallingCode">
+    <value>+593</value>
+  </data>
+  <data name="EC_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="EE_DisplayName">
+    <value>Estonia</value>
+  </data>
+  <data name="EE_ISO">
+    <value>233</value>
+  </data>
+  <data name="EE_ISO2">
+    <value>EE</value>
+  </data>
+  <data name="EE_ISO3">
+    <value>EST</value>
+  </data>
+  <data name="EE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="EE_CallingCode">
+    <value>+372</value>
+  </data>
+  <data name="EE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="EG_DisplayName">
+    <value>Egypt</value>
+  </data>
+  <data name="EG_ISO">
+    <value>818</value>
+  </data>
+  <data name="EG_ISO2">
+    <value>EG</value>
+  </data>
+  <data name="EG_ISO3">
+    <value>EGY</value>
+  </data>
+  <data name="EG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="EG_CallingCode">
+    <value>+20</value>
+  </data>
+  <data name="EG_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="EH_DisplayName">
+    <value>Western Sahara</value>
+  </data>
+  <data name="EH_ISO">
+    <value>732</value>
+  </data>
+  <data name="EH_ISO2">
+    <value>EH</value>
+  </data>
+  <data name="EH_ISO3">
+    <value>ESH</value>
+  </data>
+  <data name="EH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="EH_CallingCode">
+    <value>+212</value>
+  </data>
+  <data name="ER_DisplayName">
+    <value>Eritrea</value>
+  </data>
+  <data name="ER_ISO">
+    <value>232</value>
+  </data>
+  <data name="ER_ISO2">
+    <value>ER</value>
+  </data>
+  <data name="ER_ISO3">
+    <value>ERI</value>
+  </data>
+  <data name="ER_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ER_CallingCode">
+    <value>+291</value>
+  </data>
+  <data name="ES_DisplayName">
+    <value>Spain</value>
+  </data>
+  <data name="ES_ISO">
+    <value>724</value>
+  </data>
+  <data name="ES_ISO2">
+    <value>ES</value>
+  </data>
+  <data name="ES_ISO3">
+    <value>ESP</value>
+  </data>
+  <data name="ES_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ES_CallingCode">
+    <value>+34</value>
+  </data>
+  <data name="ES_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="ET_DisplayName">
+    <value>Ethiopia</value>
+  </data>
+  <data name="ET_ISO">
+    <value>231</value>
+  </data>
+  <data name="ET_ISO2">
+    <value>ET</value>
+  </data>
+  <data name="ET_ISO3">
+    <value>ETH</value>
+  </data>
+  <data name="ET_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ET_CallingCode">
+    <value>+251</value>
+  </data>
+  <data name="ET_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="FI_DisplayName">
+    <value>Finland</value>
+  </data>
+  <data name="FI_ISO">
+    <value>246</value>
+  </data>
+  <data name="FI_ISO2">
+    <value>FI</value>
+  </data>
+  <data name="FI_ISO3">
+    <value>FIN</value>
+  </data>
+  <data name="FI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="FI_CallingCode">
+    <value>+358</value>
+  </data>
+  <data name="FI_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="FJ_DisplayName">
+    <value>Fiji</value>
+  </data>
+  <data name="FJ_ISO">
+    <value>242</value>
+  </data>
+  <data name="FJ_ISO2">
+    <value>FJ</value>
+  </data>
+  <data name="FJ_ISO3">
+    <value>FJI</value>
+  </data>
+  <data name="FJ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="FJ_CallingCode">
+    <value>+679</value>
+  </data>
+  <data name="FK_DisplayName">
+    <value>Falkland Islands</value>
+  </data>
+  <data name="FK_ISO">
+    <value>238</value>
+  </data>
+  <data name="FK_ISO2">
+    <value>FK</value>
+  </data>
+  <data name="FK_ISO3">
+    <value>FLK</value>
+  </data>
+  <data name="FK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="FK_CallingCode">
+    <value>+500</value>
+  </data>
+  <data name="FM_DisplayName">
+    <value>Micronesia</value>
+  </data>
+  <data name="FM_ISO">
+    <value>583</value>
+  </data>
+  <data name="FM_ISO2">
+    <value>FM</value>
+  </data>
+  <data name="FM_ISO3">
+    <value>FSM</value>
+  </data>
+  <data name="FM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="FM_CallingCode">
+    <value>+691</value>
+  </data>
+  <data name="FO_DisplayName">
+    <value>Faroe Islands</value>
+  </data>
+  <data name="FO_ISO">
+    <value>234</value>
+  </data>
+  <data name="FO_ISO2">
+    <value>FO</value>
+  </data>
+  <data name="FO_ISO3">
+    <value>FRO</value>
+  </data>
+  <data name="FO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="FO_CallingCode">
+    <value>+298</value>
+  </data>
+  <data name="FO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="FR_DisplayName">
+    <value>France</value>
+  </data>
+  <data name="FR_ISO">
+    <value>250</value>
+  </data>
+  <data name="FR_ISO2">
+    <value>FR</value>
+  </data>
+  <data name="FR_ISO3">
+    <value>FRA</value>
+  </data>
+  <data name="FR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="FR_CallingCode">
+    <value>+33</value>
+  </data>
+  <data name="FR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="GA_DisplayName">
+    <value>Gabon</value>
+  </data>
+  <data name="GA_ISO">
+    <value>266</value>
+  </data>
+  <data name="GA_ISO2">
+    <value>GA</value>
+  </data>
+  <data name="GA_ISO3">
+    <value>GAB</value>
+  </data>
+  <data name="GA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GA_CallingCode">
+    <value>+241</value>
+  </data>
+  <data name="GB_DisplayName">
+    <value>United Kingdom</value>
+  </data>
+  <data name="GB_ISO">
+    <value>826</value>
+  </data>
+  <data name="GB_ISO2">
+    <value>GB</value>
+  </data>
+  <data name="GB_ISO3">
+    <value>GBR</value>
+  </data>
+  <data name="GB_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GB_CallingCode">
+    <value>+44</value>
+  </data>
+  <data name="GB_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="GD_DisplayName">
+    <value>Grenada</value>
+  </data>
+  <data name="GD_ISO">
+    <value>308</value>
+  </data>
+  <data name="GD_ISO2">
+    <value>GD</value>
+  </data>
+  <data name="GD_ISO3">
+    <value>GRD</value>
+  </data>
+  <data name="GD_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GD_CallingCode">
+    <value>+1 473</value>
+  </data>
+  <data name="GE_DisplayName">
+    <value>Georgia</value>
+  </data>
+  <data name="GE_ISO">
+    <value>268</value>
+  </data>
+  <data name="GE_ISO2">
+    <value>GE</value>
+  </data>
+  <data name="GE_ISO3">
+    <value>GEO</value>
+  </data>
+  <data name="GE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GE_CallingCode">
+    <value>+995</value>
+  </data>
+  <data name="GE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="GF_DisplayName">
+    <value>French Guiana</value>
+  </data>
+  <data name="GF_ISO">
+    <value>254</value>
+  </data>
+  <data name="GF_ISO2">
+    <value>GF</value>
+  </data>
+  <data name="GF_ISO3">
+    <value>GUF</value>
+  </data>
+  <data name="GF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GF_CallingCode">
+    <value>+33</value>
+  </data>
+  <data name="GG_DisplayName">
+    <value>Guernsey</value>
+  </data>
+  <data name="GG_ISO">
+    <value>831</value>
+  </data>
+  <data name="GG_ISO2">
+    <value>GG</value>
+  </data>
+  <data name="GG_ISO3">
+    <value>GGY</value>
+  </data>
+  <data name="GG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GG_CallingCode">
+    <value>+44 1481</value>
+  </data>
+  <data name="GH_DisplayName">
+    <value>Ghana</value>
+  </data>
+  <data name="GH_ISO">
+    <value>288</value>
+  </data>
+  <data name="GH_ISO2">
+    <value>GH</value>
+  </data>
+  <data name="GH_ISO3">
+    <value>GHA</value>
+  </data>
+  <data name="GH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GH_CallingCode">
+    <value>+233</value>
+  </data>
+  <data name="GI_DisplayName">
+    <value>Gibraltar</value>
+  </data>
+  <data name="GI_ISO">
+    <value>292</value>
+  </data>
+  <data name="GI_ISO2">
+    <value>GI</value>
+  </data>
+  <data name="GI_ISO3">
+    <value>GIB</value>
+  </data>
+  <data name="GI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GI_CallingCode">
+    <value>+350</value>
+  </data>
+  <data name="GL_DisplayName">
+    <value>Greenland</value>
+  </data>
+  <data name="GL_ISO">
+    <value>304</value>
+  </data>
+  <data name="GL_ISO2">
+    <value>GL</value>
+  </data>
+  <data name="GL_ISO3">
+    <value>GRL</value>
+  </data>
+  <data name="GL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GL_CallingCode">
+    <value>+299</value>
+  </data>
+  <data name="GL_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="GM_DisplayName">
+    <value>Gambia</value>
+  </data>
+  <data name="GM_ISO">
+    <value>270</value>
+  </data>
+  <data name="GM_ISO2">
+    <value>GM</value>
+  </data>
+  <data name="GM_ISO3">
+    <value>GMB</value>
+  </data>
+  <data name="GM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GM_CallingCode">
+    <value>+220</value>
+  </data>
+  <data name="GN_DisplayName">
+    <value>Guinea</value>
+  </data>
+  <data name="GN_ISO">
+    <value>324</value>
+  </data>
+  <data name="GN_ISO2">
+    <value>GN</value>
+  </data>
+  <data name="GN_ISO3">
+    <value>GIN</value>
+  </data>
+  <data name="GN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GN_CallingCode">
+    <value>+224</value>
+  </data>
+  <data name="GP_DisplayName">
+    <value>Guadeloupe</value>
+  </data>
+  <data name="GP_ISO">
+    <value>312</value>
+  </data>
+  <data name="GP_ISO2">
+    <value>GP</value>
+  </data>
+  <data name="GP_ISO3">
+    <value>GLP</value>
+  </data>
+  <data name="GP_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GP_CallingCode">
+    <value>+33</value>
+  </data>
+  <data name="GQ_DisplayName">
+    <value>Equatorial Guinea</value>
+  </data>
+  <data name="GQ_ISO">
+    <value>226</value>
+  </data>
+  <data name="GQ_ISO2">
+    <value>GQ</value>
+  </data>
+  <data name="GQ_ISO3">
+    <value>GNQ</value>
+  </data>
+  <data name="GQ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GQ_CallingCode">
+    <value>+240</value>
+  </data>
+  <data name="GR_DisplayName">
+    <value>Greece</value>
+  </data>
+  <data name="GR_ISO">
+    <value>300</value>
+  </data>
+  <data name="GR_ISO2">
+    <value>GR</value>
+  </data>
+  <data name="GR_ISO3">
+    <value>GRC</value>
+  </data>
+  <data name="GR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GR_CallingCode">
+    <value>+30</value>
+  </data>
+  <data name="GR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="GS_DisplayName">
+    <value>South Georgia And The South Sandwich Islands</value>
+  </data>
+  <data name="GS_ISO">
+    <value>239</value>
+  </data>
+  <data name="GS_ISO2">
+    <value>GS</value>
+  </data>
+  <data name="GS_ISO3">
+    <value>SGS</value>
+  </data>
+  <data name="GS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GS_CallingCode">
+    <value>+44</value>
+  </data>
+  <data name="GT_DisplayName">
+    <value>Guatemala</value>
+  </data>
+  <data name="GT_ISO">
+    <value>320</value>
+  </data>
+  <data name="GT_ISO2">
+    <value>GT</value>
+  </data>
+  <data name="GT_ISO3">
+    <value>GTM</value>
+  </data>
+  <data name="GT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GT_CallingCode">
+    <value>+502</value>
+  </data>
+  <data name="GT_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="GU_DisplayName">
+    <value>Guam</value>
+  </data>
+  <data name="GU_ISO">
+    <value>316</value>
+  </data>
+  <data name="GU_ISO2">
+    <value>GU</value>
+  </data>
+  <data name="GU_ISO3">
+    <value>GUM</value>
+  </data>
+  <data name="GU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GU_CallingCode">
+    <value>+1 671</value>
+  </data>
+  <data name="GW_DisplayName">
+    <value>Guinea-Bissau</value>
+  </data>
+  <data name="GW_ISO">
+    <value>624</value>
+  </data>
+  <data name="GW_ISO2">
+    <value>GW</value>
+  </data>
+  <data name="GW_ISO3">
+    <value>GNB</value>
+  </data>
+  <data name="GW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GW_CallingCode">
+    <value>+245</value>
+  </data>
+  <data name="GY_DisplayName">
+    <value>Guyana</value>
+  </data>
+  <data name="GY_ISO">
+    <value>328</value>
+  </data>
+  <data name="GY_ISO2">
+    <value>GY</value>
+  </data>
+  <data name="GY_ISO3">
+    <value>GUY</value>
+  </data>
+  <data name="GY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GY_CallingCode">
+    <value>+592</value>
+  </data>
+  <data name="HK_DisplayName">
+    <value>Hong Kong</value>
+  </data>
+  <data name="HK_ISO">
+    <value>344</value>
+  </data>
+  <data name="HK_ISO2">
+    <value>HK</value>
+  </data>
+  <data name="HK_ISO3">
+    <value>HKG</value>
+  </data>
+  <data name="HK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="HK_CallingCode">
+    <value>+852</value>
+  </data>
+  <data name="HK_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="HM_DisplayName">
+    <value>Heard Island And Mcdonald Islands</value>
+  </data>
+  <data name="HM_ISO">
+    <value>334</value>
+  </data>
+  <data name="HM_ISO2">
+    <value>HM</value>
+  </data>
+  <data name="HM_ISO3">
+    <value>HMD</value>
+  </data>
+  <data name="HM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="HM_CallingCode">
+    <value>+61</value>
+  </data>
+  <data name="HN_DisplayName">
+    <value>Honduras</value>
+  </data>
+  <data name="HN_ISO">
+    <value>340</value>
+  </data>
+  <data name="HN_ISO2">
+    <value>HN</value>
+  </data>
+  <data name="HN_ISO3">
+    <value>HND</value>
+  </data>
+  <data name="HN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="HN_CallingCode">
+    <value>+504</value>
+  </data>
+  <data name="HN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="HR_DisplayName">
+    <value>Croatia</value>
+  </data>
+  <data name="HR_ISO">
+    <value>191</value>
+  </data>
+  <data name="HR_ISO2">
+    <value>HR</value>
+  </data>
+  <data name="HR_ISO3">
+    <value>HRV</value>
+  </data>
+  <data name="HR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="HR_CallingCode">
+    <value>+385</value>
+  </data>
+  <data name="HR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="HT_DisplayName">
+    <value>Haiti</value>
+  </data>
+  <data name="HT_ISO">
+    <value>332</value>
+  </data>
+  <data name="HT_ISO2">
+    <value>HT</value>
+  </data>
+  <data name="HT_ISO3">
+    <value>HTI</value>
+  </data>
+  <data name="HT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="HT_CallingCode">
+    <value>+509</value>
+  </data>
+  <data name="HU_DisplayName">
+    <value>Hungary</value>
+  </data>
+  <data name="HU_ISO">
+    <value>348</value>
+  </data>
+  <data name="HU_ISO2">
+    <value>HU</value>
+  </data>
+  <data name="HU_ISO3">
+    <value>HUN</value>
+  </data>
+  <data name="HU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="HU_CallingCode">
+    <value>+36</value>
+  </data>
+  <data name="HU_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="ID_DisplayName">
+    <value>Indonesia</value>
+  </data>
+  <data name="ID_ISO">
+    <value>360</value>
+  </data>
+  <data name="ID_ISO2">
+    <value>ID</value>
+  </data>
+  <data name="ID_ISO3">
+    <value>IDN</value>
+  </data>
+  <data name="ID_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ID_CallingCode">
+    <value>+62</value>
+  </data>
+  <data name="ID_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="IE_DisplayName">
+    <value>Ireland</value>
+  </data>
+  <data name="IE_ISO">
+    <value>372</value>
+  </data>
+  <data name="IE_ISO2">
+    <value>IE</value>
+  </data>
+  <data name="IE_ISO3">
+    <value>IRL</value>
+  </data>
+  <data name="IE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IE_CallingCode">
+    <value>+353</value>
+  </data>
+  <data name="IE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="IL_DisplayName">
+    <value>Israel</value>
+  </data>
+  <data name="IL_ISO">
+    <value>376</value>
+  </data>
+  <data name="IL_ISO2">
+    <value>IL</value>
+  </data>
+  <data name="IL_ISO3">
+    <value>ISR</value>
+  </data>
+  <data name="IL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IL_CallingCode">
+    <value>+972</value>
+  </data>
+  <data name="IL_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="IM_DisplayName">
+    <value>Isle Of Man</value>
+  </data>
+  <data name="IM_ISO">
+    <value>833</value>
+  </data>
+  <data name="IM_ISO2">
+    <value>IM</value>
+  </data>
+  <data name="IM_ISO3">
+    <value>IMN</value>
+  </data>
+  <data name="IM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IM_CallingCode">
+    <value>+44</value>
+  </data>
+  <data name="IN_DisplayName">
+    <value>India</value>
+  </data>
+  <data name="IN_ISO">
+    <value>356</value>
+  </data>
+  <data name="IN_ISO2">
+    <value>IN</value>
+  </data>
+  <data name="IN_ISO3">
+    <value>IND</value>
+  </data>
+  <data name="IN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IN_CallingCode">
+    <value>+91</value>
+  </data>
+  <data name="IN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="IO_DisplayName">
+    <value>British Indian Ocean Territory</value>
+  </data>
+  <data name="IO_ISO">
+    <value>86</value>
+  </data>
+  <data name="IO_ISO2">
+    <value>IO</value>
+  </data>
+  <data name="IO_ISO3">
+    <value>IOT</value>
+  </data>
+  <data name="IO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IO_CallingCode">
+    <value>+246</value>
+  </data>
+  <data name="IQ_DisplayName">
+    <value>Iraq</value>
+  </data>
+  <data name="IQ_ISO">
+    <value>368</value>
+  </data>
+  <data name="IQ_ISO2">
+    <value>IQ</value>
+  </data>
+  <data name="IQ_ISO3">
+    <value>IRQ</value>
+  </data>
+  <data name="IQ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IQ_CallingCode">
+    <value>+964</value>
+  </data>
+  <data name="IQ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="IR_DisplayName">
+    <value>Iran</value>
+  </data>
+  <data name="IR_ISO">
+    <value>364</value>
+  </data>
+  <data name="IR_ISO2">
+    <value>IR</value>
+  </data>
+  <data name="IR_ISO3">
+    <value>IRN</value>
+  </data>
+  <data name="IR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IR_CallingCode">
+    <value>+98</value>
+  </data>
+  <data name="IR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="IS_DisplayName">
+    <value>Iceland</value>
+  </data>
+  <data name="IS_ISO">
+    <value>352</value>
+  </data>
+  <data name="IS_ISO2">
+    <value>IS</value>
+  </data>
+  <data name="IS_ISO3">
+    <value>ISL</value>
+  </data>
+  <data name="IS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IS_CallingCode">
+    <value>+354</value>
+  </data>
+  <data name="IS_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="IT_DisplayName">
+    <value>Italy</value>
+  </data>
+  <data name="IT_ISO">
+    <value>380</value>
+  </data>
+  <data name="IT_ISO2">
+    <value>IT</value>
+  </data>
+  <data name="IT_ISO3">
+    <value>ITA</value>
+  </data>
+  <data name="IT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="IT_CallingCode">
+    <value>+39</value>
+  </data>
+  <data name="IT_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="JE_DisplayName">
+    <value>Jersey</value>
+  </data>
+  <data name="JE_ISO">
+    <value>832</value>
+  </data>
+  <data name="JE_ISO2">
+    <value>JE</value>
+  </data>
+  <data name="JE_ISO3">
+    <value>JEY</value>
+  </data>
+  <data name="JE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="JE_CallingCode">
+    <value>+44 1534</value>
+  </data>
+  <data name="JM_DisplayName">
+    <value>Jamaica</value>
+  </data>
+  <data name="JM_ISO">
+    <value>388</value>
+  </data>
+  <data name="JM_ISO2">
+    <value>JM</value>
+  </data>
+  <data name="JM_ISO3">
+    <value>JAM</value>
+  </data>
+  <data name="JM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="JM_CallingCode">
+    <value>+1 876</value>
+  </data>
+  <data name="JM_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="JO_DisplayName">
+    <value>Jordan</value>
+  </data>
+  <data name="JO_ISO">
+    <value>400</value>
+  </data>
+  <data name="JO_ISO2">
+    <value>JO</value>
+  </data>
+  <data name="JO_ISO3">
+    <value>JOR</value>
+  </data>
+  <data name="JO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="JO_CallingCode">
+    <value>+962</value>
+  </data>
+  <data name="JO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="JP_DisplayName">
+    <value>Japan</value>
+  </data>
+  <data name="JP_ISO">
+    <value>392</value>
+  </data>
+  <data name="JP_ISO2">
+    <value>JP</value>
+  </data>
+  <data name="JP_ISO3">
+    <value>JPN</value>
+  </data>
+  <data name="JP_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="JP_CallingCode">
+    <value>+81</value>
+  </data>
+  <data name="JP_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="KE_DisplayName">
+    <value>Kenya</value>
+  </data>
+  <data name="KE_ISO">
+    <value>404</value>
+  </data>
+  <data name="KE_ISO2">
+    <value>KE</value>
+  </data>
+  <data name="KE_ISO3">
+    <value>KEN</value>
+  </data>
+  <data name="KE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KE_CallingCode">
+    <value>+254</value>
+  </data>
+  <data name="KE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="KG_DisplayName">
+    <value>Kyrgyzstan</value>
+  </data>
+  <data name="KG_ISO">
+    <value>417</value>
+  </data>
+  <data name="KG_ISO2">
+    <value>KG</value>
+  </data>
+  <data name="KG_ISO3">
+    <value>KGZ</value>
+  </data>
+  <data name="KG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KG_CallingCode">
+    <value>+996</value>
+  </data>
+  <data name="KG_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="KH_DisplayName">
+    <value>Cambodia</value>
+  </data>
+  <data name="KH_ISO">
+    <value>116</value>
+  </data>
+  <data name="KH_ISO2">
+    <value>KH</value>
+  </data>
+  <data name="KH_ISO3">
+    <value>KHM</value>
+  </data>
+  <data name="KH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KH_CallingCode">
+    <value>+855</value>
+  </data>
+  <data name="KH_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="KI_DisplayName">
+    <value>Kiribati</value>
+  </data>
+  <data name="KI_ISO">
+    <value>296</value>
+  </data>
+  <data name="KI_ISO2">
+    <value>KI</value>
+  </data>
+  <data name="KI_ISO3">
+    <value>KIR</value>
+  </data>
+  <data name="KI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KI_CallingCode">
+    <value>+686</value>
+  </data>
+  <data name="KM_DisplayName">
+    <value>Comoros</value>
+  </data>
+  <data name="KM_ISO">
+    <value>174</value>
+  </data>
+  <data name="KM_ISO2">
+    <value>KM</value>
+  </data>
+  <data name="KM_ISO3">
+    <value>COM</value>
+  </data>
+  <data name="KM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KM_CallingCode">
+    <value>+269</value>
+  </data>
+  <data name="KN_DisplayName">
+    <value>Saint Kitts And Nevis</value>
+  </data>
+  <data name="KN_ISO">
+    <value>659</value>
+  </data>
+  <data name="KN_ISO2">
+    <value>KN</value>
+  </data>
+  <data name="KN_ISO3">
+    <value>KNA</value>
+  </data>
+  <data name="KN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KN_CallingCode">
+    <value>+1 869</value>
+  </data>
+  <data name="KP_DisplayName">
+    <value>Korea</value>
+  </data>
+  <data name="KP_ISO">
+    <value>408</value>
+  </data>
+  <data name="KP_ISO2">
+    <value>KP</value>
+  </data>
+  <data name="KP_ISO3">
+    <value>PRK</value>
+  </data>
+  <data name="KP_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KP_CallingCode">
+    <value>+850</value>
+  </data>
+  <data name="KR_DisplayName">
+    <value>Korea</value>
+  </data>
+  <data name="KR_ISO">
+    <value>410</value>
+  </data>
+  <data name="KR_ISO2">
+    <value>KR</value>
+  </data>
+  <data name="KR_ISO3">
+    <value>KOR</value>
+  </data>
+  <data name="KR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KR_CallingCode">
+    <value>+82</value>
+  </data>
+  <data name="KR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="KW_DisplayName">
+    <value>Kuwait</value>
+  </data>
+  <data name="KW_ISO">
+    <value>414</value>
+  </data>
+  <data name="KW_ISO2">
+    <value>KW</value>
+  </data>
+  <data name="KW_ISO3">
+    <value>KWT</value>
+  </data>
+  <data name="KW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KW_CallingCode">
+    <value>+965</value>
+  </data>
+  <data name="KW_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="KY_DisplayName">
+    <value>Cayman Islands</value>
+  </data>
+  <data name="KY_ISO">
+    <value>136</value>
+  </data>
+  <data name="KY_ISO2">
+    <value>KY</value>
+  </data>
+  <data name="KY_ISO3">
+    <value>CYM</value>
+  </data>
+  <data name="KY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KY_CallingCode">
+    <value>+1 345</value>
+  </data>
+  <data name="KZ_DisplayName">
+    <value>Kazakhstan</value>
+  </data>
+  <data name="KZ_ISO">
+    <value>398</value>
+  </data>
+  <data name="KZ_ISO2">
+    <value>KZ</value>
+  </data>
+  <data name="KZ_ISO3">
+    <value>KAZ</value>
+  </data>
+  <data name="KZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="KZ_CallingCode">
+    <value>+7</value>
+  </data>
+  <data name="KZ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LA_DisplayName">
+    <value>Lao People'S Democratic Republic</value>
+  </data>
+  <data name="LA_ISO">
+    <value>418</value>
+  </data>
+  <data name="LA_ISO2">
+    <value>LA</value>
+  </data>
+  <data name="LA_ISO3">
+    <value>LAO</value>
+  </data>
+  <data name="LA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LA_CallingCode">
+    <value>+856</value>
+  </data>
+  <data name="LA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LB_DisplayName">
+    <value>Lebanon</value>
+  </data>
+  <data name="LB_ISO">
+    <value>422</value>
+  </data>
+  <data name="LB_ISO2">
+    <value>LB</value>
+  </data>
+  <data name="LB_ISO3">
+    <value>LBN</value>
+  </data>
+  <data name="LB_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LB_CallingCode">
+    <value>+961</value>
+  </data>
+  <data name="LB_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LC_DisplayName">
+    <value>Saint Lucia</value>
+  </data>
+  <data name="LC_ISO">
+    <value>662</value>
+  </data>
+  <data name="LC_ISO2">
+    <value>LC</value>
+  </data>
+  <data name="LC_ISO3">
+    <value>LCA</value>
+  </data>
+  <data name="LC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LC_CallingCode">
+    <value>+1 758</value>
+  </data>
+  <data name="LI_DisplayName">
+    <value>Liechtenstein</value>
+  </data>
+  <data name="LI_ISO">
+    <value>438</value>
+  </data>
+  <data name="LI_ISO2">
+    <value>LI</value>
+  </data>
+  <data name="LI_ISO3">
+    <value>LIE</value>
+  </data>
+  <data name="LI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LI_CallingCode">
+    <value>+423</value>
+  </data>
+  <data name="LI_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LK_DisplayName">
+    <value>Sri Lanka</value>
+  </data>
+  <data name="LK_ISO">
+    <value>144</value>
+  </data>
+  <data name="LK_ISO2">
+    <value>LK</value>
+  </data>
+  <data name="LK_ISO3">
+    <value>LKA</value>
+  </data>
+  <data name="LK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LK_CallingCode">
+    <value>+94</value>
+  </data>
+  <data name="LK_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LR_DisplayName">
+    <value>Liberia</value>
+  </data>
+  <data name="LR_ISO">
+    <value>430</value>
+  </data>
+  <data name="LR_ISO2">
+    <value>LR</value>
+  </data>
+  <data name="LR_ISO3">
+    <value>LBR</value>
+  </data>
+  <data name="LR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LR_CallingCode">
+    <value>+231</value>
+  </data>
+  <data name="LS_DisplayName">
+    <value>Lesotho</value>
+  </data>
+  <data name="LS_ISO">
+    <value>426</value>
+  </data>
+  <data name="LS_ISO2">
+    <value>LS</value>
+  </data>
+  <data name="LS_ISO3">
+    <value>LSO</value>
+  </data>
+  <data name="LS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LS_CallingCode">
+    <value>+266</value>
+  </data>
+  <data name="LT_DisplayName">
+    <value>Lithuania</value>
+  </data>
+  <data name="LT_ISO">
+    <value>440</value>
+  </data>
+  <data name="LT_ISO2">
+    <value>LT</value>
+  </data>
+  <data name="LT_ISO3">
+    <value>LTU</value>
+  </data>
+  <data name="LT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LT_CallingCode">
+    <value>+370</value>
+  </data>
+  <data name="LT_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LU_DisplayName">
+    <value>Luxembourg</value>
+  </data>
+  <data name="LU_ISO">
+    <value>442</value>
+  </data>
+  <data name="LU_ISO2">
+    <value>LU</value>
+  </data>
+  <data name="LU_ISO3">
+    <value>LUX</value>
+  </data>
+  <data name="LU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LU_CallingCode">
+    <value>+352</value>
+  </data>
+  <data name="LU_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LV_DisplayName">
+    <value>Latvia</value>
+  </data>
+  <data name="LV_ISO">
+    <value>428</value>
+  </data>
+  <data name="LV_ISO2">
+    <value>LV</value>
+  </data>
+  <data name="LV_ISO3">
+    <value>LVA</value>
+  </data>
+  <data name="LV_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LV_CallingCode">
+    <value>+371</value>
+  </data>
+  <data name="LV_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="LY_DisplayName">
+    <value>Libya</value>
+  </data>
+  <data name="LY_ISO">
+    <value>434</value>
+  </data>
+  <data name="LY_ISO2">
+    <value>LY</value>
+  </data>
+  <data name="LY_ISO3">
+    <value>LBY</value>
+  </data>
+  <data name="LY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="LY_CallingCode">
+    <value>+218</value>
+  </data>
+  <data name="LY_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MA_DisplayName">
+    <value>Morocco</value>
+  </data>
+  <data name="MA_ISO">
+    <value>504</value>
+  </data>
+  <data name="MA_ISO2">
+    <value>MA</value>
+  </data>
+  <data name="MA_ISO3">
+    <value>MAR</value>
+  </data>
+  <data name="MA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MA_CallingCode">
+    <value>+212</value>
+  </data>
+  <data name="MA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MC_DisplayName">
+    <value>Monaco</value>
+  </data>
+  <data name="MC_ISO">
+    <value>492</value>
+  </data>
+  <data name="MC_ISO2">
+    <value>MC</value>
+  </data>
+  <data name="MC_ISO3">
+    <value>MCO</value>
+  </data>
+  <data name="MC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MC_CallingCode">
+    <value>+377</value>
+  </data>
+  <data name="MC_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MD_DisplayName">
+    <value>Moldova</value>
+  </data>
+  <data name="MD_ISO">
+    <value>498</value>
+  </data>
+  <data name="MD_ISO2">
+    <value>MD</value>
+  </data>
+  <data name="MD_ISO3">
+    <value>MDA</value>
+  </data>
+  <data name="MD_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MD_CallingCode">
+    <value>+373</value>
+  </data>
+  <data name="ME_DisplayName">
+    <value>Montenegro</value>
+  </data>
+  <data name="ME_ISO">
+    <value>499</value>
+  </data>
+  <data name="ME_ISO2">
+    <value>ME</value>
+  </data>
+  <data name="ME_ISO3">
+    <value>MNE</value>
+  </data>
+  <data name="ME_StartDate">
+    <value>2007-01-01</value>
+  </data>
+  <data name="ME_CallingCode">
+    <value>+381</value>
+  </data>
+  <data name="ME_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MF_DisplayName">
+    <value>Saint Martin</value>
+  </data>
+  <data name="MF_ISO">
+    <value>663</value>
+  </data>
+  <data name="MF_ISO2">
+    <value>MF</value>
+  </data>
+  <data name="MF_ISO3">
+    <value>MAF</value>
+  </data>
+  <data name="MF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MF_CallingCode">
+    <value>+590</value>
+  </data>
+  <data name="MG_DisplayName">
+    <value>Madagascar</value>
+  </data>
+  <data name="MG_ISO">
+    <value>450</value>
+  </data>
+  <data name="MG_ISO2">
+    <value>MG</value>
+  </data>
+  <data name="MG_ISO3">
+    <value>MDG</value>
+  </data>
+  <data name="MG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MG_CallingCode">
+    <value>+261</value>
+  </data>
+  <data name="MH_DisplayName">
+    <value>Marshall Islands</value>
+  </data>
+  <data name="MH_ISO">
+    <value>584</value>
+  </data>
+  <data name="MH_ISO2">
+    <value>MH</value>
+  </data>
+  <data name="MH_ISO3">
+    <value>MHL</value>
+  </data>
+  <data name="MH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MH_CallingCode">
+    <value>+692</value>
+  </data>
+  <data name="MK_DisplayName">
+    <value>Macedonia</value>
+  </data>
+  <data name="MK_ISO">
+    <value>807</value>
+  </data>
+  <data name="MK_ISO2">
+    <value>MK</value>
+  </data>
+  <data name="MK_ISO3">
+    <value>MKD</value>
+  </data>
+  <data name="MK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MK_CallingCode">
+    <value>+389</value>
+  </data>
+  <data name="MK_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="ML_DisplayName">
+    <value>Mali</value>
+  </data>
+  <data name="ML_ISO">
+    <value>466</value>
+  </data>
+  <data name="ML_ISO2">
+    <value>ML</value>
+  </data>
+  <data name="ML_ISO3">
+    <value>MLI</value>
+  </data>
+  <data name="ML_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ML_CallingCode">
+    <value>+223</value>
+  </data>
+  <data name="MM_DisplayName">
+    <value>Myanmar</value>
+  </data>
+  <data name="MM_ISO">
+    <value>104</value>
+  </data>
+  <data name="MM_ISO2">
+    <value>MM</value>
+  </data>
+  <data name="MM_ISO3">
+    <value>MMR</value>
+  </data>
+  <data name="MM_StartDate">
+    <value>1989-01-01</value>
+  </data>
+  <data name="MM_CallingCode">
+    <value>+95</value>
+  </data>
+  <data name="MN_DisplayName">
+    <value>Mongolia</value>
+  </data>
+  <data name="MN_ISO">
+    <value>496</value>
+  </data>
+  <data name="MN_ISO2">
+    <value>MN</value>
+  </data>
+  <data name="MN_ISO3">
+    <value>MNG</value>
+  </data>
+  <data name="MN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MN_CallingCode">
+    <value>+976</value>
+  </data>
+  <data name="MN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MO_DisplayName">
+    <value>Macao</value>
+  </data>
+  <data name="MO_ISO">
+    <value>446</value>
+  </data>
+  <data name="MO_ISO2">
+    <value>MO</value>
+  </data>
+  <data name="MO_ISO3">
+    <value>MAC</value>
+  </data>
+  <data name="MO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MO_CallingCode">
+    <value>+853</value>
+  </data>
+  <data name="MO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MP_DisplayName">
+    <value>Northern Mariana Islands</value>
+  </data>
+  <data name="MP_ISO">
+    <value>580</value>
+  </data>
+  <data name="MP_ISO2">
+    <value>MP</value>
+  </data>
+  <data name="MP_ISO3">
+    <value>MNP</value>
+  </data>
+  <data name="MP_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MP_CallingCode">
+    <value>+1 670</value>
+  </data>
+  <data name="MQ_DisplayName">
+    <value>Martinique</value>
+  </data>
+  <data name="MQ_ISO">
+    <value>474</value>
+  </data>
+  <data name="MQ_ISO2">
+    <value>MQ</value>
+  </data>
+  <data name="MQ_ISO3">
+    <value>MTQ</value>
+  </data>
+  <data name="MQ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MQ_CallingCode">
+    <value>+33</value>
+  </data>
+  <data name="MR_DisplayName">
+    <value>Mauritania</value>
+  </data>
+  <data name="MR_ISO">
+    <value>478</value>
+  </data>
+  <data name="MR_ISO2">
+    <value>MR</value>
+  </data>
+  <data name="MR_ISO3">
+    <value>MRT</value>
+  </data>
+  <data name="MR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MR_CallingCode">
+    <value>+222</value>
+  </data>
+  <data name="MS_DisplayName">
+    <value>Montserrat</value>
+  </data>
+  <data name="MS_ISO">
+    <value>500</value>
+  </data>
+  <data name="MS_ISO2">
+    <value>MS</value>
+  </data>
+  <data name="MS_ISO3">
+    <value>MSR</value>
+  </data>
+  <data name="MS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MS_CallingCode">
+    <value>+1 664</value>
+  </data>
+  <data name="MT_DisplayName">
+    <value>Malta</value>
+  </data>
+  <data name="MT_ISO">
+    <value>470</value>
+  </data>
+  <data name="MT_ISO2">
+    <value>MT</value>
+  </data>
+  <data name="MT_ISO3">
+    <value>MLT</value>
+  </data>
+  <data name="MT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MT_CallingCode">
+    <value>+356</value>
+  </data>
+  <data name="MT_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MU_DisplayName">
+    <value>Mauritius</value>
+  </data>
+  <data name="MU_ISO">
+    <value>480</value>
+  </data>
+  <data name="MU_ISO2">
+    <value>MU</value>
+  </data>
+  <data name="MU_ISO3">
+    <value>MUS</value>
+  </data>
+  <data name="MU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MU_CallingCode">
+    <value>+230</value>
+  </data>
+  <data name="MV_DisplayName">
+    <value>Maldives</value>
+  </data>
+  <data name="MV_ISO">
+    <value>462</value>
+  </data>
+  <data name="MV_ISO2">
+    <value>MV</value>
+  </data>
+  <data name="MV_ISO3">
+    <value>MDV</value>
+  </data>
+  <data name="MV_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MV_CallingCode">
+    <value>+960</value>
+  </data>
+  <data name="MV_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MW_DisplayName">
+    <value>Malawi</value>
+  </data>
+  <data name="MW_ISO">
+    <value>454</value>
+  </data>
+  <data name="MW_ISO2">
+    <value>MW</value>
+  </data>
+  <data name="MW_ISO3">
+    <value>MWI</value>
+  </data>
+  <data name="MW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MW_CallingCode">
+    <value>+265</value>
+  </data>
+  <data name="MX_DisplayName">
+    <value>Mexico</value>
+  </data>
+  <data name="MX_ISO">
+    <value>484</value>
+  </data>
+  <data name="MX_ISO2">
+    <value>MX</value>
+  </data>
+  <data name="MX_ISO3">
+    <value>MEX</value>
+  </data>
+  <data name="MX_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MX_CallingCode">
+    <value>+52</value>
+  </data>
+  <data name="MX_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MY_DisplayName">
+    <value>Malaysia</value>
+  </data>
+  <data name="MY_ISO">
+    <value>458</value>
+  </data>
+  <data name="MY_ISO2">
+    <value>MY</value>
+  </data>
+  <data name="MY_ISO3">
+    <value>MYS</value>
+  </data>
+  <data name="MY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MY_CallingCode">
+    <value>+60</value>
+  </data>
+  <data name="MY_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="MZ_DisplayName">
+    <value>Mozambique</value>
+  </data>
+  <data name="MZ_ISO">
+    <value>508</value>
+  </data>
+  <data name="MZ_ISO2">
+    <value>MZ</value>
+  </data>
+  <data name="MZ_ISO3">
+    <value>MOZ</value>
+  </data>
+  <data name="MZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MZ_CallingCode">
+    <value>+258</value>
+  </data>
+  <data name="NA_DisplayName">
+    <value>Namibia</value>
+  </data>
+  <data name="NA_ISO">
+    <value>516</value>
+  </data>
+  <data name="NA_ISO2">
+    <value>NA</value>
+  </data>
+  <data name="NA_ISO3">
+    <value>NAM</value>
+  </data>
+  <data name="NA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NA_CallingCode">
+    <value>+264</value>
+  </data>
+  <data name="NC_DisplayName">
+    <value>New Caledonia</value>
+  </data>
+  <data name="NC_ISO">
+    <value>540</value>
+  </data>
+  <data name="NC_ISO2">
+    <value>NC</value>
+  </data>
+  <data name="NC_ISO3">
+    <value>NCL</value>
+  </data>
+  <data name="NC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NC_CallingCode">
+    <value>+687</value>
+  </data>
+  <data name="NE_DisplayName">
+    <value>Niger</value>
+  </data>
+  <data name="NE_ISO">
+    <value>562</value>
+  </data>
+  <data name="NE_ISO2">
+    <value>NE</value>
+  </data>
+  <data name="NE_ISO3">
+    <value>NER</value>
+  </data>
+  <data name="NE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NE_CallingCode">
+    <value>+227</value>
+  </data>
+  <data name="NF_DisplayName">
+    <value>Norfolk Island</value>
+  </data>
+  <data name="NF_ISO">
+    <value>574</value>
+  </data>
+  <data name="NF_ISO2">
+    <value>NF</value>
+  </data>
+  <data name="NF_ISO3">
+    <value>NFK</value>
+  </data>
+  <data name="NF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NF_CallingCode">
+    <value>+672 3</value>
+  </data>
+  <data name="NG_DisplayName">
+    <value>Nigeria</value>
+  </data>
+  <data name="NG_ISO">
+    <value>566</value>
+  </data>
+  <data name="NG_ISO2">
+    <value>NG</value>
+  </data>
+  <data name="NG_ISO3">
+    <value>NGA</value>
+  </data>
+  <data name="NG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NG_CallingCode">
+    <value>+234</value>
+  </data>
+  <data name="NG_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="NI_DisplayName">
+    <value>Nicaragua</value>
+  </data>
+  <data name="NI_ISO">
+    <value>558</value>
+  </data>
+  <data name="NI_ISO2">
+    <value>NI</value>
+  </data>
+  <data name="NI_ISO3">
+    <value>NIC</value>
+  </data>
+  <data name="NI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NI_CallingCode">
+    <value>+505</value>
+  </data>
+  <data name="NI_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="NL_DisplayName">
+    <value>Netherlands</value>
+  </data>
+  <data name="NL_ISO">
+    <value>528</value>
+  </data>
+  <data name="NL_ISO2">
+    <value>NL</value>
+  </data>
+  <data name="NL_ISO3">
+    <value>NLD</value>
+  </data>
+  <data name="NL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NL_CallingCode">
+    <value>+31</value>
+  </data>
+  <data name="NL_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="NO_DisplayName">
+    <value>Norway</value>
+  </data>
+  <data name="NO_ISO">
+    <value>578</value>
+  </data>
+  <data name="NO_ISO2">
+    <value>NO</value>
+  </data>
+  <data name="NO_ISO3">
+    <value>NOR</value>
+  </data>
+  <data name="NO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NO_CallingCode">
+    <value>+47</value>
+  </data>
+  <data name="NO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="NP_DisplayName">
+    <value>Nepal</value>
+  </data>
+  <data name="NP_ISO">
+    <value>524</value>
+  </data>
+  <data name="NP_ISO2">
+    <value>NP</value>
+  </data>
+  <data name="NP_ISO3">
+    <value>NPL</value>
+  </data>
+  <data name="NP_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NP_CallingCode">
+    <value>+977</value>
+  </data>
+  <data name="NP_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="NR_DisplayName">
+    <value>Nauru</value>
+  </data>
+  <data name="NR_ISO">
+    <value>520</value>
+  </data>
+  <data name="NR_ISO2">
+    <value>NR</value>
+  </data>
+  <data name="NR_ISO3">
+    <value>NRU</value>
+  </data>
+  <data name="NR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NR_CallingCode">
+    <value>+674</value>
+  </data>
+  <data name="NU_DisplayName">
+    <value>Niue</value>
+  </data>
+  <data name="NU_ISO">
+    <value>570</value>
+  </data>
+  <data name="NU_ISO2">
+    <value>NU</value>
+  </data>
+  <data name="NU_ISO3">
+    <value>NIU</value>
+  </data>
+  <data name="NU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NU_CallingCode">
+    <value>+683</value>
+  </data>
+  <data name="NZ_DisplayName">
+    <value>New Zealand</value>
+  </data>
+  <data name="NZ_ISO">
+    <value>554</value>
+  </data>
+  <data name="NZ_ISO2">
+    <value>NZ</value>
+  </data>
+  <data name="NZ_ISO3">
+    <value>NZL</value>
+  </data>
+  <data name="NZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NZ_CallingCode">
+    <value>+64</value>
+  </data>
+  <data name="NZ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="OM_DisplayName">
+    <value>Oman</value>
+  </data>
+  <data name="OM_ISO">
+    <value>512</value>
+  </data>
+  <data name="OM_ISO2">
+    <value>OM</value>
+  </data>
+  <data name="OM_ISO3">
+    <value>OMN</value>
+  </data>
+  <data name="OM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="OM_CallingCode">
+    <value>+968</value>
+  </data>
+  <data name="OM_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PA_DisplayName">
+    <value>Panama</value>
+  </data>
+  <data name="PA_ISO">
+    <value>591</value>
+  </data>
+  <data name="PA_ISO2">
+    <value>PA</value>
+  </data>
+  <data name="PA_ISO3">
+    <value>PAN</value>
+  </data>
+  <data name="PA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PA_CallingCode">
+    <value>+507</value>
+  </data>
+  <data name="PA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PE_DisplayName">
+    <value>Peru</value>
+  </data>
+  <data name="PE_ISO">
+    <value>604</value>
+  </data>
+  <data name="PE_ISO2">
+    <value>PE</value>
+  </data>
+  <data name="PE_ISO3">
+    <value>PER</value>
+  </data>
+  <data name="PE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PE_CallingCode">
+    <value>+51</value>
+  </data>
+  <data name="PE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PF_DisplayName">
+    <value>French Polynesia</value>
+  </data>
+  <data name="PF_ISO">
+    <value>258</value>
+  </data>
+  <data name="PF_ISO2">
+    <value>PF</value>
+  </data>
+  <data name="PF_ISO3">
+    <value>PYF</value>
+  </data>
+  <data name="PF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PF_CallingCode">
+    <value>+689</value>
+  </data>
+  <data name="PG_DisplayName">
+    <value>Papua New Guinea</value>
+  </data>
+  <data name="PG_ISO">
+    <value>598</value>
+  </data>
+  <data name="PG_ISO2">
+    <value>PG</value>
+  </data>
+  <data name="PG_ISO3">
+    <value>PNG</value>
+  </data>
+  <data name="PG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PG_CallingCode">
+    <value>+675</value>
+  </data>
+  <data name="PH_DisplayName">
+    <value>Philippines</value>
+  </data>
+  <data name="PH_ISO">
+    <value>608</value>
+  </data>
+  <data name="PH_ISO2">
+    <value>PH</value>
+  </data>
+  <data name="PH_ISO3">
+    <value>PHL</value>
+  </data>
+  <data name="PH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PH_CallingCode">
+    <value>+63</value>
+  </data>
+  <data name="PH_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PK_DisplayName">
+    <value>Pakistan</value>
+  </data>
+  <data name="PK_ISO">
+    <value>586</value>
+  </data>
+  <data name="PK_ISO2">
+    <value>PK</value>
+  </data>
+  <data name="PK_ISO3">
+    <value>PAK</value>
+  </data>
+  <data name="PK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PK_CallingCode">
+    <value>+92</value>
+  </data>
+  <data name="PK_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PL_DisplayName">
+    <value>Poland</value>
+  </data>
+  <data name="PL_ISO">
+    <value>616</value>
+  </data>
+  <data name="PL_ISO2">
+    <value>PL</value>
+  </data>
+  <data name="PL_ISO3">
+    <value>POL</value>
+  </data>
+  <data name="PL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PL_CallingCode">
+    <value>+48</value>
+  </data>
+  <data name="PL_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PM_DisplayName">
+    <value>Saint Pierre And Miquelon</value>
+  </data>
+  <data name="PM_ISO">
+    <value>666</value>
+  </data>
+  <data name="PM_ISO2">
+    <value>PM</value>
+  </data>
+  <data name="PM_ISO3">
+    <value>SPM</value>
+  </data>
+  <data name="PM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PM_CallingCode">
+    <value>+508</value>
+  </data>
+  <data name="PN_DisplayName">
+    <value>Pitcairn</value>
+  </data>
+  <data name="PN_ISO">
+    <value>612</value>
+  </data>
+  <data name="PN_ISO2">
+    <value>PN</value>
+  </data>
+  <data name="PN_ISO3">
+    <value>PCN</value>
+  </data>
+  <data name="PN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PN_CallingCode">
+    <value>+649</value>
+  </data>
+  <data name="PR_DisplayName">
+    <value>Puerto Rico</value>
+  </data>
+  <data name="PR_ISO">
+    <value>630</value>
+  </data>
+  <data name="PR_ISO2">
+    <value>PR</value>
+  </data>
+  <data name="PR_ISO3">
+    <value>PRI</value>
+  </data>
+  <data name="PR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PR_CallingCode">
+    <value>+1 787</value>
+  </data>
+  <data name="PR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PS_DisplayName">
+    <value>Palestinian Territory</value>
+  </data>
+  <data name="PS_ISO">
+    <value>275</value>
+  </data>
+  <data name="PS_ISO2">
+    <value>PS</value>
+  </data>
+  <data name="PS_ISO3">
+    <value>PSE</value>
+  </data>
+  <data name="PS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PS_CallingCode">
+    <value>+970</value>
+  </data>
+  <data name="PT_DisplayName">
+    <value>Portugal</value>
+  </data>
+  <data name="PT_ISO">
+    <value>620</value>
+  </data>
+  <data name="PT_ISO2">
+    <value>PT</value>
+  </data>
+  <data name="PT_ISO3">
+    <value>PRT</value>
+  </data>
+  <data name="PT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PT_CallingCode">
+    <value>+351</value>
+  </data>
+  <data name="PT_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="PW_DisplayName">
+    <value>Palau</value>
+  </data>
+  <data name="PW_ISO">
+    <value>585</value>
+  </data>
+  <data name="PW_ISO2">
+    <value>PW</value>
+  </data>
+  <data name="PW_ISO3">
+    <value>PLW</value>
+  </data>
+  <data name="PW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PW_CallingCode">
+    <value>+680</value>
+  </data>
+  <data name="PY_DisplayName">
+    <value>Paraguay</value>
+  </data>
+  <data name="PY_ISO">
+    <value>600</value>
+  </data>
+  <data name="PY_ISO2">
+    <value>PY</value>
+  </data>
+  <data name="PY_ISO3">
+    <value>PRY</value>
+  </data>
+  <data name="PY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PY_CallingCode">
+    <value>+595</value>
+  </data>
+  <data name="PY_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="QA_DisplayName">
+    <value>Qatar</value>
+  </data>
+  <data name="QA_ISO">
+    <value>634</value>
+  </data>
+  <data name="QA_ISO2">
+    <value>QA</value>
+  </data>
+  <data name="QA_ISO3">
+    <value>QAT</value>
+  </data>
+  <data name="QA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="QA_CallingCode">
+    <value>+974</value>
+  </data>
+  <data name="QA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="RE_DisplayName">
+    <value>Réunion</value>
+  </data>
+  <data name="RE_ISO">
+    <value>638</value>
+  </data>
+  <data name="RE_ISO2">
+    <value>RE</value>
+  </data>
+  <data name="RE_ISO3">
+    <value>REU</value>
+  </data>
+  <data name="RE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="RE_CallingCode">
+    <value>+33</value>
+  </data>
+  <data name="RO_DisplayName">
+    <value>Romania</value>
+  </data>
+  <data name="RO_ISO">
+    <value>642</value>
+  </data>
+  <data name="RO_ISO2">
+    <value>RO</value>
+  </data>
+  <data name="RO_ISO3">
+    <value>ROU</value>
+  </data>
+  <data name="RO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="RO_CallingCode">
+    <value>+40</value>
+  </data>
+  <data name="RO_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="RS_DisplayName">
+    <value>Serbia</value>
+  </data>
+  <data name="RS_ISO">
+    <value>688</value>
+  </data>
+  <data name="RS_ISO2">
+    <value>RS</value>
+  </data>
+  <data name="RS_ISO3">
+    <value>SRB</value>
+  </data>
+  <data name="RS_StartDate">
+    <value>2007-01-01</value>
+  </data>
+  <data name="RS_CallingCode">
+    <value>+381</value>
+  </data>
+  <data name="RS_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="RU_DisplayName">
+    <value>Russian Federation</value>
+  </data>
+  <data name="RU_ISO">
+    <value>643</value>
+  </data>
+  <data name="RU_ISO2">
+    <value>RU</value>
+  </data>
+  <data name="RU_ISO3">
+    <value>RUS</value>
+  </data>
+  <data name="RU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="RU_CallingCode">
+    <value>+7</value>
+  </data>
+  <data name="RU_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="RW_DisplayName">
+    <value>Rwanda</value>
+  </data>
+  <data name="RW_ISO">
+    <value>646</value>
+  </data>
+  <data name="RW_ISO2">
+    <value>RW</value>
+  </data>
+  <data name="RW_ISO3">
+    <value>RWA</value>
+  </data>
+  <data name="RW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="RW_CallingCode">
+    <value>+250</value>
+  </data>
+  <data name="RW_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SA_DisplayName">
+    <value>Saudi Arabia</value>
+  </data>
+  <data name="SA_ISO">
+    <value>682</value>
+  </data>
+  <data name="SA_ISO2">
+    <value>SA</value>
+  </data>
+  <data name="SA_ISO3">
+    <value>SAU</value>
+  </data>
+  <data name="SA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SA_CallingCode">
+    <value>+966</value>
+  </data>
+  <data name="SA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SB_DisplayName">
+    <value>Solomon Islands</value>
+  </data>
+  <data name="SB_ISO">
+    <value>90</value>
+  </data>
+  <data name="SB_ISO2">
+    <value>SB</value>
+  </data>
+  <data name="SB_ISO3">
+    <value>SLB</value>
+  </data>
+  <data name="SB_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SB_CallingCode">
+    <value>+677</value>
+  </data>
+  <data name="SC_DisplayName">
+    <value>Seychelles</value>
+  </data>
+  <data name="SC_ISO">
+    <value>690</value>
+  </data>
+  <data name="SC_ISO2">
+    <value>SC</value>
+  </data>
+  <data name="SC_ISO3">
+    <value>SYC</value>
+  </data>
+  <data name="SC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SC_CallingCode">
+    <value>+248</value>
+  </data>
+  <data name="SD_DisplayName">
+    <value>Sudan</value>
+  </data>
+  <data name="SD_ISO">
+    <value>729</value>
+  </data>
+  <data name="SD_ISO2">
+    <value>SD</value>
+  </data>
+  <data name="SD_ISO3">
+    <value>SDN</value>
+  </data>
+  <data name="SD_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SD_CallingCode">
+    <value>+249</value>
+  </data>
+  <data name="SE_DisplayName">
+    <value>Sweden</value>
+  </data>
+  <data name="SE_ISO">
+    <value>752</value>
+  </data>
+  <data name="SE_ISO2">
+    <value>SE</value>
+  </data>
+  <data name="SE_ISO3">
+    <value>SWE</value>
+  </data>
+  <data name="SE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SE_CallingCode">
+    <value>+46</value>
+  </data>
+  <data name="SE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SG_DisplayName">
+    <value>Singapore</value>
+  </data>
+  <data name="SG_ISO">
+    <value>702</value>
+  </data>
+  <data name="SG_ISO2">
+    <value>SG</value>
+  </data>
+  <data name="SG_ISO3">
+    <value>SGP</value>
+  </data>
+  <data name="SG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SG_CallingCode">
+    <value>+65</value>
+  </data>
+  <data name="SG_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SH_DisplayName">
+    <value>Saint Helena</value>
+  </data>
+  <data name="SH_ISO">
+    <value>654</value>
+  </data>
+  <data name="SH_ISO2">
+    <value>SH</value>
+  </data>
+  <data name="SH_ISO3">
+    <value>SHN</value>
+  </data>
+  <data name="SH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SH_CallingCode">
+    <value>+290</value>
+  </data>
+  <data name="SI_DisplayName">
+    <value>Slovenia</value>
+  </data>
+  <data name="SI_ISO">
+    <value>705</value>
+  </data>
+  <data name="SI_ISO2">
+    <value>SI</value>
+  </data>
+  <data name="SI_ISO3">
+    <value>SVN</value>
+  </data>
+  <data name="SI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SI_CallingCode">
+    <value>+386</value>
+  </data>
+  <data name="SI_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SJ_DisplayName">
+    <value>Svalbard And Jan Mayen</value>
+  </data>
+  <data name="SJ_ISO">
+    <value>744</value>
+  </data>
+  <data name="SJ_ISO2">
+    <value>SJ</value>
+  </data>
+  <data name="SJ_ISO3">
+    <value>SJM</value>
+  </data>
+  <data name="SJ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SJ_CallingCode">
+    <value>+47</value>
+  </data>
+  <data name="SK_DisplayName">
+    <value>Slovakia</value>
+  </data>
+  <data name="SK_ISO">
+    <value>703</value>
+  </data>
+  <data name="SK_ISO2">
+    <value>SK</value>
+  </data>
+  <data name="SK_ISO3">
+    <value>SVK</value>
+  </data>
+  <data name="SK_StartDate">
+    <value>1993-01-01</value>
+  </data>
+  <data name="SK_CallingCode">
+    <value>+421</value>
+  </data>
+  <data name="SK_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SL_DisplayName">
+    <value>Sierra Leone</value>
+  </data>
+  <data name="SL_ISO">
+    <value>694</value>
+  </data>
+  <data name="SL_ISO2">
+    <value>SL</value>
+  </data>
+  <data name="SL_ISO3">
+    <value>SLE</value>
+  </data>
+  <data name="SL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SL_CallingCode">
+    <value>+232</value>
+  </data>
+  <data name="SM_DisplayName">
+    <value>San Marino</value>
+  </data>
+  <data name="SM_ISO">
+    <value>674</value>
+  </data>
+  <data name="SM_ISO2">
+    <value>SM</value>
+  </data>
+  <data name="SM_ISO3">
+    <value>SMR</value>
+  </data>
+  <data name="SM_StartDate">
+    <value>1975-11-25</value>
+  </data>
+  <data name="SM_CallingCode">
+    <value>+378</value>
+  </data>
+  <data name="SN_DisplayName">
+    <value>Senegal</value>
+  </data>
+  <data name="SN_ISO">
+    <value>686</value>
+  </data>
+  <data name="SN_ISO2">
+    <value>SN</value>
+  </data>
+  <data name="SN_ISO3">
+    <value>SEN</value>
+  </data>
+  <data name="SN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SN_CallingCode">
+    <value>+221</value>
+  </data>
+  <data name="SN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SO_DisplayName">
+    <value>Somalia</value>
+  </data>
+  <data name="SO_ISO">
+    <value>706</value>
+  </data>
+  <data name="SO_ISO2">
+    <value>SO</value>
+  </data>
+  <data name="SO_ISO3">
+    <value>SOM</value>
+  </data>
+  <data name="SO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SO_CallingCode">
+    <value>+252</value>
+  </data>
+  <data name="SR_DisplayName">
+    <value>Suriname</value>
+  </data>
+  <data name="SR_ISO">
+    <value>740</value>
+  </data>
+  <data name="SR_ISO2">
+    <value>SR</value>
+  </data>
+  <data name="SR_ISO3">
+    <value>SUR</value>
+  </data>
+  <data name="SR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SR_CallingCode">
+    <value>+597</value>
+  </data>
+  <data name="SS_DisplayName">
+    <value>South Sudan</value>
+  </data>
+  <data name="SS_ISO">
+    <value>728</value>
+  </data>
+  <data name="SS_ISO2">
+    <value>SS</value>
+  </data>
+  <data name="SS_ISO3">
+    <value>SSD</value>
+  </data>
+  <data name="SS_StartDate">
+    <value>2011-07-09</value>
+  </data>
+  <data name="SS_CallingCode">
+    <value>+211</value>
+  </data>
+  <data name="ST_DisplayName">
+    <value>Sao Tome And Principe</value>
+  </data>
+  <data name="ST_ISO">
+    <value>678</value>
+  </data>
+  <data name="ST_ISO2">
+    <value>ST</value>
+  </data>
+  <data name="ST_ISO3">
+    <value>STP</value>
+  </data>
+  <data name="ST_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ST_CallingCode">
+    <value>+239</value>
+  </data>
+  <data name="SV_DisplayName">
+    <value>El Salvador</value>
+  </data>
+  <data name="SV_ISO">
+    <value>222</value>
+  </data>
+  <data name="SV_ISO2">
+    <value>SV</value>
+  </data>
+  <data name="SV_ISO3">
+    <value>SLV</value>
+  </data>
+  <data name="SV_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SV_CallingCode">
+    <value>+503</value>
+  </data>
+  <data name="SV_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SX_DisplayName">
+    <value>Sint Maarten</value>
+  </data>
+  <data name="SX_ISO">
+    <value>534</value>
+  </data>
+  <data name="SX_ISO2">
+    <value>SX</value>
+  </data>
+  <data name="SX_ISO3">
+    <value>SXM</value>
+  </data>
+  <data name="SX_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SX_CallingCode">
+    <value>+1 721</value>
+  </data>
+  <data name="SY_DisplayName">
+    <value>Syrian Arab Republic</value>
+  </data>
+  <data name="SY_ISO">
+    <value>760</value>
+  </data>
+  <data name="SY_ISO2">
+    <value>SY</value>
+  </data>
+  <data name="SY_ISO3">
+    <value>SYR</value>
+  </data>
+  <data name="SY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SY_CallingCode">
+    <value>+963</value>
+  </data>
+  <data name="SY_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="SZ_DisplayName">
+    <value>Swaziland</value>
+  </data>
+  <data name="SZ_ISO">
+    <value>748</value>
+  </data>
+  <data name="SZ_ISO2">
+    <value>SZ</value>
+  </data>
+  <data name="SZ_ISO3">
+    <value>SWZ</value>
+  </data>
+  <data name="SZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SZ_CallingCode">
+    <value>+268</value>
+  </data>
+  <data name="TC_DisplayName">
+    <value>Turks And Caicos Islands</value>
+  </data>
+  <data name="TC_ISO">
+    <value>796</value>
+  </data>
+  <data name="TC_ISO2">
+    <value>TC</value>
+  </data>
+  <data name="TC_ISO3">
+    <value>TCA</value>
+  </data>
+  <data name="TC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TC_CallingCode">
+    <value>+1 649</value>
+  </data>
+  <data name="TD_DisplayName">
+    <value>Chad</value>
+  </data>
+  <data name="TD_ISO">
+    <value>148</value>
+  </data>
+  <data name="TD_ISO2">
+    <value>TD</value>
+  </data>
+  <data name="TD_ISO3">
+    <value>TCD</value>
+  </data>
+  <data name="TD_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TD_CallingCode">
+    <value>+235</value>
+  </data>
+  <data name="TF_DisplayName">
+    <value>French Southern Territories</value>
+  </data>
+  <data name="TF_ISO">
+    <value>260</value>
+  </data>
+  <data name="TF_ISO2">
+    <value>TF</value>
+  </data>
+  <data name="TF_ISO3">
+    <value>ATF</value>
+  </data>
+  <data name="TF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TF_CallingCode">
+    <value>+33</value>
+  </data>
+  <data name="TG_DisplayName">
+    <value>Togo</value>
+  </data>
+  <data name="TG_ISO">
+    <value>768</value>
+  </data>
+  <data name="TG_ISO2">
+    <value>TG</value>
+  </data>
+  <data name="TG_ISO3">
+    <value>TGO</value>
+  </data>
+  <data name="TG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TG_CallingCode">
+    <value>+228</value>
+  </data>
+  <data name="TH_DisplayName">
+    <value>Thailand</value>
+  </data>
+  <data name="TH_ISO">
+    <value>764</value>
+  </data>
+  <data name="TH_ISO2">
+    <value>TH</value>
+  </data>
+  <data name="TH_ISO3">
+    <value>THA</value>
+  </data>
+  <data name="TH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TH_CallingCode">
+    <value>+66</value>
+  </data>
+  <data name="TH_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="TJ_DisplayName">
+    <value>Tajikistan</value>
+  </data>
+  <data name="TJ_ISO">
+    <value>762</value>
+  </data>
+  <data name="TJ_ISO2">
+    <value>TJ</value>
+  </data>
+  <data name="TJ_ISO3">
+    <value>TJK</value>
+  </data>
+  <data name="TJ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TJ_CallingCode">
+    <value>+992</value>
+  </data>
+  <data name="TJ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="TK_DisplayName">
+    <value>Tokelau</value>
+  </data>
+  <data name="TK_ISO">
+    <value>772</value>
+  </data>
+  <data name="TK_ISO2">
+    <value>TK</value>
+  </data>
+  <data name="TK_ISO3">
+    <value>TKL</value>
+  </data>
+  <data name="TK_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TK_CallingCode">
+    <value>+690</value>
+  </data>
+  <data name="TL_DisplayName">
+    <value>Timor-Leste</value>
+  </data>
+  <data name="TL_ISO">
+    <value>626</value>
+  </data>
+  <data name="TL_ISO2">
+    <value>TL</value>
+  </data>
+  <data name="TL_ISO3">
+    <value>TLS</value>
+  </data>
+  <data name="TL_StartDate">
+    <value>2002-05-20</value>
+  </data>
+  <data name="TL_CallingCode">
+    <value>+670</value>
+  </data>
+  <data name="TM_DisplayName">
+    <value>Turkmenistan</value>
+  </data>
+  <data name="TM_ISO">
+    <value>795</value>
+  </data>
+  <data name="TM_ISO2">
+    <value>TM</value>
+  </data>
+  <data name="TM_ISO3">
+    <value>TKM</value>
+  </data>
+  <data name="TM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TM_CallingCode">
+    <value>+993</value>
+  </data>
+  <data name="TM_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="TN_DisplayName">
+    <value>Tunisia</value>
+  </data>
+  <data name="TN_ISO">
+    <value>788</value>
+  </data>
+  <data name="TN_ISO2">
+    <value>TN</value>
+  </data>
+  <data name="TN_ISO3">
+    <value>TUN</value>
+  </data>
+  <data name="TN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TN_CallingCode">
+    <value>+216</value>
+  </data>
+  <data name="TN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="TO_DisplayName">
+    <value>Tonga</value>
+  </data>
+  <data name="TO_ISO">
+    <value>776</value>
+  </data>
+  <data name="TO_ISO2">
+    <value>TO</value>
+  </data>
+  <data name="TO_ISO3">
+    <value>TON</value>
+  </data>
+  <data name="TO_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TO_CallingCode">
+    <value>+676</value>
+  </data>
+  <data name="TR_DisplayName">
+    <value>Turkey</value>
+  </data>
+  <data name="TR_ISO">
+    <value>792</value>
+  </data>
+  <data name="TR_ISO2">
+    <value>TR</value>
+  </data>
+  <data name="TR_ISO3">
+    <value>TUR</value>
+  </data>
+  <data name="TR_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TR_CallingCode">
+    <value>+90</value>
+  </data>
+  <data name="TR_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="TT_DisplayName">
+    <value>Trinidad And Tobago</value>
+  </data>
+  <data name="TT_ISO">
+    <value>780</value>
+  </data>
+  <data name="TT_ISO2">
+    <value>TT</value>
+  </data>
+  <data name="TT_ISO3">
+    <value>TTO</value>
+  </data>
+  <data name="TT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TT_CallingCode">
+    <value>+1 868</value>
+  </data>
+  <data name="TT_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="TV_DisplayName">
+    <value>Tuvalu</value>
+  </data>
+  <data name="TV_ISO">
+    <value>798</value>
+  </data>
+  <data name="TV_ISO2">
+    <value>TV</value>
+  </data>
+  <data name="TV_ISO3">
+    <value>TUV</value>
+  </data>
+  <data name="TV_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TV_CallingCode">
+    <value>+688</value>
+  </data>
+  <data name="TW_DisplayName">
+    <value>Taiwan</value>
+  </data>
+  <data name="TW_ISO">
+    <value>158</value>
+  </data>
+  <data name="TW_ISO2">
+    <value>TW</value>
+  </data>
+  <data name="TW_ISO3">
+    <value>TWN</value>
+  </data>
+  <data name="TW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TW_CallingCode">
+    <value>+886</value>
+  </data>
+  <data name="TW_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="TZ_DisplayName">
+    <value>Tanzania</value>
+  </data>
+  <data name="TZ_ISO">
+    <value>834</value>
+  </data>
+  <data name="TZ_ISO2">
+    <value>TZ</value>
+  </data>
+  <data name="TZ_ISO3">
+    <value>TZA</value>
+  </data>
+  <data name="TZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TZ_CallingCode">
+    <value>+255</value>
+  </data>
+  <data name="UA_DisplayName">
+    <value>Ukraine</value>
+  </data>
+  <data name="UA_ISO">
+    <value>804</value>
+  </data>
+  <data name="UA_ISO2">
+    <value>UA</value>
+  </data>
+  <data name="UA_ISO3">
+    <value>UKR</value>
+  </data>
+  <data name="UA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="UA_CallingCode">
+    <value>+380</value>
+  </data>
+  <data name="UA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="UG_DisplayName">
+    <value>Uganda</value>
+  </data>
+  <data name="UG_ISO">
+    <value>800</value>
+  </data>
+  <data name="UG_ISO2">
+    <value>UG</value>
+  </data>
+  <data name="UG_ISO3">
+    <value>UGA</value>
+  </data>
+  <data name="UG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="UG_CallingCode">
+    <value>+256</value>
+  </data>
+  <data name="UM_DisplayName">
+    <value>United States Minor Outlying Islands</value>
+  </data>
+  <data name="UM_ISO">
+    <value>581</value>
+  </data>
+  <data name="UM_ISO2">
+    <value>UM</value>
+  </data>
+  <data name="UM_ISO3">
+    <value>UMI</value>
+  </data>
+  <data name="UM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="UM_CallingCode">
+    <value>+1</value>
+  </data>
+  <data name="US_DisplayName">
+    <value>United States</value>
+  </data>
+  <data name="US_ISO">
+    <value>840</value>
+  </data>
+  <data name="US_ISO2">
+    <value>US</value>
+  </data>
+  <data name="US_ISO3">
+    <value>USA</value>
+  </data>
+  <data name="US_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="US_CallingCode">
+    <value>+1</value>
+  </data>
+  <data name="US_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="UY_DisplayName">
+    <value>Uruguay</value>
+  </data>
+  <data name="UY_ISO">
+    <value>858</value>
+  </data>
+  <data name="UY_ISO2">
+    <value>UY</value>
+  </data>
+  <data name="UY_ISO3">
+    <value>URY</value>
+  </data>
+  <data name="UY_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="UY_CallingCode">
+    <value>+598</value>
+  </data>
+  <data name="UY_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="UZ_DisplayName">
+    <value>Uzbekistan</value>
+  </data>
+  <data name="UZ_ISO">
+    <value>860</value>
+  </data>
+  <data name="UZ_ISO2">
+    <value>UZ</value>
+  </data>
+  <data name="UZ_ISO3">
+    <value>UZB</value>
+  </data>
+  <data name="UZ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="UZ_CallingCode">
+    <value>+998</value>
+  </data>
+  <data name="UZ_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="VA_DisplayName">
+    <value>Holy See</value>
+  </data>
+  <data name="VA_ISO">
+    <value>336</value>
+  </data>
+  <data name="VA_ISO2">
+    <value>VA</value>
+  </data>
+  <data name="VA_ISO3">
+    <value>VAT</value>
+  </data>
+  <data name="VA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VA_CallingCode">
+    <value>+379</value>
+  </data>
+  <data name="VC_DisplayName">
+    <value>Saint Vincent And The Grenadines</value>
+  </data>
+  <data name="VC_ISO">
+    <value>670</value>
+  </data>
+  <data name="VC_ISO2">
+    <value>VC</value>
+  </data>
+  <data name="VC_ISO3">
+    <value>VCT</value>
+  </data>
+  <data name="VC_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VC_CallingCode">
+    <value>+1 784</value>
+  </data>
+  <data name="VE_DisplayName">
+    <value>Venezuela</value>
+  </data>
+  <data name="VE_ISO">
+    <value>862</value>
+  </data>
+  <data name="VE_ISO2">
+    <value>VE</value>
+  </data>
+  <data name="VE_ISO3">
+    <value>VEN</value>
+  </data>
+  <data name="VE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VE_CallingCode">
+    <value>+58</value>
+  </data>
+  <data name="VE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="VG_DisplayName">
+    <value>Virgin Islands</value>
+  </data>
+  <data name="VG_ISO">
+    <value>92</value>
+  </data>
+  <data name="VG_ISO2">
+    <value>VG</value>
+  </data>
+  <data name="VG_ISO3">
+    <value>VGB</value>
+  </data>
+  <data name="VG_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VG_CallingCode">
+    <value>+1 284</value>
+  </data>
+  <data name="VI_DisplayName">
+    <value>Virgin Islands</value>
+  </data>
+  <data name="VI_ISO">
+    <value>850</value>
+  </data>
+  <data name="VI_ISO2">
+    <value>VI</value>
+  </data>
+  <data name="VI_ISO3">
+    <value>VIR</value>
+  </data>
+  <data name="VI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VI_CallingCode">
+    <value>+1 340</value>
+  </data>
+  <data name="VN_DisplayName">
+    <value>Viet Nam</value>
+  </data>
+  <data name="VN_ISO">
+    <value>704</value>
+  </data>
+  <data name="VN_ISO2">
+    <value>VN</value>
+  </data>
+  <data name="VN_ISO3">
+    <value>VNM</value>
+  </data>
+  <data name="VN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VN_CallingCode">
+    <value>+84</value>
+  </data>
+  <data name="VN_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="VU_DisplayName">
+    <value>Vanuatu</value>
+  </data>
+  <data name="VU_ISO">
+    <value>548</value>
+  </data>
+  <data name="VU_ISO2">
+    <value>VU</value>
+  </data>
+  <data name="VU_ISO3">
+    <value>VUT</value>
+  </data>
+  <data name="VU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VU_CallingCode">
+    <value>+678</value>
+  </data>
+  <data name="WF_DisplayName">
+    <value>Wallis And Futuna</value>
+  </data>
+  <data name="WF_ISO">
+    <value>876</value>
+  </data>
+  <data name="WF_ISO2">
+    <value>WF</value>
+  </data>
+  <data name="WF_ISO3">
+    <value>WLF</value>
+  </data>
+  <data name="WF_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="WF_CallingCode">
+    <value>+688</value>
+  </data>
+  <data name="WS_DisplayName">
+    <value>Samoa</value>
+  </data>
+  <data name="WS_ISO">
+    <value>882</value>
+  </data>
+  <data name="WS_ISO2">
+    <value>WS</value>
+  </data>
+  <data name="WS_ISO3">
+    <value>WSM</value>
+  </data>
+  <data name="WS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="WS_CallingCode">
+    <value>+685</value>
+  </data>
+  <data name="YE_DisplayName">
+    <value>Yemen</value>
+  </data>
+  <data name="YE_ISO">
+    <value>887</value>
+  </data>
+  <data name="YE_ISO2">
+    <value>YE</value>
+  </data>
+  <data name="YE_ISO3">
+    <value>YEM</value>
+  </data>
+  <data name="YE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="YE_CallingCode">
+    <value>+967</value>
+  </data>
+  <data name="YE_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="YT_DisplayName">
+    <value>Mayotte</value>
+  </data>
+  <data name="YT_ISO">
+    <value>175</value>
+  </data>
+  <data name="YT_ISO2">
+    <value>YT</value>
+  </data>
+  <data name="YT_ISO3">
+    <value>MYT</value>
+  </data>
+  <data name="YT_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="YT_CallingCode">
+    <value>+269 6</value>
+  </data>
+  <data name="ZA_DisplayName">
+    <value>South Africa</value>
+  </data>
+  <data name="ZA_ISO">
+    <value>710</value>
+  </data>
+  <data name="ZA_ISO2">
+    <value>ZA</value>
+  </data>
+  <data name="ZA_ISO3">
+    <value>ZAF</value>
+  </data>
+  <data name="ZA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ZA_CallingCode">
+    <value>+27</value>
+  </data>
+  <data name="ZA_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="ZM_DisplayName">
+    <value>Zambia</value>
+  </data>
+  <data name="ZM_ISO">
+    <value>894</value>
+  </data>
+  <data name="ZM_ISO2">
+    <value>ZM</value>
+  </data>
+  <data name="ZM_ISO3">
+    <value>ZMB</value>
+  </data>
+  <data name="ZM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ZM_CallingCode">
+    <value>+260</value>
+  </data>
+  <data name="ZW_DisplayName">
+    <value>Zimbabwe</value>
+  </data>
+  <data name="ZW_ISO">
+    <value>716</value>
+  </data>
+  <data name="ZW_ISO2">
+    <value>ZW</value>
+  </data>
+  <data name="ZW_ISO3">
+    <value>ZWE</value>
+  </data>
+  <data name="ZW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ZW_CallingCode">
+    <value>+263</value>
+  </data>
+  <data name="ZW_RegionInfoExists">
+    <value>True</value>
+  </data>
+  <data name="ANHH_DisplayName">
+    <value>Netherlands Antilles</value>
+  </data>
+  <data name="ANHH_ISO">
+    <value>530</value>
+  </data>
+  <data name="ANHH_ISO2">
+    <value>AN</value>
+  </data>
+  <data name="ANHH_ISO3">
+    <value>ANT</value>
+  </data>
+  <data name="ANHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ANHH_EndDate">
+    <value>2010-10-10</value>
+  </data>
+  <data name="ANHH_CallingCode">
+    <value>+599</value>
+  </data>
+  <data name="BUMM_DisplayName">
+    <value>Burma</value>
+  </data>
+  <data name="BUMM_ISO">
+    <value>104</value>
+  </data>
+  <data name="BUMM_ISO2">
+    <value>BU</value>
+  </data>
+  <data name="BUMM_ISO3">
+    <value>BUR</value>
+  </data>
+  <data name="BUMM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BUMM_EndDate">
+    <value>1988-12-31</value>
+  </data>
+  <data name="BUMM_CallingCode">
+    <value>+95</value>
+  </data>
+  <data name="CSHH_DisplayName">
+    <value>Czechoslovakia</value>
+  </data>
+  <data name="CSHH_ISO">
+    <value>200</value>
+  </data>
+  <data name="CSHH_ISO2">
+    <value>CS</value>
+  </data>
+  <data name="CSHH_ISO3">
+    <value>CSK</value>
+  </data>
+  <data name="CSHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CSHH_EndDate">
+    <value>1992-12-31</value>
+  </data>
+  <data name="CSHH_CallingCode">
+    <value>+42</value>
+  </data>
+  <data name="CSXX_DisplayName">
+    <value>Serbia And Montenegro</value>
+  </data>
+  <data name="CSXX_ISO">
+    <value>891</value>
+  </data>
+  <data name="CSXX_ISO2">
+    <value>CS</value>
+  </data>
+  <data name="CSXX_ISO3">
+    <value>SCG</value>
+  </data>
+  <data name="CSXX_StartDate">
+    <value>1993-01-01</value>
+  </data>
+  <data name="CSXX_EndDate">
+    <value>2006-12-31</value>
+  </data>
+  <data name="CSXX_CallingCode">
+    <value>+381</value>
+  </data>
+  <data name="DDDE_DisplayName">
+    <value>German Democratic Republic</value>
+  </data>
+  <data name="DDDE_ISO">
+    <value>276</value>
+  </data>
+  <data name="DDDE_ISO2">
+    <value>DD</value>
+  </data>
+  <data name="DDDE_ISO3">
+    <value>DEU</value>
+  </data>
+  <data name="DDDE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DDDE_EndDate">
+    <value>1990-10-03</value>
+  </data>
+  <data name="DDDE_CallingCode">
+    <value>+37</value>
+  </data>
+  <data name="SUHH_DisplayName">
+    <value>Soviet Union</value>
+  </data>
+  <data name="SUHH_ISO">
+    <value>810</value>
+  </data>
+  <data name="SUHH_ISO2">
+    <value>SU</value>
+  </data>
+  <data name="SUHH_ISO3">
+    <value>SUN</value>
+  </data>
+  <data name="SUHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SUHH_EndDate">
+    <value>1991-12-31</value>
+  </data>
+  <data name="SUHH_CallingCode">
+    <value>+7</value>
+  </data>
+  <data name="YUCS_DisplayName">
+    <value>Yugoslavia</value>
+  </data>
+  <data name="YUCS_ISO">
+    <value>891</value>
+  </data>
+  <data name="YUCS_ISO2">
+    <value>YU</value>
+  </data>
+  <data name="YUCS_ISO3">
+    <value>YUG</value>
+  </data>
+  <data name="YUCS_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="YUCS_EndDate">
+    <value>2002-12-31</value>
+  </data>
+  <data name="YUCS_CallingCode">
+    <value>+38</value>
+  </data>
+  <data name="ZRCD_DisplayName">
+    <value>Zaire</value>
+  </data>
+  <data name="ZRCD_ISO">
+    <value>180</value>
+  </data>
+  <data name="ZRCD_ISO2">
+    <value>ZR</value>
+  </data>
+  <data name="ZRCD_ISO3">
+    <value>ZAR</value>
+  </data>
+  <data name="ZRCD_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="ZRCD_EndDate">
+    <value>1996-05-17</value>
+  </data>
+  <data name="ZRCD_CallingCode">
+    <value>+243</value>
+  </data>
+  <data name="All">
+    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;YE;YT;ZA;ZM;ZW;ANHH;BUMM;CSHH;CSXX;DDDE;SUHH;YUCS;ZRCD</value>
+  </data>
+</root>

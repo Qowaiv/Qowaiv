@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8690F17C-8152-42BB-9697-0360758FA832}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Qowaiv</RootNamespace>
+    <AssemblyName>Qowaiv</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Qowaiv.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Qowaiv.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Conversion\CountryTypeConverter.cs" />
+    <Compile Include="Conversion\GenderTypeConverter.cs" />
+    <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
+    <Compile Include="Conversion\PercentageTypeConverter.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="CountryConstants.cs" />
+    <Compile Include="Formatting\StringFormatter.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="InternationalBankAccountNumber.cs" />
+    <Compile Include="InternationalBankAccountNumberPatterns.cs" />
+    <Compile Include="Json\IJsonSerializable.cs" />
+    <Compile Include="Parsing.cs" />
+    <Compile Include="Percentage.cs" />
+    <Compile Include="PercentageExtensions.cs" />
+    <Compile Include="QowaivMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QowaivMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SingleValueStaticOptions.cs" />
+    <Compile Include="SingleValueObjectAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Qowaiv.snk">
+      <Link>Qowaiv.snk</Link>
+    </None>
+    <EmbeddedResource Include="CountryLabels.ar.resx" />
+    <EmbeddedResource Include="CountryLabels.de.resx" />
+    <EmbeddedResource Include="CountryLabels.es.resx" />
+    <EmbeddedResource Include="CountryLabels.fr.resx" />
+    <EmbeddedResource Include="CountryLabels.it.resx" />
+    <EmbeddedResource Include="CountryLabels.ja.resx" />
+    <EmbeddedResource Include="CountryLabels.nl.resx" />
+    <EmbeddedResource Include="CountryLabels.pt.resx" />
+    <EmbeddedResource Include="CountryLabels.resx" />
+    <EmbeddedResource Include="CountryLabels.ru.resx" />
+    <EmbeddedResource Include="CountryLabels.zh-HK.resx" />
+    <EmbeddedResource Include="CountryLabels.zh-TW.resx" />
+    <EmbeddedResource Include="CountryLabels.zh.resx" />
+    <EmbeddedResource Include="GenderLabels.ar.resx" />
+    <EmbeddedResource Include="GenderLabels.zh.resx" />
+    <EmbeddedResource Include="QowaivMessages.nl.resx" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="..\Qowaiv.license.txt">
+      <Link>Qowaiv.license.txt</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenderLabels.de.resx" />
+    <EmbeddedResource Include="GenderLabels.en-GB.resx" />
+    <EmbeddedResource Include="GenderLabels.es.resx" />
+    <EmbeddedResource Include="GenderLabels.fr.resx" />
+    <EmbeddedResource Include="GenderLabels.it.resx" />
+    <EmbeddedResource Include="GenderLabels.ja.resx" />
+    <EmbeddedResource Include="GenderLabels.nl.resx" />
+    <EmbeddedResource Include="GenderLabels.pt.resx" />
+    <EmbeddedResource Include="GenderLabels.resx" />
+    <EmbeddedResource Include="GenderLabels.ru.resx" />
+    <EmbeddedResource Include="QowaivMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QowaivMessages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

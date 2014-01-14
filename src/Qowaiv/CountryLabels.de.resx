@@ -1,0 +1,639 @@
+<?xml version="1.0"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">text/microsoft-resx</resheader>
+  <resheader name="version">2.0</resheader>
+  <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <data name="ZZ_DisplayName">
+    <value>Unbekannt</value>
+    <comment>Unknown (ZZ)</comment>
+  </data>
+  <data name="AE_DisplayName">
+    <value>Vereinigte Arabische Emirate</value>
+    <comment>United Arab Emirates (AE)</comment>
+  </data>
+  <data name="AG_DisplayName">
+    <value>Antigua Und Barbuda</value>
+    <comment>Antigua And Barbuda (AG)</comment>
+  </data>
+  <data name="AL_DisplayName">
+    <value>Albanien</value>
+    <comment>Albania (AL)</comment>
+  </data>
+  <data name="AM_DisplayName">
+    <value>Armenien</value>
+    <comment>Armenia (AM)</comment>
+  </data>
+  <data name="AQ_DisplayName">
+    <value>Antarktika</value>
+    <comment>Antarctica (AQ)</comment>
+  </data>
+  <data name="AR_DisplayName">
+    <value>Argentinien</value>
+    <comment>Argentina (AR)</comment>
+  </data>
+  <data name="AS_DisplayName">
+    <value>Amerikanisch-Samoa</value>
+    <comment>American Samoa (AS)</comment>
+  </data>
+  <data name="AT_DisplayName">
+    <value>Österreich</value>
+    <comment>Austria (AT)</comment>
+  </data>
+  <data name="AU_DisplayName">
+    <value>Australien</value>
+    <comment>Australia (AU)</comment>
+  </data>
+  <data name="AX_DisplayName">
+    <value>Åland</value>
+    <comment>Åland Islands (AX)</comment>
+  </data>
+  <data name="AZ_DisplayName">
+    <value>Aserbaidschan</value>
+    <comment>Azerbaijan (AZ)</comment>
+  </data>
+  <data name="BA_DisplayName">
+    <value>Bosnien Und Herzegowina</value>
+    <comment>Bosnia And Herzegovina (BA)</comment>
+  </data>
+  <data name="BD_DisplayName">
+    <value>Bangladesch</value>
+    <comment>Bangladesh (BD)</comment>
+  </data>
+  <data name="BE_DisplayName">
+    <value>Belgien</value>
+    <comment>Belgium (BE)</comment>
+  </data>
+  <data name="BG_DisplayName">
+    <value>Bulgarien</value>
+    <comment>Bulgaria (BG)</comment>
+  </data>
+  <data name="BL_DisplayName">
+    <value>Saint-Barthélemy</value>
+    <comment>Saint Barthélemy (BL)</comment>
+  </data>
+  <data name="BO_DisplayName">
+    <value>Bolivien</value>
+    <comment>Bolivia (BO)</comment>
+  </data>
+  <data name="BR_DisplayName">
+    <value>Brasilien</value>
+    <comment>Brazil (BR)</comment>
+  </data>
+  <data name="BV_DisplayName">
+    <value>Bouvetinsel</value>
+    <comment>Bouvet Island (BV)</comment>
+  </data>
+  <data name="CA_DisplayName">
+    <value>Kanada</value>
+    <comment>Canada (CA)</comment>
+  </data>
+  <data name="CC_DisplayName">
+    <value>Kokosinseln</value>
+    <comment>Cocos (CC)</comment>
+  </data>
+  <data name="CD_DisplayName">
+    <value>Kongo</value>
+    <comment>Congo (CD)</comment>
+  </data>
+  <data name="CF_DisplayName">
+    <value>Zentralafrikanische Republik</value>
+    <comment>Central African Republic (CF)</comment>
+  </data>
+  <data name="CG_DisplayName">
+    <value>Republik Kongo</value>
+    <comment>Congo (CG)</comment>
+  </data>
+  <data name="CH_DisplayName">
+    <value>Schweiz</value>
+    <comment>Switzerland (CH)</comment>
+  </data>
+  <data name="CI_DisplayName">
+    <value>Côte D’Ivoire</value>
+    <comment>Côte D'Ivoire (CI)</comment>
+  </data>
+  <data name="CK_DisplayName">
+    <value>Cookinseln</value>
+    <comment>Cook Islands (CK)</comment>
+  </data>
+  <data name="CM_DisplayName">
+    <value>Kamerun</value>
+    <comment>Cameroon (CM)</comment>
+  </data>
+  <data name="CO_DisplayName">
+    <value>Kolumbien</value>
+    <comment>Colombia (CO)</comment>
+  </data>
+  <data name="CU_DisplayName">
+    <value>Kuba</value>
+    <comment>Cuba (CU)</comment>
+  </data>
+  <data name="CV_DisplayName">
+    <value>Kap Verde</value>
+    <comment>Cape Verde (CV)</comment>
+  </data>
+  <data name="CX_DisplayName">
+    <value>Weihnachtsinsel</value>
+    <comment>Christmas Island (CX)</comment>
+  </data>
+  <data name="CY_DisplayName">
+    <value>Zypern</value>
+    <comment>Cyprus (CY)</comment>
+  </data>
+  <data name="CZ_DisplayName">
+    <value>Tschechische Republik</value>
+    <comment>Czech Republic (CZ)</comment>
+  </data>
+  <data name="DE_DisplayName">
+    <value>Deutschland</value>
+    <comment>Germany (DE)</comment>
+  </data>
+  <data name="DJ_DisplayName">
+    <value>Dschibuti</value>
+    <comment>Djibouti (DJ)</comment>
+  </data>
+  <data name="DK_DisplayName">
+    <value>Dänemark</value>
+    <comment>Denmark (DK)</comment>
+  </data>
+  <data name="DO_DisplayName">
+    <value>Dominikanische Republik</value>
+    <comment>Dominican Republic (DO)</comment>
+  </data>
+  <data name="DZ_DisplayName">
+    <value>Algerien</value>
+    <comment>Algeria (DZ)</comment>
+  </data>
+  <data name="EE_DisplayName">
+    <value>Estland</value>
+    <comment>Estonia (EE)</comment>
+  </data>
+  <data name="EG_DisplayName">
+    <value>Ägypten</value>
+    <comment>Egypt (EG)</comment>
+  </data>
+  <data name="EH_DisplayName">
+    <value>Westsahara</value>
+    <comment>Western Sahara (EH)</comment>
+  </data>
+  <data name="ES_DisplayName">
+    <value>Spanien</value>
+    <comment>Spain (ES)</comment>
+  </data>
+  <data name="ET_DisplayName">
+    <value>Äthiopien</value>
+    <comment>Ethiopia (ET)</comment>
+  </data>
+  <data name="FI_DisplayName">
+    <value>Finnland</value>
+    <comment>Finland (FI)</comment>
+  </data>
+  <data name="FJ_DisplayName">
+    <value>Fidschi</value>
+    <comment>Fiji (FJ)</comment>
+  </data>
+  <data name="FK_DisplayName">
+    <value>Falklandinseln</value>
+    <comment>Falkland Islands (FK)</comment>
+  </data>
+  <data name="FM_DisplayName">
+    <value>Mikronesien</value>
+    <comment>Micronesia (FM)</comment>
+  </data>
+  <data name="FO_DisplayName">
+    <value>Färöer</value>
+    <comment>Faroe Islands (FO)</comment>
+  </data>
+  <data name="FR_DisplayName">
+    <value>Frankreich</value>
+    <comment>France (FR)</comment>
+  </data>
+  <data name="GA_DisplayName">
+    <value>Gabun</value>
+    <comment>Gabon (GA)</comment>
+  </data>
+  <data name="GB_DisplayName">
+    <value>Vereinigtes Königreich</value>
+    <comment>United Kingdom (GB)</comment>
+  </data>
+  <data name="GE_DisplayName">
+    <value>Georgien</value>
+    <comment>Georgia (GE)</comment>
+  </data>
+  <data name="GF_DisplayName">
+    <value>Französisch-Guayana</value>
+    <comment>French Guiana (GF)</comment>
+  </data>
+  <data name="GL_DisplayName">
+    <value>Grönland</value>
+    <comment>Greenland (GL)</comment>
+  </data>
+  <data name="GQ_DisplayName">
+    <value>Äquatorialguinea</value>
+    <comment>Equatorial Guinea (GQ)</comment>
+  </data>
+  <data name="GR_DisplayName">
+    <value>Griechenland</value>
+    <comment>Greece (GR)</comment>
+  </data>
+  <data name="GS_DisplayName">
+    <value>Südgeorgien Und Die Südlichen Sandwichinseln</value>
+    <comment>South Georgia And The South Sandwich Islands (GS)</comment>
+  </data>
+  <data name="HK_DisplayName">
+    <value>Hongkong</value>
+    <comment>Hong Kong (HK)</comment>
+  </data>
+  <data name="HM_DisplayName">
+    <value>Heard Und Mcdonaldinseln</value>
+    <comment>Heard Island And Mcdonald Islands (HM)</comment>
+  </data>
+  <data name="HR_DisplayName">
+    <value>Kroatien</value>
+    <comment>Croatia (HR)</comment>
+  </data>
+  <data name="HU_DisplayName">
+    <value>Ungarn</value>
+    <comment>Hungary (HU)</comment>
+  </data>
+  <data name="ID_DisplayName">
+    <value>Indonesien</value>
+    <comment>Indonesia (ID)</comment>
+  </data>
+  <data name="IE_DisplayName">
+    <value>Irland</value>
+    <comment>Ireland (IE)</comment>
+  </data>
+  <data name="IM_DisplayName">
+    <value>Insel Man</value>
+    <comment>Isle Of Man (IM)</comment>
+  </data>
+  <data name="IN_DisplayName">
+    <value>Indien</value>
+    <comment>India (IN)</comment>
+  </data>
+  <data name="IO_DisplayName">
+    <value>Britisches Territorium Im Indischen Ozean</value>
+    <comment>British Indian Ocean Territory (IO)</comment>
+  </data>
+  <data name="IQ_DisplayName">
+    <value>Irak</value>
+    <comment>Iraq (IQ)</comment>
+  </data>
+  <data name="IS_DisplayName">
+    <value>Island</value>
+    <comment>Iceland (IS)</comment>
+  </data>
+  <data name="IT_DisplayName">
+    <value>Italien</value>
+    <comment>Italy (IT)</comment>
+  </data>
+  <data name="JM_DisplayName">
+    <value>Jamaika</value>
+    <comment>Jamaica (JM)</comment>
+  </data>
+  <data name="JO_DisplayName">
+    <value>Jordanien</value>
+    <comment>Jordan (JO)</comment>
+  </data>
+  <data name="KE_DisplayName">
+    <value>Kenia</value>
+    <comment>Kenya (KE)</comment>
+  </data>
+  <data name="KG_DisplayName">
+    <value>Kirgisistan</value>
+    <comment>Kyrgyzstan (KG)</comment>
+  </data>
+  <data name="KH_DisplayName">
+    <value>Kambodscha</value>
+    <comment>Cambodia (KH)</comment>
+  </data>
+  <data name="KM_DisplayName">
+    <value>Komoren</value>
+    <comment>Comoros (KM)</comment>
+  </data>
+  <data name="KN_DisplayName">
+    <value>St. Kitts Und Nevis</value>
+    <comment>Saint Kitts And Nevis (KN)</comment>
+  </data>
+  <data name="KY_DisplayName">
+    <value>Kaimaninseln</value>
+    <comment>Cayman Islands (KY)</comment>
+  </data>
+  <data name="KZ_DisplayName">
+    <value>Kasachstan</value>
+    <comment>Kazakhstan (KZ)</comment>
+  </data>
+  <data name="LA_DisplayName">
+    <value>Laos</value>
+    <comment>Lao People'S Democratic Republic (LA)</comment>
+  </data>
+  <data name="LB_DisplayName">
+    <value>Libanon</value>
+    <comment>Lebanon (LB)</comment>
+  </data>
+  <data name="LC_DisplayName">
+    <value>St. Lucia</value>
+    <comment>Saint Lucia (LC)</comment>
+  </data>
+  <data name="LT_DisplayName">
+    <value>Litauen</value>
+    <comment>Lithuania (LT)</comment>
+  </data>
+  <data name="LU_DisplayName">
+    <value>Luxemburg</value>
+    <comment>Luxembourg (LU)</comment>
+  </data>
+  <data name="LV_DisplayName">
+    <value>Lettland</value>
+    <comment>Latvia (LV)</comment>
+  </data>
+  <data name="LY_DisplayName">
+    <value>Libyen</value>
+    <comment>Libya (LY)</comment>
+  </data>
+  <data name="MA_DisplayName">
+    <value>Marokko</value>
+    <comment>Morocco (MA)</comment>
+  </data>
+  <data name="MD_DisplayName">
+    <value>Moldawien</value>
+    <comment>Moldova (MD)</comment>
+  </data>
+  <data name="MF_DisplayName">
+    <value>Saint-Martin</value>
+    <comment>Saint Martin (MF)</comment>
+  </data>
+  <data name="MG_DisplayName">
+    <value>Madagaskar</value>
+    <comment>Madagascar (MG)</comment>
+  </data>
+  <data name="MH_DisplayName">
+    <value>Marshallinseln</value>
+    <comment>Marshall Islands (MH)</comment>
+  </data>
+  <data name="MK_DisplayName">
+    <value>Mazedonien</value>
+    <comment>Macedonia (MK)</comment>
+  </data>
+  <data name="MN_DisplayName">
+    <value>Mongolei</value>
+    <comment>Mongolia (MN)</comment>
+  </data>
+  <data name="MP_DisplayName">
+    <value>Nördliche Marianen</value>
+    <comment>Northern Mariana Islands (MP)</comment>
+  </data>
+  <data name="MR_DisplayName">
+    <value>Mauretanien</value>
+    <comment>Mauritania (MR)</comment>
+  </data>
+  <data name="MV_DisplayName">
+    <value>Malediven</value>
+    <comment>Maldives (MV)</comment>
+  </data>
+  <data name="MX_DisplayName">
+    <value>Mexiko</value>
+    <comment>Mexico (MX)</comment>
+  </data>
+  <data name="MZ_DisplayName">
+    <value>Mosambik</value>
+    <comment>Mozambique (MZ)</comment>
+  </data>
+  <data name="NC_DisplayName">
+    <value>Neukaledonien</value>
+    <comment>New Caledonia (NC)</comment>
+  </data>
+  <data name="NF_DisplayName">
+    <value>Norfolkinsel</value>
+    <comment>Norfolk Island (NF)</comment>
+  </data>
+  <data name="NL_DisplayName">
+    <value>Niederlande</value>
+    <comment>Netherlands (NL)</comment>
+  </data>
+  <data name="NO_DisplayName">
+    <value>Norwegen</value>
+    <comment>Norway (NO)</comment>
+  </data>
+  <data name="NZ_DisplayName">
+    <value>Neuseeland</value>
+    <comment>New Zealand (NZ)</comment>
+  </data>
+  <data name="PF_DisplayName">
+    <value>Französisch-Polynesien</value>
+    <comment>French Polynesia (PF)</comment>
+  </data>
+  <data name="PG_DisplayName">
+    <value>Papua-Neuguinea</value>
+    <comment>Papua New Guinea (PG)</comment>
+  </data>
+  <data name="PH_DisplayName">
+    <value>Philippinen</value>
+    <comment>Philippines (PH)</comment>
+  </data>
+  <data name="PL_DisplayName">
+    <value>Polen</value>
+    <comment>Poland (PL)</comment>
+  </data>
+  <data name="PM_DisplayName">
+    <value>Saint-Pierre Und Miquelon</value>
+    <comment>Saint Pierre And Miquelon (PM)</comment>
+  </data>
+  <data name="PN_DisplayName">
+    <value>Pitcairninseln</value>
+    <comment>Pitcairn (PN)</comment>
+  </data>
+  <data name="PS_DisplayName">
+    <value>Palästinensische Autonomiegebiete</value>
+    <comment>Palestinian Territory (PS)</comment>
+  </data>
+  <data name="QA_DisplayName">
+    <value>Katar</value>
+    <comment>Qatar (QA)</comment>
+  </data>
+  <data name="RO_DisplayName">
+    <value>Rumänien</value>
+    <comment>Romania (RO)</comment>
+  </data>
+  <data name="RS_DisplayName">
+    <value>Serbien</value>
+    <comment>Serbia (RS)</comment>
+  </data>
+  <data name="RU_DisplayName">
+    <value>Russische Föderation</value>
+    <comment>Russian Federation (RU)</comment>
+  </data>
+  <data name="RW_DisplayName">
+    <value>Ruanda</value>
+    <comment>Rwanda (RW)</comment>
+  </data>
+  <data name="SA_DisplayName">
+    <value>Saudi-Arabien</value>
+    <comment>Saudi Arabia (SA)</comment>
+  </data>
+  <data name="SB_DisplayName">
+    <value>Salomonen</value>
+    <comment>Solomon Islands (SB)</comment>
+  </data>
+  <data name="SC_DisplayName">
+    <value>Seychellen</value>
+    <comment>Seychelles (SC)</comment>
+  </data>
+  <data name="SE_DisplayName">
+    <value>Schweden</value>
+    <comment>Sweden (SE)</comment>
+  </data>
+  <data name="SG_DisplayName">
+    <value>Singapur</value>
+    <comment>Singapore (SG)</comment>
+  </data>
+  <data name="SH_DisplayName">
+    <value>St. Helena</value>
+    <comment>Saint Helena (SH)</comment>
+  </data>
+  <data name="SI_DisplayName">
+    <value>Slowenien</value>
+    <comment>Slovenia (SI)</comment>
+  </data>
+  <data name="SJ_DisplayName">
+    <value>Svalbard Und Jan Mayen</value>
+    <comment>Svalbard And Jan Mayen (SJ)</comment>
+  </data>
+  <data name="SK_DisplayName">
+    <value>Slowakei</value>
+    <comment>Slovakia (SK)</comment>
+  </data>
+  <data name="SS_DisplayName">
+    <value>Südsudan</value>
+    <comment>South Sudan (SS)</comment>
+  </data>
+  <data name="ST_DisplayName">
+    <value>São Tomé Und Príncipe</value>
+    <comment>Sao Tome And Principe (ST)</comment>
+  </data>
+  <data name="SY_DisplayName">
+    <value>Syrien</value>
+    <comment>Syrian Arab Republic (SY)</comment>
+  </data>
+  <data name="SZ_DisplayName">
+    <value>Swasiland</value>
+    <comment>Swaziland (SZ)</comment>
+  </data>
+  <data name="TC_DisplayName">
+    <value>Turks- Und Caicosinseln</value>
+    <comment>Turks And Caicos Islands (TC)</comment>
+  </data>
+  <data name="TD_DisplayName">
+    <value>Tschad</value>
+    <comment>Chad (TD)</comment>
+  </data>
+  <data name="TF_DisplayName">
+    <value>Französische Süd- Und Antarktisgebiete</value>
+    <comment>French Southern Territories (TF)</comment>
+  </data>
+  <data name="TJ_DisplayName">
+    <value>Tadschikistan</value>
+    <comment>Tajikistan (TJ)</comment>
+  </data>
+  <data name="TL_DisplayName">
+    <value>Osttimor</value>
+    <comment>Timor-Leste (TL)</comment>
+  </data>
+  <data name="TN_DisplayName">
+    <value>Tunesien</value>
+    <comment>Tunisia (TN)</comment>
+  </data>
+  <data name="TR_DisplayName">
+    <value>Türkei</value>
+    <comment>Turkey (TR)</comment>
+  </data>
+  <data name="TT_DisplayName">
+    <value>Trinidad Und Tobago</value>
+    <comment>Trinidad And Tobago (TT)</comment>
+  </data>
+  <data name="TW_DisplayName">
+    <value>Republik China</value>
+    <comment>Taiwan (TW)</comment>
+  </data>
+  <data name="TZ_DisplayName">
+    <value>Tansania</value>
+    <comment>Tanzania (TZ)</comment>
+  </data>
+  <data name="US_DisplayName">
+    <value>Vereinigte Staaten Von Amerika</value>
+    <comment>United States (US)</comment>
+  </data>
+  <data name="UZ_DisplayName">
+    <value>Usbekistan</value>
+    <comment>Uzbekistan (UZ)</comment>
+  </data>
+  <data name="VA_DisplayName">
+    <value>Vatikanstadt</value>
+    <comment>Holy See (VA)</comment>
+  </data>
+  <data name="VC_DisplayName">
+    <value>St. Vincent Und Die Grenadinen</value>
+    <comment>Saint Vincent And The Grenadines (VC)</comment>
+  </data>
+  <data name="VG_DisplayName">
+    <value>Britische Jungferninseln</value>
+    <comment>Virgin Islands (VG)</comment>
+  </data>
+  <data name="VI_DisplayName">
+    <value>Amerikanische Jungferninseln</value>
+    <comment>Virgin Islands (VI)</comment>
+  </data>
+  <data name="VN_DisplayName">
+    <value>Vietnam</value>
+    <comment>Viet Nam (VN)</comment>
+  </data>
+  <data name="WF_DisplayName">
+    <value>Wallis Und Futuna</value>
+    <comment>Wallis And Futuna (WF)</comment>
+  </data>
+  <data name="YE_DisplayName">
+    <value>Jemen</value>
+    <comment>Yemen (YE)</comment>
+  </data>
+  <data name="ZA_DisplayName">
+    <value>Südafrika</value>
+    <comment>South Africa (ZA)</comment>
+  </data>
+  <data name="ZM_DisplayName">
+    <value>Sambia</value>
+    <comment>Zambia (ZM)</comment>
+  </data>
+  <data name="ZW_DisplayName">
+    <value>Simbabwe</value>
+    <comment>Zimbabwe (ZW)</comment>
+  </data>
+  <data name="ANHH_DisplayName">
+    <value>Niederländische Antillen</value>
+    <comment>Netherlands Antilles (AN)</comment>
+  </data>
+  <data name="BUMM_DisplayName">
+    <value>Birma</value>
+    <comment>Burma (BU)</comment>
+  </data>
+  <data name="CSHH_DisplayName">
+    <value>Tschechoslowakei</value>
+    <comment>Czechoslovakia (CS)</comment>
+  </data>
+  <data name="CSXX_DisplayName">
+    <value>Serbien Und Montenegro</value>
+    <comment>Serbia And Montenegro (CS)</comment>
+  </data>
+  <data name="DDDE_DisplayName">
+    <value>Deutsche Demokratische Republik</value>
+    <comment>German Democratic Republic (DD)</comment>
+  </data>
+  <data name="SUHH_DisplayName">
+    <value>Sowjetunion</value>
+    <comment>Soviet Union (SU)</comment>
+  </data>
+  <data name="YUCS_DisplayName">
+    <value>Jugoslawien</value>
+    <comment>Yugoslavia (YU)</comment>
+  </data>
+</root>

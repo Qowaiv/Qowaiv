@@ -112,6 +112,7 @@
     <EmbeddedResource Include="Resources\Gender.xls" />
     <EmbeddedResource Include="Resources\Country.xls" />
     <EmbeddedResource Include="Resources\IBAN.xls" />
+    <EmbeddedResource Include="Resources\Unknown.xls" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Qowaiv.license.txt">

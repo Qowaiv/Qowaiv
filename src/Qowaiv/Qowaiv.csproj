@@ -71,8 +71,22 @@
     <Compile Include="SingleValueStaticOptions.cs" />
     <Compile Include="SingleValueObjectAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unknown.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UnknownLabels.ar.resx" />
+    <EmbeddedResource Include="UnknownLabels.de.resx" />
+    <EmbeddedResource Include="UnknownLabels.es.resx" />
+    <EmbeddedResource Include="UnknownLabels.fr.resx" />
+    <EmbeddedResource Include="UnknownLabels.it.resx" />
+    <EmbeddedResource Include="UnknownLabels.ja.resx" />
+    <EmbeddedResource Include="UnknownLabels.nl.resx" />
+    <EmbeddedResource Include="UnknownLabels.pt.resx" />
+    <EmbeddedResource Include="UnknownLabels.resx" />
+    <EmbeddedResource Include="UnknownLabels.ru.resx" />
+    <EmbeddedResource Include="UnknownLabels.zh.resx" />
     <None Include="..\Qowaiv.snk">
       <Link>Qowaiv.snk</Link>
     </None>

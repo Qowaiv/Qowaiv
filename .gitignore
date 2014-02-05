@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+/src/TestResults
+/src/Qowaiv/bin
+/src/Qowaiv/obj
+/src/Qowaiv.CodeGenerator/bin
+/src/Qowaiv.CodeGenerator/obj
+/src/Qowaiv.UnitTests/bin
+/src/Qowaiv.UnitTests/obj
+/src/Qowaiv.Web/bin
+/src/Qowaiv.Web/obj
+*.user
+*.suo
+
+
+

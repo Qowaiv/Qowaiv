@@ -24,6 +24,7 @@ namespace Qowaiv.CodeGenerator.Generators
             GenerateGender(dir);
             GenerateCountry(dir);
             GenerateIban(dir);
+            GenerateUnknown(dir);
         }
 
         /// <summary>Generates the gender resource file.</summary>
@@ -283,7 +284,6 @@ namespace Qowaiv.CodeGenerator.Generators
                 }
             }
         }
-
         private static string GetIbanPattern(string country, string bban, string checksum)
         {
             string pattern = '^'+country;
@@ -342,6 +342,67 @@ namespace Qowaiv.CodeGenerator.Generators
 
             pattern+='$';
             return pattern;
+        }
+
+        /// <summary>Generates the gender resource file.</summary>
+        protected void GenerateUnknown(DirectoryInfo dir)
+        {
+            using (var stream = GetType().Assembly
+                .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.Unknown.xls"))
+            {
+                var workbook = Workbook.Load(stream);
+                var worksheet = workbook.Worksheets[0];
+
+                var key_index = 0;
+                var val_index = 1;
+                var cmt_index = 2;
+
+                var resx = new XResourceFile();
+
+                var header = worksheet.Cells.GetRow(0);
+
+                int i = 1;
+
+                while (true)
+                {
+                    var row = worksheet.Cells.GetRow(i++);
+
+                    if (row.LastColIndex == int.MinValue) { break; }
+
+                    resx.Data.Add(new XResourceFileData(
+                        row.GetCell(key_index).StringValue,
+                        row.GetCell(val_index).StringValue,
+                        row.GetCell(cmt_index).StringValue));
+                }
+
+                resx.Save(new FileInfo(Path.Combine(dir.FullName, "UnknownLabels.resx")));
+
+                for (int lng_index = cmt_index + 1; lng_index <= header.LastColIndex; lng_index++)
+                {
+                    var resx_lng = new XResourceFile();
+
+                    var culture = header.GetCell(lng_index).StringValue;
+
+                    i = 1;
+
+                    while (true)
+                    {
+                        var row = worksheet.Cells.GetRow(i++);
+                        if (row.LastColIndex == int.MinValue) { break; }
+
+                        var key = row.GetCell(key_index).StringValue;
+                        var val = row.GetCell(lng_index).StringValue;
+                        var cmd = row.GetCell(cmt_index).StringValue;
+                        var def = resx[key].Value;
+
+                        if (!string.IsNullOrEmpty(val) && def != val)
+                        {
+                            resx_lng.Data.Add(new XResourceFileData(key, val, cmd));
+                        }
+                    }
+                    resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "UnknownLabels." + culture + ".resx")));
+                }
+            }
         }
     }
 }

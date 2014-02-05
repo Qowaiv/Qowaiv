@@ -80,6 +80,7 @@
     <Compile Include="TestTools\ExceptionAssert.cs" />
     <Compile Include="TestTools\Globalization\CultureInfoScope.cs" />
     <Compile Include="TestTools\SerializationTest.cs" />
+    <Compile Include="UnknownTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj">

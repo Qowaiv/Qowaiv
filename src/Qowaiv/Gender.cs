@@ -579,19 +579,7 @@ namespace Qowaiv
 
         #region Resources
 
-        internal static ResourceManager ResourceManager
-        {
-            get
-            {
-                if (s_ResourceManager == null)
-                {
-                    ResourceManager temp = new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
-                    s_ResourceManager = temp;
-                }
-                return s_ResourceManager;
-            }
-        }
-        internal static ResourceManager s_ResourceManager;
+        internal static ResourceManager ResourceManager =new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">

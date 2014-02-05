@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F84F6A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{78CDE373-EA28-4964-AC6F-21657C35A22E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +48,10 @@ Global
 		{7D825B8F-14F7-4DD2-83DC-79217E97A866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D825B8F-14F7-4DD2-83DC-79217E97A866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D825B8F-14F7-4DD2-83DC-79217E97A866}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78CDE373-EA28-4964-AC6F-21657C35A22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78CDE373-EA28-4964-AC6F-21657C35A22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78CDE373-EA28-4964-AC6F-21657C35A22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78CDE373-EA28-4964-AC6F-21657C35A22E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

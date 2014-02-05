@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Qowaiv.Web")]
-[assembly: AssemblyDescription("Qowaiv Single Value Object library extensions for web usage.")]
+[assembly: AssemblyDescription("Qowaiv Single Value Object library extensions for Web.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Qowaiv community")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Qowaiv.Web")]
 [assembly: AssemblyCopyright("Copyright © Qowaiv community 2013-2014")]
 [assembly: AssemblyTrademark("")]
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f365a8b5-c152-405d-bbb9-91c91b152323")]
+[assembly: Guid("9a79b3c8-df1e-485a-866a-bf10a8b0f40e")]
 
 // Version information for an assembly consists of the following four values:
 //

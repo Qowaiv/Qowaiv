@@ -42,6 +42,14 @@ namespace Qowaiv
         /// <summary>The inner value of the Country.</summary>
         private String m_Value;
 
+        /// <summary>Gets the name of the country.</summary>
+        /// <remarks>
+        /// For formely countries this returns the ISO 3166-3 code.
+        /// For unkown a '?' is returned.
+        /// For existing countries this returns the ISO 3166-1 code.
+        /// </remarks>
+        public string Name { get { return IsUnknown() ? "?" : m_Value ?? String.Empty; } }
+
         /// <summary>Gets the displayname.</summary>
         public string DisplayName { get { return GetDisplayName(CultureInfo.CurrentCulture); } }
 
@@ -97,9 +105,12 @@ namespace Qowaiv
 
         /// <summary>Returns true if the Country is empty, otherwise false.</summary>
         public bool IsEmpty() { return m_Value == default(String); }
+
+        /// <summary>Returns true if the Country is empty, otherwise false.</summary>
+        public bool IsUnknown() { return m_Value == Country.Unknown.m_Value; }
         
         /// <summary>Returns true if the Country is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return this == Country.Empty || this == Country.Unknown; }
+        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
 
         /// <summary>Gets the displayname for a specified culture.</summary>
@@ -272,16 +283,17 @@ namespace Qowaiv
         /// <remarks>
         /// The formats:
         /// 
+        /// n: as Name.
+        /// 0: as ISO Numeric.
         /// 2: as ISO Alpha-2.
         /// 3: as ISO Alpha-3.
-        /// n: as ISO Numeric.
         /// e: as English name.
         /// f: as formatted/display name.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             // If no format specified, use the default format.
-            if (String.IsNullOrEmpty(format)) { return m_Value ?? String.Empty; }
+            if (String.IsNullOrEmpty(format)) { return this.Name; }
 
             // Apply the format.
             return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
@@ -290,9 +302,10 @@ namespace Qowaiv
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Country, IFormatProvider, string>>()
         {
+            { 'n', (svo, provider) => svo.Name },
             { '2', (svo, provider) => svo.GetResourceString("ISO2", provider) },
             { '3', (svo, provider) => svo.GetResourceString("ISO3", provider) },
-            { 'n', (svo, provider) => svo.GetResourceString("ISO", provider) },
+            { '0', (svo, provider) => svo.GetResourceString("ISO", provider) },
             { 'e', (svo, provider) => svo.EnglishName },
             { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
         };

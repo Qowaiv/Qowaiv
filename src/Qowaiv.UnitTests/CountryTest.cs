@@ -488,10 +488,18 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         [TestMethod]
-        public void ToStringN_MZ_AreEqual()
+        public void ToString0_MZ_AreEqual()
         {
             var exp = "508";
-            var act = Country.MZ.ToString("n", new CultureInfo("ja-JP"));
+            var act = Country.MZ.ToString("0", new CultureInfo("ja-JP"));
+            Assert.AreEqual(exp, act);
+        }
+
+        [TestMethod]
+        public void ToStringN_CSHH_AreEqual()
+        {
+            var exp = "CSHH";
+            var act = Country.CSHH.ToString("n", new CultureInfo("ja-JP"));
             Assert.AreEqual(exp, act);
         }
 
@@ -737,6 +745,37 @@ namespace Qowaiv.UnitTests
             var exp = "+379";
             var act = TestStruct.CallingCode;
             Assert.AreEqual(exp, act);
+        }
+
+        [TestMethod]
+        public void Name_Empty_AreEqual()
+        {
+            using (new CultureInfoScope("en-GB"))
+            {
+                var exp = "";
+                var act = Country.Empty.Name;
+                Assert.AreEqual(exp, act);
+            }
+        }
+        [TestMethod]
+        public void Name_Unknown_AreEqual()
+        {
+            using (new CultureInfoScope("en-GB"))
+            {
+                var exp = "?";
+                var act = Country.Unknown.Name;
+                Assert.AreEqual(exp, act);
+            }
+        }
+        [TestMethod]
+        public void Name_TestStruct_AreEqual()
+        {
+            using (new CultureInfoScope("en-GB"))
+            {
+                var exp = "VA";
+                var act = TestStruct.Name;
+                Assert.AreEqual(exp, act);
+            }
         }
 
         [TestMethod]

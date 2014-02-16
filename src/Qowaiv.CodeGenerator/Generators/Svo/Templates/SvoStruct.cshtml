@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using @(Model.Namespace).Conversion;
+using Qowaiv.Formatting;
 using Qowaiv.Json;
 
 namespace @Model.Namespace
@@ -44,10 +45,13 @@ namespace @Model.Namespace
         #region Methods
 
         /// <summary>Returns true if the @Model.ClassLongName is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(@Model.UnderlyingType.Name); }
-        
+        public bool IsEmpty() { return m_Value == default(String); }
+
+        /// <summary>Returns true if the @Model.ClassLongName is unknown, otherwise false.</summary>
+        public bool IsUnknown() { return m_Value == @(Model.ClassName).Unknown.m_Value; }
+
         /// <summary>Returns true if the @Model.ClassLongName is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return this == @(Model.ClassName).Empty || this == @(Model.ClassName).Unknown; }
+        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
         #endregion
 
@@ -198,6 +202,11 @@ namespace @Model.Namespace
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
+            string formatted;
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            {
+                return formatted;
+            }
             throw new NotImplementedException();
         }
 
@@ -345,8 +354,8 @@ namespace @Model.Namespace
         /// <param name="s">
         /// A string containing @Model.a @Model.ClassLongName to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The specified format provider.
         /// </param>
         /// <returns>
         /// @Model.aUpper @Model.ClassLongName.
@@ -354,10 +363,10 @@ namespace @Model.Namespace
         /// <exception cref="System.FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static @Model.ClassName Parse(string s, CultureInfo culture)
+        public static @Model.ClassName Parse(string s, IformatProvider formatProvider)
         {
             @Model.ClassName val;
-            if (@(Model.ClassName).TryParse(s, culture, out val))
+            if (@(Model.ClassName).TryParse(s, formatProvider, out val))
             {
                 return val;
             }
@@ -406,8 +415,8 @@ namespace @Model.Namespace
         /// <param name="s">
         /// A string containing @Model.a @Model.ClassLongName to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The specified format provider.
         /// </param>
         /// <param name="result">
         /// The result of the parsing.
@@ -415,17 +424,21 @@ namespace @Model.Namespace
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Parsing is culture based by convension at Qowaiv.")]
-        public static bool TryParse(string s, CultureInfo culture, out @Model.ClassName result)
+        public static bool TryParse(string s, IformatProvider formatProvider, out @Model.ClassName result)
         {
             result = @(Model.ClassName).Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
             }
+            if (Qowaiv.Unknown.IsUnknown(s))
+            {
+                result = @(Model.ClassName).Unknown;
+                return true;
+            }
             if (IsValid(s, culture))
             {
-                result = new @(Model.ClassName)() { m_Value = @(Model.UnderlyingType).Parse(s, culture) };
+                result = new @(Model.ClassName)() { m_Value = @(Model.UnderlyingType).Parse(s, formatProvider) };
                 return true;
             }
             return false;

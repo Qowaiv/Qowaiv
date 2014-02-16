@@ -9,12 +9,14 @@ using System.Threading;
 using System.Xml.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Qowaiv.UnitTests.TestTools;
+using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
 using Qowaiv.UnitTests.Json;
 using @Model.Namespace;
 
 namespace @(Model.Namespace).UnitTests
 {
+    /// <summary>Tests the @Model.ClassLongName SVO.</summary>
     [TestClass]
     public class @Model.ClassNameTest
     {
@@ -34,18 +36,61 @@ namespace @(Model.Namespace).UnitTests
 
         #region @Model.ClassLongName IsEmpty tests
 
-        /// <summary>@(Model.ClassName).IsEmpty() should true for the default of @Model.ClassLongName.</summary>
+        /// <summary>@(Model.ClassName).IsEmpty() should be true for the default of @Model.ClassLongName.</summary>
         [TestMethod]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(@(Model.ClassName)).IsEmpty());
         }
-
-        /// <summary>@(Model.ClassName).IsEmpty() should false for the TestStruct.</summary>
+        /// <summary>@(Model.ClassName).IsEmpty() should be false for @(Model.ClassName).Unknown.</summary>
         [TestMethod]
-        public void IsEmpty_Default_IsFalse()
+        public void IsEmpty_Unknown_IsFalse()
+        {
+            Assert.IsFalse(@(Model.ClassName).Unknown.IsEmpty());
+        }
+        /// <summary>@(Model.ClassName).IsEmpty() should be false for the TestStruct.</summary>
+        [TestMethod]
+        public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
+        }
+
+        /// <summary>@(Model.ClassName).IsUnknown() should be false for the default of @Model.ClassLongName.</summary>
+        [TestMethod]
+        public void IsUnknown_Default_IsFalse()
+        {
+            Assert.IsFalse(default(@(Model.ClassName)).IsUnknown());
+        }
+        /// <summary>@(Model.ClassName).IsUnknown() should be true for @(Model.ClassName).Unknown.</summary>
+        [TestMethod]
+        public void IsUnknown_Unknown_IsTrue()
+        {
+            Assert.IsTrue(@(Model.ClassName).Unknown.IsUnknown());
+        }
+        /// <summary>@(Model.ClassName).IsUnknown() should be false for the TestStruct.</summary>
+        [TestMethod]
+        public void IsUnknown_TestStruct_IsFalse()
+        {
+            Assert.IsFalse(TestStruct.IsUnknown());
+        }
+
+        /// <summary>@(Model.ClassName).IsEmptyOrUnknown() should be true for the default of @Model.ClassLongName.</summary>
+        [TestMethod]
+        public void IsEmptyOrUnknown_Default_IsFalse()
+        {
+            Assert.IsTrue(default(@(Model.ClassName)).IsEmptyOrUnknown());
+        }
+        /// <summary>@(Model.ClassName).IsEmptyOrUnknown() should be true for @(Model.ClassName).Unknown.</summary>
+        [TestMethod]
+        public void IsEmptyOrUnknown_Unknown_IsTrue()
+        {
+            Assert.IsTrue(@(Model.ClassName).Unknown.IsEmptyOrUnknown());
+        }
+        /// <summary>@(Model.ClassName).IsEmptyOrUnknown() should be false for the TestStruct.</summary>
+        [TestMethod]
+        public void IsEmptyOrUnknown_TestStruct_IsFalse()
+        {
+            Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
         }
 
         #endregion
@@ -98,6 +143,17 @@ namespace @(Model.Namespace).UnitTests
 
             Assert.IsFalse(@(Model.ClassName).TryParse(str, out val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        }
+        
+        [TestMethod]
+        public void Parse_Unknown_AreEqual()
+        {
+            using (new CultureInfoScope("en-GB"))
+            {
+                var act = @(Model.ClassName).Parse("?");
+                var exp = @(Model.ClassName).Unknown;
+                Assert.AreEqual(exp, act);
+            }
         }
 
         [TestMethod]
@@ -494,6 +550,14 @@ namespace @(Model.Namespace).UnitTests
             var act = @(Model.ClassName).Empty.ToString();
             var exp = "";
             Assert.AreEqual(exp, act);
+        }
+        [TestMethod]
+        public void ToString_CustomFormatter_SupportsCustomFormatting()
+        {
+            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
+
+        Assert.AreEqual(exp, act);
         }
         [TestMethod]
         public void ToString_TestStruct_ComplexPattern()

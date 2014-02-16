@@ -106,6 +106,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid postal code.
+        /// </summary>
+        public static string FormatExceptionPostalCode {
+            get {
+                return ResourceManager.GetString("FormatExceptionPostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to JSON deserialization from a date is not supported..
         /// </summary>
         public static string JsonSerialization_DateTimeNotSupported {

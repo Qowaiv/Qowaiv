@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Qowaiv.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,16 +54,20 @@
     <Compile Include="Conversion\GenderTypeConverter.cs" />
     <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
     <Compile Include="Conversion\PercentageTypeConverter.cs" />
+    <Compile Include="Conversion\PostalCodeTypeConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryConstants.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />
     <Compile Include="Gender.cs" />
+    <Compile Include="Globalization\PostalCodeCountryInfo.cs" />
+    <Compile Include="Globalization\PostalCodeCountryInfoInstances.cs" />
     <Compile Include="InternationalBankAccountNumber.cs" />
     <Compile Include="InternationalBankAccountNumberPatterns.cs" />
     <Compile Include="Json\IJsonSerializable.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Percentage.cs" />
     <Compile Include="PercentageExtensions.cs" />
+    <Compile Include="PostalCode.cs" />
     <Compile Include="QowaivMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

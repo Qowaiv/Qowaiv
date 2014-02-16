@@ -129,4 +129,7 @@
   <data name="FormatExceptionPercentage" xml:space="preserve">
     <value>Geen geldig percentage</value>
   </data>
+  <data name="FormatExceptionPostalCode" xml:space="preserve">
+    <value>Geen geldige postcode</value>
+  </data>
 </root>

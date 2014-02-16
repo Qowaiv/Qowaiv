@@ -73,5 +73,36 @@ namespace Qowaiv.Formatting
             }
             return sb.ToString();
         }
+
+        /// <summary>Tries to apply the custom formatter to format the object.</summary>
+        /// <param name="format">
+        /// The format to apply
+        /// </param>
+        /// <param name="obj">
+        /// The object to format.
+        /// </param>
+        /// <param name="formatProvider">
+        /// The format provider.
+        /// </param>
+        /// <param name="formatted">
+        /// The formatted result.
+        /// </param>
+        /// <returns>
+        /// True, if the format provider supports custom formatting, otherwise false.
+        /// </returns>
+        public static bool TryApplyCustomFormatter(string format, object obj, IFormatProvider formatProvider, out string formatted)
+        {
+            formatted = null;
+            if (formatProvider != null)
+            {
+                var customFormatter = formatProvider.GetFormat(typeof(ICustomFormatter)) as ICustomFormatter;
+                if (customFormatter != null)
+                {
+                    formatted = customFormatter.Format(format, obj, formatProvider);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

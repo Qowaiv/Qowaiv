@@ -225,9 +225,6 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
         /// <remarks>
         /// The formats:
         /// 

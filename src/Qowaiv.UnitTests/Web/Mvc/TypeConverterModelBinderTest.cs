@@ -13,7 +13,7 @@ namespace Qowaiv.UnitTests.Web.Mvc
         {
             var act = TypeConverterModelBinder.Types.ToList();
 
-            Assert.AreEqual(4, act.Count);
+            Assert.AreEqual(5, act.Count);
         }
         
         [TestMethod]

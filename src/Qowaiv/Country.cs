@@ -106,7 +106,7 @@ namespace Qowaiv
         /// <summary>Returns true if the Country is empty, otherwise false.</summary>
         public bool IsEmpty() { return m_Value == default(String); }
 
-        /// <summary>Returns true if the Country is empty, otherwise false.</summary>
+        /// <summary>Returns true if the Country is unknown, otherwise false.</summary>
         public bool IsUnknown() { return m_Value == Country.Unknown.m_Value; }
         
         /// <summary>Returns true if the Country is empty or unknown, otherwise false.</summary>

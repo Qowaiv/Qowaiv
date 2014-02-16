@@ -48,7 +48,7 @@ namespace Qowaiv.Conversion
             var str = value as string;
             if (value == null || str != null)
             {
-                return InternationalBankAccountNumber.Parse(str);
+                return InternationalBankAccountNumber.Parse(str, culture);
             }
             return base.ConvertFrom(context, culture, value);
         }

@@ -8,10 +8,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -243,6 +241,12 @@ namespace Qowaiv
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
+            string formatted;
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            {
+                return formatted;
+            }
+
             // If no format specified, use the default format.
             if (String.IsNullOrEmpty(format)) { return GetResourceString("", formatProvider); }
 
@@ -390,8 +394,8 @@ namespace Qowaiv
         /// <param name="s">
         /// A string containing a Gender to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The specified format provider.
         /// </param>
         /// <returns>
         /// A Gender.
@@ -399,10 +403,10 @@ namespace Qowaiv
         /// <exception cref="System.FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static Gender Parse(string s, CultureInfo culture)
+        public static Gender Parse(string s, IFormatProvider formatProvider)
         {
             Gender val;
-            if (Gender.TryParse(s, culture, out val))
+            if (Gender.TryParse(s, formatProvider, out val))
             {
                 return val;
             }
@@ -451,8 +455,8 @@ namespace Qowaiv
         /// <param name="s">
         /// A string containing a Gender to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The specified format provider.
         /// </param>
         /// <param name="result">
         /// The result of the parsing.
@@ -460,15 +464,14 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Parsing is culture based by convension at Qowaiv.")]
-        public static bool TryParse(string s, CultureInfo culture, out Gender result)
+        public static bool TryParse(string s, IFormatProvider formatProvider, out Gender result)
         {
             result = Gender.Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
             }
-            var c = culture ?? CultureInfo.InvariantCulture;
+            var c = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 
             AddCulture(c);
 

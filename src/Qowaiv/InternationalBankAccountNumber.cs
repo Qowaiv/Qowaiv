@@ -69,8 +69,11 @@ namespace Qowaiv
         /// <summary>Returns true if the IBAN is empty, otherwise false.</summary>
         public bool IsEmpty() { return m_Value == default(String); }
 
+        /// <summary>Returns true if the Gender is unknown, otherwise false.</summary>
+        public bool IsUnknown() { return m_Value == InternationalBankAccountNumber.Unknown.m_Value; }
+
         /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return this == InternationalBankAccountNumber.Empty || this == InternationalBankAccountNumber.Unknown; }
+        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
         #endregion
 

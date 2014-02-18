@@ -48,10 +48,10 @@ namespace Qowaiv
 
         /// <summary>Gets the local part of the Email Address.</summary>
         public string Local { get { return IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, m_Value.IndexOf('@')); } }
-        
+
         /// <summary>Gets the domain part of the Email Address.</summary>
         public string Domain { get { return IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(m_Value.IndexOf('@') + 1); } }
-        
+
         #endregion
 
         #region Methods
@@ -116,13 +116,13 @@ namespace Qowaiv
         }
 
         #endregion
-        
+
         #region (JSON) (De)serialization
 
         /// <summary>Generates an email address from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson()
         {
-            m_Value = default(String); 
+            m_Value = default(String);
         }
 
         /// <summary>Generates an email address from a JSON string representation.</summary>
@@ -172,14 +172,14 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a System.String that represents the current email address for debug purposes.</summary>
-         private string DebugToString()
+        private string DebugToString()
         {
             if (IsEmpty()) { return "EmailAddress: (empty)"; }
             if (IsUnknown()) { return "EmailAddress: (unknown)"; }
             return String.Format(CultureInfo.InvariantCulture, "EmailAddress: {0}", m_Value);
         }
 
-         /// <summary>Returns a System.String that represents the current email address.</summary>
+        /// <summary>Returns a System.String that represents the current email address.</summary>
         public override string ToString()
         {
             return ToString(CultureInfo.CurrentCulture);
@@ -230,7 +230,7 @@ namespace Qowaiv
 
             // If no format specified, use the default format.
             if (String.IsNullOrEmpty(format)) { return m_Value ?? String.Empty; }
-            
+
             // Apply the format.
             return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
         }
@@ -247,12 +247,12 @@ namespace Qowaiv
         };
 
         #endregion
-        
+
         #region IEquatable
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compair with.</param>
-        public override bool Equals(object obj){ return base.Equals(obj); }
+        public override bool Equals(object obj) { return base.Equals(obj); }
 
         /// <summary>Returns the hash code for this email address.</summary>
         /// <returns>
@@ -320,7 +320,7 @@ namespace Qowaiv
         public int CompareTo(EmailAddress other) { return (m_Value ?? String.Empty).CompareTo(other.m_Value ?? String.Empty); }
 
         #endregion
-       
+
         #region (Explicit) casting
 
         /// <summary>Casts an email address to a System.String.</summary>
@@ -328,7 +328,7 @@ namespace Qowaiv
         /// <summary>Casts a System.String to a email address.</summary>
         public static explicit operator EmailAddress(string str) { return EmailAddress.Parse(str, CultureInfo.CurrentCulture); }
 
-       
+
         #endregion
 
         #region Factory methods
@@ -345,7 +345,7 @@ namespace Qowaiv
         /// </exception>
         public static EmailAddress Parse(string s)
         {
-           return Parse(s, CultureInfo.CurrentCulture);
+            return Parse(s, CultureInfo.CurrentCulture);
         }
 
         /// <summary>Converts the string to an email address.</summary>
@@ -442,7 +442,6 @@ namespace Qowaiv
             return false;
         }
 
-
         #endregion
 
         #region Validation
@@ -459,5 +458,5 @@ namespace Qowaiv
             return Pattern.IsMatch(val ?? string.Empty);
         }
         #endregion
-     }
+    }
 }

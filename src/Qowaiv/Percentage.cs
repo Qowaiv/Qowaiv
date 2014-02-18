@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Conversion;
-using Qowaiv.Json;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Qowaiv
 {
@@ -562,6 +561,12 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
+            string formatted;
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            {
+                return formatted;
+            }
+
             var marker = GetMarkerType(format ?? String.Empty);
             if (marker == PercentageMarkerType.Invalid)
             {
@@ -711,8 +716,8 @@ namespace Qowaiv
         /// <param name="s">
         /// A string containing a Percentage to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The format provider.
         /// </param>
         /// <returns>
         /// A Percentage.
@@ -720,10 +725,10 @@ namespace Qowaiv
         /// <exception cref="System.FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static Percentage Parse(string s, CultureInfo culture)
+        public static Percentage Parse(string s, IFormatProvider formatProvider)
         {
             Percentage val;
-            if (Percentage.TryParse(s, culture, out val))
+            if (Percentage.TryParse(s, formatProvider, out val))
             {
                 return val;
             }
@@ -753,8 +758,8 @@ namespace Qowaiv
         /// <param name="s">
         /// A string containing a Percentage to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The format provider.
         /// </param>
         /// <param name="result">
         /// The result of the parsing.
@@ -762,8 +767,7 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Parsing is culture based by convension at Qowaiv.")]
-        public static bool TryParse(string s, CultureInfo culture, out Percentage result)
+        public static bool TryParse(string s, IFormatProvider formatProvider, out Percentage result)
         {
             result = Percentage.Zero;
 
@@ -772,7 +776,7 @@ namespace Qowaiv
                 var marker = GetMarkerType(s);
                 Decimal dec;
                 s = RemoveMarks(s);
-                if (marker != PercentageMarkerType.Invalid && Decimal.TryParse(s, NumberStyles.Number, culture, out dec))
+                if (marker != PercentageMarkerType.Invalid && Decimal.TryParse(s, NumberStyles.Number, formatProvider, out dec))
                 {
                     dec *= Dividers[marker];
                     result = Percentage.Create(dec);
@@ -854,10 +858,10 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid Percentage, otherwise false.</summary>
-        public static bool IsValid(string val, CultureInfo culture)
+        public static bool IsValid(string val, IFormatProvider formatProvider)
         {
             Percentage p;
-            return TryParse(val, culture, out p);
+            return TryParse(val, formatProvider, out p);
         }
         
         #endregion

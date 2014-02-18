@@ -107,6 +107,7 @@
     <Compile Include="CodeGenerator\Xml\XResourceFileDataTest.cs" />
     <Compile Include="CodeGenerator\Xml\XResourceFileTest.cs" />
     <Compile Include="TestTools\Formatting\UnitTestFormatProvider.cs" />
+    <Compile Include="TestTools\SvoAssert.cs" />
     <Compile Include="TestTools\TypeConverterAssert.cs" />
     <Compile Include="TestTools\CodeDom\CompileAssert.cs" />
     <Compile Include="TestTools\DebuggerDisplayAssert.cs" />

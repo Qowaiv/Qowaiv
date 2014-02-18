@@ -1,20 +1,20 @@
-﻿using System;
+﻿using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
+using System.Resources;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Conversion;
-using Qowaiv.Json;
-using System.Resources;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Qowaiv.Formatting;
 
 namespace Qowaiv
 {
@@ -427,8 +427,8 @@ namespace Qowaiv
         /// <param name="s">
         /// A string containing a Country to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The format provider.
         /// </param>
         /// <returns>
         /// A Country.
@@ -436,10 +436,10 @@ namespace Qowaiv
         /// <exception cref="System.FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static Country Parse(string s, CultureInfo culture)
+        public static Country Parse(string s, IFormatProvider formatProvider)
         {
             Country val;
-            if (Country.TryParse(s, culture, out val))
+            if (Country.TryParse(s, formatProvider, out val))
             {
                 return val;
             }
@@ -488,8 +488,8 @@ namespace Qowaiv
         /// <param name="s">
         /// A string containing a Country to convert.
         /// </param>
-        /// <param name="culture">
-        /// A specified culture.
+        /// <param name="formatProvider">
+        /// The format provider.
         /// </param>
         /// <param name="result">
         /// The result of the parsing.
@@ -497,29 +497,32 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Parsing is culture based by convension at Qowaiv.")]
-        public static bool TryParse(string s, CultureInfo culture, out Country result)
+        public static bool TryParse(string s, IFormatProvider formatProvider, out Country result)
         {
             result = Country.Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
             }
-            var c = culture ?? CultureInfo.InvariantCulture;
+            if (Qowaiv.Unknown.IsUnknown(s))
+            {
+                result = Country.Unknown;
+                return true;
+            }
+            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 
-            AddCulture(c);
+            AddCulture(culture);
 
             var str = Parsing.ToUnified(s);
             string val;
 
-            if (Parsings[c].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
                 result = new Country() { m_Value = val };
                 return true;
             }
             return false;
         }
-
 
         /// <summary>Creates a country based on a region info.</summary>
         /// <param name="region"></param>
@@ -544,15 +547,15 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid Country, otherwise false.</summary>
-        public static bool IsValid(string val, CultureInfo culture)
+        public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            if (string.IsNullOrWhiteSpace(val)) { return false; }
+            if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val)) { return false; }
 
-            var c = culture ?? CultureInfo.InvariantCulture;
-            AddCulture(c);
+            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+            AddCulture(culture);
 
             var str = Parsing.ToUnified(val);
-            return Parsings[c].ContainsKey(str) || Parsings[CultureInfo.InvariantCulture].ContainsKey(str);
+            return Parsings[culture].ContainsKey(str) || Parsings[CultureInfo.InvariantCulture].ContainsKey(str);
         }
 
         #endregion

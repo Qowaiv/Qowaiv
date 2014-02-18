@@ -234,7 +234,7 @@ namespace Qowaiv
         {
             // send a question mark in case of Unknown.
             var normalized = Unknown.m_Value == m_Value ? "?" : m_Value;
-            return PostalCodeCountryInfo.GetInstance(country).Format(normalized) ?? String.Empty;
+            return PostalCodeCountryInfo.GetInstance(country).Format(normalized);
         }
 
         #endregion

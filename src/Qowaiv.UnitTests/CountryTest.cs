@@ -73,6 +73,18 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
+        /// <summary>TryParse "?" should be valid and the result should be Country.Unknown.</summary>
+        [TestMethod]
+        public void TyrParse_Questionmark_IsValid()
+        {
+            Country val;
+
+            string str = "?";
+
+            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(val.IsUnknown(), "Value");
+        }
+
         /// <summary>TryParse with specified string value should be valid.</summary>
         [TestMethod]
         public void TyrParse_NullCultureStringValue_IsValid()
@@ -477,6 +489,14 @@ namespace Qowaiv.UnitTests
         {
             var act = Country.Empty.ToString();
             var exp = "";
+            Assert.AreEqual(exp, act);
+        }
+
+        [TestMethod]
+        public void ToString_Unknown_Questionmark()
+        {
+            var act = Country.Unknown.ToString();
+            var exp = "?";
             Assert.AreEqual(exp, act);
         }
 

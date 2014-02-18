@@ -496,11 +496,26 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
+        [TestMethod]
+        public void ToString_EmptyCA_IsStringEmpty()
+        {
+            var act = PostalCode.Empty.ToString("CA");
+            var exp = "";
+            Assert.AreEqual(exp, act);
+        }
 
         [TestMethod]
         public void ToString_Unknown_IsQuestionMark()
         {
             var act = PostalCode.Unknown.ToString();
+            var exp = "?";
+            Assert.AreEqual(exp, act);
+        }
+
+        [TestMethod]
+        public void ToString_UnknownCA_IsQuestionMark()
+        {
+            var act = PostalCode.Unknown.ToString("CA");
             var exp = "?";
             Assert.AreEqual(exp, act);
         }

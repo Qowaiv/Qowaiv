@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.Serialization;
@@ -33,7 +32,7 @@ namespace Qowaiv
     /// designator "SEX".
     /// </remarks>
     [DebuggerDisplay("{DebugToString()}")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Int32))]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Byte))]
     [TypeConverter(typeof(GenderTypeConverter))]
     public struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Gender>
     {
@@ -73,8 +72,11 @@ namespace Qowaiv
         /// <summary>Returns true if the Gender is empty, otherwise false.</summary>
         public bool IsEmpty() { return m_Value == default(Byte); }
 
+        /// <summary>Returns true if the Gender is unknown, otherwise false.</summary>
+        public bool IsUnknown() { return m_Value == Gender.Unknown.m_Value; }
+
         /// <summary>Returns true if the Gender is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return this == Gender.Empty || this == Gender.Unknown; }
+        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
         /// <summary>Returns true if the Gender is male or female, otherwise false.</summary>
         public bool IsMaleOrFemale() { return this == Gender.Male || this == Gender.Female; }
@@ -559,16 +561,16 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
-        public static bool IsValid(string val, CultureInfo culture)
+        public static bool IsValid(string val, IFormatProvider formatProvider)
         {
             if (string.IsNullOrWhiteSpace(val)) { return false; }
 
-            var c = culture ?? CultureInfo.InvariantCulture;
+            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 
-            AddCulture(c);
+            AddCulture(culture);
 
             return
-                Parsings[c].ContainsKey(val.ToLower(c)) ||
+                Parsings[culture].ContainsKey(val.ToLower(culture)) ||
                 Parsings[CultureInfo.InvariantCulture].ContainsKey(val.ToLowerInvariant());
         }
 

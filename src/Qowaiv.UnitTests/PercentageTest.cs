@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Qowaiv.UnitTests.Json;
+using Qowaiv.UnitTests.TestTools;
+using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.UnitTests.TestTools.Globalization;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
-using System.Threading;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv;
 
 namespace Qowaiv.UnitTests
 {
@@ -428,6 +426,15 @@ namespace Qowaiv.UnitTests
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("17.51%", TestStruct);
+        }
+
+        [TestMethod]
+        public void ToString_CustomFormatter_SupportsCustomFormatting()
+        {
+            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '17.51', format: 'Unit Test Format'";
+
+            Assert.AreEqual(exp, act);
         }
 
         [TestMethod]

@@ -51,12 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conversion\CountryTypeConverter.cs" />
+    <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
     <Compile Include="Conversion\GenderTypeConverter.cs" />
     <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
     <Compile Include="Conversion\PercentageTypeConverter.cs" />
     <Compile Include="Conversion\PostalCodeTypeConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryConstants.cs" />
+    <Compile Include="EmailAddress.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfo.cs" />

@@ -11,9 +11,26 @@ namespace Qowaiv.UnitTests.Web.Mvc
         [TestMethod]
         public void Initialize_None_CountEquals()
         {
-            var act = TypeConverterModelBinder.Types.ToList();
+            var act = TypeConverterModelBinder.Types.OrderBy(tp => tp.Name).ToArray();
 
-            Assert.AreEqual(5, act.Count);
+            var exp = new Type[]
+            {
+                typeof(Country),
+                typeof(EmailAddress),
+                typeof(Gender),
+                typeof(InternationalBankAccountNumber),
+                typeof(Percentage),
+                typeof(PostalCode)
+            };
+
+            foreach (var tp in act)
+            {
+                Console.WriteLine(tp);
+            }
+
+            Assert.AreEqual(6, act.Length);
+            
+            CollectionAssert.AreEqual(exp, act);
         }
         
         [TestMethod]

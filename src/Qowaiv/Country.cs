@@ -292,6 +292,12 @@ namespace Qowaiv
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
+            string formatted;
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            {
+                return formatted;
+            }
+
             // If no format specified, use the default format.
             if (String.IsNullOrEmpty(format)) { return this.Name; }
 

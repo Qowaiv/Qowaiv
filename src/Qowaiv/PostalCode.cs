@@ -232,7 +232,9 @@ namespace Qowaiv
         /// </remarks>
         public string ToString(Country country)
         {
-            return PostalCodeCountryInfo.GetInstance(country).Format(m_Value) ?? String.Empty;
+            // send a question mark in case of Unknown.
+            var normalized = Unknown.m_Value == m_Value ? "?" : m_Value;
+            return PostalCodeCountryInfo.GetInstance(country).Format(normalized) ?? String.Empty;
         }
 
         #endregion

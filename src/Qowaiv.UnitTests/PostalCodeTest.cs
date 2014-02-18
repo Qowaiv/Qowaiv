@@ -496,6 +496,15 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
+
+        [TestMethod]
+        public void ToString_Unknown_IsQuestionMark()
+        {
+            var act = PostalCode.Unknown.ToString();
+            var exp = "?";
+            Assert.AreEqual(exp, act);
+        }
+
         [TestMethod]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {

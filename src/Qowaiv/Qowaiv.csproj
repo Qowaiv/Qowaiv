@@ -53,6 +53,7 @@
     <Compile Include="Conversion\CountryTypeConverter.cs" />
     <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
     <Compile Include="Conversion\GenderTypeConverter.cs" />
+    <Compile Include="Conversion\HouseNumberTypeConverter.cs" />
     <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
     <Compile Include="Conversion\PercentageTypeConverter.cs" />
     <Compile Include="Conversion\PostalCodeTypeConverter.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Gender.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfo.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfoInstances.cs" />
+    <Compile Include="HouseNumber.cs" />
     <Compile Include="InternationalBankAccountNumber.cs" />
     <Compile Include="InternationalBankAccountNumberPatterns.cs" />
     <Compile Include="Json\IJsonSerializable.cs" />

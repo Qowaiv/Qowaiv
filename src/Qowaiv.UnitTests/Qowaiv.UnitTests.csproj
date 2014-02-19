@@ -95,6 +95,7 @@
     <Compile Include="Formatting\StringFormatterTest.cs" />
     <Compile Include="GenderTest.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfoTest.cs" />
+    <Compile Include="HouseNumberTest.cs" />
     <Compile Include="InternationalBankAccountNumberTest.cs" />
     <Compile Include="Json\JsonTester.cs" />
     <Compile Include="Json\QowaivJsonConverterTest.cs" />

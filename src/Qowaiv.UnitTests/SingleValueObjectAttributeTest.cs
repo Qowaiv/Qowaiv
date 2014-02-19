@@ -29,6 +29,7 @@ namespace Qowaiv.UnitTests
                 typeof(Country),
                 typeof(EmailAddress),
                 typeof(Gender),
+                typeof(HouseNumber),
                 typeof(InternationalBankAccountNumber),
                 typeof(Percentage),
                 typeof(PostalCode)
@@ -39,7 +40,7 @@ namespace Qowaiv.UnitTests
                 Console.WriteLine(svo);
             }
 
-            Assert.AreEqual(6, svos.Length);
+            Assert.AreEqual(exp.Length, svos.Length);
 
             CollectionAssert.AreEqual(exp, svos);
 

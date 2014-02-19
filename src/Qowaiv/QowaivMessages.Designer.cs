@@ -97,6 +97,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid house number.
+        /// </summary>
+        public static string FormatExceptionHouseNumber {
+            get {
+                return ResourceManager.GetString("FormatExceptionHouseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid IBAN.
         /// </summary>
         public static string FormatExceptionInternationalBankAccountNumber {

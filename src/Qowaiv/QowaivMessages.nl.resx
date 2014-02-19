@@ -126,6 +126,9 @@
   <data name="FormatExceptionGender" xml:space="preserve">
     <value>Geen geldig geslacht</value>
   </data>
+  <data name="FormatExceptionHouseNumber" xml:space="preserve">
+    <value>Geen geldig huisnummer</value>
+  </data>
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Geen geldig IBAN</value>
   </data>

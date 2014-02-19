@@ -117,6 +117,7 @@
     <Compile Include="TestTools\SerializationTest.cs" />
     <Compile Include="UnknownTest.cs" />
     <Compile Include="Web\Mvc\TypeConverterModelBinderTest.cs" />
+    <Compile Include="YearTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj">

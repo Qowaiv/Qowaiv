@@ -32,7 +32,8 @@ namespace Qowaiv.UnitTests
                 typeof(HouseNumber),
                 typeof(InternationalBankAccountNumber),
                 typeof(Percentage),
-                typeof(PostalCode)
+                typeof(PostalCode),
+                typeof(Year)
             };
 
             foreach (var svo in svos)

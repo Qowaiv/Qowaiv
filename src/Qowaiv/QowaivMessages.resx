@@ -141,6 +141,9 @@
   <data name="FormatExceptionPostalCode" xml:space="preserve">
     <value>Not a valid postal code</value>
   </data>
+  <data name="FormatExceptionYear" xml:space="preserve">
+    <value>Not a valid year</value>
+  </data>
   <data name="JsonSerialization_DateTimeNotSupported" xml:space="preserve">
     <value>JSON deserialization from a date is not supported.</value>
   </data>

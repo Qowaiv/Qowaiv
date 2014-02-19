@@ -133,6 +133,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid year.
+        /// </summary>
+        public static string FormatExceptionYear {
+            get {
+                return ResourceManager.GetString("FormatExceptionYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to JSON deserialization from a date is not supported..
         /// </summary>
         public static string JsonSerialization_DateTimeNotSupported {

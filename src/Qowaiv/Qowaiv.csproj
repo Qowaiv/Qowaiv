@@ -57,6 +57,7 @@
     <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
     <Compile Include="Conversion\PercentageTypeConverter.cs" />
     <Compile Include="Conversion\PostalCodeTypeConverter.cs" />
+    <Compile Include="Conversion\YearTypeConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryConstants.cs" />
     <Compile Include="EmailAddress.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Unknown.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Year.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UnknownLabels.ar.resx" />

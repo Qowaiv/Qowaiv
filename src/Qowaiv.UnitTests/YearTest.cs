@@ -852,6 +852,32 @@ namespace Qowaiv.UnitTests
         #endregion
 
         #region Properties
+
+		[TestMethod]
+		public void IsLeapYear_Empty_IsFalse()
+		{
+			Assert.IsFalse(Year.Empty.IsLeapYear);
+		}
+
+		[TestMethod]
+		public void IsLeapYear_Unknown_IsFalse()
+		{
+			Assert.IsFalse(Year.Unknown.IsLeapYear);
+		}
+
+		[TestMethod]
+		public void IsLeapYear_TestStruct_IsFalse()
+		{
+			Assert.IsFalse(TestStruct.IsLeapYear);
+		}
+
+		[TestMethod]
+		public void IsLeapYear_1980_IsTrue()
+		{
+			Year year = 1980;
+			Assert.IsTrue(year.IsLeapYear);
+		}
+
         #endregion
 
         #region Type converter tests

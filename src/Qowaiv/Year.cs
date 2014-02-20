@@ -41,6 +41,18 @@ namespace Qowaiv
         /// <summary>The inner value of the year.</summary>
         private Int16 m_Value;
 
+		/// <summary>Returns an indication whether the specified year is a leap year.</summary>
+		/// <returns>
+		/// true if year is a leap year; otherwise, false.
+		/// </returns>
+		public bool IsLeapYear
+		{
+			get
+			{
+				return !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
+			}
+		}
+
         #endregion
 
         #region Methods

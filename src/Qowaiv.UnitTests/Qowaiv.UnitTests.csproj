@@ -99,6 +99,7 @@
     <Compile Include="InternationalBankAccountNumberTest.cs" />
     <Compile Include="Json\JsonTester.cs" />
     <Compile Include="Json\QowaivJsonConverterTest.cs" />
+    <Compile Include="MonthTest.cs" />
     <Compile Include="PercentageTest.cs" />
     <Compile Include="PostalCodeCountryPatternTest.cs" />
     <Compile Include="PostalCodeTest.cs" />

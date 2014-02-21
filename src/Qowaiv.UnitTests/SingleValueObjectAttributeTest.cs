@@ -31,6 +31,7 @@ namespace Qowaiv.UnitTests
                 typeof(Gender),
                 typeof(HouseNumber),
                 typeof(InternationalBankAccountNumber),
+                typeof(Month),
                 typeof(Percentage),
                 typeof(PostalCode),
                 typeof(Year)

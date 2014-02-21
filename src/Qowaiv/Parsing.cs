@@ -41,6 +41,7 @@ namespace Qowaiv
         /// <summary>Replaces diacrtic characters by non diacritic ones.</summary>
         public static string ToNonDiacritic(string str)
         {
+            if (str == null) { return string.Empty; }
             var sb = new StringBuilder();
 
             foreach (var ch in str)

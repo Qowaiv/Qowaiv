@@ -115,6 +115,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid month.
+        /// </summary>
+        public static string FormatExceptionMonth {
+            get {
+                return ResourceManager.GetString("FormatExceptionMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid percentage.
         /// </summary>
         public static string FormatExceptionPercentage {

@@ -132,6 +132,9 @@
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Geen geldig IBAN</value>
   </data>
+  <data name="FormatExceptionMonth" xml:space="preserve">
+    <value>Geen geldige maand</value>
+  </data>
   <data name="FormatExceptionPercentage" xml:space="preserve">
     <value>Geen geldig percentage</value>
   </data>

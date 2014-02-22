@@ -26,6 +26,7 @@ namespace Qowaiv.UnitTests
 
             var exp = new Type[]
             {
+                typeof(BankIdentifierCode),
                 typeof(Country),
                 typeof(EmailAddress),
                 typeof(Gender),

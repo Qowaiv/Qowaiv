@@ -10,6 +10,10 @@ Supported scenarios include parsing, formatting, validation, (de)serialization, 
 Qowaiv types
 ============
 
+Bank Identifier Code (BIC)
+----------------------------------------
+Represents a BIC as specified in ISO 13616.
+
 Country
 -------
 Represents a country based on an ISO 3166-1 code (or 3166-3 if the country does not longer exists).
@@ -26,8 +30,8 @@ House number
 ------------
 Represents a house number in the range [1-999999999].
 
-International Bank Account Number
----------------------------------
+International Bank Account Number (IBAN)
+----------------------------------------
 Represents an IBAN as specified in ISO 13616.
 
 Month

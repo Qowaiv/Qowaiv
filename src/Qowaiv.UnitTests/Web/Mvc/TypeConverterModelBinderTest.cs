@@ -13,7 +13,7 @@ namespace Qowaiv.UnitTests.Web.Mvc
         {
             var act = TypeConverterModelBinder.Types.ToArray();
 
-            Assert.AreEqual(9, act.Length);
+            Assert.AreEqual(10, act.Length);
         }
         
         [TestMethod]

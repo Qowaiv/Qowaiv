@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankIdentifierCode.cs" />
+    <Compile Include="Conversion\BankIdentifierCodeTypeConverter.cs" />
     <Compile Include="Conversion\CountryTypeConverter.cs" />
     <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
     <Compile Include="Conversion\GenderTypeConverter.cs" />

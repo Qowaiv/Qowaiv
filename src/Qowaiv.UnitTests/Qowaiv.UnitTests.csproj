@@ -89,6 +89,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BankIdentifierCodeTest.cs" />
     <Compile Include="CodeGenerator\Generators\QowaivCodeGeneratorTest.cs" />
     <Compile Include="CountryTest.cs" />
     <Compile Include="EmailAddressTest.cs" />

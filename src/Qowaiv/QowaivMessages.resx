@@ -120,6 +120,9 @@
   <data name="AgrumentException_Must" xml:space="preserve">
     <value>Argument must be {0}</value>
   </data>
+  <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
+    <value>Not a valid BIC</value>
+  </data>
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Not a valid country</value>
   </data>

@@ -70,6 +70,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid BIC.
+        /// </summary>
+        public static string FormatExceptionBankIdentifierCode {
+            get {
+                return ResourceManager.GetString("FormatExceptionBankIdentifierCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid country.
         /// </summary>
         public static string FormatExceptionCountry {

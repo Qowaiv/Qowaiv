@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Qowaiv.UnitTests.TestTools;
+using System;
+using System.Linq;
 
 namespace Qowaiv.UnitTests
 {
@@ -35,6 +35,7 @@ namespace Qowaiv.UnitTests
                 typeof(Month),
                 typeof(Percentage),
                 typeof(PostalCode),
+                typeof(WeekDate),
                 typeof(Year)
             };
 

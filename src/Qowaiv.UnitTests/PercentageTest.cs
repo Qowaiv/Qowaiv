@@ -597,7 +597,7 @@ namespace Qowaiv.UnitTests
             {
                 val.ToString("%#%");
             },
-            "Format is invalid or not supported");
+            "Format is invalid.");
         }
 
         [TestMethod]

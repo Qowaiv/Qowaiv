@@ -1,7 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Qowaiv.UnitTests.TestTools;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Qowaiv.Formatting;
+using Qowaiv.UnitTests.TestTools;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Qowaiv.UnitTests.Formatting
@@ -57,6 +58,16 @@ namespace Qowaiv.UnitTests.Formatting
                 StringFormatter.Apply(Int32.MinValue, "0", CultureInfo.InvariantCulture, null);
             },
             "tokens");
+        }
+
+        [TestMethod]
+        public void Apply_InvalidFormat_ThrowsFormatException()
+        {
+            ExceptionAssert.ExpectException<FormatException>(() =>
+            {
+                StringFormatter.Apply(Int32.MinValue, "\\", CultureInfo.InvariantCulture, new Dictionary<char, Func<Int32, IFormatProvider, string>>());
+            },
+            "Format is invalid.");
         }
     }
 }

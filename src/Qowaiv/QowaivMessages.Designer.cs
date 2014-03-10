@@ -124,6 +124,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Format is invalid..
+        /// </summary>
+        public static string FormatExceptionInvalidFormat {
+            get {
+                return ResourceManager.GetString("FormatExceptionInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid month.
         /// </summary>
         public static string FormatExceptionMonth {
@@ -147,6 +156,15 @@ namespace Qowaiv {
         public static string FormatExceptionPostalCode {
             get {
                 return ResourceManager.GetString("FormatExceptionPostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid week date.
+        /// </summary>
+        public static string FormatExceptionWeekDate {
+            get {
+                return ResourceManager.GetString("FormatExceptionWeekDate", resourceCulture);
             }
         }
         
@@ -228,15 +246,6 @@ namespace Qowaiv {
         public static string NotSupportedExceptionCountryToRegionInfo {
             get {
                 return ResourceManager.GetString("NotSupportedExceptionCountryToRegionInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Format is invalid or not supported.
-        /// </summary>
-        public static string NotSupportedExceptionFormat {
-            get {
-                return ResourceManager.GetString("NotSupportedExceptionFormat", resourceCulture);
             }
         }
     }

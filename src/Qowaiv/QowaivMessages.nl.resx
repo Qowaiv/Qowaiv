@@ -144,6 +144,9 @@
   <data name="FormatExceptionPostalCode" xml:space="preserve">
     <value>Geen geldige postcode</value>
   </data>
+  <data name="FormatExceptionWeekDate" xml:space="preserve">
+    <value>Geen geldige week datum</value>
+  </data>
   <data name="FormatExceptionYear" xml:space="preserve">
     <value>Geen geldig jaartal</value>
   </data>

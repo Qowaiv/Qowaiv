@@ -71,6 +71,10 @@ namespace Qowaiv.Formatting
                     sb.Append(ch);
                 }
             }
+            if (isEscape)
+            {
+                throw new FormatException(QowaivMessages.FormatExceptionInvalidFormat);
+            }
             return sb.ToString();
         }
 

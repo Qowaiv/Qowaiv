@@ -570,7 +570,7 @@ namespace Qowaiv
             var marker = GetMarkerType(format ?? String.Empty);
             if (marker == PercentageMarkerType.Invalid)
             {
-                throw new FormatException(QowaivMessages.NotSupportedExceptionFormat);
+                throw new FormatException(QowaivMessages.FormatExceptionInvalidFormat);
             }
             var decimalVal = m_Value / Dividers[marker];
 

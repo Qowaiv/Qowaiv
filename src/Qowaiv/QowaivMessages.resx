@@ -138,6 +138,9 @@
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Not a valid IBAN</value>
   </data>
+  <data name="FormatExceptionInvalidFormat" xml:space="preserve">
+    <value>Format is invalid.</value>
+  </data>
   <data name="FormatExceptionMonth" xml:space="preserve">
     <value>Not a valid month</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="FormatExceptionPostalCode" xml:space="preserve">
     <value>Not a valid postal code</value>
+  </data>
+  <data name="FormatExceptionWeekDate" xml:space="preserve">
+    <value>Not a valid week date</value>
   </data>
   <data name="FormatExceptionYear" xml:space="preserve">
     <value>Not a valid year</value>
@@ -173,8 +179,5 @@
   </data>
   <data name="NotSupportedExceptionCountryToRegionInfo" xml:space="preserve">
     <value>The country '{0} ({1})' is not supported as region info.</value>
-  </data>
-  <data name="NotSupportedExceptionFormat" xml:space="preserve">
-    <value>Format is invalid or not supported</value>
   </data>
 </root>

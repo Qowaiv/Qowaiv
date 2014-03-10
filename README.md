@@ -46,6 +46,10 @@ Postal code
 -----------
 Represents a postal code. It supports validation for all countries.
 
+Week date
+---------
+Represents a week based date.
+
 Year
 ----
 Represents a year in the range [1-9999].

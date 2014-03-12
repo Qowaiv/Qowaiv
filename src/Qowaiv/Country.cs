@@ -525,16 +525,41 @@ namespace Qowaiv
         }
 
         /// <summary>Creates a country based on a region info.</summary>
-        /// <param name="region"></param>
-        /// <returns></returns>
+        /// <param name="region">
+		/// The corresponding region info.
+		/// </param>
+		/// <returns>
+		/// Returns a country that repesents the same region as region info.
+		/// </returns>
         public static Country Create(RegionInfo region)
         {
             if (region == null) { return default(Country); }
             // In .NET, Serbia and Montenegro (CS) is still active.
             if (region.TwoLetterISORegionName == "CS") { return Country.CSXX; }
 
-            return All.FirstOrDefault(c => c.IsoAlpha2Code == region.TwoLetterISORegionName);
+            return All.FirstOrDefault(c => c.Name == region.TwoLetterISORegionName);
         }
+
+
+		/// <summary>Creates a country based on a culture info.</summary>
+		/// <param name="culture">
+		/// A culture info.
+		/// </param>
+		/// <returns>
+		/// Returns a country that repesents the country specified at the culture if
+		/// any, otherwise Country.Empthy.
+		/// </returns>
+		public static Country Create(CultureInfo culture)
+		{
+			if (culture == null || culture == CultureInfo.InvariantCulture || culture.IsNeutralCulture)
+			{
+				return default(Country);
+			}
+
+			var name = culture.Name.Substring(culture.Name.IndexOf('-') + 1);
+
+			return All.FirstOrDefault(c => c.Name == name);
+		}
 
         #endregion
 

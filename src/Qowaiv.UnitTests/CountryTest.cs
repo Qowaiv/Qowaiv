@@ -164,12 +164,20 @@ namespace Qowaiv.UnitTests
         #region Create tests
 
         [TestMethod]
-        public void Create_Null_Empty()
+		public void Create_RegionInfoNull_Empty()
         {
             var exp = Country.Empty;
-            var act = Country.Create(null);
+            var act = Country.Create((RegionInfo)null);
             Assert.AreEqual(exp, act);
         }
+
+		[TestMethod]
+		public void Create_CultureInfoNull_Empty()
+		{
+			var exp = Country.Empty;
+			var act = Country.Create((CultureInfo)null);
+			Assert.AreEqual(exp, act);
+		}
 
         [TestMethod]
         public void Create_CS_CSXX()
@@ -190,6 +198,30 @@ namespace Qowaiv.UnitTests
             var act = Country.Create(new RegionInfo("NL"));
             Assert.AreEqual(exp, act);
         }
+
+		[TestMethod]
+		public void Create_CultureInfoInvariant_Empty()
+		{
+			var exp = Country.Empty;
+			var act = Country.Create(CultureInfo.InvariantCulture);
+			Assert.AreEqual(exp, act);
+		}
+
+		[TestMethod]
+		public void Create_CultureInfoEs_Empty()
+		{
+			var exp = Country.Empty;
+			var act = Country.Create(new CultureInfo("es"));
+			Assert.AreEqual(exp, act);
+		}
+
+		[TestMethod]
+		public void Create_CultureInfoEsEC_Empty()
+		{
+			var exp = Country.EC;
+			var act = Country.Create(new CultureInfo("es-EC"));
+			Assert.AreEqual(exp, act);
+		}
 
         #endregion
 

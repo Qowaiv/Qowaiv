@@ -1040,7 +1040,7 @@ namespace Qowaiv.UnitTests
         [TestMethod]
         public void IsValid_Data_IsFalse()
         {
-            Assert.IsFalse(Month.IsValid("0"), "Complex");
+            Assert.IsFalse(Month.IsValid("0"), "0");
             Assert.IsFalse(Month.IsValid((String)null), "(String)null");
             Assert.IsFalse(Month.IsValid(String.Empty), "String.Empty");
 

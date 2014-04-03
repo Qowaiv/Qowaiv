@@ -108,5 +108,58 @@ namespace Qowaiv.Formatting
             }
             return false;
         }
-    }
+
+		/// <summary>Replaces diacrtic characters by non diacritic ones.</summary>
+		/// <param name="str">
+		/// The string to remove the diacritics from.
+		/// </param>
+		/// <param name="ingore">
+		/// Diacritics at the ingore, will not be changed.
+		/// </param>
+		public static string ToNonDiacritic(string str, string ingore = "")
+		{
+			if (String.IsNullOrEmpty(str)) { return str; }
+			var sb = new StringBuilder();
+
+			foreach (var ch in str)
+			{
+				if (ingore.IndexOf(ch) > -1)
+				{
+					sb.Append(ch);
+				}
+				else
+				{
+					var index = DiacriticSearch.IndexOf(ch);
+					if (index > -1)
+					{
+						sb.Append(DiacriticReplace[index]);
+					}
+					else
+					{
+						String chs;
+						if (DiacriticLookup.TryGetValue(ch, out chs))
+						{
+							sb.Append(chs);
+						}
+						else
+						{
+							sb.Append(ch);
+						}
+					}
+				}
+			}
+			return sb.ToString();
+		}
+
+		private const string DiacriticSearch = /*  outlining */ "ÀÁÂÃÄÅĀĂĄǍǺàáâãäåāăąǎǻÇĆĈĊČƠçćĉċčơÐĎďđÈÉÊËĒĔĖĘĚèéêëēĕėęěÌÍÎÏĨĪĬĮİǏìíîïıĩīĭįǐĴĵĜĞĠĢĝğġģĤĦĥħĶķĸĹĻĽĿŁĺļľŀłÑŃŅŇŊñńņňŉŋÒÓÔÕÖØŌŎŐǑǾðòóôõöøōŏőǒǿŔŖŘŕŗřŚŜŞŠśŝşšŢŤŦţťŧÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛùúûüũūŭůűųưǔǖǘǚǜŴŵÝŶŸýÿŷŹŻŽźżž";
+		private const string DiacriticReplace = /* outlining */ "AAAAAAAAAAAaaaaaaaaaaaCCCCCCccccccDDddEEEEEEEEEeeeeeeeeeIIIIIIIIIIiiiiiiiiiiJjGGGGggggHHhhKkkLLLLLlllllNNNNNnnnnnnOOOOOOOOOOOooooooooooooRRRrrrSSSSssssTTTtttUUUUUUUUUUUUUUUUuuuuuuuuuuuuuuuuWwYYYyyyZZZzzz";
+
+		private static readonly Dictionary<char, string> DiacriticLookup = new Dictionary<char, string>()
+        {
+			{'Æ', "AE"},{'Ǽ', "AE"},{'æ', "ae"}, {'ǽ',"ae"},
+            {'ß', "sz"},
+			{'Œ', "OE"},{'œ', "oe"},
+            {'Ĳ', "IJ"},{'ĳ', "ij"},
+        };
+	}
 }

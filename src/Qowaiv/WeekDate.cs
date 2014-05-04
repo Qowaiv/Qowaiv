@@ -20,6 +20,7 @@ namespace Qowaiv
     /// government and business for fiscal years, as well as in timekeeping.
     /// The system specifies a week year atop the Gregorian calendar by
     /// defining a notation for ordinal weeks of the year.
+    /// </summary>
     /// <remarks>
     /// The Gregorian leap cycle, which has 97 leap days spread across 400 years,
     /// contains a whole number of weeks (20871). In every cycle there are 71

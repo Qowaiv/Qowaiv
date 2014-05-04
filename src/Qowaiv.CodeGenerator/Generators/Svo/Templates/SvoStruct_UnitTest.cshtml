@@ -121,6 +121,18 @@ namespace @(Model.Namespace).UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
+        /// <summary>TryParse "?" should be valid and the result should be @(Model.ClassName).Unknown.</summary>
+        [TestMethod]
+        public void TyrParse_Questionmark_IsValid()
+        {
+            @Model.ClassName val;
+
+            string str = "?";
+
+            Assert.IsTrue(@(Model.ClassName).TryParse(str, out val), "Valid");
+            Assert.IsTrue(val.IsUnknown(), "Value");
+        }
+
         /// <summary>TryParse with specified string value should be valid.</summary>
         [TestMethod]
         public void TyrParse_StringValue_IsValid()
@@ -166,7 +178,7 @@ namespace @(Model.Namespace).UnitTests
                 {
                     @(Model.ClassName).Parse("InvalidInput");
                 },
-                "Not @(Model.a) valid @(Model.ClassLongName)");
+                "Not a valid @(Model.ClassLongName)");
             }
         }
 
@@ -545,12 +557,21 @@ namespace @(Model.Namespace).UnitTests
         #region IFormattable / ToString tests
 
         [TestMethod]
-        public void ToString_Empty_IsStringEmpty()
+        public void ToString_Empty_StringEmpty()
         {
             var act = @(Model.ClassName).Empty.ToString();
             var exp = "";
             Assert.AreEqual(exp, act);
         }
+
+        [TestMethod]
+        public void ToString_Unknown_QuestionMark()
+        {
+            var act = @(Model.ClassName).Unknown.ToString();
+            var exp = "?";
+            Assert.AreEqual(exp, act);
+        }
+
         [TestMethod]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
@@ -622,19 +643,24 @@ namespace @(Model.Namespace).UnitTests
         [TestMethod]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
-        DebuggerDisplayAssert.HasAttribute(typeof(@(Model.ClassName)));
+            DebuggerDisplayAssert.HasAttribute(typeof(@(Model.ClassName)));
         }
 
         [TestMethod]
         public void DebugToString_DefaultValue_String()
         {
-        DebuggerDisplayAssert.HasResult("ComplexPattern", default(@(Model.ClassName)));
+            DebuggerDisplayAssert.HasResult("ComplexPattern", default(@(Model.ClassName)));
+        }
+        [TestMethod]
+        public void DebugToString_Unknown_String()
+        {
+            DebuggerDisplayAssert.HasResult("ComplexPattern", @(Model.ClassName).Unknown);
         }
 
         [TestMethod]
         public void DebugToString_TestStruct_String()
         {
-        DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
+            DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
         }
 
         #endregion

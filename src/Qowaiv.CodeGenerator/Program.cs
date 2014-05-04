@@ -67,7 +67,15 @@ namespace Qowaiv.CodeGenerator
 
                 var dir = new DirectoryInfo(args[0]);
 
-                var tp = Type.GetType("System." + args[1].Substring(0, 1).ToUpperInvariant() + args[1].Substring(1));
+                Type tp = null;
+                if (!args[1].Contains('.'))
+                {
+                    tp = Type.GetType("System." + args[1].Substring(0, 1).ToUpperInvariant() + args[1].Substring(1));
+                }
+                else
+                {
+                    tp = Type.GetType(args[1]);
+                }
 
                 if (tp == null) { throw new ArgumentException("Could not resolve the underlying type."); }
 

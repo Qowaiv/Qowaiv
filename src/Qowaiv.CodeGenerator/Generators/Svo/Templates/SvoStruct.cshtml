@@ -45,7 +45,7 @@ namespace @Model.Namespace
         #region Methods
 
         /// <summary>Returns true if the @Model.ClassLongName is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(String); }
+        public bool IsEmpty() { return m_Value == default(@Model.UnderlyingType); }
 
         /// <summary>Returns true if the @Model.ClassLongName is unknown, otherwise false.</summary>
         public bool IsUnknown() { return m_Value == @(Model.ClassName).Unknown.m_Value; }
@@ -100,7 +100,7 @@ namespace @Model.Namespace
         /// <param name="writer">An xml writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            writer.WriteString(ToString("xml", CultureInfo.InvariantCulture));
+            writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
         #endregion
@@ -152,7 +152,7 @@ namespace @Model.Namespace
         /// <summary>Converts @Model.a @Model.ClassLongName into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return m_Value == default(@Model.UnderlyingType.Name) ? null : ToString("json", CultureInfo.InvariantCulture);
+            return m_Value == default(@Model.UnderlyingType.Name) ? null : ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion
@@ -162,11 +162,9 @@ namespace @Model.Namespace
         /// <summary>Returns a System.String that represents the current @Model.ClassLongName for debug purposes.</summary>
          private string DebugToString()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "@(Model.ClassName): {0}{1}",
-                ToString(),
-                this == @(Model.ClassName).Empty ? "(empty)" : "");
+            if (IsEmpty()) { return "@(Model.ClassName): (empty)"; }
+            if (IsUnknown()) { return "@(Model.ClassName): (unknown)"; }
+            return string.Format(CultureInfo.InvariantCulture, "@(Model.ClassName): {0}", m_Value);
         }
 
          /// <summary>Returns a System.String that represents the current @Model.ClassLongName.</summary>
@@ -288,13 +286,13 @@ namespace @Model.Namespace
         public static bool operator @(Model.lt)(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.lt) 0; }
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator  @(Model.gt)(@(Model.ClassName) l, @(Model.ClassName) r) { return l.m_Value  @(Model.gt) r.m_Value; }
+        public static bool operator @(Model.gt)(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.gt) 0; }
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator  @(Model.lt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.m_Value  @(Model.lt)= r.m_Value; }
+        public static bool operator @(Model.lt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.lt)= 0; }
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator  @(Model.gt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.m_Value  @(Model.gt)= r.m_Value; }
+        public static bool operator @(Model.gt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.gt)= 0; }
 
 </text>}
         #endregion
@@ -363,7 +361,7 @@ namespace @Model.Namespace
         /// <exception cref="System.FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static @Model.ClassName Parse(string s, IformatProvider formatProvider)
+        public static @Model.ClassName Parse(string s, IFormatProvider formatProvider)
         {
             @Model.ClassName val;
             if (@(Model.ClassName).TryParse(s, formatProvider, out val))
@@ -424,7 +422,7 @@ namespace @Model.Namespace
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, IformatProvider formatProvider, out @Model.ClassName result)
+        public static bool TryParse(string s, IFormatProvider formatProvider, out @Model.ClassName result)
         {
             result = @(Model.ClassName).Empty;
             if (string.IsNullOrEmpty(s))
@@ -436,7 +434,7 @@ namespace @Model.Namespace
                 result = @(Model.ClassName).Unknown;
                 return true;
             }
-            if (IsValid(s, culture))
+            if (IsValid(s, formatProvider))
             {
                 result = new @(Model.ClassName)() { m_Value = @(Model.UnderlyingType).Parse(s, formatProvider) };
                 return true;
@@ -522,7 +520,7 @@ namespace @Model.Namespace
         }
 
         /// <summary>Returns true if the val represents a valid @Model.ClassLongName, otherwise false.</summary>
-        public static bool IsValid(string val, CultureInfo culture)
+        public static bool IsValid(string val, IFormatProvider formatProvider)
         {
             return Pattern.IsMatch(val ?? string.Empty);
         }

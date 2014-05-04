@@ -1,9 +1,9 @@
 Qowaiv
 ======
-Domain Driven Design bottom up
+Domain-driven design bottom up
 ------------------------------
 
-Qowaiv is a (Single) Value Object library. Its aims to model reusable (Single) Value Objects that can be used a wide variety of modelling scenarios, both inside and outsite a Domain Driven Design context.
+Qowaiv is a (Single) Value Object library. Its aims to model reusable (Single) Value Objects that can be used a wide variety of modelling scenarios, both inside and outside a Domain-driven context.
 
 Supported scenarios include parsing, formatting, validation, (de)serialization, and domain specific logic.
 

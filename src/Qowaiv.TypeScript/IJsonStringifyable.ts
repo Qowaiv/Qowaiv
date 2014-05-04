@@ -1,0 +1,3 @@
+﻿ interface IJsonStringifyable{
+    toJSON(): string;
+ }

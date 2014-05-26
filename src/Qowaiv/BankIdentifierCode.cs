@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -8,13 +11,10 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Conversion;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
 
 namespace Qowaiv
 {
-    // <summary>The Bank Identifier Code (BIC) is a standard format of Business Identifier Codes
+    /// <summary>The Bank Identifier Code (BIC) is a standard format of Business Identifier Codes
     /// approved by the International Organization for Standardization (ISO) as ISO 9362.
     /// It is a unique identification code for both financial and non-financial institutions.
     /// </summary>

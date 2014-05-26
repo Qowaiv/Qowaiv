@@ -36,18 +36,30 @@
             }
         }
         /** 
-         * Returns a value representing the current GUID for JSON.
-         * @remarks Is used by JSON.stringify().
+         * Returns a JSON representation of the GUID.
          */
         public toJSON(): string {
             return this.v;
         }
 
+        /**
+         * Creates a GUID from a JSON string.
+         * @param {string} s A JSON string representing the GUID.
+         * @return A GUID if valid, otherwise null.
+         */
+        public fromJSON(s: string) {
+            return Guid.parse(s);
+        }
+
+        /**
+         * Returns true if other is not null or undefined and a GUID
+         * representing the same value, otherwise false.
+         */
         public eq(other: any): boolean{
             return 
                 other !== null &&
                 other !== undefined && 
-                typeof(other) === typeof(Guid) &&
+                other instanceof(Guid) &&
                 other.v === this.v;
         }
 
@@ -73,10 +85,10 @@
             
             // if the value paramater is valid
             if (Guid.isValid(s)) {
-                var guid = new Guid();
+                var val = new Guid();
                 s = s.replace(/-/g, '').toUpperCase();
-                guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
-                return guid;
+                val.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
+                return val;
             }
             
             // return null if creation failed.
@@ -84,19 +96,10 @@
         }
 
         /**
-         * Creates a GUID from a JSON string.
-         * @param {string} s A string containing GUID to convert.
-         * @return GUID if valid, otherwise null.
-         */
-        public fromJSON(s: string): Guid {
-            return Guid.parse(s);
-        }
-
-        /**
          * Creates a GUID.
          * @return A random GUID.
          */
-        static newGuid(): Guid {
+        public static newGuid(): Guid {
 
             var guid = new Guid();
             guid.v = Guid.rndGuid(false) + Guid.rndGuid(true) + Guid.rndGuid(true) + Guid.rndGuid(false);

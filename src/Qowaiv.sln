@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv", "Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
 EndProject
@@ -29,6 +29,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5249CDC7-3F92-45B6-9328-627BC0C2441D}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\ProductInfo.cs = Shared\ProductInfo.cs
+		Shared\VersionInfo.cs = Shared\VersionInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,5 +69,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5249CDC7-3F92-45B6-9328-627BC0C2441D} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 EndGlobal

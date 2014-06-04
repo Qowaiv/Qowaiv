@@ -88,6 +88,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid date.
+        /// </summary>
+        public static string FormatExceptionDate {
+            get {
+                return ResourceManager.GetString("FormatExceptionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid email address.
         /// </summary>
         public static string FormatExceptionEmailAddress {

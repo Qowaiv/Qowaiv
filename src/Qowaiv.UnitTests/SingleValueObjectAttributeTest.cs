@@ -28,6 +28,7 @@ namespace Qowaiv.UnitTests
             {
                 typeof(BankIdentifierCode),
                 typeof(Country),
+				typeof(Date),
                 typeof(EmailAddress),
                 typeof(Gender),
                 typeof(HouseNumber),

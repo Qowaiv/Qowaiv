@@ -54,6 +54,7 @@
     <Compile Include="BankIdentifierCode.cs" />
     <Compile Include="Conversion\BankIdentifierCodeTypeConverter.cs" />
     <Compile Include="Conversion\CountryTypeConverter.cs" />
+    <Compile Include="Conversion\DateTypeConverter.cs" />
     <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
     <Compile Include="Conversion\GenderTypeConverter.cs" />
     <Compile Include="Conversion\HouseNumberTypeConverter.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Conversion\YearTypeConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryConstants.cs" />
+    <Compile Include="Date.cs" />
     <Compile Include="EmailAddress.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />
     <Compile Include="Gender.cs" />

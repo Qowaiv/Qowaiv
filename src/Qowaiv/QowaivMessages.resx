@@ -126,6 +126,9 @@
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Not a valid country</value>
   </data>
+  <data name="FormatExceptionDate" xml:space="preserve">
+    <value>Not a valid date</value>
+  </data>
   <data name="FormatExceptionEmailAddress" xml:space="preserve">
     <value>Not a valid email address</value>
   </data>

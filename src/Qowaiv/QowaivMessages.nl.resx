@@ -123,6 +123,9 @@
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Geen geldig land</value>
   </data>
+  <data name="FormatExceptionDate" xml:space="preserve">
+    <value>Geen geldige datum</value>
+  </data>
   <data name="FormatExceptionEmailAddress" xml:space="preserve">
     <value>Geen geldig e-mailadres</value>
   </data>

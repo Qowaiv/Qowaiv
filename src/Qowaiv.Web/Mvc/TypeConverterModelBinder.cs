@@ -25,7 +25,7 @@ namespace Qowaiv.Web.Mvc
 
         /// <summary>Static constructor.</summary>
         /// <remarks>
-        /// Add all types of Tjip.Domain that are supported by the model binder.
+        /// Add all types of Qowaiv that are supported by the model binder.
         /// </remarks>
         static TypeConverterModelBinder()
         {

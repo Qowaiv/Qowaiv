@@ -782,7 +782,7 @@ namespace Qowaiv.UnitTests
         }
         
         [TestMethod]
-        public void Domain_TestStruct_TjipDotCom()
+        public void Domain_TestStruct_QowaivOrg()
         {
             var exp = "qowaiv.org";
             var act = TestStruct.Domain;

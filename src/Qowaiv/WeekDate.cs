@@ -43,8 +43,7 @@ namespace Qowaiv
     /// 2006-W52-7 (extended form) or 2006W527 (compact form).
     /// </remarks>
     [DebuggerDisplay("{DebugToString()}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a week date.")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
     [TypeConverter(typeof(WeekDateTypeConverter))]
     public struct WeekDate : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<WeekDate>
     {
@@ -52,10 +51,10 @@ namespace Qowaiv
         public static readonly Regex Pattern = new Regex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents the minimum value of the week date.</summary>
-        public static readonly WeekDate MinValue = new WeekDate() { m_Value = DateTime.MinValue.Date };
+        public static readonly WeekDate MinValue = new WeekDate() { m_Value = Date.MinValue };
 
         /// <summary>Represents the maximum value of the week date.</summary>
-        public static readonly WeekDate MaxValue = new WeekDate() { m_Value = DateTime.MaxValue.Date };
+        public static readonly WeekDate MaxValue = new WeekDate() { m_Value = Date.MaxValue };
 
         /// <summary>Creates a date based on Week Year, week number, and day of the week.</summary>
         public WeekDate(int year, int week, int day)
@@ -73,7 +72,7 @@ namespace Qowaiv
                 throw new ArgumentOutOfRangeException("day", "Day should be in range [1,7].");
             }
 
-            DateTime dt;
+			Date dt;
             if (!TryCreate(year, week, day, out dt))
             {
                 throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception)null);
@@ -84,7 +83,7 @@ namespace Qowaiv
         #region Properties
 
         /// <summary>The inner value of the week date.</summary>
-        private DateTime m_Value;
+		private Date m_Value;
 
         /// <summary>Gets the year component represented by this instance.</summary>
         /// <remarks>
@@ -108,7 +107,7 @@ namespace Qowaiv
         public int DayOfYear { get { return GetDatePart(DatePartDayOfYear); } }
 
         /// <summary>Gets the date time component of this instance.</summary>
-        public DateTime Date { get { return m_Value; } }
+		public Date Date { get { return m_Value; } }
 
         #endregion
 
@@ -162,9 +161,9 @@ namespace Qowaiv
         /// - the first week with the majority (four or more) of its days in the starting year,
         /// - the week starting with the Monday in the period 29 December – 4 January.
         /// </remarks>
-        public static DateTime GetFirstDayOfFirstWeekOfYear(int year)
+		public static Date GetFirstDayOfFirstWeekOfYear(int year)
         {
-            var start = new DateTime(year, 01, 04);
+			var start = new Date(year, 01, 04);
             var adddays = ((int)start.DayOfWeek + 6) % 7;
             return start.AddDays(-adddays);
         }
@@ -179,7 +178,7 @@ namespace Qowaiv
         private WeekDate(SerializationInfo info, StreamingContext context)
         {
             if (info == null) { throw new ArgumentNullException("info"); }
-            m_Value = info.GetDateTime("Value");
+            m_Value = (Date)info.GetDateTime("Value");
         }
 
         /// <summary>Adds the underlying propererty of week date to the serialization info.</summary>
@@ -253,7 +252,7 @@ namespace Qowaiv
         /// </param>
         void IJsonSerializable.FromJson(DateTime jsonDate)
         {
-            m_Value = jsonDate.Date;
+            m_Value = (Date)jsonDate;
         }
 
         /// <summary>Converts a week date into its JSON object representation.</summary>
@@ -431,12 +430,10 @@ namespace Qowaiv
         /// <summary>Casts a System.String to a week date.</summary>
         public static explicit operator WeekDate(string str) { return WeekDate.Parse(str, CultureInfo.CurrentCulture); }
 
-
-
-        /// <summary>Casts a week date to a System.Int32.</summary>
+        /// <summary>Casts a week date to a date time.</summary>
         public static implicit operator DateTime(WeekDate val) { return val.m_Value; }
-        /// <summary>Casts an System.Int32 to a week date.</summary>
-        public static explicit operator WeekDate(DateTime val) { return WeekDate.Create(val); }
+		/// <summary>Casts a date time to a week date.</summary>
+        public static explicit operator WeekDate(DateTime val) { return WeekDate.Create((Date)val); }
 
         #endregion
 
@@ -541,7 +538,7 @@ namespace Qowaiv
                 var week = Int32.Parse(match.Groups["week"].Value);
                 var day = Int32.Parse(match.Groups["day"].Value);
 
-                DateTime dt;
+				Date dt;
                 if (TryCreate(year, week, day, out dt))
                 {
                     result = new WeekDate() { m_Value = dt };
@@ -555,14 +552,14 @@ namespace Qowaiv
         ///  <param name="val" >
         /// A decimal describing a week date.
         ///  </param >
-        public static WeekDate Create(DateTime val)
+        public static WeekDate Create(Date val)
         {
-            return new WeekDate() { m_Value = val.Date };
+            return new WeekDate() { m_Value = val };
         }
 
-        private static bool TryCreate(int year, int week, int day, out DateTime dt)
+        private static bool TryCreate(int year, int week, int day, out Date dt)
         {
-            dt = DateTime.MinValue;
+			dt = Date.MinValue;
 
             // Year 0 is not preserved by the regex.
             if (year < 1 ||
@@ -582,7 +579,7 @@ namespace Qowaiv
             // Week 53 can be non-existent.
             if (week == 53 && WeekDate.GetFirstDayOfFirstWeekOfYear(year + 1) <= dt)
             {
-                dt = DateTime.MinValue;
+				dt = Date.MinValue;
                 return false;
             };
             return true;

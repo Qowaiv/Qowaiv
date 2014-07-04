@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.CodeGenerator.Xml;
 using Qowaiv.UnitTests.TestTools;
 using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.SvoGenerator.Xml
 {
-    [TestClass]
+    [TestFixture]
     public class XResourceFileHeaderTest
     {
-        [TestMethod]
+        [Test]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -18,7 +18,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
             "name");
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_Params_HasResult()
         {
             var val = new XResourceFileHeader("KEY0", "VALUE0");
@@ -26,7 +26,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
             DebuggerDisplayAssert.HasResult("Header, Name: KEY0, Value: 'VALUE0'", val);
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable act = new XResourceFileHeader("KEY0", "VALUE0");

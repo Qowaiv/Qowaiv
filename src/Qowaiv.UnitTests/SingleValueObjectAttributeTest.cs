@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Linq;
 
 namespace Qowaiv.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class SingleValueObjectAttributeTest
     {
-        [TestMethod]
+        [Test]
         public void Ctor_Params_AreEqual()
         {
             var act = new SingleValueObjectAttribute(SingleValueStaticOptions.All, typeof(String));
@@ -17,7 +17,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(typeof(String), act.UnderlyingType, "act.UnderlyingType");
         }
 
-        [TestMethod]
+        [Test]
         public void Analize_AllSvos_MatchAttribute()
         {
             var svos = typeof(Qowaiv.Country).Assembly.GetTypes()

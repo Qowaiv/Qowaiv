@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
@@ -16,7 +16,7 @@ using Qowaiv;
 namespace Qowaiv.UnitTests
 {
 	/// <summary>Tests the Date SVO.</summary>
-	[TestClass]
+	[TestFixture]
 	public class DateTest
 	{
 		/// <summary>The test instance for most tests.</summary>
@@ -25,7 +25,7 @@ namespace Qowaiv.UnitTests
 		#region Date const tests
 
 		/// <summary>Date.Empty should be equal to the default of Date.</summary>
-		[TestMethod]
+		[Test]
 		public void MinValue_None_EqualsDefault()
 		{
 			Assert.AreEqual(default(Date), Date.MinValue);
@@ -35,7 +35,7 @@ namespace Qowaiv.UnitTests
 
 		#region Constructor Tests
 
-		[TestMethod]
+		[Test]
 		public void Ctor_621393984000000017_AreEqual()
 		{
 			var act = new Date(621393984000000017L);
@@ -49,7 +49,7 @@ namespace Qowaiv.UnitTests
 		#region TryParse tests
 
 		/// <summary>TryParse with specified string value should be valid.</summary>
-		[TestMethod]
+		[Test]
 		public void TyrParse_StringValue_IsValid()
 		{
 			Date val;
@@ -61,7 +61,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		/// <summary>TryParse with specified string value should be invalid.</summary>
-		[TestMethod]
+		[Test]
 		public void TyrParse_StringValue_IsNotValid()
 		{
 			using (new CultureInfoScope("nl-NL"))
@@ -75,7 +75,7 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Parse_InvalidInput_ThrowsFormatException()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -89,7 +89,7 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void TryParse_TestStructInput_AreEqual()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -101,7 +101,7 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void TryParse_InvalidInput_DefaultValue()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -117,7 +117,7 @@ namespace Qowaiv.UnitTests
 
 		#region (XML) (De)serialization tests
 
-		[TestMethod]
+		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.ExpectArgumentNullException
@@ -128,7 +128,7 @@ namespace Qowaiv.UnitTests
 			"info");
 		}
 
-		[TestMethod]
+		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
 			ExceptionAssert.ExpectException<SerializationException>
@@ -139,7 +139,7 @@ namespace Qowaiv.UnitTests
 			});
 		}
 
-		[TestMethod]
+		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.ExpectArgumentNullException
@@ -151,7 +151,7 @@ namespace Qowaiv.UnitTests
 			"info");
 		}
 
-		[TestMethod]
+		[Test]
 		public void GetObjectData_SerializationInfo_AreEqual()
 		{
 			ISerializable obj = TestStruct;
@@ -161,7 +161,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(new DateTime(1970, 02, 14), info.GetDateTime("Value"));
 		}
 
-		[TestMethod]
+		[Test]
 		public void SerializeDeserialize_TestStruct_AreEqual()
 		{
 			var input = DateTest.TestStruct;
@@ -169,7 +169,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void DataContractSerializeDeserialize_TestStruct_AreEqual()
 		{
 			var input = DateTest.TestStruct;
@@ -177,7 +177,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void XmlSerializeDeserialize_TestStruct_AreEqual()
 		{
 			var input = DateTest.TestStruct;
@@ -186,7 +186,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void SerializeDeserialize_DateSerializeObject_AreEqual()
 		{
 			var input = new DateSerializeObject()
@@ -206,7 +206,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
 			Assert.AreEqual(exp.Date, act.Date, "Date");
 		}
-		[TestMethod]
+		[Test]
 		public void XmlSerializeDeserialize_DateSerializeObject_AreEqual()
 		{
 			var input = new DateSerializeObject()
@@ -226,7 +226,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
 			Assert.AreEqual(exp.Date, act.Date, "Date");
 		}
-		[TestMethod]
+		[Test]
 		public void DataContractSerializeDeserialize_DateSerializeObject_AreEqual()
 		{
 			var input = new DateSerializeObject()
@@ -247,7 +247,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp.Date, act.Date, "Date");
 		}
 
-		[TestMethod]
+		[Test]
 		public void SerializeDeserialize_Empty_AreEqual()
 		{
 			var input = new DateSerializeObject()
@@ -267,7 +267,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
 			Assert.AreEqual(exp.Date, act.Date, "Date");
 		}
-		[TestMethod]
+		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
 		{
 			var input = new DateSerializeObject()
@@ -288,7 +288,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp.Date, act.Date, "Date");
 		}
 
-		[TestMethod]
+		[Test]
 		public void GetSchema_None_IsNull()
 		{
 			IXmlSerializable obj = TestStruct;
@@ -299,7 +299,7 @@ namespace Qowaiv.UnitTests
 
 		#region JSON (De)serialization tests
 		
-		[TestMethod]
+		[Test]
 		public void FromJson_Null_AssertNotSupportedException()
 		{
 			ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -309,7 +309,7 @@ namespace Qowaiv.UnitTests
 			"JSON deserialization from null is not supported.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
 			ExceptionAssert.ExpectException<FormatException>(() =>
@@ -318,7 +318,7 @@ namespace Qowaiv.UnitTests
 			},
 			"Not a valid date");
 		}
-		[TestMethod]
+		[Test]
 		public void FromJson_StringValue_AreEqual()
 		{
 			var act = JsonTester.Read<Date>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -327,7 +327,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void FromJson_Int64Value_AreEqual()
 		{
 			var act = JsonTester.Read<Date>(TestStruct.Ticks);
@@ -336,7 +336,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
 			ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -346,7 +346,7 @@ namespace Qowaiv.UnitTests
 			"JSON deserialization from a number is not supported.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void FromJson_DateTimeValue_AreEqual()
 		{
 			var act = JsonTester.Read<Date>((DateTime)TestStruct);
@@ -355,7 +355,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void ToJson_DefaultValue_AreEqual()
 		{
 			object act = JsonTester.Write(default(Date));
@@ -363,7 +363,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void ToJson_TestStruct_AreEqual()
 		{
 			var act = JsonTester.Write(TestStruct);
@@ -376,7 +376,7 @@ namespace Qowaiv.UnitTests
 
 		#region IFormattable / ToString tests
 
-		[TestMethod]
+		[Test]
 		public void ToString_CustomFormatter_SupportsCustomFormatting()
 		{
 			using (new CultureInfoScope("nl-NL"))
@@ -387,7 +387,7 @@ namespace Qowaiv.UnitTests
 				Assert.AreEqual(exp, act);
 			}
 		}
-		[TestMethod]
+		[Test]
 		public void ToString_TestStruct_ComplexPattern()
 		{
 			using (new CultureInfoScope("nl-BE"))
@@ -398,7 +398,7 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void ToString_FormatValueEnglishGreatBritain_AreEqual()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -409,7 +409,7 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void ToString_FormatValueSpanishEcuador_AreEqual()
 		{
 			var act = new Date(1988, 08, 08).ToString("d", new CultureInfo("es-EC"));
@@ -417,19 +417,19 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void DebuggerDisplay_DebugToString_HasAttribute()
 		{
 			DebuggerDisplayAssert.HasAttribute(typeof(Date));
 		}
 
-		[TestMethod]
+		[Test]
 		public void DebugToString_DefaultValue_String()
 		{
 			DebuggerDisplayAssert.HasResult("0001-01-01", default(Date));
 		}
 
-		[TestMethod]
+		[Test]
 		public void DebugToString_TestStruct_String()
 		{
 			DebuggerDisplayAssert.HasResult("1970-02-14", TestStruct);
@@ -440,26 +440,26 @@ namespace Qowaiv.UnitTests
 		#region IEquatable tests
 
 		/// <summary>GetHash should not fail for Date.Empty.</summary>
-		[TestMethod]
+		[Test]
 		public void GetHash_MinValue_Hash()
 		{
 			Assert.AreEqual(0, Date.MinValue.GetHashCode());
 		}
 
 		/// <summary>GetHash should not fail for the test struct.</summary>
-		[TestMethod]
+		[Test]
 		public void GetHash_TestStruct_Hash()
 		{
 			Assert.AreEqual(1232937609, DateTest.TestStruct.GetHashCode());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_EmptyEmpty_IsTrue()
 		{
 			Assert.IsTrue(Date.MinValue.Equals(Date.MinValue));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_FormattedAndUnformatted_IsTrue()
 		{
 			var l = Date.Parse("1970-02-14", CultureInfo.InvariantCulture);
@@ -468,43 +468,43 @@ namespace Qowaiv.UnitTests
 			Assert.IsTrue(l.Equals(r));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_TestStructTestStruct_IsTrue()
 		{
 			Assert.IsTrue(DateTest.TestStruct.Equals(DateTest.TestStruct));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_TestStructEmpty_IsFalse()
 		{
 			Assert.IsFalse(DateTest.TestStruct.Equals(Date.MaxValue));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_EmptyTestStruct_IsFalse()
 		{
 			Assert.IsFalse(Date.MinValue.Equals(DateTest.TestStruct));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_TestStructObjectTestStruct_IsTrue()
 		{
 			Assert.IsTrue(DateTest.TestStruct.Equals((object)DateTest.TestStruct));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_TestStructNull_IsFalse()
 		{
 			Assert.IsFalse(DateTest.TestStruct.Equals(null));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Equals_TestStructObject_IsFalse()
 		{
 			Assert.IsFalse(DateTest.TestStruct.Equals(new object()));
 		}
 
-		[TestMethod]
+		[Test]
 		public void OperatorIs_TestStructTestStruct_IsTrue()
 		{
 			var l = DateTest.TestStruct;
@@ -512,7 +512,7 @@ namespace Qowaiv.UnitTests
 			Assert.IsTrue(l == r);
 		}
 
-		[TestMethod]
+		[Test]
 		public void OperatorIsNot_TestStructTestStruct_IsFalse()
 		{
 			var l = DateTest.TestStruct;
@@ -525,7 +525,7 @@ namespace Qowaiv.UnitTests
 		#region IComparable tests
 
 		/// <summary>Orders a list of Dates ascending.</summary>
-		[TestMethod]
+		[Test]
 		public void OrderBy_Date_AreEqual()
 		{
 			var item0 = Date.Parse("1970-01-03");
@@ -541,7 +541,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		/// <summary>Orders a list of Dates descending.</summary>
-		[TestMethod]
+		[Test]
 		public void OrderByDescending_Date_AreEqual()
 		{
 			var item0 = Date.Parse("1970-01-03");
@@ -557,7 +557,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		/// <summary>Compare with a to object casted instance should be fine.</summary>
-		[TestMethod]
+		[Test]
 		public void CompareTo_ObjectTestStruct_0()
 		{
 			object other = (object)TestStruct;
@@ -569,7 +569,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		/// <summary>Compare with null should throw an expception.</summary>
-		[TestMethod]
+		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
 			ExceptionAssert.ExpectArgumentException
@@ -583,7 +583,7 @@ namespace Qowaiv.UnitTests
 			);
 		}
 		/// <summary>Compare with a random object should throw an expception.</summary>
-		[TestMethod]
+		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
 			ExceptionAssert.ExpectArgumentException
@@ -597,7 +597,7 @@ namespace Qowaiv.UnitTests
 			);
 		}
 
-		[TestMethod]
+		[Test]
 		public void LessThan_17LT19_IsTrue()
 		{
 			Date l = new Date(1990, 10, 17);
@@ -605,7 +605,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.IsTrue(l < r);
 		}
-		[TestMethod]
+		[Test]
 		public void GreaterThan_21LT19_IsTrue()
 		{
 			Date l =new Date(1990, 10,  21);
@@ -614,7 +614,7 @@ namespace Qowaiv.UnitTests
 			Assert.IsTrue(l > r);
 		}
 
-		[TestMethod]
+		[Test]
 		public void LessThanOrEqual_17LT19_IsTrue()
 		{
 			Date l = new Date(1990, 10, 17);
@@ -622,7 +622,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.IsTrue(l <= r);
 		}
-		[TestMethod]
+		[Test]
 		public void GreaterThanOrEqual_21LT19_IsTrue()
 		{
 			Date l = new Date(1990, 10, 21);
@@ -631,7 +631,7 @@ namespace Qowaiv.UnitTests
 			Assert.IsTrue(l >= r);
 		}
 
-		[TestMethod]
+		[Test]
 		public void LessThanOrEqual_17LT17_IsTrue()
 		{
 			Date l = new Date(1990, 10, 17);
@@ -639,7 +639,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.IsTrue(l <= r);
 		}
-		[TestMethod]
+		[Test]
 		public void GreaterThanOrEqual_21LT21_IsTrue()
 		{
 			Date l = new Date(1990, 10, 21);
@@ -651,7 +651,7 @@ namespace Qowaiv.UnitTests
 
 		#region Casting tests
 
-		[TestMethod]
+		[Test]
 		public void Explicit_StringToDate_AreEqual()
 		{
 			var exp = TestStruct;
@@ -659,7 +659,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void Explicit_DateToString_AreEqual()
 		{
 			var exp = TestStruct.ToString();
@@ -668,7 +668,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Implicit_WeekDateToDate_AreEqual()
 		{
 			Date exp = new WeekDate(1970, 07, 6);
@@ -676,7 +676,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void Implicit_DateToWeekDate_AreEqual()
 		{
 			WeekDate exp = TestStruct;
@@ -685,7 +685,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Explicit_DateTimeToDate_AreEqual()
 		{
 			Date exp = (Date)new DateTime(1970, 02, 14);
@@ -693,7 +693,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void Implicit_DateToDateTime_AreEqual()
 		{
 			DateTime exp = TestStruct;
@@ -706,35 +706,35 @@ namespace Qowaiv.UnitTests
 
 		#region Properties
 
-		[TestMethod]
+		[Test]
 		public void Year_TestStruct_AreEqual()
 		{
 			var act = TestStruct.Year;
 			var exp = 1970;
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void Month_TestStruct_AreEqual()
 		{
 			var act = TestStruct.Month;
 			var exp = 2;
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void Day_TestStruct_AreEqual()
 		{
 			var act = TestStruct.Day;
 			var exp = 14;
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void DayOfWeek_TestStruct_AreEqual()
 		{
 			var act = TestStruct.DayOfWeek;
 			var exp = DayOfWeek.Saturday;
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void DayOfYear_TestStruct_AreEqual()
 		{
 			var act = TestStruct.DayOfYear;
@@ -746,7 +746,7 @@ namespace Qowaiv.UnitTests
 
 		#region Methods
 
-		[TestMethod]
+		[Test]
 		public void Increment_None_AreEqual()
 		{
 			var act = TestStruct;
@@ -754,7 +754,7 @@ namespace Qowaiv.UnitTests
 			var exp = new Date(1970, 02, 15);
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void Decrement_None_AreEqual()
 		{
 			var act = TestStruct;
@@ -763,14 +763,14 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Plus_TimeSpan_AreEqual()
 		{
 			var act = TestStruct + new TimeSpan(25, 30, 15);
 			var exp = new Date(1970, 02, 15);
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void Min_TimeSpan_AreEqual()
 		{
 			var act = TestStruct - new TimeSpan(25, 30, 15);
@@ -778,7 +778,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Min_DateTime_AreEqual()
 		{
 			var act = TestStruct - new Date(1970, 02, 12);
@@ -786,7 +786,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void AddTicks_4000000000017_AreEqual()
 		{
 			var act = TestStruct.AddTicks(4000000000017L);
@@ -795,7 +795,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void AddMilliseconds_Arround3Days_AreEqual()
 		{
 			var act = TestStruct.AddMilliseconds(3 * 24 * 60 * 60 * 1003);
@@ -803,7 +803,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void AddSeconds_Arround3Days_AreEqual()
 		{
 			var act = TestStruct.AddSeconds(3 * 24 * 60 * 64);
@@ -811,7 +811,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void AddMinutes_2280_AreEqual()
 		{
 			var act = TestStruct.AddMinutes(2 * 24 * 60);
@@ -820,7 +820,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void AddHours_41_AreEqual()
 		{
 			var act = TestStruct.AddHours(41);
@@ -829,7 +829,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void AddMonths_12_AreEqual()
 		{
 			var act = TestStruct.AddMonths(12);
@@ -837,7 +837,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[TestMethod]
+		[Test]
 		public void AddYears_Min12_AreEqual()
 		{
 			var act = TestStruct.AddYears(-12);
@@ -850,36 +850,36 @@ namespace Qowaiv.UnitTests
 
 		#region Type converter tests
 
-		[TestMethod]
+		[Test]
 		public void ConverterExists_Date_IsTrue()
 		{
 			TypeConverterAssert.ConverterExists(typeof(Date));
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanNotConvertFromInt32_Date_IsTrue()
 		{
 			TypeConverterAssert.CanNotConvertFrom(typeof(Date), typeof(Int32));
 		}
-		[TestMethod]
+		[Test]
 		public void CanNotConvertToInt32_Date_IsTrue()
 		{
 			TypeConverterAssert.CanNotConvertTo(typeof(Date), typeof(Int32));
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanConvertFromString_Date_IsTrue()
 		{
 			TypeConverterAssert.CanConvertFromString(typeof(Date));
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanConvertToString_Date_IsTrue()
 		{
 			TypeConverterAssert.CanConvertToString(typeof(Date));
 		}
 
-		[TestMethod]
+		[Test]
 		public void ConvertFromString_StringValue_TestStruct()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -888,7 +888,7 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -901,14 +901,14 @@ namespace Qowaiv.UnitTests
 
 		#region IsValid tests
 
-		[TestMethod]
+		[Test]
 		public void IsValid_Data_IsFalse()
 		{
 			Assert.IsFalse(Date.IsValid("Complex"), "Complex");
 			Assert.IsFalse(Date.IsValid((String)null), "(String)null");
 			Assert.IsFalse(Date.IsValid(String.Empty), "String.Empty");
 		}
-		[TestMethod]
+		[Test]
 		public void IsValid_Data_IsTrue()
 		{
 			Assert.IsTrue(Date.IsValid("1980-04-12 4:00"));

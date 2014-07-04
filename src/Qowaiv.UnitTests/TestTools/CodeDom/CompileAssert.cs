@@ -1,5 +1,5 @@
 ﻿using Microsoft.CSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace Qowaiv.UnitTests.TestTools.CodeDom
         {
             if (files == null || !files.Any())
             {
-                throw new AssertFailedException("No files specified.");
+                throw new AssertionException("No files specified.");
             }
 
             using (var provider = new CSharpCodeProvider())

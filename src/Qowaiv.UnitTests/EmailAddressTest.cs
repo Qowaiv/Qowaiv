@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -13,7 +13,7 @@ using System.Xml.Serialization;
 namespace Qowaiv.UnitTests
 {
     /// <summary>Tests the email address SVO.</summary>
-    [TestClass]
+    [TestFixture]
     public class EmailAddressTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -22,7 +22,7 @@ namespace Qowaiv.UnitTests
         #region email address const tests
 
         /// <summary>EmailAddress.Empty should be equal to the default of email address.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(EmailAddress), EmailAddress.Empty);
@@ -33,57 +33,57 @@ namespace Qowaiv.UnitTests
         #region email address IsEmpty tests
 
         /// <summary>EmailAddress.IsEmpty() should be true for the default of email address.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(EmailAddress).IsEmpty());
         }
         /// <summary>EmailAddress.IsEmpty() should be false for EmailAddress.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
             Assert.IsFalse(EmailAddress.Unknown.IsEmpty());
         }
         /// <summary>EmailAddress.IsEmpty() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
         /// <summary>EmailAddress.IsUnknown() should be false for the default of email address.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Default_IsFalse()
         {
             Assert.IsFalse(default(EmailAddress).IsUnknown());
         }
         /// <summary>EmailAddress.IsUnknown() should be true for EmailAddress.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(EmailAddress.Unknown.IsUnknown());
         }
         /// <summary>EmailAddress.IsUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
         /// <summary>EmailAddress.IsEmptyOrUnknown() should be true for the default of email address.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
             Assert.IsTrue(default(EmailAddress).IsEmptyOrUnknown());
         }
         /// <summary>EmailAddress.IsEmptyOrUnknown() should be true for EmailAddress.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(EmailAddress.Unknown.IsEmptyOrUnknown());
         }
         /// <summary>EmailAddress.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
@@ -94,7 +94,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             EmailAddress val;
@@ -106,7 +106,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             EmailAddress val;
@@ -118,7 +118,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             EmailAddress val;
@@ -130,7 +130,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             EmailAddress val;
@@ -141,7 +141,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -152,7 +152,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -166,7 +166,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -178,7 +178,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -194,7 +194,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -205,7 +205,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -216,7 +216,7 @@ namespace Qowaiv.UnitTests
             });
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -228,7 +228,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -238,7 +238,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual("svo@qowaiv.org", info.GetString("Value"));
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = EmailAddressTest.TestStruct;
@@ -246,7 +246,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = EmailAddressTest.TestStruct;
@@ -254,7 +254,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = EmailAddressTest.TestStruct;
@@ -263,7 +263,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
             var input = new EmailAddressSerializeObject()
@@ -283,7 +283,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
             var input = new EmailAddressSerializeObject()
@@ -303,7 +303,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
             var input = new EmailAddressSerializeObject()
@@ -324,7 +324,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new EmailAddressSerializeObject()
@@ -344,7 +344,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new EmailAddressSerializeObject()
@@ -365,7 +365,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -376,7 +376,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<EmailAddress>();
@@ -385,7 +385,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -394,7 +394,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid email address");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<EmailAddress>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -403,7 +403,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -413,7 +413,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from an integer is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -423,7 +423,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a number is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -433,7 +433,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(EmailAddress));
@@ -441,7 +441,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -454,7 +454,7 @@ namespace Qowaiv.UnitTests
 
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_IsStringEmpty()
         {
             var act = EmailAddress.Empty.ToString();
@@ -462,7 +462,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -471,7 +471,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_EmptyFormatF_AreEqual()
         {
             var act = EmailAddress.Empty.ToString(@"f");
@@ -479,7 +479,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatMailtoF_AreEqual()
         {
             var act = TestStruct.ToString(@"mai\lto:f");
@@ -487,7 +487,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatU_AreEqual()
         {
             var act = TestStruct.ToString("U");
@@ -495,7 +495,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatlAtd_ComplexPatternAreEqual()
         {
             var act = TestStruct.ToString("l[at]d");
@@ -503,7 +503,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatLAtD_ComplexPatternAreEqual()
         {
             var act = TestStruct.ToString("L[at]D");
@@ -511,25 +511,25 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(EmailAddress));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("EmailAddress: (empty)", default(EmailAddress));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("EmailAddress: (unknown)", EmailAddress.Unknown);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("EmailAddress: svo@qowaiv.org", TestStruct);
@@ -540,26 +540,26 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for EmailAddress.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, EmailAddress.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(624335706, EmailAddressTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(EmailAddress.Empty.Equals(EmailAddress.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = EmailAddress.Parse("svo@qowaiv.org", CultureInfo.InvariantCulture);
@@ -568,43 +568,43 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(EmailAddressTest.TestStruct.Equals(EmailAddressTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(EmailAddressTest.TestStruct.Equals(EmailAddress.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(EmailAddress.Empty.Equals(EmailAddressTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(EmailAddressTest.TestStruct.Equals((object)EmailAddressTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(EmailAddressTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(EmailAddressTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = EmailAddressTest.TestStruct;
@@ -612,7 +612,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = EmailAddressTest.TestStruct;
@@ -625,7 +625,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of email addresss ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_EmailAddress_AreEqual()
         {
             var item0 = EmailAddress.Parse("a@qowaiv.org");
@@ -641,7 +641,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of email addresss descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_EmailAddress_AreEqual()
         {
             var item0 = EmailAddress.Parse("a@qowaiv.org");
@@ -657,7 +657,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -669,7 +669,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -683,7 +683,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -700,7 +700,7 @@ namespace Qowaiv.UnitTests
 
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToEmailAddress_AreEqual()
         {
             var exp = TestStruct;
@@ -708,7 +708,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_EmailAddressToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -721,7 +721,7 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void Length_DefaultValue_0()
         {
             var exp = 0;
@@ -729,7 +729,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void Length_Unknown_0()
         {
             var exp = 0;
@@ -737,7 +737,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Length_TestStruct_IntValue()
         {
             var exp = 14;
@@ -745,21 +745,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Local_Empty_StringEmpty()
         {
             var email = EmailAddress.Empty;
             Assert.AreEqual(string.Empty, email.Local);
         }
 
-        [TestMethod]
+        [Test]
         public void Local_Unknown_StringEmpty()
         {
             var email = EmailAddress.Unknown;
             Assert.AreEqual(string.Empty, email.Local);
         }
 
-        [TestMethod]
+        [Test]
         public void Local_TestStruct_Info()
         {
             var exp = "svo";
@@ -767,21 +767,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Domain_Empty_StringEmpty()
         {
             var email = EmailAddress.Empty;
             Assert.AreEqual(string.Empty, email.Domain);
         }
 
-        [TestMethod]
+        [Test]
         public void Domain_Unknown_StringEmpty()
         {
             var email = EmailAddress.Unknown;
             Assert.AreEqual(string.Empty, email.Domain);
         }
         
-        [TestMethod]
+        [Test]
         public void Domain_TestStruct_QowaivOrg()
         {
             var exp = "qowaiv.org";
@@ -793,36 +793,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_EmailAddress_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(EmailAddress));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_EmailAddress_IsTrue()
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(EmailAddress), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_EmailAddress_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(EmailAddress), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_EmailAddress_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(EmailAddress));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_EmailAddress_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(EmailAddress));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_EmailAddressEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -831,7 +831,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_EmailAddressEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -840,7 +840,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
             using (new CultureInfoScope("en-GB"))
@@ -849,7 +849,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -862,7 +862,7 @@ namespace Qowaiv.UnitTests
        
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(EmailAddress.IsValid(String.Empty), "String.Empty");
@@ -880,7 +880,7 @@ namespace Qowaiv.UnitTests
             Assert.IsFalse(EmailAddress.IsValid("_@bde.cc,"), "_@bde.cc,");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(EmailAddress.IsValid("w.b.f@test.com"), "w.b.f@test.com");

@@ -365,7 +365,7 @@ namespace Qowaiv.CodeGenerator.Generators
 
                     using (var testswriter = new StreamWriter(Path.Combine(dir.FullName, "PostalCodeCountryInfoTest.cs")))
                     {
-                        testswriter.WriteLine("using Microsoft.VisualStudio.TestTools.UnitTesting;");
+                        testswriter.WriteLine("using NUnit.Framework;");
                         testswriter.WriteLine();
                         testswriter.WriteLine("namespace Qowaiv.UnitTests\r\n{\r\n    public partial class PostalCodeTest\r\n    {");
 
@@ -442,7 +442,7 @@ namespace Qowaiv.CodeGenerator.Generators
                                 // Comment
                                 testswriter.WriteLine("        /// <summary>Tests patterns that should not be valid for {0} ({1}).</summary>", name, key);
                                 // Method declaration
-                                testswriter.WriteLine("        [TestMethod]\r\n        public void IsNotValid_{0}_All()", key);
+                                testswriter.WriteLine("        [Test]\r\n        public void IsNotValid_{0}_All()", key);
                                 testswriter.WriteLine("        {");
                                 // Method Logic
                                 testswriter.WriteLine("            IsNotValid(Country.{0}, {1}, {2}, {3});", key, alpha.ToString().ToLowerInvariant(), prefix.ToString().ToLowerInvariant(), lenghts);

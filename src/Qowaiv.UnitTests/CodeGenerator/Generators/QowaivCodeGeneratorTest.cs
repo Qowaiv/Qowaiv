@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.CodeGenerator.Generators;
 using System.IO;
 using System.Linq;
@@ -9,10 +9,10 @@ using System.Collections.Generic;
 
 namespace Qowaiv.UnitTests.CodeGenerator.Generators
 {
-    [TestClass]
+    [TestFixture]
     public class QowaivCodeGeneratorTest
     {
-        [TestMethod]
+        [Test]
         public void Generate_Dir_Successful()
         {
             var gen = new QowaivCodeGenerator();

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
@@ -16,7 +16,7 @@ using Qowaiv;
 namespace Qowaiv.UnitTests
 {
     /// <summary>Tests the house number SVO.</summary>
-    [TestClass]
+    [TestFixture]
     public class HouseNumberTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -25,19 +25,19 @@ namespace Qowaiv.UnitTests
         #region house number const tests
 
         /// <summary>HouseNumber.Empty should be equal to the default of house number.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(HouseNumber), HouseNumber.Empty);
         }
 
-        [TestMethod]
+        [Test]
         public void MinValue_None_1()
         {
             Assert.AreEqual(HouseNumber.Create(1), HouseNumber.MinValue);
         }
 
-        [TestMethod]
+        [Test]
         public void MaxValue_None_999999999()
         {
             Assert.AreEqual(HouseNumber.Create(999999999), HouseNumber.MaxValue);
@@ -48,57 +48,57 @@ namespace Qowaiv.UnitTests
         #region house number IsEmpty tests
 
         /// <summary>HouseNumber.IsEmpty() should be true for the default of house number.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(HouseNumber).IsEmpty());
         }
         /// <summary>HouseNumber.IsEmpty() should be false for HouseNumber.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
             Assert.IsFalse(HouseNumber.Unknown.IsEmpty());
         }
         /// <summary>HouseNumber.IsEmpty() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
         /// <summary>HouseNumber.IsUnknown() should be false for the default of house number.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Default_IsFalse()
         {
             Assert.IsFalse(default(HouseNumber).IsUnknown());
         }
         /// <summary>HouseNumber.IsUnknown() should be true for HouseNumber.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(HouseNumber.Unknown.IsUnknown());
         }
         /// <summary>HouseNumber.IsUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
         /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for the default of house number.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
             Assert.IsTrue(default(HouseNumber).IsEmptyOrUnknown());
         }
         /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for HouseNumber.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(HouseNumber.Unknown.IsEmptyOrUnknown());
         }
         /// <summary>HouseNumber.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
@@ -109,7 +109,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             HouseNumber val;
@@ -121,7 +121,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             HouseNumber val;
@@ -133,7 +133,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse "?" should be valid and the result should be HouseNumber.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Questionmark_IsValid()
         {
             HouseNumber val;
@@ -145,7 +145,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             HouseNumber val;
@@ -157,7 +157,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             HouseNumber val;
@@ -168,7 +168,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -179,7 +179,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -193,7 +193,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -205,7 +205,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -221,7 +221,7 @@ namespace Qowaiv.UnitTests
 
         #region TryCreate tests
 
-        [TestMethod]
+        [Test]
         public void TryCreate_Null_IsEmpty()
         {
             HouseNumber exp = HouseNumber.Empty;
@@ -230,7 +230,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(HouseNumber.TryCreate(null, out act));
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_Int32MinValue_IsEmpty()
         {
             HouseNumber exp = HouseNumber.Empty;
@@ -240,14 +240,14 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void TryCreate_Int32MinValue_AreEqual()
         {
             var exp = HouseNumber.Empty;
             var act = HouseNumber.TryCreate(Int32.MinValue);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_Value_AreEqual()
         {
             var exp = TestStruct;
@@ -255,7 +255,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Create_Int32MinValue_ThrowsArgumentOutOfRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException
@@ -271,7 +271,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -282,7 +282,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -293,7 +293,7 @@ namespace Qowaiv.UnitTests
             });
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -305,7 +305,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -315,7 +315,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(123456789, info.GetInt32("Value"));
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = HouseNumberTest.TestStruct;
@@ -323,7 +323,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = HouseNumberTest.TestStruct;
@@ -331,7 +331,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = HouseNumberTest.TestStruct;
@@ -340,7 +340,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
             var input = new HouseNumberSerializeObject()
@@ -360,7 +360,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
             var input = new HouseNumberSerializeObject()
@@ -380,7 +380,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
             var input = new HouseNumberSerializeObject()
@@ -401,7 +401,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new HouseNumberSerializeObject()
@@ -421,7 +421,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new HouseNumberSerializeObject()
@@ -442,7 +442,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -453,7 +453,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<HouseNumber>();
@@ -462,7 +462,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -471,7 +471,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid house number");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<HouseNumber>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -480,7 +480,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AreEqual()
         {
             var act = JsonTester.Read<HouseNumber>((Int64)TestStruct);
@@ -489,7 +489,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
             var act = JsonTester.Read<HouseNumber>((Double)TestStruct);
@@ -498,7 +498,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -508,7 +508,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(HouseNumber));
@@ -516,7 +516,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -529,21 +529,21 @@ namespace Qowaiv.UnitTests
 
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_IsStringEmpty()
         {
             var act = HouseNumber.Empty.ToString();
             var exp = "";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_Unknown_QuestionMark()
         {
             var act = HouseNumber.Unknown.ToString();
             var exp = "?";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -551,7 +551,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
             var act = TestStruct.ToString("");
@@ -559,7 +559,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -570,7 +570,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -581,7 +581,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueSpanishEcuador_AreEqual()
         {
             var act = HouseNumber.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
@@ -589,24 +589,24 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(HouseNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("HouseNumber: (empty)", default(HouseNumber));
         }
-        [TestMethod]
+        [Test]
         public void DebugToString_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("HouseNumber: (unknown)", HouseNumber.Unknown);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("HouseNumber: 123456789", TestStruct);
@@ -617,62 +617,62 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for HouseNumber.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, HouseNumber.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(123456789, HouseNumberTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(HouseNumber.Empty.Equals(HouseNumber.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(HouseNumberTest.TestStruct.Equals(HouseNumberTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(HouseNumberTest.TestStruct.Equals(HouseNumber.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(HouseNumber.Empty.Equals(HouseNumberTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(HouseNumberTest.TestStruct.Equals((object)HouseNumberTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(HouseNumberTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(HouseNumberTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = HouseNumberTest.TestStruct;
@@ -680,7 +680,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = HouseNumberTest.TestStruct;
@@ -693,7 +693,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of house numbers ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_HouseNumber_AreEqual()
         {
             HouseNumber item0 = 1;
@@ -709,7 +709,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of house numbers descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_HouseNumber_AreEqual()
         {
             HouseNumber item0 = 1;
@@ -725,7 +725,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -737,7 +737,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -751,7 +751,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -765,7 +765,7 @@ namespace Qowaiv.UnitTests
             );
         }
 
-        [TestMethod]
+        [Test]
         public void LessThan_17LT19_IsTrue()
         {
             HouseNumber l = 17;
@@ -773,7 +773,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l < r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
             HouseNumber l = 21;
@@ -782,7 +782,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l > r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
             HouseNumber l = 17;
@@ -790,7 +790,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
             HouseNumber l = 21;
@@ -799,7 +799,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l >= r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
             HouseNumber l = 17;
@@ -807,7 +807,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
             HouseNumber l = 21;
@@ -819,7 +819,7 @@ namespace Qowaiv.UnitTests
 
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToHouseNumber_AreEqual()
         {
             var exp = TestStruct;
@@ -827,7 +827,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_HouseNumberToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -837,7 +837,7 @@ namespace Qowaiv.UnitTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Explicit_Int32ToHouseNumber_AreEqual()
         {
             var exp = TestStruct;
@@ -845,7 +845,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_HouseNumberToInt32_AreEqual()
         {
             var exp = 123456789;
@@ -857,50 +857,50 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void IsOdd_Empty_IsFalse()
         {
             Assert.IsFalse(HouseNumber.Empty.IsOdd);
         }
 
-        [TestMethod]
+        [Test]
         public void IsOdd_Unknown_IsFalse()
         {
             Assert.IsFalse(HouseNumber.Unknown.IsOdd);
         }
 
-        [TestMethod]
+        [Test]
         public void IsOdd_TestStruct_IsTrue()
         {
             Assert.IsTrue(TestStruct.IsOdd);
         }
 
-        [TestMethod]
+        [Test]
         public void IsEven_Empty_IsFalse()
         {
             Assert.IsFalse(HouseNumber.Empty.IsEven);
         }
 
-        [TestMethod]
+        [Test]
         public void IsEven_Unknown_IsFalse()
         {
             Assert.IsFalse(HouseNumber.Unknown.IsEven);
         }
 
-        [TestMethod]
+        [Test]
         public void IsEven_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEven);
         }
 
-        [TestMethod]
+        [Test]
         public void IsEven_1234_IsTrue()
         {
             Assert.IsTrue(HouseNumber.Create(1234).IsEven);
         }
 
 
-        [TestMethod]
+        [Test]
         public void Length_Empty_0()
         {
             var act = HouseNumber.Empty.Length;
@@ -908,7 +908,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Length_Unknown_0()
         {
             var act = HouseNumber.Unknown.Length;
@@ -916,7 +916,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Length_TestStruct_9()
         {
             var act = TestStruct.Length;
@@ -924,7 +924,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Length_1234_4()
         {
             var act = HouseNumber.Create(1234).Length;
@@ -935,36 +935,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_HouseNumber_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(HouseNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_HouseNumber_IsTrue()
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(HouseNumber), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_HouseNumber_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(HouseNumber), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_HouseNumber_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(HouseNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_HouseNumber_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(HouseNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_HouseNumberEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -973,7 +973,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_HouseNumberEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -982,7 +982,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
             using (new CultureInfoScope("en-GB"))
@@ -991,7 +991,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1004,7 +1004,7 @@ namespace Qowaiv.UnitTests
 
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(HouseNumber.IsValid("1234567890"), "1234567890");
@@ -1013,7 +1013,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsFalse(HouseNumber.IsValid((System.Int32?)null), "(System.Int32?)null");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(HouseNumber.IsValid("123456"));

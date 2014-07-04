@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
@@ -16,7 +16,7 @@ using Qowaiv;
 namespace Qowaiv.UnitTests
 {
     /// <summary>Tests the month SVO.</summary>
-    [TestClass]
+    [TestFixture]
     public class MonthTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -25,7 +25,7 @@ namespace Qowaiv.UnitTests
         #region month const tests
 
         /// <summary>Month.Empty should be equal to the default of month.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(Month), Month.Empty);
@@ -36,57 +36,57 @@ namespace Qowaiv.UnitTests
         #region month IsEmpty tests
 
         /// <summary>Month.IsEmpty() should be true for the default of month.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(Month).IsEmpty());
         }
         /// <summary>Month.IsEmpty() should be false for Month.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
             Assert.IsFalse(Month.Unknown.IsEmpty());
         }
         /// <summary>Month.IsEmpty() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
         /// <summary>Month.IsUnknown() should be false for the default of month.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Default_IsFalse()
         {
             Assert.IsFalse(default(Month).IsUnknown());
         }
         /// <summary>Month.IsUnknown() should be true for Month.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(Month.Unknown.IsUnknown());
         }
         /// <summary>Month.IsUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
         /// <summary>Month.IsEmptyOrUnknown() should be true for the default of month.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
             Assert.IsTrue(default(Month).IsEmptyOrUnknown());
         }
         /// <summary>Month.IsEmptyOrUnknown() should be true for Month.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(Month.Unknown.IsEmptyOrUnknown());
         }
         /// <summary>Month.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
@@ -97,7 +97,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             Month val;
@@ -109,7 +109,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             Month val;
@@ -121,7 +121,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse "?" should be valid and the result should be Month.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Questionmark_IsValid()
         {
             Month val;
@@ -133,7 +133,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             Month val;
@@ -145,7 +145,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             Month val;
@@ -156,7 +156,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
         
-        [TestMethod]
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -167,7 +167,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -181,7 +181,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -193,7 +193,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_NullCulture_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -206,7 +206,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -222,7 +222,7 @@ namespace Qowaiv.UnitTests
       
         #region TryCreate tests
 
-        [TestMethod]
+        [Test]
         public void TryCreate_Null_IsEmpty()
         {
             Month exp = Month.Empty;
@@ -231,7 +231,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(Month.TryCreate(null, out act));
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_ByteMinValue_IsEmpty()
         {
             Month exp = Month.Empty;
@@ -241,14 +241,14 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void TryCreate_ByteMinValue_AreEqual()
         {
             var exp = Month.Empty;
             var act = Month.TryCreate(Byte.MinValue);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_Value_AreEqual()
         {
             var exp = TestStruct;
@@ -256,7 +256,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Create_ByteMinValue_ThrowsArgumentOutOfRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException
@@ -272,7 +272,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-		[TestMethod]
+		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.ExpectArgumentNullException
@@ -283,7 +283,7 @@ namespace Qowaiv.UnitTests
 			"info");
 		}
 		
-		[TestMethod]
+		[Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -294,7 +294,7 @@ namespace Qowaiv.UnitTests
             });
         }
 		
-		[TestMethod]
+		[Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -306,7 +306,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 		
-		[TestMethod]
+		[Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -316,7 +316,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual((Byte)2, info.GetByte("Value"));
         }
 		
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = MonthTest.TestStruct;
@@ -324,7 +324,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = MonthTest.TestStruct;
@@ -332,7 +332,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = MonthTest.TestStruct;
@@ -341,7 +341,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_MonthSerializeObject_AreEqual()
         {
             var input = new MonthSerializeObject()
@@ -361,7 +361,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_MonthSerializeObject_AreEqual()
         {
             var input = new MonthSerializeObject()
@@ -381,7 +381,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_MonthSerializeObject_AreEqual()
         {
             var input = new MonthSerializeObject()
@@ -402,7 +402,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new MonthSerializeObject()
@@ -422,7 +422,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new  MonthSerializeObject()
@@ -443,7 +443,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -454,7 +454,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<Month>();
@@ -463,7 +463,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -472,7 +472,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid month");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<Month>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -481,7 +481,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AreEqual()
         {
             var act = JsonTester.Read<Month>((Int64)TestStruct);
@@ -490,7 +490,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
             var act = JsonTester.Read<Month>((Double)TestStruct);
@@ -499,7 +499,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -509,7 +509,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(Month));
@@ -517,7 +517,7 @@ namespace Qowaiv.UnitTests
             
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -530,7 +530,7 @@ namespace Qowaiv.UnitTests
         
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_StringEmpty()
         {
             var act = Month.Empty.ToString();
@@ -538,7 +538,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Unknown_QuestionMark()
         {
             var act = Month.Unknown.ToString();
@@ -546,7 +546,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -555,7 +555,7 @@ namespace Qowaiv.UnitTests
         Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void ToString_TestStructf_FormattedString()
         {
             using (new CultureInfoScope(CultureInfo.InvariantCulture))
@@ -566,7 +566,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructs_FormattedString()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -577,7 +577,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructM_FormattedString()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -588,7 +588,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructm_FormattedString()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -599,7 +599,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Emptym_FormattedString()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -610,25 +610,25 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(Month));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("Month: (empty)", default(Month));
         }
       
-        [TestMethod]
+        [Test]
         public void DebugToString_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("Month: (unknown)", Month.Unknown);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("Month: February (02)", TestStruct);
@@ -639,26 +639,26 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for Month.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, Month.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(2, MonthTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(Month.Empty.Equals(Month.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = Month.Parse("February", CultureInfo.InvariantCulture);
@@ -667,43 +667,43 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(MonthTest.TestStruct.Equals(MonthTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(MonthTest.TestStruct.Equals(Month.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(Month.Empty.Equals(MonthTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(MonthTest.TestStruct.Equals((object)MonthTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(MonthTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(MonthTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = MonthTest.TestStruct;
@@ -711,7 +711,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = MonthTest.TestStruct;
@@ -724,7 +724,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of months ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_Month_AreEqual()
         {
             var item0 = Month.January;
@@ -740,7 +740,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of months descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_Month_AreEqual()
         {
             var item0 = Month.January;
@@ -756,7 +756,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -768,7 +768,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -782,7 +782,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -796,7 +796,7 @@ namespace Qowaiv.UnitTests
             );
         }
 
-        [TestMethod]
+        [Test]
         public void LessThan_17LT19_IsTrue()
         {
             Month l = 7;
@@ -804,7 +804,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l < r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
             Month l = 2;
@@ -813,7 +813,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l > r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
             Month l = 7;
@@ -821,7 +821,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
             Month l = 2;
@@ -830,7 +830,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l >= r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
             Month l = 7;
@@ -838,7 +838,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
             Month l = 12;
@@ -850,7 +850,7 @@ namespace Qowaiv.UnitTests
         
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToMonth_AreEqual()
         {
             var exp = TestStruct;
@@ -858,7 +858,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_MonthToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -871,7 +871,7 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void FullName_Empty_AreEqual()
         {
             using(new CultureInfoScope("es-EC"))
@@ -882,7 +882,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FullName_Unknown_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -893,7 +893,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void FullName_TestStruct_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -904,7 +904,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ShortName_Empty_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -915,7 +915,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ShortName_Unknown_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -926,7 +926,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ShortName_TestStruct_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -942,7 +942,7 @@ namespace Qowaiv.UnitTests
 
         #region Methods
 
-        [TestMethod]
+        [Test]
         public void GetFullName_Empty_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -953,7 +953,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void GetShortName_Empty_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -968,36 +968,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_Month_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(Month));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_Month_IsTrue()
         {
         TypeConverterAssert.CanNotConvertFrom(typeof(Month), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_Month_IsTrue()
         {
         TypeConverterAssert.CanNotConvertTo(typeof(Month), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_Month_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(Month));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_Month_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(Month));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_MonthEmpty()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -1006,7 +1006,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_MonthEmpty()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -1015,7 +1015,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -1024,7 +1024,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -1037,7 +1037,7 @@ namespace Qowaiv.UnitTests
       
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(Month.IsValid("0"), "0");
@@ -1046,7 +1046,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsFalse(Month.IsValid((System.Byte?)null), "(System.Byte?)null");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(Month.IsValid("April"));

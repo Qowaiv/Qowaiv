@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.CodeGenerator.Xml;
 using Qowaiv.UnitTests.TestTools;
 
 namespace Qowaiv.UnitTests.SvoGenerator.Xml
 {
-    [TestClass]
+    [TestFixture]
     public class XResourceFileDataTest
     {
-        [TestMethod]
+        [Test]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -20,7 +20,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
             "name");
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_NoComment_HasResult()
         {
             var val = new XResourceFileData("KEY0", "VALUE0");
@@ -28,7 +28,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
             DebuggerDisplayAssert.HasResult("Data, Name: KEY0, Value: 'VALUE0'", val);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_WithComment_HasResult()
         {
             var val = new XResourceFileData("KEY1", "VALUE1", "With comment.");

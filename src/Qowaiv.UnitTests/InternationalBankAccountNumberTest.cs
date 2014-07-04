@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Globalization;
 using Qowaiv.UnitTests.Json;
@@ -12,7 +12,7 @@ using Qowaiv.UnitTests.TestTools.Formatting;
 
 namespace Qowaiv.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class InternationalBankAccountNumberTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -21,7 +21,7 @@ namespace Qowaiv.UnitTests
         #region IBAN const tests
 
         /// <summary>InternationalBankAccountNumber.Empty should be equal to the default of IBAN.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(InternationalBankAccountNumber), InternationalBankAccountNumber.Empty);
@@ -32,14 +32,14 @@ namespace Qowaiv.UnitTests
         #region IBAN IsEmpty tests
 
         /// <summary>InternationalBankAccountNumber.IsEmpty() should true for the default of IBAN.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(InternationalBankAccountNumber).IsEmpty());
         }
 
         /// <summary>InternationalBankAccountNumber.IsEmpty() should false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
@@ -50,7 +50,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             InternationalBankAccountNumber val;
@@ -62,7 +62,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             InternationalBankAccountNumber val;
@@ -74,7 +74,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             InternationalBankAccountNumber val;
@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_QuestionMark_IsValid()
         {
             InternationalBankAccountNumber val;
@@ -99,7 +99,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             InternationalBankAccountNumber val;
@@ -110,7 +110,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -124,7 +124,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -136,7 +136,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -152,7 +152,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-		[TestMethod]
+		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.ExpectArgumentNullException
@@ -163,7 +163,7 @@ namespace Qowaiv.UnitTests
 			"info");
 		}
 		
-		[TestMethod]
+		[Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -174,7 +174,7 @@ namespace Qowaiv.UnitTests
             });
         }
 		
-		[TestMethod]
+		[Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -186,7 +186,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 	
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = InternationalBankAccountNumberTest.TestStruct;
@@ -194,7 +194,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = InternationalBankAccountNumberTest.TestStruct;
@@ -202,7 +202,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = InternationalBankAccountNumberTest.TestStruct;
@@ -211,7 +211,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
         {
             var input = new InternationalBankAccountNumberSerializeObject()
@@ -231,7 +231,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
         {
             var input = new InternationalBankAccountNumberSerializeObject()
@@ -251,7 +251,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
         {
             var input = new InternationalBankAccountNumberSerializeObject()
@@ -272,7 +272,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new InternationalBankAccountNumberSerializeObject()
@@ -292,7 +292,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new  InternationalBankAccountNumberSerializeObject()
@@ -313,7 +313,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -324,7 +324,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<InternationalBankAccountNumber>();
@@ -333,7 +333,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
     
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -342,7 +342,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid IBAN");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<InternationalBankAccountNumber>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -351,7 +351,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -361,7 +361,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from an integer is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -371,7 +371,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a number is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -381,7 +381,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(InternationalBankAccountNumber));
@@ -389,7 +389,7 @@ namespace Qowaiv.UnitTests
             
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -402,7 +402,7 @@ namespace Qowaiv.UnitTests
         
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_IsStringEmpty()
         {
             var act = InternationalBankAccountNumber.Empty.ToString();
@@ -410,7 +410,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -419,7 +419,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Unknown_IsStringEmpty()
         {
             var act = InternationalBankAccountNumber.Unknown.ToString("", null);
@@ -427,7 +427,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStruct_AreEqual()
         {
             var act = TestStruct.ToString();
@@ -435,42 +435,42 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatu_AreEqual()
         {
             var act = TestStruct.ToString("u");
             var exp = "nl20ingb0001234567";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatU_AreEqual()
         {
             var act = TestStruct.ToString("U");
             var exp = "NL20INGB0001234567";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatf_AreEqual()
         {
             var act = TestStruct.ToString("f");
             var exp = "nl20 ingb 0001 2345 67";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_TestStructFormatF_AreEqual()
         {
             var act = TestStruct.ToString("F");
             var exp = "NL20 INGB 0001 2345 67";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_EmptyFormatF_AreEqual()
         {
             var act = InternationalBankAccountNumber.Empty.ToString("F");
             var exp = "";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_UnknownFormatF_AreEqual()
         {
             var act = InternationalBankAccountNumber.Unknown.ToString("F");
@@ -478,24 +478,24 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
         DebuggerDisplayAssert.HasAttribute(typeof(InternationalBankAccountNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("IBAN: (empty)", default(InternationalBankAccountNumber));
         }
-        [TestMethod]
+        [Test]
         public void DebugToString_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("IBAN: (unknown)", InternationalBankAccountNumber.Unknown);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("IBAN: NL20 INGB 0001 2345 67", TestStruct);
@@ -506,26 +506,26 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for InternationalBankAccountNumber.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, InternationalBankAccountNumber.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(328152589, InternationalBankAccountNumberTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.Empty.Equals(InternationalBankAccountNumber.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = InternationalBankAccountNumber.Parse("NL20 INGB 0001 2345 67");
@@ -534,43 +534,43 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumberTest.TestStruct.Equals(InternationalBankAccountNumberTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumberTest.TestStruct.Equals(InternationalBankAccountNumber.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.Empty.Equals(InternationalBankAccountNumberTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumberTest.TestStruct.Equals((object)InternationalBankAccountNumberTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumberTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumberTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = InternationalBankAccountNumberTest.TestStruct;
@@ -578,7 +578,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = InternationalBankAccountNumberTest.TestStruct;
@@ -591,7 +591,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of IBANs ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_InternationalBankAccountNumber_AreEqual()
         {
             var item0 = InternationalBankAccountNumber.Parse("AE950210000000693123456");
@@ -607,7 +607,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of IBANs descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_InternationalBankAccountNumber_AreEqual()
         {
             var item0 = InternationalBankAccountNumber.Parse("AE950210000000693123456");
@@ -623,7 +623,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -635,7 +635,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -649,7 +649,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -666,7 +666,7 @@ namespace Qowaiv.UnitTests
         
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToInternationalBankAccountNumber_AreEqual()
         {
             var exp = TestStruct;
@@ -674,7 +674,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_InternationalBankAccountNumberToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -687,21 +687,21 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void Length_DefaultValue_0()
         {
             var exp = 0;
             var act = InternationalBankAccountNumber.Empty.Length;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Length_Unknown_0()
         {
             var exp = 0;
             var act = InternationalBankAccountNumber.Unknown.Length;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Length_TestStruct_IntValue()
         {
             var exp = 18;
@@ -710,21 +710,21 @@ namespace Qowaiv.UnitTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Country_Empty_Null()
         {
             var exp = Country.Empty;
             var act = InternationalBankAccountNumber.Empty.Country;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Country_Unknown_Null()
         {
             var exp = Country.Unknown;
             var act = InternationalBankAccountNumber.Unknown.Country;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Country_TestStruct_Null()
         {
             var exp = Country.NL;
@@ -736,36 +736,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_InternationalBankAccountNumber_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(InternationalBankAccountNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_InternationalBankAccountNumber_IsTrue()
         {
         TypeConverterAssert.CanNotConvertFrom(typeof(InternationalBankAccountNumber), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_InternationalBankAccountNumber_IsTrue()
         {
         TypeConverterAssert.CanNotConvertTo(typeof(InternationalBankAccountNumber), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_InternationalBankAccountNumber_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(InternationalBankAccountNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_InternationalBankAccountNumber_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(InternationalBankAccountNumber));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_InternationalBankAccountNumberEmpty()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -774,7 +774,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_InternationalBankAccountNumberEmpty()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -783,7 +783,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -792,7 +792,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -805,466 +805,466 @@ namespace Qowaiv.UnitTests
        
         #region IsValid tests
         
-        [TestMethod]
+        [Test]
         public void IsValid_NullValues_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid(String.Empty), "String.Empty");
             Assert.IsFalse(InternationalBankAccountNumber.IsValid((String)null), "(String)null");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_QuestionMark_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("?"), "String.Empty");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_XX_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX950210000000693123456"), "Not existing country.");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_Null_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid(null));
         }
-        [TestMethod]
+        [Test]
         public void IsValid_StringEmpty_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid(""));
         }
 
         // To Short.
-        [TestMethod]
+        [Test]
         public void IsValid_NL20INGB007_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB007"));
         }
 
         // Wrong pattern
-        [TestMethod]
+        [Test]
         public void IsValid_WilhelmusVanNassau_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("Wilhelmus van Nassau"));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_NLWrongSubpattern_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB000123456Z"));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_XXNonExistentCountry_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX20INGB0001234567"));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_USCountryWithoutPattern_IsFalse()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("US20INGB0001234567"));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_StrangeSpacing_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("NL20  INGB000	123 4567"));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_AE_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AE950210000000693123456"), "United Arab Emirates");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AE95 0210 0000 0069 3123 456"), "United Arab Emirates Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_AL_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AL47212110090000000235698741"), "Albania");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AL47 2121 1009 0000 0002 3569 8741"), "Albania Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_AD_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AD1200012030200359100100"), "Andorra");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AD12 0001 2030 2003 5910 0100"), "Andorra Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_AT_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AT611904300234573201"), "Austria");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("AT61 1904 3002 3457 3201"), "Austria Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_BA_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BA391290079401028494"), "Bosnia and Herzegovina");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BA39 1290 0794 0102 8494"), "Bosnia and Herzegovina Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_BE_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BE43068999999501"), "Belgium");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BE43 0689 9999 9501"), "Belgium Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_BG_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BG80BNBG96611020345678"), "Bulgaria");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BG80 BNBG 9661 1020 3456 78"), "Bulgaria Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_BH_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BH29BMAG1299123456BH00"), "Bahrain");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("BH29 BMAG 1299 1234 56BH 00"), "Bahrain Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_CH_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("CH3608387000001080173"), "Switzerland");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("CH36 0838 7000 0010 8017 3"), "Switzerland Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_CY_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("CY17002001280000001200527600"), "Cyprus");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("CY17 0020 0128 0000 0012 0052 7600"), "Cyprus Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_CZ_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("CZ6508000000192000145399"), "Czech Republic");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("CZ65 0800 0000 1920 0014 5399"), "Czech Republic Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_DE_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("DE68210501700012345678"), "Germany");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("DE68 2105 0170 0012 3456 78"), "Germany Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_DK_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("DK5000400440116243"), "Denmark");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("DK50 0040 0440 1162 43"), "Denmark Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_DO_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("DO28BAGR00000001212453611324"), "Dominican Republic");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("DO28 BAGR 0000 0001 2124 5361 1324"), "Dominican Republic Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_EE_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("EE382200221020145685"), "Estonia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("EE38 2200 2210 2014 5685"), "Estonia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_ES_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("ES9121000418450200051332"), "Spain");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("ES91 2100 0418 4502 0005 1332"), "Spain Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_FI_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("FI2112345600000785"), "Finland");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("FI21 1234 5600 0007 85"), "Finland Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_FO_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("FO2000400440116243"), "Faroe Islands");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("FO20 0040 0440 1162 43"), "Faroe Islands Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_FR_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("FR1420041010050500013M02606"), "Frankrijk");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("FR14 2004 1010 0505 0001 3M02 606"), "Frankrijk Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_GB_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GB82WEST12345698765432"), "United Kingdom");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GB82 WEST 1234 5698 7654 32"), "United Kingdom Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_GE_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GE29NB0000000101904917"), "Georgia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GE29 NB00 0000 0101 9049 17"), "Georgia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_GI_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GI75NWBK000000007099453"), "Gibraltar");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GI75 NWBK 0000 0000 7099 453"), "Gibraltar Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_GL_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GL2000400440116243"), "Greenland");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GL20 0040 0440 1162 43"), "Greenland Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_GR_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GR1601101250000000012300695"), "Greece");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("GR16 0110 1250 0000 0001 2300 695"), "Greece Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_HR_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("HR1210010051863000160"), "United Kingdom");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("HR12 1001 0051 8630 0016 0"), "United Kingdom Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_HU_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("HU42117730161111101800000000"), "Hungary");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("HU42 1177 3016 1111 1018 0000 0000"), "Hungary Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_IE_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IE29AIBK93115212345678"), "Ireland");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IE29 AIBK 9311 5212 3456 78"), "Ireland Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_IL_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IL620108000000099999999"), "Israel");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IL62 0108 0000 0009 9999 999"), "Israel Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_IS_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IS140159260076545510730339"), "Iceland");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IS14 0159 2600 7654 5510 7303 39"), "Iceland Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_IT_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IT60X0542811101000000123456"), "Italy");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("IT60 X054 2811 1010 0000 0123 456"), "Italy Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_KW_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("KW81CBKU0000000000001234560101"), "Kuwait");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("KW81 CBKU 0000 0000 0000 1234 5601 01"), "Kuwait Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_KZ_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("KZ75125KZT2069100100"), "Kazakhstan");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("KZ75 125K ZT20 6910 0100"), "Kazakhstan Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_LB_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LB30099900000001001925579115"), "Lebanon");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LB30 0999 0000 0001 0019 2557 9115"), "Lebanon Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_LI_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LI21088100002324013AA"), "Liechtenstein");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LI21 0881 0000 2324 013A A"), "Liechtenstein Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_LT_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LT121000011101001000"), "Lithuania");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LT12 1000 0111 0100 1000"), "Lithuania Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_LU_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LU280019400644750000"), "Luxembourg");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LU28 0019 4006 4475 0000"), "Luxembourg Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_LV_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LV80BANK0000435195001"), "Latvia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("LV80 BANK 0000 4351 9500 1"), "Latvia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_MC_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MC1112739000700011111000H79"), "Monaco");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MC11 1273 9000 7000 1111 1000 H79"), "Monaco Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_ME_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("ME25505000012345678951"), "Montenegro");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("ME25 5050 0001 2345 6789 51"), "Montenegro Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_MK_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MK07250120000058984"), "Macedonia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MK07 2501 2000 0058 984"), "Macedonia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_MR_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MR1300020001010000123456753"), "Mauritania");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MR13 0002 0001 0100 0012 3456 753"), "Mauritania Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_MT_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MT84MALT011000012345MTLCAST001S"), "Malta");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MT84 MALT 0110 0001 2345 MTLC AST0 01S"), "Malta Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_MU_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MU17BOMM0101101030300200000MUR"), "Mauritius");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("MU17 BOMM 0101 1010 3030 0200 000M UR"), "Mauritius Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_NL20INGB0001234567_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("NL20INGB0001234567"), "Unformatted");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("NL20 INGB 0001 2345 67"), "Formatted");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_NL44RABO0123456789_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("NL44RABO0123456789"), "Unformatted");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("NL44 RABO 0123 4567 89"), "Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_NO_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("NO9386011117947"), "Norway");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("NO93 8601 1117 947"), "Norway Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_PL_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("PL61109010140000071219812874"), "Poland");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("PL61 1090 1014 0000 0712 1981 2874"), "Poland Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_PT_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("PT50000201231234567890154"), "Portugal");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("PT50 0002 0123 1234 5678 9015 4"), "Portugal Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_RO_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("RO49AAAA1B31007593840000"), "Romania");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("RO49 AAAA 1B31 0075 9384 0000"), "Romania Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_RS_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("RS35260005601001611379"), "Romania");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("RS35 2600 0560 1001 6113 79"), "Romania Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_SA_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SA8440000108054011730013"), "Saudi Arabia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SA84 4000 0108 0540 1173 0013"), "Saudi Arabia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_SE_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SE3550000000054910000003"), "Sweden");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SE35 5000 0000 0549 1000 0003"), "Sweden Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_SI_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SI56191000000123438"), "Slovenia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SI56 1910 0000 0123 438"), "Slovenia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_SK_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SK3112000000198742637541"), "Slovakia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SK31 1200 0000 1987 4263 7541"), "Slovakia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_SM_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SM86U0322509800000000270100"), "San Marino");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("SM86 U032 2509 8000 0000 0270 100"), "San Marino Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_TN_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("TN5910006035183598478831"), "Tunisia");
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("TN59 1000 6035 1835 9847 8831"), "Tunisia Formatted");
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_TR_IsTrue()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("TR330006100519786457841326"), "Turkey");

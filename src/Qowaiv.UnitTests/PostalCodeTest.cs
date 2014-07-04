@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -48,7 +48,7 @@ namespace Qowaiv.UnitTests
     ///     IsValid("ZZ2037570044WK", country); //Not
     /// </example>
     /// </remarks>
-    [TestClass]
+    [TestFixture]
     public partial class PostalCodeTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -57,7 +57,7 @@ namespace Qowaiv.UnitTests
         #region postal code const tests
 
         /// <summary>PostalCode.Empty should be equal to the default of postal code.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(PostalCode), PostalCode.Empty);
@@ -68,57 +68,57 @@ namespace Qowaiv.UnitTests
         #region postal code IsEmpty tests
 
         /// <summary>PostalCode.IsEmpty() should be true for the default of postal code.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(PostalCode).IsEmpty());
         }
         /// <summary>PostalCode.IsEmpty() should be false for PostalCode.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
             Assert.IsFalse(PostalCode.Unknown.IsEmpty());
         }
         /// <summary>PostalCode.IsEmpty() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
         /// <summary>PostalCode.IsUnknown() should be false for the default of postal code.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Default_IsFalse()
         {
             Assert.IsFalse(default(PostalCode).IsUnknown());
         }
         /// <summary>PostalCode.IsUnknown() should be true for PostalCode.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(PostalCode.Unknown.IsUnknown());
         }
         /// <summary>PostalCode.IsUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
         /// <summary>PostalCode.IsEmptyOrUnknown() should be true for the default of postal code.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
             Assert.IsTrue(default(PostalCode).IsEmptyOrUnknown());
         }
         /// <summary>PostalCode.IsEmptyOrUnknown() should be true for PostalCode.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(PostalCode.Unknown.IsEmptyOrUnknown());
         }
         /// <summary>PostalCode.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
@@ -129,7 +129,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             PostalCode val;
@@ -141,7 +141,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             PostalCode val;
@@ -153,7 +153,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             PostalCode val;
@@ -165,7 +165,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             PostalCode val;
@@ -176,7 +176,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -186,7 +186,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -200,7 +200,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -212,7 +212,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -228,7 +228,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -239,7 +239,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -250,7 +250,7 @@ namespace Qowaiv.UnitTests
             });
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -262,7 +262,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -272,7 +272,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(TestStruct.ToString(), info.GetString("Value"));
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = PostalCodeTest.TestStruct;
@@ -280,7 +280,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = PostalCodeTest.TestStruct;
@@ -288,7 +288,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = PostalCodeTest.TestStruct;
@@ -297,7 +297,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
             var input = new PostalCodeSerializeObject()
@@ -317,7 +317,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
             var input = new PostalCodeSerializeObject()
@@ -337,7 +337,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
             var input = new PostalCodeSerializeObject()
@@ -358,7 +358,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new PostalCodeSerializeObject()
@@ -378,7 +378,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new PostalCodeSerializeObject()
@@ -399,7 +399,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -410,7 +410,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<PostalCode>();
@@ -419,7 +419,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -428,7 +428,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid postal code");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<PostalCode>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -437,7 +437,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -447,7 +447,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from an integer is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -457,7 +457,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a number is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -467,7 +467,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(PostalCode));
@@ -475,7 +475,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -488,7 +488,7 @@ namespace Qowaiv.UnitTests
 
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_IsStringEmpty()
         {
             var act = PostalCode.Empty.ToString();
@@ -496,7 +496,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_EmptyCA_IsStringEmpty()
         {
             var act = PostalCode.Empty.ToString("CA");
@@ -504,7 +504,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Unknown_IsQuestionMark()
         {
             var act = PostalCode.Unknown.ToString();
@@ -512,7 +512,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_UnknownCA_IsQuestionMark()
         {
             var act = PostalCode.Unknown.ToString("CA");
@@ -520,7 +520,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -529,7 +529,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_TestStructCA_ComplexPattern()
         {
             var act = TestStruct.ToString("CA");
@@ -538,7 +538,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <remarks>No valid for the Netherlands.</summary>
-        [TestMethod]
+        [Test]
         public void ToString_TestStructNL_ComplexPattern()
         {
             var act = TestStruct.ToString(Country.NL);
@@ -547,7 +547,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <remarks>No postal code in Somalia.</summary>
-        [TestMethod]
+        [Test]
         public void ToString_TestStructSO_ComplexPattern()
         {
             var act = TestStruct.ToString(Country.SO);
@@ -556,7 +556,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <remarks>No formatting in Albania.</summary>
-        [TestMethod]
+        [Test]
         public void ToString_TestStructAL_ComplexPattern()
         {
             var act = TestStruct.ToString(Country.AL);
@@ -564,7 +564,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_AD765AD_ComplexPattern()
         {
             var postalcode = PostalCode.Parse("AD765");
@@ -573,7 +573,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_765AD_ComplexPattern()
         {
             var postalcode = PostalCode.Parse("765");
@@ -582,19 +582,19 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(PostalCode));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("PostalCode: (empty)", default(PostalCode));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("PostalCode: H0H0H0", TestStruct);
@@ -605,26 +605,26 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for PostalCode.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, PostalCode.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(-896925736, PostalCodeTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(PostalCode.Empty.Equals(PostalCode.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = PostalCode.Parse("H0 H0 H0-", CultureInfo.InvariantCulture);
@@ -633,43 +633,43 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(PostalCodeTest.TestStruct.Equals(PostalCodeTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(PostalCodeTest.TestStruct.Equals(PostalCode.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(PostalCode.Empty.Equals(PostalCodeTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(PostalCodeTest.TestStruct.Equals((object)PostalCodeTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(PostalCodeTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(PostalCodeTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = PostalCodeTest.TestStruct;
@@ -677,7 +677,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = PostalCodeTest.TestStruct;
@@ -690,7 +690,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of postal codes ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_PostalCode_AreEqual()
         {
             var item0 = PostalCode.Parse("012");
@@ -706,7 +706,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of postal codes descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_PostalCode_AreEqual()
         {
             var item0 = PostalCode.Parse("012");
@@ -722,7 +722,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -734,7 +734,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -748,7 +748,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -765,7 +765,7 @@ namespace Qowaiv.UnitTests
 
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToPostalCode_AreEqual()
         {
             var exp = TestStruct;
@@ -773,7 +773,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_PostalCodeToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -786,14 +786,14 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void Length_DefaultValue_0()
         {
             var exp = 0;
             var act = PostalCode.Empty.Length;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Length_TestStruct_IntValue()
         {
             var exp = 6;
@@ -804,36 +804,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_PostalCode_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(PostalCode));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_PostalCode_IsTrue()
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(PostalCode), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_PostalCode_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(PostalCode), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_PostalCode_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(PostalCode));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_PostalCode_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(PostalCode));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_PostalCodeEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -842,7 +842,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_PostalCodeEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -851,7 +851,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
             using (new CultureInfoScope("en-GB"))
@@ -860,7 +860,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -873,7 +873,7 @@ namespace Qowaiv.UnitTests
 
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(PostalCode.IsValid("1"), "1");
@@ -882,34 +882,34 @@ namespace Qowaiv.UnitTests
             Assert.IsFalse(PostalCode.IsValid(String.Empty), "String.Empty");
         }
         
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(PostalCode.IsValid("1234AB"));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_EmptyCA_IsFalse()
         {
             Assert.IsFalse(PostalCode.Empty.IsValid(Country.CA));
         }
-        [TestMethod]
+        [Test]
         public void IsValid_UnknownCA_IsFalse()
         {
             Assert.IsFalse(PostalCode.Unknown.IsValid(Country.CA));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_TestStructCA_IsTrue()
         {
             Assert.IsTrue(TestStruct.IsValid(Country.CA));
         }
-        [TestMethod]
+        [Test]
         public void IsValid_TestStructBE_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsValid(Country.BE));
         }
-        [TestMethod]
+        [Test]
         public void IsValidFor_TestStruct_1Country()
         {
             var act = TestStruct.IsValidFor().ToArray();
@@ -919,7 +919,7 @@ namespace Qowaiv.UnitTests
             CollectionAssert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidFor_0123456_3Countries()
         {
             var postalcode = PostalCode.Parse("0123456");
@@ -935,7 +935,7 @@ namespace Qowaiv.UnitTests
         #region IsValid Country tests
 
         /// <summary>Tests patterns that should be valid for Andorra (AD).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AD_All()
         {
             var country = Country.AD;
@@ -948,7 +948,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Afghanistan (AF).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AF_All()
         {
             var country = Country.AF;
@@ -964,7 +964,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Anguilla (AI).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AI_All()
         {
             var country = Country.AI;
@@ -979,7 +979,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Albania (AL).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AL_All()
         {
             var country = Country.AL;
@@ -991,7 +991,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Armenia (AM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AM_All()
         {
             var country = Country.AM;
@@ -1004,7 +1004,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Argentina (AR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AR_All()
         {
             var country = Country.AR;
@@ -1016,7 +1016,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for American Samoa (AS).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AS_All()
         {
             var country = Country.AS;
@@ -1028,7 +1028,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Austria (AT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AT_All()
         {
             var country = Country.AT;
@@ -1040,7 +1040,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Australia (AU).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AU_All()
         {
             var country = Country.AU;
@@ -1052,7 +1052,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Åland Islands (AX).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AX_All()
         {
             var country = Country.AX;
@@ -1064,7 +1064,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Azerbaijan (AZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_AZ_All()
         {
             var country = Country.AZ;
@@ -1079,7 +1079,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Bosnia And Herzegovina (BA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BA_All()
         {
             var country = Country.BA;
@@ -1099,7 +1099,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Barbados (BB).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BB_All()
         {
             var country = Country.BB;
@@ -1115,7 +1115,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Bangladesh (BD).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BD_All()
         {
             var country = Country.BD;
@@ -1128,7 +1128,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Belgium (BE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BE_All()
         {
             var country = Country.BE;
@@ -1140,7 +1140,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Bulgaria (BG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BG_All()
         {
             var country = Country.BG;
@@ -1152,7 +1152,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Bahrain (BH).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BH_All()
         {
             var country = Country.BH;
@@ -1167,7 +1167,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Saint Barthélemy (BL).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BL_All()
         {
             var country = Country.BL;
@@ -1187,7 +1187,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Bermuda (BM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BM_All()
         {
             var country = Country.BM;
@@ -1252,7 +1252,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Brunei Darussalam (BN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BN_All()
         {
             var country = Country.BN;
@@ -1265,7 +1265,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Bolivia (BO).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BO_All()
         {
             var country = Country.BO;
@@ -1284,7 +1284,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Brazil (BR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BR_All()
         {
             var country = Country.BR;
@@ -1295,7 +1295,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Bhutan (BT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BT_All()
         {
             var country = Country.BT;
@@ -1316,7 +1316,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Belarus (BY).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_BY_All()
         {
             var country = Country.BY;
@@ -1329,7 +1329,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Canada (CA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CA_All()
         {
             var country = Country.CA;
@@ -1343,7 +1343,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Cocos (CC).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CC_All()
         {
             var country = Country.CC;
@@ -1362,7 +1362,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Switzerland (CH).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CH_All()
         {
             var country = Country.CH;
@@ -1377,7 +1377,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Chile (CL).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CL_All()
         {
             var country = Country.CL;
@@ -1397,7 +1397,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for China (CN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CN_All()
         {
             var country = Country.CN;
@@ -1408,7 +1408,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Colombia (CO).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CO_All()
         {
             var country = Country.CO;
@@ -1429,7 +1429,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Costa Rica (CR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CR_All()
         {
             var country = Country.CR;
@@ -1449,7 +1449,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Cuba (CU).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CU_All()
         {
             var country = Country.CU;
@@ -1474,7 +1474,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Cape Verde (CV).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CV_All()
         {
             var country = Country.CV;
@@ -1487,7 +1487,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Christmas Island (CX).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CX_All()
         {
             var country = Country.CX;
@@ -1507,7 +1507,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Cyprus (CY).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CY_All()
         {
             var country = Country.CY;
@@ -1519,7 +1519,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Czech Republic (CZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_CZ_All()
         {
             var country = Country.CZ;
@@ -1531,7 +1531,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Germany (DE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_DE_All()
         {
             var country = Country.DE;
@@ -1543,7 +1543,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Denmark (DK).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_DK_All()
         {
             var country = Country.DK;
@@ -1557,7 +1557,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Algeria (DZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_DZ_All()
         {
             var country = Country.DZ;
@@ -1568,7 +1568,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Ecuador (EC).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_EC_All()
         {
             var country = Country.EC;
@@ -1589,7 +1589,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Estonia (EE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_EE_All()
         {
             var country = Country.EE;
@@ -1609,7 +1609,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Egypt (EG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_EG_All()
         {
             var country = Country.EG;
@@ -1627,7 +1627,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Spain (ES).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_ES_All()
         {
             var country = Country.ES;
@@ -1645,7 +1645,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Ethiopia (ET).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_ET_All()
         {
             var country = Country.ET;
@@ -1664,7 +1664,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Finland (FI).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_FI_All()
         {
             var country = Country.FI;
@@ -1676,7 +1676,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Falkland Islands (FK).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_FK_All()
         {
             var country = Country.FK;
@@ -1685,7 +1685,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Micronesia (FM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_FM_All()
         {
             var country = Country.FM;
@@ -1702,7 +1702,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Faroe Islands (FO).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_FO_All()
         {
             var country = Country.FO;
@@ -1716,7 +1716,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for France (FR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_FR_All()
         {
             var country = Country.FR;
@@ -1728,7 +1728,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Gabon (GA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GA_All()
         {
             var country = Country.GA;
@@ -1747,7 +1747,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for United Kingdom (GB).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GB_All()
         {
             var country = Country.GB;
@@ -1775,7 +1775,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Georgia (GE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GE_All()
         {
             var country = Country.GE;
@@ -1794,7 +1794,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for French Guiana (GF).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GF_All()
         {
             var country = Country.GF;
@@ -1814,7 +1814,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Guernsey (GG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GG_All()
         {
             var country = Country.GG;
@@ -1848,7 +1848,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Gibraltar (GI).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GI_All()
         {
             var country = Country.GI;
@@ -1857,7 +1857,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Greenland (GL).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GL_All()
         {
             var country = Country.GL;
@@ -1871,7 +1871,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Guadeloupe (GP).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GP_All()
         {
             var country = Country.GP;
@@ -1891,7 +1891,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Greece (GR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GR_All()
         {
             var country = Country.GR;
@@ -1903,7 +1903,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for South Georgia And The South Sandwich Islands (GS).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GS_All()
         {
             var country = Country.GS;
@@ -1912,7 +1912,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Guatemala (GT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GT_All()
         {
             var country = Country.GT;
@@ -1932,7 +1932,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Guam (GU).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GU_All()
         {
             var country = Country.GU;
@@ -1964,7 +1964,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Guinea-Bissau (GW).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_GW_All()
         {
             var country = Country.GW;
@@ -1983,7 +1983,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Heard Island And Mcdonald Islands (HM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_HM_All()
         {
             var country = Country.HM;
@@ -2002,7 +2002,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Honduras (HN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_HN_All()
         {
             var country = Country.HN;
@@ -2022,7 +2022,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Croatia (HR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_HR_All()
         {
             var country = Country.HR;
@@ -2042,7 +2042,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Haiti (HT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_HT_All()
         {
             var country = Country.HT;
@@ -2061,7 +2061,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Hungary (HU).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_HU_All()
         {
             var country = Country.HU;
@@ -2073,7 +2073,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Indonesia (ID).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_ID_All()
         {
             var country = Country.ID;
@@ -2086,7 +2086,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Israel (IL).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IL_All()
         {
             var country = Country.IL;
@@ -2100,7 +2100,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Isle Of Man (IM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IM_All()
         {
             var country = Country.IM;
@@ -2177,7 +2177,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for India (IN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IN_All()
         {
             var country = Country.IN;
@@ -2189,7 +2189,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for British Indian Ocean Territory (IO).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IO_All()
         {
             var country = Country.IO;
@@ -2198,7 +2198,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Iraq (IQ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IQ_All()
         {
             var country = Country.IQ;
@@ -2211,7 +2211,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Iran (IR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IR_All()
         {
             var country = Country.IR;
@@ -2232,7 +2232,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Iceland (IS).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IS_All()
         {
             var country = Country.IS;
@@ -2252,7 +2252,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Italy (IT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_IT_All()
         {
             var country = Country.IT;
@@ -2266,7 +2266,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Jersey (JE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_JE_All()
         {
             var country = Country.JE;
@@ -2298,7 +2298,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Jordan (JO).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_JO_All()
         {
             var country = Country.JO;
@@ -2318,7 +2318,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Japan (JP).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_JP_All()
         {
             var country = Country.JP;
@@ -2332,7 +2332,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Kyrgyzstan (KG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_KG_All()
         {
             var country = Country.KG;
@@ -2353,7 +2353,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Cambodia (KH).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_KH_All()
         {
             var country = Country.KH;
@@ -2373,7 +2373,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Korea (KR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_KR_All()
         {
             var country = Country.KR;
@@ -2386,7 +2386,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Cayman Islands (KY).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_KY_All()
         {
             var country = Country.KY;
@@ -2406,7 +2406,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Kazakhstan (KZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_KZ_All()
         {
             var country = Country.KZ;
@@ -2427,7 +2427,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Lao People'S Democratic Republic (LA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LA_All()
         {
             var country = Country.LA;
@@ -2447,7 +2447,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Lebanon (LB).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LB_All()
         {
             var country = Country.LB;
@@ -2467,7 +2467,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Liechtenstein (LI).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LI_All()
         {
             var country = Country.LI;
@@ -2479,7 +2479,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Sri Lanka (LK).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LK_All()
         {
             var country = Country.LK;
@@ -2499,7 +2499,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Liberia (LR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LR_All()
         {
             var country = Country.LR;
@@ -2518,7 +2518,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Lesotho (LS).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LS_All()
         {
             var country = Country.LS;
@@ -2538,7 +2538,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Lithuania (LT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LT_All()
         {
             var country = Country.LT;
@@ -2553,7 +2553,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Luxembourg (LU).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LU_All()
         {
             var country = Country.LU;
@@ -2572,7 +2572,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Latvia (LV).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LV_All()
         {
             var country = Country.LV;
@@ -2591,7 +2591,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Libya (LY).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_LY_All()
         {
             var country = Country.LY;
@@ -2611,7 +2611,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Morocco (MA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MA_All()
         {
             var country = Country.MA;
@@ -2625,7 +2625,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Monaco (MC).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MC_All()
         {
             var country = Country.MC;
@@ -2644,7 +2644,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Moldova (MD).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MD_All()
         {
             var country = Country.MD;
@@ -2670,7 +2670,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Montenegro (ME).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_ME_All()
         {
             var country = Country.ME;
@@ -2684,7 +2684,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Saint Martin (MF).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MF_All()
         {
             var country = Country.MF;
@@ -2704,7 +2704,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Madagascar (MG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MG_All()
         {
             var country = Country.MG;
@@ -2724,7 +2724,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Marshall Islands (MH).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MH_All()
         {
             var country = Country.MH;
@@ -2758,7 +2758,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Macedonia (MK).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MK_All()
         {
             var country = Country.MK;
@@ -2777,7 +2777,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Myanmar (MM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MM_All()
         {
             var country = Country.MM;
@@ -2797,7 +2797,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Mongolia (MN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MN_All()
         {
             var country = Country.MN;
@@ -2817,7 +2817,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Northern Mariana Islands (MP).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MP_All()
         {
             var country = Country.MP;
@@ -2840,7 +2840,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Martinique (MQ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MQ_All()
         {
             var country = Country.MQ;
@@ -2860,7 +2860,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Malta (MT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MT_All()
         {
             var country = Country.MT;
@@ -2896,7 +2896,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Mexico (MX).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MX_All()
         {
             var country = Country.MX;
@@ -2910,7 +2910,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Malaysia (MY).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MY_All()
         {
             var country = Country.MY;
@@ -2923,7 +2923,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Mozambique (MZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_MZ_All()
         {
             var country = Country.MZ;
@@ -2942,7 +2942,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Namibia (NA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NA_All()
         {
             var country = Country.NA;
@@ -2962,7 +2962,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for New Caledonia (NC).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NC_All()
         {
             var country = Country.NC;
@@ -2982,7 +2982,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Niger (NE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NE_All()
         {
             var country = Country.NE;
@@ -3001,7 +3001,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Norfolk Island (NF).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NF_All()
         {
             var country = Country.NF;
@@ -3020,7 +3020,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Nigeria (NG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NG_All()
         {
             var country = Country.NG;
@@ -3034,7 +3034,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Nicaragua (NI).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NI_All()
         {
             var country = Country.NI;
@@ -3054,7 +3054,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Netherlands (NL).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NL_All()
         {
             var country = Country.NL;
@@ -3071,7 +3071,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Norway (NO).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NO_All()
         {
             var country = Country.NO;
@@ -3087,7 +3087,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Nepal (NP).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NP_All()
         {
             var country = Country.NP;
@@ -3107,7 +3107,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for New Zealand (NZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_NZ_All()
         {
             var country = Country.NZ;
@@ -3123,7 +3123,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Oman (OM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_OM_All()
         {
             var country = Country.OM;
@@ -3143,7 +3143,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Panama (PA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PA_All()
         {
             var country = Country.PA;
@@ -3164,7 +3164,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Peru (PE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PE_All()
         {
             var country = Country.PE;
@@ -3184,7 +3184,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for French Polynesia (PF).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PF_All()
         {
             var country = Country.PF;
@@ -3204,7 +3204,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Papua New Guinea (PG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PG_All()
         {
             var country = Country.PG;
@@ -3224,7 +3224,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Philippines (PH).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PH_All()
         {
             var country = Country.PH;
@@ -3243,7 +3243,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Pakistan (PK).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PK_All()
         {
             var country = Country.PK;
@@ -3257,7 +3257,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Poland (PL).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PL_All()
         {
             var country = Country.PL;
@@ -3274,7 +3274,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Saint Pierre And Miquelon (PM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PM_All()
         {
             var country = Country.PM;
@@ -3283,7 +3283,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Pitcairn (PN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PN_All()
         {
             var country = Country.PN;
@@ -3292,7 +3292,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Puerto Rico (PR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PR_All()
         {
             var country = Country.PR;
@@ -3310,7 +3310,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Palestinian Territory (PS).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PS_All()
         {
             var country = Country.PS;
@@ -3330,7 +3330,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Portugal (PT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PT_All()
         {
             var country = Country.PT;
@@ -3348,7 +3348,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Palau (PW).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PW_All()
         {
             var country = Country.PW;
@@ -3357,7 +3357,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Paraguay (PY).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_PY_All()
         {
             var country = Country.PY;
@@ -3376,7 +3376,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Réunion (RE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_RE_All()
         {
             var country = Country.RE;
@@ -3396,7 +3396,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Romania (RO).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_RO_All()
         {
             var country = Country.RO;
@@ -3409,7 +3409,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Serbia (RS).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_RS_All()
         {
             var country = Country.RS;
@@ -3421,7 +3421,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Russian Federation (RU).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_RU_All()
         {
             var country = Country.RU;
@@ -3433,7 +3433,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Saudi Arabia (SA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SA_All()
         {
             var country = Country.SA;
@@ -3465,7 +3465,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Sudan (SD).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SD_All()
         {
             var country = Country.SD;
@@ -3485,7 +3485,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Sweden (SE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SE_All()
         {
             var country = Country.SE;
@@ -3505,7 +3505,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Singapore (SG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SG_All()
         {
             var country = Country.SG;
@@ -3522,7 +3522,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Saint Helena (SH).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SH_All()
         {
             var country = Country.SH;
@@ -3531,7 +3531,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Slovenia (SI).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SI_All()
         {
             var country = Country.SI;
@@ -3550,7 +3550,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Slovakia (SK).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SK_All()
         {
             var country = Country.SK;
@@ -3569,7 +3569,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for San Marino (SM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SM_All()
         {
             var country = Country.SM;
@@ -3582,7 +3582,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Senegal (SN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SN_All()
         {
             var country = Country.SN;
@@ -3602,7 +3602,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for El Salvador (SV).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SV_All()
         {
             var country = Country.SV;
@@ -3611,7 +3611,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Swaziland (SZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_SZ_All()
         {
             var country = Country.SZ;
@@ -3631,7 +3631,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Turks And Caicos Islands (TC).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TC_All()
         {
             var country = Country.TC;
@@ -3640,7 +3640,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Chad (TD).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TD_All()
         {
             var country = Country.TD;
@@ -3660,7 +3660,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Thailand (TH).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TH_All()
         {
             var country = Country.TH;
@@ -3673,7 +3673,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Tajikistan (TJ).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TJ_All()
         {
             var country = Country.TJ;
@@ -3694,7 +3694,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Turkmenistan (TM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TM_All()
         {
             var country = Country.TM;
@@ -3715,7 +3715,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Tunisia (TN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TN_All()
         {
             var country = Country.TN;
@@ -3734,7 +3734,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Turkey (TR).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TR_All()
         {
             var country = Country.TR;
@@ -3749,7 +3749,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Trinidad And Tobago (TT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TT_All()
         {
             var country = Country.TT;
@@ -3770,7 +3770,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Taiwan (TW).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_TW_All()
         {
             var country = Country.TW;
@@ -3784,7 +3784,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Ukraine (UA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_UA_All()
         {
             var country = Country.UA;
@@ -3803,7 +3803,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for United States (US).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_US_All()
         {
             var country = Country.US;
@@ -3815,7 +3815,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Uruguay (UY).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_UY_All()
         {
             var country = Country.UY;
@@ -3835,7 +3835,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Holy See (VA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_VA_All()
         {
             var country = Country.VA;
@@ -3844,7 +3844,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Saint Vincent And The Grenadines (VC).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_VC_All()
         {
             var country = Country.VC;
@@ -3863,7 +3863,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Venezuela (VE).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_VE_All()
         {
             var country = Country.VE;
@@ -3913,7 +3913,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Virgin Islands (VG).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_VG_All()
         {
             var country = Country.VG;
@@ -3940,7 +3940,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Virgin Islands (VI).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_VI_All()
         {
             var country = Country.VI;
@@ -3958,7 +3958,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Viet Nam (VN).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_VN_All()
         {
             var country = Country.VN;
@@ -3979,7 +3979,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Wallis And Futuna (WF).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_WF_All()
         {
             var country = Country.WF;
@@ -3999,7 +3999,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Mayotte (YT).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_YT_All()
         {
             var country = Country.YT;
@@ -4019,7 +4019,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for South Africa (ZA).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_ZA_All()
         {
             var country = Country.ZA;
@@ -4034,7 +4034,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should be valid for Zambia (ZM).</summary>
-        [TestMethod]
+        [Test]
         public void IsValid_ZM_All()
         {
             var country = Country.ZM;
@@ -4058,7 +4058,7 @@ namespace Qowaiv.UnitTests
         #region IsNotValid Country tests
 
         /// <summary>Tests patterns that should not be valid for Andorra (AD).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AD_All()
         {
             var country = Country.AD;
@@ -4069,7 +4069,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Afghanistan (AF).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AF_All()
         {
             var country = Country.AF;
@@ -4085,7 +4085,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Anguilla (AI).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AI_All()
         {
             var country = Country.AI;
@@ -4097,7 +4097,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Albania (AL).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AL_All()
         {
             var country = Country.AL;
@@ -4115,7 +4115,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Armenia (AM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AM_All()
         {
             var country = Country.AM;
@@ -4129,7 +4129,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Argentina (AR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AR_All()
         {
             var country = Country.AR;
@@ -4139,7 +4139,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for American Samoa (AS).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AS_All()
         {
             var country = Country.AS;
@@ -4169,7 +4169,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Austria (AT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AT_All()
         {
             var country = Country.AT;
@@ -4189,7 +4189,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Australia (AU).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AU_All()
         {
             var country = Country.AU;
@@ -4206,7 +4206,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Åland Islands (AX).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AX_All()
         {
             var country = Country.AX;
@@ -4240,7 +4240,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Azerbaijan (AZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_AZ_All()
         {
             var country = Country.AZ;
@@ -4252,7 +4252,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Bosnia And Herzegovina (BA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BA_All()
         {
             var country = Country.BA;
@@ -4261,7 +4261,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Barbados (BB).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BB_All()
         {
             var country = Country.BB;
@@ -4297,7 +4297,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Bangladesh (BD).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BD_All()
         {
             var country = Country.BD;
@@ -4306,7 +4306,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Belgium (BE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BE_All()
         {
             var country = Country.BE;
@@ -4326,7 +4326,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Bulgaria (BG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BG_All()
         {
             var country = Country.BG;
@@ -4346,7 +4346,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Bahrain (BH).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BH_All()
         {
             var country = Country.BH;
@@ -4366,7 +4366,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Saint Barthélemy (BL).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BL_All()
         {
             var country = Country.BL;
@@ -4386,7 +4386,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Bermuda (BM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BM_All()
         {
             var country = Country.BM;
@@ -4411,7 +4411,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Brunei Darussalam (BN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BN_All()
         {
             var country = Country.BN;
@@ -4447,7 +4447,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Bolivia (BO).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BO_All()
         {
             var country = Country.BO;
@@ -4456,7 +4456,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Brazil (BR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BR_All()
         {
             var country = Country.BR;
@@ -4476,7 +4476,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Bhutan (BT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BT_All()
         {
             var country = Country.BT;
@@ -4485,7 +4485,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Belarus (BY).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_BY_All()
         {
             var country = Country.BY;
@@ -4494,7 +4494,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Canada (CA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CA_All()
         {
             var country = Country.CA;
@@ -4521,7 +4521,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Cocos (CC).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CC_All()
         {
             var country = Country.CC;
@@ -4530,7 +4530,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Switzerland (CH).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CH_All()
         {
             var country = Country.CH;
@@ -4550,7 +4550,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Chile (CL).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CL_All()
         {
             var country = Country.CL;
@@ -4559,7 +4559,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for China (CN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CN_All()
         {
             var country = Country.CN;
@@ -4579,7 +4579,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Colombia (CO).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CO_All()
         {
             var country = Country.CO;
@@ -4588,7 +4588,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Costa Rica (CR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CR_All()
         {
             var country = Country.CR;
@@ -4597,7 +4597,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Cuba (CU).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CU_All()
         {
             var country = Country.CU;
@@ -4610,7 +4610,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Cape Verde (CV).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CV_All()
         {
             var country = Country.CV;
@@ -4619,7 +4619,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Christmas Island (CX).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CX_All()
         {
             var country = Country.CX;
@@ -4628,7 +4628,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Cyprus (CY).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CY_All()
         {
             var country = Country.CY;
@@ -4648,7 +4648,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Czech Republic (CZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_CZ_All()
         {
             var country = Country.CZ;
@@ -4681,7 +4681,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Germany (DE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_DE_All()
         {
             var country = Country.DE;
@@ -4701,7 +4701,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Denmark (DK).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_DK_All()
         {
             var country = Country.DK;
@@ -4750,7 +4750,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Algeria (DZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_DZ_All()
         {
             var country = Country.DZ;
@@ -4759,7 +4759,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Ecuador (EC).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_EC_All()
         {
             var country = Country.EC;
@@ -4768,7 +4768,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Estonia (EE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_EE_All()
         {
             var country = Country.EE;
@@ -4777,7 +4777,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Egypt (EG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_EG_All()
         {
             var country = Country.EG;
@@ -4797,7 +4797,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Spain (ES).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_ES_All()
         {
             var country = Country.ES;
@@ -4819,7 +4819,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Ethiopia (ET).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_ET_All()
         {
             var country = Country.ET;
@@ -4828,7 +4828,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Finland (FI).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_FI_All()
         {
             var country = Country.FI;
@@ -4837,7 +4837,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Falkland Islands (FK).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_FK_All()
         {
             var country = Country.FK;
@@ -4852,7 +4852,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Micronesia (FM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_FM_All()
         {
             var country = Country.FM;
@@ -4887,7 +4887,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Faroe Islands (FO).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_FO_All()
         {
             var country = Country.FO;
@@ -4936,7 +4936,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for France (FR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_FR_All()
         {
             var country = Country.FR;
@@ -4956,7 +4956,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Gabon (GA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GA_All()
         {
             var country = Country.GA;
@@ -4965,7 +4965,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for United Kingdom (GB).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GB_All()
         {
             var country = Country.GB;
@@ -4992,7 +4992,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Georgia (GE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GE_All()
         {
             var country = Country.GE;
@@ -5001,7 +5001,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for French Guiana (GF).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GF_All()
         {
             var country = Country.GF;
@@ -5022,7 +5022,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Guernsey (GG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GG_All()
         {
             var country = Country.GG;
@@ -5077,7 +5077,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Gibraltar (GI).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GI_All()
         {
             var country = Country.GI;
@@ -5087,7 +5087,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Greenland (GL).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GL_All()
         {
             var country = Country.GL;
@@ -5122,7 +5122,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Guadeloupe (GP).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GP_All()
         {
             var country = Country.GP;
@@ -5142,7 +5142,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Greece (GR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GR_All()
         {
             var country = Country.GR;
@@ -5162,7 +5162,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for South Georgia And The South Sandwich Islands (GS).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GS_All()
         {
             var country = Country.GS;
@@ -5177,7 +5177,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Guatemala (GT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GT_All()
         {
             var country = Country.GT;
@@ -5186,7 +5186,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Guam (GU).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GU_All()
         {
             var country = Country.GU;
@@ -5223,7 +5223,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Guinea-Bissau (GW).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_GW_All()
         {
             var country = Country.GW;
@@ -5232,7 +5232,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Heard Island And Mcdonald Islands (HM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_HM_All()
         {
             var country = Country.HM;
@@ -5241,7 +5241,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Honduras (HN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_HN_All()
         {
             var country = Country.HN;
@@ -5250,7 +5250,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Croatia (HR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_HR_All()
         {
             var country = Country.HR;
@@ -5259,7 +5259,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Haiti (HT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_HT_All()
         {
             var country = Country.HT;
@@ -5268,7 +5268,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Hungary (HU).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_HU_All()
         {
             var country = Country.HU;
@@ -5288,7 +5288,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Indonesia (ID).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_ID_All()
         {
             var country = Country.ID;
@@ -5308,7 +5308,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Israel (IL).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IL_All()
         {
             var country = Country.IL;
@@ -5317,7 +5317,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Isle Of Man (IM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IM_All()
         {
             var country = Country.IM;
@@ -5352,7 +5352,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for India (IN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IN_All()
         {
             var country = Country.IN;
@@ -5372,7 +5372,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for British Indian Ocean Territory (IO).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IO_All()
         {
             var country = Country.IO;
@@ -5392,7 +5392,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Iraq (IQ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IQ_All()
         {
             var country = Country.IQ;
@@ -5405,7 +5405,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Iran (IR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IR_All()
         {
             var country = Country.IR;
@@ -5414,7 +5414,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Iceland (IS).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IS_All()
         {
             var country = Country.IS;
@@ -5423,7 +5423,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Italy (IT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_IT_All()
         {
             var country = Country.IT;
@@ -5432,7 +5432,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Jersey (JE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_JE_All()
         {
             var country = Country.JE;
@@ -5466,7 +5466,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Jordan (JO).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_JO_All()
         {
             var country = Country.JO;
@@ -5475,7 +5475,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Japan (JP).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_JP_All()
         {
             var country = Country.JP;
@@ -5484,7 +5484,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Kyrgyzstan (KG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_KG_All()
         {
             var country = Country.KG;
@@ -5493,7 +5493,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Cambodia (KH).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_KH_All()
         {
             var country = Country.KH;
@@ -5502,7 +5502,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Korea (KR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_KR_All()
         {
             var country = Country.KR;
@@ -5522,7 +5522,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Cayman Islands (KY).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_KY_All()
         {
             var country = Country.KY;
@@ -5558,7 +5558,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Kazakhstan (KZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_KZ_All()
         {
             var country = Country.KZ;
@@ -5567,7 +5567,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Lao People'S Democratic Republic (LA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LA_All()
         {
             var country = Country.LA;
@@ -5576,7 +5576,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Lebanon (LB).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LB_All()
         {
             var country = Country.LB;
@@ -5585,7 +5585,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Liechtenstein (LI).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LI_All()
         {
             var country = Country.LI;
@@ -5616,7 +5616,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Sri Lanka (LK).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LK_All()
         {
             var country = Country.LK;
@@ -5625,7 +5625,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Liberia (LR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LR_All()
         {
             var country = Country.LR;
@@ -5634,7 +5634,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Lesotho (LS).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LS_All()
         {
             var country = Country.LS;
@@ -5643,7 +5643,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Lithuania (LT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LT_All()
         {
             var country = Country.LT;
@@ -5679,7 +5679,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Luxembourg (LU).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LU_All()
         {
             var country = Country.LU;
@@ -5704,7 +5704,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Latvia (LV).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LV_All()
         {
             var country = Country.KY;
@@ -5740,7 +5740,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Libya (LY).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_LY_All()
         {
             var country = Country.LY;
@@ -5749,7 +5749,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Morocco (MA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MA_All()
         {
             var country = Country.MA;
@@ -5758,7 +5758,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Monaco (MC).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MC_All()
         {
             var country = Country.MC;
@@ -5830,7 +5830,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Moldova (MD).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MD_All()
         {
             var country = Country.MD;
@@ -5855,7 +5855,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Montenegro (ME).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_ME_All()
         {
             var country = Country.MD;
@@ -5885,7 +5885,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Saint Martin (MF).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MF_All()
         {
             var country = Country.MF;
@@ -5905,7 +5905,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Madagascar (MG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MG_All()
         {
             var country = Country.MG;
@@ -5914,7 +5914,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Marshall Islands (MH).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MH_All()
         {
             var country = Country.MH;
@@ -5952,7 +5952,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Macedonia (MK).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MK_All()
         {
             var country = Country.MK;
@@ -5961,7 +5961,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Myanmar (MM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MM_All()
         {
             var country = Country.MM;
@@ -5970,7 +5970,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Mongolia (MN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MN_All()
         {
             var country = Country.MN;
@@ -5979,7 +5979,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Northern Mariana Islands (MP).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MP_All()
         {
             var country = Country.MP;
@@ -6017,7 +6017,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Martinique (MQ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MQ_All()
         {
             var country = Country.MQ;
@@ -6037,7 +6037,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Malta (MT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MT_All()
         {
             var country = Country.MT;
@@ -6047,7 +6047,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Mexico (MX).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MX_All()
         {
             var country = Country.MX;
@@ -6056,7 +6056,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Malaysia (MY).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MY_All()
         {
             var country = Country.MY;
@@ -6076,7 +6076,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Mozambique (MZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_MZ_All()
         {
             var country = Country.MZ;
@@ -6085,7 +6085,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Namibia (NA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NA_All()
         {
             var country = Country.NA;
@@ -6107,7 +6107,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for New Caledonia (NC).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NC_All()
         {
             var country = Country.NC;
@@ -6140,7 +6140,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Niger (NE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NE_All()
         {
             var country = Country.NE;
@@ -6149,7 +6149,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Norfolk Island (NF).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NF_All()
         {
             var country = Country.NF;
@@ -6158,7 +6158,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Nigeria (NG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NG_All()
         {
             var country = Country.NG;
@@ -6167,7 +6167,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Nicaragua (NI).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NI_All()
         {
             var country = Country.NI;
@@ -6176,7 +6176,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Netherlands (NL).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NL_All()
         {
             var country = Country.NL;
@@ -6189,7 +6189,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Norway (NO).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NO_All()
         {
             var country = Country.NO;
@@ -6198,7 +6198,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Nepal (NP).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NP_All()
         {
             var country = Country.NP;
@@ -6207,7 +6207,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for New Zealand (NZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_NZ_All()
         {
             var country = Country.NZ;
@@ -6216,7 +6216,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Oman (OM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_OM_All()
         {
             var country = Country.OM;
@@ -6225,7 +6225,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Panama (PA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PA_All()
         {
             var country = Country.PA;
@@ -6234,7 +6234,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Peru (PE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PE_All()
         {
             var country = Country.PE;
@@ -6243,7 +6243,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for French Polynesia (PF).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PF_All()
         {
             var country = Country.PF;
@@ -6267,7 +6267,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Papua New Guinea (PG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PG_All()
         {
             var country = Country.PG;
@@ -6276,7 +6276,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Philippines (PH).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PH_All()
         {
             var country = Country.PH;
@@ -6296,7 +6296,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Pakistan (PK).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PK_All()
         {
             var country = Country.PK;
@@ -6320,7 +6320,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Poland (PL).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PL_All()
         {
             var country = Country.PL;
@@ -6329,7 +6329,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Saint Pierre And Miquelon (PM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PM_All()
         {
             var country = Country.PM;
@@ -6369,7 +6369,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Pitcairn (PN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PN_All()
         {
             var country = Country.PN;
@@ -6406,7 +6406,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Puerto Rico (PR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PR_All()
         {
             var country = Country.PR;
@@ -6415,7 +6415,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Palestinian Territory (PS).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PS_All()
         {
             var country = Country.PS;
@@ -6424,7 +6424,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Portugal (PT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PT_All()
         {
                  var country = Country.PT;
@@ -6444,7 +6444,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Palau (PW).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PW_All()
         {
             var country = Country.PW;
@@ -6467,7 +6467,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Paraguay (PY).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_PY_All()
         {
             var country = Country.PY;
@@ -6476,7 +6476,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Réunion (RE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_RE_All()
         {
             var country = Country.RE;
@@ -6505,7 +6505,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Romania (RO).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_RO_All()
         {
             var country = Country.RO;
@@ -6526,7 +6526,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Serbia (RS).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_RS_All()
         {
             var country = Country.RS;
@@ -6543,7 +6543,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Russian Federation (RU).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_RU_All()
         {
             var country = Country.RU;
@@ -6563,7 +6563,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Saudi Arabia (SA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SA_All()
         {
             var country = Country.SA;
@@ -6572,7 +6572,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Sudan (SD).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SD_All()
         {
             var country = Country.SD;
@@ -6581,7 +6581,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Sweden (SE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SE_All()
         {
             var country = Country.SE;
@@ -6601,7 +6601,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Singapore (SG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SG_All()
         {
             var country = Country.SG;
@@ -6610,7 +6610,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Saint Helena (SH).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SH_All()
         {
             var country = Country.SH;
@@ -6649,7 +6649,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Slovenia (SI).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SI_All()
         {
             var country = Country.SI;
@@ -6685,7 +6685,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Slovakia (SK).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SK_All()
         {
             var country = Country.SK;
@@ -6694,7 +6694,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for San Marino (SM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SM_All()
         {
             var country = Country.SM;
@@ -6715,7 +6715,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Senegal (SN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SN_All()
         {
             var country = Country.SN;
@@ -6751,7 +6751,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for El Salvador (SV).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SV_All()
         {
             var country = Country.SV;
@@ -6774,7 +6774,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Swaziland (SZ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_SZ_All()
         {
             var country = Country.SZ;
@@ -6830,7 +6830,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Turks And Caicos Islands (TC).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TC_All()
         {
             var country = Country.TC;
@@ -6874,7 +6874,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Chad (TD).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TD_All()
         {
             var country = Country.TD;
@@ -6883,7 +6883,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Thailand (TH).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TH_All()
         {
             var country = Country.TH;
@@ -6903,7 +6903,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Tajikistan (TJ).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TJ_All()
         {
             var country = Country.TJ;
@@ -6912,7 +6912,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Turkmenistan (TM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TM_All()
         {
             var country = Country.TM;
@@ -6921,7 +6921,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Tunisia (TN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TN_All()
         {
             var country = Country.TN;
@@ -6930,7 +6930,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Turkey (TR).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TR_All()
         {
             var country = Country.TR;
@@ -6950,7 +6950,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Trinidad And Tobago (TT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TT_All()
         {
             var country = Country.TT;
@@ -6959,7 +6959,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Taiwan (TW).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_TW_All()
         {
             var country = Country.TW;
@@ -6979,7 +6979,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Ukraine (UA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_UA_All()
         {
             var country = Country.UA;
@@ -6999,7 +6999,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for United States (US).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_US_All()
         {
                  var country = Country.US;
@@ -7008,7 +7008,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Uruguay (UY).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_UY_All()
         {
             var country = Country.UY;
@@ -7017,7 +7017,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Holy See (VA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_VA_All()
         {
             var country = Country.VA;
@@ -7037,7 +7037,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Saint Vincent And The Grenadines (VC).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_VC_All()
         {
             var country = Country.VC;
@@ -7073,7 +7073,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Venezuela (VE).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_VE_All()
         {
             var country = Country.VE;
@@ -7114,7 +7114,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Virgin Islands (VG).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_VG_All()
         {
             var country = Country.VG;
@@ -7149,7 +7149,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Virgin Islands (VI).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_VI_All()
         {
             var country = Country.VI;
@@ -7196,7 +7196,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Viet Nam (VN).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_VN_All()
         {
             var country = Country.VN;
@@ -7205,7 +7205,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Wallis And Futuna (WF).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_WF_All()
         {
             var country = Country.WF;
@@ -7225,7 +7225,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Mayotte (YT).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_YT_All()
         {
             var country = Country.YT;
@@ -7253,7 +7253,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for South Africa (ZA).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_ZA_All()
         {
             var country = Country.ZA;
@@ -7262,7 +7262,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Tests patterns that should not be valid for Zambia (ZM).</summary>
-        [TestMethod]
+        [Test]
         public void IsNotValidCustomCases_ZM_All()
         {
             var country = Country.ZM;

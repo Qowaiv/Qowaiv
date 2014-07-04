@@ -1,11 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Newtonsoft.Json;
 using System;
 using Qowaiv.Json;
 
 namespace Qowaiv.UnitTests.Json
 {
-    [TestClass]
+    [TestFixture]
     public class QowaivJsonConverterTest
     {
         //[TestInitialize]
@@ -14,7 +14,7 @@ namespace Qowaiv.UnitTests.Json
         //    QowaivJsonConverter.Register();
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void Register_ClearAll_Successful()
         //{
         //    var settings = Newtonsoft.Json.JsonConvert.DefaultSettings.Invoke();
@@ -30,7 +30,7 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.AreEqual(typeof(QowaivJsonConverter), settings.Converters[0].GetType(), "Default converters should contain a QowaivJsonConverter.");
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void CanConvert_Null_IsFalse()
         //{
         //    var converter = new QowaivJsonConverter();
@@ -38,14 +38,14 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.IsFalse(converter.CanConvert(null));
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void CanConvert_Boolean_IsFalse()
         //{
         //    var converter = new QowaivJsonConverter();
 
         //    Assert.IsFalse(converter.CanConvert(typeof(Boolean)));
         //}
-        //[TestMethod]
+        //[Test]
         //public void CanConvert_NullableMoney_IsTrue()
         //{
         //    var converter = new QowaivJsonConverter();
@@ -53,7 +53,7 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.IsTrue(converter.CanConvert(typeof(Money?)));
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void CanConvert_Money_IsFalse()
         //{
         //    var converter = new QowaivJsonConverter();
@@ -61,7 +61,7 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.IsTrue(converter.CanConvert(typeof(Money)));
 
         //}
-        //[TestMethod]
+        //[Test]
         //public void CanConvert_NullableBoolean_IsFalse()
         //{
         //    var converter = new QowaivJsonConverter();
@@ -69,7 +69,7 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.IsFalse(converter.CanConvert(typeof(Boolean?)));
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void SerializeObject_NullableMoney_AreEqual()
         //{
         //    var obj = (Money?)null;
@@ -80,7 +80,7 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.AreEqual(exp, act);
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void SerializeObject_BurgerServiceNummerMinValue_AreEqual()
         //{
         //    var obj = BurgerServiceNummer.MinValue;
@@ -91,7 +91,7 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.AreEqual(exp, act);
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void SerializeObject_GenderNotApplicable_AreEqual()
         //{
         //    var obj = Gender.NotApplicable;
@@ -102,7 +102,7 @@ namespace Qowaiv.UnitTests.Json
         //    Assert.AreEqual(exp, act);
         //}
         
-        //[TestMethod]
+        //[Test]
         //public void SerializeObject_Money123Dot501_AreEqual()
         //{
         //    var obj = (Money)132.501m;

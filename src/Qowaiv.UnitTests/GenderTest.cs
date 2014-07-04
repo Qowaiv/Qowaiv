@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class GenderTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -21,7 +21,7 @@ namespace Qowaiv.UnitTests
         #region Gender const tests
 
         /// <summary>Gender.Empty should be equal to the default of Gender.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(Gender), Gender.Empty);
@@ -32,14 +32,14 @@ namespace Qowaiv.UnitTests
         #region Gender IsEmpty tests
 
         /// <summary>Gender.IsEmpty() should true for the default of Gender.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(Gender).IsEmpty());
         }
 
         /// <summary>Gender.IsEmpty() should false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
@@ -50,7 +50,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -64,7 +64,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_NotKnown_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -76,7 +76,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             Gender val;
@@ -88,7 +88,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             Gender val;
@@ -100,7 +100,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             using (new CultureInfoScope("it-IT"))
@@ -115,7 +115,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_M_IsValid()
         {
             Gender val;
@@ -125,7 +125,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             Gender val;
@@ -136,7 +136,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -148,7 +148,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -164,7 +164,7 @@ namespace Qowaiv.UnitTests
       
         #region TryCreate tests
 
-        [TestMethod]
+        [Test]
         public void Create_Nullable17_ThrowsArgumentOutOfRangeException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -177,7 +177,7 @@ namespace Qowaiv.UnitTests
                 "Not a valid gender");
             }
         }
-        [TestMethod]
+        [Test]
         public void Create_17_ThrowsArgumentOutOfRangeException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -191,7 +191,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryCreate_Null_IsEmpty()
         {
             Gender exp = Gender.Empty;
@@ -200,7 +200,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(Gender.TryCreate(null, out act));
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_Int32MinValue_IsEmpty()
         {
             Gender exp = Gender.Empty;
@@ -210,21 +210,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void TryCreate_Int32MinValue_AreEqual()
         {
             var exp = Gender.Empty;
             var act = Gender.TryCreate(Int32.MinValue);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_0_AreEqual()
         {
             var exp = Gender.Unknown;
             var act = Gender.TryCreate(0);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_1_AreEqual()
         {
             var exp = TestStruct;
@@ -232,7 +232,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Create_Int32MinValue_ThrowsArgumentOutOfRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException
@@ -248,7 +248,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [TestMethod]
+        [Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.ExpectArgumentNullException
@@ -258,7 +258,7 @@ namespace Qowaiv.UnitTests
 			},
 			"info");
 		}
-        [TestMethod]
+        [Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -269,7 +269,7 @@ namespace Qowaiv.UnitTests
             });
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -280,7 +280,7 @@ namespace Qowaiv.UnitTests
             },
             "info");
         }
-        [TestMethod]
+        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -290,7 +290,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual((Byte)2, info.GetByte("Value"));
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = GenderTest.TestStruct;
@@ -298,7 +298,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = GenderTest.TestStruct;
@@ -306,7 +306,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = GenderTest.TestStruct;
@@ -315,7 +315,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_GenderSerializeObject_AreEqual()
         {
             var input = new GenderSerializeObject()
@@ -335,7 +335,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_GenderSerializeObject_AreEqual()
         {
             var input = new GenderSerializeObject()
@@ -355,7 +355,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_GenderSerializeObject_AreEqual()
         {
             var input = new GenderSerializeObject()
@@ -376,7 +376,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new GenderSerializeObject()
@@ -396,7 +396,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new  GenderSerializeObject()
@@ -417,7 +417,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -428,7 +428,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<Gender>();
@@ -437,7 +437,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -446,7 +446,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid gender");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<Gender>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -455,7 +455,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AreEqual()
         {
             var act = JsonTester.Read<Gender>((Int64)TestStruct);
@@ -464,7 +464,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
       
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -474,7 +474,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a number is not supported.");
         }
                
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -484,7 +484,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(Gender));
@@ -492,7 +492,7 @@ namespace Qowaiv.UnitTests
             
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -505,7 +505,7 @@ namespace Qowaiv.UnitTests
         
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_IsStringEmpty()
         {
             var act = Gender.Empty.ToString();
@@ -513,7 +513,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -522,14 +522,14 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringEmptyFormat_Empty_IsStringEmpty()
         {
             var act = Gender.Empty.ToString("");
             var exp = "";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToStringEmptyFormat_TestStruct_IsStringEmpty()
         {
             using (new CultureInfoScope("nl-NL"))
@@ -540,7 +540,7 @@ namespace Qowaiv.UnitTests
             }
         }
       
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -551,25 +551,25 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(Gender));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("Gender: (empty)", default(Gender));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("Gender: Male", TestStruct);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_InvariantCulture_AreEqual()
         {
             using (new CultureInfoScope(CultureInfo.InvariantCulture))
@@ -583,7 +583,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_deCH_AreEqual()
         {
             using (new CultureInfoScope("de-CH"))
@@ -596,7 +596,7 @@ namespace Qowaiv.UnitTests
                 );
             }
         }
-        [TestMethod]
+        [Test]
         public void ToString_enGB_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -609,7 +609,7 @@ namespace Qowaiv.UnitTests
                 );
             }
         }
-        [TestMethod]
+        [Test]
         public void ToString_esEC_AreEqual()
         {
             using (new CultureInfoScope("es-EC"))
@@ -622,7 +622,7 @@ namespace Qowaiv.UnitTests
                 );
             }
         }
-        [TestMethod]
+        [Test]
         public void ToString_frCH_AreEqual()
         {
             using (new CultureInfoScope("fr-CH"))
@@ -635,7 +635,7 @@ namespace Qowaiv.UnitTests
                 );
             }
         }
-        [TestMethod]
+        [Test]
         public void ToString_itIT_AreEqual()
         {
             using (new CultureInfoScope("it-IT"))
@@ -648,7 +648,7 @@ namespace Qowaiv.UnitTests
                 );
             }
         }
-        [TestMethod]
+        [Test]
         public void ToString_nlBE_AreEqual()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -698,26 +698,26 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for Gender.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, Gender.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(2, GenderTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(Gender.Empty.Equals(Gender.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = Gender.Parse("Male", CultureInfo.InvariantCulture);
@@ -726,43 +726,43 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(GenderTest.TestStruct.Equals(GenderTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(GenderTest.TestStruct.Equals(Gender.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(Gender.Empty.Equals(GenderTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(GenderTest.TestStruct.Equals((object)GenderTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(GenderTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(GenderTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = GenderTest.TestStruct;
@@ -770,7 +770,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = GenderTest.TestStruct;
@@ -783,7 +783,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of Genders ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_Gender_AreEqual()
         {
             var item0 = Gender.Unknown;
@@ -799,7 +799,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of Genders descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_Gender_AreEqual()
         {
             var item0 = Gender.Unknown;
@@ -815,7 +815,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -827,7 +827,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -841,7 +841,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -855,7 +855,7 @@ namespace Qowaiv.UnitTests
             );
         }
 
-        [TestMethod]
+        [Test]
         public void LessThan_17LT19_IsTrue()
         {
             Gender l = Gender.Unknown;
@@ -863,7 +863,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l < r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
             Gender l = Gender.Female;
@@ -872,7 +872,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l > r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
             Gender l = Gender.Male;
@@ -880,7 +880,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
             Gender l = Gender.Female;
@@ -889,7 +889,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l >= r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
             Gender l = Gender.NotApplicable;
@@ -897,7 +897,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
             Gender l = Gender.NotApplicable;
@@ -909,7 +909,7 @@ namespace Qowaiv.UnitTests
         
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToGender_AreEqual()
         {
             var exp = TestStruct;
@@ -917,7 +917,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_GenderToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -927,7 +927,7 @@ namespace Qowaiv.UnitTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Explicit_Int32ToGender_AreEqual()
         {
             var exp = TestStruct;
@@ -935,7 +935,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_GenderToInt32_AreEqual()
         {
             var exp = 1;
@@ -944,7 +944,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Explicit_GenderToNullableInt32_AreEqual()
         {
             Int32? exp = 1;
@@ -953,7 +953,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Explicit_Int32NotKnown_AreEqual()
         {
             var exp = Gender.Unknown;
@@ -962,7 +962,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Explicit_NullableInt32NotKnown_AreEqual()
         {
             var exp = Gender.Unknown;
@@ -971,7 +971,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Explicit_NotKnownToInt32_AreEqual()
         {
             Int32 exp = 0;
@@ -980,7 +980,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Explicit_EmptyToNullableInt32_AreEqual()
         {
             Int32? exp = null;
@@ -993,7 +993,7 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void DisplayName_None_AreEqual()
         {
             using (new CultureInfoScope("fr-FR"))
@@ -1008,40 +1008,40 @@ namespace Qowaiv.UnitTests
 
         #region Methods
         
-        [TestMethod]
+        [Test]
         public void IsEmptyOrNotKnown_Empty_IsTrue()
         {
             Assert.IsTrue(Gender.Empty.IsEmptyOrUnknown());
         }
 
-        [TestMethod]
+        [Test]
         public void IsEmptyOrNotKnown_NotKnown_IsTrue()
         {
             Assert.IsTrue(Gender.Unknown.IsEmptyOrUnknown());
         }
 
-        [TestMethod]
+        [Test]
         public void IsEmptyOrNotKnown_Male_IsFalse()
         {
             Assert.IsFalse(Gender.Male.IsEmptyOrUnknown());
         }
 
-        [TestMethod]
+        [Test]
         public void IsMaleOrFemale_Male_IsTrue()
         {
             Assert.IsTrue(Gender.Male.IsMaleOrFemale());
         }
-        [TestMethod]
+        [Test]
         public void IsMaleOrFemale_Female_IsTrue()
         {
             Assert.IsTrue(Gender.Female.IsMaleOrFemale());
         }
-        [TestMethod]
+        [Test]
         public void IsMaleOrFemale_NotApplicable_IsFalse()
         {
             Assert.IsFalse(Gender.NotApplicable.IsMaleOrFemale());
         }
-        [TestMethod]
+        [Test]
         public void IsMaleOrFemale_NotKnown_IsFalse()
         {
             Assert.IsFalse(Gender.Unknown.IsMaleOrFemale());
@@ -1051,36 +1051,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_Gender_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(Gender));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_Gender_IsTrue()
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(Gender), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_Gender_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(Gender), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_Gender_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(Gender));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_Gender_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(Gender));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_GenderEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1089,7 +1089,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringEmpty_GenderEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1098,7 +1098,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1107,7 +1107,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1120,47 +1120,47 @@ namespace Qowaiv.UnitTests
         
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(Gender.IsValid("Mannetje"), "Complex");
             Assert.IsFalse(Gender.IsValid((String)null), "(String)null");
             Assert.IsFalse(Gender.IsValid(String.Empty), "String.Empty");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(Gender.IsValid("Not known"));
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Null_IsFalse()
         {
             Assert.IsFalse(Gender.IsValid((String)null));
             Assert.IsFalse(Gender.IsValid((Int32?)null));
         }
-        [TestMethod]
+        [Test]
         public void IsValid_StringEmpty_IsFalse()
         {
             Assert.IsFalse(Gender.IsValid(String.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_Min1_IsFalse()
         {
             Assert.IsFalse(Gender.IsValid(-1));
         }
-        [TestMethod]
+        [Test]
         public void IsValid_512_IsFalse()
         {
             Assert.IsFalse(Gender.IsValid(512));
         }
-        [TestMethod]
+        [Test]
         public void IsValid_9_IsTrue()
         {
             Assert.IsTrue(Gender.IsValid(9));
         }
 
-        [TestMethod]
+        [Test]
         public void IsValid_MaleNull_IsTrue()
         {
             Assert.IsTrue(Gender.IsValid("Male", null));

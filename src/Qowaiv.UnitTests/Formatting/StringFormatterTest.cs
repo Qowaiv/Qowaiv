@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.Formatting;
 using Qowaiv.UnitTests.TestTools;
 using System;
@@ -7,10 +7,10 @@ using System.Globalization;
 
 namespace Qowaiv.UnitTests.Formatting
 {
-    [TestClass]
+    [TestFixture]
     public class StringFormatterTest
     {
-        [TestMethod]
+        [Test]
         public void Apply_NullObject_ThrowsArugmentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -20,7 +20,7 @@ namespace Qowaiv.UnitTests.Formatting
             "obj");
         }
 
-        [TestMethod]
+        [Test]
         public void Apply_StringEmptyFormat_ThrowsArugmentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -30,7 +30,7 @@ namespace Qowaiv.UnitTests.Formatting
             "format");
         }
 
-        [TestMethod]
+        [Test]
         public void Apply_NullFormat_ThrowsArugmentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -40,7 +40,7 @@ namespace Qowaiv.UnitTests.Formatting
             "format");
         }
         
-        [TestMethod]
+        [Test]
         public void Apply_NullFormatProvider_ThrowsArugmentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -50,7 +50,7 @@ namespace Qowaiv.UnitTests.Formatting
             "formatProvider");
         }
         
-        [TestMethod]
+        [Test]
         public void Apply_NullTokens_ThrowsArugmentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -60,7 +60,7 @@ namespace Qowaiv.UnitTests.Formatting
             "tokens");
         }
 
-        [TestMethod]
+        [Test]
         public void Apply_InvalidFormat_ThrowsFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -70,7 +70,7 @@ namespace Qowaiv.UnitTests.Formatting
             "Format is invalid.");
         }
 
-		[TestMethod]
+		[Test]
 		public void ToNonDiacritic_Null_AreEqual()
 		{
 			var str = (string)null;
@@ -81,7 +81,7 @@ namespace Qowaiv.UnitTests.Formatting
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void ToNonDiacritic_StringEmpty_AreEqual()
 		{
 			var str = String.Empty;
@@ -92,7 +92,7 @@ namespace Qowaiv.UnitTests.Formatting
 			Assert.AreEqual(exp, act);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void ToNonDiacritic_CafeUndStrasse_AreEqual()
 		{
 			var str = "Café & Straße";
@@ -103,7 +103,7 @@ namespace Qowaiv.UnitTests.Formatting
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void ToNonDiacritic_CafeUndStrasseIgnoreE_AreEqual()
 		{
 			var str = "Café & Straße";

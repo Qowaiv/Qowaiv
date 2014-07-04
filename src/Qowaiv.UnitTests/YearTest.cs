@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
@@ -16,7 +16,7 @@ using Qowaiv;
 namespace Qowaiv.UnitTests
 {
     /// <summary>Tests the year SVO.</summary>
-    [TestClass]
+    [TestFixture]
     public class YearTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -25,7 +25,7 @@ namespace Qowaiv.UnitTests
         #region year const tests
 
         /// <summary>Year.Empty should be equal to the default of year.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(Year), Year.Empty);
@@ -36,57 +36,57 @@ namespace Qowaiv.UnitTests
         #region year IsEmpty tests
 
         /// <summary>Year.IsEmpty() should be true for the default of year.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(Year).IsEmpty());
         }
         /// <summary>Year.IsEmpty() should be false for Year.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
             Assert.IsFalse(Year.Unknown.IsEmpty());
         }
         /// <summary>Year.IsEmpty() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
         /// <summary>Year.IsUnknown() should be false for the default of year.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Default_IsFalse()
         {
             Assert.IsFalse(default(Year).IsUnknown());
         }
         /// <summary>Year.IsUnknown() should be true for Year.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(Year.Unknown.IsUnknown());
         }
         /// <summary>Year.IsUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
         /// <summary>Year.IsEmptyOrUnknown() should be true for the default of year.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
             Assert.IsTrue(default(Year).IsEmptyOrUnknown());
         }
         /// <summary>Year.IsEmptyOrUnknown() should be true for Year.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(Year.Unknown.IsEmptyOrUnknown());
         }
         /// <summary>Year.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
@@ -97,7 +97,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             Year val;
@@ -109,7 +109,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             Year val;
@@ -121,7 +121,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse "?" should be valid and the result should be Year.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Questionmark_IsValid()
         {
             Year val;
@@ -133,7 +133,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             Year val;
@@ -145,7 +145,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             Year val;
@@ -156,7 +156,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -167,7 +167,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -181,7 +181,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -193,7 +193,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -209,7 +209,7 @@ namespace Qowaiv.UnitTests
 
         #region TryCreate tests
 
-        [TestMethod]
+        [Test]
         public void TryCreate_Null_IsEmpty()
         {
             Year exp = Year.Empty;
@@ -218,7 +218,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(Year.TryCreate(null, out act));
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_Int32MinValue_IsEmpty()
         {
             Year exp = Year.Empty;
@@ -228,14 +228,14 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void TryCreate_Int32MinValue_AreEqual()
         {
             var exp = Year.Empty;
             var act = Year.TryCreate(Int32.MinValue);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryCreate_Value_AreEqual()
         {
             var exp = TestStruct;
@@ -243,7 +243,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Create_Int32MinValue_ThrowsArgumentOutOfRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException
@@ -259,7 +259,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -270,7 +270,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -281,7 +281,7 @@ namespace Qowaiv.UnitTests
             });
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -293,7 +293,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -303,7 +303,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(1979, info.GetInt16("Value"));
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = YearTest.TestStruct;
@@ -311,7 +311,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = YearTest.TestStruct;
@@ -319,7 +319,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = YearTest.TestStruct;
@@ -328,7 +328,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_YearSerializeObject_AreEqual()
         {
             var input = new YearSerializeObject()
@@ -348,7 +348,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_YearSerializeObject_AreEqual()
         {
             var input = new YearSerializeObject()
@@ -368,7 +368,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_YearSerializeObject_AreEqual()
         {
             var input = new YearSerializeObject()
@@ -389,7 +389,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new YearSerializeObject()
@@ -409,7 +409,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new YearSerializeObject()
@@ -430,7 +430,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -441,7 +441,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<Year>();
@@ -450,7 +450,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -459,7 +459,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid year");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<Year>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -468,7 +468,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AreEqual()
         {
             var act = JsonTester.Read<Year>((Int64)TestStruct);
@@ -477,7 +477,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
             var act = JsonTester.Read<Year>((Double)TestStruct);
@@ -486,7 +486,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -496,7 +496,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(Year));
@@ -504,7 +504,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_Unknown_AreEqual()
         {
             var act = JsonTester.Write(Year.Unknown);
@@ -512,7 +512,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -525,21 +525,21 @@ namespace Qowaiv.UnitTests
 
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_StringEmpty()
         {
             var act = Year.Empty.ToString();
             var exp = "";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_Unknown_QuestionMark()
         {
             var act = Year.Unknown.ToString();
             var exp = "?";
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -547,7 +547,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
             var act = TestStruct.ToString("");
@@ -555,7 +555,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -566,7 +566,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -577,7 +577,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueSpanishEcuador_AreEqual()
         {
             var act = Year.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
@@ -585,24 +585,24 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(Year));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("Year: (empty)", default(Year));
         }
-        [TestMethod]
+        [Test]
         public void DebugToString_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("Year: (unknown)", Year.Unknown);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("Year: 1979", TestStruct);
@@ -613,62 +613,62 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for Year.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, Year.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(1979, YearTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(Year.Empty.Equals(Year.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(YearTest.TestStruct.Equals(YearTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(YearTest.TestStruct.Equals(Year.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(Year.Empty.Equals(YearTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(YearTest.TestStruct.Equals((object)YearTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(YearTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(YearTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = YearTest.TestStruct;
@@ -676,7 +676,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = YearTest.TestStruct;
@@ -689,7 +689,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of years ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_Year_AreEqual()
         {
             Year item0 = 1980;
@@ -705,7 +705,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of years descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_Year_AreEqual()
         {
             Year item0 = 1980;
@@ -721,7 +721,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -733,7 +733,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -747,7 +747,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -761,7 +761,7 @@ namespace Qowaiv.UnitTests
             );
         }
 
-        [TestMethod]
+        [Test]
         public void LessThan_17LT19_IsTrue()
         {
             Year l = 17;
@@ -769,7 +769,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l < r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
             Year l = 21;
@@ -778,7 +778,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l > r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
             Year l = 17;
@@ -786,7 +786,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
             Year l = 21;
@@ -795,7 +795,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l >= r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
             Year l = 17;
@@ -803,7 +803,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
             Year l = 21;
@@ -815,7 +815,7 @@ namespace Qowaiv.UnitTests
 
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToYear_AreEqual()
         {
             var exp = TestStruct;
@@ -823,7 +823,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_YearToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -833,7 +833,7 @@ namespace Qowaiv.UnitTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Explicit_Int32ToYear_AreEqual()
         {
             var exp = TestStruct;
@@ -841,7 +841,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_YearToInt32_AreEqual()
         {
             var exp = 1979;
@@ -853,25 +853,25 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-		[TestMethod]
+		[Test]
 		public void IsLeapYear_Empty_IsFalse()
 		{
 			Assert.IsFalse(Year.Empty.IsLeapYear);
 		}
 
-		[TestMethod]
+		[Test]
 		public void IsLeapYear_Unknown_IsFalse()
 		{
 			Assert.IsFalse(Year.Unknown.IsLeapYear);
 		}
 
-		[TestMethod]
+		[Test]
 		public void IsLeapYear_TestStruct_IsFalse()
 		{
 			Assert.IsFalse(TestStruct.IsLeapYear);
 		}
 
-		[TestMethod]
+		[Test]
 		public void IsLeapYear_1980_IsTrue()
 		{
 			Year year = 1980;
@@ -882,36 +882,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_Year_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(Year));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_Year_IsTrue()
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(Year), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_Year_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(Year), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_Year_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(Year));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_Year_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(Year));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_YearEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -920,7 +920,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_YearEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -929,7 +929,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
             using (new CultureInfoScope("en-GB"))
@@ -938,7 +938,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -951,7 +951,7 @@ namespace Qowaiv.UnitTests
         
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(Year.IsValid("0000"), "0000");
@@ -963,7 +963,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsFalse(Year.IsValid((System.Int32?)null), "(System.Int32?)null");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(Year.IsValid("0001"), "0001");

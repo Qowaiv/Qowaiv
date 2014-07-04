@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -13,7 +13,7 @@ using System.Xml.Serialization;
 namespace Qowaiv.UnitTests
 {
     /// <summary>Tests the week date SVO.</summary>
-    [TestClass]
+    [TestFixture]
     public class WeekDateTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -22,7 +22,7 @@ namespace Qowaiv.UnitTests
         #region week date const tests
 
         /// <summary>WeekDate.MinValue should be equal to the default of week date.</summary>
-        [TestMethod]
+        [Test]
         public void MinValue_None_EqualsDefault()
         {
             Assert.AreEqual(default(WeekDate), WeekDate.MinValue);
@@ -32,7 +32,7 @@ namespace Qowaiv.UnitTests
 
         #region week date constructor tests
 
-        [TestMethod]
+        [Test]
         public void Ctor_Y0_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -42,7 +42,7 @@ namespace Qowaiv.UnitTests
             "year",
             "Year should be in range [1,9999].");
         }
-        [TestMethod]
+        [Test]
         public void Ctor_Y10000_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -53,7 +53,7 @@ namespace Qowaiv.UnitTests
             "Year should be in range [1,9999].");
         }
 
-        [TestMethod]
+        [Test]
         public void Ctor_W0_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -63,7 +63,7 @@ namespace Qowaiv.UnitTests
             "week",
             "Week should be in range [1,53].");
         }
-        [TestMethod]
+        [Test]
         public void Ctor_W54_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -74,7 +74,7 @@ namespace Qowaiv.UnitTests
             "Week should be in range [1,53].");
         }
 
-        [TestMethod]
+        [Test]
         public void Ctor_D0_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -84,7 +84,7 @@ namespace Qowaiv.UnitTests
             "day", 
             "Day should be in range [1,7].");
         }
-        [TestMethod]
+        [Test]
         public void Ctor_D8_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -95,7 +95,7 @@ namespace Qowaiv.UnitTests
             "Day should be in range [1,7].");
         }
 
-        [TestMethod]
+        [Test]
         public void Ctor_Y9999W52D6_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -106,7 +106,7 @@ namespace Qowaiv.UnitTests
             "Year, Week, and Day parameters describe an un-representable Date.");
         }
 
-        [TestMethod]
+        [Test]
         public void Ctor_Y9999W53D1_ThrowsArgumentOutofRangeException()
         {
             ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
@@ -122,7 +122,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsInvalid()
         {
             WeekDate val;
@@ -132,7 +132,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
             WeekDate val;
@@ -143,7 +143,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             WeekDate val;
@@ -155,7 +155,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             WeekDate val;
@@ -165,7 +165,7 @@ namespace Qowaiv.UnitTests
             Assert.IsFalse(WeekDate.TryParse(str, out val), "Valid");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -179,7 +179,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -191,7 +191,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -203,7 +203,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_Y0000W21D7_DefaultValue()
         {
             WeekDate exp = default(WeekDate);
@@ -212,7 +212,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_Y2000W53D7_DefaultValue()
         {
             WeekDate exp = default(WeekDate);
@@ -225,7 +225,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -236,7 +236,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -247,7 +247,7 @@ namespace Qowaiv.UnitTests
             });
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -259,7 +259,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -269,7 +269,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual((DateTime)TestStruct, info.GetDateTime("Value"));
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = WeekDateTest.TestStruct;
@@ -277,7 +277,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = WeekDateTest.TestStruct;
@@ -285,7 +285,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = WeekDateTest.TestStruct;
@@ -294,7 +294,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_WeekDateSerializeObject_AreEqual()
         {
             var input = new WeekDateSerializeObject()
@@ -314,7 +314,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_WeekDateSerializeObject_AreEqual()
         {
             var input = new WeekDateSerializeObject()
@@ -334,7 +334,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_WeekDateSerializeObject_AreEqual()
         {
             var input = new WeekDateSerializeObject()
@@ -355,7 +355,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new WeekDateSerializeObject()
@@ -375,7 +375,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new WeekDateSerializeObject()
@@ -396,7 +396,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -407,7 +407,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -417,7 +417,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from null is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -426,7 +426,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid week date");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<WeekDate>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -435,7 +435,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -445,7 +445,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from an integer is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -455,7 +455,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a number is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AreEqual()
         {
             var act = JsonTester.Read<WeekDate>((DateTime)TestStruct);
@@ -464,7 +464,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(WeekDate));
@@ -472,7 +472,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -485,7 +485,7 @@ namespace Qowaiv.UnitTests
 
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -494,7 +494,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
             var act = TestStruct.ToString("");
@@ -502,7 +502,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Y1979W3D5FormatW_ComplexPattern()
         {
             var act = new WeekDate(1979, 3, 5).ToString(@"y-\WW-d");
@@ -510,7 +510,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Y1979W3D5Formatw_ComplexPattern()
         {
             var act = new WeekDate(1979, 3, 5).ToString(@"y-\Ww-d");
@@ -518,7 +518,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("1997-W14-6", TestStruct);
@@ -529,20 +529,20 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for WeekDate.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, WeekDate.MinValue.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(2027589483, WeekDateTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = WeekDate.Parse("1997-14-6", CultureInfo.InvariantCulture);
@@ -551,43 +551,43 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(WeekDateTest.TestStruct.Equals(WeekDateTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(WeekDateTest.TestStruct.Equals(WeekDate.MinValue));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(WeekDate.MinValue.Equals(WeekDateTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(WeekDateTest.TestStruct.Equals((object)WeekDateTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(WeekDateTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(WeekDateTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = WeekDateTest.TestStruct;
@@ -595,7 +595,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = WeekDateTest.TestStruct;
@@ -608,7 +608,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of week dates ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_WeekDate_AreEqual()
         {
             var item0 = WeekDate.Parse("2000-W01-3");
@@ -624,7 +624,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of week dates descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_WeekDate_AreEqual()
         {
             var item0 = WeekDate.Parse("2000-W01-3");
@@ -640,7 +640,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -652,7 +652,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -666,7 +666,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -680,7 +680,7 @@ namespace Qowaiv.UnitTests
             );
         }
 
-        [TestMethod]
+        [Test]
         public void LessThan_17LT19_IsTrue()
         {
             WeekDate l = new WeekDate(1980, 17, 5);
@@ -688,7 +688,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l < r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
             WeekDate l = new WeekDate(1980, 21, 5);
@@ -697,7 +697,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l > r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
             WeekDate l = new WeekDate(1980, 17, 5);
@@ -705,7 +705,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
             WeekDate l = new WeekDate(1980, 21, 5);
@@ -714,7 +714,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l >= r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
             WeekDate l = new WeekDate(1980, 17, 5);
@@ -722,7 +722,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
             WeekDate l = new WeekDate(1980, 21, 5);
@@ -734,7 +734,7 @@ namespace Qowaiv.UnitTests
 
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToWeekDate_AreEqual()
         {
             var exp = TestStruct;
@@ -742,7 +742,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_WeekDateToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -752,7 +752,7 @@ namespace Qowaiv.UnitTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void Explicit_Int32ToWeekDate_AreEqual()
         {
             var exp = TestStruct;
@@ -760,7 +760,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_WeekDateToInt32_AreEqual()
         {
             DateTime exp = new DateTime(1997, 04, 05);
@@ -772,17 +772,16 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void Date_TestStruct_AreEqual()
         {
-            var exp = new DateTime(1997, 04, 05);
+            var exp = new Date(1997, 04, 05);
             var act = TestStruct.Date;
 
             Assert.AreEqual(exp, act);
         }
 
-
-        [TestMethod]
+        [Test]
         public void Year_MinValue_AreEqual()
         {
             var exp = WeekDate.MaxValue.Year;
@@ -791,7 +790,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Year_MaxValue_AreEqual()
         {
             var exp = WeekDate.MaxValue.Year;
@@ -800,7 +799,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Year_Y2010W52D7_AreEqual()
         {
             var date = new WeekDate(2010, 52, 7);
@@ -810,7 +809,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Year_Y2020W01D1_AreEqual()
         {
             var date = new WeekDate(2020, 01, 1);
@@ -823,7 +822,7 @@ namespace Qowaiv.UnitTests
 
 
 
-        [TestMethod]
+        [Test]
         public void Day_TestStruct_AreEqual()
         {
             var exp = 6;
@@ -832,7 +831,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Day_Sunday_AreEqual()
         {
             var date = new WeekDate(1990, 40, 7);
@@ -842,7 +841,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DayOfYear_TestStruct_AreEqual()
         {
             var exp = 96;
@@ -857,36 +856,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_WeekDate_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(WeekDate));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_WeekDate_IsTrue()
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(WeekDate), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_WeekDate_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(WeekDate), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_WeekDate_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(WeekDate));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_WeekDate_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(WeekDate));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
             using (new CultureInfoScope("en-GB"))
@@ -895,7 +894,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -908,7 +907,7 @@ namespace Qowaiv.UnitTests
 
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(WeekDate.IsValid("Complex"), "Complex");
@@ -918,7 +917,7 @@ namespace Qowaiv.UnitTests
             Assert.IsFalse(WeekDate.IsValid("0001-W12-8"), "0001-W12-8");
             Assert.IsFalse(WeekDate.IsValid("9999-W53-1"), "9999-W53-1");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(WeekDate.IsValid("1234-50-6"));

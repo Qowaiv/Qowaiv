@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class PercentageTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -21,19 +21,19 @@ namespace Qowaiv.UnitTests
         #region Percentage const tests
 
         /// <summary>Percentage.Zero should be equal to the default of Percentage.</summary>
-        [TestMethod]
+        [Test]
         public void Zero_None_EqualsDefault()
         {
             Assert.AreEqual(default(Percentage), Percentage.Zero);
         }
 
-        [TestMethod]
+        [Test]
         public void One_None_0Dot01()
         {
             Assert.AreEqual((Percentage)0.01m, Percentage.One);
         }
 
-        [TestMethod]
+        [Test]
         public void Hundred_None_1()
         {
             Assert.AreEqual((Percentage)1m, Percentage.Hundred);
@@ -44,7 +44,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsInvalid()
         {
             Percentage val;
@@ -56,7 +56,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
             Percentage val;
@@ -68,7 +68,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             using (new CultureInfoScope("nl-NL"))
@@ -83,7 +83,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             Percentage val;
@@ -94,7 +94,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(Percentage.Zero, val, "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -108,7 +108,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ParseFrench_Percentage17Comma51_AreEqual()
         {
             using (new CultureInfoScope("fr-FR"))
@@ -124,7 +124,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_PercentageMarkInvalidPosition_AreEqual()
         {
             Percentage exp;
@@ -133,7 +133,7 @@ namespace Qowaiv.UnitTests
             Assert.IsFalse(Percentage.TryParse("2%2", out exp));
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryParse_PerMilleMarkInvalidPosition_AreEqual()
         {
             Percentage exp;
@@ -142,7 +142,7 @@ namespace Qowaiv.UnitTests
             Assert.IsFalse(Percentage.TryParse("2‰2", out exp));
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void TryParse_PerTenThousendMarkInvalidPosition_AreEqual()
         {
             Percentage exp;
@@ -156,7 +156,7 @@ namespace Qowaiv.UnitTests
       
         #region Create tests
 
-        [TestMethod]
+        [Test]
         public void Create_DecimalValue_AreEqual()
         {
             var exp = TestStruct;
@@ -164,7 +164,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Create_DoubleValue_AreEqual()
         {
             var exp = TestStruct;
@@ -176,7 +176,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-		[TestMethod]
+		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.ExpectArgumentNullException
@@ -187,7 +187,7 @@ namespace Qowaiv.UnitTests
 			"info");
 		}
 		
-		[TestMethod]
+		[Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -198,7 +198,7 @@ namespace Qowaiv.UnitTests
             });
         }
 		
-		[TestMethod]
+		[Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -210,7 +210,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 		
-		[TestMethod]
+		[Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -220,7 +220,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(0.1751m, info.GetDecimal("Value"));
         }
 		
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = PercentageTest.TestStruct;
@@ -228,7 +228,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = PercentageTest.TestStruct;
@@ -236,7 +236,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = PercentageTest.TestStruct;
@@ -245,7 +245,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
             var input = new PercentageSerializeObject()
@@ -265,7 +265,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
             var input = new PercentageSerializeObject()
@@ -285,7 +285,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
             var input = new PercentageSerializeObject()
@@ -306,7 +306,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new PercentageSerializeObject()
@@ -327,7 +327,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -338,7 +338,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
        
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -348,7 +348,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from null is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -357,7 +357,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid percentage");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<Percentage>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -366,7 +366,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -376,7 +376,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from an integer is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
             var act = JsonTester.Read<Percentage>((Double)TestStruct);
@@ -385,7 +385,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
        
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -395,7 +395,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(Percentage));
@@ -403,7 +403,7 @@ namespace Qowaiv.UnitTests
             
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -416,19 +416,19 @@ namespace Qowaiv.UnitTests
 
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(Percentage));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("17.51%", TestStruct);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -437,7 +437,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Zero_0()
         {
             using (new CultureInfoScope("en-GB"))
@@ -448,7 +448,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_ZeroNullFormat_0()
         {
             using (new CultureInfoScope("en-GB"))
@@ -459,7 +459,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToPercentageString_TestStruct_0()
         {
             using (new CultureInfoScope("en-GB"))
@@ -469,7 +469,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void ToPerMilleString_TestStruct_0()
         {
             using (new CultureInfoScope("en-GB"))
@@ -479,7 +479,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void ToPerTenThousendMarkString_TestStruct_0()
         {
             using (new CultureInfoScope("en-GB"))
@@ -490,7 +490,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -500,7 +500,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void ToString_ValueDutchNetherlands_AreEqual()
         {
             using (new CultureInfoScope("nl-NL"))
@@ -511,7 +511,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -522,7 +522,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -533,7 +533,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -544,7 +544,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_FormatValueSpanishEcuador_AreEqual()
         {
             var act = Percentage.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
@@ -552,7 +552,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_PercentageEnGB_FormattedString()
         {
             using (new CultureInfoScope("en-GB"))
@@ -561,7 +561,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_PercentageNlBE_FormattedString()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -570,7 +570,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_PercentageFrFR_FormattedString()
         {
             using (new CultureInfoScope("fr-FR"))
@@ -578,7 +578,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual("%31,415", ((Percentage).31415).ToString());
             }
         }
-        [TestMethod, Ignore]
+        [Test, Ignore]
         public void ToString_PercentageFaIR_FormattedString()
         {
             using (new CultureInfoScope("fa-IR"))
@@ -587,7 +587,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_InvalidPercentageMarkPosition_ThrowsException()
         {
             Percentage val = 0.33m;
@@ -600,7 +600,7 @@ namespace Qowaiv.UnitTests
             "Format is invalid.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringWithFormat_PercentageEnGB_FormattedString()
         {
             using (new CultureInfoScope("en-GB"))
@@ -623,13 +623,13 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(2097520717, PercentageTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = Percentage.Parse("17", CultureInfo.InvariantCulture);
@@ -638,37 +638,37 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(PercentageTest.TestStruct.Equals(PercentageTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(PercentageTest.TestStruct.Equals((Percentage)0.18m));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(((Percentage)0.1751m).Equals((object)PercentageTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(PercentageTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(PercentageTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = PercentageTest.TestStruct;
@@ -676,7 +676,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = PercentageTest.TestStruct;
@@ -689,7 +689,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of Percentages ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_Percentage_AreEqual()
         {
             Percentage item0 = 0.0185m;
@@ -705,7 +705,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of Percentages descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_Percentage_AreEqual()
         {
             Percentage item0 = 0.0185m;
@@ -721,7 +721,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -733,7 +733,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -747,7 +747,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -761,7 +761,7 @@ namespace Qowaiv.UnitTests
             );
         }
 
-        [TestMethod]
+        [Test]
         public void LessThan_17LT19_IsTrue()
         {
             Percentage l = 0.17m;
@@ -769,7 +769,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l < r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
             Percentage l = 0.21m;
@@ -778,7 +778,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l > r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
             Percentage l = 0.17m;
@@ -786,7 +786,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
             Percentage l = 0.21m;
@@ -795,7 +795,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l >= r);
         }
 
-        [TestMethod]
+        [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
             Percentage l = 0.17m;
@@ -803,7 +803,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsTrue(l <= r);
         }
-        [TestMethod]
+        [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
             Percentage l = 21.0;
@@ -815,7 +815,7 @@ namespace Qowaiv.UnitTests
 
         #region Percentage manipulation tests
 
-        [TestMethod]
+        [Test]
         public void UnaryNegation_Percentage17_Min17()
         {
             Percentage act = 0.17m;
@@ -825,7 +825,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void UnaryPlus_Percentage17_17()
         {
             Percentage act = 0.17m;
@@ -836,7 +836,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17Percentage42_741()
         {
             Percentage act = 0.17m;
@@ -847,7 +847,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Devide_Percentage17Percentage50_34()
         {
             Percentage act = 0.17m;
@@ -858,7 +858,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Add_Percentage17Percentage42_59()
         {
             Percentage act = 0.17m;
@@ -869,7 +869,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtract_Percentage17Percentage13_59()
         {
             Percentage act = 0.17m;
@@ -881,7 +881,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17Decimal42_741()
         {
             Percentage act = 0.17m;
@@ -892,7 +892,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17Double42_741()
         {
             Percentage act = 0.17m;
@@ -903,7 +903,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17Single42_741()
         {
             Percentage act = 0.17m;
@@ -915,7 +915,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17Int6442_34()
         {
             Percentage act = 0.17m;
@@ -926,7 +926,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17Int2342_34()
         {
             Percentage act = 0.17m;
@@ -937,7 +937,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17Int1642_34()
         {
             Percentage act = 0.17m;
@@ -949,7 +949,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17UInt6442_34()
         {
             Percentage act = 0.17m;
@@ -960,7 +960,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17UInt2342_34()
         {
             Percentage act = 0.17m;
@@ -971,7 +971,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Percentage17UInt1642_34()
         {
             Percentage act = 0.17m;
@@ -983,7 +983,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Division_Percentage17Decimal42_085()
         {
             Percentage act = 0.17m;
@@ -994,7 +994,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Percentage17Double42_085()
         {
             Percentage act = 0.17m;
@@ -1005,7 +1005,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Percentage17Single42_085()
         {
             Percentage act = 0.17m;
@@ -1017,7 +1017,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Division_Percentage17Int6442_085()
         {
             Percentage act = 0.17m;
@@ -1028,7 +1028,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Percentage17Int2342_085()
         {
             Percentage act = 0.17m;
@@ -1039,7 +1039,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Percentage17Int1642_085()
         {
             Percentage act = 0.17m;
@@ -1051,7 +1051,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Division_Percentage17UInt6442_085()
         {
             Percentage act = 0.17m;
@@ -1062,7 +1062,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Percentage17UInt2342_085()
         {
             Percentage act = 0.17m;
@@ -1073,7 +1073,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Percentage17UInt1642_085()
         {
             Percentage act = 0.17m;
@@ -1089,7 +1089,7 @@ namespace Qowaiv.UnitTests
 
         #region Number manipulation tests
 
-        [TestMethod]
+        [Test]
         public void Increment_Percentage10_Percentage11()
         {
             Percentage act = 0.1m;
@@ -1098,7 +1098,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Decrement_Percentage10_Percentage09()
         {
             Percentage act = 0.1m;
@@ -1108,7 +1108,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Addition_Int1617Percentage10_18()
         {
             Int16 act = 17;
@@ -1117,7 +1117,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_Int3217Percentage10_18()
         {
             Int32 act = 17;
@@ -1126,7 +1126,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_Int6417Percentage10_18()
         {
             Int64 act = 17;
@@ -1135,7 +1135,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_UInt1617Percentage50_25()
         {
             UInt16 act = 17;
@@ -1144,7 +1144,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_UInt3217Percentage50_25()
         {
             UInt32 act = 17;
@@ -1153,7 +1153,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_UInt6417Percentage50_25()
         {
             UInt64 act = 17;
@@ -1162,7 +1162,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_Decimal17Percentage17_19D89()
         {
             Decimal act = 17;
@@ -1171,7 +1171,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_Double17Percentage17_19D89()
         {
             Double act = 17;
@@ -1180,7 +1180,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Addition_Single17Percentage17_19D89()
         {
             Single act = 17;
@@ -1190,7 +1190,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Subtraction_Int1617Percentage10_16()
         {
             Int16 act = 17;
@@ -1199,7 +1199,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_Int3217Percentage10_16()
         {
             Int32 act = 17;
@@ -1208,7 +1208,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_Int6417Percentage10_16()
         {
             Int64 act = 17;
@@ -1217,7 +1217,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_UInt1617Percentage50_9()
         {
             UInt16 act = 17;
@@ -1226,7 +1226,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_UInt3217Percentage50_9()
         {
             UInt32 act = 17;
@@ -1235,7 +1235,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_UInt6417Percentage50_9()
         {
             UInt64 act = 17;
@@ -1244,7 +1244,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_Decimal17Percentage17_11D39()
         {
             Decimal act = 17;
@@ -1253,7 +1253,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_Double17Percentage17_11D39()
         {
             Double act = 17;
@@ -1262,7 +1262,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Subtraction_Single17Percentage17_11D3899994()
         {
             Single act = 17;
@@ -1272,7 +1272,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Division_Int1617Percentage51_33()
         {
             decimal test = (decimal)17 / .51m;
@@ -1284,7 +1284,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Int3217Percentage51_33()
         {
             Int32 act = 17;
@@ -1293,7 +1293,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Int6417Percentage51_33()
         {
             Int64 act = 17;
@@ -1302,7 +1302,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_UInt1617Percentage51_33()
         {
             UInt16 act = 17;
@@ -1311,7 +1311,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_UInt3217Percentage51_33()
         {
             UInt32 act = 17;
@@ -1320,7 +1320,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_UInt6417Percentage51_33()
         {
             UInt64 act = 17;
@@ -1329,7 +1329,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Decimal17Percentage51_33()
         {
             Decimal act = 17;
@@ -1338,7 +1338,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Double17Percentage51_33()
         {
             Double act = 17;
@@ -1347,7 +1347,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Division_Single17Percentage51_33()
         {
             Single act = 17;
@@ -1357,7 +1357,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Multiply_Int1617Percentage51_8()
         {
             decimal test = (decimal)17 * .51m;
@@ -1369,7 +1369,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Int3217Percentage51_8()
         {
             Int32 act = 17;
@@ -1378,7 +1378,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Int6417Percentage51_8()
         {
             Int64 act = 17;
@@ -1387,7 +1387,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_UInt1617Percentage51_8()
         {
             UInt16 act = 17;
@@ -1396,7 +1396,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_UInt3217Percentage51_8()
         {
             UInt32 act = 17;
@@ -1405,7 +1405,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_UInt6417Percentage51_8()
         {
             UInt64 act = 17;
@@ -1414,7 +1414,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Decimal17Percentage51_8D67()
         {
             Decimal act = 17;
@@ -1423,7 +1423,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Double17Percentage51_8D67()
         {
             Double act = 17;
@@ -1432,7 +1432,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Multiply_Single17Percentage51_8D67()
         {
             Single act = 17;
@@ -1446,7 +1446,7 @@ namespace Qowaiv.UnitTests
 
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToPercentage_AreEqual()
         {
             var exp = TestStruct;
@@ -1454,7 +1454,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_PercentageToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -1470,36 +1470,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_Percentage_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(Percentage));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_Percentage_IsTrue()
         {
         TypeConverterAssert.CanNotConvertFrom(typeof(Percentage), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_Percentage_IsTrue()
         {
         TypeConverterAssert.CanNotConvertTo(typeof(Percentage), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_Percentage_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(Percentage));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_Percentage_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(Percentage));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -1508,7 +1508,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -1521,14 +1521,14 @@ namespace Qowaiv.UnitTests
         
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(Percentage.IsValid("Complex"), "Complex");
             Assert.IsFalse(Percentage.IsValid((String)null), "(String)null");
             Assert.IsFalse(Percentage.IsValid(String.Empty), "String.Empty");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(Percentage.IsValid("%12.00"));

@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.CodeGenerator.Xml;
 using System.Collections.Generic;
 using System.IO;
@@ -7,10 +7,10 @@ using Qowaiv.UnitTests.TestTools;
 
 namespace Qowaiv.UnitTests.SvoGenerator.Xml
 {
-    [TestClass]
+    [TestFixture]
     public class XResourceFileTest
     {
-        [TestMethod]
+        [Test]
         public void Load_NullFileThrowArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -20,7 +20,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
             "file");
         }
 
-        [TestMethod]
+        [Test]
         public void Load_NullStream_ThrowArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -30,7 +30,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
             "stream");
         }
 
-        [TestMethod]
+        [Test]
         public void Save_NullFile_ThrowArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -40,7 +40,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
             "file");
         }
 
-        [TestMethod]
+        [Test]
         public void Save_NullStream_ThrowArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException(() =>
@@ -51,7 +51,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         }
 
 
-        [TestMethod]
+        [Test]
         public void SaveLoad_Data_AreEqual()
         {
 

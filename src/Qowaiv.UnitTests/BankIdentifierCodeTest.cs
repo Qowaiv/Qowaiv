@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
@@ -16,7 +16,7 @@ using Qowaiv;
 namespace Qowaiv.UnitTests
 {
     /// <summary>Tests the BIC SVO.</summary>
-    [TestClass]
+    [TestFixture]
     public class BankIdentifierCodeTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -25,7 +25,7 @@ namespace Qowaiv.UnitTests
         #region BIC const tests
 
         /// <summary>BankIdentifierCode.Empty should be equal to the default of BIC.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(BankIdentifierCode), BankIdentifierCode.Empty);
@@ -36,57 +36,57 @@ namespace Qowaiv.UnitTests
         #region BIC IsEmpty tests
 
         /// <summary>BankIdentifierCode.IsEmpty() should be true for the default of BIC.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(BankIdentifierCode).IsEmpty());
         }
         /// <summary>BankIdentifierCode.IsEmpty() should be false for BankIdentifierCode.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
             Assert.IsFalse(BankIdentifierCode.Unknown.IsEmpty());
         }
         /// <summary>BankIdentifierCode.IsEmpty() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
         /// <summary>BankIdentifierCode.IsUnknown() should be false for the default of BIC.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Default_IsFalse()
         {
             Assert.IsFalse(default(BankIdentifierCode).IsUnknown());
         }
         /// <summary>BankIdentifierCode.IsUnknown() should be true for BankIdentifierCode.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(BankIdentifierCode.Unknown.IsUnknown());
         }
         /// <summary>BankIdentifierCode.IsUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
         /// <summary>BankIdentifierCode.IsEmptyOrUnknown() should be true for the default of BIC.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
             Assert.IsTrue(default(BankIdentifierCode).IsEmptyOrUnknown());
         }
         /// <summary>BankIdentifierCode.IsEmptyOrUnknown() should be true for BankIdentifierCode.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
             Assert.IsTrue(BankIdentifierCode.Unknown.IsEmptyOrUnknown());
         }
         /// <summary>BankIdentifierCode.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
@@ -97,7 +97,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             BankIdentifierCode val;
@@ -109,7 +109,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             BankIdentifierCode val;
@@ -121,7 +121,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse "?" should be valid and the result should be BankIdentifierCode.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Questionmark_IsValid()
         {
             BankIdentifierCode val;
@@ -133,7 +133,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             BankIdentifierCode val;
@@ -145,7 +145,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             BankIdentifierCode val;
@@ -156,7 +156,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
         
-        [TestMethod]
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -167,7 +167,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -181,7 +181,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -193,7 +193,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -209,7 +209,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-		[TestMethod]
+		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.ExpectArgumentNullException
@@ -220,7 +220,7 @@ namespace Qowaiv.UnitTests
 			"info");
 		}
 		
-		[TestMethod]
+		[Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -231,7 +231,7 @@ namespace Qowaiv.UnitTests
             });
         }
 		
-		[TestMethod]
+		[Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -243,7 +243,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 		
-		[TestMethod]
+		[Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -253,7 +253,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(TestStruct.ToString(), info.GetString("Value"));
         }
 		
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = BankIdentifierCodeTest.TestStruct;
@@ -261,7 +261,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = BankIdentifierCodeTest.TestStruct;
@@ -269,7 +269,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = BankIdentifierCodeTest.TestStruct;
@@ -278,7 +278,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
             var input = new BankIdentifierCodeSerializeObject()
@@ -298,7 +298,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
             var input = new BankIdentifierCodeSerializeObject()
@@ -318,7 +318,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
             var input = new BankIdentifierCodeSerializeObject()
@@ -339,7 +339,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new BankIdentifierCodeSerializeObject()
@@ -359,7 +359,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new  BankIdentifierCodeSerializeObject()
@@ -380,7 +380,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -391,7 +391,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<BankIdentifierCode>();
@@ -400,7 +400,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -409,7 +409,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid BIC");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<BankIdentifierCode>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -418,7 +418,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
                 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -428,7 +428,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from an integer is not supported.");
         }
         
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -438,7 +438,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a number is not supported.");
         }
                 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -448,7 +448,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(BankIdentifierCode));
@@ -456,7 +456,7 @@ namespace Qowaiv.UnitTests
             
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -469,7 +469,7 @@ namespace Qowaiv.UnitTests
         
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void ToString_Empty_StringEmpty()
         {
             var act = BankIdentifierCode.Empty.ToString();
@@ -477,7 +477,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Unknown_QuestionMark()
         {
             var act = BankIdentifierCode.Unknown.ToString();
@@ -485,7 +485,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -493,7 +493,7 @@ namespace Qowaiv.UnitTests
 
         Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
             var act = TestStruct.ToString("");
@@ -501,24 +501,24 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(BankIdentifierCode));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("BankIdentifierCode: (empty)", default(BankIdentifierCode));
         }
-        [TestMethod]
+        [Test]
         public void DebugToString_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("BankIdentifierCode: (unknown)", BankIdentifierCode.Unknown);
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("BankIdentifierCode: AEGONL2UXXX", TestStruct);
@@ -529,26 +529,26 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for BankIdentifierCode.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, BankIdentifierCode.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(-845590006, BankIdentifierCodeTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(BankIdentifierCode.Empty.Equals(BankIdentifierCode.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = BankIdentifierCode.Parse("AEGONL2UXXX", CultureInfo.InvariantCulture);
@@ -557,43 +557,43 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l.Equals(r));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(BankIdentifierCodeTest.TestStruct.Equals(BankIdentifierCodeTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(BankIdentifierCodeTest.TestStruct.Equals(BankIdentifierCode.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(BankIdentifierCode.Empty.Equals(BankIdentifierCodeTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(BankIdentifierCodeTest.TestStruct.Equals((object)BankIdentifierCodeTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(BankIdentifierCodeTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(BankIdentifierCodeTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = BankIdentifierCodeTest.TestStruct;
@@ -601,7 +601,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = BankIdentifierCodeTest.TestStruct;
@@ -614,7 +614,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of BICs ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_BankIdentifierCode_AreEqual()
         {
             var item0 = BankIdentifierCode.Parse("AEGONL2UXXX");
@@ -630,7 +630,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of BICs descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_BankIdentifierCode_AreEqual()
         {
             var item0 = BankIdentifierCode.Parse("AEGONL2UXXX");
@@ -646,7 +646,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -658,7 +658,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -672,7 +672,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -689,7 +689,7 @@ namespace Qowaiv.UnitTests
         
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToBankIdentifierCode_AreEqual()
         {
             var exp = TestStruct;
@@ -697,7 +697,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_BankIdentifierCodeToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -710,21 +710,21 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void Length_DefaultValue_0()
         {
             var exp = 0;
             var act = BankIdentifierCode.Empty.Length;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Length_Unknown_0()
         {
             var exp = 0;
             var act = BankIdentifierCode.Unknown.Length;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Length_TestStruct_IntValue()
         {
             var exp = 11;
@@ -732,21 +732,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void BankCode_DefaultValue_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Empty.BankCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void BankCode_Unknown_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Unknown.BankCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void BankCode_TestStruct_AEGO()
         {
             var exp = "AEGO";
@@ -754,21 +754,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void CountryCode_DefaultValue_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Empty.CountryCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void CountryCode_Unknown_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Unknown.CountryCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void CountryCode_TestStruct_NL()
         {
             var exp = "NL";
@@ -776,21 +776,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Country_DefaultValue_CountryEmpty()
         {
             var exp = Country.Empty;
             var act = BankIdentifierCode.Empty.Country;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Country_Unknown_CountryUnknown()
         {
             var exp = Country.Unknown;
             var act = BankIdentifierCode.Unknown.Country;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Country_TestStruct_NL()
         {
             var exp = Country.NL;
@@ -798,21 +798,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void LocationCode_DefaultValue_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Empty.LocationCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void LocationCode_Unknown_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Unknown.LocationCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void LocationCode_TestStruct_NL()
         {
             var exp = "2U";
@@ -820,28 +820,28 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void BranchCode_DefaultValue_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Empty.BranchCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void BranchCode_Unknown_StringEmpty()
         {
             var exp = "";
             var act = BankIdentifierCode.Unknown.BranchCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void BranchCode_TestStruct_NL()
         {
             var exp = "XXX";
             var act = TestStruct.BranchCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void BranchCode_AEGONL2U_StringEmpty()
         {
             var exp = "";
@@ -853,36 +853,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_BankIdentifierCode_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(BankIdentifierCode));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_BankIdentifierCode_IsTrue()
         {
         TypeConverterAssert.CanNotConvertFrom(typeof(BankIdentifierCode), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_BankIdentifierCode_IsTrue()
         {
         TypeConverterAssert.CanNotConvertTo(typeof(BankIdentifierCode), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_BankIdentifierCode_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(BankIdentifierCode));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_BankIdentifierCode_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(BankIdentifierCode));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_BankIdentifierCodeEmpty()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -891,7 +891,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_BankIdentifierCodeEmpty()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -900,7 +900,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -909,7 +909,7 @@ namespace Qowaiv.UnitTests
 			}
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
 			using (new CultureInfoScope("en-GB"))
@@ -922,7 +922,7 @@ namespace Qowaiv.UnitTests
 
         #region IsValid
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(BankIdentifierCode.IsValid("1AAANL01"), "1AAANL01, cijfer in eerste vier");
@@ -934,7 +934,7 @@ namespace Qowaiv.UnitTests
 
             Assert.IsFalse(BankIdentifierCode.IsValid((String)null), "(String)null");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(BankIdentifierCode.IsValid("PSTBNL21"), "PSTBNL21");

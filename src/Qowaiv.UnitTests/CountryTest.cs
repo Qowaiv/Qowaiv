@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class CountryTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -21,7 +21,7 @@ namespace Qowaiv.UnitTests
         #region Country const tests
 
         /// <summary>Country.Empty should be equal to the default of Country.</summary>
-        [TestMethod]
+        [Test]
         public void Empty_None_EqualsDefault()
         {
             Assert.AreEqual(default(Country), Country.Empty);
@@ -32,14 +32,14 @@ namespace Qowaiv.UnitTests
         #region Country IsEmpty tests
 
         /// <summary>Country.IsEmpty() should true for the default of Country.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsTrue()
         {
             Assert.IsTrue(default(Country).IsEmpty());
         }
 
         /// <summary>Country.IsEmpty() should false for the TestStruct.</summary>
-        [TestMethod]
+        [Test]
         public void IsEmpty_Default_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
@@ -50,7 +50,7 @@ namespace Qowaiv.UnitTests
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Null_IsValid()
         {
             Country val;
@@ -62,7 +62,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
             Country val;
@@ -74,7 +74,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse "?" should be valid and the result should be Country.Unknown.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_Questionmark_IsValid()
         {
             Country val;
@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_NullCultureStringValue_IsValid()
         {
             Country val;
@@ -98,7 +98,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsValid()
         {
             Country val;
@@ -110,7 +110,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
-        [TestMethod]
+        [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
             Country val;
@@ -121,7 +121,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -135,7 +135,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -147,7 +147,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -163,7 +163,7 @@ namespace Qowaiv.UnitTests
 
         #region Create tests
 
-        [TestMethod]
+        [Test]
 		public void Create_RegionInfoNull_Empty()
         {
             var exp = Country.Empty;
@@ -171,7 +171,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-		[TestMethod]
+		[Test]
 		public void Create_CultureInfoNull_Empty()
 		{
 			var exp = Country.Empty;
@@ -179,7 +179,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-        [TestMethod]
+        [Test]
         public void Create_CS_CSXX()
         {
             var cs = new RegionInfo("CS");
@@ -191,7 +191,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void Create_NL_NL()
         {
             var exp = Country.NL;
@@ -199,7 +199,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-		[TestMethod]
+		[Test]
 		public void Create_CultureInfoInvariant_Empty()
 		{
 			var exp = Country.Empty;
@@ -207,7 +207,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Create_CultureInfoEs_Empty()
 		{
 			var exp = Country.Empty;
@@ -215,7 +215,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Create_CultureInfoEsEC_Empty()
 		{
 			var exp = Country.EC;
@@ -227,7 +227,7 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -238,7 +238,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
         {
             ExceptionAssert.ExpectException<SerializationException>
@@ -249,7 +249,7 @@ namespace Qowaiv.UnitTests
             });
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.ExpectArgumentNullException
@@ -261,7 +261,7 @@ namespace Qowaiv.UnitTests
             "info");
         }
 
-        [TestMethod]
+        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -271,7 +271,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual("VA", info.GetString("Value"));
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = CountryTest.TestStruct;
@@ -279,7 +279,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = CountryTest.TestStruct;
@@ -287,7 +287,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
             var input = CountryTest.TestStruct;
@@ -296,7 +296,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_CountrySerializeObject_AreEqual()
         {
             var input = new CountrySerializeObject()
@@ -316,7 +316,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_CountrySerializeObject_AreEqual()
         {
             var input = new CountrySerializeObject()
@@ -336,7 +336,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void DataContractSerializeDeserialize_CountrySerializeObject_AreEqual()
         {
             var input = new CountrySerializeObject()
@@ -357,7 +357,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new CountrySerializeObject()
@@ -377,7 +377,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-        [TestMethod]
+        [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
             var input = new CountrySerializeObject()
@@ -398,7 +398,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [TestMethod]
+        [Test]
         public void GetSchema_None_IsNull()
         {
             IXmlSerializable obj = TestStruct;
@@ -409,7 +409,7 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [TestMethod]
+        [Test]
         public void FromJson_Null_AreEqual()
         {
             var act = JsonTester.Read<Country>();
@@ -418,7 +418,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
        
-        [TestMethod]
+        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             ExceptionAssert.ExpectException<FormatException>(() =>
@@ -427,7 +427,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid country");
         }
-        [TestMethod]
+        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<Country>(TestStruct.ToString(CultureInfo.InvariantCulture));
@@ -436,7 +436,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_Int64Value_AreEqual()
         {
             var act = JsonTester.Read<Country>(TestStruct.IsoNumericCode);
@@ -445,7 +445,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DoubleValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -455,7 +455,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a number is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -465,7 +465,7 @@ namespace Qowaiv.UnitTests
             "JSON deserialization from a date is not supported.");
         }
 
-        [TestMethod]
+        [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(Country));
@@ -473,7 +473,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
@@ -486,28 +486,28 @@ namespace Qowaiv.UnitTests
 
         #region IFormattable / ToString tests
 
-        [TestMethod]
+        [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(Country));
         }
-        [TestMethod]
+        [Test]
         public void DebugToString_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("Country: (empty)", default(Country));
         }
-        [TestMethod]
+        [Test]
         public void DebugToString_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("Country: (unknown)", Country.Unknown);
         }
-        [TestMethod]
+        [Test]
         public void DebugToString_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("Country: Holy See (VA/VAT)", TestStruct);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -516,7 +516,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         
-        [TestMethod]
+        [Test]
         public void ToString_Empty_IsStringEmpty()
         {
             var act = Country.Empty.ToString();
@@ -524,7 +524,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_Unknown_Questionmark()
         {
             var act = Country.Unknown.ToString();
@@ -532,21 +532,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString2_NZ_AreEqual()
         {
             var exp = "MZ";
             var act = Country.MZ.ToString("2");
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString3_MZ_AreEqual()
         {
             var exp = "MOZ";
             var act = Country.MZ.ToString("3", new CultureInfo("ja-JP"));
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void ToString0_MZ_AreEqual()
         {
             var exp = "508";
@@ -554,7 +554,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringN_CSHH_AreEqual()
         {
             var exp = "CSHH";
@@ -562,7 +562,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringE_MZ_AreEqual()
         {
             var exp = "Mozambique";
@@ -570,7 +570,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringF_MZ_AreEqual()
         {
             var exp = "モザンビーク";
@@ -583,26 +583,26 @@ namespace Qowaiv.UnitTests
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for Country.Empty.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_Empty_Hash()
         {
             Assert.AreEqual(0, Country.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
-        [TestMethod]
+        [Test]
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(-838223894, CountryTest.TestStruct.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
             Assert.IsTrue(Country.Empty.Equals(Country.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             using (new CultureInfoScope("nl-NL"))
@@ -614,43 +614,43 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
             Assert.IsTrue(CountryTest.TestStruct.Equals(CountryTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
             Assert.IsFalse(CountryTest.TestStruct.Equals(Country.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
             Assert.IsFalse(Country.Empty.Equals(CountryTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
             Assert.IsTrue(CountryTest.TestStruct.Equals((object)CountryTest.TestStruct));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructNull_IsFalse()
         {
             Assert.IsFalse(CountryTest.TestStruct.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void Equals_TestStructObject_IsFalse()
         {
             Assert.IsFalse(CountryTest.TestStruct.Equals(new object()));
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
             var l = CountryTest.TestStruct;
@@ -658,7 +658,7 @@ namespace Qowaiv.UnitTests
             Assert.IsTrue(l == r);
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
             var l = CountryTest.TestStruct;
@@ -671,7 +671,7 @@ namespace Qowaiv.UnitTests
         #region IComparable tests
 
         /// <summary>Orders a list of Countrys ascending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderBy_Country_AreEqual()
         {
             var item0 = Country.AE;
@@ -687,7 +687,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Orders a list of Countrys descending.</summary>
-        [TestMethod]
+        [Test]
         public void OrderByDescending_Country_AreEqual()
         {
             var item0 = Country.AE;
@@ -703,7 +703,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_ObjectTestStruct_0()
         {
             object other = (object)TestStruct;
@@ -715,7 +715,7 @@ namespace Qowaiv.UnitTests
         }
 
         /// <summary>Compare with null should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_null_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -729,7 +729,7 @@ namespace Qowaiv.UnitTests
             );
         }
         /// <summary>Compare with a random object should throw an expception.</summary>
-        [TestMethod]
+        [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
             ExceptionAssert.ExpectArgumentException
@@ -746,7 +746,7 @@ namespace Qowaiv.UnitTests
 
         #region Casting tests
 
-        [TestMethod]
+        [Test]
         public void Explicit_StringToCountry_AreEqual()
         {
             var exp = TestStruct;
@@ -754,7 +754,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_CountryToString_AreEqual()
         {
             var exp = TestStruct.ToString();
@@ -763,7 +763,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Implicit_RegionInfoToCountry_AreEqual()
         {
             Country exp = Country.NL;
@@ -771,7 +771,7 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void Explicit_CountryToRegionInfo_AreEqual()
         {
             var exp = new RegionInfo("NL");
@@ -784,21 +784,21 @@ namespace Qowaiv.UnitTests
 
         #region Properties
 
-        [TestMethod]
+        [Test]
         public void CallingCode_Empty_AreEqual()
         {
             var exp = "";
             var act = Country.Empty.CallingCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void CallingCode_Unknown_AreEqual()
         {
             var exp = "";
             var act = Country.Unknown.CallingCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void CallingCode_TestStruct_AreEqual()
         {
             var exp = "+379";
@@ -806,7 +806,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void Name_Empty_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -816,7 +816,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void Name_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -826,7 +826,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void Name_TestStruct_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -837,7 +837,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void DisplayName_Empty_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -847,7 +847,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void DisplayName_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -857,7 +857,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void DisplayName_TestStruct_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -867,7 +867,7 @@ namespace Qowaiv.UnitTests
                 Assert.AreEqual(exp, act);
             }
         }
-        [TestMethod]
+        [Test]
         public void GetDisplayName_TestStruct_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -878,21 +878,21 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void IsoNumericCode_Empty_AreEqual()
         {
             var exp = 0;
             var act = Country.Empty.IsoNumericCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void IsoNumericCode_Unknown_AreEqual()
         {
             var exp = 999;
             var act = Country.Unknown.IsoNumericCode;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void IsoNumericCode_TestStruct_AreEqual()
         {
             var exp = 336;
@@ -900,28 +900,28 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void RegionInfoExists_Empty_AreEqual()
         {
             var exp = false;
             var act = Country.Empty.RegionInfoExists;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void RegionInfoExists_Unknown_AreEqual()
         {
             var exp = false;
             var act = Country.Unknown.RegionInfoExists;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void RegionInfoExists_TestStruct_AreEqual()
         {
             var exp = false;
             var act = TestStruct.RegionInfoExists;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void RegionInfoExists_NL_AreEqual()
         {
             var exp = true;
@@ -929,28 +929,28 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void StartDate_Empty_AreEqual()
         {
             var exp = DateTime.MinValue;
             var act = Country.Empty.StartDate;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void StartDate_Unknown_AreEqual()
         {
             var exp = DateTime.MinValue;
             var act = Country.Unknown.StartDate;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void StartDate_TestStruct_AreEqual()
         {
             var exp = new DateTime(1974, 01, 01);
             var act = TestStruct.StartDate;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void StartDate_CZ_AreEqual()
         {
             var exp = new DateTime(1993, 01, 01);
@@ -958,35 +958,35 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void EndDate_Empty_AreEqual()
         {
             DateTime? exp = null;
             var act = Country.Empty.EndDate;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void EndDate_Unknown_AreEqual()
         {
             DateTime? exp = null;
             var act = Country.Unknown.EndDate;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void EndDate_TestStruct_AreEqual()
         {
             DateTime? exp = null;
             var act = TestStruct.EndDate;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void EndDate_CZ_AreEqual()
         {
             DateTime? exp = null;
             var act = Country.CZ.EndDate;
             Assert.AreEqual(exp, act);
         }
-        [TestMethod]
+        [Test]
         public void EndDate_CSHH_AreEqual()
         {
             var exp = new DateTime(1992, 12, 31);
@@ -998,25 +998,25 @@ namespace Qowaiv.UnitTests
 
         #region Methods
 
-        [TestMethod]
+        [Test]
         public void IsEmptyOrNotKnown_Empty_IsTrue()
         {
             Assert.IsTrue(Country.Empty.IsEmptyOrUnknown());
         }
 
-        [TestMethod]
+        [Test]
         public void IsEmptyOrNotKnown_NotKnown_IsTrue()
         {
             Assert.IsTrue(Country.Unknown.IsEmptyOrUnknown());
         }
 
-        [TestMethod]
+        [Test]
         public void IsEmptyOrNotKnown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
         }
 
-        [TestMethod]
+        [Test]
         public void ToRegionInfo_TestStruct_ThrowsNotSupportedExcpetion()
         {
             ExceptionAssert.ExpectException<NotSupportedException>(() =>
@@ -1030,36 +1030,36 @@ namespace Qowaiv.UnitTests
 
         #region Type converter tests
 
-        [TestMethod]
+        [Test]
         public void ConverterExists_Country_IsTrue()
         {
             TypeConverterAssert.ConverterExists(typeof(Country));
         }
 
-        [TestMethod]
+        [Test]
         public void CanNotConvertFromInt32_Country_IsTrue()
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(Country), typeof(Int32));
         }
-        [TestMethod]
+        [Test]
         public void CanNotConvertToInt32_Country_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(Country), typeof(Int32));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertFromString_Country_IsTrue()
         {
             TypeConverterAssert.CanConvertFromString(typeof(Country));
         }
 
-        [TestMethod]
+        [Test]
         public void CanConvertToString_Country_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(Country));
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringNull_CountryEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1068,7 +1068,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFrom_StringEmpty_CountryEmpty()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1077,7 +1077,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1086,7 +1086,7 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -1099,14 +1099,14 @@ namespace Qowaiv.UnitTests
 
         #region IsValid tests
 
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(Country.IsValid("Complex"), "Complex");
             Assert.IsFalse(Country.IsValid((String)null), "(String)null");
             Assert.IsFalse(Country.IsValid(String.Empty), "String.Empty");
         }
-        [TestMethod]
+        [Test]
         public void IsValid_Data_IsTrue()
         {
             Assert.IsTrue(Country.IsValid("China", null));
@@ -1115,7 +1115,7 @@ namespace Qowaiv.UnitTests
 
         #region Collection tests
 
-        [TestMethod]
+        [Test]
         public void GetCurrent_1973_0()
         {
             var exp = 0;
@@ -1126,7 +1126,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void GetCurrent_None_249()
         {
             var exp = 249;

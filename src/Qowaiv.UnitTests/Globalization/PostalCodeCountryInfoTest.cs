@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.UnitTests.TestTools;
 using System;
@@ -7,10 +7,10 @@ using System.Linq;
 
 namespace Qowaiv.UnitTests.Globalization
 {
-    [TestClass]
+    [TestFixture]
     public class PostalCodeCountryInfoTest
     {
-        [TestMethod]
+        [Test]
         public void GetCountriesWithoutPostalCode_None_77Countries()
         {
             var exp = new Country[] { Country.AE, Country.AG, Country.AO, Country.AQ, Country.AW, Country.BF, Country.BI, Country.BJ, Country.BQ, Country.BS, Country.BV, Country.BW, Country.BZ, Country.CD, Country.CF, Country.CG, Country.CI, Country.CK, Country.CM, Country.CW, Country.DJ, Country.DM, Country.DO, Country.EH, Country.ER, Country.FJ, Country.GD, Country.GH, Country.GM, Country.GN, Country.GQ, Country.GY, Country.HK, Country.IE, Country.JM, Country.KE, Country.KI, Country.KM, Country.KN, Country.KP, Country.KW, Country.LC, Country.ML, Country.MO, Country.MR, Country.MS, Country.MU, Country.MV, Country.MW, Country.NR, Country.NU, Country.QA, Country.RW, Country.SB, Country.SC, Country.SJ, Country.SL, Country.SO, Country.SR, Country.SS, Country.ST, Country.SX, Country.SY, Country.TF, Country.TG, Country.TK, Country.TL, Country.TO, Country.TV, Country.TZ, Country.UG, Country.UM, Country.UZ, Country.VU, Country.WS, Country.YE, Country.ZW };
@@ -26,7 +26,7 @@ namespace Qowaiv.UnitTests.Globalization
             CollectionAssert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void GetCountriesWithFormatting_None_59Countries()
         {
             var exp = new Country[] { Country.AD, Country.AI, Country.AR, Country.AS, Country.AX, Country.AZ, Country.BB, Country.BM, Country.BR, Country.CA, Country.CL, Country.CU, Country.CZ, Country.DK, Country.FI, Country.FK, Country.FM, Country.FO, Country.GA, Country.GB, Country.GG, Country.GI, Country.GL, Country.GR, Country.GS, Country.GU, Country.IM, Country.IO, Country.IR, Country.JE, Country.JP, Country.KR, Country.KY, Country.LB, Country.LT, Country.LV, Country.MA, Country.MC, Country.MD, Country.MH, Country.MP, Country.MT, Country.NL, Country.PL, Country.PN, Country.PT, Country.PW, Country.SA, Country.SE, Country.SH, Country.SI, Country.SK, Country.SN, Country.TC, Country.US, Country.VC, Country.VE, Country.VG, Country.VI };
@@ -42,7 +42,7 @@ namespace Qowaiv.UnitTests.Globalization
             CollectionAssert.AreEqual(exp, act);
         }
 
-        [TestMethod]
+        [Test]
         public void GetCountriesWithSingleValue_None_10Countries()
         {
             var exp = new Dictionary<Country, string>()
@@ -78,25 +78,25 @@ namespace Qowaiv.UnitTests.Globalization
             }
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_Empty_AreEqual()
         {
             DebuggerDisplayAssert.HasResult("Postal code[], none", PostalCodeCountryInfo.GetInstance(Country.Empty));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_BE_AreEqual()
         {
             DebuggerDisplayAssert.HasResult("Postal code[BE], Pattern: ^[1-9][0-9]{3}$", PostalCodeCountryInfo.GetInstance(Country.BE));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_CA_AreEqual()
         {
             DebuggerDisplayAssert.HasResult("Postal code[CA], Pattern: ^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$, Format: $1 $2", PostalCodeCountryInfo.GetInstance(Country.CA));
         }
 
-        [TestMethod]
+        [Test]
         public void DebugToString_VA_AreEqual()
         {
             DebuggerDisplayAssert.HasResult("Postal code[VA], Value: 00120", PostalCodeCountryInfo.GetInstance(Country.VA));

@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Qowaiv.Web.Mvc;
 using System;
 using System.Linq;
 
 namespace Qowaiv.UnitTests.Web.Mvc
 {
-    [TestClass]
+    [TestFixture]
     public class TypeConverterModelBinderTest
     {
-        [TestMethod]
+        [Test]
         public void Initialize_None_CountEquals()
         {
             var act = TypeConverterModelBinder.Types.ToArray();
@@ -16,7 +16,7 @@ namespace Qowaiv.UnitTests.Web.Mvc
             Assert.AreEqual(12, act.Length);
         }
         
-        [TestMethod]
+        [Test]
         public void AddType_Int32_OneItemAdded()
         {
             try
@@ -34,7 +34,7 @@ namespace Qowaiv.UnitTests.Web.Mvc
             }
         }
 
-        [TestMethod]
+        [Test]
         public void AddType_ClassWithoutConverter_NothingAdded()
         {
             var exp = TypeConverterModelBinder.Types.Count();

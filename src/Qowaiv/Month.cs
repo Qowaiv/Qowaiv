@@ -13,6 +13,8 @@ using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Qowaiv
 {
@@ -56,6 +58,24 @@ namespace Qowaiv
         public static readonly Month November = new Month() { m_Value = 11 };
         /// <summary>Represents December (12).</summary>
         public static readonly Month December = new Month() { m_Value = 12 };
+
+		/// <summary>Represents all months (January till December).</summary>
+		public static readonly ReadOnlyCollection<Month> All = new ReadOnlyCollection<Month>(
+			new List<Month>()
+			{
+				Month.January,
+				Month.February,
+				Month.March,
+				Month.April,
+				Month.May,
+				Month.June,
+				Month.July,
+				Month.August,
+				Month.September,
+				Month.October,
+				Month.November,
+				Month.December,
+			});
 
         #region Properties
 

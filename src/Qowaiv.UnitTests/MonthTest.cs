@@ -31,6 +31,16 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(default(Month), Month.Empty);
         }
 
+		[Test]
+		public void All_None_EqualsDefault()
+		{
+			var exp = Enumerable.Range(1, 12)
+			.Select(n => Month.Create(n))
+			.ToArray();
+			
+			CollectionAssert.AreEqual(exp, Month.All);
+		}
+
         #endregion
 
         #region month IsEmpty tests

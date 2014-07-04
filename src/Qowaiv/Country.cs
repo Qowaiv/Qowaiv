@@ -609,12 +609,12 @@ namespace Qowaiv
         }
 
         /// <summary>Gets a collection of all country info's.</summary>
-        public static readonly IList<Country> All = new ReadOnlyCollection<Country>(
+		public static readonly ReadOnlyCollection<Country> All = new ReadOnlyCollection<Country>(
             ResourceManager
                 .GetString("All")
                 .Split(';')
                 .Select(str => new Country(){ m_Value = str })
-                .ToList() );
+                .ToList());
 
         #endregion
 

@@ -560,9 +560,9 @@ namespace Qowaiv
 		public static explicit operator Date(DateTime val) { return new Date(val); }
 
 		/// <summary>Casts a week date to a week date.</summary>
-		public static implicit operator WeekDate(Date val) { return val; }
+		public static implicit operator WeekDate(Date val) { return WeekDate.Create(val); }
 		/// <summary>Casts a week date to a week date.</summary>
-		public static implicit operator Date(WeekDate val) { return WeekDate.Create(val); }
+		public static implicit operator Date(WeekDate val) { return val.Date; }
 
 		#endregion
 

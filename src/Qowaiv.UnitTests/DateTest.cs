@@ -671,7 +671,7 @@ namespace Qowaiv.UnitTests
 		[TestMethod]
 		public void Implicit_WeekDateToDate_AreEqual()
 		{
-			Date exp = new WeekDate(1970, 05, 6);
+			Date exp = new WeekDate(1970, 07, 6);
 			Date act = TestStruct;
 
 			Assert.AreEqual(exp, act);
@@ -680,7 +680,7 @@ namespace Qowaiv.UnitTests
 		public void Implicit_DateToWeekDate_AreEqual()
 		{
 			WeekDate exp = TestStruct;
-			WeekDate act = new WeekDate(1970, 05, 6);
+			WeekDate act = new WeekDate(1970, 07, 6);
 
 			Assert.AreEqual(exp, act);
 		}

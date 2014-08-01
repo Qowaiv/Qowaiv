@@ -5,15 +5,14 @@ using log4net.Repository.Hierarchy;
 using Qowaiv.CodeGenerator.Generators;
 using Qowaiv.CodeGenerator.Generators.Svo;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Qowaiv.CodeGenerator
 {
-    class Program
+	/// <summary>The code generator program.</summary>
+    public class Program
     {
         /// <summary>Logger for the collector.</summary>
         private static ILog log = LogManager.GetLogger(typeof(Program));
@@ -57,7 +56,14 @@ namespace Qowaiv.CodeGenerator
             repository.RaiseConfigurationChanged(EventArgs.Empty);
         }
 
-        static void Main(string[] args)
+		/// <summary>Executes the program.</summary>
+		/// <param name="args">The Arguments of the program.</param>
+		/// <remarks>
+		/// CodeGenerator.exe outputDir underlyingType className [longClassName] [a|an] [namespace]
+		/// 
+		/// Example: CodeGenerator.exe C:\Temp\Qowaiv String EmailAddress "Email address" an Qowaiv
+		/// </remarks>
+        public static void Main(string[] args)
         {
             AppendLoggers();
 
@@ -65,21 +71,21 @@ namespace Qowaiv.CodeGenerator
             {
                 if (args == null || args.Length < 3) { throw new Exception("arguments required."); }
 
-                var dir = new DirectoryInfo(args[0]);
+                var outputDir = new DirectoryInfo(args[0]);
 
-                Type tp = null;
+                Type underlyingType = null;
                 if (!args[1].Contains('.'))
                 {
-                    tp = Type.GetType("System." + args[1].Substring(0, 1).ToUpperInvariant() + args[1].Substring(1));
+                    underlyingType = Type.GetType("System." + args[1].Substring(0, 1).ToUpperInvariant() + args[1].Substring(1));
                 }
                 else
                 {
-                    tp = Type.GetType(args[1]);
+                    underlyingType = Type.GetType(args[1]);
                 }
 
-                if (tp == null) { throw new ArgumentException("Could not resolve the underlying type."); }
+                if (underlyingType == null) { throw new ArgumentException("Could not resolve the underlying type."); }
 
-                var input = new SvoStruct() { ClassName = args[2], UnderlyingType = tp };
+                var input = new SvoStruct() { ClassName = args[2], UnderlyingType = underlyingType };
 
                 if (args.Length > 3) { input.ClassLongName = args[3]; }
                 if (args.Length > 4) { input.a = args[4].ToLower(); }
@@ -88,15 +94,14 @@ namespace Qowaiv.CodeGenerator
                 var rsxGen = new QowaivCodeGenerator();
                 var svoGen = new SvoStructGenerator();
 
-                rsxGen.Generate(dir);
-                svoGen.Generate(dir, input);
+                rsxGen.Generate(outputDir);
+                svoGen.Generate(outputDir, input);
                
             }
             catch(Exception x)
             {
                 log.Error(x);
             }
-            
         }
     }
 }

@@ -39,7 +39,7 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Qowaiv.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Shared\Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

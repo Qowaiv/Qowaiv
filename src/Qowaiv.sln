@@ -33,6 +33,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5249CDC7-3F92-45B6-9328-627BC0C2441D}"
 	ProjectSection(SolutionItems) = preProject
 		Shared\ProductInfo.cs = Shared\ProductInfo.cs
+		Shared\Qowaiv.snk = Shared\Qowaiv.snk
 		Shared\VersionInfo.cs = Shared\VersionInfo.cs
 	EndProjectSection
 EndProject

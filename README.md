@@ -26,6 +26,10 @@ Email address
 -------------
 Represents a (single) email address, including IPv4 domains.
 
+File size
+---------
+Represents the size of a file.
+
 Gender
 ------
 Represents a gender based on an ISO 5218 code.

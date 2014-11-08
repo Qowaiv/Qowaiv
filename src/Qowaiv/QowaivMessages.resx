@@ -132,6 +132,9 @@
   <data name="FormatExceptionEmailAddress" xml:space="preserve">
     <value>Not a valid email address</value>
   </data>
+  <data name="FormatExceptionFileSize" xml:space="preserve">
+    <value>Not a valid file size</value>
+  </data>
   <data name="FormatExceptionGender" xml:space="preserve">
     <value>Not a valid gender</value>
   </data>

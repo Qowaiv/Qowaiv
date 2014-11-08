@@ -382,7 +382,7 @@ namespace Qowaiv.UnitTests
 			using (new CultureInfoScope("nl-NL"))
 			{
 				var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-				var exp = "Unit Test Formatter, value: '02/14/1970', format: 'Unit Test Format'";
+				var exp = "Unit Test Formatter, value: '14-2-1970', format: 'Unit Test Format'";
 
 				Assert.AreEqual(exp, act);
 			}

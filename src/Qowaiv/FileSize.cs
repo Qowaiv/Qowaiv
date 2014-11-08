@@ -470,6 +470,31 @@ namespace Qowaiv
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
+		/// <remarks>
+		/// There are basicly two ways to format the file size. The first one is
+		/// automatic. Based on the size the extenion is chosen (byte, kB, MB, GB, ect.).
+		/// This can be specified by a s/S (short notation) and a f/F (full notation).
+		/// 
+		/// The other option is to specify the extension explictly. So Megabyte,
+		/// kB, ect. No extension is also possible.
+		/// 
+		/// Short notation:
+		/// 8900.ToString("s") => 8900b
+		/// 238900.ToString("s") => 233.3kb
+		/// 238900.ToString(" S") => 233.3 kB
+		/// 238900.ToString("0000.00 S") => 0233.30 kB
+		///
+		/// Full notation:
+		/// 8900.ToString("0.0 f") => 8900.0 byte
+		/// 238900.ToString("0 f") => 233 kilobyte
+		/// 1238900.ToString("0.00 F") => 1.18 Megabyte
+		/// 
+		/// Custom:
+		/// 8900.ToString("0.0 kb") => 8.7 kb
+		/// 238900.ToString("0.0 MB") => 0.2 MB
+		/// 1238900.ToString("#,##0.00 Kilobyte") => 1,209.86 Kilobyte
+		/// 1238900.ToString("#,##0") => 1,238,900
+		/// </remarks>
 		public string ToString(string format, IFormatProvider formatProvider)
 		{
 			string formatted;

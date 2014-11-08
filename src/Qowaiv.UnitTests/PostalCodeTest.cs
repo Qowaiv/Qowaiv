@@ -589,13 +589,13 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebugToString_DefaultValue_String()
+        public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("PostalCode: (empty)", default(PostalCode));
         }
 
         [Test]
-        public void DebugToString_TestStruct_String()
+        public void DebuggerDisplay_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("PostalCode: H0H0H0", TestStruct);
         }

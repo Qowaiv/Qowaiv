@@ -15,524 +15,527 @@ using Qowaiv.Json;
 
 namespace @Model.Namespace
 {
-    /// <summary>Represents @Model.a @Model.ClassLongName.</summary>
-    [DebuggerDisplay("{DebugToString()}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for @Model.a @Model.ClassLongName.")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(@Model.UnderlyingType.Name))]
-    [TypeConverter(typeof(@(Model.ClassName)TypeConverter))]
-    public struct @Model.ClassName : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<@Model.ClassName>
-    {
-        /// <summary>Represents the pattern of a (potential) valid @Model.ClassLongName.</summary>
-        public static readonly Regex Pattern = new Regex(@@"^ComplexRegexPattern.*$", RegexOptions.Compiled);
+	/// <summary>Represents @Model.a @Model.ClassLongName.</summary>
+	[DebuggerDisplay("{DebuggerDisplay}")]
+	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for @Model.a @Model.ClassLongName.")]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(@Model.UnderlyingType.Name))]
+	[TypeConverter(typeof(@(Model.ClassName)TypeConverter))]
+	public struct @Model.ClassName : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<@Model.ClassName>
+	{
+		/// <summary>Represents the pattern of a (potential) valid @Model.ClassLongName.</summary>
+		public static readonly Regex Pattern = new Regex(@@"^ComplexRegexPattern.*$", RegexOptions.Compiled);
 
-        /// <summary>Represents an empty/not set @Model.ClassLongName.</summary>
-        public static readonly @Model.ClassName Empty = new @(Model.ClassName)() { m_Value = default(@Model.UnderlyingType.Name) };
+		/// <summary>Represents an empty/not set @Model.ClassLongName.</summary>
+		public static readonly @Model.ClassName Empty = new @(Model.ClassName)() { m_Value = default(@Model.UnderlyingType.Name) };
 
-        /// <summary>Represents an unknown (but set) @Model.ClassLongName.</summary>
-        public static readonly @Model.ClassName Unknown = new @(Model.ClassName)() { m_Value = Unknown };
+		/// <summary>Represents an unknown (but set) @Model.ClassLongName.</summary>
+		public static readonly @Model.ClassName Unknown = new @(Model.ClassName)() { m_Value = Unknown };
 
-        #region Properties
+		#region Properties
 
-        /// <summary>The inner value of the @Model.ClassLongName.</summary>
-        private @Model.UnderlyingType.Name m_Value;
-        @if(@Model.IsStringBased){<text>
-        /// <summary>Gets the number of characters of @Model.ClassLongName.</summary>
-        public int Length { get { return m_Value == null ? 0 : m_Value.Length; } }
-        </text>}
+		/// <summary>The inner value of the @Model.ClassLongName.</summary>
+		private @Model.UnderlyingType.Name m_Value;
+		@if(@Model.IsStringBased){<text>
+		/// <summary>Gets the number of characters of @Model.ClassLongName.</summary>
+		public int Length { get { return m_Value == null ? 0 : m_Value.Length; } }
+		</text>}
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        /// <summary>Returns true if the @Model.ClassLongName is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(@Model.UnderlyingType); }
+		/// <summary>Returns true if the @Model.ClassLongName is empty, otherwise false.</summary>
+		public bool IsEmpty() { return m_Value == default(@Model.UnderlyingType); }
 
-        /// <summary>Returns true if the @Model.ClassLongName is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == @(Model.ClassName).Unknown.m_Value; }
+		/// <summary>Returns true if the @Model.ClassLongName is unknown, otherwise false.</summary>
+		public bool IsUnknown() { return m_Value == @(Model.ClassName).Unknown.m_Value; }
 
-        /// <summary>Returns true if the @Model.ClassLongName is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+		/// <summary>Returns true if the @Model.ClassLongName is empty or unknown, otherwise false.</summary>
+		public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
-        #endregion
+		#endregion
 
-        #region (XML) (De)serialization
+		#region (XML) (De)serialization
 
-        /// <summary>Initializes a new instance of @Model.ClassLongName based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private @(Model.ClassName)(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null) { throw new ArgumentNullException("info"); }
-            m_Value = info.Get@(Model.UnderlyingType.Name)("Value");
-        }
+		/// <summary>Initializes a new instance of @Model.ClassLongName based on the serialization info.</summary>
+		/// <param name="info">The serialization info.</param>
+		/// <param name="context">The streaming context.</param>
+		private @(Model.ClassName)(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null) { throw new ArgumentNullException("info"); }
+			m_Value = info.Get@(Model.UnderlyingType.Name)("Value");
+		}
 
-        /// <summary>Adds the underlying propererty of @Model.ClassLongName to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null) { throw new ArgumentNullException("info"); }
-            info.AddValue("Value", m_Value);
-        }
+		/// <summary>Adds the underlying propererty of @Model.ClassLongName to the serialization info.</summary>
+		/// <param name="info">The serialization info.</param>
+		/// <param name="context">The streaming context.</param>
+		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null) { throw new ArgumentNullException("info"); }
+			info.AddValue("Value", m_Value);
+		}
 
-        /// <summary>Gets the xml schema to (de) xml serialize @Model.a @Model.ClassLongName.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+		/// <summary>Gets the xml schema to (de) xml serialize @Model.a @Model.ClassLongName.</summary>
+		/// <remarks>
+		/// Returns null as no schema is required.
+		/// </remarks>
+		XmlSchema IXmlSerializable.GetSchema() { return null; }
 
-        /// <summary>Reads the @Model.ClassLongName from an xml writer.</summary>
-        /// <remarks>
-        /// Uses the string parse function of @Model.ClassLongName.
-        /// </remarks>
-        /// <param name="reader">An xml reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            var s = reader.ReadElementString();
-            var val = Parse(s, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-        }
+		/// <summary>Reads the @Model.ClassLongName from an xml writer.</summary>
+		/// <remarks>
+		/// Uses the string parse function of @Model.ClassLongName.
+		/// </remarks>
+		/// <param name="reader">An xml reader.</param>
+		void IXmlSerializable.ReadXml(XmlReader reader)
+		{
+			var s = reader.ReadElementString();
+			var val = Parse(s, CultureInfo.InvariantCulture);
+			m_Value = val.m_Value;
+		}
 
-        /// <summary>Writes the @Model.ClassLongName to an xml writer.</summary>
-        /// <remarks>
-        /// Uses the string representation of @Model.ClassLongName.
-        /// </remarks>
-        /// <param name="writer">An xml writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            writer.WriteString(ToString(CultureInfo.InvariantCulture));
-        }
+		/// <summary>Writes the @Model.ClassLongName to an xml writer.</summary>
+		/// <remarks>
+		/// Uses the string representation of @Model.ClassLongName.
+		/// </remarks>
+		/// <param name="writer">An xml writer.</param>
+		void IXmlSerializable.WriteXml(XmlWriter writer)
+		{
+			writer.WriteString(ToString(CultureInfo.InvariantCulture));
+		}
 
-        #endregion
-        
-        #region (JSON) (De)serialization
+		#endregion
+		
+		#region (JSON) (De)serialization
 
-        /// <summary>Generates @Model.a @Model.ClassLongName from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(@Model.UnderlyingType.Name); 
-        }
+		/// <summary>Generates @Model.a @Model.ClassLongName from a JSON null object representation.</summary>
+		void IJsonSerializable.FromJson()
+		{
+			m_Value = default(@Model.UnderlyingType.Name); 
+		}
 
-        /// <summary>Generates @Model.a @Model.ClassLongName from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the @Model.ClassLongName.
-        /// </param>
-        void IJsonSerializable.FromJson(String jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
+		/// <summary>Generates @Model.a @Model.ClassLongName from a JSON string representation.</summary>
+		/// <param name="jsonString">
+		/// The JSON string that represents the @Model.ClassLongName.
+		/// </param>
+		void IJsonSerializable.FromJson(String jsonString)
+		{
+			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+		}
 
-        /// <summary>Generates @Model.a @Model.ClassLongName from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the @Model.ClassLongName.
-        /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
-        //{
-        //    m_Value = Create(jsonInteger).m_Value;
-        //}
+		/// <summary>Generates @Model.a @Model.ClassLongName from a JSON integer representation.</summary>
+		/// <param name="jsonInteger">
+		/// The JSON integer that represents the @Model.ClassLongName.
+		/// </param>
+		void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+		//{
+		//    m_Value = Create(jsonInteger).m_Value;
+		//}
 
-        /// <summary>Generates @Model.a @Model.ClassLongName from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the @Model.ClassLongName.
-        /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
-        //{
-        //    m_Value = Create(jsonNumber).m_Value;
-        //}
+		/// <summary>Generates @Model.a @Model.ClassLongName from a JSON number representation.</summary>
+		/// <param name="jsonNumber">
+		/// The JSON number that represents the @Model.ClassLongName.
+		/// </param>
+		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+		//{
+		//    m_Value = Create(jsonNumber).m_Value;
+		//}
 
-        /// <summary>Generates @Model.a @Model.ClassLongName from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the @Model.ClassLongName.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
-        //{
-        //    m_Value = Create(jsonDate).m_Value;
-        //}
+		/// <summary>Generates @Model.a @Model.ClassLongName from a JSON date representation.</summary>
+		/// <param name="jsonDate">
+		/// The JSON Date that represents the @Model.ClassLongName.
+		/// </param>
+		void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+		//{
+		//    m_Value = Create(jsonDate).m_Value;
+		//}
 
-        /// <summary>Converts @Model.a @Model.ClassLongName into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return m_Value == default(@Model.UnderlyingType.Name) ? null : ToString(CultureInfo.InvariantCulture);
-        }
+		/// <summary>Converts @Model.a @Model.ClassLongName into its JSON object representation.</summary>
+		object IJsonSerializable.ToJson()
+		{
+			return m_Value == default(@Model.UnderlyingType.Name) ? null : ToString(CultureInfo.InvariantCulture);
+		}
 
-        #endregion
+		#endregion
 
-        #region IFormattable / ToString
+		#region IFormattable / ToString
 
-        /// <summary>Returns a System.String that represents the current @Model.ClassLongName for debug purposes.</summary>
-         private string DebugToString()
-        {
-            if (IsEmpty()) { return "@(Model.ClassName): (empty)"; }
-            if (IsUnknown()) { return "@(Model.ClassName): (unknown)"; }
-            return string.Format(CultureInfo.InvariantCulture, "@(Model.ClassName): {0}", m_Value);
-        }
+		/// <summary>Returns a System.String that represents the current @Model.ClassLongName for debug purposes.</summary>
+		private string DebuggerDisplay
+		{
+			get
+			{
+				if (IsEmpty()) { return "@(Model.ClassName): (empty)"; }
+				if (IsUnknown()) { return "@(Model.ClassName): (unknown)"; }
+				return string.Format(CultureInfo.InvariantCulture, "@(Model.ClassName): {0}", m_Value);
+			}
+		}
 
-         /// <summary>Returns a System.String that represents the current @Model.ClassLongName.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+		 /// <summary>Returns a System.String that represents the current @Model.ClassLongName.</summary>
+		public override string ToString()
+		{
+			return ToString(CultureInfo.CurrentCulture);
+		}
 
-        /// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
+		/// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
+		/// <param name="format">
+		/// The format that this describes the formatting.
+		/// </param>
+		public string ToString(string format)
+		{
+			return ToString(format, CultureInfo.CurrentCulture);
+		}
 
-        /// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+		/// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
+		/// <param name="formatProvider">
+		/// The format provider.
+		/// </param>
+		public string ToString(IFormatProvider formatProvider)
+		{
+			return ToString("", formatProvider);
+		}
 
-        /// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
-            {
-                return formatted;
-            }
-            throw new NotImplementedException();
-        }
+		/// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
+		/// <param name="format">
+		/// The format that this describes the formatting.
+		/// </param>
+		/// <param name="formatProvider">
+		/// The format provider.
+		/// </param>
+		public string ToString(string format, IFormatProvider formatProvider)
+		{
+			string formatted;
+			if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+			{
+				return formatted;
+			}
+			throw new NotImplementedException();
+		}
 
-        #endregion
-        
-        #region IEquatable
+		#endregion
+		
+		#region IEquatable
 
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compair with.</param>
-        public override bool Equals(object obj){ return base.Equals(obj); }
+		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
+		/// <param name="obj">An object to compair with.</param>
+		public override bool Equals(object obj){ return base.Equals(obj); }
 
-        /// <summary>Returns the hash code for this @Model.ClassLongName.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() { return @if(Model.UnderlyingType == typeof(System.String)){<text>m_Value == null ? 0 : </text>}m_Value.GetHashCode(); }
+		/// <summary>Returns the hash code for this @Model.ClassLongName.</summary>
+		/// <returns>
+		/// A 32-bit signed integer hash code.
+		/// </returns>
+		public override int GetHashCode() { return @if(Model.UnderlyingType == typeof(System.String)){<text>m_Value == null ? 0 : </text>}m_Value.GetHashCode(); }
 
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(@Model.ClassName left, @Model.ClassName right)
-        {
-            return left.Equals(right);
-        }
+		/// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
+		/// <param name="left">The left operand.</param>
+		/// <param name="right">The right operand</param>
+		public static bool operator ==(@Model.ClassName left, @Model.ClassName right)
+		{
+			return left.Equals(right);
+		}
 
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(@Model.ClassName left, @Model.ClassName right)
-        {
-            return !(left == right);
-        }
+		/// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
+		/// <param name="left">The left operand.</param>
+		/// <param name="right">The right operand</param>
+		public static bool operator !=(@Model.ClassName left, @Model.ClassName right)
+		{
+			return !(left == right);
+		}
 
-        #endregion
+		#endregion
 
-        #region IComparable
+		#region IComparable
 
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a @Model.ClassLongName.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="System.ArgumentException">
-        /// value is not a @Model.ClassLongName.
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is @Model.ClassName)
-            {
-                return CompareTo((@Model.ClassName)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "@Model.a @Model.ClassLongName"), "obj");
-        }
+		/// <summary>Compares this instance with a specified System.Object and indicates whether
+		/// this instance precedes, follows, or appears in the same position in the sort
+		/// order as the specified System.Object.
+		/// </summary>
+		/// <param name="obj">
+		/// An object that evaluates to a @Model.ClassLongName.
+		/// </param>
+		/// <returns>
+		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
+		/// or appears in the same position in the sort order as the value parameter.Value
+		/// Condition Less than zero This instance precedes value. Zero This instance
+		/// has the same position in the sort order as value. Greater than zero This
+		/// instance follows value.-or- value is null.
+		/// </returns>
+		/// <exception cref="System.ArgumentException">
+		/// value is not a @Model.ClassLongName.
+		/// </exception>
+		public int CompareTo(object obj)
+		{
+			if (obj is @Model.ClassName)
+			{
+				return CompareTo((@Model.ClassName)obj);
+			}
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "@Model.a @Model.ClassLongName"), "obj");
+		}
 
-        /// <summary>Compares this instance with a specified @Model.ClassLongName and indicates
-        /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified @Model.ClassLongName.
-        /// </summary>
-        /// <param name="other">
-        /// The @Model.ClassLongName to compare with this instance.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.
-        /// </returns>
-        public int CompareTo(@Model.ClassName other) { return m_Value.CompareTo(other.m_Value); }
+		/// <summary>Compares this instance with a specified @Model.ClassLongName and indicates
+		/// whether this instance precedes, follows, or appears in the same position
+		/// in the sort order as the specified @Model.ClassLongName.
+		/// </summary>
+		/// <param name="other">
+		/// The @Model.ClassLongName to compare with this instance.
+		/// </param>
+		/// <returns>
+		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
+		/// or appears in the same position in the sort order as the value parameter.
+		/// </returns>
+		public int CompareTo(@Model.ClassName other) { return m_Value.CompareTo(other.m_Value); }
 
 @if (!Model.IsStringBased){<text>
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator @(Model.lt)(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.lt) 0; }
+		/// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
+		public static bool operator @(Model.lt)(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.lt) 0; }
 
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator @(Model.gt)(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.gt) 0; }
+		/// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
+		public static bool operator @(Model.gt)(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.gt) 0; }
 
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator @(Model.lt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.lt)= 0; }
+		/// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
+		public static bool operator @(Model.lt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.lt)= 0; }
 
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator @(Model.gt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.gt)= 0; }
+		/// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
+		public static bool operator @(Model.gt)=(@(Model.ClassName) l, @(Model.ClassName) r) { return l.CompareTo(r) @(Model.gt)= 0; }
 
 </text>}
-        #endregion
-       
-        #region (Explicit) casting
+		#endregion
+	   
+		#region (Explicit) casting
 
-        /// <summary>Casts @Model.a @Model.ClassLongName to a System.String.</summary>
-        public static explicit operator string(@Model.ClassName val) { return val.ToString(CultureInfo.CurrentCulture); }
-        /// <summary>Casts a System.String to a @Model.ClassLongName.</summary>
-        public static explicit operator @(Model.ClassName)(string str) { return @(Model.ClassName).Parse(str, CultureInfo.CurrentCulture); }
+		/// <summary>Casts @Model.a @Model.ClassLongName to a System.String.</summary>
+		public static explicit operator string(@Model.ClassName val) { return val.ToString(CultureInfo.CurrentCulture); }
+		/// <summary>Casts a System.String to a @Model.ClassLongName.</summary>
+		public static explicit operator @(Model.ClassName)(string str) { return @(Model.ClassName).Parse(str, CultureInfo.CurrentCulture); }
 
 @if (Model.IsFloatBased)
 {<text>
-        /// <summary>Casts a decimal @Model.a @Model.ClassLongName.</summary>
-        public static implicit operator @(Model.ClassName)(decimal val) { return new @(Model.ClassName)() { m_Value = val }; }
-        /// <summary>Casts a decimal @Model.a @Model.ClassLongName.</summary>
-        public static implicit operator @(Model.ClassName)(double val) { return new @(Model.ClassName)() { m_Value = (decimal)val }; }
+		/// <summary>Casts a decimal @Model.a @Model.ClassLongName.</summary>
+		public static implicit operator @(Model.ClassName)(decimal val) { return new @(Model.ClassName)() { m_Value = val }; }
+		/// <summary>Casts a decimal @Model.a @Model.ClassLongName.</summary>
+		public static implicit operator @(Model.ClassName)(double val) { return new @(Model.ClassName)() { m_Value = (decimal)val }; }
 
-        /// <summary>Casts @Model.a @Model.ClassLongName to a decimal.</summary>
-        public static explicit operator decimal(@Model.ClassName val) { return val.m_Value; }
-        /// <summary>Casts @Model.a @Model.ClassLongName to a double.</summary>
-        public static explicit operator double(@Model.ClassName val) { return (double)val.m_Value; }
+		/// <summary>Casts @Model.a @Model.ClassLongName to a decimal.</summary>
+		public static explicit operator decimal(@Model.ClassName val) { return val.m_Value; }
+		/// <summary>Casts @Model.a @Model.ClassLongName to a double.</summary>
+		public static explicit operator double(@Model.ClassName val) { return (double)val.m_Value; }
 </text>}
-       
+	   
 @if (Model.IsIntegerBased)
 {<text>
-         /// <summary>Casts @Model.a @Model.ClassLongName to a System.Int32.</summary>
-        public static explicit operator Int32(@(Model.ClassName) val) { return val.m_Value; }
-        /// <summary>Casts an System.Int32 to @Model.a @Model.ClassLongName.</summary>
-        public static explicit operator @(Model.ClassName)(Int32 val) { return @(Model.ClassName).Create(val); }
+		 /// <summary>Casts @Model.a @Model.ClassLongName to a System.Int32.</summary>
+		public static explicit operator Int32(@(Model.ClassName) val) { return val.m_Value; }
+		/// <summary>Casts an System.Int32 to @Model.a @Model.ClassLongName.</summary>
+		public static explicit operator @(Model.ClassName)(Int32 val) { return @(Model.ClassName).Create(val); }
 
-        /// <summary>Casts @Model.a @Model.ClassLongName to a System.Int64.</summary>
-        public static explicit operator Int64(@(Model.ClassName) val) { return val.m_Value; }
-        /// <summary>Casts a System.Int64 to @Model.a @Model.ClassLongName.</summary>
-        public static explicit operator @(Model.ClassName)(Int64 val) { return @(Model.ClassName).Create((Int32)val); }
+		/// <summary>Casts @Model.a @Model.ClassLongName to a System.Int64.</summary>
+		public static explicit operator Int64(@(Model.ClassName) val) { return val.m_Value; }
+		/// <summary>Casts a System.Int64 to @Model.a @Model.ClassLongName.</summary>
+		public static explicit operator @(Model.ClassName)(Int64 val) { return @(Model.ClassName).Create((Int32)val); }
 </text>}
-        #endregion
+		#endregion
 
-        #region Factory methods
+		#region Factory methods
 
-        /// <summary>Converts the string to @Model.a @Model.ClassLongName.</summary>
-        /// <param name="s">
-        /// A string containing @Model.a @Model.ClassLongName to convert.
-        /// </param>
-        /// <returns>
-        /// @Model.aUpper @Model.ClassLongName.
-        /// </returns>
-        /// <exception cref="System.FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static @Model.ClassName Parse(string s)
-        {
-           return Parse(s, CultureInfo.CurrentCulture);
-        }
+		/// <summary>Converts the string to @Model.a @Model.ClassLongName.</summary>
+		/// <param name="s">
+		/// A string containing @Model.a @Model.ClassLongName to convert.
+		/// </param>
+		/// <returns>
+		/// @Model.aUpper @Model.ClassLongName.
+		/// </returns>
+		/// <exception cref="System.FormatException">
+		/// s is not in the correct format.
+		/// </exception>
+		public static @Model.ClassName Parse(string s)
+		{
+		   return Parse(s, CultureInfo.CurrentCulture);
+		}
 
-        /// <summary>Converts the string to @Model.a @Model.ClassLongName.</summary>
-        /// <param name="s">
-        /// A string containing @Model.a @Model.ClassLongName to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The specified format provider.
-        /// </param>
-        /// <returns>
-        /// @Model.aUpper @Model.ClassLongName.
-        /// </returns>
-        /// <exception cref="System.FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static @Model.ClassName Parse(string s, IFormatProvider formatProvider)
-        {
-            @Model.ClassName val;
-            if (@(Model.ClassName).TryParse(s, formatProvider, out val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatException@(Model.ClassName));
-        }
+		/// <summary>Converts the string to @Model.a @Model.ClassLongName.</summary>
+		/// <param name="s">
+		/// A string containing @Model.a @Model.ClassLongName to convert.
+		/// </param>
+		/// <param name="formatProvider">
+		/// The specified format provider.
+		/// </param>
+		/// <returns>
+		/// @Model.aUpper @Model.ClassLongName.
+		/// </returns>
+		/// <exception cref="System.FormatException">
+		/// s is not in the correct format.
+		/// </exception>
+		public static @Model.ClassName Parse(string s, IFormatProvider formatProvider)
+		{
+			@Model.ClassName val;
+			if (@(Model.ClassName).TryParse(s, formatProvider, out val))
+			{
+				return val;
+			}
+			throw new FormatException(QowaivMessages.FormatException@(Model.ClassName));
+		}
 
-        /// <summary>Converts the string to @Model.a @Model.ClassLongName.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing @Model.a @Model.ClassLongName to convert.
-        /// </param>
-        /// <returns>
-        /// The @Model.ClassLongName if the string was converted successfully, otherwise @(Model.ClassName).Empty.
-        /// </returns>
-        public static @Model.ClassName TryParse(string s)
-        {
-            @Model.ClassName val;
-            if (@(Model.ClassName).TryParse(s, out val))
-            {
-                return val;
-            }
-            return @(Model.ClassName).Empty;
-        }
+		/// <summary>Converts the string to @Model.a @Model.ClassLongName.
+		/// A return value indicates whether the conversion succeeded.
+		/// </summary>
+		/// <param name="s">
+		/// A string containing @Model.a @Model.ClassLongName to convert.
+		/// </param>
+		/// <returns>
+		/// The @Model.ClassLongName if the string was converted successfully, otherwise @(Model.ClassName).Empty.
+		/// </returns>
+		public static @Model.ClassName TryParse(string s)
+		{
+			@Model.ClassName val;
+			if (@(Model.ClassName).TryParse(s, out val))
+			{
+				return val;
+			}
+			return @(Model.ClassName).Empty;
+		}
 
-        /// <summary>Converts the string to @Model.a @Model.ClassLongName.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing @Model.a @Model.ClassLongName to convert.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, out @Model.ClassName result)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out result);
-        }
+		/// <summary>Converts the string to @Model.a @Model.ClassLongName.
+		/// A return value indicates whether the conversion succeeded.
+		/// </summary>
+		/// <param name="s">
+		/// A string containing @Model.a @Model.ClassLongName to convert.
+		/// </param>
+		/// <param name="result">
+		/// The result of the parsing.
+		/// </param>
+		/// <returns>
+		/// True if the string was converted successfully, otherwise false.
+		/// </returns>
+		public static bool TryParse(string s, out @Model.ClassName result)
+		{
+			return TryParse(s, CultureInfo.CurrentCulture, out result);
+		}
 
-        /// <summary>Converts the string to @Model.a @Model.ClassLongName.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing @Model.a @Model.ClassLongName to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The specified format provider.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, IFormatProvider formatProvider, out @Model.ClassName result)
-        {
-            result = @(Model.ClassName).Empty;
-            if (string.IsNullOrEmpty(s))
-            {
-                return true;
-            }
-            if (Qowaiv.Unknown.IsUnknown(s))
-            {
-                result = @(Model.ClassName).Unknown;
-                return true;
-            }
-            if (IsValid(s, formatProvider))
-            {
-                result = new @(Model.ClassName)() { m_Value = @(Model.UnderlyingType).Parse(s, formatProvider) };
-                return true;
-            }
-            return false;
-        }
+		/// <summary>Converts the string to @Model.a @Model.ClassLongName.
+		/// A return value indicates whether the conversion succeeded.
+		/// </summary>
+		/// <param name="s">
+		/// A string containing @Model.a @Model.ClassLongName to convert.
+		/// </param>
+		/// <param name="formatProvider">
+		/// The specified format provider.
+		/// </param>
+		/// <param name="result">
+		/// The result of the parsing.
+		/// </param>
+		/// <returns>
+		/// True if the string was converted successfully, otherwise false.
+		/// </returns>
+		public static bool TryParse(string s, IFormatProvider formatProvider, out @Model.ClassName result)
+		{
+			result = @(Model.ClassName).Empty;
+			if (string.IsNullOrEmpty(s))
+			{
+				return true;
+			}
+			if (Qowaiv.Unknown.IsUnknown(s))
+			{
+				result = @(Model.ClassName).Unknown;
+				return true;
+			}
+			if (IsValid(s, formatProvider))
+			{
+				result = new @(Model.ClassName)() { m_Value = @(Model.UnderlyingType).Parse(s, formatProvider) };
+				return true;
+			}
+			return false;
+		}
 
 @if(!Model.IsStringBased){<text>
 
-        ///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name. @(Model.lt)/summary @(Model.gt)
-        ///  @(Model.lt)param name="val" @(Model.gt)
-        /// A decimal describing @Model.a @Model.ClassLongName.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)exception cref="System.FormatException" @(Model.gt)
-        /// val is not a valid @Model.ClassLongName.
-        ///  @(Model.lt)/exception @(Model.gt)
-        public static @(Model.ClassName) Create(@Model.UnderlyingType.Name? val)
-        {
-            @(Model.ClassName) result;
-            if (@(Model.ClassName).TryCreate(val, out result))
-            {
-                return result;
-            }
-            throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatException@(Model.ClassName));
-        }
+		///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name. @(Model.lt)/summary @(Model.gt)
+		///  @(Model.lt)param name="val" @(Model.gt)
+		/// A decimal describing @Model.a @Model.ClassLongName.
+		///  @(Model.lt)/param @(Model.gt)
+		///  @(Model.lt)exception cref="System.FormatException" @(Model.gt)
+		/// val is not a valid @Model.ClassLongName.
+		///  @(Model.lt)/exception @(Model.gt)
+		public static @(Model.ClassName) Create(@Model.UnderlyingType.Name? val)
+		{
+			@(Model.ClassName) result;
+			if (@(Model.ClassName).TryCreate(val, out result))
+			{
+				return result;
+			}
+			throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatException@(Model.ClassName));
+		}
 
-        ///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
-        /// A return value indicates whether the conversion succeeded.
-        ///  @(Model.lt)/summary @(Model.gt)
-        ///  @(Model.lt)param name="val" @(Model.gt)
-        /// A decimal describing @Model.a @Model.ClassLongName.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)returns @(Model.gt)
-        /// @Model.aUpper @Model.ClassLongName if the creation was successfully, otherwise @(Model.ClassName).Empty.
-        ///  @(Model.lt)/returns @(Model.gt)
-        public static @(Model.ClassName) TryCreate(@Model.UnderlyingType.Name? val)
-        {
-            @(Model.ClassName) result;
-            if(TryCreate(val, out result))
-            {
-                return result;
-            }
-            return @(Model.ClassName).Empty;
-        }
+		///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
+		/// A return value indicates whether the conversion succeeded.
+		///  @(Model.lt)/summary @(Model.gt)
+		///  @(Model.lt)param name="val" @(Model.gt)
+		/// A decimal describing @Model.a @Model.ClassLongName.
+		///  @(Model.lt)/param @(Model.gt)
+		///  @(Model.lt)returns @(Model.gt)
+		/// @Model.aUpper @Model.ClassLongName if the creation was successfully, otherwise @(Model.ClassName).Empty.
+		///  @(Model.lt)/returns @(Model.gt)
+		public static @(Model.ClassName) TryCreate(@Model.UnderlyingType.Name? val)
+		{
+			@(Model.ClassName) result;
+			if(TryCreate(val, out result))
+			{
+				return result;
+			}
+			return @(Model.ClassName).Empty;
+		}
 
-        ///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
-        /// A return value indicates whether the creation succeeded.
-        ///  @(Model.lt)/summary @(Model.gt)
-        ///  @(Model.lt)param name="val" @(Model.gt)
-        /// A @Model.UnderlyingType.Name describing @Model.a @Model.ClassLongName.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)param name="result" @(Model.gt)
-        /// The result of the creation.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)returns @(Model.gt)
-        /// True if @Model.a @Model.ClassLongName was created successfully, otherwise false.
-        ///  @(Model.lt)/returns @(Model.gt)
-        public static bool TryCreate(@Model.UnderlyingType.Name? val, out @(Model.ClassName) result)
-        {
-            result = @(Model.ClassName).Empty;
+		///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
+		/// A return value indicates whether the creation succeeded.
+		///  @(Model.lt)/summary @(Model.gt)
+		///  @(Model.lt)param name="val" @(Model.gt)
+		/// A @Model.UnderlyingType.Name describing @Model.a @Model.ClassLongName.
+		///  @(Model.lt)/param @(Model.gt)
+		///  @(Model.lt)param name="result" @(Model.gt)
+		/// The result of the creation.
+		///  @(Model.lt)/param @(Model.gt)
+		///  @(Model.lt)returns @(Model.gt)
+		/// True if @Model.a @Model.ClassLongName was created successfully, otherwise false.
+		///  @(Model.lt)/returns @(Model.gt)
+		public static bool TryCreate(@Model.UnderlyingType.Name? val, out @(Model.ClassName) result)
+		{
+			result = @(Model.ClassName).Empty;
 
-            if (!val.HasValue)
-            {
-                return true;
-            }
-            if (IsValid(val.Value))
-            {
-                result = new @(Model.ClassName)() { m_Value = val.Value };
-                return true;
-            }
-            return false;
-        }
+			if (!val.HasValue)
+			{
+				return true;
+			}
+			if (IsValid(val.Value))
+			{
+				result = new @(Model.ClassName)() { m_Value = val.Value };
+				return true;
+			}
+			return false;
+		}
 </text>}
 
-        #endregion
+		#endregion
 
-        #region Validation
+		#region Validation
 
-        /// <summary>Returns true if the val represents a valid @Model.ClassLongName, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+		/// <summary>Returns true if the val represents a valid @Model.ClassLongName, otherwise false.</summary>
+		public static bool IsValid(string val)
+		{
+			return IsValid(val, CultureInfo.CurrentCulture);
+		}
 
-        /// <summary>Returns true if the val represents a valid @Model.ClassLongName, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            return Pattern.IsMatch(val ?? string.Empty);
-        }
+		/// <summary>Returns true if the val represents a valid @Model.ClassLongName, otherwise false.</summary>
+		public static bool IsValid(string val, IFormatProvider formatProvider)
+		{
+			return Pattern.IsMatch(val ?? string.Empty);
+		}
 @if(!Model.IsStringBased)
 {<text>
-        /// <summary>Returns true if the val represents a valid @Model.ClassLongName, otherwise false.</summary>
-        public static bool IsValid(@Model.UnderlyingType.Name? val)
-        {
-            if(!val.HasValue){ return false; }
-           throw new NotImplementedException();
-        }
+		/// <summary>Returns true if the val represents a valid @Model.ClassLongName, otherwise false.</summary>
+		public static bool IsValid(@Model.UnderlyingType.Name? val)
+		{
+			if(!val.HasValue){ return false; }
+		   throw new NotImplementedException();
+		}
 </text>}
-        #endregion
-     }
+		#endregion
+	 }
 }

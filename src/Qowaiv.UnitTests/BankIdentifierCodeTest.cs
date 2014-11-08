@@ -508,18 +508,18 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebugToString_DefaultValue_String()
+        public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("BankIdentifierCode: (empty)", default(BankIdentifierCode));
         }
         [Test]
-        public void DebugToString_Unknown_String()
+        public void DebuggerDisplay_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("BankIdentifierCode: (unknown)", BankIdentifierCode.Unknown);
         }
 
         [Test]
-        public void DebugToString_TestStruct_String()
+        public void DebuggerDisplay_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("BankIdentifierCode: AEGONL2UXXX", TestStruct);
         }

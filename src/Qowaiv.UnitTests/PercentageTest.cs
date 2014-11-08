@@ -423,7 +423,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void DebugToString_DefaultValue_String()
+		public void DebuggerDisplay_DefaultValue_String()
 		{
 			DebuggerDisplayAssert.HasResult("17.51%", TestStruct);
 		}

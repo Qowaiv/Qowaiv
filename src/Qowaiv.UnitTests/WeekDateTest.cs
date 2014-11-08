@@ -519,7 +519,7 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebugToString_TestStruct_String()
+        public void DebuggerDisplay_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("1997-W14-6", TestStruct);
         }

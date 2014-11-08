@@ -485,18 +485,18 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebugToString_DefaultValue_String()
+        public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("IBAN: (empty)", default(InternationalBankAccountNumber));
         }
         [Test]
-        public void DebugToString_Unknown_String()
+        public void DebuggerDisplay_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("IBAN: (unknown)", InternationalBankAccountNumber.Unknown);
         }
 
         [Test]
-        public void DebugToString_TestStruct_String()
+        public void DebuggerDisplay_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("IBAN: NL20 INGB 0001 2345 67", TestStruct);
         }

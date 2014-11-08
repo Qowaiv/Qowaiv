@@ -424,13 +424,13 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void DebugToString_DefaultValue_String()
+		public void DebuggerDisplay_DefaultValue_String()
 		{
 			DebuggerDisplayAssert.HasResult("0001-01-01", default(Date));
 		}
 
 		[Test]
-		public void DebugToString_TestStruct_String()
+		public void DebuggerDisplay_TestStruct_String()
 		{
 			DebuggerDisplayAssert.HasResult("1970-02-14", TestStruct);
 		}

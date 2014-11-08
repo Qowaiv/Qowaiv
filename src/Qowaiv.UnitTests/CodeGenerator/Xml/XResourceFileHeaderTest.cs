@@ -19,7 +19,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         }
 
         [Test]
-        public void DebugToString_Params_HasResult()
+        public void DebuggerDisplay_Params_HasResult()
         {
             var val = new XResourceFileHeader("KEY0", "VALUE0");
 

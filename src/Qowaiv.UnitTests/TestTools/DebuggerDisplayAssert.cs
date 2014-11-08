@@ -9,34 +9,31 @@ using System.Threading.Tasks;
 
 namespace Qowaiv.UnitTests.TestTools
 {
-    public static class DebuggerDisplayAssert
-    {
-        public static void HasAttribute(Type type)
-        {
-            Assert.IsNotNull(type, "The supplied type should not be null.");
+	public static class DebuggerDisplayAssert
+	{
+		public static void HasAttribute(Type type)
+		{
+			Assert.IsNotNull(type, "The supplied type should not be null.");
 
-            var act = (DebuggerDisplayAttribute)type.GetCustomAttributes(typeof(DebuggerDisplayAttribute), false).FirstOrDefault();
-            Assert.IsNotNull(act, "The type '{0}' has no DebuggerDisplay attribute.", type);
+			var act = (DebuggerDisplayAttribute)type.GetCustomAttributes(typeof(DebuggerDisplayAttribute), false).FirstOrDefault();
+			Assert.IsNotNull(act, "The type '{0}' has no DebuggerDisplay attribute.", type);
 
-            Assert.AreEqual("{DebugToString()}", act.Value, "DebuggerDisplay attribute value is not '{DebugToString()}'.");
-        }
+			Assert.AreEqual("{DebuggerDisplay}", act.Value, "DebuggerDisplay attribute value is not '{DebuggerDisplay}'.");
+		}
 
-        public static void HasResult(string expected, object value)
-        {
-            Assert.IsNotNull(value, "The supplied value should not be null.");
+		public static void HasResult(string expected, object value)
+		{
+			Assert.IsNotNull(value, "The supplied value should not be null.");
 
-            var type = value.GetType();
+			var type = value.GetType();
 
-            var method = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-                .FirstOrDefault(m => m.Name == "DebugToString" &&
-                    m.ReturnType == typeof(String) &&
-                    m.GetParameters().Length == 0);
+			var prop = type.GetProperty("DebuggerDisplay", BindingFlags.Instance | BindingFlags.NonPublic);
 
-            Assert.IsNotNull(method, "The type '{0}' does not contain a non public method { string DebugToString() }.", type);
+			Assert.IsNotNull(prop, "The type '{0}' does not contain a non-public property DebuggerDisplay.", type);
 
-            var actual = method.Invoke(value, new object[0]);
+			var actual = prop.GetValue(value);
 
-            Assert.AreEqual(expected, actual);
-        }
-    }
+			Assert.AreEqual(expected, actual);
+		}
+	}
 }

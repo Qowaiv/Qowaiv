@@ -492,17 +492,17 @@ namespace Qowaiv.UnitTests
             DebuggerDisplayAssert.HasAttribute(typeof(Country));
         }
         [Test]
-        public void DebugToString_DefaultValue_String()
+        public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("Country: (empty)", default(Country));
         }
         [Test]
-        public void DebugToString_Unknown_String()
+        public void DebuggerDisplay_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("Country: (unknown)", Country.Unknown);
         }
         [Test]
-        public void DebugToString_TestStruct_String()
+        public void DebuggerDisplay_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("Country: Holy See (VA/VAT)", TestStruct);
         }

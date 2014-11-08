@@ -592,18 +592,18 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebugToString_DefaultValue_String()
+        public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("Year: (empty)", default(Year));
         }
         [Test]
-        public void DebugToString_Unknown_String()
+        public void DebuggerDisplay_Unknown_String()
         {
             DebuggerDisplayAssert.HasResult("Year: (unknown)", Year.Unknown);
         }
 
         [Test]
-        public void DebugToString_TestStruct_String()
+        public void DebuggerDisplay_TestStruct_String()
         {
             DebuggerDisplayAssert.HasResult("Year: 1979", TestStruct);
         }

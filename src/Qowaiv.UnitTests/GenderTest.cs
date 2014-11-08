@@ -561,13 +561,13 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void DebugToString_DefaultValue_String()
+		public void DebuggerDisplay_DefaultValue_String()
 		{
 			DebuggerDisplayAssert.HasResult("Gender: (empty)", default(Gender));
 		}
 
 		[Test]
-		public void DebugToString_TestStruct_String()
+		public void DebuggerDisplay_TestStruct_String()
 		{
 			DebuggerDisplayAssert.HasResult("Gender: Male", TestStruct);
 		}

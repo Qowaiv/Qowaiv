@@ -24,7 +24,7 @@ namespace Qowaiv
 	/// and the total size of the file system. This value type can not represent
 	/// file sizes bigger than Int64.MaxValue.
 	/// </remarks>
-	[DebuggerDisplay("{DebugToString()}")]
+	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Int64))]
 	[TypeConverter(typeof(FileSizeTypeConverter))]
 	public struct FileSize : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<FileSize>
@@ -434,9 +434,9 @@ namespace Qowaiv
 		#region IFormattable / ToString
 
 		/// <summary>Returns a System.String that represents the current file size for debug purposes.</summary>
-		private string DebugToString()
+		private string DebuggerDisplay
 		{
-			return ToString(" F", CultureInfo.InvariantCulture);
+			get { return ToString(" F", CultureInfo.InvariantCulture); }
 		}
 
 		/// <summary>Returns a System.String that represents the current file size.</summary>

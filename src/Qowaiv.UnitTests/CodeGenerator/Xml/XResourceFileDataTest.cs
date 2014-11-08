@@ -21,7 +21,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         }
 
         [Test]
-        public void DebugToString_NoComment_HasResult()
+        public void DebuggerDisplay_NoComment_HasResult()
         {
             var val = new XResourceFileData("KEY0", "VALUE0");
 
@@ -29,7 +29,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         }
 
         [Test]
-        public void DebugToString_WithComment_HasResult()
+        public void DebuggerDisplay_WithComment_HasResult()
         {
             var val = new XResourceFileData("KEY1", "VALUE1", "With comment.");
 

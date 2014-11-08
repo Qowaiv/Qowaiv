@@ -585,13 +585,13 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void DebugToString_DefaultValue_String()
+		public void DebuggerDisplay_DefaultValue_String()
 		{
 			DebuggerDisplayAssert.HasResult("0 byte", default(FileSize));
 		}
 
 		[Test]
-		public void DebugToString_TestStruct_String()
+		public void DebuggerDisplay_TestStruct_String()
 		{
 			DebuggerDisplayAssert.HasResult("117.7 Megabyte", TestStruct);
 		}

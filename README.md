@@ -3,7 +3,7 @@ Qowaiv
 Domain-driven design bottom up
 ------------------------------
 
-Qowaiv is a (Single) Value Object library. Its aims to model reusable (Single) Value Objects that can be used a wide variety of modelling scenarios, both inside and outside a Domain-driven context.
+Qowaiv is a (Single) Value Object library. It aims to model reusable (Single) Value Objects that can be used a wide variety of modelling scenarios, both inside and outside a Domain-driven context.
 
 Supported scenarios include parsing, formatting, validation, (de)serialization, and domain specific logic.
 
@@ -61,3 +61,14 @@ Represents a week based date.
 Year
 ----
 Represents a year in the range [1-9999].
+
+Qowaiv SVO options
+==================
+
+Debugger display
+----------------
+During debugging sessions, by default, the IDE shows the result of ToString() on a watch. Although Tostring() is overridden for all Qowaiv Single Value Objects, for debugging a special debugger display is provided too, using a debugger display attribute.
+
+The debugger display attribute refers to (private) property with the name "DebuggerDisplay", which repersents the Single Value Object as string. If supported, formatted, and in case of a Empty or Unknown value with a notification of that too. The outcome of the DebuggerDisplay is tested in de UnitTests.
+
+Because the rendering of debugger display is handled based on the development enviroment, and methods as debugger display are not supported by VB.NET, the debugger display attribute refers to a property instead.

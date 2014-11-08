@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Conversion;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
 
 namespace Qowaiv
 {
 	/// <summary>Represents a Date.</summary>
-	[DebuggerDisplay("{DebugToString()}")]
+	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 	[TypeConverter(typeof(DateTypeConverter))]
 	public struct Date : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Date>
@@ -411,9 +410,9 @@ namespace Qowaiv
 		#region IFormattable / ToString
 
 		/// <summary>Returns a System.String that represents the current Date for debug purposes.</summary>
-		private string DebugToString()
+		private string DebuggerDisplay
 		{
-			return m_Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+			get { return m_Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); }
 		}
 
 		/// <summary>Returns a System.String that represents the current Date.</summary>

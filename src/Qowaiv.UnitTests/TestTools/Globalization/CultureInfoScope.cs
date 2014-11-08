@@ -9,127 +9,130 @@ using System.Threading.Tasks;
 
 namespace Qowaiv.UnitTests.TestTools.Globalization
 {
-    /// <summary>Handles the CultureInfo of a thread during its scope.</summary>
-    /// <remarks>
-    /// <code>
-    /// using(new CultureInfoScope("be-NL"))
-    /// {
-    ///     // Do things.
-    /// }
-    /// </code>
-    /// </remarks>
-    [DebuggerDisplay("{DebugToString()}")]
-    public class CultureInfoScope : IDisposable
-    {
-        #region Constructors
-        
-        /// <summary>Creates a new CultureInfo scope.</summary>
-        /// <remarks>
-        /// No direct access.
-        /// </remarks>
-        protected CultureInfoScope() { }
+	/// <summary>Handles the CultureInfo of a thread during its scope.</summary>
+	/// <remarks>
+	/// <code>
+	/// using(new CultureInfoScope("be-NL"))
+	/// {
+	///     // Do things.
+	/// }
+	/// </code>
+	/// </remarks>
+	[DebuggerDisplay("{DebuggerDisplay}")]
+	public class CultureInfoScope : IDisposable
+	{
+		#region Constructors
 
-        /// <summary>Creates a new CultureInfo scope.</summary>
-        /// <param name="name">
-        /// Name of the culture.
-        /// </param>
-        public CultureInfoScope(string name)
-            : this(new CultureInfo(name), new CultureInfo(name)) { }
+		/// <summary>Creates a new CultureInfo scope.</summary>
+		/// <remarks>
+		/// No direct access.
+		/// </remarks>
+		protected CultureInfoScope() { }
 
-        /// <summary>Creates a new CultureInfo scope.</summary>
-        /// <param name="name">
-        /// Name of the culture.
-        /// </param>
-        /// <param name="nameUI">
-        /// Name of the UI culture.
-        /// </param>
-        public CultureInfoScope(string name, string nameUI)
-            : this(new CultureInfo(name), new CultureInfo(nameUI)) { }
+		/// <summary>Creates a new CultureInfo scope.</summary>
+		/// <param name="name">
+		/// Name of the culture.
+		/// </param>
+		public CultureInfoScope(string name)
+			: this(new CultureInfo(name), new CultureInfo(name)) { }
 
-        /// <summary>Creates a new CultureInfo scope.</summary>
-        /// <param name="culture">
-        /// The culture.
-        /// </param>
-        public CultureInfoScope(CultureInfo culture)
-            : this(culture, culture) { }
+		/// <summary>Creates a new CultureInfo scope.</summary>
+		/// <param name="name">
+		/// Name of the culture.
+		/// </param>
+		/// <param name="nameUI">
+		/// Name of the UI culture.
+		/// </param>
+		public CultureInfoScope(string name, string nameUI)
+			: this(new CultureInfo(name), new CultureInfo(nameUI)) { }
 
-        /// <summary>Creates a new CultureInfo scope.</summary>
-        /// <param name="culture">
-        /// The culture.
-        /// </param>
-        /// <param name="cultureUI">
-        /// The UI culture.
-        /// </param>
-        public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI)
-        {
-            if (culture == null) { throw new ArgumentNullException("culture"); }
-            if (culture == null) { throw new ArgumentNullException("cultureUI"); }
+		/// <summary>Creates a new CultureInfo scope.</summary>
+		/// <param name="culture">
+		/// The culture.
+		/// </param>
+		public CultureInfoScope(CultureInfo culture)
+			: this(culture, culture) { }
 
-            this.Previous = Thread.CurrentThread.CurrentCulture;
-            this.PreviousUI = Thread.CurrentThread.CurrentUICulture;
+		/// <summary>Creates a new CultureInfo scope.</summary>
+		/// <param name="culture">
+		/// The culture.
+		/// </param>
+		/// <param name="cultureUI">
+		/// The UI culture.
+		/// </param>
+		public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI)
+		{
+			if (culture == null) { throw new ArgumentNullException("culture"); }
+			if (culture == null) { throw new ArgumentNullException("cultureUI"); }
 
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = cultureUI;
-        }
+			this.Previous = Thread.CurrentThread.CurrentCulture;
+			this.PreviousUI = Thread.CurrentThread.CurrentUICulture;
 
-        #endregion
+			Thread.CurrentThread.CurrentCulture = culture;
+			Thread.CurrentThread.CurrentUICulture = cultureUI;
+		}
 
-        /// <summary>Gets the previous Current UI Culture.</summary>
-        public CultureInfo PreviousUI { get; protected set; }
-        /// <summary>Gets the previous Current Culture.</summary>
-        public CultureInfo Previous { get; protected set; }
+		#endregion
 
-        /// <summary>Represents the CultureInfo scope as System.String.</summary>
-        protected string DebugToString()
-        {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}: [{1}/{2}], Previous: [{3}/{4}]",
-                GetType().Name,
-                Thread.CurrentThread.CurrentCulture.Name,
-                Thread.CurrentThread.CurrentUICulture.Name,
-                this.Previous.Name,
-                this.PreviousUI.Name);
-        }
+		/// <summary>Gets the previous Current UI Culture.</summary>
+		public CultureInfo PreviousUI { get; protected set; }
+		/// <summary>Gets the previous Current Culture.</summary>
+		public CultureInfo Previous { get; protected set; }
 
-        #region Factory Methods
+		/// <summary>Represents the CultureInfo scope as System.String.</summary>
+		protected string DebuggerDisplay
+		{
+			get
+			{
+				return string.Format(
+					CultureInfo.InvariantCulture,
+					"{0}: [{1}/{2}], Previous: [{3}/{4}]",
+					GetType().Name,
+					Thread.CurrentThread.CurrentCulture.Name,
+					Thread.CurrentThread.CurrentUICulture.Name,
+					this.Previous.Name,
+					this.PreviousUI.Name);
+			}
+		}
 
-        /// <summary>Gets a new invariant CultureInfo Scope.</summary>
-        public static CultureInfoScope NewInvariant()
-        {
-            return new CultureInfoScope(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
-        }
+		#region Factory Methods
 
-        #endregion
+		/// <summary>Gets a new invariant CultureInfo Scope.</summary>
+		public static CultureInfoScope NewInvariant()
+		{
+			return new CultureInfoScope(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
+		}
 
-        #region IDisposable
+		#endregion
 
-        /// <summary></summary>
-        public void Dispose()
-        {
-            Dispose(true);
+		#region IDisposable
 
-            // Use SupressFinalize in case a subclass 
-            // of this type implements a finalizer.
-            GC.SuppressFinalize(this);
-        }
+		/// <summary></summary>
+		public void Dispose()
+		{
+			Dispose(true);
 
-        /// <summary>Disposes the scope by setting the privious cultures back.</summary>
-        /// <param name="disposing">
-        /// Should dispose actualy dispose something.
-        /// </param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.Disposed && disposing)
-            {
-                Thread.CurrentThread.CurrentCulture = this.Previous;
-                Thread.CurrentThread.CurrentUICulture = this.PreviousUI;
-            }
-        }
+			// Use SupressFinalize in case a subclass 
+			// of this type implements a finalizer.
+			GC.SuppressFinalize(this);
+		}
 
-        /// <summary>Gets and set if the CultureInfo Scope is disposed.</summary>
-        protected bool Disposed { get; set; }
+		/// <summary>Disposes the scope by setting the privious cultures back.</summary>
+		/// <param name="disposing">
+		/// Should dispose actualy dispose something.
+		/// </param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.Disposed && disposing)
+			{
+				Thread.CurrentThread.CurrentCulture = this.Previous;
+				Thread.CurrentThread.CurrentUICulture = this.PreviousUI;
+			}
+		}
 
-        #endregion
-    }
+		/// <summary>Gets and set if the CultureInfo Scope is disposed.</summary>
+		protected bool Disposed { get; set; }
+
+		#endregion
+	}
 }

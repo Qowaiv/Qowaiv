@@ -120,6 +120,9 @@
   <data name="AgrumentException_Must" xml:space="preserve">
     <value>Argument must be {0}</value>
   </data>
+  <data name="ArgumentException_NotIFormattable" xml:space="preserve">
+    <value>The argument must implement System.IFormattable.</value>
+  </data>
   <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
     <value>Not a valid BIC</value>
   </data>
@@ -144,9 +147,6 @@
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Not a valid IBAN</value>
   </data>
-  <data name="FormatExceptionInvalidFormat" xml:space="preserve">
-    <value>Format is invalid.</value>
-  </data>
   <data name="FormatExceptionMonth" xml:space="preserve">
     <value>Not a valid month</value>
   </data>
@@ -161,6 +161,12 @@
   </data>
   <data name="FormatExceptionYear" xml:space="preserve">
     <value>Not a valid year</value>
+  </data>
+  <data name="FormatException_IndexOutOfRange" xml:space="preserve">
+    <value>Index (zero based) must be greater than or equal to zero and less than the size of the argument list.</value>
+  </data>
+  <data name="FormatException_InvalidFormat" xml:space="preserve">
+    <value>Input string was not in a correct format.</value>
   </data>
   <data name="JsonSerialization_DateTimeNotSupported" xml:space="preserve">
     <value>JSON deserialization from a date is not supported.</value>

@@ -11,7 +11,7 @@ Qowaiv types
 ============
 
 Bank Identifier Code (BIC)
-----------------------------------------
+--------------------------
 Represents a BIC as specified in ISO 13616.
 
 Country
@@ -67,8 +67,38 @@ Qowaiv SVO options
 
 Debugger display
 ----------------
-During debugging sessions, by default, the IDE shows the result of ToString() on a watch. Although Tostring() is overridden for all Qowaiv Single Value Objects, for debugging a special debugger display is provided too, using a debugger display attribute.
+During debugging sessions, by default, the IDE shows the result of ToString()
+on a watch. Although Tostring() is overridden for all Qowaiv Single Value 
+Objects, for debugging a special debugger display is provided too, using a 
+debugger display attribute.
 
-The debugger display attribute refers to (private) property with the name "DebuggerDisplay", which repersents the Single Value Object as string. If supported, formatted, and in case of a Empty or Unknown value with a notification of that too. The outcome of the DebuggerDisplay is tested in de UnitTests.
+The debugger display attribute refers to (private) property with the name 
+"DebuggerDisplay", which repersents the Single Value Object as string. If 
+supported, formatted, and in case of a Empty or Unknown value with a 
+notification of that too. The outcome of the DebuggerDisplay is tested in the 
+UnitTests.
 
-Because the rendering of debugger display is handled based on the development enviroment, and methods as debugger display are not supported by VB.NET, the debugger display attribute refers to a property instead.
+Because the rendering of debugger display is handled based on the development 
+enviroment, and methods as debugger display are not supported by VB.NET, the 
+debugger display attribute refers to a property instead.
+
+Qowaiv Formatting
+=================
+Formatting is an important part of the functionality in Qowaiv. All SVO's 
+implement IFormattable, and have custom formatting. For details, see the 
+different remarks at the Tostring(string, IFormatProvider).
+
+Formatting arugments
+--------------------
+The formatting arguments object, is a container object (struct) of the format 
+and the format provider, the two arguments reqruied for the System.Iformatable 
+ToString() method.
+
+Formatting arugments collection
+-------------------------------
+This collection of formatting arguments stores them based on a type to apply 
+on. On top of that, it has a Format() method, that is an extended implementation 
+of String.Format(). The difference between these two methods is, that - when no 
+custom format is supplied at the format string - String.Format() the default 
+formatting of the object is used, where FormattingArgumentsCollection.Format() 
+uses the default specified at te formatting collection of a type (if available).

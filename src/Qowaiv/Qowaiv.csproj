@@ -73,10 +73,13 @@
     <Compile Include="EmailAddress.cs" />
     <Compile Include="FileSize.cs" />
     <Compile Include="FileSizeExtensions.cs" />
+    <Compile Include="Formatting\FormattingArguments.cs" />
+    <Compile Include="IFormattableExtensions.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfo.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfoInstances.cs" />
+    <Compile Include="Formatting\FormattingArgumentsCollection.cs" />
     <Compile Include="HouseNumber.cs" />
     <Compile Include="InternationalBankAccountNumber.cs" />
     <Compile Include="InternationalBankAccountNumberPatterns.cs" />

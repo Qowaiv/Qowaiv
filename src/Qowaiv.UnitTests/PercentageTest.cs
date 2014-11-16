@@ -600,7 +600,7 @@ namespace Qowaiv.UnitTests
 			{
 				val.ToString("%#%");
 			},
-			"Format is invalid.");
+			"Input string was not in a correct format.");
 		}
 
 		[Test]

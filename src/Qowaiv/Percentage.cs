@@ -453,7 +453,7 @@ namespace Qowaiv
 		}
 
 		#endregion
-		
+
 		#region (JSON) (De)serialization
 
 		/// <summary>Generates a Percentage from a JSON null object representation.</summary>
@@ -515,7 +515,7 @@ namespace Qowaiv
 		{
 			return ToString("0.############################‰", CultureInfo.InvariantCulture);
 		}
-		
+
 		/// <summary>Returns a System.String that represents the current Percentage.</summary>
 		public override string ToString()
 		{
@@ -570,7 +570,7 @@ namespace Qowaiv
 			var marker = GetMarkerType(format ?? String.Empty);
 			if (marker == PercentageMarkerType.Invalid)
 			{
-				throw new FormatException(QowaivMessages.FormatExceptionInvalidFormat);
+				throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
 			}
 			var decimalVal = m_Value / Dividers[marker];
 
@@ -588,12 +588,12 @@ namespace Qowaiv
 		}
 
 		#endregion
-		
+
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compair with.</param>
-		public override bool Equals(object obj){ return base.Equals(obj); }
+		public override bool Equals(object obj) { return base.Equals(obj); }
 
 		/// <summary>Returns the hash code for this Percentage.</summary>
 		/// <returns>
@@ -674,7 +674,7 @@ namespace Qowaiv
 		public static bool operator >=(Percentage l, Percentage r) { return l.CompareTo(r) >= 0; }
 
 		#endregion
-	   
+
 		#region (Explicit) casting
 
 		/// <summary>Casts a Percentage to a System.String.</summary>
@@ -692,7 +692,7 @@ namespace Qowaiv
 		public static explicit operator decimal(Percentage val) { return val.m_Value; }
 		/// <summary>Casts a Percentage to a double.</summary>
 		public static explicit operator double(Percentage val) { return (double)val.m_Value; }
-	   
+
 		#endregion
 
 		#region Factory methods
@@ -709,7 +709,7 @@ namespace Qowaiv
 		/// </exception>
 		public static Percentage Parse(string s)
 		{
-		   return Parse(s, CultureInfo.CurrentCulture);
+			return Parse(s, CultureInfo.CurrentCulture);
 		}
 
 		/// <summary>Converts the string to a Percentage.</summary>
@@ -863,7 +863,7 @@ namespace Qowaiv
 			Percentage p;
 			return TryParse(val, formatProvider, out p);
 		}
-		
+
 		#endregion
-	 }
+	}
 }

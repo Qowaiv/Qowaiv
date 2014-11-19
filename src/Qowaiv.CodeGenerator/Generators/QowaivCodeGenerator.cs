@@ -298,7 +298,7 @@ namespace Qowaiv.CodeGenerator.Generators
             // if no fixed checksum is specified and the pattern does not start with a numeric char.
             else if (blocks[0].Last() != 'n')
             {
-                pattern += @"\d\d";
+                pattern += @"[0-9]{2}";
             }
 
 
@@ -318,7 +318,7 @@ namespace Qowaiv.CodeGenerator.Generators
                 switch (tp)
                 {
                     // numeric
-                    case 'n': p = @"\d"; break;
+                    case 'n': p = @"[0-9]"; break;
                     // alphanumeric
                     case 'a': p = "[A-Z]"; break;
                     // both numeric and alphanumeric

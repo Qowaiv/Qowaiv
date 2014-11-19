@@ -930,6 +930,13 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void IsValid_BR_IsTrue()
+		{
+			Assert.IsTrue(InternationalBankAccountNumber.IsValid("BR9700360305000010009795493P1"), "Brazil");
+		}
+	
+
+		[Test]
 		public void IsValid_CH_IsTrue()
 		{
 			Assert.IsTrue(InternationalBankAccountNumber.IsValid("CH3608387000001080173"), "Switzerland");

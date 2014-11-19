@@ -25,6 +25,9 @@ namespace Qowaiv
 		/// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
 		public static readonly Date MinValue = new Date(DateTime.MinValue);
 
+		/// <summary>Gets the current date.</summary>
+		public static Date Today { get { return (Date)DateTime.Today; } }
+
 		#region Constructors
 
 		/// <summary>Initializes a new instance of the date structure based on a System.DateTime.

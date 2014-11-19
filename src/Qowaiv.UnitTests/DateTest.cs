@@ -31,6 +31,15 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(default(Date), Date.MinValue);
 		}
 
+		[Test]
+		public void Today_None_EqualsDateTimeToday()
+		{
+			var act = Date.Today;
+			var exp = (Date)DateTime.Today;
+
+			Assert.AreEqual(act, exp);
+		}
+
 		#endregion
 
 		#region Constructor Tests

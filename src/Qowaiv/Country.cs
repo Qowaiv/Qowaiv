@@ -11,7 +11,6 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -25,12 +24,6 @@ namespace Qowaiv
 	[TypeConverter(typeof(CountryTypeConverter))]
 	public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Country>
 	{
-		private static readonly Regex IsoCodePattern = new Regex("^[a-z]{2,4}$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-		private static readonly Regex IsoNumberPattern = new Regex("^[0-9]{1,3}$", RegexOptions.Compiled);
-
-		/// <summary>Represents the pattern of a (potential) valid Country.</summary>
-		public static readonly Regex Pattern = new Regex(@"^ComplexRegexPattern.*$", RegexOptions.Compiled);
-
 		/// <summary>Represents an empty/not set Country.</summary>
 		public static readonly Country Empty = new Country() { m_Value = default(String) };
 

@@ -87,15 +87,15 @@ namespace Qowaiv
 		public bool RegionInfoExists { get { return !String.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture)); } }
 
 		/// <summary>Gets the start date from witch the country exists.</summary>
-		public DateTime StartDate { get { return m_Value == default(String) ? DateTime.MinValue : XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
+		public Date StartDate { get { return m_Value == default(String) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
 
 		/// <summary>If the country does not exist anymore, the end date is given, otherwise null.</summary>
-		public DateTime? EndDate
+		public Date? EndDate
 		{
 			get
 			{
 				var val = GetResourceString("EndDate", CultureInfo.InvariantCulture);
-				return string.IsNullOrEmpty(val) ? null : (DateTime?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
+				return string.IsNullOrEmpty(val) ? null : (Date?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
 			}
 		}
 
@@ -124,9 +124,9 @@ namespace Qowaiv
 		/// <param name="measurement">
 		/// The date of existence.
 		/// </param>
-		public bool ExistsOnDate(DateTime measurement)
+		public bool ExistsOnDate(Date measurement)
 		{
-			return this.StartDate <= measurement && (!this.EndDate.HasValue || this.EndDate.Value >= measurement.Date);
+			return this.StartDate <= measurement && (!this.EndDate.HasValue || this.EndDate.Value >= measurement);
 		}
 
 		/// <summary>Converts the CountryInfo to a RegionInfo.</summary>
@@ -596,7 +596,7 @@ namespace Qowaiv
 		/// </returns>
 		public static IEnumerable<Country> GetCurrent()
 		{
-			return GetOnDate(DateTime.Now);
+			return GetOnDate(Date.Today);
 		}
 
 		/// <summary>Gets all countries existing on the specified measurement date.</summary>
@@ -606,7 +606,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A list of existing countries.
 		/// </returns>
-		public static IEnumerable<Country> GetOnDate(DateTime measurement)
+		public static IEnumerable<Country> GetOnDate(Date measurement)
 		{
 			return All.Where(country => country.ExistsOnDate(measurement));
 		}

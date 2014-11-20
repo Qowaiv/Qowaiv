@@ -15,6 +15,8 @@ using Qowaiv.Json;
 using System.Resources;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
+using Qowaiv.Threading;
 
 namespace Qowaiv
 {
@@ -39,6 +41,9 @@ namespace Qowaiv
 
 		/// <summary>Represents an unknown (but set) currency.</summary>
 		public static readonly Currency Unknown = new Currency() { m_Value = "ZZZ" };
+
+		/// <summary>Gets a currency based on the current thread.</summary>
+		public static Currency Current { get { return Thread.CurrentThread.GetValue<Currency>(); } }
 
 		#region Properties
 

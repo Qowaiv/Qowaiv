@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
@@ -94,6 +95,8 @@
     </Compile>
     <Compile Include="SingleValueStaticOptions.cs" />
     <Compile Include="SingleValueObjectAttribute.cs" />
+    <Compile Include="Threading\ThreadDomain.cs" />
+    <Compile Include="Threading\ThreadExtensions.cs" />
     <Compile Include="Unknown.cs" />
     <Compile Include="WeekDate.cs" />
     <Compile Include="Year.cs" />

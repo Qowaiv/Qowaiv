@@ -124,6 +124,7 @@
     <Compile Include="TestTools\ExceptionAssert.cs" />
     <Compile Include="TestTools\Globalization\CultureInfoScope.cs" />
     <Compile Include="TestTools\SerializationTest.cs" />
+    <Compile Include="Threading\ThreadDomainTest.cs" />
     <Compile Include="UnknownTest.cs" />
     <Compile Include="Web\Mvc\TypeConverterModelBinderTest.cs" />
     <Compile Include="WeekDateTest.cs" />

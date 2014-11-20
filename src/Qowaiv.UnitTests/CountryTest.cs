@@ -29,6 +29,46 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
+		#region Current
+
+		[Test]
+		public void Current_CurrentCultureDeDE_Germany()
+		{
+			using (new CultureInfoScope("de-DE"))
+			{
+				var act = Country.Current;
+				var exp = Country.DE;
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void Current_CurrentCultureEsEC_Ecuador()
+		{
+			using (new CultureInfoScope("es-EC"))
+			{
+				var act = Country.Current;
+				var exp = Country.EC;
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void Current_CurrentCultureEn_Empty()
+		{
+			using (new CultureInfoScope("en"))
+			{
+				var act = Country.Current;
+				var exp = Country.Empty;
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		#endregion
+
 		#region Country IsEmpty tests
 
 		/// <summary>Country.IsEmpty() should true for the default of Country.</summary>

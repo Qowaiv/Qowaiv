@@ -106,3 +106,13 @@ of String.Format(). The difference between these two methods is, that - when no
 custom format is supplied at the format string - String.Format() the default 
 formatting of the object is used, where FormattingArgumentsCollection.Format() 
 uses the default specified at te formatting collection of a type (if available).
+
+Threading
+=========
+Because there are scenario's where you want to set typical values as a country 
+or a currency for the context of the current thread (like the culture info) 
+there is a possibilty to add these to the Qowaiv.Threading.TrheadDomain.
+
+These values can be configured (in the app settings) or can be created with a 
+creator function that can be registered. If not specified otherwise the current 
+country will be created (if possible) based on the current culture.

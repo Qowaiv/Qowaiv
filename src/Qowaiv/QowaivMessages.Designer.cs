@@ -286,6 +286,24 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Converter can not convert from System.String..
+        /// </summary>
+        public static string NotSupportedException_ConverterCanNotConvertFromString {
+            get {
+                return ResourceManager.GetString("NotSupportedException_ConverterCanNotConvertFromString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type must be a none generic type..
+        /// </summary>
+        public static string NotSupportedException_NoGenericType {
+            get {
+                return ResourceManager.GetString("NotSupportedException_NoGenericType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The country &apos;{0} ({1})&apos; is not supported as region info..
         /// </summary>
         public static string NotSupportedExceptionCountryToRegionInfo {

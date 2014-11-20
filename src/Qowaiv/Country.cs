@@ -11,9 +11,11 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Qowaiv.Threading;
 
 namespace Qowaiv
 {
@@ -29,6 +31,9 @@ namespace Qowaiv
 
 		/// <summary>Represents an unknown (but set) Country.</summary>
 		public static readonly Country Unknown = new Country() { m_Value = "ZZ" };
+
+		/// <summary>Gets a country based on the current thread.</summary>
+		public static Country Current { get { return Thread.CurrentThread.GetValue<Country>(); } }
 
 		#region Properties
 
@@ -536,7 +541,6 @@ namespace Qowaiv
 
 			return All.FirstOrDefault(c => c.Name == region.TwoLetterISORegionName);
 		}
-
 
 		/// <summary>Creates a country based on a culture info.</summary>
 		/// <param name="culture">

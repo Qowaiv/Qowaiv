@@ -187,6 +187,7 @@ namespace Qowaiv
 		#region IFormattable / ToString
 
 		/// <summary>Returns a System.String that represents the current house number for debug purposes.</summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay
 		{
 			get

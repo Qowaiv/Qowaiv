@@ -490,6 +490,7 @@ namespace Qowaiv.Formatting
 		}
 
 		/// <summary>Returns a System.String that represents the current formatting arguments collection for debug purposes.</summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay { get { return String.Format("FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count); } }
 	}
 }

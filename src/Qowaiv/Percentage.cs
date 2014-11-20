@@ -500,6 +500,7 @@ namespace Qowaiv
 		#region IFormattable / ToString
 
 		/// <summary>Returns a System.String that represents the current Percentage for debug purposes.</summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay
 		{
 			get { return ToString("0.00##########################%", CultureInfo.InvariantCulture); }

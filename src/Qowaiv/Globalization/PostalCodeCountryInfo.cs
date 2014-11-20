@@ -87,6 +87,7 @@ namespace Qowaiv.Globalization
 		}
 
 		/// <summary>Returns a System.String that represents the current postal code country info for debug purposes.</summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay
 		{
 			get

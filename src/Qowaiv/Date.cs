@@ -413,6 +413,7 @@ namespace Qowaiv
 		#region IFormattable / ToString
 
 		/// <summary>Returns a System.String that represents the current Date for debug purposes.</summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay
 		{
 			get { return m_Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); }

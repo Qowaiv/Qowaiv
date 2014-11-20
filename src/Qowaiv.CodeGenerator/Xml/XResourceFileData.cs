@@ -34,6 +34,7 @@ namespace Qowaiv.CodeGenerator.Xml
 		public string Comment { get; set; }
 
 		/// <summary>Represents the resource file data as debug string.</summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay
 		{
 			get

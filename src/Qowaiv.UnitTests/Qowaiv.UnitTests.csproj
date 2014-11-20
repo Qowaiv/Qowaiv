@@ -92,6 +92,7 @@
     <Compile Include="BankIdentifierCodeTest.cs" />
     <Compile Include="CodeGenerator\Generators\QowaivCodeGeneratorTest.cs" />
     <Compile Include="CountryTest.cs" />
+    <Compile Include="CurrencyTest.cs" />
     <Compile Include="DateTest.cs" />
     <Compile Include="EmailAddressTest.cs" />
     <Compile Include="FileSizeTest.cs" />

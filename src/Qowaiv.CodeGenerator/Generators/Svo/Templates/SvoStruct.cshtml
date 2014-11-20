@@ -17,7 +17,7 @@ namespace @Model.Namespace
 {
 	/// <summary>Represents @Model.a @Model.ClassLongName.</summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for @Model.a @Model.ClassLongName.")]
+	// [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for @Model.a @Model.ClassLongName.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(@Model.UnderlyingType.Name))]
 	[TypeConverter(typeof(@(Model.ClassName)TypeConverter))]
 	public struct @Model.ClassName : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<@Model.ClassName>

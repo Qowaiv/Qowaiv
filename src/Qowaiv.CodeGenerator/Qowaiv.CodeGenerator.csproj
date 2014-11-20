@@ -122,6 +122,7 @@
     <EmbeddedResource Include="Resources\IBAN.xls" />
     <EmbeddedResource Include="Resources\Unknown.xls" />
     <EmbeddedResource Include="Resources\PostalCode.xls" />
+    <EmbeddedResource Include="Resources\Currency.xls" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Qowaiv.license.txt">

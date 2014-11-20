@@ -1,0 +1,727 @@
+<?xml version="1.0"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">text/microsoft-resx</resheader>
+  <resheader name="version">2.0</resheader>
+  <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
+  <data name="ZZZ_DisplayName">
+    <value>Desconocido</value>
+    <comment>Unknown (ZZZ)</comment>
+  </data>
+  <data name="AED_DisplayName">
+    <value>Dirham de los Emiratos Árabes Unidos</value>
+    <comment>United Arab Emirates dirham (AED)</comment>
+  </data>
+  <data name="AFN_DisplayName">
+    <value>Afgani afgano</value>
+    <comment>Afghan afghani (AFN)</comment>
+  </data>
+  <data name="ALL_DisplayName">
+    <value>Lek albanés</value>
+    <comment>Albanian lek (ALL)</comment>
+  </data>
+  <data name="AMD_DisplayName">
+    <value>Dram armenio</value>
+    <comment>Armenian dram (AMD)</comment>
+  </data>
+  <data name="ANG_DisplayName">
+    <value>Florín antillano neerlandés</value>
+    <comment>Netherlands Antillean guilder (ANG)</comment>
+  </data>
+  <data name="AOA_DisplayName">
+    <value>Kwanza angoleño</value>
+    <comment>Angolan kwanza (AOA)</comment>
+  </data>
+  <data name="ARS_DisplayName">
+    <value>Peso argentino</value>
+    <comment>Argentine peso (ARS)</comment>
+  </data>
+  <data name="AUD_DisplayName">
+    <value>Dólar australiano</value>
+    <comment>Australian dollar (AUD)</comment>
+  </data>
+  <data name="AWG_DisplayName">
+    <value>Florín arubeño</value>
+    <comment>Aruban florin (AWG)</comment>
+  </data>
+  <data name="AZN_DisplayName">
+    <value>Manat azerbaiyano</value>
+    <comment>Azerbaijani manat (AZN)</comment>
+  </data>
+  <data name="BAM_DisplayName">
+    <value>Marco convertible de Bosnia-Herzegovina</value>
+    <comment>Bosnia and Herzegovina convertible mark (BAM)</comment>
+  </data>
+  <data name="BBD_DisplayName">
+    <value>Dólar de Barbados</value>
+    <comment>Barbados dollar (BBD)</comment>
+  </data>
+  <data name="BDT_DisplayName">
+    <value>Taka de Bangladés</value>
+    <comment>Bangladeshi taka (BDT)</comment>
+  </data>
+  <data name="BGN_DisplayName">
+    <value>Lev búlgaro</value>
+    <comment>Bulgarian lev (BGN)</comment>
+  </data>
+  <data name="BHD_DisplayName">
+    <value>Dinar bahreiní</value>
+    <comment>Bahraini dinar (BHD)</comment>
+  </data>
+  <data name="BIF_DisplayName">
+    <value>Franco burundés</value>
+    <comment>Burundian franc (BIF)</comment>
+  </data>
+  <data name="BMD_DisplayName">
+    <value>Dólar de Bermuda</value>
+    <comment>Bermudian dollar (BMD)</comment>
+  </data>
+  <data name="BND_DisplayName">
+    <value>Dólar de Brunéi</value>
+    <comment>Brunei dollar (BND)</comment>
+  </data>
+  <data name="BOV_DisplayName">
+    <value>Mvdol boliviano (código de fondos)</value>
+    <comment>Bolivian Mvdol (BOV)</comment>
+  </data>
+  <data name="BRL_DisplayName">
+    <value>Real brasileño</value>
+    <comment>Brazilian real (BRL)</comment>
+  </data>
+  <data name="BSD_DisplayName">
+    <value>Dólar bahameño</value>
+    <comment>Bahamian dollar (BSD)</comment>
+  </data>
+  <data name="BTN_DisplayName">
+    <value>Ngultrum de Bután</value>
+    <comment>Bhutanese ngultrum (BTN)</comment>
+  </data>
+  <data name="BWP_DisplayName">
+    <value>Pula de Botsuana</value>
+    <comment>Botswana pula (BWP)</comment>
+  </data>
+  <data name="BYR_DisplayName">
+    <value>Rublo bielorruso</value>
+    <comment>Belarusian ruble (BYR)</comment>
+  </data>
+  <data name="BZD_DisplayName">
+    <value>Dólar de Belice</value>
+    <comment>Belize dollar (BZD)</comment>
+  </data>
+  <data name="CAD_DisplayName">
+    <value>Dólar canadiense</value>
+    <comment>Canadian dollar (CAD)</comment>
+  </data>
+  <data name="CDF_DisplayName">
+    <value>Franco congoleño, o congolés</value>
+    <comment>Congolese franc (CDF)</comment>
+  </data>
+  <data name="CHE_DisplayName">
+    <value>#N/A!</value>
+    <comment>WIR Euro (CHE)</comment>
+  </data>
+  <data name="CHF_DisplayName">
+    <value>Franco suizo</value>
+    <comment>Swiss franc (CHF)</comment>
+  </data>
+  <data name="CHW_DisplayName">
+    <value>#N/A!</value>
+    <comment>WIR Franc (CHW)</comment>
+  </data>
+  <data name="CLF_DisplayName">
+    <value>Unidades de fomento chilenas (código de fondos)</value>
+    <comment>Unidad de Fomento (CLF)</comment>
+  </data>
+  <data name="CLP_DisplayName">
+    <value>Peso chileno</value>
+    <comment>Chilean peso (CLP)</comment>
+  </data>
+  <data name="CNH_DisplayName">
+    <value>#N/A!</value>
+    <comment>Chinese yuan when traded in Hong Kong (CNH)</comment>
+  </data>
+  <data name="CNY_DisplayName">
+    <value>Yuan chino</value>
+    <comment>Chinese yuan (CNY)</comment>
+  </data>
+  <data name="COP_DisplayName">
+    <value>Peso colombiano</value>
+    <comment>Colombian peso (COP)</comment>
+  </data>
+  <data name="COU_DisplayName">
+    <value>Unidad de valor real colombiana (añadida al COP)</value>
+    <comment>Unidad de Valor Real (COU)</comment>
+  </data>
+  <data name="CRC_DisplayName">
+    <value>Colón costarricense</value>
+    <comment>Costa Rican colon (CRC)</comment>
+  </data>
+  <data name="CUC_DisplayName">
+    <value>Peso cubano convertible</value>
+    <comment>Cuban convertible peso (CUC)</comment>
+  </data>
+  <data name="CUP_DisplayName">
+    <value>Peso cubano</value>
+    <comment>Cuban peso (CUP)</comment>
+  </data>
+  <data name="CVE_DisplayName">
+    <value>Escudo caboverdiano</value>
+    <comment>Cape Verde escudo (CVE)</comment>
+  </data>
+  <data name="CZK_DisplayName">
+    <value>Koruna checa</value>
+    <comment>Czech koruna (CZK)</comment>
+  </data>
+  <data name="DJF_DisplayName">
+    <value>Franco yibutiano</value>
+    <comment>Djiboutian franc (DJF)</comment>
+  </data>
+  <data name="DKK_DisplayName">
+    <value>Corona danesa</value>
+    <comment>Danish krone (DKK)</comment>
+  </data>
+  <data name="DOP_DisplayName">
+    <value>Peso dominicano</value>
+    <comment>Dominican peso (DOP)</comment>
+  </data>
+  <data name="DZD_DisplayName">
+    <value>Dinar argelino</value>
+    <comment>Algerian dinar (DZD)</comment>
+  </data>
+  <data name="EGP_DisplayName">
+    <value>Libra egipcia</value>
+    <comment>Egyptian pound (EGP)</comment>
+  </data>
+  <data name="ERN_DisplayName">
+    <value>Nakfa eritreo</value>
+    <comment>Eritrean nakfa (ERN)</comment>
+  </data>
+  <data name="ETB_DisplayName">
+    <value>Birr etíope</value>
+    <comment>Ethiopian birr (ETB)</comment>
+  </data>
+  <data name="FJD_DisplayName">
+    <value>Dólar fiyiano</value>
+    <comment>Fiji dollar (FJD)</comment>
+  </data>
+  <data name="FKP_DisplayName">
+    <value>Libra malvinense</value>
+    <comment>Falkland Islands pound (FKP)</comment>
+  </data>
+  <data name="GBP_DisplayName">
+    <value>Libra esterlina (libra de Gran Bretaña)</value>
+    <comment>Pound sterling (GBP)</comment>
+  </data>
+  <data name="GEL_DisplayName">
+    <value>Lari georgiano</value>
+    <comment>Georgian lari (GEL)</comment>
+  </data>
+  <data name="GHS_DisplayName">
+    <value>Cedi ghanés</value>
+    <comment>Ghanaian cedi (GHS)</comment>
+  </data>
+  <data name="GIP_DisplayName">
+    <value>Libra de Gibraltar</value>
+    <comment>Gibraltar pound (GIP)</comment>
+  </data>
+  <data name="GMD_DisplayName">
+    <value>Dalasi gambiano</value>
+    <comment>Gambian dalasi (GMD)</comment>
+  </data>
+  <data name="GNF_DisplayName">
+    <value>Franco guineano</value>
+    <comment>Guinean franc (GNF)</comment>
+  </data>
+  <data name="GTQ_DisplayName">
+    <value>Quetzal guatemalteco</value>
+    <comment>Guatemalan quetzal (GTQ)</comment>
+  </data>
+  <data name="GYD_DisplayName">
+    <value>Dólar guyanés</value>
+    <comment>Guyanese dollar (GYD)</comment>
+  </data>
+  <data name="HKD_DisplayName">
+    <value>Dólar de Hong Kong</value>
+    <comment>Hong Kong dollar (HKD)</comment>
+  </data>
+  <data name="HNL_DisplayName">
+    <value>Lempira hondureño</value>
+    <comment>Honduran lempira (HNL)</comment>
+  </data>
+  <data name="HRK_DisplayName">
+    <value>Kuna croata</value>
+    <comment>Croatian kuna (HRK)</comment>
+  </data>
+  <data name="HTG_DisplayName">
+    <value>Gourde haitiano</value>
+    <comment>Haitian gourde (HTG)</comment>
+  </data>
+  <data name="HUF_DisplayName">
+    <value>Forint húngaro</value>
+    <comment>Hungarian forint (HUF)</comment>
+  </data>
+  <data name="IDR_DisplayName">
+    <value>Rupiah indonesia</value>
+    <comment>Indonesian rupiah (IDR)</comment>
+  </data>
+  <data name="ILS_DisplayName">
+    <value>Nuevo shéquel israelí</value>
+    <comment>Israeli new shekel (ILS)</comment>
+  </data>
+  <data name="INR_DisplayName">
+    <value>Rupia india</value>
+    <comment>Indian rupee (INR)</comment>
+  </data>
+  <data name="IQD_DisplayName">
+    <value>Dinar iraquí</value>
+    <comment>Iraqi dinar (IQD)</comment>
+  </data>
+  <data name="IRR_DisplayName">
+    <value>Rial iraní</value>
+    <comment>Iranian rial (IRR)</comment>
+  </data>
+  <data name="ISK_DisplayName">
+    <value>Króna islandesa</value>
+    <comment>Icelandic króna (ISK)</comment>
+  </data>
+  <data name="JMD_DisplayName">
+    <value>Dólar jamaicano</value>
+    <comment>Jamaican dollar (JMD)</comment>
+  </data>
+  <data name="JOD_DisplayName">
+    <value>Dinar jordano</value>
+    <comment>Jordanian dinar (JOD)</comment>
+  </data>
+  <data name="JPY_DisplayName">
+    <value>Yen japonés</value>
+    <comment>Japanese yen (JPY)</comment>
+  </data>
+  <data name="KES_DisplayName">
+    <value>Chelín keniata</value>
+    <comment>Kenyan shilling (KES)</comment>
+  </data>
+  <data name="KGS_DisplayName">
+    <value>Som kirguís (de Kirguistán)</value>
+    <comment>Kyrgyzstani som (KGS)</comment>
+  </data>
+  <data name="KHR_DisplayName">
+    <value>Riel camboyano</value>
+    <comment>Cambodian riel (KHR)</comment>
+  </data>
+  <data name="KMF_DisplayName">
+    <value>Franco comoriano (de Comoras)</value>
+    <comment>Comoro franc (KMF)</comment>
+  </data>
+  <data name="KPW_DisplayName">
+    <value>Won norcoreano</value>
+    <comment>North Korean won (KPW)</comment>
+  </data>
+  <data name="KRW_DisplayName">
+    <value>Won surcoreano</value>
+    <comment>South Korean won (KRW)</comment>
+  </data>
+  <data name="KWD_DisplayName">
+    <value>Dinar kuwaití</value>
+    <comment>Kuwaiti dinar (KWD)</comment>
+  </data>
+  <data name="KYD_DisplayName">
+    <value>Dólar caimano (de Islas Caimán)</value>
+    <comment>Cayman Islands dollar (KYD)</comment>
+  </data>
+  <data name="KZT_DisplayName">
+    <value>Tenge kazajo</value>
+    <comment>Kazakhstani tenge (KZT)</comment>
+  </data>
+  <data name="LAK_DisplayName">
+    <value>Kip lao</value>
+    <comment>Lao kip (LAK)</comment>
+  </data>
+  <data name="LBP_DisplayName">
+    <value>Libra libanesa</value>
+    <comment>Lebanese pound (LBP)</comment>
+  </data>
+  <data name="LKR_DisplayName">
+    <value>Rupia de Sri Lanka</value>
+    <comment>Sri Lankan rupee (LKR)</comment>
+  </data>
+  <data name="LRD_DisplayName">
+    <value>Dólar liberiano</value>
+    <comment>Liberian dollar (LRD)</comment>
+  </data>
+  <data name="LSL_DisplayName">
+    <value>Loti lesotense</value>
+    <comment>Lesotho loti (LSL)</comment>
+  </data>
+  <data name="LTL_DisplayName">
+    <value>Litas lituano</value>
+    <comment>Lithuanian litas (LTL)</comment>
+  </data>
+  <data name="LYD_DisplayName">
+    <value>Dinar libio</value>
+    <comment>Libyan dinar (LYD)</comment>
+  </data>
+  <data name="MAD_DisplayName">
+    <value>Dirham marroquí</value>
+    <comment>Moroccan dirham (MAD)</comment>
+  </data>
+  <data name="MDL_DisplayName">
+    <value>Leu moldavo</value>
+    <comment>Moldovan leu (MDL)</comment>
+  </data>
+  <data name="MGA_DisplayName">
+    <value>Ariary malgache</value>
+    <comment>Malagasy ariary (MGA)</comment>
+  </data>
+  <data name="MKD_DisplayName">
+    <value>Denar macedonio</value>
+    <comment>Macedonian denar (MKD)</comment>
+  </data>
+  <data name="MMK_DisplayName">
+    <value>Kyat birmano</value>
+    <comment>Myanmar kyat (MMK)</comment>
+  </data>
+  <data name="MNT_DisplayName">
+    <value>Tughrik mongol</value>
+    <comment>Mongolian tugrik (MNT)</comment>
+  </data>
+  <data name="MOP_DisplayName">
+    <value>Pataca de Macao</value>
+    <comment>Macanese pataca (MOP)</comment>
+  </data>
+  <data name="MRO_DisplayName">
+    <value>Ouguiya mauritana</value>
+    <comment>Mauritanian ouguiya (MRO)</comment>
+  </data>
+  <data name="MUR_DisplayName">
+    <value>Rupia mauricia</value>
+    <comment>Mauritian rupee (MUR)</comment>
+  </data>
+  <data name="MVR_DisplayName">
+    <value>Rufiyaa maldiva</value>
+    <comment>Maldivian rufiyaa (MVR)</comment>
+  </data>
+  <data name="MWK_DisplayName">
+    <value>Kwacha malauí</value>
+    <comment>Malawian kwacha (MWK)</comment>
+  </data>
+  <data name="MXN_DisplayName">
+    <value>Peso mexicano</value>
+    <comment>Mexican peso (MXN)</comment>
+  </data>
+  <data name="MXV_DisplayName">
+    <value>Unidad de Inversión (UDI) mexicana (código de fondos)</value>
+    <comment>Mexican Unidad de Inversion (UDI) (MXV)</comment>
+  </data>
+  <data name="MYR_DisplayName">
+    <value>Ringgit malayo</value>
+    <comment>Malaysian ringgit (MYR)</comment>
+  </data>
+  <data name="MZN_DisplayName">
+    <value>Metical mozambiqueño</value>
+    <comment>Mozambican metical (MZN)</comment>
+  </data>
+  <data name="NAD_DisplayName">
+    <value>Dólar namibio</value>
+    <comment>Namibian dollar (NAD)</comment>
+  </data>
+  <data name="NGN_DisplayName">
+    <value>Naira nigeriana</value>
+    <comment>Nigerian naira (NGN)</comment>
+  </data>
+  <data name="NIO_DisplayName">
+    <value>Córdoba nicaragüense</value>
+    <comment>Nicaraguan córdoba (NIO)</comment>
+  </data>
+  <data name="NOK_DisplayName">
+    <value>Corona noruega</value>
+    <comment>Norwegian krone (NOK)</comment>
+  </data>
+  <data name="NPR_DisplayName">
+    <value>Rupia nepalesa</value>
+    <comment>Nepalese rupee (NPR)</comment>
+  </data>
+  <data name="NZD_DisplayName">
+    <value>Dólar neozelandés</value>
+    <comment>New Zealand dollar (NZD)</comment>
+  </data>
+  <data name="OMR_DisplayName">
+    <value>Rial omaní</value>
+    <comment>Omani rial (OMR)</comment>
+  </data>
+  <data name="PAB_DisplayName">
+    <value>Balboa panameña</value>
+    <comment>Panamanian balboa (PAB)</comment>
+  </data>
+  <data name="PEN_DisplayName">
+    <value>Nuevo sol peruano</value>
+    <comment>Peruvian nuevo sol (PEN)</comment>
+  </data>
+  <data name="PGK_DisplayName">
+    <value>Kina de Papúa Nueva Guinea</value>
+    <comment>Papua New Guinean kina (PGK)</comment>
+  </data>
+  <data name="PHP_DisplayName">
+    <value>Peso filipino</value>
+    <comment>Philippine peso (PHP)</comment>
+  </data>
+  <data name="PKR_DisplayName">
+    <value>Rupia pakistaní</value>
+    <comment>Pakistani rupee (PKR)</comment>
+  </data>
+  <data name="PLN_DisplayName">
+    <value>zloty polaco</value>
+    <comment>Polish złoty (PLN)</comment>
+  </data>
+  <data name="PYG_DisplayName">
+    <value>Guaraní paraguayo</value>
+    <comment>Paraguayan guaraní (PYG)</comment>
+  </data>
+  <data name="QAR_DisplayName">
+    <value>Rial qatarí</value>
+    <comment>Qatari riyal (QAR)</comment>
+  </data>
+  <data name="RON_DisplayName">
+    <value>Leu rumano</value>
+    <comment>Romanian new leu (RON)</comment>
+  </data>
+  <data name="RSD_DisplayName">
+    <value>#N/A!</value>
+    <comment>Serbian dinar (RSD)</comment>
+  </data>
+  <data name="RUB_DisplayName">
+    <value>Rublo ruso</value>
+    <comment>Russian ruble (RUB)</comment>
+  </data>
+  <data name="RWF_DisplayName">
+    <value>Franco ruandés</value>
+    <comment>Rwandan franc (RWF)</comment>
+  </data>
+  <data name="SAR_DisplayName">
+    <value>Riyal saudí</value>
+    <comment>Saudi riyal (SAR)</comment>
+  </data>
+  <data name="SBD_DisplayName">
+    <value>Dólar de las Islas Salomón</value>
+    <comment>Solomon Islands dollar (SBD)</comment>
+  </data>
+  <data name="SCR_DisplayName">
+    <value>Rupia de Seychelles</value>
+    <comment>Seychelles rupee (SCR)</comment>
+  </data>
+  <data name="SDG_DisplayName">
+    <value>Dinar sudanés</value>
+    <comment>Sudanese pound (SDG)</comment>
+  </data>
+  <data name="SEK_DisplayName">
+    <value>Corona sueca</value>
+    <comment>Swedish krona/kronor (SEK)</comment>
+  </data>
+  <data name="SGD_DisplayName">
+    <value>Dólar de Singapur</value>
+    <comment>Singapore dollar (SGD)</comment>
+  </data>
+  <data name="SHP_DisplayName">
+    <value>Libra de Santa Helena</value>
+    <comment>Saint Helena pound (SHP)</comment>
+  </data>
+  <data name="SLL_DisplayName">
+    <value>Leone de Sierra Leona</value>
+    <comment>Sierra Leonean leone (SLL)</comment>
+  </data>
+  <data name="SOS_DisplayName">
+    <value>Chelín somalí</value>
+    <comment>Somali shilling (SOS)</comment>
+  </data>
+  <data name="SRD_DisplayName">
+    <value>Dólar surinamés</value>
+    <comment>Surinamese dollar (SRD)</comment>
+  </data>
+  <data name="SSP_DisplayName">
+    <value>#N/A!</value>
+    <comment>South Sudanese pound (SSP)</comment>
+  </data>
+  <data name="STD_DisplayName">
+    <value>Dobra de Santo Tomé y Príncipe</value>
+    <comment>São Tomé and Príncipe dobra (STD)</comment>
+  </data>
+  <data name="SYP_DisplayName">
+    <value>Libra siria</value>
+    <comment>Syrian pound (SYP)</comment>
+  </data>
+  <data name="SZL_DisplayName">
+    <value>Lilangeni suazi</value>
+    <comment>Swazi lilangeni (SZL)</comment>
+  </data>
+  <data name="THB_DisplayName">
+    <value>Baht tailandés</value>
+    <comment>Thai baht (THB)</comment>
+  </data>
+  <data name="TJS_DisplayName">
+    <value>Somoni tayik (de Tayikistán)</value>
+    <comment>Tajikistani somoni (TJS)</comment>
+  </data>
+  <data name="TMT_DisplayName">
+    <value>Manat turcomano</value>
+    <comment>Turkmenistani manat (TMT)</comment>
+  </data>
+  <data name="TND_DisplayName">
+    <value>Dinar tunecino</value>
+    <comment>Tunisian dinar (TND)</comment>
+  </data>
+  <data name="TOP_DisplayName">
+    <value>Pa'anga tongano</value>
+    <comment>Tongan paʻanga (TOP)</comment>
+  </data>
+  <data name="TRY_DisplayName">
+    <value>Lira turca</value>
+    <comment>Turkish lira (TRY)</comment>
+  </data>
+  <data name="TTD_DisplayName">
+    <value>Dólar de Trinidad y Tobago</value>
+    <comment>Trinidad and Tobago dollar (TTD)</comment>
+  </data>
+  <data name="TWD_DisplayName">
+    <value>Dólar taiwanés</value>
+    <comment>New Taiwan dollar (TWD)</comment>
+  </data>
+  <data name="TZS_DisplayName">
+    <value>Chelín tanzano</value>
+    <comment>Tanzanian shilling (TZS)</comment>
+  </data>
+  <data name="UAH_DisplayName">
+    <value>Grivna ucraniana</value>
+    <comment>Ukrainian hryvnia (UAH)</comment>
+  </data>
+  <data name="UGX_DisplayName">
+    <value>Chelín ugandés</value>
+    <comment>Ugandan shilling (UGX)</comment>
+  </data>
+  <data name="USD_DisplayName">
+    <value>Dólar estadounidense</value>
+    <comment>United States dollar (USD)</comment>
+  </data>
+  <data name="USN_DisplayName">
+    <value>Dólar estadounidense (Siguiente día) (código de fondos)</value>
+    <comment>United States dollar (next day) (USN)</comment>
+  </data>
+  <data name="USS_DisplayName">
+    <value>Dólar estadounidense (Mismo día) (código de fondos)</value>
+    <comment>United States dollar (same day) (USS)</comment>
+  </data>
+  <data name="UYI_DisplayName">
+    <value>#N/A!</value>
+    <comment>Uruguay Peso en Unidades Indexadas (URUIURUI) (UYI)</comment>
+  </data>
+  <data name="UYU_DisplayName">
+    <value>Peso uruguayo</value>
+    <comment>Uruguayan peso (UYU)</comment>
+  </data>
+  <data name="UZS_DisplayName">
+    <value>Som uzbeko</value>
+    <comment>Uzbekistan som (UZS)</comment>
+  </data>
+  <data name="VEF_DisplayName">
+    <value>Bolívar fuerte venezolano</value>
+    <comment>Venezuelan bolívar (VEF)</comment>
+  </data>
+  <data name="VND_DisplayName">
+    <value>Dong vietnamita</value>
+    <comment>Vietnamese dong (VND)</comment>
+  </data>
+  <data name="VUV_DisplayName">
+    <value>Vatu vanuatense</value>
+    <comment>Vanuatu vatu (VUV)</comment>
+  </data>
+  <data name="WST_DisplayName">
+    <value>Tala samoana</value>
+    <comment>Samoan tala (WST)</comment>
+  </data>
+  <data name="XAF_DisplayName">
+    <value>Franco CFA de África Central</value>
+    <comment>CFA franc BEAC (XAF)</comment>
+  </data>
+  <data name="XAG_DisplayName">
+    <value>Onza de plata</value>
+    <comment>Silver (one troy ounce) (XAG)</comment>
+  </data>
+  <data name="XAU_DisplayName">
+    <value>Onza de oro</value>
+    <comment>Gold (one troy ounce) (XAU)</comment>
+  </data>
+  <data name="XBA_DisplayName">
+    <value>European Composite Unit (EURCO) (unidad del mercado de bonos)</value>
+    <comment>European Composite Unit (EURCO) (bond market unit) (XBA)</comment>
+  </data>
+  <data name="XBB_DisplayName">
+    <value>European Monetary Unit (E.M.U.-6) (unidad del mercado de bonos)</value>
+    <comment>European Monetary Unit (E.M.U.-6) (bond market unit) (XBB)</comment>
+  </data>
+  <data name="XBC_DisplayName">
+    <value>European Unit of Account 9 (E.U.A.-9) (unidad del mercado de bonos)</value>
+    <comment>European Unit of Account 9 (E.U.A.-9) (bond market unit) (XBC)</comment>
+  </data>
+  <data name="XBD_DisplayName">
+    <value>European Unit of Account 17 (E.U.A.-17) (unidad del mercado de bonos)</value>
+    <comment>European Unit of Account 17(E.U.A.-17) (bond market unit) (XBD)</comment>
+  </data>
+  <data name="XCD_DisplayName">
+    <value>Dólar del Caribe Oriental</value>
+    <comment>East Caribbean dollar (XCD)</comment>
+  </data>
+  <data name="XDR_DisplayName">
+    <value>Derechos Especiales de Giro (FMI)</value>
+    <comment>Special drawing rights (XDR)</comment>
+  </data>
+  <data name="XFU_DisplayName">
+    <value>Franco UIC (Special settlement currency)</value>
+    <comment>UIC franc (special settlement currency) (XFU)</comment>
+  </data>
+  <data name="XOF_DisplayName">
+    <value>Franco CFA de África Occidental</value>
+    <comment>CFA franc BCEAO (XOF)</comment>
+  </data>
+  <data name="XPD_DisplayName">
+    <value>Onza de paladio</value>
+    <comment>Palladium (one troy ounce) (XPD)</comment>
+  </data>
+  <data name="XPF_DisplayName">
+    <value>Franco CFP</value>
+    <comment>CFP franc (franc Pacifique) (XPF)</comment>
+  </data>
+  <data name="XPT_DisplayName">
+    <value>Onza de platino</value>
+    <comment>Platinum (one troy ounce) (XPT)</comment>
+  </data>
+  <data name="XSU_DisplayName">
+    <value>#N/A!</value>
+    <comment>SUCRE (XSU)</comment>
+  </data>
+  <data name="XTS_DisplayName">
+    <value>Reservado para pruebas</value>
+    <comment>Code reserved for testing purposes (XTS)</comment>
+  </data>
+  <data name="XUA_DisplayName">
+    <value>#N/A!</value>
+    <comment>ADB Unit of Account (XUA)</comment>
+  </data>
+  <data name="XXX_DisplayName">
+    <value>Sin divisa</value>
+    <comment>No currency (XXX)</comment>
+  </data>
+  <data name="YER_DisplayName">
+    <value>Rial yemení (de Yemen)</value>
+    <comment>Yemeni rial (YER)</comment>
+  </data>
+  <data name="ZAR_DisplayName">
+    <value>Rand sudafricano</value>
+    <comment>South African rand (ZAR)</comment>
+  </data>
+  <data name="ZMW_DisplayName">
+    <value>Kwacha zambiano</value>
+    <comment>Zambian kwacha (ZMW)</comment>
+  </data>
+  <data name="ZWD_DisplayName">
+    <value>#N/A!</value>
+    <comment>Zimbabwe dollar (ZWD)</comment>
+  </data>
+</root>

@@ -18,7 +18,8 @@ namespace Qowaiv.CodeGenerator.Xml
 			if (string.IsNullOrEmpty(name)) { throw new ArgumentNullException("name"); }
 			this.Name = name;
 			this.Value = val;
-			this.Comment = comment;
+			// not add empty comments.
+			this.Comment = String.IsNullOrEmpty(comment) ? null : comment;
 		}
 
 		/// <summary>Gets and set the name.</summary>

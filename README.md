@@ -66,6 +66,13 @@ Year
 ----
 Represents a year in the range [1-9999].
 
+Qowaiv web types
+================
+
+Internet media type
+-------------------
+Represents a intenet media type (also known as MIME-type and content type).
+
 Qowaiv SVO options
 ==================
 

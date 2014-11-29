@@ -27,6 +27,7 @@ namespace Qowaiv.CodeGenerator.Generators
 			GenerateIban(dir);
 			GeneratePostalCode(dir);
 			GenerateUnknown(dir);
+			GenerateInternetMediaType(dir);
 		}
 
 		/// <summary>Generates the gender resource file.</summary>
@@ -646,6 +647,40 @@ namespace Qowaiv.CodeGenerator.Generators
 					}
 					resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "UnknownLabels." + culture + ".resx")));
 				}
+			}
+		}
+
+		private void GenerateInternetMediaType(DirectoryInfo dir)
+		{
+			using (var stream = GetType().Assembly
+				.GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.Web.InternetMediaType.xls"))
+			{
+				var workbook = Workbook.Load(stream);
+				var worksheet = workbook.Worksheets[0];
+
+				var key_index = 0;
+				var val_index = 1;
+				var cmt_index = 2;
+
+				var resx = new XResourceFile();
+
+				var header = worksheet.Cells.GetRow(0);
+
+				int i = 1;
+
+				while (true)
+				{
+					var row = worksheet.Cells.GetRow(i++);
+
+					if (row.LastColIndex == int.MinValue) { break; }
+
+					resx.Data.Add(new XResourceFileData(
+						row.GetCell(key_index).StringValue,
+						row.GetCell(val_index).StringValue,
+						row.GetCell(cmt_index).StringValue));
+				}
+
+				resx.Save(new FileInfo(Path.Combine(dir.FullName, "InternetMediaType.FromFile.resx")));
 			}
 		}
 	}

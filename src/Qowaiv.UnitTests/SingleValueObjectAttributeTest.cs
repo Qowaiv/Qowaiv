@@ -2,6 +2,7 @@
 using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Qowaiv.UnitTests
 {
@@ -20,26 +21,31 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Analize_AllSvos_MatchAttribute()
 		{
-			var svos = typeof(Qowaiv.Country).Assembly.GetTypes()
+			var assemblies = new Assembly[] { typeof(Qowaiv.Country).Assembly, typeof(Qowaiv.Web.InternetMediaType).Assembly };
+
+			var svos = assemblies.SelectMany(assembly => assembly.GetTypes())
 			   .Where(tp => tp.GetCustomAttributes(typeof(SingleValueObjectAttribute), false).Any())
+			   .OrderBy(tp => tp.Name)
+			   .OrderBy(tp => tp.Namespace)
 			   .ToArray();
 
 			var exp = new Type[]
 			{
-				typeof(BankIdentifierCode),
-				typeof(Country),
-				typeof(Currency),
-				typeof(Date),
-				typeof(EmailAddress),
-				typeof(FileSize),
-				typeof(Gender),
-				typeof(HouseNumber),
-				typeof(InternationalBankAccountNumber),
-				typeof(Month),
-				typeof(Percentage),
-				typeof(PostalCode),
-				typeof(WeekDate),
-				typeof(Year)
+				typeof(Qowaiv.BankIdentifierCode),
+				typeof(Qowaiv.Country),
+				typeof(Qowaiv.Currency),
+				typeof(Qowaiv.Date),
+				typeof(Qowaiv.EmailAddress),
+				typeof(Qowaiv.FileSize),
+				typeof(Qowaiv.Gender),
+				typeof(Qowaiv.HouseNumber),
+				typeof(Qowaiv.InternationalBankAccountNumber),
+				typeof(Qowaiv.Month),
+				typeof(Qowaiv.Percentage),
+				typeof(Qowaiv.PostalCode),
+				typeof(Qowaiv.WeekDate),
+				typeof(Qowaiv.Year),
+				typeof(Qowaiv.Web.InternetMediaType)
 			};
 
 			foreach (var svo in svos)

@@ -54,6 +54,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -97,9 +98,7 @@
     <Compile Include="EmailAddressTest.cs" />
     <Compile Include="FileSizeTest.cs" />
     <Compile Include="Formatting\FormattingArgumentsCollectionTest.cs" />
-    <Compile Include="Formatting\FormattingArgumentsTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Formatting\FormattingArgumentsTest.cs" />
     <Compile Include="Formatting\StringFormatterTest.cs" />
     <Compile Include="GenderTest.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfoTest.cs" />
@@ -108,6 +107,8 @@
     <Compile Include="InternationalBankAccountNumberTest.cs" />
     <Compile Include="Json\JsonTester.cs" />
     <Compile Include="Json\QowaivJsonConverterTest.cs" />
+    <Compile Include="Mocking\Web\HttpRequestMock.cs" />
+    <Compile Include="Mocking\Web\HttpResponseMock.cs" />
     <Compile Include="MonthTest.cs" />
     <Compile Include="PercentageTest.cs" />
     <Compile Include="PostalCodeCountryPatternTest.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="TestTools\SerializationTest.cs" />
     <Compile Include="Threading\ThreadDomainTest.cs" />
     <Compile Include="UnknownTest.cs" />
+    <Compile Include="Web\InternetMediaTypeTest.cs" />
     <Compile Include="Web\Mvc\TypeConverterModelBinderTest.cs" />
     <Compile Include="WeekDateTest.cs" />
     <Compile Include="YearTest.cs" />
@@ -188,11 +190,4 @@
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

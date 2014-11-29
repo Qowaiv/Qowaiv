@@ -40,6 +40,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -55,7 +56,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InternetMediaSuffixType .cs" />
+    <Compile Include="InternetMediaTopLevelType.cs" />
+    <Compile Include="InternetMediaType.cs" />
+    <Compile Include="Conversion\InternetMediaTypeTypeConverter.cs" />
+    <Compile Include="InternetMediaTypeExtensions.cs" />
     <Compile Include="Mvc\TypeConverterModelBinder.cs" />
+    <Compile Include="QowaivWebMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QowaivWebMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +78,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="InternetMediaType.FromFile.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="..\Shared\Qowaiv.snk">
       <Link>Qowaiv.snk</Link>
@@ -81,6 +95,11 @@
   <ItemGroup>
     <EmbeddedResource Include="..\Qowaiv.license.txt">
       <Link>Qowaiv.license.txt</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QowaivWebMessages.nl.resx" />
+    <EmbeddedResource Include="QowaivWebMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QowaivWebMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

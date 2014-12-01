@@ -971,6 +971,38 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
+		[Test]
+		public void GetFullName_TestStructNullProvider_AreEqual()
+		{
+			var act = TestStruct.GetFullName(null);
+			var exp = "February";
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void GetShortName_TestStructNullProvider_AreEqual()
+		{
+			var act = TestStruct.GetShortName(null);
+			var exp = "Feb";
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void GetFullName_TestStruct_AreEqual()
+		{
+			var act = TestStruct.GetFullName(new CultureInfo("es-EC"));
+			var exp = "febrero";
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void GetShortName_TestStruct_AreEqual()
+		{
+			var act = TestStruct.GetShortName(new CultureInfo("es-EC"));
+			var exp = "feb";
+			Assert.AreEqual(exp, act);
+		}
+
 		#endregion
 
 		#region Type converter tests
@@ -1056,7 +1088,11 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void IsValid_Data_IsTrue()
 		{
-			Assert.IsTrue(Month.IsValid("April"));
+			Assert.IsTrue(Month.IsValid("11"), "11 on current culture.");
+			Assert.IsTrue(Month.IsValid("April"), "April on current culture.");
+			Assert.IsTrue(Month.IsValid("December", null), "December on no culture.");
+			Assert.IsTrue(Month.IsValid("mei", new CultureInfo("nl-NL")), "mei on Dutch culture.");
+			Assert.IsTrue(Month.IsValid("March", new CultureInfo("nl-NL")), "March on Dutch culture.");
 		}
 		#endregion
 	}

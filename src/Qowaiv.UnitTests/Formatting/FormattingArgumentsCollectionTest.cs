@@ -58,12 +58,75 @@ namespace Qowaiv.UnitTests.Formatting
 		}
 
 		[Test]
+		public void Format_LengthPlus_ThrowsFormatException()
+		{
+			ExceptionAssert.ExpectException<FormatException>(() =>
+			{
+				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
+				collection.Format("{0,+}", 1);
+			},
+			"Input string was not in a correct format.");
+		}
+		[Test]
+		public void Format_LengthA_ThrowsFormatException()
+		{
+			ExceptionAssert.ExpectException<FormatException>(() =>
+			{
+				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
+				collection.Format("{0,a}", 1);
+			},
+			"Input string was not in a correct format.");
+		}
+
+		[Test]
+		public void Format_IndexPlus_ThrowsFormatException()
+		{
+			ExceptionAssert.ExpectException<FormatException>(() =>
+			{
+				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
+				collection.Format("{+}");
+			},
+			"Input string was not in a correct format.");
+		}
+		[Test]
+		public void Format_IndexA_ThrowsFormatException()
+		{
+			ExceptionAssert.ExpectException<FormatException>(() =>
+			{
+				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
+				collection.Format("{a}");
+			},
+			"Input string was not in a correct format.");
+		}
+
+		[Test]
+		public void Format_Index1000000_AreEqual()
+		{
+			var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
+			var args = new object[1000001];
+			args[1000000] = "Test";
+			var act = collection.Format("Begin {1000000} End", args);
+			var exp = "Begin Test End";
+
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
 		public void Format_InvalidFormat_ThrowsFormatException()
 		{
 			ExceptionAssert.ExpectException<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("}");
+			},
+			"Input string was not in a correct format.");
+		}
+		[Test]
+		public void Format_ElementStartedButNotClosed_ThrowsFormatException()
+		{
+			ExceptionAssert.ExpectException<FormatException>(() =>
+			{
+				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
+				collection.Format("Test {0", 12);
 			},
 			"Input string was not in a correct format.");
 		}

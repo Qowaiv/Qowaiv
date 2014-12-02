@@ -26,7 +26,7 @@ namespace Qowaiv.Web.UnitTests
 
 		/// <summary>Represents cooltalk (x-conference/x-cooltalk).</summary>
 		public static readonly InternetMediaType XConferenceXCooltalk = InternetMediaType.Parse("x-conference/x-cooltalk");
-		
+
 		#region internet media type const tests
 
 		/// <summary>InternetMediaType.Empty should be equal to the default of internet media type.</summary>
@@ -160,7 +160,7 @@ namespace Qowaiv.Web.UnitTests
 			Assert.IsFalse(InternetMediaType.TryParse(str, out val), "Valid");
 			Assert.AreEqual(string.Empty, val.ToString(), "Value");
 		}
-		
+
 		[Test]
 		public void Parse_Unknown_AreEqual()
 		{
@@ -273,7 +273,7 @@ namespace Qowaiv.Web.UnitTests
 			},
 			"info");
 		}
-		
+
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
@@ -284,7 +284,7 @@ namespace Qowaiv.Web.UnitTests
 				SerializationTest.DeserializeUsingConstructor<InternetMediaType>(info, default(StreamingContext));
 			});
 		}
-		
+
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
@@ -296,7 +296,7 @@ namespace Qowaiv.Web.UnitTests
 			},
 			"info");
 		}
-		
+
 		[Test]
 		public void GetObjectData_SerializationInfo_AreEqual()
 		{
@@ -306,7 +306,7 @@ namespace Qowaiv.Web.UnitTests
 
 			Assert.AreEqual("application/x-chess-pgn", info.GetString("Value"));
 		}
-		
+
 		[Test]
 		public void SerializeDeserialize_TestStruct_AreEqual()
 		{
@@ -416,7 +416,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
 		{
-			var input = new  InternetMediaTypeSerializeObject()
+			var input = new InternetMediaTypeSerializeObject()
 			{
 				Id = 17,
 				Obj = InternetMediaType.Empty,
@@ -450,7 +450,7 @@ namespace Qowaiv.Web.UnitTests
 		{
 			var act = JsonTester.Read<InternetMediaType>();
 			var exp = InternetMediaType.Empty;
-			
+
 			Assert.AreEqual(exp, act);
 		}
 
@@ -481,7 +481,7 @@ namespace Qowaiv.Web.UnitTests
 			},
 			"JSON deserialization from an integer is not supported.");
 		}
-		
+
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
@@ -507,7 +507,7 @@ namespace Qowaiv.Web.UnitTests
 		{
 			object act = JsonTester.Write(default(InternetMediaType));
 			object exp = null;
-			
+
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
@@ -515,12 +515,12 @@ namespace Qowaiv.Web.UnitTests
 		{
 			var act = JsonTester.Write(TestStruct);
 			var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-			
+
 			Assert.AreEqual(exp, act);
 		}
 
 		#endregion
-		
+
 		#region IFormattable / ToString tests
 
 		[Test]
@@ -545,7 +545,7 @@ namespace Qowaiv.Web.UnitTests
 			var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
 			var exp = "Unit Test Formatter, value: 'application/x-chess-pgn', format: 'Unit Test Format'";
 
-		Assert.AreEqual(exp, act);
+			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void ToString_TestStruct_ComplexPattern()
@@ -658,7 +658,7 @@ namespace Qowaiv.Web.UnitTests
 		}
 
 		#endregion
-		
+
 		#region IComparable tests
 
 		/// <summary>Orders a list of internet media types ascending.</summary>
@@ -734,7 +734,7 @@ namespace Qowaiv.Web.UnitTests
 			);
 		}
 		#endregion
-		
+
 		#region Casting tests
 
 		[Test]
@@ -905,7 +905,7 @@ namespace Qowaiv.Web.UnitTests
 			var act = InternetMediaType.Empty.Suffix;
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void Suffix_TestStruct_None()
 		{
@@ -936,12 +936,12 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void CanNotConvertFromInt32_InternetMediaType_IsTrue()
 		{
-		TypeConverterAssert.CanNotConvertFrom(typeof(InternetMediaType), typeof(Int32));
+			TypeConverterAssert.CanNotConvertFrom(typeof(InternetMediaType), typeof(Int32));
 		}
 		[Test]
 		public void CanNotConvertToInt32_InternetMediaType_IsTrue()
 		{
-		TypeConverterAssert.CanNotConvertTo(typeof(InternetMediaType), typeof(Int32));
+			TypeConverterAssert.CanNotConvertTo(typeof(InternetMediaType), typeof(Int32));
 		}
 
 		[Test]
@@ -984,6 +984,12 @@ namespace Qowaiv.Web.UnitTests
 		}
 
 		[Test]
+		public void ConvertFromInstanceDescriptor_InternetMediaType_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(InternetMediaType));
+		}
+
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -993,7 +999,7 @@ namespace Qowaiv.Web.UnitTests
 		}
 
 		#endregion
-	
+
 		#region IsValid tests
 
 		[Test]
@@ -1029,7 +1035,7 @@ namespace Qowaiv.Web.UnitTests
 			var request = new HttpRequestMock();
 
 			request.SetContentType(TestStruct);
-			
+
 			var act = request.ContentType;
 			var exp = TestStruct.ToString();
 

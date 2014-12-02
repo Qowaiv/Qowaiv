@@ -850,6 +850,12 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ConvertFromInstanceDescriptor_EmailAddress_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(EmailAddress));
+		}
+
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))

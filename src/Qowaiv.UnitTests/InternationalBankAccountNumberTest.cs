@@ -793,6 +793,12 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ConvertFromInstanceDescriptor_InternationalBankAccountNumber_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(InternationalBankAccountNumber));
+		}
+
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -934,7 +940,7 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.IsTrue(InternationalBankAccountNumber.IsValid("BR9700360305000010009795493P1"), "Brazil");
 		}
-	
+
 
 		[Test]
 		public void IsValid_CH_IsTrue()

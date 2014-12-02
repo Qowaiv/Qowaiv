@@ -1512,6 +1512,12 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ConvertFromInstanceDescriptor_Percentage_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Percentage));
+		}
+
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))

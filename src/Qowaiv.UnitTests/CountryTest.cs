@@ -230,7 +230,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual("Serbia and Montenegro (Former)", cs.DisplayName, "cs.DisplayName");
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void Create_NL_NL()
 		{
@@ -457,7 +457,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-	   
+
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
@@ -555,7 +555,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void ToString_Empty_IsStringEmpty()
 		{
@@ -1033,7 +1033,7 @@ namespace Qowaiv.UnitTests
 			var act = Country.CSHH.EndDate;
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		#endregion
 
 		#region Methods
@@ -1127,6 +1127,12 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ConvertFromInstanceDescriptor_Country_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Country));
+		}
+
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -1159,7 +1165,7 @@ namespace Qowaiv.UnitTests
 		public void GetCurrent_1973_0()
 		{
 			var exp = 0;
-			
+
 			// before the ISO standard was introduced.
 			var act = Country.GetOnDate(new Date(1973, 12, 31)).ToList();
 

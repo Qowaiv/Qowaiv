@@ -207,7 +207,6 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-
 		#region (XML) (De)serialization tests
 
 		[Test]
@@ -427,7 +426,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
@@ -793,6 +792,12 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ConvertFromInstanceDescriptor_Currency_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Currency));
+		}
+
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -802,7 +807,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		#endregion
-		
+
 		#region IsValid tests
 
 		[Test]

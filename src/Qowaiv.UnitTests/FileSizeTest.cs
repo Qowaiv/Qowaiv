@@ -1213,6 +1213,12 @@ namespace Qowaiv.UnitTests
 			}
 		}
 
+		[Test]
+		public void ConvertFromInstanceDescriptor_FileSize_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(FileSize));
+		}
+
 		#endregion
 
 		#region IsValid tests

@@ -307,7 +307,7 @@ namespace Qowaiv.UnitTests
 		#endregion
 
 		#region JSON (De)serialization tests
-		
+
 		[Test]
 		public void FromJson_Null_AssertNotSupportedException()
 		{
@@ -344,7 +344,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
@@ -363,7 +363,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void ToJson_DefaultValue_AreEqual()
 		{
@@ -617,8 +617,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GreaterThan_21LT19_IsTrue()
 		{
-			Date l =new Date(1990, 10,  21);
-			Date r =new Date(1990, 10,  19);
+			Date l = new Date(1990, 10, 21);
+			Date r = new Date(1990, 10, 19);
 
 			Assert.IsTrue(l > r);
 		}
@@ -895,6 +895,12 @@ namespace Qowaiv.UnitTests
 			{
 				TypeConverterAssert.ConvertFromEquals(DateTest.TestStruct, DateTest.TestStruct.ToString());
 			}
+		}
+
+		[Test]
+		public void ConvertFromInstanceDescriptor_Date_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Date));
 		}
 
 		[Test]

@@ -46,7 +46,7 @@ namespace Qowaiv.Conversion
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
 			var str = value as string;
-			if (value == null || str != null)
+			if (str != null)
 			{
 				return FileSize.Parse(str, culture);
 			}
@@ -80,10 +80,6 @@ namespace Qowaiv.Conversion
 		/// </exception>
 		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
 		{
-			if (destinationType == typeof(string))
-			{
-				return ((FileSize)value).ToString(culture);
-			}
 			return base.ConvertTo(context, culture, value, destinationType);
 		}
 		#endregion

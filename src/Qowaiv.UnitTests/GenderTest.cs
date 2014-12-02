@@ -161,7 +161,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		#endregion
-	  
+
 		#region TryCreate tests
 
 		[Test]
@@ -399,7 +399,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
 		{
-			var input = new  GenderSerializeObject()
+			var input = new GenderSerializeObject()
 			{
 				Id = 17,
 				Obj = Gender.Empty,
@@ -433,10 +433,10 @@ namespace Qowaiv.UnitTests
 		{
 			var act = JsonTester.Read<Gender>();
 			var exp = Gender.Empty;
-			
+
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
@@ -463,7 +463,7 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-	  
+
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
@@ -473,7 +473,7 @@ namespace Qowaiv.UnitTests
 			},
 			"JSON deserialization from a number is not supported.");
 		}
-			   
+
 		[Test]
 		public void FromJson_DateTimeValue_AssertNotSupportedException()
 		{
@@ -489,7 +489,7 @@ namespace Qowaiv.UnitTests
 		{
 			object act = JsonTester.Write(default(Gender));
 			object exp = null;
-			
+
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
@@ -497,12 +497,12 @@ namespace Qowaiv.UnitTests
 		{
 			var act = JsonTester.Write(TestStruct);
 			var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-			
+
 			Assert.AreEqual(exp, act);
 		}
 
 		#endregion
-		
+
 		#region IFormattable / ToString tests
 
 		[Test]
@@ -542,7 +542,7 @@ namespace Qowaiv.UnitTests
 				Assert.AreEqual(exp, act);
 			}
 		}
-	  
+
 		[Test]
 		public void ToString_FormatValueEnglishGreatBritain_AreEqual()
 		{
@@ -782,7 +782,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		#endregion
-		
+
 		#region IComparable tests
 
 		/// <summary>Orders a list of Genders ascending.</summary>
@@ -909,7 +909,7 @@ namespace Qowaiv.UnitTests
 			Assert.IsTrue(l >= r);
 		}
 		#endregion
-		
+
 		#region Casting tests
 
 		[Test]
@@ -1010,7 +1010,7 @@ namespace Qowaiv.UnitTests
 		#endregion
 
 		#region Methods
-		
+
 		[Test]
 		public void IsEmptyOrNotKnown_Empty_IsTrue()
 		{
@@ -1111,6 +1111,12 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ConvertFromInstanceDescriptor_Gender_Successful()
+		{
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Gender));
+		}
+
+		[Test]
 		public void ConvertToString_TestStruct_StringValue()
 		{
 			using (new CultureInfoScope("en-GB"))
@@ -1120,7 +1126,7 @@ namespace Qowaiv.UnitTests
 		}
 
 		#endregion
-		
+
 		#region IsValid tests
 
 		[Test]

@@ -441,6 +441,18 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ToString_IFormatProviderNull_FormattedString()
+		{
+			using (new CultureInfoScope("nl-BE"))
+			{
+				var act = TestStruct.ToString((IFormatProvider)null);
+				var exp = "17,51%";
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
 		public void ToString_Zero_0()
 		{
 			using (new CultureInfoScope("en-GB"))

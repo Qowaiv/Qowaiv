@@ -563,6 +563,18 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ToString_NullFormatProvider_FormattedString()
+		{
+			using (new CultureInfoScope("es-EC"))
+			{
+				var act = TestStruct.ToString("f", null);
+				var exp = "febrero";
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
 		public void ToString_TestStructf_FormattedString()
 		{
 			using (new CultureInfoScope(CultureInfo.InvariantCulture))

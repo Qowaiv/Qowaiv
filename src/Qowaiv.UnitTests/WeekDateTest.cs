@@ -495,6 +495,18 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ToString_NullFormatProvider_FormattedString()
+		{
+			using (new CultureInfoScope("en-US"))
+			{
+				var act = TestStruct.ToString(@"y-\WW-d", null);
+				var exp = "1997-W14-6";
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
 		public void ToString_TestStruct_ComplexPattern()
 		{
 			var act = TestStruct.ToString("");

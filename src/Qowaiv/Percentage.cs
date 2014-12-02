@@ -539,7 +539,7 @@ namespace Qowaiv
 		public string ToString(IFormatProvider formatProvider)
 		{
 			string format;
-			DefaultFormats.TryGetValue(formatProvider ?? CultureInfo.InvariantCulture, out format);
+			DefaultFormats.TryGetValue(formatProvider ?? CultureInfo.CurrentCulture, out format);
 			format = format ?? "0.############################%";
 
 			return ToString(format, formatProvider);

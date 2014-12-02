@@ -254,10 +254,10 @@ namespace Qowaiv
 			}
 
 			// If no format specified, use the default format.
-			if (String.IsNullOrEmpty(format)) { return GetResourceString("", formatProvider); }
+			if (String.IsNullOrEmpty(format)) { format = "f"; }
 
 			// Apply the format.
-			return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
+			return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
 		}
 
 		/// <summary>The format token instructions.</summary>
@@ -588,7 +588,7 @@ namespace Qowaiv
 
 		#region Resources
 
-		internal static ResourceManager ResourceManager =new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
+		private static ResourceManager ResourceManager = new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
 
 		/// <summary>Get resource string.</summary>
 		/// <param name="prefix">
@@ -597,10 +597,10 @@ namespace Qowaiv
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
-		internal string GetResourceString(string prefix, IFormatProvider formatProvider)
+		private string GetResourceString(string prefix, IFormatProvider formatProvider)
 		{
-			if (m_Value == default(Byte)) { return string.Empty; }
-			return ResourceManager.GetString(prefix + GenderLabels[m_Value], formatProvider as CultureInfo ?? CultureInfo.CurrentCulture);
+			if (IsEmpty()) { return string.Empty; }
+			return ResourceManager.GetString(prefix + GenderLabels[m_Value], formatProvider as CultureInfo);
 		}
 
 		#endregion

@@ -526,6 +526,18 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
+		public void ToString_NullFormatProvider_FormattedString()
+		{
+			using (new CultureInfoScope("fr-FR"))
+			{
+				var act = TestStruct.ToString("f", null);
+				var exp = "Masculin";
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
 		public void ToStringEmptyFormat_Empty_IsStringEmpty()
 		{
 			var act = Gender.Empty.ToString("");

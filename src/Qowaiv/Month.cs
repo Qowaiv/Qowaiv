@@ -259,6 +259,14 @@ namespace Qowaiv
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
+		/// <remarks>
+		/// The formats:
+		/// 
+		/// f: as full name.
+		/// s: as short name.
+		/// M: as number with leading zero.
+		/// m: as number without leading zero.
+		/// </remarks>
 		public string ToString(string format, IFormatProvider formatProvider)
 		{
 			string formatted;
@@ -267,7 +275,7 @@ namespace Qowaiv
 				return formatted;
 			}
 			// Apply the format.
-			return StringFormatter.Apply(this, String.IsNullOrEmpty(format) ? "M" : format, formatProvider ?? CultureInfo.InvariantCulture, FormatTokens);
+			return StringFormatter.Apply(this, String.IsNullOrEmpty(format) ? "M" : format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
 		}
 
 		private string ToDefaultString() { return IsUnknown() ? "?" : String.Empty; }

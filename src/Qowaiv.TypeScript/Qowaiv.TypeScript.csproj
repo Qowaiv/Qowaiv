@@ -23,6 +23,7 @@
     <TypeScriptCompile Include="Guid.ts" />
     <TypeScriptCompile Include="IFormattable.ts" />
     <TypeScriptCompile Include="IJsonStringifyable.ts" />
+    <TypeScriptCompile Include="TimeSpan.ts" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Qowaiv.license.txt">
@@ -35,7 +36,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="IEquatable.ts" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="JavaScript\Qowaiv.min.js.map">
+      <DependentUpon>Qowaiv.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

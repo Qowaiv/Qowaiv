@@ -14,11 +14,11 @@
  */
 function eq(l, r) {
     if (arguments.length !== 2) { throw new Error('Invalid number of arguments.'); }
-    if (l !== null && l !== undefined && typeof (l.eq) === 'function') {
-        return l.eq(r);
+    if (l !== null && l !== undefined && typeof (l.equals) === 'function') {
+    	return l.equals(r);
     }
-    if (r !== null && r !== undefined && typeof (r.eq) === 'function') {
-        return r.eq(l);
+    if (r !== null && r !== undefined && typeof (r.equals) === 'function') {
+    	return r.equals(l);
     }
     return l === r;
 } 

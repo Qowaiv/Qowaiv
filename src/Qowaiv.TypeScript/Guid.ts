@@ -1,22 +1,21 @@
 ﻿module Qowaiv {
-
+    
+    /**
+     * Represents a Globally unique identifier (GUID).
+     */
     export class Guid implements IEquatable, IFormattable, IJsonStringifyable {
 
         /**
-         * Represents a Globally unique identifier (GUID).
-         * 
          * @constructor
          * @remarks It is the default constructor, for creating an actual GUID
-         *          you will normaly use Guid.newGuid() or Guid.parse(string).
+         *          you will normally use Guid.newGuid() or Guid.parse(string).
          */
-        constructor() {
-            this.v = '00000000-0000-0000-0000-000000000000';
-        }
+        constructor() { }
 
         /**
          * The underlying value.
          */
-        private v: string;
+        private v = '00000000-0000-0000-0000-000000000000';
 
         /** 
          * Returns a string that represents the current GUID.
@@ -28,7 +27,9 @@
          * Returns a string that represents the current GUID.
          */
         public format(f?: string): string {
-            switch(f){
+            switch (f) {
+                case 'B': return '{' + this.v + '}';
+                case 'b': return '{' + this.v.toLowerCase() + '}';
                 case 'S': return this.v.replace(/-/g, '');
                 case 's': return this.v.replace(/-/g, '').toLowerCase();
                 case 'l': return this.v.toLowerCase();
@@ -47,7 +48,7 @@
          * @param {string} s A JSON string representing the GUID.
          * @return A GUID if valid, otherwise null.
          */
-        public fromJSON(s: string) {
+        public static fromJSON(s: string): Guid {
             return Guid.parse(s);
         }
 
@@ -55,7 +56,7 @@
          * Returns true if other is not null or undefined and a GUID
          * representing the same value, otherwise false.
          */
-        public eq(other: any): boolean{
+        public equals(other: any): boolean{
             return 
                 other !== null &&
                 other !== undefined && 

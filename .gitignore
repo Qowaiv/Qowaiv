@@ -1,4 +1,10 @@
-﻿#################
+﻿# custom additions
+src/packages/
+src/.nuget/
+.nuget/
+test/
+
+#################
 ## Eclipse
 #################
 

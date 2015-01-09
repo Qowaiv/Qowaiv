@@ -9,7 +9,6 @@ using System.Globalization;
 using System.IO;
 using System.Resources;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
@@ -376,7 +375,7 @@ namespace Qowaiv.Web
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(InternetMediaType other) { return (m_Value ?? String.Empty).CompareTo(other.m_Value ?? String.Empty); }
+		public int CompareTo(InternetMediaType other) { return String.Compare(m_Value, other.m_Value); }
 
 		#endregion
 	   

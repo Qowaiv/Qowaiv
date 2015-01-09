@@ -1,22 +1,21 @@
-﻿using System;
-using System.Linq;
+﻿using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using Qowaiv.Threading;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
+using System.Resources;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
+using System.Threading;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Conversion;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
-using System.Resources;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading;
-using Qowaiv.Threading;
 
 namespace Qowaiv
 {
@@ -373,7 +372,7 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(Currency other) { return (m_Value ?? String.Empty).CompareTo(other.m_Value ?? String.Empty); }
+		public int CompareTo(Currency other) { return String.Compare(m_Value, other.m_Value); }
 
 		#endregion
 

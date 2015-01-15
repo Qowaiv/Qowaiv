@@ -400,7 +400,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToString_b_AreEqual()
 		{
-			using (new CultureInfoScope("nl-BE"))
+			using (new CultureInfoScope("nl-NL"))
 			{
 				var act = TestStruct.ToString("#,##0b");
 				var exp = "123.456.789b";
@@ -411,7 +411,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToString_kB_AreEqual()
 		{
-			using (new CultureInfoScope("nl-BE"))
+			using (new CultureInfoScope("nl-NL"))
 			{
 				var act = TestStruct.ToString("#,##0.00 kB");
 				var exp = "120.563,27 kB";

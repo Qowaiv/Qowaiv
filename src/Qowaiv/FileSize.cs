@@ -472,11 +472,11 @@ namespace Qowaiv
 		/// The format provider.
 		/// </param>
 		/// <remarks>
-		/// There are basicly two ways to format the file size. The first one is
-		/// automatic. Based on the size the extenion is chosen (byte, kB, MB, GB, ect.).
+		/// There are basically two ways to format the file size. The first one is
+		/// automatic. Based on the size the extension is chosen (byte, kB, MB, GB, ect.).
 		/// This can be specified by a s/S (short notation) and a f/F (full notation).
 		/// 
-		/// The other option is to specify the extension explictly. So Megabyte,
+		/// The other option is to specify the extension explicitly. So Megabyte,
 		/// kB, ect. No extension is also possible.
 		/// 
 		/// Short notation:
@@ -530,7 +530,8 @@ namespace Qowaiv
 			{
 				if (String.IsNullOrEmpty(format)) { format = "0.0"; }
 
-				while (size > 1000)
+				// Rounding would potential lead to 1000.
+				while (size >= 999.5m)
 				{
 					order++;
 					size /= 1024;
@@ -555,7 +556,7 @@ namespace Qowaiv
 		}
 
 		private static readonly Regex FormattedPattern = new Regex("^(?<format>.*)(?<fileSizeMarker> ?[sSfF])$", RegexOptions.Compiled | RegexOptions.RightToLeft);
-		private static readonly string[] ShortLabels = { "b", "kB", "MB", "GB", "TB", "PB", "EB" };
+		private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
 		private static readonly string[] FullLabels = { "byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte" };
 
 		#endregion

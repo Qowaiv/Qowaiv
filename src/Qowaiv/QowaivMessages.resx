@@ -159,6 +159,9 @@
   <data name="FormatExceptionPostalCode" xml:space="preserve">
     <value>Not a valid postal code</value>
   </data>
+  <data name="FormatExceptionQGuid" xml:space="preserve">
+    <value>Not a valid GUID</value>
+  </data>
   <data name="FormatExceptionWeekDate" xml:space="preserve">
     <value>Not a valid week date</value>
   </data>

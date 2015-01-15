@@ -58,6 +58,11 @@ Postal code
 -----------
 Represents a postal code. It supports validation for all countries.
 
+(Q)GUID
+--------
+The Quowaiv GUID (Globally Unique Identiefier) is an extension on the System.Guid.
+It is by default represented by a 22 length string, instead of a 32 length string.
+
 Week date
 ---------
 Represents a week based date.

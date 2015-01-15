@@ -153,6 +153,9 @@
   <data name="FormatExceptionPostalCode" xml:space="preserve">
     <value>Geen geldige postcode</value>
   </data>
+  <data name="FormatExceptionQGuid" xml:space="preserve">
+    <value>Geen geldig GUID</value>
+  </data>
   <data name="FormatExceptionWeekDate" xml:space="preserve">
     <value>Geen geldige week datum</value>
   </data>

@@ -62,6 +62,7 @@
     <Compile Include="Conversion\MonthTypeConverter.cs" />
     <Compile Include="Conversion\PercentageTypeConverter.cs" />
     <Compile Include="Conversion\PostalCodeTypeConverter.cs" />
+    <Compile Include="Conversion\QGuidTypeConverter.cs" />
     <Compile Include="Conversion\WeekDateTypeConverter.cs" />
     <Compile Include="Conversion\YearTypeConverter.cs" />
     <Compile Include="Country.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Percentage.cs" />
     <Compile Include="PercentageExtensions.cs" />
     <Compile Include="PostalCode.cs" />
+    <Compile Include="QGuid.cs" />
     <Compile Include="QowaivMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

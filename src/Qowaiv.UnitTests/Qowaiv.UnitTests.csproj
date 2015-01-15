@@ -113,6 +113,7 @@
     <Compile Include="PercentageTest.cs" />
     <Compile Include="PostalCodeCountryPatternTest.cs" />
     <Compile Include="PostalCodeTest.cs" />
+    <Compile Include="QGuidTest.cs" />
     <Compile Include="SingleValueObjectAttributeTest.cs" />
     <Compile Include="CodeGenerator\Xml\XResourceFileHeaderTest.cs" />
     <Compile Include="CodeGenerator\Xml\XResourceFileDataTest.cs" />

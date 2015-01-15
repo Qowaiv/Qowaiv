@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Threading;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +16,6 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Threading;
 
 namespace Qowaiv
 {
@@ -389,7 +389,7 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(Country other) { return (m_Value ?? String.Empty).CompareTo((other.m_Value ?? String.Empty)); }
+		public int CompareTo(Country other) { return String.Compare(m_Value, other.m_Value); }
 
 		#endregion
 

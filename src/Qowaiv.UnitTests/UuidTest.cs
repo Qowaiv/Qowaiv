@@ -14,10 +14,10 @@ namespace Qowaiv.UnitTests
 {
 	/// <summary>Tests the GUID SVO.</summary>
 	[TestFixture]
-	public class QGuidTest
+	public class UuidTest
 	{
 		/// <summary>The test instance for most tests.</summary>
-		public static readonly QGuid TestStruct = QGuid.Parse("Qowaiv_SVOLibrary_GUIA");
+		public static readonly Uuid TestStruct = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
 		public static readonly Guid TestGuid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
 		#region GUID const tests
@@ -26,7 +26,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Empty_None_EqualsDefault()
 		{
-			Assert.AreEqual(default(QGuid), QGuid.Empty);
+			Assert.AreEqual(default(Uuid), Uuid.Empty);
 		}
 
 		#endregion
@@ -37,7 +37,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void IsEmpty_Default_IsTrue()
 		{
-			Assert.IsTrue(default(QGuid).IsEmpty());
+			Assert.IsTrue(default(Uuid).IsEmpty());
 		}
 		/// <summary>QGuid.IsEmpty() should be false for the TestStruct.</summary>
 		[Test]
@@ -54,11 +54,11 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void TyrParse_Null_IsValid()
 		{
-			QGuid val;
+			Uuid val;
 
 			string str = null;
 
-			Assert.IsTrue(QGuid.TryParse(str, out val), "Valid");
+			Assert.IsTrue(Uuid.TryParse(str, out val), "Valid");
 			Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
 		}
 
@@ -66,11 +66,11 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void TyrParse_StringEmpty_IsValid()
 		{
-			QGuid val;
+			Uuid val;
 
 			string str = string.Empty;
 
-			Assert.IsTrue(QGuid.TryParse(str, out val), "Valid");
+			Assert.IsTrue(Uuid.TryParse(str, out val), "Valid");
 			Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
 		}
 
@@ -78,11 +78,11 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void TyrParse_StringValue_IsValid()
 		{
-			QGuid val;
+			Uuid val;
 
 			string str = "8a1a8c42-d2ff-e254-e26e-b6abcbf19420";
 
-			Assert.IsTrue(QGuid.TryParse(str, out val), "Valid");
+			Assert.IsTrue(Uuid.TryParse(str, out val), "Valid");
 			Assert.AreEqual(str, val.ToString("d"), "Value");
 		}
 
@@ -90,11 +90,11 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void TyrParse_StringValue_IsNotValid()
 		{
-			QGuid val;
+			Uuid val;
 
 			string str = "string";
 
-			Assert.IsFalse(QGuid.TryParse(str, out val), "Valid");
+			Assert.IsFalse(Uuid.TryParse(str, out val), "Valid");
 			Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
 		}
 
@@ -106,7 +106,7 @@ namespace Qowaiv.UnitTests
 				ExceptionAssert.ExpectException<FormatException>
 				(() =>
 				{
-					QGuid.Parse("InvalidInput");
+					Uuid.Parse("InvalidInput");
 				},
 				"Not a valid GUID");
 			}
@@ -118,7 +118,7 @@ namespace Qowaiv.UnitTests
 			using (new CultureInfoScope("en-GB"))
 			{
 				var exp = TestStruct;
-				var act = QGuid.TryParse(exp.ToString());
+				var act = Uuid.TryParse(exp.ToString());
 
 				Assert.AreEqual(exp, act);
 			}
@@ -129,8 +129,8 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				var exp = default(QGuid);
-				var act = QGuid.TryParse("InvalidInput");
+				var exp = default(Uuid);
+				var act = Uuid.TryParse("InvalidInput");
 
 				Assert.AreEqual(exp, act);
 			}
@@ -146,7 +146,7 @@ namespace Qowaiv.UnitTests
 			ExceptionAssert.ExpectArgumentNullException
 			(() =>
 			{
-				SerializationTest.DeserializeUsingConstructor<QGuid>(null, default(StreamingContext));
+				SerializationTest.DeserializeUsingConstructor<Uuid>(null, default(StreamingContext));
 			},
 			"info");
 		}
@@ -157,8 +157,8 @@ namespace Qowaiv.UnitTests
 			ExceptionAssert.ExpectException<SerializationException>
 			(() =>
 			{
-				var info = new SerializationInfo(typeof(QGuid), new System.Runtime.Serialization.FormatterConverter());
-				SerializationTest.DeserializeUsingConstructor<QGuid>(info, default(StreamingContext));
+				var info = new SerializationInfo(typeof(Uuid), new System.Runtime.Serialization.FormatterConverter());
+				SerializationTest.DeserializeUsingConstructor<Uuid>(info, default(StreamingContext));
 			});
 		}
 
@@ -178,7 +178,7 @@ namespace Qowaiv.UnitTests
 		public void GetObjectData_SerializationInfo_AreEqual()
 		{
 			ISerializable obj = TestStruct;
-			var info = new SerializationInfo(typeof(QGuid), new System.Runtime.Serialization.FormatterConverter());
+			var info = new SerializationInfo(typeof(Uuid), new System.Runtime.Serialization.FormatterConverter());
 			obj.GetObjectData(info, default(StreamingContext));
 
 			Assert.AreEqual(TestGuid, info.GetValue("Value", typeof(Guid)));
@@ -187,24 +187,24 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void SerializeDeserialize_TestStruct_AreEqual()
 		{
-			var input = QGuidTest.TestStruct;
-			var exp = QGuidTest.TestStruct;
+			var input = UuidTest.TestStruct;
+			var exp = UuidTest.TestStruct;
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void DataContractSerializeDeserialize_TestStruct_AreEqual()
 		{
-			var input = QGuidTest.TestStruct;
-			var exp = QGuidTest.TestStruct;
+			var input = UuidTest.TestStruct;
+			var exp = UuidTest.TestStruct;
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void XmlSerializeDeserialize_TestStruct_AreEqual()
 		{
-			var input = QGuidTest.TestStruct;
-			var exp = QGuidTest.TestStruct;
+			var input = UuidTest.TestStruct;
+			var exp = UuidTest.TestStruct;
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
@@ -215,13 +215,13 @@ namespace Qowaiv.UnitTests
 			var input = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var exp = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.SerializeDeserialize(input);
@@ -235,13 +235,13 @@ namespace Qowaiv.UnitTests
 			var input = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var exp = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -255,13 +255,13 @@ namespace Qowaiv.UnitTests
 			var input = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var exp = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
@@ -276,13 +276,13 @@ namespace Qowaiv.UnitTests
 			var input = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var exp = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuidTest.TestStruct,
+				Obj = UuidTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.SerializeDeserialize(input);
@@ -296,13 +296,13 @@ namespace Qowaiv.UnitTests
 			var input = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuid.Empty,
+				Obj = Uuid.Empty,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var exp = new QGuidSerializeObject()
 			{
 				Id = 17,
-				Obj = QGuid.Empty,
+				Obj = Uuid.Empty,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -325,8 +325,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_Null_AreEqual()
 		{
-			var act = JsonTester.Read<QGuid>();
-			var exp = QGuid.Empty;
+			var act = JsonTester.Read<Uuid>();
+			var exp = Uuid.Empty;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -336,14 +336,14 @@ namespace Qowaiv.UnitTests
 		{
 			ExceptionAssert.ExpectException<FormatException>(() =>
 			{
-				JsonTester.Read<QGuid>("InvalidStringValue");
+				JsonTester.Read<Uuid>("InvalidStringValue");
 			},
 			"Not a valid GUID");
 		}
 		[Test]
 		public void FromJson_StringValue_AreEqual()
 		{
-			var act = JsonTester.Read<QGuid>(TestStruct.ToString(CultureInfo.InvariantCulture));
+			var act = JsonTester.Read<Uuid>(TestStruct.ToString(CultureInfo.InvariantCulture));
 			var exp = TestStruct;
 
 			Assert.AreEqual(exp, act);
@@ -354,7 +354,7 @@ namespace Qowaiv.UnitTests
 		{
 			ExceptionAssert.ExpectException<NotSupportedException>(() =>
 			{
-				JsonTester.Read<QGuid>(123456L);
+				JsonTester.Read<Uuid>(123456L);
 			},
 			"JSON deserialization from an integer is not supported.");
 		}
@@ -364,7 +364,7 @@ namespace Qowaiv.UnitTests
 		{
 			ExceptionAssert.ExpectException<NotSupportedException>(() =>
 			{
-				JsonTester.Read<QGuid>(1234.56);
+				JsonTester.Read<Uuid>(1234.56);
 			},
 			"JSON deserialization from a number is not supported.");
 		}
@@ -374,7 +374,7 @@ namespace Qowaiv.UnitTests
 		{
 			ExceptionAssert.ExpectException<NotSupportedException>(() =>
 			{
-				JsonTester.Read<QGuid>(new DateTime(1972, 02, 14));
+				JsonTester.Read<Uuid>(new DateTime(1972, 02, 14));
 			},
 			"JSON deserialization from a date is not supported.");
 		}
@@ -382,7 +382,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToJson_DefaultValue_AreEqual()
 		{
-			object act = JsonTester.Write(default(QGuid));
+			object act = JsonTester.Write(default(Uuid));
 			object exp = null;
 
 			Assert.AreEqual(exp, act);
@@ -403,7 +403,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToString_Empty_StringEmpty()
 		{
-			var act = QGuid.Empty.ToString();
+			var act = Uuid.Empty.ToString();
 			var exp = "AAAAAAAAAAAAAAAAAAAAAA";
 			Assert.AreEqual(exp, act);
 		}
@@ -445,13 +445,13 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void DebuggerDisplay_DebugToString_HasAttribute()
 		{
-			DebuggerDisplayAssert.HasAttribute(typeof(QGuid));
+			DebuggerDisplayAssert.HasAttribute(typeof(Uuid));
 		}
 
 		[Test]
 		public void DebuggerDisplay_DefaultValue_String()
 		{
-			DebuggerDisplayAssert.HasResult("AAAAAAAAAAAAAAAAAAAAAA", default(QGuid));
+			DebuggerDisplayAssert.HasResult("AAAAAAAAAAAAAAAAAAAAAA", default(Uuid));
 		}
 
 		[Test]
@@ -468,27 +468,27 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetHash_Empty_Hash()
 		{
-			Assert.AreEqual(0, QGuid.Empty.GetHashCode());
+			Assert.AreEqual(0, Uuid.Empty.GetHashCode());
 		}
 
 		/// <summary>GetHash should not fail for the test struct.</summary>
 		[Test]
 		public void GetHash_TestStruct_Hash()
 		{
-			Assert.AreEqual(-286953930, QGuidTest.TestStruct.GetHashCode());
+			Assert.AreEqual(-286953930, UuidTest.TestStruct.GetHashCode());
 		}
 
 		[Test]
 		public void Equals_EmptyEmpty_IsTrue()
 		{
-			Assert.IsTrue(QGuid.Empty.Equals(QGuid.Empty));
+			Assert.IsTrue(Uuid.Empty.Equals(Uuid.Empty));
 		}
 
 		[Test]
 		public void Equals_FormattedAndUnformatted_IsTrue()
 		{
-			var l = QGuid.Parse("{95A20FBA-347D-44C9-BEBF-65F06B73F82C}");
-			var r = QGuid.Parse("95a20fba347d44c9bebf65f06b73f82c");
+			var l = Uuid.Parse("{95A20FBA-347D-44C9-BEBF-65F06B73F82C}");
+			var r = Uuid.Parse("95a20fba347d44c9bebf65f06b73f82c");
 
 			Assert.IsTrue(l.Equals(r));
 		}
@@ -496,52 +496,52 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Equals_TestStructTestStruct_IsTrue()
 		{
-			Assert.IsTrue(QGuidTest.TestStruct.Equals(QGuidTest.TestStruct));
+			Assert.IsTrue(UuidTest.TestStruct.Equals(UuidTest.TestStruct));
 		}
 
 		[Test]
 		public void Equals_TestStructEmpty_IsFalse()
 		{
-			Assert.IsFalse(QGuidTest.TestStruct.Equals(QGuid.Empty));
+			Assert.IsFalse(UuidTest.TestStruct.Equals(Uuid.Empty));
 		}
 
 		[Test]
 		public void Equals_EmptyTestStruct_IsFalse()
 		{
-			Assert.IsFalse(QGuid.Empty.Equals(QGuidTest.TestStruct));
+			Assert.IsFalse(Uuid.Empty.Equals(UuidTest.TestStruct));
 		}
 
 		[Test]
 		public void Equals_TestStructObjectTestStruct_IsTrue()
 		{
-			Assert.IsTrue(QGuidTest.TestStruct.Equals((object)QGuidTest.TestStruct));
+			Assert.IsTrue(UuidTest.TestStruct.Equals((object)UuidTest.TestStruct));
 		}
 
 		[Test]
 		public void Equals_TestStructNull_IsFalse()
 		{
-			Assert.IsFalse(QGuidTest.TestStruct.Equals(null));
+			Assert.IsFalse(UuidTest.TestStruct.Equals(null));
 		}
 
 		[Test]
 		public void Equals_TestStructObject_IsFalse()
 		{
-			Assert.IsFalse(QGuidTest.TestStruct.Equals(new object()));
+			Assert.IsFalse(UuidTest.TestStruct.Equals(new object()));
 		}
 
 		[Test]
 		public void OperatorIs_TestStructTestStruct_IsTrue()
 		{
-			var l = QGuidTest.TestStruct;
-			var r = QGuidTest.TestStruct;
+			var l = UuidTest.TestStruct;
+			var r = UuidTest.TestStruct;
 			Assert.IsTrue(l == r);
 		}
 
 		[Test]
 		public void OperatorIsNot_TestStructTestStruct_IsFalse()
 		{
-			var l = QGuidTest.TestStruct;
-			var r = QGuidTest.TestStruct;
+			var l = UuidTest.TestStruct;
+			var r = UuidTest.TestStruct;
 			Assert.IsFalse(l != r);
 		}
 
@@ -553,14 +553,14 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void OrderBy_QGuid_AreEqual()
 		{
-			var item0 = QGuid.Parse("3BE968F7-AAEA-422C-BA74-72A4D045FD74");
-			var item1 = QGuid.Parse("59ED7F38-8E6A-45A9-B3A2-6D32FDF4DD10");
-			var item2 = QGuid.Parse("5BD0EF29-C625-4B8D-A063-E474B28E8653");
-			var item3 = QGuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
+			var item0 = Uuid.Parse("3BE968F7-AAEA-422C-BA74-72A4D045FD74");
+			var item1 = Uuid.Parse("59ED7F38-8E6A-45A9-B3A2-6D32FDF4DD10");
+			var item2 = Uuid.Parse("5BD0EF29-C625-4B8D-A063-E474B28E8653");
+			var item3 = Uuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
 
 
-			var inp = new List<QGuid>() { QGuid.Empty, item3, item2, item0, item1, QGuid.Empty };
-			var exp = new List<QGuid>() { QGuid.Empty, QGuid.Empty, item0, item1, item2, item3 };
+			var inp = new List<Uuid>() { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
+			var exp = new List<Uuid>() { Uuid.Empty, Uuid.Empty, item0, item1, item2, item3 };
 			var act = inp.OrderBy(item => item).ToList();
 
 			CollectionAssert.AreEqual(exp, act);
@@ -570,13 +570,13 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void OrderByDescending_QGuid_AreEqual()
 		{
-			var item0 = QGuid.Parse("3BE968F7-AAEA-422C-BA74-72A4D045FD74");
-			var item1 = QGuid.Parse("59ED7F38-8E6A-45A9-B3A2-6D32FDF4DD10");
-			var item2 = QGuid.Parse("5BD0EF29-C625-4B8D-A063-E474B28E8653");
-			var item3 = QGuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
+			var item0 = Uuid.Parse("3BE968F7-AAEA-422C-BA74-72A4D045FD74");
+			var item1 = Uuid.Parse("59ED7F38-8E6A-45A9-B3A2-6D32FDF4DD10");
+			var item2 = Uuid.Parse("5BD0EF29-C625-4B8D-A063-E474B28E8653");
+			var item3 = Uuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
 
-			var inp = new List<QGuid>() { QGuid.Empty, item3, item2, item0, item1, QGuid.Empty };
-			var exp = new List<QGuid>() { item3, item2, item1, item0, QGuid.Empty, QGuid.Empty };
+			var inp = new List<Uuid>() { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
+			var exp = new List<Uuid>() { item3, item2, item1, item0, Uuid.Empty, Uuid.Empty };
 			var act = inp.OrderByDescending(item => item).ToList();
 
 			CollectionAssert.AreEqual(exp, act);
@@ -631,7 +631,7 @@ namespace Qowaiv.UnitTests
 		public void Explicit_StringToQGuid_AreEqual()
 		{
 			var exp = TestStruct;
-			var act = (QGuid)TestStruct.ToString();
+			var act = (Uuid)TestStruct.ToString();
 
 			Assert.AreEqual(exp, act);
 		}
@@ -647,8 +647,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Implicit_GuidToQGuid_AreEqual()
 		{
-			QGuid exp = TestStruct;
-			QGuid act = TestGuid;
+			Uuid exp = TestStruct;
+			Uuid act = TestGuid;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -680,8 +680,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void NewGuid_None_NotEmpty()
 		{
-			QGuid actual = QGuid.NewGuid();
-			QGuid expected = Guid.Empty;
+			Uuid actual = Uuid.NewGuid();
+			Uuid expected = Guid.Empty;
 			Assert.AreNotEqual(expected, actual);
 		}
 
@@ -692,30 +692,30 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ConverterExists_QGuid_IsTrue()
 		{
-			TypeConverterAssert.ConverterExists(typeof(QGuid));
+			TypeConverterAssert.ConverterExists(typeof(Uuid));
 		}
 
 		[Test]
 		public void CanNotConvertFromInt32_QGuid_IsTrue()
 		{
-			TypeConverterAssert.CanNotConvertFrom(typeof(QGuid), typeof(Int32));
+			TypeConverterAssert.CanNotConvertFrom(typeof(Uuid), typeof(Int32));
 		}
 		[Test]
 		public void CanNotConvertToInt32_QGuid_IsTrue()
 		{
-			TypeConverterAssert.CanNotConvertTo(typeof(QGuid), typeof(Int32));
+			TypeConverterAssert.CanNotConvertTo(typeof(Uuid), typeof(Int32));
 		}
 
 		[Test]
 		public void CanConvertFromString_QGuid_IsTrue()
 		{
-			TypeConverterAssert.CanConvertFromString(typeof(QGuid));
+			TypeConverterAssert.CanConvertFromString(typeof(Uuid));
 		}
 
 		[Test]
 		public void CanConvertToString_QGuid_IsTrue()
 		{
-			TypeConverterAssert.CanConvertToString(typeof(QGuid));
+			TypeConverterAssert.CanConvertToString(typeof(Uuid));
 		}
 
 		[Test]
@@ -723,7 +723,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				TypeConverterAssert.ConvertFromEquals(QGuid.Empty, (string)null);
+				TypeConverterAssert.ConvertFromEquals(Uuid.Empty, (string)null);
 			}
 		}
 
@@ -732,7 +732,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				TypeConverterAssert.ConvertFromEquals(QGuid.Empty, string.Empty);
+				TypeConverterAssert.ConvertFromEquals(Uuid.Empty, string.Empty);
 			}
 		}
 
@@ -741,14 +741,14 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				TypeConverterAssert.ConvertFromEquals(QGuidTest.TestStruct, QGuidTest.TestStruct.ToString());
+				TypeConverterAssert.ConvertFromEquals(UuidTest.TestStruct, UuidTest.TestStruct.ToString());
 			}
 		}
 
 		[Test]
 		public void ConvertFromInstanceDescriptor_QGuid_Successful()
 		{
-			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(QGuid));
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Uuid));
 		}
 
 		[Test]
@@ -756,7 +756,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				TypeConverterAssert.ConvertToStringEquals(QGuidTest.TestStruct.ToString(), QGuidTest.TestStruct);
+				TypeConverterAssert.ConvertToStringEquals(UuidTest.TestStruct.ToString(), UuidTest.TestStruct);
 			}
 		}
 
@@ -767,15 +767,15 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void IsValid_Data_IsFalse()
 		{
-			Assert.IsFalse(QGuid.IsValid("Complex"), "Complex");
-			Assert.IsFalse(QGuid.IsValid((String)null), "(String)null");
-			Assert.IsFalse(QGuid.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(Uuid.IsValid("Complex"), "Complex");
+			Assert.IsFalse(Uuid.IsValid((String)null), "(String)null");
+			Assert.IsFalse(Uuid.IsValid(String.Empty), "String.Empty");
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()
 		{
-			Assert.IsTrue(QGuid.IsValid("Qowaiv_SVOLibrary_GUIA"), "Qowaiv_SVOLibrary_GUIA");
-			Assert.IsTrue(QGuid.IsValid("8a1a8c42-d2ff-e254-e26e-b6abcbf19420"), "8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+			Assert.IsTrue(Uuid.IsValid("Qowaiv_SVOLibrary_GUIA"), "Qowaiv_SVOLibrary_GUIA");
+			Assert.IsTrue(Uuid.IsValid("8a1a8c42-d2ff-e254-e26e-b6abcbf19420"), "8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 		}
 		#endregion
 
@@ -785,7 +785,7 @@ namespace Qowaiv.UnitTests
 	public class QGuidSerializeObject
 	{
 		public int Id { get; set; }
-		public QGuid Obj { get; set; }
+		public Uuid Obj { get; set; }
 		public DateTime Date { get; set; }
 	}
 }

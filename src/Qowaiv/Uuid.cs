@@ -13,26 +13,30 @@ using System.Xml.Serialization;
 
 namespace Qowaiv
 {
-	/// <summary>Represents a GUID.</summary>
+	/// <summary>Represents a UUID (Universally unique identifier) aka GUID (Globally unique identifier).</summary>
 	/// <remarks>
-	/// The main difference between this GUID and the default System.GUID is 
+	/// The main difference between this UUID and the default System.GUID is 
 	/// the default string representation. For this, that is a 22 char long
 	/// Base64 representation.
+	/// 
+	/// The reason not to call this a GUID but an UUID it just to prevent users of 
+	/// Qowaiv to be forced to specify the namespace of there GUID of choice 
+	/// everywhere.
 	/// </remarks>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	// [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a GUID.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
-	[TypeConverter(typeof(QGuidTypeConverter))]
-	public struct QGuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<QGuid>
+	[TypeConverter(typeof(UuidTypeConverter))]
+	public struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Uuid>
 	{
 		/// <summary>Represents the pattern of a (potential) valid GUID.</summary>
 		public static readonly Regex Pattern = new Regex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
 
 		/// <summary>Represents an empty/not set GUID.</summary>
-		public static readonly QGuid Empty = default(QGuid);
+		public static readonly Uuid Empty = default(Uuid);
 
 		/// <summary>Initializes a new instance of a GUID.</summary>
-		private QGuid(Guid id)
+		private Uuid(Guid id)
 		{
 			m_Value = id;
 		}
@@ -62,7 +66,7 @@ namespace Qowaiv
 		/// <summary>Initializes a new instance of GUID based on the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
-		private QGuid(SerializationInfo info, StreamingContext context)
+		private Uuid(SerializationInfo info, StreamingContext context)
 		{
 			if (info == null) { throw new ArgumentNullException("info"); }
 			m_Value = (Guid)info.GetValue("Value", typeof(Guid));
@@ -268,7 +272,7 @@ namespace Qowaiv
 		/// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
 		/// <param name="left">The left operand.</param>
 		/// <param name="right">The right operand</param>
-		public static bool operator ==(QGuid left, QGuid right)
+		public static bool operator ==(Uuid left, Uuid right)
 		{
 			return left.Equals(right);
 		}
@@ -276,7 +280,7 @@ namespace Qowaiv
 		/// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
 		/// <param name="left">The left operand.</param>
 		/// <param name="right">The right operand</param>
-		public static bool operator !=(QGuid left, QGuid right)
+		public static bool operator !=(Uuid left, Uuid right)
 		{
 			return !(left == right);
 		}
@@ -304,9 +308,9 @@ namespace Qowaiv
 		/// </exception>
 		public int CompareTo(object obj)
 		{
-			if (obj is QGuid || obj is Guid)
+			if (obj is Uuid || obj is Guid)
 			{
-				return CompareTo((QGuid)obj);
+				return CompareTo((Uuid)obj);
 			}
 			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a GUID"), "obj");
 		}
@@ -322,30 +326,30 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(QGuid other) { return m_Value.CompareTo(other.m_Value); }
+		public int CompareTo(Uuid other) { return m_Value.CompareTo(other.m_Value); }
 
 		#endregion
 
 		#region (Explicit) casting
 
 		/// <summary>Casts a GUID to a System.String.</summary>
-		public static explicit operator string(QGuid val) { return val.ToString(CultureInfo.CurrentCulture); }
+		public static explicit operator string(Uuid val) { return val.ToString(CultureInfo.CurrentCulture); }
 		/// <summary>Casts a System.String to a GUID.</summary>
-		public static explicit operator QGuid(string str) { return QGuid.Parse(str); }
+		public static explicit operator Uuid(string str) { return Uuid.Parse(str); }
 
 		/// <summary>Casts a Qowaiv.GUID to a System.GUID.</summary>
-		public static implicit operator Guid(QGuid val) { return val.m_Value; }
+		public static implicit operator Guid(Uuid val) { return val.m_Value; }
 		/// <summary>Casts a System.GUID to a Qowaiv.GUID.</summary>
-		public static implicit operator QGuid(Guid val) { return new QGuid(val); }
+		public static implicit operator Uuid(Guid val) { return new Uuid(val); }
 
 		#endregion
 
 		#region Factory methods
 
 		/// <summary>Initializes a new instance of a GUID.</summary>
-		public static QGuid NewGuid()
+		public static Uuid NewGuid()
 		{
-			return new QGuid(Guid.NewGuid());
+			return new Uuid(Guid.NewGuid());
 		}
 
 		/// <summary>Converts the string to a GUID.</summary>
@@ -358,10 +362,10 @@ namespace Qowaiv
 		/// <exception cref="System.FormatException">
 		/// s is not in the correct format.
 		/// </exception>
-		public static QGuid Parse(string s)
+		public static Uuid Parse(string s)
 		{
-			QGuid val;
-			if (QGuid.TryParse(s, out val))
+			Uuid val;
+			if (Uuid.TryParse(s, out val))
 			{
 				return val;
 			}
@@ -377,14 +381,14 @@ namespace Qowaiv
 		/// <returns>
 		/// The GUID if the string was converted successfully, otherwise QGuid.Empty.
 		/// </returns>
-		public static QGuid TryParse(string s)
+		public static Uuid TryParse(string s)
 		{
-			QGuid val;
-			if (QGuid.TryParse(s, out val))
+			Uuid val;
+			if (Uuid.TryParse(s, out val))
 			{
 				return val;
 			}
-			return QGuid.Empty;
+			return Uuid.Empty;
 		}
 
 		/// <summary>Converts the string to a GUID.
@@ -399,9 +403,9 @@ namespace Qowaiv
 		/// <returns>
 		/// True if the string was converted successfully, otherwise false.
 		/// </returns>
-		public static bool TryParse(string s, out QGuid result)
+		public static bool TryParse(string s, out Uuid result)
 		{
-			result = QGuid.Empty;
+			result = Uuid.Empty;
 			if (string.IsNullOrEmpty(s))
 			{
 				return true;
@@ -410,14 +414,14 @@ namespace Qowaiv
 			if (Pattern.IsMatch(s))
 			{
 				var bytes = Convert.FromBase64String(s.Replace('-', '+').Replace('_', '/').Substring(0, 22) + "==");
-				result = new QGuid(new Guid(bytes));
+				result = new Uuid(new Guid(bytes));
 				return true;
 			}
 
 			Guid id;
 			if (Guid.TryParse(s, out id))
 			{
-				result = new QGuid(id);
+				result = new Uuid(id);
 				return true;
 			}
 			return false;

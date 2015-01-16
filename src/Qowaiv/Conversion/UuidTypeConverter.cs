@@ -5,7 +5,7 @@ using System.Globalization;
 namespace Qowaiv.Conversion
 {
     /// <summary>Provides a conversion for a GUID.</summary>
-    public class QGuidTypeConverter : TypeConverter
+    public class UuidTypeConverter : TypeConverter
     {
         #region Convert From
 
@@ -48,7 +48,7 @@ namespace Qowaiv.Conversion
             var str = value as string;
             if (value == null || str != null)
             {
-                return QGuid.Parse(str);
+                return Uuid.Parse(str);
             }
             return base.ConvertFrom(context, culture, value);
         }

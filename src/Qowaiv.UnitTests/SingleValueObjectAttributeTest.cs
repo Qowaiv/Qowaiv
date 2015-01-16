@@ -43,7 +43,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Month),
 				typeof(Qowaiv.Percentage),
 				typeof(Qowaiv.PostalCode),
-				typeof(Qowaiv.QGuid),
+				typeof(Qowaiv.Uuid),
 				typeof(Qowaiv.WeekDate),
 				typeof(Qowaiv.Year),
 				typeof(Qowaiv.Web.InternetMediaType)

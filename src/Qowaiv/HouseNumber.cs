@@ -25,7 +25,7 @@ namespace Qowaiv
 		public static readonly Regex Pattern = new Regex(@"^[1-9][0-9]{0,8}$", RegexOptions.Compiled);
 
 		/// <summary>Represents an empty/not set house number.</summary>
-		public static readonly HouseNumber Empty = new HouseNumber() { m_Value = default(Int32) };
+		public static readonly HouseNumber Empty = default(HouseNumber);
 
 		/// <summary>Represents an unknown (but set) house number.</summary>
 		public static readonly HouseNumber Unknown = new HouseNumber() { m_Value = Int32.MaxValue };

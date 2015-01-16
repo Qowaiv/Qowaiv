@@ -25,7 +25,7 @@ namespace Qowaiv
 		public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
 
 		/// <summary>Represents an empty/not set year.</summary>
-		public static readonly Year Empty = new Year() { m_Value = default(Int16) };
+		public static readonly Year Empty = default(Year);
 
 		/// <summary>Represents an unknown (but set) year.</summary>
 		public static readonly Year Unknown = new Year() { m_Value = Int16.MaxValue };

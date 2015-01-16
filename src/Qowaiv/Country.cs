@@ -27,7 +27,7 @@ namespace Qowaiv
 	public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Country>
 	{
 		/// <summary>Represents an empty/not set Country.</summary>
-		public static readonly Country Empty = new Country() { m_Value = default(String) };
+		public static readonly Country Empty = default(Country);
 
 		/// <summary>Represents an unknown (but set) Country.</summary>
 		public static readonly Country Unknown = new Country() { m_Value = "ZZ" };

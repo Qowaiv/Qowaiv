@@ -37,7 +37,7 @@ namespace Qowaiv
 	public struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Gender>
 	{
 		/// <summary>Represents an empty/not set Gender.</summary>
-		public static readonly Gender Empty = new Gender() { m_Value = default(Byte) };
+		public static readonly Gender Empty = default(Gender);
 
 		/// <summary>Represents a not known/unknown gender.</summary>
 		public static readonly Gender Unknown = new Gender() { m_Value = 1 };

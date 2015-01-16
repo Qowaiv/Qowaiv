@@ -36,7 +36,7 @@ namespace Qowaiv
 	public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Currency>
 	{
 		/// <summary>Represents an empty/not set currency.</summary>
-		public static readonly Currency Empty = new Currency() { m_Value = default(String) };
+		public static readonly Currency Empty = default(Currency);
 
 		/// <summary>Represents an unknown (but set) currency.</summary>
 		public static readonly Currency Unknown = new Currency() { m_Value = "ZZZ" };

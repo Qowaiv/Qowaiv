@@ -33,7 +33,7 @@ namespace Qowaiv
 			@"(\w*[a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,6})$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 		/// <summary>Represents an empty/not set email address.</summary>
-		public static readonly EmailAddress Empty = new EmailAddress() { m_Value = default(String) };
+		public static readonly EmailAddress Empty = default(EmailAddress);
 
 		/// <summary>Represents an unknown (but set) email address.</summary>
 		public static readonly EmailAddress Unknown = new EmailAddress() { m_Value = "?" };

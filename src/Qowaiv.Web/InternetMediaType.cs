@@ -62,7 +62,7 @@ namespace Qowaiv.Web
 		private const string PatternSuffix = @"(\+(?<suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?";
 
 		/// <summary>Represents an empty/not set internet media type.</summary>
-		public static readonly InternetMediaType Empty = new InternetMediaType() { m_Value = default(String) };
+		public static readonly InternetMediaType Empty = default(InternetMediaType);
 
 		/// <summary>Represents an unknown (but set) internet media type.</summary>
 		public static readonly InternetMediaType Unknown = new InternetMediaType() { m_Value = "application/octet-stream" };

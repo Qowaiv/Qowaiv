@@ -27,7 +27,7 @@ namespace Qowaiv
 		public static readonly Regex Pattern = new Regex(@"^(0?[1-9]|10|11|12)$", RegexOptions.Compiled);
 
 		/// <summary>Represents an empty/not set month.</summary>
-		public static readonly Month Empty = new Month() { m_Value = default(Byte) };
+		public static readonly Month Empty = default(Month);
 
 		/// <summary>Represents an unknown (but set) month.</summary>
 		public static readonly Month Unknown = new Month() { m_Value = Byte.MaxValue };

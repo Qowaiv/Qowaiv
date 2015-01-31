@@ -79,6 +79,21 @@ Internet media type
 -------------------
 Represents a intenet media type (also known as MIME-type and content type).
 
+Qowaiv complex types
+====================
+
+Wildcard pattern
+----------------
+Represents a pattern to match strings, using wildcard characters ? and *. It 
+also support the use of SQL wildcard characters _ and %.
+
+Qowaiv helpers
+==============
+
+Guard
+-----
+Guard parameters, for centralizing and simplifying the argument checking.
+
 Qowaiv SVO options
 ==================
 

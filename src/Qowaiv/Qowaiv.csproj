@@ -74,6 +74,7 @@
     <Compile Include="FileSize.cs" />
     <Compile Include="FileSizeExtensions.cs" />
     <Compile Include="Formatting\FormattingArguments.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="IFormattableExtensions.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />
     <Compile Include="Gender.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="Percentage.cs" />
     <Compile Include="PercentageExtensions.cs" />
     <Compile Include="PostalCode.cs" />
+    <Compile Include="Text\WildcardPattern.cs" />
+    <Compile Include="Text\WildcardPatternOptions.cs" />
     <Compile Include="Uuid.cs" />
     <Compile Include="QowaivMessages.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -102,6 +102,7 @@
     <Compile Include="Formatting\StringFormatterTest.cs" />
     <Compile Include="GenderTest.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfoTest.cs" />
+    <Compile Include="GuardTest.cs" />
     <Compile Include="HouseNumberTest.cs" />
     <Compile Include="IFormattableExtensionsTest.cs" />
     <Compile Include="InternationalBankAccountNumberTest.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="PercentageTest.cs" />
     <Compile Include="PostalCodeCountryPatternTest.cs" />
     <Compile Include="PostalCodeTest.cs" />
+    <Compile Include="Text\WildcardPatternTest.cs" />
     <Compile Include="UuidTest.cs" />
     <Compile Include="SingleValueObjectAttributeTest.cs" />
     <Compile Include="CodeGenerator\Xml\XResourceFileHeaderTest.cs" />

@@ -147,7 +147,7 @@ namespace Qowaiv
 		/// <param name="context">The streaming context.</param>
 		private Country(SerializationInfo info, StreamingContext context)
 		{
-			if (info == null) { throw new ArgumentNullException("info"); }
+			Guard.NotNull(info, "info");
 			m_Value = info.GetString("Value");
 		}
 
@@ -156,7 +156,7 @@ namespace Qowaiv
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
 		{
-			if (info == null) { throw new ArgumentNullException("info"); }
+			Guard.NotNull(info, "info");
 			info.AddValue("Value", m_Value);
 		}
 

@@ -15,8 +15,7 @@ namespace Qowaiv.CodeGenerator.Xml
 		/// <summary>Initializes a new instance of resource file data.</summary>
 		public XResourceFileData(string name, string val, string comment = null)
 		{
-			if (string.IsNullOrEmpty(name)) { throw new ArgumentNullException("name"); }
-			this.Name = name;
+			this.Name = Guard.NotNullOrEmpty(name, "name");
 			this.Value = val;
 			// not add empty comments.
 			this.Comment = String.IsNullOrEmpty(comment) ? null : comment;

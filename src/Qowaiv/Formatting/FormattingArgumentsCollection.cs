@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Qowaiv;
 
 namespace Qowaiv.Formatting
 {
@@ -24,8 +25,7 @@ namespace Qowaiv.Formatting
 		/// </param>
 		public FormattingArgumentsCollection(IFormatProvider formatProvider, FormattingArgumentsCollection parent = null)
 		{
-			if (formatProvider == null) { throw new ArgumentNullException("formatProvider"); }
-			this.FormatProvider = formatProvider;
+			this.FormatProvider = Guard.NotNull(formatProvider, "formatProvider");
 
 			if (parent != null)
 			{
@@ -101,8 +101,9 @@ namespace Qowaiv.Formatting
 		/// </remarks>
 		public string Format(string format, params object[] args)
 		{
-			if (format == null) { throw new ArgumentNullException("format"); }
-			if (args == null) { throw new ArgumentNullException("args"); }
+			Guard.NotNull(format, "format");
+			Guard.NotNull(args, "args");
+
 			var sb = new StringBuilder();
 			int pos = 0;
 			int len = format.Length;
@@ -349,7 +350,11 @@ namespace Qowaiv.Formatting
 		/// <exception cref="System.ArgumentException">
 		/// An element with the same type already exists in the collection.
 		/// </exception>
-		public void Add(Type type, FormattingArguments arguments) { dict.Add(Guard(type), arguments); }
+		public void Add(Type type, FormattingArguments arguments) 
+		{
+			Guard.ImplementsInterface(type, "type", typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
+			dict.Add(type, arguments); 
+		}
 
 
 		/// <summary>Sets a format for the specified type.</summary>
@@ -413,7 +418,10 @@ namespace Qowaiv.Formatting
 		/// <exception cref="System.NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
-		public void Set(Type type, FormattingArguments arguments) { dict[Guard(type)] = arguments; }
+		public void Set(Type type, FormattingArguments arguments) {
+			Guard.ImplementsInterface(type, "type", typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
+			dict[type] = arguments; 
+		}
 
 		/// <summary>Returns true if the collection contains the type, otherwise false.</summary>
 		/// <param name="type">
@@ -474,20 +482,6 @@ namespace Qowaiv.Formatting
 		public int Count { get { return dict.Count; } }
 
 		#endregion
-
-		/// <summary>Guards the type value.</summary>
-		/// <exception cref="System.ArgumentNullException">
-		/// The type is null.
-		/// </exception>
-		/// <exception cref="System.NotSupportedException">
-		/// The type represents a type not implementing System.IFormattable.
-		/// </exception>
-		private static Type Guard(Type type)
-		{
-			if (type == null) { throw new ArgumentNullException("type"); }
-			if (!type.GetInterfaces().Contains(typeof(IFormattable))) { throw new ArgumentException(QowaivMessages.ArgumentException_NotIFormattable, "type"); }
-			return type;
-		}
 
 		/// <summary>Returns a System.String that represents the current formatting arguments collection for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]

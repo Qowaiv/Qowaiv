@@ -135,7 +135,7 @@ namespace Qowaiv.Web.Mvc
 		/// <returns>The bound model.</returns>
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			if (bindingContext == null) { throw new ArgumentNullException("bindingContext"); }
+			Guard.NotNull(bindingContext, "bindingContext");
 
 			// Get the value result.
 			var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);

@@ -58,9 +58,8 @@ namespace Qowaiv.Threading
 		/// </remarks>
 		public static void Register(Type type, Func<Thread, object> creator)
 		{
-			if (type == null) { throw new ArgumentNullException("type"); }
-			if (creator == null) { throw new ArgumentNullException("creator"); }
-
+			Qowaiv.Guard.NotNull(type, "type");
+			Qowaiv.Guard.NotNull(creator, "creator");
 			Guard(type, Creators.ContainsKey(type));
 
 			Creators.TryAdd(type, creator);
@@ -140,7 +139,7 @@ namespace Qowaiv.Threading
 		/// </param>
 		public void Remove(Type type)
 		{
-			if (type == null) { throw new ArgumentNullException("type"); }
+			Qowaiv.Guard.NotNull(type, "type");
 			Values.Remove(type);
 		}
 

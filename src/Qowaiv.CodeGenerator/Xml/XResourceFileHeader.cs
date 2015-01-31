@@ -30,8 +30,7 @@ namespace Qowaiv.CodeGenerator.Xml
 		/// <summary>Initializes a new instance of a resource file header.</summary>
 		public XResourceFileHeader(string name, string val)
 		{
-			if (string.IsNullOrEmpty(name)) { throw new ArgumentNullException("name"); }
-			this.Name = name;
+			this.Name = Guard.NotNullOrEmpty(name, "name");
 			this.Value = val;
 		}
 

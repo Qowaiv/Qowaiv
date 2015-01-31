@@ -29,14 +29,10 @@ namespace Qowaiv.Formatting
 		/// <returns></returns>
 		public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape = '\\')
 		{
-			#region Guarding
-
-			if (obj == null) { throw new ArgumentNullException("obj"); }
-			if (String.IsNullOrEmpty(format)) { throw new ArgumentNullException("format"); }
-			if (formatProvider == null) { throw new ArgumentNullException("formatProvider"); }
-			if (tokens == null) { throw new ArgumentNullException("tokens"); }
-
-			#endregion
+			Guard.NotNull((object)obj, "obj");
+			Guard.NotNullOrEmpty(format, "format");
+			Guard.NotNull(formatProvider, "formatProvider");
+			Guard.NotNull(tokens, "tokens");
 
 			var sb = new StringBuilder();
 			var isEscape = false;

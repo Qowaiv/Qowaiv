@@ -339,7 +339,7 @@ namespace Qowaiv
 		/// <param name="context">The streaming context.</param>
 		private FileSize(SerializationInfo info, StreamingContext context)
 		{
-			if (info == null) { throw new ArgumentNullException("info"); }
+			Guard.NotNull(info, "info");
 			m_Value = info.GetInt64("Value");
 		}
 
@@ -348,7 +348,7 @@ namespace Qowaiv
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
 		{
-			if (info == null) { throw new ArgumentNullException("info"); }
+			Guard.NotNull(info, "info");
 			info.AddValue("Value", m_Value);
 		}
 
@@ -813,14 +813,14 @@ namespace Qowaiv
 		/// <summary>Creates a file size from a file info.</summary>
 		public static FileSize FromFileInfo(FileInfo fileInfo)
 		{
-			if (fileInfo == null) { throw new ArgumentNullException("fileInfo"); }
+			Guard.NotNull(fileInfo, "fileInfo");
 			return new FileSize(fileInfo.Length);
 		}
 
 		/// <summary>Creates a file size from a stream.</summary>
 		public static FileSize FromStream(Stream stream)
 		{
-			if (stream == null) { throw new ArgumentNullException("stream"); }
+			Guard.NotNull(stream, "stream");
 			return new FileSize(stream.Length);
 		}
 

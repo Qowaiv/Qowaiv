@@ -21,13 +21,14 @@ namespace Qowaiv.UnitTests.Formatting
 		}
 
 		[Test]
-		public void Apply_StringEmptyFormat_ThrowsArugmentNullException()
+		public void Apply_StringEmptyFormat_ThrowsArugmentException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.ExpectArgumentException(() =>
 			{
 				StringFormatter.Apply(new object(), String.Empty, null, null);
 			},
-			"format");
+			"format",
+			"Value cannot be an empty string.");
 		}
 
 		[Test]

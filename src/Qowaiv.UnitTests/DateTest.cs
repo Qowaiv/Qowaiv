@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Threading;
-using System.Xml.Serialization;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests
 {
@@ -368,7 +365,7 @@ namespace Qowaiv.UnitTests
 		public void ToJson_DefaultValue_AreEqual()
 		{
 			object act = JsonTester.Write(default(Date));
-			object exp = null;
+			object exp = "0001-01-01";
 
 			Assert.AreEqual(exp, act);
 		}
@@ -376,7 +373,7 @@ namespace Qowaiv.UnitTests
 		public void ToJson_TestStruct_AreEqual()
 		{
 			var act = JsonTester.Write(TestStruct);
-			var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
+			var exp = "1970-02-14";
 
 			Assert.AreEqual(exp, act);
 		}

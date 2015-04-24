@@ -19,6 +19,8 @@ namespace Qowaiv
 	[TypeConverter(typeof(DateTypeConverter))]
 	public struct Date : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Date>
 	{
+		private const string SerializableFormat = "yyyy-MM-dd";
+
 		/// <summary>Represents the largest possible value date. This field is read-only.</summary>
 		public static readonly Date MaxValue = new Date(DateTime.MaxValue);
 
@@ -359,7 +361,7 @@ namespace Qowaiv
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
-			writer.WriteString(ToString(CultureInfo.InvariantCulture));
+			writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
 		}
 
 		#endregion
@@ -405,7 +407,7 @@ namespace Qowaiv
 		/// <summary>Converts a Date into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
-			return m_Value == default(DateTime) ? null : ToString(CultureInfo.InvariantCulture);
+			return ToString(SerializableFormat, CultureInfo.InvariantCulture);
 		}
 
 		#endregion
@@ -416,7 +418,7 @@ namespace Qowaiv
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay
 		{
-			get { return m_Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); }
+			get { return m_Value.ToString(SerializableFormat, CultureInfo.InvariantCulture); }
 		}
 
 		/// <summary>Returns a System.String that represents the current Date.</summary>

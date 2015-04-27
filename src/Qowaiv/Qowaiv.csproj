@@ -59,6 +59,7 @@
     <Compile Include="Conversion\GenderTypeConverter.cs" />
     <Compile Include="Conversion\HouseNumberTypeConverter.cs" />
     <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
+    <Compile Include="Conversion\LocalDateTimeTypeConverter.cs" />
     <Compile Include="Conversion\MonthTypeConverter.cs" />
     <Compile Include="Conversion\PercentageTypeConverter.cs" />
     <Compile Include="Conversion\PostalCodeTypeConverter.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="InternationalBankAccountNumber.cs" />
     <Compile Include="InternationalBankAccountNumberPatterns.cs" />
     <Compile Include="Json\IJsonSerializable.cs" />
+    <Compile Include="LocalDateTime.cs" />
     <Compile Include="Month.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Percentage.cs" />

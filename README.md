@@ -46,6 +46,11 @@ International Bank Account Number (IBAN)
 ----------------------------------------
 Represents an IBAN as specified in ISO 13616.
 
+Local Date Time
+---------------
+Explictly marked local date time. It allows the clear distinction between local 
+and UTC-based date times.
+
 Month
 -----
 Represents a month in the range [1-12].

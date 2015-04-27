@@ -1,38 +1,46 @@
-﻿using Qowaiv.Conversion;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
 
 namespace Qowaiv
 {
-	/// <summary>Represents a Date.</summary>
+	/// <summary>Represents a local date time.</summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
-	[TypeConverter(typeof(DateTypeConverter))]
-	public struct Date : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Date>
+	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
+	[TypeConverter(typeof(LocalDateTimeTypeConverter))]
+	public struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<LocalDateTime>
 	{
-		private const string SerializableFormat = "yyyy-MM-dd";
+		private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
 
 		/// <summary>Represents the largest possible value date. This field is read-only.</summary>
-		public static readonly Date MaxValue = new Date(DateTime.MaxValue);
+		public static readonly LocalDateTime MaxValue = new LocalDateTime(1, 01, 01);
 
 		/// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
-		public static readonly Date MinValue = new Date(DateTime.MinValue);
-
-		/// <summary>Gets the current date.</summary>
-		public static Date Today { get { return (Date)DateTime.Today; } }
+		public static readonly LocalDateTime MinValue = new LocalDateTime(DateTime.MinValue);
 
 		#region Constructors
 
-		/// <summary>Initializes a new instance of the date structure based on a System.DateTime.
+		/// <summary>Initializes a new instance of the local date time structure to a specified number of ticks.</summary>
+		/// <param name="ticks">
+		///  A date expressed in 100-nanosecond units.
+		/// </param>
+		/// <exception cref="System.ArgumentOutOfRangeException">
+		///  ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
+		/// </exception>
+		public LocalDateTime(long ticks)
+			: this(new DateTime(ticks)) { }
+
+		/// <summary>Initializes a new instance of the local date time structure based on a System.DateTime.
 		/// </summary>
 		/// <param name="dt">
 		/// A date and time.
@@ -40,19 +48,7 @@ namespace Qowaiv
 		/// <remarks>
 		/// The date of the date time is taken.
 		/// </remarks>
-		private Date(DateTime dt)
-		{
-			m_Value = dt.Date;
-		}
-
-		/// <summary>Initializes a new instance of the date structure to a specified number of ticks.</summary>
-		/// <param name="ticks">
-		///  A date expressed in 100-nanosecond units.
-		/// </param>
-		/// <exception cref="System.ArgumentOutOfRangeException">
-		///  ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
-		/// </exception>
-		public Date(long ticks) : this(new DateTime(ticks)) { }
+		private LocalDateTime(DateTime dt) : this(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond) { }
 
 		/// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
 		/// <param name="year">
@@ -72,7 +68,99 @@ namespace Qowaiv
 		/// The specified parameters evaluate to less than date.MinValue or
 		/// more than date.MaxValue.
 		/// </exception>
-		public Date(int year, int month, int day) : this(new DateTime(year, month, day)) { }
+		public LocalDateTime(int year, int month, int day) : this(year, month, day, 0, 0) { }
+
+		/// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+		/// <param name="year">
+		/// The year (1 through 9999).
+		/// </param>
+		/// <param name="month">
+		/// The month (1 through 12).
+		/// </param>
+		/// <param name="day">
+		/// The day (1 through the number of days in month).
+		/// </param>
+		/// <param name="hour">
+		///  The hours (0 through 23).
+		/// </param>
+		/// <param name="minute">
+		/// The minutes (0 through 59).
+		/// </param>
+		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// year is less than 1 or greater than 9999.-or- month is less than 1 or greater
+		/// than 12.-or- day is less than 1 or greater than the number of days in month.
+		/// </exception>
+		/// <exception cref="System.ArgumentException">
+		/// The specified parameters evaluate to less than date.MinValue or
+		/// more than date.MaxValue.
+		/// </exception>
+		public LocalDateTime(int year, int month, int day, int hour, int minute)
+			: this(year, month, day, hour, minute, 0) { }
+
+		/// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+		/// <param name="year">
+		/// The year (1 through 9999).
+		/// </param>
+		/// <param name="month">
+		/// The month (1 through 12).
+		/// </param>
+		/// <param name="day">
+		/// The day (1 through the number of days in month).
+		/// </param>
+		/// <param name="hour">
+		///  The hours (0 through 23).
+		/// </param>
+		/// <param name="minute">
+		/// The minutes (0 through 59).
+		/// </param>
+		/// <param name="second">
+		/// The seconds (0 through 59).
+		/// </param>
+		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// year is less than 1 or greater than 9999.-or- month is less than 1 or greater
+		/// than 12.-or- day is less than 1 or greater than the number of days in month.
+		/// </exception>
+		/// <exception cref="System.ArgumentException">
+		/// The specified parameters evaluate to less than date.MinValue or
+		/// more than date.MaxValue.
+		/// </exception>
+		public LocalDateTime(int year, int month, int day, int hour, int minute, int second)
+			: this(year, month, day, hour, minute, second, 0) { }
+
+		/// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+		/// <param name="year">
+		/// The year (1 through 9999).
+		/// </param>
+		/// <param name="month">
+		/// The month (1 through 12).
+		/// </param>
+		/// <param name="day">
+		/// The day (1 through the number of days in month).
+		/// </param>
+		/// <param name="hour">
+		///  The hours (0 through 23).
+		/// </param>
+		/// <param name="minute">
+		/// The minutes (0 through 59).
+		/// </param>
+		/// <param name="second">
+		/// The seconds (0 through 59).
+		/// </param>
+		/// <param name="millisecond">
+		/// The milliseconds (0 through 999).
+		/// </param>
+		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// year is less than 1 or greater than 9999.-or- month is less than 1 or greater
+		/// than 12.-or- day is less than 1 or greater than the number of days in month.
+		/// </exception>
+		/// <exception cref="System.ArgumentException">
+		/// The specified parameters evaluate to less than date.MinValue or
+		/// more than date.MaxValue.
+		/// </exception>
+		public LocalDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond) 
+		{
+			m_Value = new DateTime(year, month, day, hour, minute, second, millisecond, DateTimeKind.Local);
+		}
 
 		#endregion
 
@@ -87,6 +175,18 @@ namespace Qowaiv
 		/// <summary>Gets the day of the month represented by this instance.</summary>
 		public int Day { get { return m_Value.Day; } }
 
+		/// <summary>Gets the hour component of the date represented by this instance.</summary>
+		public int Hour { get { return m_Value.Hour; } }
+
+		/// <summary>Gets the minute component of the date represented by this instance.</summary>
+		public int Minute { get { return m_Value.Minute; } }
+
+		/// <summary>Gets the seconds component of the date represented by this instance.</summary>
+		public int Second { get { return m_Value.Second; } }
+
+		/// <summary>Gets the milliseconds component of the date represented by this instance.</summary>
+		public int Millisecond { get { return m_Value.Millisecond; } }
+
 		/// <summary>Gets the number of ticks that represent the date of this instance..</summary>
 		public long Ticks { get { return m_Value.Ticks; } }
 
@@ -96,14 +196,17 @@ namespace Qowaiv
 		/// <summary>Gets the day of the year represented by this instance.</summary>
 		public int DayOfYear { get { return m_Value.DayOfYear; } }
 
-		/// <summary>The inner value of the Date.</summary>
+		/// <summary>Gets the date component of this instance.</summary>
+		public Date Date { get { return (Date)m_Value; } }
+
+		/// <summary>The inner value of the locat date time.</summary>
 		private DateTime m_Value;
 
 		#endregion
 
 		#region Methods
 
-		/// <summary>Returns a new date that adds the value of the specified System.TimeSpan
+		/// <summary>Returns a new local date time that adds the value of the specified System.TimeSpan
 		/// to the value of this instance.
 		/// </summary>
 		/// <param name="value">
@@ -117,12 +220,12 @@ namespace Qowaiv
 		///  The resulting date is less than date.MinValue or greater
 		///  than date.MaxValue.
 		///  </exception>
-		public Date Add(TimeSpan value)
+		public LocalDateTime Add(TimeSpan value)
 		{
-			return new Date(this.Ticks + value.Ticks);
+			return new LocalDateTime(this.Ticks + value.Ticks);
 		}
 
-		/// <summary>Subtracts the specified date and time from this instance.</summary>
+		/// <summary>Subtracts the specified local date time and time from this instance.</summary>
 		/// <param name="value">
 		/// An instance of date.
 		/// </param>
@@ -133,7 +236,7 @@ namespace Qowaiv
 		/// <exception cref="System.ArgumentOutOfRangeException">
 		/// The result is less than date.MinValue or greater than date.MaxValue.
 		/// </exception>
-		public TimeSpan Subtract(Date value)
+		public TimeSpan Subtract(LocalDateTime value)
 		{
 			return new TimeSpan(this.Ticks - value.Ticks);
 		}
@@ -149,12 +252,12 @@ namespace Qowaiv
 		/// <exception cref="System.ArgumentOutOfRangeException">
 		/// The result is less than date.MinValue or greater than date.MaxValue.
 		/// </exception>
-		public Date Subtract(TimeSpan value)
+		public LocalDateTime Subtract(TimeSpan value)
 		{
-			return new Date(this.Ticks - value.Ticks);
+			return new LocalDateTime(this.Ticks - value.Ticks);
 		}
 
-		/// <summary>Returns a new date that adds the specified number of years to
+		/// <summary>Returns a new local date time that adds the specified number of years to
 		/// the value of this instance.
 		/// </summary>
 		/// Parameters:
@@ -169,12 +272,12 @@ namespace Qowaiv
 		/// value or the resulting date is less than date.MinValue
 		/// or greater than date.MaxValue.
 		/// </exception>
-		public Date AddYears(int value)
+		public LocalDateTime AddYears(int value)
 		{
-			return new Date(m_Value.AddYears(value));
+			return new LocalDateTime(m_Value.AddYears(value));
 		}
 
-		/// <summary>Returns a new date that adds the specified number of months to
+		/// <summary>Returns a new local date time that adds the specified number of months to
 		/// the value of this instance.
 		/// </summary>
 		/// <param name="months">
@@ -189,12 +292,12 @@ namespace Qowaiv
 		/// than date.MaxValue.-or- months is less than -120,000 or greater
 		/// than 120,000.
 		/// </exception>
-		public Date AddMonths(int months)
+		public LocalDateTime AddMonths(int months)
 		{
-			return new Date(m_Value.AddMonths(months));
+			return new LocalDateTime(m_Value.AddMonths(months));
 		}
 
-		/// <summary>Returns a new date that adds the specified number of days to the
+		/// <summary>Returns a new local date time that adds the specified number of days to the
 		/// value of this instance.
 		/// </summary>
 		/// <param name="value">
@@ -209,12 +312,12 @@ namespace Qowaiv
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
-		public Date AddDays(double value)
+		public LocalDateTime AddDays(double value)
 		{
-			return new Date(m_Value.AddDays(value));
+			return new LocalDateTime(m_Value.AddDays(value));
 		}
 
-		/// <summary>Returns a new date that adds the specified number of ticks to
+		/// <summary>Returns a new local date time that adds the specified number of ticks to
 		/// the value of this instance.
 		/// </summary>
 		/// <param name="value">
@@ -229,12 +332,12 @@ namespace Qowaiv
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
-		public Date AddTicks(long value)
+		public LocalDateTime AddTicks(long value)
 		{
-			return new Date(Ticks + value);
+			return new LocalDateTime(Ticks + value);
 		}
 
-		/// <summary>Returns a new date that adds the specified number of hours to
+		/// <summary>Returns a new local date time that adds the specified number of hours to
 		/// the value of this instance.
 		/// </summary>
 		/// <param name="value">
@@ -249,12 +352,12 @@ namespace Qowaiv
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
-		public Date AddHours(double value)
+		public LocalDateTime AddHours(double value)
 		{
-			return new Date(m_Value.AddHours(value));
+			return new LocalDateTime(m_Value.AddHours(value));
 		}
 
-		/// <summary>Returns a new date that adds the specified number of minutes to
+		/// <summary>Returns a new local date time that adds the specified number of minutes to
 		/// the value of this instance.
 		/// </summary>
 		/// <param name="value">
@@ -269,12 +372,12 @@ namespace Qowaiv
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
-		public Date AddMinutes(double value)
+		public LocalDateTime AddMinutes(double value)
 		{
-			return new Date(m_Value.AddMinutes(value));
+			return new LocalDateTime(m_Value.AddMinutes(value));
 		}
 
-		/// <summary>Returns a new date that adds the specified number of seconds to
+		/// <summary>Returns a new local date time that adds the specified number of seconds to
 		/// the value of this instance.
 		/// </summary>
 		/// <param name="value">
@@ -289,12 +392,12 @@ namespace Qowaiv
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
-		public Date AddSeconds(double value)
+		public LocalDateTime AddSeconds(double value)
 		{
-			return new Date(m_Value.AddSeconds(value));
+			return new LocalDateTime(m_Value.AddSeconds(value));
 		}
 
-		/// <summary>Returns a new date that adds the specified number of milliseconds
+		/// <summary>Returns a new local date time that adds the specified number of milliseconds
 		/// to the value of this instance.
 		/// </summary>
 		/// <param name="value">
@@ -309,25 +412,25 @@ namespace Qowaiv
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
-		public Date AddMilliseconds(double value)
+		public LocalDateTime AddMilliseconds(double value)
 		{
-			return new Date(m_Value.AddMilliseconds(value));
+			return new LocalDateTime(m_Value.AddMilliseconds(value));
 		}
 
 		#endregion
 
 		#region (XML) (De)serialization
 
-		/// <summary>Initializes a new instance of Date based on the serialization info.</summary>
+		/// <summary>Initializes a new instance of local date time based on the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
-		private Date(SerializationInfo info, StreamingContext context)
+		private LocalDateTime(SerializationInfo info, StreamingContext context)
 		{
 			Guard.NotNull(info, "info");
 			m_Value = info.GetDateTime("Value");
 		}
 
-		/// <summary>Adds the underlying propererty of Date to the serialization info.</summary>
+		/// <summary>Adds the underlying propererty of local date time to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
@@ -336,15 +439,15 @@ namespace Qowaiv
 			info.AddValue("Value", m_Value);
 		}
 
-		/// <summary>Gets the xml schema to (de) xml serialize a Date.</summary>
+		/// <summary>Gets the xml schema to (de) xml serialize a local date time.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		XmlSchema IXmlSerializable.GetSchema() { return null; }
 
-		/// <summary>Reads the Date from an xml writer.</summary>
+		/// <summary>Reads the local date time from an xml writer.</summary>
 		/// <remarks>
-		/// Uses the string parse function of Date.
+		/// Uses the string parse function of local date time.
 		/// </remarks>
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
@@ -354,57 +457,58 @@ namespace Qowaiv
 			m_Value = val.m_Value;
 		}
 
-		/// <summary>Writes the Date to an xml writer.</summary>
+		/// <summary>Writes the local date time to an xml writer.</summary>
 		/// <remarks>
-		/// Uses the string representation of Date.
+		/// Uses the string representation of local date time.
 		/// </remarks>
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
+			//writer.WriteValue(m_Value);
 			writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
 		}
 
 		#endregion
-
+		
 		#region (JSON) (De)serialization
 
-		/// <summary>Generates a Date from a JSON null object representation.</summary>
+		/// <summary>Generates a local date time from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson() { throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported); }
 
-		/// <summary>Generates a Date from a JSON string representation.</summary>
+		/// <summary>Generates a local date time from a JSON string representation.</summary>
 		/// <param name="jsonString">
-		/// The JSON string that represents the Date.
+		/// The JSON string that represents the local date time.
 		/// </param>
 		void IJsonSerializable.FromJson(String jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
 
-		/// <summary>Generates a Date from a JSON integer representation.</summary>
+		/// <summary>Generates a local date time from a JSON integer representation.</summary>
 		/// <param name="jsonInteger">
-		/// The JSON integer that represents the Date.
+		/// The JSON integer that represents the local date time.
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger)
 		{
-			m_Value = new Date(jsonInteger).m_Value;
+			m_Value = new LocalDateTime(jsonInteger).m_Value;
 		}
 
-		/// <summary>Generates a Date from a JSON number representation.</summary>
+		/// <summary>Generates a local date time from a JSON number representation.</summary>
 		/// <param name="jsonNumber">
-		/// The JSON number that represents the Date.
+		/// The JSON number that represents the local date time.
 		/// </param>
 		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
-
-		/// <summary>Generates a Date from a JSON date representation.</summary>
+		
+		/// <summary>Generates a local date time from a JSON date representation.</summary>
 		/// <param name="jsonDate">
-		/// The JSON Date that represents the Date.
+		/// The JSON Date that represents the local date time.
 		/// </param>
 		void IJsonSerializable.FromJson(DateTime jsonDate)
 		{
-			m_Value = jsonDate.Date;
+			m_Value = new LocalDateTime(jsonDate).m_Value;
 		}
 
-		/// <summary>Converts a Date into its JSON object representation.</summary>
+		/// <summary>Converts a local date time into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
 			return ToString(SerializableFormat, CultureInfo.InvariantCulture);
@@ -414,20 +518,20 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current Date for debug purposes.</summary>
+		/// <summary>Returns a System.String that represents the current local date time for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay
 		{
-			get { return m_Value.ToString(SerializableFormat, CultureInfo.InvariantCulture); }
+			get { return m_Value.ToString("yyyy-MM-dd hh:mm:ss.FFF", CultureInfo.InvariantCulture); }
 		}
 
-		/// <summary>Returns a System.String that represents the current Date.</summary>
+		 /// <summary>Returns a System.String that represents the current local date time.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Date.</summary>
+		/// <summary>Returns a formatted System.String that represents the current local date time.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -436,16 +540,16 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Date.</summary>
+		/// <summary>Returns a formatted System.String that represents the current local date time.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
 		public string ToString(IFormatProvider formatProvider)
 		{
-			return ToString("d", formatProvider);
+			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Date.</summary>
+		/// <summary>Returns a formatted System.String that represents the current local date time.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -454,9 +558,6 @@ namespace Qowaiv
 		/// </param>
 		public string ToString(string format, IFormatProvider formatProvider)
 		{
-			// We don't want to see hh:mm pop up.
-			if (string.IsNullOrEmpty(format)) { format = "d"; }
-
 			string formatted;
 			if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
 			{
@@ -466,14 +567,14 @@ namespace Qowaiv
 		}
 
 		#endregion
-
+		
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compair with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj){ return base.Equals(obj); }
 
-		/// <summary>Returns the hash code for this Date.</summary>
+		/// <summary>Returns the hash code for this local date time.</summary>
 		/// <returns>
 		/// A 32-bit signed integer hash code.
 		/// </returns>
@@ -482,7 +583,7 @@ namespace Qowaiv
 		/// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
 		/// <param name="left">The left operand.</param>
 		/// <param name="right">The right operand</param>
-		public static bool operator ==(Date left, Date right)
+		public static bool operator ==(LocalDateTime left, LocalDateTime right)
 		{
 			return left.Equals(right);
 		}
@@ -490,7 +591,7 @@ namespace Qowaiv
 		/// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
 		/// <param name="left">The left operand.</param>
 		/// <param name="right">The right operand</param>
-		public static bool operator !=(Date left, Date right)
+		public static bool operator !=(LocalDateTime left, LocalDateTime right)
 		{
 			return !(left == right);
 		}
@@ -504,7 +605,7 @@ namespace Qowaiv
 		/// order as the specified System.Object.
 		/// </summary>
 		/// <param name="obj">
-		/// An object that evaluates to a Date.
+		/// An object that evaluates to a local date time.
 		/// </param>
 		/// <returns>
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
@@ -514,148 +615,150 @@ namespace Qowaiv
 		/// instance follows value.-or- value is null.
 		/// </returns>
 		/// <exception cref="System.ArgumentException">
-		/// value is not a Date.
+		/// value is not a local date time.
 		/// </exception>
 		public int CompareTo(object obj)
 		{
-			if (obj is Date)
+			if (obj is LocalDateTime)
 			{
-				return CompareTo((Date)obj);
+				return CompareTo((LocalDateTime)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a Date"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a local date time"), "obj");
 		}
 
-		/// <summary>Compares this instance with a specified Date and indicates
+		/// <summary>Compares this instance with a specified local date time and indicates
 		/// whether this instance precedes, follows, or appears in the same position
-		/// in the sort order as the specified Date.
+		/// in the sort order as the specified local date time.
 		/// </summary>
 		/// <param name="other">
-		/// The Date to compare with this instance.
+		/// The local date time to compare with this instance.
 		/// </param>
 		/// <returns>
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(Date other) { return m_Value.CompareTo(other.m_Value); }
+		public int CompareTo(LocalDateTime other) { return m_Value.CompareTo(other.m_Value); }
+
 
 		/// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-		public static bool operator <(Date l, Date r) { return l.CompareTo(r) < 0; }
+		public static bool operator <(LocalDateTime l, LocalDateTime r) { return l.CompareTo(r) < 0; }
 
 		/// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-		public static bool operator >(Date l, Date r) { return l.CompareTo(r) > 0; }
+		public static bool operator >(LocalDateTime l, LocalDateTime r) { return l.CompareTo(r) > 0; }
 
 		/// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-		public static bool operator <=(Date l, Date r) { return l.CompareTo(r) <= 0; }
+		public static bool operator <=(LocalDateTime l, LocalDateTime r) { return l.CompareTo(r) <= 0; }
 
 		/// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-		public static bool operator >=(Date l, Date r) { return l.CompareTo(r) >= 0; }
+		public static bool operator >=(LocalDateTime l, LocalDateTime r) { return l.CompareTo(r) >= 0; }
 
 		#endregion
-
+	   
 		#region (Explicit) casting
 
-		/// <summary>Casts a date to a System.String.</summary>
-		public static explicit operator string(Date val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a date to a date time.</summary>
-		public static implicit operator DateTime(Date val) { return val.m_Value; }
+		/// <summary>Casts a local date time to a System.String.</summary>
+		public static explicit operator string(LocalDateTime val) { return val.ToString(CultureInfo.CurrentCulture); }
+		/// <summary>Casts a local date time to a date time.</summary>
+		public static implicit operator DateTime(LocalDateTime val) { return val.m_Value; }
 
-		/// <summary>Casts a System.String to a date.</summary>
-		public static explicit operator Date(string str) { return Date.Parse(str, CultureInfo.CurrentCulture); }
-		/// <summary>Casts a date time to a date.</summary>
-		public static explicit operator Date(DateTime val) { return new Date(val); }
-		
-		/// <summary>Casts a local date time to a date.</summary>
-		public static explicit operator Date(LocalDateTime val) { return val.Date; }
-		/// <summary>Casts a week date to a date.</summary>
-		public static implicit operator Date(WeekDate val) { return val.Date; }
 
+		/// <summary>Casts a System.String to a local date time.</summary>
+		public static explicit operator LocalDateTime(string str) { return LocalDateTime.Parse(str, CultureInfo.CurrentCulture); }
+		/// <summary>Casts a date time to a local date time.</summary>
+		public static implicit operator LocalDateTime(DateTime val) { return new LocalDateTime(val); }
+	
+		/// <summary>Casts a date to a local date time.</summary>
+		public static explicit operator LocalDateTime(Date val) { return new LocalDateTime(val); }
+		/// <summary>Casts a week date to a week date.</summary>
+		public static implicit operator LocalDateTime(WeekDate val) { return (LocalDateTime)val.Date; }
+	   
 		#endregion
 
 		#region Operators
 
-		/// <summary>Adds the time span to the date.</summary>
-		public static Date operator +(Date d, TimeSpan t) { return d.Add(t); }
+		/// <summary>Adds the time span to the local date time.</summary>
+		public static LocalDateTime operator +(LocalDateTime d, TimeSpan t) { return d.Add(t); }
 
-		/// <summary>Subtracts the Time Span from the date.</summary>
-		public static Date operator -(Date d, TimeSpan t) { return d.Subtract(t); }
+		/// <summary>Subtracts the Time Span from the local date time.</summary>
+		public static LocalDateTime operator -(LocalDateTime d, TimeSpan t) { return d.Subtract(t); }
 
-		/// <summary>Adds one day to the date.</summary>
+		/// <summary>Adds one day to the local date time.</summary>
 		[SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
-		public static Date operator ++(Date d) { return d.AddDays(+1); }
+		public static LocalDateTime operator ++(LocalDateTime d) { return d.AddDays(+1); }
 
-		/// <summary>Subtracts one day from the date.</summary>
+		/// <summary>Subtracts one day from the local date time.</summary>
 		[SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
-		public static Date operator --(Date d) { return d.AddDays(-1); }
+		public static LocalDateTime operator --(LocalDateTime d) { return d.AddDays(-1); }
 
-		/// <summary>Subtracts the right Date from the left date.</summary>
-		public static TimeSpan operator -(Date l, Date r) { return l.Subtract(r); }
+		/// <summary>Subtracts the right local date time from the left date.</summary>
+		public static TimeSpan operator -(LocalDateTime l, LocalDateTime r) { return l.Subtract(r); }
 
 		#endregion
 
 		#region Factory methods
 
-		/// <summary>Converts the string to a Date.</summary>
+		/// <summary>Converts the string to a local date time.</summary>
 		/// <param name="s">
-		/// A string containing a Date to convert.
+		/// A string containing a local date time to convert.
 		/// </param>
 		/// <returns>
-		/// A Date.
+		/// A local date time.
 		/// </returns>
 		/// <exception cref="System.FormatException">
 		/// s is not in the correct format.
 		/// </exception>
-		public static Date Parse(string s)
+		public static LocalDateTime Parse(string s)
 		{
 			return Parse(s, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Converts the string to a Date.</summary>
+		/// <summary>Converts the string to a local date time.</summary>
 		/// <param name="s">
-		/// A string containing a Date to convert.
+		/// A string containing a local date time to convert.
 		/// </param>
 		/// <param name="formatProvider">
 		/// The specified format provider.
 		/// </param>
 		/// <returns>
-		/// A Date.
+		/// A local date time.
 		/// </returns>
 		/// <exception cref="System.FormatException">
 		/// s is not in the correct format.
 		/// </exception>
-		public static Date Parse(string s, IFormatProvider formatProvider)
+		public static LocalDateTime Parse(string s, IFormatProvider formatProvider)
 		{
-			Date val;
-			if (Date.TryParse(s, formatProvider, out val))
+			LocalDateTime val;
+			if (LocalDateTime.TryParse(s, formatProvider, out val))
 			{
 				return val;
 			}
 			throw new FormatException(QowaivMessages.FormatExceptionDate);
 		}
 
-		/// <summary>Converts the string to a Date.
+		/// <summary>Converts the string to a local date time.
 		/// A return value indicates whether the conversion succeeded.
 		/// </summary>
 		/// <param name="s">
-		/// A string containing a Date to convert.
+		/// A string containing a local date time to convert.
 		/// </param>
 		/// <returns>
-		/// The Date if the string was converted successfully, otherwise Date.MinValue.
+		/// The local date time if the string was converted successfully, otherwiseLocalDateTime.MinValue.
 		/// </returns>
-		public static Date TryParse(string s)
+		public static LocalDateTime TryParse(string s)
 		{
-			Date val;
-			if (Date.TryParse(s, out val))
+			LocalDateTime val;
+			if (LocalDateTime.TryParse(s, out val))
 			{
 				return val;
 			}
-			return Date.MinValue;
+			return LocalDateTime.MinValue;
 		}
 
-		/// <summary>Converts the string to a Date.
+		/// <summary>Converts the string to a local date time.
 		/// A return value indicates whether the conversion succeeded.
 		/// </summary>
 		/// <param name="s">
-		/// A string containing a Date to convert.
+		/// A string containing a local date time to convert.
 		/// </param>
 		/// <param name="result">
 		/// The result of the parsing.
@@ -663,16 +766,16 @@ namespace Qowaiv
 		/// <returns>
 		/// True if the string was converted successfully, otherwise false.
 		/// </returns>
-		public static bool TryParse(string s, out Date result)
+		public static bool TryParse(string s, out LocalDateTime result)
 		{
 			return TryParse(s, CultureInfo.CurrentCulture, out result);
 		}
 
-		/// <summary>Converts the string to a Date.
+		/// <summary>Converts the string to a local date time.
 		/// A return value indicates whether the conversion succeeded.
 		/// </summary>
 		/// <param name="s">
-		/// A string containing a Date to convert.
+		/// A string containing a local date time to convert.
 		/// </param>
 		/// <param name="formatProvider">
 		/// The specified format provider.
@@ -683,16 +786,16 @@ namespace Qowaiv
 		/// <returns>
 		/// True if the string was converted successfully, otherwise false.
 		/// </returns>
-		public static bool TryParse(string s, IFormatProvider formatProvider, out Date result)
+		public static bool TryParse(string s, IFormatProvider formatProvider, out LocalDateTime result)
 		{
 			return TryParse(s, formatProvider, DateTimeStyles.None, out result);
 		}
 
-		/// <summary>Converts the string to a Date.
+		/// <summary>Converts the string to a local date time.
 		/// A return value indicates whether the conversion succeeded.
 		/// </summary>
 		/// <param name="s">
-		/// A string containing a Date to convert.
+		/// A string containing a local date time to convert.
 		/// </param>
 		/// <param name="formatProvider">
 		/// The specified format provider.
@@ -708,16 +811,16 @@ namespace Qowaiv
 		/// <returns>
 		/// True if the string was converted successfully, otherwise false.
 		/// </returns>
-		public static bool TryParse(string s, IFormatProvider formatProvider, DateTimeStyles styles, out Date result)
+		public static bool TryParse(string s, IFormatProvider formatProvider, DateTimeStyles styles, out LocalDateTime result)
 		{
 			DateTime dt;
 
 			if (DateTime.TryParse(s, formatProvider, styles, out dt))
 			{
-				result = new Date(dt);
+				result = new LocalDateTime(dt);
 				return true;
 			}
-			result = Date.MinValue;
+			result = LocalDateTime.MinValue;
 			return false;
 		}
 
@@ -725,19 +828,19 @@ namespace Qowaiv
 
 		#region Validation
 
-		/// <summary>Returns true if the val represents a valid Date, otherwise false.</summary>
+		/// <summary>Returns true if the val represents a valid local date time, otherwise false.</summary>
 		public static bool IsValid(string val)
 		{
 			return IsValid(val, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns true if the val represents a valid Date, otherwise false.</summary>
+		/// <summary>Returns true if the val represents a valid local date time, otherwise false.</summary>
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
-			Date d;
+			LocalDateTime d;
 			return TryParse(val, formatProvider, out d);
 		}
 
 		#endregion
-	}
+	 }
 }

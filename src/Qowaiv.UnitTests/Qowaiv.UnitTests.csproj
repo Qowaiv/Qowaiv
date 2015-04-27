@@ -108,6 +108,7 @@
     <Compile Include="InternationalBankAccountNumberTest.cs" />
     <Compile Include="Json\JsonTester.cs" />
     <Compile Include="Json\QowaivJsonConverterTest.cs" />
+    <Compile Include="LocalDateTimeTest.cs" />
     <Compile Include="Mocking\Web\HttpRequestMock.cs" />
     <Compile Include="Mocking\Web\HttpResponseMock.cs" />
     <Compile Include="MonthTest.cs" />

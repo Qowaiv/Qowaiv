@@ -40,6 +40,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Gender),
 				typeof(Qowaiv.HouseNumber),
 				typeof(Qowaiv.InternationalBankAccountNumber),
+				typeof(Qowaiv.LocalDateTime),
 				typeof(Qowaiv.Month),
 				typeof(Qowaiv.Percentage),
 				typeof(Qowaiv.PostalCode),

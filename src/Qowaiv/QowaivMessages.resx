@@ -156,6 +156,9 @@
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Not a valid IBAN</value>
   </data>
+  <data name="FormatExceptionLocalDateTime" xml:space="preserve">
+    <value>Not valid date</value>
+  </data>
   <data name="FormatExceptionMonth" xml:space="preserve">
     <value>Not a valid month</value>
   </data>

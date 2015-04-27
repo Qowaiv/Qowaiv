@@ -427,13 +427,18 @@ namespace Qowaiv
 
 		/// <summary>Casts a week date to a System.String.</summary>
 		public static explicit operator string(WeekDate val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a week date.</summary>
-		public static explicit operator WeekDate(string str) { return WeekDate.Parse(str, CultureInfo.CurrentCulture); }
-
 		/// <summary>Casts a week date to a date time.</summary>
 		public static implicit operator DateTime(WeekDate val) { return val.m_Value; }
+
+		/// <summary>Casts a System.String to a week date.</summary>
+		public static explicit operator WeekDate(string str) { return WeekDate.Parse(str, CultureInfo.CurrentCulture); }
 		/// <summary>Casts a date time to a week date.</summary>
 		public static explicit operator WeekDate(DateTime val) { return WeekDate.Create((Date)val); }
+
+		/// <summary>Casts a date to a week date.</summary>
+		public static implicit operator WeekDate(Date val) { return WeekDate.Create(val); }
+		/// <summary>Casts a local date time to a week date.</summary>
+		public static explicit operator WeekDate(LocalDateTime val) { return WeekDate.Create(val.Date); }
 
 		#endregion
 

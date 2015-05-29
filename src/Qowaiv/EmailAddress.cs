@@ -27,11 +27,25 @@ namespace Qowaiv
 		/// http://www.codeproject.com/KB/recipes/EmailRegexValidator.aspx
 		/// </remarks>
 		public static readonly Regex Pattern = new Regex(
-			@"^(([\w-+]+\.)+[\w-+]+|([a-zA-Z]{1}|[\w-+]{2,}))@" +
-			@"(((\[(?=.*]$))?([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\." +
-			@"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])((?<=@\[.*)])?){1}|" +
-			@"(\w+([-]*\w+)?\.)*[a-zA-Z]{2,})$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
+			@"
+				^
+					[\w-+]+(\.[\w-+]+)*
+				@ 
+				(
+					(
+						(\[(?=.*]$))?
+						 (0|[1-9]\d?|1\d\d|25[0-5]|2[0-4]\d)
+						(\.
+						 (0|[1-9]\d?|1\d\d|25[0-5]|2[0-4]\d)
+						){3}
+						((?<=@\[.*)])?
+					)
+				|
+					(\w+([-]*\w+)?\.)*
+					[a-z]{2,}
+				)
+				$
+			", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 		/// <summary>Represents an empty/not set email address.</summary>
 		public static readonly EmailAddress Empty = default(EmailAddress);
 

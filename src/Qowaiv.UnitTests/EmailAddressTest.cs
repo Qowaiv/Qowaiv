@@ -874,31 +874,55 @@ namespace Qowaiv.UnitTests
 			Assert.IsFalse(EmailAddress.IsValid(String.Empty), "String.Empty");
 			Assert.IsFalse(EmailAddress.IsValid((String)null), "(String)null");
 
-			Assert.IsFalse(EmailAddress.IsValid("..@test.com"), "..@test.com");
-			Assert.IsFalse(EmailAddress.IsValid(".a@test.com"), ".a@test.com");
-			Assert.IsFalse(EmailAddress.IsValid(".@s.dd"), ".@s.dd");
-			Assert.IsFalse(EmailAddress.IsValid("ab@988.120.150.10"), "ab@988.120.150.10");
-			Assert.IsFalse(EmailAddress.IsValid("ab@120.256.256.120"), "ab@120.256.256.120");
-			Assert.IsFalse(EmailAddress.IsValid("ab@188.120.150.10.com"), "ab@188.120.150.10.com");
-			Assert.IsFalse(EmailAddress.IsValid("2@bde.cc"), "2@bde.cc");
-			Assert.IsFalse(EmailAddress.IsValid("-@bde.cc"), "-@bde.cc");
-			Assert.IsFalse(EmailAddress.IsValid("..@bde.cc"), "..@bde.cc");
-			Assert.IsFalse(EmailAddress.IsValid("_@bde.cc,"), "_@bde.cc,");
+			foreach (var email in new string[] { 
+				"..@test.com", 
+				".a@test.com", 
+				"ab@sd@dd", 
+				".@s.dd", 
+				"ab@988.120.150.10", 
+				"ab@120.256.256.120", 
+				"ab@[188.120.150.10",
+				"ab@188.120.150.10]",
+				"ab@[188.120.150.10].com", 
+				"a@b.-de.cc", 
+				"a@bde-.cc", 
+				"a@bde.c-c", 
+				"a@bde.cc.", 
+				"ab@b+de.cc",
+				"2@bde.cc", 
+				"-@bde.cc", 
+				"a..b@bde.cc", 
+				"_@bde.cc,"
+			})
+			{
+				Assert.IsFalse(EmailAddress.IsValid(email), email);
+			}
 		}
 
 		[Test]
 		public void IsValid_Data_IsTrue()
 		{
-			Assert.IsTrue(EmailAddress.IsValid("w.b.f@test.com"), "w.b.f@test.com");
-			Assert.IsTrue(EmailAddress.IsValid("w.b.f@test.museum"), "w.b.f@test.museum");
-			Assert.IsTrue(EmailAddress.IsValid("a.a@test.com"), "a.a@test.com");
-			Assert.IsTrue(EmailAddress.IsValid("ab@188.120.150.10"), "ab@188.120.150.10");
-			Assert.IsTrue(EmailAddress.IsValid("ab@120.254.254.120"), "ab@120.254.254.120");
-			Assert.IsTrue(EmailAddress.IsValid("a2@bde.cc"), "a2@bde.cc");
-			Assert.IsTrue(EmailAddress.IsValid("a-b@bde.cc"), "a-b@bde.cc");
-			Assert.IsTrue(EmailAddress.IsValid("f.f.f@bde.cc"), "f.f.f@bde.cc");
-			Assert.IsTrue(EmailAddress.IsValid("ab_c@bde.cc"), "ab_c@bde.cc");
-			Assert.IsTrue(EmailAddress.IsValid("k.haak@12move.nl"), "k.haak@12move.nl");
+			foreach (var email in new string[] { 
+				"w@com",
+				"w.b.f@test.com",
+				"w.b.f@test.museum",
+				"a.a@test.com",
+				"ab@288.120.150.10.com",
+				"ab@188.120.150.10",
+				"ab@120.254.254.120",
+				"ab@[120.254.254.120]",
+				"a2@bde.cc",
+				"a-b@bde.cc",
+				"ab@b-de.cc",
+				"a+b@bde.cc",
+				"f.f.f@bde.cc",
+				"ab_c@bde.cc",
+				"_-_@bde.cc",
+				"k.haak@12move.nl"
+			})
+			{
+				Assert.IsTrue(EmailAddress.IsValid(email), email);
+			}
 		}
 		#endregion
 	}

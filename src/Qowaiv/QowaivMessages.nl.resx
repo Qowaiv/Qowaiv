@@ -159,6 +159,9 @@
   <data name="FormatExceptionQGuid" xml:space="preserve">
     <value>Geen geldig GUID</value>
   </data>
+  <data name="FormatExceptionTimestamp" xml:space="preserve">
+    <value>Geen geldige SQL timestamp</value>
+  </data>
   <data name="FormatExceptionWeekDate" xml:space="preserve">
     <value>Geen geldige week datum</value>
   </data>

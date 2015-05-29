@@ -120,14 +120,20 @@
   <data name="AgrumentException_Must" xml:space="preserve">
     <value>Argument must be {0}</value>
   </data>
+  <data name="ArgumentException_EmptyArray" xml:space="preserve">
+    <value>Value cannot be an empty array.</value>
+  </data>
   <data name="ArgumentException_InvalidWildcardPattern" xml:space="preserve">
     <value>The wildcard pattern is invalid.</value>
   </data>
   <data name="ArgumentException_NotIFormattable" xml:space="preserve">
     <value>The argument must implement System.IFormattable.</value>
   </data>
-  <data name="ArgumentException_NotStringEmpty" xml:space="preserve">
+  <data name="ArgumentException_StringEmpty" xml:space="preserve">
     <value>Value cannot be an empty string.</value>
+  </data>
+  <data name="ArgumentException_TimestampArrayShouldHaveSize8" xml:space="preserve">
+    <value>The byte array should have size of 8.</value>
   </data>
   <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
     <value>Not a valid BIC</value>
@@ -170,6 +176,9 @@
   </data>
   <data name="FormatExceptionQGuid" xml:space="preserve">
     <value>Not a valid GUID</value>
+  </data>
+  <data name="FormatExceptionTimestamp" xml:space="preserve">
+    <value>Not a valid SQL timestamp</value>
   </data>
   <data name="FormatExceptionWeekDate" xml:space="preserve">
     <value>Not a valid week date</value>

@@ -115,6 +115,7 @@
     <Compile Include="PercentageTest.cs" />
     <Compile Include="PostalCodeCountryPatternTest.cs" />
     <Compile Include="PostalCodeTest.cs" />
+    <Compile Include="Sql\TimestampTest.cs" />
     <Compile Include="Text\WildcardPatternTest.cs" />
     <Compile Include="UuidTest.cs" />
     <Compile Include="SingleValueObjectAttributeTest.cs" />

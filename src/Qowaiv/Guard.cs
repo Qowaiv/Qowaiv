@@ -7,9 +7,9 @@ namespace Qowaiv
 	/// <summary>Supplies input parameter guarding.</summary>
 	public static class Guard
 	{
-		/// <summary>Guards the parameter if not null, otherwise throws an argument null exception.</summary>
+		/// <summary>Guards the parameter if not null, otherwise throws an argument (null) exception.</summary>
 		/// <typeparam name="T">
-		/// The type to guard, can not be a struct.
+		/// The type to guard, can not be a structure.
 		/// </typeparam>
 		/// <param name="param">
 		/// The parameter to guard.
@@ -27,7 +27,7 @@ namespace Qowaiv
 			return param;
 		}
 
-		/// <summary>Guards the parameter if not null or string empty, otherwise throws an argument null exception.</summary>
+		/// <summary>Guards the parameter if not null or an empty array, otherwise throws an argument (null) exception.</summary>
 		/// <param name="param">
 		/// The parameter to guard.
 		/// </param>
@@ -40,12 +40,23 @@ namespace Qowaiv
 			NotNull(param, paramName);
 			if (string.Empty.Equals(param))
 			{
-				throw new ArgumentException(QowaivMessages.ArgumentException_NotStringEmpty, paramName);
+				throw new ArgumentException(QowaivMessages.ArgumentException_StringEmpty, paramName);
 			}
 			return param;
 		}
 
-		/// <summary>Guards the paramater if the type is not null and implements the specified interface,
+		[DebuggerStepThrough]
+		public static T[] NotNullOrEmpty<T>(T[] param, string paramName)
+		{
+			NotNull(param, paramName);
+			if (param.Length == 0)
+			{
+				throw new ArgumentException(QowaivMessages.ArgumentException_EmptyArray, paramName);
+			}
+			return param;
+		}
+
+		/// <summary>Guards the parameter if the type is not null and implements the specified interface,
 		/// otherwise throws an argument (null) exception.
 		/// </summary>
 		/// <param name="param">

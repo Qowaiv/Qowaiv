@@ -50,5 +50,33 @@ namespace Qowaiv.UnitTests
 			var act = Guard.NotNullOrEmpty(exp, "testParam");
 			Assert.AreEqual(exp, act);
 		}
+
+		[Test]
+		public void NotNullOrEmpty_NullArray_ThrowsArgumentNullException()
+		{
+			ExceptionAssert.ExpectArgumentNullException(() =>
+			{
+				Guard.NotNullOrEmpty((byte[])null, "testParam");
+			},
+			"testParam");
+		}
+		[Test]
+		public void NotNullOrEmpty_EmptyArray_ThrowsArgumentException()
+		{
+			ExceptionAssert.ExpectArgumentException(() =>
+			{
+				Guard.NotNullOrEmpty(new byte[0], "testParam");
+			},
+			"testParam",
+			"Value cannot be an empty array.");
+		}
+		[Test]
+		public void NotNullOrEmpty_TestArray_AreEqual()
+		{
+			var exp = new byte[] { 0, 1 };
+			var act = Guard.NotNullOrEmpty(exp, "testParam");
+			Assert.AreEqual(exp, act);
+		}
+	
 	}
 }

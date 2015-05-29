@@ -879,8 +879,12 @@ namespace Qowaiv.UnitTests
 				".a@test.com", 
 				"ab@sd@dd", 
 				".@s.dd", 
+				"ab@01.120.150.1", 
+				"ab@88.120.150.021", 
+				"ab@88.120.150.01", 
 				"ab@988.120.150.10", 
 				"ab@120.256.256.120", 
+				"ab@120.25.1111.120", 
 				"ab@[188.120.150.10",
 				"ab@188.120.150.10]",
 				"ab@[188.120.150.10].com", 
@@ -889,8 +893,6 @@ namespace Qowaiv.UnitTests
 				"a@bde.c-c", 
 				"a@bde.cc.", 
 				"ab@b+de.cc",
-				"2@bde.cc", 
-				"-@bde.cc", 
 				"a..b@bde.cc", 
 				"_@bde.cc,"
 			})
@@ -909,8 +911,11 @@ namespace Qowaiv.UnitTests
 				"a.a@test.com",
 				"ab@288.120.150.10.com",
 				"ab@188.120.150.10",
-				"ab@120.254.254.120",
+				"ab@1.0.0.10",
+				"ab@120.25.254.120",
 				"ab@[120.254.254.120]",
+				"2@bde.cc", 
+				"-@bde.cc", 
 				"a2@bde.cc",
 				"a-b@bde.cc",
 				"ab@b-de.cc",
@@ -918,7 +923,8 @@ namespace Qowaiv.UnitTests
 				"f.f.f@bde.cc",
 				"ab_c@bde.cc",
 				"_-_@bde.cc",
-				"k.haak@12move.nl"
+				"k.haak@12move.nl",
+				"K.HAAK@12MOVE.NL"
 			})
 			{
 				Assert.IsTrue(EmailAddress.IsValid(email), email);

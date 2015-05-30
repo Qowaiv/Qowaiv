@@ -27,7 +27,7 @@ namespace Qowaiv
 			return param;
 		}
 
-		/// <summary>Guards the parameter if not null or an empty array, otherwise throws an argument (null) exception.</summary>
+		/// <summary>Guards the parameter if not null or an empty string, otherwise throws an argument (null) exception.</summary>
 		/// <param name="param">
 		/// The parameter to guard.
 		/// </param>
@@ -45,6 +45,13 @@ namespace Qowaiv
 			return param;
 		}
 
+		/// <summary>Guards the parameter if not null or an empty array, otherwise throws an argument (null) exception.</summary>
+		/// <param name="param">
+		/// The parameter to guard.
+		/// </param>
+		/// <param name="paramName">
+		/// The name of the parameter.
+		/// </param>
 		[DebuggerStepThrough]
 		public static T[] NotNullOrEmpty<T>(T[] param, string paramName)
 		{

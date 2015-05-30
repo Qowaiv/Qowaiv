@@ -98,7 +98,7 @@ namespace Qowaiv.Formatting
 			m_FormatProvider = (IFormatProvider)info.GetValue("FormatProvider", typeof(IFormatProvider));
 		}
 
-		/// <summary>Adds the underlying propererty of formatting arguments to the serialization info.</summary>
+		/// <summary>Adds the underlying property of formatting arguments to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)

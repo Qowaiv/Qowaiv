@@ -430,7 +430,7 @@ namespace Qowaiv
 			m_Value = info.GetDateTime("Value");
 		}
 
-		/// <summary>Adds the underlying propererty of local date time to the serialization info.</summary>
+		/// <summary>Adds the underlying property of local date time to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)

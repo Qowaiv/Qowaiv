@@ -72,7 +72,7 @@ namespace Qowaiv
 			m_Value = (Guid)info.GetValue("Value", typeof(Guid));
 		}
 
-		/// <summary>Adds the underlying propererty of GUID to the serialization info.</summary>
+		/// <summary>Adds the underlying property of GUID to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)

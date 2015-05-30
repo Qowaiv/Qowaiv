@@ -126,7 +126,7 @@ namespace Qowaiv
 			m_Value = info.GetByte("Value");
 		}
 
-		/// <summary>Adds the underlying propererty of month to the serialization info.</summary>
+		/// <summary>Adds the underlying property of month to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)

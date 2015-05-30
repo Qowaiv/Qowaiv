@@ -92,7 +92,7 @@ namespace Qowaiv
 			m_Value = info.GetString("Value");
 		}
 
-		/// <summary>Adds the underlying propererty of email address to the serialization info.</summary>
+		/// <summary>Adds the underlying property of email address to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)

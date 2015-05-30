@@ -470,10 +470,17 @@ namespace Qowaiv.Formatting
 		public ICollection<Type> Types { get { return dict.Keys; } }
 
 		/// <summary>Returns an enumerator that iterates through the collection.</summary>
-		IEnumerator<KeyValuePair<Type, FormattingArguments>> IEnumerable<KeyValuePair<Type, FormattingArguments>>.GetEnumerator() { return dict.GetEnumerator(); }
+		IEnumerator<KeyValuePair<Type, FormattingArguments>> IEnumerable<KeyValuePair<Type, FormattingArguments>>.GetEnumerator() { return GetEnumerator(); }
 
 		/// <summary>Returns an enumerator that iterates through the collection.</summary>
-		IEnumerator IEnumerable.GetEnumerator() { return dict.GetEnumerator(); }
+		IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+
+		/// <summary>Returns an enumerator that iterates through the collection.</summary>
+		/// <remarks>
+		/// this is used by IEnumerable.GetObjectData() so that it can be
+		/// changed by derived classes.
+		/// </remarks>
+		protected virtual IEnumerator<KeyValuePair<Type, FormattingArguments>> GetEnumerator() { return dict.GetEnumerator(); }
 
 		/// <summary>Clears all formatting arguments in the collection.</summary>
 		public void Clear() { dict.Clear(); }

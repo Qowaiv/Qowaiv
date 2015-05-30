@@ -1,22 +1,19 @@
-﻿using System;
+﻿using Qowaiv.Conversion.Sql;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
-using Qowaiv.Conversion.Sql;
 
 namespace Qowaiv.Sql
 {
 	/// <summary>Represents a timestamp.</summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	// [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a timestamp.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(UInt64))]
 	[TypeConverter(typeof(TimestampTypeConverter))]
 	public struct Timestamp : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Timestamp>
@@ -260,7 +257,6 @@ namespace Qowaiv.Sql
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
 		public int CompareTo(Timestamp other) { return m_Value.CompareTo(other.m_Value); }
-
 
 		/// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
 		public static bool operator <(Timestamp l, Timestamp r) { return l.CompareTo(r) < 0; }

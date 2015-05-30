@@ -74,7 +74,7 @@ namespace Qowaiv.Text
 		/// <summary>Initializes a new instance of a wild card pattern based on the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
-		private WildcardPattern(SerializationInfo info, StreamingContext context)
+		protected WildcardPattern(SerializationInfo info, StreamingContext context)
 		{
 			Guard.NotNull(info, "info");
 			Pattern = info.GetString("Pattern");
@@ -82,10 +82,18 @@ namespace Qowaiv.Text
 			ComparisonType = (StringComparison)info.GetInt32("ComparisonType");
 		}
 
-		/// <summary>Adds the underlying propererty of a wild card pattern to the serialization info.</summary>
+		/// <summary>Adds the underlying property of a wild card pattern to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
-		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) { GetObjectData(info, context); }
+
+		/// <summary>Adds the underlying property of a wild card pattern to the serialization info.</summary>
+		/// <param name="info">The serialization info.</param>
+		/// <param name="context">The streaming context.</param>
+		/// <remarks>
+		/// this is used by ISerializable.GetObjectData() so that it can be
+		/// changed by derived classes.</remarks>
+		protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
 			Guard.NotNull(info, "info");
 			info.AddValue("Pattern", Pattern);

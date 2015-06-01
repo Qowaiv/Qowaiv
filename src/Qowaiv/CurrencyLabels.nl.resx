@@ -356,10 +356,6 @@
     <value>Lesothaanse loti</value>
     <comment>Lesotho loti (LSL)</comment>
   </data>
-  <data name="LTL_DisplayName">
-    <value>Litouwse litas</value>
-    <comment>Lithuanian litas (LTL)</comment>
-  </data>
   <data name="LYD_DisplayName">
     <value>Libische dinar</value>
     <comment>Libyan dinar (LYD)</comment>
@@ -724,8 +720,108 @@
     <value>Zambiaanse kwacha</value>
     <comment>Zambian kwacha (ZMW)</comment>
   </data>
+  <data name="ADP_DisplayName">
+    <value>Andorese peseta</value>
+    <comment>Andorran peseta (ADP)</comment>
+  </data>
+  <data name="ATS_DisplayName">
+    <value>Oostenrijkse schilling</value>
+    <comment>Austrian schilling (ATS)</comment>
+  </data>
+  <data name="BEF_DisplayName">
+    <value>Belgische frank</value>
+    <comment>Belgian franc (BEF)</comment>
+  </data>
+  <data name="CSD_DisplayName">
+    <value>Servische dinar</value>
+    <comment>Serbian dinar (CSD)</comment>
+  </data>
+  <data name="CSK_DisplayName">
+    <value>Tsjecho-Slowaakse kroon</value>
+    <comment>Czechoslovak koruna (CSK)</comment>
+  </data>
+  <data name="DDM_DisplayName">
+    <value>Oost-Duitse mark</value>
+    <comment>East German Mark (DDM)</comment>
+  </data>
+  <data name="DEM_DisplayName">
+    <value>Duitse mark</value>
+    <comment>German mark (DEM)</comment>
+  </data>
+  <data name="ECS_DisplayName">
+    <value>Ecuadoraanse sucre</value>
+    <comment>Ecuadorian sucre (ECS)</comment>
+  </data>
+  <data name="EEK_DisplayName">
+    <value>Estse kroon</value>
+    <comment>Estonian kroon (EEK)</comment>
+  </data>
+  <data name="ESP_DisplayName">
+    <value>Spaanse peseta</value>
+    <comment>Spanish peseta (ESP)</comment>
+  </data>
+  <data name="FIM_DisplayName">
+    <value>Finse markka</value>
+    <comment>Finnish markka (FIM)</comment>
+  </data>
+  <data name="FRF_DisplayName">
+    <value>Franse frank</value>
+    <comment>French franc (FRF)</comment>
+  </data>
+  <data name="GRD_DisplayName">
+    <value>Griekse drachme</value>
+    <comment>Greek drachma (GRD)</comment>
+  </data>
+  <data name="IEP_DisplayName">
+    <value>Iers pond</value>
+    <comment>Irish pound (IEP)</comment>
+  </data>
+  <data name="ITL_DisplayName">
+    <value>Italiaanse lire</value>
+    <comment>Italian lira (ITL)</comment>
+  </data>
+  <data name="LTL_DisplayName">
+    <value>Litouwse litas</value>
+    <comment>Lithuanian litas (LTL)</comment>
+  </data>
+  <data name="LUF_DisplayName">
+    <value>Luxemburgse frank</value>
+    <comment>Luxembourgish franc (LUF)</comment>
+  </data>
+  <data name="NLG_DisplayName">
+    <value>Nederlandse gulden</value>
+    <comment>Dutch guilder (NLG)</comment>
+  </data>
+  <data name="PTE_DisplayName">
+    <value>Portugese escudo</value>
+    <comment>Portuguese escudo (PTE)</comment>
+  </data>
+  <data name="SIT_DisplayName">
+    <value>Sloveense tolar</value>
+    <comment>Slovenian tolar (SIT)</comment>
+  </data>
+  <data name="SKK_DisplayName">
+    <value>Slowaakse kroon</value>
+    <comment>Slovak koruna (SKK)</comment>
+  </data>
+  <data name="ZWC_DisplayName">
+    <value>Zimbabwaanse dollar</value>
+    <comment>Zimbabwe dollar (ZWC)</comment>
+  </data>
   <data name="ZWD_DisplayName">
     <value>Zimbabwaanse dollar</value>
     <comment>Zimbabwe dollar (ZWD)</comment>
+  </data>
+  <data name="ZWL_DisplayName">
+    <value>Zimbabwaanse dollar</value>
+    <comment>Zimbabwe dollar (ZWL)</comment>
+  </data>
+  <data name="ZWN_DisplayName">
+    <value>Zimbabwaanse dollar</value>
+    <comment>Zimbabwe dollar (ZWN)</comment>
+  </data>
+  <data name="ZWR_DisplayName">
+    <value>Zimbabwaanse dollar</value>
+    <comment>Zimbabwe dollar (ZWR)</comment>
   </data>
 </root>

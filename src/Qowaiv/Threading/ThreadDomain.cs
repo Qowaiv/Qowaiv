@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Qowaiv.Threading
 {
-	/// <summary>Representa domain of typed instances that can be used as the
+	/// <summary>Represents domain of typed instances that can be used as the
 	/// default values based on the current thread.
 	/// </summary>
 	public class ThreadDomain
@@ -16,6 +16,7 @@ namespace Qowaiv.Threading
 		static ThreadDomain()
 		{
 			Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
+			Register(typeof(Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Date.Today));
 		}
 
 		/// <summary>Gets the current thread domain.</summary>

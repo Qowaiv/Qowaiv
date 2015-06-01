@@ -360,10 +360,6 @@
     <value>萊索托洛蒂（複數：馬洛蒂）</value>
     <comment>Lesotho loti (LSL)</comment>
   </data>
-  <data name="LTL_DisplayName">
-    <value>立陶宛立特</value>
-    <comment>Lithuanian litas (LTL)</comment>
-  </data>
   <data name="LYD_DisplayName">
     <value>利比亞第納爾</value>
     <comment>Libyan dinar (LYD)</comment>
@@ -728,8 +724,8 @@
     <value>尚比亞克瓦查</value>
     <comment>Zambian kwacha (ZMW)</comment>
   </data>
-  <data name="ZWD_DisplayName">
-    <value>#/</value>
-    <comment>Zimbabwe dollar (ZWD)</comment>
+  <data name="LTL_DisplayName">
+    <value>立陶宛立特</value>
+    <comment>Lithuanian litas (LTL)</comment>
   </data>
 </root>

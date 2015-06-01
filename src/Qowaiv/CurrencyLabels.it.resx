@@ -356,10 +356,6 @@
     <value>Loti lesothiano</value>
     <comment>Lesotho loti (LSL)</comment>
   </data>
-  <data name="LTL_DisplayName">
-    <value>Lita lituano</value>
-    <comment>Lithuanian litas (LTL)</comment>
-  </data>
   <data name="LYD_DisplayName">
     <value>Dinaro libico</value>
     <comment>Libyan dinar (LYD)</comment>
@@ -724,8 +720,8 @@
     <value>Kwacha zambiano</value>
     <comment>Zambian kwacha (ZMW)</comment>
   </data>
-  <data name="ZWD_DisplayName">
-    <value>#N/A!</value>
-    <comment>Zimbabwe dollar (ZWD)</comment>
+  <data name="LTL_DisplayName">
+    <value>Lita lituano</value>
+    <comment>Lithuanian litas (LTL)</comment>
   </data>
 </root>

@@ -126,6 +126,19 @@ namespace Qowaiv
 		{
 			return this.StartDate <= measurement && (!this.EndDate.HasValue || this.EndDate.Value >= measurement);
 		}
+		
+		/// <summary>Gets the active currency at the given date.</summary>
+		/// <param name="measurement">
+		/// The date of measurement.
+		/// </param>
+		public Currency GetCurrency(Date measurement)
+		{
+			if (!ExistsOnDate(measurement)) { return Currency.Empty; }
+			var country = this;
+			return CountryToCurrency.All.Where(map => map.Country == country && map.StartDate <= measurement)
+				.Select(map => map.Currency)
+				.LastOrDefault();
+		}
 
 		/// <summary>Converts the CountryInfo to a RegionInfo.</summary>
 		public RegionInfo ToRegionInfo()
@@ -531,7 +544,7 @@ namespace Qowaiv
 		/// The corresponding region info.
 		/// </param>
 		/// <returns>
-		/// Returns a country that repesents the same region as region info.
+		/// Returns a country that represents the same region as region info.
 		/// </returns>
 		public static Country Create(RegionInfo region)
 		{
@@ -547,7 +560,7 @@ namespace Qowaiv
 		/// A culture info.
 		/// </param>
 		/// <returns>
-		/// Returns a country that repesents the country specified at the culture if
+		/// Returns a country that represents the country specified at the culture if
 		/// any, otherwise Country.Empthy.
 		/// </returns>
 		public static Country Create(CultureInfo culture)

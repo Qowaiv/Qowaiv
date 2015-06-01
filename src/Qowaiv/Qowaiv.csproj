@@ -69,6 +69,8 @@
     <Compile Include="Conversion\YearTypeConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryConstants.cs" />
+    <Compile Include="CountryToCurrency.cs" />
+    <Compile Include="CountryToCurrencyMappings.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="CurrencyConstants.cs" />
     <Compile Include="Date.cs" />

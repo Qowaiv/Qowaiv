@@ -1066,6 +1066,40 @@ namespace Qowaiv.UnitTests
 			"The country 'Holy See (VA)' is not supported as region info.");
 		}
 
+		[Test]
+		public void ExistsOnDate_SerbiaAndMontenegro1992_IsFalse()
+		{
+			Assert.IsFalse(Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)));
+		}
+		[Test]
+		public void ExistsOnDate_SerbiaAndMontenegro1993_IsTrue()
+		{
+			Assert.IsTrue(Country.CSXX.ExistsOnDate(new Date(1993, 01, 01)));
+		}
+		[Test]
+		public void ExistsOnDate_SerbiaAndMontenegro2012_IsFalse()
+		{
+			Assert.IsFalse(Country.CSXX.ExistsOnDate(new Date(2012, 01, 01)));
+		}
+
+		[Test]
+		public void GetCurrency_NL2001_NLG()
+		{
+			var act = Country.NL.GetCurrency(new Date(2001, 12, 31));
+			var exp = Currency.NLG;
+
+			Assert.AreEqual(act, exp);
+		}
+
+		[Test]
+		public void GetCurrency_NLToday_EUR()
+		{
+			var act = Country.NL.GetCurrency(Date.Today);
+			var exp = Currency.EUR;
+
+			Assert.AreEqual(act, exp);
+		}
+
 		#endregion
 
 		#region Type converter tests

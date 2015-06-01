@@ -115,6 +115,17 @@ namespace Qowaiv
 			return this.StartDate <= measurement && (!this.EndDate.HasValue || this.EndDate.Value >= measurement);
 		}
 
+		/// <summary>Gets the countries using this currency at the given date.</summary>
+		/// <param name="measurement">
+		/// The date of measurement.
+		/// </param>
+		public IEnumerable<Country> GetCountries(Date measurement)
+		{
+			var currency = this;
+			return Country.GetOnDate(measurement)
+				.Where(country => country.GetCurrency(measurement) == currency);
+		}
+
 		#endregion
 
 		#region (XML) (De)serialization

@@ -33,6 +33,48 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
+
+		#region Current
+
+		[Test]
+		public void Current_CurrentCultureNlNL_Germany()
+		{
+			using (new CultureInfoScope("nl-NL"))
+			{
+				var act = Currency.Current;
+				var exp = Currency.EUR;
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void Current_CurrentCultureEsEC_Ecuador()
+		{
+			using (new CultureInfoScope("es-EC"))
+			{
+				var act = Currency.Current;
+				var exp = Currency.USD;
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void Current_CurrentCultureEn_Empty()
+		{
+			using (new CultureInfoScope("en"))
+			{
+				var act = Currency.Current;
+				var exp = Currency.Empty;
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		#endregion
+
+
 		#region currency IsEmpty tests
 
 		/// <summary>Currency.IsEmpty() should be true for the default of currency.</summary>

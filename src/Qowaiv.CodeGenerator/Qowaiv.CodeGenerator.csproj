@@ -53,7 +53,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Qowaiv.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Shared\Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -124,6 +124,7 @@
     <EmbeddedResource Include="Resources\PostalCode.xls" />
     <EmbeddedResource Include="Resources\Currency.xls" />
     <EmbeddedResource Include="Resources\Web\InternetMediaType.xls" />
+    <EmbeddedResource Include="Resources\CountryToCurrency.xls" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Qowaiv.license.txt">

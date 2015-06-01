@@ -266,9 +266,6 @@ namespace Qowaiv
         /// <summary>Describes the currency Lesotho loti (LSL).</summary>
         public static readonly Currency LSL = new Currency() { m_Value = "LSL" };
 
-        /// <summary>Describes the currency Lithuanian litas (LTL).</summary>
-        public static readonly Currency LTL = new Currency() { m_Value = "LTL" };
-
         /// <summary>Describes the currency Libyan dinar (LYD).</summary>
         public static readonly Currency LYD = new Currency() { m_Value = "LYD" };
 
@@ -542,8 +539,169 @@ namespace Qowaiv
         /// <summary>Describes the currency Zambian kwacha (ZMW).</summary>
         public static readonly Currency ZMW = new Currency() { m_Value = "ZMW" };
 
+        /// <summary>Describes the currency Andorran peseta (ADP).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency ADP = new Currency() { m_Value = "ADP" };
+
+        /// <summary>Describes the currency Austrian schilling (ATS).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency ATS = new Currency() { m_Value = "ATS" };
+
+        /// <summary>Describes the currency Belgian franc (BEF).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency BEF = new Currency() { m_Value = "BEF" };
+
+        /// <summary>Describes the currency Serbian dinar (CSD).</summary>
+        /// <remarks>End date is 2005-12-31.</remarks>
+        public static readonly Currency CSD = new Currency() { m_Value = "CSD" };
+
+        /// <summary>Describes the currency Czechoslovak koruna (CSK).</summary>
+        /// <remarks>End date is 1993-02-08.</remarks>
+        public static readonly Currency CSK = new Currency() { m_Value = "CSK" };
+
+        /// <summary>Describes the currency Cypriot pound (CYP).</summary>
+        /// <remarks>End date is 2007-12-31.</remarks>
+        public static readonly Currency CYP = new Currency() { m_Value = "CYP" };
+
+        /// <summary>Describes the currency East German Mark (DDM).</summary>
+        /// <remarks>End date is 1990-06-30.</remarks>
+        public static readonly Currency DDM = new Currency() { m_Value = "DDM" };
+
+        /// <summary>Describes the currency German mark (DEM).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency DEM = new Currency() { m_Value = "DEM" };
+
+        /// <summary>Describes the currency Ecuadorian sucre (ECS).</summary>
+        /// <remarks>End date is 2000-03-12.</remarks>
+        public static readonly Currency ECS = new Currency() { m_Value = "ECS" };
+
+        /// <summary>Describes the currency Estonian kroon (EEK).</summary>
+        /// <remarks>End date is 2010-12-13.</remarks>
+        public static readonly Currency EEK = new Currency() { m_Value = "EEK" };
+
+        /// <summary>Describes the currency Spanish peseta (ESP).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency ESP = new Currency() { m_Value = "ESP" };
+
+        /// <summary>Describes the currency Finnish markka (FIM).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency FIM = new Currency() { m_Value = "FIM" };
+
+        /// <summary>Describes the currency French franc (FRF).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency FRF = new Currency() { m_Value = "FRF" };
+
+        /// <summary>Describes the currency Greek drachma (GRD).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency GRD = new Currency() { m_Value = "GRD" };
+
+        /// <summary>Describes the currency Irish pound (IEP).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency IEP = new Currency() { m_Value = "IEP" };
+
+        /// <summary>Describes the currency Italian lira (ITL).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency ITL = new Currency() { m_Value = "ITL" };
+
+        /// <summary>Describes the currency Lithuanian litas (LTL).</summary>
+        /// <remarks>End date is 2014-12-31.</remarks>
+        public static readonly Currency LTL = new Currency() { m_Value = "LTL" };
+
+        /// <summary>Describes the currency Luxembourgish franc (LUF).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency LUF = new Currency() { m_Value = "LUF" };
+
+        /// <summary>Describes the currency Latvian lats (LVL).</summary>
+        /// <remarks>End date is 2014-01-01.</remarks>
+        public static readonly Currency LVL = new Currency() { m_Value = "LVL" };
+
+        /// <summary>Describes the currency Monégasque franc (MCF).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency MCF = new Currency() { m_Value = "MCF" };
+
+        /// <summary>Describes the currency Maltese lira (MTL).</summary>
+        /// <remarks>End date is 2007-12-31.</remarks>
+        public static readonly Currency MTL = new Currency() { m_Value = "MTL" };
+
+        /// <summary>Describes the currency Dutch guilder (NLG).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency NLG = new Currency() { m_Value = "NLG" };
+
+        /// <summary>Describes the currency Portuguese escudo (PTE).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency PTE = new Currency() { m_Value = "PTE" };
+
+        /// <summary>Describes the currency Slovenian tolar (SIT).</summary>
+        /// <remarks>End date is 2007-01-01.</remarks>
+        public static readonly Currency SIT = new Currency() { m_Value = "SIT" };
+
+        /// <summary>Describes the currency Slovak koruna (SKK).</summary>
+        /// <remarks>End date is 2009-01-01.</remarks>
+        public static readonly Currency SKK = new Currency() { m_Value = "SKK" };
+
+        /// <summary>Describes the currency Sammarinese lira (SML).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency SML = new Currency() { m_Value = "SML" };
+
+        /// <summary>Describes the currency Soviet Union ruble (SUR).</summary>
+        /// <remarks>End date is 1990-12-31.</remarks>
+        public static readonly Currency SUR = new Currency() { m_Value = "SUR" };
+
+        /// <summary>Describes the currency Vatican lira (VAL).</summary>
+        /// <remarks>End date is 2001-12-31.</remarks>
+        public static readonly Currency VAL = new Currency() { m_Value = "VAL" };
+
+        /// <summary>Describes the currency Yugoslav dinar (YOU).</summary>
+        /// <remarks>End date is 1993-12-31.</remarks>
+        public static readonly Currency YOU = new Currency() { m_Value = "YOU" };
+
+        /// <summary>Describes the currency Yugoslav dinar (YUD).</summary>
+        /// <remarks>End date is 1989-12-31.</remarks>
+        public static readonly Currency YUD = new Currency() { m_Value = "YUD" };
+
+        /// <summary>Describes the currency Yugoslav dinar (YUG).</summary>
+        /// <remarks>End date is 1994-01-23.</remarks>
+        public static readonly Currency YUG = new Currency() { m_Value = "YUG" };
+
+        /// <summary>Describes the currency Yugoslav dinar (YUM).</summary>
+        /// <remarks>End date is 2003-07-02.</remarks>
+        public static readonly Currency YUM = new Currency() { m_Value = "YUM" };
+
+        /// <summary>Describes the currency Yugoslav dinar (YUN).</summary>
+        /// <remarks>End date is 1992-06-30.</remarks>
+        public static readonly Currency YUN = new Currency() { m_Value = "YUN" };
+
+        /// <summary>Describes the currency Yugoslav dinar (YUR).</summary>
+        /// <remarks>End date is 1993-09-30.</remarks>
+        public static readonly Currency YUR = new Currency() { m_Value = "YUR" };
+
+        /// <summary>Describes the currency Zaïrean new zaïre (ZRN).</summary>
+        /// <remarks>End date is 1996-12-31.</remarks>
+        public static readonly Currency ZRN = new Currency() { m_Value = "ZRN" };
+
+        /// <summary>Describes the currency Zaïrean zaïre (ZRZ).</summary>
+        /// <remarks>End date is 1992-12-31.</remarks>
+        public static readonly Currency ZRZ = new Currency() { m_Value = "ZRZ" };
+
+        /// <summary>Describes the currency Zimbabwe dollar (ZWC).</summary>
+        /// <remarks>End date is 1980-04-17.</remarks>
+        public static readonly Currency ZWC = new Currency() { m_Value = "ZWC" };
+
         /// <summary>Describes the currency Zimbabwe dollar (ZWD).</summary>
+        /// <remarks>End date is 2006-07-31.</remarks>
         public static readonly Currency ZWD = new Currency() { m_Value = "ZWD" };
+
+        /// <summary>Describes the currency Zimbabwe dollar (ZWL).</summary>
+        /// <remarks>End date is 2009-04-12.</remarks>
+        public static readonly Currency ZWL = new Currency() { m_Value = "ZWL" };
+
+        /// <summary>Describes the currency Zimbabwe dollar (ZWN).</summary>
+        /// <remarks>End date is 2008-07-31.</remarks>
+        public static readonly Currency ZWN = new Currency() { m_Value = "ZWN" };
+
+        /// <summary>Describes the currency Zimbabwe dollar (ZWR).</summary>
+        /// <remarks>End date is 2009-02-02.</remarks>
+        public static readonly Currency ZWR = new Currency() { m_Value = "ZWR" };
 
     }
 }

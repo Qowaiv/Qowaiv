@@ -24,6 +24,7 @@ namespace Qowaiv.CodeGenerator.Generators
 			GenerateGender(dir);
 			GenerateCountry(dir);
 			GenerateCurrency(dir);
+			GenerateCountryToCurrency(dir);
 			GenerateIban(dir);
 			GeneratePostalCode(dir);
 			GenerateUnknown(dir);
@@ -208,6 +209,60 @@ namespace Qowaiv.CodeGenerator.Generators
 						resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "CountryLabels." + culture + ".resx")));
 					}
 					writer.WriteLine("    }\r\n}");
+				}
+			}
+		}
+		
+		/// <summary>Generates the country info resource file.</summary>
+		protected void GenerateCountryToCurrency(DirectoryInfo dir)
+		{
+			using (var stream = GetType().Assembly
+				.GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.CountryToCurrency.xls"))
+			{
+				using (var writer = new StreamWriter(Path.Combine(dir.FullName, "CountryToCurrencyMappings.cs")))
+				{
+					writer.WriteLine("using System.Collections.Generic;\r\nusing System.Collections.ObjectModel;\r\n");
+
+					writer.WriteLine("namespace Qowaiv\r\n{\r\n\tinternal partial struct CountryToCurrency\r\n\t{");
+					
+					writer.WriteLine("\t\tpublic static readonly ReadOnlyCollection<CountryToCurrency> All = new ReadOnlyCollection<CountryToCurrency>(new List<CountryToCurrency>()\r\n\t\t{");
+
+					var workbook = Workbook.Load(stream);
+					var worksheet = workbook.Worksheets[0];
+
+					var all = new List<string>();
+
+					var country_index = 1;
+					var currency_index = 2;
+					var date_index = 0;
+					
+					var resx = new XResourceFile();
+
+					var header = worksheet.Cells.GetRow(0);
+
+					int i = 1;
+
+					while (true)
+					{
+						var row = worksheet.Cells.GetRow(i++);
+
+						if (row.LastColIndex == int.MinValue) { break; }
+
+						var country = row.GetCell(country_index).StringValue.Trim();
+						var cur = row.GetCell(currency_index).StringValue.Trim();
+						Date start = Date.Parse(row.GetCell(date_index).StringValue);
+
+						if (start == Date.MinValue)
+						{
+							writer.WriteLine("\t\t\tnew CountryToCurrency(Country.{0}, Currency.{1}),", country, cur);
+						}
+						else
+						{
+							writer.WriteLine("\t\t\tnew CountryToCurrency(Country.{0}, Currency.{1}, new Date({2:yyyy, MM, dd})),", country, cur, start);
+						}
+			
+					}
+					writer.WriteLine("\t\t});\r\n\t}\r\n}");
 				}
 			}
 		}

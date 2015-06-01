@@ -360,10 +360,6 @@
     <value>ロチ</value>
     <comment>Lesotho loti (LSL)</comment>
   </data>
-  <data name="LTL_DisplayName">
-    <value>リタス</value>
-    <comment>Lithuanian litas (LTL)</comment>
-  </data>
   <data name="LYD_DisplayName">
     <value>リビア・ディナール</value>
     <comment>Libyan dinar (LYD)</comment>
@@ -728,8 +724,28 @@
     <value>#N/A!</value>
     <comment>Zambian kwacha (ZMW)</comment>
   </data>
+  <data name="LTL_DisplayName">
+    <value>リタス</value>
+    <comment>Lithuanian litas (LTL)</comment>
+  </data>
+  <data name="ZWC_DisplayName">
+    <value>ジンバブエ・ドル</value>
+    <comment>Zimbabwe dollar (ZWC)</comment>
+  </data>
   <data name="ZWD_DisplayName">
     <value>ジンバブエ・ドル</value>
     <comment>Zimbabwe dollar (ZWD)</comment>
+  </data>
+  <data name="ZWL_DisplayName">
+    <value>ジンバブエ・ドル</value>
+    <comment>Zimbabwe dollar (ZWL)</comment>
+  </data>
+  <data name="ZWN_DisplayName">
+    <value>ジンバブエ・ドル</value>
+    <comment>Zimbabwe dollar (ZWN)</comment>
+  </data>
+  <data name="ZWR_DisplayName">
+    <value>ジンバブエ・ドル</value>
+    <comment>Zimbabwe dollar (ZWR)</comment>
   </data>
 </root>

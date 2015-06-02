@@ -227,7 +227,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_QGuidSerializeObject_AreEqual()
@@ -247,7 +247,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
 		public void DataContractSerializeDeserialize_QGuidSerializeObject_AreEqual()
@@ -267,7 +267,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 
 		[Test]
@@ -288,7 +288,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -308,7 +308,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 
 		[Test]
@@ -423,7 +423,18 @@ namespace Qowaiv.UnitTests
 
 			var expected = new string[] 
 			{
-				"Qowaiv_SVOLibrary_GUIA",				"Qowaiv_SVOLibrary_GUIA",				"Qowaiv_SVOLibrary_GUIA",				"Qowaiv_SVOLibrary_GUIA",				"{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}",				"{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}",				"8a1a8c42-d2ff-e254-e26e-b6abcbf19420",				"8A1A8C42-D2FF-E254-E26E-B6ABCBF19420",				"(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)",				"(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)",				"{0x8a1a8c42,0xd2ff,0xe254,{0xe2,0x6e,0xb6,0xab,0xcb,0xf1,0x94,0x20}}",				"{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}"
+				"Qowaiv_SVOLibrary_GUIA",
+				"Qowaiv_SVOLibrary_GUIA",
+				"Qowaiv_SVOLibrary_GUIA",
+				"Qowaiv_SVOLibrary_GUIA",
+				"{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}",
+				"{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}",
+				"8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
+				"8A1A8C42-D2FF-E254-E26E-B6ABCBF19420",
+				"(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)",
+				"(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)",
+				"{0x8a1a8c42,0xd2ff,0xe254,{0xe2,0x6e,0xb6,0xab,0xcb,0xf1,0x94,0x20}}",
+				"{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}"
 			};
 
 			for (var i = 0; i < expected.Length; i++)

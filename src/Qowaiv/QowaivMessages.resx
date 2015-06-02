@@ -135,6 +135,9 @@
   <data name="ArgumentException_TimestampArrayShouldHaveSize8" xml:space="preserve">
     <value>The byte array should have size of 8.</value>
   </data>
+  <data name="ArgumentOutOfRangeException_NotNegative" xml:space="preserve">
+    <value>Value should not be negative.</value>
+  </data>
   <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
     <value>Not a valid BIC</value>
   </data>

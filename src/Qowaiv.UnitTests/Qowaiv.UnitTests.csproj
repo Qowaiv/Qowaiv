@@ -41,7 +41,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ExcelLibrary.1.2011.7.30\lib\ExcelLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -117,6 +116,7 @@
     <Compile Include="PostalCodeCountryPatternTest.cs" />
     <Compile Include="PostalCodeTest.cs" />
     <Compile Include="Sql\TimestampTest.cs" />
+    <Compile Include="TestTools\DateTimeAssert.cs" />
     <Compile Include="Text\WildcardPatternTest.cs" />
     <Compile Include="CountryToCurrencyTest.cs" />
     <Compile Include="UuidTest.cs" />

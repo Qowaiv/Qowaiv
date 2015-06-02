@@ -193,7 +193,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_FileSizeSerializeObject_AreEqual()
@@ -213,7 +213,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
 		public void DataContractSerializeDeserialize_FileSizeSerializeObject_AreEqual()
@@ -233,7 +233,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 
 		[Test]
@@ -254,7 +254,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -274,7 +274,7 @@ namespace Qowaiv.UnitTests
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			Assert.AreEqual(exp.Date, act.Date, "Date");
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 
 		[Test]

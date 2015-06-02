@@ -63,6 +63,23 @@ namespace Qowaiv
 			return param;
 		}
 
+		/// <summary>Guards the parameter if the parameter is not negative, otherwise throws an argument out of range exception.</summary>
+		/// <param name="param">
+		/// The parameter to guard.
+		/// </param>
+		/// <param name="paramName">
+		/// The name of the parameter.
+		/// </param>
+		[DebuggerStepThrough]
+		public static TimeSpan NotNegative(TimeSpan param, string paramName)
+		{
+			if (param < TimeSpan.Zero)
+			{
+				throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_NotNegative, paramName);
+			}
+			return param;
+		}
+
 		/// <summary>Guards the parameter if the type is not null and implements the specified interface,
 		/// otherwise throws an argument (null) exception.
 		/// </summary>

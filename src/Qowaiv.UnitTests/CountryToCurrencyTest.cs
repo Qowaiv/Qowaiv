@@ -1,17 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Linq;
 
 namespace Qowaiv.UnitTests
 {
-	[TestClass]
+	[TestFixture]
 	public class CountryToCurrencyTest
 	{
 		private const bool TestMode = false;
 		
 		public static readonly Country[] CountriesWithoutCurrency = new Country[] { Country.AQ };
 
-		[TestMethod]
+		[Test]
 		public void GetCurrency_AllCountries_CurrencyShouldExistOnStartDateAndEndDateOrToday()
 		{
 			foreach (var country in Country.All.Where(c => !CountriesWithoutCurrency.Contains(c)))

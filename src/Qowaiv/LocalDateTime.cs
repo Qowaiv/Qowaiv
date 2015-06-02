@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Conversion;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
 
 namespace Qowaiv
 {
@@ -21,12 +20,12 @@ namespace Qowaiv
 	public struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<LocalDateTime>
 	{
 		private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
-
-		/// <summary>Represents the largest possible value date. This field is read-only.</summary>
-		public static readonly LocalDateTime MaxValue = new LocalDateTime(1, 01, 01);
-
+				
 		/// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
 		public static readonly LocalDateTime MinValue = new LocalDateTime(DateTime.MinValue);
+
+		/// <summary>Represents the largest possible value date. This field is read-only.</summary>
+		public static readonly LocalDateTime MaxValue = new LocalDateTime(DateTime.MaxValue);
 
 		#region Constructors
 

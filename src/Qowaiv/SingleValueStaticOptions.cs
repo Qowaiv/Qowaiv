@@ -21,7 +21,7 @@ namespace Qowaiv
 		/// <summary>The single value object has an static Boolean IsValid(String) method, checking its positional validness.</summary>
 		IsValid = 32,
 
-		/// <summary>The singe value object has static Parse/TryParse/IsValid methods, and is culture dependent.</summary>
+		/// <summary>The singe value object has static Parse/TryParse/IsValid methods, a MinValue and MaxVlaue constant, and is culture dependent.</summary>
 		Continuous = Parse | TryParse | CultureDependent | IsValid,
 
 		/// <summary>The singe value object has static Parse/TryParse/IsValid methods, an empty value, an unknown and is culture dependent.</summary>

@@ -24,7 +24,7 @@ namespace Qowaiv
 		public const string PercentageMark = "%";
 		/// <summary>The per mille mark (‰).</summary>
 		public const string PerMilleMark = "‰";
-		/// <summary>The per ten thousend mark (‱).</summary>
+		/// <summary>The per ten thousand mark (‱).</summary>
 		public const string PerTenThousendMark = "‱";
 
 		/// <summary>Represents 0 percent.</summary>
@@ -32,7 +32,13 @@ namespace Qowaiv
 		/// <summary>Represents 1 percent.</summary>
 		public static readonly Percentage One = Percentage.Create(0.01m);
 		/// <summary>Represents 100 percent.</summary>
-		public static readonly Percentage Hundred = Percentage.Create(1.0m);
+		public static readonly Percentage Hundred = Percentage.Create(1m);
+
+		/// <summary>Gets the minimum value of a percentage.</summary>
+		public static readonly Percentage MinValue = Decimal.MinValue;
+
+		/// <summary>Gets the maximum value of a percentage.</summary>
+		public static readonly Percentage MaxValue = Decimal.MaxValue;
 
 		#region Properties
 

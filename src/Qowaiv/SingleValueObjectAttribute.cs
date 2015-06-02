@@ -9,7 +9,7 @@ namespace Qowaiv
     {
         /// <summary>Initializes a new instance of a single value object attribute.</summary>
         /// <remarks>
-        /// The paremeterless constructor is marked private so it can not be used or tested.
+        /// The parameterless constructor is marked private so it can not be used or tested.
         /// </remarks>
         [ExcludeFromCodeCoverageAttribute]
         private SingleValueObjectAttribute() { }

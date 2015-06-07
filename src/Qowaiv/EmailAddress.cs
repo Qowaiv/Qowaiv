@@ -153,27 +153,18 @@ namespace Qowaiv
 		/// The JSON integer that represents the email address.
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
-		//{
-		//    m_Value = Create(jsonInteger).m_Value;
-		//}
 
 		/// <summary>Generates an email address from a JSON number representation.</summary>
 		/// <param name="jsonNumber">
 		/// The JSON number that represents the email address.
 		/// </param>
 		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
-		//{
-		//    m_Value = Create(jsonNumber).m_Value;
-		//}
 
 		/// <summary>Generates an email address from a JSON date representation.</summary>
 		/// <param name="jsonDate">
 		/// The JSON Date that represents the email address.
 		/// </param>
 		void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
-		//{
-		//    m_Value = Create(jsonDate).m_Value;
-		//}
 
 		/// <summary>Converts an email address into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()

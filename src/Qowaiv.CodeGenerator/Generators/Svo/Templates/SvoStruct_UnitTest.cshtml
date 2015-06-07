@@ -446,7 +446,7 @@ namespace @(Model.Namespace).UnitTests
 		#region JSON (De)serialization tests
 
 		[Test]
-		public void FromJson_Null_AreEqual()
+		public void FromJson_None_EmptyValue()
 		{
 			var act = JsonTester.Read<@(Model.ClassName)>();
 			var exp = @(Model.ClassName).Empty;

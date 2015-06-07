@@ -323,7 +323,7 @@ namespace Qowaiv.UnitTests
 		#region JSON (De)serialization tests
 
 		[Test]
-		public void FromJson_Null_AreEqual()
+		public void FromJson_None_EmptyValue()
 		{
 			var act = JsonTester.Read<Uuid>();
 			var exp = Uuid.Empty;

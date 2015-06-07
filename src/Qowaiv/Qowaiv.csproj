@@ -11,7 +11,6 @@
     <AssemblyName>Qowaiv</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,10 +44,15 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Shared\ProductInfo.cs">
+      <Link>Properties\ProductInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Shared\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="BankIdentifierCode.cs" />
     <Compile Include="Conversion\BankIdentifierCodeTypeConverter.cs" />
     <Compile Include="Conversion\CountryTypeConverter.cs" />
@@ -79,16 +83,16 @@
     <Compile Include="EmailAddressCollectionExtensions.cs" />
     <Compile Include="FileSize.cs" />
     <Compile Include="FileSizeExtensions.cs" />
-    <Compile Include="Formatting\FormattingArguments.cs" />
-    <Compile Include="Guard.cs" />
-    <Compile Include="IFormattableExtensions.cs" />
+    <Compile Include="Formatting\FormattingArgumentsCollection.cs" />
+	<Compile Include="Formatting\FormattingArguments.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfo.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfoInstances.cs" />
-    <Compile Include="Formatting\FormattingArgumentsCollection.cs" />
+	<Compile Include="Guard.cs" />
     <Compile Include="HouseNumber.cs" />
-    <Compile Include="InternationalBankAccountNumber.cs" />
+    <Compile Include="IFormattableExtensions.cs" />
+	<Compile Include="InternationalBankAccountNumber.cs" />
     <Compile Include="InternationalBankAccountNumberPatterns.cs" />
     <Compile Include="Json\IJsonSerializable.cs" />
     <Compile Include="LocalDateTime.cs" />
@@ -97,61 +101,29 @@
     <Compile Include="Percentage.cs" />
     <Compile Include="PercentageExtensions.cs" />
     <Compile Include="PostalCode.cs" />
-    <Compile Include="Sql\Timestamp.cs" />
-    <Compile Include="Text\WildcardPattern.cs" />
-    <Compile Include="Text\WildcardPatternOptions.cs" />
-    <Compile Include="Uuid.cs" />
+	<Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QowaivMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QowaivMessages.resx</DependentUpon>
-    </Compile>
+    </Compile>   
+    <Compile Include="Sql\Timestamp.cs" />
     <Compile Include="SingleValueStaticOptions.cs" />
     <Compile Include="SingleValueObjectAttribute.cs" />
+    <Compile Include="Text\WildcardPattern.cs" />
+    <Compile Include="Text\WildcardPatternOptions.cs" />
     <Compile Include="Threading\ThreadDomain.cs" />
     <Compile Include="Threading\ThreadExtensions.cs" />
-    <Compile Include="Unknown.cs" />
-    <Compile Include="WeekDate.cs" />
+	<Compile Include="Unknown.cs" />
+    <Compile Include="Uuid.cs" />
+	<Compile Include="WeekDate.cs" />
     <Compile Include="Year.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Shared\ProductInfo.cs">
-      <Link>Properties\ProductInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CurrencyLabels.ar.resx" />
-    <EmbeddedResource Include="CurrencyLabels.de.resx" />
-    <EmbeddedResource Include="CurrencyLabels.es.resx" />
-    <EmbeddedResource Include="CurrencyLabels.fr.resx" />
-    <EmbeddedResource Include="CurrencyLabels.it.resx" />
-    <EmbeddedResource Include="CurrencyLabels.ja.resx" />
-    <EmbeddedResource Include="CurrencyLabels.nl.resx" />
-    <EmbeddedResource Include="CurrencyLabels.pt.resx" />
-    <EmbeddedResource Include="CurrencyLabels.resx" />
-    <EmbeddedResource Include="CurrencyLabels.ru.resx" />
-    <EmbeddedResource Include="CurrencyLabels.zh-HK.resx" />
-    <EmbeddedResource Include="CurrencyLabels.zh-TW.resx" />
-    <EmbeddedResource Include="CurrencyLabels.zh.resx" />
-    <EmbeddedResource Include="UnknownLabels.ar.resx" />
-    <EmbeddedResource Include="UnknownLabels.de.resx" />
-    <EmbeddedResource Include="UnknownLabels.es.resx" />
-    <EmbeddedResource Include="UnknownLabels.fr.resx" />
-    <EmbeddedResource Include="UnknownLabels.it.resx" />
-    <EmbeddedResource Include="UnknownLabels.ja.resx" />
-    <EmbeddedResource Include="UnknownLabels.nl.resx" />
-    <EmbeddedResource Include="UnknownLabels.pt.resx" />
-    <EmbeddedResource Include="UnknownLabels.resx" />
-    <EmbeddedResource Include="UnknownLabels.ru.resx" />
-    <EmbeddedResource Include="UnknownLabels.zh.resx" />
-    <None Include="..\Shared\Qowaiv.snk">
-      <Link>Qowaiv.snk</Link>
-    </None>
-    <EmbeddedResource Include="CountryLabels.ar.resx" />
+    <EmbeddedResource Include="..\Qowaiv.license.txt">
+      <Link>Qowaiv.license.txt</Link>
+    </EmbeddedResource>
+	<EmbeddedResource Include="CountryLabels.ar.resx" />
     <EmbeddedResource Include="CountryLabels.de.resx" />
     <EmbeddedResource Include="CountryLabels.es.resx" />
     <EmbeddedResource Include="CountryLabels.fr.resx" />
@@ -164,14 +136,20 @@
     <EmbeddedResource Include="CountryLabels.zh-HK.resx" />
     <EmbeddedResource Include="CountryLabels.zh-TW.resx" />
     <EmbeddedResource Include="CountryLabels.zh.resx" />
-    <EmbeddedResource Include="GenderLabels.ar.resx" />
-    <EmbeddedResource Include="GenderLabels.zh.resx" />
-    <EmbeddedResource Include="QowaivMessages.nl.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\Qowaiv.license.txt">
-      <Link>Qowaiv.license.txt</Link>
-    </EmbeddedResource>
+	<EmbeddedResource Include="CurrencyLabels.ar.resx" />
+    <EmbeddedResource Include="CurrencyLabels.de.resx" />
+    <EmbeddedResource Include="CurrencyLabels.es.resx" />
+    <EmbeddedResource Include="CurrencyLabels.fr.resx" />
+    <EmbeddedResource Include="CurrencyLabels.it.resx" />
+    <EmbeddedResource Include="CurrencyLabels.ja.resx" />
+    <EmbeddedResource Include="CurrencyLabels.nl.resx" />
+    <EmbeddedResource Include="CurrencyLabels.pt.resx" />
+    <EmbeddedResource Include="CurrencyLabels.resx" />
+    <EmbeddedResource Include="CurrencyLabels.ru.resx" />
+    <EmbeddedResource Include="CurrencyLabels.zh-HK.resx" />
+    <EmbeddedResource Include="CurrencyLabels.zh-TW.resx" />
+    <EmbeddedResource Include="CurrencyLabels.zh.resx" />
+	<EmbeddedResource Include="GenderLabels.ar.resx" />
     <EmbeddedResource Include="GenderLabels.de.resx" />
     <EmbeddedResource Include="GenderLabels.en-GB.resx" />
     <EmbeddedResource Include="GenderLabels.es.resx" />
@@ -182,12 +160,29 @@
     <EmbeddedResource Include="GenderLabels.pt.resx" />
     <EmbeddedResource Include="GenderLabels.resx" />
     <EmbeddedResource Include="GenderLabels.ru.resx" />
-    <EmbeddedResource Include="QowaivMessages.resx">
+	<EmbeddedResource Include="GenderLabels.zh.resx" />
+    <EmbeddedResource Include="QowaivMessages.nl.resx" />
+	<EmbeddedResource Include="QowaivMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>QowaivMessages.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+	<EmbeddedResource Include="UnknownLabels.ar.resx" />
+    <EmbeddedResource Include="UnknownLabels.de.resx" />
+    <EmbeddedResource Include="UnknownLabels.es.resx" />
+    <EmbeddedResource Include="UnknownLabels.fr.resx" />
+    <EmbeddedResource Include="UnknownLabels.it.resx" />
+    <EmbeddedResource Include="UnknownLabels.ja.resx" />
+    <EmbeddedResource Include="UnknownLabels.nl.resx" />
+    <EmbeddedResource Include="UnknownLabels.pt.resx" />
+    <EmbeddedResource Include="UnknownLabels.resx" />
+    <EmbeddedResource Include="UnknownLabels.ru.resx" />
+    <EmbeddedResource Include="UnknownLabels.zh.resx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="..\Shared\Qowaiv.snk">
+      <Link>Qowaiv.snk</Link>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -43,7 +43,7 @@ namespace Qowaiv.Text
 		/// The wildcard pattern options.
 		/// </param>
 		/// <param name="comparisonType">
-		/// The type of comparision.
+		/// The type of comparison.
 		/// </param>
 		/// <exception cref="System.ArgumentNullException">
 		/// pattern is null.
@@ -92,7 +92,8 @@ namespace Qowaiv.Text
 		/// <param name="context">The streaming context.</param>
 		/// <remarks>
 		/// this is used by ISerializable.GetObjectData() so that it can be
-		/// changed by derived classes.</remarks>
+		/// changed by derived classes.
+		/// </remarks>
 		protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
 			Guard.NotNull(info, "info");
@@ -115,7 +116,7 @@ namespace Qowaiv.Text
 		/// <summary>The wildcard multiple chars.</summary>
 		protected char MultipleChars { get; set; }
 
-		/// <summary>Returns true if matching is culture indepedent, otherwise false.</summary>
+		/// <summary>Returns true if matching is culture independent, otherwise false.</summary>
 		protected bool IsCultureIndependent
 		{
 			get
@@ -128,7 +129,7 @@ namespace Qowaiv.Text
 			}
 		}
 
-		/// <summary>Returns true if the case should be ingnored, otherwise false.</summary>
+		/// <summary>Returns true if the case should be ignored, otherwise false.</summary>
 		protected bool IgnoreCase
 		{
 			get
@@ -254,7 +255,7 @@ namespace Qowaiv.Text
 		/// The wildcard pattern options.
 		/// </param>
 		/// <param name="comparisonType">
-		/// The type of comparision.
+		/// The type of comparison.
 		/// </param>
 		/// <returns>
 		/// true if the wildcard pattern finds a match; otherwise, false.

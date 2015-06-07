@@ -30,6 +30,10 @@ Email address
 -------------
 Represents a (single) email address, including IPv4 domains.
 
+Email address collection
+------------------------
+Represents a collection of unique email addresses, excluding the empty and unknown email address.
+
 File size
 ---------
 Represents the size of a file.

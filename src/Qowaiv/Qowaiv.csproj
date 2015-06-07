@@ -75,6 +75,8 @@
     <Compile Include="CurrencyConstants.cs" />
     <Compile Include="Date.cs" />
     <Compile Include="EmailAddress.cs" />
+    <Compile Include="EmailAddressCollection.cs" />
+    <Compile Include="EmailAddressCollectionExtensions.cs" />
     <Compile Include="FileSize.cs" />
     <Compile Include="FileSizeExtensions.cs" />
     <Compile Include="Formatting\FormattingArguments.cs" />

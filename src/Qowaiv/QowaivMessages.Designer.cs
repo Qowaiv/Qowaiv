@@ -187,6 +187,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not valid email addresses.
+        /// </summary>
+        public static string FormatExceptionEmailAddressCollection {
+            get {
+                return ResourceManager.GetString("FormatExceptionEmailAddressCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid file size.
         /// </summary>
         public static string FormatExceptionFileSize {

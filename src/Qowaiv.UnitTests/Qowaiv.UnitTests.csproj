@@ -76,6 +76,7 @@
     <Compile Include="CountryTest.cs" />
     <Compile Include="CurrencyTest.cs" />
     <Compile Include="DateTest.cs" />
+    <Compile Include="EmailAddressCollectionTest.cs" />
     <Compile Include="EmailAddressTest.cs" />
     <Compile Include="FileSizeTest.cs" />
     <Compile Include="Formatting\FormattingArgumentsCollectionTest.cs" />

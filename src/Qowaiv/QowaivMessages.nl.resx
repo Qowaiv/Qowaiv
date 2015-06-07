@@ -132,6 +132,9 @@
   <data name="FormatExceptionEmailAddress" xml:space="preserve">
     <value>Geen geldig e-mailadres</value>
   </data>
+  <data name="FormatExceptionEmailAddressCollection" xml:space="preserve">
+    <value>Geen geldige email adres(sen)</value>
+  </data>
   <data name="FormatExceptionFileSize" xml:space="preserve">
     <value>Geen geldige bestandsgrootte</value>
   </data>

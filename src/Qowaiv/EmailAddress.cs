@@ -29,23 +29,22 @@ namespace Qowaiv
 		public static readonly Regex Pattern = new Regex(
 			@"
 				^
-					[\w-+]+(\.[\w-+]+)*
+					[\w{}|/%$&#~!?*`'^=+-]+(\.[\w{}|/%$&#~!?*`'^=+-]+)*
 				@ 
 				(
 					(
 						(\[(?=.*]$))?
-						 (0|[1-9]\d?|1\d\d|25[0-5]|2[0-4]\d)
-						(\.
-						 (0|[1-9]\d?|1\d\d|25[0-5]|2[0-4]\d)
-						){3}
+						(( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )\.){3}
+						 ( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )
 						((?<=@\[.*)])?
 					)
 				|
-					(\w+([-]*\w+)?\.)*
+					(\w+([-]*\w+)*\.)*
 					[a-z]{2,}
 				)
 				$
 			", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+
 		/// <summary>Represents an empty/not set email address.</summary>
 		public static readonly EmailAddress Empty = default(EmailAddress);
 

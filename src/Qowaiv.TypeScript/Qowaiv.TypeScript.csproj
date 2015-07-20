@@ -54,6 +54,7 @@
     <None Include="..\Shared\Qowaiv.snk">
       <Link>Qowaiv.snk</Link>
     </None>
+    <Content Include="Qowaiv.TypeScript.nuspec" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -36,6 +36,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{41C15F
 		..\design\qowain logo.psd = ..\design\qowain logo.psd
 		..\design\qowain-logo_linkedin_050x050.jpg = ..\design\qowain-logo_linkedin_050x050.jpg
 		..\design\qowain-logo_linkedin_100x060.jpg = ..\design\qowain-logo_linkedin_100x060.jpg
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.cmd = ..\build.cmd
+		..\build.fsx = ..\build.fsx
+		..\build.sh = ..\build.sh
+		..\buildConfig.fsx = ..\buildConfig.fsx
+		..\downloadNuget.fsx = ..\downloadNuget.fsx
+		..\packages.config = ..\packages.config
 	EndProjectSection
 EndProject
 Global
@@ -75,5 +83,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5249CDC7-3F92-45B6-9328-627BC0C2441D} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{41C15FF1-5053-4D59-8314-B6E1CE89CDC1} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 EndGlobal

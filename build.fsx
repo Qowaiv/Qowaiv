@@ -100,11 +100,8 @@ MyTarget "CopyToRelease" (fun _ ->
         |> Seq.iter (fun (source, target) ->
             let outDir = outLibDir @@ target 
             ensureDirectory outDir
-            [ "Qowaiv.dll"
-              "Qowaiv.xml" ]
-            |> Seq.iter (fun file ->
-                let newFile = outDir @@ Path.GetFileName file
-                File.Copy(source @@ file, newFile))
+            !! (source + "/**/*.*")
+                |> Copy outDir
         )
 )
 
@@ -112,11 +109,19 @@ MyTarget "NuGet" (fun _ ->
     let outDir = releaseDir @@ "nuget"
     ensureDirectory outDir
     
+    let nugetDocsDir = nugetDir @@ "docs"
+    let nugetToolsDir = nugetDir @@ "tools"
+    let nugetLibDir = nugetDir @@ "lib"
+    let nugetLib451Dir = nugetLibDir @@ "net451"
+
+    CleanDir nugetDocsDir
+    CleanDir nugetToolsDir
+    CleanDir nugetLibDir
+    DeleteDir nugetLibDir
+
     let defaultParams p = 
         { p with
             Authors = authors
-            Project = projectName
-            Summary = projectSummary
             Description = projectDescription
             Version = release.NugetVersion
             ReleaseNotes = toLines release.Notes
@@ -125,19 +130,40 @@ MyTarget "NuGet" (fun _ ->
             AccessKey = getBuildParamOrDefault "nugetkey" ""
             Publish = hasBuildParam "nugetkey"
         }
-            
-    let qowaivParams q =
-        { q with
-            Dependencies = [ ] }
-    
-    NuGet (defaultParams) "src/Qowaiv/Qowaiv.nuspec"
-    NuGet (defaultParams >> 
-        fun p -> {p with 
-            Dependencies = ["ExcelLibrary", GetPackageVersion "./src/packages/" "ExcelLibrary"
-                            "log4net", GetPackageVersion "./src/packages/" "log4net"
-                            "Microsoft.AspNet.Razor", GetPackageVersion "./src/packages/" "Microsoft.AspNet.Razor"]}
-            ) 
+
+    NuGet (defaultParams >> fun p -> 
+               { p with Project = "Qowaiv"
+                        Summary = "Single Value Domain Objects" }) 
+         "src/Qowaiv/Qowaiv.nuspec"
+
+    NuGet (defaultParams >> fun p -> 
+               { p with Project = "Qowaiv.CodeGenerator"
+                        Summary = "Code generator for Qowaiv Single Value Domain Objects"
+                        Dependencies = 
+                            [ "ExcelLibrary", GetPackageVersion "./src/packages/" "ExcelLibrary"
+                              "log4net", GetPackageVersion "./src/packages/" "log4net" ]
+                        })
         "src/Qowaiv.CodeGenerator/Qowaiv.CodeGenerator.nuspec"
+
+    NuGet (defaultParams >> fun p -> 
+               { p with Project = "Qowaiv.Json.Newtonsoft"
+                        Summary = "Json serialization for Qowaiv Single Value Domain Objects"
+                        Dependencies = 
+                            [ "Newtonsoft.Json", GetPackageVersion "./src/packages/" "Newtonsoft.Json" ]
+                        })
+        "src/Qowaiv.Json.Newtonsoft/Qowaiv.Json.Newtonsoft.nuspec"
+
+    NuGet (defaultParams >> fun p -> 
+               { p with Project = "Qowaiv.TypeScript"
+                        Summary = "Typescript implementation for Qowaiv Single Value Domain Objects"
+                        })
+        "src/Qowaiv.TypeScript/Qowaiv.TypeScript.nuspec"
+
+    NuGet (defaultParams >> fun p -> 
+               { p with Project = "Qowaiv.Web"
+                        Summary = "Json serialization for Qowaiv Single Value Domain Objects"
+                        })
+        "src/Qowaiv.Web/Qowaiv.Web.nuspec"
 )
 
 Target "All" (fun _ ->

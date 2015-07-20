@@ -85,6 +85,7 @@
     <None Include="..\Shared\Qowaiv.snk">
       <Link>Qowaiv.snk</Link>
     </None>
+    <Content Include="Qowaiv.Web.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Qowaiv\Qowaiv.csproj">

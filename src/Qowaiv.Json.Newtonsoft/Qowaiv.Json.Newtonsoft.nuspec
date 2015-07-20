@@ -15,9 +15,8 @@
         @dependencies@
     </metadata>
   <files>
-    <file src="..\release\lib\net45\Qowaiv.dll" target="lib\net45\Qowaiv.dll" />
-    <file src="..\release\lib\net45\Qowaiv.xml" target="lib\net45\Qowaiv.xml" />
-    <file src="..\release\lib\net45\Qowaiv.pdb" target="lib\net45\Qowaiv.pdb" />
+    <file src="..\release\lib\net45\Qowaiv.Json.Newtonsoft.dll" target="lib\net45\Qowaiv.Json.Newtonsoft.dll" />
+    <file src="..\release\lib\net45\Qowaiv.Json.Newtonsoft.pdb" target="lib\net45\Qowaiv.Json.Newtonsoft.pdb" />
     <!--<file src="..\Qowaiv.license.txt" target="Qowaiv.license.txt"/>-->
-  </files>    
+  </files>
 </package>

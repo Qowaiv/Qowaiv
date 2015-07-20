@@ -125,6 +125,7 @@
     <EmbeddedResource Include="Resources\Currency.xls" />
     <EmbeddedResource Include="Resources\Web\InternetMediaType.xls" />
     <EmbeddedResource Include="Resources\CountryToCurrency.xls" />
+    <None Include="Qowaiv.CodeGenerator.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Qowaiv.license.txt">

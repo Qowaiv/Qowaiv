@@ -43,7 +43,7 @@ let outDocDir = "./release/documentation/"
 let docTemplatesDir = "./doc/templates/"
 let testDir  = "./test/"
 let nugetDir  = "./nuget/"
-let packageDir  = "./nuget/packages"
+let packageDir  = "./src/packages"
 
 let github_user = "Corniel"
 let github_project = "Qowaiv"
@@ -65,6 +65,7 @@ let github_url = sprintf "https://github.com/%s/%s" github_user github_project
     
 // Ensure the ./src/.nuget/NuGet.exe file exists (required by xbuild)
 let nuget = findToolInSubPath "NuGet.exe" "./.nuget/Build/NuGet.CommandLine/tools/NuGet.exe"
+System.IO.Directory.CreateDirectory("./src/.nuget")
 System.IO.File.Copy(nuget, "./src/.nuget/NuGet.exe", true)
 
 // Read release notes document

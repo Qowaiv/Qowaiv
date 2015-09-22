@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Qowaiv.CodeGenerator.Xml;
 using Qowaiv.UnitTests.TestTools;
 
@@ -13,7 +10,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         [Test]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
-            ExceptionAssert.ExpectArgumentNullException(() =>
+            ExceptionAssert.CatchArgumentNullException(() =>
             {
                 new XResourceFileData(null, null);
             },

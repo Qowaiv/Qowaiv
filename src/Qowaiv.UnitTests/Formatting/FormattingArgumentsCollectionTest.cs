@@ -16,7 +16,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Ctor_Null_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				new FormattingArgumentsCollection(null);
 			},
@@ -39,7 +39,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_NullFormat_ThrowArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				var collection = new FormattingArgumentsCollection();
 				collection.Format(null, null);
@@ -49,7 +49,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_NullArugment_ThrowArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				var collection = new FormattingArgumentsCollection();
 				collection.Format("Value: '{0}'", null);
@@ -60,7 +60,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_LengthPlus_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("{0,+}", 1);
@@ -70,7 +70,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_LengthA_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("{0,a}", 1);
@@ -81,7 +81,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_IndexPlus_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("{+}");
@@ -91,7 +91,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_IndexA_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("{a}");
@@ -113,7 +113,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_InvalidFormat_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("}");
@@ -123,7 +123,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_ElementStartedButNotClosed_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("Test {0", 12);
@@ -133,7 +133,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_UnparsebleIndex_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("{a}");
@@ -143,7 +143,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Format_IndexOutOfRange_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
 				collection.Format("{0}{1}", 1);
@@ -275,7 +275,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Add_NullType_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				var collection = new FormattingArgumentsCollection();
 				collection.Add(null, "");
@@ -285,7 +285,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Add_NotIFormattebleType_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				var collection = new FormattingArgumentsCollection();
 				collection.Add(typeof(Type), "");
@@ -296,7 +296,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Add_DuplicateKey_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				var collection = new FormattingArgumentsCollection();
 				collection.Add(typeof(Int32), "New");

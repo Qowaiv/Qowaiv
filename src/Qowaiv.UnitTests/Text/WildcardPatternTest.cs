@@ -3,13 +3,8 @@ using Qowaiv.Text;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Globalization;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Qowaiv.UnitTests.Text
 {
@@ -21,7 +16,7 @@ namespace Qowaiv.UnitTests.Text
 		[Test]
 		public void Ctor_InvalidPattern_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				new WildcardPattern("**");
 			},
@@ -31,7 +26,7 @@ namespace Qowaiv.UnitTests.Text
 		[Test]
 		public void Ctor_InvalidPatternSql_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
 			},
@@ -185,7 +180,7 @@ namespace Qowaiv.UnitTests.Text
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<WildcardPattern>(null, default(StreamingContext));
@@ -196,7 +191,7 @@ namespace Qowaiv.UnitTests.Text
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(WildcardPattern), new System.Runtime.Serialization.FormatterConverter());
@@ -207,7 +202,7 @@ namespace Qowaiv.UnitTests.Text
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = new WildcardPattern("*");

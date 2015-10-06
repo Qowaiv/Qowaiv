@@ -77,11 +77,11 @@ namespace Qowaiv
 
 		/// <summary>Gets the country calling code as defined by ITU-T.</summary>
 		/// <remarks>
-		/// Recommendations E.123 and E.164, also called IDD (International Direct Dialling) or ISD (International Subscriber Dialling) codes.
+		/// Recommendations E.123 and E.164, also called IDD (International Direct Dialing) or ISD (International Subscriber Dialling) codes.
 		/// </remarks>
 		public string CallingCode { get { return GetResourceString("CallingCode", CultureInfo.InvariantCulture); } }
 
-		///<summary>Gets true if the RegionInfo equvalent of this country exists, otherwise false.</summary>
+		///<summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
 		public bool RegionInfoExists { get { return !String.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture)); } }
 
 		/// <summary>Gets the start date from witch the country exists.</summary>

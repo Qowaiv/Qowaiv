@@ -75,7 +75,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<FormattingArguments>(null, default(StreamingContext));
@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(FormattingArguments), new System.Runtime.Serialization.FormatterConverter());
@@ -97,7 +97,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = TestStruct;

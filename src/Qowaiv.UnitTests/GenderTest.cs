@@ -55,7 +55,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectException<FormatException>
+				Assert.Catch<FormatException>
 				(() =>
 				{
 					Gender.Parse("InvalidInput");
@@ -169,7 +169,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+				ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 				{
 					Gender.Create((Int32?)17);
 				},
@@ -182,7 +182,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+				ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 				{
 					Gender.Create(17);
 				},
@@ -235,7 +235,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Create_Int32MinValue_ThrowsArgumentOutOfRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException
+			ExceptionAssert.CatchArgumentOutOfRangeException
 			(() =>
 			{
 				Gender.Create(Int32.MinValue);
@@ -251,7 +251,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<Gender>(null, default(StreamingContext));
@@ -261,7 +261,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(Gender), new System.Runtime.Serialization.FormatterConverter());
@@ -272,7 +272,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = TestStruct;
@@ -440,7 +440,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				JsonTester.Read<Gender>("InvalidStringValue");
 			},
@@ -467,7 +467,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<Gender>(1234.56);
 			},
@@ -477,7 +477,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DateTimeValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<Gender>(new DateTime(1972, 02, 14));
 			},
@@ -845,7 +845,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = null;
@@ -859,7 +859,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = new object();

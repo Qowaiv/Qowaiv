@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Threading;
-using System.Xml.Serialization;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests
 {
@@ -214,7 +211,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectException<FormatException>
+				Assert.Catch<FormatException>
 				(() =>
 				{
 					Currency.Parse("InvalidInput");
@@ -254,7 +251,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<Currency>(null, default(StreamingContext));
@@ -265,7 +262,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(Currency), new System.Runtime.Serialization.FormatterConverter());
@@ -276,7 +273,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = TestStruct;
@@ -445,7 +442,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				JsonTester.Read<Currency>("InvalidStringValue");
 			},
@@ -472,7 +469,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<Currency>(1234.56);
 			},
@@ -482,7 +479,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DateTimeValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<Currency>(new DateTime(1972, 02, 14));
 			},
@@ -724,7 +721,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = null;
@@ -738,7 +735,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = new object();

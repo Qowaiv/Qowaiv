@@ -177,7 +177,7 @@ namespace Qowaiv.Web.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectException<FormatException>
+				Assert.Catch<FormatException>
 				(() =>
 				{
 					InternetMediaType.Parse("InvalidInput");
@@ -266,7 +266,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<InternetMediaType>(null, default(StreamingContext));
@@ -277,7 +277,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(InternetMediaType), new System.Runtime.Serialization.FormatterConverter());
@@ -288,7 +288,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = TestStruct;
@@ -457,7 +457,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				JsonTester.Read<InternetMediaType>("InvalidStringValue");
 			},
@@ -475,7 +475,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void FromJson_Int64Value_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<InternetMediaType>(123456L);
 			},
@@ -485,7 +485,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<InternetMediaType>(1234.56);
 			},
@@ -495,7 +495,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void FromJson_DateTimeValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<InternetMediaType>(new DateTime(1972, 02, 14));
 			},
@@ -709,7 +709,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = null;
@@ -723,7 +723,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = new object();

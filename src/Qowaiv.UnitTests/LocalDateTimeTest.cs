@@ -91,7 +91,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectException<FormatException>
+				Assert.Catch<FormatException>
 				(() =>
 				{
 					LocalDateTime.Parse("InvalidInput");
@@ -165,7 +165,7 @@ namespace Qowaiv.UnitTests
 		//[Test]
 		//public void Create_DateTimeMinValue_ThrowsArgumentOutOfRangeException()
 		//{
-		//	ExceptionAssert.ExpectArgumentOutOfRangeException
+		//	ExceptionAssert.CatchArgumentOutOfRangeException
 		//	(() =>
 		//	{
 		//		LocalDateTime.Create(DateTime.MinValue);
@@ -181,7 +181,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<LocalDateTime>(null, default(StreamingContext));
@@ -192,7 +192,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(LocalDateTime), new System.Runtime.Serialization.FormatterConverter());
@@ -203,7 +203,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = TestStruct;
@@ -363,7 +363,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_Null_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<LocalDateTime>();
 			},
@@ -373,7 +373,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				JsonTester.Read<LocalDateTime>("InvalidStringValue");
 			},
@@ -400,7 +400,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<LocalDateTime>(1234.56);
 			},
@@ -614,7 +614,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = null;
@@ -628,7 +628,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = new object();

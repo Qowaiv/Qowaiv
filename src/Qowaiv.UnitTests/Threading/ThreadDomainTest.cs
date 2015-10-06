@@ -20,7 +20,7 @@ namespace Qowaiv.UnitTests.Threading
 		[Test]
 		public void Register_TypeNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				ThreadDomain.Register(null, null);
 			},
@@ -29,7 +29,7 @@ namespace Qowaiv.UnitTests.Threading
 		[Test]
 		public void Register_ActionNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				ThreadDomain.Register(typeof(Int32), null);
 			},
@@ -39,7 +39,7 @@ namespace Qowaiv.UnitTests.Threading
 		[Test]
 		public void Get_NullableDecimal_ThrowsNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				ThreadDomain.Current.Get<decimal?>();
 			},
@@ -49,7 +49,7 @@ namespace Qowaiv.UnitTests.Threading
 		[Test]
 		public void Get_Object_ThrowsNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				ThreadDomain.Current.Get<Object>();
 			},
@@ -120,7 +120,7 @@ namespace Qowaiv.UnitTests.Threading
 		[Test]
 		public void Remove_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				ThreadDomain.Current.Remove(null);
 			},

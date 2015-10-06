@@ -11,7 +11,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         [Test]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
-            ExceptionAssert.ExpectArgumentNullException(() =>
+            ExceptionAssert.CatchArgumentNullException(() =>
             {
                 new XResourceFileHeader(null, null);
             },

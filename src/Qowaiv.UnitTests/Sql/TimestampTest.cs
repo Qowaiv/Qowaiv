@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Threading;
-using System.Xml.Serialization;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Qowaiv.Sql;
+using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.Sql;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Sql
 {
@@ -97,7 +95,7 @@ namespace Qowaiv.UnitTests.Sql
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectException<FormatException>
+				Assert.Catch<FormatException>
 				(() =>
 				{
 					Timestamp.Parse("InvalidInput");
@@ -145,7 +143,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void Create_Length6ByteArray_throwsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				Timestamp.Create(new byte[] { 1, 2, 3, 4, 5, 6 });
 			},
@@ -168,7 +166,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<Timestamp>(null, default(StreamingContext));
@@ -179,7 +177,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(Timestamp), new System.Runtime.Serialization.FormatterConverter());
@@ -190,7 +188,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = TestStruct;
@@ -350,7 +348,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void FromJson_Null_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<Timestamp>();
 			},
@@ -360,7 +358,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				JsonTester.Read<Timestamp>("InvalidStringValue");
 			},
@@ -396,7 +394,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void FromJson_DateTimeValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<Timestamp>(new DateTime(1972, 02, 14));
 			},
@@ -648,7 +646,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = null;
@@ -662,7 +660,7 @@ namespace Qowaiv.UnitTests.Sql
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = new object();

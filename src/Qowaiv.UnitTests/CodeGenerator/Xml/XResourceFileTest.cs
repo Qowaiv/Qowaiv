@@ -1,9 +1,8 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Qowaiv.CodeGenerator.Xml;
+using Qowaiv.UnitTests.TestTools;
 using System.Collections.Generic;
 using System.IO;
-using Qowaiv.UnitTests.TestTools;
 
 namespace Qowaiv.UnitTests.SvoGenerator.Xml
 {
@@ -13,7 +12,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         [Test]
         public void Load_NullFileThrowArgumentNullException()
         {
-            ExceptionAssert.ExpectArgumentNullException(() =>
+            ExceptionAssert.CatchArgumentNullException(() =>
             {
                 XResourceFile.Load((FileInfo)null);
             },
@@ -23,7 +22,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         [Test]
         public void Load_NullStream_ThrowArgumentNullException()
         {
-            ExceptionAssert.ExpectArgumentNullException(() =>
+            ExceptionAssert.CatchArgumentNullException(() =>
             {
                 XResourceFile.Load((Stream)null);
             },
@@ -33,7 +32,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         [Test]
         public void Save_NullFile_ThrowArgumentNullException()
         {
-            ExceptionAssert.ExpectArgumentNullException(() =>
+            ExceptionAssert.CatchArgumentNullException(() =>
             {
                 new XResourceFile().Save((FileInfo)null);
             },
@@ -43,7 +42,7 @@ namespace Qowaiv.UnitTests.SvoGenerator.Xml
         [Test]
         public void Save_NullStream_ThrowArgumentNullException()
         {
-            ExceptionAssert.ExpectArgumentNullException(() =>
+            ExceptionAssert.CatchArgumentNullException(() =>
             {
                 new XResourceFile().Save((Stream)null);
             },

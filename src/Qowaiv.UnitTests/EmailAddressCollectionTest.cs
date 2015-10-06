@@ -22,7 +22,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_NullArray_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				new EmailAddressCollection((EmailAddress[])null);
 			},
@@ -36,7 +36,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<EmailAddress>(null, default(StreamingContext));
@@ -47,7 +47,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(EmailAddress), new System.Runtime.Serialization.FormatterConverter());
@@ -58,7 +58,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = GetTestInstance();
@@ -225,7 +225,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				JsonTester.Read<EmailAddressCollection>("InvalidStringValue");
 			},
@@ -243,7 +243,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_Int64Value_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<EmailAddressCollection>(123456L);
 			},
@@ -253,7 +253,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<EmailAddressCollection>(1234.56);
 			},
@@ -263,7 +263,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DateTimeValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<EmailAddressCollection>(new DateTime(1972, 02, 14));
 			},

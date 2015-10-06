@@ -13,7 +13,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Apply_NullObject_ThrowsArugmentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				StringFormatter.Apply<object>(null, null, null, null);
 			},
@@ -23,7 +23,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Apply_StringEmptyFormat_ThrowsArugmentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				StringFormatter.Apply(new object(), String.Empty, null, null);
 			},
@@ -34,7 +34,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Apply_NullFormat_ThrowsArugmentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				StringFormatter.Apply<object>(new object(), null, null, null);
 			},
@@ -44,7 +44,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Apply_NullFormatProvider_ThrowsArugmentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				StringFormatter.Apply(Int32.MinValue, "0", null, null);
 			},
@@ -54,7 +54,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Apply_NullTokens_ThrowsArugmentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				StringFormatter.Apply(Int32.MinValue, "0", CultureInfo.InvariantCulture, null);
 			},
@@ -64,7 +64,7 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void Apply_InvalidFormat_ThrowsFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				StringFormatter.Apply(Int32.MinValue, "\\", CultureInfo.InvariantCulture, new Dictionary<char, Func<Int32, IFormatProvider, string>>());
 			},

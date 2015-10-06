@@ -10,7 +10,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void NotNull_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				Guard.NotNull<Object>(null, "testParam");
 			},
@@ -27,7 +27,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void NotNullOrEmpty_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				Guard.NotNullOrEmpty(null, "testParam");
 			},
@@ -36,7 +36,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void NotNullOrEmpty_StringEmpty_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				Guard.NotNullOrEmpty(String.Empty, "testParam");
 			},
@@ -54,7 +54,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void NotNullOrEmpty_NullArray_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException(() =>
+			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				Guard.NotNullOrEmpty((byte[])null, "testParam");
 			},
@@ -63,7 +63,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void NotNullOrEmpty_EmptyArray_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException(() =>
+			ExceptionAssert.CatchArgumentException(() =>
 			{
 				Guard.NotNullOrEmpty(new byte[0], "testParam");
 			},

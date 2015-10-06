@@ -35,7 +35,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_Y0_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(0000, 10, 4);
 			},
@@ -45,7 +45,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_Y10000_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(10000, 10, 4);
 			},
@@ -56,7 +56,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_W0_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(1980, 0, 4);
 			},
@@ -66,7 +66,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_W54_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(1980, 54, 4);
 			},
@@ -77,7 +77,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_D0_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(1980, 10, 0);
 			},
@@ -87,7 +87,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_D8_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(1980, 10, 8);
 			},
@@ -98,7 +98,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_Y9999W52D6_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(9999, 52, 6);
 			},
@@ -109,7 +109,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_Y9999W53D1_ThrowsArgumentOutofRangeException()
 		{
-			ExceptionAssert.ExpectArgumentOutOfRangeException(() =>
+			ExceptionAssert.CatchArgumentOutOfRangeException(() =>
 			{
 				new WeekDate(9999, 53, 6);
 			},
@@ -170,7 +170,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				ExceptionAssert.ExpectException<FormatException>
+				Assert.Catch<FormatException>
 				(() =>
 				{
 					WeekDate.Parse("InvalidInput");
@@ -228,7 +228,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				SerializationTest.DeserializeUsingConstructor<WeekDate>(null, default(StreamingContext));
@@ -239,7 +239,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
 		{
-			ExceptionAssert.ExpectException<SerializationException>
+			Assert.Catch<SerializationException>
 			(() =>
 			{
 				var info = new SerializationInfo(typeof(WeekDate), new System.Runtime.Serialization.FormatterConverter());
@@ -250,7 +250,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetObjectData_Null_ThrowsArgumentNullException()
 		{
-			ExceptionAssert.ExpectArgumentNullException
+			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
 				ISerializable obj = TestStruct;
@@ -410,7 +410,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_Null_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<WeekDate>();
 			},
@@ -420,7 +420,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_InvalidStringValue_AssertFormatException()
 		{
-			ExceptionAssert.ExpectException<FormatException>(() =>
+			Assert.Catch<FormatException>(() =>
 			{
 				JsonTester.Read<WeekDate>("InvalidStringValue");
 			},
@@ -438,7 +438,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_Int64Value_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<WeekDate>(123456L);
 			},
@@ -448,7 +448,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DoubleValue_AssertNotSupportedException()
 		{
-			ExceptionAssert.ExpectException<NotSupportedException>(() =>
+			Assert.Catch<NotSupportedException>(() =>
 			{
 				JsonTester.Read<WeekDate>(1234.56);
 			},
@@ -667,7 +667,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = null;
@@ -681,7 +681,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
-			ExceptionAssert.ExpectArgumentException
+			ExceptionAssert.CatchArgumentException
 			(() =>
 				{
 					object other = new object();

@@ -70,7 +70,7 @@ namespace Qowaiv
 		///<summary>Gets the symbol for a currency.</summary>
 		public string Symbol { get { return m_Value == default(String) ? "¤" : GetResourceString("Symbol", CultureInfo.InvariantCulture); } }
 
-		///<summary>Gets the number of after the decimal seperator.</summary>
+		///<summary>Gets the number of after the decimal separator.</summary>
 		public int Digits { get { return m_Value == default(String) ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture)); } }
 
 		/// <summary>Gets the start date from witch the currency exists.</summary>

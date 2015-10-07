@@ -260,7 +260,7 @@ namespace Qowaiv
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-		/// <param name="obj">An object to compair with.</param>
+		/// <param name="obj">An object to compare with.</param>
 		public override bool Equals(object obj) { return base.Equals(obj); }
 
 		/// <summary>Returns the hash code for this GUID.</summary>

@@ -99,6 +99,7 @@
     <Compile Include="PostalCodeTest.cs" />
     <Compile Include="Sql\TimestampTest.cs" />
     <Compile Include="TestTools\DateTimeAssert.cs" />
+    <Compile Include="Text\Base64Test.cs" />
     <Compile Include="Text\WildcardPatternTest.cs" />
     <Compile Include="CountryToCurrencyTest.cs" />
     <Compile Include="UuidTest.cs" />

@@ -1,0 +1,51 @@
+﻿using System;
+using System.Text.RegularExpressions;
+
+namespace Qowaiv.Text
+{
+	/// <summary> is a group of similar binary-to-text encoding schemes that
+	/// represent binary data in an ASCII string format by translating it into
+	/// a radix-64 representation. The term Base64 originates from MIME.
+	/// (RFC 1341, since made obsolete by RFC 2045) 
+	/// </summary>
+	public static class Base64
+	{
+		public static string ToString(byte[] bytes)
+		{
+			if (bytes == null || bytes.Length == 0) { return String.Empty; }
+			return Convert.ToBase64String(bytes);
+		}
+		
+		/// <summary>Tries to get the corresponding bytes of the Base64 string.</summary>
+		/// <param name="s">
+		/// The string to convert.
+		/// </param>
+		/// <param name="bytes">
+		/// The bytes represented by the Base64 string.
+		/// </param>
+		/// <returns>
+		/// True if the string is a Base64 string, otherwise false.
+		/// </returns>
+		/// <remarks>
+		/// If the conversion fails,  bytes is an empty byte array, not null.
+		/// </remarks>
+		public static bool TryGetBytes(string s, out byte[] bytes)
+		{
+			if (String.IsNullOrEmpty(s))
+			{
+				bytes = new byte[0];
+				return true;
+			}
+			try
+			{
+				bytes = Convert.FromBase64String(s);
+				return true;
+			}
+			catch 
+			{
+				bytes = new byte[0];
+				return false;
+			}
+		}
+	}
+}

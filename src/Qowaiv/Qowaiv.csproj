@@ -84,15 +84,15 @@
     <Compile Include="FileSize.cs" />
     <Compile Include="FileSizeExtensions.cs" />
     <Compile Include="Formatting\FormattingArgumentsCollection.cs" />
-	<Compile Include="Formatting\FormattingArguments.cs" />
+    <Compile Include="Formatting\FormattingArguments.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfo.cs" />
     <Compile Include="Globalization\PostalCodeCountryInfoInstances.cs" />
-	<Compile Include="Guard.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="HouseNumber.cs" />
     <Compile Include="IFormattableExtensions.cs" />
-	<Compile Include="InternationalBankAccountNumber.cs" />
+    <Compile Include="InternationalBankAccountNumber.cs" />
     <Compile Include="InternationalBankAccountNumberPatterns.cs" />
     <Compile Include="Json\IJsonSerializable.cs" />
     <Compile Include="LocalDateTime.cs" />
@@ -101,29 +101,30 @@
     <Compile Include="Percentage.cs" />
     <Compile Include="PercentageExtensions.cs" />
     <Compile Include="PostalCode.cs" />
-	<Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QowaivMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QowaivMessages.resx</DependentUpon>
-    </Compile>   
+    </Compile>
     <Compile Include="Sql\Timestamp.cs" />
     <Compile Include="SingleValueStaticOptions.cs" />
     <Compile Include="SingleValueObjectAttribute.cs" />
+    <Compile Include="Text\Base64.cs" />
     <Compile Include="Text\WildcardPattern.cs" />
     <Compile Include="Text\WildcardPatternOptions.cs" />
     <Compile Include="Threading\ThreadDomain.cs" />
     <Compile Include="Threading\ThreadExtensions.cs" />
-	<Compile Include="Unknown.cs" />
+    <Compile Include="Unknown.cs" />
     <Compile Include="Uuid.cs" />
-	<Compile Include="WeekDate.cs" />
+    <Compile Include="WeekDate.cs" />
     <Compile Include="Year.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Qowaiv.license.txt">
       <Link>Qowaiv.license.txt</Link>
     </EmbeddedResource>
-	<EmbeddedResource Include="CountryLabels.ar.resx" />
+    <EmbeddedResource Include="CountryLabels.ar.resx" />
     <EmbeddedResource Include="CountryLabels.de.resx" />
     <EmbeddedResource Include="CountryLabels.es.resx" />
     <EmbeddedResource Include="CountryLabels.fr.resx" />
@@ -136,7 +137,7 @@
     <EmbeddedResource Include="CountryLabels.zh-HK.resx" />
     <EmbeddedResource Include="CountryLabels.zh-TW.resx" />
     <EmbeddedResource Include="CountryLabels.zh.resx" />
-	<EmbeddedResource Include="CurrencyLabels.ar.resx" />
+    <EmbeddedResource Include="CurrencyLabels.ar.resx" />
     <EmbeddedResource Include="CurrencyLabels.de.resx" />
     <EmbeddedResource Include="CurrencyLabels.es.resx" />
     <EmbeddedResource Include="CurrencyLabels.fr.resx" />
@@ -149,7 +150,7 @@
     <EmbeddedResource Include="CurrencyLabels.zh-HK.resx" />
     <EmbeddedResource Include="CurrencyLabels.zh-TW.resx" />
     <EmbeddedResource Include="CurrencyLabels.zh.resx" />
-	<EmbeddedResource Include="GenderLabels.ar.resx" />
+    <EmbeddedResource Include="GenderLabels.ar.resx" />
     <EmbeddedResource Include="GenderLabels.de.resx" />
     <EmbeddedResource Include="GenderLabels.en-GB.resx" />
     <EmbeddedResource Include="GenderLabels.es.resx" />
@@ -160,14 +161,14 @@
     <EmbeddedResource Include="GenderLabels.pt.resx" />
     <EmbeddedResource Include="GenderLabels.resx" />
     <EmbeddedResource Include="GenderLabels.ru.resx" />
-	<EmbeddedResource Include="GenderLabels.zh.resx" />
+    <EmbeddedResource Include="GenderLabels.zh.resx" />
     <EmbeddedResource Include="QowaivMessages.nl.resx" />
-	<EmbeddedResource Include="QowaivMessages.resx">
+    <EmbeddedResource Include="QowaivMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>QowaivMessages.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-	<EmbeddedResource Include="UnknownLabels.ar.resx" />
+    <EmbeddedResource Include="UnknownLabels.ar.resx" />
     <EmbeddedResource Include="UnknownLabels.de.resx" />
     <EmbeddedResource Include="UnknownLabels.es.resx" />
     <EmbeddedResource Include="UnknownLabels.fr.resx" />

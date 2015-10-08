@@ -118,7 +118,7 @@ namespace Qowaiv
 		/// Notice that it does not matter what this attribute does, as long as
 		/// it is named ValidatedNotNullAttribute.
 		/// </remarks>
-		[AttributeUsage(AttributeTargets.Property)]
+		[AttributeUsage(AttributeTargets.Parameter)]
 		sealed class ValidatedNotNullAttribute : Attribute { }
 	}
 }

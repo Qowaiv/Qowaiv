@@ -50,13 +50,34 @@ namespace Qowaiv
 		public static readonly Gender NotApplicable = new Gender() { m_Value = 18 };
 
 		/// <summary>Contains not known, male, female, not applicable.</summary>
-		public static readonly ReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>() { Gender.Male, Gender.Female, Gender.NotApplicable, Gender.Unknown });
+		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+			Justification = "ReadOnlyCollection<T> is immutable.")]
+		public static readonly ReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>() 
+		{
+			Gender.Male,
+			Gender.Female,
+			Gender.NotApplicable,
+			Gender.Unknown 
+		});
 
 		/// <summary>Contains male and female.</summary>
-		public static readonly ReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>() { Gender.Male, Gender.Female });
+		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+			Justification = "ReadOnlyCollection<T> is immutable.")]
+		public static readonly ReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>() 
+		{
+			Gender.Male, 
+			Gender.Female 
+		});
 
 		/// <summary>Contains male, female, not applicable.</summary>
-		public static readonly ReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>() { Gender.Male, Gender.Female, Gender.NotApplicable });
+		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+			Justification = "ReadOnlyCollection<T> is immutable.")]
+		public static readonly ReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>() 
+		{ 
+			Gender.Male, 
+			Gender.Female, 
+			Gender.NotApplicable 
+		});
 
 		#region Properties
 
@@ -88,10 +109,10 @@ namespace Qowaiv
 		/// </param>
 		/// <returns></returns>
 		public string GetDisplayName(CultureInfo culture) { return GetResourceString("", culture); }
-	   
+
 		/// <summary>Converts the Gender to an Int32.</summary>
 		private Int32 ToInt32() { return m_Value >> 1; }
-		
+
 		/// <summary>Converts the Gender to an Int32.</summary>
 		private Int32? ToNullableInt32() { return ToNullableInt32s[m_Value]; }
 
@@ -146,13 +167,13 @@ namespace Qowaiv
 		}
 
 		#endregion
-		
+
 		#region (JSON) (De)serialization
 
 		/// <summary>Generates a Gender from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(Byte); 
+			m_Value = default(Byte);
 		}
 
 		/// <summary>Generates a Gender from a JSON string representation.</summary>
@@ -184,7 +205,7 @@ namespace Qowaiv
 		/// The JSON Date that represents the Gender.
 		/// </param>
 		void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
-		
+
 		/// <summary>Converts a Gender into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
@@ -206,7 +227,7 @@ namespace Qowaiv
 			}
 		}
 
-		 /// <summary>Returns a System.String that represents the current Gender.</summary>
+		/// <summary>Returns a System.String that represents the current Gender.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
@@ -272,12 +293,12 @@ namespace Qowaiv
 		};
 
 		#endregion
-		
+
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj){ return base.Equals(obj); }
+		public override bool Equals(object obj) { return base.Equals(obj); }
 
 		/// <summary>Returns the hash code for this Gender.</summary>
 		/// <returns>
@@ -360,7 +381,7 @@ namespace Qowaiv
 		public static bool operator >=(Gender l, Gender r) { return l.m_Value.CompareTo(r.m_Value) >= 0; }
 
 		#endregion
-	   
+
 		#region (Explicit) casting
 
 		/// <summary>Casts a Gender to a System.String.</summary>
@@ -369,7 +390,7 @@ namespace Qowaiv
 		public static explicit operator Gender(string str) { return Gender.Parse(str, CultureInfo.CurrentCulture); }
 
 		/// <summary>Casts a Gender to a System.Int32.</summary>
-		public static explicit operator Int32(Gender val) { return  val.ToInt32(); }
+		public static explicit operator Int32(Gender val) { return val.ToInt32(); }
 		/// <summary>Casts an System.Int32 to a Gender.</summary>
 		public static implicit operator Gender(Int32 val) { return Gender.Create(val); }
 
@@ -394,7 +415,7 @@ namespace Qowaiv
 		/// </exception>
 		public static Gender Parse(string s)
 		{
-		   return Parse(s, CultureInfo.CurrentCulture);
+			return Parse(s, CultureInfo.CurrentCulture);
 		}
 
 		/// <summary>Converts the string to a Gender.</summary>
@@ -522,7 +543,7 @@ namespace Qowaiv
 		public static Gender TryCreate(Int32? val)
 		{
 			Gender result;
-			if(TryCreate(val, out result))
+			if (TryCreate(val, out result))
 			{
 				return result;
 			}

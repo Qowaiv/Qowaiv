@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -120,12 +121,13 @@ namespace Qowaiv.Web.Mvc
 			}
 		}
 
-		/// <summary>The singleton instance of the modelbinder.</summary>
-		public readonly static TypeConverterModelBinder Instance = new TypeConverterModelBinder();
+		/// <summary>The singleton instance of the model binder.</summary>
+		public static TypeConverterModelBinder Instance { get { return s_Instance; } }
+		private static TypeConverterModelBinder s_Instance = new TypeConverterModelBinder();
 
 		/// <summary>Constructor.</summary>
 		/// <remarks>
-		/// Force singelton usage.
+		/// Force singleton usage.
 		/// </remarks>
 		protected TypeConverterModelBinder() { }
 

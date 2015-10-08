@@ -58,6 +58,8 @@ namespace Qowaiv
 		public static readonly Month December = new Month() { m_Value = 12 };
 
 		/// <summary>Represents all months (January till December).</summary>
+		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+			Justification = "ReadOnlyCollection<T> is immutable.")]
 		public static readonly ReadOnlyCollection<Month> All = new ReadOnlyCollection<Month>(
 			new List<Month>()
 			{

@@ -627,6 +627,10 @@ namespace Qowaiv
 		}
 
 		/// <summary>Gets a collection of all country info's.</summary>
+		[SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
+			Justification = "Those constants are the hole point of this class.")]
+		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+			Justification = "ReadOnlyCollection<T> is immutable.")]
 		public static readonly ReadOnlyCollection<Country> All = new ReadOnlyCollection<Country>(
 			ResourceManager
 				.GetString("All")

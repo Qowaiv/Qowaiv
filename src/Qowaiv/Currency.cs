@@ -571,6 +571,8 @@ namespace Qowaiv
 		/// We'd like to call this All, but because of CLS-compliance, we can not,
 		/// because ALL exists.
 		/// </remarks>
+		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+			Justification = "ReadOnlyCollection<T> is immutable.")]
 		public static readonly ReadOnlyCollection<Currency> AllCurrencies = new ReadOnlyCollection<Currency>(
 			ResourceManager
 				.GetString("All")
@@ -614,6 +616,8 @@ namespace Qowaiv
 		#region Lookup
 
 		/// <summary>Initializes the country lookup.</summary>
+		[SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
+			Justification = "Those constants are the hole point of this class.")]
 		[SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
 			Justification = "Due to generated constants.")]
 		[SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline",

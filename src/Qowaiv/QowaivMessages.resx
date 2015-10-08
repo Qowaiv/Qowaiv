@@ -144,6 +144,9 @@
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Not a valid country</value>
   </data>
+  <data name="FormatExceptionCryptographicSeed" xml:space="preserve">
+    <value>No a valid cryptographic seed</value>
+  </data>
   <data name="FormatExceptionCurrency" xml:space="preserve">
     <value>Not a valid currency</value>
   </data>

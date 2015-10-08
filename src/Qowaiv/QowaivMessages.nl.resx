@@ -123,6 +123,9 @@
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Geen geldig land</value>
   </data>
+  <data name="FormatExceptionCryptographicSeed" xml:space="preserve">
+    <value>Geen geldige cryptografische seed</value>
+  </data>
   <data name="FormatExceptionCurrency" xml:space="preserve">
     <value>Geen geldige valuta</value>
   </data>

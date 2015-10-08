@@ -43,14 +43,14 @@ namespace Qowaiv
 
 		#region Properties
 
-		/// <summary>The inner value of the GUID.</summary>
+		/// <summary>The inner value of the UUID.</summary>
 		private Guid m_Value;
 
 		#endregion
 
 		#region Methods
 
-		/// <summary>Returns true if the GUID is empty, otherwise false.</summary>
+		/// <summary>Returns true if the UUID is empty, otherwise false.</summary>
 		public bool IsEmpty() { return m_Value == default(System.Guid); }
 
 		/// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
@@ -63,7 +63,7 @@ namespace Qowaiv
 
 		#region (XML) (De)serialization
 
-		/// <summary>Initializes a new instance of GUID based on the serialization info.</summary>
+		/// <summary>Initializes a new instance of UUID based on the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		private Uuid(SerializationInfo info, StreamingContext context)
@@ -72,7 +72,7 @@ namespace Qowaiv
 			m_Value = (Guid)info.GetValue("Value", typeof(Guid));
 		}
 
-		/// <summary>Adds the underlying property of GUID to the serialization info.</summary>
+		/// <summary>Adds the underlying property of UUID to the serialization info.</summary>
 		/// <param name="info">The serialization info.</param>
 		/// <param name="context">The streaming context.</param>
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
@@ -81,15 +81,15 @@ namespace Qowaiv
 			info.AddValue("Value", m_Value);
 		}
 
-		/// <summary>Gets the xml schema to (de) xml serialize a GUID.</summary>
+		/// <summary>Gets the xml schema to (de) xml serialize a UUID.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		XmlSchema IXmlSerializable.GetSchema() { return null; }
 
-		/// <summary>Reads the GUID from an xml writer.</summary>
+		/// <summary>Reads the UUID from an xml writer.</summary>
 		/// <remarks>
-		/// Uses the string parse function of GUID.
+		/// Uses the string parse function of UUID.
 		/// </remarks>
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
@@ -99,9 +99,9 @@ namespace Qowaiv
 			m_Value = val.m_Value;
 		}
 
-		/// <summary>Writes the GUID to an xml writer.</summary>
+		/// <summary>Writes the UUID to an xml writer.</summary>
 		/// <remarks>
-		/// Uses the string representation of GUID.
+		/// Uses the string representation of UUID.
 		/// </remarks>
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
@@ -113,49 +113,41 @@ namespace Qowaiv
 
 		#region (JSON) (De)serialization
 
-		/// <summary>Generates a GUID from a JSON null object representation.</summary>
+		/// <summary>Generates a UUID from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
 			m_Value = default(Guid);
 		}
 
-		/// <summary>Generates a GUID from a JSON string representation.</summary>
+		/// <summary>Generates a UUID from a JSON string representation.</summary>
 		/// <param name="jsonString">
-		/// The JSON string that represents the GUID.
+		/// The JSON string that represents the UUID.
 		/// </param>
 		void IJsonSerializable.FromJson(String jsonString)
 		{
 			m_Value = Parse(jsonString).m_Value;
 		}
 
-		/// <summary>Generates a GUID from a JSON integer representation.</summary>
+		/// <summary>Generates a UUID from a JSON integer representation.</summary>
 		/// <param name="jsonInteger">
-		/// The JSON integer that represents the GUID.
+		/// The JSON integer that represents the UUID.
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
-		//{
-		//    m_Value = Create(jsonInteger).m_Value;
-		//}
 
-		/// <summary>Generates a GUID from a JSON number representation.</summary>
+		/// <summary>Generates a UUID from a JSON number representation.</summary>
 		/// <param name="jsonNumber">
-		/// The JSON number that represents the GUID.
+		/// The JSON number that represents the UUID.
 		/// </param>
 		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
-		//{
-		//    m_Value = Create(jsonNumber).m_Value;
-		//}
 
-		/// <summary>Generates a GUID from a JSON date representation.</summary>
+		/// <summary>Generates a UUID from a JSON date representation.</summary>
 		/// <param name="jsonDate">
-		/// The JSON Date that represents the GUID.
+		/// The JSON Date that represents the UUID.
 		/// </param>
 		void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
-		//{
-		//    m_Value = Create(jsonDate).m_Value;
-		//}
 
-		/// <summary>Converts a GUID into its JSON object representation.</summary>
+
+		/// <summary>Converts a UUID into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
 			return m_Value == default(Guid) ? null : ToString(CultureInfo.InvariantCulture);
@@ -165,17 +157,17 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current GUID for debug purposes.</summary>
+		/// <summary>Returns a System.String that represents the current UUID for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private string DebuggerDisplay { get { return ToString(); } }
 
-		/// <summary>Returns a System.String that represents the current GUID.</summary>
+		/// <summary>Returns a System.String that represents the current UUID.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current GUID.</summary>
+		/// <summary>Returns a formatted System.String that represents the current UUID.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -184,7 +176,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current GUID.</summary>
+		/// <summary>Returns a formatted System.String that represents the current UUID.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -193,7 +185,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current GUID.</summary>
+		/// <summary>Returns a formatted System.String that represents the current UUID.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -304,7 +296,7 @@ namespace Qowaiv
 		/// instance follows value.-or- value is null.
 		/// </returns>
 		/// <exception cref="System.ArgumentException">
-		/// value is not a GUID.
+		/// value is not a UUID.
 		/// </exception>
 		public int CompareTo(object obj)
 		{
@@ -315,9 +307,9 @@ namespace Qowaiv
 			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a GUID"), "obj");
 		}
 
-		/// <summary>Compares this instance with a specified GUID and indicates
+		/// <summary>Compares this instance with a specified UUID and indicates
 		/// whether this instance precedes, follows, or appears in the same position
-		/// in the sort order as the specified GUID.
+		/// in the sort order as the specified UUID.
 		/// </summary>
 		/// <param name="other">
 		/// The GUID to compare with this instance.
@@ -332,32 +324,32 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a GUID to a System.String.</summary>
+		/// <summary>Casts a UUID to a System.String.</summary>
 		public static explicit operator string(Uuid val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a GUID.</summary>
+		/// <summary>Casts a System.String to a UUID.</summary>
 		public static explicit operator Uuid(string str) { return Uuid.Parse(str); }
 
-		/// <summary>Casts a Qowaiv.GUID to a System.GUID.</summary>
+		/// <summary>Casts a Qowaiv.UUID to a System.GUID.</summary>
 		public static implicit operator Guid(Uuid val) { return val.m_Value; }
-		/// <summary>Casts a System.GUID to a Qowaiv.GUID.</summary>
+		/// <summary>Casts a System.GUID to a Qowaiv.UUID.</summary>
 		public static implicit operator Uuid(Guid val) { return new Uuid(val); }
 
 		#endregion
 
 		#region Factory methods
 
-		/// <summary>Initializes a new instance of a GUID.</summary>
-		public static Uuid NewGuid()
+		/// <summary>Initializes a new instance of a UUID.</summary>
+		public static Uuid NewUuid()
 		{
 			return new Uuid(Guid.NewGuid());
 		}
 
-		/// <summary>Converts the string to a GUID.</summary>
+		/// <summary>Converts the string to a UUID.</summary>
 		/// <param name="s">
 		/// A string containing a GUID to convert.
 		/// </param>
 		/// <returns>
-		/// A GUID.
+		/// A UUID.
 		/// </returns>
 		/// <exception cref="System.FormatException">
 		/// s is not in the correct format.
@@ -372,11 +364,11 @@ namespace Qowaiv
 			throw new FormatException(QowaivMessages.FormatExceptionQGuid);
 		}
 
-		/// <summary>Converts the string to a GUID.
+		/// <summary>Converts the string to a UUID.
 		/// A return value indicates whether the conversion succeeded.
 		/// </summary>
 		/// <param name="s">
-		/// A string containing a GUID to convert.
+		/// A string containing a UUID to convert.
 		/// </param>
 		/// <returns>
 		/// The GUID if the string was converted successfully, otherwise QGuid.Empty.
@@ -391,11 +383,11 @@ namespace Qowaiv
 			return Uuid.Empty;
 		}
 
-		/// <summary>Converts the string to a GUID.
+		/// <summary>Converts the string to a UUID.
 		/// A return value indicates whether the conversion succeeded.
 		/// </summary>
 		/// <param name="s">
-		/// A string containing a GUID to convert.
+		/// A string containing a UUID to convert.
 		/// </param>
 		/// <param name="result">
 		/// The result of the parsing.
@@ -431,7 +423,7 @@ namespace Qowaiv
 
 		#region Validation
 
-		/// <summary>Returns true if the value represents a valid GUID, otherwise false.</summary>
+		/// <summary>Returns true if the value represents a valid UUID, otherwise false.</summary>
 		public static bool IsValid(string val)
 		{
 			Guid id;

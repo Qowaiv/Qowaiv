@@ -52,7 +52,7 @@ Represents an IBAN as specified in ISO 13616.
 
 Local Date Time
 ---------------
-Explictly marked local date time. It allows the clear distinction between local 
+Explicitly marked local date time. It allows the clear distinction between local 
 and UTC-based date times.
 
 Month
@@ -61,7 +61,7 @@ Represents a month in the range [1-12].
 
 Percentage
 ----------
-Represents a percentage/per mile/per ten thousend.
+Represents a percentage/per mile/per ten thousand.
 
 Postal code
 -----------
@@ -81,6 +81,14 @@ Year
 ----
 Represents a year in the range [1-9999].
 
+Qowaiv cryptographical types
+============================ 
+
+Seed
+----
+A seed, representing random data to encrypt and decrypt data.
+
+
 Qowaiv SQL types
 ================
 
@@ -96,7 +104,7 @@ Qowaiv web types
 
 Internet media type
 -------------------
-Represents a intenet media type (also known as MIME-type and content type).
+Represents a internet media type (also known as MIME-type and content type).
 
 Qowaiv complex types
 ====================
@@ -124,13 +132,13 @@ Objects, for debugging a special debugger display is provided too, using a
 debugger display attribute.
 
 The debugger display attribute refers to (private) property with the name 
-"DebuggerDisplay", which repersents the Single Value Object as string. If 
+"DebuggerDisplay", which represents the Single Value Object as string. If 
 supported, formatted, and in case of a Empty or Unknown value with a 
 notification of that too. The outcome of the DebuggerDisplay is tested in the 
 UnitTests.
 
 Because the rendering of debugger display is handled based on the development 
-enviroment, and methods as debugger display are not supported by VB.NET, the 
+environment, and methods as debugger display are not supported by VB.NET, the 
 debugger display attribute refers to a property instead.
 
 Qowaiv Formatting
@@ -139,26 +147,26 @@ Formatting is an important part of the functionality in Qowaiv. All SVO's
 implement IFormattable, and have custom formatting. For details, see the 
 different remarks at the Tostring(string, IFormatProvider).
 
-Formatting arugments
+Formatting arguments
 --------------------
 The formatting arguments object, is a container object (struct) of the format 
-and the format provider, the two arguments reqruied for the System.Iformatable 
+and the format provider, the two arguments required for the System.Iformatable 
 ToString() method.
 
-Formatting arugments collection
+Formatting arguments collection
 -------------------------------
 This collection of formatting arguments stores them based on a type to apply 
 on. On top of that, it has a Format() method, that is an extended implementation 
 of String.Format(). The difference between these two methods is, that - when no 
 custom format is supplied at the format string - String.Format() the default 
 formatting of the object is used, where FormattingArgumentsCollection.Format() 
-uses the default specified at te formatting collection of a type (if available).
+uses the default specified at the formatting collection of a type (if available).
 
 Threading
 =========
 Because there are scenario's where you want to set typical values as a country 
 or a currency for the context of the current thread (like the culture info) 
-there is a possibilty to add these to the Qowaiv.Threading.TrheadDomain.
+there is a possibility to add these to the Qowaiv.Threading.TrheadDomain.
 
 These values can be configured (in the app settings) or can be created with a 
 creator function that can be registered. If not specified otherwise the current 

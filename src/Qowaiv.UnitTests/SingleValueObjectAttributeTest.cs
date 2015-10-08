@@ -47,6 +47,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Uuid),
 				typeof(Qowaiv.WeekDate),
 				typeof(Qowaiv.Year),
+				typeof(Qowaiv.Security.Cryptography.CryptographicSeed),
 				typeof(Qowaiv.Sql.Timestamp),
 				typeof(Qowaiv.Web.InternetMediaType)
 			};

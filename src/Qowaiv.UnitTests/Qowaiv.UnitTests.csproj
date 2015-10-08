@@ -97,6 +97,7 @@
     <Compile Include="PercentageTest.cs" />
     <Compile Include="PostalCodeCountryPatternTest.cs" />
     <Compile Include="PostalCodeTest.cs" />
+    <Compile Include="Security\Cryptography\CryptographicSeedTest.cs" />
     <Compile Include="Sql\TimestampTest.cs" />
     <Compile Include="TestTools\DateTimeAssert.cs" />
     <Compile Include="Text\Base64Test.cs" />

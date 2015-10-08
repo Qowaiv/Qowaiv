@@ -160,6 +160,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No a valid cryptographic seed.
+        /// </summary>
+        public static string FormatExceptionCryptographicSeed {
+            get {
+                return ResourceManager.GetString("FormatExceptionCryptographicSeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid currency.
         /// </summary>
         public static string FormatExceptionCurrency {

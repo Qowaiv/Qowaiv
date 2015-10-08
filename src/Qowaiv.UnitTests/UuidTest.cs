@@ -691,7 +691,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void NewGuid_None_NotEmpty()
 		{
-			Uuid actual = Uuid.NewGuid();
+			Uuid actual = Uuid.NewUuid();
 			Uuid expected = Guid.Empty;
 			Assert.AreNotEqual(expected, actual);
 		}

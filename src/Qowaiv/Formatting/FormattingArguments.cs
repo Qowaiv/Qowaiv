@@ -14,7 +14,7 @@ namespace Qowaiv.Formatting
 		/// <summary>Represents empty/not set formatting arguments.</summary>
 		public static readonly FormattingArguments None = new FormattingArguments() { m_Format = default(String), m_FormatProvider = null };
 
-		/// <summary>Initialzes a new instance of new formatformatting arguments.</summary>
+		/// <summary>Initializes a new instance of newformatting arguments.</summary>
 		/// <param name="format">
 		/// The format.
 		/// </param>
@@ -27,14 +27,14 @@ namespace Qowaiv.Formatting
 			m_FormatProvider = formatProvider;
 		}
 
-		/// <summary>Initialzes a new instance of new formatformatting arguments.</summary>
+		/// <summary>Initializes a new instance of new formatting arguments.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
 
 		public FormattingArguments(IFormatProvider formatProvider) : this(null, formatProvider) { }
 
-		/// <summary>Initialzes a new instance of new format formatting arguments.</summary>
+		/// <summary>Initializes a new instance of new formatting arguments.</summary>
 		/// <param name="format">
 		/// The format.
 		/// </param>

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
 namespace Qowaiv.Threading
@@ -13,6 +14,8 @@ namespace Qowaiv.Threading
 	public class ThreadDomain
 	{
 		/// <summary>Initializes creators.</summary>
+		[SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", 
+			Justification = "To complex for straight forward assignment.")]
 		static ThreadDomain()
 		{
 			Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
@@ -69,7 +72,7 @@ namespace Qowaiv.Threading
 
 		/// <summary>Constructor.</summary>
 		/// <remarks>
-		/// No public accesor.
+		/// No public accessor.
 		/// </remarks>
 		protected ThreadDomain()
 		{
@@ -77,7 +80,7 @@ namespace Qowaiv.Threading
 		}
 
 		/// <summary>The underlying dictionary.</summary>
-		protected Dictionary<Type, object> Values { get; set; }
+		protected Dictionary<Type, object> Values { get; private set; }
 
 		/// <summary>Gets the current value of T.</summary>
 		/// <typeparam name="T">

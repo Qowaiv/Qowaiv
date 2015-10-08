@@ -523,12 +523,14 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
+
+			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+
+			if (Qowaiv.Unknown.IsUnknown(s, culture))
 			{
 				result = Country.Unknown;
 				return true;
 			}
-			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 
 			AddCulture(culture);
 
@@ -592,9 +594,9 @@ namespace Qowaiv
 		/// <summary>Returns true if the val represents a valid Country, otherwise false.</summary>
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
-			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo)) { return false; }
-
 			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, culture)) { return false; }
+			
 			AddCulture(culture);
 
 			var str = Parsing.ToUnified(val);

@@ -9,14 +9,14 @@ using System.Web.Mvc;
 
 namespace Qowaiv.Web.Mvc
 {
-	/// <summary>A modelbinder for types with a custom type converter.</summary>
+	/// <summary>A model binder for types with a custom type converter.</summary>
 	/// <remarks>
 	/// This binder supports models that have there own TypeConverter.
 	/// 
 	/// The message of the exception thrown by there type converter in case of
 	/// failure is the error message added to the model state.
 	/// 
-	/// This binder is needed because the default modelbinder don't call
+	/// This binder is needed because the default model binder don't call
 	/// a type converter in case the input is String.Empty.
 	/// </remarks>
 	public class TypeConverterModelBinder : DefaultModelBinder
@@ -28,6 +28,8 @@ namespace Qowaiv.Web.Mvc
 		/// <remarks>
 		/// Add all types of Qowaiv that are supported by the model binder.
 		/// </remarks>
+		[SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline",
+			Justification = "To complex for straight forward assignment.")]
 		static TypeConverterModelBinder()
 		{
 			var qowaivAssembly = typeof(Qowaiv.SingleValueObjectAttribute).Assembly;
@@ -78,7 +80,7 @@ namespace Qowaiv.Web.Mvc
 			if (!TypeConverters.ContainsKey(tp))
 			{
 				var converter = TypeDescriptor.GetConverter(tp);
-				// Not the default type converter or the enum converter.
+				// Not the default type converter or the enumerator converter.
 				if (converter.GetType() != typeof(TypeConverter) &&
 					converter.GetType() != typeof(EnumConverter) &&
 					converter.CanConvertFrom(typeof(String)))
@@ -101,7 +103,7 @@ namespace Qowaiv.Web.Mvc
 		/// <summary>Gets the types that where added to the model binder.</summary>
 		public static IEnumerable<Type> Types { get { return TypeConverters.Keys; } }
 
-		/// <summary>Registers the model binder to the specfied model binder dictionary.</summary>
+		/// <summary>Registers the model binder to the specified model binder dictionary.</summary>
 		/// <param name="binders">The model binder dictionary to add to.</param>
 		/// <remarks>
 		/// Typical usage:

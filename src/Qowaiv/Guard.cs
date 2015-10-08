@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Qowaiv
@@ -35,6 +36,8 @@ namespace Qowaiv
 		/// The name of the parameter.
 		/// </param>
 		[DebuggerStepThrough]
+		[SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength",
+			Justification = "Null reference of string is tested by NotNull() already.")]
 		public static string NotNullOrEmpty(string param, string paramName)
 		{
 			NotNull(param, paramName);

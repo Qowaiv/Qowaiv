@@ -597,10 +597,10 @@ namespace Qowaiv
 		/// <summary>Returns true if the val represents a valid month, otherwise false.</summary>
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
-			AddCulture(formatProvider as CultureInfo);
+			var culture = formatProvider as CultureInfo;
+			AddCulture(culture);
 
 			var str = Parsing.ToUnified(val);
-			var culture = formatProvider as CultureInfo;
 			return
 				Pattern.IsMatch(val ?? string.Empty) ||
 				(culture != null && Parsings[culture].ContainsKey(str)) ||

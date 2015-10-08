@@ -214,11 +214,11 @@ namespace Qowaiv
 		/// <returns>
 		///  A new date whose value is the sum of the date and time represented
 		///  by this instance and the time interval represented by value.
-		///  </returns>
-		///  <exception cref="System.ArgumentOutOfRangeException">
+		/// </returns>
+		/// <exception cref="System.ArgumentOutOfRangeException">
 		///  The resulting date is less than date.MinValue or greater
 		///  than date.MaxValue.
-		///  </exception>
+		/// </exception>
 		public LocalDateTime Add(TimeSpan value)
 		{
 			return new LocalDateTime(this.Ticks + value.Ticks);
@@ -302,7 +302,7 @@ namespace Qowaiv
 		/// <param name="value">
 		///  A number of whole and fractional days. The value parameter can be negative
 		///  or positive.
-		///  </param>
+		/// </param>
 		/// <returns>
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the number of days represented by value.

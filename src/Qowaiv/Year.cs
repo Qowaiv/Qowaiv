@@ -443,13 +443,13 @@ namespace Qowaiv
 
 
 
-		///  <summary >Creates a year from a Int32. </summary >
-		///  <param name="val" >
+		/// <summary>Creates a year from a Int32. </summary >
+		/// <param name="val" >
 		/// A decimal describing a year.
-		///  </param >
-		///  <exception cref="System.FormatException" >
+		/// </param >
+		/// <exception cref="System.FormatException" >
 		/// val is not a valid year.
-		///  </exception >
+		/// </exception >
 		public static Year Create(Int32? val)
 		{
 			Year result;
@@ -460,15 +460,15 @@ namespace Qowaiv
 			throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionYear);
 		}
 
-		///  <summary >Creates a year from a Int32.
+		/// <summary>Creates a year from a Int32.
 		/// A return value indicates whether the conversion succeeded.
-		///  </summary >
-		///  <param name="val" >
+		/// </summary >
+		/// <param name="val" >
 		/// A decimal describing a year.
-		///  </param >
-		///  <returns >
+		/// </param >
+		/// <returns >
 		/// A year if the creation was successfully, otherwise Year.Empty.
-		///  </returns >
+		/// </returns >
 		public static Year TryCreate(Int32? val)
 		{
 			Year result;
@@ -479,18 +479,18 @@ namespace Qowaiv
 			return Year.Empty;
 		}
 
-		///  <summary >Creates a year from a Int32.
+		/// <summary>Creates a year from a Int32.
 		/// A return value indicates whether the creation succeeded.
-		///  </summary >
-		///  <param name="val" >
+		/// </summary >
+		/// <param name="val" >
 		/// A Int32 describing a year.
-		///  </param >
-		///  <param name="result" >
+		/// </param >
+		/// <param name="result" >
 		/// The result of the creation.
-		///  </param >
-		///  <returns >
+		/// </param >
+		/// <returns >
 		/// True if a year was created successfully, otherwise false.
-		///  </returns >
+		/// </returns >
 		public static bool TryCreate(Int32? val, out Year result)
 		{
 			result = Year.Empty;

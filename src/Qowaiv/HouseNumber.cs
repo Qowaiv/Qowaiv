@@ -460,13 +460,13 @@ namespace Qowaiv
 
 
 
-		///  <summary >Creates a house number from a Int32. </summary >
-		///  <param name="val" >
+		/// <summary>Creates a house number from a Int32. </summary >
+		/// <param name="val" >
 		/// A decimal describing a house number.
-		///  </param >
-		///  <exception cref="System.FormatException" >
+		/// </param >
+		/// <exception cref="System.FormatException" >
 		/// val is not a valid house number.
-		///  </exception >
+		/// </exception >
 		public static HouseNumber Create(Int32? val)
 		{
 			HouseNumber result;
@@ -477,15 +477,15 @@ namespace Qowaiv
 			throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionHouseNumber);
 		}
 
-		///  <summary >Creates a house number from a Int32.
+		/// <summary>Creates a house number from a Int32.
 		/// A return value indicates whether the conversion succeeded.
-		///  </summary >
-		///  <param name="val" >
+		/// </summary >
+		/// <param name="val" >
 		/// A decimal describing a house number.
-		///  </param >
-		///  <returns >
+		/// </param >
+		/// <returns >
 		/// A house number if the creation was successfully, otherwise HouseNumber.Empty.
-		///  </returns >
+		/// </returns >
 		public static HouseNumber TryCreate(Int32? val)
 		{
 			HouseNumber result;
@@ -496,18 +496,18 @@ namespace Qowaiv
 			return HouseNumber.Empty;
 		}
 
-		///  <summary >Creates a house number from a Int32.
+		/// <summary>Creates a house number from a Int32.
 		/// A return value indicates whether the creation succeeded.
-		///  </summary >
-		///  <param name="val" >
+		/// </summary >
+		/// <param name="val" >
 		/// A Int32 describing a house number.
-		///  </param >
-		///  <param name="result" >
+		/// </param >
+		/// <param name="result" >
 		/// The result of the creation.
-		///  </param >
-		///  <returns >
+		/// </param >
+		/// <returns >
 		/// True if a house number was created successfully, otherwise false.
-		///  </returns >
+		/// </returns >
 		public static bool TryCreate(Int32? val, out HouseNumber result)
 		{
 			result = HouseNumber.Empty;

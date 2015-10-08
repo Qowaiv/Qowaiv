@@ -388,7 +388,7 @@ namespace Qowaiv.Security.Cryptography
 			return false;
 		}
 		
-		/// <summary >Creates a cryptographic seed from a Byte[]. </summary >
+		/// <summary>Creates a cryptographic seed from a Byte[]. </summary >
 		/// <param name="val" >
 		/// A decimal describing a cryptographic seed.
 		/// </param >

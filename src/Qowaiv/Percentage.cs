@@ -793,16 +793,16 @@ namespace Qowaiv
 			return false;
 		}
 
-		///  <summary >Creates a Percentage from a Decimal. </summary >
-		///  <param name="val" >
+		/// <summary>Creates a Percentage from a Decimal. </summary >
+		/// <param name="val" >
 		/// A decimal describing a Percentage.
-		///  </param >
+		/// </param >
 		public static Percentage Create(Decimal val) { return new Percentage() { m_Value = val }; }
 
-		///  <summary >Creates a Percentage from a Double. </summary >
-		///  <param name="val" >
+		/// <summary>Creates a Percentage from a Double. </summary >
+		/// <param name="val" >
 		/// A decimal describing a Percentage.
-		///  </param >
+		/// </param >
 		public static Percentage Create(Double val) { return new Percentage() { m_Value = (Decimal)val }; }
 
 		#endregion

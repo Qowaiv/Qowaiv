@@ -518,13 +518,13 @@ namespace Qowaiv
 			return false;
 		}
 
-		///  <summary >Creates a month from a Byte. </summary >
-		///  <param name="val" >
+		/// <summary>Creates a month from a Byte. </summary >
+		/// <param name="val" >
 		/// A decimal describing a month.
-		///  </param >
-		///  <exception cref="System.FormatException" >
+		/// </param >
+		/// <exception cref="System.FormatException" >
 		/// val is not a valid month.
-		///  </exception >
+		/// </exception >
 		public static Month Create(Int32? val)
 		{
 			Month result;
@@ -535,15 +535,15 @@ namespace Qowaiv
 			throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionMonth);
 		}
 
-		///  <summary >Creates a month from a Byte.
+		/// <summary>Creates a month from a Byte.
 		/// A return value indicates whether the conversion succeeded.
-		///  </summary >
-		///  <param name="val" >
+		/// </summary >
+		/// <param name="val" >
 		/// A decimal describing a month.
-		///  </param >
-		///  <returns >
+		/// </param >
+		/// <returns >
 		/// A month if the creation was successfully, otherwise Month.Empty.
-		///  </returns >
+		/// </returns >
 		public static Month TryCreate(Int32? val)
 		{
 			Month result;
@@ -554,18 +554,18 @@ namespace Qowaiv
 			return Month.Empty;
 		}
 
-		///  <summary >Creates a month from a Byte.
+		/// <summary>Creates a month from a Byte.
 		/// A return value indicates whether the creation succeeded.
-		///  </summary >
-		///  <param name="val" >
+		/// </summary >
+		/// <param name="val" >
 		/// A Byte describing a month.
-		///  </param >
-		///  <param name="result" >
+		/// </param >
+		/// <param name="result" >
 		/// The result of the creation.
-		///  </param >
-		///  <returns >
+		/// </param >
+		/// <returns >
 		/// True if a month was created successfully, otherwise false.
-		///  </returns >
+		/// </returns >
 		public static bool TryCreate(Int32? val, out Month result)
 		{
 			result = Month.Empty;

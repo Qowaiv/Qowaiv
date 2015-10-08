@@ -553,10 +553,10 @@ namespace Qowaiv
 			return false;
 		}
 
-		///  <summary >Creates a week date from a date time.</summary >
-		///  <param name="val" >
+		/// <summary>Creates a week date from a date time.</summary >
+		/// <param name="val" >
 		/// A decimal describing a week date.
-		///  </param >
+		/// </param >
 		public static WeekDate Create(Date val)
 		{
 			return new WeekDate() { m_Value = val };

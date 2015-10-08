@@ -398,7 +398,7 @@ namespace Qowaiv
 		public static explicit operator int(Currency val) { return val.IsoNumericCode; }
 
 		/// <summary>Casts a System.String to a currency.</summary>
-		public static explicit operator Currency(int val) { return Currency.Empty; }
+		public static explicit operator Currency(int val) { return AllCurrencies.FirstOrDefault(c => c.IsoNumericCode == val); }
 
 		#endregion
 
@@ -533,9 +533,10 @@ namespace Qowaiv
 		/// <summary>Returns true if the val represents a valid currency, otherwise false.</summary>
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
-			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo)) { return false; }
-
 			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+
+			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, culture)) { return false; }
+			
 			AddCulture(culture);
 
 			var str = Parsing.ToUnified(val);

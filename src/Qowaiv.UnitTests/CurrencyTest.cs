@@ -30,7 +30,6 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-
 		#region Current
 
 		[Test]
@@ -70,7 +69,6 @@ namespace Qowaiv.UnitTests
 		}
 
 		#endregion
-
 
 		#region currency IsEmpty tests
 
@@ -762,6 +760,31 @@ namespace Qowaiv.UnitTests
 		{
 			var exp = TestStruct.ToString();
 			var act = (string)TestStruct;
+
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void Explicit_Int32ToCurrency_AreEqual()
+		{
+			var exp = TestStruct;
+			var act = (Currency)TestStruct.IsoCode;
+
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void Explicit_Minus3ToCurrency_CurrencyEmpty()
+		{
+			var exp = Currency.Empty;
+			var act = (Currency)(-3);
+
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void Explicit_CurrencyToInt32_AreEqual()
+		{
+			var exp = TestStruct.ToString();
+			var act = (Int32)TestStruct;
 
 			Assert.AreEqual(exp, act);
 		}

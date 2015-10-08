@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 namespace Qowaiv.Text
@@ -29,6 +30,8 @@ namespace Qowaiv.Text
 		/// <remarks>
 		/// If the conversion fails,  bytes is an empty byte array, not null.
 		/// </remarks>
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", 
+			Justification="We don't want to redo the logic of ConvertFromBase64String.")]
 		public static bool TryGetBytes(string s, out byte[] bytes)
 		{
 			if (String.IsNullOrEmpty(s))

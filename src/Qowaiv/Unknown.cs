@@ -61,9 +61,9 @@ namespace Qowaiv
 
 		/// <summary>The resource manager managing the culture based string values.</summary>
 		private static Dictionary<CultureInfo, String[]> StringValues = new Dictionary<CultureInfo, String[]>()
-        {
-            { CultureInfo.InvariantCulture, new string[]{ "?", "unknown", "not known", "notknown" } },
-        };
+		{
+			{ CultureInfo.InvariantCulture, new string[]{ "?", "unknown", "not known", "notknown" } },
+		};
 
 		/// <summary>The resource manager managing the culture based string values.</summary>
 		private static ResourceManager ResourceManager = new ResourceManager("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);

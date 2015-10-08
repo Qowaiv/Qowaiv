@@ -65,7 +65,7 @@ namespace Qowaiv
 			{
 				if (IsEmpty()) { return Country.Empty; }
 				if (IsUnknown()) { return Country.Unknown; }
-				return Country.Parse(this.CountryCode);
+				return Country.Parse(this.CountryCode, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -426,7 +426,7 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
 			{
 				result = BankIdentifierCode.Unknown;
 				return true;

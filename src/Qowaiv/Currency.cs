@@ -533,7 +533,7 @@ namespace Qowaiv
 		/// <summary>Returns true if the val represents a valid currency, otherwise false.</summary>
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
-			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val)) { return false; }
+			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo)) { return false; }
 
 			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 			AddCulture(culture);

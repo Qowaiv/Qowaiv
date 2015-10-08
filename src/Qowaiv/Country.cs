@@ -42,13 +42,15 @@ namespace Qowaiv
 
 		/// <summary>Gets the name of the country.</summary>
 		/// <remarks>
-		/// For formely countries this returns the ISO 3166-3 code.
-		/// For unkown a '?' is returned.
+		/// For countries that no longer exit, this returns the ISO 3166-3 code.
+		/// For unknown a '?' is returned.
 		/// For existing countries this returns the ISO 3166-1 code.
 		/// </remarks>
 		public string Name { get { return IsUnknown() ? "?" : m_Value ?? String.Empty; } }
 
-		/// <summary>Gets the displayname.</summary>
+		/// <summary>Gets the display name.</summary>
+		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
+			Justification = "For alignment with System.Globalization.RegionInfo.")]
 		public string DisplayName { get { return GetDisplayName(CultureInfo.CurrentCulture); } }
 
 		/// <summary>Gets the full name of the country/region in English.</summary>
@@ -111,11 +113,13 @@ namespace Qowaiv
 		public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
 
-		/// <summary>Gets the displayname for a specified culture.</summary>
+		/// <summary>Gets the display name for a specified culture.</summary>
 		/// <param name="culture">
 		/// The culture of the display name.
 		/// </param>
-		/// <returns></returns>
+		/// <returns>
+		/// Returns a localized display name.
+		/// </returns>
 		public string GetDisplayName(CultureInfo culture) { return GetResourceString("DisplayName", culture); }
 
 		/// <summary>Returns true if the country exists at the given date, otherwise false.</summary>
@@ -223,7 +227,7 @@ namespace Qowaiv
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger)
 		{
-			m_Value = Parse(jsonInteger.ToString("000")).m_Value;
+			m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture)).m_Value;
 		}
 
 		/// <summary>Generates a Country from a JSON number representation.</summary>
@@ -402,7 +406,7 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(Country other) { return String.Compare(m_Value, other.m_Value); }
+		public int CompareTo(Country other) { return String.Compare(m_Value, other.m_Value, StringComparison.InvariantCulture); }
 
 		#endregion
 
@@ -519,7 +523,7 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
 			{
 				result = Country.Unknown;
 				return true;
@@ -588,7 +592,7 @@ namespace Qowaiv
 		/// <summary>Returns true if the val represents a valid Country, otherwise false.</summary>
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
-			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val)) { return false; }
+			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo)) { return false; }
 
 			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 			AddCulture(culture);

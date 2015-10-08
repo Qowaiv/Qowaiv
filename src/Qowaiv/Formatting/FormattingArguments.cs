@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 
@@ -33,7 +34,7 @@ namespace Qowaiv.Formatting
 
 		public FormattingArguments(IFormatProvider formatProvider) : this(null, formatProvider) { }
 
-		/// <summary>Initialzes a new instance of new formatformatting arguments.</summary>
+		/// <summary>Initialzes a new instance of new format formatting arguments.</summary>
 		/// <param name="format">
 		/// The format.
 		/// </param>

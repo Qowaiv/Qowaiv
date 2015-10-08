@@ -69,7 +69,7 @@ namespace Qowaiv.CodeGenerator.Xml
 		public string Value { get; set; }
 
 		/// <summary>Represents the resource file data as debug string.</summary>
-		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get

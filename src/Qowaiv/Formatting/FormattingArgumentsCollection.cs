@@ -491,7 +491,7 @@ namespace Qowaiv.Formatting
 		#endregion
 
 		/// <summary>Returns a System.String that represents the current formatting arguments collection for debug purposes.</summary>
-		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay { get { return String.Format("FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count); } }
 	}
 }

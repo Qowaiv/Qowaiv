@@ -518,7 +518,7 @@ namespace Qowaiv
 		#region IFormattable / ToString
 
 		/// <summary>Returns a System.String that represents the current local date time for debug purposes.</summary>
-		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get { return m_Value.ToString("yyyy-MM-dd hh:mm:ss.FFF", CultureInfo.InvariantCulture); }

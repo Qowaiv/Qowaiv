@@ -1,10 +1,14 @@
 ﻿using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 // Info about the assembly.
 [assembly: AssemblyTitle("Qowaiv.Web")]
 [assembly: AssemblyProduct("Qowaiv.Web")]
 [assembly: AssemblyDescription("Qowaiv Single Value Object library extensions for Web.")]
+
+// If not specified otherwise, the resources are in USA English.
+[assembly: NeutralResourcesLanguage("en-US")]
 
 // No COM visibility.
 [assembly: ComVisible(false)]

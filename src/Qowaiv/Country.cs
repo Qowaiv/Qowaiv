@@ -670,7 +670,10 @@ namespace Qowaiv
 		#region Lookup
 
 		/// <summary>Initializes the country lookup.</summary>
-		[SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline", Justification = "Complex initialization, this approach is better understandable.")]
+		[SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
+			Justification = "Due to generated constants.")]
+		[SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline",
+			Justification = "Complex initialization, this approach is better understandable.")]
 		static Country()
 		{
 			foreach (var country in Country.All)

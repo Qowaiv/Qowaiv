@@ -14,7 +14,7 @@ namespace Qowaiv.Formatting
 		/// <summary>Represents empty/not set formatting arguments.</summary>
 		public static readonly FormattingArguments None = new FormattingArguments() { m_Format = default(String), m_FormatProvider = null };
 
-		/// <summary>Initializes a new instance of newformatting arguments.</summary>
+		/// <summary>Initializes a new instance of new formatting arguments.</summary>
 		/// <param name="format">
 		/// The format.
 		/// </param>

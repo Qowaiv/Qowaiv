@@ -98,6 +98,8 @@ namespace Qowaiv.Formatting
 		/// <remarks>
 		/// This implementation is a (tweaked) copy of the implementation of System.String.Format().
 		/// </remarks>
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", 
+			Justification = "Just a copy of the .NET code. It is as complex as it is.")]
 		public string Format(string format, params object[] args)
 		{
 			Guard.NotNull(format, "format");

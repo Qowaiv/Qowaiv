@@ -19,7 +19,7 @@ namespace Qowaiv
 		/// The name of the parameter.
 		/// </param>
 		[DebuggerStepThrough]
-		public static T NotNull<T>(T param, string paramName) where T : class
+		public static T NotNull<T>([ValidatedNotNull] T param, string paramName) where T : class
 		{
 			if (object.ReferenceEquals(param, null))
 			{
@@ -110,5 +110,15 @@ namespace Qowaiv
 			}
 			return param;
 		}
+
+		/// <summary>Marks the NotNull argument as being validated for not being null,
+		/// to satisfy the static code analysis.
+		/// </summary>
+		/// <remarks>
+		/// Notice that it does not matter what this attribute does, as long as
+		/// it is named ValidatedNotNullAttribute.
+		/// </remarks>
+		[AttributeUsage(AttributeTargets.Property)]
+		sealed class ValidatedNotNullAttribute : Attribute { }
 	}
 }

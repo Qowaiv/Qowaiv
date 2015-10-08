@@ -620,8 +620,6 @@ namespace Qowaiv.UnitTests.Sql
 			Timestamp item1 = 13245;
 			Timestamp item2 =132456;
 			Timestamp item3 = 1324589;
-			Timestamp item4 = ulong.MinValue;
-			Timestamp item5 = ulong.MaxValue;
 
 			var inp = new List<Timestamp>() { Timestamp.MinValue, item3, item2, item0, item1, Timestamp.MinValue };
 			var exp = new List<Timestamp>() { item3, item2, item1, item0, Timestamp.MinValue, Timestamp.MinValue };

@@ -36,7 +36,7 @@ namespace Qowaiv.Formatting
 		}
 
 		/// <summary>The underlying dictionary.</summary>
-		protected Dictionary<Type, FormattingArguments> dict = new Dictionary<Type, FormattingArguments>();
+		private Dictionary<Type, FormattingArguments> dict = new Dictionary<Type, FormattingArguments>();
 
 		/// <summary>Gets the default format provider of the collection.</summary>
 		public IFormatProvider FormatProvider { get; protected set; }

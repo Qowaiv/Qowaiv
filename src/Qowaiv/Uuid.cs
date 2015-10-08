@@ -25,7 +25,7 @@ namespace Qowaiv
 	/// everywhere.
 	/// </remarks>
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	// [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a GUID.")]
+	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a GUID.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
 	[TypeConverter(typeof(UuidTypeConverter))]
 	public struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Uuid>

@@ -46,20 +46,20 @@ namespace Qowaiv
 		public EmailAddressCollection() { }
 
 		/// <summary>Initiates a new collection of email addresses.</summary>
-		/// <param name="emailaddresses">
+		/// <param name="emails">
 		/// An array of email addresses.
 		/// </param>
-		public EmailAddressCollection(params EmailAddress[] emailaddresses)
-			: this((IEnumerable<EmailAddress>)emailaddresses) { }
+		public EmailAddressCollection(params EmailAddress[] emails)
+			: this((IEnumerable<EmailAddress>)emails) { }
 
 		/// <summary>Initiates a new collection of email addresses.</summary>
-		/// <param name="emailaddresses">
+		/// <param name="emails">
 		/// An enumeration of email addresses.
 		/// </param>
-		public EmailAddressCollection(IEnumerable<EmailAddress> emailaddresses)
+		public EmailAddressCollection(IEnumerable<EmailAddress> emails)
 			: this()
 		{
-			AddRange(emailaddresses);
+			AddRange(emails);
 		}
 
 		#region Methods
@@ -67,26 +67,23 @@ namespace Qowaiv
 		/// <summary>Adds an email address to the current collection and returns
 		/// a value to indicate if the email address was successfully added.
 		/// </summary>
-		/// <param name="emailaddress">
+		/// <param name="email">
 		/// The email address to add.
 		/// </param>
-		public bool Add(EmailAddress emailaddress)
+		public bool Add(EmailAddress email)
 		{
-			if (emailaddress.IsEmptyOrUnknown()) { return false; }
-			return hashset.Add(emailaddress);
+			if (email.IsEmptyOrUnknown()) { return false; }
+			return hashset.Add(email);
 		}
 
 		/// <summary>Keeps only the distinct set of email addresses in the collection.</summary>
 		/// <returns>
 		/// The current (cleaned) instance of the collection.
 		/// </returns>
-		/// <remarks>
-		/// To support fluent API, the current instance is returned.
-		/// </remarks>
-		public void AddRange(IEnumerable<EmailAddress> emailaddresses)
+		public void AddRange(IEnumerable<EmailAddress> emails)
 		{
-			Guard.NotNull(emailaddresses, "emailaddresses");
-			foreach (var emailaddress in emailaddresses) { Add(emailaddress); }
+			Guard.NotNull(emails, "emails");
+			foreach (var email in emails) { Add(email); }
 		}
 
 		#endregion
@@ -103,7 +100,7 @@ namespace Qowaiv
 
 		/// <summary>Adds an email address to the current collection.</summary>
 		[ExcludeFromCodeCoverage]
-		void ICollection<EmailAddress>.Add(EmailAddress emailaddress) { Add(emailaddress); }
+		void ICollection<EmailAddress>.Add(EmailAddress email) { Add(email); }
 
 		/// <summary>Clears all email addresses From current collection.</summary>
 		[ExcludeFromCodeCoverage]
@@ -111,7 +108,7 @@ namespace Qowaiv
 
 		/// <summary>Returns true if the collection contains the specified email address.</summary>
 		[ExcludeFromCodeCoverage]
-		public bool Contains(EmailAddress emailaddress) { return hashset.Contains(emailaddress); }
+		public bool Contains(EmailAddress email) { return hashset.Contains(email); }
 
 		/// <summary>Copies the email addresses of the collection to an
 		///  System.Array, starting at a particular System.Array index.

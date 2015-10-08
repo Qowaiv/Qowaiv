@@ -676,6 +676,8 @@ namespace Qowaiv
 		#region Lookup
 
 		/// <summary>Initializes the country lookup.</summary>
+		[SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
+			Justification = "Due to generated constants.")]
 		[SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
 			Justification = "Due to generated constants.")]
 		[SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline",

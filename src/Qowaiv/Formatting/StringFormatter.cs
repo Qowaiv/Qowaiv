@@ -5,9 +5,9 @@ using System.Text;
 namespace Qowaiv.Formatting
 {
 	/// <summary>A string formatter class.</summary>
-	public class StringFormatter
+	public static class StringFormatter
 	{
-		/// <summary>Apply a fformat string instruction on an object.</summary>
+		/// <summary>Apply a format string instruction on an object.</summary>
 		/// <typeparam name="T">
 		/// The type of the object to format.
 		/// </typeparam>

@@ -487,6 +487,8 @@ namespace Qowaiv.Formatting
 		/// this is used by IEnumerable.GetObjectData() so that it can be
 		/// changed by derived classes.
 		/// </remarks>
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
+			Justification = "Required by the interface.")]
 		protected virtual IEnumerator<KeyValuePair<Type, FormattingArguments>> GetEnumerator() { return dict.GetEnumerator(); }
 
 		/// <summary>Clears all formatting arguments in the collection.</summary>

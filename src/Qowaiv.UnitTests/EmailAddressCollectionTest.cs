@@ -3,9 +3,9 @@ using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using System;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using System.Linq;
 
 namespace Qowaiv.UnitTests
 {
@@ -26,7 +26,7 @@ namespace Qowaiv.UnitTests
 			{
 				new EmailAddressCollection((EmailAddress[])null);
 			},
-			"emailaddresses");
+			"emails");
 		}
 
 		#endregion

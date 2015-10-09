@@ -46,6 +46,7 @@ namespace Qowaiv.Web.Mvc
 		/// </param>
 		public static void AddAssembly(Assembly assembly)
 		{
+			Guard.NotNull(assembly, "assembly");
 			var tps = assembly.GetTypes()
 				.Where(tp => tp.GetCustomAttributes(typeof(SingleValueObjectAttribute), false).Any())
 				.ToArray();
@@ -61,6 +62,7 @@ namespace Qowaiv.Web.Mvc
 		/// </remarks>
 		public static void AddTypes(params Type[] tps)
 		{
+			Guard.NotNull(tps, "tps");
 			foreach (var tp in tps)
 			{
 				AddType(tp);
@@ -117,6 +119,7 @@ namespace Qowaiv.Web.Mvc
 		/// </remarks>
 		public static void RegisterForAll(ModelBinderDictionary binders)
 		{
+			Guard.NotNull(binders, "binders");
 			foreach (var tp in TypeConverters.Keys)
 			{
 				binders.Add(tp, TypeConverterModelBinder.Instance);

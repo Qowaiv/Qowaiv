@@ -110,6 +110,7 @@ namespace Qowaiv
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s, CultureInfo.InvariantCulture);
 			m_Value = val.m_Value;
@@ -122,6 +123,7 @@ namespace Qowaiv
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(ToUnformattedString());
 		}
 

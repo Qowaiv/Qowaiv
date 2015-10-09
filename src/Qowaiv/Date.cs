@@ -349,6 +349,7 @@ namespace Qowaiv
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s, CultureInfo.InvariantCulture);
 			m_Value = val.m_Value;
@@ -361,6 +362,7 @@ namespace Qowaiv
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
 		}
 
@@ -563,7 +565,7 @@ namespace Qowaiv
 		public static explicit operator Date(string str) { return Date.Parse(str, CultureInfo.CurrentCulture); }
 		/// <summary>Casts a date time to a date.</summary>
 		public static explicit operator Date(DateTime val) { return new Date(val); }
-		
+
 		/// <summary>Casts a local date time to a date.</summary>
 		public static explicit operator Date(LocalDateTime val) { return val.Date; }
 		/// <summary>Casts a week date to a date.</summary>

@@ -52,6 +52,7 @@ namespace Qowaiv.Json
 		/// </returns>
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			Guard.NotNull(reader, "reader");
 			Guard.NotNull(objectType, "objectType");
 
 			var isNullable = objectType.IsGenericType;
@@ -98,6 +99,7 @@ namespace Qowaiv.Json
 		/// </param>
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+			Guard.NotNull(writer, "writer");
 			if (value == null) { writer.WriteNull(); }
 
 			var json = (IJsonSerializable)value;

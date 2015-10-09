@@ -783,7 +783,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Explicit_CurrencyToInt32_AreEqual()
 		{
-			var exp = TestStruct.ToString();
+			var exp = TestStruct.IsoNumericCode;
 			var act = (Int32)TestStruct;
 
 			Assert.AreEqual(exp, act);

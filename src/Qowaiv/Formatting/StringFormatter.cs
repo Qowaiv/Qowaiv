@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Qowaiv.Formatting
@@ -112,6 +113,8 @@ namespace Qowaiv.Formatting
 		/// <param name="ingore">
 		/// Diacritics at the ingore, will not be changed.
 		/// </param>
+		[SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods",
+			Justification = "If the string is null, the for each loop is never reached.")]
 		public static string ToNonDiacritic(string str, string ingore = "")
 		{
 			if (String.IsNullOrEmpty(str)) { return str; }

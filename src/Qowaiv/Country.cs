@@ -130,7 +130,7 @@ namespace Qowaiv
 		{
 			return this.StartDate <= measurement && (!this.EndDate.HasValue || this.EndDate.Value >= measurement);
 		}
-		
+
 		/// <summary>Gets the active currency at the given date.</summary>
 		/// <param name="measurement">
 		/// The date of measurement.
@@ -190,6 +190,7 @@ namespace Qowaiv
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s, CultureInfo.InvariantCulture);
 			m_Value = val.m_Value;
@@ -202,6 +203,7 @@ namespace Qowaiv
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(m_Value);
 		}
 
@@ -596,7 +598,7 @@ namespace Qowaiv
 		{
 			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 			if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, culture)) { return false; }
-			
+
 			AddCulture(culture);
 
 			var str = Parsing.ToUnified(val);

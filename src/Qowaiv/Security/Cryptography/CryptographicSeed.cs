@@ -44,13 +44,13 @@ namespace Qowaiv.Security.Cryptography
 		{
 			var clone = new byte[Length];
 
-			if(Length > 0)
+			if (Length > 0)
 			{
 				Array.Copy(m_Value, clone, clone.Length);
 			}
 			return clone;
 		}
-		
+
 		#endregion
 
 		#region (XML) (De)serialization
@@ -86,6 +86,7 @@ namespace Qowaiv.Security.Cryptography
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s);
 			m_Value = val.m_Value;
@@ -98,6 +99,7 @@ namespace Qowaiv.Security.Cryptography
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(ToString());
 		}
 
@@ -122,19 +124,19 @@ namespace Qowaiv.Security.Cryptography
 		/// The JSON integer that represents the cryptographic seed.
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
-	
+
 		/// <summary>Generates a cryptographic seed from a JSON number representation.</summary>
 		/// <param name="jsonNumber">
 		/// The JSON number that represents the cryptographic seed.
 		/// </param>
 		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
-	
+
 		/// <summary>Generates a cryptographic seed from a JSON date representation.</summary>
 		/// <param name="jsonDate">
 		/// The JSON Date that represents the cryptographic seed.
 		/// </param>
 		void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
-	
+
 		/// <summary>Converts a cryptographic seed into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson() { return Length == 0 ? null : ToString(); }
 
@@ -215,7 +217,7 @@ namespace Qowaiv.Security.Cryptography
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) 
+		public override bool Equals(object obj)
 		{
 			if (object.ReferenceEquals(obj, null) || !(obj is CryptographicSeed)) { return false; }
 			return Equals((CryptographicSeed)obj);
@@ -225,7 +227,7 @@ namespace Qowaiv.Security.Cryptography
 		/// <returns>
 		/// A 32-bit signed integer hash code.
 		/// </returns>
-		public override int GetHashCode() 
+		public override int GetHashCode()
 		{
 			var hash = 0;
 			for (var i = 0; i < Length; i++)
@@ -387,15 +389,15 @@ namespace Qowaiv.Security.Cryptography
 			}
 			return false;
 		}
-		
+
 		/// <summary>Creates a cryptographic seed from a Byte[]. </summary >
 		/// <param name="val" >
 		/// A decimal describing a cryptographic seed.
 		/// </param >
 		public static CryptographicSeed Create(Byte[] val)
 		{
-			if(val == null || val.Length == 0){return CryptographicSeed.Empty;}
-			
+			if (val == null || val.Length == 0) { return CryptographicSeed.Empty; }
+
 			var bytes = new byte[val.Length];
 			Array.Copy(val, bytes, val.Length);
 

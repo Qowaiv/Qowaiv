@@ -20,7 +20,7 @@ namespace Qowaiv
 	public struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<LocalDateTime>
 	{
 		private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
-				
+
 		/// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
 		public static readonly LocalDateTime MinValue = new LocalDateTime(DateTime.MinValue);
 
@@ -156,7 +156,7 @@ namespace Qowaiv
 		/// The specified parameters evaluate to less than date.MinValue or
 		/// more than date.MaxValue.
 		/// </exception>
-		public LocalDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond) 
+		public LocalDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond)
 		{
 			m_Value = new DateTime(year, month, day, hour, minute, second, millisecond, DateTimeKind.Local);
 		}
@@ -451,6 +451,7 @@ namespace Qowaiv
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s, CultureInfo.InvariantCulture);
 			m_Value = val.m_Value;
@@ -464,11 +465,12 @@ namespace Qowaiv
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
 			//writer.WriteValue(m_Value);
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
 		}
 
 		#endregion
-		
+
 		#region (JSON) (De)serialization
 
 		/// <summary>Generates a local date time from a JSON null object representation.</summary>
@@ -497,7 +499,7 @@ namespace Qowaiv
 		/// The JSON number that represents the local date time.
 		/// </param>
 		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
-		
+
 		/// <summary>Generates a local date time from a JSON date representation.</summary>
 		/// <param name="jsonDate">
 		/// The JSON Date that represents the local date time.
@@ -524,7 +526,7 @@ namespace Qowaiv
 			get { return m_Value.ToString("yyyy-MM-dd hh:mm:ss.FFF", CultureInfo.InvariantCulture); }
 		}
 
-		 /// <summary>Returns a System.String that represents the current local date time.</summary>
+		/// <summary>Returns a System.String that represents the current local date time.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
@@ -566,12 +568,12 @@ namespace Qowaiv
 		}
 
 		#endregion
-		
+
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj){ return base.Equals(obj); }
+		public override bool Equals(object obj) { return base.Equals(obj); }
 
 		/// <summary>Returns the hash code for this local date time.</summary>
 		/// <returns>
@@ -652,7 +654,7 @@ namespace Qowaiv
 		public static bool operator >=(LocalDateTime l, LocalDateTime r) { return l.CompareTo(r) >= 0; }
 
 		#endregion
-	   
+
 		#region (Explicit) casting
 
 		/// <summary>Casts a local date time to a System.String.</summary>
@@ -665,12 +667,12 @@ namespace Qowaiv
 		public static explicit operator LocalDateTime(string str) { return LocalDateTime.Parse(str, CultureInfo.CurrentCulture); }
 		/// <summary>Casts a date time to a local date time.</summary>
 		public static implicit operator LocalDateTime(DateTime val) { return new LocalDateTime(val); }
-	
+
 		/// <summary>Casts a date to a local date time.</summary>
 		public static explicit operator LocalDateTime(Date val) { return new LocalDateTime(val); }
 		/// <summary>Casts a week date to a week date.</summary>
 		public static implicit operator LocalDateTime(WeekDate val) { return (LocalDateTime)val.Date; }
-	   
+
 		#endregion
 
 		#region Operators
@@ -841,5 +843,5 @@ namespace Qowaiv
 		}
 
 		#endregion
-	 }
+	}
 }

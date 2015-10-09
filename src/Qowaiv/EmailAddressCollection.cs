@@ -228,6 +228,7 @@ namespace Qowaiv
 		/// </remarks>
 		protected virtual void ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s, CultureInfo.InvariantCulture);
 			AddRange(val);
@@ -243,6 +244,7 @@ namespace Qowaiv
 		/// </remarks>
 		protected virtual void WriteXml(XmlWriter writer)
 		{
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(ToString(CultureInfo.InvariantCulture));
 		}
 

@@ -72,6 +72,7 @@ namespace Qowaiv.Sql
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s, CultureInfo.InvariantCulture);
 			m_Value = val.m_Value;
@@ -84,11 +85,12 @@ namespace Qowaiv.Sql
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(ToString(CultureInfo.InvariantCulture));
 		}
 
 		#endregion
-		
+
 		#region (JSON) (De)serialization
 
 		/// <summary>Generates a timestamp from a JSON null object representation.</summary>
@@ -109,7 +111,7 @@ namespace Qowaiv.Sql
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger)
 		{
-		    m_Value = Create(jsonInteger).m_Value;
+			m_Value = Create(jsonInteger).m_Value;
 		}
 
 		/// <summary>Generates a timestamp from a JSON number representation.</summary>
@@ -118,7 +120,7 @@ namespace Qowaiv.Sql
 		/// </param>
 		void IJsonSerializable.FromJson(Double jsonNumber)
 		{
-		    m_Value = Create((Int64)jsonNumber).m_Value;
+			m_Value = Create((Int64)jsonNumber).m_Value;
 		}
 
 		/// <summary>Generates a timestamp from a JSON date representation.</summary>
@@ -141,7 +143,7 @@ namespace Qowaiv.Sql
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay { get { return ToString(CultureInfo.InvariantCulture); } }
 
-		 /// <summary>Returns a System.String that represents the current timestamp.</summary>
+		/// <summary>Returns a System.String that represents the current timestamp.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
@@ -187,12 +189,12 @@ namespace Qowaiv.Sql
 		}
 
 		#endregion
-		
+
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj){ return base.Equals(obj); }
+		public override bool Equals(object obj) { return base.Equals(obj); }
 
 		/// <summary>Returns the hash code for this timestamp.</summary>
 		/// <returns>
@@ -272,7 +274,7 @@ namespace Qowaiv.Sql
 		public static bool operator >=(Timestamp l, Timestamp r) { return l.CompareTo(r) >= 0; }
 
 		#endregion
-	   
+
 		#region (Explicit) casting
 
 		/// <summary>Casts a timestamp to a System.String.</summary>
@@ -280,9 +282,9 @@ namespace Qowaiv.Sql
 		/// <summary>Casts a System.String to a timestamp.</summary>
 		public static explicit operator Timestamp(string str) { return Timestamp.Parse(str, CultureInfo.CurrentCulture); }
 
-	   
 
-		 /// <summary>Casts a timestamp to a System.Int32.</summary>
+
+		/// <summary>Casts a timestamp to a System.Int32.</summary>
 		public static explicit operator byte[](Timestamp val) { return val.ToByteArray(); }
 		/// <summary>Casts an System.Int32 to a timestamp.</summary>
 		public static explicit operator Timestamp(byte[] val) { return Timestamp.Create(val); }
@@ -314,7 +316,7 @@ namespace Qowaiv.Sql
 		/// </exception>
 		public static Timestamp Parse(string s)
 		{
-		   return Parse(s, CultureInfo.CurrentCulture);
+			return Parse(s, CultureInfo.CurrentCulture);
 		}
 
 		/// <summary>Converts the string to a timestamp.</summary>
@@ -399,9 +401,9 @@ namespace Qowaiv.Sql
 			if (string.IsNullOrEmpty(s)) { return false; }
 			if (s.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase))
 			{
-				if(UInt64.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out val))
+				if (UInt64.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out val))
 				{
-					result= Timestamp.Create(val);
+					result = Timestamp.Create(val);
 					return true;
 				}
 			}
@@ -441,7 +443,7 @@ namespace Qowaiv.Sql
 			Guard.NotNullOrEmpty(bytes, "bytes");
 			if (bytes.Length != 8) { throw new ArgumentException(QowaivMessages.ArgumentException_TimestampArrayShouldHaveSize8, "bytes"); }
 
-			return  Timestamp.Create(BitConverter.ToUInt64(bytes, 0) );
+			return Timestamp.Create(BitConverter.ToUInt64(bytes, 0));
 		}
 
 		#endregion
@@ -462,5 +464,5 @@ namespace Qowaiv.Sql
 		}
 
 		#endregion
-	 }
+	}
 }

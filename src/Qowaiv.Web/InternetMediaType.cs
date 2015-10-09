@@ -66,7 +66,7 @@ namespace Qowaiv.Web
 
 		/// <summary>Represents an unknown (but set) internet media type.</summary>
 		public static readonly InternetMediaType Unknown = new InternetMediaType() { m_Value = "application/octet-stream" };
-		
+
 		#region Properties
 
 		/// <summary>The inner value of the internet media type.</summary>
@@ -129,9 +129,9 @@ namespace Qowaiv.Web
 		/// <remarks>
 		/// This is based on a naming convension, not on actual registration.
 		/// </remarks>
-		public bool IsRegistered 
+		public bool IsRegistered
 		{
-			get 
+			get
 			{
 				return
 					TopLevelType != InternetMediaTopLevelType.None &&
@@ -189,6 +189,7 @@ namespace Qowaiv.Web
 		/// <param name="reader">An xml reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
+			Guard.NotNull(reader, "reader");
 			var s = reader.ReadElementString();
 			var val = Parse(s);
 			m_Value = val.m_Value;
@@ -201,17 +202,18 @@ namespace Qowaiv.Web
 		/// <param name="writer">An xml writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
+			Guard.NotNull(writer, "writer");
 			writer.WriteString(ToString(CultureInfo.InvariantCulture));
 		}
 
 		#endregion
-		
+
 		#region (JSON) (De)serialization
 
 		/// <summary>Generates an internet media type from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(String); 
+			m_Value = default(String);
 		}
 
 		/// <summary>Generates an internet media type from a JSON string representation.</summary>
@@ -228,19 +230,19 @@ namespace Qowaiv.Web
 		/// The JSON integer that represents the internet media type.
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
-		
+
 		/// <summary>Generates an internet media type from a JSON number representation.</summary>
 		/// <param name="jsonNumber">
 		/// The JSON number that represents the internet media type.
 		/// </param>
 		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
-		
+
 		/// <summary>Generates an internet media type from a JSON date representation.</summary>
 		/// <param name="jsonDate">
 		/// The JSON Date that represents the internet media type.
 		/// </param>
 		void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
-		
+
 		/// <summary>Converts an internet media type into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
@@ -262,7 +264,7 @@ namespace Qowaiv.Web
 			}
 		}
 
-		 /// <summary>Returns a System.String that represents the current internet media type.</summary>
+		/// <summary>Returns a System.String that represents the current internet media type.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
@@ -305,12 +307,12 @@ namespace Qowaiv.Web
 		}
 
 		#endregion
-		
+
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj){ return base.Equals(obj); }
+		public override bool Equals(object obj) { return base.Equals(obj); }
 
 		/// <summary>Returns the hash code for this internet media type.</summary>
 		/// <returns>
@@ -378,7 +380,7 @@ namespace Qowaiv.Web
 		public int CompareTo(InternetMediaType other) { return String.Compare(m_Value, other.m_Value); }
 
 		#endregion
-	   
+
 		#region (Explicit) casting
 
 		/// <summary>Casts an internet media type to a System.String.</summary>
@@ -386,7 +388,7 @@ namespace Qowaiv.Web
 		/// <summary>Casts a System.String to a internet media type.</summary>
 		public static explicit operator InternetMediaType(string str) { return InternetMediaType.Parse(str); }
 
-	   
+
 		#endregion
 
 		#region Factory methods
@@ -492,7 +494,7 @@ namespace Qowaiv.Web
 		}
 
 		#endregion
-		
+
 		#region Validation
 
 		/// <summary>Returns true if the val represents a valid internet media type, otherwise false.</summary>
@@ -506,7 +508,7 @@ namespace Qowaiv.Web
 		#region Resources
 
 		internal static ResourceManager ResourceManager = new ResourceManager("Qowaiv.Web.InternetMediaType.FromFile", typeof(InternetMediaType).Assembly);
-		
+
 		#endregion
-	 }
+	}
 }

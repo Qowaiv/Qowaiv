@@ -19,7 +19,7 @@ namespace Qowaiv
 		/// The name of the parameter.
 		/// </param>
 		[DebuggerStepThrough]
-		public static T NotNull<T>([ValidatedNotNull] T param, string paramName) where T : class
+		public static T NotNull<T>([ValidatedNotNull]T param, string paramName) where T : class
 		{
 			if (object.ReferenceEquals(param, null))
 			{
@@ -38,7 +38,7 @@ namespace Qowaiv
 		[DebuggerStepThrough]
 		[SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength",
 			Justification = "Null reference of string is tested by NotNull() already.")]
-		public static string NotNullOrEmpty(string param, string paramName)
+		public static string NotNullOrEmpty([ValidatedNotNull]string param, string paramName)
 		{
 			NotNull(param, paramName);
 			if (string.Empty.Equals(param))
@@ -56,7 +56,7 @@ namespace Qowaiv
 		/// The name of the parameter.
 		/// </param>
 		[DebuggerStepThrough]
-		public static T[] NotNullOrEmpty<T>(T[] param, string paramName)
+		public static T[] NotNullOrEmpty<T>([ValidatedNotNull]T[] param, string paramName)
 		{
 			NotNull(param, paramName);
 			if (param.Length == 0)

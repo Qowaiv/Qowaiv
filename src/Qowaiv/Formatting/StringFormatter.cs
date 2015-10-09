@@ -24,11 +24,40 @@ namespace Qowaiv.Formatting
 		/// <param name="tokens">
 		/// An dictionary with character based tokens.
 		/// </param>
-		/// <param name="escape">
-		/// The escape character, the default escape character '\'.
+		/// <returns>
+		/// An formatted string.
+		/// </returns>
+		/// <remarks>
+		/// Uses the escape character '\'.
+		/// </remarks>
+		public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
+		{
+			return Apply(obj, format, formatProvider, tokens, '\\');
+		}
+		
+		/// <summary>Apply a format string instruction on an object.</summary>
+		/// <typeparam name="T">
+		/// The type of the object to format.
+		/// </typeparam>
+		/// <param name="obj">
+		/// The object to format.
 		/// </param>
-		/// <returns></returns>
-		public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape = '\\')
+		/// <param name="format">
+		/// The format string.
+		/// </param>
+		/// <param name="formatProvider">
+		/// The format provider.
+		/// </param>
+		/// <param name="tokens">
+		/// An dictionary with character based tokens.
+		/// </param>
+		/// <param name="escape">
+		/// The escape character.
+		/// </param>
+		/// <returns>
+		/// An formatted string.
+		/// </returns>
+		public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
 		{
 			Guard.NotNull((object)obj, "obj");
 			Guard.NotNullOrEmpty(format, "format");
@@ -106,23 +135,31 @@ namespace Qowaiv.Formatting
 			return false;
 		}
 
-		/// <summary>Replaces diacrtic characters by non diacritic ones.</summary>
+		/// <summary>Replaces diacritic characters by non diacritic ones.</summary>
 		/// <param name="str">
 		/// The string to remove the diacritics from.
 		/// </param>
-		/// <param name="ingore">
-		/// Diacritics at the ingore, will not be changed.
+		public static string ToNonDiacritic(string str)
+		{
+			return ToNonDiacritic(str, String.Empty);
+		}
+		/// <summary>Replaces diacritic characters by non diacritic ones.</summary>
+		/// <param name="str">
+		/// The string to remove the diacritics from.
+		/// </param>
+		/// <param name="ignore">
+		/// Diacritics at the ignore, will not be changed.
 		/// </param>
 		[SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods",
 			Justification = "If the string is null, the for each loop is never reached.")]
-		public static string ToNonDiacritic(string str, string ingore = "")
+		public static string ToNonDiacritic(string str, string ignore)
 		{
 			if (String.IsNullOrEmpty(str)) { return str; }
 			var sb = new StringBuilder();
 
 			foreach (var ch in str)
 			{
-				if (ingore.IndexOf(ch) > -1)
+				if (ignore.IndexOf(ch) > -1)
 				{
 					sb.Append(ch);
 				}

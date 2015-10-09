@@ -15,14 +15,20 @@ namespace Qowaiv.Formatting
 		/// <summary>Initializes a new instance of a formatting arguments collection based on the current culture.</summary>
 		public FormattingArgumentsCollection() : this(CultureInfo.CurrentCulture) { }
 
-		/// <summary>Initializes a new instance of a formatting arguments collection based on the specifed format provider.</summary>
+		/// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
+		/// <param name="formatProvider">
+		/// The default format provider.
+		/// </param>
+		public FormattingArgumentsCollection(IFormatProvider formatProvider) : this(formatProvider, null) { }
+
+		/// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
 		/// <param name="formatProvider">
 		/// The default format provider.
 		/// </param>
 		/// <param name="parent">
-		/// the optional parent collection to inherrit item from.
+		/// the optional parent collection to inherit item from.
 		/// </param>
-		public FormattingArgumentsCollection(IFormatProvider formatProvider, FormattingArgumentsCollection parent = null)
+		public FormattingArgumentsCollection(IFormatProvider formatProvider, FormattingArgumentsCollection parent)
 		{
 			this.FormatProvider = Guard.NotNull(formatProvider, "formatProvider");
 

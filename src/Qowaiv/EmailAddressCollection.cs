@@ -451,6 +451,8 @@ namespace Qowaiv
 		/// <returns>
 		/// True if the string was converted successfully, otherwise false.
 		/// </returns>
+		[SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "2",
+			Justification = "result is set when called Add().")]
 		public static bool TryParse(string s, IFormatProvider formatProvider, out EmailAddressCollection result)
 		{
 			result = new EmailAddressCollection();

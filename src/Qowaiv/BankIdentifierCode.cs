@@ -452,6 +452,8 @@ namespace Qowaiv
 		}
 
 		/// <summary>Returns true if the val represents a valid BIC, otherwise false.</summary>
+		[SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+			Justification = "formatProvider is validated by Country.IsValid().")]
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
 			return Pattern.IsMatch(val ?? string.Empty) && Country.IsValid(val.Substring(4, 2), formatProvider);

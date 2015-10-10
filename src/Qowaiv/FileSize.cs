@@ -522,6 +522,8 @@ namespace Qowaiv
 			return size.ToString(decimalFormat, formatProvider) + fileSizeMarker;
 		}
 
+		[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
+			Justification = "This is not about normalization but formatting.")]
 		private string ToFormattedString(IFormatProvider formatProvider, Match match)
 		{
 			var format = match.Groups["format"].Value;
@@ -854,11 +856,11 @@ namespace Qowaiv
 
 			foreach (var marker in ShiftLookup.Keys)
 			{
-				if (input.ToLowerInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
+				if (input.ToUpperInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
 				{
 					return input.Substring(length - marker.Length - 1);
 				}
-				if (input.ToLowerInvariant().EndsWith(marker, StringComparison.Ordinal))
+				if (input.ToUpperInvariant().EndsWith(marker, StringComparison.Ordinal))
 				{
 					return input.Substring(length - marker.Length);
 				}
@@ -873,27 +875,27 @@ namespace Qowaiv
 		private static int GetShift(string fileSizeMarker)
 		{
 			if (string.IsNullOrEmpty(fileSizeMarker)) { return 0; }
-			return ShiftLookup[fileSizeMarker.ToLowerInvariant().Trim()];
+			return ShiftLookup[fileSizeMarker.ToUpperInvariant().Trim()];
 		}
 
 		private static readonly Dictionary<string, int> ShiftLookup = new Dictionary<string, int>()
 		{
-			{ "kilobyte", 10 },
-			{ "megabyte", 20 },
-			{ "gigabyte", 30 },
-			{ "terabyte", 40 },
-			{ "petabyte", 50 },
-			{ "exabyte",  60 },
+			{ "KILOBYTE", 10 },
+			{ "MEGABYTE", 20 },
+			{ "GIGABYTE", 30 },
+			{ "TERABYTE", 40 },
+			{ "PETABYTE", 50 },
+			{ "EXABYTE",  60 },
 
-			{ "kb", 10 },
-			{ "mb", 20 },
-			{ "gb", 30 },
-			{ "tb", 40 },
-			{ "pb", 50 },
-			{ "eb", 60 },
+			{ "KB", 10 },
+			{ "MB", 20 },
+			{ "GB", 30 },
+			{ "TB", 40 },
+			{ "PB", 50 },
+			{ "EB", 60 },
 
-			{ "byte", 0 },
-			{ "b", 0 },
+			{ "BYTE", 0 },
+			{ "B", 0 },
 		};
 
 	}

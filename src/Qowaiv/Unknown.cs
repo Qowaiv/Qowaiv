@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Qowaiv
 {
 	/// <summary>Helps handling the unknown status of Single Value Objects.</summary>
 	/// <remarks>
-	/// The 'unknown' case differes from the 'empty' case. Where 'empty' just means:
+	/// The 'unknown' case differences from the 'empty' case. Where 'empty' just means:
 	/// Not set (yet), this is an unset (default) value, 'unknown' means that the user
 	/// has set the value, saying, there must be some value, but I just don't know
 	/// which value it should be.
 	/// 
-	/// Note that not all scenario's that support 'empty' suppport 'unknown' too.
+	/// Note that not all scenario's that support 'empty' support 'unknown' too.
 	/// </remarks>
 	public static class Unknown
 	{
@@ -47,22 +45,27 @@ namespace Qowaiv
 			{
 				if (!StringValues.TryGetValue(c, out values))
 				{
-					values = ResourceManager.GetString("Values", c).Split(';');
+					values = ResourceManager
+						.GetString("Values", c)
+						.Split(';')
+						.Select(v=> v.ToUpper(c))
+						.ToArray();
+
 					StringValues[c] = values;
 				}
 			}
 			return
-				values.Contains(val.ToLower(c)) ||
+				values.Contains(val.ToUpper(c)) ||
 				(
 					c != CultureInfo.InvariantCulture &&
-					StringValues[CultureInfo.InvariantCulture].Contains(val.ToLowerInvariant())
+					StringValues[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant())
 				);
 		}
 
 		/// <summary>The resource manager managing the culture based string values.</summary>
 		private static Dictionary<CultureInfo, String[]> StringValues = new Dictionary<CultureInfo, String[]>()
 		{
-			{ CultureInfo.InvariantCulture, new string[]{ "?", "unknown", "not known", "notknown" } },
+			{ CultureInfo.InvariantCulture, new string[]{ "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
 		};
 
 		/// <summary>The resource manager managing the culture based string values.</summary>

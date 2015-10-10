@@ -432,6 +432,8 @@ namespace Qowaiv
 		/// <returns>
 		/// True if the string was converted successfully, otherwise false.
 		/// </returns>
+		[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
+			Justification = "Email addresses are displayed in lowercase by default.")]
 		public static bool TryParse(string s, IFormatProvider formatProvider, out EmailAddress result)
 		{
 			result = EmailAddress.Empty;

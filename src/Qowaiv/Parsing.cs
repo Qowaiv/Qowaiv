@@ -33,7 +33,7 @@ namespace Qowaiv
         /// <summary>Unifies the string.</summary>
         public static string ToUnified(string str)
         {
-            return (StringFormatter.ToNonDiacritic(str) ?? String.Empty).ToLowerInvariant().Replace(" ", "");
+            return (StringFormatter.ToNonDiacritic(str) ?? String.Empty).ToUpperInvariant().Replace(" ", "");
         }
     }
 }

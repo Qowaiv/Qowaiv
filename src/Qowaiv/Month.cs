@@ -503,7 +503,7 @@ namespace Qowaiv
 			}
 			if (Pattern.IsMatch(s))
 			{
-				result = new Month() { m_Value = System.Byte.Parse(s, formatProvider) };
+				result = new Month() { m_Value = Byte.Parse(s, formatProvider) };
 				return true;
 			}
 			else
@@ -522,13 +522,13 @@ namespace Qowaiv
 			return false;
 		}
 
-		/// <summary>Creates a month from a Byte. </summary >
+		/// <summary>Creates a month from a Byte.</summary>
 		/// <param name="val" >
 		/// A decimal describing a month.
 		/// </param >
-		/// <exception cref="System.FormatException" >
+		/// <exception cref="System.FormatException">
 		/// val is not a valid month.
-		/// </exception >
+		/// </exception>
 		public static Month Create(Int32? val)
 		{
 			Month result;
@@ -650,29 +650,29 @@ namespace Qowaiv
 			{
 				CultureInfo.InvariantCulture, new Dictionary<string, byte>()
 				{
-					{"january", 1},
-					{"february", 2},
-					{"march", 3},
-					{"april", 4},
-					{"may", 5},
-					{"june", 6},
-					{"july", 7},
-					{"august", 8},
-					{"september", 9},
-					{"october", 10},
-					{"november", 11}, 
-					{"december", 12}, 
-					{"jan", 1},
-					{"feb", 2},
-					{"mar", 3},
-					{"apr", 4},
-					{"jun", 6},
-					{"jul", 7},
-					{"aug", 8},
-					{"sep", 9},
-					{"oct", 10},
-					{"nov", 11},
-					{"dec", 12},
+					{"JANUARY", 1},
+					{"FEBRUARY", 2},
+					{"MARCH", 3},
+					{"APRIL", 4},
+					{"MAY", 5},
+					{"JUNE", 6},
+					{"JULY", 7},
+					{"AUGUST", 8},
+					{"SEPTEMBER", 9},
+					{"OCTOBER", 10},
+					{"NOVEMBER", 11}, 
+					{"DECEMBER", 12}, 
+					{"JAN", 1},
+					{"FEB", 2},
+					{"MAR", 3},
+					{"APR", 4},
+					{"JUN", 6},
+					{"JUL", 7},
+					{"AUG", 8},
+					{"SEP", 9},
+					{"OCT", 10},
+					{"NOV", 11},
+					{"DEC", 12},
 				}
 			}
 		};

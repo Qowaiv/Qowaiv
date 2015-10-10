@@ -186,12 +186,19 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Formats the IBAN without spaces..</summary>
+		/// <summary>Formats the IBAN without spaces.</summary>
 		private string ToUnformattedString()
 		{
 			if (m_Value == default(String)) { return string.Empty; }
 			if (m_Value == Unknown.m_Value) { return "?"; }
 			return m_Value;
+		}
+		/// <summary>Formats the IBAN without spaces as lowercase.</summary>
+		[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
+			Justification = "This is not about normalization but formatting.")]
+		private string ToUnformattedLowercaseString()
+		{
+			return ToUnformattedString().ToLowerInvariant();
 		}
 
 		/// <summary>Formats the IBAN with spaces.</summary>
@@ -201,6 +208,14 @@ namespace Qowaiv
 			if (m_Value == Unknown.m_Value) { return "?"; }
 			return FormattedPattern.Replace(m_Value, "$0 ");
 		}
+		/// <summary>Formats the IBAN with spaces as lowercase.</summary>
+		[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
+			Justification = "This is not about normalization but formatting.")]
+		private string ToFormattedLowercaseString()
+		{
+			return ToFormattedString().ToLowerInvariant();
+		}
+
 		private static readonly Regex FormattedPattern = new Regex(@"\w{4}(?!$)", RegexOptions.Compiled);
 
 		/// <summary>Returns a System.String that represents the current IBAN.</summary>
@@ -238,7 +253,7 @@ namespace Qowaiv
 		/// The formats:
 		/// 
 		/// u: as unformatted lowercase.
-		/// U: as unformated uppercase.
+		/// U: as unformatted uppercase.
 		/// f: as formatted lowercase.
 		/// F: as formatted uppercase.
 		/// </remarks>
@@ -259,9 +274,9 @@ namespace Qowaiv
 		/// <summary>The format token instructions.</summary>
 		private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>()
 		{
-			{ 'u', (svo, provider) => svo.ToUnformattedString().ToLowerInvariant() },
+			{ 'u', (svo, provider) => svo.ToUnformattedLowercaseString() },
 			{ 'U', (svo, provider) => svo.ToUnformattedString() },
-			{ 'f', (svo, provider) => svo.ToFormattedString().ToLowerInvariant() },
+			{ 'f', (svo, provider) => svo.ToFormattedLowercaseString() },
 			{ 'F', (svo, provider) => svo.ToFormattedString() },
 		};
 

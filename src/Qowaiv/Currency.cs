@@ -99,7 +99,7 @@ namespace Qowaiv
 		/// <summary>Returns true if the currency is empty or unknown, otherwise false.</summary>
 		public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
-		/// <summary>Gets the displayname for a specified culture.</summary>
+		/// <summary>Gets the display name for a specified culture.</summary>
 		/// <param name="culture">
 		/// The culture of the display name.
 		/// </param>
@@ -640,7 +640,7 @@ namespace Qowaiv
 		{
 			foreach (var country in Currency.AllCurrencies)
 			{
-				Parsings[CultureInfo.InvariantCulture][country.IsoCode.ToLowerInvariant()] = country.m_Value;
+				Parsings[CultureInfo.InvariantCulture][country.IsoCode.ToUpperInvariant()] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][Parsing.ToUnified(country.GetDisplayName(CultureInfo.InvariantCulture))] = country.m_Value;
 			}

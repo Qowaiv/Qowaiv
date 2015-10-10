@@ -700,14 +700,14 @@ namespace Qowaiv
 		{
 			foreach (var country in Country.All)
 			{
-				Parsings[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToLowerInvariant()] = country.m_Value;
-				Parsings[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToLowerInvariant()] = country.m_Value;
+				Parsings[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
+				Parsings[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][Parsing.ToUnified(country.GetDisplayName(CultureInfo.InvariantCulture))] = country.m_Value;
 			}
 		}
 
-		/// <summary>Adds a culture to the parsings.</summary>
+		/// <summary>Adds a culture to the parsing collections.</summary>
 		/// <param name="culture">
 		/// The culture to add.
 		/// </param>

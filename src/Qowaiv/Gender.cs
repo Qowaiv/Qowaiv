@@ -598,8 +598,8 @@ namespace Qowaiv
 			AddCulture(culture);
 
 			return
-				Parsings[culture].ContainsKey(val.ToLower(culture)) ||
-				Parsings[CultureInfo.InvariantCulture].ContainsKey(val.ToLowerInvariant());
+				Parsings[culture].ContainsKey(val.ToUpper(culture)) ||
+				Parsings[CultureInfo.InvariantCulture].ContainsKey(val.ToUpperInvariant());
 		}
 
 		/// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
@@ -689,8 +689,8 @@ namespace Qowaiv
 
 				foreach (var gender in Gender.All)
 				{
-					var longname = gender.ToString("", culture).ToLower(culture);
-					var shortname = gender.ToString("c", culture).ToLower(culture);
+					var longname = gender.ToString("", culture).ToUpper(culture);
+					var shortname = gender.ToString("c", culture).ToUpper(culture);
 
 					Parsings[culture][longname] = gender.m_Value;
 					Parsings[culture][shortname] = gender.m_Value;
@@ -710,18 +710,18 @@ namespace Qowaiv
 					{ "2", 4 },
 					{ "9", 18 },
 					{ "?", 1 },
-					{ "m", 2 },
-					{ "f", 4 },
-					{ "x", 18 },
+					{ "M", 2 },
+					{ "F", 4 },
+					{ "X", 18 },
 					{ "♂", 2 },
 					{ "♀", 4 },
-					{ "notknown", 1 },
-					{ "not known", 1 },
-					{ "unknown", 1 },
-					{ "male", 2 },
-					{ "female", 4 },
-					{ "notapplicable", 18 },
-					{ "not applicable", 18 }
+					{ "NOTKNOWN", 1 },
+					{ "NOT KNOWN", 1 },
+					{ "UNKNOWN", 1 },
+					{ "MALE", 2 },
+					{ "FEMALE", 4 },
+					{ "NOTAPPLICABLE", 18 },
+					{ "NOT APPLICABLE", 18 }
 				}
 			}
 		};

@@ -444,6 +444,8 @@ namespace Qowaiv.Web
 		/// <returns>
 		/// True if the string was converted successfully, otherwise false.
 		/// </returns>
+		[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
+			Justification = "Internet media types are represented in lowercase by default.")]
 		public static bool TryParse(string s, out InternetMediaType result)
 		{
 			result = InternetMediaType.Empty;
@@ -490,7 +492,7 @@ namespace Qowaiv.Web
 		{
 			if (string.IsNullOrEmpty(filename)) { return InternetMediaType.Empty; }
 
-			var str = ResourceManager.GetString(Path.GetExtension(filename).ToLowerInvariant());
+			var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
 			return String.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType() { m_Value = str };
 		}
 

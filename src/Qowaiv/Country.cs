@@ -669,8 +669,20 @@ namespace Qowaiv
 		/// </param>
 		internal string GetResourceString(string postfix, IFormatProvider formatProvider)
 		{
+			return GetResourceString(postfix, formatProvider as CultureInfo);
+		}
+
+		/// <summary>Get resource string.</summary>
+		/// <param name="postfix">
+		/// The prefix of the resource key.
+		/// </param>
+		/// <param name="culture">
+		/// The culture.
+		/// </param>
+		internal string GetResourceString(string postfix, CultureInfo culture)
+		{
 			if (m_Value == default(String)) { return string.Empty; }
-			return ResourceManager.GetString(m_Value + '_' + postfix, formatProvider as CultureInfo ?? CultureInfo.CurrentCulture) ?? String.Empty;
+			return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? String.Empty;
 		}
 
 		#endregion

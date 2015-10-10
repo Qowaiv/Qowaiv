@@ -203,7 +203,7 @@ namespace Qowaiv
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger)
 		{
-			m_Value = Parse(jsonInteger.ToString("000")).m_Value;
+			m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).m_Value;
 		}
 
 		/// <summary>Generates a currency from a JSON number representation.</summary>
@@ -385,7 +385,7 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(Currency other) { return String.Compare(m_Value, other.m_Value); }
+		public int CompareTo(Currency other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
 
 		#endregion
 
@@ -502,13 +502,12 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+			if (Qowaiv.Unknown.IsUnknown(s, culture))
 			{
 				result = Currency.Unknown;
 				return true;
 			}
-			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-
 			AddCulture(culture);
 
 			var str = Parsing.ToUnified(s);
@@ -642,7 +641,7 @@ namespace Qowaiv
 			foreach (var country in Currency.AllCurrencies)
 			{
 				Parsings[CultureInfo.InvariantCulture][country.IsoCode.ToLowerInvariant()] = country.m_Value;
-				Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000")] = country.m_Value;
+				Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][Parsing.ToUnified(country.GetDisplayName(CultureInfo.InvariantCulture))] = country.m_Value;
 			}
 		}

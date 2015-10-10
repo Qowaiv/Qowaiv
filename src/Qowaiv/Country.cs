@@ -229,7 +229,7 @@ namespace Qowaiv
 		/// </param>
 		void IJsonSerializable.FromJson(Int64 jsonInteger)
 		{
-			m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture)).m_Value;
+			m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).m_Value;
 		}
 
 		/// <summary>Generates a Country from a JSON number representation.</summary>
@@ -408,7 +408,7 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(Country other) { return String.Compare(m_Value, other.m_Value, StringComparison.InvariantCulture); }
+		public int CompareTo(Country other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
 
 		#endregion
 
@@ -702,7 +702,7 @@ namespace Qowaiv
 			{
 				Parsings[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToLowerInvariant()] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToLowerInvariant()] = country.m_Value;
-				Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000")] = country.m_Value;
+				Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][Parsing.ToUnified(country.GetDisplayName(CultureInfo.InvariantCulture))] = country.m_Value;
 			}
 		}

@@ -115,7 +115,14 @@ namespace Qowaiv.Formatting
 
 		/// <summary>Returns a System.String that represents the current formatting arguments for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
-		private string DebuggerDisplay { get { return string.Format("Format: '{0}', Provider: {1}", this.Format, this.FormatProvider); } }
+		private string DebuggerDisplay
+		{
+			get
+			{
+				return string.Format(CultureInfo.InvariantCulture,
+					"Format: '{0}', Provider: {1}", this.Format, this.FormatProvider);
+			}
+		}
 
 		#endregion
 

@@ -327,7 +327,7 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(EmailAddress other) { return String.Compare(m_Value, other.m_Value); }
+		public int CompareTo(EmailAddress other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
 
 		#endregion
 
@@ -439,7 +439,8 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+			if (Qowaiv.Unknown.IsUnknown(s, culture))
 			{
 				result = EmailAddress.Unknown;
 				return true;

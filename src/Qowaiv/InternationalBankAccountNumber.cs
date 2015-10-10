@@ -58,7 +58,7 @@ namespace Qowaiv
 			{
 				if (m_Value == default(String)) { return Country.Empty; }
 				if (m_Value == Unknown.m_Value) { return Country.Unknown; }
-				return Country.Parse(m_Value.Substring(0, 2));
+				return Country.Parse(m_Value.Substring(0, 2), CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -336,7 +336,7 @@ namespace Qowaiv
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(InternationalBankAccountNumber other) { return String.Compare(m_Value, other.m_Value); }
+		public int CompareTo(InternationalBankAccountNumber other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
 
 		#endregion
 
@@ -345,7 +345,7 @@ namespace Qowaiv
 		/// <summary>Casts an IBAN to a System.String.</summary>
 		public static explicit operator string(InternationalBankAccountNumber val) { return val.ToString(); }
 		/// <summary>Casts a System.String to a IBAN.</summary>
-		public static explicit operator InternationalBankAccountNumber(string str) { return InternationalBankAccountNumber.Parse(str); }
+		public static explicit operator InternationalBankAccountNumber(string str) { return InternationalBankAccountNumber.Parse(str, CultureInfo.InvariantCulture); }
 
 		#endregion
 
@@ -447,7 +447,8 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+			if (Qowaiv.Unknown.IsUnknown(s, culture))
 			{
 				result = InternationalBankAccountNumber.Unknown;
 				return true;
@@ -498,7 +499,7 @@ namespace Qowaiv
 			InternationalBankAccountNumber iban;
 			return
 				!String.IsNullOrEmpty(val) &&
-				!Qowaiv.Unknown.IsUnknown(val) &&
+				!Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo) &&
 				TryParse(val, formatProvider, out iban);
 		}
 
@@ -511,7 +512,9 @@ namespace Qowaiv
 		/// <summary>Replaces A by 11, B by 12 ect.</summary>
 		private static string AlphanumericToNumeric(Match match)
 		{
-			return AlphanumericAndNumericLookup.IndexOf(match.Value).ToString(CultureInfo.InvariantCulture);
+			return AlphanumericAndNumericLookup
+				.IndexOf(match.Value, StringComparison.Ordinal)
+				.ToString(CultureInfo.InvariantCulture);
 		}
 
 		#endregion

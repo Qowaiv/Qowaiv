@@ -854,11 +854,11 @@ namespace Qowaiv
 
 			foreach (var marker in ShiftLookup.Keys)
 			{
-				if (input.ToLowerInvariant().EndsWith(' ' + marker))
+				if (input.ToLowerInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
 				{
 					return input.Substring(length - marker.Length - 1);
 				}
-				if (input.ToLowerInvariant().EndsWith(marker))
+				if (input.ToLowerInvariant().EndsWith(marker, StringComparison.Ordinal))
 				{
 					return input.Substring(length - marker.Length);
 				}

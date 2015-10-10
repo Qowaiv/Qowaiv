@@ -839,16 +839,16 @@ namespace Qowaiv
 		{
 			if (str.Count(c => c == PercentageMark[0] || c == PerMilleMark[0] || c == PerTenThousendMark[0]) > 1) { return PercentageMarkerType.Invalid; }
 
-			if (str.EndsWith(PercentageMark)) { return PercentageMarkerType.PercentageAfter; }
-			if (str.StartsWith(PercentageMark)) { return PercentageMarkerType.PercentageBefore; }
+			if (str.EndsWith(PercentageMark, StringComparison.Ordinal)) { return PercentageMarkerType.PercentageAfter; }
+			if (str.StartsWith(PercentageMark, StringComparison.Ordinal)) { return PercentageMarkerType.PercentageBefore; }
 			if (str.Contains(PercentageMark)) { return PercentageMarkerType.Invalid; }
 
-			if (str.EndsWith(PerMilleMark)) { return PercentageMarkerType.PerMilleAfter; }
-			if (str.StartsWith(PerMilleMark)) { return PercentageMarkerType.PerMilleBefore; }
+			if (str.EndsWith(PerMilleMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerMilleAfter; }
+			if (str.StartsWith(PerMilleMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerMilleBefore; }
 			if (str.Contains(PerMilleMark)) { return PercentageMarkerType.Invalid; }
 
-			if (str.EndsWith(PerTenThousendMark)) { return PercentageMarkerType.PerTenThousendAfter; }
-			if (str.StartsWith(PerTenThousendMark)) { return PercentageMarkerType.PerTenThousendBefore; }
+			if (str.EndsWith(PerTenThousendMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerTenThousendAfter; }
+			if (str.StartsWith(PerTenThousendMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerTenThousendBefore; }
 			if (str.Contains(PerTenThousendMark)) { return PercentageMarkerType.Invalid; }
 			return PercentageMarkerType.None;
 		}

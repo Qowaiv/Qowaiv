@@ -399,7 +399,7 @@ namespace Qowaiv.Sql
 			UInt64 val;
 
 			if (string.IsNullOrEmpty(s)) { return false; }
-			if (s.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase))
+			if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
 			{
 				if (UInt64.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out val))
 				{

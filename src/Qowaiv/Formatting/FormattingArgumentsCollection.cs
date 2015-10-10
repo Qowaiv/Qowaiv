@@ -300,6 +300,8 @@ namespace Qowaiv.Formatting
 		/// <exception cref="System.ArgumentException">
 		/// An element with the same type already exists in the collection.
 		/// </exception>
+		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
+			Justification = "Right culture selected by the default constructor.")]
 		public void Add(Type type, string format) { Add(type, new FormattingArguments(format)); }
 
 		/// <summary>Adds a format provider for the specified type.</summary>
@@ -346,7 +348,7 @@ namespace Qowaiv.Formatting
 		/// The type to specify a format for.
 		/// </param>
 		/// <param name="arguments">
-		/// The formatting agruments.
+		/// The formatting arguments.
 		/// </param>
 		/// <exception cref="System.ArgumentNullException">
 		/// The type is null.
@@ -377,6 +379,8 @@ namespace Qowaiv.Formatting
 		/// <exception cref="System.NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
+		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
+			Justification = "Right culture selected by the default constructor.")]
 		public void Set(Type type, string format) { Set(type, new FormattingArguments(format)); }
 
 		/// <summary>Sets a format provider for the specified type.</summary>
@@ -501,6 +505,14 @@ namespace Qowaiv.Formatting
 
 		/// <summary>Returns a System.String that represents the current formatting arguments collection for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
-		private string DebuggerDisplay { get { return String.Format("FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count); } }
+		private string DebuggerDisplay
+		{
+			get
+			{
+				return String.Format(
+					CultureInfo.InvariantCulture,
+					"FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count);
+			}
+		}
 	}
 }

@@ -187,7 +187,7 @@ namespace Qowaiv
 			: this()
 		{
 			Guard.NotNull(info, "info");
-			AddRange(Parse(info.GetString("Value")));
+			AddRange(Parse(info.GetString("Value"), CultureInfo.InvariantCulture));
 		}
 
 		/// <summary>Adds the underlying property of email address to the serialization info.</summary>

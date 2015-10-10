@@ -447,7 +447,8 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+			if (Qowaiv.Unknown.IsUnknown(s, culture))
 			{
 				result = HouseNumber.Unknown;
 				return true;

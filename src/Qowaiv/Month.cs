@@ -495,7 +495,8 @@ namespace Qowaiv
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+			if (Qowaiv.Unknown.IsUnknown(s, culture))
 			{
 				result = Month.Unknown;
 				return true;
@@ -507,7 +508,6 @@ namespace Qowaiv
 			}
 			else
 			{
-				var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 				AddCulture(culture);
 
 				Byte m;

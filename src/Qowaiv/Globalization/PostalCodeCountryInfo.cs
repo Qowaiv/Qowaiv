@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -74,7 +75,7 @@ namespace Qowaiv.Globalization
 			{
 				return FormattingSearchPattern.Replace(postalcode, FormattingReplacePattern);
 			}
-			if (Unknown.IsUnknown(postalcode))
+			if (Unknown.IsUnknown(postalcode, CultureInfo.InvariantCulture))
 			{
 				return "?";
 			}

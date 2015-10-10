@@ -435,12 +435,13 @@ namespace @Model.Namespace
             {
                 return true;
             }
-            if (Qowaiv.Unknown.IsUnknown(s))
+            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+            if (Qowaiv.Unknown.IsUnknown(s, culture))
             {
                 result = @(Model.ClassName).Unknown;
                 return true;
             }
-            if (IsValid(s, formatProvider))
+            if (IsValid(s, culture))
             {
                 result = new @(Model.ClassName)() { m_Value = @(Model.UnderlyingType).Parse(s, formatProvider) };
                 return true;

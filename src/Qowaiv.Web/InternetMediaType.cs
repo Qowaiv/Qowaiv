@@ -136,8 +136,8 @@ namespace Qowaiv.Web
 				return
 					TopLevelType != InternetMediaTopLevelType.None &&
 					TopLevelType != InternetMediaTopLevelType.Unregistered &&
-					!Subtype.StartsWith("x-") &&
-					!Subtype.StartsWith("x.");
+					!Subtype.StartsWith("x-", StringComparison.Ordinal) &&
+					!Subtype.StartsWith("x.", StringComparison.Ordinal);
 			}
 		}
 
@@ -377,7 +377,7 @@ namespace Qowaiv.Web
 		/// A 32-bit signed integer that indicates whether this instance precedes, follows,
 		/// or appears in the same position in the sort order as the value parameter.
 		/// </returns>
-		public int CompareTo(InternetMediaType other) { return String.Compare(m_Value, other.m_Value); }
+		public int CompareTo(InternetMediaType other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
 
 		#endregion
 
@@ -451,7 +451,7 @@ namespace Qowaiv.Web
 			{
 				return true;
 			}
-			if (Qowaiv.Unknown.IsUnknown(s))
+			if (Qowaiv.Unknown.IsUnknown(s, CultureInfo.InvariantCulture))
 			{
 				result = InternetMediaType.Unknown;
 				return true;

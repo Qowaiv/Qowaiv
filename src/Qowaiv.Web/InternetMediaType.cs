@@ -116,7 +116,7 @@ namespace Qowaiv.Web
 		}
 
 		/// <summary>Gets the suffix of the internet media type.</summary>
-		[("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.Enum.TryParse<Qowaiv.Web.InternetMediaSuffixType>(System.String,System.Boolean,Qowaiv.Web.InternetMediaSuffixType@)",
+		[SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.Enum.TryParse<Qowaiv.Web.InternetMediaSuffixType>(System.String,System.Boolean,Qowaiv.Web.InternetMediaSuffixType@)",
 			Justification = "If the parsing succeeded or not, is ignored on purpose.")]
 		public InternetMediaSuffixType Suffix
 		{

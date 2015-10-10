@@ -569,7 +569,7 @@ namespace Qowaiv
 		/// </param>
 		/// <returns>
 		/// Returns a country that represents the country specified at the culture if
-		/// any, otherwise Country.Empthy.
+		/// any, otherwise Country.Empty.
 		/// </returns>
 		public static Country Create(CultureInfo culture)
 		{

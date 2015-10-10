@@ -140,6 +140,8 @@ namespace Qowaiv.Web.Mvc
 		/// <param name="controllerContext">Controller context.</param>
 		/// <param name="bindingContext">The binding context.</param>
 		/// <returns>The bound model.</returns>
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
+			Justification = "All exceptions are caught and added as errors to the model state.")]
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
 			Guard.NotNull(bindingContext, "bindingContext");

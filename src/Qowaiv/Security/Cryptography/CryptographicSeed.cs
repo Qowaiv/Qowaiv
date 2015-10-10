@@ -353,6 +353,8 @@ namespace Qowaiv.Security.Cryptography
 		/// <returns>
 		/// The cryptographic seed if the string was converted successfully, otherwise CryptographicSeed.Empty.
 		/// </returns>
+		[SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "Qowaiv.Security.Cryptography.CryptographicSeed.TryParse(System.String,Qowaiv.Security.Cryptography.CryptographicSeed@)",
+			Justification = "If the parsing succeeded or not, is ignored on purpose.")]
 		public static CryptographicSeed TryParse(string s)
 		{
 			var result = CryptographicSeed.Empty;

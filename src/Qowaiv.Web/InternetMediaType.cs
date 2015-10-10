@@ -116,6 +116,8 @@ namespace Qowaiv.Web
 		}
 
 		/// <summary>Gets the suffix of the internet media type.</summary>
+		[("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.Enum.TryParse<Qowaiv.Web.InternetMediaSuffixType>(System.String,System.Boolean,Qowaiv.Web.InternetMediaSuffixType@)",
+			Justification = "If the parsing succeeded or not, is ignored on purpose.")]
 		public InternetMediaSuffixType Suffix
 		{
 			get
@@ -127,7 +129,7 @@ namespace Qowaiv.Web
 		}
 		/// <summary>Returns true if internet media type is a registered type, otherwise false.</summary>
 		/// <remarks>
-		/// This is based on a naming convension, not on actual registration.
+		/// This is based on a naming convention, not on actual registration.
 		/// </remarks>
 		public bool IsRegistered
 		{

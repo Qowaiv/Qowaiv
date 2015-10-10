@@ -67,13 +67,13 @@ namespace Qowaiv
 		/// <summary>Adds an email address to the current collection and returns
 		/// a value to indicate if the email address was successfully added.
 		/// </summary>
-		/// <param name="email">
+		/// <param name="item">
 		/// The email address to add.
 		/// </param>
-		public bool Add(EmailAddress email)
+		public bool Add(EmailAddress item)
 		{
-			if (email.IsEmptyOrUnknown()) { return false; }
-			return hashset.Add(email);
+			if (item.IsEmptyOrUnknown()) { return false; }
+			return hashset.Add(item);
 		}
 
 		/// <summary>Keeps only the distinct set of email addresses in the collection.</summary>
@@ -108,7 +108,7 @@ namespace Qowaiv
 
 		/// <summary>Returns true if the collection contains the specified email address.</summary>
 		[ExcludeFromCodeCoverage]
-		public bool Contains(EmailAddress email) { return hashset.Contains(email); }
+		public bool Contains(EmailAddress item) { return hashset.Contains(item); }
 
 		/// <summary>Copies the email addresses of the collection to an
 		///  System.Array, starting at a particular System.Array index.

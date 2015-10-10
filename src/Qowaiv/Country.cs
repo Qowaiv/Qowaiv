@@ -613,9 +613,9 @@ namespace Qowaiv
 		/// <returns>
 		/// A list of existing countries.
 		/// </returns>
-		public static IEnumerable<Country> GetCurrent()
+		public static IEnumerable<Country> GetExisting()
 		{
-			return GetOnDate(Date.Today);
+			return GetExisting(Date.Today);
 		}
 
 		/// <summary>Gets all countries existing on the specified measurement date.</summary>
@@ -625,7 +625,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A list of existing countries.
 		/// </returns>
-		public static IEnumerable<Country> GetOnDate(Date measurement)
+		public static IEnumerable<Country> GetExisting(Date measurement)
 		{
 			return All.Where(country => country.ExistsOnDate(measurement));
 		}

@@ -85,6 +85,8 @@ namespace Qowaiv
 		private Byte m_Value;
 
 		/// <summary>Gets the display name.</summary>
+		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
+			Justification = "Property DisplayName is a shortcut for GetDisplayName(CultureInfo.CurrentCulture).")]
 		public string DisplayName { get { return GetDisplayName(CultureInfo.CurrentCulture); } }
 
 		#endregion

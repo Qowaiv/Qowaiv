@@ -1201,7 +1201,7 @@ namespace Qowaiv.UnitTests
 			var exp = 0;
 
 			// before the ISO standard was introduced.
-			var act = Country.GetOnDate(new Date(1973, 12, 31)).ToList();
+			var act = Country.GetExisting(new Date(1973, 12, 31)).ToList();
 
 			Assert.AreEqual(exp, act.Count);
 		}
@@ -1210,7 +1210,7 @@ namespace Qowaiv.UnitTests
 		public void GetCurrent_None_249()
 		{
 			var exp = 249;
-			var act = Country.GetCurrent().ToList();
+			var act = Country.GetExisting().ToList();
 
 			Assert.AreEqual(exp, act.Count);
 		}

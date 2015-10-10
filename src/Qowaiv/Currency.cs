@@ -52,7 +52,9 @@ namespace Qowaiv
 		/// <summary>Gets the name of the currency.</summary>
 		public string Name { get { return IsUnknown() ? "?" : m_Value ?? String.Empty; } }
 
-		/// <summary>Gets the displayname.</summary>
+		/// <summary>Gets the display name.</summary>
+		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
+			Justification = "Property DisplayName is a shortcut for GetDisplayName(CultureInfo.CurrentCulture).")]
 		public string DisplayName { get { return GetDisplayName(CultureInfo.CurrentCulture); } }
 
 		/// <summary>Gets the full name of the currency in English.</summary>
@@ -122,7 +124,7 @@ namespace Qowaiv
 		public IEnumerable<Country> GetCountries(Date measurement)
 		{
 			var currency = this;
-			return Country.GetOnDate(measurement)
+			return Country.GetExisting(measurement)
 				.Where(country => country.GetCurrency(measurement) == currency);
 		}
 
@@ -551,9 +553,9 @@ namespace Qowaiv
 		/// <returns>
 		/// A list of existing currencies.
 		/// </returns>
-		public static IEnumerable<Currency> GetCurrent()
+		public static IEnumerable<Currency> GetExisting()
 		{
-			return GetOnDate(Date.Today);
+			return GetExisting(Date.Today);
 		}
 
 		/// <summary>Gets all countries existing on the specified measurement date.</summary>
@@ -563,7 +565,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A list of existing countries.
 		/// </returns>
-		public static IEnumerable<Currency> GetOnDate(Date measurement)
+		public static IEnumerable<Currency> GetExisting(Date measurement)
 		{
 			return AllCurrencies.Where(currency => currency.ExistsOnDate(measurement));
 		}

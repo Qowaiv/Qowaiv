@@ -104,6 +104,8 @@ namespace Qowaiv.Formatting
 		/// <remarks>
 		/// This implementation is a (tweaked) copy of the implementation of System.String.Format().
 		/// </remarks>
+		[SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#",
+			Justification = "Follows the origin String.Format(format, args).")]
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", 
 			Justification = "Just a copy of the .NET code. It is as complex as it is.")]
 		public string Format(string format, params object[] args)
@@ -254,7 +256,7 @@ namespace Qowaiv.Formatting
 						}
 
 						// This is different from String.Format.
-						// If no format is specified, search for a prefered format in the collection.
+						// If no format is specified, search for a preferred format in the collection.
 						if (string.IsNullOrEmpty(sFmt))
 						{
 							s = ToString(formattableArg);

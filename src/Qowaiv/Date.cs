@@ -14,6 +14,8 @@ using System.Xml.Serialization;
 namespace Qowaiv
 {
 	/// <summary>Represents a Date.</summary>
+	[SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Date",
+		Justification = "This represents a date (instead of a date time), so the name is the most descriptive name possible.")]
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 	[TypeConverter(typeof(DateTypeConverter))]

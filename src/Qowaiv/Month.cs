@@ -83,9 +83,13 @@ namespace Qowaiv
 		private Byte m_Value;
 
 		/// <summary>Gets the full name of the month.</summary>
+		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
+			Justification = "Property FullName is a shortcut for GetFullName(CultureInfo.CurrentCulture).")]
 		public string FullName { get { return GetFullName(CultureInfo.CurrentCulture); } }
 
 		/// <summary>Gets the short name of the month.</summary>
+		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
+			Justification = "Property ShortName is a shortcut for GetShortName(CultureInfo.CurrentCulture).")]
 		public string ShortName { get { return GetShortName(CultureInfo.CurrentCulture); } }
 
 		#endregion

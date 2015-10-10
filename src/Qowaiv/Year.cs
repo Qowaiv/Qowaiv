@@ -521,6 +521,8 @@ namespace Qowaiv
 		}
 
 		/// <summary>Returns true if the val represents a valid year, otherwise false.</summary>
+		[SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "formatProvider",
+			Justification = "Satisfies the static Qowaiv SVO contract.")]
 		public static bool IsValid(string val, IFormatProvider formatProvider)
 		{
 			return Pattern.IsMatch(val ?? string.Empty);

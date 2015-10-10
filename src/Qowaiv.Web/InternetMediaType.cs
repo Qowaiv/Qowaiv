@@ -471,10 +471,11 @@ namespace Qowaiv.Web
 		/// <remarks>
 		/// Based on the extension of the file.
 		/// </remarks>
+		[SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters",
+			Justification = "This has no meaning for other derived classes of FileSystemInfo.")]
 		public static InternetMediaType FromFile(FileInfo file)
 		{
 			if (file == null) { return InternetMediaType.Empty; }
-
 			return FromFile(file.Name);
 		}
 

@@ -201,7 +201,7 @@ namespace Qowaiv.Security.Cryptography
 		#region IEquatable
 
 		/// <summary>Returns true if this instance and the other cryptographic seed are equal, otherwise false.</summary>
-		/// <param name="obj">An object to compare with.</param>
+		/// <param name="other">The other cryptographic seed.</param>
 		public bool Equals(CryptographicSeed other)
 		{
 			if (Length == other.Length)
@@ -394,7 +394,7 @@ namespace Qowaiv.Security.Cryptography
 
 		/// <summary>Creates a cryptographic seed from a Byte[]. </summary >
 		/// <param name="val" >
-		/// A decimal describing a cryptographic seed.
+		/// A byte array describing a cryptographic seed.
 		/// </param >
 		public static CryptographicSeed Create(Byte[] val)
 		{
@@ -407,8 +407,8 @@ namespace Qowaiv.Security.Cryptography
 		}
 
 		/// <summary>Creates a cryptographic seed from a GUID.</summary >
-		/// <param name="val" >
-		/// A decimal describing a cryptographic seed.
+		/// <param name="id" >
+		/// A GUID describing a cryptographic seed.
 		/// </param >
 		public static CryptographicSeed Create(Guid id)
 		{
@@ -416,8 +416,8 @@ namespace Qowaiv.Security.Cryptography
 		}
 
 		/// <summary>Creates a cryptographic seed from a UUID.</summary >
-		/// <param name="val" >
-		/// A decimal describing a cryptographic seed.
+		/// <param name="id" >
+		/// A UUID describing a cryptographic seed.
 		/// </param >
 		public static CryptographicSeed Create(Uuid id)
 		{

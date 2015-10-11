@@ -11,6 +11,7 @@ namespace Qowaiv.Text
 	/// </summary>
 	public static class Base64
 	{
+		/// <summary>Represents a byte array as a System.String.</summary>
 		public static string ToString(byte[] bytes)
 		{
 			if (bytes == null || bytes.Length == 0) { return String.Empty; }

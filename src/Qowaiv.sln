@@ -20,13 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Json.Newtonsoft", "Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{7D825B8F-14F7-4DD2-83DC-79217E97A866}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F84F6A6E-08FA-442F-8AE5-876E56236CBD}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
@@ -43,6 +36,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{41C15F
 		..\design\qowain logo.psd = ..\design\qowain logo.psd
 		..\design\qowain-logo_linkedin_050x050.jpg = ..\design\qowain-logo_linkedin_050x050.jpg
 		..\design\qowain-logo_linkedin_100x060.jpg = ..\design\qowain-logo_linkedin_100x060.jpg
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.cmd = ..\build.cmd
+		..\build.fsx = ..\build.fsx
+		..\build.sh = ..\build.sh
+		..\buildConfig.fsx = ..\buildConfig.fsx
+		..\downloadNuget.fsx = ..\downloadNuget.fsx
+		..\packages.config = ..\packages.config
 	EndProjectSection
 EndProject
 Global
@@ -82,5 +83,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5249CDC7-3F92-45B6-9328-627BC0C2441D} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{41C15FF1-5053-4D59-8314-B6E1CE89CDC1} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,10 @@
-﻿#################
+﻿# custom additions
+src/packages/
+src/.nuget/
+.nuget/
+test/
+
+#################
 ## Eclipse
 #################
 
@@ -213,4 +219,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-/src/packages
+nuget/packages/

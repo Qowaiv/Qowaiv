@@ -160,6 +160,7 @@
     <EmbeddedResource Include="CurrencyLabels.zh-TW.resx" />
     <EmbeddedResource Include="CurrencyLabels.zh.resx" />
     <EmbeddedResource Include="GenderLabels.ar.resx" />
+    <None Include="Qowaiv.nuspec" />
     <EmbeddedResource Include="GenderLabels.de.resx" />
     <EmbeddedResource Include="GenderLabels.en-GB.resx" />
     <EmbeddedResource Include="GenderLabels.es.resx" />

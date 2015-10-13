@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{41C15F
 		..\design\qowain logo.psd = ..\design\qowain logo.psd
 		..\design\qowain-logo_linkedin_050x050.jpg = ..\design\qowain-logo_linkedin_050x050.jpg
 		..\design\qowain-logo_linkedin_100x060.jpg = ..\design\qowain-logo_linkedin_100x060.jpg
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8}"
 	ProjectSection(SolutionItems) = preProject
 		..\build.cmd = ..\build.cmd

@@ -36,12 +36,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Shared\Qowaiv.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -163,9 +157,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="..\Shared\Qowaiv.snk">
-      <Link>Qowaiv.snk</Link>
-    </None>
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

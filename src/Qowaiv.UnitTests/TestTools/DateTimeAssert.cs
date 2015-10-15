@@ -69,7 +69,7 @@ namespace Qowaiv.UnitTests.TestTools
 		[DebuggerStepThrough]
 		public static void AreEqual(DateTime? expected, DateTime? actual, TimeSpan tolerance, string message, params object[] args)
 		{
-			Guard.NotNegative(tolerance, "tolerance");
+			if (tolerance.Ticks < 0) { throw new ArgumentOutOfRangeException("tolerance", "Should be positive."); }
 
 			if (actual.HasValue && expected.HasValue)
 			{

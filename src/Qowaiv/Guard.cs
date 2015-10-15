@@ -6,7 +6,12 @@ using System.Linq;
 namespace Qowaiv
 {
 	/// <summary>Supplies input parameter guarding.</summary>
-	public static class Guard
+	/// <remarks>
+	/// Supplying a Guard mechanism is not something that belongs in Qowaiv. So, 
+	/// although is a nice feature, we don't provide it anymore as we would have to
+	/// add methods just because the sake of being complete.
+	/// </remarks>
+	internal static class Guard
 	{
 		/// <summary>Guards the parameter if not null, otherwise throws an argument (null) exception.</summary>
 		/// <typeparam name="T">
@@ -36,8 +41,8 @@ namespace Qowaiv
 		/// The name of the parameter.
 		/// </param>
 		[DebuggerStepThrough]
-		[SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength",
-			Justification = "Null reference of string is tested by NotNull() already.")]
+		//[SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength",
+		//	Justification = "Null reference of string is tested by NotNull() already.")]
 		public static string NotNullOrEmpty([ValidatedNotNull]string param, string paramName)
 		{
 			NotNull(param, paramName);
@@ -62,23 +67,6 @@ namespace Qowaiv
 			if (param.Length == 0)
 			{
 				throw new ArgumentException(QowaivMessages.ArgumentException_EmptyArray, paramName);
-			}
-			return param;
-		}
-
-		/// <summary>Guards the parameter if the parameter is not negative, otherwise throws an argument out of range exception.</summary>
-		/// <param name="param">
-		/// The parameter to guard.
-		/// </param>
-		/// <param name="paramName">
-		/// The name of the parameter.
-		/// </param>
-		[DebuggerStepThrough]
-		public static TimeSpan NotNegative(TimeSpan param, string paramName)
-		{
-			if (param < TimeSpan.Zero)
-			{
-				throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_NotNegative, paramName);
 			}
 			return param;
 		}

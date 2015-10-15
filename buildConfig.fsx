@@ -31,7 +31,7 @@ let projectSummary = "Single Value Domain Objects"
 let projectDescription = "Qowaiv implements common, universal domain objects. These types form the base of your domain model."
 let authors = ["Corniel Nobel";]
 let mail = "qowaiv@corniel.nl"
-let version = "1.0.0.139"
+let version = "2.0.0.149"
 let commitHash = Information.getCurrentSHA1(".")
 
 //let buildTargets = environVarOrDefault "BUILDTARGETS" ""

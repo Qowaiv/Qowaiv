@@ -62,9 +62,9 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 		/// </param>
 		public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI)
 		{
-			Guard.NotNull(culture, "culture");
-			Guard.NotNull(cultureUI, "cultureUI");
-
+			if (culture == null) { throw new ArgumentNullException("culture"); }
+			if (cultureUI == null) { throw new ArgumentNullException("cultureUI"); }
+			
 			this.Previous = Thread.CurrentThread.CurrentCulture;
 			this.PreviousUI = Thread.CurrentThread.CurrentUICulture;
 

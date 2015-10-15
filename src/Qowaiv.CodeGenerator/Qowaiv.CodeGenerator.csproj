@@ -86,6 +86,7 @@
     <Compile Include="CodeDom\Razor\TemplateStream.cs" />
     <Compile Include="Generators\Svo\SvoStruct.cs" />
     <Compile Include="Generators\SvoStructGenerator.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="QowaivCodeGeneratorMessages.Designer.cs">
       <AutoGen>True</AutoGen>

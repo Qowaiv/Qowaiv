@@ -139,17 +139,19 @@ MyTarget "NuGet" (fun _ ->
     NuGet (defaultParams >> fun p -> 
                { p with Project = "Qowaiv.CodeGenerator"
                         Summary = "Code generator for Qowaiv Single Value Domain Objects"
-                        Dependencies = 
+                        Dependencies =
                             [ "ExcelLibrary", GetPackageVersion "./src/packages/" "ExcelLibrary"
-                              "log4net", GetPackageVersion "./src/packages/" "log4net" ]
+                              "log4net", GetPackageVersion "./src/packages/" "log4net"
+                              "Qowaiv", version ]
                         })
         "src/Qowaiv.CodeGenerator/Qowaiv.CodeGenerator.nuspec"
 
     NuGet (defaultParams >> fun p -> 
                { p with Project = "Qowaiv.Json.Newtonsoft"
                         Summary = "Json serialization for Qowaiv Single Value Domain Objects"
-                        Dependencies = 
-                            [ "Newtonsoft.Json", GetPackageVersion "./src/packages/" "Newtonsoft.Json" ]
+                        Dependencies =
+                            [ "Newtonsoft.Json", GetPackageVersion "./src/packages/" "Newtonsoft.Json"
+                              "Qowaiv", version ]
                         })
         "src/Qowaiv.Json.Newtonsoft/Qowaiv.Json.Newtonsoft.nuspec"
 
@@ -162,6 +164,8 @@ MyTarget "NuGet" (fun _ ->
     NuGet (defaultParams >> fun p -> 
                { p with Project = "Qowaiv.Web"
                         Summary = "Json serialization for Qowaiv Single Value Domain Objects"
+                        Dependencies =
+                            [ "Qowaiv", version ]
                         })
         "src/Qowaiv.Web/Qowaiv.Web.nuspec"
 )

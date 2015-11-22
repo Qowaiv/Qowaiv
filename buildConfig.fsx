@@ -31,7 +31,7 @@ let projectSummary = "Single Value Domain Objects"
 let projectDescription = "Qowaiv implements common, universal domain objects. These types form the base of your domain model."
 let authors = ["Corniel Nobel";]
 let mail = "qowaiv@corniel.nl"
-let version = "2.0.0.149"
+let version = "2.0.0.150"
 let commitHash = Information.getCurrentSHA1(".")
 
 //let buildTargets = environVarOrDefault "BUILDTARGETS" ""
@@ -134,7 +134,7 @@ let net40Params = {
     DefineConstants = if isMono then "NET40 MONO" else "NET40" }
 let net45Params = { 
     OutDirName = "net45"; 
-    TargetName = (if isMono then "v4.5" else "v4.5.1"); 
+    TargetName = "v4.5";
     DefineConstants = if isMono then "NET45 MONO" else "NET45" }
 
 // Documentation 

@@ -36,7 +36,6 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Currency),
 				typeof(Qowaiv.Date),
 				typeof(Qowaiv.EmailAddress),
-				typeof(Qowaiv.FileSize),
 				typeof(Qowaiv.Gender),
 				typeof(Qowaiv.HouseNumber),
 				typeof(Qowaiv.InternationalBankAccountNumber),
@@ -47,6 +46,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Uuid),
 				typeof(Qowaiv.WeekDate),
 				typeof(Qowaiv.Year),
+				typeof(Qowaiv.IO.StreamSize),
 				typeof(Qowaiv.Security.Cryptography.CryptographicSeed),
 				typeof(Qowaiv.Sql.Timestamp),
 				typeof(Qowaiv.Web.InternetMediaType)

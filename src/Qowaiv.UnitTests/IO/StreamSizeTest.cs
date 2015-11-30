@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.IO;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -11,22 +12,22 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace Qowaiv.UnitTests
+namespace Qowaiv.UnitTests.IO
 {
-	/// <summary>Tests the file size SVO.</summary>
+	/// <summary>Tests the stream size SVO.</summary>
 	[TestFixture]
-	public class FileSizeTest
+	public class StreamSizeTest
 	{
 		/// <summary>The test instance for most tests.</summary>
-		public static readonly FileSize TestStruct = 123456789;
+		public static readonly StreamSize TestStruct = 123456789;
 
-		#region file size const tests
+		#region stream size const tests
 
-		/// <summary>FileSize.Empty should be equal to the default of file size.</summary>
+		/// <summary>StreamSize.Empty should be equal to the default of stream size.</summary>
 		[Test]
 		public void Empty_None_EqualsDefault()
 		{
-			Assert.AreEqual(default(FileSize), FileSize.Zero);
+			Assert.AreEqual(default(StreamSize), StreamSize.Zero);
 		}
 
 		#endregion
@@ -37,31 +38,31 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void TyrParse_Null_IsInvalid()
 		{
-			FileSize val;
+			StreamSize val;
 			string str = null;
 
-			Assert.IsFalse(FileSize.TryParse(str, out val));
+			Assert.IsFalse(StreamSize.TryParse(str, out val));
 		}
 
 		/// <summary>TryParse string.Empty should be valid.</summary>
 		[Test]
 		public void TyrParse_StringEmpty_IsInvalid()
 		{
-			FileSize val;
+			StreamSize val;
 			string str = string.Empty;
 
-			Assert.IsFalse(FileSize.TryParse(str, out val));
+			Assert.IsFalse(StreamSize.TryParse(str, out val));
 		}
 
 		/// <summary>TryParse with specified string value should be valid.</summary>
 		[Test]
 		public void TyrParse_StringValue_IsValid()
 		{
-			FileSize val;
+			StreamSize val;
 
 			string str = "17kb";
 
-			Assert.IsTrue(FileSize.TryParse(str, out val), "Valid");
+			Assert.IsTrue(StreamSize.TryParse(str, out val), "Valid");
 			Assert.AreEqual("17408 byte", val.ToString(), "Value");
 		}
 
@@ -73,9 +74,9 @@ namespace Qowaiv.UnitTests
 				Assert.Catch<FormatException>
 				(() =>
 				{
-					FileSize.Parse("InvalidInput");
+					StreamSize.Parse("InvalidInput");
 				},
-				"Not a valid file size");
+				"Not a valid stream size");
 			}
 		}
 
@@ -85,7 +86,7 @@ namespace Qowaiv.UnitTests
 			using (new CultureInfoScope("en-GB"))
 			{
 				var exp = TestStruct;
-				var act = FileSize.TryParse(exp.ToString());
+				var act = StreamSize.TryParse(exp.ToString());
 
 				Assert.AreEqual(exp, act);
 			}
@@ -96,8 +97,8 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				var exp = default(FileSize);
-				var act = FileSize.TryParse("InvalidInput");
+				var exp = default(StreamSize);
+				var act = StreamSize.TryParse("InvalidInput");
 
 				Assert.AreEqual(exp, act);
 			}
@@ -112,7 +113,7 @@ namespace Qowaiv.UnitTests
 			ExceptionAssert.CatchArgumentNullException
 			(() =>
 			{
-				SerializationTest.DeserializeUsingConstructor<FileSize>(null, default(StreamingContext));
+				SerializationTest.DeserializeUsingConstructor<StreamSize>(null, default(StreamingContext));
 			},
 			"info");
 		}
@@ -123,8 +124,8 @@ namespace Qowaiv.UnitTests
 			Assert.Catch<SerializationException>
 			(() =>
 			{
-				var info = new SerializationInfo(typeof(FileSize), new System.Runtime.Serialization.FormatterConverter());
-				SerializationTest.DeserializeUsingConstructor<FileSize>(info, default(StreamingContext));
+				var info = new SerializationInfo(typeof(StreamSize), new System.Runtime.Serialization.FormatterConverter());
+				SerializationTest.DeserializeUsingConstructor<StreamSize>(info, default(StreamingContext));
 			});
 		}
 
@@ -144,7 +145,7 @@ namespace Qowaiv.UnitTests
 		public void GetObjectData_SerializationInfo_AreEqual()
 		{
 			ISerializable obj = TestStruct;
-			var info = new SerializationInfo(typeof(FileSize), new System.Runtime.Serialization.FormatterConverter());
+			var info = new SerializationInfo(typeof(StreamSize), new System.Runtime.Serialization.FormatterConverter());
 			obj.GetObjectData(info, default(StreamingContext));
 
 			Assert.AreEqual((Int64)123456789, info.GetInt64("Value"));
@@ -153,41 +154,41 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void SerializeDeserialize_TestStruct_AreEqual()
 		{
-			var input = FileSizeTest.TestStruct;
-			var exp = FileSizeTest.TestStruct;
+			var input = StreamSizeTest.TestStruct;
+			var exp = StreamSizeTest.TestStruct;
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void DataContractSerializeDeserialize_TestStruct_AreEqual()
 		{
-			var input = FileSizeTest.TestStruct;
-			var exp = FileSizeTest.TestStruct;
+			var input = StreamSizeTest.TestStruct;
+			var exp = StreamSizeTest.TestStruct;
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void XmlSerializeDeserialize_TestStruct_AreEqual()
 		{
-			var input = FileSizeTest.TestStruct;
-			var exp = FileSizeTest.TestStruct;
+			var input = StreamSizeTest.TestStruct;
+			var exp = StreamSizeTest.TestStruct;
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp, act);
 		}
 
 		[Test]
-		public void SerializeDeserialize_FileSizeSerializeObject_AreEqual()
+		public void SerializeDeserialize_StreamSizeSerializeObject_AreEqual()
 		{
-			var input = new FileSizeSerializeObject()
+			var input = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
-			var exp = new FileSizeSerializeObject()
+			var exp = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.SerializeDeserialize(input);
@@ -196,18 +197,18 @@ namespace Qowaiv.UnitTests
 			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
-		public void XmlSerializeDeserialize_FileSizeSerializeObject_AreEqual()
+		public void XmlSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
 		{
-			var input = new FileSizeSerializeObject()
+			var input = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
-			var exp = new FileSizeSerializeObject()
+			var exp = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -216,18 +217,18 @@ namespace Qowaiv.UnitTests
 			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
 		}
 		[Test]
-		public void DataContractSerializeDeserialize_FileSizeSerializeObject_AreEqual()
+		public void DataContractSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
 		{
-			var input = new FileSizeSerializeObject()
+			var input = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
-			var exp = new FileSizeSerializeObject()
+			var exp = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
@@ -239,16 +240,16 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void SerializeDeserialize_Empty_AreEqual()
 		{
-			var input = new FileSizeSerializeObject()
+			var input = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
-			var exp = new FileSizeSerializeObject()
+			var exp = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSizeTest.TestStruct,
+				Obj = StreamSizeTest.TestStruct,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.SerializeDeserialize(input);
@@ -259,16 +260,16 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
 		{
-			var input = new FileSizeSerializeObject()
+			var input = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSize.Zero,
+				Obj = StreamSize.Zero,
 				Date = new DateTime(1970, 02, 14),
 			};
-			var exp = new FileSizeSerializeObject()
+			var exp = new StreamSizeSerializeObject()
 			{
 				Id = 17,
-				Obj = FileSize.Zero,
+				Obj = StreamSize.Zero,
 				Date = new DateTime(1970, 02, 14),
 			};
 			var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -291,8 +292,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_None_EmptyValue()
 		{
-			var act = JsonTester.Read<FileSize>();
-			var exp = FileSize.Zero;
+			var act = JsonTester.Read<StreamSize>();
+			var exp = StreamSize.Zero;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -302,14 +303,14 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.Catch<FormatException>(() =>
 			{
-				JsonTester.Read<FileSize>("InvalidStringValue");
+				JsonTester.Read<StreamSize>("InvalidStringValue");
 			},
-			"Not a valid file size");
+			"Not a valid stream size");
 		}
 		[Test]
 		public void FromJson_StringValue_AreEqual()
 		{
-			var act = JsonTester.Read<FileSize>(TestStruct.ToString(CultureInfo.InvariantCulture));
+			var act = JsonTester.Read<StreamSize>(TestStruct.ToString(CultureInfo.InvariantCulture));
 			var exp = TestStruct;
 
 			Assert.AreEqual(exp, act);
@@ -318,7 +319,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_Int64Value_AreEqual()
 		{
-			var act = JsonTester.Read<FileSize>((Int64)TestStruct);
+			var act = JsonTester.Read<StreamSize>((Int64)TestStruct);
 			var exp = TestStruct;
 
 			Assert.AreEqual(exp, act);
@@ -327,7 +328,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FromJson_DoubleValue_AreEqual()
 		{
-			var act = JsonTester.Read<FileSize>((Double)TestStruct);
+			var act = JsonTester.Read<StreamSize>((Double)TestStruct);
 			var exp = TestStruct;
 
 			Assert.AreEqual(exp, act);
@@ -338,7 +339,7 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.Catch<NotSupportedException>(() =>
 			{
-				JsonTester.Read<FileSize>(new DateTime(1972, 02, 14));
+				JsonTester.Read<StreamSize>(new DateTime(1972, 02, 14));
 			},
 			"JSON deserialization from a date is not supported.");
 		}
@@ -346,7 +347,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToJson_DefaultValue_AreEqual()
 		{
-			object act = JsonTester.Write(default(FileSize));
+			object act = JsonTester.Write(default(StreamSize));
 			object exp = 0;
 
 			Assert.AreEqual(exp, act);
@@ -367,7 +368,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToString_Zero_StringEmpty()
 		{
-			var act = FileSize.Zero.ToString();
+			var act = StreamSize.Zero.ToString();
 			var exp = "0 byte";
 			Assert.AreEqual(exp, act);
 		}
@@ -446,7 +447,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("nl-BE"))
 			{
-				var act = FileSize.PB.ToString("tb");
+				var act = StreamSize.PB.ToString("tb");
 				var exp = "1024tb";
 				Assert.AreEqual(exp, act);
 			}
@@ -457,7 +458,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("nl-BE"))
 			{
-				var act = FileSize.TB.ToString(" petabyte");
+				var act = StreamSize.TB.ToString(" petabyte");
 				var exp = "0,0009765625 petabyte";
 				Assert.AreEqual(exp, act);
 			}
@@ -468,7 +469,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("nl-BE"))
 			{
-				var act = FileSize.MaxValue.ToString("#,##0.## Exabyte");
+				var act = StreamSize.MaxValue.ToString("#,##0.## Exabyte");
 				var exp = "8 Exabyte";
 				Assert.AreEqual(exp, act);
 			}
@@ -531,7 +532,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("nl-BE"))
 			{
-				var act = FileSize.Parse("1600,1").ToString();
+				var act = StreamSize.Parse("1600,1").ToString();
 				var exp = "1600 byte";
 				Assert.AreEqual(exp, act);
 			}
@@ -542,7 +543,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				var act = FileSize.Parse("1600.1").ToString();
+				var act = StreamSize.Parse("1600.1").ToString();
 				var exp = "1600 byte";
 				Assert.AreEqual(exp, act);
 			}
@@ -553,7 +554,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("nl-BE"))
 			{
-				var act = FileSize.Parse("800").ToString("0000 byte");
+				var act = StreamSize.Parse("800").ToString("0000 byte");
 				var exp = "0800 byte";
 				Assert.AreEqual(exp, act);
 			}
@@ -564,7 +565,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				var act = FileSize.Parse("800").ToString("0000");
+				var act = StreamSize.Parse("800").ToString("0000");
 				var exp = "0800";
 				Assert.AreEqual(exp, act);
 			}
@@ -573,7 +574,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToString_FormatValueSpanishEcuador_AreEqual()
 		{
-			var act = FileSize.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
+			var act = StreamSize.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
 			var exp = "01700,0";
 			Assert.AreEqual(exp, act);
 		}
@@ -581,13 +582,13 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void DebuggerDisplay_DebugToString_HasAttribute()
 		{
-			DebuggerDisplayAssert.HasAttribute(typeof(FileSize));
+			DebuggerDisplayAssert.HasAttribute(typeof(StreamSize));
 		}
 
 		[Test]
 		public void DebuggerDisplay_DefaultValue_String()
 		{
-			DebuggerDisplayAssert.HasResult("0 byte", default(FileSize));
+			DebuggerDisplayAssert.HasResult("0 byte", default(StreamSize));
 		}
 
 		[Test]
@@ -600,31 +601,31 @@ namespace Qowaiv.UnitTests
 
 		#region IEquatable tests
 
-		/// <summary>GetHash should not fail for FileSize.Zero.</summary>
+		/// <summary>GetHash should not fail for StreamSize.Zero.</summary>
 		[Test]
 		public void GetHash_Empty_0()
 		{
-			Assert.AreEqual(0, FileSize.Zero.GetHashCode());
+			Assert.AreEqual(0, StreamSize.Zero.GetHashCode());
 		}
 
 		/// <summary>GetHash should not fail for the test struct.</summary>
 		[Test]
 		public void GetHash_TestStruct_123456789()
 		{
-			Assert.AreEqual(123456789, FileSizeTest.TestStruct.GetHashCode());
+			Assert.AreEqual(123456789, StreamSizeTest.TestStruct.GetHashCode());
 		}
 
 		[Test]
 		public void Equals_EmptyEmpty_IsTrue()
 		{
-			Assert.IsTrue(FileSize.Zero.Equals(FileSize.Zero));
+			Assert.IsTrue(StreamSize.Zero.Equals(StreamSize.Zero));
 		}
 
 		[Test]
 		public void Equals_FormattedAndUnformatted_IsTrue()
 		{
-			var l = FileSize.Parse("12,345 byte", CultureInfo.InvariantCulture);
-			var r = FileSize.Parse("12345", CultureInfo.InvariantCulture);
+			var l = StreamSize.Parse("12,345 byte", CultureInfo.InvariantCulture);
+			var r = StreamSize.Parse("12345", CultureInfo.InvariantCulture);
 
 			Assert.IsTrue(l.Equals(r));
 		}
@@ -632,52 +633,52 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Equals_TestStructTestStruct_IsTrue()
 		{
-			Assert.IsTrue(FileSizeTest.TestStruct.Equals(FileSizeTest.TestStruct));
+			Assert.IsTrue(StreamSizeTest.TestStruct.Equals(StreamSizeTest.TestStruct));
 		}
 
 		[Test]
 		public void Equals_TestStructEmpty_IsFalse()
 		{
-			Assert.IsFalse(FileSizeTest.TestStruct.Equals(FileSize.Zero));
+			Assert.IsFalse(StreamSizeTest.TestStruct.Equals(StreamSize.Zero));
 		}
 
 		[Test]
 		public void Equals_EmptyTestStruct_IsFalse()
 		{
-			Assert.IsFalse(FileSize.Zero.Equals(FileSizeTest.TestStruct));
+			Assert.IsFalse(StreamSize.Zero.Equals(StreamSizeTest.TestStruct));
 		}
 
 		[Test]
 		public void Equals_TestStructObjectTestStruct_IsTrue()
 		{
-			Assert.IsTrue(FileSizeTest.TestStruct.Equals((object)FileSizeTest.TestStruct));
+			Assert.IsTrue(StreamSizeTest.TestStruct.Equals((object)StreamSizeTest.TestStruct));
 		}
 
 		[Test]
 		public void Equals_TestStructNull_IsFalse()
 		{
-			Assert.IsFalse(FileSizeTest.TestStruct.Equals(null));
+			Assert.IsFalse(StreamSizeTest.TestStruct.Equals(null));
 		}
 
 		[Test]
 		public void Equals_TestStructObject_IsFalse()
 		{
-			Assert.IsFalse(FileSizeTest.TestStruct.Equals(new object()));
+			Assert.IsFalse(StreamSizeTest.TestStruct.Equals(new object()));
 		}
 
 		[Test]
 		public void OperatorIs_TestStructTestStruct_IsTrue()
 		{
-			var l = FileSizeTest.TestStruct;
-			var r = FileSizeTest.TestStruct;
+			var l = StreamSizeTest.TestStruct;
+			var r = StreamSizeTest.TestStruct;
 			Assert.IsTrue(l == r);
 		}
 
 		[Test]
 		public void OperatorIsNot_TestStructTestStruct_IsFalse()
 		{
-			var l = FileSizeTest.TestStruct;
-			var r = FileSizeTest.TestStruct;
+			var l = StreamSizeTest.TestStruct;
+			var r = StreamSizeTest.TestStruct;
 			Assert.IsFalse(l != r);
 		}
 
@@ -685,33 +686,33 @@ namespace Qowaiv.UnitTests
 
 		#region IComparable tests
 
-		/// <summary>Orders a list of file sizes ascending.</summary>
+		/// <summary>Orders a list of stream sizes ascending.</summary>
 		[Test]
-		public void OrderBy_FileSize_AreEqual()
+		public void OrderBy_StreamSize_AreEqual()
 		{
-			FileSize item0 = 13465;
-			FileSize item1 = 83465;
-			FileSize item2 = 113465;
-			FileSize item3 = 773465;
+			StreamSize item0 = 13465;
+			StreamSize item1 = 83465;
+			StreamSize item2 = 113465;
+			StreamSize item3 = 773465;
 
-			var inp = new List<FileSize>() { FileSize.Zero, item3, item2, item0, item1, FileSize.Zero };
-			var exp = new List<FileSize>() { FileSize.Zero, FileSize.Zero, item0, item1, item2, item3 };
+			var inp = new List<StreamSize>() { StreamSize.Zero, item3, item2, item0, item1, StreamSize.Zero };
+			var exp = new List<StreamSize>() { StreamSize.Zero, StreamSize.Zero, item0, item1, item2, item3 };
 			var act = inp.OrderBy(item => item).ToList();
 
 			CollectionAssert.AreEqual(exp, act);
 		}
 
-		/// <summary>Orders a list of file sizes descending.</summary>
+		/// <summary>Orders a list of stream sizes descending.</summary>
 		[Test]
-		public void OrderByDescending_FileSize_AreEqual()
+		public void OrderByDescending_StreamSize_AreEqual()
 		{
-			FileSize item0 = 13465;
-			FileSize item1 = 83465;
-			FileSize item2 = 113465;
-			FileSize item3 = 773465;
+			StreamSize item0 = 13465;
+			StreamSize item1 = 83465;
+			StreamSize item2 = 113465;
+			StreamSize item3 = 773465;
 
-			var inp = new List<FileSize>() { FileSize.Zero, item3, item2, item0, item1, FileSize.Zero };
-			var exp = new List<FileSize>() { item3, item2, item1, item0, FileSize.Zero, FileSize.Zero };
+			var inp = new List<StreamSize>() { StreamSize.Zero, item3, item2, item0, item1, StreamSize.Zero };
+			var exp = new List<StreamSize>() { item3, item2, item1, item0, StreamSize.Zero, StreamSize.Zero };
 			var act = inp.OrderByDescending(item => item).ToList();
 
 			CollectionAssert.AreEqual(exp, act);
@@ -740,7 +741,7 @@ namespace Qowaiv.UnitTests
 					var act = TestStruct.CompareTo(other);
 				},
 				"obj",
-				"Argument must be a file size"
+				"Argument must be a stream size"
 			);
 		}
 		/// <summary>Compare with a random object should throw an expception.</summary>
@@ -754,23 +755,23 @@ namespace Qowaiv.UnitTests
 					var act = TestStruct.CompareTo(other);
 				},
 				"obj",
-				"Argument must be a file size"
+				"Argument must be a stream size"
 			);
 		}
 
 		[Test]
 		public void LessThan_17LT19_IsTrue()
 		{
-			FileSize l = 17;
-			FileSize r = 19;
+			StreamSize l = 17;
+			StreamSize r = 19;
 
 			Assert.IsTrue(l < r);
 		}
 		[Test]
 		public void GreaterThan_21LT19_IsTrue()
 		{
-			FileSize l = 21;
-			FileSize r = 19;
+			StreamSize l = 21;
+			StreamSize r = 19;
 
 			Assert.IsTrue(l > r);
 		}
@@ -778,16 +779,16 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void LessThanOrEqual_17LT19_IsTrue()
 		{
-			FileSize l = 17;
-			FileSize r = 19;
+			StreamSize l = 17;
+			StreamSize r = 19;
 
 			Assert.IsTrue(l <= r);
 		}
 		[Test]
 		public void GreaterThanOrEqual_21LT19_IsTrue()
 		{
-			FileSize l = 21;
-			FileSize r = 19;
+			StreamSize l = 21;
+			StreamSize r = 19;
 
 			Assert.IsTrue(l >= r);
 		}
@@ -795,16 +796,16 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void LessThanOrEqual_17LT17_IsTrue()
 		{
-			FileSize l = 17;
-			FileSize r = 17;
+			StreamSize l = 17;
+			StreamSize r = 17;
 
 			Assert.IsTrue(l <= r);
 		}
 		[Test]
 		public void GreaterThanOrEqual_21LT21_IsTrue()
 		{
-			FileSize l = 21;
-			FileSize r = 21;
+			StreamSize l = 21;
+			StreamSize r = 21;
 
 			Assert.IsTrue(l >= r);
 		}
@@ -813,15 +814,15 @@ namespace Qowaiv.UnitTests
 		#region Casting tests
 
 		[Test]
-		public void Explicit_StringToFileSize_AreEqual()
+		public void Explicit_StringToStreamSize_AreEqual()
 		{
 			var exp = TestStruct;
-			var act = (FileSize)TestStruct.ToString();
+			var act = (StreamSize)TestStruct.ToString();
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
-		public void Explicit_FileSizeToString_AreEqual()
+		public void Explicit_StreamSizeToString_AreEqual()
 		{
 			var exp = TestStruct.ToString();
 			var act = (string)TestStruct;
@@ -830,15 +831,15 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void Implicit_Int32ToFileSize_AreEqual()
+		public void Implicit_Int32ToStreamSize_AreEqual()
 		{
-			FileSize exp = TestStruct;
-			FileSize act = 123456789;
+			StreamSize exp = TestStruct;
+			StreamSize act = 123456789;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
-		public void Explicit_FileSizeToInt32_AreEqual()
+		public void Explicit_StreamSizeToInt32_AreEqual()
 		{
 			var exp = 123456789;
 			var act = (Int32)TestStruct;
@@ -847,15 +848,15 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void Implicit_Int64ToFileSize_AreEqual()
+		public void Implicit_Int64ToStreamSize_AreEqual()
 		{
 			var exp = TestStruct;
-			FileSize act = 123456789L;
+			StreamSize act = 123456789L;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
-		public void Explicit_FileSizeToInt64_AreEqual()
+		public void Explicit_StreamSizeToInt64_AreEqual()
 		{
 			var exp = 123456789L;
 			var act = (Int64)TestStruct;
@@ -864,15 +865,15 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void Explicit_DoubleToFileSize_AreEqual()
+		public void Explicit_DoubleToStreamSize_AreEqual()
 		{
 			var exp = TestStruct;
-			var act = (FileSize)123456789d;
+			var act = (StreamSize)123456789d;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
-		public void Explicit_FileSizeToDouble_AreEqual()
+		public void Explicit_StreamSizeToDouble_AreEqual()
 		{
 			var exp = 123456789d;
 			var act = (Double)TestStruct;
@@ -881,15 +882,15 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void Explicit_DecimalToFileSize_AreEqual()
+		public void Explicit_DecimalToStreamSize_AreEqual()
 		{
 			var exp = TestStruct;
-			var act = (FileSize)123456789m;
+			var act = (StreamSize)123456789m;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
-		public void Explicit_FileSizeToDecimal_AreEqual()
+		public void Explicit_StreamSizeToDecimal_AreEqual()
 		{
 			var exp = 123456789m;
 			var act = (Decimal)TestStruct;
@@ -903,13 +904,13 @@ namespace Qowaiv.UnitTests
 		#region Properties
 		#endregion
 
-		#region File size manipulation tests
+		#region Stream size manipulation tests
 
 		[Test]
 		public void Increment_21_22()
 		{
-			FileSize act = 21;
-			FileSize exp = 22;
+			StreamSize act = 21;
+			StreamSize exp = 22;
 			act++;
 
 			Assert.AreEqual(exp, act);
@@ -917,8 +918,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Decrement_21_20()
 		{
-			FileSize act = 21;
-			FileSize exp = 20;
+			StreamSize act = 21;
+			StreamSize exp = 20;
 			act--;
 
 			Assert.AreEqual(exp, act);
@@ -927,16 +928,16 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Plus_21_21()
 		{
-			FileSize act = +((FileSize)21);
-			FileSize exp = 21;
+			StreamSize act = +((StreamSize)21);
+			StreamSize exp = 21;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void Negate_21_Minus21()
 		{
-			FileSize act = -((FileSize)21);
-			FileSize exp = -21;
+			StreamSize act = -((StreamSize)21);
+			StreamSize exp = -21;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -944,8 +945,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Addition_17Percentage10_18()
 		{
-			FileSize act = 17;
-			FileSize exp = 18;
+			StreamSize act = 17;
+			StreamSize exp = 18;
 			act = act + Percentage.Create(0.1);
 
 			Assert.AreEqual(exp, act);
@@ -953,9 +954,9 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Addition_17And5_24()
 		{
-			FileSize act = 17;
-			FileSize exp = 24;
-			act = act + (FileSize)7;
+			StreamSize act = 17;
+			StreamSize exp = 24;
+			act = act + (StreamSize)7;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -963,8 +964,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Subtraction_17Percentage10_16()
 		{
-			FileSize act = 17;
-			FileSize exp = 16;
+			StreamSize act = 17;
+			StreamSize exp = 16;
 			act = act - Percentage.Create(0.1);
 
 			Assert.AreEqual(exp, act);
@@ -972,9 +973,9 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Subtraction_17And5_12()
 		{
-			FileSize act = 17;
-			FileSize exp = 12;
-			act = act - (FileSize)5;
+			StreamSize act = 17;
+			StreamSize exp = 12;
+			act = act - (StreamSize)5;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -982,8 +983,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And2Int16_40()
 		{
-			FileSize act = 81;
-			FileSize exp = 40;
+			StreamSize act = 81;
+			StreamSize exp = 40;
 			act = act / (Int16)2;
 
 			Assert.AreEqual(exp, act);
@@ -991,8 +992,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And2Int32_40()
 		{
-			FileSize act = 81;
-			FileSize exp = 40;
+			StreamSize act = 81;
+			StreamSize exp = 40;
 			act = act / (Int32)2;
 
 			Assert.AreEqual(exp, act);
@@ -1001,8 +1002,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And2Int64_40()
 		{
-			FileSize act = 81;
-			FileSize exp = 40;
+			StreamSize act = 81;
+			StreamSize exp = 40;
 			act = act / (Int64)2;
 
 			Assert.AreEqual(exp, act);
@@ -1010,8 +1011,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And2UInt16_40()
 		{
-			FileSize act = 81;
-			FileSize exp = 40;
+			StreamSize act = 81;
+			StreamSize exp = 40;
 			act = act / (UInt16)2;
 
 			Assert.AreEqual(exp, act);
@@ -1019,8 +1020,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And2UInt32_40()
 		{
-			FileSize act = 81;
-			FileSize exp = 40;
+			StreamSize act = 81;
+			StreamSize exp = 40;
 			act = act / (UInt32)2;
 
 			Assert.AreEqual(exp, act);
@@ -1028,8 +1029,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And2UInt64_40()
 		{
-			FileSize act = 81;
-			FileSize exp = 40;
+			StreamSize act = 81;
+			StreamSize exp = 40;
 			act = act / (UInt64)2;
 
 			Assert.AreEqual(exp, act);
@@ -1037,8 +1038,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And150Percentage_54()
 		{
-			FileSize act = 81;
-			FileSize exp = 54;
+			StreamSize act = 81;
+			StreamSize exp = 54;
 			act = act / (Percentage)1.50;
 
 			Assert.AreEqual(exp, act);
@@ -1046,8 +1047,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And1Point5Single_54()
 		{
-			FileSize act = 81;
-			FileSize exp = 54;
+			StreamSize act = 81;
+			StreamSize exp = 54;
 			act = act / (Single)1.5;
 
 			Assert.AreEqual(exp, act);
@@ -1055,8 +1056,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And1Point5Double_54()
 		{
-			FileSize act = 81;
-			FileSize exp = 54;
+			StreamSize act = 81;
+			StreamSize exp = 54;
 			act = act / (Double)1.5;
 
 			Assert.AreEqual(exp, act);
@@ -1064,8 +1065,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Division_81And1Point5Decimal_54()
 		{
-			FileSize act = 81;
-			FileSize exp = 54;
+			StreamSize act = 81;
+			StreamSize exp = 54;
 			act = act / (Decimal)1.5;
 
 			Assert.AreEqual(exp, act);
@@ -1074,8 +1075,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42And3Int16_126()
 		{
-			FileSize act = 42;
-			FileSize exp = 126;
+			StreamSize act = 42;
+			StreamSize exp = 126;
 			act = act * (Int16)3;
 
 			Assert.AreEqual(exp, act);
@@ -1083,8 +1084,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42And3Int32_126()
 		{
-			FileSize act = 42;
-			FileSize exp = 126;
+			StreamSize act = 42;
+			StreamSize exp = 126;
 			act = act * (Int32)3;
 
 			Assert.AreEqual(exp, act);
@@ -1092,8 +1093,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42And3Int64_126()
 		{
-			FileSize act = 42;
-			FileSize exp = 126;
+			StreamSize act = 42;
+			StreamSize exp = 126;
 			act = act * (Int64)3;
 
 			Assert.AreEqual(exp, act);
@@ -1101,8 +1102,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42And3UInt16_126()
 		{
-			FileSize act = 42;
-			FileSize exp = 126;
+			StreamSize act = 42;
+			StreamSize exp = 126;
 			act = act * (UInt16)3;
 
 			Assert.AreEqual(exp, act);
@@ -1110,8 +1111,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42And3UInt32_126()
 		{
-			FileSize act = 42;
-			FileSize exp = 126;
+			StreamSize act = 42;
+			StreamSize exp = 126;
 			act = act * (UInt32)3;
 
 			Assert.AreEqual(exp, act);
@@ -1119,8 +1120,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42And3UInt64_126()
 		{
-			FileSize act = 42;
-			FileSize exp = 126;
+			StreamSize act = 42;
+			StreamSize exp = 126;
 			act = act * (UInt64)3;
 
 			Assert.AreEqual(exp, act);
@@ -1128,8 +1129,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42And50Percentage_21()
 		{
-			FileSize act = 42;
-			FileSize exp = 21;
+			StreamSize act = 42;
+			StreamSize exp = 21;
 			act = act * (Percentage)0.5;
 
 			Assert.AreEqual(exp, act);
@@ -1137,8 +1138,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42AndHalfSingle_21()
 		{
-			FileSize act = 42;
-			FileSize exp = 21;
+			StreamSize act = 42;
+			StreamSize exp = 21;
 			act = act * (Single)0.5;
 
 			Assert.AreEqual(exp, act);
@@ -1146,8 +1147,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42AndHalfDouble_21()
 		{
-			FileSize act = 42;
-			FileSize exp = 21;
+			StreamSize act = 42;
+			StreamSize exp = 21;
 			act = act * (Double)0.5;
 
 			Assert.AreEqual(exp, act);
@@ -1155,8 +1156,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Multiply_42AndHalfDecimal_21()
 		{
-			FileSize act = 42;
-			FileSize exp = 21;
+			StreamSize act = 42;
+			StreamSize exp = 21;
 			act = act * (Decimal)0.5;
 
 			Assert.AreEqual(exp, act);
@@ -1167,32 +1168,32 @@ namespace Qowaiv.UnitTests
 		#region Type converter tests
 
 		[Test]
-		public void ConverterExists_FileSize_IsTrue()
+		public void ConverterExists_StreamSize_IsTrue()
 		{
-			TypeConverterAssert.ConverterExists(typeof(FileSize));
+			TypeConverterAssert.ConverterExists(typeof(StreamSize));
 		}
 
 		[Test]
-		public void CanNotConvertFromInt32_FileSize_IsTrue()
+		public void CanNotConvertFromInt32_StreamSize_IsTrue()
 		{
-			TypeConverterAssert.CanNotConvertFrom(typeof(FileSize), typeof(Int32));
+			TypeConverterAssert.CanNotConvertFrom(typeof(StreamSize), typeof(Int32));
 		}
 		[Test]
-		public void CanNotConvertToInt32_FileSize_IsTrue()
+		public void CanNotConvertToInt32_StreamSize_IsTrue()
 		{
-			TypeConverterAssert.CanNotConvertTo(typeof(FileSize), typeof(Int32));
-		}
-
-		[Test]
-		public void CanConvertFromString_FileSize_IsTrue()
-		{
-			TypeConverterAssert.CanConvertFromString(typeof(FileSize));
+			TypeConverterAssert.CanNotConvertTo(typeof(StreamSize), typeof(Int32));
 		}
 
 		[Test]
-		public void CanConvertToString_FileSize_IsTrue()
+		public void CanConvertFromString_StreamSize_IsTrue()
 		{
-			TypeConverterAssert.CanConvertToString(typeof(FileSize));
+			TypeConverterAssert.CanConvertFromString(typeof(StreamSize));
+		}
+
+		[Test]
+		public void CanConvertToString_StreamSize_IsTrue()
+		{
+			TypeConverterAssert.CanConvertToString(typeof(StreamSize));
 		}
 
 		[Test]
@@ -1200,7 +1201,7 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				TypeConverterAssert.ConvertFromEquals(FileSizeTest.TestStruct, FileSizeTest.TestStruct.ToString());
+				TypeConverterAssert.ConvertFromEquals(StreamSizeTest.TestStruct, StreamSizeTest.TestStruct.ToString());
 			}
 		}
 
@@ -1209,14 +1210,14 @@ namespace Qowaiv.UnitTests
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				TypeConverterAssert.ConvertToStringEquals(FileSizeTest.TestStruct.ToString(), FileSizeTest.TestStruct);
+				TypeConverterAssert.ConvertToStringEquals(StreamSizeTest.TestStruct.ToString(), StreamSizeTest.TestStruct);
 			}
 		}
 
 		[Test]
-		public void ConvertFromInstanceDescriptor_FileSize_Successful()
+		public void ConvertFromInstanceDescriptor_StreamSize_Successful()
 		{
-			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(FileSize));
+			TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(StreamSize));
 		}
 
 		#endregion
@@ -1228,18 +1229,18 @@ namespace Qowaiv.UnitTests
 		{
 			using (CultureInfoScope.NewInvariant())
 			{
-				Assert.IsFalse(FileSize.IsValid("Complex"), "Complex");
-				Assert.IsFalse(FileSize.IsValid((String)null), "(String)null");
-				Assert.IsFalse(FileSize.IsValid(String.Empty), "String.Empty");
+				Assert.IsFalse(StreamSize.IsValid("Complex"), "Complex");
+				Assert.IsFalse(StreamSize.IsValid((String)null), "(String)null");
+				Assert.IsFalse(StreamSize.IsValid(String.Empty), "String.Empty");
 
-				Assert.IsFalse(FileSize.IsValid("1234 EB"), "1234 EB, to big");
-				Assert.IsFalse(FileSize.IsValid("-1234EB"), "-1234EB, to small");
+				Assert.IsFalse(StreamSize.IsValid("1234 EB"), "1234 EB, to big");
+				Assert.IsFalse(StreamSize.IsValid("-1234EB"), "-1234EB, to small");
 
-				Assert.IsFalse(FileSize.IsValid("12.9 EB"), "12.9 EB, to big");
-				Assert.IsFalse(FileSize.IsValid("-12.9EB"), "-12.9EB, to small");
+				Assert.IsFalse(StreamSize.IsValid("12.9 EB"), "12.9 EB, to big");
+				Assert.IsFalse(StreamSize.IsValid("-12.9EB"), "-12.9EB, to small");
 
-				Assert.IsFalse(FileSize.IsValid("79,228,162,514,264,337,593,543,950,335 kB"), "12.9 EB, to big for decimal");
-				Assert.IsFalse(FileSize.IsValid("-9,228,162,514,264,337,593,543,950,335 kB"), "-12.9EB, to small for decimal");
+				Assert.IsFalse(StreamSize.IsValid("79,228,162,514,264,337,593,543,950,335 kB"), "12.9 EB, to big for decimal");
+				Assert.IsFalse(StreamSize.IsValid("-9,228,162,514,264,337,593,543,950,335 kB"), "-12.9EB, to small for decimal");
 			}
 		}
 		[Test]
@@ -1247,8 +1248,8 @@ namespace Qowaiv.UnitTests
 		{
 			using (CultureInfoScope.NewInvariant())
 			{
-				Assert.IsTrue(FileSize.IsValid("19 MB"));
-				Assert.IsTrue(FileSize.IsValid("1,456.134 MB"));
+				Assert.IsTrue(StreamSize.IsValid("19 MB"));
+				Assert.IsTrue(StreamSize.IsValid("1,456.134 MB"));
 			}
 		}
 		#endregion
@@ -1256,69 +1257,69 @@ namespace Qowaiv.UnitTests
 		#region Extension tests
 
 		[Test]
-		public void GetFileSize_NullStream_ThrowsArgumentNullException()
+		public void GetStreamSize_NullStream_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				Stream stream = null;
-				stream.GetFileSize();
+				stream.GetStreamSize();
 			}
 			, "stream");
 		}
 		[Test]
-		public void GetFileSize_Stream_17Byte()
+		public void GetStreamSize_Stream_17Byte()
 		{
 			using (var stream = new MemoryStream(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 }))
 			{
-				FileSize act = stream.GetFileSize();
-				FileSize exp = 17;
+				StreamSize act = stream.GetStreamSize();
+				StreamSize exp = 17;
 
 				Assert.AreEqual(exp, act);
 			}
 		}
 
 		[Test]
-		public void GetFileSize_FileInfo_9Byte()
+		public void GetStreamSize_FileInfo_9Byte()
 		{
-			var file = new FileInfo("GetFileSize_FileInfo_9.test");
+			var file = new FileInfo("GetStreamSize_FileInfo_9.test");
 			using (var writer = new StreamWriter(file.FullName, false))
 			{
 				writer.Write("Unit Test");
 			}
 
-			FileSize act = file.GetFileSize();
-			FileSize exp = 9;
+			StreamSize act = file.GetStreamSize();
+			StreamSize exp = 9;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
-		public void GetFileSize_NullFileInfo_ThrowsArgumentNullException()
+		public void GetStreamSize_NullFileInfo_ThrowsArgumentNullException()
 		{
 			ExceptionAssert.CatchArgumentNullException(() =>
 			{
 				FileInfo fileInfo = null;
-				fileInfo.GetFileSize();
+				fileInfo.GetStreamSize();
 			}
 			, "fileInfo");
 		}
 
 		[Test]
-		public void Average_ArrayOfFileSizes_5Byte()
+		public void Average_ArrayOfStreamSizes_5Byte()
 		{
-			var arr = new FileSize[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+			var arr = new StreamSize[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-			FileSize act = arr.Average();
-			FileSize exp = 5;
+			StreamSize act = arr.Average();
+			StreamSize exp = 5;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
-		public void Sum_ArrayOfFileSizes_45Byte()
+		public void Sum_ArrayOfStreamSizes_45Byte()
 		{
-			var arr = new FileSize[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+			var arr = new StreamSize[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-			FileSize act = arr.Sum();
-			FileSize exp = 45;
+			StreamSize act = arr.Sum();
+			StreamSize exp = 45;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -1327,10 +1328,10 @@ namespace Qowaiv.UnitTests
 	}
 
 	[Serializable]
-	public class FileSizeSerializeObject
+	public class StreamSizeSerializeObject
 	{
 		public int Id { get; set; }
-		public FileSize Obj { get; set; }
+		public StreamSize Obj { get; set; }
 		public DateTime Date { get; set; }
 	}
 }

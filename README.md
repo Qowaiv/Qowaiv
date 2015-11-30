@@ -34,9 +34,9 @@ Email address collection
 ------------------------
 Represents a collection of unique email addresses, excluding the empty and unknown email address.
 
-File size
+Stream size
 ---------
-Represents the size of a file.
+Represents the size of a file or stream.
 
 Gender
 ------

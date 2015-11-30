@@ -78,7 +78,7 @@
     <Compile Include="DateTest.cs" />
     <Compile Include="EmailAddressCollectionTest.cs" />
     <Compile Include="EmailAddressTest.cs" />
-    <Compile Include="FileSizeTest.cs" />
+    <Compile Include="IO\StreamSizeTest.cs" />
     <Compile Include="Formatting\FormattingArgumentsCollectionTest.cs" />
     <Compile Include="Formatting\FormattingArgumentsTest.cs" />
     <Compile Include="Formatting\StringFormatterTest.cs" />

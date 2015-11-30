@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Qowaiv.IO;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Qowaiv.Conversion
+namespace Qowaiv.Conversion.IO
 {
-	/// <summary>Provides a conversion for a file size.</summary>
-	public class FileSizeTypeConverter : TypeConverter
+	/// <summary>Provides a conversion for a stream size.</summary>
+	public class StreamSizeTypeConverter : TypeConverter
 	{
 		#region Convert From
 
 		/// <summary>Returns whether this converter can convert an string to
-		/// a file size, using the specified context.
+		/// a stream size, using the specified context.
 		/// </summary>
 		/// <param name="context">
 		/// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
@@ -25,7 +26,7 @@ namespace Qowaiv.Conversion
 		{
 			return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 		}
-		/// <summary>Converts a string to a file size, using the specified
+		/// <summary>Converts a string to a stream size, using the specified
 		/// context and culture information.
 		/// </summary>
 		/// <param name="context">
@@ -48,7 +49,7 @@ namespace Qowaiv.Conversion
 			var str = value as string;
 			if (str != null)
 			{
-				return FileSize.Parse(str, culture);
+				return StreamSize.Parse(str, culture);
 			}
 			return base.ConvertFrom(context, culture, value);
 		}
@@ -56,7 +57,7 @@ namespace Qowaiv.Conversion
 
 		#region Convert To
 
-		/// <summary>Converts a file size to string, using the specified context and culture information.</summary>
+		/// <summary>Converts a stream size to string, using the specified context and culture information.</summary>
 		/// <param name="culture">
 		///  A System.Globalization.CultureInfo. If null is passed, the current culture is assumed.
 		/// </param>
@@ -64,13 +65,13 @@ namespace Qowaiv.Conversion
 		/// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
 		/// </param>
 		/// <param name="value">
-		/// The file size to convert.
+		/// The stream size to convert.
 		/// </param>
 		/// <param name="destinationType">
 		/// The System.Type to convert the value parameter to.
 		/// </param>
 		/// <returns>
-		/// A string that represents the converted file size.
+		/// A string that represents the converted stream size.
 		/// </returns>
 		/// <exception cref="System.ArgumentNullException">
 		/// The destinationType parameter is null.

@@ -205,11 +205,11 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not a valid file size.
+        ///   Looks up a localized string similar to Not a valid stream size.
         /// </summary>
-        public static string FormatExceptionFileSize {
+        public static string FormatExceptionStreamSize {
             get {
-                return ResourceManager.GetString("FormatExceptionFileSize", resourceCulture);
+                return ResourceManager.GetString("FormatExceptionStreamSize", resourceCulture);
             }
         }
         

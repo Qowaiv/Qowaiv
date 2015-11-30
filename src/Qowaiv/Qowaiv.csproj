@@ -62,7 +62,7 @@
     <Compile Include="Conversion\CurrencyTypeConverter.cs" />
     <Compile Include="Conversion\DateTypeConverter.cs" />
     <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
-    <Compile Include="Conversion\FileSizeTypeConverter.cs" />
+    <Compile Include="Conversion\IO\FileSizeTypeConverter.cs" />
     <Compile Include="Conversion\GenderTypeConverter.cs" />
     <Compile Include="Conversion\HouseNumberTypeConverter.cs" />
     <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
@@ -87,8 +87,8 @@
     <Compile Include="EmailAddress.cs" />
     <Compile Include="EmailAddressCollection.cs" />
     <Compile Include="EmailAddressCollectionExtensions.cs" />
-    <Compile Include="FileSize.cs" />
-    <Compile Include="FileSizeExtensions.cs" />
+    <Compile Include="IO\StreamSize.cs" />
+    <Compile Include="IO\StreamSizeExtensions.cs" />
     <Compile Include="Formatting\FormattingArgumentsCollection.cs" />
     <Compile Include="Formatting\FormattingArguments.cs" />
     <Compile Include="Formatting\StringFormatter.cs" />

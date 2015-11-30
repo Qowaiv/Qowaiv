@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.IO;
 using Qowaiv.Threading;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Globalization;
@@ -57,10 +58,10 @@ namespace Qowaiv.UnitTests.Threading
 		}
 
 		[Test]
-		public void Get_FileSizeByConfiguration_12kB()
+		public void Get_StreamSizeByConfiguration_12kB()
 		{
-			FileSize act = ThreadDomain.Current.Get<FileSize>();
-			FileSize exp = 12 << 10;
+			StreamSize act = ThreadDomain.Current.Get<StreamSize>();
+			StreamSize exp = 12 << 10;
 
 			Assert.AreEqual(exp, act);
 		}

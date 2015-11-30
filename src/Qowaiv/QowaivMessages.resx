@@ -159,8 +159,8 @@
   <data name="FormatExceptionEmailAddressCollection" xml:space="preserve">
     <value>Not valid email addresses</value>
   </data>
-  <data name="FormatExceptionFileSize" xml:space="preserve">
-    <value>Not a valid file size</value>
+  <data name="FormatExceptionStreamSize" xml:space="preserve">
+    <value>Not a valid stream size</value>
   </data>
   <data name="FormatExceptionGender" xml:space="preserve">
     <value>Not a valid gender</value>

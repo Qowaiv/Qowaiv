@@ -18,8 +18,8 @@ namespace Qowaiv.IO
 {
 	/// <summary>Represents a stream size.</summary>
 	/// <remarks>
-	/// A stream size measures the size of a computer file. Typically it is measured
-	/// in bytes with an SI prefix. The actual amount of disk space consumed by
+	/// A stream size measures the size of a computer file or stream. Typically it is 
+	/// measured in bytes with an SI prefix. The actual amount of disk space consumed by
 	/// the file depends on the file system. The maximum stream size a file system
 	/// supports depends on the number of bits reserved to store size information
 	/// and the total size of the file system. This value type can not represent
@@ -36,20 +36,20 @@ namespace Qowaiv.IO
 		/// <summary>Represents 1 Byte.</summary>
 		public static readonly StreamSize Byte = new StreamSize() { m_Value = 1L };
 
-		/// <summary>Represents 1 kilobyte (1,024 byte).</summary>
-		public static readonly StreamSize KB = new StreamSize() { m_Value = 1L << 10 };
+		/// <summary>Represents 1 kilobyte (1,000 byte).</summary>
+		public static readonly StreamSize KB = new StreamSize() { m_Value = 1000L };
 
-		/// <summary>Represents 1 Megabyte (1,048,576 byte).</summary>
-		public static readonly StreamSize MB = new StreamSize() { m_Value = 1L << 20 };
+		/// <summary>Represents 1 Megabyte (1,000,000 byte).</summary>
+		public static readonly StreamSize MB = new StreamSize() { m_Value = 1000000L };
 
-		/// <summary>Represents 1 Gigabyte (1,073,741,824 byte).</summary>
-		public static readonly StreamSize GB = new StreamSize() { m_Value = 1L << 30 };
+		/// <summary>Represents 1 Gigabyte (1,000,000,000 byte).</summary>
+		public static readonly StreamSize GB = new StreamSize() { m_Value = 1000000000L };
 
-		/// <summary>Represents 1 Terabyte (1,099,511,627,776 byte).</summary>
-		public static readonly StreamSize TB = new StreamSize() { m_Value = 1L << 40 };
+		/// <summary>Represents 1 Terabyte (1,000,000,000,000 byte).</summary>
+		public static readonly StreamSize TB = new StreamSize() { m_Value = 1000000000000L };
 
-		/// <summary>Represents 1 Petabyte (1,125,899,906,842,624 byte).</summary>
-		public static readonly StreamSize PB = new StreamSize() { m_Value = 1L << 50 };
+		/// <summary>Represents 1 Petabyte (1,000,000,000,000,000 byte).</summary>
+		public static readonly StreamSize PB = new StreamSize() { m_Value = 1000000000000000L };
 
 		/// <summary>Represents the minimum stream size that can be represented.</summary>
 		public static readonly StreamSize MinValue = new StreamSize() { m_Value = Int64.MinValue };
@@ -484,17 +484,17 @@ namespace Qowaiv.IO
 		/// 
 		/// Short notation:
 		/// 8900.ToString("s") => 8900b
-		/// 238900.ToString("s") => 233.3kb
-		/// 238900.ToString(" S") => 233.3 kB
-		/// 238900.ToString("0000.00 S") => 0233.30 kB
+		/// 238900.ToString("s") => 238.9kb
+		/// 238900.ToString(" S") => 238.9 kB
+		/// 238900.ToString("0000.00 S") => 0238.90 kB
 		///
 		/// Full notation:
 		/// 8900.ToString("0.0 f") => 8900.0 byte
-		/// 238900.ToString("0 f") => 233 kilobyte
-		/// 1238900.ToString("0.00 F") => 1.18 Megabyte
+		/// 238900.ToString("0 f") => 234 kilobyte
+		/// 1238900.ToString("0.00 F") => 1.24 Megabyte
 		/// 
 		/// Custom:
-		/// 8900.ToString("0.0 kb") => 8.7 kb
+		/// 8900.ToString("0.0 kb") => 8.9 kb
 		/// 238900.ToString("0.0 MB") => 0.2 MB
 		/// 1238900.ToString("#,##0.00 Kilobyte") => 1,209.86 Kilobyte
 		/// 1238900.ToString("#,##0") => 1,238,900
@@ -515,9 +515,9 @@ namespace Qowaiv.IO
 
 			var streamSizeMarker = GetStreamSizeMarker(format);
 			var decimalFormat = GetWithoutStreamSizeMarker(format, streamSizeMarker);
-			var shift = GetShift(streamSizeMarker);
+			var mp = GetMultiplier(streamSizeMarker);
 
-			Decimal size = (Decimal)m_Value / (1L << shift);
+			Decimal size = (Decimal)m_Value / (Decimal)mp;
 
 			return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
 		}
@@ -539,7 +539,7 @@ namespace Qowaiv.IO
 				while (size >= 999.5m)
 				{
 					order++;
-					size /= 1024;
+					size /= 1000;
 				}
 			}
 			var str = size.ToString(format, formatProvider);
@@ -783,15 +783,15 @@ namespace Qowaiv.IO
 
 			var streamSizeMarker = GetStreamSizeMarker(s);
 			var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
-			var shift = GetShift(streamSizeMarker);
+			var factor = GetMultiplier(streamSizeMarker);
 
 			Int64 sizeInt64;
 
 			if (Int64.TryParse(size, NumberStyles.Number, formatProvider, out sizeInt64) &&
-				sizeInt64 <= (Int64.MaxValue >> shift) &&
-				sizeInt64 >= (Int64.MinValue >> shift))
+				sizeInt64 <= Int64.MaxValue / factor &&
+				sizeInt64 >= Int64.MinValue / factor)
 			{
-				result = new StreamSize(sizeInt64 << shift);
+				result = new StreamSize(sizeInt64 * factor);
 				return true;
 			}
 
@@ -799,7 +799,6 @@ namespace Qowaiv.IO
 
 			if (Decimal.TryParse(size, NumberStyles.Number, formatProvider, out sizeDecimal))
 			{
-				long factor = 1L << shift;
 				if (sizeDecimal <= Decimal.MaxValue / factor &&
 					sizeDecimal >= Decimal.MinValue / factor)
 				{
@@ -885,7 +884,7 @@ namespace Qowaiv.IO
 
 			var length = input.Length;
 
-			foreach (var marker in ShiftLookup.Keys)
+			foreach (var marker in MultiplierLookup.Keys)
 			{
 				if (input.ToUpperInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
 				{
@@ -903,30 +902,30 @@ namespace Qowaiv.IO
 			if (string.IsNullOrEmpty(streamSizeMarker)) { return input; }
 			return input.Substring(0, input.Length - streamSizeMarker.Length);
 		}
-		private static int GetShift(string streamSizeMarker)
+		private static long GetMultiplier(string streamSizeMarker)
 		{
-			if (string.IsNullOrEmpty(streamSizeMarker)) { return 0; }
-			return ShiftLookup[streamSizeMarker.ToUpperInvariant().Trim()];
+			if (string.IsNullOrEmpty(streamSizeMarker)) { return 1; }
+			return MultiplierLookup[streamSizeMarker.ToUpperInvariant().Trim()];
 		}
 
-		private static readonly Dictionary<string, int> ShiftLookup = new Dictionary<string, int>()
+		private static readonly Dictionary<string, long> MultiplierLookup = new Dictionary<string, long>()
 		{
-			{ "KILOBYTE", 10 },
-			{ "MEGABYTE", 20 },
-			{ "GIGABYTE", 30 },
-			{ "TERABYTE", 40 },
-			{ "PETABYTE", 50 },
-			{ "EXABYTE",  60 },
+			{ "KILOBYTE", 1000L },
+			{ "MEGABYTE", 1000000L },
+			{ "GIGABYTE", 1000000000L },
+			{ "TERABYTE", 1000000000000L },
+			{ "PETABYTE", 1000000000000000L },
+			{ "EXABYTE",  1000000000000000000L },
 
-			{ "KB", 10 },
-			{ "MB", 20 },
-			{ "GB", 30 },
-			{ "TB", 40 },
-			{ "PB", 50 },
-			{ "EB", 60 },
+			{ "KB", 1000L },
+			{ "MB", 1000000L },
+			{ "GB", 1000000000L },
+			{ "TB", 1000000000000L },
+			{ "PB", 1000000000000000L },
+			{ "EB", 1000000000000000000L },
 
-			{ "BYTE", 0 },
-			{ "B", 0 },
+			{ "BYTE", 1 },
+			{ "B", 1 },
 		};
 
 	}

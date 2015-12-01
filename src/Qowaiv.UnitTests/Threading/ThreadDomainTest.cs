@@ -61,7 +61,7 @@ namespace Qowaiv.UnitTests.Threading
 		public void Get_StreamSizeByConfiguration_12kB()
 		{
 			StreamSize act = ThreadDomain.Current.Get<StreamSize>();
-			StreamSize exp = 12 << 10;
+			StreamSize exp = 12000;
 
 			Assert.AreEqual(exp, act);
 		}

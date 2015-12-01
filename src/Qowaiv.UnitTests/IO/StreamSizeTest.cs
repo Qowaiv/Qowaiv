@@ -63,7 +63,7 @@ namespace Qowaiv.UnitTests.IO
 			string str = "17kb";
 
 			Assert.IsTrue(StreamSize.TryParse(str, out val), "Valid");
-			Assert.AreEqual("17408 byte", val.ToString(), "Value");
+			Assert.AreEqual("17000 byte", val.ToString(), "Value");
 		}
 
 		[Test]
@@ -415,7 +415,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-NL"))
 			{
 				var act = TestStruct.ToString("#,##0.00 kB");
-				var exp = "120.563,27 kB";
+				var exp = "123.456,79 kB";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -426,7 +426,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = TestStruct.ToString("0.0 MegaByte");
-				var exp = "117,7 MegaByte";
+				var exp = "123,5 MegaByte";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -437,7 +437,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = TestStruct.ToString("0.00GB");
-				var exp = "0,11GB";
+				var exp = "0,12GB";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -448,7 +448,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = StreamSize.PB.ToString("tb");
-				var exp = "1024tb";
+				var exp = "1000tb";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -459,7 +459,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = StreamSize.TB.ToString(" petabyte");
-				var exp = "0,0009765625 petabyte";
+				var exp = "0,001 petabyte";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -470,7 +470,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = StreamSize.MaxValue.ToString("#,##0.## Exabyte");
-				var exp = "8 Exabyte";
+				var exp = "9,22 Exabyte";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -481,7 +481,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = TestStruct.ToString("#,##0.## F");
-				var exp = "117,74 Megabyte";
+				var exp = "123,46 Megabyte";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -491,7 +491,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = TestStruct.ToString("0 f");
-				var exp = "118 megabyte";
+				var exp = "123 megabyte";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -502,7 +502,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = TestStruct.ToString("0000 S");
-				var exp = "0118 MB";
+				var exp = "0123 MB";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -512,7 +512,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = TestStruct.ToString("0 s");
-				var exp = "118 mb";
+				var exp = "123 mb";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -522,7 +522,7 @@ namespace Qowaiv.UnitTests.IO
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = TestStruct.ToString("0s");
-				var exp = "118mb";
+				var exp = "123mb";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -594,7 +594,7 @@ namespace Qowaiv.UnitTests.IO
 		[Test]
 		public void DebuggerDisplay_TestStruct_String()
 		{
-			DebuggerDisplayAssert.HasResult("117.7 Megabyte", TestStruct);
+			DebuggerDisplayAssert.HasResult("123.5 Megabyte", TestStruct);
 		}
 
 		#endregion

@@ -9,7 +9,7 @@
         <summary>@summary@</summary>
         <projectUrl>http://www.github.com/corniel/Qowaiv</projectUrl>
         <licenseUrl>http://www.github.com/corniel/Qowaiv/blob/master/src/Qowaiv.license.txt</licenseUrl>
-        <!--<iconUrl></iconUrl>-->
+		<iconUrl>https://raw.githubusercontent.com/Corniel/Qowaiv/master/design/qowain-logo_nuget_064x064.gif</iconUrl>
         <releaseNotes>@releaseNotes@</releaseNotes>
         <tags>qowaiv, domain model</tags>
         @dependencies@

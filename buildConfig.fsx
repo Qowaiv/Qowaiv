@@ -29,9 +29,9 @@ open AssemblyInfoFile
 let projectName = "Qowaiv"
 let projectSummary = "Single Value Domain Objects"
 let projectDescription = "Qowaiv implements common, universal domain objects. These types form the base of your domain model."
-let authors = ["Corniel Nobel";]
+let authors = ["Corniel Nobel"; "Jack Kester"; "Wilko Frieke";]
 let mail = "qowaiv@corniel.nl"
-let version = "2.0.0.153"
+let version = "2.0.0.159"
 let commitHash = Information.getCurrentSHA1(".")
 
 //let buildTargets = environVarOrDefault "BUILDTARGETS" ""
@@ -48,7 +48,7 @@ let packageDir  = "./src/packages"
 let github_user = "Corniel"
 let github_project = "Qowaiv"
 
-let tags = "Domain modelling postalcode country iban bic gender emailaddress percentage"
+let tags = "Domain modeling postal code country IBAN BIC gender email address percentage"
 
 let buildMode = if isMono then "Release" else "Debug"
 

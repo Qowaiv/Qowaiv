@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
@@ -496,7 +497,7 @@ namespace Qowaiv.IO
 		/// Custom:
 		/// 8900.ToString("0.0 kb") => 8.9 kb
 		/// 238900.ToString("0.0 MB") => 0.2 MB
-		/// 1238900.ToString("#,##0.00 Kilobyte") => 1,209.86 Kilobyte
+		/// 1238900.ToString("#,##0.00 Kilobyte") => 1,239.00 Kilobyte
 		/// 1238900.ToString("#,##0") => 1,238,900
 		/// </remarks>
 		public string ToString(string format, IFormatProvider formatProvider)
@@ -529,9 +530,17 @@ namespace Qowaiv.IO
 			var format = match.Groups["format"].Value;
 			var streamSizeMarker = match.Groups["streamSizeMarker"].Value;
 
-			Decimal size = m_Value;
+			var sb = new StringBuilder();
+			if (m_Value < 0)
+			{
+				var cultureInfo = formatProvider as CultureInfo;
+				var sign = cultureInfo == null ? "-" : cultureInfo.NumberFormat.NegativeSign;
+				sb.Append(sign);
+			}
+
+			Decimal size = Math.Abs(m_Value);
 			var order = 0;
-			if (m_Value > 9999)
+			if (size > 9999)
 			{
 				if (String.IsNullOrEmpty(format)) { format = "0.0"; }
 
@@ -542,22 +551,22 @@ namespace Qowaiv.IO
 					size /= 1000;
 				}
 			}
-			var str = size.ToString(format, formatProvider);
+			sb.Append(size.ToString(format, formatProvider));
 
 			if (streamSizeMarker[0] == ' ')
 			{
-				str += ' ';
+				sb.Append(' ');
 				streamSizeMarker = streamSizeMarker.Substring(1);
 			}
 
 			switch (streamSizeMarker)
 			{
-				case "s": str += ShortLabels[order].ToLowerInvariant(); break;
-				case "S": str += ShortLabels[order]; break;
-				case "f": str += FullLabels[order].ToLowerInvariant(); break;
-				case "F": str += FullLabels[order]; break;
+				case "s": sb.Append(ShortLabels[order].ToLowerInvariant()); break;
+				case "S": sb.Append(ShortLabels[order]); break;
+				case "f": sb.Append(FullLabels[order].ToLowerInvariant()); break;
+				case "F": sb.Append(FullLabels[order]); break;
 			}
-			return str;
+			return sb.ToString();
 		}
 
 		private static readonly Regex FormattedPattern = new Regex("^(?<format>.*)(?<streamSizeMarker> ?[sSfF])$", RegexOptions.Compiled | RegexOptions.RightToLeft);

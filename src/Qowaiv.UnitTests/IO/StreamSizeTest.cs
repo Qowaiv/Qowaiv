@@ -432,6 +432,17 @@ namespace Qowaiv.UnitTests.IO
 		}
 
 		[Test]
+		public void ToString_Negative_AreEqual()
+		{
+			using (new CultureInfoScope("nl-BE"))
+			{
+				var act = (-TestStruct).ToString("0.0 F");
+				var exp = "-123,5 Megabyte";
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
 		public void ToString_GB_AreEqual()
 		{
 			using (new CultureInfoScope("nl-BE"))

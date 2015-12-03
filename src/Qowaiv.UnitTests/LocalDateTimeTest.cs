@@ -440,7 +440,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToString_CustomFormatter_SupportsCustomFormatting()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
 				var exp = "Unit Test Formatter, value: '13/06/1988 22:10:05', format: 'Unit Test Format'";

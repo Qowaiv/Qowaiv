@@ -565,7 +565,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ToString_NullFormatProvider_FormattedString()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = TestStruct.ToString("f", null);
 				var exp = "febrero";
@@ -893,7 +893,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FullName_Empty_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = Month.Empty.FullName;
 				var exp = "";
@@ -904,7 +904,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FullName_Unknown_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = Month.Unknown.FullName;
 				var exp = "?";
@@ -915,7 +915,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void FullName_TestStruct_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = TestStruct.FullName;
 				var exp = "febrero";
@@ -926,7 +926,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ShortName_Empty_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = Month.Empty.ShortName;
 				var exp = "";
@@ -937,7 +937,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ShortName_Unknown_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = Month.Unknown.ShortName;
 				var exp = "?";
@@ -948,10 +948,10 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void ShortName_TestStruct_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = TestStruct.ShortName;
-				var exp = "feb";
+				var exp = "feb.";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -964,7 +964,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetFullName_Empty_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = Month.Empty.GetFullName(null);
 				var exp = "";
@@ -975,7 +975,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetShortName_Empty_AreEqual()
 		{
-			using (new CultureInfoScope("es-EC"))
+			using (new CultureInfoScope("es-ES"))
 			{
 				var act = Month.Empty.GetShortName(null);
 				var exp = "";
@@ -1002,7 +1002,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetFullName_TestStruct_AreEqual()
 		{
-			var act = TestStruct.GetFullName(new CultureInfo("es-EC"));
+			var act = TestStruct.GetFullName(new CultureInfo("es-ES"));
 			var exp = "febrero";
 			Assert.AreEqual(exp, act);
 		}
@@ -1010,8 +1010,8 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetShortName_TestStruct_AreEqual()
 		{
-			var act = TestStruct.GetShortName(new CultureInfo("es-EC"));
-			var exp = "feb";
+			var act = TestStruct.GetShortName(new CultureInfo("es-ES"));
+			var exp = "feb.";
 			Assert.AreEqual(exp, act);
 		}
 

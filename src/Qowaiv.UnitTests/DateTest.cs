@@ -416,10 +416,10 @@ namespace Qowaiv.UnitTests
 		}
 
 		[Test]
-		public void ToString_FormatValueSpanishEcuador_AreEqual()
+		public void ToString_FormatValueSpanishSpain_AreEqual()
 		{
 			var act = new Date(1988, 08, 08).ToString("d", new CultureInfo("es-EC"));
-			var exp = "08/08/1988";
+			var exp = "8/8/1988";
 			Assert.AreEqual(exp, act);
 		}
 

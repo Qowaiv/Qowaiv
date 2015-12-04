@@ -21,7 +21,7 @@ namespace Qowaiv.UnitTests.TestTools
 			Assert.AreEqual("{DebuggerDisplay}", act.Value, "DebuggerDisplay attribute value is not '{DebuggerDisplay}'.");
 		}
 
-		public static void HasResult(string expected, object value)
+		public static void HasResult(object expected, object value)
 		{
 			Assert.IsNotNull(value, "The supplied value should not be null.");
 

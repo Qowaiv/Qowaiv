@@ -49,6 +49,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.IO.StreamSize),
 				typeof(Qowaiv.Security.Cryptography.CryptographicSeed),
 				typeof(Qowaiv.Sql.Timestamp),
+				typeof(Qowaiv.Statistics.Elo),
 				typeof(Qowaiv.Web.InternetMediaType)
 			};
 

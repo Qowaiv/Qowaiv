@@ -74,6 +74,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Conversion\Sql\TimestampTypeConverter.cs" />
+    <Compile Include="Conversion\Statistics\EloTypeConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Conversion\UuidTypeConverter.cs" />
     <Compile Include="Conversion\WeekDateTypeConverter.cs" />
     <Compile Include="Conversion\YearTypeConverter.cs" />
@@ -119,6 +122,12 @@
     <Compile Include="Sql\Timestamp.cs" />
     <Compile Include="SingleValueStaticOptions.cs" />
     <Compile Include="SingleValueObjectAttribute.cs" />
+    <Compile Include="Statistics\Elo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Statistics\EloExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Text\Base64.cs" />
     <Compile Include="Text\WildcardPattern.cs" />
     <Compile Include="Text\WildcardPatternOptions.cs" />

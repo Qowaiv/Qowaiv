@@ -26,6 +26,11 @@ Date
 ----
 Represents a date, so without hours (minutes, seconds, mili seconds).
 
+Elo
+---
+Respresents an Elo (rating), a method for calculating the relative skill levels of
+players in competitor-versus-competitor games.
+
 Email address
 -------------
 Represents a (single) email address, including IPv4 domains.

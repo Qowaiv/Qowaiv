@@ -231,4 +231,7 @@
   <data name="NotSupportedException_NoGenericType" xml:space="preserve">
     <value>Type must be a none generic type.</value>
   </data>
+  <data name="FormatExceptionElo" xml:space="preserve">
+    <value>Not a valid Elo</value>
+  </data>
 </root>

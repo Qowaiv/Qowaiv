@@ -9,3 +9,6 @@
 
 ### New in 2.0.0.159 (Released 2015/12/03)
 * Fixed an issue with negative values for StreamSize.
+
+### New in 2.0.0.164 (Released 2015/12/04)
+* Added Qowaiv.Statistics.Elo.

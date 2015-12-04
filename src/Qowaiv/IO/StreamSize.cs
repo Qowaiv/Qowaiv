@@ -630,7 +630,7 @@ namespace Qowaiv.IO
 			{
 				return CompareTo((StreamSize)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a stream size"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a stream size"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified stream size and indicates

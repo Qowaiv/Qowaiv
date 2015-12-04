@@ -395,7 +395,7 @@ namespace Qowaiv
 			{
 				return CompareTo((WeekDate)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a week date"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a week date"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified week date and indicates

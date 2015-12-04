@@ -624,7 +624,7 @@ namespace Qowaiv
 			{
 				return CompareTo((LocalDateTime)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a local date time"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a local date time"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified local date time and indicates

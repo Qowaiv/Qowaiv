@@ -271,7 +271,7 @@ namespace @Model.Namespace
             {
                 return CompareTo((@Model.ClassName)obj);
             }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "@Model.a @Model.ClassLongName"), "obj");
+            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "@Model.a @Model.ClassLongName"), "obj");
         }
 
         /// <summary>Compares this instance with a specified @Model.ClassLongName and indicates

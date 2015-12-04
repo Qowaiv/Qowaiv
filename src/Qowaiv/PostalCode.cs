@@ -300,7 +300,7 @@ namespace Qowaiv
 			{
 				return CompareTo((PostalCode)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a postal code"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a postal code"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified postal code and indicates

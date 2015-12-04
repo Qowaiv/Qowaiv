@@ -300,7 +300,7 @@ namespace Qowaiv
 			{
 				return CompareTo((HouseNumber)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a house number"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a house number"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified house number and indicates

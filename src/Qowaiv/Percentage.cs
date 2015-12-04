@@ -654,7 +654,7 @@ namespace Qowaiv
 			{
 				return CompareTo((Percentage)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a percentage"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a percentage"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified Percentage and indicates

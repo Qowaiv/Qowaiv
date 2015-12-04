@@ -354,7 +354,7 @@ namespace Qowaiv
 			{
 				return CompareTo((Month)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a month"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a month"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified month and indicates

@@ -245,7 +245,7 @@ namespace Qowaiv.Sql
 			{
 				return CompareTo((Timestamp)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a timestamp"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a timestamp"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified timestamp and indicates

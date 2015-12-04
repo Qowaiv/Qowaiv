@@ -394,7 +394,7 @@ namespace Qowaiv
 			{
 				return CompareTo((Country)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a Country"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a Country"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified Country and indicates

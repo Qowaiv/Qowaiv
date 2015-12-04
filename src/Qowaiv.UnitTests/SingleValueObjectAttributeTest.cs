@@ -56,9 +56,7 @@ namespace Qowaiv.UnitTests
 			{
 				Console.WriteLine(svo);
 			}
-
-			Assert.AreEqual(exp.Length, svos.Length);
-
+					
 			CollectionAssert.AreEqual(exp, svos);
 
 			foreach (var svo in svos)

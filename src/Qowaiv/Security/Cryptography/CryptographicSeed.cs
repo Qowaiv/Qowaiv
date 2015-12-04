@@ -280,7 +280,7 @@ namespace Qowaiv.Security.Cryptography
 			{
 				return CompareTo((CryptographicSeed)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a cryptographic seed"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a cryptographic seed"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified cryptographic seed and indicates

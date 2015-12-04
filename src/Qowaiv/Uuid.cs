@@ -307,7 +307,7 @@ namespace Qowaiv
 			{
 				return CompareTo((Uuid)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a GUID"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a GUID"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified UUID and indicates

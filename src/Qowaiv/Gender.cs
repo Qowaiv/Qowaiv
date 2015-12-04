@@ -353,7 +353,7 @@ namespace Qowaiv
 			{
 				return CompareTo((Gender)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a gender"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a gender"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified Gender and indicates

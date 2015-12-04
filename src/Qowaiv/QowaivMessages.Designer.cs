@@ -63,9 +63,9 @@ namespace Qowaiv {
         /// <summary>
         ///   Looks up a localized string similar to Argument must be {0}.
         /// </summary>
-        public static string AgrumentException_Must {
+        public static string ArgumentException_Must {
             get {
-                return ResourceManager.GetString("AgrumentException_Must", resourceCulture);
+                return ResourceManager.GetString("ArgumentException_Must", resourceCulture);
             }
         }
         

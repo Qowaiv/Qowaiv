@@ -302,7 +302,7 @@ namespace Qowaiv
 			{
 				return CompareTo((BankIdentifierCode)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a BIC"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a BIC"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified BIC and indicates

@@ -526,7 +526,7 @@ namespace Qowaiv
 			{
 				return CompareTo((Date)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a Date"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a Date"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified Date and indicates

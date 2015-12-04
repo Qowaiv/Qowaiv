@@ -285,7 +285,7 @@ namespace Qowaiv
 			{
 				return CompareTo((Year)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "a year"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a year"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified year and indicates

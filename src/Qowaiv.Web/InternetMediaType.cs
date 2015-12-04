@@ -365,7 +365,7 @@ namespace Qowaiv.Web
 			{
 				return CompareTo((InternetMediaType)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "an internet media type"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "an internet media type"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified internet media type and indicates

@@ -337,7 +337,7 @@ namespace Qowaiv
 			{
 				return CompareTo((InternationalBankAccountNumber)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "an IBAN"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "an IBAN"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified IBAN and indicates

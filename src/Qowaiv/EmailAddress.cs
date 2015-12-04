@@ -313,7 +313,7 @@ namespace Qowaiv
 			{
 				return CompareTo((EmailAddress)obj);
 			}
-			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.AgrumentException_Must, "an email address"), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "an email address"), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified email address and indicates

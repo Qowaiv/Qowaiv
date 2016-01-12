@@ -1303,6 +1303,7 @@ namespace Qowaiv.UnitTests.IO
 
 			Assert.AreEqual(exp, act);
 		}
+				
 		[Test]
 		public void GetStreamSize_NullFileInfo_ThrowsArgumentNullException()
 		{
@@ -1312,6 +1313,17 @@ namespace Qowaiv.UnitTests.IO
 				fileInfo.GetStreamSize();
 			}
 			, "fileInfo");
+		}
+
+		[Test]
+		public void GetStreamSize_NullDirectoryInfo_ThrowsArgumentNullException()
+		{
+			ExceptionAssert.CatchArgumentNullException(() =>
+			{
+				DirectoryInfo directoryInfo = null;
+				directoryInfo.GetStreamSize();
+			}
+			, "directoryInfo");
 		}
 
 		[Test]

@@ -365,10 +365,13 @@ namespace Qowaiv.UnitTests.Statistics
 		[Test]
 		public void ToString_CustomFormatter_SupportsCustomFormatting()
 		{
-			var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-			var exp = "Unit Test Formatter, value: '1732.4', format: 'Unit Test Format'";
+			using (new CultureInfoScope(CultureInfo.InvariantCulture))
+			{
+				var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+				var exp = "Unit Test Formatter, value: '1732.4', format: 'Unit Test Format'";
 
-		Assert.AreEqual(exp, act);
+				Assert.AreEqual(exp, act);
+			}
 		}
 		[Test]
 		public void ToString_TestStruct_ComplexPattern()

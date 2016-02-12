@@ -18,6 +18,15 @@ namespace Qowaiv.IO
 		{
 			return StreamSize.FromFileInfo(fileInfo);
 		}
+
+		/// <summary>Gets the stream size of the current directory.</summary>
+		public static StreamSize GetStreamSize(this DirectoryInfo directoryInfo)
+		{
+			Guard.NotNull(directoryInfo, "directoryInfo");
+			return directoryInfo
+				.EnumerateFiles("*", SearchOption.AllDirectories)
+				.Sum(file => file.Length);
+		}
 		
 		/// <summary>Gets the stream size of the current stream.</summary>
 		public static StreamSize GetStreamSize(this Stream stream)

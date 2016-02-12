@@ -66,9 +66,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Razor">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.5.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -113,7 +113,9 @@
     <EmbeddedResource Include="Generators\Svo\Templates\SvoStruct_JavaScript.cshtml" />
     <EmbeddedResource Include="Generators\Svo\Templates\SvoStruct_TypeConverter.cshtml" />
     <EmbeddedResource Include="Generators\Svo\Templates\SvoStruct_UnitTest.cshtml" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <EmbeddedResource Include="QowaivCodeGeneratorMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>QowaivCodeGeneratorMessages.Designer.cs</LastGenOutput>

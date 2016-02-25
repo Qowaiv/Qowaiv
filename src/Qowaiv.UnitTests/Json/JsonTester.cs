@@ -3,7 +3,7 @@ using System;
 
 namespace Qowaiv.UnitTests.Json
 {
-	public class JsonTester
+	public static class JsonTester
 	{
 		public static T Read<T>() where T : IJsonSerializable
 		{
@@ -14,19 +14,19 @@ namespace Qowaiv.UnitTests.Json
 			}
 			return instance;
 		}
-		public static T Read<T>(String val) where T : IJsonSerializable
+		public static T Read<T>(string val) where T : IJsonSerializable
 		{
 			T instance = NewInstance<T>();
 			instance.FromJson(val);
 			return instance;
 		}
-		public static T Read<T>(Int64 val) where T : IJsonSerializable
+		public static T Read<T>(long val) where T : IJsonSerializable
 		{
 			T instance = NewInstance<T>();
 			instance.FromJson(val);
 			return instance;
 		}
-		public static T Read<T>(Double val) where T : IJsonSerializable
+		public static T Read<T>(double val) where T : IJsonSerializable
 		{
 			T instance = NewInstance<T>();
 			instance.FromJson(val);

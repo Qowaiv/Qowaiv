@@ -12,7 +12,7 @@ using System.Text;
 namespace Qowaiv.CodeGenerator
 {
 	/// <summary>The code generator program.</summary>
-	public class Program
+	public static class Program
 	{
 		/// <summary>Logger for the collector.</summary>
 		private static ILog log = LogManager.GetLogger(typeof(Program));

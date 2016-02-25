@@ -14,12 +14,15 @@ namespace Qowaiv.CodeGenerator.Xml
 		protected XResourceFileData() { }
 
 		/// <summary>Initializes a new instance of resource file data.</summary>
-		public XResourceFileData(string name, string val, string comment = null)
+		public XResourceFileData(string name, string val) : this(name, val, null) { }
+
+		/// <summary>Initializes a new instance of resource file data.</summary>
+		public XResourceFileData(string name, string val, string comment)
 		{
-			this.Name = Guard.NotNullOrEmpty(name, "name");
-			this.Value = val;
+			Name = Guard.NotNullOrEmpty(name, "name");
+			Value = val;
 			// not add empty comments.
-			this.Comment = String.IsNullOrEmpty(comment) ? null : comment;
+			Comment = string.IsNullOrEmpty(comment) ? null : comment;
 		}
 
 		/// <summary>Gets and set the name.</summary>

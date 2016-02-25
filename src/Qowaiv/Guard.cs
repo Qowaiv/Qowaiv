@@ -41,12 +41,10 @@ namespace Qowaiv
 		/// The name of the parameter.
 		/// </param>
 		[DebuggerStepThrough]
-		//[SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength",
-		//	Justification = "Null reference of string is tested by NotNull() already.")]
 		public static string NotNullOrEmpty([ValidatedNotNull]string param, string paramName)
 		{
 			NotNull(param, paramName);
-			if (string.Empty.Equals(param))
+			if (string.Empty == param)
 			{
 				throw new ArgumentException(QowaivMessages.ArgumentException_StringEmpty, paramName);
 			}

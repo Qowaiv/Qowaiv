@@ -57,7 +57,7 @@ namespace Qowaiv
 			return
 				values.Contains(val.ToUpper(c)) ||
 				(
-					c != CultureInfo.InvariantCulture &&
+					!c.Equals(CultureInfo.InvariantCulture) &&
 					StringValues[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant())
 				);
 		}

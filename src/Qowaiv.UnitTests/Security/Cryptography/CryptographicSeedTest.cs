@@ -593,7 +593,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 		[Test]
 		public void CompareTo_ObjectTestStruct_0()
 		{
-			object other = (object)TestStruct;
+			object other = TestStruct;
 
 			var exp = 0;
 			var act = TestStruct.CompareTo(other);

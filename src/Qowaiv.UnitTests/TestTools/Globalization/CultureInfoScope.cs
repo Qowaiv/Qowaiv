@@ -79,7 +79,7 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 		/// <summary>Gets the previous Current Culture.</summary>
 		public CultureInfo Previous { get; protected set; }
 
-		/// <summary>Represents the CultureInfo scope as System.String.</summary>
+		/// <summary>Represents the CultureInfo scope as <see cref="string"/>.</summary>
 		protected string DebuggerDisplay
 		{
 			get

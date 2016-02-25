@@ -19,7 +19,7 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
         /// <param name="classname">
         /// The class name of the template.
         /// </param>
-        public TemplateStream(Stream stream, String classname)
+        public TemplateStream(Stream stream, string classname)
         {
             this.Stream = stream;
             this.ClassName = classname;
@@ -29,6 +29,6 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
         public Stream Stream { get; protected set; }
 
         /// <summary>Gets the class name.</summary>
-        public String ClassName { get; protected set; }
+        public string ClassName { get; protected set; }
     }
 }

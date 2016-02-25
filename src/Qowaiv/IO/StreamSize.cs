@@ -398,7 +398,7 @@ namespace Qowaiv.IO
 		/// <param name="jsonString">
 		/// The JSON string that represents the stream size.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -437,20 +437,20 @@ namespace Qowaiv.IO
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current stream size for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get { return ToString(" F", CultureInfo.InvariantCulture); }
 		}
 
-		/// <summary>Returns a System.String that represents the current stream size.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current stream size.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -459,7 +459,7 @@ namespace Qowaiv.IO
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current stream size.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -468,7 +468,7 @@ namespace Qowaiv.IO
 			return ToString("0 byte", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current stream size.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -508,7 +508,7 @@ namespace Qowaiv.IO
 				return formatted;
 			}
 
-			var match = FormattedPattern.Match(format ?? String.Empty);
+			var match = FormattedPattern.Match(format ?? string.Empty);
 			if (match.Success)
 			{
 				return ToFormattedString(formatProvider, match);
@@ -542,7 +542,7 @@ namespace Qowaiv.IO
 			var order = 0;
 			if (size > 9999)
 			{
-				if (String.IsNullOrEmpty(format)) { format = "0.0"; }
+				if (string.IsNullOrEmpty(format)) { format = "0.0"; }
 
 				// Rounding would potential lead to 1000.
 				while (size >= 999.5m)
@@ -663,9 +663,9 @@ namespace Qowaiv.IO
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a stream size to a System.String.</summary>
+		/// <summary>Casts a stream size to a <see cref="string"/>.</summary>
 		public static explicit operator string(StreamSize val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a stream size.</summary>
+		/// <summary>Casts a <see cref="string"/> to a stream size.</summary>
 		public static explicit operator StreamSize(string str) { return StreamSize.Parse(str, CultureInfo.CurrentCulture); }
 
 
@@ -889,7 +889,7 @@ namespace Qowaiv.IO
 
 		private static string GetStreamSizeMarker(string input)
 		{
-			if (string.IsNullOrEmpty(input)) { return String.Empty; }
+			if (string.IsNullOrEmpty(input)) { return string.Empty; }
 
 			var length = input.Length;
 
@@ -904,7 +904,7 @@ namespace Qowaiv.IO
 					return input.Substring(length - marker.Length);
 				}
 			}
-			return String.Empty;
+			return string.Empty;
 		}
 		private static string GetWithoutStreamSizeMarker(string input, string streamSizeMarker)
 		{

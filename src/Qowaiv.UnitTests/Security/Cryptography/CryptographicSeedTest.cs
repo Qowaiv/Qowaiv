@@ -424,7 +424,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 
 		#endregion
 		
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_StringEmpty()
@@ -757,7 +757,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 		{
 			Assert.IsFalse(CryptographicSeed.IsValid("!"), "!");
 			Assert.IsFalse(CryptographicSeed.IsValid((String)null), "(String)null");
-			Assert.IsFalse(CryptographicSeed.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(CryptographicSeed.IsValid(string.Empty), "string.Empty");
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

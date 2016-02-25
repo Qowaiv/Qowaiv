@@ -82,7 +82,7 @@ namespace Qowaiv.Json
 					break;
 				// Other scenario's are not supported.    
 				default:
-					throw new JsonSerializationException(String.Format(CultureInfo.CurrentCulture, QowaivMessages.JsonSerialization_TokenNotSupported, objectType.FullName, reader.TokenType));
+					throw new JsonSerializationException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.JsonSerialization_TokenNotSupported, objectType.FullName, reader.TokenType));
 			}
 			return result;
 		}

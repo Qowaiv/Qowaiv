@@ -235,7 +235,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void FromFile__StringEmpty_Empty()
 		{
-			var act = InternetMediaType.FromFile(String.Empty);
+			var act = InternetMediaType.FromFile(string.Empty);
 			var exp = InternetMediaType.Empty;
 
 			Assert.AreEqual(exp, act);
@@ -521,7 +521,7 @@ namespace Qowaiv.Web.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_StringEmpty()
@@ -776,7 +776,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void TopLevel_DefaultValue_0()
 		{
-			var exp = String.Empty;
+			var exp = string.Empty;
 			var act = InternetMediaType.Empty.TopLevel;
 			Assert.AreEqual(exp, act);
 		}
@@ -834,7 +834,7 @@ namespace Qowaiv.Web.UnitTests
 		[Test]
 		public void Subtype_DefaultValue_0()
 		{
-			var exp = String.Empty;
+			var exp = string.Empty;
 			var act = InternetMediaType.Empty.Subtype;
 			Assert.AreEqual(exp, act);
 		}
@@ -1007,7 +1007,7 @@ namespace Qowaiv.Web.UnitTests
 		{
 			Assert.IsFalse(InternetMediaType.IsValid("test/d"), "Complex");
 			Assert.IsFalse(InternetMediaType.IsValid((String)null), "(String)null");
-			Assert.IsFalse(InternetMediaType.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(InternetMediaType.IsValid(string.Empty), "string.Empty");
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

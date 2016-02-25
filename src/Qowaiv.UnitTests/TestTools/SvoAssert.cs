@@ -26,13 +26,13 @@ namespace Qowaiv.UnitTests.TestTools
 			var parse = staticMethods.SingleOrDefault(method =>
 					method.Name == "Parse" &&
 					method.GetParameters().Length == 1 &&
-					method.GetParameters()[0].ParameterType == typeof(String) &&
+					method.GetParameters()[0].ParameterType == typeof(string) &&
 					method.ReturnType == svo);
 
 			var parseCulture = staticMethods.SingleOrDefault(method =>
 				 method.Name == "Parse" &&
 				  method.GetParameters().Length == 2 &&
-				  method.GetParameters()[0].ParameterType == typeof(String) &&
+				  method.GetParameters()[0].ParameterType == typeof(string) &&
 				  method.GetParameters()[1].ParameterType == typeof(IFormatProvider) &&
 				  method.ReturnType == svo);
 
@@ -65,7 +65,7 @@ namespace Qowaiv.UnitTests.TestTools
 			var tryParse = staticMethods.SingleOrDefault(method =>
 				  method.Name == "TryParse" &&
 				  method.GetParameters().Length == 2 &&
-				  method.GetParameters()[0].ParameterType == typeof(String) &&
+				  method.GetParameters()[0].ParameterType == typeof(string) &&
 				  method.GetParameters()[1].ParameterType == byrefSvo &&
 				  method.GetParameters()[1].IsOut &&
 				  method.ReturnType == typeof(Boolean));
@@ -73,7 +73,7 @@ namespace Qowaiv.UnitTests.TestTools
 			var tryParseCulture = staticMethods.SingleOrDefault(method =>
 				 method.Name == "TryParse" &&
 				  method.GetParameters().Length == 3 &&
-				  method.GetParameters()[0].ParameterType == typeof(String) &&
+				  method.GetParameters()[0].ParameterType == typeof(string) &&
 				  method.GetParameters()[1].ParameterType == typeof(IFormatProvider) &&
 				  method.GetParameters()[2].ParameterType == byrefSvo &&
 				  method.GetParameters()[2].IsOut &&
@@ -105,13 +105,13 @@ namespace Qowaiv.UnitTests.TestTools
 			var isValid = staticMethods.SingleOrDefault(method =>
 					method.Name == "IsValid" &&
 					method.GetParameters().Length == 1 &&
-					method.GetParameters()[0].ParameterType == typeof(String) &&
+					method.GetParameters()[0].ParameterType == typeof(string) &&
 					method.ReturnType == typeof(Boolean));
 			
 			var isValidCulture = staticMethods.SingleOrDefault(method =>
 				   method.Name == "IsValid" &&
 				   method.GetParameters().Length == 2 &&
-				   method.GetParameters()[0].ParameterType == typeof(String) &&
+				   method.GetParameters()[0].ParameterType == typeof(string) &&
 				   method.GetParameters()[1].ParameterType == typeof(IFormatProvider) &&
 				   method.ReturnType == typeof(Boolean));
 			

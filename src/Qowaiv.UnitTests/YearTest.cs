@@ -520,7 +520,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_StringEmpty()
@@ -962,7 +962,7 @@ namespace Qowaiv.UnitTests
 			Assert.IsFalse(Year.IsValid("00"), "00");
 			Assert.IsFalse(Year.IsValid("0"), "0");
 			Assert.IsFalse(Year.IsValid((String)null), "(String)null");
-			Assert.IsFalse(Year.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(Year.IsValid(string.Empty), "string.Empty");
 
 			Assert.IsFalse(Year.IsValid((System.Int32?)null), "(System.Int32?)null");
 		}

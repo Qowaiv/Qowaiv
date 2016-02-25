@@ -524,7 +524,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void DebuggerDisplay_DebugToString_HasAttribute()
@@ -1184,7 +1184,7 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.IsFalse(Country.IsValid("Complex"), "Complex");
 			Assert.IsFalse(Country.IsValid((String)null), "(String)null");
-			Assert.IsFalse(Country.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(Country.IsValid(string.Empty), "string.Empty");
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

@@ -16,7 +16,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void IsUnknown_StringEmpty_IsFalse()
         {
-            Assert.IsFalse(Unknown.IsUnknown(String.Empty));
+            Assert.IsFalse(Unknown.IsUnknown(string.Empty));
         }
 
         [Test]

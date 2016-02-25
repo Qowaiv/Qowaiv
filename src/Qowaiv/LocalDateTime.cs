@@ -480,7 +480,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the local date time.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -519,20 +519,20 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current local date time for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current local date time for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get { return m_Value.ToString("yyyy-MM-dd hh:mm:ss.FFF", CultureInfo.InvariantCulture); }
 		}
 
-		/// <summary>Returns a System.String that represents the current local date time.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current local date time.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current local date time.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -541,7 +541,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current local date time.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -550,7 +550,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current local date time.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -657,13 +657,13 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a local date time to a System.String.</summary>
+		/// <summary>Casts a local date time to a <see cref="string"/>.</summary>
 		public static explicit operator string(LocalDateTime val) { return val.ToString(CultureInfo.CurrentCulture); }
 		/// <summary>Casts a local date time to a date time.</summary>
 		public static implicit operator DateTime(LocalDateTime val) { return val.m_Value; }
 
 
-		/// <summary>Casts a System.String to a local date time.</summary>
+		/// <summary>Casts a <see cref="string"/> to a local date time.</summary>
 		public static explicit operator LocalDateTime(string str) { return LocalDateTime.Parse(str, CultureInfo.CurrentCulture); }
 		/// <summary>Casts a date time to a local date time.</summary>
 		public static implicit operator LocalDateTime(DateTime val) { return new LocalDateTime(val); }

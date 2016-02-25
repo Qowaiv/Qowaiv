@@ -296,7 +296,7 @@ namespace Qowaiv.UnitTests
 		{
 			var collection = new EmailAddressCollection();
 
-			var exp = String.Empty;
+			var exp = string.Empty;
 			var act = collection.ToString();
 
 			Assert.AreEqual(exp, act);
@@ -414,7 +414,7 @@ namespace Qowaiv.UnitTests
 			EmailAddressCollection exp = new EmailAddressCollection();
 			EmailAddressCollection act;
 
-			Assert.IsTrue(EmailAddressCollection.TryParse(String.Empty, out act));
+			Assert.IsTrue(EmailAddressCollection.TryParse(string.Empty, out act));
 			CollectionAssert.AreEqual(exp, act);
 		}
 

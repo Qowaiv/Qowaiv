@@ -12,7 +12,7 @@ namespace Qowaiv.Formatting
 	public struct FormattingArguments : ISerializable
 	{
 		/// <summary>Represents empty/not set formatting arguments.</summary>
-		public static readonly FormattingArguments None = new FormattingArguments() { m_Format = default(String), m_FormatProvider = null };
+		public static readonly FormattingArguments None = new FormattingArguments() { m_Format = default(string), m_FormatProvider = null };
 
 		/// <summary>Initializes a new instance of new formatting arguments.</summary>
 		/// <param name="format">
@@ -113,7 +113,7 @@ namespace Qowaiv.Formatting
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current formatting arguments for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current formatting arguments for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{

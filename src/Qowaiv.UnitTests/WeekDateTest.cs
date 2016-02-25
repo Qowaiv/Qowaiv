@@ -483,7 +483,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_CustomFormatter_SupportsCustomFormatting()
@@ -930,7 +930,7 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.IsFalse(WeekDate.IsValid("Complex"), "Complex");
 			Assert.IsFalse(WeekDate.IsValid((String)null), "(String)null");
-			Assert.IsFalse(WeekDate.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(WeekDate.IsValid(string.Empty), "string.Empty");
 			Assert.IsFalse(WeekDate.IsValid("0000-W12-6"), "0000-W12-6");
 			Assert.IsFalse(WeekDate.IsValid("0001-W12-8"), "0001-W12-8");
 			Assert.IsFalse(WeekDate.IsValid("9999-W53-1"), "9999-W53-1");

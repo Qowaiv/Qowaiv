@@ -363,7 +363,7 @@ namespace Qowaiv.UnitTests.IO
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Zero_StringEmpty()
@@ -1242,7 +1242,7 @@ namespace Qowaiv.UnitTests.IO
 			{
 				Assert.IsFalse(StreamSize.IsValid("Complex"), "Complex");
 				Assert.IsFalse(StreamSize.IsValid((String)null), "(String)null");
-				Assert.IsFalse(StreamSize.IsValid(String.Empty), "String.Empty");
+				Assert.IsFalse(StreamSize.IsValid(string.Empty), "string.Empty");
 
 				Assert.IsFalse(StreamSize.IsValid("1234 EB"), "1234 EB, to big");
 				Assert.IsFalse(StreamSize.IsValid("-1234EB"), "-1234EB, to small");

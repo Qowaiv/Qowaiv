@@ -264,7 +264,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the email address.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			AddRange(Parse(jsonString, CultureInfo.InvariantCulture));
 		}
@@ -316,13 +316,13 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current email address collection.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current email address collection.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current email address collection.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -331,7 +331,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current email address collection.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -340,7 +340,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current email address collection.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>

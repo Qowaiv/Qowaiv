@@ -162,8 +162,8 @@ Formatting arguments collection
 -------------------------------
 This collection of formatting arguments stores them based on a type to apply 
 on. On top of that, it has a Format() method, that is an extended implementation 
-of String.Format(). The difference between these two methods is, that - when no 
-custom format is supplied at the format string - String.Format() the default 
+of string.Format(). The difference between these two methods is, that - when no 
+custom format is supplied at the format string - string.Format() the default 
 formatting of the object is used, where FormattingArgumentsCollection.Format() 
 uses the default specified at the formatting collection of a type (if available).
 

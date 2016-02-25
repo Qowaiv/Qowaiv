@@ -84,7 +84,7 @@ namespace Qowaiv.UnitTests.Globalization
 			var info = PostalCodeCountryInfo.GetInstance(Country.BE);
 			
 			var act = info.GetSingleValue();
-			var exp = String.Empty;
+			var exp = string.Empty;
 
 			Assert.AreEqual(exp, act);
 		}

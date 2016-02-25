@@ -30,7 +30,7 @@ namespace Qowaiv.CodeGenerator.Generators.Svo
         public string ClassNameSerializeObject { get { return this.ClassName + "SerializeObject"; } }
 
         /// <summary>Returns true if the underlying type is String, otherwise false.</summary>
-        public bool IsStringBased { get { return UnderlyingType == typeof(String); } }
+        public bool IsStringBased { get { return UnderlyingType == typeof(string); } }
 
         /// <summary>Returns true if the underlying type is a floating point, otherwise false.</summary>
         public bool IsFloatBased { get { return UnderlyingType == typeof(Single) || UnderlyingType == typeof(Double) || UnderlyingType == typeof(Decimal); } }
@@ -76,7 +76,7 @@ namespace Qowaiv.CodeGenerator.Generators.Svo
         public static readonly Dictionary<Type, String> JavaScriptInitialValues = new Dictionary<Type, String>()
         {
             { typeof(Object), "null" },
-            { typeof(String), "''" },
+            { typeof(string), "''" },
             { typeof(Decimal), "0.0" },
             { typeof(Single), "0.0" },
             { typeof(Double), "0.0" },

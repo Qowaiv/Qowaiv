@@ -194,7 +194,7 @@ namespace Qowaiv.Statistics
 		/// <param name="jsonString">
 		/// The JSON string that represents the Elo.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -230,17 +230,17 @@ namespace Qowaiv.Statistics
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current Elo for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Elo for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private Double DebuggerDisplay { get { return m_Value; } }
 
-		/// <summary>Returns a System.String that represents the current Elo.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Elo.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Elo.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -249,7 +249,7 @@ namespace Qowaiv.Statistics
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Elo.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -258,7 +258,7 @@ namespace Qowaiv.Statistics
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Elo.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -332,7 +332,7 @@ namespace Qowaiv.Statistics
 			{
 				return CompareTo((Elo)obj);
 			}
-			throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "an Elo."), "obj");
+			throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "an Elo."), "obj");
 		}
 
 		/// <summary>Compares this instance with a specified Elo and indicates
@@ -365,9 +365,9 @@ namespace Qowaiv.Statistics
 
 		#region (Explicit) casting
 
-		/// <summary>Casts an Elo to a System.String.</summary>
+		/// <summary>Casts an Elo to a <see cref="string"/>.</summary>
 		public static explicit operator string(Elo val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a Elo.</summary>
+		/// <summary>Casts a <see cref="string"/> to a Elo.</summary>
 		public static explicit operator Elo(string str) { return Elo.Parse(str, CultureInfo.CurrentCulture); }
 
 

@@ -29,7 +29,7 @@ namespace Qowaiv
 	/// </remarks>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a BIC.")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(String))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(BankIdentifierCodeTypeConverter))]
 	public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<BankIdentifierCode>
 	{
@@ -47,7 +47,7 @@ namespace Qowaiv
 		#region Properties
 
 		/// <summary>The inner value of the BIC.</summary>
-		private String m_Value;
+		private string m_Value;
 
 		/// <summary>Gets the number of characters of BIC.</summary>
 		public int Length { get { return IsEmptyOrUnknown() ? 0 : m_Value.Length; } }
@@ -83,7 +83,7 @@ namespace Qowaiv
 		#region Methods
 
 		/// <summary>Returns true if the BIC is empty, otherwise false.</summary>
-		public bool IsEmpty() { return m_Value == default(System.String); }
+		public bool IsEmpty() { return m_Value == default(string); }
 
 		/// <summary>Returns true if the BIC is unknown, otherwise false.</summary>
 		public bool IsUnknown() { return m_Value == BankIdentifierCode.Unknown.m_Value; }
@@ -150,14 +150,14 @@ namespace Qowaiv
 		/// <summary>Generates a BIC from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(String);
+			m_Value = default(string);
 		}
 
 		/// <summary>Generates a BIC from a JSON string representation.</summary>
 		/// <param name="jsonString">
 		/// The JSON string that represents the BIC.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -183,14 +183,14 @@ namespace Qowaiv
 		/// <summary>Converts a BIC into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
-			return m_Value == default(String) ? null : ToString(CultureInfo.InvariantCulture);
+			return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
 		}
 
 		#endregion
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current BIC for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -202,13 +202,13 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current BIC.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current BIC.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current BIC.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -217,7 +217,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current BIC.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -226,7 +226,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current BIC.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -240,7 +240,7 @@ namespace Qowaiv
 			{
 				return formatted;
 			}
-			if (IsEmpty()) { return String.Empty; }
+			if (IsEmpty()) { return string.Empty; }
 			if (IsUnknown()) { return "?"; }
 			return m_Value;
 		}
@@ -322,9 +322,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a BIC to a System.String.</summary>
+		/// <summary>Casts a BIC to a <see cref="string"/>.</summary>
 		public static explicit operator string(BankIdentifierCode val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a BIC.</summary>
+		/// <summary>Casts a <see cref="string"/> to a BIC.</summary>
 		public static explicit operator BankIdentifierCode(string str) { return BankIdentifierCode.Parse(str, CultureInfo.CurrentCulture); }
 
 

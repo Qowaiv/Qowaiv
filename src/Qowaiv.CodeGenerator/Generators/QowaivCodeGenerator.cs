@@ -137,7 +137,7 @@ namespace Qowaiv.CodeGenerator.Generators
 						var iso2 = row.GetCell(is2_index).StringValue.Trim();
 						var iso3 = row.GetCell(is3_index).StringValue.Trim();
 						var start = row.GetCell(str_index).DateTimeValue;
-						DateTime? end = String.IsNullOrEmpty(row.GetCell(end_index).StringValue) ? (DateTime?)null : (DateTime?)row.GetCell(end_index).DateTimeValue;
+						DateTime? end = string.IsNullOrEmpty(row.GetCell(end_index).StringValue) ? (DateTime?)null : (DateTime?)row.GetCell(end_index).DateTimeValue;
 						var tel = row.GetCell(tel_index).StringValue.Trim();
 						var display = row.GetCell(def_index).StringValue.Trim();
 						var hasRegInfo = XmlConvert.ToBoolean(row.GetCell(reg_index).StringValue);
@@ -169,7 +169,7 @@ namespace Qowaiv.CodeGenerator.Generators
 						{
 							resx.Data.Add(new XResourceFileData(key + "EndDate", end.Value.ToString("yyyy-MM-dd")));
 						}
-						if (!String.IsNullOrEmpty(tel))
+						if (!string.IsNullOrEmpty(tel))
 						{
 							resx.Data.Add(new XResourceFileData(key + "CallingCode", tel));
 						}
@@ -306,10 +306,10 @@ namespace Qowaiv.CodeGenerator.Generators
 						var key = row.GetCell(key_index).StringValue.Trim();
 
 						var iso = row.GetCell(iso_index).StringValue.Trim();
-						int num = String.IsNullOrEmpty(row.GetCell(num_index).StringValue) ? 0 : (int)(double)row.GetCell(num_index).Value;
-						int dig = String.IsNullOrEmpty(row.GetCell(dig_index).StringValue) ? 0 : (int)(double)row.GetCell(dig_index).Value;
+						int num = string.IsNullOrEmpty(row.GetCell(num_index).StringValue) ? 0 : (int)(double)row.GetCell(num_index).Value;
+						int dig = string.IsNullOrEmpty(row.GetCell(dig_index).StringValue) ? 0 : (int)(double)row.GetCell(dig_index).Value;
 						var start = row.GetCell(str_index).DateTimeValue;
-						DateTime? end = String.IsNullOrEmpty(row.GetCell(end_index).StringValue) ? (DateTime?)null : (DateTime?)row.GetCell(end_index).DateTimeValue;
+						DateTime? end = string.IsNullOrEmpty(row.GetCell(end_index).StringValue) ? (DateTime?)null : (DateTime?)row.GetCell(end_index).DateTimeValue;
 						var sym = row.GetCell(sym_index).StringValue.Trim();
 						var display = row.GetCell(def_index).StringValue.Trim();
 
@@ -337,7 +337,7 @@ namespace Qowaiv.CodeGenerator.Generators
 
 						resx.Data.Add(new XResourceFileData(key + "StartDate", start.ToString("yyyy-MM-dd")));
 
-						if (!String.IsNullOrEmpty(sym))
+						if (!string.IsNullOrEmpty(sym))
 						{
 							resx.Data.Add(new XResourceFileData(key + "Symbol", sym));
 						}
@@ -463,7 +463,7 @@ namespace Qowaiv.CodeGenerator.Generators
 
 			var blocks = bban.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-			if (!String.IsNullOrEmpty(checksum))
+			if (!string.IsNullOrEmpty(checksum))
 			{
 				pattern += checksum.Length == 1 ? '0' + checksum : checksum;
 			}
@@ -585,19 +585,19 @@ namespace Qowaiv.CodeGenerator.Generators
 							var comment = row.GetCell(comment_index).StringValue.Trim();
 							if (exists)
 							{
-								if (!String.IsNullOrEmpty(search) && prefix && !single)
+								if (!string.IsNullOrEmpty(search) && prefix && !single)
 								{
 									search = "(" + key + ")?" + search;
 								}
 
-								var settings = String.Format("@\"{0}\"", GetPostalCodePattern(pattern, key, prefix));
-								if (!String.IsNullOrEmpty(search))
+								var settings = string.Format("@\"{0}\"", GetPostalCodePattern(pattern, key, prefix));
+								if (!string.IsNullOrEmpty(search))
 								{
-									settings += String.Format(", \"^{0}$\", \"{1}\"", search, replace);
+									settings += string.Format(", \"^{0}$\", \"{1}\"", search, replace);
 								}
 								else if (!string.IsNullOrEmpty(replace))
 								{
-									settings += String.Format(", null, \"{0}\"", replace);
+									settings += string.Format(", null, \"{0}\"", replace);
 								}
 								if (single)
 								{

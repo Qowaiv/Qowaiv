@@ -102,10 +102,10 @@ namespace Qowaiv.Formatting
 		/// than or equal to the length of the args array.
 		/// </exception>
 		/// <remarks>
-		/// This implementation is a (tweaked) copy of the implementation of System.String.Format().
+		/// This implementation is a (tweaked) copy of the implementation of <see cref="string"/>.Format().
 		/// </remarks>
 		[SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#",
-			Justification = "Follows the origin String.Format(format, args).")]
+			Justification = "Follows the origin string.Format(format, args).")]
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", 
 			Justification = "Just a copy of the .NET code. It is as complex as it is.")]
 		public string Format(string format, params object[] args)
@@ -120,7 +120,7 @@ namespace Qowaiv.Formatting
 
 			var provider = this.FormatProvider;
 
-			// This is different form String.Format, as the provider is never null.
+			// This is different form string.Format, as the provider is never null.
 			ICustomFormatter cf = (ICustomFormatter)provider.GetFormat(typeof(ICustomFormatter));
 
 			while (true)
@@ -233,8 +233,8 @@ namespace Qowaiv.Formatting
 				}
 				if (ch != '}') FormatError();
 				pos++;
-				String sFmt = null;
-				String s = null;
+				string sFmt = null;
+				string s = null;
 				if (cf != null)
 				{
 					if (fmt != null)
@@ -255,7 +255,7 @@ namespace Qowaiv.Formatting
 							sFmt = fmt.ToString();
 						}
 
-						// This is different from String.Format.
+						// This is different from string.Format.
 						// If no format is specified, search for a preferred format in the collection.
 						if (string.IsNullOrEmpty(sFmt))
 						{
@@ -272,7 +272,7 @@ namespace Qowaiv.Formatting
 					}
 				}
 
-				if (s == null) s = String.Empty;
+				if (s == null) s = string.Empty;
 				int pad = width - s.Length;
 				if (!leftJustify && pad > 0) sb.Append(' ', pad);
 				sb.Append(s);
@@ -302,7 +302,8 @@ namespace Qowaiv.Formatting
 		/// <exception cref="System.ArgumentException">
 		/// An element with the same type already exists in the collection.
 		/// </exception>
-		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
+		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", 
+			MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
 			Justification = "Right culture selected by the default constructor.")]
 		public void Add(Type type, string format) { Add(type, new FormattingArguments(format)); }
 
@@ -381,7 +382,8 @@ namespace Qowaiv.Formatting
 		/// <exception cref="System.NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
-		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
+		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
+			MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
 			Justification = "Right culture selected by the default constructor.")]
 		public void Set(Type type, string format) { Set(type, new FormattingArguments(format)); }
 
@@ -505,13 +507,13 @@ namespace Qowaiv.Formatting
 
 		#endregion
 
-		/// <summary>Returns a System.String that represents the current formatting arguments collection for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current formatting arguments collection for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get
 			{
-				return String.Format(
+				return string.Format(
 					CultureInfo.InvariantCulture,
 					"FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count);
 			}

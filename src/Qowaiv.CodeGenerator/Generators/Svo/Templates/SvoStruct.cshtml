@@ -119,7 +119,7 @@ namespace @Model.Namespace
         /// <param name="jsonString">
         /// The JSON string that represents the @Model.ClassLongName.
         /// </param>
-        void IJsonSerializable.FromJson(String jsonString)
+        void IJsonSerializable.FromJson(string jsonString)
         {
             m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
         }
@@ -161,7 +161,7 @@ namespace @Model.Namespace
 
         #region IFormattable / ToString
 
-        /// <summary>Returns a System.String that represents the current @Model.ClassLongName for debug purposes.</summary>
+        /// <summary>Returns a <see cref="string"/> that represents the current @Model.ClassLongName for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
         private string DebuggerDisplay
         {
@@ -173,13 +173,13 @@ namespace @Model.Namespace
             }
         }
 
-         /// <summary>Returns a System.String that represents the current @Model.ClassLongName.</summary>
+         /// <summary>Returns a <see cref="string"/> that represents the current @Model.ClassLongName.</summary>
         public override string ToString()
         {
             return ToString(CultureInfo.CurrentCulture);
         }
 
-        /// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
+        /// <summary>Returns a formatted <see cref="string"/> that represents the current @Model.ClassLongName.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
@@ -188,7 +188,7 @@ namespace @Model.Namespace
             return ToString(format, CultureInfo.CurrentCulture);
         }
 
-        /// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
+        /// <summary>Returns a formatted <see cref="string"/> that represents the current @Model.ClassLongName.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
@@ -197,7 +197,7 @@ namespace @Model.Namespace
             return ToString("", formatProvider);
         }
 
-        /// <summary>Returns a formatted System.String that represents the current @Model.ClassLongName.</summary>
+        /// <summary>Returns a formatted <see cref="string"/> that represents the current @Model.ClassLongName.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
@@ -226,7 +226,7 @@ namespace @Model.Namespace
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return @if(Model.UnderlyingType == typeof(System.String)){<text>m_Value == null ? 0 : </text>}m_Value.GetHashCode(); }
+        public override int GetHashCode() { return @if(Model.UnderlyingType == typeof(<see cref="string"/>)){<text>m_Value == null ? 0 : </text>}m_Value.GetHashCode(); }
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -305,9 +305,9 @@ namespace @Model.Namespace
        
         #region (Explicit) casting
 
-        /// <summary>Casts @Model.a @Model.ClassLongName to a System.String.</summary>
+        /// <summary>Casts @Model.a @Model.ClassLongName to a <see cref="string"/>.</summary>
         public static explicit operator string(@Model.ClassName val) { return val.ToString(CultureInfo.CurrentCulture); }
-        /// <summary>Casts a System.String to a @Model.ClassLongName.</summary>
+        /// <summary>Casts a <see cref="string"/> to a @Model.ClassLongName.</summary>
         public static explicit operator @(Model.ClassName)(string str) { return @(Model.ClassName).Parse(str, CultureInfo.CurrentCulture); }
 
 @if (Model.IsFloatBased)

@@ -100,7 +100,7 @@ namespace Qowaiv.Sql
 		/// <param name="jsonString">
 		/// The JSON string that represents the timestamp.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -139,17 +139,17 @@ namespace Qowaiv.Sql
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current timestamp for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current timestamp for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay { get { return ToString(CultureInfo.InvariantCulture); } }
 
-		/// <summary>Returns a System.String that represents the current timestamp.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current timestamp.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current timestamp.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current timestamp.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -158,16 +158,16 @@ namespace Qowaiv.Sql
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current timestamp.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current timestamp.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
 		public string ToString(IFormatProvider formatProvider)
 		{
-			return ToString(String.Empty, formatProvider);
+			return ToString(string.Empty, formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current timestamp.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current timestamp.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -181,9 +181,9 @@ namespace Qowaiv.Sql
 			{
 				return formatted;
 			}
-			if (String.IsNullOrEmpty(format))
+			if (string.IsNullOrEmpty(format))
 			{
-				return String.Format(formatProvider, "0x{0:X16}", m_Value);
+				return string.Format(formatProvider, "0x{0:X16}", m_Value);
 			}
 			return m_Value.ToString(format, formatProvider);
 		}
@@ -277,9 +277,9 @@ namespace Qowaiv.Sql
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a timestamp to a System.String.</summary>
+		/// <summary>Casts a timestamp to a <see cref="string"/>.</summary>
 		public static explicit operator string(Timestamp val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a timestamp.</summary>
+		/// <summary>Casts a <see cref="string"/> to a timestamp.</summary>
 		public static explicit operator Timestamp(string str) { return Timestamp.Parse(str, CultureInfo.CurrentCulture); }
 
 

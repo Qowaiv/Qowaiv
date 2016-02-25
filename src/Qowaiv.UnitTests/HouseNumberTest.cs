@@ -527,7 +527,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_IsStringEmpty()
@@ -1015,7 +1015,7 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.IsFalse(HouseNumber.IsValid("1234567890"), "1234567890");
 			Assert.IsFalse(HouseNumber.IsValid((String)null), "(String)null");
-			Assert.IsFalse(HouseNumber.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(HouseNumber.IsValid(string.Empty), "string.Empty");
 
 			Assert.IsFalse(HouseNumber.IsValid((System.Int32?)null), "(System.Int32?)null");
 		}

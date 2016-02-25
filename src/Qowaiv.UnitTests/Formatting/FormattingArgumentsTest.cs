@@ -18,32 +18,32 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void ToString_IFormattableNull_IsNull()
 		{
-			String act = TestStruct.ToString((IFormattable)null);
-			String exp = null;
+			string act = TestStruct.ToString((IFormattable)null);
+			string exp = null;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void ToString_ObjectNull_IsNull()
 		{
-			String act = TestStruct.ToString((Object)null);
-			String exp = null;
+			string act = TestStruct.ToString((Object)null);
+			string exp = null;
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void ToString_TypeInt32_SystemInt32()
 		{
-			String act = TestStruct.ToString((Object)typeof(Int32));
-			String exp = "System.Int32";
+			string act = TestStruct.ToString((Object)typeof(Int32));
+			string exp = "System.Int32";
 
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
 		public void ToString_7_7Comma000()
 		{
-			String act = TestStruct.ToString((Object)7);
-			String exp = "7,000";
+			string act = TestStruct.ToString((Object)7);
+			string exp = "7,000";
 
 			Assert.AreEqual(exp, act);
 		}
@@ -52,8 +52,8 @@ namespace Qowaiv.UnitTests.Formatting
 		{
 			using (new CultureInfoScope("en-GB"))
 			{
-				String act = new FormattingArguments("0.000").ToString((Object)7);
-				String exp = "7.000";
+				string act = new FormattingArguments("0.000").ToString((Object)7);
+				string exp = "7.000";
 
 				Assert.AreEqual(exp, act);
 			}

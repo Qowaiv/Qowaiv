@@ -17,7 +17,7 @@ namespace Qowaiv.Web.Mvc
 	/// failure is the error message added to the model state.
 	/// 
 	/// This binder is needed because the default model binder don't call
-	/// a type converter in case the input is String.Empty.
+	/// a type converter in case the input is string.Empty.
 	/// </remarks>
 	public class TypeConverterModelBinder : DefaultModelBinder
 	{
@@ -85,7 +85,7 @@ namespace Qowaiv.Web.Mvc
 				// Not the default type converter or the enumerator converter.
 				if (converter.GetType() != typeof(TypeConverter) &&
 					converter.GetType() != typeof(EnumConverter) &&
-					converter.CanConvertFrom(typeof(String)))
+					converter.CanConvertFrom(typeof(string)))
 				{
 					TypeConverters[tp] = converter;
 				}

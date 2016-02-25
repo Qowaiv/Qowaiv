@@ -79,16 +79,16 @@ namespace Qowaiv.Globalization
 			{
 				return "?";
 			}
-			return postalcode ?? String.Empty;
+			return postalcode ?? string.Empty;
 		}
 
-		/// <summary>Gets the single value if supported, otherwise String.Empty.</summary>
+		/// <summary>Gets the single value if supported, otherwise string.Empty.</summary>
 		public string GetSingleValue()
 		{
-			return this.IsSingleValue ? this.FormattingReplacePattern : String.Empty;
+			return this.IsSingleValue ? this.FormattingReplacePattern : string.Empty;
 		}
 
-		/// <summary>Returns a System.String that represents the current postal code country info for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current postal code country info for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -173,7 +173,7 @@ namespace Qowaiv.Globalization
 			{
 				Country = country,
 				ValidationPattern = new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase),
-				FormattingSearchPattern = String.IsNullOrEmpty(search) ? null : new Regex(search, RegexOptions.Compiled),
+				FormattingSearchPattern = string.IsNullOrEmpty(search) ? null : new Regex(search, RegexOptions.Compiled),
 				FormattingReplacePattern = replace,
 				IsSingleValue = isSingle
 			};

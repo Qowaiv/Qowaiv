@@ -398,7 +398,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_StringEmpty()
@@ -780,7 +780,7 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.IsFalse(Uuid.IsValid("Complex"), "Complex");
 			Assert.IsFalse(Uuid.IsValid((String)null), "(String)null");
-			Assert.IsFalse(Uuid.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(Uuid.IsValid(string.Empty), "string.Empty");
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

@@ -27,7 +27,7 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
 		}
 
 		/// <summary>Gets and sets the Name of the tempate.</summary>
-		public virtual String Name { get; set; }
+		public virtual string Name { get; set; }
 
 		/// <summary>Gets and sets the Buffer of the tempate.</summary>
 		[Browsable(false)]

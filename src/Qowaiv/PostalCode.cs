@@ -20,7 +20,7 @@ namespace Qowaiv
 	/// <summary>Represents a postal code.</summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a postal code.")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(String))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(PostalCodeTypeConverter))]
 	public struct PostalCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<PostalCode>
 	{
@@ -36,7 +36,7 @@ namespace Qowaiv
 		#region Properties
 
 		/// <summary>The inner value of the postal code.</summary>
-		private String m_Value;
+		private string m_Value;
 
 		/// <summary>Gets the number of characters of postal code.</summary>
 		public int Length { get { return m_Value == null ? 0 : m_Value.Length; } }
@@ -46,7 +46,7 @@ namespace Qowaiv
 		#region Methods
 
 		/// <summary>Returns true if the postal code is empty, otherwise false.</summary>
-		public bool IsEmpty() { return m_Value == default(String); }
+		public bool IsEmpty() { return m_Value == default(string); }
 
 		/// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
 		public bool IsUnknown() { return m_Value == PostalCode.Unknown.m_Value; }
@@ -132,14 +132,14 @@ namespace Qowaiv
 		/// <summary>Generates a postal code from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(String);
+			m_Value = default(string);
 		}
 
 		/// <summary>Generates a postal code from a JSON string representation.</summary>
 		/// <param name="jsonString">
 		/// The JSON string that represents the postal code.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -172,7 +172,7 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current postal code for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current postal code for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -186,13 +186,13 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current postal code.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current postal code.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current postal code.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -201,7 +201,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current postal code.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -210,7 +210,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current postal code.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -227,7 +227,7 @@ namespace Qowaiv
 			return ToString(Country.TryParse(format));
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current postal code.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
 		/// <param name="country">
 		/// The country to format for.
 		/// </param>
@@ -320,9 +320,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a postal code to a System.String.</summary>
+		/// <summary>Casts a postal code to a <see cref="string"/>.</summary>
 		public static explicit operator string(PostalCode val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a postal code.</summary>
+		/// <summary>Casts a <see cref="string"/> to a postal code.</summary>
 		public static explicit operator PostalCode(string str) { return PostalCode.Parse(str, CultureInfo.CurrentCulture); }
 
 

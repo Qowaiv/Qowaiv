@@ -19,14 +19,14 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
         /// The used postfix.
         /// </param>
         public TemplateNotFoundException(Type type, string postfix = null) :
-            base(String.Format(CultureInfo.CurrentCulture, QowaivCodeGeneratorMessages.TemplateNotFoundException_Type, type, postfix)) { }
+            base(string.Format(CultureInfo.CurrentCulture, QowaivCodeGeneratorMessages.TemplateNotFoundException_Type, type, postfix)) { }
 
         /// <summary>Initializes a new instance of a template not found exception.</summary>
         /// <param name="name">
         /// The name to search a template for.
         /// </param>
         public TemplateNotFoundException(string name) :
-            base(String.Format(CultureInfo.CurrentCulture, QowaivCodeGeneratorMessages.TemplateNotFoundException_Name, name)) { }
+            base(string.Format(CultureInfo.CurrentCulture, QowaivCodeGeneratorMessages.TemplateNotFoundException_Name, name)) { }
 
         /// <summary>Initializes a new instance of a template not found exception ith serialized data.</summary>
         /// <param name="info">

@@ -236,8 +236,8 @@ namespace Qowaiv.UnitTests.Formatting
 		public void ToString_IFormattableNull_IsNull()
 		{
 			var collection = new FormattingArgumentsCollection();
-			String act = collection.ToString((IFormattable)null);
-			String exp = null;
+			string act = collection.ToString((IFormattable)null);
+			string exp = null;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -245,8 +245,8 @@ namespace Qowaiv.UnitTests.Formatting
 		public void ToString_ObjectNull_IsNull()
 		{
 			var collection = new FormattingArgumentsCollection();
-			String act = collection.ToString((Object)null);
-			String exp = null;
+			string act = collection.ToString((Object)null);
+			string exp = null;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -254,8 +254,8 @@ namespace Qowaiv.UnitTests.Formatting
 		public void ToString_TypeInt32_SystemInt32()
 		{
 			var collection = new FormattingArgumentsCollection();
-			String act = collection.ToString((Object)typeof(Int32));
-			String exp = "System.Int32";
+			string act = collection.ToString((Object)typeof(Int32));
+			string exp = "System.Int32";
 
 			Assert.AreEqual(exp, act);
 		}
@@ -264,8 +264,8 @@ namespace Qowaiv.UnitTests.Formatting
 		{
 			var collection = new FormattingArgumentsCollection();
 			collection.Add(typeof(Int32), "000");
-			String act = collection.ToString((Object)7);
-			String exp = "007";
+			string act = collection.ToString((Object)7);
+			string exp = "007";
 
 			Assert.AreEqual(exp, act);
 		}

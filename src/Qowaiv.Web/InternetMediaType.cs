@@ -47,7 +47,7 @@ namespace Qowaiv.Web
 	/// </remarks>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an internet media type.")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(String))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
 	[TypeConverter(typeof(InternetMediaTypeTypeConverter))]
 	public struct InternetMediaType : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<InternetMediaType>
 	{
@@ -70,7 +70,7 @@ namespace Qowaiv.Web
 		#region Properties
 
 		/// <summary>The inner value of the internet media type.</summary>
-		private String m_Value;
+		private string m_Value;
 
 		/// <summary>Gets the number of characters of the internet media type.</summary>
 		public int Length { get { return IsEmpty() ? 0 : m_Value.Length; } }
@@ -80,7 +80,7 @@ namespace Qowaiv.Web
 		{
 			get
 			{
-				if (IsEmpty()) { return String.Empty; }
+				if (IsEmpty()) { return string.Empty; }
 				return Pattern.Match(m_Value).Groups["toplevel"].Value;
 			}
 		}
@@ -110,20 +110,21 @@ namespace Qowaiv.Web
 		{
 			get
 			{
-				if (IsEmpty()) { return String.Empty; }
+				if (IsEmpty()) { return string.Empty; }
 				return Pattern.Match(m_Value).Groups["subtype"].Value;
 			}
 		}
 
 		/// <summary>Gets the suffix of the internet media type.</summary>
-		[SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.Enum.TryParse<Qowaiv.Web.InternetMediaSuffixType>(System.String,System.Boolean,Qowaiv.Web.InternetMediaSuffixType@)",
+		[SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults",
+			MessageId = "System.Enum.TryParse<Qowaiv.Web.InternetMediaSuffixType>(System.String,System.Boolean,Qowaiv.Web.InternetMediaSuffixType@)",
 			Justification = "If the parsing succeeded or not, is ignored on purpose.")]
 		public InternetMediaSuffixType Suffix
 		{
 			get
 			{
 				InternetMediaSuffixType type;
-				Enum.TryParse<InternetMediaSuffixType>(Pattern.Match(m_Value ?? String.Empty).Groups["suffix"].Value, true, out type);
+				Enum.TryParse<InternetMediaSuffixType>(Pattern.Match(m_Value ?? string.Empty).Groups["suffix"].Value, true, out type);
 				return type;
 			}
 		}
@@ -148,7 +149,7 @@ namespace Qowaiv.Web
 		#region Methods
 
 		/// <summary>Returns true if the internet media type is empty, otherwise false.</summary>
-		public bool IsEmpty() { return m_Value == default(System.String); }
+		public bool IsEmpty() { return m_Value == default(string); }
 
 		/// <summary>Returns true if the internet media type is unknown, otherwise false.</summary>
 		public bool IsUnknown() { return m_Value == InternetMediaType.Unknown.m_Value; }
@@ -215,14 +216,14 @@ namespace Qowaiv.Web
 		/// <summary>Generates an internet media type from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(String);
+			m_Value = default(string);
 		}
 
 		/// <summary>Generates an internet media type from a JSON string representation.</summary>
 		/// <param name="jsonString">
 		/// The JSON string that represents the internet media type.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString).m_Value;
 		}
@@ -248,14 +249,14 @@ namespace Qowaiv.Web
 		/// <summary>Converts an internet media type into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
-			return m_Value == default(String) ? null : ToString(CultureInfo.InvariantCulture);
+			return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
 		}
 
 		#endregion
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current internet media type for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current internet media type for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -266,13 +267,13 @@ namespace Qowaiv.Web
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current internet media type.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current internet media type.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current internet media type.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current internet media type.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -281,7 +282,7 @@ namespace Qowaiv.Web
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current internet media type.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current internet media type.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -290,7 +291,7 @@ namespace Qowaiv.Web
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current internet media type.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current internet media type.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -304,7 +305,7 @@ namespace Qowaiv.Web
 			{
 				return formatted;
 			}
-			return m_Value ?? String.Empty;
+			return m_Value ?? string.Empty;
 			//throw new NotImplementedException();
 		}
 
@@ -385,9 +386,9 @@ namespace Qowaiv.Web
 
 		#region (Explicit) casting
 
-		/// <summary>Casts an internet media type to a System.String.</summary>
+		/// <summary>Casts an internet media type to a <see cref="string"/>.</summary>
 		public static explicit operator string(InternetMediaType val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a internet media type.</summary>
+		/// <summary>Casts a <see cref="string"/> to a internet media type.</summary>
 		public static explicit operator InternetMediaType(string str) { return InternetMediaType.Parse(str); }
 
 
@@ -495,7 +496,7 @@ namespace Qowaiv.Web
 			if (string.IsNullOrEmpty(filename)) { return InternetMediaType.Empty; }
 
 			var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
-			return String.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType() { m_Value = str };
+			return string.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType() { m_Value = str };
 		}
 
 		#endregion

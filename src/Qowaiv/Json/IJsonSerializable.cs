@@ -12,7 +12,7 @@ namespace Qowaiv.Json
         /// <param name="jsonString">
         /// The JSON string that represents the object.
         /// </param>
-        void FromJson(String jsonString);
+        void FromJson(string jsonString);
 
         /// <summary>Generates an object from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
@@ -35,7 +35,7 @@ namespace Qowaiv.Json
         /// <summary>Converts an object into its JSON object representation.</summary>
         /// <remarks>
         /// Typically an object of the type 
-        /// System.String,
+        /// <see cref="string"/>,
         /// System.Int64, 
         /// System.Double or 
         /// System.DateTime.

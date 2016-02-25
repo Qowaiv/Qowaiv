@@ -114,7 +114,7 @@ namespace Qowaiv.Security.Cryptography
 		/// <param name="jsonString">
 		/// The JSON string that represents the cryptographic seed.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString).m_Value;
 		}
@@ -144,7 +144,7 @@ namespace Qowaiv.Security.Cryptography
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current cryptographic seed for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current cryptographic seed for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -155,13 +155,13 @@ namespace Qowaiv.Security.Cryptography
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current cryptographic seed.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current cryptographic seed.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current cryptographic seed.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current cryptographic seed.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -170,7 +170,7 @@ namespace Qowaiv.Security.Cryptography
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current cryptographic seed.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current cryptographic seed.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -179,7 +179,7 @@ namespace Qowaiv.Security.Cryptography
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current cryptographic seed.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current cryptographic seed.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -310,9 +310,9 @@ namespace Qowaiv.Security.Cryptography
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a cryptographic seed to a System.String.</summary>
+		/// <summary>Casts a cryptographic seed to a <see cref="string"/>.</summary>
 		public static explicit operator string(CryptographicSeed val) { return val.ToString(); }
-		/// <summary>Casts a System.String to a cryptographic seed.</summary>
+		/// <summary>Casts a <see cref="string"/> to a cryptographic seed.</summary>
 		public static explicit operator CryptographicSeed(string str) { return CryptographicSeed.Parse(str); }
 
 		/// <summary>Casts a cryptographic seed to a System.Byte[].</summary>
@@ -353,7 +353,8 @@ namespace Qowaiv.Security.Cryptography
 		/// <returns>
 		/// The cryptographic seed if the string was converted successfully, otherwise CryptographicSeed.Empty.
 		/// </returns>
-		[SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "Qowaiv.Security.Cryptography.CryptographicSeed.TryParse(System.String,Qowaiv.Security.Cryptography.CryptographicSeed@)",
+		[SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", 
+			MessageId = "Qowaiv.Security.Cryptography.CryptographicSeed.TryParse(System.String,Qowaiv.Security.Cryptography.CryptographicSeed)",
 			Justification = "If the parsing succeeded or not, is ignored on purpose.")]
 		public static CryptographicSeed TryParse(string s)
 		{
@@ -431,7 +432,7 @@ namespace Qowaiv.Security.Cryptography
 		public static bool IsValid(string val)
 		{
 			byte[] bytes;
-			return !String.IsNullOrEmpty(val) && Base64.TryGetBytes(val, out bytes);
+			return !string.IsNullOrEmpty(val) && Base64.TryGetBytes(val, out bytes);
 		}
 
 		#endregion

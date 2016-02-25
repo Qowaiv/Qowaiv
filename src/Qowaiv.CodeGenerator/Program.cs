@@ -61,7 +61,7 @@ namespace Qowaiv.CodeGenerator
 		/// <remarks>
 		/// CodeGenerator.exe outputDir underlyingType className [longClassName] [a|an] [namespace]
 		/// 
-		/// Example: CodeGenerator.exe C:\Temp\Qowaiv String EmailAddress "Email address" an Qowaiv
+		/// Example: CodeGenerator.exe C:\Temp\Qowaiv string EmailAddress "Email address" an Qowaiv
 		/// </remarks>
 		public static void Main(string[] args)
 		{

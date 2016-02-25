@@ -231,7 +231,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the week date.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -267,20 +267,20 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current week date for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current week date for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get { return ToString(CultureInfo.InvariantCulture); }
 		}
 
-		/// <summary>Returns a System.String that represents the current week date.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current week date.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current week date.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current week date.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -289,7 +289,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current week date.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current week date.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -298,7 +298,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current week date.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current week date.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -322,7 +322,7 @@ namespace Qowaiv
 			}
 
 			// If no format specified, use the default format.
-			if (String.IsNullOrEmpty(format)) { format = @"y-\Ww-d"; }
+			if (string.IsNullOrEmpty(format)) { format = @"y-\Ww-d"; }
 
 			// Apply the format.
 			return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.InvariantCulture, FormatTokens);
@@ -428,12 +428,12 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a week date to a System.String.</summary>
+		/// <summary>Casts a week date to a <see cref="string"/>.</summary>
 		public static explicit operator string(WeekDate val) { return val.ToString(CultureInfo.CurrentCulture); }
 		/// <summary>Casts a week date to a date time.</summary>
 		public static implicit operator DateTime(WeekDate val) { return val.m_Value; }
 
-		/// <summary>Casts a System.String to a week date.</summary>
+		/// <summary>Casts a <see cref="string"/> to a week date.</summary>
 		public static explicit operator WeekDate(string str) { return WeekDate.Parse(str, CultureInfo.CurrentCulture); }
 		/// <summary>Casts a date time to a week date.</summary>
 		public static explicit operator WeekDate(DateTime val) { return WeekDate.Create((Date)val); }
@@ -539,7 +539,7 @@ namespace Qowaiv
 		public static bool TryParse(string s, IFormatProvider formatProvider, out WeekDate result)
 		{
 			result = WeekDate.MinValue;
-			var match = Pattern.Match(s ?? String.Empty);
+			var match = Pattern.Match(s ?? string.Empty);
 			if (match.Success)
 			{
 				var year = Int32.Parse(match.Groups["year"].Value, formatProvider);

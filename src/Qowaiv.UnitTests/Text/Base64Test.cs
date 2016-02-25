@@ -42,7 +42,7 @@ namespace Qowaiv.UnitTests.Text
 			byte[] act;
 			byte[] exp = new byte[0];
 
-			Assert.IsTrue(Base64.TryGetBytes(String.Empty, out act));
+			Assert.IsTrue(Base64.TryGetBytes(string.Empty, out act));
 			CollectionAssert.AreEqual(exp, act);
 		}
 

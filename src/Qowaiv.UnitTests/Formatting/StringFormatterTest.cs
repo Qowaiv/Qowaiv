@@ -25,7 +25,7 @@ namespace Qowaiv.UnitTests.Formatting
 		{
 			ExceptionAssert.CatchArgumentException(() =>
 			{
-				StringFormatter.Apply(new object(), String.Empty, null, null);
+				StringFormatter.Apply(new object(), string.Empty, null, null);
 			},
 			"format",
 			"Value cannot be an empty string.");
@@ -85,9 +85,9 @@ namespace Qowaiv.UnitTests.Formatting
 		[Test]
 		public void ToNonDiacritic_StringEmpty_AreEqual()
 		{
-			var str = String.Empty;
+			var str = string.Empty;
 
-			var exp = String.Empty;
+			var exp = string.Empty;
 			var act = StringFormatter.ToNonDiacritic(str);
 
 			Assert.AreEqual(exp, act);

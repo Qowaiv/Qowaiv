@@ -12,10 +12,10 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Ctor_Params_AreEqual()
 		{
-			var act = new SingleValueObjectAttribute(SingleValueStaticOptions.All, typeof(String));
+			var act = new SingleValueObjectAttribute(SingleValueStaticOptions.All, typeof(string));
 
 			Assert.AreEqual(SingleValueStaticOptions.All, act.StaticOptions, "act.StaticOptions");
-			Assert.AreEqual(typeof(String), act.UnderlyingType, "act.UnderlyingType");
+			Assert.AreEqual(typeof(string), act.UnderlyingType, "act.UnderlyingType");
 		}
 
 		[Test]

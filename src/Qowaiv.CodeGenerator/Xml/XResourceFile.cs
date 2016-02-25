@@ -116,6 +116,6 @@ namespace Qowaiv.CodeGenerator.Xml
 		}
 
 		/// <summary>The serializer to load and save the resource file.</summary>
-		private static readonly XmlSerializer serializer = new XmlSerializer(typeof(XResourceFile), String.Empty);
+		private static readonly XmlSerializer serializer = new XmlSerializer(typeof(XResourceFile), string.Empty);
 	}
 }

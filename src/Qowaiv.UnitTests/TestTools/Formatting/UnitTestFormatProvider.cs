@@ -37,7 +37,7 @@ namespace Qowaiv.UnitTests.TestTools.Formatting
 		/// </param>
 		public string Format(string format, object arg, IFormatProvider formatProvider)
 		{
-			return String.Format(CultureInfo.InvariantCulture, "Unit Test Formatter, value: '{0}', format: '{1}'", arg.ToString(), format);
+			return string.Format(CultureInfo.InvariantCulture, "Unit Test Formatter, value: '{0}', format: '{1}'", arg.ToString(), format);
 		}
 	}
 }

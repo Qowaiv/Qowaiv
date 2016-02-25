@@ -420,7 +420,7 @@ namespace Qowaiv.UnitTests.Sql
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_MinValue_StringEmpty()
@@ -871,7 +871,7 @@ namespace Qowaiv.UnitTests.Sql
 		public void IsValid_Data_IsFalse()
 		{
 			Assert.IsFalse(Timestamp.IsValid((String)null), "(String)null");
-			Assert.IsFalse(Timestamp.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(Timestamp.IsValid(string.Empty), "string.Empty");
 
 			Assert.IsFalse(Timestamp.IsValid("75bcd15"), "75bcd15");
 		}

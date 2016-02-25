@@ -31,7 +31,7 @@ namespace Qowaiv
 	/// </remarks>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a currency.")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(String))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(CurrencyTypeConverter))]
 	public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Currency>
 	{
@@ -47,10 +47,10 @@ namespace Qowaiv
 		#region Properties
 
 		/// <summary>The inner value of the currency.</summary>
-		private String m_Value;
+		private string m_Value;
 
 		/// <summary>Gets the name of the currency.</summary>
-		public string Name { get { return IsUnknown() ? "?" : m_Value ?? String.Empty; } }
+		public string Name { get { return IsUnknown() ? "?" : m_Value ?? string.Empty; } }
 
 		/// <summary>Gets the display name.</summary>
 		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
@@ -67,16 +67,16 @@ namespace Qowaiv
 		public string IsoCode { get { return GetResourceString("ISO", CultureInfo.InvariantCulture); } }
 
 		///<summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
-		public int IsoNumericCode { get { return m_Value == default(String) ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture)); } }
+		public int IsoNumericCode { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture)); } }
 
 		///<summary>Gets the symbol for a currency.</summary>
-		public string Symbol { get { return m_Value == default(String) ? "¤" : GetResourceString("Symbol", CultureInfo.InvariantCulture); } }
+		public string Symbol { get { return m_Value == default(string) ? "¤" : GetResourceString("Symbol", CultureInfo.InvariantCulture); } }
 
 		///<summary>Gets the number of after the decimal separator.</summary>
-		public int Digits { get { return m_Value == default(String) ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture)); } }
+		public int Digits { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture)); } }
 
 		/// <summary>Gets the start date from witch the currency exists.</summary>
-		public Date StartDate { get { return m_Value == default(String) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
+		public Date StartDate { get { return m_Value == default(string) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
 
 		/// <summary>If the currency does not exist anymore, the end date is given, otherwise null.</summary>
 		public Date? EndDate
@@ -93,7 +93,7 @@ namespace Qowaiv
 		#region Methods
 
 		/// <summary>Returns true if the currency is empty, otherwise false.</summary>
-		public bool IsEmpty() { return m_Value == default(System.String); }
+		public bool IsEmpty() { return m_Value == default(string); }
 
 		/// <summary>Returns true if the currency is unknown, otherwise false.</summary>
 		public bool IsUnknown() { return m_Value == Currency.Unknown.m_Value; }
@@ -187,14 +187,14 @@ namespace Qowaiv
 		/// <summary>Generates a currency from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(String);
+			m_Value = default(string);
 		}
 
 		/// <summary>Generates a currency from a JSON string representation.</summary>
 		/// <param name="jsonString">
 		/// The JSON string that represents the currency.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -223,14 +223,14 @@ namespace Qowaiv
 		/// <summary>Converts a currency into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
-			return m_Value == default(String) ? null : ToString(CultureInfo.InvariantCulture);
+			return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
 		}
 
 		#endregion
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current currency for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
 		private string DebuggerDisplay
 		{
 			get
@@ -248,13 +248,13 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current currency.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current currency.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current currency.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current currency.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -263,7 +263,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current currency.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current currency.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -272,7 +272,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current currency.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current currency.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -298,7 +298,7 @@ namespace Qowaiv
 			}
 
 			// If no format specified, use the default format.
-			if (String.IsNullOrEmpty(format)) { return this.Name; }
+			if (string.IsNullOrEmpty(format)) { return this.Name; }
 
 			// Apply the format.
 			return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
@@ -393,15 +393,15 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a currency to a System.String.</summary>
+		/// <summary>Casts a currency to a <see cref="string"/>.</summary>
 		public static explicit operator string(Currency val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a currency.</summary>
+		/// <summary>Casts a <see cref="string"/> to a currency.</summary>
 		public static explicit operator Currency(string str) { return Currency.Parse(str, CultureInfo.CurrentCulture); }
 
-		/// <summary>Casts a currency to a System.String.</summary>
+		/// <summary>Casts a currency to a <see cref="string"/>.</summary>
 		public static explicit operator int(Currency val) { return val.IsoNumericCode; }
 
-		/// <summary>Casts a System.String to a currency.</summary>
+		/// <summary>Casts a <see cref="string"/> to a currency.</summary>
 		public static explicit operator Currency(int val) { return AllCurrencies.FirstOrDefault(c => c.IsoNumericCode == val); }
 
 		#endregion
@@ -623,8 +623,8 @@ namespace Qowaiv
 		/// </param>
 		internal string GetResourceString(string postfix, CultureInfo culture)
 		{
-			if (m_Value == default(String)) { return string.Empty; }
-			return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? String.Empty;
+			if (m_Value == default(string)) { return string.Empty; }
+			return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
 		}
 
 		#endregion

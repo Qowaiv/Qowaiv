@@ -360,7 +360,7 @@ namespace Qowaiv.UnitTests.Statistics
 
 		#endregion
 		
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 		
 		[Test]
 		public void ToString_CustomFormatter_SupportsCustomFormatting()
@@ -881,7 +881,7 @@ namespace Qowaiv.UnitTests.Statistics
 		{
 			Assert.IsFalse(Elo.IsValid("Complex"), "Complex");
 			Assert.IsFalse(Elo.IsValid((String)null), "(String)null");
-			Assert.IsFalse(Elo.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(Elo.IsValid(string.Empty), "string.Empty");
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

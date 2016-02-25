@@ -22,7 +22,7 @@ namespace Qowaiv
 	/// <summary>Represents a Country.</summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a Country.")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(String))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(CountryTypeConverter))]
 	public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Country>
 	{
@@ -38,7 +38,7 @@ namespace Qowaiv
 		#region Properties
 
 		/// <summary>The inner value of the Country.</summary>
-		private String m_Value;
+		private string m_Value;
 
 		/// <summary>Gets the name of the country.</summary>
 		/// <remarks>
@@ -46,7 +46,7 @@ namespace Qowaiv
 		/// For unknown a '?' is returned.
 		/// For existing countries this returns the ISO 3166-1 code.
 		/// </remarks>
-		public string Name { get { return IsUnknown() ? "?" : m_Value ?? String.Empty; } }
+		public string Name { get { return IsUnknown() ? "?" : m_Value ?? string.Empty; } }
 
 		/// <summary>Gets the display name.</summary>
 		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
@@ -75,7 +75,7 @@ namespace Qowaiv
 		/// <returns>
 		/// The numeric code defined in ISO 3166-1 for the country/region.
 		/// </returns>
-		public int IsoNumericCode { get { return m_Value == default(String) ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture)); } }
+		public int IsoNumericCode { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture)); } }
 
 		/// <summary>Gets the country calling code as defined by ITU-T.</summary>
 		/// <remarks>
@@ -84,10 +84,10 @@ namespace Qowaiv
 		public string CallingCode { get { return GetResourceString("CallingCode", CultureInfo.InvariantCulture); } }
 
 		///<summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
-		public bool RegionInfoExists { get { return !String.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture)); } }
+		public bool RegionInfoExists { get { return !string.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture)); } }
 
 		/// <summary>Gets the start date from witch the country exists.</summary>
-		public Date StartDate { get { return m_Value == default(String) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
+		public Date StartDate { get { return m_Value == default(string) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
 
 		/// <summary>If the country does not exist anymore, the end date is given, otherwise null.</summary>
 		public Date? EndDate
@@ -104,7 +104,7 @@ namespace Qowaiv
 		#region Methods
 
 		/// <summary>Returns true if the Country is empty, otherwise false.</summary>
-		public bool IsEmpty() { return m_Value == default(String); }
+		public bool IsEmpty() { return m_Value == default(string); }
 
 		/// <summary>Returns true if the Country is unknown, otherwise false.</summary>
 		public bool IsUnknown() { return m_Value == Country.Unknown.m_Value; }
@@ -212,13 +212,13 @@ namespace Qowaiv
 		#region (JSON) (De)serialization
 
 		/// <summary>Generates a Country from a JSON null object representation.</summary>
-		void IJsonSerializable.FromJson() { m_Value = default(String); }
+		void IJsonSerializable.FromJson() { m_Value = default(string); }
 
 		/// <summary>Generates a Country from a JSON string representation.</summary>
 		/// <param name="jsonString">
 		/// The JSON string that represents the Country.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -251,13 +251,13 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current Country for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get
 			{
-				if (m_Value == default(String)) { return "Country: (empty)"; }
+				if (m_Value == default(string)) { return "Country: (empty)"; }
 				if (m_Value == Unknown.m_Value) { return "Country: (unknown)"; }
 
 				return string.Format(
@@ -270,13 +270,13 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current Country.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Country.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Country.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Country.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -285,7 +285,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Country.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Country.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -294,7 +294,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Country.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Country.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -320,7 +320,7 @@ namespace Qowaiv
 			}
 
 			// If no format specified, use the default format.
-			if (String.IsNullOrEmpty(format)) { return this.Name; }
+			if (string.IsNullOrEmpty(format)) { return this.Name; }
 
 			// Apply the format.
 			return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
@@ -414,9 +414,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a Country to a System.String.</summary>
+		/// <summary>Casts a Country to a <see cref="string"/>.</summary>
 		public static explicit operator string(Country val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a Country.</summary>
+		/// <summary>Casts a <see cref="string"/> to a Country.</summary>
 		public static explicit operator Country(string str) { return Country.Parse(str, CultureInfo.CurrentCulture); }
 
 		/// <summary>Casts a System.Globalization.RegionInfo to a Country.</summary>
@@ -681,8 +681,8 @@ namespace Qowaiv
 		/// </param>
 		internal string GetResourceString(string postfix, CultureInfo culture)
 		{
-			if (m_Value == default(String)) { return string.Empty; }
-			return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? String.Empty;
+			if (m_Value == default(string)) { return string.Empty; }
+			return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
 		}
 
 		#endregion

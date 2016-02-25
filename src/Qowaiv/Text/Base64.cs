@@ -11,10 +11,10 @@ namespace Qowaiv.Text
 	/// </summary>
 	public static class Base64
 	{
-		/// <summary>Represents a byte array as a System.String.</summary>
+		/// <summary>Represents a byte array as a <see cref="string"/>.</summary>
 		public static string ToString(byte[] bytes)
 		{
-			if (bytes == null || bytes.Length == 0) { return String.Empty; }
+			if (bytes == null || bytes.Length == 0) { return string.Empty; }
 			return Convert.ToBase64String(bytes);
 		}
 		
@@ -35,7 +35,7 @@ namespace Qowaiv.Text
 			Justification="We don't want to redo the logic of ConvertFromBase64String.")]
 		public static bool TryGetBytes(string s, out byte[] bytes)
 		{
-			if (String.IsNullOrEmpty(s))
+			if (string.IsNullOrEmpty(s))
 			{
 				bytes = new byte[0];
 				return true;

@@ -472,7 +472,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the Percentage.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -508,31 +508,31 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current Percentage for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Percentage for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get { return ToString("0.00##########################%", CultureInfo.InvariantCulture); }
 		}
 
-		/// <summary>Returns a System.String that represents the current Percentage formatted with a per ten thousend mark.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Percentage formatted with a per ten thousend mark.</summary>
 		public string ToPerTenThousendMarkString()
 		{
 			return ToString("0.############################‱", CultureInfo.InvariantCulture);
 		}
-		/// <summary>Returns a System.String that represents the current Percentage formatted with a per mille mark.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Percentage formatted with a per mille mark.</summary>
 		public string ToPerMilleString()
 		{
 			return ToString("0.############################‰", CultureInfo.InvariantCulture);
 		}
 
-		/// <summary>Returns a System.String that represents the current Percentage.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Percentage.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Percentage.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -541,7 +541,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Percentage.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -562,7 +562,7 @@ namespace Qowaiv
 		};
 
 
-		/// <summary>Returns a formatted System.String that represents the current Percentage.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -577,14 +577,14 @@ namespace Qowaiv
 				return formatted;
 			}
 
-			var marker = GetMarkerType(format ?? String.Empty);
+			var marker = GetMarkerType(format ?? string.Empty);
 			if (marker == PercentageMarkerType.Invalid)
 			{
 				throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
 			}
 			var decimalVal = m_Value / Dividers[marker];
 
-			var str = decimalVal.ToString(RemoveMarks(format ?? String.Empty), formatProvider);
+			var str = decimalVal.ToString(RemoveMarks(format ?? string.Empty), formatProvider);
 			switch (marker)
 			{
 				case PercentageMarkerType.PercentageBefore: str = PercentageMark + str; break;
@@ -687,9 +687,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a Percentage to a System.String.</summary>
+		/// <summary>Casts a Percentage to a <see cref="string"/>.</summary>
 		public static explicit operator string(Percentage val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a Percentage.</summary>
+		/// <summary>Casts a <see cref="string"/> to a Percentage.</summary>
 		public static explicit operator Percentage(string str) { return Percentage.Parse(str, CultureInfo.CurrentCulture); }
 
 

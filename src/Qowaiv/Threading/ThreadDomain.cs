@@ -161,7 +161,7 @@ namespace Qowaiv.Threading
 			{
 				if (type.IsGenericType) { throw new NotSupportedException(QowaivMessages.NotSupportedException_NoGenericType); }
 				var converter = TypeDescriptor.GetConverter(type);
-				if (!converter.CanConvertFrom(typeof(String))) { throw new NotSupportedException(QowaivMessages.NotSupportedException_ConverterCanNotConvertFromString); }
+				if (!converter.CanConvertFrom(typeof(string))) { throw new NotSupportedException(QowaivMessages.NotSupportedException_ConverterCanNotConvertFromString); }
 			}
 			return type;
 		}

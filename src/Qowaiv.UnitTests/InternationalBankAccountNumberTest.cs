@@ -400,7 +400,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_IsStringEmpty()
@@ -814,14 +814,14 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void IsValid_NullValues_IsFalse()
 		{
-			Assert.IsFalse(InternationalBankAccountNumber.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(InternationalBankAccountNumber.IsValid(string.Empty), "string.Empty");
 			Assert.IsFalse(InternationalBankAccountNumber.IsValid((String)null), "(String)null");
 		}
 
 		[Test]
 		public void IsValid_QuestionMark_IsFalse()
 		{
-			Assert.IsFalse(InternationalBankAccountNumber.IsValid("?"), "String.Empty");
+			Assert.IsFalse(InternationalBankAccountNumber.IsValid("?"), "string.Empty");
 		}
 
 		[Test]

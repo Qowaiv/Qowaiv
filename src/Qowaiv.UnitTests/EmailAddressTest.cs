@@ -452,7 +452,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_IsStringEmpty()
@@ -871,7 +871,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void IsValid_Data_IsFalse()
 		{
-			Assert.IsFalse(EmailAddress.IsValid(String.Empty), "String.Empty");
+			Assert.IsFalse(EmailAddress.IsValid(string.Empty), "string.Empty");
 			Assert.IsFalse(EmailAddress.IsValid((String)null), "(String)null");
 
 			foreach (var email in new string[] { 

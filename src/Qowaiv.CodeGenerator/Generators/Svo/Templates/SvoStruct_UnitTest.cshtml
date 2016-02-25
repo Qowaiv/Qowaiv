@@ -208,7 +208,7 @@ namespace @(Model.Namespace).UnitTests
 
 		#endregion
 
-@if(Model.UnderlyingType != typeof(System.String))
+@if(Model.UnderlyingType != typeof(<see cref="string"/>))
 {<text>      
 		#region TryCreate tests
 
@@ -554,7 +554,7 @@ namespace @(Model.Namespace).UnitTests
 
 		#endregion
 		
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 
 		[Test]
 		public void ToString_Empty_StringEmpty()
@@ -824,7 +824,7 @@ namespace @(Model.Namespace).UnitTests
 				"Argument must be @(Model.a) @(Model.ClassLongName)"
 			);
 		}
-@if(Model.UnderlyingType != typeof(System.String)){<text>
+@if(Model.UnderlyingType != typeof(<see cref="string"/>)){<text>
 		[Test]
 		public void LessThan_17LT19_IsTrue()
 		{
@@ -918,7 +918,7 @@ namespace @(Model.Namespace).UnitTests
 		#endregion
 
 		#region Properties
-@if(Model.UnderlyingType == typeof(System.String)){<text>
+@if(Model.UnderlyingType == typeof(<see cref="string"/>)){<text>
 		[Test]
 		public void Length_DefaultValue_0()
 		{
@@ -1017,8 +1017,8 @@ namespace @(Model.Namespace).UnitTests
 		{
 			Assert.IsFalse(@(Model.ClassName).IsValid("Complex"), "Complex");
 			Assert.IsFalse(@(Model.ClassName).IsValid((String)null), "(String)null");
-			Assert.IsFalse(@(Model.ClassName).IsValid(String.Empty), "String.Empty");
-@if(Model.UnderlyingType != typeof(System.String)){<text>
+			Assert.IsFalse(@(Model.ClassName).IsValid(string.Empty), "string.Empty");
+@if(Model.UnderlyingType != typeof(<see cref="string"/>)){<text>
 			Assert.IsFalse(@(Model.ClassName).IsValid((@Model.UnderlyingType?)null), "(@Model.UnderlyingType?)null");
 </text>}
 		}

@@ -145,7 +145,7 @@ namespace Qowaiv.Formatting
 		/// </param>
 		public static string ToNonDiacritic(string str)
 		{
-			return ToNonDiacritic(str, String.Empty);
+			return ToNonDiacritic(str, string.Empty);
 		}
 		/// <summary>Replaces diacritic characters by non diacritic ones.</summary>
 		/// <param name="str">
@@ -158,7 +158,7 @@ namespace Qowaiv.Formatting
 			Justification = "If the string is null, the for each loop is never reached.")]
 		public static string ToNonDiacritic(string str, string ignore)
 		{
-			if (String.IsNullOrEmpty(str)) { return str; }
+			if (string.IsNullOrEmpty(str)) { return str; }
 			var sb = new StringBuilder();
 
 			foreach (var ch in str)
@@ -176,7 +176,7 @@ namespace Qowaiv.Formatting
 					}
 					else
 					{
-						String chs;
+						string chs;
 						if (DiacriticLookup.TryGetValue(ch, out chs))
 						{
 							sb.Append(chs);

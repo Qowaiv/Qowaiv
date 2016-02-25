@@ -149,7 +149,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the house number.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -188,7 +188,7 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current house number for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current house number for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -200,13 +200,13 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current house number.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current house number.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current house number.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current house number.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -215,7 +215,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current house number.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current house number.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -224,7 +224,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current house number.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current house number.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -333,9 +333,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a house number to a System.String.</summary>
+		/// <summary>Casts a house number to a <see cref="string"/>.</summary>
 		public static explicit operator string(HouseNumber val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a house number.</summary>
+		/// <summary>Casts a <see cref="string"/> to a house number.</summary>
 		public static explicit operator HouseNumber(string str) { return HouseNumber.Parse(str, CultureInfo.CurrentCulture); }
 
 		/// <summary>Casts a house number to a System.Int32.</summary>

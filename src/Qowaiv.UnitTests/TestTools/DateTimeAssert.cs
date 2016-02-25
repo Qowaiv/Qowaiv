@@ -84,7 +84,7 @@ namespace Qowaiv.UnitTests.TestTools
 					{
 						sb.AppendFormat(" Difference:<{0:#,##0.0######} seconds>.", difference.TotalSeconds);
 					}
-					if (!String.IsNullOrEmpty(message))
+					if (!string.IsNullOrEmpty(message))
 					{
 						sb.Append(' ').AppendFormat(message, args);
 					}

@@ -184,7 +184,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the Gender.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -220,7 +220,7 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current Gender for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -231,13 +231,13 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current Gender.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Gender.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Gender.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Gender.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -246,7 +246,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Gender.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Gender.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -255,7 +255,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Gender.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Gender.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -280,7 +280,7 @@ namespace Qowaiv
 			}
 
 			// If no format specified, use the default format.
-			if (String.IsNullOrEmpty(format)) { format = "f"; }
+			if (string.IsNullOrEmpty(format)) { format = "f"; }
 
 			// Apply the format.
 			return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
@@ -388,9 +388,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a Gender to a System.String.</summary>
+		/// <summary>Casts a Gender to a <see cref="string"/>.</summary>
 		public static explicit operator string(Gender val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a Gender.</summary>
+		/// <summary>Casts a <see cref="string"/> to a Gender.</summary>
 		public static explicit operator Gender(string str) { return Gender.Parse(str, CultureInfo.CurrentCulture); }
 
 		/// <summary>Casts a Gender to a System.Int32.</summary>
@@ -638,7 +638,7 @@ namespace Qowaiv
 		internal string GetResourceString(string prefix, CultureInfo culture)
 		{
 			if (IsEmpty()) { return string.Empty; }
-			return ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture) ?? String.Empty;
+			return ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
 		}
 
 		#endregion

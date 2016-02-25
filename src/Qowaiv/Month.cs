@@ -185,7 +185,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the month.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -224,7 +224,7 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current month for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -236,13 +236,13 @@ namespace Qowaiv
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current month.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current month.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current month.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -251,7 +251,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current month.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -260,7 +260,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current month.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -283,10 +283,10 @@ namespace Qowaiv
 				return formatted;
 			}
 			// Apply the format.
-			return StringFormatter.Apply(this, String.IsNullOrEmpty(format) ? "M" : format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
+			return StringFormatter.Apply(this, string.IsNullOrEmpty(format) ? "M" : format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
 		}
 
-		private string ToDefaultString() { return IsUnknown() ? "?" : String.Empty; }
+		private string ToDefaultString() { return IsUnknown() ? "?" : string.Empty; }
 
 		/// <summary>The format token instructions.</summary>
 		private static readonly Dictionary<char, Func<Month, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Month, IFormatProvider, string>>()
@@ -387,9 +387,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a month to a System.String.</summary>
+		/// <summary>Casts a month to a <see cref="string"/>.</summary>
 		public static explicit operator string(Month val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a month.</summary>
+		/// <summary>Casts a <see cref="string"/> to a month.</summary>
 		public static explicit operator Month(string str) { return Month.Parse(str, CultureInfo.CurrentCulture); }
 
 

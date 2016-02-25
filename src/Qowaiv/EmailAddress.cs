@@ -18,7 +18,7 @@ namespace Qowaiv
 	/// <summary>Represents an email address.</summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an email address.")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(String))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(EmailAddressTypeConverter))]
 	public struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<EmailAddress>
 	{
@@ -54,7 +54,7 @@ namespace Qowaiv
 		#region Properties
 
 		/// <summary>The inner value of the email address.</summary>
-		private String m_Value;
+		private string m_Value;
 
 		/// <summary>Gets the number of characters of email address.</summary>
 		public int Length { get { return IsEmptyOrUnknown() ? 0 : m_Value.Length; } }
@@ -70,7 +70,7 @@ namespace Qowaiv
 		#region Methods
 
 		/// <summary>Returns true if the email address is empty, otherwise false.</summary>
-		public bool IsEmpty() { return m_Value == default(String); }
+		public bool IsEmpty() { return m_Value == default(string); }
 
 		/// <summary>Returns true if the email address is unknown, otherwise false.</summary>
 		public bool IsUnknown() { return m_Value == EmailAddress.Unknown.m_Value; }
@@ -137,14 +137,14 @@ namespace Qowaiv
 		/// <summary>Generates an email address from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(String);
+			m_Value = default(string);
 		}
 
 		/// <summary>Generates an email address from a JSON string representation.</summary>
 		/// <param name="jsonString">
 		/// The JSON string that represents the email address.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -170,14 +170,14 @@ namespace Qowaiv
 		/// <summary>Converts an email address into its JSON object representation.</summary>
 		object IJsonSerializable.ToJson()
 		{
-			return m_Value == default(String) ? null : ToString(CultureInfo.InvariantCulture);
+			return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
 		}
 
 		#endregion
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current email address for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
@@ -185,17 +185,17 @@ namespace Qowaiv
 			{
 				if (IsEmpty()) { return "EmailAddress: (empty)"; }
 				if (IsUnknown()) { return "EmailAddress: (unknown)"; }
-				return String.Format(CultureInfo.InvariantCulture, "EmailAddress: {0}", m_Value);
+				return string.Format(CultureInfo.InvariantCulture, "EmailAddress: {0}", m_Value);
 			}
 		}
 
-		/// <summary>Returns a System.String that represents the current email address.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current email address.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current email address.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current email address.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -204,7 +204,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current email address.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current email address.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -213,7 +213,7 @@ namespace Qowaiv
 			return ToString("", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current email address.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current email address.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -239,7 +239,7 @@ namespace Qowaiv
 			}
 
 			// If no format specified, use the default format.
-			if (String.IsNullOrEmpty(format)) { return m_Value ?? String.Empty; }
+			if (string.IsNullOrEmpty(format)) { return m_Value ?? string.Empty; }
 
 			// Apply the format.
 			return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
@@ -253,7 +253,7 @@ namespace Qowaiv
 			{ 'L', (svo, provider) => svo.Local.ToUpperInvariant() },
 			{ 'd', (svo, provider) => svo.Domain },
 			{ 'D', (svo, provider) => svo.Domain.ToUpperInvariant() },
-			{ 'f', (svo, provider) => svo.m_Value ?? String.Empty },    
+			{ 'f', (svo, provider) => svo.m_Value ?? string.Empty },    
 		};
 
 		#endregion
@@ -333,9 +333,9 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts an email address to a System.String.</summary>
+		/// <summary>Casts an email address to a <see cref="string"/>.</summary>
 		public static explicit operator string(EmailAddress val) { return val.ToString(CultureInfo.CurrentCulture); }
-		/// <summary>Casts a System.String to a email address.</summary>
+		/// <summary>Casts a <see cref="string"/> to a email address.</summary>
 		public static explicit operator EmailAddress(string str) { return EmailAddress.Parse(str, CultureInfo.CurrentCulture); }
 
 

@@ -435,7 +435,7 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 		
-		#region IFormattable / ToString tests
+		#region IFormattable / Tostring tests
 		
 		[Test]
 		public void ToString_CustomFormatter_SupportsCustomFormatting()
@@ -883,7 +883,7 @@ namespace Qowaiv.UnitTests
 		{
 			Assert.IsFalse(LocalDateTime.IsValid("Complex"), "Complex");
 			Assert.IsFalse(LocalDateTime.IsValid((String)null), "(String)null");
-			Assert.IsFalse(LocalDateTime.IsValid(String.Empty), "String.MinValue");
+			Assert.IsFalse(LocalDateTime.IsValid(string.Empty), "String.MinValue");
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

@@ -379,7 +379,7 @@ namespace Qowaiv
 		/// <param name="jsonString">
 		/// The JSON string that represents the Date.
 		/// </param>
-		void IJsonSerializable.FromJson(String jsonString)
+		void IJsonSerializable.FromJson(string jsonString)
 		{
 			m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 		}
@@ -418,20 +418,20 @@ namespace Qowaiv
 
 		#region IFormattable / ToString
 
-		/// <summary>Returns a System.String that represents the current Date for debug purposes.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Date for debug purposes.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
 		private string DebuggerDisplay
 		{
 			get { return m_Value.ToString(SerializableFormat, CultureInfo.InvariantCulture); }
 		}
 
-		/// <summary>Returns a System.String that represents the current Date.</summary>
+		/// <summary>Returns a <see cref="string"/> that represents the current Date.</summary>
 		public override string ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Date.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Date.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -440,7 +440,7 @@ namespace Qowaiv
 			return ToString(format, CultureInfo.CurrentCulture);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Date.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Date.</summary>
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
@@ -449,7 +449,7 @@ namespace Qowaiv
 			return ToString("d", formatProvider);
 		}
 
-		/// <summary>Returns a formatted System.String that represents the current Date.</summary>
+		/// <summary>Returns a formatted <see cref="string"/> that represents the current Date.</summary>
 		/// <param name="format">
 		/// The format that this describes the formatting.
 		/// </param>
@@ -558,12 +558,12 @@ namespace Qowaiv
 
 		#region (Explicit) casting
 
-		/// <summary>Casts a date to a System.String.</summary>
+		/// <summary>Casts a date to a <see cref="string"/>.</summary>
 		public static explicit operator string(Date val) { return val.ToString(CultureInfo.CurrentCulture); }
 		/// <summary>Casts a date to a date time.</summary>
 		public static implicit operator DateTime(Date val) { return val.m_Value; }
 
-		/// <summary>Casts a System.String to a date.</summary>
+		/// <summary>Casts a <see cref="string"/> to a date.</summary>
 		public static explicit operator Date(string str) { return Date.Parse(str, CultureInfo.CurrentCulture); }
 		/// <summary>Casts a date time to a date.</summary>
 		public static explicit operator Date(DateTime val) { return new Date(val); }

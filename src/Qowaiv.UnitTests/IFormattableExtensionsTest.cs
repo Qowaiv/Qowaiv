@@ -13,8 +13,8 @@ namespace Qowaiv.UnitTests
 		public void ToString_NullWithFormat_FormattedString()
 		{
 			IFormattable formattable = null;
-			String act = formattable.ToString(new FormattingArguments("0.000", new CultureInfo("es-ES")));
-			String exp = null;
+			string act = formattable.ToString(new FormattingArguments("0.000", new CultureInfo("es-ES")));
+			string exp = null;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -32,8 +32,8 @@ namespace Qowaiv.UnitTests
 		public void ToString_NullWithFormatCollection_FormattedString()
 		{
 			IFormattable formattable = null;
-			String act = formattable.ToString(new FormattingArgumentsCollection());
-			String exp = null;
+			string act = formattable.ToString(new FormattingArgumentsCollection());
+			string exp = null;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -42,8 +42,8 @@ namespace Qowaiv.UnitTests
 		public void ToString_NullWithNullCollection_FormattedString()
 		{
 			IFormattable formattable = null;
-			String act = formattable.ToString((FormattingArgumentsCollection)null);
-			String exp = null;
+			string act = formattable.ToString((FormattingArgumentsCollection)null);
+			string exp = null;
 
 			Assert.AreEqual(exp, act);
 		}

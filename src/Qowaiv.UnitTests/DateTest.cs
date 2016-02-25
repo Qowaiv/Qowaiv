@@ -574,7 +574,7 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		/// <summary>Compare with null should throw an expception.</summary>
+		/// <summary>Compare with null should throw an exception.</summary>
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
@@ -588,7 +588,7 @@ namespace Qowaiv.UnitTests
 				"Argument must be a Date"
 			);
 		}
-		/// <summary>Compare with a random object should throw an expception.</summary>
+		/// <summary>Compare with a random object should throw an exception.</summary>
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{

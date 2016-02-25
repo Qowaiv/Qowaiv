@@ -705,7 +705,7 @@ namespace Qowaiv.Web.UnitTests
 			Assert.AreEqual(exp, act);
 		}
 
-		/// <summary>Compare with null should throw an expception.</summary>
+		/// <summary>Compare with null should throw an exception.</summary>
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
@@ -719,7 +719,7 @@ namespace Qowaiv.Web.UnitTests
 				"Argument must be an internet media type"
 			);
 		}
-		/// <summary>Compare with a random object should throw an expception.</summary>
+		/// <summary>Compare with a random object should throw an exception.</summary>
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{

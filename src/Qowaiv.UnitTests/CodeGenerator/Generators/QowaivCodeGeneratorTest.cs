@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.CodeGenerator.Generators;
-using System;
-using System.IO;
+using Qowaiv.UnitTests.IO;
 
 namespace Qowaiv.UnitTests.CodeGenerator.Generators
 {
@@ -11,10 +10,11 @@ namespace Qowaiv.UnitTests.CodeGenerator.Generators
 		[Test]
 		public void Generate_Dir_Successful()
 		{
-			var gen = new QowaivCodeGenerator();
-			var dir = new DirectoryInfo(@"QowaivOutput");
-			Console.WriteLine(dir.FullName);
-			gen.Generate(dir);
+			using (var dir = new TemporaryDirectory())
+			{ 
+				var gen = new QowaivCodeGenerator();
+				gen.Generate(dir);
+			}
 		}
 	}
 }

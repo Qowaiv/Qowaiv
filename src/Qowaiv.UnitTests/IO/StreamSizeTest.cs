@@ -741,7 +741,7 @@ namespace Qowaiv.UnitTests.IO
 			Assert.AreEqual(exp, act);
 		}
 
-		/// <summary>Compare with null should throw an expception.</summary>
+		/// <summary>Compare with null should throw an exception.</summary>
 		[Test]
 		public void CompareTo_null_ThrowsArgumentException()
 		{
@@ -749,13 +749,13 @@ namespace Qowaiv.UnitTests.IO
 			(() =>
 				{
 					object other = null;
-					var act = TestStruct.CompareTo(other);
+					TestStruct.CompareTo(other);
 				},
 				"obj",
 				"Argument must be a stream size"
 			);
 		}
-		/// <summary>Compare with a random object should throw an expception.</summary>
+		/// <summary>Compare with a random object should throw an exception.</summary>
 		[Test]
 		public void CompareTo_newObject_ThrowsArgumentException()
 		{
@@ -763,7 +763,7 @@ namespace Qowaiv.UnitTests.IO
 			(() =>
 				{
 					object other = new object();
-					var act = TestStruct.CompareTo(other);
+					TestStruct.CompareTo(other);
 				},
 				"obj",
 				"Argument must be a stream size"
@@ -1292,16 +1292,19 @@ namespace Qowaiv.UnitTests.IO
 		[Test]
 		public void GetStreamSize_FileInfo_9Byte()
 		{
-			var file = new FileInfo("GetStreamSize_FileInfo_9.test");
-			using (var writer = new StreamWriter(file.FullName, false))
+			using (var dir = new TemporaryDirectory())
 			{
-				writer.Write("Unit Test");
+				FileInfo file = dir.CreateFile("GetStreamSize_FileInfo_9.test");
+				using (var writer = new StreamWriter(file.FullName, false))
+				{
+					writer.Write("Unit Test");
+				}
+
+				StreamSize act = file.GetStreamSize();
+				StreamSize exp = 9;
+
+				Assert.AreEqual(exp, act);
 			}
-
-			StreamSize act = file.GetStreamSize();
-			StreamSize exp = 9;
-
-			Assert.AreEqual(exp, act);
 		}
 				
 		[Test]

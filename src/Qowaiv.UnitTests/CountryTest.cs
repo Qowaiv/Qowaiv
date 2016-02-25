@@ -18,8 +18,6 @@ namespace Qowaiv.UnitTests
 		/// <summary>The test instance for most tests.</summary>
 		public static readonly Country TestStruct = Country.VA;
 
-		#region Country const tests
-
 		/// <summary>Country.Empty should be equal to the default of Country.</summary>
 		[Test]
 		public void Empty_None_EqualsDefault()
@@ -27,7 +25,18 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(default(Country), Country.Empty);
 		}
 
-		#endregion
+		[Test]
+		public void All_None_259Countries()
+		{
+			Assert.AreEqual(259, Country.All.Count);
+		}
+
+		[Test]
+		public void GetExisting_Januari2016_249Countries()
+		{
+			Assert.AreEqual(249, Country.GetExisting(new Date(2016, 01, 01)).Count());
+		}
+
 
 		#region Current
 

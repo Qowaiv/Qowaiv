@@ -316,6 +316,8 @@ namespace Qowaiv
 			new CountryToCurrency(Country.ZW, Currency.ZWR, new Date(2004, 07, 31)),
 			new CountryToCurrency(Country.ZW, Currency.ZWL, new Date(2005, 02, 02)),
 			new CountryToCurrency(Country.ZW, Currency.USD, new Date(2009, 04, 12)),
+			new CountryToCurrency(Country.HVBF, Currency.XOF),
+			new CountryToCurrency(Country.BQAQ, Currency.GBP),
 		});
 	}
 }

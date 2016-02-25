@@ -712,6 +712,10 @@
     <value>Antilles Néerlandaises</value>
     <comment>Netherlands Antilles (AN)</comment>
   </data>
+  <data name="BQAQ_DisplayName">
+    <value>Territoire antarctique britannique</value>
+    <comment>British Antarctic Territory (BQ)</comment>
+  </data>
   <data name="BUMM_DisplayName">
     <value>Birmanie</value>
     <comment>Burma (BU)</comment>
@@ -727,6 +731,10 @@
   <data name="DDDE_DisplayName">
     <value>République démocratique allemande</value>
     <comment>German Democratic Republic (DD)</comment>
+  </data>
+  <data name="HVBF_DisplayName">
+    <value>Haute-Volta</value>
+    <comment>Upper Volta (HV)</comment>
   </data>
   <data name="SUHH_DisplayName">
     <value>Union Soviétique</value>

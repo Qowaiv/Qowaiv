@@ -753,6 +753,10 @@ namespace Qowaiv
         /// <remarks>End date is 2010-10-10.</remarks>
         public static readonly Country ANHH = new Country() { m_Value = "ANHH" };
 
+        /// <summary>Describes the country British Antarctic Territory (BQAQ).</summary>
+        /// <remarks>End date is 1979-12-31.</remarks>
+        public static readonly Country BQAQ = new Country() { m_Value = "BQAQ" };
+
         /// <summary>Describes the country Burma (BUMM).</summary>
         /// <remarks>End date is 1988-12-31.</remarks>
         public static readonly Country BUMM = new Country() { m_Value = "BUMM" };
@@ -768,6 +772,10 @@ namespace Qowaiv
         /// <summary>Describes the country German Democratic Republic (DDDE).</summary>
         /// <remarks>End date is 1990-10-03.</remarks>
         public static readonly Country DDDE = new Country() { m_Value = "DDDE" };
+
+        /// <summary>Describes the country Upper Volta (HVBF).</summary>
+        /// <remarks>End date is 1984-08-03.</remarks>
+        public static readonly Country HVBF = new Country() { m_Value = "HVBF" };
 
         /// <summary>Describes the country Soviet Union (SUHH).</summary>
         /// <remarks>End date is 1991-12-31.</remarks>

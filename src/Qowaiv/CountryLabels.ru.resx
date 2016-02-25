@@ -1008,6 +1008,10 @@
     <value>Нидерландские Антильские острова</value>
     <comment>Netherlands Antilles (AN)</comment>
   </data>
+  <data name="BQAQ_DisplayName">
+    <value>Британская антарктическая территория</value>
+    <comment>British Antarctic Territory (BQ)</comment>
+  </data>
   <data name="BUMM_DisplayName">
     <value>Бирма</value>
     <comment>Burma (BU)</comment>
@@ -1023,6 +1027,10 @@
   <data name="DDDE_DisplayName">
     <value>Німецька Демократична Республіка</value>
     <comment>German Democratic Republic (DD)</comment>
+  </data>
+  <data name="HVBF_DisplayName">
+    <value>Верхняя Вольта</value>
+    <comment>Upper Volta (HV)</comment>
   </data>
   <data name="SUHH_DisplayName">
     <value>Советский Союз</value>

@@ -1008,6 +1008,10 @@
     <value>オランダ領アンティル</value>
     <comment>Netherlands Antilles (AN)</comment>
   </data>
+  <data name="BQAQ_DisplayName">
+    <value>イギリス領南極地域</value>
+    <comment>British Antarctic Territory (BQ)</comment>
+  </data>
   <data name="BUMM_DisplayName">
     <value>ビルマ</value>
     <comment>Burma (BU)</comment>
@@ -1023,6 +1027,10 @@
   <data name="DDDE_DisplayName">
     <value>ドイツ民主共和国</value>
     <comment>German Democratic Republic (DD)</comment>
+  </data>
+  <data name="HVBF_DisplayName">
+    <value>オートボルタ</value>
+    <comment>Upper Volta (HV)</comment>
   </data>
   <data name="SUHH_DisplayName">
     <value>ソビエト連邦</value>

@@ -8,8 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Razor;
 
 namespace Qowaiv.CodeGenerator.CodeDom.Razor
@@ -141,10 +139,10 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
 			Assembly templateAssembly = null;
 
 			var genResults = new List<GeneratorResults>();
-			
+
 			foreach (var templatestream in templatestreams)
 			{
-			var host = new RazorEngineHost(new CSharpRazorCodeLanguage());
+				var host = new RazorEngineHost(new CSharpRazorCodeLanguage());
 				var razorEngine = new RazorTemplateEngine(host);
 
 				host.DefaultBaseClass = typeof(T).FullName;

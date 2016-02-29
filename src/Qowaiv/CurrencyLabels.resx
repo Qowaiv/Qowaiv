@@ -1237,6 +1237,9 @@
   <data name="KRW_StartDate">
     <value>0001-01-01</value>
   </data>
+  <data name="KRW_Symbol">
+    <value>₩</value>
+  </data>
   <data name="KWD_DisplayName">
     <value>Kuwaiti dinar</value>
   </data>

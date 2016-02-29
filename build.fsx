@@ -112,7 +112,7 @@ MyTarget "NuGet" (fun _ ->
     let nugetDocsDir = nugetDir @@ "docs"
     let nugetToolsDir = nugetDir @@ "tools"
     let nugetLibDir = nugetDir @@ "lib"
-    let nugetLib451Dir = nugetLibDir @@ "net451"
+    let nugetLib45Dir = nugetLibDir @@ "net45"
 
     CleanDir nugetDocsDir
     CleanDir nugetToolsDir

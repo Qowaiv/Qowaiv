@@ -7,10 +7,14 @@ namespace Qowaiv.UnitTests.Json
 	[TestFixture]
 	public class QowaivJsonConverterTest
 	{
-		[OneTimeSetUp]
-		public static void InitializeTest()
+		public QowaivJsonConverterTest()
 		{
+			if (JsonConvert.DefaultSettings == null)
+			{
+				JsonConvert.DefaultSettings = () => new JsonSerializerSettings() { Converters = { new QowaivJsonConverter() } };
+			}
 			QowaivJsonConverter.Register();
+
 		}
 
 		[Test]

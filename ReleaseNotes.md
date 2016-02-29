@@ -12,3 +12,8 @@
 
 ### New in 2.0.0.164 (Released 2015/12/04)
 * Added Qowaiv.Statistics.Elo.
+
+### New in 2.0.1.179 (Released 2016/02/29)
+* Internal refactoring based on SonarLint recommendations.
+* Converted solution to Visual Studio 2015.
+* Extended country and currency definitions.

@@ -3,9 +3,12 @@ Qowaiv
 Domain-driven design bottom up
 ------------------------------
 
-Qowaiv is a (Single) Value Object library. It aims to model reusable (Single) Value Objects that can be used a wide variety of modelling scenarios, both inside and outside a Domain-driven context.
+Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
+Value Objects that can be used a wide variety of modeling scenarios, both
+inside and outside a Domain-driven context.
 
-Supported scenarios include parsing, formatting, validation, (de)serialization, and domain specific logic.
+Supported scenarios include parsing, formatting, validation, (de)serialization,
+and domain specific logic.
 
 Qowaiv types
 ============
@@ -24,11 +27,11 @@ Represents a currency based on an ISO 4217 code.
 
 Date
 ----
-Represents a date, so without hours (minutes, seconds, mili seconds).
+Represents a date, so without hours (minutes, seconds, milliseconds).
 
 Elo
 ---
-Respresents an Elo (rating), a method for calculating the relative skill levels of
+Represents an Elo (rating), a method for calculating the relative skill levels of
 players in competitor-versus-competitor games.
 
 Email address
@@ -150,7 +153,7 @@ Qowaiv Formatting
 =================
 Formatting is an important part of the functionality in Qowaiv. All SVO's 
 implement IFormattable, and have custom formatting. For details, see the 
-different remarks at the Tostring(string, IFormatProvider).
+different remarks at the ToString(string, IFormatProvider).
 
 Formatting arguments
 --------------------

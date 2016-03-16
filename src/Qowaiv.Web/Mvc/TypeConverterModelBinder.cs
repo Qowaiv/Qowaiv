@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using Qowaiv.Reflection;
 
 namespace Qowaiv.Web.Mvc
 {
@@ -48,7 +49,7 @@ namespace Qowaiv.Web.Mvc
 		{
 			Guard.NotNull(assembly, "assembly");
 			var tps = assembly.GetTypes()
-				.Where(tp => tp.GetCustomAttributes(typeof(SingleValueObjectAttribute), false).Any())
+				.Where(tp => QowaivType.IsSingleValueObject(tp))
 				.ToArray();
 			AddTypes(tps);
 		}

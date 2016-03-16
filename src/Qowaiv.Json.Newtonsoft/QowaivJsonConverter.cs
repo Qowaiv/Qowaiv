@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Qowaiv.Reflection;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Qowaiv.Json
 		/// </param>
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType != null && (IsIJsonSerializable(objectType) || IsNullableIJsonSerializable(objectType));
+			return objectType != null && (QowaivType.IsIJsonSerializable(objectType) || QowaivType.IsNullableIJsonSerializable(objectType));
 		}
 
 		/// <summary>Reads the JSON representation of an IJsonSerializable.</summary>
@@ -60,7 +61,7 @@ namespace Qowaiv.Json
 
 			switch (reader.TokenType)
 			{
-				// Empty value for nullables.
+				// Empty value for null-ables.
 				case JsonToken.Null:
 					if (isNullable) { return null; }
 					result.FromJson();
@@ -68,17 +69,17 @@ namespace Qowaiv.Json
 
 				// A number without digits.
 				case JsonToken.Integer:
-					result.FromJson((Int64)reader.Value);
+					result.FromJson((long)reader.Value);
 					break;
 
 				// A number with digits.
 				case JsonToken.Float:
-					result.FromJson((Double)reader.Value);
+					result.FromJson((double)reader.Value);
 					break;
 
 				// A string.
 				case JsonToken.String:
-					result.FromJson((String)reader.Value);
+					result.FromJson((string)reader.Value);
 					break;
 				// Other scenario's are not supported.    
 				default:
@@ -114,21 +115,6 @@ namespace Qowaiv.Json
 			{
 				writer.WriteValue(jsonValue);
 			}
-		}
-
-		/// <summary>Returns true if the object type is an IJsonSerializable.</summary>
-		private static bool IsIJsonSerializable(Type objectType)
-		{
-			return objectType.GetInterfaces().Any(iface => iface == typeof(IJsonSerializable));
-		}
-
-		/// <summary>Returns true if the object type is a nullable IJsonSerializable.</summary>
-		private static bool IsNullableIJsonSerializable(Type objectType)
-		{
-			return
-				objectType.IsGenericType &&
-				objectType.GetGenericTypeDefinition() == typeof(Nullable<>) &&
-				IsIJsonSerializable(objectType.GetGenericArguments()[0]);
 		}
 	}
 }

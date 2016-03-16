@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Reflection;
 using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Linq;
-using System.Reflection;
 
 namespace Qowaiv.UnitTests
 {
@@ -21,15 +21,15 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Analize_AllSvos_MatchAttribute()
 		{
-			var assemblies = new Assembly[] { typeof(Qowaiv.Country).Assembly, typeof(Qowaiv.Web.InternetMediaType).Assembly };
+			var assemblies = new[] { typeof(Country).Assembly, typeof(Qowaiv.Web.InternetMediaType).Assembly };
 
 			var svos = assemblies.SelectMany(assembly => assembly.GetTypes())
-			   .Where(tp => tp.GetCustomAttributes(typeof(SingleValueObjectAttribute), false).Any())
-			   .OrderBy(tp => tp.Name)
+			   .Where(tp => QowaivType.IsSingleValueObject(tp))
 			   .OrderBy(tp => tp.Namespace)
+			   .ThenBy(tp => tp.Name)
 			   .ToArray();
 
-			var exp = new Type[]
+			var exp = new []
 			{
 				typeof(Qowaiv.BankIdentifierCode),
 				typeof(Qowaiv.Country),
@@ -62,7 +62,7 @@ namespace Qowaiv.UnitTests
 
 			foreach (var svo in svos)
 			{
-				var attr = (SingleValueObjectAttribute)svo.GetCustomAttributes(typeof(SingleValueObjectAttribute), false).First();
+				var attr = QowaivType.GetSingleValueObjectAttribute(svo);
 
 				SvoAssert.UnderlyingTypeMatches(svo, attr);
 				SvoAssert.ParseMatches(svo, attr);

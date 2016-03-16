@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +87,7 @@
     <Compile Include="CountryToCurrencyMappings.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="CurrencyConstants.cs" />
+    <Compile Include="Data\SvoParameter.cs" />
     <Compile Include="Date.cs" />
     <Compile Include="EmailAddress.cs" />
     <Compile Include="EmailAddressCollection.cs" />
@@ -116,6 +118,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QowaivMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Reflection\QowaivType.cs" />
     <Compile Include="Security\Cryptography\CryptographicSeed.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -107,6 +107,14 @@ binary numbers, which are guaranteed to be unique within a database. timestamp i
 used typically as a mechanism for version-stamping table rows. The storage size is
 8 bytes. See: https://technet.microsoft.com/en-us/library/aa260631%28v=sql.80%29.aspx
 
+Qowaiv Data
+===========
+
+SVO Parameter factory class
+---------------------------
+To create a (SQL) parameter with a SVO as value, use the SvoParamater factory
+class. It will return SQL parameter with a converted database proof value.
+
 Qowaiv web types
 ================
 

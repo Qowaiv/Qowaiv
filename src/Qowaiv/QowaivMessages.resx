@@ -226,12 +226,15 @@
     <value>The country '{0} ({1})' is not supported as region info.</value>
   </data>
   <data name="NotSupportedException_ConverterCanNotConvertFromString" xml:space="preserve">
-    <value>Converter can not convert from <see cref="string"/>.</value>
+    <value />
   </data>
   <data name="NotSupportedException_NoGenericType" xml:space="preserve">
     <value>Type must be a none generic type.</value>
   </data>
   <data name="FormatExceptionElo" xml:space="preserve">
     <value>Not a valid Elo</value>
+  </data>
+  <data name="InvalidCastException_FromTo" xml:space="preserve">
+    <value>Cast from {0} to {1} is not valid.</value>
   </data>
 </root>

@@ -33,12 +33,12 @@ namespace Qowaiv
 	/// designator "SEX".
 	/// </remarks>
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Byte))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 	[TypeConverter(typeof(GenderTypeConverter))]
 	public struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Gender>
 	{
 		/// <summary>Represents an empty/not set Gender.</summary>
-		public static readonly Gender Empty = default(Gender);
+		public static readonly Gender Empty;
 
 		/// <summary>Represents a not known/unknown gender.</summary>
 		public static readonly Gender Unknown = new Gender() { m_Value = 1 };
@@ -54,10 +54,10 @@ namespace Qowaiv
 			Justification = "ReadOnlyCollection<T> is immutable.")]
 		public static readonly ReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>() 
 		{
-			Gender.Male,
-			Gender.Female,
-			Gender.NotApplicable,
-			Gender.Unknown 
+			Male,
+			Female,
+			NotApplicable,
+			Unknown 
 		});
 
 		/// <summary>Contains male and female.</summary>
@@ -65,8 +65,8 @@ namespace Qowaiv
 			Justification = "ReadOnlyCollection<T> is immutable.")]
 		public static readonly ReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>() 
 		{
-			Gender.Male, 
-			Gender.Female 
+			Male, 
+			Female 
 		});
 
 		/// <summary>Contains male, female, not applicable.</summary>
@@ -74,15 +74,15 @@ namespace Qowaiv
 			Justification = "ReadOnlyCollection<T> is immutable.")]
 		public static readonly ReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>() 
 		{ 
-			Gender.Male, 
-			Gender.Female, 
-			Gender.NotApplicable 
+			Male, 
+			Female, 
+			NotApplicable 
 		});
 
 		#region Properties
 
 		/// <summary>The inner value of the Gender.</summary>
-		private Byte m_Value;
+		private byte m_Value;
 
 		/// <summary>Gets the display name.</summary>
 		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
@@ -94,29 +94,29 @@ namespace Qowaiv
 		#region Methods
 
 		/// <summary>Returns true if the Gender is empty, otherwise false.</summary>
-		public bool IsEmpty() { return m_Value == default(Byte); }
+		public bool IsEmpty() { return m_Value == default(byte); }
 
 		/// <summary>Returns true if the Gender is unknown, otherwise false.</summary>
-		public bool IsUnknown() { return m_Value == Gender.Unknown.m_Value; }
+		public bool IsUnknown() { return m_Value == Unknown.m_Value; }
 
 		/// <summary>Returns true if the Gender is empty or unknown, otherwise false.</summary>
 		public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
 
 		/// <summary>Returns true if the Gender is male or female, otherwise false.</summary>
-		public bool IsMaleOrFemale() { return this == Gender.Male || this == Gender.Female; }
+		public bool IsMaleOrFemale() { return this == Male || this == Female; }
 
-		/// <summary>Gets the displayname for a specified culture.</summary>
+		/// <summary>Gets the display name for a specified culture.</summary>
 		/// <param name="culture">
 		/// The culture of the display name.
 		/// </param>
 		/// <returns></returns>
 		public string GetDisplayName(CultureInfo culture) { return GetResourceString("", culture); }
 
-		/// <summary>Converts the Gender to an Int32.</summary>
-		private Int32 ToInt32() { return m_Value >> 1; }
+		/// <summary>Converts the Gender to an int.</summary>
+		private int ToInt32() { return m_Value >> 1; }
 
-		/// <summary>Converts the Gender to an Int32.</summary>
-		private Int32? ToNullableInt32() { return ToNullableInt32s[m_Value]; }
+		/// <summary>Converts the Gender to an int.</summary>
+		private int? ToNullableInt32() { return ToNullableInt32s[m_Value]; }
 
 		#endregion
 
@@ -177,7 +177,7 @@ namespace Qowaiv
 		/// <summary>Generates a Gender from a JSON null object representation.</summary>
 		void IJsonSerializable.FromJson()
 		{
-			m_Value = default(Byte);
+			m_Value = default(byte);
 		}
 
 		/// <summary>Generates a Gender from a JSON string representation.</summary>
@@ -193,16 +193,16 @@ namespace Qowaiv
 		/// <param name="jsonInteger">
 		/// The JSON integer that represents the Gender.
 		/// </param>
-		void IJsonSerializable.FromJson(Int64 jsonInteger)
+		void IJsonSerializable.FromJson(long jsonInteger)
 		{
-			m_Value = Create((Int32)jsonInteger).m_Value;
+			m_Value = Create((int)jsonInteger).m_Value;
 		}
 
 		/// <summary>Generates a Gender from a JSON number representation.</summary>
 		/// <param name="jsonNumber">
 		/// The JSON number that represents the Gender.
 		/// </param>
-		void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+		void IJsonSerializable.FromJson(double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
 
 		/// <summary>Generates a Gender from a JSON date representation.</summary>
 		/// <param name="jsonDate">
@@ -226,7 +226,7 @@ namespace Qowaiv
 		{
 			get
 			{
-				if (m_Value == default(Byte)) { return "Gender: (empty)"; }
+				if (m_Value == default(byte)) { return "Gender: (empty)"; }
 				return "Gender: " + GetDisplayName(CultureInfo.InvariantCulture);
 			}
 		}
@@ -391,17 +391,19 @@ namespace Qowaiv
 		/// <summary>Casts a Gender to a <see cref="string"/>.</summary>
 		public static explicit operator string(Gender val) { return val.ToString(CultureInfo.CurrentCulture); }
 		/// <summary>Casts a <see cref="string"/> to a Gender.</summary>
-		public static explicit operator Gender(string str) { return Gender.Parse(str, CultureInfo.CurrentCulture); }
+		public static explicit operator Gender(string str) { return Parse(str, CultureInfo.CurrentCulture); }
 
-		/// <summary>Casts a Gender to a System.Int32.</summary>
-		public static explicit operator Int32(Gender val) { return val.ToInt32(); }
-		/// <summary>Casts an System.Int32 to a Gender.</summary>
-		public static implicit operator Gender(Int32 val) { return Gender.Create(val); }
+		/// <summary>Casts a Gender to a <see cref="byte"/>.</summary>
+		public static explicit operator byte(Gender val) { return (byte)val.ToInt32(); }
+		/// <summary>Casts a Gender to a <see cref="int"/>.</summary>
+		public static explicit operator int(Gender val) { return val.ToInt32(); }
+		/// <summary>Casts an <see cref="int"/> to a Gender.</summary>
+		public static implicit operator Gender(int val) { return Create(val); }
 
-		/// <summary>Casts a Gender to a System.Int32.</summary>
-		public static explicit operator Int32?(Gender val) { return val.ToNullableInt32(); }
-		/// <summary>Casts an System.Int32 to a Gender.</summary>
-		public static implicit operator Gender(Int32? val) { return Gender.Create(val); }
+		/// <summary>Casts a Gender to a <see cref="int"/>.</summary>
+		public static explicit operator int?(Gender val) { return val.ToNullableInt32(); }
+		/// <summary>Casts an <see cref="int"/> to a Gender.</summary>
+		public static implicit operator Gender(int? val) { return Create(val); }
 
 		#endregion
 
@@ -518,14 +520,14 @@ namespace Qowaiv
 			return false;
 		}
 
-		/// <summary>Creates a Gender from a Int32.</summary>
+		/// <summary>Creates a Gender from a int.</summary>
 		/// <param name="val">
 		/// A decimal describing a Gender.
 		/// </param>
 		/// <exception cref="System.FormatException">
 		/// val is not a valid Gender.
 		/// </exception>
-		public static Gender Create(Int32? val)
+		public static Gender Create(int? val)
 		{
 			Gender result;
 			if (Gender.TryCreate(val, out result))
@@ -535,7 +537,7 @@ namespace Qowaiv
 			throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionGender);
 		}
 
-		/// <summary>Creates a Gender from a Int32.
+		/// <summary>Creates a Gender from a int.
 		/// A return value indicates whether the conversion succeeded.
 		/// </summary>
 		/// <param name="val">
@@ -544,7 +546,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A Gender if the creation was successfully, otherwise Gender.Empty.
 		/// </returns>
-		public static Gender TryCreate(Int32? val)
+		public static Gender TryCreate(int? val)
 		{
 			Gender result;
 			if (TryCreate(val, out result))
@@ -554,11 +556,11 @@ namespace Qowaiv
 			return Gender.Empty;
 		}
 
-		/// <summary>Creates a Gender from a Int32.
+		/// <summary>Creates a Gender from a int.
 		/// A return value indicates whether the creation succeeded.
 		/// </summary>
 		/// <param name="val">
-		/// A Int32 describing a Gender.
+		/// A int describing a Gender.
 		/// </param>
 		/// <param name="result">
 		/// The result of the creation.
@@ -566,11 +568,11 @@ namespace Qowaiv
 		/// <returns>
 		/// True if a Gender was created successfully, otherwise false.
 		/// </returns>
-		public static bool TryCreate(Int32? val, out Gender result)
+		public static bool TryCreate(int? val, out Gender result)
 		{
 			result = Gender.Empty;
 
-			Byte b = 0;
+			byte b = 0;
 
 			if (!val.HasValue || FromInt32s.TryGetValue(val.Value, out b))
 			{
@@ -605,7 +607,7 @@ namespace Qowaiv
 		}
 
 		/// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
-		public static bool IsValid(Int32? val)
+		public static bool IsValid(int? val)
 		{
 			return val.HasValue && FromInt32s.ContainsKey(val.Value);
 		}
@@ -646,16 +648,16 @@ namespace Qowaiv
 		#region Lookup
 
 		/// <summary>Gets the valid values.</summary>
-		private static Dictionary<Int32, Byte> FromInt32s = new Dictionary<Int32, Byte>()
+		private static Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>()
 		{
 			{ 0, 1 },
 			{ 1, 2 },
 			{ 2, 4 },
-			{ 9,  18 },
+			{ 9, 18 },
 		};
 
 
-		private static Dictionary<Byte, Int32?> ToNullableInt32s = new Dictionary<byte, Int32?>()
+		private static Dictionary<byte, int?> ToNullableInt32s = new Dictionary<byte, int?>()
 		{
 			{ 0, null },
 			{ 1, 0 },
@@ -668,7 +670,7 @@ namespace Qowaiv
 		/// <remarks>
 		/// Used for both serialization and resource lookups.
 		/// </remarks>
-		private static readonly Dictionary<Byte, string> GenderLabels = new Dictionary<byte, string>()
+		private static readonly Dictionary<byte, string> GenderLabels = new Dictionary<byte, string>()
 		{
 			{ 0, null },
 			{ 1, "NotKnown" },
@@ -689,7 +691,7 @@ namespace Qowaiv
 
 				Parsings[culture] = new Dictionary<string, byte>();
 
-				foreach (var gender in Gender.All)
+				foreach (var gender in All)
 				{
 					var longname = gender.ToString("", culture).ToUpper(culture);
 					var shortname = gender.ToString("c", culture).ToUpper(culture);
@@ -729,7 +731,7 @@ namespace Qowaiv
 		};
 
 		/// <summary>The locker for adding a culture.</summary>
-		private static volatile object locker = new object();
+		private static readonly object locker = new object();
 
 		#endregion
 	}

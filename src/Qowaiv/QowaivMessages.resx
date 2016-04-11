@@ -237,4 +237,7 @@
   <data name="InvalidCastException_FromTo" xml:space="preserve">
     <value>Cast from {0} to {1} is not valid.</value>
   </data>
+  <data name="FormatExceptionBase32" xml:space="preserve">
+    <value>Not a valid Base32 string</value>
+  </data>
 </root>

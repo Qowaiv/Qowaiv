@@ -103,6 +103,7 @@
     <Compile Include="Statistics\EloTest.cs" />
     <Compile Include="TestTools\DateTimeAssert.cs" />
     <Compile Include="TestTools\SqlParameterAssert.cs" />
+    <Compile Include="Text\Base32Test.cs" />
     <Compile Include="Text\Base64Test.cs" />
     <Compile Include="Text\WildcardPatternTest.cs" />
     <Compile Include="CountryToCurrencyTest.cs" />

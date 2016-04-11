@@ -151,6 +151,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid Base32 string.
+        /// </summary>
+        public static string FormatExceptionBase32 {
+            get {
+                return ResourceManager.GetString("FormatExceptionBase32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid country.
         /// </summary>
         public static string FormatExceptionCountry {

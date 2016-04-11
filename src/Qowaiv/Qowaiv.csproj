@@ -131,6 +131,7 @@
     <Compile Include="Statistics\EloExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Text\Base32.cs" />
     <Compile Include="Text\Base64.cs" />
     <Compile Include="Text\WildcardPattern.cs" />
     <Compile Include="Text\WildcardPatternOptions.cs" />

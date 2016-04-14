@@ -110,7 +110,7 @@ namespace Qowaiv.Text
         /// The Base32 string
         /// </param>
         /// <returns>
-        /// A byte array reprsentation of the Base32 string.
+        /// A byte array representation of the Base32 string.
         /// </returns>
         /// <exception cref="FormatException">
         /// If the string is not a valid Base32 string.

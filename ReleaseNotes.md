@@ -18,6 +18,6 @@
 * Converted solution to Visual Studio 2015.
 * Extended country and currency definitions.
 
-### New in 2.0.2.185 (Released 2016/04/14)
+### New in 2.0.2.186 (Released 2016/04/15)
 * Add Qowaiv.Text.Base32
 * Added explicit conversion from Gender to Byte.

@@ -226,7 +226,7 @@ namespace @Model.Namespace
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return @if(Model.UnderlyingType == typeof(<see cref="string"/>)){<text>m_Value == null ? 0 : </text>}m_Value.GetHashCode(); }
+        public override int GetHashCode() { return @if(Model.UnderlyingType == typeof(string)){<text>m_Value == null ? 0 : </text>}m_Value.GetHashCode(); }
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>

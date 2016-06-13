@@ -105,6 +105,76 @@ namespace Qowaiv.UnitTests.IO
 		}
 		#endregion
 
+		#region From*byte factory methods
+
+		[Test]
+		public void FromKilobytes_2_2000()
+		{
+			var size = StreamSize.FromKilobytes(2);
+			var act = (long)size;
+			var exp = 2000L;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void FromMegabytes_3Dot5_3500000()
+		{
+			var size = StreamSize.FromMegabytes(3.5);
+			var act = (long)size;
+			var exp = 3500000L;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void FromGigabytes_0Dot8_800000000()
+		{
+			var size = StreamSize.FromGigabytes(0.8);
+			var act = (long)size;
+			var exp = 800000000L;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void FromTerabytes_10_10000000000000()
+		{
+			var size = StreamSize.FromTerabytes(10);
+			var act = (long)size;
+			var exp = 10000000000000L;
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void FromKibibytes_2_2048()
+		{
+			var size = StreamSize.FromKibibytes(2);
+			var act = (long)size;
+			var exp = 2048L;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void FromMebibytes_3Dot5_3670016()
+		{
+			var size = StreamSize.FromMebibytes(3.5);
+			var act = (long)size;
+			var exp = 3670016L;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void FromGibibytes_0Dot8_858993459()
+		{
+			var size = StreamSize.FromGibibytes(0.8);
+			var act = (long)size;
+			var exp = 858993459L;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void FromTebibytes_10_10995116277760()
+		{
+			var size = StreamSize.FromTebibytes(10);
+			var act = (long)size;
+			var exp = 10995116277760L;
+			Assert.AreEqual(exp, act);
+		}
+
+		#endregion
+
 		#region (XML) (De)serialization tests
 
 		[Test]
@@ -194,7 +264,7 @@ namespace Qowaiv.UnitTests.IO
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
@@ -214,7 +284,7 @@ namespace Qowaiv.UnitTests.IO
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 		[Test]
 		public void DataContractSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
@@ -234,7 +304,7 @@ namespace Qowaiv.UnitTests.IO
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 
 		[Test]
@@ -255,7 +325,7 @@ namespace Qowaiv.UnitTests.IO
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -275,7 +345,7 @@ namespace Qowaiv.UnitTests.IO
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 
 		[Test]
@@ -454,6 +524,17 @@ namespace Qowaiv.UnitTests.IO
 		}
 
 		[Test]
+		public void ToString_GiB_AreEqual()
+		{
+			using (new CultureInfoScope("de-DE"))
+			{
+				var act = TestStruct.ToString("0.0000 GiB");
+				var exp = "0,1150 GiB";
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
 		public void ToString_tb_AreEqual()
 		{
 			using (new CultureInfoScope("nl-BE"))
@@ -534,6 +615,17 @@ namespace Qowaiv.UnitTests.IO
 			{
 				var act = TestStruct.ToString("0s");
 				var exp = "123mb";
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void ToString_SpaceSiLower_AreEqual()
+		{
+			using (new CultureInfoScope("nl-BE"))
+			{
+				var act = TestStruct.ToString("0.0 si");
+				var exp = "117,7 mib";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -1169,7 +1261,7 @@ namespace Qowaiv.UnitTests.IO
 		{
 			StreamSize act = 42;
 			StreamSize exp = 21;
-			act = act * (Decimal)0.5;
+			act = act * (decimal)0.5;
 
 			Assert.AreEqual(exp, act);
 		}
@@ -1306,7 +1398,7 @@ namespace Qowaiv.UnitTests.IO
 				Assert.AreEqual(exp, act);
 			}
 		}
-				
+
 		[Test]
 		public void GetStreamSize_NullFileInfo_ThrowsArgumentNullException()
 		{

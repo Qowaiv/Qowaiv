@@ -239,6 +239,9 @@ namespace Qowaiv
             // Turkey, Length: 26, BBAN: 5n,17c, Fields: TRkk bbbb bxcc cccc cccc cccc cc (b = National bank code, x = Reserved for future use (currently "0"), c = Account number)
             { Country.TR, new Regex(@"^TR[0-9]{7}[0-9A-Z]{17}$", RegexOptions.Compiled) },
 
+            // Ukraine, Length: 29, BBAN: 6n,19c, Fields: UAkk bbbb bbcc cccc cccc cccc cccc c (b = National bank code, c = Account number)
+            { Country.UA, new Regex(@"^UA[0-9]{8}[0-9A-Z]{19}$", RegexOptions.Compiled) },
+
             // United Arab Emirates, Length: 23, BBAN: 3n,16n, Fields: AEkk bbbc cccc cccc cccc ccc (b = National bank code, c = Account number)
             { Country.AE, new Regex(@"^AE[0-9]{5}[0-9]{16}$", RegexOptions.Compiled) },
 

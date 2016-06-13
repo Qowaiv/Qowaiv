@@ -1284,6 +1284,12 @@ namespace Qowaiv.UnitTests
 			Assert.IsTrue(InternationalBankAccountNumber.IsValid("TR33 0006 1005 1978 6457 8413 26"), "Turkey Formatted");
 		}
 
+		[Test]
+		public void IsValid_UA_IsTrue()
+		{
+			Assert.IsTrue(InternationalBankAccountNumber.IsValid("UA213996220000026007233566001"), "Ukraine");
+		}
+
 		#endregion
 	}
 

@@ -31,7 +31,7 @@ namespace Qowaiv.Financial
 		#region Properties
 
 		/// <summary>The inner value of the </summary>
-		private Decimal m_Value;
+		private decimal m_Value;
 
 		#endregion
 
@@ -289,13 +289,13 @@ namespace Qowaiv.Financial
 
 
 		/// <summary>Casts a decimal an </summary>
-		public static implicit operator Amount(decimal val) { return new Amount() { m_Value = val }; }
+		public static implicit operator Amount(decimal val) { return Create(val); }
 		/// <summary>Casts a decimal an </summary>
-		public static implicit operator Amount(double val) { return new Amount() { m_Value = (decimal)val }; }
+		public static implicit operator Amount(double val) { return Create(val); }
 		/// <summary>Casts a long an </summary>
-		public static implicit operator Amount(long val) { return new Amount() { m_Value = val }; }
+		public static implicit operator Amount(long val) { return Create((decimal)val); }
 		/// <summary>Casts a int an </summary>
-		public static implicit operator Amount(int val) { return new Amount() { m_Value = val }; }
+		public static implicit operator Amount(int val) { return Create((decimal)val); }
 
 		/// <summary>Casts an Amount to a decimal.</summary>
 		public static explicit operator decimal(Amount val) { return val.m_Value; }
@@ -413,22 +413,17 @@ namespace Qowaiv.Financial
 			return false;
 		}
 
-		///// <summary >Creates an Amount from a Decimal. </summary >
-		///// <param name="val" >
-		///// A decimal describing an 
-		///// </param >
-		///// <exception cref="FormatException" >
-		///// val is not a valid 
-		///// </exception >
-		//public static Amount Create(decimal? val)
-		//{
-		//	Amount result;
-		//	if (TryCreate(val, out result))
-		//	{
-		//		return result;
-		//	}
-		//	throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionFinancialAmount);
-		//}
+		/// <summary>Creates an Amount from a Decimal.</summary >
+		/// <param name="val" >
+		/// A decimal describing an Amount.
+		/// </param >
+		public static Amount Create(decimal val) { return new Amount() { m_Value = val }; }
+
+		/// <summary>Creates an Amount from a Double.</summary >
+		/// <param name="val" >
+		/// A decimal describing an Amount.
+		/// </param >
+		public static Amount Create(double val) { return Create((decimal)val); }
 
 		#endregion
 

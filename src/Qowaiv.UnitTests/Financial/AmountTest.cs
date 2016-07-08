@@ -61,12 +61,15 @@ namespace Qowaiv.Financial.UnitTests
 		[Test]
 		public void TyrParse_StringValue_IsValid()
 		{
-			Amount val;
+			using (CultureInfoScope.NewInvariant())
+			{
+				Amount val;
 
-			string str = "14.1804";
+				string str = "14.1804";
 
-			Assert.IsTrue(Amount.TryParse(str, out val), "Valid");
-			Assert.AreEqual(str, val.ToString(), "Value");
+				Assert.IsTrue(Amount.TryParse(str, out val), "Valid");
+				Assert.AreEqual(str, val.ToString(), "Value");
+			}
 		}
 
 		[Test]

@@ -96,7 +96,7 @@ namespace Qowaiv
 		public bool IsEmpty() { return m_Value == default(string); }
 
 		/// <summary>Returns true if the currency is unknown, otherwise false.</summary>
-		public bool IsUnknown() { return m_Value == Currency.Unknown.m_Value; }
+		public bool IsUnknown() { return m_Value == Unknown.m_Value; }
 
 		/// <summary>Returns true if the currency is empty or unknown, otherwise false.</summary>
 		public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
@@ -439,7 +439,7 @@ namespace Qowaiv
 		public static Currency Parse(string s, IFormatProvider formatProvider)
 		{
 			Currency val;
-			if (Currency.TryParse(s, formatProvider, out val))
+			if (TryParse(s, formatProvider, out val))
 			{
 				return val;
 			}
@@ -458,11 +458,11 @@ namespace Qowaiv
 		public static Currency TryParse(string s)
 		{
 			Currency val;
-			if (Currency.TryParse(s, out val))
+			if (TryParse(s, out val))
 			{
 				return val;
 			}
-			return Currency.Empty;
+			return Empty;
 		}
 
 		/// <summary>Converts the string to a currency.
@@ -499,7 +499,7 @@ namespace Qowaiv
 		/// </returns>
 		public static bool TryParse(string s, IFormatProvider formatProvider, out Currency result)
 		{
-			result = Currency.Empty;
+			result = Empty;
 			if (string.IsNullOrEmpty(s))
 			{
 				return true;
@@ -507,7 +507,7 @@ namespace Qowaiv
 			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 			if (Qowaiv.Unknown.IsUnknown(s, culture))
 			{
-				result = Currency.Unknown;
+				result = Unknown;
 				return true;
 			}
 			AddCulture(culture);
@@ -588,20 +588,8 @@ namespace Qowaiv
 
 		#region Resources
 
-		internal static ResourceManager ResourceManager
-		{
-			get
-			{
-				if (s_ResourceManager == null)
-				{
-					ResourceManager temp = new ResourceManager("Qowaiv.CurrencyLabels", typeof(Currency).Assembly);
-					s_ResourceManager = temp;
-				}
-				return s_ResourceManager;
-			}
-		}
-		internal static ResourceManager s_ResourceManager;
-
+		internal static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.CurrencyLabels", typeof(Currency).Assembly);
+		
 		/// <summary>Get resource string.</summary>
 		/// <param name="postfix">
 		/// The prefix of the resource key.
@@ -640,7 +628,7 @@ namespace Qowaiv
 			Justification = "Complex initialization, this approach is better understandable.")]
 		static Currency()
 		{
-			foreach (var country in Currency.AllCurrencies)
+			foreach (var country in AllCurrencies)
 			{
 				Parsings[CultureInfo.InvariantCulture][country.IsoCode.ToUpperInvariant()] = country.m_Value;
 				Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
@@ -660,7 +648,7 @@ namespace Qowaiv
 
 				Parsings[culture] = new Dictionary<string, string>();
 
-				Parsings[culture][Currency.Unknown.GetDisplayName(culture)] = Currency.Unknown.m_Value;
+				Parsings[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
 
 				foreach (var country in Currency.AllCurrencies)
 				{

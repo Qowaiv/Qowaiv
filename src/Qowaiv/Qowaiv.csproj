@@ -210,6 +210,9 @@
       <Link>Qowaiv.snk</Link>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Financial\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

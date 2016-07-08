@@ -74,7 +74,7 @@ namespace Qowaiv.UnitTests.TestTools
 
 		/// <summary>Invokes the Deserialize Constructor ( T(SerializationInfo, StreamingContext) ).</summary>
 		/// <typeparam name="T">
-		///  Type of the constructor to invoke.
+		/// Type of the constructor to invoke.
 		/// </typeparam>
 		/// <param name="info">
 		/// The serialization info.

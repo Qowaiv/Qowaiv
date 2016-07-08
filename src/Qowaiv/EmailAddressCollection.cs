@@ -111,7 +111,7 @@ namespace Qowaiv
 		public bool Contains(EmailAddress item) { return hashset.Contains(item); }
 
 		/// <summary>Copies the email addresses of the collection to an
-		///  System.Array, starting at a particular System.Array index.
+		/// System.Array, starting at a particular System.Array index.
 		/// </summary>
 		[ExcludeFromCodeCoverage]
 		public void CopyTo(EmailAddress[] array, int arrayIndex) { hashset.CopyTo(array, arrayIndex); }

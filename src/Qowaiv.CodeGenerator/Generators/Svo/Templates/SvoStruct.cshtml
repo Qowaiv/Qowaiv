@@ -451,13 +451,13 @@ namespace @Model.Namespace
 
 @if(!Model.IsStringBased){<text>
 
-        ///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name. @(Model.lt)/summary @(Model.gt)
-        ///  @(Model.lt)param name="val" @(Model.gt)
+        /// @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name. @(Model.lt)/summary @(Model.gt)
+        /// @(Model.lt)param name="val" @(Model.gt)
         /// A decimal describing @Model.a @Model.ClassLongName.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)exception cref="System.FormatException" @(Model.gt)
+        /// @(Model.lt)/param @(Model.gt)
+        /// @(Model.lt)exception cref="System.FormatException" @(Model.gt)
         /// val is not a valid @Model.ClassLongName.
-        ///  @(Model.lt)/exception @(Model.gt)
+        /// @(Model.lt)/exception @(Model.gt)
         public static @(Model.ClassName) Create(@Model.UnderlyingType.Name? val)
         {
             @(Model.ClassName) result;
@@ -468,15 +468,15 @@ namespace @Model.Namespace
             throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatException@(Model.ClassName));
         }
 
-        ///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
+        /// @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
         /// A return value indicates whether the conversion succeeded.
-        ///  @(Model.lt)/summary @(Model.gt)
-        ///  @(Model.lt)param name="val" @(Model.gt)
+        /// @(Model.lt)/summary @(Model.gt)
+        /// @(Model.lt)param name="val" @(Model.gt)
         /// A decimal describing @Model.a @Model.ClassLongName.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)returns @(Model.gt)
+        /// @(Model.lt)/param @(Model.gt)
+        /// @(Model.lt)returns @(Model.gt)
         /// @Model.aUpper @Model.ClassLongName if the creation was successfully, otherwise @(Model.ClassName).Empty.
-        ///  @(Model.lt)/returns @(Model.gt)
+        /// @(Model.lt)/returns @(Model.gt)
         public static @(Model.ClassName) TryCreate(@Model.UnderlyingType.Name? val)
         {
             @(Model.ClassName) result;
@@ -487,18 +487,18 @@ namespace @Model.Namespace
             return @(Model.ClassName).Empty;
         }
 
-        ///  @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
+        /// @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
         /// A return value indicates whether the creation succeeded.
-        ///  @(Model.lt)/summary @(Model.gt)
-        ///  @(Model.lt)param name="val" @(Model.gt)
+        /// @(Model.lt)/summary @(Model.gt)
+        /// @(Model.lt)param name="val" @(Model.gt)
         /// A @Model.UnderlyingType.Name describing @Model.a @Model.ClassLongName.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)param name="result" @(Model.gt)
+        /// @(Model.lt)/param @(Model.gt)
+        /// @(Model.lt)param name="result" @(Model.gt)
         /// The result of the creation.
-        ///  @(Model.lt)/param @(Model.gt)
-        ///  @(Model.lt)returns @(Model.gt)
+        /// @(Model.lt)/param @(Model.gt)
+        /// @(Model.lt)returns @(Model.gt)
         /// True if @Model.a @Model.ClassLongName was created successfully, otherwise false.
-        ///  @(Model.lt)/returns @(Model.gt)
+        /// @(Model.lt)/returns @(Model.gt)
         public static bool TryCreate(@Model.UnderlyingType.Name? val, out @(Model.ClassName) result)
         {
             result = @(Model.ClassName).Empty;

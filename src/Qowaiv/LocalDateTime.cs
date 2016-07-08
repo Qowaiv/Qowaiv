@@ -31,10 +31,10 @@ namespace Qowaiv
 
 		/// <summary>Initializes a new instance of the local date time structure to a specified number of ticks.</summary>
 		/// <param name="ticks">
-		///  A date expressed in 100-nanosecond units.
+		/// A date expressed in 100-nanosecond units.
 		/// </param>
 		/// <exception cref="ArgumentOutOfRangeException">
-		///  ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
+		/// ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
 		/// </exception>
 		public LocalDateTime(long ticks)
 			: this(new DateTime(ticks)) { }
@@ -80,7 +80,7 @@ namespace Qowaiv
 		/// The day (1 through the number of days in month).
 		/// </param>
 		/// <param name="hour">
-		///  The hours (0 through 23).
+		/// The hours (0 through 23).
 		/// </param>
 		/// <param name="minute">
 		/// The minutes (0 through 59).
@@ -107,7 +107,7 @@ namespace Qowaiv
 		/// The day (1 through the number of days in month).
 		/// </param>
 		/// <param name="hour">
-		///  The hours (0 through 23).
+		/// The hours (0 through 23).
 		/// </param>
 		/// <param name="minute">
 		/// The minutes (0 through 59).
@@ -137,7 +137,7 @@ namespace Qowaiv
 		/// The day (1 through the number of days in month).
 		/// </param>
 		/// <param name="hour">
-		///  The hours (0 through 23).
+		/// The hours (0 through 23).
 		/// </param>
 		/// <param name="minute">
 		/// The minutes (0 through 59).
@@ -212,12 +212,12 @@ namespace Qowaiv
 		/// A System.TimeSpan object that represents a positive or negative time interval.
 		/// </param>
 		/// <returns>
-		///  A new date whose value is the sum of the date and time represented
-		///  by this instance and the time interval represented by value.
+		/// A new date whose value is the sum of the date and time represented
+		/// by this instance and the time interval represented by value.
 		/// </returns>
 		/// <exception cref="ArgumentOutOfRangeException">
-		///  The resulting date is less than date.MinValue or greater
-		///  than date.MaxValue.
+		/// The resulting date is less than date.MinValue or greater
+		/// than date.MaxValue.
 		/// </exception>
 		public LocalDateTime Add(TimeSpan value)
 		{
@@ -300,8 +300,8 @@ namespace Qowaiv
 		/// value of this instance.
 		/// </summary>
 		/// <param name="value">
-		///  A number of whole and fractional days. The value parameter can be negative
-		///  or positive.
+		/// A number of whole and fractional days. The value parameter can be negative
+		/// or positive.
 		/// </param>
 		/// <returns>
 		/// A date whose value is the sum of the date and time represented

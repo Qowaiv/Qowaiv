@@ -12,8 +12,8 @@ namespace Qowaiv.Data
 	{
 		/// <summary>Creates a <see cref="SqlParameter"/> based on the single value object.</summary>
 		/// <param name="parameterName">
-		///  The name of the parameter to map.
-		///  </param>
+		/// The name of the parameter to map.
+		/// </param>
 		/// <param name="value">
 		/// An <see cref="object"/>that is the value of the <see cref="SqlParameter"/>.
 		/// </param>

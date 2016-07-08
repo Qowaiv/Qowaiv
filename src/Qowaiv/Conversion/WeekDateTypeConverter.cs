@@ -58,7 +58,7 @@ namespace Qowaiv.Conversion
 
 		/// <summary>Converts a week date to string, using the specified context and culture information.</summary>
 		/// <param name="culture">
-		///  A System.Globalization.CultureInfo. If null is passed, the current culture is assumed.
+		/// A System.Globalization.CultureInfo. If null is passed, the current culture is assumed.
 		/// </param>
 		/// <param name="context">
 		/// An System.ComponentModel.ITypeDescriptorContext that provides a format context.

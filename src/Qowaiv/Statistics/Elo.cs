@@ -494,13 +494,13 @@ namespace Qowaiv.Statistics
 			return false;
 		}
 
-		///  <summary >Creates an Elo from a Double. </summary >
-		///  <param name="val" >
+		/// <summary >Creates an Elo from a Double. </summary >
+		/// <param name="val" >
 		/// A decimal describing an Elo.
-		///  </param >
-		///  <exception cref="System.FormatException" >
+		/// </param >
+		/// <exception cref="FormatException" >
 		/// val is not a valid Elo.
-		///  </exception >
+		/// </exception >
 		public static Elo Create(Double val)
 		{
 			return new Elo() { m_Value = val };

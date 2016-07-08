@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion;
+﻿using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -13,18 +13,18 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
-    ///<summary>The International Bank Account Number (IBAN) is an international standard
-    /// for identifying bank accounts across national borders with a minimal risk
-    /// of propagating transcription errors. It was originally adopted by the European
-    /// Committee for Banking Standards (ECBS), and was later adopted as an international
-    /// standard under ISO 13616:1997 and now as ISO 13616-1:2007.
-    /// </summary>
-    /// <remarks>
-    /// The official IBAN registrar under ISO 13616-2:2007 is SWIFT.
-    /// </remarks>
-    [DebuggerDisplay("{DebuggerDisplay}")]
+	///<summary>The International Bank Account Number (IBAN) is an international standard
+	/// for identifying bank accounts across national borders with a minimal risk
+	/// of propagating transcription errors. It was originally adopted by the European
+	/// Committee for Banking Standards (ECBS), and was later adopted as an international
+	/// standard under ISO 13616:1997 and now as ISO 13616-1:2007.
+	/// </summary>
+	/// <remarks>
+	/// The official IBAN registrar under ISO 13616-2:2007 is SWIFT.
+	/// </remarks>
+	[DebuggerDisplay("{DebuggerDisplay}")]
     [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an IBAN.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
@@ -32,7 +32,7 @@ namespace Qowaiv
     {
         /// <summary>Represents the pattern of a (potential) valid IBAN.</summary>
         /// <remarks>
-        /// Pairs of IBAN characters can be devided by maximum 2 spacing characters.
+        /// Pairs of IBAN characters can be divided by maximum 2 spacing characters.
         /// </remarks>
         public static readonly Regex Pattern = new Regex(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 

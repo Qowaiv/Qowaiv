@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Data;
+using Qowaiv.Financial;
 using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Data;

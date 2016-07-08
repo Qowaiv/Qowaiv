@@ -31,13 +31,11 @@ namespace Qowaiv.UnitTests
 
 			var exp = new []
 			{
-				typeof(BankIdentifierCode),
 				typeof(Country),
 				typeof(Date),
 				typeof(EmailAddress),
 				typeof(Gender),
 				typeof(HouseNumber),
-				typeof(InternationalBankAccountNumber),
 				typeof(LocalDateTime),
 				typeof(Month),
 				typeof(Percentage),
@@ -46,7 +44,9 @@ namespace Qowaiv.UnitTests
 				typeof(WeekDate),
 				typeof(Year),
 				typeof(Qowaiv.Financial.Amount),
+				typeof(Qowaiv.Financial.BankIdentifierCode),
 				typeof(Qowaiv.Financial.Currency),
+				typeof(Qowaiv.Financial.InternationalBankAccountNumber),
 				typeof(Qowaiv.IO.StreamSize),
 				typeof(Qowaiv.Security.Cryptography.CryptographicSeed),
 				typeof(Qowaiv.Sql.Timestamp),

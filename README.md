@@ -13,10 +13,6 @@ and domain specific logic.
 Qowaiv types
 ============
 
-Bank Identifier Code (BIC)
---------------------------
-Represents a BIC as specified in ISO 13616.
-
 Country
 -------
 Represents a country based on an ISO 3166-1 code (or 3166-3 if the country does not longer exists).
@@ -49,10 +45,6 @@ Represents a gender based on an ISO 5218 code.
 House number
 ------------
 Represents a house number in the range [1-999999999].
-
-International Bank Account Number (IBAN)
-----------------------------------------
-Represents an IBAN as specified in ISO 13616.
 
 Local Date Time
 ---------------
@@ -95,9 +87,17 @@ A seed, representing random data to encrypt and decrypt data.
 Qowaiv financial types
 ======================
 
+Bank Identifier Code (BIC)
+--------------------------
+Represents a BIC as specified in ISO 13616.
+
 Currency
 --------
 Represents a currency based on an ISO 4217 code.
+
+International Bank Account Number (IBAN)
+----------------------------------------
+Represents an IBAN as specified in ISO 13616.
 
 Qowaiv SQL types
 ================

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     public partial struct InternationalBankAccountNumber
     {

@@ -57,8 +57,8 @@
     <Compile Include="..\Shared\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="BankIdentifierCode.cs" />
-    <Compile Include="Conversion\BankIdentifierCodeTypeConverter.cs" />
+    <Compile Include="Financial\BankIdentifierCode.cs" />
+    <Compile Include="Conversion\Fiancial\BankIdentifierCodeTypeConverter.cs" />
     <Compile Include="Conversion\CountryTypeConverter.cs" />
     <Compile Include="Conversion\Fiancial\AmountTypeConverter.cs" />
     <Compile Include="Conversion\Fiancial\CurrencyTypeConverter.cs" />
@@ -67,7 +67,7 @@
     <Compile Include="Conversion\IO\FileSizeTypeConverter.cs" />
     <Compile Include="Conversion\GenderTypeConverter.cs" />
     <Compile Include="Conversion\HouseNumberTypeConverter.cs" />
-    <Compile Include="Conversion\InternationalBankAccountNumberTypeConverter.cs" />
+    <Compile Include="Conversion\Fiancial\InternationalBankAccountNumberTypeConverter.cs" />
     <Compile Include="Conversion\LocalDateTimeTypeConverter.cs" />
     <Compile Include="Conversion\MonthTypeConverter.cs" />
     <Compile Include="Conversion\PercentageTypeConverter.cs" />
@@ -105,8 +105,8 @@
     <Compile Include="Guard.cs" />
     <Compile Include="HouseNumber.cs" />
     <Compile Include="IFormattableExtensions.cs" />
-    <Compile Include="InternationalBankAccountNumber.cs" />
-    <Compile Include="InternationalBankAccountNumberPatterns.cs" />
+    <Compile Include="Financial\InternationalBankAccountNumber.cs" />
+    <Compile Include="Financial\InternationalBankAccountNumberPatterns.cs" />
     <Compile Include="Json\IJsonSerializable.cs" />
     <Compile Include="LocalDateTime.cs" />
     <Compile Include="Month.cs" />

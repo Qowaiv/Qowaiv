@@ -69,7 +69,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankIdentifierCodeTest.cs" />
+    <Compile Include="Financial\BankIdentifierCodeTest.cs" />
     <Compile Include="CodeGenerator\Generators\QowaivCodeGeneratorTest.cs" />
     <Compile Include="CountryTest.cs" />
     <Compile Include="Financial\AmountTest.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Globalization\PostalCodeCountryInfoTest.cs" />
     <Compile Include="HouseNumberTest.cs" />
     <Compile Include="IFormattableExtensionsTest.cs" />
-    <Compile Include="InternationalBankAccountNumberTest.cs" />
+    <Compile Include="Financial\InternationalBankAccountNumberTest.cs" />
     <Compile Include="IO\TemporaryDirectory.cs" />
     <Compile Include="Json\JsonTester.cs" />
     <Compile Include="Json\QowaivJsonConverterTest.cs" />

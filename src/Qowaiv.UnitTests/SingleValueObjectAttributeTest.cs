@@ -21,7 +21,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void Analize_AllSvos_MatchAttribute()
 		{
-			var assemblies = new[] { typeof(Country).Assembly, typeof(Qowaiv.Web.InternetMediaType).Assembly };
+			var assemblies = new[] { typeof(Date).Assembly, typeof(Qowaiv.Web.InternetMediaType).Assembly };
 
 			var svos = assemblies.SelectMany(assembly => assembly.GetTypes())
 			   .Where(tp => QowaivType.IsSingleValueObject(tp))
@@ -31,7 +31,6 @@ namespace Qowaiv.UnitTests
 
 			var exp = new []
 			{
-				typeof(Country),
 				typeof(Date),
 				typeof(EmailAddress),
 				typeof(Gender),
@@ -47,6 +46,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Financial.BankIdentifierCode),
 				typeof(Qowaiv.Financial.Currency),
 				typeof(Qowaiv.Financial.InternationalBankAccountNumber),
+				typeof(Qowaiv.Globalization.Country),
 				typeof(Qowaiv.IO.StreamSize),
 				typeof(Qowaiv.Security.Cryptography.CryptographicSeed),
 				typeof(Qowaiv.Sql.Timestamp),

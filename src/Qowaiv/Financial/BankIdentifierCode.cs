@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
+using Qowaiv.Globalization;
 using Qowaiv.Json;
 using System;
 using System.ComponentModel;
@@ -65,7 +66,7 @@ namespace Qowaiv.Financial
 			{
 				if (IsEmpty()) { return Country.Empty; }
 				if (IsUnknown()) { return Country.Unknown; }
-				return Country.Parse(this.CountryCode, CultureInfo.InvariantCulture);
+				return Country.Parse(CountryCode, CultureInfo.InvariantCulture);
 			}
 		}
 

@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Financial
+﻿using Qowaiv.Globalization;
+
+namespace Qowaiv.Financial
 {
 	internal partial struct CountryToCurrency
 	{

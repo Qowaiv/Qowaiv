@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Qowaiv.Globalization;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Qowaiv.Conversion
+namespace Qowaiv.Conversion.Globalization
 {
 	/// <summary>Provides a conversion for a Country.</summary>
 	public class CountryTypeConverter : TypeConverter

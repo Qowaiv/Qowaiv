@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Qowaiv.Financial;
+using Qowaiv.Globalization;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,7 @@ namespace Qowaiv.Threading
 		static ThreadDomain()
 		{
 			Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
-			Register(typeof(Financial.Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Date.Today));
+			Register(typeof(Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Date.Today));
 		}
 
 		/// <summary>Gets the current thread domain.</summary>

@@ -10,7 +10,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetPublicKey_Qowaiv_320CharLongKey()
 		{
-			AssertPublicKey(typeof(Qowaiv.Country), PublicKey);
+			AssertPublicKey(typeof(Date), PublicKey);
 		}
 
 		[Test]

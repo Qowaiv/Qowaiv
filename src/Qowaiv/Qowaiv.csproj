@@ -59,7 +59,7 @@
     </Compile>
     <Compile Include="Financial\BankIdentifierCode.cs" />
     <Compile Include="Conversion\Fiancial\BankIdentifierCodeTypeConverter.cs" />
-    <Compile Include="Conversion\CountryTypeConverter.cs" />
+    <Compile Include="Conversion\Globalization\CountryTypeConverter.cs" />
     <Compile Include="Conversion\Fiancial\AmountTypeConverter.cs" />
     <Compile Include="Conversion\Fiancial\CurrencyTypeConverter.cs" />
     <Compile Include="Conversion\DateTypeConverter.cs" />
@@ -82,8 +82,8 @@
     <Compile Include="Conversion\UuidTypeConverter.cs" />
     <Compile Include="Conversion\WeekDateTypeConverter.cs" />
     <Compile Include="Conversion\YearTypeConverter.cs" />
-    <Compile Include="Country.cs" />
-    <Compile Include="CountryConstants.cs" />
+    <Compile Include="Globalization\Country.cs" />
+    <Compile Include="Globalization\CountryConstants.cs" />
     <Compile Include="Financial\Amount.cs" />
     <Compile Include="Financial\CountryToCurrency.cs" />
     <Compile Include="Financial\CountryToCurrencyMappings.cs" />
@@ -148,19 +148,19 @@
     <EmbeddedResource Include="..\Qowaiv.license.txt">
       <Link>Qowaiv.license.txt</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="CountryLabels.ar.resx" />
-    <EmbeddedResource Include="CountryLabels.de.resx" />
-    <EmbeddedResource Include="CountryLabels.es.resx" />
-    <EmbeddedResource Include="CountryLabels.fr.resx" />
-    <EmbeddedResource Include="CountryLabels.it.resx" />
-    <EmbeddedResource Include="CountryLabels.ja.resx" />
-    <EmbeddedResource Include="CountryLabels.nl.resx" />
-    <EmbeddedResource Include="CountryLabels.pt.resx" />
-    <EmbeddedResource Include="CountryLabels.resx" />
-    <EmbeddedResource Include="CountryLabels.ru.resx" />
-    <EmbeddedResource Include="CountryLabels.zh-HK.resx" />
-    <EmbeddedResource Include="CountryLabels.zh-TW.resx" />
-    <EmbeddedResource Include="CountryLabels.zh.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.ar.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.de.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.es.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.fr.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.it.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.ja.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.nl.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.pt.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.ru.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.zh-HK.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.zh-TW.resx" />
+    <EmbeddedResource Include="Globalization\CountryLabels.zh.resx" />
     <EmbeddedResource Include="Financial\CurrencyLabels.ar.resx" />
     <EmbeddedResource Include="Financial\CurrencyLabels.de.resx" />
     <EmbeddedResource Include="Financial\CurrencyLabels.es.resx" />

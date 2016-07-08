@@ -1,4 +1,4 @@
-namespace Qowaiv
+namespace Qowaiv.Globalization
 {
     public partial struct Country
     {

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Financial;
+using Qowaiv.Globalization;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
@@ -11,7 +12,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace Qowaiv.UnitTests
+namespace Qowaiv.UnitTests.Globalization
 {
 	[TestFixture]
 	public class CountryTest

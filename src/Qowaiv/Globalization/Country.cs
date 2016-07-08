@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion;
+﻿using Qowaiv.Conversion.Globalization;
 using Qowaiv.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
@@ -18,7 +18,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Qowaiv
+namespace Qowaiv.Globalization
 {
 	/// <summary>Represents a </summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
@@ -653,7 +653,7 @@ namespace Qowaiv
 			{
 				if (s_ResourceManager == null)
 				{
-					ResourceManager temp = new ResourceManager("Qowaiv.CountryLabels", typeof(Country).Assembly);
+					ResourceManager temp = new ResourceManager("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
 					s_ResourceManager = temp;
 				}
 				return s_ResourceManager;

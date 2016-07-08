@@ -49,7 +49,7 @@ namespace Qowaiv.Threading
 		/// <param name="creator">
 		/// The creator function.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// If the type or the creator is null.
 		/// </exception>
 		/// <exception cref="NotSupportedException">

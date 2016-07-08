@@ -51,7 +51,7 @@ namespace Qowaiv
 		/// <param name="ticks">
 		///  A date expressed in 100-nanosecond units.
 		/// </param>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		///  ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
 		/// </exception>
 		public Date(long ticks) : this(new DateTime(ticks)) { }
@@ -66,11 +66,11 @@ namespace Qowaiv
 		/// <param name="day">
 		/// The day (1 through the number of days in month).
 		/// </param>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// year is less than 1 or greater than 9999.-or- month is less than 1 or greater
 		/// than 12.-or- day is less than 1 or greater than the number of days in month.
 		/// </exception>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// The specified parameters evaluate to less than date.MinValue or
 		/// more than date.MaxValue.
 		/// </exception>
@@ -115,7 +115,7 @@ namespace Qowaiv
 		///  A new date whose value is the sum of the date and time represented
 		///  by this instance and the time interval represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		///  The resulting date is less than date.MinValue or greater
 		///  than date.MaxValue.
 		/// </exception>
@@ -132,7 +132,7 @@ namespace Qowaiv
 		/// A System.TimeSpan interval equal to the date and time represented by this
 		/// instance minus the date and time represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The result is less than date.MinValue or greater than date.MaxValue.
 		/// </exception>
 		public TimeSpan Subtract(Date value)
@@ -148,7 +148,7 @@ namespace Qowaiv
 		/// A date equal to the date and time represented by this instance
 		/// minus the time interval represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The result is less than date.MinValue or greater than date.MaxValue.
 		/// </exception>
 		public Date Subtract(TimeSpan value)
@@ -167,7 +167,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the number of years represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// value or the resulting date is less than date.MinValue
 		/// or greater than date.MaxValue.
 		/// </exception>
@@ -186,7 +186,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and months.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.-or- months is less than -120,000 or greater
 		/// than 120,000.
@@ -207,7 +207,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the number of days represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
@@ -227,7 +227,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the time represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
@@ -247,7 +247,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the number of hours represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
@@ -267,7 +267,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the number of minutes represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
@@ -287,7 +287,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the number of seconds represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
@@ -307,7 +307,7 @@ namespace Qowaiv
 		/// A date whose value is the sum of the date and time represented
 		/// by this instance and the number of milliseconds represented by value.
 		/// </returns>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// The resulting date is less than date.MinValue or greater
 		/// than date.MaxValue.
 		/// </exception>
@@ -517,7 +517,7 @@ namespace Qowaiv
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a Date.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -605,7 +605,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A Date.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Date Parse(string s)
@@ -623,7 +623,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A Date.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Date Parse(string s, IFormatProvider formatProvider)

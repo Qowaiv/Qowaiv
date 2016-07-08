@@ -271,7 +271,7 @@ namespace Qowaiv.Security.Cryptography
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a cryptographic seed.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -331,7 +331,7 @@ namespace Qowaiv.Security.Cryptography
 		/// <returns>
 		/// A cryptographic seed.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static CryptographicSeed Parse(string s)

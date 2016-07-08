@@ -298,7 +298,7 @@ namespace Qowaiv
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a UUID.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -354,7 +354,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A UUID.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Uuid Parse(string s)

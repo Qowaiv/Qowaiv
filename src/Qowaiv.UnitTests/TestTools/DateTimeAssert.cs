@@ -27,7 +27,7 @@ namespace Qowaiv.UnitTests.TestTools
 		/// <param name="args">
 		/// Array of objects to be used in formatting the message
 		/// </param>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// If the specified tolerance is negative.
 		/// </exception>
 		/// <exception cref="NUnit.Framework.AssertionException">
@@ -60,7 +60,7 @@ namespace Qowaiv.UnitTests.TestTools
 		/// <param name="args">
 		/// Array of objects to be used in formatting the message
 		/// </param>
-		/// <exception cref="System.ArgumentOutOfRangeException">
+		/// <exception cref="ArgumentOutOfRangeException">
 		/// If the specified tolerance is negative.
 		/// </exception>
 		/// <exception cref="NUnit.Framework.AssertionException">

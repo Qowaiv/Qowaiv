@@ -94,10 +94,10 @@ namespace Qowaiv.Formatting
 		/// A copy of format in which the format items have been replaced by the string
 		/// representation of the corresponding objects in args.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// format or args is null.
 		/// </exception>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// format is invalid.-or- The index of a format item is less than zero, or greater
 		/// than or equal to the length of the args array.
 		/// </exception>
@@ -293,13 +293,13 @@ namespace Qowaiv.Formatting
 		/// <param name="format">
 		/// The format.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// An element with the same type already exists in the collection.
 		/// </exception>
 		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", 
@@ -314,13 +314,13 @@ namespace Qowaiv.Formatting
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// An element with the same type already exists in the collection.
 		/// </exception>
 		public void Add(Type type, IFormatProvider formatProvider) { Add(type, new FormattingArguments(formatProvider)); }
@@ -335,13 +335,13 @@ namespace Qowaiv.Formatting
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// An element with the same type already exists in the collection.
 		/// </exception>
 		public void Add(Type type, string format, IFormatProvider formatProvider) { Add(type, new FormattingArguments(format, formatProvider)); }
@@ -353,13 +353,13 @@ namespace Qowaiv.Formatting
 		/// <param name="arguments">
 		/// The formatting arguments.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// An element with the same type already exists in the collection.
 		/// </exception>
 		public void Add(Type type, FormattingArguments arguments) 
@@ -376,10 +376,10 @@ namespace Qowaiv.Formatting
 		/// <param name="format">
 		/// The format.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
 		[SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
@@ -394,10 +394,10 @@ namespace Qowaiv.Formatting
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
 		public void Set(Type type, IFormatProvider formatProvider) { Set(type, new FormattingArguments(formatProvider)); }
@@ -412,10 +412,10 @@ namespace Qowaiv.Formatting
 		/// <param name="formatProvider">
 		/// The format provider.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
 		public void Set(Type type, string format, IFormatProvider formatProvider) { Set(type, new FormattingArguments(format, formatProvider)); }
@@ -427,10 +427,10 @@ namespace Qowaiv.Formatting
 		/// <param name="arguments">
 		/// The formatting arugments.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The type is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The type represents a type not implementing System.IFormattable.
 		/// </exception>
 		public void Set(Type type, FormattingArguments arguments) {

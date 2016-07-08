@@ -344,7 +344,7 @@ namespace Qowaiv
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a Gender.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -416,7 +416,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A Gender.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Gender Parse(string s)
@@ -434,7 +434,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A Gender.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Gender Parse(string s, IFormatProvider formatProvider)
@@ -524,7 +524,7 @@ namespace Qowaiv
 		/// <param name="val">
 		/// A decimal describing a Gender.
 		/// </param>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// val is not a valid Gender.
 		/// </exception>
 		public static Gender Create(int? val)

@@ -8,7 +8,7 @@ namespace Qowaiv.Text
     /// a radix-32 representation.
     /// </summary>
     /// <remarks>
-    /// Codes originates from <see cref="http://scottless.com/blog/archive/2014/02/15/base32-encoder-and-decoder-in-c.aspx"/>
+    /// Codes originates from see http://scottless.com/blog/archive/2014/02/15/base32-encoder-and-decoder-in-c.aspx.
     /// </remarks>
     public static class Base32
     {

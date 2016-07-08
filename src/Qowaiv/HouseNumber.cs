@@ -291,7 +291,7 @@ namespace Qowaiv
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a house number.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -358,7 +358,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A house number.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static HouseNumber Parse(string s)
@@ -376,7 +376,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A house number.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static HouseNumber Parse(string s, IFormatProvider formatProvider)
@@ -467,7 +467,7 @@ namespace Qowaiv
 		/// <param name="val" >
 		/// A decimal describing a house number.
 		/// </param >
-		/// <exception cref="System.FormatException" >
+		/// <exception cref="FormatException" >
 		/// val is not a valid house number.
 		/// </exception >
 		public static HouseNumber Create(Int32? val)

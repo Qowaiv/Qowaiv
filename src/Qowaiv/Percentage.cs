@@ -645,7 +645,7 @@ namespace Qowaiv
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a Percentage.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -714,7 +714,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A Percentage.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Percentage Parse(string s)
@@ -732,7 +732,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A Percentage.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Percentage Parse(string s, IFormatProvider formatProvider)

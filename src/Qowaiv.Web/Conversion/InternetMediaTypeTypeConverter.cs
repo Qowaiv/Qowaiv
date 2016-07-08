@@ -40,7 +40,7 @@ namespace Qowaiv.Web.Conversion
 		/// <returns>
 		/// An System.Object that represents the converted value.
 		/// </returns>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The conversion cannot be performed.
 		/// </exception>
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
@@ -72,10 +72,10 @@ namespace Qowaiv.Web.Conversion
 		/// <returns>
 		/// A string that represents the converted internet media type.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// The destinationType parameter is null.
 		/// </exception>
-		/// <exception cref="System.NotSupportedException">
+		/// <exception cref="NotSupportedException">
 		/// The conversion cannot be performed.
 		/// </exception>
 		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)

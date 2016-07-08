@@ -26,10 +26,10 @@ namespace Qowaiv.Text
 		/// <param name="pattern">
 		/// The pattern to match on.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// pattern is null.
 		/// </exception>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// pattern is empty or invalid.
 		/// </exception>
 		public WildcardPattern(string pattern)
@@ -45,10 +45,10 @@ namespace Qowaiv.Text
 		/// <param name="comparisonType">
 		/// The type of comparison.
 		/// </param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// pattern is null.
 		/// </exception>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// pattern is empty or invalid.
 		/// </exception>
 		public WildcardPattern(string pattern, WildcardPatternOptions options, StringComparison comparisonType)
@@ -148,7 +148,7 @@ namespace Qowaiv.Text
 		/// <returns>
 		/// true if the wildcard pattern finds a match; otherwise, false.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// input is null.
 		/// </exception>
 		public bool IsMatch(string input)
@@ -237,7 +237,7 @@ namespace Qowaiv.Text
 		/// <returns>
 		/// true if the wildcard pattern finds a match; otherwise, false.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// input is null.
 		/// </exception>
 		public static bool IsMatch(string pattern, string input)
@@ -260,7 +260,7 @@ namespace Qowaiv.Text
 		/// <returns>
 		/// true if the wildcard pattern finds a match; otherwise, false.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// input is null.
 		/// </exception>
 		public static bool IsMatch(string pattern, string input, WildcardPatternOptions options, StringComparison comparisonType)

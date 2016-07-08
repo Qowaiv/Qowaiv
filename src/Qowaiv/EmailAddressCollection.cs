@@ -369,7 +369,7 @@ namespace Qowaiv
 		/// <returns>
 		/// An email address.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static EmailAddressCollection Parse(string s)
@@ -387,7 +387,7 @@ namespace Qowaiv
 		/// <returns>
 		/// An email address.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static EmailAddressCollection Parse(string s, IFormatProvider formatProvider)

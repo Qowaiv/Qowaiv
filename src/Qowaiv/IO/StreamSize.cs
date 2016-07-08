@@ -645,7 +645,7 @@ namespace Qowaiv.IO
         /// has the same position in the sort order as value. Greater than zero This
         /// instance follows value.-or- value is null.
         /// </returns>
-        /// <exception cref="System.ArgumentException">
+        /// <exception cref="ArgumentException">
         /// value is not a stream size.
         /// </exception>
         public int CompareTo(object obj)
@@ -724,7 +724,7 @@ namespace Qowaiv.IO
         /// <returns>
         /// A stream size.
         /// </returns>
-        /// <exception cref="System.FormatException">
+        /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
         public static StreamSize Parse(string s)
@@ -742,7 +742,7 @@ namespace Qowaiv.IO
         /// <returns>
         /// A stream size.
         /// </returns>
-        /// <exception cref="System.FormatException">
+        /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
         public static StreamSize Parse(string s, IFormatProvider formatProvider)

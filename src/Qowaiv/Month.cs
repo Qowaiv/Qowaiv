@@ -345,7 +345,7 @@ namespace Qowaiv
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a month.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -410,7 +410,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A month.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Month Parse(string s)
@@ -428,7 +428,7 @@ namespace Qowaiv
 		/// <returns>
 		/// A month.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static Month Parse(string s, IFormatProvider formatProvider)
@@ -530,7 +530,7 @@ namespace Qowaiv
 		/// <param name="val" >
 		/// A decimal describing a month.
 		/// </param >
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// val is not a valid month.
 		/// </exception>
 		public static Month Create(Int32? val)

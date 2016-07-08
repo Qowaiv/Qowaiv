@@ -357,7 +357,7 @@ namespace Qowaiv.Web
 		/// has the same position in the sort order as value. Greater than zero This
 		/// instance follows value.-or- value is null.
 		/// </returns>
-		/// <exception cref="System.ArgumentException">
+		/// <exception cref="ArgumentException">
 		/// value is not a internet media type.
 		/// </exception>
 		public int CompareTo(object obj)
@@ -403,7 +403,7 @@ namespace Qowaiv.Web
 		/// <returns>
 		/// An internet media type.
 		/// </returns>
-		/// <exception cref="System.FormatException">
+		/// <exception cref="FormatException">
 		/// s is not in the correct format.
 		/// </exception>
 		public static InternetMediaType Parse(string s)

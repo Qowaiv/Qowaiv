@@ -19,7 +19,7 @@ namespace Qowaiv.Threading
 		static ThreadDomain()
 		{
 			Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
-			Register(typeof(Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Date.Today));
+			Register(typeof(Financial.Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Date.Today));
 		}
 
 		/// <summary>Gets the current thread domain.</summary>

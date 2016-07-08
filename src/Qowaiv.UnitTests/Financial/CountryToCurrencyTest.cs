@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Financial;
 using System;
 using System.Linq;
 
-namespace Qowaiv.UnitTests
+namespace Qowaiv.UnitTests.Financial
 {
 	[TestFixture]
 	public class CountryToCurrencyTest

@@ -33,7 +33,6 @@ namespace Qowaiv.UnitTests
 			{
 				typeof(Qowaiv.BankIdentifierCode),
 				typeof(Qowaiv.Country),
-				typeof(Qowaiv.Currency),
 				typeof(Qowaiv.Date),
 				typeof(Qowaiv.EmailAddress),
 				typeof(Qowaiv.Gender),
@@ -46,6 +45,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Uuid),
 				typeof(Qowaiv.WeekDate),
 				typeof(Qowaiv.Year),
+				typeof(Qowaiv.Financial.Currency),
 				typeof(Qowaiv.IO.StreamSize),
 				typeof(Qowaiv.Security.Cryptography.CryptographicSeed),
 				typeof(Qowaiv.Sql.Timestamp),

@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion;
+﻿using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Threading;
@@ -17,7 +17,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
 	/// <summary>Represents a currency.</summary>
 	/// <remarks>
@@ -36,7 +36,7 @@ namespace Qowaiv
 	public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Currency>
 	{
 		/// <summary>Represents an empty/not set currency.</summary>
-		public static readonly Currency Empty = default(Currency);
+		public static readonly Currency Empty;
 
 		/// <summary>Represents an unknown (but set) currency.</summary>
 		public static readonly Currency Unknown = new Currency() { m_Value = "ZZZ" };
@@ -588,8 +588,22 @@ namespace Qowaiv
 
 		#region Resources
 
-		internal static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.CurrencyLabels", typeof(Currency).Assembly);
-		
+		/// <summary>This is done so that it will be available when called by another initialization.</summary>
+		internal static ResourceManager ResourceManager
+		{
+			get
+			{
+				if (s_ResourceManager == null)
+				{
+					ResourceManager temp = new ResourceManager("Qowaiv.Financial.CurrencyLabels", typeof(Currency).Assembly);
+					s_ResourceManager = temp;
+				}
+				return s_ResourceManager;
+			}
+		}
+		private static ResourceManager s_ResourceManager;
+
+
 		/// <summary>Get resource string.</summary>
 		/// <param name="postfix">
 		/// The prefix of the resource key.

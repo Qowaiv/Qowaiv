@@ -1,4 +1,4 @@
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     public partial struct Currency
     {

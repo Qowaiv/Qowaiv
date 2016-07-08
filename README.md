@@ -21,10 +21,6 @@ Country
 -------
 Represents a country based on an ISO 3166-1 code (or 3166-3 if the country does not longer exists).
 
-Currency
---------
-Represents a currency based on an ISO 4217 code.
-
 Date
 ----
 Represents a date, so without hours (minutes, seconds, milliseconds).
@@ -96,6 +92,12 @@ Seed
 ----
 A seed, representing random data to encrypt and decrypt data.
 
+Qowaiv financial types
+======================
+
+Currency
+--------
+Represents a currency based on an ISO 4217 code.
 
 Qowaiv SQL types
 ================

@@ -72,7 +72,7 @@
     <Compile Include="BankIdentifierCodeTest.cs" />
     <Compile Include="CodeGenerator\Generators\QowaivCodeGeneratorTest.cs" />
     <Compile Include="CountryTest.cs" />
-    <Compile Include="CurrencyTest.cs" />
+    <Compile Include="Financial\CurrencyTest.cs" />
     <Compile Include="Data\SvoParameterTest.cs" />
     <Compile Include="DateTest.cs" />
     <Compile Include="EmailAddressCollectionTest.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Text\Base32Test.cs" />
     <Compile Include="Text\Base64Test.cs" />
     <Compile Include="Text\WildcardPatternTest.cs" />
-    <Compile Include="CountryToCurrencyTest.cs" />
+    <Compile Include="Financial\CountryToCurrencyTest.cs" />
     <Compile Include="UuidTest.cs" />
     <Compile Include="SingleValueObjectAttributeTest.cs" />
     <Compile Include="CodeGenerator\Xml\XResourceFileHeaderTest.cs" />

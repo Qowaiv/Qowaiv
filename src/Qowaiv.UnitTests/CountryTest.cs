@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Financial;
 using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;

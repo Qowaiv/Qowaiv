@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Conversion;
+using Qowaiv.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Threading;

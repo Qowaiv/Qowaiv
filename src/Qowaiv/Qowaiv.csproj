@@ -60,7 +60,7 @@
     <Compile Include="BankIdentifierCode.cs" />
     <Compile Include="Conversion\BankIdentifierCodeTypeConverter.cs" />
     <Compile Include="Conversion\CountryTypeConverter.cs" />
-    <Compile Include="Conversion\CurrencyTypeConverter.cs" />
+    <Compile Include="Conversion\Fiancial\CurrencyTypeConverter.cs" />
     <Compile Include="Conversion\DateTypeConverter.cs" />
     <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
     <Compile Include="Conversion\IO\FileSizeTypeConverter.cs" />
@@ -83,10 +83,10 @@
     <Compile Include="Conversion\YearTypeConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryConstants.cs" />
-    <Compile Include="CountryToCurrency.cs" />
-    <Compile Include="CountryToCurrencyMappings.cs" />
-    <Compile Include="Currency.cs" />
-    <Compile Include="CurrencyConstants.cs" />
+    <Compile Include="Financial\CountryToCurrency.cs" />
+    <Compile Include="Financial\CountryToCurrencyMappings.cs" />
+    <Compile Include="Financial\Currency.cs" />
+    <Compile Include="Financial\CurrencyConstants.cs" />
     <Compile Include="Data\SvoParameter.cs" />
     <Compile Include="Date.cs" />
     <Compile Include="EmailAddress.cs" />
@@ -159,19 +159,19 @@
     <EmbeddedResource Include="CountryLabels.zh-HK.resx" />
     <EmbeddedResource Include="CountryLabels.zh-TW.resx" />
     <EmbeddedResource Include="CountryLabels.zh.resx" />
-    <EmbeddedResource Include="CurrencyLabels.ar.resx" />
-    <EmbeddedResource Include="CurrencyLabels.de.resx" />
-    <EmbeddedResource Include="CurrencyLabels.es.resx" />
-    <EmbeddedResource Include="CurrencyLabels.fr.resx" />
-    <EmbeddedResource Include="CurrencyLabels.it.resx" />
-    <EmbeddedResource Include="CurrencyLabels.ja.resx" />
-    <EmbeddedResource Include="CurrencyLabels.nl.resx" />
-    <EmbeddedResource Include="CurrencyLabels.pt.resx" />
-    <EmbeddedResource Include="CurrencyLabels.resx" />
-    <EmbeddedResource Include="CurrencyLabels.ru.resx" />
-    <EmbeddedResource Include="CurrencyLabels.zh-HK.resx" />
-    <EmbeddedResource Include="CurrencyLabels.zh-TW.resx" />
-    <EmbeddedResource Include="CurrencyLabels.zh.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.ar.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.de.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.es.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.fr.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.it.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.ja.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.nl.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.pt.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.ru.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.zh-HK.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.zh-TW.resx" />
+    <EmbeddedResource Include="Financial\CurrencyLabels.zh.resx" />
     <EmbeddedResource Include="GenderLabels.ar.resx" />
     <None Include="Qowaiv.nuspec">
       <SubType>Designer</SubType>
@@ -210,9 +210,7 @@
       <Link>Qowaiv.snk</Link>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Financial\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

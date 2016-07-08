@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Financial;
 using Qowaiv.IO;
 using Qowaiv.Threading;
 using Qowaiv.UnitTests.TestTools;

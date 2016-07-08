@@ -189,7 +189,8 @@ namespace Qowaiv.Financial
 			{
 				return formatted;
 			}
-			return m_Value.ToString(format, formatProvider);
+			var info = GetNumberFormatInfo(formatProvider);
+			return m_Value.ToString(format, info);
 		}
 
 		#endregion
@@ -404,8 +405,8 @@ namespace Qowaiv.Financial
 			result = Zero;
 
 			decimal amount;
-				
-			if (decimal.TryParse(s, NumberStyles.Currency, formatProvider, out amount))
+			var info = GetNumberFormatInfo(formatProvider);
+			if (decimal.TryParse(s, NumberStyles.Currency, info, out amount))
 			{
 				result = amount;
 				return true;
@@ -424,6 +425,25 @@ namespace Qowaiv.Financial
 		/// A decimal describing an Amount.
 		/// </param >
 		public static Amount Create(double val) { return Create((decimal)val); }
+
+		/// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
+		/// <remarks>
+		/// Because the options for formatting and parsing percentages as provided 
+		/// by the .NET framework are not sufficient, internally we use number
+		/// settings. For parsing and formatting however we like to use the
+		/// percentage properties of the <see cref="NumberFormatInfo"/> instead of
+		/// the number properties, so we copy them for desired behavior.
+		/// </remarks>
+		private static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+		{
+			var info = NumberFormatInfo.GetInstance(formatProvider);
+			info = (NumberFormatInfo)info.Clone();
+			info.NumberDecimalDigits = info.CurrencyDecimalDigits;
+			info.NumberDecimalSeparator = info.CurrencyDecimalSeparator;
+			info.NumberGroupSeparator = info.CurrencyGroupSeparator;
+			info.NumberGroupSizes = info.CurrencyGroupSizes;
+			return info;
+		}
 
 		#endregion
 

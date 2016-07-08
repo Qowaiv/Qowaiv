@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Threading;
-using System.Xml.Serialization;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Qowaiv.UnitTests.Json;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
 using Qowaiv.UnitTests.TestTools.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.Financial;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Qowaiv.Financial.UnitTests
 {
@@ -21,6 +18,17 @@ namespace Qowaiv.Financial.UnitTests
 	{
 		/// <summary>The test instance for most tests.</summary>
 		public static readonly Amount TestStruct = 42.17m;
+
+
+		public static NumberFormatInfo GetCustomNumberFormatInfo()
+		{
+			var info = new NumberFormatInfo()
+			{
+				CurrencyGroupSeparator = "#",
+				CurrencyDecimalSeparator = "*",
+			};
+			return info;
+		}
 
 		#region Amount const tests
 
@@ -108,6 +116,15 @@ namespace Qowaiv.Financial.UnitTests
 
 				Assert.AreEqual(exp, act);
 			}
+		}
+
+		[Test]
+		public void Parse_CustomFormatProvider_ValidParsing()
+		{
+			Amount act = Amount.Parse("5#123*34", GetCustomNumberFormatInfo());
+			Amount exp = 5123.34;
+
+			Assert.AreEqual(exp, act);
 		}
 
 		#endregion
@@ -332,7 +349,7 @@ namespace Qowaiv.Financial.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		
+
 		[Test]
 		public void FromJson_DoubleValue_AreEqual()
 		{
@@ -341,7 +358,7 @@ namespace Qowaiv.Financial.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-					
+
 		[Test]
 		public void FromJson_DateTimeValue_AssertNotSupportedException()
 		{
@@ -351,7 +368,7 @@ namespace Qowaiv.Financial.UnitTests
 			},
 			"JSON deserialization from a date is not supported.");
 		}
-				
+
 		[Test]
 		public void ToJson_TestStruct_AreEqual()
 		{
@@ -433,6 +450,15 @@ namespace Qowaiv.Financial.UnitTests
 		{
 			var act = Amount.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
 			var exp = "01700,0";
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void ToString_CustomFormatProvider_Formatted()
+		{
+			Amount amount = 12345678.235m;
+			var act = amount.ToString("#,##0.0000", GetCustomNumberFormatInfo());
+			var exp = "12#345#678*2350";
 			Assert.AreEqual(exp, act);
 		}
 
@@ -751,6 +777,7 @@ namespace Qowaiv.Financial.UnitTests
 		}
 
 		#endregion
+		
 		#region IsValid tests
 
 		[Test]

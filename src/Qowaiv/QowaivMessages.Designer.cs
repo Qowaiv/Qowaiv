@@ -223,6 +223,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid amount.
+        /// </summary>
+        public static string FormatExceptionFinancialAmount {
+            get {
+                return ResourceManager.GetString("FormatExceptionFinancialAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid gender.
         /// </summary>
         public static string FormatExceptionGender {

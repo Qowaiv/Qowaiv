@@ -72,6 +72,7 @@
     <Compile Include="BankIdentifierCodeTest.cs" />
     <Compile Include="CodeGenerator\Generators\QowaivCodeGeneratorTest.cs" />
     <Compile Include="CountryTest.cs" />
+    <Compile Include="Financial\AmountTest.cs" />
     <Compile Include="Financial\CurrencyTest.cs" />
     <Compile Include="Data\SvoParameterTest.cs" />
     <Compile Include="DateTest.cs" />

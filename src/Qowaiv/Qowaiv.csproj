@@ -60,6 +60,7 @@
     <Compile Include="BankIdentifierCode.cs" />
     <Compile Include="Conversion\BankIdentifierCodeTypeConverter.cs" />
     <Compile Include="Conversion\CountryTypeConverter.cs" />
+    <Compile Include="Conversion\Fiancial\AmountTypeConverter.cs" />
     <Compile Include="Conversion\Fiancial\CurrencyTypeConverter.cs" />
     <Compile Include="Conversion\DateTypeConverter.cs" />
     <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Conversion\YearTypeConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CountryConstants.cs" />
+    <Compile Include="Financial\Amount.cs" />
     <Compile Include="Financial\CountryToCurrency.cs" />
     <Compile Include="Financial\CountryToCurrencyMappings.cs" />
     <Compile Include="Financial\Currency.cs" />

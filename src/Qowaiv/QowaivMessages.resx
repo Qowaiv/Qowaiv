@@ -240,4 +240,7 @@
   <data name="FormatExceptionBase32" xml:space="preserve">
     <value>Not a valid Base32 string</value>
   </data>
+  <data name="FormatExceptionFinancialAmount" xml:space="preserve">
+    <value>Not a valid amount</value>
+  </data>
 </root>

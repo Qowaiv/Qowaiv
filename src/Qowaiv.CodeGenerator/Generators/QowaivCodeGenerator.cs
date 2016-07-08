@@ -21,10 +21,14 @@ namespace Qowaiv.CodeGenerator.Generators
 		public void Generate(DirectoryInfo dir)
 		{
 			if (!dir.Exists) { dir.Create(); }
+
+			var fin = new DirectoryInfo(Path.Combine(dir.FullName, "Financial"));
+			if (!fin.Exists) { fin.Create(); }
+
 			GenerateGender(dir);
 			GenerateCountry(dir);
-			GenerateCurrency(dir);
-			GenerateCountryToCurrency(dir);
+			GenerateCurrency(fin);
+			GenerateCountryToCurrency(fin);
 			GenerateIban(dir);
 			GeneratePostalCode(dir);
 			GenerateUnknown(dir);
@@ -223,7 +227,7 @@ namespace Qowaiv.CodeGenerator.Generators
 				{
 					writer.WriteLine("using System.Collections.Generic;\r\nusing System.Collections.ObjectModel;\r\n");
 
-					writer.WriteLine("namespace Qowaiv\r\n{\r\n\tinternal partial struct CountryToCurrency\r\n\t{");
+					writer.WriteLine("namespace Qowaiv.Financial\r\n{\r\n\tinternal partial struct CountryToCurrency\r\n\t{");
 					
 					writer.WriteLine("\t\tpublic static readonly ReadOnlyCollection<CountryToCurrency> All = new ReadOnlyCollection<CountryToCurrency>(new List<CountryToCurrency>()\r\n\t\t{");
 
@@ -275,7 +279,7 @@ namespace Qowaiv.CodeGenerator.Generators
 			{
 				using (var writer = new StreamWriter(Path.Combine(dir.FullName, "CurrencyConstants.cs")))
 				{
-					writer.WriteLine("namespace Qowaiv\r\n{\r\n    public partial struct Currency\r\n    {");
+					writer.WriteLine("namespace Qowaiv.Financial\r\n{\r\n    public partial struct Currency\r\n    {");
 
 					var workbook = Workbook.Load(stream);
 					var worksheet = workbook.Worksheets[0];
@@ -348,7 +352,7 @@ namespace Qowaiv.CodeGenerator.Generators
 						}
 					}
 
-					resx.Data.Add(new XResourceFileData("All", String.Join(";", all)));
+					resx.Data.Add(new XResourceFileData("All", string.Join(";", all)));
 
 					resx.Save(new FileInfo(Path.Combine(dir.FullName, "CurrencyLabels.resx")));
 

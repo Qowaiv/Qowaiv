@@ -39,7 +39,7 @@ namespace Qowaiv
 		public static readonly Regex Pattern = new Regex(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 		/// <summary>Represents an empty/not set BIC.</summary>
-		public static readonly BankIdentifierCode Empty = default(BankIdentifierCode);
+		public static readonly BankIdentifierCode Empty;
 
 		/// <summary>Represents an unknown (but set) BIC.</summary>
 		public static readonly BankIdentifierCode Unknown = new BankIdentifierCode() { m_Value = "ZZZZZZZZZZZ" };

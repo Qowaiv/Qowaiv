@@ -34,7 +34,7 @@ namespace Qowaiv
 		public static readonly Regex Pattern = new Regex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
 
 		/// <summary>Represents an empty/not set GUID.</summary>
-		public static readonly Uuid Empty = default(Uuid);
+		public static readonly Uuid Empty;
 
 		/// <summary>Initializes a new instance of a GUID.</summary>
 		private Uuid(Guid id)

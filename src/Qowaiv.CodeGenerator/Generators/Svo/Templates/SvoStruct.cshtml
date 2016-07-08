@@ -26,7 +26,7 @@ namespace @Model.Namespace
         public static readonly Regex Pattern = new Regex(@@"^ComplexRegexPattern.*$", RegexOptions.Compiled);
 
         /// <summary>Represents an empty/not set @Model.ClassLongName.</summary>
-        public static readonly @Model.ClassName Empty = default(@(Model.ClassName));
+        public static readonly @Model.ClassName Empty;
 
         /// <summary>Represents an unknown (but set) @Model.ClassLongName.</summary>
         public static readonly @Model.ClassName Unknown = new @(Model.ClassName)() { m_Value = Unknown };
@@ -48,7 +48,7 @@ namespace @Model.Namespace
         public bool IsEmpty() { return m_Value == default(@Model.UnderlyingType); }
 
         /// <summary>Returns true if the @Model.ClassLongName is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == @(Model.ClassName).Unknown.m_Value; }
+        public bool IsUnknown() { return m_Value == Unknown.m_Value; }
 
         /// <summary>Returns true if the @Model.ClassLongName is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
@@ -370,7 +370,7 @@ namespace @Model.Namespace
         public static @Model.ClassName Parse(string s, IFormatProvider formatProvider)
         {
             @Model.ClassName val;
-            if (@(Model.ClassName).TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out val))
             {
                 return val;
             }
@@ -384,16 +384,16 @@ namespace @Model.Namespace
         /// A string containing @Model.a @Model.ClassLongName to convert.
         /// </param>
         /// <returns>
-        /// The @Model.ClassLongName if the string was converted successfully, otherwise @(Model.ClassName).Empty.
+        /// The @Model.ClassLongName if the string was converted successfully, otherwise Empty.
         /// </returns>
         public static @Model.ClassName TryParse(string s)
         {
             @Model.ClassName val;
-            if (@(Model.ClassName).TryParse(s, out val))
+            if (TryParse(s, out val))
             {
                 return val;
             }
-            return @(Model.ClassName).Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to @Model.a @Model.ClassLongName.
@@ -430,7 +430,7 @@ namespace @Model.Namespace
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out @Model.ClassName result)
         {
-            result = @(Model.ClassName).Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
@@ -438,7 +438,7 @@ namespace @Model.Namespace
             var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
             if (Qowaiv.Unknown.IsUnknown(s, culture))
             {
-                result = @(Model.ClassName).Unknown;
+                result = Unknown;
                 return true;
             }
             if (IsValid(s, culture))
@@ -461,7 +461,7 @@ namespace @Model.Namespace
         public static @(Model.ClassName) Create(@Model.UnderlyingType.Name? val)
         {
             @(Model.ClassName) result;
-            if (@(Model.ClassName).TryCreate(val, out result))
+            if (TryCreate(val, out result))
             {
                 return result;
             }
@@ -475,7 +475,7 @@ namespace @Model.Namespace
         /// A decimal describing @Model.a @Model.ClassLongName.
         /// @(Model.lt)/param @(Model.gt)
         /// @(Model.lt)returns @(Model.gt)
-        /// @Model.aUpper @Model.ClassLongName if the creation was successfully, otherwise @(Model.ClassName).Empty.
+        /// @Model.aUpper @Model.ClassLongName if the creation was successfully, otherwise Empty.
         /// @(Model.lt)/returns @(Model.gt)
         public static @(Model.ClassName) TryCreate(@Model.UnderlyingType.Name? val)
         {
@@ -484,7 +484,7 @@ namespace @Model.Namespace
             {
                 return result;
             }
-            return @(Model.ClassName).Empty;
+            return Empty;
         }
 
         /// @(Model.lt)summary @(Model.gt)Creates @Model.a @Model.ClassLongName from a @Model.UnderlyingType.Name.
@@ -501,7 +501,7 @@ namespace @Model.Namespace
         /// @(Model.lt)/returns @(Model.gt)
         public static bool TryCreate(@Model.UnderlyingType.Name? val, out @(Model.ClassName) result)
         {
-            result = @(Model.ClassName).Empty;
+            result = Empty;
 
             if (!val.HasValue)
             {

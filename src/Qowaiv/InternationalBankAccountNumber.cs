@@ -37,7 +37,7 @@ namespace Qowaiv
         public static readonly Regex Pattern = new Regex(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents an empty/not set IBAN.</summary>
-        public static readonly InternationalBankAccountNumber Empty = default(InternationalBankAccountNumber);
+        public static readonly InternationalBankAccountNumber Empty;
 
         /// <summary>Represents an unknown (but set) IBAN.</summary>
         public static readonly InternationalBankAccountNumber Unknown = new InternationalBankAccountNumber() { m_Value = "ZZ" };

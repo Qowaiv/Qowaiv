@@ -22,7 +22,7 @@ namespace Qowaiv.Security.Cryptography
 	public struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<CryptographicSeed>, IEquatable<CryptographicSeed>
 	{
 		/// <summary>Represents an empty/not set cryptographic seed.</summary>
-		public static readonly CryptographicSeed Empty = default(CryptographicSeed);
+		public static readonly CryptographicSeed Empty;
 
 		#region Properties
 

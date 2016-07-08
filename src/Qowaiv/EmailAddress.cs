@@ -46,7 +46,7 @@ namespace Qowaiv
 			", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
 		/// <summary>Represents an empty/not set email address.</summary>
-		public static readonly EmailAddress Empty = default(EmailAddress);
+		public static readonly EmailAddress Empty;
 
 		/// <summary>Represents an unknown (but set) email address.</summary>
 		public static readonly EmailAddress Unknown = new EmailAddress() { m_Value = "?" };

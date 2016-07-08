@@ -28,7 +28,7 @@ namespace Qowaiv
 		public static readonly Regex Pattern = new Regex(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 		/// <summary>Represents an empty/not set postal code.</summary>
-		public static readonly PostalCode Empty = default(PostalCode);
+		public static readonly PostalCode Empty;
 
 		/// <summary>Represents an unknown (but set) postal code.</summary>
 		public static readonly PostalCode Unknown = new PostalCode() { m_Value = "ZZZZZZZZZ" };

@@ -85,8 +85,8 @@
     <Compile Include="Globalization\Country.cs" />
     <Compile Include="Globalization\CountryConstants.cs" />
     <Compile Include="Financial\Amount.cs" />
-    <Compile Include="Financial\CountryToCurrency.cs" />
-    <Compile Include="Financial\CountryToCurrencyMappings.cs" />
+    <Compile Include="Globalization\CountryToCurrency.cs" />
+    <Compile Include="Globalization\CountryToCurrencyMappings.cs" />
     <Compile Include="Financial\Currency.cs" />
     <Compile Include="Financial\CurrencyConstants.cs" />
     <Compile Include="Data\SvoParameter.cs" />

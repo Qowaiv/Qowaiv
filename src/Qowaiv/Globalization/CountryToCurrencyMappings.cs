@@ -1,8 +1,8 @@
-using Qowaiv.Globalization;
+using Qowaiv.Financial;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Qowaiv.Financial
+namespace Qowaiv.Globalization
 {
 	internal partial struct CountryToCurrency
 	{

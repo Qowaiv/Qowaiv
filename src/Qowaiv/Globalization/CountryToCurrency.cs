@@ -1,13 +1,12 @@
-﻿using Qowaiv.Globalization;
+﻿using Qowaiv.Financial;
 
-namespace Qowaiv.Financial
+namespace Qowaiv.Globalization
 {
 	internal partial struct CountryToCurrency
 	{
 		private Country m_Country;
 		private Currency m_Currency;
 		private Date m_StartDate;
-		
 
 		public CountryToCurrency(Country country, Currency currency, Date startdate)
 		{

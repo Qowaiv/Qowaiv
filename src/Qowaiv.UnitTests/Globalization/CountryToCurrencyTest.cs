@@ -4,14 +4,14 @@ using Qowaiv.Globalization;
 using System;
 using System.Linq;
 
-namespace Qowaiv.UnitTests.Financial
+namespace Qowaiv.UnitTests.Globalization
 {
 	[TestFixture]
 	public class CountryToCurrencyTest
 	{
 		private const bool TestMode = false;
 		
-		public static readonly Country[] CountriesWithoutCurrency = new Country[] { Country.AQ };
+		public static readonly Country[] CountriesWithoutCurrency = new [] { Country.AQ };
 
 		[Test]
 		public void GetCurrency_AllCountries_CurrencyShouldExistOnStartDateAndEndDateOrToday()

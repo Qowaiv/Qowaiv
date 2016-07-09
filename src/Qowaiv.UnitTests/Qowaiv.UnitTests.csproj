@@ -107,7 +107,7 @@
     <Compile Include="Text\Base32Test.cs" />
     <Compile Include="Text\Base64Test.cs" />
     <Compile Include="Text\WildcardPatternTest.cs" />
-    <Compile Include="Financial\CountryToCurrencyTest.cs" />
+    <Compile Include="Globalization\CountryToCurrencyTest.cs" />
     <Compile Include="UuidTest.cs" />
     <Compile Include="SingleValueObjectAttributeTest.cs" />
     <Compile Include="CodeGenerator\Xml\XResourceFileHeaderTest.cs" />

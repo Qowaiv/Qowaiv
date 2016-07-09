@@ -52,7 +52,7 @@ namespace Qowaiv
 		/// <summary>Contains not known, male, female, not applicable.</summary>
 		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
 			Justification = "ReadOnlyCollection<T> is immutable.")]
-		public static readonly ReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>() 
+		public static readonly IReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>() 
 		{
 			Male,
 			Female,
@@ -63,7 +63,7 @@ namespace Qowaiv
 		/// <summary>Contains male and female.</summary>
 		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
 			Justification = "ReadOnlyCollection<T> is immutable.")]
-		public static readonly ReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>() 
+		public static readonly IReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>() 
 		{
 			Male, 
 			Female 
@@ -72,7 +72,7 @@ namespace Qowaiv
 		/// <summary>Contains male, female, not applicable.</summary>
 		[SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
 			Justification = "ReadOnlyCollection<T> is immutable.")]
-		public static readonly ReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>() 
+		public static readonly IReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>() 
 		{ 
 			Male, 
 			Female, 

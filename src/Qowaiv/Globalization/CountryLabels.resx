@@ -55,9 +55,6 @@
   <data name="AE_CallingCode">
     <value>+971</value>
   </data>
-  <data name="AE_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="AF_DisplayName">
     <value>Afghanistan</value>
   </data>
@@ -75,9 +72,6 @@
   </data>
   <data name="AF_CallingCode">
     <value>+93</value>
-  </data>
-  <data name="AF_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="AG_DisplayName">
     <value>Antigua And Barbuda</value>
@@ -133,9 +127,6 @@
   <data name="AL_CallingCode">
     <value>+355</value>
   </data>
-  <data name="AL_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="AM_DisplayName">
     <value>Armenia</value>
   </data>
@@ -153,9 +144,6 @@
   </data>
   <data name="AM_CallingCode">
     <value>+374</value>
-  </data>
-  <data name="AM_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="AO_DisplayName">
     <value>Angola</value>
@@ -208,9 +196,6 @@
   <data name="AR_CallingCode">
     <value>+54</value>
   </data>
-  <data name="AR_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="AS_DisplayName">
     <value>American Samoa</value>
   </data>
@@ -247,9 +232,6 @@
   <data name="AT_CallingCode">
     <value>+43</value>
   </data>
-  <data name="AT_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="AU_DisplayName">
     <value>Australia</value>
   </data>
@@ -267,9 +249,6 @@
   </data>
   <data name="AU_CallingCode">
     <value>+61</value>
-  </data>
-  <data name="AU_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="AW_DisplayName">
     <value>Aruba</value>
@@ -325,9 +304,6 @@
   <data name="AZ_CallingCode">
     <value>+994</value>
   </data>
-  <data name="AZ_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="BA_DisplayName">
     <value>Bosnia And Herzegovina</value>
   </data>
@@ -345,9 +321,6 @@
   </data>
   <data name="BA_CallingCode">
     <value>+387</value>
-  </data>
-  <data name="BA_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="BB_DisplayName">
     <value>Barbados</value>
@@ -385,9 +358,6 @@
   <data name="BD_CallingCode">
     <value>+880</value>
   </data>
-  <data name="BD_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="BE_DisplayName">
     <value>Belgium</value>
   </data>
@@ -405,9 +375,6 @@
   </data>
   <data name="BE_CallingCode">
     <value>+32</value>
-  </data>
-  <data name="BE_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="BF_DisplayName">
     <value>Burkina Faso</value>
@@ -445,9 +412,6 @@
   <data name="BG_CallingCode">
     <value>+359</value>
   </data>
-  <data name="BG_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="BH_DisplayName">
     <value>Bahrain</value>
   </data>
@@ -465,9 +429,6 @@
   </data>
   <data name="BH_CallingCode">
     <value>+973</value>
-  </data>
-  <data name="BH_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="BI_DisplayName">
     <value>Burundi</value>
@@ -559,9 +520,6 @@
   <data name="BN_CallingCode">
     <value>+673</value>
   </data>
-  <data name="BN_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="BO_DisplayName">
     <value>Bolivia</value>
   </data>
@@ -579,9 +537,6 @@
   </data>
   <data name="BO_CallingCode">
     <value>+591</value>
-  </data>
-  <data name="BO_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="BQ_DisplayName">
     <value>Bonaire</value>
@@ -618,9 +573,6 @@
   </data>
   <data name="BR_CallingCode">
     <value>+55</value>
-  </data>
-  <data name="BR_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="BS_DisplayName">
     <value>Bahamas</value>
@@ -712,9 +664,6 @@
   <data name="BY_CallingCode">
     <value>+375</value>
   </data>
-  <data name="BY_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="BZ_DisplayName">
     <value>Belize</value>
   </data>
@@ -733,9 +682,6 @@
   <data name="BZ_CallingCode">
     <value>+501</value>
   </data>
-  <data name="BZ_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="CA_DisplayName">
     <value>Canada</value>
   </data>
@@ -753,9 +699,6 @@
   </data>
   <data name="CA_CallingCode">
     <value>+1</value>
-  </data>
-  <data name="CA_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="CC_DisplayName">
     <value>Cocos</value>
@@ -847,9 +790,6 @@
   <data name="CH_CallingCode">
     <value>+41</value>
   </data>
-  <data name="CH_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="CI_DisplayName">
     <value>Côte D'Ivoire</value>
   </data>
@@ -904,9 +844,6 @@
   <data name="CL_CallingCode">
     <value>+56</value>
   </data>
-  <data name="CL_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="CM_DisplayName">
     <value>Cameroon</value>
   </data>
@@ -943,9 +880,6 @@
   <data name="CN_CallingCode">
     <value>+86</value>
   </data>
-  <data name="CN_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="CO_DisplayName">
     <value>Colombia</value>
   </data>
@@ -964,9 +898,6 @@
   <data name="CO_CallingCode">
     <value>+57</value>
   </data>
-  <data name="CO_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="CR_DisplayName">
     <value>Costa Rica</value>
   </data>
@@ -984,9 +915,6 @@
   </data>
   <data name="CR_CallingCode">
     <value>+506</value>
-  </data>
-  <data name="CR_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="CU_DisplayName">
     <value>Cuba</value>
@@ -1096,9 +1024,6 @@
   <data name="CZ_CallingCode">
     <value>+420</value>
   </data>
-  <data name="CZ_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="DE_DisplayName">
     <value>Germany</value>
   </data>
@@ -1116,9 +1041,6 @@
   </data>
   <data name="DE_CallingCode">
     <value>+49</value>
-  </data>
-  <data name="DE_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="DJ_DisplayName">
     <value>Djibouti</value>
@@ -1156,9 +1078,6 @@
   <data name="DK_CallingCode">
     <value>+45</value>
   </data>
-  <data name="DK_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="DM_DisplayName">
     <value>Dominica</value>
   </data>
@@ -1195,9 +1114,6 @@
   <data name="DO_CallingCode">
     <value>+1 809</value>
   </data>
-  <data name="DO_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="DZ_DisplayName">
     <value>Algeria</value>
   </data>
@@ -1215,9 +1131,6 @@
   </data>
   <data name="DZ_CallingCode">
     <value>+213</value>
-  </data>
-  <data name="DZ_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="EC_DisplayName">
     <value>Ecuador</value>
@@ -1237,9 +1150,6 @@
   <data name="EC_CallingCode">
     <value>+593</value>
   </data>
-  <data name="EC_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="EE_DisplayName">
     <value>Estonia</value>
   </data>
@@ -1258,9 +1168,6 @@
   <data name="EE_CallingCode">
     <value>+372</value>
   </data>
-  <data name="EE_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="EG_DisplayName">
     <value>Egypt</value>
   </data>
@@ -1278,9 +1185,6 @@
   </data>
   <data name="EG_CallingCode">
     <value>+20</value>
-  </data>
-  <data name="EG_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="EH_DisplayName">
     <value>Western Sahara</value>
@@ -1336,9 +1240,6 @@
   <data name="ES_CallingCode">
     <value>+34</value>
   </data>
-  <data name="ES_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="ET_DisplayName">
     <value>Ethiopia</value>
   </data>
@@ -1357,9 +1258,6 @@
   <data name="ET_CallingCode">
     <value>+251</value>
   </data>
-  <data name="ET_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="FI_DisplayName">
     <value>Finland</value>
   </data>
@@ -1377,9 +1275,6 @@
   </data>
   <data name="FI_CallingCode">
     <value>+358</value>
-  </data>
-  <data name="FI_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="FJ_DisplayName">
     <value>Fiji</value>
@@ -1453,9 +1348,6 @@
   <data name="FO_CallingCode">
     <value>+298</value>
   </data>
-  <data name="FO_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="FR_DisplayName">
     <value>France</value>
   </data>
@@ -1473,9 +1365,6 @@
   </data>
   <data name="FR_CallingCode">
     <value>+33</value>
-  </data>
-  <data name="FR_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="GA_DisplayName">
     <value>Gabon</value>
@@ -1513,9 +1402,6 @@
   <data name="GB_CallingCode">
     <value>+44</value>
   </data>
-  <data name="GB_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="GD_DisplayName">
     <value>Grenada</value>
   </data>
@@ -1551,9 +1437,6 @@
   </data>
   <data name="GE_CallingCode">
     <value>+995</value>
-  </data>
-  <data name="GE_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="GF_DisplayName">
     <value>French Guiana</value>
@@ -1645,9 +1528,6 @@
   <data name="GL_CallingCode">
     <value>+299</value>
   </data>
-  <data name="GL_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="GM_DisplayName">
     <value>Gambia</value>
   </data>
@@ -1738,9 +1618,6 @@
   <data name="GR_CallingCode">
     <value>+30</value>
   </data>
-  <data name="GR_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="GS_DisplayName">
     <value>South Georgia And The South Sandwich Islands</value>
   </data>
@@ -1776,9 +1653,6 @@
   </data>
   <data name="GT_CallingCode">
     <value>+502</value>
-  </data>
-  <data name="GT_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="GU_DisplayName">
     <value>Guam</value>
@@ -1852,9 +1726,6 @@
   <data name="HK_CallingCode">
     <value>+852</value>
   </data>
-  <data name="HK_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="HM_DisplayName">
     <value>Heard Island And Mcdonald Islands</value>
   </data>
@@ -1891,9 +1762,6 @@
   <data name="HN_CallingCode">
     <value>+504</value>
   </data>
-  <data name="HN_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="HR_DisplayName">
     <value>Croatia</value>
   </data>
@@ -1911,9 +1779,6 @@
   </data>
   <data name="HR_CallingCode">
     <value>+385</value>
-  </data>
-  <data name="HR_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="HT_DisplayName">
     <value>Haiti</value>
@@ -1951,9 +1816,6 @@
   <data name="HU_CallingCode">
     <value>+36</value>
   </data>
-  <data name="HU_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="ID_DisplayName">
     <value>Indonesia</value>
   </data>
@@ -1971,9 +1833,6 @@
   </data>
   <data name="ID_CallingCode">
     <value>+62</value>
-  </data>
-  <data name="ID_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="IE_DisplayName">
     <value>Ireland</value>
@@ -1993,9 +1852,6 @@
   <data name="IE_CallingCode">
     <value>+353</value>
   </data>
-  <data name="IE_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="IL_DisplayName">
     <value>Israel</value>
   </data>
@@ -2013,9 +1869,6 @@
   </data>
   <data name="IL_CallingCode">
     <value>+972</value>
-  </data>
-  <data name="IL_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="IM_DisplayName">
     <value>Isle Of Man</value>
@@ -2053,9 +1906,6 @@
   <data name="IN_CallingCode">
     <value>+91</value>
   </data>
-  <data name="IN_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="IO_DisplayName">
     <value>British Indian Ocean Territory</value>
   </data>
@@ -2092,9 +1942,6 @@
   <data name="IQ_CallingCode">
     <value>+964</value>
   </data>
-  <data name="IQ_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="IR_DisplayName">
     <value>Iran</value>
   </data>
@@ -2112,9 +1959,6 @@
   </data>
   <data name="IR_CallingCode">
     <value>+98</value>
-  </data>
-  <data name="IR_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="IS_DisplayName">
     <value>Iceland</value>
@@ -2134,9 +1978,6 @@
   <data name="IS_CallingCode">
     <value>+354</value>
   </data>
-  <data name="IS_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="IT_DisplayName">
     <value>Italy</value>
   </data>
@@ -2154,9 +1995,6 @@
   </data>
   <data name="IT_CallingCode">
     <value>+39</value>
-  </data>
-  <data name="IT_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="JE_DisplayName">
     <value>Jersey</value>
@@ -2194,9 +2032,6 @@
   <data name="JM_CallingCode">
     <value>+1 876</value>
   </data>
-  <data name="JM_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="JO_DisplayName">
     <value>Jordan</value>
   </data>
@@ -2214,9 +2049,6 @@
   </data>
   <data name="JO_CallingCode">
     <value>+962</value>
-  </data>
-  <data name="JO_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="JP_DisplayName">
     <value>Japan</value>
@@ -2236,9 +2068,6 @@
   <data name="JP_CallingCode">
     <value>+81</value>
   </data>
-  <data name="JP_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="KE_DisplayName">
     <value>Kenya</value>
   </data>
@@ -2256,9 +2085,6 @@
   </data>
   <data name="KE_CallingCode">
     <value>+254</value>
-  </data>
-  <data name="KE_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="KG_DisplayName">
     <value>Kyrgyzstan</value>
@@ -2278,9 +2104,6 @@
   <data name="KG_CallingCode">
     <value>+996</value>
   </data>
-  <data name="KG_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="KH_DisplayName">
     <value>Cambodia</value>
   </data>
@@ -2298,9 +2121,6 @@
   </data>
   <data name="KH_CallingCode">
     <value>+855</value>
-  </data>
-  <data name="KH_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="KI_DisplayName">
     <value>Kiribati</value>
@@ -2392,9 +2212,6 @@
   <data name="KR_CallingCode">
     <value>+82</value>
   </data>
-  <data name="KR_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="KW_DisplayName">
     <value>Kuwait</value>
   </data>
@@ -2412,9 +2229,6 @@
   </data>
   <data name="KW_CallingCode">
     <value>+965</value>
-  </data>
-  <data name="KW_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="KY_DisplayName">
     <value>Cayman Islands</value>
@@ -2452,9 +2266,6 @@
   <data name="KZ_CallingCode">
     <value>+7</value>
   </data>
-  <data name="KZ_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="LA_DisplayName">
     <value>Lao People'S Democratic Republic</value>
   </data>
@@ -2473,9 +2284,6 @@
   <data name="LA_CallingCode">
     <value>+856</value>
   </data>
-  <data name="LA_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="LB_DisplayName">
     <value>Lebanon</value>
   </data>
@@ -2493,9 +2301,6 @@
   </data>
   <data name="LB_CallingCode">
     <value>+961</value>
-  </data>
-  <data name="LB_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="LC_DisplayName">
     <value>Saint Lucia</value>
@@ -2533,9 +2338,6 @@
   <data name="LI_CallingCode">
     <value>+423</value>
   </data>
-  <data name="LI_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="LK_DisplayName">
     <value>Sri Lanka</value>
   </data>
@@ -2553,9 +2355,6 @@
   </data>
   <data name="LK_CallingCode">
     <value>+94</value>
-  </data>
-  <data name="LK_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="LR_DisplayName">
     <value>Liberia</value>
@@ -2611,9 +2410,6 @@
   <data name="LT_CallingCode">
     <value>+370</value>
   </data>
-  <data name="LT_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="LU_DisplayName">
     <value>Luxembourg</value>
   </data>
@@ -2631,9 +2427,6 @@
   </data>
   <data name="LU_CallingCode">
     <value>+352</value>
-  </data>
-  <data name="LU_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="LV_DisplayName">
     <value>Latvia</value>
@@ -2653,9 +2446,6 @@
   <data name="LV_CallingCode">
     <value>+371</value>
   </data>
-  <data name="LV_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="LY_DisplayName">
     <value>Libya</value>
   </data>
@@ -2673,9 +2463,6 @@
   </data>
   <data name="LY_CallingCode">
     <value>+218</value>
-  </data>
-  <data name="LY_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="MA_DisplayName">
     <value>Morocco</value>
@@ -2695,9 +2482,6 @@
   <data name="MA_CallingCode">
     <value>+212</value>
   </data>
-  <data name="MA_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="MC_DisplayName">
     <value>Monaco</value>
   </data>
@@ -2715,9 +2499,6 @@
   </data>
   <data name="MC_CallingCode">
     <value>+377</value>
-  </data>
-  <data name="MC_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="MD_DisplayName">
     <value>Moldova</value>
@@ -2754,9 +2535,6 @@
   </data>
   <data name="ME_CallingCode">
     <value>+381</value>
-  </data>
-  <data name="ME_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="MF_DisplayName">
     <value>Saint Martin</value>
@@ -2830,9 +2608,6 @@
   <data name="MK_CallingCode">
     <value>+389</value>
   </data>
-  <data name="MK_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="ML_DisplayName">
     <value>Mali</value>
   </data>
@@ -2887,9 +2662,6 @@
   <data name="MN_CallingCode">
     <value>+976</value>
   </data>
-  <data name="MN_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="MO_DisplayName">
     <value>Macao</value>
   </data>
@@ -2907,9 +2679,6 @@
   </data>
   <data name="MO_CallingCode">
     <value>+853</value>
-  </data>
-  <data name="MO_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="MP_DisplayName">
     <value>Northern Mariana Islands</value>
@@ -3001,9 +2770,6 @@
   <data name="MT_CallingCode">
     <value>+356</value>
   </data>
-  <data name="MT_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="MU_DisplayName">
     <value>Mauritius</value>
   </data>
@@ -3039,9 +2805,6 @@
   </data>
   <data name="MV_CallingCode">
     <value>+960</value>
-  </data>
-  <data name="MV_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="MW_DisplayName">
     <value>Malawi</value>
@@ -3079,9 +2842,6 @@
   <data name="MX_CallingCode">
     <value>+52</value>
   </data>
-  <data name="MX_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="MY_DisplayName">
     <value>Malaysia</value>
   </data>
@@ -3099,9 +2859,6 @@
   </data>
   <data name="MY_CallingCode">
     <value>+60</value>
-  </data>
-  <data name="MY_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="MZ_DisplayName">
     <value>Mozambique</value>
@@ -3211,9 +2968,6 @@
   <data name="NG_CallingCode">
     <value>+234</value>
   </data>
-  <data name="NG_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="NI_DisplayName">
     <value>Nicaragua</value>
   </data>
@@ -3231,9 +2985,6 @@
   </data>
   <data name="NI_CallingCode">
     <value>+505</value>
-  </data>
-  <data name="NI_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="NL_DisplayName">
     <value>Netherlands</value>
@@ -3253,9 +3004,6 @@
   <data name="NL_CallingCode">
     <value>+31</value>
   </data>
-  <data name="NL_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="NO_DisplayName">
     <value>Norway</value>
   </data>
@@ -3274,9 +3022,6 @@
   <data name="NO_CallingCode">
     <value>+47</value>
   </data>
-  <data name="NO_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="NP_DisplayName">
     <value>Nepal</value>
   </data>
@@ -3294,9 +3039,6 @@
   </data>
   <data name="NP_CallingCode">
     <value>+977</value>
-  </data>
-  <data name="NP_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="NR_DisplayName">
     <value>Nauru</value>
@@ -3352,9 +3094,6 @@
   <data name="NZ_CallingCode">
     <value>+64</value>
   </data>
-  <data name="NZ_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="OM_DisplayName">
     <value>Oman</value>
   </data>
@@ -3372,9 +3111,6 @@
   </data>
   <data name="OM_CallingCode">
     <value>+968</value>
-  </data>
-  <data name="OM_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="PA_DisplayName">
     <value>Panama</value>
@@ -3394,9 +3130,6 @@
   <data name="PA_CallingCode">
     <value>+507</value>
   </data>
-  <data name="PA_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="PE_DisplayName">
     <value>Peru</value>
   </data>
@@ -3414,9 +3147,6 @@
   </data>
   <data name="PE_CallingCode">
     <value>+51</value>
-  </data>
-  <data name="PE_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="PF_DisplayName">
     <value>French Polynesia</value>
@@ -3472,9 +3202,6 @@
   <data name="PH_CallingCode">
     <value>+63</value>
   </data>
-  <data name="PH_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="PK_DisplayName">
     <value>Pakistan</value>
   </data>
@@ -3493,9 +3220,6 @@
   <data name="PK_CallingCode">
     <value>+92</value>
   </data>
-  <data name="PK_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="PL_DisplayName">
     <value>Poland</value>
   </data>
@@ -3513,9 +3237,6 @@
   </data>
   <data name="PL_CallingCode">
     <value>+48</value>
-  </data>
-  <data name="PL_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="PM_DisplayName">
     <value>Saint Pierre And Miquelon</value>
@@ -3571,9 +3292,6 @@
   <data name="PR_CallingCode">
     <value>+1 787</value>
   </data>
-  <data name="PR_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="PS_DisplayName">
     <value>Palestinian Territory</value>
   </data>
@@ -3609,9 +3327,6 @@
   </data>
   <data name="PT_CallingCode">
     <value>+351</value>
-  </data>
-  <data name="PT_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="PW_DisplayName">
     <value>Palau</value>
@@ -3649,9 +3364,6 @@
   <data name="PY_CallingCode">
     <value>+595</value>
   </data>
-  <data name="PY_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="QA_DisplayName">
     <value>Qatar</value>
   </data>
@@ -3669,9 +3381,6 @@
   </data>
   <data name="QA_CallingCode">
     <value>+974</value>
-  </data>
-  <data name="QA_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="RE_DisplayName">
     <value>Réunion</value>
@@ -3709,9 +3418,6 @@
   <data name="RO_CallingCode">
     <value>+40</value>
   </data>
-  <data name="RO_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="RS_DisplayName">
     <value>Serbia</value>
   </data>
@@ -3729,9 +3435,6 @@
   </data>
   <data name="RS_CallingCode">
     <value>+381</value>
-  </data>
-  <data name="RS_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="RU_DisplayName">
     <value>Russian Federation</value>
@@ -3751,9 +3454,6 @@
   <data name="RU_CallingCode">
     <value>+7</value>
   </data>
-  <data name="RU_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="RW_DisplayName">
     <value>Rwanda</value>
   </data>
@@ -3772,9 +3472,6 @@
   <data name="RW_CallingCode">
     <value>+250</value>
   </data>
-  <data name="RW_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="SA_DisplayName">
     <value>Saudi Arabia</value>
   </data>
@@ -3792,9 +3489,6 @@
   </data>
   <data name="SA_CallingCode">
     <value>+966</value>
-  </data>
-  <data name="SA_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="SB_DisplayName">
     <value>Solomon Islands</value>
@@ -3868,9 +3562,6 @@
   <data name="SE_CallingCode">
     <value>+46</value>
   </data>
-  <data name="SE_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="SG_DisplayName">
     <value>Singapore</value>
   </data>
@@ -3888,9 +3579,6 @@
   </data>
   <data name="SG_CallingCode">
     <value>+65</value>
-  </data>
-  <data name="SG_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="SH_DisplayName">
     <value>Saint Helena</value>
@@ -3928,9 +3616,6 @@
   <data name="SI_CallingCode">
     <value>+386</value>
   </data>
-  <data name="SI_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="SJ_DisplayName">
     <value>Svalbard And Jan Mayen</value>
   </data>
@@ -3966,9 +3651,6 @@
   </data>
   <data name="SK_CallingCode">
     <value>+421</value>
-  </data>
-  <data name="SK_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="SL_DisplayName">
     <value>Sierra Leone</value>
@@ -4023,9 +3705,6 @@
   </data>
   <data name="SN_CallingCode">
     <value>+221</value>
-  </data>
-  <data name="SN_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="SO_DisplayName">
     <value>Somalia</value>
@@ -4117,9 +3796,6 @@
   <data name="SV_CallingCode">
     <value>+503</value>
   </data>
-  <data name="SV_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="SX_DisplayName">
     <value>Sint Maarten</value>
   </data>
@@ -4155,9 +3831,6 @@
   </data>
   <data name="SY_CallingCode">
     <value>+963</value>
-  </data>
-  <data name="SY_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="SZ_DisplayName">
     <value>Swaziland</value>
@@ -4267,9 +3940,6 @@
   <data name="TH_CallingCode">
     <value>+66</value>
   </data>
-  <data name="TH_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="TJ_DisplayName">
     <value>Tajikistan</value>
   </data>
@@ -4287,9 +3957,6 @@
   </data>
   <data name="TJ_CallingCode">
     <value>+992</value>
-  </data>
-  <data name="TJ_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="TK_DisplayName">
     <value>Tokelau</value>
@@ -4345,9 +4012,6 @@
   <data name="TM_CallingCode">
     <value>+993</value>
   </data>
-  <data name="TM_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="TN_DisplayName">
     <value>Tunisia</value>
   </data>
@@ -4365,9 +4029,6 @@
   </data>
   <data name="TN_CallingCode">
     <value>+216</value>
-  </data>
-  <data name="TN_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="TO_DisplayName">
     <value>Tonga</value>
@@ -4405,9 +4066,6 @@
   <data name="TR_CallingCode">
     <value>+90</value>
   </data>
-  <data name="TR_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="TT_DisplayName">
     <value>Trinidad And Tobago</value>
   </data>
@@ -4425,9 +4083,6 @@
   </data>
   <data name="TT_CallingCode">
     <value>+1 868</value>
-  </data>
-  <data name="TT_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="TV_DisplayName">
     <value>Tuvalu</value>
@@ -4465,9 +4120,6 @@
   <data name="TW_CallingCode">
     <value>+886</value>
   </data>
-  <data name="TW_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="TZ_DisplayName">
     <value>Tanzania</value>
   </data>
@@ -4503,9 +4155,6 @@
   </data>
   <data name="UA_CallingCode">
     <value>+380</value>
-  </data>
-  <data name="UA_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="UG_DisplayName">
     <value>Uganda</value>
@@ -4561,9 +4210,6 @@
   <data name="US_CallingCode">
     <value>+1</value>
   </data>
-  <data name="US_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="UY_DisplayName">
     <value>Uruguay</value>
   </data>
@@ -4582,9 +4228,6 @@
   <data name="UY_CallingCode">
     <value>+598</value>
   </data>
-  <data name="UY_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="UZ_DisplayName">
     <value>Uzbekistan</value>
   </data>
@@ -4602,9 +4245,6 @@
   </data>
   <data name="UZ_CallingCode">
     <value>+998</value>
-  </data>
-  <data name="UZ_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="VA_DisplayName">
     <value>Holy See</value>
@@ -4660,9 +4300,6 @@
   <data name="VE_CallingCode">
     <value>+58</value>
   </data>
-  <data name="VE_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="VG_DisplayName">
     <value>Virgin Islands</value>
   </data>
@@ -4716,9 +4353,6 @@
   </data>
   <data name="VN_CallingCode">
     <value>+84</value>
-  </data>
-  <data name="VN_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="VU_DisplayName">
     <value>Vanuatu</value>
@@ -4792,9 +4426,6 @@
   <data name="YE_CallingCode">
     <value>+967</value>
   </data>
-  <data name="YE_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="YT_DisplayName">
     <value>Mayotte</value>
   </data>
@@ -4831,9 +4462,6 @@
   <data name="ZA_CallingCode">
     <value>+27</value>
   </data>
-  <data name="ZA_RegionInfoExists">
-    <value>True</value>
-  </data>
   <data name="ZM_DisplayName">
     <value>Zambia</value>
   </data>
@@ -4869,9 +4497,6 @@
   </data>
   <data name="ZW_CallingCode">
     <value>+263</value>
-  </data>
-  <data name="ZW_RegionInfoExists">
-    <value>True</value>
   </data>
   <data name="ANHH_DisplayName">
     <value>Netherlands Antilles</value>

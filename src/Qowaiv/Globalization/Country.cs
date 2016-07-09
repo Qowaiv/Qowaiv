@@ -129,7 +129,7 @@ namespace Qowaiv.Globalization
 		/// </param>
 		public bool ExistsOnDate(Date measurement)
 		{
-			return this.StartDate <= measurement && (!this.EndDate.HasValue || this.EndDate.Value >= measurement);
+			return StartDate <= measurement && (!EndDate.HasValue || EndDate.Value >= measurement);
 		}
 
 		/// <summary>Gets the active currency at the given date.</summary>
@@ -148,12 +148,15 @@ namespace Qowaiv.Globalization
 		/// <summary>Converts the CountryInfo to a RegionInfo.</summary>
 		public RegionInfo ToRegionInfo()
 		{
-			if (this.RegionInfoExists)
+			try
 			{
-				return new RegionInfo(this.IsoAlpha2Code);
+				return new RegionInfo(IsoAlpha2Code);
 			}
-			throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
-				QowaivMessages.NotSupportedExceptionCountryToRegionInfo, this.EnglishName, this.IsoAlpha2Code));
+			catch
+			{
+				throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
+					QowaivMessages.NotSupportedExceptionCountryToRegionInfo, EnglishName, IsoAlpha2Code));
+			}
 		}
 
 		#endregion
@@ -264,9 +267,9 @@ namespace Qowaiv.Globalization
 				return string.Format(
 				  CultureInfo.InvariantCulture,
 				  "Country: {0} ({1}/{2})",
-				  this.EnglishName,
-				  this.IsoAlpha2Code,
-				  this.IsoAlpha3Code
+				  EnglishName,
+				  IsoAlpha2Code,
+				  IsoAlpha3Code
 			  );
 			}
 		}
@@ -321,7 +324,7 @@ namespace Qowaiv.Globalization
 			}
 
 			// If no format specified, use the default format.
-			if (string.IsNullOrEmpty(format)) { return this.Name; }
+			if (string.IsNullOrEmpty(format)) { return Name; }
 
 			// Apply the format.
 			return StringFormatter.Apply(this, format, formatProvider, FormatTokens);

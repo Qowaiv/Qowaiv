@@ -950,36 +950,7 @@ namespace Qowaiv.UnitTests.Globalization
 			var act = TestStruct.IsoNumericCode;
 			Assert.AreEqual(exp, act);
 		}
-
-		[Test]
-		public void RegionInfoExists_Empty_AreEqual()
-		{
-			var exp = false;
-			var act = Country.Empty.RegionInfoExists;
-			Assert.AreEqual(exp, act);
-		}
-		[Test]
-		public void RegionInfoExists_Unknown_AreEqual()
-		{
-			var exp = false;
-			var act = Country.Unknown.RegionInfoExists;
-			Assert.AreEqual(exp, act);
-		}
-		[Test]
-		public void RegionInfoExists_TestStruct_AreEqual()
-		{
-			var exp = false;
-			var act = TestStruct.RegionInfoExists;
-			Assert.AreEqual(exp, act);
-		}
-		[Test]
-		public void RegionInfoExists_NL_AreEqual()
-		{
-			var exp = true;
-			var act = Country.NL.RegionInfoExists;
-			Assert.AreEqual(exp, act);
-		}
-
+		
 		[Test]
 		public void StartDate_Empty_AreEqual()
 		{

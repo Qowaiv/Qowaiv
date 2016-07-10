@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace Qowaiv.UnitTests.TestTools.Globalization
+namespace Qowaiv.Globalization
 {
 	/// <summary>Handles the CultureInfo of a thread during its scope.</summary>
 	/// <remarks>
@@ -33,8 +29,7 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 		/// <param name="name">
 		/// Name of the culture.
 		/// </param>
-		public CultureInfoScope(string name)
-			: this(new CultureInfo(name), new CultureInfo(name)) { }
+		public CultureInfoScope(string name) : this(name, name) { }
 
 		/// <summary>Creates a new CultureInfo scope.</summary>
 		/// <param name="name">
@@ -44,7 +39,7 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 		/// Name of the UI culture.
 		/// </param>
 		public CultureInfoScope(string name, string nameUI)
-			: this(new CultureInfo(name), new CultureInfo(nameUI)) { }
+			: this(new CultureInfo(Guard.NotNullOrEmpty(name, "name")), new CultureInfo(Guard.NotNullOrEmpty(nameUI, "nameUI"))) { }
 
 		/// <summary>Creates a new CultureInfo scope.</summary>
 		/// <param name="culture">
@@ -62,11 +57,11 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 		/// </param>
 		public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI)
 		{
-			if (culture == null) { throw new ArgumentNullException("culture"); }
-			if (cultureUI == null) { throw new ArgumentNullException("cultureUI"); }
+			Guard.NotNull(culture, "culture");
+			Guard.NotNull(cultureUI, "cultureUI");
 			
-			this.Previous = Thread.CurrentThread.CurrentCulture;
-			this.PreviousUI = Thread.CurrentThread.CurrentUICulture;
+			Previous = Thread.CurrentThread.CurrentCulture;
+			PreviousUI = Thread.CurrentThread.CurrentUICulture;
 
 			Thread.CurrentThread.CurrentCulture = culture;
 			Thread.CurrentThread.CurrentUICulture = cultureUI;
@@ -75,11 +70,12 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 		#endregion
 
 		/// <summary>Gets the previous Current UI Culture.</summary>
-		public CultureInfo PreviousUI { get; protected set; }
+		public CultureInfo PreviousUI { get;  }
 		/// <summary>Gets the previous Current Culture.</summary>
-		public CultureInfo Previous { get; protected set; }
+		public CultureInfo Previous { get;  }
 
 		/// <summary>Represents the CultureInfo scope as <see cref="string"/>.</summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		protected string DebuggerDisplay
 		{
 			get
@@ -90,8 +86,8 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 					GetType().Name,
 					Thread.CurrentThread.CurrentCulture.Name,
 					Thread.CurrentThread.CurrentUICulture.Name,
-					this.Previous.Name,
-					this.PreviousUI.Name);
+					Previous.Name,
+					PreviousUI.Name);
 			}
 		}
 
@@ -123,10 +119,11 @@ namespace Qowaiv.UnitTests.TestTools.Globalization
 		/// </param>
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!this.Disposed && disposing)
+			if (!Disposed && disposing)
 			{
-				Thread.CurrentThread.CurrentCulture = this.Previous;
-				Thread.CurrentThread.CurrentUICulture = this.PreviousUI;
+				Thread.CurrentThread.CurrentCulture = Previous;
+				Thread.CurrentThread.CurrentUICulture = PreviousUI;
+				Disposed = false;
 			}
 		}
 

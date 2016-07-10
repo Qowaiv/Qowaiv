@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Globalization;
 using Qowaiv.Text;
 using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Globalization;
 using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;

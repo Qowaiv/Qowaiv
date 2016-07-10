@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Formatting;
-using Qowaiv.UnitTests.TestTools.Globalization;
+using Qowaiv.Globalization;
 using System;
 using System.Globalization;
 

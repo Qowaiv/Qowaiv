@@ -119,7 +119,6 @@
     <Compile Include="TestTools\CodeDom\CompileAssert.cs" />
     <Compile Include="TestTools\DebuggerDisplayAssert.cs" />
     <Compile Include="TestTools\ExceptionAssert.cs" />
-    <Compile Include="TestTools\Globalization\CultureInfoScope.cs" />
     <Compile Include="TestTools\SerializationTest.cs" />
     <Compile Include="Threading\ThreadDomainTest.cs" />
     <Compile Include="UnknownTest.cs" />

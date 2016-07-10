@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Formatting;
+using Qowaiv.Globalization;
 using Qowaiv.UnitTests.TestTools;
 using Qowaiv.UnitTests.TestTools.Formatting;
-using Qowaiv.UnitTests.TestTools.Globalization;
 using System;
 using System.Collections;
 using System.Collections.Generic;

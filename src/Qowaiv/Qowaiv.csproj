@@ -94,6 +94,7 @@
     <Compile Include="EmailAddress.cs" />
     <Compile Include="EmailAddressCollection.cs" />
     <Compile Include="EmailAddressCollectionExtensions.cs" />
+    <Compile Include="Globalization\CultureInfoScope.cs" />
     <Compile Include="IO\StreamSize.cs" />
     <Compile Include="IO\StreamSizeExtensions.cs" />
     <Compile Include="Formatting\FormattingArgumentsCollection.cs" />

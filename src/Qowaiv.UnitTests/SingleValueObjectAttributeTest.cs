@@ -46,6 +46,7 @@ namespace Qowaiv.UnitTests
 				typeof(Qowaiv.Financial.BankIdentifierCode),
 				typeof(Qowaiv.Financial.Currency),
 				typeof(Qowaiv.Financial.InternationalBankAccountNumber),
+				typeof(Qowaiv.Financial.Money),
 				typeof(Qowaiv.Globalization.Country),
 				typeof(Qowaiv.IO.StreamSize),
 				typeof(Qowaiv.Security.Cryptography.CryptographicSeed),

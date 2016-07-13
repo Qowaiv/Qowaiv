@@ -57,6 +57,7 @@
     <Compile Include="..\Shared\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Conversion\Fiancial\MoneyTypeConverter.cs" />
     <Compile Include="Financial\BankIdentifierCode.cs" />
     <Compile Include="Conversion\Fiancial\BankIdentifierCodeTypeConverter.cs" />
     <Compile Include="Conversion\Globalization\CountryTypeConverter.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Conversion\UuidTypeConverter.cs" />
     <Compile Include="Conversion\WeekDateTypeConverter.cs" />
     <Compile Include="Conversion\YearTypeConverter.cs" />
+    <Compile Include="Financial\Money.cs" />
     <Compile Include="Globalization\Country.cs" />
     <Compile Include="Globalization\CountryConstants.cs" />
     <Compile Include="Financial\Amount.cs" />

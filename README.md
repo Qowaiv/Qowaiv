@@ -83,6 +83,10 @@ A seed, representing random data to encrypt and decrypt data.
 Qowaiv financial types
 ======================
 
+Amount
+------
+Represents money without the notion of the actual currency.
+
 Bank Identifier Code (BIC)
 --------------------------
 Represents a BIC as specified in ISO 13616.
@@ -94,6 +98,11 @@ Represents a currency based on an ISO 4217 code.
 International Bank Account Number (IBAN)
 ----------------------------------------
 Represents an IBAN as specified in ISO 13616.
+
+Money
+-----
+Represents the amount and the currency. Technically this is not SVO. However it
+acts identically as a SVO.
 
 Qowaiv globalization types
 ==========================

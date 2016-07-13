@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -16,7 +15,6 @@ namespace Qowaiv.Financial
 {
 	/// <summary>Represents an </summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	// [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an ")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 	[TypeConverter(typeof(AmountTypeConverter))]
 	public struct Amount : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Amount>
@@ -189,7 +187,7 @@ namespace Qowaiv.Financial
 			{
 				return formatted;
 			}
-			var info = GetNumberFormatInfo(formatProvider);
+			var info = Money.GetNumberFormatInfo(formatProvider);
 			return m_Value.ToString(format, info);
 		}
 
@@ -403,12 +401,10 @@ namespace Qowaiv.Financial
 		public static bool TryParse(string s, IFormatProvider formatProvider, out Amount result)
 		{
 			result = Zero;
-
-			decimal amount;
-			var info = GetNumberFormatInfo(formatProvider);
-			if (decimal.TryParse(s, NumberStyles.Currency, info, out amount))
+			Money money;
+			if (Money.TryParse(s, formatProvider, out money))
 			{
-				result = amount;
+				result = (decimal)money;
 				return true;
 			}
 			return false;
@@ -425,25 +421,6 @@ namespace Qowaiv.Financial
 		/// A decimal describing an Amount.
 		/// </param >
 		public static Amount Create(double val) { return Create((decimal)val); }
-
-		/// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
-		/// <remarks>
-		/// Because the options for formatting and parsing percentages as provided 
-		/// by the .NET framework are not sufficient, internally we use number
-		/// settings. For parsing and formatting however we like to use the
-		/// percentage properties of the <see cref="NumberFormatInfo"/> instead of
-		/// the number properties, so we copy them for desired behavior.
-		/// </remarks>
-		private static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
-		{
-			var info = NumberFormatInfo.GetInstance(formatProvider);
-			info = (NumberFormatInfo)info.Clone();
-			info.NumberDecimalDigits = info.CurrencyDecimalDigits;
-			info.NumberDecimalSeparator = info.CurrencyDecimalSeparator;
-			info.NumberGroupSeparator = info.CurrencyGroupSeparator;
-			info.NumberGroupSizes = info.CurrencyGroupSizes;
-			return info;
-		}
 
 		#endregion
 

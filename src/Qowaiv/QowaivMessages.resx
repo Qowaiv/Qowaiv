@@ -243,4 +243,7 @@
   <data name="FormatExceptionFinancialAmount" xml:space="preserve">
     <value>Not a valid amount</value>
   </data>
+  <data name="FormatExceptionMoney" xml:space="preserve">
+    <value>Not a valid amount</value>
+  </data>
 </root>

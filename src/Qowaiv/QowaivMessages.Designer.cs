@@ -268,6 +268,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid amount.
+        /// </summary>
+        public static string FormatExceptionMoney {
+            get {
+                return ResourceManager.GetString("FormatExceptionMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid month.
         /// </summary>
         public static string FormatExceptionMonth {

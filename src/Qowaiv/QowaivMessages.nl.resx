@@ -180,4 +180,7 @@
   <data name="FormatExceptionFinancialAmount" xml:space="preserve">
     <value>Geen geldig bedrag</value>
   </data>
+  <data name="FormatExceptionMoney" xml:space="preserve">
+    <value>Geen geldig bedrag</value>
+  </data>
 </root>

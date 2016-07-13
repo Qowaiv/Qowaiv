@@ -13,7 +13,7 @@ namespace Qowaiv.UnitTests.Web.Mvc
         {
             var act = TypeConverterModelBinder.Types.ToArray();
 
-            Assert.AreEqual(21, act.Length);
+            Assert.AreEqual(22, act.Length);
         }
         
         [Test]
@@ -22,7 +22,7 @@ namespace Qowaiv.UnitTests.Web.Mvc
             try
             {
                 var exp = TypeConverterModelBinder.Types.Count() + 1;
-                TypeConverterModelBinder.AddType(typeof(Int32));
+                TypeConverterModelBinder.AddType(typeof(int));
                 var act = TypeConverterModelBinder.Types.Count();
                 
                 Assert.AreEqual(exp, act);
@@ -30,7 +30,7 @@ namespace Qowaiv.UnitTests.Web.Mvc
             finally
             {
                 // Cleanup
-                TypeConverterModelBinder.RemoveType(typeof(Int32));
+                TypeConverterModelBinder.RemoveType(typeof(int));
             }
         }
 

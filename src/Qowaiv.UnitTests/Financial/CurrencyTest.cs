@@ -170,6 +170,18 @@ namespace Qowaiv.UnitTests.Financial
 			Assert.IsTrue(val.IsUnknown(), "Value");
 		}
 
+		/// <summary>TryParse "¤" should be valid and the result should be Currency.Unknown.</summary>
+		[Test]
+		public void TyrParse_UnknownCurrencySymbol_IsValid()
+		{
+			Currency val;
+
+			string str = "¤";
+
+			Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+			Assert.IsTrue(val.IsUnknown(), "Value");
+		}
+
 		/// <summary>TryParse with specified string value should be valid.</summary>
 		[Test]
 		public void TyrParse_StringValue_IsValid()
@@ -241,6 +253,14 @@ namespace Qowaiv.UnitTests.Financial
 
 				Assert.AreEqual(exp, act);
 			}
+		}
+
+		[Test]
+		public void Parse_EuroSign_EUR()
+		{
+			var act = Currency.Parse("€");
+			var exp = Currency.EUR;
+			Assert.AreEqual(exp, act);
 		}
 
 		#endregion
@@ -334,7 +354,7 @@ namespace Qowaiv.UnitTests.Financial
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_CurrencySerializeObject_AreEqual()
@@ -354,7 +374,7 @@ namespace Qowaiv.UnitTests.Financial
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 		[Test]
 		public void DataContractSerializeDeserialize_CurrencySerializeObject_AreEqual()
@@ -374,7 +394,7 @@ namespace Qowaiv.UnitTests.Financial
 			var act = SerializationTest.DataContractSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 
 		[Test]
@@ -395,7 +415,7 @@ namespace Qowaiv.UnitTests.Financial
 			var act = SerializationTest.SerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 		[Test]
 		public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -415,7 +435,7 @@ namespace Qowaiv.UnitTests.Financial
 			var act = SerializationTest.XmlSerializeDeserialize(input);
 			Assert.AreEqual(exp.Id, act.Id, "Id");
 			Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
+			DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
 		}
 
 		[Test]
@@ -581,6 +601,84 @@ namespace Qowaiv.UnitTests.Financial
 		public void DebuggerDisplay_TestStruct_String()
 		{
 			DebuggerDisplayAssert.HasResult("Currency: Euro (EUR/978)", TestStruct);
+		}
+
+		#endregion
+
+		#region IFormatProvider
+
+		[Test]
+		public void FormatAmount_BYR_NAf12Dot34()
+		{
+			using (new CultureInfoScope("en-GB"))
+			{
+				Amount number = 1200.34m;
+				var act = number.ToString("C", Currency.BYR);
+				var exp = "BYR1,200";
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void FormatAmount_ANG_NAf12Dot34()
+		{
+			using (new CultureInfoScope("en-GB"))
+			{
+				Amount number = 12.34m;
+				var act = number.ToString("C", Currency.ANG);
+				var exp = "NAf.12.34";
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void FormatDecimal_ANG_ANG12Dot34()
+		{
+			using (new CultureInfoScope("en-GB"))
+			{
+				var number = 12.34m;
+				var act = number.ToString("C", Currency.ANG);
+				var exp = "NAf.12.34";
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void FormatDecimal_TND_TND12Dot340()
+		{
+			using (new CultureInfoScope("en-GB"))
+			{
+				var number = 12.34m;
+				var act = number.ToString("C", Currency.TND);
+				var exp = "TND12.340";
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void FormatDecimal_EUR_E12Dot34()
+		{
+			using (new CultureInfoScope("en-GB"))
+			{
+				var number = 12.34m;
+				var act = number.ToString("C", Currency.EUR);
+				var exp = "€12.34";
+
+				Assert.AreEqual(exp, act);
+			}
+		}
+
+		[Test]
+		public void FormatDouble_EUR_E12Dot34()
+		{
+			using (new CultureInfoScope("en-GB"))
+			{
+				var number = 12.34;
+				var act = number.ToString("C", Currency.EUR);
+				var exp = "€12.34";
+
+				Assert.AreEqual(exp, act);
+			}
 		}
 
 		#endregion
@@ -793,6 +891,14 @@ namespace Qowaiv.UnitTests.Financial
 		#endregion
 
 		#region Properties
+
+		[Test]
+		public void Symbol_AZN_Special()
+		{
+			var act = Currency.AZN.Symbol;
+			var exp = "₼";
+			Assert.AreEqual(exp, act);
+		}
 
 		#endregion
 

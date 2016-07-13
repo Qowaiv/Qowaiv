@@ -34,7 +34,7 @@ namespace Qowaiv.Financial
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a currency.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(CurrencyTypeConverter))]
-	public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Currency>
+	public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IFormatProvider, IComparable, IComparable<Currency>
 	{
 		/// <summary>Represents an empty/not set currency.</summary>
 		public static readonly Currency Empty;
@@ -71,7 +71,7 @@ namespace Qowaiv.Financial
 		public int IsoNumericCode { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture)); } }
 
 		///<summary>Gets the symbol for a currency.</summary>
-		public string Symbol { get { return m_Value == default(string) ? "¤" : GetResourceString("Symbol", CultureInfo.InvariantCulture); } }
+		public string Symbol { get { return m_Value == default(string) ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture); } }
 
 		///<summary>Gets the number of after the decimal separator.</summary>
 		public int Digits { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture)); } }
@@ -242,9 +242,9 @@ namespace Qowaiv.Financial
 				return string.Format(
 				  CultureInfo.InvariantCulture,
 				  "Currency: {0} ({1}/{2:000})",
-				  this.EnglishName,
-				  this.IsoCode,
-				  this.IsoNumericCode
+				  EnglishName,
+				  IsoCode,
+				  IsoNumericCode
 			  );
 			}
 		}
@@ -316,6 +316,33 @@ namespace Qowaiv.Financial
 			{ 'e', (svo, provider) => svo.EnglishName },
 			{ 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
 		};
+
+		#endregion
+
+		#region IFormatter
+				
+		object IFormatProvider.GetFormat(Type formatType)
+		{
+			if (formatType != typeof(NumberFormatInfo)) { return null; }
+			return GetNumberFormatInfo(CultureInfo.CurrentCulture);
+		}
+
+		/// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
+		/// <remarks>
+		/// Because the options for formatting and parsing currencies as provided 
+		/// by the .NET framework are not sufficient, internally we use number
+		/// settings. For parsing and formatting however we like to use the
+		/// currency properties of the <see cref="NumberFormatInfo"/> instead of
+		/// the number properties, so we copy them for desired behavior.
+		/// </remarks>
+		internal NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+		{
+			var info = NumberFormatInfo.GetInstance(formatProvider);
+			info = (NumberFormatInfo)info.Clone();
+			info.CurrencySymbol = string.IsNullOrEmpty(Symbol) ? IsoCode : Symbol;
+			info.CurrencyDecimalDigits = Digits;
+			return info;
+		}
 
 		#endregion
 
@@ -506,7 +533,7 @@ namespace Qowaiv.Financial
 				return true;
 			}
 			var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-			if (Qowaiv.Unknown.IsUnknown(s, culture))
+			if (Qowaiv.Unknown.IsUnknown(s, culture) || s == Unknown.Symbol)
 			{
 				result = Unknown;
 				return true;
@@ -515,11 +542,19 @@ namespace Qowaiv.Financial
 
 			var str = Parsing.ToUnified(s);
 			string val;
-
+			
 			if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
 			{
 				result = new Currency() { m_Value = val };
 				return true;
+			}
+			foreach (var currency in AllCurrencies.Where(c => !string.IsNullOrEmpty(c.Symbol)))
+			{
+				if (currency.Symbol == str)
+				{
+					result = currency;
+					return true;
+				}
 			}
 			return false;
 		}
@@ -687,6 +722,19 @@ namespace Qowaiv.Financial
 
 		/// <summary>The locker for adding a culture.</summary>
 		private static volatile object locker = new object();
+
+		#endregion
+
+		#region Money creation operators
+
+		/// <summary>Creates money based on the amount and the currency.</summary>
+		public static Money operator +(Amount val, Currency currency) { return Money.Create(val, currency); }
+		/// <summary>Creates money based on the amount and the currency.</summary>
+		public static Money operator +(decimal val, Currency currency) { return Money.Create(val, currency); }
+		/// <summary>Creates money based on the amount and the currency.</summary>
+		public static Money operator +(double val, Currency currency) { return Money.Create(val, currency); }
+		/// <summary>Creates money based on the amount and the currency.</summary>
+		public static Money operator +(int val, Currency currency) { return Money.Create(val, currency); }
 
 		#endregion
 	}

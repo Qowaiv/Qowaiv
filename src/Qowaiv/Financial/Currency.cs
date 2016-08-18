@@ -728,11 +728,11 @@ namespace Qowaiv.Financial
 		#region Money creation operators
 
 		/// <summary>Creates money based on the amount and the currency.</summary>
-		public static Money operator +(Amount val, Currency currency) { return Money.Create(val, currency); }
+		public static Money operator +(Amount val, Currency currency) { return Money.Create((decimal)val, currency); }
 		/// <summary>Creates money based on the amount and the currency.</summary>
 		public static Money operator +(decimal val, Currency currency) { return Money.Create(val, currency); }
 		/// <summary>Creates money based on the amount and the currency.</summary>
-		public static Money operator +(double val, Currency currency) { return Money.Create(val, currency); }
+		public static Money operator +(double val, Currency currency) { return Money.Create((decimal)val, currency); }
 		/// <summary>Creates money based on the amount and the currency.</summary>
 		public static Money operator +(int val, Currency currency) { return Money.Create(val, currency); }
 

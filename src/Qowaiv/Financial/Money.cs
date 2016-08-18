@@ -17,7 +17,7 @@ namespace Qowaiv.Financial
 	/// <summary>Represents </summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	// [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for ")]
-	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Amount))]
+	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 	[TypeConverter(typeof(MoneyTypeConverter))]
 	public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Money>
 	{
@@ -31,7 +31,7 @@ namespace Qowaiv.Financial
 		#region Properties
 
 		/// <summary>The inner value of the </summary>
-		private Amount m_Value;
+		private decimal m_Value;
 		private Currency m_Currency;
 		
 		/// <summary>Gets the currency of the money.</summary>
@@ -132,7 +132,7 @@ namespace Qowaiv.Financial
 		/// </param>
 		void IJsonSerializable.FromJson(double jsonNumber)
 		{
-			var money = Create(jsonNumber, Currency.Empty);
+			var money = Create((decimal)jsonNumber, Currency.Empty);
 			m_Value = money.m_Value;
 			m_Currency = money.m_Currency;
 		}
@@ -316,12 +316,12 @@ namespace Qowaiv.Financial
 		/// <summary>Casts a double to Money.</summary>
 		public static implicit operator Money(double val) { return Create((decimal)val); }
 		/// <summary>Casts a double to Money.</summary>
-		public static implicit operator Money(int val) { return Create((decimal)val); }
+		public static implicit operator Money(int val) { return Create(val); }
 
 		/// <summary>Casts Money to a decimal.</summary>
 		public static explicit operator Amount(Money val) { return val.m_Value; }
 		/// <summary>Casts Money to a decimal.</summary>
-		public static explicit operator decimal(Money val) { return (decimal)val.m_Value; }
+		public static explicit operator decimal(Money val) { return val.m_Value; }
 		/// <summary>Casts Money to a double.</summary>
 		public static explicit operator double(Money val) { return (double)val.m_Value; }
 			   
@@ -473,7 +473,7 @@ namespace Qowaiv.Financial
 		/// <param name="val" >
 		/// The amount.
 		/// </param>
-		public static Money Create(Amount val)
+		public static Money Create(decimal val)
 		{
 			return Create(val, Currency.Current);
 		}
@@ -485,7 +485,7 @@ namespace Qowaiv.Financial
 		/// <param name="currency">
 		/// The currency of the amount.
 		/// </param>
-		public static Money Create(Amount val, Currency currency)
+		public static Money Create(decimal val, Currency currency)
 		{
 			return new Money() { m_Value = val, m_Currency = currency };
 		}

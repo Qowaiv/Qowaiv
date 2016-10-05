@@ -25,12 +25,15 @@ namespace Qowaiv.CodeGenerator.Generators
 			var fin = new DirectoryInfo(Path.Combine(dir.FullName, "Financial"));
 			if (!fin.Exists) { fin.Create(); }
 
+			var glo = new DirectoryInfo(Path.Combine(dir.FullName, "Globalization"));
+			if (!glo.Exists) { glo.Create(); }
+
 			GenerateGender(dir);
-			GenerateCountry(dir);
+			GenerateCountry(glo);
 			GenerateCurrency(fin);
-			GenerateCountryToCurrency(fin);
-			GenerateIban(dir);
-			GeneratePostalCode(dir);
+			GenerateCountryToCurrency(glo);
+			GenerateIban(fin);
+			GeneratePostalCode(glo);
 			GenerateUnknown(dir);
 			GenerateInternetMediaType(dir);
 		}
@@ -104,7 +107,7 @@ namespace Qowaiv.CodeGenerator.Generators
 			{
 				using (var writer = new StreamWriter(Path.Combine(dir.FullName, "CountryConstants.cs")))
 				{
-					writer.WriteLine("namespace Qowaiv\r\n{\r\n    public partial struct Country\r\n    {");
+					writer.WriteLine("namespace Qowaiv.Globalization\r\n{\r\n    public partial struct Country\r\n    {");
 
 					var workbook = Workbook.Load(stream);
 					var worksheet = workbook.Worksheets[0];
@@ -119,9 +122,8 @@ namespace Qowaiv.CodeGenerator.Generators
 					var str_index = 6;
 					var end_index = 7;
 					var tel_index = 8;
-					var reg_index = 9;
-					//var nat_index = 10;
-					var def_index = 11;
+					//var nat_index = 9;
+					var def_index = 10;
 
 					var resx = new XResourceFile();
 
@@ -141,10 +143,9 @@ namespace Qowaiv.CodeGenerator.Generators
 						var iso2 = row.GetCell(is2_index).StringValue.Trim();
 						var iso3 = row.GetCell(is3_index).StringValue.Trim();
 						var start = row.GetCell(str_index).DateTimeValue;
-						DateTime? end = string.IsNullOrEmpty(row.GetCell(end_index).StringValue) ? (DateTime?)null : (DateTime?)row.GetCell(end_index).DateTimeValue;
+						DateTime? end = string.IsNullOrEmpty(row.GetCell(end_index).StringValue) ? (DateTime?)null : row.GetCell(end_index).DateTimeValue;
 						var tel = row.GetCell(tel_index).StringValue.Trim();
 						var display = row.GetCell(def_index).StringValue.Trim();
-						var hasRegInfo = XmlConvert.ToBoolean(row.GetCell(reg_index).StringValue);
 
 						if (key != "ZZ")
 						{
@@ -177,13 +178,9 @@ namespace Qowaiv.CodeGenerator.Generators
 						{
 							resx.Data.Add(new XResourceFileData(key + "CallingCode", tel));
 						}
-						if (hasRegInfo)
-						{
-							resx.Data.Add(new XResourceFileData(key + "RegionInfoExists", true.ToString()));
-						}
 					}
 
-					resx.Data.Add(new XResourceFileData("All", String.Join(";", all)));
+					resx.Data.Add(new XResourceFileData("All", string.Join(";", all)));
 
 					resx.Save(new FileInfo(Path.Combine(dir.FullName, "CountryLabels.resx")));
 
@@ -225,7 +222,10 @@ namespace Qowaiv.CodeGenerator.Generators
 			{
 				using (var writer = new StreamWriter(Path.Combine(dir.FullName, "CountryToCurrencyMappings.cs")))
 				{
-					writer.WriteLine("using System.Collections.Generic;\r\nusing System.Collections.ObjectModel;\r\n");
+					writer.WriteLine("using Qowaiv.Globalization;");
+					writer.WriteLine("using System.Collections.Generic;");
+					writer.WriteLine("using System.Collections.ObjectModel;");
+					writer.WriteLine();
 
 					writer.WriteLine("namespace Qowaiv.Financial\r\n{\r\n\tinternal partial struct CountryToCurrency\r\n\t{");
 					

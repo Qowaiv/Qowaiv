@@ -155,17 +155,17 @@ namespace Qowaiv.Statistics
 			info.AddValue("Value", m_Value);
 		}
 
-		/// <summary>Gets the xml schema to (de) xml serialize an Elo.</summary>
+		/// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize an Elo.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		XmlSchema IXmlSerializable.GetSchema() { return null; }
 
-		/// <summary>Reads the Elo from an xml writer.</summary>
+		/// <summary>Reads the Elo from an <see href="XmlReader"/>.</summary>
 		/// <remarks>
 		/// Uses the string parse function of Elo.
 		/// </remarks>
-		/// <param name="reader">An xml reader.</param>
+		/// <param name="reader">An XML reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
 			var s = reader.ReadElementString();
@@ -173,11 +173,11 @@ namespace Qowaiv.Statistics
 			m_Value = val.m_Value;
 		}
 
-		/// <summary>Writes the Elo to an xml writer.</summary>
+		/// <summary>Writes the Elo to an <see href="XmlWriter"/>.</summary>
 		/// <remarks>
 		/// Uses the string representation of Elo.
 		/// </remarks>
-		/// <param name="writer">An xml writer.</param>
+		/// <param name="writer">An XML writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
 			writer.WriteString(ToString("", CultureInfo.InvariantCulture));

@@ -64,17 +64,17 @@ namespace Qowaiv.Financial
 			info.AddValue("Currency", m_Currency.Name);
 		}
 
-		/// <summary>Gets the XML schema to (de) xml serialize </summary>
+		/// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize Money.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		XmlSchema IXmlSerializable.GetSchema() { return null; }
 
-		/// <summary>Reads the Money from an xml writer.</summary>
+		/// <summary>Reads the Money from an <see href="XmlReader"/>.</summary>
 		/// <remarks>
-		/// Uses the string parse function of 
+		/// Uses the string parse function of Money.
 		/// </remarks>
-		/// <param name="reader">An xml reader.</param>
+		/// <param name="reader">An XML reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
 			Guard.NotNull(reader, "reader");
@@ -84,11 +84,11 @@ namespace Qowaiv.Financial
 			m_Currency = val.m_Currency;
 		}
 
-		/// <summary>Writes the Money to an xml writer.</summary>
+		/// <summary>Writes the Money to an <see href="XmlWriter"/>.</summary>
 		/// <remarks>
-		/// Uses the string representation of 
+		/// Uses the string representation of Money.
 		/// </remarks>
-		/// <param name="writer">An xml writer.</param>
+		/// <param name="writer">An XML writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
 			Guard.NotNull(writer, "writer");

@@ -114,17 +114,17 @@ namespace Qowaiv.Financial
 			info.AddValue("Value", m_Value);
 		}
 
-		/// <summary>Gets the xml schema to (de) xml serialize a BIC.</summary>
+		/// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize a BIC.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		XmlSchema IXmlSerializable.GetSchema() { return null; }
 
-		/// <summary>Reads the BIC from an xml writer.</summary>
+		/// <summary>Reads the BIC from an <see href="XmlReader"/>.</summary>
 		/// <remarks>
 		/// Uses the string parse function of BIC.
 		/// </remarks>
-		/// <param name="reader">An xml reader.</param>
+		/// <param name="reader">An XML reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
 			Guard.NotNull(reader, "reader");
@@ -133,11 +133,11 @@ namespace Qowaiv.Financial
 			m_Value = val.m_Value;
 		}
 
-		/// <summary>Writes the BIC to an xml writer.</summary>
+		/// <summary>Writes the BIC to an <see href="XmlWriter"/>.</summary>
 		/// <remarks>
 		/// Uses the string representation of BIC.
 		/// </remarks>
-		/// <param name="writer">An xml writer.</param>
+		/// <param name="writer">An XML writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
 			Guard.NotNull(writer, "writer");

@@ -83,6 +83,7 @@
     <Compile Include="Conversion\UuidTypeConverter.cs" />
     <Compile Include="Conversion\WeekDateTypeConverter.cs" />
     <Compile Include="Conversion\YearTypeConverter.cs" />
+    <Compile Include="Financial\CurrencyMismatchException.cs" />
     <Compile Include="Financial\Money.cs" />
     <Compile Include="Globalization\Country.cs" />
     <Compile Include="Globalization\CountryConstants.cs" />

@@ -40,6 +40,23 @@ namespace Qowaiv.Financial
 
 		#region Methods
 
+		public Money Add(Money l, Money r)
+		{
+			return Create(l.m_Value + r.m_Value, HaveSameCurrency(l, r, "addition"));
+		}
+
+		public static Money operator +(Money l, Money r) { return l + r; }
+
+
+		[DebuggerStepThrough]
+		private static Currency HaveSameCurrency(Money l, Money r, string operation)
+		{
+			if (l.Currency != r.Currency)
+			{
+				throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
+			}
+			return l.Currency;
+		}
 		#endregion
 
 		#region (XML) (De)serialization

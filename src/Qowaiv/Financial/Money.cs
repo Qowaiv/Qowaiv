@@ -16,7 +16,6 @@ namespace Qowaiv.Financial
 {
 	/// <summary>Represents </summary>
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	// [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for ")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 	[TypeConverter(typeof(MoneyTypeConverter))]
 	public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Money>
@@ -61,11 +60,11 @@ namespace Qowaiv.Financial
 		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
 		{
 			Guard.NotNull(info, "info");
-			info.AddValue("Value", (decimal)m_Value);
+			info.AddValue("Value", m_Value);
 			info.AddValue("Currency", m_Currency.Name);
 		}
 
-		/// <summary>Gets the xml schema to (de) xml serialize </summary>
+		/// <summary>Gets the XML schema to (de) xml serialize </summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>

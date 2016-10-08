@@ -179,17 +179,17 @@ namespace Qowaiv.Web
 			info.AddValue("Value", m_Value);
 		}
 
-		/// <summary>Gets the xml schema to (de) xml serialize an internet media type.</summary>
+		/// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize an internet media type.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		XmlSchema IXmlSerializable.GetSchema() { return null; }
 
-		/// <summary>Reads the internet media type from an xml writer.</summary>
+		/// <summary>Reads the internet media type from an <see href="XmlReader"/>.</summary>
 		/// <remarks>
 		/// Uses the string parse function of internet media type.
 		/// </remarks>
-		/// <param name="reader">An xml reader.</param>
+		/// <param name="reader">An XML reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
 			Guard.NotNull(reader, "reader");
@@ -198,11 +198,11 @@ namespace Qowaiv.Web
 			m_Value = val.m_Value;
 		}
 
-		/// <summary>Writes the internet media type to an xml writer.</summary>
+		/// <summary>Writes the internet media type to an <see href="XmlWriter"/>.</summary>
 		/// <remarks>
 		/// Uses the string representation of internet media type.
 		/// </remarks>
-		/// <param name="writer">An xml writer.</param>
+		/// <param name="writer">An XML writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
 			Guard.NotNull(writer, "writer");

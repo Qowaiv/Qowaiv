@@ -47,7 +47,6 @@ namespace Qowaiv.Financial
 
 		public static Money operator +(Money l, Money r) { return l + r; }
 
-
 		[DebuggerStepThrough]
 		private static Currency HaveSameCurrency(Money l, Money r, string operation)
 		{

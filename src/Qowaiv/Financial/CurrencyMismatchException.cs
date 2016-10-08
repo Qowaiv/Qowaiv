@@ -1,32 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Qowaiv.Financial
 {
-
+	/// <summary>When currencies differ, operations on money are not possible.</summary>
 	[Serializable]
 	public class CurrencyMismatchException : Exception
 	{
-		private Currency currency1;
-		private Currency currency2;
-		private string operation;
-
+		/// <summary>Initializes a new instance of a <see cref="CurrencyMismatchException"/>.</summary>
 		public CurrencyMismatchException() { }
+		/// <summary>Initializes a new instance of a <see cref="CurrencyMismatchException"/>.</summary>
 		public CurrencyMismatchException(string message) : base(message) { }
+		/// <summary>Initializes a new instance of a <see cref="CurrencyMismatchException"/>.</summary>
 		public CurrencyMismatchException(string message, Exception inner) : base(message, inner) { }
 
-		public CurrencyMismatchException(Currency currency1, Currency currency2, string operation)
-		{
-			this.currency1 = currency1;
-			this.currency2 = currency2;
-			this.operation = operation;
-		}
+		/// <summary>Initializes a new instance of a <see cref="CurrencyMismatchException"/>.</summary>
+		public CurrencyMismatchException(Currency cur0, Currency cur1, string operation)
+			: this(string.Format(QowaivMessages.CurrencyMismatchException, operation, cur0, cur1)) { }
 
-		protected CurrencyMismatchException(
-		  System.Runtime.Serialization.SerializationInfo info,
-		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+		/// <summary>Initializes a new instance of a <see cref="CurrencyMismatchException"/>.</summary>
+		protected CurrencyMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 	}
 }

@@ -37,14 +37,14 @@ namespace Qowaiv.CodeGenerator.Xml
 
 		#region IXmlSerializable
 
-		/// <summary>Gets the xml schema to (de) xml serialize a resource file header.</summary>
+		/// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize a resource file header.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		public XmlSchema GetSchema() { return null; }
 
-		/// <summary>Reads the resource file header from an xml writer.</summary>
-		/// <param name="reader">An xml reader.</param>
+		/// <summary>Reads the resource file header from an <see href="XmlReader"/>.</summary>
+		/// <param name="reader">An XML reader.</param>
 		public void ReadXml(XmlReader reader)
 		{
 			var element = XElement.Parse(reader.ReadOuterXml());
@@ -52,8 +52,8 @@ namespace Qowaiv.CodeGenerator.Xml
 			this.Value = element.Value;
 		}
 
-		/// <summary>Writes the resource file header to an xml writer.</summary>
-		/// <param name="writer">An xml writer.</param>
+		/// <summary>Writes the resource file header to an <see href="XmlWriter"/>.</summary>
+		/// <param name="writer">An XML writer.</param>
 		public void WriteXml(XmlWriter writer)
 		{
 			writer.WriteAttributeString("name", this.Name);

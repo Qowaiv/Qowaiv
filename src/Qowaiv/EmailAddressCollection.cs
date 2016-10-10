@@ -205,24 +205,24 @@ namespace Qowaiv
 			info.AddValue("Value", ToString());
 		}
 
-		/// <summary>Gets the xml schema to (de) xml serialize an email address.</summary>
+		/// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize an email address.</summary>
 		/// <remarks>
 		/// Returns null as no schema is required.
 		/// </remarks>
 		XmlSchema IXmlSerializable.GetSchema() { return GetSchema(); }
 
-		/// <summary>Gets the xml schema to (de) xml serialize an email address.</summary>
+		/// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize an email address.</summary>
 		/// <remarks>
 		/// this is used by IXmlSerializable.GetSchema() so that it can be changed by derived classes.
 		/// </remarks>
 		protected virtual XmlSchema GetSchema() { return null; }
 
-		/// <summary>Reads the email address from an xml writer.</summary>
-		/// <param name="reader">An xml reader.</param>
+		/// <summary>Reads the email address from an <see href="XmlReader"/>.</summary>
+		/// <param name="reader">An XML reader.</param>
 		void IXmlSerializable.ReadXml(XmlReader reader) { ReadXml(reader); }
 
-		/// <summary>Reads the email address from an xml writer.</summary>
-		/// <param name="reader">An xml reader.</param>
+		/// <summary>Reads the email address from an <see href="XmlReader"/>.</summary>
+		/// <param name="reader">An XML reader.</param>
 		/// <remarks>
 		/// this is used by IXmlSerializable.ReadXml() so that it can be changed by derived classes.
 		/// </remarks>
@@ -234,10 +234,10 @@ namespace Qowaiv
 			AddRange(val);
 		}
 
-		/// <summary>Writes the email address to an xml writer.</summary>
-		/// <param name="writer">An xml writer.</param>
+		/// <summary>Writes the email address to an <see href="XmlWriter"/>.</summary>
+		/// <param name="writer">An XML writer.</param>
 		void IXmlSerializable.WriteXml(XmlWriter writer) { WriteXml(writer); }
-		/// <summary>Writes the email address to an xml writer.</summary>
+		/// <summary>Writes the email address to an <see href="XmlWriter"/>.</summary>
 		/// <remarks>
 		/// this is used by IXmlSerializable.WriteXml() so that it can be
 		/// changed by derived classes.

@@ -124,6 +124,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The {0} operation could not be applied. There is a mismatch between {1} and {2}..
+        /// </summary>
+        public static string CurrencyMismatchException {
+            get {
+                return ResourceManager.GetString("CurrencyMismatchException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index (zero based) must be greater than or equal to zero and less than the size of the argument list..
         /// </summary>
         public static string FormatException_IndexOutOfRange {

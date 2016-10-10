@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Qowaiv
@@ -26,7 +25,7 @@ namespace Qowaiv
 		[DebuggerStepThrough]
 		public static T NotNull<T>([ValidatedNotNull]T param, string paramName) where T : class
 		{
-			if (object.ReferenceEquals(param, null))
+			if (ReferenceEquals(param, null))
 			{
 				throw new ArgumentNullException(paramName);
 			}
@@ -50,7 +49,7 @@ namespace Qowaiv
 			}
 			return param;
 		}
-
+		
 		/// <summary>Guards the parameter if not null or an empty array, otherwise throws an argument (null) exception.</summary>
 		/// <param name="param">
 		/// The parameter to guard.
@@ -88,7 +87,7 @@ namespace Qowaiv
 		[DebuggerStepThrough]
 		public static Type ImplementsInterface(Type param, string paramName, Type iface, string message)
 		{
-			Guard.NotNull(param, paramName);
+			NotNull(param, paramName);
 
 			if (!param.GetInterfaces().Contains(iface))
 			{
@@ -96,7 +95,7 @@ namespace Qowaiv
 			}
 			return param;
 		}
-
+		
 		/// <summary>Marks the NotNull argument as being validated for not being null,
 		/// to satisfy the static code analysis.
 		/// </summary>

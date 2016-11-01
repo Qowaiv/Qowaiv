@@ -209,7 +209,7 @@ namespace @(Model.Namespace).UnitTests
 		#endregion
 
 @if(Model.UnderlyingType != typeof(string))
-{<text>      
+{<text>	  
 		#region TryCreate tests
 
 		[Test]
@@ -580,55 +580,17 @@ namespace @(Model.Namespace).UnitTests
 
 		Assert.AreEqual(exp, act);
 		}
-		[Test]
-		public void ToString_TestStruct_ComplexPattern()
+		[TestCase("en-US", "", "ComplexPattern", "ComplexPattern")]
+		[TestCase("nl-BE", null, "1600,1", "1600,1")]
+		[TestCase("en-GB", null, "1600.1", "1600.1")]
+		[TestCase("nl-BE", "0000", "800", "0800")]
+		[TestCase("en-GB", "0000", "800", "0800")]
+		public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
 		{
-			var act = TestStruct.ToString("");
-			var exp = "ComplexPattern";
-			Assert.AreEqual(exp, act);
-		}
-
-		[Test]
-		public void ToString_ValueDutchBelgium_AreEqual()
-		{
-			using (new CultureInfoScope("nl-BE"))
+			using (new CultureInfoScope(culture))
 			{
-				var act = @(Model.ClassName).Parse("1600,1").ToString();
-				var exp = "1600,1";
-				Assert.AreEqual(exp, act);
-			}
-		}
-
-		[Test]
-		public void ToString_ValueEnglishGreatBritain_AreEqual()
-		{
-			using (new CultureInfoScope("en-GB"))
-			{
-				var act = @(Model.ClassName).Parse("1600.1").ToString();
-				var exp = "1600.1";
-				Assert.AreEqual(exp, act);
-			}
-		}
-
-		[Test]
-		public void ToString_FormatValueDutchBelgium_AreEqual()
-		{
-			using (new CultureInfoScope("nl-BE"))
-			{
-				var act = @(Model.ClassName).Parse("800").ToString("0000");
-				var exp = "0800";
-				Assert.AreEqual(exp, act);
-			}
-		}
-
-		[Test]
-		public void ToString_FormatValueEnglishGreatBritain_AreEqual()
-		{
-			using (new CultureInfoScope("en-GB"))
-			{
-				var act = @(Model.ClassName).Parse("800").ToString("0000");
-				var exp = "0800";
-				Assert.AreEqual(exp, act);
+				var actual = @(Model.ClassName).Parse(str).ToString(format);
+				Assert.AreEqual(expected, actual);
 			}
 		}
 
@@ -1012,15 +974,21 @@ namespace @(Model.Namespace).UnitTests
 		#endregion
 		  #region IsValid tests
 
-		[Test]
-		public void IsValid_Data_IsFalse()
+		[TestCase(null)]
+		[TestCase("")]
+		[TestCase("Complex")]
+		public void IsInvalid_String(string pattern)
 		{
-			Assert.IsFalse(@(Model.ClassName).IsValid("Complex"), "Complex");
-			Assert.IsFalse(@(Model.ClassName).IsValid((String)null), "(String)null");
-			Assert.IsFalse(@(Model.ClassName).IsValid(string.Empty), "string.Empty");
+			Assert.IsFalse(@(Model.ClassName).IsValid(pattern));
+		}
 @if(Model.UnderlyingType != typeof(string)){<text>
-			Assert.IsFalse(@(Model.ClassName).IsValid((@Model.UnderlyingType?)null), "(@Model.UnderlyingType?)null");
-</text>}
+		[Test]
+		public void IsInvalid_@Model.UnderlyingType?()
+		{
+			@Model.UnderlyingType? value = null;
+			Assert.IsFalse(@(Model.ClassName).IsValid(value));
+		}
+</text>
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

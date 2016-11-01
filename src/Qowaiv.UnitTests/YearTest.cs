@@ -523,20 +523,6 @@ namespace Qowaiv.UnitTests
 		#region IFormattable / Tostring tests
 
 		[Test]
-		public void ToString_Empty_StringEmpty()
-		{
-			var act = Year.Empty.ToString();
-			var exp = "";
-			Assert.AreEqual(exp, act);
-		}
-		[Test]
-		public void ToString_Unknown_QuestionMark()
-		{
-			var act = Year.Unknown.ToString();
-			var exp = "?";
-			Assert.AreEqual(exp, act);
-		}
-		[Test]
 		public void ToString_CustomFormatter_SupportsCustomFormatting()
 		{
 			var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
@@ -544,33 +530,17 @@ namespace Qowaiv.UnitTests
 
 			Assert.AreEqual(exp, act);
 		}
-		[Test]
-		public void ToString_TestStruct_ComplexPattern()
-		{
-			var act = TestStruct.ToString("");
-			var exp = "1979";
-			Assert.AreEqual(exp, act);
-		}
 
-		[Test]
-		public void ToString_FormatValueDutchBelgium_AreEqual()
+		[TestCase("en-US", "", "1979", "1979")]
+		[TestCase("en-GB", "", "?", "?")]
+		[TestCase("nl-BE", "0000", "800", "0800")]
+		[TestCase("en-GB", "0000", "800", "0800")]
+		public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
 		{
-			using (new CultureInfoScope("nl-BE"))
+			using (new CultureInfoScope(culture))
 			{
-				var act = Year.Parse("800").ToString("0000");
-				var exp = "0800";
-				Assert.AreEqual(exp, act);
-			}
-		}
-
-		[Test]
-		public void ToString_FormatValueEnglishGreatBritain_AreEqual()
-		{
-			using (new CultureInfoScope("en-GB"))
-			{
-				var act = Year.Parse("800").ToString("0000");
-				var exp = "0800";
-				Assert.AreEqual(exp, act);
+				var actual = Year.Parse(str).ToString(format);
+				Assert.AreEqual(expected, actual);
 			}
 		}
 
@@ -954,17 +924,22 @@ namespace Qowaiv.UnitTests
 
 		#region IsValid tests
 
-		[Test]
-		public void IsValid_Data_IsFalse()
+		[TestCase("0000")]
+		[TestCase("000")]
+		[TestCase("00")]
+		[TestCase("0")]
+		[TestCase((string)null)]
+		[TestCase("")]
+		public void IsInvalid_String(string value)
 		{
-			Assert.IsFalse(Year.IsValid("0000"), "0000");
-			Assert.IsFalse(Year.IsValid("000"), "000");
-			Assert.IsFalse(Year.IsValid("00"), "00");
-			Assert.IsFalse(Year.IsValid("0"), "0");
-			Assert.IsFalse(Year.IsValid((String)null), "(String)null");
-			Assert.IsFalse(Year.IsValid(string.Empty), "string.Empty");
+			Assert.IsFalse(Year.IsValid(value));
+		}
 
-			Assert.IsFalse(Year.IsValid((System.Int32?)null), "(System.Int32?)null");
+		[TestCase]
+		public void IsInvalid_NullabelInt()
+		{
+			int? number = null;
+			Assert.IsFalse(Year.IsValid(number));
 		}
 		[Test]
 		public void IsValid_Data_IsTrue()

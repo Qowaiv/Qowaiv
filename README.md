@@ -10,6 +10,10 @@ inside and outside a Domain-driven context.
 Supported scenarios include parsing, formatting, validation, (de)serialization,
 and domain specific logic.
 
+Single Value Object
+-------------------
+A Value Object that can be represented by a single scalar.
+
 Qowaiv types
 ============
 
@@ -73,8 +77,8 @@ Year
 ----
 Represents a year in the range [1-9999].
 
-Qowaiv cryptographical types
-============================ 
+Qowaiv cryptographic types
+========================== 
 
 Seed
 ----
@@ -116,8 +120,8 @@ Qowaiv SQL types
 
 Timestamp
 ---------
-Represents a (MS SQL) timestamp is a data type that exposes automatically generated
-binary numbers, which are guaranteed to be unique within a database. timestamp is
+Represents a (MS SQL) time-stamp is a data type that exposes automatically generated
+binary numbers, which are guaranteed to be unique within a database. time-stamp is
 used typically as a mechanism for version-stamping table rows. The storage size is
 8 bytes. See: https://technet.microsoft.com/en-us/library/aa260631%28v=sql.80%29.aspx
 
@@ -134,7 +138,7 @@ Qowaiv web types
 
 Internet media type
 -------------------
-Represents a internet media type (also known as MIME-type and content type).
+Represents an Internet media type (also known as MIME-type and content type).
 
 Qowaiv complex types
 ====================
@@ -196,8 +200,8 @@ Threading
 =========
 Because there are scenario's where you want to set typical values as a country 
 or a currency for the context of the current thread (like the culture info) 
-there is a possibility to add these to the Qowaiv.Threading.TrheadDomain.
+there is a possibility to add these to the Qowaiv.Threading.ThreadDomain.
 
-These values can be configured (in the app settings) or can be created with a 
-creator function that can be registered. If not specified otherwise the current 
+These values can be configured (in the application settings) or can be created with
+a creator function that can be registered. If not specified otherwise the current 
 country will be created (if possible) based on the current culture.

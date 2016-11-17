@@ -940,3123 +940,1893 @@ namespace Qowaiv.UnitTests
 
 		#region IsValid Country tests
 
-		/// <summary>Tests patterns that should be valid for Andorra (AD).</summary>
-		[Test]
-		public void IsValid_AD_All()
-		{
-			var country = Country.AD;
-
-			IsValid("AD123", country);
-			IsValid("AD234", country);
-			IsValid("AD345", country);
-			IsValid("AD678", country);
-			IsValid("AD789", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Afghanistan (AF).</summary>
-		[Test]
-		public void IsValid_AF_All()
-		{
-			var country = Country.AF;
-
-			IsValid("4301", country);
-			IsValid("1001", country);
-			IsValid("2023", country);
-			IsValid("1102", country);
-			IsValid("4020", country);
-			IsValid("3077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Anguilla (AI).</summary>
-		[Test]
-		public void IsValid_AI_All()
-		{
-			var country = Country.AI;
-
-			IsValid("2640", country);
-			IsValid("AI-2640", country);
-			IsValid("AI2640", country);
-			IsValid("ai-2640", country);
-			IsValid("ai2640", country);
-			IsValid("ai 2640", country);
-			IsValid("ai.2640", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Albania (AL).</summary>
-		[Test]
-		public void IsValid_AL_All()
-		{
-			var country = Country.AL;
-
-			IsValid("1872", country);
-			IsValid("2540", country);
-			IsValid("7900", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Armenia (AM).</summary>
-		[Test]
-		public void IsValid_AM_All()
-		{
-			var country = Country.AM;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Argentina (AR).</summary>
-		[Test]
-		public void IsValid_AR_All()
-		{
-			var country = Country.AR;
-
-			IsValid("A4400XXX", country);
-			IsValid("C 1420 ABC", country);
-			IsValid("S 2300DDD", country);
-			IsValid("Z9400 QOW", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for American Samoa (AS).</summary>
-		[Test]
-		public void IsValid_AS_All()
-		{
-			var country = Country.AS;
-
-			IsValid("91000-0060", country);
-			IsValid("91000-9996", country);
-			IsValid("90126", country);
-			IsValid("92345", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Austria (AT).</summary>
-		[Test]
-		public void IsValid_AT_All()
-		{
-			var country = Country.AT;
-
-			IsValid("2471", country);
-			IsValid("1000", country);
-			IsValid("5120", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Australia (AU).</summary>
-		[Test]
-		public void IsValid_AU_All()
-		{
-			var country = Country.AU;
-
-			IsValid("0872", country);
-			IsValid("2540", country);
-			IsValid("0900", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Åland Islands (AX).</summary>
-		[Test]
-		public void IsValid_AX_All()
-		{
-			var country = Country.AX;
-
-			IsValid("22-000", country);
-			IsValid("22-123", country);
-			IsValid("22000", country);
-			IsValid("22345", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Azerbaijan (AZ).</summary>
-		[Test]
-		public void IsValid_AZ_All()
-		{
-			var country = Country.AZ;
-
-			IsValid("1499", country);
-			IsValid("az 1499", country);
-			IsValid("AZ-1499", country);
-			IsValid("az1499", country);
-			IsValid("AZ0499", country);
-			IsValid("AZ0099", country);
-			IsValid("aZ6990", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Bosnia And Herzegovina (BA).</summary>
-		[Test]
-		public void IsValid_BA_All()
-		{
-			var country = Country.BA;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Barbados (BB).</summary>
-		[Test]
-		public void IsValid_BB_All()
-		{
-			var country = Country.BB;
-
-			IsValid("21499", country);
-			IsValid("01499", country);
-			IsValid("bB-31499", country);
-			IsValid("BB 01499", country);
-			IsValid("bb81499", country);
-			IsValid("BB71499", country);
-			IsValid("BB56990", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Bangladesh (BD).</summary>
-		[Test]
-		public void IsValid_BD_All()
-		{
-			var country = Country.BD;
-
-			IsValid("0483", country);
-			IsValid("1480", country);
-			IsValid("5492", country);
-			IsValid("7695", country);
-			IsValid("9796", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Belgium (BE).</summary>
-		[Test]
-		public void IsValid_BE_All()
-		{
-			var country = Country.BE;
-
-			IsValid("2471", country);
-			IsValid("1000", country);
-			IsValid("5120", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Bulgaria (BG).</summary>
-		[Test]
-		public void IsValid_BG_All()
-		{
-			var country = Country.BG;
-
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Bahrain (BH).</summary>
-		[Test]
-		public void IsValid_BH_All()
-		{
-			var country = Country.BH;
-
-			IsValid("199", country);
-			IsValid("1299", country);
-			IsValid("666", country);
-			IsValid("890", country);
-			IsValid("768", country);
-			IsValid("1000", country);
-			IsValid("1176", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Saint Barthélemy (BL).</summary>
-		[Test]
-		public void IsValid_BL_All()
-		{
-			var country = Country.BL;
-
-			IsValid("97700", country);
-			IsValid("97701", country);
-			IsValid("97712", country);
-			IsValid("97720", country);
-			IsValid("97732", country);
-			IsValid("97740", country);
-			IsValid("97756", country);
-			IsValid("97762", country);
-			IsValid("97776", country);
-			IsValid("97767", country);
-			IsValid("97787", country);
-			IsValid("97799", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Bermuda (BM).</summary>
-		[Test]
-		public void IsValid_BM_All()
-		{
-			var country = Country.BM;
-
-			IsValid("AA", country);
-			IsValid("AS", country);
-			IsValid("BJ", country);
-			IsValid("CD", country);
-			IsValid("DE", country);
-			IsValid("EO", country);
-			IsValid("FN", country);
-			IsValid("GF", country);
-			IsValid("HL", country);
-			IsValid("ID", country);
-			IsValid("JS", country);
-			IsValid("KN", country);
-			IsValid("LO", country);
-			IsValid("ME", country);
-			IsValid("NN", country);
-			IsValid("OL", country);
-			IsValid("PS", country);
-			IsValid("QD", country);
-			IsValid("RN", country);
-			IsValid("SE", country);
-			IsValid("TM", country);
-			IsValid("UF", country);
-			IsValid("VE", country);
-			IsValid("WL", country);
-			IsValid("XM", country);
-			IsValid("YE", country);
-			IsValid("ZL", country);
-			IsValid("ZZ", country);
-
-			IsValid("AA0F", country);
-			IsValid("AS0S", country);
-			IsValid("BJ1F", country);
-			IsValid("CD2K", country);
-			IsValid("DE3D", country);
-			IsValid("EO4J", country);
-			IsValid("FN5F", country);
-			IsValid("GF6S", country);
-			IsValid("HL7D", country);
-			IsValid("ID69", country);
-			IsValid("JS66", country);
-			IsValid("KN48", country);
-			IsValid("LO12", country);
-			IsValid("MEDS", country);
-			IsValid("NNRF", country);
-			IsValid("OLWK", country);
-			IsValid("PSSD", country);
-			IsValid("QDPJ", country);
-			IsValid("RNKF", country);
-			IsValid("SELS", country);
-			IsValid("TMD1", country);
-			IsValid("UFO7", country);
-			IsValid("VEF2", country);
-			IsValid("WLS9", country);
-			IsValid("XMF0", country);
-			IsValid("YES4", country);
-			IsValid("ZLF2", country);
-			IsValid("ZZK7", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Brunei Darussalam (BN).</summary>
-		[Test]
-		public void IsValid_BN_All()
-		{
-			var country = Country.BN;
-
-			IsValid("YZ0000", country);
-			IsValid("BU2529", country);
-			IsValid("bU2529", country);
-			IsValid("bu2529", country);
-			IsValid("Bu2529", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Bolivia (BO).</summary>
-		[Test]
-		public void IsValid_BO_All()
-		{
-			var country = Country.BO;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Brazil (BR).</summary>
-		[Test]
-		public void IsValid_BR_All()
-		{
-			var country = Country.BR;
-
-			IsValid("01000-000", country);
-			IsValid("01000999", country);
-			IsValid("88000-123", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Bhutan (BT).</summary>
-		[Test]
-		public void IsValid_BT_All()
-		{
-			var country = Country.BT;
-
-			IsValid("000", country);
-			IsValid("012", country);
-			IsValid("123", country);
-			IsValid("200", country);
-			IsValid("326", country);
-			IsValid("409", country);
-			IsValid("566", country);
-			IsValid("629", country);
-			IsValid("763", country);
-			IsValid("675", country);
-			IsValid("871", country);
-			IsValid("999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Belarus (BY).</summary>
-		[Test]
-		public void IsValid_BY_All()
-		{
-			var country = Country.BY;
-
-			IsValid("010185", country);
-			IsValid("110000", country);
-			IsValid("342600", country);
-			IsValid("610185", country);
-			IsValid("910185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Canada (CA).</summary>
-		[Test]
-		public void IsValid_CA_All()
-		{
-			var country = Country.CA;
-
-			IsValid("H0H-0H0", country);
-			IsValid("K8 N5W 6", country);
-			IsValid("A1A 1A1", country);
-			IsValid("K0H 9Z0", country);
-			IsValid("T1R 9Z0", country);
-			IsValid("P2V9z0", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Cocos (CC).</summary>
-		[Test]
-		public void IsValid_CC_All()
-		{
-			var country = Country.CC;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Switzerland (CH).</summary>
-		[Test]
-		public void IsValid_CH_All()
-		{
-			var country = Country.CH;
-
-			IsValid("1001", country);
-			IsValid("8023", country);
-			IsValid("9100", country);
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Chile (CL).</summary>
-		[Test]
-		public void IsValid_CL_All()
-		{
-			var country = Country.CL;
-
-			IsValid("0000000", country);
-			IsValid("0231145", country);
-			IsValid("1342456", country);
-			IsValid("2000974", country);
-			IsValid("3642438", country);
-			IsValid("4940375", country);
-			IsValid("5646230", country);
-			IsValid("6902168", country);
-			IsValid("7346345", country);
-			IsValid("6557682", country);
-			IsValid("8187992", country);
-			IsValid("9999999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for China (CN).</summary>
-		[Test]
-		public void IsValid_CN_All()
-		{
-			var country = Country.CN;
-
-			IsValid("010000", country);
-			IsValid("342600", country);
-			IsValid("810185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Colombia (CO).</summary>
-		[Test]
-		public void IsValid_CO_All()
-		{
-			var country = Country.CO;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Costa Rica (CR).</summary>
-		[Test]
-		public void IsValid_CR_All()
-		{
-			var country = Country.CR;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Cuba (CU).</summary>
-		[Test]
-		public void IsValid_CU_All()
-		{
-			var country = Country.CU;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-			IsValid("CP00000", country);
-			IsValid("CP01235", country);
-			IsValid("CP12346", country);
-			IsValid("CP20004", country);
-			IsValid("CP32648", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Cape Verde (CV).</summary>
-		[Test]
-		public void IsValid_CV_All()
-		{
-			var country = Country.CV;
-
-			IsValid("0000", country);
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Christmas Island (CX).</summary>
-		[Test]
-		public void IsValid_CX_All()
-		{
-			var country = Country.CX;
-
-			IsValid("0000", country);
-			IsValid("0144", country);
-			IsValid("1282", country);
-			IsValid("2037", country);
-			IsValid("3243", country);
-			IsValid("4008", country);
-			IsValid("5697", country);
-			IsValid("6282", country);
-			IsValid("7611", country);
-			IsValid("6767", country);
-			IsValid("8752", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Cyprus (CY).</summary>
-		[Test]
-		public void IsValid_CY_All()
-		{
-			var country = Country.CY;
-
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Czech Republic (CZ).</summary>
-		[Test]
-		public void IsValid_CZ_All()
-		{
-			var country = Country.CZ;
-
-			IsValid("21234", country);
-			IsValid("12345", country);
-			IsValid("11111", country);
-			IsValid("123 45", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Germany (DE).</summary>
-		[Test]
-		public void IsValid_DE_All()
-		{
-			var country = Country.DE;
-
-			IsValid("10000", country);
-			IsValid("01123", country);
-			IsValid("89000", country);
-			IsValid("12345", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Denmark (DK).</summary>
-		[Test]
-		public void IsValid_DK_All()
-		{
-			var country = Country.DK;
-
-			IsValid("1499", country);
-			IsValid("dk-1499", country);
-			IsValid("DK-1499", country);
-			IsValid("dk1499", country);
-			IsValid("DK1499", country);
-			IsValid("DK6990", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Algeria (DZ).</summary>
-		[Test]
-		public void IsValid_DZ_All()
-		{
-			var country = Country.DZ;
-
-			IsValid("01234", country);
-			IsValid("12345", country);
-			IsValid("11111", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Ecuador (EC).</summary>
-		[Test]
-		public void IsValid_EC_All()
-		{
-			var country = Country.EC;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Estonia (EE).</summary>
-		[Test]
-		public void IsValid_EE_All()
-		{
-			var country = Country.EE;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Egypt (EG).</summary>
-		[Test]
-		public void IsValid_EG_All()
-		{
-			var country = Country.EG;
-
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Spain (ES).</summary>
-		[Test]
-		public void IsValid_ES_All()
-		{
-			var country = Country.ES;
-
-			IsValid("01070", country);
-			IsValid("10070", country);
-			IsValid("20767", country);
-			IsValid("26560", country);
-			IsValid("32451", country);
-			IsValid("09112", country);
-			IsValid("48221", country);
-			IsValid("50636", country);
-			IsValid("52636", country);
-			IsValid("51050", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Ethiopia (ET).</summary>
-		[Test]
-		public void IsValid_ET_All()
-		{
-			var country = Country.ET;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Finland (FI).</summary>
-		[Test]
-		public void IsValid_FI_All()
-		{
-			var country = Country.FI;
-
-			IsValid("00-000", country);
-			IsValid("01-123", country);
-			IsValid("00000", country);
-			IsValid("12345", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Falkland Islands (FK).</summary>
-		[Test]
-		public void IsValid_FK_All()
-		{
-			var country = Country.FK;
-
-			IsValid("FIQQ1ZZ", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Micronesia (FM).</summary>
-		[Test]
-		public void IsValid_FM_All()
-		{
-			var country = Country.FM;
-
-			IsValid("96941", country);
-			IsValid("96942", country);
-			IsValid("96943", country);
-			IsValid("96944", country);
-
-			IsValid("969410000", country);
-			IsValid("969420123", country);
-			IsValid("969430144", country);
-			IsValid("969441282", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Faroe Islands (FO).</summary>
-		[Test]
-		public void IsValid_FO_All()
-		{
-			var country = Country.FO;
-
-			IsValid("399", country);
-			IsValid("fo-399", country);
-			IsValid("FO-199", country);
-			IsValid("fO399", country);
-			IsValid("FO678", country);
-			IsValid("FO123", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for France (FR).</summary>
-		[Test]
-		public void IsValid_FR_All()
-		{
-			var country = Country.FR;
-
-			IsValid("10000", country);
-			IsValid("01123", country);
-			IsValid("89000", country);
-			IsValid("12345", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Gabon (GA).</summary>
-		[Test]
-		public void IsValid_GA_All()
-		{
-			var country = Country.GA;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for United Kingdom (GB).</summary>
-		[Test]
-		public void IsValid_GB_All()
-		{
-			var country = Country.GB;
-
-			IsValid("M11AA", country);
-			IsValid("M11aA", country);
-			IsValid("M11AA", country);
-			IsValid("m11AA", country);
-			IsValid("m11aa", country);
-
-			IsValid("B338TH", country);
-			IsValid("B338TH", country);
-
-			IsValid("CR26XH", country);
-			IsValid("CR26XH", country);
-
-			IsValid("DN551PT", country);
-			IsValid("DN551PT", country);
-
-			IsValid("W1A1HQ", country);
-			IsValid("W1A1HQ", country);
-
-			IsValid("EC1A1BB", country);
-			IsValid("EC1A1BB", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Georgia (GE).</summary>
-		[Test]
-		public void IsValid_GE_All()
-		{
-			var country = Country.GE;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for French Guiana (GF).</summary>
-		[Test]
-		public void IsValid_GF_All()
-		{
-			var country = Country.GF;
-
-			IsValid("97300", country);
-			IsValid("97301", country);
-			IsValid("97312", country);
-			IsValid("97320", country);
-			IsValid("97332", country);
-			IsValid("97340", country);
-			IsValid("97356", country);
-			IsValid("97362", country);
-			IsValid("97376", country);
-			IsValid("97367", country);
-			IsValid("97387", country);
-			IsValid("97399", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Guernsey (GG).</summary>
-		[Test]
-		public void IsValid_GG_All()
-		{
-			var country = Country.GG;
-
-			IsValid("00DF", country);
-			IsValid("03DS", country);
-			IsValid("14RF", country);
-			IsValid("20WK", country);
-			IsValid("34SD", country);
-			IsValid("44PJ", country);
-			IsValid("54KF", country);
-			IsValid("60LS", country);
-			IsValid("74JD", country);
-			IsValid("65MO", country);
-			IsValid("88DF", country);
-			IsValid("99JS", country);
-
-			IsValid("000DF", country);
-			IsValid("015DS", country);
-			IsValid("126RF", country);
-			IsValid("204WK", country);
-			IsValid("328SD", country);
-			IsValid("405PJ", country);
-			IsValid("560KF", country);
-			IsValid("628LS", country);
-			IsValid("765JD", country);
-			IsValid("672MO", country);
-			IsValid("872DF", country);
-			IsValid("999JS", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Gibraltar (GI).</summary>
-		[Test]
-		public void IsValid_GI_All()
-		{
-			var country = Country.GI;
-
-			IsValid("GX111AA", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Greenland (GL).</summary>
-		[Test]
-		public void IsValid_GL_All()
-		{
-			var country = Country.GL;
-
-			IsValid("3999", country);
-			IsValid("gl-3999", country);
-			IsValid("GL-3999", country);
-			IsValid("gL 3999", country);
-			IsValid("GL3999", country);
-			IsValid("GL3990", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Guadeloupe (GP).</summary>
-		[Test]
-		public void IsValid_GP_All()
-		{
-			var country = Country.GP;
-
-			IsValid("97100", country);
-			IsValid("97101", country);
-			IsValid("97112", country);
-			IsValid("97120", country);
-			IsValid("97132", country);
-			IsValid("97140", country);
-			IsValid("97156", country);
-			IsValid("97162", country);
-			IsValid("97176", country);
-			IsValid("97167", country);
-			IsValid("97187", country);
-			IsValid("97199", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Greece (GR).</summary>
-		[Test]
-		public void IsValid_GR_All()
-		{
-			var country = Country.GR;
-
-			IsValid("10000", country);
-			IsValid("31123", country);
-			IsValid("89000", country);
-			IsValid("12345", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for South Georgia And The South Sandwich Islands (GS).</summary>
-		[Test]
-		public void IsValid_GS_All()
-		{
-			var country = Country.GS;
-
-			IsValid("SIQQ1ZZ", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Guatemala (GT).</summary>
-		[Test]
-		public void IsValid_GT_All()
-		{
-			var country = Country.GT;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Guam (GU).</summary>
-		[Test]
-		public void IsValid_GU_All()
-		{
-			var country = Country.GU;
-
-			IsValid("96910", country);
-			IsValid("96910", country);
-			IsValid("96911", country);
-			IsValid("96912", country);
-			IsValid("96923", country);
-			IsValid("96924", country);
-			IsValid("96925", country);
-			IsValid("96926", country);
-			IsValid("96927", country);
-			IsValid("96926", country);
-			IsValid("96931", country);
-			IsValid("96932", country);
-			IsValid("969100000", country);
-			IsValid("969103015", country);
-			IsValid("969114126", country);
-			IsValid("969120204", country);
-			IsValid("969234328", country);
-			IsValid("969244405", country);
-			IsValid("969254560", country);
-			IsValid("969260628", country);
-			IsValid("969274765", country);
-			IsValid("969265672", country);
-			IsValid("969318872", country);
-			IsValid("969329999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Guinea-Bissau (GW).</summary>
-		[Test]
-		public void IsValid_GW_All()
-		{
-			var country = Country.GW;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Heard Island And Mcdonald Islands (HM).</summary>
-		[Test]
-		public void IsValid_HM_All()
-		{
-			var country = Country.HM;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Honduras (HN).</summary>
-		[Test]
-		public void IsValid_HN_All()
-		{
-			var country = Country.HN;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Croatia (HR).</summary>
-		[Test]
-		public void IsValid_HR_All()
-		{
-			var country = Country.HR;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Haiti (HT).</summary>
-		[Test]
-		public void IsValid_HT_All()
-		{
-			var country = Country.HT;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Hungary (HU).</summary>
-		[Test]
-		public void IsValid_HU_All()
-		{
-			var country = Country.HU;
-
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Indonesia (ID).</summary>
-		[Test]
-		public void IsValid_ID_All()
-		{
-			var country = Country.ID;
-
-			IsValid("10000", country);
-			IsValid("31123", country);
-			IsValid("89000", country);
-			IsValid("89007", country);
-			IsValid("12340", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Israel (IL).</summary>
-		[Test]
-		public void IsValid_IL_All()
-		{
-			var country = Country.IL;
-
-			IsValid("0110023", country);
-			IsValid("1084023", country);
-			IsValid("3108701", country);
-			IsValid("4201907", country);
-			IsValid("5403506", country);
-			IsValid("6177008", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Isle Of Man (IM).</summary>
-		[Test]
-		public void IsValid_IM_All()
-		{
-			var country = Country.IM;
-
-			IsValid("00DF", country);
-			IsValid("04DS", country);
-			IsValid("18RF", country);
-			IsValid("23WK", country);
-			IsValid("34SD", country);
-			IsValid("40PJ", country);
-			IsValid("59KF", country);
-			IsValid("68LS", country);
-			IsValid("71JD", country);
-			IsValid("66MO", country);
-			IsValid("85DF", country);
-			IsValid("99JS", country);
-			IsValid("00DF", country);
-
-			IsValid("000DF", country);
-			IsValid("014DS", country);
-			IsValid("128RF", country);
-			IsValid("203WK", country);
-			IsValid("324SD", country);
-			IsValid("400PJ", country);
-			IsValid("569KF", country);
-			IsValid("628LS", country);
-			IsValid("761JD", country);
-			IsValid("676MO", country);
-			IsValid("875DF", country);
-			IsValid("999JS", country);
-			IsValid("000DF", country);
-
-			IsValid("IM00DF", country);
-			IsValid("IM04DS", country);
-			IsValid("IM18RF", country);
-			IsValid("IM23WK", country);
-			IsValid("IM34SD", country);
-			IsValid("IM40PJ", country);
-			IsValid("IM59KF", country);
-			IsValid("IM68LS", country);
-			IsValid("IM71JD", country);
-			IsValid("IM66MO", country);
-			IsValid("IM85DF", country);
-			IsValid("IM99JS", country);
-			IsValid("IM00DF", country);
-
-			IsValid("IM000DF", country);
-			IsValid("IM014DS", country);
-			IsValid("IM128RF", country);
-			IsValid("IM203WK", country);
-			IsValid("IM324SD", country);
-			IsValid("IM400PJ", country);
-			IsValid("IM569KF", country);
-			IsValid("IM628LS", country);
-			IsValid("IM761JD", country);
-			IsValid("IM676MO", country);
-			IsValid("IM875DF", country);
-			IsValid("IM999JS", country);
-			IsValid("IM000DF", country);
-
-			IsValid("IM00DF", country);
-			IsValid("IM04DS", country);
-			IsValid("IM18RF", country);
-			IsValid("IM23WK", country);
-			IsValid("IM34SD", country);
-			IsValid("IM40PJ", country);
-			IsValid("IM59KF", country);
-			IsValid("IM68LS", country);
-			IsValid("IM71JD", country);
-			IsValid("IM66MO", country);
-			IsValid("IM85DF", country);
-			IsValid("IM99JS", country);
-			IsValid("IM00DF", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for India (IN).</summary>
-		[Test]
-		public void IsValid_IN_All()
-		{
-			var country = Country.IN;
-
-			IsValid("110000", country);
-			IsValid("342600", country);
-			IsValid("810185", country);
-			IsValid("810 185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for British Indian Ocean Territory (IO).</summary>
-		[Test]
-		public void IsValid_IO_All()
-		{
-			var country = Country.IO;
-
-			IsValid("BBND1ZZ", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Iraq (IQ).</summary>
-		[Test]
-		public void IsValid_IQ_All()
-		{
-			var country = Country.IQ;
-
-			IsValid("12346", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Iran (IR).</summary>
-		[Test]
-		public void IsValid_IR_All()
-		{
-			var country = Country.IR;
-
-			IsValid("0000000000", country);
-			IsValid("0144942325", country);
-			IsValid("1282353436", country);
-			IsValid("2037570044", country);
-			IsValid("3243436478", country);
-			IsValid("4008279475", country);
-			IsValid("5697836450", country);
-			IsValid("6282469088", country);
-			IsValid("7611343495", country);
-			IsValid("6767185502", country);
-			IsValid("8752391832", country);
-			IsValid("9999999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Iceland (IS).</summary>
-		[Test]
-		public void IsValid_IS_All()
-		{
-			var country = Country.IS;
-
-			IsValid("000", country);
-			IsValid("035", country);
-			IsValid("146", country);
-			IsValid("204", country);
-			IsValid("348", country);
-			IsValid("445", country);
-			IsValid("540", country);
-			IsValid("608", country);
-			IsValid("745", country);
-			IsValid("652", country);
-			IsValid("882", country);
-			IsValid("999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Italy (IT).</summary>
-		[Test]
-		public void IsValid_IT_All()
-		{
-			var country = Country.IT;
-
-			IsValid("00123", country);
-			IsValid("02123", country);
-			IsValid("31001", country);
-			IsValid("42007", country);
-			IsValid("54006", country);
-			IsValid("91008", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Jersey (JE).</summary>
-		[Test]
-		public void IsValid_JE_All()
-		{
-			var country = Country.JE;
-
-			IsValid("00AS", country);
-			IsValid("25GS", country);
-			IsValid("36DF", country);
-			IsValid("44DS", country);
-			IsValid("78RF", country);
-			IsValid("75WK", country);
-			IsValid("50SD", country);
-			IsValid("88PJ", country);
-			IsValid("95KF", country);
-			IsValid("02LS", country);
-			IsValid("32JD", country);
-			IsValid("99MO", country);
-			IsValid("00AS", country);
-			IsValid("042GS", country);
-			IsValid("153DF", country);
-			IsValid("274DS", country);
-			IsValid("337RF", country);
-			IsValid("477WK", country);
-			IsValid("535SD", country);
-			IsValid("668PJ", country);
-			IsValid("749KF", country);
-			IsValid("680LS", country);
-			IsValid("893JD", country);
-			IsValid("999MO", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Jordan (JO).</summary>
-		[Test]
-		public void IsValid_JO_All()
-		{
-			var country = Country.JO;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Japan (JP).</summary>
-		[Test]
-		public void IsValid_JP_All()
-		{
-			var country = Country.JP;
-
-			IsValid("000-0000", country);
-			IsValid("000-0999", country);
-			IsValid("010-0000", country);
-			IsValid("0100999", country);
-			IsValid("880-0123", country);
-			IsValid("900-0123", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Kyrgyzstan (KG).</summary>
-		[Test]
-		public void IsValid_KG_All()
-		{
-			var country = Country.KG;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Cambodia (KH).</summary>
-		[Test]
-		public void IsValid_KH_All()
-		{
-			var country = Country.KH;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Korea (KR).</summary>
-		[Test]
-		public void IsValid_KR_All()
-		{
-			var country = Country.KR;
-
-			IsValid("110000", country);
-			IsValid("342600", country);
-			IsValid("610185", country);
-			IsValid("410-185", country);
-			IsValid("710-185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Cayman Islands (KY).</summary>
-		[Test]
-		public void IsValid_KY_All()
-		{
-			var country = Country.KY;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Kazakhstan (KZ).</summary>
-		[Test]
-		public void IsValid_KZ_All()
-		{
-			var country = Country.KZ;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Lao People'S Democratic Republic (LA).</summary>
-		[Test]
-		public void IsValid_LA_All()
-		{
-			var country = Country.LA;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Lebanon (LB).</summary>
-		[Test]
-		public void IsValid_LB_All()
-		{
-			var country = Country.LB;
-
-			IsValid("00000000", country);
-			IsValid("01442325", country);
-			IsValid("12853436", country);
-			IsValid("20370044", country);
-			IsValid("32436478", country);
-			IsValid("40079475", country);
-			IsValid("56936450", country);
-			IsValid("62869088", country);
-			IsValid("76143495", country);
-			IsValid("67685502", country);
-			IsValid("87591832", country);
-			IsValid("99999999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Liechtenstein (LI).</summary>
-		[Test]
-		public void IsValid_LI_All()
-		{
-			var country = Country.LI;
-
-			for (int code = 9485; code <= 9498; code++)
-			{
-				IsValid(code.ToString(), country);
-			}
-		}
-
-		/// <summary>Tests patterns that should be valid for Sri Lanka (LK).</summary>
-		[Test]
-		public void IsValid_LK_All()
-		{
-			var country = Country.LK;
-
-			IsValid("00000", country);
-			IsValid("10070", country);
-			IsValid("20767", country);
-			IsValid("26560", country);
-			IsValid("32451", country);
-			IsValid("09112", country);
-			IsValid("48221", country);
-			IsValid("54636", country);
-			IsValid("65050", country);
-			IsValid("70162", country);
-			IsValid("81271", country);
-			IsValid("92686", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Liberia (LR).</summary>
-		[Test]
-		public void IsValid_LR_All()
-		{
-			var country = Country.LR;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Lesotho (LS).</summary>
-		[Test]
-		public void IsValid_LS_All()
-		{
-			var country = Country.LS;
-
-			IsValid("000", country);
-			IsValid("015", country);
-			IsValid("126", country);
-			IsValid("204", country);
-			IsValid("328", country);
-			IsValid("405", country);
-			IsValid("560", country);
-			IsValid("628", country);
-			IsValid("765", country);
-			IsValid("672", country);
-			IsValid("872", country);
-			IsValid("999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Lithuania (LT).</summary>
-		[Test]
-		public void IsValid_LT_All()
-		{
-			var country = Country.LT;
-
-			IsValid("21499", country);
-			IsValid("01499", country);
-			IsValid("lT-31499", country);
-			IsValid("LT-01499", country);
-			IsValid("lt81499", country);
-			IsValid("LT71499", country);
-			IsValid("LT56990", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Luxembourg (LU).</summary>
-		[Test]
-		public void IsValid_LU_All()
-		{
-			var country = Country.LU;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Latvia (LV).</summary>
-		[Test]
-		public void IsValid_LV_All()
-		{
-			var country = Country.LV;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Libya (LY).</summary>
-		[Test]
-		public void IsValid_LY_All()
-		{
-			var country = Country.LY;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Morocco (MA).</summary>
-		[Test]
-		public void IsValid_MA_All()
-		{
-			var country = Country.MA;
-
-			IsValid("11 302", country);
-			IsValid("24 023", country);
-			IsValid("45001", country);
-			IsValid("89607", country);
-			IsValid("86096", country);
-			IsValid("85808", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Monaco (MC).</summary>
-		[Test]
-		public void IsValid_MC_All()
-		{
-			var country = Country.MC;
-
-			IsValid("MC-98000", country);
-			IsValid("MC-98012", country);
-			IsValid("MC 98023", country);
-			IsValid("mc98089", country);
-			IsValid("MC98099", country);
-			IsValid("Mc98077", country);
-			IsValid("mC98066", country);
-			IsValid("98089", country);
-			IsValid("98099", country);
-			IsValid("98077", country);
-			IsValid("98066", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Moldova (MD).</summary>
-		[Test]
-		public void IsValid_MD_All()
-		{
-			var country = Country.MD;
-
-			IsValid("1499", country);
-			IsValid("md-1499", country);
-			IsValid("MD-1499", country);
-			IsValid("md1499", country);
-			IsValid("MD0499", country);
-			IsValid("MD0099", country);
-			IsValid("mD6990", country);
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Montenegro (ME).</summary>
-		[Test]
-		public void IsValid_ME_All()
-		{
-			var country = Country.ME;
-
-			IsValid("81302", country);
-			IsValid("84023", country);
-			IsValid("85001", country);
-			IsValid("81607", country);
-			IsValid("84096", country);
-			IsValid("85808", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Saint Martin (MF).</summary>
-		[Test]
-		public void IsValid_MF_All()
-		{
-			var country = Country.MF;
-
-			IsValid("97800", country);
-			IsValid("97805", country);
-			IsValid("97816", country);
-			IsValid("97824", country);
-			IsValid("97838", country);
-			IsValid("97845", country);
-			IsValid("97850", country);
-			IsValid("97868", country);
-			IsValid("97875", country);
-			IsValid("97862", country);
-			IsValid("97882", country);
-			IsValid("97899", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Madagascar (MG).</summary>
-		[Test]
-		public void IsValid_MG_All()
-		{
-			var country = Country.MG;
-
-			IsValid("000", country);
-			IsValid("015", country);
-			IsValid("126", country);
-			IsValid("204", country);
-			IsValid("328", country);
-			IsValid("405", country);
-			IsValid("560", country);
-			IsValid("628", country);
-			IsValid("765", country);
-			IsValid("672", country);
-			IsValid("872", country);
-			IsValid("999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Marshall Islands (MH).</summary>
-		[Test]
-		public void IsValid_MH_All()
-		{
-			var country = Country.MH;
-
-			IsValid("96960", country);
-			IsValid("96960", country);
-			IsValid("96961", country);
-			IsValid("96962", country);
-			IsValid("96963", country);
-			IsValid("96964", country);
-			IsValid("96965", country);
-			IsValid("96976", country);
-			IsValid("96977", country);
-			IsValid("96976", country);
-			IsValid("96978", country);
-			IsValid("96979", country);
-			IsValid("96970", country);
-			IsValid("969600000", country);
-			IsValid("969604423", country);
-			IsValid("969612534", country);
-			IsValid("969627700", country);
-			IsValid("969633364", country);
-			IsValid("969648794", country);
-			IsValid("969657364", country);
-			IsValid("969762690", country);
-			IsValid("969771434", country);
-			IsValid("969767855", country);
-			IsValid("969782918", country);
-			IsValid("969799999", country);
-			IsValid("969700000", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Macedonia (MK).</summary>
-		[Test]
-		public void IsValid_MK_All()
-		{
-			var country = Country.MK;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Myanmar (MM).</summary>
-		[Test]
-		public void IsValid_MM_All()
-		{
-			var country = Country.MM;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Mongolia (MN).</summary>
-		[Test]
-		public void IsValid_MN_All()
-		{
-			var country = Country.MN;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Northern Mariana Islands (MP).</summary>
-		[Test]
-		public void IsValid_MP_All()
-		{
-			var country = Country.MP;
-
-			IsValid("96950", country);
-			IsValid("96951", country);
-			IsValid("96952", country);
-			IsValid("969500000", country);
-			IsValid("969500143", country);
-			IsValid("969501254", country);
-			IsValid("969502070", country);
-			IsValid("969513234", country);
-			IsValid("969514074", country);
-			IsValid("969515634", country);
-			IsValid("969516260", country);
-			IsValid("969527644", country);
-			IsValid("969526785", country);
-			IsValid("969528798", country);
-			IsValid("969529999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Martinique (MQ).</summary>
-		[Test]
-		public void IsValid_MQ_All()
-		{
-			var country = Country.MQ;
-
-			IsValid("97200", country);
-			IsValid("97201", country);
-			IsValid("97212", country);
-			IsValid("97220", country);
-			IsValid("97232", country);
-			IsValid("97240", country);
-			IsValid("97256", country);
-			IsValid("97262", country);
-			IsValid("97276", country);
-			IsValid("97267", country);
-			IsValid("97287", country);
-			IsValid("97299", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Malta (MT).</summary>
-		[Test]
-		public void IsValid_MT_All()
-		{
-			var country = Country.MT;
-
-			IsValid("AAA0000", country);
-			IsValid("ASD0132", country);
-			IsValid("BJR1243", country);
-			IsValid("CDW2004", country);
-			IsValid("DES3247", country);
-			IsValid("EOP4047", country);
-			IsValid("FNK5645", country);
-			IsValid("GFL6208", country);
-			IsValid("HLJ7649", country);
-			IsValid("IDM6750", country);
-			IsValid("JSD8783", country);
-			IsValid("KNJ9999", country);
-			IsValid("LOD0000", country);
-			IsValid("MED0132", country);
-			IsValid("NNR1243", country);
-			IsValid("OLW2004", country);
-			IsValid("PSS3247", country);
-			IsValid("QDP4047", country);
-			IsValid("RNK5645", country);
-			IsValid("SEL6208", country);
-			IsValid("TMJ7649", country);
-			IsValid("UFM6750", country);
-			IsValid("VED8783", country);
-			IsValid("WLJ9999", country);
-			IsValid("XMD0000", country);
-			IsValid("YED0132", country);
-			IsValid("ZLR1243", country);
-			IsValid("ZZZ9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Mexico (MX).</summary>
-		[Test]
-		public void IsValid_MX_All()
-		{
-			var country = Country.MX;
-
-			IsValid("09302", country);
-			IsValid("10023", country);
-			IsValid("31001", country);
-			IsValid("42007", country);
-			IsValid("54006", country);
-			IsValid("61008", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Malaysia (MY).</summary>
-		[Test]
-		public void IsValid_MY_All()
-		{
-			var country = Country.MY;
-
-			IsValid("10023", country);
-			IsValid("31001", country);
-			IsValid("42007", country);
-			IsValid("54006", country);
-			IsValid("61008", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Mozambique (MZ).</summary>
-		[Test]
-		public void IsValid_MZ_All()
-		{
-			var country = Country.MZ;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Namibia (NA).</summary>
-		[Test]
-		public void IsValid_NA_All()
-		{
-			var country = Country.NA;
-
-			IsValid("90000", country);
-			IsValid("90015", country);
-			IsValid("90126", country);
-			IsValid("90204", country);
-			IsValid("91328", country);
-			IsValid("91405", country);
-			IsValid("91560", country);
-			IsValid("91628", country);
-			IsValid("92765", country);
-			IsValid("92672", country);
-			IsValid("92872", country);
-			IsValid("92999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for New Caledonia (NC).</summary>
-		[Test]
-		public void IsValid_NC_All()
-		{
-			var country = Country.NC;
-
-			IsValid("98800", country);
-			IsValid("98802", country);
-			IsValid("98813", country);
-			IsValid("98820", country);
-			IsValid("98836", country);
-			IsValid("98884", country);
-			IsValid("98895", country);
-			IsValid("98896", country);
-			IsValid("98897", country);
-			IsValid("98896", country);
-			IsValid("98898", country);
-			IsValid("98899", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Niger (NE).</summary>
-		[Test]
-		public void IsValid_NE_All()
-		{
-			var country = Country.NE;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Norfolk Island (NF).</summary>
-		[Test]
-		public void IsValid_NF_All()
-		{
-			var country = Country.NF;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Nigeria (NG).</summary>
-		[Test]
-		public void IsValid_NG_All()
-		{
-			var country = Country.NG;
-
-			IsValid("009999", country);
-			IsValid("018010", country);
-			IsValid("110000", country);
-			IsValid("342600", country);
-			IsValid("810185", country);
-			IsValid("810185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Nicaragua (NI).</summary>
-		[Test]
-		public void IsValid_NI_All()
-		{
-			var country = Country.NI;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Netherlands (NL).</summary>
-		[Test]
-		public void IsValid_NL_All()
-		{
-			var country = Country.NL;
-
-			IsValid("1236RF", country);
-			IsValid("2044WK", country);
-			IsValid("4075PJ", country);
-			IsValid("5650KF", country);
-			IsValid("6288LS", country);
-			IsValid("7695JD", country);
-			IsValid("6702MO", country);
-			IsValid("8732DF", country);
-			IsValid("9999JS", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Norway (NO).</summary>
-		[Test]
-		public void IsValid_NO_All()
-		{
-			var country = Country.NO;
-
-			IsValid("0912", country);
-			IsValid("0821", country);
-			IsValid("0666", country);
-			IsValid("0000", country);
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Nepal (NP).</summary>
-		[Test]
-		public void IsValid_NP_All()
-		{
-			var country = Country.NP;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for New Zealand (NZ).</summary>
-		[Test]
-		public void IsValid_NZ_All()
-		{
-			var country = Country.NZ;
-
-			IsValid("0912", country);
-			IsValid("0821", country);
-			IsValid("0666", country);
-			IsValid("0000", country);
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Oman (OM).</summary>
-		[Test]
-		public void IsValid_OM_All()
-		{
-			var country = Country.OM;
-
-			IsValid("000", country);
-			IsValid("015", country);
-			IsValid("126", country);
-			IsValid("204", country);
-			IsValid("328", country);
-			IsValid("405", country);
-			IsValid("560", country);
-			IsValid("628", country);
-			IsValid("765", country);
-			IsValid("672", country);
-			IsValid("872", country);
-			IsValid("999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Panama (PA).</summary>
-		[Test]
-		public void IsValid_PA_All()
-		{
-			var country = Country.PA;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Peru (PE).</summary>
-		[Test]
-		public void IsValid_PE_All()
-		{
-			var country = Country.PE;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for French Polynesia (PF).</summary>
-		[Test]
-		public void IsValid_PF_All()
-		{
-			var country = Country.PF;
-
-			IsValid("98700", country);
-			IsValid("98725", country);
-			IsValid("98736", country);
-			IsValid("98704", country);
-			IsValid("98768", country);
-			IsValid("98795", country);
-			IsValid("98760", country);
-			IsValid("98798", country);
-			IsValid("98735", country);
-			IsValid("98752", country);
-			IsValid("98712", country);
-			IsValid("98799", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Papua New Guinea (PG).</summary>
-		[Test]
-		public void IsValid_PG_All()
-		{
-			var country = Country.PG;
-
-			IsValid("000", country);
-			IsValid("015", country);
-			IsValid("126", country);
-			IsValid("204", country);
-			IsValid("328", country);
-			IsValid("405", country);
-			IsValid("560", country);
-			IsValid("628", country);
-			IsValid("765", country);
-			IsValid("672", country);
-			IsValid("872", country);
-			IsValid("999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Philippines (PH).</summary>
-		[Test]
-		public void IsValid_PH_All()
-		{
-			var country = Country.PH;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Pakistan (PK).</summary>
-		[Test]
-		public void IsValid_PK_All()
-		{
-			var country = Country.PK;
-
-			IsValid("11302", country);
-			IsValid("24023", country);
-			IsValid("45001", country);
-			IsValid("89607", country);
-			IsValid("86096", country);
-			IsValid("85808", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Poland (PL).</summary>
-		[Test]
-		public void IsValid_PL_All()
-		{
-			var country = Country.PL;
-
-			IsValid("01302", country);
-			IsValid("11302", country);
-			IsValid("24023", country);
-			IsValid("45001", country);
-			IsValid("89607", country);
-			IsValid("86096", country);
-			IsValid("85808", country);
-			IsValid("06-096", country);
-			IsValid("85-808", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Saint Pierre And Miquelon (PM).</summary>
-		[Test]
-		public void IsValid_PM_All()
-		{
-			var country = Country.PM;
-
-			IsValid("97500", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Pitcairn (PN).</summary>
-		[Test]
-		public void IsValid_PN_All()
-		{
-			var country = Country.PN;
-
-			IsValid("PCRN1ZZ", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Puerto Rico (PR).</summary>
-		[Test]
-		public void IsValid_PR_All()
-		{
-			var country = Country.PR;
-
-			IsValid("01302", country);
-			IsValid("00802", country);
-			IsValid("11302", country);
-			IsValid("24023", country);
-			IsValid("45001", country);
-			IsValid("89607", country);
-			IsValid("86096", country);
-			IsValid("85808", country);
-			IsValid("06096", country);
-			IsValid("85808", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Palestinian Territory (PS).</summary>
-		[Test]
-		public void IsValid_PS_All()
-		{
-			var country = Country.PS;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Portugal (PT).</summary>
-		[Test]
-		public void IsValid_PT_All()
-		{
-			var country = Country.PT;
-
-			IsValid("1282353", country);
-			IsValid("2037570", country);
-			IsValid("3243436", country);
-			IsValid("4008279", country);
-			IsValid("5697836", country);
-			IsValid("6282469", country);
-			IsValid("7611343", country);
-			IsValid("6767185", country);
-			IsValid("8752391", country);
-			IsValid("9999999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Palau (PW).</summary>
-		[Test]
-		public void IsValid_PW_All()
-		{
-			var country = Country.PW;
-
-			IsValid("96940", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Paraguay (PY).</summary>
-		[Test]
-		public void IsValid_PY_All()
-		{
-			var country = Country.PY;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Réunion (RE).</summary>
-		[Test]
-		public void IsValid_RE_All()
-		{
-			var country = Country.RE;
-
-			IsValid("97400", country);
-			IsValid("97402", country);
-			IsValid("97413", country);
-			IsValid("97420", country);
-			IsValid("97436", country);
-			IsValid("97449", country);
-			IsValid("97456", country);
-			IsValid("97469", country);
-			IsValid("97473", country);
-			IsValid("97465", country);
-			IsValid("97481", country);
-			IsValid("97499", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Romania (RO).</summary>
-		[Test]
-		public void IsValid_RO_All()
-		{
-			var country = Country.RO;
-
-			IsValid("018010", country);
-			IsValid("110000", country);
-			IsValid("342600", country);
-			IsValid("810185", country);
-			IsValid("810185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Serbia (RS).</summary>
-		[Test]
-		public void IsValid_RS_All()
-		{
-			var country = Country.RS;
-
-			IsValid("10070", country);
-			IsValid("20767", country);
-			IsValid("26560", country);
-			IsValid("32451", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Russian Federation (RU).</summary>
-		[Test]
-		public void IsValid_RU_All()
-		{
-			var country = Country.RU;
-
-			IsValid("110000", country);
-			IsValid("342600", country);
-			IsValid("610185", country);
-			IsValid("410185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Saudi Arabia (SA).</summary>
-		[Test]
-		public void IsValid_SA_All()
-		{
-			var country = Country.SA;
-
-			IsValid("00000", country);
-			IsValid("03145", country);
-			IsValid("14256", country);
-			IsValid("20074", country);
-			IsValid("34238", country);
-			IsValid("44075", country);
-			IsValid("54630", country);
-			IsValid("60268", country);
-			IsValid("74645", country);
-			IsValid("65782", country);
-			IsValid("88792", country);
-			IsValid("99999", country);
-			IsValid("000000000", country);
-			IsValid("031452003", country);
-			IsValid("142563114", country);
-			IsValid("200740220", country);
-			IsValid("342386334", country);
-			IsValid("440759444", country);
-			IsValid("546306554", country);
-			IsValid("602689660", country);
-			IsValid("746453774", country);
-			IsValid("657825665", country);
-			IsValid("887921888", country);
-			IsValid("999999999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Sudan (SD).</summary>
-		[Test]
-		public void IsValid_SD_All()
-		{
-			var country = Country.SD;
-
-			IsValid("00000", country);
-			IsValid("03145", country);
-			IsValid("14256", country);
-			IsValid("20074", country);
-			IsValid("34238", country);
-			IsValid("44075", country);
-			IsValid("54630", country);
-			IsValid("60268", country);
-			IsValid("74645", country);
-			IsValid("65782", country);
-			IsValid("88792", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Sweden (SE).</summary>
-		[Test]
-		public void IsValid_SE_All()
-		{
-			var country = Country.SE;
-
-			IsValid("10000", country);
-			IsValid("10070", country);
-			IsValid("20767", country);
-			IsValid("86560", country);
-			IsValid("32451", country);
-			IsValid("99112", country);
-			IsValid("482 21", country);
-			IsValid("546 36", country);
-			IsValid("650 50", country);
-			IsValid("701 62", country);
-			IsValid("812 71", country);
-			IsValid("926 86", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Singapore (SG).</summary>
-		[Test]
-		public void IsValid_SG_All()
-		{
-			var country = Country.SG;
-
-			IsValid("11000", country);
-			IsValid("34600", country);
-			IsValid("61185", country);
-			IsValid("41185", country);
-			IsValid("00999", country);
-			IsValid("01010", country);
-			IsValid("71185", country);
-			IsValid("81185", country);
-			IsValid("91185", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Saint Helena (SH).</summary>
-		[Test]
-		public void IsValid_SH_All()
-		{
-			var country = Country.SH;
-
-			IsValid("STHL1ZZ", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Slovenia (SI).</summary>
-		[Test]
-		public void IsValid_SI_All()
-		{
-			var country = Country.SI;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Slovakia (SK).</summary>
-		[Test]
-		public void IsValid_SK_All()
-		{
-			var country = Country.SK;
-
-			IsValid("10070", country);
-			IsValid("20767", country);
-			IsValid("26560", country);
-			IsValid("32451", country);
-			IsValid("09112", country);
-			IsValid("48221", country);
-			IsValid("546 36", country);
-			IsValid("650 50", country);
-			IsValid("701 62", country);
-			IsValid("812 71", country);
-			IsValid("926 86", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for San Marino (SM).</summary>
-		[Test]
-		public void IsValid_SM_All()
-		{
-			var country = Country.SM;
-
-			IsValid("47890", country);
-			IsValid("47891", country);
-			IsValid("47892", country);
-			IsValid("47895", country);
-			IsValid("47899", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Senegal (SN).</summary>
-		[Test]
-		public void IsValid_SN_All()
-		{
-			var country = Country.SN;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for El Salvador (SV).</summary>
-		[Test]
-		public void IsValid_SV_All()
-		{
-			var country = Country.SV;
-
-			IsValid("01101", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Swaziland (SZ).</summary>
-		[Test]
-		public void IsValid_SZ_All()
-		{
-			var country = Country.SZ;
-
-			IsValid("H761", country);
-			IsValid("L000", country);
-			IsValid("M014", country);
-			IsValid("S628", country);
-			IsValid("H611", country);
-			IsValid("L760", country);
-			IsValid("M754", country);
-			IsValid("S998", country);
-			IsValid("H000", country);
-			IsValid("L023", country);
-			IsValid("M182", country);
-			IsValid("S282", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Turks And Caicos Islands (TC).</summary>
-		[Test]
-		public void IsValid_TC_All()
-		{
-			var country = Country.TC;
-
-			IsValid("TKCA1ZZ", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Chad (TD).</summary>
-		[Test]
-		public void IsValid_TD_All()
-		{
-			var country = Country.TD;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Thailand (TH).</summary>
-		[Test]
-		public void IsValid_TH_All()
-		{
-			var country = Country.TH;
-
-			IsValid("10023", country);
-			IsValid("31001", country);
-			IsValid("42007", country);
-			IsValid("54006", country);
-			IsValid("61008", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Tajikistan (TJ).</summary>
-		[Test]
-		public void IsValid_TJ_All()
-		{
-			var country = Country.TJ;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Turkmenistan (TM).</summary>
-		[Test]
-		public void IsValid_TM_All()
-		{
-			var country = Country.TM;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Tunisia (TN).</summary>
-		[Test]
-		public void IsValid_TN_All()
-		{
-			var country = Country.TN;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Turkey (TR).</summary>
-		[Test]
-		public void IsValid_TR_All()
-		{
-			var country = Country.TR;
-
-			IsValid("01302", country);
-			IsValid("08302", country);
-			IsValid("10023", country);
-			IsValid("31001", country);
-			IsValid("42007", country);
-			IsValid("74006", country);
-			IsValid("91008", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Trinidad And Tobago (TT).</summary>
-		[Test]
-		public void IsValid_TT_All()
-		{
-			var country = Country.TT;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Taiwan (TW).</summary>
-		[Test]
-		public void IsValid_TW_All()
-		{
-			var country = Country.TW;
-
-			IsValid("10023", country);
-			IsValid("31001", country);
-			IsValid("42007", country);
-			IsValid("54006", country);
-			IsValid("61008", country);
-			IsValid("91008", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Ukraine (UA).</summary>
-		[Test]
-		public void IsValid_UA_All()
-		{
-			var country = Country.UA;
-
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for United States (US).</summary>
-		[Test]
-		public void IsValid_US_All()
-		{
-			var country = Country.US;
-
-			IsValid("01000-0060", country);
-			IsValid("11000-9996", country);
-			IsValid("00126", country);
-			IsValid("12345", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Uruguay (UY).</summary>
-		[Test]
-		public void IsValid_UY_All()
-		{
-			var country = Country.UY;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Holy See (VA).</summary>
-		[Test]
-		public void IsValid_VA_All()
-		{
-			var country = Country.VA;
-
-			IsValid("00120", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Saint Vincent And The Grenadines (VC).</summary>
-		[Test]
-		public void IsValid_VC_All()
-		{
-			var country = Country.VC;
-
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3248", country);
-			IsValid("4945", country);
-			IsValid("5640", country);
-			IsValid("6208", country);
-			IsValid("7645", country);
-			IsValid("6752", country);
-			IsValid("8782", country);
-			IsValid("9999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Venezuela (VE).</summary>
-		[Test]
-		public void IsValid_VE_All()
-		{
-			var country = Country.VE;
-
-			IsValid("0000", country);
-			IsValid("0123", country);
-			IsValid("1234", country);
-			IsValid("2000", country);
-			IsValid("3264", country);
-			IsValid("4094", country);
-			IsValid("5664", country);
-			IsValid("6290", country);
-			IsValid("7634", country);
-			IsValid("6755", country);
-			IsValid("8718", country);
-			IsValid("9999", country);
-
-			IsValid("0000A", country);
-			IsValid("0325A", country);
-			IsValid("1436B", country);
-			IsValid("2044C", country);
-			IsValid("3478D", country);
-			IsValid("4475E", country);
-			IsValid("5450F", country);
-			IsValid("6088G", country);
-			IsValid("7495H", country);
-			IsValid("6502I", country);
-			IsValid("8832J", country);
-			IsValid("9999K", country);
-			IsValid("0000L", country);
-			IsValid("0325M", country);
-			IsValid("1436N", country);
-			IsValid("2044O", country);
-			IsValid("3478P", country);
-			IsValid("4475Q", country);
-			IsValid("5450R", country);
-			IsValid("6088S", country);
-			IsValid("7495T", country);
-			IsValid("6502U", country);
-			IsValid("8832V", country);
-			IsValid("9999W", country);
-			IsValid("0000X", country);
-			IsValid("0325Y", country);
-			IsValid("1436Z", country);
-			IsValid("2044Z", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Virgin Islands (VG).</summary>
-		[Test]
-		public void IsValid_VG_All()
-		{
-			var country = Country.VG;
-
-			IsValid("1103", country);
-			IsValid("1114", country);
-			IsValid("1120", country);
-			IsValid("1138", country);
-			IsValid("1145", country);
-			IsValid("1150", country);
-			IsValid("1168", country);
-			IsValid("1135", country);
-			IsValid("1162", country);
-
-			IsValid("VG1101", country);
-			IsValid("VG1112", country);
-			IsValid("VG1120", country);
-			IsValid("VG1132", country);
-			IsValid("VG1149", country);
-			IsValid("VG1156", country);
-			IsValid("VG1162", country);
-			IsValid("VG1106", country);
-			IsValid("VG1167", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Virgin Islands (VI).</summary>
-		[Test]
-		public void IsValid_VI_All()
-		{
-			var country = Country.VI;
-
-			IsValid("00815", country);
-			IsValid("00826", country);
-			IsValid("00837", country);
-			IsValid("00846", country);
-			IsValid("00858", country);
-			IsValid("008152346", country);
-			IsValid("008260004", country);
-			IsValid("008372648", country);
-			IsValid("008460945", country);
-			IsValid("008586640", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Viet Nam (VN).</summary>
-		[Test]
-		public void IsValid_VN_All()
-		{
-			var country = Country.VN;
-
-			IsValid("000000", country);
-			IsValid("023145", country);
-			IsValid("134256", country);
-			IsValid("200074", country);
-			IsValid("364238", country);
-			IsValid("494075", country);
-			IsValid("564630", country);
-			IsValid("690268", country);
-			IsValid("734645", country);
-			IsValid("655782", country);
-			IsValid("818792", country);
-			IsValid("999999", country);
-
-		}
-
-		/// <summary>Tests patterns that should be valid for Wallis And Futuna (WF).</summary>
-		[Test]
-		public void IsValid_WF_All()
-		{
-			var country = Country.WF;
-
-			IsNotValid("00000", country);
-			IsNotValid("01235", country);
-			IsNotValid("12346", country);
-			IsNotValid("20004", country);
-			IsNotValid("32648", country);
-			IsNotValid("40945", country);
-			IsNotValid("56640", country);
-			IsNotValid("62908", country);
-			IsNotValid("76345", country);
-			IsNotValid("67552", country);
-			IsNotValid("87182", country);
-			IsNotValid("99999", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Mayotte (YT).</summary>
-		[Test]
-		public void IsValid_YT_All()
-		{
-			var country = Country.YT;
-
-			IsValid("97600", country);
-			IsValid("97605", country);
-			IsValid("97616", country);
-			IsValid("97624", country);
-			IsValid("97638", country);
-			IsValid("97645", country);
-			IsValid("97650", country);
-			IsValid("97668", country);
-			IsValid("97675", country);
-			IsValid("97662", country);
-			IsValid("97682", country);
-			IsValid("97699", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for South Africa (ZA).</summary>
-		[Test]
-		public void IsValid_ZA_All()
-		{
-			var country = Country.ZA;
-
-			IsValid("0001", country);
-			IsValid("0023", country);
-			IsValid("0100", country);
-			IsValid("1000", country);
-			IsValid("2077", country);
-			IsValid("2650", country);
-			IsValid("4241", country);
-		}
-
-		/// <summary>Tests patterns that should be valid for Zambia (ZM).</summary>
-		[Test]
-		public void IsValid_ZM_All()
-		{
-			var country = Country.ZM;
-
-			IsValid("00000", country);
-			IsValid("01235", country);
-			IsValid("12346", country);
-			IsValid("20004", country);
-			IsValid("32648", country);
-			IsValid("40945", country);
-			IsValid("56640", country);
-			IsValid("62908", country);
-			IsValid("76345", country);
-			IsValid("67552", country);
-			IsValid("87182", country);
-			IsValid("99999", country);
+		// Tests patterns that should be valid for Andorra (AD).
+		[TestCase("AD", "AD123")]
+		[TestCase("AD", "AD345")]
+		[TestCase("AD", "AD678")]
+		[TestCase("AD", "AD789")]
+		// Tests patterns that should be valid for Afghanistan (AF)
+		[TestCase("AF", "4301")]
+		[TestCase("AF", "1001")]
+		[TestCase("AF", "2023")]
+		[TestCase("AF", "1102")]
+		[TestCase("AF", "4020")]
+		[TestCase("AF", "3077")]
+		[TestCase("AF", "2650")]
+		[TestCase("AF", "4241")]
+		// Tests patterns that should be valid for Anguilla(AI).
+		[TestCase("AI", "2640")]
+		[TestCase("AI", "AI-2640")]
+		[TestCase("AI", "AI2640")]
+		[TestCase("AI", "ai-2640")]
+		[TestCase("AI", "ai2640")]
+		[TestCase("AI", "ai 2640")]
+		[TestCase("AI", "ai.2640")]
+		// Tests patterns that should be valid for Albania (AL).
+		[TestCase("AL", "1872")]
+		[TestCase("AL", "2540")]
+		[TestCase("AL", "7900")]
+		[TestCase("AL", "9999")]
+		// Tests patterns that should be valid for Armenia (AM).
+		[TestCase("AM", "0123")]
+		[TestCase("AM", "1234")]
+		[TestCase("AM", "2000")]
+		[TestCase("AM", "3248")]
+		[TestCase("AM", "4945")]
+		// Tests patterns that should be valid for Argentina (AR).
+		[TestCase("AR", "A4400XXX")]
+		[TestCase("AR", "C 1420 ABC")]
+		[TestCase("AR", "S 2300DDD")]
+		[TestCase("AR", "Z9400 QOW")]
+		// Tests patterns that should be valid for American Samoa (AS).
+		[TestCase("AS", "91000-0060")]
+		[TestCase("AS", "91000-9996")]
+		[TestCase("AS", "90126")]
+		[TestCase("AS", "92345")]
+		// Tests patterns that should be valid for Austria (AT).
+		[TestCase("AT", "2471")]
+		[TestCase("AT", "1000")]
+		[TestCase("AT", "5120")]
+		[TestCase("AT", "9999")]
+		// Tests patterns that should be valid for Australia (AU).
+		[TestCase("AU", "0872")]
+		[TestCase("AU", "2540")]
+		[TestCase("AU", "0900")]
+		[TestCase("AU", "9999")]
+		// Tests patterns that should be valid for Åland Islands (AX).
+		[TestCase("AX", "22-000")]
+		[TestCase("AX", "22-123")]
+		[TestCase("AX", "22000")]
+		[TestCase("AX", "22345")]
+		// Tests patterns that should be valid for Azerbaijan (AZ).
+		[TestCase("AZ", "1499")]
+		[TestCase("AZ", "az 1499")]
+		[TestCase("AZ", "AZ-1499")]
+		[TestCase("AZ", "az1499")]
+		[TestCase("AZ", "AZ0499")]
+		[TestCase("AZ", "AZ0099")]
+		[TestCase("AZ", "aZ6990")]
+		// Tests patterns that should be valid for Bosnia And Herzegovina (BA).
+		[TestCase("BA", "00000")]
+		[TestCase("BA", "01235")]
+		[TestCase("BA", "12346")]
+		[TestCase("BA", "20004")]
+		[TestCase("BA", "32648")]
+		[TestCase("BA", "40945")]
+		[TestCase("BA", "56640")]
+		[TestCase("BA", "62908")]
+		[TestCase("BA", "76345")]
+		[TestCase("BA", "67552")]
+		[TestCase("BA", "87182")]
+		[TestCase("BA", "99999")]
+		// Tests patterns that should be valid for Barbados (BB).
+		[TestCase("BB", "21499")]
+		[TestCase("BB", "01499")]
+		[TestCase("BB", "bB-31499")]
+		[TestCase("BB", "BB 01499")]
+		[TestCase("BB", "bb81499")]
+		[TestCase("BB", "BB71499")]
+		[TestCase("BB", "BB56990")]
+		// Tests patterns that should be valid for Bangladesh (BD).
+		[TestCase("BD", "0483")]
+		[TestCase("BD", "1480")]
+		[TestCase("BD", "5492")]
+		[TestCase("BD", "7695")]
+		[TestCase("BD", "9796")]
+		// Tests patterns that should be valid for Belgium (BE).
+		[TestCase("BE", "2471")]
+		[TestCase("BE", "1000")]
+		[TestCase("BE", "5120")]
+		[TestCase("BE", "9999")]
+		// Tests patterns that should be valid for Bulgaria (BG).
+		[TestCase("BG", "1000")]
+		[TestCase("BG", "2077")]
+		[TestCase("BG", "2650")]
+		[TestCase("BG", "4241")]
+		// Tests patterns that should be valid for Bahrain (BH).
+		[TestCase("BH", "199")]
+		[TestCase("BH", "1299")]
+		[TestCase("BH", "666")]
+		[TestCase("BH", "890")]
+		[TestCase("BH", "768")]
+		[TestCase("BH", "1000")]
+		[TestCase("BH", "1176")]
+		// Tests patterns that should be valid for Saint Barthélemy (BL).
+		[TestCase("BL", "97700")]
+		[TestCase("BL", "97701")]
+		[TestCase("BL", "97712")]
+		[TestCase("BL", "97720")]
+		[TestCase("BL", "97732")]
+		[TestCase("BL", "97740")]
+		[TestCase("BL", "97756")]
+		[TestCase("BL", "97762")]
+		[TestCase("BL", "97776")]
+		[TestCase("BL", "97767")]
+		[TestCase("BL", "97787")]
+		[TestCase("BL", "97799")]
+		// Tests patterns that should be valid for Bermuda (BM).
+		[TestCase("BM", "AA")]
+		[TestCase("BM", "AS")]
+		[TestCase("BM", "BJ")]
+		[TestCase("BM", "CD")]
+		[TestCase("BM", "DE")]
+		[TestCase("BM", "EO")]
+		[TestCase("BM", "FN")]
+		[TestCase("BM", "GF")]
+		[TestCase("BM", "HL")]
+		[TestCase("BM", "ID")]
+		[TestCase("BM", "JS")]
+		[TestCase("BM", "KN")]
+		[TestCase("BM", "LO")]
+		[TestCase("BM", "ME")]
+		[TestCase("BM", "NN")]
+		[TestCase("BM", "OL")]
+		[TestCase("BM", "PS")]
+		[TestCase("BM", "QD")]
+		[TestCase("BM", "RN")]
+		[TestCase("BM", "SE")]
+		[TestCase("BM", "TM")]
+		[TestCase("BM", "UF")]
+		[TestCase("BM", "VE")]
+		[TestCase("BM", "WL")]
+		[TestCase("BM", "XM")]
+		[TestCase("BM", "YE")]
+		[TestCase("BM", "ZL")]
+		[TestCase("BM", "ZZ")]
+		[TestCase("BM", "AA0F")]
+		[TestCase("BM", "AS0S")]
+		[TestCase("BM", "BJ1F")]
+		[TestCase("BM", "CD2K")]
+		[TestCase("BM", "DE3D")]
+		[TestCase("BM", "EO4J")]
+		[TestCase("BM", "FN5F")]
+		[TestCase("BM", "GF6S")]
+		[TestCase("BM", "HL7D")]
+		[TestCase("BM", "ID69")]
+		[TestCase("BM", "JS66")]
+		[TestCase("BM", "KN48")]
+		[TestCase("BM", "LO12")]
+		[TestCase("BM", "MEDS")]
+		[TestCase("BM", "NNRF")]
+		[TestCase("BM", "OLWK")]
+		[TestCase("BM", "PSSD")]
+		[TestCase("BM", "QDPJ")]
+		[TestCase("BM", "RNKF")]
+		[TestCase("BM", "SELS")]
+		[TestCase("BM", "TMD1")]
+		[TestCase("BM", "UFO7")]
+		[TestCase("BM", "VEF2")]
+		[TestCase("BM", "WLS9")]
+		[TestCase("BM", "XMF0")]
+		[TestCase("BM", "YES4")]
+		[TestCase("BM", "ZLF2")]
+		[TestCase("BM", "ZZK7")]
+		// Tests patterns that should be valid for Brunei Darussalam (BN).
+		[TestCase("BN", "YZ0000")]
+		[TestCase("BN", "BU2529")]
+		[TestCase("BN", "bU2529")]
+		[TestCase("BN", "bu2529")]
+		[TestCase("BN", "Bu2529")]
+		// Tests patterns that should be valid for Bolivia (BO).
+		[TestCase("BO", "0123")]
+		[TestCase("BO", "1234")]
+		[TestCase("BO", "2000")]
+		[TestCase("BO", "3248")]
+		[TestCase("BO", "4945")]
+		[TestCase("BO", "5640")]
+		[TestCase("BO", "6208")]
+		[TestCase("BO", "7645")]
+		[TestCase("BO", "6752")]
+		[TestCase("BO", "8782")]
+		[TestCase("BO", "9999")]
+		// Tests patterns that should be valid for Brazil (BR).
+		[TestCase("BR", "01000-000")]
+		[TestCase("BR", "01000999")]
+		[TestCase("BR", "88000-123")]
+		// Tests patterns that should be valid for Bhutan (BT).
+		[TestCase("BT", "000")]
+		[TestCase("BT", "012")]
+		[TestCase("BT", "123")]
+		[TestCase("BT", "200")]
+		[TestCase("BT", "326")]
+		[TestCase("BT", "409")]
+		[TestCase("BT", "566")]
+		[TestCase("BT", "629")]
+		[TestCase("BT", "763")]
+		[TestCase("BT", "675")]
+		[TestCase("BT", "871")]
+		[TestCase("BT", "999")]
+		// Tests patterns that should be valid for Belarus (BY).
+		[TestCase("BY", "010185")]
+		[TestCase("BY", "110000")]
+		[TestCase("BY", "342600")]
+		[TestCase("BY", "610185")]
+		[TestCase("BY", "910185")]
+		// Tests patterns that should be valid for Canada (CA).
+		[TestCase("CA", "H0H-0H0")]
+		[TestCase("CA", "K8 N5W 6")]
+		[TestCase("CA", "A1A 1A1")]
+		[TestCase("CA", "K0H 9Z0")]
+		[TestCase("CA", "T1R 9Z0")]
+		[TestCase("CA", "P2V9z0")]
+		// Tests patterns that should be valid for Cocos (CC).
+		[TestCase("CC", "0123")]
+		[TestCase("CC", "1234")]
+		[TestCase("CC", "2000")]
+		[TestCase("CC", "3248")]
+		[TestCase("CC", "4945")]
+		[TestCase("CC", "5640")]
+		[TestCase("CC", "6208")]
+		[TestCase("CC", "7645")]
+		[TestCase("CC", "6752")]
+		[TestCase("CC", "8782")]
+		[TestCase("CC", "9999")]
+		// Tests patterns that should be valid for Switzerland (CH).
+		[TestCase("CH", "1001")]
+		[TestCase("CH", "8023")]
+		[TestCase("CH", "9100")]
+		[TestCase("CH", "1000")]
+		[TestCase("CH", "2077")]
+		[TestCase("CH", "2650")]
+		[TestCase("CH", "4241")]
+		// Tests patterns that should be valid for Chile (CL).
+		[TestCase("CL", "0000000")]
+		[TestCase("CL", "0231145")]
+		[TestCase("CL", "1342456")]
+		[TestCase("CL", "2000974")]
+		[TestCase("CL", "3642438")]
+		[TestCase("CL", "4940375")]
+		[TestCase("CL", "5646230")]
+		[TestCase("CL", "6902168")]
+		[TestCase("CL", "7346345")]
+		[TestCase("CL", "6557682")]
+		[TestCase("CL", "8187992")]
+		[TestCase("CL", "9999999")]
+		// Tests patterns that should be valid for China (CN).
+		[TestCase("CN", "010000")]
+		[TestCase("CN", "342600")]
+		[TestCase("CN", "810185")]
+		// Tests patterns that should be valid for Colombia (CO).
+		[TestCase("CO", "000000")]
+		[TestCase("CO", "023145")]
+		[TestCase("CO", "134256")]
+		[TestCase("CO", "200074")]
+		[TestCase("CO", "364238")]
+		[TestCase("CO", "494075")]
+		[TestCase("CO", "564630")]
+		[TestCase("CO", "690268")]
+		[TestCase("CO", "734645")]
+		[TestCase("CO", "655782")]
+		[TestCase("CO", "818792")]
+		[TestCase("CO", "999999")]
+		// Tests patterns that should be valid for Costa Rica (CR).
+		[TestCase("CR", "00000")]
+		[TestCase("CR", "01235")]
+		[TestCase("CR", "12346")]
+		[TestCase("CR", "20004")]
+		[TestCase("CR", "32648")]
+		[TestCase("CR", "40945")]
+		[TestCase("CR", "56640")]
+		[TestCase("CR", "62908")]
+		[TestCase("CR", "76345")]
+		[TestCase("CR", "67552")]
+		[TestCase("CR", "87182")]
+		[TestCase("CR", "99999")]
+		// Tests patterns that should be valid for Cuba (CU).
+		[TestCase("CU", "00000")]
+		[TestCase("CU", "01235")]
+		[TestCase("CU", "12346")]
+		[TestCase("CU", "20004")]
+		[TestCase("CU", "32648")]
+		[TestCase("CU", "40945")]
+		[TestCase("CU", "56640")]
+		[TestCase("CU", "62908")]
+		[TestCase("CU", "76345")]
+		[TestCase("CU", "67552")]
+		[TestCase("CU", "87182")]
+		[TestCase("CU", "99999")]
+		[TestCase("CU", "CP00000")]
+		[TestCase("CU", "CP01235")]
+		[TestCase("CU", "CP12346")]
+		[TestCase("CU", "CP20004")]
+		[TestCase("CU", "CP32648")]
+		// Tests patterns that should be valid for Cape Verde (CV).
+		[TestCase("CV", "0000")]
+		[TestCase("CV", "1000")]
+		[TestCase("CV", "2077")]
+		[TestCase("CV", "2650")]
+		[TestCase("CV", "4241")]
+		// Tests patterns that should be valid for Christmas Island (CX).
+		[TestCase("CX", "0000")]
+		[TestCase("CX", "0144")]
+		[TestCase("CX", "1282")]
+		[TestCase("CX", "2037")]
+		[TestCase("CX", "3243")]
+		[TestCase("CX", "4008")]
+		[TestCase("CX", "5697")]
+		[TestCase("CX", "6282")]
+		[TestCase("CX", "7611")]
+		[TestCase("CX", "6767")]
+		[TestCase("CX", "8752")]
+		[TestCase("CX", "9999")]
+		// Tests patterns that should be valid for Cyprus (CY).
+		[TestCase("CY", "1000")]
+		[TestCase("CY", "2077")]
+		[TestCase("CY", "2650")]
+		[TestCase("CY", "4241")]
+		// Tests patterns that should be valid for Czech Republic (CZ).
+		[TestCase("CZ", "21234")]
+		[TestCase("CZ", "12345")]
+		[TestCase("CZ", "11111")]
+		[TestCase("CZ", "123 45")]
+		// Tests patterns that should be valid for Germany (DE).
+		[TestCase("DE", "10000")]
+		[TestCase("DE", "01123")]
+		[TestCase("DE", "89000")]
+		[TestCase("DE", "12345")]
+		// Tests patterns that should be valid for Denmark (DK).
+		[TestCase("DK", "1499")]
+		[TestCase("DK", "dk-1499")]
+		[TestCase("DK", "DK-1499")]
+		[TestCase("DK", "dk1499")]
+		[TestCase("DK", "DK1499")]
+		[TestCase("DK", "DK6990")]
+		// Tests patterns that should be valid for Algeria (DZ).
+		[TestCase("DZ", "01234")]
+		[TestCase("DZ", "12345")]
+		[TestCase("DZ", "11111")]
+		// Tests patterns that should be valid for Ecuador (EC).
+		[TestCase("EC", "000000")]
+		[TestCase("EC", "023145")]
+		[TestCase("EC", "134256")]
+		[TestCase("EC", "200074")]
+		[TestCase("EC", "364238")]
+		[TestCase("EC", "494075")]
+		[TestCase("EC", "564630")]
+		[TestCase("EC", "690268")]
+		[TestCase("EC", "734645")]
+		[TestCase("EC", "655782")]
+		[TestCase("EC", "818792")]
+		[TestCase("EC", "999999")]
+		// Tests patterns that should be valid for Estonia (EE).
+		[TestCase("EE", "00000")]
+		[TestCase("EE", "01235")]
+		[TestCase("EE", "12346")]
+		[TestCase("EE", "20004")]
+		[TestCase("EE", "32648")]
+		[TestCase("EE", "40945")]
+		[TestCase("EE", "56640")]
+		[TestCase("EE", "62908")]
+		[TestCase("EE", "76345")]
+		[TestCase("EE", "67552")]
+		[TestCase("EE", "87182")]
+		[TestCase("EE", "99999")]
+		// Tests patterns that should be valid for Egypt (EG).
+		[TestCase("EG", "12346")]
+		[TestCase("EG", "20004")]
+		[TestCase("EG", "32648")]
+		[TestCase("EG", "40945")]
+		[TestCase("EG", "56640")]
+		[TestCase("EG", "62908")]
+		[TestCase("EG", "76345")]
+		[TestCase("EG", "67552")]
+		[TestCase("EG", "87182")]
+		[TestCase("EG", "99999")]
+		// Tests patterns that should be valid for Spain (ES).
+		[TestCase("ES", "01070")]
+		[TestCase("ES", "10070")]
+		[TestCase("ES", "20767")]
+		[TestCase("ES", "26560")]
+		[TestCase("ES", "32451")]
+		[TestCase("ES", "09112")]
+		[TestCase("ES", "48221")]
+		[TestCase("ES", "50636")]
+		[TestCase("ES", "52636")]
+		[TestCase("ES", "51050")]
+		// Tests patterns that should be valid for Ethiopia (ET).
+		[TestCase("ET", "0123")]
+		[TestCase("ET", "1234")]
+		[TestCase("ET", "2000")]
+		[TestCase("ET", "3248")]
+		[TestCase("ET", "4945")]
+		[TestCase("ET", "5640")]
+		[TestCase("ET", "6208")]
+		[TestCase("ET", "7645")]
+		[TestCase("ET", "6752")]
+		[TestCase("ET", "8782")]
+		[TestCase("ET", "9999")]
+		// Tests patterns that should be valid for Finland (FI).
+		[TestCase("FI", "00-000")]
+		[TestCase("FI", "01-123")]
+		[TestCase("FI", "00000")]
+		[TestCase("FI", "12345")]
+		// Tests patterns that should be valid for Falkland Islands (FK).
+		[TestCase("FK", "FIQQ1ZZ")]
+		// Tests patterns that should be valid for Micronesia (FM).
+		[TestCase("FM", "96941")]
+		[TestCase("FM", "96942")]
+		[TestCase("FM", "96943")]
+		[TestCase("FM", "96944")]
+		[TestCase("FM", "969410000")]
+		[TestCase("FM", "969420123")]
+		[TestCase("FM", "969430144")]
+		[TestCase("FM", "969441282")]
+		// Tests patterns that should be valid for Faroe Islands (FO).
+		[TestCase("FO", "399")]
+		[TestCase("FO", "fo-399")]
+		[TestCase("FO", "FO-199")]
+		[TestCase("FO", "fO399")]
+		[TestCase("FO", "FO678")]
+		[TestCase("FO", "FO123")]
+		// Tests patterns that should be valid for France (FR).
+		[TestCase("FR", "10000")]
+		[TestCase("FR", "01123")]
+		[TestCase("FR", "89000")]
+		[TestCase("FR", "12345")]
+		// Tests patterns that should be valid for Gabon (GA).
+		[TestCase("GA", "0123")]
+		[TestCase("GA", "1234")]
+		[TestCase("GA", "2000")]
+		[TestCase("GA", "3248")]
+		[TestCase("GA", "4945")]
+		[TestCase("GA", "5640")]
+		[TestCase("GA", "6208")]
+		[TestCase("GA", "7645")]
+		[TestCase("GA", "6752")]
+		[TestCase("GA", "8782")]
+		[TestCase("GA", "9999")]
+		// Tests patterns that should be valid for United Kingdom (GB).
+		[TestCase("GB", "M11AA")]
+		[TestCase("GB", "M11aA")]
+		[TestCase("GB", "M11AA")]
+		[TestCase("GB", "m11AA")]
+		[TestCase("GB", "m11aa")]
+		[TestCase("GB", "B338TH")]
+		[TestCase("GB", "B338TH")]
+		[TestCase("GB", "CR26XH")]
+		[TestCase("GB", "CR26XH")]
+		[TestCase("GB", "DN551PT")]
+		[TestCase("GB", "DN551PT")]
+		[TestCase("GB", "W1A1HQ")]
+		[TestCase("GB", "W1A1HQ")]
+		[TestCase("GB", "EC1A1BB")]
+		[TestCase("GB", "EC1A1BB")]
+		// Tests patterns that should be valid for Georgia (GE).
+		[TestCase("GE", "0123")]
+		[TestCase("GE", "1234")]
+		[TestCase("GE", "2000")]
+		[TestCase("GE", "3248")]
+		[TestCase("GE", "4945")]
+		[TestCase("GE", "5640")]
+		[TestCase("GE", "6208")]
+		[TestCase("GE", "7645")]
+		[TestCase("GE", "6752")]
+		[TestCase("GE", "8782")]
+		[TestCase("GE", "9999")]
+		// Tests patterns that should be valid for French Guiana (GF).
+		[TestCase("GF", "97300")]
+		[TestCase("GF", "97301")]
+		[TestCase("GF", "97312")]
+		[TestCase("GF", "97320")]
+		[TestCase("GF", "97332")]
+		[TestCase("GF", "97340")]
+		[TestCase("GF", "97356")]
+		[TestCase("GF", "97362")]
+		[TestCase("GF", "97376")]
+		[TestCase("GF", "97367")]
+		[TestCase("GF", "97387")]
+		[TestCase("GF", "97399")]
+		// Tests patterns that should be valid for Guernsey (GG).
+		[TestCase("GG", "00DF")]
+		[TestCase("GG", "03DS")]
+		[TestCase("GG", "14RF")]
+		[TestCase("GG", "20WK")]
+		[TestCase("GG", "34SD")]
+		[TestCase("GG", "44PJ")]
+		[TestCase("GG", "54KF")]
+		[TestCase("GG", "60LS")]
+		[TestCase("GG", "74JD")]
+		[TestCase("GG", "65MO")]
+		[TestCase("GG", "88DF")]
+		[TestCase("GG", "99JS")]
+		[TestCase("GG", "000DF")]
+		[TestCase("GG", "015DS")]
+		[TestCase("GG", "126RF")]
+		[TestCase("GG", "204WK")]
+		[TestCase("GG", "328SD")]
+		[TestCase("GG", "405PJ")]
+		[TestCase("GG", "560KF")]
+		[TestCase("GG", "628LS")]
+		[TestCase("GG", "765JD")]
+		[TestCase("GG", "672MO")]
+		[TestCase("GG", "872DF")]
+		[TestCase("GG", "999JS")]
+		// Tests patterns that should be valid for Gibraltar (GI).
+		[TestCase("GI", "GX111AA")]
+		// Tests patterns that should be valid for Greenland (GL).
+		[TestCase("GL", "3999")]
+		[TestCase("GL", "gl-3999")]
+		[TestCase("GL", "GL-3999")]
+		[TestCase("GL", "gL 3999")]
+		[TestCase("GL", "GL3999")]
+		[TestCase("GL", "GL3990")]
+		// Tests patterns that should be valid for Guadeloupe (GP).
+		[TestCase("GP", "97100")]
+		[TestCase("GP", "97101")]
+		[TestCase("GP", "97112")]
+		[TestCase("GP", "97120")]
+		[TestCase("GP", "97132")]
+		[TestCase("GP", "97140")]
+		[TestCase("GP", "97156")]
+		[TestCase("GP", "97162")]
+		[TestCase("GP", "97176")]
+		[TestCase("GP", "97167")]
+		[TestCase("GP", "97187")]
+		[TestCase("GP", "97199")]
+		// Tests patterns that should be valid for Greece (GR).
+		[TestCase("GR", "10000")]
+		[TestCase("GR", "31123")]
+		[TestCase("GR", "89000")]
+		[TestCase("GR", "12345")]
+		// Tests patterns that should be valid for South Georgia And The South Sandwich Islands (GS).
+		[TestCase("GS", "SIQQ1ZZ")]
+		// Tests patterns that should be valid for Guatemala (GT).
+		[TestCase("GT", "00000")]
+		[TestCase("GT", "01235")]
+		[TestCase("GT", "12346")]
+		[TestCase("GT", "20004")]
+		[TestCase("GT", "32648")]
+		[TestCase("GT", "40945")]
+		[TestCase("GT", "56640")]
+		[TestCase("GT", "62908")]
+		[TestCase("GT", "76345")]
+		[TestCase("GT", "67552")]
+		[TestCase("GT", "87182")]
+		[TestCase("GT", "99999")]
+		// Tests patterns that should be valid for Guam (GU).
+		[TestCase("GU", "96910")]
+		[TestCase("GU", "96910")]
+		[TestCase("GU", "96911")]
+		[TestCase("GU", "96912")]
+		[TestCase("GU", "96923")]
+		[TestCase("GU", "96924")]
+		[TestCase("GU", "96925")]
+		[TestCase("GU", "96926")]
+		[TestCase("GU", "96927")]
+		[TestCase("GU", "96926")]
+		[TestCase("GU", "96931")]
+		[TestCase("GU", "96932")]
+		[TestCase("GU", "969100000")]
+		[TestCase("GU", "969103015")]
+		[TestCase("GU", "969114126")]
+		[TestCase("GU", "969120204")]
+		[TestCase("GU", "969234328")]
+		[TestCase("GU", "969244405")]
+		[TestCase("GU", "969254560")]
+		[TestCase("GU", "969260628")]
+		[TestCase("GU", "969274765")]
+		[TestCase("GU", "969265672")]
+		[TestCase("GU", "969318872")]
+		[TestCase("GU", "969329999")]
+		// Tests patterns that should be valid for Guinea-Bissau (GW).
+		[TestCase("GW", "0123")]
+		[TestCase("GW", "1234")]
+		[TestCase("GW", "2000")]
+		[TestCase("GW", "3248")]
+		[TestCase("GW", "4945")]
+		[TestCase("GW", "5640")]
+		[TestCase("GW", "6208")]
+		[TestCase("GW", "7645")]
+		[TestCase("GW", "6752")]
+		[TestCase("GW", "8782")]
+		[TestCase("GW", "9999")]
+		// Tests patterns that should be valid for Heard Island And Mcdonald Islands (HM).
+		[TestCase("HM", "0123")]
+		[TestCase("HM", "1234")]
+		[TestCase("HM", "2000")]
+		[TestCase("HM", "3248")]
+		[TestCase("HM", "4945")]
+		[TestCase("HM", "5640")]
+		[TestCase("HM", "6208")]
+		[TestCase("HM", "7645")]
+		[TestCase("HM", "6752")]
+		[TestCase("HM", "8782")]
+		[TestCase("HM", "9999")]
+		// Tests patterns that should be valid for Honduras (HN).
+		[TestCase("HN", "00000")]
+		[TestCase("HN", "01235")]
+		[TestCase("HN", "12346")]
+		[TestCase("HN", "20004")]
+		[TestCase("HN", "32648")]
+		[TestCase("HN", "40945")]
+		[TestCase("HN", "56640")]
+		[TestCase("HN", "62908")]
+		[TestCase("HN", "76345")]
+		[TestCase("HN", "67552")]
+		[TestCase("HN", "87182")]
+		[TestCase("HN", "99999")]
+		// Tests patterns that should be valid for Croatia (HR).
+		[TestCase("HR", "00000")]
+		[TestCase("HR", "01235")]
+		[TestCase("HR", "12346")]
+		[TestCase("HR", "20004")]
+		[TestCase("HR", "32648")]
+		[TestCase("HR", "40945")]
+		[TestCase("HR", "56640")]
+		[TestCase("HR", "62908")]
+		[TestCase("HR", "76345")]
+		[TestCase("HR", "67552")]
+		[TestCase("HR", "87182")]
+		[TestCase("HR", "99999")]
+		// Tests patterns that should be valid for Haiti (HT).
+		[TestCase("HT", "0123")]
+		[TestCase("HT", "1234")]
+		[TestCase("HT", "2000")]
+		[TestCase("HT", "3248")]
+		[TestCase("HT", "4945")]
+		[TestCase("HT", "5640")]
+		[TestCase("HT", "6208")]
+		[TestCase("HT", "7645")]
+		[TestCase("HT", "6752")]
+		[TestCase("HT", "8782")]
+		[TestCase("HT", "9999")]
+		// Tests patterns that should be valid for Hungary (HU).
+		[TestCase("HU", "1000")]
+		[TestCase("HU", "2077")]
+		[TestCase("HU", "2650")]
+		[TestCase("HU", "4241")]
+		// Tests patterns that should be valid for Indonesia (ID).
+		[TestCase("ID", "10000")]
+		[TestCase("ID", "31123")]
+		[TestCase("ID", "89000")]
+		[TestCase("ID", "89007")]
+		[TestCase("ID", "12340")]
+		// Tests patterns that should be valid for Israel (IL).
+		[TestCase("IL", "0110023")]
+		[TestCase("IL", "1084023")]
+		[TestCase("IL", "3108701")]
+		[TestCase("IL", "4201907")]
+		[TestCase("IL", "5403506")]
+		[TestCase("IL", "6177008")]
+		// Tests patterns that should be valid for Isle Of Man (IM).
+		[TestCase("IM", "00DF")]
+		[TestCase("IM", "04DS")]
+		[TestCase("IM", "18RF")]
+		[TestCase("IM", "23WK")]
+		[TestCase("IM", "34SD")]
+		[TestCase("IM", "40PJ")]
+		[TestCase("IM", "59KF")]
+		[TestCase("IM", "68LS")]
+		[TestCase("IM", "71JD")]
+		[TestCase("IM", "66MO")]
+		[TestCase("IM", "85DF")]
+		[TestCase("IM", "99JS")]
+		[TestCase("IM", "00DF")]
+		[TestCase("IM", "000DF")]
+		[TestCase("IM", "014DS")]
+		[TestCase("IM", "128RF")]
+		[TestCase("IM", "203WK")]
+		[TestCase("IM", "324SD")]
+		[TestCase("IM", "400PJ")]
+		[TestCase("IM", "569KF")]
+		[TestCase("IM", "628LS")]
+		[TestCase("IM", "761JD")]
+		[TestCase("IM", "676MO")]
+		[TestCase("IM", "875DF")]
+		[TestCase("IM", "999JS")]
+		[TestCase("IM", "000DF")]
+		[TestCase("IM", "IM00DF")]
+		[TestCase("IM", "IM04DS")]
+		[TestCase("IM", "IM18RF")]
+		[TestCase("IM", "IM23WK")]
+		[TestCase("IM", "IM34SD")]
+		[TestCase("IM", "IM40PJ")]
+		[TestCase("IM", "IM59KF")]
+		[TestCase("IM", "IM68LS")]
+		[TestCase("IM", "IM71JD")]
+		[TestCase("IM", "IM66MO")]
+		[TestCase("IM", "IM85DF")]
+		[TestCase("IM", "IM99JS")]
+		[TestCase("IM", "IM00DF")]
+		[TestCase("IM", "IM000DF")]
+		[TestCase("IM", "IM014DS")]
+		[TestCase("IM", "IM128RF")]
+		[TestCase("IM", "IM203WK")]
+		[TestCase("IM", "IM324SD")]
+		[TestCase("IM", "IM400PJ")]
+		[TestCase("IM", "IM569KF")]
+		[TestCase("IM", "IM628LS")]
+		[TestCase("IM", "IM761JD")]
+		[TestCase("IM", "IM676MO")]
+		[TestCase("IM", "IM875DF")]
+		[TestCase("IM", "IM999JS")]
+		[TestCase("IM", "IM000DF")]
+		[TestCase("IM", "IM00DF")]
+		[TestCase("IM", "IM04DS")]
+		[TestCase("IM", "IM18RF")]
+		[TestCase("IM", "IM23WK")]
+		[TestCase("IM", "IM34SD")]
+		[TestCase("IM", "IM40PJ")]
+		[TestCase("IM", "IM59KF")]
+		[TestCase("IM", "IM68LS")]
+		[TestCase("IM", "IM71JD")]
+		[TestCase("IM", "IM66MO")]
+		[TestCase("IM", "IM85DF")]
+		[TestCase("IM", "IM99JS")]
+		[TestCase("IM", "IM00DF")]
+		// Tests patterns that should be valid for India (IN).
+		[TestCase("IN", "110000")]
+		[TestCase("IN", "342600")]
+		[TestCase("IN", "810185")]
+		[TestCase("IN", "810 185")]
+		// Tests patterns that should be valid for British Indian Ocean Territory (IO).
+		[TestCase("IO", "BBND1ZZ")]
+		// Tests patterns that should be valid for Iraq (IQ).
+		[TestCase("IQ", "12346")]
+		[TestCase("IQ", "32648")]
+		[TestCase("IQ", "40945")]
+		[TestCase("IQ", "56640")]
+		[TestCase("IQ", "62908")]
+		// Tests patterns that should be valid for Iran (IR).
+		[TestCase("IR", "0000000000")]
+		[TestCase("IR", "0144942325")]
+		[TestCase("IR", "1282353436")]
+		[TestCase("IR", "2037570044")]
+		[TestCase("IR", "3243436478")]
+		[TestCase("IR", "4008279475")]
+		[TestCase("IR", "5697836450")]
+		[TestCase("IR", "6282469088")]
+		[TestCase("IR", "7611343495")]
+		[TestCase("IR", "6767185502")]
+		[TestCase("IR", "8752391832")]
+		[TestCase("IR", "9999999999")]
+		// Tests patterns that should be valid for Iceland (IS).
+		[TestCase("IS", "000")]
+		[TestCase("IS", "035")]
+		[TestCase("IS", "146")]
+		[TestCase("IS", "204")]
+		[TestCase("IS", "348")]
+		[TestCase("IS", "445")]
+		[TestCase("IS", "540")]
+		[TestCase("IS", "608")]
+		[TestCase("IS", "745")]
+		[TestCase("IS", "652")]
+		[TestCase("IS", "882")]
+		[TestCase("IS", "999")]
+		// Tests patterns that should be valid for Italy (IT).
+		[TestCase("IT", "00123")]
+		[TestCase("IT", "02123")]
+		[TestCase("IT", "31001")]
+		[TestCase("IT", "42007")]
+		[TestCase("IT", "54006")]
+		[TestCase("IT", "91008")]
+		// Tests patterns that should be valid for Jersey (JE).
+		[TestCase("JE", "00AS")]
+		[TestCase("JE", "25GS")]
+		[TestCase("JE", "36DF")]
+		[TestCase("JE", "44DS")]
+		[TestCase("JE", "78RF")]
+		[TestCase("JE", "75WK")]
+		[TestCase("JE", "50SD")]
+		[TestCase("JE", "88PJ")]
+		[TestCase("JE", "95KF")]
+		[TestCase("JE", "02LS")]
+		[TestCase("JE", "32JD")]
+		[TestCase("JE", "99MO")]
+		[TestCase("JE", "00AS")]
+		[TestCase("JE", "042GS")]
+		[TestCase("JE", "153DF")]
+		[TestCase("JE", "274DS")]
+		[TestCase("JE", "337RF")]
+		[TestCase("JE", "477WK")]
+		[TestCase("JE", "535SD")]
+		[TestCase("JE", "668PJ")]
+		[TestCase("JE", "749KF")]
+		[TestCase("JE", "680LS")]
+		[TestCase("JE", "893JD")]
+		[TestCase("JE", "999MO")]
+		// Tests patterns that should be valid for Jordan (JO).
+		[TestCase("JO", "00000")]
+		[TestCase("JO", "01235")]
+		[TestCase("JO", "12346")]
+		[TestCase("JO", "20004")]
+		[TestCase("JO", "32648")]
+		[TestCase("JO", "40945")]
+		[TestCase("JO", "56640")]
+		[TestCase("JO", "62908")]
+		[TestCase("JO", "76345")]
+		[TestCase("JO", "67552")]
+		[TestCase("JO", "87182")]
+		[TestCase("JO", "99999")]
+		// Tests patterns that should be valid for Japan (JP).
+		[TestCase("JP", "000-0000")]
+		[TestCase("JP", "000-0999")]
+		[TestCase("JP", "010-0000")]
+		[TestCase("JP", "0100999")]
+		[TestCase("JP", "880-0123")]
+		[TestCase("JP", "900-0123")]
+		// Tests patterns that should be valid for Kyrgyzstan (KG).
+		[TestCase("KG", "000000")]
+		[TestCase("KG", "023145")]
+		[TestCase("KG", "134256")]
+		[TestCase("KG", "200074")]
+		[TestCase("KG", "364238")]
+		[TestCase("KG", "494075")]
+		[TestCase("KG", "564630")]
+		[TestCase("KG", "690268")]
+		[TestCase("KG", "734645")]
+		[TestCase("KG", "655782")]
+		[TestCase("KG", "818792")]
+		[TestCase("KG", "999999")]
+		// Tests patterns that should be valid for Cambodia (KH).
+		[TestCase("KH", "00000")]
+		[TestCase("KH", "01235")]
+		[TestCase("KH", "12346")]
+		[TestCase("KH", "20004")]
+		[TestCase("KH", "32648")]
+		[TestCase("KH", "40945")]
+		[TestCase("KH", "56640")]
+		[TestCase("KH", "62908")]
+		[TestCase("KH", "76345")]
+		[TestCase("KH", "67552")]
+		[TestCase("KH", "87182")]
+		[TestCase("KH", "99999")]
+		// Tests patterns that should be valid for Korea (KR).
+		[TestCase("KR", "110000")]
+		[TestCase("KR", "342600")]
+		[TestCase("KR", "610185")]
+		[TestCase("KR", "410-185")]
+		[TestCase("KR", "710-185")]
+		// Tests patterns that should be valid for Cayman Islands (KY).
+		[TestCase("KY", "00000")]
+		[TestCase("KY", "01235")]
+		[TestCase("KY", "12346")]
+		[TestCase("KY", "20004")]
+		[TestCase("KY", "32648")]
+		[TestCase("KY", "40945")]
+		[TestCase("KY", "56640")]
+		[TestCase("KY", "62908")]
+		[TestCase("KY", "76345")]
+		[TestCase("KY", "67552")]
+		[TestCase("KY", "87182")]
+		[TestCase("KY", "99999")]
+		// Tests patterns that should be valid for Kazakhstan (KZ).
+		[TestCase("KZ", "000000")]
+		[TestCase("KZ", "023145")]
+		[TestCase("KZ", "134256")]
+		[TestCase("KZ", "200074")]
+		[TestCase("KZ", "364238")]
+		[TestCase("KZ", "494075")]
+		[TestCase("KZ", "564630")]
+		[TestCase("KZ", "690268")]
+		[TestCase("KZ", "734645")]
+		[TestCase("KZ", "655782")]
+		[TestCase("KZ", "818792")]
+		[TestCase("KZ", "999999")]
+		// Tests patterns that should be valid for Lao People'S Democratic Re
+		[TestCase("LA", "00000")]
+		[TestCase("LA", "01235")]
+		[TestCase("LA", "12346")]
+		[TestCase("LA", "20004")]
+		[TestCase("LA", "32648")]
+		[TestCase("LA", "40945")]
+		[TestCase("LA", "56640")]
+		[TestCase("LA", "62908")]
+		[TestCase("LA", "76345")]
+		[TestCase("LA", "67552")]
+		[TestCase("LA", "87182")]
+		[TestCase("LA", "99999")]
+		// Tests patterns that should be valid for Lebanon (LB).
+		[TestCase("LB", "00000000")]
+		[TestCase("LB", "01442325")]
+		[TestCase("LB", "12853436")]
+		[TestCase("LB", "20370044")]
+		[TestCase("LB", "32436478")]
+		[TestCase("LB", "40079475")]
+		[TestCase("LB", "56936450")]
+		[TestCase("LB", "62869088")]
+		[TestCase("LB", "76143495")]
+		[TestCase("LB", "67685502")]
+		[TestCase("LB", "87591832")]
+		[TestCase("LB", "99999999")]
+		// Tests patterns that should be valid for Liechtenstein (LI).
+		[TestCase("LI", "9485")]
+		[TestCase("LI", "9489")]
+		[TestCase("LI", "9490")]
+		[TestCase("LI", "9498")]
+		// Tests patterns that should be valid for Sri Lanka (LK).
+		[TestCase("LK", "00000")]
+		[TestCase("LK", "10070")]
+		[TestCase("LK", "20767")]
+		[TestCase("LK", "26560")]
+		[TestCase("LK", "32451")]
+		[TestCase("LK", "09112")]
+		[TestCase("LK", "48221")]
+		[TestCase("LK", "54636")]
+		[TestCase("LK", "65050")]
+		[TestCase("LK", "70162")]
+		[TestCase("LK", "81271")]
+		[TestCase("LK", "92686")]
+		// Tests patterns that should be valid for Liberia (LR).
+		[TestCase("LR", "0123")]
+		[TestCase("LR", "1234")]
+		[TestCase("LR", "2000")]
+		[TestCase("LR", "3248")]
+		[TestCase("LR", "4945")]
+		[TestCase("LR", "5640")]
+		[TestCase("LR", "6208")]
+		[TestCase("LR", "7645")]
+		[TestCase("LR", "6752")]
+		[TestCase("LR", "8782")]
+		[TestCase("LR", "9999")]
+		// Tests patterns that should be valid for Lesotho (LS).
+		[TestCase("LS", "000")]
+		[TestCase("LS", "015")]
+		[TestCase("LS", "126")]
+		[TestCase("LS", "204")]
+		[TestCase("LS", "328")]
+		[TestCase("LS", "405")]
+		[TestCase("LS", "560")]
+		[TestCase("LS", "628")]
+		[TestCase("LS", "765")]
+		[TestCase("LS", "672")]
+		[TestCase("LS", "872")]
+		[TestCase("LS", "999")]
+		// Tests patterns that should be valid for Lithuania (LT).
+		[TestCase("LT", "21499")]
+		[TestCase("LT", "01499")]
+		[TestCase("LT", "lT-31499")]
+		[TestCase("LT", "LT-01499")]
+		[TestCase("LT", "lt81499")]
+		[TestCase("LT", "LT71499")]
+		[TestCase("LT", "LT56990")]
+		// Tests patterns that should be valid for Luxembourg (LU).
+		[TestCase("LU", "0123")]
+		[TestCase("LU", "1234")]
+		[TestCase("LU", "2000")]
+		[TestCase("LU", "3248")]
+		[TestCase("LU", "4945")]
+		[TestCase("LU", "5640")]
+		[TestCase("LU", "6208")]
+		[TestCase("LU", "7645")]
+		[TestCase("LU", "6752")]
+		[TestCase("LU", "8782")]
+		[TestCase("LU", "9999")]
+		// Tests patterns that should be valid for Latvia (LV).
+		[TestCase("LV", "0123")]
+		[TestCase("LV", "1234")]
+		[TestCase("LV", "2000")]
+		[TestCase("LV", "3248")]
+		[TestCase("LV", "4945")]
+		[TestCase("LV", "5640")]
+		[TestCase("LV", "6208")]
+		[TestCase("LV", "7645")]
+		[TestCase("LV", "6752")]
+		[TestCase("LV", "8782")]
+		[TestCase("LV", "9999")]
+		// Tests patterns that should be valid for Libya (LY).
+		[TestCase("LY", "00000")]
+		[TestCase("LY", "01235")]
+		[TestCase("LY", "12346")]
+		[TestCase("LY", "20004")]
+		[TestCase("LY", "32648")]
+		[TestCase("LY", "40945")]
+		[TestCase("LY", "56640")]
+		[TestCase("LY", "62908")]
+		[TestCase("LY", "76345")]
+		[TestCase("LY", "67552")]
+		[TestCase("LY", "87182")]
+		[TestCase("LY", "99999")]
+		// Tests patterns that should be valid for Morocco (MA).
+		[TestCase("MA", "11 302")]
+		[TestCase("MA", "24 023")]
+		[TestCase("MA", "45001")]
+		[TestCase("MA", "89607")]
+		[TestCase("MA", "86096")]
+		[TestCase("MA", "85808")]
+		// Tests patterns that should be valid for Monaco (MC).
+		[TestCase("MC", "MC-98000")]
+		[TestCase("MC", "MC-98012")]
+		[TestCase("MC", "MC 98023")]
+		[TestCase("MC", "mc98089")]
+		[TestCase("MC", "MC98099")]
+		[TestCase("MC", "Mc98077")]
+		[TestCase("MC", "mC98066")]
+		[TestCase("MC", "98089")]
+		[TestCase("MC", "98099")]
+		[TestCase("MC", "98077")]
+		[TestCase("MC", "98066")]
+		// Tests patterns that should be valid for Moldova (MD).
+		[TestCase("MD", "1499")]
+		[TestCase("MD", "md-1499")]
+		[TestCase("MD", "MD-1499")]
+		[TestCase("MD", "md1499")]
+		[TestCase("MD", "MD0499")]
+		[TestCase("MD", "MD0099")]
+		[TestCase("MD", "mD6990")]
+		[TestCase("MD", "0123")]
+		[TestCase("MD", "1234")]
+		[TestCase("MD", "2000")]
+		[TestCase("MD", "3248")]
+		[TestCase("MD", "4945")]
+		[TestCase("MD", "5640")]
+		[TestCase("MD", "6208")]
+		[TestCase("MD", "7645")]
+		[TestCase("MD", "6752")]
+		[TestCase("MD", "8782")]
+		[TestCase("MD", "9999")]
+		// Tests patterns that should be valid for Montenegro (ME).
+		[TestCase("ME", "81302")]
+		[TestCase("ME", "84023")]
+		[TestCase("ME", "85001")]
+		[TestCase("ME", "81607")]
+		[TestCase("ME", "84096")]
+		[TestCase("ME", "85808")]
+		// Tests patterns that should be valid for Saint Martin (MF).
+		[TestCase("MF", "97800")]
+		[TestCase("MF", "97805")]
+		[TestCase("MF", "97816")]
+		[TestCase("MF", "97824")]
+		[TestCase("MF", "97838")]
+		[TestCase("MF", "97845")]
+		[TestCase("MF", "97850")]
+		[TestCase("MF", "97868")]
+		[TestCase("MF", "97875")]
+		[TestCase("MF", "97862")]
+		[TestCase("MF", "97882")]
+		[TestCase("MF", "97899")]
+		// Tests patterns that should be valid for Madagascar (MG).
+		[TestCase("MG", "000")]
+		[TestCase("MG", "015")]
+		[TestCase("MG", "126")]
+		[TestCase("MG", "204")]
+		[TestCase("MG", "328")]
+		[TestCase("MG", "405")]
+		[TestCase("MG", "560")]
+		[TestCase("MG", "628")]
+		[TestCase("MG", "765")]
+		[TestCase("MG", "672")]
+		[TestCase("MG", "872")]
+		[TestCase("MG", "999")]
+		// Tests patterns that should be valid for Marshall Islands (MH).
+		[TestCase("MH", "96960")]
+		[TestCase("MH", "96960")]
+		[TestCase("MH", "96961")]
+		[TestCase("MH", "96962")]
+		[TestCase("MH", "96963")]
+		[TestCase("MH", "96964")]
+		[TestCase("MH", "96965")]
+		[TestCase("MH", "96976")]
+		[TestCase("MH", "96977")]
+		[TestCase("MH", "96976")]
+		[TestCase("MH", "96978")]
+		[TestCase("MH", "96979")]
+		[TestCase("MH", "96970")]
+		[TestCase("MH", "969600000")]
+		[TestCase("MH", "969604423")]
+		[TestCase("MH", "969612534")]
+		[TestCase("MH", "969627700")]
+		[TestCase("MH", "969633364")]
+		[TestCase("MH", "969648794")]
+		[TestCase("MH", "969657364")]
+		[TestCase("MH", "969762690")]
+		[TestCase("MH", "969771434")]
+		[TestCase("MH", "969767855")]
+		[TestCase("MH", "969782918")]
+		[TestCase("MH", "969799999")]
+		[TestCase("MH", "969700000")]
+		// Tests patterns that should be valid for Macedonia (MK).
+		[TestCase("MK", "0123")]
+		[TestCase("MK", "1234")]
+		[TestCase("MK", "2000")]
+		[TestCase("MK", "3248")]
+		[TestCase("MK", "4945")]
+		[TestCase("MK", "5640")]
+		[TestCase("MK", "6208")]
+		[TestCase("MK", "7645")]
+		[TestCase("MK", "6752")]
+		[TestCase("MK", "8782")]
+		[TestCase("MK", "9999")]
+		// Tests patterns that should be valid for Myanmar (MM).
+		[TestCase("MM", "00000")]
+		[TestCase("MM", "01235")]
+		[TestCase("MM", "12346")]
+		[TestCase("MM", "20004")]
+		[TestCase("MM", "32648")]
+		[TestCase("MM", "40945")]
+		[TestCase("MM", "56640")]
+		[TestCase("MM", "62908")]
+		[TestCase("MM", "76345")]
+		[TestCase("MM", "67552")]
+		[TestCase("MM", "87182")]
+		[TestCase("MM", "99999")]
+		// Tests patterns that should be valid for Mongolia (MN).
+		[TestCase("MN", "00000")]
+		[TestCase("MN", "01235")]
+		[TestCase("MN", "12346")]
+		[TestCase("MN", "20004")]
+		[TestCase("MN", "32648")]
+		[TestCase("MN", "40945")]
+		[TestCase("MN", "56640")]
+		[TestCase("MN", "62908")]
+		[TestCase("MN", "76345")]
+		[TestCase("MN", "67552")]
+		[TestCase("MN", "87182")]
+		[TestCase("MN", "99999")]
+		// Tests patterns that should be valid for Northern Mariana Islands (MP).
+		[TestCase("MP", "96950")]
+		[TestCase("MP", "96951")]
+		[TestCase("MP", "96952")]
+		[TestCase("MP", "969500000")]
+		[TestCase("MP", "969500143")]
+		[TestCase("MP", "969501254")]
+		[TestCase("MP", "969502070")]
+		[TestCase("MP", "969513234")]
+		[TestCase("MP", "969514074")]
+		[TestCase("MP", "969515634")]
+		[TestCase("MP", "969516260")]
+		[TestCase("MP", "969527644")]
+		[TestCase("MP", "969526785")]
+		[TestCase("MP", "969528798")]
+		[TestCase("MP", "969529999")]
+		// Tests patterns that should be valid for Martinique (MQ).
+		[TestCase("MQ", "97200")]
+		[TestCase("MQ", "97201")]
+		[TestCase("MQ", "97212")]
+		[TestCase("MQ", "97220")]
+		[TestCase("MQ", "97232")]
+		[TestCase("MQ", "97240")]
+		[TestCase("MQ", "97256")]
+		[TestCase("MQ", "97262")]
+		[TestCase("MQ", "97276")]
+		[TestCase("MQ", "97267")]
+		[TestCase("MQ", "97287")]
+		[TestCase("MQ", "97299")]
+		// Tests patterns that should be valid for Malta (MT).
+		[TestCase("MT", "AAA0000")]
+		[TestCase("MT", "ASD0132")]
+		[TestCase("MT", "BJR1243")]
+		[TestCase("MT", "CDW2004")]
+		[TestCase("MT", "DES3247")]
+		[TestCase("MT", "EOP4047")]
+		[TestCase("MT", "FNK5645")]
+		[TestCase("MT", "GFL6208")]
+		[TestCase("MT", "HLJ7649")]
+		[TestCase("MT", "IDM6750")]
+		[TestCase("MT", "JSD8783")]
+		[TestCase("MT", "KNJ9999")]
+		[TestCase("MT", "LOD0000")]
+		[TestCase("MT", "MED0132")]
+		[TestCase("MT", "NNR1243")]
+		[TestCase("MT", "OLW2004")]
+		[TestCase("MT", "PSS3247")]
+		[TestCase("MT", "QDP4047")]
+		[TestCase("MT", "RNK5645")]
+		[TestCase("MT", "SEL6208")]
+		[TestCase("MT", "TMJ7649")]
+		[TestCase("MT", "UFM6750")]
+		[TestCase("MT", "VED8783")]
+		[TestCase("MT", "WLJ9999")]
+		[TestCase("MT", "XMD0000")]
+		[TestCase("MT", "YED0132")]
+		[TestCase("MT", "ZLR1243")]
+		[TestCase("MT", "ZZZ9999")]
+		// Tests patterns that should be valid for Mexico (MX).
+		[TestCase("MX", "09302")]
+		[TestCase("MX", "10023")]
+		[TestCase("MX", "31001")]
+		[TestCase("MX", "42007")]
+		[TestCase("MX", "54006")]
+		[TestCase("MX", "61008")]
+		// Tests patterns that should be valid for Malaysia (MY).
+		[TestCase("MY", "10023")]
+		[TestCase("MY", "31001")]
+		[TestCase("MY", "42007")]
+		[TestCase("MY", "54006")]
+		[TestCase("MY", "61008")]
+		// Tests patterns that should be valid for Mozambique (MZ).
+		[TestCase("MZ", "0123")]
+		[TestCase("MZ", "1234")]
+		[TestCase("MZ", "2000")]
+		[TestCase("MZ", "3248")]
+		[TestCase("MZ", "4945")]
+		[TestCase("MZ", "5640")]
+		[TestCase("MZ", "6208")]
+		[TestCase("MZ", "7645")]
+		[TestCase("MZ", "6752")]
+		[TestCase("MZ", "8782")]
+		[TestCase("MZ", "9999")]
+		// Tests patterns that should be valid for Namibia (NA).
+		[TestCase("NA", "90000")]
+		[TestCase("NA", "90015")]
+		[TestCase("NA", "90126")]
+		[TestCase("NA", "90204")]
+		[TestCase("NA", "91328")]
+		[TestCase("NA", "91405")]
+		[TestCase("NA", "91560")]
+		[TestCase("NA", "91628")]
+		[TestCase("NA", "92765")]
+		[TestCase("NA", "92672")]
+		[TestCase("NA", "92872")]
+		[TestCase("NA", "92999")]
+		// Tests patterns that should be valid for New Caledonia (NC).
+		[TestCase("NC", "98800")]
+		[TestCase("NC", "98802")]
+		[TestCase("NC", "98813")]
+		[TestCase("NC", "98820")]
+		[TestCase("NC", "98836")]
+		[TestCase("NC", "98884")]
+		[TestCase("NC", "98895")]
+		[TestCase("NC", "98896")]
+		[TestCase("NC", "98897")]
+		[TestCase("NC", "98896")]
+		[TestCase("NC", "98898")]
+		[TestCase("NC", "98899")]
+		// Tests patterns that should be valid for Niger (NE).
+		[TestCase("NE", "0123")]
+		[TestCase("NE", "1234")]
+		[TestCase("NE", "2000")]
+		[TestCase("NE", "3248")]
+		[TestCase("NE", "4945")]
+		[TestCase("NE", "5640")]
+		[TestCase("NE", "6208")]
+		[TestCase("NE", "7645")]
+		[TestCase("NE", "6752")]
+		[TestCase("NE", "8782")]
+		[TestCase("NE", "9999")]
+		// Tests patterns that should be valid for Norfolk Island (NF).
+		[TestCase("NF", "0123")]
+		[TestCase("NF", "1234")]
+		[TestCase("NF", "2000")]
+		[TestCase("NF", "3248")]
+		[TestCase("NF", "4945")]
+		[TestCase("NF", "5640")]
+		[TestCase("NF", "6208")]
+		[TestCase("NF", "7645")]
+		[TestCase("NF", "6752")]
+		[TestCase("NF", "8782")]
+		[TestCase("NF", "9999")]
+		// Tests patterns that should be valid for Nigeria (NG).
+		[TestCase("NG", "009999")]
+		[TestCase("NG", "018010")]
+		[TestCase("NG", "110000")]
+		[TestCase("NG", "342600")]
+		[TestCase("NG", "810185")]
+		[TestCase("NG", "810185")]
+		// Tests patterns that should be valid for Nicaragua (NI).
+		[TestCase("NI", "00000")]
+		[TestCase("NI", "01235")]
+		[TestCase("NI", "12346")]
+		[TestCase("NI", "20004")]
+		[TestCase("NI", "32648")]
+		[TestCase("NI", "40945")]
+		[TestCase("NI", "56640")]
+		[TestCase("NI", "62908")]
+		[TestCase("NI", "76345")]
+		[TestCase("NI", "67552")]
+		[TestCase("NI", "87182")]
+		[TestCase("NI", "99999")]
+		// Tests patterns that should be valid for Netherlands (NL).
+		[TestCase("NL", "1236RF")]
+		[TestCase("NL", "2044WK")]
+		[TestCase("NL", "4075PJ")]
+		[TestCase("NL", "5650KF")]
+		[TestCase("NL", "6288LS")]
+		[TestCase("NL", "7695JD")]
+		[TestCase("NL", "6702MO")]
+		[TestCase("NL", "8732DF")]
+		[TestCase("NL", "9999JS")]
+		[TestCase("NL", "2331 PS")]
+		// Tests patterns that should be valid for Norway (NO).
+		[TestCase("NO", "0912")]
+		[TestCase("NO", "0821")]
+		[TestCase("NO", "0666")]
+		[TestCase("NO", "0000")]
+		[TestCase("NO", "1000")]
+		[TestCase("NO", "2077")]
+		[TestCase("NO", "2650")]
+		[TestCase("NO", "4241")]
+		// Tests patterns that should be valid for Nepal (NP).
+		[TestCase("NP", "00000")]
+		[TestCase("NP", "01235")]
+		[TestCase("NP", "12346")]
+		[TestCase("NP", "20004")]
+		[TestCase("NP", "32648")]
+		[TestCase("NP", "40945")]
+		[TestCase("NP", "56640")]
+		[TestCase("NP", "62908")]
+		[TestCase("NP", "76345")]
+		[TestCase("NP", "67552")]
+		[TestCase("NP", "87182")]
+		[TestCase("NP", "99999")]
+		// Tests patterns that should be valid for New Zealand (NZ).
+		[TestCase("NZ", "0912")]
+		[TestCase("NZ", "0821")]
+		[TestCase("NZ", "0666")]
+		[TestCase("NZ", "0000")]
+		[TestCase("NZ", "1000")]
+		[TestCase("NZ", "2077")]
+		[TestCase("NZ", "2650")]
+		[TestCase("NZ", "4241")]
+		// Tests patterns that should be valid for Oman (OM).
+		[TestCase("OM", "000")]
+		[TestCase("OM", "015")]
+		[TestCase("OM", "126")]
+		[TestCase("OM", "204")]
+		[TestCase("OM", "328")]
+		[TestCase("OM", "405")]
+		[TestCase("OM", "560")]
+		[TestCase("OM", "628")]
+		[TestCase("OM", "765")]
+		[TestCase("OM", "672")]
+		[TestCase("OM", "872")]
+		[TestCase("OM", "999")]
+		// Tests patterns that should be valid for Panama (PA).
+		[TestCase("PA", "000000")]
+		[TestCase("PA", "023145")]
+		[TestCase("PA", "134256")]
+		[TestCase("PA", "200074")]
+		[TestCase("PA", "364238")]
+		[TestCase("PA", "494075")]
+		[TestCase("PA", "564630")]
+		[TestCase("PA", "690268")]
+		[TestCase("PA", "734645")]
+		[TestCase("PA", "655782")]
+		[TestCase("PA", "818792")]
+		[TestCase("PA", "999999")]
+		// Tests patterns that should be valid for Peru (PE).
+		[TestCase("PE", "00000")]
+		[TestCase("PE", "01235")]
+		[TestCase("PE", "12346")]
+		[TestCase("PE", "20004")]
+		[TestCase("PE", "32648")]
+		[TestCase("PE", "40945")]
+		[TestCase("PE", "56640")]
+		[TestCase("PE", "62908")]
+		[TestCase("PE", "76345")]
+		[TestCase("PE", "67552")]
+		[TestCase("PE", "87182")]
+		[TestCase("PE", "99999")]
+		// Tests patterns that should be valid for French Polynesia (PF).
+		[TestCase("PF", "98700")]
+		[TestCase("PF", "98725")]
+		[TestCase("PF", "98736")]
+		[TestCase("PF", "98704")]
+		[TestCase("PF", "98768")]
+		[TestCase("PF", "98795")]
+		[TestCase("PF", "98760")]
+		[TestCase("PF", "98798")]
+		[TestCase("PF", "98735")]
+		[TestCase("PF", "98752")]
+		[TestCase("PF", "98712")]
+		[TestCase("PF", "98799")]
+		// Tests patterns that should be valid for Papua New Guinea (PG).
+		[TestCase("PG", "000")]
+		[TestCase("PG", "015")]
+		[TestCase("PG", "126")]
+		[TestCase("PG", "204")]
+		[TestCase("PG", "328")]
+		[TestCase("PG", "405")]
+		[TestCase("PG", "560")]
+		[TestCase("PG", "628")]
+		[TestCase("PG", "765")]
+		[TestCase("PG", "672")]
+		[TestCase("PG", "872")]
+		[TestCase("PG", "999")]
+		// Tests patterns that should be valid for Philippines (PH).
+		[TestCase("PH", "0123")]
+		[TestCase("PH", "1234")]
+		[TestCase("PH", "2000")]
+		[TestCase("PH", "3248")]
+		[TestCase("PH", "4945")]
+		[TestCase("PH", "5640")]
+		[TestCase("PH", "6208")]
+		[TestCase("PH", "7645")]
+		[TestCase("PH", "6752")]
+		[TestCase("PH", "8782")]
+		[TestCase("PH", "9999")]
+		// Tests patterns that should be valid for Pakistan (PK).
+		[TestCase("PK", "11302")]
+		[TestCase("PK", "24023")]
+		[TestCase("PK", "45001")]
+		[TestCase("PK", "89607")]
+		[TestCase("PK", "86096")]
+		[TestCase("PK", "85808")]
+		// Tests patterns that should be valid for Poland (PL).
+		[TestCase("PL", "01302")]
+		[TestCase("PL", "11302")]
+		[TestCase("PL", "24023")]
+		[TestCase("PL", "45001")]
+		[TestCase("PL", "89607")]
+		[TestCase("PL", "86096")]
+		[TestCase("PL", "85808")]
+		[TestCase("PL", "06-096")]
+		[TestCase("PL", "85-808")]
+		// Tests patterns that should be valid for Saint Pierre And Miquelon (PM).
+		[TestCase("PM", "97500")]
+		// Tests patterns that should be valid for Pitcairn (PN).
+		[TestCase("PN", "PCRN1ZZ")]
+		// Tests patterns that should be valid for Puerto Rico (PR).
+		[TestCase("PR", "01302")]
+		[TestCase("PR", "00802")]
+		[TestCase("PR", "11302")]
+		[TestCase("PR", "24023")]
+		[TestCase("PR", "45001")]
+		[TestCase("PR", "89607")]
+		[TestCase("PR", "86096")]
+		[TestCase("PR", "85808")]
+		[TestCase("PR", "06096")]
+		[TestCase("PR", "85808")]
+		// Tests patterns that should be valid for Palestinian Territory (PS).
+		[TestCase("PS", "00000")]
+		[TestCase("PS", "01235")]
+		[TestCase("PS", "12346")]
+		[TestCase("PS", "20004")]
+		[TestCase("PS", "32648")]
+		[TestCase("PS", "40945")]
+		[TestCase("PS", "56640")]
+		[TestCase("PS", "62908")]
+		[TestCase("PS", "76345")]
+		[TestCase("PS", "67552")]
+		[TestCase("PS", "87182")]
+		[TestCase("PS", "99999")]
+		// Tests patterns that should be valid for Portugal (PT).
+		[TestCase("PT", "1282353")]
+		[TestCase("PT", "2037570")]
+		[TestCase("PT", "3243436")]
+		[TestCase("PT", "4008279")]
+		[TestCase("PT", "5697836")]
+		[TestCase("PT", "6282469")]
+		[TestCase("PT", "7611343")]
+		[TestCase("PT", "6767185")]
+		[TestCase("PT", "8752391")]
+		[TestCase("PT", "9999999")]
+		// Tests patterns that should be valid for Palau (PW).
+		[TestCase("PW", "96940")]
+		// Tests patterns that should be valid for Paraguay (PY).
+		[TestCase("PY", "0123")]
+		[TestCase("PY", "1234")]
+		[TestCase("PY", "2000")]
+		[TestCase("PY", "3248")]
+		[TestCase("PY", "4945")]
+		[TestCase("PY", "5640")]
+		[TestCase("PY", "6208")]
+		[TestCase("PY", "7645")]
+		[TestCase("PY", "6752")]
+		[TestCase("PY", "8782")]
+		[TestCase("PY", "9999")]
+		// Tests patterns that should be valid for Réunion (RE).
+		[TestCase("RE", "97400")]
+		[TestCase("RE", "97402")]
+		[TestCase("RE", "97413")]
+		[TestCase("RE", "97420")]
+		[TestCase("RE", "97436")]
+		[TestCase("RE", "97449")]
+		[TestCase("RE", "97456")]
+		[TestCase("RE", "97469")]
+		[TestCase("RE", "97473")]
+		[TestCase("RE", "97465")]
+		[TestCase("RE", "97481")]
+		[TestCase("RE", "97499")]
+		// Tests patterns that should be valid for Romania (RO).
+		[TestCase("RO", "018010")]
+		[TestCase("RO", "110000")]
+		[TestCase("RO", "342600")]
+		[TestCase("RO", "810185")]
+		[TestCase("RO", "810185")]
+		// Tests patterns that should be valid for Serbia (RS).
+		[TestCase("RS", "10070")]
+		[TestCase("RS", "20767")]
+		[TestCase("RS", "26560")]
+		[TestCase("RS", "32451")]
+		// Tests patterns that should be valid for Russian Federation (RU).
+		[TestCase("RU", "110000")]
+		[TestCase("RU", "342600")]
+		[TestCase("RU", "610185")]
+		[TestCase("RU", "410185")]
+		// Tests patterns that should be valid for Saudi Arabia (SA).
+		[TestCase("SA", "00000")]
+		[TestCase("SA", "03145")]
+		[TestCase("SA", "14256")]
+		[TestCase("SA", "20074")]
+		[TestCase("SA", "34238")]
+		[TestCase("SA", "44075")]
+		[TestCase("SA", "54630")]
+		[TestCase("SA", "60268")]
+		[TestCase("SA", "74645")]
+		[TestCase("SA", "65782")]
+		[TestCase("SA", "88792")]
+		[TestCase("SA", "99999")]
+		[TestCase("SA", "000000000")]
+		[TestCase("SA", "031452003")]
+		[TestCase("SA", "142563114")]
+		[TestCase("SA", "200740220")]
+		[TestCase("SA", "342386334")]
+		[TestCase("SA", "440759444")]
+		[TestCase("SA", "546306554")]
+		[TestCase("SA", "602689660")]
+		[TestCase("SA", "746453774")]
+		[TestCase("SA", "657825665")]
+		[TestCase("SA", "887921888")]
+		[TestCase("SA", "999999999")]
+		// Tests patterns that should be valid for Sudan (SD).
+		[TestCase("SD", "00000")]
+		[TestCase("SD", "03145")]
+		[TestCase("SD", "14256")]
+		[TestCase("SD", "20074")]
+		[TestCase("SD", "34238")]
+		[TestCase("SD", "44075")]
+		[TestCase("SD", "54630")]
+		[TestCase("SD", "60268")]
+		[TestCase("SD", "74645")]
+		[TestCase("SD", "65782")]
+		[TestCase("SD", "88792")]
+		[TestCase("SD", "99999")]
+		// Tests patterns that should be valid for Sweden (SE).
+		[TestCase("SE", "10000")]
+		[TestCase("SE", "10070")]
+		[TestCase("SE", "20767")]
+		[TestCase("SE", "86560")]
+		[TestCase("SE", "32451")]
+		[TestCase("SE", "99112")]
+		[TestCase("SE", "482 21")]
+		[TestCase("SE", "546 36")]
+		[TestCase("SE", "650 50")]
+		[TestCase("SE", "701 62")]
+		[TestCase("SE", "812 71")]
+		[TestCase("SE", "926 86")]
+		// Tests patterns that should be valid for Singapore (SG).
+		[TestCase("SG", "11000")]
+		[TestCase("SG", "34600")]
+		[TestCase("SG", "61185")]
+		[TestCase("SG", "41185")]
+		[TestCase("SG", "00999")]
+		[TestCase("SG", "01010")]
+		[TestCase("SG", "71185")]
+		[TestCase("SG", "81185")]
+		[TestCase("SG", "91185")]
+		// Tests patterns that should be valid for Saint Helena (SH).
+		[TestCase("SH", "STHL1ZZ")]
+		// Tests patterns that should be valid for Slovenia (SI).
+		[TestCase("SI", "0123")]
+		[TestCase("SI", "1234")]
+		[TestCase("SI", "2000")]
+		[TestCase("SI", "3248")]
+		[TestCase("SI", "4945")]
+		[TestCase("SI", "5640")]
+		[TestCase("SI", "6208")]
+		[TestCase("SI", "7645")]
+		[TestCase("SI", "6752")]
+		[TestCase("SI", "8782")]
+		[TestCase("SI", "9999")]
+		// Tests patterns that should be valid for Slovakia (SK).
+		[TestCase("SK", "10070")]
+		[TestCase("SK", "20767")]
+		[TestCase("SK", "26560")]
+		[TestCase("SK", "32451")]
+		[TestCase("SK", "09112")]
+		[TestCase("SK", "48221")]
+		[TestCase("SK", "546 36")]
+		[TestCase("SK", "650 50")]
+		[TestCase("SK", "701 62")]
+		[TestCase("SK", "812 71")]
+		[TestCase("SK", "926 86")]
+		// Tests patterns that should be valid for San Marino (SM).
+		[TestCase("SM", "47890")]
+		[TestCase("SM", "47891")]
+		[TestCase("SM", "47892")]
+		[TestCase("SM", "47895")]
+		[TestCase("SM", "47899")]
+		// Tests patterns that should be valid for Senegal (SN).
+		[TestCase("SN", "00000")]
+		[TestCase("SN", "01235")]
+		[TestCase("SN", "12346")]
+		[TestCase("SN", "20004")]
+		[TestCase("SN", "32648")]
+		[TestCase("SN", "40945")]
+		[TestCase("SN", "56640")]
+		[TestCase("SN", "62908")]
+		[TestCase("SN", "76345")]
+		[TestCase("SN", "67552")]
+		[TestCase("SN", "87182")]
+		[TestCase("SN", "99999")]
+		// Tests patterns that should be valid for El Salvador (SV).
+		[TestCase("SV", "01101")]
+		// Tests patterns that should be valid for Swaziland (SZ).
+		[TestCase("SZ", "H761")]
+		[TestCase("SZ", "L000")]
+		[TestCase("SZ", "M014")]
+		[TestCase("SZ", "S628")]
+		[TestCase("SZ", "H611")]
+		[TestCase("SZ", "L760")]
+		[TestCase("SZ", "M754")]
+		[TestCase("SZ", "S998")]
+		[TestCase("SZ", "H000")]
+		[TestCase("SZ", "L023")]
+		[TestCase("SZ", "M182")]
+		[TestCase("SZ", "S282")]
+		// Tests patterns that should be valid for Turks And Caicos Islands (TC).
+		[TestCase("TC", "TKCA1ZZ")]
+		// Tests patterns that should be valid for Chad (TD).
+		[TestCase("TD", "00000")]
+		[TestCase("TD", "01235")]
+		[TestCase("TD", "12346")]
+		[TestCase("TD", "20004")]
+		[TestCase("TD", "32648")]
+		[TestCase("TD", "40945")]
+		[TestCase("TD", "56640")]
+		[TestCase("TD", "62908")]
+		[TestCase("TD", "76345")]
+		[TestCase("TD", "67552")]
+		[TestCase("TD", "87182")]
+		[TestCase("TD", "99999")]
+		// Tests patterns that should be valid for Thailand (TH).
+		[TestCase("TH", "10023")]
+		[TestCase("TH", "31001")]
+		[TestCase("TH", "42007")]
+		[TestCase("TH", "54006")]
+		[TestCase("TH", "61008")]
+		// Tests patterns that should be valid for Tajikistan (TJ).
+		[TestCase("TJ", "000000")]
+		[TestCase("TJ", "023145")]
+		[TestCase("TJ", "134256")]
+		[TestCase("TJ", "200074")]
+		[TestCase("TJ", "364238")]
+		[TestCase("TJ", "494075")]
+		[TestCase("TJ", "564630")]
+		[TestCase("TJ", "690268")]
+		[TestCase("TJ", "734645")]
+		[TestCase("TJ", "655782")]
+		[TestCase("TJ", "818792")]
+		[TestCase("TJ", "999999")]
+		// Tests patterns that should be valid for Turkmenistan (TM).
+		[TestCase("TM", "000000")]
+		[TestCase("TM", "023145")]
+		[TestCase("TM", "134256")]
+		[TestCase("TM", "200074")]
+		[TestCase("TM", "364238")]
+		[TestCase("TM", "494075")]
+		[TestCase("TM", "564630")]
+		[TestCase("TM", "690268")]
+		[TestCase("TM", "734645")]
+		[TestCase("TM", "655782")]
+		[TestCase("TM", "818792")]
+		[TestCase("TM", "999999")]
+		// Tests patterns that should be valid for Tunisia (TN).
+		[TestCase("TN", "0123")]
+		[TestCase("TN", "1234")]
+		[TestCase("TN", "2000")]
+		[TestCase("TN", "3248")]
+		[TestCase("TN", "4945")]
+		[TestCase("TN", "5640")]
+		[TestCase("TN", "6208")]
+		[TestCase("TN", "7645")]
+		[TestCase("TN", "6752")]
+		[TestCase("TN", "8782")]
+		[TestCase("TN", "9999")]
+		// Tests patterns that should be valid for Turkey (TR).
+		[TestCase("TR", "01302")]
+		[TestCase("TR", "08302")]
+		[TestCase("TR", "10023")]
+		[TestCase("TR", "31001")]
+		[TestCase("TR", "42007")]
+		[TestCase("TR", "74006")]
+		[TestCase("TR", "91008")]
+		// Tests patterns that should be valid for Trinidad And Tobago (TT).
+		[TestCase("TT", "000000")]
+		[TestCase("TT", "023145")]
+		[TestCase("TT", "134256")]
+		[TestCase("TT", "200074")]
+		[TestCase("TT", "364238")]
+		[TestCase("TT", "494075")]
+		[TestCase("TT", "564630")]
+		[TestCase("TT", "690268")]
+		[TestCase("TT", "734645")]
+		[TestCase("TT", "655782")]
+		[TestCase("TT", "818792")]
+		[TestCase("TT", "999999")]
+		// Tests patterns that should be valid for Taiwan (TW).
+		[TestCase("TW", "10023")]
+		[TestCase("TW", "31001")]
+		[TestCase("TW", "42007")]
+		[TestCase("TW", "54006")]
+		[TestCase("TW", "61008")]
+		[TestCase("TW", "91008")]
+		// Tests patterns that should be valid for Ukraine (UA).
+		[TestCase("UA", "01235")]
+		[TestCase("UA", "12346")]
+		[TestCase("UA", "20004")]
+		[TestCase("UA", "32648")]
+		[TestCase("UA", "40945")]
+		[TestCase("UA", "56640")]
+		[TestCase("UA", "62908")]
+		[TestCase("UA", "76345")]
+		[TestCase("UA", "67552")]
+		[TestCase("UA", "87182")]
+		[TestCase("UA", "99999")]
+		// Tests patterns that should be valid for United States (US).
+		[TestCase("US", "01000-0060")]
+		[TestCase("US", "11000-9996")]
+		[TestCase("US", "00126")]
+		[TestCase("US", "12345")]
+		// Tests patterns that should be valid for Uruguay (UY).
+		[TestCase("UY", "00000")]
+		[TestCase("UY", "01235")]
+		[TestCase("UY", "12346")]
+		[TestCase("UY", "20004")]
+		[TestCase("UY", "32648")]
+		[TestCase("UY", "40945")]
+		[TestCase("UY", "56640")]
+		[TestCase("UY", "62908")]
+		[TestCase("UY", "76345")]
+		[TestCase("UY", "67552")]
+		[TestCase("UY", "87182")]
+		[TestCase("UY", "99999")]
+		// Tests patterns that should be valid for Holy See (VA).
+		[TestCase("VA", "00120")]
+		// Tests patterns that should be valid for Saint Vincent And The Grenadines (VC).
+		[TestCase("VC", "0123")]
+		[TestCase("VC", "1234")]
+		[TestCase("VC", "2000")]
+		[TestCase("VC", "3248")]
+		[TestCase("VC", "4945")]
+		[TestCase("VC", "5640")]
+		[TestCase("VC", "6208")]
+		[TestCase("VC", "7645")]
+		[TestCase("VC", "6752")]
+		[TestCase("VC", "8782")]
+		[TestCase("VC", "9999")]
+		// Tests patterns that should be valid for Venezuela (VE).
+		[TestCase("VE", "0000")]
+		[TestCase("VE", "0123")]
+		[TestCase("VE", "1234")]
+		[TestCase("VE", "2000")]
+		[TestCase("VE", "3264")]
+		[TestCase("VE", "4094")]
+		[TestCase("VE", "5664")]
+		[TestCase("VE", "6290")]
+		[TestCase("VE", "7634")]
+		[TestCase("VE", "6755")]
+		[TestCase("VE", "8718")]
+		[TestCase("VE", "9999")]
+		[TestCase("VE", "0000A")]
+		[TestCase("VE", "0325A")]
+		[TestCase("VE", "1436B")]
+		[TestCase("VE", "2044C")]
+		[TestCase("VE", "3478D")]
+		[TestCase("VE", "4475E")]
+		[TestCase("VE", "5450F")]
+		[TestCase("VE", "6088G")]
+		[TestCase("VE", "7495H")]
+		[TestCase("VE", "6502I")]
+		[TestCase("VE", "8832J")]
+		[TestCase("VE", "9999K")]
+		[TestCase("VE", "0000L")]
+		[TestCase("VE", "0325M")]
+		[TestCase("VE", "1436N")]
+		[TestCase("VE", "2044O")]
+		[TestCase("VE", "3478P")]
+		[TestCase("VE", "4475Q")]
+		[TestCase("VE", "5450R")]
+		[TestCase("VE", "6088S")]
+		[TestCase("VE", "7495T")]
+		[TestCase("VE", "6502U")]
+		[TestCase("VE", "8832V")]
+		[TestCase("VE", "9999W")]
+		[TestCase("VE", "0000X")]
+		[TestCase("VE", "0325Y")]
+		[TestCase("VE", "1436Z")]
+		[TestCase("VE", "2044Z")]
+		// Tests patterns that should be valid for Virgin Islands (VG).
+		[TestCase("VG", "1103")]
+		[TestCase("VG", "1114")]
+		[TestCase("VG", "1120")]
+		[TestCase("VG", "1138")]
+		[TestCase("VG", "1145")]
+		[TestCase("VG", "1150")]
+		[TestCase("VG", "1168")]
+		[TestCase("VG", "1135")]
+		[TestCase("VG", "1162")]
+		[TestCase("VG", "VG1101")]
+		[TestCase("VG", "VG1112")]
+		[TestCase("VG", "VG1120")]
+		[TestCase("VG", "VG1132")]
+		[TestCase("VG", "VG1149")]
+		[TestCase("VG", "VG1156")]
+		[TestCase("VG", "VG1162")]
+		[TestCase("VG", "VG1106")]
+		[TestCase("VG", "VG1167")]
+		// Tests patterns that should be valid for Virgin Islands (VI).
+		[TestCase("VI", "00815")]
+		[TestCase("VI", "00826")]
+		[TestCase("VI", "00837")]
+		[TestCase("VI", "00846")]
+		[TestCase("VI", "00858")]
+		[TestCase("VI", "008152346")]
+		[TestCase("VI", "008260004")]
+		[TestCase("VI", "008372648")]
+		[TestCase("VI", "008460945")]
+		[TestCase("VI", "008586640")]
+		// Tests patterns that should be valid for Viet Nam (VN).
+		[TestCase("VN", "000000")]
+		[TestCase("VN", "023145")]
+		[TestCase("VN", "134256")]
+		[TestCase("VN", "200074")]
+		[TestCase("VN", "364238")]
+		[TestCase("VN", "494075")]
+		[TestCase("VN", "564630")]
+		[TestCase("VN", "690268")]
+		[TestCase("VN", "734645")]
+		[TestCase("VN", "655782")]
+		[TestCase("VN", "818792")]
+		[TestCase("VN", "999999")]
+		// Tests patterns that should be valid for Wallis And Futuna (WF).
+		[TestCase("WF", "98600")]
+		[TestCase("WF", "98617")]
+		[TestCase("WF", "98699")]
+		// Tests patterns that should be valid for Mayotte (YT).
+		[TestCase("YT", "97600")]
+		[TestCase("YT", "97605")]
+		[TestCase("YT", "97616")]
+		[TestCase("YT", "97624")]
+		[TestCase("YT", "97638")]
+		[TestCase("YT", "97645")]
+		[TestCase("YT", "97650")]
+		[TestCase("YT", "97668")]
+		[TestCase("YT", "97675")]
+		[TestCase("YT", "97662")]
+		[TestCase("YT", "97682")]
+		[TestCase("YT", "97699")]
+		// Tests patterns that should be valid for South Africa (ZA).
+		[TestCase("ZA", "0001")]
+		[TestCase("ZA", "0023")]
+		[TestCase("ZA", "0100")]
+		[TestCase("ZA", "1000")]
+		[TestCase("ZA", "2077")]
+		[TestCase("ZA", "2650")]
+		[TestCase("ZA", "4241")]
+		// Tests patterns that should be valid for Zambia (ZM).
+		[TestCase("ZM", "00000")]
+		[TestCase("ZM", "01235")]
+		[TestCase("ZM", "12346")]
+		[TestCase("ZM", "20004")]
+		[TestCase("ZM", "32648")]
+		[TestCase("ZM", "40945")]
+		[TestCase("ZM", "56640")]
+		[TestCase("ZM", "62908")]
+		[TestCase("ZM", "76345")]
+		[TestCase("ZM", "67552")]
+		[TestCase("ZM", "87182")]
+		[TestCase("ZM", "99999")]
+		public void IsValid(string countrycode, string postalcode)
+		{
+			var country = Country.Parse(countrycode);
+			IsValid(postalcode, country);
+		}
+
+		private static void IsValid(string postalcode, Country country)
+		{
+			Assert.IsTrue(PostalCode.IsValid(postalcode, country), "Postal code '{0}' should be valid for {1:f}.", postalcode, country);
 		}
 
 		#endregion
@@ -7278,10 +6048,6 @@ namespace Qowaiv.UnitTests
 
 		#endregion
 
-		private static void IsValid(string code, Country country)
-		{
-			Assert.IsTrue(PostalCode.IsValid(code, country), "Postal code '{0}' should be valid for {1:f}.", code, country);
-		}
 		private static void IsNotValid(string code, Country country)
 		{
 			Assert.IsFalse(PostalCode.IsValid(code, country), "Postal code '{0}' should be not valid for {1:f}.", code, country);

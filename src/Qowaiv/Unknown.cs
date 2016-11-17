@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -63,13 +62,13 @@ namespace Qowaiv
 		}
 
 		/// <summary>The resource manager managing the culture based string values.</summary>
-		private static Dictionary<CultureInfo, String[]> StringValues = new Dictionary<CultureInfo, String[]>()
+		private static Dictionary<CultureInfo, string[]> StringValues = new Dictionary<CultureInfo, string[]>()
 		{
-			{ CultureInfo.InvariantCulture, new string[]{ "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
+			{ CultureInfo.InvariantCulture, new []{ "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
 		};
 
 		/// <summary>The resource manager managing the culture based string values.</summary>
-		private static ResourceManager ResourceManager = new ResourceManager("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
+		private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
 
 		/// <summary>The locker for adding a culture.</summary>
 		private static volatile object locker = new object();

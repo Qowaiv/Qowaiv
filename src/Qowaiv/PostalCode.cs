@@ -22,7 +22,7 @@ namespace Qowaiv
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a postal code.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(PostalCodeTypeConverter))]
-	public struct PostalCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<PostalCode>
+	public struct PostalCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
 	{
 		/// <summary>Represents the pattern of a (potential) valid postal code.</summary>
 		public static readonly Regex Pattern = new Regex(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -249,7 +249,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is PostalCode && Equals((PostalCode)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="PostalCode"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="PostalCode"/> to compare with.</param>
+		public bool Equals(PostalCode other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this postal code.</summary>
 		/// <returns>

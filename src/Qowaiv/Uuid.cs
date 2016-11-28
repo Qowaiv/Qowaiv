@@ -28,7 +28,7 @@ namespace Qowaiv
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a GUID.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
 	[TypeConverter(typeof(UuidTypeConverter))]
-	public struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Uuid>
+	public struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
 	{
 		/// <summary>Represents the pattern of a (potential) valid GUID.</summary>
 		public static readonly Regex Pattern = new Regex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
@@ -256,7 +256,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Uuid && Equals((Uuid)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Uuid"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Uuid"/> to compare with.</param>
+		public bool Equals(Uuid other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this GUID.</summary>
 		/// <returns>

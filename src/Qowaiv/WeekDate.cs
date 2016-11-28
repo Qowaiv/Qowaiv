@@ -45,7 +45,7 @@ namespace Qowaiv
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
 	[TypeConverter(typeof(WeekDateTypeConverter))]
-	public struct WeekDate : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<WeekDate>
+	public struct WeekDate : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
 	{
 		/// <summary>Represents the pattern of a (potential) valid week date.</summary>
 		public static readonly Regex Pattern = new Regex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -344,7 +344,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is WeekDate && Equals((WeekDate)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="WeekDate"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="WeekDate"/> to compare with.</param>
+		public bool Equals(WeekDate other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this week date.</summary>
 		/// <returns>

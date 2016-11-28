@@ -35,7 +35,7 @@ namespace Qowaiv
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 	[TypeConverter(typeof(GenderTypeConverter))]
-	public struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Gender>
+	public struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
 	{
 		/// <summary>Represents an empty/not set Gender.</summary>
 		public static readonly Gender Empty;
@@ -302,7 +302,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Gender && Equals((Gender)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Gender"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Gender"/> to compare with.</param>
+		public bool Equals(Gender other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this Gender.</summary>
 		/// <returns>

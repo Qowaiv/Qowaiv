@@ -29,7 +29,7 @@ namespace Qowaiv.IO
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Int64))]
     [TypeConverter(typeof(StreamSizeTypeConverter))]
-    public struct StreamSize : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<StreamSize>
+    public struct StreamSize : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
     {
         /// <summary>Represents an empty/not set stream size.</summary>
         public static readonly StreamSize Zero;
@@ -603,7 +603,11 @@ namespace Qowaiv.IO
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) { return base.Equals(obj); }
+        public override bool Equals(object obj) { return obj is StreamSize && Equals((StreamSize)obj); }
+
+        /// <summary>Returns true if this instance and the other <see cref="StreamSize"/> are equal, otherwise false.</summary>
+        /// <param name="other">The <see cref="StreamSize"/> to compare with.</param>
+        public bool Equals(StreamSize other) { return m_Value == other.m_Value; }
 
         /// <summary>Returns the hash code for this stream size.</summary>
         /// <returns>

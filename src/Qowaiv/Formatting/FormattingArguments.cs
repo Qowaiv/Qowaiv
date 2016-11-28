@@ -130,7 +130,7 @@ namespace Qowaiv.Formatting
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return base.Equals(obj); }
 
 		/// <summary>Returns the hash code for this formatting arguments.</summary>
 		/// <returns>

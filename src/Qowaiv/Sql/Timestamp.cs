@@ -17,7 +17,7 @@ namespace Qowaiv.Sql
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(UInt64))]
 	[TypeConverter(typeof(TimestampTypeConverter))]
-	public struct Timestamp : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Timestamp>
+	public struct Timestamp : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
 	{
 		/// <summary>Gets the minimum value of a timestamp.</summary>
 		public static readonly Timestamp MinValue = UInt64.MinValue;
@@ -194,7 +194,11 @@ namespace Qowaiv.Sql
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Timestamp && Equals((Timestamp)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Timestamp"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Timestamp"/> to compare with.</param>
+		public bool Equals(Timestamp other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this timestamp.</summary>
 		/// <returns>

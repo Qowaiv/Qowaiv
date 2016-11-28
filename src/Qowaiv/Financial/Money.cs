@@ -18,7 +18,7 @@ namespace Qowaiv.Financial
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 	[TypeConverter(typeof(MoneyTypeConverter))]
-	public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Money>
+	public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
 	{
 		/// <summary>Represents an Amount of zero.</summary>
 		public static readonly Money Zero;
@@ -226,7 +226,11 @@ namespace Qowaiv.Financial
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Money && Equals((Money)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Money"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Money"/> to compare with.</param>
+		public bool Equals(Money other) { return m_Value == other.m_Value && m_Currency == other.m_Currency; }
 
 		/// <summary>Returns the hash code for this </summary>
 		/// <returns>

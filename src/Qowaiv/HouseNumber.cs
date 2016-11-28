@@ -19,7 +19,7 @@ namespace Qowaiv
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a house number.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Int32))]
 	[TypeConverter(typeof(HouseNumberTypeConverter))]
-	public struct HouseNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<HouseNumber>
+	public struct HouseNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
 	{
 		/// <summary>Represents the pattern of a (potential) valid house number.</summary>
 		public static readonly Regex Pattern = new Regex(@"^[1-9][0-9]{0,8}$", RegexOptions.Compiled);
@@ -249,7 +249,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is HouseNumber && Equals((HouseNumber)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="HouseNumber"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="HouseNumber"/> to compare with.</param>
+		public bool Equals(HouseNumber other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this house number.</summary>
 		/// <returns>

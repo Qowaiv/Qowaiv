@@ -20,7 +20,7 @@ namespace Qowaiv
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an email address.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(EmailAddressTypeConverter))]
-	public struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<EmailAddress>
+	public struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
 	{
 		/// <summary>Represents the pattern of a (potential) valid email address.</summary>
 		/// <remarks>
@@ -262,7 +262,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is EmailAddress && Equals((EmailAddress)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="EmailAddress"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="EmailAddress"/> to compare with.</param>
+		public bool Equals(EmailAddress other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this email address.</summary>
 		/// <returns>

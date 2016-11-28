@@ -18,7 +18,7 @@ namespace Qowaiv
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Decimal))]
 	[TypeConverter(typeof(PercentageTypeConverter))]
-	public struct Percentage : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Percentage>
+	public struct Percentage : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
 	{
 		/// <summary>The percentage mark (%).</summary>
 		public const string PercentageMark = "%";
@@ -603,7 +603,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Percentage && Equals((Percentage)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Percentage"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Percentage"/> to compare with.</param>
+		public bool Equals(Percentage other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this Percentage.</summary>
 		/// <returns>

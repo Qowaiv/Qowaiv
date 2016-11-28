@@ -29,7 +29,7 @@ namespace Qowaiv.Financial
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an IBAN.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
-	public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<InternationalBankAccountNumber>
+	public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 	{
 		/// <summary>Represents the pattern of a (potential) valid IBAN.</summary>
 		/// <remarks>
@@ -287,7 +287,11 @@ namespace Qowaiv.Financial
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is InternationalBankAccountNumber && Equals((InternationalBankAccountNumber)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="InternationalBankAccountNumber"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="InternationalBankAccountNumber"/> to compare with.</param>
+		public bool Equals(InternationalBankAccountNumber other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this IBAN.</summary>
 		/// <returns>

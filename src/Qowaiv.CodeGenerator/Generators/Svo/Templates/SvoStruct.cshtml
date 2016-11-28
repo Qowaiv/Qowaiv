@@ -20,7 +20,7 @@ namespace @Model.Namespace
     // [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for @Model.a @Model.ClassLongName.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(@Model.UnderlyingType.Name))]
     [TypeConverter(typeof(@(Model.ClassName)TypeConverter))]
-    public struct @Model.ClassName : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<@Model.ClassName>
+    public struct @Model.ClassName : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<@Model.ClassName>, IComparable, IComparable<@Model.ClassName>
     {
         /// <summary>Represents the pattern of a (potential) valid @Model.ClassLongName.</summary>
         public static readonly Regex Pattern = new Regex(@@"^ComplexRegexPattern.*$", RegexOptions.Compiled);
@@ -220,7 +220,11 @@ namespace @Model.Namespace
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) { return base.Equals(obj); }
+        public override bool Equals(object obj) { return obj is @Model.ClassName && Equals((@Model.ClassName)obj); }
+
+        /// <summary>Returns true if this instance and the other <see cref="@Model.ClassName" /> are equal, otherwise false.</summary>
+        /// <param name="other">The <see cref="@Model.ClassName" /> to compare with.</param>
+        public bool Equals(@Model.ClassName other) { return m_Value == other.m_Value; }
 
         /// <summary>Returns the hash code for this @Model.ClassLongName.</summary>
         /// <returns>

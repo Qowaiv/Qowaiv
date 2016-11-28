@@ -19,7 +19,7 @@ namespace Qowaiv
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 	[TypeConverter(typeof(DateTypeConverter))]
-	public struct Date : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Date>
+	public struct Date : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
 	{
 		private const string SerializableFormat = "yyyy-MM-dd";
 
@@ -475,7 +475,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Date && Equals((Date)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Date"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Date"/> to compare with.</param>
+		public bool Equals(Date other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this Date.</summary>
 		/// <returns>

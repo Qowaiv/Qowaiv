@@ -380,7 +380,7 @@ namespace Qowaiv.UnitTests.Financial
 		public void ToString_Empty_StringEmpty()
 		{
 			var act = Money.Zero.ToString();
-			var exp = " 0";
+			var exp = "0";
 			Assert.AreEqual(exp, act);
 		}
 

@@ -21,7 +21,7 @@ namespace Qowaiv
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a month.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Byte))]
 	[TypeConverter(typeof(MonthTypeConverter))]
-	public struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Month>
+	public struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
 	{
 		/// <summary>Represents the pattern of a (potential) valid month.</summary>
 		public static readonly Regex Pattern = new Regex(@"^(0?[1-9]|10|11|12)$", RegexOptions.Compiled);
@@ -303,7 +303,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Month && Equals((Month)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Month"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Month"/> to compare with.</param>
+		public bool Equals(Month other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this month.</summary>
 		/// <returns>

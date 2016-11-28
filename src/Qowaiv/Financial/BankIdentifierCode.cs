@@ -32,7 +32,7 @@ namespace Qowaiv.Financial
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a BIC.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(BankIdentifierCodeTypeConverter))]
-	public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<BankIdentifierCode>
+	public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BankIdentifierCode>, IComparable, IComparable<BankIdentifierCode>
 	{
 		/// <remarks>
 		/// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
@@ -252,7 +252,11 @@ namespace Qowaiv.Financial
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is BankIdentifierCode && Equals((BankIdentifierCode)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="BankIdentifierCode"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="BankIdentifierCode"/> to compare with.</param>
+		public bool Equals(BankIdentifierCode other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this BIC.</summary>
 		/// <returns>

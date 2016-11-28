@@ -49,7 +49,7 @@ namespace Qowaiv.Web
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an internet media type.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
 	[TypeConverter(typeof(InternetMediaTypeTypeConverter))]
-	public struct InternetMediaType : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<InternetMediaType>
+	public struct InternetMediaType : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
 	{
 		/// <summary>Represents the pattern of a (potential) valid internet media type.</summary>
 		public static readonly Regex Pattern = new Regex('^' + PatternTopLevel + '/' + PatternSubtype + PatternSuffix + '$', RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -315,7 +315,11 @@ namespace Qowaiv.Web
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is InternetMediaType && Equals((InternetMediaType)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="InternetMediaType"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="InternetMediaType"/> to compare with.</param>
+		public bool Equals(InternetMediaType other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this internet media type.</summary>
 		/// <returns>

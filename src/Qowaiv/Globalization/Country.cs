@@ -25,7 +25,7 @@ namespace Qowaiv.Globalization
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a ")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(CountryTypeConverter))]
-	public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Country>
+	public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
 	{
 		/// <summary>Represents an empty/not set </summary>
 		public static readonly Country Empty;
@@ -347,7 +347,11 @@ namespace Qowaiv.Globalization
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Country && Equals((Country)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Country"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Country"/> to compare with.</param>
+		public bool Equals(Country other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this </summary>
 		/// <returns>

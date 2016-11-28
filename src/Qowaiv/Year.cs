@@ -19,7 +19,7 @@ namespace Qowaiv
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a year.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Int16))]
 	[TypeConverter(typeof(YearTypeConverter))]
-	public struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Year>
+	public struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
 	{
 		/// <summary>Represents the pattern of a (potential) valid year.</summary>
 		public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
@@ -234,7 +234,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Year && Equals((Year)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Year"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Year"/> to compare with.</param>
+		public bool Equals(Year other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this year.</summary>
 		/// <returns>

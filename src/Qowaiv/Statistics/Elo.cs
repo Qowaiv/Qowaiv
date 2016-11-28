@@ -26,7 +26,7 @@ namespace Qowaiv.Statistics
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Double))]
 	[TypeConverter(typeof(EloTypeConverter))]
-	public struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<Elo>
+	public struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
 	{
 		/// <summary>Represents the zero value of an Elo.</summary>
 		public static readonly Elo Zero = new Elo() { m_Value = default(Double) };
@@ -281,7 +281,11 @@ namespace Qowaiv.Statistics
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Elo && Equals((Elo)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Elo"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Elo"/> to compare with.</param>
+		public bool Equals(Elo other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this Elo.</summary>
 		/// <returns>

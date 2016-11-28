@@ -34,7 +34,7 @@ namespace Qowaiv.Financial
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a currency.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 	[TypeConverter(typeof(CurrencyTypeConverter))]
-	public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IFormatProvider, IComparable, IComparable<Currency>
+	public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
 	{
 		/// <summary>Represents an empty/not set currency.</summary>
 		public static readonly Currency Empty;
@@ -350,7 +350,11 @@ namespace Qowaiv.Financial
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is Currency && Equals((Currency)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="Currency"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="Currency"/> to compare with.</param>
+		public bool Equals(Currency other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this currency.</summary>
 		/// <returns>

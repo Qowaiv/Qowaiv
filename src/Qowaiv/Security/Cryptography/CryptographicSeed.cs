@@ -19,7 +19,7 @@ namespace Qowaiv.Security.Cryptography
 	[SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a cryptographic seed.")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Byte[]))]
 	[TypeConverter(typeof(CryptographicSeedTypeConverter))]
-	public struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<CryptographicSeed>, IEquatable<CryptographicSeed>
+	public struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
 	{
 		/// <summary>Represents an empty/not set cryptographic seed.</summary>
 		public static readonly CryptographicSeed Empty;
@@ -200,6 +200,10 @@ namespace Qowaiv.Security.Cryptography
 
 		#region IEquatable
 
+		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
+		/// <param name="obj">An object to compare with.</param>
+		public override bool Equals(object obj) { return obj is CryptographicSeed && Equals((CryptographicSeed)obj); }
+
 		/// <summary>Returns true if this instance and the other cryptographic seed are equal, otherwise false.</summary>
 		/// <param name="other">The other cryptographic seed.</param>
 		public bool Equals(CryptographicSeed other)
@@ -213,14 +217,6 @@ namespace Qowaiv.Security.Cryptography
 				return true;
 			}
 			return false;
-		}
-
-		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj)
-		{
-			if (object.ReferenceEquals(obj, null) || !(obj is CryptographicSeed)) { return false; }
-			return Equals((CryptographicSeed)obj);
 		}
 
 		/// <summary>Returns the hash code for this cryptographic seed.</summary>

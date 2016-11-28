@@ -17,7 +17,7 @@ namespace Qowaiv
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
 	[TypeConverter(typeof(LocalDateTimeTypeConverter))]
-	public struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IComparable, IComparable<LocalDateTime>
+	public struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
 	{
 		private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
 
@@ -573,7 +573,11 @@ namespace Qowaiv
 
 		/// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
 		/// <param name="obj">An object to compare with.</param>
-		public override bool Equals(object obj) { return base.Equals(obj); }
+		public override bool Equals(object obj)  { return obj is LocalDateTime && Equals((LocalDateTime)obj); }
+
+		/// <summary>Returns true if this instance and the other <see cref="LocalDateTime"/> are equal, otherwise false.</summary>
+		/// <param name="other">The <see cref="LocalDateTime"/> to compare with.</param>
+		public bool Equals(LocalDateTime other) { return m_Value == other.m_Value; }
 
 		/// <summary>Returns the hash code for this local date time.</summary>
 		/// <returns>

@@ -14,9 +14,9 @@
 		<tags>qowaiv, domain model</tags>
 		@dependencies@
 	</metadata>
-  <files>
+	<files>
 	<file src="..\src\Qowaiv.TypeScript\**\*.ts" target="content" />
 	<file src="..\src\Qowaiv.TypeScript\**\*.js" target="content" />
 	<!--<file src="..\Qowaiv.license.txt" target="Qowaiv.license.txt"/>-->
-  </files>
+	</files>
 </package>

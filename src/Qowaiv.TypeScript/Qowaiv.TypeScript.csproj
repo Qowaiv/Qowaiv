@@ -15,11 +15,11 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="JavaScript\Qowaiv.min.js" />
     <Content Include="JavaScript\eq.js" />
-    <TypeScriptCompile Include="BankIdentifier.ts" />
     <TypeScriptCompile Include="Guid.ts" />
     <TypeScriptCompile Include="IFormattable.ts" />
     <TypeScriptCompile Include="IJsonStringifyable.ts" />

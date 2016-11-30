@@ -152,7 +152,7 @@
         /**
          * Creates a TimeSpan from a JSON string.
          * @param {string} s A string containing TimeSpan to convert.
-         * @return TimeSpan if valid, otherwise null.
+         * @returns TimeSpan if valid, otherwise null.
          */
         public static fromJSON(s: string): TimeSpan {
             return TimeSpan.parse(s);
@@ -162,8 +162,7 @@
         * representing the same value, otherwise false.
         */
         public equals(other: any): boolean {
-            return
-                other !== null &&
+            return other !== null &&
                 other !== undefined &&
                 other instanceof (TimeSpan) &&
                 other.v === this.v;
@@ -182,7 +181,7 @@
         /**
          * Creates a time span.
          * @param {string} s A string containing time span.
-         * @return A TimeSpan if valid, otherwise null.
+         * @returns A TimeSpan if valid, otherwise null.
          */
         public static parse(str: string): TimeSpan {
             if (TimeSpan.isValid(str)) {

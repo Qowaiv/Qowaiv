@@ -46,7 +46,7 @@
         /**
          * Creates a GUID from a JSON string.
          * @param {string} s A JSON string representing the GUID.
-         * @return A GUID if valid, otherwise null.
+         * @returns A GUID if valid, otherwise null.
          */
         public static fromJSON(s: string): Guid {
             return Guid.parse(s);
@@ -57,10 +57,9 @@
          * representing the same value, otherwise false.
          */
         public equals(other: any): boolean{
-            return 
-                other !== null &&
-                other !== undefined && 
-                other instanceof(Guid) &&
+            return other !== null &&
+                other !== undefined &&
+                other instanceof (Guid) &&
                 other.v === this.v;
         }
 
@@ -77,19 +76,19 @@
         /**
          * Creates a GUID.
          * @param {string} s A string containing GUID to convert or a number.
-         * @return A GUID if valid, otherwise null.
+         * @returns A GUID if valid, otherwise null.
          */
         public static parse(s: string): Guid {
             
             // an empty string should equal Guid.Empty.
             if (s === '') { return new Guid(); }
             
-            // if the value paramater is valid
+            // if the value parameter is valid
             if (Guid.isValid(s)) {
-                var val = new Guid();
+                var guid = new Guid();
                 s = s.replace(/-/g, '').toUpperCase();
-                val.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
-                return val;
+                guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
+                return guid;
             }
             
             // return null if creation failed.
@@ -98,7 +97,7 @@
 
         /**
          * Creates a GUID.
-         * @return A random GUID.
+         * @returns A random GUID.
          */
         public static newGuid(): Guid {
 
@@ -110,6 +109,7 @@
 
         /**
          * Creates random GUID blocks.
+         * @remarks called 4 times by Guid.newGuid().
          */
         private static rndGuid(s: boolean): string {
             var p = (Math.random().toString(16) + '000000000').substr(2, 8);

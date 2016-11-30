@@ -14,9 +14,9 @@
 		<tags>qowaiv, domain model</tags>
 		@dependencies@
 	</metadata>
-  <files>
+	<files>
 	<file src="..\release\lib\net45\Qowaiv.Json.Newtonsoft.dll" target="lib\net45\Qowaiv.Json.Newtonsoft.dll" />
 	<file src="..\release\lib\net45\Qowaiv.Json.Newtonsoft.pdb" target="lib\net45\Qowaiv.Json.Newtonsoft.pdb" />
 	<!--<file src="..\Qowaiv.license.txt" target="Qowaiv.license.txt"/>-->
-  </files>
+	</files>
 </package>

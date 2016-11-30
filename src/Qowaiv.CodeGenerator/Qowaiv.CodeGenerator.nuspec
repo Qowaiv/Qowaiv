@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-        <description>@description@</description>
-        <id>@project@</id>
-        <version>@build.number@</version>
-        <authors>@authors@</authors>
-        <language>en-US</language>
-        <summary>@summary@</summary>
-        <projectUrl>http://www.github.com/corniel/Qowaiv</projectUrl>
-        <licenseUrl>http://www.github.com/corniel/Qowaiv/blob/master/src/Qowaiv.license.txt</licenseUrl>
+		<metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+				<description>@description@</description>
+				<id>@project@</id>
+				<version>@build.number@</version>
+				<authors>@authors@</authors>
+				<language>en-US</language>
+				<summary>@summary@</summary>
+				<projectUrl>http://www.github.com/corniel/Qowaiv</projectUrl>
+				<licenseUrl>http://www.github.com/corniel/Qowaiv/blob/master/src/Qowaiv.license.txt</licenseUrl>
 		<iconUrl>https://raw.githubusercontent.com/Corniel/Qowaiv/master/design/qowain-logo_nuget_064x064.gif</iconUrl>
-        <releaseNotes>@releaseNotes@</releaseNotes>
-        <tags>qowaiv, domain model</tags>
-        @dependencies@
-    </metadata>
-  <files>
-    <file src="..\release\lib\net45\Qowaiv.CodeGenerator.exe" target="lib\net45\Qowaiv.CodeGenerator.exe" />
-    <file src="..\release\lib\net45\Qowaiv.CodeGenerator.exe.config" target="lib\net45\Qowaiv.CodeGenerator.exe.config" />
-    <file src="..\release\lib\net45\Qowaiv.CodeGenerator.xml" target="lib\net45\Qowaiv.CodeGenerator.xml" />
-    <file src="..\release\lib\net45\Qowaiv.CodeGenerator.pdb" target="lib\net45\Qowaiv.CodeGenerator.pdb" />
-    <!--<file src="..\Qowaiv.license.txt" target="Qowaiv.license.txt"/>-->
-  </files>
+				<releaseNotes>@releaseNotes@</releaseNotes>
+				<tags>qowaiv, domain model</tags>
+				@dependencies@
+		</metadata>
+	<files>
+		<file src="..\release\lib\net45\Qowaiv.CodeGenerator.exe" target="lib\net45\Qowaiv.CodeGenerator.exe" />
+		<file src="..\release\lib\net45\Qowaiv.CodeGenerator.exe.config" target="lib\net45\Qowaiv.CodeGenerator.exe.config" />
+		<file src="..\release\lib\net45\Qowaiv.CodeGenerator.xml" target="lib\net45\Qowaiv.CodeGenerator.xml" />
+		<file src="..\release\lib\net45\Qowaiv.CodeGenerator.pdb" target="lib\net45\Qowaiv.CodeGenerator.pdb" />
+		<!--<file src="..\Qowaiv.license.txt" target="Qowaiv.license.txt"/>-->
+	</files>
 </package>

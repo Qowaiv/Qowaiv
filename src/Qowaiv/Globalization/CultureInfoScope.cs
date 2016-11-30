@@ -59,7 +59,7 @@ namespace Qowaiv.Globalization
 		{
 			Guard.NotNull(culture, "culture");
 			Guard.NotNull(cultureUI, "cultureUI");
-			
+
 			Previous = Thread.CurrentThread.CurrentCulture;
 			PreviousUI = Thread.CurrentThread.CurrentUICulture;
 
@@ -70,9 +70,9 @@ namespace Qowaiv.Globalization
 		#endregion
 
 		/// <summary>Gets the previous Current UI Culture.</summary>
-		public CultureInfo PreviousUI { get;  }
+		public CultureInfo PreviousUI { get; private set; }
 		/// <summary>Gets the previous Current Culture.</summary>
-		public CultureInfo Previous { get;  }
+		public CultureInfo Previous { get; private set; }
 
 		/// <summary>Represents the CultureInfo scope as <see cref="string"/>.</summary>
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]

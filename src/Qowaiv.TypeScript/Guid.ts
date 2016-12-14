@@ -99,11 +99,22 @@
          * Creates a GUID.
          * @returns A random GUID.
          */
-        public static newGuid(): Guid {
+        public static newGuid(seed?: Guid): Guid {
 
             var guid = new Guid();
             guid.v = Guid.rndGuid(false) + Guid.rndGuid(true) + Guid.rndGuid(true) + Guid.rndGuid(false);
 
+            if (seed !== null)
+            {
+                var lookup = "0123456789ABCDEF";
+                var merged = "";
+                for (var i = 0; i < 36; i++) {
+                    var l = lookup.indexOf(seed.v.charAt(i));
+                    var r = lookup.indexOf(guid.v.charAt(i));
+                    merged += l === -1 || r === -1 ? guid.v.charAt(i) : lookup.charAt(l ^ r);
+                }
+                seed.v = merged;
+            }
             return guid;
         }
 

@@ -37,6 +37,25 @@ namespace Qowaiv.UnitTests
 			Assert.AreEqual(act, exp);
 		}
 
+		[Test]
+		public void Yesterday_None_EqualsDateTimeTodayMinus1()
+		{
+			var act = Date.Yesterday;
+			var exp = (Date)DateTime.Today.AddDays(-1);
+
+			Assert.AreEqual(act, exp);
+		}
+
+		[Test]
+		public void Tomorrow_None_EqualsDateTimeTodayPlus1()
+		{
+			var act = Date.Tomorrow;
+			var exp = (Date)DateTime.Today.AddDays(1);
+
+			Assert.AreEqual(act, exp);
+		}
+
+
 		#endregion
 
 		#region Constructor Tests

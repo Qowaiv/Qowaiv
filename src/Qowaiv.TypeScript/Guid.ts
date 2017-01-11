@@ -102,18 +102,22 @@
         public static newGuid(seed?: Guid): Guid {
 
             var guid = new Guid();
-            guid.v = Guid.rndGuid(false) + Guid.rndGuid(true) + Guid.rndGuid(true) + Guid.rndGuid(false);
+            guid.v = (
+                Guid.rndGuid(false) +
+                Guid.rndGuid(true) +
+                Guid.rndGuid(true) +
+                Guid.rndGuid(false)).toUpperCase();
 
-            if (seed !== null)
+            if (seed !== null && seed instanceof(Guid))
             {
-                var lookup = "0123456789ABCDEF";
-                var merged = "";
+                var lookup = '0123456789ABCDEF';
+                var merged = '';
                 for (var i = 0; i < 36; i++) {
                     var l = lookup.indexOf(seed.v.charAt(i));
                     var r = lookup.indexOf(guid.v.charAt(i));
                     merged += l === -1 || r === -1 ? guid.v.charAt(i) : lookup.charAt(l ^ r);
                 }
-                seed.v = merged;
+                guid.v = merged;
             }
             return guid;
         }
@@ -124,7 +128,7 @@
          */
         private static rndGuid(s: boolean): string {
             var p = (Math.random().toString(16) + '000000000').substr(2, 8);
-            return s ? "-" + p.substr(0, 4) + '-' + p.substr(4, 4) : p;
+            return s ? '-' + p.substr(0, 4) + '-' + p.substr(4, 4) : p;
         }
     }
 } 

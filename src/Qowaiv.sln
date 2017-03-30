@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv", "Qowaiv\Qowaiv.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator", "Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{E3DCEC1A-818F-4EF1-AECA-2E34E96B39FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.UnitTests", "Qowaiv.UnitTests\Qowaiv.UnitTests.csproj", "{D0233D1C-86A8-4229-907D-438537AF4372}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.UnitTests", "..\test\Qowaiv.UnitTests\Qowaiv.UnitTests.csproj", "{D0233D1C-86A8-4229-907D-438537AF4372}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4C3C9FF-4EED-41FE-8849-C896429254B5}"
 	ProjectSection(SolutionItems) = preProject
@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0
 		..\packages.config = ..\packages.config
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E8EB4E5F-5EA7-4AA2-A710-57A205717C76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{D0233D1C-86A8-4229-907D-438537AF4372} = {E8EB4E5F-5EA7-4AA2-A710-57A205717C76}
 		{5249CDC7-3F92-45B6-9328-627BC0C2441D} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{41C15FF1-5053-4D59-8314-B6E1CE89CDC1} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}

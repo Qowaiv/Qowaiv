@@ -1,84 +1,94 @@
-var Qowaiv;
+﻿var Qowaiv;
 (function (Qowaiv) {
     /**
-     * Represents a Globally unique identifier (GUID).
-     */
+    * Represents a Globally unique identifier (GUID).
+    */
     var Guid = (function () {
         /**
-         * @constructor
-         * @remarks It is the default constructor, for creating an actual GUID
-         *          you will normally use Guid.newGuid() or Guid.parse(string).
-         */
+        * @constructor
+        * @remarks It is the default constructor, for creating an actual GUID
+        *          you will normally use Guid.newGuid() or Guid.parse(string).
+        */
         function Guid() {
             /**
-             * The underlying value.
-             */
+            * The underlying value.
+            */
             this.v = '00000000-0000-0000-0000-000000000000';
         }
         /**
-         * Returns a string that represents the current GUID.
-         */
+        * Returns a string that represents the current GUID.
+        */
         Guid.prototype.toString = function () {
             return this.v;
         };
+
         /**
-         * Returns a string that represents the current GUID.
-         */
+        * Returns a string that represents the current GUID.
+        */
         Guid.prototype.format = function (f) {
             switch (f) {
-                case 'B': return '{' + this.v + '}';
-                case 'b': return '{' + this.v.toLowerCase() + '}';
-                case 'S': return this.v.replace(/-/g, '');
-                case 's': return this.v.replace(/-/g, '').toLowerCase();
-                case 'l': return this.v.toLowerCase();
+                case 'B':
+                    return '{' + this.v + '}';
+                case 'b':
+                    return '{' + this.v.toLowerCase() + '}';
+                case 'S':
+                    return this.v.replace(/-/g, '');
+                case 's':
+                    return this.v.replace(/-/g, '').toLowerCase();
+                case 'l':
+                    return this.v.toLowerCase();
                 case 'U':
                 case 'u':
-                default: return this.v;
+                default:
+                    return this.v;
             }
         };
+
         /**
-         * Returns a JSON representation of the GUID.
-         */
+        * Returns a JSON representation of the GUID.
+        */
         Guid.prototype.toJSON = function () {
             return this.v;
         };
+
         /**
-         * Creates a GUID from a JSON string.
-         * @param {string} s A JSON string representing the GUID.
-         * @returns A GUID if valid, otherwise null.
-         */
+        * Creates a GUID from a JSON string.
+        * @param {string} s A JSON string representing the GUID.
+        * @returns A GUID if valid, otherwise null.
+        */
         Guid.fromJSON = function (s) {
             return Guid.parse(s);
         };
+
         /**
-         * Returns true if other is not null or undefined and a GUID
-         * representing the same value, otherwise false.
-         */
+        * Returns true if other is not null or undefined and a GUID
+        * representing the same value, otherwise false.
+        */
         Guid.prototype.equals = function (other) {
-            return other !== null &&
-                other !== undefined &&
-                other instanceof (Guid) &&
-                other.v === this.v;
+            return other !== null && other !== undefined && other instanceof (Guid) && other.v === this.v;
         };
+
         /**
-         * Returns true if the val represents valid GUID, otherwise false.
-         * @param {string} s A string containing GUID.
-         * @remarks This method calls create(). It's of no use, to call isValid(),
-         *          to avoid a create() call.
-         */
+        * Returns true if the val represents valid GUID, otherwise false.
+        * @param {string} s A string containing GUID.
+        * @remarks This method calls create(). It's of no use, to call isValid(),
+        *          to avoid a create() call.
+        */
         Guid.isValid = function (s) {
             return /^[0-9ABCDEF]{32}$/i.test(s.replace(/-/g, ''));
         };
+
         /**
-         * Creates a GUID.
-         * @param {string} s A string containing GUID to convert or a number.
-         * @returns A GUID if valid, otherwise null.
-         */
+        * Creates a GUID.
+        * @param {string} s A string containing GUID to convert or a number.
+        * @returns A GUID if valid, otherwise null.
+        */
         Guid.parse = function (s) {
             // an empty string should equal Guid.Empty.
             if (s === '') {
                 return new Guid();
             }
+
             // if the value parameter is valid
             if (Guid.isValid(s)) {
                 var guid = new Guid();
@@ -86,22 +96,22 @@ var Qowaiv;
                 guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
                 return guid;
             }
+
             // return null if creation failed.
             return null;
         };
+
         /**
-         * Creates a GUID.
-         * @returns A random GUID.
-         */
+        * Creates a GUID.
+        * @returns A random GUID.
+        */
         Guid.newGuid = function (seed) {
             var guid = new Guid();
-            guid.v = (Guid.rndGuid(false) +
-                Guid.rndGuid(true) +
-                Guid.rndGuid(true) +
-                Guid.rndGuid(false)).toUpperCase();
+            guid.v = (Guid.rndGuid(false) + Guid.rndGuid(true) + Guid.rndGuid(true) + Guid.rndGuid(false)).toUpperCase();
+
             if (seed !== null && seed instanceof (Guid)) {
-                var lookup = "0123456789ABCDEF";
-                var merged = "";
+                var lookup = '0123456789ABCDEF';
+                var merged = '';
                 for (var i = 0; i < 36; i++) {
                     var l = lookup.indexOf(seed.v.charAt(i));
                     var r = lookup.indexOf(guid.v.charAt(i));
@@ -111,27 +121,28 @@ var Qowaiv;
             }
             return guid;
         };
+
         /**
-         * Creates random GUID blocks.
-         * @remarks called 4 times by Guid.newGuid().
-         */
+        * Creates random GUID blocks.
+        * @remarks called 4 times by Guid.newGuid().
+        */
         Guid.rndGuid = function (s) {
-            var p = (Math.random().toString(16) + "000000000").substr(2, 8);
-            return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+            var p = (Math.random().toString(16) + '000000000').substr(2, 8);
+            return s ? '-' + p.substr(0, 4) + '-' + p.substr(4, 4) : p;
         };
         return Guid;
-    }());
+    })();
     Qowaiv.Guid = Guid;
 })(Qowaiv || (Qowaiv = {}));
 var Qowaiv;
 (function (Qowaiv) {
     /**
-     * Represents a (second based) time span.
-     */
+    * Represents a (second based) time span.
+    */
     var TimeSpan = (function () {
         /**
-         * @constructor
-         */
+        * @constructor
+        */
         function TimeSpan(d, h, m, s, f) {
             this.v = this.num(d) * 86400;
             this.v += this.num(h) * 3600;
@@ -142,84 +153,98 @@ var Qowaiv;
         TimeSpan.prototype.num = function (n) {
             return isNaN(n) ? 0 : n;
         };
+
         /**
-         * Returns the days of the time span.
-         */
+        * Returns the days of the time span.
+        */
         TimeSpan.prototype.getDays = function () {
             return ~~(this.v / 86400);
         };
+
         /**
-         * Returns the hours of the time span.
-         */
+        * Returns the hours of the time span.
+        */
         TimeSpan.prototype.getHours = function () {
             return ~~((this.v / 3600) % 24);
         };
+
         /**
-         * Returns the minutes of the time span.
-         */
+        * Returns the minutes of the time span.
+        */
         TimeSpan.prototype.getMinutes = function () {
             return ~~((this.v / 60) % 60);
         };
+
         /**
-         * Returns the seconds of the time span.
-         */
+        * Returns the seconds of the time span.
+        */
         TimeSpan.prototype.getSeconds = function () {
             return ~~(this.v % 60);
         };
+
         /**
-         * Returns the milliseconds of the time span.
-         */
+        * Returns the milliseconds of the time span.
+        */
         TimeSpan.prototype.getMilliseconds = function () {
             return ~~((this.v * 1000) % 1000);
         };
+
         /**
-         * Returns the total of days of the time span.
-         */
+        * Returns the total of days of the time span.
+        */
         TimeSpan.prototype.getTotalDays = function () {
             return this.v / 86400.0;
         };
+
         /**
-         * Returns the total of hours of the time span.
-         */
+        * Returns the total of hours of the time span.
+        */
         TimeSpan.prototype.getTotalHours = function () {
             return this.v / 3600.0;
         };
+
         /**
-         * Returns the total of minutes of the time span.
-         */
+        * Returns the total of minutes of the time span.
+        */
         TimeSpan.prototype.getTotalMinutes = function () {
             return this.v / 60.0;
         };
+
         /**
-         * Returns the total of seconds of the time span.
-         */
+        * Returns the total of seconds of the time span.
+        */
         TimeSpan.prototype.getTotalSeconds = function () {
             return this.v;
         };
+
         /**
-         * Returns the total of milliseconds of the time span.
-         */
+        * Returns the total of milliseconds of the time span.
+        */
         TimeSpan.prototype.getTotalMilliseconds = function () {
             return this.v * 1000.0;
         };
+
         /**
-         * Returns the total of ticks of the time span.
-         */
+        * Returns the total of ticks of the time span.
+        */
         TimeSpan.prototype.getTicks = function () {
             return ~~(this.v * 10000000);
         };
+
         /**
-         * Multiplies the time span with the specified factor.
-         */
+        * Multiplies the time span with the specified factor.
+        */
         TimeSpan.prototype.multiply = function (factor) {
             if (isNaN(factor)) {
                 throw Error("factor is not a number.");
             }
+
             return TimeSpan.fromSeconds(this.v * factor);
         };
+
         /**
-         * Divide the time span with the specified factor.
-         */
+        * Divide the time span with the specified factor.
+        */
         TimeSpan.prototype.divide = function (factor) {
             if (isNaN(factor)) {
                 throw Error("factor is not a number.");
@@ -227,11 +252,13 @@ var Qowaiv;
             if (factor === 0) {
                 throw Error("factor is zero.");
             }
+
             return TimeSpan.fromSeconds(this.v / factor);
         };
+
         /**
-         * Returns a string that represents the current time span.
-         */
+        * Returns a string that represents the current time span.
+        */
         TimeSpan.prototype.toString = function () {
             var s = this.getTotalSeconds() % 60;
             var m = this.getMinutes();
@@ -261,54 +288,58 @@ var Qowaiv;
             }
             return str;
         };
+
         TimeSpan.prototype.format = function (format) {
             var sec = Math.round(this.v);
             var ts = TimeSpan.fromSeconds(sec);
             return ts.toString();
         };
+
         /**
-         * Returns a value representing the current time span for JSON.
-         * @remarks Is used by JSON.stringify().
-         */
+        * Returns a value representing the current time span for JSON.
+        * @remarks Is used by JSON.stringify().
+        */
         TimeSpan.prototype.toJSON = function () {
             return this.toString();
         };
+
         /**
-         * Creates a TimeSpan from a JSON string.
-         * @param {string} s A string containing TimeSpan to convert.
-         * @returns TimeSpan if valid, otherwise null.
-         */
+        * Creates a TimeSpan from a JSON string.
+        * @param {string} s A string containing TimeSpan to convert.
+        * @returns TimeSpan if valid, otherwise null.
+        */
         TimeSpan.fromJSON = function (s) {
             return TimeSpan.parse(s);
         };
+
         /**
         * Returns true if other is not null or undefined and a TimeSpan
         * representing the same value, otherwise false.
         */
         TimeSpan.prototype.equals = function (other) {
-            return other !== null &&
-                other !== undefined &&
-                other instanceof (TimeSpan) &&
-                other.v === this.v;
+            return other !== null && other !== undefined && other instanceof (TimeSpan) && other.v === this.v;
         };
+
         /**
-         * Returns true if the value represents valid time span, otherwise false.
-         * @param {string} s A string containing time span.
-         * @remarks This method calls create(). It's of no use, to call isValid(),
-         * to avoid a create() call.
-         */
+        * Returns true if the value represents valid time span, otherwise false.
+        * @param {string} s A string containing time span.
+        * @remarks This method calls create(). It's of no use, to call isValid(),
+        * to avoid a create() call.
+        */
         TimeSpan.isValid = function (s) {
             return typeof (s) === 'string' && TimeSpan.pattern.test(s);
         };
+
         /**
-         * Creates a time span.
-         * @param {string} s A string containing time span.
-         * @returns A TimeSpan if valid, otherwise null.
-         */
+        * Creates a time span.
+        * @param {string} s A string containing time span.
+        * @returns A TimeSpan if valid, otherwise null.
+        */
         TimeSpan.parse = function (str) {
             if (TimeSpan.isValid(str)) {
                 var bl = str.split(':');
                 var l = bl.length;
+
                 var s = parseFloat(bl[l - 1].replace(',', '.'));
                 var d = (l > 3) ? parseInt(bl[l - 4]) : 0;
                 var h = (l > 2) ? parseInt(bl[l - 3]) : 0;
@@ -317,8 +348,9 @@ var Qowaiv;
             }
             return null;
         };
+
         /**
-         * Creates a time span based on the specified seconds.
+        * Creates a time span based on the specified seconds.
         */
         TimeSpan.fromSeconds = function (seconds) {
             if (isNaN(seconds)) {
@@ -326,13 +358,9 @@ var Qowaiv;
             }
             return new TimeSpan(0, 0, 0, seconds);
         };
-        /**
-         * Represents the pattern of a (potential) valid time span.
-         * @remarks [ extra ][ d ][ hours ][ min ][ sec ][ ms ]
-         */
         TimeSpan.pattern = /^\d*((((\d+:(2[0-3]|[0-1]\d)|\d)?:[0-5])?\d:)?[0-5])?\d([,\.]\d+)?$/;
         return TimeSpan;
-    }());
+    })();
     Qowaiv.TimeSpan = TimeSpan;
 })(Qowaiv || (Qowaiv = {}));
 //# sourceMappingURL=Qowaiv.js.map

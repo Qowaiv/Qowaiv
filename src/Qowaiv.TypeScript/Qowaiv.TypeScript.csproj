@@ -35,8 +35,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\Qowaiv.license.txt">
-      <Link>Qowaiv.license.txt</Link>
+    <EmbeddedResource Include="..\..\LICENSE.txt">
+      <Link>LICENSE.txt</Link>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -74,5 +74,10 @@
     <None Include="packages.config" />
     <None Include="Qowaiv.Json.Newtonsoft.nuspec" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\LICENSE.txt">
+      <Link>LICENSE.txt</Link>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

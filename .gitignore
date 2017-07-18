@@ -220,3 +220,6 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 nuget/packages/
+
+Exclude build folder at root level
+!/build

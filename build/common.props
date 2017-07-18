@@ -1,0 +1,19 @@
+<Project>
+  <Import Project="..\version.props" />
+
+  <PropertyGroup>
+    <Product>Qowaiv</Product>
+    <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
+    <Authors>Ad van der Hoeven;Corniel Nobel;Jack Kester;Wilko Frieke</Authors>
+    <Owners>Qowaiv community</Owners>
+    <Copyright>Copyright © Exact International Development B.V. 2005-2017</Copyright>
+    <RepositoryUrl>https://github.exactsoftware.com/cloud-solutions/online-exact-shared</RepositoryUrl>
+    <PackageProjectUrl>https://github.exactsoftware.com/cloud-solutions/online-exact-shared</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Qowaiv.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+</Project>

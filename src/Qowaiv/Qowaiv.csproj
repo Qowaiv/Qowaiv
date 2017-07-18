@@ -1,225 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+  
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8690F17C-8152-42BB-9697-0360758FA832}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Qowaiv</RootNamespace>
-    <AssemblyName>Qowaiv</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Qowaiv.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Qowaiv.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Qowaiv.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DelaySign>false</DelaySign>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Shared\Qowaiv.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.0-preview2-25405-01" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\Shared\ProductInfo.cs">
-      <Link>Properties\ProductInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\Shared\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Conversion\Fiancial\MoneyTypeConverter.cs" />
-    <Compile Include="Financial\BankIdentifierCode.cs" />
-    <Compile Include="Conversion\Fiancial\BankIdentifierCodeTypeConverter.cs" />
-    <Compile Include="Conversion\Globalization\CountryTypeConverter.cs" />
-    <Compile Include="Conversion\Fiancial\AmountTypeConverter.cs" />
-    <Compile Include="Conversion\Fiancial\CurrencyTypeConverter.cs" />
-    <Compile Include="Conversion\DateTypeConverter.cs" />
-    <Compile Include="Conversion\EmailAddressTypeConverter.cs" />
-    <Compile Include="Conversion\IO\FileSizeTypeConverter.cs" />
-    <Compile Include="Conversion\GenderTypeConverter.cs" />
-    <Compile Include="Conversion\HouseNumberTypeConverter.cs" />
-    <Compile Include="Conversion\Fiancial\InternationalBankAccountNumberTypeConverter.cs" />
-    <Compile Include="Conversion\LocalDateTimeTypeConverter.cs" />
-    <Compile Include="Conversion\MonthTypeConverter.cs" />
-    <Compile Include="Conversion\PercentageTypeConverter.cs" />
-    <Compile Include="Conversion\PostalCodeTypeConverter.cs" />
-    <Compile Include="Conversion\Security\Cryptography\CryptographicSeedTypeConverter.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Conversion\Sql\TimestampTypeConverter.cs" />
-    <Compile Include="Conversion\Statistics\EloTypeConverter.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Conversion\UuidTypeConverter.cs" />
-    <Compile Include="Conversion\WeekDateTypeConverter.cs" />
-    <Compile Include="Conversion\YearTypeConverter.cs" />
-    <Compile Include="Financial\CurrencyMismatchException.cs" />
-    <Compile Include="Financial\Money.cs" />
-    <Compile Include="Globalization\Country.cs" />
-    <Compile Include="Globalization\CountryConstants.cs" />
-    <Compile Include="Financial\Amount.cs" />
-    <Compile Include="Globalization\CountryToCurrency.cs" />
-    <Compile Include="Globalization\CountryToCurrencyMappings.cs" />
-    <Compile Include="Financial\Currency.cs" />
-    <Compile Include="Financial\CurrencyConstants.cs" />
-    <Compile Include="Data\SvoParameter.cs" />
-    <Compile Include="Date.cs" />
-    <Compile Include="EmailAddress.cs" />
-    <Compile Include="EmailAddressCollection.cs" />
-    <Compile Include="EmailAddressCollectionExtensions.cs" />
-    <Compile Include="Globalization\CultureInfoScope.cs" />
-    <Compile Include="IO\StreamSize.cs" />
-    <Compile Include="IO\StreamSizeExtensions.cs" />
-    <Compile Include="Formatting\FormattingArgumentsCollection.cs" />
-    <Compile Include="Formatting\FormattingArguments.cs" />
-    <Compile Include="Formatting\StringFormatter.cs" />
-    <Compile Include="Gender.cs" />
-    <Compile Include="Globalization\PostalCodeCountryInfo.cs" />
-    <Compile Include="Globalization\PostalCodeCountryInfoInstances.cs" />
-    <Compile Include="Guard.cs" />
-    <Compile Include="HouseNumber.cs" />
-    <Compile Include="IFormattableExtensions.cs" />
-    <Compile Include="Financial\InternationalBankAccountNumber.cs" />
-    <Compile Include="Financial\InternationalBankAccountNumberPatterns.cs" />
-    <Compile Include="Json\IJsonSerializable.cs" />
-    <Compile Include="LocalDateTime.cs" />
-    <Compile Include="Month.cs" />
-    <Compile Include="Parsing.cs" />
-    <Compile Include="Percentage.cs" />
-    <Compile Include="PercentageExtensions.cs" />
-    <Compile Include="PostalCode.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QowaivMessages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QowaivMessages.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Reflection\QowaivType.cs" />
-    <Compile Include="Security\Cryptography\CryptographicSeed.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Sql\Timestamp.cs" />
-    <Compile Include="SingleValueStaticOptions.cs" />
-    <Compile Include="SingleValueObjectAttribute.cs" />
-    <Compile Include="Statistics\Elo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Statistics\EloExtensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Text\Base32.cs" />
-    <Compile Include="Text\Base64.cs" />
-    <Compile Include="Text\WildcardPattern.cs" />
-    <Compile Include="Text\WildcardPatternOptions.cs" />
-    <Compile Include="Threading\ThreadDomain.cs" />
-    <Compile Include="Threading\ThreadExtensions.cs" />
-    <Compile Include="Unknown.cs" />
-    <Compile Include="Uuid.cs" />
-    <Compile Include="WeekDate.cs" />
-    <Compile Include="Year.cs" />
+    <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\..\LICENSE.txt">
-      <Link>LICENSE.txt</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Globalization\CountryLabels.ar.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.de.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.es.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.fr.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.it.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.ja.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.nl.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.pt.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.ru.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.zh-HK.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.zh-TW.resx" />
-    <EmbeddedResource Include="Globalization\CountryLabels.zh.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.ar.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.de.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.es.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.fr.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.it.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.ja.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.nl.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.pt.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.ru.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.zh-HK.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.zh-TW.resx" />
-    <EmbeddedResource Include="Financial\CurrencyLabels.zh.resx" />
-    <EmbeddedResource Include="GenderLabels.ar.resx" />
-    <None Include="Qowaiv.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <EmbeddedResource Include="GenderLabels.de.resx" />
-    <EmbeddedResource Include="GenderLabels.en-GB.resx" />
-    <EmbeddedResource Include="GenderLabels.es.resx" />
-    <EmbeddedResource Include="GenderLabels.fr.resx" />
-    <EmbeddedResource Include="GenderLabels.it.resx" />
-    <EmbeddedResource Include="GenderLabels.ja.resx" />
-    <EmbeddedResource Include="GenderLabels.nl.resx" />
-    <EmbeddedResource Include="GenderLabels.pt.resx" />
-    <EmbeddedResource Include="GenderLabels.resx" />
-    <EmbeddedResource Include="GenderLabels.ru.resx" />
-    <EmbeddedResource Include="GenderLabels.zh.resx" />
-    <EmbeddedResource Include="QowaivMessages.nl.resx" />
-    <EmbeddedResource Include="QowaivMessages.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>QowaivMessages.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UnknownLabels.ar.resx" />
-    <EmbeddedResource Include="UnknownLabels.de.resx" />
-    <EmbeddedResource Include="UnknownLabels.es.resx" />
-    <EmbeddedResource Include="UnknownLabels.fr.resx" />
-    <EmbeddedResource Include="UnknownLabels.it.resx" />
-    <EmbeddedResource Include="UnknownLabels.ja.resx" />
-    <EmbeddedResource Include="UnknownLabels.nl.resx" />
-    <EmbeddedResource Include="UnknownLabels.pt.resx" />
-    <EmbeddedResource Include="UnknownLabels.resx" />
-    <EmbeddedResource Include="UnknownLabels.ru.resx" />
-    <EmbeddedResource Include="UnknownLabels.zh.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Shared\Qowaiv.snk">
-      <Link>Qowaiv.snk</Link>
-    </None>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
+
 </Project>

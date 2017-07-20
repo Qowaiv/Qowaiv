@@ -96,11 +96,6 @@ Task("Package")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    var versionSuffix = "";
-    if (AppVeyor.IsRunningOnAppVeyor)
-    {
-        versionSuffix = AppVeyor.Environment.Build.Number.ToString();
-    }
     DotNetCorePack(solutionFileCore, new DotNetCorePackSettings {
         Configuration = configuration,
         OutputDirectory = outputDir,

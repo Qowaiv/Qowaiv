@@ -39,21 +39,28 @@ Task("Restore-NuGet-Packages")
     NuGetRestore(solutionFile);
 });
 
-GitVersion version = null;
+string versionPrefix = "";
+string versionSuffix = "";
 Task("Version")
     .Does(() =>
 {
-    version = GitVersion(new GitVersionSettings{
+    var result = GitVersion(new GitVersionSettings{
         UpdateAssemblyInfo = false
     });
 
-    Information(String.Format("Version: {0}", version.NuGetVersion));
+    versionPrefix = result.MajorMinorPatch;
+    versionSuffix = result.PreReleaseTag;
     if (AppVeyor.IsRunningOnAppVeyor)
     {
-        AppVeyor.UpdateBuildVersion(version.NuGetVersion);
+        versionSuffix = String.Format("{0}-{1}", result.PreReleaseLabel, AppVeyor.Environment.Build.Number);
+        AppVeyor.UpdateBuildVersion(String.Format("{0}-{1}", versionPrefix, versionSuffix));
     }
-    XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionPrefix", version.MajorMinorPatch);
-    XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionSuffix", version.PreReleaseTag);
+    Information(String.Format("Version: {0}-{1}", versionPrefix, versionSuffix));
+    
+    if (!String.IsNullOrEmpty(versionPrefix)) {
+        XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionPrefix", versionPrefix);
+        XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionSuffix", versionSuffix);
+    }
 });
 
 
@@ -67,7 +74,6 @@ Task("Build")
         MSBuild(solutionFile, settings =>
         {
             settings.ToolPath = msBuildPath;
-            settings.WithProperty("Version", version.NuGetVersion);
             settings.SetConfiguration(configuration);
         });
     }
@@ -99,7 +105,7 @@ Task("Package")
         Configuration = configuration,
         OutputDirectory = outputDir,
         IncludeSymbols = true,
-        VersionSuffix = version.PreReleaseTag
+        VersionSuffix = versionSuffix
     });
 });
 

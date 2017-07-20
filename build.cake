@@ -47,11 +47,11 @@ Task("Version")
         UpdateAssemblyInfo = false
     });
 
+    Information(String.Format("Version: {0}", version.NuGetVersion));
     if (AppVeyor.IsRunningOnAppVeyor)
     {
         AppVeyor.UpdateBuildVersion(version.NuGetVersion);
     }
-    Information(String.Format("Version: {0}", version.NuGetVersion));
     XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionPrefix", version.MajorMinorPatch);
     XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionSuffix", version.PreReleaseTag);
 });

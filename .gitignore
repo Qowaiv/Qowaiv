@@ -225,3 +225,5 @@ tools/
 
 # Exclude build folder at root level
 !/build
+
+artifacts

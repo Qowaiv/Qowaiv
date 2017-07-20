@@ -13,7 +13,7 @@ var configuration = Argument("configuration", "Release");
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var outputDir = Directory("./output") + Directory(configuration);
+var outputDir = Directory("./artifacts");
 var solutionFile = File("./src/Qowaiv.sln");
 var solutionFileCore = File("./src/Qowaiv.Core.sln");
 
@@ -49,6 +49,7 @@ Task("Version")
 
     if (AppVeyor.IsRunningOnAppVeyor)
     {
+        version.PreReleaseNumber = AppVeyor.Environment.Build.Number.ToString();
         AppVeyor.UpdateBuildVersion(version.NuGetVersion);
     }
     Information(String.Format("Version: {0}", version.NuGetVersion));
@@ -87,7 +88,7 @@ Task("Run-Unit-Tests")
 });
 
 Task("Package")
-    .IsDependentOn("Build")
+    .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
     var versionSuffix = "";
@@ -108,7 +109,7 @@ Task("PublishAppVeyor")
     .WithCriteria(AppVeyor.IsRunningOnAppVeyor)
     .Does(() =>
 {
-    foreach (var file in GetFiles(outputDir.ToString() + "**/*"))
+    foreach (var file in GetFiles("./artifacts/**/*"))
         AppVeyor.UploadArtifact(file.FullPath);
 });
 

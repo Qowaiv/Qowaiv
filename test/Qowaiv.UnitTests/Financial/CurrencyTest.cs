@@ -694,9 +694,9 @@ namespace Qowaiv.UnitTests.Financial
 
 		/// <summary>GetHash should not fail for the test struct.</summary>
 		[Test]
-		public void GetHash_TestStruct_Min31357301()
+		public void GetHash_TestStruct_884246882()
 		{
-			Assert.AreEqual(-31357301, CurrencyTest.TestStruct.GetHashCode());
+			Assert.AreEqual(884246882, CurrencyTest.TestStruct.GetHashCode());
 		}
 
 		[Test]

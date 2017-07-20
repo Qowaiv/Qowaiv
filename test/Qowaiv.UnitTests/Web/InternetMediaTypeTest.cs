@@ -585,9 +585,9 @@ namespace Qowaiv.Web.UnitTests
 
 		/// <summary>GetHash should not fail for the test struct.</summary>
 		[Test]
-		public void GetHash_TestStruct_149724860()
+		public void GetHash_TestStruct_276882338()
 		{
-			Assert.AreEqual(149724860, InternetMediaTypeTest.TestStruct.GetHashCode());
+			Assert.AreEqual(276882338, InternetMediaTypeTest.TestStruct.GetHashCode());
 		}
 
 		[Test]

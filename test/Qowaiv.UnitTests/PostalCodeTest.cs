@@ -615,7 +615,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetHash_TestStruct_Hash()
 		{
-			Assert.AreEqual(-896925736, PostalCodeTest.TestStruct.GetHashCode());
+			Assert.AreEqual(-1500506634, PostalCodeTest.TestStruct.GetHashCode());
 		}
 
 		[Test]

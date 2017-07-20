@@ -517,7 +517,7 @@ namespace Qowaiv.UnitTests.Financial
 		[Test]
 		public void GetHash_TestStruct_Hash()
 		{
-			Assert.AreEqual(328152589, InternationalBankAccountNumberTest.TestStruct.GetHashCode());
+			Assert.AreEqual(985668192, InternationalBankAccountNumberTest.TestStruct.GetHashCode());
 		}
 
 		[Test]

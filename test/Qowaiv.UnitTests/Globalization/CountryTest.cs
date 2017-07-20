@@ -643,7 +643,7 @@ namespace Qowaiv.UnitTests.Globalization
 		[Test]
 		public void GetHash_TestStruct_Hash()
 		{
-			Assert.AreEqual(-838223894, CountryTest.TestStruct.GetHashCode());
+			Assert.AreEqual(-734575385, CountryTest.TestStruct.GetHashCode());
 		}
 
 		[Test]

@@ -550,7 +550,7 @@ namespace Qowaiv.UnitTests
 		[Test]
 		public void GetHash_TestStruct_Hash()
 		{
-			Assert.AreEqual(624335706, EmailAddressTest.TestStruct.GetHashCode());
+			Assert.AreEqual(-1104217831, EmailAddressTest.TestStruct.GetHashCode());
 		}
 
 		[Test]

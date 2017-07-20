@@ -39,7 +39,26 @@ Task("Restore-NuGet-Packages")
     NuGetRestore(solutionFile);
 });
 
+GitVersion version = null;
+Task("Version")
+    .Does(() =>
+{
+    version = GitVersion(new GitVersionSettings{
+        UpdateAssemblyInfo = false
+    });
+
+    if (AppVeyor.IsRunningOnAppVeyor)
+    {
+        AppVeyor.UpdateBuildVersion(version.NuGetVersion);
+    }
+    Information(String.Format("Version: {0}", version.NuGetVersion));
+    XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionPrefix", version.MajorMinorPatch);
+    XmlPoke(File("version.props"), "/Project/PropertyGroup/VersionSuffix", version.PreReleaseTag);
+});
+
+
 Task("Build")
+    .IsDependentOn("Version")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
@@ -48,6 +67,7 @@ Task("Build")
         MSBuild(solutionFile, settings =>
         {
             settings.ToolPath = msBuildPath;
+            settings.WithProperty("Version", version.NuGetVersion);
             settings.SetConfiguration(configuration);
         });
     }
@@ -67,12 +87,19 @@ Task("Run-Unit-Tests")
 });
 
 Task("Package")
-    .IsDependentOn("Run-Unit-Tests")
+    .IsDependentOn("Build")
     .Does(() =>
 {
+    var versionSuffix = "";
+    if (AppVeyor.IsRunningOnAppVeyor)
+    {
+        versionSuffix = AppVeyor.Environment.Build.Number.ToString();
+    }
     DotNetCorePack(solutionFileCore, new DotNetCorePackSettings {
         Configuration = configuration,
-        OutputDirectory = outputDir
+        OutputDirectory = outputDir,
+        IncludeSymbols = true,
+        VersionSuffix = version.PreReleaseTag
     });
 });
 
@@ -81,6 +108,8 @@ Task("PublishAppVeyor")
     .WithCriteria(AppVeyor.IsRunningOnAppVeyor)
     .Does(() =>
 {
+    foreach (var file in GetFiles(outputDir.ToString() + "**/*"))
+        AppVeyor.UploadArtifact(file.FullPath);
 });
 
 //////////////////////////////////////////////////////////////////////

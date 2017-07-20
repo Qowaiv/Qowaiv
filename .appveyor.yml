@@ -3,5 +3,5 @@ assembly_info:
   patch: false
 
 build_script:
-  - ps: ./build.ps1
+  - ps: ./build.ps1 -t PublishAppVeyor
 test: off

@@ -49,7 +49,6 @@ Task("Version")
 
     if (AppVeyor.IsRunningOnAppVeyor)
     {
-        version.PreReleaseNumber = AppVeyor.Environment.Build.Number.ToString();
         AppVeyor.UpdateBuildVersion(version.NuGetVersion);
     }
     Information(String.Format("Version: {0}", version.NuGetVersion));

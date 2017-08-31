@@ -208,9 +208,9 @@ namespace Qowaiv.UnitTests.Formatting
 
 		/// <summary>GetHash should not fail for the test struct.</summary>
 		[Test]
-		public void GetHash_TestStruct_1547829240()
+		public void GetHash_TestStruct_Min1957205100()
 		{
-			Assert.AreEqual(1547829240, FormattingArgumentsTest.TestStruct.GetHashCode());
+			Assert.AreEqual(-1957205100, FormattingArgumentsTest.TestStruct.GetHashCode());
 		}
 
 		[Test]

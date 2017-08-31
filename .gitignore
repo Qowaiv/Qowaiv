@@ -1,6 +1,5 @@
 ﻿# custom additions
-src/packages/
-src/.nuget/
+packages/
 .nuget/
 
 #################
@@ -220,3 +219,11 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 nuget/packages/
+
+# Cake
+tools/
+
+# Exclude build folder at root level
+!/build
+
+artifacts

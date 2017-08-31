@@ -1,5 +1,8 @@
 Qowaiv
 ======
+
+[![Build status](https://ci.appveyor.com/api/projects/status/j8o76flxqkh0o9fk?svg=true)](https://ci.appveyor.com/project/qowaiv/qowaiv)
+
 Domain-driven design bottom up
 ------------------------------
 

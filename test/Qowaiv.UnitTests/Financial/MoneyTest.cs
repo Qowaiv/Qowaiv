@@ -412,7 +412,7 @@ namespace Qowaiv.UnitTests.Financial
 			using (new CultureInfoScope("nl-BE"))
 			{
 				var act = Money.Parse("ALL 1600,1").ToString();
-				var exp = "Lekë 1.600,10";
+				var exp = "1.600,10 Lekë";
 				Assert.AreEqual(exp, act);
 			}
 		}
@@ -496,7 +496,7 @@ namespace Qowaiv.UnitTests.Financial
 		[Test]
 		public void GetHash_TestStruct_Hash()
 		{
-			Assert.AreEqual(825801657, TestStruct.GetHashCode());
+			Assert.AreEqual(-72502192, TestStruct.GetHashCode());
 		}
 
 		[Test]

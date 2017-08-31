@@ -4,8 +4,6 @@ using System.Resources;
 using System.Runtime.InteropServices;
 
 // Info about all assemblies.
-[assembly: AssemblyCompany("Qowaiv community")]
-[assembly: AssemblyCopyright("Copyright © Qowaiv community 2013-2015")]
 [assembly: AssemblyTrademark("Qowaiv")]
 
 // If not specified otherwise, the resources are in USA English.

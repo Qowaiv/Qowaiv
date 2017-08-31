@@ -40,11 +40,17 @@ namespace Qowaiv.Financial
 
 		#region Methods
 
+		/// <summary>Adds money.</summary>
+		/// <param name="l">The left operand.</param>
+		/// <param name="r">The right operand</param>
 		public Money Add(Money l, Money r)
 		{
 			return Create(l.m_Value + r.m_Value, HaveSameCurrency(l, r, "addition"));
 		}
 
+		/// <summary>Adds money.</summary>
+		/// <param name="l">The left operand.</param>
+		/// <param name="r">The right operand</param>
 		public static Money operator +(Money l, Money r) { return l + r; }
 
 		[DebuggerStepThrough]

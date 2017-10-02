@@ -1,8 +1,9 @@
-Qowaiv
-======
+![Qowaiv](Design\qowain-logo_linkedin_100x060.jpg)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/j8o76flxqkh0o9fk?svg=true)](https://ci.appveyor.com/project/qowaiv/qowaiv)
 
+Qowaiv
+======
 Domain-driven design bottom up
 ------------------------------
 
@@ -16,6 +17,11 @@ and domain specific logic.
 Single Value Object
 -------------------
 A Value Object that can be represented by a single scalar.
+
+Technical requirements
+----------------------
+Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Core (2.0)
+the Visual Studio solution file requires VS2017.3 or higher.
 
 Qowaiv types
 ============

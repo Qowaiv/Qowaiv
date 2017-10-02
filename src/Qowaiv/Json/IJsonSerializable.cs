@@ -21,10 +21,10 @@ namespace Qowaiv.Json
         void FromJson(Int64 jsonInteger);
 
         /// <summary>Generates an object from a JSON number representation.</summary>
-        /// <param name="JsonNumber">
+        /// <param name="jsonNumber">
         /// The JSON number that represents the object.
         /// </param>
-        void FromJson(Double JsonNumber);
+        void FromJson(Double jsonNumber);
 
         /// <summary>Generates an object from a JSON date representation.</summary>
         /// <param name="jsonDate">

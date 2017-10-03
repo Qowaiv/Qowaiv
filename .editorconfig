@@ -1,0 +1,7 @@
+[*]
+insert_final_newline = true
+
+# Code files
+[*.cs,*.cshtml]
+indent_style = space
+indent_size = 4

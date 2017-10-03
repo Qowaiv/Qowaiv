@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Qowaiv Rule Set" Description=" " ToolsVersion="12.0">
+<RuleSet Name="Qowaiv Rule Set" Description=" " ToolsVersion="15.0">
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1000" Action="Warning" />
     <Rule Id="CA1001" Action="Warning" />
@@ -578,5 +578,17 @@
     <Rule Id="C6993" Action="Warning" />
     <Rule Id="C6995" Action="Warning" />
     <Rule Id="C6997" Action="Warning" />
+  </Rules>
+  <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
+    <Rule Id="S1135" Action="Warning" />
+    <Rule Id="S1145" Action="Warning" />
+    <Rule Id="S1905" Action="Warning" />
+    <Rule Id="S2156" Action="Warning" />
+    <Rule Id="S2221" Action="Warning" />
+    <Rule Id="S2357" Action="Error" />
+    <Rule Id="S2387" Action="Warning" />
+    <Rule Id="S2551" Action="Error" />
+    <Rule Id="S2737" Action="Warning" />
+    <Rule Id="S2931" Action="Warning" />
   </Rules>
 </RuleSet>

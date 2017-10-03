@@ -5,13 +5,13 @@ using System.Globalization;
 
 namespace Qowaiv.Conversion.Sql
 {
-    /// <summary>Provides a conversion for a timestamp.</summary>
+    /// <summary>Provides a conversion for a time stamp.</summary>
     public class TimestampTypeConverter : TypeConverter
     {
         #region Convert From
 
         /// <summary>Returns whether this converter can convert an string to
-        /// a timestamp, using the specified context.
+        /// a time stamp, using the specified context.
         /// </summary>
         /// <param name="context">
         /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
@@ -26,7 +26,7 @@ namespace Qowaiv.Conversion.Sql
         {
             return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
-        /// <summary>Converts a string to a timestamp, using the specified
+        /// <summary>Converts a string to a time stamp, using the specified
         /// context and culture information.
         /// </summary>
         /// <param name="context">
@@ -57,7 +57,7 @@ namespace Qowaiv.Conversion.Sql
 
         #region Convert To
 
-        /// <summary>Converts a timestamp to string, using the specified context and culture information.</summary>
+        /// <summary>Converts a time stamp to string, using the specified context and culture information.</summary>
         /// <param name="culture">
         /// A System.Globalization.CultureInfo. If null is passed, the current culture is assumed.
         /// </param>
@@ -65,13 +65,13 @@ namespace Qowaiv.Conversion.Sql
         /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
         /// </param>
         /// <param name="value">
-        /// The timestamp to convert.
+        /// The time stamp to convert.
         /// </param>
         /// <param name="destinationType">
         /// The System.Type to convert the value parameter to.
         /// </param>
         /// <returns>
-        /// A string that represents the converted timestamp.
+        /// A string that represents the converted time stamp.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// The destinationType parameter is null.

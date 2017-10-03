@@ -48,9 +48,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0
 		..\buildConfig.fsx = ..\buildConfig.fsx
 		..\downloadNuget.fsx = ..\downloadNuget.fsx
 		..\packages.config = ..\packages.config
+		..\build\Qowaiv.snk = ..\build\Qowaiv.snk
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E8EB4E5F-5EA7-4AA2-A710-57A205717C76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Data.SqlClient", "Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj", "{6F1282F9-F2D6-4E26-9EF3-2383040054AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +85,10 @@ Global
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

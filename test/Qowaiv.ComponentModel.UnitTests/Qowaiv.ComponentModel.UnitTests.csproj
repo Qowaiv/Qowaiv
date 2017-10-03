@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="TestMessages.nl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="TestMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TestMessages.Designer.cs</LastGenOutput>

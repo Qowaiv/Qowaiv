@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv", "Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv", "Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator", "Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{E3DCEC1A-818F-4EF1-AECA-2E34E96B39FC}"
 EndProject
@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.UnitTests", "..\test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4C3C9FF-4EED-41FE-8849-C896429254B5}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
 		..\LICENSE.txt = ..\LICENSE.txt
@@ -19,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\ReleaseNotes.md = ..\ReleaseNotes.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Json.Newtonsoft", "Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{7D825B8F-14F7-4DD2-83DC-79217E97A866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{7D825B8F-14F7-4DD2-83DC-79217E97A866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
 EndProject
@@ -46,11 +47,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0
 		..\build.fsx = ..\build.fsx
 		..\build.sh = ..\build.sh
 		..\buildConfig.fsx = ..\buildConfig.fsx
+		..\build\common.props = ..\build\common.props
 		..\downloadNuget.fsx = ..\downloadNuget.fsx
 		..\packages.config = ..\packages.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E8EB4E5F-5EA7-4AA2-A710-57A205717C76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.ComponentModel", "Qowaiv.ComponentModel\Qowaiv.ComponentModel.csproj", "{A647D037-BDEF-4623-9160-45499778F0A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.ComponentModel.UnitTests", "..\test\Qowaiv.ComponentModel.UnitTests\Qowaiv.ComponentModel.UnitTests.csproj", "{444B4839-E450-4607-BCBB-AEDCB986EB88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +88,14 @@ Global
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A647D037-BDEF-4623-9160-45499778F0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A647D037-BDEF-4623-9160-45499778F0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A647D037-BDEF-4623-9160-45499778F0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A647D037-BDEF-4623-9160-45499778F0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{444B4839-E450-4607-BCBB-AEDCB986EB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{444B4839-E450-4607-BCBB-AEDCB986EB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{444B4839-E450-4607-BCBB-AEDCB986EB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{444B4839-E450-4607-BCBB-AEDCB986EB88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +105,9 @@ Global
 		{5249CDC7-3F92-45B6-9328-627BC0C2441D} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{41C15FF1-5053-4D59-8314-B6E1CE89CDC1} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{444B4839-E450-4607-BCBB-AEDCB986EB88} = {E8EB4E5F-5EA7-4AA2-A710-57A205717C76}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79180471-396A-415A-8A7A-8DF1057CCFCB}
 	EndGlobalSection
 EndGlobal

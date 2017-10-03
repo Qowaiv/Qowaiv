@@ -99,7 +99,7 @@ namespace Qowaiv.ComponentModel.Rules
 			{
 				return ValidationMessage.None;
 			}
-			return ValidationMessage.Error(ErrorMessageString(), PropertyNames);
+			return ValidationMessage.Error(string.Format(CultureInfo.CurrentCulture, ErrorMessageString(), PropertyNames), PropertyNames);
 		}
 
 		/// <Summary>Determines whether the specified value of the object is valid.</Summary>

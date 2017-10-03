@@ -21,7 +21,8 @@ A Value Object that can be represented by a single scalar.
 Technical requirements
 ----------------------
 Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Core (2.0)
-the Visual Studio solution file requires VS2017.3 or higher.
+the Visual Studio solution file requires VS2017.3 or higher. Visual Studio can be downloaded
+here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 
 Qowaiv types
 ============

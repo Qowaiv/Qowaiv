@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
-MinimumVisualStudioVersion = 10.0.40219.1
+MinimumVisualStudioVersion = 15.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv", "Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator", "Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{E3DCEC1A-818F-4EF1-AECA-2E34E96B39FC}"
@@ -100,6 +100,6 @@ Global
 		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CC1BA2AD-B948-43CC-AABD-E4F0437CBE73}
+		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}
 	EndGlobalSection
 EndGlobal

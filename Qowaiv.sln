@@ -1,10 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 15.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv", "src\Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv", "Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator", "src\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{E3DCEC1A-818F-4EF1-AECA-2E34E96B39FC}"
 EndProject
@@ -24,9 +23,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{7D825B8F-14F7-4DD2-83DC-79217E97A866}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Web", "src\Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{7D825B8F-14F7-4DD2-83DC-79217E97A866}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "src\Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
 EndProject
@@ -48,22 +44,20 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8}"
 	ProjectSection(SolutionItems) = preProject
 		build.cake = build.cake
-		build.ps1 = build.ps1
-		build.sh = build.sh
-		build\common.props = build\common.props
-		build\Qowaiv.snk = build\Qowaiv.snk
 		..\build.cmd = ..\build.cmd
 		..\build.fsx = ..\build.fsx
-		..\build.sh = ..\build.sh
+		build.ps1 = build.ps1
+		build.sh = build.sh
 		..\buildConfig.fsx = ..\buildConfig.fsx
+		build\common.props = build\common.props
 		..\downloadNuget.fsx = ..\downloadNuget.fsx
 		..\packages.config = ..\packages.config
-		..\build\Qowaiv.snk = ..\build\Qowaiv.snk
+		build\Qowaiv.snk = build\Qowaiv.snk
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Data.SqlClient", "Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj", "{6F1282F9-F2D6-4E26-9EF3-2383040054AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Data.SqlClient", "src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj", "{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,10 +89,10 @@ Global
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{729DFCC9-A8DB-469D-881F-81E089A3049D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F1282F9-F2D6-4E26-9EF3-2383040054AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,7 +104,6 @@ Global
 		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {252815FC-CFE7-4400-80DB-8312DEF1A73E}
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}
 	EndGlobalSection
 EndGlobal

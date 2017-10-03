@@ -464,11 +464,7 @@ namespace Qowaiv.Sql
 		}
 
 		/// <summary>Returns true if the val represents a valid time stamp, otherwise false.</summary>
-		public static bool IsValid(string val, IFormatProvider formatProvider)
-		{
-			Timestamp time stamp;
-			return TryParse(val, formatProvider, out time stamp);
-		}
+		public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out Timestamp timestamp);
 
 		#endregion
 	}

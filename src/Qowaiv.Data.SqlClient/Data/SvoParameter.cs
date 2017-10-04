@@ -23,16 +23,14 @@ namespace Qowaiv.Data
 		/// </returns>
 		public static SqlParameter CreateForSql(string parameterName, object value)
 		{
-			// If null, return DBNull..
+			// If null, return DBNull.
 			if (value == null) { return new SqlParameter(parameterName, DBNull.Value); }
 
 			var sourceType = value.GetType();
 
 			lock (locker)
 			{
-				SingleValueObjectAttribute attr;
-
-				if (!Attributes.TryGetValue(sourceType, out attr))
+				if (!Attributes.TryGetValue(sourceType, out SingleValueObjectAttribute attr))
 				{
 					attr = QowaivType.GetSingleValueObjectAttribute(sourceType);
 				}

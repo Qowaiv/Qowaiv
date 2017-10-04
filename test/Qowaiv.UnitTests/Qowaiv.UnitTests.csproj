@@ -142,6 +142,10 @@
       <Project>{e3dcec1a-818f-4ef1-aeca-2e34e96b39fc}</Project>
       <Name>Qowaiv.CodeGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj">
+      <Project>{2c42afc6-1dc6-488c-8e39-cd7c8e4b09d5}</Project>
+      <Name>Qowaiv.Data.SqlClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj">
       <Project>{7d825b8f-14f7-4dd2-83dc-79217e97a866}</Project>
       <Name>Qowaiv.Json.Newtonsoft</Name>

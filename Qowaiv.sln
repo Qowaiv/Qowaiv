@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv", "Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 15.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv", "src\Qowaiv\Qowaiv.csproj", "{8690F17C-8152-42BB-9697-0360758FA832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator", "Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{E3DCEC1A-818F-4EF1-AECA-2E34E96B39FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator", "src\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{E3DCEC1A-818F-4EF1-AECA-2E34E96B39FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.UnitTests", "..\test\Qowaiv.UnitTests\Qowaiv.UnitTests.csproj", "{D0233D1C-86A8-4229-907D-438537AF4372}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.UnitTests", "test\Qowaiv.UnitTests\Qowaiv.UnitTests.csproj", "{D0233D1C-86A8-4229-907D-438537AF4372}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4C3C9FF-4EED-41FE-8849-C896429254B5}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,16 +18,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
 		..\LICENSE.txt = ..\LICENSE.txt
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
 		Qowaiv.ruleset = Qowaiv.ruleset
-		..\README.md = ..\README.md
-		..\ReleaseNotes.md = ..\ReleaseNotes.md
+		README.md = README.md
+		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{7D825B8F-14F7-4DD2-83DC-79217E97A866}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Web", "Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{7D825B8F-14F7-4DD2-83DC-79217E97A866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Web", "src\Qowaiv.Web\Qowaiv.Web.csproj", "{AE69AC33-D0F4-43B1-9194-AD5D9FCF9630}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "src\Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5249CDC7-3F92-45B6-9328-627BC0C2441D}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,24 +44,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5249CD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{41C15FF1-5053-4D59-8314-B6E1CE89CDC1}"
 	ProjectSection(SolutionItems) = preProject
-		..\design\qowain logo.psd = ..\design\qowain logo.psd
-		..\design\qowain-logo_linkedin_050x050.jpg = ..\design\qowain-logo_linkedin_050x050.jpg
-		..\design\qowain-logo_linkedin_100x060.jpg = ..\design\qowain-logo_linkedin_100x060.jpg
-		..\design\qowain-logo_nuget_064x064.gif = ..\design\qowain-logo_nuget_064x064.gif
+		design\qowain logo.psd = design\qowain logo.psd
+		design\qowain-logo_linkedin_050x050.jpg = design\qowain-logo_linkedin_050x050.jpg
+		design\qowain-logo_linkedin_100x060.jpg = design\qowain-logo_linkedin_100x060.jpg
+		design\qowain-logo_nuget_064x064.gif = design\qowain-logo_nuget_064x064.gif
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8}"
 	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
 		..\build.cmd = ..\build.cmd
 		..\build.fsx = ..\build.fsx
-		..\build.sh = ..\build.sh
+		build.ps1 = build.ps1
+		build.sh = build.sh
 		..\buildConfig.fsx = ..\buildConfig.fsx
 		..\build\common.props = ..\build\common.props
+		build\common.props = build\common.props
 		..\downloadNuget.fsx = ..\downloadNuget.fsx
 		..\packages.config = ..\packages.config
+		build\Qowaiv.snk = build\Qowaiv.snk
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E8EB4E5F-5EA7-4AA2-A710-57A205717C76}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Data.SqlClient", "src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj", "{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.ComponentModel", "Qowaiv.ComponentModel\Qowaiv.ComponentModel.csproj", "{A647D037-BDEF-4623-9160-45499778F0A3}"
 EndProject
@@ -96,12 +111,16 @@ Global
 		{444B4839-E450-4607-BCBB-AEDCB986EB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{444B4839-E450-4607-BCBB-AEDCB986EB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{444B4839-E450-4607-BCBB-AEDCB986EB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C42AFC6-1DC6-488C-8E39-CD7C8E4B09D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D0233D1C-86A8-4229-907D-438537AF4372} = {E8EB4E5F-5EA7-4AA2-A710-57A205717C76}
+		{D0233D1C-86A8-4229-907D-438537AF4372} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{5249CDC7-3F92-45B6-9328-627BC0C2441D} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{41C15FF1-5053-4D59-8314-B6E1CE89CDC1} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
@@ -109,5 +128,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79180471-396A-415A-8A7A-8DF1057CCFCB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}
 	EndGlobalSection
 EndGlobal

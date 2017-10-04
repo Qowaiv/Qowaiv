@@ -147,15 +147,15 @@
       <Name>Qowaiv.Data.SqlClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj">
-      <Project>{7d825b8f-14f7-4dd2-83dc-79217e97a866}</Project>
+      <Project>{4cf69836-9b52-4423-b527-99e4a288997f}</Project>
       <Name>Qowaiv.Json.Newtonsoft</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Qowaiv.Web\Qowaiv.Web.csproj">
-      <Project>{ae69ac33-d0f4-43b1-9194-ad5d9fcf9630}</Project>
+      <Project>{472b9e6e-96f4-4a26-a968-9bfc3606bf31}</Project>
       <Name>Qowaiv.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj">
-      <Project>{8690f17c-8152-42bb-9697-0360758fa832}</Project>
+      <Project>{acf6f726-8cbe-4f7c-89ef-9002a6441d19}</Project>
       <Name>Qowaiv</Name>
     </ProjectReference>
   </ItemGroup>

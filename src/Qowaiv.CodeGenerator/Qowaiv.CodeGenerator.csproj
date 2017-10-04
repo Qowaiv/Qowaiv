@@ -154,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Qowaiv\Qowaiv.csproj">
-      <Project>{8690f17c-8152-42bb-9697-0360758fa832}</Project>
+      <Project>{acf6f726-8cbe-4f7c-89ef-9002a6441d19}</Project>
       <Name>Qowaiv</Name>
     </ProjectReference>
   </ItemGroup>

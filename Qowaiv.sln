@@ -28,8 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "src\Qo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5249CDC7-3F92-45B6-9328-627BC0C2441D}"
 	ProjectSection(SolutionItems) = preProject
+		build\common.props = build\common.props
 		Shared\ProductInfo.cs = Shared\ProductInfo.cs
 		Shared\Qowaiv.snk = Shared\Qowaiv.snk
+		version.props = version.props
 		Shared\VersionInfo.cs = Shared\VersionInfo.cs
 	EndProjectSection
 EndProject

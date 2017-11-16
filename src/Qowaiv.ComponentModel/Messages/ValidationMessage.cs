@@ -58,7 +58,7 @@ namespace Qowaiv.ComponentModel.Messages
         /// <summary>Creates a warning message.</summary>
         public static ValidationWarningMessage Warning(string message, params string[] memberNames) => new ValidationWarningMessage(message, memberNames);
 
-        /// <summary>Creates a warning message.</summary>
+        /// <summary>Creates an info message.</summary>
         public static ValidationInfoMessage Info(string message, params string[] memberNames) => new ValidationInfoMessage(message, memberNames);
     }
 }

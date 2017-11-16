@@ -2,14 +2,14 @@
 
 namespace System.ComponentModel.DataAnnotations
 {
-	/// <summary>Extensions on <see cref="ValidationContext"/>.</summary>
-	public static class ValidationContextExtensions
-	{
-		/// <summary>Returns the service that provides custom validation.</summary>
-		public static T GetSevice<T>(this ValidationContext validationContext)
-		{
-			Guard.NotNull(validationContext, nameof(validationContext));
-			return (T)validationContext.GetService(typeof(T));
-		}
-	}
+    /// <summary>Extensions on <see cref="ValidationContext"/>.</summary>
+    public static class ValidationContextExtensions
+    {
+        /// <summary>Returns the service that provides custom validation.</summary>
+        public static T GetSevice<T>(this ValidationContext validationContext)
+        {
+            Guard.NotNull(validationContext, nameof(validationContext));
+            return (T)validationContext.GetService(typeof(T));
+        }
+    }
 }

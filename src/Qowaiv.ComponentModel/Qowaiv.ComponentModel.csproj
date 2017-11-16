@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Qowaiv.ComponentModel.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Qowaiv.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivComponentModelMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QowaivComponentModelMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivComponentModelMessages.nl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="QowaivComponentModelMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>QowaivComponentModelMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Rules\Globalization\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="6.6.0.3969" />
+  </ItemGroup>
+
+</Project>

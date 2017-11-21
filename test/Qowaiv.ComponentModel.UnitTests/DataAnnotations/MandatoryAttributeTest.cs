@@ -1,41 +1,41 @@
-﻿using Qowaiv.ComponentModel.DataAnnotations;
+﻿using NUnit.Framework;
+using Qowaiv.ComponentModel.DataAnnotations;
 using System;
-using Xunit;
 
 namespace Qowaiv.ComponentModel.Tests.DataAnnotations
 {
-	public class MandatoryAttributeTest
-	{
-		[Fact]
-		public void IsValid_NewGuid_True()
-		{
-			var attr = new MandatoryAttribute();
-			var act = attr.IsValid(Guid.NewGuid());
-			Assert.True(act);
-		}
+    public class MandatoryAttributeTest
+    {
+        [Test]
+        public void IsValid_NewGuid_True()
+        {
+            var attr = new MandatoryAttribute();
+            var act = attr.IsValid(Guid.NewGuid());
+            Assert.IsTrue(act);
+        }
 
-		[Fact]
-		public void IsValid_GuidEmpty_False()
-		{
-			var attr = new MandatoryAttribute();
-			var act = attr.IsValid(Guid.Empty);
-			Assert.False(act);
-		}
+        [Test]
+        public void IsValid_GuidEmpty_False()
+        {
+            var attr = new MandatoryAttribute();
+            var act = attr.IsValid(Guid.Empty);
+            Assert.IsFalse(act);
+        }
 
-		[Fact]
-		public void IsValid_SomeEmailAddress_True()
-		{
-			var attr = new MandatoryAttribute();
-			var act = attr.IsValid(EmailAddress.Parse("test@exact.com"));
-			Assert.True(act);
-		}
+        [Test]
+        public void IsValid_SomeEmailAddress_True()
+        {
+            var attr = new MandatoryAttribute();
+            var act = attr.IsValid(EmailAddress.Parse("test@exact.com"));
+            Assert.IsTrue(act);
+        }
 
-		[Fact]
-		public void IsValid_EmailAddressEmpty_False()
-		{
-			var attr = new MandatoryAttribute();
-			var act = attr.IsValid(EmailAddress.Empty);
-			Assert.False(act);
-		}
-	}
+        [Test]
+        public void IsValid_EmailAddressEmpty_False()
+        {
+            var attr = new MandatoryAttribute();
+            var act = attr.IsValid(EmailAddress.Empty);
+            Assert.IsFalse(act);
+        }
+    }
 }

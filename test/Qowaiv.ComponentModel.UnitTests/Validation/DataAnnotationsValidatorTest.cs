@@ -1,14 +1,14 @@
-﻿using Qowaiv.ComponentModel.Tests.TestTools;
+﻿using NUnit.Framework;
+using Qowaiv.ComponentModel.Tests.TestTools;
 using Qowaiv.ComponentModel.UnitTests.Validation.Models;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.Globalization;
-using Xunit;
 
 namespace Qowaiv.ComponentModel.Tests.Validation
 {
     public class DataAnnotationsValidatorTest
     {
-        [Fact]
+        [Test]
         public void Validate_ModelWithMandatoryProperties_WithErrors()
         {
             using (CultureInfoScope.NewInvariant())
@@ -21,7 +21,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 );
             }
         }
-        [Fact]
+        [Test]
         public void Validate_ModelWithMandatoryProperties_IsValid()
         {
             var model = new ModelWithMandatoryProperties
@@ -32,7 +32,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             DataAnnotationsAssert.IsValid(model);
         }
 
-        [Fact]
+        [Test]
         public void Validate_ModelWithAllowedValues_WithError()
         {
             var model = new ModelWithAllowedValues
@@ -44,14 +44,14 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 ValidationTestMessage.Error("The value of the Country field is not allowed.", "Country")
             );
         }
-        [Fact]
+        [Test]
         public void Validate_ModelWithAllowedValues_IsValid()
         {
             var model = new ModelWithAllowedValues();
             DataAnnotationsAssert.IsValid(model);
         }
 
-        [Fact]
+        [Test]
         public void Validate_ModelWithForbiddenValues_WithError()
         {
             var model = new ModelWithForbiddenValues
@@ -61,7 +61,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             DataAnnotationsAssert.WithErrors(model,
                 ValidationTestMessage.Error("The value of the Email field is not allowed.", "Email"));
         }
-        [Fact]
+        [Test]
         public void Validate_ModelWithForbiddenValues_IsValid()
         {
             var model = new ModelWithForbiddenValues
@@ -72,7 +72,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
         }
 
 
-        [Fact]
+        [Test]
         public void Validate_PostalCodeModel_Valid()
         {
             var model = new PostalCodeModel
@@ -84,7 +84,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             DataAnnotationsAssert.IsValid(model);
         }
 
-        [Fact]
+        [Test]
         public void Validate_PostalCodeModelWithEmptyValues_With2Errors()
         {
             var model = new PostalCodeModel
@@ -99,7 +99,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             );
         }
 
-        [Fact]
+        [Test]
         public void Validate_PostalCodeModelWithInvalidPostalCode_WithError()
         {
             using (new CultureInfoScope("nl-BE"))
@@ -116,7 +116,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             }
         }
 
-        [Fact]
+        [Test]
         public void Validate_PostalCodeModelWithErrorByService_WithError()
         {
             var validator = new AnnotatedModelValidator(new TestServiceProvider
@@ -135,7 +135,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             );
         }
 
-        [Fact]
+        [Test]
         public void Validate_ModelWithCustomizedResource_WithError()
         {
             var model = new ModelWithCustomizedResource();

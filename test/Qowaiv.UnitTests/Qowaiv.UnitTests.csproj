@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Financial\BankIdentifierCodeTest.cs" />
-    <Compile Include="CodeGenerator\Generators\QowaivCodeGeneratorTest.cs" />
     <Compile Include="Financial\MoneyTest.cs" />
     <Compile Include="Globalization\CountryTest.cs" />
     <Compile Include="Financial\AmountTest.cs" />
@@ -113,9 +112,6 @@
     <Compile Include="Globalization\CountryToCurrencyTest.cs" />
     <Compile Include="UuidTest.cs" />
     <Compile Include="SingleValueObjectAttributeTest.cs" />
-    <Compile Include="CodeGenerator\Xml\XResourceFileHeaderTest.cs" />
-    <Compile Include="CodeGenerator\Xml\XResourceFileDataTest.cs" />
-    <Compile Include="CodeGenerator\Xml\XResourceFileTest.cs" />
     <Compile Include="TestTools\Formatting\UnitTestFormatProvider.cs" />
     <Compile Include="TestTools\SvoAssert.cs" />
     <Compile Include="TestTools\TypeConverterAssert.cs" />
@@ -140,10 +136,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj">
-      <Project>{e3dcec1a-818f-4ef1-aeca-2e34e96b39fc}</Project>
-      <Name>Qowaiv.CodeGenerator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj">
       <Project>{2c42afc6-1dc6-488c-8e39-cd7c8e4b09d5}</Project>
       <Name>Qowaiv.Data.SqlClient</Name>

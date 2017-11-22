@@ -80,6 +80,7 @@
     <Compile Include="CodeDom\CSharp\CSharpNameOptions.cs" />
     <Compile Include="CodeDom\CSharp\TypeCSharpExtensions.cs" />
     <Compile Include="CodeDom\Razor\IRazorTemplateRendering.cs" />
+    <Compile Include="CodeDom\Razor\RazorTemplate_T.cs" />
     <Compile Include="CodeDom\Razor\RazorTemplate.cs" />
     <Compile Include="CodeDom\Razor\RazorTemplates.cs" />
     <Compile Include="CodeDom\Razor\TemplateNotFoundException.cs" />

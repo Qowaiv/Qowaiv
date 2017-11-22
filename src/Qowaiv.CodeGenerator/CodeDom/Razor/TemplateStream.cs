@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace Qowaiv.CodeGenerator.CodeDom.Razor
 {
@@ -21,14 +20,14 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
         /// </param>
         public TemplateStream(Stream stream, string classname)
         {
-            this.Stream = stream;
-            this.ClassName = classname;
+            Stream = stream;
+            ClassName = classname;
         }
 
         /// <summary>Gets the stream.</summary>
-        public Stream Stream { get; protected set; }
+        public Stream Stream { get; }
 
         /// <summary>Gets the class name.</summary>
-        public string ClassName { get; protected set; }
+        public string ClassName { get; }
     }
 }

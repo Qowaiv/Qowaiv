@@ -28,7 +28,7 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
         public TemplateNotFoundException(string name) :
             base(string.Format(CultureInfo.CurrentCulture, QowaivCodeGeneratorMessages.TemplateNotFoundException_Name, name)) { }
 
-        /// <summary>Initializes a new instance of a template not found exception ith serialized data.</summary>
+        /// <summary>Initializes a new instance of a template not found exception in the serialized data.</summary>
         /// <param name="info">
         /// The System.Runtime.Serialization.SerializationInfo that holds the serialized
         /// object data about the exception being thrown.

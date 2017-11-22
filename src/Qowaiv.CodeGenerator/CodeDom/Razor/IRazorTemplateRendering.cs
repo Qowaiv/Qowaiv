@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Qowaiv.CodeGenerator.CodeDom.Razor
+﻿namespace Qowaiv.CodeGenerator.CodeDom.Razor
 {
     /// <summary>Interface for razor template rendering.</summary>
     public interface IRazorTemplateRendering

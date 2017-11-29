@@ -73,14 +73,14 @@ namespace Qowaiv.ComponentModel.Tests
         public void Implicit_Result_ToType()
         {
             Result<bool> result = true;
-            Assert.IsTrue(result.IsValid);
+            Assert.IsTrue(result.Data);
         }
 
         [Test]
         public void Implicit_Null_ToType()
         {
             Result<bool> result = false;
-            Assert.IsFalse(result.IsValid);
+            Assert.IsFalse(result.Data);
         }
 
         [Test]

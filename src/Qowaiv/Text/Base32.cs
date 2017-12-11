@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Qowaiv.Text
 {
@@ -7,102 +6,78 @@ namespace Qowaiv.Text
     /// represent binary data in an ASCII string format by translating it into
     /// a radix-32 representation.
     /// </summary>
-    /// <remarks>
-    /// Codes originates from see http://scottless.com/blog/archive/2014/02/15/base32-encoder-and-decoder-in-c.aspx.
-    /// </remarks>
     public static class Base32
     {
-        /// <summary>
-        /// Size of the regular byte in bits
-        /// </summary>
-        private const int InByteSize = 8;
+        private const int BitPerByte = 8;
+        private const int BitPerChar = 5;
+        private const int BitShift = BitPerByte - BitPerChar;
+        private const int BitsMask = 31;
 
-        /// <summary>
-        /// Size of converted byte in bits
-        /// </summary>
-        private const int OutByteSize = 5;
+        private const string UpperCaseBitChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+        private const string LowerCaseBitChars = "abcdefghijklmnopqrstuvwxyz234567";
 
-        /// <summary>Gets the last five bit of the int.</summary>
-        /// <remarks>
-        /// 0x001F = 00011111B
-        /// </remarks>
-        private const int OverflowMask = 0x001F;
-
-        /// <summary>The lookup for <see cref="ToString(byte[])"/>.</summary>
-        private const string LookupToString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-
-        /// <summary>The lookup for <see cref="ToString(byte[])"/>.</summary>
-        private const string LookupGetBytes = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz223344556677";
+        /// <summary>A lookup where the index is the <see cref="int"/> representation of the <see cref="char"/>.</summary>
+        private static readonly byte[] CharValues = new byte[] { 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 26, 27, 28, 29, 30, 31, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 255, 255, 255, 255, 255, 255, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
+        /// <summary>The 'z' is the highest <see cref="char"/> that can be found in the <see cref="CharValues"/>.</summary>
+        private const char MaxChar = 'z';
 
         /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
-        public static string ToString(byte[] bytes)
+        /// <param name="bytes">
+        /// The bytes to represent as Base32 string.
+        /// </param>
+        /// <remarks>
+        /// Uppercase by default.
+        /// </remarks>
+        public static string ToString(byte[] bytes) => ToString(bytes, false);
+
+        /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
+        /// <param name="bytes">
+        /// The bytes to represent as Base32 string.
+        /// </param>
+        /// <param name="lowerCase">
+        /// An indicator to specify lower case or upper case.
+        /// </param>
+        public static string ToString(byte[] bytes, bool lowerCase)
         {
-            if (bytes == null || bytes.Length == 0) { return string.Empty; }
-
-            // Prepare container for the final value
-            var buffer = new StringBuilder(1 + bytes.Length * InByteSize / OutByteSize);
-
-            var position = 0;
-
-            // Offset inside a single byte that <bytesPosition> points to (from left to right)
-            // 0 - highest bit, 7 - lowest bit
-            var subposition = 0;
-
-            // Byte to look up in the dictionary
-            var base32Byte = 0;
-
-            // The number of bits filled in the current output byte
-            var base32BytePosition = 0;
-
-            // Iterate through input buffer until we reach past the end of it
-            while (position < bytes.Length)
+            if (bytes == null || bytes.Length == 0)
             {
-                // Calculate the number of bits we can extract out of current input byte to fill missing bits in the output byte
-                var bitsAvailableInByte = Math.Min(InByteSize - subposition, OutByteSize - base32BytePosition);
-
-                // Make space in the output byte
-                base32Byte <<= bitsAvailableInByte;
-
-                // Extract the part of the input byte and move it to the output byte
-                base32Byte |= (byte)(bytes[position] >> (InByteSize - (subposition + bitsAvailableInByte)));
-
-                // Update current sub-byte position
-                subposition += bitsAvailableInByte;
-
-                // Check overflow
-                if (subposition >= InByteSize)
-                {
-                    // Move to the next byte
-                    position++;
-                    subposition = 0;
-                }
-
-                // Update current base32 byte completion
-                base32BytePosition += bitsAvailableInByte;
-
-                // Check overflow or end of input array
-                if (base32BytePosition >= OutByteSize)
-                {
-                    // Drop the overflow bits
-                    base32Byte &= 0x1F;  // 0x1F = 00011111 in binary
-
-                    // Add current Base32 byte and convert it to character
-                    buffer.Append(LookupToString[base32Byte]);
-
-                    // Move to the next byte
-                    base32BytePosition = 0;
-                }
+                return string.Empty;
             }
 
-            // Check if we have a remainder
-            if (base32BytePosition > 0)
+            var lookup = lowerCase ? LowerCaseBitChars : UpperCaseBitChars;
+
+            // Determine the string size.
+            var bitLength = bytes.Length << 3;
+            var chars = new char[1 + (bitLength - 1) / BitPerChar];
+
+            var indexChars = 0;
+            var indexBytes = 0;
+            int buffer = bytes[indexBytes++];
+            var overFlow = BitShift;
+
+            while (indexChars < chars.Length)
             {
-                // Move to the right bits
-                base32Byte <<= (OutByteSize - base32BytePosition);
-                // Add current Base32 byte and convert it to character
-                buffer.Append(LookupToString[base32Byte & OverflowMask]);
+                // Get the 5 bits, from the buffer to chars.
+                // A negative overflow can only occur at the end.
+                var bits = overFlow < 0 ? (buffer << -overFlow) : (buffer >> overFlow);
+                chars[indexChars++] = lookup[bits & BitsMask];
+
+                // If the buffer is too small, and there are bytes left.
+                if (overFlow < BitPerChar && indexBytes < bytes.Length)
+                {
+                    // Make place at the beginning of the buffer.
+                    buffer <<= BitPerByte;
+                    // Add the bits.
+                    buffer |= bytes[indexBytes++];
+                    // Update the overflow.
+                    overFlow += BitShift;
+                }
+                else
+                {
+                    overFlow -= BitPerChar;
+                }
             }
-            return buffer.ToString();
+            return new string(chars);
         }
 
         /// <summary>Gets the bytes for a given Base32 string. </summary>
@@ -117,9 +92,7 @@ namespace Qowaiv.Text
         /// </exception>
         public static byte[] GetBytes(string s)
         {
-            byte[] bytes;
-
-            if (TryGetBytes(s, out bytes))
+            if (TryGetBytes(s, out byte[] bytes))
             {
                 return bytes;
             }
@@ -144,68 +117,46 @@ namespace Qowaiv.Text
                 return true;
             }
 
-            // Prepare output byte array
-            bytes = new byte[s.Length * OutByteSize / InByteSize];
-            
-            // Position in the string
-            int base32Position = 0;
+            // Determine the byte size.
+            var bitLength = s.Length * BitPerChar;
+            bytes = new byte[bitLength >> 3];
 
-            // Offset inside the character in the string
-            int base32SubPosition = 0;
+            var buffer = 0;
+            var bufferLength = 0;
+            var index = 0;
 
-            // Position within outputBytes array
-            int outputBytePosition = 0;
-
-            // The number of bits filled in the current output byte
-            int outputByteSubPosition = 0;
-
-            // Normally we would iterate on the input array but in this case we actually iterate on the output array
-            // We do it because output array doesn't have overflow bits, while input does and it will cause output array overflow if we don't stop in time
-            while (outputBytePosition < bytes.Length)
+            // Loop through all chars.
+            foreach (var ch in s)
             {
-                // Look up current character in the dictionary to convert it to byte
-                int currentBase32Byte = LookupGetBytes.IndexOf(s[base32Position]);
-
-                // Check if found
-                if (currentBase32Byte < 0)
+                // the char is not a valid base32 char.
+                if (ch > MaxChar)
                 {
                     bytes = new byte[0];
                     return false;
                 }
-                else
+                var charValue = CharValues[ch];
+                // the char is not a valid base32 char, although it is in the lookup.
+                if (charValue == byte.MaxValue)
                 {
-                    currentBase32Byte >>= 1;
+                    bytes = new byte[0];
+                    return false;
                 }
 
-                // Calculate the number of bits we can extract out of current input character to fill missing bits in the output byte
-                int bitsAvailableInByte = Math.Min(OutByteSize - base32SubPosition, InByteSize - outputByteSubPosition);
+                // Create 5 bits at the beginning for the new char value.
+                buffer <<= BitPerChar;
+                // Add the new bits.
+                buffer |= charValue;
+                // Update the buffer length.
+                bufferLength += BitPerChar;
 
-                // Make space in the output byte
-                bytes[outputBytePosition] <<= bitsAvailableInByte;
-
-                // Extract the part of the input character and move it to the output byte
-                bytes[outputBytePosition] |= (byte)(currentBase32Byte >> (OutByteSize - (base32SubPosition + bitsAvailableInByte)));
-
-                // Update current sub-byte position
-                outputByteSubPosition += bitsAvailableInByte;
-
-                // Check overflow
-                if (outputByteSubPosition >= InByteSize)
+                // If the buffer is big enough to represent a byte.
+                if (bufferLength >= BitPerByte)
                 {
-                    // Move to the next byte
-                    outputBytePosition++;
-                    outputByteSubPosition = 0;
-                }
+                    // The byte to add are at the end of the buffer.
+                    var bits = buffer >> (bufferLength - BitPerByte);
 
-                // Update current base32 byte completion
-                base32SubPosition += bitsAvailableInByte;
-
-                // Check overflow or end of input array
-                if (base32SubPosition >= OutByteSize)
-                {
-                    // Move to the next character
-                    base32Position++;
-                    base32SubPosition = 0;
+                    bytes[index++] = (byte)bits;
+                    bufferLength -= BitPerByte;
                 }
             }
             return true;

@@ -25,3 +25,9 @@
 ### New in 3.0.0.223 (Released 2016/11/30)
 * Introduced namespaces Financial, Globalization, Security, Statistics, and moved types from root namespace to those.
 * Introduced Money.
+
+### New in 3.1.1 (Released 2017/11/22)
+* Introduced Component Model validation
+
+### New in 3.1.2 (Released 2017/12/12)
+* New Base-32 implementation

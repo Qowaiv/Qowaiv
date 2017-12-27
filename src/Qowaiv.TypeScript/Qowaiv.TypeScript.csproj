@@ -6,12 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Guid.ts" />
-    <None Remove="IEquatable.ts" />
-    <None Remove="IFormattable.ts" />
-    <None Remove="IJsonStringifyable.ts" />
-    <None Remove="JavaScript\Qowaiv.d.ts" />
-    <None Remove="TimeSpan.ts" />
+    <None Remove="*.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="Guid.ts" />
-    <TypeScriptCompile Include="IEquatable.ts" />
-    <TypeScriptCompile Include="IFormattable.ts" />
-    <TypeScriptCompile Include="IJsonStringifyable.ts" />
-    <TypeScriptCompile Include="TimeSpan.ts" />
+    <TypeScriptCompile Include="*.ts" />
   </ItemGroup>
 
   <PropertyGroup>

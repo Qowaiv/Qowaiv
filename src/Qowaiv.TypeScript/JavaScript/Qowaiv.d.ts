@@ -164,10 +164,6 @@ declare module Qowaiv {
          */
         getTotalMilliseconds(): number;
         /**
-         * Returns the total of ticks of the time span.
-         */
-        getTicks(): number;
-        /**
          * Multiplies the time span with the specified factor.
          */
         multiply(factor: number): TimeSpan;

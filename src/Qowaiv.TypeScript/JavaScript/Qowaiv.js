@@ -215,12 +215,6 @@ var Qowaiv;
             return this.v * 1000.0;
         }
         /**
-         * Returns the total of ticks of the time span.
-         */
-        getTicks() {
-            return ~~(this.v * 10000000);
-        }
-        /**
          * Multiplies the time span with the specified factor.
          */
         multiply(factor) {

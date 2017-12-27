@@ -4,13 +4,17 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="*.ts" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="GuidTest.ts" />
+    <TypeScriptCompile Include="*.ts" />
   </ItemGroup>
 
   <PropertyGroup>

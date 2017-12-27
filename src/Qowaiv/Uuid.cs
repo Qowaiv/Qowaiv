@@ -115,13 +115,13 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a UUID from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()=>m_Value = default(Guid);
+        void IJsonSerializable.FromJson() => m_Value = default(Guid);
 
         /// <summary>Generates a UUID from a JSON string representation.</summary>
         /// <param name="jsonString">
         /// The JSON string that represents the UUID.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString).m_Value;
+        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString).m_Value;
 
         /// <summary>Generates a UUID from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
@@ -139,11 +139,11 @@ namespace Qowaiv
         /// <param name="jsonDate">
         /// The JSON Date that represents the UUID.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); 
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
 
         /// <summary>Converts a UUID into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()=> m_Value == default(Guid) ? null : ToString(CultureInfo.InvariantCulture);
+        object IJsonSerializable.ToJson() => m_Value == default(Guid) ? null : ToString(CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -151,22 +151,22 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
-        private string DebuggerDisplay=> ToString(); 
+        private string DebuggerDisplay => ToString();
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID.</summary>
-        public override string ToString()=> ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current UUID.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
-        public string ToString(string format)=> ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current UUID.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)=> ToString("", formatProvider);
+        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current UUID.</summary>
         /// <param name="format">
@@ -235,17 +235,17 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)=> obj is Uuid && Equals((Uuid)obj);
+        public override bool Equals(object obj) => obj is Uuid && Equals((Uuid)obj);
 
         /// <summary>Returns true if this instance and the other <see cref="Uuid"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Uuid"/> to compare with.</param>
-        public bool Equals(Uuid other)=> m_Value == other.m_Value;
+        public bool Equals(Uuid other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this GUID.</summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode()=> m_Value.GetHashCode();
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -342,8 +342,7 @@ namespace Qowaiv
         /// </exception>
         public static Uuid Parse(string s)
         {
-            Uuid val;
-            if (Uuid.TryParse(s, out val))
+            if (TryParse(s, out Uuid val))
             {
                 return val;
             }
@@ -361,12 +360,11 @@ namespace Qowaiv
         /// </returns>
         public static Uuid TryParse(string s)
         {
-            Uuid val;
-            if (Uuid.TryParse(s, out val))
+            if (TryParse(s, out Uuid val))
             {
                 return val;
             }
-            return Uuid.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to a UUID.
@@ -383,7 +381,7 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, out Uuid result)
         {
-            result = Uuid.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
@@ -396,8 +394,7 @@ namespace Qowaiv
                 return true;
             }
 
-            Guid id;
-            if (Guid.TryParse(s, out id))
+            if (Guid.TryParse(s, out Guid id))
             {
                 result = new Uuid(id);
                 return true;
@@ -409,20 +406,26 @@ namespace Qowaiv
         public static Uuid GenerateWithMD5(byte[] data)
         {
             Guard.NotNull(data, nameof(data));
-            var hash = MD5.Create().ComputeHash(data);
-            UuidExtensions.SetVersion(hash, UuidVersion.MD5);
-            return new Guid(hash);
+            using (var md5 = MD5.Create())
+            {
+                var hash = md5.ComputeHash(data);
+                UuidExtensions.SetVersion(hash, UuidVersion.MD5);
+                return new Guid(hash);
+            }
         }
 
         /// <summary>Generates an <see cref="Uuid"/> applying a <see cref="SHA1"/> hash on the data.</summary>
         public static Uuid GenerateWithSHA1(byte[] data)
         {
             Guard.NotNull(data, nameof(data));
-            var bytes = SHA1.Create().ComputeHash(data);
-            var hash = new byte[16];
-            Array.Copy(bytes, hash, 16);
-            UuidExtensions.SetVersion(hash, UuidVersion.SHA1);
-            return new Guid(hash);
+            using (var sha1 = SHA1.Create())
+            {
+                var bytes = sha1.ComputeHash(data);
+                var hash = new byte[16];
+                Array.Copy(bytes, hash, 16);
+                UuidExtensions.SetVersion(hash, UuidVersion.SHA1);
+                return new Guid(hash);
+            }
         }
 
         #endregion

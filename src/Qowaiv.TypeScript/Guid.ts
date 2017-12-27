@@ -44,12 +44,10 @@
         }
 
         /**
-         * Creates a GUID from a JSON string.
-         * @param {string} s A JSON string representing the GUID.
-         * @returns A GUID if valid, otherwise null.
+         * Returns the version of the GUID.
          */
-        public static fromJSON(s: string): Guid {
-            return Guid.parse(s);
+        public version(): number {
+            return parseInt(this.v.substr(14, 1));
         }
 
         /**
@@ -61,6 +59,15 @@
                 other !== undefined &&
                 other instanceof (Guid) &&
                 other.v === this.v;
+        }
+
+        /**
+          * Creates a GUID from a JSON string.
+          * @param {string} s A JSON string representing the GUID.
+          * @returns A GUID if valid, otherwise null.
+          */
+        public static fromJSON(s: string): Guid {
+            return Guid.parse(s);
         }
 
         /**
@@ -96,6 +103,13 @@
         }
 
         /**
+         * Returns a new empty GUID.
+         */
+        public static empty(): Guid {
+            return new Guid();
+        }
+
+        /**
          * Creates a GUID.
          * @returns A random GUID.
          */
@@ -117,8 +131,10 @@
                     var r = lookup.indexOf(guid.v.charAt(i));
                     merged += l === -1 || r === -1 ? guid.v.charAt(i) : lookup.charAt(l ^ r);
                 }
-                guid.v = merged;
             }
+            // set version to 4 (Random).
+            guid.v = guid.v.substr(0, 14) + '4' + guid.v.substr(15);
+
             return guid;
         }
 

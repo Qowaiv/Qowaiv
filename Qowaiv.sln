@@ -10,9 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4C3C9FF-4EED-41FE-8849-C896429254B5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		..\.gitattributes = ..\.gitattributes
 		.gitattributes = .gitattributes
-		..\.gitignore = ..\.gitignore
 		.gitignore = .gitignore
 		..\LICENSE.txt = ..\LICENSE.txt
 		LICENSE.txt = LICENSE.txt
@@ -25,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Web", "src\Qowaiv.Web\Qowaiv.Web.csproj", "{472B9E6E-96F4-4A26-A968-9BFC3606BF31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TypeScript", "src\Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TypeScript", "src\Qowaiv.TypeScript\Qowaiv.TypeScript.csproj", "{729DFCC9-A8DB-469D-881F-81E089A3049D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5249CDC7-3F92-45B6-9328-627BC0C2441D}"
 	ProjectSection(SolutionItems) = preProject
@@ -69,9 +67,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.ComponentModel", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{CCCCEB32-7082-431D-A7DC-3C6E213DA8D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator", "tooling\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{DC848917-E057-461F-A8B0-276F3C61CDF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.CodeGenerator", "tooling\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{DC848917-E057-461F-A8B0-276F3C61CDF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator.UnitTests", "test\Qowaiv.CodeGenerator.UnitTests\Qowaiv.CodeGenerator.UnitTests.csproj", "{9A884773-78CD-4753-9E08-22350B2370FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.CodeGenerator.UnitTests", "test\Qowaiv.CodeGenerator.UnitTests\Qowaiv.CodeGenerator.UnitTests.csproj", "{C397102C-FC47-4D5F-9F0A-BE6EC2B8F7B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TypeScript.UnitTests", "test\Qowaiv.TypeScript.UnitTests\Qowaiv.TypeScript.UnitTests.csproj", "{F01F939F-F150-4DD8-8EBB-A3615D65679F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,10 +115,14 @@ Global
 		{DC848917-E057-461F-A8B0-276F3C61CDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC848917-E057-461F-A8B0-276F3C61CDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC848917-E057-461F-A8B0-276F3C61CDF8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A884773-78CD-4753-9E08-22350B2370FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A884773-78CD-4753-9E08-22350B2370FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A884773-78CD-4753-9E08-22350B2370FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A884773-78CD-4753-9E08-22350B2370FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C397102C-FC47-4D5F-9F0A-BE6EC2B8F7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C397102C-FC47-4D5F-9F0A-BE6EC2B8F7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C397102C-FC47-4D5F-9F0A-BE6EC2B8F7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C397102C-FC47-4D5F-9F0A-BE6EC2B8F7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F01F939F-F150-4DD8-8EBB-A3615D65679F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F01F939F-F150-4DD8-8EBB-A3615D65679F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F01F939F-F150-4DD8-8EBB-A3615D65679F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F01F939F-F150-4DD8-8EBB-A3615D65679F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,7 +134,8 @@ Global
 		{C4A408F0-FCFD-4FB9-AC08-BEA5E25DC2B8} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{69CA9631-8F91-4213-880D-CBB2D516CC58} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{DC848917-E057-461F-A8B0-276F3C61CDF8} = {CCCCEB32-7082-431D-A7DC-3C6E213DA8D4}
-		{9A884773-78CD-4753-9E08-22350B2370FA} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{C397102C-FC47-4D5F-9F0A-BE6EC2B8F7B0} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{F01F939F-F150-4DD8-8EBB-A3615D65679F} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

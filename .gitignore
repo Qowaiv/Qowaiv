@@ -227,3 +227,6 @@ tools/
 !/build
 
 artifacts
+
+# TypeScript (only needed for debugging)
+*.js.map

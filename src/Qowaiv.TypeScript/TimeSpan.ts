@@ -89,12 +89,6 @@
         public getTotalMilliseconds(): number {
             return this.v * 1000.0;
         }
-        /**
-         * Returns the total of ticks of the time span.
-         */
-        public getTicks(): number {
-            return ~~(this.v * 10000000);
-        }
 
         /**
          * Multiplies the time span with the specified factor.

@@ -21,18 +21,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Analize_AllSvos_MatchAttribute()
         {
-            var assemblies = new[]
-            {
-                typeof(Date).Assembly,
-                typeof(Qowaiv.Data.SvoParameter).Assembly,
-                typeof(Qowaiv.Web.InternetMediaType).Assembly,
-            };
-
-            var svos = assemblies.SelectMany(assembly => assembly.GetTypes())
-               .Where(tp => QowaivType.IsSingleValueObject(tp))
-               .OrderBy(tp => tp.Namespace)
-               .ThenBy(tp => tp.Name)
-               .ToArray();
+            var svos = GetSvos();
 
             var exp = new[]
             {
@@ -79,6 +68,23 @@ namespace Qowaiv.UnitTests
                 SvoAssert.ImplementsInterfaces(svo);
                 SvoAssert.AttributesMatches(svo);
             }
+        }
+
+        private static Type[] GetSvos()
+        {
+            var assemblies = new[]
+            {
+                typeof(Date).Assembly,
+                typeof(Qowaiv.Data.SvoParameter).Assembly,
+                typeof(Qowaiv.Web.InternetMediaType).Assembly,
+            };
+
+            var svos = assemblies.SelectMany(assembly => assembly.GetTypes())
+               .Where(tp => QowaivType.IsSingleValueObject(tp))
+               .OrderBy(tp => tp.Namespace)
+               .ThenBy(tp => tp.Name)
+               .ToArray();
+            return svos;
         }
     }
 }

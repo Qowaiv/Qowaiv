@@ -23,7 +23,10 @@ namespace Qowaiv.Conversion
         /// </returns>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+            return 
+                sourceType == typeof(string) || 
+                sourceType == typeof(Guid) ||
+                base.CanConvertFrom(context, sourceType);
         }
         /// <summary>Converts a string to a GUID, using the specified
         /// context and culture information.
@@ -50,11 +53,21 @@ namespace Qowaiv.Conversion
             {
                 return Uuid.Parse(str);
             }
+            if(value is Guid guid)
+            {
+                return (Uuid)guid;
+            }
             return base.ConvertFrom(context, culture, value);
         }
         #endregion
 
         #region Convert To
+
+        /// <inheritdoc />
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            return destinationType == typeof(Guid) || base.CanConvertTo(context, destinationType);
+        }
 
         /// <summary>Converts a GUID to string, using the specified context and culture information.</summary>
         /// <param name="culture">
@@ -80,8 +93,14 @@ namespace Qowaiv.Conversion
         /// </exception>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
+            if(destinationType == typeof(Guid))
+            {
+                var tyoped = Guard.IsTypeOf<Uuid>(value, nameof(value));
+                return (Guid)tyoped;
+            }
             return base.ConvertTo(context, culture, value, destinationType);
         }
+
         #endregion
     }
 }

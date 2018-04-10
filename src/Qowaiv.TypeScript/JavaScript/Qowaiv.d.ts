@@ -37,7 +37,7 @@ declare module Qowaiv {
         /**
           * Creates a GUID from a JSON string.
           * @param {string} s A JSON string representing the GUID.
-          * @returns A GUID if valid, otherwise null.
+          * @returns {Guid} A GUID if valid, otherwise null.
           */
         static fromJSON(s: string): Guid;
         /**
@@ -50,16 +50,17 @@ declare module Qowaiv {
         /**
          * Creates a GUID.
          * @param {string} s A string containing GUID to convert or a number.
-         * @returns A GUID if valid, otherwise null.
+         * @returns {Guid} A GUID if valid, otherwise null.
          */
         static parse(s: string): Guid;
+        private static strip(s);
         /**
          * Returns a new empty GUID.
          */
         static empty(): Guid;
         /**
          * Creates a GUID.
-         * @returns A random GUID.
+         * @returns {Guid} A random GUID.
          */
         static newGuid(seed?: Guid): Guid;
         /**

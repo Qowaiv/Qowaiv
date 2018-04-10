@@ -64,7 +64,7 @@
         /**
           * Creates a GUID from a JSON string.
           * @param {string} s A JSON string representing the GUID.
-          * @returns A GUID if valid, otherwise null.
+          * @returns {Guid} A GUID if valid, otherwise null.
           */
         public static fromJSON(s: string): Guid {
             return Guid.parse(s);
@@ -77,29 +77,37 @@
          *          to avoid a create() call.
          */
         public static isValid(s: string): boolean {
-            return /^[0-9ABCDEF]{32}$/i.test(s.replace(/-/g, ''));
+            return /^[0-9ABCDEF]{32}$/i.test(Guid.strip(s));
         }
 
         /**
          * Creates a GUID.
          * @param {string} s A string containing GUID to convert or a number.
-         * @returns A GUID if valid, otherwise null.
+         * @returns {Guid} A GUID if valid, otherwise null.
          */
         public static parse(s: string): Guid {
             
             // an empty string should equal Guid.Empty.
             if (s === '') { return new Guid(); }
-            
+
+            s = Guid.strip(s).toUpperCase();
+
             // if the value parameter is valid
             if (Guid.isValid(s)) {
                 var guid = new Guid();
-                s = s.replace(/-/g, '').toUpperCase();
                 guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
                 return guid;
             }
-            
             // return null if creation failed.
             return null;
+        }
+
+        private static strip(s: string): string {
+            var replace = s.replace(/-/g, '');
+            if (replace.indexOf('{') == 0 && replace.lastIndexOf('}') == replace.length - 1) {
+                replace = replace.substr(1, replace.length - 2);
+            }
+            return replace;
         }
 
         /**
@@ -111,7 +119,7 @@
 
         /**
          * Creates a GUID.
-         * @returns A random GUID.
+         * @returns {Guid} A random GUID.
          */
         public static newGuid(seed?: Guid): Guid {
 

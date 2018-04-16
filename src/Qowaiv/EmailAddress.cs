@@ -22,6 +22,14 @@ namespace Qowaiv
     [TypeConverter(typeof(EmailAddressTypeConverter))]
     public struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
     {
+        /// <summary>
+        /// An email address must not exceed 254 characters.
+        /// </summary>
+        /// <remarks>
+        /// https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+        /// </remarks>
+        public const int MaxLength = 254;
+
         /// <summary>Represents the pattern of a (potential) valid email address.</summary>
         /// <remarks>
         /// http://www.codeproject.com/KB/recipes/EmailRegexValidator.aspx
@@ -39,7 +47,7 @@ namespace Qowaiv
 						((?<=@\[.*)])?
 					)
 				|
-					(\w+([-]*\w+)*\.)*
+					(\w+([-]+\w+)*\.)*
 					[a-z]{2,}
 				)
 				$
@@ -474,7 +482,9 @@ namespace Qowaiv
             Justification = "Satisfies the static Qowaiv SVO contract.")]
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return Pattern.IsMatch(val ?? string.Empty);
+            return !string.IsNullOrWhiteSpace(val)
+                && val.Length <= MaxLength
+                && Pattern.IsMatch(val);
         }
         #endregion
     }

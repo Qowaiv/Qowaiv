@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Product>Qowaiv</Product>
     <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
-    <Authors>Ad van der Hoeven;Corniel Nobel;Jack Kester;Vincent Lesierse;Wilko Frieke</Authors>
+    <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Jack Kester;Hanif Hafez Nezami;Vincent Lesierse;Wilko Frieke</Authors>
     <Owners>Qowaiv community</Owners>
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>

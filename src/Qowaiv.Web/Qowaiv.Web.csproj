@@ -1,20 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\build\common.props" />
+  <Import Project="..\..\props\common.props" />
   
   <PropertyGroup>
     <TargetFrameworks>net45</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <DebugType>full</DebugType>
-    <CodeAnalysisRuleSet>..\..\Qowaiv.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\net45\Qowaiv.Data.SqlClient.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\net45\Qowaiv.Data.SqlClient.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <Reference Include="System.Web" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Web" />
+    <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
   </ItemGroup>
 
 </Project>

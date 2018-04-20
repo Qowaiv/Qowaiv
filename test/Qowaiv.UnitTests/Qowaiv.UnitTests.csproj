@@ -1,173 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\props\test.props" />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D0233D1C-86A8-4229-907D-438537AF4372}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Qowaiv.UnitTests</RootNamespace>
-    <AssemblyName>Qowaiv.UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net462</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\src\packages\ExcelLibrary.1.2011.7.31\lib\ExcelLibrary.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\src\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\src\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\src\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\tooling\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\src\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.XML" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Financial\BankIdentifierCodeTest.cs" />
-    <Compile Include="Financial\MoneyTest.cs" />
-    <Compile Include="Globalization\CountryTest.cs" />
-    <Compile Include="Financial\AmountTest.cs" />
-    <Compile Include="Financial\CurrencyTest.cs" />
-    <Compile Include="Data\SvoParameterTest.cs" />
-    <Compile Include="DateTest.cs" />
-    <Compile Include="EmailAddressCollectionTest.cs" />
-    <Compile Include="EmailAddressTest.cs" />
-    <Compile Include="IO\StreamSizeTest.cs" />
-    <Compile Include="Formatting\FormattingArgumentsCollectionTest.cs" />
-    <Compile Include="Formatting\FormattingArgumentsTest.cs" />
-    <Compile Include="Formatting\StringFormatterTest.cs" />
-    <Compile Include="GenderTest.cs" />
-    <Compile Include="Globalization\PostalCodeCountryInfoTest.cs" />
-    <Compile Include="HouseNumberTest.cs" />
-    <Compile Include="IFormattableExtensionsTest.cs" />
-    <Compile Include="Financial\InternationalBankAccountNumberTest.cs" />
-    <Compile Include="IO\TemporaryDirectory.cs" />
-    <Compile Include="Json\JsonTester.cs" />
-    <Compile Include="Json\QowaivJsonConverterTest.cs" />
-    <Compile Include="LocalDateTimeTest.cs" />
-    <Compile Include="Mocking\Web\HttpRequestMock.cs" />
-    <Compile Include="Mocking\Web\HttpResponseMock.cs" />
-    <Compile Include="MonthTest.cs" />
-    <Compile Include="PercentageTest.cs" />
-    <Compile Include="PostalCodeCountryPatternTest.cs" />
-    <Compile Include="PostalCodeTest.cs" />
-    <Compile Include="PublicKeyTest.cs" />
-    <Compile Include="Security\Cryptography\CryptographicSeedTest.cs" />
-    <Compile Include="Sql\TimestampTest.cs" />
-    <Compile Include="Statistics\EloExtensionsTests.cs" />
-    <Compile Include="Statistics\EloTest.cs" />
-    <Compile Include="TestTools\DateTimeAssert.cs" />
-    <Compile Include="TestTools\SqlParameterAssert.cs" />
-    <Compile Include="Text\Base32Test.cs" />
-    <Compile Include="Text\Base64Test.cs" />
-    <Compile Include="Text\WildcardPatternTest.cs" />
-    <Compile Include="Globalization\CountryToCurrencyTest.cs" />
-    <Compile Include="UuidTest.cs" />
-    <Compile Include="SingleValueObjectAttributeTest.cs" />
-    <Compile Include="TestTools\Formatting\UnitTestFormatProvider.cs" />
-    <Compile Include="TestTools\SvoAssert.cs" />
-    <Compile Include="TestTools\TypeConverterAssert.cs" />
-    <Compile Include="TestTools\CodeDom\CompileAssert.cs" />
-    <Compile Include="TestTools\DebuggerDisplayAssert.cs" />
-    <Compile Include="TestTools\ExceptionAssert.cs" />
-    <Compile Include="TestTools\SerializationTest.cs" />
-    <Compile Include="Threading\ThreadDomainTest.cs" />
-    <Compile Include="UnknownTest.cs" />
-    <Compile Include="Web\InternetMediaTypeTest.cs" />
-    <Compile Include="Web\Mvc\TypeConverterModelBinderTest.cs" />
-    <Compile Include="WeekDateTest.cs" />
-    <Compile Include="YearTest.cs" />
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\src\Shared\ProductInfo.cs">
-      <Link>Properties\ProductInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\..\src\Shared\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj">
-      <Project>{2c42afc6-1dc6-488c-8e39-cd7c8e4b09d5}</Project>
-      <Name>Qowaiv.Data.SqlClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj">
-      <Project>{4cf69836-9b52-4423-b527-99e4a288997f}</Project>
-      <Name>Qowaiv.Json.Newtonsoft</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Qowaiv.Web\Qowaiv.Web.csproj">
-      <Project>{472b9e6e-96f4-4a26-a968-9bfc3606bf31}</Project>
-      <Name>Qowaiv.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj">
-      <Project>{acf6f726-8cbe-4f7c-89ef-9002a6441d19}</Project>
-      <Name>Qowaiv</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\..\LICENSE.txt">
-      <Link>LICENSE.txt</Link>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
-  </Target>
+
 </Project>

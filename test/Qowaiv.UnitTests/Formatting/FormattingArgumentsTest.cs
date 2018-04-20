@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.TestTools;
+using Qowaiv.TestTools;
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
@@ -9,7 +9,6 @@ using System.Runtime.Serialization;
 namespace Qowaiv.UnitTests.Formatting
 {
     /// <summary>Tests the formatting arguments SVO.</summary>
-    [TestFixture]
     public class FormattingArgumentsTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -18,7 +17,8 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_IFormattableNull_IsNull()
         {
-            string act = TestStruct.ToString((IFormattable)null);
+            IFormattable formatter = null;
+            string act = TestStruct.ToString(formatter);
             string exp = null;
 
             Assert.AreEqual(exp, act);
@@ -144,28 +144,28 @@ namespace Qowaiv.UnitTests.Formatting
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
-        public void SerializeDeserialize_Empty_AreEqual()
+        public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new FormattableArgumentsSerializeObject()
             {
                 Id = 17,
-                Obj = FormattingArgumentsTest.TestStruct,
+                Obj = default(FormattingArguments),
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new FormattableArgumentsSerializeObject()
             {
                 Id = 17,
-                Obj = FormattingArgumentsTest.TestStruct,
+                Obj = default(FormattingArguments),
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -185,7 +185,7 @@ namespace Qowaiv.UnitTests.Formatting
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]

@@ -2,9 +2,9 @@
 
 namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
 {
-	public class ModelWithForbiddenValues
+    public class ModelWithForbiddenValues
     {
-		[ForbiddenValues("spam@qowaiv.org")]
-		public EmailAddress Email { get; set; }
-	}
+        [ForbiddenValues("spam@qowaiv.org")]
+        public EmailAddress Email { get; set; }
+    }
 }

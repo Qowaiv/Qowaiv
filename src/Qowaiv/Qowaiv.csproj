@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\build\common.props" />
-  
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <DebugType>full</DebugType>
-    <CodeAnalysisRuleSet>..\..\Qowaiv.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+  <Import Project="..\..\props\common.props" />
 
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Qowaiv.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Qowaiv.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">

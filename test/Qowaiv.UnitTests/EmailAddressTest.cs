@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +11,6 @@ using System.Xml.Serialization;
 namespace Qowaiv.UnitTests
 {
     /// <summary>Tests the email address SVO.</summary>
-    [TestFixture]
     public class EmailAddressTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -281,7 +278,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
@@ -301,7 +298,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void DataContractSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
@@ -321,7 +318,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
@@ -330,19 +327,19 @@ namespace Qowaiv.UnitTests
             var input = new EmailAddressSerializeObject()
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = EmailAddress.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new EmailAddressSerializeObject()
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = EmailAddress.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -362,7 +359,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
@@ -452,7 +449,7 @@ namespace Qowaiv.UnitTests
 
         #endregion
 
-        #region IFormattable / Tostring tests
+        #region IFormattable / ToString tests
 
         [Test]
         public void ToString_Empty_IsStringEmpty()
@@ -868,142 +865,133 @@ namespace Qowaiv.UnitTests
 
         #region IsValid tests
 
-        [Test]
-        public void IsValid_Data_IsFalse()
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("..@test.com")]
+        [TestCase(".a@test.com")]
+        [TestCase("ab@sd@dd")]
+        [TestCase(".@s.dd")]
+        [TestCase("ab@01.120.150.1")]
+        [TestCase("ab@88.120.150.021")]
+        [TestCase("ab@88.120.150.01")]
+        [TestCase("ab@988.120.150.10")]
+        [TestCase("ab@120.256.256.120")]
+        [TestCase("ab@120.25.1111.120")]
+        [TestCase("ab@[188.120.150.10")]
+        [TestCase("ab@188.120.150.10]")]
+        [TestCase("ab@[188.120.150.10].com")]
+        [TestCase("a@b.-de.cc")]
+        [TestCase("a@bde-.cc")]
+        [TestCase("a@bde.c-c")]
+        [TestCase("a@bde.cc.")]
+        [TestCase("ab@b+de.cc")]
+        [TestCase("a..b@bde.cc")]
+        [TestCase("_@bde.cc,")]
+        [TestCase("plainaddress")]
+        [TestCase("plain.address")]
+        [TestCase("@%^%#$@#$@#.com")]
+        [TestCase("@domain.com")]
+        [TestCase("Joe Smith &lt;email@domain.com&gt;")]
+        [TestCase("email.domain.com")]
+        [TestCase("email@domain@domain.com")]
+        [TestCase(".email@domain.com")]
+        [TestCase("email.@domain.com")]
+        [TestCase("email..email@domain.com")]
+        [TestCase("email@domain.com (joe Smith)")]
+        [TestCase("email@-domain.com")]
+        [TestCase("email@domain-.com")]
+        [TestCase("email@domain.com-")]
+        [TestCase("email@.domain.com")]
+        [TestCase("email@domain.com.")]
+        [TestCase("email@domain..com")]
+        [TestCase("email@111.222.333")]
+        [TestCase("email@111.222.333.256")]
+        [TestCase("email@[123.123.123.123")]
+        [TestCase("email@[123.123.123].123")]
+        [TestCase("email@123.123.123.123]")]
+        [TestCase("email@123.123.[123.123]")]
+        [TestCase("email@{leftbracket.com")]
+        [TestCase("email@rightbracket}.com")]
+        [TestCase("email@p|pe.com")]
+        [TestCase("isis@100%.nl")]
+        [TestCase("email@dollar$.com")]
+        [TestCase("email@r&amp;d.com")]
+        [TestCase("email@#hash.com")]
+        [TestCase("email@wave~tilde.com")]
+        [TestCase("email@exclamation!mark.com")]
+        [TestCase("email@question?mark.com")]
+        [TestCase("email@obelix*asterisk.com")]
+        [TestCase("email@grave`accent.com")]
+        [TestCase("email@caret^xor.com")]
+        [TestCase("email@=qowaiv.com")]
+        [TestCase("email@plus+.coM")]
+        [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
+        public void InvalidEmailAddresses(string email)
         {
-            Assert.IsFalse(EmailAddress.IsValid(string.Empty), "string.Empty");
-            Assert.IsFalse(EmailAddress.IsValid((String)null), "(String)null");
-
-            foreach (var email in new string[] {
-                "..@test.com",
-                ".a@test.com",
-                "ab@sd@dd",
-                ".@s.dd",
-                "ab@01.120.150.1",
-                "ab@88.120.150.021",
-                "ab@88.120.150.01",
-                "ab@988.120.150.10",
-                "ab@120.256.256.120",
-                "ab@120.25.1111.120",
-                "ab@[188.120.150.10",
-                "ab@188.120.150.10]",
-                "ab@[188.120.150.10].com",
-                "a@b.-de.cc",
-                "a@bde-.cc",
-                "a@bde.c-c",
-                "a@bde.cc.",
-                "ab@b+de.cc",
-                "a..b@bde.cc",
-                "_@bde.cc,",
-                "plainaddress",
-                "plain.address",
-                "@%^%#$@#$@#.com",
-                "@domain.com",
-                "Joe Smith &lt;email@domain.com&gt;",
-                "email.domain.com",
-                "email@domain@domain.com",
-                ".email@domain.com",
-                "email.@domain.com",
-                "email..email@domain.com",
-                "email@domain.com (joe Smith)",
-                "email@-domain.com",
-                "email@domain-.com",
-                "email@domain.com-",
-                "email@.domain.com",
-                "email@domain.com.",
-                "email@domain..com",
-                "email@111.222.333",
-                "email@111.222.333.256",
-                "email@[123.123.123.123",
-                "email@[123.123.123].123",
-                "email@123.123.123.123]",
-                "email@123.123.[123.123]",
-                "email@{leftbracket.com",
-                "email@rightbracket}.com",
-                "email@p|pe.com",
-                "isis@100%.nl",
-                "email@dollar$.com",
-                "email@r&amp;d.com",
-                "email@#hash.com",
-                "email@wave~tilde.com",
-                "email@exclamation!mark.com",
-                "email@question?mark.com",
-                "email@obelix*asterisk.com",
-                "email@grave`accent.com",
-                "email@caret^xor.com",
-                "email@=qowaiv.com",
-                "email@plus+.com"
-            })
-            {
-                Assert.IsFalse(EmailAddress.IsValid(email), email);
-            }
+            Assert.IsFalse(EmailAddress.IsValid(email), email);
         }
 
-        [Test]
-        public void IsValid_Data_IsTrue()
+        [TestCase("w@com")]
+        [TestCase("w.b.f@test.com")]
+        [TestCase("w.b.f@test.museum")]
+        [TestCase("a.a@test.com")]
+        [TestCase("ab@288.120.150.10.com")]
+        [TestCase("ab@188.120.150.10")]
+        [TestCase("ab@1.0.0.10")]
+        [TestCase("ab@120.25.254.120")]
+        [TestCase("ab@[120.254.254.120]")]
+        [TestCase("2@bde.cc")]
+        [TestCase("-@bde.cc")]
+        [TestCase("a2@bde.cc")]
+        [TestCase("a-b@bde.cc")]
+        [TestCase("ab@b-de.cc")]
+        [TestCase("a+b@bde.cc")]
+        [TestCase("f.f.f@bde.cc")]
+        [TestCase("ab_c@bde.cc")]
+        [TestCase("_-_@bde.cc")]
+        [TestCase("k.haak@12move.nl")]
+        [TestCase("K.HAAK@12MOVE.NL")]
+        [TestCase("email@domain.com")]
+        [TestCase("email@domain")]
+        [TestCase("あいうえお@domain.com")]
+        [TestCase("local@あいうえお.com")]
+        [TestCase("firstname.lastname@domain.com")]
+        [TestCase("email@subdomain.domain.com")]
+        [TestCase("firstname+lastname@domain.com")]
+        [TestCase("email@123.123.123.123")]
+        [TestCase("email@[123.123.123.123]")]
+        [TestCase("1234567890@domain.com")]
+        [TestCase("a@domain.com")]
+        [TestCase("a.b.c.d@domain.com")]
+        [TestCase("aap.123.noot.mies@domain.com")]
+        [TestCase("1@domain.com")]
+        [TestCase("email@domain-one.com")]
+        [TestCase("_______@domain.com")]
+        [TestCase("email@domain.topleveldomain")]
+        [TestCase("email@domain.co.jp")]
+        [TestCase("firstname-lastname@domain.com")]
+        [TestCase("firstname-lastname@d.com")]
+        [TestCase("FIRSTNAME-LASTNAME@d--n.com")]
+        [TestCase("first-name-last-name@d-a-n.com")]
+        [TestCase("{local{name{{with{@leftbracket.com")]
+        [TestCase("}local}name}}with{@rightbracket.com")]
+        [TestCase("|local||name|with|@pipe.com")]
+        [TestCase("%local%%name%with%@percentage.com")]
+        [TestCase("$local$$name$with$@dollar.com")]
+        [TestCase("&local&&name&with&$@amp.com")]
+        [TestCase("#local##name#with#@hash.com")]
+        [TestCase("~local~~name~with~@tilde.com")]
+        [TestCase("!local!!name!with!@exclamation.com")]
+        [TestCase("?local??name?with?@question.com")]
+        [TestCase("*local**name*with*@asterisk.com")]
+        [TestCase("`local``name`with`@grave-accent.com")]
+        [TestCase("^local^^name^with^@xor.com")]
+        [TestCase("=local==name=with=@equality.com")]
+        [TestCase("+local++name+with+@equality.com")]
+        [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
+        public void ValidEmailAddresses(string email)
         {
-            foreach (var email in new string[] {
-                "w@com",
-                "w.b.f@test.com",
-                "w.b.f@test.museum",
-                "a.a@test.com",
-                "ab@288.120.150.10.com",
-                "ab@188.120.150.10",
-                "ab@1.0.0.10",
-                "ab@120.25.254.120",
-                "ab@[120.254.254.120]",
-                "2@bde.cc",
-                "-@bde.cc",
-                "a2@bde.cc",
-                "a-b@bde.cc",
-                "ab@b-de.cc",
-                "a+b@bde.cc",
-                "f.f.f@bde.cc",
-                "ab_c@bde.cc",
-                "_-_@bde.cc",
-                "k.haak@12move.nl",
-                "K.HAAK@12MOVE.NL",
-                "email@domain.com",
-                "email@domain",
-                "あいうえお@domain.com",
-                "local@あいうえお.com",
-                "firstname.lastname@domain.com",
-                "email@subdomain.domain.com",
-                "firstname+lastname@domain.com",
-                "email@123.123.123.123",
-                "email@[123.123.123.123]",
-                "1234567890@domain.com",
-                "a@domain.com",
-                "a.b.c.d@domain.com",
-                "aap.123.noot.mies@domain.com",
-                "1@domain.com",
-                "email@domain-one.com",
-                "_______@domain.com",
-                "email@domain.topleveldomain",
-                "email@domain.co.jp",
-                "firstname-lastname@domain.com",
-                "firstname-lastname@d.com",
-                "FIRSTNAME-LASTNAME@d--n.com",
-                "first-name-last-name@d-a-n.com",
-                "{local{name{{with{@leftbracket.com",
-                "}local}name}}with{@rightbracket.com",
-                "|local||name|with|@pipe.com",
-                "%local%%name%with%@percentage.com",
-                "$local$$name$with$@dollar.com",
-                "&local&&name&with&$@amp.com",
-                "#local##name#with#@hash.com",
-                "~local~~name~with~@tilde.com",
-                "!local!!name!with!@exclamation.com",
-                "?local??name?with?@question.com",
-                "*local**name*with*@asterisk.com",
-                "`local``name`with`@grave-accent.com",
-                "^local^^name^with^@xor.com",
-                "=local==name=with=@equality.com",
-                "+local++name+with+@equality.com"
-            })
-            {
-                Assert.IsTrue(EmailAddress.IsValid(email), email);
-            }
+            Assert.IsTrue(EmailAddress.IsValid(email), email);
         }
         #endregion
     }

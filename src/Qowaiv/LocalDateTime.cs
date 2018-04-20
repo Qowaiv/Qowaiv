@@ -559,8 +559,7 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -668,7 +667,7 @@ namespace Qowaiv
 
 
         /// <summary>Casts a <see cref="string"/> to a local date time.</summary>
-        public static explicit operator LocalDateTime(string str) { return LocalDateTime.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator LocalDateTime(string str) { return Parse(str, CultureInfo.CurrentCulture); }
         /// <summary>Casts a date time to a local date time.</summary>
         public static implicit operator LocalDateTime(DateTime val) { return new LocalDateTime(val); }
 
@@ -732,8 +731,7 @@ namespace Qowaiv
         /// </exception>
         public static LocalDateTime Parse(string s, IFormatProvider formatProvider)
         {
-            LocalDateTime val;
-            if (LocalDateTime.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out LocalDateTime val))
             {
                 return val;
             }
@@ -747,16 +745,15 @@ namespace Qowaiv
         /// A string containing a local date time to convert.
         /// </param>
         /// <returns>
-        /// The local date time if the string was converted successfully, otherwiseLocalDateTime.MinValue.
+        /// The local date time if the string was converted successfully, otherwiseMinValue.
         /// </returns>
         public static LocalDateTime TryParse(string s)
         {
-            LocalDateTime val;
-            if (LocalDateTime.TryParse(s, out val))
+            if (TryParse(s, out LocalDateTime val))
             {
                 return val;
             }
-            return LocalDateTime.MinValue;
+            return MinValue;
         }
 
         /// <summary>Converts the string to a local date time.
@@ -818,14 +815,12 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, DateTimeStyles styles, out LocalDateTime result)
         {
-            DateTime dt;
-
-            if (DateTime.TryParse(s, formatProvider, styles, out dt))
+            if (DateTime.TryParse(s, formatProvider, styles, out DateTime dt))
             {
                 result = new LocalDateTime(dt);
                 return true;
             }
-            result = LocalDateTime.MinValue;
+            result = MinValue;
             return false;
         }
 
@@ -842,8 +837,7 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid local date time, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            LocalDateTime d;
-            return TryParse(val, formatProvider, out d);
+            return TryParse(val, formatProvider, out LocalDateTime d);
         }
 
         #endregion

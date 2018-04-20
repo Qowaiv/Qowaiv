@@ -67,6 +67,30 @@ namespace Qowaiv.Reflection
             return code >= TypeCode.SByte && code <= TypeCode.Decimal;
         }
 
+        /// <summary>Returns true if the object type is a date (of any kind).</summary>
+        /// <param name="objectType">
+        /// The type to test for.
+        /// </param>
+        /// <remarks>
+        /// Tests on the types:
+        /// * <see cref="DateTime"/>
+        /// * <see cref="DateTimeOffset"/>
+        /// * <see cref="LocalDateTime"/>
+        /// * <see cref="Date"/>
+        /// * <see cref="WeekDate"/>
+        /// </remarks>
+        public static bool IsDate(Type objectType)
+        {
+            var type = GetNotNullableType(objectType);
+
+            return
+                type == typeof(DateTime) ||
+                type == typeof(DateTimeOffset) ||
+                type == typeof(LocalDateTime) ||
+                type == typeof(Date) ||
+                type == typeof(WeekDate);
+        }
+
         /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>
         /// <param name="objectType">
         /// The type to test for.

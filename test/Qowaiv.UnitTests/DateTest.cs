@@ -914,6 +914,17 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void ConvertFrom_DateTime_Successful()
+        {
+            TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTime(1970, 02, 14));
+        }
+        [Test]
+        public void ConvertFrom_WeekDate_Successful()
+        {
+            TypeConverterAssert.ConvertFromEquals(TestStruct, WeekDate.Create(TestStruct));
+        }
+
+        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -923,15 +934,15 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromUnderlyingType_DateTime_Successful()
+        public void ConverTo_DateTime_Successful()
         {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTime(1970, 02, 14));
+            TypeConverterAssert.ConvertToEquals(new DateTime(1970, 02, 14), TestStruct);
         }
 
         [Test]
-        public void ConverToUnderlyingType_DateTime_Successful()
+        public void ConverTo_WeekDate_Successful()
         {
-            TypeConverterAssert.ConvertToEquals(new DateTime(1970, 02, 14), TestStruct);
+            TypeConverterAssert.ConvertToEquals(WeekDate.Create(TestStruct), TestStruct);
         }
 
         #endregion

@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests
 {
+    [TestFixture]
     public class EmailAddressCollectionTest
     {
         public EmailAddressCollection GetTestInstance()
@@ -346,8 +347,10 @@ namespace Qowaiv.UnitTests
         public void Add_EmailAddressEmptyToEmptyCollection_DoesNotExtendTheCollection()
         {
             var exp = new EmailAddressCollection();
-            var act = new EmailAddressCollection();
-            act.Add(EmailAddress.Empty);
+            var act = new EmailAddressCollection
+            {
+                EmailAddress.Empty
+            };
 
             CollectionAssert.AreEqual(exp, act);
         }
@@ -356,8 +359,10 @@ namespace Qowaiv.UnitTests
         public void Add_EmailAddressUnknownToEmptyCollection_DoesNotExtendTheCollection()
         {
             var exp = new EmailAddressCollection();
-            var act = new EmailAddressCollection();
-            act.Add(EmailAddress.Unknown);
+            var act = new EmailAddressCollection
+            {
+                EmailAddress.Unknown
+            };
 
             CollectionAssert.AreEqual(exp, act);
         }
@@ -399,9 +404,7 @@ namespace Qowaiv.UnitTests
         public void TryParse_Null_EmptyCollection()
         {
             EmailAddressCollection exp = new EmailAddressCollection();
-            EmailAddressCollection act;
-
-            Assert.IsTrue(EmailAddressCollection.TryParse(null, out act));
+            Assert.IsTrue(EmailAddressCollection.TryParse(null, out EmailAddressCollection act));
             CollectionAssert.AreEqual(exp, act);
         }
 
@@ -409,9 +412,7 @@ namespace Qowaiv.UnitTests
         public void TryParse_StringEmpty_EmptyCollection()
         {
             EmailAddressCollection exp = new EmailAddressCollection();
-            EmailAddressCollection act;
-
-            Assert.IsTrue(EmailAddressCollection.TryParse(string.Empty, out act));
+            Assert.IsTrue(EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act));
             CollectionAssert.AreEqual(exp, act);
         }
 

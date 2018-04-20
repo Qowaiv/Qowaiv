@@ -1,4 +1,7 @@
-﻿using Qowaiv.Formatting;
+﻿#pragma warning disable S927 // parameter names should match base declaration and other partial definitions
+// In this class, it makes more sense to rename item to email.
+
+using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
 using System.Collections;
@@ -15,8 +18,7 @@ namespace Qowaiv
 {
     /// <summary>Represents a collection of unique email addresses.</summary>
     /// <remarks>
-    /// Empty and unknown email addresses can not be added due to a special 
-    /// equality comparer that always assumes that they are already added.
+    /// Empty and unknown email addresses can not be added.
     /// </remarks>
     [Serializable]
     public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSerializable, IJsonSerializable, IFormattable
@@ -40,7 +42,7 @@ namespace Qowaiv
         /// 
         /// So this construction is required.
         /// </remarks>
-        private HashSet<EmailAddress> hashset = new HashSet<EmailAddress>();
+        private readonly HashSet<EmailAddress> hashset = new HashSet<EmailAddress>();
 
         /// <summary>Initiates a new collection of email addresses.</summary>
         public EmailAddressCollection() { }
@@ -57,10 +59,7 @@ namespace Qowaiv
         /// An enumeration of email addresses.
         /// </param>
         public EmailAddressCollection(IEnumerable<EmailAddress> emails)
-            : this()
-        {
-            AddRange(emails);
-        }
+            : this() => AddRange(emails);
 
         #region Methods
 
@@ -92,41 +91,42 @@ namespace Qowaiv
 
         /// <summary>Gets the number of email addresses in the collection.</summary>
         [ExcludeFromCodeCoverage]
-        public int Count { get { return hashset.Count; } }
+        public int Count => hashset.Count;
 
         /// <summary>Returns false as this collection is not read only.</summary>
         [ExcludeFromCodeCoverage]
-        public bool IsReadOnly { get { return false; } }
+        public bool IsReadOnly => false;
 
         /// <summary>Adds an email address to the current collection.</summary>
         [ExcludeFromCodeCoverage]
-        void ICollection<EmailAddress>.Add(EmailAddress email) { Add(email); }
+
+        void ICollection<EmailAddress>.Add(EmailAddress email) => Add(email);
 
         /// <summary>Clears all email addresses From current collection.</summary>
         [ExcludeFromCodeCoverage]
-        public void Clear() { hashset.Clear(); }
+        public void Clear() => hashset.Clear();
 
         /// <summary>Returns true if the collection contains the specified email address.</summary>
         [ExcludeFromCodeCoverage]
-        public bool Contains(EmailAddress item) { return hashset.Contains(item); }
+        public bool Contains(EmailAddress item) => hashset.Contains(item);
 
         /// <summary>Copies the email addresses of the collection to an
         /// System.Array, starting at a particular System.Array index.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        public void CopyTo(EmailAddress[] array, int arrayIndex) { hashset.CopyTo(array, arrayIndex); }
+        public void CopyTo(EmailAddress[] array, int arrayIndex) => hashset.CopyTo(array, arrayIndex);
 
         /// <summary>Removes the email address from the collection.</summary>
         [ExcludeFromCodeCoverage]
-        public bool Remove(EmailAddress item) { return hashset.Remove(item); }
+        public bool Remove(EmailAddress item) => hashset.Remove(item);
 
         /// <summary>Gets an enumerator to loop through all email addresses of the collection.</summary>
         [ExcludeFromCodeCoverage]
-        public IEnumerator<EmailAddress> GetEnumerator() { return hashset.GetEnumerator(); }
+        public IEnumerator<EmailAddress> GetEnumerator() => hashset.GetEnumerator();
 
         /// <summary>Gets an enumerator to loop through all email addresses of the collection.</summary>
         [ExcludeFromCodeCoverage]
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion
 
@@ -134,47 +134,47 @@ namespace Qowaiv
 
         /// <summary>Removes all elements in the specified collection from the current set.</summary>
         [ExcludeFromCodeCoverage]
-        public void ExceptWith(IEnumerable<EmailAddress> other) { hashset.ExceptWith(other); }
+        public void ExceptWith(IEnumerable<EmailAddress> other) => hashset.ExceptWith(other);
 
         /// <summary>Modifies the current set so that it contains only elements that are also in a specified collection.</summary>
         [ExcludeFromCodeCoverage]
-        public void IntersectWith(IEnumerable<EmailAddress> other) { hashset.IntersectWith(other); }
+        public void IntersectWith(IEnumerable<EmailAddress> other) => hashset.IntersectWith(other);
 
         /// <summary>Determines whether the current set is a proper (strict) subset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
-        public bool IsProperSubsetOf(IEnumerable<EmailAddress> other) { return IsProperSubsetOf(other); }
+        public bool IsProperSubsetOf(IEnumerable<EmailAddress> other) => hashset.IsProperSubsetOf(other);
 
         /// <summary>Determines whether the current set is a proper (strict) superset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
-        public bool IsProperSupersetOf(IEnumerable<EmailAddress> other) { return IsProperSupersetOf(other); }
+        public bool IsProperSupersetOf(IEnumerable<EmailAddress> other) => hashset.IsProperSupersetOf(other);
 
         /// <summary>Determines whether a set is a subset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
-        public bool IsSubsetOf(IEnumerable<EmailAddress> other) { return IsSubsetOf(other); }
+        public bool IsSubsetOf(IEnumerable<EmailAddress> other) => hashset.IsSubsetOf(other);
 
         /// <summary>Determines whether a set is a superset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
-        public bool IsSupersetOf(IEnumerable<EmailAddress> other) { return IsSupersetOf(other); }
+        public bool IsSupersetOf(IEnumerable<EmailAddress> other) => hashset.IsSupersetOf(other);
 
         /// <summary>Determines whether the current set overlaps with the specified collection.</summary>
         [ExcludeFromCodeCoverage]
-        public bool Overlaps(IEnumerable<EmailAddress> other) { return Overlaps(other); }
+        public bool Overlaps(IEnumerable<EmailAddress> other) => hashset.Overlaps(other);
 
         /// <summary>Determines whether the current set and the specified collection contain the same elements.</summary>
         [ExcludeFromCodeCoverage]
-        public bool SetEquals(IEnumerable<EmailAddress> other) { return SetEquals(other); }
+        public bool SetEquals(IEnumerable<EmailAddress> other) => hashset.SetEquals(other);
 
         /// <summary>Modifies the current set so that it contains only elements that are present
         /// either in the current set or in the specified collection, but not both.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        public void SymmetricExceptWith(IEnumerable<EmailAddress> other) { SymmetricExceptWith(other); }
+        public void SymmetricExceptWith(IEnumerable<EmailAddress> other) => hashset.SymmetricExceptWith(other);
 
         /// <summary>Modifies the current set so that it contains all elements that are present
         /// in either the current set or the specified collection.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        public void UnionWith(IEnumerable<EmailAddress> other) { UnionWith(other); }
+        public void UnionWith(IEnumerable<EmailAddress> other) => hashset.UnionWith(other);
 
         #endregion
 
@@ -258,7 +258,7 @@ namespace Qowaiv
         /// should never be called. Instead, the read will return null.
         /// </remarks>
         [ExcludeFromCodeCoverage]
-        void IJsonSerializable.FromJson() { }
+        void IJsonSerializable.FromJson() { /* should read as null */ }
 
         /// <summary>Generates an email address from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -308,37 +308,26 @@ namespace Qowaiv
         /// <remarks>
         /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
         /// </remarks>
-        protected virtual object ToJson()
-        {
-            return Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
-        }
+        protected virtual object ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
+
         #endregion
 
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address collection.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
         /// <param name="format">
@@ -349,8 +338,7 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -372,10 +360,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static EmailAddressCollection Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
+        public static EmailAddressCollection Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to an email address collection.</summary>
         /// <param name="s">
@@ -392,8 +377,7 @@ namespace Qowaiv
         /// </exception>
         public static EmailAddressCollection Parse(string s, IFormatProvider formatProvider)
         {
-            EmailAddressCollection val;
-            if (EmailAddressCollection.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out EmailAddressCollection val))
             {
                 return val;
             }
@@ -411,8 +395,7 @@ namespace Qowaiv
         /// </returns>
         public static EmailAddressCollection TryParse(string s)
         {
-            EmailAddressCollection val;
-            if (EmailAddressCollection.TryParse(s, out val))
+            if (TryParse(s, out EmailAddressCollection val))
             {
                 return val;
             }
@@ -464,8 +447,7 @@ namespace Qowaiv
 
             foreach (var str in strs)
             {
-                EmailAddress email;
-                if (EmailAddress.TryParse(str, formatProvider, out email))
+                if (EmailAddress.TryParse(str, formatProvider, out EmailAddress email))
                 {
                     result.Add(email);
                 }

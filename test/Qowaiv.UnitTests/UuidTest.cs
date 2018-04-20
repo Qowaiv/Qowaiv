@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -55,11 +53,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Uuid val;
-
             string str = null;
 
-            Assert.IsTrue(Uuid.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
             Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
         }
 
@@ -67,11 +63,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Uuid val;
-
             string str = string.Empty;
 
-            Assert.IsTrue(Uuid.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
             Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
         }
 
@@ -79,11 +73,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Uuid val;
-
             string str = "8a1a8c42-d2ff-e254-e26e-b6abcbf19420";
 
-            Assert.IsTrue(Uuid.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
             Assert.AreEqual(str, val.ToString("d"), "Value");
         }
 
@@ -91,11 +83,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Uuid val;
-
             string str = "string";
 
-            Assert.IsFalse(Uuid.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Uuid.TryParse(str, out Uuid val), "Valid");
             Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
         }
 
@@ -228,7 +218,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_GuidSerializeObject_AreEqual()
@@ -248,7 +238,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void DataContractSerializeDeserialize_GuidSerializeObject_AreEqual()
@@ -268,7 +258,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
@@ -277,19 +267,19 @@ namespace Qowaiv.UnitTests
             var input = new QGuidSerializeObject()
             {
                 Id = 17,
-                Obj = TestStruct,
+                Obj = Uuid.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new QGuidSerializeObject()
             {
                 Id = 17,
-                Obj = TestStruct,
+                Obj = Uuid.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -309,7 +299,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
@@ -614,7 +604,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a GUID"
@@ -628,7 +618,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a GUID"

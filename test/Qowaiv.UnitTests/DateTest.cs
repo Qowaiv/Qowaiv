@@ -1,11 +1,8 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -78,11 +75,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Date val;
-
             string str = "1983-05-02";
 
-            Assert.IsTrue(Date.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Date.TryParse(str, out Date val), "Valid");
             Assert.AreEqual(new Date(1983, 05, 02), val, "Value");
         }
 
@@ -92,11 +87,9 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("nl-NL"))
             {
-                Date val;
-
                 string str = "string";
 
-                Assert.IsFalse(Date.TryParse(str, out val), "Valid");
+                Assert.IsFalse(Date.TryParse(str, out Date val), "Valid");
                 Assert.AreEqual("1-1-0001", val.ToString(), "Value");
             }
         }
@@ -230,7 +223,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_DateSerializeObject_AreEqual()
@@ -250,7 +243,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void DataContractSerializeDeserialize_DateSerializeObject_AreEqual()
@@ -270,28 +263,28 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
-        public void SerializeDeserialize_Empty_AreEqual()
+        public void SerializeDeserialize_MinValue_AreEqual()
         {
             var input = new DateSerializeObject()
             {
                 Id = 17,
-                Obj = TestStruct,
+                Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new DateSerializeObject()
             {
                 Id = 17,
-                Obj = TestStruct,
+                Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -311,7 +304,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
@@ -602,7 +595,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a Date"
@@ -616,7 +609,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a Date"

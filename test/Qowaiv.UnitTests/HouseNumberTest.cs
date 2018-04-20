@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -109,11 +107,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            HouseNumber val;
-
             string str = null;
 
-            Assert.IsTrue(HouseNumber.TryParse(str, out val), "Valid");
+            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -121,11 +117,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            HouseNumber val;
-
             string str = string.Empty;
 
-            Assert.IsTrue(HouseNumber.TryParse(str, out val), "Valid");
+            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -133,11 +127,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            HouseNumber val;
-
             string str = "?";
 
-            Assert.IsTrue(HouseNumber.TryParse(str, out val), "Valid");
+            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -145,11 +137,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            HouseNumber val;
-
             string str = "123";
 
-            Assert.IsTrue(HouseNumber.TryParse(str, out val), "Valid");
+            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -157,11 +147,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            HouseNumber val;
-
             string str = "string";
 
-            Assert.IsFalse(HouseNumber.TryParse(str, out val), "Valid");
+            Assert.IsFalse(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -222,18 +210,14 @@ namespace Qowaiv.UnitTests
         public void TryCreate_Null_IsEmpty()
         {
             HouseNumber exp = HouseNumber.Empty;
-            HouseNumber act;
-
-            Assert.IsTrue(HouseNumber.TryCreate(null, out act));
+            Assert.IsTrue(HouseNumber.TryCreate(null, out HouseNumber act));
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void TryCreate_Int32MinValue_IsEmpty()
         {
             HouseNumber exp = HouseNumber.Empty;
-            HouseNumber act;
-
-            Assert.IsFalse(HouseNumber.TryCreate(Int32.MinValue, out act));
+            Assert.IsFalse(HouseNumber.TryCreate(Int32.MinValue, out HouseNumber act));
             Assert.AreEqual(exp, act);
         }
 
@@ -355,7 +339,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
@@ -375,7 +359,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void DataContractSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
@@ -395,7 +379,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
@@ -404,19 +388,19 @@ namespace Qowaiv.UnitTests
             var input = new HouseNumberSerializeObject()
             {
                 Id = 17,
-                Obj = TestStruct,
+                Obj = HouseNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new HouseNumberSerializeObject()
             {
                 Id = 17,
-                Obj = TestStruct,
+                Obj = HouseNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -436,7 +420,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
         }
 
         [Test]
@@ -741,7 +725,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a house number"
@@ -755,7 +739,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a house number"

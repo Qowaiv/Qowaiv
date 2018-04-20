@@ -19,11 +19,15 @@ namespace Qowaiv.Conversion
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
+            if(value is null)
+            {
+                return Activator.CreateInstance<T>();
+            }
             if (value is string str)
             {
                 return FromString(str, culture);
             }
-            if(!(value is null) && IsConvertable(value.GetType()))
+            if(IsConvertable(value.GetType()))
             {
                 if(value is DateTime dateTime)
                 {
@@ -62,38 +66,52 @@ namespace Qowaiv.Conversion
         /// <inheritdoc />
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if(destinationType == typeof(string))
+            Guard.NotNull(destinationType, nameof(destinationType));
+
+            // If the value is null or default value.
+            if (QowaivType.IsNullOrDefaultValue(value))
+            {
+                return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
+            }
+
+            if (destinationType == typeof(string))
             {
                 var typed = Guard.IsTypeOf<T>(value, nameof(value));
                 return typed.ToString(string.Empty, culture);
             }
-            if(!(destinationType is null) &&  IsConvertable(destinationType))
+
+            if(IsConvertable(destinationType))
             {
                 var date = Guard.IsTypeOf<T>(value, nameof(value));
 
-                if (destinationType == typeof(DateTime ))
+                var type = QowaivType.GetNotNullableType(destinationType);
+
+                if (type == typeof(DateTime))
                 {
                     return ToDateTime(date);
                 }
-                if (destinationType == typeof(DateTimeOffset))
+                if (type == typeof(DateTimeOffset))
                 {
                     return ToDateTimeOffset(date);
                 }
-                if (destinationType == typeof(LocalDateTime))
+                if (type == typeof(LocalDateTime))
                 {
                     return ToLocalDateTime(date);
                 }
-                if (destinationType == typeof(Date))
+                if (type == typeof(Date))
                 {
                     return ToDate(date);
                 }
-                if (destinationType == typeof(WeekDate))
+                if (type == typeof(WeekDate))
                 {
                     return ToWeekDate(date);
                 }
             }
+
             return base.ConvertTo(context, culture, value, destinationType);
         }
+
+        #endregion
 
         #region From's
 
@@ -105,7 +123,7 @@ namespace Qowaiv.Conversion
 
         /// <summary>Converts from <see cref="DateTimeOffset"/>.</summary>
         protected abstract T FromDateTimeOffset(DateTimeOffset offset);
-        
+
         /// <summary>Converts from <see cref="LocalDateTime"/>.</summary>
         protected abstract T FromLocalDateTime(LocalDateTime local);
 
@@ -141,7 +159,5 @@ namespace Qowaiv.Conversion
             return type != typeof(T) &&
                 (type == typeof(string) || QowaivType.IsDate(type));
         }
-
-        #endregion
     }
 }

@@ -5,8 +5,8 @@ using System.Globalization;
 
 namespace Qowaiv.Conversion.Financial
 {
-	/// <summary>Provides a conversion for an Amount.</summary>
-	public class AmountTypeConverter : TypeConverter
+    /// <summary>Provides a conversion for an Amount.</summary>
+    public class AmountTypeConverter : TypeConverter
     {
         #region Convert From
 

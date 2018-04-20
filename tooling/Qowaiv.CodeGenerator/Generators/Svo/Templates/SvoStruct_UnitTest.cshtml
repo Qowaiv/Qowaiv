@@ -16,7 +16,6 @@ using @Model.Namespace;
 namespace @(Model.Namespace).UnitTests
 {
     /// <summary>Tests the @Model.ClassLongName SVO.</summary>
-    [TestFixture]
     public class @Model.ClassNameTest
     {
     /// <summary>The test instance for most tests.</summary>
@@ -173,42 +172,42 @@ namespace @(Model.Namespace).UnitTests
     using (new CultureInfoScope("en-GB"))
     {
     Assert.Catch<FormatException>
-        (() =>
-        {
-        @(Model.ClassName).Parse("InvalidInput");
-        },
-        "Not a valid @(Model.ClassLongName)");
-        }
-        }
+    (() =>
+    {
+    @(Model.ClassName).Parse("InvalidInput");
+    },
+    "Not a valid @(Model.ClassLongName)");
+    }
+    }
 
-        [Test]
-        public void TryParse_TestStructInput_AreEqual()
-        {
-        using (new CultureInfoScope("en-GB"))
-        {
-        var exp = TestStruct;
-        var act = @(Model.ClassName).TryParse(exp.ToString());
+    [Test]
+    public void TryParse_TestStructInput_AreEqual()
+    {
+    using (new CultureInfoScope("en-GB"))
+    {
+    var exp = TestStruct;
+    var act = @(Model.ClassName).TryParse(exp.ToString());
 
-        Assert.AreEqual(exp, act);
-        }
-        }
+    Assert.AreEqual(exp, act);
+    }
+    }
 
-        [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-        using (new CultureInfoScope("en-GB"))
-        {
-        var exp = default(@(Model.ClassName));
-        var act = @(Model.ClassName).TryParse("InvalidInput");
+    [Test]
+    public void TryParse_InvalidInput_DefaultValue()
+    {
+    using (new CultureInfoScope("en-GB"))
+    {
+    var exp = default(@(Model.ClassName));
+    var act = @(Model.ClassName).TryParse("InvalidInput");
 
-        Assert.AreEqual(exp, act);
-        }
-        }
+    Assert.AreEqual(exp, act);
+    }
+    }
 
-        #endregion
+    #endregion
 
-        @if (Model.UnderlyingType != typeof(string))
-        {<text>
+    @if (Model.UnderlyingType != typeof(string))
+    {<text>
     #region TryCreate tests
 
     [Test]
@@ -260,554 +259,554 @@ namespace @(Model.Namespace).UnitTests
     #endregion
     </text>}
 
-        #region (XML) (De)serialization tests
+    #region (XML) (De)serialization tests
 
-        [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-        ExceptionAssert.CatchArgumentNullException
-        (() =>
-        {
-        SerializationTest.DeserializeUsingConstructor<@(Model.ClassName)>
-            (null, default(StreamingContext));
-            },
-            "info");
-            }
+    [Test]
+    public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
+    {
+    ExceptionAssert.CatchArgumentNullException
+    (() =>
+    {
+    SerializationTest.DeserializeUsingConstructor<@(Model.ClassName)>
+    (null, default(StreamingContext));
+    },
+    "info");
+    }
 
-            [Test]
-            public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-            {
-            Assert.Catch<SerializationException>
-                (() =>
-                {
-                var info = new SerializationInfo(typeof(@(Model.ClassName)), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<@(Model.ClassName)>
-                    (info, default(StreamingContext));
-                    });
-                    }
+    [Test]
+    public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
+    {
+    Assert.Catch<SerializationException>
+    (() =>
+    {
+    var info = new SerializationInfo(typeof(@(Model.ClassName)), new System.Runtime.Serialization.FormatterConverter());
+    SerializationTest.DeserializeUsingConstructor<@(Model.ClassName)>
+    (info, default(StreamingContext));
+    });
+    }
 
-                    [Test]
-                    public void GetObjectData_Null_ThrowsArgumentNullException()
-                    {
-                    ExceptionAssert.CatchArgumentNullException
-                    (() =>
-                    {
-                    ISerializable obj = TestStruct;
-                    obj.GetObjectData(null, default(StreamingContext));
-                    },
-                    "info");
-                    }
+    [Test]
+    public void GetObjectData_Null_ThrowsArgumentNullException()
+    {
+    ExceptionAssert.CatchArgumentNullException
+    (() =>
+    {
+    ISerializable obj = TestStruct;
+    obj.GetObjectData(null, default(StreamingContext));
+    },
+    "info");
+    }
 
-                    [Test]
-                    public void GetObjectData_SerializationInfo_AreEqual()
-                    {
-                    ISerializable obj = TestStruct;
-                    var info = new SerializationInfo(typeof(@(Model.ClassName)), new System.Runtime.Serialization.FormatterConverter());
-                    obj.GetObjectData(info, default(StreamingContext));
+    [Test]
+    public void GetObjectData_SerializationInfo_AreEqual()
+    {
+    ISerializable obj = TestStruct;
+    var info = new SerializationInfo(typeof(@(Model.ClassName)), new System.Runtime.Serialization.FormatterConverter());
+    obj.GetObjectData(info, default(StreamingContext));
 
-                    Assert.AreEqual((@(Model.UnderlyingType.Name))2, info.Get@(Model.UnderlyingType.Name)("Value"));
-                    }
+    Assert.AreEqual((@(Model.UnderlyingType.Name))2, info.Get@(Model.UnderlyingType.Name)("Value"));
+    }
 
-                    [Test]
-                    public void SerializeDeserialize_TestStruct_AreEqual()
-                    {
-                    var input = TestStruct;
-                    var exp = TestStruct;
-                    var act = SerializationTest.SerializeDeserialize(input);
-                    Assert.AreEqual(exp, act);
-                    }
-                    [Test]
-                    public void DataContractSerializeDeserialize_TestStruct_AreEqual()
-                    {
-                    var input = TestStruct;
-                    var exp = TestStruct;
-                    var act = SerializationTest.DataContractSerializeDeserialize(input);
-                    Assert.AreEqual(exp, act);
-                    }
-                    [Test]
-                    public void XmlSerializeDeserialize_TestStruct_AreEqual()
-                    {
-                    var input = TestStruct;
-                    var exp = TestStruct;
-                    var act = SerializationTest.XmlSerializeDeserialize(input);
-                    Assert.AreEqual(exp, act);
-                    }
+    [Test]
+    public void SerializeDeserialize_TestStruct_AreEqual()
+    {
+    var input = TestStruct;
+    var exp = TestStruct;
+    var act = SerializationTest.SerializeDeserialize(input);
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void DataContractSerializeDeserialize_TestStruct_AreEqual()
+    {
+    var input = TestStruct;
+    var exp = TestStruct;
+    var act = SerializationTest.DataContractSerializeDeserialize(input);
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void XmlSerializeDeserialize_TestStruct_AreEqual()
+    {
+    var input = TestStruct;
+    var exp = TestStruct;
+    var act = SerializationTest.XmlSerializeDeserialize(input);
+    Assert.AreEqual(exp, act);
+    }
 
-                    [Test]
-                    public void SerializeDeserialize_@(Model.ClassNameSerializeObject)_AreEqual()
-                    {
-                    var input = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var exp = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var act = SerializationTest.SerializeDeserialize(input);
-                    Assert.AreEqual(exp.Id, act.Id, "Id");
-                    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-                    DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
-                    }
-                    [Test]
-                    public void XmlSerializeDeserialize_@(Model.ClassNameSerializeObject)_AreEqual()
-                    {
-                    var input = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var exp = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var act = SerializationTest.XmlSerializeDeserialize(input);
-                    Assert.AreEqual(exp.Id, act.Id, "Id");
-                    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-                    DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
-                    }
-                    [Test]
-                    public void DataContractSerializeDeserialize_@(Model.ClassNameSerializeObject)_AreEqual()
-                    {
-                    var input = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var exp = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var act = SerializationTest.DataContractSerializeDeserialize(input);
-                    Assert.AreEqual(exp.Id, act.Id, "Id");
-                    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-                    DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
-                    }
+    [Test]
+    public void SerializeDeserialize_@(Model.ClassNameSerializeObject)_AreEqual()
+    {
+    var input = new @(Model.ClassNameSerializeObject)()
+    {
+    Id = 17,
+    Obj = TestStruct,
+    Date = new DateTime(1970, 02, 14),
+    };
+    var exp = new @(Model.ClassNameSerializeObject)()
+    {
+    Id = 17,
+    Obj = TestStruct,
+    Date = new DateTime(1970, 02, 14),
+    };
+    var act = SerializationTest.SerializeDeserialize(input);
+    Assert.AreEqual(exp.Id, act.Id, "Id");
+    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
+    Assert.AreEqual(exp.Date, act.Date, "Date");;
+    }
+    [Test]
+    public void XmlSerializeDeserialize_@(Model.ClassNameSerializeObject)_AreEqual()
+    {
+    var input = new @(Model.ClassNameSerializeObject)()
+    {
+    Id = 17,
+    Obj = TestStruct,
+    Date = new DateTime(1970, 02, 14),
+    };
+    var exp = new @(Model.ClassNameSerializeObject)()
+    {
+    Id = 17,
+    Obj = TestStruct,
+    Date = new DateTime(1970, 02, 14),
+    };
+    var act = SerializationTest.XmlSerializeDeserialize(input);
+    Assert.AreEqual(exp.Id, act.Id, "Id");
+    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
+    Assert.AreEqual(exp.Date, act.Date, "Date");;
+    }
+    [Test]
+    public void DataContractSerializeDeserialize_@(Model.ClassNameSerializeObject)_AreEqual()
+    {
+    var input = new @(Model.ClassNameSerializeObject)()
+    {
+    Id = 17,
+    Obj = TestStruct,
+    Date = new DateTime(1970, 02, 14),
+    };
+    var exp = new @(Model.ClassNameSerializeObject)()
+    {
+    Id = 17,
+    Obj = TestStruct,
+    Date = new DateTime(1970, 02, 14),
+    };
+    var act = SerializationTest.DataContractSerializeDeserialize(input);
+    Assert.AreEqual(exp.Id, act.Id, "Id");
+    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
+    Assert.AreEqual(exp.Date, act.Date, "Date");;
+    }
 
-                    [Test]
-                    public void SerializeDeserialize_Empty_AreEqual()
-                    {
-                    var input = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var exp = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = TestStruct,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var act = SerializationTest.SerializeDeserialize(input);
-                    Assert.AreEqual(exp.Id, act.Id, "Id");
-                    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-                    DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
-                    }
-                    [Test]
-                    public void XmlSerializeDeserialize_Empty_AreEqual()
-                    {
-                    var input = new  @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = @(Model.ClassName).Empty,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var exp = new @(Model.ClassNameSerializeObject)()
-                    {
-                    Id = 17,
-                    Obj = @(Model.ClassName).Empty,
-                    Date = new DateTime(1970, 02, 14),
-                    };
-                    var act = SerializationTest.XmlSerializeDeserialize(input);
-                    Assert.AreEqual(exp.Id, act.Id, "Id");
-                    Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-                    DateTimeAssert.AreEqual(exp.Date, act.Date, "Date");;
-                    }
+    [Test]
+    public void SerializeDeserialize_Default_AreEqual()
+    {
+		var input = new @(Model.ClassNameSerializeObject)()
+		{
+			Id = 17,
+			Obj = default(@(Model.ClassName)),
+			Date = new DateTime(1970, 02, 14),
+		};
+		var exp = new @(Model.ClassNameSerializeObject)()
+		{
+			Id = 17,
+			Obj = default(@(Model.ClassName)),
+			Date = new DateTime(1970, 02, 14),
+		};
+		var act = SerializationTest.SerializeDeserialize(input);
+		Assert.AreEqual(exp.Id, act.Id, "Id");
+		Assert.AreEqual(exp.Obj, act.Obj, "Obj");
+		Assert.AreEqual(exp.Date, act.Date, "Date");
+    }
+    [Test]
+    public void XmlSerializeDeserialize_Default_AreEqual()
+    {
+		var input = new  @(Model.ClassNameSerializeObject)()
+		{
+			Id = 17,
+			Obj = default(@(Model.ClassName)),
+			Date = new DateTime(1970, 02, 14),
+		};
+		var exp = new @(Model.ClassNameSerializeObject)()
+		{
+			Id = 17,
+			Obj = default(@(Model.ClassName)),
+			Date = new DateTime(1970, 02, 14),
+		};
+		var act = SerializationTest.XmlSerializeDeserialize(input);
+		Assert.AreEqual(exp.Id, act.Id, "Id");
+		Assert.AreEqual(exp.Obj, act.Obj, "Obj");
+		Assert.AreEqual(exp.Date, act.Date, "Date");
+    }
 
-                    [Test]
-                    public void GetSchema_None_IsNull()
-                    {
-                    IXmlSerializable obj = TestStruct;
-                    Assert.IsNull(obj.GetSchema());
-                    }
+    [Test]
+    public void GetSchema_None_IsNull()
+    {
+    IXmlSerializable obj = TestStruct;
+    Assert.IsNull(obj.GetSchema());
+    }
 
-                    #endregion
+    #endregion
 
-                    #region JSON (De)serialization tests
+    #region JSON (De)serialization tests
 
-                    [Test]
-                    public void FromJson_None_EmptyValue()
-                    {
-                    var act = JsonTester.Read<@(Model.ClassName)>
-                        ();
-                        var exp = @(Model.ClassName).Empty;
+    [Test]
+    public void FromJson_None_EmptyValue()
+    {
+    var act = JsonTester.Read<@(Model.ClassName)>
+    ();
+    var exp = @(Model.ClassName).Empty;
 
-                        Assert.AreEqual(exp, act);
-                        }
-                        [Test]
-                        public void FromJson_Null_AssertNotSupportedException()
-                        {
-                        Assert.Catch<NotSupportedException>
-                            (() =>
-                            {
-                            JsonTester.Read<@(Model.ClassName)>
-                                ();
-                                },
-                                "JSON deserialization from null is not supported.");
-                                }
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void FromJson_Null_AssertNotSupportedException()
+    {
+    Assert.Catch<NotSupportedException>
+    (() =>
+    {
+    JsonTester.Read<@(Model.ClassName)>
+    ();
+    },
+    "JSON deserialization from null is not supported.");
+    }
 
-                                [Test]
-                                public void FromJson_InvalidStringValue_AssertFormatException()
-                                {
-                                Assert.Catch<FormatException>
-                                    (() =>
-                                    {
-                                    JsonTester.Read<@(Model.ClassName)>
-                                        ("InvalidStringValue");
-                                        },
-                                        "Not a valid @Model.ClassLongName");
-                                        }
-                                        [Test]
-                                        public void FromJson_StringValue_AreEqual()
-                                        {
-                                        var act = JsonTester.Read<@(Model.ClassName)>
-                                            (TestStruct.ToString(CultureInfo.InvariantCulture));
-                                            var exp = TestStruct;
+    [Test]
+    public void FromJson_InvalidStringValue_AssertFormatException()
+    {
+    Assert.Catch<FormatException>
+    (() =>
+    {
+    JsonTester.Read<@(Model.ClassName)>
+    ("InvalidStringValue");
+    },
+    "Not a valid @Model.ClassLongName");
+    }
+    [Test]
+    public void FromJson_StringValue_AreEqual()
+    {
+    var act = JsonTester.Read<@(Model.ClassName)>
+    (TestStruct.ToString(CultureInfo.InvariantCulture));
+    var exp = TestStruct;
 
-                                            Assert.AreEqual(exp, act);
-                                            }
+    Assert.AreEqual(exp, act);
+    }
 
-                                            [Test]
-                                            public void FromJson_Int64Value_AreEqual()
-                                            {
-                                            var act = JsonTester.Read<@(Model.ClassName)>
-                                                ((Int64)TestStruct);
-                                                var exp = TestStruct;
+    [Test]
+    public void FromJson_Int64Value_AreEqual()
+    {
+    var act = JsonTester.Read<@(Model.ClassName)>
+    ((Int64)TestStruct);
+    var exp = TestStruct;
 
-                                                Assert.AreEqual(exp, act);
-                                                }
-                                                [Test]
-                                                public void FromJson_Int64Value_AssertNotSupportedException()
-                                                {
-                                                Assert.Catch<NotSupportedException>
-                                                    (() =>
-                                                    {
-                                                    JsonTester.Read<@(Model.ClassName)>
-                                                        (123456L);
-                                                        },
-                                                        "JSON deserialization from an integer is not supported.");
-                                                        }
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void FromJson_Int64Value_AssertNotSupportedException()
+    {
+    Assert.Catch<NotSupportedException>
+    (() =>
+    {
+    JsonTester.Read<@(Model.ClassName)>
+    (123456L);
+    },
+    "JSON deserialization from an integer is not supported.");
+    }
 
-                                                        [Test]
-                                                        public void FromJson_DoubleValue_AreEqual()
-                                                        {
-                                                        var act = JsonTester.Read<@(Model.ClassName)>
-                                                            ((Double)TestStruct);
-                                                            var exp = TestStruct;
+    [Test]
+    public void FromJson_DoubleValue_AreEqual()
+    {
+    var act = JsonTester.Read<@(Model.ClassName)>
+    ((Double)TestStruct);
+    var exp = TestStruct;
 
-                                                            Assert.AreEqual(exp, act);
-                                                            }
-                                                            [Test]
-                                                            public void FromJson_DoubleValue_AssertNotSupportedException()
-                                                            {
-                                                            Assert.Catch<NotSupportedException>
-                                                                (() =>
-                                                                {
-                                                                JsonTester.Read<@(Model.ClassName)>
-                                                                    (1234.56);
-                                                                    },
-                                                                    "JSON deserialization from a number is not supported.");
-                                                                    }
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void FromJson_DoubleValue_AssertNotSupportedException()
+    {
+    Assert.Catch<NotSupportedException>
+    (() =>
+    {
+    JsonTester.Read<@(Model.ClassName)>
+    (1234.56);
+    },
+    "JSON deserialization from a number is not supported.");
+    }
 
-                                                                    [Test]
-                                                                    public void FromJson_DateTimeValue_AreEqual()
-                                                                    {
-                                                                    var act = JsonTester.Read<@(Model.ClassName)>
-                                                                        ((DateTime)TestStruct);
-                                                                        var exp = TestStruct;
+    [Test]
+    public void FromJson_DateTimeValue_AreEqual()
+    {
+    var act = JsonTester.Read<@(Model.ClassName)>
+    ((DateTime)TestStruct);
+    var exp = TestStruct;
 
-                                                                        Assert.AreEqual(exp, act);
-                                                                        }
-                                                                        [Test]
-                                                                        public void FromJson_DateTimeValue_AssertNotSupportedException()
-                                                                        {
-                                                                        Assert.Catch<NotSupportedException>
-                                                                            (() =>
-                                                                            {
-                                                                            JsonTester.Read<@(Model.ClassName)>
-                                                                                (new DateTime(1972, 02, 14));
-                                                                                },
-                                                                                "JSON deserialization from a date is not supported.");
-                                                                                }
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void FromJson_DateTimeValue_AssertNotSupportedException()
+    {
+    Assert.Catch<NotSupportedException>
+    (() =>
+    {
+    JsonTester.Read<@(Model.ClassName)>
+    (new DateTime(1972, 02, 14));
+    },
+    "JSON deserialization from a date is not supported.");
+    }
 
-                                                                                [Test]
-                                                                                public void ToJson_DefaultValue_AreEqual()
-                                                                                {
-                                                                                object act = JsonTester.Write(default(@Model.ClassName));
-                                                                                object exp = null;
+    [Test]
+    public void ToJson_DefaultValue_AreEqual()
+    {
+    object act = JsonTester.Write(default(@Model.ClassName));
+    object exp = null;
 
-                                                                                Assert.AreEqual(exp, act);
-                                                                                }
-                                                                                [Test]
-                                                                                public void ToJson_TestStruct_AreEqual()
-                                                                                {
-                                                                                var act = JsonTester.Write(TestStruct);
-                                                                                var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void ToJson_TestStruct_AreEqual()
+    {
+    var act = JsonTester.Write(TestStruct);
+    var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
 
-                                                                                Assert.AreEqual(exp, act);
-                                                                                }
+    Assert.AreEqual(exp, act);
+    }
 
-                                                                                #endregion
+    #endregion
 
-                                                                                #region IFormattable / Tostring tests
+    #region IFormattable / Tostring tests
 
-                                                                                [Test]
-                                                                                public void ToString_Empty_StringEmpty()
-                                                                                {
-                                                                                var act = @(Model.ClassName).Empty.ToString();
-                                                                                var exp = "";
-                                                                                Assert.AreEqual(exp, act);
-                                                                                }
+    [Test]
+    public void ToString_Empty_StringEmpty()
+    {
+    var act = @(Model.ClassName).Empty.ToString();
+    var exp = "";
+    Assert.AreEqual(exp, act);
+    }
 
-                                                                                [Test]
-                                                                                public void ToString_Unknown_QuestionMark()
-                                                                                {
-                                                                                var act = @(Model.ClassName).Unknown.ToString();
-                                                                                var exp = "?";
-                                                                                Assert.AreEqual(exp, act);
-                                                                                }
+    [Test]
+    public void ToString_Unknown_QuestionMark()
+    {
+    var act = @(Model.ClassName).Unknown.ToString();
+    var exp = "?";
+    Assert.AreEqual(exp, act);
+    }
 
-                                                                                [Test]
-                                                                                public void ToString_CustomFormatter_SupportsCustomFormatting()
-                                                                                {
-                                                                                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                                                                                var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
+    [Test]
+    public void ToString_CustomFormatter_SupportsCustomFormatting()
+    {
+    var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+    var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
 
-                                                                                Assert.AreEqual(exp, act);
-                                                                                }
-                                                                                [TestCase("en-US", "", "ComplexPattern", "ComplexPattern")]
-                                                                                [TestCase("nl-BE", null, "1600,1", "1600,1")]
-                                                                                [TestCase("en-GB", null, "1600.1", "1600.1")]
-                                                                                [TestCase("nl-BE", "0000", "800", "0800")]
-                                                                                [TestCase("en-GB", "0000", "800", "0800")]
-                                                                                public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
-                                                                                {
-                                                                                using (new CultureInfoScope(culture))
-                                                                                {
-                                                                                var actual = @(Model.ClassName).Parse(str).ToString(format);
-                                                                                Assert.AreEqual(expected, actual);
-                                                                                }
-                                                                                }
+    Assert.AreEqual(exp, act);
+    }
+    [TestCase("en-US", "", "ComplexPattern", "ComplexPattern")]
+    [TestCase("nl-BE", null, "1600,1", "1600,1")]
+    [TestCase("en-GB", null, "1600.1", "1600.1")]
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
+    {
+    using (new CultureInfoScope(culture))
+    {
+    var actual = @(Model.ClassName).Parse(str).ToString(format);
+    Assert.AreEqual(expected, actual);
+    }
+    }
 
-                                                                                [Test]
-                                                                                public void ToString_FormatValueSpanishEcuador_AreEqual()
-                                                                                {
-                                                                                var act = @(Model.ClassName).Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
-                                                                                var exp = "01700,0";
-                                                                                Assert.AreEqual(exp, act);
-                                                                                }
+    [Test]
+    public void ToString_FormatValueSpanishEcuador_AreEqual()
+    {
+    var act = @(Model.ClassName).Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
+    var exp = "01700,0";
+    Assert.AreEqual(exp, act);
+    }
 
-                                                                                [Test]
-                                                                                public void DebuggerDisplay_DebugToString_HasAttribute()
-                                                                                {
-                                                                                DebuggerDisplayAssert.HasAttribute(typeof(@(Model.ClassName)));
-                                                                                }
+    [Test]
+    public void DebuggerDisplay_DebugToString_HasAttribute()
+    {
+    DebuggerDisplayAssert.HasAttribute(typeof(@(Model.ClassName)));
+    }
 
-                                                                                [Test]
-                                                                                public void DebuggerDisplay_DefaultValue_String()
-                                                                                {
-                                                                                DebuggerDisplayAssert.HasResult("ComplexPattern", default(@(Model.ClassName)));
-                                                                                }
-                                                                                [Test]
-                                                                                public void DebuggerDisplay_Unknown_String()
-                                                                                {
-                                                                                DebuggerDisplayAssert.HasResult("ComplexPattern", @(Model.ClassName).Unknown);
-                                                                                }
+    [Test]
+    public void DebuggerDisplay_DefaultValue_String()
+    {
+    DebuggerDisplayAssert.HasResult("ComplexPattern", default(@(Model.ClassName)));
+    }
+    [Test]
+    public void DebuggerDisplay_Unknown_String()
+    {
+    DebuggerDisplayAssert.HasResult("ComplexPattern", @(Model.ClassName).Unknown);
+    }
 
-                                                                                [Test]
-                                                                                public void DebuggerDisplay_TestStruct_String()
-                                                                                {
-                                                                                DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
-                                                                                }
+    [Test]
+    public void DebuggerDisplay_TestStruct_String()
+    {
+    DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
+    }
 
-                                                                                #endregion
+    #endregion
 
-                                                                                #region IEquatable tests
+    #region IEquatable tests
 
-                                                                                /// <summary>GetHash should not fail for @(Model.ClassName).Empty.</summary>
-                                                                                [Test]
-                                                                                public void GetHash_Empty_Hash()
-                                                                                {
-                                                                                Assert.AreEqual(-1, @(Model.ClassName).Empty.GetHashCode());
-                                                                                }
+    /// <summary>GetHash should not fail for @(Model.ClassName).Empty.</summary>
+    [Test]
+    public void GetHash_Empty_Hash()
+    {
+    Assert.AreEqual(-1, @(Model.ClassName).Empty.GetHashCode());
+    }
 
-                                                                                /// <summary>GetHash should not fail for the test struct.</summary>
-                                                                                [Test]
-                                                                                public void GetHash_TestStruct_Hash()
-                                                                                {
-                                                                                Assert.AreEqual(-1, TestStruct.GetHashCode());
-                                                                                }
+    /// <summary>GetHash should not fail for the test struct.</summary>
+    [Test]
+    public void GetHash_TestStruct_Hash()
+    {
+    Assert.AreEqual(-1, TestStruct.GetHashCode());
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_EmptyEmpty_IsTrue()
-                                                                                {
-                                                                                Assert.IsTrue(@(Model.ClassName).Empty.Equals(@(Model.ClassName).Empty));
-                                                                                }
+    [Test]
+    public void Equals_EmptyEmpty_IsTrue()
+    {
+    Assert.IsTrue(@(Model.ClassName).Empty.Equals(@(Model.ClassName).Empty));
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_FormattedAndUnformatted_IsTrue()
-                                                                                {
-                                                                                var l = @(Model.ClassName).Parse("formatted", CultureInfo.InvariantCulture);
-                                                                                var r = @(Model.ClassName).Parse("unformatted", CultureInfo.InvariantCulture);
+    [Test]
+    public void Equals_FormattedAndUnformatted_IsTrue()
+    {
+    var l = @(Model.ClassName).Parse("formatted", CultureInfo.InvariantCulture);
+    var r = @(Model.ClassName).Parse("unformatted", CultureInfo.InvariantCulture);
 
-                                                                                Assert.IsTrue(l.Equals(r));
-                                                                                }
+    Assert.IsTrue(l.Equals(r));
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_TestStructTestStruct_IsTrue()
-                                                                                {
-                                                                                Assert.IsTrue(TestStruct.Equals(TestStruct));
-                                                                                }
+    [Test]
+    public void Equals_TestStructTestStruct_IsTrue()
+    {
+    Assert.IsTrue(TestStruct.Equals(TestStruct));
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_TestStructEmpty_IsFalse()
-                                                                                {
-                                                                                Assert.IsFalse(TestStruct.Equals(@(Model.ClassName).Empty));
-                                                                                }
+    [Test]
+    public void Equals_TestStructEmpty_IsFalse()
+    {
+    Assert.IsFalse(TestStruct.Equals(@(Model.ClassName).Empty));
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_EmptyTestStruct_IsFalse()
-                                                                                {
-                                                                                Assert.IsFalse(@(Model.ClassName).Empty.Equals(TestStruct));
-                                                                                }
+    [Test]
+    public void Equals_EmptyTestStruct_IsFalse()
+    {
+    Assert.IsFalse(@(Model.ClassName).Empty.Equals(TestStruct));
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_TestStructObjectTestStruct_IsTrue()
-                                                                                {
-                                                                                Assert.IsTrue(TestStruct.Equals((object)TestStruct));
-                                                                                }
+    [Test]
+    public void Equals_TestStructObjectTestStruct_IsTrue()
+    {
+    Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_TestStructNull_IsFalse()
-                                                                                {
-                                                                                Assert.IsFalse(TestStruct.Equals(null));
-                                                                                }
+    [Test]
+    public void Equals_TestStructNull_IsFalse()
+    {
+    Assert.IsFalse(TestStruct.Equals(null));
+    }
 
-                                                                                [Test]
-                                                                                public void Equals_TestStructObject_IsFalse()
-                                                                                {
-                                                                                Assert.IsFalse(TestStruct.Equals(new object()));
-                                                                                }
+    [Test]
+    public void Equals_TestStructObject_IsFalse()
+    {
+    Assert.IsFalse(TestStruct.Equals(new object()));
+    }
 
-                                                                                [Test]
-                                                                                public void OperatorIs_TestStructTestStruct_IsTrue()
-                                                                                {
-                                                                                var l = TestStruct;
-                                                                                var r = TestStruct;
-                                                                                Assert.IsTrue(l == r);
-                                                                                }
+    [Test]
+    public void OperatorIs_TestStructTestStruct_IsTrue()
+    {
+    var l = TestStruct;
+    var r = TestStruct;
+    Assert.IsTrue(l == r);
+    }
 
-                                                                                [Test]
-                                                                                public void OperatorIsNot_TestStructTestStruct_IsFalse()
-                                                                                {
-                                                                                var l = TestStruct;
-                                                                                var r = TestStruct;
-                                                                                Assert.IsFalse(l != r);
-                                                                                }
+    [Test]
+    public void OperatorIsNot_TestStructTestStruct_IsFalse()
+    {
+    var l = TestStruct;
+    var r = TestStruct;
+    Assert.IsFalse(l != r);
+    }
 
-                                                                                #endregion
+    #endregion
 
-                                                                                #region IComparable tests
+    #region IComparable tests
 
-                                                                                /// <summary>Orders a list of @(Model.ClassLongName)s ascending.</summary>
-                                                                                [Test]
-                                                                                public void OrderBy_@(Model.ClassName)_AreEqual()
-                                                                                {
-                                                                                var item0 = @(Model.ClassName).Parse("ComplexRegexPatternA");
-                                                                                var item1 = @(Model.ClassName).Parse("ComplexRegexPatternB");
-                                                                                var item2 = @(Model.ClassName).Parse("ComplexRegexPatternC");
-                                                                                var item3 = @(Model.ClassName).Parse("ComplexRegexPatternD");
+    /// <summary>Orders a list of @(Model.ClassLongName)s ascending.</summary>
+    [Test]
+    public void OrderBy_@(Model.ClassName)_AreEqual()
+    {
+    var item0 = @(Model.ClassName).Parse("ComplexRegexPatternA");
+    var item1 = @(Model.ClassName).Parse("ComplexRegexPatternB");
+    var item2 = @(Model.ClassName).Parse("ComplexRegexPatternC");
+    var item3 = @(Model.ClassName).Parse("ComplexRegexPatternD");
 
-                                                                                var inp = new List<@(Model.ClassName)>
-                                                                                    () { @(Model.ClassName).Empty, item3, item2, item0, item1, @(Model.ClassName).Empty };
-                                                                                    var exp = new List<@(Model.ClassName)>
-                                                                                        () { @(Model.ClassName).Empty, @(Model.ClassName).Empty, item0, item1, item2, item3 };
-                                                                                        var act = inp.OrderBy(item => item).ToList();
+    var inp = new List<@(Model.ClassName)>
+    () { @(Model.ClassName).Empty, item3, item2, item0, item1, @(Model.ClassName).Empty };
+    var exp = new List<@(Model.ClassName)>
+    () { @(Model.ClassName).Empty, @(Model.ClassName).Empty, item0, item1, item2, item3 };
+    var act = inp.OrderBy(item => item).ToList();
 
-                                                                                        CollectionAssert.AreEqual(exp, act);
-                                                                                        }
+    CollectionAssert.AreEqual(exp, act);
+    }
 
-                                                                                        /// <summary>Orders a list of @(Model.ClassLongName)s descending.</summary>
-                                                                                        [Test]
-                                                                                        public void OrderByDescending_@(Model.ClassName)_AreEqual()
-                                                                                        {
-                                                                                        var item0 = @(Model.ClassName).Parse("ComplexRegexPatternA");
-                                                                                        var item1 = @(Model.ClassName).Parse("ComplexRegexPatternB");
-                                                                                        var item2 = @(Model.ClassName).Parse("ComplexRegexPatternC");
-                                                                                        var item3 = @(Model.ClassName).Parse("ComplexRegexPatternD");
+    /// <summary>Orders a list of @(Model.ClassLongName)s descending.</summary>
+    [Test]
+    public void OrderByDescending_@(Model.ClassName)_AreEqual()
+    {
+    var item0 = @(Model.ClassName).Parse("ComplexRegexPatternA");
+    var item1 = @(Model.ClassName).Parse("ComplexRegexPatternB");
+    var item2 = @(Model.ClassName).Parse("ComplexRegexPatternC");
+    var item3 = @(Model.ClassName).Parse("ComplexRegexPatternD");
 
-                                                                                        var inp = new List<@(Model.ClassName)>
-                                                                                            () { @(Model.ClassName).Empty, item3, item2, item0, item1, @(Model.ClassName).Empty };
-                                                                                            var exp = new List<@(Model.ClassName)>
-                                                                                                () { item3, item2, item1, item0, @(Model.ClassName).Empty, @(Model.ClassName).Empty };
-                                                                                                var act = inp.OrderByDescending(item => item).ToList();
+    var inp = new List<@(Model.ClassName)>
+    () { @(Model.ClassName).Empty, item3, item2, item0, item1, @(Model.ClassName).Empty };
+    var exp = new List<@(Model.ClassName)>
+    () { item3, item2, item1, item0, @(Model.ClassName).Empty, @(Model.ClassName).Empty };
+    var act = inp.OrderByDescending(item => item).ToList();
 
-                                                                                                CollectionAssert.AreEqual(exp, act);
-                                                                                                }
+    CollectionAssert.AreEqual(exp, act);
+    }
 
-                                                                                                /// <summary>Compare with a to object casted instance should be fine.</summary>
-                                                                                                [Test]
-                                                                                                public void CompareTo_ObjectTestStruct_0()
-                                                                                                {
-                                                                                                object other = TestStruct;
+    /// <summary>Compare with a to object casted instance should be fine.</summary>
+    [Test]
+    public void CompareTo_ObjectTestStruct_0()
+    {
+    object other = TestStruct;
 
-                                                                                                var exp = 0;
-                                                                                                var act = TestStruct.CompareTo(other);
+    var exp = 0;
+    var act = TestStruct.CompareTo(other);
 
-                                                                                                Assert.AreEqual(exp, act);
-                                                                                                }
+    Assert.AreEqual(exp, act);
+    }
 
-                                                                                                /// <summary>Compare with null should throw an exception.</summary>
-                                                                                                [Test]
-                                                                                                public void CompareTo_null_ThrowsArgumentException()
-                                                                                                {
-                                                                                                ExceptionAssert.CatchArgumentException
-                                                                                                (() =>
-                                                                                                {
-                                                                                                object other = null;
-                                                                                                var act = TestStruct.CompareTo(other);
-                                                                                                },
-                                                                                                "obj",
-                                                                                                "Argument must be @(Model.a) @(Model.ClassLongName)"
-                                                                                                );
-                                                                                                }
-                                                                                                /// <summary>Compare with a random object should throw an exception.</summary>
-                                                                                                [Test]
-                                                                                                public void CompareTo_newObject_ThrowsArgumentException()
-                                                                                                {
-                                                                                                ExceptionAssert.CatchArgumentException
-                                                                                                (() =>
-                                                                                                {
-                                                                                                object other = new object();
-                                                                                                var act = TestStruct.CompareTo(other);
-                                                                                                },
-                                                                                                "obj",
-                                                                                                "Argument must be @(Model.a) @(Model.ClassLongName)"
-                                                                                                );
-                                                                                                }
-                                                                                                @if (Model.UnderlyingType != typeof(string))
-                                                                                                {<text>
+    /// <summary>Compare with null should throw an exception.</summary>
+    [Test]
+    public void CompareTo_null_ThrowsArgumentException()
+    {
+    ExceptionAssert.CatchArgumentException
+    (() =>
+    {
+    object other = null;
+    TestStruct.CompareTo(other);
+    },
+    "obj",
+    "Argument must be @(Model.a) @(Model.ClassLongName)"
+    );
+    }
+    /// <summary>Compare with a random object should throw an exception.</summary>
+    [Test]
+    public void CompareTo_newObject_ThrowsArgumentException()
+    {
+    ExceptionAssert.CatchArgumentException
+    (() =>
+    {
+    object other = new object();
+    var act = TestStruct.CompareTo(other);
+    },
+    "obj",
+    "Argument must be @(Model.a) @(Model.ClassLongName)"
+    );
+    }
+    @if (Model.UnderlyingType != typeof(string))
+    {<text>
     [Test]
     public void LessThan_17LT19_IsTrue()
     {
@@ -859,29 +858,29 @@ namespace @(Model.Namespace).UnitTests
     Assert.IsTrue(l >= r);
     }
     </text>}
-                                                                                                #endregion
+    #endregion
 
-                                                                                                #region Casting tests
+    #region Casting tests
 
-                                                                                                [Test]
-                                                                                                public void Explicit_StringTo@(Model.ClassName)_AreEqual()
-                                                                                                {
-                                                                                                var exp = TestStruct;
-                                                                                                var act = (@(Model.ClassName))TestStruct.ToString();
+    [Test]
+    public void Explicit_StringTo@(Model.ClassName)_AreEqual()
+    {
+    var exp = TestStruct;
+    var act = (@(Model.ClassName))TestStruct.ToString();
 
-                                                                                                Assert.AreEqual(exp, act);
-                                                                                                }
-                                                                                                [Test]
-                                                                                                public void Explicit_@(Model.ClassName)ToString_AreEqual()
-                                                                                                {
-                                                                                                var exp = TestStruct.ToString();
-                                                                                                var act = (string)TestStruct;
+    Assert.AreEqual(exp, act);
+    }
+    [Test]
+    public void Explicit_@(Model.ClassName)ToString_AreEqual()
+    {
+    var exp = TestStruct.ToString();
+    var act = (string)TestStruct;
 
-                                                                                                Assert.AreEqual(exp, act);
-                                                                                                }
+    Assert.AreEqual(exp, act);
+    }
 
-                                                                                                @if (Model.UnderlyingType == typeof(System.Int16) || Model.UnderlyingType == typeof(System.Int32) || Model.UnderlyingType == typeof(System.Int64))
-                                                                                                {<text>
+    @if (Model.UnderlyingType == typeof(System.Int16) || Model.UnderlyingType == typeof(System.Int32) || Model.UnderlyingType == typeof(System.Int64))
+    {<text>
     [Test]
     public void Explicit_Int32To@(Model.ClassName)_AreEqual()
     {
@@ -899,11 +898,11 @@ namespace @(Model.Namespace).UnitTests
     Assert.AreEqual(exp, act);
     }
     </text>}
-                                                                                                #endregion
+    #endregion
 
-                                                                                                #region Properties
-                                                                                                @if (Model.UnderlyingType == typeof(string))
-                                                                                                {<text>
+    #region Properties
+    @if (Model.UnderlyingType == typeof(string))
+    {<text>
     [Test]
     public void Length_DefaultValue_0()
     {
@@ -919,93 +918,93 @@ namespace @(Model.Namespace).UnitTests
     Assert.AreEqual(exp, act);
     }
     </text>}
-                                                                                                #endregion
+    #endregion
 
-                                                                                                #region Type converter tests
+    #region Type converter tests
 
-                                                                                                [Test]
-                                                                                                public void ConverterExists_@(Model.ClassName)_IsTrue()
-                                                                                                {
-                                                                                                TypeConverterAssert.ConverterExists(typeof(@(Model.ClassName)));
-                                                                                                }
+    [Test]
+    public void ConverterExists_@(Model.ClassName)_IsTrue()
+    {
+    TypeConverterAssert.ConverterExists(typeof(@(Model.ClassName)));
+    }
 
-                                                                                                [Test]
-                                                                                                public void CanNotConvertFromInt32_@(Model.ClassName)_IsTrue()
-                                                                                                {
-                                                                                                TypeConverterAssert.CanNotConvertFrom(typeof(@(Model.ClassName)), typeof(Int32));
-                                                                                                }
-                                                                                                [Test]
-                                                                                                public void CanNotConvertToInt32_@(Model.ClassName)_IsTrue()
-                                                                                                {
-                                                                                                TypeConverterAssert.CanNotConvertTo(typeof(@(Model.ClassName)), typeof(Int32));
-                                                                                                }
+    [Test]
+    public void CanNotConvertFromInt32_@(Model.ClassName)_IsTrue()
+    {
+    TypeConverterAssert.CanNotConvertFrom(typeof(@(Model.ClassName)), typeof(Int32));
+    }
+    [Test]
+    public void CanNotConvertToInt32_@(Model.ClassName)_IsTrue()
+    {
+    TypeConverterAssert.CanNotConvertTo(typeof(@(Model.ClassName)), typeof(Int32));
+    }
 
-                                                                                                [Test]
-                                                                                                public void CanConvertFromString_@(Model.ClassName)_IsTrue()
-                                                                                                {
-                                                                                                TypeConverterAssert.CanConvertFromString(typeof(@(Model.ClassName)));
-                                                                                                }
+    [Test]
+    public void CanConvertFromString_@(Model.ClassName)_IsTrue()
+    {
+    TypeConverterAssert.CanConvertFromString(typeof(@(Model.ClassName)));
+    }
 
-                                                                                                [Test]
-                                                                                                public void CanConvertToString_@(Model.ClassName)_IsTrue()
-                                                                                                {
-                                                                                                TypeConverterAssert.CanConvertToString(typeof(@(Model.ClassName)));
-                                                                                                }
+    [Test]
+    public void CanConvertToString_@(Model.ClassName)_IsTrue()
+    {
+    TypeConverterAssert.CanConvertToString(typeof(@(Model.ClassName)));
+    }
 
-                                                                                                [Test]
-                                                                                                public void ConvertFrom_StringNull_@(Model.ClassName)Empty()
-                                                                                                {
-                                                                                                using (new CultureInfoScope("en-GB"))
-                                                                                                {
-                                                                                                TypeConverterAssert.ConvertFromEquals(@(Model.ClassName).Empty, (string)null);
-                                                                                                }
-                                                                                                }
+    [Test]
+    public void ConvertFrom_StringNull_@(Model.ClassName)Empty()
+    {
+    using (new CultureInfoScope("en-GB"))
+    {
+    TypeConverterAssert.ConvertFromEquals(@(Model.ClassName).Empty, (string)null);
+    }
+    }
 
-                                                                                                [Test]
-                                                                                                public void ConvertFrom_StringEmpty_@(Model.ClassName)Empty()
-                                                                                                {
-                                                                                                using (new CultureInfoScope("en-GB"))
-                                                                                                {
-                                                                                                TypeConverterAssert.ConvertFromEquals(@(Model.ClassName).Empty, string.Empty);
-                                                                                                }
-                                                                                                }
+    [Test]
+    public void ConvertFrom_StringEmpty_@(Model.ClassName)Empty()
+    {
+    using (new CultureInfoScope("en-GB"))
+    {
+    TypeConverterAssert.ConvertFromEquals(@(Model.ClassName).Empty, string.Empty);
+    }
+    }
 
-                                                                                                [Test]
-                                                                                                public void ConvertFromString_StringValue_TestStruct()
-                                                                                                {
-                                                                                                using (new CultureInfoScope("en-GB"))
-                                                                                                {
-                                                                                                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-                                                                                                }
-                                                                                                }
+    [Test]
+    public void ConvertFromString_StringValue_TestStruct()
+    {
+    using (new CultureInfoScope("en-GB"))
+    {
+    TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
+    }
+    }
 
-                                                                                                [Test]
-                                                                                                public void ConvertFromInstanceDescriptor_@(Model.ClassName)_Successful()
-                                                                                                {
-                                                                                                TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(@(Model.ClassName)));
-                                                                                                }
+    [Test]
+    public void ConvertFromInstanceDescriptor_@(Model.ClassName)_Successful()
+    {
+    TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(@(Model.ClassName)));
+    }
 
-                                                                                                [Test]
-                                                                                                public void ConvertToString_TestStruct_StringValue()
-                                                                                                {
-                                                                                                using (new CultureInfoScope("en-GB"))
-                                                                                                {
-                                                                                                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-                                                                                                }
-                                                                                                }
+    [Test]
+    public void ConvertToString_TestStruct_StringValue()
+    {
+    using (new CultureInfoScope("en-GB"))
+    {
+    TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
+    }
+    }
 
-                                                                                                #endregion
-                                                                                                #region IsValid tests
+    #endregion
+    #region IsValid tests
 
-                                                                                                [TestCase(null)]
-                                                                                                [TestCase("")]
-                                                                                                [TestCase("Complex")]
-                                                                                                public void IsInvalid_String(string pattern)
-                                                                                                {
-                                                                                                Assert.IsFalse(@(Model.ClassName).IsValid(pattern));
-                                                                                                }
-                                                                                                @if (Model.UnderlyingType != typeof(string))
-                                                                                                {<text>
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase("Complex")]
+    public void IsInvalid_String(string pattern)
+    {
+    Assert.IsFalse(@(Model.ClassName).IsValid(pattern));
+    }
+    @if (Model.UnderlyingType != typeof(string))
+    {<text>
     [Test]
     public void IsInvalid_@Model.UnderlyingType?()
     {
@@ -1013,20 +1012,20 @@ namespace @(Model.Namespace).UnitTests
     Assert.IsFalse(@(Model.ClassName).IsValid(value));
     }
     </text>
-                                                                                                }
-                                                                                                [Test]
-                                                                                                public void IsValid_Data_IsTrue()
-                                                                                                {
-                                                                                                Assert.IsTrue(@(Model.ClassName).IsValid("ComplexPattern"));
-                                                                                                }
-                                                                                                #endregion
-                                                                                                }
+    }
+    [Test]
+    public void IsValid_Data_IsTrue()
+    {
+    Assert.IsTrue(@(Model.ClassName).IsValid("ComplexPattern"));
+    }
+    #endregion
+    }
 
-                                                                                                [Serializable]
-                                                                                                public class @Model.ClassNameSerializeObject
-                                                                                                {
-                                                                                                public int Id { get; set; }
-                                                                                                public @Model.ClassName Obj { get; set; }
-                                                                                                public DateTime Date { get; set; }
-                                                                                                }
-                                                                                                }
+    [Serializable]
+    public class @Model.ClassNameSerializeObject
+    {
+    public int Id { get; set; }
+    public @Model.ClassName Obj { get; set; }
+    public DateTime Date { get; set; }
+    }
+}

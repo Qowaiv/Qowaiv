@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.UnitTests.Mocking.Web;
+using Qowaiv.Web.UnitTests.Mocking;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -517,7 +519,7 @@ namespace Qowaiv.Web.UnitTests
 
         #endregion
 
-        #region IFormattable / Tostring tests
+        #region IFormattable / ToString tests
 
         [Test]
         public void ToString_Empty_StringEmpty()
@@ -709,10 +711,10 @@ namespace Qowaiv.Web.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an internet media type"
+                "Argument must be an Internet media type"
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -723,10 +725,10 @@ namespace Qowaiv.Web.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an internet media type"
+                "Argument must be an Internet media type"
             );
         }
         #endregion

@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace Qowaiv.TestTools
 {
     /// <summary>Helper class for (argument) exceptions.</summary>
-	public static class ExceptionAssert
+    public static class ExceptionAssert
     {
         /// <summary>Catches an argument null exception.</summary>
         /// <param name="code">

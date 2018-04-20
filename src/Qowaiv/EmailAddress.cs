@@ -34,22 +34,22 @@ namespace Qowaiv
         /// </remarks>
         public static readonly Regex Pattern = new Regex(
             @"
-				^
-					[\w{}|/%$&#~!?*`'^=+-]+(\.[\w{}|/%$&#~!?*`'^=+-]+)*
-				@ 
-				(
-					(
-						(\[(?=.*]$))?
-						(( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )\.){3}
-						 ( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )
-						((?<=@\[.*)])?
-					)
-				|
-					(\w+([-]+\w+)*\.)*
-					[a-z]{2,}
-				)
-				$
-			", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+                ^
+                    [\w{}|/%$&#~!?*`'^=+-]+(\.[\w{}|/%$&#~!?*`'^=+-]+)*
+                @ 
+                (
+                    (
+                        (\[(?=.*]$))?
+                        (( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )\.){3}
+                         ( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )
+                        ((?<=@\[.*)])?
+                    )
+                |
+                    (\w+([-]+\w+)*\.)*
+                    [a-z]{2,}
+                )
+                $
+            ", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
         /// <summary>Represents an empty/not set email address.</summary>
         public static readonly EmailAddress Empty;
@@ -159,7 +159,7 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the email address.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
+        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
 
         /// <summary>Generates an email address from a JSON number representation.</summary>
         /// <param name="jsonNumber">

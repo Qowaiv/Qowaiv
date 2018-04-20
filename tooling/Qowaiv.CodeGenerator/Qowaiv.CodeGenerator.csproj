@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\build\common.props" />
+  <Import Project="..\..\props\common.props" />
   
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net45</TargetFramework>
+    <OutputType>EXE</OutputType>
+    <TargetFramework>net462</TargetFramework>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 

@@ -3,9 +3,6 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-// Info about all assemblies.
-[assembly: AssemblyTrademark("Qowaiv")]
-
 // If not specified otherwise, the resources are in USA English.
 [assembly: NeutralResourcesLanguage("en-US")]
 

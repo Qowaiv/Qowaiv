@@ -927,12 +927,7 @@ namespace Qowaiv.UnitTests
         {
             TypeConverterAssert.CanNotConvertFrom(typeof(HouseNumber), typeof(DateTime));
         }
-        [Test]
-        public void CanNotConvertToDateTime_HouseNumber_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(HouseNumber), typeof(DateTime));
-        }
-
+       
         [Test]
         public void CanConvertFromString_HouseNumber_IsTrue()
         {
@@ -1004,18 +999,18 @@ namespace Qowaiv.UnitTests
             TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, default(long?));
         }
         [Test]
-        public void ConvertFromUnderlyingType_Int_Successful()
+        public void ConvertFrom_Int_Successful()
         {
             TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
         }
 
         [Test]
-        public void ConverToUnderlyingType_Int_Successful()
+        public void ConvertToUnderlyingType_Int_Successful()
         {
             TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
         }
         [Test]
-        public void ConverToUnderlyingType_NullableInt_Successful()
+        public void ConvertToUnderlyingType_NullableInt_Successful()
         {
             TypeConverterAssert.ConvertToEquals(default(int?), HouseNumber.Empty);
         }

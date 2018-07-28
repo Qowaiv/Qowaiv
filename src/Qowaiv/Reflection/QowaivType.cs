@@ -7,6 +7,12 @@ namespace Qowaiv.Reflection
     /// <summary>Helper class for some operations on <see cref="Type"/>.</summary>
     public static class QowaivType
     {
+        /// <summary>Returns true if the value is null or equal to the default value.</summary>
+        public static bool IsNullOrDefaultValue(object value)
+        {
+            return value is null || value.Equals(Activator.CreateInstance(value.GetType()));
+        }
+
         /// <summary>Returns true if the type is a Single Value Object, otherwise false.</summary>
         /// <param name="objectType">
         /// The type to test for.

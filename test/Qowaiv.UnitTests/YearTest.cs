@@ -853,9 +853,9 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Year_IsTrue()
+        public void CanConvertFromInt32_Year()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Year), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals((Year)2018, 2018);
         }
         [Test]
         public void CanNotConvertToInt32_Year_IsTrue()

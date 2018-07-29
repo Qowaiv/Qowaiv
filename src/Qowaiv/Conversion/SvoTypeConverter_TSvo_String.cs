@@ -12,10 +12,9 @@ namespace Qowaiv.Conversion
     /// for conversion from <see cref="string"/> the <see cref="FromString(string, CultureInfo)"/>
     /// method has to be implemented.
     /// </remarks>
-    public abstract class SvoTypeConverter<TSvo> : TypeConverter where TSvo : struct
+    public abstract class SvoTypeConverter<TSvo> : TypeConverter
+        where TSvo : struct, IFormattable
     {
-        #region Convert From
-
         /// <inheritdoc />
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -32,8 +31,6 @@ namespace Qowaiv.Conversion
             }
             return base.ConvertFrom(context, culture, value);
         }
-
-        #endregion
 
         /// <summary>Converts from <see cref="string"/>.</summary>
         protected abstract TSvo FromString(string str, CultureInfo culture);

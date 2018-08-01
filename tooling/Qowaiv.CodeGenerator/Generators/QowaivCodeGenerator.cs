@@ -393,10 +393,11 @@ namespace Qowaiv.CodeGenerator.Generators
             {
                 using (var writer = new StreamWriter(Path.Combine(dir.FullName, "InternationalBankAccountNumberPatterns.cs")))
                 {
+                    writer.WriteLine("using Qowaiv.Financial;");
                     writer.WriteLine("using System.Collections.Generic;");
                     writer.WriteLine("using System.Text.RegularExpressions;");
                     writer.WriteLine();
-                    writer.WriteLine("namespace Qowaiv\r\n{\r\n    public partial struct InternationalBankAccountNumber\r\n    {");
+                    writer.WriteLine("namespace Qowaiv.Financial\r\n{\r\n    public partial struct InternationalBankAccountNumber\r\n    {");
                     writer.WriteLine("        /// <summary>Gets the localized patterns.</summary>");
                     writer.WriteLine("        /// <remarks>");
                     writer.WriteLine("        /// See http://en.wikipedia.org/wiki/International_Bank_Account_Number.");

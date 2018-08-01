@@ -298,6 +298,7 @@ namespace Qowaiv.Globalization
             new CountryToCurrency(Country.VU, Currency.VUV),
             new CountryToCurrency(Country.WF, Currency.XPF),
             new CountryToCurrency(Country.WS, Currency.WST),
+            new CountryToCurrency(Country.XK, Currency.EUR, new Date(2008, 02, 01)),
             new CountryToCurrency(Country.YE, Currency.YER),
             new CountryToCurrency(Country.YT, Currency.FRF),
             new CountryToCurrency(Country.YT, Currency.EUR, new Date(2002, 01, 01)),

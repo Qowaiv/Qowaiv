@@ -789,5 +789,8 @@ namespace Qowaiv.Globalization
         /// <remarks>End date is 1996-05-17.</remarks>
         public static readonly Country ZRCD = new Country() { m_Value = "ZRCD" };
 
+        /// <summary>Describes the country Kosovo (XK).</summary>
+        public static readonly Country XK = new Country() { m_Value = "XK" };
+
     }
 }

@@ -229,6 +229,7 @@ Also we propose a Result model that includes the validation messages, and Result
 
 ``` CSharp
 Result<DataType> result = Result.For(data);
+Result<DataType> resultWithMessages = Result.For(data, messages);
 ```
 
 ### ValidationMessages with severity

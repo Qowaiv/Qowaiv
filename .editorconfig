@@ -7,3 +7,8 @@ insert_final_newline = true
 [*.{cs,cshtml,ts}]
 indent_style = space
 indent_size = 4
+
+# Project files
+[*.{csproj,props}]
+indent_style = space
+indent_size = 2

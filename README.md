@@ -20,7 +20,7 @@ A Value Object that can be represented by a single scalar.
 
 Technical requirements
 ----------------------
-Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Core (2.0)
+Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Standard (2.0)
 the Visual Studio solution file requires VS2017.3 or higher. Visual Studio can be downloaded
 here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 
@@ -225,6 +225,7 @@ We're extending the DataAnnotations from Microsoft with some more attributes:
 * [Mandatory] Here the difference with Microsoft's [Required] attribute is that it works for value types as well, it will be invalid if the default value is used.
 * [AllowedValues] and 
 * [ForbiddenValues] make it easy to validate string values, or objects/value types that have a string representation.
+* [Any] Tells that a collection should have at least one item.
 
 Result model
 ------------

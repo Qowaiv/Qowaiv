@@ -1,4 +1,4 @@
-![Qowaiv](Design\qowain-logo_linkedin_100x060.jpg)
+![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/j8o76flxqkh0o9fk?svg=true)](https://ci.appveyor.com/project/qowaiv/qowaiv)
 

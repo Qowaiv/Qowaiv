@@ -24,15 +24,15 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void All_None_259Countries()
+        public void All_None_260Countries()
         {
-            Assert.AreEqual(259, Country.All.Count);
+            Assert.AreEqual(260, Country.All.Count);
         }
 
         [Test]
-        public void GetExisting_Januari2016_249Countries()
+        public void GetExisting_Januari2016_250Countries()
         {
-            Assert.AreEqual(249, Country.GetExisting(new Date(2016, 01, 01)).Count());
+            Assert.AreEqual(250, Country.GetExisting(new Date(2016, 01, 01)).Count());
         }
 
 
@@ -1175,9 +1175,9 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void GetCurrent_None_249()
+        public void GetCurrent_None_250()
         {
-            var exp = 249;
+            var exp = 250;
             var act = Country.GetExisting().ToList();
 
             Assert.AreEqual(exp, act.Count);

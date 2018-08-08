@@ -1,4 +1,11 @@
-﻿### NEw in 3.1.3 (Released 2018/04/17)
+﻿### New in 3.2.0 (Released 2018/08/08)
+* Added the country Kosovo (#22)
+* Made SonarAnalyzer dependency a private asset (#26)
+* Extended Qowaiv.ComponentModel.Result with factory methods (#24)
+* Introduced Qowaiv.ComponentModel.DataAnnotations.AnyAttribute (#25)
+* Fix in email address collection (#21)
+
+# New in 3.1.3 (Released 2018/04/17)
 * Fix in email address validation (#18)
 
 ### New in 3.1.2 (Released 2017/12/12)

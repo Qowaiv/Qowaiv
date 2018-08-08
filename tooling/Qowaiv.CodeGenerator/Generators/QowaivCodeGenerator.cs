@@ -226,9 +226,9 @@ namespace Qowaiv.CodeGenerator.Generators
                     writer.WriteLine("using System.Collections.ObjectModel;");
                     writer.WriteLine();
 
-                    writer.WriteLine("namespace Qowaiv.Financial\r\n{\r\n\tinternal partial struct CountryToCurrency\r\n\t{");
+                    writer.WriteLine("namespace Qowaiv.Financial\r\n{\r\n\tinternal partial struct CountryToCurrency\r\n    {");
 
-                    writer.WriteLine("\t\tpublic static readonly ReadOnlyCollection<CountryToCurrency> All = new ReadOnlyCollection<CountryToCurrency>(new List<CountryToCurrency>()\r\n\t\t{");
+                    writer.WriteLine("        public static readonly ReadOnlyCollection<CountryToCurrency> All = new ReadOnlyCollection<CountryToCurrency>(new List<CountryToCurrency>()\r\n        {");
 
                     var workbook = Workbook.Load(stream);
                     var worksheet = workbook.Worksheets[0];
@@ -237,7 +237,7 @@ namespace Qowaiv.CodeGenerator.Generators
 
                     var country_index = 1;
                     var currency_index = 2;
-                    var date_index = 0;
+                    var date_index = 3;
 
                     var resx = new XResourceFile();
 
@@ -253,19 +253,19 @@ namespace Qowaiv.CodeGenerator.Generators
 
                         var country = row.GetCell(country_index).StringValue.Trim();
                         var cur = row.GetCell(currency_index).StringValue.Trim();
-                        Date start = Date.Parse(row.GetCell(date_index).StringValue);
+                        var start = (Date)row.GetCell(date_index).DateTimeValue;
 
                         if (start == Date.MinValue)
                         {
-                            writer.WriteLine("\t\t\tnew CountryToCurrency(Country.{0}, Currency.{1}),", country, cur);
+                            writer.WriteLine($"{new string(' ', 12)}new CountryToCurrency(Country.{country}, Currency.{cur}),");
                         }
                         else
                         {
-                            writer.WriteLine("\t\t\tnew CountryToCurrency(Country.{0}, Currency.{1}, new Date({2:yyyy, MM, dd})),", country, cur, start);
+                            writer.WriteLine($"{new string(' ', 12)}new CountryToCurrency(Country.{country}, Currency.{cur}, new Date({start:yyyy, MM, dd})),");
                         }
 
                     }
-                    writer.WriteLine("\t\t});\r\n\t}\r\n}");
+                    writer.WriteLine("        });\r\n    }\r\n}");
                 }
             }
         }
@@ -393,10 +393,11 @@ namespace Qowaiv.CodeGenerator.Generators
             {
                 using (var writer = new StreamWriter(Path.Combine(dir.FullName, "InternationalBankAccountNumberPatterns.cs")))
                 {
+                    writer.WriteLine("using Qowaiv.Financial;");
                     writer.WriteLine("using System.Collections.Generic;");
                     writer.WriteLine("using System.Text.RegularExpressions;");
                     writer.WriteLine();
-                    writer.WriteLine("namespace Qowaiv\r\n{\r\n    public partial struct InternationalBankAccountNumber\r\n    {");
+                    writer.WriteLine("namespace Qowaiv.Financial\r\n{\r\n    public partial struct InternationalBankAccountNumber\r\n    {");
                     writer.WriteLine("        /// <summary>Gets the localized patterns.</summary>");
                     writer.WriteLine("        /// <remarks>");
                     writer.WriteLine("        /// See http://en.wikipedia.org/wiki/International_Bank_Account_Number.");

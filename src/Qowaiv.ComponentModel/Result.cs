@@ -54,5 +54,15 @@ namespace Qowaiv.ComponentModel
 
         /// <summary>Gets all messages with <see cref="ValidationSeverity.Info"/>.</summary>
         public IEnumerable<ValidationResult> Infos => Messages.GetInfos();
+
+
+        /// <summary>Creates a <see cref="Result{T}"/> for the data.</summary>
+        public static Result<T> For<T>(T data, params ValidationResult[] messages) => new Result<T>(data, messages);
+
+        /// <summary>Creates a result with messages.</summary>
+        public static Result WithMessages(params ValidationResult[] messages) => new Result(messages);
+
+        /// <summary>Creates a result with messages.</summary>
+        public static Result<T> WithMessages<T>(params ValidationResult[] messages) => new Result<T>(default(T), messages);
     }
 }

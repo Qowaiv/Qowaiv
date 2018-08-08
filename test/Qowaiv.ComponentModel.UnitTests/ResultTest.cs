@@ -19,7 +19,7 @@ namespace Qowaiv.ComponentModel.Tests
         [Test]
         public void IsValid_TestMesages_False()
         {
-            var result = new Result(TestMessages);
+            var result = Result.WithMessages(TestMessages);
             var act = result.IsValid;
             Assert.IsFalse(act);
         }
@@ -27,7 +27,7 @@ namespace Qowaiv.ComponentModel.Tests
         [Test]
         public void IsValid_SomeNoneErrorsMesages_True()
         {
-            var result = new Result(new[] { Warning1, Info1, Info2 });
+            var result = Result.WithMessages<int>(Warning1, Info1, Info2);
             var act = result.IsValid;
             Assert.True(act);
         }
@@ -35,7 +35,7 @@ namespace Qowaiv.ComponentModel.Tests
         [Test]
         public void Errors_2Items()
         {
-            var result = new Result(TestMessages);
+            var result = Result.WithMessages(TestMessages);
             var act = result.Errors;
             var exp = new[] { Error1, Error2 };
             Assert.AreEqual(exp, act);
@@ -44,7 +44,7 @@ namespace Qowaiv.ComponentModel.Tests
         [Test]
         public void Warnings_2Items()
         {
-            var result = new Result(TestMessages);
+            var result = Result.WithMessages(TestMessages);
             var act = result.Warnings;
             var exp = new[] { Warning1, Warning2 };
             Assert.AreEqual(exp, act);
@@ -53,7 +53,7 @@ namespace Qowaiv.ComponentModel.Tests
         [Test]
         public void Infos_2Items()
         {
-            var result = new Result(TestMessages);
+            var result = Result.WithMessages(TestMessages);
             var act = result.Infos;
             var exp = new[] { Info1, Info2 };
             Assert.AreEqual(exp, act);
@@ -93,21 +93,21 @@ namespace Qowaiv.ComponentModel.Tests
         [Test]
         public void WithError_IsNotValid()
         {
-            var actual = new Result(new[] { ValidationMessage.Error("This should not be valid") });
+            var actual = Result.WithMessages(ValidationMessage.Error("This should not be valid"));
             Assert.False(actual.IsValid);
         }
 
         [Test]
         public void WithWarning_IsValid()
         {
-            var actual = new Result(new[] { ValidationMessage.Warning("This should valid") });
+            var actual = Result.WithMessages(ValidationMessage.Warning("This should valid"));
             Assert.True(actual.IsValid);
         }
 
         [Test]
         public void WithInfo_IsValid()
         {
-            var actual = new Result(new[] { ValidationMessage.Info("This should be valid") });
+            var actual = Result.WithMessages(ValidationMessage.Info("This should be valid"));
             Assert.True(actual.IsValid);
         }
     }

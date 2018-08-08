@@ -1,4 +1,4 @@
-![Qowaiv](Design\qowain-logo_linkedin_100x060.jpg)
+![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/j8o76flxqkh0o9fk?svg=true)](https://ci.appveyor.com/project/qowaiv/qowaiv)
 
@@ -20,7 +20,7 @@ A Value Object that can be represented by a single scalar.
 
 Technical requirements
 ----------------------
-Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Core (2.0)
+Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Standard (2.0)
 the Visual Studio solution file requires VS2017.3 or higher. Visual Studio can be downloaded
 here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 
@@ -216,20 +216,37 @@ These values can be configured (in the application settings) or can be created w
 a creator function that can be registered. If not specified otherwise the current 
 country will be created (if possible) based on the current culture.
 
-Qowaiv Component Model
-======================
-Annotations
---------------
+## Qowaiv Component Model
+### Annotations
 We're extending the DataAnnotations from Microsoft with some more attributes:
 
 * [Mandatory] Here the difference with Microsoft's [Required] attribute is that it works for value types as well, it will be invalid if the default value is used.
 * [AllowedValues] and 
 * [ForbiddenValues] make it easy to validate string values, or objects/value types that have a string representation.
+* [Any] Tells that a collection should have at least one item.
 
-Result model
-------------
+### Result model
 Also we propose a Result model that includes the validation messages, and Result which can contain both an object and validation messages. This can be a helpful return type for methods that need to return objects but first have to validate them.
 
-ValidationMessages with severity
---------------------------------
+``` CSharp
+Result<DataType> result = Result.For(data);
+Result<DataType> resultWithMessages = Result.For(data, messages);
+```
+
+### ValidationMessages with severity
 The difference with Microsoft's default ValidationResult and ValidationMessages is that in this PR we support a severity: info, warning, or error.
+
+Those messages can be created via factory methods:
+``` CSharp
+var none = ValidationMessage.None;
+var info = ValidationMessage.Info(message, args);
+var warn = ValidationMessage.Warning(message, args);
+var error = ValidationMessage.Error(message, args);
+```
+
+Or contained by a Result or Result&lt;T&gt;:
+
+``` CSharp
+Result result = Result.WithMessage(messages);
+Result<DataType> result = Result.WithMessage<DataType>(messages);
+```

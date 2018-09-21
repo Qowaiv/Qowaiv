@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <Import Project="..\..\props\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivDomainModelMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QowaivDomainModelMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivDomainModelMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>QowaivDomainModelMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

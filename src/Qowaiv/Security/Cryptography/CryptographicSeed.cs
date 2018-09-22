@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion.Security.Cryptography;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion.Security.Cryptography;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Text;

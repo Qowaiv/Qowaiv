@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -486,10 +490,10 @@ namespace Qowaiv
         /// <param name="other">The <see cref="Date"/> to compare with.</param>
         public bool Equals(Date other) => m_Value == other.m_Value;
 
-        /// <summary>Returns the hash code for this </summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
+                             /// <summary>Returns the hash code for this </summary>
+                             /// <returns>
+                             /// A 32-bit signed integer hash code.
+                             /// </returns>
         public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>

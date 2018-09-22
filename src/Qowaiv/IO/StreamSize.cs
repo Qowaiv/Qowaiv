@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion.IO;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion.IO;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;

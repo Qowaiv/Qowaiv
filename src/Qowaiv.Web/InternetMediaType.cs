@@ -1,5 +1,6 @@
-﻿#pragma warning disable S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
-// The < and > operators have no meaning for an Internet media type.
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
 
 using Qowaiv.Formatting;
 using Qowaiv.Json;

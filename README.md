@@ -2,10 +2,9 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/j8o76flxqkh0o9fk?svg=true)](https://ci.appveyor.com/project/qowaiv/qowaiv)
 
-Qowaiv
-======
-Domain-driven design bottom up
-------------------------------
+# Qowaiv
+
+## Domain-driven design bottom up
 
 Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
 Value Objects that can be used a wide variety of modeling scenarios, both
@@ -14,162 +13,145 @@ inside and outside a Domain-driven context.
 Supported scenarios include parsing, formatting, validation, (de)serialization,
 and domain specific logic.
 
-Single Value Object
--------------------
+# Single Value Object
 A Value Object that can be represented by a single scalar.
 
-Technical requirements
-----------------------
+## Technical requirements
 Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Standard (2.0)
 the Visual Studio solution file requires VS2017.3 or higher. Visual Studio can be downloaded
 here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 
-Qowaiv types
-============
+## Qowaiv types
 
-Date
-----
+### Date
+
 Represents a date, so without hours (minutes, seconds, milliseconds).
 
-Elo
----
+### Elo
 Represents an Elo (rating), a method for calculating the relative skill levels of
 players in competitor-versus-competitor games.
 
-Email address
--------------
+### Email address
 Represents a (single) email address, including IPv4 domains.
 
-Email address collection
-------------------------
+### Email address collection
 Represents a collection of unique email addresses, excluding the empty and unknown email address.
 
-Stream size
----------
+### Stream size
 Represents the size of a file or stream.
 
-Gender
-------
+### Gender
 Represents a gender based on an ISO 5218 code.
 
-House number
-------------
+### House number
 Represents a house number in the range [1-999999999].
 
-Local Date Time
----------------
+### Local Date Time
 Explicitly marked local date time. It allows the clear distinction between local 
 and UTC-based date times.
 
-Month
------
+### Month
 Represents a month in the range [1-12].
 
-Percentage
-----------
+### Percentage
 Represents a percentage/per mile/per ten thousand.
 
-Postal code
------------
+### Postal code
 Represents a postal code. It supports validation for all countries.
 
-UUID aka GUID
--------------
+### UUID aka GUID
 The UUID (Universally unique identifier) aka GUID (Globally unique identifier) is an
 extension on the System.Guid. It is by default represented by a 22 length string, 
 instead of a 32 length string.
 
-Week date
----------
+### Week date
 Represents a week based date.
 
-Year
-----
+### Year
 Represents a year in the range [1-9999].
 
-Qowaiv cryptographic types
-========================== 
+## Qowaiv cryptographic types
 
-Seed
-----
+### Seed
 A seed, representing random data to encrypt and decrypt data.
 
-Qowaiv financial types
-======================
+## Qowaiv financial types
 
-Amount
-------
+### Amount
 Represents money without the notion of the actual currency.
 
-Bank Identifier Code (BIC)
---------------------------
+### Bank Identifier Code (BIC)
 Represents a BIC as specified in ISO 13616.
 
-Currency
---------
+### Currency
 Represents a currency based on an ISO 4217 code.
 
-International Bank Account Number (IBAN)
-----------------------------------------
+### International Bank Account Number (IBAN)
 Represents an IBAN as specified in ISO 13616.
 
-Money
------
+### Money
 Represents the amount and the currency. Technically this is not SVO. However it
 acts identically as a SVO.
 
-Qowaiv globalization types
-==========================
+## Qowaiv globalization types
 
-Country
--------
+### Country
 Represents a country based on an ISO 3166-1 code (or 3166-3 if the country does not longer exists).
 
-Qowaiv SQL types
-================
+## Qowaiv SQL types
 
-Timestamp
----------
+### Timestamp
 Represents a (MS SQL) time-stamp is a data type that exposes automatically generated
 binary numbers, which are guaranteed to be unique within a database. time-stamp is
 used typically as a mechanism for version-stamping table rows. The storage size is
 8 bytes. See: https://technet.microsoft.com/en-us/library/aa260631%28v=sql.80%29.aspx
 
-Qowaiv Data
-===========
+## Qowaiv Data
 
-SVO Parameter factory class
----------------------------
+### SVO Parameter factory class
 To create a (SQL) parameter with a SVO as value, use the SvoParamater factory
 class. It will return SQL parameter with a converted database proof value.
 
-Qowaiv web types
-================
+## Qowaiv web types
 
-Internet media type
--------------------
+### Internet media type
 Represents an Internet media type (also known as MIME-type and content type).
 
-Qowaiv complex types
-====================
+## Qowaiv complex types
 
-Wildcard pattern
-----------------
+### Wildcard pattern
 Represents a pattern to match strings, using wildcard characters ? and *. It 
 also support the use of SQL wildcard characters _ and %.
 
-Qowaiv helpers
-==============
+## Qowaiv helpers
 
-Guard
------
+### Guard
 Guard parameters, for centralizing and simplifying the argument checking.
 
-Qowaiv SVO options
-==================
 
-Debugger display
-----------------
+## Qowaiv SVO options
+
+### Hashing
+To support hashing (object.GetHashCode()) the hash code should always return 
+the same value, for the same object. As SVO's are equal by value, the hash
+is calculated based on the underlying value.
+
+Due to IXmlSerialization support, however, the underlying value is not
+read-only, because this interface first create default instance and then
+sets the value. Only if somebody intentionally misuses the IXmlSerialization
+interface, can change a value during the lifetime of a SVO.
+
+Therefor
+
+``` CSharp
+#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+```
+
+is fine.
+
+### Debugger display
 During debugging sessions, by default, the IDE shows the result of ToString()
 on a watch. Although Tostring() is overridden for all Qowaiv Single Value 
 Objects, for debugging a special debugger display is provided too, using a 
@@ -185,20 +167,17 @@ Because the rendering of debugger display is handled based on the development
 environment, and methods as debugger display are not supported by VB.NET, the 
 debugger display attribute refers to a property instead.
 
-Qowaiv Formatting
-=================
+## Qowaiv Formatting
 Formatting is an important part of the functionality in Qowaiv. All SVO's 
 implement IFormattable, and have custom formatting. For details, see the 
 different remarks at the ToString(string, IFormatProvider).
 
-Formatting arguments
---------------------
+### Formatting arguments
 The formatting arguments object, is a container object (struct) of the format 
 and the format provider, the two arguments required for the System.Iformatable 
 ToString() method.
 
-Formatting arguments collection
--------------------------------
+### Formatting arguments collection
 This collection of formatting arguments stores them based on a type to apply 
 on. On top of that, it has a Format() method, that is an extended implementation 
 of string.Format(). The difference between these two methods is, that - when no 
@@ -206,7 +185,7 @@ custom format is supplied at the format string - string.Format() the default
 formatting of the object is used, where FormattingArgumentsCollection.Format() 
 uses the default specified at the formatting collection of a type (if available).
 
-Threading
+### Threading
 =========
 Because there are scenario's where you want to set typical values as a country 
 or a currency for the context of the current thread (like the culture info) 

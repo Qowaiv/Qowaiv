@@ -72,8 +72,7 @@ namespace Qowaiv
                 throw new ArgumentOutOfRangeException("day", "Day should be in range [1,7].");
             }
 
-            Date dt;
-            if (!TryCreate(year, week, day, out dt))
+            if (!TryCreate(year, week, day, out Date dt))
             {
                 throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception)null);
             }
@@ -120,9 +119,9 @@ namespace Qowaiv
             int week = 0;
 
             // Now the week number.
-            DateTime startdate = WeekDate.GetFirstDayOfFirstWeekOfYear(year);
+            DateTime startdate = GetFirstDayOfFirstWeekOfYear(year);
             // No overflow please.
-            DateTime enddate = year < 9999 ? WeekDate.GetFirstDayOfFirstWeekOfYear(year + 1) : DateTime.MaxValue;
+            DateTime enddate = year < 9999 ? GetFirstDayOfFirstWeekOfYear(year + 1) : DateTime.MaxValue;
 
             // The date is member of a week in the next year.
             if (m_Value >= enddate)
@@ -133,7 +132,7 @@ namespace Qowaiv
             // The date is member of a week in the previous year.
             if (m_Value < startdate)
             {
-                startdate = WeekDate.GetFirstDayOfFirstWeekOfYear(year - 1);
+                startdate = GetFirstDayOfFirstWeekOfYear(year - 1);
                 year--;
             }
             if (part == DatePartYear) { return year; }
@@ -315,8 +314,7 @@ namespace Qowaiv
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -438,14 +436,14 @@ namespace Qowaiv
         public static implicit operator DateTime(WeekDate val) { return val.m_Value; }
 
         /// <summary>Casts a <see cref="string"/> to a week date.</summary>
-        public static explicit operator WeekDate(string str) { return WeekDate.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator WeekDate(string str) { return Parse(str, CultureInfo.CurrentCulture); }
         /// <summary>Casts a date time to a week date.</summary>
-        public static explicit operator WeekDate(DateTime val) { return WeekDate.Create((Date)val); }
+        public static explicit operator WeekDate(DateTime val) { return Create((Date)val); }
 
         /// <summary>Casts a date to a week date.</summary>
-        public static implicit operator WeekDate(Date val) { return WeekDate.Create(val); }
+        public static implicit operator WeekDate(Date val) { return Create(val); }
         /// <summary>Casts a local date time to a week date.</summary>
-        public static explicit operator WeekDate(LocalDateTime val) { return WeekDate.Create(val.Date); }
+        public static explicit operator WeekDate(LocalDateTime val) { return Create(val.Date); }
 
         #endregion
 
@@ -481,8 +479,7 @@ namespace Qowaiv
         /// </exception>
         public static WeekDate Parse(string s, IFormatProvider formatProvider)
         {
-            WeekDate val;
-            if (WeekDate.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out WeekDate val))
             {
                 return val;
             }
@@ -496,16 +493,15 @@ namespace Qowaiv
         /// A string containing a week date to convert.
         /// </param>
         /// <returns>
-        /// The week date if the string was converted successfully, otherwise WeekDate.Empty.
+        /// The week date if the string was converted successfully, otherwise Empty.
         /// </returns>
         public static WeekDate TryParse(string s)
         {
-            WeekDate val;
-            if (WeekDate.TryParse(s, out val))
+            if (TryParse(s, out WeekDate val))
             {
                 return val;
             }
-            return WeekDate.MinValue;
+            return MinValue;
         }
 
         /// <summary>Converts the string to a week date.
@@ -542,7 +538,7 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out WeekDate result)
         {
-            result = WeekDate.MinValue;
+            result = MinValue;
             var match = Pattern.Match(s ?? string.Empty);
             if (match.Success)
             {
@@ -550,8 +546,7 @@ namespace Qowaiv
                 var week = Int32.Parse(match.Groups["week"].Value, formatProvider);
                 var day = Int32.Parse(match.Groups["day"].Value, formatProvider);
 
-                Date dt;
-                if (TryCreate(year, week, day, out dt))
+                if (TryCreate(year, week, day, out Date dt))
                 {
                     result = new WeekDate() { m_Value = dt };
                     return true;
@@ -580,7 +575,7 @@ namespace Qowaiv
             {
                 return false;
             }
-            dt = WeekDate.GetFirstDayOfFirstWeekOfYear(year);
+            dt = GetFirstDayOfFirstWeekOfYear(year);
 
             // Zerobased.
             int dayofyear = (week - 1) * 7 + (day - 1);
@@ -589,7 +584,7 @@ namespace Qowaiv
             dt = dt.AddDays(dayofyear);
 
             // Week 53 can be non-existent.
-            if (week == 53 && WeekDate.GetFirstDayOfFirstWeekOfYear(year + 1) <= dt)
+            if (week == 53 && GetFirstDayOfFirstWeekOfYear(year + 1) <= dt)
             {
                 dt = Date.MinValue;
                 return false;
@@ -610,8 +605,7 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid week date, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            WeekDate wd;
-            return TryParse(val, formatProvider, out wd);
+            return TryParse(val, formatProvider, out WeekDate wd);
         }
 
         #endregion

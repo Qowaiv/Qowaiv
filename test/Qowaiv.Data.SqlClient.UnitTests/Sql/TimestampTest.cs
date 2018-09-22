@@ -814,14 +814,14 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Timestamp_IsTrue()
+        public void CanConvertFromInt32()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Timestamp), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals(Timestamp.Create(15), 15);
         }
         [Test]
-        public void CanNotConvertToInt32_Timestamp_IsTrue()
+        public void CanConvertToInt32_Timestamp_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Timestamp), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(15, Timestamp.Create(15));
         }
 
         [Test]

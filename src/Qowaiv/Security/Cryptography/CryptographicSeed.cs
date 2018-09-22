@@ -17,7 +17,7 @@ namespace Qowaiv.Security.Cryptography
     /// <summary>Represents a cryptographic seed.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a cryptographic seed.")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Byte[]))]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(byte[]))]
     [TypeConverter(typeof(CryptographicSeedTypeConverter))]
     public struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
     {

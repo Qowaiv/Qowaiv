@@ -823,14 +823,14 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Elo_IsTrue()
+        public void CanNotConvertFromInt32()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Elo), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals((Elo)1600, 1600);
         }
         [Test]
-        public void CanNotConvertToInt32_Elo_IsTrue()
+        public void CanConvertToInt32()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Elo), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(1600, (Elo)1600);
         }
 
         [Test]

@@ -1274,14 +1274,14 @@ namespace Qowaiv.UnitTests.IO
         }
 
         [Test]
-        public void CanNotConvertFromInt32_StreamSize_IsTrue()
+        public void CanConvertFromInt32_StreamSize_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(StreamSize), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
         }
         [Test]
-        public void CanNotConvertToInt32_StreamSize_IsTrue()
+        public void CanConvertToInt32()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(StreamSize), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
         }
 
         [Test]

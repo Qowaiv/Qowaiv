@@ -100,14 +100,18 @@ namespace Qowaiv.Json
         /// </param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            Guard.NotNull(writer, "writer");
-            if (value == null) { writer.WriteNull(); }
+            Guard.NotNull(writer, nameof(writer));
 
-            var json = (IJsonSerializable)value;
+            if (value is null)
+            {
+                writer.WriteNull();
+            }
+
+            var json = Guard.IsTypeOf<IJsonSerializable>(value, nameof(value));
 
             var jsonValue = json.ToJson();
 
-            if (jsonValue == null)
+            if (jsonValue is null)
             {
                 writer.WriteNull();
             }

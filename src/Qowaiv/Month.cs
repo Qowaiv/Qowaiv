@@ -135,7 +135,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private Month(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetByte("Value");
         }
 
@@ -144,7 +144,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -161,7 +161,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(writer, nameof(writer));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -174,7 +174,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 

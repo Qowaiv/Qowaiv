@@ -30,7 +30,7 @@ namespace Qowaiv.Formatting
         /// </param>
         public FormattingArgumentsCollection(IFormatProvider formatProvider, FormattingArgumentsCollection parent)
         {
-            FormatProvider = Guard.NotNull(formatProvider, "formatProvider");
+            FormatProvider = Guard.NotNull(formatProvider, nameof(formatProvider));
 
             if (parent != null)
             {
@@ -112,8 +112,8 @@ namespace Qowaiv.Formatting
             Justification = "Just a copy of the .NET code. It is as complex as it is.")]
         public string Format(string format, params object[] args)
         {
-            Guard.NotNull(format, "format");
-            Guard.NotNull(args, "args");
+            Guard.NotNull(format, nameof(format));
+            Guard.NotNull(args, nameof(args));
 
             var sb = new StringBuilder();
             int pos = 0;
@@ -366,7 +366,7 @@ namespace Qowaiv.Formatting
         /// </exception>
         public void Add(Type type, FormattingArguments arguments) 
         {
-            Guard.ImplementsInterface(type, "type", typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
+            Guard.ImplementsInterface(type, nameof(type), typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
             dict.Add(type, arguments); 
         }
 
@@ -436,7 +436,7 @@ namespace Qowaiv.Formatting
         /// The type represents a type not implementing System.IFormattable.
         /// </exception>
         public void Set(Type type, FormattingArguments arguments) {
-            Guard.ImplementsInterface(type, "type", typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
+            Guard.ImplementsInterface(type, nameof(type), typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
             dict[type] = arguments; 
         }
 

@@ -58,7 +58,7 @@ namespace Qowaiv
         /// The name of the parameter.
         /// </param>
         [DebuggerStepThrough]
-        public static T[] NotNullOrEmpty<T>([ValidatedNotNull]T[] param, string paramName)
+        public static T[] HasAny<T>([ValidatedNotNull]T[] param, string paramName)
         {
             NotNull(param, paramName);
             if (param.Length == 0)

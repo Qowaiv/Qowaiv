@@ -361,7 +361,7 @@ namespace Qowaiv.IO
         /// <param name="context">The streaming context.</param>
         private StreamSize(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetInt64("Value");
         }
 
@@ -370,7 +370,7 @@ namespace Qowaiv.IO
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -387,7 +387,7 @@ namespace Qowaiv.IO
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(writer, nameof(writer));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -400,7 +400,7 @@ namespace Qowaiv.IO
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -907,21 +907,21 @@ namespace Qowaiv.IO
         /// <summary>Creates a stream size from a file info.</summary>
         public static StreamSize FromByteArray(byte[] bytes)
         {
-            Guard.NotNull(bytes, "bytes");
+            Guard.NotNull(bytes, nameof(bytes));
             return new StreamSize(bytes.Length);
         }
 
         /// <summary>Creates a stream size from a file info.</summary>
         public static StreamSize FromFileInfo(FileInfo fileInfo)
         {
-            Guard.NotNull(fileInfo, "fileInfo");
+            Guard.NotNull(fileInfo, nameof(fileInfo));
             return new StreamSize(fileInfo.Length);
         }
 
         /// <summary>Creates a stream size from a stream.</summary>
         public static StreamSize FromStream(Stream stream)
         {
-            Guard.NotNull(stream, "stream");
+            Guard.NotNull(stream, nameof(stream));
             return new StreamSize(stream.Length);
         }
 

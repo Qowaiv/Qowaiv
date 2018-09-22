@@ -94,7 +94,7 @@ namespace Qowaiv.Formatting
         /// <param name="context">The streaming context.</param>
         private FormattingArguments(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Format = info.GetString("Format");
             m_FormatProvider = (IFormatProvider)info.GetValue("FormatProvider", typeof(IFormatProvider));
         }
@@ -104,7 +104,7 @@ namespace Qowaiv.Formatting
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Format", m_Format);
             info.AddValue("FormatProvider", m_FormatProvider);
         }

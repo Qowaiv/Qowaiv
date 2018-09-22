@@ -22,7 +22,7 @@ namespace Qowaiv.IO
         /// <summary>Gets the stream size of the current directory.</summary>
         public static StreamSize GetStreamSize(this DirectoryInfo directoryInfo)
         {
-            Guard.NotNull(directoryInfo, "directoryInfo");
+            Guard.NotNull(directoryInfo, nameof(directoryInfo));
             return directoryInfo
                 .EnumerateFiles("*", SearchOption.AllDirectories)
                 .Sum(file => file.Length);

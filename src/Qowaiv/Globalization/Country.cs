@@ -172,7 +172,7 @@ namespace Qowaiv.Globalization
         /// <param name="context">The streaming context.</param>
         private Country(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetString("Value");
         }
 
@@ -181,7 +181,7 @@ namespace Qowaiv.Globalization
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -198,7 +198,7 @@ namespace Qowaiv.Globalization
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(writer, nameof(writer));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -211,7 +211,7 @@ namespace Qowaiv.Globalization
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(m_Value);
         }
 

@@ -53,7 +53,7 @@ namespace Qowaiv.Json
         /// </returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             Guard.NotNull(objectType, "objectType");
 
             var isNullable = objectType.IsGenericType;

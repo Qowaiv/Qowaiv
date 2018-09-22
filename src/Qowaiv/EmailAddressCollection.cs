@@ -81,7 +81,7 @@ namespace Qowaiv
         /// </returns>
         public void AddRange(IEnumerable<EmailAddress> emails)
         {
-            Guard.NotNull(emails, "emails");
+            Guard.NotNull(emails, nameof(emails));
             foreach (var email in emails) { Add(email); }
         }
 
@@ -186,7 +186,7 @@ namespace Qowaiv
         protected EmailAddressCollection(SerializationInfo info, StreamingContext context)
             : this()
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             AddRange(Parse(info.GetString("Value"), CultureInfo.InvariantCulture));
         }
 
@@ -201,7 +201,7 @@ namespace Qowaiv
         /// </remarks>
         protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", ToString());
         }
 
@@ -228,7 +228,7 @@ namespace Qowaiv
         /// </remarks>
         protected virtual void ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(writer, nameof(writer));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             AddRange(val);
@@ -244,7 +244,7 @@ namespace Qowaiv
         /// </remarks>
         protected virtual void WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 

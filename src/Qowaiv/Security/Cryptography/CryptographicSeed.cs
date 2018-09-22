@@ -64,7 +64,7 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="context">The streaming context.</param>
         private CryptographicSeed(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = (byte[])info.GetValue("Value", typeof(byte[]));
         }
 
@@ -73,7 +73,7 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -90,7 +90,7 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(writer, nameof(writer));
             var s = reader.ReadElementString();
             var val = Parse(s);
             m_Value = val.m_Value;
@@ -103,7 +103,7 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString());
         }
 

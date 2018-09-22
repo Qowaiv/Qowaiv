@@ -1,4 +1,7 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328 // "GetHashCode" should not reference mutable fields
+// To support XML serialization, the underlying value has to be mutable but the struct is inmutable.
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -19,7 +22,7 @@ namespace Qowaiv
     /// <summary>Represents a month.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a month.")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Byte))]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [TypeConverter(typeof(MonthTypeConverter))]
     public struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
     {
@@ -30,32 +33,32 @@ namespace Qowaiv
         public static readonly Month Empty;
 
         /// <summary>Represents an unknown (but set) month.</summary>
-        public static readonly Month Unknown = new Month() { m_Value = Byte.MaxValue };
+        public static readonly Month Unknown = new Month { m_Value = byte.MaxValue };
 
         /// <summary>Represents January (01).</summary>
-        public static readonly Month January = new Month() { m_Value = 1 };
+        public static readonly Month January /*  */ = new Month { m_Value = 1 };
         /// <summary>Represents February (02).</summary>
-        public static readonly Month February = new Month() { m_Value = 2 };
+        public static readonly Month February /* */ = new Month { m_Value = 2 };
         /// <summary>Represents March (03).</summary>
-        public static readonly Month March = new Month() { m_Value = 3 };
+        public static readonly Month March /*    */ = new Month { m_Value = 3 };
         /// <summary>Represents April (04).</summary>
-        public static readonly Month April = new Month() { m_Value = 4 };
+        public static readonly Month April /*    */ = new Month { m_Value = 4 };
         /// <summary>Represents May (05).</summary>
-        public static readonly Month May = new Month() { m_Value = 5 };
+        public static readonly Month May /*      */ = new Month { m_Value = 5 };
         /// <summary>Represents June (06).</summary>
-        public static readonly Month June = new Month() { m_Value = 6 };
+        public static readonly Month June /*     */ = new Month { m_Value = 6 };
         /// <summary>Represents July (07).</summary>
-        public static readonly Month July = new Month() { m_Value = 7 };
+        public static readonly Month July /*     */ = new Month { m_Value = 7 };
         /// <summary>Represents August (08).</summary>
-        public static readonly Month August = new Month() { m_Value = 8 };
+        public static readonly Month August /*   */ = new Month { m_Value = 8 };
         /// <summary>Represents September (09).</summary>
-        public static readonly Month September = new Month() { m_Value = 9 };
+        public static readonly Month September /**/ = new Month { m_Value = 9 };
         /// <summary>Represents October (10).</summary>
-        public static readonly Month October = new Month() { m_Value = 10 };
+        public static readonly Month October /*  */ = new Month { m_Value = 10 };
         /// <summary>Represents November (11).</summary>
-        public static readonly Month November = new Month() { m_Value = 11 };
+        public static readonly Month November /* */ = new Month { m_Value = 11 };
         /// <summary>Represents December (12).</summary>
-        public static readonly Month December = new Month() { m_Value = 12 };
+        public static readonly Month December /* */ = new Month { m_Value = 12 };
 
         /// <summary>Represents all months (January till December).</summary>
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
@@ -63,18 +66,18 @@ namespace Qowaiv
         public static readonly ReadOnlyCollection<Month> All = new ReadOnlyCollection<Month>(
             new List<Month>()
             {
-                Month.January,
-                Month.February,
-                Month.March,
-                Month.April,
-                Month.May,
-                Month.June,
-                Month.July,
-                Month.August,
-                Month.September,
-                Month.October,
-                Month.November,
-                Month.December,
+                January,
+                February,
+                March,
+                April,
+                May,
+                June,
+                July,
+                August,
+                September,
+                October,
+                November,
+                December,
             });
 
         #region Properties
@@ -85,38 +88,42 @@ namespace Qowaiv
         /// <summary>Gets the full name of the month.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
             Justification = "Property FullName is a shortcut for GetFullName(CultureInfo.CurrentCulture).")]
-        public string FullName { get { return GetFullName(CultureInfo.CurrentCulture); } }
+        public string FullName => GetFullName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the short name of the month.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
             Justification = "Property ShortName is a shortcut for GetShortName(CultureInfo.CurrentCulture).")]
-        public string ShortName { get { return GetShortName(CultureInfo.CurrentCulture); } }
+        public string ShortName => GetShortName(CultureInfo.CurrentCulture);
 
         #endregion
 
         #region Methods
 
         /// <summary>Returns true if the month is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(System.Byte); }
+        public bool IsEmpty() => m_Value == default(byte);
 
         /// <summary>Returns true if the month is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == Month.Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Unknown.m_Value;
 
         /// <summary>Returns true if the month is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
 
 
         /// <summary>Gets the full name of the month.</summary>
         public string GetFullName(IFormatProvider formatProvider)
         {
-            return IsEmptyOrUnknown() ? ToDefaultString() : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetMonthName(m_Value);
+            return IsEmptyOrUnknown()
+                ? ToDefaultString()
+                : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetMonthName(m_Value);
         }
 
         /// <summary>Gets the short name of the month.</summary>
         public string GetShortName(IFormatProvider formatProvider)
         {
-            return IsEmptyOrUnknown() ? ToDefaultString() : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
+            return IsEmptyOrUnknown()
+                ? ToDefaultString()
+                : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
         }
 
         #endregion
@@ -176,48 +183,36 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a month from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(Byte);
-        }
+        void IJsonSerializable.FromJson() => m_Value = default(Byte);
 
         /// <summary>Generates a month from a JSON string representation.</summary>
         /// <param name="jsonString">
         /// The JSON string that represents the month.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
+        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates a month from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
         /// The JSON integer that represents the month.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger)
-        {
-            m_Value = Create((Int32)jsonInteger).m_Value;
-        }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => m_Value = Create((Int32)jsonInteger).m_Value;
 
         /// <summary>Generates a month from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the month.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber)
-        {
-            m_Value = Create((Int32)jsonNumber).m_Value;
-        }
+        void IJsonSerializable.FromJson(Double jsonNumber) => m_Value = Create((Int32)jsonNumber).m_Value;
 
         /// <summary>Generates a month from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the month.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a month into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return m_Value == default(Byte) ? null : ToString(CultureInfo.InvariantCulture);
+            return (m_Value == default(byte)) ? null : ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion
@@ -237,28 +232,19 @@ namespace Qowaiv
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current month.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
         /// <param name="format">
@@ -277,16 +263,19 @@ namespace Qowaiv
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
             // Apply the format.
-            return StringFormatter.Apply(this, string.IsNullOrEmpty(format) ? "M" : format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
+            return StringFormatter.Apply
+            (
+                this, string.IsNullOrEmpty(format) ? "M" : format,
+                formatProvider ?? CultureInfo.CurrentCulture, FormatTokens
+            );
         }
 
-        private string ToDefaultString() { return IsUnknown() ? "?" : string.Empty; }
+        private string ToDefaultString() => IsUnknown() ? "?" : string.Empty;
 
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<Month, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Month, IFormatProvider, string>>()
@@ -303,33 +292,28 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is Month && Equals((Month)obj); }
+        public override bool Equals(object obj) => obj is Month && Equals((Month)obj);
 
         /// <summary>Returns true if this instance and the other <see cref="Month"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Month"/> to compare with.</param>
-        public bool Equals(Month other) { return m_Value == other.m_Value; }
+        public bool Equals(Month other) => m_Value == other.m_Value;
+
 
         /// <summary>Returns the hash code for this month.</summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return m_Value.GetHashCode(); }
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(Month left, Month right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Month left, Month right) => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(Month left, Month right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Month left, Month right) => !(left == right);
 
         #endregion
 
@@ -372,36 +356,36 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Month other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Month other) => m_Value.CompareTo(other.m_Value);
 
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Month l, Month r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(Month l, Month r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Month l, Month r) { return l.m_Value > r.m_Value; }
+        public static bool operator >(Month l, Month r) => l.m_Value > r.m_Value;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Month l, Month r) { return l.m_Value <= r.m_Value; }
+        public static bool operator <=(Month l, Month r) => l.m_Value <= r.m_Value;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Month l, Month r) { return l.m_Value >= r.m_Value; }
+        public static bool operator >=(Month l, Month r) => l.m_Value >= r.m_Value;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a month to a <see cref="string"/>.</summary>
-        public static explicit operator string(Month val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Month val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a month.</summary>
-        public static explicit operator Month(string str) { return Month.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator Month(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
 
         /// <summary>Casts a month to a System.Int32.</summary>
-        public static explicit operator Int32(Month val) { return val.m_Value; }
+        public static explicit operator Int32(Month val) => val.m_Value;
         /// <summary>Casts an System.Int32 to a month.</summary>
-        public static implicit operator Month(Int32 val) { return Month.Create(val); }
+        public static implicit operator Month(Int32 val) => Create(val);
 
         #endregion
 
@@ -417,10 +401,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static Month Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
+        public static Month Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to a month.</summary>
         /// <param name="s">
@@ -437,8 +418,7 @@ namespace Qowaiv
         /// </exception>
         public static Month Parse(string s, IFormatProvider formatProvider)
         {
-            Month val;
-            if (Month.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Month val))
             {
                 return val;
             }
@@ -456,12 +436,11 @@ namespace Qowaiv
         /// </returns>
         public static Month TryParse(string s)
         {
-            Month val;
-            if (Month.TryParse(s, out val))
+            if (TryParse(s, out Month val))
             {
                 return val;
             }
-            return Month.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to a month.
@@ -476,10 +455,7 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, out Month result)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out result);
-        }
+        public static bool TryParse(string s, out Month result) => TryParse(s, CultureInfo.CurrentCulture, out result);
 
         /// <summary>Converts the string to a month.
         /// A return value indicates whether the conversion succeeded.
@@ -498,7 +474,7 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out Month result)
         {
-            result = Month.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
@@ -506,21 +482,20 @@ namespace Qowaiv
             var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
             if (Qowaiv.Unknown.IsUnknown(s, culture))
             {
-                result = Month.Unknown;
+                result = Unknown;
                 return true;
             }
             if (Pattern.IsMatch(s))
             {
-                result = new Month() { m_Value = Byte.Parse(s, formatProvider) };
+                result = new Month() { m_Value = byte.Parse(s, formatProvider) };
                 return true;
             }
             else
             {
                 AddCulture(culture);
 
-                Byte m;
                 var str = Parsing.ToUnified(s);
-                if (Parsings[culture].TryGetValue(str, out m) ||
+                if (Parsings[culture].TryGetValue(str, out byte m) ||
                     Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
                 {
                     result = new Month() { m_Value = m };
@@ -539,8 +514,7 @@ namespace Qowaiv
         /// </exception>
         public static Month Create(Int32? val)
         {
-            Month result;
-            if (Month.TryCreate(val, out result))
+            if (TryCreate(val, out Month result))
             {
                 return result;
             }
@@ -558,12 +532,11 @@ namespace Qowaiv
         /// </returns >
         public static Month TryCreate(Int32? val)
         {
-            Month result;
-            if (TryCreate(val, out result))
+            if (TryCreate(val, out Month result))
             {
                 return result;
             }
-            return Month.Empty;
+            return Empty;
         }
 
         /// <summary>Creates a month from a Byte.
@@ -580,7 +553,7 @@ namespace Qowaiv
         /// </returns >
         public static bool TryCreate(Int32? val, out Month result)
         {
-            result = Month.Empty;
+            result = Empty;
 
             if (!val.HasValue)
             {
@@ -599,10 +572,7 @@ namespace Qowaiv
         #region Validation
 
         /// <summary>Returns true if the val represents a valid month, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid month, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
@@ -668,8 +638,8 @@ namespace Qowaiv
                     {"AUGUST", 8},
                     {"SEPTEMBER", 9},
                     {"OCTOBER", 10},
-                    {"NOVEMBER", 11}, 
-                    {"DECEMBER", 12}, 
+                    {"NOVEMBER", 11},
+                    {"DECEMBER", 12},
                     {"JAN", 1},
                     {"FEB", 2},
                     {"MAR", 3},
@@ -686,7 +656,7 @@ namespace Qowaiv
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static volatile object locker = new object();
+        private static readonly object locker = new object();
 
         #endregion
     }

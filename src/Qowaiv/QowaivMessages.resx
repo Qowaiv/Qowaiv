@@ -252,4 +252,7 @@
   <data name="ArgumentException_IsDefaultValue" xml:space="preserve">
     <value>Argument is the not initialized/default value.</value>
   </data>
+  <data name="ArgumentException_TypeOf" xml:space="preserve">
+    <value />
+  </data>
 </root>

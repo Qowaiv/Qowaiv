@@ -1544,14 +1544,14 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Percentage_IsTrue()
+        public void CanConvertFromInt32()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Percentage), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals((Percentage)2.0m, 2);
         }
         [Test]
-        public void CanNotConvertToInt32_Percentage_IsTrue()
+        public void CanConvertToDecimal()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Percentage), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(0.1751m, TestStruct);
         }
 
         [Test]

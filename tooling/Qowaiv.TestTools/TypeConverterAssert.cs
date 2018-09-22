@@ -93,5 +93,17 @@ namespace Qowaiv.TestTools
 
             Assert.AreEqual(expected, actual);
         }
+
+        /// <summary>Asserts that the TypeConverter converts the input value to the expected string.</summary>
+        [DebuggerStepThrough]
+        public static void ConvertToEquals<TExp, TAct>(TExp expected, TAct input)
+        {
+            var converter = TypeDescriptor.GetConverter(typeof(TAct));
+            var actual = (TExp)converter.ConvertTo(input, typeof(TExp));
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        
     }
 }

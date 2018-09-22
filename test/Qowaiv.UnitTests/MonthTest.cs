@@ -1023,14 +1023,21 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Month_IsTrue()
+        public void CanConvertFromInt32_Month()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Month), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals(Month.December, 12);
         }
+
         [Test]
-        public void CanNotConvertToInt32_Month_IsTrue()
+        public void CanConvertFromDouble_Month()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Month), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals(Month.December, 12.0);
+        }
+
+        [Test]
+        public void CanNotConvertToInt32()
+        {
+            TypeConverterAssert.ConvertToEquals(12, Month.December);
         }
 
         [Test]

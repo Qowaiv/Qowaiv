@@ -737,14 +737,14 @@ namespace Qowaiv.Financial.UnitTests
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Amount_IsTrue()
+        public void CanConvertFromInt32()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Amount), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals((Amount)123, 123);
         }
         [Test]
-        public void CanNotConvertToInt32_Amount_IsTrue()
+        public void CanConvertToInt32()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Amount), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(1234, (Amount)1234);
         }
 
         [Test]

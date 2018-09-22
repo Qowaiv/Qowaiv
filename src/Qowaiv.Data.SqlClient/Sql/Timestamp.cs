@@ -63,7 +63,7 @@ namespace Qowaiv.Sql
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the time stamp from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -94,7 +94,7 @@ namespace Qowaiv.Sql
         #region (JSON) (De)serialization
 
         /// <summary>Generates a time stamp from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() { throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported); }
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a time stamp from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -127,7 +127,7 @@ namespace Qowaiv.Sql
         /// <param name="jsonDate">
         /// The JSON Date that represents the time stamp.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a time stamp into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -176,8 +176,7 @@ namespace Qowaiv.Sql
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -198,7 +197,7 @@ namespace Qowaiv.Sql
 
         /// <summary>Returns true if this instance and the other <see cref="Timestamp"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Timestamp"/> to compare with.</param>
-        public bool Equals(Timestamp other) { return m_Value == other.m_Value; }
+        public bool Equals(Timestamp other) => m_Value == other.m_Value;
 
 
         /// <summary>Returns the hash code for this time stamp.</summary>
@@ -266,47 +265,47 @@ namespace Qowaiv.Sql
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Timestamp other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Timestamp other) => m_Value.CompareTo(other.m_Value);
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Timestamp l, Timestamp r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(Timestamp l, Timestamp r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Timestamp l, Timestamp r) { return l.CompareTo(r) > 0; }
+        public static bool operator >(Timestamp l, Timestamp r) => l.CompareTo(r) > 0;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Timestamp l, Timestamp r) { return l.CompareTo(r) <= 0; }
+        public static bool operator <=(Timestamp l, Timestamp r) => l.CompareTo(r) <= 0;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Timestamp l, Timestamp r) { return l.CompareTo(r) >= 0; }
+        public static bool operator >=(Timestamp l, Timestamp r) => l.CompareTo(r) >= 0;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a time stamp to a <see cref="string"/>.</summary>
-        public static explicit operator string(Timestamp val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Timestamp val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a time stamp.</summary>
-        public static explicit operator Timestamp(string str) { return Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator Timestamp(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
 
         /// <summary>Casts a time stamp to a System.Int32.</summary>
         public static explicit operator byte[] (Timestamp val) { return val.ToByteArray(); }
         /// <summary>Casts an System.Int32 to a time stamp.</summary>
-        public static explicit operator Timestamp(byte[] val) { return Create(val); }
+        public static explicit operator Timestamp(byte[] val) => Create(val);
 
         /// <summary>Casts a time stamp to a System.Int64.</summary>
         public static explicit operator Int64(Timestamp val) { return BitConverter.ToInt64(val.ToByteArray(), 0); }
         /// <summary>Casts a System.Int64 to a time stamp.</summary>
-        public static explicit operator Timestamp(Int64 val) { return Create(val); }
+        public static explicit operator Timestamp(Int64 val) => Create(val);
 
         /// <summary>Casts a time stamp to a System.UInt64.</summary>
         [CLSCompliant(false)]
-        public static explicit operator UInt64(Timestamp val) { return val.m_Value; }
+        public static explicit operator UInt64(Timestamp val) => val.m_Value;
         /// <summary>Casts a System.UInt64 to a time stamp.</summary>
         [CLSCompliant(false)]
-        public static implicit operator Timestamp(UInt64 val) { return Create(val); }
+        public static implicit operator Timestamp(UInt64 val) => Create(val);
         #endregion
 
         #region Factory methods
@@ -429,7 +428,7 @@ namespace Qowaiv.Sql
         [CLSCompliant(false)]
         public static Timestamp Create(UInt64 val)
         {
-            return new Timestamp() { m_Value = val };
+            return new Timestamp { m_Value = val };
         }
 
         /// <summary>Creates a time stamp from a Int64. </summary >

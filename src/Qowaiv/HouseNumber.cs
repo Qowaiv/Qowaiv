@@ -27,13 +27,13 @@ namespace Qowaiv
         public static readonly HouseNumber Empty;
 
         /// <summary>Represents an unknown (but set) house number.</summary>
-        public static readonly HouseNumber Unknown = new HouseNumber() { m_Value = Int32.MaxValue };
+        public static readonly HouseNumber Unknown = new HouseNumber { m_Value = Int32.MaxValue };
 
         /// <summary>Represents the smallest possible House number 1.</summary>
-        public static readonly HouseNumber MinValue = new HouseNumber() { m_Value = 1 };
+        public static readonly HouseNumber MinValue = new HouseNumber { m_Value = 1 };
 
         /// <summary>Represents the largest possible House number 999999999.</summary>
-        public static readonly HouseNumber MaxValue = new HouseNumber() { m_Value = 999999999 };
+        public static readonly HouseNumber MaxValue = new HouseNumber { m_Value = 999999999 };
 
         #region Properties
 
@@ -223,8 +223,7 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -435,7 +434,7 @@ namespace Qowaiv
             }
             if (IsValid(s, formatProvider))
             {
-                result = new HouseNumber() { m_Value = System.Int32.Parse(s, formatProvider) };
+                result = new HouseNumber { m_Value = int.Parse(s, formatProvider) };
                 return true;
             }
             return false;
@@ -500,7 +499,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new HouseNumber() { m_Value = val.Value };
+                result = new HouseNumber { m_Value = val.Value };
                 return true;
             }
             return false;

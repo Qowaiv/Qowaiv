@@ -31,7 +31,7 @@ namespace Qowaiv.Globalization
         public static readonly Country Empty;
 
         /// <summary>Represents an unknown (but set) </summary>
-        public static readonly Country Unknown = new Country() { m_Value = "ZZ" };
+        public static readonly Country Unknown = new Country { m_Value = "ZZ" };
 
         /// <summary>Gets a country based on the current thread.</summary>
         public static Country Current { get { return Thread.CurrentThread.GetValue<Country>(); } }
@@ -105,13 +105,13 @@ namespace Qowaiv.Globalization
         #region Methods
 
         /// <summary>Returns true if the Country is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(string); }
+        public bool IsEmpty() => m_Value == default(string);
 
         /// <summary>Returns true if the Country is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Unknown.m_Value;
 
         /// <summary>Returns true if the Country is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
 
         /// <summary>Gets the display name for a specified culture.</summary>
@@ -121,7 +121,7 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// Returns a localized display name.
         /// </returns>
-        public string GetDisplayName(CultureInfo culture) { return GetResourceString("DisplayName", culture); }
+        public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
 
         /// <summary>Returns true if the country exists at the given date, otherwise false.</summary>
         /// <param name="measurement">
@@ -185,7 +185,7 @@ namespace Qowaiv.Globalization
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the Country from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -216,7 +216,7 @@ namespace Qowaiv.Globalization
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Country from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() { m_Value = default(string); }
+        void IJsonSerializable.FromJson() => m_Value = default(string);
 
         /// <summary>Generates a Country from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -240,13 +240,13 @@ namespace Qowaiv.Globalization
         /// <param name="jsonNumber">
         /// The JSON number that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a Country from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a Country into its JSON object representation.</summary>
         object IJsonSerializable.ToJson() { return m_Value; }
@@ -261,9 +261,14 @@ namespace Qowaiv.Globalization
         {
             get
             {
-                if (m_Value == default(string)) { return "Country: (empty)"; }
-                if (m_Value == Unknown.m_Value) { return "Country: (unknown)"; }
-
+                if (m_Value == default(string))
+                {
+                    return "Country: (empty)";
+                }
+                if (m_Value == Unknown.m_Value)
+                {
+                    return "Country: (unknown)";
+                }
                 return string.Format(
                   CultureInfo.InvariantCulture,
                   "Country: {0} ({1}/{2})",
@@ -317,8 +322,7 @@ namespace Qowaiv.Globalization
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -351,7 +355,7 @@ namespace Qowaiv.Globalization
 
         /// <summary>Returns true if this instance and the other <see cref="Country"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Country"/> to compare with.</param>
-        public bool Equals(Country other) { return m_Value == other.m_Value; }
+        public bool Equals(Country other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this </summary>
         /// <returns>
@@ -423,9 +427,9 @@ namespace Qowaiv.Globalization
         #region (Explicit) casting
 
         /// <summary>Casts a Country to a <see cref="string"/>.</summary>
-        public static explicit operator string(Country val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Country val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
-        public static explicit operator Country(string str) { return Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator Country(string str) => Parse(str, CultureInfo.CurrentCulture);
 
         /// <summary>Casts a System.Globalization.RegionInfo to a </summary>
         public static implicit operator Country(RegionInfo region) { return Create(region); }
@@ -549,7 +553,7 @@ namespace Qowaiv.Globalization
 
             if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new Country() { m_Value = val };
+                result = new Country { m_Value = val };
                 return true;
             }
             return false;
@@ -647,7 +651,7 @@ namespace Qowaiv.Globalization
             ResourceManager
                 .GetString("All")
                 .Split(';')
-                .Select(str => new Country() { m_Value = str })
+                .Select(str => new Country { m_Value = str })
                 .ToList());
 
         #endregion
@@ -666,7 +670,7 @@ namespace Qowaiv.Globalization
                 return s_ResourceManager;
             }
         }
-        internal static ResourceManager s_ResourceManager;
+        private static ResourceManager s_ResourceManager;
 
         /// <summary>Get resource string.</summary>
         /// <param name="postfix">

@@ -152,7 +152,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the month from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -487,7 +487,7 @@ namespace Qowaiv
             }
             if (Pattern.IsMatch(s))
             {
-                result = new Month() { m_Value = byte.Parse(s, formatProvider) };
+                result = new Month { m_Value = byte.Parse(s, formatProvider) };
                 return true;
             }
             else
@@ -498,7 +498,7 @@ namespace Qowaiv
                 if (Parsings[culture].TryGetValue(str, out byte m) ||
                     Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
                 {
-                    result = new Month() { m_Value = m };
+                    result = new Month { m_Value = m };
                     return true;
                 }
             }
@@ -561,7 +561,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new Month() { m_Value = (Byte)val.Value };
+                result = new Month { m_Value = (byte)val.Value };
                 return true;
             }
             return false;

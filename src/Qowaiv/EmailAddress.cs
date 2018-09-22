@@ -55,7 +55,7 @@ namespace Qowaiv
         public static readonly EmailAddress Empty;
 
         /// <summary>Represents an unknown (but set) email address.</summary>
-        public static readonly EmailAddress Unknown = new EmailAddress() { m_Value = "?" };
+        public static readonly EmailAddress Unknown = new EmailAddress { m_Value = "?" };
 
         #region Properties
 
@@ -159,7 +159,7 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the email address.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an email address from a JSON number representation.</summary>
         /// <param name="jsonNumber">
@@ -328,9 +328,9 @@ namespace Qowaiv
         #region (Explicit) casting
 
         /// <summary>Casts an email address to a <see cref="string"/>.</summary>
-        public static explicit operator string(EmailAddress val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(EmailAddress val)=> val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a email address.</summary>
-        public static explicit operator EmailAddress(string str) { return Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator EmailAddress(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         #endregion
@@ -435,7 +435,7 @@ namespace Qowaiv
             }
             if (IsValid(s, formatProvider))
             {
-                result = new EmailAddress() { m_Value = s.ToLowerInvariant() };
+                result = new EmailAddress { m_Value = s.ToLowerInvariant() };
                 return true;
             }
             return false;

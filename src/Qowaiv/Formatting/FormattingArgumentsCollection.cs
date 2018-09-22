@@ -30,7 +30,7 @@ namespace Qowaiv.Formatting
         /// </param>
         public FormattingArgumentsCollection(IFormatProvider formatProvider, FormattingArgumentsCollection parent)
         {
-            this.FormatProvider = Guard.NotNull(formatProvider, "formatProvider");
+            FormatProvider = Guard.NotNull(formatProvider, "formatProvider");
 
             if (parent != null)
             {
@@ -42,7 +42,7 @@ namespace Qowaiv.Formatting
         }
 
         /// <summary>The underlying dictionary.</summary>
-        private Dictionary<Type, FormattingArguments> dict = new Dictionary<Type, FormattingArguments>();
+        private readonly Dictionary<Type, FormattingArguments> dict = new Dictionary<Type, FormattingArguments>();
 
         /// <summary>Gets the default format provider of the collection.</summary>
         public IFormatProvider FormatProvider { get; protected set; }
@@ -56,8 +56,10 @@ namespace Qowaiv.Formatting
         /// </returns>
         public string ToString(IFormattable obj)
         {
-            if (obj == null) { return null; }
-
+            if (obj is null)
+            {
+                return null;
+            }
             var arguments = Get(obj.GetType());
 
             return arguments.ToString(obj);
@@ -75,10 +77,10 @@ namespace Qowaiv.Formatting
         /// </remarks>
         public string ToString(object obj)
         {
-            if (obj == null) { return null; }
-            var formattable = obj as IFormattable;
-            if (formattable == null) { return obj.ToString(); }
-            return ToString(formattable);
+            return 
+                obj is IFormattable formattable
+                ? ToString(formattable)
+                : obj?.ToString();
         }
 
         /// <summary>Replaces the format item in a specified string with the string representation

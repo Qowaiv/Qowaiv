@@ -40,10 +40,10 @@ namespace Qowaiv.Financial
         public static readonly Currency Empty;
 
         /// <summary>Represents an unknown (but set) currency.</summary>
-        public static readonly Currency Unknown = new Currency() { m_Value = "ZZZ" };
+        public static readonly Currency Unknown = new Currency { m_Value = "ZZZ" };
 
         /// <summary>Gets a currency based on the current thread.</summary>
-        public static Currency Current { get { return Thread.CurrentThread.GetValue<Currency>(); } }
+        public static Currency Current => Thread.CurrentThread.GetValue<Currency>();
 
         #region Properties
 
@@ -51,33 +51,33 @@ namespace Qowaiv.Financial
         private string m_Value;
 
         /// <summary>Gets the name of the currency.</summary>
-        public string Name { get { return IsUnknown() ? "?" : m_Value ?? string.Empty; } }
+        public string Name => IsUnknown() ? "?" : m_Value ?? string.Empty;
 
         /// <summary>Gets the display name.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
             Justification = "Property DisplayName is a shortcut for GetDisplayName(CultureInfo.CurrentCulture).")]
-        public string DisplayName { get { return GetDisplayName(CultureInfo.CurrentCulture); } }
+        public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the full name of the currency in English.</summary>
         /// <returns>
         /// The full name of the currency in English.
         /// </returns>
-        public string EnglishName { get { return GetDisplayName(CultureInfo.InvariantCulture); } }
+        public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
         ///<summary>Gets the code defined in ISO 4217 for the currency.</summary>
-        public string IsoCode { get { return GetResourceString("ISO", CultureInfo.InvariantCulture); } }
+        public string IsoCode => GetResourceString("ISO", CultureInfo.InvariantCulture);
 
         ///<summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
-        public int IsoNumericCode { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture)); } }
+        public int IsoNumericCode => m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture));
 
         ///<summary>Gets the symbol for a currency.</summary>
-        public string Symbol { get { return m_Value == default(string) ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture); } }
+        public string Symbol => m_Value == default(string) ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture);
 
         ///<summary>Gets the number of after the decimal separator.</summary>
-        public int Digits { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture)); } }
+        public int Digits => m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture));
 
         /// <summary>Gets the start date from witch the currency exists.</summary>
-        public Date StartDate { get { return m_Value == default(string) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
+        public Date StartDate => m_Value == default(string) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
 
         /// <summary>If the currency does not exist anymore, the end date is given, otherwise null.</summary>
         public Date? EndDate
@@ -94,20 +94,20 @@ namespace Qowaiv.Financial
         #region Methods
 
         /// <summary>Returns true if the currency is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(string); }
+        public bool IsEmpty() => m_Value == default(string);
 
         /// <summary>Returns true if the currency is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Unknown.m_Value;
 
         /// <summary>Returns true if the currency is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         /// <summary>Gets the display name for a specified culture.</summary>
         /// <param name="culture">
         /// The culture of the display name.
         /// </param>
         /// <returns></returns>
-        public string GetDisplayName(CultureInfo culture) { return GetResourceString("DisplayName", culture); }
+        public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
 
         /// <summary>Returns true if the currency exists at the given date, otherwise false.</summary>
         /// <param name="measurement">
@@ -115,7 +115,7 @@ namespace Qowaiv.Financial
         /// </param>
         public bool ExistsOnDate(Date measurement)
         {
-            return this.StartDate <= measurement && (!this.EndDate.HasValue || this.EndDate.Value >= measurement);
+            return StartDate <= measurement && (!EndDate.HasValue || EndDate.Value >= measurement);
         }
 
         /// <summary>Gets the countries using this currency at the given date.</summary>
@@ -155,7 +155,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the currency from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -186,10 +186,8 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates a currency from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(string);
-        }
+        void IJsonSerializable.FromJson() => m_Value = default(string);
+
 
         /// <summary>Generates a currency from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -213,13 +211,13 @@ namespace Qowaiv.Financial
         /// <param name="jsonNumber">
         /// The JSON number that represents the currency.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a currency from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the currency.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a currency into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -232,12 +230,19 @@ namespace Qowaiv.Financial
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
             {
-                if (IsEmpty()) { return "Currency: (empty)"; }
-                if (IsUnknown()) { return "Currency: (unknown)"; }
+                if (IsEmpty())
+                {
+                    return "Currency: (empty)";
+                }
+                if (IsUnknown())
+                {
+                    return "Currency: (unknown)";
+                }
 
                 return string.Format(
                   CultureInfo.InvariantCulture,
@@ -292,8 +297,7 @@ namespace Qowaiv.Financial
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -354,7 +358,7 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns true if this instance and the other <see cref="Currency"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Currency"/> to compare with.</param>
-        public bool Equals(Currency other) { return m_Value == other.m_Value; }
+        public bool Equals(Currency other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this currency.</summary>
         /// <returns>
@@ -426,7 +430,7 @@ namespace Qowaiv.Financial
         #region (Explicit) casting
 
         /// <summary>Casts a currency to a <see cref="string"/>.</summary>
-        public static explicit operator string(Currency val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Currency val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a currency.</summary>
         public static explicit operator Currency(string str) { return Currency.Parse(str, CultureInfo.CurrentCulture); }
 
@@ -549,7 +553,7 @@ namespace Qowaiv.Financial
 
             if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new Currency() { m_Value = val };
+                result = new Currency { m_Value = val };
                 return true;
             }
             foreach (var currency in AllCurrencies.Where(c => !string.IsNullOrEmpty(c.Symbol)))
@@ -621,7 +625,7 @@ namespace Qowaiv.Financial
             ResourceManager
                 .GetString("All")
                 .Split(';')
-                .Select(str => new Currency() { m_Value = str })
+                .Select(str => new Currency { m_Value = str })
                 .ToList());
 
         #endregion
@@ -732,13 +736,13 @@ namespace Qowaiv.Financial
         #region Money creation operators
 
         /// <summary>Creates money based on the amount and the currency.</summary>
-        public static Money operator +(Amount val, Currency currency) { return Money.Create((decimal)val, currency); }
+        public static Money operator +(Amount val, Currency currency) => Money.Create((decimal)val, currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
-        public static Money operator +(decimal val, Currency currency) { return Money.Create(val, currency); }
+        public static Money operator +(decimal val, Currency currency) => Money.Create(val, currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
-        public static Money operator +(double val, Currency currency) { return Money.Create((decimal)val, currency); }
+        public static Money operator +(double val, Currency currency) => Money.Create((decimal)val, currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
-        public static Money operator +(int val, Currency currency) { return Money.Create(val, currency); }
+        public static Money operator +(int val, Currency currency) => Money.Create(val, currency);
 
         #endregion
     }

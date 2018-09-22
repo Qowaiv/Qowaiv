@@ -250,18 +250,13 @@ namespace Qowaiv
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(Uuid left, Uuid right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Uuid left, Uuid right) => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(Uuid left, Uuid right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Uuid left, Uuid right) => !(left == right);
+
 
         #endregion
 
@@ -304,7 +299,7 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Uuid other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Uuid other) => m_Value.CompareTo(other.m_Value);
 
         #endregion
 
@@ -325,10 +320,8 @@ namespace Qowaiv
         #region Factory methods
 
         /// <summary>Initializes a new instance of a UUID.</summary>
-        public static Uuid NewUuid()
-        {
-            return new Uuid(Guid.NewGuid());
-        }
+        public static Uuid NewUuid() => new Uuid(Guid.NewGuid());
+
 
         /// <summary>Converts the string to a UUID.</summary>
         /// <param name="s">
@@ -435,8 +428,8 @@ namespace Qowaiv
         /// <summary>Returns true if the value represents a valid UUID, otherwise false.</summary>
         public static bool IsValid(string val)
         {
-            Guid id;
-            return Pattern.IsMatch(val ?? string.Empty) || Guid.TryParse(val, out id);
+            return Pattern.IsMatch(val ?? string.Empty)
+                || Guid.TryParse(val, out Guid id);
         }
 
         #endregion

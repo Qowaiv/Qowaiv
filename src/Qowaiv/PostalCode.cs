@@ -31,7 +31,7 @@ namespace Qowaiv
         public static readonly PostalCode Empty;
 
         /// <summary>Represents an unknown (but set) postal code.</summary>
-        public static readonly PostalCode Unknown = new PostalCode() { m_Value = "ZZZZZZZZZ" };
+        public static readonly PostalCode Unknown = new PostalCode { m_Value = "ZZZZZZZZZ" };
 
         #region Properties
 
@@ -46,13 +46,13 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the postal code is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(string); }
+        public bool IsEmpty() => m_Value == default(string);
 
         /// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
         public bool IsUnknown() { return m_Value == PostalCode.Unknown.m_Value; }
 
         /// <summary>Returns true if the postal code is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>
         /// <param name="country">
@@ -99,7 +99,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the postal code from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -148,19 +148,19 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the postal code.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates a postal code from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the postal code.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a postal code from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the postal code.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a postal code into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -182,33 +182,26 @@ namespace Qowaiv
                     CultureInfo.InvariantCulture,
                     "PostalCode: {0}{1}",
                     ToString(),
-                    this == PostalCode.Empty ? "(empty)" : "");
+                    this == Empty ? "(empty)" : "");
             }
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current postal code.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
+
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
         /// <param name="format">
@@ -219,8 +212,7 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -253,7 +245,7 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other <see cref="PostalCode"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="PostalCode"/> to compare with.</param>
-        public bool Equals(PostalCode other) { return m_Value == other.m_Value; }
+        public bool Equals(PostalCode other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this postal code.</summary>
         /// <returns>
@@ -264,18 +256,13 @@ namespace Qowaiv
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(PostalCode left, PostalCode right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(PostalCode left, PostalCode right) => left.Equals(right);
+
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(PostalCode left, PostalCode right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(PostalCode left, PostalCode right) => !(left == right);
 
         #endregion
 
@@ -318,16 +305,16 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(PostalCode other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
+        public int CompareTo(PostalCode other) => string.Compare(m_Value, other.m_Value, StringComparison.Ordinal);
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a postal code to a <see cref="string"/>.</summary>
-        public static explicit operator string(PostalCode val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(PostalCode val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a postal code.</summary>
-        public static explicit operator PostalCode(string str) { return PostalCode.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator PostalCode(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         #endregion
@@ -364,8 +351,7 @@ namespace Qowaiv
         /// </exception>
         public static PostalCode Parse(string s, IFormatProvider formatProvider)
         {
-            PostalCode val;
-            if (PostalCode.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out PostalCode val))
             {
                 return val;
             }
@@ -383,12 +369,11 @@ namespace Qowaiv
         /// </returns>
         public static PostalCode TryParse(string s)
         {
-            PostalCode val;
-            if (PostalCode.TryParse(s, out val))
+            if (TryParse(s, out PostalCode val))
             {
                 return val;
             }
-            return PostalCode.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to a postal code.
@@ -425,7 +410,7 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out PostalCode result)
         {
-            result = PostalCode.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
@@ -433,12 +418,12 @@ namespace Qowaiv
             var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
             if (Qowaiv.Unknown.IsUnknown(s, culture))
             {
-                result = PostalCode.Unknown;
+                result = Unknown;
                 return true;
             }
             if (IsValid(s, formatProvider))
             {
-                result = new PostalCode() { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
+                result = new PostalCode { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
                 return true;
             }
             return false;
@@ -449,10 +434,8 @@ namespace Qowaiv
         #region Validation
 
         /// <summary>Returns true if the val represents a valid postal code, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
+
 
         /// <summary>Returns true if the val represents a valid postal code, otherwise false.</summary>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "formatProvider",

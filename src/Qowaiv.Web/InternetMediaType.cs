@@ -67,7 +67,7 @@ namespace Qowaiv.Web
         public static readonly InternetMediaType Empty;
 
         /// <summary>Represents an unknown (but set) Internet media type.</summary>
-        public static readonly InternetMediaType Unknown = new InternetMediaType() { m_Value = "application/octet-stream" };
+        public static readonly InternetMediaType Unknown = new InternetMediaType { m_Value = "application/octet-stream" };
 
         #region Properties
 
@@ -151,13 +151,13 @@ namespace Qowaiv.Web
         #region Methods
 
         /// <summary>Returns true if the Internet media type is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(string); }
+        public bool IsEmpty() => m_Value == default(string);
 
         /// <summary>Returns true if the Internet media type is unknown, otherwise false.</summary>
         public bool IsUnknown() { return m_Value == InternetMediaType.Unknown.m_Value; }
 
         /// <summary>Returns true if the Internet media type is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         #endregion
 
@@ -185,7 +185,7 @@ namespace Qowaiv.Web
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the Internet media type from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -234,19 +234,19 @@ namespace Qowaiv.Web
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an Internet media type from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates an Internet media type from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts an Internet media type into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -320,7 +320,7 @@ namespace Qowaiv.Web
 
         /// <summary>Returns true if this instance and the other <see cref="InternetMediaType"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="InternetMediaType"/> to compare with.</param>
-        public bool Equals(InternetMediaType other) { return m_Value == other.m_Value; }
+        public bool Equals(InternetMediaType other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this Internet media type.</summary>
         /// <returns>
@@ -392,7 +392,7 @@ namespace Qowaiv.Web
         #region (Explicit) casting
 
         /// <summary>Casts an Internet media type to a <see cref="string"/>.</summary>
-        public static explicit operator string(InternetMediaType val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(InternetMediaType val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Internet media type.</summary>
         public static explicit operator InternetMediaType(string str) { return InternetMediaType.Parse(str); }
 
@@ -468,7 +468,7 @@ namespace Qowaiv.Web
             }
             if (IsValid(s))
             {
-                result = new InternetMediaType() { m_Value = s.ToLowerInvariant() };
+                result = new InternetMediaType { m_Value = s.ToLowerInvariant() };
                 return true;
             }
             return false;
@@ -501,7 +501,7 @@ namespace Qowaiv.Web
             if (string.IsNullOrEmpty(filename)) { return InternetMediaType.Empty; }
 
             var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
-            return string.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType() { m_Value = str };
+            return string.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType { m_Value = str };
         }
 
         #endregion

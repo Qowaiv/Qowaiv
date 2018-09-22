@@ -22,7 +22,6 @@ namespace Qowaiv.Conversion
             return IsConvertable(destinationType) || base.CanConvertTo(context, destinationType);
         }
 
-
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
@@ -37,7 +36,6 @@ namespace Qowaiv.Conversion
             }
             return base.ConvertFrom(context, culture, value);
         }
-
 
         /// <inheritdoc />
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)

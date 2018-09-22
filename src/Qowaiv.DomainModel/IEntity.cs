@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel
 {
@@ -10,9 +11,10 @@ namespace Qowaiv.DomainModel
         where TId : struct
     {
         /// <summary>The identifier of the entity.</summary>
+        [Key]
         TId Id { get; }
 
         /// <summary>Indicates that the entity not yet has a set identifier.</summary>
-        bool IsTransient();
+        bool IsTransient { get; }
     }
 }

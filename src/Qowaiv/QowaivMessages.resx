@@ -249,4 +249,7 @@
   <data name="CurrencyMismatchException" xml:space="preserve">
     <value>The {0} operation could not be applied. There is a mismatch between {1} and {2}.</value>
   </data>
+  <data name="ArgumentException_IsDefaultValue" xml:space="preserve">
+    <value>Argument is the not initialized/default value.</value>
+  </data>
 </root>

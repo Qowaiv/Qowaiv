@@ -25,12 +25,33 @@ namespace Qowaiv
         [DebuggerStepThrough]
         public static T NotNull<T>([ValidatedNotNull]T param, string paramName) where T : class
         {
-            if (ReferenceEquals(param, null))
+            if (param is null)
             {
                 throw new ArgumentNullException(paramName);
             }
             return param;
         }
+
+        /// <summary>Guards the parameter if not the default value, otherwise throws an argument exception.</summary>
+        /// <typeparam name="T">
+        /// The type to guard, can not be a class.
+        /// </typeparam>
+        /// <param name="param">
+        /// The parameter to guard.
+        /// </param>
+        /// <param name="paramName">
+        /// The name of the parameter.
+        /// </param>
+        [DebuggerStepThrough]
+        public static T NotDefault<T>([ValidatedNotNull]T param, string paramName) where T : struct
+        {
+            if (default(T).Equals(param))
+            {
+                throw new ArgumentException(QowaivMessages.ArgumentException_IsDefaultValue, paramName);
+            }
+            return param;
+        }
+
 
         /// <summary>Guards the parameter if not null or an empty string, otherwise throws an argument (null) exception.</summary>
         /// <param name="param">

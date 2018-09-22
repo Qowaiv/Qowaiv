@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Qowaiv.TestTools;
 using System;
 
 namespace Qowaiv.DomainModel.UnitTests
@@ -9,7 +10,7 @@ namespace Qowaiv.DomainModel.UnitTests
         public void Ctor_NewlyCreated_IsTransient()
         {
             var entity = new GuidEntity();
-            Assert.True(entity.IsTransient());
+            Assert.True(entity.IsTransient);
         }
 
         [Test]
@@ -18,7 +19,17 @@ namespace Qowaiv.DomainModel.UnitTests
             var entity = new GuidEntity();
             entity.NewId();
 
-            Assert.False(entity.IsTransient());
+            Assert.False(entity.IsTransient);
+        }
+
+        [Test]
+        public void UpdateId_Default_ArgumentException()
+        {
+            var entity = new GuidEntity();
+            Assert.Throws<ArgumentException>
+            (
+                () => entity.NewId(Guid.Empty)
+            );
         }
 
         [Test]
@@ -86,13 +97,14 @@ namespace Qowaiv.DomainModel.UnitTests
             Assert.IsTrue(left == right);
         }
         [Test]
-        public void Inequality_SameId_IsTrue()
+        public void Inequality_SameId_IsFalse()
         {
             var left = new GuidEntity();
+            left.NewId();
             var right = new GuidEntity();
             right.NewId(left.Id);
 
-            Assert.IsTrue(left != right);
+            Assert.False(left != right);
         }
 
         [Test]
@@ -113,6 +125,30 @@ namespace Qowaiv.DomainModel.UnitTests
             var expected = entity.GetHashCode();
 
             Assert.AreEqual(expected, entity.GetHashCode());
+        }
+
+        [Test]
+        public void DebuggerDisplay_IsSupported()
+        {
+            DebuggerDisplayAssert.HasAttribute(typeof(Entity<>));
+        }
+
+        [Test]
+        public void DebuggerDisplay_IsTransient()
+        {
+            DebuggerDisplayAssert.HasResult(
+                "Qowaiv.DomainModel.Entity`1[System.Guid], ID: ?",
+                new Entity<Guid>());
+        }
+
+        [Test]
+        public void DebuggerDisplay_NotTransient()
+        {
+            var id = Guid.Parse("10FC7CA7-A781-45DF-81FA-35F3246A5E39");
+
+            DebuggerDisplayAssert.HasResult(
+                "Qowaiv.DomainModel.Entity`1[System.Guid], ID: 10fc7ca7-a781-45df-81fa-35f3246a5e39",
+                new Entity<Guid>(id));
         }
     }
 

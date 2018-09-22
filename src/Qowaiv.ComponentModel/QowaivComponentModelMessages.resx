@@ -120,6 +120,9 @@
   <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
     <value>The value of the {0} field is not allowed.</value>
   </data>
+  <data name="IdentifierNotFoundException" xml:space="preserve">
+    <value>The identifier could not be found.</value>
+  </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
     <value>The postal code {0} is not valid for {1}.</value>
   </data>

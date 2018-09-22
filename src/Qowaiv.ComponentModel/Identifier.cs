@@ -54,14 +54,14 @@ namespace Qowaiv.ComponentModel
             if (!Store.TryGetValue(type, out PropertyInfo prop))
             {
                 prop = ResolveId(type);
-                if (prop != null)
-                {
-                    Store.TryAdd(type, prop);
-                }
-                else
+                if (prop is null)
                 {
                     id = null;
                     return false;
+                }
+                else
+                {
+                    Store.TryAdd(type, prop);
                 }
             }
             id = prop.GetValue(model);
@@ -76,14 +76,12 @@ namespace Qowaiv.ComponentModel
         {
             var properties = dataType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
             var byKey = properties.FirstOrDefault(prop => prop.GetCustomAttributes<KeyAttribute>(true).Any());
-            if (byKey != null)
-            {
-                return byKey;
-            }
-            return properties.FirstOrDefault(prop =>
-                prop.Name.ToUpperInvariant() == "ID" &&
-                IdentifierTypes.Contains(prop.PropertyType)
-            );
+            return byKey ?? properties.FirstOrDefault(IsIdentfier);
+        }
+        private static bool IsIdentfier(PropertyInfo property)
+        {
+            return "ID" == property.Name.ToLowerInvariant()
+                && IdentifierTypes.Contains(property.PropertyType);
         }
         private static readonly Type[] IdentifierTypes = { typeof(Guid),typeof(Uuid), typeof(int), typeof(long) };
 

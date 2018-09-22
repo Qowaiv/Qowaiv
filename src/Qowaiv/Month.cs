@@ -30,32 +30,32 @@ namespace Qowaiv
         public static readonly Month Empty;
 
         /// <summary>Represents an unknown (but set) month.</summary>
-        public static readonly Month Unknown = new Month() { m_Value = Byte.MaxValue };
+        public static readonly Month Unknown = new Month{ m_Value = byte.MaxValue };
 
         /// <summary>Represents January (01).</summary>
-        public static readonly Month January = new Month() { m_Value = 1 };
+        public static readonly Month January = new Month{ m_Value = 1 };
         /// <summary>Represents February (02).</summary>
-        public static readonly Month February = new Month() { m_Value = 2 };
+        public static readonly Month February = new Month{ m_Value = 2 };
         /// <summary>Represents March (03).</summary>
-        public static readonly Month March = new Month() { m_Value = 3 };
+        public static readonly Month March = new Month{ m_Value = 3 };
         /// <summary>Represents April (04).</summary>
-        public static readonly Month April = new Month() { m_Value = 4 };
+        public static readonly Month April = new Month{ m_Value = 4 };
         /// <summary>Represents May (05).</summary>
-        public static readonly Month May = new Month() { m_Value = 5 };
+        public static readonly Month May = new Month{ m_Value = 5 };
         /// <summary>Represents June (06).</summary>
-        public static readonly Month June = new Month() { m_Value = 6 };
+        public static readonly Month June = new Month{ m_Value = 6 };
         /// <summary>Represents July (07).</summary>
-        public static readonly Month July = new Month() { m_Value = 7 };
+        public static readonly Month July = new Month{ m_Value = 7 };
         /// <summary>Represents August (08).</summary>
-        public static readonly Month August = new Month() { m_Value = 8 };
+        public static readonly Month August = new Month{ m_Value = 8 };
         /// <summary>Represents September (09).</summary>
-        public static readonly Month September = new Month() { m_Value = 9 };
+        public static readonly Month September = new Month{ m_Value = 9 };
         /// <summary>Represents October (10).</summary>
-        public static readonly Month October = new Month() { m_Value = 10 };
+        public static readonly Month October = new Month{ m_Value = 10 };
         /// <summary>Represents November (11).</summary>
-        public static readonly Month November = new Month() { m_Value = 11 };
+        public static readonly Month November = new Month{ m_Value = 11 };
         /// <summary>Represents December (12).</summary>
-        public static readonly Month December = new Month() { m_Value = 12 };
+        public static readonly Month December = new Month{ m_Value = 12 };
 
         /// <summary>Represents all months (January till December).</summary>
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
@@ -63,18 +63,18 @@ namespace Qowaiv
         public static readonly ReadOnlyCollection<Month> All = new ReadOnlyCollection<Month>(
             new List<Month>()
             {
-                Month.January,
-                Month.February,
-                Month.March,
-                Month.April,
-                Month.May,
-                Month.June,
-                Month.July,
-                Month.August,
-                Month.September,
-                Month.October,
-                Month.November,
-                Month.December,
+                January,
+                February,
+                March,
+                April,
+                May,
+                June,
+                July,
+                August,
+                September,
+                October,
+                November,
+                December,
             });
 
         #region Properties
@@ -97,14 +97,13 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the month is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(System.Byte); }
+        public bool IsEmpty()=> m_Value == default(byte);
 
         /// <summary>Returns true if the month is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == Month.Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Month.Unknown.m_Value;
 
         /// <summary>Returns true if the month is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
-
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
 
         /// <summary>Gets the full name of the month.</summary>
@@ -117,6 +116,21 @@ namespace Qowaiv
         public string GetShortName(IFormatProvider formatProvider)
         {
             return IsEmptyOrUnknown() ? ToDefaultString() : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
+        }
+
+        /// <summary>Returns the number of days for the month.</summary>
+        /// <param name="year">
+        /// The year to ask the number of days for.
+        /// </param>
+        /// <remarks>
+        /// If the year of month is empty or unknown -1 is returned.
+        /// </remarks>
+        public int Days(Year year)
+        {
+            return
+                year.IsEmptyOrUnknown() || IsEmptyOrUnknown()
+                ? -1
+                : DateTime.DaysInMonth((int)year, m_Value);
         }
 
         #endregion
@@ -511,7 +525,7 @@ namespace Qowaiv
             }
             if (Pattern.IsMatch(s))
             {
-                result = new Month() { m_Value = Byte.Parse(s, formatProvider) };
+                result = new Month{ m_Value = Byte.Parse(s, formatProvider) };
                 return true;
             }
             else
@@ -523,7 +537,7 @@ namespace Qowaiv
                 if (Parsings[culture].TryGetValue(str, out m) ||
                     Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
                 {
-                    result = new Month() { m_Value = m };
+                    result = new Month{ m_Value = m };
                     return true;
                 }
             }
@@ -588,7 +602,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new Month() { m_Value = (Byte)val.Value };
+                result = new Month{ m_Value = (Byte)val.Value };
                 return true;
             }
             return false;

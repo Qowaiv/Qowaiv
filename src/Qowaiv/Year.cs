@@ -28,13 +28,13 @@ namespace Qowaiv
         public static readonly Year Empty;
 
         /// <summary>Represents an unknown (but set) year.</summary>
-        public static readonly Year Unknown = new Year() { m_Value = Int16.MaxValue };
+        public static readonly Year Unknown = new Year { m_Value = Int16.MaxValue };
 
         /// <summary>Represents the smallest possible year 1.</summary>
-        public static readonly Year MinValue = new Year() { m_Value = 1 };
+        public static readonly Year MinValue = new Year { m_Value = 1 };
 
         /// <summary>Represents the largest possible year 9999.</summary>
-        public static readonly Year MaxValue = new Year() { m_Value = 9999 };
+        public static readonly Year MaxValue = new Year { m_Value = 9999 };
 
         #region Properties
 
@@ -47,10 +47,7 @@ namespace Qowaiv
         /// </returns>
         public bool IsLeapYear
         {
-            get
-            {
-                return !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
-            }
+            get => !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
         }
 
         #endregion
@@ -58,13 +55,13 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the year is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(Int16); }
+        public bool IsEmpty() => m_Value == default(short);
 
         /// <summary>Returns true if the year is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == Year.Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Unknown.m_Value;
 
         /// <summary>Returns true if the year is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         #endregion
 

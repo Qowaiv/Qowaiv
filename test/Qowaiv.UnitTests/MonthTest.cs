@@ -96,6 +96,27 @@ namespace Qowaiv.UnitTests
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
         }
 
+        [TestCase(31, 1979, 12)]
+        [TestCase(30, 2000, 11)]
+        [TestCase(29, 1980, 02)]
+        [TestCase(28, 1981, 02)]
+        public void Days(int expected, int year, int month)
+        {
+            Assert.AreEqual(expected, ((Month)month).Days(year));
+        }
+
+        [Test]
+        public void Days_EmptyYear()
+        {
+            Assert.AreEqual(-1, Month.April.Days(Year.Empty));
+        }
+
+        [Test]
+        public void Days_EmptyMonth()
+        {
+            Assert.AreEqual(-1, Month.Empty.Days(2018));
+        }
+
         #endregion
 
         #region TryParse tests

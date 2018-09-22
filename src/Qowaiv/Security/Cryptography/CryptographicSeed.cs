@@ -90,7 +90,7 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(writer, nameof(writer));
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s);
             m_Value = val.m_Value;

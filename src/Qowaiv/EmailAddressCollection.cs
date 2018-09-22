@@ -228,7 +228,7 @@ namespace Qowaiv
         /// </remarks>
         protected virtual void ReadXml(XmlReader reader)
         {
-            Guard.NotNull(writer, nameof(writer));
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             AddRange(val);

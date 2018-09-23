@@ -124,6 +124,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ArgumentException_TypeOf {
+            get {
+                return ResourceManager.GetString("ArgumentException_TypeOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value should not be negative..
         /// </summary>
         public static string ArgumentOutOfRangeException_NotNegative {

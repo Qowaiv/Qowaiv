@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion.IO;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion.IO;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -35,44 +39,44 @@ namespace Qowaiv.IO
         public static readonly StreamSize Zero;
 
         /// <summary>Represents 1 Byte.</summary>
-        public static readonly StreamSize Byte = new StreamSize() { m_Value = 1L };
+        public static readonly StreamSize Byte = new StreamSize { m_Value = 1L };
 
         /// <summary>Represents 1 kilobyte (1,000 byte).</summary>
-        public static readonly StreamSize KB = new StreamSize() { m_Value = 1000L };
+        public static readonly StreamSize KB = new StreamSize { m_Value = 1000L };
 
         /// <summary>Represents 1 Megabyte (1,000,000 byte).</summary>
-        public static readonly StreamSize MB = new StreamSize() { m_Value = 1000000L };
+        public static readonly StreamSize MB = new StreamSize { m_Value = 1000000L };
 
         /// <summary>Represents 1 Gigabyte (1,000,000,000 byte).</summary>
-        public static readonly StreamSize GB = new StreamSize() { m_Value = 1000000000L };
+        public static readonly StreamSize GB = new StreamSize { m_Value = 1000000000L };
 
         /// <summary>Represents 1 Terabyte (1,000,000,000,000 byte).</summary>
-        public static readonly StreamSize TB = new StreamSize() { m_Value = 1000000000000L };
+        public static readonly StreamSize TB = new StreamSize { m_Value = 1000000000000L };
 
         /// <summary>Represents 1 Petabyte (1,000,000,000,000,000 byte).</summary>
-        public static readonly StreamSize PB = new StreamSize() { m_Value = 1000000000000000L };
+        public static readonly StreamSize PB = new StreamSize { m_Value = 1000000000000000L };
 
 
         /// <summary>Represents 1 kibibyte (1,024 byte).</summary>
-        public static readonly StreamSize KiB = new StreamSize() { m_Value = 1L << 10 };
+        public static readonly StreamSize KiB = new StreamSize { m_Value = 1L << 10 };
 
         /// <summary>Represents 1 Mebibyte (1,048,576 byte).</summary>
-        public static readonly StreamSize MiB = new StreamSize() { m_Value = 1L << 20 };
+        public static readonly StreamSize MiB = new StreamSize { m_Value = 1L << 20 };
 
         /// <summary>Represents 1 Gibibyte (1,073,741,824 byte).</summary>
-        public static readonly StreamSize GiB = new StreamSize() { m_Value = 1L << 30 };
+        public static readonly StreamSize GiB = new StreamSize { m_Value = 1L << 30 };
 
         /// <summary>Represents 1 Tebibyte (1,099,511,627,776 byte).</summary>
-        public static readonly StreamSize TiB = new StreamSize() { m_Value = 1L << 40 };
+        public static readonly StreamSize TiB = new StreamSize { m_Value = 1L << 40 };
 
         /// <summary>Represents 1 Petabyte (1,125,899,906,842,624 byte).</summary>
-        public static readonly StreamSize PiB = new StreamSize() { m_Value = 1L << 50 };
+        public static readonly StreamSize PiB = new StreamSize { m_Value = 1L << 50 };
 
         /// <summary>Represents the minimum stream size that can be represented.</summary>
-        public static readonly StreamSize MinValue = new StreamSize() { m_Value = long.MinValue };
+        public static readonly StreamSize MinValue = new StreamSize { m_Value = long.MinValue };
 
         /// <summary>Represents the maximum stream size that can be represented.</summary>
-        public static readonly StreamSize MaxValue = new StreamSize() { m_Value = long.MaxValue };
+        public static readonly StreamSize MaxValue = new StreamSize { m_Value = long.MaxValue };
 
         /// <summary>Initializes a new instance of a stream size.</summary>
         /// <param name="size">
@@ -357,7 +361,7 @@ namespace Qowaiv.IO
         /// <param name="context">The streaming context.</param>
         private StreamSize(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetInt64("Value");
         }
 
@@ -366,7 +370,7 @@ namespace Qowaiv.IO
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -374,7 +378,7 @@ namespace Qowaiv.IO
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the stream size from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -383,7 +387,7 @@ namespace Qowaiv.IO
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -396,7 +400,7 @@ namespace Qowaiv.IO
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -441,7 +445,7 @@ namespace Qowaiv.IO
         /// <param name="jsonDate">
         /// The JSON Date that represents the stream size.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a stream size into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -515,8 +519,7 @@ namespace Qowaiv.IO
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -607,13 +610,13 @@ namespace Qowaiv.IO
 
         /// <summary>Returns true if this instance and the other <see cref="StreamSize"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="StreamSize"/> to compare with.</param>
-        public bool Equals(StreamSize other) { return m_Value == other.m_Value; }
+        public bool Equals(StreamSize other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this stream size.</summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return m_Value.GetHashCode(); }
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -672,50 +675,50 @@ namespace Qowaiv.IO
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(StreamSize other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(StreamSize other) => m_Value.CompareTo(other.m_Value);
 
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(StreamSize l, StreamSize r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(StreamSize l, StreamSize r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(StreamSize l, StreamSize r) { return l.CompareTo(r) > 0; }
+        public static bool operator >(StreamSize l, StreamSize r) => l.CompareTo(r) > 0;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(StreamSize l, StreamSize r) { return l.CompareTo(r) <= 0; }
+        public static bool operator <=(StreamSize l, StreamSize r) => l.CompareTo(r) <= 0;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(StreamSize l, StreamSize r) { return l.CompareTo(r) >= 0; }
+        public static bool operator >=(StreamSize l, StreamSize r) => l.CompareTo(r) >= 0;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a stream size to a <see cref="string"/>.</summary>
-        public static explicit operator string(StreamSize val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(StreamSize val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a stream size.</summary>
         public static explicit operator StreamSize(string str) { return StreamSize.Parse(str, CultureInfo.CurrentCulture); }
 
 
         /// <summary>Casts a stream size to a System.Int32.</summary>
-        public static explicit operator Int32(StreamSize val) { return (Int32)val.m_Value; }
+        public static explicit operator int(StreamSize val) => (int)val.m_Value;
         /// <summary>Casts an System.Int32 to a stream size.</summary>
-        public static implicit operator StreamSize(Int32 val) { return new StreamSize(val); }
+        public static implicit operator StreamSize(int val) => new StreamSize(val); 
 
         /// <summary>Casts a stream size to a System.Int64.</summary>
-        public static explicit operator Int64(StreamSize val) { return (Int64)val.m_Value; }
+        public static explicit operator long(StreamSize val) => val.m_Value;
         /// <summary>Casts a System.Int64 to a stream size.</summary>
-        public static implicit operator StreamSize(Int64 val) { return new StreamSize(val); }
+        public static implicit operator StreamSize(long val) => new StreamSize(val);
 
         /// <summary>Casts a stream size to a System.Double.</summary>
-        public static explicit operator Double(StreamSize val) { return (Double)val.m_Value; }
+        public static explicit operator double(StreamSize val) => val.m_Value;
         /// <summary>Casts a System.Double to a stream size.</summary>
-        public static explicit operator StreamSize(Double val) { return new StreamSize((Int64)val); }
+        public static explicit operator StreamSize(double val) => new StreamSize((long)val);
 
         /// <summary>Casts a stream size to a System.Decimal.</summary>
-        public static explicit operator Decimal(StreamSize val) { return (Decimal)val.m_Value; }
+        public static explicit operator decimal(StreamSize val) => val.m_Value;
         /// <summary>Casts a System.DoubleDecimal to a stream size.</summary>
-        public static explicit operator StreamSize(Decimal val) { return new StreamSize((Int64)val); }
+        public static explicit operator StreamSize(decimal val) => new StreamSize((long)val);
 
         #endregion
 
@@ -751,8 +754,7 @@ namespace Qowaiv.IO
         /// </exception>
         public static StreamSize Parse(string s, IFormatProvider formatProvider)
         {
-            StreamSize val;
-            if (StreamSize.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out StreamSize val))
             {
                 return val;
             }
@@ -770,12 +772,11 @@ namespace Qowaiv.IO
         /// </returns>
         public static StreamSize TryParse(string s)
         {
-            StreamSize val;
-            if (StreamSize.TryParse(s, out val))
+            if (TryParse(s, out StreamSize val))
             {
                 return val;
             }
-            return StreamSize.Zero;
+            return Zero;
         }
 
         /// <summary>Converts the string to a stream size.
@@ -822,30 +823,24 @@ namespace Qowaiv.IO
             var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
             var factor = GetMultiplier(streamSizeMarker);
 
-            Int64 sizeInt64;
-
-            if (Int64.TryParse(size, NumberStyles.Number, formatProvider, out sizeInt64) &&
-                sizeInt64 <= Int64.MaxValue / factor &&
-                sizeInt64 >= Int64.MinValue / factor)
+            if (long.TryParse(size, NumberStyles.Number, formatProvider, out long sizeInt64) &&
+                sizeInt64 <= long.MaxValue / factor &&
+                sizeInt64 >= long.MinValue / factor)
             {
                 result = new StreamSize(sizeInt64 * factor);
                 return true;
             }
 
-            Decimal sizeDecimal;
-
-            if (Decimal.TryParse(size, NumberStyles.Number, formatProvider, out sizeDecimal))
+            if (decimal.TryParse(size, NumberStyles.Number, formatProvider, out decimal sizeDecimal) &&
+                sizeDecimal <= decimal.MaxValue / factor &&
+                sizeDecimal >= decimal.MinValue / factor)
             {
-                if (sizeDecimal <= Decimal.MaxValue / factor &&
-                    sizeDecimal >= Decimal.MinValue / factor)
-                {
-                    sizeDecimal *= factor;
+                sizeDecimal *= factor;
 
-                    if (sizeDecimal <= Int64.MaxValue && sizeDecimal >= Int64.MinValue)
-                    {
-                        result = new StreamSize((Int64)sizeDecimal);
-                        return true;
-                    }
+                if (sizeDecimal <= long.MaxValue && sizeDecimal >= long.MinValue)
+                {
+                    result = new StreamSize((long)sizeDecimal);
+                    return true;
                 }
             }
             return false;
@@ -904,21 +899,21 @@ namespace Qowaiv.IO
         /// <summary>Creates a stream size from a file info.</summary>
         public static StreamSize FromByteArray(byte[] bytes)
         {
-            Guard.NotNull(bytes, "bytes");
+            Guard.NotNull(bytes, nameof(bytes));
             return new StreamSize(bytes.Length);
         }
 
         /// <summary>Creates a stream size from a file info.</summary>
         public static StreamSize FromFileInfo(FileInfo fileInfo)
         {
-            Guard.NotNull(fileInfo, "fileInfo");
+            Guard.NotNull(fileInfo, nameof(fileInfo));
             return new StreamSize(fileInfo.Length);
         }
 
         /// <summary>Creates a stream size from a stream.</summary>
         public static StreamSize FromStream(Stream stream)
         {
-            Guard.NotNull(stream, "stream");
+            Guard.NotNull(stream, nameof(stream));
             return new StreamSize(stream.Length);
         }
 
@@ -927,16 +922,12 @@ namespace Qowaiv.IO
         #region Validation
 
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val)=> IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            StreamSize size;
-            return TryParse(val, formatProvider, out size);
+            return TryParse(val, formatProvider, out StreamSize size);
         }
 
         #endregion
@@ -986,7 +977,7 @@ namespace Qowaiv.IO
             { "TB", 1000000000000L },
             { "PB", 1000000000000000L },
             { "EB", 1000000000000000000L },
-            
+
             { "KIBIBYTE", 1L << 10 },
             { "MEBIBYTE", 1L << 20 },
             { "GIBIBYTE", 1L << 30 },
@@ -1005,6 +996,5 @@ namespace Qowaiv.IO
             { "BYTE", 1 },
             { "B", 1 },
         };
-
     }
 }

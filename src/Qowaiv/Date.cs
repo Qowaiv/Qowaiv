@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -331,7 +335,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private Date(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetDateTime("Value");
         }
 
@@ -340,7 +344,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -348,7 +352,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the Date from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -357,7 +361,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -370,7 +374,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
         }
 
@@ -379,7 +383,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Date from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() { throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported); }
+        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a Date from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -403,7 +407,7 @@ namespace Qowaiv
         /// <param name="jsonNumber">
         /// The JSON number that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a Date from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -484,13 +488,13 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other <see cref="Date"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Date"/> to compare with.</param>
-        public bool Equals(Date other) { return m_Value == other.m_Value; }
+        public bool Equals(Date other) => m_Value == other.m_Value;
 
-        /// <summary>Returns the hash code for this </summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() { return m_Value.GetHashCode(); }
+                             /// <summary>Returns the hash code for this </summary>
+                             /// <returns>
+                             /// A 32-bit signed integer hash code.
+                             /// </returns>
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -549,31 +553,31 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Date other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Date other) => m_Value.CompareTo(other.m_Value);
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Date l, Date r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(Date l, Date r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Date l, Date r) { return l.CompareTo(r) > 0; }
+        public static bool operator >(Date l, Date r) => l.CompareTo(r) > 0;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Date l, Date r) { return l.CompareTo(r) <= 0; }
+        public static bool operator <=(Date l, Date r) => l.CompareTo(r) <= 0;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Date l, Date r) { return l.CompareTo(r) >= 0; }
+        public static bool operator >=(Date l, Date r) => l.CompareTo(r) >= 0;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a date to a <see cref="string"/>.</summary>
-        public static explicit operator string(Date val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Date val)=> val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a date to a date time.</summary>
-        public static implicit operator DateTime(Date val) { return val.m_Value; }
+        public static implicit operator DateTime(Date val) => val.m_Value;
 
         /// <summary>Casts a <see cref="string"/> to a date.</summary>
-        public static explicit operator Date(string str) { return Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator Date(string str) => Parse(str, CultureInfo.CurrentCulture);
         /// <summary>Casts a date time to a date.</summary>
         public static explicit operator Date(DateTime val) { return new Date(val); }
 

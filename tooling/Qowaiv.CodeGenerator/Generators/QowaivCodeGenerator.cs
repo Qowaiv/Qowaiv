@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Qowaiv.CodeGenerator.Generators
 {
@@ -233,15 +234,9 @@ namespace Qowaiv.CodeGenerator.Generators
                     var workbook = Workbook.Load(stream);
                     var worksheet = workbook.Worksheets[0];
 
-                    var all = new List<string>();
-
                     var country_index = 1;
                     var currency_index = 2;
                     var date_index = 3;
-
-                    var resx = new XResourceFile();
-
-                    var header = worksheet.Cells.GetRow(0);
 
                     int i = 1;
 
@@ -411,8 +406,6 @@ namespace Qowaiv.CodeGenerator.Generators
                     var workbook = Workbook.Load(stream);
                     var worksheet = workbook.Worksheets[0];
 
-                    var all = new List<string>();
-
                     var key_index = 0;
                     var ctr_index = 1;
                     var len_index = 2;
@@ -420,9 +413,6 @@ namespace Qowaiv.CodeGenerator.Generators
                     var fld_index = 4;
                     var cmd_index = 5;
                     var chk_index = 6;
-
-                    var header = worksheet.Cells.GetRow(0);
-
                     int i = 1;
 
                     while (true)
@@ -463,25 +453,25 @@ namespace Qowaiv.CodeGenerator.Generators
         }
         private static string GetIbanPattern(string country, string bban, string checksum)
         {
-            string pattern = '^' + country;
+            var pattern = new StringBuilder().Append('^').Append(country);
 
             var blocks = bban.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (!string.IsNullOrEmpty(checksum))
             {
-                pattern += checksum.Length == 1 ? '0' + checksum : checksum;
+                pattern.Append(checksum.Length == 1 ? '0' + checksum : checksum);
             }
             // if no fixed checksum is specified and the pattern does not start with a numeric char.
             else if (blocks[0].Last() != 'n')
             {
-                pattern += @"[0-9]{2}";
+                pattern.Append(@"[0-9]{2}");
             }
 
 
             foreach (var block in blocks)
             {
                 var tp = block.Last();
-                var len = Int32.Parse(block.Substring(0, block.Length - 1));
+                var len = int.Parse(block.Substring(0, block.Length - 1));
 
                 // if the first block and numeric, then add 2 digits for the checksum.
                 if (tp == 'n' && pattern.Length == 3)
@@ -505,20 +495,20 @@ namespace Qowaiv.CodeGenerator.Generators
                 // add length
                 if (len == 1)
                 {
-                    pattern += p;
+                    pattern.Append(p);
                 }
                 else if (len == 2 && tp == 'n')
                 {
-                    pattern += p + p;
+                    pattern.Append(p).Append(p);
                 }
                 else
                 {
-                    pattern += p + '{' + len.ToString() + '}';
+                    pattern.Append(p).Append('{').Append(len).Append('}');
                 }
             }
 
-            pattern += '$';
-            return pattern;
+            pattern.Append('$');
+            return pattern.ToString();
         }
 
         /// <summary>Generates the PostalCode Settings file.</summary>
@@ -548,8 +538,6 @@ namespace Qowaiv.CodeGenerator.Generators
                         var workbook = Workbook.Load(stream);
                         var worksheet = workbook.Worksheets[0];
 
-                        var all = new List<string>();
-
                         var key_index = 1;
                         var name_index = 2;
                         var exists_index = 3;
@@ -561,9 +549,6 @@ namespace Qowaiv.CodeGenerator.Generators
                         var lenghts_index = 9;
                         var alpha_index = 10;
                         var comment_index = 11;
-
-                        var header = worksheet.Cells.GetRow(0);
-
                         int i = 1;
 
                         while (true)
@@ -717,14 +702,11 @@ namespace Qowaiv.CodeGenerator.Generators
                 var workbook = Workbook.Load(stream);
                 var worksheet = workbook.Worksheets[0];
 
+                var resx = new XResourceFile();
+
                 var key_index = 0;
                 var val_index = 1;
                 var cmt_index = 2;
-
-                var resx = new XResourceFile();
-
-                var header = worksheet.Cells.GetRow(0);
-
                 int i = 1;
 
                 while (true)

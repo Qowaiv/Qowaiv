@@ -63,10 +63,10 @@ namespace Qowaiv.Formatting
             Justification = "There is no better way in this case.")]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
         {
-            Guard.NotNull((object)obj, "obj");
-            Guard.NotNullOrEmpty(format, "format");
-            Guard.NotNull(formatProvider, "formatProvider");
-            Guard.NotNull(tokens, "tokens");
+            Guard.NotNull((object)obj, nameof(obj));
+            Guard.NotNullOrEmpty(format, nameof(format));
+            Guard.NotNull(formatProvider, nameof(formatProvider));
+            Guard.NotNull(tokens, nameof(tokens));
 
             var sb = new StringBuilder();
             var isEscape = false;

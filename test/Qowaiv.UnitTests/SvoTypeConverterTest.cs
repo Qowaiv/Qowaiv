@@ -10,10 +10,11 @@ namespace Qowaiv.UnitTests
         public void ConvertTo_Nullable()
         {
             var converter = new UuidTypeConverter();
-            object value = Uuid.NewUuid();
+            var value = Uuid.NewUuid();
 
-            var actual = converter.ConvertTo(value, typeof(Guid?));
+            var actual = converter.ConvertTo((object)value, typeof(Guid?));
 
+            Assert.IsInstanceOf<Guid>(actual);
             Assert.AreEqual((Guid)value, actual);
         }
     }

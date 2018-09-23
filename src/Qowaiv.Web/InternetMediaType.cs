@@ -1,5 +1,10 @@
-﻿#pragma warning disable S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
-// The < and > operators have no meaning for an Internet media type.
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
 
 using Qowaiv.Formatting;
 using Qowaiv.Json;
@@ -67,7 +72,7 @@ namespace Qowaiv.Web
         public static readonly InternetMediaType Empty;
 
         /// <summary>Represents an unknown (but set) Internet media type.</summary>
-        public static readonly InternetMediaType Unknown = new InternetMediaType() { m_Value = "application/octet-stream" };
+        public static readonly InternetMediaType Unknown = new InternetMediaType { m_Value = "application/octet-stream" };
 
         #region Properties
 
@@ -95,15 +100,14 @@ namespace Qowaiv.Web
         {
             get
             {
-                if (IsEmpty()) { return InternetMediaTopLevelType.None; }
-
-                InternetMediaTopLevelType type;
-
-                if (Enum.TryParse<InternetMediaTopLevelType>(TopLevel, true, out type))
+                if (IsEmpty())
                 {
-                    return type;
+                    return InternetMediaTopLevelType.None;
                 }
-                return InternetMediaTopLevelType.Unregistered;
+                return
+                    Enum.TryParse(TopLevel, true, out InternetMediaTopLevelType type)
+                    ? type
+                    : InternetMediaTopLevelType.Unregistered;
             }
         }
 
@@ -125,8 +129,7 @@ namespace Qowaiv.Web
         {
             get
             {
-                InternetMediaSuffixType type;
-                Enum.TryParse<InternetMediaSuffixType>(Pattern.Match(m_Value ?? string.Empty).Groups["suffix"].Value, true, out type);
+                Enum.TryParse(Pattern.Match(m_Value ?? string.Empty).Groups["suffix"].Value, true, out InternetMediaSuffixType type);
                 return type;
             }
         }
@@ -151,13 +154,13 @@ namespace Qowaiv.Web
         #region Methods
 
         /// <summary>Returns true if the Internet media type is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(string); }
+        public bool IsEmpty() => m_Value == default(string);
 
         /// <summary>Returns true if the Internet media type is unknown, otherwise false.</summary>
         public bool IsUnknown() { return m_Value == InternetMediaType.Unknown.m_Value; }
 
         /// <summary>Returns true if the Internet media type is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         #endregion
 
@@ -168,7 +171,7 @@ namespace Qowaiv.Web
         /// <param name="context">The streaming context.</param>
         private InternetMediaType(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetString("Value");
         }
 
@@ -177,7 +180,7 @@ namespace Qowaiv.Web
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -185,7 +188,7 @@ namespace Qowaiv.Web
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the Internet media type from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -194,7 +197,7 @@ namespace Qowaiv.Web
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s);
             m_Value = val.m_Value;
@@ -207,7 +210,7 @@ namespace Qowaiv.Web
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -234,19 +237,19 @@ namespace Qowaiv.Web
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an Internet media type from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates an Internet media type from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts an Internet media type into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -307,7 +310,6 @@ namespace Qowaiv.Web
                 return formatted;
             }
             return m_Value ?? string.Empty;
-            //throw new NotImplementedException();
         }
 
         #endregion
@@ -320,7 +322,7 @@ namespace Qowaiv.Web
 
         /// <summary>Returns true if this instance and the other <see cref="InternetMediaType"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="InternetMediaType"/> to compare with.</param>
-        public bool Equals(InternetMediaType other) { return m_Value == other.m_Value; }
+        public bool Equals(InternetMediaType other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this Internet media type.</summary>
         /// <returns>
@@ -392,7 +394,7 @@ namespace Qowaiv.Web
         #region (Explicit) casting
 
         /// <summary>Casts an Internet media type to a <see cref="string"/>.</summary>
-        public static explicit operator string(InternetMediaType val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(InternetMediaType val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Internet media type.</summary>
         public static explicit operator InternetMediaType(string str) { return InternetMediaType.Parse(str); }
 
@@ -413,8 +415,7 @@ namespace Qowaiv.Web
         /// </exception>
         public static InternetMediaType Parse(string s)
         {
-            InternetMediaType val;
-            if (InternetMediaType.TryParse(s, out val))
+            if (TryParse(s, out InternetMediaType val))
             {
                 return val;
             }
@@ -432,12 +433,11 @@ namespace Qowaiv.Web
         /// </returns>
         public static InternetMediaType TryParse(string s)
         {
-            InternetMediaType val;
-            if (InternetMediaType.TryParse(s, out val))
+            if (TryParse(s, out InternetMediaType val))
             {
                 return val;
             }
-            return InternetMediaType.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to an Internet media type.
@@ -456,19 +456,19 @@ namespace Qowaiv.Web
             Justification = "Internet media types are represented in lowercase by default.")]
         public static bool TryParse(string s, out InternetMediaType result)
         {
-            result = InternetMediaType.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
             }
             if (Qowaiv.Unknown.IsUnknown(s, CultureInfo.InvariantCulture))
             {
-                result = InternetMediaType.Unknown;
+                result = Unknown;
                 return true;
             }
             if (IsValid(s))
             {
-                result = new InternetMediaType() { m_Value = s.ToLowerInvariant() };
+                result = new InternetMediaType { m_Value = s.ToLowerInvariant() };
                 return true;
             }
             return false;
@@ -485,8 +485,10 @@ namespace Qowaiv.Web
             Justification = "This has no meaning for other derived classes of FileSystemInfo.")]
         public static InternetMediaType FromFile(FileInfo file)
         {
-            if (file == null) { return InternetMediaType.Empty; }
-            return FromFile(file.Name);
+            return
+                file is null
+                ? Empty
+                : FromFile(file.Name);
         }
 
         /// <summary>Gets the Internet media type base on the filename.</summary>
@@ -498,10 +500,12 @@ namespace Qowaiv.Web
         /// </remarks>
         public static InternetMediaType FromFile(string filename)
         {
-            if (string.IsNullOrEmpty(filename)) { return InternetMediaType.Empty; }
-
+            if (string.IsNullOrEmpty(filename))
+            {
+                return Empty;
+            }
             var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
-            return string.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType() { m_Value = str };
+            return string.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType { m_Value = str };
         }
 
         #endregion

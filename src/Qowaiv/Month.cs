@@ -135,7 +135,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private Month(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetByte("Value");
         }
 
@@ -144,7 +144,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -152,7 +152,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the month from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -161,7 +161,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -174,7 +174,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -487,7 +487,7 @@ namespace Qowaiv
             }
             if (Pattern.IsMatch(s))
             {
-                result = new Month() { m_Value = byte.Parse(s, formatProvider) };
+                result = new Month { m_Value = byte.Parse(s, formatProvider) };
                 return true;
             }
             else
@@ -498,7 +498,7 @@ namespace Qowaiv
                 if (Parsings[culture].TryGetValue(str, out byte m) ||
                     Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
                 {
-                    result = new Month() { m_Value = m };
+                    result = new Month { m_Value = m };
                     return true;
                 }
             }
@@ -561,7 +561,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new Month() { m_Value = (Byte)val.Value };
+                result = new Month { m_Value = (byte)val.Value };
                 return true;
             }
             return false;

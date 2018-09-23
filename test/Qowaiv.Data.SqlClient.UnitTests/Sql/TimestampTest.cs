@@ -247,7 +247,7 @@ namespace Qowaiv.UnitTests.Sql
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_TimestampSerializeObject_AreEqual()
@@ -267,7 +267,7 @@ namespace Qowaiv.UnitTests.Sql
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_TimestampSerializeObject_AreEqual()
@@ -287,7 +287,7 @@ namespace Qowaiv.UnitTests.Sql
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -308,7 +308,7 @@ namespace Qowaiv.UnitTests.Sql
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -328,7 +328,7 @@ namespace Qowaiv.UnitTests.Sql
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -645,7 +645,7 @@ namespace Qowaiv.UnitTests.Sql
             (() =>
             {
                 object other = null;
-                var act = TestStruct.CompareTo(other);
+                TestStruct.CompareTo(other);
             },
                 "obj",
                 "Argument must be a time stamp"
@@ -659,7 +659,7 @@ namespace Qowaiv.UnitTests.Sql
             (() =>
             {
                 object other = new object();
-                var act = TestStruct.CompareTo(other);
+                TestStruct.CompareTo(other);
             },
                 "obj",
                 "Argument must be a time stamp"
@@ -814,14 +814,14 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Timestamp_IsTrue()
+        public void CanConvertFromInt32()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Timestamp), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals(Timestamp.Create(15), 15);
         }
         [Test]
-        public void CanNotConvertToInt32_Timestamp_IsTrue()
+        public void CanConvertToInt32_Timestamp_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Timestamp), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(15, Timestamp.Create(15));
         }
 
         [Test]

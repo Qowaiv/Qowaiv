@@ -19,9 +19,6 @@ namespace Qowaiv.UnitTests.Globalization
             {
                 Console.WriteLine(item);
             }
-
-            Assert.AreEqual(exp.Length, act.Length, "act.Length");
-
             CollectionAssert.AreEqual(exp, act);
         }
 
@@ -35,9 +32,6 @@ namespace Qowaiv.UnitTests.Globalization
             {
                 Console.WriteLine(item);
             }
-
-            Assert.AreEqual(exp.Length, act.Length, "act.Length");
-
             CollectionAssert.AreEqual(exp, act);
         }
 

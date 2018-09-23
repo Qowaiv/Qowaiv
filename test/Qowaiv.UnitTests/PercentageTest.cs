@@ -292,7 +292,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_PercentageSerializeObject_AreEqual()
@@ -312,7 +312,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_PercentageSerializeObject_AreEqual()
@@ -332,7 +332,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -353,7 +353,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -807,7 +807,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a percentage"
@@ -821,7 +821,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a percentage"
@@ -1342,9 +1342,6 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Division_Int1617Percentage51_33()
         {
-            decimal test = 17 / .51m;
-            var t = (short)test;
-
             short act = 17;
             short exp = 33;
             act = act / Percentage.Create(0.51m);
@@ -1427,9 +1424,6 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Multiply_Int1617Percentage51_8()
         {
-            decimal test = 17 * .51m;
-            var t = (short)test;
-
             short act = 17;
             short exp = 8;
             act = act * Percentage.Create(0.51m);
@@ -1544,14 +1538,14 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Percentage_IsTrue()
+        public void CanConvertFromInt32()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Percentage), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals((Percentage)2.0m, 2);
         }
         [Test]
-        public void CanNotConvertToInt32_Percentage_IsTrue()
+        public void CanConvertToDecimal()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Percentage), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(0.1751m, TestStruct);
         }
 
         [Test]

@@ -49,7 +49,7 @@ namespace Qowaiv
             }
             return param;
         }
-        
+
         /// <summary>Guards the parameter if not null or an empty array, otherwise throws an argument (null) exception.</summary>
         /// <param name="param">
         /// The parameter to guard.
@@ -58,7 +58,7 @@ namespace Qowaiv
         /// The name of the parameter.
         /// </param>
         [DebuggerStepThrough]
-        public static T[] NotNullOrEmpty<T>([ValidatedNotNull]T[] param, string paramName)
+        public static T[] HasAny<T>([ValidatedNotNull]T[] param, string paramName)
         {
             NotNull(param, paramName);
             if (param.Length == 0)
@@ -66,6 +66,23 @@ namespace Qowaiv
                 throw new ArgumentException(QowaivMessages.ArgumentException_EmptyArray, paramName);
             }
             return param;
+        }
+
+        /// <summary>Guards the parameter to be of the specified type, otherwise throws an argument exception.</summary>
+        /// <param name="param">
+        /// The parameter to guard.
+        /// </param>
+        /// <param name="paramName">
+        /// The name of the parameter.
+        /// </param>
+        [DebuggerStepThrough]
+        public static T IsTypeOf<T>([ValidatedNotNull]object param, string paramName)
+        {
+            if (param is T)
+            {
+                return (T)param;
+            }
+            throw new ArgumentException(string.Format(QowaivMessages.ArgumentException_Must, typeof(T)), paramName);
         }
 
         /// <summary>Guards the parameter if the type is not null and implements the specified interface,
@@ -95,7 +112,7 @@ namespace Qowaiv
             }
             return param;
         }
-        
+
         /// <summary>Marks the NotNull argument as being validated for not being null,
         /// to satisfy the static code analysis.
         /// </summary>

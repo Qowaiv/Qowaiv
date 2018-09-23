@@ -12,7 +12,7 @@ namespace Qowaiv.Formatting
     public struct FormattingArguments : ISerializable
     {
         /// <summary>Represents empty/not set formatting arguments.</summary>
-        public static readonly FormattingArguments None = new FormattingArguments() { m_Format = default(string), m_FormatProvider = null };
+        public static readonly FormattingArguments None = new FormattingArguments(default(string), null);
 
         /// <summary>Initializes a new instance of new formatting arguments.</summary>
         /// <param name="format">
@@ -23,8 +23,8 @@ namespace Qowaiv.Formatting
         /// </param>
         public FormattingArguments(string format, IFormatProvider formatProvider)
         {
-            m_Format = format;
-            m_FormatProvider = formatProvider;
+            Format = format;
+            FormatProvider = formatProvider;
         }
 
         /// <summary>Initializes a new instance of new formatting arguments.</summary>
@@ -42,13 +42,10 @@ namespace Qowaiv.Formatting
 
         #region Properties
 
-        private string m_Format;
-        private IFormatProvider m_FormatProvider;
-
         /// <summary>Gets the format.</summary>
-        public string Format { get { return m_Format; } }
+        public string Format { get; }
         /// <summary>Gets the format provider.</summary>
-        public IFormatProvider FormatProvider { get { return m_FormatProvider; } }
+        public IFormatProvider FormatProvider { get; }
 
         #endregion
 
@@ -63,8 +60,15 @@ namespace Qowaiv.Formatting
         /// </returns>
         public string ToString(IFormattable obj)
         {
-            if (obj == null) { return null; }
-            return obj.ToString(this.Format, this.FormatProvider ?? CultureInfo.CurrentCulture);
+            if (obj == null)
+            {
+#pragma warning disable S2225
+                // "ToString()" method should not return null
+                // if the origin is null, it should not become string.Empty.
+                return null;
+#pragma warning restore S2225
+            }
+            return obj.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
         }
 
         /// <summary>Formats the object using the formatting arguments.</summary>
@@ -79,10 +83,10 @@ namespace Qowaiv.Formatting
         /// </remarks>
         public string ToString(object obj)
         {
-            if (obj == null) { return null; }
-            var formattable = obj as IFormattable;
-            if (formattable == null) { return obj.ToString(); }
-            return ToString(formattable);
+            return 
+                (obj is IFormattable formattable)
+                ? ToString(formattable)
+                : obj?.ToString();
         }
 
         #endregion
@@ -94,9 +98,9 @@ namespace Qowaiv.Formatting
         /// <param name="context">The streaming context.</param>
         private FormattingArguments(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
-            m_Format = info.GetString("Format");
-            m_FormatProvider = (IFormatProvider)info.GetValue("FormatProvider", typeof(IFormatProvider));
+            Guard.NotNull(info, nameof(info));
+            Format = info.GetString(nameof(Format));
+            FormatProvider = (IFormatProvider)info.GetValue(nameof(FormatProvider), typeof(IFormatProvider));
         }
 
         /// <summary>Adds the underlying property of formatting arguments to the serialization info.</summary>
@@ -104,9 +108,9 @@ namespace Qowaiv.Formatting
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
-            info.AddValue("Format", m_Format);
-            info.AddValue("FormatProvider", m_FormatProvider);
+            Guard.NotNull(info, nameof(info));
+            info.AddValue(nameof(Format), Format);
+            info.AddValue(nameof(FormatProvider), FormatProvider);
         }
 
         #endregion
@@ -120,7 +124,7 @@ namespace Qowaiv.Formatting
             get
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Format: '{0}', Provider: {1}", this.Format, this.FormatProvider);
+                    "Format: '{0}', Provider: {1}", Format, FormatProvider);
             }
         }
 
@@ -138,11 +142,11 @@ namespace Qowaiv.Formatting
         /// </returns>
         public override int GetHashCode()
         {
-            int hash = (m_Format == null) ? 0 : m_Format.GetHashCode();
+            int hash = (Format == null) ? 0 : Format.GetHashCode();
 
-            if (m_FormatProvider != null)
+            if (FormatProvider != null)
             {
-                hash ^= m_FormatProvider.GetHashCode();
+                hash ^= FormatProvider.GetHashCode();
             }
             return hash;
         }

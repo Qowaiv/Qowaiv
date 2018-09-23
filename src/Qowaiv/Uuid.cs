@@ -1,4 +1,12 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -26,7 +34,6 @@ namespace Qowaiv
     /// everywhere.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a GUID.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
     [TypeConverter(typeof(UuidTypeConverter))]
     public struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
@@ -67,7 +74,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private Uuid(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = (Guid)info.GetValue("Value", typeof(Guid));
         }
 
@@ -76,7 +83,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -93,7 +100,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s);
             m_Value = val.m_Value;
@@ -106,7 +113,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -250,18 +257,13 @@ namespace Qowaiv
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(Uuid left, Uuid right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Uuid left, Uuid right) => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(Uuid left, Uuid right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Uuid left, Uuid right) => !(left == right);
+
 
         #endregion
 
@@ -304,7 +306,7 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Uuid other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Uuid other) => m_Value.CompareTo(other.m_Value);
 
         #endregion
 
@@ -325,10 +327,8 @@ namespace Qowaiv
         #region Factory methods
 
         /// <summary>Initializes a new instance of a UUID.</summary>
-        public static Uuid NewUuid()
-        {
-            return new Uuid(Guid.NewGuid());
-        }
+        public static Uuid NewUuid() => new Uuid(Guid.NewGuid());
+
 
         /// <summary>Converts the string to a UUID.</summary>
         /// <param name="s">
@@ -435,8 +435,8 @@ namespace Qowaiv
         /// <summary>Returns true if the value represents a valid UUID, otherwise false.</summary>
         public static bool IsValid(string val)
         {
-            Guid id;
-            return Pattern.IsMatch(val ?? string.Empty) || Guid.TryParse(val, out id);
+            return Pattern.IsMatch(val ?? string.Empty)
+                || Guid.TryParse(val, out Guid id);
         }
 
         #endregion

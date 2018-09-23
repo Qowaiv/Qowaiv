@@ -38,8 +38,11 @@ namespace Qowaiv.Globalization
         /// <param name="nameUI">
         /// Name of the UI culture.
         /// </param>
-        public CultureInfoScope(string name, string nameUI)
-            : this(new CultureInfo(Guard.NotNullOrEmpty(name, "name")), new CultureInfo(Guard.NotNullOrEmpty(nameUI, "nameUI"))) { }
+        public CultureInfoScope(string name, string nameUI) : this
+        (
+            new CultureInfo(Guard.NotNullOrEmpty(name, nameof(name))), 
+            new CultureInfo(Guard.NotNullOrEmpty(nameUI, nameof(nameUI)))
+        ) { }
 
         /// <summary>Creates a new CultureInfo scope.</summary>
         /// <param name="culture">
@@ -57,8 +60,8 @@ namespace Qowaiv.Globalization
         /// </param>
         public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI)
         {
-            Guard.NotNull(culture, "culture");
-            Guard.NotNull(cultureUI, "cultureUI");
+            Guard.NotNull(culture, nameof(culture));
+            Guard.NotNull(cultureUI, nameof(cultureUI));
 
             Previous = Thread.CurrentThread.CurrentCulture;
             PreviousUI = Thread.CurrentThread.CurrentUICulture;

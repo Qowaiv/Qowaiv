@@ -14,7 +14,7 @@ namespace Qowaiv.UnitTests.IO
     /// }
     /// </code>
     /// </remarks>
-    public class TemporaryDirectory : IDisposable
+    public sealed class TemporaryDirectory : IDisposable
     {
         /// <summary>Creates a temporary directory.</summary>
         public TemporaryDirectory()
@@ -24,16 +24,16 @@ namespace Qowaiv.UnitTests.IO
         }
 
         /// <summary>Gets the full name of the directory.</summary>
-        public string FullName { get { return Root.FullName; } }
+        public string FullName => Root.FullName; 
 
         /// <summary>Casts the temporary directory to a <see cref="DirectoryInfo"/>.</summary>
-        public static implicit operator DirectoryInfo(TemporaryDirectory dir) { return dir.Root; }
+        public static implicit operator DirectoryInfo(TemporaryDirectory dir)=> dir.Root;
 
         /// <summary>Represents the temporary directory as <see cref="string"/>.</summary>
-        public override string ToString() { return Root.ToString(); }
+        public override string ToString()=> Root.ToString();
 
         /// <summary>The underlying <see cref="DirectoryInfo"/>.</summary>
-        protected DirectoryInfo Root { get; private set; }
+        private DirectoryInfo Root { get; set; }
 
         /// <summary>Creates a file in the temporary directory.</summary>
         public FileInfo CreateFile(string fileName)
@@ -46,7 +46,7 @@ namespace Qowaiv.UnitTests.IO
         // To detect redundant calls
         private bool isDisposed;
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (!isDisposed)
             {

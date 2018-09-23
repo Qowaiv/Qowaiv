@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -417,7 +421,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private Percentage(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetDecimal("Value");
         }
 
@@ -426,7 +430,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -434,7 +438,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the Percentage from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -443,7 +447,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -456,7 +460,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString("0.############################%", CultureInfo.InvariantCulture));
         }
 
@@ -465,7 +469,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Percentage from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() { throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported); }
+        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a Percentage from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -480,7 +484,7 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Percentage.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates a Percentage from a JSON number representation.</summary>
         /// <param name="jsonNumber">
@@ -495,7 +499,7 @@ namespace Qowaiv
         /// <param name="jsonDate">
         /// The JSON Date that represents the Percentage.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a Percentage into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -570,8 +574,7 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -607,13 +610,13 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other <see cref="Percentage"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Percentage"/> to compare with.</param>
-        public bool Equals(Percentage other) { return m_Value == other.m_Value; }
+        public bool Equals(Percentage other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this Percentage.</summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return m_Value.GetHashCode(); }
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -672,40 +675,40 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Percentage other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Percentage other) => m_Value.CompareTo(other.m_Value);
 
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Percentage l, Percentage r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(Percentage l, Percentage r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Percentage l, Percentage r) { return l.CompareTo(r) > 0; }
+        public static bool operator >(Percentage l, Percentage r) => l.CompareTo(r) > 0;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Percentage l, Percentage r) { return l.CompareTo(r) <= 0; }
+        public static bool operator <=(Percentage l, Percentage r) => l.CompareTo(r) <= 0;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Percentage l, Percentage r) { return l.CompareTo(r) >= 0; }
+        public static bool operator >=(Percentage l, Percentage r) => l.CompareTo(r) >= 0;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a Percentage to a <see cref="string"/>.</summary>
-        public static explicit operator string(Percentage val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Percentage val)=> val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Percentage.</summary>
-        public static explicit operator Percentage(string str) { return Percentage.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator Percentage(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         /// <summary>Casts a decimal a Percentage.</summary>
-        public static implicit operator Percentage(decimal val) { return Percentage.Create(val); }
+        public static implicit operator Percentage(decimal val)=> Create(val);
         /// <summary>Casts a decimal a Percentage.</summary>
-        public static implicit operator Percentage(double val) { return Percentage.Create(val); }
+        public static implicit operator Percentage(double val) => Create(val);
 
         /// <summary>Casts a Percentage to a decimal.</summary>
-        public static explicit operator decimal(Percentage val) { return val.m_Value; }
+        public static explicit operator decimal(Percentage val) => val.m_Value;
         /// <summary>Casts a Percentage to a double.</summary>
-        public static explicit operator double(Percentage val) { return (double)val.m_Value; }
+        public static explicit operator double(Percentage val) => (double)val.m_Value;
 
         #endregion
 
@@ -741,8 +744,7 @@ namespace Qowaiv
         /// </exception>
         public static Percentage Parse(string s, IFormatProvider formatProvider)
         {
-            Percentage val;
-            if (TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Percentage val))
             {
                 return val;
             }
@@ -805,13 +807,13 @@ namespace Qowaiv
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
-        public static Percentage Create(decimal val) { return new Percentage() { m_Value = val }; }
+        public static Percentage Create(decimal val) => new Percentage { m_Value = val };
 
         /// <summary>Creates a Percentage from a Double.</summary >
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
-        public static Percentage Create(double val) { return Create((decimal)val); }
+        public static Percentage Create(double val) => Create((decimal)val);
 
         #endregion
 

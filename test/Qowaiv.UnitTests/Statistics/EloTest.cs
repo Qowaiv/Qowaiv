@@ -215,7 +215,7 @@ namespace Qowaiv.UnitTests.Statistics
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_EloSerializeObject_AreEqual()
@@ -235,7 +235,7 @@ namespace Qowaiv.UnitTests.Statistics
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_EloSerializeObject_AreEqual()
@@ -255,7 +255,7 @@ namespace Qowaiv.UnitTests.Statistics
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -276,7 +276,7 @@ namespace Qowaiv.UnitTests.Statistics
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -568,7 +568,7 @@ namespace Qowaiv.UnitTests.Statistics
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be an Elo."
@@ -582,7 +582,7 @@ namespace Qowaiv.UnitTests.Statistics
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be an Elo."
@@ -823,14 +823,14 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Elo_IsTrue()
+        public void CanNotConvertFromInt32()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Elo), typeof(Int32));
+            TypeConverterAssert.ConvertFromEquals((Elo)1600, 1600);
         }
         [Test]
-        public void CanNotConvertToInt32_Elo_IsTrue()
+        public void CanConvertToInt32()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Elo), typeof(Int32));
+            TypeConverterAssert.ConvertToEquals(1600, (Elo)1600);
         }
 
         [Test]

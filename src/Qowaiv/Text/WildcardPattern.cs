@@ -54,7 +54,7 @@ namespace Qowaiv.Text
         public WildcardPattern(string pattern, WildcardPatternOptions options, StringComparison comparisonType)
             : this()
         {
-            Pattern = Guard.NotNullOrEmpty(pattern, "pattern");
+            Pattern = Guard.NotNullOrEmpty(pattern, nameof(pattern));
 
             if (options.HasFlag(WildcardPatternOptions.SqlWildcards))
             {
@@ -76,7 +76,7 @@ namespace Qowaiv.Text
         /// <param name="context">The streaming context.</param>
         protected WildcardPattern(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             Pattern = info.GetString("Pattern");
             Options = (WildcardPatternOptions)info.GetInt32("Options");
             ComparisonType = (StringComparison)info.GetInt32("ComparisonType");
@@ -96,7 +96,7 @@ namespace Qowaiv.Text
         /// </remarks>
         protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Pattern", Pattern);
             info.AddValue("Options", (int)Options);
             info.AddValue("ComparisonType", (int)ComparisonType);
@@ -153,7 +153,7 @@ namespace Qowaiv.Text
         /// </exception>
         public bool IsMatch(string input)
         {
-            Guard.NotNull(input, "input");
+            Guard.NotNull(input, nameof(input));
             return IsMatch(input, 0, 0);
         }
         /// <summary>Handles the actual matching.</summary>

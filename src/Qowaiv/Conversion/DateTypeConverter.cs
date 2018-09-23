@@ -1,87 +1,50 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Globalization;
 
 namespace Qowaiv.Conversion
 {
     /// <summary>Provides a conversion for a Date.</summary>
-    public class DateTypeConverter : TypeConverter
+    public class DateTypeConverter : DateTypeConverter<Date>
     {
-        #region Convert From
+        #region From's
 
-        /// <summary>Returns whether this converter can convert an string to
-        /// a Date, using the specified context.
-        /// </summary>
-        /// <param name="context">
-        /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
-        /// </param>
-        /// <param name="sourceType">
-        /// A System.Type that represents the type you want to convert from.
-        /// </param>
-        /// <returns>
-        /// true if this converter can perform the conversion; otherwise, false.
-        /// </returns>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
-        }
-        /// <summary>Converts a string to a Date, using the specified
-        /// context and culture information.
-        /// </summary>
-        /// <param name="context">
-        /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
-        /// </param>
-        /// <param name="culture">
-        /// The System.Globalization.CultureInfo to use as the current culture.
-        /// </param>
-        /// <param name="value">
-        /// The System.Object to convert.
-        /// </param>
-        /// <returns>
-        /// An System.Object that represents the converted value.
-        /// </returns>
-        /// <exception cref="NotSupportedException">
-        /// The conversion cannot be performed.
-        /// </exception>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            var str = value as string;
-            if (str != null)
-            {
-                return Date.Parse(str, culture);
-            }
-            return base.ConvertFrom(context, culture, value);
-        }
+        /// <inheritdoc />
+        protected override Date FromString(string str, CultureInfo culture) => Date.Parse(str, culture);
+
+        /// <inheritdoc />
+        protected override Date FromDate(Date date) => date;
+
+        /// <inheritdoc />
+        protected override Date FromDateTime(DateTime dateTime) => (Date)dateTime;
+        
+        /// <inheritdoc />
+        protected override Date FromDateTimeOffset(DateTimeOffset offset) => FromDateTime(offset.Date);
+
+        /// <inheritdoc />
+        protected override Date FromLocalDateTime(LocalDateTime local) => FromDateTime(local);
+
+        /// <inheritdoc />
+        protected override Date FromWeekDate(WeekDate weekDate) => weekDate;
+
         #endregion
 
-        #region Convert To
+        #region To's
 
-        /// <summary>Converts a Date to string, using the specified context and culture information.</summary>
-        /// <param name="culture">
-        /// A System.Globalization.CultureInfo. If null is passed, the current culture is assumed.
-        /// </param>
-        /// <param name="context">
-        /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
-        /// </param>
-        /// <param name="value">
-        /// The Date to convert.
-        /// </param>
-        /// <param name="destinationType">
-        /// The System.Type to convert the value parameter to.
-        /// </param>
-        /// <returns>
-        /// A string that represents the converted Date.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// The destinationType parameter is null.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// The conversion cannot be performed.
-        /// </exception>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
+        /// <inheritdoc />
+        protected override Date ToDate(Date date) => date;
+
+        /// <inheritdoc />
+        protected override DateTime ToDateTime(Date date) => date;
+
+        /// <inheritdoc />
+        protected override DateTimeOffset ToDateTimeOffset(Date date) => ToDateTime(date);
+
+        /// <inheritdoc />
+        protected override LocalDateTime ToLocalDateTime(Date date) => ToDateTime(date);
+
+        /// <inheritdoc />
+        protected override WeekDate ToWeekDate(Date date) => date;
+
         #endregion
     }
 }

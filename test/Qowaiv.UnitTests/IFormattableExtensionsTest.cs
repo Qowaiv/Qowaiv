@@ -7,16 +7,14 @@ using System.Globalization;
 namespace Qowaiv.UnitTests
 {
     [TestFixture]
-    public class IFormattableExtensionsTest
+    public class FormattableExtensionsTest
     {
         [Test]
         public void ToString_NullWithFormat_FormattedString()
         {
             IFormattable formattable = null;
             string act = formattable.ToString(new FormattingArguments("0.000", new CultureInfo("es-ES")));
-            string exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
 
         [Test]

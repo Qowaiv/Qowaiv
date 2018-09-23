@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion.Statistics;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion.Statistics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -29,13 +33,13 @@ namespace Qowaiv.Statistics
     public struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
     {
         /// <summary>Represents the zero value of an Elo.</summary>
-        public static readonly Elo Zero = new Elo() { m_Value = default(Double) };
+        public static readonly Elo Zero = new Elo { m_Value = default(Double) };
 
         /// <summary>Represents the minimum value of an Elo.</summary>
-        public static readonly Elo MinValue = new Elo() { m_Value = Double.MinValue };
+        public static readonly Elo MinValue = new Elo { m_Value = Double.MinValue };
 
         /// <summary>Represents the maximum value of an Elo.</summary>
-        public static readonly Elo MaxValue = new Elo() { m_Value = Double.MaxValue };
+        public static readonly Elo MaxValue = new Elo { m_Value = Double.MaxValue };
 
         #region Properties
 
@@ -66,72 +70,64 @@ namespace Qowaiv.Statistics
         #region Elo manipulation
 
         /// <summary>Increases the Elo with one.</summary>
-        public Elo Increment()
-        {
-            return this.Add(1d);
-        }
+        public Elo Increment() => Add(1d);
+
         /// <summary>Decreases the Elo with one.</summary>
-        public Elo Decrement()
-        {
-            return this.Subtract(1d);
-        }
+        public Elo Decrement() => Subtract(1d);
+
 
         /// <summary>Pluses the Elo.</summary>
-        public Elo Plus()
-        {
-            return Elo.Create(+m_Value);
-        }
+        public Elo Plus() => Create(+m_Value);
+
         /// <summary>Negates the Elo.</summary>
-        public Elo Negate()
-        {
-            return Elo.Create(-m_Value);
-        }
+        public Elo Negate() => Create(-m_Value);
+
 
         /// <summary>Multiplies the current Elo with a factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Elo Multiply(double factor) { return m_Value * factor; }
+        public Elo Multiply(double factor) => m_Value * factor;
 
         /// <summary>Divides the current Elo by a factor.</summary>
         /// <param name="factor">
         /// The factor to divides by.
         /// </param>
-        public Elo Divide(double factor) { return m_Value / factor; }
+        public Elo Divide(double factor) => m_Value / factor;
 
         /// <summary>Adds Elo to the current Elo.
         /// </summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
-        public Elo Add(Elo p) { return m_Value + p.m_Value; }
+        public Elo Add(Elo p) => m_Value + p.m_Value;
 
         /// <summary>Subtracts Elo from the current Elo.
         /// </summary>
         /// <param name="p">
         /// The percentage to Subtract.
         /// </param>
-        public Elo Subtract(Elo p) { return m_Value - p.m_Value; }
+        public Elo Subtract(Elo p) => m_Value - p.m_Value;
 
 
         /// <summary>Increases the Elo with one.</summary>
-        public static Elo operator ++(Elo elo) { return elo.Increment(); }
+        public static Elo operator ++(Elo elo) => elo.Increment();
         /// <summary>Decreases the Elo with one.</summary>
-        public static Elo operator --(Elo elo) { return elo.Decrement(); }
+        public static Elo operator --(Elo elo) => elo.Decrement();
 
         /// <summary>Unitary plusses the Elo.</summary>
-        public static Elo operator +(Elo elo) { return elo.Plus(); }
+        public static Elo operator +(Elo elo) => elo.Plus();
         /// <summary>Negates the Elo.</summary>
-        public static Elo operator -(Elo elo) { return elo.Negate(); }
+        public static Elo operator -(Elo elo) => elo.Negate();
 
         /// <summary>Multiplies the Elo with the factor.</summary>
-        public static Elo operator *(Elo elo, double factor) { return elo.Multiply(factor); }
+        public static Elo operator *(Elo elo, double factor) => elo.Multiply(factor);
         /// <summary>Divides the Elo by the factor.</summary>
-        public static Elo operator /(Elo elo, double factor) { return elo.Divide(factor); }
+        public static Elo operator /(Elo elo, double factor) => elo.Divide(factor);
         /// <summary>Adds the left and the right Elo.</summary>
-        public static Elo operator +(Elo l, Elo r) { return l.Add(r); }
+        public static Elo operator +(Elo l, Elo r) => l.Add(r);
         /// <summary>Subtracts the right from the left Elo.</summary>
-        public static Elo operator -(Elo l, Elo r) { return l.Subtract(r); }
+        public static Elo operator -(Elo l, Elo r) => l.Subtract(r);
 
         #endregion
 
@@ -159,7 +155,7 @@ namespace Qowaiv.Statistics
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the Elo from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -188,7 +184,7 @@ namespace Qowaiv.Statistics
         #region (JSON) (De)serialization
 
         /// <summary>Generates an Elo from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() { throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported); }
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates an Elo from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -221,7 +217,7 @@ namespace Qowaiv.Statistics
         /// <param name="jsonDate">
         /// The JSON Date that represents the Elo.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts an Elo into its JSON object representation.</summary>
         object IJsonSerializable.ToJson() { return m_Value; }
@@ -267,8 +263,7 @@ namespace Qowaiv.Statistics
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -281,17 +276,17 @@ namespace Qowaiv.Statistics
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is Elo && Equals((Elo)obj); }
+        public override bool Equals(object obj) { return obj is Elo && Equals((Elo)obj); }
 
         /// <summary>Returns true if this instance and the other <see cref="Elo"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Elo"/> to compare with.</param>
-        public bool Equals(Elo other) { return m_Value == other.m_Value; }
+        public bool Equals(Elo other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this Elo.</summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return m_Value.GetHashCode(); }
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -350,42 +345,42 @@ namespace Qowaiv.Statistics
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Elo other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Elo other) => m_Value.CompareTo(other.m_Value);
 
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Elo l, Elo r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(Elo l, Elo r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Elo l, Elo r) { return l.CompareTo(r) > 0; }
+        public static bool operator >(Elo l, Elo r) => l.CompareTo(r) > 0;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Elo l, Elo r) { return l.CompareTo(r) <= 0; }
+        public static bool operator <=(Elo l, Elo r) => l.CompareTo(r) <= 0;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Elo l, Elo r) { return l.CompareTo(r) >= 0; }
+        public static bool operator >=(Elo l, Elo r) => l.CompareTo(r) >= 0;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts an Elo to a <see cref="string"/>.</summary>
-        public static explicit operator string(Elo val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Elo val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Elo.</summary>
         public static explicit operator Elo(string str) { return Elo.Parse(str, CultureInfo.CurrentCulture); }
 
 
         /// <summary>Casts a decimal to an Elo.</summary>
-        public static implicit operator Elo(decimal val) { return new Elo() { m_Value = (double)val }; }
+        public static implicit operator Elo(decimal val) { return new Elo { m_Value = (double)val }; }
         /// <summary>Casts a decimal to an Elo.</summary>
-        public static implicit operator Elo(double val) { return new Elo() { m_Value = val }; }
+        public static implicit operator Elo(double val) { return new Elo { m_Value = val }; }
         /// <summary>Casts an integer to an Elo.</summary>
-        public static implicit operator Elo(Int32 val) { return new Elo() { m_Value = val }; }
+        public static implicit operator Elo(Int32 val) { return new Elo { m_Value = val }; }
 
         /// <summary>Casts an Elo to a decimal.</summary>
         public static explicit operator decimal(Elo val) { return (decimal)val.m_Value; }
         /// <summary>Casts an Elo to a double.</summary>
-        public static explicit operator double(Elo val) { return val.m_Value; }
+        public static explicit operator double(Elo val) => val.m_Value;
         /// <summary>Casts an Elo to an integer.</summary>
         public static explicit operator Int32(Elo val) { return (Int32)Math.Round(val.m_Value); }
 
@@ -423,8 +418,7 @@ namespace Qowaiv.Statistics
         /// </exception>
         public static Elo Parse(string s, IFormatProvider formatProvider)
         {
-            Elo val;
-            if (Elo.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Elo val))
             {
                 return val;
             }
@@ -442,12 +436,11 @@ namespace Qowaiv.Statistics
         /// </returns>
         public static Elo TryParse(string s)
         {
-            Elo val;
-            if (Elo.TryParse(s, out val))
+            if (TryParse(s, out Elo val))
             {
                 return val;
             }
-            return Elo.Zero;
+            return Zero;
         }
 
         /// <summary>Converts the string to an Elo.
@@ -484,14 +477,13 @@ namespace Qowaiv.Statistics
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out Elo result)
         {
-            result = Elo.Zero;
-            Double d;
+            result = Zero;
             if (!string.IsNullOrEmpty(s))
             {
                 var str = s.EndsWith("*") ? s.Substring(0, s.Length - 1) : s;
-                if (Double.TryParse(str, NumberStyles.Number, formatProvider, out d))
+                if (double.TryParse(str, NumberStyles.Number, formatProvider, out double d))
                 {
-                    result = new Elo() { m_Value = d };
+                    result = new Elo { m_Value = d };
                     return true;
                 }
             }
@@ -505,27 +497,17 @@ namespace Qowaiv.Statistics
         /// <exception cref="FormatException" >
         /// val is not a valid Elo.
         /// </exception >
-        public static Elo Create(Double val)
-        {
-            return new Elo() { m_Value = val };
-        }
+        public static Elo Create(Double val) => new Elo { m_Value = val };
 
         #endregion
 
         #region Validation
 
         /// <summary>Returns true if the val represents a valid Elo, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid Elo, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            Elo elo;
-            return TryParse(val, formatProvider, out elo);
-        }
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out Elo elo);
 
         #endregion
     }

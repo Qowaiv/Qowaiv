@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -13,7 +17,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv
 {
-    /// <summary>Represents a Date.</summary>
+    /// <summary>Represents a </summary>
     [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Date",
         Justification = "This represents a date (instead of a date time), so the name is the most descriptive name possible.")]
     [DebuggerDisplay("{DebuggerDisplay}")]
@@ -104,7 +108,7 @@ namespace Qowaiv
         /// <summary>Gets the day of the year represented by this instance.</summary>
         public int DayOfYear { get { return m_Value.DayOfYear; } }
 
-        /// <summary>The inner value of the Date.</summary>
+        /// <summary>The inner value of the </summary>
         private DateTime m_Value;
 
         #endregion
@@ -331,7 +335,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private Date(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetDateTime("Value");
         }
 
@@ -340,24 +344,24 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
-        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize a Date.</summary>
+        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize a </summary>
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the Date from an <see href="XmlReader"/>.</summary>
         /// <remarks>
-        /// Uses the string parse function of Date.
+        /// Uses the string parse function of 
         /// </remarks>
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -365,12 +369,12 @@ namespace Qowaiv
 
         /// <summary>Writes the Date to an <see href="XmlWriter"/>.</summary>
         /// <remarks>
-        /// Uses the string representation of Date.
+        /// Uses the string representation of 
         /// </remarks>
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
         }
 
@@ -379,11 +383,11 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Date from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() { throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported); }
+        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a Date from a JSON string representation.</summary>
         /// <param name="jsonString">
-        /// The JSON string that represents the Date.
+        /// The JSON string that represents the 
         /// </param>
         void IJsonSerializable.FromJson(string jsonString)
         {
@@ -392,7 +396,7 @@ namespace Qowaiv
 
         /// <summary>Generates a Date from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
-        /// The JSON integer that represents the Date.
+        /// The JSON integer that represents the 
         /// </param>
         void IJsonSerializable.FromJson(Int64 jsonInteger)
         {
@@ -401,17 +405,17 @@ namespace Qowaiv
 
         /// <summary>Generates a Date from a JSON number representation.</summary>
         /// <param name="jsonNumber">
-        /// The JSON number that represents the Date.
+        /// The JSON number that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a Date from a JSON date representation.</summary>
         /// <param name="jsonDate">
-        /// The JSON Date that represents the Date.
+        /// The JSON Date that represents the 
         /// </param>
         void IJsonSerializable.FromJson(DateTime jsonDate)
         {
-            m_Value = jsonDate.Date;
+            m_Value = jsonDate;
         }
 
         /// <summary>Converts a Date into its JSON object representation.</summary>
@@ -431,13 +435,13 @@ namespace Qowaiv
             get { return m_Value.ToString(SerializableFormat, CultureInfo.InvariantCulture); }
         }
 
-        /// <summary>Returns a <see cref="string"/> that represents the current Date.</summary>
+        /// <summary>Returns a <see cref="string"/> that represents the current </summary>
         public override string ToString()
         {
             return ToString(CultureInfo.CurrentCulture);
         }
 
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Date.</summary>
+        /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
@@ -446,7 +450,7 @@ namespace Qowaiv
             return ToString(format, CultureInfo.CurrentCulture);
         }
 
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Date.</summary>
+        /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
@@ -455,7 +459,7 @@ namespace Qowaiv
             return ToString("d", formatProvider);
         }
 
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Date.</summary>
+        /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
@@ -467,8 +471,7 @@ namespace Qowaiv
             // We don't want to see hh:mm pop up.
             if (string.IsNullOrEmpty(format)) { format = "d"; }
 
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -485,13 +488,13 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other <see cref="Date"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Date"/> to compare with.</param>
-        public bool Equals(Date other) { return m_Value == other.m_Value; }
+        public bool Equals(Date other) => m_Value == other.m_Value;
 
-        /// <summary>Returns the hash code for this Date.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() { return m_Value.GetHashCode(); }
+                             /// <summary>Returns the hash code for this </summary>
+                             /// <returns>
+                             /// A 32-bit signed integer hash code.
+                             /// </returns>
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -518,7 +521,7 @@ namespace Qowaiv
         /// order as the specified System.Object.
         /// </summary>
         /// <param name="obj">
-        /// An object that evaluates to a Date.
+        /// An object that evaluates to a 
         /// </param>
         /// <returns>
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
@@ -528,7 +531,7 @@ namespace Qowaiv
         /// instance follows value.-or- value is null.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// value is not a Date.
+        /// value is not a 
         /// </exception>
         public int CompareTo(object obj)
         {
@@ -541,7 +544,7 @@ namespace Qowaiv
 
         /// <summary>Compares this instance with a specified Date and indicates
         /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified Date.
+        /// in the sort order as the specified 
         /// </summary>
         /// <param name="other">
         /// The Date to compare with this instance.
@@ -550,31 +553,31 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Date other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Date other) => m_Value.CompareTo(other.m_Value);
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Date l, Date r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(Date l, Date r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Date l, Date r) { return l.CompareTo(r) > 0; }
+        public static bool operator >(Date l, Date r) => l.CompareTo(r) > 0;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Date l, Date r) { return l.CompareTo(r) <= 0; }
+        public static bool operator <=(Date l, Date r) => l.CompareTo(r) <= 0;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Date l, Date r) { return l.CompareTo(r) >= 0; }
+        public static bool operator >=(Date l, Date r) => l.CompareTo(r) >= 0;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a date to a <see cref="string"/>.</summary>
-        public static explicit operator string(Date val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Date val)=> val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a date to a date time.</summary>
-        public static implicit operator DateTime(Date val) { return val.m_Value; }
+        public static implicit operator DateTime(Date val) => val.m_Value;
 
         /// <summary>Casts a <see cref="string"/> to a date.</summary>
-        public static explicit operator Date(string str) { return Date.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator Date(string str) => Parse(str, CultureInfo.CurrentCulture);
         /// <summary>Casts a date time to a date.</summary>
         public static explicit operator Date(DateTime val) { return new Date(val); }
 
@@ -608,12 +611,12 @@ namespace Qowaiv
 
         #region Factory methods
 
-        /// <summary>Converts the string to a Date.</summary>
+        /// <summary>Converts the string to a </summary>
         /// <param name="s">
         /// A string containing a Date to convert.
         /// </param>
         /// <returns>
-        /// A Date.
+        /// A 
         /// </returns>
         /// <exception cref="FormatException">
         /// s is not in the correct format.
@@ -623,7 +626,7 @@ namespace Qowaiv
             return Parse(s, CultureInfo.CurrentCulture);
         }
 
-        /// <summary>Converts the string to a Date.</summary>
+        /// <summary>Converts the string to a </summary>
         /// <param name="s">
         /// A string containing a Date to convert.
         /// </param>
@@ -631,41 +634,39 @@ namespace Qowaiv
         /// The specified format provider.
         /// </param>
         /// <returns>
-        /// A Date.
+        /// A 
         /// </returns>
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
         public static Date Parse(string s, IFormatProvider formatProvider)
         {
-            Date val;
-            if (Date.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Date val))
             {
                 return val;
             }
             throw new FormatException(QowaivMessages.FormatExceptionDate);
         }
 
-        /// <summary>Converts the string to a Date.
+        /// <summary>Converts the string to a 
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name="s">
         /// A string containing a Date to convert.
         /// </param>
         /// <returns>
-        /// The Date if the string was converted successfully, otherwise Date.MinValue.
+        /// The Date if the string was converted successfully, otherwise MinValue.
         /// </returns>
         public static Date TryParse(string s)
         {
-            Date val;
-            if (Date.TryParse(s, out val))
+            if (TryParse(s, out Date val))
             {
                 return val;
             }
-            return Date.MinValue;
+            return MinValue;
         }
 
-        /// <summary>Converts the string to a Date.
+        /// <summary>Converts the string to a 
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name="s">
@@ -682,7 +683,7 @@ namespace Qowaiv
             return TryParse(s, CultureInfo.CurrentCulture, out result);
         }
 
-        /// <summary>Converts the string to a Date.
+        /// <summary>Converts the string to a 
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name="s">
@@ -702,7 +703,7 @@ namespace Qowaiv
             return TryParse(s, formatProvider, DateTimeStyles.None, out result);
         }
 
-        /// <summary>Converts the string to a Date.
+        /// <summary>Converts the string to a 
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name="s">
@@ -724,14 +725,12 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, DateTimeStyles styles, out Date result)
         {
-            DateTime dt;
-
-            if (DateTime.TryParse(s, formatProvider, styles, out dt))
+            if (DateTime.TryParse(s, formatProvider, styles, out DateTime dt))
             {
                 result = new Date(dt);
                 return true;
             }
-            result = Date.MinValue;
+            result = MinValue;
             return false;
         }
 
@@ -748,8 +747,7 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid Date, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            Date d;
-            return TryParse(val, formatProvider, out d);
+            return TryParse(val, formatProvider, out Date d);
         }
 
         #endregion

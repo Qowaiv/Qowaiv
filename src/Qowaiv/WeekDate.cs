@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -51,10 +55,10 @@ namespace Qowaiv
         public static readonly Regex Pattern = new Regex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents the minimum value of the week date.</summary>
-        public static readonly WeekDate MinValue = new WeekDate() { m_Value = Date.MinValue };
+        public static readonly WeekDate MinValue = new WeekDate { m_Value = Date.MinValue };
 
         /// <summary>Represents the maximum value of the week date.</summary>
-        public static readonly WeekDate MaxValue = new WeekDate() { m_Value = Date.MaxValue };
+        public static readonly WeekDate MaxValue = new WeekDate { m_Value = Date.MaxValue };
 
         /// <summary>Creates a date based on Week Year, week number, and day of the week.</summary>
         public WeekDate(int year, int week, int day)
@@ -72,8 +76,7 @@ namespace Qowaiv
                 throw new ArgumentOutOfRangeException("day", "Day should be in range [1,7].");
             }
 
-            Date dt;
-            if (!TryCreate(year, week, day, out dt))
+            if (!TryCreate(year, week, day, out Date dt))
             {
                 throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception)null);
             }
@@ -120,9 +123,9 @@ namespace Qowaiv
             int week = 0;
 
             // Now the week number.
-            DateTime startdate = WeekDate.GetFirstDayOfFirstWeekOfYear(year);
+            DateTime startdate = GetFirstDayOfFirstWeekOfYear(year);
             // No overflow please.
-            DateTime enddate = year < 9999 ? WeekDate.GetFirstDayOfFirstWeekOfYear(year + 1) : DateTime.MaxValue;
+            DateTime enddate = year < 9999 ? GetFirstDayOfFirstWeekOfYear(year + 1) : DateTime.MaxValue;
 
             // The date is member of a week in the next year.
             if (m_Value >= enddate)
@@ -133,7 +136,7 @@ namespace Qowaiv
             // The date is member of a week in the previous year.
             if (m_Value < startdate)
             {
-                startdate = WeekDate.GetFirstDayOfFirstWeekOfYear(year - 1);
+                startdate = GetFirstDayOfFirstWeekOfYear(year - 1);
                 year--;
             }
             if (part == DatePartYear) { return year; }
@@ -177,7 +180,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private WeekDate(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = (Date)info.GetDateTime("Value");
         }
 
@@ -186,7 +189,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -194,7 +197,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the week date from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -203,7 +206,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -216,7 +219,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -225,7 +228,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a week date from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() { throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported); }
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a week date from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -240,13 +243,13 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the week date.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates a week date from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the week date.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a week date from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -315,8 +318,7 @@ namespace Qowaiv
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -344,17 +346,17 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is WeekDate && Equals((WeekDate)obj); }
+        public override bool Equals(object obj) { return obj is WeekDate && Equals((WeekDate)obj); }
 
         /// <summary>Returns true if this instance and the other <see cref="WeekDate"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="WeekDate"/> to compare with.</param>
-        public bool Equals(WeekDate other) { return m_Value == other.m_Value; }
+        public bool Equals(WeekDate other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this week date.</summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return m_Value.GetHashCode(); }
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -413,39 +415,39 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(WeekDate other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(WeekDate other) => m_Value.CompareTo(other.m_Value);
 
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(WeekDate l, WeekDate r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(WeekDate l, WeekDate r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(WeekDate l, WeekDate r) { return l.CompareTo(r) > 0; }
+        public static bool operator >(WeekDate l, WeekDate r) => l.CompareTo(r) > 0;
 
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(WeekDate l, WeekDate r) { return l.CompareTo(r) <= 0; }
+        public static bool operator <=(WeekDate l, WeekDate r) => l.CompareTo(r) <= 0;
 
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(WeekDate l, WeekDate r) { return l.CompareTo(r) >= 0; }
+        public static bool operator >=(WeekDate l, WeekDate r) => l.CompareTo(r) >= 0;
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a week date to a <see cref="string"/>.</summary>
-        public static explicit operator string(WeekDate val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(WeekDate val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a week date to a date time.</summary>
-        public static implicit operator DateTime(WeekDate val) { return val.m_Value; }
+        public static implicit operator DateTime(WeekDate val) => val.m_Value;
 
         /// <summary>Casts a <see cref="string"/> to a week date.</summary>
-        public static explicit operator WeekDate(string str) { return WeekDate.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator WeekDate(string str) => Parse(str, CultureInfo.CurrentCulture);
         /// <summary>Casts a date time to a week date.</summary>
-        public static explicit operator WeekDate(DateTime val) { return WeekDate.Create((Date)val); }
+        public static explicit operator WeekDate(DateTime val) { return Create((Date)val); }
 
         /// <summary>Casts a date to a week date.</summary>
-        public static implicit operator WeekDate(Date val) { return WeekDate.Create(val); }
+        public static implicit operator WeekDate(Date val) => Create(val);
         /// <summary>Casts a local date time to a week date.</summary>
-        public static explicit operator WeekDate(LocalDateTime val) { return WeekDate.Create(val.Date); }
+        public static explicit operator WeekDate(LocalDateTime val) { return Create(val.Date); }
 
         #endregion
 
@@ -481,8 +483,7 @@ namespace Qowaiv
         /// </exception>
         public static WeekDate Parse(string s, IFormatProvider formatProvider)
         {
-            WeekDate val;
-            if (WeekDate.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out WeekDate val))
             {
                 return val;
             }
@@ -496,16 +497,15 @@ namespace Qowaiv
         /// A string containing a week date to convert.
         /// </param>
         /// <returns>
-        /// The week date if the string was converted successfully, otherwise WeekDate.Empty.
+        /// The week date if the string was converted successfully, otherwise Empty.
         /// </returns>
         public static WeekDate TryParse(string s)
         {
-            WeekDate val;
-            if (WeekDate.TryParse(s, out val))
+            if (TryParse(s, out WeekDate val))
             {
                 return val;
             }
-            return WeekDate.MinValue;
+            return MinValue;
         }
 
         /// <summary>Converts the string to a week date.
@@ -542,7 +542,7 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out WeekDate result)
         {
-            result = WeekDate.MinValue;
+            result = MinValue;
             var match = Pattern.Match(s ?? string.Empty);
             if (match.Success)
             {
@@ -550,10 +550,9 @@ namespace Qowaiv
                 var week = Int32.Parse(match.Groups["week"].Value, formatProvider);
                 var day = Int32.Parse(match.Groups["day"].Value, formatProvider);
 
-                Date dt;
-                if (TryCreate(year, week, day, out dt))
+                if (TryCreate(year, week, day, out Date dt))
                 {
-                    result = new WeekDate() { m_Value = dt };
+                    result = new WeekDate { m_Value = dt };
                     return true;
                 }
             }
@@ -566,7 +565,7 @@ namespace Qowaiv
         /// </param >
         public static WeekDate Create(Date val)
         {
-            return new WeekDate() { m_Value = val };
+            return new WeekDate { m_Value = val };
         }
 
         private static bool TryCreate(int year, int week, int day, out Date dt)
@@ -580,7 +579,7 @@ namespace Qowaiv
             {
                 return false;
             }
-            dt = WeekDate.GetFirstDayOfFirstWeekOfYear(year);
+            dt = GetFirstDayOfFirstWeekOfYear(year);
 
             // Zerobased.
             int dayofyear = (week - 1) * 7 + (day - 1);
@@ -589,11 +588,11 @@ namespace Qowaiv
             dt = dt.AddDays(dayofyear);
 
             // Week 53 can be non-existent.
-            if (week == 53 && WeekDate.GetFirstDayOfFirstWeekOfYear(year + 1) <= dt)
+            if (week == 53 && GetFirstDayOfFirstWeekOfYear(year + 1) <= dt)
             {
                 dt = Date.MinValue;
                 return false;
-            };
+            }
             return true;
         }
 
@@ -610,8 +609,7 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid week date, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            WeekDate wd;
-            return TryParse(val, formatProvider, out wd);
+            return TryParse(val, formatProvider, out WeekDate wd);
         }
 
         #endregion

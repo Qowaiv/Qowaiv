@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -72,7 +76,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private Year(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetInt16("Value");
         }
 
@@ -81,7 +85,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -89,7 +93,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the year from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -98,7 +102,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -111,7 +115,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -156,7 +160,7 @@ namespace Qowaiv
         /// <param name="jsonDate">
         /// The JSON Date that represents the year.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a year into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -215,8 +219,7 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -231,11 +234,11 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is Year && Equals((Year)obj); }
+        public override bool Equals(object obj) { return obj is Year && Equals((Year)obj); }
 
         /// <summary>Returns true if this instance and the other <see cref="Year"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Year"/> to compare with.</param>
-        public bool Equals(Year other) { return m_Value == other.m_Value; }
+        public bool Equals(Year other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this year.</summary>
         /// <returns>
@@ -300,11 +303,11 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(Year other) { return m_Value.CompareTo(other.m_Value); }
+        public int CompareTo(Year other) => m_Value.CompareTo(other.m_Value);
 
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Year l, Year r) { return l.CompareTo(r) < 0; }
+        public static bool operator <(Year l, Year r) => l.CompareTo(r) < 0;
 
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
         public static bool operator >(Year l, Year r) { return l.m_Value > r.m_Value; }
@@ -320,14 +323,14 @@ namespace Qowaiv
         #region (Explicit) casting
 
         /// <summary>Casts a year to a <see cref="string"/>.</summary>
-        public static explicit operator string(Year val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(Year val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a year.</summary>
         public static explicit operator Year(string str) { return Year.Parse(str, CultureInfo.CurrentCulture); }
 
 
 
         /// <summary>Casts a year to a System.Int32.</summary>
-        public static explicit operator Int32(Year val) { return val.m_Value; }
+        public static explicit operator Int32(Year val) => val.m_Value;
         /// <summary>Casts an System.Int32 to a year.</summary>
         public static implicit operator Year(Int32 val) { return Year.Create(val); }
 
@@ -439,7 +442,7 @@ namespace Qowaiv
             }
             if (IsValid(s, formatProvider))
             {
-                result = new Year() { m_Value = Int16.Parse(s, formatProvider) };
+                result = new Year { m_Value = Int16.Parse(s, formatProvider) };
                 return true;
             }
             return false;
@@ -505,7 +508,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new Year() { m_Value = (Int16)val.Value };
+                result = new Year { m_Value = (Int16)val.Value };
                 return true;
             }
             return false;

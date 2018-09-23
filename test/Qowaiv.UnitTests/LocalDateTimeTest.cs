@@ -209,7 +209,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ; ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
@@ -229,7 +229,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
@@ -249,29 +249,9 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
-        [Test]
-        public void SerializeDeserialize_MinValue_AreEqual()
-        {
-            var input = new LocalDateTimeSerializeObject()
-            {
-                Id = 17,
-                Obj = LocalDateTimeTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var exp = new LocalDateTimeSerializeObject()
-            {
-                Id = 17,
-                Obj = LocalDateTimeTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var act = SerializationTest.SerializeDeserialize(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
-        }
         [Test]
         public void XmlSerializeDeserialize_MinValue_AreEqual()
         {
@@ -290,7 +270,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -562,7 +542,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a local date time"
@@ -576,63 +556,13 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a local date time"
             );
         }
 
-        //[Test]
-        //public void LessThan_17LT19_IsTrue()
-        //{
-        //    LocalDateTime l = 17;
-        //    LocalDateTime r = 19;
-
-        //    Assert.IsTrue(l < r);
-        //}
-        //[Test]
-        //public void GreaterThan_21LT19_IsTrue()
-        //{
-        //    LocalDateTime l = 21;
-        //    LocalDateTime r = 19;
-
-        //    Assert.IsTrue(l > r);
-        //}
-
-        //[Test]
-        //public void LessThanOrEqual_17LT19_IsTrue()
-        //{
-        //    LocalDateTime l = 17;
-        //    LocalDateTime r = 19;
-
-        //    Assert.IsTrue(l <= r);
-        //}
-        //[Test]
-        //public void GreaterThanOrEqual_21LT19_IsTrue()
-        //{
-        //    LocalDateTime l = 21;
-        //    LocalDateTime r = 19;
-
-        //    Assert.IsTrue(l >= r);
-        //}
-
-        //[Test]
-        //public void LessThanOrEqual_17LT17_IsTrue()
-        //{
-        //    LocalDateTime l = 17;
-        //    LocalDateTime r = 17;
-
-        //    Assert.IsTrue(l <= r);
-        //}
-        //[Test]
-        //public void GreaterThanOrEqual_21LT21_IsTrue()
-        //{
-        //    LocalDateTime l = 21;
-        //    LocalDateTime r = 21;
-
-        //    Assert.IsTrue(l >= r);
-        //}
         #endregion
 
         #region Casting tests

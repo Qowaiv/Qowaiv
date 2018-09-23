@@ -1,4 +1,8 @@
-﻿#pragma warning disable S2328
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -23,7 +27,6 @@ namespace Qowaiv
 {
     /// <summary>Represents a postal code.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a postal code.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(PostalCodeTypeConverter))]
     public struct PostalCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>

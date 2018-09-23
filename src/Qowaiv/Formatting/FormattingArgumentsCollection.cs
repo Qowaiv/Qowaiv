@@ -58,7 +58,11 @@ namespace Qowaiv.Formatting
         {
             if (obj is null)
             {
+#pragma warning disable S2225
+                // "ToString()" method should not return null
+                // if the origin is null, it should not become string.Empty.
                 return null;
+#pragma warning restore S2225
             }
             var arguments = Get(obj.GetType());
 
@@ -77,7 +81,7 @@ namespace Qowaiv.Formatting
         /// </remarks>
         public string ToString(object obj)
         {
-            return 
+            return
                 obj is IFormattable formattable
                 ? ToString(formattable)
                 : obj?.ToString();
@@ -108,12 +112,16 @@ namespace Qowaiv.Formatting
         /// </remarks>
         [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#",
             Justification = "Follows the origin string.Format(format, args).")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity",
             Justification = "Just a copy of the .NET code. It is as complex as it is.")]
         public string Format(string format, params object[] args)
         {
             Guard.NotNull(format, nameof(format));
             Guard.NotNull(args, nameof(args));
+
+            // This code is here as reference, so we don't want to touch it.
+#pragma warning disable S125 // Sections of code should not be "commented out"
+#pragma warning disable S1854 // Dead stores should be removed
 
             var sb = new StringBuilder();
             int pos = 0;
@@ -136,6 +144,7 @@ namespace Qowaiv.Formatting
                     pos++;
                     if (ch == '}')
                     {
+
                         if (pos < len && format[pos] == '}') // Treat as escape character for }}
                             pos++;
                         else
@@ -281,10 +290,13 @@ namespace Qowaiv.Formatting
                 if (leftJustify && pad > 0) sb.Append(' ', pad);
             }
             return sb.ToString();
+
+#pragma warning restore S1854 // Dead stores should be removed
+#pragma warning restore S125 // Sections of code should not be "commented out"
         }
 
-        private static void FormatError() { throw new FormatException(QowaivMessages.FormatException_InvalidFormat); }
-        private static void FormatErrorIndexOutOfRange() { throw new FormatException(QowaivMessages.FormatException_IndexOutOfRange); }
+        private static void FormatError() => throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
+        private static void FormatErrorIndexOutOfRange() => throw new FormatException(QowaivMessages.FormatException_IndexOutOfRange);
 
         #region Collection/dictionary related
 
@@ -304,10 +316,10 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentException">
         /// An element with the same type already exists in the collection.
         /// </exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", 
+        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
             MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
             Justification = "Right culture selected by the default constructor.")]
-        public void Add(Type type, string format) { Add(type, new FormattingArguments(format)); }
+        public void Add(Type type, string format) => Add(type, new FormattingArguments(format));
 
         /// <summary>Adds a format provider for the specified type.</summary>
         /// <param name="type">
@@ -325,7 +337,7 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentException">
         /// An element with the same type already exists in the collection.
         /// </exception>
-        public void Add(Type type, IFormatProvider formatProvider) { Add(type, new FormattingArguments(formatProvider)); }
+        public void Add(Type type, IFormatProvider formatProvider) => Add(type, new FormattingArguments(formatProvider));
 
         /// <summary>Adds a format and format provider for the specified type.</summary>
         /// <param name="type">
@@ -346,7 +358,7 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentException">
         /// An element with the same type already exists in the collection.
         /// </exception>
-        public void Add(Type type, string format, IFormatProvider formatProvider) { Add(type, new FormattingArguments(format, formatProvider)); }
+        public void Add(Type type, string format, IFormatProvider formatProvider) => Add(type, new FormattingArguments(format, formatProvider));
 
         /// <summary>Adds a format and format provider for the specified type.</summary>
         /// <param name="type">
@@ -364,10 +376,10 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentException">
         /// An element with the same type already exists in the collection.
         /// </exception>
-        public void Add(Type type, FormattingArguments arguments) 
+        public void Add(Type type, FormattingArguments arguments)
         {
             Guard.ImplementsInterface(type, nameof(type), typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
-            dict.Add(type, arguments); 
+            dict.Add(type, arguments);
         }
 
 
@@ -387,7 +399,7 @@ namespace Qowaiv.Formatting
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
             MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
             Justification = "Right culture selected by the default constructor.")]
-        public void Set(Type type, string format) { Set(type, new FormattingArguments(format)); }
+        public void Set(Type type, string format) => Set(type, new FormattingArguments(format));
 
         /// <summary>Sets a format provider for the specified type.</summary>
         /// <param name="type">
@@ -402,7 +414,7 @@ namespace Qowaiv.Formatting
         /// <exception cref="NotSupportedException">
         /// The type represents a type not implementing System.IFormattable.
         /// </exception>
-        public void Set(Type type, IFormatProvider formatProvider) { Set(type, new FormattingArguments(formatProvider)); }
+        public void Set(Type type, IFormatProvider formatProvider) => Set(type, new FormattingArguments(formatProvider));
 
         /// <summary>Sets a format and format provider for the specified type.</summary>
         /// <param name="type">
@@ -420,14 +432,14 @@ namespace Qowaiv.Formatting
         /// <exception cref="NotSupportedException">
         /// The type represents a type not implementing System.IFormattable.
         /// </exception>
-        public void Set(Type type, string format, IFormatProvider formatProvider) { Set(type, new FormattingArguments(format, formatProvider)); }
+        public void Set(Type type, string format, IFormatProvider formatProvider) => Set(type, new FormattingArguments(format, formatProvider));
 
         /// <summary>Sets a format and format provider for the specified type.</summary>
         /// <param name="type">
         /// The type to specify a format for.
         /// </param>
         /// <param name="arguments">
-        /// The formatting arugments.
+        /// The formatting arguments.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// The type is null.
@@ -435,16 +447,17 @@ namespace Qowaiv.Formatting
         /// <exception cref="NotSupportedException">
         /// The type represents a type not implementing System.IFormattable.
         /// </exception>
-        public void Set(Type type, FormattingArguments arguments) {
+        public void Set(Type type, FormattingArguments arguments)
+        {
             Guard.ImplementsInterface(type, nameof(type), typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
-            dict[type] = arguments; 
+            dict[type] = arguments;
         }
 
         /// <summary>Returns true if the collection contains the type, otherwise false.</summary>
         /// <param name="type">
         /// The type to test for.
         /// </param>
-        public bool Contains(Type type) { return dict.ContainsKey(type); }
+        public bool Contains(Type type) => dict.ContainsKey(type);
 
         /// <summary>Removes the formatting arguments for the specified type.</summary>
         /// <param name="type">
@@ -453,7 +466,7 @@ namespace Qowaiv.Formatting
         /// <returns>
         /// True if type was removed, otherwise false.
         /// </returns>
-        public bool Remove(Type type) { return dict.Remove(type); }
+        public bool Remove(Type type) => dict.Remove(type);
 
         /// <summary>Gets the formatting arguments for the specified type.</summary>
         /// <param name="type">
@@ -471,9 +484,8 @@ namespace Qowaiv.Formatting
             string format = null;
             IFormatProvider formatProvider = null;
 
-            FormattingArguments arguments;
 
-            if (dict.TryGetValue(type, out arguments))
+            if (dict.TryGetValue(type, out FormattingArguments arguments))
             {
                 format = arguments.Format;
                 formatProvider = arguments.FormatProvider;
@@ -484,13 +496,13 @@ namespace Qowaiv.Formatting
         }
 
         /// <summary>Gets a collection containing the types for the collection.</summary>
-        public ICollection<Type> Types { get { return dict.Keys; } }
+        public ICollection<Type> Types => dict.Keys;
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        IEnumerator<KeyValuePair<Type, FormattingArguments>> IEnumerable<KeyValuePair<Type, FormattingArguments>>.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator<KeyValuePair<Type, FormattingArguments>> IEnumerable<KeyValuePair<Type, FormattingArguments>>.GetEnumerator() => GetEnumerator();
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <remarks>
@@ -499,13 +511,13 @@ namespace Qowaiv.Formatting
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
             Justification = "Required by the interface.")]
-        protected virtual IEnumerator<KeyValuePair<Type, FormattingArguments>> GetEnumerator() { return dict.GetEnumerator(); }
+        protected virtual IEnumerator<KeyValuePair<Type, FormattingArguments>> GetEnumerator() => dict.GetEnumerator();
 
         /// <summary>Clears all formatting arguments in the collection.</summary>
-        public void Clear() { dict.Clear(); }
+        public void Clear() => dict.Clear();
 
         /// <summary>Gets the number of formatting arguments in the collection.</summary>
-        public int Count { get { return dict.Count; } }
+        public int Count => dict.Count;
 
         #endregion
 

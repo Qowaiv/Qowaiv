@@ -1,4 +1,8 @@
-﻿#pragma warning disable S2328
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -30,7 +34,6 @@ namespace Qowaiv.Financial
     /// The official IBAN registrar under ISO 13616-2:2007 is SWIFT.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an IBAN.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
     public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>

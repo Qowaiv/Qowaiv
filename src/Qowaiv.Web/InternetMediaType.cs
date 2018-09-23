@@ -1,4 +1,8 @@
-﻿#pragma warning disable S2328
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -96,15 +100,14 @@ namespace Qowaiv.Web
         {
             get
             {
-                if (IsEmpty()) { return InternetMediaTopLevelType.None; }
-
-                InternetMediaTopLevelType type;
-
-                if (Enum.TryParse<InternetMediaTopLevelType>(TopLevel, true, out type))
+                if (IsEmpty())
                 {
-                    return type;
+                    return InternetMediaTopLevelType.None;
                 }
-                return InternetMediaTopLevelType.Unregistered;
+                return
+                    Enum.TryParse(TopLevel, true, out InternetMediaTopLevelType type)
+                    ? type
+                    : InternetMediaTopLevelType.Unregistered;
             }
         }
 
@@ -126,8 +129,7 @@ namespace Qowaiv.Web
         {
             get
             {
-                InternetMediaSuffixType type;
-                Enum.TryParse<InternetMediaSuffixType>(Pattern.Match(m_Value ?? string.Empty).Groups["suffix"].Value, true, out type);
+                Enum.TryParse(Pattern.Match(m_Value ?? string.Empty).Groups["suffix"].Value, true, out InternetMediaSuffixType type);
                 return type;
             }
         }
@@ -308,7 +310,6 @@ namespace Qowaiv.Web
                 return formatted;
             }
             return m_Value ?? string.Empty;
-            //throw new NotImplementedException();
         }
 
         #endregion
@@ -414,8 +415,7 @@ namespace Qowaiv.Web
         /// </exception>
         public static InternetMediaType Parse(string s)
         {
-            InternetMediaType val;
-            if (InternetMediaType.TryParse(s, out val))
+            if (TryParse(s, out InternetMediaType val))
             {
                 return val;
             }
@@ -433,12 +433,11 @@ namespace Qowaiv.Web
         /// </returns>
         public static InternetMediaType TryParse(string s)
         {
-            InternetMediaType val;
-            if (InternetMediaType.TryParse(s, out val))
+            if (TryParse(s, out InternetMediaType val))
             {
                 return val;
             }
-            return InternetMediaType.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to an Internet media type.
@@ -457,14 +456,14 @@ namespace Qowaiv.Web
             Justification = "Internet media types are represented in lowercase by default.")]
         public static bool TryParse(string s, out InternetMediaType result)
         {
-            result = InternetMediaType.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
             }
             if (Qowaiv.Unknown.IsUnknown(s, CultureInfo.InvariantCulture))
             {
-                result = InternetMediaType.Unknown;
+                result = Unknown;
                 return true;
             }
             if (IsValid(s))
@@ -486,8 +485,10 @@ namespace Qowaiv.Web
             Justification = "This has no meaning for other derived classes of FileSystemInfo.")]
         public static InternetMediaType FromFile(FileInfo file)
         {
-            if (file == null) { return InternetMediaType.Empty; }
-            return FromFile(file.Name);
+            return
+                file is null
+                ? Empty
+                : FromFile(file.Name);
         }
 
         /// <summary>Gets the Internet media type base on the filename.</summary>
@@ -499,8 +500,10 @@ namespace Qowaiv.Web
         /// </remarks>
         public static InternetMediaType FromFile(string filename)
         {
-            if (string.IsNullOrEmpty(filename)) { return InternetMediaType.Empty; }
-
+            if (string.IsNullOrEmpty(filename))
+            {
+                return Empty;
+            }
             var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
             return string.IsNullOrEmpty(str) ? InternetMediaType.Unknown : new InternetMediaType { m_Value = str };
         }

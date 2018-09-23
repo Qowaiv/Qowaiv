@@ -151,6 +151,22 @@ Therefor
 
 is fine.
 
+### Sortable
+SVO's support sorting. So, LINQ expressions like OrderBy() and OrderByDescending()
+work out of the box, just like Array.Sort(), and List.Sort(). However, the
+comparison operators (<, >, <=, >=) do only make sense for a subset of those,
+and are not implemented on all.
+
+Therefor
+
+``` CSharp
+#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+```
+
+is fine for types that are sortable via IComparable (in most cases).
+
 ### Debugger display
 During debugging sessions, by default, the IDE shows the result of ToString()
 on a watch. Although Tostring() is overridden for all Qowaiv Single Value 

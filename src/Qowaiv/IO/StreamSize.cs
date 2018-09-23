@@ -701,24 +701,24 @@ namespace Qowaiv.IO
 
 
         /// <summary>Casts a stream size to a System.Int32.</summary>
-        public static explicit operator Int32(StreamSize val) { return (Int32)val.m_Value; }
+        public static explicit operator int(StreamSize val) => (int)val.m_Value;
         /// <summary>Casts an System.Int32 to a stream size.</summary>
-        public static implicit operator StreamSize(Int32 val) { return new StreamSize(val); }
+        public static implicit operator StreamSize(int val) => new StreamSize(val); 
 
         /// <summary>Casts a stream size to a System.Int64.</summary>
-        public static explicit operator Int64(StreamSize val) { return (Int64)val.m_Value; }
+        public static explicit operator long(StreamSize val) => val.m_Value;
         /// <summary>Casts a System.Int64 to a stream size.</summary>
-        public static implicit operator StreamSize(Int64 val) { return new StreamSize(val); }
+        public static implicit operator StreamSize(long val) => new StreamSize(val);
 
         /// <summary>Casts a stream size to a System.Double.</summary>
-        public static explicit operator Double(StreamSize val) => (double)val.m_Value;
+        public static explicit operator double(StreamSize val) => val.m_Value;
         /// <summary>Casts a System.Double to a stream size.</summary>
-        public static explicit operator StreamSize(Double val) { return new StreamSize((Int64)val); }
+        public static explicit operator StreamSize(double val) => new StreamSize((long)val);
 
         /// <summary>Casts a stream size to a System.Decimal.</summary>
-        public static explicit operator Decimal(StreamSize val) { return (Decimal)val.m_Value; }
+        public static explicit operator decimal(StreamSize val) => val.m_Value;
         /// <summary>Casts a System.DoubleDecimal to a stream size.</summary>
-        public static explicit operator StreamSize(Decimal val) { return new StreamSize((Int64)val); }
+        public static explicit operator StreamSize(decimal val) => new StreamSize((long)val);
 
         #endregion
 
@@ -754,8 +754,7 @@ namespace Qowaiv.IO
         /// </exception>
         public static StreamSize Parse(string s, IFormatProvider formatProvider)
         {
-            StreamSize val;
-            if (StreamSize.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out StreamSize val))
             {
                 return val;
             }
@@ -773,12 +772,11 @@ namespace Qowaiv.IO
         /// </returns>
         public static StreamSize TryParse(string s)
         {
-            StreamSize val;
-            if (StreamSize.TryParse(s, out val))
+            if (TryParse(s, out StreamSize val))
             {
                 return val;
             }
-            return StreamSize.Zero;
+            return Zero;
         }
 
         /// <summary>Converts the string to a stream size.
@@ -825,30 +823,24 @@ namespace Qowaiv.IO
             var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
             var factor = GetMultiplier(streamSizeMarker);
 
-            Int64 sizeInt64;
-
-            if (Int64.TryParse(size, NumberStyles.Number, formatProvider, out sizeInt64) &&
-                sizeInt64 <= Int64.MaxValue / factor &&
-                sizeInt64 >= Int64.MinValue / factor)
+            if (long.TryParse(size, NumberStyles.Number, formatProvider, out long sizeInt64) &&
+                sizeInt64 <= long.MaxValue / factor &&
+                sizeInt64 >= long.MinValue / factor)
             {
                 result = new StreamSize(sizeInt64 * factor);
                 return true;
             }
 
-            Decimal sizeDecimal;
-
-            if (Decimal.TryParse(size, NumberStyles.Number, formatProvider, out sizeDecimal))
+            if (decimal.TryParse(size, NumberStyles.Number, formatProvider, out decimal sizeDecimal) &&
+                sizeDecimal <= decimal.MaxValue / factor &&
+                sizeDecimal >= decimal.MinValue / factor)
             {
-                if (sizeDecimal <= Decimal.MaxValue / factor &&
-                    sizeDecimal >= Decimal.MinValue / factor)
-                {
-                    sizeDecimal *= factor;
+                sizeDecimal *= factor;
 
-                    if (sizeDecimal <= Int64.MaxValue && sizeDecimal >= Int64.MinValue)
-                    {
-                        result = new StreamSize((Int64)sizeDecimal);
-                        return true;
-                    }
+                if (sizeDecimal <= long.MaxValue && sizeDecimal >= long.MinValue)
+                {
+                    result = new StreamSize((long)sizeDecimal);
+                    return true;
                 }
             }
             return false;
@@ -930,16 +922,12 @@ namespace Qowaiv.IO
         #region Validation
 
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val)=> IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            StreamSize size;
-            return TryParse(val, formatProvider, out size);
+            return TryParse(val, formatProvider, out StreamSize size);
         }
 
         #endregion

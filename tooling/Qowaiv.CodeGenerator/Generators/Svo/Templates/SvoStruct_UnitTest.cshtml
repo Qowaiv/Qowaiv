@@ -784,8 +784,7 @@ namespace @(Model.Namespace).UnitTests
     ExceptionAssert.CatchArgumentException
     (() =>
     {
-    object other = null;
-    TestStruct.CompareTo(other);
+    TestStruct.CompareTo(null);
     },
     "obj",
     "Argument must be @(Model.a) @(Model.ClassLongName)"
@@ -798,8 +797,7 @@ namespace @(Model.Namespace).UnitTests
     ExceptionAssert.CatchArgumentException
     (() =>
     {
-    object other = new object();
-    var act = TestStruct.CompareTo(other);
+    TestStruct.CompareTo(new object());
     },
     "obj",
     "Argument must be @(Model.a) @(Model.ClassLongName)"
@@ -807,56 +805,56 @@ namespace @(Model.Namespace).UnitTests
     }
     @if (Model.UnderlyingType != typeof(string))
     {<text>
-    [Test]
-    public void LessThan_17LT19_IsTrue()
-    {
-    @(Model.ClassName) l = 17;
-    @(Model.ClassName) r = 19;
+            [Test]
+            public void LessThan_17LT19_IsTrue()
+            {
+            @(Model.ClassName) l = 17;
+            @(Model.ClassName) r = 19;
 
-    Assert.IsTrue(l < r);
-    }
-    [Test]
-    public void GreaterThan_21LT19_IsTrue()
-    {
-    @(Model.ClassName) l = 21;
-    @(Model.ClassName) r = 19;
+            Assert.IsTrue(l < r);
+            }
+            [Test]
+            public void GreaterThan_21LT19_IsTrue()
+            {
+            @(Model.ClassName) l = 21;
+            @(Model.ClassName) r = 19;
 
-    Assert.IsTrue(l > r);
-    }
+            Assert.IsTrue(l > r);
+            }
 
-    [Test]
-    public void LessThanOrEqual_17LT19_IsTrue()
-    {
-    @(Model.ClassName) l = 17;
-    @(Model.ClassName) r = 19;
+            [Test]
+            public void LessThanOrEqual_17LT19_IsTrue()
+            {
+            @(Model.ClassName) l = 17;
+            @(Model.ClassName) r = 19;
 
-    Assert.IsTrue(l <= r);
-    }
-    [Test]
-    public void GreaterThanOrEqual_21LT19_IsTrue()
-    {
-    @(Model.ClassName) l = 21;
-    @(Model.ClassName) r = 19;
+            Assert.IsTrue(l <= r);
+            }
+            [Test]
+            public void GreaterThanOrEqual_21LT19_IsTrue()
+            {
+            @(Model.ClassName) l = 21;
+            @(Model.ClassName) r = 19;
 
-    Assert.IsTrue(l >= r);
-    }
+            Assert.IsTrue(l >= r);
+            }
 
-    [Test]
-    public void LessThanOrEqual_17LT17_IsTrue()
-    {
-    @(Model.ClassName) l = 17;
-    @(Model.ClassName) r = 17;
+            [Test]
+            public void LessThanOrEqual_17LT17_IsTrue()
+            {
+            @(Model.ClassName) l = 17;
+            @(Model.ClassName) r = 17;
 
-    Assert.IsTrue(l <= r);
-    }
-    [Test]
-    public void GreaterThanOrEqual_21LT21_IsTrue()
-    {
-    @(Model.ClassName) l = 21;
-    @(Model.ClassName) r = 21;
+            Assert.IsTrue(l <= r);
+            }
+            [Test]
+            public void GreaterThanOrEqual_21LT21_IsTrue()
+            {
+            @(Model.ClassName) l = 21;
+            @(Model.ClassName) r = 21;
 
-    Assert.IsTrue(l >= r);
-    }
+            Assert.IsTrue(l >= r);
+            }
     </text>}
     #endregion
 
@@ -881,42 +879,42 @@ namespace @(Model.Namespace).UnitTests
 
     @if (Model.UnderlyingType == typeof(System.Int16) || Model.UnderlyingType == typeof(System.Int32) || Model.UnderlyingType == typeof(System.Int64))
     {<text>
-    [Test]
-    public void Explicit_Int32To@(Model.ClassName)_AreEqual()
-    {
-    var exp = TestStruct;
-    var act = (@(Model.ClassName))123456789;
+            [Test]
+            public void Explicit_Int32To@(Model.ClassName)_AreEqual()
+            {
+            var exp = TestStruct;
+            var act = (@(Model.ClassName))123456789;
 
-    Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void Explicit_@(Model.ClassName)ToInt32_AreEqual()
-    {
-    var exp = 123456789;
-    var act = (Int32)TestStruct;
+            Assert.AreEqual(exp, act);
+            }
+            [Test]
+            public void Explicit_@(Model.ClassName)ToInt32_AreEqual()
+            {
+            var exp = 123456789;
+            var act = (Int32)TestStruct;
 
-    Assert.AreEqual(exp, act);
-    }
+            Assert.AreEqual(exp, act);
+            }
     </text>}
     #endregion
 
     #region Properties
     @if (Model.UnderlyingType == typeof(string))
     {<text>
-    [Test]
-    public void Length_DefaultValue_0()
-    {
-    var exp = 0;
-    var act = @(Model.ClassName).Empty.Length;
-    Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void Length_TestStruct_IntValue()
-    {
-    var exp = -10;
-    var act = TestStruct.Length;
-    Assert.AreEqual(exp, act);
-    }
+            [Test]
+            public void Length_DefaultValue_0()
+            {
+            var exp = 0;
+            var act = @(Model.ClassName).Empty.Length;
+            Assert.AreEqual(exp, act);
+            }
+            [Test]
+            public void Length_TestStruct_IntValue()
+            {
+            var exp = -10;
+            var act = TestStruct.Length;
+            Assert.AreEqual(exp, act);
+            }
     </text>}
     #endregion
 
@@ -1005,14 +1003,14 @@ namespace @(Model.Namespace).UnitTests
     }
     @if (Model.UnderlyingType != typeof(string))
     {<text>
-    [Test]
-    public void IsInvalid_@Model.UnderlyingType?()
-    {
-    @Model.UnderlyingType? value = null;
-    Assert.IsFalse(@(Model.ClassName).IsValid(value));
-    }
+            [Test]
+            public void IsInvalid_@Model.UnderlyingType?()
+            {
+            @Model.UnderlyingType? value = null;
+            Assert.IsFalse(@(Model.ClassName).IsValid(value));
+            }
     </text>
-    }
+}
     [Test]
     public void IsValid_Data_IsTrue()
     {
@@ -1028,4 +1026,4 @@ namespace @(Model.Namespace).UnitTests
     public @Model.ClassName Obj { get; set; }
     public DateTime Date { get; set; }
     }
-}
+    }

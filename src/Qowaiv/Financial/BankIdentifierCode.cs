@@ -1,4 +1,8 @@
-﻿#pragma warning disable S2328
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -33,7 +37,6 @@ namespace Qowaiv.Financial
     /// statements.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a BIC.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(BankIdentifierCodeTypeConverter))]
     public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BankIdentifierCode>, IComparable, IComparable<BankIdentifierCode>

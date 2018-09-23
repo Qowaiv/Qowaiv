@@ -1,4 +1,8 @@
-﻿#pragma warning disable S2328
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -20,7 +24,6 @@ namespace Qowaiv.Security.Cryptography
 {
     /// <summary>Represents a cryptographic seed.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a cryptographic seed.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(byte[]))]
     [TypeConverter(typeof(CryptographicSeedTypeConverter))]
     public struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
@@ -344,9 +347,10 @@ namespace Qowaiv.Security.Cryptography
             Justification = "If the parsing succeeded or not, is ignored on purpose.")]
         public static CryptographicSeed TryParse(string s)
         {
-            var result = Empty;
-            TryParse(s, out result);
-            return result;
+            return
+                TryParse(s, out CryptographicSeed result)
+                ? result
+                : Empty;
         }
 
         /// <summary>Converts the string to a cryptographic seed.

@@ -592,7 +592,7 @@ namespace Qowaiv
             {
                 dt = Date.MinValue;
                 return false;
-            };
+            }
             return true;
         }
 

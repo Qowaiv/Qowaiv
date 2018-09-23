@@ -1,4 +1,8 @@
-﻿#pragma warning disable S2328
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -35,7 +39,6 @@ namespace Qowaiv.Financial
     /// is a synonym for the concept of money.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a currency.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(CurrencyTypeConverter))]
     public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>

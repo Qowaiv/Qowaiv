@@ -62,7 +62,11 @@ namespace Qowaiv.Formatting
         {
             if (obj == null)
             {
+#pragma warning disable S2225
+                // "ToString()" method should not return null
+                // if the origin is null, it should not become string.Empty.
                 return null;
+#pragma warning restore S2225
             }
             return obj.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
         }

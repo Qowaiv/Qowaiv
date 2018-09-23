@@ -182,7 +182,7 @@ namespace Qowaiv.Financial
         [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
         private string DebuggerDisplay
         {
-            get => string.Format(CultureInfo.InvariantCulture, "{0} {1}", m_Currency, (decimal)m_Value);
+            get => string.Format(CultureInfo.InvariantCulture, "{0} {1}", m_Currency, m_Value);
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current </summary>

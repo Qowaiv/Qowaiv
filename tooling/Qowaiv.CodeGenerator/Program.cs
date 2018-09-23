@@ -62,6 +62,7 @@ namespace Qowaiv.CodeGenerator
         /// 
         /// Example: CodeGenerator.exe C:\Temp\Qowaiv string EmailAddress "Email address" an Qowaiv
         /// </remarks>
+        [STAThread]
         public static void Main(string[] args)
         {
             AppendLoggers();

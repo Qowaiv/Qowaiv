@@ -1,4 +1,12 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -17,7 +25,6 @@ namespace Qowaiv
 {
     /// <summary>Represents an email address.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an email address.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(EmailAddressTypeConverter))]
     public struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
@@ -55,7 +62,7 @@ namespace Qowaiv
         public static readonly EmailAddress Empty;
 
         /// <summary>Represents an unknown (but set) email address.</summary>
-        public static readonly EmailAddress Unknown = new EmailAddress() { m_Value = "?" };
+        public static readonly EmailAddress Unknown = new EmailAddress { m_Value = "?" };
 
         #region Properties
 
@@ -93,7 +100,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private EmailAddress(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetString("Value");
         }
 
@@ -102,7 +109,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -119,7 +126,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -132,7 +139,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -159,7 +166,7 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the email address.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an email address from a JSON number representation.</summary>
         /// <param name="jsonNumber">
@@ -328,9 +335,9 @@ namespace Qowaiv
         #region (Explicit) casting
 
         /// <summary>Casts an email address to a <see cref="string"/>.</summary>
-        public static explicit operator string(EmailAddress val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(EmailAddress val)=> val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a email address.</summary>
-        public static explicit operator EmailAddress(string str) { return Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator EmailAddress(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         #endregion
@@ -435,7 +442,7 @@ namespace Qowaiv
             }
             if (IsValid(s, formatProvider))
             {
-                result = new EmailAddress() { m_Value = s.ToLowerInvariant() };
+                result = new EmailAddress { m_Value = s.ToLowerInvariant() };
                 return true;
             }
             return false;

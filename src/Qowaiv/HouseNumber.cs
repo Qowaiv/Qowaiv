@@ -1,4 +1,8 @@
-﻿using Qowaiv.Conversion;
+﻿#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -27,13 +31,13 @@ namespace Qowaiv
         public static readonly HouseNumber Empty;
 
         /// <summary>Represents an unknown (but set) house number.</summary>
-        public static readonly HouseNumber Unknown = new HouseNumber() { m_Value = Int32.MaxValue };
+        public static readonly HouseNumber Unknown = new HouseNumber { m_Value = Int32.MaxValue };
 
         /// <summary>Represents the smallest possible House number 1.</summary>
-        public static readonly HouseNumber MinValue = new HouseNumber() { m_Value = 1 };
+        public static readonly HouseNumber MinValue = new HouseNumber { m_Value = 1 };
 
         /// <summary>Represents the largest possible House number 999999999.</summary>
-        public static readonly HouseNumber MaxValue = new HouseNumber() { m_Value = 999999999 };
+        public static readonly HouseNumber MaxValue = new HouseNumber { m_Value = 999999999 };
 
         #region Properties
 
@@ -91,7 +95,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         private HouseNumber(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetInt32("Value");
         }
 
@@ -100,7 +104,7 @@ namespace Qowaiv
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -117,7 +121,7 @@ namespace Qowaiv
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -130,7 +134,7 @@ namespace Qowaiv
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -223,8 +227,7 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -435,7 +438,7 @@ namespace Qowaiv
             }
             if (IsValid(s, formatProvider))
             {
-                result = new HouseNumber() { m_Value = System.Int32.Parse(s, formatProvider) };
+                result = new HouseNumber { m_Value = int.Parse(s, formatProvider) };
                 return true;
             }
             return false;
@@ -500,7 +503,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new HouseNumber() { m_Value = val.Value };
+                result = new HouseNumber { m_Value = val.Value };
                 return true;
             }
             return false;

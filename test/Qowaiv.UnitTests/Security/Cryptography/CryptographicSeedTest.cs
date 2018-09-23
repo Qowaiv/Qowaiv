@@ -44,11 +44,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            CryptographicSeed val;
-
             string str = null;
-
-            Assert.IsTrue(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -56,11 +53,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            CryptographicSeed val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -68,11 +62,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            CryptographicSeed val;
-
             string str = "string==";
-
-            Assert.IsTrue(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -80,11 +71,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            CryptographicSeed val;
-
             string str = "string";
-
-            Assert.IsFalse(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsFalse(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -247,7 +235,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
@@ -267,7 +255,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
@@ -287,7 +275,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -308,7 +296,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -328,7 +316,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -603,7 +591,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a cryptographic seed"
@@ -617,7 +605,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a cryptographic seed"

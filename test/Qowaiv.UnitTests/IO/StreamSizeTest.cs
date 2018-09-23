@@ -35,31 +35,25 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void TyrParse_Null_IsInvalid()
         {
-            StreamSize val;
             string str = null;
-
-            Assert.IsFalse(StreamSize.TryParse(str, out val));
+            Assert.IsFalse(StreamSize.TryParse(str, out StreamSize val));
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
-            StreamSize val;
             string str = string.Empty;
-
-            Assert.IsFalse(StreamSize.TryParse(str, out val));
+            Assert.IsFalse(StreamSize.TryParse(str, out StreamSize val));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            StreamSize val;
-
             string str = "17kb";
 
-            Assert.IsTrue(StreamSize.TryParse(str, out val), "Valid");
+            Assert.IsTrue(StreamSize.TryParse(str, out StreamSize val), "Valid");
             Assert.AreEqual("17000 byte", val.ToString(), "Value");
         }
 
@@ -261,7 +255,7 @@ namespace Qowaiv.UnitTests.IO
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
@@ -281,7 +275,7 @@ namespace Qowaiv.UnitTests.IO
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
@@ -301,7 +295,7 @@ namespace Qowaiv.UnitTests.IO
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -322,7 +316,7 @@ namespace Qowaiv.UnitTests.IO
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -342,7 +336,7 @@ namespace Qowaiv.UnitTests.IO
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -1094,7 +1088,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 40;
-            act = act / (Int32)2;
+            act = act / 2;
 
             Assert.AreEqual(exp, act);
         }
@@ -1149,7 +1143,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 54;
-            act = act / (Single)1.5;
+            act = act / (float)1.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1158,7 +1152,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 54;
-            act = act / (Double)1.5;
+            act = act / 1.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1167,7 +1161,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 54;
-            act = act / (Decimal)1.5;
+            act = act / 1.5d;
 
             Assert.AreEqual(exp, act);
         }
@@ -1177,7 +1171,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (Int16)3;
+            act = act * (short)3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1186,7 +1180,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (Int32)3;
+            act = act * 3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1195,7 +1189,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (Int64)3;
+            act = act * (long)3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1240,7 +1234,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 21;
-            act = act * (Single)0.5;
+            act = act * (float)0.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1249,7 +1243,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 21;
-            act = act * (Double)0.5;
+            act = act * 0.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1258,7 +1252,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 21;
-            act = act * (decimal)0.5;
+            act = act * 0.5d;
 
             Assert.AreEqual(exp, act);
         }

@@ -64,8 +64,8 @@ namespace Qowaiv.Threading
         /// </remarks>
         public static void Register(Type type, Func<Thread, object> creator)
         {
-            Qowaiv.Guard.NotNull(type, "type");
-            Qowaiv.Guard.NotNull(creator, "creator");
+            Qowaiv.Guard.NotNull(type, nameof(type));
+            Qowaiv.Guard.NotNull(creator, nameof(creator));
             Guard(type, Creators.ContainsKey(type));
 
             Creators.TryAdd(type, creator);
@@ -145,7 +145,7 @@ namespace Qowaiv.Threading
         /// </param>
         public void Remove(Type type)
         {
-            Qowaiv.Guard.NotNull(type, "type");
+            Qowaiv.Guard.NotNull(type, nameof(type));
             Values.Remove(type);
         }
 

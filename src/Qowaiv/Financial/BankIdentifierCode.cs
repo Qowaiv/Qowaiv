@@ -1,4 +1,12 @@
-﻿using Qowaiv.Conversion.Financial;
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -29,7 +37,6 @@ namespace Qowaiv.Financial
     /// statements.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a BIC.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(BankIdentifierCodeTypeConverter))]
     public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BankIdentifierCode>, IComparable, IComparable<BankIdentifierCode>
@@ -43,7 +50,7 @@ namespace Qowaiv.Financial
         public static readonly BankIdentifierCode Empty;
 
         /// <summary>Represents an unknown (but set) BIC.</summary>
-        public static readonly BankIdentifierCode Unknown = new BankIdentifierCode() { m_Value = "ZZZZZZZZZZZ" };
+        public static readonly BankIdentifierCode Unknown = new BankIdentifierCode { m_Value = "ZZZZZZZZZZZ" };
 
         #region Properties
 
@@ -51,46 +58,52 @@ namespace Qowaiv.Financial
         private string m_Value;
 
         /// <summary>Gets the number of characters of BIC.</summary>
-        public int Length { get { return IsEmptyOrUnknown() ? 0 : m_Value.Length; } }
+        public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
 
         /// <summary>Gets the institution code or bank code.</summary>
-        public string BankCode { get { return IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, 4); } }
+        public string BankCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, 4);
 
         /// <summary>Gets the country code.</summary>
-        public string CountryCode { get { return IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(4, 2); } }
+        public string CountryCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(4, 2);
 
         /// <summary>Gets the country info of the country code.</summary>
         public Country Country
         {
             get
             {
-                if (IsEmpty()) { return Country.Empty; }
-                if (IsUnknown()) { return Country.Unknown; }
+                if (IsEmpty())
+                {
+                    return Country.Empty;
+                }
+                if (IsUnknown())
+                {
+                    return Country.Unknown;
+                }
                 return Country.Parse(CountryCode, CultureInfo.InvariantCulture);
             }
         }
 
         /// <summary>Gets the location code.</summary>
-        public string LocationCode { get { return IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(6, 2); } }
+        public string LocationCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(6, 2);
 
         /// <summary>Gets the branch code.</summary>
         /// <remarks>
         /// Is optional, XXX for primary office.
         /// </remarks>
-        public string BranchCode { get { return this.Length != 11 ? string.Empty : m_Value.Substring(8); } }
+        public string BranchCode => Length != 11 ? string.Empty : m_Value.Substring(8);
 
         #endregion
 
         #region Methods
 
         /// <summary>Returns true if the BIC is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(string); }
+        public bool IsEmpty() => m_Value == default(string);
 
         /// <summary>Returns true if the BIC is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == BankIdentifierCode.Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Unknown.m_Value;
 
         /// <summary>Returns true if the BIC is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         #endregion
 
@@ -101,7 +114,7 @@ namespace Qowaiv.Financial
         /// <param name="context">The streaming context.</param>
         private BankIdentifierCode(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetString("Value");
         }
 
@@ -110,7 +123,7 @@ namespace Qowaiv.Financial
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -118,7 +131,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the BIC from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -127,7 +140,7 @@ namespace Qowaiv.Financial
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -140,7 +153,7 @@ namespace Qowaiv.Financial
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
 
@@ -149,10 +162,8 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates a BIC from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(string);
-        }
+        void IJsonSerializable.FromJson() => m_Value = default(string);
+
 
         /// <summary>Generates a BIC from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -167,19 +178,19 @@ namespace Qowaiv.Financial
         /// <param name="jsonInteger">
         /// The JSON integer that represents the BIC.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates a BIC from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the BIC.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a BIC from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the BIC.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a BIC into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -204,29 +215,19 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current BIC.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
-
+        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
         /// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
@@ -236,8 +237,7 @@ namespace Qowaiv.Financial
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
@@ -252,33 +252,27 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is BankIdentifierCode && Equals((BankIdentifierCode)obj); }
+        public override bool Equals(object obj) => obj is BankIdentifierCode && Equals((BankIdentifierCode)obj);
 
         /// <summary>Returns true if this instance and the other <see cref="BankIdentifierCode"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="BankIdentifierCode"/> to compare with.</param>
-        public bool Equals(BankIdentifierCode other) { return m_Value == other.m_Value; }
+        public bool Equals(BankIdentifierCode other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this BIC.</summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
-        public override int GetHashCode() { return m_Value == null ? 0 : m_Value.GetHashCode(); }
+        public override int GetHashCode() => m_Value == null ? 0 : m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(BankIdentifierCode left, BankIdentifierCode right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(BankIdentifierCode left, BankIdentifierCode right) => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(BankIdentifierCode left, BankIdentifierCode right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(BankIdentifierCode left, BankIdentifierCode right) => !(left == right);
 
         #endregion
 
@@ -328,9 +322,9 @@ namespace Qowaiv.Financial
         #region (Explicit) casting
 
         /// <summary>Casts a BIC to a <see cref="string"/>.</summary>
-        public static explicit operator string(BankIdentifierCode val) { return val.ToString(CultureInfo.CurrentCulture); }
+        public static explicit operator string(BankIdentifierCode val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a BIC.</summary>
-        public static explicit operator BankIdentifierCode(string str) { return BankIdentifierCode.Parse(str, CultureInfo.CurrentCulture); }
+        public static explicit operator BankIdentifierCode(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         #endregion
@@ -347,10 +341,7 @@ namespace Qowaiv.Financial
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static BankIdentifierCode Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
+        public static BankIdentifierCode Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to a BIC.</summary>
         /// <param name="s">
@@ -367,8 +358,7 @@ namespace Qowaiv.Financial
         /// </exception>
         public static BankIdentifierCode Parse(string s, IFormatProvider formatProvider)
         {
-            BankIdentifierCode val;
-            if (BankIdentifierCode.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out BankIdentifierCode val))
             {
                 return val;
             }
@@ -386,12 +376,11 @@ namespace Qowaiv.Financial
         /// </returns>
         public static BankIdentifierCode TryParse(string s)
         {
-            BankIdentifierCode val;
-            if (BankIdentifierCode.TryParse(s, out val))
+            if (TryParse(s, out BankIdentifierCode val))
             {
                 return val;
             }
-            return BankIdentifierCode.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to a BIC.
@@ -428,19 +417,19 @@ namespace Qowaiv.Financial
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out BankIdentifierCode result)
         {
-            result = BankIdentifierCode.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
             }
             if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
             {
-                result = BankIdentifierCode.Unknown;
+                result = Unknown;
                 return true;
             }
             if (IsValid(s, formatProvider))
             {
-                result = new BankIdentifierCode() { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
+                result = new BankIdentifierCode { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
                 return true;
             }
             return false;
@@ -451,17 +440,15 @@ namespace Qowaiv.Financial
         #region Validation
 
         /// <summary>Returns true if the val represents a valid BIC, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid BIC, otherwise false.</summary>
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
             Justification = "formatProvider is validated by Country.IsValid().")]
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return Pattern.IsMatch(val ?? string.Empty) && Country.IsValid(val.Substring(4, 2), formatProvider);
+            var value = val ?? string.Empty;
+            return Pattern.IsMatch(value) && Country.IsValid(value.Substring(4, 2), formatProvider);
         }
         #endregion
     }

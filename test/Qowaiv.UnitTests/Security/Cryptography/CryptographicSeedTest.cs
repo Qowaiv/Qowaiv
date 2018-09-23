@@ -44,11 +44,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            CryptographicSeed val;
-
             string str = null;
-
-            Assert.IsTrue(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -56,11 +53,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            CryptographicSeed val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -68,11 +62,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            CryptographicSeed val;
-
             string str = "string==";
-
-            Assert.IsTrue(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -80,11 +71,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            CryptographicSeed val;
-
             string str = "string";
-
-            Assert.IsFalse(CryptographicSeed.TryParse(str, out val), "Valid");
+            Assert.IsFalse(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 

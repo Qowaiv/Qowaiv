@@ -484,7 +484,7 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Percentage.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
+        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates a Percentage from a JSON number representation.</summary>
         /// <param name="jsonNumber">

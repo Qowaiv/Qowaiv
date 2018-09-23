@@ -206,7 +206,7 @@ namespace Qowaiv
         /// <param name="jsonNumber">
         /// The JSON number that represents the Gender.
         /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a Gender from a JSON date representation.</summary>
         /// <param name="jsonDate">

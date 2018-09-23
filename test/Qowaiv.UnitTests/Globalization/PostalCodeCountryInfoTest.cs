@@ -10,18 +10,15 @@ namespace Qowaiv.UnitTests.Globalization
     public class PostalCodeCountryInfoTest
     {
         [Test]
-        public void GetCountriesWithoutPostalCode_None_78Countries()
+        public void GetCountriesWithoutPostalCode_None_77Countries()
         {
-            var exp = new Country[] { Country.AE, Country.AG, Country.AO, Country.AQ, Country.AW, Country.BF, Country.BI, Country.BJ, Country.BQ, Country.BS, Country.BV, Country.BW, Country.BZ, Country.CD, Country.CF, Country.CG, Country.CI, Country.CK, Country.CM, Country.CW, Country.DJ, Country.DM, Country.DO, Country.EH, Country.ER, Country.FJ, Country.GD, Country.GH, Country.GM, Country.GN, Country.GQ, Country.GY, Country.HK, Country.IE, Country.JM, Country.KE, Country.KI, Country.KM, Country.KN, Country.KP, Country.KW, Country.LC, Country.ML, Country.MO, Country.MR, Country.MS, Country.MU, Country.MV, Country.MW, Country.NR, Country.NU, Country.QA, Country.RW, Country.SB, Country.SC, Country.SJ, Country.SL, Country.SO, Country.SR, Country.SS, Country.ST, Country.SX, Country.SY, Country.TF, Country.TG, Country.TK, Country.TL, Country.TO, Country.TV, Country.TZ, Country.UG, Country.UM, Country.UZ, Country.VU, Country.WS, Country.YE, Country.ZW, Country.XK };
+            var exp = new Country[] { Country.AE, Country.AG, Country.AO, Country.AQ, Country.AW, Country.BF, Country.BI, Country.BJ, Country.BQ, Country.BS, Country.BV, Country.BW, Country.BZ, Country.CD, Country.CF, Country.CG, Country.CI, Country.CK, Country.CM, Country.CW, Country.DJ, Country.DM, Country.DO, Country.EH, Country.ER, Country.FJ, Country.GD, Country.GH, Country.GM, Country.GN, Country.GQ, Country.GY, Country.HK, Country.IE, Country.JM, Country.KE, Country.KI, Country.KM, Country.KN, Country.KP, Country.KW, Country.LC, Country.ML, Country.MO, Country.MR, Country.MS, Country.MU, Country.MV, Country.MW, Country.NR, Country.NU, Country.QA, Country.RW, Country.SB, Country.SC, Country.SJ, Country.SL, Country.SO, Country.SR, Country.SS, Country.ST, Country.SX, Country.SY, Country.TF, Country.TG, Country.TK, Country.TL, Country.TO, Country.TV, Country.TZ, Country.UG, Country.UM, Country.UZ, Country.VU, Country.WS, Country.YE, Country.ZW };
             var act = PostalCodeCountryInfo.GetCountriesWithoutPostalCode().ToArray();
 
             foreach (var item in act)
             {
                 Console.WriteLine(item);
             }
-
-            Assert.AreEqual(exp.Length, act.Length, "act.Length");
-
             CollectionAssert.AreEqual(exp, act);
         }
 
@@ -35,9 +32,6 @@ namespace Qowaiv.UnitTests.Globalization
             {
                 Console.WriteLine(item);
             }
-
-            Assert.AreEqual(exp.Length, act.Length, "act.Length");
-
             CollectionAssert.AreEqual(exp, act);
         }
 

@@ -501,7 +501,7 @@ namespace Qowaiv
         /// <param name="jsonNumber">
         /// The JSON number that represents the local date time.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a local date time from a JSON date representation.</summary>
         /// <param name="jsonDate">

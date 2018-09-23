@@ -237,13 +237,13 @@ namespace Qowaiv.Web
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an Internet media type from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the Internet media type.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates an Internet media type from a JSON date representation.</summary>
         /// <param name="jsonDate">

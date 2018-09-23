@@ -278,7 +278,7 @@ namespace Qowaiv
         /// <remarks>
         /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
         /// </remarks>
-        protected virtual void FromJson(Int64 jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
+        protected virtual void FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an email address from a JSON number representation.</summary>
         /// <param name="jsonNumber">
@@ -289,7 +289,7 @@ namespace Qowaiv
         /// <remarks>
         /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
         /// </remarks>
-        protected virtual void FromJson(Double jsonNumber) => new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        protected virtual void FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates an email address from a JSON date representation.</summary>
         /// <param name="jsonDate">

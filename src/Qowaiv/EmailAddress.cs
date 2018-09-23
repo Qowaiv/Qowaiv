@@ -166,7 +166,7 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the email address.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) => new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an email address from a JSON number representation.</summary>
         /// <param name="jsonNumber">

@@ -35,31 +35,25 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void TyrParse_Null_IsInvalid()
         {
-            StreamSize val;
             string str = null;
-
-            Assert.IsFalse(StreamSize.TryParse(str, out val));
+            Assert.IsFalse(StreamSize.TryParse(str, out StreamSize val));
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
-            StreamSize val;
             string str = string.Empty;
-
-            Assert.IsFalse(StreamSize.TryParse(str, out val));
+            Assert.IsFalse(StreamSize.TryParse(str, out StreamSize val));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            StreamSize val;
-
             string str = "17kb";
 
-            Assert.IsTrue(StreamSize.TryParse(str, out val), "Valid");
+            Assert.IsTrue(StreamSize.TryParse(str, out StreamSize val), "Valid");
             Assert.AreEqual("17000 byte", val.ToString(), "Value");
         }
 

@@ -94,11 +94,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            EmailAddress val;
-
             string str = null;
 
-            Assert.IsTrue(EmailAddress.TryParse(str, out val), "Valid");
+            Assert.IsTrue(EmailAddress.TryParse(str, out EmailAddress val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -106,11 +104,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            EmailAddress val;
-
             string str = string.Empty;
 
-            Assert.IsTrue(EmailAddress.TryParse(str, out val), "Valid");
+            Assert.IsTrue(EmailAddress.TryParse(str, out EmailAddress val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -118,11 +114,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            EmailAddress val;
-
             string str = "svo@qowaiv.org";
 
-            Assert.IsTrue(EmailAddress.TryParse(str, out val), "Valid");
+            Assert.IsTrue(EmailAddress.TryParse(str, out EmailAddress val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -130,11 +124,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            EmailAddress val;
-
             string str = "string";
 
-            Assert.IsFalse(EmailAddress.TryParse(str, out val), "Valid");
+            Assert.IsFalse(EmailAddress.TryParse(str, out EmailAddress val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 

@@ -35,8 +35,8 @@ namespace Qowaiv.ComponentModel.Rules.Globalization
         }
     }
 
-    /// <summary>Rule that can validate a <see cref="Qowaiv.PostalCode"/> 
-    /// being valid for a specific <see cref="Qowaiv.Globalization.Country"/>.
+    /// <summary>Rule that can validate a <see cref="PostalCode"/> 
+    /// being valid for a specific <see cref="Country"/>.
     /// </summary>
     public class PostalCodeRule<TModel> : ValidationRule<TModel>
         where TModel : class

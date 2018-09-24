@@ -12,11 +12,16 @@ namespace Qowaiv.ComponentModel.DataAnnotations
         /// </summary>
         public override bool IsValid(object value)
         {
-            if (value != null && value.GetType().IsValueType)
+            if (IsApplicable(value))
             {
                 return !value.Equals(Activator.CreateInstance(value.GetType()));
             }
             return base.IsValid(value);
+        }
+
+        internal static bool IsApplicable(object value)
+        {
+            return value != null && value.GetType().IsValueType;
         }
     }
 }

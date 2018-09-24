@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.ComponentModel.DataAnnotations
@@ -12,11 +11,16 @@ namespace Qowaiv.ComponentModel.DataAnnotations
         /// </summary>
         public override bool IsValid(object value)
         {
-            if (value is IEnumerable enumerable)
+            if (IsApplicable(value))
             {
-                return enumerable.GetEnumerator().MoveNext();
+                return ((IEnumerable)value).GetEnumerator().MoveNext();
             }
             return base.IsValid(value);
+        }
+
+        internal static bool IsApplicable(object value)
+        {
+            return value is IEnumerable && !(value is string);
         }
     }
 }

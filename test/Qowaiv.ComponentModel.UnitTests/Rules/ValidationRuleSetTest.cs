@@ -12,7 +12,33 @@ namespace Qowaiv.ComponentModel.UnitTests.Rules
     public class ValidationRuleSetTest
     {
         [Test]
-        public void Validate_()
+        public void Validate_NoPostalCodeForCountryWithouPostalCode_IsValid()
+        {
+            var model = new ComplexValidatableModel
+            {
+                PostalCode = PostalCode.Empty,
+                Country = Country.AE,
+            };
+
+            DataAnnotationsAssert.IsValid(model);
+        }
+
+        [Test]
+        public void Validate_NoPostalCode_WithErrors()
+        {
+            var model = new ComplexValidatableModel
+            {
+                PostalCode = PostalCode.Empty,
+                Country = Country.NL,
+            };
+
+            DataAnnotationsAssert.WithErrors(model,
+                new ValidationTestMessage(ValidationSeverity.Error, "The PostalCode field is required.", "PostalCode")
+            );
+        }
+
+        [Test]
+        public void Validate_NotValidForCountry_WithErrors()
         {
             var model = new ComplexValidatableModel
             {
@@ -36,7 +62,15 @@ namespace Qowaiv.ComponentModel.UnitTests.Rules
         private static readonly ValidationRuleSet<ComplexValidatableModel> ruleSet =
             new ValidationRuleSet<ComplexValidatableModel>
             (
-                PostalCodeRule.For<ComplexValidatableModel>(m => m.PostalCode, m=> m.Country)
+                PostalCodeRule.For<ComplexValidatableModel>
+                (
+                    m => m.PostalCode, m=> m.Country
+                ),
+                ConditionalRequiredRule.For<ComplexValidatableModel>
+                (
+                    c => PostalCodeCountryInfo.GetInstance(c.Model.Country).HasPostalCode,
+                    m => m.PostalCode
+                )
             );
 
         public PostalCode PostalCode { get; set; }

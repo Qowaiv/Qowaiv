@@ -53,7 +53,7 @@ declare module Qowaiv {
          * @returns {Guid} A GUID if valid, otherwise null.
          */
         static parse(s: string): Guid;
-        private static strip(s);
+        private static strip;
         /**
          * Returns a new empty GUID.
          */
@@ -67,7 +67,7 @@ declare module Qowaiv {
          * Creates random GUID blocks.
          * @remarks called 4 times by Guid.newGuid().
          */
-        private static rndGuid(s);
+        private static rndGuid;
     }
 }
 /**
@@ -123,7 +123,7 @@ declare module Qowaiv {
          * @constructor
          */
         constructor(d?: number, h?: number, m?: number, s?: number, f?: number);
-        private num(n);
+        private num;
         /**
          * Returns the days of the time span.
          */

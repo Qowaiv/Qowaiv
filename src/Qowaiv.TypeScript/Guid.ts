@@ -95,7 +95,7 @@
             // if the value parameter is valid
             if (Guid.isValid(s)) {
                 var guid = new Guid();
-                guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
+                guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
                 return guid;
             }
             // return null if creation failed.

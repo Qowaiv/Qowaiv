@@ -61,7 +61,7 @@ var Qowaiv;
         /**
           * Creates a GUID from a JSON string.
           * @param {string} s A JSON string representing the GUID.
-          * @returns A GUID if valid, otherwise null.
+          * @returns {Guid} A GUID if valid, otherwise null.
           */
         Guid.fromJSON = function (s) {
             return Guid.parse(s);
@@ -73,27 +73,34 @@ var Qowaiv;
          *          to avoid a create() call.
          */
         Guid.isValid = function (s) {
-            return /^[0-9ABCDEF]{32}$/i.test(s.replace(/-/g, ''));
+            return /^[0-9ABCDEF]{32}$/i.test(Guid.strip(s));
         };
         /**
          * Creates a GUID.
          * @param {string} s A string containing GUID to convert or a number.
-         * @returns A GUID if valid, otherwise null.
+         * @returns {Guid} A GUID if valid, otherwise null.
          */
         Guid.parse = function (s) {
             // an empty string should equal Guid.Empty.
             if (s === '') {
                 return new Guid();
             }
+            s = Guid.strip(s).toUpperCase();
             // if the value parameter is valid
             if (Guid.isValid(s)) {
                 var guid = new Guid();
-                s = s.replace(/-/g, '').toUpperCase();
-                guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{8})/, '$1-$2-$3-$4-$5');
+                guid.v = s.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
                 return guid;
             }
             // return null if creation failed.
             return null;
+        };
+        Guid.strip = function (s) {
+            var replace = s.replace(/-/g, '');
+            if (replace.indexOf('{') == 0 && replace.lastIndexOf('}') == replace.length - 1) {
+                replace = replace.substr(1, replace.length - 2);
+            }
+            return replace;
         };
         /**
          * Returns a new empty GUID.
@@ -103,7 +110,7 @@ var Qowaiv;
         };
         /**
          * Creates a GUID.
-         * @returns A random GUID.
+         * @returns {Guid} A random GUID.
          */
         Guid.newGuid = function (seed) {
             var guid = new Guid();
@@ -178,6 +185,14 @@ describe("GUID: ", function () {
     it("format('s') should have no dashed and be lowercase.", function () {
         var guid = Qowaiv.Guid.parse("DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189");
         expect(guid.format("s")).toBe("dc7fba65df6f4cb98faa6c7b5654f189");
+    });
+    it("Parse('{DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189}') should be parseable.", function () {
+        var guid = Qowaiv.Guid.parse("{DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189}");
+        expect(guid.format("U")).toBe("DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189");
+    });
+    it("Parse('Nonsense') should not be parseable.", function () {
+        var guid = Qowaiv.Guid.parse("Nonsense");
+        expect(guid).toBe(null);
     });
 });
 var Qowaiv;

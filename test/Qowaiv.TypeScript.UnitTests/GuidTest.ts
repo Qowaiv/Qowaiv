@@ -61,4 +61,16 @@ describe("GUID: ", () => {
         var guid = Qowaiv.Guid.parse("DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189");
         expect(guid.format("s")).toBe("dc7fba65df6f4cb98faa6c7b5654f189");
     }); 
+
+    it("Parse('{DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189}') should be parseable.", () => {
+
+        var guid = Qowaiv.Guid.parse("{DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189}");
+        expect(guid.format("U")).toBe("DC7FBA65-DF6F-4CB9-8FAA-6C7B5654F189");
+    }); 
+
+    it("Parse('Nonsense') should not be parseable.", () => {
+
+        var guid = Qowaiv.Guid.parse("Nonsense");
+        expect(guid).toBe(null);
+    }); 
 });

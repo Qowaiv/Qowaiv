@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <resheader name="resmimetype">text/microsoft-resx</resheader>
   <resheader name="version">2.0</resheader>
   <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</resheader>
@@ -1043,5 +1043,9 @@
   <data name="ZRCD_DisplayName">
     <value>ザイール</value>
     <comment>Zaire (ZR)</comment>
+  </data>
+  <data name="XK_DisplayName">
+    <value>コソボ</value>
+    <comment>Kosovo (XK)</comment>
   </data>
 </root>

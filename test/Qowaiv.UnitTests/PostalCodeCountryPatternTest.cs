@@ -1152,15 +1152,7 @@ namespace Qowaiv.UnitTests
         {
             IsNotValid(Country.VC, false, true, 4);
         }
-
-        /// <summary>Tests patterns that should not be valid for Venezuela (VE).</summary>
-        [Test]
-        public void IsNotValid_VE_All()
-        {
-            // Not possible to generate.
-            // IsNotValid(Country.VE, true, false, 4, 5);
-        }
-
+        
         /// <summary>Tests patterns that should not be valid for Virgin Islands (VG).</summary>
         [Test]
         public void IsNotValid_VG_All()
@@ -1187,6 +1179,13 @@ namespace Qowaiv.UnitTests
         public void IsNotValid_WF_All()
         {
             IsNotValid(Country.WF, false, false, 5);
+        }
+
+        /// <summary>Tests patterns that should not be valid for Kosovo (XK).</summary>
+        [Test]
+        public void IsNotValid_XK_All()
+        {
+            IsNotValid(Country.XK, false, false, 5);
         }
 
         /// <summary>Tests patterns that should not be valid for Mayotte (YT).</summary>

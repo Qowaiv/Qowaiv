@@ -514,6 +514,9 @@ namespace Qowaiv.Globalization
             // WF: Wallis And Futuna, http://en.wikipedia.org/wiki/List_of_postal_codes_in_France
             { Country.WF, New(Country.WF,@"^986[0-9]{2}$") },
 
+            // XK: Kosovo, https://en.wikipedia.org/wiki/Postal_codes_in_Kosovo
+            { Country.XK, New(Country.XK,@"^[1-7][0-9]{4}$") },
+
             // YT: Mayotte, http://en.wikipedia.org/wiki/List_of_postal_codes_in_France
             { Country.YT, New(Country.YT,@"^976[0-9]{2}$") },
 

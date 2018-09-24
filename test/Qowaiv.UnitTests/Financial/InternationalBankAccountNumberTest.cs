@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -230,7 +228,7 @@ namespace Qowaiv.UnitTests.Financial
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
@@ -250,7 +248,7 @@ namespace Qowaiv.UnitTests.Financial
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
@@ -270,7 +268,7 @@ namespace Qowaiv.UnitTests.Financial
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -279,19 +277,19 @@ namespace Qowaiv.UnitTests.Financial
             var input = new InternationalBankAccountNumberSerializeObject()
             {
                 Id = 17,
-                Obj = InternationalBankAccountNumberTest.TestStruct,
+                Obj = InternationalBankAccountNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new InternationalBankAccountNumberSerializeObject()
             {
                 Id = 17,
-                Obj = InternationalBankAccountNumberTest.TestStruct,
+                Obj = InternationalBankAccountNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -311,7 +309,7 @@ namespace Qowaiv.UnitTests.Financial
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -401,7 +399,7 @@ namespace Qowaiv.UnitTests.Financial
 
         #endregion
 
-        #region IFormattable / Tostring tests
+        #region IFormattable / ToString tests
 
         [Test]
         public void ToString_Empty_IsStringEmpty()
@@ -643,7 +641,7 @@ namespace Qowaiv.UnitTests.Financial
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be an IBAN"
@@ -657,7 +655,7 @@ namespace Qowaiv.UnitTests.Financial
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be an IBAN"
@@ -877,7 +875,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void IsValid_StrangeSpacing_IsTrue()
         {
-            Assert.IsTrue(InternationalBankAccountNumber.IsValid("NL20  INGB000	123 4567"));
+            Assert.IsTrue(InternationalBankAccountNumber.IsValid("AE950 2100000006  93123456"));
         }
 
         [Test]

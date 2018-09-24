@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="version.props" />
+  <Import Project="analytics.props" />
+
+  <PropertyGroup>
+    <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
+    <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Jack Kester;Hanif Hafez Nezami;Vincent Lesierse;Wilko Frieke</Authors>
+    <Owners>Qowaiv community</Owners>
+    <PackageTags>qowaiv domain model</PackageTags>
+    <Company>Qowaiv community</Company>
+    <Copyright>Copyright © Qowaiv community 2013-2018</Copyright>
+
+    <PackageIconUrl>https://raw.githubusercontent.com/Corniel/Qowaiv/master/design/qowain-logo_nuget_064x064.gif</PackageIconUrl>
+    <PackageProjectUrl>http://www.github.com/corniel/Qowaiv</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.github.com/corniel/Qowaiv/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <!-- for code coverage an proper debugging -->
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+</Project>

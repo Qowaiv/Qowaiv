@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +11,6 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Globalization
 {
-    [TestFixture]
     public class CountryTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -27,15 +24,15 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void All_None_259Countries()
+        public void All_None_260Countries()
         {
-            Assert.AreEqual(259, Country.All.Count);
+            Assert.AreEqual(260, Country.All.Count);
         }
 
         [Test]
-        public void GetExisting_Januari2016_249Countries()
+        public void GetExisting_Januari2016_250Countries()
         {
-            Assert.AreEqual(249, Country.GetExisting(new Date(2016, 01, 01)).Count());
+            Assert.AreEqual(250, Country.GetExisting(new Date(2016, 01, 01)).Count());
         }
 
 
@@ -364,7 +361,7 @@ namespace Qowaiv.UnitTests.Globalization
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_CountrySerializeObject_AreEqual()
@@ -384,7 +381,7 @@ namespace Qowaiv.UnitTests.Globalization
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_CountrySerializeObject_AreEqual()
@@ -404,7 +401,7 @@ namespace Qowaiv.UnitTests.Globalization
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -413,19 +410,19 @@ namespace Qowaiv.UnitTests.Globalization
             var input = new CountrySerializeObject()
             {
                 Id = 17,
-                Obj = CountryTest.TestStruct,
+                Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new CountrySerializeObject()
             {
                 Id = 17,
-                Obj = CountryTest.TestStruct,
+                Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -445,7 +442,7 @@ namespace Qowaiv.UnitTests.Globalization
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -534,7 +531,7 @@ namespace Qowaiv.UnitTests.Globalization
 
         #endregion
 
-        #region IFormattable / Tostring tests
+        #region IFormattable / ToString tests
 
         [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
@@ -772,7 +769,7 @@ namespace Qowaiv.UnitTests.Globalization
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a Country"
@@ -786,7 +783,7 @@ namespace Qowaiv.UnitTests.Globalization
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a Country"
@@ -1038,16 +1035,6 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void ToRegionInfo_TestStruct_ThrowsNotSupportedExcpetion()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                TestStruct.ToRegionInfo();
-            },
-            "The country 'Holy See (VA)' is not supported as region info.");
-        }
-
-        [Test]
         public void ExistsOnDate_SerbiaAndMontenegro1992_IsFalse()
         {
             Assert.IsFalse(Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)));
@@ -1188,9 +1175,9 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void GetCurrent_None_249()
+        public void GetCurrent_None_250()
         {
-            var exp = 249;
+            var exp = 250;
             var act = Country.GetExisting().ToList();
 
             Assert.AreEqual(exp, act.Count);

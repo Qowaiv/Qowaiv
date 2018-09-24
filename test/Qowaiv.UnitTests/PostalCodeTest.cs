@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.Json;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests.TestTools.Formatting;
+using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -48,7 +46,6 @@ namespace Qowaiv.UnitTests
     ///     IsValid("ZZ2037570044WK", country); //Not
     /// </example>
     /// </remarks>
-    [TestFixture]
     public partial class PostalCodeTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -275,24 +272,24 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = PostalCodeTest.TestStruct;
-            var exp = PostalCodeTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = PostalCodeTest.TestStruct;
-            var exp = PostalCodeTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = PostalCodeTest.TestStruct;
-            var exp = PostalCodeTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
@@ -303,19 +300,19 @@ namespace Qowaiv.UnitTests
             var input = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
@@ -323,19 +320,19 @@ namespace Qowaiv.UnitTests
             var input = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
@@ -343,19 +340,19 @@ namespace Qowaiv.UnitTests
             var input = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -364,19 +361,19 @@ namespace Qowaiv.UnitTests
             var input = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = PostalCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new PostalCodeSerializeObject()
             {
                 Id = 17,
-                Obj = PostalCodeTest.TestStruct,
+                Obj = PostalCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -396,7 +393,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -486,7 +483,7 @@ namespace Qowaiv.UnitTests
 
         #endregion
 
-        #region IFormattable / Tostring tests
+        #region IFormattable / ToString tests
 
         [Test]
         public void ToString_Empty_IsStringEmpty()
@@ -636,52 +633,52 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
-            Assert.IsTrue(PostalCodeTest.TestStruct.Equals(PostalCodeTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(PostalCodeTest.TestStruct.Equals(PostalCode.Empty));
+            Assert.IsFalse(TestStruct.Equals(PostalCode.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(PostalCode.Empty.Equals(PostalCodeTest.TestStruct));
+            Assert.IsFalse(PostalCode.Empty.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
-            Assert.IsTrue(PostalCodeTest.TestStruct.Equals((object)PostalCodeTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
         }
 
         [Test]
         public void Equals_TestStructNull_IsFalse()
         {
-            Assert.IsFalse(PostalCodeTest.TestStruct.Equals(null));
+            Assert.IsFalse(TestStruct.Equals(null));
         }
 
         [Test]
         public void Equals_TestStructObject_IsFalse()
         {
-            Assert.IsFalse(PostalCodeTest.TestStruct.Equals(new object()));
+            Assert.IsFalse(TestStruct.Equals(new object()));
         }
 
         [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
-            var l = PostalCodeTest.TestStruct;
-            var r = PostalCodeTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsTrue(l == r);
         }
 
         [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
-            var l = PostalCodeTest.TestStruct;
-            var r = PostalCodeTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsFalse(l != r);
         }
 
@@ -741,7 +738,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = null;
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a postal code"
@@ -755,7 +752,7 @@ namespace Qowaiv.UnitTests
             (() =>
                 {
                     object other = new object();
-                    var act = TestStruct.CompareTo(other);
+                    TestStruct.CompareTo(other);
                 },
                 "obj",
                 "Argument must be a postal code"
@@ -856,7 +853,7 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(PostalCodeTest.TestStruct, PostalCodeTest.TestStruct.ToString());
+                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
         }
 
@@ -871,7 +868,7 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertToStringEquals(PostalCodeTest.TestStruct.ToString(), PostalCodeTest.TestStruct);
+                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
         }
 
@@ -3560,16 +3557,6 @@ namespace Qowaiv.UnitTests
 
             IsNotValid("00000", country);
             IsNotValid("01235", country);
-            //IsValid("12346", country);
-            //IsValid("20004", country);
-            //IsValid("32648", country);
-            //IsValid("40945", country);
-            //IsValid("56640", country);
-            //IsValid("62908", country);
-            //IsValid("76345", country);
-            //IsValid("67552", country);
-            //IsValid("87182", country);
-            //IsValid("99999", country);
         }
 
         /// <summary>Tests patterns that should not be valid for Spain (ES).</summary>

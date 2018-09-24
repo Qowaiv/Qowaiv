@@ -1,31 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\build\common.props" />
+  <Import Project="..\..\props\common.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <DebugType>full</DebugType>
-    <CodeAnalysisRuleSet>..\..\Qowaiv.ruleset</CodeAnalysisRuleSet>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Qowaiv.ComponentModel.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Qowaiv.ComponentModel.xml</DocumentationFile>
+  </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
+    <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,14 +45,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>QowaivComponentModelMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Rules\Globalization\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="6.6.0.3969" />
   </ItemGroup>
 
 </Project>

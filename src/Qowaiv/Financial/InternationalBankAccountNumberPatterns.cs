@@ -1,3 +1,7 @@
+#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
 using Qowaiv.Globalization;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -134,6 +138,9 @@ namespace Qowaiv.Financial
 
             // Kazakhstan, Length: 20, BBAN: 3n,13c, Fields: KZkk bbbc cccc cccc cccc (b = National bank code, c = Account number)
             { Country.KZ, new Regex(@"^KZ[0-9]{5}[0-9A-Z]{13}$", RegexOptions.Compiled) },
+
+            // Kosovo, Length: 20, BBAN: 4n,10n,2n, Fields: XKkk bbbb cccc cccc cccc (b = National bank code, c = Account number)
+            { Country.XK, new Regex(@"^XK[0-9]{6}[0-9]{10}[0-9][0-9]$", RegexOptions.Compiled) },
 
             // Kuwait, Length: 30, BBAN: 4a, 22c, Fields: KWkk bbbb cccc cccc cccc cccc cccc cc (b = National bank code, c = Account number)
             { Country.KW, new Regex(@"^KW[0-9]{2}[A-Z]{4}[0-9A-Z]{22}$", RegexOptions.Compiled) },

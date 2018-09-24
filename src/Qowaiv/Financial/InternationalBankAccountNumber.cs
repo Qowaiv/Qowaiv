@@ -1,4 +1,12 @@
-﻿using Qowaiv.Conversion.Financial;
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
+// "GetHashCode" should not reference mutable fields
+// See README.md => Hashing
+
+using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -26,7 +34,6 @@ namespace Qowaiv.Financial
     /// The official IBAN registrar under ISO 13616-2:2007 is SWIFT.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for an IBAN.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
     public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
@@ -41,7 +48,7 @@ namespace Qowaiv.Financial
         public static readonly InternationalBankAccountNumber Empty;
 
         /// <summary>Represents an unknown (but set) IBAN.</summary>
-        public static readonly InternationalBankAccountNumber Unknown = new InternationalBankAccountNumber() { m_Value = "ZZ" };
+        public static readonly InternationalBankAccountNumber Unknown = new InternationalBankAccountNumber { m_Value = "ZZ" };
 
         #region Properties
 
@@ -49,7 +56,7 @@ namespace Qowaiv.Financial
         private string m_Value;
 
         /// <summary>Gets the number of characters of IBAN.</summary>
-        public int Length { get { return IsEmptyOrUnknown() ? 0 : m_Value.Length; } }
+        public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
 
 
         /// <summary>Gets the country of IBAN.</summary>
@@ -57,8 +64,14 @@ namespace Qowaiv.Financial
         {
             get
             {
-                if (m_Value == default(string)) { return Country.Empty; }
-                if (m_Value == Unknown.m_Value) { return Country.Unknown; }
+                if (m_Value == default(string))
+                {
+                    return Country.Empty;
+                }
+                if (m_Value == Unknown.m_Value)
+                {
+                    return Country.Unknown;
+                }
                 return Country.Parse(m_Value.Substring(0, 2), CultureInfo.InvariantCulture);
             }
         }
@@ -68,13 +81,13 @@ namespace Qowaiv.Financial
         #region Methods
 
         /// <summary>Returns true if the IBAN is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(string); }
+        public bool IsEmpty() => m_Value == default(string);
 
         /// <summary>Returns true if the Gender is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == InternationalBankAccountNumber.Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Unknown.m_Value;
 
         /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() { return IsEmpty() || IsUnknown(); }
+        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         #endregion
 
@@ -85,7 +98,7 @@ namespace Qowaiv.Financial
         /// <param name="context">The streaming context.</param>
         private InternationalBankAccountNumber(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             m_Value = info.GetString("Value");
         }
 
@@ -94,7 +107,7 @@ namespace Qowaiv.Financial
         /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Guard.NotNull(info, "info");
+            Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
         }
 
@@ -102,7 +115,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the IBAN from an <see href="XmlReader"/>.</summary>
         /// <remarks>
@@ -111,7 +124,7 @@ namespace Qowaiv.Financial
         /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            Guard.NotNull(reader, "reader");
+            Guard.NotNull(reader, nameof(reader));
             var s = reader.ReadElementString();
             var val = Parse(s, CultureInfo.InvariantCulture);
             m_Value = val.m_Value;
@@ -124,7 +137,7 @@ namespace Qowaiv.Financial
         /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            Guard.NotNull(writer, "writer");
+            Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToUnformattedString());
         }
 
@@ -133,10 +146,7 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates an IBAN from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(string);
-        }
+        void IJsonSerializable.FromJson() => m_Value = default(string);
 
         /// <summary>Generates an IBAN from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -151,19 +161,19 @@ namespace Qowaiv.Financial
         /// <param name="jsonInteger">
         /// The JSON integer that represents the IBAN.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported); }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates an IBAN from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the IBAN.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported); }
+        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates an IBAN from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the IBAN.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported); }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts an IBAN into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
@@ -181,8 +191,14 @@ namespace Qowaiv.Financial
         {
             get
             {
-                if (m_Value == default(string)) { return "IBAN: (empty)"; }
-                if (m_Value == Unknown.m_Value) { return "IBAN: (unknown)"; }
+                if (m_Value == default(string))
+                {
+                    return "IBAN: (empty)";
+                }
+                if (m_Value == Unknown.m_Value)
+                {
+                    return "IBAN: (unknown)";
+                }
                 return "IBAN: " + ToFormattedString();
             }
         }
@@ -190,58 +206,57 @@ namespace Qowaiv.Financial
         /// <summary>Formats the IBAN without spaces.</summary>
         private string ToUnformattedString()
         {
-            if (m_Value == default(string)) { return string.Empty; }
-            if (m_Value == Unknown.m_Value) { return "?"; }
+            if (m_Value == default(string))
+            {
+                return string.Empty;
+            }
+            if (m_Value == Unknown.m_Value)
+            {
+                return "?";
+            }
             return m_Value;
         }
         /// <summary>Formats the IBAN without spaces as lowercase.</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
             Justification = "This is not about normalization but formatting.")]
-        private string ToUnformattedLowercaseString()
-        {
-            return ToUnformattedString().ToLowerInvariant();
-        }
+        private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();
+
 
         /// <summary>Formats the IBAN with spaces.</summary>
         private string ToFormattedString()
         {
-            if (m_Value == default(string)) { return string.Empty; }
-            if (m_Value == Unknown.m_Value) { return "?"; }
+            if (m_Value == default(string))
+            {
+                return string.Empty;
+            }
+            if (m_Value == Unknown.m_Value)
+            {
+                return "?";
+            }
             return FormattedPattern.Replace(m_Value, "$0 ");
         }
         /// <summary>Formats the IBAN with spaces as lowercase.</summary>
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
             Justification = "This is not about normalization but formatting.")]
-        private string ToFormattedLowercaseString()
-        {
-            return ToFormattedString().ToLowerInvariant();
-        }
+        private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
+
 
         private static readonly Regex FormattedPattern = new Regex(@"\w{4}(?!$)", RegexOptions.Compiled);
 
         /// <summary>Returns a <see cref="string"/> that represents the current IBAN.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current IBAN.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current IBAN.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current IBAN.</summary>
         /// <param name="format">
@@ -260,14 +275,15 @@ namespace Qowaiv.Financial
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            string formatted;
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out formatted))
+            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
             // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { return ToUnformattedString(); }
-
+            if (string.IsNullOrEmpty(format))
+            {
+                return ToUnformattedString();
+            }
             // Apply the format.
             return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
         }
@@ -287,11 +303,11 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) { return obj is InternationalBankAccountNumber && Equals((InternationalBankAccountNumber)obj); }
+        public override bool Equals(object obj) => obj is InternationalBankAccountNumber && Equals((InternationalBankAccountNumber)obj);
 
         /// <summary>Returns true if this instance and the other <see cref="InternationalBankAccountNumber"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="InternationalBankAccountNumber"/> to compare with.</param>
-        public bool Equals(InternationalBankAccountNumber other) { return m_Value == other.m_Value; }
+        public bool Equals(InternationalBankAccountNumber other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this IBAN.</summary>
         /// <returns>
@@ -302,18 +318,12 @@ namespace Qowaiv.Financial
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(InternationalBankAccountNumber left, InternationalBankAccountNumber right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(InternationalBankAccountNumber left, InternationalBankAccountNumber right) => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(InternationalBankAccountNumber left, InternationalBankAccountNumber right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(InternationalBankAccountNumber left, InternationalBankAccountNumber right) => !(left == right);
 
         #endregion
 
@@ -356,16 +366,16 @@ namespace Qowaiv.Financial
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(InternationalBankAccountNumber other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
+        public int CompareTo(InternationalBankAccountNumber other) => string.Compare(m_Value, other.m_Value, StringComparison.Ordinal);
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts an IBAN to a <see cref="string"/>.</summary>
-        public static explicit operator string(InternationalBankAccountNumber val) { return val.ToString(); }
+        public static explicit operator string(InternationalBankAccountNumber val) => val.ToString();
         /// <summary>Casts a <see cref="string"/> to a IBAN.</summary>
-        public static explicit operator InternationalBankAccountNumber(string str) { return InternationalBankAccountNumber.Parse(str, CultureInfo.InvariantCulture); }
+        public static explicit operator InternationalBankAccountNumber(string str) => Parse(str, CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -381,10 +391,7 @@ namespace Qowaiv.Financial
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static InternationalBankAccountNumber Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
+        public static InternationalBankAccountNumber Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to an IBAN.</summary>
         /// <param name="s">
@@ -401,8 +408,7 @@ namespace Qowaiv.Financial
         /// </exception>
         public static InternationalBankAccountNumber Parse(string s, IFormatProvider formatProvider)
         {
-            InternationalBankAccountNumber val;
-            if (InternationalBankAccountNumber.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out InternationalBankAccountNumber val))
             {
                 return val;
             }
@@ -420,12 +426,11 @@ namespace Qowaiv.Financial
         /// </returns>
         public static InternationalBankAccountNumber TryParse(string s)
         {
-            InternationalBankAccountNumber val;
-            if (InternationalBankAccountNumber.TryParse(s, CultureInfo.CurrentCulture, out val))
+            if (TryParse(s, CultureInfo.CurrentCulture, out InternationalBankAccountNumber val))
             {
                 return val;
             }
-            return InternationalBankAccountNumber.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to an IBAN.
@@ -462,7 +467,7 @@ namespace Qowaiv.Financial
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out InternationalBankAccountNumber result)
         {
-            result = InternationalBankAccountNumber.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
@@ -478,10 +483,9 @@ namespace Qowaiv.Financial
                 var str = Parsing.ClearSpacingToUpper(s);
                 var country = Country.TryParse(str.Substring(0, 2));
 
-                Regex localizedPattern;
 
                 if (str.Length > 11 && !country.IsEmptyOrUnknown() &&
-                    (!LocalizedPatterns.TryGetValue(country, out localizedPattern) || localizedPattern.IsMatch(str)))
+                    (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern) || localizedPattern.IsMatch(str)))
                 {
                     var validation = Alphanumeric.Replace(str.Substring(4) + str.Substring(0, 4), AlphanumericToNumeric);
 
@@ -495,7 +499,7 @@ namespace Qowaiv.Financial
                     }
                     if ((sum % 97) == 1)
                     {
-                        result = new InternationalBankAccountNumber() { m_Value = str };
+                        result = new InternationalBankAccountNumber { m_Value = str };
                         return true;
                     }
                 }
@@ -508,10 +512,7 @@ namespace Qowaiv.Financial
         #region Validation
 
         /// <summary>Returns true if the val represents a valid IBAN, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid IBAN, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)

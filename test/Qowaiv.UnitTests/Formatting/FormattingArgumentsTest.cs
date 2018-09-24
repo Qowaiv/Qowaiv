@@ -1,15 +1,15 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
-using Qowaiv.UnitTests.TestTools;
+using Qowaiv.TestTools;
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Formatting
 {
     /// <summary>Tests the formatting arguments SVO.</summary>
-    [TestFixture]
     public class FormattingArgumentsTest
     {
         /// <summary>The test instance for most tests.</summary>
@@ -18,7 +18,8 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_IFormattableNull_IsNull()
         {
-            string act = TestStruct.ToString((IFormattable)null);
+            IFormattable formatter = null;
+            string act = TestStruct.ToString(formatter);
             string exp = null;
 
             Assert.AreEqual(exp, act);
@@ -144,28 +145,28 @@ namespace Qowaiv.UnitTests.Formatting
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
-        public void SerializeDeserialize_Empty_AreEqual()
+        public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new FormattableArgumentsSerializeObject()
             {
                 Id = 17,
-                Obj = FormattingArgumentsTest.TestStruct,
+                Obj = default(FormattingArguments),
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new FormattableArgumentsSerializeObject()
             {
                 Id = 17,
-                Obj = FormattingArgumentsTest.TestStruct,
+                Obj = default(FormattingArguments),
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -185,15 +186,9 @@ namespace Qowaiv.UnitTests.Formatting
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            DateTimeAssert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
-
-        [Test]
-        public void GetSchema_None_IsNull()
-        {
-            //IXmlSerializable obj = TestStruct;
-            //Assert.IsNull(obj.GetSchema());
-        }
+      
 
         #endregion
 
@@ -216,58 +211,59 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
-            Assert.IsTrue(FormattingArguments.None.Equals(FormattingArguments.None));
+            Assert.IsTrue(FormattingArguments.None.Equals(default(FormattingArguments)));
         }
 
         [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
-            Assert.IsTrue(FormattingArgumentsTest.TestStruct.Equals(FormattingArgumentsTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals(new FormattingArguments("0.000", new CultureInfo("fr-BE"))));
         }
 
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(FormattingArgumentsTest.TestStruct.Equals(FormattingArguments.None));
+            Assert.IsFalse(TestStruct.Equals(FormattingArguments.None));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(FormattingArguments.None.Equals(FormattingArgumentsTest.TestStruct));
+            Assert.IsFalse(FormattingArguments.None.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
-            Assert.IsTrue(FormattingArgumentsTest.TestStruct.Equals((object)FormattingArgumentsTest.TestStruct));
+            object obj = TestStruct;
+            Assert.IsTrue(TestStruct.Equals(obj));
         }
 
         [Test]
         public void Equals_TestStructNull_IsFalse()
         {
-            Assert.IsFalse(FormattingArgumentsTest.TestStruct.Equals(null));
+            Assert.IsFalse(TestStruct.Equals(null));
         }
 
         [Test]
         public void Equals_TestStructObject_IsFalse()
         {
-            Assert.IsFalse(FormattingArgumentsTest.TestStruct.Equals(new object()));
+            Assert.IsFalse(TestStruct.Equals(new object()));
         }
 
         [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
-            var l = FormattingArgumentsTest.TestStruct;
-            var r = FormattingArgumentsTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsTrue(l == r);
         }
 
         [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
-            var l = FormattingArgumentsTest.TestStruct;
-            var r = FormattingArgumentsTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsFalse(l != r);
         }
 

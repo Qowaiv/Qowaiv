@@ -154,6 +154,6 @@ namespace Qowaiv.DomainModel.UnitTests
 
     internal class GuidEntity : Entity<Guid>
     {
-        public void NewId(Guid? id = null) => Id = id ?? Guid.NewGuid();
+        public void NewId(Guid? id = null) => SetId(id ?? Guid.NewGuid());
     }
 }

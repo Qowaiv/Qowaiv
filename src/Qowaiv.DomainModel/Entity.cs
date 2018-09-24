@@ -27,22 +27,24 @@ namespace Qowaiv.DomainModel
         public Entity(TId id)
         {
             Guard.NotDefault(id, nameof(id));
-            _id = id;
+            SetId(id);
         }
 
         /// <inheritdoc />
-        public TId Id
-        {
-            get => _id;
-            protected set => _id = IsTransient
-                ? Guard.NotDefault(value, nameof(Id))
-                : throw new NotSupportedException(QowaivDomainModelMessages.NotSupported_UpdateEntityId);
-        }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private TId _id;
-
+        public TId Id { get; private set; }
+ 
         /// <inheritdoc />
         public bool IsTransient => default(TId).Equals(Id);
+
+        /// <summary>Initializes the identifier of the entity.</summary>
+        protected void SetId(TId id)
+        {
+            if(!IsTransient)
+            {
+                throw new NotSupportedException(QowaivDomainModelMessages.NotSupported_UpdateEntityId);
+            }
+            Id = Guard.NotDefault(id, nameof(id));
+        }
 
         /// <inheritdoc />
         public override bool Equals(object obj) => Equals(obj as Entity<TId>);

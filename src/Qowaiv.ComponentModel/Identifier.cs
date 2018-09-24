@@ -80,7 +80,7 @@ namespace Qowaiv.ComponentModel
         }
         private static bool IsIdentfier(PropertyInfo property)
         {
-            return "ID" == property.Name.ToLowerInvariant()
+            return "ID" == property.Name.ToUpperInvariant()
                 && IdentifierTypes.Contains(property.PropertyType);
         }
         private static readonly Type[] IdentifierTypes = { typeof(Guid),typeof(Uuid), typeof(int), typeof(long) };

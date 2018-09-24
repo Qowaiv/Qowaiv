@@ -70,7 +70,7 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The postal code {0} is not valid for {1}..
+        ///   Looks up a localized string similar to The postal code {0} is not valid for {1:f}..
         /// </summary>
         internal static string PostalCodeValidator_ErrorMessage {
             get {

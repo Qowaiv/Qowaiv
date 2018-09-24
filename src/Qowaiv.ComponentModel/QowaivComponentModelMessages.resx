@@ -121,7 +121,7 @@
     <value>The value of the {0} field is not allowed.</value>
   </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
-    <value>The postal code {0} is not valid for {1}.</value>
+    <value>The postal code {0} is not valid for {1:f}.</value>
   </data>
   <data name="ValidationRule_ResourcePropertyNotStringType" xml:space="preserve">
     <value>The property '{1}' on resource type '{0}' is not a string type.</value>

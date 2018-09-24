@@ -1,56 +1,72 @@
-﻿using Qowaiv.ComponentModel.Messages;
-using System.ComponentModel.DataAnnotations;
+﻿using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.ComponentModel.Messages;
 using Qowaiv.Globalization;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Linq.Expressions;
 
 namespace Qowaiv.ComponentModel.Rules.Globalization
 {
+    public partial class PostalCodeRule
+    {
+        /// <summary>Creates a postal code rule for the specified model.</summary>
+        /// <typeparam name="TModel">
+        /// The model to validate.
+        /// </typeparam>
+        /// <param name="getPostalCode">
+        /// The expression to retrieve the postal code.
+        /// </param>
+        /// <param name="getCountry">
+        /// The expression to retrieve the country to validate the postal code for.
+        /// </param>
+        public static PostalCodeRule<TModel> For<TModel>(
+            Expression<Func<TModel, PostalCode>> getPostalCode, 
+            Expression<Func<TModel, Country>> getCountry)
+            where TModel: class
+        {
+            Guard.NotNull(getPostalCode, nameof(getPostalCode));
+            Guard.NotNull(getCountry, nameof(getCountry));
+
+            var postalCodeName = ExpressionRule.GetMemberName(getPostalCode);
+
+            return new PostalCodeRule<TModel>(getPostalCode.Compile(), getCountry.Compile(), postalCodeName);
+        }
+    }
+
     /// <summary>Rule that can validate a <see cref="Qowaiv.PostalCode"/> 
     /// being valid for a specific <see cref="Qowaiv.Globalization.Country"/>.
     /// </summary>
-    public class PostalCodeRule : ValidationRule
+    public class PostalCodeRule<TModel> : ValidationRule<TModel>
+        where TModel : class
     {
-        /// <summary>Creates a new instance of a <see cref="PostalCodeRule"/>.</summary>
-        /// <param name="postalCode">
-        /// The postal code to validate.
-        /// </param>
-        /// <param name="country">
-        /// The country to validate it for.
-        /// </param>
-        /// <param name="postalCodeName">
-        /// The name of the <see cref="Qowaiv.PostalCode"/> property in the model.
-        /// </param>
-        /// <param name="countryName">
-        /// The name of the <see cref="Qowaiv.Globalization.Country"/> property in the model.
-        /// </param>
-        public PostalCodeRule(PostalCode postalCode, Country country, string postalCodeName, string countryName)
-            : base(postalCodeName, countryName)
+        /// <summary>Creates a new instance of the rule.</summary>
+        internal PostalCodeRule(Func<TModel, PostalCode> postalCode, Func<TModel, Country> country, string postalCodePropertyName)
+            : base(postalCodePropertyName)
         {
-            PostalCode = postalCode;
-            Country = country;
+            getPostalCode = postalCode;
+            getCountry = country;
         }
 
-        /// <summary>Gets the involved postal code.</summary>
-        public PostalCode PostalCode { get; }
-        /// <summary>Gets the involved country.</summary>
-        public Country Country { get; }
-
-        /// <summary>Returns true if postal code is valid (or if the postal code or country is empty or unknown).</summary>
-        protected override bool IsValid(ValidationContext validationContext)
+        /// <inheritdoc />
+        public override IEnumerable<ValidationResult> Validate(ValidationContext<TModel> validationContext)
         {
-            return PostalCode.IsEmptyOrUnknown() || Country.IsEmptyOrUnknown() || PostalCode.IsValid(Country);
+            Guard.NotNull(validationContext, nameof(validationContext));
+
+            var postalCode = getPostalCode(validationContext.Model);
+            var country = getCountry(validationContext.Model);
+
+            if (!postalCode.IsEmptyOrUnknown() && !postalCode.IsValid(country))
+            {
+                yield return ValidationMessage.Error(string.Format(CultureInfo.CurrentCulture, ErrorMessageString(), postalCode, country), new[] { PropertyNames[0] });
+            }
         }
 
         /// <summary>Gets the error message.</summary>
-        protected override Func<string> ErrorMessageString => () => string.Format(QowaivComponentModelMessages.PostalCodeValidator_ErrorMessage, PostalCode, Country.DisplayName);
+        protected override Func<string> ErrorMessageString => () => QowaivComponentModelMessages.PostalCodeValidator_ErrorMessage;
 
-        /// <summary>Returns <see cref="ValidationMessage.None"/> if the <see cref="PostalCode"/> 
-        /// is valid for a specific <see cref="Country"/>, otherwise false.
-        /// </summary>
-        public static ValidationResult IsValid(PostalCode postalCode, Country country, string postalCodeName, string countryName)
-        {
-            var rule = new PostalCodeRule(postalCode, country, postalCodeName, countryName);
-            return rule.Validate(null);
-        }
+        private readonly Func<TModel, PostalCode> getPostalCode;
+        private readonly Func<TModel, Country> getCountry;
     }
 }

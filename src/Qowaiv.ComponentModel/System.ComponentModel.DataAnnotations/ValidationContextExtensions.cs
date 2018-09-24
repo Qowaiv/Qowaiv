@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using Qowaiv.ComponentModel.DataAnnotations;
 
 namespace System.ComponentModel.DataAnnotations
 {
@@ -6,10 +7,23 @@ namespace System.ComponentModel.DataAnnotations
     public static class ValidationContextExtensions
     {
         /// <summary>Returns the service that provides custom validation.</summary>
-        public static T GetSevice<T>(this ValidationContext validationContext)
+        public static TService GetSevice<TService>(this ValidationContext validationContext)
         {
             Guard.NotNull(validationContext, nameof(validationContext));
-            return (T)validationContext.GetService(typeof(T));
+            return (TService)validationContext.GetService(typeof(TService));
+        }
+
+        /// <summary>Casts a validation context to a typed validation context.</summary>
+        public static ValidationContext<TModel> Typed<TModel>(this ValidationContext validationContext)
+            where TModel: class
+        {
+            if (validationContext is null)
+            {
+                return null;
+            }
+            Guard.IsTypeOf<TModel>(validationContext.ObjectInstance, nameof(validationContext.ObjectInstance));
+
+            return new ValidationContext<TModel>(validationContext);
         }
     }
 }

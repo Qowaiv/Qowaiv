@@ -1,5 +1,6 @@
 ﻿using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Linq;
 namespace Qowaiv.ComponentModel.Rules
 {
     /// <summary>Represents a <see cref="List{T}"/> of <see cref="IValidationRule"/>s.</summary>
+    [Obsolete("Use ValidationRuleSet instead.")]
     public class ValidationRules : List<IValidationRule>
     {
         /// <summary>Creates a new instance of <see cref="ValidationRules"/>.</summary>

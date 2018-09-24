@@ -1,4 +1,5 @@
-﻿using Qowaiv.ComponentModel.Messages;
+﻿using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.ComponentModel.Messages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,8 +12,8 @@ namespace Qowaiv.ComponentModel.Rules
     /// <summary>Represents a validation rule that is intended to be validated
     /// during <see cref="IValidatableObject.Validate(ValidationContext)"/>.
     /// </summary>
-    [Obsolete("Use ValidationRule<TModel> instead.")]
-    public abstract class ValidationRule : IValidationRule
+    public abstract class ValidationRule<TModel> : IValidationRule<TModel>
+        where TModel : class
     {
         /// <summary>Creates a new instance of a <see cref="ValidationRule"/>.</summary>
         /// <param name="propertyNames">
@@ -89,49 +90,7 @@ namespace Qowaiv.ComponentModel.Rules
                 ErrorMessageResourceName));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="validationContext"></param>
-        /// <returns></returns>
-        public virtual ValidationResult Validate(ValidationContext validationContext)
-        {
-            if (IsValid(validationContext))
-            {
-                return ValidationMessage.None;
-            }
-            return ValidationMessage.Error(string.Format(CultureInfo.CurrentCulture, ErrorMessageString(), PropertyNames), PropertyNames);
-        }
-
-        /// <Summary>Determines whether the specified value of the object is valid.</Summary>
-        /// <param name="validationContext">
-        /// </param>
-        /// <returns>
-        /// <code>true</code> if the specified value is valid, otherwise <code>false</code>.
-        /// </returns>
-        protected abstract bool IsValid(ValidationContext validationContext);
-
-        /// <summary>Creates an <see cref="IValidationRule"/> based on the expression.</summary>
-        /// <param name="isValid">
-        /// The isValid expression.
-        /// </param>
-        /// <param name="message">
-        /// The message to show when the rule is not valid.
-        /// </param>
-        /// <param name="propertyNames">
-        /// The involved property names.
-        /// </param>
-        /// <remarks>
-        /// If the <code>bool?</code> has no value, the rule is assumed not to be invalid.
-        /// This helps in scenario's like these:
-        /// <code>
-        /// ValidationRule.For((context) => context.GetService&lt;SomeService&gt;()?.IsValid(), "Error");
-        /// </code>
-        /// If The service could not be resolved, the rule will be ignored.
-        /// </remarks>
-        public static IValidationRule For(Func<ValidationContext, bool?> isValid, Func<string> message, params string[] propertyNames)
-        {
-            return new ValidationExpression(isValid, message, propertyNames);
-        }
+        /// <inheritdoc />
+        public abstract IEnumerable<ValidationResult> Validate(ValidationContext<TModel> validationContext);
     }
 }

@@ -56,7 +56,12 @@ namespace Qowaiv
                     [a-z]{2,}
                 )
                 $
-            ", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+            ",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+
+        private static readonly Regex DisplayNamePattern = new Regex(
+            "[^<]+<(?<email>[^<>]{0,254})>",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents an empty/not set email address.</summary>
         public static readonly EmailAddress Empty;
@@ -442,7 +447,14 @@ namespace Qowaiv
             }
             if (IsValid(s, formatProvider))
             {
-                result = new EmailAddress { m_Value = s.ToLowerInvariant() };
+                var index = s.IndexOf('<');
+
+                // If display name is included trim.
+                var trim = index == -1
+                    ? s
+                    : s.Substring(index + 1, s.Length - index - 2);
+
+                result = new EmailAddress { m_Value = trim.ToLowerInvariant() };
                 return true;
             }
             return false;
@@ -460,9 +472,14 @@ namespace Qowaiv
             Justification = "Satisfies the static Qowaiv SVO contract.")]
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return !string.IsNullOrWhiteSpace(val)
-                && val.Length <= MaxLength
-                && Pattern.IsMatch(val);
+            if(string.IsNullOrWhiteSpace(val))
+            {
+                return false;
+            }
+
+            var match = DisplayNamePattern.Match(val);
+            var test = match.Success ? match.Groups["email"].Value : val;
+            return test.Length <= MaxLength && Pattern.IsMatch(test);
         }
 
         #endregion

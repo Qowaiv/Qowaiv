@@ -179,6 +179,14 @@ namespace Qowaiv.UnitTests
             }
         }
 
+        [Test]
+        public void Parse_WithDisplayName_WithoutDisplayName()
+        {
+            var email = EmailAddress.Parse("John Doe <john.doe@example.com>");
+            var expected = EmailAddress.Parse("john.doe@example.com");
+            Assert.AreEqual(expected, email);
+        }
+
         #endregion
 
         #region (XML) (De)serialization tests
@@ -981,6 +989,7 @@ namespace Qowaiv.UnitTests
         [TestCase("=local==name=with=@equality.com")]
         [TestCase("+local++name+with+@equality.com")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
+        [TestCase("John Doe <john.doe@example.com>")]
         public void ValidEmailAddresses(string email)
         {
             Assert.IsTrue(EmailAddress.IsValid(email), email);

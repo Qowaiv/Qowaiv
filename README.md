@@ -33,6 +33,7 @@ players in competitor-versus-competitor games.
 
 ### Email address
 Represents a (single) email address, including IPv4 domains.
+A display name (like John Doe <john.doe@example.com>) is stripped to john.doe@example.com.
 
 ### Email address collection
 Represents a collection of unique email addresses, excluding the empty and unknown email address.

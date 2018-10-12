@@ -51,10 +51,7 @@ namespace Qowaiv
         /// </returns>
         public bool IsLeapYear
         {
-            get
-            {
-                return !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
-            }
+            get => !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
         }
 
         #endregion
@@ -62,10 +59,10 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the year is empty, otherwise false.</summary>
-        public bool IsEmpty() { return m_Value == default(Int16); }
+        public bool IsEmpty() => m_Value == default(short);
 
         /// <summary>Returns true if the year is unknown, otherwise false.</summary>
-        public bool IsUnknown() { return m_Value == Year.Unknown.m_Value; }
+        public bool IsUnknown() => m_Value == Unknown.m_Value;
 
         /// <summary>Returns true if the year is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();

@@ -21,7 +21,6 @@ namespace Qowaiv
 {
     /// <summary>Represents a month.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a month.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [TypeConverter(typeof(MonthTypeConverter))]
     public struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
@@ -108,8 +107,6 @@ namespace Qowaiv
         /// <summary>Returns true if the month is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
-
-
         /// <summary>Gets the full name of the month.</summary>
         public string GetFullName(IFormatProvider formatProvider)
         {
@@ -124,6 +121,21 @@ namespace Qowaiv
             return IsEmptyOrUnknown()
                 ? ToDefaultString()
                 : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
+        }
+
+        /// <summary>Returns the number of days for the month.</summary>
+        /// <param name="year">
+        /// The year to ask the number of days for.
+        /// </param>
+        /// <remarks>
+        /// If the year of month is empty or unknown -1 is returned.
+        /// </remarks>
+        public int Days(Year year)
+        {
+            return
+                year.IsEmptyOrUnknown() || IsEmptyOrUnknown()
+                ? -1
+                : DateTime.DaysInMonth((int)year, m_Value);
         }
 
         #endregion

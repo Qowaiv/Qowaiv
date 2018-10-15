@@ -6,6 +6,7 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <SignAssembly>false</SignAssembly>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>

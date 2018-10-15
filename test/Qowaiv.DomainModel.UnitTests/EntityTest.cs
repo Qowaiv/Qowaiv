@@ -1,6 +1,8 @@
 using NUnit.Framework;
+using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.TestTools;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests
 {
@@ -41,6 +43,18 @@ namespace Qowaiv.DomainModel.UnitTests
             (
                 () => entity.NewId()
             );
+        }
+
+        [Test]
+        public void SetFullName_TooLong_Throws()
+        {
+            var entity = new GuidEntity();
+
+            var exception = Assert.Throws<ValidationException>
+            (
+                () => entity.FullName = "1234"
+            );
+            Assert.AreEqual("The field Full name must be a string or array type with a maximum length of '3'.", exception.Message);
         }
 
         [Test]
@@ -155,5 +169,12 @@ namespace Qowaiv.DomainModel.UnitTests
     internal class GuidEntity : Entity<Guid>
     {
         public void NewId(Guid? id = null) => SetId(id ?? Guid.NewGuid());
+
+        [Mandatory, MaxLength(3), Display(Name = "Full name")]
+        public string FullName
+        {
+            get => GetProperty<string>();
+            set => SetProperty(value);
+        }
     }
 }

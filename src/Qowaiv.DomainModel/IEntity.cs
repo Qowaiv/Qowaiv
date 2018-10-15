@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel
@@ -7,7 +8,7 @@ namespace Qowaiv.DomainModel
     /// <typeparam name="TId">
     /// The type of the identifier.
     /// </typeparam>
-    public interface IEntity<TId> : IEquatable<IEntity<TId>>
+    public interface IEntity<TId> : IEquatable<IEntity<TId>>, INotifyPropertyChanged
         where TId : struct
     {
         /// <summary>The identifier of the entity.</summary>

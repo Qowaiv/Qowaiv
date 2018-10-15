@@ -43,6 +43,9 @@ namespace Qowaiv.DomainModel
         /// <inheritdoc />
         public bool IsTransient => default(TId).Equals(Id);
 
+        /// <summary>Returns true if any of the properties is dirty, otherwise false.</summary>
+        public bool IsDirty => _properties.IsDirty;
+
         /// <summary>Initializes the identifier of the entity.</summary>
         protected void SetId(TId id)
         {
@@ -56,8 +59,10 @@ namespace Qowaiv.DomainModel
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>Gets a property (value).</summary>
         protected T GetProperty<T>([CallerMemberName] string propertyName = null) => (T)_properties[propertyName].Value;
 
+        /// <summary>Sets a property (value).</summary>
         protected void SetProperty(object value, [CallerMemberName] string propertyName = null)
         {
             if (_properties[propertyName].SetValue(value, this) && PropertyChanged != null)

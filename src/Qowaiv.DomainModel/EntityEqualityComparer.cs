@@ -25,7 +25,7 @@ namespace Qowaiv.DomainModel
         }
 
         /// <summary>Gets a hash code for the entity.</summary>
-        /// <exception cref="obj">
+        /// <exception cref="ArgumentNullException">
         /// If the entity is null.
         /// </exception>
         /// <exception cref="NotSupportedException">

@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.TestTools;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -11,14 +10,14 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Ctor_NewlyCreated_IsTransient()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             Assert.True(entity.IsTransient);
         }
 
         [Test]
         public void SetId_NotTransient()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             entity.NewId();
 
             Assert.False(entity.IsTransient);
@@ -27,7 +26,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void UpdateId_Default_ArgumentException()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             Assert.Throws<ArgumentException>
             (
                 () => entity.NewId(Guid.Empty)
@@ -37,7 +36,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void UpdateId_NotSupported()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             entity.NewId();
             Assert.Throws<NotSupportedException>
             (
@@ -46,9 +45,21 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
+        public void SetFullName_EmptyValue_Throws()
+        {
+            var entity = new SimpleEntity();
+
+            var exception = Assert.Throws<ValidationException>
+            (
+                () => entity.FullName = ""
+            );
+            Assert.AreEqual("The Full name field is required.", exception.Message);
+        }
+
+        [Test]
         public void SetFullName_TooLong_Throws()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
 
             var exception = Assert.Throws<ValidationException>
             (
@@ -58,16 +69,27 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
+        public void SetFullName_IsSetAndDirty()
+        {
+            var entity = new SimpleEntity
+            {
+                FullName = "ABC"
+            };
+            Assert.AreEqual("ABC", entity.FullName);
+            Assert.IsTrue(entity.IsDirty);
+        }
+
+        [Test]
         public void Equals_Null_False()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             Assert.False(entity.Equals((object)null));
         }
 
         [Test]
         public void Equals_OtherType_False()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             var other = new Entity<Guid>();
             Assert.False(entity.Equals(other));
         }
@@ -75,17 +97,17 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Equals_BothIsTransient_False()
         {
-            var entity = new GuidEntity();
-            object other = new GuidEntity();
+            var entity = new SimpleEntity();
+            object other = new SimpleEntity();
             Assert.False(entity.Equals(other));
         }
 
         [Test]
         public void Equals_DifferentIds_False()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             entity.NewId();
-            var other = new GuidEntity();
+            var other = new SimpleEntity();
             other.NewId();
             Assert.False(entity.Equals(other));
         }
@@ -93,9 +115,9 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Equals_SameIds_True()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             entity.NewId();
-            var other = new GuidEntity();
+            var other = new SimpleEntity();
             other.NewId(entity.Id);
             Assert.True(entity.Equals(other));
         }
@@ -103,9 +125,9 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Equality_SameId_IsTrue()
         {
-            var left = new GuidEntity();
+            var left = new SimpleEntity();
             left.NewId();
-            var right = new GuidEntity();
+            var right = new SimpleEntity();
             right.NewId(left.Id);
 
             Assert.IsTrue(left == right);
@@ -113,9 +135,9 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Inequality_SameId_IsFalse()
         {
-            var left = new GuidEntity();
+            var left = new SimpleEntity();
             left.NewId();
-            var right = new GuidEntity();
+            var right = new SimpleEntity();
             right.NewId(left.Id);
 
             Assert.False(left != right);
@@ -126,14 +148,14 @@ namespace Qowaiv.DomainModel.UnitTests
         {
             Assert.Throws<NotSupportedException>
             (
-                () => new GuidEntity().GetHashCode()
+                () => new SimpleEntity().GetHashCode()
             );
         }
 
         [Test]
         public void GetHashCode_SameValue()
         {
-            var entity = new GuidEntity();
+            var entity = new SimpleEntity();
             entity.NewId();
 
             var expected = entity.GetHashCode();
@@ -163,18 +185,6 @@ namespace Qowaiv.DomainModel.UnitTests
             DebuggerDisplayAssert.HasResult(
                 "Qowaiv.DomainModel.Entity`1[System.Guid], ID: 10fc7ca7-a781-45df-81fa-35f3246a5e39",
                 new Entity<Guid>(id));
-        }
-    }
-
-    internal class GuidEntity : Entity<Guid>
-    {
-        public void NewId(Guid? id = null) => SetId(id ?? Guid.NewGuid());
-
-        [Mandatory, MaxLength(3), Display(Name = "Full name")]
-        public string FullName
-        {
-            get => GetProperty<string>();
-            set => SetProperty(value);
         }
     }
 }

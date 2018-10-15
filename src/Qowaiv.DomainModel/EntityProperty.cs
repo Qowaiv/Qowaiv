@@ -42,7 +42,7 @@ namespace Qowaiv.DomainModel
 
             var context = new ValidationContext(entity)
             {
-                MemberName = Annotations.DisplayAttribute.Name
+                MemberName = Annotations.Descriptor.Name
             };
 
             // required is done separately.

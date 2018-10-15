@@ -2,6 +2,7 @@
 // Classes implementing "IEquatable<T>" should be sealed
 // The Implementation takes types into account, and uses an equality comparer.
 
+using Qowaiv.ComponentModel.DataAnnotations;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -31,30 +32,22 @@ namespace Qowaiv.DomainModel
         /// </exception>
         public Entity(TId id) : this()
         {
-            Guard.NotDefault(id, nameof(id));
-            SetId(id);
+            Id = Guard.NotDefault(id, nameof(id));
         }
 
         /// <inheritdoc />
-        public TId Id => m_Id;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private TId m_Id;
+        [Mandatory, Immutable]
+        public TId Id
+        {
+            get => GetProperty<TId>();
+            set => SetProperty(value);
+        }
 
         /// <inheritdoc />
-        public bool IsTransient => default(TId).Equals(Id);
+        public bool IsTransient => default(TId).Equals(Id) || _properties[nameof(Id)].IsDirty;
 
         /// <summary>Returns true if any of the properties is dirty, otherwise false.</summary>
         public bool IsDirty => _properties.IsDirty;
-
-        /// <summary>Initializes the identifier of the entity.</summary>
-        protected void SetId(TId id)
-        {
-            if (!IsTransient)
-            {
-                throw new NotSupportedException(QowaivDomainModelMessages.NotSupported_UpdateEntityId);
-            }
-            m_Id = Guard.NotDefault(id, nameof(id));
-        }
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;

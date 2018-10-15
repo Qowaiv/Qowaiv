@@ -36,7 +36,7 @@ namespace Qowaiv.DomainModel
         {
             Guard.NotNull(obj, nameof(obj));
 
-            return obj.IsTransient
+            return default(TId).Equals(obj.Id)
                 ? throw new NotSupportedException(QowaivDomainModelMessages.NotSupported_GetHashCodeOnIsTransient)
                 : obj.Id.GetHashCode() ^ obj.GetType().GetHashCode();
         }

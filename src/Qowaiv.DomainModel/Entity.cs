@@ -5,6 +5,7 @@
 using Qowaiv.ComponentModel.DataAnnotations;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -20,7 +21,7 @@ namespace Qowaiv.DomainModel
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
         public Entity()
         {
-            _properties = EntityPropertyCollection.Create(GetType());
+            Properties =  PropertyCollection.Create(this);
         }
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
@@ -32,11 +33,14 @@ namespace Qowaiv.DomainModel
         /// </exception>
         public Entity(TId id) : this()
         {
-            Id = Guard.NotDefault(id, nameof(id));
+            Properties[nameof(Id)].Load(Guard.NotDefault(id, nameof(id)));
         }
 
+        /// <summary>Gets the (editable) properties of the entity.</summary>
+        public PropertyCollection Properties { get; }
+
         /// <inheritdoc />
-        [Mandatory, Immutable]
+        [Mandatory]
         public TId Id
         {
             get => GetProperty<TId>();
@@ -44,24 +48,39 @@ namespace Qowaiv.DomainModel
         }
 
         /// <inheritdoc />
-        public bool IsTransient => default(TId).Equals(Id) || _properties[nameof(Id)].IsDirty;
+        public bool IsTransient => default(TId).Equals(Id) || Properties[nameof(Id)].IsDirty;
 
         /// <summary>Returns true if any of the properties is dirty, otherwise false.</summary>
-        public bool IsDirty => _properties.IsDirty;
+        public bool IsDirty => Properties.IsDirty;
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>Gets a property (value).</summary>
-        protected T GetProperty<T>([CallerMemberName] string propertyName = null) => (T)_properties[propertyName].Value;
+        protected T GetProperty<T>([CallerMemberName] string propertyName = null) => (T)Properties[propertyName].Value;
 
         /// <summary>Sets a property (value).</summary>
+        /// <exception cref="ValidationException">
+        /// If the new value violates the property constraints.
+        /// </exception>
+        /// <remarks>
+        /// This will trigger the <see cref="PropertyChanged"/> on a change.
+        /// </remarks>
         protected void SetProperty(object value, [CallerMemberName] string propertyName = null)
         {
-            if (_properties[propertyName].SetValue(value, this) && PropertyChanged != null)
+            if (Properties[propertyName].Set(value) && PropertyChanged != null)
             {
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        /// <summary>Loads a property (value).</summary>
+        /// <remarks>
+        /// Will not trigger any validation constraints, and clears a potential dirty flag.
+        /// </remarks>
+        protected void LoadProperty(object value, string propertyName)
+        {
+            Properties[propertyName].Load(value);
         }
 
         /// <inheritdoc />
@@ -91,8 +110,6 @@ namespace Qowaiv.DomainModel
         {
             get => $"{base.ToString()}, ID: {(IsTransient ? "?" : Id.ToString())}";
         }
-
-        private readonly EntityPropertyCollection _properties;
 
         /// <summary>The comparer that deals with equals and hash codes.</summary>
         private static readonly EntityEqualityComparer<TId> _comparer = new EntityEqualityComparer<TId>();

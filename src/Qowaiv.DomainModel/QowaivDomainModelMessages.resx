@@ -120,7 +120,7 @@
   <data name="NotSupported_GetHashCodeOnIsTransient" xml:space="preserve">
     <value>Entities that are transient can not be stored in a hash table.</value>
   </data>
-  <data name="NotSupported_UpdateEntityId" xml:space="preserve">
-    <value>The identifier of en entity can not be updated once it is set.</value>
+  <data name="Validation_UpdateEntityId" xml:space="preserve">
+    <value>The identifier of an entity can not be updated once it is set.</value>
   </data>
 </root>

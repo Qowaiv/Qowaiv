@@ -6,13 +6,17 @@ using System.Diagnostics;
 namespace Qowaiv.DomainModel
 {
     /// <summary>Represents a editable property of an entity.</summary>
-    public class EntityProperty
+    public class Property
     {
         /// <summary>Creates a new instance of a property.</summary>
-        internal EntityProperty(AnnotatedProperty annotations)
+        internal Property(AnnotatedProperty annotations, object entity)
         {
             Annotations = annotations;
             _value = annotations.DefaultValue;
+            _context = new ValidationContext(entity)
+            {
+                MemberName = Annotations.Descriptor.Name
+            };
         }
 
         /// <summary>Gets the annotations of the property.</summary>
@@ -33,20 +37,22 @@ namespace Qowaiv.DomainModel
         public Type PropertyType => Annotations.Descriptor.PropertyType;
 
         /// <summary>Sets the value of the property.</summary>
-        internal bool SetValue<TId>(object value, IEntity<TId> entity) where TId : struct
+        /// <exception cref="ValidationException">
+        /// When the value is not allowed according to the validation attributes.
+        /// </exception>
+        /// <returns>
+        /// True if the value have been changed, false if the value equals the original value.
+        /// </returns>
+        public bool Set(object value)
         {
             if (_value == value)
             {
                 return false;
             }
 
-            var context = new ValidationContext(entity)
-            {
-                MemberName = Annotations.Descriptor.Name
-            };
 
             // required is done separately.
-            var required = Annotations.RequiredAttribute.GetValidationResult(value, context);
+            var required = Annotations.RequiredAttribute.GetValidationResult(value, _context);
             if (required != ValidationResult.Success)
             {
                 throw new ValidationException(required, Annotations.RequiredAttribute, value);
@@ -55,7 +61,7 @@ namespace Qowaiv.DomainModel
             // other validation attributes.
             foreach (var attr in Annotations.ValidationAttributes)
             {
-                var validationResult = attr.GetValidationResult(value, context);
+                var validationResult = attr.GetValidationResult(value, _context);
                 if (validationResult != ValidationResult.Success)
                 {
                     throw new ValidationException(validationResult, attr, value);
@@ -67,10 +73,23 @@ namespace Qowaiv.DomainModel
             return true;
         }
 
+        /// <summary>Loads the value of the property.</summary>
+        /// <remarks>
+        /// This implies that property is not (longer) dirty after loading,
+        /// and will not trigger any validation.
+        /// </remarks>
+        public virtual void Load(object value)
+        {
+            IsDirty = false;
+            _value = value;
+        }
+
         /// <inheritdoc />
         public override string ToString()
         {
             return $"{Annotations.DisplayAttribute.Name}, Value: {Value}{(IsDirty ? ", IsDirty" : "")}";
         }
+
+        private readonly ValidationContext _context;
     }
 }

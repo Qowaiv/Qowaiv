@@ -20,8 +20,8 @@ namespace Qowaiv.DomainModel
             return
                 x.GetType().Equals(y.GetType()) &&
                 x.Id.Equals(y.Id) &&
-                !x.IsTransient &&
-                !y.IsTransient;
+                !default(TId).Equals(x.Id) &&
+                !default(TId).Equals(y.Id);
         }
 
         /// <summary>Gets a hash code for the entity.</summary>

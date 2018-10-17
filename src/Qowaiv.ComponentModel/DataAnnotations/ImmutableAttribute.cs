@@ -34,7 +34,7 @@ namespace Qowaiv.ComponentModel.DataAnnotations
 
             return IsDefaultValue(current)
                 ? ValidationMessage.None
-                : ValidationMessage.Error("", validationContext.MemberName);
+                : ValidationMessage.Error(FormatErrorMessage(validationContext.MemberName), validationContext.MemberName);
         }
 
         private static bool IsDefaultValue(object value)

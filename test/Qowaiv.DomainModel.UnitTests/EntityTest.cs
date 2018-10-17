@@ -17,30 +17,28 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void SetId_NotTransient()
         {
-            var entity = new SimpleEntity();
-            entity.NewId();
-
+            var entity = new SimpleEntity(Guid.NewGuid());
+            
             Assert.False(entity.IsTransient);
         }
 
         [Test]
-        public void UpdateId_Default_ArgumentException()
+        public void UpdateId_Default_ValidationException()
         {
             var entity = new SimpleEntity();
-            Assert.Throws<ArgumentException>
+            Assert.Throws<ValidationException>
             (
-                () => entity.NewId(Guid.Empty)
+                () => entity.Id = Guid.Empty
             );
         }
 
         [Test]
-        public void UpdateId_NotSupported()
+        public void UpdateId_ValidationException()
         {
-            var entity = new SimpleEntity();
-            entity.NewId();
-            Assert.Throws<NotSupportedException>
+            var entity = new SimpleEntity(Guid.NewGuid());
+            Assert.Throws<ValidationException>
             (
-                () => entity.NewId()
+                () => entity.Id = Guid.NewGuid()
             );
         }
 
@@ -105,40 +103,32 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Equals_DifferentIds_False()
         {
-            var entity = new SimpleEntity();
-            entity.NewId();
-            var other = new SimpleEntity();
-            other.NewId();
+            var entity = new SimpleEntity(Guid.NewGuid());
+            var other = new SimpleEntity(Guid.NewGuid());
             Assert.False(entity.Equals(other));
         }
 
         [Test]
         public void Equals_SameIds_True()
         {
-            var entity = new SimpleEntity();
-            entity.NewId();
-            var other = new SimpleEntity();
-            other.NewId(entity.Id);
+            var entity = new SimpleEntity(Guid.NewGuid());
+            var other = new SimpleEntity(entity.Id);
             Assert.True(entity.Equals(other));
         }
 
         [Test]
         public void Equality_SameId_IsTrue()
         {
-            var left = new SimpleEntity();
-            left.NewId();
-            var right = new SimpleEntity();
-            right.NewId(left.Id);
+            var left = new SimpleEntity(Guid.NewGuid());
+            var right = new SimpleEntity(left.Id);
 
             Assert.IsTrue(left == right);
         }
         [Test]
         public void Inequality_SameId_IsFalse()
         {
-            var left = new SimpleEntity();
-            left.NewId();
-            var right = new SimpleEntity();
-            right.NewId(left.Id);
+            var left = new SimpleEntity(Guid.NewGuid());
+            var right = new SimpleEntity(left.Id);
 
             Assert.False(left != right);
         }
@@ -155,8 +145,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void GetHashCode_SameValue()
         {
-            var entity = new SimpleEntity();
-            entity.NewId();
+            var entity = new SimpleEntity(Guid.NewGuid());
 
             var expected = entity.GetHashCode();
 

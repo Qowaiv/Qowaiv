@@ -70,11 +70,11 @@ namespace Qowaiv.DomainModel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The identifier of en entity can not be updated once it is set..
+        ///   Looks up a localized string similar to The identifier of an entity can not be updated once it is set..
         /// </summary>
-        internal static string NotSupported_UpdateEntityId {
+        internal static string Validation_UpdateEntityId {
             get {
-                return ResourceManager.GetString("NotSupported_UpdateEntityId", resourceCulture);
+                return ResourceManager.GetString("Validation_UpdateEntityId", resourceCulture);
             }
         }
     }

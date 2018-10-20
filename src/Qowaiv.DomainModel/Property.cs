@@ -78,7 +78,7 @@ namespace Qowaiv.DomainModel
         /// This implies that property is not (longer) dirty after loading,
         /// and will not trigger any validation.
         /// </remarks>
-        public virtual void Load(object value)
+        public virtual void Init(object value)
         {
             IsDirty = false;
             _value = value;

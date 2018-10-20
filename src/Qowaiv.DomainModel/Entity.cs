@@ -33,7 +33,7 @@ namespace Qowaiv.DomainModel
         /// </exception>
         public Entity(TId id) : this()
         {
-            Properties[nameof(Id)].Load(Guard.NotDefault(id, nameof(id)));
+            Properties[nameof(Id)].Init(Guard.NotDefault(id, nameof(id)));
         }
 
         /// <summary>Gets the (editable) properties of the entity.</summary>
@@ -78,9 +78,9 @@ namespace Qowaiv.DomainModel
         /// <remarks>
         /// Will not trigger any validation constraints, and clears a potential dirty flag.
         /// </remarks>
-        protected void LoadProperty(object value, string propertyName)
+        protected void InitProperty(object value, string propertyName)
         {
-            Properties[propertyName].Load(value);
+            Properties[propertyName].Init(value);
         }
 
         /// <inheritdoc />

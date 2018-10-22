@@ -12,7 +12,6 @@ namespace Qowaiv.Json.UnitTests
                 JsonConvert.DefaultSettings = () => new JsonSerializerSettings() { Converters = { new QowaivJsonConverter() } };
             }
             QowaivJsonConverter.Register();
-
         }
 
         [Test]
@@ -65,5 +64,31 @@ namespace Qowaiv.Json.UnitTests
 
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void DeserializeObject_GenderInvalid_Throws()
+        {
+            var exception = Assert.Throws<JsonSerializationException>
+            (
+                ()=> JsonConvert.DeserializeObject<ReadModel>("{ \"Gender\": \"invalid\" }")
+            );
+            Assert.AreEqual("Not a valid gender", exception.Message);
+        }
+
+        [Test]
+        public void DeserializeObject_GenderDouble_Throws()
+        {
+            var exception = Assert.Throws<JsonSerializationException>
+            (
+                () => JsonConvert.DeserializeObject<ReadModel>("{ \"Gender\": 0.0 }")
+            );
+            Assert.AreEqual("JSON deserialization from a number is not supported.", exception.Message);
+        }
+
+        internal class ReadModel
+        {
+            public Gender Gender { get; set; }
+        }
+
     }
 }

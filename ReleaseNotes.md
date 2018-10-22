@@ -1,5 +1,8 @@
-﻿### New in 3.2.1 (Realeased 2018/10/12)
-* TypeConverters support convertions from the underlying value type (#19)
+﻿### New in 3.2.2 (Released 2018/10/22)
+* JsonConverter only throws JSON exceptions #36
+
+### New in 3.2.1 (Realesed 2018/10/12)
+* TypeConverters support conversions from the underlying value type (#19)
 * Added Month.Days(year) (#30)
 
 ### New in 3.2.0 (Released 2018/08/08)

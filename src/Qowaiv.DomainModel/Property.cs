@@ -23,7 +23,7 @@ namespace Qowaiv.DomainModel
         public AnnotatedProperty Annotations { get; }
 
         /// <summary>Returns true if the property is dirty (has unsaved changes).</summary>
-        public bool IsDirty { get; internal set; }
+        public bool IsDirty => !Equals(Value, Initial);
 
         /// <summary>Gets the value of the property.</summary>
         public object Value
@@ -32,6 +32,9 @@ namespace Qowaiv.DomainModel
         }
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private object _value;
+
+        /// <summary>Gets the initial value.</summary>
+        public object Initial { get; protected set; }
 
         /// <summary>Gets the type of the property.</summary>
         public Type PropertyType => Annotations.Descriptor.PropertyType;
@@ -50,7 +53,6 @@ namespace Qowaiv.DomainModel
                 return false;
             }
 
-
             // required is done separately.
             var required = Annotations.RequiredAttribute.GetValidationResult(value, _context);
             if (required != ValidationResult.Success)
@@ -67,8 +69,6 @@ namespace Qowaiv.DomainModel
                     throw new ValidationException(validationResult, attr, value);
                 }
             }
-
-            IsDirty = true;
             _value = value;
             return true;
         }
@@ -80,7 +80,7 @@ namespace Qowaiv.DomainModel
         /// </remarks>
         public virtual void Init(object value)
         {
-            IsDirty = false;
+            Initial = value;
             _value = value;
         }
 

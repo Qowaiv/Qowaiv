@@ -3,6 +3,7 @@
 // The Implementation takes types into account, and uses an equality comparer.
 
 using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.DomainModel.Persistence;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -55,6 +56,9 @@ namespace Qowaiv.DomainModel
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>Gets the delta of the properties.</summary>
+        public Delta GetDelta() => Properties.GetDelta();
 
         /// <summary>Gets a property (value).</summary>
         protected T GetProperty<T>([CallerMemberName] string propertyName = null) => (T)Properties[propertyName].Value;

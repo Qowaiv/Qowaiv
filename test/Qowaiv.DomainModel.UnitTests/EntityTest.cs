@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Qowaiv.TestTools;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests
@@ -75,6 +76,22 @@ namespace Qowaiv.DomainModel.UnitTests
             };
             Assert.AreEqual("ABC", entity.FullName);
             Assert.IsTrue(entity.IsDirty);
+        }
+
+        [Test]
+        public void GetDelta()
+        {
+            var entity = new SimpleEntity();
+            entity.Properties[nameof(SimpleEntity.FullName)].Init("Initial full name");
+            entity.FullName = "New";
+
+            var delta = entity.GetDelta();
+
+            var _new = new Dictionary<string, object> { { nameof(SimpleEntity.FullName), "New" } };
+            var _old = new Dictionary<string, object> { { nameof(SimpleEntity.FullName), "Initial full name" } };
+
+            Assert.AreEqual(_new, delta.New);
+            Assert.AreEqual(_old, delta.Old);
         }
 
         [Test]

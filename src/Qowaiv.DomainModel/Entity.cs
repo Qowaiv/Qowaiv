@@ -40,7 +40,7 @@ namespace Qowaiv.DomainModel
         public PropertyCollection Properties { get; }
 
         /// <inheritdoc />
-        [Mandatory]
+        [Mandatory, Immutable]
         public TId Id
         {
             get => GetProperty<TId>();

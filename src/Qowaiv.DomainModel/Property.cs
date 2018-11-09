@@ -34,7 +34,7 @@ namespace Qowaiv.DomainModel
         private object _value;
 
         /// <summary>Gets the initial value.</summary>
-        public object Initial { get; protected set; }
+        public object Initial { get; private set; }
 
         /// <summary>Gets the type of the property.</summary>
         public Type PropertyType => Annotations.Descriptor.PropertyType;
@@ -48,7 +48,7 @@ namespace Qowaiv.DomainModel
         /// </returns>
         public bool Set(object value)
         {
-            if (_value == value)
+            if (GuardType(value) == _value)
             {
                 return false;
             }
@@ -70,6 +70,7 @@ namespace Qowaiv.DomainModel
                 }
             }
             _value = value;
+
             return true;
         }
 
@@ -78,9 +79,9 @@ namespace Qowaiv.DomainModel
         /// This implies that property is not (longer) dirty after loading,
         /// and will not trigger any validation.
         /// </remarks>
-        public virtual void Init(object value)
+        public void Init(object value)
         {
-            Initial = value;
+            Initial = GuardType(value);
             _value = value;
         }
 
@@ -88,6 +89,16 @@ namespace Qowaiv.DomainModel
         public override string ToString()
         {
             return $"{Annotations.DisplayAttribute.Name}, Value: {Value}{(IsDirty ? ", IsDirty" : "")}";
+        }
+
+        /// <summary>Guards values to be of the right type.</summary>
+        private object GuardType(object value)
+        {
+            if (!(value is null) && !PropertyType.IsInstanceOfType(value))
+            {
+                throw new ArgumentException(string.Format(QowaivMessages.ArgumentException_Must, PropertyType), nameof(value));
+            }
+            return value;
         }
 
         private readonly ValidationContext _context;

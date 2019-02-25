@@ -21,7 +21,7 @@ namespace Qowaiv.DomainModel
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
         public Entity()
         {
-            Properties =  PropertyCollection.Create(this);
+            Properties = PropertyCollection.Create(this);
         }
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
@@ -48,10 +48,7 @@ namespace Qowaiv.DomainModel
         }
 
         /// <inheritdoc />
-        public bool IsTransient => default(TId).Equals(Id) || Properties[nameof(Id)].IsDirty;
-
-        /// <summary>Returns true if any of the properties is dirty, otherwise false.</summary>
-        public bool IsDirty => Properties.IsDirty;
+        public bool IsTransient => default(TId).Equals(Id);
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,10 +75,7 @@ namespace Qowaiv.DomainModel
         /// <remarks>
         /// Will not trigger any validation constraints, and clears a potential dirty flag.
         /// </remarks>
-        protected void InitProperty(object value, string propertyName)
-        {
-            Properties[propertyName].Init(value);
-        }
+        protected void InitProperty(object value, string propertyName) => Properties[propertyName].Init(value);
 
         /// <inheritdoc />
         public override bool Equals(object obj) => Equals(obj as Entity<TId>);
@@ -93,10 +87,7 @@ namespace Qowaiv.DomainModel
         }
 
         /// <summary>Returns true if left and right are equal.</summary>
-        public static bool operator ==(Entity<TId> left, Entity<TId> right)
-        {
-            return _comparer.Equals(left, right);
-        }
+        public static bool operator ==(Entity<TId> left, Entity<TId> right) => _comparer.Equals(left, right);
 
         /// <summary>Returns false if left and right are equal.</summary>
         public static bool operator !=(Entity<TId> left, Entity<TId> right) => !(left == right);
@@ -106,10 +97,7 @@ namespace Qowaiv.DomainModel
 
         /// <summary>Represents the entity as a DEBUG <see cref="string"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get => $"{base.ToString()}, ID: {(IsTransient ? "?" : Id.ToString())}";
-        }
+        private string DebuggerDisplay => $"{base.ToString()}, ID: {(IsTransient ? "?" : Id.ToString())}";
 
         /// <summary>The comparer that deals with equals and hash codes.</summary>
         private static readonly EntityEqualityComparer<TId> _comparer = new EntityEqualityComparer<TId>();

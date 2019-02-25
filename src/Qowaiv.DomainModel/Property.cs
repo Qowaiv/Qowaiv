@@ -22,20 +22,11 @@ namespace Qowaiv.DomainModel
         /// <summary>Gets the annotations of the property.</summary>
         public AnnotatedProperty Annotations { get; }
 
-        /// <summary>Returns true if the property is dirty (has unsaved changes).</summary>
-        public bool IsDirty => !Equals(Value, Initial);
-
         /// <summary>Gets the value of the property.</summary>
-        public object Value
-        {
-            get => _value;
-        }
+        public object Value => _value;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private object _value;
-
-        /// <summary>Gets the initial value.</summary>
-        public object Initial { get; protected set; }
-
+     
         /// <summary>Gets the type of the property.</summary>
         public Type PropertyType => Annotations.Descriptor.PropertyType;
 
@@ -78,16 +69,12 @@ namespace Qowaiv.DomainModel
         /// This implies that property is not (longer) dirty after loading,
         /// and will not trigger any validation.
         /// </remarks>
-        public virtual void Init(object value)
-        {
-            Initial = value;
-            _value = value;
-        }
+        public virtual void Init(object value)=> _value = value;
 
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"{Annotations.DisplayAttribute.Name}, Value: {Value}{(IsDirty ? ", IsDirty" : "")}";
+            return string.Format("{0}, Value: {1}", Annotations.DisplayAttribute.Name, Value);
         }
 
         private readonly ValidationContext _context;

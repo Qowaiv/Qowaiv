@@ -1,7 +1,6 @@
 ﻿using Qowaiv.ComponentModel.Validation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Qowaiv.DomainModel
 {
@@ -10,9 +9,6 @@ namespace Qowaiv.DomainModel
     {
         /// <summary>No public constructor</summary>
         private PropertyCollection(Dictionary<string, Property> properties) : base(properties) { }
-
-        /// <summary>Returns true if any of the properties is dirty, otherwise false.</summary>
-        public bool IsDirty => Values.Any(prop => prop.IsDirty);
 
         /// <summary>Creates the properties for the type.</summary>
         public static PropertyCollection Create<TId>(IEntity<TId> entity) where TId : struct

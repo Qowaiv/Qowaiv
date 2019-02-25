@@ -67,17 +67,6 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
-        public void SetFullName_IsSetAndDirty()
-        {
-            var entity = new SimpleEntity
-            {
-                FullName = "ABC"
-            };
-            Assert.AreEqual("ABC", entity.FullName);
-            Assert.IsTrue(entity.IsDirty);
-        }
-
-        [Test]
         public void Equals_Null_False()
         {
             var entity = new SimpleEntity();

@@ -47,6 +47,7 @@ namespace Qowaiv.DomainModel
         /// </remarks>
         public bool Set(object value)
         {
+            GuardType(value);
             if (Annotations.IsRequired || _value != value)
             {
                 ValidationMessage.ThrowIfAnyErrors(Validate(value));
@@ -88,6 +89,15 @@ namespace Qowaiv.DomainModel
         public override string ToString()
         {
             return string.Format("{0}, Value: {1}", Annotations.DisplayAttribute.Name, Value);
+        }
+
+        /// <summary>Guards values to be of the right type.</summary>
+        private void GuardType(object value)
+        {
+            if (!(value is null) && !PropertyType.IsInstanceOfType(value))
+            {
+                throw new ArgumentException(string.Format(QowaivMessages.ArgumentException_Must, PropertyType), nameof(value));
+            }
         }
 
         private readonly ValidationContext _context;

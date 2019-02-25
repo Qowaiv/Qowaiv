@@ -8,7 +8,13 @@ namespace Qowaiv.DomainModel
     public class PropertyCollection : ReadOnlyDictionary<string, Property>
     {
         /// <summary>No public constructor</summary>
-        private PropertyCollection(Dictionary<string, Property> properties) : base(properties) { }
+        private PropertyCollection(Dictionary<string, Property> properties) : base(properties)
+        {
+            foreach (var prop in this)
+            {
+                prop.Value.SetOnly(prop.Value.Annotations.DefaultValue);
+            }
+        }
 
         /// <summary>Creates the properties for the type.</summary>
         public static PropertyCollection Create<TId>(IEntity<TId> entity) where TId : struct

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.TestTools;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests

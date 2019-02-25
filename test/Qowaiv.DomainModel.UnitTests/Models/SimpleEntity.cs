@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Qowaiv.DomainModel.UnitTests
+namespace Qowaiv.DomainModel.UnitTests.Models
 {
     internal class SimpleEntity : Entity<Guid>
     {

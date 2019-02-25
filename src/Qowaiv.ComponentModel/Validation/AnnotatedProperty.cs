@@ -35,6 +35,9 @@ namespace Qowaiv.ComponentModel.Validation
         /// </summary>
         public RequiredAttribute RequiredAttribute { get; }
 
+        /// <summary>True if the <see cref="RequiredAttribute"/> is not a <see cref="NotRequiredAttributeAttribute"/>.</summary>
+        public bool IsRequired => !(RequiredAttribute is NotRequiredAttributeAttribute);
+
         /// <summary>Gets the <see cref="ValidationAttribute"/>s the property
         /// is decorated with.
         /// </summary>

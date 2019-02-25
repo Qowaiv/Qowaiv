@@ -33,14 +33,14 @@ namespace Qowaiv.DomainModel
         /// </exception>
         public Entity(TId id) : this()
         {
-            Properties[nameof(Id)].Init(Guard.NotDefault(id, nameof(id)));
+            Id = id;
         }
 
         /// <summary>Gets the (editable) properties of the entity.</summary>
         public PropertyCollection Properties { get; }
 
         /// <inheritdoc />
-        [Mandatory]
+        [Mandatory, Immutable]
         public TId Id
         {
             get => GetProperty<TId>();
@@ -52,6 +52,47 @@ namespace Qowaiv.DomainModel
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>Initializes multiple properties simultaneously.</summary>
+        /// <param name="initProperties">
+        /// The action initializing multiple properties.
+        /// </param>
+        /// <exception cref="ValidationException">
+        /// If an single error occurs.
+        /// </exception>
+        /// <exception cref="AggregateException">
+        /// If multiple errors occur.
+        /// </exception>
+        public void InitProperties(Action initProperties)
+        {
+            Guard.NotNull(initProperties, nameof(initProperties));
+            _tracker = new PropertyChangeTracker<TId>(this);
+            initProperties();
+            _tracker.ApplyChanges();
+        }
+
+        /// <summary>Sets multiple properties simultaneously.</summary>
+        /// <param name="setProperties">
+        /// The action initializing multiple properties.
+        /// </param>
+        /// <exception cref="ValidationException">
+        /// If an single error occurs.
+        /// </exception>
+        /// <exception cref="AggregateException">
+        /// If multiple errors occur.
+        /// </exception>
+        /// <remarks>
+        /// Triggers <see cref="PropertyChangedEventHandler"/> events if all
+        /// properties could be set without an error.
+        /// </remarks>
+        public void SetProperties(Action setProperties)
+        {
+            Guard.NotNull(setProperties, nameof(setProperties));
+            _tracker = new PropertyChangeTracker<TId>(this, PropertyChanged);
+            setProperties();
+            _tracker.ApplyChanges();
+        }
+        internal PropertyChangeTracker<TId> _tracker;
 
         /// <summary>Gets a property (value).</summary>
         protected T GetProperty<T>([CallerMemberName] string propertyName = null) => (T)Properties[propertyName].Value;
@@ -65,17 +106,19 @@ namespace Qowaiv.DomainModel
         /// </remarks>
         protected void SetProperty(object value, [CallerMemberName] string propertyName = null)
         {
-            if (Properties[propertyName].Set(value) && PropertyChanged != null)
+            var property = Properties[propertyName];
+            if (_tracker is null)
             {
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                if (property.Set(value))
+                {
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+            else
+            {
+                _tracker.AddChange(property, value);
             }
         }
-
-        /// <summary>Loads a property (value).</summary>
-        /// <remarks>
-        /// Will not trigger any validation constraints, and clears a potential dirty flag.
-        /// </remarks>
-        protected void InitProperty(object value, string propertyName) => Properties[propertyName].Init(value);
 
         /// <inheritdoc />
         public override bool Equals(object obj) => Equals(obj as Entity<TId>);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Qowaiv.ComponentModel.Messages
 {
@@ -60,5 +61,27 @@ namespace Qowaiv.ComponentModel.Messages
 
         /// <summary>Creates an info message.</summary>
         public static ValidationInfoMessage Info(string message, params string[] memberNames) => new ValidationInfoMessage(message, memberNames);
+
+        /// <summary>Throws the <see cref="ValidationException"/> messages contain any error messages.</summary>
+        /// <exception cref="ValidationException">
+        /// If an single error occurs.
+        /// </exception>
+        /// <exception cref="AggregateException">
+        /// If multiple errors occur.
+        /// </exception>
+        public static void ThrowIfAnyErrors(IEnumerable<ValidationException> messages)
+        {
+            Guard.NotNull(messages, nameof(messages));
+
+            var errors = messages.Where(m => m.ValidationResult is null || m.ValidationResult.GetSeverity() == ValidationSeverity.Error).ToArray();
+            if(errors.Length == 1)
+            {
+                throw errors[0];
+            }
+            else if(errors.Any())
+            {
+                throw new AggregateException(errors);
+            }
+        }
     }
 }

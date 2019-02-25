@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.TestTools;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -122,6 +123,16 @@ namespace Qowaiv.DomainModel.UnitTests
             Assert.False(left != right);
         }
 
+        [Test]
+        public void InitProperties_TwoErrors_()
+        {
+            var errors = Assert.Throws<AggregateException>(() =>
+            {
+                EntityWithInitScope.FromData(17, string.Empty, Date.MinValue);
+            });
+
+            Assert.AreEqual(2, errors.InnerExceptions.Count);
+        }
         [Test]
         public void GetHashCode_IsTransient_NotSupported()
         {

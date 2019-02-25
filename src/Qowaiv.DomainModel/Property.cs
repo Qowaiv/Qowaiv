@@ -1,5 +1,7 @@
-﻿using Qowaiv.ComponentModel.Validation;
+﻿using Qowaiv.ComponentModel.Messages;
+using Qowaiv.ComponentModel.Validation;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
@@ -32,44 +34,55 @@ namespace Qowaiv.DomainModel
 
         /// <summary>Sets the value of the property.</summary>
         /// <exception cref="ValidationException">
-        /// When the value is not allowed according to the validation attributes.
+        /// If an single error occurs.
+        /// </exception>
+        /// <exception cref="AggregateException">
+        /// If multiple errors occur.
         /// </exception>
         /// <returns>
         /// True if the value have been changed, false if the value equals the original value.
         /// </returns>
+        /// <remarks>
+        /// Only calls validate if the value has changed, or the property is required.
+        /// </remarks>
         public bool Set(object value)
         {
-            if (_value == value)
+            if (Annotations.IsRequired || _value != value)
             {
-                return false;
+                ValidationMessage.ThrowIfAnyErrors(Validate(value));
+                _value = value;
             }
+            return _value != value;
+        }
 
+        /// <summary>Sets the value of the property without validating it.</summary>
+        /// <remarks>
+        /// Used to help the <see cref="PropertyChangeTracker{TId}"/> to do its job.
+        /// </remarks>
+        internal void SetOnly(object value)=> _value = value;
+
+        /// <summary>Validates the property based on the value it tries to set.</summary>
+        internal IEnumerable<ValidationException> Validate(object value)
+        {
             // required is done separately.
             var required = Annotations.RequiredAttribute.GetValidationResult(value, _context);
             if (required != ValidationResult.Success)
             {
-                throw new ValidationException(required, Annotations.RequiredAttribute, value);
+                yield return new ValidationException(required, Annotations.RequiredAttribute, value);
             }
-
-            // other validation attributes.
-            foreach (var attr in Annotations.ValidationAttributes)
+            else
             {
-                var validationResult = attr.GetValidationResult(value, _context);
-                if (validationResult != ValidationResult.Success)
+                // other validation attributes.
+                foreach (var attr in Annotations.ValidationAttributes)
                 {
-                    throw new ValidationException(validationResult, attr, value);
+                    var validationResult = attr.GetValidationResult(value, _context);
+                    if (validationResult != ValidationResult.Success)
+                    {
+                        yield return new ValidationException(validationResult, attr, value);
+                    }
                 }
             }
-            _value = value;
-            return true;
         }
-
-        /// <summary>Loads the value of the property.</summary>
-        /// <remarks>
-        /// This implies that property is not (longer) dirty after loading,
-        /// and will not trigger any validation.
-        /// </remarks>
-        public virtual void Init(object value)=> _value = value;
 
         /// <inheritdoc />
         public override string ToString()

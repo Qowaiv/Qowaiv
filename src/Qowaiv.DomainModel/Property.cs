@@ -47,13 +47,13 @@ namespace Qowaiv.DomainModel
         /// </remarks>
         public bool Set(object value)
         {
-            GuardType(value);
-            if (Annotations.IsRequired || _value != value)
+            var hasChanged = GuardType(value) != _value;
+            if (hasChanged || Annotations.IsRequired)
             {
                 ValidationMessage.ThrowIfAnyErrors(Validate(value));
                 _value = value;
             }
-            return _value != value;
+            return hasChanged;
         }
 
         /// <summary>Sets the value of the property without validating it.</summary>
@@ -92,12 +92,13 @@ namespace Qowaiv.DomainModel
         }
 
         /// <summary>Guards values to be of the right type.</summary>
-        private void GuardType(object value)
+        private object GuardType(object value)
         {
             if (!(value is null) && !PropertyType.IsInstanceOfType(value))
             {
                 throw new ArgumentException(string.Format(QowaivMessages.ArgumentException_Must, PropertyType), nameof(value));
             }
+            return value;
         }
 
         private readonly ValidationContext _context;

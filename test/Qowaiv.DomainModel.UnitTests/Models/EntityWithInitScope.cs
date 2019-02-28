@@ -25,7 +25,7 @@ namespace Qowaiv.DomainModel.UnitTests.Models
         {
             var entity = new EntityWithInitScope(id);
 
-            entity.InitProperties(() =>
+            entity.SetProperties(() =>
             {
                 entity.Name = name;
                 entity.StartDate = startDate;

@@ -12,7 +12,7 @@ namespace Qowaiv.DomainModel
         {
             foreach (var prop in this)
             {
-                prop.Value.SetOnly(prop.Value.Annotations.DefaultValue);
+                prop.Value.SetValue(prop.Value.Annotations.DefaultValue);
             }
         }
 

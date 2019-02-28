@@ -18,10 +18,13 @@ namespace Qowaiv.DomainModel
     [DebuggerDisplay("{DebuggerDisplay}")]
     public class Entity<TId> : IEntity<TId> where TId : struct
     {
+        private readonly EntityChangeTracker<TId> _tracker;
+
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
         public Entity()
         {
             Properties = PropertyCollection.Create(this);
+            _tracker = new EntityChangeTracker<TId>(this);
         }
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
@@ -53,6 +56,16 @@ namespace Qowaiv.DomainModel
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>Notifies that the <see cref="Property"/> changed.</summary>
+        internal bool NotifyPropertyChanged(Property property)
+        {
+            if(PropertyChanged is null)
+            {
+                return false;
+            }
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property.PropertyType.Name));
+            return true;
+        }
 
         /// <summary>Sets multiple properties simultaneously.</summary>
         /// <param name="setProperties">
@@ -71,12 +84,11 @@ namespace Qowaiv.DomainModel
         public void SetProperties(Action setProperties)
         {
             Guard.NotNull(setProperties, nameof(setProperties));
-            _tracker = new PropertyChangeTracker<TId>(this, PropertyChanged);
+            _tracker.BufferChanges = true;
             setProperties();
-            _tracker.ApplyChanges();
+            _tracker.ProcessChanges();
         }
-        internal PropertyChangeTracker<TId> _tracker;
-
+       
         /// <summary>Gets a property (value).</summary>
         protected T GetProperty<T>([CallerMemberName] string propertyName = null) => (T)Properties[propertyName].Value;
 
@@ -90,17 +102,7 @@ namespace Qowaiv.DomainModel
         protected void SetProperty(object value, [CallerMemberName] string propertyName = null)
         {
             var property = Properties[propertyName];
-            if (_tracker is null)
-            {
-                if (property.Set(value))
-                {
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
-            else
-            {
-                _tracker.AddChange(property, value);
-            }
+            _tracker.AddPropertyChange(property, value);
         }
 
         /// <inheritdoc />

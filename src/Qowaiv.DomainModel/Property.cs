@@ -1,5 +1,4 @@
-﻿using Qowaiv.ComponentModel.Messages;
-using Qowaiv.ComponentModel.Validation;
+﻿using Qowaiv.ComponentModel.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,35 +31,11 @@ namespace Qowaiv.DomainModel
         /// <summary>Gets the type of the property.</summary>
         public Type PropertyType => Annotations.Descriptor.PropertyType;
 
-        /// <summary>Sets the value of the property.</summary>
-        /// <exception cref="ValidationException">
-        /// If an single error occurs.
-        /// </exception>
-        /// <exception cref="AggregateException">
-        /// If multiple errors occur.
-        /// </exception>
-        /// <returns>
-        /// True if the value have been changed, false if the value equals the original value.
-        /// </returns>
-        /// <remarks>
-        /// Only calls validate if the value has changed, or the property is required.
-        /// </remarks>
-        public bool Set(object value)
-        {
-            var hasChanged = GuardType(value) != _value;
-            if (hasChanged || Annotations.IsRequired)
-            {
-                ValidationMessage.ThrowIfAnyErrors(Validate(value));
-                _value = value;
-            }
-            return hasChanged;
-        }
-
         /// <summary>Sets the value of the property without validating it.</summary>
         /// <remarks>
-        /// Used to help the <see cref="PropertyChangeTracker{TId}"/> to do its job.
+        /// Used to help the <see cref="EntityChangeTracker{TId}"/> to do its job.
         /// </remarks>
-        internal void SetOnly(object value)=> _value = value;
+        internal void SetValue(object value) => _value = GuardType(value);
 
         /// <summary>Validates the property based on the value it tries to set.</summary>
         internal IEnumerable<ValidationException> Validate(object value)
@@ -83,6 +58,7 @@ namespace Qowaiv.DomainModel
                     }
                 }
             }
+            SetValue(value);
         }
 
         /// <inheritdoc />

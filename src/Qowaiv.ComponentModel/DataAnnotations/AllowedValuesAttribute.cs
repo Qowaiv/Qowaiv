@@ -8,7 +8,7 @@ namespace Qowaiv.ComponentModel.DataAnnotations
     {
         /// <summary>Creates a new instance of an <see cref="AllowedValuesAttribute"/>.</summary>
         public AllowedValuesAttribute(string value1, string value2)
-            : base(new[] { value1, value2 }) { }
+            : base(value1, value2) { }
 
         /// <summary>Creates a new instance of an <see cref="AllowedValuesAttribute"/>.</summary>
         /// <param name="values">

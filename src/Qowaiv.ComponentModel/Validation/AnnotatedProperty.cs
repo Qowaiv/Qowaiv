@@ -15,13 +15,13 @@ namespace Qowaiv.ComponentModel.Validation
         private static readonly RequiredAttribute Optional = new NotRequiredAttributeAttribute();
 
         /// <summary>Creates a new instance of an <see cref="AnnotatedProperty"/>.</summary>
-        private AnnotatedProperty(PropertyDescriptor descriptor, DisplayAttribute displayAttribute, RequiredAttribute requiredAttribute, ValidationAttribute[] validationAttributes)
+        private AnnotatedProperty(PropertyDescriptor descriptor, RequiredAttribute requiredAttribute, ValidationAttribute[] validationAttributes)
         {
             Descriptor = descriptor;
-            DisplayAttribute = displayAttribute ?? new DisplayAttribute { Name = descriptor.Name };
+            DisplayAttribute = descriptor.GetDisplayAttribute() ?? new DisplayAttribute { Name = descriptor.Name };
             RequiredAttribute = requiredAttribute ?? Optional;
             ValidationAttributes = validationAttributes;
-            DefaultValue = descriptor.PropertyType.IsValueType ? Activator.CreateInstance(descriptor.PropertyType) : null;
+            DefaultValue = descriptor.GetDefaultValue();
         }
 
         /// <summary>Gets the <see cref="PropertyDescriptor"/>.</summary>
@@ -103,8 +103,6 @@ namespace Qowaiv.ComponentModel.Validation
                 .Cast<Attribute>()
                 .OfType<ValidationAttribute>();
 
-            var display = (DisplayAttribute)descriptor.Attributes[typeof(DisplayAttribute)];
-
             RequiredAttribute required = null;
 
             foreach (var attribute in attributes)
@@ -119,7 +117,7 @@ namespace Qowaiv.ComponentModel.Validation
                     validationAttributes.Add(attribute);
                 }
             }
-            return new AnnotatedProperty(descriptor, display, required, validationAttributes.ToArray());
+            return new AnnotatedProperty(descriptor, required, validationAttributes.ToArray());
         }
     }
 }

@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
 using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.DomainModel.UnitTests.Models;
+using Qowaiv.Globalization;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Qowaiv.DomainModel.UnitTests
 {
     public class PropertyTest
     {
+        [Test]
+        public void DefaultValue_SomeModel_Initialized()
+        {
+            var entity = new EntityWithDefaultValue(17);
+            Assert.AreEqual(Country.IS, entity.Country);
+        }
+
         [Test]
         public void GuardType_WrongType_Throws()
         {

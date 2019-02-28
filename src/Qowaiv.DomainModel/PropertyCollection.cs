@@ -21,7 +21,7 @@ namespace Qowaiv.DomainModel
         {
             Guard.NotNull(entity, nameof(entity));
 
-            var annotated = AnnotatedModel.Create(entity.GetType());
+            var annotated = AnnotatedModelStore.Instance.GetAnnotededModel(entity.GetType());
 
             var properties = new Dictionary<string, Property>();
 

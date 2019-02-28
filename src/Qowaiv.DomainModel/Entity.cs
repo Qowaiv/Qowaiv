@@ -53,23 +53,6 @@ namespace Qowaiv.DomainModel
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>Initializes multiple properties simultaneously.</summary>
-        /// <param name="initProperties">
-        /// The action initializing multiple properties.
-        /// </param>
-        /// <exception cref="ValidationException">
-        /// If an single error occurs.
-        /// </exception>
-        /// <exception cref="AggregateException">
-        /// If multiple errors occur.
-        /// </exception>
-        public void InitProperties(Action initProperties)
-        {
-            Guard.NotNull(initProperties, nameof(initProperties));
-            _tracker = new PropertyChangeTracker<TId>(this);
-            initProperties();
-            _tracker.ApplyChanges();
-        }
 
         /// <summary>Sets multiple properties simultaneously.</summary>
         /// <param name="setProperties">

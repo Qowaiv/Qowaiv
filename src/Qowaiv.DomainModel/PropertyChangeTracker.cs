@@ -13,14 +13,9 @@ namespace Qowaiv.DomainModel
         private readonly Entity<TId> _entity;
         private readonly PropertyChangedEventHandler _propertyChanged;
 
-        public PropertyChangeTracker(Entity<TId> entity)
+        public PropertyChangeTracker(Entity<TId> entity, PropertyChangedEventHandler propertyChanged)
         {
             _entity = entity;
-        }
-
-        public PropertyChangeTracker(Entity<TId> entity, PropertyChangedEventHandler propertyChanged)
-            : this(entity)
-        {
             _propertyChanged = propertyChanged;
         }
 

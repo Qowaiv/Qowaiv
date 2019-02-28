@@ -27,29 +27,35 @@ namespace Qowaiv.ComponentModel.Validation
         {
             Guard.NotNull(type, nameof(type));
 
-            lock (locker)
+            if (NotAnnotatedTypes.Contains(type))
             {
-                if (NotAnnotatedTypes.Contains(type))
+                return AnnotatedModel.None(type);
+            }
+            if (Models.TryGetValue(type, out AnnotatedModel model))
+            {
+                return model;
+            }
+            else
+            {
+                lock (locker)
                 {
-                    return AnnotatedModel.None(type);
-                }
-                if (!Models.TryGetValue(type, out AnnotatedModel model))
-                {
-                    model = AnnotatedModel.Create(type);
+                    if (!Models.TryGetValue(type, out model))
+                    {
+                        model = AnnotatedModel.Create(type);
 
-                    // store the result.
-                    if (model.IsValidatable)
-                    {
-                        Models[type] = model;
-                    }
-                    else
-                    {
-                        NotAnnotatedTypes.Add(type);
+                        // store the result.
+                        if (model.IsValidatable)
+                        {
+                            Models[type] = model;
+                        }
+                        else
+                        {
+                            NotAnnotatedTypes.Add(type);
+                        }
                     }
                 }
                 return model;
-
-            }
+            }            
         }
 
         /// <summary>To be thread-safe we have a locker.</summary>

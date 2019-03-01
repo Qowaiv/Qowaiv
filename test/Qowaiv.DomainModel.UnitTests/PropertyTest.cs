@@ -41,8 +41,10 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void ToString_PropertyWithDisplayAttribute_SomeInformativeText()
         {
-            var entity = new PropertyTestEntity();
-            entity.DisplayProperty = "Hello World!";
+            var entity = new PropertyTestEntity
+            {
+                DisplayProperty = "Hello World!"
+            };
 
             Assert.AreEqual("Display property, Value: Hello World!", entity.ToStringAccessor());
         }

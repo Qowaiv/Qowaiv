@@ -16,12 +16,12 @@ namespace Qowaiv.DomainModel
     /// The type of the identifier.
     /// </typeparam>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public class Entity<TId> : IEntity<TId> where TId : struct
+    public abstract class Entity<TId> : IEntity<TId> where TId : struct
     {
         private readonly EntityChangeTracker<TId> _tracker;
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
-        public Entity()
+        protected Entity()
         {
             Properties = PropertyCollection.Create(this);
             _tracker = new EntityChangeTracker<TId>(this);
@@ -34,7 +34,7 @@ namespace Qowaiv.DomainModel
         /// <exception cref="ArgumentException">
         /// If the identifier has the default (transient) value.
         /// </exception>
-        public Entity(TId id) : this()
+        protected Entity(TId id) : this()
         {
             Id = id;
         }

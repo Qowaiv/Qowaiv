@@ -79,7 +79,7 @@ namespace Qowaiv.DomainModel.UnitTests
         public void Equals_OtherType_False()
         {
             var entity = new SimpleEntity();
-            var other = new Entity<Guid>();
+            var other = new EmptyEntity();
             Assert.False(entity.Equals(other));
         }
 
@@ -157,24 +157,6 @@ namespace Qowaiv.DomainModel.UnitTests
         public void DebuggerDisplay_IsSupported()
         {
             DebuggerDisplayAssert.HasAttribute(typeof(Entity<>));
-        }
-
-        [Test]
-        public void DebuggerDisplay_IsTransient()
-        {
-            DebuggerDisplayAssert.HasResult(
-                "Qowaiv.DomainModel.Entity`1[System.Guid], ID: ?",
-                new Entity<Guid>());
-        }
-
-        [Test]
-        public void DebuggerDisplay_NotTransient()
-        {
-            var id = Guid.Parse("10FC7CA7-A781-45DF-81FA-35F3246A5E39");
-
-            DebuggerDisplayAssert.HasResult(
-                "Qowaiv.DomainModel.Entity`1[System.Guid], ID: 10fc7ca7-a781-45df-81fa-35f3246a5e39",
-                new Entity<Guid>(id));
         }
     }
 }

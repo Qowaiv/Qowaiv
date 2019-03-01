@@ -12,15 +12,6 @@
     <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
-  </ItemGroup>
-
   <ItemGroup>
     <Compile Update="QowaivDomainModelMessages.Designer.cs">
       <DesignTime>True</DesignTime>

@@ -7,7 +7,7 @@ using System.Linq;
 namespace Qowaiv.Json
 {
     /// <summary>The Qowaiv JSON converter converts types from and to JSON that implement the Qowaiv.Json.IJsonSerializable.</summary>
-    public class QowaivJsonConverter : Newtonsoft.Json.JsonConverter
+    public class QowaivJsonConverter : JsonConverter
     {
         /// <summary>Registers the Qowaiv JSON converter.</summary>
         public static void Register()
@@ -59,31 +59,43 @@ namespace Qowaiv.Json
             var isNullable = objectType.IsGenericType;
             var result = (IJsonSerializable)Activator.CreateInstance(isNullable ? objectType.GetGenericArguments()[0] : objectType);
 
-            switch (reader.TokenType)
+            try
             {
-                // Empty value for null-ables.
-                case JsonToken.Null:
-                    if (isNullable) { return null; }
-                    result.FromJson();
-                    break;
+                switch (reader.TokenType)
+                {
+                    // Empty value for null-ables.
+                    case JsonToken.Null:
+                        if (isNullable) { return null; }
+                        result.FromJson();
+                        break;
 
-                // A number without digits.
-                case JsonToken.Integer:
-                    result.FromJson((long)reader.Value);
-                    break;
+                    // A number without digits.
+                    case JsonToken.Integer:
+                        result.FromJson((long)reader.Value);
+                        break;
 
-                // A number with digits.
-                case JsonToken.Float:
-                    result.FromJson((double)reader.Value);
-                    break;
+                    // A number with digits.
+                    case JsonToken.Float:
+                        result.FromJson((double)reader.Value);
+                        break;
 
-                // A string.
-                case JsonToken.String:
-                    result.FromJson((string)reader.Value);
-                    break;
-                // Other scenario's are not supported.    
-                default:
-                    throw new JsonSerializationException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.JsonSerialization_TokenNotSupported, objectType.FullName, reader.TokenType));
+                    // A string.
+                    case JsonToken.String:
+                        result.FromJson((string)reader.Value);
+                        break;
+                    // Other scenario's are not supported.    
+                    default:
+                        throw new JsonSerializationException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.JsonSerialization_TokenNotSupported, objectType.FullName, reader.TokenType));
+                }
+            }
+            // We want to communicate exceptions as JSON serialization exceptions.
+            catch(Exception x)
+            {
+                if(x is JsonSerializationException || x is JsonReaderException)
+                {
+                    throw;
+                }
+                throw new JsonSerializationException(x.Message, x);
             }
             return result;
         }

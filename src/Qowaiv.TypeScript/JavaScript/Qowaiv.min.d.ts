@@ -10,9 +10,10 @@ declare module Qowaiv {
         static fromJSON(s: string): Guid;
         static isValid(s: string): boolean;
         static parse(s: string): Guid;
+        private static strip;
         static empty(): Guid;
         static newGuid(seed?: Guid): Guid;
-        private static rndGuid(s);
+        private static rndGuid;
     }
 }
 interface IEquatable {
@@ -30,7 +31,7 @@ declare module Qowaiv {
         private static pattern;
         private v;
         constructor(d?: number, h?: number, m?: number, s?: number, f?: number);
-        private num(n);
+        private num;
         getDays(): number;
         getHours(): number;
         getMinutes(): number;

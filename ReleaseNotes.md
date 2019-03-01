@@ -1,4 +1,11 @@
-﻿### New in 3.2.0 (Released 2018/08/08)
+﻿### New in 3.2.2 (Released 2018/10/22)
+* JsonConverter only throws JSON exceptions #36
+
+### New in 3.2.1 (Realesed 2018/10/12)
+* TypeConverters support conversions from the underlying value type (#19)
+* Added Month.Days(year) (#30)
+
+### New in 3.2.0 (Released 2018/08/08)
 * Added the country Kosovo (#22)
 * Made SonarAnalyzer dependency a private asset (#26)
 * Extended Qowaiv.ComponentModel.Result with factory methods (#24)

@@ -129,7 +129,7 @@ namespace Qowaiv.DomainModel
 
                 if (change.Intial != value)
                 {
-                    _entity.NotifyPropertyChanged(prop);
+                    _entity.OnPropertyChanged(prop);
                 }
             }
         }

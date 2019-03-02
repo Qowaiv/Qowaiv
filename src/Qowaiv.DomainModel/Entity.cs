@@ -53,18 +53,15 @@ namespace Qowaiv.DomainModel
         /// <inheritdoc />
         public bool IsTransient => default(TId).Equals(Id);
 
-        /// <inheritdoc />
+        /// <summary>
+        /// PropertyChanged event (per <see cref="INotifyPropertyChanged" />).
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>Notifies that the <see cref="Property"/> changed.</summary>
-        internal bool NotifyPropertyChanged(Property property)
+        internal void OnPropertyChanged(Property property)
         {
-            if(PropertyChanged is null)
-            {
-                return false;
-            }
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property.PropertyType.Name));
-            return true;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property.PropertyType.Name));
         }
 
         /// <summary>Sets multiple properties simultaneously.</summary>

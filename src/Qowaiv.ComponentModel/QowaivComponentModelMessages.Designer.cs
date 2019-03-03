@@ -79,6 +79,15 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The identifier could not be found..
+        /// </summary>
+        internal static string IdentifierNotFoundException {
+            get {
+                return ResourceManager.GetString("IdentifierNotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} field is immutable and can not be changed..
         /// </summary>
         internal static string ImmutableAttribute_ErrorMessage {

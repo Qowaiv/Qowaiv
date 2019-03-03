@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Qowaiv.DomainModel
+namespace Qowaiv.DomainModel.ChangeManagement
 {
     /// <summary>Tracks (potential) changes and fires validations and notification events.</summary>
     internal class EntityChangeTracker<TId> : Dictionary<Property, PropertyChange>
@@ -40,7 +40,7 @@ namespace Qowaiv.DomainModel
                 this[property] = change;
             }
 
-            property.SetValue(value);
+            property.Value = value;
 
             if (!BufferChanges)
             {
@@ -69,6 +69,7 @@ namespace Qowaiv.DomainModel
             {
                 ValidateModelBasedValidationAttributes(errors);
                 ValidatePropertyChanges(changes, errors);
+                ValidateCalculatedProperies(changes, errors);
             }
             // if this fails, we want to rollback too.
             catch (Exception)
@@ -91,8 +92,18 @@ namespace Qowaiv.DomainModel
             {
                 var prop = change.Property;
                 var value = prop.Value;
-                prop.SetValue(change.Intial);
+                prop.Value = change.Intial;
                 errors.AddRange(prop.Validate(value));
+                prop.Value = value;
+            }
+        }
+
+        private void ValidateCalculatedProperies(PropertyChange[] changes, List<ValidationException> errors)
+        {
+            // TODO: keep track of calculated values and skip those who did not change.
+            foreach (var calculated in changes.SelectMany(change => change.Property.TriggersProperties).Distinct())
+            {
+                errors.AddRange(calculated.Validate(calculated.Value));
             }
         }
 
@@ -113,7 +124,7 @@ namespace Qowaiv.DomainModel
             foreach (var change in changes)
             {
                 var prop = change.Property;
-                prop.SetValue(change.Intial);
+                prop.Value = change.Intial;
             }
         }
 

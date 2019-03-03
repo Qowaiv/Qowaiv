@@ -1,4 +1,5 @@
 ﻿using Qowaiv.ComponentModel.Validation;
+using Qowaiv.DomainModel.ChangeManagement;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,18 +25,19 @@ namespace Qowaiv.DomainModel
         public AnnotatedProperty Annotations { get; }
 
         /// <summary>Gets the value of the property.</summary>
-        public object Value => _value;
+        /// <remarks>
+        /// Set is internally used to help the <see cref="EntityChangeTracker{TId}"/> to do its job.
+        /// </remarks>
+        public virtual object Value 
+        {
+            get => _value;
+            internal set => _value = GuardType(value);
+        }
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private object _value;
      
         /// <summary>Gets the type of the property.</summary>
         public Type PropertyType => Annotations.Descriptor.PropertyType;
-
-        /// <summary>Sets the value of the property without validating it.</summary>
-        /// <remarks>
-        /// Used to help the <see cref="EntityChangeTracker{TId}"/> to do its job.
-        /// </remarks>
-        internal void SetValue(object value) => _value = GuardType(value);
 
         /// <summary>Validates the property based on the value it tries to set.</summary>
         internal IEnumerable<ValidationException> Validate(object value)
@@ -58,8 +60,9 @@ namespace Qowaiv.DomainModel
                     }
                 }
             }
-            SetValue(value);
         }
+
+        internal List<CalculatedProperty> TriggersProperties { get; } = new List<CalculatedProperty>();
 
         /// <inheritdoc />
         public override string ToString()
@@ -77,6 +80,6 @@ namespace Qowaiv.DomainModel
             return value;
         }
 
-        private readonly ValidationContext _context;
+        internal readonly ValidationContext _context;
     }
 }

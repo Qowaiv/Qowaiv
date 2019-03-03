@@ -1,6 +1,8 @@
 ﻿using Qowaiv.ComponentModel.Validation;
+using Qowaiv.DomainModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Qowaiv.DomainModel
 {
@@ -10,11 +12,17 @@ namespace Qowaiv.DomainModel
         /// <summary>No public constructor</summary>
         private PropertyCollection(Dictionary<string, Property> properties) : base(properties)
         {
-            foreach (var prop in this)
+            foreach (var prop in GetEditiable())
             {
-                prop.Value.SetValue(prop.Value.Annotations.DefaultValue);
+                prop.Value = prop.Annotations.DefaultValue;
             }
         }
+
+        /// <summary>Gets the editable properties.</summary>
+        private IEnumerable<Property> GetEditiable() => Values.Where(p => !(p is CalculatedProperty));
+
+        /// <summary>Gets the calculated properties.</summary>
+        private IEnumerable<CalculatedProperty> GetCalculated() => Values.Where(p => p is CalculatedProperty).Cast<CalculatedProperty>();
 
         /// <summary>Creates the properties for the type.</summary>
         public static PropertyCollection Create<TId>(IEntity<TId> entity) where TId : struct
@@ -27,14 +35,37 @@ namespace Qowaiv.DomainModel
 
             foreach (var info in annotated.Properties)
             {
-                if (!info.Descriptor.IsReadOnly)
+                if(SkipProperty(info.Descriptor.Name))
                 {
-                    var property = new Property(info, entity);
+                    continue;
+                }
 
-                    properties[info.Descriptor.Name] = property;
+                var property = info.Descriptor.IsReadOnly 
+                    ? new CalculatedProperty(info, entity)
+                    : new Property(info, entity);
+
+                properties[info.Descriptor.Name] = property;
+            }
+            var collection = new PropertyCollection(properties);
+
+            foreach(var calculated in collection.GetCalculated())
+            {
+                var dependsOn = (DependsOnAttribute)calculated.Annotations.Descriptor.Attributes[typeof(DependsOnAttribute)];
+                if(dependsOn != null)
+                {
+                    foreach(var property in dependsOn.DependingProperties)
+                    {
+                        collection[property].TriggersProperties.Add(calculated);
+                    }
                 }
             }
-            return new PropertyCollection(properties);
+            return collection;
+        }
+
+        private static bool SkipProperty(string name)
+        {
+            return nameof(Entity<int>.IsTransient) == name
+                || nameof(Entity<int>.Properties) == name;
         }
     }
 }

@@ -3,6 +3,7 @@
 // The Implementation takes types into account, and uses an equality comparer.
 
 using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.DomainModel.ChangeManagement;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

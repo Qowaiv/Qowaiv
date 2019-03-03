@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Qowaiv.DomainModel
+namespace Qowaiv.DomainModel.ChangeManagement
 {
     /// <summary>Contains information about a property that was (potentially) changed.</summary>
     internal class PropertyChange

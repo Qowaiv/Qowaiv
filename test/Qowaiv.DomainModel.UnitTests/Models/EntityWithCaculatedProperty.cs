@@ -1,10 +1,12 @@
-﻿namespace Qowaiv.DomainModel.UnitTests.Models
+﻿using Qowaiv.DomainModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+
+namespace Qowaiv.DomainModel.UnitTests.Models
 {
     public class EntityWithCaculatedProperty : Entity<int>
     {
-        public EntityWithCaculatedProperty(int id) : base(id)
-        {
-        }
+        public EntityWithCaculatedProperty(int id)
+            : base(id) { }
 
         public decimal Value
         {
@@ -17,6 +19,7 @@
             set => SetProperty(value);
         }
 
+        [Range(15, 150), DependsOn(nameof(Value), nameof(Repertitions))]
         public decimal Total => Value * Repertitions;
     }
 }

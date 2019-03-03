@@ -70,11 +70,20 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The identifier could not be found..
+        ///   Looks up a localized string similar to The member &apos;{0}&apos; could not be resolved for the type &apos;{1}&apos;..
         /// </summary>
-        internal static string IdentifierNotFoundException {
+        internal static string ArgumentException_MemberCouldNotBeResolvedForType {
             get {
-                return ResourceManager.GetString("IdentifierNotFoundException", resourceCulture);
+                return ResourceManager.GetString("ArgumentException_MemberCouldNotBeResolvedForType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} field is immutable and can not be changed..
+        /// </summary>
+        internal static string ImmutableAttribute_ErrorMessage {
+            get {
+                return ResourceManager.GetString("ImmutableAttribute_ErrorMessage", resourceCulture);
             }
         }
         

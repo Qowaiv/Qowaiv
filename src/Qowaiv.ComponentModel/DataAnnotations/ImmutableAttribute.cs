@@ -7,20 +7,11 @@ namespace Qowaiv.ComponentModel.DataAnnotations
 {
     /// <summary>Specifies that a data field value is immutable.</summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public sealed class ImmutableAttribute : ValidationAttribute
+    public class ImmutableAttribute : ValidationAttribute
     {
         /// <summary>Creates a new instance of an <see cref="ImmutableAttribute"/>.</summary>
-        public ImmutableAttribute() { }
-
-        /// <summary>Creates a new instance of an <see cref="ImmutableAttribute"/>.</summary>
-        /// <param name="errorMessageAccessor">
-        /// The function that enables access to validation resources.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// errorMessageAccessor is null.
-        /// </exception>
-        public ImmutableAttribute(Func<string> errorMessageAccessor)
-            : base(errorMessageAccessor) { }
+        public ImmutableAttribute()
+            : base(() => QowaivComponentModelMessages.ImmutableAttribute_ErrorMessage) { }
 
         /// <summary>Creates a new instance of an <see cref="ImmutableAttribute"/>.</summary>
         /// <param name="errorMessage">
@@ -33,32 +24,43 @@ namespace Qowaiv.ComponentModel.DataAnnotations
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             Guard.NotNull(validationContext, nameof(validationContext));
-            if (IsDefaultValue(value))
-            {
-                throw new ArgumentException(QowaivMessages.ArgumentException_IsDefaultValue, nameof(value));
-            }
 
-            var property = validationContext.ObjectType.GetProperty(validationContext.MemberName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var current = GetCurrent(validationContext);
 
-            if (property is null)
-            {
-                throw new ArgumentException("Validation context contains unresolvable property.");
-            }
-
-            var current = property.GetValue(validationContext.ObjectInstance);
-
-            return IsDefaultValue(current)
+            return IsDefaultValue(current) || current.Equals(value)
                 ? ValidationMessage.None
                 : ValidationMessage.Error(FormatErrorMessage(validationContext.MemberName), validationContext.MemberName);
         }
 
+        /// <summary>Gets the current value of the involved member (property or field).</summary>
+        private object GetCurrent(ValidationContext validationContext)
+        {
+            var member = validationContext.MemberName;
+            var type = validationContext.ObjectType;
+            var instance = validationContext.ObjectInstance;
+
+            var property = type.GetProperty(member, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (property != null)
+            {
+                return property.GetValue(instance);
+            }
+
+            var field = type.GetField(member, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (field != null)
+            {
+                return field.GetValue(instance);
+            }
+
+            throw new ArgumentException(string.Format(QowaivComponentModelMessages.ArgumentException_MemberCouldNotBeResolvedForType, member, type), nameof(validationContext));
+        }
+
+        /// <summary>Returns true if the value equals null or the default of its type.</summary>
         private static bool IsDefaultValue(object value)
         {
             if (value is null)
             {
                 return true;
             }
-            
             var type = value.GetType();
 
             return type.IsValueType && Activator.CreateInstance(type).Equals(value);

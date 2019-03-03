@@ -62,7 +62,7 @@
     <value>De waarde van het veld {0} is niet toegestaan.</value>
   </data>
   <data name="ImmutableAttribute_ErrorMessage" xml:space="preserve">
-    <value>Het veld {0} is onveranderlijk.</value>
+    <value>Het veld {0} is immutable en kan niet worden geweizigd.</value>
   </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
     <value>De postcode {0} is niet geldig voor {1}.</value>

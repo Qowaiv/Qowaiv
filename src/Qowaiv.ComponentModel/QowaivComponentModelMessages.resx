@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -66,7 +65,7 @@
     <value>The member '{0}' could not be resolved for the type '{1}'.</value>
   </data>
   <data name="ImmutableAttribute_ErrorMessage" xml:space="preserve">
-    <value>The {0} field is immutable.</value>
+    <value>The {0} field is immutable and can not be changed.</value>
   </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
     <value>The postal code {0} is not valid for {1}.</value>

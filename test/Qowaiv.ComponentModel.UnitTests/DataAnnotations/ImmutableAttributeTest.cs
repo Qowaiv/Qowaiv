@@ -13,7 +13,7 @@ namespace Qowaiv.ComponentModel.UnitTests.DataAnnotations
         {
             var attribute = new ImmutableAttribute();
             var context = new ValidationContext(new TestClass() { Id = 4 }) { MemberName = nameof(TestClass.Id) };
-            ValidationAssert.WithError("The Id field is immutable.", attribute, 3, context);
+            ValidationAssert.WithError("The Id field is immutable and can not be changed.", attribute, 3, context);
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace Qowaiv.ComponentModel.UnitTests.DataAnnotations
         {
             var attribute = new ImmutableAttribute();
             var context = new ValidationContext(new TestClass() { _Id = 4 }) { MemberName = nameof(TestClass._Id) };
-            ValidationAssert.WithError("The _Id field is immutable.", attribute, 3, context);
+            ValidationAssert.WithError("The _Id field is immutable and can not be changed.", attribute, 3, context);
         }
 
         [Test]

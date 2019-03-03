@@ -1,7 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\props\common.props" />
-
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
@@ -24,6 +23,14 @@
 
   <ItemGroup>
     <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QowaivMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

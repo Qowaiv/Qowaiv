@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\props\common.props" />
 
@@ -38,9 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="QowaivComponentModelMessages.nl.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="QowaivComponentModelMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>QowaivComponentModelMessages.Designer.cs</LastGenOutput>

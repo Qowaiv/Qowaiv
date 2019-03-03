@@ -70,6 +70,24 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The member &apos;{0}&apos; could not be resolved for the type &apos;{1}&apos;..
+        /// </summary>
+        internal static string ArgumentException_MemberCouldNotBeResolvedForType {
+            get {
+                return ResourceManager.GetString("ArgumentException_MemberCouldNotBeResolvedForType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} field is immutable..
+        /// </summary>
+        internal static string ImmutableAttribute_ErrorMessage {
+            get {
+                return ResourceManager.GetString("ImmutableAttribute_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The postal code {0} is not valid for {1}..
         /// </summary>
         internal static string PostalCodeValidator_ErrorMessage {

@@ -1,46 +1,42 @@
-﻿using Qowaiv.ComponentModel.Messages;
+﻿using Qowaiv.ComponentModel;
+using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Qowaiv.DomainModel.ChangeManagement
 {
     /// <summary>Tracks (potential) changes and fires validations and notification events.</summary>
-    internal class EntityChangeTracker<TId> : Dictionary<Property, PropertyChange>
+    internal class EntityChangeTracker<TId> : Dictionary<string, PropertyChange>
         where TId : struct
     {
         private readonly Entity<TId> _entity;
-        private readonly IReadOnlyCollection<ValidationAttribute> _typeAttributes;
-        private readonly ValidationContext _validationContext;
+        private readonly PropertyCollection _properties;
+        private readonly AnnotatedModelValidator _validator;
 
         /// <summary>Creates a new instance of an <see cref="EntityChangeTracker{TId}"/>.</summary>
-        public EntityChangeTracker(Entity<TId> entity)
+        public EntityChangeTracker(Entity<TId> entity, PropertyCollection properties, AnnotatedModelValidator validator)
         {
             _entity = entity;
-           _typeAttributes = AnnotatedModelStore.Instance.GetAnnotededModel(entity.GetType()).TypeAttributes;
-            _validationContext = new ValidationContext(entity)
-            {
-                DisplayName = _entity.GetType().Name
-            };
-
+            _properties = properties;
+            _validator = validator;
         }
 
         /// <summary>If set to true, it buffer changes first before validating.</summary>
         public bool BufferChanges { get; set; }
 
         /// <summary>Adds a <see cref="PropertyChange"/> to list of changed properties.</summary>
-        public void AddPropertyChange(Property property, object value)
+        public void AddPropertyChange(string propertyName, object value)
         {
-            if (!TryGetValue(property, out PropertyChange change))
+            if (!TryGetValue(propertyName, out PropertyChange change))
             {
-                change = new PropertyChange(property);
-                this[property] = change;
+                change = new PropertyChange(propertyName, _properties[propertyName]);
+                this[propertyName] = change;
             }
 
-            property.Value = value;
+            _properties[propertyName] = value;
 
             if (!BufferChanges)
             {
@@ -58,7 +54,7 @@ namespace Qowaiv.DomainModel.ChangeManagement
         /// <summary>Validates all changed properties.</summary>
         private void ValidateAll()
         {
-            var errors = new List<ValidationException>();
+            Result validationResult = null;
 
             // We want to be ready for a next usage.
             var changes = Values.ToArray();
@@ -67,9 +63,7 @@ namespace Qowaiv.DomainModel.ChangeManagement
 
             try
             {
-                ValidateModelBasedValidationAttributes(errors);
-                ValidatePropertyChanges(changes, errors);
-                ValidateCalculatedProperies(changes, errors);
+                validationResult = _validator.Validate(_entity);
             }
             // if this fails, we want to rollback too.
             catch (Exception)
@@ -79,52 +73,18 @@ namespace Qowaiv.DomainModel.ChangeManagement
             }
 
             // Rollback.
-            if (errors.Any(e => e.ValidationResult is null || e.ValidationResult.GetSeverity() == ValidationSeverity.Error))
+            if (!validationResult.IsValid)
             {
                 Rollback(changes);
-                ValidationMessage.ThrowIfAnyErrors(errors);
+                ValidationMessage.ThrowIfAnyErrors(validationResult.Messages);
             }
         }
 
-        private static void ValidatePropertyChanges(PropertyChange[] changes, List<ValidationException> errors)
+        private void Rollback(PropertyChange[] changes)
         {
             foreach (var change in changes)
             {
-                var prop = change.Property;
-                var value = prop.Value;
-                prop.Value = change.Intial;
-                errors.AddRange(prop.Validate(value));
-                prop.Value = value;
-            }
-        }
-
-        private void ValidateCalculatedProperies(PropertyChange[] changes, List<ValidationException> errors)
-        {
-            // TODO: keep track of calculated values and skip those who did not change.
-            foreach (var calculated in changes.SelectMany(change => change.Property.TriggersProperties).Distinct())
-            {
-                errors.AddRange(calculated.Validate(calculated.Value));
-            }
-        }
-
-        private void ValidateModelBasedValidationAttributes(List<ValidationException> errors)
-        {
-            foreach (var attr in _typeAttributes)
-            {
-                var result = attr.GetValidationResult(_entity, _validationContext);
-                if (result.GetSeverity() != ValidationSeverity.None)
-                {
-                    errors.Add(new ValidationException(result, attr, _entity));
-                }
-            }
-        }
-
-        private static void Rollback(PropertyChange[] changes)
-        {
-            foreach (var change in changes)
-            {
-                var prop = change.Property;
-                prop.Value = change.Intial;
+                _properties[change.PropertyName] = change.Intial;
             }
         }
 
@@ -135,12 +95,11 @@ namespace Qowaiv.DomainModel.ChangeManagement
         {
             foreach (var change in Values)
             {
-                var prop = change.Property;
-                var value = prop.Value;
+                var value = _properties[change.PropertyName];
 
                 if (change.Intial != value)
                 {
-                    _entity.OnPropertyChanged(prop);
+                    _entity.OnPropertyChanged(change.PropertyName);
                 }
             }
         }

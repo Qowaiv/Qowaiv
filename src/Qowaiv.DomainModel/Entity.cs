@@ -3,11 +3,14 @@
 // The Implementation takes types into account, and uses an equality comparer.
 
 using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.ComponentModel.Validation;
 using Qowaiv.DomainModel.ChangeManagement;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Qowaiv.DomainModel
@@ -20,28 +23,29 @@ namespace Qowaiv.DomainModel
     public abstract class Entity<TId> : IEntity<TId> where TId : struct
     {
         private readonly EntityChangeTracker<TId> _tracker;
-
-        /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
-        protected Entity()
-        {
-            Properties = PropertyCollection.Create(this);
-            _tracker = new EntityChangeTracker<TId>(this);
-        }
+        private readonly PropertyCollection _properties;
+        private readonly AnnotatedModelValidator _validator;
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
         /// <param name="id">
         /// The identifier of the entity.
         /// </param>
-        /// <exception cref="ArgumentException">
-        /// If the identifier has the default (transient) value.
-        /// </exception>
-        protected Entity(TId id) : this()
+        /// <param name="validator">
+        /// The validator to validate the entity with.
+        /// </param>
+        protected Entity(TId id, AnnotatedModelValidator validator)
         {
+            _validator = validator ?? new AnnotatedModelValidator();
+            _properties = PropertyCollection.Create(this);
+            _tracker = new EntityChangeTracker<TId>(this, _properties, _validator);
+
             Id = id;
         }
+        /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
+        protected Entity(TId id) : this(id, null) { }
 
-        /// <summary>Gets the (editable) properties of the entity.</summary>
-        public PropertyCollection Properties { get; }
+        /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
+        protected Entity() : this(default(TId)) { }
 
         /// <inheritdoc />
         [Mandatory, Immutable]
@@ -50,19 +54,23 @@ namespace Qowaiv.DomainModel
             get => GetProperty<TId>();
             set => SetProperty(value);
         }
-
-        /// <inheritdoc />
-        public bool IsTransient => default(TId).Equals(Id);
-
+        
         /// <summary>
         /// PropertyChanged event (per <see cref="INotifyPropertyChanged" />).
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>Notifies that the <see cref="Property"/> changed.</summary>
-        internal void OnPropertyChanged(Property property)
+        /// <summary>Validates  if the <see cref="Entity{TId}"/> is valid.</summary>
+        /// <remarks>
+        /// This rules are triggered automatically on every change to guarantee
+        /// that the entity is always valid.
+        /// </remarks>
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => Enumerable.Empty<ValidationResult>();
+
+        /// <summary>Notifies that the property changed.</summary>
+        internal void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property.PropertyType.Name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>Sets multiple properties simultaneously.</summary>
@@ -86,9 +94,12 @@ namespace Qowaiv.DomainModel
             setProperties();
             _tracker.ProcessChanges();
         }
-       
+
         /// <summary>Gets a property (value).</summary>
-        protected T GetProperty<T>([CallerMemberName] string propertyName = null) => (T)Properties[propertyName].Value;
+        protected T GetProperty<T>([CallerMemberName] string propertyName = null)
+        {
+            return (T)_properties[propertyName];
+        }
 
         /// <summary>Sets a property (value).</summary>
         /// <exception cref="ValidationException">
@@ -99,18 +110,14 @@ namespace Qowaiv.DomainModel
         /// </remarks>
         protected void SetProperty(object value, [CallerMemberName] string propertyName = null)
         {
-            var property = Properties[propertyName];
-            _tracker.AddPropertyChange(property, value);
+            _tracker.AddPropertyChange(propertyName, value);
         }
 
         /// <inheritdoc />
         public override bool Equals(object obj) => Equals(obj as Entity<TId>);
 
         /// <inheritdoc />
-        public bool Equals(IEntity<TId> other)
-        {
-            return _comparer.Equals(this, other);
-        }
+        public bool Equals(IEntity<TId> other) => _comparer.Equals(this, other);
 
         /// <summary>Returns true if left and right are equal.</summary>
         public static bool operator ==(Entity<TId> left, Entity<TId> right) => _comparer.Equals(left, right);
@@ -120,6 +127,8 @@ namespace Qowaiv.DomainModel
 
         /// <inheritdoc />
         public override int GetHashCode() => _comparer.GetHashCode(this);
+
+        private bool IsTransient => default(TId).Equals(Id);
 
         /// <summary>Represents the entity as a DEBUG <see cref="string"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -6,14 +6,14 @@ namespace Qowaiv.DomainModel.ChangeManagement
     internal class PropertyChange
     {
         /// <summary>Creates a new instance of a <see cref="PropertyChange"/>.</summary>
-        public PropertyChange(Property property)
+        public PropertyChange(string propertyName, object intial)
         {
-            Property = property;
-            Intial = property.Value;
+            PropertyName = propertyName;
+            Intial = intial;
         }
 
         /// <summary>The linked entity property.</summary>
-        public Property Property { get; }
+        public string PropertyName { get; }
 
         /// <summary>The initial value of the property.</summary>
         /// <remarks>

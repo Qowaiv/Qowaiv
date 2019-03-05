@@ -2,28 +2,12 @@ using NUnit.Framework;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.TestTools;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests
 {
     public class EntityTest
     {
-        [Test]
-        public void Ctor_NewlyCreated_IsTransient()
-        {
-            var entity = new SimpleEntity();
-            Assert.True(entity.IsTransient);
-        }
-
-        [Test]
-        public void SetId_NotTransient()
-        {
-            var entity = new SimpleEntity(Guid.NewGuid());
-            
-            Assert.False(entity.IsTransient);
-        }
-
         [Test]
         public void UpdateId_Default_ValidationException()
         {

@@ -51,21 +51,8 @@ namespace Qowaiv.ComponentModel.Validation
         public Result<T> Validate<T>(T model)
         {
             var validationContext = new ValidationContext(model, ServiceProvider, Items);
-            var annotatedModel = AnnotatedModelStore.Instance.GetAnnotededModel(ResolveType(model));
+            var annotatedModel = AnnotatedModelStore.Instance.GetAnnotededModel(model.GetType());
             return Validate(new Result<T>(model), validationContext, annotatedModel);
-        }
-
-        /// <summary>Resolves the type of the model.</summary>
-        /// <remarks>
-        /// For scenarios where we don't actually know T and specify <see cref="object"/>.
-        /// </remarks>
-        internal static Type ResolveType<T>(T model)
-        {
-            if (model != null && typeof(T) == typeof(object))
-            {
-                return model.GetType();
-            }
-            return typeof(T);
         }
 
         private Result<T> Validate<T>(Result<T> result, ValidationContext validationContext, AnnotatedModel annotations)

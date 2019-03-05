@@ -1,5 +1,4 @@
-﻿using Qowaiv.DomainModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
@@ -19,7 +18,7 @@ namespace Qowaiv.DomainModel.UnitTests.Models
             set => SetProperty(value);
         }
 
-        [Range(15, 150), DependsOn(nameof(Value), nameof(Repertitions))]
+        [Range(15, 150)]
         public decimal Total => Value * Repertitions;
     }
 }

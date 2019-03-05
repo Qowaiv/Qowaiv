@@ -37,20 +37,11 @@ namespace Qowaiv.DomainModel.UnitTests
                 entity.RequiredProperty = 0;
             });
         }
-
-        [Test]
-        public void ToString_PropertyWithDisplayAttribute_SomeInformativeText()
-        {
-            var entity = new PropertyTestEntity
-            {
-                DisplayProperty = "Hello World!"
-            };
-
-            Assert.AreEqual("Display property, Value: Hello World!", entity.ToStringAccessor());
-        }
-
+        
         private class PropertyTestEntity : Entity<int>
         {
+            public PropertyTestEntity() : base(17) { }
+
             public int WrongTypeProperty
             {
                 get => GetProperty<int>();
@@ -70,11 +61,6 @@ namespace Qowaiv.DomainModel.UnitTests
             {
                 get => GetProperty<string>();
                 set => SetProperty(value);
-            }
-
-            public string ToStringAccessor()
-            {
-                return Properties[nameof(DisplayProperty)].ToString();
             }
         }
     }

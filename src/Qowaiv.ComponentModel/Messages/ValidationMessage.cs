@@ -69,18 +69,19 @@ namespace Qowaiv.ComponentModel.Messages
         /// <exception cref="AggregateException">
         /// If multiple errors occur.
         /// </exception>
-        public static void ThrowIfAnyErrors(IEnumerable<ValidationException> messages)
+        public static void ThrowIfAnyErrors(IEnumerable<ValidationResult> messages)
         {
             Guard.NotNull(messages, nameof(messages));
 
-            var errors = messages.Where(m => m.ValidationResult is null || m.ValidationResult.GetSeverity() == ValidationSeverity.Error).ToArray();
+            var errors = messages.GetErrors().ToArray();
             if(errors.Length == 1)
             {
-                throw errors[0];
+                var error = errors[0];
+                throw new ValidationException(error, null, null);
             }
             else if(errors.Any())
             {
-                throw new AggregateException(errors);
+                throw new AggregateException(errors.Select(error => new ValidationException(error, null, null)).ToArray());
             }
         }
     }

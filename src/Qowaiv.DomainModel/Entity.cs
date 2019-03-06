@@ -20,11 +20,10 @@ namespace Qowaiv.DomainModel
     /// The type of the identifier.
     /// </typeparam>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public abstract class Entity<TId> : IEntity<TId> where TId : struct
+    public abstract class Entity<TId> : IEntity<TId>, IValidatableObject where TId : struct
     {
         private readonly EntityChangeTracker<TId> _tracker;
         private readonly PropertyCollection _properties;
-        private readonly AnnotatedModelValidator _validator;
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
         /// <param name="validator">
@@ -32,9 +31,8 @@ namespace Qowaiv.DomainModel
         /// </param>
         protected Entity(AnnotatedModelValidator validator)
         {
-            _validator = validator ?? new AnnotatedModelValidator();
             _properties = PropertyCollection.Create(this);
-            _tracker = new EntityChangeTracker<TId>(this, _properties, _validator);
+            _tracker = new EntityChangeTracker<TId>(this, _properties, validator);
         }
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
@@ -52,12 +50,12 @@ namespace Qowaiv.DomainModel
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>Validates  if the <see cref="Entity{TId}"/> is valid.</summary>
+        /// <summary>Validates if the <see cref="Entity{TId}"/> is valid.</summary>
         /// <remarks>
         /// This rules are triggered automatically on every change to guarantee
         /// that the entity is always valid.
         /// </remarks>
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => Enumerable.Empty<ValidationResult>();
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => Enumerable.Empty<ValidationResult>();
 
         /// <summary>Notifies that the property changed.</summary>
         internal void OnPropertyChanged(string propertyName)

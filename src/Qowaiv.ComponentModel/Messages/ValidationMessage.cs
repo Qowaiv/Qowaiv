@@ -64,7 +64,7 @@ namespace Qowaiv.ComponentModel.Messages
 
         /// <summary>Throws the <see cref="ValidationException"/> messages contain any error messages.</summary>
         /// <exception cref="ValidationException">
-        /// If an single error occurs.
+        /// If a single error occurs.
         /// </exception>
         /// <exception cref="AggregateException">
         /// If multiple errors occur.

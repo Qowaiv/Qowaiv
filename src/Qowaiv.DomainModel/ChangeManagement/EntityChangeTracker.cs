@@ -21,7 +21,7 @@ namespace Qowaiv.DomainModel.ChangeManagement
         {
             _entity = entity;
             _properties = properties;
-            _validator = validator;
+            _validator = validator ?? new AnnotatedModelValidator();
         }
 
         /// <summary>If set to true, it buffer changes first before validating.</summary>

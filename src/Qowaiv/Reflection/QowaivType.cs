@@ -10,7 +10,12 @@ namespace Qowaiv.Reflection
         /// <summary>Returns true if the value is null or equal to the default value.</summary>
         public static bool IsNullOrDefaultValue(object value)
         {
-            return value is null || value.Equals(Activator.CreateInstance(value.GetType()));
+            if(value is null)
+            {
+                return true;
+            }
+            var tp = value.GetType();
+            return tp.IsValueType && value.Equals(Activator.CreateInstance(tp));
         }
 
         /// <summary>Returns true if the type is a Single Value Object, otherwise false.</summary>

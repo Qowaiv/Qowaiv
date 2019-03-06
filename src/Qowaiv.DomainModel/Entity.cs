@@ -5,6 +5,7 @@
 using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.DomainModel.ChangeManagement;
+using Qowaiv.Reflection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,11 +49,11 @@ namespace Qowaiv.DomainModel
         protected Entity() : this(default(TId)) { }
 
         /// <inheritdoc />
-        [Mandatory, Immutable]
+        //[Mandatory, Immutable]
         public TId Id
         {
             get => GetProperty<TId>();
-            set => SetProperty(value);
+            set => SetImmutableProperty(value);
         }
         
         /// <summary>
@@ -108,9 +109,19 @@ namespace Qowaiv.DomainModel
         /// <remarks>
         /// This will trigger the <see cref="PropertyChanged"/> on a change.
         /// </remarks>
-        protected void SetProperty(object value, [CallerMemberName] string propertyName = null)
+        protected void SetProperty<T>(T value, [CallerMemberName] string propertyName = null)
         {
             _tracker.AddPropertyChange(propertyName, value);
+        }
+
+        protected void SetImmutableProperty<T>(T value, [CallerMemberName] string propertyName = null)
+        {
+            var current = GetProperty<T>(propertyName);
+            if(!QowaivType.IsNullOrDefaultValue(current))
+            {
+                throw new ValidationException("");
+            }
+            SetImmutableProperty(value, propertyName);
         }
 
         /// <inheritdoc />

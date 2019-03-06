@@ -5,8 +5,6 @@ namespace Qowaiv.DomainModel.UnitTests.Models
 {
     public class EntityWithDefaultValue : Entity<int>
     {
-        public EntityWithDefaultValue(int id) : base(id) { }
-
         [DefaultValue("is")]
         public Country Country
         {

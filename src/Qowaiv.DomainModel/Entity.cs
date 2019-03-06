@@ -2,7 +2,6 @@
 // Classes implementing "IEquatable<T>" should be sealed
 // The Implementation takes types into account, and uses an equality comparer.
 
-using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.DomainModel.ChangeManagement;
 using Qowaiv.Reflection;
@@ -28,34 +27,26 @@ namespace Qowaiv.DomainModel
         private readonly AnnotatedModelValidator _validator;
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
-        /// <param name="id">
-        /// The identifier of the entity.
-        /// </param>
         /// <param name="validator">
         /// The validator to validate the entity with.
         /// </param>
-        protected Entity(TId id, AnnotatedModelValidator validator)
+        protected Entity(AnnotatedModelValidator validator)
         {
             _validator = validator ?? new AnnotatedModelValidator();
             _properties = PropertyCollection.Create(this);
             _tracker = new EntityChangeTracker<TId>(this, _properties, _validator);
-
-            Id = id;
         }
-        /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
-        protected Entity(TId id) : this(id, null) { }
 
         /// <summary>Creates a new instance of an <see cref="Entity{TId}"/>.</summary>
-        protected Entity() : this(default(TId)) { }
+        protected Entity() : this(null) { }
 
         /// <inheritdoc />
-        //[Mandatory, Immutable]
         public TId Id
         {
             get => GetProperty<TId>();
             set => SetImmutableProperty(value);
         }
-        
+
         /// <summary>
         /// PropertyChanged event (per <see cref="INotifyPropertyChanged" />).
         /// </summary>
@@ -106,22 +97,24 @@ namespace Qowaiv.DomainModel
         /// <exception cref="ValidationException">
         /// If the new value violates the property constraints.
         /// </exception>
-        /// <remarks>
-        /// This will trigger the <see cref="PropertyChanged"/> on a change.
-        /// </remarks>
         protected void SetProperty<T>(T value, [CallerMemberName] string propertyName = null)
         {
             _tracker.AddPropertyChange(propertyName, value);
         }
 
+        /// <summary>Sets a property (value).</summary>
+        /// <exception cref="ValidationException">
+        /// If the new value violates the property constraints, including the
+        /// its immutability.
+        /// </exception>
         protected void SetImmutableProperty<T>(T value, [CallerMemberName] string propertyName = null)
         {
             var current = GetProperty<T>(propertyName);
-            if(!QowaivType.IsNullOrDefaultValue(current))
+            if (!QowaivType.IsNullOrDefaultValue(current))
             {
-                throw new ValidationException("");
+                throw new ValidationException(QowaivDomainModelMessages.ImmutableAttribute_ErrorMessage);
             }
-            SetImmutableProperty(value, propertyName);
+            SetProperty(value, propertyName);
         }
 
         /// <inheritdoc />

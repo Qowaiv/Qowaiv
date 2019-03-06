@@ -4,8 +4,8 @@ namespace Qowaiv.DomainModel.UnitTests.Models
 {
     public class EntityWithCaculatedProperty : Entity<int>
     {
-        public EntityWithCaculatedProperty(int id)
-            : base(id) { }
+        public EntityWithCaculatedProperty()
+            : base() { }
 
         public decimal Value
         {

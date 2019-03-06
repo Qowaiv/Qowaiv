@@ -9,9 +9,10 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void IsValid_CalculatedProperty_IsValid()
         {
-            var model = new EntityWithCaculatedProperty(17);
+            var model = new EntityWithCaculatedProperty();
             model.SetProperties(() =>
             {
+                model.Id = 17;
                 model.Repertitions = 5;
                 model.Value = 8;
             });
@@ -20,11 +21,12 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void IsValid_CalculatedProperty_WithErrors()
         {
-            var model = new EntityWithCaculatedProperty(17);
+            var model = new EntityWithCaculatedProperty();
             Assert.Throws<ValidationException>(() =>
             {
                 model.SetProperties(() =>
                 {
+                    model.Id = 17;
                     model.Repertitions = 50;
                     model.Value = 8.17m;
                 });

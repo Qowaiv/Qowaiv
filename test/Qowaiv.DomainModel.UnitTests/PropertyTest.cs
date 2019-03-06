@@ -2,7 +2,6 @@
 using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.Globalization;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests
@@ -12,19 +11,8 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void DefaultValue_SomeModel_Initialized()
         {
-            var entity = new EntityWithDefaultValue(17);
+            var entity = new EntityWithDefaultValue();
             Assert.AreEqual(Country.IS, entity.Country);
-        }
-
-        [Test]
-        public void GuardType_WrongType_Throws()
-        {
-            var entity = new PropertyTestEntity();
-
-            Assert.Throws<ArgumentException>(() =>
-            {
-                entity.WrongTypeProperty = 12;    
-            });
         }
 
         [Test]
@@ -40,15 +28,6 @@ namespace Qowaiv.DomainModel.UnitTests
         
         private class PropertyTestEntity : Entity<int>
         {
-            public PropertyTestEntity() : base(17) { }
-
-            public int WrongTypeProperty
-            {
-                get => GetProperty<int>();
-                // Sets the value using a string to trigger the validation.
-                set => SetProperty(value.ToString());
-            }
-
             [Mandatory]
             public int RequiredProperty
             {

@@ -88,15 +88,6 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} field is immutable and can not be changed..
-        /// </summary>
-        internal static string ImmutableAttribute_ErrorMessage {
-            get {
-                return ResourceManager.GetString("ImmutableAttribute_ErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The postal code {0} is not valid for {1}..
         /// </summary>
         internal static string PostalCodeValidator_ErrorMessage {

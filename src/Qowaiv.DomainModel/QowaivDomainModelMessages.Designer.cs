@@ -61,6 +61,15 @@ namespace Qowaiv.DomainModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The {0} field is immutable and can not be changed..
+        /// </summary>
+        internal static string ImmutableAttribute_ErrorMessage {
+            get {
+                return ResourceManager.GetString("ImmutableAttribute_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entities that are transient can not be stored in a hash table..
         /// </summary>
         internal static string NotSupported_GetHashCodeOnIsTransient {

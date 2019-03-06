@@ -4,9 +4,6 @@ namespace Qowaiv.DomainModel.UnitTests.Models
 {
     public class EntityWithInitScope : Entity<int>
     {
-        public EntityWithInitScope() { }
-        public EntityWithInitScope(int id) : base(id) { }
-
         [Mandatory]
         public string Name
         {
@@ -23,10 +20,11 @@ namespace Qowaiv.DomainModel.UnitTests.Models
 
         public static EntityWithInitScope FromData(int id, string name, Date startDate)
         {
-            var entity = new EntityWithInitScope(id);
+            var entity = new EntityWithInitScope();
 
             entity.SetProperties(() =>
             {
+                entity.Id = id;
                 entity.Name = name;
                 entity.StartDate = startDate;
             });

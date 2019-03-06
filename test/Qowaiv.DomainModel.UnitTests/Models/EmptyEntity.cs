@@ -8,8 +8,6 @@ namespace Qowaiv.DomainModel.UnitTests.Models
         {
         }
 
-        public EmptyEntity(Guid id) : base(id)
-        {
-        }
+        public EmptyEntity(Guid id) => Id = id;
     }
 }

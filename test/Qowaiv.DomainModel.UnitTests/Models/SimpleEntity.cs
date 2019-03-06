@@ -6,9 +6,6 @@ namespace Qowaiv.DomainModel.UnitTests.Models
 {
     internal class SimpleEntity : Entity<Guid>
     {
-        public SimpleEntity() { }
-        public SimpleEntity(Guid id) : base(id) { }
-
         [Mandatory, MaxLength(3), Display(Name = "Full name")]
         public string FullName
         {

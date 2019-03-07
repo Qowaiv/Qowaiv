@@ -42,5 +42,23 @@ namespace Qowaiv.UnitTests
         {
             Assert.IsFalse(Unknown.IsUnknown("Vreemd", CultureInfo.InvariantCulture));
         }
+
+        [Test]
+        public void Value_ReferenceType_Throws()
+        {
+            Assert.Throws<ArgumentException>(() => Unknown.Value(typeof(object)));
+        }
+
+        [Test]
+        public void Value_TypeWithUnkown_UnknownValue()
+        {
+            Assert.AreEqual(PostalCode.Unknown, Unknown.Value(typeof(PostalCode)));
+        }
+
+        [Test]
+        public void Value_TypeWithoutUnkown_IsNull()
+        {
+            Assert.IsNull(Unknown.Value(typeof(Uuid)));
+        }
     }
 }

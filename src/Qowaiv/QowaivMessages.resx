@@ -252,4 +252,7 @@
   <data name="ArgumentException_TypeOf" xml:space="preserve">
     <value />
   </data>
+  <data name="ArgumentException_NoValueType" xml:space="preserve">
+    <value>The argument {0} is not a value type.</value>
+  </data>
 </root>

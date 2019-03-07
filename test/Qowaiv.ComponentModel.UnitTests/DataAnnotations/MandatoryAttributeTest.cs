@@ -37,5 +37,20 @@ namespace Qowaiv.ComponentModel.Tests.DataAnnotations
             var act = attr.IsValid(EmailAddress.Empty);
             Assert.IsFalse(act);
         }
+
+        [Test]
+        public void IsValid_EmailAddressUnknown_True()
+        {
+            var attr = new MandatoryAttribute { AllowUnknownValue = true };
+            var act = attr.IsValid(EmailAddress.Unknown);
+            Assert.IsTrue(act);
+        }
+        [Test]
+        public void IsValid_EmailAddressUnknown_False()
+        {
+            var attr = new MandatoryAttribute();
+            var act = attr.IsValid(EmailAddress.Unknown);
+            Assert.IsFalse(act);
+        }
     }
 }

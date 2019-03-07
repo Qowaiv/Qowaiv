@@ -21,12 +21,13 @@ namespace Qowaiv.ComponentModel.DataAnnotations
             if (value != null)
             {
                 var type = value.GetType();
+
+                if (!AllowUnknownValue && value.Equals(Unknown.Value(type)))
+                {
+                    return false;
+                }
                 if (type.IsValueType)
                 {
-                    if (!AllowUnknownValue && value.Equals(Unknown.Value(type)))
-                    {
-                        return false;
-                    }
                     return !value.Equals(Activator.CreateInstance(value.GetType()));
                 }
             }

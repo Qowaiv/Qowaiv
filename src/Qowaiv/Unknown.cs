@@ -79,8 +79,6 @@ namespace Qowaiv
         /// </remarks>
         public static object Value(Type type)
         {
-            Guard.IsValueType(type, nameof(type));
-
             if (UnknownValues.TryGetValue(type, out object unknown))
             {
                 return unknown;
@@ -90,14 +88,14 @@ namespace Qowaiv
                 if (!UnknownValues.TryGetValue(type, out unknown))
                 {
                     var field = type.GetField(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                    if (field != null)
+                    if (field?.FieldType == type)
                     {
                         unknown = field.GetValue(null);
                     }
                     else
                     {
                         var property = type.GetProperty(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                        if (property != null)
+                        if (property?.PropertyType == type)
                         {
                             unknown = property.GetValue(null);
                         }

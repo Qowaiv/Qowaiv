@@ -85,23 +85,6 @@ namespace Qowaiv
             throw new ArgumentException(string.Format(QowaivMessages.ArgumentException_Must, typeof(T)), paramName);
         }
 
-        /// <summary>Guards the parameter to be of the value type, otherwise throws an argument exception.</summary>
-        /// <param name="param">
-        /// The parameter to guard.
-        /// </param>
-        /// <param name="paramName">
-        /// The name of the parameter.
-        /// </param>
-        [DebuggerStepThrough]
-        public static Type IsValueType([ValidatedNotNull]Type param, string paramName)
-        {
-            if(NotNull(param, paramName).IsValueType)
-            {
-                return param;
-            }
-            throw new ArgumentException(string.Format(QowaivMessages.ArgumentException_NoValueType, param), paramName);
-        }
-
         /// <summary>Guards the parameter if the type is not null and implements the specified interface,
         /// otherwise throws an argument (null) exception.
         /// </summary>

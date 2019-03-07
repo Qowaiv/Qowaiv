@@ -44,21 +44,26 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Value_ReferenceType_Throws()
+        public void Value_ValueTypeWithUnkown_UnknownValue()
         {
-            Assert.Throws<ArgumentException>(() => Unknown.Value(typeof(object)));
+            Assert.AreEqual(PostalCode.Unknown, Unknown.Value(typeof(PostalCode)));
         }
 
         [Test]
-        public void Value_TypeWithUnkown_UnknownValue()
+        public void Value_ReferenceTypeWithUnkown_UnknownValue()
         {
-            Assert.AreEqual(PostalCode.Unknown, Unknown.Value(typeof(PostalCode)));
+            Assert.AreEqual(ClassWithUnknownValue.Unknown, Unknown.Value(typeof(ClassWithUnknownValue)));
         }
 
         [Test]
         public void Value_TypeWithoutUnkown_IsNull()
         {
             Assert.IsNull(Unknown.Value(typeof(Uuid)));
+        }
+
+        private class ClassWithUnknownValue
+        {
+            public static ClassWithUnknownValue Unknown { get; } = new ClassWithUnknownValue();
         }
     }
 }

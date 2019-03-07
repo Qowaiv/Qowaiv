@@ -97,15 +97,6 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The argument {0} is not a value type..
-        /// </summary>
-        public static string ArgumentException_NoValueType {
-            get {
-                return ResourceManager.GetString("ArgumentException_NoValueType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Value cannot be an empty string..
         /// </summary>
         public static string ArgumentException_StringEmpty {

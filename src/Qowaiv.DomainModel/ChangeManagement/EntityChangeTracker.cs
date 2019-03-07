@@ -9,7 +9,7 @@ using System.Linq;
 namespace Qowaiv.DomainModel.ChangeManagement
 {
     /// <summary>Tracks (potential) changes and fires validations and notification events.</summary>
-    internal class EntityChangeTracker<TId> : Dictionary<string, PropertyChange>
+    internal class EntityChangeTracker<TId> : Dictionary<string, object>
         where TId : struct
     {
         private readonly Entity<TId> _entity;
@@ -27,13 +27,13 @@ namespace Qowaiv.DomainModel.ChangeManagement
         /// <summary>If set to true, it buffer changes first before validating.</summary>
         public bool BufferChanges { get; set; }
 
-        /// <summary>Adds a <see cref="PropertyChange"/> to list of changed properties.</summary>
+        /// <summary>Adds the changed  property with its initial value to the changed properties.</summary>
         public void AddPropertyChange(string propertyName, object value)
         {
-            if (!TryGetValue(propertyName, out PropertyChange change))
+            if (!ContainsKey(propertyName))
             {
-                change = new PropertyChange(propertyName, _properties[propertyName]);
-                this[propertyName] = change;
+                var initial = _properties[propertyName];
+                this[propertyName] = initial;
             }
 
             _properties[propertyName] = value;
@@ -47,44 +47,51 @@ namespace Qowaiv.DomainModel.ChangeManagement
         /// <summary>Applies all changes at once.</summary>
         public void ProcessChanges()
         {
-            ValidateAll();
-            InvokePropertiesChanged();
+            lock (locker)
+            {
+                try
+                {
+                    var result = ValidateAll();
+                    if (result.IsValid)
+                    {
+                        InvokePropertiesChanged();
+                    }
+                    else
+                    {
+                        Rollback();
+                        ValidationMessage.ThrowIfAnyErrors(result.Messages);
+                    }
+                }
+                finally
+                {
+                    Clear();
+                }
+            }
         }
 
         /// <summary>Validates all changed properties.</summary>
-        private void ValidateAll()
+        private Result ValidateAll()
         {
-            Result validationResult = null;
-
-            // We want to be ready for a next usage.
-            var changes = Values.ToArray();
-            Clear();
             BufferChanges = false;
 
             try
             {
-                validationResult = _validator.Validate(_entity);
+                return _validator.Validate(_entity);
             }
             // if this fails, we want to rollback too.
             catch (Exception)
             {
-                Rollback(changes);
+                Rollback();
                 throw;
-            }
-
-            // Rollback.
-            if (!validationResult.IsValid)
-            {
-                Rollback(changes);
-                ValidationMessage.ThrowIfAnyErrors(validationResult.Messages);
             }
         }
 
-        private void Rollback(PropertyChange[] changes)
+        /// <summary>Rolls back all changed properties.</summary>
+        private void Rollback()
         {
-            foreach (var change in changes)
+            foreach (var change in this)
             {
-                _properties[change.PropertyName] = change.Intial;
+                _properties[change.Key] = change.Value;
             }
         }
 
@@ -93,15 +100,17 @@ namespace Qowaiv.DomainModel.ChangeManagement
         /// </summary>
         private void InvokePropertiesChanged()
         {
-            foreach (var change in Values)
+            foreach (var change in this)
             {
-                var value = _properties[change.PropertyName];
+                var value = _properties[change.Key];
 
-                if (change.Intial != value)
+                if (change.Value != value)
                 {
-                    _entity.OnPropertyChanged(change.PropertyName);
+                    _entity.OnPropertyChanged(change.Key);
                 }
             }
         }
+
+        private readonly object locker = new object();
     }
 }

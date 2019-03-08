@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Qowaiv.ComponentModel
@@ -25,11 +27,16 @@ namespace Qowaiv.ComponentModel
         /// </param>
         public Result(T data, IEnumerable<ValidationResult> messages) : base(messages)
         {
-            Data = data;
+            _data = data;
         }
 
         /// <summary>Gets the data related to result.</summary>
-        public T Data { get; }
+        public T Data => IsValid 
+            ? _data 
+            : throw new InvalidOperationException(QowaivComponentModelMessages.InvalidOperationException_InvalidModel);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        internal readonly T _data;
 
         /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
         public static implicit operator Result<T>(T model) => new Result<T>(model);

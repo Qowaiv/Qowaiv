@@ -70,6 +70,15 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The model can not be executed. It is invalid..
+        /// </summary>
+        internal static string InvalidOperationException_InvalidModel {
+            get {
+                return ResourceManager.GetString("InvalidOperationException_InvalidModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The postal code {0} is not valid for {1}..
         /// </summary>
         internal static string PostalCodeValidator_ErrorMessage {

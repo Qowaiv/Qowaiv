@@ -46,11 +46,20 @@ namespace Qowaiv.ComponentModel.Validation
             get => IsIValidatableObject || TypeAttributes.Any() || Properties.Any();
         }
 
+        /// <summary>Get an <see cref="AnnotatedModel"/>.</summary>
+        /// <param name="type">
+        /// Type to get the annotated model for.
+        /// </param>
+        public static AnnotatedModel Get(Type type)
+        {
+            return AnnotatedModelStore.Instance.GetAnnotededModel(type);
+        }
+
         /// <summary>Creates an <see cref="AnnotatedModel"/>.</summary>
         /// <param name="type">
         /// Type to create the annotated model for.
         /// </param>
-        public static AnnotatedModel Create(Type type)
+        internal static AnnotatedModel Create(Type type)
         {
             Guard.NotNull(type, nameof(type));
 

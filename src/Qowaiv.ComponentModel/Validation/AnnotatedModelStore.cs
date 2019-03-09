@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Qowaiv.ComponentModel.Validation
 {
     /// <summary>Represents a store for <see cref="AnnotatedModel"/>s.</summary>
-    public sealed class AnnotatedModelStore
+    internal sealed class AnnotatedModelStore
     {
         /// <summary>Gets the singleton instance of the <see cref="AnnotatedModelStore"/>.</summary>
         public static readonly AnnotatedModelStore Instance = new AnnotatedModelStore();
@@ -55,7 +55,7 @@ namespace Qowaiv.ComponentModel.Validation
                     }
                 }
                 return model;
-            }            
+            }
         }
 
         /// <summary>To be thread-safe we have a locker.</summary>

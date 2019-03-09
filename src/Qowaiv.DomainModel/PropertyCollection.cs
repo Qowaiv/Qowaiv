@@ -14,7 +14,7 @@ namespace Qowaiv.DomainModel
         {
             Guard.NotNull(entity, nameof(entity));
 
-            var annotated = AnnotatedModelStore.Instance.GetAnnotededModel(entity.GetType());
+            var annotated = AnnotatedModel.Get(entity.GetType());
 
             var properties = new PropertyCollection(annotated.Properties.Count);
 

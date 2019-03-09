@@ -51,7 +51,7 @@ namespace Qowaiv.ComponentModel.Validation
         public Result<T> Validate<T>(T model)
         {
             var validationContext = new ValidationContext(model, ServiceProvider, Items);
-            var annotatedModel = AnnotatedModelStore.Instance.GetAnnotededModel(model.GetType());
+            var annotatedModel = AnnotatedModel.Get(model.GetType());
             return Validate(new Result<T>(model), validationContext, annotatedModel);
         }
 

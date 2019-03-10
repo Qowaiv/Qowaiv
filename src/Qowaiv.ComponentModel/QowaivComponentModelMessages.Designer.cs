@@ -70,11 +70,11 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The model can not be executed. It is invalid..
+        ///   Looks up a localized string similar to The {0} model can not be operated on as it is invalid..
         /// </summary>
-        internal static string InvalidOperationException_InvalidModel {
+        internal static string InvalidModelException {
             get {
-                return ResourceManager.GetString("InvalidOperationException_InvalidModel", resourceCulture);
+                return ResourceManager.GetString("InvalidModelException", resourceCulture);
             }
         }
         

@@ -61,8 +61,8 @@
   <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
     <value>The value of the {0} field is not allowed.</value>
   </data>
-  <data name="InvalidOperationException_InvalidModel" xml:space="preserve">
-    <value>The model can not be executed. It is invalid.</value>
+  <data name="InvalidModelException" xml:space="preserve">
+    <value>The {0} model can not be operated on as it is invalid.</value>
   </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
     <value>The postal code {0} is not valid for {1}.</value>

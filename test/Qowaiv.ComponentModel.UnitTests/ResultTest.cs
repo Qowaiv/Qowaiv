@@ -63,7 +63,7 @@ namespace Qowaiv.ComponentModel.Tests
         public void Ctor_WithData_HasBeenSet()
         {
             var exp = 2;
-            var result = new Result<int>(exp);
+            var result = Result.For(exp);
             var act = result.Data;
 
             Assert.AreEqual(exp, act);

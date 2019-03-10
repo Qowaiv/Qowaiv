@@ -53,13 +53,13 @@ namespace Qowaiv.ComponentModel.Validation
         {
             var validationContext = new ValidationContext(model, ServiceProvider, Items);
             var annotations = AnnotatedModelStore.Instance.GetAnnotededModel(model.GetType());
-            var result = Result.For(model);
+            var messages = new List<ValidationResult>();
 
-            result.AddRange(ValidateProperties(model, annotations, validationContext));
-            result.AddRange(ValidateType(model, annotations, validationContext));
-            result.AddRange(ValidateValidatableObject(model, annotations, validationContext));
+            messages.AddRange(ValidateProperties(model, annotations, validationContext));
+            messages.AddRange(ValidateType(model, annotations, validationContext));
+            messages.AddRange(ValidateValidatableObject(model, annotations, validationContext));
 
-            return result;
+            return Result.For(model, messages);
         }
 
         /// <summary>Gets the results for validating the (annotated )properties.</summary>

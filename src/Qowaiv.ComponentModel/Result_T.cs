@@ -7,16 +7,13 @@ using System.Linq;
 namespace Qowaiv.ComponentModel
 {
     /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
-    public class Result<T> : Result
+    public sealed class Result<T> : Result
     {
-        /// <summary>Creates a new instance of a <see cref="Result{T}"/>.</summary>
-        public Result(IEnumerable<ValidationResult> messages) : this(default(T), messages) { }
-
         /// <summary>Creates a new instance of a <see cref="Result{T}"/>.</summary>
         /// <param name="data">
         /// The data related to the result.
         /// </param>
-        public Result(T data) : this(data, Enumerable.Empty<ValidationResult>()) { }
+        internal Result(T data) : this(data, Enumerable.Empty<ValidationResult>()) { }
 
         /// <summary>Creates a new instance of a <see cref="Result{T}"/>.</summary>
         /// <param name="data">
@@ -25,15 +22,15 @@ namespace Qowaiv.ComponentModel
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
-        public Result(T data, IEnumerable<ValidationResult> messages) : base(messages)
+        internal Result(T data, IEnumerable<ValidationResult> messages) : base(messages)
         {
-            _data = data;
+            _data =  IsValid ? data : default(T);
         }
 
         /// <summary>Gets the data related to result.</summary>
-        public T Data => IsValid 
-            ? _data 
-            : throw new InvalidOperationException(QowaivComponentModelMessages.InvalidOperationException_InvalidModel);
+        public T Data => IsValid
+            ? _data
+            : throw InvalidModelException.For<T>(Errors);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal readonly T _data;

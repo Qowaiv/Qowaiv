@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.ComponentModel.Messages;
+using System;
 
 namespace Qowaiv.ComponentModel.Tests
 {
@@ -30,6 +31,14 @@ namespace Qowaiv.ComponentModel.Tests
             var result = Result.WithMessages<int>(Warning1, Info1, Info2);
             var act = result.IsValid;
             Assert.True(act);
+        }
+
+        [Test]
+        public void WithError_DoesNotAllowAccessToTheModel()
+        {
+            var result = Result.For(new object(), ValidationMessage.Error("Not OK"));
+
+            Assert.Throws<InvalidModelException>(() => Console.WriteLine(result.Data));
         }
 
         [Test]

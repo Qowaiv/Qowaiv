@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
@@ -24,21 +23,21 @@ namespace Qowaiv.ComponentModel
         /// </param>
         internal Result(T data, IEnumerable<ValidationResult> messages) : base(messages)
         {
-            _data =  IsValid ? data : default(T);
+            _value =  IsValid ? data : default(T);
         }
 
-        /// <summary>Gets the data related to result.</summary>
-        public T Data => IsValid
-            ? _data
+        /// <summary>Gets the value related to result.</summary>
+        public T Value => IsValid
+            ? _value
             : throw InvalidModelException.For<T>(Errors);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal readonly T _data;
+        internal readonly T _value;
 
         /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
         public static implicit operator Result<T>(T model) => new Result<T>(model);
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
-        public static explicit operator T(Result<T> result) => result == null ? default(T) : result.Data;
+        public static explicit operator T(Result<T> result) => result == null ? default(T) : result.Value;
     }
 }

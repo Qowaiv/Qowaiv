@@ -38,7 +38,7 @@ namespace Qowaiv.ComponentModel.Tests
         {
             var result = Result.For(new object(), ValidationMessage.Error("Not OK"));
 
-            Assert.Throws<InvalidModelException>(() => Console.WriteLine(result.Data));
+            Assert.Throws<InvalidModelException>(() => Console.WriteLine(result.Value));
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace Qowaiv.ComponentModel.Tests
         {
             var exp = 2;
             var result = Result.For(exp);
-            var act = result.Data;
+            var act = result.Value;
 
             Assert.AreEqual(exp, act);
         }
@@ -82,14 +82,14 @@ namespace Qowaiv.ComponentModel.Tests
         public void Implicit_Result_ToType()
         {
             Result<bool> result = true;
-            Assert.IsTrue(result.Data);
+            Assert.IsTrue(result.Value);
         }
 
         [Test]
         public void Implicit_Null_ToType()
         {
             Result<bool> result = false;
-            Assert.IsFalse(result.Data);
+            Assert.IsFalse(result.Value);
         }
 
         [Test]

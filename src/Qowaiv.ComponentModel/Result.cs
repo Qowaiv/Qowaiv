@@ -13,7 +13,7 @@ namespace Qowaiv.ComponentModel
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
-        protected Result(IEnumerable<ValidationResult> messages)
+        internal Result(IEnumerable<ValidationResult> messages)
         {
             Guard.NotNull(messages, nameof(messages));
             Messages = new ReadOnlyCollection<ValidationResult>(messages.GetWithSeverity().ToList());

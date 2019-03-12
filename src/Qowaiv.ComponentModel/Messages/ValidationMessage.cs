@@ -8,7 +8,7 @@ namespace Qowaiv.ComponentModel.Messages
 {
     /// <summary>Represents a validation message.</summary>
     /// <remarks>
-    /// To support messages with different severities.
+    /// To support serialization and messages with different severities.
     /// </remarks>
     [Serializable]
     public abstract class ValidationMessage : ValidationResult, ISerializable

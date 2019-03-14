@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Qowaiv.ComponentModel.Validation
 {
@@ -51,54 +52,59 @@ namespace Qowaiv.ComponentModel.Validation
         public Result<T> Validate<T>(T model)
         {
             var validationContext = new ValidationContext(model, ServiceProvider, Items);
-            var annotatedModel = AnnotatedModelStore.Instance.GetAnnotededModel(ResolveType(model));
-            return Validate(new Result<T>(model), validationContext, annotatedModel);
+            var annotations = AnnotatedModelStore.Instance.GetAnnotededModel(model.GetType());
+            var messages = new List<ValidationResult>();
+
+            messages.AddRange(ValidateProperties(model, annotations, validationContext));
+            messages.AddRange(ValidateType(model, annotations, validationContext));
+            messages.AddRange(ValidateValidatableObject(model, annotations, validationContext));
+
+            return Result.For(model, messages);
         }
 
-        /// <summary>Resolves the type of the model.</summary>
+        /// <summary>Gets the results for validating the (annotated )properties.</summary>
+        private static IEnumerable<ValidationResult> ValidateProperties(object model, AnnotatedModel annotations, ValidationContext validationContext)
+        {
+            return annotations.Properties.SelectMany(prop => ValidateProperty(prop, model, validationContext));
+        }
+
+        /// <summary>Gets the results for validating a single annotated property.</summary>
         /// <remarks>
-        /// For scenarios where we don't actually know T and specify <see cref="object"/>.
+        /// It creates a sub validation context.
         /// </remarks>
-        internal static Type ResolveType<T>(T model)
+        private static IEnumerable<ValidationResult> ValidateProperty(AnnotatedProperty property, object model, ValidationContext validationContext)
         {
-            if (model != null && typeof(T) == typeof(object))
+            var value = property.GetValue(model);
+            var propertyContext = property.CreateValidationContext(model, validationContext);
+
+            var isRequiredMessage = property.RequiredAttribute.GetValidationResult(value, propertyContext);
+            yield return isRequiredMessage;
+
+            // Only validate the other properties if the required condition was not met.
+            if (isRequiredMessage.GetSeverity() != ValidationSeverity.Error)
             {
-                return model.GetType();
+                foreach (var attribute in property.ValidationAttributes)
+                {
+                    yield return attribute.GetValidationResult(value, propertyContext);
+                }
             }
-            return typeof(T);
         }
 
-        private Result<T> Validate<T>(Result<T> result, ValidationContext validationContext, AnnotatedModel annotations)
+        /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
+        private static IEnumerable<ValidationResult> ValidateType(object model, AnnotatedModel annotations, ValidationContext validationContext)
         {
-            foreach (var property in annotations.Properties)
-            {
-                ValidateProperty(result, validationContext, property);
-            }
-            foreach (var attribute in annotations.TypeAttributes)
-            {
-                result.Add(attribute.GetValidationResult(result.Data, validationContext));
-            }
-            if (annotations.IsIValidatableObject)
-            {
-                result.AddRange(((IValidatableObject)result.Data).Validate(validationContext));
-            }
-            return result;
+            return annotations.TypeAttributes.Select(attr => attr.GetValidationResult(model, validationContext));
         }
 
-        private static void ValidateProperty<T>(Result<T> result, ValidationContext validationContext, AnnotatedProperty property)
+        /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
+        /// <remarks>
+        /// If the model is not <see cref="IValidatableObject"/> nothing is done.
+        /// </remarks>
+        private static IEnumerable<ValidationResult> ValidateValidatableObject(object model, AnnotatedModel annotations, ValidationContext validationContext)
         {
-            var value = property.GetValue(result.Data);
-            var propertyContext = property.CreateValidationContext(result.Data, validationContext);
-
-            // The required condition was not met.
-            if (result.Add(property.RequiredAttribute.GetValidationResult(value, propertyContext)))
-            {
-                return;
-            }
-            foreach (var attribute in property.ValidationAttributes)
-            {
-                result.Add(attribute.GetValidationResult(value, propertyContext));
-            }
+            return annotations.IsIValidatableObject
+                ? ((IValidatableObject)model).Validate(validationContext)
+                : Enumerable.Empty<ValidationResult>();
         }
     }
 }

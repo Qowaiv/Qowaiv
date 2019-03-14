@@ -477,7 +477,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void GetHash_TestStruct_Hash()
         {
-            Assert.AreEqual(-286953930, TestStruct.GetHashCode());
+            Assert.AreEqual(TestGuid.GetHashCode(), TestStruct.GetHashCode());
         }
 
         [Test]

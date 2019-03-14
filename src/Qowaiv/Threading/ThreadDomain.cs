@@ -96,9 +96,8 @@ namespace Qowaiv.Threading
         {
             var type = Guard(typeof(T), Values.ContainsKey(typeof(T)));
 
-            object value;
 
-            if (!this.Values.TryGetValue(type, out value))
+            if (!Values.TryGetValue(type, out object value))
             {
                 var str = ConfigurationManager.AppSettings[type.FullName];
                 if (str != null)
@@ -108,8 +107,7 @@ namespace Qowaiv.Threading
                 }
                 else
                 {
-                    Func<Thread, object> func;
-                    if (Creators.TryGetValue(type, out func))
+                    if (Creators.TryGetValue(type, out Func<Thread, object> func))
                     {
                         value = func.Invoke(Thread.CurrentThread);
                     }

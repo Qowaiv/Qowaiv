@@ -119,36 +119,6 @@ namespace Qowaiv.UnitTests.Formatting
         }
 
         [Test]
-        public void SerializeDeserialize_TestStruct_AreEqual()
-        {
-            var input = FormattingArgumentsTest.TestStruct;
-            var exp = FormattingArgumentsTest.TestStruct;
-            var act = SerializationTest.SerializeDeserialize(input);
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void SerializeDeserialize_FormattableArgumentsSerializeObject_AreEqual()
-        {
-            var input = new FormattableArgumentsSerializeObject()
-            {
-                Id = 17,
-                Obj = FormattingArgumentsTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var exp = new FormattableArgumentsSerializeObject()
-            {
-                Id = 17,
-                Obj = FormattingArgumentsTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var act = SerializationTest.SerializeDeserialize(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
-        }
-
-        [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new FormattableArgumentsSerializeObject()

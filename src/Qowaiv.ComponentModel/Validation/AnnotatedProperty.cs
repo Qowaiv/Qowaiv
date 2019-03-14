@@ -15,11 +15,12 @@ namespace Qowaiv.ComponentModel.Validation
         private static readonly RequiredAttribute Optional = new NotRequiredAttributeAttribute();
 
         /// <summary>Creates a new instance of an <see cref="AnnotatedProperty"/>.</summary>
-        private AnnotatedProperty(PropertyDescriptor descriptor, RequiredAttribute requiredAttribute, ValidationAttribute[] validationAttributes)
+        private AnnotatedProperty(PropertyDescriptor descriptor, bool typeIsAnnotatedModel, RequiredAttribute requiredAttribute, ValidationAttribute[] validationAttributes)
         {
             Descriptor = descriptor;
             RequiredAttribute = requiredAttribute ?? Optional;
             ValidationAttributes = validationAttributes;
+            TypeIsAnnotatedModel = typeIsAnnotatedModel;;
         }
 
         /// <summary>Gets the <see cref="PropertyDescriptor"/>.</summary>
@@ -29,6 +30,9 @@ namespace Qowaiv.ComponentModel.Validation
         /// if the property was decorated with one, otherwise a <see cref="NotRequiredAttributeAttribute"/>.
         /// </summary>
         public RequiredAttribute RequiredAttribute { get; }
+
+        /// <summary>Returns true, if the type itself is <see cref="AnnotatedModel"/>.</summary>
+        public bool TypeIsAnnotatedModel { get; }
 
         /// <summary>Gets the <see cref="ValidationAttribute"/>s the property
         /// is decorated with.
@@ -67,31 +71,51 @@ namespace Qowaiv.ComponentModel.Validation
         #endregion
 
         /// <summary>Creates a <see cref="AnnotatedProperty"/> for all annotated properties.</summary>
-        /// <param name="type">
-        /// The type to get the properties for.
-        /// </param>
-        internal static IEnumerable<AnnotatedProperty> CreateAll(Type type)
+        internal static IEnumerable<AnnotatedProperty> CreateAll(
+            Type type,
+            AnnotatedModelStore store,
+            ISet<Type> chain)
         {
             var descriptors = TypeDescriptor.GetProperties(type);
-            return descriptors.Cast<PropertyDescriptor>()
-                .Select(descriptor => TryCreate(descriptor))
-                .Where(descriptor => descriptor != null);
+            return descriptors
+                .Cast<PropertyDescriptor>()
+                .Select(descriptor => TryCreate(descriptor, store, chain))
+                .Where(property => !(property is null));
         }
 
         /// <summary>Tries to create a <see cref="AnnotatedProperty"/>.</summary>
-        /// <param name="descriptor">
-        /// The <see cref="PropertyDescriptor"/>/.
-        /// </param>
         /// <returns>
         /// A <see cref="AnnotatedProperty"/> if the property is annotated,
         /// otherwise <code>null</code>.
         /// </returns>
-        private static AnnotatedProperty TryCreate(PropertyDescriptor descriptor)
+        private static AnnotatedProperty TryCreate(
+            PropertyDescriptor descriptor,
+            AnnotatedModelStore store, 
+            ISet<Type> chain)
         {
+            var type = descriptor.PropertyType;
             var validationAttributes = new List<ValidationAttribute>();
+            var requiredAttribute = CollectAttributes(descriptor, validationAttributes);
+            var typeIsAnnotated = store.IsAnnotededModel(type, chain);
+
+            if(requiredAttribute is null && !validationAttributes.Any() && !typeIsAnnotated)
+            {
+                return null;
+            }
+
+            return new AnnotatedProperty(descriptor, typeIsAnnotated, requiredAttribute, validationAttributes.ToArray());
+        }
+
+        /// <summary>Fills the collection with all validation attributes,
+        /// except the first <see cref="System.ComponentModel.DataAnnotations.RequiredAttribute"/>,
+        /// as that one is returned.
+        /// </summary>
+        private static RequiredAttribute CollectAttributes(PropertyDescriptor descriptor, List<ValidationAttribute> validationAttributes)
+        {
             var attributes = descriptor.Attributes
                 .Cast<Attribute>()
                 .OfType<ValidationAttribute>();
+
             RequiredAttribute required = null;
 
             foreach (var attribute in attributes)
@@ -106,14 +130,8 @@ namespace Qowaiv.ComponentModel.Validation
                     validationAttributes.Add(attribute);
                 }
             }
-            if ((required != null && !(required is NotRequiredAttributeAttribute)) || validationAttributes.Count != 0)
-            {
-                return new AnnotatedProperty(descriptor, required, validationAttributes.ToArray());
-            }
-            else
-            {
-                return null;
-            }
+
+            return required is NotRequiredAttributeAttribute ? null : required;
         }
     }
 }

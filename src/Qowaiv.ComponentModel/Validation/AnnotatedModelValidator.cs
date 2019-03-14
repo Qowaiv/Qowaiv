@@ -52,7 +52,7 @@ namespace Qowaiv.ComponentModel.Validation
         public Result<T> Validate<T>(T model)
         {
             var validationContext = new ValidationContext(model, ServiceProvider, Items);
-            var annotations = AnnotatedModelStore.Instance.GetAnnotededModel(model.GetType());
+            var annotations = AnnotatedModel.Get(model.GetType());
             var messages = new List<ValidationResult>();
 
             messages.AddRange(ValidateProperties(model, annotations, validationContext));

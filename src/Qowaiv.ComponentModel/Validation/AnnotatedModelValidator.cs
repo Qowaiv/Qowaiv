@@ -54,28 +54,32 @@ namespace Qowaiv.ComponentModel.Validation
             var validationContext = new ValidationContext(model, ServiceProvider, Items);
             var annotations = AnnotatedModel.Get(model.GetType());
             var messages = new List<ValidationResult>();
-
-            messages.AddRange(ValidateProperties(model, annotations, validationContext));
-            messages.AddRange(ValidateType(model, annotations, validationContext));
-            messages.AddRange(ValidateValidatableObject(model, annotations, validationContext));
+            messages.AddRange(ValidateModel(model, validationContext, annotations));
 
             return Result.For(model, messages);
         }
 
-        /// <summary>Gets the results for validating the (annotated )properties.</summary>
-        private static IEnumerable<ValidationResult> ValidateProperties(object model, AnnotatedModel annotations, ValidationContext validationContext)
+        private IEnumerable<ValidationResult> ValidateModel(object model, ValidationContext validationContext, AnnotatedModel annotations)
         {
-            return annotations.Properties.SelectMany(prop => ValidateProperty(prop, model, validationContext));
+            return ValidateProperties(model, annotations)
+                .Concat(ValidateType(model, annotations, validationContext))
+                .Concat(ValidateValidatableObject(model, annotations, validationContext));
+        }
+
+        /// <summary>Gets the results for validating the (annotated )properties.</summary>
+        private IEnumerable<ValidationResult> ValidateProperties(object model, AnnotatedModel annotations)
+        {
+            return annotations.Properties.SelectMany(prop => ValidateProperty(prop, model));
         }
 
         /// <summary>Gets the results for validating a single annotated property.</summary>
         /// <remarks>
         /// It creates a sub validation context.
         /// </remarks>
-        private static IEnumerable<ValidationResult> ValidateProperty(AnnotatedProperty property, object model, ValidationContext validationContext)
+        private IEnumerable<ValidationResult> ValidateProperty(AnnotatedProperty property, object model)
         {
             var value = property.GetValue(model);
-            var propertyContext = property.CreateValidationContext(model, validationContext);
+            var propertyContext = CreatePropertyContext(model, property);
 
             var isRequiredMessage = property.RequiredAttribute.GetValidationResult(value, propertyContext);
             yield return isRequiredMessage;
@@ -87,6 +91,20 @@ namespace Qowaiv.ComponentModel.Validation
                 {
                     yield return attribute.GetValidationResult(value, propertyContext);
                 }
+
+                if (value != null && property.TypeIsAnnotatedModel)
+                {
+                    ValidationContext context = new ValidationContext(value, ServiceProvider, Items);
+                    var annotations = AnnotatedModel.Get(value.GetType());
+                    var messages = ValidateModel(value, context, annotations);
+
+                    //// validated nested.
+                    foreach (var message in messages)
+                    {
+                        yield return message;
+                    }
+                }
+
             }
         }
 
@@ -105,6 +123,15 @@ namespace Qowaiv.ComponentModel.Validation
             return annotations.IsIValidatableObject
                 ? ((IValidatableObject)model).Validate(validationContext)
                 : Enumerable.Empty<ValidationResult>();
+        }
+
+        private ValidationContext CreatePropertyContext(object model, AnnotatedProperty property)
+        {
+            var propertyContext = new ValidationContext(model, ServiceProvider, Items)
+            {
+                MemberName = property.Descriptor.Name
+            };
+            return propertyContext;
         }
     }
 }

@@ -3,6 +3,7 @@ using Qowaiv.ComponentModel.Tests.TestTools;
 using Qowaiv.ComponentModel.UnitTests.Validation.Models;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.Globalization;
+using System;
 
 namespace Qowaiv.ComponentModel.Tests.Validation
 {
@@ -141,6 +142,30 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             var model = new ModelWithCustomizedResource();
             DataAnnotationsAssert.WithErrors(model,
                 ValidationTestMessage.Error("This IBAN is wrong.", "Iban"));
+        }
+
+
+        [Test]
+        public void Validate_NestedModelWithNullChild_With1Error()
+        {
+            var model = new NestedModel()
+            {
+                Id = Guid.NewGuid()
+            };
+            DataAnnotationsAssert.WithErrors(model,
+                ValidationTestMessage.Error("The Child field is required.", "Child"));
+        }
+
+        [Test]
+        public void Validate_NestedModelWithInvalidChild_With1Error()
+        {
+            var model = new NestedModel()
+            {
+                Id = Guid.NewGuid(),
+                Child = new NestedModel.ChildModel()
+            };
+            DataAnnotationsAssert.WithErrors(model,
+                ValidationTestMessage.Error("The Name field is required.", "Child.Name"));
         }
     }
 }

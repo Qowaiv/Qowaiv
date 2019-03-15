@@ -38,17 +38,7 @@ namespace Qowaiv.ComponentModel.Validation
         /// is decorated with.
         /// </summary>
         public IReadOnlyCollection<ValidationAttribute> ValidationAttributes { get; }
-
-        /// <summary>Creates a <see cref="ValidationContext"/> for the property only.</summary>
-        public ValidationContext CreateValidationContext(object model, ValidationContext validationContext)
-        {
-            var propertyContext = new ValidationContext(model, validationContext, validationContext.Items)
-            {
-                MemberName = Descriptor.Name
-            };
-            return propertyContext;
-        }
-
+        
         /// <summary>Gets the value of the property for the specified model.</summary>
         public object GetValue(object model) => Descriptor.GetValue(model);
 

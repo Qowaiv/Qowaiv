@@ -63,5 +63,18 @@ namespace Qowaiv.ComponentModel.Messages
 
         /// <summary>Creates an info message.</summary>
         public static ValidationInfoMessage Info(string message, params string[] memberNames) => new ValidationInfoMessage(message, memberNames);
+
+        /// <summary>Creates a validation message.</summary>
+        public static ValidationResult For(ValidationSeverity serverity, string message, string[] memberNames)
+        {
+            switch (serverity)
+            {
+                case ValidationSeverity.None: return None;
+                case ValidationSeverity.Info: return Info(message, memberNames);
+                case ValidationSeverity.Warning: return Warning(message, memberNames);
+                case ValidationSeverity.Error:
+                default: return Error(message, memberNames);
+            }
+        }
     }
 }

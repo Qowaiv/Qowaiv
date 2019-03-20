@@ -3,13 +3,13 @@ using System;
 
 namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
 {
-    public class NestedModel
+    public class NestedModelWithChildren
     {
         [Mandatory]
         public Guid Id { get; set; }
 
         [Mandatory]
-        public ChildModel Child { get; set; }
+        public ChildModel[] Children { get; set; }
 
         public class ChildModel
         {

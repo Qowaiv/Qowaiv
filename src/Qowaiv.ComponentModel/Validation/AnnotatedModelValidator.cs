@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -96,8 +97,20 @@ namespace Qowaiv.ComponentModel.Validation
 
             if (value != null && property.TypeIsAnnotatedModel)
             {
-                NestedValidationContext nestedContext = propertyContext.Nested(value);
-                ValidateModel(nestedContext);
+                if (value is IEnumerable enumerable)
+                {
+                    var index = 0;
+                    foreach(var item in enumerable)
+                    {
+                        var nestedContext = propertyContext.Nested(item, index++);
+                        ValidateModel(nestedContext);
+                    }
+                }
+                else
+                {
+                    var nestedContext = propertyContext.Nested(value);
+                    ValidateModel(nestedContext);
+                }
             }
         }
 

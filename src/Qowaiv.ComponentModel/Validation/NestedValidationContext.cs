@@ -97,13 +97,21 @@ namespace Qowaiv.ComponentModel.Validation
         /// <param name="value">
         /// The value of the property.
         /// </param>
-        public NestedValidationContext Nested(object value)
+        /// <param name="index">
+        /// The optional index in case of an enumeration.
+        /// </param>
+        public NestedValidationContext Nested(object value, int? index = null)
         {
             var path = string.IsNullOrEmpty(Path)
-                ? MemberName + '.'
-                : Path + '.' + MemberName + '.';
+                ? MemberName
+                : Path + '.' + MemberName;
 
-            return new NestedValidationContext(path, value, ServiceProvider, Items)
+            if(index.HasValue)
+            {
+                path += '[' + index.Value.ToString() + ']';
+            }
+
+            return new NestedValidationContext(path + '.', value, ServiceProvider, Items)
             {
                 Messages = Messages,
             };

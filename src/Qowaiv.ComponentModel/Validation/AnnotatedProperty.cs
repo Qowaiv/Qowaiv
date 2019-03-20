@@ -88,6 +88,22 @@ namespace Qowaiv.ComponentModel.Validation
             var requiredAttribute = CollectAttributes(descriptor, validationAttributes);
             var typeIsAnnotated = store.IsAnnotededModel(type, chain);
 
+            // If there is an enumeration, test for the type of the enumeration.
+            if(!typeIsAnnotated)
+            {
+                var enumerable = type
+                    .GetInterfaces()
+                    .FirstOrDefault(iface => 
+                        iface.IsGenericType && 
+                        iface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+                if(enumerable != null)
+                {
+                    type = enumerable.GetGenericArguments()[0];
+                    typeIsAnnotated = store.IsAnnotededModel(type, chain);
+                }
+            }
+
             if(requiredAttribute is null && !validationAttributes.Any() && !typeIsAnnotated)
             {
                 return null;

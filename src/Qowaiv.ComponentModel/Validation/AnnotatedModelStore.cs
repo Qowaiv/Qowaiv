@@ -10,7 +10,15 @@ namespace Qowaiv.ComponentModel.Validation
         internal AnnotatedModelStore()
         {
             Models = new Dictionary<Type, AnnotatedModel>();
-            NotAnnotatedTypes = new HashSet<Type>();
+            NotAnnotatedTypes = new HashSet<Type>
+            {
+                typeof(string),
+                typeof(int),
+                typeof(long),
+                typeof(double),
+                typeof(decimal),
+                typeof(Guid),
+            };
         }
 
         /// <summary>Gets the stored <see cref="AnnotatedModel"/>s.</summary>
@@ -32,11 +40,11 @@ namespace Qowaiv.ComponentModel.Validation
             }
             lock (locker)
             {
-                return GetAnnotededModel(type, new HashSet<Type>());
+                return GetAnnotededModel(type, new TypePath());
             }
         }
 
-        private AnnotatedModel GetAnnotededModel(Type type, ISet<Type> chain)
+        private AnnotatedModel GetAnnotededModel(Type type, TypePath path)
         {
             if (NotAnnotatedTypes.Contains(type))
             {
@@ -44,8 +52,8 @@ namespace Qowaiv.ComponentModel.Validation
             }
             if (!Models.TryGetValue(type, out AnnotatedModel model))
             {
-                chain.Add(type);
-                model = AnnotatedModel.Create(type, this, chain);
+                var extended = path.GetExtended(type);
+                model = AnnotatedModel.Create(type, this, extended);
 
                 // store the result.
                 if (model.IsValidatable)
@@ -60,7 +68,7 @@ namespace Qowaiv.ComponentModel.Validation
             return model;
         }
 
-        internal bool IsAnnotededModel(Type type, ISet<Type> chain)
+        internal bool IsAnnotededModel(Type type, TypePath path)
         {
             Guard.NotNull(type, nameof(type));
 
@@ -73,7 +81,7 @@ namespace Qowaiv.ComponentModel.Validation
                 return true;
             }
             // We will not check the model if it was already added to the chain.
-            if (!chain.Contains(type) && GetAnnotededModel(type, chain).IsValidatable)
+            if (!path.Contains(type) && GetAnnotededModel(type, path).IsValidatable)
             {
                 return true;
             }

@@ -59,10 +59,7 @@ namespace Qowaiv.ComponentModel.Validation
         public static AnnotatedModel Get(Type type) => Store.GetAnnotededModel(type);
 
         /// <summary>Creates an <see cref="AnnotatedModel"/>.</summary>
-        /// <param name="type">
-        /// Type to create the annotated model for.
-        /// </param>
-        internal static AnnotatedModel Create(Type type, AnnotatedModelStore store, ISet<Type> chain)
+        internal static AnnotatedModel Create(Type type, AnnotatedModelStore store, TypePath path)
         {
             Guard.NotNull(type, nameof(type));
 
@@ -73,7 +70,7 @@ namespace Qowaiv.ComponentModel.Validation
                     .GetAttributes(type)
                     .Cast<Attribute>()
                     .OfType<ValidationAttribute>().ToArray(),
-                    AnnotatedProperty.CreateAll(type, store, chain).ToArray()
+                    AnnotatedProperty.CreateAll(type, store, path).ToArray()
                 );
         }
 

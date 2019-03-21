@@ -144,7 +144,6 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 ValidationTestMessage.Error("This IBAN is wrong.", "Iban"));
         }
 
-
         [Test]
         public void Validate_NestedModelWithNullChild_With1Error()
         {
@@ -164,6 +163,36 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 Id = Guid.NewGuid(),
                 Child = new NestedModel.ChildModel()
             };
+            DataAnnotationsAssert.WithErrors(model,
+                ValidationTestMessage.Error("The Name field is required.", "Child.Name"));
+        }
+
+        [Test]
+        public void Validate_NestedModelWithInvalidChildren_With1Error()
+        {
+            var model = new NestedModelWithChildren()
+            {
+                Id = Guid.NewGuid(),
+                Children = new[]
+                {
+                    new NestedModelWithChildren.ChildModel{ Name = "Valid Name" },
+                    new NestedModelWithChildren.ChildModel()
+                }
+            };
+            DataAnnotationsAssert.WithErrors(model,
+                ValidationTestMessage.Error("The Name field is required.", "Children[1].Name"));
+        }
+
+        [Test]
+        public void Validate_NestedModelWithLoop_With1Error()
+        {
+            var model = new NestedModelWithLoop()
+            {
+                Id = Guid.NewGuid(),
+                Child = new NestedModelWithLoop.ChildModel(),
+            };
+            model.Child.Parent = model;
+
             DataAnnotationsAssert.WithErrors(model,
                 ValidationTestMessage.Error("The Name field is required.", "Child.Name"));
         }

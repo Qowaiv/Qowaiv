@@ -20,7 +20,7 @@ namespace Qowaiv.ComponentModel.Validation
             Descriptor = descriptor;
             RequiredAttribute = requiredAttribute ?? Optional;
             ValidationAttributes = validationAttributes;
-            TypeIsAnnotatedModel = typeIsAnnotatedModel;;
+            TypeIsAnnotatedModel = typeIsAnnotatedModel;
         }
 
         /// <summary>Gets the <see cref="PropertyDescriptor"/>.</summary>
@@ -64,12 +64,12 @@ namespace Qowaiv.ComponentModel.Validation
         internal static IEnumerable<AnnotatedProperty> CreateAll(
             Type type,
             AnnotatedModelStore store,
-            ISet<Type> chain)
+            TypePath path)
         {
             var descriptors = TypeDescriptor.GetProperties(type);
             return descriptors
                 .Cast<PropertyDescriptor>()
-                .Select(descriptor => TryCreate(descriptor, store, chain))
+                .Select(descriptor => TryCreate(descriptor, store, path))
                 .Where(property => !(property is null));
         }
 
@@ -80,16 +80,16 @@ namespace Qowaiv.ComponentModel.Validation
         /// </returns>
         private static AnnotatedProperty TryCreate(
             PropertyDescriptor descriptor,
-            AnnotatedModelStore store, 
-            ISet<Type> chain)
+            AnnotatedModelStore store,
+            TypePath path)
         {
             var type = descriptor.PropertyType;
             var validationAttributes = new List<ValidationAttribute>();
             var requiredAttribute = CollectAttributes(descriptor, validationAttributes);
-            var typeIsAnnotated = store.IsAnnotededModel(type, chain);
+            var typeIsAnnotated = store.IsAnnotededModel(type, path);
 
             // If there is an enumeration, test for the type of the enumeration.
-            if(!typeIsAnnotated)
+            if(!typeIsAnnotated && typeof(string) != type)
             {
                 var enumerable = type
                     .GetInterfaces()
@@ -100,7 +100,7 @@ namespace Qowaiv.ComponentModel.Validation
                 if(enumerable != null)
                 {
                     type = enumerable.GetGenericArguments()[0];
-                    typeIsAnnotated = store.IsAnnotededModel(type, chain);
+                    typeIsAnnotated = store.IsAnnotededModel(type, path);
                 }
             }
 

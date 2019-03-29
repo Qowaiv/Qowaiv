@@ -7,15 +7,11 @@ namespace Qowaiv.DomainModel
     /// <typeparam name="TEntity">
     /// The type of the actual entity.
     /// </typeparam>
-    /// <typeparam name="TId">
-    /// The type of the identifier.
-    /// </typeparam>
-    public interface IEntity<TEntity, TId> : IEquatable<TEntity>
-        where TEntity : class, IEntity<TEntity, TId>
-        where TId : struct
+    public interface IEntity<TEntity> : IEquatable<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>The identifier of the entity.</summary>
         [Key]
-        TId Id { get; }
+        Guid Id { get; }
     }
 }

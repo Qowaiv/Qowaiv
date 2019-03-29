@@ -2,7 +2,7 @@
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
-    public class EmptyEntity : Entity<EmptyEntity, Guid>
+    public class EmptyEntity : Entity<EmptyEntity>
     {
         public EmptyEntity() { }
 

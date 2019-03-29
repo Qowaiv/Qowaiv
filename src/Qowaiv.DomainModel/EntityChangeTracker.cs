@@ -7,15 +7,14 @@ using System.Collections.Generic;
 namespace Qowaiv.DomainModel
 {
     /// <summary>Tracks (potential) changes and fires validations and notification events.</summary>
-    internal class EntityChangeTracker<TEntity, TId> : Dictionary<string, object>
-        where TEntity : Entity<TEntity, TId>
-        where TId : struct
+    internal class EntityChangeTracker<TEntity> : Dictionary<string, object>
+        where TEntity : Entity<TEntity>
     {
         private readonly TEntity _entity;
         private readonly PropertyCollection _properties;
         private readonly AnnotatedModelValidator _validator;
 
-        /// <summary>Creates a new instance of an <see cref="EntityChangeTracker{TEntity, TId}"/>.</summary>
+        /// <summary>Creates a new instance of an <see cref="EntityChangeTracker{TEntity}"/>.</summary>
         public EntityChangeTracker(TEntity entity, PropertyCollection properties, AnnotatedModelValidator validator)
         {
             _entity = entity;
@@ -53,7 +52,7 @@ namespace Qowaiv.DomainModel
                 {
                     var result = ValidateAll();
                     if (!result.IsValid)
-                    { 
+                    {
                         Rollback();
                     }
                     return result;
@@ -90,7 +89,6 @@ namespace Qowaiv.DomainModel
                 _properties[change.Key] = change.Value;
             }
         }
-
         private readonly object locker = new object();
     }
 }

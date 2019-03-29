@@ -103,7 +103,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void InitProperties_TwoErrors_WithErrors()
         {
-            var entity =  EntityWithInitScope.FromData(17, string.Empty, Date.MinValue);
+            var entity =  EntityWithInitScope.FromData(Guid.NewGuid(), string.Empty, Date.MinValue);
 
             ValidationResultAssert.WithErrors(entity,
                 ValidationMessage.Error("The Name field is required.", nameof(EntityWithInitScope.Name)),
@@ -133,7 +133,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void DebuggerDisplay_IsSupported()
         {
-            DebuggerDisplayAssert.HasAttribute(typeof(Entity<,>));
+            DebuggerDisplayAssert.HasAttribute(typeof(Entity<>));
         }
     }
 }

@@ -4,9 +4,8 @@ using System.Collections.Generic;
 namespace Qowaiv.DomainModel
 {
     /// <summary>Compares entities.</summary>
-    public class EntityEqualityComparer<TEntity, TId> : IEqualityComparer<TEntity>
-        where TEntity : class, IEntity<TEntity, TId>
-        where TId : struct
+    public class EntityEqualityComparer<TEntity> : IEqualityComparer<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>Returns true if both entities have the same type,
         /// are not transient, and have the same id, otherwise false.
@@ -21,8 +20,8 @@ namespace Qowaiv.DomainModel
             return
                 x.GetType().Equals(y.GetType()) &&
                 x.Id.Equals(y.Id) &&
-                !default(TId).Equals(x.Id) &&
-                !default(TId).Equals(y.Id);
+                !default(Guid).Equals(x.Id) &&
+                !default(Guid).Equals(y.Id);
         }
 
         /// <summary>Gets a hash code for the entity.</summary>
@@ -37,7 +36,7 @@ namespace Qowaiv.DomainModel
         {
             Guard.NotNull(obj, nameof(obj));
 
-            return default(TId).Equals(obj.Id)
+            return default(Guid).Equals(obj.Id)
                 ? throw new NotSupportedException(QowaivDomainModelMessages.NotSupported_GetHashCodeOnIsTransient)
                 : obj.Id.GetHashCode() ^ obj.GetType().GetHashCode();
         }

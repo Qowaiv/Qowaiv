@@ -1,9 +1,10 @@
 ﻿using Qowaiv.ComponentModel;
 using Qowaiv.ComponentModel.DataAnnotations;
+using System;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
-    public class EntityWithInitScope : Entity<EntityWithInitScope, int>
+    public class EntityWithInitScope : Entity<EntityWithInitScope>
     {
         [Mandatory]
         public string Name
@@ -19,7 +20,7 @@ namespace Qowaiv.DomainModel.UnitTests.Models
             set => SetProperty(value);
         }
 
-        public static Result<EntityWithInitScope> FromData(int id, string name, Date startDate)
+        public static Result<EntityWithInitScope> FromData(Guid id, string name, Date startDate)
         {
             var entity = new EntityWithInitScope();
 

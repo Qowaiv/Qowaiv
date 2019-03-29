@@ -18,38 +18,34 @@ namespace Qowaiv.DomainModel
     /// <typeparam name="TEntity">
     /// The type of the entity itself.
     /// </typeparam>
-    /// <typeparam name="TId">
-    /// The type of the identifier.
-    /// </typeparam>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public abstract class Entity<TEntity, TId> : IEntity<TEntity, TId>, IValidatableObject 
-        where TEntity : Entity<TEntity, TId>
-        where TId : struct
+    public abstract class Entity<TEntity> : IEntity<TEntity>, IValidatableObject
+        where TEntity : Entity<TEntity>
     {
-        private readonly EntityChangeTracker<TEntity, TId> _tracker;
+        private readonly EntityChangeTracker<TEntity> _tracker;
         private readonly PropertyCollection _properties;
 
-        /// <summary>Creates a new instance of an <see cref="Entity{Tentity, TId}"/>.</summary>
+        /// <summary>Creates a new instance of an <see cref="Entity{Tentity}"/>.</summary>
         /// <param name="validator">
         /// The validator to validate the entity with.
         /// </param>
         protected Entity(AnnotatedModelValidator validator)
         {
             _properties = PropertyCollection.Create(GetType());
-            _tracker = new EntityChangeTracker<TEntity, TId>((TEntity)this, _properties, validator);
+            _tracker = new EntityChangeTracker<TEntity>((TEntity)this, _properties, validator);
         }
 
-        /// <summary>Creates a new instance of an <see cref="Entity{TEntity, TId}"/>.</summary>
+        /// <summary>Creates a new instance of an <see cref="Entity{TEntity}"/>.</summary>
         protected Entity() : this(null) { }
 
         /// <inheritdoc />
-        public TId Id
+        public Guid Id
         {
-            get => GetProperty<TId>();
+            get => GetProperty<Guid>();
             set => SetImmutableProperty(value);
         }
 
-        /// <summary>Validates if the <see cref="Entity{TEntity, TId}"/> is valid.</summary>
+        /// <summary>Validates if the <see cref="Entity{TEntity}"/> is valid.</summary>
         /// <remarks>
         /// This rules are triggered automatically on every change to guarantee
         /// that the entity is always valid.
@@ -109,19 +105,19 @@ namespace Qowaiv.DomainModel
         public bool Equals(TEntity other) => _comparer.Equals((TEntity)this, other);
 
         /// <summary>Returns true if left and right are equal.</summary>
-        public static bool operator ==(Entity<TEntity, TId> left, Entity<TEntity, TId> right) => _comparer.Equals((TEntity)left, (TEntity)right);
+        public static bool operator ==(Entity<TEntity> left, Entity<TEntity> right) => _comparer.Equals((TEntity)left, (TEntity)right);
 
         /// <summary>Returns false if left and right are equal.</summary>
-        public static bool operator !=(Entity<TEntity, TId> left, Entity<TEntity, TId> right) => !(left == right);
+        public static bool operator !=(Entity<TEntity> left, Entity<TEntity> right) => !(left == right);
 
         /// <inheritdoc />
         public override int GetHashCode() => _comparer.GetHashCode((TEntity)this);
 
         /// <summary>Represents the entity as a DEBUG <see cref="string"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"{base.ToString()}, ID: {(default(TId).Equals(Id) ? "?" : Id.ToString())}";
+        private string DebuggerDisplay => $"{base.ToString()}, ID: {(default(Guid).Equals(Id) ? "?" : Id.ToString())}";
 
         /// <summary>The comparer that deals with equals and hash codes.</summary>
-        private static readonly EntityEqualityComparer<TEntity, TId> _comparer = new EntityEqualityComparer<TEntity, TId>();
+        private static readonly EntityEqualityComparer<TEntity> _comparer = new EntityEqualityComparer<TEntity>();
     }
 }

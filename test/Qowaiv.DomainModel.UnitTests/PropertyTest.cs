@@ -26,7 +26,7 @@ namespace Qowaiv.DomainModel.UnitTests
             });
         }
         
-        private class PropertyTestEntity : Entity<PropertyTestEntity, int>
+        private class PropertyTestEntity : Entity<PropertyTestEntity>
         {
             [Mandatory]
             public int RequiredProperty

@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.DomainModel.UnitTests.Models;
-using Qowaiv.TestTools.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Qowaiv.DomainModel.UnitTests
 {
@@ -13,7 +12,7 @@ namespace Qowaiv.DomainModel.UnitTests
             var model = new EntityWithCaculatedProperty();
             model.SetProperties((m) =>
             {
-                m.Id = 17;
+                m.Id = Guid.NewGuid();
                 m.Repertitions = 5;
                 m.Value = 8;
             });
@@ -26,7 +25,7 @@ namespace Qowaiv.DomainModel.UnitTests
             
             var result = model.SetProperties((m) =>
             {
-                m.Id = 17;
+                m.Id = Guid.NewGuid();
                 m.Repertitions = 50;
                 m.Value = 8.17m;
             });

@@ -2,7 +2,7 @@
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
-    public class EntityWithCaculatedProperty : Entity<EntityWithCaculatedProperty, int>
+    public class EntityWithCaculatedProperty : Entity<EntityWithCaculatedProperty>
     {
         public EntityWithCaculatedProperty()
             : base() { }

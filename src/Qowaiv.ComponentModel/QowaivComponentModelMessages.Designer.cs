@@ -61,6 +61,15 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The currency of the {0} field is not allowed..
+        /// </summary>
+        internal static string AllowedCurrenciesAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("AllowedCurrenciesAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value of the {0} field is not allowed..
         /// </summary>
         internal static string AllowedValuesAttribute_ValidationError {

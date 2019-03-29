@@ -138,4 +138,7 @@
   <data name="ValidationRule_ResourceTypeDoesNotHaveProperty" xml:space="preserve">
     <value>The resource type '{0}' does not have an accessible static property named '{1}'.</value>
   </data>
+  <data name="AllowedCurrenciesAttribute_ValidationError" xml:space="preserve">
+    <value>The currency of the {0} field is not allowed.</value>
+  </data>
 </root>

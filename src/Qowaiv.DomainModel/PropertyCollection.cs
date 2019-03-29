@@ -10,7 +10,7 @@ namespace Qowaiv.DomainModel
         private PropertyCollection(int capacity) : base(capacity) { }
         
         /// <summary>Creates the properties for the type.</summary>
-        public static PropertyCollection Create<TId>(IEntity<TId> entity) where TId : struct
+        public static PropertyCollection Create<TEntity>(TEntity entity) where TEntity : class
         {
             Guard.NotNull(entity, nameof(entity));
 

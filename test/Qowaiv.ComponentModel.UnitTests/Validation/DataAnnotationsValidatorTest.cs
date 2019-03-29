@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Qowaiv.ComponentModel.Tests.TestTools;
 using Qowaiv.ComponentModel.UnitTests.Validation.Models;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.Globalization;
+using Qowaiv.TestTools.ComponentModel;
 
 namespace Qowaiv.ComponentModel.Tests.Validation
 {

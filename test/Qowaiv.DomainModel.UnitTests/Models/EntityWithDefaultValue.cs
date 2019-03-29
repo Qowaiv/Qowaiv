@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
-    public class EntityWithDefaultValue : Entity<int>
+    public class EntityWithDefaultValue : Entity<EntityWithDefaultValue, int>
     {
         [DefaultValue("is")]
         public Country Country

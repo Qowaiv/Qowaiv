@@ -4,13 +4,14 @@ using System.Collections.Generic;
 namespace Qowaiv.DomainModel
 {
     /// <summary>Compares entities.</summary>
-    public class EntityEqualityComparer<TId> : IEqualityComparer<IEntity<TId>>
+    public class EntityEqualityComparer<TEntity, TId> : IEqualityComparer<TEntity>
+        where TEntity : class, IEntity<TEntity, TId>
         where TId : struct
     {
         /// <summary>Returns true if both entities have the same type,
         /// are not transient, and have the same id, otherwise false.
         /// </summary>
-        public bool Equals(IEntity<TId> x, IEntity<TId> y)
+        public bool Equals(TEntity x, TEntity y)
         {
             if (x is null || y is null)
             {
@@ -32,7 +33,7 @@ namespace Qowaiv.DomainModel
         /// When an entity is transient, as the id (which is the source of the hash)
         /// is likely to change.
         /// </exception>
-        public int GetHashCode(IEntity<TId> obj)
+        public int GetHashCode(TEntity obj)
         {
             Guard.NotNull(obj, nameof(obj));
 

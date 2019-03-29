@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -99,15 +100,16 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
-        public void InitProperties_TwoErrors_()
+        public void InitProperties_TwoErrors_WithErrors()
         {
-            var errors = Assert.Throws<AggregateException>(() =>
-            {
-                EntityWithInitScope.FromData(17, string.Empty, Date.MinValue);
-            });
+            var entity =  EntityWithInitScope.FromData(17, string.Empty, Date.MinValue);
 
-            Assert.AreEqual(2, errors.InnerExceptions.Count);
+            ValidationResultAssert.WithErrors(entity,
+                ValidationTestMessage.Error("The Name field is required.", nameof(EntityWithInitScope.Name)),
+                ValidationTestMessage.Error("The StartDate field is required.", nameof(EntityWithInitScope.StartDate))
+            );
         }
+
         [Test]
         public void GetHashCode_IsTransient_NotSupported()
         {
@@ -130,7 +132,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void DebuggerDisplay_IsSupported()
         {
-            DebuggerDisplayAssert.HasAttribute(typeof(Entity<>));
+            DebuggerDisplayAssert.HasAttribute(typeof(Entity<,>));
         }
     }
 }

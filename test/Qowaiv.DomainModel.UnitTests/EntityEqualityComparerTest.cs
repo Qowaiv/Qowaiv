@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.DomainModel.UnitTests.Models;
 using System;
 
 namespace Qowaiv.DomainModel.UnitTests
@@ -8,7 +9,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Equals_NullAndNull_True()
         {
-            var comparer = new EntityEqualityComparer<Guid>();
+            var comparer = new EntityEqualityComparer<SimpleEntity, Guid>();
             Assert.IsTrue(comparer.Equals(null, null));
         }
     }

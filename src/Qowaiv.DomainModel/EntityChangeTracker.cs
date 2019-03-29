@@ -1,23 +1,23 @@
 ﻿using Qowaiv.ComponentModel;
-using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.Validation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Qowaiv.DomainModel.ChangeManagement
+namespace Qowaiv.DomainModel
 {
     /// <summary>Tracks (potential) changes and fires validations and notification events.</summary>
-    internal class EntityChangeTracker<TId> : Dictionary<string, object>
+    internal class EntityChangeTracker<TEntity, TId> : Dictionary<string, object>
+        where TEntity : Entity<TEntity, TId>
         where TId : struct
     {
-        private readonly Entity<TId> _entity;
+        private readonly TEntity _entity;
         private readonly PropertyCollection _properties;
         private readonly AnnotatedModelValidator _validator;
 
-        /// <summary>Creates a new instance of an <see cref="EntityChangeTracker{TId}"/>.</summary>
-        public EntityChangeTracker(Entity<TId> entity, PropertyCollection properties, AnnotatedModelValidator validator)
+        /// <summary>Creates a new instance of an <see cref="EntityChangeTracker{TEntity, TId}"/>.</summary>
+        public EntityChangeTracker(TEntity entity, PropertyCollection properties, AnnotatedModelValidator validator)
         {
             _entity = entity;
             _properties = properties;
@@ -40,27 +40,28 @@ namespace Qowaiv.DomainModel.ChangeManagement
 
             if (!BufferChanges)
             {
-                ProcessChanges();
+               var result = ProcessChanges();
+                if(!result.IsValid)
+                {
+                    // TODO: improve.
+                    throw new ValidationException(result.Errors.FirstOrDefault(), null,  value);
+                }
             }
         }
 
         /// <summary>Applies all changes at once.</summary>
-        public void ProcessChanges()
+        public Result<TEntity> ProcessChanges()
         {
             lock (locker)
             {
                 try
                 {
                     var result = ValidateAll();
-                    if (result.IsValid)
-                    {
-                        InvokePropertiesChanged();
-                    }
-                    else
-                    {
+                    if (!result.IsValid)
+                    { 
                         Rollback();
-                        ValidationMessage.ThrowIfAnyErrors(result.Messages);
                     }
+                    return result;
                 }
                 finally
                 {
@@ -70,7 +71,7 @@ namespace Qowaiv.DomainModel.ChangeManagement
         }
 
         /// <summary>Validates all changed properties.</summary>
-        private Result ValidateAll()
+        private Result<TEntity> ValidateAll()
         {
             BufferChanges = false;
 
@@ -92,22 +93,6 @@ namespace Qowaiv.DomainModel.ChangeManagement
             foreach (var change in this)
             {
                 _properties[change.Key] = change.Value;
-            }
-        }
-
-        /// <summary>Invoke <see cref="PropertyChangedEventHandler"/> events for
-        /// all changed properties.
-        /// </summary>
-        private void InvokePropertiesChanged()
-        {
-            foreach (var change in this)
-            {
-                var value = _properties[change.Key];
-
-                if (change.Value != value)
-                {
-                    _entity.OnPropertyChanged(change.Key);
-                }
             }
         }
 

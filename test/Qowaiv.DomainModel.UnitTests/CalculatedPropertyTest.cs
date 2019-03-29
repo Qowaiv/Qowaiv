@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.DomainModel.UnitTests.Models;
+using Qowaiv.TestTools.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests
@@ -10,11 +11,11 @@ namespace Qowaiv.DomainModel.UnitTests
         public void IsValid_CalculatedProperty_IsValid()
         {
             var model = new EntityWithCaculatedProperty();
-            model.SetProperties(() =>
+            model.SetProperties((m) =>
             {
-                model.Id = 17;
-                model.Repertitions = 5;
-                model.Value = 8;
+                m.Id = 17;
+                m.Repertitions = 5;
+                m.Value = 8;
             });
         }
 
@@ -22,15 +23,15 @@ namespace Qowaiv.DomainModel.UnitTests
         public void IsValid_CalculatedProperty_WithErrors()
         {
             var model = new EntityWithCaculatedProperty();
-            Assert.Throws<ValidationException>(() =>
+            
+            var result = model.SetProperties((m) =>
             {
-                model.SetProperties(() =>
-                {
-                    model.Id = 17;
-                    model.Repertitions = 50;
-                    model.Value = 8.17m;
-                });
+                m.Id = 17;
+                m.Repertitions = 50;
+                m.Value = 8.17m;
             });
+
+            Assert.IsFalse(result.IsValid);
         }
     }
 }

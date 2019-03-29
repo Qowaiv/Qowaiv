@@ -2,11 +2,9 @@
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
-    public class EmptyEntity : Entity<Guid>
+    public class EmptyEntity : Entity<EmptyEntity, Guid>
     {
-        public EmptyEntity()
-        {
-        }
+        public EmptyEntity() { }
 
         public EmptyEntity(Guid id) => Id = id;
     }

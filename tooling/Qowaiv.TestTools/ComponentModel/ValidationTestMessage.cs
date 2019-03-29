@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Qowaiv.ComponentModel.Tests.TestTools
+namespace Qowaiv.TestTools.ComponentModel
 {
     public sealed class ValidationTestMessage: IEquatable<ValidationTestMessage>
     {
@@ -13,7 +13,7 @@ namespace Qowaiv.ComponentModel.Tests.TestTools
         {
             Severity = severity;
             Message = message;
-            MemberNames = new ReadOnlyCollection<string>(memberNames.ToList());
+            MemberNames = new ReadOnlyCollection<string>(memberNames == null ? new List<string>(0) : memberNames.ToList());
         }
 
         public string Message { get; }
@@ -24,6 +24,7 @@ namespace Qowaiv.ComponentModel.Tests.TestTools
         public bool Equals(ValidationTestMessage other)=> other != null && ToString() == other.ToString();
         public override int GetHashCode() => ToString().GetHashCode();
 
+        /// <inheritdoc />
         public override string ToString() => $"[{Severity}] {Message}, Members: {string.Join(", ", MemberNames)}";
 
         public static ValidationTestMessage Info(string message, params string[] memberNames) => new ValidationTestMessage(ValidationSeverity.Info, message, memberNames);

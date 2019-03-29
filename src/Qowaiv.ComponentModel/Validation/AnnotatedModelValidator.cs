@@ -59,6 +59,11 @@ namespace Qowaiv.ComponentModel.Validation
 
         private void ValidateModel(NestedValidationContext context)
         {
+            // instance has already been validated.
+            if (!context.Done.Add(context.Instance))
+            {
+                return;
+            }
             ValidateProperties(context);
             ValidateType(context);
             ValidateValidatableObject(context);

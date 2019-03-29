@@ -10,7 +10,7 @@ namespace Qowaiv.ComponentModel.Validation
     internal class NestedValidationContext : IServiceProvider
     {
         /// <summary>Constructor.</summary>
-        private NestedValidationContext(string path, object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
+        private NestedValidationContext(string path, object instance, IServiceProvider serviceProvider, IDictionary<object, object> items, ISet<object> done)
         {
             Path = path;
             Instance = instance;
@@ -18,7 +18,11 @@ namespace Qowaiv.ComponentModel.Validation
             Items = items;
             Messages = new List<ValidationResult>();
             Annotations = AnnotatedModel.Get(instance.GetType());
+            Done = done;
         }
+
+        /// <summary>Keeps track of objects that already have been validated.</summary>
+        public ISet<object> Done { get; }
 
         /// <summary>Gets the (nested) path.</summary>
         public string Path { get; }
@@ -86,7 +90,7 @@ namespace Qowaiv.ComponentModel.Validation
         /// <summary>Creates context for the property.</summary>
         public NestedValidationContext ForProperty(AnnotatedProperty property)
         {
-            return new NestedValidationContext(Path, Instance, ServiceProvider, Items)
+            return new NestedValidationContext(Path, Instance, ServiceProvider, Items, Done)
             {
                 MemberName = property.Descriptor.Name,
                 Messages = Messages,
@@ -111,7 +115,7 @@ namespace Qowaiv.ComponentModel.Validation
                 path += '[' + index.Value.ToString() + ']';
             }
 
-            return new NestedValidationContext(path + '.', value, ServiceProvider, Items)
+            return new NestedValidationContext(path + '.', value, ServiceProvider, Items, Done)
             {
                 Messages = Messages,
             };
@@ -132,7 +136,7 @@ namespace Qowaiv.ComponentModel.Validation
         public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
         {
             Guard.NotNull(instance, nameof(instance));
-            return new NestedValidationContext(string.Empty, instance, serviceProvider, items);
+            return new NestedValidationContext(string.Empty, instance, serviceProvider, items, new HashSet<object>(ReferenceComparer.Instance));
         }
     }
 }

@@ -15,12 +15,12 @@ namespace Qowaiv.ComponentModel.Validation
         private static readonly RequiredAttribute Optional = new NotRequiredAttributeAttribute();
 
         /// <summary>Creates a new instance of an <see cref="AnnotatedProperty"/>.</summary>
-        private AnnotatedProperty(PropertyDescriptor descriptor, bool typeIsAnnotatedModel, RequiredAttribute requiredAttribute, ValidationAttribute[] validationAttributes)
+        private AnnotatedProperty(PropertyDescriptor descriptor, bool? typeIsAnnotatedModel, RequiredAttribute requiredAttribute, ValidationAttribute[] validationAttributes)
         {
             Descriptor = descriptor;
             RequiredAttribute = requiredAttribute ?? Optional;
             ValidationAttributes = validationAttributes;
-            TypeIsAnnotatedModel = typeIsAnnotatedModel;
+            m_TypeIsAnnotatedModel = typeIsAnnotatedModel;
         }
 
         /// <summary>Gets the <see cref="PropertyDescriptor"/>.</summary>
@@ -32,7 +32,19 @@ namespace Qowaiv.ComponentModel.Validation
         public RequiredAttribute RequiredAttribute { get; }
 
         /// <summary>Returns true, if the type itself is <see cref="AnnotatedModel"/>.</summary>
-        public bool TypeIsAnnotatedModel { get; }
+        public bool TypeIsAnnotatedModel
+        {
+            get
+            {
+                if(!m_TypeIsAnnotatedModel.HasValue)
+                {
+                    m_TypeIsAnnotatedModel = AnnotatedModel.Store.IsAnnotededModel(Descriptor.PropertyType, new TypePath());
+                }
+                return m_TypeIsAnnotatedModel.GetValueOrDefault();
+            }
+        }
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private bool? m_TypeIsAnnotatedModel;
 
         /// <summary>Gets the <see cref="ValidationAttribute"/>s the property
         /// is decorated with.
@@ -86,29 +98,18 @@ namespace Qowaiv.ComponentModel.Validation
             var type = descriptor.PropertyType;
             var validationAttributes = new List<ValidationAttribute>();
             var requiredAttribute = CollectAttributes(descriptor, validationAttributes);
-            var typeIsAnnotated = store.IsAnnotededModel(type, path);
 
-            // If there is an enumeration, test for the type of the enumeration.
-            if(!typeIsAnnotated && typeof(string) != type)
+            bool? typeIsAnnotated = default(bool?);
+
+            if (requiredAttribute is null && !validationAttributes.Any())
             {
-                var enumerable = type
-                    .GetInterfaces()
-                    .FirstOrDefault(iface => 
-                        iface.IsGenericType && 
-                        iface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+                typeIsAnnotated = store.IsAnnotededModel(type, path);
 
-                if(enumerable != null)
+                if (!typeIsAnnotated.Value)
                 {
-                    type = enumerable.GetGenericArguments()[0];
-                    typeIsAnnotated = store.IsAnnotededModel(type, path);
+                    return null;
                 }
             }
-
-            if(requiredAttribute is null && !validationAttributes.Any() && !typeIsAnnotated)
-            {
-                return null;
-            }
-
             return new AnnotatedProperty(descriptor, typeIsAnnotated, requiredAttribute, validationAttributes.ToArray());
         }
 

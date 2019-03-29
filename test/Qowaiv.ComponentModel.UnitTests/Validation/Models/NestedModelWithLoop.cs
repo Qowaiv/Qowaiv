@@ -18,6 +18,5 @@ namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
 
             public NestedModelWithLoop Parent { get; set; }
         }
-
     }
 }

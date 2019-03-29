@@ -7,7 +7,7 @@ namespace Qowaiv.Tests
     {
         protected override Type AssemblyType => typeof(Date);
 
-        protected override Type[] Svos => new[]
+        protected override Type[] ExpectedSvos => new[]
         {
             typeof(Date),
             typeof(EmailAddress),

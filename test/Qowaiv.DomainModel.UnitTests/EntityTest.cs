@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Qowaiv.ComponentModel.Messages;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.ComponentModel;
@@ -105,8 +106,8 @@ namespace Qowaiv.DomainModel.UnitTests
             var entity =  EntityWithInitScope.FromData(17, string.Empty, Date.MinValue);
 
             ValidationResultAssert.WithErrors(entity,
-                ValidationTestMessage.Error("The Name field is required.", nameof(EntityWithInitScope.Name)),
-                ValidationTestMessage.Error("The StartDate field is required.", nameof(EntityWithInitScope.StartDate))
+                ValidationMessage.Error("The Name field is required.", nameof(EntityWithInitScope.Name)),
+                ValidationMessage.Error("The StartDate field is required.", nameof(EntityWithInitScope.StartDate))
             );
         }
 

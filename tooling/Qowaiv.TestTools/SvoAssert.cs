@@ -10,8 +10,10 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.TestTools
 {
+    /// <summary>Assertions on the (implicit) SVO contract.</summary>
     public static class SvoAssert
     {
+        /// <summary>Asserts that the underlying type matches the decorated type. Throws if not.</summary>
         public static void UnderlyingTypeMatches(Type svo, SingleValueObjectAttribute attr)
         {
             var m_Value = svo.GetField("m_Value", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -19,6 +21,7 @@ namespace Qowaiv.TestTools
             Assert.AreEqual(attr.UnderlyingType, m_Value.FieldType, "{0}.m_Field", svo);
         }
 
+        /// <summary>Asserts that the Parse contract is met. Throws if not.</summary>
         public static void ParseMatches(Type svo, SingleValueObjectAttribute attr)
         {
             var staticMethods = svo.GetMethods(BindingFlags.Public | BindingFlags.Static);
@@ -55,6 +58,7 @@ namespace Qowaiv.TestTools
             }
         }
 
+        /// <summary>Asserts that the TryParse contract is met. Throws if not.</summary>
         public static void TryParseMatches(Type svo, SingleValueObjectAttribute attr)
         {
             var staticMethods = svo.GetMethods(BindingFlags.Public | BindingFlags.Static);
@@ -98,6 +102,7 @@ namespace Qowaiv.TestTools
             }
         }
 
+        /// <summary>Asserts that the IsValid contract is met. Throws if not.</summary>
         public static void IsValidMatches(Type svo, SingleValueObjectAttribute attr)
         {
             var staticMethods = svo.GetMethods(BindingFlags.Public | BindingFlags.Static);
@@ -134,6 +139,7 @@ namespace Qowaiv.TestTools
             }
         }
 
+        /// <summary>Asserts that the EmptyAndUnknown contract is met. Throws if not.</summary>
         public static void EmptyAndUnknownMatches(Type svo, SingleValueObjectAttribute attr)
         {
             var emptyValue = svo.GetFields(BindingFlags.Static | BindingFlags.Public).SingleOrDefault(field =>
@@ -211,6 +217,7 @@ namespace Qowaiv.TestTools
             }
         }
 
+        /// <summary>Asserts that the Interface contracts are met. Throws if not.</summary>
         public static void ImplementsInterfaces(Type svo)
         {
             var interfaces = svo.GetInterfaces().ToList();
@@ -225,6 +232,7 @@ namespace Qowaiv.TestTools
             Assert.IsTrue(interfaces.Contains(iComparable), "{0} should contain IComparable<{0}>.", svo);
         }
 
+        /// <summary>Asserts that the attribute contracts are met. Throws if not.</summary>
         public static void AttributesMatches(Type svo)
         {
             var attributes = svo.GetCustomAttributes(false);

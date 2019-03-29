@@ -9,7 +9,7 @@ namespace Qowaiv.Sql.UnitTests
     {
         protected override Type AssemblyType => typeof(Timestamp);
 
-        protected override Type[] Svos => new Type[] 
+        protected override Type[] ExpectedSvos => new Type[] 
         {
             typeof(Timestamp),
         };

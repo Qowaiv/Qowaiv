@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using Qowaiv.TestTools;
+﻿using Qowaiv.TestTools;
 using System;
 
 namespace Qowaiv.ComponentModel.Tests
@@ -8,6 +7,6 @@ namespace Qowaiv.ComponentModel.Tests
     {
         protected override Type AssemblyType => typeof(ComponentModel.Validation.AnnotatedModel);
 
-        protected override Type[] Svos => new Type[0];
+        protected override Type[] ExpectedSvos => new Type[0];
     }
 }

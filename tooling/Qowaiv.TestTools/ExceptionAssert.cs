@@ -36,7 +36,10 @@ namespace Qowaiv.TestTools
         /// <param name="exceptionMessage">
         /// The expected exception message.
         /// </param>
-        /// The catch exception.
+        /// <param name="args">
+        /// Array of objects to be used in formatting the message.
+        /// </param>
+        /// The caught exception.
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentException CatchArgumentException(TestDelegate code, string paramName, string exceptionMessage, params object[] args)
@@ -57,8 +60,11 @@ namespace Qowaiv.TestTools
         /// <returns>
         /// <param name="exceptionMessage">
         /// The expected exception message.
+        /// </param>  
+        /// <param name="args">
+        /// Array of objects to be used in formatting the message.
         /// </param>
-        /// The catch exception.
+        /// The caught exception.
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentOutOfRangeException CatchArgumentOutOfRangeException(TestDelegate code, string paramName, string exceptionMessage, params object[] args)

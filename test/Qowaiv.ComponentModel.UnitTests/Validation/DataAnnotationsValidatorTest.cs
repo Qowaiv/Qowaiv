@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.UnitTests.Validation.Models;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.Globalization;
@@ -17,8 +18,8 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 var model = new ModelWithMandatoryProperties();
 
                 DataAnnotationsAssert.WithErrors(model,
-                    ValidationTestMessage.Error("The E-mail address field is required.", "Email"),
-                    ValidationTestMessage.Error("The SomeString field is required.", "SomeString")
+                    ValidationMessage.Error("The E-mail address field is required.", "Email"),
+                    ValidationMessage.Error("The SomeString field is required.", "SomeString")
                 );
             }
         }
@@ -42,7 +43,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             };
 
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("The value of the Country field is not allowed.", "Country")
+                ValidationMessage.Error("The value of the Country field is not allowed.", "Country")
             );
         }
         [Test]
@@ -60,7 +61,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 Email = EmailAddress.Parse("spam@qowaiv.org"),
             };
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("The value of the Email field is not allowed.", "Email"));
+                ValidationMessage.Error("The value of the Email field is not allowed.", "Email"));
         }
         [Test]
         public void Validate_ModelWithForbiddenValues_IsValid()
@@ -95,8 +96,8 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             };
 
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("The Country field is required.", "Country"),
-                ValidationTestMessage.Error("The PostalCode field is required.", "PostalCode")
+                ValidationMessage.Error("The Country field is required.", "Country"),
+                ValidationMessage.Error("The PostalCode field is required.", "PostalCode")
             );
         }
 
@@ -112,7 +113,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 };
 
                 DataAnnotationsAssert.WithErrors(model,
-                    ValidationTestMessage.Error("De postcode 2629JD is niet geldig voor België.", "PostalCode", "Country")
+                    ValidationMessage.Error("De postcode 2629JD is niet geldig voor België.", "PostalCode", "Country")
                 );
             }
         }
@@ -132,7 +133,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             };
 
             DataAnnotationsAssert.WithErrors(model, validator,
-                ValidationTestMessage.Error("Postal code does not exist.", "PostalCode")
+                ValidationMessage.Error("Postal code does not exist.", "PostalCode")
             );
         }
 
@@ -141,7 +142,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
         {
             var model = new ModelWithCustomizedResource();
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("This IBAN is wrong.", "Iban"));
+                ValidationMessage.Error("This IBAN is wrong.", "Iban"));
         }
 
         [Test]
@@ -152,7 +153,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 Id = Guid.NewGuid()
             };
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("The Child field is required.", "Child"));
+                ValidationMessage.Error("The Child field is required.", "Child"));
         }
 
         [Test]
@@ -164,7 +165,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 Child = new NestedModel.ChildModel()
             };
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("The Name field is required.", "Child.Name"));
+                ValidationMessage.Error("The Name field is required.", "Child.Name"));
         }
 
         [Test]
@@ -180,7 +181,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 }
             };
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("The Name field is required.", "Children[1].Name"));
+                ValidationMessage.Error("The Name field is required.", "Children[1].Name"));
         }
 
         [Test]
@@ -194,7 +195,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
             model.Child.Parent = model;
 
             DataAnnotationsAssert.WithErrors(model,
-                ValidationTestMessage.Error("The Name field is required.", "Child.Name"));
+                ValidationMessage.Error("The Name field is required.", "Child.Name"));
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Qowaiv.Json.UnitTests
     {
         protected override Type AssemblyType => typeof(QowaivJsonConverter);
 
-        protected override Type[] Svos => new Type[0];
+        protected override Type[] ExpectedSvos => new Type[0];
     }
 }
 

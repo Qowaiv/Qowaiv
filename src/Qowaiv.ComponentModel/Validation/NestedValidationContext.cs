@@ -92,7 +92,7 @@ namespace Qowaiv.ComponentModel.Validation
         {
             return new NestedValidationContext(Path, Instance, ServiceProvider, Items, Done)
             {
-                MemberName = property.Descriptor.Name,
+                MemberName = property.Name,
                 Messages = Messages,
             };
         }

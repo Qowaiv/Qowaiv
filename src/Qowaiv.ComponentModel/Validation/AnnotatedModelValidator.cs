@@ -100,12 +100,12 @@ namespace Qowaiv.ComponentModel.Validation
                 propertyContext.AddMessage(attribute.GetValidationResult(value, propertyContext));
             }
 
-            if (value != null && property.TypeIsAnnotatedModel)
+            if (value != null)
             {
-                if (value is IEnumerable enumerable)
+                if (property.IsEnumerable)
                 {
                     var index = 0;
-                    foreach(var item in enumerable)
+                    foreach(var item in (IEnumerable)value)
                     {
                         var nestedContext = propertyContext.Nested(item, index++);
                         ValidateModel(nestedContext);

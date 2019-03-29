@@ -1,4 +1,5 @@
 ﻿using Qowaiv.ComponentModel.Validation;
+using System;
 using System.Collections.Generic;
 
 namespace Qowaiv.DomainModel
@@ -10,21 +11,19 @@ namespace Qowaiv.DomainModel
         private PropertyCollection(int capacity) : base(capacity) { }
         
         /// <summary>Creates the properties for the type.</summary>
-        public static PropertyCollection Create<TEntity>(TEntity entity) where TEntity : class
+        public static PropertyCollection Create(Type type)
         {
-            Guard.NotNull(entity, nameof(entity));
-
-            var annotated = AnnotatedModel.Get(entity.GetType());
+            var annotated = AnnotatedModel.Get(type);
 
             var properties = new PropertyCollection(annotated.Properties.Count);
 
             foreach (var info in annotated.Properties)
             {
-                if(info.Descriptor.IsReadOnly)
+                if(info.IsReadOnly)
                 {
                     continue;
                 }
-                properties[info.Descriptor.Name] = info.DefaultValue;
+                properties[info.Name] = info.DefaultValue;
             }
             return properties;
         }

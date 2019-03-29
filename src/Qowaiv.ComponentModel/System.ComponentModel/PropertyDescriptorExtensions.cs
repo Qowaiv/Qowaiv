@@ -1,4 +1,6 @@
 ﻿using Qowaiv;
+using Qowaiv.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -28,8 +30,30 @@ namespace System.ComponentModel
                     : null;
             }
 
-            return GetConverter(descriptor)
+            return descriptor
+                .GetTypeConverter()
                 .ConvertFrom(defaultValueAttribute.Value);
+        }
+
+        /// <summary>Gets the decorated <see cref="RequiredAttribute"/> for the property.</summary>
+        public static RequiredAttribute GetRequiredAttribute(this PropertyDescriptor descriptor)
+        {
+            Guard.NotNull(descriptor, nameof(descriptor));
+
+            return descriptor.Attributes
+                .Cast<Attribute>()
+                .OfType<RequiredAttribute>()
+                .FirstOrDefault(attr => !(attr is NotRequiredAttributeAttribute));
+        }
+
+        /// <summary>Gets the decorated <see cref="RequiredAttribute"/> for the property.</summary>
+        public static IEnumerable<ValidationAttribute> GetValidationAttributes(this PropertyDescriptor descriptor)
+        {
+            Guard.NotNull(descriptor, nameof(descriptor));
+
+            return descriptor.Attributes
+                .Cast<Attribute>()
+                .OfType<ValidationAttribute>();
         }
 
         /// <summary>Gets the decorated <see cref="DisplayAttribute"/> for the property.</summary>
@@ -40,7 +64,8 @@ namespace System.ComponentModel
             return (DisplayAttribute)descriptor.Attributes[typeof(DisplayAttribute)];
         }
 
-        private static TypeConverter GetConverter(PropertyDescriptor descriptor)
+        /// <summary>Gets the type converter associated with the property.</summary>
+        public static TypeConverter GetTypeConverter(this PropertyDescriptor descriptor)
         {
             var converterType = descriptor.Attributes
                 .Cast<Attribute>()

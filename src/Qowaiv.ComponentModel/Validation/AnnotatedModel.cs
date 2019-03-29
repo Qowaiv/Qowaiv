@@ -13,6 +13,8 @@ namespace Qowaiv.ComponentModel.Validation
     /// </remarks>
     public class AnnotatedModel
     {
+        internal static readonly AnnotatedModel None = new AnnotatedModel(typeof(object), false, new ValidationAttribute[0], new AnnotatedProperty[0]);
+
         /// <summary>Gets the singleton instance of the <see cref="AnnotatedModelStore"/>.</summary>
         internal static readonly AnnotatedModelStore Store = new AnnotatedModelStore();
 
@@ -43,12 +45,6 @@ namespace Qowaiv.ComponentModel.Validation
         /// </summary>
         public bool IsIValidatableObject { get; }
 
-        /// <summary>Returns true if the model is validatable, otherwise false.</summary>
-        public bool IsValidatable
-        {
-            get => IsIValidatableObject || TypeAttributes.Any() || Properties.Any();
-        }
-
         /// <summary>Gets an <see cref="AnnotatedModel"/>.</summary>
         /// <param name="type">
         /// Type to create the annotated model for.
@@ -59,31 +55,17 @@ namespace Qowaiv.ComponentModel.Validation
         public static AnnotatedModel Get(Type type) => Store.GetAnnotededModel(type);
 
         /// <summary>Creates an <see cref="AnnotatedModel"/>.</summary>
-        internal static AnnotatedModel Create(Type type, AnnotatedModelStore store, TypePath path)
+        internal static AnnotatedModel Create(Type type)
         {
             Guard.NotNull(type, nameof(type));
 
-            return new AnnotatedModel(
-                type,
-                type.GetInterfaces().Contains(typeof(IValidatableObject)),
-                TypeDescriptor
-                    .GetAttributes(type)
-                    .Cast<Attribute>()
-                    .OfType<ValidationAttribute>().ToArray(),
-                    AnnotatedProperty.CreateAll(type, store, path).ToArray()
-                );
-        }
+            var isIValidatable = type.GetInterfaces().Contains(typeof(IValidatableObject));
+            var validations = TypeDescriptor.GetAttributes(type).Cast<Attribute>().OfType<ValidationAttribute>().ToArray();
+            var properties = AnnotatedProperty.CreateAll(type).ToArray();
 
-        /// <summary>Creates an <see cref="AnnotatedModel"/> for a not annotated model.</summary>
-        /// <param name="type">
-        /// Type to create the not annotated model for.
-        /// </param>
-        /// <remarks>
-        /// Useful in caching scenarios.
-        /// </remarks>
-        internal static AnnotatedModel None(Type type)
-        {
-            return new AnnotatedModel(type, false, new ValidationAttribute[0], new AnnotatedProperty[0]);
+            return isIValidatable || validations.Any() || properties.Any()
+                ? new AnnotatedModel(type, isIValidatable, validations, properties)
+                : None;
         }
     }
 }

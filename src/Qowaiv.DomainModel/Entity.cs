@@ -35,7 +35,7 @@ namespace Qowaiv.DomainModel
         /// </param>
         protected Entity(AnnotatedModelValidator validator)
         {
-            _properties = PropertyCollection.Create(this);
+            _properties = PropertyCollection.Create(GetType());
             _tracker = new EntityChangeTracker<TEntity, TId>((TEntity)this, _properties, validator);
         }
 

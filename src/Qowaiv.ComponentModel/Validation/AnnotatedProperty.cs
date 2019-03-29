@@ -12,65 +12,67 @@ namespace Qowaiv.ComponentModel.Validation
     [DebuggerDisplay("{DebuggerDisplay}")]
     public class AnnotatedProperty
     {
-        private static readonly RequiredAttribute Optional = new NotRequiredAttributeAttribute();
+        /// <summary>The underlying descriptor.</summary>
+        private readonly PropertyDescriptor descriptor;
 
         /// <summary>Creates a new instance of an <see cref="AnnotatedProperty"/>.</summary>
-        private AnnotatedProperty(PropertyDescriptor descriptor, bool? typeIsAnnotatedModel, RequiredAttribute requiredAttribute, ValidationAttribute[] validationAttributes)
+        private AnnotatedProperty(PropertyDescriptor desc)
         {
-            Descriptor = descriptor;
-            DisplayAttribute = descriptor.GetDisplayAttribute() ?? new DisplayAttribute { Name = descriptor.Name };
-            RequiredAttribute = requiredAttribute ?? Optional;
-            ValidationAttributes = validationAttributes;
-            m_TypeIsAnnotatedModel = typeIsAnnotatedModel;
-            DefaultValue = descriptor.GetDefaultValue();
+            descriptor = desc;
+            DisplayAttribute = desc.GetDisplayAttribute() ?? new DisplayAttribute { Name = desc.Name };
+            RequiredAttribute = desc.GetRequiredAttribute() ?? NotRequiredAttributeAttribute.Optional;
+            ValidationAttributes = desc.GetValidationAttributes().Except(new[] { RequiredAttribute }).ToArray();
+            TypeConverter = desc.GetTypeConverter();
+            DefaultValue = desc.GetDefaultValue();
+            IsEnumerable = PropertyType != typeof(string) && !(GetEnumerableType(PropertyType) is null);
         }
 
-        /// <summary>Gets the <see cref="PropertyDescriptor"/>.</summary>
-        public PropertyDescriptor Descriptor { get; }
+        /// <summary>Gets the type of the property.</summary>
+        public Type PropertyType => descriptor.PropertyType;
 
-        /// <summary>Gets the <see cref="DisplayAttribute"/>.</summary>
+        /// <summary>Gets the name of the property.</summary>
+        public string Name => descriptor.Name;
+
+        /// <summary>True if the property is read-only, otherwise false.</summary>
+        public bool IsReadOnly => descriptor.IsReadOnly;
+
+        /// <summary>True if the property is an <see cref="IEnumerable{T}"/> type, otherwise false.</summary>
+        public bool IsEnumerable { get; }
+
+        /// <summary>Gets the default value for the property.</summary>
+        public object DefaultValue { get; }
+
+        /// <summary>Gets the type converter associated with the property.</summary>
+        /// <remarks>
+        /// If not decorated, get the default type converter of the property type.
+        /// </remarks>
+        public TypeConverter TypeConverter { get; }
+
+        /// <summary>Gets the display attribute.</summary>
+        /// <remarks>
+        /// Returns a display attribute with the name equal to the property name if not decorated.
+        /// </remarks>
         public DisplayAttribute DisplayAttribute { get; }
 
-        /// <summary>Gets the <see cref="System.ComponentModel.DataAnnotations.RequiredAttribute"/>
-        /// if the property was decorated with one, otherwise a <see cref="NotRequiredAttributeAttribute"/>.
-        /// </summary>
+        /// <summary>Gets the required attribute.</summary>
+        /// <remarks>
+        /// <see cref="NotRequiredAttributeAttribute"/> if the property is not decorated.
+        /// </remarks>
         public RequiredAttribute RequiredAttribute { get; }
-
-        /// <summary>True if the <see cref="RequiredAttribute"/> is not a <see cref="NotRequiredAttributeAttribute"/>.</summary>
-        public bool IsRequired => !(RequiredAttribute is NotRequiredAttributeAttribute);
-
-
-        /// <summary>Returns true, if the type itself is <see cref="AnnotatedModel"/>.</summary>
-        public bool TypeIsAnnotatedModel
-        {
-            get
-            {
-                if(!m_TypeIsAnnotatedModel.HasValue)
-                {
-                    m_TypeIsAnnotatedModel = AnnotatedModel.Store.IsAnnotededModel(Descriptor.PropertyType, new TypePath());
-                }
-                return m_TypeIsAnnotatedModel.GetValueOrDefault();
-            }
-        }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private bool? m_TypeIsAnnotatedModel;
 
         /// <summary>Gets the <see cref="ValidationAttribute"/>s the property
         /// is decorated with.
         /// </summary>
         public IReadOnlyCollection<ValidationAttribute> ValidationAttributes { get; }
 
-        /// <summary>Gets the default value for the property.</summary>
-        public object DefaultValue { get; }
-
         /// <summary>Gets the value of the property for the specified model.</summary>
-        public object GetValue(object model) => Descriptor.GetValue(model);
+        public object GetValue(object model) => descriptor.GetValue(model);
 
         #region Debugger experience
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal string DebuggerDisplay
         {
-            get => $"{Descriptor.PropertyType} {Descriptor.Name}, Attributes: {string.Join(", ", GetAll().Select(a => Shorten(a)))}";
+            get => $"{descriptor.PropertyType} {descriptor.Name}, Attributes: {string.Join(", ", GetAll().Select(a => Shorten(a)))}";
         }
         private IEnumerable<ValidationAttribute> GetAll()
         {
@@ -85,72 +87,23 @@ namespace Qowaiv.ComponentModel.Validation
         #endregion
 
         /// <summary>Creates a <see cref="AnnotatedProperty"/> for all annotated properties.</summary>
-        internal static IEnumerable<AnnotatedProperty> CreateAll(
-            Type type,
-            AnnotatedModelStore store,
-            TypePath path)
+        internal static IEnumerable<AnnotatedProperty> CreateAll(Type type)
         {
-            var descriptors = TypeDescriptor.GetProperties(type);
-            return descriptors
+            return TypeDescriptor
+                .GetProperties(type)
                 .Cast<PropertyDescriptor>()
-                .Select(descriptor => TryCreate(descriptor, store, path))
-                .Where(property => !(property is null));
+                .Select(desc => new AnnotatedProperty(desc));
         }
 
-        /// <summary>Tries to create a <see cref="AnnotatedProperty"/>.</summary>
-        /// <returns>
-        /// A <see cref="AnnotatedProperty"/> if the property is annotated,
-        /// otherwise <code>null</code>.
-        /// </returns>
-        private static AnnotatedProperty TryCreate(
-            PropertyDescriptor descriptor,
-            AnnotatedModelStore store,
-            TypePath path)
+        private static Type GetEnumerableType(Type type)
         {
-            var type = descriptor.PropertyType;
-            var validationAttributes = new List<ValidationAttribute>();
-            var requiredAttribute = CollectAttributes(descriptor, validationAttributes);
+            var enumType = type
+                .GetInterfaces()
+                .FirstOrDefault(iface =>
+                    iface.IsGenericType &&
+                    iface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
 
-            bool? typeIsAnnotated = default(bool?);
-
-            if (requiredAttribute is null && !validationAttributes.Any())
-            {
-                typeIsAnnotated = store.IsAnnotededModel(type, path);
-
-                if (!typeIsAnnotated.Value)
-                {
-                    return null;
-                }
-            }
-            return new AnnotatedProperty(descriptor, typeIsAnnotated, requiredAttribute, validationAttributes.ToArray());
-        }
-
-        /// <summary>Fills the collection with all validation attributes,
-        /// except the first <see cref="System.ComponentModel.DataAnnotations.RequiredAttribute"/>,
-        /// as that one is returned.
-        /// </summary>
-        private static RequiredAttribute CollectAttributes(PropertyDescriptor descriptor, List<ValidationAttribute> validationAttributes)
-        {
-            var attributes = descriptor.Attributes
-                .Cast<Attribute>()
-                .OfType<ValidationAttribute>();
-
-            RequiredAttribute required = null;
-
-            foreach (var attribute in attributes)
-            {
-                // find a required attribute.
-                if (required == null && attribute is RequiredAttribute req)
-                {
-                    required = req;
-                }
-                else
-                {
-                    validationAttributes.Add(attribute);
-                }
-            }
-
-            return required is NotRequiredAttributeAttribute ? null : required;
+            return enumType?.GetGenericArguments()[0];
         }
     }
 }

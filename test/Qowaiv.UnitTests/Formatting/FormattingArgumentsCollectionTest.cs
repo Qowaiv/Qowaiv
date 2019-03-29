@@ -301,7 +301,7 @@ namespace Qowaiv.UnitTests.Formatting
                 collection.Add(typeof(Int32), "Update");
             },
             null,
-            "An item with the same key has already been added.");
+            "An item with the same key has already been added. Key: System.Int32");
         }
 
         [Test]

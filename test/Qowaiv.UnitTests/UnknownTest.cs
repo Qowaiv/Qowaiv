@@ -42,5 +42,28 @@ namespace Qowaiv.UnitTests
         {
             Assert.IsFalse(Unknown.IsUnknown("Vreemd", CultureInfo.InvariantCulture));
         }
+
+        [Test]
+        public void Value_ValueTypeWithUnkown_UnknownValue()
+        {
+            Assert.AreEqual(PostalCode.Unknown, Unknown.Value(typeof(PostalCode)));
+        }
+
+        [Test]
+        public void Value_ReferenceTypeWithUnkown_UnknownValue()
+        {
+            Assert.AreEqual(ClassWithUnknownValue.Unknown, Unknown.Value(typeof(ClassWithUnknownValue)));
+        }
+
+        [Test]
+        public void Value_TypeWithoutUnkown_IsNull()
+        {
+            Assert.IsNull(Unknown.Value(typeof(Uuid)));
+        }
+
+        private class ClassWithUnknownValue
+        {
+            public static ClassWithUnknownValue Unknown { get; } = new ClassWithUnknownValue();
+        }
     }
 }

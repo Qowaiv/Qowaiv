@@ -13,6 +13,9 @@ namespace Qowaiv.ComponentModel.Validation
     /// </remarks>
     public class AnnotatedModel
     {
+        /// <summary>Gets the singleton instance of the <see cref="AnnotatedModelStore"/>.</summary>
+        internal static readonly AnnotatedModelStore Store = new AnnotatedModelStore();
+
         /// <summary>Creates a new instance of an <see cref="AnnotatedModel"/>.</summary>
         private AnnotatedModel(
             Type type,
@@ -46,20 +49,17 @@ namespace Qowaiv.ComponentModel.Validation
             get => IsIValidatableObject || TypeAttributes.Any() || Properties.Any();
         }
 
-        /// <summary>Get an <see cref="AnnotatedModel"/>.</summary>
-        /// <param name="type">
-        /// Type to get the annotated model for.
-        /// </param>
-        public static AnnotatedModel Get(Type type)
-        {
-            return AnnotatedModelStore.Instance.GetAnnotededModel(type);
-        }
-
-        /// <summary>Creates an <see cref="AnnotatedModel"/>.</summary>
+        /// <summary>Gets an <see cref="AnnotatedModel"/>.</summary>
         /// <param name="type">
         /// Type to create the annotated model for.
         /// </param>
-        internal static AnnotatedModel Create(Type type)
+        /// <remarks>
+        /// This one uses caching.
+        /// </remarks>
+        public static AnnotatedModel Get(Type type) => Store.GetAnnotededModel(type);
+
+        /// <summary>Creates an <see cref="AnnotatedModel"/>.</summary>
+        internal static AnnotatedModel Create(Type type, AnnotatedModelStore store, TypePath path)
         {
             Guard.NotNull(type, nameof(type));
 
@@ -70,7 +70,7 @@ namespace Qowaiv.ComponentModel.Validation
                     .GetAttributes(type)
                     .Cast<Attribute>()
                     .OfType<ValidationAttribute>().ToArray(),
-                    AnnotatedProperty.CreateAll(type).ToArray()
+                    AnnotatedProperty.CreateAll(type, store, path).ToArray()
                 );
         }
 
@@ -81,7 +81,7 @@ namespace Qowaiv.ComponentModel.Validation
         /// <remarks>
         /// Useful in caching scenarios.
         /// </remarks>
-        public static AnnotatedModel None(Type type)
+        internal static AnnotatedModel None(Type type)
         {
             return new AnnotatedModel(type, false, new ValidationAttribute[0], new AnnotatedProperty[0]);
         }

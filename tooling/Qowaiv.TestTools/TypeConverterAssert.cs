@@ -64,23 +64,18 @@ namespace Qowaiv.TestTools
             Assert.AreEqual(expected, actual);
         }
 
-        /// <summary>Asserts that the type converter converts an instance descriptior to a guid.</summary>
+        /// <summary>Asserts that the type converter converts an instance descriptor to a GUID.</summary>
         /// <remarks>
-        /// Tests the call to the base implementation.
+        /// Tests the call to the base implementation, that (with .NET-core) fails.
         /// </remarks>
         [DebuggerStepThrough]
         public static void ConvertFromInstanceDescriptor(Type type)
         {
-            var expected = Guid.Parse("34adf67e-47d7-4cee-81fb-89be27aaf77c");
-
             var ctor = typeof(Guid).GetConstructor(new Type[] { typeof(string) });
-            var args = new object[] { expected.ToString() };
-            var descriptor = new InstanceDescriptor(ctor, args);
+            var descriptor = new InstanceDescriptor(ctor, new[] { "34adf67e-47d7-4cee-81fb-89be27aaf77c" });
             var converter = TypeDescriptor.GetConverter(type);
 
-            var actual = (Guid)converter.ConvertFrom(descriptor);
-
-            Assert.AreEqual(expected, actual);
+            Assert.Throws<NotSupportedException>(() => converter.ConvertFrom(descriptor));
         }
 
 
@@ -103,7 +98,5 @@ namespace Qowaiv.TestTools
 
             Assert.AreEqual(expected, actual);
         }
-
-        
     }
 }

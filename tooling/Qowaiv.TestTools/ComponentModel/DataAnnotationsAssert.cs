@@ -12,7 +12,7 @@ namespace Qowaiv.TestTools.ComponentModel
 
         /// <summary>Asserts that the model is valid, throws if not.</summary>
         [DebuggerStepThrough]
-        public static void IsValid<T>(T model, AnnotatedModelValidator validator) => WithErrors<T>(model, new ValidationTestMessage[0]);
+        public static void IsValid<T>(T model, AnnotatedModelValidator validator) => WithErrors(model, new ValidationTestMessage[0]);
 
         /// <summary>Asserts the model to be invalid with specific messages. Throws if not.</summary>
         [DebuggerStepThrough]
@@ -23,7 +23,7 @@ namespace Qowaiv.TestTools.ComponentModel
         public static void WithErrors<T>(T model, AnnotatedModelValidator validator, params ValidationTestMessage[] expected)
         {
             var result = (validator ?? new AnnotatedModelValidator()).Validate(model);
-            ValidationResultAssert.WithErrors(result);
+            ValidationResultAssert.WithErrors(result, expected);
         }
     }
 }

@@ -2,9 +2,10 @@
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.IO;
-using Qowaiv.Threading;
 using Qowaiv.TestTools;
+using Qowaiv.Threading;
 using System;
+using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -60,6 +61,7 @@ namespace Qowaiv.UnitTests.Threading
         [Test]
         public void Get_StreamSizeByConfiguration_12kB()
         {
+            ConfigurationManager.AppSettings["Qowaiv.IO.StreamSize"] = "12kB";
             StreamSize act = ThreadDomain.Current.Get<StreamSize>();
             StreamSize exp = 12000;
 

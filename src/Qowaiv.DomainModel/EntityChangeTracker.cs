@@ -1,9 +1,8 @@
 ﻿using Qowaiv.ComponentModel;
+using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.Validation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Qowaiv.DomainModel
 {
@@ -40,12 +39,8 @@ namespace Qowaiv.DomainModel
 
             if (!BufferChanges)
             {
-               var result = ProcessChanges();
-                if(!result.IsValid)
-                {
-                    // TODO: improve.
-                    throw new ValidationException(result.Errors.FirstOrDefault(), null,  value);
-                }
+                var result = ProcessChanges();
+                ValidationMessage.ThrowIfAnyErrors(result.Messages);
             }
         }
 

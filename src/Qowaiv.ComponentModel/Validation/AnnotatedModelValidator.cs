@@ -1,5 +1,5 @@
-﻿using Qowaiv.ComponentModel.Messages;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -51,60 +51,90 @@ namespace Qowaiv.ComponentModel.Validation
         /// </returns>
         public Result<T> Validate<T>(T model)
         {
-            var validationContext = new ValidationContext(model, ServiceProvider, Items);
-            var annotations = AnnotatedModelStore.Instance.GetAnnotededModel(model.GetType());
-            var messages = new List<ValidationResult>();
+            var context = NestedValidationContext.CreateRoot(model, ServiceProvider, Items);
+            ValidateModel(context);
 
-            messages.AddRange(ValidateProperties(model, annotations, validationContext));
-            messages.AddRange(ValidateType(model, annotations, validationContext));
-            messages.AddRange(ValidateValidatableObject(model, annotations, validationContext));
+            return Result.For(model, context.Messages);
+        }
 
-            return Result.For(model, messages);
+        private void ValidateModel(NestedValidationContext context)
+        {
+            // instance has already been validated.
+            if (!context.Done.Add(context.Instance))
+            {
+                return;
+            }
+            ValidateProperties(context);
+            ValidateType(context);
+            ValidateValidatableObject(context);
         }
 
         /// <summary>Gets the results for validating the (annotated )properties.</summary>
-        private static IEnumerable<ValidationResult> ValidateProperties(object model, AnnotatedModel annotations, ValidationContext validationContext)
+        private void ValidateProperties(NestedValidationContext context)
         {
-            return annotations.Properties.SelectMany(prop => ValidateProperty(prop, model, validationContext));
+            foreach(var property in context.Annotations.Properties)
+            {
+                ValidateProperty(property, context);
+            }
         }
 
         /// <summary>Gets the results for validating a single annotated property.</summary>
         /// <remarks>
         /// It creates a sub validation context.
         /// </remarks>
-        private static IEnumerable<ValidationResult> ValidateProperty(AnnotatedProperty property, object model, ValidationContext validationContext)
+        private void ValidateProperty(AnnotatedProperty property, NestedValidationContext context)
         {
+            var model = context.Instance;
             var value = property.GetValue(model);
-            var propertyContext = property.CreateValidationContext(model, validationContext);
 
-            var isRequiredMessage = property.RequiredAttribute.GetValidationResult(value, propertyContext);
-            yield return isRequiredMessage;
+            var propertyContext = context.ForProperty(property);
 
             // Only validate the other properties if the required condition was not met.
-            if (isRequiredMessage.GetSeverity() != ValidationSeverity.Error)
+            if (propertyContext.AddMessage(property.RequiredAttribute.GetValidationResult(value, propertyContext)))
             {
-                foreach (var attribute in property.ValidationAttributes)
+                return;
+            }
+            
+            foreach (var attribute in property.ValidationAttributes)
+            {
+                propertyContext.AddMessage(attribute.GetValidationResult(value, propertyContext));
+            }
+
+            if (value != null && property.TypeIsAnnotatedModel)
+            {
+                if (value is IEnumerable enumerable)
                 {
-                    yield return attribute.GetValidationResult(value, propertyContext);
+                    var index = 0;
+                    foreach(var item in enumerable)
+                    {
+                        var nestedContext = propertyContext.Nested(item, index++);
+                        ValidateModel(nestedContext);
+                    }
+                }
+                else
+                {
+                    var nestedContext = propertyContext.Nested(value);
+                    ValidateModel(nestedContext);
                 }
             }
         }
 
         /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
-        private static IEnumerable<ValidationResult> ValidateType(object model, AnnotatedModel annotations, ValidationContext validationContext)
+        private static void ValidateType(NestedValidationContext context)
         {
-            return annotations.TypeAttributes.Select(attr => attr.GetValidationResult(model, validationContext));
+            context.AddMessages(context.Annotations.TypeAttributes.Select(attr => attr.GetValidationResult(context.Instance, context)));
         }
 
         /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
         /// <remarks>
         /// If the model is not <see cref="IValidatableObject"/> nothing is done.
         /// </remarks>
-        private static IEnumerable<ValidationResult> ValidateValidatableObject(object model, AnnotatedModel annotations, ValidationContext validationContext)
+        private static void ValidateValidatableObject(NestedValidationContext context)
         {
-            return annotations.IsIValidatableObject
-                ? ((IValidatableObject)model).Validate(validationContext)
-                : Enumerable.Empty<ValidationResult>();
+            if(context.Annotations.IsIValidatableObject)
+            {
+                context.AddMessages(((IValidatableObject)context.Instance).Validate(context));
+            }
         }
     }
 }

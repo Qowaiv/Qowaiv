@@ -59,7 +59,7 @@ namespace Qowaiv.DomainModel
         /// <returns>
         /// A <see cref="Result{T}"/> containing the entity or the messages.
         /// </returns>
-        public Result<TEntity> SetProperties(Action<TEntity> update)
+        public Result<TEntity> TrackChanges(Action<TEntity> update)
         {
             Guard.NotNull(update, nameof(update));
 

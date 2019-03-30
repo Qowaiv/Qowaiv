@@ -61,11 +61,56 @@ namespace Qowaiv.DomainModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The version ({0}) of the event is not successive to the current version ({1})..
+        /// </summary>
+        internal static string ArgumenException_VersionNotSuccessive {
+            get {
+                return ResourceManager.GetString("ArgumenException_VersionNotSuccessive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The identifier of the event does not match the identifier of the aggregate root..
+        /// </summary>
+        internal static string ArgumentException_InvalidEventId {
+            get {
+                return ResourceManager.GetString("ArgumentException_InvalidEventId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The events are out of order as ther versions are not successive..
+        /// </summary>
+        internal static string EventsOutOfOrderException {
+            get {
+                return ResourceManager.GetString("EventsOutOfOrderException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The event of the type {0} is not supported for {1}..
+        /// </summary>
+        internal static string EventTypeNotSupportedException {
+            get {
+                return ResourceManager.GetString("EventTypeNotSupportedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} field is immutable and can not be changed..
         /// </summary>
         internal static string ImmutableAttribute_ErrorMessage {
             get {
                 return ResourceManager.GetString("ImmutableAttribute_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not add committed events to a not empty event stream..
+        /// </summary>
+        internal static string InvalidOperationException_NotEmptyEventStream {
+            get {
+                return ResourceManager.GetString("InvalidOperationException_NotEmptyEventStream", resourceCulture);
             }
         }
         

@@ -24,7 +24,7 @@ namespace Qowaiv.DomainModel.UnitTests.Models
         {
             var entity = new EntityWithInitScope();
 
-            return entity.SetProperties((e) =>
+            return entity.TrackChanges((e) =>
             {
                 e.Id = id;
                 e.Name = name;

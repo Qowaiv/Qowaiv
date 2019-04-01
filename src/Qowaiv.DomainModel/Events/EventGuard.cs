@@ -15,7 +15,7 @@ namespace Qowaiv.DomainModel.Events
             {
                 Guard.NotNull(@event, paramName + '[' + version.ToString() + ']');
 
-                if(@event.Version != version++)
+                if(@event.Version != ++version)
                 {
                     throw new EventsOutOfOrderException(paramName);
                 }

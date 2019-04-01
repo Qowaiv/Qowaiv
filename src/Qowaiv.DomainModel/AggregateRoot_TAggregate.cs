@@ -1,6 +1,7 @@
 ﻿using Qowaiv.ComponentModel;
 using Qowaiv.DomainModel.Dynamic;
 using Qowaiv.DomainModel.Events;
+using System.Diagnostics;
 
 namespace Qowaiv.DomainModel
 {
@@ -59,7 +60,7 @@ namespace Qowaiv.DomainModel
         /// <summary>Represents the aggregate root as a dynamic.</summary>
         /// <remarks>
         /// By default, this dynamic is only capable of invoking Apply(@event).
-        /// If more is wanted, this method should be overriden.
+        /// If more is wanted, this method should be overridden.
         /// </remarks>
         protected virtual dynamic AsDynamic()
         {
@@ -69,6 +70,7 @@ namespace Qowaiv.DomainModel
             }
             return _dynamic;
         }
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private dynamic _dynamic;
     }
 }

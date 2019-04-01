@@ -16,9 +16,11 @@ namespace Qowaiv.TestTools.ComponentModel
 
         /// <summary>Asserts that the result is valid, throws if not.</summary>
         [DebuggerStepThrough]
-        public static void IsValid(Result result)
+        public static void IsValid(Result result, params ValidationResult[] expectedMessages)
         {
-            Assert.AreEqual(new ValidationResult[0], result.Errors.ToArray());
+            Assert.NotNull(result, "The result is null.");
+            SameMessages(expectedMessages, result.Messages);
+            Assert.IsTrue(result.IsValid, "The result is not valid");
         }
 
         /// <summary>Asserts that result contains expected messages. Throws if not.</summary>
@@ -26,9 +28,8 @@ namespace Qowaiv.TestTools.ComponentModel
         public static void WithErrors(Result result, params ValidationResult[] expectedMessages)
         {
             Assert.NotNull(result, "The result is null.");
-            Assert.NotNull(expectedMessages, "The expected messages are null.");
-
             SameMessages(expectedMessages, result.Messages);
+            Assert.IsFalse(result.IsValid, "The result is valid");
         }
 
         /// <summary>Asserts that two collections contain the same error messages, Throws if not.</summary>

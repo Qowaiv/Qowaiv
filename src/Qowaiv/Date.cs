@@ -34,13 +34,13 @@ namespace Qowaiv
         public static readonly Date MinValue = new Date(DateTime.MinValue);
 
         /// <summary>Gets the day before today.</summary>
-        public static Date Yesterday { get { return (Date)DateTime.Today.AddDays(-1); } }
+        public static Date Yesterday => Clock.Yesterday();
 
         /// <summary>Gets the current date.</summary>
-        public static Date Today { get { return (Date)DateTime.Today; } }
+        public static Date Today => Clock.Today();
 
         /// <summary>Gets the day after today.</summary>
-        public static Date Tomorrow { get { return (Date)DateTime.Today.AddDays(1); } }
+        public static Date Tomorrow => Clock.Tomorrow();
 
         #region Constructors
 
@@ -91,22 +91,22 @@ namespace Qowaiv
         #region Properties
 
         /// <summary>Gets the year component of the date represented by this instance.</summary>
-        public int Year { get { return m_Value.Year; } }
+        public int Year => m_Value.Year;
 
         /// <summary>Gets the month component of the date represented by this instance.</summary>
-        public int Month { get { return m_Value.Month; } }
+        public int Month => m_Value.Month;
 
         /// <summary>Gets the day of the month represented by this instance.</summary>
-        public int Day { get { return m_Value.Day; } }
+        public int Day => m_Value.Day;
 
         /// <summary>Gets the number of ticks that represent the date of this instance..</summary>
-        public long Ticks { get { return m_Value.Ticks; } }
+        public long Ticks => m_Value.Ticks;
 
         /// <summary>Gets the day of the week represented by this instance.</summary>
-        public DayOfWeek DayOfWeek { get { return m_Value.DayOfWeek; } }
+        public DayOfWeek DayOfWeek => m_Value.DayOfWeek;
 
         /// <summary>Gets the day of the year represented by this instance.</summary>
-        public int DayOfYear { get { return m_Value.DayOfYear; } }
+        public int DayOfYear => m_Value.DayOfYear;
 
         /// <summary>The inner value of the </summary>
         private DateTime m_Value;
@@ -129,10 +129,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
-        public Date Add(TimeSpan value)
-        {
-            return new Date(this.Ticks + value.Ticks);
-        }
+        public Date Add(TimeSpan value) => new Date(Ticks + value.Ticks);
 
         /// <summary>Subtracts the specified date and time from this instance.</summary>
         /// <param name="value">
@@ -145,10 +142,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than date.MinValue or greater than date.MaxValue.
         /// </exception>
-        public TimeSpan Subtract(Date value)
-        {
-            return new TimeSpan(this.Ticks - value.Ticks);
-        }
+        public TimeSpan Subtract(Date value) => new TimeSpan(Ticks - value.Ticks);
 
         /// <summary>Subtracts the specified duration from this instance.</summary>
         /// <param name="value">
@@ -161,10 +155,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than date.MinValue or greater than date.MaxValue.
         /// </exception>
-        public Date Subtract(TimeSpan value)
-        {
-            return new Date(this.Ticks - value.Ticks);
-        }
+        public Date Subtract(TimeSpan value) => new Date(Ticks - value.Ticks);
 
         /// <summary>Returns a new date that adds the specified number of years to
         /// the value of this instance.
@@ -181,10 +172,7 @@ namespace Qowaiv
         /// value or the resulting date is less than date.MinValue
         /// or greater than date.MaxValue.
         /// </exception>
-        public Date AddYears(int value)
-        {
-            return new Date(m_Value.AddYears(value));
-        }
+        public Date AddYears(int value) => new Date(m_Value.AddYears(value));
 
         /// <summary>Returns a new date that adds the specified number of months to
         /// the value of this instance.
@@ -201,10 +189,7 @@ namespace Qowaiv
         /// than date.MaxValue.-or- months is less than -120,000 or greater
         /// than 120,000.
         /// </exception>
-        public Date AddMonths(int months)
-        {
-            return new Date(m_Value.AddMonths(months));
-        }
+        public Date AddMonths(int months) => new Date(m_Value.AddMonths(months));
 
         /// <summary>Returns a new date that adds the specified number of days to the
         /// value of this instance.
@@ -221,10 +206,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
-        public Date AddDays(double value)
-        {
-            return new Date(m_Value.AddDays(value));
-        }
+        public Date AddDays(double value) => new Date(m_Value.AddDays(value));
 
         /// <summary>Returns a new date that adds the specified number of ticks to
         /// the value of this instance.
@@ -241,10 +223,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
-        public Date AddTicks(long value)
-        {
-            return new Date(Ticks + value);
-        }
+        public Date AddTicks(long value) => new Date(Ticks + value);
 
         /// <summary>Returns a new date that adds the specified number of hours to
         /// the value of this instance.
@@ -261,10 +240,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
-        public Date AddHours(double value)
-        {
-            return new Date(m_Value.AddHours(value));
-        }
+        public Date AddHours(double value) => new Date(m_Value.AddHours(value));
 
         /// <summary>Returns a new date that adds the specified number of minutes to
         /// the value of this instance.
@@ -281,10 +257,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
-        public Date AddMinutes(double value)
-        {
-            return new Date(m_Value.AddMinutes(value));
-        }
+        public Date AddMinutes(double value) => new Date(m_Value.AddMinutes(value));
 
         /// <summary>Returns a new date that adds the specified number of seconds to
         /// the value of this instance.
@@ -301,10 +274,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
-        public Date AddSeconds(double value)
-        {
-            return new Date(m_Value.AddSeconds(value));
-        }
+        public Date AddSeconds(double value) => new Date(m_Value.AddSeconds(value));
 
         /// <summary>Returns a new date that adds the specified number of milliseconds
         /// to the value of this instance.
@@ -321,10 +291,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
-        public Date AddMilliseconds(double value)
-        {
-            return new Date(m_Value.AddMilliseconds(value));
-        }
+        public Date AddMilliseconds(double value) => new Date(m_Value.AddMilliseconds(value));
 
         #endregion
 
@@ -383,25 +350,19 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Date from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a Date from a JSON string representation.</summary>
         /// <param name="jsonString">
         /// The JSON string that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
+        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates a Date from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
         /// The JSON integer that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger)
-        {
-            m_Value = new Date(jsonInteger).m_Value;
-        }
+        void IJsonSerializable.FromJson(Int64 jsonInteger) => m_Value = new Date(jsonInteger).m_Value;
 
         /// <summary>Generates a Date from a JSON number representation.</summary>
         /// <param name="jsonNumber">
@@ -413,16 +374,10 @@ namespace Qowaiv
         /// <param name="jsonDate">
         /// The JSON Date that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate)
-        {
-            m_Value = jsonDate;
-        }
+        void IJsonSerializable.FromJson(DateTime jsonDate) => m_Value = jsonDate;
 
         /// <summary>Converts a Date into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return ToString(SerializableFormat, CultureInfo.InvariantCulture);
-        }
+        object IJsonSerializable.ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -432,32 +387,23 @@ namespace Qowaiv
         [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
         private string DebuggerDisplay
         {
-            get { return m_Value.ToString(SerializableFormat, CultureInfo.InvariantCulture); }
+            get => m_Value.ToString(SerializableFormat, CultureInfo.InvariantCulture);
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current </summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("d", formatProvider);
-        }
+        public string ToString(IFormatProvider formatProvider) => ToString("d", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">
@@ -484,33 +430,27 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is Date && Equals((Date)obj); }
+        public override bool Equals(object obj) => obj is Date && Equals((Date)obj);
 
         /// <summary>Returns true if this instance and the other <see cref="Date"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Date"/> to compare with.</param>
         public bool Equals(Date other) => m_Value == other.m_Value;
 
-                             /// <summary>Returns the hash code for this </summary>
-                             /// <returns>
-                             /// A 32-bit signed integer hash code.
-                             /// </returns>
+        /// <summary>Returns the hash code for this </summary>
+        /// <returns>
+        /// A 32-bit signed integer hash code.
+        /// </returns>
         public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(Date left, Date right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Date left, Date right) => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(Date left, Date right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Date left, Date right) => !(left == right);
 
         #endregion
 
@@ -572,7 +512,7 @@ namespace Qowaiv
         #region (Explicit) casting
 
         /// <summary>Casts a date to a <see cref="string"/>.</summary>
-        public static explicit operator string(Date val)=> val.ToString(CultureInfo.CurrentCulture);
+        public static explicit operator string(Date val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a date to a date time.</summary>
         public static implicit operator DateTime(Date val) => val.m_Value;
 
@@ -591,21 +531,21 @@ namespace Qowaiv
         #region Operators
 
         /// <summary>Adds the time span to the date.</summary>
-        public static Date operator +(Date d, TimeSpan t) { return d.Add(t); }
+        public static Date operator +(Date d, TimeSpan t) => d.Add(t);
 
         /// <summary>Subtracts the Time Span from the date.</summary>
-        public static Date operator -(Date d, TimeSpan t) { return d.Subtract(t); }
+        public static Date operator -(Date d, TimeSpan t) => d.Subtract(t);
 
         /// <summary>Adds one day to the date.</summary>
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
-        public static Date operator ++(Date d) { return d.AddDays(+1); }
+        public static Date operator ++(Date d) => d.AddDays(+1);
 
         /// <summary>Subtracts one day from the date.</summary>
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
-        public static Date operator --(Date d) { return d.AddDays(-1); }
+        public static Date operator --(Date d) => d.AddDays(-1);
 
         /// <summary>Subtracts the right Date from the left date.</summary>
-        public static TimeSpan operator -(Date l, Date r) { return l.Subtract(r); }
+        public static TimeSpan operator -(Date l, Date r) => l.Subtract(r);
 
         #endregion
 
@@ -621,10 +561,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static Date Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
+        public static Date Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to a </summary>
         /// <param name="s">
@@ -739,16 +676,10 @@ namespace Qowaiv
         #region Validation
 
         /// <summary>Returns true if the val represents a valid Date, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid Date, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            return TryParse(val, formatProvider, out Date d);
-        }
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out Date d);
 
         #endregion
     }

@@ -30,7 +30,7 @@ namespace Qowaiv.UnitTests
         public void Today_None_EqualsDateTimeToday()
         {
             var act = Date.Today;
-            var exp = (Date)DateTime.Today;
+            var exp = Clock.Today();
 
             Assert.AreEqual(act, exp);
         }
@@ -39,7 +39,7 @@ namespace Qowaiv.UnitTests
         public void Yesterday_None_EqualsDateTimeTodayMinus1()
         {
             var act = Date.Yesterday;
-            var exp = (Date)DateTime.Today.AddDays(-1);
+            var exp = Clock.Yesterday();
 
             Assert.AreEqual(act, exp);
         }
@@ -48,7 +48,7 @@ namespace Qowaiv.UnitTests
         public void Tomorrow_None_EqualsDateTimeTodayPlus1()
         {
             var act = Date.Tomorrow;
-            var exp = (Date)DateTime.Today.AddDays(1);
+            var exp = Clock.Tomorrow();
 
             Assert.AreEqual(act, exp);
         }

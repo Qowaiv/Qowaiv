@@ -1,15 +1,81 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Qowaiv.DomainModel.Reflection
 {
-    // TODO: find out if CQRSlite is indead the creator of this and otherwise refer to the owner.
-    internal class CompiledMethodInfo
+    /// <summary>An implementation of <see cref="MethodInfo"/> that executes
+    /// <see cref="MethodBase.Invoke(object, BindingFlags, Binder, object[], CultureInfo)"/>
+    /// by executing a (compiled) <see cref="Func{T1, T2, TResult}"/>.
+    /// </summary>
+    internal class CompiledMethodInfo : MethodInfo
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly MethodInfo _method;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Func<object, object[], object> _func;
 
-        public CompiledMethodInfo(MethodInfo methodInfo, Type type)
+        /// <summary>Creates a new instance of a <see cref="CompiledMethodInfo"/>.</summary>
+        /// <param name="methodInfo">
+        /// The underlying method info.
+        /// </param>
+        public CompiledMethodInfo(MethodInfo methodInfo)
+        {
+            _method = Guard.NotNull(methodInfo, nameof(methodInfo));
+            _func = Compile(methodInfo);
+        }
+
+        /// <inheritdoc />
+        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        {
+            return _func(obj, parameters);
+        }
+
+        #region Via underlying method.
+
+        /// <inherrit />
+        public override string Name => _method.Name;
+        
+        /// <inherrit />
+        public override Type DeclaringType => _method.DeclaringType;
+
+        /// <inherrit />
+        public override Type ReflectedType => _method.ReflectedType;
+
+        /// <inherrit />
+        public override RuntimeMethodHandle MethodHandle => _method.MethodHandle;
+
+        /// <inherrit />
+        public override MethodAttributes Attributes => _method.Attributes;
+
+        /// <inherrit />
+        public override ICustomAttributeProvider ReturnTypeCustomAttributes => _method.ReturnTypeCustomAttributes;
+
+        /// <inherrit />
+        public override MethodInfo GetBaseDefinition() => _method.GetBaseDefinition();
+
+        /// <inherrit />
+        public override object[] GetCustomAttributes(bool inherit) => _method.GetCustomAttributes(inherit);
+
+        /// <inherrit />
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) => _method.GetCustomAttributes(attributeType, inherit);
+
+        /// <inherrit />
+        public override MethodImplAttributes GetMethodImplementationFlags() => _method.GetMethodImplementationFlags();
+
+        /// <inherrit />
+        public override ParameterInfo[] GetParameters() => _method.GetParameters();
+        
+        /// <inherrit />
+        public override bool IsDefined(Type attributeType, bool inherit) => _method.IsDefined(attributeType, inherit);
+
+        #endregion
+
+        /// <summary>Compiles a <see cref="Func{T1, T2, TResult}"/> based on the method info.</summary>
+        private static Func<object, object[], object> Compile(MethodInfo methodInfo)
         {
             var instanceExpression = Expression.Parameter(typeof(object), "instance");
             var argumentsExpression = Expression.Parameter(typeof(object[]), "arguments");
@@ -21,25 +87,17 @@ namespace Qowaiv.DomainModel.Reflection
                 var parameterInfo = parameterInfos[i];
                 argumentExpressions[i] = Expression.Convert(Expression.ArrayIndex(argumentsExpression, Expression.Constant(i)), parameterInfo.ParameterType);
             }
-            var callExpression = Expression.Call(!methodInfo.IsStatic ? Expression.Convert(instanceExpression, type) : null, methodInfo, argumentExpressions);
+            var callExpression = Expression.Call(!methodInfo.IsStatic ? Expression.Convert(instanceExpression, methodInfo.ReflectedType) : null, methodInfo, argumentExpressions);
             if (callExpression.Type == typeof(void))
             {
                 var action = Expression.Lambda<Action<object, object[]>>(callExpression, instanceExpression, argumentsExpression).Compile();
-                _func = (instance, arguments) =>
+                return (instance, arguments) =>
                 {
                     action(instance, arguments);
                     return null;
                 };
             }
-            else
-            {
-                _func = Expression.Lambda<Func<object, object[], object>>(Expression.Convert(callExpression, typeof(object)), instanceExpression, argumentsExpression).Compile();
-            }
-        }
-
-        public object Invoke(object instance, params object[] arguments)
-        {
-            return _func(instance, arguments);
+            return Expression.Lambda<Func<object, object[], object>>(Expression.Convert(callExpression, typeof(object)), instanceExpression, argumentsExpression).Compile();
         }
     }
 }

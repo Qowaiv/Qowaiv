@@ -51,7 +51,7 @@ namespace Qowaiv.DomainModel.Dynamic
         private object Apply(object[] args)
         {
             var eventType = args[0].GetType();
-            if (lookup[objectType].TryGetValue(eventType, out CompiledMethodInfo Apply))
+            if (lookup[objectType].TryGetValue(eventType, out MethodInfo Apply))
             {
                 return Apply.Invoke(@object, args);
             }
@@ -67,7 +67,7 @@ namespace Qowaiv.DomainModel.Dynamic
                 {
                     if (!lookup.ContainsKey(objectType))
                     {
-                        var cache = new Dictionary<Type, CompiledMethodInfo>();
+                        var cache = new Dictionary<Type, MethodInfo>();
 
                         var name = nameof(Apply);
                         var methods = objectType
@@ -82,7 +82,7 @@ namespace Qowaiv.DomainModel.Dynamic
                                 var parameterType = parameters[0].ParameterType;
                                 if (parameterType.GetInterfaces().Contains(typeof(IEvent)))
                                 {
-                                    cache[parameterType] = new CompiledMethodInfo(method, objectType);
+                                    cache[parameterType] = new CompiledMethodInfo(method);
                                 }
                             }
                         }
@@ -93,6 +93,6 @@ namespace Qowaiv.DomainModel.Dynamic
         }
 
         private static readonly object locker = new object();
-        private static readonly Dictionary<Type, Dictionary<Type, CompiledMethodInfo>> lookup = new Dictionary<Type, Dictionary<Type, CompiledMethodInfo>>();
+        private static readonly Dictionary<Type, Dictionary<Type, MethodInfo>> lookup = new Dictionary<Type, Dictionary<Type, MethodInfo>>();
     }
 }

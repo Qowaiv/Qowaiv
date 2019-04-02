@@ -64,6 +64,15 @@ namespace Qowaiv.DomainModel
             Tracker.Add(new PropertyChanged(_properties, propertyName, value));
         }
 
+        /// <summary>Initializes a property (value).</summary>
+        /// <remarks>
+        /// Should only be called from the constructor.
+        /// </remarks>
+        protected void InitProperty<T>(string propertyName, T value)
+        {
+            _properties[propertyName] = value;
+        }
+
         /// <summary>Sets a property (value).</summary>
         /// <exception cref="ValidationException">
         /// If the new value violates the property constraints, including the

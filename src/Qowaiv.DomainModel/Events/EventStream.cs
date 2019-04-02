@@ -6,23 +6,24 @@ using System.Linq;
 namespace Qowaiv.DomainModel.Events
 {
     /// <summary>An event stream.</summary>
-    public class EventStream : IEnumerable<IEvent>
+    public class EventStream : IEnumerable<VersionedEvent>
     {
-        private readonly List<IEvent> events = new List<IEvent>();
+        private readonly List<VersionedEvent> collection = new List<VersionedEvent>();
 
-        /// <summary>Gets the identifier of the related aggregate root.</summary>
-        public Guid AggregateId => Version == 0 ? Guid.Empty : events[0].Id;
-
+        /// <summary>Gets the identifier of the aggregate linked to the event stream.</summary>
+        public Guid AggregateId => Version == 0 ? Guid.Empty : collection[0].Info.AggregateId;
+        
         /// <summary>The version of the event stream.</summary>
         /// <remarks>
         /// Equal to the number of events in the stream.
         /// </remarks>
-        public int Version => events.Count;
+        public int Version => collection.Count;
 
+        /// <summary>Gets the committed version of the event stream.</summary>
         public int CommittedVersion { get; private set; }
 
         /// <summary>Gets an event, based on its version.</summary>
-        public IEvent this[int version]
+        public VersionedEvent this[int version]
         {
             get
             {
@@ -30,87 +31,78 @@ namespace Qowaiv.DomainModel.Events
                 {
                     throw new ArgumentOutOfRangeException(nameof(version), "");
                 }
-                var @event = events[version - 1];
-                @event.Version = version;
-                @event.Id = AggregateId;
-                return @event;
+                return collection[version - 1];
+
             }
         }
 
-        /// <summary>Adds an event that is already committed.</summary>
-        public void AddCommitted(IEnumerable<IEvent> @events)
+        /// <summary>Initializes the event stream with an initial set of events.</summary>
+        public void Initialize(IEnumerable<VersionedEvent> events)
         {
-            lock (locker)
+            if (Version != 0)
             {
-                if (Version != 0) { throw new InvalidOperationException(QowaivDomainModelMessages.InvalidOperationException_NotEmptyEventStream); }
-
-                this.events.AddRange(EventGuard.LoadFromHistory(events, nameof(events)));
+                throw new InvalidOperationException("Already initialized");
             }
+            var eventArray = Guard.HasAny(events?.ToArray(), nameof(events));
+            var first = eventArray[0].Info;
+
+            for (var i = 0; i < eventArray.Length; i++)
+            {
+                var info = eventArray[i].Info;
+                if (info.AggregateId == Guid.Empty || info.AggregateId != first.AggregateId)
+                {
+                    throw new ArgumentException();
+                }
+                if (info.Version != i + 1)
+                {
+                    throw new EventsOutOfOrderException(nameof(events));
+                }
+            }
+            collection.AddRange(events);
+            MarkAllAsCommitted();
         }
 
-        /// <summary>Adds an event that is uncommitted.</summary>
-        public void AddUncommited(IEvent @event) => Add(@event, false);
-
-        private void Add(IEvent @event, bool isCommited)
+        /// <summary>Adds an event to the event stream.</summary>
+        public void Add(IEvent @event)
         {
-            Guard.NotNull(@event, nameof(@event));
-            
-            lock(locker)
-            {
-                if (isCommited)
-                {
-                    if (@event.Version != Version + 1)
-                    {
-                        throw new ArgumentException(string.Format(QowaivDomainModelMessages.ArgumenException_VersionNotSuccessive, @event.Version, Version), nameof(@event));
-                    }
-                    if (Version > 0 && (@event.Id == Guid.Empty || @event.Id != AggregateId))
-                    {
-                        throw new ArgumentException(QowaivDomainModelMessages.ArgumentException_InvalidEventId, nameof(@event));
-                    }
-                }
-                else
-                {
-                    @event.Version = Version + 1;
-                }
-                events.Add(@event);
-            }
+            var info = new EventInfo(Version + 1, AggregateId == Guid.Empty ? Guid.NewGuid() : AggregateId, Clock.UtcNow());
+            var versioned = new VersionedEvent(info, @event);
+            collection.Add(versioned);
         }
 
+        /// <summary>Gets the uncommitted events of the event stream.</summary>
+        public IEnumerable<VersionedEvent> GetUncommitted() => this.Skip(CommittedVersion);
+
+        /// <summary>Marks all events as being committed.</summary>
         public void MarkAllAsCommitted() => CommittedVersion = Version;
 
-        public IEnumerable<IEvent> GetUncommitted() => this.Skip(CommittedVersion);
+        /// <summary>Rolls back to a specific version.</summary>
+        /// <remarks>
+        /// By doing so, the events with higher versions are removed.
+        /// </remarks>
+        public void Rollback(int version)
+        {
+            collection.RemoveRange(version, Version - version);
 
-        /// <summary>Gets the lock object to lock the event stream.</summary>
+            if (CommittedVersion >Version)
+            {
+                CommittedVersion = Version;
+            }
+        }
+
+        /// <summary>Lock this to lock the event stream.</summary>
         public object Lock() => locker;
+        private readonly object locker = new object();
 
         #region IEnumerable
 
-        private IEnumerable<IEvent> GetAll()
-        {
-            var aggregateId = AggregateId;
-            var version = 0;
-            var count = events.Count;
-
-            while(version < count)
-            {
-                // be on the safe side:
-                // set (aggregate) id
-                // set version
-                var @event = events[version++];
-                @event.Version = version;
-                @event.Id = aggregateId;
-                yield return @event;
-            }
-        }
-
         /// <inheritdoc />
-        public IEnumerator<IEvent> GetEnumerator() => GetAll().GetEnumerator();
+        public IEnumerator<VersionedEvent> GetEnumerator() => collection.GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion
-
-        private readonly object locker = new object();
+       
     }
 }

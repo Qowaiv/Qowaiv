@@ -1,0 +1,64 @@
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+
+namespace Qowaiv.DomainModel.Events
+{
+    /// <summary>Represents an event an its info.</summary>
+    [DebuggerDisplay("{DebuggerDisplay}")]
+    public class VersionedEvent
+    {
+        /// <summary>Creates a new instance of a versioned event.</summary>
+        public VersionedEvent(EventInfo info, IEvent @event)
+        {
+            Info = Guard.NotDefault(info, nameof(info));
+            Event = Guard.NotNull(@event, nameof(@event));
+        }
+
+        /// <summary>Gets the event info.</summary>
+        public EventInfo Info { get; }
+
+        /// <summary>Gets the event.</summary>
+        public IEvent Event { get; }
+
+        /// <summary>Casts event to a specific even type.</summary>
+        public TEvent Cast<TEvent>() where TEvent : IEvent => (TEvent)Event;
+
+        /// <summary>Represents the versioned event as a DEBUG <see cref="string"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        internal string DebuggerDisplay
+        {
+            get
+            {
+                var props = GetType()
+                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                 .ToArray();
+
+                // Get rid of Event suffix.
+                var eventName = GetType().Name;
+                if (eventName.EndsWith("Event")) { eventName = eventName.Substring(eventName.Length - 5); }
+
+                var sb = new StringBuilder()
+                    .AppendFormat("v{0} ", Info.Version)
+                    .AppendFormat(eventName)
+                    .AppendFormat(", Props[{0}] {{ ", props.Length);
+
+                for (var i = 0; i < props.Length; i++)
+                {
+                    var prop = props[i];
+                    if (i != 0)
+                    {
+                        sb.Append(", ");
+                    }
+                    sb.AppendFormat("{0}: {1}", prop.Name, prop.GetValue(this));
+
+                }
+
+                sb.Append(" }");
+                sb.AppendFormat(", {0:yyyy-MM-dd hh/:mm/:ss}, Aggregate: {1:B}", Info.Version, Info.AggregateId);
+                return sb.ToString();
+            }
+        }
+    }
+}

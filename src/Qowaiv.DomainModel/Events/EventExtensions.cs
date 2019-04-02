@@ -1,22 +1,18 @@
-﻿namespace Qowaiv.DomainModel.Events
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Qowaiv.DomainModel.Events
 {
     /// <summary>Extensions for and/or on <see cref="IEvent"/>.</summary>
     public static class EventExtensions
     {
-        /// <summary>Links the aggregate properties <see cref="Entity{TEntity}.Id"/>
-        /// and <see cref="AggregateRoot{TAggrgate}.Version"/> to the event.
-        /// </summary>
-        public static TEvent Link<TEvent, TAggregate>(this TEvent @event, TAggregate aggregate)
-            where TEvent: class, IEvent
-            where TAggregate: AggregateRoot<TAggregate>
+        public static IEnumerable<VersionedEvent> Versioned(this IEnumerable<IEvent> events, Guid aggregateId = default(Guid))
         {
-            if(@event is null)
-            {
-                return null;
-            }
-            @event.Id = aggregate.Id;
-            @event.Version = aggregate.Version + 1;
-            return @event;
+            Guard.NotNull(events, nameof(events));
+            var id = aggregateId == Guid.Empty ? Guid.NewGuid() : aggregateId;
+            var version = 1;
+            return events.Select(e => new VersionedEvent(new EventInfo(version++, id, Clock.UtcNow()), e));
         }
     }
 }

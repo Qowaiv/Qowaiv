@@ -8,13 +8,11 @@ namespace Qowaiv.DomainModel
     public static class AggregateRoot
     {
         /// <summary>Loads an aggregate root from historical events.</summary>
-        public static Result<TAggrgate> LoadFromHistory<TAggrgate>(IEnumerable<IEvent> events)
+        public static Result<TAggrgate> LoadFromHistory<TAggrgate>(IEnumerable<VersionedEvent> events)
              where TAggrgate : AggregateRoot<TAggrgate>, new()
         {
-            var eventArray = EventGuard.LoadFromHistory(events, nameof(events));
-
             var aggregateRoot = new TAggrgate();
-            return aggregateRoot.LoadFromHistory(eventArray);
+            return aggregateRoot.LoadFromHistory(events);
         }
     }
 }

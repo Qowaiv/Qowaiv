@@ -67,30 +67,34 @@ namespace Qowaiv.DomainModel
                 });
                 if (result.IsValid)
                 {
-                    EventStream.AddUncommited(@event);
+                    EventStream.Add(@event);
                 }
                 return result;
             }
         }
 
         /// <summary>Loads the state of the aggregate root based on historical events.</summary>
-        internal Result<TAggrgate> LoadFromHistory(IEvent[] events)
+        internal Result<TAggrgate> LoadFromHistory(IEnumerable<VersionedEvent> events)
         {
-            var result = TrackChanges((self) =>
+            lock (EventStream.Lock())
             {
-                // Set ID:
-                //self.Id = Guard.NotDefault(events[0].Id, "events.Id")
+                EventStream.Initialize(events);
 
-                foreach (var e in events)
+                var result = TrackChanges((self) =>
                 {
-                    self.AsDynamic().Apply(e);
+                    self.Id = EventStream.AggregateId;
+
+                    foreach (var e in events)
+                    {
+                        self.AsDynamic().Apply(e.Event);
+                    }
+                });
+                if (!result.IsValid)
+                {
+                    EventStream.Rollback(0);
                 }
-            });
-            if (result.IsValid)
-            {
-                EventStream.AddCommitted(events);
+                return result;
             }
-            return result;
         }
 
         /// <summary>Adds an element to the child collection.</summary>

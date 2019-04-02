@@ -4,7 +4,7 @@ using System;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
-    public class EntityWithInitScope : Entity<EntityWithInitScope>
+    public class EntityWithInitScope : AggregateRoot<EntityWithInitScope>
     {
         [Mandatory]
         public string Name

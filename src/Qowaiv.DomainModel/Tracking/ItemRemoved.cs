@@ -1,17 +1,17 @@
 ﻿namespace Qowaiv.DomainModel.Tracking
 {
-    /// <summary>Implements <see cref="ITrackableChange"/> for removing an item from a <see cref="ValueObjectCollection{TValueObject}"/>.</summary>
-    public class ItemRemoved<TValueObject> : ITrackableChange
+    /// <summary>Implements <see cref="ITrackableChange"/> for removing an element from a <see cref="ChildCollection{TChild}"/>.</summary>
+    public class ItemRemoved<TChild> : ITrackableChange
     {
-        /// <summary>Creates a new instance of a <see cref="ItemRemoved{TValueObject}"/>.</summary>
-        public ItemRemoved(ValueObjectCollection<TValueObject> collection, TValueObject item)
+        /// <summary>Creates a new instance of a <see cref="ItemRemoved{TChild}"/>.</summary>
+        public ItemRemoved(ChildCollection<TChild> collection, TChild item)
         {
             _collection = Guard.NotNull(collection, nameof(collection));
             _item = item;
         }
 
-        private readonly ValueObjectCollection<TValueObject> _collection;
-        private readonly TValueObject _item;
+        private readonly ChildCollection<TChild> _collection;
+        private readonly TChild _item;
 
         /// <inheritdoc />
         public void Apply() => _collection.Remove(_item);

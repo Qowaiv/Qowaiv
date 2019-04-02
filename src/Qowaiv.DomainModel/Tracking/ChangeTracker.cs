@@ -1,8 +1,4 @@
-﻿using Qowaiv.ComponentModel;
-using Qowaiv.ComponentModel.Messages;
-using Qowaiv.ComponentModel.Validation;
-using Qowaiv.Diagnostics;
-using System;
+﻿using Qowaiv.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,19 +7,10 @@ namespace Qowaiv.DomainModel.Tracking
 {
     /// <summary>Tracks (potential) changes and fires validations and notification events.</summary>
     [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(CollectionDebugView))]
-    public class ChangeTracker<TModel> : IEnumerable<ITrackableChange> where TModel : class
+    public abstract class ChangeTracker : IEnumerable<ITrackableChange>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly List<ITrackableChange> _changes = new List<ITrackableChange>();
-        private readonly TModel _model;
-        private readonly AnnotatedModelValidator _validator;
-
-        /// <summary>Creates a new instance of an <see cref="ChangeTracker"/>.</summary>
-        public ChangeTracker(TModel model, AnnotatedModelValidator validator)
-        {
-            _model = Guard.NotNull(model, nameof(model));
-            _validator = validator ?? new AnnotatedModelValidator();
-        }
 
         /// <summary>If set to true, it buffer changes first before validating.</summary>
         public bool BufferChanges { get; set; }
@@ -31,60 +18,19 @@ namespace Qowaiv.DomainModel.Tracking
         /// <summary>Gets the number of changes in the change tracker.</summary>
         public int Count => _changes.Count;
 
-        /// <summary>Adds a change to tracker.</summary>
+        /// <summary>Adds (and applies) a change to tracker.</summary>
         public void Add(ITrackableChange change)
         {
-            Guard.NotNull(change, nameof(change));
-            _changes.Add(change);
+            _changes.Add(Guard.NotNull(change, nameof(change)));
             change.Apply();
-
-            if (!BufferChanges)
-            {
-                var result = Process();
-                ValidationMessage.ThrowIfAnyErrors(result.Messages);
-            }
+            OnAddComplete();
         }
 
-        /// <summary>Applies all changes at once.</summary>
-        public Result<TModel> Process()
-        {
-            lock (locker)
-            {
-                try
-                {
-                    var result = ValidateAll();
-                    if (!result.IsValid)
-                    {
-                        Rollback();
-                    }
-                    return result;
-                }
-                finally
-                {
-                    _changes.Clear();
-                }
-            }
-        }
-
-        /// <summary>Validates all changed properties.</summary>
-        private Result<TModel> ValidateAll()
-        {
-            BufferChanges = false;
-
-            try
-            {
-                return _validator.Validate(_model);
-            }
-            // if this fails, we want to rollback too.
-            catch (Exception)
-            {
-                Rollback();
-                throw;
-            }
-        }
+        /// <summary>Action that is applied when the change has been added.</summary>
+        protected abstract void OnAddComplete();
 
         /// <summary>Rolls back all changed properties.</summary>
-        private void Rollback()
+        protected void Rollback()
         {
             foreach (var change in this)
             {
@@ -93,7 +39,8 @@ namespace Qowaiv.DomainModel.Tracking
             _changes.Clear();
         }
 
-        private readonly object locker = new object();
+        /// <summary>Removes all changes from the change tracker.</summary>
+        protected void Clear() => _changes.Clear();
 
         #region IEnumerable
 

@@ -2,7 +2,7 @@
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
-    public class EmptyEntity : Entity<EmptyEntity>
+    public class EmptyEntity : AggregateRoot<EmptyEntity>
     {
         public EmptyEntity() { }
 

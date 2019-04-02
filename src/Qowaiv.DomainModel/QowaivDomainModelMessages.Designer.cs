@@ -106,6 +106,24 @@ namespace Qowaiv.DomainModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The change tracker has already been initialized..
+        /// </summary>
+        internal static string InvalidOperationException_ChangeTrackerAlreadyInitialized {
+            get {
+                return ResourceManager.GetString("InvalidOperationException_ChangeTrackerAlreadyInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The change tracker has not been initialized..
+        /// </summary>
+        internal static string InvalidOperationException_ChangeTrackerNotInitialized {
+            get {
+                return ResourceManager.GetString("InvalidOperationException_ChangeTrackerNotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not add committed events to a not empty event stream..
         /// </summary>
         internal static string InvalidOperationException_NotEmptyEventStream {

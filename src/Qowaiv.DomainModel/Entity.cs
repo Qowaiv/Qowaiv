@@ -2,8 +2,6 @@
 // Classes implementing "IEquatable<T>" should be sealed
 // The Implementation takes types into account, and uses an equality comparer.
 
-using Qowaiv.ComponentModel;
-using Qowaiv.ComponentModel.Validation;
 using Qowaiv.DomainModel.Tracking;
 using Qowaiv.Reflection;
 using System;
@@ -23,21 +21,16 @@ namespace Qowaiv.DomainModel
     public abstract class Entity<TEntity> : IEntity<TEntity>, IValidatableObject
         where TEntity : Entity<TEntity>
     {
-        internal readonly ChangeTracker<TEntity> _tracker;
         private readonly PropertyCollection _properties;
 
         /// <summary>Creates a new instance of an <see cref="Entity{Tentity}"/>.</summary>
-        /// <param name="validator">
-        /// The validator to validate the entity with.
+        /// <param name="tracker">
         /// </param>
-        protected Entity(AnnotatedModelValidator validator)
+        protected Entity(ChangeTracker tracker)
         {
             _properties = PropertyCollection.Create(GetType());
-            _tracker = new ChangeTracker<TEntity>((TEntity)this, validator);
+            Tracker = Guard.NotNull(tracker, nameof(tracker));
         }
-
-        /// <summary>Creates a new instance of an <see cref="Entity{TEntity}"/>.</summary>
-        protected Entity() : this(null) { }
 
         /// <inheritdoc />
         public Guid Id
@@ -46,28 +39,15 @@ namespace Qowaiv.DomainModel
             set => SetImmutableProperty(value);
         }
 
+        /// <summary>Gets the change tracker.</summary>
+        protected virtual ChangeTracker Tracker { get; }
+
         /// <summary>Validates if the <see cref="Entity{TEntity}"/> is valid.</summary>
         /// <remarks>
         /// This rules are triggered automatically on every change to guarantee
         /// that the entity is always valid.
         /// </remarks>
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => Enumerable.Empty<ValidationResult>();
-
-        /// <summary>Sets multiple properties simultaneously.</summary>
-        /// <param name="update">
-        /// The action trying to update the state of the properties.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Result{T}"/> containing the entity or the messages.
-        /// </returns>
-        public Result<TEntity> TrackChanges(Action<TEntity> update)
-        {
-            Guard.NotNull(update, nameof(update));
-
-            _tracker.BufferChanges = true;
-            update((TEntity)this);
-            return _tracker.Process();
-        }
 
         /// <summary>Gets a property (value).</summary>
         protected T GetProperty<T>([CallerMemberName] string propertyName = null)
@@ -81,7 +61,7 @@ namespace Qowaiv.DomainModel
         /// </exception>
         protected void SetProperty<T>(T value, [CallerMemberName] string propertyName = null)
         {
-            _tracker.Add(new PropertyChanged(_properties, propertyName, value));
+            Tracker.Add(new PropertyChanged(_properties, propertyName, value));
         }
 
         /// <summary>Sets a property (value).</summary>

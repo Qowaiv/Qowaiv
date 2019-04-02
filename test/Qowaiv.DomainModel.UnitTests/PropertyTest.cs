@@ -26,7 +26,7 @@ namespace Qowaiv.DomainModel.UnitTests
             });
         }
         
-        private class PropertyTestEntity : Entity<PropertyTestEntity>
+        private class PropertyTestEntity : AggregateRoot<PropertyTestEntity>
         {
             [Mandatory]
             public int RequiredProperty

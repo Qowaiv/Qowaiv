@@ -1,7 +1,10 @@
 ﻿using Qowaiv.ComponentModel;
+using Qowaiv.ComponentModel.Validation;
 using Qowaiv.DomainModel.Dynamic;
 using Qowaiv.DomainModel.Events;
 using Qowaiv.DomainModel.Tracking;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Qowaiv.DomainModel
@@ -13,11 +16,43 @@ namespace Qowaiv.DomainModel
     public abstract class AggregateRoot<TAggrgate> : Entity<TAggrgate>
         where TAggrgate : AggregateRoot<TAggrgate>
     {
+        /// <summary>Creates a new instance of an <see cref="AggregateRoot{TAggrgate}"/>.</summary>
+        protected AggregateRoot() : this(null) { }
+
+        /// <summary>Creates a new instance of an <see cref="AggregateRoot{TAggrgate}"/>.</summary>
+        /// <param name="validator">
+        /// A custom validator.
+        /// </param>
+        protected AggregateRoot(AnnotatedModelValidator validator)
+            : base(new ChangeTracker<TAggrgate>())
+        {
+            Tracker.Init((TAggrgate)this, validator ?? new AnnotatedModelValidator());
+        }
+
+        /// <summary>Sets multiple properties simultaneously.</summary>
+        /// <param name="update">
+        /// The action trying to update the state of the properties.
+        /// </param>
+        /// <returns>
+        /// A <see cref="Result{T}"/> containing the entity or the messages.
+        /// </returns>
+        public Result<TAggrgate> TrackChanges(Action<TAggrgate> update)
+        {
+            Guard.NotNull(update, nameof(update));
+
+            Tracker.BufferChanges = true;
+            update((TAggrgate)this);
+            return Tracker.Process();
+        }
+
         /// <summary>Gets the event stream representing the state of the aggregate root.</summary>
         public EventStream EventStream { get; } = new EventStream();
 
         /// <summary>Gets the version of the aggregate root.</summary>
         public int Version => EventStream.Version;
+
+        /// <inheritdoc />
+        protected new ChangeTracker<TAggrgate> Tracker => (ChangeTracker<TAggrgate>)base.Tracker;
 
         /// <summary>Applies a change.</summary>
         protected Result<TAggrgate> ApplyChange(IEvent @event)
@@ -58,16 +93,32 @@ namespace Qowaiv.DomainModel
             return result;
         }
 
-        /// <summary>Adds a value object to the collection.</summary>
-        protected void Add<TValueObject>(ValueObjectCollection<TValueObject> collection, TValueObject item)
+        /// <summary>Adds an element to the child collection.</summary>
+        protected void Add<TChild>(ChildCollection<TChild> collection, TChild item)
         {
-            _tracker.Add(new ItemAdded<TValueObject>(collection, item));
+            Tracker.Add(new ItemAdded<TChild>(collection, item));
         }
 
-        /// <summary>Removes a value object from the collection.</summary>
-        protected void Remove<TValueObject>(ValueObjectCollection<TValueObject> collection, TValueObject item)
+        /// <summary>Adds elements to the child collection.</summary>
+        protected void AddRange<TChild>(ChildCollection<TChild> collection, IEnumerable<TChild> items)
         {
-            _tracker.Add(new ItemRemoved<TValueObject>(collection, item));
+            Guard.NotNull(items, nameof(items));
+            foreach(var item in items)
+            {
+                Add(collection, item);
+            }
+        }
+
+        /// <summary>Removes an element from the child collection.</summary>
+        protected void Remove<TChild>(ChildCollection<TChild> collection, TChild item)
+        {
+            Tracker.Add(new ItemRemoved<TChild>(collection, item));
+        }
+
+        /// <summary>Removes all elements from the child collection.</summary>
+        protected void Clear<TChild>(ChildCollection<TChild> collection)
+        {
+            Tracker.Add(new ClearedCollection<TChild>(collection));
         }
 
         /// <summary>Represents the aggregate root as a dynamic.</summary>

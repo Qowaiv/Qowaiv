@@ -59,7 +59,7 @@ namespace Qowaiv.ComponentModel.Validation
         {
             Guard.NotNull(type, nameof(type));
 
-            var isIValidatable = type.GetInterfaces().Contains(typeof(IValidatableObject));
+            var isIValidatable = typeof(IValidatableObject).IsAssignableFrom(type);
             var validations = TypeDescriptor.GetAttributes(type).Cast<Attribute>().OfType<ValidationAttribute>().ToArray();
             var properties = AnnotatedProperty.CreateAll(type).ToArray();
 

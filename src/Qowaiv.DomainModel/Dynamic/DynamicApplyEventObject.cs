@@ -80,7 +80,7 @@ namespace Qowaiv.DomainModel.Dynamic
                             if (parameters.Length == 1)
                             {
                                 var parameterType = parameters[0].ParameterType;
-                                if (parameterType.GetInterfaces().Contains(typeof(IEvent)))
+                                if (typeof(IEvent).IsAssignableFrom(parameterType))
                                 {
                                     cache[parameterType] = new CompiledMethodInfo(method);
                                 }

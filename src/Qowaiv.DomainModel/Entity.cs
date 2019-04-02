@@ -4,6 +4,7 @@
 
 using Qowaiv.ComponentModel;
 using Qowaiv.ComponentModel.Validation;
+using Qowaiv.DomainModel.Tracking;
 using Qowaiv.Reflection;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Qowaiv.DomainModel
     public abstract class Entity<TEntity> : IEntity<TEntity>, IValidatableObject
         where TEntity : Entity<TEntity>
     {
-        private readonly EntityChangeTracker<TEntity> _tracker;
+        internal readonly ChangeTracker<TEntity> _tracker;
         private readonly PropertyCollection _properties;
 
         /// <summary>Creates a new instance of an <see cref="Entity{Tentity}"/>.</summary>
@@ -32,7 +33,7 @@ namespace Qowaiv.DomainModel
         protected Entity(AnnotatedModelValidator validator)
         {
             _properties = PropertyCollection.Create(GetType());
-            _tracker = new EntityChangeTracker<TEntity>((TEntity)this, _properties, validator);
+            _tracker = new ChangeTracker<TEntity>((TEntity)this, validator);
         }
 
         /// <summary>Creates a new instance of an <see cref="Entity{TEntity}"/>.</summary>
@@ -65,7 +66,7 @@ namespace Qowaiv.DomainModel
 
             _tracker.BufferChanges = true;
             update((TEntity)this);
-            return _tracker.ProcessChanges();
+            return _tracker.Process();
         }
 
         /// <summary>Gets a property (value).</summary>
@@ -80,7 +81,7 @@ namespace Qowaiv.DomainModel
         /// </exception>
         protected void SetProperty<T>(T value, [CallerMemberName] string propertyName = null)
         {
-            _tracker.AddPropertyChange(propertyName, value);
+            _tracker.Add(new PropertyChanged(_properties, propertyName, value));
         }
 
         /// <summary>Sets a property (value).</summary>

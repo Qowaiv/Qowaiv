@@ -1,6 +1,7 @@
 ﻿using Qowaiv.ComponentModel;
 using Qowaiv.DomainModel.Dynamic;
 using Qowaiv.DomainModel.Events;
+using Qowaiv.DomainModel.Tracking;
 using System.Diagnostics;
 
 namespace Qowaiv.DomainModel
@@ -55,6 +56,18 @@ namespace Qowaiv.DomainModel
                 EventStream.AddCommitted(events);
             }
             return result;
+        }
+
+        /// <summary>Adds a value object to the collection.</summary>
+        protected void Add<TValueObject>(ValueObjectCollection<TValueObject> collection, TValueObject item)
+        {
+            _tracker.Add(new ItemAdded<TValueObject>(collection, item));
+        }
+
+        /// <summary>Removes a value object from the collection.</summary>
+        protected void Remove<TValueObject>(ValueObjectCollection<TValueObject> collection, TValueObject item)
+        {
+            _tracker.Add(new ItemRemoved<TValueObject>(collection, item));
         }
 
         /// <summary>Represents the aggregate root as a dynamic.</summary>

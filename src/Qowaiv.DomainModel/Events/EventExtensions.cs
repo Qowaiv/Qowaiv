@@ -12,7 +12,7 @@ namespace Qowaiv.DomainModel.Events
             Guard.NotNull(events, nameof(events));
             var id = aggregateId == Guid.Empty ? Guid.NewGuid() : aggregateId;
             var version = 1;
-            return events.Select(e => new VersionedEvent(new EventInfo(version++, id, Clock.UtcNow()), e));
+            return events.Select(e => new VersionedEvent(new EventInfo(version++, id, Clock.UtcNow()), e)).ToArray();
         }
     }
 }

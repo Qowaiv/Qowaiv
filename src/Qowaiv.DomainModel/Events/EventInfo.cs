@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Qowaiv.DomainModel.Events
 {
@@ -42,6 +43,12 @@ namespace Qowaiv.DomainModel.Events
             return Version.GetHashCode()
                 ^ AggregateId.GetHashCode()
                 ^ CreatedUtc.GetHashCode();
+        }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return string.Format(CultureInfo.InvariantCulture, "v{0}, {1:yyyy-MM-dd HH/:mm/:ss.FFFFF}, AggregateId: {2}", Version, CreatedUtc, AggregateId);
         }
     }
 }

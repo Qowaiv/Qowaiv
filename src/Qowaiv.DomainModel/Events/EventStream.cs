@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Qowaiv.Diagnostics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Qowaiv.DomainModel.Events
 {
     /// <summary>An event stream.</summary>
+    [DebuggerDisplay("{DebuggerDisplay}"), DebuggerTypeProxy(typeof(CollectionDebugView))]
     public class EventStream : IEnumerable<VersionedEvent>
     {
         private readonly List<VersionedEvent> collection = new List<VersionedEvent>();
@@ -58,7 +61,7 @@ namespace Qowaiv.DomainModel.Events
                     throw new EventsOutOfOrderException(nameof(events));
                 }
             }
-            collection.AddRange(events);
+            collection.AddRange(eventArray);
             MarkAllAsCommitted();
         }
 
@@ -103,6 +106,14 @@ namespace Qowaiv.DomainModel.Events
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion
-       
+        
+        /// <summary>Returns a <see cref="string"/> that represents the event stream for debug purposes.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        internal string DebuggerDisplay
+        {
+            get => Version == CommittedVersion
+                ? $"Version: {Version}"
+                : $"Version: {Version} (Committed: {CommittedVersion})";
+        }
     }
 }

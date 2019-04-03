@@ -68,6 +68,12 @@ namespace Qowaiv.DomainModel
                 if (result.IsValid)
                 {
                     EventStream.Add(@event);
+                    
+                    // If no ID yet, take the generated aggregate ID.
+                    if(Id == Guid.Empty)
+                    {
+                        Id = EventStream.AggregateId;
+                    }
                 }
                 return result;
             }

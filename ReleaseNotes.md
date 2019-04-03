@@ -1,4 +1,7 @@
-﻿### New in 3.2.2 (Released 2018/10/22)
+﻿### New in 3.2.3 (Released 2019/04/03)
+* Introduced Clock (#44)
+
+### New in 3.2.2 (Released 2018/10/22)
 * JsonConverter only throws JSON exceptions #36
 
 ### New in 3.2.1 (Realesed 2018/10/12)

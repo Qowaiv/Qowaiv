@@ -196,4 +196,7 @@
   <data name="ArgumentException_TypeOf" xml:space="preserve">
     <value />
   </data>
+  <data name="ArgumentException_IsGuidEmpty" xml:space="preserve">
+    <value>Argument is an empty GUID.</value>
+  </data>
 </root>

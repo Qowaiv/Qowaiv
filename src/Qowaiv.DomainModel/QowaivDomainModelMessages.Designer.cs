@@ -79,6 +79,24 @@ namespace Qowaiv.DomainModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The events belong to multiple aggregate roots..
+        /// </summary>
+        internal static string ArgumentException_MultipleAggregates {
+            get {
+                return ResourceManager.GetString("ArgumentException_MultipleAggregates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version {0} does not exist for the aggregate root ({1})..
+        /// </summary>
+        internal static string ArgumentOutOfRangeException_InvalidVersion {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRangeException_InvalidVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The events are out of order as ther versions are not successive..
         /// </summary>
         internal static string EventsOutOfOrderException {
@@ -124,11 +142,29 @@ namespace Qowaiv.DomainModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The event stream has already been initialized..
+        /// </summary>
+        internal static string InvalidOperationException_InitializedEventStream {
+            get {
+                return ResourceManager.GetString("InvalidOperationException_InitializedEventStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not add committed events to a not empty event stream..
         /// </summary>
         internal static string InvalidOperationException_NotEmptyEventStream {
             get {
                 return ResourceManager.GetString("InvalidOperationException_NotEmptyEventStream", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The event stream has not been initialized yet..
+        /// </summary>
+        internal static string InvalidOperationException_NotInitializedEventStream {
+            get {
+                return ResourceManager.GetString("InvalidOperationException_NotInitializedEventStream", resourceCulture);
             }
         }
         

@@ -43,7 +43,7 @@ namespace Qowaiv
         /// The name of the parameter.
         /// </param>
         [DebuggerStepThrough]
-        public static T NotDefault<T>([ValidatedNotNull]T param, string paramName) where T : struct
+        public static T NotDefault<T>(T param, string paramName) where T : struct
         {
             if (default(T).Equals(param))
             {
@@ -52,6 +52,22 @@ namespace Qowaiv
             return param;
         }
 
+        /// <summary>Guards the parameter if not <see cref="Guid.Empty"/>, otherwise throws an argument exception.</summary>
+        /// <param name="param">
+        /// The parameter to guard.
+        /// </param>
+        /// <param name="paramName">
+        /// The name of the parameter.
+        /// </param>
+        [DebuggerStepThrough]
+        public static Guid NotEmpty(Guid param, string paramName)
+        {
+            if (Guid.Empty.Equals(param))
+            {
+                throw new ArgumentException(QowaivMessages.ArgumentException_IsGuidEmpty, paramName);
+            }
+            return param;
+        }
 
         /// <summary>Guards the parameter if not null or an empty string, otherwise throws an argument (null) exception.</summary>
         /// <param name="param">

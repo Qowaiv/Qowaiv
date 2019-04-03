@@ -88,6 +88,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Argument is an empty GUID..
+        /// </summary>
+        public static string ArgumentException_IsGuidEmpty {
+            get {
+                return ResourceManager.GetString("ArgumentException_IsGuidEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Argument must be {0}.
         /// </summary>
         public static string ArgumentException_Must {

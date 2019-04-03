@@ -74,7 +74,7 @@ namespace Qowaiv.DomainModel
         }
 
         /// <summary>Loads the state of the aggregate root based on historical events.</summary>
-        internal Result<TAggrgate> LoadFromHistory(IEnumerable<VersionedEvent> events)
+        internal Result<TAggrgate> LoadFromHistory(IEnumerable<EventMessage> events)
         {
             lock (EventStream.Lock())
             {

@@ -9,42 +9,48 @@ namespace Qowaiv.DomainModel.Events
 {
     /// <summary>An event stream.</summary>
     [DebuggerDisplay("{DebuggerDisplay}"), DebuggerTypeProxy(typeof(CollectionDebugView))]
-    public class EventStream : IEnumerable<VersionedEvent>
+    public class EventStream : IEnumerable<EventMessage>
     {
-        private readonly List<VersionedEvent> collection = new List<VersionedEvent>();
+        private readonly List<EventMessage> messages = new List<EventMessage>();
 
         /// <summary>Gets the identifier of the aggregate linked to the event stream.</summary>
-        public Guid AggregateId => Version == 0 ? Guid.Empty : collection[0].Info.AggregateId;
+        public Guid AggregateId => Version == 0 ? Guid.Empty : messages[0].Info.AggregateId;
         
         /// <summary>The version of the event stream.</summary>
         /// <remarks>
         /// Equal to the number of events in the stream.
         /// </remarks>
-        public int Version => collection.Count;
+        public int Version => messages.Count;
 
         /// <summary>Gets the committed version of the event stream.</summary>
         public int CommittedVersion { get; private set; }
 
         /// <summary>Gets an event, based on its version.</summary>
-        public VersionedEvent this[int version]
+        public EventMessage this[int version]
         {
             get
             {
+                if(Version == 0)
+                {
+                    throw new InvalidOperationException(QowaivDomainModelMessages.InvalidOperationException_NotInitializedEventStream);
+                }
                 if(version < 1 || version > Version)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(version), "");
+                    throw new ArgumentOutOfRangeException(nameof(version), string.Format(
+                        QowaivDomainModelMessages.ArgumentOutOfRangeException_InvalidVersion, 
+                        version, AggregateId));
                 }
-                return collection[version - 1];
+                return messages[version - 1];
 
             }
         }
 
         /// <summary>Initializes the event stream with an initial set of events.</summary>
-        public void Initialize(IEnumerable<VersionedEvent> events)
+        public void Initialize(IEnumerable<EventMessage> events)
         {
             if (Version != 0)
             {
-                throw new InvalidOperationException("Already initialized");
+                throw new InvalidOperationException(QowaivDomainModelMessages.InvalidOperationException_InitializedEventStream);
             }
             var eventArray = Guard.HasAny(events?.ToArray(), nameof(events));
             var first = eventArray[0].Info;
@@ -52,16 +58,19 @@ namespace Qowaiv.DomainModel.Events
             for (var i = 0; i < eventArray.Length; i++)
             {
                 var info = eventArray[i].Info;
-                if (info.AggregateId == Guid.Empty || info.AggregateId != first.AggregateId)
+
+                Guard.NotEmpty(info.AggregateId, $"events[{i}].AggregateId");
+
+                if (info.AggregateId != first.AggregateId)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException(QowaivDomainModelMessages.ArgumentException_MultipleAggregates, nameof(events));
                 }
                 if (info.Version != i + 1)
                 {
                     throw new EventsOutOfOrderException(nameof(events));
                 }
             }
-            collection.AddRange(eventArray);
+            messages.AddRange(eventArray);
             MarkAllAsCommitted();
         }
 
@@ -69,12 +78,12 @@ namespace Qowaiv.DomainModel.Events
         public void Add(IEvent @event)
         {
             var info = new EventInfo(Version + 1, AggregateId == Guid.Empty ? Guid.NewGuid() : AggregateId, Clock.UtcNow());
-            var versioned = new VersionedEvent(info, @event);
-            collection.Add(versioned);
+            var versioned = new EventMessage(info, @event);
+            messages.Add(versioned);
         }
 
         /// <summary>Gets the uncommitted events of the event stream.</summary>
-        public IEnumerable<VersionedEvent> GetUncommitted() => this.Skip(CommittedVersion);
+        public IEnumerable<EventMessage> GetUncommitted() => this.Skip(CommittedVersion);
 
         /// <summary>Marks all events as being committed.</summary>
         public void MarkAllAsCommitted() => CommittedVersion = Version;
@@ -85,7 +94,7 @@ namespace Qowaiv.DomainModel.Events
         /// </remarks>
         public void Rollback(int version)
         {
-            collection.RemoveRange(version, Version - version);
+            messages.RemoveRange(version, Version - version);
 
             if (CommittedVersion >Version)
             {
@@ -100,7 +109,7 @@ namespace Qowaiv.DomainModel.Events
         #region IEnumerable
 
         /// <inheritdoc />
-        public IEnumerator<VersionedEvent> GetEnumerator() => collection.GetEnumerator();
+        public IEnumerator<EventMessage> GetEnumerator() => messages.GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

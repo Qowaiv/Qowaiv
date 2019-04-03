@@ -7,10 +7,10 @@ namespace Qowaiv.DomainModel.Events
 {
     /// <summary>Represents an event an its info.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public class VersionedEvent
+    public class EventMessage
     {
-        /// <summary>Creates a new instance of a versioned event.</summary>
-        public VersionedEvent(EventInfo info, IEvent @event)
+        /// <summary>Creates a new instance of a event message.</summary>
+        public EventMessage(EventInfo info, IEvent @event)
         {
             Info = Guard.NotDefault(info, nameof(info));
             Event = Guard.NotNull(@event, nameof(@event));
@@ -25,7 +25,7 @@ namespace Qowaiv.DomainModel.Events
         /// <summary>Casts event to a specific even type.</summary>
         public TEvent Cast<TEvent>() where TEvent : IEvent => (TEvent)Event;
 
-        /// <summary>Represents the versioned event as a DEBUG <see cref="string"/>.</summary>
+        /// <summary>Represents the event message as a DEBUG <see cref="string"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal string DebuggerDisplay
         {
@@ -52,7 +52,6 @@ namespace Qowaiv.DomainModel.Events
                         sb.Append(", ");
                     }
                     sb.AppendFormat("{0}: {1}", prop.Name, prop.GetValue(this));
-
                 }
 
                 sb.Append(" }");

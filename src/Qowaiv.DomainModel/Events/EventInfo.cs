@@ -13,7 +13,7 @@ namespace Qowaiv.DomainModel.Events
         public EventInfo(int version, Guid aggregateId, DateTime createdUtc)
         {
             Version = version;
-            AggregateId = Guard.NotDefault(aggregateId, nameof(aggregateId));
+            AggregateId = Guard.NotEmpty(aggregateId, nameof(aggregateId));
             CreatedUtc = Guard.NotDefault(createdUtc, nameof(createdUtc));
         }
 

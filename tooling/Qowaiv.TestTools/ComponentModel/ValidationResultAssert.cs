@@ -29,7 +29,6 @@ namespace Qowaiv.TestTools.ComponentModel
         {
             Assert.NotNull(result, "The result is null.");
             SameMessages(expectedMessages, result.Messages);
-            Assert.IsFalse(result.IsValid, "The result is valid");
         }
 
         /// <summary>Asserts that two collections contain the same error messages, Throws if not.</summary>

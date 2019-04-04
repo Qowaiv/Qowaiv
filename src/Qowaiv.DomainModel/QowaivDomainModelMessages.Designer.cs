@@ -151,24 +151,6 @@ namespace Qowaiv.DomainModel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not add committed events to a not empty event stream..
-        /// </summary>
-        internal static string InvalidOperationException_NotEmptyEventStream {
-            get {
-                return ResourceManager.GetString("InvalidOperationException_NotEmptyEventStream", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The event stream has not been initialized yet..
-        /// </summary>
-        internal static string InvalidOperationException_NotInitializedEventStream {
-            get {
-                return ResourceManager.GetString("InvalidOperationException_NotInitializedEventStream", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Entities that are transient can not be stored in a hash table..
         /// </summary>
         internal static string NotSupported_GetHashCodeOnIsTransient {

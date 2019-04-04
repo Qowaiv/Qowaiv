@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Qowaiv.DomainModel.Events
+namespace Qowaiv.DomainModel.EventSourcing
 {
     /// <summary>Extensions for and/or on <see cref="IEvent"/>.</summary>
     public static class EventExtensions

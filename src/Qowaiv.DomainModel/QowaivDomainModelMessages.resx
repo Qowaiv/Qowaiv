@@ -79,9 +79,6 @@
   <data name="Validation_UpdateEntityId" xml:space="preserve">
     <value>The identifier of an entity can not be updated once it is set.</value>
   </data>
-  <data name="InvalidOperationException_NotEmptyEventStream" xml:space="preserve">
-    <value>Can not add committed events to a not empty event stream.</value>
-  </data>
   <data name="InvalidOperationException_ChangeTrackerAlreadyInitialized" xml:space="preserve">
     <value>The change tracker has already been initialized.</value>
   </data>
@@ -93,9 +90,6 @@
   </data>
   <data name="InvalidOperationException_InitializedEventStream" xml:space="preserve">
     <value>The event stream has already been initialized.</value>
-  </data>
-  <data name="InvalidOperationException_NotInitializedEventStream" xml:space="preserve">
-    <value>The event stream has not been initialized yet.</value>
   </data>
   <data name="ArgumentOutOfRangeException_InvalidVersion" xml:space="preserve">
     <value>Version {0} does not exist for the aggregate root ({1}).</value>

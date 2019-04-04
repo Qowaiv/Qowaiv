@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Qowaiv.DomainModel.Events
+namespace Qowaiv.DomainModel.EventSourcing
 {
     /// <summary>Thrown when events are out of order/</summary>
     [Serializable]

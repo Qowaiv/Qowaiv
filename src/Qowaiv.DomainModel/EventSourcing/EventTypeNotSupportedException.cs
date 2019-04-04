@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Qowaiv.DomainModel.Events
+namespace Qowaiv.DomainModel.EventSourcing
 {
     /// <summary>The exception that is thrown when an event type is not supported for a specific <see cref="AggregateRoot{TAggrgate}"/>.</summary>
     [Serializable]

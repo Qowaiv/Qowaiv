@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Qowaiv.DomainModel.Events
+namespace Qowaiv.DomainModel.EventSourcing
 {
     /// <summary>Represents an event an its info.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]

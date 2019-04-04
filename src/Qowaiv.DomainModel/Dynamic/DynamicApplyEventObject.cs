@@ -1,4 +1,4 @@
-﻿using Qowaiv.DomainModel.Events;
+﻿using Qowaiv.DomainModel.EventSourcing;
 using Qowaiv.DomainModel.Reflection;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Qowaiv
 {
@@ -37,14 +38,35 @@ namespace Qowaiv
         /// <summary>Gets the time zone of the <see cref="Clock"/>.</summary>
         public static TimeZoneInfo TimeZone => threadTimeZone ?? globalTimeZone;
 
-        /// <summary>Gets the current local <see cref="DateTime"/>.</summary>
-        public static DateTime Now() => Now(TimeZone);
+        /// <summary>Gets the current <see cref="LocalDateTime"/>.</summary>
+        public static LocalDateTime Now() => Now(TimeZone);
 
-        /// <summary>Gets the current <see cref="DateTime"/> for the specified time zone.</summary>
+        /// <summary>Gets the current <see cref="LocalDateTime"/> for the specified time zone.</summary>
         /// <param name="timeZone">
         /// The specified time zone.
         /// </param>
-        public static DateTime Now(TimeZoneInfo timeZone) => TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), Guard.NotNull(timeZone, nameof(timeZone)));
+        public static LocalDateTime Now(TimeZoneInfo timeZone) => TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), Guard.NotNull(timeZone, nameof(timeZone)));
+
+        /// <summary>Gets the current <see cref="DateTimeOffset"/>.</summary>
+        public static DateTimeOffset NowWithOffset() => NowWithOffset(TimeZone);
+
+        /// <summary>Gets the current <see cref="DateTimeOffset"/> for the specified time zone.</summary>
+        /// <param name="timeZone">
+        /// The specified time zone.
+        /// </param>
+        public static DateTimeOffset NowWithOffset(TimeZoneInfo timeZone)
+        {
+            var now = Now(timeZone);
+
+            var offset = timeZone.BaseUtcOffset;
+            var rule = timeZone.GetAdjustmentRules().LastOrDefault(r => r.DateStart < now.Date && r.DateEnd >= now.Date);
+
+            if (rule != null && timeZone.IsDaylightSavingTime(now))
+            {
+                offset = offset.Add(rule.DaylightDelta);
+            }
+            return new DateTimeOffset(now, offset);
+        }
 
         /// <summary>Gets the yesterday for the local <see cref="DateTime"/>.</summary>
         public static Date Yesterday() => Yesterday(TimeZone);

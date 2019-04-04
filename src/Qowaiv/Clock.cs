@@ -65,16 +65,10 @@ namespace Qowaiv
         /// </param>
         public static DateTimeOffset NowWithOffset(TimeZoneInfo timeZone)
         {
-            var now = Now(timeZone);
-
-            var offset = timeZone.BaseUtcOffset;
-            var rule = timeZone.GetAdjustmentRules().LastOrDefault(r => r.DateStart < now.Date && r.DateEnd >= now.Date);
-
-            if (rule != null && timeZone.IsDaylightSavingTime(now))
-            {
-                offset = offset.Add(rule.DaylightDelta);
-            }
-            return new DateTimeOffset(now, offset);
+            Guard.NotNull(timeZone, nameof(timeZone));
+            var utcNow = UtcNow();
+            var now = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZone);
+            return new DateTimeOffset(now, now - utcNow);
         }
 
         /// <summary>Gets the yesterday for the local <see cref="DateTime"/>.</summary>

@@ -32,8 +32,17 @@ namespace Qowaiv
         /// To be able to stub the clock, this simple class can be used. 
         /// 
         /// The core if this clock it UTC, see: https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
+        /// 
+        /// To prevent unexpected behaviour, the result is always converted to
+        /// <see cref="DateTimeKind.Utc"/> if needed.
         /// </remarks>
-        public static DateTime UtcNow() => (threadUtcNow ?? globalUtcNow).Invoke();
+        public static DateTime UtcNow()
+        {
+            var utcNow = (threadUtcNow ?? globalUtcNow).Invoke();
+            return utcNow.Kind == DateTimeKind.Utc
+                ? utcNow
+                : new DateTime(utcNow.Ticks, DateTimeKind.Utc);
+        }
 
         /// <summary>Gets the time zone of the <see cref="Clock"/>.</summary>
         public static TimeZoneInfo TimeZone => threadTimeZone ?? globalTimeZone;

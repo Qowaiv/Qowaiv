@@ -27,7 +27,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         public int Version => EventStream.Version;
 
         /// <summary>Applies a change.</summary>
-        protected Result<TAggrgate> ApplyChange(IEvent @event)
+        protected Result<TAggrgate> ApplyChange(object @event)
         {
             Guard.NotNull(@event, nameof(@event));
 

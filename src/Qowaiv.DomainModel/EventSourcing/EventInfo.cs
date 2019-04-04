@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Qowaiv.DomainModel.EventSourcing
 {
-    /// <summary>Contains information about an <see cref="IEvent"/>.</summary>
+    /// <summary>Contains information about an event.</summary>
     public struct EventInfo : IEquatable<EventInfo>
     {
         /// <summary>Represents empty/not set event info.</summary>

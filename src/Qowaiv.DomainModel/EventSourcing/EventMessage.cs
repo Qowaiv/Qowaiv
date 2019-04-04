@@ -10,7 +10,7 @@ namespace Qowaiv.DomainModel.EventSourcing
     public class EventMessage
     {
         /// <summary>Creates a new instance of a event message.</summary>
-        public EventMessage(EventInfo info, IEvent @event)
+        public EventMessage(EventInfo info, object @event)
         {
             Info = Guard.NotDefault(info, nameof(info));
             Event = Guard.NotNull(@event, nameof(@event));
@@ -20,10 +20,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         public EventInfo Info { get; }
 
         /// <summary>Gets the event.</summary>
-        public IEvent Event { get; }
-
-        /// <summary>Casts event to a specific even type.</summary>
-        public TEvent Cast<TEvent>() where TEvent : IEvent => (TEvent)Event;
+        public object Event { get; }
 
         /// <summary>Represents the event message as a DEBUG <see cref="string"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

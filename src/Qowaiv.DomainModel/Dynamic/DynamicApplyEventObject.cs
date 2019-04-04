@@ -15,7 +15,7 @@ namespace Qowaiv.DomainModel.Dynamic
     /// The constraints on the method:
     /// * Name of the method is 'Apply'
     /// * Binding is on instance (both public and non-public)
-    /// * One parameter with a type that implements <see cref="IEvent"/>.
+    /// * One parameter with a type that is/could be an event.
     /// * Return type is ignored.
     /// 
     /// It caches the available methods per type.
@@ -33,13 +33,13 @@ namespace Qowaiv.DomainModel.Dynamic
         private readonly object @object;
         private readonly Type objectType;
 
-        /// <summary>Tries to invoke a Apply(@event) method.</summary>
+        /// <summary>Tries to invoke a (void) Apply(@event) method.</summary>
         /// <exception cref="EventTypeNotSupportedException">
-        /// If the invoke call was on Apply(@event) but the type was not available.
+        /// If the invoke call was on (void) Apply(@event) but the type was not available.
         /// </exception>
         public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
         {
-            if (binder?.Name == nameof(Apply) && args?.Length == 1 && args[0] is IEvent)
+            if (binder?.Name == nameof(Apply) && args?.Length == 1)
             {
                 result = Apply(args);
                 return true;
@@ -80,7 +80,11 @@ namespace Qowaiv.DomainModel.Dynamic
                             if (parameters.Length == 1)
                             {
                                 var parameterType = parameters[0].ParameterType;
-                                if (typeof(IEvent).IsAssignableFrom(parameterType))
+
+                                // Leave out object itself, primitives and enums.
+                                if (parameterType != typeof(object) &&
+                                    !parameterType.IsPrimitive &&
+                                    !parameterType.IsEnum)
                                 {
                                     cache[parameterType] = new CompiledMethodInfo(method);
                                 }

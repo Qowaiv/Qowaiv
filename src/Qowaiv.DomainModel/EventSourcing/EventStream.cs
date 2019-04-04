@@ -54,7 +54,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         }
 
         /// <summary>Adds an event to the event stream.</summary>
-        public void Add(IEvent @event)
+        public void Add(object @event)
         {
             lock (locker)
             {

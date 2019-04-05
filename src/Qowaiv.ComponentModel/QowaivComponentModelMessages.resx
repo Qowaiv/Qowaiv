@@ -61,6 +61,12 @@
   <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
     <value>The value of the {0} field is not allowed.</value>
   </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer" xml:space="preserve">
+    <value>The type {0} does not implement IEqualityComparer or IEqualityComarer&lt;object&gt;.</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
+    <value>All values of the {0} field should be distinct.</value>
+  </data>
   <data name="InvalidModelException" xml:space="preserve">
     <value>The {0} model can not be operated on as it is invalid.</value>
   </data>

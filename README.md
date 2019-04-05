@@ -1,6 +1,9 @@
 ![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/j8o76flxqkh0o9fk?svg=true)](https://ci.appveyor.com/project/qowaiv/qowaiv)
+![version](https://img.shields.io/badge/version-3.2.4-blue.svg?cacheSeconds=2592000)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
 
 # Qowaiv
 

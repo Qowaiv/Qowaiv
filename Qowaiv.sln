@@ -58,7 +58,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.DomainModel.UnitTest
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{F15A78FC-45FC-4E3C-B46A-8F8DFC453E7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.FirstPopCoffeeCompany", "example\Qowaiv.FirstPopCoffeeCompany\Qowaiv.FirstPopCoffeeCompany.csproj", "{8ED45F49-183C-49A4-84FB-1227971576F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.FirstPopCoffeeCompany", "example\Qowaiv.FirstPopCoffeeCompany\Qowaiv.FirstPopCoffeeCompany.csproj", "{8ED45F49-183C-49A4-84FB-1227971576F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

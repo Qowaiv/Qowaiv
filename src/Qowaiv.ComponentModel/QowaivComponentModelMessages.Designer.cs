@@ -88,6 +88,15 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type {0} does not implement IEqualityComparer or IEqualityComarer&lt;object&gt;..
+        /// </summary>
+        internal static string ArgumentException_TypeIsNotEqualityComparer {
+            get {
+                return ResourceManager.GetString("ArgumentException_TypeIsNotEqualityComparer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All values of the {0} field should be distinct..
         /// </summary>
         internal static string DistinctValuesAttribute_ValidationError {

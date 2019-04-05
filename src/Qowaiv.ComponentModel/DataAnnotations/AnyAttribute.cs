@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.ComponentModel.DataAnnotations

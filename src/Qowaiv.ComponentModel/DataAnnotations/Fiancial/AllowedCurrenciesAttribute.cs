@@ -36,7 +36,7 @@ namespace Qowaiv.ComponentModel.DataAnnotations.Financial
         public Currency[] AllowedCurrencies { get; }
 
         /// <summary>Returns true the value is null, or once the money has one of the allowed currencies.</summary>
-        public sealed override bool IsValid(object value)
+        public override bool IsValid(object value)
         {
             if (value == null)
             {

@@ -1,7 +1,6 @@
 ﻿using Qowaiv.ComponentModel;
 using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.ComponentModel.Messages;
-using Qowaiv.ComponentModel.Rules;
 using Qowaiv.DomainModel;
 using Qowaiv.DomainModel.EventSourcing;
 using Qowaiv.FirstPopCoffeeCompany.RoastPlanning.Events;
@@ -29,6 +28,7 @@ namespace Qowaiv.FirstPopCoffeeCompany.RoastPlanning
             private set => SetProperty(value);
         }
 
+        [DistinctValues(ErrorMessage = "Roast days can only be selected once.")]
         public ChildCollection<Date> RoastDays { get; } = new ChildCollection<Date>();
 
         public Result<RoastSchedule> SelectRoastDays(Date[] roastDays)
@@ -43,7 +43,7 @@ namespace Qowaiv.FirstPopCoffeeCompany.RoastPlanning
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (StartDate.NotDefault() && EndDate.NotDefault() && EndDate < StartDate)
+            if (StartDate.Mandatory() && EndDate.Mandatory() && EndDate < StartDate)
             {
                 yield return ValidationMessage.Error("The end date can not be before the start date", nameof(EndDate));
             }
@@ -51,10 +51,6 @@ namespace Qowaiv.FirstPopCoffeeCompany.RoastPlanning
             if (RoastDays.Any(day => day < StartDate || day > EndDate))
             {
                 yield return ValidationMessage.Error("No roast day should be before the start or after the end date.", nameof(RoastDays));
-            }
-            if (RoastDays.Distinct().Count() != RoastDays.Count)
-            {
-                yield return ValidationMessage.Error("Roast days can only be selected once.", nameof(RoastDays));
             }
         }
 

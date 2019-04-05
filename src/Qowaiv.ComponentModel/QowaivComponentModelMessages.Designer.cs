@@ -88,6 +88,15 @@ namespace Qowaiv.ComponentModel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All values of the {0} field should be distinct..
+        /// </summary>
+        internal static string DistinctValuesAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("DistinctValuesAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The identifier could not be found..
         /// </summary>
         internal static string IdentifierNotFoundException {

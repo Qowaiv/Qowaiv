@@ -1,4 +1,9 @@
-﻿### New in 3.2.3 (Released 2019/04/03)
+﻿### New in 3.2.4 (Released 2019/04/05)
+* Introduction of Clock.NowWithOffset(TimezoneInfo) #45
+* Fix LocalDateTime to always have DateTimeKind.Local and no loss of ticks
+* Clock.UtcNow() is guaranteed to have DateTimeKind.Utc
+
+### New in 3.2.3 (Released 2019/04/03)
 * Introduced Clock (#44)
 
 ### New in 3.2.2 (Released 2018/10/22)

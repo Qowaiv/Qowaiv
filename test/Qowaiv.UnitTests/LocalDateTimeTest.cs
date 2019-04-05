@@ -632,10 +632,10 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void AddTicks_4000000000017_AreEqual()
+        public void AddTicks_4000001700000_AreEqual()
         {
-            var act = TestStruct.AddTicks(4000000000017L);
-            var exp = new LocalDateTime(1988, 06, 18, 13, 16, 45, 001);
+            var act = TestStruct.AddTicks(4000001700000L);
+            var exp = new LocalDateTime(1988, 06, 18, 13, 16, 45, 171);
 
             Assert.AreEqual(exp, act);
         }

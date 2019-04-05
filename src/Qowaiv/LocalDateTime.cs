@@ -41,7 +41,9 @@ namespace Qowaiv
         /// ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
         /// </exception>
         public LocalDateTime(long ticks)
-            : this(new DateTime(ticks)) { }
+        {
+            m_Value = new DateTime(ticks, DateTimeKind.Local);
+        }
 
         /// <summary>Initializes a new instance of the local date time structure based on a System.DateTime.
         /// </summary>
@@ -51,7 +53,7 @@ namespace Qowaiv
         /// <remarks>
         /// The date of the date time is taken.
         /// </remarks>
-        private LocalDateTime(DateTime dt) : this(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond) { }
+        private LocalDateTime(DateTime dt) : this(dt.Ticks) { }
 
         /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
         /// <param name="year">
@@ -161,9 +163,7 @@ namespace Qowaiv
         /// more than date.MaxValue.
         /// </exception>
         public LocalDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond)
-        {
-            m_Value = new DateTime(year, month, day, hour, minute, second, millisecond, DateTimeKind.Local);
-        }
+            : this(new DateTime(year, month, day, hour, minute, second, millisecond, DateTimeKind.Local)) { }
 
         #endregion
 

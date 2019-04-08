@@ -46,7 +46,10 @@ namespace Qowaiv.DomainModel.Dynamic
             }
             return base.TryInvokeMember(binder, args, out result);
         }
-        
+
+        /// <summary>Gets the supported event types.</summary>
+        public IReadOnlyCollection<Type> SupportedEventTypes => lookup[objectType].Keys;
+
         /// <summary>Invokes the Apply(@event) method.</summary>
         private object Apply(object[] args)
         {

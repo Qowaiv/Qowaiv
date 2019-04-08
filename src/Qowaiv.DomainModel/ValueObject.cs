@@ -3,7 +3,6 @@
 // It is left to actual implementations
 
 using Qowaiv.ComponentModel;
-using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.Validation;
 using System;
 using System.Collections.Generic;
@@ -48,7 +47,10 @@ namespace Qowaiv.DomainModel
         protected void Validate()
         {
             Result result = _validator.Validate(this);
-            ValidationMessage.ThrowIfAnyErrors(result.Messages);
+            if(!result.IsValid)
+            {
+                throw InvalidModelException.For<T>(result.Errors);
+            }
         }
 
         /// <summary>Validates if the <see cref="ValueObject{T}"/> is valid.</summary>

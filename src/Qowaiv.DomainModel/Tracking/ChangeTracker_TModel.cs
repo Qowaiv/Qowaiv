@@ -1,5 +1,4 @@
 ﻿using Qowaiv.ComponentModel;
-using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.Diagnostics;
 using System;
@@ -28,7 +27,10 @@ namespace Qowaiv.DomainModel.Tracking
             if (!BufferChanges)
             {
                 var result = Process();
-                ValidationMessage.ThrowIfAnyErrors(result.Messages);
+                if(!result.IsValid)
+                {
+                    throw InvalidModelException.For<TModel>(result.Errors);
+                }
             }
         }
         

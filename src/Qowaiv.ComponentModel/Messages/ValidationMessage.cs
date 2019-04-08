@@ -76,28 +76,5 @@ namespace Qowaiv.ComponentModel.Messages
                 default: return Error(message, memberNames);
             }
         }
-
-        /// <summary>Throws the <see cref="ValidationException"/> messages contain any error messages.</summary>
-        /// <exception cref="ValidationException">
-        /// If a single error occurs.
-        /// </exception>
-        /// <exception cref="AggregateException">
-        /// If multiple errors occur.
-        /// </exception>
-        public static void ThrowIfAnyErrors(IEnumerable<ValidationResult> messages)
-        {
-            Guard.NotNull(messages, nameof(messages));
-
-            var errors = messages.GetErrors().ToArray();
-            if (errors.Length == 1)
-            {
-                var error = errors[0];
-                throw new ValidationException(error, null, null);
-            }
-            else if (errors.Any())
-            {
-                throw new AggregateException(errors.Select(error => new ValidationException(error, null, null)).ToArray());
-            }
-        }
     }
 }

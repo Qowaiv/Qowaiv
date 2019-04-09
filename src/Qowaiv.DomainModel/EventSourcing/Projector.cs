@@ -12,21 +12,19 @@ namespace Qowaiv.DomainModel.EventSourcing
         protected Projector()
         {
             _dynamic = new DynamicApplyEventObject(this);
-            _supportedEventTypes = new HashSet<Type>(_dynamic.SupportedEventTypes);
         }
+
+        /// <summary>The event types that is projector can process.</summary>
+        public IReadOnlyCollection<Type> SupportedEventTypes => _dynamic.SupportedEventTypes;
 
         /// <summary>Applies the projection defined for the event (type).</summary>
         /// <param name="event">
         /// The event that should be applied on the projection.
         /// </param>
-        public void ApplyProjection(object @event)
+        public void Process(object @event)
         {
             Guard.NotNull(@event, nameof(@event));
-
-            if (_supportedEventTypes.Contains(@event.GetType()))
-            {
-                AsDynamic().Apply(@event);
-            }
+            AsDynamic().Apply(@event);
         }
 
         /// <summary>Represents the projector as a dynamic.</summary>
@@ -34,6 +32,6 @@ namespace Qowaiv.DomainModel.EventSourcing
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly DynamicApplyEventObject _dynamic;
 
-        private readonly HashSet<Type> _supportedEventTypes;
+        
     }
 }

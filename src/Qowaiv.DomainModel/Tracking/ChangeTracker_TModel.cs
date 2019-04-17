@@ -26,11 +26,7 @@ namespace Qowaiv.DomainModel.Tracking
         {
             if (!BufferChanges)
             {
-                var result = Process();
-                if(!result.IsValid)
-                {
-                    throw InvalidModelException.For<TModel>(result.Errors);
-                }
+                Process().ThrowIfInvalid();
             }
         }
         

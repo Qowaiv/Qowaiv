@@ -21,13 +21,19 @@ namespace Qowaiv.ComponentModel
         }
 
         /// <summary>Gets the value related to result.</summary>
-        public T Value => IsValid
-            ? _value
-            : throw InvalidModelException.For<T>(Errors);
+        public T Value => IsValid ? _value : throw InvalidModelException.For<T>(Errors);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal readonly T _value;
 
+        /// <summary>Throws an <see cref="InvalidModelException"/> if the result is invalid.</summary>
+        public void ThrowIfInvalid()
+        {
+            if(!IsValid)
+            {
+                throw InvalidModelException.For<T>(Errors);
+            }
+        }
         /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
         public static implicit operator Result<T>(T model) => For(model);
 

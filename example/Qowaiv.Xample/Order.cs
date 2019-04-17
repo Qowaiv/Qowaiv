@@ -6,14 +6,16 @@ using Qowaiv.Financial;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Qowaiv.ComponentModel.Validation;
-using Qowaiv.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.Xample
 {
     public class Order : EventSourcedAggregateRoot<Order>
     {
-        public ChildCollection<OrderItem> OrderItems { get; } = new ChildCollection<OrderItem>();
+        public Order()
+        {
+            OrderItems = new ChildCollection<OrderItem>(Tracker);
+        }
+        public ChildCollection<OrderItem> OrderItems { get; }
 
         public OrderStatus Status
         {
@@ -63,7 +65,7 @@ namespace Qowaiv.Xample
                 Price = e.Price,
                 ProductId = e.ProductId,
             };
-            Add(OrderItems, order);
+            OrderItems.Add(order);
         }
     }
 }

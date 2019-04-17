@@ -18,7 +18,7 @@ namespace System.ComponentModel.DataAnnotations
         {
             Guard.NotNull(validationContext, nameof(validationContext));
             Guard.NotNull(property, nameof(property));
-            return new ValidationContext(validationContext.ObjectInstance, validationContext.ServiceContainer, validationContext.Items)
+            return new ValidationContext(validationContext.ObjectInstance, validationContext, validationContext.Items)
             {
                 MemberName = property.Name,
                 DisplayName = property.DisplayAttribute.Name,

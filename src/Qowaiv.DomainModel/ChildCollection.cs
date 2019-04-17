@@ -1,52 +1,74 @@
 ﻿using Qowaiv.Diagnostics;
+using Qowaiv.DomainModel.Tracking;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Qowaiv.DomainModel
 {
-    /// <summary>Represents a read-only collection of (domain-driven design) child objects (both entities and value objects).</summary>
+    /// <summary>Represents child collection of (domain-driven design) for an aggregate (both entities and value objects).</summary>
     /// <remarks>
-    /// The contract is read-only, but the aggregate root can manipulate its
-    /// children, so also child collections:
-    /// <see cref="AggregateRoot{TAggrgate}.Add{TChild}(ChildCollection{TChild}, TChild)"/>
-    /// <see cref="AggregateRoot{TAggrgate}.AddRange{TChild}(ChildCollection{TChild}, IEnumerable{TChild})"/>
-    /// <see cref="AggregateRoot{TAggrgate}.Remove{TChild}(ChildCollection{TChild}, TChild)"/>
-    /// <see cref="AggregateRoot{TAggrgate}.Clear{TChild}(ChildCollection{TChild})"/>
+    /// 
     /// </remarks>
-    /// <typeparam name="TChild">
-    /// The type of the elements in the child collection.
-    /// </typeparam>
     [DebuggerDisplay("Count = {Count}"), DebuggerTypeProxy(typeof(CollectionDebugView))]
-    public class ChildCollection<TChild> : IReadOnlyList<TChild>
+    public class ChildCollection<TChild> : IList<TChild>
     {
         /// <summary>The underlying collection.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly List<TChild> collection = new List<TChild>();
 
+        private readonly ChangeTracker tracker;
+
+        /// <summary>Creates a new instance of <see cref="ChildCollection{TChild}"/>.</summary>
+        /// <param name="tracker"></param>
+        public ChildCollection(ChangeTracker tracker) => this.tracker = Guard.NotNull(tracker, nameof(tracker));
+
         /// <summary>Gets or the element at the specified index.</summary>
-        public TChild this[int index] => collection[index];
+        public TChild this[int index]
+        {
+            get => collection[index];
+            set
+            {
+                var org = collection[index];
+                tracker.Add(new IndexUpdated<TChild>(collection, index, org, value));
+                collection[index] = value;
+            }
+        }
 
         /// <summary>Gets the number of elements in the collection.</summary>
         public int Count => collection.Count;
 
-        /// <summary>Adds an element the collection.</summary>
-        /// <remarks>
-        /// Can be accessed by <see cref="AggregateRoot{TAggrgate}.Add{TChild}(ChildCollection{TChild}, TChild)"/>.
-        /// </remarks>
-        internal void Add(TChild item) => collection.Add(item);
+        /// <summary>The child collection is not read-only.</summary>
+        public bool IsReadOnly => false;
 
-        /// <summary>Removes an element from the collection.</summary>
-        /// <remarks>
-        /// Can be accessed by <see cref="AggregateRoot{TAggrgate}.Remove{TChild}(ChildCollection{TChild}, TChild)"/>.
-        /// </remarks>
-        internal void Remove(TChild item) => collection.Remove(item);
+        /// <inheritdoc />
+        public int IndexOf(TChild item) => collection.IndexOf(item);
+        
+        /// <inheritdoc />
+        public bool Contains(TChild item) => collection.Contains(item);
+        
+        /// <inheritdoc />
+        public void CopyTo(TChild[] array, int arrayIndex) => collection.CopyTo(array, arrayIndex);
 
-        /// <summary>Removes all elements from the collection.</summary>
-        /// <remarks>
-        /// Can be accessed by <see cref="AggregateRoot{TAggrgate}.Clear{TChild}(ChildCollection{TChild})"/>.
-        /// </remarks>
-        internal void Clear() => collection.Clear();
+        /// <inheritdoc />
+        public void Add(TChild item) => tracker.Add(new ItemAdded<TChild>(collection, item));
+
+        /// <inheritdoc />
+        public void Insert(int index, TChild item) => tracker.Add(new ItemInserted<TChild>(collection, index, item));
+
+        /// <inheritdoc />
+        public bool Remove(TChild item)
+        {
+            var count = Count;
+            tracker.Add(new ItemRemoved<TChild>(collection, item));
+            return count != Count;
+        }
+
+        /// <inheritdoc />
+        public void RemoveAt(int index) => tracker.Add(new ItemRemovedAt<TChild>(collection, index, this[index]));
+
+        /// <inheritdoc />
+        public void Clear() => tracker.Add(new ClearedCollection<TChild>(collection));
 
         #region IEnumerable
 

@@ -1,6 +1,5 @@
 ﻿using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.ComponentModel.Messages;
-using Qowaiv.ComponentModel.Rules;
 using Qowaiv.ComponentModel.Rules.Globalization;
 using Qowaiv.Globalization;
 using System.Collections.Generic;

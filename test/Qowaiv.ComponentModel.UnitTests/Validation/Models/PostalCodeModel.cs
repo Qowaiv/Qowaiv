@@ -1,4 +1,5 @@
 ﻿using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.ComponentModel.Messages;
 using Qowaiv.ComponentModel.Rules;
 using Qowaiv.ComponentModel.Rules.Globalization;
 using Qowaiv.Globalization;
@@ -17,13 +18,12 @@ namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            return ValidationRules.Validate(validationContext,
-                new PostalCodeRule(PostalCode, Country, nameof(PostalCode), nameof(Country)),
+            yield return PostalCodeRule.ValidFor(PostalCode, Country, nameof(PostalCode));
                 
-                ValidationRule.For(
-                    (cxt) => cxt.GetSevice<AddressService>()?.PostalCodeExists(PostalCode), 
-                    ()=> "Postal code does not exist.",
-                    nameof(PostalCode)));
+            if(validationContext.GetSevice<AddressService>()?.PostalCodeExists(PostalCode) == false)
+            {
+                yield return ValidationMessage.Error("Postal code does not exist.", nameof(PostalCode));
+            }
         }
     }
     public class AddressService

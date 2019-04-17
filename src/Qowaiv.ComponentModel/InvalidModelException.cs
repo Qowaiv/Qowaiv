@@ -25,8 +25,8 @@ namespace Qowaiv.ComponentModel
             : base(message, innerException) { }
 
         /// <summary>Creates a new instance of an <see cref="InvalidModelException"/>.</summary>
-        public InvalidModelException(string message, Exception innerException, IEnumerable<ValidationResult> messages)
-            :this(message, innerException)
+        public InvalidModelException(string message, Type modelType, Exception innerException, IEnumerable<ValidationResult> messages)
+            : this(message, innerException)
         {
             var errors = new List<ValidationMessage>();
 
@@ -41,6 +41,7 @@ namespace Qowaiv.ComponentModel
                     errors.Add(serializable);
                 }
             }
+            ModelType = modelType;
             Errors = new ReadOnlyCollection<ValidationMessage>(errors);
         }
 
@@ -48,8 +49,9 @@ namespace Qowaiv.ComponentModel
         protected InvalidModelException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+            ModelType = info.GetValue(nameof(ModelType), typeof(Type)) as Type;
             var errors = info.GetValue(nameof(Errors), typeof(ValidationMessage[])) as ValidationMessage[];
-            Errors = new ReadOnlyCollection<ValidationMessage>(errors);
+            Errors = new ReadOnlyCollection<ValidationMessage>(errors ?? new ValidationMessage[0]);
         }
 
         /// <inheritdoc />
@@ -57,6 +59,7 @@ namespace Qowaiv.ComponentModel
         {
             base.GetObjectData(info, context);
             info.AddValue(nameof(Errors), Errors.ToArray());
+            info.AddValue(nameof(ModelType), ModelType);
         }
 
         /// <inheritdoc />
@@ -83,10 +86,13 @@ namespace Qowaiv.ComponentModel
         /// <summary>The related validation error(s).</summary>
         public IReadOnlyList<ValidationMessage> Errors { get; } = new ReadOnlyCollection<ValidationMessage>(new ValidationMessage[0]);
 
+        /// <summary>The type of the invalid model.</summary>
+        public Type ModelType { get; }
+
         /// <summary>Creates an <see cref="InvalidModelException"/> for the model.</summary>
         public static InvalidModelException For<T>(IEnumerable<ValidationResult> messages)
         {
-            return new InvalidModelException(string.Format(QowaivComponentModelMessages.InvalidModelException, typeof(T)), null, messages);
+            return new InvalidModelException(string.Format(QowaivComponentModelMessages.InvalidModelException, typeof(T)), typeof(T), null, messages);
         }
     }
 }

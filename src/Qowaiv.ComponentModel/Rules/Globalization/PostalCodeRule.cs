@@ -1,56 +1,44 @@
 ﻿using Qowaiv.ComponentModel.Messages;
-using System.ComponentModel.DataAnnotations;
 using Qowaiv.Globalization;
-using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.ComponentModel.Rules.Globalization
 {
-    /// <summary>Rule that can validate a <see cref="Qowaiv.PostalCode"/> 
-    /// being valid for a specific <see cref="Qowaiv.Globalization.Country"/>.
+    /// <summary>Rule that can validate a <see cref="PostalCode"/> 
+    /// being valid for a specific <see cref="Country"/>.
     /// </summary>
-    public class PostalCodeRule : ValidationRule
+    public static class PostalCodeRule
     {
-        /// <summary>Creates a new instance of a <see cref="PostalCodeRule"/>.</summary>
-        /// <param name="postalCode">
-        /// The postal code to validate.
-        /// </param>
-        /// <param name="country">
-        /// The country to validate it for.
-        /// </param>
-        /// <param name="postalCodeName">
-        /// The name of the <see cref="Qowaiv.PostalCode"/> property in the model.
-        /// </param>
-        /// <param name="countryName">
-        /// The name of the <see cref="Qowaiv.Globalization.Country"/> property in the model.
-        /// </param>
-        public PostalCodeRule(PostalCode postalCode, Country country, string postalCodeName, string countryName)
-            : base(postalCodeName, countryName)
+        /// <summary>Returns <see cref="ValidationMessage.None"/> if the <see cref="PostalCode"/> 
+        /// is valid for a specific <see cref="Country"/>, otherwise an error message.
+        /// </summary>
+        public static ValidationResult ValidFor(PostalCode postalCode, Country country, string postalCodeName, string errorMessage = null)
         {
-            PostalCode = postalCode;
-            Country = country;
+            Guard.NotNullOrEmpty(postalCodeName, nameof(postalCodeName));
+
+            if (postalCode.IsEmptyOrUnknown() || country.IsEmptyOrUnknown() || postalCode.IsValid(country))
+            {
+                return ValidationMessage.None;
+            }
+            var message = string.Format(errorMessage ?? QowaivComponentModelMessages.PostalCodeValidator_ErrorMessage, postalCode, country.DisplayName);
+            return ValidationMessage.Error(message, postalCodeName);
         }
 
-        /// <summary>Gets the involved postal code.</summary>
-        public PostalCode PostalCode { get; }
-        /// <summary>Gets the involved country.</summary>
-        public Country Country { get; }
-
-        /// <summary>Returns true if postal code is valid (or if the postal code or country is empty or unknown).</summary>
-        protected override bool IsValid(ValidationContext validationContext)
-        {
-            return PostalCode.IsEmptyOrUnknown() || Country.IsEmptyOrUnknown() || PostalCode.IsValid(Country);
-        }
-
-        /// <summary>Gets the error message.</summary>
-        protected override Func<string> ErrorMessageString => () => string.Format(QowaivComponentModelMessages.PostalCodeValidator_ErrorMessage, PostalCode, Country.DisplayName);
 
         /// <summary>Returns <see cref="ValidationMessage.None"/> if the <see cref="PostalCode"/> 
-        /// is valid for a specific <see cref="Country"/>, otherwise false.
+        /// is not null or empty or if the specific <see cref="Country"/> does not have postal codes, otherwise an error message.
         /// </summary>
-        public static ValidationResult IsValid(PostalCode postalCode, Country country, string postalCodeName, string countryName)
+        public static ValidationResult RequiredFor(PostalCode postalCode, Country country, string postalCodeName, string errorMessage = null)
         {
-            var rule = new PostalCodeRule(postalCode, country, postalCodeName, countryName);
-            return rule.Validate(null);
+            Guard.NotNullOrEmpty(postalCodeName, nameof(postalCodeName));
+
+            if (PostalCodeCountryInfo.GetInstance(country).HasPostalCode && postalCode.IsEmptyOrUnknown())
+            {
+                var message = string.Format(errorMessage ?? QowaivComponentModelMessages.PostalCodeValidator_ErrorMessage, postalCode, country.DisplayName);
+                return ValidationMessage.Error(message, postalCodeName);
+            }
+            return ValidationMessage.None;
+            
         }
     }
 }

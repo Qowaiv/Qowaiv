@@ -113,7 +113,7 @@ namespace Qowaiv.ComponentModel.Tests.Validation
                 };
 
                 DataAnnotationsAssert.WithErrors(model,
-                    ValidationMessage.Error("De postcode 2629JD is niet geldig voor België.", "PostalCode", "Country")
+                    ValidationMessage.Error("De postcode 2629JD is niet geldig voor België.", "PostalCode")
                 );
             }
         }

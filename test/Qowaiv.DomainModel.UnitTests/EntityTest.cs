@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Qowaiv.ComponentModel;
 using Qowaiv.ComponentModel.Messages;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.TestTools;
@@ -25,7 +26,7 @@ namespace Qowaiv.DomainModel.UnitTests
         {
             var entity = new SimpleEntity();
 
-            var exception = Assert.Throws<ValidationException>
+            var exception = Assert.Throws<InvalidModelException>
             (
                 () => entity.FullName = ""
             );

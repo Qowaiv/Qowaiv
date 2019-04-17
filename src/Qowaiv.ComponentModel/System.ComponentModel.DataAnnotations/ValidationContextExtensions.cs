@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using Qowaiv.ComponentModel.Validation;
 
 namespace System.ComponentModel.DataAnnotations
 {
@@ -10,6 +11,18 @@ namespace System.ComponentModel.DataAnnotations
         {
             Guard.NotNull(validationContext, nameof(validationContext));
             return (T)validationContext.GetService(typeof(T));
+        }
+
+        /// <summary>Gets a validation context for a property.</summary>
+        public static ValidationContext ForProperty(this ValidationContext validationContext, AnnotatedProperty property)
+        {
+            Guard.NotNull(validationContext, nameof(validationContext));
+            Guard.NotNull(property, nameof(property));
+            return new ValidationContext(validationContext.ObjectInstance, validationContext.ServiceContainer, validationContext.Items)
+            {
+                MemberName = property.Name,
+                DisplayName = property.DisplayAttribute.Name,
+            };
         }
     }
 }

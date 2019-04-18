@@ -2,7 +2,7 @@
 
 namespace Qowaiv.DomainModel.Tracking
 {
-    /// <summary>Implements <see cref="ITrackableChange"/> for adding an element to a <see cref="ICollection{TChild}"/>.</summary>
+    /// <summary>Implements <see cref="ITrackableChange"/> for adding an element to an <see cref="ICollection{TChild}"/>.</summary>
     public class ItemAdded<TChild> : ITrackableChange
     {
         /// <summary>Creates a new instance of a <see cref="ItemAdded{TChild}"/>.</summary>

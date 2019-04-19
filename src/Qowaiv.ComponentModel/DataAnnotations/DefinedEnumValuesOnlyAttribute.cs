@@ -14,7 +14,11 @@ namespace Qowaiv.ComponentModel.DataAnnotations
         : base(() => QowaivComponentModelMessages.AllowedValuesAttribute_ValidationError) { }
 
         /// <summary>If true, for flag enums, also combinations of defined single values are allowed, that are not defined themselves explicitly.</summary>
-        public bool AllowUndefinedFlagCombinations { get; set; } = true;
+        /// <remarks>
+        /// When enabled, the logic falls back on <see cref="Enum.IsDefined(Type, object)"/>, as
+        /// that is stricter than, our implementation.
+        /// </remarks>
+        public bool OnlyAllowDefinedFlagsCombinations { get; set; }
 
         /// <summary>Returns true if the value is defined for the enum, otherwise false.</summary>
         /// <exception cref="ArgumentException">
@@ -30,7 +34,7 @@ namespace Qowaiv.ComponentModel.DataAnnotations
 
             var enumType = value.GetType();
 
-            if(AllowUndefinedFlagCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
+            if(!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
             {
                 dynamic dyn = value;
                 var max = Enum.GetValues(enumType)

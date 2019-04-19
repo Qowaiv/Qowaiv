@@ -30,21 +30,21 @@ namespace Qowaiv.ComponentModel.UnitTests.DataAnnotations
         [Test]
         public void IsValid_FlagsEnumMixed_IsTrue()
         {
-            var attribute = new DefinedEnumValuesOnlyAttribute { AllowUndefinedFlagCombinations = false };
+            var attribute = new DefinedEnumValuesOnlyAttribute();
             Assert.IsTrue(attribute.IsValid(Flag.American));
         }
 
         [Test]
         public void IsValid_FlagsEnumMixedAllowUndefinedFlagCombinations_IsTrue()
         {
-            var attribute = new DefinedEnumValuesOnlyAttribute { AllowUndefinedFlagCombinations = true };
+            var attribute = new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = false };
             Assert.IsTrue(attribute.IsValid(Flag.UnionJack | Flag.StarsAndStripes));
         }
 
         [Test]
         public void IsValid_FlagsEnumMixed_IsFalse()
         {
-            var attribute = new DefinedEnumValuesOnlyAttribute { AllowUndefinedFlagCombinations = false };
+            var attribute = new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = true };
             Assert.IsFalse(attribute.IsValid(Flag.UnionJack | Flag.StarsAndStripes));
         }
 
@@ -70,14 +70,14 @@ namespace Qowaiv.ComponentModel.UnitTests.DataAnnotations
         }
 
 
-        [Flags]
-        public enum Flag
-        {
-            UnionJack = 1,
-            StarsAndStripes = 2,
-            MapleLeaf = 4,
-            American = StarsAndStripes | MapleLeaf,
-        }
+[Flags]
+public enum Flag
+{
+    UnionJack = 1,
+    StarsAndStripes = 2,
+    MapleLeaf = 4,
+    American = StarsAndStripes | MapleLeaf,
+}
 
         public enum Number
         {

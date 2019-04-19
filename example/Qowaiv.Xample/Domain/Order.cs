@@ -1,4 +1,5 @@
 ﻿using Qowaiv.ComponentModel;
+using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.ComponentModel.Rules;
 using Qowaiv.DomainModel;
 using Qowaiv.DomainModel.EventSourcing;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Qowaiv.Xample
+namespace Qowaiv.Xample.Domain
 {
     public class Order : EventSourcedAggregateRoot<Order>
     {
@@ -17,6 +18,7 @@ namespace Qowaiv.Xample
         }
         public ChildCollection<OrderItem> OrderItems { get; }
 
+        [DefinedEnumValuesOnly]
         public OrderStatus Status
         {
             get => GetProperty<OrderStatus>();
@@ -30,6 +32,7 @@ namespace Qowaiv.Xample
             private set => SetProperty(value);
         }
 
+        [Display(Name = "Total price")]
         public Money TotalPrice
         {
             get

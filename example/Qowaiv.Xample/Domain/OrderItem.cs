@@ -3,7 +3,7 @@ using Qowaiv.DomainModel;
 using Qowaiv.DomainModel.Tracking;
 using Qowaiv.Financial;
 
-namespace Qowaiv.Xample
+namespace Qowaiv.Xample.Domain
 {
     public class OrderItem : Entity<OrderItem>
     {

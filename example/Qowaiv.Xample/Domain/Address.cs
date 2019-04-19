@@ -5,7 +5,7 @@ using Qowaiv.Globalization;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Qowaiv.Xample
+namespace Qowaiv.Xample.Domain
 {
     public sealed class Address : ValueObject<Address>
     {

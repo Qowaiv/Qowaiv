@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Xample
+﻿namespace Qowaiv.Xample.Domain
 {
     public enum OrderStatus
     {

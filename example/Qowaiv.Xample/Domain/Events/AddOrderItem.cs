@@ -1,7 +1,7 @@
 ﻿using Qowaiv.Financial;
 using System;
 
-namespace Qowaiv.Xample.Events
+namespace Qowaiv.Xample.Domain.Events
 {
     public class AddOrderItem
     {

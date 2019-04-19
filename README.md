@@ -257,6 +257,7 @@ We're extending the DataAnnotations from Microsoft with some more attributes:
 * [AllowedValues] and 
 * [ForbiddenValues] make it easy to validate string values, or objects/value types that have a string representation.
 * [Any] Tells that a collection should have at least one item.
+* [DefinedEnumValuesOnly] limits the allowed enum values to those defined by the enum.
 
 ### Result model
 Also we propose a Result model that includes the validation messages, and Result which can contain both an object and validation messages. This can be a helpful return type for methods that need to return objects but first have to validate them.

@@ -56,7 +56,7 @@ namespace Qowaiv.UnitTests
             string str = null;
 
             Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
-            Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
+            Assert.AreEqual("", val.ToString(), "Value");
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
@@ -66,7 +66,7 @@ namespace Qowaiv.UnitTests
             string str = string.Empty;
 
             Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
-            Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
+            Assert.AreEqual("", val.ToString(), "Value");
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests
             string str = "string";
 
             Assert.IsFalse(Uuid.TryParse(str, out Uuid val), "Valid");
-            Assert.AreEqual("AAAAAAAAAAAAAAAAAAAAAA", val.ToString(), "Value");
+            Assert.AreEqual("", val.ToString(), "Value");
         }
 
         [Test]
@@ -395,7 +395,7 @@ namespace Qowaiv.UnitTests
         public void ToString_Empty_StringEmpty()
         {
             var act = Uuid.Empty.ToString();
-            var exp = "AAAAAAAAAAAAAAAAAAAAAA";
+            var exp = "";
             Assert.AreEqual(exp, act);
         }
 
@@ -453,7 +453,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("AAAAAAAAAAAAAAAAAAAAAA", default(Uuid));
+            DebuggerDisplayAssert.HasResult("", default(Uuid));
         }
 
         [Test]

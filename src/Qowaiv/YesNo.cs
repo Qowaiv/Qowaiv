@@ -1,4 +1,4 @@
-#pragma warning disable S2328
+﻿#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -6,12 +6,14 @@ using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Resources;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -24,9 +26,6 @@ namespace Qowaiv
     [TypeConverter(typeof(YesNoTypeConverter))]
     public struct YesNo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
     {
-        /// <summary>Represents the pattern of a (potential) valid Yes-no.</summary>
-        public static readonly Regex Pattern = new Regex(@"^ComplexRegexPattern.*$", RegexOptions.Compiled);
-
         /// <summary>Represents an empty/not set Yes-no.</summary>
         public static readonly YesNo Empty;
 
@@ -37,8 +36,11 @@ namespace Qowaiv
         public static readonly YesNo Yes = new YesNo { m_Value = 2 };
 
         /// <summary>Represents an unknown (but set) Yes-no.</summary>
-        public static readonly YesNo Unknown = new YesNo { m_Value = 4 };
+        public static readonly YesNo Unknown = new YesNo { m_Value = 255 };
 
+        /// <summary>Contains yes and no.</summary>
+        public static readonly IReadOnlyCollection<YesNo> YesAndNo = new ReadOnlyCollection<YesNo>(new List<YesNo> { Yes, No });
+        
         #region Properties
 
         /// <summary>The inner value of the Yes-no.</summary>
@@ -56,6 +58,12 @@ namespace Qowaiv
 
         /// <summary>Returns true if the Yes-no is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+
+        /// <summary>Returns true if the Yes-no value represents no, otherwise false.</summary>
+        public bool IsNo() => m_Value == No.m_Value;
+
+        /// <summary>Returns true if the Yes-no value represents yes, otherwise false.</summary>
+        public bool IsYes() => m_Value == Yes.m_Value;
 
         #endregion
 
@@ -126,25 +134,27 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Yes-no.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-        // m_Value = Create(jsonInteger).m_Value;
+        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
 
         /// <summary>Generates a Yes-no from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the Yes-no.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-        // m_Value = Create(jsonNumber).m_Value;
+        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((int)jsonNumber).m_Value;
         
         /// <summary>Generates a Yes-no from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the Yes-no.
         /// </param>
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-        // m_Value = Create(jsonDate).m_Value;
 
         /// <summary>Converts a Yes-no into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value == default(byte) ? null : ToString(CultureInfo.InvariantCulture);
+        object IJsonSerializable.ToJson()
+        {
+            if (IsNo()) {return "no"; }
+            if (IsYes()) { return "yes"; }
+            return IsEmpty() ? null : "?";
+        }
 
         #endregion
 
@@ -158,13 +168,13 @@ namespace Qowaiv
             {
                 if (IsEmpty())
                 {
-                    return "YesNo: (empty)";
+                    return "{empty} (YesNo)";
                 }
                 if (IsUnknown())
                 {
-                    return "YesNo: (unknown)";
+                    return "unknown (YesNo)";
                 }
-                return string.Format(CultureInfo.InvariantCulture, "YesNo: {0}", m_Value);
+                return ToString(CultureInfo.InvariantCulture);
             }
         }
 
@@ -190,17 +200,37 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        /// <remarks>
+        /// The formats:
+        /// 
+        /// i: as integer (note, unknown is a question mark sign).
+        /// c: as single character.
+        /// f: as formatted/display name.
+        /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
-            throw new NotImplementedException();
+
+            // If no format specified, use the default format.
+            if (string.IsNullOrEmpty(format)) { format = "f"; }
+
+            // Apply the format.
+            return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
         }
 
+        /// <summary>The format token instructions.</summary>
+        private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<YesNo, IFormatProvider, string>>()
+        {
+            { 'c', (svo, provider) => svo.GetResourceString("ch_", provider) },
+            { 'i', (svo, provider) => svo.GetResourceString("int_", provider) },
+            { 'f', (svo, provider) => svo.GetResourceString("", provider) },
+        };
+
         #endregion
-        
+
         #region IEquatable
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
@@ -395,9 +425,14 @@ namespace Qowaiv
                 result = Unknown;
                 return true;
             }
-            if (IsValid(s, culture))
+            AddCulture(culture);
+
+            var str = Parsing.ToUnified(s);
+
+            if (Parsings[culture].TryGetValue(str, out byte val) ||
+                Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new YesNo { m_Value = byte.Parse(s, formatProvider) };
+                result = new YesNo { m_Value = val };
                 return true;
             }
             return false;
@@ -457,9 +492,19 @@ namespace Qowaiv
             {
                 return true;
             }
-            if (IsValid((byte)val.Value))
+            if(val == 0)
             {
-                result = new YesNo { m_Value = (byte)val.Value };
+                result = No;
+                return true;
+            }
+            if(val == 1)
+            {
+                result = Yes;
+                return true;
+            }
+            if(val == byte.MaxValue || val == int.MaxValue)
+            {
+                result = Unknown;
                 return true;
             }
             return false;
@@ -475,18 +520,103 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid Yes-no, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return Pattern.IsMatch(val ?? string.Empty);
+            if (string.IsNullOrWhiteSpace(val)) { return false; }
+            return TryParse(val, formatProvider, out YesNo result);
         }
 
         /// <summary>Returns true if the val represents a valid Yes-no, otherwise false.</summary>
-        public static bool IsValid(byte? val)
-        {
-            if(!val.HasValue)
-            {
-                return false;
-            }
-            throw new NotImplementedException();
-        }
+        public static bool IsValid(int? val) => val.HasValue && TryCreate(val, out YesNo result);
+
         #endregion
-     }
+
+        #region Resources
+
+        private static ResourceManager ResourceManager = new ResourceManager("Qowaiv.YesNoLabels", typeof(YesNo).Assembly);
+
+        /// <summary>Get resource string.</summary>
+        /// <param name="prefix">
+        /// The prefix of the resource key.
+        /// </param>
+        /// <param name="formatProvider">
+        /// The format provider.
+        /// </param>
+        internal string GetResourceString(string prefix, IFormatProvider formatProvider)
+        {
+            return GetResourceString(prefix, formatProvider as CultureInfo);
+        }
+
+        /// <summary>Get resource string.</summary>
+        /// <param name="prefix">
+        /// The prefix of the resource key.
+        /// </param>
+        /// <param name="culture">
+        /// The culture.
+        /// </param>
+        internal string GetResourceString(string prefix, CultureInfo culture)
+        {
+            if (IsEmpty()) { return string.Empty; }
+            return ResourceManager.GetString(prefix + YesNoLabels[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
+        }
+
+        #endregion
+
+        #region Lookup
+
+        /// <summary>Gets the yes-no labels.</summary>
+        /// <remarks>
+        /// Used for both serialization and resource lookups.
+        /// </remarks>
+        private static readonly Dictionary<byte, string> YesNoLabels = new Dictionary<byte, string>()
+        {
+            { 0, null },
+            { 1, "No" },
+            { 2, "Yes" },
+            { 255, "Unknown" },
+        };
+
+        /// <summary>Adds a culture to the parsings.</summary>
+        /// <param name="culture">
+        /// The culture to add.
+        /// </param>
+        private static void AddCulture(CultureInfo culture)
+        {
+            lock (locker)
+            {
+                if (Parsings.ContainsKey(culture)) { return; }
+
+                Parsings[culture] = new Dictionary<string, byte>();
+
+                foreach (var value in YesAndNo)
+                {
+                    var label = value.ToString("", culture).ToUpper(culture);
+                    var @char = value.ToString("c", culture).ToUpper(culture);
+
+                    Parsings[culture][label] = value.m_Value;
+                    Parsings[culture][@char] = value.m_Value;
+                }
+            }
+        }
+
+        /// <summary>Represents the parsing keys.</summary>
+        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>()
+        {
+            {
+                CultureInfo.InvariantCulture, new Dictionary<string, byte>()
+                {
+                    { "", 0 },
+                    { "0", 1 },
+                    { "1", 2 },
+                    { "FALSE", 1 },
+                    { "TRUE", 2 },
+                    { "NO", 1 },
+                    { "YES", 2 },
+                }
+            }
+        };
+
+        /// <summary>The locker for adding a culture.</summary>
+        private static readonly object locker = new object();
+
+        #endregion
+    }
 }

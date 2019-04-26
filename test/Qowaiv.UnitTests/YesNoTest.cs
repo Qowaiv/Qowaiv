@@ -2,7 +2,6 @@ using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,7 +13,7 @@ namespace Qowaiv.Fiancial.UnitTests
     public class YesNoTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly YesNo TestStruct = YesNo.Parse("ComplexRegexPattern");
+        public static readonly YesNo TestStruct = YesNo.Yes;
 
         #region Yes-no const tests
 
@@ -94,11 +93,9 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            YesNo val;
-
             string str = null;
 
-            Assert.IsTrue(YesNo.TryParse(str, out val), "Valid");
+            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -106,11 +103,9 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            YesNo val;
-
             string str = string.Empty;
 
-            Assert.IsTrue(YesNo.TryParse(str, out val), "Valid");
+            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -118,11 +113,9 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            YesNo val;
-
             string str = "?";
 
-            Assert.IsTrue(YesNo.TryParse(str, out val), "Valid");
+            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -130,23 +123,21 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            YesNo val;
-
-            string str = "string";
-
-            Assert.IsTrue(YesNo.TryParse(str, out val), "Valid");
-            Assert.AreEqual(str, val.ToString(), "Value");
+            using (new CultureInfoScope("en"))
+            {
+                string str = "yes";
+                Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
+                Assert.AreEqual(str, val.ToString(), "Value");
+            }
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            YesNo val;
-
             string str = "string";
 
-            Assert.IsFalse(YesNo.TryParse(str, out val), "Valid");
+            Assert.IsFalse(YesNo.TryParse(str, out YesNo val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -208,46 +199,41 @@ namespace Qowaiv.Fiancial.UnitTests
         public void TryCreate_Null_IsEmpty()
         {
             YesNo exp = YesNo.Empty;
-            YesNo act;
-
-            Assert.IsTrue(YesNo.TryCreate(null, out act));
+            Assert.IsTrue(YesNo.TryCreate(null, out YesNo act));
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void TryCreate_ByteMinValue_IsEmpty()
+        public void TryCreate_69_IsEmpty()
         {
             YesNo exp = YesNo.Empty;
-            YesNo act;
-
-            Assert.IsFalse(YesNo.TryCreate(Byte.MinValue, out act));
+            Assert.IsFalse(YesNo.TryCreate(69, out YesNo act));
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void TryCreate_ByteMinValue_AreEqual()
+        public void TryCreate_Null_AreEqual()
         {
             var exp = YesNo.Empty;
-            var act = YesNo.TryCreate(Byte.MinValue);
+            var act = YesNo.TryCreate(null);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void TryCreate_Value_AreEqual()
         {
             var exp = TestStruct;
-            var act = YesNo.TryCreate(1234567);
+            var act = YesNo.TryCreate(1);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void Create_ByteMinValue_ThrowsArgumentOutOfRangeException()
+        public void Create_SomeValue_ThrowsArgumentOutOfRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException
-            (() =>
+            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
             {
-                YesNo.Create(Byte.MinValue);
+                YesNo.Create(69);
             },
             "val",
-            "Not a valid Yes-no");
+            "Not a valid yes-no value");
         }
 
         #endregion
@@ -441,22 +427,10 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void FromJson_None_EmptyValue()
         {
-            var act = JsonTester.Read<YesNo>
-            ();
+            var act = JsonTester.Read<YesNo>();
             var exp = YesNo.Empty;
 
             Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void FromJson_Null_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>
-            (() =>
-            {
-                JsonTester.Read<YesNo>
-        ();
-            },
-            "JSON deserialization from null is not supported.");
         }
 
         [Test]
@@ -483,44 +457,21 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            var act = JsonTester.Read<YesNo>
-            ((Int64)TestStruct);
-            var exp = TestStruct;
+            var act = JsonTester.Read<YesNo>(0);
+            var exp = YesNo.No;
 
             Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>
-            (() =>
-            {
-                JsonTester.Read<YesNo>
-        (123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
         }
 
         [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
-            var act = JsonTester.Read<YesNo>
-            ((Double)TestStruct);
+            var act = JsonTester.Read<YesNo>(1.0);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
         }
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>
-            (() =>
-            {
-                JsonTester.Read<YesNo>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
+   
         [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
@@ -564,7 +515,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void ToString_Unknown_QuestionMark()
         {
-            var act = YesNo.Unknown.ToString();
+            var act = YesNo.Unknown.ToString("c");
             var exp = "?";
             Assert.AreEqual(exp, act);
         }
@@ -573,15 +524,22 @@ namespace Qowaiv.Fiancial.UnitTests
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
+            var exp = "Unit Test Formatter, value: 'yes', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);
         }
-        [TestCase("en-US", "", "ComplexPattern", "ComplexPattern")]
-        [TestCase("nl-BE", null, "1600,1", "1600,1")]
-        [TestCase("en-GB", null, "1600.1", "1600.1")]
-        [TestCase("nl-BE", "0000", "800", "0800")]
-        [TestCase("en-GB", "0000", "800", "0800")]
+        [TestCase("en-GB", null, "Yes", "yes")]
+        [TestCase("nl-BE", null, "Yes", "ja")]
+        [TestCase("es-EQ", null, "Yes", "si")]
+        [TestCase("en-GB", null, "No", "no")]
+        [TestCase("nl-BE", null, "no", "nee")]
+        [TestCase("es-EQ", null, "no", "no")]
+        [TestCase("en-GB", "c", "Yes", "Y")]
+        [TestCase("nl-BE", "c", "Yes", "J")]
+        [TestCase("es-EQ", "c", "Yes", "S")]
+        [TestCase("en-GB", "c", "No", "N")]
+        [TestCase("nl-BE", "c", "no", "N")]
+        [TestCase("es-EQ", "c", "no", "N")]
         public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
         {
             using (new CultureInfoScope(culture))
@@ -589,14 +547,6 @@ namespace Qowaiv.Fiancial.UnitTests
                 var actual = YesNo.Parse(str).ToString(format);
                 Assert.AreEqual(expected, actual);
             }
-        }
-
-        [Test]
-        public void ToString_FormatValueSpanishEcuador_AreEqual()
-        {
-            var act = YesNo.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
-            var exp = "01700,0";
-            Assert.AreEqual(exp, act);
         }
 
         [Test]
@@ -608,18 +558,18 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("ComplexPattern", default(YesNo));
+            DebuggerDisplayAssert.HasResult("{empty} (YesNo)", default(YesNo));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("ComplexPattern", YesNo.Unknown);
+            DebuggerDisplayAssert.HasResult("unknown (YesNo)", YesNo.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
+            DebuggerDisplayAssert.HasResult("yes", TestStruct);
         }
 
         #endregion
@@ -630,14 +580,14 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void GetHash_Empty_Hash()
         {
-            Assert.AreEqual(-1, YesNo.Empty.GetHashCode());
+            Assert.AreEqual(0, YesNo.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
         [Test]
         public void GetHash_TestStruct_Hash()
         {
-            Assert.AreEqual(-1, TestStruct.GetHashCode());
+            Assert.AreEqual(2, TestStruct.GetHashCode());
         }
 
         [Test]
@@ -649,8 +599,8 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            var l = YesNo.Parse("formatted", CultureInfo.InvariantCulture);
-            var r = YesNo.Parse("unformatted", CultureInfo.InvariantCulture);
+            var l = YesNo.Parse("Yes", CultureInfo.InvariantCulture);
+            var r = YesNo.Parse("yes", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
         }
@@ -715,15 +665,12 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void OrderBy_YesNo_AreEqual()
         {
-            var item0 = YesNo.Parse("ComplexRegexPatternA");
-            var item1 = YesNo.Parse("ComplexRegexPatternB");
-            var item2 = YesNo.Parse("ComplexRegexPatternC");
-            var item3 = YesNo.Parse("ComplexRegexPatternD");
+            var item0 = YesNo.No;
+            var item1 = YesNo.Yes;
+            var item2 = YesNo.Unknown;
 
-            var inp = new List<YesNo>
-            () { YesNo.Empty, item3, item2, item0, item1, YesNo.Empty };
-            var exp = new List<YesNo>
-            () { YesNo.Empty, YesNo.Empty, item0, item1, item2, item3 };
+            var inp = new []{ YesNo.Empty, item2, item0, item1, YesNo.Empty };
+            var exp = new []{ YesNo.Empty, YesNo.Empty, item0, item1, item2 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -733,15 +680,12 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void OrderByDescending_YesNo_AreEqual()
         {
-            var item0 = YesNo.Parse("ComplexRegexPatternA");
-            var item1 = YesNo.Parse("ComplexRegexPatternB");
-            var item2 = YesNo.Parse("ComplexRegexPatternC");
-            var item3 = YesNo.Parse("ComplexRegexPatternD");
+            var item0 = YesNo.No;
+            var item1 = YesNo.Yes;
+            var item2 = YesNo.Unknown;
 
-            var inp = new List<YesNo>
-            () { YesNo.Empty, item3, item2, item0, item1, YesNo.Empty };
-            var exp = new List<YesNo>
-            () { item3, item2, item1, item0, YesNo.Empty, YesNo.Empty };
+            var inp = new []{ YesNo.Empty, item2, item0, item1, YesNo.Empty };
+            var exp = new []{ item2, item1, item0, YesNo.Empty, YesNo.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -906,7 +850,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void IsValid_Data_IsTrue()
         {
-            Assert.IsTrue(YesNo.IsValid("ComplexPattern"));
+            Assert.IsTrue(YesNo.IsValid("Unknown"));
         }
         #endregion
     }

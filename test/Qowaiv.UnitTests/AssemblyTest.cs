@@ -20,6 +20,7 @@ namespace Qowaiv.Tests
             typeof(Uuid),
             typeof(WeekDate),
             typeof(Year),
+            typeof(YesNo),
             typeof(Financial.Amount),
             typeof(Financial.BankIdentifierCode),
             typeof(Financial.Currency),

@@ -489,7 +489,7 @@ namespace Qowaiv
                 result = Yes;
                 return true;
             }
-            if(val == byte.MaxValue || val == int.MaxValue)
+            if(val == byte.MaxValue || val == short.MaxValue || val == int.MaxValue)
             {
                 result = Unknown;
                 return true;

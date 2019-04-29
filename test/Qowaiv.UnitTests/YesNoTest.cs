@@ -192,52 +192,6 @@ namespace Qowaiv.Fiancial.UnitTests
 
         #endregion
 
-
-        #region TryCreate tests
-
-        [Test]
-        public void TryCreate_Null_IsEmpty()
-        {
-            YesNo exp = YesNo.Empty;
-            Assert.IsTrue(YesNo.TryCreate(null, out YesNo act));
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void TryCreate_69_IsEmpty()
-        {
-            YesNo exp = YesNo.Empty;
-            Assert.IsFalse(YesNo.TryCreate(69, out YesNo act));
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void TryCreate_Null_AreEqual()
-        {
-            var exp = YesNo.Empty;
-            var act = YesNo.TryCreate(null);
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void TryCreate_Value_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = YesNo.TryCreate(1);
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void Create_SomeValue_ThrowsArgumentOutOfRangeException()
-        {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                YesNo.Create(69);
-            },
-            "val",
-            "Not a valid yes-no value");
-        }
-
-        #endregion
-
         #region (XML) (De)serialization tests
 
         [Test]
@@ -529,17 +483,17 @@ namespace Qowaiv.Fiancial.UnitTests
             Assert.AreEqual(exp, act);
         }
         [TestCase("en-GB", null, "Yes", "yes")]
-        [TestCase("nl-BE", null, "Yes", "ja")]
-        [TestCase("es-EQ", null, "Yes", "si")]
+        [TestCase("nl-BE", "f", "Yes", "ja")]
+        [TestCase("es-EQ", "F", "Yes", "Si")]
         [TestCase("en-GB", null, "No", "no")]
-        [TestCase("nl-BE", null, "no", "nee")]
-        [TestCase("es-EQ", null, "no", "no")]
-        [TestCase("en-GB", "c", "Yes", "Y")]
-        [TestCase("nl-BE", "c", "Yes", "J")]
-        [TestCase("es-EQ", "c", "Yes", "S")]
-        [TestCase("en-GB", "c", "No", "N")]
-        [TestCase("nl-BE", "c", "no", "N")]
-        [TestCase("es-EQ", "c", "no", "N")]
+        [TestCase("nl-BE", "f", "no", "nee")]
+        [TestCase("es-EQ", "F", "no", "No")]
+        [TestCase("en-GB", "C", "Yes", "Y")]
+        [TestCase("nl-BE", "C", "Yes", "J")]
+        [TestCase("es-EQ", "C", "Yes", "S")]
+        [TestCase("en-GB", "C", "No", "N")]
+        [TestCase("nl-BE", "c", "no", "n")]
+        [TestCase("es-EQ", "c", "no", "n")]
         public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
         {
             using (new CultureInfoScope(culture))
@@ -838,13 +792,6 @@ namespace Qowaiv.Fiancial.UnitTests
         public void IsInvalid_String(string pattern)
         {
             Assert.IsFalse(YesNo.IsValid(pattern));
-        }
-
-        [Test]
-        public void IsInvalid_SystemNullableByte()
-            {
-            System.Byte? value = null;
-            Assert.IsFalse(YesNo.IsValid(value));
         }
 
         [Test]

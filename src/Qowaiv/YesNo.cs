@@ -36,7 +36,7 @@ namespace Qowaiv
         public static readonly YesNo Yes = new YesNo { m_Value = 2 };
 
         /// <summary>Represents an unknown (but set) Yes-no.</summary>
-        public static readonly YesNo Unknown = new YesNo { m_Value = 255 };
+        public static readonly YesNo Unknown = new YesNo { m_Value = 3 };
 
         /// <summary>Contains yes and no.</summary>
         public static readonly IReadOnlyCollection<YesNo> YesAndNo = new ReadOnlyCollection<YesNo>(new List<YesNo> { Yes, No });
@@ -114,7 +114,7 @@ namespace Qowaiv
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
             Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToString(CultureInfo.InvariantCulture));
+            writer.WriteString(SerializationValues[m_Value]);
         }
 
         #endregion
@@ -149,19 +149,14 @@ namespace Qowaiv
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a Yes-no into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            if (IsNo()) {return "no"; }
-            if (IsYes()) { return "yes"; }
-            return IsEmpty() ? null : "?";
-        }
+        object IJsonSerializable.ToJson() => SerializationValues[m_Value];
 
         #endregion
 
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Yes-no for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -204,8 +199,9 @@ namespace Qowaiv
         /// The formats:
         /// 
         /// i: as integer (note, unknown is a question mark sign).
-        /// c: as single character.
-        /// f: as formatted/display name.
+        /// c/C: as single character (y/n/?) (Upper cased).
+        /// f/F: as formatted string (Title cased).
+        /// b/B: as boolean (true/false) (Title cased).
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
@@ -218,15 +214,19 @@ namespace Qowaiv
             if (string.IsNullOrEmpty(format)) { format = "f"; }
 
             // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
+            return StringFormatter.Apply(this, format, formatProvider as CultureInfo ?? CultureInfo.CurrentCulture, FormatTokens);
         }
 
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<YesNo, IFormatProvider, string>>()
         {
             { 'c', (svo, provider) => svo.GetResourceString("ch_", provider) },
+            { 'C', (svo, provider) => svo.GetResourceString("ch_", provider).ToUpper(provider) },
             { 'i', (svo, provider) => svo.GetResourceString("int_", provider) },
-            { 'f', (svo, provider) => svo.GetResourceString("", provider) },
+            { 'f', (svo, provider) => svo.GetResourceString("f_", provider) },
+            { 'F', (svo, provider) => svo.GetResourceString("f_", provider).ToTitleCase(provider) },
+            { 'b', (svo, provider) => svo.GetResourceString("b_", provider) },
+            { 'B', (svo, provider) => svo.GetResourceString("b_", provider).ToTitleCase(provider) },
         };
 
         #endregion
@@ -322,10 +322,19 @@ namespace Qowaiv
         /// <summary>Casts a <see cref="string"/> to a Yes-no.</summary>
         public static explicit operator YesNo(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-         /// <summary>Casts a Yes-no to a System.Int32.</summary>
-        public static explicit operator int(YesNo val) => val.m_Value;
-        /// <summary>Casts an System.Int32 to a Yes-no.</summary>
-        public static explicit operator YesNo(int val) => Create(val);
+        /// <summary>Casts a Yes-no to a nullable <see cref="bool"/>.</summary>
+        public static explicit operator bool?(YesNo val) => BooleanValues[val.m_Value];
+        /// <summary>Casts a nullable <see cref="bool"/> to a Yes-no.</summary>
+        public static explicit operator YesNo(bool? val)
+        {
+            if(val.HasValue)
+            {
+                return val.Value ? Yes : No;
+            }
+            return Empty;
+        }
+
+        private static readonly bool?[] BooleanValues = new bool?[] { null, false, true, null };
 
         #endregion
 
@@ -442,34 +451,16 @@ namespace Qowaiv
         /// <param name="val" >
         /// A decimal describing a Yes-no.
         /// </param >
-        /// <exception cref="System.FormatException" >
+        /// <exception cref="FormatException" >
         /// val is not a valid Yes-no.
         /// </exception >
-        public static YesNo Create(int? val)
+        private static YesNo Create(int? val)
         {
             if (TryCreate(val, out YesNo result))
             {
                 return result;
             }
             throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionYesNo);
-        }
-
-        /// <summary >Creates a Yes-no from a byte.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary >
-        /// <param name="val" >
-        /// A decimal describing a Yes-no.
-        /// </param >
-        /// <returns >
-        /// A Yes-no if the creation was successfully, otherwise Empty.
-        /// </returns >
-        public static YesNo TryCreate(int? val)
-        {
-            if(TryCreate(val, out YesNo result))
-            {
-                return result;
-            }
-            return Empty;
         }
 
         /// <summary >Creates a Yes-no from a byte.
@@ -484,7 +475,7 @@ namespace Qowaiv
         /// <returns >
         /// True if a Yes-no was created successfully, otherwise false.
         /// </returns >
-        public static bool TryCreate(int? val, out YesNo result)
+        private static bool TryCreate(int? val, out YesNo result)
         {
             result = Empty;
 
@@ -524,9 +515,6 @@ namespace Qowaiv
             return TryParse(val, formatProvider, out YesNo result);
         }
 
-        /// <summary>Returns true if the val represents a valid Yes-no, otherwise false.</summary>
-        public static bool IsValid(int? val) => val.HasValue && TryCreate(val, out YesNo result);
-
         #endregion
 
         #region Resources
@@ -555,7 +543,7 @@ namespace Qowaiv
         internal string GetResourceString(string prefix, CultureInfo culture)
         {
             if (IsEmpty()) { return string.Empty; }
-            return ResourceManager.GetString(prefix + YesNoLabels[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
+            return ResourceManager.GetString(prefix + LookupSuffix[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
         }
 
         #endregion
@@ -566,13 +554,8 @@ namespace Qowaiv
         /// <remarks>
         /// Used for both serialization and resource lookups.
         /// </remarks>
-        private static readonly Dictionary<byte, string> YesNoLabels = new Dictionary<byte, string>()
-        {
-            { 0, null },
-            { 1, "No" },
-            { 2, "Yes" },
-            { 255, "Unknown" },
-        };
+        private static readonly string[] LookupSuffix = { null, "No", "Yes", "Unknown" };
+        private static readonly string[] SerializationValues = { null, "no", "yes", "?" };
 
         /// <summary>Adds a culture to the parsings.</summary>
         /// <param name="culture">

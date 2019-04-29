@@ -569,9 +569,11 @@ namespace Qowaiv
                 {
                     var label = value.ToString("", culture).ToUpper(culture);
                     var @char = value.ToString("c", culture).ToUpper(culture);
+                    var @bool = value.ToString("b", culture).ToUpper(culture);
 
                     Parsings[culture][label] = value.m_Value;
                     Parsings[culture][@char] = value.m_Value;
+                    Parsings[culture][@bool] = value.m_Value;
                 }
             }
         }

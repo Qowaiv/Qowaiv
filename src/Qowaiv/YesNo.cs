@@ -24,6 +24,12 @@ using System.Xml.Serialization;
 namespace Qowaiv
 {
     /// <summary>Represents a Yes-no.</summary>
+    /// <remarks>
+    /// A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
+    /// has an "empty"(unset) and "unknown" value.It maps easily with a <see cref="bool"/>, but
+    /// Supports all kind of formatting(and both empty and unknown) that can not be
+    /// achieved when modeling a property as <see cref="bool"/> instead of an <see cref="YesNo"/>.
+    /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [TypeConverter(typeof(YesNoTypeConverter))]

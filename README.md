@@ -73,6 +73,12 @@ Represents a week based date.
 ### Year
 Represents a year in the range [1-9999].
 
+### Yes-no
+A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
+has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but
+Supports all kind of formatting (and both empty and unknown) that can not be
+achieved when modeling a property as `bool` instead of an `YesNo`.
+
 ## Qowaiv cryptographic types
 
 ### Seed

@@ -87,6 +87,30 @@ namespace Qowaiv.Fiancial.UnitTests
 
         #endregion
 
+        #region Boolean mappings
+
+        [TestCase(false, "")]
+        [TestCase(false, "N")]
+        [TestCase(true, "Y")]
+        [TestCase(false, "?")]
+        public void IsYes(bool expected, string str)
+        {
+            var yesNo = YesNo.Parse(str);
+            Assert.AreEqual(expected, yesNo.IsYes());
+        }
+
+        [TestCase(false, "")]
+        [TestCase(true, "N")]
+        [TestCase(false, "Y")]
+        [TestCase(false, "?")]
+        public void IsNo(bool expected, string str)
+        {
+            var yesNo = YesNo.Parse(str);
+            Assert.AreEqual(expected, yesNo.IsNo());
+        }
+
+        #endregion
+
         #region TryParse tests
 
         /// <summary>TryParse null should be valid.</summary>
@@ -283,7 +307,7 @@ namespace Qowaiv.Fiancial.UnitTests
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void XmlSerializeDeserialize_YesNoSerializeObject_AreEqual()
@@ -303,7 +327,7 @@ namespace Qowaiv.Fiancial.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_YesNoSerializeObject_AreEqual()
@@ -323,7 +347,7 @@ namespace Qowaiv.Fiancial.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -482,18 +506,24 @@ namespace Qowaiv.Fiancial.UnitTests
 
             Assert.AreEqual(exp, act);
         }
+
         [TestCase("en-GB", null, "Yes", "yes")]
         [TestCase("nl-BE", "f", "Yes", "ja")]
         [TestCase("es-EQ", "F", "Yes", "Si")]
         [TestCase("en-GB", null, "No", "no")]
-        [TestCase("nl-BE", "f", "no", "nee")]
-        [TestCase("es-EQ", "F", "no", "No")]
+        [TestCase("nl-BE", "f", "No", "nee")]
+        [TestCase("es-EQ", "F", "No", "No")]
         [TestCase("en-GB", "C", "Yes", "Y")]
         [TestCase("nl-BE", "C", "Yes", "J")]
         [TestCase("es-EQ", "C", "Yes", "S")]
         [TestCase("en-GB", "C", "No", "N")]
-        [TestCase("nl-BE", "c", "no", "n")]
-        [TestCase("es-EQ", "c", "no", "n")]
+        [TestCase("nl-BE", "c", "No", "n")]
+        [TestCase("es-EQ", "c", "No", "n")]
+        [TestCase("en-US", "B", "Yes", "True")]
+        [TestCase("en-US", "b", "No", "false")]
+        [TestCase("en-US", "i", "Yes", "1")]
+        [TestCase("en-US", "i", "No", "0")]
+        [TestCase("en-US", "i", "?", "?")]
         public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
         {
             using (new CultureInfoScope(culture))
@@ -705,9 +735,36 @@ namespace Qowaiv.Fiancial.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        #endregion
+        [Test]
+        public void Explicit_BoolToYesNo_Empty()
+        {
+            var yesNo = (YesNo)default(bool?);
+            Assert.AreEqual(YesNo.Empty, yesNo);
+        }
+        [Test]
+        public void Explicit_BoolToYesNo_No()
+        {
+            var yesNo = (YesNo)false;
+            Assert.AreEqual(YesNo.No, yesNo);
+        }
+        [Test]
+        public void Explicit_BoolToYesNo_Yes()
+        {
+            var yesNo = (YesNo)true;
+            Assert.AreEqual(YesNo.Yes, yesNo);
+        }
 
-        #region Properties
+        [TestCase(null, "")]
+        [TestCase(true, "Y")]
+        [TestCase(false, "N")]
+        [TestCase(null, "?")]
+        public void Explicit_YesNoToBool(bool? expected, string str)
+        {
+            var yesNo = YesNo.Parse(str);
+            var casted = (bool?)yesNo;
+            Assert.AreEqual(expected, casted);
+        }
+
         #endregion
 
         #region Type converter tests
@@ -784,6 +841,7 @@ namespace Qowaiv.Fiancial.UnitTests
         }
 
         #endregion
+
         #region IsValid tests
 
         [TestCase(null)]

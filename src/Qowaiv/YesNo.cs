@@ -1,4 +1,8 @@
-﻿#pragma warning disable S2328
+﻿#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
+#pragma warning disable S2328
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -10,7 +14,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.Serialization;
@@ -299,19 +302,6 @@ namespace Qowaiv
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
         public int CompareTo(YesNo other) => m_Value.CompareTo(other.m_Value);
-
-
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(YesNo l, YesNo r) => l.CompareTo(r) < 0;
-
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(YesNo l, YesNo r) => l.CompareTo(r) > 0;
-
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(YesNo l, YesNo r) => l.CompareTo(r) <= 0;
-
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(YesNo l, YesNo r) => l.CompareTo(r) >= 0;
 
         #endregion
        

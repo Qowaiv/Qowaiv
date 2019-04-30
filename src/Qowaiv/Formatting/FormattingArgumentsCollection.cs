@@ -131,7 +131,7 @@ namespace Qowaiv.Formatting
             var provider = this.FormatProvider;
 
             // This is different form string.Format, as the provider is never null.
-            ICustomFormatter cf = (ICustomFormatter)provider.GetFormat(typeof(ICustomFormatter));
+            ICustomFormatter cf = provider.GetFormat<ICustomFormatter>();
 
             while (true)
             {

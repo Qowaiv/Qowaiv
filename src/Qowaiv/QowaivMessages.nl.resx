@@ -183,4 +183,7 @@
   <data name="FormatExceptionMoney" xml:space="preserve">
     <value>Geen geldig bedrag</value>
   </data>
+  <data name="FormatExceptionYesNo" xml:space="preserve">
+    <value>geen geldige ja/nee waarde</value>
+  </data>
 </root>

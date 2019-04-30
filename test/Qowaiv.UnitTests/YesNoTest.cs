@@ -1,48 +1,112 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace Qowaiv.UnitTests
+namespace Qowaiv.Fiancial.UnitTests
 {
-    /// <summary>Tests the GUID SVO.</summary>
-    [TestFixture]
-    public class UuidTest
+    /// <summary>Tests the Yes-no SVO.</summary>
+    public class YesNoTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly Uuid TestStruct = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
-        public static readonly Guid TestGuid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        public static readonly YesNo TestStruct = YesNo.Yes;
 
-        #region GUID const tests
+        #region Yes-no const tests
 
-        /// <summary>QGuid.Empty should be equal to the default of GUID.</summary>
+        /// <summary>YesNo.Empty should be equal to the default of Yes-no.</summary>
         [Test]
         public void Empty_None_EqualsDefault()
         {
-            Assert.AreEqual(default(Uuid), Uuid.Empty);
+            Assert.AreEqual(default(YesNo), YesNo.Empty);
         }
 
         #endregion
 
-        #region GUID IsEmpty tests
+        #region Yes-no IsEmpty tests
 
-        /// <summary>QGuid.IsEmpty() should be true for the default of GUID.</summary>
+        /// <summary>YesNo.IsEmpty() should be true for the default of Yes-no.</summary>
         [Test]
         public void IsEmpty_Default_IsTrue()
         {
-            Assert.IsTrue(default(Uuid).IsEmpty());
+            Assert.IsTrue(default(YesNo).IsEmpty());
         }
-        /// <summary>QGuid.IsEmpty() should be false for the TestStruct.</summary>
+        /// <summary>YesNo.IsEmpty() should be false for YesNo.Unknown.</summary>
+        [Test]
+        public void IsEmpty_Unknown_IsFalse()
+        {
+            Assert.IsFalse(YesNo.Unknown.IsEmpty());
+        }
+        /// <summary>YesNo.IsEmpty() should be false for the TestStruct.</summary>
         [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
+        }
+
+        /// <summary>YesNo.IsUnknown() should be false for the default of Yes-no.</summary>
+        [Test]
+        public void IsUnknown_Default_IsFalse()
+        {
+            Assert.IsFalse(default(YesNo).IsUnknown());
+        }
+        /// <summary>YesNo.IsUnknown() should be true for YesNo.Unknown.</summary>
+        [Test]
+        public void IsUnknown_Unknown_IsTrue()
+        {
+            Assert.IsTrue(YesNo.Unknown.IsUnknown());
+        }
+        /// <summary>YesNo.IsUnknown() should be false for the TestStruct.</summary>
+        [Test]
+        public void IsUnknown_TestStruct_IsFalse()
+        {
+            Assert.IsFalse(TestStruct.IsUnknown());
+        }
+
+        /// <summary>YesNo.IsEmptyOrUnknown() should be true for the default of Yes-no.</summary>
+        [Test]
+        public void IsEmptyOrUnknown_Default_IsFalse()
+        {
+            Assert.IsTrue(default(YesNo).IsEmptyOrUnknown());
+        }
+        /// <summary>YesNo.IsEmptyOrUnknown() should be true for YesNo.Unknown.</summary>
+        [Test]
+        public void IsEmptyOrUnknown_Unknown_IsTrue()
+        {
+            Assert.IsTrue(YesNo.Unknown.IsEmptyOrUnknown());
+        }
+        /// <summary>YesNo.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
+        [Test]
+        public void IsEmptyOrUnknown_TestStruct_IsFalse()
+        {
+            Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
+        }
+
+        #endregion
+
+        #region Boolean mappings
+
+        [TestCase(false, "")]
+        [TestCase(false, "N")]
+        [TestCase(true, "Y")]
+        [TestCase(false, "?")]
+        public void IsYes(bool expected, string str)
+        {
+            var yesNo = YesNo.Parse(str);
+            Assert.AreEqual(expected, yesNo.IsYes());
+        }
+
+        [TestCase(false, "")]
+        [TestCase(true, "N")]
+        [TestCase(false, "Y")]
+        [TestCase(false, "?")]
+        public void IsNo(bool expected, string str)
+        {
+            var yesNo = YesNo.Parse(str);
+            Assert.AreEqual(expected, yesNo.IsNo());
         }
 
         #endregion
@@ -55,8 +119,8 @@ namespace Qowaiv.UnitTests
         {
             string str = null;
 
-            Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
-            Assert.AreEqual("", val.ToString(), "Value");
+            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
+            Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
@@ -65,18 +129,30 @@ namespace Qowaiv.UnitTests
         {
             string str = string.Empty;
 
-            Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
-            Assert.AreEqual("", val.ToString(), "Value");
+            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
+            Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        }
+
+        /// <summary>TryParse "?" should be valid and the result should be YesNo.Unknown.</summary>
+        [Test]
+        public void TyrParse_Questionmark_IsValid()
+        {
+            string str = "?";
+
+            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
+            Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            string str = "8a1a8c42-d2ff-e254-e26e-b6abcbf19420";
-
-            Assert.IsTrue(Uuid.TryParse(str, out Uuid val), "Valid");
-            Assert.AreEqual(str, val.ToString("d"), "Value");
+            using (new CultureInfoScope("en"))
+            {
+                string str = "yes";
+                Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
+                Assert.AreEqual(str, val.ToString(), "Value");
+            }
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
@@ -85,8 +161,19 @@ namespace Qowaiv.UnitTests
         {
             string str = "string";
 
-            Assert.IsFalse(Uuid.TryParse(str, out Uuid val), "Valid");
-            Assert.AreEqual("", val.ToString(), "Value");
+            Assert.IsFalse(YesNo.TryParse(str, out YesNo val), "Valid");
+            Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        }
+
+        [Test]
+        public void Parse_Unknown_AreEqual()
+        {
+            using (new CultureInfoScope("en-GB"))
+            {
+                var act = YesNo.Parse("?");
+                var exp = YesNo.Unknown;
+                Assert.AreEqual(exp, act);
+            }
         }
 
         [Test]
@@ -97,9 +184,9 @@ namespace Qowaiv.UnitTests
                 Assert.Catch<FormatException>
                 (() =>
                 {
-                    Uuid.Parse("InvalidInput");
+                    YesNo.Parse("InvalidInput");
                 },
-                "Not a valid GUID");
+                "Not a valid Yes-no");
             }
         }
 
@@ -109,7 +196,7 @@ namespace Qowaiv.UnitTests
             using (new CultureInfoScope("en-GB"))
             {
                 var exp = TestStruct;
-                var act = Uuid.TryParse(exp.ToString());
+                var act = YesNo.TryParse(exp.ToString());
 
                 Assert.AreEqual(exp, act);
             }
@@ -120,8 +207,8 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                var exp = default(Uuid);
-                var act = Uuid.TryParse("InvalidInput");
+                var exp = default(YesNo);
+                var act = YesNo.TryParse("InvalidInput");
 
                 Assert.AreEqual(exp, act);
             }
@@ -137,7 +224,8 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Uuid>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<YesNo>
+        (null, default(StreamingContext));
             },
             "info");
         }
@@ -148,8 +236,9 @@ namespace Qowaiv.UnitTests
             Assert.Catch<SerializationException>
             (() =>
             {
-                var info = new SerializationInfo(typeof(Uuid), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Uuid>(info, default(StreamingContext));
+                var info = new SerializationInfo(typeof(YesNo), new System.Runtime.Serialization.FormatterConverter());
+                SerializationTest.DeserializeUsingConstructor<YesNo>
+        (info, default(StreamingContext));
             });
         }
 
@@ -169,10 +258,10 @@ namespace Qowaiv.UnitTests
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(Uuid), new System.Runtime.Serialization.FormatterConverter());
+            var info = new SerializationInfo(typeof(YesNo), new System.Runtime.Serialization.FormatterConverter());
             obj.GetObjectData(info, default(StreamingContext));
 
-            Assert.AreEqual(TestGuid, info.GetValue("Value", typeof(Guid)));
+            Assert.AreEqual((Byte)2, info.GetByte("Value"));
         }
 
         [Test]
@@ -201,15 +290,15 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void SerializeDeserialize_GuidSerializeObject_AreEqual()
+        public void SerializeDeserialize_YesNoSerializeObject_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new YesNoSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new YesNoSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -221,15 +310,15 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
-        public void XmlSerializeDeserialize_GuidSerializeObject_AreEqual()
+        public void XmlSerializeDeserialize_YesNoSerializeObject_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new YesNoSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new YesNoSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -241,15 +330,15 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
-        public void DataContractSerializeDeserialize_GuidSerializeObject_AreEqual()
+        public void DataContractSerializeDeserialize_YesNoSerializeObject_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new YesNoSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new YesNoSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -262,18 +351,18 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void SerializeDeserialize_Empty_AreEqual()
+        public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = Uuid.Empty,
+                Obj = default(YesNo),
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = Uuid.Empty,
+                Obj = default(YesNo),
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -282,18 +371,18 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
-        public void XmlSerializeDeserialize_Empty_AreEqual()
+        public void XmlSerializeDeserialize_Default_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = Uuid.Empty,
+                Obj = default(YesNo),
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = Uuid.Empty,
+                Obj = default(YesNo),
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -316,8 +405,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_None_EmptyValue()
         {
-            var act = JsonTester.Read<Uuid>();
-            var exp = Uuid.Empty;
+            var act = JsonTester.Read<YesNo>();
+            var exp = YesNo.Empty;
 
             Assert.AreEqual(exp, act);
         }
@@ -325,47 +414,49 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
-            Assert.Catch<FormatException>(() =>
+            Assert.Catch<FormatException>
+            (() =>
             {
-                JsonTester.Read<Uuid>("InvalidStringValue");
+                JsonTester.Read<YesNo>
+        ("InvalidStringValue");
             },
-            "Not a valid GUID");
+            "Not a valid Yes-no");
         }
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Uuid>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<YesNo>
+            (TestStruct.ToString(CultureInfo.InvariantCulture));
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
+        public void FromJson_Int64Value_AreEqual()
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Uuid>(123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
+            var act = JsonTester.Read<YesNo>(0);
+            var exp = YesNo.No;
+
+            Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
+        public void FromJson_DoubleValue_AreEqual()
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Uuid>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
+            var act = JsonTester.Read<YesNo>(1.0);
+            var exp = TestStruct;
 
+            Assert.AreEqual(exp, act);
+        }
+   
         [Test]
         public void FromJson_DateTimeValue_AssertNotSupportedException()
         {
-            Assert.Catch<NotSupportedException>(() =>
+            Assert.Catch<NotSupportedException>
+            (() =>
             {
-                JsonTester.Read<Uuid>(new DateTime(1972, 02, 14));
+                JsonTester.Read<YesNo>(new DateTime(1972, 02, 14));
             },
             "JSON deserialization from a date is not supported.");
         }
@@ -373,7 +464,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToJson_DefaultValue_AreEqual()
         {
-            object act = JsonTester.Write(default(Uuid));
+            object act = JsonTester.Write(default(YesNo));
             object exp = null;
 
             Assert.AreEqual(exp, act);
@@ -389,13 +480,21 @@ namespace Qowaiv.UnitTests
 
         #endregion
 
-        #region IFormattable / ToString tests
+        #region IFormattable / Tostring tests
 
         [Test]
         public void ToString_Empty_StringEmpty()
         {
-            var act = Uuid.Empty.ToString();
+            var act = YesNo.Empty.ToString();
             var exp = "";
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void ToString_Unknown_QuestionMark()
+        {
+            var act = YesNo.Unknown.ToString("c");
+            var exp = "?";
             Assert.AreEqual(exp, act);
         }
 
@@ -403,94 +502,89 @@ namespace Qowaiv.UnitTests
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'Qowaiv_SVOLibrary_GUIA', format: 'Unit Test Format'";
+            var exp = "Unit Test Formatter, value: 'yes', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);
         }
-        [Test]
-        public void ToString_Formats_FormattedGuid()
+
+        [TestCase("en-GB", null, "Yes", "yes")]
+        [TestCase("nl-BE", "f", "Yes", "ja")]
+        [TestCase("es-EQ", "F", "Yes", "Si")]
+        [TestCase("en-GB", null, "No", "no")]
+        [TestCase("nl-BE", "f", "No", "nee")]
+        [TestCase("es-EQ", "F", "No", "No")]
+        [TestCase("en-GB", "C", "Yes", "Y")]
+        [TestCase("nl-BE", "C", "Yes", "J")]
+        [TestCase("es-EQ", "C", "Yes", "S")]
+        [TestCase("en-GB", "C", "No", "N")]
+        [TestCase("nl-BE", "c", "No", "n")]
+        [TestCase("es-EQ", "c", "No", "n")]
+        [TestCase("en-US", "B", "Yes", "True")]
+        [TestCase("en-US", "b", "No", "false")]
+        [TestCase("en-US", "i", "Yes", "1")]
+        [TestCase("en-US", "i", "No", "0")]
+        [TestCase("en-US", "i", "?", "?")]
+        public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
         {
-            var formats = new string[] { null, "", "s", "S", "b", "B", "d", "D", "p", "P", "x", "X" };
-
-            var expected = new string[]
+            using (new CultureInfoScope(culture))
             {
-                "Qowaiv_SVOLibrary_GUIA",
-                "Qowaiv_SVOLibrary_GUIA",
-                "Qowaiv_SVOLibrary_GUIA",
-                "Qowaiv_SVOLibrary_GUIA",
-                "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}",
-                "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}",
-                "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
-                "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420",
-                "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)",
-                "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)",
-                "{0x8a1a8c42,0xd2ff,0xe254,{0xe2,0x6e,0xb6,0xab,0xcb,0xf1,0x94,0x20}}",
-                "{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}"
-            };
-
-            for (var i = 0; i < expected.Length; i++)
-            {
-                var actual = TestStruct.ToString(formats[i]);
-                Assert.AreEqual(expected[i], actual);
+                var actual = YesNo.Parse(str).ToString(format);
+                Assert.AreEqual(expected, actual);
             }
-        }
-
-        [Test]
-        public void ToString_Invalid_FormattedGuid()
-        {
-            Assert.Catch<FormatException>(() =>
-            {
-                TestStruct.ToString("invalid");
-            }, "Input string was not in a correct format.");
         }
 
         [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
-            DebuggerDisplayAssert.HasAttribute(typeof(Uuid));
+            DebuggerDisplayAssert.HasAttribute(typeof(YesNo));
         }
 
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("", default(Uuid));
+            DebuggerDisplayAssert.HasResult("{empty} (YesNo)", default(YesNo));
+        }
+        [Test]
+        public void DebuggerDisplay_Unknown_String()
+        {
+            DebuggerDisplayAssert.HasResult("unknown (YesNo)", YesNo.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("Qowaiv_SVOLibrary_GUIA", TestStruct);
+            DebuggerDisplayAssert.HasResult("yes", TestStruct);
         }
 
         #endregion
 
         #region IEquatable tests
 
-        /// <summary>GetHash should not fail for QGuid.Empty.</summary>
+        /// <summary>GetHash should not fail for YesNo.Empty.</summary>
         [Test]
         public void GetHash_Empty_Hash()
         {
-            Assert.AreEqual(0, Uuid.Empty.GetHashCode());
+            Assert.AreEqual(0, YesNo.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
         [Test]
         public void GetHash_TestStruct_Hash()
         {
-            Assert.AreEqual(TestGuid.GetHashCode(), TestStruct.GetHashCode());
+            Assert.AreEqual(2, TestStruct.GetHashCode());
         }
 
         [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
-            Assert.IsTrue(Uuid.Empty.Equals(Uuid.Empty));
+            Assert.IsTrue(YesNo.Empty.Equals(YesNo.Empty));
         }
 
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            var l = Uuid.Parse("{95A20FBA-347D-44C9-BEBF-65F06B73F82C}");
-            var r = Uuid.Parse("95a20fba347d44c9bebf65f06b73f82c");
+            var l = YesNo.Parse("Yes", CultureInfo.InvariantCulture);
+            var r = YesNo.Parse("yes", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
         }
@@ -504,13 +598,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(TestStruct.Equals(Uuid.Empty));
+            Assert.IsFalse(TestStruct.Equals(YesNo.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(Uuid.Empty.Equals(TestStruct));
+            Assert.IsFalse(YesNo.Empty.Equals(TestStruct));
         }
 
         [Test]
@@ -551,34 +645,31 @@ namespace Qowaiv.UnitTests
 
         #region IComparable tests
 
-        /// <summary>Orders a list of GUIDs ascending.</summary>
+        /// <summary>Orders a list of Yes-nos ascending.</summary>
         [Test]
-        public void OrderBy_Uuid_AreEqual()
+        public void OrderBy_YesNo_AreEqual()
         {
-            var item0 = Uuid.Parse("3BE968F7-AAEA-422C-BA74-72A4D045FD74");
-            var item1 = Uuid.Parse("59ED7F38-8E6A-45A9-B3A2-6D32FDF4DD10");
-            var item2 = Uuid.Parse("5BD0EF29-C625-4B8D-A063-E474B28E8653");
-            var item3 = Uuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
+            var item0 = YesNo.No;
+            var item1 = YesNo.Yes;
+            var item2 = YesNo.Unknown;
 
-
-            var inp = new List<Uuid>() { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
-            var exp = new List<Uuid>() { Uuid.Empty, Uuid.Empty, item0, item1, item2, item3 };
+            var inp = new []{ YesNo.Empty, item2, item0, item1, YesNo.Empty };
+            var exp = new []{ YesNo.Empty, YesNo.Empty, item0, item1, item2 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
         }
 
-        /// <summary>Orders a list of GUIDs descending.</summary>
+        /// <summary>Orders a list of Yes-nos descending.</summary>
         [Test]
-        public void OrderByDescending_Uuid_AreEqual()
+        public void OrderByDescending_YesNo_AreEqual()
         {
-            var item0 = Uuid.Parse("3BE968F7-AAEA-422C-BA74-72A4D045FD74");
-            var item1 = Uuid.Parse("59ED7F38-8E6A-45A9-B3A2-6D32FDF4DD10");
-            var item2 = Uuid.Parse("5BD0EF29-C625-4B8D-A063-E474B28E8653");
-            var item3 = Uuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
+            var item0 = YesNo.No;
+            var item1 = YesNo.Yes;
+            var item2 = YesNo.Unknown;
 
-            var inp = new List<Uuid>() { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
-            var exp = new List<Uuid>() { item3, item2, item1, item0, Uuid.Empty, Uuid.Empty };
+            var inp = new []{ YesNo.Empty, item2, item0, item1, YesNo.Empty };
+            var exp = new []{ item2, item1, item0, YesNo.Empty, YesNo.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -602,12 +693,11 @@ namespace Qowaiv.UnitTests
         {
             ExceptionAssert.CatchArgumentException
             (() =>
-                {
-                    object other = null;
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be a GUID"
+            {
+                TestStruct.CompareTo(null);
+            },
+            "obj",
+            "Argument must be a Yes-no"
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -616,12 +706,11 @@ namespace Qowaiv.UnitTests
         {
             ExceptionAssert.CatchArgumentException
             (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be a GUID"
+            {
+                TestStruct.CompareTo(new object());
+            },
+            "obj",
+            "Argument must be a Yes-no"
             );
         }
 
@@ -630,15 +719,15 @@ namespace Qowaiv.UnitTests
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToQGuid_AreEqual()
+        public void Explicit_StringToYesNo_AreEqual()
         {
             var exp = TestStruct;
-            var act = (Uuid)TestStruct.ToString();
+            var act = (YesNo)TestStruct.ToString();
 
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void Explicit_GuidToString_AreEqual()
+        public void Explicit_YesNoToString_AreEqual()
         {
             var exp = TestStruct.ToString();
             var act = (string)TestStruct;
@@ -647,44 +736,33 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Implicit_GuidToQGuid_AreEqual()
+        public void Explicit_BoolToYesNo_Empty()
         {
-            Uuid exp = TestStruct;
-            Uuid act = TestGuid;
-
-            Assert.AreEqual(exp, act);
+            var yesNo = (YesNo)default(bool?);
+            Assert.AreEqual(YesNo.Empty, yesNo);
         }
         [Test]
-        public void Explicit_UuidToGuid_AreEqual()
+        public void Explicit_BoolToYesNo_No()
         {
-            Guid exp = TestGuid;
-            Guid act = TestStruct;
-
-            Assert.AreEqual(exp, act);
+            var yesNo = (YesNo)false;
+            Assert.AreEqual(YesNo.No, yesNo);
+        }
+        [Test]
+        public void Explicit_BoolToYesNo_Yes()
+        {
+            var yesNo = (YesNo)true;
+            Assert.AreEqual(YesNo.Yes, yesNo);
         }
 
-        #endregion
-
-        #region Properties
-        #endregion
-
-        #region Methods
-
-        [Test]
-        public void ToByteArray_TestStruct_EqualsTestGuidToByteArray()
+        [TestCase(null, "")]
+        [TestCase(true, "Y")]
+        [TestCase(false, "N")]
+        [TestCase(null, "?")]
+        public void Explicit_YesNoToBool(bool? expected, string str)
         {
-            var act = TestStruct.ToByteArray();
-            var exp = TestGuid.ToByteArray();
-
-            CollectionAssert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void NewGuid_None_NotEmpty()
-        {
-            Uuid actual = Uuid.NewUuid();
-            Uuid expected = Guid.Empty;
-            Assert.AreNotEqual(expected, actual);
+            var yesNo = YesNo.Parse(str);
+            var casted = (bool?)yesNo;
+            Assert.AreEqual(expected, casted);
         }
 
         #endregion
@@ -692,49 +770,49 @@ namespace Qowaiv.UnitTests
         #region Type converter tests
 
         [Test]
-        public void ConverterExists_Uuid_IsTrue()
+        public void ConverterExists_YesNo_IsTrue()
         {
-            TypeConverterAssert.ConverterExists(typeof(Uuid));
+            TypeConverterAssert.ConverterExists(typeof(YesNo));
         }
 
         [Test]
-        public void CanNotConvertFromInt32_Uuid_IsTrue()
+        public void CanNotConvertFromInt32_YesNo_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Uuid), typeof(Int32));
+            TypeConverterAssert.CanNotConvertFrom(typeof(YesNo), typeof(Int32));
         }
         [Test]
-        public void CanNotConvertToInt32_Uuid_IsTrue()
+        public void CanNotConvertToInt32_YesNo_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Uuid), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_Uuid_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Uuid));
+            TypeConverterAssert.CanNotConvertTo(typeof(YesNo), typeof(Int32));
         }
 
         [Test]
-        public void CanConvertToString_Uuid_IsTrue()
+        public void CanConvertFromString_YesNo_IsTrue()
         {
-            TypeConverterAssert.CanConvertToString(typeof(Uuid));
+            TypeConverterAssert.CanConvertFromString(typeof(YesNo));
         }
 
         [Test]
-        public void ConvertFrom_StringNull_UuidEmpty()
+        public void CanConvertToString_YesNo_IsTrue()
+        {
+            TypeConverterAssert.CanConvertToString(typeof(YesNo));
+        }
+
+        [Test]
+        public void ConvertFrom_StringNull_YesNoEmpty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(Uuid.Empty, (string)null);
+                TypeConverterAssert.ConvertFromEquals(YesNo.Empty, (string)null);
             }
         }
 
         [Test]
-        public void ConvertFrom_StringEmpty_UuidEmpty()
+        public void ConvertFrom_StringEmpty_YesNoEmpty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(Uuid.Empty, string.Empty);
+                TypeConverterAssert.ConvertFromEquals(YesNo.Empty, string.Empty);
             }
         }
 
@@ -748,9 +826,9 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Uuid_Successful()
+        public void ConvertFromInstanceDescriptor_YesNo_Successful()
         {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Uuid));
+            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(YesNo));
         }
 
         [Test]
@@ -762,74 +840,31 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [Test]
-        public void ConvertFromUnderlyingType_Guid_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, TestGuid);
-        }
-
-        [Test]
-        public void ConverToUnderlyingType_Guid_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(TestGuid, TestStruct);
-        }
-
         #endregion
 
         #region IsValid tests
 
-        [Test]
-        public void IsValid_Data_IsFalse()
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("Complex")]
+        public void IsInvalid_String(string pattern)
         {
-            Assert.IsFalse(Uuid.IsValid("Complex"), "Complex");
-            Assert.IsFalse(Uuid.IsValid((String)null), "(String)null");
-            Assert.IsFalse(Uuid.IsValid(string.Empty), "string.Empty");
+            Assert.IsFalse(YesNo.IsValid(pattern));
         }
+
         [Test]
         public void IsValid_Data_IsTrue()
         {
-            Assert.IsTrue(Uuid.IsValid("Qowaiv_SVOLibrary_GUIA"), "Qowaiv_SVOLibrary_GUIA");
-            Assert.IsTrue(Uuid.IsValid("8a1a8c42-d2ff-e254-e26e-b6abcbf19420"), "8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+            Assert.IsTrue(YesNo.IsValid("Unknown"));
         }
-        #endregion
-
-        #region Version
-
-        [Test]
-        public void GenerateWithMd5_HasVersion3()
-        {
-            var uuid = Uuid.GenerateWithMD5(Encoding.ASCII.GetBytes("Qowaiv"));
-            var actual = Uuid.Parse("lmZO_haEOTCwGsCcbIZFFg");
-
-            Assert.AreEqual(UuidVersion.MD5, uuid.Version);
-            Assert.AreEqual(uuid, actual);
-        }
-
-        [Test]
-        public void NewUuid_HasVersion4()
-        {
-            var uuid = Uuid.NewUuid();
-            Assert.AreEqual(UuidVersion.Random, uuid.Version);
-        }
-
-        [Test]
-        public void GenerateWithSHA1_HasVersion5()
-        {
-            var uuid = Uuid.GenerateWithSHA1(Encoding.ASCII.GetBytes("Qowaiv"));
-            var actual = Uuid.Parse("39h-Y1rR51ym_t78x9h0bA");
-
-            Assert.AreEqual(UuidVersion.SHA1, uuid.Version);
-            Assert.AreEqual(uuid, actual);
-        }
-
         #endregion
     }
 
     [Serializable]
-    public class QGuidSerializeObject
+    public class YesNoSerializeObject
     {
         public int Id { get; set; }
-        public Uuid Obj { get; set; }
+        public YesNo Obj { get; set; }
         public DateTime Date { get; set; }
     }
 }

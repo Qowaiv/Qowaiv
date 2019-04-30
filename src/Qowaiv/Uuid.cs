@@ -211,6 +211,8 @@ namespace Qowaiv
                 return formatted;
             }
 
+            if (IsEmpty()) { return string.Empty; }
+
             switch (format)
             {
                 case null:

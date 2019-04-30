@@ -367,6 +367,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid yes-no value.
+        /// </summary>
+        public static string FormatExceptionYesNo {
+            get {
+                return ResourceManager.GetString("FormatExceptionYesNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cast from {0} to {1} is not valid..
         /// </summary>
         public static string InvalidCastException_FromTo {

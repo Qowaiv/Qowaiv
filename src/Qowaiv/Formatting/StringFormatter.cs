@@ -129,7 +129,7 @@ namespace Qowaiv.Formatting
             formatted = null;
             if (formatProvider != null)
             {
-                var customFormatter = formatProvider.GetFormat(typeof(ICustomFormatter)) as ICustomFormatter;
+                var customFormatter = formatProvider.GetFormat<ICustomFormatter>();
                 if (customFormatter != null)
                 {
                     formatted = customFormatter.Format(format, obj, formatProvider);

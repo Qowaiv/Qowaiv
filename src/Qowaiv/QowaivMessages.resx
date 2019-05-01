@@ -258,7 +258,6 @@
   <data name="ArgumentException_IsGuidEmpty" xml:space="preserve">
     <value>Argument is an empty GUID.</value>
   </data>
-</root>
   <data name="FormatExceptionYesNo" xml:space="preserve">
     <value>Not a valid yes-no value</value>
   </data>

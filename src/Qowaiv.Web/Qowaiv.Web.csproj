@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj" />
     <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
   </ItemGroup>
 

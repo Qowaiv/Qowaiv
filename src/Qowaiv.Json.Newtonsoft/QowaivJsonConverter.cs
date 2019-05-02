@@ -12,13 +12,13 @@ namespace Qowaiv.Json
         /// <summary>Registers the Qowaiv JSON converter.</summary>
         public static void Register()
         {
-            if (JsonConvert.DefaultSettings == null)
+            if (JsonConvert.DefaultSettings is null)
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings() { Converters = { new QowaivJsonConverter() } };
+                JsonConvert.DefaultSettings = () => new JsonSerializerSettings { Converters = { new QowaivJsonConverter() } };
             }
             else
             {
-                var settings = Newtonsoft.Json.JsonConvert.DefaultSettings.Invoke();
+                var settings = JsonConvert.DefaultSettings.Invoke();
                 if (!settings.Converters.Any(c => c.GetType() == typeof(QowaivJsonConverter)))
                 {
                     settings.Converters.Add(new QowaivJsonConverter());
@@ -54,10 +54,11 @@ namespace Qowaiv.Json
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             Guard.NotNull(reader, nameof(reader));
-            Guard.NotNull(objectType, "objectType");
+            Guard.NotNull(objectType, nameof(objectType));
 
-            var isNullable = objectType.IsGenericType;
-            var result = (IJsonSerializable)Activator.CreateInstance(isNullable ? objectType.GetGenericArguments()[0] : objectType);
+            var isNullable = QowaivType.IsNullable(objectType);
+            var resultType = isNullable ? objectType.GetGenericArguments()[0] : objectType;
+            var result = (IJsonSerializable)Activator.CreateInstance(resultType);
 
             try
             {
@@ -89,9 +90,9 @@ namespace Qowaiv.Json
                 }
             }
             // We want to communicate exceptions as JSON serialization exceptions.
-            catch(Exception x)
+            catch (Exception x)
             {
-                if(x is JsonSerializationException || x is JsonReaderException)
+                if (x is JsonSerializationException || x is JsonReaderException)
                 {
                     throw;
                 }

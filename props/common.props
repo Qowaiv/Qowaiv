@@ -10,11 +10,11 @@
     <Owners>Qowaiv community</Owners>
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
-    <Copyright>Copyright © Qowaiv community 2013-2018</Copyright>
+    <Copyright>Copyright © Qowaiv community 2013-2019</Copyright>
 
-    <PackageIconUrl>https://raw.githubusercontent.com/Corniel/Qowaiv/master/design/qowain-logo_nuget_064x064.gif</PackageIconUrl>
-    <PackageProjectUrl>http://www.github.com/corniel/Qowaiv</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.github.com/corniel/Qowaiv/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
+    <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.github.com/Qowaiv/Qowaiv/blob/master/LICENSE.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
   </PropertyGroup>

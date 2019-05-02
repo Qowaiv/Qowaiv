@@ -119,18 +119,20 @@ namespace Qowaiv.Json
             {
                 writer.WriteNull();
             }
-
-            var json = Guard.IsTypeOf<IJsonSerializable>(value, nameof(value));
-
-            var jsonValue = json.ToJson();
-
-            if (jsonValue is null)
-            {
-                writer.WriteNull();
-            }
             else
             {
-                writer.WriteValue(jsonValue);
+                var json = Guard.IsTypeOf<IJsonSerializable>(value, nameof(value));
+
+                var jsonValue = json.ToJson();
+
+                if (jsonValue is null)
+                {
+                    writer.WriteNull();
+                }
+                else
+                {
+                    writer.WriteValue(jsonValue);
+                }
             }
         }
     }

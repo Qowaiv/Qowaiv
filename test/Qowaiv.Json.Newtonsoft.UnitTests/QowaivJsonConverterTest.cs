@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
+using System.IO;
 
 namespace Qowaiv.Json.UnitTests
 {
@@ -52,6 +53,20 @@ namespace Qowaiv.Json.UnitTests
             var converter = new QowaivJsonConverter();
 
             Assert.IsFalse(converter.CanConvert(typeof(bool?)));
+        }
+
+        [Test]
+        public void Write_null_ShouldNotWriteAnything()
+        {
+            var conveter = new QowaivJsonConverter();
+
+            using (var stream = new MemoryStream())
+            {
+                var writer = new JsonTextWriter(new StreamWriter(stream));
+                conveter.WriteJson(writer, null, new JsonSerializer());
+
+                Assert.IsEmpty(stream.ToArray());
+            }
         }
 
         [Test]

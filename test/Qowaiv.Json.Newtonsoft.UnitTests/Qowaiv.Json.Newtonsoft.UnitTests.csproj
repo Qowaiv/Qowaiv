@@ -3,7 +3,7 @@
   <Import Project="..\..\props\test.props" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Qowaiv.Json.UnitTests</RootNamespace>
   </PropertyGroup>
 

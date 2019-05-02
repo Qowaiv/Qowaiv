@@ -39,6 +39,7 @@ namespace Qowaiv
         /// <remarks>
         /// http://www.codeproject.com/KB/recipes/EmailRegexValidator.aspx
         /// </remarks>
+        [Obsolete("Usage is discouraged. A regular expression for parsing email address is slow.")]
         public static readonly Regex Pattern = new Regex(
             @"
                 ^
@@ -425,8 +426,6 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "Email addresses are displayed in lowercase by default.")]
         public static bool TryParse(string s, IFormatProvider formatProvider, out EmailAddress result)
         {
             result = Empty;
@@ -434,18 +433,19 @@ namespace Qowaiv
             {
                 return true;
             }
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            if (Qowaiv.Unknown.IsUnknown(s, culture))
+            if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
             {
                 result = Unknown;
                 return true;
             }
-            if (IsValid(s, formatProvider))
+            string email = EmailParser.Parse(s);
+
+            if(email is null)
             {
-                result = new EmailAddress { m_Value = s.ToLowerInvariant() };
-                return true;
+                return false;
             }
-            return false;
+            result = new EmailAddress { m_Value = email };
+            return true;
         }
 
         #endregion
@@ -456,13 +456,11 @@ namespace Qowaiv
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid email address, otherwise false.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "formatProvider",
-            Justification = "Satisfies the static Qowaiv SVO contract.")]
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return !string.IsNullOrWhiteSpace(val)
-                && val.Length <= MaxLength
-                && Pattern.IsMatch(val);
+            return !string.IsNullOrWhiteSpace(val) 
+                && !Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo)
+                && TryParse(val, formatProvider, out EmailAddress email);
         }
 
         #endregion

@@ -142,6 +142,20 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Parse_WithHeader_WithoutHeader()
+        {
+            var email = EmailAddress.Parse("Joe Smith <email@domain.com>");
+            Assert.AreEqual("email@domain.com", email.ToString());
+        }
+        [Test]
+        public void Parse_WithBrackets_WithoutBrackets()
+        {
+            var email = EmailAddress.Parse("home@[127.0.0.1]");
+            Assert.AreEqual("home@127.0.0.1", email.ToString());
+        }
+
+
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -980,6 +994,7 @@ namespace Qowaiv.UnitTests
         [TestCase("^local^^name^with^@xor.com")]
         [TestCase("=local==name=with=@equality.com")]
         [TestCase("+local++name+with+@equality.com")]
+        [TestCase("Joe Smith <email@domain.com>")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void ValidEmailAddresses(string email)
         {

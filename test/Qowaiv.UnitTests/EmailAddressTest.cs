@@ -918,7 +918,6 @@ namespace Qowaiv.UnitTests
         [TestCase(".email@domain.com")]
         [TestCase("email.@domain.com")]
         [TestCase("email..email@domain.com")]
-        [TestCase("email@domain.com (joe Smith)")]
         [TestCase("email@-domain.com")]
         [TestCase("email@domain-.com")]
         [TestCase("email@domain.com-")]
@@ -1014,6 +1013,7 @@ namespace Qowaiv.UnitTests
         [TestCase("=local==name=with=@equality.com")]
         [TestCase("+local++name+with+@equality.com")]
         [TestCase("Joe Smith <email@domain.com>")]
+        [TestCase("email@domain.com (joe Smith)")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void ValidEmailAddresses(string email)
         {

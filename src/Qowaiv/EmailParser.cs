@@ -63,8 +63,8 @@ namespace Qowaiv
                 // @
                 if (ch == At)
                 {
-                    // No @ yet, and a not empty local part.
-                    if (noAt && index_l != 0)
+                    // No @ yet, and a not empty local part, and not predicated by a dot.
+                    if (noAt && index_l != 0 && prev != Dot)
                     {
                         noAt = false;
                         local[index_l++] = At;
@@ -162,7 +162,10 @@ namespace Qowaiv
             return extension.Length > 1 
                 && extension.All(ch => ch >= 'a' && ch <= 'z');
         }
-        private static bool IsValidIpAddress(string domain) => IPAddress.TryParse(domain, out IPAddress ip);
+        private static bool IsValidIpAddress(string domain)
+        {
+            return IPAddress.TryParse(domain, out IPAddress ip);
+        }
 
         /// <summary>Removes email address comments from the string.</summary>
         /// <remarks>

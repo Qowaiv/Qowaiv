@@ -438,7 +438,7 @@ namespace Qowaiv
                 result = Unknown;
                 return true;
             }
-            string email = EmailParser.Parse(s);
+            string email = EmailParser.Parse(s.Trim());
 
             if(email is null)
             {

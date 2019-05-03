@@ -50,7 +50,7 @@ namespace Qowaiv
             var local = new char[EmailAddress.MaxLength];
             var domain = new char[EmailAddress.MaxLength];
 
-            var at = NotFound;
+            var withAt = false;
             var index_l = 0;
             var index_d = 0;
             var prev = default(char);
@@ -76,10 +76,10 @@ namespace Qowaiv
                 if (ch == At)
                 {
                     // No @ yet, and a not empty local part.
-                    if (at == NotFound && index_l != 0)
+                    if (!withAt && index_l != 0)
                     {
+                        withAt = true;
                         local[index_l++] = At;
-                        at = index_l;
                     }
                     else
                     {
@@ -87,7 +87,7 @@ namespace Qowaiv
                     }
                 }
                 // Local part.
-                else if (at == NotFound)
+                else if (withAt)
                 {
                     // Don't start with a dot.
                     if (!IsValidLocal(ch) || ch == Dot && index_l == 0)
@@ -132,7 +132,7 @@ namespace Qowaiv
                 prev = ch;
             }
 
-            if (at == NotFound)
+            if (!withAt)
             {
                 return null;
             }

@@ -1,7 +1,5 @@
-﻿using System;
+﻿using System.Linq;
 using System.Net;
-using System.Linq;
-
 
 namespace Qowaiv
 {
@@ -15,8 +13,6 @@ namespace Qowaiv
         private const int NotFound = -1;
         private const char At = '@';
         private const char Dot = '.';
-        private const char Lt = '<';
-        private const char Gt = '>';
         private const char Dash = '-';
 
         /// <summary>Parses an email address string.</summary>
@@ -24,38 +20,30 @@ namespace Qowaiv
         /// null if the string was not a valid email address.
         /// a stripped lowercased email address if valid.
         /// </returns>
-        internal static string Parse(string str)
+        internal static string Parse(string s)
         {
-            var start = 0;
+            var str = s.Trim();
+            str = RemoveComment(str);
+            str = RemoveDisplayName(str);
 
-            // Something of the form header <local@domain>
-            var withHeader = str[str.Length - 1] == Gt;
-
-            // Search for the < to start with.
-            if (withHeader)
+            if (str is null)
             {
-                // No < to start parsing for.
-                var lt = str.IndexOf(Lt);
-                if (lt == NotFound)
-                {
-                    return null;
-                }
-                start = lt + 1;
+                return null;
             }
-
-            // Skip the > if with header.
-            var end = str.Length - (withHeader ? 1 : 0);
 
             // buffers.
             var local = new char[EmailAddress.MaxLength];
             var domain = new char[EmailAddress.MaxLength];
 
-            var withAt = false;
+            var noAt = true;
             var index_l = 0;
             var index_d = 0;
             var prev = default(char);
             var hasBrackets = false;
             var dot = NotFound;
+
+            var start = 0;
+            var end = str.Length;
 
             for (var pos = start; pos < end; pos++)
             {
@@ -76,9 +64,9 @@ namespace Qowaiv
                 if (ch == At)
                 {
                     // No @ yet, and a not empty local part.
-                    if (!withAt && index_l != 0)
+                    if (noAt && index_l != 0)
                     {
-                        withAt = true;
+                        noAt = false;
                         local[index_l++] = At;
                     }
                     else
@@ -87,7 +75,7 @@ namespace Qowaiv
                     }
                 }
                 // Local part.
-                else if (withAt)
+                else if (noAt)
                 {
                     // Don't start with a dot.
                     if (!IsValidLocal(ch) || ch == Dot && index_l == 0)
@@ -132,7 +120,7 @@ namespace Qowaiv
                 prev = ch;
             }
 
-            if (!withAt)
+            if (noAt)
             {
                 return null;
             }
@@ -175,5 +163,72 @@ namespace Qowaiv
                 && extension.All(ch => ch >= 'a' && ch <= 'z');
         }
         private static bool IsValidIpAddress(string domain) => IPAddress.TryParse(domain, out IPAddress ip);
+
+        /// <summary>Removes email address comments from the string.</summary>
+        /// <remarks>
+        /// Comments are allowed in the domain as well as in the local-part:
+        /// john.smith@(comment)example.com and 
+        /// john.smith@example.com(comment) are equivalent to 
+        /// john.smith@example.com.
+        /// </remarks>
+        private static string RemoveComment(string s)
+        {
+            var level = 0;
+            var buffer = new char[s.Length];
+            var pos = 0;
+
+            foreach (var ch in s)
+            {
+                if (ch == '(')
+                {
+                    if (level == 0)
+                    {
+                        level++;
+                    }
+                    // not nested.
+                    else { return null; }
+                }
+                else if (ch == ')')
+                {
+                    if (level == 1)
+                    {
+                        level--;
+                    }
+                    else { return null; }
+                }
+                else if (level == 0)
+                {
+                    buffer[pos++] = ch;
+                }
+            }
+
+            if(level != 0)
+            {
+                return null;
+            }
+            return new string(buffer, 0, pos).Trim();
+        }
+
+        /// <summary>Removes the email address display name from the string.</summary>
+        /// <remarks>
+        /// To indicate the message recipient, an email address also may have an
+        /// associated display name for the recipient, which is followed by the
+        /// address specification surrounded by angled brackets, for example:
+        /// John Smith &lt;john.smith@example.org&gt;.
+        /// </remarks>
+        private static string RemoveDisplayName(string s)
+        {
+            if (s is null) { return null; }
+            if(s[s.Length -1] == '>')
+            {
+                var lt = s.IndexOf('<');
+                if(lt != NotFound)
+                {
+                    return s.Substring(lt + 1, s.Length - lt - 2);
+                }
+                return null;
+            }
+            return s;
+        }
     }
 }

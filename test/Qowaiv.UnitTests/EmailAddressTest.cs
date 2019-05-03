@@ -142,11 +142,26 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Parse_WithHeader_WithoutHeader()
+        public void Parse_WithDisplayName_WithoutDisplayName()
         {
             var email = EmailAddress.Parse("Joe Smith <email@domain.com>");
             Assert.AreEqual("email@domain.com", email.ToString());
         }
+
+        [Test]
+        public void Parse_WithCommentAtTheEnd_WithoutComment()
+        {
+            var email = EmailAddress.Parse("email@domain.com (Joe Smith)");
+            Assert.AreEqual("email@domain.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_WithComment_WithoutComment()
+        {
+            var email = EmailAddress.Parse("email@(stupid but true)domain.com");
+            Assert.AreEqual("email@domain.com", email.ToString());
+        }
+
         [Test]
         public void Parse_WithBrackets_WithoutBrackets()
         {
@@ -931,6 +946,10 @@ namespace Qowaiv.UnitTests
         [TestCase("email@caret^xor.com")]
         [TestCase("email@=qowaiv.com")]
         [TestCase("email@plus+.coM")]
+        [TestCase("email( (nested) )@plus.com")]
+        [TestCase("email)mirror(@plus.com")]
+        [TestCase("email@plus.com (not closed comment")]
+        [TestCase("email(with @ in comment)plus.com")]
         [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void InvalidEmailAddresses(string email)
         {

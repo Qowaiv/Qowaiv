@@ -25,10 +25,11 @@ namespace Qowaiv.Text
         public char First() => buffer[0];
         public char Last() => buffer[Length - 1];
 
-        public void Add(CharBuffer other)
+        public CharBuffer Add(CharBuffer other)
         {
             Array.Copy(other.buffer, 0, buffer, Length, other.Length);
             Length += other.Length;
+            return this;
         }
 
         public CharBuffer Add(string str)

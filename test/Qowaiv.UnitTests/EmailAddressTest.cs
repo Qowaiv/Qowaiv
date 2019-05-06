@@ -163,12 +163,18 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Parse_WithBrackets_WithoutBrackets()
+        public void Parse_WithoutBrackets_WithBrackets()
         {
-            var email = EmailAddress.Parse("home@[127.0.0.1]");
-            Assert.AreEqual("home@127.0.0.1", email.ToString());
+            var email = EmailAddress.Parse("home@127.0.0.1");
+            Assert.AreEqual("home@[127.0.0.1]", email.ToString());
         }
 
+        [Test]
+        public void Parse_WithBrackets_WithBrackets()
+        {
+            var email = EmailAddress.Parse("home@[127.0.0.1]");
+            Assert.AreEqual("home@[127.0.0.1]", email.ToString());
+        }
 
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
@@ -942,6 +948,7 @@ namespace Qowaiv.UnitTests
         [TestCase("email@question?mark.com")]
         [TestCase("email@obelix*asterisk.com")]
         [TestCase("email@grave`accent.com")]
+        [TestCase("email@colon:colon.com")]
         [TestCase("email@caret^xor.com")]
         [TestCase("email@=qowaiv.com")]
         [TestCase("email@plus+.coM")]
@@ -964,6 +971,8 @@ namespace Qowaiv.UnitTests
         [TestCase("ab@1.0.0.10")]
         [TestCase("ab@120.25.254.120")]
         [TestCase("ab@[120.254.254.120]")]
+        [TestCase("local@2001:0db8:85a3:0000:0000:8a2e:0370:7334")]
+        [TestCase("local@[2001:0db8:85a3:0000:0000:8a2e:0370:7334]")]
         [TestCase("2@bde.cc")]
         [TestCase("-@bde.cc")]
         [TestCase("a2@bde.cc")]

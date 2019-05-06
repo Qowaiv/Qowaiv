@@ -1,5 +1,4 @@
 ﻿using Qowaiv.Text;
-using System.Linq;
 using System.Net;
 
 namespace Qowaiv
@@ -15,6 +14,7 @@ namespace Qowaiv
         private const char At = '@';
         private const char Dot = '.';
         private const char Dash = '-';
+        private const char Colon = ':';
 
         /// <summary>Parses an email address string.</summary>
         /// <returns>
@@ -96,7 +96,7 @@ namespace Qowaiv
                     }
 
                     // Don't start with a dash or a dot.
-                    if (!IsValid(ch) || (domain.Empty() && (ch == Dash || ch == Dot)))
+                    if (!IsValidDomain(ch) || (domain.Empty() && (ch == Dash || ch == Dot)))
                     {
                         return null;
                     }
@@ -125,14 +125,16 @@ namespace Qowaiv
                 return null;
             }
 
-            var localPart = local.ToString();
-            var domainPart = domain.ToString();
-
             // a valid extension is only applicable without brackets.
-            // in both cases a valid IP-address might save the day.
-            if ((!hasBrackets && HasValidExtension(domainPart, dot)) || IsValidIpAddress(domainPart))
+            if (!hasBrackets && domain.IsValidDomain(dot))
             {
-                return localPart + domainPart;
+                return local.Add(domain);
+            }
+
+            // Validate The IP address.
+            if (IPAddress.TryParse(domain, out IPAddress ip))
+            {
+                return local.Add('[').Add(ip.ToString()).Add(']');
             }
             return null;
         }
@@ -143,6 +145,9 @@ namespace Qowaiv
             return IsValid(ch)
                 || "{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
         }
+
+        private static bool IsValidDomain(char ch) => IsValid(ch) || ch == Colon;
+
         /// <summary>Valid email address characters are letters, digits and ., _ and -.</summary>
         private static bool IsValid(char ch)
         {
@@ -155,16 +160,27 @@ namespace Qowaiv
             return local.Length + (domain.Length < 2 ? 2 : domain.Length) >= EmailAddress.MaxLength;
         }
 
-        private static bool HasValidExtension(string domain, int dot)
+        public static bool IsValidDomain(this CharBuffer buffer, int dot)
         {
-            var extension = domain.Substring(dot + 1);
+            if(buffer.IndexOf(Colon) != NotFound)
+            {
+                return false;
+            }
 
-            return extension.Length > 1 
-                && extension.All(ch => ch >= 'a' && ch <= 'z');
-        }
-        private static bool IsValidIpAddress(string domain)
-        {
-            return IPAddress.TryParse(domain, out IPAddress ip);
+            var start = dot + 1;
+            if(buffer.Length - start < 2)
+            {
+                return false;
+            }
+            for (var i = start; i < buffer.Length; i++)
+            {
+                var ch = buffer[i];
+                if (ch < 'a' || ch > 'z')
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         /// <summary>Removes email address comments from the string.</summary>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Qowaiv.Text;
+using System.Linq;
 using System.Net;
 
 namespace Qowaiv
@@ -22,22 +23,21 @@ namespace Qowaiv
         /// </returns>
         internal static string Parse(string s)
         {
-            var str = s.Trim();
-            str = RemoveComment(str);
-            str = RemoveDisplayName(str);
+            var str = new CharBuffer(s)
+                .Trim()
+                .RemoveComment()
+                .RemoveDisplayName();
 
-            if (str is null)
+            if(str.Empty())
             {
                 return null;
             }
 
             // buffers.
-            var local = new char[EmailAddress.MaxLength];
-            var domain = new char[EmailAddress.MaxLength];
+            var local = new CharBuffer(EmailAddress.MaxLength);
+            var domain = new CharBuffer(EmailAddress.MaxLength);
 
             var noAt = true;
-            var index_l = 0;
-            var index_d = 0;
             var prev = default(char);
             var hasBrackets = false;
             var dot = NotFound;
@@ -49,7 +49,7 @@ namespace Qowaiv
             {
                 var ch = str[pos];
 
-                if (TooLong(index_l, index_d))
+                if (TooLong(local, domain))
                 {
                     return null;
                 }
@@ -64,10 +64,10 @@ namespace Qowaiv
                 if (ch == At)
                 {
                     // No @ yet, and a not empty local part, and not predicated by a dot.
-                    if (noAt && index_l != 0 && prev != Dot)
+                    if (noAt && local.NotEmpty() && prev != Dot)
                     {
                         noAt = false;
-                        local[index_l++] = At;
+                        local.Add(At);
                     }
                     else
                     {
@@ -78,17 +78,17 @@ namespace Qowaiv
                 else if (noAt)
                 {
                     // Don't start with a dot.
-                    if (!IsValidLocal(ch) || ch == Dot && index_l == 0)
+                    if (!IsValidLocal(ch) || ch == Dot && local.Empty())
                     {
                         return null;
                     }
-                    local[index_l++] = char.ToLowerInvariant(ch);
+                    local.AddLower(ch);
                 }
                 // Domain part.
                 else
                 {
                     // Potentially an email address of the type local@[ip-address].
-                    if (index_d == 0 && ch == '[' && str[end - 1] == ']')
+                    if (domain.Empty() && ch == '[' && str[end - 1] == ']')
                     {
                         hasBrackets = true;
                         end--;
@@ -96,7 +96,7 @@ namespace Qowaiv
                     }
 
                     // Don't start with a dash or a dot.
-                    if (!IsValid(ch) || (index_d == 0 && (ch == Dash || ch == Dot)))
+                    if (!IsValid(ch) || (domain.Empty() && (ch == Dash || ch == Dot)))
                     {
                         return null;
                     }
@@ -108,14 +108,14 @@ namespace Qowaiv
                         {
                             return null;
                         }
-                        dot = index_d;
+                        dot = domain.Length;
                     }
                     // No .-
                     else if(ch == Dash && prev == Dot)
                     {
                         return null;
                     }
-                    domain[index_d++] = char.ToLowerInvariant(ch);
+                    domain.AddLower(ch);
                 }
                 prev = ch;
             }
@@ -125,8 +125,8 @@ namespace Qowaiv
                 return null;
             }
 
-            var localPart = new string(local, 0, index_l);
-            var domainPart = new string(domain, 0, index_d);
+            var localPart = local.ToString();
+            var domainPart = domain.ToString();
 
             // a valid extension is only applicable without brackets.
             // in both cases a valid IP-address might save the day.
@@ -137,7 +137,7 @@ namespace Qowaiv
             return null;
         }
 
-        /// <summary>Valid email address characters for the local part also include: {}|/%$&#~!?*`'^=+.</summary>
+        /// <summary>Valid email address characters for the local part also include: {}|/%$&amp;#~!?*`'^=+.</summary>
         private static bool IsValidLocal(char ch)
         {
             return IsValid(ch)
@@ -150,9 +150,9 @@ namespace Qowaiv
                 || char.IsLetterOrDigit(ch);
         }
 
-        private static bool TooLong(int local, int domain)
+        private static bool TooLong(CharBuffer local, CharBuffer domain)
         {
-            return local + (domain < 2 ? 2 : domain) >= EmailAddress.MaxLength;
+            return local.Length + (domain.Length < 2 ? 2 : domain.Length) >= EmailAddress.MaxLength;
         }
 
         private static bool HasValidExtension(string domain, int dot)
@@ -174,42 +174,43 @@ namespace Qowaiv
         /// john.smith@example.com(comment) are equivalent to 
         /// john.smith@example.com.
         /// </remarks>
-        private static string RemoveComment(string s)
+        private static CharBuffer RemoveComment(this CharBuffer buffer)
         {
             var level = 0;
-            var buffer = new char[s.Length];
-            var pos = 0;
+            var length = 0;
 
-            foreach (var ch in s)
+            for(var pos = buffer.Length -1; pos > -1; pos--)
             {
-                if (ch == '(')
+                var ch = buffer[pos];
+                if (ch == ')')
                 {
                     if (level == 0)
                     {
                         level++;
                     }
                     // not nested.
-                    else { return null; }
+                    else { buffer.Clear(); }
                 }
-                else if (ch == ')')
+                else if (ch == '(')
                 {
                     if (level == 1)
                     {
                         level--;
+                        buffer.RemoveRange(pos, length + 2);
+                        length = 0;
                     }
-                    else { return null; }
+                    else { buffer.Clear(); }
                 }
-                else if (level == 0)
+                else if(level == 1)
                 {
-                    buffer[pos++] = ch;
+                    length++;
                 }
             }
-
             if(level != 0)
             {
-                return null;
+                return buffer.Clear();
             }
-            return new string(buffer, 0, pos).Trim();
+            return buffer.Trim();
         }
 
         /// <summary>Removes the email address display name from the string.</summary>
@@ -219,19 +220,25 @@ namespace Qowaiv
         /// address specification surrounded by angled brackets, for example:
         /// John Smith &lt;john.smith@example.org&gt;.
         /// </remarks>
-        private static string RemoveDisplayName(string s)
+        private static CharBuffer RemoveDisplayName(this CharBuffer buffer)
         {
-            if (s is null) { return null; }
-            if(s[s.Length -1] == '>')
+            if(buffer.Empty())
             {
-                var lt = s.IndexOf('<');
-                if(lt != NotFound)
-                {
-                    return s.Substring(lt + 1, s.Length - lt - 2);
-                }
-                return null;
+                return buffer;
             }
-            return s;
+            if(buffer.Last() == '>')
+            {
+                var lt = buffer.IndexOf('<');
+
+                if (lt == CharBuffer.NotFound)
+                {
+                    return buffer.Clear();
+                }
+                return buffer
+                    .RemoveFromEnd(1)
+                    .RemoveRange(0, lt + 1);
+            }
+            return buffer;
         }
     }
 }

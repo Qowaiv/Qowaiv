@@ -47,6 +47,10 @@ namespace Qowaiv.Text
         }
         public CharBuffer AddLower(char ch) => Add(char.ToLowerInvariant(ch));
 
+        /// <summary>Gets the index of the <see cref="char"/> in the buffer.</summary>
+        /// <returns>
+        /// -1 if not found, otherwise the index of the <see cref="char"/>.
+        /// </returns>
         public int IndexOf(char ch)
         {
             for (var i = 0; i < Length; i++)
@@ -59,12 +63,25 @@ namespace Qowaiv.Text
             return NotFound;
         }
 
+        /// <summary>Counts the occurrences of the <see cref="char"/> in the buffer.</summary>
+        public int Count(char ch)
+        {
+            var count = 0;
+            for (var i = 0; i < Length; i++)
+            {
+                if (buffer[i] == ch)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
         public CharBuffer Trim()
         {
             return TrimRight()
                 .TrimLeft();
         }
-
         public CharBuffer TrimLeft()
         {
             for (var trim = 0; trim < Length; trim++)

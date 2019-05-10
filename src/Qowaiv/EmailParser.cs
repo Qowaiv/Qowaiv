@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Text;
 using System.Net;
+using System.Net.Sockets;
 
 namespace Qowaiv
 {
@@ -134,6 +135,11 @@ namespace Qowaiv
             // Validate The IP address.
             if (IPAddress.TryParse(domain, out IPAddress ip))
             {
+                // as IPAddress parse is too forgiving.
+                if (ip.AddressFamily == AddressFamily.InterNetwork && domain.Count(Dot) != 3)
+                {
+                    return null;
+                }
                 return local.Add('[').Add(ip.ToString()).Add(']');
             }
             return null;

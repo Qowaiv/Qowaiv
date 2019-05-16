@@ -49,7 +49,7 @@ namespace Qowaiv.ComponentModel
         protected InvalidModelException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            ModelType = info.GetValue(nameof(ModelType), typeof(Type)) as Type;
+            ModelType = Type.GetType(info.GetString(nameof(ModelType)));
             var errors = info.GetValue(nameof(Errors), typeof(ValidationMessage[])) as ValidationMessage[];
             Errors = new ReadOnlyCollection<ValidationMessage>(errors ?? new ValidationMessage[0]);
         }
@@ -59,7 +59,7 @@ namespace Qowaiv.ComponentModel
         {
             base.GetObjectData(info, context);
             info.AddValue(nameof(Errors), Errors.ToArray());
-            info.AddValue(nameof(ModelType), ModelType);
+            info.AddValue(nameof(ModelType), ModelType.FullName);
         }
 
         /// <inheritdoc />

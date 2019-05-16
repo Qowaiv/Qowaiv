@@ -75,8 +75,8 @@ namespace Qowaiv.DomainModel.EventSourcing
         internal string DebuggerDisplay
         {
             get => Version == CommittedVersion
-                ? $"Version: {Version}"
-                : $"Version: {Version} (Committed: {CommittedVersion})";
+                ? $"Version: {Version}, Aggregate: {AggregateId}"
+                : $"Version: {Version} (Committed: {CommittedVersion}), Aggregate: {AggregateId}";
         }
 
         #region IEnumerable

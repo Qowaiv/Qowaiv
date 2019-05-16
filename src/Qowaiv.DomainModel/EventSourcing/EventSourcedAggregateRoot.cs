@@ -50,7 +50,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         {
             var result = TrackChanges((self) =>
             {
-                self.Id = EventStream.AggregateId;
+                self.Id = stream.AggregateId;
 
                 foreach (var e in stream)
                 {

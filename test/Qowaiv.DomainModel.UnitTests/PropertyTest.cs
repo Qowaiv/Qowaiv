@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.ComponentModel;
 using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.Globalization;
@@ -20,7 +21,7 @@ namespace Qowaiv.DomainModel.UnitTests
         {
             var entity = new PropertyTestEntity();
 
-            Assert.Throws<ValidationException>(() =>
+            Assert.Throws<InvalidModelException>(() =>
             {
                 entity.RequiredProperty = 0;
             });

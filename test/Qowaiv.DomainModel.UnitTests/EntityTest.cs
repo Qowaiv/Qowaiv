@@ -30,7 +30,7 @@ namespace Qowaiv.DomainModel.UnitTests
             (
                 () => entity.FullName = ""
             );
-            Assert.AreEqual("The Full name field is required.", exception.Message);
+            Assert.AreEqual("The Full name field is required.", exception.Errors[0].ErrorMessage);
         }
 
         [Test]
@@ -38,11 +38,11 @@ namespace Qowaiv.DomainModel.UnitTests
         {
             var entity = new SimpleEntity();
 
-            var exception = Assert.Throws<ValidationException>
+            var exception = Assert.Throws<InvalidModelException>
             (
                 () => entity.FullName = "1234"
             );
-            Assert.AreEqual("The field Full name must be a string or array type with a maximum length of '3'.", exception.Message);
+            Assert.AreEqual("The field Full name must be a string or array type with a maximum length of '3'.", exception.Errors[0].ErrorMessage);
         }
 
         [Test]

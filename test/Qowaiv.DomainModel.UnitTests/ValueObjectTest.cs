@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.ComponentModel;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.Globalization;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,7 @@ namespace Qowaiv.DomainModel.UnitTests
         [Test]
         public void Ctor_WithError_Throws()
         {
-            Assert.Throws<ValidationException>(() =>
+            Assert.Throws<InvalidModelException>(() =>
             {
                 new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.Empty);
             });

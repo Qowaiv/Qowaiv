@@ -99,8 +99,6 @@ namespace Qowaiv.DomainModel.EventSourcing
             {
                 var info = eventArray[i].Info;
 
-                Guard.NotEmpty(info.AggregateId, $"events[{i}].AggregateId");
-
                 if (info.AggregateId != first.AggregateId)
                 {
                     throw new ArgumentException(QowaivDomainModelMessages.ArgumentException_MultipleAggregates, nameof(events));

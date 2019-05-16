@@ -2,6 +2,7 @@
 // Classes implementing "IEquatable<T>" should be sealed
 // The Implementation takes types into account, and uses an equality comparer.
 
+using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.DomainModel.Tracking;
 using Qowaiv.Reflection;
 using System;
@@ -18,6 +19,7 @@ namespace Qowaiv.DomainModel
     /// The type of the entity itself.
     /// </typeparam>
     [DebuggerDisplay("{DebuggerDisplay}")]
+    [NestedModel]
     public abstract class Entity<TEntity> : IEntity<TEntity>, IValidatableObject
         where TEntity : Entity<TEntity>
     {

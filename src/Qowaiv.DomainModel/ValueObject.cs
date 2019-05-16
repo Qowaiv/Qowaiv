@@ -3,6 +3,7 @@
 // It is left to actual implementations
 
 using Qowaiv.ComponentModel;
+using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.ComponentModel.Validation;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Qowaiv.DomainModel
     /// <remarks>
     /// This base class should not be used for Single Value Objects (SVO's).
     /// </remarks>
+    [NestedModel]
     public abstract class ValueObject<T> : IEquatable<T>, IValidatableObject where T : ValueObject<T>
     {
         private readonly AnnotatedModelValidator _validator;

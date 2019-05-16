@@ -72,7 +72,7 @@ namespace Qowaiv.ComponentModel.Validation
         /// <summary>Gets the results for validating the (annotated )properties.</summary>
         private void ValidateProperties(NestedValidationContext context)
         {
-            foreach(var property in context.Annotations.Properties)
+            foreach (var property in context.Annotations.Properties)
             {
                 ValidateProperty(property, context);
             }
@@ -94,7 +94,7 @@ namespace Qowaiv.ComponentModel.Validation
             {
                 return;
             }
-            
+
             foreach (var attribute in property.ValidationAttributes)
             {
                 propertyContext.AddMessage(attribute.GetValidationResult(value, propertyContext));
@@ -105,16 +105,20 @@ namespace Qowaiv.ComponentModel.Validation
                 if (property.IsEnumerable)
                 {
                     var index = 0;
-                    foreach(var item in (IEnumerable)value)
+                    foreach (var item in (IEnumerable)value)
                     {
                         var nestedContext = propertyContext.Nested(item, index++);
                         ValidateModel(nestedContext);
                     }
                 }
-                else
+                else if (property.IsNestedModel)
                 {
                     var nestedContext = propertyContext.Nested(value);
                     ValidateModel(nestedContext);
+                }
+                else
+                {
+                    // Else we can skip further validation.
                 }
             }
         }
@@ -131,7 +135,7 @@ namespace Qowaiv.ComponentModel.Validation
         /// </remarks>
         private static void ValidateValidatableObject(NestedValidationContext context)
         {
-            if(context.Annotations.IsIValidatableObject)
+            if (context.Annotations.IsIValidatableObject)
             {
                 context.AddMessages(((IValidatableObject)context.Instance).Validate(context));
             }

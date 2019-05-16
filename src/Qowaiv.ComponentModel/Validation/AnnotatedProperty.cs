@@ -24,7 +24,9 @@ namespace Qowaiv.ComponentModel.Validation
             ValidationAttributes = desc.GetValidationAttributes().Except(new[] { RequiredAttribute }).ToArray();
             TypeConverter = desc.GetTypeConverter();
             DefaultValue = desc.GetDefaultValue();
-            IsEnumerable = PropertyType != typeof(string) && !(GetEnumerableType(PropertyType) is null);
+            IsEnumerable = PropertyType != typeof(string)
+                && PropertyType != typeof(byte[])
+                && !(GetEnumerableType(PropertyType) is null);
         }
 
         /// <summary>Gets the type of the property.</summary>

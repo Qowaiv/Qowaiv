@@ -12,7 +12,7 @@ namespace Qowaiv.TestTools.ComponentModel
     /// <summary>Assertion helper class on <see cref="Result"/> and/or <see cref="Result{T}"/>.</summary>
     public static class ValidationResultAssert
     {
-        private static ValidationResultComparer Comparer = new ValidationResultComparer();
+        private static readonly ValidationResultComparer Comparer = new ValidationResultComparer();
 
         /// <summary>Asserts that the result is valid, throws if not.</summary>
         [DebuggerStepThrough]

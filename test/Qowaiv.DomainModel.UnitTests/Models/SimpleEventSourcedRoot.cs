@@ -1,4 +1,5 @@
-﻿using Qowaiv.DomainModel.EventSourcing;
+﻿using Qowaiv.ComponentModel;
+using Qowaiv.DomainModel.EventSourcing;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
@@ -10,11 +11,30 @@ namespace Qowaiv.DomainModel.UnitTests.Models
             private set => SetProperty(value);
         }
 
+        public string Name
+        {
+            get => GetProperty<string>();
+            private set => SetProperty(value);
+        }
+
+        public Result<SimpleEventSourcedRoot> SetName(UpdateNameEvent command) => ApplyChange(command);
+
+        internal void Apply(UpdateNameEvent @event)
+        {
+            Name = @event.Name;
+        }
+
         internal void Apply(SimpleInitEvent @event)
         {
             Initialized = true;
         }
     }
-    public class SimpleInitEvent{}
+
+    public class UpdateNameEvent
+    {
+        public string Name { get; set; }
+    }
+
+    public class SimpleInitEvent { }
 
 }

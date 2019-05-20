@@ -16,6 +16,29 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
             var aggregate = AggregateRoot.FromEvents<SimpleEventSourcedRoot>(stream).Value;
 
             Assert.AreEqual(aggregateId, aggregate.Id);
+            Assert.AreEqual(aggregateId, aggregate.EventStream.AggregateId);
+            Assert.AreEqual(1, aggregate.Version);
+        }
+
+        [Test]
+        public void Ctor_NoParameters_SetsId()
+        {
+            var aggregate = new SimpleEventSourcedRoot();
+
+            Assert.AreNotEqual(Guid.Empty, aggregate.Id);
+            Assert.AreEqual(aggregate.Id, aggregate.EventStream.AggregateId);
+            Assert.AreEqual(0, aggregate.Version);
+        }
+
+        [Test]
+        public void ApplyEvent_SomeEvent_UpdatesAggregate()
+        {
+            var aggregate = new SimpleEventSourcedRoot();
+            aggregate = aggregate.SetName(new UpdateNameEvent { Name = "Nelis Bijl" }).Value;
+
+            Assert.AreEqual("Nelis Bijl", aggregate.Name);
+            Assert.AreEqual(0, aggregate.EventStream.CommittedVersion);
+            Assert.AreEqual(1, aggregate.Version);
         }
     }
 }

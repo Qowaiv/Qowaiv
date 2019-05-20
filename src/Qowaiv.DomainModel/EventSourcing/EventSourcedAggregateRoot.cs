@@ -1,6 +1,7 @@
 ﻿using Qowaiv.ComponentModel;
 using Qowaiv.ComponentModel.Validation;
 using Qowaiv.DomainModel.Dynamic;
+using System;
 using System.Diagnostics;
 
 namespace Qowaiv.DomainModel.EventSourcing
@@ -18,10 +19,12 @@ namespace Qowaiv.DomainModel.EventSourcing
         /// <summary>Creates a new instance of an <see cref="EventSourcedAggregateRoot{TAggrgate}"/>.</summary>
         protected EventSourcedAggregateRoot(AnnotatedModelValidator validator) : base(validator)
         {
+            InitProperty(nameof(Id), Guid.NewGuid());
+            EventStream = new EventStream(Id);
         }
 
         /// <summary>Gets the event stream representing the state of the aggregate root.</summary>
-        public EventStream EventStream { get; internal set; } = new EventStream();
+        public EventStream EventStream { get; private set; }
 
         /// <summary>Gets the version of the aggregate root.</summary>
         public int Version => EventStream.Version;
@@ -49,8 +52,9 @@ namespace Qowaiv.DomainModel.EventSourcing
         internal Result<TAggrgate> LoadEvents(EventStream stream)
         {
             Tracker.Intialize();
-            Id = stream.AggregateId;
-            EventStream = new EventStream(Id);
+
+            InitProperty(nameof(Id), stream.AggregateId);
+            EventStream = new EventStream(Id, stream.Version);
 
             foreach (var e in stream)
             {

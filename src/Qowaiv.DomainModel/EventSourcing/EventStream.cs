@@ -21,6 +21,12 @@ namespace Qowaiv.DomainModel.EventSourcing
         /// <summary>Creates a new instance of an <see cref="EventStream"/>.</summary>
         public EventStream(Guid aggregateId) => AggregateId = Guard.NotEmpty(aggregateId, nameof(aggregateId));
 
+        /// <summary>Creates a new instance of an <see cref="EventStream"/>.</summary>
+        internal EventStream(Guid aggregateId, int version) : this(aggregateId)
+        {
+            versionOffset = version;
+        }
+
         /// <summary>Gets the identifier of the aggregate linked to the event stream.</summary>
         public Guid AggregateId { get; }
         
@@ -30,7 +36,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         /// </remarks>
         public int Version => messages.Count + versionOffset;
         private int versionOffset;
-
+        
         /// <summary>Gets the committed version of the event stream.</summary>
         public int CommittedVersion { get; private set; }
 

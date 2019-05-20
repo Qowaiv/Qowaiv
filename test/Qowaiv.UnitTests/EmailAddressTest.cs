@@ -142,6 +142,41 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Parse_WithDisplayName_WithoutDisplayName()
+        {
+            var email = EmailAddress.Parse("Joe Smith <email@domain.com>");
+            Assert.AreEqual("email@domain.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_WithCommentAtTheEnd_WithoutComment()
+        {
+            var email = EmailAddress.Parse("email@domain.com (Joe Smith)");
+            Assert.AreEqual("email@domain.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_WithComment_WithoutComment()
+        {
+            var email = EmailAddress.Parse("email@(stupid but true)domain.com");
+            Assert.AreEqual("email@domain.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_WithoutBrackets_WithBrackets()
+        {
+            var email = EmailAddress.Parse("home@127.0.0.1");
+            Assert.AreEqual("home@[127.0.0.1]", email.ToString());
+        }
+
+        [Test]
+        public void Parse_WithBrackets_WithBrackets()
+        {
+            var email = EmailAddress.Parse("home@[127.0.0.1]");
+            Assert.AreEqual("home@[127.0.0.1]", email.ToString());
+        }
+
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -863,9 +898,6 @@ namespace Qowaiv.UnitTests
         [TestCase(".a@test.com")]
         [TestCase("ab@sd@dd")]
         [TestCase(".@s.dd")]
-        [TestCase("ab@01.120.150.1")]
-        [TestCase("ab@88.120.150.021")]
-        [TestCase("ab@88.120.150.01")]
         [TestCase("ab@988.120.150.10")]
         [TestCase("ab@120.256.256.120")]
         [TestCase("ab@120.25.1111.120")]
@@ -889,7 +921,6 @@ namespace Qowaiv.UnitTests
         [TestCase(".email@domain.com")]
         [TestCase("email.@domain.com")]
         [TestCase("email..email@domain.com")]
-        [TestCase("email@domain.com (joe Smith)")]
         [TestCase("email@-domain.com")]
         [TestCase("email@domain-.com")]
         [TestCase("email@domain.com-")]
@@ -914,9 +945,14 @@ namespace Qowaiv.UnitTests
         [TestCase("email@question?mark.com")]
         [TestCase("email@obelix*asterisk.com")]
         [TestCase("email@grave`accent.com")]
+        [TestCase("email@colon:colon.com")]
         [TestCase("email@caret^xor.com")]
         [TestCase("email@=qowaiv.com")]
         [TestCase("email@plus+.coM")]
+        [TestCase("email( (nested) )@plus.com")]
+        [TestCase("email)mirror(@plus.com")]
+        [TestCase("email@plus.com (not closed comment")]
+        [TestCase("email(with @ in comment)plus.com")]
         [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void InvalidEmailAddresses(string email)
         {
@@ -931,7 +967,12 @@ namespace Qowaiv.UnitTests
         [TestCase("ab@188.120.150.10")]
         [TestCase("ab@1.0.0.10")]
         [TestCase("ab@120.25.254.120")]
+        [TestCase("ab@01.120.150.1")]
+        [TestCase("ab@88.120.150.021")]
+        [TestCase("ab@88.120.150.01")]
         [TestCase("ab@[120.254.254.120]")]
+        [TestCase("local@2001:0db8:85a3:0000:0000:8a2e:0370:7334")]
+        [TestCase("local@[2001:0db8:85a3:0000:0000:8a2e:0370:7334]")]
         [TestCase("2@bde.cc")]
         [TestCase("-@bde.cc")]
         [TestCase("a2@bde.cc")]
@@ -980,6 +1021,8 @@ namespace Qowaiv.UnitTests
         [TestCase("^local^^name^with^@xor.com")]
         [TestCase("=local==name=with=@equality.com")]
         [TestCase("+local++name+with+@equality.com")]
+        [TestCase("Joe Smith <email@domain.com>")]
+        [TestCase("email@domain.com (joe Smith)")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void ValidEmailAddresses(string email)
         {

@@ -19,7 +19,7 @@ namespace Qowaiv {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class QowaivMessages {
@@ -57,15 +57,6 @@ namespace Qowaiv {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value cannot be an empty array..
-        /// </summary>
-        public static string ArgumentException_EmptyArray {
-            get {
-                return ResourceManager.GetString("ArgumentException_EmptyArray", resourceCulture);
             }
         }
         
@@ -115,38 +106,11 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value cannot be an empty string..
-        /// </summary>
-        public static string ArgumentException_StringEmpty {
-            get {
-                return ResourceManager.GetString("ArgumentException_StringEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The byte array should have size of 8..
         /// </summary>
         public static string ArgumentException_TimestampArrayShouldHaveSize8 {
             get {
                 return ResourceManager.GetString("ArgumentException_TimestampArrayShouldHaveSize8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string ArgumentException_TypeOf {
-            get {
-                return ResourceManager.GetString("ArgumentException_TypeOf", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value should not be negative..
-        /// </summary>
-        public static string ArgumentOutOfRangeException_NotNegative {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRangeException_NotNegative", resourceCulture);
             }
         }
         

@@ -50,7 +50,7 @@ namespace Qowaiv.Conversion
         {
             if (destinationType == typeof(TRaw) || destinationType == typeof(TRaw?))
             {
-                var svo = Guard.IsTypeOf<TSvo>(value, nameof(value));
+                var svo = Guard.IsInstanceOf<TSvo>(value, nameof(value));
                 return ToRaw(svo);
             }
             return base.ConvertTo(context, culture, value, destinationType);

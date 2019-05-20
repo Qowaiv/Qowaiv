@@ -50,7 +50,7 @@ namespace Qowaiv.Conversion
 
             if(IsConvertable(destinationType))
             {
-                var svo = Guard.IsTypeOf<TSvo>(value, nameof(value));
+                var svo = Guard.IsInstanceOf<TSvo>(value, nameof(value));
                 var raw = ToRaw(svo);
                 return Convert.ChangeType(raw, QowaivType.GetNotNullableType(destinationType));
             }

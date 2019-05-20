@@ -76,13 +76,13 @@ namespace Qowaiv.Conversion
 
             if (destinationType == typeof(string))
             {
-                var typed = Guard.IsTypeOf<T>(value, nameof(value));
+                var typed = Guard.IsInstanceOf<T>(value, nameof(value));
                 return typed.ToString(string.Empty, culture);
             }
 
             if(IsConvertable(destinationType))
             {
-                var date = Guard.IsTypeOf<T>(value, nameof(value));
+                var date = Guard.IsInstanceOf<T>(value, nameof(value));
 
                 var type = QowaivType.GetNotNullableType(destinationType);
 

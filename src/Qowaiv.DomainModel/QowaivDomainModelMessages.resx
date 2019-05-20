@@ -94,4 +94,7 @@
   <data name="ArgumentOutOfRangeException_InvalidVersion" xml:space="preserve">
     <value>Version {0} does not exist for the aggregate root ({1}).</value>
   </data>
+  <data name="EventStreamNoFullHistoryException" xml:space="preserve">
+    <value>The provided event stream does not contain a (potential) full history for an aggregate.</value>
+  </data>
 </root>

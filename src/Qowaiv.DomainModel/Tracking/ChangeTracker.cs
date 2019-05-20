@@ -12,8 +12,14 @@ namespace Qowaiv.DomainModel.Tracking
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly List<ITrackableChange> _changes = new List<ITrackableChange>();
 
-        /// <summary>If set to true, it buffer changes first before validating.</summary>
-        public bool BufferChanges { get; set; }
+        /// <summary>Gets the mode of the change tracker.</summary>
+        public ChangeTrackerMode Mode { get; internal protected set; }
+
+        /// <summary>Sets the mode to buffering.</summary>
+        public void BufferChanges() => Mode = ChangeTrackerMode.Buffering;
+
+        /// <summary>Sets the mode to initialization.</summary>
+        public void Intialize() => Mode = ChangeTrackerMode.Initialization;
 
         /// <summary>Gets the number of changes in the change tracker.</summary>
         public int Count => _changes.Count;
@@ -21,7 +27,12 @@ namespace Qowaiv.DomainModel.Tracking
         /// <summary>Adds (and applies) a change to tracker.</summary>
         public void Add(ITrackableChange change)
         {
-            _changes.Add(Guard.NotNull(change, nameof(change)));
+            Guard.NotNull(change, nameof(change));
+
+            if (Mode != ChangeTrackerMode.Initialization)
+            {
+                _changes.Add(change);
+            }
             change.Apply();
             OnAddComplete();
         }

@@ -24,7 +24,7 @@ namespace Qowaiv.DomainModel.Tracking
         /// <inheritdoc />
         protected sealed override void OnAddComplete()
         {
-            if (!BufferChanges)
+            if (Mode == ChangeTrackerMode.None)
             {
                 Process().ThrowIfInvalid();
             }
@@ -39,7 +39,7 @@ namespace Qowaiv.DomainModel.Tracking
             {
                 try
                 {
-                    var result = ValidateAll();
+                    var result = Validate();
                     if (!result.IsValid)
                     {
                         Rollback();
@@ -54,9 +54,9 @@ namespace Qowaiv.DomainModel.Tracking
         }
 
         /// <summary>Validates all changed properties.</summary>
-        private Result<TModel> ValidateAll()
+        internal Result<TModel> Validate()
         {
-            BufferChanges = false;
+            Mode = ChangeTrackerMode.None;
 
             try
             {

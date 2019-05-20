@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using Qowaiv.DomainModel.EventSourcing;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Qowaiv.DomainModel.UnitTests.EventSourcing
 {
@@ -51,6 +53,39 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
             Assert.Throws<EventsOutOfOrderException>(() => EventStream.FromMessages(messages));
         }
 
+        [Test]
+        public void ClearCommitted_WithoutUncommitted()
+        {
+            var stream = new EventStream();
+            for (var i = 0; i < 16; i++)
+            {
+                stream.Add(new DummyEvent());
+            }
+            stream.MarkAllAsCommitted();
+            stream.ClearCommitted();
+
+            Assert.AreEqual(16, stream.Version);
+            Assert.AreEqual(16, stream.CommittedVersion);
+            Assert.IsEmpty(stream.GetUncommitted());
+        }
+
+        [Test]
+        public void ClearCommitted_WithUncommitted()
+        {
+            var stream = new EventStream();
+            for (var i = 0; i < 16; i++)
+            {
+                stream.Add(new DummyEvent());
+            }
+            stream.MarkAllAsCommitted();
+            stream.ClearCommitted();
+
+            stream.Add(new DummyEvent());
+
+            Assert.AreEqual(17, stream.Version);
+            Assert.AreEqual(16, stream.CommittedVersion);
+            Assert.AreEqual(1, stream.GetUncommitted().Count());
+        }
 
         private class DummyEvent { }
     }

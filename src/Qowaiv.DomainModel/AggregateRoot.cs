@@ -36,7 +36,7 @@ namespace Qowaiv.DomainModel
         {
             Guard.NotNull(update, nameof(update));
 
-            Tracker.BufferChanges = true;
+            Tracker.BufferChanges();
             update((TAggrgate)this);
             return Tracker.Process();
         }

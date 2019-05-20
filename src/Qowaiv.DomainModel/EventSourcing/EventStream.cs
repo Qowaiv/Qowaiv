@@ -28,30 +28,23 @@ namespace Qowaiv.DomainModel.EventSourcing
         /// <remarks>
         /// Equal to the number of events in the stream.
         /// </remarks>
-        public int Version => messages.Count;
+        public int Version => messages.Count + versionOffset;
+        private int versionOffset;
 
         /// <summary>Gets the committed version of the event stream.</summary>
         public int CommittedVersion { get; private set; }
 
+        /// <summary>Returns true if all events together describe a (potential) full history for an aggregate.
+        /// So all events in the stream are committed, and no event has been cleared (yet).
+        /// </summary>
+        public bool ContainsFullHistory
+        {
+            get => versionOffset == 0 && CommittedVersion == Version && Version > 0;
+        }
+
         /// <summary>Gets a lock object to lock the event stream.</summary>
         public object Lock() => locker;
         private readonly object locker = new object();
-
-        /// <summary>Gets an event, based on its version.</summary>
-        public EventMessage this[int version]
-        {
-            get
-            {
-                if(version < 1 || version > Version)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(version), string.Format(
-                        QowaivDomainModelMessages.ArgumentOutOfRangeException_InvalidVersion, 
-                        version, AggregateId));
-                }
-                return messages[version - 1];
-
-            }
-        }
 
         /// <summary>Adds an event to the event stream.</summary>
         public void Add(object @event)
@@ -69,6 +62,14 @@ namespace Qowaiv.DomainModel.EventSourcing
 
         /// <summary>Marks all events as being committed.</summary>
         public void MarkAllAsCommitted() => CommittedVersion = Version;
+
+        /// <summary>Removes the committed events from the stream.</summary>
+        public void ClearCommitted()
+        {
+            var delta = Version - CommittedVersion;
+            messages.RemoveRange(0, delta);
+            versionOffset += delta;
+        }
 
         /// <summary>Returns a <see cref="string"/> that represents the event stream for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

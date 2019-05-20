@@ -6,13 +6,13 @@
 
   <PropertyGroup>
     <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
-    <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Jack Kester;Hanif Hafez Nezami;Vincent Lesierse;Wilko Frieke</Authors>
+    <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Jack Kester;Hanif Hafez Nezami;Patrick Evers;Vincent Lesierse;Wilko Frieke</Authors>
     <Owners>Qowaiv community</Owners>
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-2019</Copyright>
 
-    <PackageIconUrl>https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Qowaiv/Qowaiv/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
     <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
     <PackageLicenseUrl>http://www.github.com/Qowaiv/Qowaiv/blob/master/LICENSE.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>

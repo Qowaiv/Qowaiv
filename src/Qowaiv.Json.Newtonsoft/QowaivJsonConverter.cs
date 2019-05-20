@@ -119,7 +119,7 @@ namespace Qowaiv.Json
                 writer.WriteNull();
             }
 
-            var json = Guard.IsTypeOf<IJsonSerializable>(value, nameof(value));
+            var json = Guard.IsInstanceOf<IJsonSerializable>(value, nameof(value));
 
             var jsonValue = json.ToJson();
 

@@ -42,7 +42,7 @@ namespace Qowaiv.ComponentModel.DataAnnotations.Financial
             {
                 return true;
             }
-            var money = Guard.IsTypeOf<Money>(value, nameof(value));
+            var money = Guard.IsInstanceOf<Money>(value, nameof(value));
             return AllowedCurrencies.Any(allowed => money.Currency == allowed);
         }
     }

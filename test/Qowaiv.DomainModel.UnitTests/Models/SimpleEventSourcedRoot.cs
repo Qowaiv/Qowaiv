@@ -36,5 +36,4 @@ namespace Qowaiv.DomainModel.UnitTests.Models
     }
 
     public class SimpleInitEvent { }
-
 }

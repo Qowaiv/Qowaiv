@@ -37,8 +37,8 @@ namespace Qowaiv.DomainModel.EventSourcing
         protected EventTypeNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            EventType = (Type)info.GetValue(nameof(EventType), typeof(Type));
-            AggregateType = (Type)info.GetValue(nameof(AggregateType), typeof(Type));
+            EventType = Type.GetType(info.GetString(nameof(EventType)));
+            AggregateType = Type.GetType(info.GetString(nameof(AggregateType)));
         }
 
         /// <summary>The event type that is not supported.</summary>
@@ -51,8 +51,8 @@ namespace Qowaiv.DomainModel.EventSourcing
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue(nameof(EventType), EventType);
-            info.AddValue(nameof(AggregateType), AggregateType);
+            info.AddValue(nameof(EventType), EventType.FullName);
+            info.AddValue(nameof(AggregateType), AggregateType.FullName);
         }
     }
 }

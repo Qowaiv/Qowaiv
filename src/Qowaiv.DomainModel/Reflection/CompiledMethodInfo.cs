@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -37,39 +38,51 @@ namespace Qowaiv.DomainModel.Reflection
         #region Via underlying method.
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override string Name => _method.Name;
-        
+
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override Type DeclaringType => _method.DeclaringType;
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override Type ReflectedType => _method.ReflectedType;
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override RuntimeMethodHandle MethodHandle => _method.MethodHandle;
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override MethodAttributes Attributes => _method.Attributes;
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override ICustomAttributeProvider ReturnTypeCustomAttributes => _method.ReturnTypeCustomAttributes;
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override MethodInfo GetBaseDefinition() => _method.GetBaseDefinition();
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override object[] GetCustomAttributes(bool inherit) => _method.GetCustomAttributes(inherit);
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override object[] GetCustomAttributes(Type attributeType, bool inherit) => _method.GetCustomAttributes(attributeType, inherit);
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override MethodImplAttributes GetMethodImplementationFlags() => _method.GetMethodImplementationFlags();
 
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override ParameterInfo[] GetParameters() => _method.GetParameters();
-        
+
         /// <inherrit />
+        [ExcludeFromCodeCoverage]
         public override bool IsDefined(Type attributeType, bool inherit) => _method.IsDefined(attributeType, inherit);
 
         #endregion

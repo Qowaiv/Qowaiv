@@ -223,6 +223,25 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
+        public void Contains_SomeContainedValue_True()
+        {
+            var parent = new NumberParent();
+            parent.Numbers.Add(17);
+            parent.Numbers.Add(69);
+
+            Assert.IsTrue(parent.Numbers.Contains(69));
+        }
+
+        [Test]
+        public void Contains_SomeNoneContainedValue_False()
+        {
+            var parent = new NumberParent();
+            parent.Numbers.Add(17);
+
+            Assert.IsTrue(parent.Numbers.Contains(69));
+        }
+
+        [Test]
         public void Sort_Valid_Applied()
         {
             var parent = new NumberParent();

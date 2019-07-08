@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.ComponentModel.DataAnnotations;
+using Qowaiv.ComponentModel.Tests.TestTools;
 using System;
 
 namespace Qowaiv.ComponentModel.Tests.DataAnnotations
@@ -52,5 +53,19 @@ namespace Qowaiv.ComponentModel.Tests.DataAnnotations
             var act = attr.IsValid(EmailAddress.Unknown);
             Assert.IsFalse(act);
         }
+
+        [Test]
+        public void IsValid_MandatoryNullableProperty_IsValid()
+        {
+            var model = new MandatoryNullableProperty { Income = 0 };
+            DataAnnotationsAssert.IsValid(model);
+        }
+
+        internal class MandatoryNullableProperty
+        {
+            [Mandatory(IsNullable = true)]
+            public decimal? Income { get; set; }
+        }
+
     }
 }

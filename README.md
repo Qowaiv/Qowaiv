@@ -1,7 +1,6 @@
 ![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/j8o76flxqkh0o9fk?svg=true)](https://ci.appveyor.com/project/qowaiv/qowaiv)
-![version](https://img.shields.io/badge/version-3.2.4-blue.svg?cacheSeconds=2592000)
+![version](https://img.shields.io/badge/version-3.2.5-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
 
@@ -259,11 +258,11 @@ public void TestSomething()
 ### Annotations
 We're extending the DataAnnotations from Microsoft with some more attributes:
 
-* [Mandatory] Here the difference with Microsoft's [Required] attribute is that it works for value types as well, it will be invalid if the default value is used.
-* [AllowedValues] and 
-* [ForbiddenValues] make it easy to validate string values, or objects/value types that have a string representation.
-* [Any] Tells that a collection should have at least one item.
-* [DefinedEnumValuesOnly] limits the allowed enum values to those defined by the enum.
+ * [`Mandatory`] Here the difference with Microsoft's [`Required`] attribute is that it works for value types as well, it will be invalid if the default value is used.
+* [`AllowedValues`] and 
+* [`ForbiddenValues`] make it easy to validate string values, or objects/value types that have a string representation.
+* [`Any`] Tells that a collection should have at least one item.
+* [`DefinedEnumValuesOnly`] limits the allowed enum values to those defined by the enum.
 
 ### Result model
 Also we propose a Result model that includes the validation messages, and Result which can contain both an object and validation messages. This can be a helpful return type for methods that need to return objects but first have to validate them.

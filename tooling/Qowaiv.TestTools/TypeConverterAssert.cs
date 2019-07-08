@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
@@ -14,7 +13,7 @@ namespace Qowaiv.TestTools
         public static void ConverterExists(Type type)
         {
             var converter = TypeDescriptor.GetConverter(type);
-            Assert.IsNotNull(converter, "No TypeConverter could be resolved for '{0}'.", type);
+            Assert.IsNotNull(converter, $"No TypeConverter could be resolved for '{type}'.");
         }
 
         /// <summary>Asserts that the type converter for the specified type can convert from string.</summary>
@@ -23,7 +22,7 @@ namespace Qowaiv.TestTools
         {
             var converter = TypeDescriptor.GetConverter(type);
 
-            Assert.IsTrue(converter.CanConvertFrom(typeof(string)), "The TypeConverter for '{0}' cannot covert from System.String.", type);
+            Assert.IsTrue(converter.CanConvertFrom(typeof(string)), $"The TypeConverter for '{type}' cannot covert from System.String.");
         }
 
         /// <summary>Asserts that the type converter for the specified type can convert to string.</summary>
@@ -32,7 +31,7 @@ namespace Qowaiv.TestTools
         {
             var converter = TypeDescriptor.GetConverter(type);
 
-            Assert.IsTrue(converter.CanConvertTo(typeof(string)), "The TypeConverter for '{0}' cannot covert to System.String.", type);
+            Assert.IsTrue(converter.CanConvertTo(typeof(string)), $"The TypeConverter for '{type}' cannot covert to System.String.");
         }
 
         /// <summary>Asserts that the type converter for the specified type can not convert from string.</summary>
@@ -41,7 +40,7 @@ namespace Qowaiv.TestTools
         {
             var converter = TypeDescriptor.GetConverter(type);
 
-            Assert.IsFalse(converter.CanConvertFrom(source), "The TypeConverter for '{0}' can covert from {1}.", type, source);
+            Assert.IsTrue(!converter.CanConvertFrom(source), $"The TypeConverter for '{type}' can covert from {source}.");
         }
 
         /// <summary>Asserts that the type converter for the specified type can not convert to string.</summary>
@@ -50,7 +49,7 @@ namespace Qowaiv.TestTools
         {
             var converter = TypeDescriptor.GetConverter(type);
 
-            Assert.IsFalse(converter.CanConvertTo(target), "The TypeConverter for '{0}' can covert to {1}.", type, target);
+            Assert.IsTrue(!converter.CanConvertTo(target), $"The TypeConverter for '{type}' can covert to {target}.");
         }
 
 
@@ -75,7 +74,7 @@ namespace Qowaiv.TestTools
             var descriptor = new InstanceDescriptor(ctor, new[] { "34adf67e-47d7-4cee-81fb-89be27aaf77c" });
             var converter = TypeDescriptor.GetConverter(type);
 
-            Assert.Throws<NotSupportedException>(() => converter.ConvertFrom(descriptor));
+            Assert.Catch<NotSupportedException>(() => converter.ConvertFrom(descriptor));
         }
 
 
@@ -98,7 +97,5 @@ namespace Qowaiv.TestTools
 
             Assert.AreEqual(expected, actual);
         }
-
-        
     }
 }

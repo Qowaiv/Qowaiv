@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace Qowaiv.TestTools
@@ -18,7 +17,7 @@ namespace Qowaiv.TestTools
         /// The catch exception.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentNullException CatchArgumentNullException(TestDelegate code, string paramName)
+        public static ArgumentNullException CatchArgumentNullException(Action code, string paramName)
         {
             var exception = Assert.Catch<ArgumentNullException>(code);
             Assert.AreEqual(paramName, exception.ParamName);
@@ -36,10 +35,13 @@ namespace Qowaiv.TestTools
         /// <param name="exceptionMessage">
         /// The expected exception message.
         /// </param>
-        /// The catch exception.
+        /// <param name="args">
+        /// Array of objects to be used in formatting the message.
+        /// </param>
+        /// The caught exception.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentException CatchArgumentException(TestDelegate code, string paramName, string exceptionMessage, params object[] args)
+        public static ArgumentException CatchArgumentException(Action code, string paramName, string exceptionMessage, params object[] args)
         {
             var exception = Assert.Catch<ArgumentException>(code);
             Assert.AreEqual(paramName, exception.ParamName);
@@ -57,11 +59,14 @@ namespace Qowaiv.TestTools
         /// <returns>
         /// <param name="exceptionMessage">
         /// The expected exception message.
+        /// </param>  
+        /// <param name="args">
+        /// Array of objects to be used in formatting the message.
         /// </param>
-        /// The catch exception.
+        /// The caught exception.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentOutOfRangeException CatchArgumentOutOfRangeException(TestDelegate code, string paramName, string exceptionMessage, params object[] args)
+        public static ArgumentOutOfRangeException CatchArgumentOutOfRangeException(Action code, string paramName, string exceptionMessage, params object[] args)
         {
             var exception = Assert.Catch<ArgumentOutOfRangeException>(code);
             Assert.AreEqual(paramName, exception.ParamName);

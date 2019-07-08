@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -88,7 +87,7 @@ namespace Qowaiv.TestTools
         public static T DeserializeUsingConstructor<T>(SerializationInfo info, StreamingContext context)
         {
             var ctor = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new Type[] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
-            Assert.IsNotNull(ctor, "No {0}(SerializationInfo, StreamingContext) constructor found.", typeof(T).Name);
+            Assert.IsNotNull(ctor, $"No {typeof(T).Name}(SerializationInfo, StreamingContext) constructor found.");
 
             try
             {

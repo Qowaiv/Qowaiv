@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Qowaiv.ComponentModel.Messages;
+using Qowaiv.Reflection;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.ComponentModel.DataAnnotations
@@ -10,19 +12,38 @@ namespace Qowaiv.ComponentModel.DataAnnotations
         /// <summary>Gets or sets a value that indicates whether an empty string is allowed.</summary>
         public bool AllowUnknownValue { get; set; }
 
-        /// <summary>Gets or sets that the type of the attribute is a <see cref="Nullable{T}"/>.</summary>
+        /// <inheritdoc />
+        public override bool RequiresValidationContext => true;
+
+        /// <inheritdoc />
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            Guard.NotNull(validationContext, nameof(validationContext));
+
+            if (IsValid(value, GetMemberType(validationContext)))
+            {
+                return ValidationResult.Success;
+            }
+
+            var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : null;
+            return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
+        }
+
+        /// <summary>Gets the type of the field/property.</summary>
         /// <remarks>
-        /// Because the argument provided as an <see cref="object"/> (and
-        /// therefor boxed), it is not possible to get the right <see cref="Type"/>
-        /// of an set <see cref="Nullable{T}"/>, as the boxing removes the 
-        /// <see cref="Nullable{T}"/> wrapper.
-        /// 
-        /// To prevent a mixture of <see cref="MandatoryAttribute"/> and
-        /// <see cref="RequiredAttribute"/>, this option can be flagged to
-        /// prevent set nullables with the default value to be marked as
-        /// invalid.
+        /// Because the values of the member are boxed, this is (unfortunately)
+        /// the only way to determine if the provided value is a nullable type,
+        /// or not.
         /// </remarks>
-        public bool IsNullable { get; set; }
+        private Type GetMemberType(ValidationContext context)
+        {
+            if (string.IsNullOrEmpty(context.MemberName))
+            {
+                return null;
+            }
+            return context.ObjectType.GetProperty(context.MemberName)?.PropertyType
+                ?? context.ObjectType.GetField(context.MemberName)?.FieldType;
+        }
 
         /// <summary>Returns true if the value is not null and value types are
         /// not equal to their default value, otherwise false.
@@ -30,19 +51,22 @@ namespace Qowaiv.ComponentModel.DataAnnotations
         /// <remarks>
         /// The unknown value is expected to be static field or property of the type with the name "Unknown".
         /// </remarks>
-        public override bool IsValid(object value)
+        public override bool IsValid(object value) => IsValid(value, null);
+
+        private bool IsValid(object value, Type memberType)
         {
             if (value != null)
             {
-                var type = value.GetType();
+                var type = memberType ?? value.GetType();
+                var underlyingType = QowaivType.GetNotNullableType(type);
 
-                if (!AllowUnknownValue && value.Equals(Unknown.Value(type)))
+                if (!AllowUnknownValue && value.Equals(Unknown.Value(underlyingType)))
                 {
                     return false;
                 }
-                if (type.IsValueType && !IsNullable)
+                if (type.IsValueType)
                 {
-                    return !value.Equals(Activator.CreateInstance(value.GetType()));
+                    return !value.Equals(Activator.CreateInstance(type));
                 }
             }
             return base.IsValid(value);

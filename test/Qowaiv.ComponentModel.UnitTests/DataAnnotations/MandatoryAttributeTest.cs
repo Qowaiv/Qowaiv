@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.ComponentModel.DataAnnotations;
-using Qowaiv.ComponentModel.Tests.TestTools;
+using Qowaiv.ComponentModel.Messages;
+using Qowaiv.TestTools.ComponentModel;
 using System;
 
 namespace Qowaiv.ComponentModel.Tests.DataAnnotations
@@ -58,13 +59,26 @@ namespace Qowaiv.ComponentModel.Tests.DataAnnotations
         public void IsValid_MandatoryNullableProperty_IsValid()
         {
             var model = new MandatoryNullableProperty { Income = 0 };
-            DataAnnotationsAssert.IsValid(model);
+            DataAnnotationsAssert.IsValid(Result.For(model));
+        }
+
+        [Test]
+        public void IsValidNullableWithUnknownValue_IsInvalid()
+        {
+            var model = new MandatoryNullablePropertyWithUnknown { Gender = Gender.Unknown };
+            DataAnnotationsAssert.WithErrors(model, ValidationMessage.Error("The Gender field is required.", "Gender"));
         }
 
         internal class MandatoryNullableProperty
         {
-            [Mandatory(IsNullable = true)]
+            [Mandatory]
             public decimal? Income { get; set; }
+        }
+
+        internal class MandatoryNullablePropertyWithUnknown
+        {
+            [Mandatory]
+            public Gender? Gender { get; set; }
         }
 
     }

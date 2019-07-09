@@ -64,7 +64,7 @@ namespace Qowaiv.Financial
         {
             get
             {
-                if (m_Value == default(string))
+                if (m_Value == default)
                 {
                     return Country.Empty;
                 }
@@ -81,7 +81,7 @@ namespace Qowaiv.Financial
         #region Methods
 
         /// <summary>Returns true if the IBAN is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(string);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the Gender is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -146,7 +146,7 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates an IBAN from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default(string);
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates an IBAN from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -178,7 +178,7 @@ namespace Qowaiv.Financial
         /// <summary>Converts an IBAN into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return m_Value == default(string) ? null : ToUnformattedString();
+            return m_Value == default ? null : ToUnformattedString();
         }
 
         #endregion
@@ -191,7 +191,7 @@ namespace Qowaiv.Financial
         {
             get
             {
-                if (m_Value == default(string))
+                if (m_Value == default)
                 {
                     return "IBAN: (empty)";
                 }
@@ -206,7 +206,7 @@ namespace Qowaiv.Financial
         /// <summary>Formats the IBAN without spaces.</summary>
         private string ToUnformattedString()
         {
-            if (m_Value == default(string))
+            if (m_Value == default)
             {
                 return string.Empty;
             }
@@ -225,7 +225,7 @@ namespace Qowaiv.Financial
         /// <summary>Formats the IBAN with spaces.</summary>
         private string ToFormattedString()
         {
-            if (m_Value == default(string))
+            if (m_Value == default)
             {
                 return string.Empty;
             }

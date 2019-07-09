@@ -35,9 +35,9 @@ namespace Qowaiv.Tests
                 typeof(Globalization.Country),
                 typeof(IO.StreamSize),
                 typeof(Security.Cryptography.CryptographicSeed),
-                typeof(Statistics.Elo)
+                typeof(Statistics.Elo),
+                typeof(Web.InternetMediaType)
             );
         }
-
     }
 }

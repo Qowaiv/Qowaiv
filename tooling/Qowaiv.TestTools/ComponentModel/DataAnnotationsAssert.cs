@@ -9,11 +9,11 @@ namespace Qowaiv.TestTools.ComponentModel
     {
         /// <summary>Asserts that the model is valid, throws if not.</summary>
         [DebuggerStepThrough]
-        public static void IsValid<T>(T model) => IsValid<T>(model, null);
+        public static void IsValid<T>(T model) => IsValid(model, null);
 
         /// <summary>Asserts that the model is valid, throws if not.</summary>
         [DebuggerStepThrough]
-        public static void IsValid<T>(T model, AnnotatedModelValidator validator) => WithErrors(model, new ValidationResult[0]);
+        public static void IsValid<T>(T model, AnnotatedModelValidator validator) => WithErrors(model, validator, new ValidationResult[0]);
 
         /// <summary>Asserts the model to be invalid with specific messages. Throws if not.</summary>
         [DebuggerStepThrough]

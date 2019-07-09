@@ -59,16 +59,6 @@ namespace Qowaiv.UnitTests.Threading
         }
 
         [Test]
-        public void Get_StreamSizeByConfiguration_12kB()
-        {
-            ConfigurationManager.AppSettings["Qowaiv.IO.StreamSize"] = "12kB";
-            StreamSize act = ThreadDomain.Current.Get<StreamSize>();
-            StreamSize exp = 12000;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void Get_CountryByCreator_Portugal()
         {
             using (new CultureInfoScope("pt-PT"))

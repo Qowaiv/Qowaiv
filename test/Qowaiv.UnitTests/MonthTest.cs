@@ -303,7 +303,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Month>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Month>(null, default);
             },
             "info");
         }
@@ -315,7 +315,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(Month), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Month>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Month>(info, default);
             });
         }
 
@@ -326,7 +326,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -336,7 +336,7 @@ namespace Qowaiv.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Month), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual((Byte)2, info.GetByte("Value"));
         }

@@ -157,7 +157,7 @@ namespace Qowaiv.UnitTests.Financial
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<InternationalBankAccountNumber>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<InternationalBankAccountNumber>(null, default);
             },
             "info");
         }
@@ -169,7 +169,7 @@ namespace Qowaiv.UnitTests.Financial
             (() =>
             {
                 var info = new SerializationInfo(typeof(InternationalBankAccountNumber), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<InternationalBankAccountNumber>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<InternationalBankAccountNumber>(info, default);
             });
         }
 
@@ -180,7 +180,7 @@ namespace Qowaiv.UnitTests.Financial
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }

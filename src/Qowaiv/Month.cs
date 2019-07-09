@@ -99,7 +99,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the month is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(byte);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the month is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -195,7 +195,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a month from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default(Byte);
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates a month from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -224,7 +224,7 @@ namespace Qowaiv
         /// <summary>Converts a month into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return (m_Value == default(byte)) ? null : ToString(CultureInfo.InvariantCulture);
+            return (m_Value == default) ? null : ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion

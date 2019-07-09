@@ -60,7 +60,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the Yes-no is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(byte);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the Yes-no is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -131,7 +131,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Yes-no from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default(byte);
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates a Yes-no from a JSON string representation.</summary>
         /// <param name="jsonString">

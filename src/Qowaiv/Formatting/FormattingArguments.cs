@@ -12,7 +12,7 @@ namespace Qowaiv.Formatting
     public struct FormattingArguments : ISerializable
     {
         /// <summary>Represents empty/not set formatting arguments.</summary>
-        public static readonly FormattingArguments None = new FormattingArguments(default(string), null);
+        public static readonly FormattingArguments None = new FormattingArguments(default, null);
 
         /// <summary>Initializes a new instance of new formatting arguments.</summary>
         /// <param name="format">

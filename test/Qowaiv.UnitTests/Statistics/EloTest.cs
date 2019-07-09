@@ -134,7 +134,7 @@ namespace Qowaiv.UnitTests.Statistics
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Elo>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Elo>(null, default);
             },
             "info");
         }
@@ -146,7 +146,7 @@ namespace Qowaiv.UnitTests.Statistics
             (() =>
             {
                 var info = new SerializationInfo(typeof(Elo), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Elo>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Elo>(info, default);
             });
         }
 
@@ -157,7 +157,7 @@ namespace Qowaiv.UnitTests.Statistics
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -167,7 +167,7 @@ namespace Qowaiv.UnitTests.Statistics
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Elo), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual(1732.4000000000001, info.GetDouble("Value"));
         }

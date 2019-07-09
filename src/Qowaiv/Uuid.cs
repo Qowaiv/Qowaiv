@@ -60,7 +60,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the UUID is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(Guid);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
         public byte[] ToByteArray() => m_Value.ToByteArray();
@@ -122,7 +122,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a UUID from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default(Guid);
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates a UUID from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -150,7 +150,7 @@ namespace Qowaiv
 
 
         /// <summary>Converts a UUID into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value == default(Guid) ? null : ToString(CultureInfo.InvariantCulture);
+        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         #endregion
 

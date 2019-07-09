@@ -59,7 +59,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the year is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(short);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the year is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;

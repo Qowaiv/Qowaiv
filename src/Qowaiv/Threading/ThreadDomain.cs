@@ -4,8 +4,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
 namespace Qowaiv.Threading
@@ -16,8 +14,6 @@ namespace Qowaiv.Threading
     public class ThreadDomain
     {
         /// <summary>Initializes creators.</summary>
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", 
-            Justification = "To complex for straight forward assignment.")]
         static ThreadDomain()
         {
             Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
@@ -70,7 +66,7 @@ namespace Qowaiv.Threading
 
             Creators.TryAdd(type, creator);
         }
-        private static ConcurrentDictionary<Type, Func<Thread, object>> Creators = new ConcurrentDictionary<Type, Func<Thread, object>>();
+        private static readonly ConcurrentDictionary<Type, Func<Thread, object>> Creators = new ConcurrentDictionary<Type, Func<Thread, object>>();
 
         /// <summary>Constructor.</summary>
         /// <remarks>
@@ -78,7 +74,7 @@ namespace Qowaiv.Threading
         /// </remarks>
         protected ThreadDomain()
         {
-            this.Values = new Dictionary<Type, object>();
+            Values = new Dictionary<Type, object>();
         }
 
         /// <summary>The underlying dictionary.</summary>
@@ -99,22 +95,13 @@ namespace Qowaiv.Threading
 
             if (!Values.TryGetValue(type, out object value))
             {
-                var str = ConfigurationManager.AppSettings[type.FullName];
-                if (str != null)
+                if (Creators.TryGetValue(type, out Func<Thread, object> func))
                 {
-                    var converter = TypeDescriptor.GetConverter(type);
-                    value = converter.ConvertFromString(str);
+                    value = func.Invoke(Thread.CurrentThread);
                 }
                 else
                 {
-                    if (Creators.TryGetValue(type, out Func<Thread, object> func))
-                    {
-                        value = func.Invoke(Thread.CurrentThread);
-                    }
-                    else
-                    {
-                        value = default(T);
-                    }
+                    value = default(T);
                 }
             }
             return (T)value;
@@ -134,7 +121,7 @@ namespace Qowaiv.Threading
         public void Set<T>(T value)
         {
             var type = Guard(typeof(T), Values.ContainsKey(typeof(T)));
-            this.Values[type] = value;
+            Values[type] = value;
         }
 
         /// <summary>Removes the value from the thread domain.</summary>
@@ -148,7 +135,7 @@ namespace Qowaiv.Threading
         }
 
         /// <summary>Clears all values from the thread domain.</summary>
-        public void Clear() { this.Values.Clear(); }
+        public void Clear() => Values.Clear();
 
         /// <summary>Guards the type.</summary>
         /// <exception cref="NotSupportedException">

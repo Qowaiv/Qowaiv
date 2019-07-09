@@ -79,7 +79,7 @@ namespace Qowaiv.UnitTests.Formatting
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<FormattingArguments>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<FormattingArguments>(null, default);
             },
             "info");
         }
@@ -91,7 +91,7 @@ namespace Qowaiv.UnitTests.Formatting
             (() =>
             {
                 var info = new SerializationInfo(typeof(FormattingArguments), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<FormattingArguments>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<FormattingArguments>(info, default);
             });
         }
 
@@ -102,7 +102,7 @@ namespace Qowaiv.UnitTests.Formatting
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -112,7 +112,7 @@ namespace Qowaiv.UnitTests.Formatting
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(FormattingArguments), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual("0.000", info.GetString("Format"));
             Assert.AreEqual(new CultureInfo("fr-BE"), info.GetValue("FormatProvider", typeof(IFormatProvider)));

@@ -225,7 +225,7 @@ namespace Qowaiv.Fiancial.UnitTests
             (() =>
             {
                 SerializationTest.DeserializeUsingConstructor<YesNo>
-        (null, default(StreamingContext));
+        (null, default);
             },
             "info");
         }
@@ -238,7 +238,7 @@ namespace Qowaiv.Fiancial.UnitTests
             {
                 var info = new SerializationInfo(typeof(YesNo), new System.Runtime.Serialization.FormatterConverter());
                 SerializationTest.DeserializeUsingConstructor<YesNo>
-        (info, default(StreamingContext));
+        (info, default);
             });
         }
 
@@ -249,7 +249,7 @@ namespace Qowaiv.Fiancial.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -259,7 +259,7 @@ namespace Qowaiv.Fiancial.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(YesNo), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual((Byte)2, info.GetByte("Value"));
         }

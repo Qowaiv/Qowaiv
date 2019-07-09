@@ -6,9 +6,9 @@
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
+using Qowaiv.Conversion.Web;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
-using Qowaiv.Web.Conversion;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -154,7 +154,7 @@ namespace Qowaiv.Web
         #region Methods
 
         /// <summary>Returns true if the Internet media type is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(string);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the Internet media type is unknown, otherwise false.</summary>
         public bool IsUnknown() { return m_Value == InternetMediaType.Unknown.m_Value; }
@@ -219,10 +219,7 @@ namespace Qowaiv.Web
         #region (JSON) (De)serialization
 
         /// <summary>Generates an Internet media type from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(string);
-        }
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates an Internet media type from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -252,10 +249,7 @@ namespace Qowaiv.Web
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts an Internet media type into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
-        }
+        object IJsonSerializable.ToJson()=> m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -419,7 +413,7 @@ namespace Qowaiv.Web
             {
                 return val;
             }
-            throw new FormatException(QowaivWebMessages.FormatExceptionInternetMediaType);
+            throw new FormatException(QowaivMessages.FormatExceptionInternetMediaType);
         }
 
         /// <summary>Converts the string to an Internet media type.

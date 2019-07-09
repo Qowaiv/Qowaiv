@@ -53,7 +53,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the postal code is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(string);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
         public bool IsUnknown() { return m_Value == PostalCode.Unknown.m_Value; }
@@ -139,7 +139,7 @@ namespace Qowaiv
         /// <summary>Generates a postal code from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson()
         {
-            m_Value = default(string);
+            m_Value = default;
         }
 
         /// <summary>Generates a postal code from a JSON string representation.</summary>

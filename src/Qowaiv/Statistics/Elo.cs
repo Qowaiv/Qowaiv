@@ -33,7 +33,7 @@ namespace Qowaiv.Statistics
     public struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
     {
         /// <summary>Represents the zero value of an Elo.</summary>
-        public static readonly Elo Zero = new Elo { m_Value = default(Double) };
+        public static readonly Elo Zero = new Elo { m_Value = default };
 
         /// <summary>Represents the minimum value of an Elo.</summary>
         public static readonly Elo MinValue = new Elo { m_Value = Double.MinValue };

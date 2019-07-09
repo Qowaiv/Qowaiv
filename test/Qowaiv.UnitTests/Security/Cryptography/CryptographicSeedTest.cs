@@ -154,7 +154,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<CryptographicSeed>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<CryptographicSeed>(null, default);
             },
             "info");
         }
@@ -166,7 +166,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(CryptographicSeed), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<CryptographicSeed>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<CryptographicSeed>(info, default);
             });
         }
 
@@ -177,7 +177,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -187,7 +187,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(CryptographicSeed), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             CollectionAssert.AreEqual(new byte[] { 66, 140, 26, 138 }, (byte[])info.GetValue("Value", typeof(byte[])));
         }

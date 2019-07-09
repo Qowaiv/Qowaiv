@@ -210,7 +210,6 @@ formatting of the object is used, where FormattingArgumentsCollection.Format()
 uses the default specified at the formatting collection of a type (if available).
 
 ### Threading
-=========
 Because there are scenario's where you want to set typical values as a country 
 or a currency for the context of the current thread (like the culture info) 
 there is a possibility to add these to the Qowaiv.Threading.ThreadDomain.
@@ -218,6 +217,12 @@ there is a possibility to add these to the Qowaiv.Threading.ThreadDomain.
 These values can be configured (in the application settings) or can be created with
 a creator function that can be registered. If not specified otherwise the current 
 country will be created (if possible) based on the current culture.
+
+## MVC ModelBinding
+When using Qowaiv with MVC (not ASP.NET core) you need a specific model binder.
+This binder is needed because the default model binder don't call a type
+converter in case the input is string.Empty.
+The example can be found [here](src/Qowaiv.Web/Mvc/typeConverterModelBinder.cs).
 
 ## Qowaiv clock
 The `Clock` class is an outsider within the Qowaiv library. It is a solution 

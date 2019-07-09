@@ -241,6 +241,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid internet media type.
+        /// </summary>
+        public static string FormatExceptionInternetMediaType {
+            get {
+                return ResourceManager.GetString("FormatExceptionInternetMediaType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not valid date.
         /// </summary>
         public static string FormatExceptionLocalDateTime {

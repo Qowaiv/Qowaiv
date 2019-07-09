@@ -31,7 +31,7 @@ namespace Qowaiv.ComponentModel.DataAnnotations
                 return true;
             }
 
-            var collection = Guard.IsTypeOf<IEnumerable>(value, nameof(value)).Cast<object>();
+            var collection = Guard.IsInstanceOf<IEnumerable>(value, nameof(value)).Cast<object>();
             var checker = new HashSet<object>(EqualityComparer);
 
             return collection.All(checker.Add);

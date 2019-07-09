@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
-using Qowaiv.UnitTests.Mocking.Web;
-using Qowaiv.Web.UnitTests.Mocking;
+using Qowaiv.Web;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,7 +10,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace Qowaiv.Web.UnitTests
+namespace Qowaiv.UnitTests.Web
 {
     /// <summary>Tests the Internet media type SVO.</summary>
     public class InternetMediaTypeTest
@@ -103,11 +102,9 @@ namespace Qowaiv.Web.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            InternetMediaType val;
-
             string str = null;
 
-            Assert.IsTrue(InternetMediaType.TryParse(str, out val), "Valid");
+            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -115,11 +112,10 @@ namespace Qowaiv.Web.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            InternetMediaType val;
 
             string str = string.Empty;
 
-            Assert.IsTrue(InternetMediaType.TryParse(str, out val), "Valid");
+            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -127,11 +123,9 @@ namespace Qowaiv.Web.UnitTests
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            InternetMediaType val;
-
             string str = "?";
 
-            Assert.IsTrue(InternetMediaType.TryParse(str, out val), "Valid");
+            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -139,11 +133,9 @@ namespace Qowaiv.Web.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            InternetMediaType val;
-
             string str = "application/atom+xml";
 
-            Assert.IsTrue(InternetMediaType.TryParse(str, out val), "Valid");
+            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -151,11 +143,9 @@ namespace Qowaiv.Web.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            InternetMediaType val;
-
             string str = "string";
 
-            Assert.IsFalse(InternetMediaType.TryParse(str, out val), "Valid");
+            Assert.IsFalse(InternetMediaType.TryParse(str, out var val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -1013,56 +1003,6 @@ namespace Qowaiv.Web.UnitTests
             Assert.IsTrue(InternetMediaType.IsValid("application/x-chess-pgn"));
             Assert.IsTrue(InternetMediaType.IsValid("VIDEO/Mp3"));
         }
-        #endregion
-
-        #region Extension methods
-
-        [Test]
-        public void GetContentType_HttpRequest_TextHtml()
-        {
-            var request = new HttpRequestMock() { ContentType = "text/html" };
-
-            var act = request.GetContentType();
-            var exp = TextHtml;
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void SetContentType_HttpRequestTestStruct_TextHtml()
-        {
-            var request = new HttpRequestMock();
-
-            request.SetContentType(TestStruct);
-
-            var act = request.ContentType;
-            var exp = TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void GetContentType_HttpResponse_TextHtml()
-        {
-            var response = new HttpResponseMock() { ContentType = "text/html" };
-
-            var act = response.GetContentType();
-            var exp = TextHtml;
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void SetContentType_HttpResponseTestStruct_TextHtml()
-        {
-            var response = new HttpResponseMock();
-
-            response.SetContentType(TestStruct);
-
-            var act = response.ContentType;
-            var exp = TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-
         #endregion
     }
 

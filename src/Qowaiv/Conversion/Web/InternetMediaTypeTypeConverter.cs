@@ -1,7 +1,7 @@
-﻿using Qowaiv.Conversion;
+﻿using Qowaiv.Web;
 using System.Globalization;
 
-namespace Qowaiv.Web.Conversion
+namespace Qowaiv.Conversion.Web
 {
     /// <summary>Provides a conversion for an Internet media type.</summary>
     public class InternetMediaTypeTypeConverter : SvoTypeConverter<InternetMediaType>

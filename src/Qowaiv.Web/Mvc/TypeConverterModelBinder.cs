@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Qowaiv.Reflection;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Qowaiv.Reflection;
 
 namespace Qowaiv.Web.Mvc
 {
@@ -29,12 +28,10 @@ namespace Qowaiv.Web.Mvc
         /// <remarks>
         /// Add all types of Qowaiv that are supported by the model binder.
         /// </remarks>
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline",
-            Justification = "To complex for straight forward assignment.")]
         static TypeConverterModelBinder()
         {
-            var qowaivAssembly = typeof(Qowaiv.SingleValueObjectAttribute).Assembly;
-            var qowaivWebAssembly = typeof(Qowaiv.Web.InternetMediaType).Assembly;
+            var qowaivAssembly = typeof(SingleValueObjectAttribute).Assembly;
+            var qowaivWebAssembly = typeof(InternetMediaType).Assembly;
 
             // Add types.
             AddAssembly(qowaivAssembly);
@@ -47,7 +44,7 @@ namespace Qowaiv.Web.Mvc
         /// </param>
         public static void AddAssembly(Assembly assembly)
         {
-            Guard.NotNull(assembly, "assembly");
+            Guard.NotNull(assembly, nameof(assembly));
             var tps = assembly.GetTypes()
                 .Where(tp => QowaivType.IsSingleValueObject(tp))
                 .ToArray();
@@ -63,7 +60,7 @@ namespace Qowaiv.Web.Mvc
         /// </remarks>
         public static void AddTypes(params Type[] tps)
         {
-            Guard.NotNull(tps, "tps");
+            Guard.NotNull(tps, nameof(tps));
             foreach (var tp in tps)
             {
                 AddType(tp);
@@ -97,14 +94,10 @@ namespace Qowaiv.Web.Mvc
         /// <param name="tp">
         /// Type to remove.
         /// </param>
-        public static void RemoveType(Type tp)
-        {
-            TypeConverter converter;
-            TypeConverters.TryRemove(tp, out converter);
-        }
+        public static void RemoveType(Type tp) => TypeConverters.TryRemove(tp, out _);
 
         /// <summary>Gets the types that where added to the model binder.</summary>
-        public static IEnumerable<Type> Types { get { return TypeConverters.Keys; } }
+        public static IEnumerable<Type> Types => TypeConverters.Keys;
 
         /// <summary>Registers the model binder to the specified model binder dictionary.</summary>
         /// <param name="binders">The model binder dictionary to add to.</param>
@@ -120,16 +113,15 @@ namespace Qowaiv.Web.Mvc
         /// </remarks>
         public static void RegisterForAll(ModelBinderDictionary binders)
         {
-            Guard.NotNull(binders, "binders");
+            Guard.NotNull(binders, nameof(binders));
             foreach (var tp in TypeConverters.Keys)
             {
-                binders.Add(tp, TypeConverterModelBinder.Instance);
+                binders.Add(tp, Instance);
             }
         }
 
         /// <summary>The singleton instance of the model binder.</summary>
-        public static TypeConverterModelBinder Instance { get { return s_Instance; } }
-        private static TypeConverterModelBinder s_Instance = new TypeConverterModelBinder();
+        public static TypeConverterModelBinder Instance { get; } = new TypeConverterModelBinder();
 
         /// <summary>Constructor.</summary>
         /// <remarks>
@@ -141,22 +133,19 @@ namespace Qowaiv.Web.Mvc
         /// <param name="controllerContext">Controller context.</param>
         /// <param name="bindingContext">The binding context.</param>
         /// <returns>The bound model.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "All exceptions are caught and added as errors to the model state.")]
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            Guard.NotNull(bindingContext, "bindingContext");
+            Guard.NotNull(bindingContext, nameof(bindingContext));
 
             // Get the value result.
             var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            if (valueResult == null) { return null; }
+            if (valueResult is null) { return null; }
 
-            string value = null;
-            var valueAsArray = valueResult.RawValue as Array;
-            if (valueAsArray != null && valueAsArray.Length > 0)
+            string value;
+            if (valueResult.RawValue is Array array && array.Length > 0)
             {
                 // provided value is an array; take first element (if available)
-                value = valueAsArray.GetValue(0) as string;
+                value = array.GetValue(0) as string;
             }
             else
             {

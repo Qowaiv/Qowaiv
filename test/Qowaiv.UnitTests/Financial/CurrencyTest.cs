@@ -270,7 +270,7 @@ namespace Qowaiv.UnitTests.Financial
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Currency>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Currency>(null, default);
             },
             "info");
         }
@@ -282,7 +282,7 @@ namespace Qowaiv.UnitTests.Financial
             (() =>
             {
                 var info = new SerializationInfo(typeof(Currency), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Currency>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Currency>(info, default);
             });
         }
 
@@ -293,7 +293,7 @@ namespace Qowaiv.UnitTests.Financial
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -303,7 +303,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Currency), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual("EUR", info.GetString("Value"));
         }

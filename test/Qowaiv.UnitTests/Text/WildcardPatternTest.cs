@@ -182,7 +182,7 @@ namespace Qowaiv.UnitTests.Text
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(null, default);
             },
             "info");
         }
@@ -194,7 +194,7 @@ namespace Qowaiv.UnitTests.Text
             (() =>
             {
                 var info = new SerializationInfo(typeof(WildcardPattern), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(info, default);
             });
         }
 
@@ -205,7 +205,7 @@ namespace Qowaiv.UnitTests.Text
             (() =>
             {
                 ISerializable obj = new WildcardPattern("*");
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -215,7 +215,7 @@ namespace Qowaiv.UnitTests.Text
         {
             ISerializable obj = TestPattern;
             var info = new SerializationInfo(typeof(Date), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual("t?st*", info.GetString("Pattern"));
             Assert.AreEqual((int)WildcardPatternOptions.SingleOrTrailing, info.GetInt32("Options"));

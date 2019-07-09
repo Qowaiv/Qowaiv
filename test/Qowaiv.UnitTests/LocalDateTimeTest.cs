@@ -128,7 +128,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<LocalDateTime>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<LocalDateTime>(null, default);
             },
             "info");
         }
@@ -140,7 +140,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(LocalDateTime), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<LocalDateTime>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<LocalDateTime>(info, default);
             });
         }
 
@@ -151,7 +151,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -161,7 +161,7 @@ namespace Qowaiv.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(LocalDateTime), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual(new DateTime(1988, 06, 13, 22, 10, 05, 001), info.GetDateTime("Value"));
         }

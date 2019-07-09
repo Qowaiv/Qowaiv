@@ -251,7 +251,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Gender>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Gender>(null, default);
             },
             "info");
         }
@@ -262,7 +262,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(Gender), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Gender>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Gender>(info, default);
             });
         }
 
@@ -273,7 +273,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -282,7 +282,7 @@ namespace Qowaiv.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Gender), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual((Byte)2, info.GetByte("Value"));
         }

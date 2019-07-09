@@ -37,7 +37,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<EmailAddress>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<EmailAddress>(null, default);
             },
             "info");
         }
@@ -49,7 +49,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(EmailAddress), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<EmailAddress>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<EmailAddress>(info, default);
             });
         }
 
@@ -60,7 +60,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = GetTestInstance();
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -70,7 +70,7 @@ namespace Qowaiv.UnitTests
         {
             ISerializable obj = GetTestInstance();
             var info = new SerializationInfo(typeof(EmailAddressCollection), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual("info@qowaiv.org,test@qowaiv.org", info.GetString("Value"));
         }

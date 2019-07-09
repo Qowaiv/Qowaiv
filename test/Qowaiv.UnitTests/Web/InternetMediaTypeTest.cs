@@ -257,7 +257,7 @@ namespace Qowaiv.UnitTests.Web
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<InternetMediaType>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<InternetMediaType>(null, default);
             },
             "info");
         }
@@ -269,7 +269,7 @@ namespace Qowaiv.UnitTests.Web
             (() =>
             {
                 var info = new SerializationInfo(typeof(InternetMediaType), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<InternetMediaType>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<InternetMediaType>(info, default);
             });
         }
 
@@ -280,7 +280,7 @@ namespace Qowaiv.UnitTests.Web
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -290,7 +290,7 @@ namespace Qowaiv.UnitTests.Web
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(InternetMediaType), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual("application/x-chess-pgn", info.GetString("Value"));
         }

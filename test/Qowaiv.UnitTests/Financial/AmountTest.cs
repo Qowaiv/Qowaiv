@@ -134,7 +134,7 @@ namespace Qowaiv.Financial.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Amount>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Amount>(null, default);
             },
             "info");
         }
@@ -146,7 +146,7 @@ namespace Qowaiv.Financial.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(Amount), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Amount>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Amount>(info, default);
             });
         }
 
@@ -157,7 +157,7 @@ namespace Qowaiv.Financial.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -167,7 +167,7 @@ namespace Qowaiv.Financial.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Amount), new FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual(42.17m, info.GetDecimal("Value"));
         }

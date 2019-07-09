@@ -223,7 +223,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<PostalCode>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<PostalCode>(null, default);
             },
             "info");
         }
@@ -235,7 +235,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(PostalCode), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<PostalCode>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<PostalCode>(info, default);
             });
         }
 
@@ -246,7 +246,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -256,7 +256,7 @@ namespace Qowaiv.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(PostalCode), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual(TestStruct.ToString(), info.GetString("Value"));
         }

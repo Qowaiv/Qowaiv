@@ -166,7 +166,7 @@ namespace Qowaiv.UnitTests.Sql
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Timestamp>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Timestamp>(null, default);
             },
             "info");
         }
@@ -178,7 +178,7 @@ namespace Qowaiv.UnitTests.Sql
             (() =>
             {
                 var info = new SerializationInfo(typeof(Timestamp), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Timestamp>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Timestamp>(info, default);
             });
         }
 
@@ -189,7 +189,7 @@ namespace Qowaiv.UnitTests.Sql
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -199,7 +199,7 @@ namespace Qowaiv.UnitTests.Sql
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Timestamp), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual((Int64)123456789, info.GetInt64("Value"));
         }

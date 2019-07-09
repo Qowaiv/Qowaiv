@@ -258,7 +258,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<HouseNumber>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<HouseNumber>(null, default);
             },
             "info");
         }
@@ -270,7 +270,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(HouseNumber), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<HouseNumber>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<HouseNumber>(info, default);
             });
         }
 
@@ -281,7 +281,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -291,7 +291,7 @@ namespace Qowaiv.UnitTests
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(HouseNumber), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual(123456789, info.GetInt32("Value"));
         }

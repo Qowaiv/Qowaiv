@@ -280,7 +280,7 @@ namespace Qowaiv.UnitTests.Globalization
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<Country>(null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Country>(null, default);
             },
             "info");
         }
@@ -292,7 +292,7 @@ namespace Qowaiv.UnitTests.Globalization
             (() =>
             {
                 var info = new SerializationInfo(typeof(Country), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Country>(info, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<Country>(info, default);
             });
         }
 
@@ -303,7 +303,7 @@ namespace Qowaiv.UnitTests.Globalization
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -313,7 +313,7 @@ namespace Qowaiv.UnitTests.Globalization
         {
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Country), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual("VA", info.GetString("Value"));
         }

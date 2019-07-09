@@ -97,7 +97,7 @@ namespace Qowaiv.Financial
         #region Methods
 
         /// <summary>Returns true if the BIC is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(string);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the BIC is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -162,7 +162,7 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates a BIC from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default(string);
+        void IJsonSerializable.FromJson() => m_Value = default;
 
 
         /// <summary>Generates a BIC from a JSON string representation.</summary>
@@ -195,7 +195,7 @@ namespace Qowaiv.Financial
         /// <summary>Converts a BIC into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
+            return m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion

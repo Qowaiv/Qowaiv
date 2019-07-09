@@ -84,7 +84,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the email address is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(string);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the email address is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -151,7 +151,7 @@ namespace Qowaiv
         /// <summary>Generates an email address from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson()
         {
-            m_Value = default(string);
+            m_Value = default;
         }
 
         /// <summary>Generates an email address from a JSON string representation.</summary>
@@ -184,7 +184,7 @@ namespace Qowaiv
         /// <summary>Converts an email address into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
+            return m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion

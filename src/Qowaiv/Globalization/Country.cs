@@ -83,7 +83,7 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// The numeric code defined in ISO 3166-1 for the country/region.
         /// </returns>
-        public int IsoNumericCode { get { return m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture)); } }
+        public int IsoNumericCode { get { return m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture)); } }
 
         /// <summary>Gets the country calling code as defined by ITU-T.</summary>
         /// <remarks>
@@ -95,7 +95,7 @@ namespace Qowaiv.Globalization
         public bool RegionInfoExists { get { return !string.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture)); } }
 
         /// <summary>Gets the start date from witch the country exists.</summary>
-        public Date StartDate { get { return m_Value == default(string) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
+        public Date StartDate { get { return m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
 
         /// <summary>If the country does not exist anymore, the end date is given, otherwise null.</summary>
         public Date? EndDate
@@ -112,7 +112,7 @@ namespace Qowaiv.Globalization
         #region Methods
 
         /// <summary>Returns true if the Country is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(string);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the Country is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -223,7 +223,7 @@ namespace Qowaiv.Globalization
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Country from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default(string);
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates a Country from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -268,7 +268,7 @@ namespace Qowaiv.Globalization
         {
             get
             {
-                if (m_Value == default(string))
+                if (m_Value == default)
                 {
                     return "Country: (empty)";
                 }
@@ -575,7 +575,7 @@ namespace Qowaiv.Globalization
         /// </returns>
         public static Country Create(RegionInfo region)
         {
-            if (region == null) { return default(Country); }
+            if (region == null) { return default; }
             // In .NET, Serbia and Montenegro (CS) is still active.
             if (region.TwoLetterISORegionName == "CS") { return CSXX; }
 
@@ -594,7 +594,7 @@ namespace Qowaiv.Globalization
         {
             if (culture == null || culture == CultureInfo.InvariantCulture || culture.IsNeutralCulture)
             {
-                return default(Country);
+                return default;
             }
 
             var name = culture.Name.Substring(culture.Name.IndexOf('-') + 1);
@@ -700,7 +700,7 @@ namespace Qowaiv.Globalization
         /// </param>
         internal string GetResourceString(string postfix, CultureInfo culture)
         {
-            if (m_Value == default(string)) { return string.Empty; }
+            if (m_Value == default) { return string.Empty; }
             return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
         }
 

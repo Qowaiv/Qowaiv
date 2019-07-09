@@ -75,16 +75,16 @@ namespace Qowaiv.Financial
         public string IsoCode => GetResourceString("ISO", CultureInfo.InvariantCulture);
 
         ///<summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
-        public int IsoNumericCode => m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture));
+        public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture));
 
         ///<summary>Gets the symbol for a currency.</summary>
-        public string Symbol => m_Value == default(string) ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture);
+        public string Symbol => m_Value == default ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture);
 
         ///<summary>Gets the number of after the decimal separator.</summary>
-        public int Digits => m_Value == default(string) ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture));
+        public int Digits => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture));
 
         /// <summary>Gets the start date from witch the currency exists.</summary>
-        public Date StartDate => m_Value == default(string) ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
+        public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
 
         /// <summary>If the currency does not exist anymore, the end date is given, otherwise null.</summary>
         public Date? EndDate
@@ -101,7 +101,7 @@ namespace Qowaiv.Financial
         #region Methods
 
         /// <summary>Returns true if the currency is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(string);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the currency is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -193,7 +193,7 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates a currency from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default(string);
+        void IJsonSerializable.FromJson() => m_Value = default;
 
 
         /// <summary>Generates a currency from a JSON string representation.</summary>
@@ -229,7 +229,7 @@ namespace Qowaiv.Financial
         /// <summary>Converts a currency into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return m_Value == default(string) ? null : ToString(CultureInfo.InvariantCulture);
+            return m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion
@@ -676,7 +676,7 @@ namespace Qowaiv.Financial
         /// </param>
         internal string GetResourceString(string postfix, CultureInfo culture)
         {
-            if (m_Value == default(string)) { return string.Empty; }
+            if (m_Value == default) { return string.Empty; }
             return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
         }
 

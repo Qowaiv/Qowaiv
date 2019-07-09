@@ -411,7 +411,7 @@ namespace Qowaiv.IO
         /// <summary>Generates a stream size from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson()
         {
-            m_Value = default(long);
+            m_Value = default;
         }
 
         /// <summary>Generates a stream size from a JSON string representation.</summary>

@@ -90,7 +90,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the Gender is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(byte);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the Gender is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -173,7 +173,7 @@ namespace Qowaiv
         /// <summary>Generates a Gender from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson()
         {
-            m_Value = default(byte);
+            m_Value = default;
         }
 
         /// <summary>Generates a Gender from a JSON string representation.</summary>
@@ -222,7 +222,7 @@ namespace Qowaiv
         {
             get
             {
-                if (m_Value == default(byte)) { return "Gender: (empty)"; }
+                if (m_Value == default) { return "Gender: (empty)"; }
                 return "Gender: " + GetDisplayName(CultureInfo.InvariantCulture);
             }
         }

@@ -1,4 +1,9 @@
-﻿### New in 3.2.4 (Released 2019/04/05)
+﻿### New in 4.0.0 (Released 2019/07/09)
+* .NET standard 2.0 only (#59)
+* Drop of Qowaiv.Web, Qowaiv.Json.Newtonsoft packages
+* Introduction of Qowaiv.TestTools (v1.0.0)
+
+### New in 3.2.4 (Released 2019/04/05)
 * Introduction of Clock.NowWithOffset(TimezoneInfo) #45
 * Fix LocalDateTime to always have DateTimeKind.Local and no loss of ticks
 * Clock.UtcNow() is guaranteed to have DateTimeKind.Utc

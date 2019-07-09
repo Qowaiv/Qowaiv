@@ -56,8 +56,8 @@ namespace Qowaiv.Json
             Guard.NotNull(reader, nameof(reader));
             Guard.NotNull(objectType, "objectType");
 
-            var isNullable = objectType.IsGenericType;
-            var result = (IJsonSerializable)Activator.CreateInstance(isNullable ? objectType.GetGenericArguments()[0] : objectType);
+            var type = QowaivType.GetNotNullableType(objectType);
+            var result = (IJsonSerializable)Activator.CreateInstance(type);
 
             try
             {
@@ -65,7 +65,7 @@ namespace Qowaiv.Json
                 {
                     // Empty value for null-ables.
                     case JsonToken.Null:
-                        if (isNullable) { return null; }
+                        if (type != objectType) { return null; }
                         result.FromJson();
                         break;
 
@@ -119,7 +119,7 @@ namespace Qowaiv.Json
                 writer.WriteNull();
             }
 
-            var json = Guard.IsTypeOf<IJsonSerializable>(value, nameof(value));
+            var json = Guard.IsInstanceOf<IJsonSerializable>(value, nameof(value));
 
             var jsonValue = json.ToJson();
 

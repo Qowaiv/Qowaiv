@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project>
-  <PropertyGroup>
-    <VersionPrefix>3.2.5</VersionPrefix>
-    <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''"></VersionSuffix>
-  </PropertyGroup>
-</Project>

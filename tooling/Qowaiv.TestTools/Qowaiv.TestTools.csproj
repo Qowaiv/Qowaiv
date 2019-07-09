@@ -19,8 +19,4 @@
     <Compile Include="..\..\src\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Update="SonarAnalyzer.CSharp" Version="7.15.0.8572" />
-  </ItemGroup>
-  
 </Project>

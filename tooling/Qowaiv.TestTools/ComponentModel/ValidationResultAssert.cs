@@ -19,11 +19,6 @@ namespace Qowaiv.TestTools.ComponentModel
         {
             Assert.IsNotNull(result, "The result is null.");
             SameMessages(expectedMessages, result.Messages);
-            NewMethod(result);
-        }
-
-        private static void NewMethod(Result result)
-        {
             Assert.IsTrue(result.IsValid, "The result is not valid");
         }
 

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.ComponentModel.Messages;
-using Qowaiv.ComponentModel.Tests.TestTools;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.ComponentModel.UnitTests
@@ -25,14 +25,7 @@ namespace Qowaiv.ComponentModel.UnitTests
             Assert.AreEqual(expected.Message, actual.Message);
             Assert.IsNull(actual.InnerException);
 
-            var actualErrors = actual.Errors.ForAssertion();
-
-            Assert.AreEqual(new[]
-            {
-                ValidationTestMessage.Error("Not a prime", "_value"),
-                ValidationTestMessage.Error("Not serializable", "this")
-            },
-            actualErrors);
+            ValidationResultAssert.SameMessages(expected.Errors, actual.Errors);
         }
     }
 }

@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Compile Remove="Validation\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Validation\**" />
+    <None Remove="Models\**" />
+    <None Remove="Validation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="AnnotatedModelTest.cs" />
+    <Compile Remove="AssemblyTest.cs" />
+    <Compile Remove="IdentifierTest.cs" />
+    <Compile Remove="InvalidModelExceptionTest.cs" />
+    <Compile Remove="ResultTest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Models\ModelWithAllowedValues.cs" />
+    <Compile Include="Models\ModelWithCustomizedResource.cs" />
+    <Compile Include="Models\ModelWithForbiddenValues.cs" />
+    <Compile Include="Models\ModelWithMandatoryProperties.cs" />
+    <Compile Include="Models\ModelWithOneState.cs" />
+    <Compile Include="Models\NestedModel.cs" />
+    <Compile Include="Models\NestedModelWithChildren.cs" />
+    <Compile Include="Models\NestedModelWithLoop.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv.Validation.DataAnnotations\Qowaiv.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="..\..\tooling\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TestMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TestMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="TestMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,6 @@
-﻿using Qowaiv.ComponentModel.DataAnnotations;
-using System;
+﻿using System;
 
-namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
+namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models
 {
     public class NestedModelWithLoop
     {

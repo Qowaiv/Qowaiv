@@ -1,15 +1,14 @@
-﻿using Qowaiv.ComponentModel.DataAnnotations;
-using System;
+﻿using System;
 
-namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
+namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models
 {
-    public class NestedModel
+    public class NestedModelWithChildren
     {
         [Mandatory]
         public Guid Id { get; set; }
 
         [Mandatory]
-        public ChildModel Child { get; set; }
+        public ChildModel[] Children { get; set; }
 
         [NestedModel]
         public class ChildModel
@@ -17,6 +16,5 @@ namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
             [Mandatory]
             public string Name { get; set; }
         }
-
     }
 }

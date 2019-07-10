@@ -23,9 +23,15 @@ namespace Qowaiv.ComponentModel.UnitTests
             var actual = SerializationTest.SerializeDeserialize(expected);
 
             Assert.AreEqual(expected.Message, actual.Message);
+            Assert.AreEqual(2, actual.Errors.Count);
             Assert.IsNull(actual.InnerException);
 
-            ValidationResultAssert.SameMessages(expected.Errors, actual.Errors);
+            ValidationResultAssert.SameMessages(new[]
+            {
+                ValidationMessage.Error("Not a prime", "_value"),
+                ValidationMessage.Error("Not serializable", "this")
+            },
+            actual.Errors);
         }
     }
 }

@@ -30,7 +30,7 @@
       <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="QowaivValidationFluentMessages.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>QowaivValidationFluentMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

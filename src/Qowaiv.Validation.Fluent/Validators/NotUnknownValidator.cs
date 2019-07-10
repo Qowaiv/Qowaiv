@@ -1,4 +1,5 @@
-﻿using FluentValidation.Validators;
+﻿using FluentValidation.Resources;
+using FluentValidation.Validators;
 
 namespace Qowaiv.Validation.Fluent.Validators
 {
@@ -7,7 +8,7 @@ namespace Qowaiv.Validation.Fluent.Validators
         private readonly object _unknownValueForType;
 
         public NotUnknownValidator(object unknownValueForType)
-            : base(nameof(NotUnknownValidator), typeof(QowaivValidationFluentMessages))
+            : base(new LazyStringSource(context => QowaivValidationFluentMessages.NotUnknownValidator))
         {
             _unknownValueForType = unknownValueForType;
         }

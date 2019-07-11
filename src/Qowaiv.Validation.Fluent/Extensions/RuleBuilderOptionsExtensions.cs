@@ -1,5 +1,8 @@
-﻿using Qowaiv;
+﻿using FluentValidation.Internal;
+using Qowaiv;
+using Qowaiv.Globalization;
 using Qowaiv.Validation.Fluent.Validators;
+using System;
 
 namespace FluentValidation
 {
@@ -24,6 +27,38 @@ namespace FluentValidation
         public static IRuleBuilderOptions<T, TProperty> NotEmptyOrUnknown<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder)
         {
             return ruleBuilder.NotEmpty().NotUnknown();
+        }
+
+        /// <summary>Defines a postal code validator on the current rule builder.</summary>
+        /// <typeparam name="T">
+        /// Type of object being validated.
+        /// </typeparam>
+        /// <param name="ruleBuilder">
+        /// The rule builder on which the validator should be defined.
+        /// </param>
+        /// <param name="country">
+        /// The county the postal code should be valid for.
+        /// </param>
+        public static IRuleBuilderOptions<T, PostalCode> ValidFor<T, PostalCode>(this IRuleBuilder<T, PostalCode> ruleBuilder, Country country)
+        {
+            Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+            return ruleBuilder.SetValidator(new PostalCodeValidator(country));
+        }
+
+        /// <summary>Defines a postal code validator on the current rule builder.</summary>
+        /// <typeparam name="T">
+        /// Type of object being validated.
+        /// </typeparam>
+        /// <param name="ruleBuilder">
+        /// The rule builder on which the validator should be defined.
+        /// </param>
+        /// <param name="country">
+        /// The county the postal code should be valid for.
+        /// </param>
+        public static IRuleBuilderOptions<T, PostalCode> ValidFor<T, PostalCode>(this IRuleBuilder<T, PostalCode> ruleBuilder, Func<T, Country> country)
+        {
+            Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+            return ruleBuilder.SetValidator(new PostalCodeValidator(country.ToNongenericInput()));
         }
     }
 }

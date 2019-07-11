@@ -10,7 +10,7 @@ namespace Qowaiv.Validation.Fluent.Validators
 
         /// <summary>Creates a new instance of a <see cref="NotUnknownValidator"/>.</summary>
         public NotUnknownValidator(object unknownValueForType)
-            : base(new LazyStringSource(context => QowaivValidationFluentMessages.NotUnknownValidator))
+            : base(new LazyStringSource(context => QowaivValidationFluentMessages.NotUnknown))
         {
             _unknownValueForType = unknownValueForType;
         }

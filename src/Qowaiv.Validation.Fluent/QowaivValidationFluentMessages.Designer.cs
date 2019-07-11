@@ -63,9 +63,18 @@ namespace Qowaiv.Validation.Fluent {
         /// <summary>
         ///   Looks up a localized string similar to &apos;{PropertyName}&apos; must not be unknown..
         /// </summary>
-        internal static string NotUnknownValidator {
+        internal static string NotUnknown {
             get {
-                return ResourceManager.GetString("NotUnknownValidator", resourceCulture);
+                return ResourceManager.GetString("NotUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; {Value} is not valid for {Country}..
+        /// </summary>
+        internal static string PostalCodeValidForCountry {
+            get {
+                return ResourceManager.GetString("PostalCodeValidForCountry", resourceCulture);
             }
         }
     }

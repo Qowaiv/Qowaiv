@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Reflection;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,31 +12,20 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Creates a new instance of an <see cref="AnnotatedModelStore"/>.</summary>
         internal AnnotatedModelStore()
         {
-            Models = new Dictionary<Type, AnnotatedModel>
+            _models = new ConcurrentDictionary<Type, AnnotatedModel>(new Dictionary<Type, AnnotatedModel>
             {
-                { typeof(string), AnnotatedModel.None },
-                { typeof(char), AnnotatedModel.None },
-                { typeof(short), AnnotatedModel.None },
-                { typeof(int), AnnotatedModel.None },
-                { typeof(long), AnnotatedModel.None },
-                { typeof(ushort), AnnotatedModel.None },
-                { typeof(uint), AnnotatedModel.None },
-                { typeof(ulong), AnnotatedModel.None },
-                { typeof(float), AnnotatedModel.None },
-                { typeof(double), AnnotatedModel.None },
-                { typeof(decimal), AnnotatedModel.None },
                 { typeof(Guid), AnnotatedModel.None },
                 { typeof(DateTime), AnnotatedModel.None },
                 { typeof(DateTimeOffset), AnnotatedModel.None },
-            };
-            foreach(var tp in typeof(Date).Assembly.GetTypes().Where(tp => tp.IsValueType && tp.IsVisible))
+            });
+            foreach (var tp in typeof(Date).Assembly.GetTypes().Where(tp => tp.IsValueType && tp.IsVisible))
             {
-                Models[tp] = AnnotatedModel.None;
+                _models[tp] = AnnotatedModel.None;
             }
         }
 
         /// <summary>Gets the stored <see cref="AnnotatedModel"/>s.</summary>
-        private IDictionary<Type, AnnotatedModel> Models { get; }
+        private readonly ConcurrentDictionary<Type, AnnotatedModel> _models;
 
         /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
         public AnnotatedModel GetAnnotededModel(Type type)
@@ -44,26 +34,16 @@ namespace Qowaiv.Validation.DataAnnotations
 
             var tp = QowaivType.GetNotNullableType(type);
 
-            if (Models.TryGetValue(tp, out AnnotatedModel model))
-            {
-                return model;
-            }
-            if (tp.IsEnum)
+            if (tp.IsEnum || type.IsPrimitive)
             {
                 return AnnotatedModel.None;
             }
-            lock (locker)
+            if (!_models.TryGetValue(tp, out AnnotatedModel model))
             {
-                if (!Models.TryGetValue(tp, out model))
-                {
-                    model = AnnotatedModel.Create(tp);
-                    Models[type] = model;
-                }
-                return model;
+                model = AnnotatedModel.Create(tp);
+                _models[type] = model;
             }
+            return model;
         }
-
-        ///// <summary>To be thread-safe we have a locker.</summary>
-        private readonly object locker = new object();
     }
 }

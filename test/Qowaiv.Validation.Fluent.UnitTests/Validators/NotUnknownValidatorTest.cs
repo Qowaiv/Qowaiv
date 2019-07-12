@@ -11,9 +11,9 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         [Test]
         public void Validate_Empty_WithError()
         {
-            var model = new SimpleModel();
+            var model = new NotUnknownModel();
 
-            FluentValidatorAssert.WithErrors<SimpleModelValidator, SimpleModel>(model,
+            FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
                 new ValidationMessage() { Severity = ValidationSeverity.Error, Message = "'Email' must not be empty.", MemberName = "Email" }
             );
         }
@@ -23,9 +23,9 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         {
             using (new CultureInfoScope("nl"))
             {
-                var model = new SimpleModel { Email = EmailAddress.Unknown };
+                var model = new NotUnknownModel { Email = EmailAddress.Unknown };
 
-                FluentValidatorAssert.WithErrors<SimpleModelValidator, SimpleModel>(model,
+                FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
                     new ValidationMessage() { Severity = ValidationSeverity.Error, Message = "'Email' mag niet onbekend zijn.", MemberName = "Email" }
                 );
             }

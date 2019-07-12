@@ -259,38 +259,8 @@ public void TestSomething()
 }
 ```
 
-## Qowaiv Component Model
-### Annotations
-We're extending the DataAnnotations from Microsoft with some more attributes:
-
- * [`Mandatory`] Here the difference with Microsoft's [`Required`] attribute is that it works for value types as well, it will be invalid if the default value is used.
-* [`AllowedValues`] and 
-* [`ForbiddenValues`] make it easy to validate string values, or objects/value types that have a string representation.
-* [`Any`] Tells that a collection should have at least one item.
-* [`DefinedEnumValuesOnly`] limits the allowed enum values to those defined by the enum.
-
-### Result model
-Also we propose a Result model that includes the validation messages, and Result which can contain both an object and validation messages. This can be a helpful return type for methods that need to return objects but first have to validate them.
-
-``` CSharp
-Result<DataType> result = Result.For(data);
-Result<DataType> resultWithMessages = Result.For(data, messages);
-```
-
-### ValidationMessages with severity
-The difference with Microsoft's default ValidationResult and ValidationMessages is that in this PR we support a severity: info, warning, or error.
-
-Those messages can be created via factory methods:
-``` CSharp
-var none = ValidationMessage.None;
-var info = ValidationMessage.Info(message, args);
-var warn = ValidationMessage.Warning(message, args);
-var error = ValidationMessage.Error(message, args);
-```
-
-Or contained by a Result or Result&lt;T&gt;:
-
-``` CSharp
-Result result = Result.WithMessage(messages);
-Result<DataType> result = Result.WithMessage<DataType>(messages);
-```
+## Validation
+Qowaiv supports validation of different kind. Details can be found here:
+* [Qowaiv validation abstractions](src/Qowaiv.Validation.Abstractions/README.md)
+* [Qowaiv validation data annotations](src/Qowaiv.Validation.DataAnnotations/README.md)
+* [Qowaiv validation FluentValidation.NET](src/Qowaiv.Validation.Fluent/README.md)

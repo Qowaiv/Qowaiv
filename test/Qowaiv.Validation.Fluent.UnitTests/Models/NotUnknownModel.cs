@@ -2,13 +2,13 @@
 
 namespace Qowaiv.Validation.Fluent.UnitTests.Models
 {
-    public class SimpleModel
+    public class NotUnknownModel
     {
         public EmailAddress Email { get; set; }
     }
-    public class SimpleModelValidator : AbstractValidator<SimpleModel>
+    public class NotUnknownModelValidator : AbstractValidator<NotUnknownModel>
     {
-        public SimpleModelValidator()
+        public NotUnknownModelValidator()
         {
             RuleFor(m => m.Email).NotEmptyOrUnknown();
         }

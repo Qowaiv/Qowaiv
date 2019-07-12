@@ -2,7 +2,7 @@
 using Qowaiv.ComponentModel.DataAnnotations;
 using System;
 
-namespace Qowaiv.ComponentModel.Tests.DataAnnotations
+namespace Qowaiv.Validation.DataAnnotations.Tests.ValidationAttributes
 {
     public class MandatoryAttributeTest
     {

@@ -1,9 +1,9 @@
 ﻿using Qowaiv.ComponentModel.DataAnnotations;
 using System;
 
-namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
+namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models
 {
-    public class NestedModelWithLoop
+    public class NestedModel
     {
         [Mandatory]
         public Guid Id { get; set; }
@@ -16,8 +16,7 @@ namespace Qowaiv.ComponentModel.UnitTests.Validation.Models
         {
             [Mandatory]
             public string Name { get; set; }
-
-            public NestedModelWithLoop Parent { get; set; }
         }
+
     }
 }

@@ -60,5 +60,20 @@ namespace FluentValidation
             Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
             return ruleBuilder.SetValidator(new PostalCodeValidator(country.ToNongenericInput()));
         }
+
+        private static readonly NoIPBasedEmailAddressValidator _validator = new NoIPBasedEmailAddressValidator();
+
+        /// <summary>Defines validator that disallows IP-based email addresses on the current rule builder.</summary>
+        /// <typeparam name="TModel">
+        /// Type of object being validated.
+        /// </typeparam>
+        /// <param name="ruleBuilder">
+        /// The rule builder on which the validator should be defined.
+        /// </param>
+        public static IRuleBuilderOptions<TModel, EmailAddress> NotIPBased<TModel, EmailAddress>(this IRuleBuilder<TModel, EmailAddress> ruleBuilder)
+        {
+            Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+            return ruleBuilder.SetValidator(_validator);
+        }
     }
 }

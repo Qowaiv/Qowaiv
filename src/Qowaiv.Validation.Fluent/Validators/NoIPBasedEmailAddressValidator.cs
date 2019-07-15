@@ -1,11 +1,10 @@
-﻿using FluentValidation;
-using FluentValidation.Resources;
+﻿using FluentValidation.Resources;
 using FluentValidation.Validators;
 
 namespace Qowaiv.Validation.Fluent.Validators
 {
-    /// <summary>A validator that disallowes IP-based email addresses.</summary>
-    public class NoIPBasedEmailAddressValidator : PropertyValidator
+    /// <summary>A validator that disallows IP-based email addresses.</summary>
+    internal class NoIPBasedEmailAddressValidator : PropertyValidator
     {
         /// <summary>Creates a new instance of a <see cref="NoIPBasedEmailAddressValidator"/>.</summary>
         public NoIPBasedEmailAddressValidator()
@@ -14,8 +13,7 @@ namespace Qowaiv.Validation.Fluent.Validators
         /// <inheritdoc />
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            Guard.NotNull(context, nameof(context));
-            var email = Guard.IsInstanceOf<EmailAddress>(context.PropertyValue, nameof(context.PropertyValue));
+            var email = (EmailAddress)context.PropertyValue;
             return !email.IsIPBased;
         }
     }

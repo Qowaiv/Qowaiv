@@ -23,8 +23,7 @@ namespace Qowaiv.Validation.Fluent.Validators
         /// <inheritdoc />
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            Guard.NotNull(context, nameof(context));
-            var postalCode = Guard.IsInstanceOf<PostalCode>(context.PropertyValue, nameof(context.PropertyValue));
+            var postalCode = (PostalCode)context.PropertyValue;
             var country = _country(context.Instance);
 
             if(country.IsEmptyOrUnknown() 
@@ -35,8 +34,7 @@ namespace Qowaiv.Validation.Fluent.Validators
             }
             context.MessageFormatter
                 .AppendArgument(nameof(Country), country.DisplayName)
-                .AppendArgument("Value", postalCode)
-                ;
+                .AppendArgument("Value", postalCode);
 
             return false;
         }

@@ -1,5 +1,4 @@
-﻿using FluentValidation.Internal;
-using Qowaiv;
+﻿using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Validation.Fluent.Validators;
 using System;
@@ -61,7 +60,6 @@ namespace FluentValidation
             return ruleBuilder.SetValidator(new PostalCodeValidator(country.ToNongenericInput()));
         }
 
-        private static readonly NoIPBasedEmailAddressValidator _validator = new NoIPBasedEmailAddressValidator();
 
         /// <summary>Defines validator that disallows IP-based email addresses on the current rule builder.</summary>
         /// <typeparam name="TModel">
@@ -70,10 +68,10 @@ namespace FluentValidation
         /// <param name="ruleBuilder">
         /// The rule builder on which the validator should be defined.
         /// </param>
-        public static IRuleBuilderOptions<TModel, EmailAddress> NotIPBased<TModel, EmailAddress>(this IRuleBuilder<TModel, EmailAddress> ruleBuilder)
+        public static IRuleBuilderOptions<TModel, EmailAddress> NotIPBased<TModel>(this IRuleBuilder<TModel, EmailAddress> ruleBuilder)
         {
             Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
-            return ruleBuilder.SetValidator(_validator);
+            return ruleBuilder.SetValidator(new NoIPBasedEmailAddressValidator());
         }
     }
 }

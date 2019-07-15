@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
@@ -812,6 +813,30 @@ namespace Qowaiv.UnitTests
             var act = TestStruct.Domain;
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void IsIPBased_Empty_False()
+        {
+            Assert.IsFalse(EmailAddress.Empty.IsIPBased);
+        }
+
+        [Test]
+        public void IPDomain_TestStruct_None()
+        {
+            var exp = IPAddress.None;
+            var act = TestStruct.IPDomain;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void IPDomain_IPBasedEmail_None()
+        {
+            var email = EmailAddress.Parse("qowaiv@172.16.254.1");
+            var exp = IPAddress.Parse("172.16.254.1");
+            var act = email.IPDomain;
+            Assert.AreEqual(exp, act);
+        }
+
 
         #endregion
 

@@ -22,20 +22,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="QowaivValidationMessages.Designer.cs">
+    <Compile Update="QowaivComponentModelMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>QowaivValidationMessages.resx</DependentUpon>
+      <DependentUpon>QowaivComponentModelMessages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationMessages.nl.resx">
+    <EmbeddedResource Update="QowaivComponentModelMessages.nl.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="QowaivValidationMessages.resx">
+    <EmbeddedResource Update="QowaivComponentModelMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>QowaivValidationMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>QowaivComponentModelMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

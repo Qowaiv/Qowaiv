@@ -36,7 +36,8 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
             {
                 var model = new PostalCodeModel { Country = Country.NL, PostalCode = PostalCode.Parse("12345") };
                 FluentValidatorAssert.WithErrors<PostalCodeModelValidator, PostalCodeModel>(model,
-                    ValidationMessage.Error("'Postal Code' 12345 is niet geldig voor Nederland.", "PostalCode"));
+                    ValidationMessage.Error("'Postal Code' 12345 is niet geldig voor Nederland.", "PostalCode")
+                );
             }
         }
     }

@@ -84,7 +84,7 @@ namespace Qowaiv.TestTools.Validiation
 
             if (!string.IsNullOrEmpty(message.PropertyName))
             {
-                sb.Append(" Member: ").AppendLine(message.PropertyName);
+                sb.Append(" Prop: ").AppendLine(message.PropertyName);
             }
         }
     }

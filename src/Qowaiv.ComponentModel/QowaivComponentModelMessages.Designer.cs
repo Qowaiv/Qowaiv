@@ -22,14 +22,14 @@ namespace Qowaiv.ComponentModel {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class QowaivValidationMessages {
+    internal class QowaivComponentModelMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal QowaivValidationMessages() {
+        internal QowaivComponentModelMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Qowaiv.ComponentModel {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Qowaiv.ComponentModel.QowaivValidationMessages", typeof(QowaivValidationMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Qowaiv.ComponentModel.QowaivComponentModelMessages", typeof(QowaivComponentModelMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -84,6 +84,15 @@ namespace Qowaiv.ComponentModel {
         internal static string DistinctValuesAttribute_ValidationError {
             get {
                 return ResourceManager.GetString("DistinctValuesAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} model can not be operated on as it is invalid..
+        /// </summary>
+        internal static string InvalidModelException {
+            get {
+                return ResourceManager.GetString("InvalidModelException", resourceCulture);
             }
         }
         

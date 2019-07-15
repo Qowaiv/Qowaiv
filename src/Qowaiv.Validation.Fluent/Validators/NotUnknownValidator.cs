@@ -4,7 +4,7 @@ using FluentValidation.Validators;
 namespace Qowaiv.Validation.Fluent.Validators
 {
     /// <summary><see cref="PropertyValidator"/> that validates that a property is not <see cref="Unknown"/>.</summary>
-    public class NotUnknownValidator : PropertyValidator
+    internal class NotUnknownValidator : PropertyValidator
     {
         private readonly object _unknownValueForType;
 
@@ -18,9 +18,8 @@ namespace Qowaiv.Validation.Fluent.Validators
         /// <inheritdoc />
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            Guard.NotNull(context, nameof(context));
-
-            return !_unknownValueForType.Equals(context.PropertyValue);
+            return context.PropertyValue is null 
+                || !Equals(_unknownValueForType, context.PropertyValue);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 namespace Qowaiv.Validation.Fluent
 {
     [Serializable]
-    public class ValidationMessage : ValidationFailure,  IValidationMessage
+    public class ValidationMessage : ValidationFailure, IValidationMessage
     {
         /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
         protected ValidationMessage(string propertyName, string errorMessage)
@@ -23,7 +23,7 @@ namespace Qowaiv.Validation.Fluent
             get => ErrorMessage;
             set => ErrorMessage = value;
         }
-        
+
         /// <summary>Gets a collection of <see cref="ValidationMessage"/>s 
         /// based on a collection of <see cref="ValidationFailure"/>s.
         /// </summary>
@@ -35,13 +35,13 @@ namespace Qowaiv.Validation.Fluent
         }
 
         /// <summary>Creates an error message.</summary>
-        public static ValidationMessage Error(string message, string propertyName) => new ValidationMessage(message, propertyName) { Severity = Severity.Error };
+        public static ValidationMessage Error(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Error };
 
         /// <summary>Creates a warning message.</summary>
-        public static ValidationMessage Warn(string message, string propertyName) => new ValidationMessage(message, propertyName) { Severity = Severity.Warning };
+        public static ValidationMessage Warn(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Warning };
 
         /// <summary>Creates an info message.</summary>
-        public static ValidationMessage Info(string message, string propertyName) => new ValidationMessage(message, propertyName) { Severity = Severity.Info };
+        public static ValidationMessage Info(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Info };
 
         /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
         public static ValidationMessage For(ValidationFailure message)
@@ -54,7 +54,7 @@ namespace Qowaiv.Validation.Fluent
                 CustomState = message.CustomState,
                 ErrorCode = message.ErrorCode,
                 FormattedMessageArguments = message.FormattedMessageArguments,
-                FormattedMessagePlaceholderValues =message.FormattedMessagePlaceholderValues,
+                FormattedMessagePlaceholderValues = message.FormattedMessagePlaceholderValues,
                 ResourceName = message.ResourceName,
             };
         }

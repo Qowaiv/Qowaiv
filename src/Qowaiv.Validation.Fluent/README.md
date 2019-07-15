@@ -3,7 +3,7 @@
 
 ## Validators
 
-### NotUnknown validator
+### Not unknown
 The `NotUnknownValidator` validates that a value does not equal the Unknown
 value (if existing of course). Accessible via the fluent syntax.
 
@@ -18,17 +18,30 @@ public class CustomValidator : AbstractValidator<Model>
 }
 ```
 
-### PostalCode validator
-The `PostalCodeValidator` validates that a `PostalCode` value is valid for
-a specific `Country`, both static and via another property. Accessible via the
-fluent syntax.
+### Email address should be IP-based
+The `NoIPBasedEmailAddressValidator` validates that an `EmailAddress`
+does not have an IP-based domain.
 
 ``` C#
 public class CustomValidator : AbstractValidator<Model>
 {
     public CustomValidator()
     {
-        RuleFor(m => m.PostalCod).ValidFor(m => m.Country);
+        RuleFor(m => m.Email).NotIPBased();
+    }
+}
+```
+
+### PostalCode valid for specific country
+The `PostalCodeValidator` validates that a `PostalCode` value is valid for
+a specific `Country`, both static and via another property.
+
+``` C#
+public class CustomValidator : AbstractValidator<Model>
+{
+    public CustomValidator()
+    {
+        RuleFor(m => m.PostalCode).ValidFor(m => m.Country);
     }
 }
 ```

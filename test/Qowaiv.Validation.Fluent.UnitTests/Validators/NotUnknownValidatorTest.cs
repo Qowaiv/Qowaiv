@@ -14,7 +14,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
             var model = new NotUnknownModel();
 
             FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
-                new ValidationMessage() { Severity = ValidationSeverity.Error, Message = "'Email' must not be empty.", MemberName = "Email" }
+                ValidationMessage.Error("'Email' must not be empty.", "Email")
             );
         }
 
@@ -26,7 +26,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
                 var model = new NotUnknownModel { Email = EmailAddress.Unknown };
 
                 FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
-                    new ValidationMessage() { Severity = ValidationSeverity.Error, Message = "'Email' mag niet onbekend zijn.", MemberName = "Email" }
+                    ValidationMessage.Error("'Email' mag niet onbekend zijn.", "Email")
                 );
             }
         }

@@ -51,9 +51,9 @@ namespace Qowaiv.Validation.Abstractions
             foreach(var error in Errors)
             {
                 sb.Append(error.Message);
-                if (!string.IsNullOrEmpty(error.MemberName))
+                if (!string.IsNullOrEmpty(error.PropertyName))
                 {
-                    sb.Append(" (").Append(error.MemberName).AppendLine(")");
+                    sb.Append(" (").Append(error.PropertyName).AppendLine(")");
                 }
                 else
                 {

@@ -7,7 +7,7 @@
         ValidationSeverity Severity { get; }
 
         /// <summary>The name of the property.</summary>
-        string MemberName { get; }
+        string PropertyName { get; }
 
         /// <summary>Gets the (<see cref="string"/>) message.</summary>
         string Message { get; }

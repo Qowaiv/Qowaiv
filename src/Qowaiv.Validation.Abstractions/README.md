@@ -73,7 +73,7 @@ namespace Qowaiv.Validation.Abstractions
     public interface IValidationMessage
     {
         ValidationSeverity Severity { get; }
-        string MemberName { get; }
+        string PropertyName { get; }
         string Message { get; }
     }
 }

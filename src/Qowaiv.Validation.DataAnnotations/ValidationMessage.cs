@@ -44,7 +44,7 @@ namespace Qowaiv.Validation.DataAnnotations
         public ValidationSeverity Severity { get; }
 
         /// <inheritdoc />
-        public string MemberName => MemberNames.FirstOrDefault();
+        public string PropertyName => MemberNames.FirstOrDefault();
 
         /// <inheritdoc />
         public string Message => ErrorMessage;

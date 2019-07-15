@@ -82,9 +82,9 @@ namespace Qowaiv.TestTools.Validiation
             sb.AppendFormat("- {0,-7} ", message.Severity.ToString().ToUpperInvariant())
                 .Append(message.Message);
 
-            if (!string.IsNullOrEmpty(message.MemberName))
+            if (!string.IsNullOrEmpty(message.PropertyName))
             {
-                sb.Append(" Member: ").AppendLine(message.MemberName);
+                sb.Append(" Prop: ").AppendLine(message.PropertyName);
             }
         }
     }

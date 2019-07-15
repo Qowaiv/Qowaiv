@@ -19,7 +19,8 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         {
             var model = new NoIPBasedEmailAddressModel { Email = EmailAddress.Parse("qowaiv@172.16.254.1") };
             FluentValidatorAssert.WithErrors<NoIPBasedEmailAddressModelValidator, NoIPBasedEmailAddressModel>(model,
-                new ValidationMessage {  Severity = ValidationSeverity.Error, Message = "'Email' has a IP address based domain.", MemberName = "Email" });
+                ValidationMessage.Error("'Email' has a IP address based domain.", "Email")
+            );
         }
     }
 }

@@ -34,7 +34,21 @@ Represents an Elo (rating), a method for calculating the relative skill levels o
 players in competitor-versus-competitor games.
 
 ### Email address
-Represents a (single) email address, including IPv4 domains.
+Represents a (single) email address. Support:
+* Display names (are stripped)
+* Comments (are removed)
+* IP-based domains (normalized and surrounded by breakets)
+
+Furthermore, the email address is normalized as a lowercase string, making it
+case-insensitve.
+
+``` C#
+var email = EmailAddress.Parse("Test Account <TEST@qowaiv.org>");
+var ip_based = EmailAddress.Parse("test@[172.16.254.1]");
+
+email.ToString(); // test@qowaiv.org
+ip_based.IsIPBased; // true
+```
 
 ### Email address collection
 Represents a collection of unique email addresses, excluding the empty and unknown email address.

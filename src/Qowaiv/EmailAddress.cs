@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -78,6 +79,19 @@ namespace Qowaiv
 
         /// <summary>Gets the domain part of the Email Address.</summary>
         public string Domain => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(m_Value.IndexOf('@') + 1);
+
+        /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
+        /// <remarks>
+        /// As IP-Addresses are normalized by the <see cref="EmailParser"/> it
+        /// can simply be checked by checking the last character of the string
+        /// value.
+        /// </remarks>
+        public bool IsIPBased => !IsEmptyOrUnknown() && m_Value[m_Value.Length - 1] == ']';
+
+        /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None"/>.</summary>
+        public IPAddress IPDomain => IsIPBased 
+            ? IPAddress.Parse(Domain.Substring(1, Domain.Length - 2)) 
+            : IPAddress.None;
 
         #endregion
 

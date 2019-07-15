@@ -61,6 +61,15 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; has a IP address based domain..
+        /// </summary>
+        internal static string NoIPBasedEmailAddress {
+            get {
+                return ResourceManager.GetString("NoIPBasedEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{PropertyName}&apos; must not be unknown..
         /// </summary>
         internal static string NotUnknown {

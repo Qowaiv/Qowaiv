@@ -15,7 +15,7 @@ namespace Qowaiv.TestTools.Validiation
             }
             return x.Message == y.Message
                 && x.Severity == y.Severity
-                && x.MemberName == y.MemberName;;
+                && x.PropertyName == y.PropertyName;;
         }
 
         /// <inheritdoc />
@@ -24,7 +24,7 @@ namespace Qowaiv.TestTools.Validiation
             if (obj is null) { return 0; }
 
             return (obj.Message ?? "").GetHashCode()
-                ^ (obj.MemberName ?? "").GetHashCode()
+                ^ (obj.PropertyName ?? "").GetHashCode()
                 ^ (int)obj.Severity;
         }
     }

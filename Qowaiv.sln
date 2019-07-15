@@ -55,7 +55,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnotations.UnitTests", "test\Qowaiv.Validation.DataAnnotations.UnitTests\Qowaiv.Validation.DataAnnotations.UnitTests.csproj", "{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Validation.Fluent.UnitTests", "test\Qowaiv.Validation.Fluent.UnitTests\Qowaiv.Validation.Fluent.UnitTests.csproj", "{C2ABE02B-F1D0-4393-B676-13B1323A7879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent.UnitTests", "test\Qowaiv.Validation.Fluent.UnitTests\Qowaiv.Validation.Fluent.UnitTests.csproj", "{C2ABE02B-F1D0-4393-B676-13B1323A7879}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.DomainModel", "src\Qowaiv.DomainModel\Qowaiv.DomainModel.csproj", "{18493140-5089-4862-AB96-7813E3A8AAF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.DomainModel.UnitTests", "test\Qowaiv.DomainModel.UnitTests\Qowaiv.DomainModel.UnitTests.csproj", "{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +131,14 @@ Global
 		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18493140-5089-4862-AB96-7813E3A8AAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18493140-5089-4862-AB96-7813E3A8AAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18493140-5089-4862-AB96-7813E3A8AAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18493140-5089-4862-AB96-7813E3A8AAF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +153,7 @@ Global
 		{6C74ECDC-D724-4794-905F-609A27A42F99} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{C2ABE02B-F1D0-4393-B676-13B1323A7879} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

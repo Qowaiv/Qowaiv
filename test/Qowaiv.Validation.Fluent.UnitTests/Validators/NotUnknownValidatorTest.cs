@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools.Validiation;
-using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.Fluent.UnitTests.Models;
 
 namespace Qowaiv.Validation.Fluent.UnitTests.Validators
@@ -14,7 +13,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
             var model = new NotUnknownModel();
 
             FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
-                new ValidationMessage() { Severity = ValidationSeverity.Error, Message = "'Email' must not be empty.", MemberName = "Email" }
+                ValidationMessage.Error("'Email' must not be empty.", "Email")
             );
         }
 
@@ -26,7 +25,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
                 var model = new NotUnknownModel { Email = EmailAddress.Unknown };
 
                 FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
-                    new ValidationMessage() { Severity = ValidationSeverity.Error, Message = "'Email' mag niet onbekend zijn.", MemberName = "Email" }
+                    ValidationMessage.Error("'Email' mag niet onbekend zijn.", "Email")
                 );
             }
         }

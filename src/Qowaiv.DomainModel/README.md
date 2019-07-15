@@ -1,0 +1,1 @@
+﻿# Qowaiv Domain Model

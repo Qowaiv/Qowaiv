@@ -19,16 +19,13 @@ namespace Qowaiv.DomainModel.UnitTests.Models
 
         public override bool Equals(AddressValueObject other)
         {
-            if (AreSame(other))
-            {
-                return true;
-            }
+            if (AreSame(other)) { return true; }
+
             return NotNull(other)
                 && Street == other.Street
                 && HouseNumber == other.HouseNumber
                 && PostalCode == other.PostalCode
-                && Country == other.Country
-                ;
+                && Country == other.Country;
         }
 
         protected override int Hash()
@@ -36,8 +33,9 @@ namespace Qowaiv.DomainModel.UnitTests.Models
             return QowaivHash.HashObject(Street)
                 ^ QowaivHash.Hash(HouseNumber, 3)
                 ^ QowaivHash.Hash(PostalCode, 5)
-                ^ QowaivHash.Hash(Country, 13)
-                ;
+                ^ QowaivHash.Hash(Country, 13);
         }
+
+        public override string ToString() => $"{Street} {HouseNumber}, {PostalCode.ToString(Country.Name)}, {Country.DisplayName}";
     }
 }

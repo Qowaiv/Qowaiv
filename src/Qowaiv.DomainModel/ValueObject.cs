@@ -19,7 +19,7 @@ namespace Qowaiv.DomainModel
         public abstract bool Equals(TModel other);
 
         /// <inheritdoc />
-        public sealed override bool Equals(object obj) => Equals(obj as TModel);
+        public sealed override bool Equals(object obj) => obj is TModel other && Equals(other);
 
         /// <inheritdoc />
         public sealed override int GetHashCode() => Hash();

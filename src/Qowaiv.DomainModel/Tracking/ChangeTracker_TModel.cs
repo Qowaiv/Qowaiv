@@ -17,7 +17,7 @@ namespace Qowaiv.DomainModel.Tracking
         {
             if (!(_model is null)) { throw new InvalidOperationException(QowaivDomainModelMessages.InvalidOperationException_ChangeTrackerNotInitialized); }
             _model = Guard.NotNull(model, nameof(model));
-            _validator = validator ?? Validator.Empty<TModel>();
+            _validator = Guard.NotNull(validator, nameof(validator));
         }
 
         /// <inheritdoc />

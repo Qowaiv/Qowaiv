@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Qowaiv.ComponentModel;
-using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.DomainModel.UnitTests.Models;
 using Qowaiv.Globalization;
+using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests
@@ -29,6 +29,7 @@ namespace Qowaiv.DomainModel.UnitTests
         
         private class PropertyTestEntity : AggregateRoot<PropertyTestEntity>
         {
+            public PropertyTestEntity() : base(new AnnotatedModelValidator<PropertyTestEntity>()) { }
             [Mandatory]
             public int RequiredProperty
             {

@@ -6,7 +6,7 @@ namespace Qowaiv.DomainModel.UnitTests.Models
 {
     public sealed class SimpleEventSourcedRoot : EventSourcedAggregateRoot<SimpleEventSourcedRoot>
     {
-        public SimpleEventSourcedRoot() : base(Guid.NewGuid()) { }
+        public SimpleEventSourcedRoot() : base(Validator.Empty<SimpleEventSourcedRoot>()) { }
 
         public bool Initialized
         {

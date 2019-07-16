@@ -1,4 +1,13 @@
 ﻿# Qowaiv Domain Model
+`Qowaiv.DomainModel` is a package that provides building blocks for applying
+Domain-Driven Design. The starting-point of the modeled entities is that the
+concept of *always valid* is achieved by implicitly triggered validation.
+
+## Always valid
+
+
+## Entities
+
 
 ## Complex Value Objects
 Complex Value Objects - opposed to Single Value Objects (SVO's), those who can

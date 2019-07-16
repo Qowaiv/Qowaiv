@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Qowaiv.Validation.DataAnnotations;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
     public class EntityWithCaculatedProperty : AggregateRoot<EntityWithCaculatedProperty>
     {
-        public EntityWithCaculatedProperty() : base(Guid.NewGuid()) { }
+        public EntityWithCaculatedProperty()
+            : base(Guid.NewGuid(), new AnnotatedModelValidator<EntityWithCaculatedProperty>()) { }
 
         public decimal Value
         {

@@ -44,19 +44,21 @@ namespace Qowaiv.Validation.Fluent
         public static ValidationMessage Info(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Info };
 
         /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
-        public static ValidationMessage For(ValidationFailure message)
+        public static ValidationMessage For(ValidationFailure failure)
         {
-            Guard.NotNull(message, nameof(message));
+            Guard.NotNull(failure, nameof(failure));
 
-            return new ValidationMessage(message.PropertyName, message.ErrorMessage)
-            {
-                AttemptedValue = message.AttemptedValue,
-                CustomState = message.CustomState,
-                ErrorCode = message.ErrorCode,
-                FormattedMessageArguments = message.FormattedMessageArguments,
-                FormattedMessagePlaceholderValues = message.FormattedMessagePlaceholderValues,
-                ResourceName = message.ResourceName,
-            };
+            return failure is ValidationMessage message
+                ? message
+                : new ValidationMessage(failure.PropertyName, failure.ErrorMessage)
+                {
+                    AttemptedValue = failure.AttemptedValue,
+                    CustomState = failure.CustomState,
+                    ErrorCode = failure.ErrorCode,
+                    FormattedMessageArguments = failure.FormattedMessageArguments,
+                    FormattedMessagePlaceholderValues = failure.FormattedMessagePlaceholderValues,
+                    ResourceName = failure.ResourceName,
+                };
         }
     }
 }

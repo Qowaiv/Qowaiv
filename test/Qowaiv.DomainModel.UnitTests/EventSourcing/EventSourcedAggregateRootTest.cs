@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.DomainModel.EventSourcing;
 using Qowaiv.DomainModel.UnitTests.Models;
+using Qowaiv.Validation.Abstractions;
 using System;
 
 namespace Qowaiv.DomainModel.UnitTests.EventSourcing
@@ -64,6 +65,9 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
 
         private class TestApplyChangeAggregate : EventSourcedAggregateRoot<TestApplyChangeAggregate>
         {
+            public TestApplyChangeAggregate()
+                : base(Guid.NewGuid(), Validator.Empty<TestApplyChangeAggregate>()) { }
+
             public void TestApplyChange(object @event)
             {
                 ApplyChange(@event);

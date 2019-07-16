@@ -22,7 +22,6 @@ namespace Qowaiv.Validation.DataAnnotations
             RequiredAttribute = desc.GetRequiredAttribute() ?? NotRequiredAttributeAttribute.Optional;
             ValidationAttributes = desc.GetValidationAttributes().Except(new[] { RequiredAttribute }).ToArray();
             TypeConverter = desc.GetTypeConverter();
-            DefaultValue = desc.GetDefaultValue();
             IsEnumerable = PropertyType != typeof(string)
                 && PropertyType != typeof(byte[])
                 && !(GetEnumerableType(PropertyType) is null);
@@ -40,9 +39,6 @@ namespace Qowaiv.Validation.DataAnnotations
 
         /// <summary>True if the property is an <see cref="IEnumerable{T}"/> type, otherwise false.</summary>
         public bool IsEnumerable { get; }
-
-        /// <summary>Gets the default value for the property.</summary>
-        public object DefaultValue { get; }
 
         /// <summary>True if the model is decorated with the <see cref="NestedModelAttribute"/>, otherwise false.</summary>
         public bool IsNestedModel { get; }

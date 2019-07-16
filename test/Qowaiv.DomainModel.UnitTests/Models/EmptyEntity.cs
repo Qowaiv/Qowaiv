@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.Validation.Abstractions;
+using System;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
@@ -6,6 +7,6 @@ namespace Qowaiv.DomainModel.UnitTests.Models
     {
         public EmptyEntity(): this(Guid.NewGuid()) { }
 
-        public EmptyEntity(Guid id) : base(id) { }
+        public EmptyEntity(Guid id) : base(id, Validator.Empty<EmptyEntity>()) { }
     }
 }

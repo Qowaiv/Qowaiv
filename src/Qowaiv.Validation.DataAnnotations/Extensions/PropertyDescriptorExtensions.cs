@@ -9,32 +9,6 @@ namespace System.ComponentModel
     /// <summary>Extensions on <see cref="PropertyDescriptor"/>.</summary>
     public static class PropertyDescriptorExtensions
     {
-        /// <summary>Gets the default value for the property (type).</summary>
-        /// <remarks>
-        /// Uses both the <see cref="DefaultValueAttribute"/> as the
-        /// <see cref="TypeConverterAttribute"/> if available/applicable.
-        /// </remarks>
-        public static object GetDefaultValue(this PropertyDescriptor descriptor)
-        {
-            Guard.NotNull(descriptor, nameof(descriptor));
-
-            var defaultValueAttribute = descriptor.Attributes
-                .Cast<Attribute>()
-                .OfType<DefaultValueAttribute>()
-                .FirstOrDefault();
-
-            if (defaultValueAttribute is null)
-            {
-                return descriptor.PropertyType.IsValueType
-                    ? Activator.CreateInstance(descriptor.PropertyType)
-                    : null;
-            }
-
-            return descriptor
-                .GetTypeConverter()
-                .ConvertFrom(defaultValueAttribute.Value);
-        }
-
         /// <summary>Gets the decorated <see cref="RequiredAttribute"/> for the property.</summary>
         public static RequiredAttribute GetRequiredAttribute(this PropertyDescriptor descriptor)
         {

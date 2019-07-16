@@ -3,12 +3,9 @@
 // The Implementation takes types into account, and uses an equality comparer.
 
 using Qowaiv.DomainModel.Tracking;
-using Qowaiv.Reflection;
 using Qowaiv.Validation.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Qowaiv.DomainModel
@@ -44,7 +41,7 @@ namespace Qowaiv.DomainModel
         }
 
         /// <inheritdoc />
-        public Guid Id { get; }
+        public virtual Guid Id { get; }
 
         /// <summary>Gets the change tracker.</summary>
         protected virtual ChangeTracker Tracker { get; }
@@ -62,15 +59,6 @@ namespace Qowaiv.DomainModel
         protected void SetProperty<T>(T value, [CallerMemberName] string propertyName = null)
         {
             Tracker.Add(new PropertyChanged(_properties, propertyName, value));
-        }
-
-        /// <summary>Initializes a property (value).</summary>
-        /// <remarks>
-        /// Should only be called from the constructor.
-        /// </remarks>
-        protected void InitProperty<T>(string propertyName, T value)
-        {
-            _properties[propertyName] = value;
         }
 
         /// <inheritdoc />

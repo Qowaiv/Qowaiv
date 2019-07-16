@@ -13,13 +13,10 @@ namespace Qowaiv.DomainModel.EventSourcing
         where TAggrgate : EventSourcedAggregateRoot<TAggrgate>
     {
         /// <summary>Creates a new instance of an <see cref="EventSourcedAggregateRoot{TAggrgate}"/>.</summary>
-        protected EventSourcedAggregateRoot() : this(Guid.NewGuid()) { }
-
-        /// <summary>Creates a new instance of an <see cref="EventSourcedAggregateRoot{TAggrgate}"/>.</summary>
-        /// <param name="id">
-        /// The identifier of the aggregate root.
+        /// <param name="validator">
+        /// A custom validator.
         /// </param>
-        protected EventSourcedAggregateRoot(Guid id) : this(id, null) { }
+        protected EventSourcedAggregateRoot(IValidator<TAggrgate> validator) : this(Guid.NewGuid(), validator) { }
 
         /// <summary>Creates a new instance of an <see cref="EventSourcedAggregateRoot{TAggrgate}"/>.</summary>
         /// <param name="id">
@@ -32,6 +29,9 @@ namespace Qowaiv.DomainModel.EventSourcing
         {
             EventStream = new EventStream(id);
         }
+
+        /// <inheritdoc />
+        public sealed override Guid Id => EventStream.AggregateId;
 
         /// <summary>Gets the event stream representing the state of the aggregate root.</summary>
         public EventStream EventStream { get; private set; }
@@ -62,9 +62,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         internal Result<TAggrgate> LoadEvents(EventStream stream)
         {
             Tracker.Intialize();
-
-            InitProperty(nameof(Id), stream.AggregateId);
-            EventStream = new EventStream(Id, stream.Version);
+            EventStream = new EventStream(stream.AggregateId, stream.Version);
 
             foreach (var e in stream)
             {

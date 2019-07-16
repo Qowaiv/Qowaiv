@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,23 +18,42 @@ namespace Qowaiv.DomainModel
         protected PropertyCollection(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
+        /// <summary>Clones the property collection.</summary>
+        internal PropertyCollection Clone()
+        {
+            var clone = new PropertyCollection(Count);
+            foreach (var kvp in this)
+            {
+                clone[kvp.Key] = kvp.Value;
+            }
+            return clone;
+        }
+
         /// <summary>Creates the properties for the type.</summary>
         public static PropertyCollection Create(Type type)
         {
             Guard.NotNull(type, nameof(type));
 
-            var descriptors = TypeDescriptor.GetProperties(type)
-                .Cast<PropertyDescriptor>()
-                .Where(desc => !desc.IsReadOnly)
-                .ToArray();
-
-            var properties = new PropertyCollection(descriptors.Length);
-
-            foreach (var desc in descriptors)
+            if (!_collections.TryGetValue(type, out var properties))
             {
-                properties[desc.Name] = desc.PropertyType.IsValueType ? Activator.CreateInstance(desc.PropertyType) : null;
+                var descriptors = TypeDescriptor.GetProperties(type)
+                    .Cast<PropertyDescriptor>()
+                    .Where(desc => !desc.IsReadOnly)
+                    .ToArray();
+
+                properties = new PropertyCollection(descriptors.Length);
+
+                foreach (var desc in descriptors)
+                {
+                    properties[desc.Name] = desc.PropertyType.IsValueType ? Activator.CreateInstance(desc.PropertyType) : null;
+                }
+                _collections.TryAdd(type, properties.Clone());
             }
+
             return properties;
         }
+
+        /// <remarks>For performance, we cache the structure of the property collections.</remarks>
+        private static readonly ConcurrentDictionary<Type, PropertyCollection> _collections = new ConcurrentDictionary<Type, PropertyCollection>();
     }
 }

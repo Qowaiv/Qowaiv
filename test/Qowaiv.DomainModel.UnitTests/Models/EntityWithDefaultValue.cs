@@ -1,14 +1,17 @@
 ﻿using Qowaiv.Globalization;
-using System;
-using System.ComponentModel;
+using Qowaiv.Validation.DataAnnotations;
 
 namespace Qowaiv.DomainModel.UnitTests.Models
 {
     public class EntityWithDefaultValue : AggregateRoot<EntityWithDefaultValue>
     {
-        public EntityWithDefaultValue() : base(Guid.NewGuid()) { }
+        public EntityWithDefaultValue() : base(new AnnotatedModelValidator<EntityWithDefaultValue>()) 
+        {
+            Initialize(() => Country = Country.IS);
+        }
 
-        [DefaultValue("is")]
+        /// <summary>Initial value is not allowed.</summary>
+        [ForbiddenValues("IS")]
         public Country Country
         {
             get => GetProperty<Country>();

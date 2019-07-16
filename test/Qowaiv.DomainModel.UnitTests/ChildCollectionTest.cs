@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Qowaiv.Validation.Fluent;
 using System;
+using System.Linq;
 
 namespace Qowaiv.DomainModel.UnitTests
 {
@@ -237,7 +238,7 @@ namespace Qowaiv.DomainModel.UnitTests
             var parent = new NumberParent();
             parent.Numbers.Add(17);
 
-            Assert.IsTrue(parent.Numbers.Contains(69));
+            Assert.IsFalse(parent.Numbers.Contains(69));
         }
 
         [Test]

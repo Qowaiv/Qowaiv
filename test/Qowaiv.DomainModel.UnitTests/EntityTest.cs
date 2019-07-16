@@ -102,15 +102,6 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
-        public void GetHashCode_IsTransient_NotSupported()
-        {
-            Assert.Throws<NotSupportedException>
-            (
-                () => new SimpleEntity().GetHashCode()
-            );
-        }
-
-        [Test]
         public void GetHashCode_SameValue()
         {
             var entity = new EmptyEntity(Guid.NewGuid());

@@ -5,7 +5,7 @@ concept of *always valid* is achieved by implicitly triggered validation.
 
 ## Aggregate Roots & Entities
 Aggregate Roots and Entities are complex DDD objects that are identifiable by
-there ID. Qowaiv provides a generic base class for both types. It comes with
+their ID. Qowaiv provides a generic base class for both types. It comes with
 a mechanism to ensure always valid by a Validator.
 
 ``` C#
@@ -24,6 +24,7 @@ public sealed class Person : Entity<Person>
         internal set => SetProperty(value);
     }
 }
+
 public sealed class Family : AggregateRoot<Family>
 {
     public Family(): base(new FamilyValidator()) 
@@ -59,6 +60,12 @@ public sealed class Family : AggregateRoot<Family>
         });
     }
 }
+
+```
+
+And a validator might look like this:
+
+``` C#
 public FamilyValidator : FluentModelValidator<Family>
 {
     public FamilyValidator()
@@ -78,15 +85,17 @@ public FamilyValidator : FluentModelValidator<Family>
 
 You could argue that some of the rules specified in the validator should be handled
 as part of the *anti-corruption layer*, but that is another topic. The point is
-that by defining those constraints, you can not longer add any item to `Family.Members`
+that by defining those constraints, you can no longer add any item to `Family.Members`
 that is short than 50 cms, or has `default` as `DateOfBirth`, nor could you remove
 a member if `Family.Members` contains a single item.
 
 If you want to throw an exception, or deal with a `Result<TAggegate>` is up to
 the developer.
 
-### Command and Query Responsibility Segregation (CQRS)
-A popular pattern to bring DDD to the next level is CQRS.
+### Event Sourcing
+Event Sourcing (often as part of Command and Query Responsibility Segregation aka CQRS)
+is a concept in which changes on the domain are described (and communicated) as
+messages/events. Qowaiv has support for such scenarios.
 
 ``` C#
 public sealed class Family : EventSourcedAggregateRoot<Family>
@@ -115,10 +124,16 @@ public sealed class Family : EventSourcedAggregateRoot<Family>
         });
     }
 }
+```
 
-public class CommandHandlers
+Interacting with an Event Source based aggregate root is commonly done via a
+command handler. Whatever mechanism (and with which technology) you choice,
+saving the new events and publishing them, is done here.
+
+``` C#
+public class CommandHandler
 {
-    public Result<Family> Handle(AddFamiyMember cmd)
+    public Result<Family> Handle(AddFamilyMember cmd)
     {
         var family = repository.ById(cmd.Id);
         var result = family.AddMember(cmd.DateOfBirth, cmd.Length);
@@ -142,7 +157,7 @@ be represented by a single scalar - are represented by multiple (immutable)
 scalars. Qowaiv provides a generic base class helping to achieve that.
 
 ``` C#
-public sealed class Address : SingleValueObject<Address>
+public sealed class Address : ValueObject<Address>
 {
     public Address(string street, HouseNumber number, PostalCode code, Country country)
     {

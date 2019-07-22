@@ -116,5 +116,12 @@ namespace Qowaiv.DomainModel.UnitTests
         {
             DebuggerDisplayAssert.HasAttribute(typeof(Entity<>));
         }
+
+        [Test]
+        public void DebuggerDisplay_HasResult()
+        {
+            var entity = new EmptyEntity(Guid.Parse("F83FFED0-BC6E-4AC8-BA8B-B5F1004C8762"));
+            DebuggerDisplayAssert.HasResult("EmptyEntity, ID: {f83ffed0-bc6e-4ac8-ba8b-b5f1004c8762}", entity);
+        }
     }
 }

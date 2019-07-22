@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Qowaiv.DomainModel.Diagnostics
 {
     /// <summary>Allows the debugger to display collections.</summary>
+    [ExcludeFromCodeCoverage]
     internal class CollectionDebugView
     {
         /// <summary>Constructor.</summary>

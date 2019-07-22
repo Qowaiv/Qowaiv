@@ -8,6 +8,7 @@ namespace Qowaiv.TestTools
     public static class DebuggerDisplayAssert
     {
         /// <summary>Verifies that a certain type is decorated with a <see cref="DebuggerDisplayAttribute"/>.</summary>
+        [DebuggerStepThrough]
         public static void HasAttribute(Type type)
         {
             Assert.IsNotNull(type, "The supplied type should not be null.");
@@ -19,15 +20,22 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute"/> of a certain <see cref="object"/>.</summary>
+        [DebuggerStepThrough]
         public static void HasResult(object expected, object value)
         {
             Assert.IsNotNull(value, "The supplied value should not be null.");
 
             var type = value.GetType();
+            PropertyInfo prop = null;
 
-            var prop = type.GetProperty("DebuggerDisplay", BindingFlags.Instance | BindingFlags.NonPublic);
+            // Get the property via itself, or one of its bases.
+            while (prop is null && type != null)
+            {
+                prop = type.GetProperty("DebuggerDisplay", BindingFlags.Instance | BindingFlags.NonPublic);
+                type = type.BaseType;
+            }
 
-            Assert.IsNotNull(prop, $"The type '{type}' does not contain a non-public property DebuggerDisplay.");
+            Assert.IsNotNull(prop, $"The type '{value.GetType()}' does not contain a non-public property DebuggerDisplay.");
 
             var actual = prop.GetValue(value);
 

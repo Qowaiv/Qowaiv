@@ -34,6 +34,24 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
+        public void Equlity_SameInstances_IsTrue()
+        {
+            var left = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+            var right = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+
+            Assert.IsTrue(left == right);
+        }
+
+        [Test]
+        public void Inequality_SameInstances_IsFalse()
+        {
+            var left = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+            var right = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+
+            Assert.IsFalse(left != right);
+        }
+
+        [Test]
         public void GetHashCode_TwoIdenticalInstances_AreEqual()
         {
             var act = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB).GetHashCode();

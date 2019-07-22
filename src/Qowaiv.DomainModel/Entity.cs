@@ -78,7 +78,7 @@ namespace Qowaiv.DomainModel
 
         /// <summary>Represents the entity as a DEBUG <see cref="string"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"{base.ToString()}, ID: {Id:B}";
+        private string DebuggerDisplay => $"{GetType().Name}, ID: {Id:B}";
 
         /// <summary>The comparer that deals with equals and hash codes.</summary>
         private static readonly EntityEqualityComparer<TEntity> _comparer = new EntityEqualityComparer<TEntity>();

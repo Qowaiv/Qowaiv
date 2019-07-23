@@ -28,17 +28,17 @@ namespace Qowaiv.DomainModel.EventSourcing
         {
             get
             {
-                var props = GetType()
+                var props = Event.GetType()
                  .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                  .ToArray();
 
                 // Get rid of Event suffix.
-                var eventName = GetType().Name;
-                if (eventName.EndsWith("Event")) { eventName = eventName.Substring(eventName.Length - 5); }
+                var eventName = Event.GetType().Name;
+                if (eventName.EndsWith("Event")) { eventName = eventName.Substring(0, eventName.Length - 5); }
 
                 var sb = new StringBuilder()
-                    .AppendFormat("v{0} ", Info.Version)
                     .AppendFormat(eventName)
+                    .AppendFormat(", Version: {0}", Info.Version)
                     .AppendFormat(", Props[{0}] {{ ", props.Length);
 
                 for (var i = 0; i < props.Length; i++)
@@ -48,11 +48,11 @@ namespace Qowaiv.DomainModel.EventSourcing
                     {
                         sb.Append(", ");
                     }
-                    sb.AppendFormat("{0}: {1}", prop.Name, prop.GetValue(this));
+                    sb.AppendFormat("{0}: {1}", prop.Name, prop.GetValue(Event));
                 }
 
                 sb.Append(" }");
-                sb.AppendFormat(", {0:yyyy-MM-dd HH/:mm/:ss}, Aggregate: {1:B}", Info.CreatedUtc, Info.AggregateId);
+                sb.AppendFormat(@", {0:yyyy-MM-dd HH\:mm\:ss}, Aggregate: {1:B}", Info.CreatedUtc, Info.AggregateId);
                 return sb.ToString();
             }
         }

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.DomainModel.EventSourcing;
+using Qowaiv.TestTools;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Qowaiv.DomainModel.UnitTests.EventSourcing
@@ -24,6 +24,13 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
             Assert.IsNotNull(stream);
             Assert.AreEqual(id, stream.AggregateId);
             Assert.AreEqual(2, stream.Version);
+        }
+
+        [Test]
+        public void FromMessages_Null_Throws()
+        {
+            var x = Assert.Throws<ArgumentNullException>(() => EventStream.FromMessages(null));
+            Assert.AreEqual("events", x.ParamName);
         }
 
         [Test]
@@ -85,6 +92,31 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
             Assert.AreEqual(17, stream.Version);
             Assert.AreEqual(16, stream.CommittedVersion);
             Assert.AreEqual(1, stream.GetUncommitted().Count());
+        }
+
+        [Test]
+        public void DebuggerDisplay_WithUncommited()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(2017, 06, 11)))
+            {
+                var stream = new EventStream(Guid.Parse("1F8B5071-C03B-457D-B27F-442C5AAC5785"));
+                stream.Add(new DummyEvent());
+
+                DebuggerDisplayAssert.HasResult("Version: 1 (Committed: 0), Aggregate: {1f8b5071-c03b-457d-b27f-442c5aac5785}", stream);
+            }
+        }
+
+        [Test]
+        public void DebuggerDisplay_WithoutUncommited()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(2017, 06, 11)))
+            {
+                var stream = new EventStream(Guid.Parse("1F8B5071-C03B-457D-B27F-442C5AAC5785"));
+                stream.Add(new DummyEvent());
+                stream.MarkAllAsCommitted();
+
+                DebuggerDisplayAssert.HasResult("Version: 1, Aggregate: {1f8b5071-c03b-457d-b27f-442c5aac5785}", stream);
+            }
         }
 
         private class DummyEvent { }

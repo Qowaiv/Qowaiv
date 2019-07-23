@@ -502,6 +502,7 @@ namespace Qowaiv.Formatting
         IEnumerator<KeyValuePair<Type, FormattingArguments>> IEnumerable<KeyValuePair<Type, FormattingArguments>>.GetEnumerator() => GetEnumerator();
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
+        [ExcludeFromCodeCoverage/* Just to satisfy the none-generic interface. */]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>

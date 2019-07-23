@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Qowaiv.DomainModel.Tracking
 {
@@ -67,6 +68,7 @@ namespace Qowaiv.DomainModel.Tracking
         public IEnumerator<ITrackableChange> GetEnumerator() => LoopReversed().GetEnumerator();
 
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage/* Just to satisfy the none-generic interface. */]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion

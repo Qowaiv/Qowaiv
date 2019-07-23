@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 namespace Qowaiv.DomainModel.EventSourcing
@@ -18,20 +19,13 @@ namespace Qowaiv.DomainModel.EventSourcing
         private static string GetMessage(Type eventType, Type aggragateType)
         {
             return string.Format(
-                QowaivDomainModelMessages.EventTypeNotSupportedException, 
-                eventType?.ToString() ?? "{null}", 
+                QowaivDomainModelMessages.EventTypeNotSupportedException,
+                eventType?.ToString() ?? "{null}",
                 aggragateType ?? typeof(AggregateRoot<>));
         }
 
         /// <summary>Creates a new instance of an <see cref="EventTypeNotSupportedException"/>.</summary>
-        public EventTypeNotSupportedException() { }
-
-        /// <summary>Creates a new instance of an <see cref="EventTypeNotSupportedException"/>.</summary>
         public EventTypeNotSupportedException(string message) : base(message) { }
-
-        /// <summary>Creates a new instance of an <see cref="EventTypeNotSupportedException"/>.</summary>
-        public EventTypeNotSupportedException(string message, Exception innerException)
-            : base(message, innerException) { }
 
         /// <summary>Deserializes an <see cref="EventTypeNotSupportedException"/></summary>
         protected EventTypeNotSupportedException(SerializationInfo info, StreamingContext context)
@@ -40,6 +34,15 @@ namespace Qowaiv.DomainModel.EventSourcing
             EventType = Type.GetType(info.GetString(nameof(EventType)));
             AggregateType = Type.GetType(info.GetString(nameof(AggregateType)));
         }
+
+        /// <summary>Creates a new instance of an <see cref="EventTypeNotSupportedException"/>.</summary>
+        [ExcludeFromCodeCoverage/* Required Exception constructor for inheritance. */]
+        public EventTypeNotSupportedException() { }
+
+        /// <summary>Creates a new instance of an <see cref="EventTypeNotSupportedException"/>.</summary>
+        [ExcludeFromCodeCoverage/* Required Exception constructor for inheritance. */]
+        public EventTypeNotSupportedException(string message, Exception innerException)
+            : base(message, innerException) { }
 
         /// <summary>The event type that is not supported.</summary>
         public Type EventType { get; }
@@ -51,8 +54,8 @@ namespace Qowaiv.DomainModel.EventSourcing
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue(nameof(EventType), EventType.FullName);
-            info.AddValue(nameof(AggregateType), AggregateType.FullName);
+            info.AddValue(nameof(EventType), EventType.AssemblyQualifiedName);
+            info.AddValue(nameof(AggregateType), AggregateType.AssemblyQualifiedName);
         }
     }
 }

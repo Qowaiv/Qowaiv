@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Qowaiv.DomainModel
 {
@@ -118,6 +119,7 @@ namespace Qowaiv.DomainModel
         public IEnumerator<TChild> GetEnumerator() => collection.GetEnumerator();
 
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage/* Just to satisfy the none-generic interface. */]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion

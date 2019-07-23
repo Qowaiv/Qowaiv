@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Qowaiv.DomainModel.EventSourcing
@@ -82,8 +83,8 @@ namespace Qowaiv.DomainModel.EventSourcing
         internal string DebuggerDisplay
         {
             get => Version == CommittedVersion
-                ? $"Version: {Version}, Aggregate: {AggregateId}"
-                : $"Version: {Version} (Committed: {CommittedVersion}), Aggregate: {AggregateId}";
+                ? $"Version: {Version}, Aggregate: {AggregateId:B}"
+                : $"Version: {Version} (Committed: {CommittedVersion}), Aggregate: {AggregateId:B}";
         }
 
         #region IEnumerable
@@ -92,6 +93,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         public IEnumerator<EventMessage> GetEnumerator() => messages.GetEnumerator();
 
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage/* Just to satisfy the none-generic interface. */]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion

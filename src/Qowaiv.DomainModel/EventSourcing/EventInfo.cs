@@ -48,7 +48,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         /// <inheritdoc />
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "v{0}, {1:yyyy-MM-dd HH/:mm/:ss.FFFFF}, AggregateId: {2}", Version, CreatedUtc, AggregateId);
+            return string.Format(CultureInfo.InvariantCulture, @"Version: {0}, {1:yyyy-MM-dd HH\:mm\:ss.FFFFF}, AggregateId: {2:B}", Version, CreatedUtc, AggregateId);
         }
     }
 }

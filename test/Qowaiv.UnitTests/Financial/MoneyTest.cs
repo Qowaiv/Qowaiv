@@ -410,6 +410,8 @@ namespace Qowaiv.UnitTests.Financial
         {
             using (new CultureInfoScope("nl-BE"))
             {
+                // 3: n $
+                CultureInfo.CurrentCulture.NumberFormat.CurrencyPositivePattern = 3;
                 var act = Money.Parse("ALL 1600,1").ToString();
                 var exp = "1.600,10 Lekë";
                 Assert.AreEqual(exp, act);

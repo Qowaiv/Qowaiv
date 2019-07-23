@@ -28,7 +28,7 @@ namespace Qowaiv.UnitTests.Formatting
                 StringFormatter.Apply(new object(), string.Empty, null, null);
             },
             "format",
-            "Value cannot be an empty string.");
+            "Argument cannot be an empty string.");
         }
 
         [Test]

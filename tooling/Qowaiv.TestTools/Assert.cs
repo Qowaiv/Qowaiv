@@ -46,7 +46,7 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void AreEqual(object expected, object actual, string message = null)
         {
-            if (expected != actual)
+            if (!Equals(expected, actual))
             {
                 var sb = new StringBuilder();
                 sb.AppendFormat("Expected: {0}", expected).AppendLine();
@@ -56,6 +56,7 @@ namespace Qowaiv.TestTools
                 {
                     sb.AppendLine(message);
                 }
+                Fail(sb.ToString());
             }
         }
 

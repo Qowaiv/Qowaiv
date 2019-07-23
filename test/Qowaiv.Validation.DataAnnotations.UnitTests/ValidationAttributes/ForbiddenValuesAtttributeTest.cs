@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using Qowaiv.ComponentModel.DataAnnotations;
 using Qowaiv.Globalization;
 
 namespace Qowaiv.Validation.DataAnnotations.Tests.ValidationAttributes

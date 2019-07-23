@@ -35,10 +35,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Data.SqlClient", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TestTools", "tooling\Qowaiv.TestTools\Qowaiv.TestTools.csproj", "{50F34D90-4AD2-4E6F-8A75-EA3656B31480}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.ComponentModel", "src\Qowaiv.ComponentModel\Qowaiv.ComponentModel.csproj", "{3823BECB-BAE6-4C81-90B8-CA8C07FE5EE2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.ComponentModel.UnitTests", "test\Qowaiv.ComponentModel.UnitTests\Qowaiv.ComponentModel.UnitTests.csproj", "{8C026B5F-87B3-49F9-9D21-75774972A53A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{BCFDC29E-57F5-4D3C-85E2-D37217EE62A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft.UnitTests", "test\Qowaiv.Json.Newtonsoft.UnitTests\Qowaiv.Json.Newtonsoft.UnitTests.csproj", "{864B79CC-0B90-475D-8EDC-C69830F8D773}"
@@ -55,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnotations.UnitTests", "test\Qowaiv.Validation.DataAnnotations.UnitTests\Qowaiv.Validation.DataAnnotations.UnitTests.csproj", "{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Validation.Fluent.UnitTests", "test\Qowaiv.Validation.Fluent.UnitTests\Qowaiv.Validation.Fluent.UnitTests.csproj", "{C2ABE02B-F1D0-4393-B676-13B1323A7879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent.UnitTests", "test\Qowaiv.Validation.Fluent.UnitTests\Qowaiv.Validation.Fluent.UnitTests.csproj", "{C2ABE02B-F1D0-4393-B676-13B1323A7879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,14 +79,6 @@ Global
 		{50F34D90-4AD2-4E6F-8A75-EA3656B31480}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50F34D90-4AD2-4E6F-8A75-EA3656B31480}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50F34D90-4AD2-4E6F-8A75-EA3656B31480}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3823BECB-BAE6-4C81-90B8-CA8C07FE5EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3823BECB-BAE6-4C81-90B8-CA8C07FE5EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3823BECB-BAE6-4C81-90B8-CA8C07FE5EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3823BECB-BAE6-4C81-90B8-CA8C07FE5EE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C026B5F-87B3-49F9-9D21-75774972A53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C026B5F-87B3-49F9-9D21-75774972A53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C026B5F-87B3-49F9-9D21-75774972A53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C026B5F-87B3-49F9-9D21-75774972A53A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCFDC29E-57F5-4D3C-85E2-D37217EE62A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCFDC29E-57F5-4D3C-85E2-D37217EE62A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCFDC29E-57F5-4D3C-85E2-D37217EE62A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -135,7 +123,6 @@ Global
 		{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{21E4DDC5-08FE-42EA-9B82-7C54C176161F} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{48FB953F-7321-4D10-BED7-3A2FE3C5EF5B} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
-		{8C026B5F-87B3-49F9-9D21-75774972A53A} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{864B79CC-0B90-475D-8EDC-C69830F8D773} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{E76B08DA-74EE-415C-B554-BA395499AB1A} = {CCCCEB32-7082-431D-A7DC-3C6E213DA8D4}
 		{6C74ECDC-D724-4794-905F-609A27A42F99} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}

@@ -15,7 +15,7 @@ namespace Qowaiv.TestTools.Validiation
             }
             return x.Message == y.Message
                 && x.Severity == y.Severity
-                && x.PropertyName == y.PropertyName;;
+                && x.PropertyName == y.PropertyName;
         }
 
         /// <inheritdoc />

@@ -12,7 +12,6 @@
     <ProjectReference Include="..\..\src\Qowaiv.Validation.DataAnnotations\Qowaiv.Validation.DataAnnotations.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Validation.Fluent\Qowaiv.Validation.Fluent.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
-    <ProjectReference Include="..\..\src\Qowaiv.ComponentModel\Qowaiv.ComponentModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

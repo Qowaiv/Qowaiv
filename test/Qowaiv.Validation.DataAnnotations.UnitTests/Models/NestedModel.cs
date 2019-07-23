@@ -1,5 +1,4 @@
-﻿using Qowaiv.ComponentModel.DataAnnotations;
-using System;
+﻿using System;
 
 namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models
 {

@@ -1,7 +1,9 @@
 ﻿using Qowaiv.DomainModel.Dynamic;
 using Qowaiv.Validation.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Qowaiv.DomainModel.EventSourcing
 {
@@ -53,6 +55,34 @@ namespace Qowaiv.DomainModel.EventSourcing
                 if (result.IsValid)
                 {
                     EventStream.Add(@event);
+                }
+                return result;
+            }
+        }
+
+        /// <summary>Applies the changes.</summary>
+        protected Result<TAggrgate> ApplyChanges(params object[] events) => ApplyChanges(events?.AsEnumerable());
+
+        /// <summary>Applies the changes.</summary>
+        protected Result<TAggrgate> ApplyChanges(IEnumerable<object> events)
+        {
+            var all = Guard.NotNull(events, nameof(events)).ToArray();
+
+            lock (EventStream.Lock())
+            {
+                var result = TrackChanges((self) =>
+                {
+                    foreach (var @event in all)
+                    {
+                        self.AsDynamic().Apply(@event);
+                    }
+                });
+                if (result.IsValid)
+                {
+                    foreach (var @event in all)
+                    {
+                        EventStream.Add(@event);
+                    }
                 }
                 return result;
             }

@@ -111,6 +111,14 @@ Represents a currency based on an ISO 4217 code.
 ### International Bank Account Number (IBAN)
 Represents an IBAN as specified in ISO 13616.
 
+``` C#
+var iban = InternationalBankAccountNumber.Parse("nl20ingb0001234567");
+
+iban.Country; // Country.NL
+iban.Length; // 18
+iban.ToString("F");// NL20 INGB 0001 2345 67
+```
+
 ### Money
 Represents the amount and the currency. Technically this is not SVO. However it
 acts identically as a SVO.

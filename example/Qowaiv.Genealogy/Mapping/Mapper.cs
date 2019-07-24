@@ -6,7 +6,7 @@ namespace Qowaiv.Genealogy.Mapping
 {
     public static class Mapper
     {
-        public static TDestination Map<TDestination>(object source) => Get().Map<TDestination>(source);
+        public static TDestination Map<TDestination>(this object source) => Get().Map<TDestination>(source);
 
         private static IMapper Get()
         {

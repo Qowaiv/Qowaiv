@@ -52,7 +52,7 @@ namespace Qowaiv.Genealogy
         {
             Guard.NotNull(cmd, nameof(cmd));
 
-            return ApplyChange(Mapper.Map<PersonUpdated>(cmd));
+            return ApplyChange(cmd.Map<PersonUpdated>());
         }
 
         internal void Apply(PersonUpdated e)
@@ -70,7 +70,7 @@ namespace Qowaiv.Genealogy
             Guard.NotNull(cmd, nameof(cmd));
 
             var person = new Person();
-            var updated = Mapper.Map<PersonUpdated>(cmd);
+            var updated = cmd.Map<PersonUpdated>();
             return person.ApplyChanges(new PersonCreated(), updated);
         }
     }

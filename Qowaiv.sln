@@ -57,6 +57,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.DomainModel", "src\Q
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.DomainModel.UnitTests", "test\Qowaiv.DomainModel.UnitTests\Qowaiv.DomainModel.UnitTests.csproj", "{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{14039334-EE87-49C4-88DA-D4526544A51A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Genealogy", "example\Qowaiv.Genealogy\Qowaiv.Genealogy.csproj", "{28181D70-5A21-4E2D-9199-4D85D41FA1F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +131,10 @@ Global
 		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28181D70-5A21-4E2D-9199-4D85D41FA1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28181D70-5A21-4E2D-9199-4D85D41FA1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28181D70-5A21-4E2D-9199-4D85D41FA1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28181D70-5A21-4E2D-9199-4D85D41FA1F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +149,7 @@ Global
 		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{C2ABE02B-F1D0-4393-B676-13B1323A7879} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{EDFE004D-ED15-4A2C-AE63-C17245E87D9D} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{28181D70-5A21-4E2D-9199-4D85D41FA1F5} = {14039334-EE87-49C4-88DA-D4526544A51A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

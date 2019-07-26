@@ -358,6 +358,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An not set email address can not be shown with a display name..
+        /// </summary>
+        public static string InvalidOperationException_WithDisplayName {
+            get {
+                return ResourceManager.GetString("InvalidOperationException_WithDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to JSON deserialization from a date is not supported..
         /// </summary>
         public static string JsonSerialization_DateTimeNotSupported {

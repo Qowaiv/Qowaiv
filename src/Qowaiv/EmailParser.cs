@@ -262,12 +262,42 @@ namespace Qowaiv
             }
             if (buffer.First() == '"')
             {
-                var end = buffer.IndexOf('"', 1);
-                if (end == CharBuffer.NotFound)
+                var escape = false;
+
+                var pos = 1;
+                var end = buffer.Length - 1;
+
+                while(pos < end)
                 {
-                    return buffer.Clear();
+                    var ch = buffer[pos++];
+
+                    // The escape character is found.
+                    if (ch == '\\')
+                    {
+                        // toggle state.
+                        escape = !escape;
+                    }
+                    // The (potential) and character.
+                    else if (ch == '"')
+                    {
+                        // if not escaped.
+                        if (!escape)
+                        {
+                            // if followd by a whitespace.
+                            if (char.IsWhiteSpace(buffer[pos++]))
+                            {
+                                return buffer.RemoveRange(0, pos).Trim();
+                            }
+                            return buffer.Clear();
+                        }
+                        escape = false;
+                    }
+                    else
+                    {
+                        escape = false;
+                    }
                 }
-                return buffer.RemoveRange(0, end + 1).TrimLeft();
+                return buffer.Clear();
             }
             return buffer;
         }

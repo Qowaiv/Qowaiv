@@ -51,9 +51,9 @@ namespace Qowaiv.Text
         /// <returns>
         /// -1 if not found, otherwise the index of the <see cref="char"/>.
         /// </returns>
-        public int IndexOf(char ch, int start = 0)
+        public int IndexOf(char ch)
         {
-            for (var i = start; i < Length; i++)
+            for (var i = 0; i < Length; i++)
             {
                 if (buffer[i] == ch)
                 {

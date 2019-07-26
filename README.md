@@ -58,6 +58,8 @@ var ip_based = EmailAddress.Parse("test@[172.16.254.1]");
 email.ToString(); // test@qowaiv.org
 quoted.ToString(); // email@qowaiv.org
 ip_based.IsIPBased; // true
+ip_based.WithDisplayName("Jimi Hendrix"); // Jimi Hendrix <test@[172.16.254.1]>
+
 ```
 
 ### Email address collection

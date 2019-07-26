@@ -501,10 +501,13 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'yes', format: 'Unit Test Format'";
+            using (CultureInfoScope.NewInvariant())
+            {
+                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+                var exp = "Unit Test Formatter, value: 'yes', format: 'Unit Test Format'";
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
 
         [TestCase("en-GB", null, "Yes", "yes")]

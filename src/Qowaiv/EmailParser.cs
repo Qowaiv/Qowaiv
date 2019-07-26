@@ -29,7 +29,7 @@ namespace Qowaiv
                 .RemoveComment()
                 .RemoveDisplayName();
 
-            if(str.Empty())
+            if (str.Empty())
             {
                 return null;
             }
@@ -105,14 +105,14 @@ namespace Qowaiv
                     if (ch == Dot)
                     {
                         // No -.
-                        if(prev == Dash)
+                        if (prev == Dash)
                         {
                             return null;
                         }
                         dot = domain.Length;
                     }
                     // No .-
-                    else if(ch == Dash && prev == Dot)
+                    else if (ch == Dash && prev == Dot)
                     {
                         return null;
                     }
@@ -168,13 +168,13 @@ namespace Qowaiv
 
         public static bool IsValidDomain(this CharBuffer buffer, int dot)
         {
-            if(buffer.IndexOf(Colon) != NotFound)
+            if (buffer.IndexOf(Colon) != NotFound)
             {
                 return false;
             }
 
             var start = dot + 1;
-            if(buffer.Length - start < 2)
+            if (buffer.Length - start < 2)
             {
                 return false;
             }
@@ -201,7 +201,7 @@ namespace Qowaiv
             var level = 0;
             var length = 0;
 
-            for(var pos = buffer.Length -1; pos > -1; pos--)
+            for (var pos = buffer.Length - 1; pos > -1; pos--)
             {
                 var ch = buffer[pos];
                 if (ch == ')')
@@ -223,12 +223,12 @@ namespace Qowaiv
                     }
                     else { buffer.Clear(); }
                 }
-                else if(level == 1)
+                else if (level == 1)
                 {
                     length++;
                 }
             }
-            if(level != 0)
+            if (level != 0)
             {
                 return buffer.Clear();
             }
@@ -244,11 +244,11 @@ namespace Qowaiv
         /// </remarks>
         private static CharBuffer RemoveDisplayName(this CharBuffer buffer)
         {
-            if(buffer.Empty())
+            if (buffer.Empty())
             {
                 return buffer;
             }
-            if(buffer.Last() == '>')
+            if (buffer.Last() == '>')
             {
                 var lt = buffer.IndexOf('<');
 
@@ -259,6 +259,15 @@ namespace Qowaiv
                 return buffer
                     .RemoveFromEnd(1)
                     .RemoveRange(0, lt + 1);
+            }
+            if (buffer.First() == '"')
+            {
+                var end = buffer.IndexOf('"', 1);
+                if (end == CharBuffer.NotFound)
+                {
+                    return buffer.Clear();
+                }
+                return buffer.RemoveRange(0, end + 1).TrimLeft();
             }
             return buffer;
         }

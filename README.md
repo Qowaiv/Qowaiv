@@ -1,8 +1,16 @@
 ![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
-![version](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
+
+| version                                                                        | package                           |
+|--------------------------------------------------------------------------------|-----------------------------------|
+|![v](https://img.shields.io/badge/version-4.0.1-blue.svg?cacheSeconds=3600)     | Qowaiv                            |
+|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     | Qowaiv.Data.SqlCient              |
+|![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    | Qowaiv.Validation.Abstractions    |
+|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.DataAnnotations |
+|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.Fluent          |
+|![v](https://img.shields.io/badge/version-1.0.1-darkred.svg?cacheSeconds=3600)  | Qowaiv.TestTools                  |
 
 # Qowaiv
 

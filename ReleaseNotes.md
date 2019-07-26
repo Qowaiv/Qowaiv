@@ -1,4 +1,11 @@
-﻿### New in 4.0.0 (Released 2019/07/09)
+﻿### Released 2019/07/26
+#### Qowaiv 4.0.1 
+* Added support for 12 new countries with IBAN patterns #65
+* Fix Y/N parsing for non-English languages #66
+#### Qowaiv.TestTools 1.01
+* Fix in TestTools Assert (internal)
+
+### New in 4.0.0 (Released 2019/07/09)
 * .NET standard 2.0 only (#59)
 * Drop of Qowaiv.Web, Qowaiv.Json.Newtonsoft packages
 * Introduction of Qowaiv.TestTools (v1.0.0)

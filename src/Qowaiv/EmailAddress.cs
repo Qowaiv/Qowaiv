@@ -107,8 +107,15 @@ namespace Qowaiv
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
         /// <summary>Gets the email address with a (prefix) display name.</summary>
-        /// <param name="displayName"></param>
-        /// <returns></returns>
+        /// <param name="displayName">
+        /// The display name.
+        /// </param>
+        /// <returns>
+        /// An email address with a display name.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// When the email address is empty or unknown.
+        /// </exception>
         public string WithDisplayName(string displayName)
         {
             if (IsEmptyOrUnknown())

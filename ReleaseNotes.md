@@ -1,4 +1,8 @@
-﻿### Released 2019/07/26
+﻿### Released 2019/07/28
+#### Qowaiv 4.0.2
+* Extended display name support for email address #69 
+
+### Released 2019/07/26
 #### Qowaiv 4.0.1 
 * Added support for 12 new countries with IBAN patterns #65
 * Fix Y/N parsing for non-English languages #66

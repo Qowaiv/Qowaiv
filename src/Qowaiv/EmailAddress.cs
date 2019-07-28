@@ -106,6 +106,29 @@ namespace Qowaiv
         /// <summary>Returns true if the email address is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
+        /// <summary>Gets the email address with a (prefix) display name.</summary>
+        /// <param name="displayName">
+        /// The display name.
+        /// </param>
+        /// <returns>
+        /// An email address with a display name.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// When the email address is empty or unknown.
+        /// </exception>
+        public string WithDisplayName(string displayName)
+        {
+            if (IsEmptyOrUnknown())
+            {
+                throw new InvalidOperationException(QowaivMessages.InvalidOperationException_WithDisplayName);
+            }
+            if (string.IsNullOrWhiteSpace(displayName))
+            {
+                return ToString();
+            }
+            return string.Format(CultureInfo.CurrentCulture, "{0} <{1}>", displayName.Trim(), this);
+        }
+
         #endregion
 
         #region (XML) (De)serialization

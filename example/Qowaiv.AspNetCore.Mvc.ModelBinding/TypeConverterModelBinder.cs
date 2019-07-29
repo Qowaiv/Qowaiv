@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Qowaiv.Reflection;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -21,29 +22,28 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
     public class TypeConverterModelBinder : IModelBinderProvider, IModelBinder
     {
         /// <summary>A Dictionary that keeps track of the registered type converters.</summary>
-        private static readonly ConcurrentDictionary<Type, TypeConverter> TypeConverters = new ConcurrentDictionary<Type, TypeConverter>();
+        private readonly ConcurrentDictionary<Type, TypeConverter> TypeConverters = new ConcurrentDictionary<Type, TypeConverter>();
 
         /// <summary>Static constructor.</summary>
         /// <remarks>
         /// Add all types of Qowaiv that are supported by the model binder.
         /// </remarks>
-        static TypeConverterModelBinder()
+        public TypeConverterModelBinder()
         {
-            var qowaivAssembly = typeof(SingleValueObjectAttribute).Assembly;
-
-            // Add types.
-            AddAssembly(qowaivAssembly);
+            // Adds all Qowaiv types.
+            AddAssembly(typeof(SingleValueObjectAttribute).Assembly);
         }
 
         /// <summary>Adds the types of the assembly that are marked with teh SingleValueObjectAttribute.</summary>
         /// <param name="assembly">
         /// Assembly to add.
         /// </param>
-        public static void AddAssembly(Assembly assembly)
+        public TypeConverterModelBinder AddAssembly(Assembly assembly)
         {
             Guard.NotNull(assembly, nameof(assembly));
             var tps = assembly.GetTypes();
             AddTypes(tps);
+            return this;
         }
 
         /// <summary>Adds the specified types.</summary>
@@ -53,13 +53,14 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
         /// <remarks>
         /// Only adds the types that are supported by the model binder.
         /// </remarks>
-        public static void AddTypes(params Type[] tps)
+        public TypeConverterModelBinder AddTypes(params Type[] tps)
         {
             Guard.NotNull(tps, nameof(tps));
             foreach (var tp in tps)
             {
                 AddType(tp);
             }
+            return this;
         }
 
         /// <summary>Adds the specified type.</summary>
@@ -69,7 +70,7 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
         /// <remarks>
         /// Only adds the types that are supported by the model binder.
         /// </remarks>
-        public static void AddType(Type tp)
+        public TypeConverterModelBinder AddType(Type tp)
         {
             // Don't add types twice.
             if (!TypeConverters.ContainsKey(tp))
@@ -83,23 +84,20 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
                     TypeConverters[tp] = converter;
                 }
             }
+            return this;
         }
 
-        /// <summary>Removes the specified type.</summary>
-        /// <param name="tp">
-        /// Type to remove.
-        /// </param>
-        public static void RemoveType(Type tp) => TypeConverters.TryRemove(tp, out _);
-
         /// <summary>Gets the types that where added to the model binder.</summary>
-        public static IEnumerable<Type> Types => TypeConverters.Keys;
+        public IEnumerable<Type> Types => TypeConverters.Keys;
 
         /// <inheritdoc />
         public IModelBinder GetBinder(ModelBinderProviderContext context)
         {
             Guard.NotNull(context, nameof(context));
 
-            return TypeConverters.ContainsKey(context.Metadata?.ModelType)
+            var type = QowaivType.GetNotNullableType(context.Metadata?.ModelType);
+
+            return TypeConverters.ContainsKey(type)
                 ? this
                 : null;
         }
@@ -121,11 +119,25 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
 
             var value = valueProviderResult.FirstValue;
 
+            var type = bindingContext.ModelType;
+            var nullable = !type.IsValueType || QowaivType.IsNullable(type);
+
+            if (nullable && string.IsNullOrEmpty(value))
+            {
+                bindingContext.Result = ModelBindingResult.Success(null);
+                return Task.CompletedTask;
+            }
+
+            // We want the converter for the not nullable type.
+            var converter = TypeConverters[QowaivType.GetNotNullableType(type)];
+
             try
             {
-                var converter = TypeConverters[bindingContext.ModelType];
-                // return the conversion result.
-                var result = converter.ConvertFrom(value);
+                var result = converter.ConvertFrom(
+                    context: null,
+                    culture: valueProviderResult.Culture,
+                    value: value);
+
                 bindingContext.Result = ModelBindingResult.Success(result);
             }
             catch (Exception x)

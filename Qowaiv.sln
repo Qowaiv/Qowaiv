@@ -55,9 +55,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent.Un
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model Binding", "Model Binding", "{225B41F0-0B59-4AB1-96DA-A916E2678AD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.AspNetCore.Mvc.ModelBinding", "example\Qowaiv.AspNetCore.Mvc.ModelBinding\Qowaiv.AspNetCore.Mvc.ModelBinding.csproj", "{69E9CC0E-BF81-41CD-92A7-4CD50004900E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.AspNetCore.Mvc.ModelBinding", "example\Qowaiv.AspNetCore.Mvc.ModelBinding\Qowaiv.AspNetCore.Mvc.ModelBinding.csproj", "{69E9CC0E-BF81-41CD-92A7-4CD50004900E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Web.Mvc.ModelBinding", "example\Qowaiv.Web.Mvc.ModelBinding\Qowaiv.Web.Mvc.ModelBinding.csproj", "{B9DD949C-C45D-4332-A870-890DC4B80F97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Web.Mvc.ModelBinding", "example\Qowaiv.Web.Mvc.ModelBinding\Qowaiv.Web.Mvc.ModelBinding.csproj", "{B9DD949C-C45D-4332-A870-890DC4B80F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests", "example\Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests\Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests.csproj", "{1FD06220-5716-4863-8FEC-63B3F6EBE598}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,10 @@ Global
 		{B9DD949C-C45D-4332-A870-890DC4B80F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9DD949C-C45D-4332-A870-890DC4B80F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9DD949C-C45D-4332-A870-890DC4B80F97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD06220-5716-4863-8FEC-63B3F6EBE598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD06220-5716-4863-8FEC-63B3F6EBE598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD06220-5716-4863-8FEC-63B3F6EBE598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD06220-5716-4863-8FEC-63B3F6EBE598}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +150,7 @@ Global
 		{C2ABE02B-F1D0-4393-B676-13B1323A7879} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{69E9CC0E-BF81-41CD-92A7-4CD50004900E} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 		{B9DD949C-C45D-4332-A870-890DC4B80F97} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
+		{1FD06220-5716-4863-8FEC-63B3F6EBE598} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

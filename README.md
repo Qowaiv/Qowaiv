@@ -165,9 +165,6 @@ also support the use of SQL wildcard characters _ and %.
 
 ## Qowaiv helpers
 
-### Guard
-Guard parameters, for centralizing and simplifying the argument checking.
-
 ## Model Binding
 All SVO's support model binding out of the box. That is to say, when the model
 binding mechanism works with a `TypeConverter`. It still may be beneficial to

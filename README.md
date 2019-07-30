@@ -174,16 +174,46 @@ lead to a dependency hell, Qowaiv provides them as code snippets:
 * [ASP.NET Core MVC ModelBinding](example/Qowaiv.AspNetCore.Mvc.ModelBinding/README.md)
 * [ASP.NET (Classic) MVC ModelBinding](example/Qowaiv.Web.Mvc.ModelBinding/README.md)
 
+## Serialization
+### JSON
+Serializing data using JSON is de facto the default. However, .NET has no
+generic interface in the standard library to implement. To overcome this,
+Qowaiv has its own: [IJsonSerializable](src/Qowaiv/Json/IJsonSerializable.cs)
+
+Is has some from methods, and one `ToJson()` method. Depending on your
+serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
+You can implement it yourself:
+* [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
+
+### XML
+.NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
+with the same approach:
+``` C#
+XmlSchema IXmlSerializable.GetSchema() => null;
+
+void IXmlSerializable.ReadXml(XmlReader reader)
+{
+    var s = reader.ReadElementString();
+    var val = Parse(s, CultureInfo.InvariantCulture);
+    m_Value = val.m_Value;
+}
+
+void IXmlSerializable.WriteXml(XmlWriter writer)
+{
+    writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
+}
+```
+
 ## Qowaiv SVO options
 
 ### Hashing
-To support hashing (object.GetHashCode()) the hash code should always return 
+To support hashing (`object.GetHashCode()`) the hash code should always return 
 the same value, for the same object. As SVO's are equal by value, the hash
 is calculated based on the underlying value.
 
 Due to IXmlSerialization support, however, the underlying value is not
 read-only, because this interface first create default instance and then
-sets the value. Only if somebody intentionally misuses the IXmlSerialization
+sets the value. Only if somebody intentionally misuses the `IXmlSerialization`
 interface, can change a value during the lifetime of a SVO.
 
 Therefor

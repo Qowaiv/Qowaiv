@@ -10,7 +10,7 @@
 |![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    | Qowaiv.Validation.Abstractions    |
 |![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.DataAnnotations |
 |![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.Fluent          |
-|![v](https://img.shields.io/badge/version-1.0.1-darkred.svg?cacheSeconds=3600)  | Qowaiv.TestTools                  |
+|![v](https://img.shields.io/badge/version-1.0.2-darkred.svg?cacheSeconds=3600)  | Qowaiv.TestTools                  |
 
 # Qowaiv
 

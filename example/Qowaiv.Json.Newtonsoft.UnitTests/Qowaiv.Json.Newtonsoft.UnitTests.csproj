@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj" />
-    <ProjectReference Include="..\..\tooling\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="..\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj" />
   </ItemGroup>
 
 </Project>

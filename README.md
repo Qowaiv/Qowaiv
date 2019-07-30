@@ -15,20 +15,18 @@
 # Qowaiv
 
 ## Domain-driven design bottom up
-
 Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
 Value Objects that can be used a wide variety of modeling scenarios, both
 inside and outside a Domain-driven context.
 
 Supported scenarios include parsing, formatting, validation, (de)serialization,
-and domain specific logic.
+model binding, and domain specific logic.
 
 # Single Value Object
 A Value Object that can be represented by a single scalar.
 
 ## Technical requirements
-Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Standard (2.0)
-the Visual Studio solution file requires VS2017.3 or higher. Visual Studio can be downloaded
+Visual Studio VS2017.3 or higher is required. Visual Studio can be downloaded
 here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 
 ## Qowaiv types
@@ -167,20 +165,55 @@ also support the use of SQL wildcard characters _ and %.
 
 ## Qowaiv helpers
 
-### Guard
-Guard parameters, for centralizing and simplifying the argument checking.
+## Model Binding
+All SVO's support model binding out of the box. That is to say, when the model
+binding mechanism works with a `TypeConverter`. It still may be beneficial to
+have a custom model binder. Because different solutions might require different
+custom model binders, and deploying them as NuGet packages would potentially
+lead to a dependency hell, Qowaiv provides them as code snippets:
+* [ASP.NET Core MVC ModelBinding](example/Qowaiv.AspNetCore.Mvc.ModelBinding/README.md)
+* [ASP.NET (Classic) MVC ModelBinding](example/Qowaiv.Web.Mvc.ModelBinding/README.md)
 
+## Serialization
+### JSON
+Serializing data using JSON is de facto the default. However, .NET has no
+generic interface in the standard library to implement. To overcome this,
+Qowaiv has its own: [IJsonSerializable](src/Qowaiv/Json/IJsonSerializable.cs)
+
+Is has some from methods, and one `ToJson()` method. Depending on your
+serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
+You can implement it yourself:
+* [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
+
+### XML
+.NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
+with the same approach:
+``` C#
+XmlSchema IXmlSerializable.GetSchema() => null;
+
+void IXmlSerializable.ReadXml(XmlReader reader)
+{
+    var s = reader.ReadElementString();
+    var val = Parse(s, CultureInfo.InvariantCulture);
+    m_Value = val.m_Value;
+}
+
+void IXmlSerializable.WriteXml(XmlWriter writer)
+{
+    writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
+}
+```
 
 ## Qowaiv SVO options
 
 ### Hashing
-To support hashing (object.GetHashCode()) the hash code should always return 
+To support hashing (`object.GetHashCode()`) the hash code should always return 
 the same value, for the same object. As SVO's are equal by value, the hash
 is calculated based on the underlying value.
 
 Due to IXmlSerialization support, however, the underlying value is not
 read-only, because this interface first create default instance and then
-sets the value. Only if somebody intentionally misuses the IXmlSerialization
+sets the value. Only if somebody intentionally misuses the `IXmlSerialization`
 interface, can change a value during the lifetime of a SVO.
 
 Therefor
@@ -251,12 +284,6 @@ there is a possibility to add these to the Qowaiv.Threading.ThreadDomain.
 These values can be configured (in the application settings) or can be created with
 a creator function that can be registered. If not specified otherwise the current 
 country will be created (if possible) based on the current culture.
-
-## MVC ModelBinding
-When using Qowaiv with MVC (not ASP.NET core) you need a specific model binder.
-This binder is needed because the default model binder don't call a type
-converter in case the input is string.Empty.
-The example can be found [here](src/Qowaiv.Web/Mvc/typeConverterModelBinder.cs).
 
 ## Qowaiv clock
 The `Clock` class is an outsider within the Qowaiv library. It is a solution 

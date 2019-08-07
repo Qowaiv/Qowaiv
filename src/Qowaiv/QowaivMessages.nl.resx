@@ -184,9 +184,12 @@
     <value>Geen geldig bedrag</value>
   </data>
   <data name="FormatExceptionYesNo" xml:space="preserve">
-    <value>geen geldige ja/nee waarde</value>
+    <value>Geen geldige ja/nee waarde</value>
   </data>
   <data name="FormatExceptionInternetMediaType" xml:space="preserve">
     <value>Geen geldig internet media type</value>
+  </data>
+  <data name="FormatExceptionDateSpan" xml:space="preserve">
+    <value>Geen geldige tijdsduur</value>
   </data>
 </root>

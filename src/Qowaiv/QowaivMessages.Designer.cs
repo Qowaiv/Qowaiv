@@ -178,6 +178,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid date span.
+        /// </summary>
+        public static string FormatExceptionDateSpan {
+            get {
+                return ResourceManager.GetString("FormatExceptionDateSpan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid Elo.
         /// </summary>
         public static string FormatExceptionElo {

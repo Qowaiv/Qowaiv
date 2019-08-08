@@ -82,6 +82,21 @@ Represents a month in the range [1-12].
 ### Percentage
 Represents a percentage/per mile/per ten thousand.
 
+``` C#
+// Creation
+Percentage p = 0.0314; // implict cast: 3.14%
+var p = Percentage.Parse("3.14"); //  Parse: 3.14%;
+var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
+var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
+var p = 3.14.Percent(); // Extension on double: 3.14%;
+
+// Manipulation
+var total = 400;
+total *= (Percentage)0.5; // Total = 200;
+var value = 50.0;
+value += (Percentage)0.1; // value 55;
+```
+
 ### Postal code
 Represents a postal code. It supports validation for all countries.
 

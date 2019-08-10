@@ -363,13 +363,13 @@ namespace Qowaiv
 
         #region Percent()
 
-        /// <summary>Interpertates the <see cref="int"/> if it was written with a '%' sign.</summary>
+        /// <summary>Interprets the <see cref="int"/> if it was written with a '%' sign.</summary>
         public static Percentage Percent(this int number) => number * 0.01m;
-        
-        /// <summary>Interpertates the <see cref="double"/> if it was written with a '%' sign.</summary>
+
+        /// <summary>Interprets the <see cref="double"/> if it was written with a '%' sign.</summary>
         public static Percentage Percent(this double number) => number * 0.01;
 
-        /// <summary>Interpertates the <see cref="decimal"/> if it was written with a '%' sign.</summary>
+        /// <summary>Interprets the <see cref="decimal"/> if it was written with a '%' sign.</summary>
         public static Percentage Percent(this decimal number) => number * 0.01m;
 
         #endregion

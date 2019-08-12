@@ -80,7 +80,9 @@ and UTC-based date times.
 Represents a month in the range [1-12].
 
 ### Percentage
-Represents a percentage/per mile/per ten thousand.
+Represents a percentage. It supports parsing from per mile and per ten thousand
+too. The basic thought is that `Percentage.Parse("14%")` has the same result
+as `double.Parse("14%")`, which is `0.14`.
 
 ``` C#
 // Creation
@@ -91,6 +93,8 @@ var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
 var p = 3.14.Percent(); // Extension on double: 3.14%;
 
 // Manipulation
+var p = 13.2.Percent();
+p++; // 14.2%;
 var total = 400;
 total *= (Percentage)0.5; // Total = 200;
 var value = 50.0;

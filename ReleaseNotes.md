@@ -1,11 +1,15 @@
-﻿### Released 2019-07-30
-### Qowaiv.Validation.Abstractions 0.0.1
+﻿### Released 2019-08-25
+#### Qowaiv 4.0.3
+* Added Percent() extension method (#70)
+
+### Released 2019-07-30
+#### Qowaiv.Validation.Abstractions 0.0.1
 * Initial version
-### Qowaiv.Validation.DataAnnotations 0.0.1
+#### Qowaiv.Validation.DataAnnotations 0.0.1
 * Initial version
-### Qowaiv.Validation.Fluent 0.0.1
+#### Qowaiv.Validation.Fluent 0.0.1
 * Initial version
-### Qowaiv.Validation.TestTools 1.0.2
+#### Qowaiv.Validation.TestTools 1.0.2
 * Updated references
 
 ### Released 2019-07-28

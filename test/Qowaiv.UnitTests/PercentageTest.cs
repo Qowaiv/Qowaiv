@@ -1529,6 +1529,31 @@ namespace Qowaiv.UnitTests
         #region Properties
         #endregion
 
+        #region Percent()
+
+        [Test]
+        public void Percent_Int_IsPercentage()
+        {
+            var p = 3.Percent();
+            Assert.AreEqual("3%", p.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void Percent_Double_IsPercentage()
+        {
+            var p = 3.14.Percent();
+            Assert.AreEqual("3.14%", p.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void Percent_Decimal_IsPercentage()
+        {
+            var p = 3.14m.Percent();
+            Assert.AreEqual("3.14%", p.ToString(CultureInfo.InvariantCulture));
+        }
+
+        #endregion
+
         #region Type converter tests
 
         [Test]

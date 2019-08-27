@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace Qowaiv.Web.Mvc
+namespace Qowaiv.Web.Mvc.ModelBinding
 {
     /// <summary>A model binder for types with a custom type converter.</summary>
     /// <remarks>
@@ -22,7 +22,7 @@ namespace Qowaiv.Web.Mvc
     public class TypeConverterModelBinder : DefaultModelBinder
     {
         /// <summary>A Dictionary that keeps track of the registered type converters.</summary>
-        private static ConcurrentDictionary<Type, TypeConverter> TypeConverters = new ConcurrentDictionary<Type, TypeConverter>();
+        private static readonly ConcurrentDictionary<Type, TypeConverter> TypeConverters = new ConcurrentDictionary<Type, TypeConverter>();
 
         /// <summary>Static constructor.</summary>
         /// <remarks>
@@ -31,11 +31,9 @@ namespace Qowaiv.Web.Mvc
         static TypeConverterModelBinder()
         {
             var qowaivAssembly = typeof(SingleValueObjectAttribute).Assembly;
-            var qowaivWebAssembly = typeof(InternetMediaType).Assembly;
 
             // Add types.
             AddAssembly(qowaivAssembly);
-            AddAssembly(qowaivWebAssembly);
         }
 
         /// <summary>Adds the types of the assembly that are marked with teh SingleValueObjectAttribute.</summary>

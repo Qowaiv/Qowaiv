@@ -591,6 +591,8 @@ namespace Qowaiv
                     { "TRUE", 2 },
                     { "NO", 1 },
                     { "YES", 2 },
+                    { "N", 1 },
+                    { "Y", 2 },
                 }
             }
         };

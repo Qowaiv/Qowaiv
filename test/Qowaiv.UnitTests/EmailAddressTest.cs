@@ -150,6 +150,13 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Parse_WithQuotedDisplayName_WithoutDisplayName()
+        {
+            var email = EmailAddress.Parse("\"Joe Smith\" email@domain.com");
+            Assert.AreEqual("email@domain.com", email.ToString());
+        }
+
+        [Test]
         public void Parse_WithCommentAtTheEnd_WithoutComment()
         {
             var email = EmailAddress.Parse("email@domain.com (Joe Smith)");
@@ -840,6 +847,31 @@ namespace Qowaiv.UnitTests
 
         #endregion
 
+        #region Methods
+
+        [Test]
+        public void WithDisplayName_UnknownEmailAddress_Throws()
+        {
+            var x = Assert.Catch<InvalidOperationException>(() => EmailAddress.Unknown.WithDisplayName("Jimi Hendrix"));
+            Assert.AreEqual("An not set email address can not be shown with a display name.", x.Message);
+        }
+
+        [Test]
+        public void WithDisplayName_EmptyString_EmailAddressOnly()
+        {
+            var str = TestStruct.WithDisplayName(string.Empty);
+            Assert.AreEqual("svo@qowaiv.org", str);
+        }
+
+        [Test]
+        public void WithDisplayName_JimiHendrix_WithDisplayName()
+        {
+            var str = TestStruct.WithDisplayName(" Jimi Hendrix  ");
+            Assert.AreEqual("Jimi Hendrix <svo@qowaiv.org>", str);
+        }
+
+        #endregion
+
         #region Type converter tests
 
         [Test]
@@ -978,6 +1010,9 @@ namespace Qowaiv.UnitTests
         [TestCase("email)mirror(@plus.com")]
         [TestCase("email@plus.com (not closed comment")]
         [TestCase("email(with @ in comment)plus.com")]
+        [TestCase(@"""Joe Smith email@domain.com")]
+        [TestCase(@"""Joe Smith' email@domain.com")]
+        [TestCase(@"""Joe Smith""email@domain.com")]
         [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void InvalidEmailAddresses(string email)
         {
@@ -1048,6 +1083,9 @@ namespace Qowaiv.UnitTests
         [TestCase("+local++name+with+@equality.com")]
         [TestCase("Joe Smith <email@domain.com>")]
         [TestCase("email@domain.com (joe Smith)")]
+        [TestCase(@"""Joe Smith"" email@domain.com")]
+        [TestCase(@"""Joe\\tSmith"" email@domain.com")]
+        [TestCase(@"""Joe\""Smith"" email@domain.com")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void ValidEmailAddresses(string email)
         {

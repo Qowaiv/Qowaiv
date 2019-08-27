@@ -1,26 +1,32 @@
 ![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
-![version](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
+
+| version                                                                        | package                           |
+|--------------------------------------------------------------------------------|-----------------------------------|
+|![v](https://img.shields.io/badge/version-4.0.3-blue.svg?cacheSeconds=3600)     | Qowaiv                            |
+|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     | Qowaiv.Data.SqlCient              |
+|![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    | Qowaiv.Validation.Abstractions    |
+|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.DataAnnotations |
+|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.Fluent          |
+|![v](https://img.shields.io/badge/version-1.0.2-darkred.svg?cacheSeconds=3600)  | Qowaiv.TestTools                  |
 
 # Qowaiv
 
 ## Domain-driven design bottom up
-
 Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
 Value Objects that can be used a wide variety of modeling scenarios, both
 inside and outside a Domain-driven context.
 
 Supported scenarios include parsing, formatting, validation, (de)serialization,
-and domain specific logic.
+model binding, and domain specific logic.
 
 # Single Value Object
 A Value Object that can be represented by a single scalar.
 
 ## Technical requirements
-Because we use .NET standard to support both .NET 4.5 (and higher) as .NET Standard (2.0)
-the Visual Studio solution file requires VS2017.3 or higher. Visual Studio can be downloaded
+Visual Studio VS2017.3 or higher is required. Visual Studio can be downloaded
 here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 
 ## Qowaiv types
@@ -44,10 +50,14 @@ case-insensitve.
 
 ``` C#
 var email = EmailAddress.Parse("Test Account <TEST@qowaiv.org>");
+var quoted = EmailAddress.Parse("\"Joe Smith\" email@qowaiv.org");
 var ip_based = EmailAddress.Parse("test@[172.16.254.1]");
 
 email.ToString(); // test@qowaiv.org
+quoted.ToString(); // email@qowaiv.org
 ip_based.IsIPBased; // true
+ip_based.WithDisplayName("Jimi Hendrix"); // Jimi Hendrix <test@[172.16.254.1]>
+
 ```
 
 ### Email address collection
@@ -70,7 +80,26 @@ and UTC-based date times.
 Represents a month in the range [1-12].
 
 ### Percentage
-Represents a percentage/per mile/per ten thousand.
+Represents a percentage. It supports parsing from per mile and per ten thousand
+too. The basic thought is that `Percentage.Parse("14%")` has the same result
+as `double.Parse("14%")`, which is `0.14`.
+
+``` C#
+// Creation
+Percentage p = 0.0314; // implict cast: 3.14%
+var p = Percentage.Parse("3.14"); //  Parse: 3.14%;
+var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
+var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
+var p = 3.14.Percent(); // Extension on double: 3.14%;
+
+// Manipulation
+var p = 13.2.Percent();
+p++; // 14.2%;
+var total = 400;
+total *= (Percentage)0.5; // Total = 200;
+var value = 50.0;
+value += (Percentage)0.1; // value 55;
+```
 
 ### Postal code
 Represents a postal code. It supports validation for all countries.
@@ -155,20 +184,55 @@ also support the use of SQL wildcard characters _ and %.
 
 ## Qowaiv helpers
 
-### Guard
-Guard parameters, for centralizing and simplifying the argument checking.
+## Model Binding
+All SVO's support model binding out of the box. That is to say, when the model
+binding mechanism works with a `TypeConverter`. It still may be beneficial to
+have a custom model binder. Because different solutions might require different
+custom model binders, and deploying them as NuGet packages would potentially
+lead to a dependency hell, Qowaiv provides them as code snippets:
+* [ASP.NET Core MVC ModelBinding](example/Qowaiv.AspNetCore.Mvc.ModelBinding/README.md)
+* [ASP.NET (Classic) MVC ModelBinding](example/Qowaiv.Web.Mvc.ModelBinding/README.md)
 
+## Serialization
+### JSON
+Serializing data using JSON is de facto the default. However, .NET has no
+generic interface in the standard library to implement. To overcome this,
+Qowaiv has its own: [IJsonSerializable](src/Qowaiv/Json/IJsonSerializable.cs)
+
+Is has some from methods, and one `ToJson()` method. Depending on your
+serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
+You can implement it yourself:
+* [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
+
+### XML
+.NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
+with the same approach:
+``` C#
+XmlSchema IXmlSerializable.GetSchema() => null;
+
+void IXmlSerializable.ReadXml(XmlReader reader)
+{
+    var s = reader.ReadElementString();
+    var val = Parse(s, CultureInfo.InvariantCulture);
+    m_Value = val.m_Value;
+}
+
+void IXmlSerializable.WriteXml(XmlWriter writer)
+{
+    writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
+}
+```
 
 ## Qowaiv SVO options
 
 ### Hashing
-To support hashing (object.GetHashCode()) the hash code should always return 
+To support hashing (`object.GetHashCode()`) the hash code should always return 
 the same value, for the same object. As SVO's are equal by value, the hash
 is calculated based on the underlying value.
 
 Due to IXmlSerialization support, however, the underlying value is not
 read-only, because this interface first create default instance and then
-sets the value. Only if somebody intentionally misuses the IXmlSerialization
+sets the value. Only if somebody intentionally misuses the `IXmlSerialization`
 interface, can change a value during the lifetime of a SVO.
 
 Therefor
@@ -239,12 +303,6 @@ there is a possibility to add these to the Qowaiv.Threading.ThreadDomain.
 These values can be configured (in the application settings) or can be created with
 a creator function that can be registered. If not specified otherwise the current 
 country will be created (if possible) based on the current culture.
-
-## MVC ModelBinding
-When using Qowaiv with MVC (not ASP.NET core) you need a specific model binder.
-This binder is needed because the default model binder don't call a type
-converter in case the input is string.Empty.
-The example can be found [here](src/Qowaiv.Web/Mvc/typeConverterModelBinder.cs).
 
 ## Qowaiv clock
 The `Clock` class is an outsider within the Qowaiv library. It is a solution 

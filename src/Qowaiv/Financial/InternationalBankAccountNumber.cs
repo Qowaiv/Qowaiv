@@ -517,11 +517,9 @@ namespace Qowaiv.Financial
         /// <summary>Returns true if the val represents a valid IBAN, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            InternationalBankAccountNumber iban;
-            return
-                !string.IsNullOrEmpty(val) &&
+            return !string.IsNullOrEmpty(val) &&
                 !Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo) &&
-                TryParse(val, formatProvider, out iban);
+                TryParse(val, formatProvider, out _);
         }
 
         /// <summary>Contains a lookup for alphanumeric and numeric chars.</summary>

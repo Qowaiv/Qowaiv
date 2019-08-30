@@ -19,7 +19,6 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
             Assert.Throws<EventStreamNoFullHistoryException>(() => AggregateRoot.FromEvents<SimpleEventSourcedRoot>(stream));
         }
 
-
         [Test]
         public void FromEvents_AggregateShouldHaveIdOfEvents()
         {
@@ -31,6 +30,7 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
             Assert.AreEqual(aggregateId, aggregate.Id);
             Assert.AreEqual(aggregateId, aggregate.EventStream.AggregateId);
             Assert.AreEqual(1, aggregate.Version);
+            Assert.AreEqual(1, aggregate.EventStream.CommittedVersion);
         }
 
         [Test]

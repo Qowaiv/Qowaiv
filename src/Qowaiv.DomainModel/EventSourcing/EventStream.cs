@@ -26,6 +26,8 @@ namespace Qowaiv.DomainModel.EventSourcing
         internal EventStream(Guid aggregateId, int version) : this(aggregateId)
         {
             versionOffset = version;
+            // Committed version can not be lower than the offset.
+            CommittedVersion = version;
         }
 
         /// <summary>Gets the identifier of the aggregate linked to the event stream.</summary>
@@ -65,7 +67,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         }
 
         /// <summary>Gets the uncommitted events of the event stream.</summary>
-        public IEnumerable<EventMessage> GetUncommitted() => this.Skip(CommittedVersion);
+        public IEnumerable<EventMessage> GetUncommitted() => this.Skip(CommittedVersion - versionOffset);
 
         /// <summary>Marks all events as being committed.</summary>
         public void MarkAllAsCommitted() => CommittedVersion = Version;
@@ -73,7 +75,7 @@ namespace Qowaiv.DomainModel.EventSourcing
         /// <summary>Removes the committed events from the stream.</summary>
         public void ClearCommitted()
         {
-            var delta = Version - CommittedVersion;
+            var delta = CommittedVersion - versionOffset;
             messages.RemoveRange(0, delta);
             versionOffset += delta;
         }

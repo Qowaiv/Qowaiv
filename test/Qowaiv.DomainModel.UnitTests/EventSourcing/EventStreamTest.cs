@@ -61,6 +61,76 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
         }
 
         [Test]
+        public void GetUncommitted_NoCommitted_All()
+        {
+            var stream = new EventStream
+            {
+                new DummyEvent(),
+                new DummyEvent(),
+                new DummyEvent()
+            };
+            Assert.AreEqual(3, stream.GetUncommitted().Count());
+        }
+
+        [Test]
+        public void GetUncommitted_3Committed_1ItemWithVersion4()
+        {
+            var stream = new EventStream
+            {
+                new DummyEvent(),
+                new DummyEvent(),
+                new DummyEvent()
+            };
+            stream.MarkAllAsCommitted();
+            stream.Add(new DummyEvent());
+
+            var uncommited = stream.GetUncommitted().ToArray();
+
+            Assert.AreEqual(1, uncommited.Length);
+            Assert.AreEqual(4, uncommited[0].Info.Version);
+        }
+
+        [Test]
+        public void GetUncommitted_ClearCommitted_1ItemWithVersion4()
+        {
+            var stream = new EventStream
+            {
+                new DummyEvent(),
+                new DummyEvent(),
+                new DummyEvent()
+            };
+            stream.MarkAllAsCommitted();
+            stream.ClearCommitted();
+            stream.Add(new DummyEvent());
+
+            var uncommited = stream.GetUncommitted().ToArray();
+
+            Assert.AreEqual(1, uncommited.Length);
+            Assert.AreEqual(4, uncommited[0].Info.Version);
+        }
+
+        [Test]
+        public void GetUncommitted_ClearCommittedWithCommitted_1ItemWithVersion5()
+        {
+            var stream = new EventStream
+            {
+                new DummyEvent(),
+                new DummyEvent(),
+                new DummyEvent()
+            };
+            stream.MarkAllAsCommitted();
+            stream.ClearCommitted();
+            stream.Add(new DummyEvent());
+            stream.MarkAllAsCommitted();
+            stream.Add(new DummyEvent());
+
+            var uncommited = stream.GetUncommitted().ToArray();
+
+            Assert.AreEqual(1, uncommited.Length);
+            Assert.AreEqual(5, uncommited[0].Info.Version);
+        }
+
+        [Test]
         public void ClearCommitted_WithoutUncommitted()
         {
             var stream = new EventStream();
@@ -92,6 +162,7 @@ namespace Qowaiv.DomainModel.UnitTests.EventSourcing
             Assert.AreEqual(17, stream.Version);
             Assert.AreEqual(16, stream.CommittedVersion);
             Assert.AreEqual(1, stream.GetUncommitted().Count());
+            Assert.AreEqual(1, stream.Count());
         }
 
         [Test]

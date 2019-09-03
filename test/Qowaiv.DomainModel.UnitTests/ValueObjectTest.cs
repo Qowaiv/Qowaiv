@@ -7,6 +7,20 @@ namespace Qowaiv.DomainModel.UnitTests
     public class ValueObjectTest
     {
         [Test]
+        public void Equals_OtherObject_IsFalse()
+        {
+            var valueObject = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+            Assert.IsFalse(valueObject.Equals(new object()));
+        }
+
+        [Test]
+        public void Equals_Null_IsFalse()
+        {
+            var valueObject = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+            Assert.IsFalse(valueObject.Equals(null));
+        }
+
+        [Test]
         public void Equals_TwoIdenticalInstances_AreEqual()
         {
             var act = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
@@ -38,6 +52,33 @@ namespace Qowaiv.DomainModel.UnitTests
         {
             var left = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
             var right = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+
+            Assert.IsTrue(left == right);
+        }
+
+        [Test]
+        public void Equality_WithNullLeft_IsFalse()
+        {
+            AddressValueObject left = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+            AddressValueObject right = null;
+
+            Assert.IsFalse(left == right);
+        }
+
+        [Test]
+        public void Equality_WithNullRight_IsFalse()
+        {
+            AddressValueObject left = null;
+            AddressValueObject right = new AddressValueObject("Downingstreet", 10, PostalCode.Parse("SW1A 2AA"), Country.GB);
+
+            Assert.IsFalse(left == right);
+        }
+
+        [Test]
+        public void Equality_WithNulls_IsTrue()
+        {
+            AddressValueObject left = null;
+            AddressValueObject right = null;
 
             Assert.IsTrue(left == right);
         }

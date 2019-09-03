@@ -56,7 +56,7 @@ namespace Qowaiv.DomainModel
         /// <inheritdoc />
         public void Add(TChild item)
         {
-            GuardNull(item);
+            GuardNull(item, nameof(item));
             tracker.Add(new ItemAdded<TChild>(collection, item));
         }
 
@@ -80,7 +80,7 @@ namespace Qowaiv.DomainModel
         /// <inheritdoc />
         public void Insert(int index, TChild item)
         {
-            GuardNull(item);
+            GuardNull(item, nameof(item));
             tracker.Add(new ItemInserted<TChild>(collection, index, item));
         }
 
@@ -125,11 +125,11 @@ namespace Qowaiv.DomainModel
         #endregion
 
         /// <remarks>We don't want to support null elements in child collections.</remarks>
-        private static void GuardNull(TChild item, string paramName = null)
+        private static void GuardNull(TChild item, string paramName)
         {
 #pragma warning disable IDE0041 // Use 'is null' check
             // False positive: TChild is not (guaranteed) a reference type, so item is null is rejected by the compiler.
-            if (ReferenceEquals(item, null)) { throw new ArgumentNullException(paramName ?? nameof(item)); }
+            if (ReferenceEquals(item, null)) { throw new ArgumentNullException(paramName); }
 #pragma warning restore IDE0041 // Use 'is null' check
         }
     }

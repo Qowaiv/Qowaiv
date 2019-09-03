@@ -37,6 +37,12 @@ namespace Qowaiv.DomainModel.UnitTests
             Assert.AreEqual(new[] { 17, 69 }, parent.Numbers);
         }
 
+        [Test]
+        public void Add_Null_Throws()
+        {
+            var parent = new ObjectParent();
+            Assert.Throws<ArgumentNullException>(() => parent.Objects.Add(null));
+        }
 
         [Test]
         public void Add_Valid_Applied()
@@ -242,6 +248,36 @@ namespace Qowaiv.DomainModel.UnitTests
         }
 
         [Test]
+        public  void CopyTo_Aray_AreEqual()
+        {
+            var actual = new int[3];
+            var expected = new[] { 666, 17, 69 };
+
+            var parent = new NumberParent();
+            parent.Numbers.AddRange(expected);
+
+            parent.Numbers.CopyTo(actual, 0);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Count_Filled_7()
+        {
+            var parent = new NumberParent();
+            parent.Numbers.AddRange(new[] { 666, 17, 69, 4, 5, 6, 7 });
+
+            Assert.AreEqual(7, parent.Numbers.Count);
+        }
+
+        [Test]
+        public void IsReadOnly_IsFalse()
+        {
+            var parent = new NumberParent();
+            Assert.IsFalse(parent.Numbers.IsReadOnly);
+        }
+
+        [Test]
         public void Sort_Valid_Applied()
         {
             var parent = new NumberParent();
@@ -306,4 +342,17 @@ namespace Qowaiv.DomainModel.UnitTests
             }
         }
     }
+
+    internal class ObjectParent : AggregateRoot<ObjectParent>
+    {
+        public ObjectParent() : base(Guid.NewGuid(), new ObjectParentValidator())
+        {
+            Objects = new ChildCollection<object>(Tracker);
+        }
+
+        public ChildCollection<object> Objects { get; }
+
+        private class ObjectParentValidator : FluentModelValidator<ObjectParent> { }
+    }
+
 }

@@ -1505,6 +1505,52 @@ namespace Qowaiv.UnitTests
 
         #endregion
 
+        #region Math-like methods tests
+
+        [Test]
+        public void Max_FirstLargest_First()
+        {
+            var actual = Percentage.Max(TestStruct, 0.007);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Max_SecondLargest_Second()
+        {
+            var actual = Percentage.Max(0.1, TestStruct);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Max_Values_Largest()
+        {
+            var actual = Percentage.Max(0.1, TestStruct, 0.02, 0.17);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Min_FirstSmallest_Frist()
+        {
+            var actual = Percentage.Min(TestStruct, 0.9);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Min_SecondSmallest_Second()
+        {
+            var actual = Percentage.Min(0.9, TestStruct);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Min_Values_Smallest()
+        {
+            var actual = Percentage.Min(0.9, TestStruct, 0.18, 0.74);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        #endregion
+
         #region Casting tests
 
         [Test]
@@ -1524,9 +1570,6 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        #endregion
-
-        #region Properties
         #endregion
 
         #region Percent()

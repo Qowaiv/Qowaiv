@@ -99,6 +99,9 @@ var total = 400;
 total *= (Percentage)0.5; // Total = 200;
 var value = 50.0;
 value += (Percentage)0.1; // value 55;
+
+var max = Percentage.Max(1.4.Percent(), 1.8.Percent()); // 1.8%;
+var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
 ```
 
 ### Postal code

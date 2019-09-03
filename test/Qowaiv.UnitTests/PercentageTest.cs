@@ -1549,6 +1549,47 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(TestStruct, actual);
         }
 
+        [Test]
+        public void Round_Minus1Digits_Throws()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestStruct.Round(-1));
+        }
+
+        [Test]
+        public void Round_27Digits_Throws()
+        {
+            var exception = Assert.Catch<ArgumentOutOfRangeException>(() => TestStruct.Round(27));
+            Assert.AreEqual("Percentages can only round to between 0 and 26 digits of precision.\r\nParameter name: decimals", exception.Message);
+        }
+
+        [Test]
+        public void Round_18Percent()
+        {
+            var actual = TestStruct.Round();
+            Assert.AreEqual(18.Percent(), actual);
+        }
+
+        [Test]
+        public void Round_1decimal_17d5Percent()
+        {
+            var actual = TestStruct.Round(1);
+            Assert.AreEqual(17.5.Percent(), actual);
+        }
+
+        [Test]
+        public void Round_AwayFromZero_17Percent()
+        {
+            var actual = 16.5.Percent().Round(0, MidpointRounding.AwayFromZero);
+            Assert.AreEqual(17.Percent(), actual);
+        }
+
+        [Test]
+        public void Round_ToEven_16Percent()
+        {
+            var actual = 16.5.Percent().Round(0, MidpointRounding.ToEven);
+            Assert.AreEqual(16.Percent(), actual);
+        }
+
         #endregion
 
         #region Casting tests

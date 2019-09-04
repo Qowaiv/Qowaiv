@@ -97,6 +97,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Percentages can only round to between 0 and 26 digits of precision..
+        /// </summary>
+        public static string ArgumentOutOfRange_PercentagelRound {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_PercentagelRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} operation could not be applied. There is a mismatch between {1} and {2}..
         /// </summary>
         public static string CurrencyMismatchException {

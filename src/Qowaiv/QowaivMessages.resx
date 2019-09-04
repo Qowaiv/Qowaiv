@@ -190,4 +190,7 @@
   <data name="InvalidOperationException_WithDisplayName" xml:space="preserve">
     <value>An not set email address can not be shown with a display name.</value>
   </data>
+  <data name="ArgumentOutOfRange_PercentagelRound" xml:space="preserve">
+    <value>Percentages can only round to between 0 and 26 digits of precision.</value>
+  </data>
 </root>

@@ -1,4 +1,9 @@
-﻿### Released 2019-08-25
+﻿### Released 2019-09-04
+#### Qowaiv 4.0.4
+* Added Percentage.Min() and Percentage.Max() (#73)
+* Added Percentage.Round() (#74)
+
+### Released 2019-08-25
 #### Qowaiv 4.0.3
 * Added Percent() extension method (#70)
 

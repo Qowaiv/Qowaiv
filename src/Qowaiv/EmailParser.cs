@@ -250,7 +250,7 @@ namespace Qowaiv
             }
             if (buffer.Last() == '>')
             {
-                var lt = buffer.IndexOf('<');
+                var lt = buffer.LastIndexOf('<');
 
                 if (lt == CharBuffer.NotFound)
                 {

@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Text
 {
-    internal class CharBuffer
+    internal class CharBuffer: IEquatable<string>
     {
         public static readonly int NotFound = -1;
 
@@ -146,6 +146,23 @@ namespace Qowaiv.Text
         {
             Length = 0;
             return this;
+        }
+
+        /// <inheritdoc />
+        public bool Equals(string other)
+        {
+            if(Length != other.Length)
+            {
+                return false;
+            }
+            for(var i = 0; i < Length; i++)
+            {
+                if(buffer[i] != other[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static implicit operator string(CharBuffer buffer) => buffer?.ToString();

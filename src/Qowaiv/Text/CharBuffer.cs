@@ -63,6 +63,22 @@ namespace Qowaiv.Text
             return NotFound;
         }
 
+        /// <summary>Gets the last index of the <see cref="char"/> in the buffer.</summary>
+        /// <returns>
+        /// -1 if not found, otherwise the index of the <see cref="char"/>.
+        /// </returns>
+        public int LastIndexOf(char ch)
+        {
+            for (var i = Length -1; i >= 0; i--)
+            {
+                if (buffer[i] == ch)
+                {
+                    return i;
+                }
+            }
+            return NotFound;
+        }
+
         /// <summary>Counts the occurrences of the <see cref="char"/> in the buffer.</summary>
         public int Count(char ch)
         {

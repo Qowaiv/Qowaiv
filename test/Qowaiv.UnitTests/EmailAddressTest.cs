@@ -1086,6 +1086,7 @@ namespace Qowaiv.UnitTests
         [TestCase(@"""Joe Smith"" email@domain.com")]
         [TestCase(@"""Joe\\tSmith"" email@domain.com")]
         [TestCase(@"""Joe\""Smith"" email@domain.com")]
+        [TestCase(@"Test |<gaaf <email@domain.com>")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void ValidEmailAddresses(string email)
         {

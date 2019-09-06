@@ -1013,8 +1013,10 @@ namespace Qowaiv.UnitTests
         [TestCase(@"""Joe Smith email@domain.com")]
         [TestCase(@"""Joe Smith' email@domain.com")]
         [TestCase(@"""Joe Smith""email@domain.com")]
+        [TestCase("email@mailto:domain.com")]
+        [TestCase("mailto:mailto:email@domain.com")]
         [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
-        public void InvalidEmailAddresses(string email)
+        public void IsInvalid(string email)
         {
             Assert.IsFalse(EmailAddress.IsValid(email), email);
         }
@@ -1087,8 +1089,11 @@ namespace Qowaiv.UnitTests
         [TestCase(@"""Joe\\tSmith"" email@domain.com")]
         [TestCase(@"""Joe\""Smith"" email@domain.com")]
         [TestCase(@"Test |<gaaf <email@domain.com>")]
+        [TestCase("MailTo:casesensitve@domain.com")]
+        [TestCase("mailto:email@domain.com")]
+        [TestCase("Joe Smith <mailto:email@domain.com>")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
-        public void ValidEmailAddresses(string email)
+        public void IsValid(string email)
         {
             Assert.IsTrue(EmailAddress.IsValid(email), email);
         }

@@ -43,13 +43,13 @@ players in competitor-versus-competitor games.
 Represents a (single) email address. Support:
 * Display names (are stripped)
 * Comments (are removed)
-* IP-based domains (normalized and surrounded by breakets)
+* IP-based domains (normalized and surrounded by brackets)
 
 Furthermore, the email address is normalized as a lowercase string, making it
-case-insensitve.
+case-insensitive.
 
 ``` C#
-var email = EmailAddress.Parse("Test Account <TEST@qowaiv.org>");
+var email = EmailAddress.Parse("Test Account <mailto:TEST@qowaiv.org>");
 var quoted = EmailAddress.Parse("\"Joe Smith\" email@qowaiv.org");
 var ip_based = EmailAddress.Parse("test@[172.16.254.1]");
 
@@ -86,7 +86,7 @@ as `double.Parse("14%")`, which is `0.14`.
 
 ``` C#
 // Creation
-Percentage p = 0.0314; // implict cast: 3.14%
+Percentage p = 0.0314; // implicit cast: 3.14%
 var p = Percentage.Parse("3.14"); //  Parse: 3.14%;
 var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
 var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;

@@ -38,6 +38,7 @@ namespace Qowaiv
             var local = new CharBuffer(EmailAddress.MaxLength);
             var domain = new CharBuffer(EmailAddress.MaxLength);
 
+            var mailto = false;
             var noAt = true;
             var prev = default(char);
             var hasBrackets = false;
@@ -78,6 +79,14 @@ namespace Qowaiv
                 // Local part.
                 else if (noAt)
                 {
+                    // If no MailTo: detected yet, we should remove it.
+                    if (!mailto && ch == Colon && local.Equals(nameof(mailto)))
+                    {
+                        local.Clear();
+                        mailto = true;
+                        continue;
+                    }
+
                     // Don't start with a dot.
                     if (!IsValidLocal(ch) || ch == Dot && local.Empty())
                     {

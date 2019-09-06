@@ -26,8 +26,10 @@ namespace Qowaiv
         {
             var str = new CharBuffer(s)
                 .Trim()
+                .RemoveQuotedPrefix()
+                .RemoveDisplayName()
                 .RemoveComment()
-                .RemoveDisplayName();
+            ;
 
             if (str.Empty())
             {
@@ -198,6 +200,90 @@ namespace Qowaiv
             return true;
         }
 
+        /// <summary>Removes the email address display name from the string.</summary>
+        /// <remarks>
+        /// To indicate the message recipient, an email address also may have an
+        /// associated display name for the recipient, which is followed by the
+        /// address specification surrounded by angled brackets, for example:
+        /// John Smith &lt;john.smith@example.org&gt;.
+        /// </remarks>
+        private static CharBuffer RemoveQuotedPrefix(this CharBuffer buffer)
+        {
+            if (buffer.Empty())
+            {
+                return buffer;
+            }
+            if (buffer.First() == '"')
+            {
+                var escape = false;
+
+                var pos = 1;
+                var end = buffer.Length - 1;
+
+                while (pos < end)
+                {
+                    var ch = buffer[pos++];
+
+                    // The escape character is found.
+                    if (ch == '\\')
+                    {
+                        // toggle state.
+                        escape = !escape;
+                    }
+                    // The (potential) and character.
+                    else if (ch == '"')
+                    {
+                        // if not escaped.
+                        if (!escape)
+                        {
+                            // if followed by a whitespace.
+                            if (char.IsWhiteSpace(buffer[pos++]))
+                            {
+                                return buffer.RemoveRange(0, pos).Trim();
+                            }
+                            return buffer.Clear();
+                        }
+                        escape = false;
+                    }
+                    else
+                    {
+                        escape = false;
+                    }
+                }
+                return buffer.Clear();
+            }
+            return buffer;
+        }
+
+        /// <summary>Removes the email address display name from the string.</summary>
+        /// <remarks>
+        /// To indicate the message recipient, an email address also may have an
+        /// associated display name for the recipient, which is followed by the
+        /// address specification surrounded by angled brackets, for example:
+        /// John Smith &lt;john.smith@example.org&gt;.
+        /// </remarks>
+        private static CharBuffer RemoveDisplayName(this CharBuffer buffer)
+        {
+            if (buffer.Empty())
+            {
+                return buffer;
+            }
+            if (buffer.Last() == '>')
+            {
+                var lt = buffer.LastIndexOf('<');
+
+                if (lt == CharBuffer.NotFound)
+                {
+                    return buffer.Clear();
+                }
+                return buffer
+                    .RemoveFromEnd(1)
+                    .RemoveRange(0, lt + 1);
+            }
+            return buffer;
+        }
+
+
         /// <summary>Removes email address comments from the string.</summary>
         /// <remarks>
         /// Comments are allowed in the domain as well as in the local-part:
@@ -244,71 +330,5 @@ namespace Qowaiv
             return buffer.Trim();
         }
 
-        /// <summary>Removes the email address display name from the string.</summary>
-        /// <remarks>
-        /// To indicate the message recipient, an email address also may have an
-        /// associated display name for the recipient, which is followed by the
-        /// address specification surrounded by angled brackets, for example:
-        /// John Smith &lt;john.smith@example.org&gt;.
-        /// </remarks>
-        private static CharBuffer RemoveDisplayName(this CharBuffer buffer)
-        {
-            if (buffer.Empty())
-            {
-                return buffer;
-            }
-            if (buffer.Last() == '>')
-            {
-                var lt = buffer.LastIndexOf('<');
-
-                if (lt == CharBuffer.NotFound)
-                {
-                    return buffer.Clear();
-                }
-                return buffer
-                    .RemoveFromEnd(1)
-                    .RemoveRange(0, lt + 1);
-            }
-            if (buffer.First() == '"')
-            {
-                var escape = false;
-
-                var pos = 1;
-                var end = buffer.Length - 1;
-
-                while(pos < end)
-                {
-                    var ch = buffer[pos++];
-
-                    // The escape character is found.
-                    if (ch == '\\')
-                    {
-                        // toggle state.
-                        escape = !escape;
-                    }
-                    // The (potential) and character.
-                    else if (ch == '"')
-                    {
-                        // if not escaped.
-                        if (!escape)
-                        {
-                            // if followd by a whitespace.
-                            if (char.IsWhiteSpace(buffer[pos++]))
-                            {
-                                return buffer.RemoveRange(0, pos).Trim();
-                            }
-                            return buffer.Clear();
-                        }
-                        escape = false;
-                    }
-                    else
-                    {
-                        escape = false;
-                    }
-                }
-                return buffer.Clear();
-            }
-            return buffer;
-        }
     }
 }

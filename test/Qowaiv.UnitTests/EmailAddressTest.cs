@@ -1005,7 +1005,8 @@ namespace Qowaiv.UnitTests
         [TestCase("email@colon:colon.com")]
         [TestCase("email@caret^xor.com")]
         [TestCase("email@=qowaiv.com")]
-        [TestCase("email@plus+.coM")]
+        [TestCase("email@plus+.com")]
+        [TestCase("email@domain.com>")]
         [TestCase("email( (nested) )@plus.com")]
         [TestCase("email)mirror(@plus.com")]
         [TestCase("email@plus.com (not closed comment")]
@@ -1015,6 +1016,7 @@ namespace Qowaiv.UnitTests
         [TestCase(@"""Joe Smith""email@domain.com")]
         [TestCase("email@mailto:domain.com")]
         [TestCase("mailto:mailto:email@domain.com")]
+        [TestCase("Display Name <email@plus.com> (after name with display)")]
         [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void IsInvalid(string email)
         {
@@ -1092,6 +1094,8 @@ namespace Qowaiv.UnitTests
         [TestCase("MailTo:casesensitve@domain.com")]
         [TestCase("mailto:email@domain.com")]
         [TestCase("Joe Smith <mailto:email@domain.com>")]
+        [TestCase("Joe Smith <mailto:email(with comment)@domain.com>")]
+        [TestCase(@"""With extra < within quotes"" Display Name<email@domain.com>")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
         public void IsValid(string email)
         {

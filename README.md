@@ -5,7 +5,7 @@
 
 | version                                                                        | package                                                                                              |
 |--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-4.0.4-blue.svg?cacheSeconds=3600)     |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                      |
+|![v](https://img.shields.io/badge/version-4.0.5-blue.svg?cacheSeconds=3600)     |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                      |
 |![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                         |
 |![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
 |![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|

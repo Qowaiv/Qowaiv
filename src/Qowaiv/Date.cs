@@ -22,6 +22,7 @@ namespace Qowaiv
         Justification = "This represents a date (instead of a date time), so the name is the most descriptive name possible.")]
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
+    [SwaggerDataType(format: "date")]
     [TypeConverter(typeof(DateTypeConverter))]
     public struct Date : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
     {

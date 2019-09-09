@@ -32,6 +32,7 @@ namespace Qowaiv
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+    [SwaggerDataType(format: "yes-no", nullable: true)]
     [TypeConverter(typeof(YesNoTypeConverter))]
     public struct YesNo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
     {

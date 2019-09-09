@@ -29,6 +29,7 @@ namespace Qowaiv.Statistics
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Double))]
+    [SwaggerDataType(type: "number", format: "elo")]
     [TypeConverter(typeof(EloTypeConverter))]
     public struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
     {

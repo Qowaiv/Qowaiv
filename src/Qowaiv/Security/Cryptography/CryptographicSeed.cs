@@ -25,6 +25,7 @@ namespace Qowaiv.Security.Cryptography
     /// <summary>Represents a cryptographic seed.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(byte[]))]
+    [SwaggerDataType(format: "cryptographic-seed", nullable: true)]
     [TypeConverter(typeof(CryptographicSeedTypeConverter))]
     public struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
     {

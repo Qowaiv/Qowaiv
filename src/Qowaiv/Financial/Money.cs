@@ -21,6 +21,7 @@ namespace Qowaiv.Financial
     /// <summary>Represents </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
+    [SwaggerDataType(format: "money", nullable: true)]
     [TypeConverter(typeof(MoneyTypeConverter))]
     public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
     {

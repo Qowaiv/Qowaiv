@@ -22,6 +22,7 @@ namespace Qowaiv
     [DebuggerDisplay("{DebuggerDisplay}")]
     [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a year.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Int16))]
+    [SwaggerDataType(type: "number", format: "year", nullable: true)]
     [TypeConverter(typeof(YearTypeConverter))]
     public struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {

@@ -32,6 +32,7 @@ namespace Qowaiv.IO
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Int64))]
+    [SwaggerDataType(type: "integer", format: "stream-size")]
     [TypeConverter(typeof(StreamSizeTypeConverter))]
     public struct StreamSize : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
     {

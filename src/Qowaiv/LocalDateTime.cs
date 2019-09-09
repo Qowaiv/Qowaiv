@@ -20,6 +20,7 @@ namespace Qowaiv
     /// <summary>Represents a local date time.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
+    [SwaggerDataType(format: "date-time-local")]
     [TypeConverter(typeof(LocalDateTimeTypeConverter))]
     public struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
     {

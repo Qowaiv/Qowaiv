@@ -27,6 +27,7 @@ namespace Qowaiv
     /// <summary>Represents an email address.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+    [SwaggerDataType(format: "email", nullable: true)]
     [TypeConverter(typeof(EmailAddressTypeConverter))]
     public struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
     {

@@ -10,24 +10,24 @@ namespace Qowaiv.Validation.DataAnnotations
     /// <summary>A validator to validate models based on their data annotations.</summary>
     public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     {
-        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator"/>.</summary>
+        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator{TModel}"/>.</summary>
         public AnnotatedModelValidator() : this(null, null) { }
 
-        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator"/>.</summary>
+        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator{TModel}"/>.</summary>
         /// <param name="serviceProvider">
         /// The object that implements the System.IServiceProvider interface. This parameter is optional.
         /// </param>
         public AnnotatedModelValidator(IServiceProvider serviceProvider)
             : this(serviceProvider, null) { }
 
-        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator"/>.</summary>
+        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator{TModel}"/>.</summary>
         /// <param name="items">
         /// A dictionary of key/value pairs to make available to the service consumers. This parameter is optional.
         /// </param>
         public AnnotatedModelValidator(IDictionary<object, object> items)
             : this(null, items) { }
 
-        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator"/>.</summary>
+        /// <summary>Creates a new instance of a <see cref="AnnotatedModelValidator{TModel}"/>.</summary>
         /// <param name="serviceProvider">
         /// The object that implements the System.IServiceProvider interface. This parameter is optional.
         /// </param>

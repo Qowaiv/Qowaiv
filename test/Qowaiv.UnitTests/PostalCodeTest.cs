@@ -2807,15 +2807,10 @@ namespace Qowaiv.UnitTests
         [TestCase("ZM", "67552")]
         [TestCase("ZM", "87182")]
         [TestCase("ZM", "99999")]
-        public void IsValid(string countrycode, string postalcode)
+        public void IsValid(Country country, string postalcode)
         {
-            var country = Country.Parse(countrycode);
-            IsValid(postalcode, country);
-        }
-
-        private static void IsValid(string postalcode, Country country)
-        {
-            Assert.IsTrue(PostalCode.IsValid(postalcode, country), "Postal code '{0}' should be valid for {1:f}.", postalcode, country);
+            var isValid = PostalCode.IsValid(postalcode, country);
+            Assert.IsTrue(isValid, "Postal code '{0}' should be valid for {1:f}.", postalcode, country);
         }
 
         #endregion

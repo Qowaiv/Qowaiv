@@ -6,14 +6,13 @@ using System.Runtime.Serialization;
 
 namespace Qowaiv.Validation.DataAnnotations
 {
-    /// <summary>Represents a validation message.</summary>
-    /// <remarks>
-    /// To support serialization and messages with different severities.
-    /// </remarks>
+    /// <summary>Represents a <see cref="ValidationResult"/> as a <see cref="IValidationMessage"/>.</summary>
     [Serializable]
     public class ValidationMessage : ValidationResult, IValidationMessage, ISerializable
     {
+        /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
         public ValidationMessage() : this(ValidationSeverity.None, null, null) { }
+
         internal ValidationMessage(ValidationSeverity serverity, string message, string[] memberNames)
             : base(message, memberNames)
         {
@@ -61,6 +60,10 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Creates an info message.</summary>
         public static ValidationMessage Info(string message, params string[] memberNames) => new ValidationMessage(ValidationSeverity.Error, message, memberNames);
 
+        /// <summary>Creates a validation message for a validation result.</summary>
+        /// <param name="validationResult">
+        /// The validation result to convert.
+        /// </param>
         public static ValidationMessage For(ValidationResult validationResult)
         {
             if(validationResult is null || validationResult == Success)

@@ -21,7 +21,7 @@ namespace Qowaiv
     /// Empty and unknown email addresses can not be added.
     /// </remarks>
     [Serializable]
-    [SwaggerDataType(format: "email-collection", nullable: true)]
+    [OpenApiDataType(type: "string", format: "email-collection", nullable: true)]
     public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSerializable, IJsonSerializable, IFormattable
     {
         /// <summary>The email address separator is a comma.</summary>

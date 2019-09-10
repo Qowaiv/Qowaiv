@@ -16,7 +16,7 @@ namespace Qowaiv.Sql
     /// <summary>Represents a time stamp.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(UInt64))]
-    [SwaggerDataType(format: "timestamp")]
+    [OpenApiDataType(type: "string", format: "timestamp")]
     [TypeConverter(typeof(TimestampTypeConverter))]
     public struct Timestamp : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
     {

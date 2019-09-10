@@ -35,7 +35,7 @@ namespace Qowaiv.Financial
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-    [SwaggerDataType(format: "iban", nullable: true)]
+    [OpenApiDataType(type: "string", format: "iban", nullable: true)]
     [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
     public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
     {

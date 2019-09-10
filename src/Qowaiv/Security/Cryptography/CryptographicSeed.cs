@@ -25,7 +25,7 @@ namespace Qowaiv.Security.Cryptography
     /// <summary>Represents a cryptographic seed.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(byte[]))]
-    [SwaggerDataType(format: "cryptographic-seed", nullable: true)]
+    [OpenApiDataType(type: "string", format: "cryptographic-seed", nullable: true)]
     [TypeConverter(typeof(CryptographicSeedTypeConverter))]
     public struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
     {
@@ -343,9 +343,6 @@ namespace Qowaiv.Security.Cryptography
         /// <returns>
         /// The cryptographic seed if the string was converted successfully, otherwise CryptographicSeed.Empty.
         /// </returns>
-        [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults",
-            MessageId = "Qowaiv.Security.Cryptography.CryptographicSeed.TryParse(System.String,Qowaiv.Security.Cryptography.CryptographicSeed)",
-            Justification = "If the parsing succeeded or not, is ignored on purpose.")]
         public static CryptographicSeed TryParse(string s)
         {
             return

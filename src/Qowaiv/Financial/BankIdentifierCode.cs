@@ -38,7 +38,7 @@ namespace Qowaiv.Financial
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-    [SwaggerDataType(format: "bic", nullable: true)]
+    [OpenApiDataType(type: "string", format: "bic", nullable: true)]
     [TypeConverter(typeof(BankIdentifierCodeTypeConverter))]
     public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BankIdentifierCode>, IComparable, IComparable<BankIdentifierCode>
     {

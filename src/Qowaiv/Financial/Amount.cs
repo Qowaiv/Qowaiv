@@ -20,7 +20,7 @@ namespace Qowaiv.Financial
     /// <summary>Represents an </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
-    [SwaggerDataType(type: "number", format: "amount")]
+    [OpenApiDataType(type: "number", format: "amount")]
     [TypeConverter(typeof(AmountTypeConverter))]
     public struct Amount : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
     {

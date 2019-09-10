@@ -209,6 +209,41 @@ serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
 You can implement it yourself:
 * [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
 
+#### OpenAPI Specification
+The [OpenAPI Specification](https://swagger.io/docs/specification/about/)
+(formerly Swagger Specification) is an API description format for REST API's.
+
+To improve usage of your REST API's you should specify the Data Type of your
+SVO's. To make this as simple as possible, Qowaiv SVO's are decorated with the
+`OpenApiDataTypeAttribute`. It specifies the type, format, (regex) pattern,
+and if the data type is nullable, all when applicable.
+
+| SVO                                      | Type    | Format              | Nullable |
+|------------------------------------------|---------|---------------------|----------|
+| Date                                     | string  | date                | false    |
+| EmailAddress                             | string  | email               | true     |
+| EmailAddressCollection                   | string  | email-collection    | true     |
+| Gender                                   | string  | gender              | true     |
+| HouseNumber                              | string  | house-number        | true     |
+| LocalDateTime                            | string  | date-time-local     | false    |
+| Month                                    | string  | month               | true     |
+| Percentage                               | string  | percentage          | false    |
+| PostalCode                               | string  | postal-code         | true     |
+| Uuid                                     | string  | uuid-base64         | true     |
+| WeekDate                                 | string  | date-weekbased      | false    |
+| Year                                     | integer | year                | true     |
+| YesNo                                    | string  | yes-no              | true     |
+| Financial.Amount                         | number  | amount              | false    |
+| Financial.BankIdentifierCode             | string  | bic                 | true     |
+| Financial.Currency                       | string  | currency            | true     |
+| Financial.InternationalBankAccountNumber | string  | iban                | true     |
+| Financial.Money                          | string  | money               | false    |
+| Globalization.Country                    | string  | country             | true     |
+| IO.StreamSize                            | integer | stream-size         | false    |
+| Security.Cryptography.CryptographicSeed  | string  | cryptographic-seed  | true     |
+| Statistics.Elo                           | number  | elo                 | false    |
+| Web.InternetMediaType                    | string  | internet-media-type | true     |
+              
 ### XML
 .NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
 with the same approach:

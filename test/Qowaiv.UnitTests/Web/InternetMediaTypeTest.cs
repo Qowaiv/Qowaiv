@@ -454,7 +454,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<InternetMediaType>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<InternetMediaType>("application/x-chess-pgn");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

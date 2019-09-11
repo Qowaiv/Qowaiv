@@ -500,7 +500,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Month>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Month>("feb");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

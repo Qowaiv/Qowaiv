@@ -340,7 +340,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Date>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Date>("1970-02-14");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -368,7 +368,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_DateTimeValue_AreEqual()
         {
-            var act = JsonTester.Read<Date>((DateTime)TestStruct);
+            var act = JsonTester.Read<Date>(new DateTime( 1970, 02, 14));
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

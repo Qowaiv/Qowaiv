@@ -312,7 +312,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Elo>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Elo>("1732.4");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -321,7 +321,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            Elo act = JsonTester.Read<Elo>((Int64)TestStruct);
+            Elo act = JsonTester.Read<Elo>(1732L);
             Elo exp = 1732;
 
             Assert.AreEqual(exp, act);

@@ -389,7 +389,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Percentage>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Percentage>("17.51%");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

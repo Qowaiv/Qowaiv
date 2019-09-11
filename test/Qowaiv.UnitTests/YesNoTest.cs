@@ -425,8 +425,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<YesNo>
-            (TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<YesNo>("yes");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

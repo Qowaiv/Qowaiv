@@ -364,7 +364,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Timestamp>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Timestamp>("123456789");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -373,7 +373,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            var act = JsonTester.Read<Timestamp>((Int64)((UInt64)TestStruct));
+            var act = JsonTester.Read<Timestamp>(123456789L);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -382,7 +382,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
-            var act = JsonTester.Read<Timestamp>((Double)(UInt64)TestStruct);
+            var act = JsonTester.Read<Timestamp>(123456789.0);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

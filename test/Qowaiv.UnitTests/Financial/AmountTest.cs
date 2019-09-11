@@ -332,7 +332,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Amount>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Amount>("42.17");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

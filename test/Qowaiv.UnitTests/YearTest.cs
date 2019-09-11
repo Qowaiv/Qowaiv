@@ -456,7 +456,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Year>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Year>("1979");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

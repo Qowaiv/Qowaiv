@@ -407,7 +407,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<BankIdentifierCode>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<BankIdentifierCode>("AEGONL2UXXX");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

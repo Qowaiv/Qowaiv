@@ -477,7 +477,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Country>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Country>("VA");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

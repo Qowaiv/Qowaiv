@@ -446,7 +446,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Gender>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Gender>("male");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -1112,7 +1112,7 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(GenderTest.TestStruct, GenderTest.TestStruct.ToString(CultureInfo.InvariantCulture));
+                TypeConverterAssert.ConvertFromEquals(TestStruct, "Male");
             }
         }
 
@@ -1127,7 +1127,7 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertToStringEquals(GenderTest.TestStruct.ToString(), GenderTest.TestStruct);
+                TypeConverterAssert.ConvertToStringEquals("Male", TestStruct);
             }
         }
 

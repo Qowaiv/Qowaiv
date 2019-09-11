@@ -31,7 +31,7 @@ namespace Qowaiv.Globalization
     /// <summary>Represents a </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-    [OpenApiDataType(type: "string", format: "country", nullable: true)]
+    [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.", type: "string", format: "country", nullable: true)]
     [TypeConverter(typeof(CountryTypeConverter))]
     public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
     {

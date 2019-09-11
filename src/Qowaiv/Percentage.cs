@@ -22,7 +22,7 @@ namespace Qowaiv
     /// <summary>Represents a Percentage.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Decimal))]
-    [OpenApiDataType(type: "string", format: "percentage")]
+    [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.", type: "string", format: "percentage")]
     [TypeConverter(typeof(PercentageTypeConverter))]
     public struct Percentage : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
     {

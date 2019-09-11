@@ -12,18 +12,23 @@ namespace Qowaiv.Json
     {
         /// <summary>Creates a new instance of a <see cref="OpenApiDataTypeAttribute"/>.</summary>
         public OpenApiDataTypeAttribute(
+            string description,
             string type, 
             string format = null,
             bool nullable = false,
             string pattern = null,
             string @enum = null)
         {
+            Description = Guard.NotNullOrEmpty(description, nameof(description));
             Type = Guard.NotNullOrEmpty(type, nameof(type));
             Format = format;
             Nullable = nullable;
             Pattern = pattern;
             Enum = @enum is null ? null : @enum.Split(',');
         }
+
+        /// <summary>Gets the description of the OpenAPI Data Type.</summary>
+        public string Description { get; }
 
         /// <summary>Gets the type of the OpenAPI Data Type.</summary>
         public string Type { get; }

@@ -21,8 +21,8 @@ namespace Qowaiv
     /// <summary>Represents a year.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a year.")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Int16))]
-    [OpenApiDataType(type: "integer", format: "year", nullable: true)]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
+    [OpenApiDataType(description: "Year(-only) notation.", type: "integer", format: "year", nullable: true)]
     [TypeConverter(typeof(YearTypeConverter))]
     public struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {
@@ -33,7 +33,7 @@ namespace Qowaiv
         public static readonly Year Empty;
 
         /// <summary>Represents an unknown (but set) year.</summary>
-        public static readonly Year Unknown = new Year { m_Value = Int16.MaxValue };
+        public static readonly Year Unknown = new Year { m_Value = short.MaxValue };
 
         /// <summary>Represents the smallest possible year 1.</summary>
         public static readonly Year MinValue = new Year { m_Value = 1 };
@@ -125,10 +125,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a year from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(Int32);
-        }
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates a year from a JSON string representation.</summary>
         /// <param name="jsonString">

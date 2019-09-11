@@ -55,7 +55,7 @@ namespace Qowaiv.Web
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
-    [OpenApiDataType(type: "string", format: "internet-media-type", nullable: true)]
+    [OpenApiDataType(description: "Full-date notation as defined by RFC 6838, for example, text/html.", type: "string", format: "internet-media-type", nullable: true)]
     [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
     public struct InternetMediaType : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
     {

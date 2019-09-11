@@ -221,21 +221,25 @@ and if the data type is nullable, all when applicable.
 ``` json
 {
   "Date": {
+    "description": "Full-date notation as defined by RFC 3339, section 5.6, for example, 2017-06-10.",
     "type": "string",
     "format": "date",
     "nullabe": false
   },
   "EmailAddress": {
+    "description": "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.",
     "type": "string",
     "format": "email",
     "nullabe": true
   },
   "EmailAddressCollection": {
+    "description": "Comma separated list of email addresses defined by RFC 5322.",
     "type": "string",
     "format": "email-collection",
     "nullabe": true
   },
   "Gender": {
+    "description": "Gender as specified by ISO/IEC 5218.",
     "type": "string",
     "format": "gender",
     "nullabe": true,
@@ -247,96 +251,120 @@ and if the data type is nullable, all when applicable.
     ]
   },
   "HouseNumber": {
+    "description": "House number notation.",
     "type": "string",
     "format": "house-number",
     "nullabe": true
   },
   "LocalDateTime": {
+    "description": "Date-time notation as defined by RFC 3339, without time zone information, for example, 2017-06-10 15:00.",
     "type": "string",
     "format": "date-time-local",
     "nullabe": false
   },
   "Month": {
+    "description": "Month(-only) notation.",
     "type": "string",
     "format": "month",
     "nullabe": true
   },
   "Percentage": {
+    "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
     "type": "string",
     "format": "percentage",
     "nullabe": false
   },
   "PostalCode": {
+    "description": "Postal code notation.",
     "type": "string",
     "format": "postal-code",
     "nullabe": true
   },
   "Uuid": {
+    "description": "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.",
     "type": "string",
     "format": "uuid-base64",
     "nullabe": true
   },
   "WeekDate": {
+    "description": "Full-date notation as defined by ISO 8601, for example, 1997-W14-6.",
     "type": "string",
     "format": "date-weekbased",
     "nullabe": false
   },
   "Year": {
+    "description": "Year(-only) notation.",
     "type": "integer",
     "format": "year",
     "nullabe": true
   },
   "YesNo": {
+    "description": "Yes-No notation.",
     "type": "string",
     "format": "yes-no",
-    "nullabe": true
+    "nullabe": true,
+    "enum": [
+      "yes",
+      "no",
+      "?"
+    ]
   },
   "Financial.Amount": {
+    "description": "Decimal representation of a currency amount.",
     "type": "number",
     "format": "amount",
     "nullabe": false
   },
   "Financial.BankIdentifierCode": {
+    "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
     "type": "string",
     "format": "bic",
     "nullabe": true
   },
   "Financial.Currency": {
+    "description": "Currency notation as defined by ISO 4217, for example, EUR.",
     "type": "string",
     "format": "currency",
     "nullabe": true
   },
   "Financial.InternationalBankAccountNumber": {
+    "description": "International Bank Account Number notation as defined by ISO 13616:2007, for example, BE71096123456769.",
     "type": "string",
     "format": "iban",
     "nullabe": true
   },
   "Financial.Money": {
+    "description": "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.",
     "type": "string",
     "format": "money",
     "nullabe": false
   },
   "Globalization.Country": {
+    "description": "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.",
     "type": "string",
     "format": "country",
     "nullabe": true
   },
   "IO.StreamSize": {
+    "description": "Stream size notation (in byte).",
     "type": "integer",
     "format": "stream-size",
     "nullabe": false
   },
   "Security.Cryptography.CryptographicSeed": {
+    "description": "Base64 encoded cryptographic seed.",
     "type": "string",
     "format": "cryptographic-seed",
     "nullabe": true
   },
   "Statistics.Elo": {
+    "description": "Elo rating system notation.",
     "type": "number",
     "format": "elo",
     "nullabe": false
   },
   "Web.InternetMediaType": {
+    "description": "Full-date notation as defined by RFC 6838, for example, text/html.",
     "type": "string",
     "format": "internet-media-type",
     "nullabe": true

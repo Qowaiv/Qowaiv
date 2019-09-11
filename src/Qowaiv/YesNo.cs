@@ -32,7 +32,7 @@ namespace Qowaiv
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
-    [OpenApiDataType(type: "string", format: "yes-no", nullable: true)]
+    [OpenApiDataType(description: "Yes-No notation.", type: "string", format: "yes-no", nullable: true, @enum:"yes,no,?")]
     [TypeConverter(typeof(YesNoTypeConverter))]
     public struct YesNo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
     {

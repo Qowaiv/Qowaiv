@@ -21,7 +21,7 @@ namespace Qowaiv
     /// <summary>Represents a house number.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(Int32))]
-    [OpenApiDataType(type: "string", format: "house-number", nullable: true)]
+    [OpenApiDataType(description: "House number notation.", type: "string", format: "house-number", nullable: true)]
     [TypeConverter(typeof(HouseNumberTypeConverter))]
     public struct HouseNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
     {

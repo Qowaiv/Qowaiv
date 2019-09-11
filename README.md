@@ -371,6 +371,27 @@ and if the data type is nullable, all when applicable.
   }
 }
 ```
+#### Swashbuckle registration
+Registration of SVO's with [Swashbuckle](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/)
+could look like this:
+
+``` C#
+public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
+{
+    var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
+    foreach (var attr in attributes)
+    {
+        options.MapType(attr.DataType, () => new OpenApiSchema
+        {
+            Type = attr.Type,
+            Format = attr.Format,
+            Pattern = attr.Pattern,
+            Nullable = attr.Nullable,
+        });
+    }
+    return options;
+}
+```
               
 ### XML
 .NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`

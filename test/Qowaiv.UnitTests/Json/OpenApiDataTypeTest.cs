@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using Qowaiv.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,8 @@ namespace Qowaiv.UnitTests.Json
                 .ThenBy(tp => tp.Name)
                 .ToArray();
 
+            var all = new Dictionary<string, OpenApiDataType>();
+
             foreach(var tp in types)
             {
                 var attribute = tp.GetCustomAttribute<OpenApiDataTypeAttribute>();
@@ -39,8 +42,30 @@ namespace Qowaiv.UnitTests.Json
 
                 var name = $"{tp.Namespace}.{tp.Name}".Replace("Qowaiv.", "");
 
-                Console.WriteLine($"| {name,-40} | {attribute.Type,-7} | {attribute.Format,-19} | {attribute.Nullable.ToString().ToLowerInvariant(),-8} |");
+                all[name] = new OpenApiDataType
+                {
+                    type = attribute.Type,
+                    description = null,
+                    format = attribute.Format,
+                    pattern = attribute.Pattern,
+                    nullabe = attribute.Nullable,
+                    @enum = attribute.Enum,
+                };
             }
+
+            Console.WriteLine(JsonConvert.SerializeObject(all, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            }));
         }
+    }
+    internal class OpenApiDataType
+    {
+        public string type { get; set; }
+        public string description { get; set; }
+        public string format { get; set; }
+        public string pattern { get; set; }
+        public bool nullabe { get; set; }
+        public string[] @enum { get; set; }
     }
 }

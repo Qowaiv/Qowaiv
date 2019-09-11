@@ -38,7 +38,7 @@ namespace Qowaiv
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
-    [OpenApiDataType(type: "string", format: "gender", nullable: true)]
+    [OpenApiDataType(type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
     [TypeConverter(typeof(GenderTypeConverter))]
     public struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
     {

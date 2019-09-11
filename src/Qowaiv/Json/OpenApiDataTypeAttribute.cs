@@ -11,12 +11,18 @@ namespace Qowaiv.Json
     public sealed class OpenApiDataTypeAttribute : Attribute
     {
         /// <summary>Creates a new instance of a <see cref="OpenApiDataTypeAttribute"/>.</summary>
-        public OpenApiDataTypeAttribute(string type, string format = null, bool nullable = false, string pattern = null)
+        public OpenApiDataTypeAttribute(
+            string type, 
+            string format = null,
+            bool nullable = false,
+            string pattern = null,
+            string @enum = null)
         {
             Type = Guard.NotNullOrEmpty(type, nameof(type));
             Format = format;
             Nullable = nullable;
             Pattern = pattern;
+            Enum = @enum is null ? null : @enum.Split(',');
         }
 
         /// <summary>Gets the type of the OpenAPI Data Type.</summary>
@@ -31,20 +37,23 @@ namespace Qowaiv.Json
         /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
         public string Pattern { get; }
 
+        /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
+        public string[] Enum { get; }
+
         /// <inheritdoc />
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append($"{{ type: {Type}");
+            sb.Append($@"{{ type: ""{Type}""");
 
             if (!string.IsNullOrEmpty(Format))
             {
-                sb.Append($", format: {Format}");
+                sb.Append($@", format: ""{Format}""");
             }
 
             if (!string.IsNullOrEmpty(Pattern))
             {
-                sb.Append($", pattern: {Pattern}");
+                sb.Append($@", pattern: ""{Pattern}""");
             }
 
             if (Nullable)

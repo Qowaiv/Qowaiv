@@ -218,31 +218,131 @@ SVO's. To make this as simple as possible, Qowaiv SVO's are decorated with the
 `OpenApiDataTypeAttribute`. It specifies the type, format, (regex) pattern,
 and if the data type is nullable, all when applicable.
 
-| SVO                                      | Type    | Format              | Nullable |
-|------------------------------------------|---------|---------------------|----------|
-| Date                                     | string  | date                | false    |
-| EmailAddress                             | string  | email               | true     |
-| EmailAddressCollection                   | string  | email-collection    | true     |
-| Gender                                   | string  | gender              | true     |
-| HouseNumber                              | string  | house-number        | true     |
-| LocalDateTime                            | string  | date-time-local     | false    |
-| Month                                    | string  | month               | true     |
-| Percentage                               | string  | percentage          | false    |
-| PostalCode                               | string  | postal-code         | true     |
-| Uuid                                     | string  | uuid-base64         | true     |
-| WeekDate                                 | string  | date-weekbased      | false    |
-| Year                                     | integer | year                | true     |
-| YesNo                                    | string  | yes-no              | true     |
-| Financial.Amount                         | number  | amount              | false    |
-| Financial.BankIdentifierCode             | string  | bic                 | true     |
-| Financial.Currency                       | string  | currency            | true     |
-| Financial.InternationalBankAccountNumber | string  | iban                | true     |
-| Financial.Money                          | string  | money               | false    |
-| Globalization.Country                    | string  | country             | true     |
-| IO.StreamSize                            | integer | stream-size         | false    |
-| Security.Cryptography.CryptographicSeed  | string  | cryptographic-seed  | true     |
-| Statistics.Elo                           | number  | elo                 | false    |
-| Web.InternetMediaType                    | string  | internet-media-type | true     |
+``` json
+{
+  "Date": {
+    "type": "string",
+    "format": "date",
+    "nullabe": false
+  },
+  "EmailAddress": {
+    "type": "string",
+    "format": "email",
+    "nullabe": true
+  },
+  "EmailAddressCollection": {
+    "type": "string",
+    "format": "email-collection",
+    "nullabe": true
+  },
+  "Gender": {
+    "type": "string",
+    "format": "gender",
+    "nullabe": true,
+    "enum": [
+      "NotKnown",
+      "Male",
+      "Female",
+      "NotApplicable"
+    ]
+  },
+  "HouseNumber": {
+    "type": "string",
+    "format": "house-number",
+    "nullabe": true
+  },
+  "LocalDateTime": {
+    "type": "string",
+    "format": "date-time-local",
+    "nullabe": false
+  },
+  "Month": {
+    "type": "string",
+    "format": "month",
+    "nullabe": true
+  },
+  "Percentage": {
+    "type": "string",
+    "format": "percentage",
+    "nullabe": false
+  },
+  "PostalCode": {
+    "type": "string",
+    "format": "postal-code",
+    "nullabe": true
+  },
+  "Uuid": {
+    "type": "string",
+    "format": "uuid-base64",
+    "nullabe": true
+  },
+  "WeekDate": {
+    "type": "string",
+    "format": "date-weekbased",
+    "nullabe": false
+  },
+  "Year": {
+    "type": "integer",
+    "format": "year",
+    "nullabe": true
+  },
+  "YesNo": {
+    "type": "string",
+    "format": "yes-no",
+    "nullabe": true
+  },
+  "Financial.Amount": {
+    "type": "number",
+    "format": "amount",
+    "nullabe": false
+  },
+  "Financial.BankIdentifierCode": {
+    "type": "string",
+    "format": "bic",
+    "nullabe": true
+  },
+  "Financial.Currency": {
+    "type": "string",
+    "format": "currency",
+    "nullabe": true
+  },
+  "Financial.InternationalBankAccountNumber": {
+    "type": "string",
+    "format": "iban",
+    "nullabe": true
+  },
+  "Financial.Money": {
+    "type": "string",
+    "format": "money",
+    "nullabe": false
+  },
+  "Globalization.Country": {
+    "type": "string",
+    "format": "country",
+    "nullabe": true
+  },
+  "IO.StreamSize": {
+    "type": "integer",
+    "format": "stream-size",
+    "nullabe": false
+  },
+  "Security.Cryptography.CryptographicSeed": {
+    "type": "string",
+    "format": "cryptographic-seed",
+    "nullabe": true
+  },
+  "Statistics.Elo": {
+    "type": "number",
+    "format": "elo",
+    "nullabe": false
+  },
+  "Web.InternetMediaType": {
+    "type": "string",
+    "format": "internet-media-type",
+    "nullabe": true
+  }
+}
+```
               
 ### XML
 .NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`

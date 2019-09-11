@@ -425,19 +425,17 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsZero()
         {
             object act = JsonTester.Write(default(Percentage));
             object exp = "0%";
-
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "17.51%";
             Assert.AreEqual(exp, act);
         }
 

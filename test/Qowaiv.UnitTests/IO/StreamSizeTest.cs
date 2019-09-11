@@ -406,11 +406,10 @@ namespace Qowaiv.UnitTests.IO
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsZero()
         {
             object act = JsonTester.Write(default(StreamSize));
             object exp = 0;
-
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -418,7 +417,6 @@ namespace Qowaiv.UnitTests.IO
         {
             var act = JsonTester.Write(TestStruct);
             var exp = 123456789L;
-
             Assert.AreEqual(exp, act);
         }
 

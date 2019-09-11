@@ -371,7 +371,6 @@ namespace Qowaiv.Financial.UnitTests
         {
             var act = JsonTester.Write(TestStruct);
             var exp = 42.17m;
-
             Assert.AreEqual(exp, act);
         }
 

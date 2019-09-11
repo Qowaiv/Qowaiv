@@ -351,7 +351,6 @@ namespace Qowaiv.UnitTests.Statistics
         {
             var act = JsonTester.Write(TestStruct);
             var exp = 1732.4000000000001;
-
             Assert.AreEqual(exp, act);
         }
 

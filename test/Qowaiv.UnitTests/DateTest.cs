@@ -379,7 +379,6 @@ namespace Qowaiv.UnitTests
         {
             object act = JsonTester.Write(default(Date));
             object exp = "0001-01-01";
-
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -387,7 +386,6 @@ namespace Qowaiv.UnitTests
         {
             var act = JsonTester.Write(TestStruct);
             var exp = "1970-02-14";
-
             Assert.AreEqual(exp, act);
         }
 

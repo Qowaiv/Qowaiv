@@ -403,15 +403,13 @@ namespace Qowaiv.UnitTests.Sql
         {
             object act = JsonTester.Write(Timestamp.MinValue);
             object exp = "0x0000000000000000";
-
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "0x00000000075BCD15";
             Assert.AreEqual(exp, act);
         }
 

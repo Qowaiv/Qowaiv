@@ -363,8 +363,7 @@ namespace Qowaiv.UnitTests.Financial
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "€42.17";
             Assert.AreEqual(exp, act);
         }
 

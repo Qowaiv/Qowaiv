@@ -334,7 +334,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Uuid>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Uuid>("Qowaiv_SVOLibrary_GUIA");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -371,19 +371,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(Uuid));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "Qowaiv_SVOLibrary_GUIA";
             Assert.AreEqual(exp, act);
         }
 

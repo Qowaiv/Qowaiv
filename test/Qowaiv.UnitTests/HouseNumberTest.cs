@@ -455,7 +455,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<HouseNumber>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<HouseNumber>("123456789");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -464,7 +464,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            var act = JsonTester.Read<HouseNumber>((Int64)TestStruct);
+            var act = JsonTester.Read<HouseNumber>(123456789L);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -490,19 +490,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(HouseNumber));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "123456789";
             Assert.AreEqual(exp, act);
         }
 

@@ -412,7 +412,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<WeekDate>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<WeekDate>("1997-W14-6");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -452,15 +452,13 @@ namespace Qowaiv.UnitTests
         {
             object act = JsonTester.Write(default(WeekDate));
             object exp = "0001-W01-1";
-
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "1997-W14-6";
             Assert.AreEqual(exp, act);
         }
 

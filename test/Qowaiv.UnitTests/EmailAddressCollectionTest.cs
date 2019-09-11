@@ -269,19 +269,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(new EmailAddressCollection());
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(EmailAddressCollection.Parse("info@qowaiv.org, test@qowaiv.org"));
             var exp = "info@qowaiv.org,test@qowaiv.org";
-
             Assert.AreEqual(exp, act);
         }
 

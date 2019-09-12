@@ -21,7 +21,7 @@ namespace Qowaiv.Financial
     /// <summary>Represents </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
-    [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.", type: "string", format: "money")]
+    [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
     [TypeConverter(typeof(MoneyTypeConverter))]
     public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
     {

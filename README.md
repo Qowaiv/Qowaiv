@@ -259,19 +259,35 @@ and if the data type is nullable, all when applicable.
   "LocalDateTime": {
     "description": "Date-time notation as defined by RFC 3339, without time zone information, for example, 2017-06-10 15:00.",
     "type": "string",
-    "format": "date-time-local",
+    "format": "local-date-time",
     "nullabe": false
   },
   "Month": {
     "description": "Month(-only) notation.",
     "type": "string",
     "format": "month",
-    "nullabe": true
+    "nullabe": true,
+    "enum": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+      "?"
+    ]
   },
   "Percentage": {
     "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
     "type": "string",
     "format": "percentage",
+    "pattern": "-?[0-9]+(\\.[0-9])?%",
     "nullabe": false
   },
   "PostalCode": {
@@ -337,6 +353,7 @@ and if the data type is nullable, all when applicable.
     "description": "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.",
     "type": "string",
     "format": "money",
+    "pattern": "[A-Z]{3} -?[0-9]+(\\.[0-9]+)?",
     "nullabe": false
   },
   "Globalization.Country": {
@@ -364,7 +381,7 @@ and if the data type is nullable, all when applicable.
     "nullabe": false
   },
   "Web.InternetMediaType": {
-    "description": "Full-date notation as defined by RFC 6838, for example, text/html.",
+    "description": "Media type notation as defined by RFC 6838, for example, text/html.",
     "type": "string",
     "format": "internet-media-type",
     "nullabe": true

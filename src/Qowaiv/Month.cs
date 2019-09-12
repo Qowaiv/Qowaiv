@@ -22,6 +22,7 @@ namespace Qowaiv
     /// <summary>Represents a month.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+    [OpenApiDataType(description: "Month(-only) notation.", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
     [TypeConverter(typeof(MonthTypeConverter))]
     public struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
     {

@@ -209,6 +209,207 @@ serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
 You can implement it yourself:
 * [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
 
+#### OpenAPI Specification
+The [OpenAPI Specification](https://swagger.io/docs/specification/about/)
+(formerly Swagger Specification) is an API description format for REST API's.
+
+To improve usage of your REST API's you should specify the Data Type of your
+SVO's. To make this as simple as possible, Qowaiv SVO's are decorated with the
+`OpenApiDataTypeAttribute`. It specifies the type, format, (regex) pattern,
+and if the data type is nullable, all when applicable.
+
+``` json
+{
+  "Date": {
+    "description": "Full-date notation as defined by RFC 3339, section 5.6, for example, 2017-06-10.",
+    "type": "string",
+    "format": "date",
+    "nullabe": false
+  },
+  "EmailAddress": {
+    "description": "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.",
+    "type": "string",
+    "format": "email",
+    "nullabe": true
+  },
+  "EmailAddressCollection": {
+    "description": "Comma separated list of email addresses defined by RFC 5322.",
+    "type": "string",
+    "format": "email-collection",
+    "nullabe": true
+  },
+  "Gender": {
+    "description": "Gender as specified by ISO/IEC 5218.",
+    "type": "string",
+    "format": "gender",
+    "nullabe": true,
+    "enum": [
+      "NotKnown",
+      "Male",
+      "Female",
+      "NotApplicable"
+    ]
+  },
+  "HouseNumber": {
+    "description": "House number notation.",
+    "type": "string",
+    "format": "house-number",
+    "nullabe": true
+  },
+  "LocalDateTime": {
+    "description": "Date-time notation as defined by RFC 3339, without time zone information, for example, 2017-06-10 15:00.",
+    "type": "string",
+    "format": "local-date-time",
+    "nullabe": false
+  },
+  "Month": {
+    "description": "Month(-only) notation.",
+    "type": "string",
+    "format": "month",
+    "nullabe": true,
+    "enum": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+      "?"
+    ]
+  },
+  "Percentage": {
+    "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
+    "type": "string",
+    "format": "percentage",
+    "pattern": "-?[0-9]+(\\.[0-9])?%",
+    "nullabe": false
+  },
+  "PostalCode": {
+    "description": "Postal code notation.",
+    "type": "string",
+    "format": "postal-code",
+    "nullabe": true
+  },
+  "Uuid": {
+    "description": "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.",
+    "type": "string",
+    "format": "uuid-base64",
+    "nullabe": true
+  },
+  "WeekDate": {
+    "description": "Full-date notation as defined by ISO 8601, for example, 1997-W14-6.",
+    "type": "string",
+    "format": "date-weekbased",
+    "nullabe": false
+  },
+  "Year": {
+    "description": "Year(-only) notation.",
+    "type": "integer",
+    "format": "year",
+    "nullabe": true
+  },
+  "YesNo": {
+    "description": "Yes-No notation.",
+    "type": "string",
+    "format": "yes-no",
+    "nullabe": true,
+    "enum": [
+      "yes",
+      "no",
+      "?"
+    ]
+  },
+  "Financial.Amount": {
+    "description": "Decimal representation of a currency amount.",
+    "type": "number",
+    "format": "amount",
+    "nullabe": false
+  },
+  "Financial.BankIdentifierCode": {
+    "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
+    "type": "string",
+    "format": "bic",
+    "nullabe": true
+  },
+  "Financial.Currency": {
+    "description": "Currency notation as defined by ISO 4217, for example, EUR.",
+    "type": "string",
+    "format": "currency",
+    "nullabe": true
+  },
+  "Financial.InternationalBankAccountNumber": {
+    "description": "International Bank Account Number notation as defined by ISO 13616:2007, for example, BE71096123456769.",
+    "type": "string",
+    "format": "iban",
+    "nullabe": true
+  },
+  "Financial.Money": {
+    "description": "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.",
+    "type": "string",
+    "format": "money",
+    "pattern": "[A-Z]{3} -?[0-9]+(\\.[0-9]+)?",
+    "nullabe": false
+  },
+  "Globalization.Country": {
+    "description": "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.",
+    "type": "string",
+    "format": "country",
+    "nullabe": true
+  },
+  "IO.StreamSize": {
+    "description": "Stream size notation (in byte).",
+    "type": "integer",
+    "format": "stream-size",
+    "nullabe": false
+  },
+  "Security.Cryptography.CryptographicSeed": {
+    "description": "Base64 encoded cryptographic seed.",
+    "type": "string",
+    "format": "cryptographic-seed",
+    "nullabe": true
+  },
+  "Statistics.Elo": {
+    "description": "Elo rating system notation.",
+    "type": "number",
+    "format": "elo",
+    "nullabe": false
+  },
+  "Web.InternetMediaType": {
+    "description": "Media type notation as defined by RFC 6838, for example, text/html.",
+    "type": "string",
+    "format": "internet-media-type",
+    "nullabe": true
+  }
+}
+```
+#### Swashbuckle registration
+Registration of SVO's with [Swashbuckle](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/)
+could look like this:
+
+``` C#
+public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
+{
+    var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
+    foreach (var attr in attributes)
+    {
+        options.MapType(attr.DataType, () => new OpenApiSchema
+        {
+            Type = attr.Type,
+            Format = attr.Format,
+            Pattern = attr.Pattern,
+            Nullable = attr.Nullable,
+        });
+    }
+    return options;
+}
+```
+              
 ### XML
 .NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
 with the same approach:

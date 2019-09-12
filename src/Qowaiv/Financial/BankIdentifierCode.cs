@@ -38,6 +38,7 @@ namespace Qowaiv.Financial
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+    [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.", type: "string", format: "bic", nullable: true)]
     [TypeConverter(typeof(BankIdentifierCodeTypeConverter))]
     public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BankIdentifierCode>, IComparable, IComparable<BankIdentifierCode>
     {

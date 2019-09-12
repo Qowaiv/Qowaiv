@@ -35,6 +35,7 @@ namespace Qowaiv
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
+    [OpenApiDataType(description: "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.", type: "string", format: "uuid-base64", nullable: true)]
     [TypeConverter(typeof(UuidTypeConverter))]
     public struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
     {

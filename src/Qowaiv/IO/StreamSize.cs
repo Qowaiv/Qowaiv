@@ -31,7 +31,8 @@ namespace Qowaiv.IO
     /// stream sizes bigger than Int64.MaxValue.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Int64))]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
+    [OpenApiDataType(description: "Stream size notation (in byte).", type: "integer", format: "stream-size")]
     [TypeConverter(typeof(StreamSizeTypeConverter))]
     public struct StreamSize : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
     {

@@ -36,6 +36,7 @@ namespace Qowaiv.Financial
     /// messages between banks. The codes can sometimes be found on account
     /// statements.
     /// </remarks>
+    [Obsolete("Use Qowaiv.Financial.BusinessIdentifierCode instead.")]
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.", type: "string", format: "bic", nullable: true)]

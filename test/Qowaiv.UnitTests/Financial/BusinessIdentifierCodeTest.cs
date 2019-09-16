@@ -95,11 +95,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            BusinessIdentifierCode val;
-
             string str = null;
-
-            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -107,11 +104,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            BusinessIdentifierCode val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -119,11 +113,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            BusinessIdentifierCode val;
-
             string str = "?";
-
-            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -131,11 +122,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            BusinessIdentifierCode val;
-
             string str = "AEGONL2UXXX";
-
-            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -143,11 +131,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            BusinessIdentifierCode val;
-
             string str = "string";
-
-            Assert.IsFalse(BusinessIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsFalse(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -251,24 +236,24 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = BusinessIdentifierCodeTest.TestStruct;
-            var exp = BusinessIdentifierCodeTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = BusinessIdentifierCodeTest.TestStruct;
-            var exp = BusinessIdentifierCodeTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void XmlSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = BusinessIdentifierCodeTest.TestStruct;
-            var exp = BusinessIdentifierCodeTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
@@ -279,13 +264,13 @@ namespace Qowaiv.UnitTests.Financial
             var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = BusinessIdentifierCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = BusinessIdentifierCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -299,13 +284,13 @@ namespace Qowaiv.UnitTests.Financial
             var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = BusinessIdentifierCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = BusinessIdentifierCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -319,13 +304,13 @@ namespace Qowaiv.UnitTests.Financial
             var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = BusinessIdentifierCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = BusinessIdentifierCodeTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.DataContractSerializeDeserialize(input);
@@ -502,18 +487,18 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("BusinessIdentifierCode: (empty)", default(BusinessIdentifierCode));
+            DebuggerDisplayAssert.HasResult("BIC: (empty)", default(BusinessIdentifierCode));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("BusinessIdentifierCode: (unknown)", BusinessIdentifierCode.Unknown);
+            DebuggerDisplayAssert.HasResult("BIC: (unknown)", BusinessIdentifierCode.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("BusinessIdentifierCode: AEGONL2UXXX", TestStruct);
+            DebuggerDisplayAssert.HasResult("BIC: AEGONL2UXXX", TestStruct);
         }
 
         #endregion
@@ -552,52 +537,52 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
-            Assert.IsTrue(BusinessIdentifierCodeTest.TestStruct.Equals(BusinessIdentifierCodeTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(BusinessIdentifierCodeTest.TestStruct.Equals(BusinessIdentifierCode.Empty));
+            Assert.IsFalse(TestStruct.Equals(BusinessIdentifierCode.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(BusinessIdentifierCode.Empty.Equals(BusinessIdentifierCodeTest.TestStruct));
+            Assert.IsFalse(BusinessIdentifierCode.Empty.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
-            Assert.IsTrue(BusinessIdentifierCodeTest.TestStruct.Equals((object)BusinessIdentifierCodeTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
         }
 
         [Test]
         public void Equals_TestStructNull_IsFalse()
         {
-            Assert.IsFalse(BusinessIdentifierCodeTest.TestStruct.Equals(null));
+            Assert.IsFalse(TestStruct.Equals(null));
         }
 
         [Test]
         public void Equals_TestStructObject_IsFalse()
         {
-            Assert.IsFalse(BusinessIdentifierCodeTest.TestStruct.Equals(new object()));
+            Assert.IsFalse(TestStruct.Equals(new object()));
         }
 
         [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
-            var l = BusinessIdentifierCodeTest.TestStruct;
-            var r = BusinessIdentifierCodeTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsTrue(l == r);
         }
 
         [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
-            var l = BusinessIdentifierCodeTest.TestStruct;
-            var r = BusinessIdentifierCodeTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsFalse(l != r);
         }
 
@@ -726,21 +711,21 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void BankCode_DefaultValue_StringEmpty()
+        public void BusinessCode_DefaultValue_StringEmpty()
         {
             var exp = "";
             var act = BusinessIdentifierCode.Empty.BusinessCode;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void BankCode_Unknown_StringEmpty()
+        public void BusinessCode_Unknown_StringEmpty()
         {
             var exp = "";
             var act = BusinessIdentifierCode.Unknown.BusinessCode;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void BankCode_TestStruct_AEGO()
+        public void BusinessCode_TestStruct_AEGO()
         {
             var exp = "AEGO";
             var act = TestStruct.BusinessCode;
@@ -899,7 +884,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(BusinessIdentifierCodeTest.TestStruct, BusinessIdentifierCodeTest.TestStruct.ToString());
+                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
         }
 
@@ -914,7 +899,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertToStringEquals(BusinessIdentifierCodeTest.TestStruct.ToString(), BusinessIdentifierCodeTest.TestStruct);
+                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
         }
 
@@ -922,21 +907,31 @@ namespace Qowaiv.UnitTests.Financial
 
         #region IsValid
 
-        [Test]
-        public void IsValid_Data_IsFalse()
+        [TestCase("1AAANL01", "Digit in first four characters")]
+        [TestCase("AAAANLBB1", "Branch length of 1")]
+        [TestCase("AAAANLBB12", "Branch length of 2")]
+        [TestCase("ABCDXX01", "Digit in country code")]
+        [TestCase("ABCDXX01", "None existing country")]
+        [TestCase("AAAANLBË", "Diacritic")]
+        [TestCase(null, "(String)null")]
+        [TestCase("", "String.Empty")]
+        public void IsInvalid(string str, string message)
         {
-            Assert.IsFalse(BusinessIdentifierCode.IsValid("1AAANL01"), "1AAANL01, cijfer in eerste vier");
-            Assert.IsFalse(BusinessIdentifierCode.IsValid("AAAANLBB1"), "AAAANLBB1, lengte van 1 voor branch");
-            Assert.IsFalse(BusinessIdentifierCode.IsValid("AAAANLBB12"), "AAAANLBB12, lengte van 2 voor branch");
-            Assert.IsFalse(BusinessIdentifierCode.IsValid("ABCDXX01"), "ABCD1E01, cijfer in landcode");
-            Assert.IsFalse(BusinessIdentifierCode.IsValid("ABCDXX01"), "ABCDXX01, niet bestaand land");
-            Assert.IsFalse(BusinessIdentifierCode.IsValid("AAAANLBË"), "AAAANLBË, diacriet");
-
-            Assert.IsFalse(BusinessIdentifierCode.IsValid((String)null), "(String)null");
+            Assert.IsFalse(BusinessIdentifierCode.IsValid(str), message);
         }
-        [Test]
-        public void IsValid_Data_IsTrue()
+
+        [TestCase("PSTBNL21")]
+        [TestCase("ABNANL2A")]
+        [TestCase("BACBBEBB")]
+        [TestCase("GEBABEBB36A")]
+        [TestCase("DEUTDEFF")]
+        [TestCase("NEDSZAJJ")]
+        [TestCase("DABADKKK")]
+        [TestCase("UNCRIT2B912")]
+        [TestCase("DSBACNBXSHA")]
+        public void IsValid(string str)
         {
+            Assert.IsTrue(BusinessIdentifierCode.IsValid(str));
             Assert.IsTrue(BusinessIdentifierCode.IsValid("PSTBNL21"), "PSTBNL21");
             Assert.IsTrue(BusinessIdentifierCode.IsValid("ABNANL2A"), "ABNANL2A");
             Assert.IsTrue(BusinessIdentifierCode.IsValid("BACBBEBB"), "BACBBEBB");

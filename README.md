@@ -150,6 +150,17 @@ Represents money without the notion of the actual currency.
 ### Business Identifier Code (BIC)
 Represents a BIC as specified in ISO 13616.
 
+``` C#
+var bic = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+
+var business = bic.BusinessCode; // "AEGO"
+var code = bic.CountyCode; // "NL"
+var country = bic.County; // Country.NL
+var location = bic.LocationCode; // "2U"
+var branch = bic.BranchCode; // "XXX"
+var length = bic.Length; // 11
+```
+
 ### Currency
 Represents a currency based on an ISO 4217 code.
 

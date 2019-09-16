@@ -34,6 +34,29 @@ namespace Qowaiv.TestTools
             }
         }
 
+        /// <summary>Serializes an instance using an XmlSerializer.</summary>
+        /// <typeparam name="T">
+        /// Type of the instance.
+        /// </typeparam>
+        /// <param name="instance">
+        /// The instance to (XML) serialize.
+        /// </param>
+        public static string XmlSerialize<T>(T instance)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var writer = new XmlTextWriter(stream, Encoding.UTF8);
+                var serializer = new XmlSerializer(typeof(T));
+                serializer.Serialize(writer, instance);
+                stream.Position = 0;
+
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
         /// <summary>Serializes and deserializes an instance using an XmlSerializer.</summary>
         /// <typeparam name="T">
         /// Type of the instance.

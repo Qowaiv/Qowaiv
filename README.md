@@ -79,6 +79,17 @@ and UTC-based date times.
 ### Month
 Represents a month in the range [1-12].
 
+``` C#
+Month feb = Month.Parse("February");
+Month may = Month.May;
+Month dec = 12;
+
+feb.ToString("f", new CultureInfo("nl-NL")); // februari
+feb.ToString("s"); // Feb
+feb.ToString("M"); // 02
+feb.ToString("m"); // 2
+```
+
 ### Percentage
 Represents a percentage. It supports parsing from per mile and per ten thousand
 too. The basic thought is that `Percentage.Parse("14%")` has the same result

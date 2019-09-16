@@ -151,6 +151,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid BIC.
+        /// </summary>
+        public static string FormatExceptionBusinessIdentifierCode {
+            get {
+                return ResourceManager.GetString("FormatExceptionBusinessIdentifierCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid country.
         /// </summary>
         public static string FormatExceptionCountry {

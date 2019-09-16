@@ -147,7 +147,7 @@ A seed, representing random data to encrypt and decrypt data.
 ### Amount
 Represents money without the notion of the actual currency.
 
-### Bank Identifier Code (BIC)
+### Business Identifier Code (BIC)
 Represents a BIC as specified in ISO 13616.
 
 ### Currency
@@ -342,7 +342,7 @@ and if the data type is nullable, all when applicable.
     "format": "amount",
     "nullabe": false
   },
-  "Financial.BankIdentifierCode": {
+  "Financial.BusinessIdentifierCode": {
     "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
     "type": "string",
     "format": "bic",

@@ -147,8 +147,18 @@ A seed, representing random data to encrypt and decrypt data.
 ### Amount
 Represents money without the notion of the actual currency.
 
-### Bank Identifier Code (BIC)
+### Business Identifier Code (BIC)
 Represents a BIC as specified in ISO 13616.
+
+``` C#
+var bic = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+
+var business = bic.Business; // "AEGO"
+var country = bic.Country; // Country.NL
+var location = bic.Location; // "2U"
+var branch = bic.Branch; // "XXX"
+var length = bic.Length; // 11
+```
 
 ### Currency
 Represents a currency based on an ISO 4217 code.
@@ -342,7 +352,7 @@ and if the data type is nullable, all when applicable.
     "format": "amount",
     "nullabe": false
   },
-  "Financial.BankIdentifierCode": {
+  "Financial.BusinessIdentifierCode": {
     "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
     "type": "string",
     "format": "bic",

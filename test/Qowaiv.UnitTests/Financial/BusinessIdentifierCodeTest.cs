@@ -714,43 +714,21 @@ namespace Qowaiv.UnitTests.Financial
         public void BusinessCode_DefaultValue_StringEmpty()
         {
             var exp = "";
-            var act = BusinessIdentifierCode.Empty.BusinessCode;
+            var act = BusinessIdentifierCode.Empty.Business;
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void BusinessCode_Unknown_StringEmpty()
         {
             var exp = "";
-            var act = BusinessIdentifierCode.Unknown.BusinessCode;
+            var act = BusinessIdentifierCode.Unknown.Business;
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void BusinessCode_TestStruct_AEGO()
         {
             var exp = "AEGO";
-            var act = TestStruct.BusinessCode;
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void CountryCode_DefaultValue_StringEmpty()
-        {
-            var exp = "";
-            var act = BusinessIdentifierCode.Empty.CountryCode;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void CountryCode_Unknown_StringEmpty()
-        {
-            var exp = "";
-            var act = BusinessIdentifierCode.Unknown.CountryCode;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void CountryCode_TestStruct_NL()
-        {
-            var exp = "NL";
-            var act = TestStruct.CountryCode;
+            var act = TestStruct.Business;
             Assert.AreEqual(exp, act);
         }
 
@@ -780,21 +758,21 @@ namespace Qowaiv.UnitTests.Financial
         public void LocationCode_DefaultValue_StringEmpty()
         {
             var exp = "";
-            var act = BusinessIdentifierCode.Empty.LocationCode;
+            var act = BusinessIdentifierCode.Empty.Location;
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void LocationCode_Unknown_StringEmpty()
         {
             var exp = "";
-            var act = BusinessIdentifierCode.Unknown.LocationCode;
+            var act = BusinessIdentifierCode.Unknown.Location;
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void LocationCode_TestStruct_NL()
         {
             var exp = "2U";
-            var act = TestStruct.LocationCode;
+            var act = TestStruct.Location;
             Assert.AreEqual(exp, act);
         }
 
@@ -802,28 +780,28 @@ namespace Qowaiv.UnitTests.Financial
         public void BranchCode_DefaultValue_StringEmpty()
         {
             var exp = "";
-            var act = BusinessIdentifierCode.Empty.BranchCode;
+            var act = BusinessIdentifierCode.Empty.Branch;
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void BranchCode_Unknown_StringEmpty()
         {
             var exp = "";
-            var act = BusinessIdentifierCode.Unknown.BranchCode;
+            var act = BusinessIdentifierCode.Unknown.Branch;
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void BranchCode_TestStruct_NL()
         {
             var exp = "XXX";
-            var act = TestStruct.BranchCode;
+            var act = TestStruct.Branch;
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void BranchCode_AEGONL2U_StringEmpty()
         {
             var exp = "";
-            var act = BusinessIdentifierCode.Parse("AEGONL2U").BranchCode;
+            var act = BusinessIdentifierCode.Parse("AEGONL2U").Branch;
             Assert.AreEqual(exp, act);
         }
 

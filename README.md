@@ -153,11 +153,10 @@ Represents a BIC as specified in ISO 13616.
 ``` C#
 var bic = BusinessIdentifierCode.Parse("AEGONL2UXXX");
 
-var business = bic.BusinessCode; // "AEGO"
-var code = bic.CountyCode; // "NL"
+var business = bic.Business; // "AEGO"
 var country = bic.County; // Country.NL
-var location = bic.LocationCode; // "2U"
-var branch = bic.BranchCode; // "XXX"
+var location = bic.Location; // "2U"
+var branch = bic.Branch; // "XXX"
 var length = bic.Length; // 11
 ```
 

@@ -61,10 +61,7 @@ namespace Qowaiv.Financial
         public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
 
         /// <summary>Gets the institution code or business code.</summary>
-        public string BusinessCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, 4);
-
-        /// <summary>Gets the country code.</summary>
-        public string CountryCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(4, 2);
+        public string Business => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, 4);
 
         /// <summary>Gets the country info of the country code.</summary>
         public Country Country
@@ -79,18 +76,18 @@ namespace Qowaiv.Financial
                 {
                     return Country.Unknown;
                 }
-                return Country.Parse(CountryCode, CultureInfo.InvariantCulture);
+                return Country.Parse(m_Value.Substring(4, 2), CultureInfo.InvariantCulture);
             }
         }
 
         /// <summary>Gets the location code.</summary>
-        public string LocationCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(6, 2);
+        public string Location => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(6, 2);
 
         /// <summary>Gets the branch code.</summary>
         /// <remarks>
         /// Is optional, XXX for primary office.
         /// </remarks>
-        public string BranchCode => Length != 11 ? string.Empty : m_Value.Substring(8);
+        public string Branch => Length != 11 ? string.Empty : m_Value.Substring(8);
 
         #endregion
 

@@ -1,0 +1,13 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test-windows:
+    name: Unit tests on Windows
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Dotnet test
+      run: |
+        dotnet.exe test

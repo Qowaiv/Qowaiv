@@ -10,6 +10,7 @@
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-2019</Copyright>
+    <LangVersion>latest</LangVersion>
 
     <PackageIconUrl>https://raw.githubusercontent.com/Qowaiv/Qowaiv/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
     <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>

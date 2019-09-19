@@ -33,147 +33,80 @@ namespace Qowaiv.UnitTests.Text
             "The wildcard pattern is invalid.");
         }
 
-        [Test]
-        public void IsMatch_DefaultSettings_Matches()
+        [TestCase("*", "matches", true)]
+        [TestCase("转*字", "转注字", true)]
+        [TestCase("转?字", "转注字", true)]
+        [TestCase("g*ks", "geeks", true)]
+        [TestCase("g*éks", "geéks", true)]
+        [TestCase("G*ks", "Geeks", true)]
+        [TestCase("ge?ks*", "geeksforgeeks", true)]
+        // Don't match on trailing
+        [TestCase("gee?ks", "geeks", false)]
+        // Don't match because of capitalization.
+        [TestCase("g*ks", "Geeks", false)]
+        [TestCase("g*Ks", "geeks", false)]
+        // No because 'k' is not in second
+        [TestCase("g*k", "gee", false)]
+        // No because 't' is not in first
+        [TestCase("*pqrs", "pqrst", false)]
+        [TestCase("abc*bcd", "abcdhghgbcd", true)]
+        // No because second must have 2 instances of 'c'
+        [TestCase("abc*c?d", "abcd", false)]
+        [TestCase("*c*d", "abcd", true)]
+        [TestCase("*?c*d", "abcd", true)]
+        // SQL wildcards.
+        [TestCase("*_c%d", "abcd", false)]
+        [TestCase("g%ks", "geeks", false)]
+        [TestCase("转%字", "转注字", true, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("转_字", "转注字", true, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("g%ks", "geeks", true, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("g%éks", "geéks", true, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("G%ks", "Geeks", true, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("ge_ks%", "geeksforgeeks", true, WildcardPatternOptions.SqlWildcards)]
+        // No because 'k' is not in second
+        [TestCase("g%k", "gee", false, WildcardPatternOptions.SqlWildcards)]
+        // No because 't' is not in first
+        [TestCase("%pqrs", "pqrst", false, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("abc%bcd", "abcdhghgbcd", true, WildcardPatternOptions.SqlWildcards)]
+        // No because second must have 2 instances of 'c'
+        [TestCase("abc%c_d", "abcd", false, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("%c%d", "abcd", true, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("%_c%d", "abcd", true, WildcardPatternOptions.SqlWildcards)]
+        // Default wildcards.
+        [TestCase("*?c*d", "abcd", false, WildcardPatternOptions.SqlWildcards)]
+        [TestCase("g*ks", "geeks", false, WildcardPatternOptions.SqlWildcards)]
+        // SingleOrTrailing
+        [TestCase("gee?ks", "geeks", true, WildcardPatternOptions.SingleOrTrailing)]
+        [TestCase("ge?ks", "geeks", true, WildcardPatternOptions.SingleOrTrailing)]
+        [TestCase("gee_ks", "geeks", true, WildcardPatternOptions.SingleOrTrailing | WildcardPatternOptions.SqlWildcards)]
+        [TestCase("ge_ks", "geeks", true, WildcardPatternOptions.SingleOrTrailing | WildcardPatternOptions.SqlWildcards)]
+        [TestCase("g*ks", "Geeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
+        [TestCase("g*Ks", "geeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
+        [TestCase("Ig*ks", "iGeeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
+        [TestCase("ig*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
+        [TestCase("Ig*ks", "ıGeeks", false, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
+        [TestCase("ıg*ks", "IGeeks", false, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
+        [TestCase("g*ks", "Geeks", true, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
+        [TestCase("g*Ks", "geeks", true, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
+        [TestCase("Ig*ks", "iGeeks", false, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
+        [TestCase("ig*ks", "IGeeks", false, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
+        [TestCase("Ig*ks", "ıGeeks", true, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
+        [TestCase("ıg*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
+        [TestCase("g*ks", "Geeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
+        [TestCase("g*Ks", "geeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
+        [TestCase("Ig*ks", "iGeeks", false, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
+        [TestCase("ig*ks", "IGeeks", false, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
+        [TestCase("Ig*ks", "ıGeeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
+        [TestCase("ıg*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
+        public void IsMatch(string pattern, string input, bool isMatch, WildcardPatternOptions options = default, StringComparison comparsionType = default, string culture = null)
         {
-            IsMatch("转*字", "转注字", true);
-            IsMatch("转?字", "转注字", true);
-            IsMatch("g*ks", "geeks", true);
-            IsMatch("g*éks", "geéks", true);
-            IsMatch("G*ks", "Geeks", true);
-            IsMatch("ge?ks*", "geeksforgeeks", true);
-
-            // Don't match on trailing
-            IsMatch("gee?ks", "geeks", false);
-
-            // Don't match because of capitalization.
-            IsMatch("g*ks", "Geeks", false);
-            IsMatch("g*Ks", "geeks", false);
-
-            // No because 'k' is not in second
-            IsMatch("g*k", "gee", false);
-
-            // No because 't' is not in first
-            IsMatch("*pqrs", "pqrst", false);
-            IsMatch("abc*bcd", "abcdhghgbcd", true);
-
-            // No because second must have 2 instances of 'c'
-            IsMatch("abc*c?d", "abcd", false);
-            IsMatch("*c*d", "abcd", true);
-            IsMatch("*?c*d", "abcd", true);
-
-            // SQL wildcards.
-            IsMatch("*_c%d", "abcd", false);
-            IsMatch("g%ks", "geeks", false);
-        }
-        [Test]
-        public void IsMatch_SqlWildCards_Matches()
-        {
-            var options = WildcardPatternOptions.SqlWildcards;
-
-            IsMatch("转%字", "转注字", true, options);
-            IsMatch("转_字", "转注字", true, options);
-            IsMatch("g%ks", "geeks", true, options);
-            IsMatch("g%éks", "geéks", true, options);
-            IsMatch("G%ks", "Geeks", true, options);
-            IsMatch("ge_ks%", "geeksforgeeks", true, options);
-
-            // Don't match on trailing
-            IsMatch("gee_ks", "geeks", false);
-
-            // Don't match because of capitalization.
-            IsMatch("g%ks", "Geeks", false);
-            IsMatch("g%Ks", "geeks", false);
-
-            // No because 'k' is not in second
-            IsMatch("g%k", "gee", false, options);
-
-            // No because 't' is not in first
-            IsMatch("%pqrs", "pqrst", false, options);
-            IsMatch("abc%bcd", "abcdhghgbcd", true, options);
-
-            // No because second must have 2 instances of 'c'
-            IsMatch("abc%c_d", "abcd", false, options);
-            IsMatch("%c%d", "abcd", true, options);
-            IsMatch("%_c%d", "abcd", true, options);
-
-            // Default wildcards.
-            IsMatch("*?c*d", "abcd", false, options);
-            IsMatch("g*ks", "geeks", false, options);
-        }
-        [Test]
-        public void IsMatch_SingleOrTrailing_Matches()
-        {
-            var options = WildcardPatternOptions.SingleOrTrailing;
-
-            IsMatch("gee?ks", "geeks", true, options);
-            IsMatch("gee_ks", "geeks", true, options | WildcardPatternOptions.SqlWildcards);
-
-            IsMatch("ge?ks", "geeks", true, options);
-            IsMatch("ge_ks", "geeks", true, options | WildcardPatternOptions.SqlWildcards);
-        }
-
-        [Test]
-        public void IsMatch_InvariantCultureIgnoreCase_Matches()
-        {
-            using (new CultureInfoScope("tr-TR"))
+            using (culture is null ? CultureInfoScope.NewInvariant() : new CultureInfoScope("tr-TR"))
             {
-                var options = WildcardPatternOptions.None;
-                var compare = StringComparison.InvariantCultureIgnoreCase;
-
-                IsMatch("g*ks", "Geeks", true, options, compare);
-                IsMatch("g*Ks", "geeks", true, options, compare);
-
-                IsMatch("Ig*ks", "iGeeks", true, options, compare);
-                IsMatch("ig*ks", "IGeeks", true, options, compare);
-
-                IsMatch("Ig*ks", "ıGeeks", false, options, compare);
-                IsMatch("ıg*ks", "IGeeks", false, options, compare);
+                var actual = WildcardPattern.IsMatch(pattern, input, options, comparsionType);
+                Assert.AreEqual(isMatch, actual, "'{0}' should {2} match '{1}', with {3} and {4}.", pattern, input, isMatch ? "" : "not ", options, comparsionType);
             }
         }
-        [Test]
-        public void IsMatch_CurrentCultureIgnoreCase_Matches()
-        {
-            using (new CultureInfoScope("tr-TR"))
-            {
-                var options = WildcardPatternOptions.None;
-                var compare = StringComparison.CurrentCultureIgnoreCase;
-
-                IsMatch("g*ks", "Geeks", true, options, compare);
-                IsMatch("g*Ks", "geeks", true, options, compare);
-
-                IsMatch("Ig*ks", "iGeeks", false, options, compare);
-                IsMatch("ig*ks", "IGeeks", false, options, compare);
-
-                IsMatch("Ig*ks", "ıGeeks", true, options, compare);
-                IsMatch("ıg*ks", "IGeeks", true, options, compare);
-            }
-        }
-        [Test]
-        public void IsMatch_OrdinalIgnoreCase_Matches()
-        {
-            using (new CultureInfoScope("tr-TR"))
-            {
-                var options = WildcardPatternOptions.None;
-                var compare = StringComparison.OrdinalIgnoreCase;
-
-                IsMatch("g*ks", "Geeks", true, options, compare);
-                IsMatch("g*Ks", "geeks", true, options, compare);
-
-                IsMatch("Ig*ks", "iGeeks", false, options, compare);
-                IsMatch("ig*ks", "IGeeks", false, options, compare);
-
-                IsMatch("Ig*ks", "ıGeeks", true, options, compare);
-                IsMatch("ıg*ks", "IGeeks", true, options, compare);
-            }
-        }
-
-        [Test]
-        public void IsMatch_Static_Matches()
-        {
-            Assert.IsTrue(WildcardPattern.IsMatch("*", "matches"));
-        }
-
+  
         #region (XML) (De)serialization tests
 
         [Test]
@@ -246,13 +179,6 @@ namespace Qowaiv.UnitTests.Text
         public void DebuggerDisplay_TestPattern_DebuggerString()
         {
             DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", TestPattern);
-        }
-
-        [DebuggerStepThrough]
-        private void IsMatch(string pattern, string input, bool isMatch, WildcardPatternOptions options = WildcardPatternOptions.None, StringComparison comparsionType = StringComparison.CurrentCulture)
-        {
-            Assert.AreEqual(isMatch, WildcardPattern.IsMatch(pattern, input, options, comparsionType),
-                "'{0}' should {2} match '{1}', with {3} and {4}.", pattern, input, isMatch ? "" : "not ", options, comparsionType);
         }
     }
 }

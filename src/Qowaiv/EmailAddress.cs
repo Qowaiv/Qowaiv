@@ -27,6 +27,7 @@ namespace Qowaiv
     /// <summary>Represents an email address.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+    [OpenApiDataType(description: "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.", type: "string", format: "email", nullable: true)]
     [TypeConverter(typeof(EmailAddressTypeConverter))]
     public struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
     {

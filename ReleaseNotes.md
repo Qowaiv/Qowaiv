@@ -1,4 +1,14 @@
-﻿### Released 2019-08-25
+﻿### Released 2019-09-06
+#### Qowaiv 4.0.5
+* Added support of "mailto:"-prefix on email address (#78)
+* Fix on '<' in display name on email address (#77)
+
+### Released 2019-09-04
+#### Qowaiv 4.0.4
+* Added Percentage.Min() and Percentage.Max() (#73)
+* Added Percentage.Round() (#74)
+
+### Released 2019-08-25
 #### Qowaiv 4.0.3
 * Added Percent() extension method (#70)
 

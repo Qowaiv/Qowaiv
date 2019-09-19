@@ -13,7 +13,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -23,7 +22,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.Financial
 {
-    /// <summary>The Bank Identifier Code (BIC) is a standard format of Business Identifier Codes
+    /// <summary>The Business Identifier Code (BIC) is a standard format of Business Identifier Codes
     /// approved by the International Organization for Standardization (ISO) as ISO 9362.
     /// It is a unique identification code for both financial and non-financial institutions.
     /// </summary>
@@ -36,12 +35,11 @@ namespace Qowaiv.Financial
     /// messages between banks. The codes can sometimes be found on account
     /// statements.
     /// </remarks>
-    [Obsolete("Use Qowaiv.Financial.BusinessIdentifierCode instead.")]
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.", type: "string", format: "bic", nullable: true)]
-    [TypeConverter(typeof(BankIdentifierCodeTypeConverter))]
-    public struct BankIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BankIdentifierCode>, IComparable, IComparable<BankIdentifierCode>
+    [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]
+    public struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
     {
         /// <remarks>
         /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
@@ -49,10 +47,10 @@ namespace Qowaiv.Financial
         public static readonly Regex Pattern = new Regex(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents an empty/not set BIC.</summary>
-        public static readonly BankIdentifierCode Empty;
+        public static readonly BusinessIdentifierCode Empty;
 
         /// <summary>Represents an unknown (but set) BIC.</summary>
-        public static readonly BankIdentifierCode Unknown = new BankIdentifierCode { m_Value = "ZZZZZZZZZZZ" };
+        public static readonly BusinessIdentifierCode Unknown = new BusinessIdentifierCode { m_Value = "ZZZZZZZZZZZ" };
 
         #region Properties
 
@@ -62,11 +60,8 @@ namespace Qowaiv.Financial
         /// <summary>Gets the number of characters of BIC.</summary>
         public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
 
-        /// <summary>Gets the institution code or bank code.</summary>
-        public string BankCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, 4);
-
-        /// <summary>Gets the country code.</summary>
-        public string CountryCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(4, 2);
+        /// <summary>Gets the institution code or business code.</summary>
+        public string Business => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, 4);
 
         /// <summary>Gets the country info of the country code.</summary>
         public Country Country
@@ -81,18 +76,18 @@ namespace Qowaiv.Financial
                 {
                     return Country.Unknown;
                 }
-                return Country.Parse(CountryCode, CultureInfo.InvariantCulture);
+                return Country.Parse(m_Value.Substring(4, 2), CultureInfo.InvariantCulture);
             }
         }
 
         /// <summary>Gets the location code.</summary>
-        public string LocationCode => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(6, 2);
+        public string Location => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(6, 2);
 
         /// <summary>Gets the branch code.</summary>
         /// <remarks>
         /// Is optional, XXX for primary office.
         /// </remarks>
-        public string BranchCode => Length != 11 ? string.Empty : m_Value.Substring(8);
+        public string Branch => Length != 11 ? string.Empty : m_Value.Substring(8);
 
         #endregion
 
@@ -114,7 +109,7 @@ namespace Qowaiv.Financial
         /// <summary>Initializes a new instance of BIC based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>
         /// <param name="context">The streaming context.</param>
-        private BankIdentifierCode(SerializationInfo info, StreamingContext context)
+        private BusinessIdentifierCode(SerializationInfo info, StreamingContext context)
         {
             Guard.NotNull(info, nameof(info));
             m_Value = info.GetString("Value");
@@ -180,13 +175,13 @@ namespace Qowaiv.Financial
         /// <param name="jsonInteger">
         /// The JSON integer that represents the BIC.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
+        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates a BIC from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the BIC.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a BIC from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -205,14 +200,14 @@ namespace Qowaiv.Financial
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
             {
-                if (IsEmpty()) { return "BankIdentifierCode: (empty)"; }
-                if (IsUnknown()) { return "BankIdentifierCode: (unknown)"; }
-                return string.Format(CultureInfo.InvariantCulture, "BankIdentifierCode: {0}", m_Value);
+                if (IsEmpty()) { return "BIC: (empty)"; }
+                if (IsUnknown()) { return "BIC: (unknown)"; }
+                return string.Format(CultureInfo.InvariantCulture, "BIC: {0}", m_Value);
             }
         }
 
@@ -254,11 +249,11 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) => obj is BankIdentifierCode && Equals((BankIdentifierCode)obj);
+        public override bool Equals(object obj) => obj is BusinessIdentifierCode && Equals((BusinessIdentifierCode)obj);
 
-        /// <summary>Returns true if this instance and the other <see cref="BankIdentifierCode"/> are equal, otherwise false.</summary>
-        /// <param name="other">The <see cref="BankIdentifierCode"/> to compare with.</param>
-        public bool Equals(BankIdentifierCode other) => m_Value == other.m_Value;
+        /// <summary>Returns true if this instance and the other <see cref="BusinessIdentifierCode"/> are equal, otherwise false.</summary>
+        /// <param name="other">The <see cref="BusinessIdentifierCode"/> to compare with.</param>
+        public bool Equals(BusinessIdentifierCode other) => m_Value == other.m_Value;
 
         /// <summary>Returns the hash code for this BIC.</summary>
         /// <returns>
@@ -269,12 +264,12 @@ namespace Qowaiv.Financial
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator ==(BankIdentifierCode left, BankIdentifierCode right) => left.Equals(right);
+        public static bool operator ==(BusinessIdentifierCode left, BusinessIdentifierCode right) => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
-        public static bool operator !=(BankIdentifierCode left, BankIdentifierCode right) => !(left == right);
+        public static bool operator !=(BusinessIdentifierCode left, BusinessIdentifierCode right) => !(left == right);
 
         #endregion
 
@@ -299,9 +294,9 @@ namespace Qowaiv.Financial
         /// </exception>
         public int CompareTo(object obj)
         {
-            if (obj is BankIdentifierCode)
+            if (obj is BusinessIdentifierCode)
             {
-                return CompareTo((BankIdentifierCode)obj);
+                return CompareTo((BusinessIdentifierCode)obj);
             }
             throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a BIC"), "obj");
         }
@@ -317,16 +312,16 @@ namespace Qowaiv.Financial
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(BankIdentifierCode other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
+        public int CompareTo(BusinessIdentifierCode other) { return string.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
 
         #endregion
 
         #region (Explicit) casting
 
         /// <summary>Casts a BIC to a <see cref="string"/>.</summary>
-        public static explicit operator string(BankIdentifierCode val) => val.ToString(CultureInfo.CurrentCulture);
+        public static explicit operator string(BusinessIdentifierCode val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a BIC.</summary>
-        public static explicit operator BankIdentifierCode(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator BusinessIdentifierCode(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         #endregion
@@ -343,7 +338,7 @@ namespace Qowaiv.Financial
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static BankIdentifierCode Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static BusinessIdentifierCode Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to a BIC.</summary>
         /// <param name="s">
@@ -358,13 +353,13 @@ namespace Qowaiv.Financial
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static BankIdentifierCode Parse(string s, IFormatProvider formatProvider)
+        public static BusinessIdentifierCode Parse(string s, IFormatProvider formatProvider)
         {
-            if (TryParse(s, formatProvider, out BankIdentifierCode val))
+            if (TryParse(s, formatProvider, out BusinessIdentifierCode val))
             {
                 return val;
             }
-            throw new FormatException(QowaivMessages.FormatExceptionBankIdentifierCode);
+            throw new FormatException(QowaivMessages.FormatExceptionBusinessIdentifierCode);
         }
 
         /// <summary>Converts the string to a BIC.
@@ -374,11 +369,11 @@ namespace Qowaiv.Financial
         /// A string containing a BIC to convert.
         /// </param>
         /// <returns>
-        /// The BIC if the string was converted successfully, otherwise BankIdentifierCode.Empty.
+        /// The BIC if the string was converted successfully, otherwise BusinessIdentifierCode.Empty.
         /// </returns>
-        public static BankIdentifierCode TryParse(string s)
+        public static BusinessIdentifierCode TryParse(string s)
         {
-            if (TryParse(s, out BankIdentifierCode val))
+            if (TryParse(s, out BusinessIdentifierCode val))
             {
                 return val;
             }
@@ -397,7 +392,7 @@ namespace Qowaiv.Financial
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, out BankIdentifierCode result)
+        public static bool TryParse(string s, out BusinessIdentifierCode result)
         {
             return TryParse(s, CultureInfo.CurrentCulture, out result);
         }
@@ -417,7 +412,7 @@ namespace Qowaiv.Financial
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, IFormatProvider formatProvider, out BankIdentifierCode result)
+        public static bool TryParse(string s, IFormatProvider formatProvider, out BusinessIdentifierCode result)
         {
             result = Empty;
             if (string.IsNullOrEmpty(s))
@@ -431,7 +426,7 @@ namespace Qowaiv.Financial
             }
             if (IsValid(s, formatProvider))
             {
-                result = new BankIdentifierCode { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
+                result = new BusinessIdentifierCode { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
                 return true;
             }
             return false;
@@ -445,8 +440,6 @@ namespace Qowaiv.Financial
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid BIC, otherwise false.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
-            Justification = "formatProvider is validated by Country.IsValid().")]
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
             var value = val ?? string.Empty;

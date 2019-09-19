@@ -40,6 +40,7 @@ namespace Qowaiv.Financial
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+    [OpenApiDataType(description: "Currency notation as defined by ISO 4217, for example, EUR.", type: "string", format: "currency", nullable: true)]
     [TypeConverter(typeof(CurrencyTypeConverter))]
     public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
     {

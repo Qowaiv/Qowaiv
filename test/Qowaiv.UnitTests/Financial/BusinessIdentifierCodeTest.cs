@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
@@ -8,91 +9,78 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace Qowaiv.UnitTests
+namespace Qowaiv.UnitTests.Financial
 {
-    /// <summary>Tests the house number SVO.</summary>
-    [TestFixture]
-    public class HouseNumberTest
+    /// <summary>Tests the BIC SVO.</summary>
+    public class BusinessIdentifierCodeTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly HouseNumber TestStruct = 123456789L;
+        public static readonly BusinessIdentifierCode TestStruct = BusinessIdentifierCode.Parse("AEGONL2UXXX");
 
-        #region house number const tests
+        #region BIC const tests
 
-        /// <summary>HouseNumber.Empty should be equal to the default of house number.</summary>
+        /// <summary>BusinessIdentifierCode.Empty should be equal to the default of BIC.</summary>
         [Test]
         public void Empty_None_EqualsDefault()
         {
-            Assert.AreEqual(default(HouseNumber), HouseNumber.Empty);
-        }
-
-        [Test]
-        public void MinValue_None_1()
-        {
-            Assert.AreEqual(HouseNumber.Create(1), HouseNumber.MinValue);
-        }
-
-        [Test]
-        public void MaxValue_None_999999999()
-        {
-            Assert.AreEqual(HouseNumber.Create(999999999), HouseNumber.MaxValue);
+            Assert.AreEqual(default(BusinessIdentifierCode), BusinessIdentifierCode.Empty);
         }
 
         #endregion
 
-        #region house number IsEmpty tests
+        #region BIC IsEmpty tests
 
-        /// <summary>HouseNumber.IsEmpty() should be true for the default of house number.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmpty() should be true for the default of BIC.</summary>
         [Test]
         public void IsEmpty_Default_IsTrue()
         {
-            Assert.IsTrue(default(HouseNumber).IsEmpty());
+            Assert.IsTrue(default(BusinessIdentifierCode).IsEmpty());
         }
-        /// <summary>HouseNumber.IsEmpty() should be false for HouseNumber.Unknown.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmpty() should be false for BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
-            Assert.IsFalse(HouseNumber.Unknown.IsEmpty());
+            Assert.IsFalse(BusinessIdentifierCode.Unknown.IsEmpty());
         }
-        /// <summary>HouseNumber.IsEmpty() should be false for the TestStruct.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmpty() should be false for the TestStruct.</summary>
         [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
-        /// <summary>HouseNumber.IsUnknown() should be false for the default of house number.</summary>
+        /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the default of BIC.</summary>
         [Test]
         public void IsUnknown_Default_IsFalse()
         {
-            Assert.IsFalse(default(HouseNumber).IsUnknown());
+            Assert.IsFalse(default(BusinessIdentifierCode).IsUnknown());
         }
-        /// <summary>HouseNumber.IsUnknown() should be true for HouseNumber.Unknown.</summary>
+        /// <summary>BusinessIdentifierCode.IsUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
-            Assert.IsTrue(HouseNumber.Unknown.IsUnknown());
+            Assert.IsTrue(BusinessIdentifierCode.Unknown.IsUnknown());
         }
-        /// <summary>HouseNumber.IsUnknown() should be false for the TestStruct.</summary>
+        /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the TestStruct.</summary>
         [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
-        /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for the default of house number.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for the default of BIC.</summary>
         [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
-            Assert.IsTrue(default(HouseNumber).IsEmptyOrUnknown());
+            Assert.IsTrue(default(BusinessIdentifierCode).IsEmptyOrUnknown());
         }
-        /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for HouseNumber.Unknown.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
-            Assert.IsTrue(HouseNumber.Unknown.IsEmptyOrUnknown());
+            Assert.IsTrue(BusinessIdentifierCode.Unknown.IsEmptyOrUnknown());
         }
-        /// <summary>HouseNumber.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
         [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
@@ -108,8 +96,7 @@ namespace Qowaiv.UnitTests
         public void TyrParse_Null_IsValid()
         {
             string str = null;
-
-            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -118,18 +105,16 @@ namespace Qowaiv.UnitTests
         public void TyrParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
-
-            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        /// <summary>TryParse "?" should be valid and the result should be HouseNumber.Unknown.</summary>
+        /// <summary>TryParse "?" should be valid and the result should be BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
             string str = "?";
-
-            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -137,9 +122,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            string str = "123";
-
-            Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+            string str = "AEGONL2UXXX";
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -148,8 +132,7 @@ namespace Qowaiv.UnitTests
         public void TyrParse_StringValue_IsNotValid()
         {
             string str = "string";
-
-            Assert.IsFalse(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+            Assert.IsFalse(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -158,8 +141,8 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                var act = HouseNumber.Parse("?");
-                var exp = HouseNumber.Unknown;
+                var act = BusinessIdentifierCode.Parse("?");
+                var exp = BusinessIdentifierCode.Unknown;
                 Assert.AreEqual(exp, act);
             }
         }
@@ -172,9 +155,9 @@ namespace Qowaiv.UnitTests
                 Assert.Catch<FormatException>
                 (() =>
                 {
-                    HouseNumber.Parse("InvalidInput");
+                    BusinessIdentifierCode.Parse("InvalidInput");
                 },
-                "Not a valid house number");
+                "Not a valid BIC");
             }
         }
 
@@ -184,7 +167,7 @@ namespace Qowaiv.UnitTests
             using (new CultureInfoScope("en-GB"))
             {
                 var exp = TestStruct;
-                var act = HouseNumber.TryParse(exp.ToString());
+                var act = BusinessIdentifierCode.TryParse(exp.ToString());
 
                 Assert.AreEqual(exp, act);
             }
@@ -195,57 +178,11 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                var exp = default(HouseNumber);
-                var act = HouseNumber.TryParse("InvalidInput");
+                var exp = default(BusinessIdentifierCode);
+                var act = BusinessIdentifierCode.TryParse("InvalidInput");
 
                 Assert.AreEqual(exp, act);
             }
-        }
-
-        #endregion
-
-        #region TryCreate tests
-
-        [Test]
-        public void TryCreate_Null_IsEmpty()
-        {
-            HouseNumber exp = HouseNumber.Empty;
-            Assert.IsTrue(HouseNumber.TryCreate(null, out HouseNumber act));
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void TryCreate_Int32MinValue_IsEmpty()
-        {
-            HouseNumber exp = HouseNumber.Empty;
-            Assert.IsFalse(HouseNumber.TryCreate(Int32.MinValue, out HouseNumber act));
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void TryCreate_Int32MinValue_AreEqual()
-        {
-            var exp = HouseNumber.Empty;
-            var act = HouseNumber.TryCreate(Int32.MinValue);
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void TryCreate_Value_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = HouseNumber.TryCreate(123456789);
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void Create_Int32MinValue_ThrowsArgumentOutOfRangeException()
-        {
-            ExceptionAssert.CatchArgumentOutOfRangeException
-            (() =>
-            {
-                HouseNumber.Create(Int32.MinValue);
-            },
-            "val",
-            "Not a valid house number");
         }
 
         #endregion
@@ -258,7 +195,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<HouseNumber>(null, default);
+                SerializationTest.DeserializeUsingConstructor<BusinessIdentifierCode>(null, default);
             },
             "info");
         }
@@ -269,8 +206,8 @@ namespace Qowaiv.UnitTests
             Assert.Catch<SerializationException>
             (() =>
             {
-                var info = new SerializationInfo(typeof(HouseNumber), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<HouseNumber>(info, default);
+                var info = new SerializationInfo(typeof(BusinessIdentifierCode), new System.Runtime.Serialization.FormatterConverter());
+                SerializationTest.DeserializeUsingConstructor<BusinessIdentifierCode>(info, default);
             });
         }
 
@@ -290,10 +227,10 @@ namespace Qowaiv.UnitTests
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(HouseNumber), new System.Runtime.Serialization.FormatterConverter());
+            var info = new SerializationInfo(typeof(BusinessIdentifierCode), new System.Runtime.Serialization.FormatterConverter());
             obj.GetObjectData(info, default);
 
-            Assert.AreEqual(123456789, info.GetInt32("Value"));
+            Assert.AreEqual(TestStruct.ToString(), info.GetString("Value"));
         }
 
         [Test]
@@ -322,15 +259,15 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void SerializeDeserialize_HouseNumberSerializeObject_AreEqual()
+        public void SerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -342,15 +279,15 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
-        public void XmlSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
+        public void XmlSerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -362,15 +299,15 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
-        public void DataContractSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
+        public void DataContractSerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -385,16 +322,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = HouseNumber.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = HouseNumber.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -405,16 +342,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = HouseNumber.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = HouseNumber.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -437,8 +374,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_None_EmptyValue()
         {
-            var act = JsonTester.Read<HouseNumber>();
-            var exp = HouseNumber.Empty;
+            var act = JsonTester.Read<BusinessIdentifierCode>();
+            var exp = BusinessIdentifierCode.Empty;
 
             Assert.AreEqual(exp, act);
         }
@@ -448,35 +385,37 @@ namespace Qowaiv.UnitTests
         {
             Assert.Catch<FormatException>(() =>
             {
-                JsonTester.Read<HouseNumber>("InvalidStringValue");
+                JsonTester.Read<BusinessIdentifierCode>("InvalidStringValue");
             },
-            "Not a valid house number");
+            "Not a valid BIC");
         }
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<HouseNumber>("123456789");
+            var act = JsonTester.Read<BusinessIdentifierCode>("AEGONL2UXXX");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void FromJson_Int64Value_AreEqual()
+        public void FromJson_Int64Value_AssertNotSupportedException()
         {
-            var act = JsonTester.Read<HouseNumber>(123456789L);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<NotSupportedException>(() =>
+            {
+                JsonTester.Read<BusinessIdentifierCode>(123456L);
+            },
+            "JSON deserialization from an integer is not supported.");
         }
 
         [Test]
-        public void FromJson_DoubleValue_AreEqual()
+        public void FromJson_DoubleValue_AssertNotSupportedException()
         {
-            var act = JsonTester.Read<HouseNumber>((Double)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<NotSupportedException>(() =>
+            {
+                JsonTester.Read<BusinessIdentifierCode>(1234.56);
+            },
+            "JSON deserialization from a number is not supported.");
         }
 
         [Test]
@@ -484,7 +423,7 @@ namespace Qowaiv.UnitTests
         {
             Assert.Catch<NotSupportedException>(() =>
             {
-                JsonTester.Read<HouseNumber>(new DateTime(1972, 02, 14));
+                JsonTester.Read<BusinessIdentifierCode>(new DateTime(1972, 02, 14));
             },
             "JSON deserialization from a date is not supported.");
         }
@@ -492,40 +431,42 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToJson_DefaultValue_IsNull()
         {
-            object act = JsonTester.Write(default(HouseNumber));
+            object act = JsonTester.Write(default(BusinessIdentifierCode));
             Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = "123456789";
+            var exp = "AEGONL2UXXX";
             Assert.AreEqual(exp, act);
         }
 
         #endregion
 
-        #region IFormattable / Tostring tests
+        #region IFormattable / ToString tests
 
         [Test]
-        public void ToString_Empty_IsStringEmpty()
+        public void ToString_Empty_StringEmpty()
         {
-            var act = HouseNumber.Empty.ToString();
+            var act = BusinessIdentifierCode.Empty.ToString();
             var exp = "";
             Assert.AreEqual(exp, act);
         }
+
         [Test]
         public void ToString_Unknown_QuestionMark()
         {
-            var act = HouseNumber.Unknown.ToString();
+            var act = BusinessIdentifierCode.Unknown.ToString();
             var exp = "?";
             Assert.AreEqual(exp, act);
         }
+
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: '123456789', format: 'Unit Test Format'";
+            var exp = "Unit Test Formatter, value: 'AEGONL2UXXX', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);
         }
@@ -533,85 +474,64 @@ namespace Qowaiv.UnitTests
         public void ToString_TestStruct_ComplexPattern()
         {
             var act = TestStruct.ToString("");
-            var exp = "123456789";
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void ToString_FormatValueDutchBelgium_AreEqual()
-        {
-            using (new CultureInfoScope("nl-BE"))
-            {
-                var act = HouseNumber.Parse("800").ToString("0000");
-                var exp = "0800";
-                Assert.AreEqual(exp, act);
-            }
-        }
-
-        [Test]
-        public void ToString_FormatValueEnglishGreatBritain_AreEqual()
-        {
-            using (new CultureInfoScope("en-GB"))
-            {
-                var act = HouseNumber.Parse("800").ToString("0000");
-                var exp = "0800";
-                Assert.AreEqual(exp, act);
-            }
-        }
-
-        [Test]
-        public void ToString_FormatValueSpanishEcuador_AreEqual()
-        {
-            var act = HouseNumber.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
-            var exp = "01700,0";
+            var exp = "AEGONL2UXXX";
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
-            DebuggerDisplayAssert.HasAttribute(typeof(HouseNumber));
+            DebuggerDisplayAssert.HasAttribute(typeof(BusinessIdentifierCode));
         }
 
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("HouseNumber: (empty)", default(HouseNumber));
+            DebuggerDisplayAssert.HasResult("BIC: (empty)", default(BusinessIdentifierCode));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("HouseNumber: (unknown)", HouseNumber.Unknown);
+            DebuggerDisplayAssert.HasResult("BIC: (unknown)", BusinessIdentifierCode.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("HouseNumber: 123456789", TestStruct);
+            DebuggerDisplayAssert.HasResult("BIC: AEGONL2UXXX", TestStruct);
         }
 
         #endregion
 
         #region IEquatable tests
 
-        /// <summary>GetHash should not fail for HouseNumber.Empty.</summary>
+        /// <summary>GetHash should not fail for BusinessIdentifierCode.Empty.</summary>
         [Test]
         public void GetHash_Empty_Hash()
         {
-            Assert.AreEqual(0, HouseNumber.Empty.GetHashCode());
+            Assert.AreEqual(0, BusinessIdentifierCode.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
         [Test]
-        public void GetHash_TestStruct_Hash()
+        public void GetHash_TestStruct_NotZero()
         {
-            Assert.AreEqual(123456789, TestStruct.GetHashCode());
+            Assert.NotZero(TestStruct.GetHashCode());
         }
 
         [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
-            Assert.IsTrue(HouseNumber.Empty.Equals(HouseNumber.Empty));
+            Assert.IsTrue(BusinessIdentifierCode.Empty.Equals(BusinessIdentifierCode.Empty));
+        }
+
+        [Test]
+        public void Equals_FormattedAndUnformatted_IsTrue()
+        {
+            var l = BusinessIdentifierCode.Parse("AEGONL2UXXX", CultureInfo.InvariantCulture);
+            var r = BusinessIdentifierCode.Parse("AEgonL2Uxxx", CultureInfo.InvariantCulture);
+
+            Assert.IsTrue(l.Equals(r));
         }
 
         [Test]
@@ -623,13 +543,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(TestStruct.Equals(HouseNumber.Empty));
+            Assert.IsFalse(TestStruct.Equals(BusinessIdentifierCode.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(HouseNumber.Empty.Equals(TestStruct));
+            Assert.IsFalse(BusinessIdentifierCode.Empty.Equals(TestStruct));
         }
 
         [Test]
@@ -670,33 +590,33 @@ namespace Qowaiv.UnitTests
 
         #region IComparable tests
 
-        /// <summary>Orders a list of house numbers ascending.</summary>
+        /// <summary>Orders a list of BICs ascending.</summary>
         [Test]
-        public void OrderBy_HouseNumber_AreEqual()
+        public void OrderBy_BusinessIdentifierCode_AreEqual()
         {
-            HouseNumber item0 = 1;
-            HouseNumber item1 = 12;
-            HouseNumber item2 = 123;
-            HouseNumber item3 = 1234;
+            var item0 = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+            var item1 = BusinessIdentifierCode.Parse("CEBUNL2U");
+            var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
+            var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<HouseNumber>() { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
-            var exp = new List<HouseNumber>() { HouseNumber.Empty, HouseNumber.Empty, item0, item1, item2, item3 };
+            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
         }
 
-        /// <summary>Orders a list of house numbers descending.</summary>
+        /// <summary>Orders a list of BICs descending.</summary>
         [Test]
-        public void OrderByDescending_HouseNumber_AreEqual()
+        public void OrderByDescending_BusinessIdentifierCode_AreEqual()
         {
-            HouseNumber item0 = 1;
-            HouseNumber item1 = 12;
-            HouseNumber item2 = 123;
-            HouseNumber item3 = 1234;
+            var item0 = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+            var item1 = BusinessIdentifierCode.Parse("CEBUNL2U");
+            var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
+            var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<HouseNumber>() { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
-            var exp = new List<HouseNumber>() { item3, item2, item1, item0, HouseNumber.Empty, HouseNumber.Empty };
+            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode>() { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -725,7 +645,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a house number"
+                "Argument must be a BIC"
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -739,74 +659,24 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a house number"
+                "Argument must be a BIC"
             );
         }
 
-        [Test]
-        public void LessThan_17LT19_IsTrue()
-        {
-            HouseNumber l = 17;
-            HouseNumber r = 19;
-
-            Assert.IsTrue(l < r);
-        }
-        [Test]
-        public void GreaterThan_21LT19_IsTrue()
-        {
-            HouseNumber l = 21;
-            HouseNumber r = 19;
-
-            Assert.IsTrue(l > r);
-        }
-
-        [Test]
-        public void LessThanOrEqual_17LT19_IsTrue()
-        {
-            HouseNumber l = 17;
-            HouseNumber r = 19;
-
-            Assert.IsTrue(l <= r);
-        }
-        [Test]
-        public void GreaterThanOrEqual_21LT19_IsTrue()
-        {
-            HouseNumber l = 21;
-            HouseNumber r = 19;
-
-            Assert.IsTrue(l >= r);
-        }
-
-        [Test]
-        public void LessThanOrEqual_17LT17_IsTrue()
-        {
-            HouseNumber l = 17;
-            HouseNumber r = 17;
-
-            Assert.IsTrue(l <= r);
-        }
-        [Test]
-        public void GreaterThanOrEqual_21LT21_IsTrue()
-        {
-            HouseNumber l = 21;
-            HouseNumber r = 21;
-
-            Assert.IsTrue(l >= r);
-        }
         #endregion
 
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToHouseNumber_AreEqual()
+        public void Explicit_StringToBusinessIdentifierCode_AreEqual()
         {
             var exp = TestStruct;
-            var act = (HouseNumber)TestStruct.ToString();
+            var act = (BusinessIdentifierCode)TestStruct.ToString();
 
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void Explicit_HouseNumberToString_AreEqual()
+        public void Explicit_BusinessIdentifierCodeToString_AreEqual()
         {
             var exp = TestStruct.ToString();
             var act = (string)TestStruct;
@@ -814,144 +684,176 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-
-        [Test]
-        public void Explicit_Int32ToHouseNumber_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (HouseNumber)123456789;
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_HouseNumberToInt32_AreEqual()
-        {
-            var exp = 123456789;
-            var act = (Int32)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
         #endregion
 
         #region Properties
 
         [Test]
-        public void IsOdd_Empty_IsFalse()
+        public void Length_DefaultValue_0()
         {
-            Assert.IsFalse(HouseNumber.Empty.IsOdd);
-        }
-
-        [Test]
-        public void IsOdd_Unknown_IsFalse()
-        {
-            Assert.IsFalse(HouseNumber.Unknown.IsOdd);
-        }
-
-        [Test]
-        public void IsOdd_TestStruct_IsTrue()
-        {
-            Assert.IsTrue(TestStruct.IsOdd);
-        }
-
-        [Test]
-        public void IsEven_Empty_IsFalse()
-        {
-            Assert.IsFalse(HouseNumber.Empty.IsEven);
-        }
-
-        [Test]
-        public void IsEven_Unknown_IsFalse()
-        {
-            Assert.IsFalse(HouseNumber.Unknown.IsEven);
-        }
-
-        [Test]
-        public void IsEven_TestStruct_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.IsEven);
-        }
-
-        [Test]
-        public void IsEven_1234_IsTrue()
-        {
-            Assert.IsTrue(HouseNumber.Create(1234).IsEven);
-        }
-
-
-        [Test]
-        public void Length_Empty_0()
-        {
-            var act = HouseNumber.Empty.Length;
             var exp = 0;
+            var act = BusinessIdentifierCode.Empty.Length;
             Assert.AreEqual(exp, act);
         }
-
         [Test]
         public void Length_Unknown_0()
         {
-            var act = HouseNumber.Unknown.Length;
             var exp = 0;
+            var act = BusinessIdentifierCode.Unknown.Length;
             Assert.AreEqual(exp, act);
         }
-
         [Test]
-        public void Length_TestStruct_9()
+        public void Length_TestStruct_IntValue()
         {
+            var exp = 11;
             var act = TestStruct.Length;
-            var exp = 9;
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void Length_1234_4()
+        public void BusinessCode_DefaultValue_StringEmpty()
         {
-            var act = HouseNumber.Create(1234).Length;
-            var exp = 4;
+            var exp = "";
+            var act = BusinessIdentifierCode.Empty.Business;
             Assert.AreEqual(exp, act);
         }
+        [Test]
+        public void BusinessCode_Unknown_StringEmpty()
+        {
+            var exp = "";
+            var act = BusinessIdentifierCode.Unknown.Business;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void BusinessCode_TestStruct_AEGO()
+        {
+            var exp = "AEGO";
+            var act = TestStruct.Business;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Country_DefaultValue_CountryEmpty()
+        {
+            var exp = Country.Empty;
+            var act = BusinessIdentifierCode.Empty.Country;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void Country_Unknown_CountryUnknown()
+        {
+            var exp = Country.Unknown;
+            var act = BusinessIdentifierCode.Unknown.Country;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void Country_TestStruct_NL()
+        {
+            var exp = Country.NL;
+            var act = TestStruct.Country;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void LocationCode_DefaultValue_StringEmpty()
+        {
+            var exp = "";
+            var act = BusinessIdentifierCode.Empty.Location;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void LocationCode_Unknown_StringEmpty()
+        {
+            var exp = "";
+            var act = BusinessIdentifierCode.Unknown.Location;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void LocationCode_TestStruct_NL()
+        {
+            var exp = "2U";
+            var act = TestStruct.Location;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void BranchCode_DefaultValue_StringEmpty()
+        {
+            var exp = "";
+            var act = BusinessIdentifierCode.Empty.Branch;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void BranchCode_Unknown_StringEmpty()
+        {
+            var exp = "";
+            var act = BusinessIdentifierCode.Unknown.Branch;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void BranchCode_TestStruct_NL()
+        {
+            var exp = "XXX";
+            var act = TestStruct.Branch;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void BranchCode_AEGONL2U_StringEmpty()
+        {
+            var exp = "";
+            var act = BusinessIdentifierCode.Parse("AEGONL2U").Branch;
+            Assert.AreEqual(exp, act);
+        }
+
         #endregion
 
         #region Type converter tests
 
         [Test]
-        public void ConverterExists_HouseNumber_IsTrue()
+        public void ConverterExists_BusinessIdentifierCode_IsTrue()
         {
-            TypeConverterAssert.ConverterExists(typeof(HouseNumber));
+            TypeConverterAssert.ConverterExists(typeof(BusinessIdentifierCode));
         }
 
         [Test]
-        public void CanNotConvertFromDateTime_HouseNumber_IsTrue()
+        public void CanNotConvertFromInt32_BusinessIdentifierCode_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(HouseNumber), typeof(DateTime));
-        }
-       
-        [Test]
-        public void CanConvertFromString_HouseNumber_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(HouseNumber));
+            TypeConverterAssert.CanNotConvertFrom(typeof(BusinessIdentifierCode), typeof(Int32));
         }
 
         [Test]
-        public void CanConvertToString_HouseNumber_IsTrue()
+        public void CanNotConvertToInt32_BusinessIdentifierCode_IsTrue()
         {
-            TypeConverterAssert.CanConvertToString(typeof(HouseNumber));
+            TypeConverterAssert.CanNotConvertTo(typeof(BusinessIdentifierCode), typeof(Int32));
         }
 
         [Test]
-        public void ConvertFrom_StringNull_HouseNumberEmpty()
+        public void CanConvertFromString_BusinessIdentifierCode_IsTrue()
+        {
+            TypeConverterAssert.CanConvertFromString(typeof(BusinessIdentifierCode));
+        }
+
+        [Test]
+        public void CanConvertToString_BusinessIdentifierCode_IsTrue()
+        {
+            TypeConverterAssert.CanConvertToString(typeof(BusinessIdentifierCode));
+        }
+
+        [Test]
+        public void ConvertFrom_StringNull_BusinessIdentifierCodeEmpty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, (string)null);
+                TypeConverterAssert.ConvertFromEquals(BusinessIdentifierCode.Empty, (string)null);
             }
         }
 
         [Test]
-        public void ConvertFrom_StringEmpty_HouseNumberEmpty()
+        public void ConvertFrom_StringEmpty_BusinessIdentifierCodeEmpty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, string.Empty);
+                TypeConverterAssert.ConvertFromEquals(BusinessIdentifierCode.Empty, string.Empty);
             }
         }
 
@@ -965,9 +867,9 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_HouseNumber_Successful()
+        public void ConvertFromInstanceDescriptor_BusinessIdentifierCode_Successful()
         {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(HouseNumber));
+            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(BusinessIdentifierCode));
         }
 
         [Test]
@@ -979,65 +881,54 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [Test]
-        public void ConvertFromInstanceDescriptor_NullableInt32_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(int?));
-        }
-        [Test]
-        public void ConvertFromInstanceDescriptor_Int64_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(long));
-        }
-
-        [Test]
-        public void ConvertFromUnderlyingType_NullableInt64_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, default(long?));
-        }
-        [Test]
-        public void ConvertFrom_Int_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
-        }
-
-        [Test]
-        public void ConvertToUnderlyingType_Int_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
-        }
-        [Test]
-        public void ConvertToUnderlyingType_NullableInt_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(default(int?), HouseNumber.Empty);
-        }
-
         #endregion
 
-        #region IsValid tests
+        #region IsValid
 
-        [Test]
-        public void IsValid_Data_IsFalse()
+        [TestCase("1AAANL01", "Digit in first four characters")]
+        [TestCase("AAAANLBB1", "Branch length of 1")]
+        [TestCase("AAAANLBB12", "Branch length of 2")]
+        [TestCase("ABCDXX01", "Digit in country code")]
+        [TestCase("ABCDXX01", "None existing country")]
+        [TestCase("AAAANLBË", "Diacritic")]
+        [TestCase(null, "(String)null")]
+        [TestCase("", "String.Empty")]
+        public void IsInvalid(string str, string message)
         {
-            Assert.IsFalse(HouseNumber.IsValid("1234567890"), "1234567890");
-            Assert.IsFalse(HouseNumber.IsValid((String)null), "(String)null");
-            Assert.IsFalse(HouseNumber.IsValid(string.Empty), "string.Empty");
+            Assert.IsFalse(BusinessIdentifierCode.IsValid(str), message);
+        }
 
-            Assert.IsFalse(HouseNumber.IsValid((System.Int32?)null), "(System.Int32?)null");
-        }
-        [Test]
-        public void IsValid_Data_IsTrue()
+        [TestCase("PSTBNL21")]
+        [TestCase("ABNANL2A")]
+        [TestCase("BACBBEBB")]
+        [TestCase("GEBABEBB36A")]
+        [TestCase("DEUTDEFF")]
+        [TestCase("NEDSZAJJ")]
+        [TestCase("DABADKKK")]
+        [TestCase("UNCRIT2B912")]
+        [TestCase("DSBACNBXSHA")]
+        public void IsValid(string str)
         {
-            Assert.IsTrue(HouseNumber.IsValid("123456"));
+            Assert.IsTrue(BusinessIdentifierCode.IsValid(str));
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("PSTBNL21"), "PSTBNL21");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("ABNANL2A"), "ABNANL2A");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("BACBBEBB"), "BACBBEBB");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("GEBABEBB36A"), "GEBABEBB36A");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("DEUTDEFF"), "DEUTDEFF");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("NEDSZAJJ"), "NEDSZAJJ");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("DABADKKK"), "DABADKKK");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("UNCRIT2B912"), "UNCRIT2B912");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("DSBACNBXSHA"), "DSBACNBXSHA");
         }
+
         #endregion
     }
 
     [Serializable]
-    public class HouseNumberSerializeObject
+    public class BusinessIdentifierCodeSerializeObject
     {
         public int Id { get; set; }
-        public HouseNumber Obj { get; set; }
+        public BusinessIdentifierCode Obj { get; set; }
         public DateTime Date { get; set; }
     }
 }

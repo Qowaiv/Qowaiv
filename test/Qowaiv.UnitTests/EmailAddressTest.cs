@@ -429,7 +429,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<EmailAddress>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<EmailAddress>("svo@qowaiv.org");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -466,19 +466,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(EmailAddress));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "svo@qowaiv.org";
             Assert.AreEqual(exp, act);
         }
 
@@ -1005,7 +1002,8 @@ namespace Qowaiv.UnitTests
         [TestCase("email@colon:colon.com")]
         [TestCase("email@caret^xor.com")]
         [TestCase("email@=qowaiv.com")]
-        [TestCase("email@plus+.coM")]
+        [TestCase("email@plus+.com")]
+        [TestCase("email@domain.com>")]
         [TestCase("email( (nested) )@plus.com")]
         [TestCase("email)mirror(@plus.com")]
         [TestCase("email@plus.com (not closed comment")]
@@ -1013,8 +1011,11 @@ namespace Qowaiv.UnitTests
         [TestCase(@"""Joe Smith email@domain.com")]
         [TestCase(@"""Joe Smith' email@domain.com")]
         [TestCase(@"""Joe Smith""email@domain.com")]
+        [TestCase("email@mailto:domain.com")]
+        [TestCase("mailto:mailto:email@domain.com")]
+        [TestCase("Display Name <email@plus.com> (after name with display)")]
         [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
-        public void InvalidEmailAddresses(string email)
+        public void IsInvalid(string email)
         {
             Assert.IsFalse(EmailAddress.IsValid(email), email);
         }
@@ -1086,8 +1087,14 @@ namespace Qowaiv.UnitTests
         [TestCase(@"""Joe Smith"" email@domain.com")]
         [TestCase(@"""Joe\\tSmith"" email@domain.com")]
         [TestCase(@"""Joe\""Smith"" email@domain.com")]
+        [TestCase(@"Test |<gaaf <email@domain.com>")]
+        [TestCase("MailTo:casesensitve@domain.com")]
+        [TestCase("mailto:email@domain.com")]
+        [TestCase("Joe Smith <mailto:email@domain.com>")]
+        [TestCase("Joe Smith <mailto:email(with comment)@domain.com>")]
+        [TestCase(@"""With extra < within quotes"" Display Name<email@domain.com>")]
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
-        public void ValidEmailAddresses(string email)
+        public void IsValid(string email)
         {
             Assert.IsTrue(EmailAddress.IsValid(email), email);
         }

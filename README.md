@@ -3,14 +3,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
 
-| version                                                                        | package                           |
-|--------------------------------------------------------------------------------|-----------------------------------|
-|![v](https://img.shields.io/badge/version-4.0.3-blue.svg?cacheSeconds=3600)     | Qowaiv                            |
-|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     | Qowaiv.Data.SqlCient              |
-|![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    | Qowaiv.Validation.Abstractions    |
-|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.DataAnnotations |
-|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)| Qowaiv.Validation.Fluent          |
-|![v](https://img.shields.io/badge/version-1.0.2-darkred.svg?cacheSeconds=3600)  | Qowaiv.TestTools                  |
+| version                                                                        | package                                                                                              |
+|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+|![v](https://img.shields.io/badge/version-4.0.5-blue.svg?cacheSeconds=3600)     |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                      |
+|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                         |
+|![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
+|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
+|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
+|![v](https://img.shields.io/badge/version-1.0.2-darkred.svg?cacheSeconds=3600)  |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                  |
 
 # Qowaiv
 
@@ -43,13 +43,13 @@ players in competitor-versus-competitor games.
 Represents a (single) email address. Support:
 * Display names (are stripped)
 * Comments (are removed)
-* IP-based domains (normalized and surrounded by breakets)
+* IP-based domains (normalized and surrounded by brackets)
 
 Furthermore, the email address is normalized as a lowercase string, making it
-case-insensitve.
+case-insensitive.
 
 ``` C#
-var email = EmailAddress.Parse("Test Account <TEST@qowaiv.org>");
+var email = EmailAddress.Parse("Test Account <mailto:TEST@qowaiv.org>");
 var quoted = EmailAddress.Parse("\"Joe Smith\" email@qowaiv.org");
 var ip_based = EmailAddress.Parse("test@[172.16.254.1]");
 
@@ -79,6 +79,17 @@ and UTC-based date times.
 ### Month
 Represents a month in the range [1-12].
 
+``` C#
+Month feb = Month.Parse("February");
+Month may = Month.May;
+Month dec = 12;
+
+feb.ToString("f", new CultureInfo("nl-NL")); // februari
+feb.ToString("s"); // Feb
+feb.ToString("M"); // 02
+feb.ToString("m"); // 2
+```
+
 ### Percentage
 Represents a percentage. It supports parsing from per mile and per ten thousand
 too. The basic thought is that `Percentage.Parse("14%")` has the same result
@@ -86,7 +97,7 @@ as `double.Parse("14%")`, which is `0.14`.
 
 ``` C#
 // Creation
-Percentage p = 0.0314; // implict cast: 3.14%
+Percentage p = 0.0314; // implicit cast: 3.14%
 var p = Percentage.Parse("3.14"); //  Parse: 3.14%;
 var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
 var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
@@ -99,6 +110,11 @@ var total = 400;
 total *= (Percentage)0.5; // Total = 200;
 var value = 50.0;
 value += (Percentage)0.1; // value 55;
+
+var rounded = 17.56.Percent().Round(1); // 17.6%;
+
+var max = Percentage.Max(1.4.Percent(), 1.8.Percent()); // 1.8%;
+var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
 ```
 
 ### Postal code
@@ -131,8 +147,18 @@ A seed, representing random data to encrypt and decrypt data.
 ### Amount
 Represents money without the notion of the actual currency.
 
-### Bank Identifier Code (BIC)
+### Business Identifier Code (BIC)
 Represents a BIC as specified in ISO 13616.
+
+``` C#
+var bic = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+
+var business = bic.Business; // "AEGO"
+var country = bic.Country; // Country.NL
+var location = bic.Location; // "2U"
+var branch = bic.Branch; // "XXX"
+var length = bic.Length; // 11
+```
 
 ### Currency
 Represents a currency based on an ISO 4217 code.
@@ -204,6 +230,207 @@ serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
 You can implement it yourself:
 * [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
 
+#### OpenAPI Specification
+The [OpenAPI Specification](https://swagger.io/docs/specification/about/)
+(formerly Swagger Specification) is an API description format for REST API's.
+
+To improve usage of your REST API's you should specify the Data Type of your
+SVO's. To make this as simple as possible, Qowaiv SVO's are decorated with the
+`OpenApiDataTypeAttribute`. It specifies the type, format, (regex) pattern,
+and if the data type is nullable, all when applicable.
+
+``` json
+{
+  "Date": {
+    "description": "Full-date notation as defined by RFC 3339, section 5.6, for example, 2017-06-10.",
+    "type": "string",
+    "format": "date",
+    "nullabe": false
+  },
+  "EmailAddress": {
+    "description": "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.",
+    "type": "string",
+    "format": "email",
+    "nullabe": true
+  },
+  "EmailAddressCollection": {
+    "description": "Comma separated list of email addresses defined by RFC 5322.",
+    "type": "string",
+    "format": "email-collection",
+    "nullabe": true
+  },
+  "Gender": {
+    "description": "Gender as specified by ISO/IEC 5218.",
+    "type": "string",
+    "format": "gender",
+    "nullabe": true,
+    "enum": [
+      "NotKnown",
+      "Male",
+      "Female",
+      "NotApplicable"
+    ]
+  },
+  "HouseNumber": {
+    "description": "House number notation.",
+    "type": "string",
+    "format": "house-number",
+    "nullabe": true
+  },
+  "LocalDateTime": {
+    "description": "Date-time notation as defined by RFC 3339, without time zone information, for example, 2017-06-10 15:00.",
+    "type": "string",
+    "format": "local-date-time",
+    "nullabe": false
+  },
+  "Month": {
+    "description": "Month(-only) notation.",
+    "type": "string",
+    "format": "month",
+    "nullabe": true,
+    "enum": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+      "?"
+    ]
+  },
+  "Percentage": {
+    "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
+    "type": "string",
+    "format": "percentage",
+    "pattern": "-?[0-9]+(\\.[0-9])?%",
+    "nullabe": false
+  },
+  "PostalCode": {
+    "description": "Postal code notation.",
+    "type": "string",
+    "format": "postal-code",
+    "nullabe": true
+  },
+  "Uuid": {
+    "description": "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.",
+    "type": "string",
+    "format": "uuid-base64",
+    "nullabe": true
+  },
+  "WeekDate": {
+    "description": "Full-date notation as defined by ISO 8601, for example, 1997-W14-6.",
+    "type": "string",
+    "format": "date-weekbased",
+    "nullabe": false
+  },
+  "Year": {
+    "description": "Year(-only) notation.",
+    "type": "integer",
+    "format": "year",
+    "nullabe": true
+  },
+  "YesNo": {
+    "description": "Yes-No notation.",
+    "type": "string",
+    "format": "yes-no",
+    "nullabe": true,
+    "enum": [
+      "yes",
+      "no",
+      "?"
+    ]
+  },
+  "Financial.Amount": {
+    "description": "Decimal representation of a currency amount.",
+    "type": "number",
+    "format": "amount",
+    "nullabe": false
+  },
+  "Financial.BusinessIdentifierCode": {
+    "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
+    "type": "string",
+    "format": "bic",
+    "nullabe": true
+  },
+  "Financial.Currency": {
+    "description": "Currency notation as defined by ISO 4217, for example, EUR.",
+    "type": "string",
+    "format": "currency",
+    "nullabe": true
+  },
+  "Financial.InternationalBankAccountNumber": {
+    "description": "International Bank Account Number notation as defined by ISO 13616:2007, for example, BE71096123456769.",
+    "type": "string",
+    "format": "iban",
+    "nullabe": true
+  },
+  "Financial.Money": {
+    "description": "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.",
+    "type": "string",
+    "format": "money",
+    "pattern": "[A-Z]{3} -?[0-9]+(\\.[0-9]+)?",
+    "nullabe": false
+  },
+  "Globalization.Country": {
+    "description": "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.",
+    "type": "string",
+    "format": "country",
+    "nullabe": true
+  },
+  "IO.StreamSize": {
+    "description": "Stream size notation (in byte).",
+    "type": "integer",
+    "format": "stream-size",
+    "nullabe": false
+  },
+  "Security.Cryptography.CryptographicSeed": {
+    "description": "Base64 encoded cryptographic seed.",
+    "type": "string",
+    "format": "cryptographic-seed",
+    "nullabe": true
+  },
+  "Statistics.Elo": {
+    "description": "Elo rating system notation.",
+    "type": "number",
+    "format": "elo",
+    "nullabe": false
+  },
+  "Web.InternetMediaType": {
+    "description": "Media type notation as defined by RFC 6838, for example, text/html.",
+    "type": "string",
+    "format": "internet-media-type",
+    "nullabe": true
+  }
+}
+```
+#### Swashbuckle registration
+Registration of SVO's with [Swashbuckle](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/)
+could look like this:
+
+``` C#
+public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
+{
+    var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
+    foreach (var attr in attributes)
+    {
+        options.MapType(attr.DataType, () => new OpenApiSchema
+        {
+            Type = attr.Type,
+            Format = attr.Format,
+            Pattern = attr.Pattern,
+            Nullable = attr.Nullable,
+        });
+    }
+    return options;
+}
+```
+              
 ### XML
 .NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
 with the same approach:

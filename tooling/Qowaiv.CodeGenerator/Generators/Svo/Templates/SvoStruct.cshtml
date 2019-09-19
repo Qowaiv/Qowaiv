@@ -21,6 +21,7 @@ namespace @Model.Namespace
     /// <summary>Represents @Model.a @Model.ClassLongName.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(@Model.UnderlyingType.Name))]
+    [OpenApiDataType(type: "string", format: "@Model.ClassName")]
     [TypeConverter(typeof(@(Model.ClassName)TypeConverter))]
     public struct @Model.ClassName : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<@Model.ClassName>
         , IComparable, IComparable<@Model.ClassName>

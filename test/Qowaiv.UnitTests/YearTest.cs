@@ -456,7 +456,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Year>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Year>("1979");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -491,27 +491,23 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(Year));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+             Assert.IsNull(act);
         }
         [Test]
         public void ToJson_Unknown_AreEqual()
         {
             var act = JsonTester.Write(Year.Unknown);
             var exp = "?";
-
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = (Int16)TestStruct;
-
+            var exp = (short)TestStruct;
             Assert.AreEqual(exp, act);
         }
 

@@ -48,6 +48,7 @@ namespace Qowaiv
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
+    [OpenApiDataType(description: "Full-date notation as defined by ISO 8601, for example, 1997-W14-6.", type: "string", format: "date-weekbased")]
     [TypeConverter(typeof(WeekDateTypeConverter))]
     public struct WeekDate : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
     {

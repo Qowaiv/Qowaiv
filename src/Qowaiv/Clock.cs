@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace Qowaiv
 {
@@ -115,7 +114,7 @@ namespace Qowaiv
 
         /// <summary>Sets the <see cref="DateTime"/> function for current thread only.</summary>
         public static IDisposable SetTimeForCurrentThread(Func<DateTime> time) => new TimeScope(time);
-        
+
         /// <summary>Sets the <see cref="TimeZoneInfo"/> for current thread only.</summary>
         public static IDisposable SetTimeZoneForCurrentThread(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
 

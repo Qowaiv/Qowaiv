@@ -74,10 +74,11 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [Test, Ignore("Does not seem to work on GitHub actions")]
+        [Test]
         public void NowWithOffset_WestEuropeanWithoutDaylightSaving_Plus1()
         {
-            var timezone = TimeZoneInfo.CreateCustomTimeZone("id", TimeSpan.FromHours(1), "Test", "Test");
+            var name = nameof(NowWithOffset_WestEuropeanWithoutDaylightSaving_Plus1);
+            var timezone = TimeZoneInfo.CreateCustomTimeZone(name, TimeSpan.FromHours(+1), name, name);
 
             using (Clock.SetTimeAndTimeZoneForCurrentThread(() => new DateTime(2019, 02, 14), timezone))
             {

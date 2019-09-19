@@ -345,8 +345,15 @@ namespace Qowaiv.UnitTests
         public void XmlSerialize_TestStruct_AreEqual()
         {
             var act = SerializationTest.XmlSerialize(TestStruct);
-            var exp = @"<?xml version=""1.0"" encoding=""utf-8""?><Month>Feb</Month>";
+            var exp = "Feb";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_Feb_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Month>("Feb");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -579,10 +586,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'February', format: 'Unit Test Format'";
+            using (CultureInfoScope.NewInvariant())
+            {
+                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+                var exp = "Unit Test Formatter, value: 'February', format: 'Unit Test Format'";
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
 
         [Test]

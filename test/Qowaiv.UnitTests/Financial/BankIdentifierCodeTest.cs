@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿#pragma warning disable CS0618 // Type or member is obsolete
+// This class only exists to test the obsolete BankIdentifierCode class.
+
+using NUnit.Framework;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;

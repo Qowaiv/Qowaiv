@@ -83,7 +83,7 @@ namespace Qowaiv.UnitTests
             using (Clock.SetTimeAndTimeZoneForCurrentThread(() => new DateTime(2019, 02, 14), timezone))
             {
                 var act = Clock.NowWithOffset();
-                var exp = new DateTimeOffset(new LocalDateTime(2019, 02, 14, 1, 0, 0), TimeSpan.FromHours(+1));
+                var exp = new DateTimeOffset(new DateTime(2019, 02, 14, 1, 0, 0, DateTimeKind.Unspecified), TimeSpan.FromHours(+1));
                 Assert.AreEqual(exp, act);
             }
         }

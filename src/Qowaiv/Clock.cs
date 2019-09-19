@@ -67,8 +67,7 @@ namespace Qowaiv
             Guard.NotNull(timeZone, nameof(timeZone));
             var utcNow = UtcNow();
             var now = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZone);
-            var delta = now - utcNow;
-            return new DateTimeOffset(now.Ticks, delta);
+            return new DateTimeOffset(now.Ticks, now - utcNow);
         }
 
         /// <summary>Gets the yesterday for the local <see cref="DateTime"/>.</summary>

@@ -3,7 +3,8 @@ name: Test
 on: [push, pull_request]
 
 jobs:
-  build:
+  test-windows:
+    name: Unit tests on Windows
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1

@@ -69,10 +69,7 @@ namespace Qowaiv
             var now = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZone);
 
             // TODO: remove this debug code.
-            if(now.Kind != DateTimeKind.Unspecified)
-            {
-                throw new InvalidOperationException($"DateTimeKind is {now.Kind}");
-            }
+            throw new InvalidOperationException($"DateTimeKind is {now.Kind}");
             return new DateTimeOffset(now, now - utcNow);
         }
 

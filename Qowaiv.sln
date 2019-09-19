@@ -16,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{CCCCEB32-7082-431D-A7DC-3C6E213DA8D4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tooling", "tooling", "{CCCCEB32-7082-431D-A7DC-3C6E213DA8D4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Props", "Props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
 	ProjectSection(SolutionItems) = preProject
 		props\analytics.props = props\analytics.props
 		props\common.props = props\common.props
@@ -60,6 +60,26 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "example\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{C9A81969-FF9E-4903-AC82-F6BC3C03563E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft.UnitTests", "example\Qowaiv.Json.Newtonsoft.UnitTests\Qowaiv.Json.Newtonsoft.UnitTests.csproj", "{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C036985A-F17D-405A-B3FD-37F30FA154FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\test.yaml = .github\workflows\test.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{932B4123-594C-494B-9B3E-7017D526E80F}"
+	ProjectSection(SolutionItems) = preProject
+		design\qowaiv logo.psd = design\qowaiv logo.psd
+		design\qowaiv-logo_linkedin_050x050.jpg = design\qowaiv-logo_linkedin_050x050.jpg
+		design\qowaiv-logo_linkedin_100x060.jpg = design\qowaiv-logo_linkedin_100x060.jpg
+		design\qowaiv-logo_nuget_064x064.gif = design\qowaiv-logo_nuget_064x064.gif
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2-39B5-40EB-8C44-1D6015C38D70}"
+	ProjectSection(SolutionItems) = preProject
+		build\Qowaiv.snk = build\Qowaiv.snk
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -152,6 +172,10 @@ Global
 		{1FD06220-5716-4863-8FEC-63B3F6EBE598} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 		{C9A81969-FF9E-4903-AC82-F6BC3C03563E} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
+		{C036985A-F17D-405A-B3FD-37F30FA154FB} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
+		{932B4123-594C-494B-9B3E-7017D526E80F} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

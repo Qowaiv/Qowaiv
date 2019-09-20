@@ -69,7 +69,7 @@ namespace Qowaiv.UnitTests
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = GetTestInstance();
-            var info = new SerializationInfo(typeof(EmailAddressCollection), new System.Runtime.Serialization.FormatterConverter());
+            var info = new SerializationInfo(typeof(EmailAddressCollection), new FormatterConverter());
             obj.GetObjectData(info, default);
 
             Assert.AreEqual("info@qowaiv.org,test@qowaiv.org", info.GetString("Value"));
@@ -103,7 +103,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<EmailAddress>("info@qowaiv.org,test@qowaiv.org");
+            var act = SerializationTest.XmlDeserialize<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
             Assert.AreEqual(GetTestInstance(), act);
         }
 

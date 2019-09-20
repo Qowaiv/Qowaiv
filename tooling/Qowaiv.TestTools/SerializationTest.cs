@@ -68,11 +68,24 @@ namespace Qowaiv.TestTools
         /// </param>
         public static T XmlDeserialize<T>(string xml)
         {
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes($"<Wrapper><Value>{xml}</Value></Wrapper>")))
+            var value = new XElement("Value", xml);
+            var doc = new XDocument(new XElement("Wrapper", value));
+            
+            using (var stream = new MemoryStream())
             {
+                doc.Save(stream);
+                stream.Position = 0;
                 var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
-                var wrapper = (SerializationWrapper<T>)serializer.Deserialize(stream);
-                return wrapper.Value;
+                try
+                {
+                    var wrapper = (SerializationWrapper<T>)serializer.Deserialize(stream);
+                    return wrapper.Value;
+                }
+                catch (Exception x)
+                {
+                    throw new SerializationException($"'{value.Value}' failed on: {x.Message}", x);
+                }
+
             }
         }
 

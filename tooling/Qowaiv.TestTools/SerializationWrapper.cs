@@ -9,6 +9,7 @@ namespace Qowaiv.TestTools
     [Serializable, XmlRoot("Wrapper")]
     public class SerializationWrapper<T>
     {
+        /// <summary>The generic part of the wrapper.</summary>
         public T Value { get; set; }
     }
 }

@@ -286,14 +286,22 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = EmailAddressTest.TestStruct;
-            var exp = EmailAddressTest.TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "svo@qowaiv.org";
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<EmailAddress>("svo@qowaiv.org");
+            Assert.AreEqual(TestStruct, act);
+        }
+
 
         [Test]
         public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()

@@ -197,13 +197,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "1970-02-14";
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Date>("1970-02-14");
+            Assert.AreEqual(TestStruct, act);
+        }
+
 
         [Test]
         public void SerializeDeserialize_DateSerializeObject_AreEqual()

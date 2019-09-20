@@ -208,13 +208,20 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = CryptographicSeedTest.TestStruct;
-            var exp = CryptographicSeedTest.TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "Qowaig==";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<CryptographicSeed>("Qowaig==");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]

@@ -1,4 +1,14 @@
-﻿### Released 2019-09-06
+﻿# Release Notes
+
+### Released 2019-10-02
+#### Qowaiv 4.0.6
+* Support OpenAPI (#81)
+* Fix on serialization Month (#88)
+* Introduction of BusinessIdentifierCode (#89)
+#### Qowaiv.TestTools 1.0.3
+* Extend TestTools.SerializationTest with XmlSerialize() and XmlDeserialize() (#93)
+
+### Released 2019-09-06
 #### Qowaiv 4.0.5
 * Added support of "mailto:"-prefix on email address (#78)
 * Fix on '<' in display name on email address (#77)
@@ -19,7 +29,7 @@
 * Initial version
 #### Qowaiv.Validation.Fluent 0.0.1
 * Initial version
-#### Qowaiv.Validation.TestTools 1.0.2
+#### Qowaiv.TestTools 1.0.2
 * Updated references
 
 ### Released 2019-07-28
@@ -30,7 +40,7 @@
 #### Qowaiv 4.0.1 
 * Added support for 12 new countries with IBAN patterns #65
 * Fix Y-N parsing for non-English languages #66
-#### Qowaiv.TestTools 1.01
+#### Qowaiv.TestTools 1.0.1
 * Fix in TestTools Assert (internal)
 
 ### New in 4.0.0 (Released 2019-07-09)

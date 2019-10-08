@@ -220,13 +220,20 @@ namespace Qowaiv.UnitTests.Sql
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "0x00000000075BCD15";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Timestamp>("0x00000000075BCD15");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -364,7 +371,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Timestamp>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Timestamp>("123456789");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -373,7 +380,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            var act = JsonTester.Read<Timestamp>((Int64)((UInt64)TestStruct));
+            var act = JsonTester.Read<Timestamp>(123456789L);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -382,7 +389,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
-            var act = JsonTester.Read<Timestamp>((Double)(UInt64)TestStruct);
+            var act = JsonTester.Read<Timestamp>(123456789.0);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -403,15 +410,13 @@ namespace Qowaiv.UnitTests.Sql
         {
             object act = JsonTester.Write(Timestamp.MinValue);
             object exp = "0x0000000000000000";
-
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "0x00000000075BCD15";
             Assert.AreEqual(exp, act);
         }
 

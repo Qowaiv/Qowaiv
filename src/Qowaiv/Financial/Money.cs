@@ -21,6 +21,7 @@ namespace Qowaiv.Financial
     /// <summary>Represents </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
+    [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
     [TypeConverter(typeof(MoneyTypeConverter))]
     public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
     {
@@ -466,9 +467,8 @@ namespace Qowaiv.Financial
             }
 
             Currency currency = Currency.Empty;
-            decimal value;
             if ((s_cur == "" || Currency.TryParse(s_cur, out currency)) &&
-                decimal.TryParse(s_num, NumberStyles.Number, GetNumberFormatInfo(formatProvider), out value))
+                decimal.TryParse(s_num, NumberStyles.Number, GetNumberFormatInfo(formatProvider), out decimal value))
             {
                 result = Create(value, currency);
                 return true;

@@ -1,93 +1,86 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
-using Qowaiv.Web;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace Qowaiv.UnitTests.Web
+namespace Qowaiv.UnitTests.Financial
 {
-    /// <summary>Tests the Internet media type SVO.</summary>
-    public class InternetMediaTypeTest
+    /// <summary>Tests the BIC SVO.</summary>
+    public class BusinessIdentifierCodeTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly InternetMediaType TestStruct = InternetMediaType.Parse("application/x-chess-pgn");
+        public static readonly BusinessIdentifierCode TestStruct = BusinessIdentifierCode.Parse("AEGONL2UXXX");
 
-        /// <summary>Represents text/html.</summary>
-        public static readonly InternetMediaType TextHtml = InternetMediaType.Parse("text/html");
+        #region BIC const tests
 
-        /// <summary>Represents cooltalk (x-conference/x-cooltalk).</summary>
-        public static readonly InternetMediaType XConferenceXCooltalk = InternetMediaType.Parse("x-conference/x-cooltalk");
-
-        #region internet media type const tests
-
-        /// <summary>InternetMediaType.Empty should be equal to the default of internet media type.</summary>
+        /// <summary>BusinessIdentifierCode.Empty should be equal to the default of BIC.</summary>
         [Test]
         public void Empty_None_EqualsDefault()
         {
-            Assert.AreEqual(default(InternetMediaType), InternetMediaType.Empty);
+            Assert.AreEqual(default(BusinessIdentifierCode), BusinessIdentifierCode.Empty);
         }
 
         #endregion
 
-        #region internet media type IsEmpty tests
+        #region BIC IsEmpty tests
 
-        /// <summary>InternetMediaType.IsEmpty() should be true for the default of internet media type.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmpty() should be true for the default of BIC.</summary>
         [Test]
         public void IsEmpty_Default_IsTrue()
         {
-            Assert.IsTrue(default(InternetMediaType).IsEmpty());
+            Assert.IsTrue(default(BusinessIdentifierCode).IsEmpty());
         }
-        /// <summary>InternetMediaType.IsEmpty() should be false for InternetMediaType.Unknown.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmpty() should be false for BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void IsEmpty_Unknown_IsFalse()
         {
-            Assert.IsFalse(InternetMediaType.Unknown.IsEmpty());
+            Assert.IsFalse(BusinessIdentifierCode.Unknown.IsEmpty());
         }
-        /// <summary>InternetMediaType.IsEmpty() should be false for the TestStruct.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmpty() should be false for the TestStruct.</summary>
         [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
-        /// <summary>InternetMediaType.IsUnknown() should be false for the default of internet media type.</summary>
+        /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the default of BIC.</summary>
         [Test]
         public void IsUnknown_Default_IsFalse()
         {
-            Assert.IsFalse(default(InternetMediaType).IsUnknown());
+            Assert.IsFalse(default(BusinessIdentifierCode).IsUnknown());
         }
-        /// <summary>InternetMediaType.IsUnknown() should be true for InternetMediaType.Unknown.</summary>
+        /// <summary>BusinessIdentifierCode.IsUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void IsUnknown_Unknown_IsTrue()
         {
-            Assert.IsTrue(InternetMediaType.Unknown.IsUnknown());
+            Assert.IsTrue(BusinessIdentifierCode.Unknown.IsUnknown());
         }
-        /// <summary>InternetMediaType.IsUnknown() should be false for the TestStruct.</summary>
+        /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the TestStruct.</summary>
         [Test]
         public void IsUnknown_TestStruct_IsFalse()
         {
             Assert.IsFalse(TestStruct.IsUnknown());
         }
 
-        /// <summary>InternetMediaType.IsEmptyOrUnknown() should be true for the default of internet media type.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for the default of BIC.</summary>
         [Test]
         public void IsEmptyOrUnknown_Default_IsFalse()
         {
-            Assert.IsTrue(default(InternetMediaType).IsEmptyOrUnknown());
+            Assert.IsTrue(default(BusinessIdentifierCode).IsEmptyOrUnknown());
         }
-        /// <summary>InternetMediaType.IsEmptyOrUnknown() should be true for InternetMediaType.Unknown.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void IsEmptyOrUnknown_Unknown_IsTrue()
         {
-            Assert.IsTrue(InternetMediaType.Unknown.IsEmptyOrUnknown());
+            Assert.IsTrue(BusinessIdentifierCode.Unknown.IsEmptyOrUnknown());
         }
-        /// <summary>InternetMediaType.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
+        /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
         [Test]
         public void IsEmptyOrUnknown_TestStruct_IsFalse()
         {
@@ -103,8 +96,7 @@ namespace Qowaiv.UnitTests.Web
         public void TyrParse_Null_IsValid()
         {
             string str = null;
-
-            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -112,20 +104,17 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-
             string str = string.Empty;
-
-            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
-        /// <summary>TryParse "?" should be valid and the result should be InternetMediaType.Unknown.</summary>
+        /// <summary>TryParse "?" should be valid and the result should be BusinessIdentifierCode.Unknown.</summary>
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
             string str = "?";
-
-            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -133,9 +122,8 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            string str = "application/atom+xml";
-
-            Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+            string str = "AEGONL2UXXX";
+            Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -144,8 +132,7 @@ namespace Qowaiv.UnitTests.Web
         public void TyrParse_StringValue_IsNotValid()
         {
             string str = "string";
-
-            Assert.IsFalse(InternetMediaType.TryParse(str, out var val), "Valid");
+            Assert.IsFalse(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -154,8 +141,8 @@ namespace Qowaiv.UnitTests.Web
         {
             using (new CultureInfoScope("en-GB"))
             {
-                var act = InternetMediaType.Parse("?");
-                var exp = InternetMediaType.Unknown;
+                var act = BusinessIdentifierCode.Parse("?");
+                var exp = BusinessIdentifierCode.Unknown;
                 Assert.AreEqual(exp, act);
             }
         }
@@ -168,9 +155,9 @@ namespace Qowaiv.UnitTests.Web
                 Assert.Catch<FormatException>
                 (() =>
                 {
-                    InternetMediaType.Parse("InvalidInput");
+                    BusinessIdentifierCode.Parse("InvalidInput");
                 },
-                "Not a valid internet media type");
+                "Not a valid BIC");
             }
         }
 
@@ -180,7 +167,7 @@ namespace Qowaiv.UnitTests.Web
             using (new CultureInfoScope("en-GB"))
             {
                 var exp = TestStruct;
-                var act = InternetMediaType.TryParse(exp.ToString());
+                var act = BusinessIdentifierCode.TryParse(exp.ToString());
 
                 Assert.AreEqual(exp, act);
             }
@@ -191,60 +178,11 @@ namespace Qowaiv.UnitTests.Web
         {
             using (new CultureInfoScope("en-GB"))
             {
-                var exp = default(InternetMediaType);
-                var act = InternetMediaType.TryParse("InvalidInput");
+                var exp = default(BusinessIdentifierCode);
+                var act = BusinessIdentifierCode.TryParse("InvalidInput");
 
                 Assert.AreEqual(exp, act);
             }
-        }
-
-        #endregion
-
-        #region FromFile tests
-
-        [Test]
-        public void FromFile_NullFileInfo_Empty()
-        {
-            var act = InternetMediaType.FromFile((FileInfo)null);
-            var exp = InternetMediaType.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromFile_NullString_Empty()
-        {
-            var act = InternetMediaType.FromFile((String)null);
-            var exp = InternetMediaType.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromFile__StringEmpty_Empty()
-        {
-            var act = InternetMediaType.FromFile(string.Empty);
-            var exp = InternetMediaType.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromFile__GamesDotPgn_ApplicationXChessPgn()
-        {
-            var act = InternetMediaType.FromFile(new FileInfo("games.pgn"));
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromFile__TestDotUnknown_Unknown()
-        {
-            var act = InternetMediaType.FromFile(new FileInfo("test.unknown"));
-            var exp = InternetMediaType.Unknown;
-
-            Assert.AreEqual(exp, act);
         }
 
         #endregion
@@ -257,7 +195,7 @@ namespace Qowaiv.UnitTests.Web
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<InternetMediaType>(null, default);
+                SerializationTest.DeserializeUsingConstructor<BusinessIdentifierCode>(null, default);
             },
             "info");
         }
@@ -268,8 +206,8 @@ namespace Qowaiv.UnitTests.Web
             Assert.Catch<SerializationException>
             (() =>
             {
-                var info = new SerializationInfo(typeof(InternetMediaType), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<InternetMediaType>(info, default);
+                var info = new SerializationInfo(typeof(BusinessIdentifierCode), new System.Runtime.Serialization.FormatterConverter());
+                SerializationTest.DeserializeUsingConstructor<BusinessIdentifierCode>(info, default);
             });
         }
 
@@ -289,10 +227,10 @@ namespace Qowaiv.UnitTests.Web
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(InternetMediaType), new System.Runtime.Serialization.FormatterConverter());
+            var info = new SerializationInfo(typeof(BusinessIdentifierCode), new System.Runtime.Serialization.FormatterConverter());
             obj.GetObjectData(info, default);
 
-            Assert.AreEqual("application/x-chess-pgn", info.GetString("Value"));
+            Assert.AreEqual(TestStruct.ToString(), info.GetString("Value"));
         }
 
         [Test]
@@ -316,27 +254,28 @@ namespace Qowaiv.UnitTests.Web
         public void XmlSerialize_TestStruct_AreEqual()
         {
             var act = SerializationTest.XmlSerialize(TestStruct);
-            var exp = "application/x-chess-pgn";
+            var exp = "AEGONL2UXXX";
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<InternetMediaType>("application/x-chess-pgn");
+            var act = SerializationTest.XmlDeserialize<BusinessIdentifierCode>("AEGONL2UXXX");
             Assert.AreEqual(TestStruct, act);
         }
 
+
         [Test]
-        public void SerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
+        public void SerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -348,15 +287,15 @@ namespace Qowaiv.UnitTests.Web
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
-        public void XmlSerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
+        public void XmlSerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -368,15 +307,15 @@ namespace Qowaiv.UnitTests.Web
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
         [Test]
-        public void DataContractSerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
+        public void DataContractSerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -391,16 +330,16 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = InternetMediaType.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = InternetMediaType.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -411,16 +350,16 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = InternetMediaType.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject()
             {
                 Id = 17,
-                Obj = InternetMediaType.Empty,
+                Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -443,8 +382,8 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void FromJson_None_EmptyValue()
         {
-            var act = JsonTester.Read<InternetMediaType>();
-            var exp = InternetMediaType.Empty;
+            var act = JsonTester.Read<BusinessIdentifierCode>();
+            var exp = BusinessIdentifierCode.Empty;
 
             Assert.AreEqual(exp, act);
         }
@@ -454,14 +393,14 @@ namespace Qowaiv.UnitTests.Web
         {
             Assert.Catch<FormatException>(() =>
             {
-                JsonTester.Read<InternetMediaType>("InvalidStringValue");
+                JsonTester.Read<BusinessIdentifierCode>("InvalidStringValue");
             },
-            "Not a valid internet media type");
+            "Not a valid BIC");
         }
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<InternetMediaType>("application/x-chess-pgn");
+            var act = JsonTester.Read<BusinessIdentifierCode>("AEGONL2UXXX");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -472,7 +411,7 @@ namespace Qowaiv.UnitTests.Web
         {
             Assert.Catch<NotSupportedException>(() =>
             {
-                JsonTester.Read<InternetMediaType>(123456L);
+                JsonTester.Read<BusinessIdentifierCode>(123456L);
             },
             "JSON deserialization from an integer is not supported.");
         }
@@ -482,7 +421,7 @@ namespace Qowaiv.UnitTests.Web
         {
             Assert.Catch<NotSupportedException>(() =>
             {
-                JsonTester.Read<InternetMediaType>(1234.56);
+                JsonTester.Read<BusinessIdentifierCode>(1234.56);
             },
             "JSON deserialization from a number is not supported.");
         }
@@ -492,7 +431,7 @@ namespace Qowaiv.UnitTests.Web
         {
             Assert.Catch<NotSupportedException>(() =>
             {
-                JsonTester.Read<InternetMediaType>(new DateTime(1972, 02, 14));
+                JsonTester.Read<BusinessIdentifierCode>(new DateTime(1972, 02, 14));
             },
             "JSON deserialization from a date is not supported.");
         }
@@ -500,14 +439,14 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ToJson_DefaultValue_IsNull()
         {
-            object act = JsonTester.Write(default(InternetMediaType));
+            object act = JsonTester.Write(default(BusinessIdentifierCode));
             Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = "application/x-chess-pgn";
+            var exp = "AEGONL2UXXX";
             Assert.AreEqual(exp, act);
         }
 
@@ -518,7 +457,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ToString_Empty_StringEmpty()
         {
-            var act = InternetMediaType.Empty.ToString();
+            var act = BusinessIdentifierCode.Empty.ToString();
             var exp = "";
             Assert.AreEqual(exp, act);
         }
@@ -526,8 +465,8 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ToString_Unknown_QuestionMark()
         {
-            var act = InternetMediaType.Unknown.ToString();
-            var exp = "application/octet-stream";
+            var act = BusinessIdentifierCode.Unknown.ToString();
+            var exp = "?";
             Assert.AreEqual(exp, act);
         }
 
@@ -535,7 +474,7 @@ namespace Qowaiv.UnitTests.Web
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'application/x-chess-pgn', format: 'Unit Test Format'";
+            var exp = "Unit Test Formatter, value: 'AEGONL2UXXX', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);
         }
@@ -543,36 +482,42 @@ namespace Qowaiv.UnitTests.Web
         public void ToString_TestStruct_ComplexPattern()
         {
             var act = TestStruct.ToString("");
-            var exp = "application/x-chess-pgn";
+            var exp = "AEGONL2UXXX";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void DebuggerDisplay_DebugToString_HasAttribute()
+        {
+            DebuggerDisplayAssert.HasAttribute(typeof(BusinessIdentifierCode));
         }
 
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("Internet Media Type: (empty)", default(InternetMediaType));
+            DebuggerDisplayAssert.HasResult("BIC: (empty)", default(BusinessIdentifierCode));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("application/octet-stream", InternetMediaType.Unknown);
+            DebuggerDisplayAssert.HasResult("BIC: (unknown)", BusinessIdentifierCode.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("application/x-chess-pgn", TestStruct);
+            DebuggerDisplayAssert.HasResult("BIC: AEGONL2UXXX", TestStruct);
         }
 
         #endregion
 
         #region IEquatable tests
 
-        /// <summary>GetHash should not fail for InternetMediaType.Empty.</summary>
+        /// <summary>GetHash should not fail for BusinessIdentifierCode.Empty.</summary>
         [Test]
-        public void GetHash_Empty_0()
+        public void GetHash_Empty_Hash()
         {
-            Assert.AreEqual(0, InternetMediaType.Empty.GetHashCode());
+            Assert.AreEqual(0, BusinessIdentifierCode.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
@@ -585,14 +530,14 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
-            Assert.IsTrue(InternetMediaType.Empty.Equals(InternetMediaType.Empty));
+            Assert.IsTrue(BusinessIdentifierCode.Empty.Equals(BusinessIdentifierCode.Empty));
         }
 
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            var l = InternetMediaType.Parse("application/x-chess-pgn");
-            var r = InternetMediaType.Parse("application/X-chess-PGN");
+            var l = BusinessIdentifierCode.Parse("AEGONL2UXXX", CultureInfo.InvariantCulture);
+            var r = BusinessIdentifierCode.Parse("AEgonL2Uxxx", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
         }
@@ -606,13 +551,13 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(TestStruct.Equals(InternetMediaType.Empty));
+            Assert.IsFalse(TestStruct.Equals(BusinessIdentifierCode.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(InternetMediaType.Empty.Equals(TestStruct));
+            Assert.IsFalse(BusinessIdentifierCode.Empty.Equals(TestStruct));
         }
 
         [Test]
@@ -653,33 +598,33 @@ namespace Qowaiv.UnitTests.Web
 
         #region IComparable tests
 
-        /// <summary>Orders a list of internet media types ascending.</summary>
+        /// <summary>Orders a list of BICs ascending.</summary>
         [Test]
-        public void OrderBy_InternetMediaType_AreEqual()
+        public void OrderBy_BusinessIdentifierCode_AreEqual()
         {
-            var item0 = InternetMediaType.Parse("audio/mp3");
-            var item1 = InternetMediaType.Parse("image/jpeg");
-            var item2 = InternetMediaType.Parse("text/x-markdown");
-            var item3 = InternetMediaType.Parse("video/quicktime");
+            var item0 = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+            var item1 = BusinessIdentifierCode.Parse("CEBUNL2U");
+            var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
+            var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<InternetMediaType>() { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
-            var exp = new List<InternetMediaType>() { InternetMediaType.Empty, InternetMediaType.Empty, item0, item1, item2, item3 };
+            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
         }
 
-        /// <summary>Orders a list of internet media types descending.</summary>
+        /// <summary>Orders a list of BICs descending.</summary>
         [Test]
-        public void OrderByDescending_InternetMediaType_AreEqual()
+        public void OrderByDescending_BusinessIdentifierCode_AreEqual()
         {
-            var item0 = InternetMediaType.Parse("audio/mp3");
-            var item1 = InternetMediaType.Parse("image/jpeg");
-            var item2 = InternetMediaType.Parse("text/x-markdown");
-            var item3 = InternetMediaType.Parse("video/quicktime");
+            var item0 = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+            var item1 = BusinessIdentifierCode.Parse("CEBUNL2U");
+            var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
+            var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<InternetMediaType>() { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
-            var exp = new List<InternetMediaType>() { item3, item2, item1, item0, InternetMediaType.Empty, InternetMediaType.Empty };
+            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode>() { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -708,7 +653,7 @@ namespace Qowaiv.UnitTests.Web
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Internet media type"
+                "Argument must be a BIC"
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -722,23 +667,24 @@ namespace Qowaiv.UnitTests.Web
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Internet media type"
+                "Argument must be a BIC"
             );
         }
+
         #endregion
 
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToInternetMediaType_AreEqual()
+        public void Explicit_StringToBusinessIdentifierCode_AreEqual()
         {
             var exp = TestStruct;
-            var act = (InternetMediaType)TestStruct.ToString();
+            var act = (BusinessIdentifierCode)TestStruct.ToString();
 
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void Explicit_InternetMediaTypeToString_AreEqual()
+        public void Explicit_BusinessIdentifierCodeToString_AreEqual()
         {
             var exp = TestStruct.ToString();
             var act = (string)TestStruct;
@@ -754,164 +700,116 @@ namespace Qowaiv.UnitTests.Web
         public void Length_DefaultValue_0()
         {
             var exp = 0;
-            var act = InternetMediaType.Empty.Length;
+            var act = BusinessIdentifierCode.Empty.Length;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void Length_TestStruct_23()
+        public void Length_Unknown_0()
         {
-            var exp = 23;
+            var exp = 0;
+            var act = BusinessIdentifierCode.Unknown.Length;
+            Assert.AreEqual(exp, act);
+        }
+        [Test]
+        public void Length_TestStruct_IntValue()
+        {
+            var exp = 11;
             var act = TestStruct.Length;
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void TopLevel_DefaultValue_0()
+        public void BusinessCode_DefaultValue_StringEmpty()
         {
-            var exp = string.Empty;
-            var act = InternetMediaType.Empty.TopLevel;
+            var exp = "";
+            var act = BusinessIdentifierCode.Empty.Business;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void TopLevel_TextHtml_Text()
+        public void BusinessCode_Unknown_StringEmpty()
         {
-            var exp = "text";
-            var act = TextHtml.TopLevel;
+            var exp = "";
+            var act = BusinessIdentifierCode.Unknown.Business;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void TopLevel_XConferenceXCooltalk_XConference()
+        public void BusinessCode_TestStruct_AEGO()
         {
-            var exp = "x-conference";
-            var act = XConferenceXCooltalk.TopLevel;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void TopLevel_TestStruct_Application()
-        {
-            var exp = "application";
-            var act = TestStruct.TopLevel;
+            var exp = "AEGO";
+            var act = TestStruct.Business;
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void TopLevelType_DefaultValue_0()
+        public void Country_DefaultValue_CountryEmpty()
         {
-            var exp = InternetMediaTopLevelType.None;
-            var act = InternetMediaType.Empty.TopLevelType;
+            var exp = Country.Empty;
+            var act = BusinessIdentifierCode.Empty.Country;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void TopLevelType_TextHtml_Text()
+        public void Country_Unknown_CountryUnknown()
         {
-            var exp = InternetMediaTopLevelType.Text;
-            var act = TextHtml.TopLevelType;
+            var exp = Country.Unknown;
+            var act = BusinessIdentifierCode.Unknown.Country;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void TopLevelType_XConferenceXCooltalk_Unregistered()
+        public void Country_TestStruct_NL()
         {
-            var exp = InternetMediaTopLevelType.Unregistered;
-            var act = XConferenceXCooltalk.TopLevelType;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void TopLevelType_TestStruct_Application()
-        {
-            var exp = InternetMediaTopLevelType.Application;
-            var act = TestStruct.TopLevelType;
+            var exp = Country.NL;
+            var act = TestStruct.Country;
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void Subtype_DefaultValue_0()
+        public void LocationCode_DefaultValue_StringEmpty()
         {
-            var exp = string.Empty;
-            var act = InternetMediaType.Empty.Subtype;
+            var exp = "";
+            var act = BusinessIdentifierCode.Empty.Location;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void Subtype_TextHtml_Html()
+        public void LocationCode_Unknown_StringEmpty()
         {
-            var exp = "html";
-            var act = TextHtml.Subtype;
+            var exp = "";
+            var act = BusinessIdentifierCode.Unknown.Location;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void Subtype_XConferenceXCooltalk_XCooltalk()
+        public void LocationCode_TestStruct_NL()
         {
-            var exp = "x-cooltalk";
-            var act = XConferenceXCooltalk.Subtype;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Subtype_TestStruct_XChessPgn()
-        {
-            var exp = "x-chess-pgn";
-            var act = TestStruct.Subtype;
+            var exp = "2U";
+            var act = TestStruct.Location;
             Assert.AreEqual(exp, act);
         }
 
         [Test]
-        public void IsRegistered_DefaultValue_IsFalse()
+        public void BranchCode_DefaultValue_StringEmpty()
         {
-            var exp = false;
-            var act = InternetMediaType.Empty.IsRegistered;
+            var exp = "";
+            var act = BusinessIdentifierCode.Empty.Branch;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void IsRegistered_TextHtml_IsTrue()
+        public void BranchCode_Unknown_StringEmpty()
         {
-            var exp = true;
-            var act = TextHtml.IsRegistered;
+            var exp = "";
+            var act = BusinessIdentifierCode.Unknown.Branch;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void IsRegistered_XConferenceXCooltalk_IsFalse()
+        public void BranchCode_TestStruct_NL()
         {
-            var exp = false;
-            var act = XConferenceXCooltalk.IsRegistered;
+            var exp = "XXX";
+            var act = TestStruct.Branch;
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void IsRegistered_TestStruct_IsFalse()
+        public void BranchCode_AEGONL2U_StringEmpty()
         {
-            var exp = false;
-            var act = TestStruct.IsRegistered;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void IsRegistered_VideoSlashXDotTest_IsFalse()
-        {
-            var mime = InternetMediaType.Parse("video/x.test");
-            var exp = false;
-            var act = mime.IsRegistered;
-            Assert.AreEqual(exp, act);
-        }
-
-
-        [Test]
-        public void Suffix_DefaultValue_None()
-        {
-            var exp = InternetMediaSuffixType.None;
-            var act = InternetMediaType.Empty.Suffix;
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void Suffix_TestStruct_None()
-        {
-            var exp = InternetMediaSuffixType.None;
-            var act = TestStruct.Suffix;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Suffix_ApplicationAtomXml_Xml()
-        {
-            var mime = InternetMediaType.Parse("application/atom+xml");
-
-            var exp = InternetMediaSuffixType.xml;
-            var act = mime.Suffix;
+            var exp = "";
+            var act = BusinessIdentifierCode.Parse("AEGONL2U").Branch;
             Assert.AreEqual(exp, act);
         }
 
@@ -920,49 +818,50 @@ namespace Qowaiv.UnitTests.Web
         #region Type converter tests
 
         [Test]
-        public void ConverterExists_InternetMediaType_IsTrue()
+        public void ConverterExists_BusinessIdentifierCode_IsTrue()
         {
-            TypeConverterAssert.ConverterExists(typeof(InternetMediaType));
+            TypeConverterAssert.ConverterExists(typeof(BusinessIdentifierCode));
         }
 
         [Test]
-        public void CanNotConvertFromInt32_InternetMediaType_IsTrue()
+        public void CanNotConvertFromInt32_BusinessIdentifierCode_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(InternetMediaType), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_InternetMediaType_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(InternetMediaType), typeof(Int32));
+            TypeConverterAssert.CanNotConvertFrom(typeof(BusinessIdentifierCode), typeof(Int32));
         }
 
         [Test]
-        public void CanConvertFromString_InternetMediaType_IsTrue()
+        public void CanNotConvertToInt32_BusinessIdentifierCode_IsTrue()
         {
-            TypeConverterAssert.CanConvertFromString(typeof(InternetMediaType));
+            TypeConverterAssert.CanNotConvertTo(typeof(BusinessIdentifierCode), typeof(Int32));
         }
 
         [Test]
-        public void CanConvertToString_InternetMediaType_IsTrue()
+        public void CanConvertFromString_BusinessIdentifierCode_IsTrue()
         {
-            TypeConverterAssert.CanConvertToString(typeof(InternetMediaType));
+            TypeConverterAssert.CanConvertFromString(typeof(BusinessIdentifierCode));
         }
 
         [Test]
-        public void ConvertFrom_StringNull_InternetMediaTypeEmpty()
+        public void CanConvertToString_BusinessIdentifierCode_IsTrue()
+        {
+            TypeConverterAssert.CanConvertToString(typeof(BusinessIdentifierCode));
+        }
+
+        [Test]
+        public void ConvertFrom_StringNull_BusinessIdentifierCodeEmpty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(InternetMediaType.Empty, (string)null);
+                TypeConverterAssert.ConvertFromEquals(BusinessIdentifierCode.Empty, (string)null);
             }
         }
 
         [Test]
-        public void ConvertFrom_StringEmpty_InternetMediaTypeEmpty()
+        public void ConvertFrom_StringEmpty_BusinessIdentifierCodeEmpty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(InternetMediaType.Empty, string.Empty);
+                TypeConverterAssert.ConvertFromEquals(BusinessIdentifierCode.Empty, string.Empty);
             }
         }
 
@@ -976,9 +875,9 @@ namespace Qowaiv.UnitTests.Web
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_InternetMediaType_Successful()
+        public void ConvertFromInstanceDescriptor_BusinessIdentifierCode_Successful()
         {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(InternetMediaType));
+            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(BusinessIdentifierCode));
         }
 
         [Test]
@@ -992,29 +891,52 @@ namespace Qowaiv.UnitTests.Web
 
         #endregion
 
-        #region IsValid tests
+        #region IsValid
 
-        [Test]
-        public void IsValid_Data_IsFalse()
+        [TestCase("1AAANL01", "Digit in first four characters")]
+        [TestCase("AAAANLBB1", "Branch length of 1")]
+        [TestCase("AAAANLBB12", "Branch length of 2")]
+        [TestCase("ABCDXX01", "Digit in country code")]
+        [TestCase("ABCDXX01", "None existing country")]
+        [TestCase("AAAANLBË", "Diacritic")]
+        [TestCase(null, "(String)null")]
+        [TestCase("", "String.Empty")]
+        public void IsInvalid(string str, string message)
         {
-            Assert.IsFalse(InternetMediaType.IsValid("test/d"), "Complex");
-            Assert.IsFalse(InternetMediaType.IsValid((String)null), "(String)null");
-            Assert.IsFalse(InternetMediaType.IsValid(string.Empty), "string.Empty");
+            Assert.IsFalse(BusinessIdentifierCode.IsValid(str), message);
         }
-        [Test]
-        public void IsValid_Data_IsTrue()
+
+        [TestCase("PSTBNL21")]
+        [TestCase("ABNANL2A")]
+        [TestCase("BACBBEBB")]
+        [TestCase("GEBABEBB36A")]
+        [TestCase("DEUTDEFF")]
+        [TestCase("NEDSZAJJ")]
+        [TestCase("DABADKKK")]
+        [TestCase("UNCRIT2B912")]
+        [TestCase("DSBACNBXSHA")]
+        public void IsValid(string str)
         {
-            Assert.IsTrue(InternetMediaType.IsValid("application/x-chess-pgn"));
-            Assert.IsTrue(InternetMediaType.IsValid("VIDEO/Mp3"));
+            Assert.IsTrue(BusinessIdentifierCode.IsValid(str));
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("PSTBNL21"), "PSTBNL21");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("ABNANL2A"), "ABNANL2A");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("BACBBEBB"), "BACBBEBB");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("GEBABEBB36A"), "GEBABEBB36A");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("DEUTDEFF"), "DEUTDEFF");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("NEDSZAJJ"), "NEDSZAJJ");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("DABADKKK"), "DABADKKK");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("UNCRIT2B912"), "UNCRIT2B912");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid("DSBACNBXSHA"), "DSBACNBXSHA");
         }
+
         #endregion
     }
 
     [Serializable]
-    public class InternetMediaTypeSerializeObject
+    public class BusinessIdentifierCodeSerializeObject
     {
         public int Id { get; set; }
-        public InternetMediaType Obj { get; set; }
+        public BusinessIdentifierCode Obj { get; set; }
         public DateTime Date { get; set; }
     }
 }

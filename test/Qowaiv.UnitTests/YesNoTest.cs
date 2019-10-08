@@ -280,13 +280,20 @@ namespace Qowaiv.Fiancial.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "yes";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<YesNo>("yes");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -425,8 +432,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<YesNo>
-            (TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<YesNo>("yes");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -462,19 +468,16 @@ namespace Qowaiv.Fiancial.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(YesNo));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
-        public void ToJson_TestStruct_AreEqual()
+        public void ToJson_Yes_AreEqual()
         {
-            var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var act = JsonTester.Write(YesNo.Yes);
+            var exp = "yes";
             Assert.AreEqual(exp, act);
         }
 

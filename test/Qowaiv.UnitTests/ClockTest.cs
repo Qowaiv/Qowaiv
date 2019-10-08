@@ -77,20 +77,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void NowWithOffset_WestEuropeanWithoutDaylightSaving_Plus1()
         {
-            using (Clock.SetTimeAndTimeZoneForCurrentThread(() => new DateTime(2019, 02, 14), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time")))
+            var name = nameof(NowWithOffset_WestEuropeanWithoutDaylightSaving_Plus1);
+            var timezone = TimeZoneInfo.CreateCustomTimeZone(name, TimeSpan.FromHours(+1), name, name);
+
+            using (Clock.SetTimeAndTimeZoneForCurrentThread(() => new DateTime(2019, 02, 14), timezone))
             {
                 var act = Clock.NowWithOffset();
-                var exp = new DateTimeOffset(new LocalDateTime(2019, 02, 14, 1, 0, 0), TimeSpan.FromHours(+1));
-                Assert.AreEqual(exp, act);
-            }
-        }
-        [Test]
-        public void NowWithOffset_WestEuropeanWithDaylightSaving_Plus2()
-        {
-            using (Clock.SetTimeAndTimeZoneForCurrentThread(() => new DateTime(2019, 04, 01), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time")))
-            {
-                var act = Clock.NowWithOffset();
-                var exp = new DateTimeOffset(new LocalDateTime(2019, 04, 01, 2, 0, 0), TimeSpan.FromHours(+2));
+                var exp = new DateTimeOffset(new DateTime(2019, 02, 14, 1, 0, 0, DateTimeKind.Unspecified), TimeSpan.FromHours(+1));
                 Assert.AreEqual(exp, act);
             }
         }

@@ -188,13 +188,20 @@ namespace Qowaiv.UnitTests.Statistics
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = EloTest.TestStruct;
-            var exp = EloTest.TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "1732.4";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Elo>("1732.4");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -312,7 +319,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Elo>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Elo>("1732.4");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -321,7 +328,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            Elo act = JsonTester.Read<Elo>((Int64)TestStruct);
+            Elo act = JsonTester.Read<Elo>(1732L);
             Elo exp = 1732;
 
             Assert.AreEqual(exp, act);
@@ -351,7 +358,6 @@ namespace Qowaiv.UnitTests.Statistics
         {
             var act = JsonTester.Write(TestStruct);
             var exp = 1732.4000000000001;
-
             Assert.AreEqual(exp, act);
         }
 

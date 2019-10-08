@@ -181,14 +181,22 @@ namespace Qowaiv.UnitTests.Financial
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "EUR42.17";
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Money>("EUR42.17");
+            Assert.AreEqual(TestStruct, act);
+        }
+
 
         [Test]
         public void SerializeDeserialize_MoneySerializeObject_AreEqual()
@@ -325,7 +333,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Money>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Money>("EUR 42.17");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -363,8 +371,7 @@ namespace Qowaiv.UnitTests.Financial
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "€42.17";
             Assert.AreEqual(exp, act);
         }
 

@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Schema;
@@ -20,7 +21,8 @@ namespace Qowaiv
 {
     /// <summary>Represents a Percentage.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Decimal))]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
+    [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9])?%")]
     [TypeConverter(typeof(PercentageTypeConverter))]
     public struct Percentage : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
     {
@@ -54,52 +56,42 @@ namespace Qowaiv
         #region Percentage manipulation
 
         /// <summary>Increases the percentage with one percent.</summary>
-        public Percentage Increment()
-        {
-            return Add(One);
-        }
+        public Percentage Increment() => Add(One);
+
         /// <summary>Decreases the percentage with one percent.</summary>
-        public Percentage Decrement()
-        {
-            return Subtract(One);
-        }
+        public Percentage Decrement() => Subtract(One);
 
         /// <summary>Pluses the percentage.</summary>
-        public Percentage Plus()
-        {
-            return +m_Value;
-        }
+        public Percentage Plus() => +m_Value;
+
         /// <summary>Negates the percentage.</summary>
-        public Percentage Negate()
-        {
-            return -m_Value;
-        }
+        public Percentage Negate() => -m_Value;
 
         /// <summary>Gets a percentage of the current percentage.</summary>
         /// <param name="p">
         /// The percentage to get.
         /// </param>
-        public Percentage Multiply(Percentage p) { return m_Value * p.m_Value; }
+        public Percentage Multiply(Percentage p) => m_Value * p.m_Value;
 
         /// <summary>Divides the current percentage by a specified percentage.</summary>
         /// <param name="p">
         /// The percentage to devides to..
         /// </param>
-        public Percentage Divide(Percentage p) { return m_Value / p.m_Value; }
+        public Percentage Divide(Percentage p) => m_Value / p.m_Value;
 
         /// <summary>Adds a percentage to the current percentage.
         /// </summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
-        public Percentage Add(Percentage p) { return m_Value + p.m_Value; }
+        public Percentage Add(Percentage p) => m_Value + p.m_Value;
 
         /// <summary>Subtracts a percentage from the current percentage.
         /// </summary>
         /// <param name="p">
         /// The percentage to Subtract.
         /// </param>
-        public Percentage Subtract(Percentage p) { return m_Value - p.m_Value; }
+        public Percentage Subtract(Percentage p) => m_Value - p.m_Value;
 
         #region Multiply
 
@@ -108,43 +100,21 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Percentage Multiply(decimal factor) { return m_Value * factor; }
+        public Percentage Multiply(decimal factor) => m_Value * factor;
 
         /// <summary>Multiplies the percentage with a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Percentage Multiply(double factor) { return Multiply((decimal)factor); }
+        public Percentage Multiply(double factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the percentage with a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Percentage Multiply(float factor) { return Multiply((decimal)factor); }
-
-
-        /// <summary>Multiplies the percentage with a specified factor.
-        /// </summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public Percentage Multiply(long factor) { return Multiply((decimal)factor); }
-
-        /// <summary>Multiplies the percentage with a specified factor.
-        /// </summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public Percentage Multiply(int factor) { return Multiply((decimal)factor); }
-
-        /// <summary>Multiplies the percentage with a specified factor.
-        /// </summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public Percentage Multiply(short factor) { return Multiply((decimal)factor); }
+        public Percentage Multiply(float factor) => Multiply((decimal)factor);
 
 
         /// <summary>Multiplies the percentage with a specified factor.
@@ -152,8 +122,22 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        [CLSCompliant(false)]
-        public Percentage Multiply(ulong factor) { return Multiply((decimal)factor); }
+        public Percentage Multiply(long factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the percentage with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Percentage Multiply(int factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the percentage with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Percentage Multiply(short factor) => Multiply((decimal)factor);
+
 
         /// <summary>Multiplies the percentage with a specified factor.
         /// </summary>
@@ -161,7 +145,7 @@ namespace Qowaiv
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public Percentage Multiply(uint factor) { return Multiply((decimal)factor); }
+        public Percentage Multiply(ulong factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the percentage with a specified factor.
         /// </summary>
@@ -169,7 +153,15 @@ namespace Qowaiv
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public Percentage Multiply(ushort factor) { return Multiply((decimal)factor); }
+        public Percentage Multiply(uint factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the percentage with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Percentage Multiply(ushort factor) => Multiply((decimal)factor);
 
         #endregion
 
@@ -180,43 +172,21 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Percentage Divide(decimal factor) { return m_Value / factor; }
+        public Percentage Divide(decimal factor) => m_Value / factor;
 
         /// <summary>Divide the percentage by a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Percentage Divide(double factor) { return Divide((decimal)factor); }
+        public Percentage Divide(double factor) => Divide((decimal)factor);
 
         /// <summary>Divide the percentage by a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Percentage Divide(float factor) { return Divide((decimal)factor); }
-
-
-        /// <summary>Divide the percentage by a specified factor.
-        /// </summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public Percentage Divide(long factor) { return Divide((decimal)factor); }
-
-        /// <summary>Divide the percentage by a specified factor.
-        /// </summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public Percentage Divide(int factor) { return Divide((decimal)factor); }
-
-        /// <summary>Divide the percentage by a specified factor.
-        /// </summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public Percentage Divide(short factor) { return Divide((decimal)factor); }
+        public Percentage Divide(float factor) => Divide((decimal)factor);
 
 
         /// <summary>Divide the percentage by a specified factor.
@@ -224,8 +194,22 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        [CLSCompliant(false)]
-        public Percentage Divide(ulong factor) { return Divide((decimal)factor); }
+        public Percentage Divide(long factor) => Divide((decimal)factor);
+
+        /// <summary>Divide the percentage by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Percentage Divide(int factor) => Divide((decimal)factor);
+
+        /// <summary>Divide the percentage by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Percentage Divide(short factor) => Divide((decimal)factor);
+
 
         /// <summary>Divide the percentage by a specified factor.
         /// </summary>
@@ -233,7 +217,7 @@ namespace Qowaiv
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public Percentage Divide(uint factor) { return Divide((decimal)factor); }
+        public Percentage Divide(ulong factor) => Divide((decimal)factor);
 
         /// <summary>Divide the percentage by a specified factor.
         /// </summary>
@@ -241,176 +225,285 @@ namespace Qowaiv
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public Percentage Divide(ushort factor) { return Divide((decimal)factor); }
+        public Percentage Divide(uint factor) => Divide((decimal)factor);
+
+        /// <summary>Divide the percentage by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Percentage Divide(ushort factor) => Divide((decimal)factor);
 
         #endregion
 
         /// <summary>Increases the percentage with one percent.</summary>
-        public static Percentage operator ++(Percentage p) { return p.Increment(); }
+        public static Percentage operator ++(Percentage p) => p.Increment();
         /// <summary>Decreases the percentage with one percent.</summary>
-        public static Percentage operator --(Percentage p) { return p.Decrement(); }
+        public static Percentage operator --(Percentage p) => p.Decrement();
 
         /// <summary>Unitary plusses the percentage.</summary>
-        public static Percentage operator +(Percentage p) { return p.Plus(); }
+        public static Percentage operator +(Percentage p) => p.Plus();
         /// <summary>Negates the percentage.</summary>
-        public static Percentage operator -(Percentage p) { return p.Negate(); }
+        public static Percentage operator -(Percentage p) => p.Negate();
 
         /// <summary>Multiplies the left and the right percentage.</summary>
-        public static Percentage operator *(Percentage l, Percentage r) { return l.Multiply(r); }
+        public static Percentage operator *(Percentage l, Percentage r) => l.Multiply(r);
         /// <summary>Divides the left by the right percentage.</summary>
-        public static Percentage operator /(Percentage l, Percentage r) { return l.Divide(r); }
+        public static Percentage operator /(Percentage l, Percentage r) => l.Divide(r);
         /// <summary>Adds the left and the right percentage.</summary>
-        public static Percentage operator +(Percentage l, Percentage r) { return l.Add(r); }
+        public static Percentage operator +(Percentage l, Percentage r) => l.Add(r);
         /// <summary>Subtracts the right from the left percentage.</summary>
-        public static Percentage operator -(Percentage l, Percentage r) { return l.Subtract(r); }
+        public static Percentage operator -(Percentage l, Percentage r) => l.Subtract(r);
 
         /// <summary>Multiplies the percentage with the factor.</summary>
-        public static Percentage operator *(Percentage p, decimal factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, decimal factor) => p.Multiply(factor);
         /// <summary>Multiplies the percentage with the factor.</summary>
-        public static Percentage operator *(Percentage p, double factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, double factor) => p.Multiply(factor);
         /// <summary>Multiplies the percentage with the factor.</summary>
-        public static Percentage operator *(Percentage p, float factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, float factor) => p.Multiply(factor);
 
         /// <summary>Multiplies the percentage with the factor.</summary>
-        public static Percentage operator *(Percentage p, long factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, long factor) => p.Multiply(factor);
         /// <summary>Multiplies the percentage with the factor.</summary>
-        public static Percentage operator *(Percentage p, int factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, int factor) => p.Multiply(factor);
         /// <summary>Multiplies the percentage with the factor.</summary>
-        public static Percentage operator *(Percentage p, short factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, short factor) => p.Multiply(factor);
 
         /// <summary>Multiplies the percentage with the factor.</summary>
         [CLSCompliant(false)]
-        public static Percentage operator *(Percentage p, ulong factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, ulong factor) => p.Multiply(factor);
         /// <summary>Multiplies the percentage with the factor.</summary>
         [CLSCompliant(false)]
-        public static Percentage operator *(Percentage p, uint factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, uint factor) => p.Multiply(factor);
         /// <summary>Multiplies the percentage with the factor.</summary>
         [CLSCompliant(false)]
-        public static Percentage operator *(Percentage p, ushort factor) { return p.Multiply(factor); }
+        public static Percentage operator *(Percentage p, ushort factor) => p.Multiply(factor);
 
         /// <summary>Divides the percentage by the factor.</summary>
-        public static Percentage operator /(Percentage p, decimal factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, decimal factor) => p.Divide(factor);
         /// <summary>Divides the percentage by the factor.</summary>
-        public static Percentage operator /(Percentage p, double factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, double factor) => p.Divide(factor);
         /// <summary>Divides the percentage by the factor.</summary>
-        public static Percentage operator /(Percentage p, float factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, float factor) => p.Divide(factor);
 
         /// <summary>Divides the percentage by the factor.</summary>
-        public static Percentage operator /(Percentage p, long factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, long factor) => p.Divide(factor);
         /// <summary>Divides the percentage by the factor.</summary>
-        public static Percentage operator /(Percentage p, int factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, int factor) => p.Divide(factor);
         /// <summary>Divides the percentage by the factor.</summary>
-        public static Percentage operator /(Percentage p, short factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, short factor) => p.Divide(factor);
 
         /// <summary>Divides the percentage by the factor.</summary>
         [CLSCompliant(false)]
-        public static Percentage operator /(Percentage p, ulong factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, ulong factor) => p.Divide(factor);
         /// <summary>Divides the percentage by the factor.</summary>
         [CLSCompliant(false)]
-        public static Percentage operator /(Percentage p, uint factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, uint factor) => p.Divide(factor);
         /// <summary>Divides the percentage by the factor.</summary>
         [CLSCompliant(false)]
-        public static Percentage operator /(Percentage p, ushort factor) { return p.Divide(factor); }
+        public static Percentage operator /(Percentage p, ushort factor) => p.Divide(factor);
 
         #endregion
 
         #region Number manipulation
 
         /// <summary>Gets the percentage of the Decimal.</summary>
-        public static decimal operator *(decimal d, Percentage p) { return d.Multiply(p); }
+        public static decimal operator *(decimal d, Percentage p) => d.Multiply(p);
         /// <summary>Gets the percentage of the Double.</summary>
-        public static double operator *(double d, Percentage p) { return d.Multiply(p); }
+        public static double operator *(double d, Percentage p) => d.Multiply(p);
         /// <summary>Gets the percentage of the Single.</summary>
-        public static float operator *(float d, Percentage p) { return d.Multiply(p); }
+        public static float operator *(float d, Percentage p) => d.Multiply(p);
 
         /// <summary>Gets the percentage of the Int64.</summary>
-        public static long operator *(long d, Percentage p) { return d.Multiply(p); }
+        public static long operator *(long d, Percentage p) => d.Multiply(p);
         /// <summary>Gets the percentage of the Int32.</summary>
-        public static int operator *(int d, Percentage p) { return d.Multiply(p); }
+        public static int operator *(int d, Percentage p) => d.Multiply(p);
         /// <summary>Gets the percentage of the Int16.</summary>
-        public static short operator *(short d, Percentage p) { return d.Multiply(p); }
+        public static short operator *(short d, Percentage p) => d.Multiply(p);
 
         /// <summary>Gets the percentage of the UInt64.</summary>
         [CLSCompliant(false)]
-        public static ulong operator *(ulong d, Percentage p) { return d.Multiply(p); }
+        public static ulong operator *(ulong d, Percentage p) => d.Multiply(p);
         /// <summary>Gets the percentage of the UInt32.</summary>
         [CLSCompliant(false)]
-        public static uint operator *(uint d, Percentage p) { return d.Multiply(p); }
+        public static uint operator *(uint d, Percentage p) => d.Multiply(p);
         /// <summary>Gets the percentage of the UInt16.</summary>
         [CLSCompliant(false)]
-        public static ushort operator *(ushort d, Percentage p) { return d.Multiply(p); }
+        public static ushort operator *(ushort d, Percentage p) => d.Multiply(p);
 
         /// <summary>Divides the Decimal by the percentage.</summary>
-        public static decimal operator /(decimal d, Percentage p) { return d.Divide(p); }
+        public static decimal operator /(decimal d, Percentage p) => d.Divide(p);
         /// <summary>Divides the Double by the percentage.</summary>
-        public static double operator /(double d, Percentage p) { return d.Divide(p); }
+        public static double operator /(double d, Percentage p) => d.Divide(p);
         /// <summary>Divides the Single by the percentage.</summary>
-        public static float operator /(float d, Percentage p) { return d.Divide(p); }
+        public static float operator /(float d, Percentage p) => d.Divide(p);
 
         /// <summary>Divides the Int64 by the percentage.</summary>
-        public static long operator /(long d, Percentage p) { return d.Divide(p); }
+        public static long operator /(long d, Percentage p) => d.Divide(p);
         /// <summary>Divides the Int32 by the percentage.</summary>
-        public static int operator /(int d, Percentage p) { return d.Divide(p); }
+        public static int operator /(int d, Percentage p) => d.Divide(p);
         /// <summary>Divides the Int16 by the percentage.</summary>
-        public static short operator /(short d, Percentage p) { return d.Divide(p); }
+        public static short operator /(short d, Percentage p) => d.Divide(p);
 
         /// <summary>Divides the UInt64 by the percentage.</summary>
         [CLSCompliant(false)]
-        public static ulong operator /(ulong d, Percentage p) { return d.Divide(p); }
+        public static ulong operator /(ulong d, Percentage p) => d.Divide(p);
         /// <summary>Divides the UInt32 by the percentage.</summary>
         [CLSCompliant(false)]
-        public static uint operator /(uint d, Percentage p) { return d.Divide(p); }
+        public static uint operator /(uint d, Percentage p) => d.Divide(p);
         /// <summary>Divides the UInt16 by the percentage.</summary>
         [CLSCompliant(false)]
-        public static ushort operator /(ushort d, Percentage p) { return d.Divide(p); }
+        public static ushort operator /(ushort d, Percentage p) => d.Divide(p);
 
         /// <summary>Adds the percentage to the Decimal.</summary>
-        public static decimal operator +(decimal d, Percentage p) { return d.Add(p); }
+        public static decimal operator +(decimal d, Percentage p) => d.Add(p);
         /// <summary>Adds the percentage to the Double.</summary>
-        public static double operator +(double d, Percentage p) { return d.Add(p); }
+        public static double operator +(double d, Percentage p) => d.Add(p);
         /// <summary>Adds the percentage to the Single.</summary>
-        public static float operator +(float d, Percentage p) { return d.Add(p); }
+        public static float operator +(float d, Percentage p) => d.Add(p);
 
         /// <summary>Adds the percentage to the Int64.</summary>
-        public static long operator +(long d, Percentage p) { return d.Add(p); }
+        public static long operator +(long d, Percentage p) => d.Add(p);
         /// <summary>Adds the percentage to the Int32.</summary>
-        public static int operator +(int d, Percentage p) { return d.Add(p); }
+        public static int operator +(int d, Percentage p) => d.Add(p);
         /// <summary>Adds the percentage to the Int16.</summary>
-        public static short operator +(short d, Percentage p) { return d.Add(p); }
+        public static short operator +(short d, Percentage p) => d.Add(p);
 
         /// <summary>Adds the percentage to the UInt64.</summary>
         [CLSCompliant(false)]
-        public static ulong operator +(ulong d, Percentage p) { return d.Add(p); }
+        public static ulong operator +(ulong d, Percentage p) => d.Add(p);
         /// <summary>Adds the percentage to the UInt32.</summary>
         [CLSCompliant(false)]
-        public static uint operator +(uint d, Percentage p) { return d.Add(p); }
+        public static uint operator +(uint d, Percentage p) => d.Add(p);
         /// <summary>Adds the percentage to the UInt16.</summary>
         [CLSCompliant(false)]
-        public static ushort operator +(ushort d, Percentage p) { return d.Add(p); }
+        public static ushort operator +(ushort d, Percentage p) => d.Add(p);
 
         /// <summary>Subtracts the percentage to the Decimal.</summary>
-        public static decimal operator -(decimal d, Percentage p) { return d.Subtract(p); }
+        public static decimal operator -(decimal d, Percentage p) => d.Subtract(p);
         /// <summary>Subtracts the percentage to the Double.</summary>
-        public static double operator -(double d, Percentage p) { return d.Subtract(p); }
+        public static double operator -(double d, Percentage p) => d.Subtract(p);
         /// <summary>Subtracts the percentage to the Single.</summary>
-        public static float operator -(float d, Percentage p) { return d.Subtract(p); }
+        public static float operator -(float d, Percentage p) => d.Subtract(p);
 
         /// <summary>Subtracts the percentage to the Int64.</summary>
-        public static long operator -(long d, Percentage p) { return d.Subtract(p); }
+        public static long operator -(long d, Percentage p) => d.Subtract(p);
         /// <summary>Subtracts the percentage to the Int32.</summary>
-        public static int operator -(int d, Percentage p) { return d.Subtract(p); }
+        public static int operator -(int d, Percentage p) => d.Subtract(p);
         /// <summary>Subtracts the percentage to the Int16.</summary>
-        public static short operator -(short d, Percentage p) { return d.Subtract(p); }
+        public static short operator -(short d, Percentage p) => d.Subtract(p);
 
         /// <summary>Subtracts the percentage to the UInt64.</summary>
         [CLSCompliant(false)]
-        public static ulong operator -(ulong d, Percentage p) { return d.Subtract(p); }
+        public static ulong operator -(ulong d, Percentage p) => d.Subtract(p);
         /// <summary>Subtracts the percentage to the UInt32.</summary>
         [CLSCompliant(false)]
-        public static uint operator -(uint d, Percentage p) { return d.Subtract(p); }
+        public static uint operator -(uint d, Percentage p) => d.Subtract(p);
         /// <summary>Subtracts the percentage to the UInt16.</summary>
         [CLSCompliant(false)]
-        public static ushort operator -(ushort d, Percentage p) { return d.Subtract(p); }
+        public static ushort operator -(ushort d, Percentage p) => d.Subtract(p);
+
+        #endregion
+
+        #region Math-like methods
+
+        /// <summary>Returns the larger of two percentages.</summary>
+        /// <param name="val1">
+        /// The second of the two percentages to compare.
+        /// </param>
+        /// <param name="val2">
+        /// The first of the two percentages to compare.
+        /// </param>
+        /// <returns>
+        /// Parameter val1 or val2, whichever is larger.
+        /// </returns>
+        public static Percentage Max(Percentage val1, Percentage val2) => val1 > val2 ? val1 : val2;
+
+        /// <summary>Returns the largest of the percentages.</summary>
+        /// <param name="values">
+        /// The percentages to compare.
+        /// </param>
+        /// <returns>
+        /// The percentage with the largest value.
+        /// </returns>
+        public static Percentage Max(params Percentage[] values) => Guard.NotNull(values, nameof(values)).Max();
+
+        /// <summary>Returns the smaller of two percentages.</summary>
+        /// <param name="val1">
+        /// The second of the two percentages to compare.
+        /// </param>
+        /// <param name="val2">
+        /// The first of the two percentages to compare.
+        /// </param>
+        /// <returns>
+        /// Parameter val1 or val2, whichever is smaller.
+        /// </returns>
+        public static Percentage Min(Percentage val1, Percentage val2) => val1 < val2 ? val1 : val2;
+
+        /// <summary>Returns the smallest of the percentages.</summary>
+        /// <param name="values">
+        /// The percentages to compare.
+        /// </param>
+        /// <returns>
+        /// The percentage with the smallest value.
+        /// </returns>
+        public static Percentage Min(params Percentage[] values) => Guard.NotNull(values, nameof(values)).Min();
+
+        /// <summary>Rounds the percentage.</summary>
+        /// <returns>
+        /// The percentage nearest to the percentage that contains zero
+        /// fractional digits. If the percentage has no fractional digits,
+        /// the percentage is returned unchanged.
+        /// </returns>
+        public Percentage Round() => Round(0);
+
+        /// <summary>Rounds the percentage to a specified number of fractional digits.</summary>
+        /// <param name="decimals">
+        /// The number of decimal places in the return value.
+        /// </param>
+        /// <returns>
+        /// The percentage nearest to the percentage that contains a number of
+        /// fractional digits equal to <paramref name="decimals"/>. If the
+        /// percentage has fewer fractional digits than <paramref name="decimals"/>,
+        /// the percentage is returned unchanged.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="decimals"/> is less than 0 or greater than 26.
+        /// </exception>
+        public Percentage Round(int decimals) => Round(decimals, default);
+
+        /// <summary>Rounds the percentage to a specified number of fractional
+        /// digits. A parameter specifies how to round the value if it is midway
+        /// between two numbers.
+        /// </summary>
+        /// <param name="decimals">
+        /// The number of decimal places in the return value.
+        /// </param>
+        /// <param name="mode">
+        /// Specification for how to round if it is midway between two other numbers.
+        /// </param>
+        /// <returns>
+        /// The percentage nearest to the percentage that contains a number of
+        /// fractional digits equal to <paramref name="decimals"/>. If the
+        /// percentage has fewer fractional digits than <paramref name="decimals"/>,
+        /// the percentage is returned unchanged.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="decimals"/> is less than 0 or greater than 26.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///  <paramref name="mode"/> is not a valid value of <see cref="MidpointRounding"/>.
+        /// </exception>
+        public Percentage Round(int decimals, MidpointRounding mode)
+        {
+            if ((decimals < 0) || (decimals > 26))
+            {
+                throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentagelRound);
+            }
+
+            return Math.Round(m_Value, decimals + 2, mode);
+        }
 
         #endregion
 
@@ -469,16 +562,13 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a Percentage from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a Percentage from a JSON string representation.</summary>
         /// <param name="jsonString">
         /// The JSON string that represents the Percentage.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
+        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates a Percentage from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
@@ -490,10 +580,7 @@ namespace Qowaiv
         /// <param name="jsonNumber">
         /// The JSON number that represents the Percentage.
         /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber)
-        {
-            m_Value = Create((decimal)jsonNumber).m_Value;
-        }
+        void IJsonSerializable.FromJson(double jsonNumber)=> m_Value = Create((decimal)jsonNumber).m_Value;
 
         /// <summary>Generates a Percentage from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -502,10 +589,7 @@ namespace Qowaiv
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a Percentage into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return ToString("0.############################%", CultureInfo.InvariantCulture);
-        }
+        object IJsonSerializable.ToJson() => ToString("0.############################%", CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -515,7 +599,7 @@ namespace Qowaiv
         [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
         private string DebuggerDisplay
         {
-            get { return ToString("0.00##########################%", CultureInfo.InvariantCulture); }
+            get => ToString("0.00##########################%", CultureInfo.InvariantCulture);
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current Percentage formatted with a per ten Thousand mark.</summary>
@@ -550,15 +634,14 @@ namespace Qowaiv
         /// </param>
         public string ToString(IFormatProvider formatProvider)
         {
-            string format;
-            DefaultFormats.TryGetValue(formatProvider ?? CultureInfo.CurrentCulture, out format);
+            DefaultFormats.TryGetValue(formatProvider ?? CultureInfo.CurrentCulture, out string format);
             format = format ?? "0.############################%";
 
             return ToString(format, formatProvider);
         }
 
         /// <summary>Gets the default format for different countries.</summary>
-        private static Dictionary<IFormatProvider, string> DefaultFormats = new Dictionary<IFormatProvider, string>()
+        private static readonly Dictionary<IFormatProvider, string> DefaultFormats = new Dictionary<IFormatProvider, string>()
         {
             { new CultureInfo("fr-FR"), "%0.############################" },
             { new CultureInfo("fa-IR"), "%0.############################" },
@@ -578,7 +661,7 @@ namespace Qowaiv
             {
                 return formatted;
             }
-            
+
             var marker = GetMarkerType(format ?? string.Empty, null);
             if (marker == PercentageMarkerType.Invalid)
             {
@@ -587,15 +670,15 @@ namespace Qowaiv
             var decimalVal = m_Value / Dividers[marker];
             var info = GetNumberFormatInfo(formatProvider);
             var str = decimalVal.ToString(RemoveMarks(format ?? string.Empty, null), info);
-            
+
             switch (marker)
             {
                 case PercentageMarkerType.PercentageBefore: str = info.PercentSymbol + str; break;
-                case PercentageMarkerType.PercentageAfter: str = str + info.PercentSymbol; break;
+                case PercentageMarkerType.PercentageAfter: str += info.PercentSymbol; break;
                 case PercentageMarkerType.PerMilleBefore: str = info.PerMilleSymbol + str; break;
-                case PercentageMarkerType.PerMilleAfter: str = str + info.PerMilleSymbol; break;
+                case PercentageMarkerType.PerMilleAfter: str += info.PerMilleSymbol; break;
                 case PercentageMarkerType.PerTenThousandBefore: str = PerTenThousandMark + str; break;
-                case PercentageMarkerType.PerTenThousandAfter: str = str + PerTenThousandMark; break;
+                case PercentageMarkerType.PerTenThousandAfter: str += PerTenThousandMark; break;
             }
             return str;
         }
@@ -606,7 +689,7 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is Percentage && Equals((Percentage)obj); }
+        public override bool Equals(object obj) => obj is Percentage && Equals((Percentage)obj);
 
         /// <summary>Returns true if this instance and the other <see cref="Percentage"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Percentage"/> to compare with.</param>
@@ -695,13 +778,13 @@ namespace Qowaiv
         #region (Explicit) casting
 
         /// <summary>Casts a Percentage to a <see cref="string"/>.</summary>
-        public static explicit operator string(Percentage val)=> val.ToString(CultureInfo.CurrentCulture);
+        public static explicit operator string(Percentage val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Percentage.</summary>
         public static explicit operator Percentage(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         /// <summary>Casts a decimal a Percentage.</summary>
-        public static implicit operator Percentage(decimal val)=> Create(val);
+        public static implicit operator Percentage(decimal val) => Create(val);
         /// <summary>Casts a decimal a Percentage.</summary>
         public static implicit operator Percentage(double val) => Create(val);
 
@@ -791,9 +874,8 @@ namespace Qowaiv
             {
                 var info = GetNumberFormatInfo(formatProvider);
                 var marker = GetMarkerType(s, info);
-                decimal dec;
                 s = RemoveMarks(s, info);
-                if (marker != PercentageMarkerType.Invalid && decimal.TryParse(s, NumberStyles.Number, info, out dec))
+                if (marker != PercentageMarkerType.Invalid && decimal.TryParse(s, NumberStyles.Number, info, out decimal dec))
                 {
                     dec *= Dividers[marker];
                     result = Create(dec);
@@ -802,7 +884,7 @@ namespace Qowaiv
             }
             return false;
         }
-        
+
         /// <summary>Creates a Percentage from a Decimal.</summary >
         /// <param name="val" >
         /// A decimal describing a Percentage.
@@ -848,7 +930,7 @@ namespace Qowaiv
             var mille = info == null ? PerMilleMark : info.PerMilleSymbol;
 
             var count = Count(str, PercentageMark) + Count(str, PerMilleMark) + Count(str, PerTenThousandMark);
-            if (cent != PercentageMark) { count+= Count(str, cent); }
+            if (cent != PercentageMark) { count += Count(str, cent); }
             if (mille != PerMilleMark) { count += Count(str, mille); }
             if (count > 1) { return PercentageMarkerType.Invalid; }
 
@@ -910,9 +992,9 @@ namespace Qowaiv
         {
             var info = NumberFormatInfo.GetInstance(formatProvider);
             info = (NumberFormatInfo)info.Clone();
-            info.NumberDecimalDigits= info.PercentDecimalDigits; 
-            info.NumberDecimalSeparator = info.PercentDecimalSeparator ;
-            info.NumberGroupSeparator = info.PercentGroupSeparator ;
+            info.NumberDecimalDigits = info.PercentDecimalDigits;
+            info.NumberDecimalSeparator = info.PercentDecimalSeparator;
+            info.NumberGroupSeparator = info.PercentGroupSeparator;
             info.NumberGroupSizes = info.PercentGroupSizes;
             return info;
         }
@@ -928,11 +1010,7 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid Percentage, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            Percentage p;
-            return TryParse(val, formatProvider, out p);
-        }
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
 
         #endregion
     }

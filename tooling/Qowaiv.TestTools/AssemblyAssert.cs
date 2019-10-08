@@ -2,10 +2,12 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Qowaiv.TestTools
 {
+    /// <summary>Contains assert methods on <see cref="Assembly"/>'s.</summary>
     public static class AssemblyAssert
     {
         /// <summary>Asserts that the assembly (of the specified <see cref="Type"/>) has the expected public key.</summary>

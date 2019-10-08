@@ -69,7 +69,7 @@ namespace Qowaiv.UnitTests
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = GetTestInstance();
-            var info = new SerializationInfo(typeof(EmailAddressCollection), new System.Runtime.Serialization.FormatterConverter());
+            var info = new SerializationInfo(typeof(EmailAddressCollection), new FormatterConverter());
             obj.GetObjectData(info, default);
 
             Assert.AreEqual("info@qowaiv.org,test@qowaiv.org", info.GetString("Value"));
@@ -91,14 +91,22 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             CollectionAssert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = GetTestInstance();
-            var exp = GetTestInstance();
-            var act = SerializationTest.XmlSerializeDeserialize(input);
-            CollectionAssert.AreEqual(exp, act);
+            var act = SerializationTest.XmlSerialize(GetTestInstance());
+            var exp = "info@qowaiv.org,test@qowaiv.org";
+            Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
+            Assert.AreEqual(GetTestInstance(), act);
+        }
+
 
         [Test]
         public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
@@ -269,19 +277,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(new EmailAddressCollection());
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(EmailAddressCollection.Parse("info@qowaiv.org, test@qowaiv.org"));
             var exp = "info@qowaiv.org,test@qowaiv.org";
-
             Assert.AreEqual(exp, act);
         }
 

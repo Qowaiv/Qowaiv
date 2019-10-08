@@ -277,13 +277,20 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "H0H0H0";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<PostalCode>("H0H0H0");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -420,7 +427,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<PostalCode>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<PostalCode>("H0H0H0");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -457,19 +464,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(PostalCode));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "H0H0H0";
             Assert.AreEqual(exp, act);
         }
 
@@ -2807,15 +2811,10 @@ namespace Qowaiv.UnitTests
         [TestCase("ZM", "67552")]
         [TestCase("ZM", "87182")]
         [TestCase("ZM", "99999")]
-        public void IsValid(string countrycode, string postalcode)
+        public void IsValid(Country country, string postalcode)
         {
-            var country = Country.Parse(countrycode);
-            IsValid(postalcode, country);
-        }
-
-        private static void IsValid(string postalcode, Country country)
-        {
-            Assert.IsTrue(PostalCode.IsValid(postalcode, country), "Postal code '{0}' should be valid for {1:f}.", postalcode, country);
+            var isValid = PostalCode.IsValid(postalcode, country);
+            Assert.IsTrue(isValid, "Postal code '{0}' should be valid for {1:f}.", postalcode, country);
         }
 
         #endregion

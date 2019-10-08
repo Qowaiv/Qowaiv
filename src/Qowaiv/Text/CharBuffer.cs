@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Text
 {
-    internal class CharBuffer
+    internal class CharBuffer: IEquatable<string>
     {
         public static readonly int NotFound = -1;
 
@@ -54,6 +54,22 @@ namespace Qowaiv.Text
         public int IndexOf(char ch)
         {
             for (var i = 0; i < Length; i++)
+            {
+                if (buffer[i] == ch)
+                {
+                    return i;
+                }
+            }
+            return NotFound;
+        }
+
+        /// <summary>Gets the last index of the <see cref="char"/> in the buffer.</summary>
+        /// <returns>
+        /// -1 if not found, otherwise the index of the <see cref="char"/>.
+        /// </returns>
+        public int LastIndexOf(char ch)
+        {
+            for (var i = Length -1; i >= 0; i--)
             {
                 if (buffer[i] == ch)
                 {
@@ -130,6 +146,23 @@ namespace Qowaiv.Text
         {
             Length = 0;
             return this;
+        }
+
+        /// <inheritdoc />
+        public bool Equals(string other)
+        {
+            if(Length != other.Length)
+            {
+                return false;
+            }
+            for(var i = 0; i < Length; i++)
+            {
+                if(buffer[i] != other[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static implicit operator string(CharBuffer buffer) => buffer?.ToString();

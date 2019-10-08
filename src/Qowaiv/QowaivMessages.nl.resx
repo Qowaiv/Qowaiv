@@ -120,6 +120,9 @@
   <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
     <value>Geen geldige BIC</value>
   </data>
+  <data name="FormatExceptionBusinessIdentifierCode" xml:space="preserve">
+    <value>Geen geldige BIC</value>
+  </data>
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Geen geldig land</value>
   </data>

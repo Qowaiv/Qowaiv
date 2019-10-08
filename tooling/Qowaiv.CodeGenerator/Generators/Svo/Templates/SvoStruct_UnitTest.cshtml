@@ -323,14 +323,21 @@ namespace @(Model.Namespace).UnitTests
     var act = SerializationTest.DataContractSerializeDeserialize(input);
     Assert.AreEqual(exp, act);
     }
-    [Test]
-    public void XmlSerializeDeserialize_TestStruct_AreEqual()
-    {
-    var input = TestStruct;
-    var exp = TestStruct;
-    var act = SerializationTest.XmlSerializeDeserialize(input);
-    Assert.AreEqual(exp, act);
-    }
+    
+        [Test]
+        public void XmlSerialize_TestStruct_AreEqual()
+        {
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "xmlstring";
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Model.ClassNameSerializeObject>("xmlstring");
+            Assert.AreEqual(TestStruct, act);
+        }
 
     [Test]
     public void SerializeDeserialize_@(Model.ClassNameSerializeObject)_AreEqual()
@@ -480,21 +487,15 @@ namespace @(Model.Namespace).UnitTests
     [Test]
     public void FromJson_StringValue_AreEqual()
     {
-    var act = JsonTester.Read<@(Model.ClassName)>
-    (TestStruct.ToString(CultureInfo.InvariantCulture));
-    var exp = TestStruct;
-
-    Assert.AreEqual(exp, act);
+        var act = JsonTester.Read<@(Model.ClassName)>("JsonRepresentationString");
+        Assert.AreEqual(TestStruct, act);
     }
 
     [Test]
     public void FromJson_Int64Value_AreEqual()
     {
-    var act = JsonTester.Read<@(Model.ClassName)>
-    ((Int64)TestStruct);
-    var exp = TestStruct;
-
-    Assert.AreEqual(exp, act);
+        var act = JsonTester.Read<@(Model.ClassName)>(123456789L);
+        Assert.AreEqual(TestStruct, act);
     }
     [Test]
     public void FromJson_Int64Value_AssertNotSupportedException()
@@ -551,20 +552,17 @@ namespace @(Model.Namespace).UnitTests
     }
 
     [Test]
-    public void ToJson_DefaultValue_AreEqual()
+    public void ToJson_DefaultValue_IsNull()
     {
-    object act = JsonTester.Write(default(@Model.ClassName));
-    object exp = null;
-
-    Assert.AreEqual(exp, act);
+        object act = JsonTester.Write(default(@Model.ClassName));
+        Assert.IsNull(act);
     }
     [Test]
     public void ToJson_TestStruct_AreEqual()
     {
-    var act = JsonTester.Write(TestStruct);
-    var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
-    Assert.AreEqual(exp, act);
+        var act = JsonTester.Write(TestStruct);
+        var exp = "Some JSON string";
+        Assert.AreEqual(exp, act);
     }
 
     #endregion

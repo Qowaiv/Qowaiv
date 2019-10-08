@@ -265,13 +265,20 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "17.51%";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Percentage>("17.51%");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -389,7 +396,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Percentage>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Percentage>("17.51%");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -425,19 +432,17 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsZero()
         {
             object act = JsonTester.Write(default(Percentage));
             object exp = "0%";
-
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "17.51%";
             Assert.AreEqual(exp, act);
         }
 
@@ -1505,6 +1510,93 @@ namespace Qowaiv.UnitTests
 
         #endregion
 
+        #region Math-like methods tests
+
+        [Test]
+        public void Max_FirstLargest_First()
+        {
+            var actual = Percentage.Max(TestStruct, 0.007);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Max_SecondLargest_Second()
+        {
+            var actual = Percentage.Max(0.1, TestStruct);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Max_Values_Largest()
+        {
+            var actual = Percentage.Max(0.1, TestStruct, 0.02, 0.17);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Min_FirstSmallest_Frist()
+        {
+            var actual = Percentage.Min(TestStruct, 0.9);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Min_SecondSmallest_Second()
+        {
+            var actual = Percentage.Min(0.9, TestStruct);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Min_Values_Smallest()
+        {
+            var actual = Percentage.Min(0.9, TestStruct, 0.18, 0.74);
+            Assert.AreEqual(TestStruct, actual);
+        }
+
+        [Test]
+        public void Round_Minus1Digits_Throws()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestStruct.Round(-1));
+        }
+
+        [Test]
+        public void Round_27Digits_Throws()
+        {
+            var exception = Assert.Catch<ArgumentOutOfRangeException>(() => TestStruct.Round(27));
+            Assert.AreEqual("Percentages can only round to between 0 and 26 digits of precision.\r\nParameter name: decimals", exception.Message);
+        }
+
+        [Test]
+        public void Round_18Percent()
+        {
+            var actual = TestStruct.Round();
+            Assert.AreEqual(18.Percent(), actual);
+        }
+
+        [Test]
+        public void Round_1decimal_17d5Percent()
+        {
+            var actual = TestStruct.Round(1);
+            Assert.AreEqual(17.5.Percent(), actual);
+        }
+
+        [Test]
+        public void Round_AwayFromZero_17Percent()
+        {
+            var actual = 16.5.Percent().Round(0, MidpointRounding.AwayFromZero);
+            Assert.AreEqual(17.Percent(), actual);
+        }
+
+        [Test]
+        public void Round_ToEven_16Percent()
+        {
+            var actual = 16.5.Percent().Round(0, MidpointRounding.ToEven);
+            Assert.AreEqual(16.Percent(), actual);
+        }
+
+        #endregion
+
         #region Casting tests
 
         [Test]
@@ -1524,9 +1616,6 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        #endregion
-
-        #region Properties
         #endregion
 
         #region Percent()

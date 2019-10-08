@@ -132,6 +132,9 @@
   <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
     <value>Not a valid BIC</value>
   </data>
+  <data name="FormatExceptionBusinessIdentifierCode" xml:space="preserve">
+    <value>Not a valid BIC</value>
+  </data>
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Not a valid country</value>
   </data>

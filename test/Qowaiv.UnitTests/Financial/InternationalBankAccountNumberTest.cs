@@ -188,14 +188,22 @@ namespace Qowaiv.UnitTests.Financial
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = InternationalBankAccountNumberTest.TestStruct;
-            var exp = InternationalBankAccountNumberTest.TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "NL20INGB0001234567";
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<InternationalBankAccountNumber>("NL20INGB0001234567");
+            Assert.AreEqual(TestStruct, act);
+        }
+
 
         [Test]
         public void SerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
@@ -331,7 +339,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<InternationalBankAccountNumber>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<InternationalBankAccountNumber>("NL20INGB0001234567");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -368,19 +376,16 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(InternationalBankAccountNumber));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "NL20INGB0001234567";
             Assert.AreEqual(exp, act);
         }
 

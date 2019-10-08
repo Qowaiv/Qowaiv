@@ -22,6 +22,7 @@ namespace Qowaiv
     /// <summary>Represents a month.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+    [OpenApiDataType(description: "Month(-only) notation.", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
     [TypeConverter(typeof(MonthTypeConverter))]
     public struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
     {
@@ -82,7 +83,7 @@ namespace Qowaiv
         #region Properties
 
         /// <summary>The inner value of the month.</summary>
-        private Byte m_Value;
+        private byte m_Value;
 
         /// <summary>Gets the full name of the month.</summary>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
@@ -187,7 +188,7 @@ namespace Qowaiv
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
             Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToString(CultureInfo.InvariantCulture));
+            writer.WriteString(ToString("s", CultureInfo.InvariantCulture));
         }
 
         #endregion
@@ -207,13 +208,13 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the month.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) => m_Value = Create((Int32)jsonInteger).m_Value;
+        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
 
         /// <summary>Generates a month from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the month.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => m_Value = Create((Int32)jsonNumber).m_Value;
+        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((int)jsonNumber).m_Value;
 
         /// <summary>Generates a month from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -224,7 +225,7 @@ namespace Qowaiv
         /// <summary>Converts a month into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return (m_Value == default) ? null : ToString(CultureInfo.InvariantCulture);
+            return (m_Value == default) ? null : ToString("s", CultureInfo.InvariantCulture);
         }
 
         #endregion
@@ -282,7 +283,7 @@ namespace Qowaiv
             // Apply the format.
             return StringFormatter.Apply
             (
-                this, string.IsNullOrEmpty(format) ? "M" : format,
+                this, string.IsNullOrEmpty(format) ? "f" : format,
                 formatProvider ?? CultureInfo.CurrentCulture, FormatTokens
             );
         }
@@ -395,9 +396,9 @@ namespace Qowaiv
 
 
         /// <summary>Casts a month to a System.Int32.</summary>
-        public static explicit operator Int32(Month val) => val.m_Value;
+        public static explicit operator int(Month val) => val.m_Value;
         /// <summary>Casts an System.Int32 to a month.</summary>
-        public static implicit operator Month(Int32 val) => Create(val);
+        public static implicit operator Month(int val) => Create(val);
 
         #endregion
 

@@ -335,35 +335,42 @@ namespace Qowaiv.UnitTests
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(Month), new System.Runtime.Serialization.FormatterConverter());
+            var info = new SerializationInfo(typeof(Month), new FormatterConverter());
             obj.GetObjectData(info, default);
 
-            Assert.AreEqual((Byte)2, info.GetByte("Value"));
+            Assert.AreEqual((byte)2, info.GetByte("Value"));
         }
 
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = MonthTest.TestStruct;
-            var exp = MonthTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = MonthTest.TestStruct;
-            var exp = MonthTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = MonthTest.TestStruct;
-            var exp = MonthTest.TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "Feb";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Month>("Feb");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -372,13 +379,13 @@ namespace Qowaiv.UnitTests
             var input = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = MonthTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = MonthTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -392,13 +399,13 @@ namespace Qowaiv.UnitTests
             var input = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = MonthTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = MonthTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -412,13 +419,13 @@ namespace Qowaiv.UnitTests
             var input = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = MonthTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = MonthTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.DataContractSerializeDeserialize(input);
@@ -433,13 +440,13 @@ namespace Qowaiv.UnitTests
             var input = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = default(Month),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new MonthSerializeObject()
             {
                 Id = 17,
-                Obj = default(Month),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -500,7 +507,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<Month>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<Month>("feb");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -509,7 +516,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            var act = JsonTester.Read<Month>((Int64)TestStruct);
+            var act = JsonTester.Read<Month>(2);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -518,7 +525,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
-            var act = JsonTester.Read<Month>((Double)TestStruct);
+            var act = JsonTester.Read<Month>(2.0);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -535,19 +542,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(Month));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "Feb";
             Assert.AreEqual(exp, act);
         }
 
@@ -574,10 +578,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: '2', format: 'Unit Test Format'";
+            using (CultureInfoScope.NewInvariant())
+            {
+                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+                var exp = "Unit Test Formatter, value: 'February', format: 'Unit Test Format'";
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
 
         [Test]
@@ -686,7 +693,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void GetHash_TestStruct_Hash()
         {
-            Assert.AreEqual(2, MonthTest.TestStruct.GetHashCode());
+            Assert.AreEqual(2, TestStruct.GetHashCode());
         }
 
         [Test]
@@ -707,52 +714,52 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
-            Assert.IsTrue(MonthTest.TestStruct.Equals(MonthTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(MonthTest.TestStruct.Equals(Month.Empty));
+            Assert.IsFalse(TestStruct.Equals(Month.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(Month.Empty.Equals(MonthTest.TestStruct));
+            Assert.IsFalse(Month.Empty.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
-            Assert.IsTrue(MonthTest.TestStruct.Equals((object)MonthTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
         }
 
         [Test]
         public void Equals_TestStructNull_IsFalse()
         {
-            Assert.IsFalse(MonthTest.TestStruct.Equals(null));
+            Assert.IsFalse(TestStruct.Equals(null));
         }
 
         [Test]
         public void Equals_TestStructObject_IsFalse()
         {
-            Assert.IsFalse(MonthTest.TestStruct.Equals(new object()));
+            Assert.IsFalse(TestStruct.Equals(new object()));
         }
 
         [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
-            var l = MonthTest.TestStruct;
-            var r = MonthTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsTrue(l == r);
         }
 
         [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
-            var l = MonthTest.TestStruct;
-            var r = MonthTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsFalse(l != r);
         }
 
@@ -1096,7 +1103,7 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(MonthTest.TestStruct, MonthTest.TestStruct.ToString());
+                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
         }
 
@@ -1111,7 +1118,7 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertToStringEquals(MonthTest.TestStruct.ToString(), MonthTest.TestStruct);
+                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
         }
 
@@ -1123,10 +1130,10 @@ namespace Qowaiv.UnitTests
         public void IsValid_Data_IsFalse()
         {
             Assert.IsFalse(Month.IsValid("0"), "0");
-            Assert.IsFalse(Month.IsValid((String)null), "(String)null");
+            Assert.IsFalse(Month.IsValid((string)null), "(String)null");
             Assert.IsFalse(Month.IsValid(string.Empty), "string.Empty");
 
-            Assert.IsFalse(Month.IsValid((System.Byte?)null), "(System.Byte?)null");
+            Assert.IsFalse(Month.IsValid((byte?)null), "(System.Byte?)null");
         }
         [Test]
         public void IsValid_Data_IsTrue()

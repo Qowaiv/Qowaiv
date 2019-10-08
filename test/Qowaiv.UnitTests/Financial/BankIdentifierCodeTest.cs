@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿#pragma warning disable CS0618 // Type or member is obsolete
+// This class only exists to test the obsolete BankIdentifierCode class.
+
+using NUnit.Framework;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
@@ -407,7 +410,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
-            var act = JsonTester.Read<BankIdentifierCode>(TestStruct.ToString(CultureInfo.InvariantCulture));
+            var act = JsonTester.Read<BankIdentifierCode>("AEGONL2UXXX");
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -444,19 +447,16 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void ToJson_DefaultValue_AreEqual()
+        public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(BankIdentifierCode));
-            object exp = null;
-
-            Assert.AreEqual(exp, act);
+            Assert.IsNull(act);
         }
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
+            var exp = "AEGONL2UXXX";
             Assert.AreEqual(exp, act);
         }
 

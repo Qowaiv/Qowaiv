@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace Qowaiv.TestTools
@@ -31,6 +32,60 @@ namespace Qowaiv.TestTools
 
                 var result = (T)formatter.Deserialize(buffer);
                 return result;
+            }
+        }
+
+        /// <summary>Serializes an instance using an XmlSerializer.</summary>
+        /// <typeparam name="T">
+        /// Type of the instance.
+        /// </typeparam>
+        /// <param name="instance">
+        /// The instance to (XML) serialize.
+        /// </param>
+        public static string XmlSerialize<T>(T instance)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var writer = new XmlTextWriter(stream, Encoding.UTF8);
+                var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
+                serializer.Serialize(writer, new SerializationWrapper<T> { Value = instance });
+                stream.Position = 0;
+
+                using (var reader = new StreamReader(stream))
+                {
+                    var xml = XDocument.Load(reader);
+                    return xml.Element("Wrapper")?.Element("Value")?.Value;
+                }
+            }
+        }
+
+        /// <summary>Serializes an instance using an XmlSerializer.</summary>
+        /// <typeparam name="T">
+        /// Type of the instance.
+        /// </typeparam>
+        /// <param name="xml">
+        /// The xml string to (XML) deserialize.
+        /// </param>
+        public static T XmlDeserialize<T>(string xml)
+        {
+            var value = new XElement("Value", xml);
+            var doc = new XDocument(new XElement("Wrapper", value));
+            
+            using (var stream = new MemoryStream())
+            {
+                doc.Save(stream);
+                stream.Position = 0;
+                var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
+                try
+                {
+                    var wrapper = (SerializationWrapper<T>)serializer.Deserialize(stream);
+                    return wrapper.Value;
+                }
+                catch (Exception x)
+                {
+                    throw new SerializationException($"'{value.Value}' failed on: {x.Message}", x);
+                }
+
             }
         }
 

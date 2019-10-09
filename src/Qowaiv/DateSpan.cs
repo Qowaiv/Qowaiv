@@ -2,49 +2,82 @@
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
+using Qowaiv.Conversion;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Qowaiv.Conversion;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
 
 namespace Qowaiv
 {
     /// <summary>Represents a date span.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(ulong))]
+    [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
+    [OpenApiDataType(description: "Date span, specified in years, months and days, for example +1Y+10M+16D.", type: "string", format: "date-span", pattern: @"([+-][0-9]+Y)?([+-][0-9]+M)?([+-][0-9]+D)?")]
     [TypeConverter(typeof(DateSpanTypeConverter))]
     public struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
+        /// <summary>Represents the pattern of a (potential) valid year.</summary>
+        internal static readonly Regex Pattern = new Regex(@"^(?<Years>([+-][0-9]{1,4})Y)?(?<Months>([+-][0-9]{1,5})M)?(?<Days>([+-][0-9]{1,9})D)?$", RegexOptions.Compiled|RegexOptions.IgnoreCase);
+
+        /// <summary>The average amount of days per month (taken leap years into account.</summary>
+        internal const double DaysPerMonth = 30.421625;
+
         /// <summary>Represents an empty/not set date span.</summary>
-        public static readonly DateSpan Empty;
+        public static readonly DateSpan Zero;
 
-        public DateSpan(int years, int months, int days)
+        /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
+        /// <param name="months">
+        /// Number of months.
+        /// </param>
+        /// <param name="days">
+        /// Number of days.
+        /// </param>
+        public DateSpan(int months, int days)
         {
-            var total = (uint)(months + years * 12);
-
-            m_Value = (uint)days | ((ulong)total << 32);
+            m_Value = (uint)days | ((ulong)months << 32);
         }
+
+        /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
+        /// <param name="years">
+        /// Number of years.
+        /// </param>
+        /// <param name="months">
+        /// Number of months.
+        /// </param>
+        /// <param name="days">
+        /// Number of days.
+        /// </param>
+        public DateSpan(int years, int months, int days) 
+            : this(years * 12 + months, days) { }
 
         #region Properties
 
         /// <summary>The inner value of the date span.</summary>
         private ulong m_Value;
 
+        /// <summary>Gets the total of months.</summary>
         public int TotalMonths => (int)(m_Value >> 32);
 
+        /// <summary>Gets the years component of the date span.</summary>
         public int Years => TotalMonths / 12;
 
+        /// <summary>Gets the months component of the date span.</summary>
         public int Months => TotalMonths % 12;
 
+        /// <summary>Gets the days component of the date span.</summary>
         public int Days => (int)m_Value;
+
+        /// <summary>Gets a (approximate) value to sort the date spans by.</summary>
+        internal double TotalDays => Days + TotalMonths * DaysPerMonth;
 
         #endregion
 
@@ -103,7 +136,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a date span from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a date span from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -115,25 +148,22 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the date span.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-        // m_Value = Create(jsonInteger).m_Value;
+        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = new DateSpan(0, (int)jsonInteger).m_Value;
 
         /// <summary>Generates a date span from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the date span.
         /// </param>
         void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-        // m_Value = Create(jsonNumber).m_Value;
 
         /// <summary>Generates a date span from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the date span.
         /// </param>
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-        // m_Value = Create(jsonDate).m_Value;
 
         /// <summary>Converts a date span into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -141,7 +171,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0:#,###0} Months, {1:#,###0} Days", TotalMonths, Days);
+        private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0:#,###0} Years, {1:#,###0} Months, {2:#,###0} Days", Years, Months, Days);
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
@@ -171,9 +201,28 @@ namespace Qowaiv
             {
                 return formatted;
             }
-            throw new NotImplementedException();
-        }
+            
+            if(m_Value == 0)
+            {
+                return "0D";
+            }
 
+            var sb = new StringBuilder(16);
+
+            if(Years != 0)
+            {
+                sb.AppendFormat(formatProvider, "{0:+0;-0;#}Y", Years);
+            }
+            if (Months != 0)
+            {
+                sb.AppendFormat(formatProvider, "{0:+0;-0;#}M", Months);
+            }
+            if (Days != 0)
+            {
+                sb.AppendFormat(formatProvider, "{0:+0;-0;#}D", Days);
+            }
+            return sb.ToString();
+        }
         #endregion
 
         #region IEquatable
@@ -243,7 +292,7 @@ namespace Qowaiv
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
-        public int CompareTo(DateSpan other) => m_Value.CompareTo(other.m_Value);
+        public int CompareTo(DateSpan other) => TotalDays.CompareTo(other.TotalDays);
 
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
@@ -260,27 +309,64 @@ namespace Qowaiv
 
         #endregion
 
-        #region (Explicit) casting
-
-        /// <summary>Casts a date span to a <see cref="string" />.</summary>
-        public static explicit operator string(DateSpan val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string" /> to a date span.</summary>
-        public static explicit operator DateSpan(string str) => DateSpan.Parse(str, CultureInfo.CurrentCulture);
-
-
-        #endregion
-
         #region Factory methods
 
-        public static DateSpan Age(Date reference) => Delta(reference, Clock.Today());
+        /// <summary>Creates a date span from days only.</summary>
+        public static DateSpan FromDays(int days) => new DateSpan(0, 0, days);
 
-        public static DateSpan Delta(Date start, Date end)
+        public static DateSpan Age(Date reference) => Age(reference, DateSpanSettings.WithoutMonths);
+        public static DateSpan Age(Date reference, DateSpanSettings settings) => Subtract(Clock.Today(), reference, settings);
+
+        public static DateSpan Subtract(Date t1, Date t2) => Subtract(t1, t2, DateSpanSettings.Default);
+        public static DateSpan Subtract(Date t1, Date t2, DateSpanSettings settings)
         {
-            var years = end.Year - start.Year;
-            var months = end.Month - start.Month;
-            var days = end.Day - start.Day;
+            var withYears = (settings & DateSpanSettings.WithoutYears) == default;
+            var withMonths = (settings & DateSpanSettings.WithoutMonths) == default;
+            var daysOnly = !withYears && !withMonths;
 
-            return new DateSpan(years, months, days);
+            if (daysOnly)
+            {
+                var totalDays = (int)(t1 - t2).TotalDays;
+                return FromDays(totalDays);
+            }
+
+            var noMixedSings = (settings & DateSpanSettings.MixedSigns) == default;
+            var daysFirst = (settings & DateSpanSettings.DaysFirst) != default;
+
+            var max = t1;
+            var min = t2;
+
+            var negative = t1 < t2;
+
+            if (negative)
+            {
+                max = t2;
+                min = t1;
+            }
+
+            var years = max.Year - min.Year;
+            var months = withMonths ? max.Month - min.Month: 0;
+            var days = max.Day - min.Day;
+
+            if (days < 0 && noMixedSings)
+            {
+                if(withMonths)
+                {
+                    months--;
+                    var sub = daysFirst ? min : max.AddMonths(-1);
+                    days += DateTime.DaysInMonth(sub.Year, sub.Month);
+                }
+                else
+                {
+                    years--;
+                    var sub = daysFirst ? min : max.AddYears(-1);
+                    days += DateTime.IsLeapYear(sub.Year) ? 366 : 365;
+                }
+            }
+
+            return negative
+                ? new DateSpan(-years, -months, -days)
+                : new DateSpan(+years, +months, +days);
         }
 
         /// <summary>Converts the string to a date span.</summary>
@@ -332,7 +418,7 @@ namespace Qowaiv
             {
                 return val;
             }
-            return Empty;
+            return Zero;
         }
 
         /// <summary>Converts the string to a date span.
@@ -366,8 +452,39 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out DateSpan result)
         {
-            result = new DateSpan { m_Value = ulong.Parse(s, formatProvider) };
-            return true;
+            result = default;
+
+            if (string.IsNullOrEmpty(s))
+            {
+                return false;
+            }
+            if (s == "0D")
+            {
+                return true;
+            }
+
+            var match = Pattern.Match(s);
+
+            if (match.Success)
+            {
+                var y = IntFromGroup(match, nameof(Years));
+                var m = IntFromGroup(match, nameof(Months));
+                var d = IntFromGroup(match, nameof(Days)); 
+                result = new DateSpan(y, m, d);
+
+                return true;
+            }
+            return false;
+        }
+
+        private static int IntFromGroup(Match match, string group)
+        {
+            if (match.Groups[group].Length != 0)
+            {
+                var str = match.Groups[group].Value;
+                return int.Parse(str.Substring(0, str.Length -1));
+            }
+            return 0;
         }
 
         #endregion

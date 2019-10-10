@@ -26,13 +26,22 @@ namespace Qowaiv
     public struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
-        internal static readonly Regex Pattern = new Regex(@"^(?<Years>([+-][0-9]{1,4})Y)?(?<Months>([+-][0-9]{1,5})M)?(?<Days>([+-][0-9]{1,9})D)?$", RegexOptions.Compiled|RegexOptions.IgnoreCase);
+        internal static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4})Y)?(?<Months>([+-][0-9]{1,6})M)?(?<Days>([+-][0-9]{1,7})D)?$", RegexOptions.Compiled|RegexOptions.IgnoreCase);
 
-        /// <summary>The average amount of days per month (taken leap years into account.</summary>
+        /// <summary>The average amount of days per month, taken leap years into account.</summary>
         internal const double DaysPerMonth = 30.421625;
 
-        /// <summary>Represents an empty/not set date span.</summary>
+        /// <summary>The total of days, that can not be applied on a <see cref="Date"/> or <see cref="DateTime"/>.</summary>
+        internal const int MaxDays = (int)(DaysPerMonth * 120000);
+
+        /// <summary>Represents the zero date span.</summary>
         public static readonly DateSpan Zero;
+
+        /// <summary>Represents the maximum value of the date span.</summary>
+        public static readonly DateSpan MaxValue = new DateSpan { m_Value = GetValue(12 * +9998 + 11, +30) };
+        
+        /// <summary>Represents the minimum value of the date span.</summary>
+        public static readonly DateSpan MinValue = new DateSpan { m_Value = GetValue(12 * -9998 - 11, -30) };
 
         /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
         /// <param name="months">
@@ -43,8 +52,15 @@ namespace Qowaiv
         /// </param>
         public DateSpan(int months, int days)
         {
-            m_Value = (uint)days | ((ulong)months << 32);
+            m_Value = GetValue(months, days);
+
+            if(IsOutOfRange(months, days, TotalDays))
+            {
+                throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan);
+            }
         }
+
+       
 
         /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
         /// <param name="years">
@@ -58,6 +74,8 @@ namespace Qowaiv
         /// </param>
         public DateSpan(int years, int months, int days) 
             : this(years * 12 + months, days) { }
+
+        private static ulong GetValue(int months, int days) => (uint)days | ((ulong)months << 32);
 
         #region Properties
 
@@ -78,6 +96,19 @@ namespace Qowaiv
 
         /// <summary>Gets a (approximate) value to sort the date spans by.</summary>
         internal double TotalDays => Days + TotalMonths * DaysPerMonth;
+
+        #endregion
+
+        #region Operations
+
+        public DateSpan Add(DateSpan other) => new DateSpan(TotalMonths + other.TotalMonths, Days + other.Days);
+        public DateSpan Subtract(DateSpan other) => new DateSpan(TotalMonths - other.TotalMonths, Days - other.Days);
+
+        public DateSpan AddDays(int days) => new DateSpan(TotalMonths, Days+ days);
+
+        public DateSpan AddMonths(int months) => new DateSpan(TotalMonths + months, Days);
+
+        public DateSpan AddYears(int years) => new DateSpan(Years + years, Months, Days);
 
         #endregion
 
@@ -223,6 +254,7 @@ namespace Qowaiv
             }
             return sb.ToString();
         }
+        
         #endregion
 
         #region IEquatable
@@ -378,43 +410,30 @@ namespace Qowaiv
             }
 
             var years = max.Year - min.Year;
+            var months = withMonths ? max.Month - min.Month: 0;
+            var days = withMonths
+                ? max.Day - min.Day
+                : max.DayOfYear - min.DayOfYear;
 
-
-            if (withMonths)
+            if (days < 0 && noMixedSings)
             {
-                var months = withMonths ? max.Month - min.Month : 0;
-                var days = max.Day - min.Day;
-
-                if (days < 0 && noMixedSings)
+                if(withMonths)
                 {
                     months--;
                     var sub = daysFirst ? min : max.AddMonths(-1);
                     days += DateTime.DaysInMonth(sub.Year, sub.Month);
                 }
-
-                return negative
-                ? new DateSpan(-years, -months, -days)
-                : new DateSpan(+years, +months, +days);
+                else
+                {
+                    years--;
+                    var sub = daysFirst ? min : max.AddYears(-1);
+                    days += DateTime.IsLeapYear(sub.Year) ? 366 : 365;
+                }
             }
 
-            throw new NotImplementedException("Not done yet.");
-
-
-            //if (days < 0 && noMixedSings)
-            //{
-            //    if(withMonths)
-            //    {
-                   
-            //    }
-            //    else
-            //    {
-            //        years--;
-            //        var sub = daysFirst ? min : max.AddYears(-1);
-            //        days += DateTime.IsLeapYear(sub.Year) ? 366 : 365;
-            //    }
-            //}
-
-            
+            return negative
+                ? new DateSpan(-years, -months, -days)
+                : new DateSpan(+years, +months, +days);
         }
 
         /// <summary>Converts the string to a date span.</summary>
@@ -517,10 +536,16 @@ namespace Qowaiv
             {
                 var y = IntFromGroup(match, nameof(Years));
                 var m = IntFromGroup(match, nameof(Months));
-                var d = IntFromGroup(match, nameof(Days)); 
-                result = new DateSpan(y, m, d);
+                var d = IntFromGroup(match, nameof(Days));
 
-                return true;
+                var months = y * 12 + m;
+                var totalDays = d + months * DaysPerMonth;
+
+                if (!IsOutOfRange(months, d, totalDays))
+                {
+                    result = new DateSpan { m_Value = GetValue(months, d) };
+                    return true;
+                }
             }
             return false;
         }
@@ -533,6 +558,27 @@ namespace Qowaiv
                 return int.Parse(str.Substring(0, str.Length -1));
             }
             return 0;
+        }
+
+        #endregion
+
+        #region Validation
+
+        /// <summary>Returns true if the val represents a valid date span, otherwise false.</summary>
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
+
+        /// <summary>Returns true if the val represents a valid date span, otherwise false.</summary>
+        public static bool IsValid(string val, IFormatProvider formatProvider)=>TryParse(val, formatProvider, out _);
+
+        /// <summary>Returns true if the combination of months and days can not be processed.</summary>
+        private static bool IsOutOfRange(int months, int days, double totalDays)
+        {
+            return months > MaxValue.TotalMonths
+                || months < MinValue.TotalMonths
+                || totalDays > MaxValue.TotalDays
+                || totalDays < MinValue.TotalDays
+                || days > +MaxDays
+                || days < -MaxDays;
         }
 
         #endregion

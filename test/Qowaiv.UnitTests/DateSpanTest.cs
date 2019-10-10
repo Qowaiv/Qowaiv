@@ -25,6 +25,20 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(default(DateSpan), DateSpan.Zero);
         }
 
+        [Test]
+        public void MaxValue_EqualsDateMaxDateMin()
+        {
+            var max = DateSpan.Subtract(Date.MaxValue, Date.MinValue);
+            Assert.AreEqual(DateSpan.MaxValue, max);
+        }
+
+        [Test]
+        public void MinValue_EqualsDateMinDateMax()
+        {
+            var min = DateSpan.Subtract(Date.MinValue, Date.MaxValue);
+            Assert.AreEqual(DateSpan.MinValue, min);
+        }
+
         #endregion
 
         #region TryParse tests
@@ -586,6 +600,51 @@ namespace Qowaiv.UnitTests
         #endregion
     
         #region Properties
+
+        [TestCase(1, 2, +3)]
+        [TestCase(0, 0, +3)]
+        [TestCase(9, 6, +0)]
+        [TestCase(9, 6, -1)]
+        [TestCase(-9, -6, -1)]
+        public void Days(int years, int months, int days)
+        {
+            var span = new DateSpan(years, months, days);
+            Assert.AreEqual(days, span.Days);
+        }
+
+        [TestCase(1, 2, +3)]
+        [TestCase(0, 0, +3)]
+        [TestCase(9, 6, +0)]
+        [TestCase(9, 6, -1)]
+        [TestCase(-9, -6, -1)]
+        public void Months(int years, int months, int days)
+        {
+            var span = new DateSpan(years, months, days);
+            Assert.AreEqual(months, span.Months);
+        }
+
+        [TestCase(1, 2, +3)]
+        [TestCase(0, 0, +3)]
+        [TestCase(9, 6, +0)]
+        [TestCase(9, 6, -1)]
+        [TestCase(-9, -6, -1)]
+        public void Years(int years, int months, int days)
+        {
+            var span = new DateSpan(years, months, days);
+            Assert.AreEqual(years, span.Years);
+        }
+
+        [TestCase(014, 1, 2, +3)]
+        [TestCase(012, 1, 0, +3)]
+        [TestCase(117, 9, 9, +0)]
+        [TestCase(006, 0, 6, -1)]
+        [TestCase(-19, -1, -7, -1)]
+        public void TotalMonths(int total, int years, int months, int days)
+        {
+            var span = new DateSpan(years, months, days);
+            Assert.AreEqual(total, span.TotalMonths);
+        }
+
         #endregion
 
         #region Operations
@@ -596,7 +655,7 @@ namespace Qowaiv.UnitTests
             using (Clock.SetTimeForCurrentThread(() => new Date(2019, 10, 10)))
             {
                 var age = DateSpan.Age(new Date(2017, 06, 11));
-                var exp = new DateSpan(2, 0, 50);
+                var exp = new DateSpan(2, 0, 121);
                 Assert.AreEqual(exp, age);
             }
         }
@@ -607,8 +666,8 @@ namespace Qowaiv.UnitTests
         [TestCase(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
         [TestCase(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
         [TestCase(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
-        [TestCase(+12, +362, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-        [TestCase(+24, +362, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+        [TestCase(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+        [TestCase(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
         [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
         [TestCase(-12, +01, "2017-06-11","2018-06-10", DateSpanSettings.MixedSigns)]
         public void Subtract(int months, int days, Date t1, Date t2, DateSpanSettings settings)
@@ -676,6 +735,30 @@ namespace Qowaiv.UnitTests
         }
 
         #endregion
+
+        [TestCase("23Y+0M+0D", "Without starting sign")]
+        [TestCase("+9998Y+0M+0D", "A lot of years")]
+        [TestCase("-9998Y+0M+0D", "A lot of years")]
+        [TestCase("+100000M", "A lot of months")]
+        [TestCase("-100000M", "A lot of months")]
+        [TestCase("+3650000D", "A lot of days")]
+        [TestCase("-3650000D", "A lot of days")]
+        public void IsValid(string val, string scenario)
+        {
+            Assert.IsTrue(DateSpan.IsValid(val), scenario);
+        }
+
+        [TestCase(null, "Null")]
+        [TestCase("", "String.Empty")]
+        [TestCase("234adf", "Noise")]
+        [TestCase("+9999Y+0M+0D", "Years out of reach")]
+        [TestCase("-9999Y+0M+0D", "Years out of reach")]
+        [TestCase("+4650000D", "Days out of reach")]
+        [TestCase("-4650000D", "Days out of reach")]
+        public void IsInvalid(string val, string scenario)
+        {
+            Assert.IsFalse(DateSpan.IsValid(val), scenario);
+        }
     }
 
     [Serializable]

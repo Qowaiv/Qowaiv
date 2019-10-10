@@ -163,7 +163,7 @@
   <data name="NotSupportedException_ConverterCanNotConvertFromString" xml:space="preserve">
     <value />
   </data>
-   <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
+  <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
     <value>Percentages can only round to between 0 and 26 digits of precision.</value>
   </data>
   <data name="NotSupportedException_NoGenericType" xml:space="preserve">
@@ -198,5 +198,8 @@
   </data>
   <data name="FormatExceptionDateSpan" xml:space="preserve">
     <value>Not a valid date span</value>
+  </data>
+  <data name="ArgumentOutOfRangeException_DateSpan" xml:space="preserve">
+    <value>The specified years, months and days results in an un-representable DateSpan.</value>
   </data>
 </root>

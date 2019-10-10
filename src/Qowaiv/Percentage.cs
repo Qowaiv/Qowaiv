@@ -497,11 +497,10 @@ namespace Qowaiv
         /// </exception>
         public Percentage Round(int decimals, MidpointRounding mode)
         {
-            if ((decimals < 0) || (decimals > 26))
+            if (decimals < 0 || decimals > 26)
             {
-                throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentagelRound);
+                throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentageRound);
             }
-
             return Math.Round(m_Value, decimals + 2, mode);
         }
 
@@ -568,7 +567,7 @@ namespace Qowaiv
         /// <param name="jsonString">
         /// The JSON string that represents the Percentage.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates a Percentage from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
@@ -580,7 +579,7 @@ namespace Qowaiv
         /// <param name="jsonNumber">
         /// The JSON number that represents the Percentage.
         /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber)=> m_Value = Create((decimal)jsonNumber).m_Value;
+        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((decimal)jsonNumber).m_Value;
 
         /// <summary>Generates a Percentage from a JSON date representation.</summary>
         /// <param name="jsonDate">

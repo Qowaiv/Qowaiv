@@ -31,50 +31,35 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TyrParse_Null_IsInvalid()
         {
-            DateSpan val;
-
             string str = null;
-
-            Assert.IsTrue(DateSpan.TryParse(str, out val), "Valid");
-            Assert.AreEqual(string.Empty, val.ToString(), "Value");
+            Assert.IsFalse(DateSpan.TryParse(str, out _));
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringZero_IsValid()
+        public void TyrParse_StringEmpty_IsInvalid()
         {
-            DateSpan val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(DateSpan.TryParse(str, out val), "Valid");
-            Assert.AreEqual(string.Empty, val.ToString(), "Value");
+            Assert.IsFalse(DateSpan.TryParse(str, out _));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            DateSpan val;
-
-            string str = "string";
-
-            Assert.IsTrue(DateSpan.TryParse(str, out val), "Valid");
+            string str = "+5Y+3M+2D";
+            Assert.IsTrue(DateSpan.TryParse(str, out DateSpan val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TyrParse_StringValue_IsInvalid()
         {
-            DateSpan val;
-
-            string str = "string";
-
-            Assert.IsFalse(DateSpan.TryParse(str, out val), "Valid");
-            Assert.AreEqual(string.Empty, val.ToString(), "Value");
+            string str = "InvalidString";
+            Assert.IsFalse(DateSpan.TryParse(str, out _), "Valid");
         }
 
         [Test]
@@ -377,10 +362,10 @@ namespace Qowaiv.UnitTests
         #region IFormattable / Tostring tests
 
         [Test]
-        public void ToString_Zero_StringZero()
+        public void ToString_Zero_0D()
         {
             var act = DateSpan.Zero.ToString();
-            var exp = "";
+            var exp = "0D";
             Assert.AreEqual(exp, act);
         }
 
@@ -388,7 +373,7 @@ namespace Qowaiv.UnitTests
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
+            var exp = "Unit Test Formatter, value: '+10Y+3M-5D', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);
         }
@@ -525,7 +510,7 @@ namespace Qowaiv.UnitTests
         {
             var time = new Date(2000, 01, 01) - Date.MinValue;
             double daysPerMonth = time.TotalDays / 2000 / 12;
-            Assert.AreEqual(daysPerMonth, DateSpan.DaysPerMonth);
+            Assert.AreEqual(daysPerMonth, DateSpan.DaysPerMonth, 0.000000001);
         }
 
         /// <summary>Orders a list of date spans ascending.</summary>
@@ -653,15 +638,6 @@ namespace Qowaiv.UnitTests
         public void CanConvertToString_DateSpan_IsTrue()
         {
             TypeConverterAssert.CanConvertToString(typeof(DateSpan));
-        }
-
-        [Test]
-        public void ConvertFrom_StringZero_DateSpanZero()
-        {
-            using (new CultureInfoScope("en-GB"))
-            {
-                TypeConverterAssert.ConvertFromEquals(DateSpan.Zero, string.Empty);
-            }
         }
 
         [Test]

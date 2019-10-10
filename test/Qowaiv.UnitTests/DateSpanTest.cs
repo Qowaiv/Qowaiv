@@ -590,6 +590,17 @@ namespace Qowaiv.UnitTests
 
         #region Operations
 
+        [Test]
+        public void Age_HasNoMonths()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new Date(2019, 10, 10)))
+            {
+                var age = DateSpan.Age(new Date(2017, 06, 11));
+                var exp = new DateSpan(2, 0, 50);
+                Assert.AreEqual(exp, age);
+            }
+        }
+
         [TestCase(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
         [TestCase(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
         [TestCase(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]

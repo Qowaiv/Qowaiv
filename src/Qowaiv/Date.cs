@@ -80,8 +80,8 @@ namespace Qowaiv
         /// than 12.-or- day is less than 1 or greater than the number of days in month.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// The specified parameters evaluate to less than date.MinValue or
-        /// more than date.MaxValue.
+        /// The specified parameters evaluate to less than <see cref="MinValue"/> or
+        /// more than <see cref="MaxValue"/>.
         /// </exception>
         public Date(int year, int month, int day) : this(new DateTime(year, month, day)) { }
 
@@ -114,7 +114,7 @@ namespace Qowaiv
 
         #region Methods
 
-        /// <summary>Returns a new date that adds the value of the specified System.TimeSpan
+        /// <summary>Returns a new date that adds the value of the specified <see cref="TimeSpan"/>
         /// to the value of this instance.
         /// </summary>
         /// <param name="value">
@@ -125,10 +125,51 @@ namespace Qowaiv
         /// by this instance and the time interval represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
         /// </exception>
         public Date Add(TimeSpan value) => new Date(Ticks + value.Ticks);
+
+        /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
+        /// to the value of this instance.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+        /// </param>
+        /// <returns>
+        /// A new date whose value is the sum of the date and time represented
+        /// by this instance and the time interval represented by value.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
+        /// </exception>
+        public Date Add(DateSpan value) => Add(value, false);
+
+        /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
+        /// to the value of this instance.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+        /// </param>
+        /// <param name="daysFirst">
+        /// If true, days are added first, otherwise months are added first.
+        /// </param>
+        /// <returns>
+        /// A new date whose value is the sum of the date and time represented
+        /// by this instance and the time interval represented by value.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
+        /// </exception>
+        public Date Add(DateSpan value, bool daysFirst)
+        {
+            return daysFirst
+                ? AddDays(value.Days).AddMonths(value.TotalMonths)
+                : AddMonths(value.TotalMonths).AddDays(value.Days)
+            ;
+        }
 
         /// <summary>Subtracts the specified date and time from this instance.</summary>
         /// <param name="value">
@@ -139,22 +180,35 @@ namespace Qowaiv
         /// instance minus the date and time represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The result is less than date.MinValue or greater than date.MaxValue.
+        /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         /// </exception>
         public TimeSpan Subtract(Date value) => new TimeSpan(Ticks - value.Ticks);
 
         /// <summary>Subtracts the specified duration from this instance.</summary>
         /// <param name="value">
-        /// An instance of System.TimeSpan.
+        /// An instance of <see cref="TimeSpan"/>.
         /// </param>
         /// <returns>
         /// A date equal to the date and time represented by this instance
         /// minus the time interval represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The result is less than date.MinValue or greater than date.MaxValue.
+        /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         /// </exception>
         public Date Subtract(TimeSpan value) => new Date(Ticks - value.Ticks);
+
+        /// <summary>Subtracts the specified duration from this instance.</summary>
+        /// <param name="value">
+        /// An instance of <see cref="DateSpan"/>.
+        /// </param>
+        /// <returns>
+        /// A date equal to the date and time represented by this instance
+        /// minus the time interval represented by value.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        /// </exception>
+        public Date Subtract(DateSpan value) => Add(-value);
 
         /// <summary>Returns a new date that adds the specified number of years to
         /// the value of this instance.
@@ -168,8 +222,8 @@ namespace Qowaiv
         /// by this instance and the number of years represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// value or the resulting date is less than date.MinValue
-        /// or greater than date.MaxValue.
+        /// value or the resulting date is less than <see cref="MinValue"/>
+        /// or greater than <see cref="MaxValue"/>.
         /// </exception>
         public Date AddYears(int value) => new Date(m_Value.AddYears(value));
 
@@ -184,8 +238,8 @@ namespace Qowaiv
         /// by this instance and months.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.-or- months is less than -120,000 or greater
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.-or- months is less than -120,000 or greater
         /// than 120,000.
         /// </exception>
         public Date AddMonths(int months) => new Date(m_Value.AddMonths(months));
@@ -202,8 +256,8 @@ namespace Qowaiv
         /// by this instance and the number of days represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
         /// </exception>
         public Date AddDays(double value) => new Date(m_Value.AddDays(value));
 
@@ -219,8 +273,8 @@ namespace Qowaiv
         /// by this instance and the time represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
         /// </exception>
         public Date AddTicks(long value) => new Date(Ticks + value);
 
@@ -236,8 +290,8 @@ namespace Qowaiv
         /// by this instance and the number of hours represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
         /// </exception>
         public Date AddHours(double value) => new Date(m_Value.AddHours(value));
 
@@ -253,8 +307,8 @@ namespace Qowaiv
         /// by this instance and the number of minutes represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
         /// </exception>
         public Date AddMinutes(double value) => new Date(m_Value.AddMinutes(value));
 
@@ -270,8 +324,8 @@ namespace Qowaiv
         /// by this instance and the number of seconds represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
         /// </exception>
         public Date AddSeconds(double value) => new Date(m_Value.AddSeconds(value));
 
@@ -287,8 +341,8 @@ namespace Qowaiv
         /// by this instance and the number of milliseconds represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// The resulting date is less than date.MinValue or greater
-        /// than date.MaxValue.
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
         /// </exception>
         public Date AddMilliseconds(double value) => new Date(m_Value.AddMilliseconds(value));
 

@@ -309,15 +309,48 @@ namespace Qowaiv
 
         #endregion
 
+        /// <summary>Subtracts the Time Span from the date.</summary>
+        public static DateSpan operator -(DateSpan span) => new DateSpan(-span.TotalMonths, -span.Days);
+
         #region Factory methods
 
         /// <summary>Creates a date span from days only.</summary>
         public static DateSpan FromDays(int days) => new DateSpan(0, 0, days);
 
+        /// <summary>Creates a date span from months only.</summary>
+        public static DateSpan FromMonths(int months) => new DateSpan(0, months, 0);
+
+        /// <summary>Creates a date span from months only.</summary>
+        public static DateSpan FromYears(int years) => new DateSpan(years, 0, 0);
+
         public static DateSpan Age(Date reference) => Age(reference, DateSpanSettings.WithoutMonths);
         public static DateSpan Age(Date reference, DateSpanSettings settings) => Subtract(Clock.Today(), reference, settings);
 
+        /// <summary>Creates a date span on by subtracting t2 from t1.</summary>
+        /// <param name="t1">
+        /// The date to subtract from.
+        /// </param>
+        /// <param name="t2">
+        /// The date to subtract.
+        /// </param>
+        /// <returns>
+        /// Returns a date span describing the duration between t1 and t2.
+        /// </returns>
         public static DateSpan Subtract(Date t1, Date t2) => Subtract(t1, t2, DateSpanSettings.Default);
+
+        /// <summary>Creates a date span on by subtracting t2 from t1.</summary>
+        /// <param name="t1">
+        /// The date to subtract from.
+        /// </param>
+        /// <param name="t2">
+        /// The date to subtract.
+        /// </param>
+        /// <param name="settings">
+        /// The settings to apply.
+        /// </param>
+        /// <returns>
+        /// Returns a date span describing the duration between t1 and t2.
+        /// </returns>
         public static DateSpan Subtract(Date t1, Date t2, DateSpanSettings settings)
         {
             var withYears = (settings & DateSpanSettings.WithoutYears) == default;
@@ -345,28 +378,43 @@ namespace Qowaiv
             }
 
             var years = max.Year - min.Year;
-            var months = withMonths ? max.Month - min.Month: 0;
-            var days = max.Day - min.Day;
 
-            if (days < 0 && noMixedSings)
+
+            if (withMonths)
             {
-                if(withMonths)
+                var months = withMonths ? max.Month - min.Month : 0;
+                var days = max.Day - min.Day;
+
+                if (days < 0 && noMixedSings)
                 {
                     months--;
                     var sub = daysFirst ? min : max.AddMonths(-1);
                     days += DateTime.DaysInMonth(sub.Year, sub.Month);
                 }
-                else
-                {
-                    years--;
-                    var sub = daysFirst ? min : max.AddYears(-1);
-                    days += DateTime.IsLeapYear(sub.Year) ? 366 : 365;
-                }
-            }
 
-            return negative
+                return negative
                 ? new DateSpan(-years, -months, -days)
                 : new DateSpan(+years, +months, +days);
+            }
+
+            throw new NotImplementedException("Not done yet.");
+
+
+            //if (days < 0 && noMixedSings)
+            //{
+            //    if(withMonths)
+            //    {
+                   
+            //    }
+            //    else
+            //    {
+            //        years--;
+            //        var sub = daysFirst ? min : max.AddYears(-1);
+            //        days += DateTime.IsLeapYear(sub.Year) ? 366 : 365;
+            //    }
+            //}
+
+            
         }
 
         /// <summary>Converts the string to a date span.</summary>

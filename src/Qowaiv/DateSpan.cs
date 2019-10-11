@@ -38,10 +38,10 @@ namespace Qowaiv
         public static readonly DateSpan Zero;
 
         /// <summary>Represents the maximum value of the date span.</summary>
-        public static readonly DateSpan MaxValue = new DateSpan { m_Value = GetValue(12 * +9998 + 11, +30) };
+        public static readonly DateSpan MaxValue = new DateSpan { m_Value = AsUInt64(12 * +9998 + 11, +30) };
         
         /// <summary>Represents the minimum value of the date span.</summary>
-        public static readonly DateSpan MinValue = new DateSpan { m_Value = GetValue(12 * -9998 - 11, -30) };
+        public static readonly DateSpan MinValue = new DateSpan { m_Value = AsUInt64(12 * -9998 - 11, -30) };
 
         /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
         /// <param name="months">
@@ -52,7 +52,7 @@ namespace Qowaiv
         /// </param>
         public DateSpan(int months, int days)
         {
-            m_Value = GetValue(months, days);
+            m_Value = AsUInt64(months, days);
 
             if(IsOutOfRange(months, days, TotalDays))
             {
@@ -75,7 +75,8 @@ namespace Qowaiv
         public DateSpan(int years, int months, int days) 
             : this(years * 12 + months, days) { }
 
-        private static ulong GetValue(int months, int days) => (uint)days | ((ulong)months << 32);
+        /// <summary>Converts the combination of months and days to a <see cref="ulong"/>.</summary>
+        private static ulong AsUInt64(int months, int days) => (uint)days | ((ulong)months << 32);
 
         #region Properties
 
@@ -543,7 +544,7 @@ namespace Qowaiv
 
                 if (!IsOutOfRange(months, d, totalDays))
                 {
-                    result = new DateSpan { m_Value = GetValue(months, d) };
+                    result = new DateSpan { m_Value = AsUInt64(months, d) };
                     return true;
                 }
             }

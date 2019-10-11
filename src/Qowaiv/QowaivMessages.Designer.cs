@@ -491,5 +491,14 @@ namespace Qowaiv {
                 return ResourceManager.GetString("NotSupportedExceptionCountryToRegionInfo", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DateSpan overflowed because the duration the duration is too long..
+        /// </summary>
+        public static string OverflowException_DateSpan {
+            get {
+                return ResourceManager.GetString("OverflowException_DateSpan", resourceCulture);
+            }
+        }
     }
 }

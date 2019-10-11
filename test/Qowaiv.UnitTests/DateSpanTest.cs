@@ -650,6 +650,68 @@ namespace Qowaiv.UnitTests
         #region Operations
 
         [Test]
+        public void Mutate_Overflows()
+        {
+            var x = Assert.Catch<OverflowException>(()=> DateSpan.MaxValue.AddDays(1));
+            Assert.AreEqual("DateSpan overflowed because the duration the duration is too long.", x.Message);
+        }
+
+        [Test]
+        public void Add_DateSpan_AddsUp()
+        {
+            var l = new DateSpan(12, 3, 4);
+            var r = new DateSpan(-2, 2, 7);
+
+            var exp = new DateSpan(10, 5, 11);
+            var act = l + r;
+
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Subtract_DateSpan_AddsUp()
+        {
+            var l = new DateSpan(12, 3, 4);
+            var r = new DateSpan(-2, 2, 7);
+
+            var exp = new DateSpan(14, 1, -3);
+            var act = l - r;
+
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Add_Days_AddsUp()
+        {
+            var span = new DateSpan(12, 3, 4);
+            var exp = new DateSpan(12, 3, 21);
+            var act = span.AddDays(17);
+
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Add_Months_AddsUp()
+        {
+            var span = new DateSpan(12, 3, 4);
+            var exp = new DateSpan(12, 20, 4);
+            var act = span.AddMonths(17);
+
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Add_Years_AddsUp()
+        {
+            var span = new DateSpan(12, 3, 4);
+            var exp = new DateSpan(29, 3, 4);
+            var act = span.AddYears(17);
+
+            Assert.AreEqual(exp, act);
+        }
+
+
+        [Test]
         public void Age_HasNoMonths()
         {
             using (Clock.SetTimeForCurrentThread(() => new Date(2019, 10, 10)))

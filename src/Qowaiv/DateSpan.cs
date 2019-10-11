@@ -26,7 +26,7 @@ namespace Qowaiv
     public struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
-        internal static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4})Y)?(?<Months>([+-][0-9]{1,6})M)?(?<Days>([+-][0-9]{1,7})D)?$", RegexOptions.Compiled|RegexOptions.IgnoreCase);
+        internal static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4})Y)?(?<Months>([+-][0-9]{1,6})M)?(?<Days>([+-][0-9]{1,7})D)?$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>The average amount of days per month, taken leap years into account.</summary>
         internal const double DaysPerMonth = 30.421625;
@@ -39,7 +39,7 @@ namespace Qowaiv
 
         /// <summary>Represents the maximum value of the date span.</summary>
         public static readonly DateSpan MaxValue = new DateSpan { m_Value = AsUInt64(12 * +9998 + 11, +30) };
-        
+
         /// <summary>Represents the minimum value of the date span.</summary>
         public static readonly DateSpan MinValue = new DateSpan { m_Value = AsUInt64(12 * -9998 - 11, -30) };
 
@@ -54,13 +54,11 @@ namespace Qowaiv
         {
             m_Value = AsUInt64(months, days);
 
-            if(IsOutOfRange(months, days, TotalDays))
+            if (IsOutOfRange(months, days, TotalDays))
             {
                 throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan);
             }
         }
-
-       
 
         /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
         /// <param name="years">
@@ -72,11 +70,11 @@ namespace Qowaiv
         /// <param name="days">
         /// Number of days.
         /// </param>
-        public DateSpan(int years, int months, int days) 
+        public DateSpan(int years, int months, int days)
             : this(years * 12 + months, days) { }
 
         /// <summary>Converts the combination of months and days to a <see cref="ulong"/>.</summary>
-        private static ulong AsUInt64(int months, int days) => (uint)days | ((ulong)months << 32);
+        private static ulong AsUInt64(long months, long days) => (uint)days | ((ulong)months << 32);
 
         #region Properties
 
@@ -102,14 +100,75 @@ namespace Qowaiv
 
         #region Operations
 
-        public DateSpan Add(DateSpan other) => new DateSpan(TotalMonths + other.TotalMonths, Days + other.Days);
-        public DateSpan Subtract(DateSpan other) => new DateSpan(TotalMonths - other.TotalMonths, Days - other.Days);
+        /// <summary>Returns a new date span whose value is the sum of the specified date span and this instance.</summary>
+        ///<param name="other">
+        /// The date span to add.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public DateSpan Add(DateSpan other)
+        {
+            long days = (long)Days + other.Days;
+            long months = (long)TotalMonths + other.TotalMonths;
+            return Mutate(months, days);
+        }
 
-        public DateSpan AddDays(int days) => new DateSpan(TotalMonths, Days+ days);
+        /// <summary>Returns a new date span whose value is the subtraction of the specified date span and this instance.</summary>
+        ///<param name="other">
+        /// The date span to subtract.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public DateSpan Subtract(DateSpan other)
+        {
+            long days = (long)Days - other.Days;
+            long months = (long)TotalMonths - other.TotalMonths;
+            return Mutate(months, days);
+        }
 
-        public DateSpan AddMonths(int months) => new DateSpan(TotalMonths + months, Days);
+        /// <summary>Returns a new date span whose value is the sum of the days to add this instance.</summary>
+        ///<param name="days">
+        /// The days to add.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public DateSpan AddDays(int days) => Mutate(TotalMonths, Days + (long)days);
 
-        public DateSpan AddYears(int years) => new DateSpan(Years + years, Months, Days);
+        /// <summary>Returns a new date span whose value is the sum of the months to add this instance.</summary>
+        ///<param name="months">
+        /// The months to add.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public DateSpan AddMonths(int months) => Mutate(TotalMonths + (long)months, Days);
+
+        /// <summary>Returns a new date span whose value is the sum of the years to add this instance.</summary>
+        ///<param name="years">
+        /// The years to add.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public DateSpan AddYears(int years) => Mutate(TotalMonths + years * 12L, Days);
+
+        /// <summary>Mutates the months and days.</summary>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        private static DateSpan Mutate(long months, long days)
+        {
+            var totalDays = months * DaysPerMonth + days;
+
+            if (IsOutOfRange(months, days, totalDays))
+            {
+                throw new OverflowException(QowaivMessages.OverflowException_DateSpan);
+            }
+            return new DateSpan { m_Value = AsUInt64(months, days) };
+        }
 
         #endregion
 
@@ -233,15 +292,15 @@ namespace Qowaiv
             {
                 return formatted;
             }
-            
-            if(m_Value == 0)
+
+            if (m_Value == 0)
             {
                 return "0D";
             }
 
             var sb = new StringBuilder(16);
 
-            if(Years != 0)
+            if (Years != 0)
             {
                 sb.AppendFormat(formatProvider, "{0:+0;-0;#}Y", Years);
             }
@@ -255,7 +314,7 @@ namespace Qowaiv
             }
             return sb.ToString();
         }
-        
+
         #endregion
 
         #region IEquatable
@@ -343,7 +402,11 @@ namespace Qowaiv
         #endregion
 
         /// <summary>Subtracts the Time Span from the date.</summary>
+        public static DateSpan operator +(DateSpan span) => span;
         public static DateSpan operator -(DateSpan span) => new DateSpan(-span.TotalMonths, -span.Days);
+
+        public static DateSpan operator +(DateSpan l, DateSpan r) => l.Add(r);
+        public static DateSpan operator -(DateSpan l, DateSpan r) => l.Subtract(r);
 
         #region Factory methods
 
@@ -411,14 +474,14 @@ namespace Qowaiv
             }
 
             var years = max.Year - min.Year;
-            var months = withMonths ? max.Month - min.Month: 0;
+            var months = withMonths ? max.Month - min.Month : 0;
             var days = withMonths
                 ? max.Day - min.Day
                 : max.DayOfYear - min.DayOfYear;
 
             if (days < 0 && noMixedSings)
             {
-                if(withMonths)
+                if (withMonths)
                 {
                     months--;
                     var sub = daysFirst ? min : max.AddMonths(-1);
@@ -556,7 +619,7 @@ namespace Qowaiv
             if (match.Groups[group].Length != 0)
             {
                 var str = match.Groups[group].Value;
-                return int.Parse(str.Substring(0, str.Length -1));
+                return int.Parse(str.Substring(0, str.Length - 1));
             }
             return 0;
         }
@@ -569,10 +632,10 @@ namespace Qowaiv
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid date span, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)=>TryParse(val, formatProvider, out _);
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
 
         /// <summary>Returns true if the combination of months and days can not be processed.</summary>
-        private static bool IsOutOfRange(int months, int days, double totalDays)
+        private static bool IsOutOfRange(long months, long days, double totalDays)
         {
             return months > MaxValue.TotalMonths
                 || months < MinValue.TotalMonths

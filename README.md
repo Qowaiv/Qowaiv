@@ -32,15 +32,23 @@ here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 ## Qowaiv types
 
 ### Date
-
 Represents a date, so without hours (minutes, seconds, milliseconds).
+
+### Date span
+Represents a date span. 
+
+
+``` C#
+var age = DateSpan.Age(new Date(2017, 06, 11));
+
+```
 
 ### Elo
 Represents an Elo (rating), a method for calculating the relative skill levels of
 players in competitor-versus-competitor games.
 
 ### Email address
-Represents a (single) email address. Support:
+Represents a (single) email address. Supports:
 * Display names (are stripped)
 * Comments (are removed)
 * IP-based domains (normalized and surrounded by brackets)

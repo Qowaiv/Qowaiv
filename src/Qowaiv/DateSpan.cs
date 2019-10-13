@@ -56,7 +56,7 @@ namespace Qowaiv
 
             if (IsOutOfRange(months, days, TotalDays))
             {
-                throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan);
+                throw new ArgumentOutOfRangeException(null, QowaivMessages.ArgumentOutOfRangeException_DateSpan);
             }
         }
 

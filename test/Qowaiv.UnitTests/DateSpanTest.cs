@@ -323,6 +323,7 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid date span");
         }
+
         [Test]
         public void FromJson_StringValue_AreEqual()
         {
@@ -730,6 +731,8 @@ namespace Qowaiv.UnitTests
         [TestCase(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
         [TestCase(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
         [TestCase(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+        [TestCase(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+        [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
         [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
         [TestCase(-12, +01, "2017-06-11","2018-06-10", DateSpanSettings.MixedSigns)]
         public void Subtract(int months, int days, Date t1, Date t2, DateSpanSettings settings)
@@ -797,6 +800,41 @@ namespace Qowaiv.UnitTests
         }
 
         #endregion
+
+        [Test]
+        public void Ctor_OutOfRange_Throws()
+        {
+            var x = Assert.Catch<ArgumentOutOfRangeException>(() => new DateSpan(int.MaxValue, int.MaxValue));
+            Assert.AreEqual("The specified years, months and days results in an un-representable DateSpan.", x.Message);
+        }
+
+        [Test]
+        public void FromDays_4_4Days()
+        {
+            var span = DateSpan.FromDays(4);
+            var exp = new DateSpan(0, 4);
+
+            Assert.AreEqual(exp, span);
+        }
+
+        [Test]
+        public void FromMonths_17_17Months()
+        {
+            var span = DateSpan.FromMonths(17);
+            var exp = new DateSpan(17, 0);
+
+            Assert.AreEqual(exp, span);
+        }
+
+        [Test]
+        public void FromYears_17_17Years()
+        {
+            var span = DateSpan.FromYears(17);
+            var exp = new DateSpan(17, 0, 0);
+
+            Assert.AreEqual(exp, span);
+        }
+
 
         [TestCase("23Y+0M+0D", "Without starting sign")]
         [TestCase("+9998Y+0M+0D", "A lot of years")]

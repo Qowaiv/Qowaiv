@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Financial\Money.cs~RFec02089.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="..\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
   </ItemGroup>
 

@@ -38,8 +38,7 @@ namespace Qowaiv.UnitTests.Financial
             using (new CultureInfoScope("nl-NL"))
             {
                 Money exp = 42.17 + Currency.EUR;
-                Money act;
-                Assert.IsTrue(Money.TryParse("€42,17", out act), "Valid");
+                Assert.IsTrue(Money.TryParse("€42,17", out Money act), "Valid");
                 Assert.AreEqual(exp, act, "Value");
             }
         }
@@ -48,11 +47,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Money val;
-
             string str = "string";
-
-            Assert.IsFalse(Money.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Money.TryParse(str, out Money val), "Valid");
             Assert.AreEqual(Money.Zero, val, "Value");
         }
 
@@ -265,13 +261,13 @@ namespace Qowaiv.UnitTests.Financial
             var input = new MoneySerializeObject()
             {
                 Id = 17,
-                Obj = default(Money),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new MoneySerializeObject()
             {
                 Id = 17,
-                Obj = default(Money),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -725,6 +721,91 @@ namespace Qowaiv.UnitTests.Financial
         #endregion
 
         #region Properties
+
+        [Test]
+        public void Currency_Set()
+        {
+            var money = 42 + Currency.EUR;
+            Assert.AreEqual(Currency.EUR, money.Currency);
+        }
+
+        #endregion
+
+        #region Operations
+
+        [Test]
+        public void Plus_TestStruct_SameValue()
+        {
+            var act = +TestStruct;
+            Assert.AreEqual(TestStruct, act);
+        }
+
+        [Test]
+        public void Negates_TestStruct_NegativeValue()
+        {
+            var act = -TestStruct;
+            var exp = -42.17 + Currency.EUR;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Increase_TestStruct_Plus1()
+        {
+            var act = TestStruct;
+            var exp = 43.17 + Currency.EUR;
+            Assert.AreEqual(exp, ++act);
+        }
+
+        [Test]
+        public void Decrease_TestStruct_Minus1()
+        {
+            var act = TestStruct;
+            var exp = 41.17 + Currency.EUR;
+            Assert.AreEqual(exp, --act);
+        }
+
+        [Test]
+        public void Add_SameCurrency_Added()
+        {
+            var l = 16 + Currency.EUR;
+            var r = 26 + Currency.EUR;
+            var a = 42 + Currency.EUR;
+
+            Assert.AreEqual(a, l + r);
+        }
+
+        [Test]
+        public void Add_DifferentCurrency_Throws()
+        {
+            var l = 16 + Currency.EUR;
+            var r = 666 + Currency.USD;
+
+            var x = Assert.Catch<CurrencyMismatchException>(()=>  Money.Add(l, r));
+
+            Assert.AreEqual("The addition operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
+        }
+
+        [Test]
+        public void Subtract_SameCurrency_Subtracted()
+        {
+            var l = 69 + Currency.EUR;
+            var r = 27 + Currency.EUR;
+            var a = 42 + Currency.EUR;
+
+            Assert.AreEqual(a, l - r);
+        }
+
+        [Test]
+        public void Subtract_DifferentCurrency_Throws()
+        {
+            var l = 16 + Currency.EUR;
+            var r = 666 + Currency.USD;
+
+            var x = Assert.Catch<CurrencyMismatchException>(() => Money.Subtract(l, r));
+
+            Assert.AreEqual("The subtraction operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
+        }
+
         #endregion
 
         #region Type converter tests

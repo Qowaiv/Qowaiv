@@ -45,18 +45,53 @@ namespace Qowaiv.Financial
 
         #region Methods
 
-        /// <summary>Adds money.</summary>
-        /// <param name="l">The left operand.</param>
-        /// <param name="r">The right operand</param>
-        public Money Add(Money l, Money r)
-        {
-            return Create(l.m_Value + r.m_Value, HaveSameCurrency(l, r, "addition"));
-        }
+        /// <summary>Increases the money with one (of the current currency).</summary>
+        public Money Increment() => Create(m_Value + 1, Currency);
+
+        /// <summary>Decreases the money with one (of the current currency).</summary>
+        public Money Decrement() => Create(m_Value - 1, Currency);
+
+        /// <summary>Pluses the money.</summary>
+        public Money Plus() => Create(+m_Value, Currency);
+
+        /// <summary>Negates the Money.</summary>
+        public Money Negate() => Create(-m_Value, Currency);
 
         /// <summary>Adds money.</summary>
         /// <param name="l">The left operand.</param>
         /// <param name="r">The right operand</param>
-        public static Money operator +(Money l, Money r) => l + r;
+        public static Money Add(Money l, Money r)
+        {
+            return Create(l.m_Value + r.m_Value, HaveSameCurrency(l, r, "addition"));
+        }
+
+        /// <summary>Subtracts money.</summary>
+        /// <param name="l">The left operand.</param>
+        /// <param name="r">The right operand</param>
+        public static Money Subtract(Money l, Money r)
+        {
+            return Create(l.m_Value - r.m_Value, HaveSameCurrency(l, r, "subtraction"));
+        }
+
+        /// <summary>Increases the money with one (of the current currency).</summary>
+        public static Money operator ++(Money money) => money.Increment();
+        /// <summary>Decreases the money with one (of the current currency).</summary>
+        public static Money operator --(Money money) => money.Decrement();
+
+        /// <summary>Unitary plusses the money.</summary>
+        public static Money operator +(Money money) => money.Plus();
+        /// <summary>Negates the money.</summary>
+        public static Money operator -(Money money) => money.Negate();
+
+        /// <summary>Adds money.</summary>
+        /// <param name="l">The left operand.</param>
+        /// <param name="r">The right operand</param>
+        public static Money operator +(Money l, Money r) => Add(l, r);
+
+        /// <summary>Adds money.</summary>
+        /// <param name="l">The left operand.</param>
+        /// <param name="r">The right operand</param>
+        public static Money operator -(Money l, Money r) => Subtract(l, r);
 
         [DebuggerStepThrough]
         private static Currency HaveSameCurrency(Money l, Money r, string operation)
@@ -321,7 +356,6 @@ namespace Qowaiv.Financial
         /// <summary>Casts a <see cref="string"/> to a </summary>
         public static explicit operator Money(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-
         /// <summary>Casts an Amount to Money.</summary>
         public static implicit operator Money(Amount val) => Create((decimal)val);
         /// <summary>Casts a decimal to Money.</summary>
@@ -507,7 +541,7 @@ namespace Qowaiv.Financial
         /// <summary>Returns true if the val represents a valid Money, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return TryParse(val, formatProvider, out Money money);
+            return TryParse(val, formatProvider, out _);
         }
 
         #endregion

@@ -97,6 +97,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decimals can only round to between -28 and 28 digits of precision..
+        /// </summary>
+        public static string ArgumentOutOfRange_DecimalRound {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_DecimalRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Percentages can only round to between 0 and 26 digits of precision..
         /// </summary>
         public static string ArgumentOutOfRange_PercentagelRound {

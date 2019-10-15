@@ -9,8 +9,8 @@ namespace Qowaiv
         private const int SignMask = unchecked((int)0x80000000);
 
         public static decimal Round(this decimal value) => value.Round(0);
-        public static decimal Round(this decimal value, int decimals) => value.Round(decimals, DecimalRounding.ToEven);
-        public static decimal Round(this decimal value, int decimals, int multiplyOf) => value.Round(decimals, DecimalRounding.ToEven, multiplyOf);
+        public static decimal Round(this decimal value, int decimals) => value.Round(decimals, DecimalRounding.AwayFromZero);
+        public static decimal Round(this decimal value, int decimals, int multiplyOf) => value.Round(decimals, DecimalRounding.AwayFromZero, multiplyOf);
         public static decimal Round(this decimal value, int decimals, DecimalRounding rounding) => value.Round(decimals, rounding, 1);
         public static decimal Round(this decimal value, int decimals, DecimalRounding rounding, int multiplyOf)
         {
@@ -22,21 +22,14 @@ namespace Qowaiv
                 throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_DecimalRound);
             }
 
-            var rounded = multiplyOf == 1 ? value : value / multiplyOf;
+            var withMultiply = multiplyOf != 1;
 
-            rounded = InternalRound(rounded, decimals, rounding);
-
-            return rounded * multiplyOf;
-        }
-
-        private static decimal InternalRound(decimal value, int decimals, DecimalRounding rounding)
-        {
-            var bits = decimal.GetBits(value);
+            var bits = decimal.GetBits(withMultiply ? value / multiplyOf : value);
 
             int scale = (bits[3] & ScaleMask) >> 16;
             var scaleDifference = scale - decimals;
 
-            if(scaleDifference <= 0)
+            if (scaleDifference <= 0)
             {
                 return value;
             }
@@ -59,7 +52,7 @@ namespace Qowaiv
             }
             while (scaleDifference > 0);
 
-            if (AdditionForRounding(remainder, divisor, rounding, !negative) && 
+            if (AdditionForRounding(b0, remainder, divisor, rounding, !negative) &&
                 InternalAdd(ref b0, ref b1, ref b2, 1) != 0)
             {
                 throw new OverflowException();
@@ -82,16 +75,17 @@ namespace Qowaiv
             var mi = (int)b1;
             var hi = (int)b2;
 
-            return new decimal(lo, mi, hi, negative, (byte)scale);
+            var rounded = new decimal(lo, mi, hi, negative, (byte)scale);
+
+            return withMultiply ?  rounded * multiplyOf: rounded;
         }
 
-        private static bool AdditionForRounding(ulong remainder, ulong divisor, DecimalRounding rounding, bool isPositive)
+        private static bool AdditionForRounding(ulong b0, ulong remainder, ulong divisor, DecimalRounding rounding, bool isPositive)
         {
             if (remainder == 0 || rounding == DecimalRounding.Truncate)
             {
                 return false;
             }
-
             if (rounding == DecimalRounding.Ceiling)
             {
                 return isPositive;
@@ -99,6 +93,12 @@ namespace Qowaiv
             if (rounding == DecimalRounding.Floor)
             {
                 return !isPositive;
+            }
+            // if to even, and the divisor is twice the remainder only add
+            // when the number is odd.
+            if (rounding == DecimalRounding.ToEven && remainder == (divisor >> 1))
+            {
+                return (b0 & 1) == 1;
             }
 
             return remainder >= (divisor >> 1);
@@ -132,18 +132,18 @@ namespace Qowaiv
         {
             ulong overflow = 0;
 
-            if(b0 != 0)
+            if (b0 != 0)
             {
                 b0 *= factor;
                 overflow = b0 >> 32;
             }
-            if(b1 != 0 || overflow != 0)
+            if (b1 != 0 || overflow != 0)
             {
                 b1 += overflow;
                 b1 *= factor;
                 overflow = b1 >> 32;
             }
-            if(b2 != 0 || overflow != 0)
+            if (b2 != 0 || overflow != 0)
             {
                 b2 += overflow;
                 b2 *= factor;

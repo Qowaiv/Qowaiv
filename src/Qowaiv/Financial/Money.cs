@@ -45,6 +45,45 @@ namespace Qowaiv.Financial
 
         #region Methods
 
+        /// <summary>Rounds the money value to the prefered number decimal places, based on its currency.</summary>
+        public Money Round() => Round(Currency.Digits);
+
+        /// <summary>Rounds the money value to a specified number of decimal places.</summary>
+        /// <param name="decimals">
+        /// A value from -28 to 28 that specifies the number of decimal places to round to.
+        /// </param>
+        /// <remarks>
+        /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+        /// </remarks>
+        public Money Round(int decimals) => Round(decimals, DecimalRounding.BankersRound);
+
+        /// <summary>Rounds the money value to a specified number of decimal places.</summary>
+        /// <param name="decimals">
+        /// A value from -28 to 28 that specifies the number of decimal places to round to.
+        /// </param>
+        /// <param name="mode">
+        /// The mode of rounding applied.
+        /// </param>
+        /// <remarks>
+        /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+        /// </remarks>
+        public Money Round(int decimals, DecimalRounding mode) => Create(m_Value.Round(decimals, mode), Currency);
+
+        /// <summary>Rounds the money value to the closed number that is a multiple of the specified factor.</summary>
+        /// <param name="multipleOf">
+        /// The factor of which the number should be multiple of.
+        /// </param>
+        public Money Round(decimal multipleOf) => Round(multipleOf, DecimalRounding.BankersRound);
+
+        /// <summary>Rounds the money value value to the closed number that is a multiple of the specified factor.</summary>
+        /// <param name="multipleOf">
+        /// The factor of which the number should be multiple of.
+        /// </param>
+        /// <param name="mode">
+        /// The rounding method used to determine the closed by number.
+        /// </param>
+        public Money Round(decimal multipleOf, DecimalRounding mode) => Create(m_Value.Round(multipleOf, mode), Currency);
+
         /// <summary>Increases the money with one (of the current currency).</summary>
         public Money Increment() => Create(m_Value + 1, Currency);
 

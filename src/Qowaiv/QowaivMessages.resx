@@ -258,4 +258,7 @@
   <data name="ArgumentOutOfRange_DecimalRound" xml:space="preserve">
     <value>Decimals can only round to between -28 and 28 digits of precision.</value>
   </data>
+  <data name="OverflowException_DecimalRound" xml:space="preserve">
+    <value>Decimal overflowed while rouding.</value>
+  </data>
 </root>

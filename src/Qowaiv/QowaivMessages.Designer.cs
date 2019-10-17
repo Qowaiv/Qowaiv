@@ -482,5 +482,14 @@ namespace Qowaiv {
                 return ResourceManager.GetString("NotSupportedExceptionCountryToRegionInfo", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decimal overflowed while rouding..
+        /// </summary>
+        public static string OverflowException_DecimalRound {
+            get {
+                return ResourceManager.GetString("OverflowException_DecimalRound", resourceCulture);
+            }
+        }
     }
 }

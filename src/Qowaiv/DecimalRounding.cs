@@ -1,9 +1,12 @@
 ﻿namespace Qowaiv
 {
     /// <summary>Methods of rounding <see cref="decimal"/>s.</summary>
+    /// <remarks>
+    /// This is an extension on <see cref="System.MidpointRounding"/>.
+    /// </remarks>
     public enum DecimalRounding
     {
-        /// <summary>When a number is halfway between two others, it is rounded toward the nearest.</summary>
+        /// <summary>When a number is halfway between two others, it is rounded toward the nearest even.</summary>
         ToEven = 0,
 
         /// <summary>Bankers round, also known as <see cref="ToEven"/>.</summary>

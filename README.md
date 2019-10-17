@@ -180,7 +180,7 @@ acts identically as a SVO.
 
 ``` C#
 Money money = 125.34 + Currency.EUR;
-var sum = (12 + Currency.EUR) + (15 + Currency.EUR); // Throws CurrencyMismatchException()
+var sum = (12 + Currency.EUR) + (15 + Currency.USD); // Throws CurrencyMismatchException()
 
 ```
 

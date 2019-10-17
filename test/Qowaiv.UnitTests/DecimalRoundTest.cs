@@ -8,35 +8,102 @@ namespace Qowaiv.UnitTests
         [TestCase(125.0, 123.0, 5, DecimalRounding.AwayFromZero)]
         [TestCase(123.25, 123.3085, 0.25, DecimalRounding.AwayFromZero)]
         [TestCase(666, 666, 3, DecimalRounding.AwayFromZero)]
-        public void Round(decimal exp, decimal value, decimal factor, DecimalRounding mode)
+        public void Round_MultipleOf(decimal exp, decimal value, decimal factor, DecimalRounding mode)
         {
-            var act = value.MultipleOf(factor, mode);
+            var act = value.Round(factor, mode);
             Assert.AreEqual(exp, act);
         }
 
-        [TestCase(126, 125.5, +0, DecimalRounding.ToEven)]
-        [TestCase(126, 126.5, +0, DecimalRounding.ToEven)]
-
-        [TestCase(000, 126.3, -3, DecimalRounding.AwayFromZero)]
-        [TestCase(100, 126.3, -2, DecimalRounding.AwayFromZero)]
-        [TestCase(130, 126.3, -1, DecimalRounding.AwayFromZero)]
-        [TestCase(126.4, 126.36, +1, DecimalRounding.AwayFromZero)]
-
-        [TestCase(125, 125.4, +0, DecimalRounding.AwayFromZero)]
-        [TestCase(126, 125.5, +0, DecimalRounding.AwayFromZero)]
-        [TestCase(126, 125.1, +0, DecimalRounding.Ceiling)]
-        [TestCase(125, 125.9, +0, DecimalRounding.Floor)]
-        [TestCase(125, 125.8, +0, DecimalRounding.Truncate)]
-
-        [TestCase(-25, -25.4, +0, DecimalRounding.AwayFromZero)]
-        [TestCase(-26, -25.5, +0, DecimalRounding.AwayFromZero)]
-        [TestCase(-25, -25.1, +0, DecimalRounding.Ceiling)]
-        [TestCase(-26, -25.9, +0, DecimalRounding.Floor)]
-        [TestCase(-25, -25.8, +0, DecimalRounding.Truncate)]
-        public void Round(decimal exp, decimal value, int digits, DecimalRounding mode)
+        /// <remarks>Use strings as doubles leck prescision.</remarks>
+        [TestCase("123456789.1234567890", +10)]
+        [TestCase("123456789.123456789", +9)]
+        [TestCase("123456789.12345679", +8)]
+        [TestCase("123456789.1234568", +7)]
+        [TestCase("123456789.123457", +6)]
+        [TestCase("123456789.12346", +5)]
+        [TestCase("123456789.1235", +4)]
+        [TestCase("123456789.123", +3)]
+        [TestCase("123456789.12", +2)]
+        [TestCase("123456789.1", +1)]
+        [TestCase("123456789", +0)]
+        [TestCase("123456790", -1)]
+        [TestCase("123456800", -2)]
+        [TestCase("123457000", -3)]
+        [TestCase("123460000", -4)]
+        [TestCase("123500000", -5)]
+        [TestCase("123000000", -6)]
+        [TestCase("120000000", -7)]
+        [TestCase("100000000", -8)]
+        [TestCase(0, -9)]
+        public void Round_Digits(decimal exp, int digits)
         {
-            var act = value.Round(digits, mode);
+            var act = 123456789.123456789m.Round(digits, DecimalRounding.AwayFromZero);
             Assert.AreEqual(exp, act);
+        }
+
+        // Halfway/nearest rounding
+        [TestCase(-26, -25.5, DecimalRounding.AwayFromZero)]
+        [TestCase(+26, +25.5, DecimalRounding.AwayFromZero)]
+        [TestCase(-25, -25.5, DecimalRounding.TowardsZero)]
+        [TestCase(+25, +25.5, DecimalRounding.TowardsZero)]
+        [TestCase(+26, +25.5, DecimalRounding.ToEven)]
+        [TestCase(+24, +24.5, DecimalRounding.ToEven)]
+        [TestCase(+25, +25.5, DecimalRounding.ToOdd)]
+        [TestCase(+25, +24.5, DecimalRounding.ToOdd)]
+        [TestCase(-25, -25.5, DecimalRounding.Up)]
+        [TestCase(+26, +25.5, DecimalRounding.Up)]
+        [TestCase(-26, -25.5, DecimalRounding.Down)]
+        [TestCase(+25, +25.5, DecimalRounding.Down)]
+        // Direct rounding
+        [TestCase(-26, -25.1, DecimalRounding.DirectAwayFromZero)]
+        [TestCase(+26, +25.1, DecimalRounding.DirectAwayFromZero)]
+        [TestCase(-25, -25.1, DecimalRounding.DirectTowardsZero)]
+        [TestCase(+25, +25.1, DecimalRounding.DirectTowardsZero)]
+        [TestCase(-25, -25.1, DecimalRounding.Ceiling)]
+        [TestCase(+26, +25.1, DecimalRounding.Ceiling)]
+        [TestCase(-26, -25.1, DecimalRounding.Floor)]
+        [TestCase(+25, +25.1, DecimalRounding.Floor)]
+        public void Round_NearestAndDirect(decimal exp, decimal value, DecimalRounding mode)
+        {
+            var act = value.Round(0, mode);
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Round_RandomTieBreaking()
+        {
+            var value = 17.5m;
+
+            var runs = 100_000;
+            var sum = 0m;
+
+            for(var i = 0; i < runs; i++)
+            {
+                sum += value.Round(0, DecimalRounding.RandomTieBreaking);
+            }
+
+            var avg = sum / runs;
+
+            Assert.That(avg, Is.EqualTo(value).Within(0.01m));
+        }
+
+        [TestCase(17.1)]
+        [TestCase(17.3)]
+        [TestCase(17.6)]
+        [TestCase(17.8)]
+        public void Round_StochasticRounding(decimal value)
+        {
+            var runs = 10_000;
+            var sum = 0m;
+
+            for (var i = 0; i < runs; i++)
+            {
+                sum += value.Round(0, DecimalRounding.StochasticRounding);
+            }
+
+            var avg = sum / runs;
+
+            Assert.That(avg, Is.EqualTo(value).Within(0.01m));
         }
     }
 }

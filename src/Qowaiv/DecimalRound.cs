@@ -8,27 +8,39 @@ namespace Qowaiv
         private const int ScaleMask = 0x00FF0000;
         private const int SignMask = unchecked((int)0x80000000);
 
-        /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
-        /// <param name="value">
-        /// The value to round to.
-        /// </param>
-        /// <param name="factor">
-        /// The factor of which the number should be multiple of.
-        /// </param>
-        /// <returns>
-        /// A rounded number that is multiple to the specified factor.
-        /// </returns>
-        public static decimal MultipleOf(this decimal value, decimal factor)
+        /// <summary>Returns true if the rounding is direct; the nearest of the two options is not relevent.</summary>
+        public static bool IsDirectRounding(this DecimalRounding mode)
         {
-            Guard.Positive(factor, nameof(factor));
-            return (value / factor).Round() * factor;
+            return mode >= DecimalRounding.DirectAwayFromZero && mode <= DecimalRounding.Floor;
+        }
+
+        /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
+        public static bool IsNearestRouding(this DecimalRounding mode)
+        {
+            return mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;
         }
 
         /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
         /// <param name="value">
         /// The value to round to.
         /// </param>
-        /// <param name="factor">
+        /// <param name="multipleOf">
+        /// The factor of which the number should be multiple of.
+        /// </param>
+        /// <returns>
+        /// A rounded number that is multiple to the specified factor.
+        /// </returns>
+        public static decimal Round(this decimal value, decimal multipleOf)
+        {
+            Guard.Positive(multipleOf, nameof(multipleOf));
+            return (value / multipleOf).Round() * multipleOf;
+        }
+
+        /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
+        /// <param name="value">
+        /// The value to round to.
+        /// </param>
+        /// <param name="multipleOf">
         /// The factor of which the number should be multiple of.
         /// </param>
         /// <param name="mode">
@@ -37,10 +49,10 @@ namespace Qowaiv
         /// <returns>
         /// A rounded number that is multiple to the specified factor.
         /// </returns>
-        public static decimal MultipleOf(this decimal value, decimal factor, DecimalRounding mode)
+        public static decimal Round(this decimal value, decimal multipleOf, DecimalRounding mode)
         {
-            Guard.Positive(factor, nameof(factor));
-            return (value / factor).Round(0, mode) * factor;
+            Guard.Positive(multipleOf, nameof(multipleOf));
+            return (value / multipleOf).Round(0, mode) * multipleOf;
         }
 
         /// <summary>Rounds a decimal value to the nearest integer.</summary>
@@ -103,9 +115,10 @@ namespace Qowaiv
                 return value;
             }
 
-            ulong b0 = (ulong)bits[0];
-            ulong b1 = (ulong)bits[1];
-            ulong b2 = (ulong)bits[2];
+            // Note that a direct cast to ulong will give a different outcome when the int is negative.
+            ulong b0 = (uint)bits[0];
+            ulong b1 = (uint)bits[1];
+            ulong b2 = (uint)bits[2];
             var negative = (bits[3] & SignMask) != 0;
 
             ulong remainder;
@@ -157,22 +170,57 @@ namespace Qowaiv
             {
                 return false;
             }
-            if (mode == DecimalRounding.Ceiling)
+
+            if (mode.IsDirectRounding())
             {
-                return isPositive;
-            }
-            if (mode == DecimalRounding.Floor)
-            {
-                return !isPositive;
-            }
-            // if to even, and the divisor is twice the remainder only add
-            // when the number is odd.
-            if (mode == DecimalRounding.ToEven && remainder == (divisor >> 1))
-            {
-                return (b0 & 1) == 1;
+                switch (mode)
+                {
+                    case DecimalRounding.DirectAwayFromZero:
+                        return true;
+                    case DecimalRounding.DirectTowardsZero:
+                        return false;
+                        
+                    case DecimalRounding.Ceiling:
+                        return isPositive;
+                    case DecimalRounding.Floor:
+                        return !isPositive;
+                }
             }
 
-            return remainder >= (divisor >> 1);
+            var halfway = divisor >> 1;
+
+            if (remainder == halfway && mode.IsNearestRouding())
+            {
+                switch (mode)
+                {
+                    case DecimalRounding.ToEven:
+                        return (b0 & 1) == 1;
+                    case DecimalRounding.ToOdd:
+                        return (b0 & 1) == 0;
+
+                    case DecimalRounding.AwayFromZero:
+                        return true;
+                    case DecimalRounding.TowardsZero:
+                        return false;
+
+                    case DecimalRounding.Up:
+                        return isPositive;
+                    case DecimalRounding.Down:
+                        return !isPositive;
+
+                    // Pick a 50-50 random.
+                    case DecimalRounding.RandomTieBreaking:
+                        return (Random().Next() & 1) == 0;
+                }
+            }
+
+            if (mode == DecimalRounding.StochasticRounding)
+            {
+                var ratio = remainder / (double)divisor;
+                return Random().NextDouble() <= ratio;
+            }
+
+            return remainder >= halfway;
         }
 
         /// <summary>Divides the decimal with an <see cref="uint"/> divisor.</summary>
@@ -276,5 +324,21 @@ namespace Qowaiv
             1000000000000000000,
             10000000000000000000,
         };
+
+        /// <summary>Gets a (thread static) instance of <see cref="Random"/>.</summary>
+        /// <remarks>
+        /// creates a new instance if required.
+        /// </remarks>
+        private static Random Random()
+        {
+            if (rnd is null)
+            {
+                rnd = new Random();
+            }
+            return rnd;
+        }
+
+        [ThreadStatic]
+        private static Random rnd;
     }
 }

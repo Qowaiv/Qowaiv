@@ -220,7 +220,7 @@ To round tenfold, hundredfold, etc. precision, a negative amount of decimals
 can be specified:
 ``` C#
 var tenfold = 1245.346m.Round(-1); // 1250m
-var hundredfold = 1209m.Round(-2); // 1000m
+var hundredfold = 1209m.Round(-2); // 1200m
 ```
 
 #### Multiple of

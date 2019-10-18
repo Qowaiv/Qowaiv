@@ -1584,16 +1584,24 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Round_AwayFromZero_17Percent()
         {
-            var actual = 16.5.Percent().Round(0, MidpointRounding.AwayFromZero);
+            var actual = 16.5.Percent().Round(0, DecimalRounding.AwayFromZero);
             Assert.AreEqual(17.Percent(), actual);
         }
 
         [Test]
         public void Round_ToEven_16Percent()
         {
-            var actual = 16.5.Percent().Round(0, MidpointRounding.ToEven);
+            var actual = 16.5.Percent().Round(0, DecimalRounding.ToEven);
             Assert.AreEqual(16.Percent(), actual);
         }
+
+        [Test]
+        public void Round_MulptipleOf3Percent_15Percent()
+        {
+            var actual = 16.5.Percent().Round(3.Percent());
+            Assert.AreEqual(15.Percent(), actual);
+        }
+
 
         #endregion
 

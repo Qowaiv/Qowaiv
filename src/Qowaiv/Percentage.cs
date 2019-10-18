@@ -471,7 +471,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="decimals"/> is less than 0 or greater than 26.
         /// </exception>
-        public Percentage Round(int decimals) => Round(decimals, default);
+        public Percentage Round(int decimals) => Round(decimals, DecimalRounding.AwayFromZero);
 
         /// <summary>Rounds the percentage to a specified number of fractional
         /// digits. A parameter specifies how to round the value if it is midway
@@ -493,16 +493,61 @@ namespace Qowaiv
         /// <paramref name="decimals"/> is less than 0 or greater than 26.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///  <paramref name="mode"/> is not a valid value of <see cref="MidpointRounding"/>.
+        /// <paramref name="mode"/> is not a valid value of <see cref="MidpointRounding"/>.
         /// </exception>
-        public Percentage Round(int decimals, MidpointRounding mode)
+        [Obsolete("Use  Round(decimals, DecimalRounding) instead")]
+        public Percentage Round(int decimals, MidpointRounding mode) => Round(decimals, (DecimalRounding)mode);
+
+        /// <summary>Rounds the percentage to a specified number of fractional
+        /// digits. A parameter specifies how to round the value if it is midway
+        /// between two numbers.
+        /// </summary>
+        /// <param name="decimals">
+        /// The number of decimal places in the return value.
+        /// </param>
+        /// <param name="mode">
+        /// Specification for how to round if it is midway between two other numbers.
+        /// </param>
+        /// <returns>
+        /// The percentage nearest to the percentage that contains a number of
+        /// fractional digits equal to <paramref name="decimals"/>. If the
+        /// percentage has fewer fractional digits than <paramref name="decimals"/>,
+        /// the percentage is returned unchanged.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="decimals"/> is less than 0 or greater than 26.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="mode"/> is not a valid value of <see cref="DecimalRounding"/>.
+        /// </exception>
+        public Percentage Round(int decimals, DecimalRounding mode)
         {
-            if ((decimals < 0) || (decimals > 26))
+            if ((decimals < -26) || (decimals > 26))
             {
                 throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentagelRound);
             }
+            return m_Value.Round(decimals - 2, mode);
+        }
 
-            return Math.Round(m_Value, decimals + 2, mode);
+        /// <summary>Rounds the percentage to a specified multiple of the specified percentage.</summary>
+        /// <param name="multipleOf">
+        /// The percentage of which the number should be multiple of.
+        /// </param>
+        public Percentage Round(Percentage multipleOf) => Round(multipleOf, DecimalRounding.AwayFromZero);
+
+        /// <summary>Rounds the percentage to a specified multiple of the specified percentage.</summary>
+        /// <param name="multipleOf">
+        /// The percentage of which the number should be multiple of.
+        /// </param>
+        /// <param name="mode">
+        /// Specification for how to round if it is midway between two other numbers.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="mode"/> is not a valid value of <see cref="DecimalRounding"/>.
+        /// </exception>
+        public Percentage Round(Percentage multipleOf, DecimalRounding mode)
+        {
+            return m_Value.Round((decimal)multipleOf, mode);
         }
 
         #endregion

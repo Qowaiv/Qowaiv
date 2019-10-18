@@ -39,15 +39,15 @@ namespace Qowaiv.UnitTests
 
 
         [Test]
-        public void Round_PostiveWithMulpleOf_ShoulRoundAwayFromZero()
+        public void RoundToMultiple_PostiveWithMulpleOf_ShoulRoundAwayFromZero()
         {
-            var rounded = 24.5m.Round(1m);
+            var rounded = 24.5m.RoundToMultiple(1m);
             Assert.AreEqual(25m, rounded);
         }
         [Test]
-        public void Round_NegativeWithMulpleOf_ShoulRoundAwayFromZero()
+        public void RoundToMultiple_NegativeWithMulpleOf_ShoulRoundAwayFromZero()
         {
-            var rounded = -25.5m.Round(1m);
+            var rounded = -25.5m.RoundToMultiple(1m);
             Assert.AreEqual(-26m, rounded);
         }
 
@@ -58,7 +58,7 @@ namespace Qowaiv.UnitTests
         [TestCase(666, 666, 3, DecimalRounding.AwayFromZero)]
         public void Round_MultipleOf(decimal exp, decimal value, decimal factor, DecimalRounding mode)
         {
-            var act = value.Round(factor, mode);
+            var act = value.RoundToMultiple(factor, mode);
             Assert.AreEqual(exp, act);
         }
 

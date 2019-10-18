@@ -533,7 +533,7 @@ namespace Qowaiv
         /// <param name="multipleOf">
         /// The percentage of which the number should be multiple of.
         /// </param>
-        public Percentage Round(Percentage multipleOf) => Round(multipleOf, DecimalRounding.AwayFromZero);
+        public Percentage RoundToMultiple(Percentage multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.AwayFromZero);
 
         /// <summary>Rounds the percentage to a specified multiple of the specified percentage.</summary>
         /// <param name="multipleOf">
@@ -545,9 +545,9 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="mode"/> is not a valid value of <see cref="DecimalRounding"/>.
         /// </exception>
-        public Percentage Round(Percentage multipleOf, DecimalRounding mode)
+        public Percentage RoundToMultiple(Percentage multipleOf, DecimalRounding mode)
         {
-            return m_Value.Round((decimal)multipleOf, mode);
+            return m_Value.RoundToMultiple((decimal)multipleOf, mode);
         }
 
         #endregion

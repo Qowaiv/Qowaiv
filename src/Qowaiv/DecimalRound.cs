@@ -30,7 +30,7 @@ namespace Qowaiv
         /// <returns>
         /// A rounded number that is multiple to the specified factor.
         /// </returns>
-        public static decimal Round(this decimal value, decimal multipleOf)
+        public static decimal RoundToMultiple(this decimal value, decimal multipleOf)
         {
             Guard.Positive(multipleOf, nameof(multipleOf));
             return (value / multipleOf).Round() * multipleOf;
@@ -49,7 +49,7 @@ namespace Qowaiv
         /// <returns>
         /// A rounded number that is multiple to the specified factor.
         /// </returns>
-        public static decimal Round(this decimal value, decimal multipleOf, DecimalRounding mode)
+        public static decimal RoundToMultiple(this decimal value, decimal multipleOf, DecimalRounding mode)
         {
             Guard.Positive(multipleOf, nameof(multipleOf));
             return (value / multipleOf).Round(0, mode) * multipleOf;

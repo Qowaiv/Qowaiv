@@ -226,8 +226,8 @@ var hundredfold = 1209m.Round(-2); // 1000m
 #### Multiple of
 Rounding to a multiple of is supported:
 ``` C#
-var multipleOf = 123.5m.Round(5m); //   125.0m
-var multiple25 = 123.5m.Round(2.5m); // 122.5m
+var multipleOf = 123.5m.RoundToMultiple(5m); //   125.0m
+var multiple25 = 123.5m.RoundToMultiple(2.5m); // 122.5m
 ```
 
 #### Extra rounding methods

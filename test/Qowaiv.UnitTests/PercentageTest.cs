@@ -1596,9 +1596,9 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Round_MulptipleOf3Percent_15Percent()
+        public void RoundToMultiple_3Percent_15Percent()
         {
-            var actual = 16.4.Percent().Round(3.Percent());
+            var actual = 16.4.Percent().RoundToMultiple(3.Percent());
             Assert.AreEqual(15.Percent(), actual);
         }
 

@@ -115,18 +115,17 @@ namespace Qowaiv
                 return value;
             }
 
-            // Note that a direct cast to ulong will give a different outcome when the int is negative.
-            ulong b0 = (uint)bits[0];
-            ulong b1 = (uint)bits[1];
-            ulong b2 = (uint)bits[2];
+            var b0 = (uint)bits[0];
+            var b1 = (uint)bits[1];
+            var b2 = (uint)bits[2];
             var negative = (bits[3] & SignMask) != 0;
 
             ulong remainder;
-            ulong divisor;
+            uint divisor;
 
             do
             {
-                var diffCunck = (scaleDifference > MaxInt64Scale) ? MaxInt64Scale : scaleDifference;
+                var diffCunck = (scaleDifference > MaxInt32Scale) ? MaxInt32Scale : scaleDifference;
                 divisor = Powers10[diffCunck];
                 remainder = InternalDivide(ref b0, ref b1, ref b2, divisor);
                 scaleDifference -= diffCunck;
@@ -142,9 +141,9 @@ namespace Qowaiv
             // For negative decimals, this can happen.
             while (scale < 0)
             {
-                var diffChunk = (-scale > MaxInt64Scale) ? MaxInt64Scale : -scale;
+                var diffChunk = (-scale > MaxInt32Scale) ? MaxInt32Scale : -scale;
                 var factor = Powers10[diffChunk];
-                InternalMultiply(ref b0, ref b1, ref b2, (uint)factor);
+                InternalMultiply(ref b0, ref b1, ref b2, factor);
                 scale += diffChunk;
             }
 
@@ -218,26 +217,29 @@ namespace Qowaiv
         }
 
         /// <summary>Multiplies the decimal with an <see cref="uint"/> factor.</summary>
-        private static void InternalMultiply(ref ulong b0, ref ulong b1, ref ulong b2, uint factor)
+        private static void InternalMultiply(ref uint b0, ref uint b1, ref uint b2, uint factor)
         {
             ulong overflow = 0;
+            ulong n;
+            ulong f = factor;
 
             if (b0 != 0)
             {
-                b0 *= factor;
-                overflow = b0 >> 32;
+                n = overflow + b0 * f;
+                overflow = n >> 32;
+                b0 = (uint)n;
             }
             if (b1 != 0 || overflow != 0)
             {
-                b1 += overflow;
-                b1 *= factor;
-                overflow = b1 >> 32;
+                n = overflow + b1 * f;
+                overflow = n >> 32;
+                b1 = (uint)n;
             }
             if (b2 != 0 || overflow != 0)
             {
-                b2 += overflow;
-                b2 *= factor;
-                overflow = b2 >> 32;
+                n = overflow + b2 * f;
+                overflow = n >> 32;
+                b2 = (uint)n;
             }
             if (overflow != 0)
             {
@@ -246,9 +248,10 @@ namespace Qowaiv
         }
 
         /// <summary>Divides the decimal with an <see cref="uint"/> divisor.</summary>
-        private static ulong InternalDivide(ref ulong b0, ref ulong b1, ref ulong b2, ulong divisor)
+        private static ulong InternalDivide(ref uint b0, ref uint b1, ref uint b2, uint divisor)
         {
             ulong remainder = 0;
+            ulong n;
 
             if (b2 != 0)
             {
@@ -257,38 +260,40 @@ namespace Qowaiv
             }
             if (b1 != 0 || remainder != 0)
             {
-                b1 |= remainder << 32;
-                remainder = b1 % divisor;
-                b1 /= divisor;
+                n = b1 | (remainder << 32);
+                remainder = n % divisor;
+                b1 = (uint)(n / divisor);
             }
             if (b0 != 0 || remainder != 0)
             {
-                b0 |= remainder << 32;
-                remainder = b0 % divisor;
-                b0 /= divisor;
+                n = b0 | (remainder << 32);
+                remainder = n % divisor;
+                b0 = (uint)(n / divisor);
             }
             return remainder;
         }
 
         /// <summary>Adds an <see cref="uint"/> to the decimal.</summary>
-        private static void InternalAdd(ref ulong b0, ref ulong b1, ref ulong b2, uint addition)
+        private static void InternalAdd(ref uint b0, ref uint b1, ref uint b2, uint addition)
         {
-            ulong overflow = 0;
+            ulong overflow;
+            ulong n;
 
-            if (b0 != 0)
-            {
-                b0 += addition;
-                overflow = b0 >> 32;
-            }
+            n = b0 + (ulong)addition;
+            overflow = n >> 32;
+            b0 = (uint)n;
+
             if (overflow != 0)
             {
-                b1 += overflow;
-                overflow = b1 >> 32;
+                n = b1 + overflow;
+                overflow =n >> 32;
+                b1 = (uint)n;
 
                 if (overflow != 0)
                 {
-                    b2 += overflow;
-                    overflow = b2 >> 32;
+                    n = b2 + overflow;
+                    overflow = n >> 32;
+                    b2 = (uint)n;
                 }
             }
 
@@ -298,11 +303,11 @@ namespace Qowaiv
             }
         }
 
-        /// <summary>The maximum power of 19 that a 64 bit integer can store.</summary>
-        private const int MaxInt64Scale = 19;
+        /// <summary>The maximum power of 19 that a 32 bit integer can store.</summary>
+        private const int MaxInt32Scale = 9;
 
         /// <summary>Fast access for 10^n where n is 0-19.</summary>
-        private static readonly ulong[] Powers10 = new ulong[] {
+        private static readonly uint[] Powers10 = new uint[] {
             1,
             10,
             100,
@@ -312,17 +317,7 @@ namespace Qowaiv
             1000000,
             10000000,
             100000000,
-            1000000000,
-            10000000000,
-            100000000000,
-            1000000000000,
-            10000000000000,
-            100000000000000,
-            1000000000000000,
-            10000000000000000,
-            100000000000000000,
-            1000000000000000000,
-            10000000000000000000,
+            1000000000
         };
 
         /// <summary>Gets a (thread static) instance of <see cref="Random"/>.</summary>

@@ -31,7 +31,7 @@ namespace Qowaiv.UnitTests
         public void Round_ALotOf3s_WithoutIssues()
         {
             var value = 9_876_543_210m + 1m / 3m;
-            var rounded = value.Round(-8);
+            var rounded = value.Round(-9);
             var expected = 10_000_000_000m;
 
             Assert.AreEqual(expected, rounded);

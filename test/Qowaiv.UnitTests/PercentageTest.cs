@@ -1555,16 +1555,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Round_Minus1Digits_Throws()
+        public void Round_Minus27Digits_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => TestStruct.Round(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestStruct.Round(-27));
         }
 
         [Test]
         public void Round_27Digits_Throws()
         {
             var exception = Assert.Catch<ArgumentOutOfRangeException>(() => TestStruct.Round(27));
-            Assert.AreEqual("Percentages can only round to between 0 and 26 digits of precision.\r\nParameter name: decimals", exception.Message);
+            Assert.AreEqual("Percentages can only round to between -26 and 26 digits of precision.\r\nParameter name: decimals", exception.Message);
         }
 
         [Test]
@@ -1598,7 +1598,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Round_MulptipleOf3Percent_15Percent()
         {
-            var actual = 16.5.Percent().Round(3.Percent());
+            var actual = 16.4.Percent().Round(3.Percent());
             Assert.AreEqual(15.Percent(), actual);
         }
 

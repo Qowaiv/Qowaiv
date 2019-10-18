@@ -298,8 +298,8 @@ namespace Qowaiv
             }
         }
 
-        /// <summary>The maximum power of 20 that a 64 bit integer can store.</summary>
-        private const int MaxInt64Scale = 20;
+        /// <summary>The maximum power of 19 that a 64 bit integer can store.</summary>
+        private const int MaxInt64Scale = 19;
 
         /// <summary>Fast access for 10^n where n is 0-19.</summary>
         private static readonly ulong[] Powers10 = new ulong[] {

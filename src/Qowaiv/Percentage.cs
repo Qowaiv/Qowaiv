@@ -526,7 +526,7 @@ namespace Qowaiv
             {
                 throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentagelRound);
             }
-            return m_Value.Round(decimals - 2, mode);
+            return m_Value.Round(decimals + 2, mode);
         }
 
         /// <summary>Rounds the percentage to a specified multiple of the specified percentage.</summary>

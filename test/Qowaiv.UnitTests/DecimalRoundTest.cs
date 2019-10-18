@@ -28,6 +28,17 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Round_ALotOf3s_WithoutIssues()
+        {
+            var value = 9_876_543_210m + 1m / 3m;
+            var rounded = value.Round(-8);
+            var expected = 10_000_000_000m;
+
+            Assert.AreEqual(expected, rounded);
+        }
+
+
+        [Test]
         public void Round_PostiveWithMulpleOf_ShoulRoundAwayFromZero()
         {
             var rounded = 24.5m.Round(1m);

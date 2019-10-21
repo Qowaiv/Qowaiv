@@ -85,7 +85,6 @@ namespace Qowaiv
             m_Value = dt.Date;
         }
 
-
         #endregion
 
         #region Properties
@@ -374,7 +373,7 @@ namespace Qowaiv
         /// <param name="jsonDate">
         /// The JSON Date that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => m_Value = jsonDate;
+        void IJsonSerializable.FromJson(DateTime jsonDate) => m_Value = jsonDate.Date;
 
         /// <summary>Converts a Date into its JSON object representation.</summary>
         object IJsonSerializable.ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);

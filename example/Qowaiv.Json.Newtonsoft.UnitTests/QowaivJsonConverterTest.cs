@@ -85,9 +85,30 @@ namespace Qowaiv.Json.UnitTests
             Assert.AreEqual("JSON deserialization from a number is not supported.", exception.Message);
         }
 
+
+        [Test]
+        public void DeserializeObject_WithQowaivJsonConverter_SupportsJsonDateNode()
+        {
+            QowaivJsonConverter.Register();
+
+            var json = "{ Id: 3, Date: \"2012-04-23T10:25:43.015-05:00\", Val: \"Hello World!\" }";
+            var act = JsonConvert.DeserializeObject<JsonDateObject>(json);
+
+            Assert.AreEqual(3, act.Id);
+            Assert.AreEqual(new Date(2012, 04, 23), act.Date);
+            Assert.AreEqual("Hello World!", act.Val);
+        }
+
         internal class ReadModel
         {
             public Gender Gender { get; set; }
+        }
+
+        internal class JsonDateObject
+        {
+            public int Id { get; set; }
+            public Date? Date { get; set; }
+            public string Val { get; set; }
         }
 
     }

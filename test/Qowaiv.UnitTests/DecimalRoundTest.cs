@@ -15,16 +15,16 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Round_Postive_ShouldRoundAwayFromZero()
+        public void Round_Postive_ShoulRoundToEven()
         {
             var rounded = 24.5m.Round();
-            Assert.AreEqual(25m, rounded);
+            Assert.AreEqual(24m, rounded);
         }
         [Test]
-        public void Round_Negative_ShouldRoundAwayFromZero()
+        public void Round_Negative_ShoulRoundToEven()
         {
-            var rounded = -25.5m.Round();
-            Assert.AreEqual(-26m, rounded);
+            var rounded = -24.5m.Round();
+            Assert.AreEqual(-24m, rounded);
         }
 
         [Test]
@@ -39,15 +39,15 @@ namespace Qowaiv.UnitTests
 
 
         [Test]
-        public void RoundToMultiple_PostiveWithMulpleOf_ShouldRoundAwayFromZero()
+        public void RoundToMultiple_PostiveWithMulpleOf_ShoulRoundToEven()
         {
             var rounded = 24.5m.RoundToMultiple(1m);
-            Assert.AreEqual(25m, rounded);
+            Assert.AreEqual(24m, rounded);
         }
         [Test]
-        public void RoundToMultiple_NegativeWithMulpleOf_ShouldRoundAwayFromZero()
+        public void RoundToMultiple_NegativeWithMulpleOf_ShoulRoundToEven()
         {
-            var rounded = -25.5m.RoundToMultiple(1m);
+            var rounded = -26.5m.RoundToMultiple(1m);
             Assert.AreEqual(-26m, rounded);
         }
 

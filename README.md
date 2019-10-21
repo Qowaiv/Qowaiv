@@ -233,7 +233,7 @@ var multiple25 = 123.5m.RoundToMultiple(2.5m); // 122.5m
 #### Extra rounding methods
 .NET supports rounding to even (Bankers rounding) and away from zero out-of-the-box.
 Rounding methods like ceiling, floor, and truncate have limited support (0 decimals only),
-and a lot others (to odd, half-way up, half-way down, e.o.) are missing.
+and many others (to odd, half-way up, half-way down, e.o.) are missing.
 By specifying the `DecimalRounding` 13 ways are supported.
 
 ``` c#

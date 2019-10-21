@@ -69,6 +69,11 @@ namespace Qowaiv.Json
                         result.FromJson();
                         break;
 
+                    // A string.
+                    case JsonToken.String:
+                        result.FromJson((string)reader.Value);
+                        break;
+
                     // A number without digits.
                     case JsonToken.Integer:
                         result.FromJson((long)reader.Value);
@@ -79,10 +84,11 @@ namespace Qowaiv.Json
                         result.FromJson((double)reader.Value);
                         break;
 
-                    // A string.
-                    case JsonToken.String:
-                        result.FromJson((string)reader.Value);
+                    // A date.
+                    case JsonToken.Date:
+                        result.FromJson((DateTime)reader.Value);
                         break;
+
                     // Other scenario's are not supported.    
                     default:
                         throw new JsonSerializationException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.JsonSerialization_TokenNotSupported, objectType.FullName, reader.TokenType));

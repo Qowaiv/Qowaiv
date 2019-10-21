@@ -1,20 +1,68 @@
 ﻿using NUnit.Framework;
+using System.Globalization;
 
 namespace Qowaiv.UnitTests
 {
     public class DecimalRoundTest
     {
+        [Test]
+        public void Round_RemainderZero_NoChange()
+        {
+            // initializes a decimal with scale of 4, instead of 0.
+            var value = decimal.Parse("1000.0000", CultureInfo.InvariantCulture);
+            var rounded = value.Round(-2);
+            Assert.AreEqual(1000m, rounded);
+        }
+
+        [Test]
+        public void Round_Positive_ShouldRoundToEven()
+        {
+            var rounded = 24.5m.Round();
+            Assert.AreEqual(24m, rounded);
+        }
+        [Test]
+        public void Round_Negative_ShouldRoundToEven()
+        {
+            var rounded = -24.5m.Round();
+            Assert.AreEqual(-24m, rounded);
+        }
+
+        [Test]
+        public void Round_ALotOf3s_WithoutIssues()
+        {
+            var value = 9_876_543_210m + 1m / 3m;
+            var rounded = value.Round(-9);
+            var expected = 10_000_000_000m;
+
+            Assert.AreEqual(expected, rounded);
+        }
+
+
+        [Test]
+        public void RoundToMultiple_PositiveWithMultipleOf_ShouldRoundToEven()
+        {
+            var rounded = 24.5m.RoundToMultiple(1m);
+            Assert.AreEqual(24m, rounded);
+        }
+        [Test]
+        public void RoundToMultiple_NegativeWithMultipleOf_ShouldRoundToEven()
+        {
+            var rounded = -26.5m.RoundToMultiple(1m);
+            Assert.AreEqual(-26m, rounded);
+        }
+
+
         [TestCase(150.0, 125.0, 50, DecimalRounding.AwayFromZero)]
         [TestCase(125.0, 123.0, 5, DecimalRounding.AwayFromZero)]
         [TestCase(123.25, 123.3085, 0.25, DecimalRounding.AwayFromZero)]
         [TestCase(666, 666, 3, DecimalRounding.AwayFromZero)]
         public void Round_MultipleOf(decimal exp, decimal value, decimal factor, DecimalRounding mode)
         {
-            var act = value.Round(factor, mode);
+            var act = value.RoundToMultiple(factor, mode);
             Assert.AreEqual(exp, act);
         }
 
-        /// <remarks>Use strings as doubles leck prescision.</remarks>
+        /// <remarks>Use strings as doubles lack precision.</remarks>
         [TestCase("123456789.1234567890", +10)]
         [TestCase("123456789.123456789", +9)]
         [TestCase("123456789.12345679", +8)]
@@ -63,6 +111,8 @@ namespace Qowaiv.UnitTests
         [TestCase(+26, +25.1, DecimalRounding.Ceiling)]
         [TestCase(-26, -25.1, DecimalRounding.Floor)]
         [TestCase(+25, +25.1, DecimalRounding.Floor)]
+        [TestCase(-25, -25.1, DecimalRounding.Truncate)]
+        [TestCase(+25, +25.1, DecimalRounding.Truncate)]
         public void Round_NearestAndDirect(decimal exp, decimal value, DecimalRounding mode)
         {
             var act = value.Round(0, mode);
@@ -79,12 +129,14 @@ namespace Qowaiv.UnitTests
 
             for(var i = 0; i < runs; i++)
             {
-                sum += value.Round(0, DecimalRounding.RandomTieBreaking);
+                var rounded = value.Round(0, DecimalRounding.RandomTieBreaking);
+                Assert.IsTrue(rounded == 17 || rounded == 18);
+                sum += rounded;
             }
 
             var avg = sum / runs;
 
-            Assert.That(avg, Is.EqualTo(value).Within(0.01m));
+            Assert.That(avg, Is.EqualTo(value).Within(0.05m));
         }
 
         [TestCase(17.1)]
@@ -98,12 +150,14 @@ namespace Qowaiv.UnitTests
 
             for (var i = 0; i < runs; i++)
             {
-                sum += value.Round(0, DecimalRounding.StochasticRounding);
+                var rounded = value.Round(0, DecimalRounding.StochasticRounding);
+                Assert.IsTrue(rounded == 17 || rounded == 18);
+                sum += rounded;
             }
 
             var avg = sum / runs;
 
-            Assert.That(avg, Is.EqualTo(value).Within(0.01m));
+            Assert.That(avg, Is.EqualTo(value).Within(0.05m));
         }
     }
 }

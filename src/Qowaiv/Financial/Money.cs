@@ -45,7 +45,7 @@ namespace Qowaiv.Financial
 
         #region Methods
 
-        /// <summary>Rounds the money value to the prefered number decimal places, based on its currency.</summary>
+        /// <summary>Rounds the money value to the preferred number decimal places, based on its currency.</summary>
         public Money Round() => Round(Currency.Digits);
 
         /// <summary>Rounds the money value to a specified number of decimal places.</summary>
@@ -73,16 +73,16 @@ namespace Qowaiv.Financial
         /// <param name="multipleOf">
         /// The factor of which the number should be multiple of.
         /// </param>
-        public Money Round(decimal multipleOf) => Round(multipleOf, DecimalRounding.BankersRound);
+        public Money RoundToMultiple(decimal multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.BankersRound);
 
-        /// <summary>Rounds the money value value to the closed number that is a multiple of the specified factor.</summary>
+        /// <summary>Rounds the money value to the closed number that is a multiple of the specified factor.</summary>
         /// <param name="multipleOf">
         /// The factor of which the number should be multiple of.
         /// </param>
         /// <param name="mode">
         /// The rounding method used to determine the closed by number.
         /// </param>
-        public Money Round(decimal multipleOf, DecimalRounding mode) => Create(m_Value.Round(multipleOf, mode), Currency);
+        public Money RoundToMultiple(decimal multipleOf, DecimalRounding mode) => Create(m_Value.RoundToMultiple(multipleOf, mode), Currency);
 
         /// <summary>Increases the money with one (of the current currency).</summary>
         public Money Increment() => Create(m_Value + 1, Currency);

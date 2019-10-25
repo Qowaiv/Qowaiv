@@ -115,6 +115,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The specified years, months and days results in an un-representable DateSpan..
+        /// </summary>
+        public static string ArgumentOutOfRangeException_DateSpan {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRangeException_DateSpan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} operation could not be applied. There is a mismatch between {1} and {2}..
         /// </summary>
         public static string CurrencyMismatchException {
@@ -201,6 +210,15 @@ namespace Qowaiv {
         public static string FormatExceptionDate {
             get {
                 return ResourceManager.GetString("FormatExceptionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid date span.
+        /// </summary>
+        public static string FormatExceptionDateSpan {
+            get {
+                return ResourceManager.GetString("FormatExceptionDateSpan", resourceCulture);
             }
         }
         
@@ -466,7 +484,7 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Converter can not convert from System.String..
         /// </summary>
         public static string NotSupportedException_ConverterCanNotConvertFromString {
             get {
@@ -489,6 +507,15 @@ namespace Qowaiv {
         public static string NotSupportedExceptionCountryToRegionInfo {
             get {
                 return ResourceManager.GetString("NotSupportedExceptionCountryToRegionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DateSpan overflowed because the resulting duration is too long..
+        /// </summary>
+        public static string OverflowException_DateSpan {
+            get {
+                return ResourceManager.GetString("OverflowException_DateSpan", resourceCulture);
             }
         }
         

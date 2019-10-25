@@ -110,11 +110,11 @@ namespace Qowaiv.Financial
 
         public static Money Average(this IEnumerable<Money> source)
         {
-
+            return default;
         }
         public static Money? Average(this IEnumerable<Money?> source)
         {
-
+            return default;
         }
 
         public static Money Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Money> selector)

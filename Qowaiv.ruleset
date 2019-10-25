@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Microsoft Managed Recommended Rules" Description="These rules focus on the most critical problems in your code, including potential security holes, application crashes, and other important logic and design errors. It is recommended to include this rule set in any custom rule set you create for your projects." ToolsVersion="10.0">
+<RuleSet Name="Microsoft Managed Recommended Rules" Description="These rules focus on the most critical problems in your code, including potential security holes, application crashes, and other important logic and design errors. It is recommended to include this rule set in any custom rule set you create for your projects." ToolsVersion="16.0">
   <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
     <Name Resource="MinimumRecommendedRules_Name" />
     <Description Resource="MinimumRecommendedRules_Description" />
@@ -70,5 +70,26 @@
   </Rules>
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
     <Rule Id="S105" Action="Warning" />
+    <Rule Id="S106" Action="Warning" />
+    <Rule Id="S107" Action="Warning" />
+    <Rule Id="S109" Action="Warning" />
+    <Rule Id="S110" Action="Warning" />
+    <Rule Id="S1109" Action="Warning" />
+    <Rule Id="S113" Action="Warning" />
+    <Rule Id="S1145" Action="Warning" />
+    <Rule Id="S1147" Action="Warning" />
+    <Rule Id="S1151" Action="Warning" />
+    <Rule Id="S1192" Action="Warning" />
+    <Rule Id="S121" Action="Warning" />
+    <Rule Id="S1226" Action="Warning" />
+    <Rule Id="S1244" Action="Warning" />
+    <Rule Id="S126" Action="Warning" />
+    <Rule Id="S4060" Action="Warning" />
+    <Rule Id="S4069" Action="Warning" />
+    <Rule Id="S4136" Action="None" />
+    <Rule Id="S4142" Action="Warning" />
+    <Rule Id="S4212" Action="Warning" />
+    <Rule Id="S4432" Action="Warning" />
+    <Rule Id="S4462" Action="Warning" />
   </Rules>
 </RuleSet>

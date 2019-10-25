@@ -58,11 +58,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArgumentException_Must" xml:space="preserve">
-    <value>Argument must be {0}</value>
-  </data>
   <data name="ArgumentException_InvalidWildcardPattern" xml:space="preserve">
     <value>The wildcard pattern is invalid.</value>
+  </data>
+  <data name="ArgumentException_Must" xml:space="preserve">
+    <value>Argument must be {0}</value>
   </data>
   <data name="ArgumentException_NotIFormattable" xml:space="preserve">
     <value>The argument must implement System.IFormattable.</value>
@@ -70,8 +70,29 @@
   <data name="ArgumentException_TimestampArrayShouldHaveSize8" xml:space="preserve">
     <value>The byte array should have size of 8.</value>
   </data>
+  <data name="ArgumentOutOfRange_DecimalRound" xml:space="preserve">
+    <value>Decimals can only round to between -28 and 28 digits of precision.</value>
+  </data>
+  <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
+    <value>Percentages can only round to between -26 and 26 digits of precision.</value>
+  </data>
+  <data name="ArgumentOutOfRangeException_DateSpan" xml:space="preserve">
+    <value>The specified years, months and days results in an un-representable DateSpan.</value>
+  </data>
+  <data name="CurrencyMismatchException" xml:space="preserve">
+    <value>The {0} operation could not be applied. There is a mismatch between {1} and {2}.</value>
+  </data>
+  <data name="FormatException_IndexOutOfRange" xml:space="preserve">
+    <value>Index (zero based) must be greater than or equal to zero and less than the size of the argument list.</value>
+  </data>
+  <data name="FormatException_InvalidFormat" xml:space="preserve">
+    <value>Input string was not in a correct format.</value>
+  </data>
   <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
     <value>Not a valid BIC</value>
+  </data>
+  <data name="FormatExceptionBase32" xml:space="preserve">
+    <value>Not a valid Base32 string</value>
   </data>
   <data name="FormatExceptionBusinessIdentifierCode" xml:space="preserve">
     <value>Not a valid BIC</value>
@@ -88,14 +109,20 @@
   <data name="FormatExceptionDate" xml:space="preserve">
     <value>Not a valid date</value>
   </data>
+  <data name="FormatExceptionDateSpan" xml:space="preserve">
+    <value>Not a valid date span</value>
+  </data>
+  <data name="FormatExceptionElo" xml:space="preserve">
+    <value>Not a valid Elo</value>
+  </data>
   <data name="FormatExceptionEmailAddress" xml:space="preserve">
     <value>Not a valid email address</value>
   </data>
   <data name="FormatExceptionEmailAddressCollection" xml:space="preserve">
     <value>Not valid email addresses</value>
   </data>
-  <data name="FormatExceptionStreamSize" xml:space="preserve">
-    <value>Not a valid stream size</value>
+  <data name="FormatExceptionFinancialAmount" xml:space="preserve">
+    <value>Not a valid amount</value>
   </data>
   <data name="FormatExceptionGender" xml:space="preserve">
     <value>Not a valid gender</value>
@@ -106,8 +133,14 @@
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Not a valid IBAN</value>
   </data>
+  <data name="FormatExceptionInternetMediaType" xml:space="preserve">
+    <value>Not a valid internet media type</value>
+  </data>
   <data name="FormatExceptionLocalDateTime" xml:space="preserve">
     <value>Not valid date</value>
+  </data>
+  <data name="FormatExceptionMoney" xml:space="preserve">
+    <value>Not a valid amount</value>
   </data>
   <data name="FormatExceptionMonth" xml:space="preserve">
     <value>Not a valid month</value>
@@ -121,6 +154,9 @@
   <data name="FormatExceptionQGuid" xml:space="preserve">
     <value>Not a valid GUID</value>
   </data>
+  <data name="FormatExceptionStreamSize" xml:space="preserve">
+    <value>Not a valid stream size</value>
+  </data>
   <data name="FormatExceptionTimestamp" xml:space="preserve">
     <value>Not a valid SQL timestamp</value>
   </data>
@@ -130,11 +166,17 @@
   <data name="FormatExceptionYear" xml:space="preserve">
     <value>Not a valid year</value>
   </data>
-  <data name="FormatException_IndexOutOfRange" xml:space="preserve">
-    <value>Index (zero based) must be greater than or equal to zero and less than the size of the argument list.</value>
+  <data name="FormatExceptionYesNo" xml:space="preserve">
+    <value>Not a valid yes-no value</value>
   </data>
-  <data name="FormatException_InvalidFormat" xml:space="preserve">
-    <value>Input string was not in a correct format.</value>
+  <data name="InvalidCastException_FromTo" xml:space="preserve">
+    <value>Cast from {0} to {1} is not valid.</value>
+  </data>
+  <data name="InvalidOperationException_NoElements" xml:space="preserve">
+    <value>Sequence contains no elements.</value>
+  </data>
+  <data name="InvalidOperationException_WithDisplayName" xml:space="preserve">
+    <value>An not set email address can not be shown with a display name.</value>
   </data>
   <data name="JsonSerialization_DateTimeNotSupported" xml:space="preserve">
     <value>JSON deserialization from a date is not supported.</value>
@@ -157,61 +199,19 @@
   <data name="JsonSerialization_TokenNotSupported" xml:space="preserve">
     <value>Unexpected token parsing {0}. {1} is not supported.</value>
   </data>
-  <data name="NotSupportedExceptionCountryToRegionInfo" xml:space="preserve">
-    <value>The country '{0} ({1})' is not supported as region info.</value>
-  </data>
   <data name="NotSupportedException_ConverterCanNotConvertFromString" xml:space="preserve">
     <value>Converter can not convert from System.String.</value>
   </data>
   <data name="NotSupportedException_NoGenericType" xml:space="preserve">
     <value>Type must be a none generic type.</value>
   </data>
-  <data name="FormatExceptionElo" xml:space="preserve">
-    <value>Not a valid Elo</value>
-  </data>
-  <data name="InvalidCastException_FromTo" xml:space="preserve">
-    <value>Cast from {0} to {1} is not valid.</value>
-  </data>
-  <data name="FormatExceptionBase32" xml:space="preserve">
-    <value>Not a valid Base32 string</value>
-  </data>
-  <data name="FormatExceptionFinancialAmount" xml:space="preserve">
-    <value>Not a valid amount</value>
-  </data>
-  <data name="FormatExceptionMoney" xml:space="preserve">
-    <value>Not a valid amount</value>
-  </data>
-  <data name="CurrencyMismatchException" xml:space="preserve">
-    <value>The {0} operation could not be applied. There is a mismatch between {1} and {2}.</value>
-  </data>
-  <data name="FormatExceptionYesNo" xml:space="preserve">
-    <value>Not a valid yes-no value</value>
-  </data>
-  <data name="FormatExceptionInternetMediaType" xml:space="preserve">
-    <value>Not a valid internet media type</value>
-  </data>
-  <data name="InvalidOperationException_WithDisplayName" xml:space="preserve">
-    <value>An not set email address can not be shown with a display name.</value>
-  </data>
-  <data name="FormatExceptionDateSpan" xml:space="preserve">
-    <value>Not a valid date span</value>
-  </data>
-  <data name="ArgumentOutOfRangeException_DateSpan" xml:space="preserve">
-    <value>The specified years, months and days results in an un-representable DateSpan.</value>
+  <data name="NotSupportedExceptionCountryToRegionInfo" xml:space="preserve">
+    <value>The country '{0} ({1})' is not supported as region info.</value>
   </data>
   <data name="OverflowException_DateSpan" xml:space="preserve">
     <value>DateSpan overflowed because the resulting duration is too long.</value>
   </data>
-  <data name="ArgumentOutOfRange_DecimalRound" xml:space="preserve">
-    <value>Decimals can only round to between -28 and 28 digits of precision.</value>
-  </data>
-  <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
-    <value>Percentages can only round to between -26 and 26 digits of precision.</value>
-  </data>
   <data name="OverflowException_DecimalRound" xml:space="preserve">
     <value>Decimal overflowed while rounding.</value>
-  </data>
-  <data name="InvalidOperationException_NoElements" xml:space="preserve">
-    <value>Sequence contains no elements.</value>
   </data>
 </root>

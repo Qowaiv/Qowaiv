@@ -226,7 +226,7 @@ namespace Qowaiv
         /// </exception>
         public LocalDateTime Add(TimeSpan value)
         {
-            return new LocalDateTime(this.Ticks + value.Ticks);
+            return new LocalDateTime(m_Value.Ticks + value.Ticks);
         }
 
         /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>

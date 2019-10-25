@@ -63,7 +63,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            string str = "+5Y+3M+2D";
+            string str = "5Y+3M+2D";
             Assert.IsTrue(DateSpan.TryParse(str, out DateSpan val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
@@ -359,7 +359,7 @@ namespace Qowaiv.UnitTests
         public void ToJson_DefaultValue_AreEqual()
         {
             object act = JsonTester.Write(default(DateSpan));
-            object exp = "0D";
+            object exp = "0Y+0M+0D";
 
             Assert.AreEqual(exp, act);
         }
@@ -377,10 +377,10 @@ namespace Qowaiv.UnitTests
         #region IFormattable / Tostring tests
 
         [Test]
-        public void ToString_Zero_0D()
+        public void ToString_Zero_0Y0M0D()
         {
             var act = DateSpan.Zero.ToString();
-            var exp = "0D";
+            var exp = "0Y+0M+0D";
             Assert.AreEqual(exp, act);
         }
 
@@ -388,21 +388,21 @@ namespace Qowaiv.UnitTests
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: '+10Y+3M-5D', format: 'Unit Test Format'";
+            var exp = "Unit Test Formatter, value: '10Y+3M-5D', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);
         }
 
-        [TestCase("0D", 0, 0)]
-        [TestCase("+1D", 0, 1)]
-        [TestCase("+1M", 1, 0)]
-        [TestCase("+1Y", 12, 0)]
-        [TestCase("+1Y+1D", 12, 1)]
-        [TestCase("+1Y+1D", 12, 1)]
-        [TestCase("+1Y+1M+1D", 13, 1)]
-        [TestCase("-11D", 0, -11)]
-        [TestCase("+1M-12D", +1, -12)]
-        [TestCase("-1M-12D", -1, -12)]
+        [TestCase("0Y+0M+0D", 0, 0)]
+        [TestCase("0Y+0M+1D", 0, 1)]
+        [TestCase("0Y+1M+0D", 1, 0)]
+        [TestCase("1Y+0M+0D", 12, 0)]
+        [TestCase("1Y+0M+1D", 12, 1)]
+        [TestCase("1Y+0M+1D", 12, 1)]
+        [TestCase("1Y+1M+1D", 13, 1)]
+        [TestCase("0Y+0M-11D", 0, -11)]
+        [TestCase("0Y+1M-12D", +1, -12)]
+        [TestCase("0Y-1M-12D", -1, -12)]
         [TestCase("-1Y-1M+1D", -13, 1)]
         public void ToString_Invariant(string expected, int months, int days)
         {
@@ -458,8 +458,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            var l = DateSpan.Parse("+3Y+3D", CultureInfo.InvariantCulture);
-            var r = DateSpan.Parse("+36m+3d", CultureInfo.InvariantCulture);
+            var l = DateSpan.Parse("3Y-0M+3D", CultureInfo.InvariantCulture);
+            var r = DateSpan.Parse("-0y+36m+3d", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
         }
@@ -654,7 +654,7 @@ namespace Qowaiv.UnitTests
         public void Mutate_Overflows()
         {
             var x = Assert.Catch<OverflowException>(()=> DateSpan.MaxValue.AddDays(1));
-            Assert.AreEqual("DateSpan overflowed because the duration the duration is too long.", x.Message);
+            Assert.AreEqual("DateSpan overflowed because the resulting duration is too long.", x.Message);
         }
 
         [Test]
@@ -839,10 +839,10 @@ namespace Qowaiv.UnitTests
         [TestCase("23Y+0M+0D", "Without starting sign")]
         [TestCase("+9998Y+0M+0D", "A lot of years")]
         [TestCase("-9998Y+0M+0D", "A lot of years")]
-        [TestCase("+100000M", "A lot of months")]
-        [TestCase("-100000M", "A lot of months")]
-        [TestCase("+3650000D", "A lot of days")]
-        [TestCase("-3650000D", "A lot of days")]
+        [TestCase("0Y+100000M+1D", "A lot of months")]
+        [TestCase("0Y-100000M+1D", "A lot of months")]
+        [TestCase("0Y+0M+3650000D", "A lot of days")]
+        [TestCase("0Y+0M-3650000D", "A lot of days")]
         public void IsValid(string val, string scenario)
         {
             Assert.IsTrue(DateSpan.IsValid(val), scenario);
@@ -853,8 +853,8 @@ namespace Qowaiv.UnitTests
         [TestCase("234adf", "Noise")]
         [TestCase("+9999Y+0M+0D", "Years out of reach")]
         [TestCase("-9999Y+0M+0D", "Years out of reach")]
-        [TestCase("+4650000D", "Days out of reach")]
-        [TestCase("-4650000D", "Days out of reach")]
+        [TestCase("0Y+0M+4650000D", "Days out of reach")]
+        [TestCase("0Y+0M-4650000D", "Days out of reach")]
         public void IsInvalid(string val, string scenario)
         {
             Assert.IsFalse(DateSpan.IsValid(val), scenario);

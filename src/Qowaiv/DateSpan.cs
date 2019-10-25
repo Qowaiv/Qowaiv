@@ -10,7 +10,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
@@ -26,7 +25,16 @@ namespace Qowaiv
     public struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
-        internal static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4})Y)?(?<Months>([+-][0-9]{1,6})M)?(?<Days>([+-][0-9]{1,7})D)?$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M(?<Days>([+-][0-9]{1,7}))D$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        /// <summary>Represents the zero date span.</summary>
+        public static readonly DateSpan Zero;
+
+        /// <summary>Represents the maximum value of the date span.</summary>
+        public static readonly DateSpan MaxValue = new DateSpan { m_Value = AsUInt64(MonthsPerYear * +9998 + 11, +30) };
+
+        /// <summary>Represents the minimum value of the date span.</summary>
+        public static readonly DateSpan MinValue = new DateSpan { m_Value = AsUInt64(MonthsPerYear * -9998 - 11, -30) };
 
         /// <summary>The average amount of days per month, taken leap years into account.</summary>
         internal const double DaysPerMonth = 30.421625;
@@ -34,14 +42,17 @@ namespace Qowaiv
         /// <summary>The total of days, that can not be applied on a <see cref="Date"/> or <see cref="DateTime"/>.</summary>
         internal const int MaxDays = (int)(DaysPerMonth * 120000);
 
-        /// <summary>Represents the zero date span.</summary>
-        public static readonly DateSpan Zero;
+        /// <summary>12 months per year.</summary>
+        internal const int MonthsPerYear = 12;
+        
+        /// <summary>365 days per year.</summary>
+        internal const int DaysPerYear = 365;
+        
+        /// <summary>366 days per leap year.</summary>
+        internal const int DaysPerLeapYear = 366;
 
-        /// <summary>Represents the maximum value of the date span.</summary>
-        public static readonly DateSpan MaxValue = new DateSpan { m_Value = AsUInt64(12 * +9998 + 11, +30) };
-
-        /// <summary>Represents the minimum value of the date span.</summary>
-        public static readonly DateSpan MinValue = new DateSpan { m_Value = AsUInt64(12 * -9998 - 11, -30) };
+        /// <summary>The shift position of the total months in the value.</summary>
+        internal const int MonthShift = 32;
 
         /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
         /// <param name="months">
@@ -56,7 +67,7 @@ namespace Qowaiv
 
             if (IsOutOfRange(months, days, TotalDays))
             {
-                throw new ArgumentOutOfRangeException(null, QowaivMessages.ArgumentOutOfRangeException_DateSpan);
+                throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception)null);
             }
         }
 
@@ -71,10 +82,10 @@ namespace Qowaiv
         /// Number of days.
         /// </param>
         public DateSpan(int years, int months, int days)
-            : this(years * 12 + months, days) { }
+            : this(years * MonthsPerYear + months, days) { }
 
         /// <summary>Converts the combination of months and days to a <see cref="ulong"/>.</summary>
-        private static ulong AsUInt64(long months, long days) => (uint)days | ((ulong)months << 32);
+        private static ulong AsUInt64(long months, long days) => (uint)days | ((ulong)months << MonthShift);
 
         #region Properties
 
@@ -82,13 +93,13 @@ namespace Qowaiv
         private ulong m_Value;
 
         /// <summary>Gets the total of months.</summary>
-        public int TotalMonths => (int)(m_Value >> 32);
+        public int TotalMonths => (int)(m_Value >> MonthShift);
 
         /// <summary>Gets the years component of the date span.</summary>
-        public int Years => TotalMonths / 12;
+        public int Years => TotalMonths / MonthsPerYear;
 
         /// <summary>Gets the months component of the date span.</summary>
-        public int Months => TotalMonths % 12;
+        public int Months => TotalMonths % MonthsPerYear;
 
         /// <summary>Gets the days component of the date span.</summary>
         public int Days => (int)m_Value;
@@ -99,6 +110,13 @@ namespace Qowaiv
         #endregion
 
         #region Operations
+
+        /// <summary>Unary plus the date span.</summary>
+        /// <returns></returns>
+        internal DateSpan Plus() => this;
+
+        /// <summary>Negates the date span.</summary>
+        public DateSpan Negate() => new DateSpan { m_Value = AsUInt64(-TotalMonths, -Days) };
 
         /// <summary>Returns a new date span whose value is the sum of the specified date span and this instance.</summary>
         ///<param name="other">
@@ -153,7 +171,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
-        public DateSpan AddYears(int years) => Mutate(TotalMonths + years * 12L, Days);
+        public DateSpan AddYears(int years) => Mutate(TotalMonths + years * (long)MonthsPerYear, Days);
 
         /// <summary>Mutates the months and days.</summary>
         ///<exception cref="OverflowException">
@@ -292,27 +310,7 @@ namespace Qowaiv
             {
                 return formatted;
             }
-
-            if (m_Value == 0)
-            {
-                return "0D";
-            }
-
-            var sb = new StringBuilder(16);
-
-            if (Years != 0)
-            {
-                sb.AppendFormat(formatProvider, "{0:+0;-0;#}Y", Years);
-            }
-            if (Months != 0)
-            {
-                sb.AppendFormat(formatProvider, "{0:+0;-0;#}M", Months);
-            }
-            if (Days != 0)
-            {
-                sb.AppendFormat(formatProvider, "{0:+0;-0;#}D", Days);
-            }
-            return sb.ToString();
+            return string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M{2:+0;-0;+0}D", Years, Months, Days);
         }
 
         #endregion
@@ -401,11 +399,16 @@ namespace Qowaiv
 
         #endregion
 
-        /// <summary>Subtracts the Time Span from the date.</summary>
-        public static DateSpan operator +(DateSpan span) => span;
-        public static DateSpan operator -(DateSpan span) => new DateSpan(-span.TotalMonths, -span.Days);
+        /// <summary>Unary plus the date span.</summary>
+        public static DateSpan operator +(DateSpan span) => span.Plus();
 
+        /// <summary>Negates the date span.</summary>
+        public static DateSpan operator -(DateSpan span) => span.Negate();
+
+        /// <summary>Adds two date spans.</summary>
         public static DateSpan operator +(DateSpan l, DateSpan r) => l.Add(r);
+
+        /// <summary>Subtracts two date spans.</summary>
         public static DateSpan operator -(DateSpan l, DateSpan r) => l.Subtract(r);
 
         #region Factory methods
@@ -419,8 +422,27 @@ namespace Qowaiv
         /// <summary>Creates a date span from months only.</summary>
         public static DateSpan FromYears(int years) => new DateSpan(years, 0, 0);
 
-        public static DateSpan Age(Date reference) => Age(reference, DateSpanSettings.WithoutMonths);
-        public static DateSpan Age(Date reference, DateSpanSettings settings) => Subtract(Clock.Today(), reference, settings);
+        /// <summary>Calculates the age (in years and days) for a given date for today.</summary>
+        /// <param name="t1">
+        /// The date to get the age for.
+        /// </param>
+        /// <returns>
+        /// The age defined in years and days.
+        /// </returns>
+        public static DateSpan Age(Date t1) => Age(t1, Clock.Today());
+
+
+        /// <summary>Calculates the age (in years and days) for a given date for the reference date.</summary>
+        /// <param name="t1">
+        /// The date to get the age for.
+        /// </param>
+        /// <param name="reference">
+        /// The reference date.
+        /// </param>
+        /// <returns>
+        /// The age defined in years and days.
+        /// </returns>
+        public static DateSpan Age(Date t1, Date reference) => Subtract(reference, t1, DateSpanSettings.WithoutMonths);
 
         /// <summary>Creates a date span on by subtracting t2 from t1.</summary>
         /// <param name="t1">
@@ -491,7 +513,7 @@ namespace Qowaiv
                 {
                     years--;
                     var sub = daysFirst ? min : max.AddYears(-1);
-                    days += DateTime.IsLeapYear(sub.Year) ? 366 : 365;
+                    days += DateTime.IsLeapYear(sub.Year) ? DaysPerLeapYear : DaysPerYear;
                 }
             }
 
@@ -589,10 +611,6 @@ namespace Qowaiv
             {
                 return false;
             }
-            if (s == "0D")
-            {
-                return true;
-            }
 
             var match = Pattern.Match(s);
 
@@ -616,12 +634,8 @@ namespace Qowaiv
 
         private static int IntFromGroup(Match match, string group)
         {
-            if (match.Groups[group].Length != 0)
-            {
-                var str = match.Groups[group].Value;
-                return int.Parse(str.Substring(0, str.Length - 1));
-            }
-            return 0;
+            var str = match.Groups[group].Value;
+            return int.Parse(str);
         }
 
         #endregion

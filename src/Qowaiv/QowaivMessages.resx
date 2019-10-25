@@ -161,7 +161,7 @@
     <value>The country '{0} ({1})' is not supported as region info.</value>
   </data>
   <data name="NotSupportedException_ConverterCanNotConvertFromString" xml:space="preserve">
-    <value />
+    <value>Converter can not convert from System.String.</value>
   </data>
   <data name="NotSupportedException_NoGenericType" xml:space="preserve">
     <value>Type must be a none generic type.</value>

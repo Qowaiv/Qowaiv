@@ -475,7 +475,7 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Converter can not convert from System.String..
         /// </summary>
         public static string NotSupportedException_ConverterCanNotConvertFromString {
             get {

@@ -524,7 +524,7 @@ namespace Qowaiv
         {
             if ((decimals < -26) || (decimals > 26))
             {
-                throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentagelRound);
+                throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentageRound);
             }
             return m_Value.Round(decimals + 2, mode);
         }

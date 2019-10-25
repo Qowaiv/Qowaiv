@@ -16,6 +16,7 @@ namespace Qowaiv.Tests
         {
             AssemblyAssert.ContainsSvos<Date>(
                 typeof(Date),
+                typeof(DateSpan),
                 typeof(EmailAddress),
                 typeof(Gender),
                 typeof(HouseNumber),

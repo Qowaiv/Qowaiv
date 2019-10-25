@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace @(Model.Namespace).Conversion
+namespace Qowaiv.Conversion
 {
-    /// <summary>Provides a conversion for @Model.a @(Model.ClassLongName).</summary>
-    public class @(Model.ClassName)TypeConverter : TypeConverter
+    /// <summary>Provides a conversion for a date span.</summary>
+    public class DateSpanTypeConverter : TypeConverter
     {
         #region Convert From
 
         /// <summary>Returns whether this converter can convert an string to
-        /// @Model.a @Model.ClassLongName, using the specified context.
+        /// a date span, using the specified context.
         /// </summary>
         /// <param name="context">
         /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
@@ -25,7 +25,7 @@ namespace @(Model.Namespace).Conversion
         {
             return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
-        /// <summary>Converts a string to @Model.a @Model.ClassLongName, using the specified
+        /// <summary>Converts a string to a date span, using the specified
         /// context and culture information.
         /// </summary>
         /// <param name="context">
@@ -48,7 +48,7 @@ namespace @(Model.Namespace).Conversion
             var str = value as string;
             if (value is null || str != null)
             {
-                return @(Model.ClassName).Parse(str, culture);
+                return DateSpan.Parse(str, culture);
             }
             return base.ConvertFrom(context, culture, value);
         }
@@ -56,7 +56,7 @@ namespace @(Model.Namespace).Conversion
 
         #region Convert To
 
-        /// <summary>Converts @Model.a @Model.ClassLongName to string, using the specified context and culture information.</summary>
+        /// <summary>Converts a date span to string, using the specified context and culture information.</summary>
         /// <param name="culture">
         /// A System.Globalization.CultureInfo. If null is passed, the current culture is assumed.
         /// </param>
@@ -64,13 +64,13 @@ namespace @(Model.Namespace).Conversion
         /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
         /// </param>
         /// <param name="value">
-        /// The @Model.ClassLongName to convert.
+        /// The date span to convert.
         /// </param>
         /// <param name="destinationType">
         /// The System.Type to convert the value parameter to.
         /// </param>
         /// <returns>
-        /// A string that represents the converted @Model.ClassLongName.
+        /// A string that represents the converted date span.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// The destinationType parameter is null.

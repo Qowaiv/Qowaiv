@@ -37,10 +37,10 @@ Represents a date, so without hours (minutes, seconds, milliseconds).
 ### Date span
 Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
 Adding one month to a date in January result in adding a different number of days, 
-then adding one month date in March.
+than adding one month a date in March.
 
-Date spans are particular useful in scenario's for defining (and doing calculations)
-on month based periods, and ages (mostly in years and days).
+Date spans are particular useful in scenario's for defining (and doing calculations on)
+month based periods, and ages (mostly in years and days).
 
 ``` C#
 var span = new DateSpan(years: 3, months: 2, days: -4);

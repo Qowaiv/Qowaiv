@@ -42,20 +42,7 @@ namespace Qowaiv
         public static Date Tomorrow => Clock.Tomorrow();
 
         #region Constructors
-
-        /// <summary>Initializes a new instance of the date structure based on a System.DateTime.
-        /// </summary>
-        /// <param name="dt">
-        /// A date and time.
-        /// </param>
-        /// <remarks>
-        /// The date of the date time is taken.
-        /// </remarks>
-        private Date(DateTime dt)
-        {
-            m_Value = dt.Date;
-        }
-
+           
         /// <summary>Initializes a new instance of the date structure to a specified number of ticks.</summary>
         /// <param name="ticks">
         /// A date expressed in 100-nanosecond units.
@@ -84,6 +71,19 @@ namespace Qowaiv
         /// more than <see cref="MaxValue"/>.
         /// </exception>
         public Date(int year, int month, int day) : this(new DateTime(year, month, day)) { }
+
+        /// <summary>Initializes a new instance of the date structure based on a System.DateTime.
+        /// </summary>
+        /// <param name="dt">
+        /// A date and time.
+        /// </param>
+        /// <remarks>
+        /// The date of the date time is taken.
+        /// </remarks>
+        private Date(DateTime dt)
+        {
+            m_Value = dt.Date;
+        }
 
         #endregion
 
@@ -427,7 +427,7 @@ namespace Qowaiv
         /// <param name="jsonDate">
         /// The JSON Date that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => m_Value = jsonDate;
+        void IJsonSerializable.FromJson(DateTime jsonDate) => m_Value = jsonDate.Date;
 
         /// <summary>Converts a Date into its JSON object representation.</summary>
         object IJsonSerializable.ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
@@ -732,7 +732,7 @@ namespace Qowaiv
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid Date, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out Date d);
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
 
         #endregion
     }

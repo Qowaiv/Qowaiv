@@ -43,6 +43,29 @@ namespace Qowaiv.Financial
         /// <summary>Returns the absolute value of the amount.</summary>
         public Amount Abs() => Math.Abs(m_Value);
 
+        /// <summary>Pluses the amount.</summary>
+        internal Amount Plus() => +m_Value;
+
+        /// <summary>Negates the amount.</summary>
+
+        internal Amount Negate() => -m_Value;
+
+        /// <summary>Increases the amount with one.</summary>
+        internal Amount Increment() => m_Value + 1;
+
+        /// <summary>Decreases the amount with one.</summary>
+        internal Amount Decrement() => m_Value - 1;
+
+        /// <summary>Unitary plusses the amount.</summary>
+        public static Amount operator +(Amount money) => money.Plus();
+        /// <summary>Negates the amount.</summary>
+        public static Amount operator -(Amount money) => money.Negate();
+
+        /// <summary>Increases the amount with one.</summary>
+        public static Amount operator ++(Amount amount) => amount.Increment();
+        /// <summary>Decreases the amount with one.</summary>
+        public static Amount operator --(Amount amount) => amount.Decrement();
+
         #endregion
 
         #region (XML) (De)serialization

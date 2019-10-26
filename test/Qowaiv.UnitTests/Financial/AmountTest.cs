@@ -742,6 +742,36 @@ namespace Qowaiv.Financial.UnitTests
             Assert.AreEqual(expected, abs);
         }
 
+        [TestCase(-1234.01)]
+        [TestCase(+1234.01)]
+        public void Plus(Amount expected)
+        {
+            var plus = +expected;
+            Assert.AreEqual(expected, plus);
+        }
+
+        [TestCase(+1234.01, -1234.01)]
+        [TestCase(-1234.01, +1234.01)]
+        public void Negate(Amount expected, Amount value)
+        {
+            var negated = -value;
+            Assert.AreEqual(expected, negated);
+        }
+
+        [Test]
+        public void Decrement_EqualsTestStruct()
+        {
+            Amount amount = 43.17;
+            Assert.AreEqual(TestStruct, --amount);
+        }
+
+        [Test]
+        public void Increment_EqualsTestStruct()
+        {
+            Amount amount = 41.17;
+            Assert.AreEqual(TestStruct, ++amount);
+        }
+
         #endregion
 
         #region Type converter tests

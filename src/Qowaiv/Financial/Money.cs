@@ -48,6 +48,18 @@ namespace Qowaiv.Financial
         /// <summary>Returns the absolute value of the money.</summary>
         public Money Abs() => Math.Abs(m_Value) + Currency;
 
+        /// <summary>Pluses the money.</summary>
+        internal Money Plus() => +m_Value + Currency;
+
+        /// <summary>Negates the money.</summary>
+        internal Money Negate() => -m_Value + Currency;
+
+        /// <summary>Increases the money with one (of the current currency).</summary>
+        internal Money Increment() => (m_Value + 1) + Currency;
+
+        /// <summary>Decreases the money with one (of the current currency).</summary>
+        internal Money Decrement() => (m_Value - 1) + Currency;
+
         /// <summary>Rounds the money value to the preferred number decimal places, based on its currency.</summary>
         public Money Round() => Round(Currency.Digits);
 
@@ -86,18 +98,6 @@ namespace Qowaiv.Financial
         /// The rounding method used to determine the closed by number.
         /// </param>
         public Money RoundToMultiple(decimal multipleOf, DecimalRounding mode) => Create(m_Value.RoundToMultiple(multipleOf, mode), Currency);
-
-        /// <summary>Increases the money with one (of the current currency).</summary>
-        public Money Increment() => Create(m_Value + 1, Currency);
-
-        /// <summary>Decreases the money with one (of the current currency).</summary>
-        public Money Decrement() => Create(m_Value - 1, Currency);
-
-        /// <summary>Pluses the money.</summary>
-        public Money Plus() => Create(+m_Value, Currency);
-
-        /// <summary>Negates the Money.</summary>
-        public Money Negate() => Create(-m_Value, Currency);
 
         /// <summary>Adds money.</summary>
         /// <param name="l">The left operand.</param>
@@ -205,7 +205,7 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates Money from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates Money from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -394,7 +394,7 @@ namespace Qowaiv.Financial
         #region (Explicit) casting
 
         /// <summary>Casts Money to a <see cref="string"/>.</summary>
-        public static explicit operator string(Money val)=> val.ToString(CultureInfo.CurrentCulture);
+        public static explicit operator string(Money val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
         public static explicit operator Money(string str) => Parse(str, CultureInfo.CurrentCulture);
 
@@ -428,7 +428,7 @@ namespace Qowaiv.Financial
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static Money Parse(string s)=> Parse(s, CultureInfo.CurrentCulture);
+        public static Money Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to </summary>
         /// <param name="s">

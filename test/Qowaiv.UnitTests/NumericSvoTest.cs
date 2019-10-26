@@ -10,6 +10,7 @@ namespace Qowaiv.UnitTests
 {
     public class NumericSvoTest
     {
+        internal const BindingFlags NonPublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
         internal const BindingFlags PublicInstance = BindingFlags.Public | BindingFlags.Instance;
         internal const BindingFlags PublicStatic = BindingFlags.Public | BindingFlags.Static;
 
@@ -40,7 +41,7 @@ namespace Qowaiv.UnitTests
         public void Plus(Type svo)
         {
             var methods = svo
-                .GetMethods(PublicInstance)
+                .GetMethods(NonPublicInstance)
                 .ExcludeObsolete()
                 .Returns(svo)
                 .Where(m => m.Name == nameof(Plus))
@@ -68,7 +69,7 @@ namespace Qowaiv.UnitTests
         public void Negate(Type svo)
         {
             var methods = svo
-                .GetMethods(PublicInstance)
+                .GetMethods(NonPublicInstance)
                 .ExcludeObsolete()
                 .Returns(svo)
                 .Where(m => m.Name == nameof(Negate))
@@ -96,7 +97,7 @@ namespace Qowaiv.UnitTests
         public void Increment(Type svo)
         {
             var methods = svo
-                .GetMethods(PublicInstance)
+                .GetMethods(NonPublicInstance)
                 .ExcludeObsolete()
                 .Returns(svo)
                 .Where(m => m.Name == nameof(Increment))
@@ -124,7 +125,7 @@ namespace Qowaiv.UnitTests
         public void Decrement(Type svo)
         {
             var methods = svo
-                .GetMethods(PublicInstance)
+                .GetMethods(NonPublicInstance)
                 .ExcludeObsolete()
                 .Returns(svo)
                 .Where(m => m.Name == nameof(Decrement))

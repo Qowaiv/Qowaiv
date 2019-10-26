@@ -274,10 +274,10 @@ namespace Qowaiv.IO
 
         #endregion
 
-        /// <summary>Increases the stream size with one percent.</summary>
-        public static StreamSize operator ++(StreamSize streamSize) { return streamSize.Increment(); }
-        /// <summary>Decreases the stream size with one percent.</summary>
-        public static StreamSize operator --(StreamSize streamSize) { return streamSize.Decrement(); }
+        /// <summary>Increases the stream size with one byte.</summary>
+        public static StreamSize operator ++(StreamSize streamSize) => streamSize.Increment();
+        /// <summary>Decreases the stream size with one byte.</summary>
+        public static StreamSize operator --(StreamSize streamSize) => streamSize.Decrement();
 
         /// <summary>Unitary plusses the stream size.</summary>
         public static StreamSize operator +(StreamSize streamSize) { return streamSize.Plus(); }

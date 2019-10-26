@@ -96,7 +96,7 @@ namespace Qowaiv.UnitTests.IO
         }
         #endregion
 
-        #region From*byte factory methods
+        #region From byte factory methods
 
         [Test]
         public void FromKilobytes_2_2000()
@@ -1000,10 +1000,16 @@ namespace Qowaiv.UnitTests.IO
 
         #endregion
 
-        #region Properties
-        #endregion
 
         #region Stream size manipulation tests
+
+        [TestCase(1234, -1234)]
+        [TestCase(1234, +1234)]
+        public void Abs(StreamSize expected, StreamSize value)
+        {
+            var abs = value.Abs();
+            Assert.AreEqual(expected, abs);
+        }
 
         [Test]
         public void Increment_21_22()

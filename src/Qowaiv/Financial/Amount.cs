@@ -38,6 +38,13 @@ namespace Qowaiv.Financial
 
         #endregion
 
+        #region Methods
+
+        /// <summary>Returns the absolute value of the amount.</summary>
+        public Amount Abs() => Math.Abs(m_Value);
+
+        #endregion
+
         #region (XML) (De)serialization
 
         /// <summary>Initializes a new instance of Amount based on the serialization info.</summary>

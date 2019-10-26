@@ -97,51 +97,44 @@ namespace Qowaiv.IO
 
         #region StreamSize manipulation
 
-        /// <summary>Increases the stream size with one percent.</summary>
-        public StreamSize Increment()
-        {
-            return this.Add(StreamSize.Byte);
-        }
+        /// <summary>Returns the absolute value of stream size.</summary>
+        public StreamSize Abs() => Math.Abs(m_Value);
+
+        /// <summary>Increases the stream size with one byte.</summary>
+        internal StreamSize Increment() => Add(Byte);
+
         /// <summary>Decreases the stream size with one percent.</summary>
-        public StreamSize Decrement()
-        {
-            return this.Subtract(StreamSize.Byte);
-        }
+        internal StreamSize Decrement() => Subtract(Byte);
 
         /// <summary>Pluses the stream size.</summary>
-        public StreamSize Plus()
-        {
-            return new StreamSize(+m_Value);
-        }
+        internal StreamSize Plus() => +m_Value;
+
         /// <summary>Negates the stream size.</summary>
-        public StreamSize Negate()
-        {
-            return new StreamSize(-m_Value);
-        }
+        internal StreamSize Negate() => -m_Value;
 
         /// <summary>Adds a stream size to the current stream size.</summary>
         /// <param name="streamSize">
         /// The stream size to add.
         /// </param>
-        public StreamSize Add(StreamSize streamSize) { return m_Value + streamSize.m_Value; }
+        public StreamSize Add(StreamSize streamSize) => m_Value + streamSize.m_Value;
 
         /// <summary>Adds the specified percentage to the stream size.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
-        public StreamSize Add(Percentage p) { return m_Value.Add(p); }
+        public StreamSize Add(Percentage p) => m_Value.Add(p);
 
         /// <summary>Subtracts a stream size from the current stream size.</summary>
         /// <param name="streamSize">
         /// The stream size to Subtract.
         /// </param>
-        public StreamSize Subtract(StreamSize streamSize) { return m_Value - streamSize.m_Value; }
+        public StreamSize Subtract(StreamSize streamSize) => m_Value - streamSize.m_Value;
 
         /// <summary>AddsSubtract the specified percentage from the stream size.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
-        public StreamSize Subtract(Percentage p) { return m_Value.Subtract(p); }
+        public StreamSize Subtract(Percentage p) => m_Value.Subtract(p);
 
         #region Multiply
 
@@ -704,7 +697,7 @@ namespace Qowaiv.IO
         /// <summary>Casts a stream size to a System.Int32.</summary>
         public static explicit operator int(StreamSize val) => (int)val.m_Value;
         /// <summary>Casts an System.Int32 to a stream size.</summary>
-        public static implicit operator StreamSize(int val) => new StreamSize(val); 
+        public static implicit operator StreamSize(int val) => new StreamSize(val);
 
         /// <summary>Casts a stream size to a System.Int64.</summary>
         public static explicit operator long(StreamSize val) => val.m_Value;
@@ -923,7 +916,7 @@ namespace Qowaiv.IO
         #region Validation
 
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
-        public static bool IsValid(string val)=> IsValid(val, CultureInfo.CurrentCulture);
+        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)

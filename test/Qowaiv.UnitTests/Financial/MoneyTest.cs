@@ -733,6 +733,15 @@ namespace Qowaiv.UnitTests.Financial
 
         #region Operations
 
+        [TestCase(23.1234, -23.1234)]
+        [TestCase(23.1234, +23.1234)]
+        public void Abs(decimal expected, decimal value)
+        {
+            var money = value + Currency.USD;
+            var abs = money.Abs();
+            Assert.AreEqual(expected+Currency.USD, abs);
+        }
+
         [Test]
         public void Plus_TestStruct_SameValue()
         {

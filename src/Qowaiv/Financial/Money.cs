@@ -45,6 +45,9 @@ namespace Qowaiv.Financial
 
         #region Methods
 
+        /// <summary>Returns the absolute value of the money.</summary>
+        public Money Abs() => Math.Abs(m_Value) + Currency;
+
         /// <summary>Rounds the money value to the preferred number decimal places, based on its currency.</summary>
         public Money Round() => Round(Currency.Digits);
 

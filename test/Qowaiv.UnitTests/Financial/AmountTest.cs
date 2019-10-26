@@ -732,7 +732,16 @@ namespace Qowaiv.Financial.UnitTests
 
         #endregion
 
-        #region Properties
+        #region Methods
+
+        [TestCase(1234.01, -1234.01)]
+        [TestCase(1234.01, +1234.01)]
+        public void Abs(Amount expected, Amount value)
+        {
+            var abs = value.Abs();
+            Assert.AreEqual(expected, abs);
+        }
+
         #endregion
 
         #region Type converter tests

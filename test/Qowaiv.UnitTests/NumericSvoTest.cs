@@ -13,6 +13,26 @@ namespace Qowaiv.UnitTests
         internal const BindingFlags PublicInstance = BindingFlags.Public | BindingFlags.Instance;
         internal const BindingFlags PublicStatic = BindingFlags.Public | BindingFlags.Static;
 
+
+        [TestCase(typeof(Amount))]
+        [TestCase(typeof(Money))]
+        [TestCase(typeof(Percentage))]
+        [TestCase(typeof(StreamSize))]
+        public void Abs(Type svo)
+        {
+            //Math.Abs
+            var methods = svo
+                .GetMethods(PublicInstance)
+                .ExcludeObsolete()
+                .Returns(svo)
+                .Where(m => m.Name == nameof(Abs))
+                .SelectParameters()
+                .Where(pars => pars.Length == 0)
+                .ToArray();
+
+            Assert.IsTrue(methods.Length == 1, nameof(methods));
+        }
+
         [TestCase(typeof(Amount))]
         [TestCase(typeof(Money))]
         [TestCase(typeof(Percentage))]

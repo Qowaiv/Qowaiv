@@ -55,17 +55,20 @@ namespace Qowaiv
 
         #region Percentage manipulation
 
+        /// <summary>Returns the absolute value of the percentage.</summary>
+        public Percentage Abs() => Math.Abs(m_Value);
+
         /// <summary>Increases the percentage with one percent.</summary>
-        public Percentage Increment() => Add(One);
+        internal Percentage Increment() => Add(One);
 
         /// <summary>Decreases the percentage with one percent.</summary>
-        public Percentage Decrement() => Subtract(One);
+        internal Percentage Decrement() => Subtract(One);
 
         /// <summary>Pluses the percentage.</summary>
-        public Percentage Plus() => +m_Value;
+        internal Percentage Plus() => +m_Value;
 
         /// <summary>Negates the percentage.</summary>
-        public Percentage Negate() => -m_Value;
+        internal Percentage Negate() => -m_Value;
 
         /// <summary>Gets a percentage of the current percentage.</summary>
         /// <param name="p">

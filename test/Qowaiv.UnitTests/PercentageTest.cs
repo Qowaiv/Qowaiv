@@ -887,6 +887,14 @@ namespace Qowaiv.UnitTests
 
         #region Percentage manipulation tests
 
+        [TestCase(0.1234, -0.1234)]
+        [TestCase(0.1234, +0.1234)]
+        public void Abs(Percentage expected, Percentage value)
+        {
+            var abs = value.Abs();
+            Assert.AreEqual(expected, abs);
+        }
+
         [Test]
         public void UnaryNegation_Percentage17_Min17()
         {

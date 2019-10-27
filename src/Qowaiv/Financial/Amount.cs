@@ -81,6 +81,156 @@ namespace Qowaiv.Financial
         /// </param>
         public Amount Subtract(Percentage p) => m_Value.Subtract(p);
 
+        /// <summary>Gets a percentage of the current amount.</summary>
+        /// <param name="p">
+        /// The percentage to get.
+        /// </param>
+        public Amount Multiply(Percentage p) => m_Value * p;
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Multiply(decimal factor) => m_Value * factor;
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Multiply(double factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Multiply(float factor) => Multiply((decimal)factor);
+
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Multiply(long factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Multiply(int factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Multiply(short factor) => Multiply((decimal)factor);
+
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Amount Multiply(ulong factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Amount Multiply(uint factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the amount with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Amount Multiply(ushort factor) => Multiply((decimal)factor);
+
+
+        /// <summary>Divides the amount by a specified amount.</summary>
+        /// <param name="p">
+        /// The amount to devides to..
+        /// </param>
+        public Amount Divide(Percentage p) => m_Value / p;
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Divide(decimal factor) => m_Value / factor;
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Divide(double factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Divide(float factor) => Divide((decimal)factor);
+
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Divide(long factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Divide(int factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Amount Divide(short factor) => Divide((decimal)factor);
+
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Amount Divide(ulong factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Amount Divide(uint factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the amount by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Amount Divide(ushort factor) => Divide((decimal)factor);
+
+
         /// <summary>Unitary plusses the amount.</summary>
         public static Amount operator +(Amount amount) => amount.Plus();
         /// <summary>Negates the amount.</summary>
@@ -100,6 +250,61 @@ namespace Qowaiv.Financial
         public static Amount operator -(Amount l, Amount r) => l.Subtract(r);
         /// <summary>Subtracts the percentage from the amount.</summary>
         public static Amount operator -(Amount amount, Percentage p) => amount.Subtract(p);
+
+
+        /// <summary>Multiplies the amount with the factor.</summary>
+        public static Amount operator *(Amount amount, Percentage factor) => amount.Multiply(factor);
+
+        /// <summary>Multiplies the amount with the factor.</summary>
+        public static Amount operator *(Amount amount, decimal factor) => amount.Multiply(factor);
+        /// <summary>Multiplies the amount with the factor.</summary>
+        public static Amount operator *(Amount amount, double factor) => amount.Multiply(factor);
+        /// <summary>Multiplies the amount with the factor.</summary>
+        public static Amount operator *(Amount amount, float factor) => amount.Multiply(factor);
+
+        /// <summary>Multiplies the amount with the factor.</summary>
+        public static Amount operator *(Amount amount, long factor) => amount.Multiply(factor);
+        /// <summary>Multiplies the amount with the factor.</summary>
+        public static Amount operator *(Amount amount, int factor) => amount.Multiply(factor);
+        /// <summary>Multiplies the amount with the factor.</summary>
+        public static Amount operator *(Amount amount, short factor) => amount.Multiply(factor);
+
+        /// <summary>Multiplies the amount with the factor.</summary>
+        [CLSCompliant(false)]
+        public static Amount operator *(Amount amount, ulong factor) => amount.Multiply(factor);
+        /// <summary>Multiplies the amount with the factor.</summary>
+        [CLSCompliant(false)]
+        public static Amount operator *(Amount amount, uint factor) => amount.Multiply(factor);
+        /// <summary>Multiplies the amount with the factor.</summary>
+        [CLSCompliant(false)]
+        public static Amount operator *(Amount amount, ushort factor) => amount.Multiply(factor);
+  
+        /// <summary>Divides the amount by the percentage.</summary>
+        public static Amount operator /(Amount amount, Percentage p) => amount.Divide(p);
+        /// <summary>Divides the amount by the factor.</summary>
+        public static Amount operator /(Amount amount, decimal factor) => amount.Divide(factor);
+        /// <summary>Divides the amount by the factor.</summary>
+        public static Amount operator /(Amount amount, double factor) => amount.Divide(factor);
+        /// <summary>Divides the amount by the factor.</summary>
+        public static Amount operator /(Amount amount, float factor) => amount.Divide(factor);
+
+        /// <summary>Divides the amount by the factor.</summary>
+        public static Amount operator /(Amount amount, long factor) => amount.Divide(factor);
+        /// <summary>Divides the amount by the factor.</summary>
+        public static Amount operator /(Amount amount, int factor) => amount.Divide(factor);
+        /// <summary>Divides the amount by the factor.</summary>
+        public static Amount operator /(Amount amount, short factor) => amount.Divide(factor);
+
+        /// <summary>Divides the amount by the factor.</summary>
+        [CLSCompliant(false)]
+        public static Amount operator /(Amount amount, ulong factor) => amount.Divide(factor);
+        /// <summary>Divides the amount by the factor.</summary>
+        [CLSCompliant(false)]
+        public static Amount operator /(Amount amount, uint factor) => amount.Divide(factor);
+        /// <summary>Divides the amount by the factor.</summary>
+        [CLSCompliant(false)]
+        public static Amount operator /(Amount amount, ushort factor) => amount.Divide(factor);
+
 
         #endregion
 

@@ -804,6 +804,186 @@ namespace Qowaiv.Financial.UnitTests
             Assert.AreEqual((Amount)30.00, amount - p);
         }
 
+        [Test]
+        public void Multiply_Percentage()
+        {
+            Amount amount = 100.40m;
+            var p = 50.Percent();
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Multiply_Float()
+        {
+            Amount amount = 100.40m;
+            float p = 0.5F;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Multiply_Double()
+        {
+            Amount amount = 100.40m;
+            double p = 0.5;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Multiply_Decimal()
+        {
+            Amount amount = 100.40m;
+            var p = 0.5m;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Multiply_Short()
+        {
+            Amount amount = 100.40m;
+            short f = 2;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Multiply_Int()
+        {
+            Amount amount = 100.40m;
+            int f = 2;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Multiply_Long()
+        {
+            Amount amount = 100.40m;
+            long f = 2;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Multiply_UShort()
+        {
+            Amount amount = 100.40m;
+            ushort f = 2;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Multiply_UInt()
+        {
+            Amount amount = 100.40m;
+            uint f = 2;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Multiply_ULong()
+        {
+            Amount amount = 100.40m;
+            ulong f = 2;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_Percentage()
+        {
+            Amount amount = 100.40m;
+            var p = 50.Percent();
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Float()
+        {
+            Amount amount = 100.40m;
+            float p = 0.5F;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Double()
+        {
+            Amount amount = 100.40m;
+            double p = 0.5;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Decimal()
+        {
+            Amount amount = 100.40m;
+            var p = 0.5m;
+            Amount expected = 200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Short()
+        {
+            Amount amount = 100.40m;
+            short f = 2;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_Int()
+        {
+            Amount amount = 100.40m;
+            int f = 2;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_Long()
+        {
+            Amount amount = 100.40m;
+            long f = 2;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_UShort()
+        {
+            Amount amount = 100.40m;
+            ushort f = 2;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_UInt()
+        {
+            Amount amount = 100.40m;
+            uint f = 2;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_ULong()
+        {
+            Amount amount = 100.40m;
+            ulong f = 2;
+            Amount expected = 50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
         #endregion
 
         #region Type converter tests

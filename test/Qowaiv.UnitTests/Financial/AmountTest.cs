@@ -772,6 +772,38 @@ namespace Qowaiv.Financial.UnitTests
             Assert.AreEqual(TestStruct, ++amount);
         }
 
+        [Test]
+        public void Add_SomeAmount_Added()
+        {
+            Amount amount = 40.10;
+            Amount other = 2.07;
+            Assert.AreEqual(TestStruct, amount + other);
+        }
+
+        [Test]
+        public void Add_SomePercentage_Added()
+        {
+            Amount amount = 40.00;
+            var p = 10.Percent();
+            Assert.AreEqual((Amount)44.00, amount + p);
+        }
+
+        [Test]
+        public void Subtract_SomeAmount_Subtracted()
+        {
+            Amount amount = 43.20;
+            Amount other = 1.03;
+            Assert.AreEqual(TestStruct, amount - other);
+        }
+
+        [Test]
+        public void Subtract_SomePercentage_Subtracted()
+        {
+            Amount amount = 40.00;
+            var p = 25.Percent();
+            Assert.AreEqual((Amount)30.00, amount - p);
+        }
+
         #endregion
 
         #region Type converter tests

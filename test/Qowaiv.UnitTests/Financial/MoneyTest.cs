@@ -784,13 +784,22 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
+        public void Add_25Percent_Added()
+        {
+            var l = 16 + Currency.EUR;
+            var p = 25.Percent();
+            var a = 20 + Currency.EUR;
+
+            Assert.AreEqual(a, l + p);
+        }
+
+        [Test]
         public void Add_DifferentCurrency_Throws()
         {
             var l = 16 + Currency.EUR;
             var r = 666 + Currency.USD;
 
-            var x = Assert.Catch<CurrencyMismatchException>(()=>  Money.Add(l, r));
-
+            var x = Assert.Catch<CurrencyMismatchException>(() => l.Add(r));
             Assert.AreEqual("The addition operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
         }
 
@@ -805,12 +814,22 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
+        public void Subtract_25Percent_Subtracted()
+        {
+            var l = 16 + Currency.EUR;
+            var p = 25.Percent();
+            var a = 12 + Currency.EUR;
+
+            Assert.AreEqual(a, l - p);
+        }
+
+        [Test]
         public void Subtract_DifferentCurrency_Throws()
         {
             var l = 16 + Currency.EUR;
             var r = 666 + Currency.USD;
 
-            var x = Assert.Catch<CurrencyMismatchException>(() => Money.Subtract(l, r));
+            var x = Assert.Catch<CurrencyMismatchException>(() => l.Subtract(r));
 
             Assert.AreEqual("The subtraction operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
         }

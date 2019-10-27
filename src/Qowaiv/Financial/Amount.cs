@@ -56,15 +56,50 @@ namespace Qowaiv.Financial
         /// <summary>Decreases the amount with one.</summary>
         internal Amount Decrement() => m_Value - 1;
 
+        /// <summary>Decreases the amount with one.</summary>
+        /// <summary>Adds a amount to the current amount.</summary>
+        /// <param name="amount">
+        /// The amount to add.
+        /// </param>
+        public Amount Add(Amount amount) => m_Value + amount.m_Value;
+
+        /// <summary>Adds the specified percentage to the amount.</summary>
+        /// <param name="p">
+        /// The percentage to add.
+        /// </param>
+        public Amount Add(Percentage p) => m_Value.Add(p);
+
+        /// <summary>Subtracts a amount from the current amount.</summary>
+        /// <param name="amount">
+        /// The amount to Subtract.
+        /// </param>
+        public Amount Subtract(Amount amount) => m_Value - amount.m_Value;
+
+        /// <summary>AddsSubtract the specified percentage from the amount.</summary>
+        /// <param name="p">
+        /// The percentage to add.
+        /// </param>
+        public Amount Subtract(Percentage p) => m_Value.Subtract(p);
+
         /// <summary>Unitary plusses the amount.</summary>
-        public static Amount operator +(Amount money) => money.Plus();
+        public static Amount operator +(Amount amount) => amount.Plus();
         /// <summary>Negates the amount.</summary>
-        public static Amount operator -(Amount money) => money.Negate();
+        public static Amount operator -(Amount amount) => amount.Negate();
 
         /// <summary>Increases the amount with one.</summary>
         public static Amount operator ++(Amount amount) => amount.Increment();
         /// <summary>Decreases the amount with one.</summary>
         public static Amount operator --(Amount amount) => amount.Decrement();
+
+        /// <summary>Adds the left and the right amount.</summary>
+        public static Amount operator +(Amount l, Amount r) => l.Add(r);
+        /// <summary>Adds the percentage to the amount.</summary>
+        public static Amount operator +(Amount amount, Percentage p) => amount.Add(p);
+
+        /// <summary>Subtracts the right from the left amount.</summary>
+        public static Amount operator -(Amount l, Amount r) => l.Subtract(r);
+        /// <summary>Subtracts the percentage from the amount.</summary>
+        public static Amount operator -(Amount amount, Percentage p) => amount.Subtract(p);
 
         #endregion
 

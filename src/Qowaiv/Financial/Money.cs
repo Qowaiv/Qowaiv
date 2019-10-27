@@ -60,6 +60,32 @@ namespace Qowaiv.Financial
         /// <summary>Decreases the money with one (of the current currency).</summary>
         internal Money Decrement() => (m_Value - 1) + Currency;
 
+        /// <summary>Decreases the amount with one.</summary>
+        /// <summary>Adds a amount to the current amount.</summary>
+        /// <param name="money">
+        /// The money to add.
+        /// </param>
+        public Money Add(Money money) => (m_Value + money.m_Value) + HaveSameCurrency(this, money, "addition");
+
+        /// <summary>Adds the specified percentage to the amount.</summary>
+        /// <param name="p">
+        /// The percentage to add.
+        /// </param>
+        public Money Add(Percentage p) => m_Value.Add(p) + Currency;
+
+        /// <summary>Subtracts a amount from the current amount.</summary>
+        /// <param name="money">
+        /// The money to Subtract.
+        /// </param>
+        public Money Subtract(Money money) => (m_Value - money.m_Value) + HaveSameCurrency(this, money, "subtraction");
+
+        /// <summary>AddsSubtract the specified percentage from the amount.</summary>
+        /// <param name="p">
+        /// The percentage to add.
+        /// </param>
+        public Money Subtract(Percentage p) => m_Value.Subtract(p) + Currency;
+
+
         /// <summary>Rounds the money value to the preferred number decimal places, based on its currency.</summary>
         public Money Round() => Round(Currency.Digits);
 
@@ -99,22 +125,6 @@ namespace Qowaiv.Financial
         /// </param>
         public Money RoundToMultiple(decimal multipleOf, DecimalRounding mode) => Create(m_Value.RoundToMultiple(multipleOf, mode), Currency);
 
-        /// <summary>Adds money.</summary>
-        /// <param name="l">The left operand.</param>
-        /// <param name="r">The right operand</param>
-        public static Money Add(Money l, Money r)
-        {
-            return Create(l.m_Value + r.m_Value, HaveSameCurrency(l, r, "addition"));
-        }
-
-        /// <summary>Subtracts money.</summary>
-        /// <param name="l">The left operand.</param>
-        /// <param name="r">The right operand</param>
-        public static Money Subtract(Money l, Money r)
-        {
-            return Create(l.m_Value - r.m_Value, HaveSameCurrency(l, r, "subtraction"));
-        }
-
         /// <summary>Increases the money with one (of the current currency).</summary>
         public static Money operator ++(Money money) => money.Increment();
         /// <summary>Decreases the money with one (of the current currency).</summary>
@@ -128,12 +138,18 @@ namespace Qowaiv.Financial
         /// <summary>Adds money.</summary>
         /// <param name="l">The left operand.</param>
         /// <param name="r">The right operand</param>
-        public static Money operator +(Money l, Money r) => Add(l, r);
+        public static Money operator +(Money l, Money r) => l.Add(r);
+        
+        /// <summary>Adds the percentage to the money.</summary>
+        public static Money operator +(Money money, Percentage p) => (money.m_Value + p) + money.Currency;
 
         /// <summary>Adds money.</summary>
         /// <param name="l">The left operand.</param>
         /// <param name="r">The right operand</param>
-        public static Money operator -(Money l, Money r) => Subtract(l, r);
+        public static Money operator -(Money l, Money r) => l.Subtract(r);
+
+        /// <summary>Subtracts the percentage from the money.</summary>
+        public static Money operator -(Money money, Percentage p) => (money.m_Value - p) + money.Currency;
 
         [DebuggerStepThrough]
         private static Currency HaveSameCurrency(Money l, Money r, string operation)

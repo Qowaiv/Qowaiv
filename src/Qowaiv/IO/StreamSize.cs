@@ -285,14 +285,14 @@ namespace Qowaiv.IO
         public static StreamSize operator -(StreamSize streamSize) { return streamSize.Negate(); }
 
         /// <summary>Adds the left and the right stream size.</summary>
-        public static StreamSize operator +(StreamSize l, StreamSize r) { return l.Add(r); }
+        public static StreamSize operator +(StreamSize l, StreamSize r) => l.Add(r);
         /// <summary>Subtracts the right from the left stream size.</summary>
-        public static StreamSize operator -(StreamSize l, StreamSize r) { return l.Subtract(r); }
+        public static StreamSize operator -(StreamSize l, StreamSize r) => l.Subtract(r);
 
         /// <summary>Adds the percentage to the stream size.</summary>
-        public static StreamSize operator +(StreamSize streamSize, Percentage p) { return streamSize.Add(p); }
+        public static StreamSize operator +(StreamSize streamSize, Percentage p) => streamSize.Add(p);
         /// <summary>Subtracts the percentage from the stream size.</summary>
-        public static StreamSize operator -(StreamSize streamSize, Percentage p) { return streamSize.Subtract(p); }
+        public static StreamSize operator -(StreamSize streamSize, Percentage p) => streamSize.Subtract(p);
 
         /// <summary>Multiplies the stream size with the factor.</summary>
         public static StreamSize operator *(StreamSize streamSize, Decimal factor) { return streamSize.Multiply(factor); }

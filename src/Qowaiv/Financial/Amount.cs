@@ -27,9 +27,9 @@ namespace Qowaiv.Financial
         /// <summary>Represents an Amount of zero.</summary>
         public static readonly Amount Zero;
         /// <summary>Represents the smallest possible value of an </summary>
-        public static readonly Amount MinValue = decimal.MinValue;
+        public static readonly Amount MinValue = (Amount)decimal.MinValue;
         /// <summary>Represents the biggest possible value of an </summary>
-        public static readonly Amount MaxValue = decimal.MaxValue;
+        public static readonly Amount MaxValue = (Amount)decimal.MaxValue;
 
         #region Properties
 
@@ -41,58 +41,58 @@ namespace Qowaiv.Financial
         #region Methods
 
         /// <summary>Returns the absolute value of the amount.</summary>
-        public Amount Abs() => Math.Abs(m_Value);
+        public Amount Abs() => (Amount)Math.Abs(m_Value);
 
         /// <summary>Pluses the amount.</summary>
-        internal Amount Plus() => +m_Value;
+        internal Amount Plus() => (Amount)(+m_Value);
 
         /// <summary>Negates the amount.</summary>
 
-        internal Amount Negate() => -m_Value;
+        internal Amount Negate() => (Amount)( - m_Value);
 
         /// <summary>Increases the amount with one.</summary>
-        internal Amount Increment() => m_Value + 1;
+        internal Amount Increment() => (Amount)(m_Value + 1);
 
         /// <summary>Decreases the amount with one.</summary>
-        internal Amount Decrement() => m_Value - 1;
+        internal Amount Decrement() => (Amount)(m_Value - 1);
 
         /// <summary>Decreases the amount with one.</summary>
         /// <summary>Adds a amount to the current amount.</summary>
         /// <param name="amount">
         /// The amount to add.
         /// </param>
-        public Amount Add(Amount amount) => m_Value + amount.m_Value;
+        public Amount Add(Amount amount) => (Amount)(m_Value + amount.m_Value);
 
         /// <summary>Adds the specified percentage to the amount.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
-        public Amount Add(Percentage p) => m_Value.Add(p);
+        public Amount Add(Percentage p) => (Amount)(m_Value.Add(p));
 
         /// <summary>Subtracts a amount from the current amount.</summary>
         /// <param name="amount">
         /// The amount to Subtract.
         /// </param>
-        public Amount Subtract(Amount amount) => m_Value - amount.m_Value;
+        public Amount Subtract(Amount amount) => (Amount)(m_Value - amount.m_Value);
 
         /// <summary>AddsSubtract the specified percentage from the amount.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
-        public Amount Subtract(Percentage p) => m_Value.Subtract(p);
+        public Amount Subtract(Percentage p) => (Amount)(m_Value.Subtract(p));
 
         /// <summary>Gets a percentage of the current amount.</summary>
         /// <param name="p">
         /// The percentage to get.
         /// </param>
-        public Amount Multiply(Percentage p) => m_Value * p;
+        public Amount Multiply(Percentage p) => (Amount)(m_Value * p);
 
         /// <summary>Multiplies the amount with a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Amount Multiply(decimal factor) => m_Value * factor;
+        public Amount Multiply(decimal factor) => (Amount)(m_Value * factor);
 
         /// <summary>Multiplies the amount with a specified factor.
         /// </summary>
@@ -160,14 +160,14 @@ namespace Qowaiv.Financial
         /// <param name="p">
         /// The amount to devides to..
         /// </param>
-        public Amount Divide(Percentage p) => m_Value / p;
+        public Amount Divide(Percentage p) => (Amount)(m_Value / p);
 
         /// <summary>Divides the amount by a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public Amount Divide(decimal factor) => m_Value / factor;
+        public Amount Divide(decimal factor) => (Amount)(m_Value / factor);
 
         /// <summary>Divides the amount by a specified factor.
         /// </summary>
@@ -552,13 +552,13 @@ namespace Qowaiv.Financial
 
 
         /// <summary>Casts a decimal an </summary>
-        public static implicit operator Amount(decimal val) => Create(val);
+        public static explicit operator Amount(decimal val) => Create(val);
         /// <summary>Casts a decimal an </summary>
-        public static implicit operator Amount(double val) => Create(val);
+        public static explicit operator Amount(double val) => Create(val);
         /// <summary>Casts a long an </summary>
-        public static implicit operator Amount(long val) => Create((decimal)val);
+        public static explicit operator Amount(long val) => Create((decimal)val);
         /// <summary>Casts a int an </summary>
-        public static implicit operator Amount(int val) => Create((decimal)val);
+        public static explicit operator Amount(int val) => Create((decimal)val);
 
         /// <summary>Casts an Amount to a decimal.</summary>
         public static explicit operator decimal(Amount val) => val.m_Value;
@@ -662,7 +662,7 @@ namespace Qowaiv.Financial
             result = Zero;
             if (Money.TryParse(s, formatProvider, out Money money))
             {
-                result = (decimal)money;
+                result = (Amount)(decimal)money;
                 return true;
             }
             return false;

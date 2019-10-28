@@ -7,7 +7,7 @@ namespace Qowaiv.Conversion.Financial
     public class AmountTypeConverter : NumericTypeConverter<Amount, decimal>
     {
         /// <inheritdoc/>
-        protected override Amount FromRaw(decimal raw) => raw;
+        protected override Amount FromRaw(decimal raw) => (Amount)raw;
 
         /// <inheritdoc/>
         protected override Amount FromString(string str, CultureInfo culture) => Amount.Parse(str, culture);

@@ -628,7 +628,7 @@ namespace Qowaiv.Financial
         public static implicit operator Money(int val) => Create(val);
 
         /// <summary>Casts Money to a decimal.</summary>
-        public static explicit operator Amount(Money val) => val.m_Value;
+        public static explicit operator Amount(Money val) => (Amount)val.m_Value;
         /// <summary>Casts Money to a decimal.</summary>
         public static explicit operator decimal(Money val) => val.m_Value;
         /// <summary>Casts Money to a double.</summary>

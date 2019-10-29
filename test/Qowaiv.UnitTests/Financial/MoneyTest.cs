@@ -650,7 +650,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void LessThan_17LT19_IsTrue()
         {
-            var l = 17+ Currency.DKK;
+            var l = 17 + Currency.DKK;
             var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l < r);
@@ -729,6 +729,13 @@ namespace Qowaiv.UnitTests.Financial
             Assert.AreEqual(Currency.EUR, money.Currency);
         }
 
+        [Test]
+        public void Amount_Set()
+        {
+            var money = 42 + Currency.EUR;
+            Assert.AreEqual((Amount)42, money.Amount);
+        }
+
         #endregion
 
         #region Operations
@@ -739,7 +746,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             var money = value + Currency.USD;
             var abs = money.Abs();
-            Assert.AreEqual(expected+Currency.USD, abs);
+            Assert.AreEqual(expected + Currency.USD, abs);
         }
 
         [Test]
@@ -1012,6 +1019,30 @@ namespace Qowaiv.UnitTests.Financial
             ulong f = 2;
             var expected = 50.20m + Currency.USD;
             Assert.AreEqual(expected, money / f);
+        }
+
+        [Test]
+        public void Round_EUR_2Digits()
+        {
+            var money = 123.4567m + Currency.EUR;
+            var rounded = money.Round();
+            Assert.AreEqual(123.46m + Currency.EUR, rounded);
+        }
+
+        [Test]
+        public void Round_1Digit()
+        {
+            var money = 123.4567m + Currency.EUR;
+            var rounded = money.Round(1);
+            Assert.AreEqual(123.5m + Currency.EUR, rounded);
+        }
+
+        [Test]
+        public void RoundToMultiple_0d25()
+        {
+            var money = 123.6567m + Currency.EUR;
+            var rounded = money.RoundToMultiple(0.25m);
+            Assert.AreEqual(123.75m + Currency.EUR, rounded);
         }
 
         #endregion

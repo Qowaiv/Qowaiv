@@ -38,6 +38,9 @@ namespace Qowaiv.Financial
         private decimal m_Value;
         private Currency m_Currency;
 
+        /// <summary>Gets the amount of the money.</summary>
+        public Amount Amount => (Amount)m_Value;
+
         /// <summary>Gets the currency of the money.</summary>
         public Currency Currency => m_Currency;
 
@@ -256,7 +259,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
-        public Money Round(int decimals, DecimalRounding mode) => Create(m_Value.Round(decimals, mode), Currency);
+        public Money Round(int decimals, DecimalRounding mode) => m_Value.Round(decimals, mode) + Currency;
 
         /// <summary>Rounds the money value to the closed number that is a multiple of the specified factor.</summary>
         /// <param name="multipleOf">
@@ -271,7 +274,7 @@ namespace Qowaiv.Financial
         /// <param name="mode">
         /// The rounding method used to determine the closed by number.
         /// </param>
-        public Money RoundToMultiple(decimal multipleOf, DecimalRounding mode) => Create(m_Value.RoundToMultiple(multipleOf, mode), Currency);
+        public Money RoundToMultiple(decimal multipleOf, DecimalRounding mode) => m_Value.RoundToMultiple(multipleOf, mode) + Currency;
 
         /// <summary>Increases the money with one (of the current currency).</summary>
         public static Money operator ++(Money money) => money.Increment();
@@ -287,7 +290,7 @@ namespace Qowaiv.Financial
         /// <param name="l">The left operand.</param>
         /// <param name="r">The right operand</param>
         public static Money operator +(Money l, Money r) => l.Add(r);
-        
+
         /// <summary>Adds the percentage to the money.</summary>
         public static Money operator +(Money money, Percentage p) => (money.m_Value + p) + money.Currency;
 

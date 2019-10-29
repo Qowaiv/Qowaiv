@@ -301,22 +301,6 @@ namespace Qowaiv.UnitTests
         [TestCase(typeof(Amount))]
         [TestCase(typeof(Money))]
         [TestCase(typeof(Percentage))]
-        public void Round_DecimalRounding(Type svo)
-        {
-            var methods = svo
-                .GetMethods(PublicInstance)
-                .Returns(svo)
-                .Where(m => m.Name == nameof(Round))
-                .SelectParameters()
-                .Where(pars => pars.Length == 1 && pars[0] == typeof(DecimalRounding))
-                .ToArray();
-
-            Assert.IsTrue(methods.Length == 1, nameof(methods));
-        }
-
-        [TestCase(typeof(Amount))]
-        [TestCase(typeof(Money))]
-        [TestCase(typeof(Percentage))]
         public void Round_Decimals_DecimalRounding(Type svo)
         {
             var methods = svo

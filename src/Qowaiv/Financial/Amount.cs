@@ -231,6 +231,46 @@ namespace Qowaiv.Financial
         public Amount Divide(ushort factor) => Divide((decimal)factor);
 
 
+        /// <summary>Rounds the amount value to the 0 decimal places</summary>
+        public Amount Round() => Round(0);
+
+        /// <summary>Rounds the amount value to a specified number of decimal places.</summary>
+        /// <param name="decimals">
+        /// A value from -28 to 28 that specifies the number of decimal places to round to.
+        /// </param>
+        /// <remarks>
+        /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+        /// </remarks>
+        public Amount Round(int decimals) => Round(decimals, DecimalRounding.BankersRound);
+
+        /// <summary>Rounds the amount value to a specified number of decimal places.</summary>
+        /// <param name="decimals">
+        /// A value from -28 to 28 that specifies the number of decimal places to round to.
+        /// </param>
+        /// <param name="mode">
+        /// The mode of rounding applied.
+        /// </param>
+        /// <remarks>
+        /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+        /// </remarks>
+        public Amount Round(int decimals, DecimalRounding mode) => (Amount)m_Value.Round(decimals, mode);
+
+        /// <summary>Rounds the amount value to the closed number that is a multiple of the specified factor.</summary>
+        /// <param name="multipleOf">
+        /// The factor of which the number should be multiple of.
+        /// </param>
+        public Amount RoundToMultiple(decimal multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.BankersRound);
+
+        /// <summary>Rounds the amount value to the closed number that is a multiple of the specified factor.</summary>
+        /// <param name="multipleOf">
+        /// The factor of which the number should be multiple of.
+        /// </param>
+        /// <param name="mode">
+        /// The rounding method used to determine the closed by number.
+        /// </param>
+        public Amount RoundToMultiple(decimal multipleOf, DecimalRounding mode) => (Amount)m_Value.RoundToMultiple(multipleOf, mode);
+
+
         /// <summary>Unitary plusses the amount.</summary>
         public static Amount operator +(Amount amount) => amount.Plus();
         /// <summary>Negates the amount.</summary>

@@ -984,6 +984,30 @@ namespace Qowaiv.Financial.UnitTests
             Assert.AreEqual(expected, amount / f);
         }
 
+        [Test]
+        public void Round_NoDigits()
+        {
+            var amount = (Amount)123.4567m;
+            var rounded = amount.Round();
+            Assert.AreEqual((Amount)123m, rounded);
+        }
+
+        [Test]
+        public void Round_1Digit()
+        {
+            var amount = (Amount)123.4567m;
+            var rounded = amount.Round(1);
+            Assert.AreEqual((Amount)123.5m , rounded);
+        }
+
+        [Test]
+        public void RoundToMultiple_0d25()
+        {
+            var amount = (Amount)123.6567m;
+            var rounded = amount.RoundToMultiple(0.25m);
+            Assert.AreEqual((Amount)123.75m, rounded);
+        }
+
         #endregion
 
         #region Type converter tests

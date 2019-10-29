@@ -19,19 +19,24 @@ namespace Qowaiv.Text.Json.Serialization
             return objectType != null && (QowaivType.IsIJsonSerializable(objectType) || QowaivType.IsNullableIJsonSerializable(objectType));
         }
 
+        /// <summary>Creates a converter for a <see cref="IJsonSerializable"/>.</summary>
+        /// <param name="typeToConvert">
+        /// The <see cref="IJsonSerializable"/> type.
+        /// </param>
+        /// <param name="options">
+        /// The serialization options to use (are ignored).
+        /// </param>
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
-            var type = QowaivType.GetNotNullableType(typeToConvert);
-
-            if (!_converters.TryGetValue(type, out JsonConverter converter))
+            if (!_converters.TryGetValue(typeToConvert, out JsonConverter converter))
             {
                 lock (locker)
                 {
-                    if (!_converters.TryGetValue(type, out converter))
+                    if (!_converters.TryGetValue(typeToConvert, out converter))
                     {
-                        var converterType = typeof(QowaivJsonConverter<>).MakeGenericType(type);
+                        var converterType = typeof(QowaivJsonConverter<>).MakeGenericType(typeToConvert);
                         converter = (JsonConverter)Activator.CreateInstance(converterType);
-                        _converters[type] = converter;
+                        _converters[typeToConvert] = converter;
                     }
                 }
             }
@@ -42,28 +47,46 @@ namespace Qowaiv.Text.Json.Serialization
         private readonly Dictionary<Type, JsonConverter> _converters = new Dictionary<Type, JsonConverter>();
     }
 
-    internal class QowaivJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : IJsonSerializable
+    /// <summary>Specific <see cref="JsonConverter{TSvo}"/>.</summary>
+    /// <typeparam name="TSvo">
+    /// The type that is <see cref="IJsonSerializable"/> or <see cref="Nullable{IJsonSerializable}"/>.
+    /// </typeparam>
+    internal class QowaivJsonConverter<TSvo> : JsonConverter<TSvo>
     {
+        /// <summary>Reads and converts the JSON to type <typeparamref name="TSvo"/>.</summary>
+        /// <param name="reader">
+        /// The reader.
+        /// </param>
+        /// <param name="typeToConvert">
+        /// The type to convert.
+        /// </param>
+        /// <param name="options">
+        /// An object that specifies serialization options to use (ignored).
+        /// </param>
+        /// <returns>
+        /// The converted value.
+        /// </returns>
         public override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            TSvo svo = default;
+            var type = QowaivType.GetNotNullableType(typeToConvert);
+            var result = (IJsonSerializable)Activator.CreateInstance(type);
 
             var isNullable = typeof(TSvo) != typeToConvert;
 
             switch (reader.TokenType)
             {
                 case JsonTokenType.String:
-                    svo.FromJson(reader.GetString());
+                    result.FromJson(reader.GetString());
                     break;
 
                 case JsonTokenType.Number:
                     if(reader.TryGetInt64(out long num))
                     {
-                        svo.FromJson(num);
+                        result.FromJson(num);
                     }
                     else if(reader.TryGetDouble(out double dec))
                     {
-                        svo.FromJson(dec);
+                        result.FromJson(dec);
                     }
                     else
                     {
@@ -74,21 +97,31 @@ namespace Qowaiv.Text.Json.Serialization
                 case JsonTokenType.Null:
                     if(isNullable)
                     {
-                        //return null;
+                        return default;
                     }
-                    svo.FromJson();
+                    result.FromJson();
                     break;
 
                 default:
                     throw new JsonException($"QowaivJsonConverter does not support token type {reader.TokenType}.");
             }
 
-            return svo;
+            return (TSvo)result;
         }
 
+        /// <summary>Writes a specified value as JSON.</summary>
+        /// <param name="writer">
+        /// The writer to write to.
+        /// </param>    
+        /// <param name="value">
+        /// The value to convert to JSON.
+        /// </param>
+        /// <param name="options">
+        /// An object that specifies serialization options to use.
+        /// </param>
         public override void Write(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
         {
-            var obj = value.ToJson();
+            var obj = ((IJsonSerializable)value).ToJson();
             
             if(obj is string str)
             {
@@ -97,6 +130,10 @@ namespace Qowaiv.Text.Json.Serialization
             else if(obj is decimal dec)
             {
                 writer.WriteNumberValue(dec);
+            }
+            else if (obj is double dbl)
+            {
+                writer.WriteNumberValue(dbl);
             }
             else if(obj is long num)
             {

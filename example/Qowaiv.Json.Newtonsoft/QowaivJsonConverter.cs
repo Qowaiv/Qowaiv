@@ -95,9 +95,9 @@ namespace Qowaiv.Json
                 }
             }
             // We want to communicate exceptions as JSON serialization exceptions.
-            catch(Exception x)
+            catch (Exception x)
             {
-                if(x is JsonSerializationException || x is JsonReaderException)
+                if (x is JsonSerializationException || x is JsonReaderException)
                 {
                     throw;
                 }
@@ -119,11 +119,6 @@ namespace Qowaiv.Json
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             Guard.NotNull(writer, nameof(writer));
-
-            if (value is null)
-            {
-                writer.WriteNull();
-            }
 
             var json = Guard.IsInstanceOf<IJsonSerializable>(value, nameof(value));
 

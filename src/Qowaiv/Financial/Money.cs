@@ -618,15 +618,6 @@ namespace Qowaiv.Financial
         /// <summary>Casts a <see cref="string"/> to a </summary>
         public static explicit operator Money(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-        /// <summary>Casts an Amount to Money.</summary>
-        public static implicit operator Money(Amount val) => Create((decimal)val);
-        /// <summary>Casts a decimal to Money.</summary>
-        public static implicit operator Money(decimal val) => Create(val);
-        /// <summary>Casts a double to Money.</summary>
-        public static implicit operator Money(double val) => Create((decimal)val);
-        /// <summary>Casts a double to Money.</summary>
-        public static implicit operator Money(int val) => Create(val);
-
         /// <summary>Casts Money to a decimal.</summary>
         public static explicit operator Amount(Money val) => (Amount)val.m_Value;
         /// <summary>Casts Money to a decimal.</summary>

@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Financial;
 using System;
+using System.Linq;
 
 namespace Qowaiv.UnitTests
 {
@@ -16,48 +17,58 @@ namespace Qowaiv.UnitTests
         private static readonly Money?[] NullableMoneys = new Money?[] { 1 + Currency.EUR, 23 + Currency.EUR, 0 + Currency.EUR, null };
 
         [Test]
+        public void Reference_EnsuresThatSystemLinqDoesNotConflict()
+        {
+            var avg = new[] { 2.0, 3.0 }.Average();
+            var sum = new[] { 2m, 3m }.Sum();
+
+            Assert.AreEqual(2.5, avg);
+            Assert.AreEqual(5m, sum);
+        }
+
+        [Test]
         public void Average_SelectedEmpyAmount_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Average(Array.Empty<Amount>(), (m) => m));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Amount>().Average((m) => m));
         }
         [Test]
         public void Average_EmptyNullableAmount_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Average(Array.Empty<Amount>()));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Amount>().Average());
         }
         [Test]
         public void Average_SelectedEmpyNullableAmount_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Average(Array.Empty<Amount?>(), (m) => m));
+            Assert.IsNull(Array.Empty<Amount?>().Average((m) => m));
         }
         [Test]
         public void Average_EmptyNullableAmount_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Average(Array.Empty<Amount?>()));
+            Assert.IsNull(Array.Empty<Amount?>().Average());
         }
 
         [Test]
         public void Average_SelectedAmount_Calculated()
         {
-            var avg = QowaivEnumerable.Average(Amounts, (m) => m);
+            var avg = Amounts.Average((m) => m);
             Assert.AreEqual((Amount)8, avg);
         }
         [Test]
         public void Average_Amount_Calculated()
         {
-            var avg = QowaivEnumerable.Average(Amounts);
+            var avg = Amounts.Average();
             Assert.AreEqual((Amount)8, avg);
         }
         [Test]
         public void Average_SelectedNullableAmount_Calculated()
         {
-            var avg = QowaivEnumerable.Average(NullableAmounts, (m) => m);
+            var avg = NullableAmounts.Average((m) => m);
             Assert.AreEqual((Amount)8, avg);
         }
         [Test]
         public void Average_NullableAmount_Calculated()
         {
-            var avg = QowaivEnumerable.Average(NullableAmounts);
+            var avg = NullableAmounts.Average();
             Assert.AreEqual((Amount)8, avg);
         }
 
@@ -65,67 +76,67 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Average_SelectedEmpyMoney_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Average(Array.Empty<Money>(), (m) => m));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Money>().Average((m) => m));
         }
         [Test]
         public void Average_EmptyNullableMoney_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Average(Array.Empty<Money>()));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Money>().Average());
         }
         [Test]
         public void Average_SelectedEmpyNullableMoney_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Average(Array.Empty<Money?>(), (m) => m));
+            Assert.IsNull(Array.Empty<Money?>().Average((m) => m));
         }
         [Test]
         public void Average_EmptyNullableMoney_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Average(Array.Empty<Money?>()));
+            Assert.IsNull(Array.Empty<Money?>().Average());
         }
 
         [Test]
         public void Average_SelectedMixedMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Average(MixedMoneys, (m) => m));
+            Assert.Throws<CurrencyMismatchException>(() => MixedMoneys.Average((m) => m));
         }
         [Test]
         public void Average_MixedMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Average(MixedMoneys));
+            Assert.Throws<CurrencyMismatchException>(() => MixedMoneys.Average());
         }
         [Test]
         public void Average_SelectedMixedNullableMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Average(MixedNullableMoneys, (m) => m));
+            Assert.Throws<CurrencyMismatchException>(() => MixedNullableMoneys.Average((m) => m));
         }
         [Test]
         public void Average_NullableMixedMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Average(MixedNullableMoneys));
+            Assert.Throws<CurrencyMismatchException>(() => MixedNullableMoneys.Average());
         }
 
         [Test]
         public void Average_SelectedMoney_Calculated()
         {
-            var avg = QowaivEnumerable.Average(Moneys, (m) => m);
+            var avg = Moneys.Average((m) => m);
             Assert.AreEqual(8 + Currency.EUR, avg);
         }
         [Test]
         public void Average_Money_Calculated()
         {
-            var avg = QowaivEnumerable.Average(Moneys);
+            var avg = Moneys.Average();
             Assert.AreEqual(8 + Currency.EUR, avg);
         }
         [Test]
         public void Average_SelectedNullableMoney_Calculated()
         {
-            var avg = QowaivEnumerable.Average(NullableMoneys, (m) => m);
+            var avg = NullableMoneys.Average((m) => m);
             Assert.AreEqual(8 + Currency.EUR, avg);
         }
         [Test]
         public void Average_NullableMoney_Calculated()
         {
-            var avg = QowaivEnumerable.Average(NullableMoneys);
+            var avg = NullableMoneys.Average();
             Assert.AreEqual(8 + Currency.EUR, avg);
         }
 
@@ -134,46 +145,46 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Sum_SelectedEmpyAmount_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Sum(Array.Empty<Amount>(), (m) => m));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Amount>().Sum((m) => m));
         }
         [Test]
         public void Sum_EmptyNullableAmount_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Sum(Array.Empty<Amount>()));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Amount>().Sum());
         }
         [Test]
         public void Sum_SelectedEmpyNullableAmount_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Sum(Array.Empty<Amount?>(), (m) => m));
+            Assert.IsNull(Array.Empty<Amount?>().Sum((m) => m));
         }
         [Test]
         public void Sum_EmptyNullableAmount_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Sum(Array.Empty<Amount?>()));
+            Assert.IsNull(Array.Empty<Amount?>().Sum());
         }
 
         [Test]
         public void Sum_SelectedAmount_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(Amounts, (m) => m);
+            var sum = Amounts.Sum((m) => m);
             Assert.AreEqual((Amount)24, sum);
         }
         [Test]
         public void Sum_Amount_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(Amounts);
+            var sum = Amounts.Sum();
             Assert.AreEqual((Amount)24, sum);
         }
         [Test]
         public void Sum_SelectedNullableAmount_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(NullableAmounts, (m) => m);
+            var sum = NullableAmounts.Sum((m) => m);
             Assert.AreEqual((Amount)24, sum);
         }
         [Test]
         public void Sum_NullableAmount_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(NullableAmounts);
+            var sum = NullableAmounts.Sum();
             Assert.AreEqual((Amount)24, sum);
         }
 
@@ -181,67 +192,67 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Sum_SelectedEmpyMoney_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Sum(Array.Empty<Money>(), (m) => m));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Money>().Sum((m) => m));
         }
         [Test]
         public void Sum_EmptyNullableMoney_Throws()
         {
-            Assert.Throws<InvalidOperationException>(() => QowaivEnumerable.Sum(Array.Empty<Money>()));
+            Assert.Throws<InvalidOperationException>(() => Array.Empty<Money>().Sum());
         }
         [Test]
         public void Sum_SelectedEmpyNullableMoney_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Sum(Array.Empty<Money?>(), (m) => m));
+            Assert.IsNull(Array.Empty<Money?>().Sum((m) => m));
         }
         [Test]
         public void Sum_EmptyNullableMoney_Null()
         {
-            Assert.IsNull(QowaivEnumerable.Sum(Array.Empty<Money?>()));
+            Assert.IsNull(Array.Empty<Money?>().Sum());
         }
 
         [Test]
         public void Sum_SelectedMixedMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Sum(MixedMoneys, (m) => m));
+            Assert.Throws<CurrencyMismatchException>(() => MixedMoneys.Sum((m) => m));
         }
         [Test]
         public void Sum_MixedMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Sum(MixedMoneys));
+            Assert.Throws<CurrencyMismatchException>(() => MixedMoneys.Sum());
         }
         [Test]
         public void Sum_SelectedMixedNullableMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Sum(MixedNullableMoneys, (m) => m));
+            Assert.Throws<CurrencyMismatchException>(() => MixedNullableMoneys.Sum((m) => m));
         }
         [Test]
         public void Sum_NullableMixedMoney_Throws()
         {
-            Assert.Throws<CurrencyMismatchException>(() => QowaivEnumerable.Sum(MixedNullableMoneys));
+            Assert.Throws<CurrencyMismatchException>(() => MixedNullableMoneys.Sum());
         }
 
         [Test]
         public void Sum_SelectedMoney_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(Moneys, (m) => m);
+            var sum = Moneys.Sum((m) => m);
             Assert.AreEqual(24 + Currency.EUR, sum);
         }
         [Test]
         public void Sum_Money_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(Moneys);
+            var sum = Moneys.Sum();
             Assert.AreEqual(24 + Currency.EUR, sum);
         }
         [Test]
         public void Sum_SelectedNullableMoney_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(NullableMoneys, (m) => m);
+            var sum = NullableMoneys.Sum((m) => m);
             Assert.AreEqual(24 + Currency.EUR, sum);
         }
         [Test]
         public void Sum_NullableMoney_Calculated()
         {
-            var sum = QowaivEnumerable.Sum(NullableMoneys);
+            var sum = NullableMoneys.Sum();
             Assert.AreEqual(24 + Currency.EUR, sum);
         }
     }

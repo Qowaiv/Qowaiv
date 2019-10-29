@@ -650,16 +650,16 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void LessThan_17LT19_IsTrue()
         {
-            Money l = 17;
-            Money r = 19;
+            var l = 17+ Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l < r);
         }
         [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
-            Money l = 21;
-            Money r = 19;
+            var l = 21 + Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l > r);
         }
@@ -667,16 +667,16 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
-            Money l = 17;
-            Money r = 19;
+            var l = 17 + Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
-            Money l = 21;
-            Money r = 19;
+            var l = 21 + Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l >= r);
         }
@@ -684,16 +684,16 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
-            Money l = 17;
-            Money r = 17;
+            var l = 17 + Currency.DKK;
+            var r = 17 + Currency.DKK;
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
-            Money l = 21;
-            Money r = 21;
+            var l = 21 + Currency.DKK;
+            var r = 21 + Currency.DKK;
 
             Assert.IsTrue(l >= r);
         }

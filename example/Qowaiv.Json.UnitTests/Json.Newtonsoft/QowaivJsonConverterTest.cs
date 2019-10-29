@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
+using Qowaiv.Json;
 
-namespace Qowaiv.Json.UnitTests
+namespace Qowaiv.UnitTests.Json.Newtonsoft
 {
     public class QowaivJsonConverterTest
     {
@@ -59,7 +60,7 @@ namespace Qowaiv.Json.UnitTests
         {
             var obj = Gender.NotApplicable;
 
-            var act = JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.None);
+            var act = JsonConvert.SerializeObject(obj, global::Newtonsoft.Json.Formatting.None);
             var exp = "\"NotApplicable\"";
 
             Assert.AreEqual(exp, act);

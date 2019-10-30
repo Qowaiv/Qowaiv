@@ -82,7 +82,7 @@ namespace Qowaiv
                 else if (noAt)
                 {
                     // If no MailTo: detected yet, we should remove it.
-                    if (!mailto && ch == Colon && local.Equals(nameof(mailto)))
+                    if (!mailto && ch == Colon && local.Equals(nameof(mailto), true))
                     {
                         local.Clear();
                         mailto = true;

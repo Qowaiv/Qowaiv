@@ -132,6 +132,20 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Parse_DomainPartShouldBeLowerCased()
+        {
+            var email = EmailAddress.Parse("mail@UPPERCASE.com");
+            Assert.AreEqual("mail@uppercase.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_LocalPartShouldNotBeLowerCased()
+        {
+            var email = EmailAddress.Parse("MAIL@lowercase.com");
+            Assert.AreEqual("MAIL@lowercase.com", email.ToString());
+        }
+
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -600,7 +614,7 @@ namespace Qowaiv.UnitTests
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = EmailAddress.Parse("svo@qowaiv.org", CultureInfo.InvariantCulture);
-            var r = EmailAddress.Parse("SVO@Qowaiv.org", CultureInfo.InvariantCulture);
+            var r = EmailAddress.Parse("With display <svo@Qowaiv.org>", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
         }

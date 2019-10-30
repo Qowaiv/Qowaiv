@@ -1,12 +1,11 @@
-﻿using Qowaiv.DomainModel.EventSourcing;
-using Qowaiv.DomainModel.Reflection;
+﻿using Qowaiv.DomainModel.EventSourcing.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
-namespace Qowaiv.DomainModel.Dynamic
+namespace Qowaiv.DomainModel.EventSourcing.Dynamic
 {
     /// <summary>A dynamic apply event object, is a extremely limited dynamic object
     /// that is capable of invoking instance methods with the signature Apply(@event). 
@@ -20,7 +19,7 @@ namespace Qowaiv.DomainModel.Dynamic
     /// 
     /// It caches the available methods per type.
     /// </remarks>
-    public class DynamicApplyEventObject : DynamicObject
+    internal class DynamicApplyEventObject : DynamicObject
     {
         /// <summary>Creates a new instance of a <see cref="DynamicApplyEventObject"/>.</summary>
         public DynamicApplyEventObject(object obj)

@@ -1,7 +1,6 @@
-﻿using Qowaiv.DomainModel.EventSourcing;
-using Qowaiv.Validation.Abstractions;
+﻿using Qowaiv.Validation.Abstractions;
 
-namespace Qowaiv.DomainModel
+namespace Qowaiv.DomainModel.EventSourcing
 {
     /// <summary>Factory to create <see cref="AggregateRoot{TAggregate}"/>s.</summary>
     public static class AggregateRoot
@@ -12,7 +11,7 @@ namespace Qowaiv.DomainModel
         {
             Guard.NotNull(stream, nameof(stream));
 
-            if(!stream.ContainsFullHistory)
+            if (!stream.ContainsFullHistory)
             {
                 throw new EventStreamNoFullHistoryException(nameof(stream));
             }

@@ -28,12 +28,14 @@ namespace Qowaiv.DomainModel.Tracking
                 Process().ThrowIfInvalid();
             }
         }
-        
+
         /// <summary>Applies all changes at once.</summary>
         public Result<TModel> Process()
         {
-            if (_model is null) { throw new InvalidOperationException(QowaivDomainModelMessages.InvalidOperationException_ChangeTrackerNotInitialized); }
-
+            if (_model is null)
+            {
+                throw new InvalidOperationException(QowaivDomainModelMessages.InvalidOperationException_ChangeTrackerNotInitialized); 
+            }
             lock (locker)
             {
                 try
@@ -53,7 +55,7 @@ namespace Qowaiv.DomainModel.Tracking
         }
 
         /// <summary>Validates all changed properties.</summary>
-        internal Result<TModel> Validate()
+        private Result<TModel> Validate()
         {
             Mode = ChangeTrackerMode.None;
 

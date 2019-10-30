@@ -70,6 +70,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft.UnitTests", "example\Qowaiv.Json.Newtonsoft.UnitTests\Qowaiv.Json.Newtonsoft.UnitTests.csproj", "{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5A7A7034-93F5-4E53-BB21-D98376AF549E}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C036985A-F17D-405A-B3FD-37F30FA154FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8}"
@@ -89,6 +90,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2
 	ProjectSection(SolutionItems) = preProject
 		build\Qowaiv.snk = build\Qowaiv.snk
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.DomainModel.EventSourcing", "src\Qowaiv.DomainModel.EventSourcing\Qowaiv.DomainModel.EventSourcing.csproj", "{DCCF522B-AD66-4667-82AA-FE4FA6D2241C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -176,6 +179,10 @@ Global
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCCF522B-AD66-4667-82AA-FE4FA6D2241C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCCF522B-AD66-4667-82AA-FE4FA6D2241C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCCF522B-AD66-4667-82AA-FE4FA6D2241C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCCF522B-AD66-4667-82AA-FE4FA6D2241C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

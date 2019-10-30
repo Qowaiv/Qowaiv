@@ -1,4 +1,4 @@
-﻿using Qowaiv.DomainModel.Diagnostics;
+﻿using Qowaiv.DomainModel.EventSourcing.Diagnostics;
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Qowaiv.DomainModel.Reflection
+namespace Qowaiv.DomainModel.EventSourcing.Reflection
 {
     /// <summary>An implementation of <see cref="MethodInfo"/> that executes
     /// <see cref="MethodBase.Invoke(object, BindingFlags, Binder, object[], CultureInfo)"/>

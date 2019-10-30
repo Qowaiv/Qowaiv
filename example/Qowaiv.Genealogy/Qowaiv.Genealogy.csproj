@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv.DomainModel.EventSourcing\Qowaiv.DomainModel.EventSourcing.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.DomainModel\Qowaiv.DomainModel.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Validation.Fluent\Qowaiv.Validation.Fluent.csproj" />
   </ItemGroup>

@@ -22,7 +22,7 @@ namespace Qowaiv.DomainModel {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class QowaivDomainModelMessages {
+    public class QowaivDomainModelMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Qowaiv.DomainModel {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Qowaiv.DomainModel.QowaivDomainModelMessages", typeof(QowaivDomainModelMessages).Assembly);
@@ -51,7 +51,7 @@ namespace Qowaiv.DomainModel {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The version ({0}) of the event is not successive to the current version ({1})..
         /// </summary>
-        internal static string ArgumenException_VersionNotSuccessive {
+        public static string ArgumenException_VersionNotSuccessive {
             get {
                 return ResourceManager.GetString("ArgumenException_VersionNotSuccessive", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The identifier of the event does not match the identifier of the aggregate root..
         /// </summary>
-        internal static string ArgumentException_InvalidEventId {
+        public static string ArgumentException_InvalidEventId {
             get {
                 return ResourceManager.GetString("ArgumentException_InvalidEventId", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The events belong to multiple aggregate roots..
         /// </summary>
-        internal static string ArgumentException_MultipleAggregates {
+        public static string ArgumentException_MultipleAggregates {
             get {
                 return ResourceManager.GetString("ArgumentException_MultipleAggregates", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to Version {0} does not exist for the aggregate root ({1})..
         /// </summary>
-        internal static string ArgumentOutOfRangeException_InvalidVersion {
+        public static string ArgumentOutOfRangeException_InvalidVersion {
             get {
                 return ResourceManager.GetString("ArgumentOutOfRangeException_InvalidVersion", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The events are out of order as ther versions are not successive..
         /// </summary>
-        internal static string EventsOutOfOrderException {
+        public static string EventsOutOfOrderException {
             get {
                 return ResourceManager.GetString("EventsOutOfOrderException", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The provided event stream does not contain a (potential) full history for an aggregate..
         /// </summary>
-        internal static string EventStreamNoFullHistoryException {
+        public static string EventStreamNoFullHistoryException {
             get {
                 return ResourceManager.GetString("EventStreamNoFullHistoryException", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The event of the type {0} is not supported for {1}..
         /// </summary>
-        internal static string EventTypeNotSupportedException {
+        public static string EventTypeNotSupportedException {
             get {
                 return ResourceManager.GetString("EventTypeNotSupportedException", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The {0} field is immutable and can not be changed..
         /// </summary>
-        internal static string ImmutableAttribute_ErrorMessage {
+        public static string ImmutableAttribute_ErrorMessage {
             get {
                 return ResourceManager.GetString("ImmutableAttribute_ErrorMessage", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The change tracker has already been initialized..
         /// </summary>
-        internal static string InvalidOperationException_ChangeTrackerAlreadyInitialized {
+        public static string InvalidOperationException_ChangeTrackerAlreadyInitialized {
             get {
                 return ResourceManager.GetString("InvalidOperationException_ChangeTrackerAlreadyInitialized", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The change tracker has not been initialized..
         /// </summary>
-        internal static string InvalidOperationException_ChangeTrackerNotInitialized {
+        public static string InvalidOperationException_ChangeTrackerNotInitialized {
             get {
                 return ResourceManager.GetString("InvalidOperationException_ChangeTrackerNotInitialized", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The event stream has already been initialized..
         /// </summary>
-        internal static string InvalidOperationException_InitializedEventStream {
+        public static string InvalidOperationException_InitializedEventStream {
             get {
                 return ResourceManager.GetString("InvalidOperationException_InitializedEventStream", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to Entities that are transient can not be stored in a hash table..
         /// </summary>
-        internal static string NotSupported_GetHashCodeOnIsTransient {
+        public static string NotSupported_GetHashCodeOnIsTransient {
             get {
                 return ResourceManager.GetString("NotSupported_GetHashCodeOnIsTransient", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Qowaiv.DomainModel {
         /// <summary>
         ///   Looks up a localized string similar to The identifier of an entity can not be updated once it is set..
         /// </summary>
-        internal static string Validation_UpdateEntityId {
+        public static string Validation_UpdateEntityId {
             get {
                 return ResourceManager.GetString("Validation_UpdateEntityId", resourceCulture);
             }

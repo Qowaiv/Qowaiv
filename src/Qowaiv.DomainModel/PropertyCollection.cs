@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace Qowaiv.DomainModel
@@ -36,21 +37,28 @@ namespace Qowaiv.DomainModel
 
             if (!_collections.TryGetValue(type, out var properties))
             {
-                var descriptors = TypeDescriptor.GetProperties(type)
-                    .Cast<PropertyDescriptor>()
-                    .Where(desc => !desc.IsReadOnly)
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(IsEditableProperty)
                     .ToArray();
 
-                properties = new PropertyCollection(descriptors.Length);
+                properties = new PropertyCollection(props.Length);
 
-                foreach (var desc in descriptors)
+                foreach (var desc in props)
                 {
                     properties[desc.Name] = desc.PropertyType.IsValueType ? Activator.CreateInstance(desc.PropertyType) : null;
                 }
                 _collections.TryAdd(type, properties.Clone());
+                return properties;
             }
-
-            return properties;
+            return properties.Clone();
+        }
+        
+        private static bool IsEditableProperty(PropertyInfo prop)
+        {
+            // CanWrite only works on public set, but internal and private set are also needed.
+            // Obviously, we don't want write only properies.
+            return prop.GetSetMethod(true) != null 
+                && prop.CanRead;
         }
 
         /// <remarks>For performance, we cache the structure of the property collections.</remarks>

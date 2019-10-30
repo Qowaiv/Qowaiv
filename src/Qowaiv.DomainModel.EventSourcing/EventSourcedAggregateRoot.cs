@@ -1,4 +1,4 @@
-﻿using Qowaiv.DomainModel.Dynamic;
+﻿using Qowaiv.DomainModel.EventSourcing.Dynamic;
 using Qowaiv.Validation.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -98,7 +98,7 @@ namespace Qowaiv.DomainModel.EventSourcing
             {
                 AsDynamic().Apply(e.Event);
             }
-            return Tracker.Validate();
+            return Tracker.Process();
         }
 
         /// <summary>Represents the aggregate root as a dynamic.</summary>

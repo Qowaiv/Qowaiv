@@ -1,7 +1,7 @@
 ﻿# Qowaiv JSON serialization
 For full support of JSON serialization a custom JSON converter has to be
 registered. For [Newtonsoft](https://www.newtonsoft.com)'s converter (the .NET
-de facto default) Qowaiv provides an [example implementation](QowaivJsonConverter.cs).
+de facto default, until .NET Core 3.0) Qowaiv provides an [example implementation](QowaivJsonConverter.cs).
 
 To register you can do:
 ``` C#

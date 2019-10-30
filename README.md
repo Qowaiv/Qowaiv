@@ -260,6 +260,7 @@ Qowaiv has its own: [IJsonSerializable](src/Qowaiv/Json/IJsonSerializable.cs)
 Is has some from methods, and one `ToJson()` method. Depending on your
 serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
 You can implement it yourself:
+* [.NET Core 3.0](example/Qowaiv.Text.Json.Serialization/README.md)
 * [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
 
 #### OpenAPI Specification

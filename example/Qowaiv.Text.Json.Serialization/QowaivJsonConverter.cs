@@ -71,41 +71,51 @@ namespace Qowaiv.Text.Json.Serialization
             var type = QowaivType.GetNotNullableType(typeToConvert);
             var result = (IJsonSerializable)Activator.CreateInstance(type);
 
-            var isNullable = typeof(TSvo) != typeToConvert;
+            var isNullable = typeof(TSvo) != typeToConvert || typeToConvert.IsClass;
 
-            switch (reader.TokenType)
+            try
             {
-                case JsonTokenType.String:
-                    result.FromJson(reader.GetString());
-                    break;
+                switch (reader.TokenType)
+                {
+                    case JsonTokenType.String:
+                        result.FromJson(reader.GetString());
+                        break;
 
-                case JsonTokenType.Number:
-                    if(reader.TryGetInt64(out long num))
-                    {
-                        result.FromJson(num);
-                    }
-                    else if(reader.TryGetDouble(out double dec))
-                    {
-                        result.FromJson(dec);
-                    }
-                    else
-                    {
-                        throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
-                    }
-                    break;
+                    case JsonTokenType.Number:
+                        if (reader.TryGetInt64(out long num))
+                        {
+                            result.FromJson(num);
+                        }
+                        else if (reader.TryGetDouble(out double dec))
+                        {
+                            result.FromJson(dec);
+                        }
+                        else
+                        {
+                            throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
+                        }
+                        break;
 
-                case JsonTokenType.Null:
-                    if(isNullable)
-                    {
-                        return default;
-                    }
-                    result.FromJson();
-                    break;
+                    case JsonTokenType.Null:
+                        if (isNullable)
+                        {
+                            return default;
+                        }
+                        result.FromJson();
+                        break;
 
-                default:
-                    throw new JsonException($"QowaivJsonConverter does not support token type {reader.TokenType}.");
+                    default:
+                        throw new JsonException($"Unexpected token parsing { typeToConvert.FullName }. { reader.TokenType} is not supported.");
+                }
             }
-
+            catch (Exception x)
+            {
+                if (x is JsonException)
+                {
+                    throw;
+                }
+                throw new JsonException(x.Message, x);
+            }
             return (TSvo)result;
         }
 
@@ -122,12 +132,12 @@ namespace Qowaiv.Text.Json.Serialization
         public override void Write(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
         {
             var obj = ((IJsonSerializable)value).ToJson();
-            
-            if(obj is string str)
+
+            if (obj is null)
             {
-                writer.WriteStringValue(str);
+                writer.WriteNullValue();
             }
-            else if(obj is decimal dec)
+            else if (obj is decimal dec)
             {
                 writer.WriteNumberValue(dec);
             }
@@ -135,21 +145,17 @@ namespace Qowaiv.Text.Json.Serialization
             {
                 writer.WriteNumberValue(dbl);
             }
-            else if(obj is long num)
+            else if (obj is long num)
             {
                 writer.WriteNumberValue(num);
             }
-            else if(obj is DateTime dt)
+            else if (obj is DateTime dt)
             {
                 writer.WriteStringValue(dt);
             }
-            else if (obj is null)
-            {
-                writer.WriteNullValue();
-            }
             else
             {
-                throw new JsonException($"QowaivJsonConverter does not support writing to {obj.GetType()}.");
+                writer.WriteStringValue(obj.ToString());
             }
         }
     }

@@ -342,14 +342,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void XmlSerialize_TestStruct_AreEqual()
-        {
-            var act = SerializationTest.XmlSerialize(TestStruct);
-            var exp = @"<?xml version=""1.0"" encoding=""utf-8""?><Month>Feb</Month>";
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = TestStruct;
@@ -365,13 +357,20 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "Feb";
             Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Month>("Feb");
+            Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
@@ -579,10 +578,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'February', format: 'Unit Test Format'";
+            using (CultureInfoScope.NewInvariant())
+            {
+                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+                var exp = "Unit Test Formatter, value: 'February', format: 'Unit Test Format'";
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
 
         [Test]

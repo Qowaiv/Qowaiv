@@ -1,11 +1,9 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
-using Qowaiv.IO;
 using Qowaiv.TestTools;
 using Qowaiv.Threading;
 using System;
-using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -41,21 +39,15 @@ namespace Qowaiv.UnitTests.Threading
         [Test]
         public void Get_NullableDecimal_ThrowsNotSupportedException()
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                ThreadDomain.Current.Get<decimal?>();
-            },
-            "Type must be a none generic type.");
+            var x = Assert.Catch<NotSupportedException>(() => ThreadDomain.Current.Get<decimal?>());
+            Assert.AreEqual("Type must be a none generic type.", x.Message);
         }
 
         [Test]
         public void Get_Object_ThrowsNotSupportedException()
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                ThreadDomain.Current.Get<Object>();
-            },
-            "Converter can not convert from System.String.");
+            var x = Assert.Catch<NotSupportedException>(() => ThreadDomain.Current.Get<object>());
+            Assert.AreEqual("Converter can not convert from System.String.", x.Message);
         }
 
         [Test]

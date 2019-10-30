@@ -132,6 +132,20 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Parse_DomainPartShouldBeLowerCased()
+        {
+            var email = EmailAddress.Parse("mail@UPPERCASE.com");
+            Assert.AreEqual("mail@uppercase.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_LocalPartShouldNotBeLowerCased()
+        {
+            var email = EmailAddress.Parse("MAIL@lowercase.com");
+            Assert.AreEqual("MAIL@lowercase.com", email.ToString());
+        }
+
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -286,14 +300,22 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
+
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = EmailAddressTest.TestStruct;
-            var exp = EmailAddressTest.TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "svo@qowaiv.org";
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<EmailAddress>("svo@qowaiv.org");
+            Assert.AreEqual(TestStruct, act);
+        }
+
 
         [Test]
         public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
@@ -592,7 +614,7 @@ namespace Qowaiv.UnitTests
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = EmailAddress.Parse("svo@qowaiv.org", CultureInfo.InvariantCulture);
-            var r = EmailAddress.Parse("SVO@Qowaiv.org", CultureInfo.InvariantCulture);
+            var r = EmailAddress.Parse("With display <svo@Qowaiv.org>", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
         }

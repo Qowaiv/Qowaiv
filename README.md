@@ -5,12 +5,12 @@
 
 | version                                                                        | package                                                                                              |
 |--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-4.0.5-blue.svg?cacheSeconds=3600)     |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                      |
+|![v](https://img.shields.io/badge/version-4.0.6-blue.svg?cacheSeconds=3600)     |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                      |
 |![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                         |
 |![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
 |![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
 |![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
-|![v](https://img.shields.io/badge/version-1.0.2-darkred.svg?cacheSeconds=3600)  |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                  |
+|![v](https://img.shields.io/badge/version-1.0.3-darkred.svg?cacheSeconds=3600)  |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                  |
 
 # Qowaiv
 
@@ -32,15 +32,29 @@ here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 ## Qowaiv types
 
 ### Date
-
 Represents a date, so without hours (minutes, seconds, milliseconds).
+
+### Date span
+Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
+Adding one month to a date in January result in adding a different number of days, 
+than adding one month a date in March.
+
+Date spans are particular useful in scenario's for defining (and doing calculations on)
+month based periods, and ages (mostly in years and days).
+
+``` C#
+var span = new DateSpan(years: 3, months: 2, days: -4);
+var age = DateSpan.Age(new Date(2017, 06, 11)); // 2Y+0M+121D on 2019-10-10
+var duration = DateSpan.Subtract(new Date(2019, 06, 10), new Date(2017, 06, 11)); // 1Y+11M+30D
+var date = new Date(2016, 06, 03).Add(age); // 2018-10-02
+```
 
 ### Elo
 Represents an Elo (rating), a method for calculating the relative skill levels of
 players in competitor-versus-competitor games.
 
 ### Email address
-Represents a (single) email address. Support:
+Represents a (single) email address. Supports:
 * Display names (are stripped)
 * Comments (are removed)
 * IP-based domains (normalized and surrounded by brackets)
@@ -209,6 +223,38 @@ Represents a pattern to match strings, using wildcard characters ? and *. It
 also support the use of SQL wildcard characters _ and %.
 
 ## Qowaiv helpers
+
+### Decimal round
+By default, .NET support rounding of floating points (including `decimal`s).
+However, for some domains this support is too limited. To overcome this, Qowaiv
+has the static `DecimalRound` helper class, containing extension methods for rounding.
+
+#### ‘Negative’ decimals
+To round tenfold, hundredfold, etc. precision, a negative amount of decimals
+can be specified:
+``` C#
+var tenfold = 1245.346m.Round(-1); // 1250m
+var hundredfold = 1209m.Round(-2); // 1200m
+```
+
+#### Multiple of
+Rounding to a multiple of is supported:
+``` C#
+var multipleOf = 123.5m.RoundToMultiple(5m); //   125.0m
+var multiple25 = 123.5m.RoundToMultiple(2.5m); // 122.5m
+```
+
+#### Extra rounding methods
+.NET supports rounding to even (Bankers rounding) and away from zero out-of-the-box.
+Rounding methods like ceiling, floor, and truncate have limited support (0 decimals only),
+and many others (to odd, half-way up, half-way down, e.o.) are missing.
+By specifying the `DecimalRounding` 13 ways are supported.
+
+``` c#
+var toOdd = 23.0455m.Round(3, DecimalRounding.ToOdd); // 23.045m
+var towardsZero = 23.5m.Round(DecimalRounding.TowardsZero); // 23m
+var randomTie = 23.5m.Round(DecimalRounding.RandomTieBreaking); // 50% 23m, 50% 24,
+```
 
 ## Model Binding
 All SVO's support model binding out of the box. That is to say, when the model

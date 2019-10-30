@@ -197,13 +197,21 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
         [Test]
-        public void XmlSerializeDeserialize_TestStruct_AreEqual()
+
+        public void XmlSerialize_TestStruct_AreEqual()
         {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializationTest.XmlSerialize(TestStruct);
+            var exp = "1970-02-14";
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void XmlDeserialize_XmlString_AreEqual()
+        {
+            var act = SerializationTest.XmlDeserialize<Date>("1970-02-14");
+            Assert.AreEqual(TestStruct, act);
+        }
+
 
         [Test]
         public void SerializeDeserialize_DateSerializeObject_AreEqual()
@@ -337,11 +345,14 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid date");
         }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
+
+        [TestCase("2012-04-23")]
+        [TestCase("2012-04-23T18:25:43.511Z")]
+        [TestCase("2012-04-23T10:25:43-05:00")]
+        public void FromJson_StringValue_AreEqual(string str)
         {
-            var act = JsonTester.Read<Date>("1970-02-14");
-            var exp = TestStruct;
+            var act = JsonTester.Read<Date>(str);
+            var exp = new Date(2012, 04, 23);
 
             Assert.AreEqual(exp, act);
         }
@@ -369,6 +380,15 @@ namespace Qowaiv.UnitTests
         public void FromJson_DateTimeValue_AreEqual()
         {
             var act = JsonTester.Read<Date>(new DateTime( 1970, 02, 14));
+            var exp = TestStruct;
+
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void FromJson_DateTimeValueWithSeconds_AreEqual()
+        {
+            var act = JsonTester.Read<Date>(new DateTime(1970, 02, 14, 17, 44, 09));
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

@@ -94,7 +94,7 @@ namespace Qowaiv
                     {
                         return null;
                     }
-                    local.AddLower(ch);
+                    local.Add(ch);
                 }
                 // Domain part.
                 else

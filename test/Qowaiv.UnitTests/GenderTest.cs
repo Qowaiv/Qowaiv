@@ -305,13 +305,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_GenderSerializeObject_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
@@ -325,13 +325,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_GenderSerializeObject_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
@@ -345,13 +345,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_GenderSerializeObject_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
@@ -366,13 +366,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,
@@ -386,13 +386,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,

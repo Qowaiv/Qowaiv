@@ -286,13 +286,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_WeekDateSerializeObject_AreEqual()
         {
-            var input = new WeekDateSerializeObject()
+            var input = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new WeekDateSerializeObject()
+            var exp = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -306,13 +306,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_WeekDateSerializeObject_AreEqual()
         {
-            var input = new WeekDateSerializeObject()
+            var input = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new WeekDateSerializeObject()
+            var exp = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -326,13 +326,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_WeekDateSerializeObject_AreEqual()
         {
-            var input = new WeekDateSerializeObject()
+            var input = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new WeekDateSerializeObject()
+            var exp = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -347,13 +347,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_MinValue_AreEqual()
         {
-            var input = new WeekDateSerializeObject()
+            var input = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = WeekDate.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new WeekDateSerializeObject()
+            var exp = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = WeekDate.MinValue,
@@ -367,13 +367,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new WeekDateSerializeObject()
+            var input = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = WeekDate.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new WeekDateSerializeObject()
+            var exp = new WeekDateSerializeObject
             {
                 Id = 17,
                 Obj = WeekDate.MinValue,

@@ -190,13 +190,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
@@ -210,13 +210,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
@@ -230,13 +230,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStructNoMilliseconds,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStructNoMilliseconds,
@@ -251,13 +251,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_MinValue_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTime.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTime.MinValue,

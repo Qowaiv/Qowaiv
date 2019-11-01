@@ -107,7 +107,7 @@ namespace Qowaiv
         }
 
         /// <summary>The resource manager managing the culture based string values.</summary>
-        private readonly static Dictionary<CultureInfo, string[]> StringValues = new Dictionary<CultureInfo, string[]>()
+        private readonly static Dictionary<CultureInfo, string[]> StringValues = new Dictionary<CultureInfo, string[]>
         {
             { CultureInfo.InvariantCulture, new []{ "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
         };

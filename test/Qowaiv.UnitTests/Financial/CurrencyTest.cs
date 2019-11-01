@@ -325,13 +325,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_CurrencySerializeObject_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
@@ -345,13 +345,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_CurrencySerializeObject_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
@@ -365,13 +365,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DataContractSerializeDeserialize_CurrencySerializeObject_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
@@ -386,13 +386,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,
@@ -406,13 +406,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,

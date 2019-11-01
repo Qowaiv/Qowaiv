@@ -336,13 +336,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void SerializeDeserialize_CountrySerializeObject_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
@@ -356,13 +356,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void XmlSerializeDeserialize_CountrySerializeObject_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
@@ -376,13 +376,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void DataContractSerializeDeserialize_CountrySerializeObject_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
@@ -397,13 +397,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,
@@ -417,13 +417,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,

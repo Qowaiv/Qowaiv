@@ -265,13 +265,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
@@ -285,13 +285,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
@@ -305,13 +305,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DataContractSerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
@@ -326,13 +326,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,
@@ -346,13 +346,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,

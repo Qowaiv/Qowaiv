@@ -210,13 +210,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_GuidSerializeObject_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -230,13 +230,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_GuidSerializeObject_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -250,13 +250,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_GuidSerializeObject_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -271,13 +271,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = Uuid.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = Uuid.Empty,
@@ -291,13 +291,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new QGuidSerializeObject()
+            var input = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = Uuid.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new QGuidSerializeObject()
+            var exp = new QGuidSerializeObject
             {
                 Id = 17,
                 Obj = Uuid.Empty,

@@ -17,7 +17,7 @@ namespace Qowaiv.UnitTests
 
         public static NumberFormatInfo GetCustomNumberFormatInfo()
         {
-            var info = new NumberFormatInfo()
+            var info = new NumberFormatInfo
             {
                 PercentSymbol = "!",
                 PerMilleSymbol = "#",
@@ -263,13 +263,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -283,13 +283,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -303,13 +303,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -324,13 +324,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Zero_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = Percentage.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = Percentage.Zero,

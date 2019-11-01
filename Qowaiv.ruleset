@@ -94,9 +94,9 @@
     <Rule Id="S3234" Action="Warning" />
     <Rule Id="S3235" Action="Warning" />
     <Rule Id="S3240" Action="Warning" />
-    <Rule Id="S3242" Action="Warning" />
+    <Rule Id="S3242" Action="Info" />
     <Rule Id="S3253" Action="Warning" />
-    <Rule Id="S3257" Action="Error" />
+    <Rule Id="S3257" Action="Warning" />
     <Rule Id="S3353" Action="Warning" />
     <Rule Id="S3366" Action="Warning" />
     <Rule Id="S3431" Action="Warning" />

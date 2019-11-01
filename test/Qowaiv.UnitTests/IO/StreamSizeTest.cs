@@ -247,13 +247,13 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void SerializeDeserialize_StreamSizeSerializeObject_AreEqual()
         {
-            var input = new StreamSizeSerializeObject()
+            var input = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new StreamSizeSerializeObject()
+            var exp = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -267,13 +267,13 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void XmlSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
         {
-            var input = new StreamSizeSerializeObject()
+            var input = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new StreamSizeSerializeObject()
+            var exp = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -287,13 +287,13 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void DataContractSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
         {
-            var input = new StreamSizeSerializeObject()
+            var input = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new StreamSizeSerializeObject()
+            var exp = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -308,13 +308,13 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new StreamSizeSerializeObject()
+            var input = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new StreamSizeSerializeObject()
+            var exp = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -328,13 +328,13 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new StreamSizeSerializeObject()
+            var input = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = StreamSize.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new StreamSizeSerializeObject()
+            var exp = new StreamSizeSerializeObject
             {
                 Id = 17,
                 Obj = StreamSize.Zero,
@@ -810,8 +810,8 @@ namespace Qowaiv.UnitTests.IO
             StreamSize item2 = 113465;
             StreamSize item3 = 773465;
 
-            var inp = new List<StreamSize>() { StreamSize.Zero, item3, item2, item0, item1, StreamSize.Zero };
-            var exp = new List<StreamSize>() { item3, item2, item1, item0, StreamSize.Zero, StreamSize.Zero };
+            var inp = new List<StreamSize> { StreamSize.Zero, item3, item2, item0, item1, StreamSize.Zero };
+            var exp = new List<StreamSize> { item3, item2, item1, item0, StreamSize.Zero, StreamSize.Zero };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

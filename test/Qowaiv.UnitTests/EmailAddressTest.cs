@@ -320,13 +320,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
@@ -340,13 +340,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
@@ -360,13 +360,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
@@ -381,13 +381,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,
@@ -401,13 +401,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,

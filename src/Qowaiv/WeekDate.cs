@@ -72,7 +72,7 @@ namespace Qowaiv
             {
                 throw new ArgumentOutOfRangeException("week", "Week should be in range [1,53].");
             }
-            if (day < 1 || day > 7)
+            if (day < 1 || day > DaysPerWeek)
             {
                 throw new ArgumentOutOfRangeException("day", "Day should be in range [1,7].");
             }
@@ -93,35 +93,31 @@ namespace Qowaiv
         /// <remarks>
         /// The week date year component can differ from the year component of a date.
         /// </remarks>
-        public int Year { get { return GetDatePart(DatePartYear); } }
+        public int Year => GetDatePart(DatePartYear);
 
         /// <summary>Gets the week component of the week date represented by this instance.</summary>
-        public int Week { get { return GetDatePart(DatePartWeek); } }
+        public int Week => GetDatePart(DatePartWeek);
 
         /// <summary>Gets the day component represented by this instance.</summary>
-        public Int32 Day
-        {
-            get { return DayOfWeek == DayOfWeek.Sunday ? 7 : (Int32)DayOfWeek; }
-        }
+        public int Day => DayOfWeek == DayOfWeek.Sunday ? DaysPerWeek : (int)DayOfWeek;
 
         /// <summary>Gets the day of the week represented by this instance.</summary>
-        public DayOfWeek DayOfWeek { get { return m_Value.DayOfWeek; } }
+        public DayOfWeek DayOfWeek => m_Value.DayOfWeek;
 
         /// <summary>Gets the day of the year represented by this instance.</summary>
-        public int DayOfYear { get { return GetDatePart(DatePartDayOfYear); } }
+        public int DayOfYear => GetDatePart(DatePartDayOfYear);
 
         /// <summary>Gets the date time component of this instance.</summary>
-        public Date Date { get { return m_Value; } }
+        public Date Date => m_Value;
 
         #endregion
 
         #region Methods
 
         /// <summary>Gets the year of week part of the week date.</summary>
-        private Int32 GetDatePart(int part)
+        private int GetDatePart(int part)
         {
             int year = m_Value.Year;
-            int week = 0;
 
             // Now the week number.
             DateTime startdate = GetFirstDayOfFirstWeekOfYear(year);
@@ -147,10 +143,11 @@ namespace Qowaiv
             if (part == DatePartDayOfYear) { return dayofyear; }
 
             // The week number is not zero based.
-            week = dayofyear / 7 + 1;
+            var week = dayofyear / DaysPerWeek + 1;
             return week;
         }
 
+        private const int DaysPerWeek = 7;
         private const int DatePartYear = 0;
         private const int DatePartDayOfYear = 1;
         private const int DatePartWeek = 2;
@@ -332,7 +329,7 @@ namespace Qowaiv
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<WeekDate, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<WeekDate, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<WeekDate, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<WeekDate, IFormatProvider, string>>
         {
             { 'y', (svo, provider) => svo.Year.ToString("0000", provider) },
             { 'w', (svo, provider) => svo.Week.ToString("00", provider) },
@@ -610,7 +607,7 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid week date, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return TryParse(val, formatProvider, out WeekDate wd);
+            return TryParse(val, formatProvider, out _);
         }
 
         #endregion

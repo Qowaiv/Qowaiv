@@ -311,13 +311,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_YearSerializeObject_AreEqual()
         {
-            var input = new YearSerializeObject()
+            var input = new YearSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new YearSerializeObject()
+            var exp = new YearSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -331,13 +331,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_YearSerializeObject_AreEqual()
         {
-            var input = new YearSerializeObject()
+            var input = new YearSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new YearSerializeObject()
+            var exp = new YearSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -351,13 +351,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_YearSerializeObject_AreEqual()
         {
-            var input = new YearSerializeObject()
+            var input = new YearSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new YearSerializeObject()
+            var exp = new YearSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -372,13 +372,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new YearSerializeObject()
+            var input = new YearSerializeObject
             {
                 Id = 17,
                 Obj = Year.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new YearSerializeObject()
+            var exp = new YearSerializeObject
             {
                 Id = 17,
                 Obj = Year.Empty,
@@ -392,13 +392,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new YearSerializeObject()
+            var input = new YearSerializeObject
             {
                 Id = 17,
                 Obj = Year.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new YearSerializeObject()
+            var exp = new YearSerializeObject
             {
                 Id = 17,
                 Obj = Year.Empty,

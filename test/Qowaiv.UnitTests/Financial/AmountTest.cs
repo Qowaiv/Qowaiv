@@ -199,13 +199,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void SerializeDeserialize_AmountSerializeObject_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -219,13 +219,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void XmlSerializeDeserialize_AmountSerializeObject_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -239,13 +239,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_AmountSerializeObject_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -260,13 +260,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -280,13 +280,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = Amount.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = Amount.Zero,

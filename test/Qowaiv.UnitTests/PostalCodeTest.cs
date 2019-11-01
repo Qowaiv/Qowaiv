@@ -296,13 +296,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -316,13 +316,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -336,13 +336,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -357,13 +357,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,
@@ -377,13 +377,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,

@@ -199,13 +199,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void SerializeDeserialize_EloSerializeObject_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
@@ -219,13 +219,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void XmlSerializeDeserialize_EloSerializeObject_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
@@ -239,13 +239,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void DataContractSerializeDeserialize_EloSerializeObject_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
@@ -260,13 +260,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void SerializeDeserialize_Zero_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = Elo.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = Elo.Zero,

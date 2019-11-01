@@ -332,13 +332,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -352,13 +352,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -372,13 +372,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -393,13 +393,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,
@@ -413,13 +413,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,

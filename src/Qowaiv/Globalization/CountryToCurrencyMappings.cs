@@ -6,7 +6,7 @@ namespace Qowaiv.Globalization
 {
     internal partial struct CountryToCurrency
     {
-        public static readonly ReadOnlyCollection<CountryToCurrency> All = new ReadOnlyCollection<CountryToCurrency>(new List<CountryToCurrency>()
+        public static readonly ReadOnlyCollection<CountryToCurrency> All = new ReadOnlyCollection<CountryToCurrency>(new List<CountryToCurrency>
         {
             new CountryToCurrency(Country.AD, Currency.ADP),
             new CountryToCurrency(Country.AD, Currency.EUR, new Date(2002, 01, 01)),

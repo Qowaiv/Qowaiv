@@ -354,13 +354,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_MonthSerializeObject_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -374,13 +374,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_MonthSerializeObject_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -394,13 +394,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_MonthSerializeObject_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -415,13 +415,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -435,13 +435,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = Month.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = Month.Empty,

@@ -227,13 +227,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void SerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
@@ -247,13 +247,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void XmlSerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
@@ -267,13 +267,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
@@ -288,13 +288,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,
@@ -308,13 +308,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,

@@ -16,14 +16,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj" />
-    <ProjectReference Include="..\..\tooling\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Reference Include="System.Data">
-      <HintPath>..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
 
   <ItemGroup>

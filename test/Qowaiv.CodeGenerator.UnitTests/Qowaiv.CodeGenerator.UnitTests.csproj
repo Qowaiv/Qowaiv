@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <Import Project="..\..\props\test.props" />
-
-  <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
-  </PropertyGroup>
-
-  </Project>

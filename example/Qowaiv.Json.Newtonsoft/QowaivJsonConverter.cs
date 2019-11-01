@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Qowaiv.Reflection;
 using System;
-using System.Globalization;
 using System.Linq;
 
 namespace Qowaiv.Json
@@ -59,13 +58,18 @@ namespace Qowaiv.Json
             var type = QowaivType.GetNotNullableType(objectType);
             var result = (IJsonSerializable)Activator.CreateInstance(type);
 
+            var isNullable = type != objectType || objectType.IsClass;
+
             try
             {
                 switch (reader.TokenType)
                 {
                     // Empty value for null-ables.
                     case JsonToken.Null:
-                        if (type != objectType) { return null; }
+                        if (isNullable)
+                        {
+                            return null; 
+                        }
                         result.FromJson();
                         break;
 
@@ -91,13 +95,13 @@ namespace Qowaiv.Json
 
                     // Other scenario's are not supported.    
                     default:
-                        throw new JsonSerializationException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.JsonSerialization_TokenNotSupported, objectType.FullName, reader.TokenType));
+                        throw new JsonSerializationException($"Unexpected token parsing {objectType.FullName}. {reader.TokenType} is not supported.");
                 }
             }
             // We want to communicate exceptions as JSON serialization exceptions.
-            catch(Exception x)
+            catch (Exception x)
             {
-                if(x is JsonSerializationException || x is JsonReaderException)
+                if (x is JsonSerializationException || x is JsonReaderException)
                 {
                     throw;
                 }
@@ -119,11 +123,6 @@ namespace Qowaiv.Json
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             Guard.NotNull(writer, nameof(writer));
-
-            if (value is null)
-            {
-                writer.WriteNull();
-            }
 
             var json = Guard.IsInstanceOf<IJsonSerializable>(value, nameof(value));
 

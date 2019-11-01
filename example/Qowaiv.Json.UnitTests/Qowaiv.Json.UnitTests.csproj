@@ -3,8 +3,7 @@
   <Import Project="..\..\props\test.props" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>Qowaiv.Json.UnitTests</RootNamespace>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj" />
+    <ProjectReference Include="..\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj" />
   </ItemGroup>
 
 </Project>

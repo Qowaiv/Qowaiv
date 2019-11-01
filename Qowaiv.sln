@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.AspNetCore.Mvc.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "example\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{C9A81969-FF9E-4903-AC82-F6BC3C03563E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft.UnitTests", "example\Qowaiv.Json.Newtonsoft.UnitTests\Qowaiv.Json.Newtonsoft.UnitTests.csproj", "{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.UnitTests", "example\Qowaiv.Json.UnitTests\Qowaiv.Json.UnitTests.csproj", "{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C036985A-F17D-405A-B3FD-37F30FA154FB}"
 EndProject
@@ -67,6 +67,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2
 		build\Qowaiv.snk = build\Qowaiv.snk
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Text.Json.Serialization", "example\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj", "{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}"
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TestTools", "src\Qowaiv.TestTools\Qowaiv.TestTools.csproj", "{DDB84002-C9A4-4D0C-9B98-19FF02854D11}"
 EndProject
 Global
@@ -115,6 +116,10 @@ Global
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -137,6 +142,7 @@ Global
 		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
 		{932B4123-594C-494B-9B3E-7017D526E80F} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

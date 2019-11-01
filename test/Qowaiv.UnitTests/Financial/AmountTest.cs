@@ -776,12 +776,6 @@ namespace Qowaiv.Financial.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Amount_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Amount));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

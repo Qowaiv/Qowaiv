@@ -1134,12 +1134,6 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Country_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Country));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

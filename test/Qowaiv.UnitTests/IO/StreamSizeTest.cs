@@ -1313,12 +1313,6 @@ namespace Qowaiv.UnitTests.IO
             }
         }
 
-        [Test]
-        public void ConvertFromInstanceDescriptor_StreamSize_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(StreamSize));
-        }
-
         #endregion
 
         #region IsValid tests

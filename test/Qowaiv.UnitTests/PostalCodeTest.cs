@@ -854,12 +854,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_PostalCode_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(PostalCode));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

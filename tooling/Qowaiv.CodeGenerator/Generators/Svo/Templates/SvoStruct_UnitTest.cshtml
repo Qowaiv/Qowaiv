@@ -975,12 +975,6 @@ namespace @(Model.Namespace).UnitTests
     }
 
     [Test]
-    public void ConvertFromInstanceDescriptor_@(Model.ClassName)_Successful()
-    {
-    TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(@(Model.ClassName)));
-    }
-
-    [Test]
     public void ConvertToString_TestStruct_StringValue()
     {
     using (new CultureInfoScope("en-GB"))

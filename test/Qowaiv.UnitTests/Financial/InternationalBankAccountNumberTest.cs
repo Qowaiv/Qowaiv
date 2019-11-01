@@ -784,12 +784,6 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_InternationalBankAccountNumber_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(InternationalBankAccountNumber));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

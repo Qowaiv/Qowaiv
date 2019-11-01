@@ -832,12 +832,6 @@ namespace Qowaiv.Fiancial.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_YesNo_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(YesNo));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

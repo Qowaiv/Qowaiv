@@ -851,12 +851,6 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Timestamp_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Timestamp));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

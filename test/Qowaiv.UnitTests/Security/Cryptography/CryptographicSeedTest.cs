@@ -720,12 +720,6 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_CryptographicSeed_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(CryptographicSeed));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

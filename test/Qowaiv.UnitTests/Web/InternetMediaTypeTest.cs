@@ -976,12 +976,6 @@ namespace Qowaiv.UnitTests.Web
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_InternetMediaType_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(InternetMediaType));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

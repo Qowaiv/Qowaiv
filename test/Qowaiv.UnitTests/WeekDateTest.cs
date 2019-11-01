@@ -906,12 +906,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_WeekDate_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(WeekDate));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

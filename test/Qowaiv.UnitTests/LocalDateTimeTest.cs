@@ -740,12 +740,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_LocalDateTime_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(LocalDateTime));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

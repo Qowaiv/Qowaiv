@@ -973,29 +973,12 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_HouseNumber_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(HouseNumber));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_NullableInt32_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(int?));
-        }
-        [Test]
-        public void ConvertFromInstanceDescriptor_Int64_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(long));
         }
 
         [Test]

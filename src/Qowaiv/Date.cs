@@ -590,11 +590,9 @@ namespace Qowaiv
         public static Date operator -(Date d, TimeSpan t) => d.Subtract(t);
 
         /// <summary>Adds one day to the date.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
         public static Date operator ++(Date d) => d.AddDays(+1);
 
         /// <summary>Subtracts one day from the date.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
         public static Date operator --(Date d) => d.AddDays(-1);
 
         /// <summary>Subtracts the right Date from the left date.</summary>

@@ -58,12 +58,18 @@ namespace Qowaiv.Text
 
             if (options.HasFlag(WildcardPatternOptions.SqlWildcards))
             {
-                if (pattern.Contains("%%")) { throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, "pattern"); }
-
+                if (pattern.Contains("%%"))
+                {
+                    throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, "pattern");
+                }
                 SingleChar = '_';
                 MultipleChars = '%';
             }
-            else if (pattern.Contains("**")) { throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, "pattern"); }
+            else if (pattern.Contains("**"))
+            {
+                throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, "pattern");
+            }
+            else { /* No arugument exceptions. */ }
 
             Options = options;
             ComparisonType = comparisonType;

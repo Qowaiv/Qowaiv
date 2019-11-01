@@ -125,19 +125,19 @@ namespace Qowaiv.Globalization
         /// <summary>Gets countries without a postal code system.</summary>
         public static IEnumerable<Country> GetCountriesWithoutPostalCode()
         {
-            return Country.GetExisting().Where(country => !PostalCodeCountryInfo.GetInstance(country).HasPostalCode);
+            return Country.GetExisting().Where(country => !GetInstance(country).HasPostalCode);
         }
 
         /// <summary>Gets countries with postal codes with formatting.</summary>
         public static IEnumerable<Country> GetCountriesWithFormatting()
         {
-            return Country.GetExisting().Where(country => PostalCodeCountryInfo.GetInstance(country).HasFormatting);
+            return Country.GetExisting().Where(country => GetInstance(country).HasFormatting);
         }
 
         /// <summary>Gets countries with a single postal code value.</summary>
         public static IEnumerable<Country> GetCountriesWithSingleValue()
         {
-            return Country.GetExisting().Where(country => PostalCodeCountryInfo.GetInstance(country).IsSingleValue);
+            return Country.GetExisting().Where(country => GetInstance(country).IsSingleValue);
         }
 
         #endregion
@@ -150,13 +150,11 @@ namespace Qowaiv.Globalization
         /// </param>
         public static PostalCodeCountryInfo GetInstance(Country country)
         {
-            PostalCodeCountryInfo instance;
-
-            if (Instances.TryGetValue(country, out instance))
+            if (Instances.TryGetValue(country, out PostalCodeCountryInfo instance))
             {
                 return instance;
             }
-            return new PostalCodeCountryInfo()
+            return new PostalCodeCountryInfo
             {
                 Country = country,
             };
@@ -164,11 +162,11 @@ namespace Qowaiv.Globalization
 
         /// <summary>Creates a new instance.</summary>
         /// <remarks>
-        /// Used for ininitalating the Instances dictionary.
+        /// Used for initializing the Instances dictionary.
         /// </remarks>
         private static PostalCodeCountryInfo New(Country country, string validation, string search = null, string replace = null, bool isSingle = false)
         {
-            return new PostalCodeCountryInfo()
+            return new PostalCodeCountryInfo
             {
                 Country = country,
                 ValidationPattern = new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase),

@@ -218,10 +218,7 @@ namespace Qowaiv.Financial
             return m_Value;
         }
         /// <summary>Formats the IBAN without spaces as lowercase.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "This is not about normalization but formatting.")]
         private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();
-
 
         /// <summary>Formats the IBAN with spaces.</summary>
         private string ToFormattedString()
@@ -290,7 +287,7 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>
         {
             { 'u', (svo, provider) => svo.ToUnformattedLowercaseString() },
             { 'U', (svo, provider) => svo.ToUnformattedString() },
@@ -529,8 +526,8 @@ namespace Qowaiv.Financial
         /// <summary>Matches on Alphanumeric uppercase chars.</summary>
         private static readonly Regex Alphanumeric = new Regex("[A-Z]", RegexOptions.Compiled);
 
-        /// <summary>Replaces A by 11, B by 12 ect.</summary>
-        private static string AlphanumericToNumeric(Match match)
+        /// <summary>Replaces A by 11, B by 12 etcetera.</summary>
+        private static string AlphanumericToNumeric(Capture match)
         {
             return AlphanumericAndNumericLookup
                 .IndexOf(match.Value, StringComparison.Ordinal)

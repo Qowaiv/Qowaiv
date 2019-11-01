@@ -1,4 +1,8 @@
-﻿using Qowaiv.Financial;
+﻿#pragma warning disable S3898
+// Value types should implement "IEquatable<T>"
+// Equals of this type is never called.
+
+using Qowaiv.Financial;
 
 namespace Qowaiv.Globalization
 {
@@ -15,11 +19,11 @@ namespace Qowaiv.Globalization
             m_StartDate = startdate;
         }
 
-        public CountryToCurrency(Country country, Currency currency) 
+        public CountryToCurrency(Country country, Currency currency)
             : this(country, currency, Date.MinValue) { }
 
-        public Country Country { get { return m_Country; } }
-        public Currency Currency { get { return m_Currency; } }
-        public Date StartDate { get { return m_StartDate; } }
+        public Country Country => m_Country;
+        public Currency Currency => m_Currency;
+        public Date StartDate => m_StartDate;
     }
 }

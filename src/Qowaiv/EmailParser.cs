@@ -46,10 +46,9 @@ namespace Qowaiv
             var hasBrackets = false;
             var dot = NotFound;
 
-            var start = 0;
             var end = str.Length;
 
-            for (var pos = start; pos < end; pos++)
+            for (var pos = 0; pos < end; pos++)
             {
                 var ch = str[pos];
 

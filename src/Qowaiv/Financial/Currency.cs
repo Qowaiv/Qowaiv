@@ -318,7 +318,7 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Currency, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Currency, IFormatProvider, string>>
         {
             { 'n', (svo, provider) => svo.Name },
             { 'i', (svo, provider) => svo.IsoCode },
@@ -482,8 +482,7 @@ namespace Qowaiv.Financial
         /// </exception>
         public static Currency Parse(string s, IFormatProvider formatProvider)
         {
-            Currency val;
-            if (TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Currency val))
             {
                 return val;
             }
@@ -501,8 +500,7 @@ namespace Qowaiv.Financial
         /// </returns>
         public static Currency TryParse(string s)
         {
-            Currency val;
-            if (TryParse(s, out val))
+            if (TryParse(s, out Currency val))
             {
                 return val;
             }
@@ -557,9 +555,8 @@ namespace Qowaiv.Financial
             AddCulture(culture);
 
             var str = Parsing.ToUnified(s);
-            string val;
 
-            if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
                 result = new Currency { m_Value = val };
                 return true;
@@ -724,10 +721,10 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>()
+        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, string>()
+                CultureInfo.InvariantCulture, new Dictionary<string, string>
                 {
                     { "ZZZ", "ZZZ" },
                     { "999", "ZZZ" },
@@ -737,7 +734,7 @@ namespace Qowaiv.Financial
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static volatile object locker = new object();
+        private static readonly object locker = new object();
 
         #endregion
 

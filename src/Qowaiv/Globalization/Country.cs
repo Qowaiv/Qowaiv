@@ -146,7 +146,10 @@ namespace Qowaiv.Globalization
         /// </param>
         public Currency GetCurrency(Date measurement)
         {
-            if (!ExistsOnDate(measurement)) { return Currency.Empty; }
+            if (!ExistsOnDate(measurement))
+            {
+                return Currency.Empty;
+            }
             var country = this;
             return CountryToCurrency.All.Where(map => map.Country == country && map.StartDate <= measurement)
                 .Select(map => map.Currency)
@@ -343,7 +346,7 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Country, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Country, IFormatProvider, string>>
         {
             { 'n', (svo, provider) => svo.Name },
             { '2', (svo, provider) => svo.GetResourceString("ISO2", provider) },
@@ -479,8 +482,7 @@ namespace Qowaiv.Globalization
         /// </exception>
         public static Country Parse(string s, IFormatProvider formatProvider)
         {
-            Country val;
-            if (TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Country val))
             {
                 return val;
             }
@@ -498,8 +500,7 @@ namespace Qowaiv.Globalization
         /// </returns>
         public static Country TryParse(string s)
         {
-            Country val;
-            if (TryParse(s, out val))
+            if (TryParse(s, out Country val))
             {
                 return val;
             }
@@ -557,9 +558,8 @@ namespace Qowaiv.Globalization
             AddCulture(culture);
 
             var str = Parsing.ToUnified(s);
-            string val;
 
-            if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
                 result = new Country { m_Value = val };
                 return true;
@@ -749,10 +749,10 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>()
+        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, string>()
+                CultureInfo.InvariantCulture, new Dictionary<string, string>
                 {
                     { "ZZ", "ZZ" },
                     { "ZZZ", "ZZ" },

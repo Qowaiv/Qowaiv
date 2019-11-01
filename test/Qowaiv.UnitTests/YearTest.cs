@@ -906,12 +906,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Year_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Year));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

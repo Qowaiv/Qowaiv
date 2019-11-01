@@ -696,9 +696,11 @@ namespace Qowaiv.UnitTests
 
         /// <summary>GetHash should not fail for the test struct.</summary>
         [Test]
-        public void GetHash_TestStruct_Hash()
+        public void GetHash_SameValue_SameHash()
         {
-            Assert.AreEqual(2097520717, TestStruct.GetHashCode());
+            var hash0 = TestStruct.GetHashCode();
+            var hash1 = 17.51.Percent().GetHashCode();
+            Assert.AreEqual(hash0, hash1);
         }
 
         [Test]
@@ -1564,7 +1566,7 @@ namespace Qowaiv.UnitTests
         public void Round_27Digits_Throws()
         {
             var exception = Assert.Catch<ArgumentOutOfRangeException>(() => TestStruct.Round(27));
-            Assert.AreEqual("Percentages can only round to between -26 and 26 digits of precision.\r\nParameter name: decimals", exception.Message);
+            StringAssert.StartsWith("Percentages can only round to between -26 and 26 digits of precision.", exception.Message);
         }
 
         [Test]

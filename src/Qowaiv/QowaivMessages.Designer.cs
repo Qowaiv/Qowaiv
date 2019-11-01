@@ -108,9 +108,18 @@ namespace Qowaiv {
         /// <summary>
         ///   Looks up a localized string similar to Percentages can only round to between -26 and 26 digits of precision..
         /// </summary>
-        public static string ArgumentOutOfRange_PercentagelRound {
+        public static string ArgumentOutOfRange_PercentageRound {
             get {
-                return ResourceManager.GetString("ArgumentOutOfRange_PercentagelRound", resourceCulture);
+                return ResourceManager.GetString("ArgumentOutOfRange_PercentageRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified years, months and days results in an un-representable DateSpan..
+        /// </summary>
+        public static string ArgumentOutOfRangeException_DateSpan {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRangeException_DateSpan", resourceCulture);
             }
         }
         
@@ -201,6 +210,15 @@ namespace Qowaiv {
         public static string FormatExceptionDate {
             get {
                 return ResourceManager.GetString("FormatExceptionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid date span.
+        /// </summary>
+        public static string FormatExceptionDateSpan {
+            get {
+                return ResourceManager.GetString("FormatExceptionDateSpan", resourceCulture);
             }
         }
         
@@ -457,7 +475,7 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Converter can not convert from System.String..
         /// </summary>
         public static string NotSupportedException_ConverterCanNotConvertFromString {
             get {
@@ -484,7 +502,16 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decimal overflowed while rouding..
+        ///   Looks up a localized string similar to DateSpan overflowed because the resulting duration is too long..
+        /// </summary>
+        public static string OverflowException_DateSpan {
+            get {
+                return ResourceManager.GetString("OverflowException_DateSpan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decimal overflowed while rounding..
         /// </summary>
         public static string OverflowException_DecimalRound {
             get {

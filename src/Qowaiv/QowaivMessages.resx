@@ -161,7 +161,7 @@
     <value>The country '{0} ({1})' is not supported as region info.</value>
   </data>
   <data name="NotSupportedException_ConverterCanNotConvertFromString" xml:space="preserve">
-    <value />
+    <value>Converter can not convert from System.String.</value>
   </data>
   <data name="NotSupportedException_NoGenericType" xml:space="preserve">
     <value>Type must be a none generic type.</value>
@@ -193,13 +193,22 @@
   <data name="InvalidOperationException_WithDisplayName" xml:space="preserve">
     <value>An not set email address can not be shown with a display name.</value>
   </data>
-  <data name="ArgumentOutOfRange_PercentagelRound" xml:space="preserve">
-    <value>Percentages can only round to between -26 and 26 digits of precision.</value>
+  <data name="FormatExceptionDateSpan" xml:space="preserve">
+    <value>Not a valid date span</value>
+  </data>
+  <data name="ArgumentOutOfRangeException_DateSpan" xml:space="preserve">
+    <value>The specified years, months and days results in an un-representable DateSpan.</value>
+  </data>
+  <data name="OverflowException_DateSpan" xml:space="preserve">
+    <value>DateSpan overflowed because the resulting duration is too long.</value>
   </data>
   <data name="ArgumentOutOfRange_DecimalRound" xml:space="preserve">
     <value>Decimals can only round to between -28 and 28 digits of precision.</value>
   </data>
+  <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
+    <value>Percentages can only round to between -26 and 26 digits of precision.</value>
+  </data>
   <data name="OverflowException_DecimalRound" xml:space="preserve">
-    <value>Decimal overflowed while rouding.</value>
+    <value>Decimal overflowed while rounding.</value>
   </data>
 </root>

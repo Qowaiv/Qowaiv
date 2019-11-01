@@ -4,13 +4,15 @@
   
   <PropertyGroup>
     <OutputType>EXE</OutputType>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   
   <ItemGroup>
     <None Remove="Resources\*.xls" />
+    <None Remove="Resources\Web\*.xls" />
     <EmbeddedResource Include="Resources\*.xls" />
+    <EmbeddedResource Include="Resources\Web\*.xls" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,14 +27,11 @@
     <PackageReference Include="ExcelLibrary" Version="1.2011.7.31" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="RazorEngine" Version="3.10.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
   <ItemGroup>

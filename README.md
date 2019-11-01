@@ -3,14 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
 
-| version                                                                        | package                                                                                              |
-|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-4.0.6-blue.svg?cacheSeconds=3600)     |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                      |
-|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                         |
-|![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
-|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
-|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
-|![v](https://img.shields.io/badge/version-1.0.3-darkred.svg?cacheSeconds=3600)  |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                  |
+| version                                                                      | package                                                                     |
+|------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+|![v](https://img.shields.io/badge/version-4.0.6-blue.svg?cacheSeconds=3600)   |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)   |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
+|![v](https://img.shields.io/badge/version-1.0.3-darkred.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
 # Qowaiv
 
@@ -32,15 +29,29 @@ here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
 ## Qowaiv types
 
 ### Date
-
 Represents a date, so without hours (minutes, seconds, milliseconds).
+
+### Date span
+Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
+Adding one month to a date in January result in adding a different number of days, 
+than adding one month a date in March.
+
+Date spans are particular useful in scenario's for defining (and doing calculations on)
+month based periods, and ages (mostly in years and days).
+
+``` C#
+var span = new DateSpan(years: 3, months: 2, days: -4);
+var age = DateSpan.Age(new Date(2017, 06, 11)); // 2Y+0M+121D on 2019-10-10
+var duration = DateSpan.Subtract(new Date(2019, 06, 10), new Date(2017, 06, 11)); // 1Y+11M+30D
+var date = new Date(2016, 06, 03).Add(age); // 2018-10-02
+```
 
 ### Elo
 Represents an Elo (rating), a method for calculating the relative skill levels of
 players in competitor-versus-competitor games.
 
 ### Email address
-Represents a (single) email address. Support:
+Represents a (single) email address. Supports:
 * Display names (are stripped)
 * Comments (are removed)
 * IP-based domains (normalized and surrounded by brackets)
@@ -598,9 +609,3 @@ public void TestSomething()
     }
 }
 ```
-
-## Validation
-Qowaiv supports validation of different kind. Details can be found here:
-* [Qowaiv validation abstractions](src/Qowaiv.Validation.Abstractions/README.md)
-* [Qowaiv validation data annotations](src/Qowaiv.Validation.DataAnnotations/README.md)
-* [Qowaiv validation FluentValidation.NET](src/Qowaiv.Validation.Fluent/README.md)

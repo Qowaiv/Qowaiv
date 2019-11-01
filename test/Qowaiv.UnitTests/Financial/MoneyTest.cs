@@ -38,8 +38,7 @@ namespace Qowaiv.UnitTests.Financial
             using (new CultureInfoScope("nl-NL"))
             {
                 Money exp = 42.17 + Currency.EUR;
-                Money act;
-                Assert.IsTrue(Money.TryParse("€42,17", out act), "Valid");
+                Assert.IsTrue(Money.TryParse("€42,17", out Money act), "Valid");
                 Assert.AreEqual(exp, act, "Value");
             }
         }
@@ -48,11 +47,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Money val;
-
             string str = "string";
-
-            Assert.IsFalse(Money.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Money.TryParse(str, out Money val), "Valid");
             Assert.AreEqual(Money.Zero, val, "Value");
         }
 
@@ -265,13 +261,13 @@ namespace Qowaiv.UnitTests.Financial
             var input = new MoneySerializeObject()
             {
                 Id = 17,
-                Obj = default(Money),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new MoneySerializeObject()
             {
                 Id = 17,
-                Obj = default(Money),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);

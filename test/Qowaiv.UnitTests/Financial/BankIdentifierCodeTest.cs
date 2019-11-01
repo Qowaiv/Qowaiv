@@ -98,11 +98,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = null;
-
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -110,11 +107,9 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = string.Empty;
 
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -122,11 +117,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = "?";
-
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -134,11 +126,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = "AEGONL2UXXX";
-
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -146,11 +135,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            BankIdentifierCode val;
-
             string str = "string";
-
-            Assert.IsFalse(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsFalse(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 

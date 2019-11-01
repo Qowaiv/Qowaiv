@@ -123,14 +123,14 @@ namespace Qowaiv.UnitTests
         public void TyrParse_Null_IsInvalid()
         {
             string str = null;
-            Assert.IsFalse(WeekDate.TryParse(str, out WeekDate val), "Not valid");
+            Assert.IsFalse(WeekDate.TryParse(str, out _), "Not valid");
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
-            Assert.IsFalse(WeekDate.TryParse(string.Empty, out WeekDate val), "Not valid");
+            Assert.IsFalse(WeekDate.TryParse(string.Empty, out _), "Not valid");
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
@@ -138,7 +138,6 @@ namespace Qowaiv.UnitTests
         public void TyrParse_StringValue_IsValid()
         {
             string str = "1234-W50-6";
-
             Assert.IsTrue(WeekDate.TryParse(str, out WeekDate val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
@@ -147,7 +146,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Assert.IsFalse(WeekDate.TryParse("string", out WeekDate val), "Valid");
+            Assert.IsFalse(WeekDate.TryParse("string", out _), "Valid");
         }
 
         [Test]
@@ -191,7 +190,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_Y0000W21D7_DefaultValue()
         {
-            WeekDate exp = default(WeekDate);
+            WeekDate exp = default;
             Assert.IsFalse(WeekDate.TryParse("0000-W21-7", out WeekDate act));
             Assert.AreEqual(exp, act);
         }
@@ -199,7 +198,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_Y2000W53D7_DefaultValue()
         {
-            WeekDate exp = default(WeekDate);
+            WeekDate exp = default;
             Assert.IsFalse(WeekDate.TryParse("2000-W53-7", out WeekDate act));
             Assert.AreEqual(exp, act);
         }

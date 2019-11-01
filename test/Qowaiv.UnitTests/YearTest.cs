@@ -94,11 +94,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Year val;
-
             string str = null;
-
-            Assert.IsTrue(Year.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Year.TryParse(str, out Year val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -106,11 +103,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Year val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Year.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Year.TryParse(str, out Year val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -118,11 +112,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            Year val;
-
             string str = "?";
-
-            Assert.IsTrue(Year.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Year.TryParse(str, out Year val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -130,11 +121,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Year val;
-
             string str = "1979";
-
-            Assert.IsTrue(Year.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Year.TryParse(str, out Year val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -142,11 +130,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Year val;
-
             string str = "string";
-
-            Assert.IsFalse(Year.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Year.TryParse(str, out Year val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -206,27 +191,21 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryCreate_Null_IsEmpty()
         {
-            Year exp = Year.Empty;
-            Year act;
-
-            Assert.IsTrue(Year.TryCreate(null, out act));
-            Assert.AreEqual(exp, act);
+            Assert.IsTrue(Year.TryCreate(null, out Year act));
+            Assert.AreEqual(Year.Empty, act);
         }
         [Test]
         public void TryCreate_Int32MinValue_IsEmpty()
         {
-            Year exp = Year.Empty;
-            Year act;
-
-            Assert.IsFalse(Year.TryCreate(Int32.MinValue, out act));
-            Assert.AreEqual(exp, act);
+            Assert.IsFalse(Year.TryCreate(int.MinValue, out Year act));
+            Assert.AreEqual(Year.Empty, act);
         }
 
         [Test]
         public void TryCreate_Int32MinValue_AreEqual()
         {
             var exp = Year.Empty;
-            var act = Year.TryCreate(Int32.MinValue);
+            var act = Year.TryCreate(int.MinValue);
             Assert.AreEqual(exp, act);
         }
         [Test]

@@ -124,8 +124,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<DateSpan>
-        (null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<DateSpan>(null, default);
             },
             "info");
         }
@@ -136,9 +135,8 @@ namespace Qowaiv.UnitTests
             Assert.Catch<SerializationException>
             (() =>
             {
-                var info = new SerializationInfo(typeof(DateSpan), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<DateSpan>
-        (info, default(StreamingContext));
+                var info = new SerializationInfo(typeof(DateSpan), new FormatterConverter());
+                SerializationTest.DeserializeUsingConstructor<DateSpan>(info, default);
             });
         }
 
@@ -149,7 +147,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -158,8 +156,8 @@ namespace Qowaiv.UnitTests
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(DateSpan), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            var info = new SerializationInfo(typeof(DateSpan), new FormatterConverter());
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual(532575944699UL, info.GetUInt64("Value"));
         }
@@ -256,13 +254,13 @@ namespace Qowaiv.UnitTests
             var input = new DateSpanSerializeObject()
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new DateSpanSerializeObject()
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -276,13 +274,13 @@ namespace Qowaiv.UnitTests
             var input = new DateSpanSerializeObject()
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new DateSpanSerializeObject()
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);

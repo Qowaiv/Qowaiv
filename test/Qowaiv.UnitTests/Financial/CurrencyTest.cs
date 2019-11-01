@@ -135,11 +135,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Currency val;
-
             string str = null;
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -147,11 +144,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Currency val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -159,11 +153,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            Currency val;
-
             string str = "?";
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -171,11 +162,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_UnknownCurrencySymbol_IsValid()
         {
-            Currency val;
-
             string str = "¤";
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -183,11 +171,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Currency val;
-
             string str = "USD";
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -195,11 +180,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Currency val;
-
             string str = "string";
-
-            Assert.IsFalse(Currency.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 

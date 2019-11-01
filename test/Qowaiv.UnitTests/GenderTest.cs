@@ -76,11 +76,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Gender val;
-
             string str = null;
-
-            Assert.IsTrue(Gender.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -88,11 +85,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Gender val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Gender.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -102,11 +96,8 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("it-IT"))
             {
-                Gender val;
-
                 string str = "Maschio";
-
-                Assert.IsTrue(Gender.TryParse(str, out val), "Valid");
+                Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
                 Assert.AreEqual(str, val.ToString(), "Value");
             }
         }
@@ -115,9 +106,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_M_IsValid()
         {
-            Gender val;
             string str = "M";
-            Assert.IsTrue(Gender.TryParse(str, null, out val), "Valid");
+            Assert.IsTrue(Gender.TryParse(str, null, out Gender val), "Valid");
             Assert.AreEqual(TestStruct, val, "Value");
         }
 
@@ -125,11 +115,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Gender val;
-
             string str = "string";
-
-            Assert.IsFalse(Gender.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Gender.TryParse(str, out Gender val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -192,18 +179,14 @@ namespace Qowaiv.UnitTests
         public void TryCreate_Null_IsEmpty()
         {
             Gender exp = Gender.Empty;
-            Gender act;
-
-            Assert.IsTrue(Gender.TryCreate(null, out act));
+            Assert.IsTrue(Gender.TryCreate(null, out Gender act));
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void TryCreate_Int32MinValue_IsEmpty()
         {
             Gender exp = Gender.Empty;
-            Gender act;
-
-            Assert.IsFalse(Gender.TryCreate(Int32.MinValue, out act));
+            Assert.IsFalse(Gender.TryCreate(int.MinValue, out Gender act));
             Assert.AreEqual(exp, act);
         }
 

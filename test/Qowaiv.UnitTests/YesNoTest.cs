@@ -363,13 +363,13 @@ namespace Qowaiv.Fiancial.UnitTests
             var input = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = default(YesNo),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = default(YesNo),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -383,13 +383,13 @@ namespace Qowaiv.Fiancial.UnitTests
             var input = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = default(YesNo),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new YesNoSerializeObject()
             {
                 Id = 17,
-                Obj = default(YesNo),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);

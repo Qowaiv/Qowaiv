@@ -69,8 +69,7 @@ namespace Qowaiv.Data
         /// </exception>
         private static MethodInfo GetCast(Type sourceType, SingleValueObjectAttribute attr)
         {
-            MethodInfo cast;
-            if (!Casts.TryGetValue(sourceType, out cast))
+            if (!Casts.TryGetValue(sourceType, out MethodInfo cast))
             {
                 var returnType = attr.DatabaseType ?? attr.UnderlyingType;
                 var methods = sourceType.GetMethods(BindingFlags.Public | BindingFlags.Static)

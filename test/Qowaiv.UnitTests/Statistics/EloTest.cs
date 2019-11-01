@@ -57,32 +57,24 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void TyrParse_Null_IsNotValid()
         {
-            Elo val;
-
             string str = null;
-
-            Assert.IsFalse(Elo.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Elo.TryParse(str, out _), "Valid");
         }
 
         /// <summary>TryParse string.Empty should not be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsNotValid()
         {
-            Elo val;
-
             string str = string.Empty;
-            Assert.IsFalse(Elo.TryParse(str, out val));
+            Assert.IsFalse(Elo.TryParse(str, out _));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Elo val;
-
             string str = "1400";
-
-            Assert.IsTrue(Elo.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Elo.TryParse(str, out Elo val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 

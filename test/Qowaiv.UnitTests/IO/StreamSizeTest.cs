@@ -36,7 +36,7 @@ namespace Qowaiv.UnitTests.IO
         public void TyrParse_Null_IsInvalid()
         {
             string str = null;
-            Assert.IsFalse(StreamSize.TryParse(str, out StreamSize val));
+            Assert.IsFalse(StreamSize.TryParse(str, out _));
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
@@ -44,7 +44,7 @@ namespace Qowaiv.UnitTests.IO
         public void TyrParse_StringEmpty_IsInvalid()
         {
             string str = string.Empty;
-            Assert.IsFalse(StreamSize.TryParse(str, out StreamSize val));
+            Assert.IsFalse(StreamSize.TryParse(str, out _));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
@@ -311,13 +311,13 @@ namespace Qowaiv.UnitTests.IO
             var input = new StreamSizeSerializeObject()
             {
                 Id = 17,
-                Obj = default(StreamSize),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new StreamSizeSerializeObject()
             {
                 Id = 17,
-                Obj = default(StreamSize),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -1046,7 +1046,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 17;
             StreamSize exp = 18;
-            act = act + Percentage.Create(0.1);
+            act += Percentage.Create(0.1);
 
             Assert.AreEqual(exp, act);
         }
@@ -1055,7 +1055,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 17;
             StreamSize exp = 24;
-            act = act + (StreamSize)7;
+            act += (StreamSize)7;
 
             Assert.AreEqual(exp, act);
         }
@@ -1065,7 +1065,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 17;
             StreamSize exp = 16;
-            act = act - Percentage.Create(0.1);
+            act -= Percentage.Create(0.1);
 
             Assert.AreEqual(exp, act);
         }
@@ -1074,7 +1074,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 17;
             StreamSize exp = 12;
-            act = act - (StreamSize)5;
+            act -= (StreamSize)5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1084,7 +1084,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 40;
-            act = act / (Int16)2;
+            act /= (Int16)2;
 
             Assert.AreEqual(exp, act);
         }
@@ -1093,7 +1093,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 40;
-            act = act / 2;
+            act /= 2;
 
             Assert.AreEqual(exp, act);
         }
@@ -1103,7 +1103,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 40;
-            act = act / (Int64)2;
+            act /= (long)2;
 
             Assert.AreEqual(exp, act);
         }
@@ -1112,7 +1112,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 40;
-            act = act / (UInt16)2;
+            act /= (ushort)2;
 
             Assert.AreEqual(exp, act);
         }
@@ -1121,7 +1121,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 40;
-            act = act / (UInt32)2;
+            act /= (uint)2;
 
             Assert.AreEqual(exp, act);
         }
@@ -1130,7 +1130,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 40;
-            act = act / (UInt64)2;
+            act /= (ulong)2;
 
             Assert.AreEqual(exp, act);
         }
@@ -1139,7 +1139,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 54;
-            act = act / (Percentage)1.50;
+            act /= (Percentage)1.50;
 
             Assert.AreEqual(exp, act);
         }
@@ -1148,7 +1148,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 54;
-            act = act / (float)1.5;
+            act /= (float)1.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1157,7 +1157,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 54;
-            act = act / 1.5;
+            act /= 1.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1166,7 +1166,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 81;
             StreamSize exp = 54;
-            act = act / 1.5d;
+            act /= 1.5d;
 
             Assert.AreEqual(exp, act);
         }
@@ -1176,7 +1176,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (short)3;
+            act *= (short)3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1185,7 +1185,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * 3;
+            act *= 3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1194,7 +1194,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (long)3;
+            act *= (long)3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1203,7 +1203,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (UInt16)3;
+            act *= (ushort)3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1212,7 +1212,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (UInt32)3;
+            act *= (uint)3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1221,7 +1221,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 126;
-            act = act * (UInt64)3;
+            act *= (ulong)3;
 
             Assert.AreEqual(exp, act);
         }
@@ -1230,7 +1230,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 21;
-            act = act * (Percentage)0.5;
+            act *= 50.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1239,7 +1239,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 21;
-            act = act * (float)0.5;
+            act *= (float)0.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1248,7 +1248,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 21;
-            act = act * 0.5;
+            act *= 0.5;
 
             Assert.AreEqual(exp, act);
         }
@@ -1257,7 +1257,7 @@ namespace Qowaiv.UnitTests.IO
         {
             StreamSize act = 42;
             StreamSize exp = 21;
-            act = act * 0.5d;
+            act *= 0.5d;
 
             Assert.AreEqual(exp, act);
         }

@@ -100,11 +100,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Country val;
-
             string str = null;
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -112,11 +109,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Country val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -124,11 +118,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            Country val;
-
             string str = "?";
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -136,11 +127,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_NullCultureStringValue_IsValid()
         {
-            Country val;
-
             string str = "VA";
-
-            Assert.IsTrue(Country.TryParse(str, null, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, null, out Country val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -148,11 +136,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Country val;
-
             string str = "VA";
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -160,11 +145,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Country val;
-
             string str = "string";
-
-            Assert.IsFalse(Country.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 

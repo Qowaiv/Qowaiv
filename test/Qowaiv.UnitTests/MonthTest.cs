@@ -125,11 +125,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Month val;
-
             string str = null;
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -137,11 +134,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Month val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -149,11 +143,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            Month val;
-
             string str = "?";
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -161,11 +152,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Month val;
-
             string str = "December";
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(Month.December, val, "Value");
         }
 
@@ -173,11 +161,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Month val;
-
             string str = "string";
-
-            Assert.IsFalse(Month.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -224,9 +209,7 @@ namespace Qowaiv.UnitTests
             using (new CultureInfoScope("en-GB"))
             {
                 var exp = TestStruct;
-
-                Month act;
-                Assert.IsTrue(Month.TryParse(exp.ShortName, null, out act));
+                Assert.IsTrue(Month.TryParse(exp.ShortName, null, out Month act));
                 Assert.AreEqual(exp, act);
             }
         }
@@ -250,20 +233,15 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryCreate_Null_IsEmpty()
         {
-            Month exp = Month.Empty;
-            Month act;
-
-            Assert.IsTrue(Month.TryCreate(null, out act));
+            var exp = Month.Empty;
+            Assert.IsTrue(Month.TryCreate(null, out Month act));
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void TryCreate_ByteMinValue_IsEmpty()
         {
-            Month exp = Month.Empty;
-            Month act;
-
-            Assert.IsFalse(Month.TryCreate(Byte.MinValue, out act));
-            Assert.AreEqual(exp, act);
+            Assert.IsFalse(Month.TryCreate(byte.MinValue, out Month act));
+            Assert.AreEqual(Month.Empty, act);
         }
 
         [Test]

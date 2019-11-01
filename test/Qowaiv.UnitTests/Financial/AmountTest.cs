@@ -44,22 +44,16 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void TyrParse_Null_IsInvalid()
         {
-            Amount val;
-
             string str = null;
-
-            Assert.IsFalse(Amount.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Amount.TryParse(str, out _));
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
-            Amount val;
-
             string str = string.Empty;
-
-            Assert.IsFalse(Amount.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Amount.TryParse(str, out _));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
@@ -68,11 +62,8 @@ namespace Qowaiv.Financial.UnitTests
         {
             using (CultureInfoScope.NewInvariant())
             {
-                Amount val;
-
                 string str = "14.1804";
-
-                Assert.IsTrue(Amount.TryParse(str, out val), "Valid");
+                Assert.IsTrue(Amount.TryParse(str, out Amount val), "Valid");
                 Assert.AreEqual(str, val.ToString(), "Value");
             }
         }
@@ -272,13 +263,13 @@ namespace Qowaiv.Financial.UnitTests
             var input = new AmountSerializeObject()
             {
                 Id = 17,
-                Obj = default(Amount),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new AmountSerializeObject()
             {
                 Id = 17,
-                Obj = default(Amount),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);

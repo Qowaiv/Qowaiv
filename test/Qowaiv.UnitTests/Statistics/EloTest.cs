@@ -861,12 +861,6 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Elo_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Elo));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

@@ -80,8 +80,7 @@ namespace Qowaiv.TestTools
             var message = string.Format(exceptionMessage, args);
             if (!string.IsNullOrEmpty(paramName))
             {
-                message += Environment.NewLine;
-                message += string.Format("Parameter name: {0}", paramName);
+                message += string.Format(" (Parameter '{0}')", paramName);
             }
             return message;
         }

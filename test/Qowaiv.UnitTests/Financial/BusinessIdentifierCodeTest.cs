@@ -875,12 +875,6 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_BusinessIdentifierCode_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(BusinessIdentifierCode));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

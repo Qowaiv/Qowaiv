@@ -752,12 +752,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Uuid_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Uuid));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

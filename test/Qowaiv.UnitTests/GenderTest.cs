@@ -1124,12 +1124,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Gender_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Gender));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

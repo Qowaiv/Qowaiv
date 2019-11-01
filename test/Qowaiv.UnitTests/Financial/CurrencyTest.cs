@@ -962,12 +962,6 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Currency_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Currency));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

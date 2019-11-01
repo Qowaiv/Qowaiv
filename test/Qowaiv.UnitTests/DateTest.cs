@@ -926,12 +926,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_Date_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Date));
-        }
-
-        [Test]
         public void ConvertFrom_DateTime_Successful()
         {
             TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTime(1970, 02, 14));

@@ -785,12 +785,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_DateSpan_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(DateSpan));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

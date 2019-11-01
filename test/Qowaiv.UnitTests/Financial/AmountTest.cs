@@ -507,9 +507,11 @@ namespace Qowaiv.Financial.UnitTests
 
         /// <summary>GetHash should not fail for the test struct.</summary>
         [Test]
-        public void GetHash_TestStruct_Hash()
+        public void GetHash_SameValue_SameHash()
         {
-            Assert.AreEqual(-820429518, TestStruct.GetHashCode());
+            var hash0 = ((Amount)451).GetHashCode();
+            var hash1 = ((Amount)451).GetHashCode();
+            Assert.AreEqual(hash1, hash0);
         }
 
         [Test]
@@ -773,12 +775,6 @@ namespace Qowaiv.Financial.UnitTests
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_Amount_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Amount));
         }
 
         [Test]

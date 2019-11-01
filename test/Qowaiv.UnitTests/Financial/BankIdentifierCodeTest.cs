@@ -907,12 +907,6 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_BankIdentifierCode_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(BankIdentifierCode));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))

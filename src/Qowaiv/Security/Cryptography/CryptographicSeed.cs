@@ -153,7 +153,7 @@ namespace Qowaiv.Security.Cryptography
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current cryptographic seed for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get

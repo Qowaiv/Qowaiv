@@ -459,7 +459,7 @@ namespace Qowaiv.IO
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay { get { return ToString(" F", CultureInfo.InvariantCulture); } }
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>

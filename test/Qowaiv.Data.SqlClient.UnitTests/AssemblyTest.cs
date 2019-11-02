@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Qowaiv.TestTools;
-using System;
 
 namespace Qowaiv.Sql.UnitTests
 {

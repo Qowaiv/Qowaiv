@@ -13,7 +13,7 @@ namespace Qowaiv.Json
         {
             if (JsonConvert.DefaultSettings is null)
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings() { Converters = { new QowaivJsonConverter() } };
+                JsonConvert.DefaultSettings = () => new JsonSerializerSettings { Converters = { new QowaivJsonConverter() } };
             }
             else
             {
@@ -52,8 +52,8 @@ namespace Qowaiv.Json
         /// </returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Guard.NotNull(reader, nameof(reader));
-            Guard.NotNull(objectType, nameof(objectType));
+            if (reader is null) { throw new ArgumentNullException(nameof(reader)); }
+            if (objectType is null) { throw new ArgumentNullException(nameof(objectType)); }
 
             var type = QowaivType.GetNotNullableType(objectType);
             var result = (IJsonSerializable)Activator.CreateInstance(type);
@@ -122,9 +122,9 @@ namespace Qowaiv.Json
         /// </param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            Guard.NotNull(writer, nameof(writer));
-
-            var json = Guard.IsInstanceOf<IJsonSerializable>(value, nameof(value));
+            if (writer is null) { throw new ArgumentNullException(nameof(writer)); }
+            
+            var json = (IJsonSerializable)value;
 
             var jsonValue = json.ToJson();
 

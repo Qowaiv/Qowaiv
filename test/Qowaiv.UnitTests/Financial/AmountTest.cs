@@ -19,7 +19,7 @@ namespace Qowaiv.Financial.UnitTests
 
         public static NumberFormatInfo GetCustomNumberFormatInfo()
         {
-            var info = new NumberFormatInfo()
+            var info = new NumberFormatInfo
             {
                 CurrencyGroupSeparator = "#",
                 CurrencyDecimalSeparator = "*",
@@ -588,8 +588,8 @@ namespace Qowaiv.Financial.UnitTests
             Amount item2 = 2.27;
             Amount item3 = 1300;
 
-            var inp = new List<Amount>() { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
-            var exp = new List<Amount>() { Amount.Zero, Amount.Zero, item0, item1, item2, item3 };
+            var inp = new List<Amount> { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
+            var exp = new List<Amount> { Amount.Zero, Amount.Zero, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -604,8 +604,8 @@ namespace Qowaiv.Financial.UnitTests
             Amount item2 = 2.27;
             Amount item3 = 1300;
 
-            var inp = new List<Amount>() { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
-            var exp = new List<Amount>() { item3, item2, item1, item0, Amount.Zero, Amount.Zero };
+            var inp = new List<Amount> { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
+            var exp = new List<Amount> { item3, item2, item1, item0, Amount.Zero, Amount.Zero };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

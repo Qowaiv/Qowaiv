@@ -794,8 +794,8 @@ namespace Qowaiv.UnitTests.IO
             StreamSize item2 = 113465;
             StreamSize item3 = 773465;
 
-            var inp = new List<StreamSize>() { StreamSize.Zero, item3, item2, item0, item1, StreamSize.Zero };
-            var exp = new List<StreamSize>() { StreamSize.Zero, StreamSize.Zero, item0, item1, item2, item3 };
+            var inp = new List<StreamSize> { StreamSize.Zero, item3, item2, item0, item1, StreamSize.Zero };
+            var exp = new List<StreamSize> { StreamSize.Zero, StreamSize.Zero, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

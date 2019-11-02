@@ -141,7 +141,7 @@ namespace Qowaiv.TestTools
         /// </remarks>
         public static T DeserializeUsingConstructor<T>(SerializationInfo info, StreamingContext context)
         {
-            var ctor = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new Type[] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
+            var ctor = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new [] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
             Assert.IsNotNull(ctor, $"No {typeof(T).Name}(SerializationInfo, StreamingContext) constructor found.");
 
             try

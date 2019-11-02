@@ -713,8 +713,8 @@ namespace Qowaiv.UnitTests.Globalization
             var item2 = Country.CU;
             var item3 = Country.DO;
 
-            var inp = new List<Country>() { Country.Empty, item3, item2, item0, item1, Country.Empty };
-            var exp = new List<Country>() { Country.Empty, Country.Empty, item0, item1, item2, item3 };
+            var inp = new List<Country> { Country.Empty, item3, item2, item0, item1, Country.Empty };
+            var exp = new List<Country> { Country.Empty, Country.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -729,8 +729,8 @@ namespace Qowaiv.UnitTests.Globalization
             var item2 = Country.CU;
             var item3 = Country.DO;
 
-            var inp = new List<Country>() { Country.Empty, item3, item2, item0, item1, Country.Empty };
-            var exp = new List<Country>() { item3, item2, item1, item0, Country.Empty, Country.Empty };
+            var inp = new List<Country> { Country.Empty, item3, item2, item0, item1, Country.Empty };
+            var exp = new List<Country> { item3, item2, item1, item0, Country.Empty, Country.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

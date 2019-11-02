@@ -8,7 +8,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -113,6 +112,12 @@ namespace Qowaiv
         #endregion
 
         #region Methods
+
+        /// <summary>Adds one day to the date.</summary>
+        internal Date Increment() => AddDays(+1);
+
+        /// <summary>Subtracts one day from the date.</summary>
+        internal Date Decrement() => AddDays(-1);
 
         /// <summary>Returns a new date that adds the value of the specified <see cref="TimeSpan"/>
         /// to the value of this instance.
@@ -437,7 +442,7 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Date for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get => m_Value.ToString(SerializableFormat, CultureInfo.InvariantCulture);
@@ -468,13 +473,13 @@ namespace Qowaiv
         public string ToString(string format, IFormatProvider formatProvider)
         {
             // We don't want to see hh:mm pop up.
-            if (string.IsNullOrEmpty(format)) { format = "d"; }
+            var f = string.IsNullOrEmpty(format) ? "d" : format;
 
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+            if (StringFormatter.TryApplyCustomFormatter(f, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
-            return m_Value.ToString(format, formatProvider);
+            return m_Value.ToString(f, formatProvider);
         }
 
         #endregion
@@ -590,10 +595,10 @@ namespace Qowaiv
         public static Date operator -(Date d, TimeSpan t) => d.Subtract(t);
 
         /// <summary>Adds one day to the date.</summary>
-        public static Date operator ++(Date d) => d.AddDays(+1);
+        public static Date operator ++(Date d) => d.Increment();
 
         /// <summary>Subtracts one day from the date.</summary>
-        public static Date operator --(Date d) => d.AddDays(-1);
+        public static Date operator --(Date d) => d.Decrement();
 
         /// <summary>Subtracts the right Date from the left date.</summary>
         public static TimeSpan operator -(Date l, Date r) => l.Subtract(r);

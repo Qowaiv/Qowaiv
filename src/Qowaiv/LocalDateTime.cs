@@ -210,6 +210,12 @@ namespace Qowaiv
 
         #region Methods
 
+        /// <summary>Adds one day to the local date time.</summary>
+        internal LocalDateTime Increment() => AddDays(+1);
+
+        /// <summary>Subtracts one day from the local date time.</summary>
+        internal LocalDateTime Decrement() => AddDays(-1);
+
         /// <summary>Returns a new local date time that adds the value of the specified System.TimeSpan
         /// to the value of this instance.
         /// </summary>
@@ -519,7 +525,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a local date time from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates a local date time from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -617,7 +623,7 @@ namespace Qowaiv
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj)  { return obj is LocalDateTime && Equals((LocalDateTime)obj); }
+        public override bool Equals(object obj) { return obj is LocalDateTime && Equals((LocalDateTime)obj); }
 
         /// <summary>Returns true if this instance and the other <see cref="LocalDateTime"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="LocalDateTime"/> to compare with.</param>
@@ -706,7 +712,7 @@ namespace Qowaiv
         #region (Explicit) casting
 
         /// <summary>Casts a local date time to a <see cref="string"/>.</summary>
-        public static explicit operator string(LocalDateTime val)=> val.ToString(CultureInfo.CurrentCulture);
+        public static explicit operator string(LocalDateTime val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a local date time to a date time.</summary>
         public static implicit operator DateTime(LocalDateTime val) => val.m_Value;
 
@@ -726,21 +732,19 @@ namespace Qowaiv
         #region Operators
 
         /// <summary>Adds the time span to the local date time.</summary>
-        public static LocalDateTime operator +(LocalDateTime d, TimeSpan t) { return d.Add(t); }
+        public static LocalDateTime operator +(LocalDateTime d, TimeSpan t) => d.Add(t);
 
         /// <summary>Subtracts the Time Span from the local date time.</summary>
-        public static LocalDateTime operator -(LocalDateTime d, TimeSpan t) { return d.Subtract(t); }
+        public static LocalDateTime operator -(LocalDateTime d, TimeSpan t) => d.Subtract(t);
 
         /// <summary>Adds one day to the local date time.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
-        public static LocalDateTime operator ++(LocalDateTime d) { return d.AddDays(+1); }
+        public static LocalDateTime operator ++(LocalDateTime d) => d.Increment();
 
         /// <summary>Subtracts one day from the local date time.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "AddDays is the logical named alternate.")]
-        public static LocalDateTime operator --(LocalDateTime d) { return d.AddDays(-1); }
+        public static LocalDateTime operator --(LocalDateTime d) => d.Decrement();
 
         /// <summary>Subtracts the right local date time from the left date.</summary>
-        public static TimeSpan operator -(LocalDateTime l, LocalDateTime r) { return l.Subtract(r); }
+        public static TimeSpan operator -(LocalDateTime l, LocalDateTime r) => l.Subtract(r);
 
         #endregion
 
@@ -882,7 +886,7 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid local date time, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return TryParse(val, formatProvider, out LocalDateTime d);
+            return TryParse(val, formatProvider, out _);
         }
 
         #endregion

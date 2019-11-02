@@ -9,7 +9,7 @@ namespace Qowaiv.TestTools
         /// <summary>Applies <see cref="IJsonSerializable.FromJson()"/>.</summary>
         public static T Read<T>() where T : IJsonSerializable
         {
-            T instance = default(T);
+            T instance = default;
             if (typeof(T).IsValueType)
             {
                 instance.FromJson();
@@ -52,12 +52,12 @@ namespace Qowaiv.TestTools
         /// <summary>Applies <see cref="IJsonSerializable.ToJson()"/>.</summary>
         public static object Write(IJsonSerializable val)
         {
-            return val.ToJson();
+            return val?.ToJson();
         }
 
         private static T NewInstance<T>() where T : IJsonSerializable
         {
-            return typeof(T).IsValueType ? default(T) : Activator.CreateInstance<T>();
+            return typeof(T).IsValueType ? default : Activator.CreateInstance<T>();
         }
 
     }

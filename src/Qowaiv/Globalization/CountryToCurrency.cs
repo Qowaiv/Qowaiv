@@ -3,27 +3,43 @@
 // Equals of this type is never called.
 
 using Qowaiv.Financial;
+using System;
 
 namespace Qowaiv.Globalization
 {
-    internal partial struct CountryToCurrency
+    internal partial struct CountryToCurrency : IEquatable<CountryToCurrency>
     {
-        private Country m_Country;
-        private Currency m_Currency;
-        private Date m_StartDate;
-
         public CountryToCurrency(Country country, Currency currency, Date startdate)
         {
-            m_Country = country;
-            m_Currency = currency;
-            m_StartDate = startdate;
+            Country = country;
+            Currency = currency;
+            StartDate = startdate;
         }
 
         public CountryToCurrency(Country country, Currency currency)
             : this(country, currency, Date.MinValue) { }
 
-        public Country Country => m_Country;
-        public Currency Currency => m_Currency;
-        public Date StartDate => m_StartDate;
+        public Country Country { get; }
+        public Currency Currency { get; }
+        public Date StartDate { get; }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            return Country.GetHashCode()
+                ^ Currency.GetHashCode()
+                ^ StartDate.GetHashCode();
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj) => obj is CountryToCurrency other && Equals(other);
+
+        /// <inheritdoc />
+        public bool Equals(CountryToCurrency other)
+        {
+            return Country.Equals(other.Country)
+                && Currency.Equals(other.Currency)
+                && StartDate.Equals(other.StartDate);
+        }
     }
 }

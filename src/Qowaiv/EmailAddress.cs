@@ -288,7 +288,7 @@ namespace Qowaiv
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>
         {
             { 'U', (svo, provider) => svo.m_Value.ToUpperInvariant() },
             { 'l', (svo, provider) => svo.Local },
@@ -498,7 +498,7 @@ namespace Qowaiv
         {
             return !string.IsNullOrWhiteSpace(val) 
                 && !Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo)
-                && TryParse(val, formatProvider, out EmailAddress email);
+                && TryParse(val, formatProvider, out _);
         }
 
         #endregion

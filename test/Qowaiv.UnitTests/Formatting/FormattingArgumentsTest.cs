@@ -5,7 +5,6 @@ using Qowaiv.TestTools;
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Formatting
 {
@@ -124,13 +123,13 @@ namespace Qowaiv.UnitTests.Formatting
             var input = new FormattableArgumentsSerializeObject
             {
                 Id = 17,
-                Obj = default(FormattingArguments),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new FormattableArgumentsSerializeObject
             {
                 Id = 17,
-                Obj = default(FormattingArguments),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -181,7 +180,7 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
-            Assert.IsTrue(FormattingArguments.None.Equals(default(FormattingArguments)));
+            Assert.IsTrue(FormattingArguments.None.Equals(default));
         }
 
         [Test]

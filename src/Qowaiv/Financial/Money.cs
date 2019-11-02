@@ -507,7 +507,7 @@ namespace Qowaiv.Financial
         /// <summary>Returns true if the val represents a valid Money, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return TryParse(val, formatProvider, out Money money);
+            return TryParse(val, formatProvider, out _);
         }
 
         #endregion

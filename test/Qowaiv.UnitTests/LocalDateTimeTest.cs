@@ -493,8 +493,8 @@ namespace Qowaiv.UnitTests
             var item2 = new LocalDateTime(1999, 12, 05, 04, 13, 14);
             var item3 = new LocalDateTime(2010, 07, 13, 00, 44, 13);
 
-            var inp = new List<LocalDateTime>() { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
-            var exp = new List<LocalDateTime>() { LocalDateTime.MinValue, LocalDateTime.MinValue, item0, item1, item2, item3 };
+            var inp = new List<LocalDateTime> { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
+            var exp = new List<LocalDateTime> { LocalDateTime.MinValue, LocalDateTime.MinValue, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -509,8 +509,8 @@ namespace Qowaiv.UnitTests
             var item2 = new LocalDateTime(1999, 12, 05, 04, 13, 14);
             var item3 = new LocalDateTime(2010, 07, 13, 00, 44, 13);
 
-            var inp = new List<LocalDateTime>() { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
-            var exp = new List<LocalDateTime>() { item3, item2, item1, item0, LocalDateTime.MinValue, LocalDateTime.MinValue };
+            var inp = new List<LocalDateTime> { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
+            var exp = new List<LocalDateTime> { item3, item2, item1, item0, LocalDateTime.MinValue, LocalDateTime.MinValue };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

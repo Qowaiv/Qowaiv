@@ -750,8 +750,8 @@ namespace Qowaiv.UnitTests
             Percentage item2 = 0.2083m;
             Percentage item3 = 0.3333m;
 
-            var inp = new List<Percentage>() { item3, item2, item0, item1 };
-            var exp = new List<Percentage>() { item0, item1, item2, item3 };
+            var inp = new List<Percentage> { item3, item2, item0, item1 };
+            var exp = new List<Percentage> { item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -766,8 +766,8 @@ namespace Qowaiv.UnitTests
             Percentage item2 = 0.2083m;
             Percentage item3 = 0.3333m;
 
-            var inp = new List<Percentage>() { item3, item2, item0, item1 };
-            var exp = new List<Percentage>() { item3, item2, item1, item0 };
+            var inp = new List<Percentage> { item3, item2, item0, item1 };
+            var exp = new List<Percentage> { item3, item2, item1, item0 };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

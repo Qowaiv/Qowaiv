@@ -227,13 +227,13 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void SerializeDeserialize_TimestampSerializeObject_AreEqual()
         {
-            var input = new TimestampSerializeObject()
+            var input = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new TimestampSerializeObject()
+            var exp = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -247,13 +247,13 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void XmlSerializeDeserialize_TimestampSerializeObject_AreEqual()
         {
-            var input = new TimestampSerializeObject()
+            var input = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new TimestampSerializeObject()
+            var exp = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -267,13 +267,13 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void DataContractSerializeDeserialize_TimestampSerializeObject_AreEqual()
         {
-            var input = new TimestampSerializeObject()
+            var input = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new TimestampSerializeObject()
+            var exp = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -288,13 +288,13 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new TimestampSerializeObject()
+            var input = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new TimestampSerializeObject()
+            var exp = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -308,13 +308,13 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new TimestampSerializeObject()
+            var input = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = Timestamp.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new TimestampSerializeObject()
+            var exp = new TimestampSerializeObject
             {
                 Id = 17,
                 Obj = Timestamp.MinValue,
@@ -595,8 +595,8 @@ namespace Qowaiv.UnitTests.Sql
             Timestamp item2 = 132456;
             Timestamp item3 = 1324589;
 
-            var inp = new List<Timestamp>() { Timestamp.MinValue, item3, item2, item0, item1, Timestamp.MinValue };
-            var exp = new List<Timestamp>() { Timestamp.MinValue, Timestamp.MinValue, item0, item1, item2, item3 };
+            var inp = new List<Timestamp> { Timestamp.MinValue, item3, item2, item0, item1, Timestamp.MinValue };
+            var exp = new List<Timestamp> { Timestamp.MinValue, Timestamp.MinValue, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -611,8 +611,8 @@ namespace Qowaiv.UnitTests.Sql
             Timestamp item2 = 132456;
             Timestamp item3 = 1324589;
 
-            var inp = new List<Timestamp>() { Timestamp.MinValue, item3, item2, item0, item1, Timestamp.MinValue };
-            var exp = new List<Timestamp>() { item3, item2, item1, item0, Timestamp.MinValue, Timestamp.MinValue };
+            var inp = new List<Timestamp> { Timestamp.MinValue, item3, item2, item0, item1, Timestamp.MinValue };
+            var exp = new List<Timestamp> { item3, item2, item1, item0, Timestamp.MinValue, Timestamp.MinValue };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

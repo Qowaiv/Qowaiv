@@ -687,8 +687,8 @@ namespace Qowaiv.UnitTests
             HouseNumber item2 = 123;
             HouseNumber item3 = 1234;
 
-            var inp = new List<HouseNumber>() { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
-            var exp = new List<HouseNumber>() { HouseNumber.Empty, HouseNumber.Empty, item0, item1, item2, item3 };
+            var inp = new List<HouseNumber> { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
+            var exp = new List<HouseNumber> { HouseNumber.Empty, HouseNumber.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -703,8 +703,8 @@ namespace Qowaiv.UnitTests
             HouseNumber item2 = 123;
             HouseNumber item3 = 1234;
 
-            var inp = new List<HouseNumber>() { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
-            var exp = new List<HouseNumber>() { item3, item2, item1, item0, HouseNumber.Empty, HouseNumber.Empty };
+            var inp = new List<HouseNumber> { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
+            var exp = new List<HouseNumber> { item3, item2, item1, item0, HouseNumber.Empty, HouseNumber.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

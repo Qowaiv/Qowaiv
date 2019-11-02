@@ -615,8 +615,8 @@ namespace Qowaiv.UnitTests
             var item2 = WeekDate.Parse("2000-W21-1");
             var item3 = WeekDate.Parse("2000-W31-7");
 
-            var inp = new List<WeekDate>() { WeekDate.MinValue, item3, item2, item0, item1, WeekDate.MinValue };
-            var exp = new List<WeekDate>() { WeekDate.MinValue, WeekDate.MinValue, item0, item1, item2, item3 };
+            var inp = new List<WeekDate> { WeekDate.MinValue, item3, item2, item0, item1, WeekDate.MinValue };
+            var exp = new List<WeekDate> { WeekDate.MinValue, WeekDate.MinValue, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -631,8 +631,8 @@ namespace Qowaiv.UnitTests
             var item2 = WeekDate.Parse("2000-W21-1");
             var item3 = WeekDate.Parse("2000-W31-7");
 
-            var inp = new List<WeekDate>() { WeekDate.MinValue, item3, item2, item0, item1, WeekDate.MinValue };
-            var exp = new List<WeekDate>() { item3, item2, item1, item0, WeekDate.MinValue, WeekDate.MinValue };
+            var inp = new List<WeekDate> { WeekDate.MinValue, item3, item2, item0, item1, WeekDate.MinValue };
+            var exp = new List<WeekDate> { item3, item2, item1, item0, WeekDate.MinValue, WeekDate.MinValue };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

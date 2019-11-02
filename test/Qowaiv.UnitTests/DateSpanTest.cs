@@ -225,7 +225,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); 
         }
         [Test]
         public void DataContractSerializeDeserialize_DateSpanSerializeObject_AreEqual()
@@ -245,7 +245,7 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
@@ -535,8 +535,8 @@ namespace Qowaiv.UnitTests
             var item2 = new DateSpan(0, 00, +500);
             var item3 = new DateSpan(4, 00, -40);
 
-            var inp = new List<DateSpan>() { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
-            var exp = new List<DateSpan>() { item0, DateSpan.Zero, DateSpan.Zero,  item1, item2, item3 };
+            var inp = new List<DateSpan> { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
+            var exp = new List<DateSpan> { item0, DateSpan.Zero, DateSpan.Zero,  item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -551,8 +551,8 @@ namespace Qowaiv.UnitTests
             var item2 = new DateSpan(0, 00, +500);
             var item3 = new DateSpan(4, 00, -40);
 
-            var inp = new List<DateSpan>() { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
-            var exp = new List<DateSpan>() { item3, item2, item1, DateSpan.Zero, DateSpan.Zero, item0 };
+            var inp = new List<DateSpan> { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
+            var exp = new List<DateSpan> { item3, item2, item1, DateSpan.Zero, DateSpan.Zero, item0 };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

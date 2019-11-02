@@ -37,6 +37,8 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
 
         public void GenerateFile(T model, FileInfo targetLocation)
         {
+            Guard.NotNull(targetLocation, nameof(targetLocation));
+
             var config = new TemplateServiceConfiguration
             {
                 Language = Language.CSharp,

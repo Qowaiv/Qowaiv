@@ -434,7 +434,7 @@ namespace Qowaiv.UnitTests
         public void TryParse_SingleEmailAddress_CollectionWithOneItems()
         {
             var act = EmailAddressCollection.TryParse("svo@qowaiv.org");
-            var exp = new EmailAddressCollection() { EmailAddress.Parse("svo@qowaiv.org") };
+            var exp = new EmailAddressCollection { EmailAddress.Parse("svo@qowaiv.org") };
 
             CollectionAssert.AreEqual(exp, act);
         }
@@ -446,8 +446,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToCollection_EnumerartionOfEmailAddresses_EmailAddressCollection()
         {
-            var collection = EmailAddressCollection.Parse("mail@qowaiv.org,info@qowaiv.org,test@qowaiv.org,test@unit.com")
-                .Where(email => email.Domain.EndsWith(".org"));
+            var collection = EmailAddressCollection.Parse("mail@qowaiv.org,info@qowaiv.org,test@qowaiv.org").AsEnumerable();
 
             var act = collection.ToCollection();
             var exp = EmailAddressCollection.Parse("mail@qowaiv.org,info@qowaiv.org,test@qowaiv.org");
@@ -463,7 +462,9 @@ namespace Qowaiv.UnitTests
     public class EmailAddressCollectionSerializeObject
     {
         public int Id { get; set; }
+#pragma warning disable S4004 // Collection properties should be readonly
         public EmailAddressCollection Obj { get; set; }
+#pragma warning restore S4004 // Collection properties should be readonly
         public DateTime Date { get; set; }
     }
 }

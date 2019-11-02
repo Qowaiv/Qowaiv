@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Xml;
 using System.Xml.Linq;
@@ -47,17 +46,22 @@ namespace Qowaiv.CodeGenerator.Xml
         /// <param name="reader">An XML reader.</param>
         public void ReadXml(XmlReader reader)
         {
+            Guard.NotNull(reader, nameof(reader));
+
             var element = XElement.Parse(reader.ReadOuterXml());
-            this.Name = element.Attribute("name").Value;
-            this.Value = element.Value;
+            
+            Name = element.Attribute("name").Value;
+            Value = element.Value;
         }
 
         /// <summary>Writes the resource file header to an <see href="XmlWriter"/>.</summary>
         /// <param name="writer">An XML writer.</param>
         public void WriteXml(XmlWriter writer)
         {
-            writer.WriteAttributeString("name", this.Name);
-            writer.WriteString(this.Value);
+            Guard.NotNull(writer, nameof(writer));
+
+            writer.WriteAttributeString("name", Name);
+            writer.WriteString(Value);
         }
 
         #endregion
@@ -70,7 +74,7 @@ namespace Qowaiv.CodeGenerator.Xml
         public string Value { get; set; }
 
         /// <summary>Represents the resource file data as debug string.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get

@@ -928,7 +928,7 @@ namespace Qowaiv.IO
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return TryParse(val, formatProvider, out StreamSize size);
+            return TryParse(val, formatProvider, out _);
         }
 
         #endregion
@@ -963,7 +963,7 @@ namespace Qowaiv.IO
             return MultiplierLookup[streamSizeMarker.ToUpperInvariant().Trim()];
         }
 
-        private static readonly Dictionary<string, long> MultiplierLookup = new Dictionary<string, long>()
+        private static readonly Dictionary<string, long> MultiplierLookup = new Dictionary<string, long>
         {
             { "KILOBYTE", 1000L },
             { "MEGABYTE", 1000000L },

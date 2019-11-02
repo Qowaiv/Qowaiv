@@ -754,8 +754,8 @@ namespace Qowaiv.UnitTests
             var item2 = Month.April;
             var item3 = Month.December;
 
-            var inp = new List<Month>() { Month.Empty, item3, item2, item0, item1, Month.Empty };
-            var exp = new List<Month>() { Month.Empty, Month.Empty, item0, item1, item2, item3 };
+            var inp = new List<Month> { Month.Empty, item3, item2, item0, item1, Month.Empty };
+            var exp = new List<Month> { Month.Empty, Month.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -770,8 +770,8 @@ namespace Qowaiv.UnitTests
             var item2 = Month.April;
             var item3 = Month.December;
 
-            var inp = new List<Month>() { Month.Empty, item3, item2, item0, item1, Month.Empty };
-            var exp = new List<Month>() { item3, item2, item1, item0, Month.Empty, Month.Empty };
+            var inp = new List<Month> { Month.Empty, item3, item2, item0, item1, Month.Empty };
+            var exp = new List<Month> { item3, item2, item1, item0, Month.Empty, Month.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

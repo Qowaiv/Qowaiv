@@ -14,7 +14,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// See http://en.wikipedia.org/wiki/International_Bank_Account_Number.
         /// </remarks>
-        private static readonly Dictionary<Country, Regex> LocalizedPatterns = new Dictionary<Country, Regex>()
+        private static readonly Dictionary<Country, Regex> LocalizedPatterns = new Dictionary<Country, Regex>
         {   
             // Albania, Length: 28, BBAN: 8n, 16c, Fields: ALkk bbbs sssx cccc cccc cccc cccc (b = National bank code, s = Branch code, x = National check digit, c = Account number)
             { Country.AL, new Regex(@"^AL[0-9]{10}[0-9A-Z]{16}$", RegexOptions.Compiled) },

@@ -341,8 +341,7 @@ namespace Qowaiv.Sql
         /// </exception>
         public static Timestamp Parse(string s, IFormatProvider formatProvider)
         {
-            Timestamp val;
-            if (TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Timestamp val))
             {
                 return val;
             }
@@ -360,8 +359,7 @@ namespace Qowaiv.Sql
         /// </returns>
         public static Timestamp TryParse(string s)
         {
-            Timestamp val;
-            if (TryParse(s, out val))
+            if (TryParse(s, out Timestamp val))
             {
                 return val;
             }
@@ -464,7 +462,7 @@ namespace Qowaiv.Sql
         }
 
         /// <summary>Returns true if the val represents a valid time stamp, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out Timestamp timestamp);
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
 
         #endregion
     }

@@ -16,6 +16,9 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void UnderlyingTypeMatches(Type svo, SingleValueObjectAttribute attr)
         {
+            Assert.IsNotNull(svo, nameof(svo));
+            Assert.IsNotNull(attr, nameof(attr));
+
             var m_Value = svo.GetField("m_Value", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.IsNotNull(m_Value, $"{svo} should contain a m_Value field.");
             Assert.AreEqual(attr.UnderlyingType, m_Value.FieldType, $"{svo}.m_Field");
@@ -25,6 +28,9 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void ParseMatches(Type svo, SingleValueObjectAttribute attr)
         {
+            Assert.IsNotNull(svo, nameof(svo));
+            Assert.IsNotNull(attr, nameof(attr));
+
             var staticMethods = svo.GetMethods(BindingFlags.Public | BindingFlags.Static);
 
             var parse = staticMethods.SingleOrDefault(method =>
@@ -63,6 +69,9 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void TryParseMatches(Type svo, SingleValueObjectAttribute attr)
         {
+            Assert.IsNotNull(svo, nameof(svo));
+            Assert.IsNotNull(attr, nameof(attr));
+
             var staticMethods = svo.GetMethods(BindingFlags.Public | BindingFlags.Static);
 
             // The out parameter.
@@ -108,6 +117,9 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void IsValidMatches(Type svo, SingleValueObjectAttribute attr)
         {
+            Assert.IsNotNull(svo, nameof(svo));
+            Assert.IsNotNull(attr, nameof(attr));
+
             var staticMethods = svo.GetMethods(BindingFlags.Public | BindingFlags.Static);
 
             var isValid = staticMethods.SingleOrDefault(method =>
@@ -146,6 +158,9 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void EmptyAndUnknownMatches(Type svo, SingleValueObjectAttribute attr)
         {
+            Assert.IsNotNull(svo, nameof(svo));
+            Assert.IsNotNull(attr, nameof(attr));
+
             var emptyValue = svo.GetFields(BindingFlags.Static | BindingFlags.Public).SingleOrDefault(field =>
                     field.Name == "Empty" &&
                     field.IsInitOnly &&
@@ -225,6 +240,8 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void ImplementsInterfaces(Type svo)
         {
+            Assert.IsNotNull(svo, nameof(svo));
+
             var interfaces = svo.GetInterfaces().ToList();
 
             var iComparable = typeof(IComparable<>).MakeGenericType(svo);
@@ -241,6 +258,8 @@ namespace Qowaiv.TestTools
         [DebuggerStepThrough]
         public static void AttributesMatches(Type svo)
         {
+            Assert.IsNotNull(svo, nameof(svo));
+
             var attributes = svo.GetCustomAttributes(false);
 
             Assert.IsTrue(attributes.Any(att => (att is DebuggerDisplayAttribute)), /**/ $"{svo} should have DebuggerDisplayAttribute.");

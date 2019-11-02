@@ -570,8 +570,8 @@ namespace Qowaiv.UnitTests
             var item2 = Date.Parse("1970-03-28");
             var item3 = Date.Parse("1970-04-12");
 
-            var inp = new List<Date>() { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
-            var exp = new List<Date>() { Date.MinValue, Date.MinValue, item0, item1, item2, item3 };
+            var inp = new List<Date> { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
+            var exp = new List<Date> { Date.MinValue, Date.MinValue, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -586,8 +586,8 @@ namespace Qowaiv.UnitTests
             var item2 = Date.Parse("1970-03-28");
             var item3 = Date.Parse("1970-04-12");
 
-            var inp = new List<Date>() { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
-            var exp = new List<Date>() { item3, item2, item1, item0, Date.MinValue, Date.MinValue };
+            var inp = new List<Date> { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
+            var exp = new List<Date> { item3, item2, item1, item0, Date.MinValue, Date.MinValue };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

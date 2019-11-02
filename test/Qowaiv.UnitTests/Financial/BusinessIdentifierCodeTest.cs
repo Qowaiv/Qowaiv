@@ -607,8 +607,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
             var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
-            var exp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
+            var inp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -623,8 +623,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
             var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
-            var exp = new List<BusinessIdentifierCode>() { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
+            var inp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode> { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

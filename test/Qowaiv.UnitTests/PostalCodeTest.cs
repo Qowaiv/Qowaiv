@@ -691,8 +691,8 @@ namespace Qowaiv.UnitTests
             var item2 = PostalCode.Parse("23456");
             var item3 = PostalCode.Parse("345678");
 
-            var inp = new List<PostalCode>() { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
-            var exp = new List<PostalCode>() { PostalCode.Empty, PostalCode.Empty, item0, item1, item2, item3 };
+            var inp = new List<PostalCode> { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
+            var exp = new List<PostalCode> { PostalCode.Empty, PostalCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -707,8 +707,8 @@ namespace Qowaiv.UnitTests
             var item2 = PostalCode.Parse("23456");
             var item3 = PostalCode.Parse("345678");
 
-            var inp = new List<PostalCode>() { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
-            var exp = new List<PostalCode>() { item3, item2, item1, item0, PostalCode.Empty, PostalCode.Empty };
+            var inp = new List<PostalCode> { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
+            var exp = new List<PostalCode> { item3, item2, item1, item0, PostalCode.Empty, PostalCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -906,7 +906,7 @@ namespace Qowaiv.UnitTests
         public void IsValidFor_TestStruct_1Country()
         {
             var act = TestStruct.IsValidFor().ToArray();
-            var exp = new Country[] { Country.CA };
+            var exp = new [] { Country.CA };
             CollectionAssert.AllItemsAreUnique(act);
 
             CollectionAssert.AreEqual(exp, act);
@@ -917,7 +917,7 @@ namespace Qowaiv.UnitTests
         {
             var postalcode = PostalCode.Parse("0123456");
             var act = postalcode.IsValidFor().ToArray();
-            var exp = new Country[] { Country.CL, Country.IL, Country.JP };
+            var exp = new [] { Country.CL, Country.IL, Country.JP };
             CollectionAssert.AllItemsAreUnique(act);
 
             CollectionAssert.AreEqual(exp, act);

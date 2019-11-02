@@ -523,8 +523,8 @@ namespace Qowaiv.UnitTests.Statistics
             Elo item2 = 2416;
             Elo item3 = 2601;
 
-            var inp = new List<Elo>() { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
-            var exp = new List<Elo>() { Elo.Zero, Elo.Zero, item0, item1, item2, item3 };
+            var inp = new List<Elo> { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
+            var exp = new List<Elo> { Elo.Zero, Elo.Zero, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -539,8 +539,8 @@ namespace Qowaiv.UnitTests.Statistics
             Elo item2 = 2416;
             Elo item3 = 2601;
 
-            var inp = new List<Elo>() { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
-            var exp = new List<Elo>() { item3, item2, item1, item0, Elo.Zero, Elo.Zero };
+            var inp = new List<Elo> { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
+            var exp = new List<Elo> { item3, item2, item1, item0, Elo.Zero, Elo.Zero };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

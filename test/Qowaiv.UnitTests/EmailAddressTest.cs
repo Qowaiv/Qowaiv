@@ -684,8 +684,8 @@ namespace Qowaiv.UnitTests
             var item2 = EmailAddress.Parse("c@qowaiv.org");
             var item3 = EmailAddress.Parse("d@qowaiv.org");
 
-            var inp = new List<EmailAddress>() { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
-            var exp = new List<EmailAddress>() { EmailAddress.Empty, EmailAddress.Empty, item0, item1, item2, item3 };
+            var inp = new List<EmailAddress> { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
+            var exp = new List<EmailAddress> { EmailAddress.Empty, EmailAddress.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -700,8 +700,8 @@ namespace Qowaiv.UnitTests
             var item2 = EmailAddress.Parse("c@qowaiv.org");
             var item3 = EmailAddress.Parse("d@qowaiv.org");
 
-            var inp = new List<EmailAddress>() { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
-            var exp = new List<EmailAddress>() { item3, item2, item1, item0, EmailAddress.Empty, EmailAddress.Empty };
+            var inp = new List<EmailAddress> { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
+            var exp = new List<EmailAddress> { item3, item2, item1, item0, EmailAddress.Empty, EmailAddress.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

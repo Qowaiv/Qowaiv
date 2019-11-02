@@ -603,8 +603,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BankIdentifierCode.Parse("DSSBNL22");
             var item3 = BankIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BankIdentifierCode>() { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
-            var exp = new List<BankIdentifierCode>() { BankIdentifierCode.Empty, BankIdentifierCode.Empty, item0, item1, item2, item3 };
+            var inp = new List<BankIdentifierCode> { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
+            var exp = new List<BankIdentifierCode> { BankIdentifierCode.Empty, BankIdentifierCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -619,8 +619,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BankIdentifierCode.Parse("DSSBNL22");
             var item3 = BankIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BankIdentifierCode>() { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
-            var exp = new List<BankIdentifierCode>() { item3, item2, item1, item0, BankIdentifierCode.Empty, BankIdentifierCode.Empty };
+            var inp = new List<BankIdentifierCode> { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
+            var exp = new List<BankIdentifierCode> { item3, item2, item1, item0, BankIdentifierCode.Empty, BankIdentifierCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

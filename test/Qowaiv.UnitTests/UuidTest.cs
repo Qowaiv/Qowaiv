@@ -3,7 +3,6 @@ using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -416,7 +415,7 @@ namespace Qowaiv.UnitTests
         {
             var formats = new string[] { null, "", "s", "S", "b", "B", "d", "D", "p", "P", "x", "X" };
 
-            var expected = new string[]
+            var expected = new []
             {
                 "Qowaiv_SVOLibrary_GUIA",
                 "Qowaiv_SVOLibrary_GUIA",
@@ -565,8 +564,8 @@ namespace Qowaiv.UnitTests
             var item3 = Uuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
 
 
-            var inp = new List<Uuid>() { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
-            var exp = new List<Uuid>() { Uuid.Empty, Uuid.Empty, item0, item1, item2, item3 };
+            var inp = new List<Uuid> { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
+            var exp = new List<Uuid> { Uuid.Empty, Uuid.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -581,8 +580,8 @@ namespace Qowaiv.UnitTests
             var item2 = Uuid.Parse("5BD0EF29-C625-4B8D-A063-E474B28E8653");
             var item3 = Uuid.Parse("77185219-193C-4D39-B4B1-9ED05B0FC4C8");
 
-            var inp = new List<Uuid>() { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
-            var exp = new List<Uuid>() { item3, item2, item1, item0, Uuid.Empty, Uuid.Empty };
+            var inp = new List<Uuid> { Uuid.Empty, item3, item2, item0, item1, Uuid.Empty };
+            var exp = new List<Uuid> { item3, item2, item1, item0, Uuid.Empty, Uuid.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

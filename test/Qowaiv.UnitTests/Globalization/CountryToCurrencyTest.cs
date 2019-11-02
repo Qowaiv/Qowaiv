@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

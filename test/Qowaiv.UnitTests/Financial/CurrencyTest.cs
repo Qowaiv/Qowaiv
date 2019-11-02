@@ -762,8 +762,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = Currency.CAD;
             var item3 = Currency.EUR;
 
-            var inp = new List<Currency>() { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
-            var exp = new List<Currency>() { Currency.Empty, Currency.Empty, item0, item1, item2, item3 };
+            var inp = new List<Currency> { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
+            var exp = new List<Currency> { Currency.Empty, Currency.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -778,8 +778,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = Currency.CAD;
             var item3 = Currency.EUR;
 
-            var inp = new List<Currency>() { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
-            var exp = new List<Currency>() { item3, item2, item1, item0, Currency.Empty, Currency.Empty };
+            var inp = new List<Currency> { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
+            var exp = new List<Currency> { item3, item2, item1, item0, Currency.Empty, Currency.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

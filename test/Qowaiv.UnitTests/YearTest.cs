@@ -643,8 +643,8 @@ namespace Qowaiv.UnitTests
             Year item2 = 1982;
             Year item3 = 1983;
 
-            var inp = new List<Year>() { Year.Empty, item3, item2, item0, item1, Year.Empty };
-            var exp = new List<Year>() { Year.Empty, Year.Empty, item0, item1, item2, item3 };
+            var inp = new List<Year> { Year.Empty, item3, item2, item0, item1, Year.Empty };
+            var exp = new List<Year> { Year.Empty, Year.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -659,8 +659,8 @@ namespace Qowaiv.UnitTests
             Year item2 = 1982;
             Year item3 = 1983;
 
-            var inp = new List<Year>() { Year.Empty, item3, item2, item0, item1, Year.Empty };
-            var exp = new List<Year>() { item3, item2, item1, item0, Year.Empty, Year.Empty };
+            var inp = new List<Year> { Year.Empty, item3, item2, item0, item1, Year.Empty };
+            var exp = new List<Year> { item3, item2, item1, item0, Year.Empty, Year.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

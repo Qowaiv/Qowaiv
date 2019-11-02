@@ -790,8 +790,8 @@ namespace Qowaiv.UnitTests
             var item2 = Gender.Female;
             var item3 = Gender.NotApplicable;
 
-            var inp = new List<Gender>() { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
-            var exp = new List<Gender>() { Gender.Empty, Gender.Empty, item0, item1, item2, item3 };
+            var inp = new List<Gender> { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
+            var exp = new List<Gender> { Gender.Empty, Gender.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -806,8 +806,8 @@ namespace Qowaiv.UnitTests
             var item2 = Gender.Female;
             var item3 = Gender.NotApplicable;
 
-            var inp = new List<Gender>() { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
-            var exp = new List<Gender>() { item3, item2, item1, item0, Gender.Empty, Gender.Empty };
+            var inp = new List<Gender> { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
+            var exp = new List<Gender> { item3, item2, item1, item0, Gender.Empty, Gender.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

@@ -82,7 +82,7 @@ namespace Qowaiv.UnitTests.Data
     }
 
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-    internal struct StructWithoutRequiredCast
+    internal struct StructWithoutRequiredCast : IEquatable<StructWithoutRequiredCast>
     {
         private readonly string val;
 
@@ -90,6 +90,11 @@ namespace Qowaiv.UnitTests.Data
         {
             val = str;
         }
+
+        public override bool Equals(object obj) => obj is StructWithoutRequiredCast svo && Equals(svo);
+        public bool Equals(StructWithoutRequiredCast other) => other.val == val;
+        public override int GetHashCode() => (val ?? "").GetHashCode();
+
         public override string ToString() { return val; }
     }
 }

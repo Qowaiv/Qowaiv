@@ -98,11 +98,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = null;
-
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -110,11 +107,9 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = string.Empty;
 
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -122,11 +117,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = "?";
-
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -134,11 +126,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            BankIdentifierCode val;
-
             string str = "AEGONL2UXXX";
-
-            Assert.IsTrue(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsTrue(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -146,11 +135,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            BankIdentifierCode val;
-
             string str = "string";
-
-            Assert.IsFalse(BankIdentifierCode.TryParse(str, out val), "Valid");
+            Assert.IsFalse(BankIdentifierCode.TryParse(str, out BankIdentifierCode val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -279,13 +265,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
@@ -299,13 +285,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
@@ -319,13 +305,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DataContractSerializeDeserialize_BankIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCodeTest.TestStruct,
@@ -340,13 +326,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,
@@ -360,13 +346,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new BankIdentifierCodeSerializeObject()
+            var input = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BankIdentifierCodeSerializeObject()
+            var exp = new BankIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BankIdentifierCode.Empty,
@@ -617,8 +603,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BankIdentifierCode.Parse("DSSBNL22");
             var item3 = BankIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BankIdentifierCode>() { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
-            var exp = new List<BankIdentifierCode>() { BankIdentifierCode.Empty, BankIdentifierCode.Empty, item0, item1, item2, item3 };
+            var inp = new List<BankIdentifierCode> { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
+            var exp = new List<BankIdentifierCode> { BankIdentifierCode.Empty, BankIdentifierCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -633,8 +619,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BankIdentifierCode.Parse("DSSBNL22");
             var item3 = BankIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BankIdentifierCode>() { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
-            var exp = new List<BankIdentifierCode>() { item3, item2, item1, item0, BankIdentifierCode.Empty, BankIdentifierCode.Empty };
+            var inp = new List<BankIdentifierCode> { BankIdentifierCode.Empty, item3, item2, item0, item1, BankIdentifierCode.Empty };
+            var exp = new List<BankIdentifierCode> { item3, item2, item1, item0, BankIdentifierCode.Empty, BankIdentifierCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -904,12 +890,6 @@ namespace Qowaiv.UnitTests.Financial
             {
                 TypeConverterAssert.ConvertFromEquals(BankIdentifierCodeTest.TestStruct, BankIdentifierCodeTest.TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_BankIdentifierCode_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(BankIdentifierCode));
         }
 
         [Test]

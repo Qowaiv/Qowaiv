@@ -13,7 +13,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -205,7 +204,7 @@ namespace Qowaiv.Financial
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -445,8 +444,6 @@ namespace Qowaiv.Financial
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid BIC, otherwise false.</summary>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
-            Justification = "formatProvider is validated by Country.IsValid().")]
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
             var value = val ?? string.Empty;

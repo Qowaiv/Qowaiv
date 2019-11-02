@@ -18,7 +18,7 @@ namespace Qowaiv.CodeGenerator
 
         private static void AppendLoggers()
         {
-            var fileAppender = new FileAppender()
+            var fileAppender = new FileAppender
             {
                 File = "../Qowaiv.CodeGenerator.log",
                 AppendToFile = true,
@@ -29,7 +29,7 @@ namespace Qowaiv.CodeGenerator
             };
             fileAppender.ActivateOptions();
 
-            var consoleAppender = new ConsoleAppender()
+            var consoleAppender = new ConsoleAppender
             {
                 Name = "ConsoleAppender",
                 Layout = new PatternLayout("%d{HH:mm:ss} %-5p %m%n"),
@@ -75,7 +75,7 @@ namespace Qowaiv.CodeGenerator
 
                 Type underlyingType = GetType(args[1]);
 
-                var input = new SvoStruct() { ClassName = args[2], UnderlyingType = underlyingType };
+                var input = new SvoStruct { ClassName = args[2], UnderlyingType = underlyingType };
 
                 if (args.Length > 3) { input.ClassLongName = args[3]; }
                 if (args.Length > 4) { input.a = args[4].ToLower(); }

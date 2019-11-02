@@ -36,7 +36,7 @@ namespace Qowaiv.CodeGenerator.CodeDom.Razor
         {
             return typeof(SvoStructGenerator).Assembly
                 .GetManifestResourceNames()
-                .Where(name => name.EndsWith(".cshtml"));
+                .Where(name => name.EndsWith(".cshtml", System.StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

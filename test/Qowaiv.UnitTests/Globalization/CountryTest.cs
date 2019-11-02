@@ -100,11 +100,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Country val;
-
             string str = null;
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -112,11 +109,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Country val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -124,11 +118,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            Country val;
-
             string str = "?";
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -136,11 +127,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_NullCultureStringValue_IsValid()
         {
-            Country val;
-
             string str = "VA";
-
-            Assert.IsTrue(Country.TryParse(str, null, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, null, out Country val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -148,11 +136,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Country val;
-
             string str = "VA";
-
-            Assert.IsTrue(Country.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -160,11 +145,8 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Country val;
-
             string str = "string";
-
-            Assert.IsFalse(Country.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Country.TryParse(str, out Country val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -354,13 +336,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void SerializeDeserialize_CountrySerializeObject_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
@@ -374,13 +356,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void XmlSerializeDeserialize_CountrySerializeObject_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
@@ -394,13 +376,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void DataContractSerializeDeserialize_CountrySerializeObject_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = CountryTest.TestStruct,
@@ -415,13 +397,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,
@@ -435,13 +417,13 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CountrySerializeObject()
+            var input = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CountrySerializeObject()
+            var exp = new CountrySerializeObject
             {
                 Id = 17,
                 Obj = Country.Empty,
@@ -731,8 +713,8 @@ namespace Qowaiv.UnitTests.Globalization
             var item2 = Country.CU;
             var item3 = Country.DO;
 
-            var inp = new List<Country>() { Country.Empty, item3, item2, item0, item1, Country.Empty };
-            var exp = new List<Country>() { Country.Empty, Country.Empty, item0, item1, item2, item3 };
+            var inp = new List<Country> { Country.Empty, item3, item2, item0, item1, Country.Empty };
+            var exp = new List<Country> { Country.Empty, Country.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -747,8 +729,8 @@ namespace Qowaiv.UnitTests.Globalization
             var item2 = Country.CU;
             var item3 = Country.DO;
 
-            var inp = new List<Country>() { Country.Empty, item3, item2, item0, item1, Country.Empty };
-            var exp = new List<Country>() { item3, item2, item1, item0, Country.Empty, Country.Empty };
+            var inp = new List<Country> { Country.Empty, item3, item2, item0, item1, Country.Empty };
+            var exp = new List<Country> { item3, item2, item1, item0, Country.Empty, Country.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -1131,12 +1113,6 @@ namespace Qowaiv.UnitTests.Globalization
             {
                 TypeConverterAssert.ConvertFromEquals(CountryTest.TestStruct, CountryTest.TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_Country_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Country));
         }
 
         [Test]

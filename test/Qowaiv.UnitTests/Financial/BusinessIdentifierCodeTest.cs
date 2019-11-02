@@ -269,13 +269,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BusinessIdentifierCodeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BusinessIdentifierCodeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -289,13 +289,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BusinessIdentifierCodeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BusinessIdentifierCodeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -309,13 +309,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DataContractSerializeDeserialize_BusinessIdentifierCodeSerializeObject_AreEqual()
         {
-            var input = new BusinessIdentifierCodeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BusinessIdentifierCodeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -330,13 +330,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new BusinessIdentifierCodeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BusinessIdentifierCodeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BusinessIdentifierCode.Empty,
@@ -350,13 +350,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new BusinessIdentifierCodeSerializeObject()
+            var input = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BusinessIdentifierCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new BusinessIdentifierCodeSerializeObject()
+            var exp = new BusinessIdentifierCodeSerializeObject
             {
                 Id = 17,
                 Obj = BusinessIdentifierCode.Empty,
@@ -607,8 +607,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
             var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
-            var exp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
+            var inp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -623,8 +623,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
             var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
 
-            var inp = new List<BusinessIdentifierCode>() { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
-            var exp = new List<BusinessIdentifierCode>() { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
+            var inp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
+            var exp = new List<BusinessIdentifierCode> { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -872,12 +872,6 @@ namespace Qowaiv.UnitTests.Financial
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_BusinessIdentifierCode_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(BusinessIdentifierCode));
         }
 
         [Test]

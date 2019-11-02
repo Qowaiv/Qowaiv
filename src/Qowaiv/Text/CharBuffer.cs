@@ -149,16 +149,21 @@ namespace Qowaiv.Text
         }
 
         /// <inheritdoc />
-        public bool Equals(string other)
+        public bool Equals(string other) => Equals(other, false);
+        public bool Equals(string other, bool ignoreCase)
         {
-            if(Length != other.Length)
+            if (Length != other.Length)
             {
                 return false;
             }
-            for(var i = 0; i < Length; i++)
+            for (var i = 0; i < Length; i++)
             {
-                if(buffer[i] != other[i])
+                if (buffer[i] != other[i])
                 {
+                    if (ignoreCase && char.ToUpperInvariant(buffer[i]) == char.ToUpperInvariant(other[i]))
+                    {
+                        continue;
+                    }
                     return false;
                 }
             }

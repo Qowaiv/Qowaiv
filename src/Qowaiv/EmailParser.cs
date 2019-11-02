@@ -46,10 +46,9 @@ namespace Qowaiv
             var hasBrackets = false;
             var dot = NotFound;
 
-            var start = 0;
             var end = str.Length;
 
-            for (var pos = start; pos < end; pos++)
+            for (var pos = 0; pos < end; pos++)
             {
                 var ch = str[pos];
 
@@ -82,7 +81,7 @@ namespace Qowaiv
                 else if (noAt)
                 {
                     // If no MailTo: detected yet, we should remove it.
-                    if (!mailto && ch == Colon && local.Equals(nameof(mailto)))
+                    if (!mailto && ch == Colon && local.Equals(nameof(mailto), true))
                     {
                         local.Clear();
                         mailto = true;
@@ -94,7 +93,7 @@ namespace Qowaiv
                     {
                         return null;
                     }
-                    local.AddLower(ch);
+                    local.Add(ch);
                 }
                 // Domain part.
                 else

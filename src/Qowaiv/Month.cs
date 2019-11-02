@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -61,10 +60,8 @@ namespace Qowaiv
         public static readonly Month December /* */ = new Month { m_Value = 12 };
 
         /// <summary>Represents all months (January till December).</summary>
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
-            Justification = "ReadOnlyCollection<T> is immutable.")]
         public static readonly ReadOnlyCollection<Month> All = new ReadOnlyCollection<Month>(
-            new List<Month>()
+            new List<Month>
             {
                 January,
                 February,
@@ -86,13 +83,9 @@ namespace Qowaiv
         private byte m_Value;
 
         /// <summary>Gets the full name of the month.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Property FullName is a shortcut for GetFullName(CultureInfo.CurrentCulture).")]
         public string FullName => GetFullName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the short name of the month.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Property ShortName is a shortcut for GetShortName(CultureInfo.CurrentCulture).")]
         public string ShortName => GetShortName(CultureInfo.CurrentCulture);
 
         #endregion
@@ -233,7 +226,7 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -291,7 +284,7 @@ namespace Qowaiv
         private string ToDefaultString() => IsUnknown() ? "?" : string.Empty;
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Month, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Month, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<Month, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Month, IFormatProvider, string>>
         {
             { 'f', (svo, provider) => svo.GetFullName(provider) },
             { 's', (svo, provider) => svo.GetShortName(provider) },
@@ -636,10 +629,10 @@ namespace Qowaiv
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>()
+        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, byte>()
+                CultureInfo.InvariantCulture, new Dictionary<string, byte>
                 {
                     {"JANUARY", 1},
                     {"FEBRUARY", 2},

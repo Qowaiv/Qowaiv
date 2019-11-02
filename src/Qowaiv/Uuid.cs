@@ -12,7 +12,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
@@ -158,7 +157,7 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => ToString();
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID.</summary>
@@ -438,8 +437,7 @@ namespace Qowaiv
         /// <summary>Returns true if the value represents a valid UUID, otherwise false.</summary>
         public static bool IsValid(string val)
         {
-            return Pattern.IsMatch(val ?? string.Empty)
-                || Guid.TryParse(val, out Guid id);
+            return Pattern.IsMatch(val ?? string.Empty) || Guid.TryParse(val, out _);
         }
 
         #endregion

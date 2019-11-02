@@ -216,13 +216,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_DateSerializeObject_AreEqual()
         {
-            var input = new DateSerializeObject()
+            var input = new DateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSerializeObject()
+            var exp = new DateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -236,13 +236,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_DateSerializeObject_AreEqual()
         {
-            var input = new DateSerializeObject()
+            var input = new DateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSerializeObject()
+            var exp = new DateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -256,13 +256,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_DateSerializeObject_AreEqual()
         {
-            var input = new DateSerializeObject()
+            var input = new DateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSerializeObject()
+            var exp = new DateSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -277,13 +277,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_MinValue_AreEqual()
         {
-            var input = new DateSerializeObject()
+            var input = new DateSerializeObject
             {
                 Id = 17,
                 Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSerializeObject()
+            var exp = new DateSerializeObject
             {
                 Id = 17,
                 Obj = Date.MinValue,
@@ -297,13 +297,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new DateSerializeObject()
+            var input = new DateSerializeObject
             {
                 Id = 17,
                 Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSerializeObject()
+            var exp = new DateSerializeObject
             {
                 Id = 17,
                 Obj = Date.MinValue,
@@ -570,8 +570,8 @@ namespace Qowaiv.UnitTests
             var item2 = Date.Parse("1970-03-28");
             var item3 = Date.Parse("1970-04-12");
 
-            var inp = new List<Date>() { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
-            var exp = new List<Date>() { Date.MinValue, Date.MinValue, item0, item1, item2, item3 };
+            var inp = new List<Date> { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
+            var exp = new List<Date> { Date.MinValue, Date.MinValue, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -586,8 +586,8 @@ namespace Qowaiv.UnitTests
             var item2 = Date.Parse("1970-03-28");
             var item3 = Date.Parse("1970-04-12");
 
-            var inp = new List<Date>() { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
-            var exp = new List<Date>() { item3, item2, item1, item0, Date.MinValue, Date.MinValue };
+            var inp = new List<Date> { Date.MinValue, item3, item2, item0, item1, Date.MinValue };
+            var exp = new List<Date> { item3, item2, item1, item0, Date.MinValue, Date.MinValue };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -923,12 +923,6 @@ namespace Qowaiv.UnitTests
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_Date_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Date));
         }
 
         [Test]

@@ -105,6 +105,8 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
         /// <inheritdoc />
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
+            Guard.NotNull(bindingContext, nameof(bindingContext));
+
             var modelName = bindingContext.ModelName;
 
             // Try to fetch the value of the argument by name

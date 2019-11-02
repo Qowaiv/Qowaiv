@@ -3,14 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
 
-| version                                                                        | package                                                                                              |
-|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-4.0.6-blue.svg?cacheSeconds=3600)     |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                      |
-|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)     |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                         |
-|![v](https://img.shields.io/badge/version-0.0.1-green.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
-|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
-|![v](https://img.shields.io/badge/version-0.0.1-darkgreen.svg?cacheSeconds=3600)|[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
-|![v](https://img.shields.io/badge/version-1.0.3-darkred.svg?cacheSeconds=3600)  |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                  |
+| version                                                                      | package                                                                     |
+|------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+|![v](https://img.shields.io/badge/version-4.0.6-blue.svg?cacheSeconds=3600)   |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)   |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
+|![v](https://img.shields.io/badge/version-1.0.3-darkred.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
 # Qowaiv
 
@@ -280,6 +277,7 @@ Qowaiv has its own: [IJsonSerializable](src/Qowaiv/Json/IJsonSerializable.cs)
 Is has some from methods, and one `ToJson()` method. Depending on your
 serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
 You can implement it yourself:
+* [.NET Core 3.0](example/Qowaiv.Text.Json.Serialization/README.md)
 * [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
 
 #### OpenAPI Specification
@@ -617,9 +615,3 @@ public void TestSomething()
     }
 }
 ```
-
-## Validation
-Qowaiv supports validation of different kind. Details can be found here:
-* [Qowaiv validation abstractions](src/Qowaiv.Validation.Abstractions/README.md)
-* [Qowaiv validation data annotations](src/Qowaiv.Validation.DataAnnotations/README.md)
-* [Qowaiv validation FluentValidation.NET](src/Qowaiv.Validation.Fluent/README.md)

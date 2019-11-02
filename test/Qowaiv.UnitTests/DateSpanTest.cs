@@ -124,8 +124,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<DateSpan>
-        (null, default(StreamingContext));
+                SerializationTest.DeserializeUsingConstructor<DateSpan>(null, default);
             },
             "info");
         }
@@ -136,9 +135,8 @@ namespace Qowaiv.UnitTests
             Assert.Catch<SerializationException>
             (() =>
             {
-                var info = new SerializationInfo(typeof(DateSpan), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<DateSpan>
-        (info, default(StreamingContext));
+                var info = new SerializationInfo(typeof(DateSpan), new FormatterConverter());
+                SerializationTest.DeserializeUsingConstructor<DateSpan>(info, default);
             });
         }
 
@@ -149,7 +147,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default(StreamingContext));
+                obj.GetObjectData(null, default);
             },
             "info");
         }
@@ -158,8 +156,8 @@ namespace Qowaiv.UnitTests
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(DateSpan), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default(StreamingContext));
+            var info = new SerializationInfo(typeof(DateSpan), new FormatterConverter());
+            obj.GetObjectData(info, default);
 
             Assert.AreEqual(532575944699UL, info.GetUInt64("Value"));
         }
@@ -192,13 +190,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_DateSpanSerializeObject_AreEqual()
         {
-            var input = new DateSpanSerializeObject()
+            var input = new DateSpanSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSpanSerializeObject()
+            var exp = new DateSpanSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -212,13 +210,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_DateSpanSerializeObject_AreEqual()
         {
-            var input = new DateSpanSerializeObject()
+            var input = new DateSpanSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSpanSerializeObject()
+            var exp = new DateSpanSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -227,18 +225,18 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.XmlSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date"); 
         }
         [Test]
         public void DataContractSerializeDeserialize_DateSpanSerializeObject_AreEqual()
         {
-            var input = new DateSpanSerializeObject()
+            var input = new DateSpanSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSpanSerializeObject()
+            var exp = new DateSpanSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -247,22 +245,22 @@ namespace Qowaiv.UnitTests
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date"); ;
+            Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new DateSpanSerializeObject()
+            var input = new DateSpanSerializeObject
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSpanSerializeObject()
+            var exp = new DateSpanSerializeObject
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -273,16 +271,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Default_AreEqual()
         {
-            var input = new DateSpanSerializeObject()
+            var input = new DateSpanSerializeObject
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new DateSpanSerializeObject()
+            var exp = new DateSpanSerializeObject
             {
                 Id = 17,
-                Obj = default(DateSpan),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -537,8 +535,8 @@ namespace Qowaiv.UnitTests
             var item2 = new DateSpan(0, 00, +500);
             var item3 = new DateSpan(4, 00, -40);
 
-            var inp = new List<DateSpan>() { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
-            var exp = new List<DateSpan>() { item0, DateSpan.Zero, DateSpan.Zero,  item1, item2, item3 };
+            var inp = new List<DateSpan> { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
+            var exp = new List<DateSpan> { item0, DateSpan.Zero, DateSpan.Zero,  item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -553,8 +551,8 @@ namespace Qowaiv.UnitTests
             var item2 = new DateSpan(0, 00, +500);
             var item3 = new DateSpan(4, 00, -40);
 
-            var inp = new List<DateSpan>() { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
-            var exp = new List<DateSpan>() { item3, item2, item1, DateSpan.Zero, DateSpan.Zero, item0 };
+            var inp = new List<DateSpan> { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
+            var exp = new List<DateSpan> { item3, item2, item1, DateSpan.Zero, DateSpan.Zero, item0 };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -782,12 +780,6 @@ namespace Qowaiv.UnitTests
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_DateSpan_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(DateSpan));
         }
 
         [Test]

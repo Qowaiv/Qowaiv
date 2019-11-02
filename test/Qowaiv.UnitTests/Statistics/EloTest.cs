@@ -57,32 +57,24 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void TyrParse_Null_IsNotValid()
         {
-            Elo val;
-
             string str = null;
-
-            Assert.IsFalse(Elo.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Elo.TryParse(str, out _), "Valid");
         }
 
         /// <summary>TryParse string.Empty should not be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsNotValid()
         {
-            Elo val;
-
             string str = string.Empty;
-            Assert.IsFalse(Elo.TryParse(str, out val));
+            Assert.IsFalse(Elo.TryParse(str, out _));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Elo val;
-
             string str = "1400";
-
-            Assert.IsTrue(Elo.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Elo.TryParse(str, out Elo val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -207,13 +199,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void SerializeDeserialize_EloSerializeObject_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
@@ -227,13 +219,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void XmlSerializeDeserialize_EloSerializeObject_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
@@ -247,13 +239,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void DataContractSerializeDeserialize_EloSerializeObject_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
@@ -268,13 +260,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void SerializeDeserialize_Zero_AreEqual()
         {
-            var input = new EloSerializeObject()
+            var input = new EloSerializeObject
             {
                 Id = 17,
                 Obj = Elo.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EloSerializeObject()
+            var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = Elo.Zero,
@@ -531,8 +523,8 @@ namespace Qowaiv.UnitTests.Statistics
             Elo item2 = 2416;
             Elo item3 = 2601;
 
-            var inp = new List<Elo>() { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
-            var exp = new List<Elo>() { Elo.Zero, Elo.Zero, item0, item1, item2, item3 };
+            var inp = new List<Elo> { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
+            var exp = new List<Elo> { Elo.Zero, Elo.Zero, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -547,8 +539,8 @@ namespace Qowaiv.UnitTests.Statistics
             Elo item2 = 2416;
             Elo item3 = 2601;
 
-            var inp = new List<Elo>() { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
-            var exp = new List<Elo>() { item3, item2, item1, item0, Elo.Zero, Elo.Zero };
+            var inp = new List<Elo> { Elo.Zero, item3, item2, item0, item1, Elo.Zero };
+            var exp = new List<Elo> { item3, item2, item1, item0, Elo.Zero, Elo.Zero };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -858,12 +850,6 @@ namespace Qowaiv.UnitTests.Statistics
             {
                 TypeConverterAssert.ConvertFromEquals(EloTest.TestStruct, EloTest.TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_Elo_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Elo));
         }
 
         [Test]

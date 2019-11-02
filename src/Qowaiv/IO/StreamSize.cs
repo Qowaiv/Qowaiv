@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
@@ -452,7 +451,7 @@ namespace Qowaiv.IO
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay { get { return ToString(" F", CultureInfo.InvariantCulture); } }
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>
@@ -533,8 +532,6 @@ namespace Qowaiv.IO
             return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "This is not about normalization but formatting.")]
         private string ToFormattedString(IFormatProvider formatProvider, Match match)
         {
             var format = match.Groups["format"].Value;
@@ -921,7 +918,7 @@ namespace Qowaiv.IO
         /// <summary>Returns true if the val represents a valid stream size, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return TryParse(val, formatProvider, out StreamSize size);
+            return TryParse(val, formatProvider, out _);
         }
 
         #endregion
@@ -956,7 +953,7 @@ namespace Qowaiv.IO
             return MultiplierLookup[streamSizeMarker.ToUpperInvariant().Trim()];
         }
 
-        private static readonly Dictionary<string, long> MultiplierLookup = new Dictionary<string, long>()
+        private static readonly Dictionary<string, long> MultiplierLookup = new Dictionary<string, long>
         {
             { "KILOBYTE", 1000L },
             { "MEGABYTE", 1000000L },

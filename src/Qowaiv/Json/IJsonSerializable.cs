@@ -18,13 +18,13 @@ namespace Qowaiv.Json
         /// <param name="jsonInteger">
         /// The JSON integer that represents the object.
         /// </param>
-        void FromJson(Int64 jsonInteger);
+        void FromJson(long jsonInteger);
 
         /// <summary>Generates an object from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the object.
         /// </param>
-        void FromJson(Double jsonNumber);
+        void FromJson(double jsonNumber);
 
         /// <summary>Generates an object from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -40,6 +40,6 @@ namespace Qowaiv.Json
         /// System.Double or 
         /// System.DateTime.
         /// </remarks>
-        Object ToJson();
+        object ToJson();
     }
 }

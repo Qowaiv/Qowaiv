@@ -14,7 +14,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -187,7 +186,7 @@ namespace Qowaiv.Financial
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current IBAN for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -218,10 +217,7 @@ namespace Qowaiv.Financial
             return m_Value;
         }
         /// <summary>Formats the IBAN without spaces as lowercase.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "This is not about normalization but formatting.")]
         private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();
-
 
         /// <summary>Formats the IBAN with spaces.</summary>
         private string ToFormattedString()
@@ -237,10 +233,7 @@ namespace Qowaiv.Financial
             return FormattedPattern.Replace(m_Value, "$0 ");
         }
         /// <summary>Formats the IBAN with spaces as lowercase.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "This is not about normalization but formatting.")]
         private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
-
 
         private static readonly Regex FormattedPattern = new Regex(@"\w{4}(?!$)", RegexOptions.Compiled);
 
@@ -290,7 +283,7 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>
         {
             { 'u', (svo, provider) => svo.ToUnformattedLowercaseString() },
             { 'U', (svo, provider) => svo.ToUnformattedString() },
@@ -529,8 +522,8 @@ namespace Qowaiv.Financial
         /// <summary>Matches on Alphanumeric uppercase chars.</summary>
         private static readonly Regex Alphanumeric = new Regex("[A-Z]", RegexOptions.Compiled);
 
-        /// <summary>Replaces A by 11, B by 12 ect.</summary>
-        private static string AlphanumericToNumeric(Match match)
+        /// <summary>Replaces A by 11, B by 12 etcetera.</summary>
+        private static string AlphanumericToNumeric(Capture match)
         {
             return AlphanumericAndNumericLookup
                 .IndexOf(match.Value, StringComparison.Ordinal)

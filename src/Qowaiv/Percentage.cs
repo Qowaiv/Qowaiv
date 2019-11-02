@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -644,7 +643,7 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Percentage for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get => ToString("0.00##########################%", CultureInfo.InvariantCulture);
@@ -683,13 +682,13 @@ namespace Qowaiv
         public string ToString(IFormatProvider formatProvider)
         {
             DefaultFormats.TryGetValue(formatProvider ?? CultureInfo.CurrentCulture, out string format);
-            format = format ?? "0.############################%";
+            format ??= "0.############################%";
 
             return ToString(format, formatProvider);
         }
 
         /// <summary>Gets the default format for different countries.</summary>
-        private static readonly Dictionary<IFormatProvider, string> DefaultFormats = new Dictionary<IFormatProvider, string>()
+        private static readonly Dictionary<IFormatProvider, string> DefaultFormats = new Dictionary<IFormatProvider, string>
         {
             { new CultureInfo("fr-FR"), "%0.############################" },
             { new CultureInfo("fa-IR"), "%0.############################" },
@@ -961,7 +960,7 @@ namespace Qowaiv
             Invalid,
         }
 
-        internal static readonly Dictionary<PercentageMarkerType, decimal> Dividers = new Dictionary<PercentageMarkerType, decimal>()
+        internal static readonly Dictionary<PercentageMarkerType, decimal> Dividers = new Dictionary<PercentageMarkerType, decimal>
         {
             { PercentageMarkerType.None, 0.01m },
             { PercentageMarkerType.PercentageBefore, 0.01m },

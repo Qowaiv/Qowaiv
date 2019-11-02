@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -55,18 +54,16 @@ namespace Qowaiv.Globalization
         /// For unknown a '?' is returned.
         /// For existing countries this returns the ISO 3166-1 code.
         /// </remarks>
-        public string Name { get { return IsUnknown() ? "?" : m_Value ?? string.Empty; } }
+        public string Name => IsUnknown() ? "?" : m_Value ?? string.Empty;
 
         /// <summary>Gets the display name.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "For alignment with System.Globalization.RegionInfo.")]
-        public string DisplayName { get { return GetDisplayName(CultureInfo.CurrentCulture); } }
+        public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the full name of the country/region in English.</summary>
         /// <returns>
         /// The full name of the country in English.
         /// </returns>
-        public string EnglishName { get { return GetDisplayName(CultureInfo.InvariantCulture); } }
+        public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
         ///<summary>Gets the two-letter code defined in ISO 3166-1 for the country.</summary>
         /// <returns>
@@ -146,7 +143,10 @@ namespace Qowaiv.Globalization
         /// </param>
         public Currency GetCurrency(Date measurement)
         {
-            if (!ExistsOnDate(measurement)) { return Currency.Empty; }
+            if (!ExistsOnDate(measurement))
+            {
+                return Currency.Empty;
+            }
             var country = this;
             return CountryToCurrency.All.Where(map => map.Country == country && map.StartDate <= measurement)
                 .Select(map => map.Currency)
@@ -264,7 +264,7 @@ namespace Qowaiv.Globalization
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -343,7 +343,7 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Country, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Country, IFormatProvider, string>>
         {
             { 'n', (svo, provider) => svo.Name },
             { '2', (svo, provider) => svo.GetResourceString("ISO2", provider) },
@@ -479,8 +479,7 @@ namespace Qowaiv.Globalization
         /// </exception>
         public static Country Parse(string s, IFormatProvider formatProvider)
         {
-            Country val;
-            if (TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Country val))
             {
                 return val;
             }
@@ -498,8 +497,7 @@ namespace Qowaiv.Globalization
         /// </returns>
         public static Country TryParse(string s)
         {
-            Country val;
-            if (TryParse(s, out val))
+            if (TryParse(s, out Country val))
             {
                 return val;
             }
@@ -557,9 +555,8 @@ namespace Qowaiv.Globalization
             AddCulture(culture);
 
             var str = Parsing.ToUnified(s);
-            string val;
 
-            if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
                 result = new Country { m_Value = val };
                 return true;
@@ -651,10 +648,6 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>Gets a collection of all country info's.</summary>
-        [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
-            Justification = "Those constants are the hole point of this class.")]
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
-            Justification = "ReadOnlyCollection<T> is immutable.")]
         public static readonly ReadOnlyCollection<Country> All = new ReadOnlyCollection<Country>(
             ResourceManager
                 .GetString("All")
@@ -710,12 +703,6 @@ namespace Qowaiv.Globalization
         #region Lookup
 
         /// <summary>Initializes the country lookup.</summary>
-        [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
-            Justification = "Due to generated constants.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
-            Justification = "Due to generated constants.")]
-        [SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline",
-            Justification = "Complex initialization, this approach is better understandable.")]
         static Country()
         {
             foreach (var country in All)
@@ -749,10 +736,10 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>()
+        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, string>()
+                CultureInfo.InvariantCulture, new Dictionary<string, string>
                 {
                     { "ZZ", "ZZ" },
                     { "ZZZ", "ZZ" },

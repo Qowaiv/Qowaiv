@@ -125,11 +125,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Month val;
-
             string str = null;
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -137,11 +134,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Month val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -149,11 +143,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            Month val;
-
             string str = "?";
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -161,11 +152,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Month val;
-
             string str = "December";
-
-            Assert.IsTrue(Month.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(Month.December, val, "Value");
         }
 
@@ -173,11 +161,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Month val;
-
             string str = "string";
-
-            Assert.IsFalse(Month.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Month.TryParse(str, out Month val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -224,9 +209,7 @@ namespace Qowaiv.UnitTests
             using (new CultureInfoScope("en-GB"))
             {
                 var exp = TestStruct;
-
-                Month act;
-                Assert.IsTrue(Month.TryParse(exp.ShortName, null, out act));
+                Assert.IsTrue(Month.TryParse(exp.ShortName, null, out Month act));
                 Assert.AreEqual(exp, act);
             }
         }
@@ -250,20 +233,15 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryCreate_Null_IsEmpty()
         {
-            Month exp = Month.Empty;
-            Month act;
-
-            Assert.IsTrue(Month.TryCreate(null, out act));
+            var exp = Month.Empty;
+            Assert.IsTrue(Month.TryCreate(null, out Month act));
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void TryCreate_ByteMinValue_IsEmpty()
         {
-            Month exp = Month.Empty;
-            Month act;
-
-            Assert.IsFalse(Month.TryCreate(Byte.MinValue, out act));
-            Assert.AreEqual(exp, act);
+            Assert.IsFalse(Month.TryCreate(byte.MinValue, out Month act));
+            Assert.AreEqual(Month.Empty, act);
         }
 
         [Test]
@@ -376,13 +354,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_MonthSerializeObject_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -396,13 +374,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_MonthSerializeObject_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -416,13 +394,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_MonthSerializeObject_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -437,13 +415,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -457,13 +435,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new MonthSerializeObject()
+            var input = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = Month.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MonthSerializeObject()
+            var exp = new MonthSerializeObject
             {
                 Id = 17,
                 Obj = Month.Empty,
@@ -776,8 +754,8 @@ namespace Qowaiv.UnitTests
             var item2 = Month.April;
             var item3 = Month.December;
 
-            var inp = new List<Month>() { Month.Empty, item3, item2, item0, item1, Month.Empty };
-            var exp = new List<Month>() { Month.Empty, Month.Empty, item0, item1, item2, item3 };
+            var inp = new List<Month> { Month.Empty, item3, item2, item0, item1, Month.Empty };
+            var exp = new List<Month> { Month.Empty, Month.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -792,8 +770,8 @@ namespace Qowaiv.UnitTests
             var item2 = Month.April;
             var item3 = Month.December;
 
-            var inp = new List<Month>() { Month.Empty, item3, item2, item0, item1, Month.Empty };
-            var exp = new List<Month>() { item3, item2, item1, item0, Month.Empty, Month.Empty };
+            var inp = new List<Month> { Month.Empty, item3, item2, item0, item1, Month.Empty };
+            var exp = new List<Month> { item3, item2, item1, item0, Month.Empty, Month.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -1105,12 +1083,6 @@ namespace Qowaiv.UnitTests
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_Month_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Month));
         }
 
         [Test]

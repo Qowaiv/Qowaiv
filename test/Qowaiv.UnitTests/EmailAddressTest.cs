@@ -132,6 +132,20 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Parse_DomainPartShouldBeLowerCased()
+        {
+            var email = EmailAddress.Parse("mail@UPPERCASE.com");
+            Assert.AreEqual("mail@uppercase.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_LocalPartShouldNotBeLowerCased()
+        {
+            var email = EmailAddress.Parse("MAIL@lowercase.com");
+            Assert.AreEqual("MAIL@lowercase.com", email.ToString());
+        }
+
+        [Test]
         public void Parse_Unknown_AreEqual()
         {
             using (new CultureInfoScope("en-GB"))
@@ -306,13 +320,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
@@ -326,13 +340,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
@@ -346,13 +360,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddressTest.TestStruct,
@@ -367,13 +381,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,
@@ -387,13 +401,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new EmailAddressSerializeObject()
+            var input = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new EmailAddressSerializeObject()
+            var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
                 Obj = EmailAddress.Empty,
@@ -600,7 +614,7 @@ namespace Qowaiv.UnitTests
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
             var l = EmailAddress.Parse("svo@qowaiv.org", CultureInfo.InvariantCulture);
-            var r = EmailAddress.Parse("SVO@Qowaiv.org", CultureInfo.InvariantCulture);
+            var r = EmailAddress.Parse("With display <svo@Qowaiv.org>", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
         }
@@ -670,8 +684,8 @@ namespace Qowaiv.UnitTests
             var item2 = EmailAddress.Parse("c@qowaiv.org");
             var item3 = EmailAddress.Parse("d@qowaiv.org");
 
-            var inp = new List<EmailAddress>() { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
-            var exp = new List<EmailAddress>() { EmailAddress.Empty, EmailAddress.Empty, item0, item1, item2, item3 };
+            var inp = new List<EmailAddress> { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
+            var exp = new List<EmailAddress> { EmailAddress.Empty, EmailAddress.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -686,8 +700,8 @@ namespace Qowaiv.UnitTests
             var item2 = EmailAddress.Parse("c@qowaiv.org");
             var item3 = EmailAddress.Parse("d@qowaiv.org");
 
-            var inp = new List<EmailAddress>() { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
-            var exp = new List<EmailAddress>() { item3, item2, item1, item0, EmailAddress.Empty, EmailAddress.Empty };
+            var inp = new List<EmailAddress> { EmailAddress.Empty, item3, item2, item0, item1, EmailAddress.Empty };
+            var exp = new List<EmailAddress> { item3, item2, item1, item0, EmailAddress.Empty, EmailAddress.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -933,12 +947,6 @@ namespace Qowaiv.UnitTests
             {
                 TypeConverterAssert.ConvertFromEquals(EmailAddressTest.TestStruct, EmailAddressTest.TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_EmailAddress_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(EmailAddress));
         }
 
         [Test]

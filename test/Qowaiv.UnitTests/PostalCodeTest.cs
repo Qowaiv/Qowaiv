@@ -296,13 +296,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -316,13 +316,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -336,13 +336,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_PostalCodeSerializeObject_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -357,13 +357,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,
@@ -377,13 +377,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new PostalCodeSerializeObject()
+            var input = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PostalCodeSerializeObject()
+            var exp = new PostalCodeSerializeObject
             {
                 Id = 17,
                 Obj = PostalCode.Empty,
@@ -691,8 +691,8 @@ namespace Qowaiv.UnitTests
             var item2 = PostalCode.Parse("23456");
             var item3 = PostalCode.Parse("345678");
 
-            var inp = new List<PostalCode>() { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
-            var exp = new List<PostalCode>() { PostalCode.Empty, PostalCode.Empty, item0, item1, item2, item3 };
+            var inp = new List<PostalCode> { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
+            var exp = new List<PostalCode> { PostalCode.Empty, PostalCode.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -707,8 +707,8 @@ namespace Qowaiv.UnitTests
             var item2 = PostalCode.Parse("23456");
             var item3 = PostalCode.Parse("345678");
 
-            var inp = new List<PostalCode>() { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
-            var exp = new List<PostalCode>() { item3, item2, item1, item0, PostalCode.Empty, PostalCode.Empty };
+            var inp = new List<PostalCode> { PostalCode.Empty, item3, item2, item0, item1, PostalCode.Empty };
+            var exp = new List<PostalCode> { item3, item2, item1, item0, PostalCode.Empty, PostalCode.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -854,12 +854,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void ConvertFromInstanceDescriptor_PostalCode_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(PostalCode));
-        }
-
-        [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
             using (new CultureInfoScope("en-GB"))
@@ -912,7 +906,7 @@ namespace Qowaiv.UnitTests
         public void IsValidFor_TestStruct_1Country()
         {
             var act = TestStruct.IsValidFor().ToArray();
-            var exp = new Country[] { Country.CA };
+            var exp = new [] { Country.CA };
             CollectionAssert.AllItemsAreUnique(act);
 
             CollectionAssert.AreEqual(exp, act);
@@ -923,7 +917,7 @@ namespace Qowaiv.UnitTests
         {
             var postalcode = PostalCode.Parse("0123456");
             var act = postalcode.IsValidFor().ToArray();
-            var exp = new Country[] { Country.CL, Country.IL, Country.JP };
+            var exp = new [] { Country.CL, Country.IL, Country.JP };
             CollectionAssert.AllItemsAreUnique(act);
 
             CollectionAssert.AreEqual(exp, act);

@@ -3,7 +3,6 @@ using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -227,13 +226,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void SerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
@@ -247,13 +246,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void XmlSerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
@@ -267,13 +266,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_CryptographicSeedSerializeObject_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeedTest.TestStruct,
@@ -288,13 +287,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,
@@ -308,13 +307,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CryptographicSeedSerializeObject()
+            var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CryptographicSeedSerializeObject()
+            var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
                 Obj = CryptographicSeed.Empty,
@@ -552,8 +551,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var item2 = CryptographicSeed.Create(new byte[] { 3, 6 });
             var item3 = CryptographicSeed.Create(new byte[] { 4, 2 });
 
-            var inp = new List<CryptographicSeed>() { CryptographicSeed.Empty, item3, item2, item0, item1, CryptographicSeed.Empty };
-            var exp = new List<CryptographicSeed>() { CryptographicSeed.Empty, CryptographicSeed.Empty, item0, item1, item2, item3 };
+            var inp = new List<CryptographicSeed> { CryptographicSeed.Empty, item3, item2, item0, item1, CryptographicSeed.Empty };
+            var exp = new List<CryptographicSeed> { CryptographicSeed.Empty, CryptographicSeed.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -568,8 +567,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var item2 = CryptographicSeed.Create(new byte[] { 3, 6 });
             var item3 = CryptographicSeed.Create(new byte[] { 4, 2 });
 
-            var inp = new List<CryptographicSeed>() { CryptographicSeed.Empty, item3, item2, item0, item1, CryptographicSeed.Empty };
-            var exp = new List<CryptographicSeed>() { item3, item2, item1, item0, CryptographicSeed.Empty, CryptographicSeed.Empty };
+            var inp = new List<CryptographicSeed> { CryptographicSeed.Empty, item3, item2, item0, item1, CryptographicSeed.Empty };
+            var exp = new List<CryptographicSeed> { item3, item2, item1, item0, CryptographicSeed.Empty, CryptographicSeed.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -717,12 +716,6 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             {
                 TypeConverterAssert.ConvertFromEquals(CryptographicSeedTest.TestStruct, CryptographicSeedTest.TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_CryptographicSeed_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(CryptographicSeed));
         }
 
         [Test]

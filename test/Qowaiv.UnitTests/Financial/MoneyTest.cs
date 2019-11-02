@@ -197,13 +197,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_MoneySerializeObject_AreEqual()
         {
-            var input = new MoneySerializeObject()
+            var input = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MoneySerializeObject()
+            var exp = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -217,13 +217,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_MoneySerializeObject_AreEqual()
         {
-            var input = new MoneySerializeObject()
+            var input = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MoneySerializeObject()
+            var exp = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -237,13 +237,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DataContractSerializeDeserialize_MoneySerializeObject_AreEqual()
         {
-            var input = new MoneySerializeObject()
+            var input = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MoneySerializeObject()
+            var exp = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -258,13 +258,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new MoneySerializeObject()
+            var input = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MoneySerializeObject()
+            var exp = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -278,13 +278,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new MoneySerializeObject()
+            var input = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = Money.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new MoneySerializeObject()
+            var exp = new MoneySerializeObject
             {
                 Id = 17,
                 Obj = Money.Zero,
@@ -583,8 +583,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = 124.42 + Currency.EUR;
             var item3 = 124.39 + Currency.GBP;
 
-            var inp = new List<Money>() { Money.Zero, item3, item2, item0, item1, Money.Zero };
-            var exp = new List<Money>() { Money.Zero, Money.Zero, item0, item1, item2, item3 };
+            var inp = new List<Money> { Money.Zero, item3, item2, item0, item1, Money.Zero };
+            var exp = new List<Money> { Money.Zero, Money.Zero, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -599,8 +599,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = 124.42 + Currency.EUR;
             var item3 = 124.39 + Currency.GBP;
 
-            var inp = new List<Money>() { Money.Zero, item3, item2, item0, item1, Money.Zero };
-            var exp = new List<Money>() { item3, item2, item1, item0, Money.Zero, Money.Zero };
+            var inp = new List<Money> { Money.Zero, item3, item2, item0, item1, Money.Zero };
+            var exp = new List<Money> { item3, item2, item1, item0, Money.Zero, Money.Zero };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -1094,12 +1094,6 @@ namespace Qowaiv.UnitTests.Financial
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_Money_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(Money));
         }
 
         [Test]

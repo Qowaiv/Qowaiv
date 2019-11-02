@@ -33,7 +33,7 @@ namespace Qowaiv
         /// <remarks>
         /// Both comma and semicolon are supported.
         /// </remarks>
-        private static readonly char[] Separators = new char[] { ',', ';' };
+        private static readonly char[] Separators = new[] { ',', ';' };
 
         /// <summary>The underlying hash set.</summary>
         /// <remarks>

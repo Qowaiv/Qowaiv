@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\common.props" />
+  <Import Project="..\..\props\nopackage.props" />
   
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>

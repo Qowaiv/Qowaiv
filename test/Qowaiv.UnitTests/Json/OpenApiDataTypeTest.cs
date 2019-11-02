@@ -34,7 +34,7 @@ namespace Qowaiv.UnitTests.Json
 
             foreach(var attribute in attributes)
             {
-                var name = $"{attribute.DataType.Namespace}.{attribute.DataType.Name}".Replace("Qowaiv.", "");
+                var name = $"{attribute.DataType.Namespace}.{attribute.DataType.Name}".Replace("Qowaiv.", "", StringComparison.InvariantCulture);
 
                 all[name] = new OpenApiDataType
                 {

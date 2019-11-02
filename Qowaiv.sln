@@ -22,9 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tooling", "tooling", "{CCCC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
 	ProjectSection(SolutionItems) = preProject
-		props\analytics.props = props\analytics.props
 		props\common.props = props\common.props
-		props\test.props = props\test.props
+		props\nopackage.props = props\nopackage.props
+		props\package.props = props\package.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.UnitTests", "test\Qowaiv.UnitTests\Qowaiv.UnitTests.csproj", "{21E4DDC5-08FE-42EA-9B82-7C54C176161F}"
@@ -33,21 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Data.SqlClient.UnitT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Data.SqlClient", "src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj", "{684CA0A3-9F0E-4F58-A39B-2E93E249496E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TestTools", "tooling\Qowaiv.TestTools\Qowaiv.TestTools.csproj", "{50F34D90-4AD2-4E6F-8A75-EA3656B31480}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.CodeGenerator", "tooling\Qowaiv.CodeGenerator\Qowaiv.CodeGenerator.csproj", "{E76B08DA-74EE-415C-B554-BA395499AB1A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Abstractions", "src\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj", "{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Abstractions.UnitTests", "test\Qowaiv.Validation.Abstractions.UnitTests\Qowaiv.Validation.Abstractions.UnitTests.csproj", "{6C74ECDC-D724-4794-905F-609A27A42F99}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent", "src\Qowaiv.Validation.Fluent\Qowaiv.Validation.Fluent.csproj", "{67DC037A-0782-4D36-9A5F-1116062E77E6}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnotations", "src\Qowaiv.Validation.DataAnnotations\Qowaiv.Validation.DataAnnotations.csproj", "{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnotations.UnitTests", "test\Qowaiv.Validation.DataAnnotations.UnitTests\Qowaiv.Validation.DataAnnotations.UnitTests.csproj", "{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent.UnitTests", "test\Qowaiv.Validation.Fluent.UnitTests\Qowaiv.Validation.Fluent.UnitTests.csproj", "{C2ABE02B-F1D0-4393-B676-13B1323A7879}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model Binding and Serialization", "Model Binding and Serialization", "{225B41F0-0B59-4AB1-96DA-A916E2678AD4}"
 EndProject
@@ -59,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.AspNetCore.Mvc.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "example\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{C9A81969-FF9E-4903-AC82-F6BC3C03563E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft.UnitTests", "example\Qowaiv.Json.Newtonsoft.UnitTests\Qowaiv.Json.Newtonsoft.UnitTests.csproj", "{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.UnitTests", "example\Qowaiv.Json.UnitTests\Qowaiv.Json.UnitTests.csproj", "{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C036985A-F17D-405A-B3FD-37F30FA154FB}"
 EndProject
@@ -80,6 +66,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2
 	ProjectSection(SolutionItems) = preProject
 		build\Qowaiv.snk = build\Qowaiv.snk
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Text.Json.Serialization", "example\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj", "{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TestTools", "src\Qowaiv.TestTools\Qowaiv.TestTools.csproj", "{DDB84002-C9A4-4D0C-9B98-19FF02854D11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,38 +93,10 @@ Global
 		{684CA0A3-9F0E-4F58-A39B-2E93E249496E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{684CA0A3-9F0E-4F58-A39B-2E93E249496E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{684CA0A3-9F0E-4F58-A39B-2E93E249496E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50F34D90-4AD2-4E6F-8A75-EA3656B31480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50F34D90-4AD2-4E6F-8A75-EA3656B31480}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50F34D90-4AD2-4E6F-8A75-EA3656B31480}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50F34D90-4AD2-4E6F-8A75-EA3656B31480}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E76B08DA-74EE-415C-B554-BA395499AB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E76B08DA-74EE-415C-B554-BA395499AB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E76B08DA-74EE-415C-B554-BA395499AB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E76B08DA-74EE-415C-B554-BA395499AB1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C74ECDC-D724-4794-905F-609A27A42F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C74ECDC-D724-4794-905F-609A27A42F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C74ECDC-D724-4794-905F-609A27A42F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C74ECDC-D724-4794-905F-609A27A42F99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Release|Any CPU.Build.0 = Release|Any CPU
 		{69E9CC0E-BF81-41CD-92A7-4CD50004900E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{69E9CC0E-BF81-41CD-92A7-4CD50004900E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69E9CC0E-BF81-41CD-92A7-4CD50004900E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -155,6 +117,14 @@ Global
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A01AB5C-E8EB-43F2-86B8-EA6B4A907DE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,9 +134,6 @@ Global
 		{21E4DDC5-08FE-42EA-9B82-7C54C176161F} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{48FB953F-7321-4D10-BED7-3A2FE3C5EF5B} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{E76B08DA-74EE-415C-B554-BA395499AB1A} = {CCCCEB32-7082-431D-A7DC-3C6E213DA8D4}
-		{6C74ECDC-D724-4794-905F-609A27A42F99} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
-		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
-		{C2ABE02B-F1D0-4393-B676-13B1323A7879} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{69E9CC0E-BF81-41CD-92A7-4CD50004900E} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 		{B9DD949C-C45D-4332-A870-890DC4B80F97} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 		{1FD06220-5716-4863-8FEC-63B3F6EBE598} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
@@ -176,6 +143,7 @@ Global
 		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
 		{932B4123-594C-494B-9B3E-7017D526E80F} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

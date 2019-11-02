@@ -1,10 +1,6 @@
 ﻿using Qowaiv.CodeGenerator.CodeDom.Razor;
 using Qowaiv.CodeGenerator.Generators.Svo;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 
 namespace Qowaiv.CodeGenerator.Generators
 {
@@ -20,6 +16,9 @@ namespace Qowaiv.CodeGenerator.Generators
         /// </param>
         public void Generate(DirectoryInfo dir, SvoStruct input)
         {
+            Guard.NotNull(dir, nameof(dir));
+            Guard.NotNull(input, nameof(input));
+
             var fileStruct = new FileInfo(Path.Combine(dir.FullName, input.ClassName + ".cs"));
             var fileJavaScript = new FileInfo(Path.Combine(dir.FullName, "Qowaiv." + input.ClassName + ".js"));
             var fileTypeConverter = new FileInfo(Path.Combine(dir.FullName, input.ClassName + "TypeConverter.cs"));

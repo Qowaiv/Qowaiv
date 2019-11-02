@@ -4,7 +4,6 @@ using Qowaiv.TestTools;
 using Qowaiv.Web;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -330,13 +329,13 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void SerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -350,13 +349,13 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void XmlSerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -370,13 +369,13 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void DataContractSerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -391,13 +390,13 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = InternetMediaType.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = InternetMediaType.Empty,
@@ -411,13 +410,13 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new InternetMediaTypeSerializeObject()
+            var input = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = InternetMediaType.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternetMediaTypeSerializeObject()
+            var exp = new InternetMediaTypeSerializeObject
             {
                 Id = 17,
                 Obj = InternetMediaType.Empty,
@@ -662,8 +661,8 @@ namespace Qowaiv.UnitTests.Web
             var item2 = InternetMediaType.Parse("text/x-markdown");
             var item3 = InternetMediaType.Parse("video/quicktime");
 
-            var inp = new List<InternetMediaType>() { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
-            var exp = new List<InternetMediaType>() { InternetMediaType.Empty, InternetMediaType.Empty, item0, item1, item2, item3 };
+            var inp = new List<InternetMediaType> { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
+            var exp = new List<InternetMediaType> { InternetMediaType.Empty, InternetMediaType.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -678,8 +677,8 @@ namespace Qowaiv.UnitTests.Web
             var item2 = InternetMediaType.Parse("text/x-markdown");
             var item3 = InternetMediaType.Parse("video/quicktime");
 
-            var inp = new List<InternetMediaType>() { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
-            var exp = new List<InternetMediaType>() { item3, item2, item1, item0, InternetMediaType.Empty, InternetMediaType.Empty };
+            var inp = new List<InternetMediaType> { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
+            var exp = new List<InternetMediaType> { item3, item2, item1, item0, InternetMediaType.Empty, InternetMediaType.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -973,12 +972,6 @@ namespace Qowaiv.UnitTests.Web
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
-        }
-
-        [Test]
-        public void ConvertFromInstanceDescriptor_InternetMediaType_Successful()
-        {
-            TypeConverterAssert.ConvertFromInstanceDescriptor(typeof(InternetMediaType));
         }
 
         [Test]

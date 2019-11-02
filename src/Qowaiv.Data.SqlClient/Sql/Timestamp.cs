@@ -4,7 +4,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -141,7 +140,7 @@ namespace Qowaiv.Sql
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current time stamp for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay { get { return ToString(CultureInfo.InvariantCulture); } }
 
         /// <summary>Returns a <see cref="string"/> that represents the current time stamp.</summary>
@@ -341,8 +340,7 @@ namespace Qowaiv.Sql
         /// </exception>
         public static Timestamp Parse(string s, IFormatProvider formatProvider)
         {
-            Timestamp val;
-            if (TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Timestamp val))
             {
                 return val;
             }
@@ -360,8 +358,7 @@ namespace Qowaiv.Sql
         /// </returns>
         public static Timestamp TryParse(string s)
         {
-            Timestamp val;
-            if (TryParse(s, out val))
+            if (TryParse(s, out Timestamp val))
             {
                 return val;
             }
@@ -464,7 +461,7 @@ namespace Qowaiv.Sql
         }
 
         /// <summary>Returns true if the val represents a valid time stamp, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out Timestamp timestamp);
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
 
         #endregion
     }

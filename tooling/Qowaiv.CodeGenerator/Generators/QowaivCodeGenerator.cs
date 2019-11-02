@@ -11,8 +11,8 @@ namespace Qowaiv.CodeGenerator.Generators
     /// <summary>Generator for resource files.</summary>
     public class QowaivCodeGenerator
     {
-        /// <summary>Constructor.</summary>
-        public QowaivCodeGenerator() { }
+        private const string Resx = ".resx";
+        private const string DateFromat = "yyyy-MM-dd";
 
         /// <summary>Generates the resource files.</summary>
         /// <param name="dir">
@@ -20,6 +20,8 @@ namespace Qowaiv.CodeGenerator.Generators
         /// </param>
         public void Generate(DirectoryInfo dir)
         {
+            Guard.NotNull(dir, nameof(dir));
+
             if (!dir.Exists) { dir.Create(); }
 
             var fin = new DirectoryInfo(Path.Combine(dir.FullName, "Financial"));
@@ -39,7 +41,7 @@ namespace Qowaiv.CodeGenerator.Generators
         }
 
         /// <summary>Generates the gender resource file.</summary>
-        protected void GenerateGender(DirectoryInfo dir)
+        private void GenerateGender(DirectoryInfo dir)
         {
             using (var stream = GetType().Assembly
                 .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.Gender.xls"))
@@ -47,9 +49,9 @@ namespace Qowaiv.CodeGenerator.Generators
                 var workbook = Workbook.Load(stream);
                 var worksheet = workbook.Worksheets[0];
 
-                var key_index = 1;
-                var val_index = 2;
-                var cmt_index = 3;
+                const int key_index = 1;
+                const int val_index = 2;
+                const int cmt_index = 3;
 
                 var resx = new XResourceFile();
 
@@ -94,13 +96,13 @@ namespace Qowaiv.CodeGenerator.Generators
                             resx_lng.Data.Add(new XResourceFileData(key, val, cmd));
                         }
                     }
-                    resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "GenderLabels." + culture + ".resx")));
+                    resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "GenderLabels." + culture + Resx)));
                 }
             }
         }
 
         /// <summary>Generates the country info resource file.</summary>
-        protected void GenerateCountry(DirectoryInfo dir)
+        private void GenerateCountry(DirectoryInfo dir)
         {
             using (var stream = GetType().Assembly
                 .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.Country.xls"))
@@ -114,16 +116,16 @@ namespace Qowaiv.CodeGenerator.Generators
 
                     var all = new List<string>();
 
-                    var key_index = 1;
-                    var num_index = 2;
-                    var is2_index = 3;
-                    var is3_index = 4;
-                    //var win_index = 5
-                    var str_index = 6;
-                    var end_index = 7;
-                    var tel_index = 8;
-                    //var nat_index = 9
-                    var def_index = 10;
+                    const int key_index = 1;
+                    const int num_index = 2;
+                    const int is2_index = 3;
+                    const int is3_index = 4;
+                    // const int win_index = 5
+                    const int str_index = 6;
+                    const int end_index = 7;
+                    const int tel_index = 8;
+                    // const int  nat_index = 9
+                    const int def_index = 10;
 
                     var resx = new XResourceFile();
 
@@ -168,11 +170,11 @@ namespace Qowaiv.CodeGenerator.Generators
                         resx.Data.Add(new XResourceFileData(key + "ISO", num));
                         resx.Data.Add(new XResourceFileData(key + "ISO2", iso2));
                         resx.Data.Add(new XResourceFileData(key + "ISO3", iso3));
-                        resx.Data.Add(new XResourceFileData(key + "StartDate", start.ToString("yyyy-MM-dd")));
+                        resx.Data.Add(new XResourceFileData(key + "StartDate", start.ToString(DateFromat)));
 
                         if (end.HasValue)
                         {
-                            resx.Data.Add(new XResourceFileData(key + "EndDate", end.Value.ToString("yyyy-MM-dd")));
+                            resx.Data.Add(new XResourceFileData(key + "EndDate", end.Value.ToString(DateFromat)));
                         }
                         if (!string.IsNullOrEmpty(tel))
                         {
@@ -207,7 +209,7 @@ namespace Qowaiv.CodeGenerator.Generators
                                 resx_lng.Data.Add(new XResourceFileData(key, val, cmd));
                             }
                         }
-                        resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "CountryLabels." + culture + ".resx")));
+                        resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "CountryLabels." + culture + Resx)));
                     }
                     writer.WriteLine("    }\r\n}");
                 }
@@ -215,7 +217,7 @@ namespace Qowaiv.CodeGenerator.Generators
         }
 
         /// <summary>Generates the country info resource file.</summary>
-        protected void GenerateCountryToCurrency(DirectoryInfo dir)
+        private void GenerateCountryToCurrency(DirectoryInfo dir)
         {
             using (var stream = GetType().Assembly
                 .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.CountryToCurrency.xls"))
@@ -234,9 +236,9 @@ namespace Qowaiv.CodeGenerator.Generators
                     var workbook = Workbook.Load(stream);
                     var worksheet = workbook.Worksheets[0];
 
-                    var country_index = 1;
-                    var currency_index = 2;
-                    var date_index = 3;
+                    const int country_index = 1;
+                    const int currency_index = 2;
+                    const int date_index = 3;
 
                     int i = 1;
 
@@ -266,7 +268,7 @@ namespace Qowaiv.CodeGenerator.Generators
         }
 
         /// <summary>Generates the country info resource file.</summary>
-        protected void GenerateCurrency(DirectoryInfo dir)
+        private void GenerateCurrency(DirectoryInfo dir)
         {
             using (var stream = GetType().Assembly
                 .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.Currency.xls"))
@@ -280,14 +282,14 @@ namespace Qowaiv.CodeGenerator.Generators
 
                     var all = new List<string>();
 
-                    var key_index = 1;
-                    var iso_index = 2;
-                    var num_index = 3;
-                    var dig_index = 4;
-                    var sym_index = 5;
-                    var str_index = 6;
-                    var end_index = 7;
-                    var def_index = 8;
+                    const int key_index = 1;
+                    const int iso_index = 2;
+                    const int num_index = 3;
+                    const int dig_index = 4;
+                    const int sym_index = 5;
+                    const int str_index = 6;
+                    const int end_index = 7;
+                    const int def_index = 8;
 
                     var resx = new XResourceFile();
 
@@ -333,7 +335,7 @@ namespace Qowaiv.CodeGenerator.Generators
                         resx.Data.Add(new XResourceFileData(key + "ISO", iso));
                         resx.Data.Add(new XResourceFileData(key + "Digits", dig.ToString()));
 
-                        resx.Data.Add(new XResourceFileData(key + "StartDate", start.ToString("yyyy-MM-dd")));
+                        resx.Data.Add(new XResourceFileData(key + "StartDate", start.ToString(DateFromat)));
 
                         if (!string.IsNullOrEmpty(sym))
                         {
@@ -342,7 +344,7 @@ namespace Qowaiv.CodeGenerator.Generators
 
                         if (end.HasValue)
                         {
-                            resx.Data.Add(new XResourceFileData(key + "EndDate", end.Value.ToString("yyyy-MM-dd")));
+                            resx.Data.Add(new XResourceFileData(key + "EndDate", end.Value.ToString(DateFromat)));
                         }
                     }
 
@@ -373,7 +375,7 @@ namespace Qowaiv.CodeGenerator.Generators
                                 resx_lng.Data.Add(new XResourceFileData(key, val, cmd));
                             }
                         }
-                        resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "CurrencyLabels." + culture + ".resx")));
+                        resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "CurrencyLabels." + culture + Resx)));
                     }
                     writer.WriteLine("    }\r\n}");
                 }
@@ -381,7 +383,7 @@ namespace Qowaiv.CodeGenerator.Generators
         }
 
         /// <summary>Generates the IBAN pattern file.</summary>
-        protected void GenerateIban(DirectoryInfo dir)
+        private void GenerateIban(DirectoryInfo dir)
         {
             using (var stream = GetType().Assembly
                 .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.IBAN.xls"))
@@ -406,13 +408,13 @@ namespace Qowaiv.CodeGenerator.Generators
                     var workbook = Workbook.Load(stream);
                     var worksheet = workbook.Worksheets[0];
 
-                    var key_index = 0;
-                    var ctr_index = 1;
-                    var len_index = 2;
-                    var bbn_index = 3;
-                    var fld_index = 4;
-                    var cmd_index = 5;
-                    var chk_index = 6;
+                    const int key_index = 0;
+                    const int ctr_index = 1;
+                    const int len_index = 2;
+                    const int bbn_index = 3;
+                    const int fld_index = 4;
+                    const int cmd_index = 5;
+                    const int chk_index = 6;
                     int i = 1;
 
                     while (true)
@@ -426,7 +428,7 @@ namespace Qowaiv.CodeGenerator.Generators
                         var len = (Int32)(Double)row.GetCell(len_index).Value;
                         var bban = row.GetCell(bbn_index).StringValue.Trim();
                         var fields = row.GetCell(fld_index).StringValue.Trim();
-                        var comment = String.Join(", ", row.GetCell(cmd_index).StringValue.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries));
+                        var comment = string.Join(", ", row.GetCell(cmd_index).StringValue.Split(new [] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries));
                         var checksum = row.GetCell(chk_index).StringValue.Trim();
 
                         if (key != fields.Substring(0, 2)) { throw new NotSupportedException("Invalid key specified."); }
@@ -455,7 +457,7 @@ namespace Qowaiv.CodeGenerator.Generators
         {
             var pattern = new StringBuilder().Append('^').Append(country);
 
-            var blocks = bban.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var blocks = bban.Split(new [] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (!string.IsNullOrEmpty(checksum))
             {
@@ -512,7 +514,7 @@ namespace Qowaiv.CodeGenerator.Generators
         }
 
         /// <summary>Generates the PostalCode Settings file.</summary>
-        protected void GeneratePostalCode(DirectoryInfo dir)
+        private void GeneratePostalCode(DirectoryInfo dir)
         {
             using (var stream = GetType().Assembly
                 .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.PostalCode.xls"))
@@ -538,17 +540,17 @@ namespace Qowaiv.CodeGenerator.Generators
                         var workbook = Workbook.Load(stream);
                         var worksheet = workbook.Worksheets[0];
 
-                        var key_index = 1;
-                        var name_index = 2;
-                        var exists_index = 3;
-                        var single_index = 4;
-                        var prefix_index = 5;
-                        var pattern_index = 6;
-                        var search_index = 7;
-                        var replace_index = 8;
-                        var lenghts_index = 9;
-                        var alpha_index = 10;
-                        var comment_index = 11;
+                        const int key_index = 1;
+                        const int name_index = 2;
+                        const int exists_index = 3;
+                        const int single_index = 4;
+                        const int prefix_index = 5;
+                        const int pattern_index = 6;
+                        const int search_index = 7;
+                        const int replace_index = 8;
+                        const int lenghts_index = 9;
+                        const int alpha_index = 10;
+                        const int comment_index = 11;
                         int i = 1;
 
                         while (true)
@@ -568,7 +570,7 @@ namespace Qowaiv.CodeGenerator.Generators
                             var search = row.GetCell(search_index).StringValue.Trim();
                             var replace = row.GetCell(replace_index).StringValue.Trim();
 
-                            var lenghts = String.Join(", ", row.GetCell(lenghts_index).StringValue.Trim().Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries));
+                            var lenghts = string.Join(", ", row.GetCell(lenghts_index).StringValue.Trim().Split(new [] { ';' }, StringSplitOptions.RemoveEmptyEntries));
                             var alpha = (bool)row.GetCell(alpha_index).Value;
 
                             var comment = row.GetCell(comment_index).StringValue.Trim();
@@ -634,7 +636,7 @@ namespace Qowaiv.CodeGenerator.Generators
         }
 
         /// <summary>Generates the gender resource file.</summary>
-        protected void GenerateUnknown(DirectoryInfo dir)
+        private void GenerateUnknown(DirectoryInfo dir)
         {
             using (var stream = GetType().Assembly
                 .GetManifestResourceStream("Qowaiv.CodeGenerator.Resources.Unknown.xls"))
@@ -642,9 +644,9 @@ namespace Qowaiv.CodeGenerator.Generators
                 var workbook = Workbook.Load(stream);
                 var worksheet = workbook.Worksheets[0];
 
-                var key_index = 0;
-                var val_index = 1;
-                var cmt_index = 2;
+                const int key_index = 0;
+                const int val_index = 1;
+                const int cmt_index = 2;
 
                 var resx = new XResourceFile();
 
@@ -689,7 +691,7 @@ namespace Qowaiv.CodeGenerator.Generators
                             resx_lng.Data.Add(new XResourceFileData(key, val, cmd));
                         }
                     }
-                    resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "UnknownLabels." + culture + ".resx")));
+                    resx_lng.Save(new FileInfo(Path.Combine(dir.FullName, "UnknownLabels." + culture + Resx)));
                 }
             }
         }
@@ -704,9 +706,9 @@ namespace Qowaiv.CodeGenerator.Generators
 
                 var resx = new XResourceFile();
 
-                var key_index = 0;
-                var val_index = 1;
-                var cmt_index = 2;
+                const int key_index = 0;
+                const int val_index = 1;
+                const int cmt_index = 2;
                 int i = 1;
 
                 while (true)

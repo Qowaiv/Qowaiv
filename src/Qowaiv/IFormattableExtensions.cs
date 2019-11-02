@@ -1,6 +1,5 @@
 ﻿using Qowaiv.Formatting;
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Qowaiv
 {
@@ -40,8 +39,6 @@ namespace Qowaiv
         /// <returns>
         /// A formatted string representing the object.
         /// </returns>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "Qowaiv.Formatting.FormattingArgumentsCollection.#ctor",
-            Justification = "Right culture selected by the default constructor.")]
         public static string ToString(this IFormattable formattable, FormattingArgumentsCollection argumentsCollection)
         {
             if (formattable == null)

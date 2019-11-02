@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -62,8 +61,6 @@ namespace Qowaiv.Financial
         public string Name => IsUnknown() ? "?" : m_Value ?? string.Empty;
 
         /// <summary>Gets the display name.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Property DisplayName is a shortcut for GetDisplayName(CultureInfo.CurrentCulture).")]
         public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the full name of the currency in English.</summary>
@@ -624,8 +621,6 @@ namespace Qowaiv.Financial
         /// We'd like to call this All, but because of CLS-compliance, we can not,
         /// because ALL exists.
         /// </remarks>
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
-            Justification = "ReadOnlyCollection<T> is immutable.")]
         public static readonly ReadOnlyCollection<Currency> AllCurrencies = new ReadOnlyCollection<Currency>(
             ResourceManager
                 .GetString("All")
@@ -683,12 +678,6 @@ namespace Qowaiv.Financial
         #region Lookup
 
         /// <summary>Initializes the country lookup.</summary>
-        [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
-            Justification = "Those constants are the hole point of this class.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
-            Justification = "Due to generated constants.")]
-        [SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline",
-            Justification = "Complex initialization, this approach is better understandable.")]
         static Currency()
         {
             foreach (var country in AllCurrencies)

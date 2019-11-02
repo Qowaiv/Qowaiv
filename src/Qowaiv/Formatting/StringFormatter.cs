@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Qowaiv.Formatting
@@ -30,8 +29,6 @@ namespace Qowaiv.Formatting
         /// <remarks>
         /// Uses the escape character '\'.
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "There is no better way in this case.")]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
         {
             return Apply(obj, format, formatProvider, tokens, '\\');
@@ -59,8 +56,6 @@ namespace Qowaiv.Formatting
         /// <returns>
         /// An formatted string.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "There is no better way in this case.")]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
         {
             Guard.NotNull((object)obj, nameof(obj));

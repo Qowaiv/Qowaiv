@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 
@@ -318,9 +317,6 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentException">
         /// An element with the same type already exists in the collection.
         /// </exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
-            MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
-            Justification = "Right culture selected by the default constructor.")]
         public void Add(Type type, string format) => Add(type, new FormattingArguments(format));
 
         /// <summary>Adds a format provider for the specified type.</summary>
@@ -398,9 +394,6 @@ namespace Qowaiv.Formatting
         /// <exception cref="NotSupportedException">
         /// The type represents a type not implementing System.IFormattable.
         /// </exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
-            MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
-            Justification = "Right culture selected by the default constructor.")]
         public void Set(Type type, string format) => Set(type, new FormattingArguments(format));
 
         /// <summary>Sets a format provider for the specified type.</summary>
@@ -511,8 +504,6 @@ namespace Qowaiv.Formatting
         /// this is used by IEnumerable.GetObjectData() so that it can be
         /// changed by derived classes.
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "Required by the interface.")]
         protected virtual IEnumerator<KeyValuePair<Type, FormattingArguments>> GetEnumerator() => dict.GetEnumerator();
 
         /// <summary>Clears all formatting arguments in the collection.</summary>

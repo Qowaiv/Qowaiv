@@ -14,7 +14,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -234,10 +233,7 @@ namespace Qowaiv.Financial
             return FormattedPattern.Replace(m_Value, "$0 ");
         }
         /// <summary>Formats the IBAN with spaces as lowercase.</summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "This is not about normalization but formatting.")]
         private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
-
 
         private static readonly Regex FormattedPattern = new Regex(@"\w{4}(?!$)", RegexOptions.Compiled);
 

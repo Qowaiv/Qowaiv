@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -84,13 +83,9 @@ namespace Qowaiv
         private byte m_Value;
 
         /// <summary>Gets the full name of the month.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Property FullName is a shortcut for GetFullName(CultureInfo.CurrentCulture).")]
         public string FullName => GetFullName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the short name of the month.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Property ShortName is a shortcut for GetShortName(CultureInfo.CurrentCulture).")]
         public string ShortName => GetShortName(CultureInfo.CurrentCulture);
 
         #endregion

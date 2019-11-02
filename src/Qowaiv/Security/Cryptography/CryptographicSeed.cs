@@ -13,7 +13,6 @@ using Qowaiv.Text;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -414,7 +413,7 @@ namespace Qowaiv.Security.Cryptography
         /// <summary>Returns true if the val represents a valid cryptographic seed, otherwise false.</summary>
         public static bool IsValid(string val)
         {
-            return !string.IsNullOrEmpty(val) && Base64.TryGetBytes(val, out byte[] bytes);
+            return !string.IsNullOrEmpty(val) && Base64.TryGetBytes(val, out _);
         }
 
         #endregion

@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -55,18 +54,16 @@ namespace Qowaiv.Globalization
         /// For unknown a '?' is returned.
         /// For existing countries this returns the ISO 3166-1 code.
         /// </remarks>
-        public string Name { get { return IsUnknown() ? "?" : m_Value ?? string.Empty; } }
+        public string Name => IsUnknown() ? "?" : m_Value ?? string.Empty;
 
         /// <summary>Gets the display name.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "For alignment with System.Globalization.RegionInfo.")]
-        public string DisplayName { get { return GetDisplayName(CultureInfo.CurrentCulture); } }
+        public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the full name of the country/region in English.</summary>
         /// <returns>
         /// The full name of the country in English.
         /// </returns>
-        public string EnglishName { get { return GetDisplayName(CultureInfo.InvariantCulture); } }
+        public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
         ///<summary>Gets the two-letter code defined in ISO 3166-1 for the country.</summary>
         /// <returns>
@@ -651,10 +648,6 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>Gets a collection of all country info's.</summary>
-        [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
-            Justification = "Those constants are the hole point of this class.")]
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
-            Justification = "ReadOnlyCollection<T> is immutable.")]
         public static readonly ReadOnlyCollection<Country> All = new ReadOnlyCollection<Country>(
             ResourceManager
                 .GetString("All")
@@ -710,12 +703,6 @@ namespace Qowaiv.Globalization
         #region Lookup
 
         /// <summary>Initializes the country lookup.</summary>
-        [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
-            Justification = "Due to generated constants.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
-            Justification = "Due to generated constants.")]
-        [SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline",
-            Justification = "Complex initialization, this approach is better understandable.")]
         static Country()
         {
             foreach (var country in All)

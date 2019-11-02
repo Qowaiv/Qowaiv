@@ -8,7 +8,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -20,7 +19,6 @@ namespace Qowaiv
 {
     /// <summary>Represents a year.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes", Justification = "The < and > operators have no meaning for a year.")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
     [OpenApiDataType(description: "Year(-only) notation.", type: "integer", format: "year", nullable: true)]
     [TypeConverter(typeof(YearTypeConverter))]
@@ -366,8 +364,7 @@ namespace Qowaiv
         /// </exception>
         public static Year Parse(string s, IFormatProvider formatProvider)
         {
-            Year val;
-            if (Year.TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Year val))
             {
                 return val;
             }
@@ -385,12 +382,11 @@ namespace Qowaiv
         /// </returns>
         public static Year TryParse(string s)
         {
-            Year val;
-            if (Year.TryParse(s, out val))
+            if (TryParse(s, out Year val))
             {
                 return val;
             }
-            return Year.Empty;
+            return Empty;
         }
 
         /// <summary>Converts the string to a year.
@@ -455,14 +451,13 @@ namespace Qowaiv
         /// <exception cref="FormatException" >
         /// val is not a valid year.
         /// </exception >
-        public static Year Create(Int32? val)
+        public static Year Create(int? val)
         {
-            Year result;
-            if (Year.TryCreate(val, out result))
+            if (TryCreate(val, out Year result))
             {
                 return result;
             }
-            throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionYear);
+            throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionYear);
         }
 
         /// <summary>Creates a year from a Int32.
@@ -474,14 +469,13 @@ namespace Qowaiv
         /// <returns >
         /// A year if the creation was successfully, otherwise Year.Empty.
         /// </returns >
-        public static Year TryCreate(Int32? val)
+        public static Year TryCreate(int? val)
         {
-            Year result;
-            if (TryCreate(val, out result))
+            if (TryCreate(val, out Year result))
             {
                 return result;
             }
-            return Year.Empty;
+            return Empty;
         }
 
         /// <summary>Creates a year from a Int32.
@@ -523,8 +517,6 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid year, otherwise false.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "formatProvider",
-            Justification = "Satisfies the static Qowaiv SVO contract.")]
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
             return Pattern.IsMatch(val ?? string.Empty);

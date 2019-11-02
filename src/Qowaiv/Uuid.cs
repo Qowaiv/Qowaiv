@@ -12,7 +12,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
@@ -438,8 +437,7 @@ namespace Qowaiv
         /// <summary>Returns true if the value represents a valid UUID, otherwise false.</summary>
         public static bool IsValid(string val)
         {
-            return Pattern.IsMatch(val ?? string.Empty)
-                || Guid.TryParse(val, out Guid id);
+            return Pattern.IsMatch(val ?? string.Empty) || Guid.TryParse(val, out _);
         }
 
         #endregion

@@ -8,7 +8,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -79,7 +78,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Returns true if the house number is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default(Int32);
+        public bool IsEmpty() => m_Value == default;
 
         /// <summary>Returns true if the house number is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
@@ -144,10 +143,7 @@ namespace Qowaiv
         #region (JSON) (De)serialization
 
         /// <summary>Generates a house number from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default(Int32);
-        }
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates a house number from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -185,7 +181,7 @@ namespace Qowaiv
         /// <summary>Converts a house number into its JSON object representation.</summary>
         object IJsonSerializable.ToJson()
         {
-            return m_Value == default(Int32) ? null : ToString(CultureInfo.InvariantCulture);
+            return m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion
@@ -193,7 +189,7 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current house number for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -456,8 +452,7 @@ namespace Qowaiv
         /// </exception >
         public static HouseNumber Create(Int32? val)
         {
-            HouseNumber result;
-            if (TryCreate(val, out result))
+            if (TryCreate(val, out HouseNumber result))
             {
                 return result;
             }
@@ -518,8 +513,6 @@ namespace Qowaiv
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid house number, otherwise false.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "formatProvider",
-            Justification = "Satisfies the static Qowaiv SVO contract.")]
         public static bool IsValid(string val, IFormatProvider formatProvider) => Pattern.IsMatch(val ?? string.Empty);
 
         /// <summary>Returns true if the val represents a valid house number, otherwise false.</summary>

@@ -386,12 +386,14 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Types_CollectionWithTwoItems_Int32AndDate()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "Int32Format");
-            collection.Add(typeof(Date), "Date");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "Int32Format" },
+                { typeof(Date), "Date" }
+            };
 
             var act = collection.Types;
-            var exp = new Type[] { typeof(Int32), typeof(Date) };
+            var exp = new [] { typeof(int), typeof(Date) };
 
             CollectionAssert.AreEqual(exp, act);
         }

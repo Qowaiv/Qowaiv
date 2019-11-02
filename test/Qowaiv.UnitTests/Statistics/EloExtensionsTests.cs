@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Statistics;
-using System.Linq;
 
 namespace Qowaiv.UnitTests.Statistics
 {

@@ -76,11 +76,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Gender val;
-
             string str = null;
-
-            Assert.IsTrue(Gender.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -88,11 +85,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Gender val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Gender.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -102,11 +96,8 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("it-IT"))
             {
-                Gender val;
-
                 string str = "Maschio";
-
-                Assert.IsTrue(Gender.TryParse(str, out val), "Valid");
+                Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
                 Assert.AreEqual(str, val.ToString(), "Value");
             }
         }
@@ -115,9 +106,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_M_IsValid()
         {
-            Gender val;
             string str = "M";
-            Assert.IsTrue(Gender.TryParse(str, null, out val), "Valid");
+            Assert.IsTrue(Gender.TryParse(str, null, out Gender val), "Valid");
             Assert.AreEqual(TestStruct, val, "Value");
         }
 
@@ -125,11 +115,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Gender val;
-
             string str = "string";
-
-            Assert.IsFalse(Gender.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Gender.TryParse(str, out Gender val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -192,18 +179,14 @@ namespace Qowaiv.UnitTests
         public void TryCreate_Null_IsEmpty()
         {
             Gender exp = Gender.Empty;
-            Gender act;
-
-            Assert.IsTrue(Gender.TryCreate(null, out act));
+            Assert.IsTrue(Gender.TryCreate(null, out Gender act));
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void TryCreate_Int32MinValue_IsEmpty()
         {
             Gender exp = Gender.Empty;
-            Gender act;
-
-            Assert.IsFalse(Gender.TryCreate(Int32.MinValue, out act));
+            Assert.IsFalse(Gender.TryCreate(int.MinValue, out Gender act));
             Assert.AreEqual(exp, act);
         }
 
@@ -322,13 +305,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_GenderSerializeObject_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
@@ -342,13 +325,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_GenderSerializeObject_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
@@ -362,13 +345,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_GenderSerializeObject_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = GenderTest.TestStruct,
@@ -383,13 +366,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,
@@ -403,13 +386,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new GenderSerializeObject()
+            var input = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new GenderSerializeObject()
+            var exp = new GenderSerializeObject
             {
                 Id = 17,
                 Obj = Gender.Empty,
@@ -807,8 +790,8 @@ namespace Qowaiv.UnitTests
             var item2 = Gender.Female;
             var item3 = Gender.NotApplicable;
 
-            var inp = new List<Gender>() { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
-            var exp = new List<Gender>() { Gender.Empty, Gender.Empty, item0, item1, item2, item3 };
+            var inp = new List<Gender> { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
+            var exp = new List<Gender> { Gender.Empty, Gender.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -823,8 +806,8 @@ namespace Qowaiv.UnitTests
             var item2 = Gender.Female;
             var item3 = Gender.NotApplicable;
 
-            var inp = new List<Gender>() { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
-            var exp = new List<Gender>() { item3, item2, item1, item0, Gender.Empty, Gender.Empty };
+            var inp = new List<Gender> { Gender.Empty, item3, item2, item0, item1, Gender.Empty };
+            var exp = new List<Gender> { item3, item2, item1, item0, Gender.Empty, Gender.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

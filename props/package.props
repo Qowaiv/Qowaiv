@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="common.props" />
+
+  <PropertyGroup>
+    <PackageIconUrl>https://raw.githubusercontent.com/Qowaiv/Qowaiv/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
+    <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+  </ItemGroup>
+
+</Project>

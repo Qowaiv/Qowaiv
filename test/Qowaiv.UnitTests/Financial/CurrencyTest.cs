@@ -135,11 +135,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Currency val;
-
             string str = null;
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -147,11 +144,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Currency val;
-
             string str = string.Empty;
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -159,11 +153,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_Questionmark_IsValid()
         {
-            Currency val;
-
             string str = "?";
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -171,11 +162,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_UnknownCurrencySymbol_IsValid()
         {
-            Currency val;
-
             string str = "¤";
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.IsTrue(val.IsUnknown(), "Value");
         }
 
@@ -183,11 +171,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            Currency val;
-
             string str = "USD";
-
-            Assert.IsTrue(Currency.TryParse(str, out val), "Valid");
+            Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -195,11 +180,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Currency val;
-
             string str = "string";
-
-            Assert.IsFalse(Currency.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Currency.TryParse(str, out Currency val), "Valid");
             Assert.AreEqual(string.Empty, val.ToString(), "Value");
         }
 
@@ -343,13 +325,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_CurrencySerializeObject_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
@@ -363,13 +345,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_CurrencySerializeObject_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
@@ -383,13 +365,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DataContractSerializeDeserialize_CurrencySerializeObject_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = CurrencyTest.TestStruct,
@@ -404,13 +386,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,
@@ -424,13 +406,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new CurrencySerializeObject()
+            var input = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new CurrencySerializeObject()
+            var exp = new CurrencySerializeObject
             {
                 Id = 17,
                 Obj = Currency.Empty,
@@ -780,8 +762,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = Currency.CAD;
             var item3 = Currency.EUR;
 
-            var inp = new List<Currency>() { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
-            var exp = new List<Currency>() { Currency.Empty, Currency.Empty, item0, item1, item2, item3 };
+            var inp = new List<Currency> { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
+            var exp = new List<Currency> { Currency.Empty, Currency.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -796,8 +778,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = Currency.CAD;
             var item3 = Currency.EUR;
 
-            var inp = new List<Currency>() { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
-            var exp = new List<Currency>() { item3, item2, item1, item0, Currency.Empty, Currency.Empty };
+            var inp = new List<Currency> { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
+            var exp = new List<Currency> { item3, item2, item1, item0, Currency.Empty, Currency.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

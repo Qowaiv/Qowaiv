@@ -4,7 +4,6 @@ using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -208,13 +207,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
         {
-            var input = new InternationalBankAccountNumberSerializeObject()
+            var input = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumberTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternationalBankAccountNumberSerializeObject()
+            var exp = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumberTest.TestStruct,
@@ -228,13 +227,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
         {
-            var input = new InternationalBankAccountNumberSerializeObject()
+            var input = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumberTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternationalBankAccountNumberSerializeObject()
+            var exp = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumberTest.TestStruct,
@@ -248,13 +247,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DataContractSerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
         {
-            var input = new InternationalBankAccountNumberSerializeObject()
+            var input = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumberTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternationalBankAccountNumberSerializeObject()
+            var exp = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumberTest.TestStruct,
@@ -269,13 +268,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new InternationalBankAccountNumberSerializeObject()
+            var input = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternationalBankAccountNumberSerializeObject()
+            var exp = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumber.Empty,
@@ -289,13 +288,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new InternationalBankAccountNumberSerializeObject()
+            var input = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new InternationalBankAccountNumberSerializeObject()
+            var exp = new InternationalBankAccountNumberSerializeObject
             {
                 Id = 17,
                 Obj = InternationalBankAccountNumber.Empty,
@@ -590,8 +589,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = InternationalBankAccountNumber.Parse("CY17002001280000001200527600");
             var item3 = InternationalBankAccountNumber.Parse("DK5000400440116243");
 
-            var inp = new List<InternationalBankAccountNumber>() { InternationalBankAccountNumber.Empty, item3, item2, item0, item1, InternationalBankAccountNumber.Empty };
-            var exp = new List<InternationalBankAccountNumber>() { InternationalBankAccountNumber.Empty, InternationalBankAccountNumber.Empty, item0, item1, item2, item3 };
+            var inp = new List<InternationalBankAccountNumber> { InternationalBankAccountNumber.Empty, item3, item2, item0, item1, InternationalBankAccountNumber.Empty };
+            var exp = new List<InternationalBankAccountNumber> { InternationalBankAccountNumber.Empty, InternationalBankAccountNumber.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -606,8 +605,8 @@ namespace Qowaiv.UnitTests.Financial
             var item2 = InternationalBankAccountNumber.Parse("CY17002001280000001200527600");
             var item3 = InternationalBankAccountNumber.Parse("DK5000400440116243");
 
-            var inp = new List<InternationalBankAccountNumber>() { InternationalBankAccountNumber.Empty, item3, item2, item0, item1, InternationalBankAccountNumber.Empty };
-            var exp = new List<InternationalBankAccountNumber>() { item3, item2, item1, item0, InternationalBankAccountNumber.Empty, InternationalBankAccountNumber.Empty };
+            var inp = new List<InternationalBankAccountNumber> { InternationalBankAccountNumber.Empty, item3, item2, item0, item1, InternationalBankAccountNumber.Empty };
+            var exp = new List<InternationalBankAccountNumber> { item3, item2, item1, item0, InternationalBankAccountNumber.Empty, InternationalBankAccountNumber.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -937,7 +936,7 @@ namespace Qowaiv.UnitTests.Financial
         [TestCaseSource(nameof(LocalizedPatterns))]
         public void Pattern_StartsWith(Country country, Regex pattern)
         {
-            StringAssert.StartsWith("^" + country.IsoAlpha2Code, pattern.ToString());
+            StringAssert.StartsWith("^" + country.IsoAlpha2Code, pattern?.ToString());
         }
     }
 

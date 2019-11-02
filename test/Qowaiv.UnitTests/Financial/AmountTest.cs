@@ -19,7 +19,7 @@ namespace Qowaiv.Financial.UnitTests
 
         public static NumberFormatInfo GetCustomNumberFormatInfo()
         {
-            var info = new NumberFormatInfo()
+            var info = new NumberFormatInfo
             {
                 CurrencyGroupSeparator = "#",
                 CurrencyDecimalSeparator = "*",
@@ -44,22 +44,16 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void TyrParse_Null_IsInvalid()
         {
-            Amount val;
-
             string str = null;
-
-            Assert.IsFalse(Amount.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Amount.TryParse(str, out _));
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
-            Amount val;
-
             string str = string.Empty;
-
-            Assert.IsFalse(Amount.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Amount.TryParse(str, out _));
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
@@ -68,11 +62,8 @@ namespace Qowaiv.Financial.UnitTests
         {
             using (CultureInfoScope.NewInvariant())
             {
-                Amount val;
-
                 string str = "14.1804";
-
-                Assert.IsTrue(Amount.TryParse(str, out val), "Valid");
+                Assert.IsTrue(Amount.TryParse(str, out Amount val), "Valid");
                 Assert.AreEqual(str, val.ToString(), "Value");
             }
         }
@@ -208,13 +199,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void SerializeDeserialize_AmountSerializeObject_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -228,13 +219,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void XmlSerializeDeserialize_AmountSerializeObject_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -248,13 +239,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_AmountSerializeObject_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -269,16 +260,16 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
-                Obj = default(Amount),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
-                Obj = default(Amount),
+                Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -289,13 +280,13 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new AmountSerializeObject()
+            var input = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = Amount.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new AmountSerializeObject()
+            var exp = new AmountSerializeObject
             {
                 Id = 17,
                 Obj = Amount.Zero,
@@ -597,8 +588,8 @@ namespace Qowaiv.Financial.UnitTests
             Amount item2 = 2.27;
             Amount item3 = 1300;
 
-            var inp = new List<Amount>() { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
-            var exp = new List<Amount>() { Amount.Zero, Amount.Zero, item0, item1, item2, item3 };
+            var inp = new List<Amount> { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
+            var exp = new List<Amount> { Amount.Zero, Amount.Zero, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -613,8 +604,8 @@ namespace Qowaiv.Financial.UnitTests
             Amount item2 = 2.27;
             Amount item3 = 1300;
 
-            var inp = new List<Amount>() { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
-            var exp = new List<Amount>() { item3, item2, item1, item0, Amount.Zero, Amount.Zero };
+            var inp = new List<Amount> { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
+            var exp = new List<Amount> { item3, item2, item1, item0, Amount.Zero, Amount.Zero };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

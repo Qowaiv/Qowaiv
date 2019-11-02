@@ -37,7 +37,7 @@ namespace Qowaiv.UnitTests
             var act = Clock.UtcNow();
             var exp = Clock.UtcNow();
 
-            Assert.That(act, Is.EqualTo(exp).Within(TimeSpan.FromTicks(100)));
+            Assert.That(act, Is.EqualTo(exp).Within(TimeSpan.FromTicks(1000)));
         }
         /// <remarks>
         /// Just to hit the code path. We can't guarantee that stuff is cleaned up in time.

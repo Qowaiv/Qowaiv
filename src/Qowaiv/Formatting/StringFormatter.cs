@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Qowaiv.Formatting
@@ -30,8 +29,6 @@ namespace Qowaiv.Formatting
         /// <remarks>
         /// Uses the escape character '\'.
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "There is no better way in this case.")]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
         {
             return Apply(obj, format, formatProvider, tokens, '\\');
@@ -59,8 +56,6 @@ namespace Qowaiv.Formatting
         /// <returns>
         /// An formatted string.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "There is no better way in this case.")]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
         {
             Guard.NotNull((object)obj, nameof(obj));
@@ -70,7 +65,6 @@ namespace Qowaiv.Formatting
 
             var sb = new StringBuilder();
             var isEscape = false;
-            Func<T, IFormatProvider, string> action;
 
             foreach (var ch in format)
             {
@@ -91,7 +85,7 @@ namespace Qowaiv.Formatting
                     isEscape = true;
                 }
                 // If a token match, apply.
-                else if (tokens.TryGetValue(ch, out action))
+                else if (tokens.TryGetValue(ch, out Func<T, IFormatProvider, string> action))
                 {
                     sb.Append(action.Invoke(obj, formatProvider));
                 }
@@ -154,8 +148,6 @@ namespace Qowaiv.Formatting
         /// <param name="ignore">
         /// Diacritics at the ignore, will not be changed.
         /// </param>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods",
-            Justification = "If the string is null, the for each loop is never reached.")]
         public static string ToNonDiacritic(string str, string ignore)
         {
             if (string.IsNullOrEmpty(str)) { return str; }
@@ -163,7 +155,7 @@ namespace Qowaiv.Formatting
 
             foreach (var ch in str)
             {
-                if (ignore.IndexOf(ch) > -1)
+                if (ignore?.IndexOf(ch) > -1)
                 {
                     sb.Append(ch);
                 }
@@ -176,8 +168,7 @@ namespace Qowaiv.Formatting
                     }
                     else
                     {
-                        string chs;
-                        if (DiacriticLookup.TryGetValue(ch, out chs))
+                        if (DiacriticLookup.TryGetValue(ch, out string chs))
                         {
                             sb.Append(chs);
                         }
@@ -194,7 +185,7 @@ namespace Qowaiv.Formatting
         private const string DiacriticSearch = /*  outlining */ "ÀÁÂÃÄÅĀĂĄǍǺàáâãäåāăąǎǻÇĆĈĊČƠçćĉċčơÐĎďđÈÉÊËĒĔĖĘĚèéêëēĕėęěÌÍÎÏĨĪĬĮİǏìíîïıĩīĭįǐĴĵĜĞĠĢĝğġģĤĦĥħĶķĸĹĻĽĿŁĺļľŀłÑŃŅŇŊñńņňŉŋÒÓÔÕÖØŌŎŐǑǾðòóôõöøōŏőǒǿŔŖŘŕŗřŚŜŞŠśŝşšŢŤŦţťŧÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛùúûüũūŭůűųưǔǖǘǚǜŴŵÝŶŸýÿŷŹŻŽźżž";
         private const string DiacriticReplace = /* outlining */ "AAAAAAAAAAAaaaaaaaaaaaCCCCCCccccccDDddEEEEEEEEEeeeeeeeeeIIIIIIIIIIiiiiiiiiiiJjGGGGggggHHhhKkkLLLLLlllllNNNNNnnnnnnOOOOOOOOOOOooooooooooooRRRrrrSSSSssssTTTtttUUUUUUUUUUUUUUUUuuuuuuuuuuuuuuuuWwYYYyyyZZZzzz";
 
-        private static readonly Dictionary<char, string> DiacriticLookup = new Dictionary<char, string>()
+        private static readonly Dictionary<char, string> DiacriticLookup = new Dictionary<char, string>
         {
             {'Æ', "AE"},{'Ǽ', "AE"},{'æ', "ae"}, {'ǽ',"ae"},
             {'ß', "sz"},

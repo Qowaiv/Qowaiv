@@ -36,22 +36,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsNotValid()
         {
-            LocalDateTime val;
-
             string str = null;
-
-            Assert.IsFalse(LocalDateTime.TryParse(str, out val), "Valid");
+            Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
         }
 
         /// <summary>TryParse string.MinValue should be valid.</summary>
         [Test]
         public void TyrParse_StringMinValue_IsNotValid()
         {
-            LocalDateTime val;
-
             string str = string.Empty;
-
-            Assert.IsFalse(LocalDateTime.TryParse(str, out val), "Valid");
+            Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
@@ -60,11 +54,8 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("nl-NL"))
             {
-                LocalDateTime val;
-
                 string str = "26-4-2015 17:07:13";
-
-                Assert.IsTrue(LocalDateTime.TryParse(str, out val), "Valid");
+                Assert.IsTrue(LocalDateTime.TryParse(str, out LocalDateTime val), "Valid");
                 Assert.AreEqual(str, val.ToString(), "Value");
             }
         }
@@ -73,11 +64,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            LocalDateTime val;
-
             string str = "invalid format";
-
-            Assert.IsFalse(LocalDateTime.TryParse(str, out val), "Valid");
+            Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
         }
 
         [Test]
@@ -202,13 +190,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
@@ -222,13 +210,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStruct,
@@ -242,13 +230,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStructNoMilliseconds,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTimeTest.TestStructNoMilliseconds,
@@ -263,13 +251,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_MinValue_AreEqual()
         {
-            var input = new LocalDateTimeSerializeObject()
+            var input = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTime.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new LocalDateTimeSerializeObject()
+            var exp = new LocalDateTimeSerializeObject
             {
                 Id = 17,
                 Obj = LocalDateTime.MinValue,
@@ -505,8 +493,8 @@ namespace Qowaiv.UnitTests
             var item2 = new LocalDateTime(1999, 12, 05, 04, 13, 14);
             var item3 = new LocalDateTime(2010, 07, 13, 00, 44, 13);
 
-            var inp = new List<LocalDateTime>() { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
-            var exp = new List<LocalDateTime>() { LocalDateTime.MinValue, LocalDateTime.MinValue, item0, item1, item2, item3 };
+            var inp = new List<LocalDateTime> { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
+            var exp = new List<LocalDateTime> { LocalDateTime.MinValue, LocalDateTime.MinValue, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -521,8 +509,8 @@ namespace Qowaiv.UnitTests
             var item2 = new LocalDateTime(1999, 12, 05, 04, 13, 14);
             var item3 = new LocalDateTime(2010, 07, 13, 00, 44, 13);
 
-            var inp = new List<LocalDateTime>() { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
-            var exp = new List<LocalDateTime>() { item3, item2, item1, item0, LocalDateTime.MinValue, LocalDateTime.MinValue };
+            var inp = new List<LocalDateTime> { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
+            var exp = new List<LocalDateTime> { item3, item2, item1, item0, LocalDateTime.MinValue, LocalDateTime.MinValue };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

@@ -22,9 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tooling", "tooling", "{CCCC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
 	ProjectSection(SolutionItems) = preProject
-		props\analytics.props = props\analytics.props
 		props\common.props = props\common.props
-		props\test.props = props\test.props
+		props\nopackage.props = props\nopackage.props
+		props\package.props = props\package.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.UnitTests", "test\Qowaiv.UnitTests\Qowaiv.UnitTests.csproj", "{21E4DDC5-08FE-42EA-9B82-7C54C176161F}"
@@ -68,6 +68,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Text.Json.Serialization", "example\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj", "{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TestTools", "src\Qowaiv.TestTools\Qowaiv.TestTools.csproj", "{DDB84002-C9A4-4D0C-9B98-19FF02854D11}"
 EndProject
 Global

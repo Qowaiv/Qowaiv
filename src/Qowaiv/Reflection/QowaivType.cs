@@ -103,7 +103,8 @@ namespace Qowaiv.Reflection
         /// </param>
         public static Type GetNotNullableType(Type objectType)
         {
-            if(IsNullable(objectType))
+            Guard.NotNull(objectType, nameof(objectType));
+            if (IsNullable(objectType))
             {
                 return objectType.GetGenericArguments()[0];
             }

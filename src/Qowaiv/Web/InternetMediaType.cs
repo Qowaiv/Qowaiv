@@ -12,7 +12,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Resources;
@@ -123,9 +122,6 @@ namespace Qowaiv.Web
         }
 
         /// <summary>Gets the suffix of the Internet media type.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults",
-            MessageId = "System.Enum.TryParse<Qowaiv.Web.InternetMediaSuffixType>(System.String,System.Boolean,Qowaiv.Web.InternetMediaSuffixType@)",
-            Justification = "If the parsing succeeded or not, is ignored on purpose.")]
         public InternetMediaSuffixType Suffix
         {
             get
@@ -257,7 +253,7 @@ namespace Qowaiv.Web
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Internet media type for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -447,8 +443,6 @@ namespace Qowaiv.Web
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "Internet media types are represented in lowercase by default.")]
         public static bool TryParse(string s, out InternetMediaType result)
         {
             result = Empty;
@@ -476,8 +470,6 @@ namespace Qowaiv.Web
         /// <remarks>
         /// Based on the extension of the file.
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters",
-            Justification = "This has no meaning for other derived classes of FileSystemInfo.")]
         public static InternetMediaType FromFile(FileInfo file)
         {
             return

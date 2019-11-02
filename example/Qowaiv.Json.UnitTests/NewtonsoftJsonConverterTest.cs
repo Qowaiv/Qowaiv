@@ -10,7 +10,7 @@ namespace Qowaiv.Json.UnitTests
         {
             if (JsonConvert.DefaultSettings == null)
             {
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings() { Converters = { new QowaivJsonConverter() } };
+                JsonConvert.DefaultSettings = () => new JsonSerializerSettings { Converters = { new QowaivJsonConverter() } };
             }
             QowaivJsonConverter.Register();
         }

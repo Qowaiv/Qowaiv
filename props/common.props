@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 
-  <Import Project="analytics.props" />
-
   <PropertyGroup>
     <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
     <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Jack Kester;Hanif Hafez Nezami;Patrick Evers;Vincent Lesierse;Wilko Frieke</Authors>
@@ -11,21 +9,15 @@
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-2019</Copyright>
     <LangVersion>latest</LangVersion>
-
-    <PackageIconUrl>https://raw.githubusercontent.com/Qowaiv/Qowaiv/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
-    <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.github.com/Qowaiv/Qowaiv/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
+    <CodeAnalysisRuleSet>..\..\Qowaiv.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.0.0.9566">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <!-- for code coverage an proper debugging -->
   <PropertyGroup>

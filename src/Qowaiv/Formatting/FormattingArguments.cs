@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 
@@ -9,10 +8,10 @@ namespace Qowaiv.Formatting
     /// <summary>Represents formatting arguments.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
-    public struct FormattingArguments : ISerializable
+    public struct FormattingArguments : ISerializable, IEquatable<FormattingArguments>
     {
         /// <summary>Represents empty/not set formatting arguments.</summary>
-        public static readonly FormattingArguments None = new FormattingArguments(default, null);
+        public static readonly FormattingArguments None;
 
         /// <summary>Initializes a new instance of new formatting arguments.</summary>
         /// <param name="format">
@@ -83,7 +82,7 @@ namespace Qowaiv.Formatting
         /// </remarks>
         public string ToString(object obj)
         {
-            return 
+            return
                 (obj is IFormattable formattable)
                 ? ToString(formattable)
                 : obj?.ToString();
@@ -118,7 +117,7 @@ namespace Qowaiv.Formatting
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -132,14 +131,24 @@ namespace Qowaiv.Formatting
 
         #region IEquatable
 
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) { return base.Equals(obj); }
+        /// <inheritdoc />
+        public override bool Equals(object obj) => obj is FormattingArguments args && Equals(args);
 
-        /// <summary>Returns the hash code for this formatting arguments.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
+        /// <inheritdoc />
+        public bool Equals(FormattingArguments other)
+        {
+            if (Format != other.Format)
+            {
+                return false;
+            }
+            if (FormatProvider is null)
+            {
+                return other.FormatProvider is null;
+            }
+            return FormatProvider.Equals(other.FormatProvider);
+        }
+
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             int hash = (Format == null) ? 0 : Format.GetHashCode();

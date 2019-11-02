@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -62,8 +61,6 @@ namespace Qowaiv.Financial
         public string Name => IsUnknown() ? "?" : m_Value ?? string.Empty;
 
         /// <summary>Gets the display name.</summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Property DisplayName is a shortcut for GetDisplayName(CultureInfo.CurrentCulture).")]
         public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
 
         /// <summary>Gets the full name of the currency in English.</summary>
@@ -318,7 +315,7 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Currency, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Currency, IFormatProvider, string>>
         {
             { 'n', (svo, provider) => svo.Name },
             { 'i', (svo, provider) => svo.IsoCode },
@@ -482,8 +479,7 @@ namespace Qowaiv.Financial
         /// </exception>
         public static Currency Parse(string s, IFormatProvider formatProvider)
         {
-            Currency val;
-            if (TryParse(s, formatProvider, out val))
+            if (TryParse(s, formatProvider, out Currency val))
             {
                 return val;
             }
@@ -501,8 +497,7 @@ namespace Qowaiv.Financial
         /// </returns>
         public static Currency TryParse(string s)
         {
-            Currency val;
-            if (TryParse(s, out val))
+            if (TryParse(s, out Currency val))
             {
                 return val;
             }
@@ -557,9 +552,8 @@ namespace Qowaiv.Financial
             AddCulture(culture);
 
             var str = Parsing.ToUnified(s);
-            string val;
 
-            if (Parsings[culture].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
                 result = new Currency { m_Value = val };
                 return true;
@@ -627,8 +621,6 @@ namespace Qowaiv.Financial
         /// We'd like to call this All, but because of CLS-compliance, we can not,
         /// because ALL exists.
         /// </remarks>
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
-            Justification = "ReadOnlyCollection<T> is immutable.")]
         public static readonly ReadOnlyCollection<Currency> AllCurrencies = new ReadOnlyCollection<Currency>(
             ResourceManager
                 .GetString("All")
@@ -686,12 +678,6 @@ namespace Qowaiv.Financial
         #region Lookup
 
         /// <summary>Initializes the country lookup.</summary>
-        [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
-            Justification = "Those constants are the hole point of this class.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
-            Justification = "Due to generated constants.")]
-        [SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline",
-            Justification = "Complex initialization, this approach is better understandable.")]
         static Currency()
         {
             foreach (var country in AllCurrencies)
@@ -724,10 +710,10 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>()
+        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, string>()
+                CultureInfo.InvariantCulture, new Dictionary<string, string>
                 {
                     { "ZZZ", "ZZZ" },
                     { "999", "ZZZ" },
@@ -737,11 +723,15 @@ namespace Qowaiv.Financial
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static volatile object locker = new object();
+        private static readonly object locker = new object();
 
         #endregion
 
         #region Money creation operators
+
+#pragma warning disable S4069
+        // Operator overloads should have named alternatives
+        // In this case, Money.Create is the best way to achieve this. The name Add would be confusing.
 
         /// <summary>Creates money based on the amount and the currency.</summary>
         public static Money operator +(Amount val, Currency currency) => Money.Create((decimal)val, currency);
@@ -751,6 +741,8 @@ namespace Qowaiv.Financial
         public static Money operator +(double val, Currency currency) => Money.Create((decimal)val, currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
         public static Money operator +(int val, Currency currency) => Money.Create(val, currency);
+
+#pragma warning restore S4069 // Operator overloads should have named alternatives
 
         #endregion
     }

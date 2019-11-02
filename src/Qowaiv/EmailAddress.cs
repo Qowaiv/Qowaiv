@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Runtime.Serialization;
@@ -230,7 +229,7 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -288,7 +287,7 @@ namespace Qowaiv
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>
         {
             { 'U', (svo, provider) => svo.m_Value.ToUpperInvariant() },
             { 'l', (svo, provider) => svo.Local },
@@ -498,7 +497,7 @@ namespace Qowaiv
         {
             return !string.IsNullOrWhiteSpace(val) 
                 && !Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo)
-                && TryParse(val, formatProvider, out EmailAddress email);
+                && TryParse(val, formatProvider, out _);
         }
 
         #endregion

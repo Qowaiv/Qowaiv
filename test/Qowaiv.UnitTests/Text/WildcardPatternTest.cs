@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.Text;
 using Qowaiv.TestTools;
+using Qowaiv.Text;
 using System;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 
 namespace Qowaiv.UnitTests.Text

@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#pragma warning disable S1192 
+// String literals should not be duplicated
+// It should be defined per country.
+
+using System.Collections.Generic;
 
 namespace Qowaiv.Globalization
 {
     public partial class PostalCodeCountryInfo
     {
         /// <summary>Gets the country based settings.</summary>
-        private static readonly Dictionary<Country, PostalCodeCountryInfo> Instances = new Dictionary<Country, PostalCodeCountryInfo>()
+        private static readonly Dictionary<Country, PostalCodeCountryInfo> Instances = new Dictionary<Country, PostalCodeCountryInfo>
         {
             // AD: Andorra, http://en.wikipedia.org/wiki/Postal_codes_in_Andorra
             { Country.AD, New(Country.AD,@"^(AD)?[1-7][0-9]{2}$", "^(AD)?(...)$", "AD-$2") },

@@ -68,17 +68,17 @@ namespace Qowaiv.CodeGenerator.Generators.Svo
         public string gt => ">";
 
         /// <summary>A lookup table for JavaScirpt initial values.</summary>
-        internal static readonly Dictionary<Type, string> JavaScriptInitialValues = new Dictionary<Type, string>()
+        internal static readonly Dictionary<Type, string> JavaScriptInitialValues = new Dictionary<Type, string>
         {
-            { typeof(Object), "null" },
+            { typeof(object), "null" },
             { typeof(string), "''" },
-            { typeof(Decimal), "0.0" },
-            { typeof(Single), "0.0" },
-            { typeof(Double), "0.0" },
-            { typeof(Byte), "0" },
-            { typeof(Int16), "0" },
-            { typeof(Int32), "0" },
-            { typeof(Int64), "0" },
+            { typeof(decimal), "0.0" },
+            { typeof(float), "0.0" },
+            { typeof(double), "0.0" },
+            { typeof(byte), "0" },
+            { typeof(short), "0" },
+            { typeof(int), "0" },
+            { typeof(long), "0" },
         };
     }
 }

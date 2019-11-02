@@ -15,14 +15,7 @@ namespace Qowaiv.TestTools
         /// </remarks>
         public object GetFormat(Type formatType)
         {
-            if (typeof(ICustomFormatter).IsAssignableFrom(formatType))
-            {
-                return this;
-            }
-            else
-            {
-                return null;
-            }
+            return (typeof(ICustomFormatter).IsAssignableFrom(formatType)) ? this : null;
         }
 
         /// <summary>Formats the object as String.</summary>
@@ -37,7 +30,7 @@ namespace Qowaiv.TestTools
         /// </param>
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
-            return string.Format(CultureInfo.InvariantCulture, "Unit Test Formatter, value: '{0}', format: '{1}'", arg.ToString(), format);
+            return string.Format(CultureInfo.InvariantCulture, "Unit Test Formatter, value: '{0}', format: '{1}'", arg?.ToString(), format);
         }
     }
 }

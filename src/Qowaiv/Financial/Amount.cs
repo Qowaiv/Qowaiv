@@ -8,7 +8,6 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -140,7 +139,7 @@ namespace Qowaiv.Financial
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -420,7 +419,7 @@ namespace Qowaiv.Financial
         /// <summary>Returns true if the val represents a valid Amount, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return TryParse(val, formatProvider, out Amount result);
+            return TryParse(val, formatProvider, out _);
         }
 
         #endregion

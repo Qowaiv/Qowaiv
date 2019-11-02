@@ -26,7 +26,7 @@ namespace Qowaiv.TestTools
         }
 
         [DebuggerStepThrough]
-        public static void IsNotNull(object obj, string message = null)
+        public static void IsNotNull([ValidatedNotNull]object obj, string message = null)
         {
             if (obj is null)
             {
@@ -74,5 +74,13 @@ namespace Qowaiv.TestTools
         {
             throw new AssertException(message);
         }
+
+        /// <summary>Marks the NotNull argument as being validated for not being null, to satisfy the static code analysis.</summary>
+        /// <remarks>
+        /// Notice that it does not matter what this attribute does, as long as
+        /// it is named ValidatedNotNullAttribute.
+        /// </remarks>
+        [AttributeUsage(AttributeTargets.Parameter)]
+        sealed class ValidatedNotNullAttribute : Attribute { }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace Qowaiv.CodeGenerator.Xml
@@ -15,21 +15,21 @@ namespace Qowaiv.CodeGenerator.Xml
         /// <summary>Initializes a new instance of a resource file.</summary>
         protected XResourceFile()
         {
-            Headers = new List<XResourceFileHeader>();
-            Data = new List<XResourceFileData>();
+            Headers = new Collection<XResourceFileHeader>();
+            Data = new Collection<XResourceFileData>();
         }
 
         /// <summary>Initializes a new instance of a resource file.</summary>
         public XResourceFile(params XResourceFileData[] data)
         {
-            Headers = new List<XResourceFileHeader>()
+            Headers = new Collection<XResourceFileHeader>
             {
                 XResourceFileHeader.ResMimeType,
                 XResourceFileHeader.Version ,
                 XResourceFileHeader.Reader,
                 XResourceFileHeader.Writer
             };
-            Data = data.ToList();
+            Data = new Collection<XResourceFileData>(data);
         }
 
         /// <summary>Initializes a new instance of a resource file.</summary>
@@ -37,11 +37,11 @@ namespace Qowaiv.CodeGenerator.Xml
 
         /// <summary>Gets the headers.</summary>
         [XmlElement(Type = typeof(XResourceFileHeader), ElementName = "resheader")]
-        public List<XResourceFileHeader> Headers { get; set; }
+        public Collection<XResourceFileHeader> Headers { get; private set; }
 
         /// <summary>Gets the data.</summary>
         [XmlElement(Type = typeof(XResourceFileData), ElementName = "data")]
-        public List<XResourceFileData> Data { get; set; }
+        public Collection<XResourceFileData> Data { get; private set; }
 
         /// <summary>Gets the first (or default) item with the specified key.</summary>
         /// <param name="key">

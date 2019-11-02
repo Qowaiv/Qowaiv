@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 
@@ -110,10 +109,6 @@ namespace Qowaiv.Formatting
         /// <remarks>
         /// This implementation is a (tweaked) copy of the implementation of <see cref="string"/>.Format().
         /// </remarks>
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#",
-            Justification = "Follows the origin string.Format(format, args).")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity",
-            Justification = "Just a copy of the .NET code. It is as complex as it is.")]
         public string Format(string format, params object[] args)
         {
             Guard.NotNull(format, nameof(format));
@@ -122,6 +117,9 @@ namespace Qowaiv.Formatting
             // This code is here as reference, so we don't want to touch it.
 #pragma warning disable S125 // Sections of code should not be "commented out"
 #pragma warning disable S1854 // Dead stores should be removed
+#pragma warning disable S121 // Control structures should use curly braces
+#pragma warning disable S3240 // The simplest possible condition syntax should be used
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
 
             var sb = new StringBuilder();
             int pos = 0;
@@ -293,6 +291,9 @@ namespace Qowaiv.Formatting
 
 #pragma warning restore S1854 // Dead stores should be removed
 #pragma warning restore S125 // Sections of code should not be "commented out"
+#pragma warning restore S121 // Control structures should use curly braces
+#pragma warning restore S3240 // The simplest possible condition syntax should be used
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
         }
 
         private static void FormatError() => throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
@@ -316,9 +317,6 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentException">
         /// An element with the same type already exists in the collection.
         /// </exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
-            MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
-            Justification = "Right culture selected by the default constructor.")]
         public void Add(Type type, string format) => Add(type, new FormattingArguments(format));
 
         /// <summary>Adds a format provider for the specified type.</summary>
@@ -396,9 +394,6 @@ namespace Qowaiv.Formatting
         /// <exception cref="NotSupportedException">
         /// The type represents a type not implementing System.IFormattable.
         /// </exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider",
-            MessageId = "Qowaiv.Formatting.FormattingArguments.#ctor(System.String)",
-            Justification = "Right culture selected by the default constructor.")]
         public void Set(Type type, string format) => Set(type, new FormattingArguments(format));
 
         /// <summary>Sets a format provider for the specified type.</summary>
@@ -509,8 +504,6 @@ namespace Qowaiv.Formatting
         /// this is used by IEnumerable.GetObjectData() so that it can be
         /// changed by derived classes.
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "Required by the interface.")]
         protected virtual IEnumerator<KeyValuePair<Type, FormattingArguments>> GetEnumerator() => dict.GetEnumerator();
 
         /// <summary>Clears all formatting arguments in the collection.</summary>
@@ -522,7 +515,7 @@ namespace Qowaiv.Formatting
         #endregion
 
         /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments collection for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get

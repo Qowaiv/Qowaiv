@@ -332,13 +332,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -352,13 +352,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -372,13 +372,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_HouseNumberSerializeObject_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -393,13 +393,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Empty_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,
@@ -413,13 +413,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_Empty_AreEqual()
         {
-            var input = new HouseNumberSerializeObject()
+            var input = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new HouseNumberSerializeObject()
+            var exp = new HouseNumberSerializeObject
             {
                 Id = 17,
                 Obj = HouseNumber.Empty,
@@ -687,8 +687,8 @@ namespace Qowaiv.UnitTests
             HouseNumber item2 = 123;
             HouseNumber item3 = 1234;
 
-            var inp = new List<HouseNumber>() { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
-            var exp = new List<HouseNumber>() { HouseNumber.Empty, HouseNumber.Empty, item0, item1, item2, item3 };
+            var inp = new List<HouseNumber> { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
+            var exp = new List<HouseNumber> { HouseNumber.Empty, HouseNumber.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -703,8 +703,8 @@ namespace Qowaiv.UnitTests
             HouseNumber item2 = 123;
             HouseNumber item3 = 1234;
 
-            var inp = new List<HouseNumber>() { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
-            var exp = new List<HouseNumber>() { item3, item2, item1, item0, HouseNumber.Empty, HouseNumber.Empty };
+            var inp = new List<HouseNumber> { HouseNumber.Empty, item3, item2, item0, item1, HouseNumber.Empty };
+            var exp = new List<HouseNumber> { item3, item2, item1, item0, HouseNumber.Empty, HouseNumber.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);

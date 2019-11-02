@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.Serialization;
@@ -55,7 +54,7 @@ namespace Qowaiv
         public static readonly Gender NotApplicable = new Gender { m_Value = 18 };
 
         /// <summary>Contains not known, male, female, not applicable.</summary>
-        public static readonly IReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>()
+        public static readonly IReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>
         {
             Male,
             Female,
@@ -64,14 +63,14 @@ namespace Qowaiv
         });
 
         /// <summary>Contains male and female.</summary>
-        public static readonly IReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>()
+        public static readonly IReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>
         {
             Male,
             Female
         });
 
         /// <summary>Contains male, female, not applicable.</summary>
-        public static readonly IReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>()
+        public static readonly IReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>
         {
             Male,
             Female,
@@ -218,7 +217,7 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
             get
@@ -283,7 +282,7 @@ namespace Qowaiv
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Gender, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Gender, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<Gender, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Gender, IFormatProvider, string>>
         {
             { 'i', (svo, provider) => svo.GetResourceString("int_", provider) },
             { 'c', (svo, provider) => svo.GetResourceString("char_", provider) },
@@ -489,7 +488,7 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out Gender result)
         {
-            result = Gender.Empty;
+            result = Empty;
             if (string.IsNullOrEmpty(s))
             {
                 return true;
@@ -499,9 +498,8 @@ namespace Qowaiv
             AddCulture(c);
 
             var str = Parsing.ToUnified(s);
-            byte val;
 
-            if (Parsings[c].TryGetValue(str, out val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            if (Parsings[c].TryGetValue(str, out byte val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
                 result = new Gender { m_Value = val };
                 return true;
@@ -518,8 +516,7 @@ namespace Qowaiv
         /// </exception>
         public static Gender Create(int? val)
         {
-            Gender result;
-            if (Gender.TryCreate(val, out result))
+            if (TryCreate(val, out Gender result))
             {
                 return result;
             }
@@ -537,12 +534,11 @@ namespace Qowaiv
         /// </returns>
         public static Gender TryCreate(int? val)
         {
-            Gender result;
-            if (TryCreate(val, out result))
+            if (TryCreate(val, out Gender result))
             {
                 return result;
             }
-            return Gender.Empty;
+            return Empty;
         }
 
         /// <summary>Creates a Gender from a int.
@@ -637,7 +633,7 @@ namespace Qowaiv
         #region Lookup
 
         /// <summary>Gets the valid values.</summary>
-        private static Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>()
+        private static Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>
         {
             { 0, 1 },
             { 1, 2 },
@@ -646,7 +642,7 @@ namespace Qowaiv
         };
 
 
-        private static Dictionary<byte, int?> ToNullableInt32s = new Dictionary<byte, int?>()
+        private static Dictionary<byte, int?> ToNullableInt32s = new Dictionary<byte, int?>
         {
             { 0, null },
             { 1, 0 },
@@ -659,7 +655,7 @@ namespace Qowaiv
         /// <remarks>
         /// Used for both serialization and resource lookups.
         /// </remarks>
-        private static readonly Dictionary<byte, string> GenderLabels = new Dictionary<byte, string>()
+        private static readonly Dictionary<byte, string> GenderLabels = new Dictionary<byte, string>
         {
             { 0, null },
             { 1, "NotKnown" },
@@ -692,10 +688,10 @@ namespace Qowaiv
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>()
+        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, byte>()
+                CultureInfo.InvariantCulture, new Dictionary<string, byte>
                 {
                     { "", 0 },
                     { "0", 1 },

@@ -17,7 +17,7 @@ namespace Qowaiv.UnitTests
 
         public static NumberFormatInfo GetCustomNumberFormatInfo()
         {
-            var info = new NumberFormatInfo()
+            var info = new NumberFormatInfo
             {
                 PercentSymbol = "!",
                 PerMilleSymbol = "#",
@@ -55,11 +55,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_Null_IsInvalid()
         {
-            Percentage val;
-
             string str = null;
-
-            Assert.IsFalse(Percentage.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Percentage.TryParse(str, out Percentage val), "Valid");
             Assert.AreEqual(Percentage.Zero, val, "Value");
         }
 
@@ -67,11 +64,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringEmpty_IsInvalid()
         {
-            Percentage val;
-
             string str = string.Empty;
-
-            Assert.IsFalse(Percentage.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Percentage.TryParse(str, out Percentage val), "Valid");
             Assert.AreEqual(Percentage.Zero, val, "Value");
         }
 
@@ -81,11 +75,8 @@ namespace Qowaiv.UnitTests
         {
             using (new CultureInfoScope("nl-NL"))
             {
-                Percentage val;
-
                 string str = "17,51%";
-
-                Assert.IsTrue(Percentage.TryParse(str, out val), "Valid");
+                Assert.IsTrue(Percentage.TryParse(str, out Percentage val), "Valid");
                 Assert.AreEqual(str, val.ToString(), "Value");
             }
         }
@@ -94,11 +85,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            Percentage val;
-
             string str = "string";
-
-            Assert.IsFalse(Percentage.TryParse(str, out val), "Valid");
+            Assert.IsFalse(Percentage.TryParse(str, out Percentage val), "Valid");
             Assert.AreEqual(Percentage.Zero, val, "Value");
         }
 
@@ -129,29 +117,20 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_PercentageMarkInvalidPosition_AreEqual()
         {
-            Percentage exp;
-            Percentage act = Percentage.Zero;
-
-            Assert.IsFalse(Percentage.TryParse("2%2", out exp));
-            Assert.AreEqual(exp, act);
+            Assert.IsFalse(Percentage.TryParse("2%2", out Percentage act));
+            Assert.AreEqual(Percentage.Zero, act);
         }
         [Test]
         public void TryParse_PerMilleMarkInvalidPosition_AreEqual()
         {
-            Percentage exp;
-            Percentage act = Percentage.Zero;
-
-            Assert.IsFalse(Percentage.TryParse("2‰2", out exp));
-            Assert.AreEqual(exp, act);
+            Assert.IsFalse(Percentage.TryParse("2‰2", out Percentage act));
+            Assert.AreEqual(Percentage.Zero, act);
         }
         [Test]
         public void TryParse_PerTenThousendMarkInvalidPosition_AreEqual()
         {
-            Percentage exp;
-            Percentage act = Percentage.Zero;
-
-            Assert.IsFalse(Percentage.TryParse("2‱2", out exp));
-            Assert.AreEqual(exp, act);
+            Assert.IsFalse(Percentage.TryParse("2‱2", out Percentage act));
+            Assert.AreEqual(Percentage.Zero, act);
         }
 
         [Test]
@@ -284,13 +263,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -304,13 +283,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlSerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -324,13 +303,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DataContractSerializeDeserialize_PercentageSerializeObject_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -345,13 +324,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_Zero_AreEqual()
         {
-            var input = new PercentageSerializeObject()
+            var input = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = Percentage.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var exp = new PercentageSerializeObject()
+            var exp = new PercentageSerializeObject
             {
                 Id = 17,
                 Obj = Percentage.Zero,
@@ -771,8 +750,8 @@ namespace Qowaiv.UnitTests
             Percentage item2 = 0.2083m;
             Percentage item3 = 0.3333m;
 
-            var inp = new List<Percentage>() { item3, item2, item0, item1 };
-            var exp = new List<Percentage>() { item0, item1, item2, item3 };
+            var inp = new List<Percentage> { item3, item2, item0, item1 };
+            var exp = new List<Percentage> { item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -787,8 +766,8 @@ namespace Qowaiv.UnitTests
             Percentage item2 = 0.2083m;
             Percentage item3 = 0.3333m;
 
-            var inp = new List<Percentage>() { item3, item2, item0, item1 };
-            var exp = new List<Percentage>() { item3, item2, item1, item0 };
+            var inp = new List<Percentage> { item3, item2, item0, item1 };
+            var exp = new List<Percentage> { item3, item2, item1, item0 };
             var act = inp.OrderByDescending(item => item).ToList();
 
             CollectionAssert.AreEqual(exp, act);
@@ -917,7 +896,7 @@ namespace Qowaiv.UnitTests
             Percentage exp = 0.0714m;
             Percentage mut = 0.42m;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -928,7 +907,7 @@ namespace Qowaiv.UnitTests
             Percentage exp = 0.34m;
             Percentage mut = 0.50m;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -939,7 +918,7 @@ namespace Qowaiv.UnitTests
             Percentage exp = 0.59m;
             Percentage mut = 0.42m;
 
-            act = act + mut;
+            act += mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -950,7 +929,7 @@ namespace Qowaiv.UnitTests
             Percentage exp = 0.04m;
             Percentage mut = 0.13m;
 
-            act = act - mut;
+            act -= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -960,9 +939,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.0714m;
-            Decimal mut = 0.42m;
+            decimal mut = 0.42m;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -971,9 +950,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.0714m;
-            Double mut = 0.42;
+            double mut = 0.42;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -982,9 +961,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.0714m;
-            Single mut = 0.42F;
+            float mut = 0.42F;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -994,9 +973,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.34m;
-            Int64 mut = 2;
+            long mut = 2;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1005,9 +984,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.34m;
-            Int32 mut = 2;
+            int mut = 2;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1016,9 +995,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.34m;
-            Int16 mut = 2;
+            short mut = 2;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1028,9 +1007,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.34m;
-            UInt64 mut = 2;
+            ulong mut = 2;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1039,9 +1018,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.34m;
-            UInt32 mut = 2;
+            uint mut = 2;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1050,9 +1029,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.34m;
-            UInt16 mut = 2;
+            ushort mut = 2;
 
-            act = act * mut;
+            act *= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1062,9 +1041,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.4047619047619047619047619048m;
-            Decimal mut = 0.42m;
+            decimal mut = 0.42m;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1073,9 +1052,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.4047619047619047619047619048m;
-            Double mut = 0.42;
+            double mut = 0.42;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1084,9 +1063,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.4047619047619047619047619048m;
-            Single mut = 0.42F;
+            float mut = 0.42F;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1096,9 +1075,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.085m;
-            Int64 mut = 2;
+            long mut = 2;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1107,9 +1086,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.085m;
-            Int32 mut = 2;
+            int mut = 2;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1118,9 +1097,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.085m;
-            Int16 mut = 2;
+            short mut = 2;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1130,9 +1109,9 @@ namespace Qowaiv.UnitTests
         {
             Percentage act = 0.17m;
             Percentage exp = 0.085m;
-            UInt64 mut = 2;
+            ulong mut = 2;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1143,7 +1122,7 @@ namespace Qowaiv.UnitTests
             Percentage exp = 0.085m;
             uint mut = 2;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1154,7 +1133,7 @@ namespace Qowaiv.UnitTests
             Percentage exp = 0.085m;
             ushort mut = 2;
 
-            act = act / mut;
+            act /= mut;
 
             Assert.AreEqual(exp, act);
         }
@@ -1187,7 +1166,7 @@ namespace Qowaiv.UnitTests
         {
             short act = 17;
             short exp = 18;
-            act = act + Percentage.Create(0.1);
+            act += 10.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1196,7 +1175,7 @@ namespace Qowaiv.UnitTests
         {
             int act = 17;
             int exp = 18;
-            act = act + Percentage.Create(0.1);
+            act += 10.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1205,7 +1184,7 @@ namespace Qowaiv.UnitTests
         {
             long act = 17;
             long exp = 18;
-            act = act + Percentage.Create(0.1);
+            act += 10.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1214,7 +1193,7 @@ namespace Qowaiv.UnitTests
         {
             ushort act = 17;
             ushort exp = 25;
-            act = act + Percentage.Create(0.5);
+            act += 50.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1223,7 +1202,7 @@ namespace Qowaiv.UnitTests
         {
             uint act = 17;
             uint exp = 25;
-            act = act + Percentage.Create(0.5);
+            act += 50.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1232,7 +1211,7 @@ namespace Qowaiv.UnitTests
         {
             ulong act = 17;
             ulong exp = 25;
-            act = act + Percentage.Create(0.5);
+            act += 50.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1241,7 +1220,7 @@ namespace Qowaiv.UnitTests
         {
             decimal act = 17;
             decimal exp = 19.89m;
-            act = act + Percentage.Create(0.17);
+            act += Percentage.Create(0.17);
 
             Assert.AreEqual(exp, act);
         }
@@ -1250,7 +1229,7 @@ namespace Qowaiv.UnitTests
         {
             double act = 17;
             double exp = 19.89;
-            act = act + Percentage.Create(0.17);
+            act += Percentage.Create(0.17);
 
             Assert.AreEqual(exp, act);
         }
@@ -1259,7 +1238,7 @@ namespace Qowaiv.UnitTests
         {
             float act = 17;
             float exp = 19.89F;
-            act = act + Percentage.Create(0.17);
+            act += Percentage.Create(0.17);
 
             Assert.AreEqual(exp, act);
         }
@@ -1269,7 +1248,7 @@ namespace Qowaiv.UnitTests
         {
             short act = 17;
             short exp = 16;
-            act = act - Percentage.Create(0.1);
+            act -= 10.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1278,7 +1257,7 @@ namespace Qowaiv.UnitTests
         {
             int act = 17;
             int exp = 16;
-            act = act - Percentage.Create(0.1);
+            act -= 10.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1287,7 +1266,7 @@ namespace Qowaiv.UnitTests
         {
             long act = 17;
             long exp = 16;
-            act = act - Percentage.Create(0.1);
+            act -= 10.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1296,7 +1275,7 @@ namespace Qowaiv.UnitTests
         {
             ushort act = 17;
             ushort exp = 9;
-            act = act - Percentage.Create(0.5);
+            act -= 50.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1305,7 +1284,7 @@ namespace Qowaiv.UnitTests
         {
             uint act = 17;
             uint exp = 9;
-            act = act - Percentage.Create(0.5);
+            act -= 50.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1314,7 +1293,7 @@ namespace Qowaiv.UnitTests
         {
             ulong act = 17;
             ulong exp = 9;
-            act = act - Percentage.Create(0.5);
+            act -= 50.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1323,7 +1302,7 @@ namespace Qowaiv.UnitTests
         {
             decimal act = 17;
             decimal exp = 11.39m;
-            act = act - Percentage.Create(0.33m);
+            act -= 33.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1332,7 +1311,7 @@ namespace Qowaiv.UnitTests
         {
             double act = 17;
             double exp = 11.39;
-            act = act - Percentage.Create(0.33m);
+            act -= 33.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1341,7 +1320,7 @@ namespace Qowaiv.UnitTests
         {
             float act = 17;
             float exp = 11.3899994F;
-            act = act - Percentage.Create(0.33m);
+            act -= 33.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1351,7 +1330,7 @@ namespace Qowaiv.UnitTests
         {
             short act = 17;
             short exp = 33;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1360,7 +1339,7 @@ namespace Qowaiv.UnitTests
         {
             int act = 17;
             int exp = 33;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1369,7 +1348,7 @@ namespace Qowaiv.UnitTests
         {
             long act = 17;
             long exp = 33;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1378,7 +1357,7 @@ namespace Qowaiv.UnitTests
         {
             ushort act = 17;
             ushort exp = 33;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1387,7 +1366,7 @@ namespace Qowaiv.UnitTests
         {
             uint act = 17;
             uint exp = 33;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1396,7 +1375,7 @@ namespace Qowaiv.UnitTests
         {
             ulong act = 17;
             ulong exp = 33;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1405,7 +1384,7 @@ namespace Qowaiv.UnitTests
         {
             decimal act = 17;
             decimal exp = 100.0m / 3.0m;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1414,7 +1393,7 @@ namespace Qowaiv.UnitTests
         {
             double act = 17;
             double exp = 100.0 / 3.0;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1423,7 +1402,7 @@ namespace Qowaiv.UnitTests
         {
             float act = 17;
             float exp = 100.0F / 3.0F;
-            act = act / Percentage.Create(0.51m);
+            act /= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1433,7 +1412,7 @@ namespace Qowaiv.UnitTests
         {
             short act = 17;
             short exp = 8;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1442,7 +1421,7 @@ namespace Qowaiv.UnitTests
         {
             int act = 17;
             int exp = 8;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1451,7 +1430,7 @@ namespace Qowaiv.UnitTests
         {
             long act = 17;
             long exp = 8;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1460,7 +1439,7 @@ namespace Qowaiv.UnitTests
         {
             ushort act = 17;
             ushort exp = 8;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1469,7 +1448,7 @@ namespace Qowaiv.UnitTests
         {
             uint act = 17;
             uint exp = 8;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1478,7 +1457,7 @@ namespace Qowaiv.UnitTests
         {
             ulong act = 17;
             ulong exp = 8;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1487,7 +1466,7 @@ namespace Qowaiv.UnitTests
         {
             decimal act = 17;
             decimal exp = 8.67m;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1496,7 +1475,7 @@ namespace Qowaiv.UnitTests
         {
             double act = 17;
             double exp = 8.67;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }
@@ -1505,7 +1484,7 @@ namespace Qowaiv.UnitTests
         {
             float act = 17;
             float exp = 8.67F;
-            act = act * Percentage.Create(0.51m);
+            act *= 51.Percent();
 
             Assert.AreEqual(exp, act);
         }

@@ -277,11 +277,11 @@ namespace Qowaiv.Statistics
 
         /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
         /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) { return obj is Elo && Equals((Elo)obj); }
+        public override bool Equals(object obj) => obj is Elo && Equals((Elo)obj);
 
         /// <summary>Returns true if this instance and the other <see cref="Elo"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Elo"/> to compare with.</param>
-        public bool Equals(Elo other) => m_Value == other.m_Value;
+        public bool Equals(Elo other) => m_Value.Equals(other.m_Value);
 
         /// <summary>Returns the hash code for this Elo.</summary>
         /// <returns>
@@ -481,7 +481,7 @@ namespace Qowaiv.Statistics
             result = Zero;
             if (!string.IsNullOrEmpty(s))
             {
-                var str = s.EndsWith("*") ? s.Substring(0, s.Length - 1) : s;
+                var str = s.EndsWith("*", StringComparison.InvariantCultureIgnoreCase) ? s.Substring(0, s.Length - 1) : s;
                 if (double.TryParse(str, NumberStyles.Number, formatProvider, out double d))
                 {
                     result = new Elo { m_Value = d };
@@ -508,7 +508,7 @@ namespace Qowaiv.Statistics
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
 
         /// <summary>Returns true if the val represents a valid Elo, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out Elo elo);
+        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
 
         #endregion
     }

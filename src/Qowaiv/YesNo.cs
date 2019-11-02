@@ -228,7 +228,7 @@ namespace Qowaiv
         }
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<YesNo, IFormatProvider, string>>()
+        private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<YesNo, IFormatProvider, string>>
         {
             { 'c', (svo, provider) => svo.GetResourceString("ch_", provider) },
             { 'C', (svo, provider) => svo.GetResourceString("ch_", provider).ToUpper(provider) },
@@ -508,8 +508,7 @@ namespace Qowaiv
         /// <summary>Returns true if the val represents a valid Yes-no, otherwise false.</summary>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            if (string.IsNullOrWhiteSpace(val)) { return false; }
-            return TryParse(val, formatProvider, out YesNo result);
+            return !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
         }
 
         #endregion
@@ -580,10 +579,10 @@ namespace Qowaiv
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>()
+        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, byte>()
+                CultureInfo.InvariantCulture, new Dictionary<string, byte>
                 {
                     { "", 0 },
                     { "0", 1 },

@@ -71,6 +71,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Text.Json.Serializat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TestTools", "src\Qowaiv.TestTools\Qowaiv.TestTools.csproj", "{DDB84002-C9A4-4D0C-9B98-19FF02854D11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.TestTools.UnitTests", "test\Qowaiv.TestTools.UnitTests\Qowaiv.TestTools.UnitTests.csproj", "{A3710D9F-C77B-41F0-AFD8-A999D9F3C17A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDB84002-C9A4-4D0C-9B98-19FF02854D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3710D9F-C77B-41F0-AFD8-A999D9F3C17A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3710D9F-C77B-41F0-AFD8-A999D9F3C17A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3710D9F-C77B-41F0-AFD8-A999D9F3C17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3710D9F-C77B-41F0-AFD8-A999D9F3C17A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +150,7 @@ Global
 		{932B4123-594C-494B-9B3E-7017D526E80F} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{CEB12E1E-A171-4D64-B8E1-4E4D2D3C693E} = {225B41F0-0B59-4AB1-96DA-A916E2678AD4}
+		{A3710D9F-C77B-41F0-AFD8-A999D9F3C17A} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

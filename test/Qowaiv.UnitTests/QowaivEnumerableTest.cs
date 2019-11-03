@@ -7,7 +7,7 @@ namespace Qowaiv.UnitTests
 {
     public class QowaivEnumerableTest
     {
-        private static readonly Amount[] Amounts = new Amount[] { (Amount)1, (Amount)23, (Amount)0 };
+        private static readonly Amount[] Amounts = new [] { (Amount)1, (Amount)23, (Amount)0 };
         private static readonly Amount?[] NullableAmounts = new Amount?[] { (Amount)1, (Amount)23, (Amount)0, null };
 
         private static readonly Money[] MixedMoneys = new[] { 1 + Currency.EUR, 23 + Currency.USD };

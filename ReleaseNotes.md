@@ -1,5 +1,22 @@
 ﻿# Release Notes
 
+### Released 2019-11-03
+#### Qowaiv 4.1.0
+* Introduction of `DateSpan` (#95)
+* Money, Amount, Percentage and SteamSize have `Abs()` method (#96)
+* Money, Amount, Percentage and SteamSize have `Round()` method (#96)
+* Introduction of `DecimalRound.Round()` and `RoundToMultiple()` (#97)
+* `Date.FromJson(DateTime)` ignores time part (#98) fix
+* Null message `NotSupportedException_ConverterCanNotConvertFomString` (#100) fix
+
+#### Qowaiv.Data.SqlClient 4.1.0
+* Updated package depedency.
+* Own internal Guard.
+
+#### Qowaiv.TestTools 2.0.0
+* Removed Qowaiv.TestTools.Validation.* (107) breaking
+* DebuggerDisplayAssert supports nested classes. (#110) fix
+
 ### Released 2019-10-02
 #### Qowaiv 4.0.6
 * Support OpenAPI (#81)
@@ -23,12 +40,6 @@
 * Added Percent() extension method (#70)
 
 ### Released 2019-07-30
-#### Qowaiv.Validation.Abstractions 0.0.1
-* Initial version
-#### Qowaiv.Validation.DataAnnotations 0.0.1
-* Initial version
-#### Qowaiv.Validation.Fluent 0.0.1
-* Initial version
 #### Qowaiv.TestTools 1.0.2
 * Updated references
 

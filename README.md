@@ -5,9 +5,9 @@
 
 | version                                                                      | package                                                                     |
 |------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-4.0.6-blue.svg?cacheSeconds=3600)   |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
-|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)   |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
-|![v](https://img.shields.io/badge/version-1.0.3-darkred.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
+|![v](https://img.shields.io/badge/version-4.1.0-blue.svg?cacheSeconds=3600)   |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-4.1.0-blue.svg?cacheSeconds=3600)   |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
+|![v](https://img.shields.io/badge/version-2.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
 # Qowaiv
 
@@ -297,6 +297,13 @@ and if the data type is nullable, all when applicable.
     "format": "date",
     "nullabe": false
   },
+  "DateSpan": {
+    "description": "Date span, specified in years, months and days, for example 1Y+10M+16D.",
+    "type": "string",
+    "format": "date-span",
+    "pattern": "[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D",
+    "nullabe": false
+  },
   "EmailAddress": {
     "description": "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.",
     "type": "string",
@@ -402,6 +409,12 @@ and if the data type is nullable, all when applicable.
     "format": "amount",
     "nullabe": false
   },
+  "Financial.BankIdentifierCode": {
+    "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
+    "type": "string",
+    "format": "bic",
+    "nullabe": true
+  },
   "Financial.BusinessIdentifierCode": {
     "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
     "type": "string",
@@ -457,27 +470,6 @@ and if the data type is nullable, all when applicable.
     "format": "internet-media-type",
     "nullabe": true
   }
-}
-```
-#### Swashbuckle registration
-Registration of SVO's with [Swashbuckle](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/)
-could look like this:
-
-``` C#
-public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
-{
-    var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
-    foreach (var attr in attributes)
-    {
-        options.MapType(attr.DataType, () => new OpenApiSchema
-        {
-            Type = attr.Type,
-            Format = attr.Format,
-            Pattern = attr.Pattern,
-            Nullable = attr.Nullable,
-        });
-    }
-    return options;
 }
 ```
               

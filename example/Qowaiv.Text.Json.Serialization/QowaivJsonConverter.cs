@@ -11,12 +11,12 @@ namespace Qowaiv.Text.Json.Serialization
     public class QowaivJsonConverter : JsonConverterFactory
     {
         /// <summary>Returns true if the object type is (nullable) IJsonSerializable.</summary>
-        /// <param name="objectType">
+        /// <param name="typeToConvert">
         /// The object type to convert.
         /// </param>
-        public override bool CanConvert(Type objectType)
+        public override bool CanConvert(Type typeToConvert)
         {
-            return objectType != null && (QowaivType.IsIJsonSerializable(objectType) || QowaivType.IsNullableIJsonSerializable(objectType));
+            return typeToConvert != null && (QowaivType.IsIJsonSerializable(typeToConvert) || QowaivType.IsNullableIJsonSerializable(typeToConvert));
         }
 
         /// <summary>Creates a converter for a <see cref="IJsonSerializable"/>.</summary>

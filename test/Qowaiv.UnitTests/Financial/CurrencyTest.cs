@@ -595,7 +595,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             using (new CultureInfoScope("en-GB"))
             {
-                Amount number = 1200.34m;
+                Amount number = (Amount)1200.34m;
                 var act = number.ToString("C", Currency.BYR);
                 var exp = "BYR1,200";
                 Assert.AreEqual(exp, act);
@@ -607,7 +607,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             using (new CultureInfoScope("en-GB"))
             {
-                Amount number = 12.34m;
+                Amount number = (Amount)12.34m;
                 var act = number.ToString("C", Currency.ANG);
                 var exp = "NAf.12.34";
                 Assert.AreEqual(exp, act);

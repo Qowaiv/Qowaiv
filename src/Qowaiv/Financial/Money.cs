@@ -37,6 +37,9 @@ namespace Qowaiv.Financial
         private decimal m_Value;
         private Currency m_Currency;
 
+        /// <summary>Gets the amount of the money.</summary>
+        public Amount Amount => (Amount)m_Value;
+
         /// <summary>Gets the currency of the money.</summary>
         public Currency Currency => m_Currency;
 
@@ -44,18 +47,315 @@ namespace Qowaiv.Financial
 
         #region Methods
 
-        /// <summary>Adds money.</summary>
-        /// <param name="l">The left operand.</param>
-        /// <param name="r">The right operand</param>
-        public Money Add(Money l, Money r)
-        {
-            return Create(l.m_Value + r.m_Value, HaveSameCurrency(l, r, "addition"));
-        }
+        /// <summary>Returns the absolute value of the money.</summary>
+        public Money Abs() => Math.Abs(m_Value) + Currency;
+
+        /// <summary>Pluses the money.</summary>
+        internal Money Plus() => +m_Value + Currency;
+
+        /// <summary>Negates the money.</summary>
+        internal Money Negate() => -m_Value + Currency;
+
+        /// <summary>Increases the money with one (of the current currency).</summary>
+        internal Money Increment() => (m_Value + 1) + Currency;
+
+        /// <summary>Decreases the money with one (of the current currency).</summary>
+        internal Money Decrement() => (m_Value - 1) + Currency;
+
+        /// <summary>Decreases the amount with one.</summary>
+        /// <summary>Adds a amount to the current amount.</summary>
+        /// <param name="money">
+        /// The money to add.
+        /// </param>
+        public Money Add(Money money) => (m_Value + money.m_Value) + HaveSameCurrency(this, money, "addition");
+
+        /// <summary>Adds the specified percentage to the amount.</summary>
+        /// <param name="p">
+        /// The percentage to add.
+        /// </param>
+        public Money Add(Percentage p) => m_Value.Add(p) + Currency;
+
+        /// <summary>Subtracts a amount from the current amount.</summary>
+        /// <param name="money">
+        /// The money to Subtract.
+        /// </param>
+        public Money Subtract(Money money) => (m_Value - money.m_Value) + HaveSameCurrency(this, money, "subtraction");
+
+        /// <summary>AddsSubtract the specified percentage from the amount.</summary>
+        /// <param name="p">
+        /// The percentage to add.
+        /// </param>
+        public Money Subtract(Percentage p) => m_Value.Subtract(p) + Currency;
+
+        /// <summary>Gets a percentage of the money.</summary>
+        /// <param name="p">
+        /// The percentage to get.
+        /// </param>
+        public Money Multiply(Percentage p) => (m_Value * p) + Currency;
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Multiply(decimal factor) => (m_Value * factor) + Currency;
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Multiply(double factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Multiply(float factor) => Multiply((decimal)factor);
+
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Multiply(long factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Multiply(int factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Multiply(short factor) => Multiply((decimal)factor);
+
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Money Multiply(ulong factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Money Multiply(uint factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the money with a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Money Multiply(ushort factor) => Multiply((decimal)factor);
+
+
+        /// <summary>Divides the money by a specified money.</summary>
+        /// <param name="p">
+        /// The money to devides to..
+        /// </param>
+        public Money Divide(Percentage p) => (m_Value / p) + Currency;
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Divide(decimal factor) => (m_Value / factor) + Currency;
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Divide(double factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Divide(float factor) => Divide((decimal)factor);
+
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Divide(long factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Divide(int factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Money Divide(short factor) => Divide((decimal)factor);
+
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Money Divide(ulong factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Money Divide(uint factor) => Divide((decimal)factor);
+
+        /// <summary>Divides the money by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public Money Divide(ushort factor) => Divide((decimal)factor);
+
+        /// <summary>Rounds the money value to the preferred number decimal places, based on its currency.</summary>
+        public Money Round() => Round(Currency.Digits);
+
+        /// <summary>Rounds the money value to a specified number of decimal places.</summary>
+        /// <param name="decimals">
+        /// A value from -28 to 28 that specifies the number of decimal places to round to.
+        /// </param>
+        /// <remarks>
+        /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+        /// </remarks>
+        public Money Round(int decimals) => Round(decimals, DecimalRounding.BankersRound);
+
+        /// <summary>Rounds the money value to a specified number of decimal places.</summary>
+        /// <param name="decimals">
+        /// A value from -28 to 28 that specifies the number of decimal places to round to.
+        /// </param>
+        /// <param name="mode">
+        /// The mode of rounding applied.
+        /// </param>
+        /// <remarks>
+        /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+        /// </remarks>
+        public Money Round(int decimals, DecimalRounding mode) => m_Value.Round(decimals, mode) + Currency;
+
+        /// <summary>Rounds the money value to the closed number that is a multiple of the specified factor.</summary>
+        /// <param name="multipleOf">
+        /// The factor of which the number should be multiple of.
+        /// </param>
+        public Money RoundToMultiple(decimal multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.BankersRound);
+
+        /// <summary>Rounds the money value to the closed number that is a multiple of the specified factor.</summary>
+        /// <param name="multipleOf">
+        /// The factor of which the number should be multiple of.
+        /// </param>
+        /// <param name="mode">
+        /// The rounding method used to determine the closed by number.
+        /// </param>
+        public Money RoundToMultiple(decimal multipleOf, DecimalRounding mode) => m_Value.RoundToMultiple(multipleOf, mode) + Currency;
+
+        /// <summary>Increases the money with one (of the current currency).</summary>
+        public static Money operator ++(Money money) => money.Increment();
+        /// <summary>Decreases the money with one (of the current currency).</summary>
+        public static Money operator --(Money money) => money.Decrement();
+
+        /// <summary>Unitary plusses the money.</summary>
+        public static Money operator +(Money money) => money.Plus();
+        /// <summary>Negates the money.</summary>
+        public static Money operator -(Money money) => money.Negate();
 
         /// <summary>Adds money.</summary>
         /// <param name="l">The left operand.</param>
         /// <param name="r">The right operand</param>
-        public static Money operator +(Money l, Money r) => l + r;
+        public static Money operator +(Money l, Money r) => l.Add(r);
+
+        /// <summary>Adds the percentage to the money.</summary>
+        public static Money operator +(Money money, Percentage p) => (money.m_Value + p) + money.Currency;
+
+        /// <summary>Adds money.</summary>
+        /// <param name="l">The left operand.</param>
+        /// <param name="r">The right operand</param>
+        public static Money operator -(Money l, Money r) => l.Subtract(r);
+
+        /// <summary>Subtracts the percentage from the money.</summary>
+        public static Money operator -(Money money, Percentage p) => (money.m_Value - p) + money.Currency;
+
+        /// <summary>Multiplies the money with the factor.</summary>
+        public static Money operator *(Money money, Percentage factor) => money.Multiply(factor);
+
+        /// <summary>Multiplies the money with the factor.</summary>
+        public static Money operator *(Money money, decimal factor) => money.Multiply(factor);
+        /// <summary>Multiplies the money with the factor.</summary>
+        public static Money operator *(Money money, double factor) => money.Multiply(factor);
+        /// <summary>Multiplies the money with the factor.</summary>
+        public static Money operator *(Money money, float factor) => money.Multiply(factor);
+
+        /// <summary>Multiplies the money with the factor.</summary>
+        public static Money operator *(Money money, long factor) => money.Multiply(factor);
+        /// <summary>Multiplies the money with the factor.</summary>
+        public static Money operator *(Money money, int factor) => money.Multiply(factor);
+        /// <summary>Multiplies the money with the factor.</summary>
+        public static Money operator *(Money money, short factor) => money.Multiply(factor);
+
+        /// <summary>Multiplies the money with the factor.</summary>
+        [CLSCompliant(false)]
+        public static Money operator *(Money money, ulong factor) => money.Multiply(factor);
+        /// <summary>Multiplies the money with the factor.</summary>
+        [CLSCompliant(false)]
+        public static Money operator *(Money money, uint factor) => money.Multiply(factor);
+        /// <summary>Multiplies the money with the factor.</summary>
+        [CLSCompliant(false)]
+        public static Money operator *(Money money, ushort factor) => money.Multiply(factor);
+
+
+        /// <summary>Divides the money by the percentage.</summary>
+        public static Money operator /(Money money, Percentage p) => money.Divide(p);
+        /// <summary>Divides the money by the factor.</summary>
+        public static Money operator /(Money money, decimal factor) => money.Divide(factor);
+        /// <summary>Divides the money by the factor.</summary>
+        public static Money operator /(Money money, double factor) => money.Divide(factor);
+        /// <summary>Divides the money by the factor.</summary>
+        public static Money operator /(Money money, float factor) => money.Divide(factor);
+
+        /// <summary>Divides the money by the factor.</summary>
+        public static Money operator /(Money money, long factor) => money.Divide(factor);
+        /// <summary>Divides the money by the factor.</summary>
+        public static Money operator /(Money money, int factor) => money.Divide(factor);
+        /// <summary>Divides the money by the factor.</summary>
+        public static Money operator /(Money money, short factor) => money.Divide(factor);
+
+        /// <summary>Divides the money by the factor.</summary>
+        [CLSCompliant(false)]
+        public static Money operator /(Money money, ulong factor) => money.Divide(factor);
+        /// <summary>Divides the money by the factor.</summary>
+        [CLSCompliant(false)]
+        public static Money operator /(Money money, uint factor) => money.Divide(factor);
+        /// <summary>Divides the money by the factor.</summary>
+        [CLSCompliant(false)]
+        public static Money operator /(Money money, ushort factor) => money.Divide(factor);
+
+
 
         [DebuggerStepThrough]
         private static Currency HaveSameCurrency(Money l, Money r, string operation)
@@ -127,7 +427,7 @@ namespace Qowaiv.Financial
         #region (JSON) (De)serialization
 
         /// <summary>Generates Money from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()  => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
 
         /// <summary>Generates Money from a JSON string representation.</summary>
         /// <param name="jsonString">
@@ -200,7 +500,7 @@ namespace Qowaiv.Financial
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString("C", formatProvider);
+        public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">
@@ -216,7 +516,7 @@ namespace Qowaiv.Financial
                 return formatted;
             }
             var numberFormatInfo = Currency.GetNumberFormatInfo(formatProvider);
-            return m_Value.ToString(format, numberFormatInfo);
+            return m_Value.ToString(format ?? "C", numberFormatInfo);
         }
 
         #endregion
@@ -316,22 +616,12 @@ namespace Qowaiv.Financial
         #region (Explicit) casting
 
         /// <summary>Casts Money to a <see cref="string"/>.</summary>
-        public static explicit operator string(Money val)=> val.ToString(CultureInfo.CurrentCulture);
+        public static explicit operator string(Money val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
         public static explicit operator Money(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-
-        /// <summary>Casts an Amount to Money.</summary>
-        public static implicit operator Money(Amount val) => Create((decimal)val);
-        /// <summary>Casts a decimal to Money.</summary>
-        public static implicit operator Money(decimal val) => Create(val);
-        /// <summary>Casts a double to Money.</summary>
-        public static implicit operator Money(double val) => Create((decimal)val);
-        /// <summary>Casts a double to Money.</summary>
-        public static implicit operator Money(int val) => Create(val);
-
         /// <summary>Casts Money to a decimal.</summary>
-        public static explicit operator Amount(Money val) => val.m_Value;
+        public static explicit operator Amount(Money val) => (Amount)val.m_Value;
         /// <summary>Casts Money to a decimal.</summary>
         public static explicit operator decimal(Money val) => val.m_Value;
         /// <summary>Casts Money to a double.</summary>
@@ -351,7 +641,7 @@ namespace Qowaiv.Financial
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
-        public static Money Parse(string s)=> Parse(s, CultureInfo.CurrentCulture);
+        public static Money Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to </summary>
         /// <param name="s">

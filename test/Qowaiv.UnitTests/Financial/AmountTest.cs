@@ -14,7 +14,7 @@ namespace Qowaiv.Financial.UnitTests
     public class AmountTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly Amount TestStruct = 42.17m;
+        public static readonly Amount TestStruct = (Amount)42.17m;
 
 
         public static NumberFormatInfo GetCustomNumberFormatInfo()
@@ -110,7 +110,7 @@ namespace Qowaiv.Financial.UnitTests
         public void Parse_CustomFormatProvider_ValidParsing()
         {
             Amount act = Amount.Parse("5#123*34", GetCustomNumberFormatInfo());
-            Amount exp = 5123.34;
+            Amount exp = (Amount)5123.34;
 
             Assert.AreEqual(exp, act);
         }
@@ -341,7 +341,7 @@ namespace Qowaiv.Financial.UnitTests
         public void FromJson_Int64Value_AreEqual()
         {
             Amount act = JsonTester.Read<Amount>((long)TestStruct);
-            Amount exp = 42;
+            Amount exp = (Amount)42;
 
             Assert.AreEqual(exp, act);
         }
@@ -451,7 +451,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void ToString_FormatCurrencyFrFr_170Comma42Euro()
         {
-            Amount amount = 170.42;
+            Amount amount = (Amount)170.42;
             var act = amount.ToString("C", new CultureInfo("fr-FR"));
             var exp = "170,42 €";
             Assert.AreEqual(exp, act);
@@ -461,7 +461,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void ToString_CustomFormatProvider_Formatted()
         {
-            Amount amount = 12345678.235m;
+            Amount amount = (Amount)12345678.235m;
             var act = amount.ToString("#,##0.0000", GetCustomNumberFormatInfo());
             var exp = "12#345#678*2350";
             Assert.AreEqual(exp, act);
@@ -583,10 +583,10 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void OrderBy_Amount_AreEqual()
         {
-            Amount item0 = 0.23;
-            Amount item1 = 1.24;
-            Amount item2 = 2.27;
-            Amount item3 = 1300;
+            Amount item0 = (Amount)0.23;
+            Amount item1 = (Amount)1.24;
+            Amount item2 = (Amount)2.27;
+            Amount item3 = (Amount)1300;
 
             var inp = new List<Amount> { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
             var exp = new List<Amount> { Amount.Zero, Amount.Zero, item0, item1, item2, item3 };
@@ -599,10 +599,10 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void OrderByDescending_Amount_AreEqual()
         {
-            Amount item0 = 0.23;
-            Amount item1 = 1.24;
-            Amount item2 = 2.27;
-            Amount item3 = 1300;
+            Amount item0 = (Amount)0.23;
+            Amount item1 = (Amount)1.24;
+            Amount item2 = (Amount)2.27;
+            Amount item3 = (Amount)1300;
 
             var inp = new List<Amount> { Amount.Zero, item3, item2, item0, item1, Amount.Zero };
             var exp = new List<Amount> { item3, item2, item1, item0, Amount.Zero, Amount.Zero };
@@ -655,16 +655,16 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void LessThan_17LT19_IsTrue()
         {
-            Amount l = 17;
-            Amount r = 19;
+            Amount l = (Amount)17;
+            Amount r = (Amount)19;
 
             Assert.IsTrue(l < r);
         }
         [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
-            Amount l = 21;
-            Amount r = 19;
+            Amount l = (Amount)21;
+            Amount r = (Amount)19;
 
             Assert.IsTrue(l > r);
         }
@@ -672,16 +672,16 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
-            Amount l = 17;
-            Amount r = 19;
+            Amount l = (Amount)17;
+            Amount r = (Amount)19;
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
-            Amount l = 21;
-            Amount r = 19;
+            Amount l = (Amount)21;
+            Amount r = (Amount)19;
 
             Assert.IsTrue(l >= r);
         }
@@ -689,16 +689,16 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
-            Amount l = 17;
-            Amount r = 17;
+            Amount l = (Amount)17;
+            Amount r = (Amount)17;
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
-            Amount l = 21;
-            Amount r = 21;
+            Amount l = (Amount)21;
+            Amount r = (Amount)21;
 
             Assert.IsTrue(l >= r);
         }
@@ -725,7 +725,282 @@ namespace Qowaiv.Financial.UnitTests
 
         #endregion
 
-        #region Properties
+        #region Methods
+
+        [TestCase(1234.01, -1234.01)]
+        [TestCase(1234.01, +1234.01)]
+        public void Abs(Amount expected, Amount value)
+        {
+            var abs = value.Abs();
+            Assert.AreEqual(expected, abs);
+        }
+
+        [TestCase(-1234.01)]
+        [TestCase(+1234.01)]
+        public void Plus(Amount expected)
+        {
+            var plus = +expected;
+            Assert.AreEqual(expected, plus);
+        }
+
+        [TestCase(+1234.01, -1234.01)]
+        [TestCase(-1234.01, +1234.01)]
+        public void Negate(Amount expected, Amount value)
+        {
+            var negated = -value;
+            Assert.AreEqual(expected, negated);
+        }
+
+        [Test]
+        public void Decrement_EqualsTestStruct()
+        {
+            Amount amount = (Amount)43.17;
+            Assert.AreEqual(TestStruct, --amount);
+        }
+
+        [Test]
+        public void Increment_EqualsTestStruct()
+        {
+            Amount amount = (Amount)41.17;
+            Assert.AreEqual(TestStruct, ++amount);
+        }
+
+        [Test]
+        public void Add_SomeAmount_Added()
+        {
+            Amount amount = (Amount)40.10;
+            Amount other = (Amount)2.07;
+            Assert.AreEqual(TestStruct, amount + other);
+        }
+
+        [Test]
+        public void Add_SomePercentage_Added()
+        {
+            Amount amount = (Amount)40.00;
+            var p = 10.Percent();
+            Assert.AreEqual((Amount)44.00, amount + p);
+        }
+
+        [Test]
+        public void Subtract_SomeAmount_Subtracted()
+        {
+            Amount amount = (Amount)43.20;
+            Amount other = (Amount)1.03;
+            Assert.AreEqual(TestStruct, amount - other);
+        }
+
+        [Test]
+        public void Subtract_SomePercentage_Subtracted()
+        {
+            Amount amount = (Amount)40.00;
+            var p = 25.Percent();
+            Assert.AreEqual((Amount)30.00, amount - p);
+        }
+
+        [Test]
+        public void Multiply_Percentage()
+        {
+            Amount amount = (Amount)100.40m;
+            var p = 50.Percent();
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount * p);
+        }
+
+        [Test]
+        public void Multiply_Float()
+        {
+            Amount amount = (Amount)100.40m;
+            float p = 0.5F;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount * p);
+        }
+
+        [Test]
+        public void Multiply_Double()
+        {
+            Amount amount = (Amount)100.40m;
+            double p = 0.5;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount * p);
+        }
+
+        [Test]
+        public void Multiply_Decimal()
+        {
+            Amount amount = (Amount)100.40m;
+            var p = 0.5m;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount * p);
+        }
+
+        [Test]
+        public void Multiply_Short()
+        {
+            Amount amount = (Amount)100.40m;
+            short f = 2;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount * f);
+        }
+
+        [Test]
+        public void Multiply_Int()
+        {
+            Amount amount = (Amount)100.40m;
+            int f = 2;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount * f);
+        }
+
+        [Test]
+        public void Multiply_Long()
+        {
+            Amount amount = (Amount)100.40m;
+            long f = 2;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount * f);
+        }
+
+        [Test]
+        public void Multiply_UShort()
+        {
+            Amount amount = (Amount)100.40m;
+            ushort f = 2;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount * f);
+        }
+
+        [Test]
+        public void Multiply_UInt()
+        {
+            Amount amount = (Amount)100.40m;
+            uint f = 2;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount * f);
+        }
+
+        [Test]
+        public void Multiply_ULong()
+        {
+            Amount amount = (Amount)100.40m;
+            ulong f = 2;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount * f);
+        }
+
+        [Test]
+        public void Divide_Percentage()
+        {
+            Amount amount = (Amount)100.40m;
+            var p = 50.Percent();
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Float()
+        {
+            Amount amount = (Amount)100.40m;
+            float p = 0.5F;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Double()
+        {
+            Amount amount = (Amount)100.40m;
+            double p = 0.5;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Decimal()
+        {
+            Amount amount = (Amount)100.40m;
+            var p = 0.5m;
+            Amount expected = (Amount)200.80m;
+            Assert.AreEqual(expected, amount / p);
+        }
+
+        [Test]
+        public void Divide_Short()
+        {
+            Amount amount = (Amount)100.40m;
+            short f = 2;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_Int()
+        {
+            Amount amount = (Amount)100.40m;
+            int f = 2;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_Long()
+        {
+            Amount amount = (Amount)100.40m;
+            long f = 2;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_UShort()
+        {
+            Amount amount = (Amount)100.40m;
+            ushort f = 2;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_UInt()
+        {
+            Amount amount = (Amount)100.40m;
+            uint f = 2;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Divide_ULong()
+        {
+            Amount amount = (Amount)100.40m;
+            ulong f = 2;
+            Amount expected = (Amount)50.20m;
+            Assert.AreEqual(expected, amount / f);
+        }
+
+        [Test]
+        public void Round_NoDigits()
+        {
+            var amount = (Amount)123.4567m;
+            var rounded = amount.Round();
+            Assert.AreEqual((Amount)123m, rounded);
+        }
+
+        [Test]
+        public void Round_1Digit()
+        {
+            var amount = (Amount)123.4567m;
+            var rounded = amount.Round(1);
+            Assert.AreEqual((Amount)123.5m , rounded);
+        }
+
+        [Test]
+        public void RoundToMultiple_0d25()
+        {
+            var amount = (Amount)123.6567m;
+            var rounded = amount.RoundToMultiple(0.25m);
+            Assert.AreEqual((Amount)123.75m, rounded);
+        }
+
         #endregion
 
         #region Type converter tests

@@ -650,16 +650,16 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void LessThan_17LT19_IsTrue()
         {
-            Money l = 17;
-            Money r = 19;
+            var l = 17 + Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l < r);
         }
         [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
-            Money l = 21;
-            Money r = 19;
+            var l = 21 + Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l > r);
         }
@@ -667,16 +667,16 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
-            Money l = 17;
-            Money r = 19;
+            var l = 17 + Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
-            Money l = 21;
-            Money r = 19;
+            var l = 21 + Currency.DKK;
+            var r = 19 + Currency.DKK;
 
             Assert.IsTrue(l >= r);
         }
@@ -684,16 +684,16 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
-            Money l = 17;
-            Money r = 17;
+            var l = 17 + Currency.DKK;
+            var r = 17 + Currency.DKK;
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
-            Money l = 21;
-            Money r = 21;
+            var l = 21 + Currency.DKK;
+            var r = 21 + Currency.DKK;
 
             Assert.IsTrue(l >= r);
         }
@@ -721,6 +721,330 @@ namespace Qowaiv.UnitTests.Financial
         #endregion
 
         #region Properties
+
+        [Test]
+        public void Currency_Set()
+        {
+            var money = 42 + Currency.EUR;
+            Assert.AreEqual(Currency.EUR, money.Currency);
+        }
+
+        [Test]
+        public void Amount_Set()
+        {
+            var money = 42 + Currency.EUR;
+            Assert.AreEqual((Amount)42, money.Amount);
+        }
+
+        #endregion
+
+        #region Operations
+
+        [TestCase(23.1234, -23.1234)]
+        [TestCase(23.1234, +23.1234)]
+        public void Abs(decimal expected, decimal value)
+        {
+            var money = value + Currency.USD;
+            var abs = money.Abs();
+            Assert.AreEqual(expected + Currency.USD, abs);
+        }
+
+        [Test]
+        public void Plus_TestStruct_SameValue()
+        {
+            var act = +TestStruct;
+            Assert.AreEqual(TestStruct, act);
+        }
+
+        [Test]
+        public void Negates_TestStruct_NegativeValue()
+        {
+            var act = -TestStruct;
+            var exp = -42.17 + Currency.EUR;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Increase_TestStruct_Plus1()
+        {
+            var act = TestStruct;
+            var exp = 43.17 + Currency.EUR;
+            Assert.AreEqual(exp, ++act);
+        }
+
+        [Test]
+        public void Decrease_TestStruct_Minus1()
+        {
+            var act = TestStruct;
+            var exp = 41.17 + Currency.EUR;
+            Assert.AreEqual(exp, --act);
+        }
+
+        [Test]
+        public void Add_SameCurrency_Added()
+        {
+            var l = 16 + Currency.EUR;
+            var r = 26 + Currency.EUR;
+            var a = 42 + Currency.EUR;
+
+            Assert.AreEqual(a, l + r);
+        }
+
+        [Test]
+        public void Add_25Percent_Added()
+        {
+            var l = 16 + Currency.EUR;
+            var p = 25.Percent();
+            var a = 20 + Currency.EUR;
+
+            Assert.AreEqual(a, l + p);
+        }
+
+        [Test]
+        public void Add_DifferentCurrency_Throws()
+        {
+            var l = 16 + Currency.EUR;
+            var r = 666 + Currency.USD;
+
+            var x = Assert.Catch<CurrencyMismatchException>(() => l.Add(r));
+            Assert.AreEqual("The addition operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
+        }
+
+        [Test]
+        public void Subtract_SameCurrency_Subtracted()
+        {
+            var l = 69 + Currency.EUR;
+            var r = 27 + Currency.EUR;
+            var a = 42 + Currency.EUR;
+
+            Assert.AreEqual(a, l - r);
+        }
+
+        [Test]
+        public void Subtract_25Percent_Subtracted()
+        {
+            var l = 16 + Currency.EUR;
+            var p = 25.Percent();
+            var a = 12 + Currency.EUR;
+
+            Assert.AreEqual(a, l - p);
+        }
+
+        [Test]
+        public void Subtract_DifferentCurrency_Throws()
+        {
+            var l = 16 + Currency.EUR;
+            var r = 666 + Currency.USD;
+
+            var x = Assert.Catch<CurrencyMismatchException>(() => l.Subtract(r));
+
+            Assert.AreEqual("The subtraction operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
+        }
+
+        [Test]
+        public void Multiply_Percentage()
+        {
+            var money = 100.40m + Currency.USD;
+            var p = 50.Percent();
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money * p);
+        }
+
+        [Test]
+        public void Multiply_Float()
+        {
+            var money = 100.40m + Currency.USD;
+            float p = 0.5F;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money * p);
+        }
+
+        [Test]
+        public void Multiply_Double()
+        {
+            var money = 100.40m + Currency.USD;
+            double p = 0.5;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money * p);
+        }
+
+        [Test]
+        public void Multiply_Decimal()
+        {
+            var money = 100.40m + Currency.USD;
+            var p = 0.5m;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money * p);
+        }
+
+        [Test]
+        public void Multiply_Short()
+        {
+            var money = 100.40m + Currency.USD;
+            short f = 2;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money * f);
+        }
+
+        [Test]
+        public void Multiply_Int()
+        {
+            var money = 100.40m + Currency.USD;
+            int f = 2;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money * f);
+        }
+
+        [Test]
+        public void Multiply_Long()
+        {
+            var money = 100.40m + Currency.USD;
+            long f = 2;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money * f);
+        }
+
+        [Test]
+        public void Multiply_UShort()
+        {
+            var money = 100.40m + Currency.USD;
+            ushort f = 2;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money * f);
+        }
+
+        [Test]
+        public void Multiply_UInt()
+        {
+            var money = 100.40m + Currency.USD;
+            uint f = 2;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money * f);
+        }
+
+        [Test]
+        public void Multiply_ULong()
+        {
+            var money = 100.40m + Currency.USD;
+            ulong f = 2;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money * f);
+        }
+
+        [Test]
+        public void Divide_Percentage()
+        {
+            var money = 100.40m + Currency.USD;
+            var p = 50.Percent();
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money / p);
+        }
+
+        [Test]
+        public void Divide_Float()
+        {
+            var money = 100.40m + Currency.USD;
+            float p = 0.5F;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money / p);
+        }
+
+        [Test]
+        public void Divide_Double()
+        {
+            var money = 100.40m + Currency.USD;
+            double p = 0.5;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money / p);
+        }
+
+        [Test]
+        public void Divide_Decimal()
+        {
+            var money = 100.40m + Currency.USD;
+            var p = 0.5m;
+            var expected = 200.8m + Currency.USD;
+            Assert.AreEqual(expected, money / p);
+        }
+
+        [Test]
+        public void Divide_Short()
+        {
+            var money = 100.40m + Currency.USD;
+            short f = 2;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money / f);
+        }
+
+        [Test]
+        public void Divide_Int()
+        {
+            var money = 100.40m + Currency.USD;
+            int f = 2;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money / f);
+        }
+
+        [Test]
+        public void Divide_Long()
+        {
+            var money = 100.40m + Currency.USD;
+            long f = 2;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money / f);
+        }
+
+        [Test]
+        public void Divide_UShort()
+        {
+            var money = 100.40m + Currency.USD;
+            ushort f = 2;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money / f);
+        }
+
+        [Test]
+        public void Divide_UInt()
+        {
+            var money = 100.40m + Currency.USD;
+            uint f = 2;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money / f);
+        }
+
+        [Test]
+        public void Divide_ULong()
+        {
+            var money = 100.40m + Currency.USD;
+            ulong f = 2;
+            var expected = 50.20m + Currency.USD;
+            Assert.AreEqual(expected, money / f);
+        }
+
+        [Test]
+        public void Round_EUR_2Digits()
+        {
+            var money = 123.4567m + Currency.EUR;
+            var rounded = money.Round();
+            Assert.AreEqual(123.46m + Currency.EUR, rounded);
+        }
+
+        [Test]
+        public void Round_1Digit()
+        {
+            var money = 123.4567m + Currency.EUR;
+            var rounded = money.Round(1);
+            Assert.AreEqual(123.5m + Currency.EUR, rounded);
+        }
+
+        [Test]
+        public void RoundToMultiple_0d25()
+        {
+            var money = 123.6567m + Currency.EUR;
+            var rounded = money.RoundToMultiple(0.25m);
+            Assert.AreEqual(123.75m + Currency.EUR, rounded);
+        }
+
         #endregion
 
         #region Type converter tests

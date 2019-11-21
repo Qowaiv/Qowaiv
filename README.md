@@ -472,7 +472,32 @@ and if the data type is nullable, all when applicable.
   }
 }
 ```
-              
+  
+#### OpenApi using Swagger 
+When using [Swagger](https://swagger.io/resources/open-api/) to implement
+OpenApi this could be done like below:
+``` C#
+/// <summary>Extensions on <see cref="SwaggerGenOptions"/>.</summary>
+public static class SwaggerGenOptionsSvoExtensions
+{
+	/// <summary>Maps Qowaiv SVO's.</summary>
+	public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
+	{
+		var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
+		foreach (var attr in attributes)
+		{
+			options.MapType(attr.DataType, () => new OpenApiSchema
+			{
+				Type = attr.Type,
+				Format = attr.Format,
+				Pattern = attr.Pattern,
+				Nullable = attr.Nullable,
+			});
+		}
+	}
+}
+```
+            
 ### XML
 .NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
 with the same approach:

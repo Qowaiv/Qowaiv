@@ -10,8 +10,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv
@@ -21,9 +19,12 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
     [OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information, for example, 2017-06-10 15:00.", type: "string", format: "local-date-time")]
     [TypeConverter(typeof(LocalDateTimeTypeConverter))]
-    public struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
+    public partial struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
     {
         private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
+
+        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
+        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionLocalDateTime;
 
         /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
         public static readonly LocalDateTime MinValue = new LocalDateTime(DateTime.MinValue);
@@ -170,39 +171,39 @@ namespace Qowaiv
         #region Properties
 
         /// <summary>Gets the year component of the date represented by this instance.</summary>
-        public int Year { get { return m_Value.Year; } }
+        public int Year => m_Value.Year;
 
         /// <summary>Gets the month component of the date represented by this instance.</summary>
-        public int Month { get { return m_Value.Month; } }
+        public int Month => m_Value.Month;
 
         /// <summary>Gets the day of the month represented by this instance.</summary>
-        public int Day { get { return m_Value.Day; } }
+        public int Day => m_Value.Day;
 
         /// <summary>Gets the hour component of the date represented by this instance.</summary>
-        public int Hour { get { return m_Value.Hour; } }
+        public int Hour => m_Value.Hour;
 
         /// <summary>Gets the minute component of the date represented by this instance.</summary>
-        public int Minute { get { return m_Value.Minute; } }
+        public int Minute => m_Value.Minute;
 
         /// <summary>Gets the seconds component of the date represented by this instance.</summary>
-        public int Second { get { return m_Value.Second; } }
+        public int Second => m_Value.Second; 
 
         /// <summary>Gets the milliseconds component of the date represented by this instance.</summary>
-        public int Millisecond { get { return m_Value.Millisecond; } }
+        public int Millisecond=> m_Value.Millisecond; 
 
         /// <summary>Gets the number of ticks that represent the date of this instance..</summary>
-        public long Ticks { get { return m_Value.Ticks; } }
+        public long Ticks => m_Value.Ticks; 
 
         /// <summary>Gets the day of the week represented by this instance.</summary>
-        public DayOfWeek DayOfWeek { get { return m_Value.DayOfWeek; } }
+        public DayOfWeek DayOfWeek=> m_Value.DayOfWeek; 
 
         /// <summary>Gets the day of the year represented by this instance.</summary>
-        public int DayOfYear { get { return m_Value.DayOfYear; } }
+        public int DayOfYear => m_Value.DayOfYear; 
 
         /// <summary>Gets the date component of this instance.</summary>
-        public Date Date { get { return (Date)m_Value; } }
+        public Date Date => (Date)m_Value;
 
-        /// <summary>The inner value of the locat date time.</summary>
+        /// <summary>The inner value of the local date time.</summary>
         private DateTime m_Value;
 
         #endregion
@@ -469,58 +470,6 @@ namespace Qowaiv
 
         #endregion
 
-        #region (XML) (De)serialization
-
-        /// <summary>Initializes a new instance of local date time based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private LocalDateTime(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            m_Value = info.GetDateTime("Value");
-        }
-
-        /// <summary>Adds the underlying property of local date time to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
-
-        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize a local date time.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the local date time from an <see href="XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses the string parse function of local date time.
-        /// </remarks>
-        /// <param name="reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = Parse(s, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-        }
-
-        /// <summary>Writes the local date time to an <see href="XmlWriter"/>.</summary>
-        /// <remarks>
-        /// Uses the string representation of local date time.
-        /// </remarks>
-        /// <param name="writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToString(SerializableFormat, CultureInfo.InvariantCulture));
-        }
-
-        #endregion
-
         #region (JSON) (De)serialization
 
         /// <summary>Generates a local date time from a JSON null object representation.</summary>
@@ -530,75 +479,34 @@ namespace Qowaiv
         /// <param name="jsonString">
         /// The JSON string that represents the local date time.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
+        void IJsonSerializable.FromJson(string jsonString)=>  m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates a local date time from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
         /// The JSON integer that represents the local date time.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger)
-        {
-            m_Value = new LocalDateTime(jsonInteger).m_Value;
-        }
+        void IJsonSerializable.FromJson(long jsonInteger)=>m_Value = new LocalDateTime(jsonInteger).m_Value;
 
         /// <summary>Generates a local date time from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the local date time.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a local date time from a JSON date representation.</summary>
         /// <param name="jsonDate">
         /// The JSON Date that represents the local date time.
         /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate)
-        {
-            m_Value = new LocalDateTime(jsonDate).m_Value;
-        }
+        void IJsonSerializable.FromJson(DateTime jsonDate)=>m_Value = new LocalDateTime(jsonDate).m_Value;
 
         /// <summary>Converts a local date time into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return ToString(SerializableFormat, CultureInfo.InvariantCulture);
-        }
+        object IJsonSerializable.ToJson()=>ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         #endregion
 
-        #region IFormattable / ToString
-
         /// <summary>Returns a <see cref="string"/> that represents the current local date time for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get { return m_Value.ToString("yyyy-MM-dd hh:mm:ss.FFF", CultureInfo.InvariantCulture); }
-        }
-
-        /// <summary>Returns a <see cref="string"/> that represents the current local date time.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+        private string DebuggerDisplay => ToString("yyyy-MM-dd hh:mm:ss.FFF", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
         /// <param name="format">
@@ -616,97 +524,8 @@ namespace Qowaiv
             return m_Value.ToString(format, formatProvider);
         }
 
-        #endregion
-
-        #region IEquatable
-
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) { return obj is LocalDateTime && Equals((LocalDateTime)obj); }
-
-        /// <summary>Returns true if this instance and the other <see cref="LocalDateTime"/> are equal, otherwise false.</summary>
-        /// <param name="other">The <see cref="LocalDateTime"/> to compare with.</param>
-        public bool Equals(LocalDateTime other) => m_Value == other.m_Value;
-
-        /// <summary>Returns the hash code for this local date time.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() => m_Value.GetHashCode();
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(LocalDateTime left, LocalDateTime right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(LocalDateTime left, LocalDateTime right)
-        {
-            return !(left == right);
-        }
-
-        #endregion
-
-        #region IComparable
-
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a local date time.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value is not a local date time.
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is LocalDateTime)
-            {
-                return CompareTo((LocalDateTime)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a local date time"), "obj");
-        }
-
-        /// <summary>Compares this instance with a specified local date time and indicates
-        /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified local date time.
-        /// </summary>
-        /// <param name="other">
-        /// The local date time to compare with this instance.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.
-        /// </returns>
-        public int CompareTo(LocalDateTime other) => m_Value.CompareTo(other.m_Value);
-
-
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) < 0;
-
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) > 0;
-
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) <= 0;
-
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) >= 0;
-
-        #endregion
+        /// <summary>Gets an XML string representation of the @FullName.</summary>
+        private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         #region (Explicit) casting
 
@@ -746,80 +565,6 @@ namespace Qowaiv
         public static TimeSpan operator -(LocalDateTime l, LocalDateTime r) => l.Subtract(r);
 
         #endregion
-
-        #region Factory methods
-
-        /// <summary>Converts the string to a local date time.</summary>
-        /// <param name="s">
-        /// A string containing a local date time to convert.
-        /// </param>
-        /// <returns>
-        /// A local date time.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static LocalDateTime Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Converts the string to a local date time.</summary>
-        /// <param name="s">
-        /// A string containing a local date time to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The specified format provider.
-        /// </param>
-        /// <returns>
-        /// A local date time.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static LocalDateTime Parse(string s, IFormatProvider formatProvider)
-        {
-            if (TryParse(s, formatProvider, out LocalDateTime val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatExceptionDate);
-        }
-
-        /// <summary>Converts the string to a local date time.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a local date time to convert.
-        /// </param>
-        /// <returns>
-        /// The local date time if the string was converted successfully, otherwiseMinValue.
-        /// </returns>
-        public static LocalDateTime TryParse(string s)
-        {
-            if (TryParse(s, out LocalDateTime val))
-            {
-                return val;
-            }
-            return MinValue;
-        }
-
-        /// <summary>Converts the string to a local date time.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a local date time to convert.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, out LocalDateTime result)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out result);
-        }
 
         /// <summary>Converts the string to a local date time.
         /// A return value indicates whether the conversion succeeded.
@@ -872,22 +617,10 @@ namespace Qowaiv
             return false;
         }
 
-        #endregion
-
-        #region Validation
-
-        /// <summary>Returns true if the val represents a valid local date time, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns true if the val represents a valid local date time, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            return TryParse(val, formatProvider, out _);
-        }
-
-        #endregion
+        /// <summary>Creates the local date time based on an XML string.</summary>
+        /// <param name="xmlString">
+        /// The XML string representing the local date time.
+        /// </param>
+        private static LocalDateTime FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

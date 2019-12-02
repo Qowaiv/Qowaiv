@@ -13,8 +13,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv
@@ -39,19 +37,22 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
     [TypeConverter(typeof(GenderTypeConverter))]
-    public struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
+    public partial struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
     {
+        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
+        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionGender;
+
         /// <summary>Represents an empty/not set Gender.</summary>
         public static readonly Gender Empty;
 
         /// <summary>Represents a not known/unknown gender.</summary>
-        public static readonly Gender Unknown = new Gender { m_Value = 1 };
+        public static readonly Gender Unknown = new Gender(1);
         /// <summary>Represents a male.</summary>
-        public static readonly Gender Male = new Gender { m_Value = 2 };
+        public static readonly Gender Male = new Gender(2);
         /// <summary>Represents a female.</summary>
-        public static readonly Gender Female = new Gender { m_Value = 4 };
+        public static readonly Gender Female = new Gender(4);
         /// <summary>Represents a not applicable gender.</summary>
-        public static readonly Gender NotApplicable = new Gender { m_Value = 18 };
+        public static readonly Gender NotApplicable = new Gender(18);
 
         /// <summary>Contains not known, male, female, not applicable.</summary>
         public static readonly IReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>
@@ -77,29 +78,11 @@ namespace Qowaiv
             NotApplicable
         });
 
-        #region Properties
-
-        /// <summary>The inner value of the Gender.</summary>
-        private byte m_Value;
-
         /// <summary>Gets the display name.</summary>
         public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>Returns true if the Gender is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default;
-
-        /// <summary>Returns true if the Gender is unknown, otherwise false.</summary>
-        public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-        /// <summary>Returns true if the Gender is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-
         /// <summary>Returns true if the Gender is male or female, otherwise false.</summary>
-        public bool IsMaleOrFemale() => this == Male || this == Female;
+        public bool IsMaleOrFemale() => Equals(Male) || Equals(Female);
 
         /// <summary>Gets the display name for a specified culture.</summary>
         /// <param name="culture">
@@ -114,85 +97,20 @@ namespace Qowaiv
         /// <summary>Converts the Gender to an int.</summary>
         private int? ToNullableInt32() => ToNullableInt32s[m_Value];
 
-        #endregion
-
-        #region (XML) (De)serialization
-
-        /// <summary>Initializes a new instance of Gender based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private Gender(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            m_Value = info.GetByte("Value");
-        }
-
-        /// <summary>Adds the underlying property of Gender to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
-
-        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize a Gender.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the Gender from an <see href="XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses the string parse function of Gender.
-        /// </remarks>
-        /// <param name="reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = Parse(s, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-        }
-
-        /// <summary>Writes the Gender to an <see href="XmlWriter"/>.</summary>
-        /// <remarks>
-        /// Uses the string representation of Gender.
-        /// </remarks>
-        /// <param name="writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(GenderLabels[m_Value]);
-        }
-
-        #endregion
-
-        #region (JSON) (De)serialization
-
         /// <summary>Generates a Gender from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default;
-        }
+        void IJsonSerializable.FromJson() => m_Value = default;
 
         /// <summary>Generates a Gender from a JSON string representation.</summary>
         /// <param name="jsonString">
         /// The JSON string that represents the Gender.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
+        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates a Gender from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Gender.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger)
-        {
-            m_Value = Create((int)jsonInteger).m_Value;
-        }
+        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
 
         /// <summary>Generates a Gender from a JSON number representation.</summary>
         /// <param name="jsonNumber">
@@ -207,49 +125,11 @@ namespace Qowaiv
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a Gender into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return GenderLabels[m_Value];
-        }
-
-        #endregion
-
-        #region IFormattable / ToString
+        object IJsonSerializable.ToJson() => GenderLabels[m_Value];
 
         /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (m_Value == default) { return "Gender: (empty)"; }
-                return "Gender: " + GetDisplayName(CultureInfo.InvariantCulture);
-            }
-        }
-
-        /// <summary>Returns a <see cref="string"/> that represents the current Gender.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Gender.</summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Gender.</summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+        private string DebuggerDisplay => IsEmpty() ? "{empty}" : GetDisplayName(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Gender.</summary>
         /// <param name="format">
@@ -291,95 +171,8 @@ namespace Qowaiv
             { 'f', (svo, provider) => svo.GetResourceString("", provider) },
         };
 
-        #endregion
-
-        #region IEquatable
-
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) => obj is Gender && Equals((Gender)obj);
-
-        /// <summary>Returns true if this instance and the other <see cref="Gender"/> are equal, otherwise false.</summary>
-        /// <param name="other">The <see cref="Gender"/> to compare with.</param>
-        public bool Equals(Gender other) => m_Value == other.m_Value;
-
-        /// <summary>Returns the hash code for this Gender.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() => m_Value.GetHashCode();
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(Gender left, Gender right) => left.Equals(right);
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(Gender left, Gender right) => !(left == right);
-
-        #endregion
-
-        #region IComparable
-
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a Gender.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value is not a Gender.
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is Gender)
-            {
-                return CompareTo((Gender)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a gender"), "obj");
-        }
-
-        /// <summary>Compares this instance with a specified Gender and indicates
-        /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified Gender.
-        /// </summary>
-        /// <param name="other">
-        /// The Gender to compare with this instance.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.
-        /// </returns>
-        /// <remarks>
-        /// Gender.Empty follows all other Gender.
-        /// </remarks>
-        public int CompareTo(Gender other) => m_Value.CompareTo(other.m_Value);
-
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Gender l, Gender r) { return l.m_Value.CompareTo(r.m_Value) < 0; }
-
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Gender l, Gender r) { return l.m_Value.CompareTo(r.m_Value) > 0; }
-
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Gender l, Gender r) { return l.m_Value.CompareTo(r.m_Value) <= 0; }
-
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Gender l, Gender r) { return l.m_Value.CompareTo(r.m_Value) >= 0; }
-
-        #endregion
-
-        #region (Explicit) casting
+        /// <summary>Gets an XML string representation of the gender.</summary>
+        private string ToXmlString() => GenderLabels[m_Value] ?? string.Empty;
 
         /// <summary>Casts a Gender to a <see cref="string"/>.</summary>
         public static explicit operator string(Gender val) => val.ToString(CultureInfo.CurrentCulture);
@@ -394,82 +187,9 @@ namespace Qowaiv
         public static implicit operator Gender(int val) => Create(val);
 
         /// <summary>Casts a Gender to a <see cref="int"/>.</summary>
-        public static explicit operator int? (Gender val) => val.ToNullableInt32();
+        public static explicit operator int?(Gender val) => val.ToNullableInt32();
         /// <summary>Casts an <see cref="int"/> to a Gender.</summary>
         public static implicit operator Gender(int? val) => Create(val);
-
-        #endregion
-
-        #region Factory methods
-
-        /// <summary>Converts the string to a Gender.</summary>
-        /// <param name="s">
-        /// A string containing a Gender to convert.
-        /// </param>
-        /// <returns>
-        /// A Gender.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Gender Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
-
-        /// <summary>Converts the string to a Gender.</summary>
-        /// <param name="s">
-        /// A string containing a Gender to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The specified format provider.
-        /// </param>
-        /// <returns>
-        /// A Gender.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Gender Parse(string s, IFormatProvider formatProvider)
-        {
-            if (TryParse(s, formatProvider, out Gender val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatExceptionGender);
-        }
-
-        /// <summary>Converts the string to a Gender.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a Gender to convert.
-        /// </param>
-        /// <returns>
-        /// The Gender if the string was converted successfully, otherwise Gender.Empty.
-        /// </returns>
-        public static Gender TryParse(string s)
-        {
-            if (TryParse(s, out Gender val))
-            {
-                return val;
-            }
-            return Empty;
-        }
-
-        /// <summary>Converts the string to a Gender.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a Gender to convert.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, out Gender result)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out result);
-        }
 
         /// <summary>Converts the string to a Gender.
         /// A return value indicates whether the conversion succeeded.
@@ -567,37 +287,14 @@ namespace Qowaiv
             return false;
         }
 
-        #endregion
-
-        #region Validation
-
         /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsValid(int? val) => val.HasValue && FromInt32s.ContainsKey(val.Value);
 
-        /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            if (string.IsNullOrWhiteSpace(val)) { return false; }
-
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-
-            AddCulture(culture);
-
-            return
-                Parsings[culture].ContainsKey(val.ToUpper(culture)) ||
-                Parsings[CultureInfo.InvariantCulture].ContainsKey(val.ToUpperInvariant());
-        }
-
-        /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
-        public static bool IsValid(int? val)
-        {
-            return val.HasValue && FromInt32s.ContainsKey(val.Value);
-        }
-
-        #endregion
+        /// <summary>Creates the gender based on an XML string.</summary>
+        /// <param name="xmlString">
+        /// The XML string representing the gender.
+        /// </param>
+        private static Gender FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
 
         #region Resources
 
@@ -670,7 +367,7 @@ namespace Qowaiv
         /// </param>
         private static void AddCulture(CultureInfo culture)
         {
-            lock (locker)
+            lock (Locker)
             {
                 if (Parsings.ContainsKey(culture)) { return; }
 
@@ -716,7 +413,7 @@ namespace Qowaiv
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static readonly object locker = new object();
+        private static readonly object Locker = new object();
 
         #endregion
     }

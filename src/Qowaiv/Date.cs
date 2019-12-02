@@ -507,9 +507,9 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary>Creates the @FullName based on an XML string.</summary>
+        /// <summary>Creates the date based on an XML string.</summary>
         /// <param name="xmlString">
-        /// The XML string representing the @FullName.
+        /// The XML string representing the date.
         /// </param>
         private static Date FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }

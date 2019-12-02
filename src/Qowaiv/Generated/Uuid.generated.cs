@@ -7,49 +7,50 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
-#define NotIsEmpty
+#define NotCultureDependent
 #define NotIsUnknown
 #define NotIsEmptyOrUnknown
+#define NoComparisonOperators
 #define NotGetHashCodeClass
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System;
 
-    public partial struct Timestamp
+    public partial struct Uuid
     {
 #if !NotField
-        private Timestamp(ulong value) => m_Value = value;
-        /// <summary>The inner value of the timestamp.</summary>
-        private ulong m_Value;
+        private Uuid(Guid value) => m_Value = value;
+        /// <summary>The inner value of the UUID.</summary>
+        private Guid m_Value;
 #endif
 #if !NotIsEmpty
-        /// <summary>Returns true if the  timestamp is empty, otherwise false.</summary>
+        /// <summary>Returns true if the  UUID is empty, otherwise false.</summary>
         public bool IsEmpty() => m_Value == default;
 #endif
 #if !NotIsUnknown
-        /// <summary>Returns true if the  timestamp is unknown, otherwise false.</summary>
+        /// <summary>Returns true if the  UUID is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
 #endif
 #if !NotIsEmptyOrUnknown
-        /// <summary>Returns true if the  timestamp is empty or unknown, otherwise false.</summary>
+        /// <summary>Returns true if the  UUID is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 #endif
     }
 }
 
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System;
 
-    public partial struct Timestamp : IEquatable<Timestamp>
+    public partial struct Uuid : IEquatable<Uuid>
     {
 #if !NotEqualsSvo
-        /// <summary>Returns true if this instance and the other timestamp are equal, otherwise false.</summary>
-        /// <param name = "other">The <see cref = "Timestamp"/> to compare with.</param>
-        public bool Equals(Timestamp other) => m_Value == other.m_Value;
+        /// <summary>Returns true if this instance and the other UUID are equal, otherwise false.</summary>
+        /// <param name = "other">The <see cref = "Uuid"/> to compare with.</param>
+        public bool Equals(Uuid other) => m_Value == other.m_Value;
 #endif
         /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is Timestamp other && Equals(other);
+        public override bool Equals(object obj) => obj is Uuid other && Equals(other);
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -61,25 +62,25 @@ namespace Qowaiv.Sql
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
         /// <param name = "right">The right operand</param>
-        public static bool operator !=(Timestamp left, Timestamp right) => !(left == right);
+        public static bool operator !=(Uuid left, Uuid right) => !(left == right);
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
         /// <param name = "right">The right operand</param>
-        public static bool operator ==(Timestamp left, Timestamp right) => left.Equals(right);
+        public static bool operator ==(Uuid left, Uuid right) => left.Equals(right);
     }
 }
 
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System;
     using System.Collections.Generic;
 
-    public partial struct Timestamp : IComparable, IComparable<Timestamp>
+    public partial struct Uuid : IComparable, IComparable<Uuid>
     {
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
-            if (obj is Timestamp other)
+            if (obj is Uuid other)
             {
                 return CompareTo(other);
             }
@@ -88,37 +89,37 @@ namespace Qowaiv.Sql
         }
 
         /// <inheritdoc/>
-        public int CompareTo(Timestamp other) => Comparer<ulong>.Default.Compare(m_Value, other.m_Value);
+        public int CompareTo(Uuid other) => Comparer<Guid>.Default.Compare(m_Value, other.m_Value);
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Timestamp l, Timestamp r) => l.CompareTo(r) < 0;
+        public static bool operator <(Uuid l, Uuid r) => l.CompareTo(r) < 0;
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator>(Timestamp l, Timestamp r) => l.CompareTo(r) > 0;
+        public static bool operator>(Uuid l, Uuid r) => l.CompareTo(r) > 0;
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Timestamp l, Timestamp r) => l.CompareTo(r) <= 0;
+        public static bool operator <=(Uuid l, Uuid r) => l.CompareTo(r) <= 0;
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Timestamp l, Timestamp r) => l.CompareTo(r) >= 0;
+        public static bool operator >=(Uuid l, Uuid r) => l.CompareTo(r) >= 0;
 #endif
     }
 }
 
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System;
     using System.Runtime.Serialization;
 
-    public partial struct Timestamp : ISerializable
+    public partial struct Uuid : ISerializable
     {
-        /// <summary>Initializes a new instance of the timestamp based on the serialization info.</summary>
+        /// <summary>Initializes a new instance of the UUID based on the serialization info.</summary>
         /// <param name = "info">The serialization info.</param>
         /// <param name = "context">The streaming context.</param>
-        private Timestamp(SerializationInfo info, StreamingContext context)
+        private Uuid(SerializationInfo info, StreamingContext context)
         {
             Guard.NotNull(info, nameof(info));
-            m_Value = (ulong)info.GetValue("Value", typeof(ulong));
+            m_Value = (Guid)info.GetValue("Value", typeof(Guid));
         }
 
-        /// <summary>Adds the underlying property of the timestamp to the serialization info.</summary>
+        /// <summary>Adds the underlying property of the UUID to the serialization info.</summary>
         /// <param name = "info">The serialization info.</param>
         /// <param name = "context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
@@ -129,20 +130,20 @@ namespace Qowaiv.Sql
     }
 }
 
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    public partial struct Timestamp : IXmlSerializable
+    public partial struct Uuid : IXmlSerializable
     {
-        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the timestamp.</summary>
+        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the UUID.</summary>
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
-        /// <summary>Reads the timestamp from an <see href = "XmlReader"/>.</summary>
+        /// <summary>Reads the UUID from an <see href = "XmlReader"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "FromXml(string)"/>.
         /// </remarks>
@@ -155,7 +156,7 @@ namespace Qowaiv.Sql
             m_Value = val.m_Value;
         }
 
-        /// <summary>Writes the timestamp to an <see href = "XmlWriter"/>.</summary>
+        /// <summary>Writes the UUID to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.
         /// </remarks>
@@ -168,21 +169,21 @@ namespace Qowaiv.Sql
     }
 }
 
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System;
     using System.Globalization;
 
-    public partial struct Timestamp : IFormattable
+    public partial struct Uuid : IFormattable
     {
-        /// <summary>Returns a <see cref = "string "/> that represents the timestamp.</summary>
+        /// <summary>Returns a <see cref = "string "/> that represents the UUID.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the timestamp.</summary>
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the UUID.</summary>
         /// <param name = "format">
         /// The format that this describes the formatting.
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the timestamp.</summary>
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the UUID.</summary>
         /// <param name = "formatProvider">
         /// The format provider.
         /// </param>
@@ -190,60 +191,60 @@ namespace Qowaiv.Sql
     }
 }
 
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System;
     using System.Globalization;
 
-    public partial struct Timestamp
+    public partial struct Uuid
     {
 #if !NotCultureDependent
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Uuid"/>.</summary>
         /// <param name = "s">
-        /// A string containing the timestamp to convert.
+        /// A string containing the UUID to convert.
         /// </param>
         /// <returns>
-        /// The parsed timestamp.
+        /// The parsed UUID.
         /// </returns>
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Timestamp Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
+        public static Uuid Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Uuid"/>.</summary>
         /// <param name = "s">
-        /// A string containing the timestamp to convert.
+        /// A string containing the UUID to convert.
         /// </param>
         /// <param name = "formatProvider">
         /// The specified format provider.
         /// </param>
         /// <returns>
-        /// The parsed timestamp.
+        /// The parsed UUID.
         /// </returns>
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Timestamp Parse(string s, IFormatProvider formatProvider)
+        public static Uuid Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out Timestamp val) ? val : throw new FormatException(FormatExceptionMessage);
+            return TryParse(s, formatProvider, out Uuid val) ? val : throw new FormatException(FormatExceptionMessage);
         }
 
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Uuid"/>.</summary>
         /// <param name = "s">
-        /// A string containing the timestamp to convert.
+        /// A string containing the UUID to convert.
         /// </param>
         /// <returns>
-        /// The timestamp if the string was converted successfully, otherwise default.
+        /// The UUID if the string was converted successfully, otherwise default.
         /// </returns>
-        public static Timestamp TryParse(string s)
+        public static Uuid TryParse(string s)
         {
-            return TryParse(s, CultureInfo.CurrentCulture, out Timestamp val) ? val : default;
+            return TryParse(s, CultureInfo.CurrentCulture, out Uuid val) ? val : default;
         }
 
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Uuid"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name = "s">
-        /// A string containing the timestamp to convert.
+        /// A string containing the UUID to convert.
         /// </param>
         /// <param name = "result">
         /// The result of the parsing.
@@ -251,54 +252,54 @@ namespace Qowaiv.Sql
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, out Timestamp result) => TryParse(s, CultureInfo.CurrentCulture, out result);
+        public static bool TryParse(string s, out Uuid result) => TryParse(s, CultureInfo.CurrentCulture, out result);
 #else
-        /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
+        /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
         /// <param name="s">
-        /// A string containing the timestamp to convert.
+        /// A string containing the UUID to convert.
         /// </param>
         /// <returns>
-        /// The parsed timestamp.
+        /// The parsed UUID.
         /// </returns>
         /// <exception cref="FormatException">
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
-        public static Timestamp Parse(string s)
+        public static Uuid Parse(string s)
         {
-            return TryParse(s, out Timestamp val)
+            return TryParse(s, out Uuid val)
                 ? val
                 : throw new FormatException(FormatExceptionMessage);
         }
 
-        /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
+        /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
         /// <param name="s">
-        /// A string containing the timestamp to convert.
+        /// A string containing the UUID to convert.
         /// </param>
         /// <returns>
-        /// The timestamp if the string was converted successfully, otherwise default.
+        /// The UUID if the string was converted successfully, otherwise default.
         /// </returns>
-        public static Timestamp TryParse(string s)
+        public static Uuid TryParse(string s)
         {
-            return TryParse(s, out Timestamp val) ? val : default;
+            return TryParse(s, out Uuid val) ? val : default;
         }
 #endif
     }
 }
 
-namespace Qowaiv.Sql
+namespace Qowaiv
 {
     using System;
     using System.Globalization;
 
-    public partial struct Timestamp
+    public partial struct Uuid
     {
 #if !NotCultureDependent
-        /// <summary>Returns true if the value represents a valid timestamp.</summary>
+        /// <summary>Returns true if the value represents a valid UUID.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
-        /// <summary>Returns true if the value represents a valid timestamp.</summary>
+        /// <summary>Returns true if the value represents a valid UUID.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
@@ -314,7 +315,7 @@ namespace Qowaiv.Sql
             && TryParse(val, formatProvider, out _);
         }
 #else
-        /// <summary>Returns true if the value represents a valid timestamp.</summary>
+        /// <summary>Returns true if the value represents a valid UUID.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>

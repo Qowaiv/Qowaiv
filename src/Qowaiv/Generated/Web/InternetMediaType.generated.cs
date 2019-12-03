@@ -42,13 +42,12 @@ namespace Qowaiv.Web
 
     public partial struct InternetMediaType : IEquatable<InternetMediaType>
     {
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is InternetMediaType other && Equals(other);
 #if !NotEqualsSvo
         /// <summary>Returns true if this instance and the other Internet media type are equal, otherwise false.</summary>
         /// <param name = "other">The <see cref = "InternetMediaType"/> to compare with.</param>
         public bool Equals(InternetMediaType other) => m_Value == other.m_Value;
-#endif
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is InternetMediaType other && Equals(other);
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -56,6 +55,7 @@ namespace Qowaiv.Web
 #if !NotGetHashCodeClass
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+#endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
@@ -86,8 +86,10 @@ namespace Qowaiv.Web
             throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
         }
 
+#if !NotEqualsSvo
         /// <inheritdoc/>
         public int CompareTo(InternetMediaType other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
+#endif
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
         public static bool operator <(InternetMediaType l, InternetMediaType r) => l.CompareTo(r) < 0;
@@ -130,6 +132,7 @@ namespace Qowaiv.Web
 
 namespace Qowaiv.Web
 {
+    using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -142,15 +145,16 @@ namespace Qowaiv.Web
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
         /// <summary>Reads the Internet media type from an <see href = "XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses <see cref = "FromXml(string)"/>.
-        /// </remarks>
         /// <param name = "reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
             Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = FromXml(s);
+            var xml = reader.ReadElementString();
+#if !NotCultureDependent
+            var val = Parse(xml, CultureInfo.InvariantCulture);
+#else
+            var val = Parse(xml);
+#endif
             m_Value = val.m_Value;
         }
 
@@ -223,7 +227,7 @@ namespace Qowaiv.Web
         /// </exception>
         public static InternetMediaType Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out InternetMediaType val) ? val : throw new FormatException(FormatExceptionMessage);
+            return TryParse(s, formatProvider, out InternetMediaType val) ? val : throw new FormatException(QowaivMessages.FormatExceptionInternetMediaType);
         }
 
         /// <summary>Converts the <see cref = "string "/> to <see cref = "InternetMediaType"/>.</summary>
@@ -266,7 +270,7 @@ namespace Qowaiv.Web
         {
             return TryParse(s, out InternetMediaType val)
                 ? val
-                : throw new FormatException(FormatExceptionMessage);
+                : throw new FormatException(QowaivMessages.FormatExceptionInternetMediaType);
         }
 
         /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>

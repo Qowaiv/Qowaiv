@@ -11,8 +11,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv
@@ -22,7 +20,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
     [OpenApiDataType(description: "Date span, specified in years, months and days, for example 1Y+10M+16D.", type: "string", format: "date-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D")]
     [TypeConverter(typeof(DateSpanTypeConverter))]
-    public struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
+    public partial struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
         public static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M(?<Days>([+-][0-9]{1,7}))D$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -31,10 +29,10 @@ namespace Qowaiv
         public static readonly DateSpan Zero;
 
         /// <summary>Represents the maximum value of the date span.</summary>
-        public static readonly DateSpan MaxValue = new DateSpan { m_Value = AsUInt64(MonthsPerYear * +9998 + 11, +30) };
+        public static readonly DateSpan MaxValue = new DateSpan(AsUInt64(MonthsPerYear * +9998 + 11, +30));
 
         /// <summary>Represents the minimum value of the date span.</summary>
-        public static readonly DateSpan MinValue = new DateSpan { m_Value = AsUInt64(MonthsPerYear * -9998 - 11, -30) };
+        public static readonly DateSpan MinValue = new DateSpan(AsUInt64(MonthsPerYear * -9998 - 11, -30) );
 
         /// <summary>The average amount of days per month, taken leap years into account.</summary>
         internal const double DaysPerMonth = 30.421625;
@@ -61,10 +59,8 @@ namespace Qowaiv
         /// <param name="days">
         /// Number of days.
         /// </param>
-        public DateSpan(int months, int days)
+        public DateSpan(int months, int days): this(AsUInt64(months, days))
         {
-            m_Value = AsUInt64(months, days);
-
             if (IsOutOfRange(months, days, TotalDays))
             {
                 throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception)null);
@@ -87,11 +83,6 @@ namespace Qowaiv
         /// <summary>Converts the combination of months and days to a <see cref="ulong"/>.</summary>
         private static ulong AsUInt64(long months, long days) => (uint)days | ((ulong)months << MonthShift);
 
-        #region Properties
-
-        /// <summary>The inner value of the date span.</summary>
-        private ulong m_Value;
-
         /// <summary>Gets the total of months.</summary>
         public int TotalMonths => (int)(m_Value >> MonthShift);
 
@@ -106,8 +97,6 @@ namespace Qowaiv
 
         /// <summary>Gets a (approximate) value to sort the date spans by.</summary>
         internal double TotalDays => Days + TotalMonths * DaysPerMonth;
-
-        #endregion
 
         #region Operations
 
@@ -190,58 +179,6 @@ namespace Qowaiv
 
         #endregion
 
-        #region (XML) (De)serialization
-
-        /// <summary>Initializes a new instance of date span based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private DateSpan(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            m_Value = info.GetUInt64("Value");
-        }
-
-        /// <summary>Adds the underlying property of date span to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
-
-        /// <summary>Gets the <see href="XmlSchema" /> to (de) XML serialize a date span.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the date span from an <see href="XmlReader" />.</summary>
-        /// <remarks>
-        /// Uses the string parse function of date span.
-        /// </remarks>
-        /// <param name="reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = Parse(s, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-        }
-
-        /// <summary>Writes the date span to an <see href="XmlWriter" />.</summary>
-        /// <remarks>
-        /// Uses the string representation of date span.
-        /// </remarks>
-        /// <param name="writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToString(CultureInfo.InvariantCulture));
-        }
-
-        #endregion
-
         #region (JSON) (De)serialization
 
         /// <summary>Generates a date span from a JSON null object representation.</summary>
@@ -276,26 +213,9 @@ namespace Qowaiv
 
         #endregion
 
-        #region IFormattable / ToString
-
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0:#,###0} Years, {1:#,###0} Months, {2:#,###0} Days", Years, Months, Days);
-
-        /// <summary>Returns a <see cref="string" /> that represents the current date span.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
-
-        /// <summary>Returns a formatted <see cref="string" /> that represents the current date span.</summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-
-        /// <summary>Returns a formatted <see cref="string" /> that represents the current date span.</summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string" /> that represents the current date span.</summary>
         /// <param name="format">
@@ -313,91 +233,9 @@ namespace Qowaiv
             return string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M{2:+0;-0;+0}D", Years, Months, Days);
         }
 
-        #endregion
+        /// <summary>Gets an XML string representation of the date span.</summary>
+        private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        #region IEquatable
-
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) => obj is DateSpan && Equals((DateSpan)obj);
-
-        /// <summary>Returns true if this instance and the other <see cref="DateSpan" /> are equal, otherwise false.</summary>
-        /// <param name="other">The <see cref="DateSpan" /> to compare with.</param>
-        public bool Equals(DateSpan other) => m_Value == other.m_Value;
-
-        /// <summary>Returns the hash code for this date span.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() => m_Value.GetHashCode();
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(DateSpan left, DateSpan right) => left.Equals(right);
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(DateSpan left, DateSpan right) => !(left == right);
-
-        #endregion
-
-        #region IComparable
-
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a date span.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value is not a date span.
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is DateSpan)
-            {
-                return CompareTo((DateSpan)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a date span"), "obj");
-        }
-
-        /// <summary>Compares this instance with a specified date span and indicates
-        /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified date span.
-        /// </summary>
-        /// <param name="other">
-        /// The date span to compare with this instance.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.
-        /// </returns>
-        public int CompareTo(DateSpan other) => TotalDays.CompareTo(other.TotalDays);
-
-
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(DateSpan l, DateSpan r) => l.CompareTo(r) < 0;
-
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(DateSpan l, DateSpan r) => l.CompareTo(r) > 0;
-
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(DateSpan l, DateSpan r) => l.CompareTo(r) <= 0;
-
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(DateSpan l, DateSpan r) => l.CompareTo(r) >= 0;
-
-        #endregion
 
         /// <summary>Unary plus the date span.</summary>
         public static DateSpan operator +(DateSpan span) => span.Plus();
@@ -410,8 +248,6 @@ namespace Qowaiv
 
         /// <summary>Subtracts two date spans.</summary>
         public static DateSpan operator -(DateSpan l, DateSpan r) => l.Subtract(r);
-
-        #region Factory methods
 
         /// <summary>Creates a date span from days only.</summary>
         public static DateSpan FromDays(int days) => new DateSpan(0, 0, days);
@@ -430,7 +266,6 @@ namespace Qowaiv
         /// The age defined in years and days.
         /// </returns>
         public static DateSpan Age(Date t1) => Age(t1, Clock.Today());
-
 
         /// <summary>Calculates the age (in years and days) for a given date for the reference date.</summary>
         /// <param name="t1">
@@ -522,72 +357,6 @@ namespace Qowaiv
                 : new DateSpan(+years, +months, +days);
         }
 
-        /// <summary>Converts the string to a date span.</summary>
-        /// <param name="s">
-        /// A string containing a date span to convert.
-        /// </param>
-        /// <returns>
-        /// A date span.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static DateSpan Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
-
-        /// <summary>Converts the string to a date span.</summary>
-        /// <param name="s">
-        /// A string containing a date span to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The specified format provider.
-        /// </param>
-        /// <returns>
-        /// A date span.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static DateSpan Parse(string s, IFormatProvider formatProvider)
-        {
-            if (TryParse(s, formatProvider, out DateSpan val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
-        }
-
-        /// <summary>Converts the string to a date span.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a date span to convert.
-        /// </param>
-        /// <returns>
-        /// The date span if the string was converted successfully, otherwise Empty.
-        /// </returns>
-        public static DateSpan TryParse(string s)
-        {
-            if (TryParse(s, out DateSpan val))
-            {
-                return val;
-            }
-            return Zero;
-        }
-
-        /// <summary>Converts the string to a date span.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a date span to convert.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, out DateSpan result) => TryParse(s, CultureInfo.CurrentCulture, out result);
-
         /// <summary>Converts the string to a date span.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -616,9 +385,9 @@ namespace Qowaiv
 
             if (match.Success)
             {
-                var y = IntFromGroup(match, nameof(Years));
-                var m = IntFromGroup(match, nameof(Months));
-                var d = IntFromGroup(match, nameof(Days));
+                var y = IntFromGroup(match, nameof(Years), formatProvider);
+                var m = IntFromGroup(match, nameof(Months), formatProvider);
+                var d = IntFromGroup(match, nameof(Days), formatProvider);
 
                 var months = y * 12 + m;
                 var totalDays = d + months * DaysPerMonth;
@@ -632,21 +401,11 @@ namespace Qowaiv
             return false;
         }
 
-        private static int IntFromGroup(Match match, string group)
+        private static int IntFromGroup(Match match, string group, IFormatProvider formatProvider)
         {
             var str = match.Groups[group].Value;
-            return int.Parse(str);
+            return int.Parse(str, formatProvider);
         }
-
-        #endregion
-
-        #region Validation
-
-        /// <summary>Returns true if the val represents a valid date span, otherwise false.</summary>
-        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
-
-        /// <summary>Returns true if the val represents a valid date span, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
 
         /// <summary>Returns true if the combination of months and days can not be processed.</summary>
         private static bool IsOutOfRange(long months, long days, double totalDays)
@@ -658,7 +417,5 @@ namespace Qowaiv
                 || days > +MaxDays
                 || days < -MaxDays;
         }
-
-        #endregion
     }
 }

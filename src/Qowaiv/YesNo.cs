@@ -34,9 +34,6 @@ namespace Qowaiv
     [TypeConverter(typeof(YesNoTypeConverter))]
     public partial struct YesNo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
     {
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionYesNo;
-
         /// <summary>Represents an empty/not set yes-no.</summary>
         public static readonly YesNo Empty;
 
@@ -249,12 +246,6 @@ namespace Qowaiv
             }
             return false;
         }
-
-        /// <summary>Creates the yes-no based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the yes-no.
-        /// </param>
-        private static YesNo FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
 
         #region Resources
 

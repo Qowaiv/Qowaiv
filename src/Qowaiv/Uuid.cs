@@ -39,9 +39,6 @@ namespace Qowaiv
         /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
         public static readonly Regex Pattern = new Regex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
 
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionQGuid;
-
         /// <summary>Represents an empty/not set GUID.</summary>
         public static readonly Uuid Empty;
 
@@ -224,11 +221,5 @@ namespace Qowaiv
                 return new Guid(hash);
             }
         }
-
-        /// <summary>Creates the UUID based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the UUID.
-        /// </param>
-        private static Uuid FromXml(string xmlString) => Parse(xmlString);
     }
 }

@@ -23,9 +23,6 @@ namespace Qowaiv
     [TypeConverter(typeof(MonthTypeConverter))]
     public partial struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
     {
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionMonth;
-
         /// <summary>Represents the pattern of a (potential) valid month.</summary>
         public static readonly Regex Pattern = new Regex(@"^(0?[1-9]|10|11|12)$", RegexOptions.Compiled);
 
@@ -329,12 +326,6 @@ namespace Qowaiv
                 && val.Value >= January.m_Value 
                 && val.Value <= December.m_Value;
         }
-
-        /// <summary>Creates the month based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the month.
-        /// </param>
-        private static Month FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
 
         #region Lookup
 

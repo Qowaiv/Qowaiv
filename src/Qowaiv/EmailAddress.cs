@@ -28,9 +28,6 @@ namespace Qowaiv
     [TypeConverter(typeof(EmailAddressTypeConverter))]
     public partial struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
     {
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionEmailAddress;
-
         /// <summary>An email address must not exceed 254 characters.</summary>
         /// <remarks>
         /// https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
@@ -240,11 +237,5 @@ namespace Qowaiv
             result = new EmailAddress(email);
             return true;
         }
-
-        /// <summary>Creates the email address based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the email address.
-        /// </param>
-        private static EmailAddress FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

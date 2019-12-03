@@ -43,13 +43,12 @@ namespace Qowaiv.Statistics
 
     public partial struct Elo : IEquatable<Elo>
     {
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is Elo other && Equals(other);
 #if !NotEqualsSvo
         /// <summary>Returns true if this instance and the other elo are equal, otherwise false.</summary>
         /// <param name = "other">The <see cref = "Elo"/> to compare with.</param>
         public bool Equals(Elo other) => m_Value == other.m_Value;
-#endif
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is Elo other && Equals(other);
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -57,6 +56,7 @@ namespace Qowaiv.Statistics
 #if !NotGetHashCodeClass
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+#endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
@@ -87,8 +87,10 @@ namespace Qowaiv.Statistics
             throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
         }
 
+#if !NotEqualsSvo
         /// <inheritdoc/>
         public int CompareTo(Elo other) => Comparer<double>.Default.Compare(m_Value, other.m_Value);
+#endif
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
         public static bool operator <(Elo l, Elo r) => l.CompareTo(r) < 0;
@@ -131,6 +133,7 @@ namespace Qowaiv.Statistics
 
 namespace Qowaiv.Statistics
 {
+    using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -143,15 +146,16 @@ namespace Qowaiv.Statistics
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
         /// <summary>Reads the elo from an <see href = "XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses <see cref = "FromXml(string)"/>.
-        /// </remarks>
         /// <param name = "reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
             Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = FromXml(s);
+            var xml = reader.ReadElementString();
+#if !NotCultureDependent
+            var val = Parse(xml, CultureInfo.InvariantCulture);
+#else
+            var val = Parse(xml);
+#endif
             m_Value = val.m_Value;
         }
 
@@ -224,7 +228,7 @@ namespace Qowaiv.Statistics
         /// </exception>
         public static Elo Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out Elo val) ? val : throw new FormatException(FormatExceptionMessage);
+            return TryParse(s, formatProvider, out Elo val) ? val : throw new FormatException(QowaivMessages.FormatExceptionElo);
         }
 
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Elo"/>.</summary>
@@ -267,7 +271,7 @@ namespace Qowaiv.Statistics
         {
             return TryParse(s, out Elo val)
                 ? val
-                : throw new FormatException(FormatExceptionMessage);
+                : throw new FormatException(QowaivMessages.FormatExceptionElo);
         }
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>

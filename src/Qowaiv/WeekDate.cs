@@ -49,9 +49,6 @@ namespace Qowaiv
     [TypeConverter(typeof(WeekDateTypeConverter))]
     public partial struct WeekDate : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
     {
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionWeekDate;
-
         /// <summary>Represents the pattern of a (potential) valid week date.</summary>
         public static readonly Regex Pattern = new Regex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
@@ -335,11 +332,5 @@ namespace Qowaiv
             }
             return true;
         }
-
-        /// <summary>Creates the week date based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the @FullName.
-        /// </param>
-        private static WeekDate FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

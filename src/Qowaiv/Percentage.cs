@@ -23,9 +23,6 @@ namespace Qowaiv
     [TypeConverter(typeof(PercentageTypeConverter))]
     public partial struct Percentage : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
     {
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionPercentage;
-
         /// <summary>The percentage mark (%).</summary>
         public static readonly string PercentageMark = "%";
         /// <summary>The per mille mark (‰).</summary>
@@ -838,11 +835,5 @@ namespace Qowaiv
         }
 
         #endregion
-
-        /// <summary>Creates the percentage based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the percentage.
-        /// </param>
-        private static Percentage FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

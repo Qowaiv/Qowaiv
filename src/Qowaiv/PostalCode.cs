@@ -29,9 +29,6 @@ namespace Qowaiv
     [TypeConverter(typeof(PostalCodeTypeConverter))]
     public partial struct PostalCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
     {
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionPostalCode;
-
         /// <summary>Represents the pattern of a (potential) valid postal code.</summary>
         public static readonly Regex Pattern = new Regex(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
@@ -203,11 +200,5 @@ namespace Qowaiv
         {
             return PostalCodeCountryInfo.GetInstance(country).IsValid(postalcode);
         }
-
-        /// <summary>Creates the postal code based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the  postal code.
-        /// </param>
-        private static PostalCode FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

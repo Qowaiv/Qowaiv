@@ -23,9 +23,6 @@ namespace Qowaiv.Sql
         /// <summary>Gets the maximum value of a timestamp.</summary>
         public static readonly Timestamp MaxValue = new Timestamp(ulong.MaxValue);
 
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static string FormatExceptionMessage => QowaivMessages.FormatExceptionTimestamp;
-
         /// <summary>Represents the timestamp .</summary>
         public byte[] ToByteArray() => BitConverter.GetBytes(m_Value);
 
@@ -169,11 +166,5 @@ namespace Qowaiv.Sql
 
             return Create(BitConverter.ToUInt64(bytes, 0));
         }
-
-        /// <summary>Creates the timestamp based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the timestamp.
-        /// </param>
-        private static Timestamp FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

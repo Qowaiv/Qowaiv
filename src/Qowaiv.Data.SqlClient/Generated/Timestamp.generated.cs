@@ -43,13 +43,12 @@ namespace Qowaiv.Sql
 
     public partial struct Timestamp : IEquatable<Timestamp>
     {
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is Timestamp other && Equals(other);
 #if !NotEqualsSvo
         /// <summary>Returns true if this instance and the other timestamp are equal, otherwise false.</summary>
         /// <param name = "other">The <see cref = "Timestamp"/> to compare with.</param>
         public bool Equals(Timestamp other) => m_Value == other.m_Value;
-#endif
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is Timestamp other && Equals(other);
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -57,6 +56,7 @@ namespace Qowaiv.Sql
 #if !NotGetHashCodeClass
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+#endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
@@ -87,8 +87,10 @@ namespace Qowaiv.Sql
             throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
         }
 
+#if !NotEqualsSvo
         /// <inheritdoc/>
         public int CompareTo(Timestamp other) => Comparer<ulong>.Default.Compare(m_Value, other.m_Value);
+#endif
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
         public static bool operator <(Timestamp l, Timestamp r) => l.CompareTo(r) < 0;
@@ -131,6 +133,7 @@ namespace Qowaiv.Sql
 
 namespace Qowaiv.Sql
 {
+    using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -143,15 +146,16 @@ namespace Qowaiv.Sql
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
         /// <summary>Reads the timestamp from an <see href = "XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses <see cref = "FromXml(string)"/>.
-        /// </remarks>
         /// <param name = "reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
             Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = FromXml(s);
+            var xml = reader.ReadElementString();
+#if !NotCultureDependent
+            var val = Parse(xml, CultureInfo.InvariantCulture);
+#else
+            var val = Parse(xml);
+#endif
             m_Value = val.m_Value;
         }
 
@@ -224,7 +228,7 @@ namespace Qowaiv.Sql
         /// </exception>
         public static Timestamp Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out Timestamp val) ? val : throw new FormatException(FormatExceptionMessage);
+            return TryParse(s, formatProvider, out Timestamp val) ? val : throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
         }
 
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
@@ -267,7 +271,7 @@ namespace Qowaiv.Sql
         {
             return TryParse(s, out Timestamp val)
                 ? val
-                : throw new FormatException(FormatExceptionMessage);
+                : throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
         }
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>

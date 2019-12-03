@@ -22,9 +22,6 @@ namespace Qowaiv
     [TypeConverter(typeof(YearTypeConverter))]
     public partial struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     { 
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionYear;
-
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
         public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
 
@@ -231,12 +228,5 @@ namespace Qowaiv
             if (!val.HasValue) { return false; }
             return val.Value >= MinValue.m_Value && val.Value <= MaxValue.m_Value;
         }
-
-        /// <summary>Creates the year based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the year.
-        /// </param>
-        private static Year FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
-
     }
 }

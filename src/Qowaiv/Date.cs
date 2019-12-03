@@ -23,9 +23,6 @@ namespace Qowaiv
     {
         private const string SerializableFormat = "yyyy-MM-dd";
 
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionDate;
-
         /// <summary>Represents the largest possible value date. This field is read-only.</summary>
         public static readonly Date MaxValue = new Date(DateTime.MaxValue);
 
@@ -506,11 +503,5 @@ namespace Qowaiv
             result = MinValue;
             return false;
         }
-
-        /// <summary>Creates the date based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the date.
-        /// </param>
-        private static Date FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

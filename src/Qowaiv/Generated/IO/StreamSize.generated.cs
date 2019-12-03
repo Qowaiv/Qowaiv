@@ -7,6 +7,7 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
+#define NotField
 #define NotIsEmpty
 #define NotIsUnknown
 #define NotIsEmptyOrUnknown
@@ -43,13 +44,12 @@ namespace Qowaiv.IO
 
     public partial struct StreamSize : IEquatable<StreamSize>
     {
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is StreamSize other && Equals(other);
 #if !NotEqualsSvo
         /// <summary>Returns true if this instance and the other stream size are equal, otherwise false.</summary>
         /// <param name = "other">The <see cref = "StreamSize"/> to compare with.</param>
         public bool Equals(StreamSize other) => m_Value == other.m_Value;
-#endif
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is StreamSize other && Equals(other);
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -57,6 +57,7 @@ namespace Qowaiv.IO
 #if !NotGetHashCodeClass
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+#endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
@@ -87,8 +88,10 @@ namespace Qowaiv.IO
             throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
         }
 
+#if !NotEqualsSvo
         /// <inheritdoc/>
         public int CompareTo(StreamSize other) => Comparer<long>.Default.Compare(m_Value, other.m_Value);
+#endif
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
         public static bool operator <(StreamSize l, StreamSize r) => l.CompareTo(r) < 0;
@@ -131,6 +134,7 @@ namespace Qowaiv.IO
 
 namespace Qowaiv.IO
 {
+    using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -143,15 +147,16 @@ namespace Qowaiv.IO
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
         /// <summary>Reads the stream size from an <see href = "XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses <see cref = "FromXml(string)"/>.
-        /// </remarks>
         /// <param name = "reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
             Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = FromXml(s);
+            var xml = reader.ReadElementString();
+#if !NotCultureDependent
+            var val = Parse(xml, CultureInfo.InvariantCulture);
+#else
+            var val = Parse(xml);
+#endif
             m_Value = val.m_Value;
         }
 
@@ -165,28 +170,6 @@ namespace Qowaiv.IO
             Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToXmlString());
         }
-    }
-}
-
-namespace Qowaiv.IO
-{
-    using System;
-    using System.Globalization;
-
-    public partial struct StreamSize : IFormattable
-    {
-        /// <summary>Returns a <see cref = "string "/> that represents the stream size.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the stream size.</summary>
-        /// <param name = "format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the stream size.</summary>
-        /// <param name = "formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
     }
 }
 
@@ -224,7 +207,7 @@ namespace Qowaiv.IO
         /// </exception>
         public static StreamSize Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out StreamSize val) ? val : throw new FormatException(FormatExceptionMessage);
+            return TryParse(s, formatProvider, out StreamSize val) ? val : throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
         }
 
         /// <summary>Converts the <see cref = "string "/> to <see cref = "StreamSize"/>.</summary>
@@ -267,7 +250,7 @@ namespace Qowaiv.IO
         {
             return TryParse(s, out StreamSize val)
                 ? val
-                : throw new FormatException(FormatExceptionMessage);
+                : throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
         }
 
         /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>

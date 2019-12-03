@@ -367,6 +367,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid GUID.
+        /// </summary>
+        public static string FormatExceptionUuid {
+            get {
+                return ResourceManager.GetString("FormatExceptionUuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid week date.
         /// </summary>
         public static string FormatExceptionWeekDate {

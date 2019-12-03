@@ -22,14 +22,14 @@ using System.Resources;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Globalization
 {
     /// <summary>Represents a </summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+    [Serializable]
+    [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.", type: "string", format: "country", nullable: true)]
     [TypeConverter(typeof(CountryTypeConverter))]
     public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
@@ -38,15 +38,10 @@ namespace Qowaiv.Globalization
         public static readonly Country Empty;
 
         /// <summary>Represents an unknown (but set) </summary>
-        public static readonly Country Unknown = new Country { m_Value = "ZZ" };
+        public static readonly Country Unknown = new Country("ZZ");
 
         /// <summary>Gets a country based on the current thread.</summary>
-        public static Country Current { get { return Thread.CurrentThread.GetValue<Country>(); } }
-
-        #region Properties
-
-        /// <summary>The inner value of the </summary>
-        private string m_Value;
+        public static Country Current=>Thread.CurrentThread.GetValue<Country>();
 
         /// <summary>Gets the name of the country.</summary>
         /// <remarks>
@@ -69,31 +64,31 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// The two-letter code defined in ISO 3166-1 for the country.
         /// </returns>
-        public string IsoAlpha2Code { get { return GetResourceString("ISO2", CultureInfo.InvariantCulture); } }
+        public string IsoAlpha2Code=> GetResourceString("ISO2", CultureInfo.InvariantCulture); 
 
         ///<summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
         /// <returns>
         /// The three-letter code defined in ISO 3166-1 for the country.
         /// </returns>
-        public string IsoAlpha3Code { get { return GetResourceString("ISO3", CultureInfo.InvariantCulture); } }
+        public string IsoAlpha3Code=>GetResourceString("ISO3", CultureInfo.InvariantCulture); 
 
         ///<summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
         /// <returns>
         /// The numeric code defined in ISO 3166-1 for the country/region.
         /// </returns>
-        public int IsoNumericCode { get { return m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture)); } }
+        public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture)); 
 
         /// <summary>Gets the country calling code as defined by ITU-T.</summary>
         /// <remarks>
         /// Recommendations E.123 and E.164, also called IDD (International Direct Dialing) or ISD (International Subscriber Dialling) codes.
         /// </remarks>
-        public string CallingCode { get { return GetResourceString("CallingCode", CultureInfo.InvariantCulture); } }
+        public string CallingCode => GetResourceString("CallingCode", CultureInfo.InvariantCulture); 
 
         ///<summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
-        public bool RegionInfoExists { get { return !string.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture)); } }
+        public bool RegionInfoExists => !string.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture));
 
         /// <summary>Gets the start date from witch the country exists.</summary>
-        public Date StartDate { get { return m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd"); } }
+        public Date StartDate=> m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
 
         /// <summary>If the country does not exist anymore, the end date is given, otherwise null.</summary>
         public Date? EndDate
@@ -104,21 +99,6 @@ namespace Qowaiv.Globalization
                 return string.IsNullOrEmpty(val) ? null : (Date?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
             }
         }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>Returns true if the Country is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default;
-
-        /// <summary>Returns true if the Country is unknown, otherwise false.</summary>
-        public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-        /// <summary>Returns true if the Country is empty or unknown, otherwise false.</summary>
-        public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-
-
         /// <summary>Gets the display name for a specified culture.</summary>
         /// <param name="culture">
         /// The culture of the display name.
@@ -167,62 +147,6 @@ namespace Qowaiv.Globalization
             }
         }
 
-        #endregion
-
-        #region (XML) (De)serialization
-
-        /// <summary>Initializes a new instance of Country based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private Country(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            m_Value = info.GetString("Value");
-        }
-
-        /// <summary>Adds the underlying property of Country to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
-
-        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the Country from an <see href="XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses the string parse function of 
-        /// </remarks>
-        /// <param name="reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = Parse(s, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-        }
-
-        /// <summary>Writes the Country to an <see href="XmlWriter"/>.</summary>
-        /// <remarks>
-        /// Uses the string representation of 
-        /// </remarks>
-        /// <param name="writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(m_Value);
-        }
-
-        #endregion
-
-        #region (JSON) (De)serialization
-
         /// <summary>Generates a Country from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson() => m_Value = default;
 
@@ -230,25 +154,19 @@ namespace Qowaiv.Globalization
         /// <param name="jsonString">
         /// The JSON string that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
-
+        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+    
         /// <summary>Generates a Country from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
         /// The JSON integer that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger)
-        {
-            m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).m_Value;
-        }
+        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates a Country from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the 
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a Country from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -257,11 +175,7 @@ namespace Qowaiv.Globalization
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a Country into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() { return m_Value; }
-
-        #endregion
-
-        #region IFormattable / ToString
+        object IJsonSerializable.ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -269,46 +183,16 @@ namespace Qowaiv.Globalization
         {
             get
             {
-                if (m_Value == default)
+                if (IsEmpty())
                 {
-                    return "Country: (empty)";
+                    return "{empty}";
                 }
-                if (m_Value == Unknown.m_Value)
+                if (IsUnknown())
                 {
-                    return "Country: (unknown)";
+                    return "?";
                 }
-                return string.Format(
-                  CultureInfo.InvariantCulture,
-                  "Country: {0} ({1}/{2})",
-                  EnglishName,
-                  IsoAlpha2Code,
-                  IsoAlpha3Code
-              );
+                return string.Format(CultureInfo.InvariantCulture, "{0} ({1}/{2}", EnglishName, IsoAlpha2Code, IsoAlpha3Code);
             }
-        }
-
-        /// <summary>Returns a <see cref="string"/> that represents the current </summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
         }
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
@@ -342,6 +226,9 @@ namespace Qowaiv.Globalization
             return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
         }
 
+        /// <summary>Gets an XML string representation of the country.</summary>
+        private string ToXmlString() => m_Value;
+
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Country, IFormatProvider, string>>
         {
@@ -353,87 +240,6 @@ namespace Qowaiv.Globalization
             { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
         };
 
-        #endregion
-
-        #region IEquatable
-
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) { return obj is Country && Equals((Country)obj); }
-
-        /// <summary>Returns true if this instance and the other <see cref="Country"/> are equal, otherwise false.</summary>
-        /// <param name="other">The <see cref="Country"/> to compare with.</param>
-        public bool Equals(Country other) => m_Value == other.m_Value;
-
-        /// <summary>Returns the hash code for this </summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() => m_Value == null ? 0 : m_Value.GetHashCode();
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(Country left, Country right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(Country left, Country right)
-        {
-            return !(left == right);
-        }
-
-        #endregion
-
-        #region IComparable
-
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a 
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value is not a 
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is Country)
-            {
-                return CompareTo((Country)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a Country"), "obj");
-        }
-
-        /// <summary>Compares this instance with a specified Country and indicates
-        /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified 
-        /// </summary>
-        /// <param name="other">
-        /// The Country to compare with this instance.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.
-        /// </returns>
-        public int CompareTo(Country other) { return String.Compare(m_Value, other.m_Value, StringComparison.Ordinal); }
-
-        #endregion
-
-        #region (Explicit) casting
-
         /// <summary>Casts a Country to a <see cref="string"/>.</summary>
         public static explicit operator string(Country val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
@@ -444,82 +250,6 @@ namespace Qowaiv.Globalization
 
         /// <summary>Casts a Country to a System.Globalization.RegionInf.</summary>
         public static explicit operator RegionInfo(Country val) { return val.ToRegionInfo(); }
-
-        #endregion
-
-        #region Factory methods
-
-        /// <summary>Converts the string to a </summary>
-        /// <param name="s">
-        /// A string containing a Country to convert.
-        /// </param>
-        /// <returns>
-        /// A 
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Country Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Converts the string to a </summary>
-        /// <param name="s">
-        /// A string containing a Country to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        /// <returns>
-        /// A 
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Country Parse(string s, IFormatProvider formatProvider)
-        {
-            if (TryParse(s, formatProvider, out Country val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatExceptionCountry);
-        }
-
-        /// <summary>Converts the string to a 
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a Country to convert.
-        /// </param>
-        /// <returns>
-        /// The Country if the string was converted successfully, otherwise Empty.
-        /// </returns>
-        public static Country TryParse(string s)
-        {
-            if (TryParse(s, out Country val))
-            {
-                return val;
-            }
-            return Empty;
-        }
-
-        /// <summary>Converts the string to a 
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a Country to convert.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, out Country result)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out result);
-        }
 
         /// <summary>Converts the string to a 
         /// A return value indicates whether the conversion succeeded.
@@ -558,7 +288,7 @@ namespace Qowaiv.Globalization
 
             if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new Country { m_Value = val };
+                result = new Country( val );
                 return true;
             }
             return false;
@@ -599,30 +329,6 @@ namespace Qowaiv.Globalization
 
             return All.FirstOrDefault(c => c.Name == name);
         }
-
-        #endregion
-
-        #region Validation
-
-        /// <summary>Returns true if the val represents a valid Country, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return IsValid(val, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns true if the val represents a valid Country, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            if (string.IsNullOrWhiteSpace(val) || Qowaiv.Unknown.IsUnknown(val, culture)) { return false; }
-
-            AddCulture(culture);
-
-            var str = Parsing.ToUnified(val);
-            return Parsings[culture].ContainsKey(str) || Parsings[CultureInfo.InvariantCulture].ContainsKey(str);
-        }
-
-        #endregion
 
         #region Get countries
 

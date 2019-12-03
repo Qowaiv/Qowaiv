@@ -44,13 +44,12 @@ namespace Qowaiv.Security.Cryptography
 
     public partial struct CryptographicSeed : IEquatable<CryptographicSeed>
     {
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is CryptographicSeed other && Equals(other);
 #if !NotEqualsSvo
         /// <summary>Returns true if this instance and the other cryptographic seed are equal, otherwise false.</summary>
         /// <param name = "other">The <see cref = "CryptographicSeed"/> to compare with.</param>
         public bool Equals(CryptographicSeed other) => m_Value == other.m_Value;
-#endif
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is CryptographicSeed other && Equals(other);
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -58,6 +57,7 @@ namespace Qowaiv.Security.Cryptography
 #if !NotGetHashCodeClass
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+#endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
@@ -88,8 +88,10 @@ namespace Qowaiv.Security.Cryptography
             throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
         }
 
+#if !NotEqualsSvo
         /// <inheritdoc/>
         public int CompareTo(CryptographicSeed other) => Comparer<System.Byte[]>.Default.Compare(m_Value, other.m_Value);
+#endif
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
         public static bool operator <(CryptographicSeed l, CryptographicSeed r) => l.CompareTo(r) < 0;
@@ -132,6 +134,7 @@ namespace Qowaiv.Security.Cryptography
 
 namespace Qowaiv.Security.Cryptography
 {
+    using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -144,15 +147,16 @@ namespace Qowaiv.Security.Cryptography
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
         /// <summary>Reads the cryptographic seed from an <see href = "XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses <see cref = "FromXml(string)"/>.
-        /// </remarks>
         /// <param name = "reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
             Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = FromXml(s);
+            var xml = reader.ReadElementString();
+#if !NotCultureDependent
+            var val = Parse(xml, CultureInfo.InvariantCulture);
+#else
+            var val = Parse(xml);
+#endif
             m_Value = val.m_Value;
         }
 
@@ -225,7 +229,7 @@ namespace Qowaiv.Security.Cryptography
         /// </exception>
         public static CryptographicSeed Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out CryptographicSeed val) ? val : throw new FormatException(FormatExceptionMessage);
+            return TryParse(s, formatProvider, out CryptographicSeed val) ? val : throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
         }
 
         /// <summary>Converts the <see cref = "string "/> to <see cref = "CryptographicSeed"/>.</summary>
@@ -268,7 +272,7 @@ namespace Qowaiv.Security.Cryptography
         {
             return TryParse(s, out CryptographicSeed val)
                 ? val
-                : throw new FormatException(FormatExceptionMessage);
+                : throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
         }
 
         /// <summary>Converts the <see cref="string"/> to <see cref="CryptographicSeed"/>.</summary>

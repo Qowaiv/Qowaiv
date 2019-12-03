@@ -7,45 +7,46 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
-#define NotGetHashCodeClass
-namespace Qowaiv
+#define NoComparisonOperators
+#define NotGetHashCodeStruct
+namespace Qowaiv.Financial
 {
     using System;
 
-    public partial struct Year
+    public partial struct BankIdentifierCode
     {
 #if !NotField
-        private Year(short value) => m_Value = value;
-        /// <summary>The inner value of the year.</summary>
-        private short m_Value;
+        private BankIdentifierCode(string value) => m_Value = value;
+        /// <summary>The inner value of the BIC.</summary>
+        private string m_Value;
 #endif
 #if !NotIsEmpty
-        /// <summary>Returns true if the  year is empty, otherwise false.</summary>
+        /// <summary>Returns true if the  BIC is empty, otherwise false.</summary>
         public bool IsEmpty() => m_Value == default;
 #endif
 #if !NotIsUnknown
-        /// <summary>Returns true if the  year is unknown, otherwise false.</summary>
+        /// <summary>Returns true if the  BIC is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
 #endif
 #if !NotIsEmptyOrUnknown
-        /// <summary>Returns true if the  year is empty or unknown, otherwise false.</summary>
+        /// <summary>Returns true if the  BIC is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 #endif
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     using System;
 
-    public partial struct Year : IEquatable<Year>
+    public partial struct BankIdentifierCode : IEquatable<BankIdentifierCode>
     {
         /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is Year other && Equals(other);
+        public override bool Equals(object obj) => obj is BankIdentifierCode other && Equals(other);
 #if !NotEqualsSvo
-        /// <summary>Returns true if this instance and the other year are equal, otherwise false.</summary>
-        /// <param name = "other">The <see cref = "Year"/> to compare with.</param>
-        public bool Equals(Year other) => m_Value == other.m_Value;
+        /// <summary>Returns true if this instance and the other BIC are equal, otherwise false.</summary>
+        /// <param name = "other">The <see cref = "BankIdentifierCode"/> to compare with.</param>
+        public bool Equals(BankIdentifierCode other) => m_Value == other.m_Value;
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -58,25 +59,25 @@ namespace Qowaiv
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
         /// <param name = "right">The right operand</param>
-        public static bool operator !=(Year left, Year right) => !(left == right);
+        public static bool operator !=(BankIdentifierCode left, BankIdentifierCode right) => !(left == right);
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
         /// <param name = "right">The right operand</param>
-        public static bool operator ==(Year left, Year right) => left.Equals(right);
+        public static bool operator ==(BankIdentifierCode left, BankIdentifierCode right) => left.Equals(right);
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     using System;
     using System.Collections.Generic;
 
-    public partial struct Year : IComparable, IComparable<Year>
+    public partial struct BankIdentifierCode : IComparable, IComparable<BankIdentifierCode>
     {
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
-            if (obj is Year other)
+            if (obj is BankIdentifierCode other)
             {
                 return CompareTo(other);
             }
@@ -86,38 +87,38 @@ namespace Qowaiv
 
 #if !NotEqualsSvo
         /// <inheritdoc/>
-        public int CompareTo(Year other) => Comparer<short>.Default.Compare(m_Value, other.m_Value);
+        public int CompareTo(BankIdentifierCode other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
 #endif
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Year l, Year r) => l.CompareTo(r) < 0;
+        public static bool operator <(BankIdentifierCode l, BankIdentifierCode r) => l.CompareTo(r) < 0;
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator>(Year l, Year r) => l.CompareTo(r) > 0;
+        public static bool operator>(BankIdentifierCode l, BankIdentifierCode r) => l.CompareTo(r) > 0;
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Year l, Year r) => l.CompareTo(r) <= 0;
+        public static bool operator <=(BankIdentifierCode l, BankIdentifierCode r) => l.CompareTo(r) <= 0;
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Year l, Year r) => l.CompareTo(r) >= 0;
+        public static bool operator >=(BankIdentifierCode l, BankIdentifierCode r) => l.CompareTo(r) >= 0;
 #endif
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     using System;
     using System.Runtime.Serialization;
 
-    public partial struct Year : ISerializable
+    public partial struct BankIdentifierCode : ISerializable
     {
-        /// <summary>Initializes a new instance of the year based on the serialization info.</summary>
+        /// <summary>Initializes a new instance of the BIC based on the serialization info.</summary>
         /// <param name = "info">The serialization info.</param>
         /// <param name = "context">The streaming context.</param>
-        private Year(SerializationInfo info, StreamingContext context)
+        private BankIdentifierCode(SerializationInfo info, StreamingContext context)
         {
             Guard.NotNull(info, nameof(info));
-            m_Value = (short)info.GetValue("Value", typeof(short));
+            m_Value = (string)info.GetValue("Value", typeof(string));
         }
 
-        /// <summary>Adds the underlying property of the year to the serialization info.</summary>
+        /// <summary>Adds the underlying property of the BIC to the serialization info.</summary>
         /// <param name = "info">The serialization info.</param>
         /// <param name = "context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
@@ -128,21 +129,21 @@ namespace Qowaiv
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    public partial struct Year : IXmlSerializable
+    public partial struct BankIdentifierCode : IXmlSerializable
     {
-        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the year.</summary>
+        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the BIC.</summary>
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
-        /// <summary>Reads the year from an <see href = "XmlReader"/>.</summary>
+        /// <summary>Reads the BIC from an <see href = "XmlReader"/>.</summary>
         /// <param name = "reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
@@ -156,7 +157,7 @@ namespace Qowaiv
             m_Value = val.m_Value;
         }
 
-        /// <summary>Writes the year to an <see href = "XmlWriter"/>.</summary>
+        /// <summary>Writes the BIC to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.
         /// </remarks>
@@ -169,21 +170,21 @@ namespace Qowaiv
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     using System;
     using System.Globalization;
 
-    public partial struct Year : IFormattable
+    public partial struct BankIdentifierCode : IFormattable
     {
-        /// <summary>Returns a <see cref = "string "/> that represents the year.</summary>
+        /// <summary>Returns a <see cref = "string "/> that represents the BIC.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the year.</summary>
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the BIC.</summary>
         /// <param name = "format">
         /// The format that this describes the formatting.
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the year.</summary>
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the BIC.</summary>
         /// <param name = "formatProvider">
         /// The format provider.
         /// </param>
@@ -191,60 +192,60 @@ namespace Qowaiv
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     using System;
     using System.Globalization;
 
-    public partial struct Year
+    public partial struct BankIdentifierCode
     {
 #if !NotCultureDependent
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.</summary>
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "BankIdentifierCode"/>.</summary>
         /// <param name = "s">
-        /// A string containing the year to convert.
+        /// A string containing the BIC to convert.
         /// </param>
         /// <returns>
-        /// The parsed year.
+        /// The parsed BIC.
         /// </returns>
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Year Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.</summary>
+        public static BankIdentifierCode Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "BankIdentifierCode"/>.</summary>
         /// <param name = "s">
-        /// A string containing the year to convert.
+        /// A string containing the BIC to convert.
         /// </param>
         /// <param name = "formatProvider">
         /// The specified format provider.
         /// </param>
         /// <returns>
-        /// The parsed year.
+        /// The parsed BIC.
         /// </returns>
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Year Parse(string s, IFormatProvider formatProvider)
+        public static BankIdentifierCode Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out Year val) ? val : throw new FormatException(QowaivMessages.FormatExceptionYear);
+            return TryParse(s, formatProvider, out BankIdentifierCode val) ? val : throw new FormatException(QowaivMessages.FormatExceptionBankIdentifierCode);
         }
 
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.</summary>
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "BankIdentifierCode"/>.</summary>
         /// <param name = "s">
-        /// A string containing the year to convert.
+        /// A string containing the BIC to convert.
         /// </param>
         /// <returns>
-        /// The year if the string was converted successfully, otherwise default.
+        /// The BIC if the string was converted successfully, otherwise default.
         /// </returns>
-        public static Year TryParse(string s)
+        public static BankIdentifierCode TryParse(string s)
         {
-            return TryParse(s, CultureInfo.CurrentCulture, out Year val) ? val : default;
+            return TryParse(s, CultureInfo.CurrentCulture, out BankIdentifierCode val) ? val : default;
         }
 
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "BankIdentifierCode"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name = "s">
-        /// A string containing the year to convert.
+        /// A string containing the BIC to convert.
         /// </param>
         /// <param name = "result">
         /// The result of the parsing.
@@ -252,54 +253,54 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, out Year result) => TryParse(s, CultureInfo.CurrentCulture, out result);
+        public static bool TryParse(string s, out BankIdentifierCode result) => TryParse(s, CultureInfo.CurrentCulture, out result);
 #else
-        /// <summary>Converts the <see cref="string"/> to <see cref="Year"/>.</summary>
+        /// <summary>Converts the <see cref="string"/> to <see cref="BankIdentifierCode"/>.</summary>
         /// <param name="s">
-        /// A string containing the year to convert.
+        /// A string containing the BIC to convert.
         /// </param>
         /// <returns>
-        /// The parsed year.
+        /// The parsed BIC.
         /// </returns>
         /// <exception cref="FormatException">
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
-        public static Year Parse(string s)
+        public static BankIdentifierCode Parse(string s)
         {
-            return TryParse(s, out Year val)
+            return TryParse(s, out BankIdentifierCode val)
                 ? val
-                : throw new FormatException(QowaivMessages.FormatExceptionYear);
+                : throw new FormatException(QowaivMessages.FormatExceptionBankIdentifierCode);
         }
 
-        /// <summary>Converts the <see cref="string"/> to <see cref="Year"/>.</summary>
+        /// <summary>Converts the <see cref="string"/> to <see cref="BankIdentifierCode"/>.</summary>
         /// <param name="s">
-        /// A string containing the year to convert.
+        /// A string containing the BIC to convert.
         /// </param>
         /// <returns>
-        /// The year if the string was converted successfully, otherwise default.
+        /// The BIC if the string was converted successfully, otherwise default.
         /// </returns>
-        public static Year TryParse(string s)
+        public static BankIdentifierCode TryParse(string s)
         {
-            return TryParse(s, out Year val) ? val : default;
+            return TryParse(s, out BankIdentifierCode val) ? val : default;
         }
 #endif
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Financial
 {
     using System;
     using System.Globalization;
 
-    public partial struct Year
+    public partial struct BankIdentifierCode
     {
 #if !NotCultureDependent
-        /// <summary>Returns true if the value represents a valid year.</summary>
+        /// <summary>Returns true if the value represents a valid BIC.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
-        /// <summary>Returns true if the value represents a valid year.</summary>
+        /// <summary>Returns true if the value represents a valid BIC.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
@@ -315,7 +316,7 @@ namespace Qowaiv
             && TryParse(val, formatProvider, out _);
         }
 #else
-        /// <summary>Returns true if the value represents a valid year.</summary>
+        /// <summary>Returns true if the value represents a valid BIC.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>

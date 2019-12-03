@@ -23,9 +23,6 @@ namespace Qowaiv
     {
         private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
 
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionLocalDateTime;
-
         /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
         public static readonly LocalDateTime MinValue = new LocalDateTime(DateTime.MinValue);
 
@@ -616,11 +613,5 @@ namespace Qowaiv
             result = MinValue;
             return false;
         }
-
-        /// <summary>Creates the local date time based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the local date time.
-        /// </param>
-        private static LocalDateTime FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
     }
 }

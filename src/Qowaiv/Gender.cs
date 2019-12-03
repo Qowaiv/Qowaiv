@@ -39,9 +39,6 @@ namespace Qowaiv
     [TypeConverter(typeof(GenderTypeConverter))]
     public partial struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
     {
-        /// <summary>Gets a culture dependent message when a <see cref="FormatException"/> occurs.</summary>
-        private static readonly string FormatExceptionMessage = QowaivMessages.FormatExceptionGender;
-
         /// <summary>Represents an empty/not set Gender.</summary>
         public static readonly Gender Empty;
 
@@ -289,12 +286,6 @@ namespace Qowaiv
 
         /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
         public static bool IsValid(int? val) => val.HasValue && FromInt32s.ContainsKey(val.Value);
-
-        /// <summary>Creates the gender based on an XML string.</summary>
-        /// <param name="xmlString">
-        /// The XML string representing the gender.
-        /// </param>
-        private static Gender FromXml(string xmlString) => Parse(xmlString, CultureInfo.InvariantCulture);
 
         #region Resources
 

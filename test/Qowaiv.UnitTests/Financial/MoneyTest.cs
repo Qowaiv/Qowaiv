@@ -72,7 +72,7 @@ namespace Qowaiv.UnitTests.Financial
             using (new CultureInfoScope("en-GB"))
             {
                 var exp = TestStruct;
-                var act = Money.TryParse(exp.ToString());
+                var act = Money.TryParse("€42.17");
 
                 Assert.AreEqual(exp, act);
             }
@@ -192,7 +192,6 @@ namespace Qowaiv.UnitTests.Financial
             var act = SerializationTest.XmlDeserialize<Money>("EUR42.17");
             Assert.AreEqual(TestStruct, act);
         }
-
 
         [Test]
         public void SerializeDeserialize_MoneySerializeObject_AreEqual()
@@ -367,7 +366,7 @@ namespace Qowaiv.UnitTests.Financial
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);
-            var exp = "€42.17";
+            var exp = "EUR42.17";
             Assert.AreEqual(exp, act);
         }
 
@@ -402,7 +401,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             using (new CultureInfoScope("nl-BE"))
             {
-                var act = TestStruct.ToString("");
+                var act = TestStruct.ToString("0.00");
                 var exp = "42,17";
                 Assert.AreEqual(exp, act);
             }
@@ -629,7 +628,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be Money"
+                "Argument must be Money."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -643,7 +642,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be Money"
+                "Argument must be Money."
             );
         }
 

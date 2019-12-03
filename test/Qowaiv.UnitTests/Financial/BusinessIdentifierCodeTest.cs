@@ -495,18 +495,18 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("BIC: (empty)", default(BusinessIdentifierCode));
+            DebuggerDisplayAssert.HasResult("{empty}", default(BusinessIdentifierCode));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("BIC: (unknown)", BusinessIdentifierCode.Unknown);
+            DebuggerDisplayAssert.HasResult("?", BusinessIdentifierCode.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("BIC: AEGONL2UXXX", TestStruct);
+            DebuggerDisplayAssert.HasResult("AEGONL2UXXX", TestStruct);
         }
 
         #endregion
@@ -653,7 +653,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a BIC"
+                "Argument must be BusinessIdentifierCode."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -667,7 +667,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a BIC"
+                "Argument must be BusinessIdentifierCode."
             );
         }
 
@@ -893,7 +893,6 @@ namespace Qowaiv.UnitTests.Financial
         [TestCase("1AAANL01", "digit in first four characters")]
         [TestCase("AAAANLBB1", "Branch length of 1")]
         [TestCase("AAAANLBB12", "Branch length of 2")]
-        [TestCase("ABCDXX01", "Digit in country")]
         [TestCase("ABCDXX01", "Not existing country")]
         [TestCase("AAAANLBË", "Diacritic")]
         public void IsValid_False(string str, string message)

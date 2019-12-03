@@ -107,33 +107,6 @@ namespace Qowaiv
 
 namespace Qowaiv
 {
-    using System;
-    using System.Runtime.Serialization;
-
-    public partial struct WeekDate : ISerializable
-    {
-        /// <summary>Initializes a new instance of the week date based on the serialization info.</summary>
-        /// <param name = "info">The serialization info.</param>
-        /// <param name = "context">The streaming context.</param>
-        private WeekDate(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            m_Value = (Qowaiv.Date)info.GetValue("Value", typeof(Qowaiv.Date));
-        }
-
-        /// <summary>Adds the underlying property of the week date to the serialization info.</summary>
-        /// <param name = "info">The serialization info.</param>
-        /// <param name = "context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
-    }
-}
-
-namespace Qowaiv
-{
     using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;

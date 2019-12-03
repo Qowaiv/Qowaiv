@@ -178,9 +178,9 @@ namespace Qowaiv
                 result = Unknown;
                 return true;
             }
-            if (IsValid(s, formatProvider))
+            if (Pattern.IsMatch(s))
             {
-                result = new PostalCode { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
+                result = new PostalCode(Parsing.ClearSpacingAndMarkupToUpper(s));
                 return true;
             }
             return false;

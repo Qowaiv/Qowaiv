@@ -21,7 +21,7 @@ namespace Qowaiv
     [OpenApiDataType(description: "Year(-only) notation.", type: "integer", format: "year", nullable: true)]
     [TypeConverter(typeof(YearTypeConverter))]
     public partial struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
-    { 
+    {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
         public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
 
@@ -152,7 +152,7 @@ namespace Qowaiv
                 result = Unknown;
                 return true;
             }
-            if (IsValid(s, formatProvider))
+            if (Pattern.IsMatch(s))
             {
                 result = new Year(short.Parse(s, formatProvider));
                 return true;

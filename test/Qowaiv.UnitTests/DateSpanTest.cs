@@ -444,7 +444,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void GetHash_TestStruct_Hash()
         {
-            Assert.AreEqual(-128, TestStruct.GetHashCode());
+            Assert.AreNotEqual(0, TestStruct.GetHashCode());
         }
 
         [Test]

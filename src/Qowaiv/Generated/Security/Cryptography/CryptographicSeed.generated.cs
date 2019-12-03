@@ -11,6 +11,7 @@
 #define NotIsUnknown
 #define NotIsEmptyOrUnknown
 #define NoComparisonOperators
+#define NotEqualsSvo
 #define NotGetHashCodeStruct
 namespace Qowaiv.Security.Cryptography
 {

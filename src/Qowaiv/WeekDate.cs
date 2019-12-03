@@ -168,7 +168,25 @@ namespace Qowaiv
 
         #endregion
 
-        #region (JSON) (De)serialization
+        #region (De)serialization
+
+        /// <summary>Initializes a new instance of week date based on the serialization info.</summary>
+        /// <param name="info">The serialization info.</param>
+        /// <param name="context">The streaming context.</param>
+        private WeekDate(SerializationInfo info, StreamingContext context)
+        {
+            Guard.NotNull(info, nameof(info));
+            m_Value = (Date)info.GetDateTime("Value");
+        }
+
+        /// <summary>Adds the underlying property of week date to the serialization info.</summary>
+        /// <param name="info">The serialization info.</param>
+        /// <param name="context">The streaming context.</param>
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            Guard.NotNull(info, nameof(info));
+            info.AddValue("Value", m_Value);
+        }
 
         /// <summary>Generates a week date from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
@@ -307,7 +325,7 @@ namespace Qowaiv
 
         private static bool TryCreate(int year, int week, int day, out Date dt)
         {
-            dt = Date.MinValue;
+            dt = default;
 
             // Year 0 is not preserved by the regex.
             if (year < 1 ||
@@ -327,7 +345,7 @@ namespace Qowaiv
             // Week 53 can be non-existent.
             if (week == 53 && GetFirstDayOfFirstWeekOfYear(year + 1) <= dt)
             {
-                dt = Date.MinValue;
+                dt = default;
                 return false;
             }
             return true;

@@ -910,7 +910,6 @@ namespace Qowaiv.UnitTests.Financial
         [TestCase("1AAANL01", "digit in first four characters")]
         [TestCase("AAAANLBB1", "Branch length of 1")]
         [TestCase("AAAANLBB12", "Branch length of 2")]
-        [TestCase("ABCDXX01", "Digit in country")]
         [TestCase("ABCDXX01", "Not existing country")]
         [TestCase("AAAANLBË", "Diacritic")]
         public void IsValid_False(string str, string message)

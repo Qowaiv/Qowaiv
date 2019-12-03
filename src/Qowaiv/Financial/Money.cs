@@ -11,6 +11,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Financial
@@ -384,6 +386,35 @@ namespace Qowaiv.Financial
             info.AddValue("Value", m_Value);
             info.AddValue("Currency", m_Currency.Name);
         }
+
+        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the money.</summary>
+        /// <remarks>
+        /// Returns null as no schema is required.
+        /// </remarks>
+        XmlSchema IXmlSerializable.GetSchema() => null;
+
+        /// <summary>Reads the money from an <see href = "XmlReader"/>.</summary>
+        /// <param name = "reader">An XML reader.</param>
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+            Guard.NotNull(reader, nameof(reader));
+            var xml = reader.ReadElementString();
+            var val = Parse(xml, CultureInfo.InvariantCulture);
+            m_Value = val.m_Value;
+            m_Currency = val.m_Currency;
+        }
+
+        /// <summary>Writes the money to an <see href = "XmlWriter"/>.</summary>
+        /// <remarks>
+        /// Uses <see cref = "ToXmlString()"/>.
+        /// </remarks>
+        /// <param name = "writer">An XML writer.</param>
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            Guard.NotNull(writer, nameof(writer));
+            writer.WriteString(ToXmlString());
+        }
+
         #endregion
 
         #region (JSON) (De)serialization
@@ -431,7 +462,7 @@ namespace Qowaiv.Financial
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts Money into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()=> ToString(CultureInfo.InvariantCulture);
+        object IJsonSerializable.ToJson() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -456,11 +487,11 @@ namespace Qowaiv.Financial
                 return formatted;
             }
             var numberFormatInfo = Currency.GetNumberFormatInfo(formatProvider);
-            return m_Value.ToString(format ?? "C", numberFormatInfo);
+            return m_Value.ToString(string.IsNullOrEmpty(format) ? "C" : format, numberFormatInfo);
         }
 
         /// <summary>Gets an XML string representation of the money.</summary>
-        private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+        private string ToXmlString() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
 
         /// <summary>Returns true if this instance and the other <see cref="Money"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Money"/> to compare with.</param>

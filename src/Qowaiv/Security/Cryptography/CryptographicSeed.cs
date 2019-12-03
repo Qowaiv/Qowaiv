@@ -98,6 +98,46 @@ namespace Qowaiv.Security.Cryptography
         /// <summary>Gets an XML string representation of the cryptographic seed.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
+        /// <inheritdoc />
+        public bool Equals(CryptographicSeed other) {
+            if (Length == other.Length)
+            {
+                for (var i = 0; i < Length; i++)
+                {
+                    if (!m_Value[i].Equals(other.m_Value[i])) { return false; }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            var hash = 0;
+            for (var i = 0; i < Length; i++)
+            {
+                hash ^= m_Value[i] << ((i * 17) % 24);
+            }
+            return hash;
+        }
+
+        /// <inheritdoc />
+        public int CompareTo(CryptographicSeed other)
+        {
+            var minLength = Math.Min(Length, other.Length);
+
+            for (var i = 0; i < minLength; i++)
+            {
+                var compare = m_Value[i].CompareTo(other.m_Value[i]);
+                if (compare != 0)
+                {
+                    return compare;
+                }
+            }
+            return Length.CompareTo(other.Length);
+        }
+
         /// <summary>Casts a cryptographic seed to a <see cref="string"/>.</summary>
         public static explicit operator string(CryptographicSeed val) => val.ToString();
         /// <summary>Casts a <see cref="string"/> to a cryptographic seed.</summary>

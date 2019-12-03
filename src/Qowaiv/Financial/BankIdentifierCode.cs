@@ -115,7 +115,7 @@ namespace Qowaiv.Financial
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts a BIC into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()=> m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -177,7 +177,7 @@ namespace Qowaiv.Financial
             if (Pattern.IsMatch(s))
             {
                 result = new BankIdentifierCode(Parsing.ClearSpacingAndMarkupToUpper(s));
-                if (result.Country.IsEmptyOrUnknown())
+                if (Country.TryParse(result.CountryCode).IsEmptyOrUnknown())
                 {
                     result = default;
                     return false;

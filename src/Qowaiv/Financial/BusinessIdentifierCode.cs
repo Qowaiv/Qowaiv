@@ -174,7 +174,7 @@ namespace Qowaiv.Financial
             if (Pattern.IsMatch(s))
             {
                 result = new BusinessIdentifierCode(Parsing.ClearSpacingAndMarkupToUpper(s));
-                if(result.Country.IsEmptyOrUnknown())
+                if (Country.TryParse(result.m_Value.Substring(4, 2)).IsEmptyOrUnknown())
                 {
                     result = default;
                     return false;

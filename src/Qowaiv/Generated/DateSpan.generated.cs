@@ -10,6 +10,7 @@
 #define NotIsEmpty
 #define NotIsUnknown
 #define NotIsEmptyOrUnknown
+#define NotEqualsSvo
 #define NotGetHashCodeClass
 namespace Qowaiv
 {

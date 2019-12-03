@@ -194,16 +194,16 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = CryptographicSeedTest.TestStruct;
-            var exp = CryptographicSeedTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = CryptographicSeedTest.TestStruct;
-            var exp = CryptographicSeedTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
@@ -229,13 +229,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
-                Obj = CryptographicSeedTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
-                Obj = CryptographicSeedTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -249,13 +249,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
-                Obj = CryptographicSeedTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
-                Obj = CryptographicSeedTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -269,13 +269,13 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             var input = new CryptographicSeedSerializeObject
             {
                 Id = 17,
-                Obj = CryptographicSeedTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new CryptographicSeedSerializeObject
             {
                 Id = 17,
-                Obj = CryptographicSeedTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.DataContractSerializeDeserialize(input);
@@ -489,52 +489,52 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
-            Assert.IsTrue(CryptographicSeedTest.TestStruct.Equals(CryptographicSeedTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(CryptographicSeedTest.TestStruct.Equals(CryptographicSeed.Empty));
+            Assert.IsFalse(TestStruct.Equals(CryptographicSeed.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(CryptographicSeed.Empty.Equals(CryptographicSeedTest.TestStruct));
+            Assert.IsFalse(CryptographicSeed.Empty.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
-            Assert.IsTrue(CryptographicSeedTest.TestStruct.Equals((object)CryptographicSeedTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
         }
 
         [Test]
         public void Equals_TestStructNull_IsFalse()
         {
-            Assert.IsFalse(CryptographicSeedTest.TestStruct.Equals(null));
+            Assert.IsFalse(TestStruct.Equals(null));
         }
 
         [Test]
         public void Equals_TestStructObject_IsFalse()
         {
-            Assert.IsFalse(CryptographicSeedTest.TestStruct.Equals(new object()));
+            Assert.IsFalse(TestStruct.Equals(new object()));
         }
 
         [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
-            var l = CryptographicSeedTest.TestStruct;
-            var r = CryptographicSeedTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsTrue(l == r);
         }
 
         [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
-            var l = CryptographicSeedTest.TestStruct;
-            var r = CryptographicSeedTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsFalse(l != r);
         }
 
@@ -714,7 +714,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(CryptographicSeedTest.TestStruct, CryptographicSeedTest.TestStruct.ToString());
+                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
         }
 
@@ -723,7 +723,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertToStringEquals(CryptographicSeedTest.TestStruct.ToString(), CryptographicSeedTest.TestStruct);
+                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
         }
 

@@ -236,6 +236,14 @@ namespace Qowaiv
         /// <summary>Gets an XML string representation of the date span.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
+        /// <inheritdoc/>
+        public bool Equals(DateSpan other) => m_Value == other.m_Value;
+
+        /// <inheritdoc/>
+        public int CompareTo(DateSpan other) => TotalDays.CompareTo(other.TotalDays);
+
+        /// <inheritdoc/>
+        public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Unary plus the date span.</summary>
         public static DateSpan operator +(DateSpan span) => span.Plus();

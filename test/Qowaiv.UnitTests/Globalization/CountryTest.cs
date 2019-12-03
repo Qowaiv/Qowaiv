@@ -528,17 +528,17 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("Country: (empty)", default(Country));
+            DebuggerDisplayAssert.HasResult("{empty}", default(Country));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("Country: (unknown)", Country.Unknown);
+            DebuggerDisplayAssert.HasResult("?", Country.Unknown);
         }
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("Country: Holy See (VA/VAT)", TestStruct);
+            DebuggerDisplayAssert.HasResult("Holy See (VA/VAT)", TestStruct);
         }
 
         [Test]
@@ -759,7 +759,7 @@ namespace Qowaiv.UnitTests.Globalization
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a Country"
+                "Argument must be Country."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -773,7 +773,7 @@ namespace Qowaiv.UnitTests.Globalization
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a Country"
+                "Argument must be Country."
             );
         }
         #endregion

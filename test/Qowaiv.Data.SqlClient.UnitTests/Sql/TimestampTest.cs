@@ -641,7 +641,7 @@ namespace Qowaiv.UnitTests.Sql
                 TestStruct.CompareTo(other);
             },
                 "obj",
-                "Argument must be a time stamp"
+                "Argument must be Timestamp."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -655,7 +655,7 @@ namespace Qowaiv.UnitTests.Sql
                 TestStruct.CompareTo(other);
             },
                 "obj",
-                "Argument must be a time stamp"
+                "Argument must be Timestamp."
             );
         }
 

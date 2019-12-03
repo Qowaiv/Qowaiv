@@ -559,13 +559,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("Gender: (empty)", default(Gender));
+            DebuggerDisplayAssert.HasResult("{empty}", default(Gender));
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("Gender: Male", TestStruct);
+            DebuggerDisplayAssert.HasResult("Male", TestStruct);
         }
 
         [Test]
@@ -836,7 +836,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a gender"
+                "Argument must be Gender."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -850,7 +850,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a gender"
+                "Argument must be Gender."
             );
         }
 

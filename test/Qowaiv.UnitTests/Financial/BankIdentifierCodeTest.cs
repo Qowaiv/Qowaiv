@@ -491,18 +491,18 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("BankIdentifierCode: (empty)", default(BankIdentifierCode));
+            DebuggerDisplayAssert.HasResult("{empty}", default(BankIdentifierCode));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("BankIdentifierCode: (unknown)", BankIdentifierCode.Unknown);
+            DebuggerDisplayAssert.HasResult("?", BankIdentifierCode.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("BankIdentifierCode: AEGONL2UXXX", TestStruct);
+            DebuggerDisplayAssert.HasResult("AEGONL2UXXX", TestStruct);
         }
 
         #endregion
@@ -649,7 +649,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a BIC"
+                "Argument must be BankIdentifierCode."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -663,7 +663,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a BIC"
+                "Argument must be BankIdentifierCode."
             );
         }
 
@@ -905,30 +905,30 @@ namespace Qowaiv.UnitTests.Financial
 
         #region IsValid
 
-        [Test]
-        public void IsValid_Data_IsFalse()
+        [TestCase(null, "null")]
+        [TestCase("", "string.Empty")]
+        [TestCase("1AAANL01", "digit in first four characters")]
+        [TestCase("AAAANLBB1", "Branch length of 1")]
+        [TestCase("AAAANLBB12", "Branch length of 2")]
+        [TestCase("ABCDXX01", "Not existing country")]
+        [TestCase("AAAANLBË", "Diacritic")]
+        public void IsValid_False(string str, string message)
         {
-            Assert.IsFalse(BankIdentifierCode.IsValid("1AAANL01"), "1AAANL01, cijfer in eerste vier");
-            Assert.IsFalse(BankIdentifierCode.IsValid("AAAANLBB1"), "AAAANLBB1, lengte van 1 voor branch");
-            Assert.IsFalse(BankIdentifierCode.IsValid("AAAANLBB12"), "AAAANLBB12, lengte van 2 voor branch");
-            Assert.IsFalse(BankIdentifierCode.IsValid("ABCDXX01"), "ABCD1E01, cijfer in landcode");
-            Assert.IsFalse(BankIdentifierCode.IsValid("ABCDXX01"), "ABCDXX01, niet bestaand land");
-            Assert.IsFalse(BankIdentifierCode.IsValid("AAAANLBË"), "AAAANLBË, diacriet");
-
-            Assert.IsFalse(BankIdentifierCode.IsValid((String)null), "(String)null");
+            Assert.IsFalse(BankIdentifierCode.IsValid(str), "{0}, {1}", str, message);
         }
-        [Test]
-        public void IsValid_Data_IsTrue()
+
+        [TestCase("PSTBNL21")]
+        [TestCase("ABNANL2A")]
+        [TestCase("BACBBEBB")]
+        [TestCase("GEBABEBB36A")]
+        [TestCase("DEUTDEFF")]
+        [TestCase("NEDSZAJJ")]
+        [TestCase("DABADKKK")]
+        [TestCase("UNCRIT2B912")]
+        [TestCase("DSBACNBXSHA")]
+        public void IsValid_True(string str)
         {
-            Assert.IsTrue(BankIdentifierCode.IsValid("PSTBNL21"), "PSTBNL21");
-            Assert.IsTrue(BankIdentifierCode.IsValid("ABNANL2A"), "ABNANL2A");
-            Assert.IsTrue(BankIdentifierCode.IsValid("BACBBEBB"), "BACBBEBB");
-            Assert.IsTrue(BankIdentifierCode.IsValid("GEBABEBB36A"), "GEBABEBB36A");
-            Assert.IsTrue(BankIdentifierCode.IsValid("DEUTDEFF"), "DEUTDEFF");
-            Assert.IsTrue(BankIdentifierCode.IsValid("NEDSZAJJ"), "NEDSZAJJ");
-            Assert.IsTrue(BankIdentifierCode.IsValid("DABADKKK"), "DABADKKK");
-            Assert.IsTrue(BankIdentifierCode.IsValid("UNCRIT2B912"), "UNCRIT2B912");
-            Assert.IsTrue(BankIdentifierCode.IsValid("DSBACNBXSHA"), "DSBACNBXSHA");
+            Assert.IsTrue(BankIdentifierCode.IsValid(str), str);
         }
 
         #endregion

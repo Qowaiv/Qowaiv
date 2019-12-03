@@ -661,7 +661,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a week date"
+                "Argument must be WeekDate."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -675,7 +675,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a week date"
+                "Argument must be WeekDate."
             );
         }
 

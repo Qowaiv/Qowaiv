@@ -214,4 +214,7 @@
   <data name="OverflowException_DecimalRound" xml:space="preserve">
     <value>Decimal overflowed while rounding.</value>
   </data>
+  <data name="FormatExceptionUuid" xml:space="preserve">
+    <value>Not a valid GUID</value>
+  </data>
 </root>

@@ -733,7 +733,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a house number"
+                "Argument must be HouseNumber."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -747,7 +747,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a house number"
+                "Argument must be HouseNumber."
             );
         }
 

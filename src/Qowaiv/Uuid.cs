@@ -16,8 +16,6 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv
@@ -36,7 +34,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
     [OpenApiDataType(description: "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.", type: "string", format: "uuid-base64", nullable: true)]
     [TypeConverter(typeof(UuidTypeConverter))]
-    public struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
+    public partial struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
     {
         /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
         public static readonly Regex Pattern = new Regex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
@@ -44,82 +42,11 @@ namespace Qowaiv
         /// <summary>Represents an empty/not set GUID.</summary>
         public static readonly Uuid Empty;
 
-        /// <summary>Initializes a new instance of a GUID.</summary>
-        private Uuid(Guid id) => m_Value = id;
-
-        #region Properties
-
-        /// <summary>The inner value of the UUID.</summary>
-        private Guid m_Value;
-
         /// <summary>Get the version of the UUID.</summary>
         public UuidVersion Version => m_Value.GetVersion();
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>Returns true if the UUID is empty, otherwise false.</summary>
-        public bool IsEmpty() => m_Value == default;
-
         /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
         public byte[] ToByteArray() => m_Value.ToByteArray();
-
-        #endregion
-
-        #region (XML) (De)serialization
-
-        /// <summary>Initializes a new instance of UUID based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private Uuid(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            m_Value = (Guid)info.GetValue("Value", typeof(Guid));
-        }
-
-        /// <summary>Adds the underlying property of UUID to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
-
-        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize a UUID.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the UUID from an <see href="XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses the string parse function of UUID.
-        /// </remarks>
-        /// <param name="reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = Parse(s);
-            m_Value = val.m_Value;
-        }
-
-        /// <summary>Writes the UUID to an <see href="XmlWriter"/>.</summary>
-        /// <remarks>
-        /// Uses the string representation of UUID.
-        /// </remarks>
-        /// <param name="writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToString(CultureInfo.InvariantCulture));
-        }
-
-        #endregion
-
-        #region (JSON) (De)serialization
 
         /// <summary>Generates a UUID from a JSON null object representation.</summary>
         void IJsonSerializable.FromJson() => m_Value = default;
@@ -134,13 +61,13 @@ namespace Qowaiv
         /// <param name="jsonInteger">
         /// The JSON integer that represents the UUID.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
+        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
 
         /// <summary>Generates a UUID from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the UUID.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
+        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
 
         /// <summary>Generates a UUID from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -148,32 +75,12 @@ namespace Qowaiv
         /// </param>
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
-
         /// <summary>Converts a UUID into its JSON object representation.</summary>
         object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-        #endregion
-
-        #region IFormattable / ToString
-
         /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => ToString();
-
-        /// <summary>Returns a <see cref="string"/> that represents the current UUID.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current UUID.</summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current UUID.</summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
+        private string DebuggerDisplay => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current UUID.</summary>
         /// <param name="format">
@@ -238,81 +145,8 @@ namespace Qowaiv
             }
         }
 
-        #endregion
-
-        #region IEquatable
-
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) => obj is Uuid && Equals((Uuid)obj);
-
-        /// <summary>Returns true if this instance and the other <see cref="Uuid"/> are equal, otherwise false.</summary>
-        /// <param name="other">The <see cref="Uuid"/> to compare with.</param>
-        public bool Equals(Uuid other) => m_Value == other.m_Value;
-
-        /// <summary>Returns the hash code for this GUID.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() => m_Value.GetHashCode();
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(Uuid left, Uuid right) => left.Equals(right);
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(Uuid left, Uuid right) => !(left == right);
-
-
-        #endregion
-
-        #region IComparable
-
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a GUID.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value is not a UUID.
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is Uuid || obj is Guid)
-            {
-                return CompareTo((Uuid)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "a GUID"), "obj");
-        }
-
-        /// <summary>Compares this instance with a specified UUID and indicates
-        /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified UUID.
-        /// </summary>
-        /// <param name="other">
-        /// The GUID to compare with this instance.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.
-        /// </returns>
-        public int CompareTo(Uuid other) => m_Value.CompareTo(other.m_Value);
-
-        #endregion
-
-        #region (Explicit) casting
+        /// <summary>Gets an XML string representation of the @FullName.</summary>
+        private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a UUID to a <see cref="string"/>.</summary>
         public static explicit operator string(Uuid val) => val.ToString(CultureInfo.CurrentCulture);
@@ -324,50 +158,8 @@ namespace Qowaiv
         /// <summary>Casts a System.GUID to a Qowaiv.UUID.</summary>
         public static implicit operator Uuid(Guid val) => new Uuid(val);
 
-        #endregion
-
-        #region Factory methods
-
         /// <summary>Initializes a new instance of a UUID.</summary>
         public static Uuid NewUuid() => new Uuid(Guid.NewGuid());
-
-
-        /// <summary>Converts the string to a UUID.</summary>
-        /// <param name="s">
-        /// A string containing a GUID to convert.
-        /// </param>
-        /// <returns>
-        /// A UUID.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Uuid Parse(string s)
-        {
-            if (TryParse(s, out Uuid val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatExceptionQGuid);
-        }
-
-        /// <summary>Converts the string to a UUID.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing a UUID to convert.
-        /// </param>
-        /// <returns>
-        /// The GUID if the string was converted successfully, otherwise QGuid.Empty.
-        /// </returns>
-        public static Uuid TryParse(string s)
-        {
-            if (TryParse(s, out Uuid val))
-            {
-                return val;
-            }
-            return Empty;
-        }
 
         /// <summary>Converts the string to a UUID.
         /// A return value indicates whether the conversion succeeded.
@@ -429,17 +221,5 @@ namespace Qowaiv
                 return new Guid(hash);
             }
         }
-
-        #endregion
-
-        #region Validation
-
-        /// <summary>Returns true if the value represents a valid UUID, otherwise false.</summary>
-        public static bool IsValid(string val)
-        {
-            return Pattern.IsMatch(val ?? string.Empty) || Guid.TryParse(val, out _);
-        }
-
-        #endregion
     }
 }

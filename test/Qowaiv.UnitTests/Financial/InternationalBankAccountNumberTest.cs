@@ -477,18 +477,18 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("IBAN: (empty)", default(InternationalBankAccountNumber));
+            DebuggerDisplayAssert.HasResult("{empty}", default(InternationalBankAccountNumber));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("IBAN: (unknown)", InternationalBankAccountNumber.Unknown);
+            DebuggerDisplayAssert.HasResult("?", InternationalBankAccountNumber.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("IBAN: NL20 INGB 0001 2345 67", TestStruct);
+            DebuggerDisplayAssert.HasResult("NL20 INGB 0001 2345 67", TestStruct);
         }
 
         #endregion
@@ -635,7 +635,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an IBAN"
+                "Argument must be InternationalBankAccountNumber."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -649,7 +649,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an IBAN"
+                "Argument must be InternationalBankAccountNumber."
             );
         }
         #endregion
@@ -795,68 +795,20 @@ namespace Qowaiv.UnitTests.Financial
 
         #region IsValid tests
 
-        [Test]
-        public void IsValid_NullValues_IsFalse()
+        [TestCase("", "string.Empty")]
+        [TestCase(null, "(String)null")]
+        [TestCase("XX950210000000693123456", "Not existing country.")]
+        [TestCase("Garbage in, garbage out", "Wrong pattern.")]
+        [TestCase("NL20INGB007", "Too short.")]
+        [TestCase("NL20INGB000123456Z", "Wrong Dutch sub pattern.")]
+        [TestCase("XX20INGB0001234567", "Non-existing country.")]
+        [TestCase("US20INGB0001234567", "Country without pattern.")]
+        public void IsValid_False(string str, string message)
         {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid(string.Empty), "string.Empty");
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid((String)null), "(String)null");
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid(str), message);
         }
 
-        [Test]
-        public void IsValid_QuestionMark_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("?"), "string.Empty");
-        }
-
-        [Test]
-        public void IsValid_XX_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX950210000000693123456"), "Not existing country.");
-        }
-
-        [Test]
-        public void IsValid_Null_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid(null));
-        }
-        [Test]
-        public void IsValid_StringEmpty_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid(""));
-        }
-
-        // To Short.
-        [Test]
-        public void IsValid_NL20INGB007_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB007"));
-        }
-
-        // Wrong pattern
-        [Test]
-        public void IsValid_WilhelmusVanNassau_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("Wilhelmus van Nassau"));
-        }
-
-        [Test]
-        public void IsValid_NLWrongSubpattern_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB000123456Z"));
-        }
-
-        [Test]
-        public void IsValid_XXNonExistentCountry_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX20INGB0001234567"));
-        }
-
-        [Test]
-        public void IsValid_USCountryWithoutPattern_IsFalse()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("US20INGB0001234567"));
-        }
-
+        [TestCase("?", "Unknown")]
         [TestCase("AE950 2100000006  93123456", "United Arab Emirates")]
         [TestCase("AE95 0210 0000 0069 3123 456", "United Arab Emirates")]
         [TestCase("AL47 2121 1009 0000 0002 3569 8741", "Albania")]

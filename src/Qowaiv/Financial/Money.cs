@@ -11,18 +11,17 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Financial
 {
-    /// <summary>Represents </summary>
+    /// <summary>Represents money (amount and currency).</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
+    [Serializable]
+    [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
     [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
     [TypeConverter(typeof(MoneyTypeConverter))]
-    public struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
+    public partial struct Money : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
     {
         /// <summary>Represents an Amount of zero.</summary>
         public static readonly Money Zero;
@@ -30,8 +29,6 @@ namespace Qowaiv.Financial
         public static readonly Money MinValue = decimal.MinValue + Currency.Empty;
         /// <summary>Represents the biggest possible value of an </summary>
         public static readonly Money MaxValue = decimal.MaxValue + Currency.Empty;
-
-        #region Properties
 
         /// <summary>The inner value of the </summary>
         private decimal m_Value;
@@ -42,8 +39,6 @@ namespace Qowaiv.Financial
 
         /// <summary>Gets the currency of the money.</summary>
         public Currency Currency => m_Currency;
-
-        #endregion
 
         #region Methods
 
@@ -368,7 +363,7 @@ namespace Qowaiv.Financial
         }
         #endregion
 
-        #region (XML) (De)serialization
+        #region (De)serialization
 
         /// <summary>Initializes a new instance of Money based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>
@@ -377,7 +372,7 @@ namespace Qowaiv.Financial
         {
             Guard.NotNull(info, nameof(info));
             m_Value = info.GetDecimal("Value");
-            m_Currency = Currency.Parse(info.GetString("Currency"));
+            m_Currency = Currency.Parse(info.GetString(nameof(Currency)));
         }
 
         /// <summary>Adds the underlying property of Money to the serialization info.</summary>
@@ -387,40 +382,11 @@ namespace Qowaiv.Financial
         {
             Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
-            info.AddValue("Currency", m_Currency.Name);
+            info.AddValue(nameof(Currency), m_Currency.Name);
         }
 
-        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize Money.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the Money from an <see href="XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses the string parse function of Money.
-        /// </remarks>
-        /// <param name="reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            Guard.NotNull(reader, nameof(reader));
-            var s = reader.ReadElementString();
-            var val = Parse(s, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-            m_Currency = val.m_Currency;
-        }
-
-        /// <summary>Writes the Money to an <see href="XmlWriter"/>.</summary>
-        /// <remarks>
-        /// Uses the string representation of Money.
-        /// </remarks>
-        /// <param name="writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(Currency.Name);
-            writer.WriteString(m_Value.ToString("", CultureInfo.InvariantCulture));
-        }
+        /// <remarks>Sets the currency.</remarks>
+        partial void OnReadXml(Money other) => m_Currency = other.m_Currency;
 
         #endregion
 
@@ -469,14 +435,9 @@ namespace Qowaiv.Financial
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts Money into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return ToString(CultureInfo.InvariantCulture);
-        }
+        object IJsonSerializable.ToJson() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
 
         #endregion
-
-        #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current Money for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -484,23 +445,6 @@ namespace Qowaiv.Financial
         {
             get => string.Format(CultureInfo.InvariantCulture, "{0} {1}", m_Currency, m_Value);
         }
-
-        /// <summary>Returns a <see cref="string"/> that represents the current </summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
-
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">
@@ -516,16 +460,11 @@ namespace Qowaiv.Financial
                 return formatted;
             }
             var numberFormatInfo = Currency.GetNumberFormatInfo(formatProvider);
-            return m_Value.ToString(format ?? "C", numberFormatInfo);
+            return m_Value.ToString(string.IsNullOrEmpty(format) ? "C" : format, numberFormatInfo);
         }
 
-        #endregion
-
-        #region IEquatable
-
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) => obj is Money && Equals((Money)obj);
+        /// <summary>Gets an XML string representation of the money.</summary>
+        private string ToXmlString() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
 
         /// <summary>Returns true if this instance and the other <see cref="Money"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Money"/> to compare with.</param>
@@ -536,46 +475,6 @@ namespace Qowaiv.Financial
         /// A 32-bit signed integer hash code.
         /// </returns>
         public override int GetHashCode() => m_Value.GetHashCode() ^ m_Currency.GetHashCode();
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(Money left, Money right) => left.Equals(right);
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(Money left, Money right) => !(left == right);
-
-        #endregion
-
-        #region IComparable
-
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a 
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value is not a 
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is Money)
-            {
-                return CompareTo((Money)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "Money"), "obj");
-        }
 
         /// <summary>Compares this instance with a specified Money and indicates
         /// whether this instance precedes, follows, or appears in the same position
@@ -598,21 +497,6 @@ namespace Qowaiv.Financial
             return compare;
         }
 
-
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Money l, Money r) => l.CompareTo(r) < 0;
-
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Money l, Money r) => l.CompareTo(r) > 0;
-
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Money l, Money r) => l.CompareTo(r) <= 0;
-
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Money l, Money r) => l.CompareTo(r) >= 0;
-
-        #endregion
-
         #region (Explicit) casting
 
         /// <summary>Casts Money to a <see cref="string"/>.</summary>
@@ -628,77 +512,6 @@ namespace Qowaiv.Financial
         public static explicit operator double(Money val) => (double)val.m_Value;
 
         #endregion
-
-        #region Factory methods
-
-        /// <summary>Converts the string to </summary>
-        /// <param name="s">
-        /// A string containing Money to convert.
-        /// </param>
-        /// <returns>
-        /// 
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Money Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
-
-        /// <summary>Converts the string to </summary>
-        /// <param name="s">
-        /// A string containing Money to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The specified format provider.
-        /// </param>
-        /// <returns>
-        /// 
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Money Parse(string s, IFormatProvider formatProvider)
-        {
-            if (TryParse(s, formatProvider, out Money val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatExceptionMoney);
-        }
-
-        /// <summary>Converts the string to 
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing Money to convert.
-        /// </param>
-        /// <returns>
-        /// The Money if the string was converted successfully, otherwise Empty.
-        /// </returns>
-        public static Money TryParse(string s)
-        {
-            if (TryParse(s, out Money val))
-            {
-                return val;
-            }
-            return Zero;
-        }
-
-        /// <summary>Converts the string to 
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing Money to convert.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, out Money result)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out result);
-        }
 
         /// <summary>Converts the string to 
         /// A return value indicates whether the conversion succeeded.
@@ -717,7 +530,7 @@ namespace Qowaiv.Financial
         /// </returns>
         public static bool TryParse(string s, IFormatProvider formatProvider, out Money result)
         {
-            result = Zero;
+            result = default;
             if (string.IsNullOrEmpty(s))
             {
                 return false;
@@ -785,21 +598,6 @@ namespace Qowaiv.Financial
         {
             return new Money { m_Value = val, m_Currency = currency };
         }
-
-        #endregion
-
-        #region Validation
-
-        /// <summary>Returns true if the val represents a valid Money, otherwise false.</summary>
-        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
-
-        /// <summary>Returns true if the val represents a valid Money, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            return TryParse(val, formatProvider, out _);
-        }
-
-        #endregion
 
         /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
         /// <remarks>

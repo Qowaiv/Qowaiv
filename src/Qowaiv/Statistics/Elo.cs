@@ -10,8 +10,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Statistics
@@ -28,28 +26,20 @@ namespace Qowaiv.Statistics
     /// League Baseball, competitive programming, and other games.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
-    [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Double))]
+    [Serializable]
+    [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(double))]
     [OpenApiDataType(description: "Elo rating system notation.", type: "number", format: "elo")]
     [TypeConverter(typeof(EloTypeConverter))]
-    public struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
+    public partial struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
     {
         /// <summary>Represents the zero value of an Elo.</summary>
-        public static readonly Elo Zero = new Elo { m_Value = default };
+        public static readonly Elo Zero;
 
         /// <summary>Represents the minimum value of an Elo.</summary>
-        public static readonly Elo MinValue = new Elo { m_Value = Double.MinValue };
+        public static readonly Elo MinValue = new Elo(double.MinValue);
 
         /// <summary>Represents the maximum value of an Elo.</summary>
-        public static readonly Elo MaxValue = new Elo { m_Value = Double.MaxValue };
-
-        #region Properties
-
-        /// <summary>The inner value of the Elo.</summary>
-        private Double m_Value;
-
-        #endregion
-
-        #region Methods
+        public static readonly Elo MaxValue = new Elo(double.MaxValue);
 
         /// <summary>Gets an z-score based on the two Elo's.</summary>
         /// <param name="elo0">
@@ -65,8 +55,6 @@ namespace Qowaiv.Statistics
 
             return z;
         }
-
-        #endregion
 
         #region Elo manipulation
 
@@ -132,56 +120,6 @@ namespace Qowaiv.Statistics
 
         #endregion
 
-        #region (XML) (De)serialization
-
-        /// <summary>Initializes a new instance of Elo based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private Elo(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null) { throw new ArgumentNullException("info"); }
-            m_Value = info.GetDouble("Value");
-        }
-
-        /// <summary>Adds the underlying property of Elo to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null) { throw new ArgumentNullException("info"); }
-            info.AddValue("Value", m_Value);
-        }
-
-        /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize an Elo.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the Elo from an <see href="XmlReader"/>.</summary>
-        /// <remarks>
-        /// Uses the string parse function of Elo.
-        /// </remarks>
-        /// <param name="reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            var s = reader.ReadElementString();
-            var val = Parse(s, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-        }
-
-        /// <summary>Writes the Elo to an <see href="XmlWriter"/>.</summary>
-        /// <remarks>
-        /// Uses the string representation of Elo.
-        /// </remarks>
-        /// <param name="writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            writer.WriteString(ToString("", CultureInfo.InvariantCulture));
-        }
-
-        #endregion
-
         #region (JSON) (De)serialization
 
         /// <summary>Generates an Elo from a JSON null object representation.</summary>
@@ -191,28 +129,19 @@ namespace Qowaiv.Statistics
         /// <param name="jsonString">
         /// The JSON string that represents the Elo.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
+        void IJsonSerializable.FromJson(string jsonString)=>m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
 
         /// <summary>Generates an Elo from a JSON integer representation.</summary>
         /// <param name="jsonInteger">
         /// The JSON integer that represents the Elo.
         /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger)
-        {
-            m_Value = Create(jsonInteger).m_Value;
-        }
+        void IJsonSerializable.FromJson(long jsonInteger)=>m_Value = Create(jsonInteger).m_Value;
 
         /// <summary>Generates an Elo from a JSON number representation.</summary>
         /// <param name="jsonNumber">
         /// The JSON number that represents the Elo.
         /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber)
-        {
-            m_Value = Create(jsonNumber).m_Value;
-        }
+        void IJsonSerializable.FromJson(double jsonNumber)=>m_Value = Create(jsonNumber).m_Value;
 
         /// <summary>Generates an Elo from a JSON date representation.</summary>
         /// <param name="jsonDate">
@@ -221,39 +150,13 @@ namespace Qowaiv.Statistics
         void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
 
         /// <summary>Converts an Elo into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() { return m_Value; }
+        object IJsonSerializable.ToJson() => m_Value;
 
         #endregion
 
-        #region IFormattable / ToString
-
         /// <summary>Returns a <see cref="string"/> that represents the current Elo for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Double DebuggerDisplay { get { return m_Value; } }
-
-        /// <summary>Returns a <see cref="string"/> that represents the current Elo.</summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
-        /// <param name="format">
-        /// The format that this describes the formatting.
-        /// </param>
-        public string ToString(string format)
-        {
-            return ToString(format, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return ToString("", formatProvider);
-        }
+        private double DebuggerDisplay=> m_Value;
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
         /// <param name="format">
@@ -271,195 +174,27 @@ namespace Qowaiv.Statistics
             return m_Value.ToString(format, formatProvider);
         }
 
-        #endregion
-
-        #region IEquatable
-
-        /// <summary>Returns true if this instance and the other object are equal, otherwise false.</summary>
-        /// <param name="obj">An object to compare with.</param>
-        public override bool Equals(object obj) => obj is Elo && Equals((Elo)obj);
-
-        /// <summary>Returns true if this instance and the other <see cref="Elo"/> are equal, otherwise false.</summary>
-        /// <param name="other">The <see cref="Elo"/> to compare with.</param>
-        public bool Equals(Elo other) => m_Value.Equals(other.m_Value);
-
-        /// <summary>Returns the hash code for this Elo.</summary>
-        /// <returns>
-        /// A 32-bit signed integer hash code.
-        /// </returns>
-        public override int GetHashCode() => m_Value.GetHashCode();
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator ==(Elo left, Elo right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(Elo left, Elo right)
-        {
-            return !(left == right);
-        }
-
-        #endregion
-
-        #region IComparable
-
-        /// <summary>Compares this instance with a specified System.Object and indicates whether
-        /// this instance precedes, follows, or appears in the same position in the sort
-        /// order as the specified System.Object.
-        /// </summary>
-        /// <param name="obj">
-        /// An object that evaluates to a Elo.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.Value
-        /// Condition Less than zero This instance precedes value. Zero This instance
-        /// has the same position in the sort order as value. Greater than zero This
-        /// instance follows value.-or- value is null.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value is not a Elo.
-        /// </exception>
-        public int CompareTo(object obj)
-        {
-            if (obj is Elo)
-            {
-                return CompareTo((Elo)obj);
-            }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivMessages.ArgumentException_Must, "an Elo."), "obj");
-        }
-
-        /// <summary>Compares this instance with a specified Elo and indicates
-        /// whether this instance precedes, follows, or appears in the same position
-        /// in the sort order as the specified Elo.
-        /// </summary>
-        /// <param name="other">
-        /// The Elo to compare with this instance.
-        /// </param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-        /// or appears in the same position in the sort order as the value parameter.
-        /// </returns>
-        public int CompareTo(Elo other) => m_Value.CompareTo(other.m_Value);
-
-
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Elo l, Elo r) => l.CompareTo(r) < 0;
-
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator >(Elo l, Elo r) => l.CompareTo(r) > 0;
-
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Elo l, Elo r) => l.CompareTo(r) <= 0;
-
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Elo l, Elo r) => l.CompareTo(r) >= 0;
-
-        #endregion
-
-        #region (Explicit) casting
+        /// <summary>Gets an XML string representation of the Elo.</summary>
+        private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts an Elo to a <see cref="string"/>.</summary>
         public static explicit operator string(Elo val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Elo.</summary>
-        public static explicit operator Elo(string str) { return Elo.Parse(str, CultureInfo.CurrentCulture); }
-
+        public static explicit operator Elo(string str) =>Parse(str, CultureInfo.CurrentCulture);
 
         /// <summary>Casts a decimal to an Elo.</summary>
-        public static implicit operator Elo(decimal val) { return new Elo { m_Value = (double)val }; }
+        public static implicit operator Elo(decimal val)=>new Elo((double)val);
         /// <summary>Casts a decimal to an Elo.</summary>
-        public static implicit operator Elo(double val) { return new Elo { m_Value = val }; }
+        public static implicit operator Elo(double val) => new Elo(val);
         /// <summary>Casts an integer to an Elo.</summary>
-        public static implicit operator Elo(Int32 val) { return new Elo { m_Value = val }; }
+        public static implicit operator Elo(int val) => new Elo(val);
 
         /// <summary>Casts an Elo to a decimal.</summary>
-        public static explicit operator decimal(Elo val) { return (decimal)val.m_Value; }
+        public static explicit operator decimal(Elo val) => (decimal)val.m_Value;
         /// <summary>Casts an Elo to a double.</summary>
         public static explicit operator double(Elo val) => val.m_Value;
         /// <summary>Casts an Elo to an integer.</summary>
-        public static explicit operator Int32(Elo val) { return (Int32)Math.Round(val.m_Value); }
-
-        #endregion
-
-        #region Factory methods
-
-        /// <summary>Converts the string to an Elo.</summary>
-        /// <param name="s">
-        /// A string containing an Elo to convert.
-        /// </param>
-        /// <returns>
-        /// An Elo.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Elo Parse(string s)
-        {
-            return Parse(s, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>Converts the string to an Elo.</summary>
-        /// <param name="s">
-        /// A string containing an Elo to convert.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        /// <returns>
-        /// An Elo.
-        /// </returns>
-        /// <exception cref="FormatException">
-        /// s is not in the correct format.
-        /// </exception>
-        public static Elo Parse(string s, IFormatProvider formatProvider)
-        {
-            if (TryParse(s, formatProvider, out Elo val))
-            {
-                return val;
-            }
-            throw new FormatException(QowaivMessages.FormatExceptionElo);
-        }
-
-        /// <summary>Converts the string to an Elo.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing an Elo to convert.
-        /// </param>
-        /// <returns>
-        /// The Elo if the string was converted successfully, otherwise Elo.Empty.
-        /// </returns>
-        public static Elo TryParse(string s)
-        {
-            if (TryParse(s, out Elo val))
-            {
-                return val;
-            }
-            return Zero;
-        }
-
-        /// <summary>Converts the string to an Elo.
-        /// A return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="s">
-        /// A string containing an Elo to convert.
-        /// </param>
-        /// <param name="result">
-        /// The result of the parsing.
-        /// </param>
-        /// <returns>
-        /// True if the string was converted successfully, otherwise false.
-        /// </returns>
-        public static bool TryParse(string s, out Elo result)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out result);
-        }
+        public static explicit operator int(Elo val) =>(int)Math.Round(val.m_Value);
 
         /// <summary>Converts the string to an Elo.
         /// A return value indicates whether the conversion succeeded.
@@ -498,18 +233,6 @@ namespace Qowaiv.Statistics
         /// <exception cref="FormatException" >
         /// val is not a valid Elo.
         /// </exception >
-        public static Elo Create(Double val) => new Elo { m_Value = val };
-
-        #endregion
-
-        #region Validation
-
-        /// <summary>Returns true if the val represents a valid Elo, otherwise false.</summary>
-        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
-
-        /// <summary>Returns true if the val represents a valid Elo, otherwise false.</summary>
-        public static bool IsValid(string val, IFormatProvider formatProvider) => TryParse(val, formatProvider, out _);
-
-        #endregion
+        public static Elo Create(double val) => new Elo(val);
     }
 }

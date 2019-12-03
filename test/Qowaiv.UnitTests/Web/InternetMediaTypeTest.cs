@@ -549,7 +549,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("Internet Media Type: (empty)", default(InternetMediaType));
+            DebuggerDisplayAssert.HasResult("{empty}", default(InternetMediaType));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
@@ -707,7 +707,7 @@ namespace Qowaiv.UnitTests.Web
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Internet media type"
+                "Argument must be InternetMediaType."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -721,7 +721,7 @@ namespace Qowaiv.UnitTests.Web
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Internet media type"
+                "Argument must be InternetMediaType."
             );
         }
         #endregion

@@ -569,7 +569,7 @@ namespace Qowaiv.UnitTests.Statistics
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Elo."
+                "Argument must be Elo."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -583,7 +583,7 @@ namespace Qowaiv.UnitTests.Statistics
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Elo."
+                "Argument must be Elo."
             );
         }
 

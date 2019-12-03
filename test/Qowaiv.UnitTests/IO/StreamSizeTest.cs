@@ -840,7 +840,7 @@ namespace Qowaiv.UnitTests.IO
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a stream size"
+                "Argument must be StreamSize."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -854,7 +854,7 @@ namespace Qowaiv.UnitTests.IO
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a stream size"
+                "Argument must be StreamSize."
             );
         }
 

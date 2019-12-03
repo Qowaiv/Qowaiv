@@ -173,7 +173,12 @@ namespace Qowaiv.Financial
             }
             if (Pattern.IsMatch(s))
             {
-                result = new BusinessIdentifierCode { m_Value = Parsing.ClearSpacingAndMarkupToUpper(s) };
+                result = new BusinessIdentifierCode(Parsing.ClearSpacingAndMarkupToUpper(s));
+                if(result.Country.IsEmptyOrUnknown())
+                {
+                    result = default;
+                    return false;
+                }
                 return true;
             }
             return false;

@@ -177,6 +177,11 @@ namespace Qowaiv.Financial
             if (Pattern.IsMatch(s))
             {
                 result = new BankIdentifierCode(Parsing.ClearSpacingAndMarkupToUpper(s));
+                if (result.Country.IsEmptyOrUnknown())
+                {
+                    result = default;
+                    return false;
+                }
                 return true;
             }
             return false;

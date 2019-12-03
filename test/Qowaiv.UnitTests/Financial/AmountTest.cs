@@ -634,7 +634,7 @@ namespace Qowaiv.Financial.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Amount"
+                "Argument must be Amount."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -648,7 +648,7 @@ namespace Qowaiv.Financial.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an Amount"
+                "Argument must be Amount."
             );
         }
 

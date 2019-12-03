@@ -539,7 +539,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a local date time"
+                "Argument must be LocalDateTime."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -553,7 +553,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a local date time"
+                "Argument must be LocalDateTime."
             );
         }
 

@@ -796,7 +796,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a percentage"
+                "Argument must be Percentage."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -810,7 +810,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a percentage"
+                "Argument must be Percentage."
             );
         }
 

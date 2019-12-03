@@ -737,7 +737,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a postal code"
+                "Argument must be PostalCode."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -751,7 +751,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a postal code"
+                "Argument must be PostalCode."
             );
         }
         #endregion

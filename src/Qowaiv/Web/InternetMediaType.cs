@@ -258,7 +258,7 @@ namespace Qowaiv.Web
                 return default;
             }
             var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
-            return string.IsNullOrEmpty(str) ? default : new InternetMediaType(str);
+            return string.IsNullOrEmpty(str) ? Unknown : new InternetMediaType(str);
         }
         internal readonly static ResourceManager ResourceManager = new ResourceManager("Qowaiv.Web.InternetMediaType.FromFile", typeof(InternetMediaType).Assembly);
     }

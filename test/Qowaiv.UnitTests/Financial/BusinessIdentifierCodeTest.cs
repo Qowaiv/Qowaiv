@@ -887,17 +887,18 @@ namespace Qowaiv.UnitTests.Financial
 
         #region IsValid
 
-        [TestCase("1AAANL01", "Digit in first four characters")]
+
+        [TestCase(null, "null")]
+        [TestCase("", "string.Empty")]
+        [TestCase("1AAANL01", "digit in first four characters")]
         [TestCase("AAAANLBB1", "Branch length of 1")]
         [TestCase("AAAANLBB12", "Branch length of 2")]
-        [TestCase("ABCDXX01", "Digit in country code")]
-        [TestCase("ABCDXX01", "None existing country")]
+        [TestCase("ABCDXX01", "Digit in country")]
+        [TestCase("ABCDXX01", "Not existing country")]
         [TestCase("AAAANLBË", "Diacritic")]
-        [TestCase(null, "(String)null")]
-        [TestCase("", "String.Empty")]
-        public void IsInvalid(string str, string message)
+        public void IsValid_False(string str, string message)
         {
-            Assert.IsFalse(BusinessIdentifierCode.IsValid(str), message);
+            Assert.IsFalse(BusinessIdentifierCode.IsValid(str), "{0}, {1}", str, message);
         }
 
         [TestCase("PSTBNL21")]
@@ -909,18 +910,9 @@ namespace Qowaiv.UnitTests.Financial
         [TestCase("DABADKKK")]
         [TestCase("UNCRIT2B912")]
         [TestCase("DSBACNBXSHA")]
-        public void IsValid(string str)
+        public void IsValid_True(string str)
         {
-            Assert.IsTrue(BusinessIdentifierCode.IsValid(str));
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("PSTBNL21"), "PSTBNL21");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("ABNANL2A"), "ABNANL2A");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("BACBBEBB"), "BACBBEBB");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("GEBABEBB36A"), "GEBABEBB36A");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("DEUTDEFF"), "DEUTDEFF");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("NEDSZAJJ"), "NEDSZAJJ");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("DABADKKK"), "DABADKKK");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("UNCRIT2B912"), "UNCRIT2B912");
-            Assert.IsTrue(BusinessIdentifierCode.IsValid("DSBACNBXSHA"), "DSBACNBXSHA");
+            Assert.IsTrue(BusinessIdentifierCode.IsValid(str), str);
         }
 
         #endregion

@@ -468,7 +468,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void GetHash_TestStruct_Hash()
         {
-            Assert.AreEqual(1378, CryptographicSeedTest.TestStruct.GetHashCode());
+            Assert.AreNotEqual(0, TestStruct.GetHashCode());
         }
 
         [Test]
@@ -597,7 +597,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a cryptographic seed"
+                "Argument must be CryptographicSeed."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -611,7 +611,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a cryptographic seed"
+                "Argument must be CryptographicSeed."
             );
         }
 

@@ -87,7 +87,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current yes-no for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString("F", CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString("f", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current yes-no.</summary>
         /// <param name="format">
@@ -118,9 +118,6 @@ namespace Qowaiv
             return StringFormatter.Apply(this, format, formatProvider as CultureInfo ?? CultureInfo.CurrentCulture, FormatTokens);
         }
 
-        /// <summary>Gets an XML string representation of the yes-no.</summary>
-        private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
-
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<YesNo, IFormatProvider, string>>
         {
@@ -133,6 +130,9 @@ namespace Qowaiv
             { 'B', (svo, provider) => svo.GetResourceString("b_", provider).ToTitleCase(provider) },
         };
 
+        /// <summary>Gets an XML string representation of the yes-no.</summary>
+        private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+
         /// <summary>Casts a yes-no to a <see cref="string"/>.</summary>
         public static explicit operator string(YesNo val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a yes-no.</summary>
@@ -143,7 +143,7 @@ namespace Qowaiv
         /// <summary>Casts a nullable <see cref="bool"/> to a yes-no.</summary>
         public static explicit operator YesNo(bool? val)
         {
-            if(val.HasValue)
+            if (val.HasValue)
             {
                 return val.Value ? Yes : No;
             }
@@ -229,17 +229,17 @@ namespace Qowaiv
             {
                 return true;
             }
-            if(val == 0)
+            if (val == 0)
             {
                 result = No;
                 return true;
             }
-            if(val == 1)
+            if (val == 1)
             {
                 result = Yes;
                 return true;
             }
-            if(val == byte.MaxValue || val == short.MaxValue || val == int.MaxValue)
+            if (val == byte.MaxValue || val == short.MaxValue || val == int.MaxValue)
             {
                 result = Unknown;
                 return true;

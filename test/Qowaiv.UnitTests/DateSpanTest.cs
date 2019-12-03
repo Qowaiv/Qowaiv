@@ -580,7 +580,7 @@ namespace Qowaiv.UnitTests
                 TestStruct.CompareTo(null);
             },
             "obj",
-            "Argument must be a date span"
+            "Argument must be DateSpan."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -593,7 +593,7 @@ namespace Qowaiv.UnitTests
                 TestStruct.CompareTo(new object());
             },
             "obj",
-            "Argument must be a date span"
+            "Argument must be DateSpan."
             );
         }
         #endregion

@@ -312,11 +312,7 @@ namespace Qowaiv
         /// </param>
         public static bool IsValid(string val, IFormatProvider formatProvider)
         {
-            return !string.IsNullOrWhiteSpace(val) 
-#if !NotIsUnknown
-            && !Qowaiv.Unknown.IsUnknown(val, formatProvider as CultureInfo) 
-#endif
-            && TryParse(val, formatProvider, out _);
+            return !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
         }
 #else
         /// <summary>Returns true if the value represents a valid date.</summary>
@@ -325,11 +321,7 @@ namespace Qowaiv
         /// </param>
         public static bool IsValid(string val)
         {
-            return !string.IsNullOrWhiteSpace(val)
-#if !NotIsUnknown
-                && !Qowaiv.Unknown.IsUnknown(val, CultureInfo.InvariantCulture)
-#endif
-                && TryParse(val, out _);
+            return !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
         }
 #endif
     }

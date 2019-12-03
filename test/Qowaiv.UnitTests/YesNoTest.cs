@@ -548,12 +548,12 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("{empty} (YesNo)", default(YesNo));
+            DebuggerDisplayAssert.HasResult("{empty}", default(YesNo));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("unknown (YesNo)", YesNo.Unknown);
+            DebuggerDisplayAssert.HasResult("unknown", YesNo.Unknown);
         }
 
         [Test]
@@ -703,7 +703,7 @@ namespace Qowaiv.Fiancial.UnitTests
                 TestStruct.CompareTo(null);
             },
             "obj",
-            "Argument must be a Yes-no"
+            "Argument must be YesNo."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -716,7 +716,7 @@ namespace Qowaiv.Fiancial.UnitTests
                 TestStruct.CompareTo(new object());
             },
             "obj",
-            "Argument must be a Yes-no"
+            "Argument must be YesNo."
             );
         }
 

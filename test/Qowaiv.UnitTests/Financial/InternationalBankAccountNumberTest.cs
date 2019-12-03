@@ -477,18 +477,18 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("IBAN: (empty)", default(InternationalBankAccountNumber));
+            DebuggerDisplayAssert.HasResult("{empty}", default(InternationalBankAccountNumber));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("IBAN: (unknown)", InternationalBankAccountNumber.Unknown);
+            DebuggerDisplayAssert.HasResult("?", InternationalBankAccountNumber.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("IBAN: NL20 INGB 0001 2345 67", TestStruct);
+            DebuggerDisplayAssert.HasResult("NL20 INGB 0001 2345 67", TestStruct);
         }
 
         #endregion
@@ -635,7 +635,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an IBAN"
+                "Argument must be InternationalBankAccountNumber."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -649,7 +649,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an IBAN"
+                "Argument must be InternationalBankAccountNumber."
             );
         }
         #endregion

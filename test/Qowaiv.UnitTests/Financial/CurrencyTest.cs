@@ -572,18 +572,18 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("Currency: (empty)", default(Currency));
+            DebuggerDisplayAssert.HasResult("{empty}", default(Currency));
         }
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("Currency: (unknown)", Currency.Unknown);
+            DebuggerDisplayAssert.HasResult("?", Currency.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("Currency: Euro (EUR/978)", TestStruct);
+            DebuggerDisplayAssert.HasResult("Euro (EUR/978)", TestStruct);
         }
 
         #endregion
@@ -808,7 +808,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a currency"
+                "Argument must be Currency."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -822,7 +822,7 @@ namespace Qowaiv.UnitTests.Financial
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be a currency"
+                "Argument must be Currency."
             );
         }
         #endregion

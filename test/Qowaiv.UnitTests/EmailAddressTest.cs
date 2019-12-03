@@ -571,19 +571,19 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("EmailAddress: (empty)", default(EmailAddress));
+            DebuggerDisplayAssert.HasResult("{empty}", default(EmailAddress));
         }
 
         [Test]
         public void DebuggerDisplay_Unknown_String()
         {
-            DebuggerDisplayAssert.HasResult("EmailAddress: (unknown)", EmailAddress.Unknown);
+            DebuggerDisplayAssert.HasResult("?", EmailAddress.Unknown);
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("EmailAddress: svo@qowaiv.org", TestStruct);
+            DebuggerDisplayAssert.HasResult("svo@qowaiv.org", TestStruct);
         }
 
         #endregion
@@ -730,7 +730,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an email address"
+                "Argument must be EmailAddress."
             );
         }
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -744,7 +744,7 @@ namespace Qowaiv.UnitTests
                     TestStruct.CompareTo(other);
                 },
                 "obj",
-                "Argument must be an email address"
+                "Argument must be EmailAddress."
             );
         }
         #endregion

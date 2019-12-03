@@ -191,7 +191,7 @@ namespace Qowaiv.Globalization
                 {
                     return "?";
                 }
-                return string.Format(CultureInfo.InvariantCulture, "{0} ({1}/{2}", EnglishName, IsoAlpha2Code, IsoAlpha3Code);
+                return string.Format(CultureInfo.InvariantCulture, "{0} ({1}/{2})", EnglishName, IsoAlpha2Code, IsoAlpha3Code);
             }
         }
 

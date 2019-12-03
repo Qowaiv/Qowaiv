@@ -156,8 +156,10 @@ namespace Qowaiv.Web
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(InternetMediaType other);
         /// <summary>Writes the Internet media type to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

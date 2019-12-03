@@ -158,8 +158,10 @@ namespace Qowaiv.IO
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(StreamSize other);
         /// <summary>Writes the stream size to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

@@ -155,8 +155,10 @@ namespace Qowaiv.Financial
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(Currency other);
         /// <summary>Writes the currency to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

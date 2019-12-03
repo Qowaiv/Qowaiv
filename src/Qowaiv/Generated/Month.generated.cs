@@ -154,8 +154,10 @@ namespace Qowaiv
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(Month other);
         /// <summary>Writes the month to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

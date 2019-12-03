@@ -155,8 +155,10 @@ namespace Qowaiv.Financial
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(InternationalBankAccountNumber other);
         /// <summary>Writes the IBAN to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

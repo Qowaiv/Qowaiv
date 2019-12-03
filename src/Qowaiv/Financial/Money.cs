@@ -11,8 +11,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Financial
@@ -374,7 +372,7 @@ namespace Qowaiv.Financial
         {
             Guard.NotNull(info, nameof(info));
             m_Value = info.GetDecimal("Value");
-            m_Currency = Currency.Parse(info.GetString("Currency"));
+            m_Currency = Currency.Parse(info.GetString(nameof(Currency)));
         }
 
         /// <summary>Adds the underlying property of Money to the serialization info.</summary>
@@ -384,36 +382,11 @@ namespace Qowaiv.Financial
         {
             Guard.NotNull(info, nameof(info));
             info.AddValue("Value", m_Value);
-            info.AddValue("Currency", m_Currency.Name);
+            info.AddValue(nameof(Currency), m_Currency.Name);
         }
 
-        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the money.</summary>
-        /// <remarks>
-        /// Returns null as no schema is required.
-        /// </remarks>
-        XmlSchema IXmlSerializable.GetSchema() => null;
-
-        /// <summary>Reads the money from an <see href = "XmlReader"/>.</summary>
-        /// <param name = "reader">An XML reader.</param>
-        void IXmlSerializable.ReadXml(XmlReader reader)
-        {
-            Guard.NotNull(reader, nameof(reader));
-            var xml = reader.ReadElementString();
-            var val = Parse(xml, CultureInfo.InvariantCulture);
-            m_Value = val.m_Value;
-            m_Currency = val.m_Currency;
-        }
-
-        /// <summary>Writes the money to an <see href = "XmlWriter"/>.</summary>
-        /// <remarks>
-        /// Uses <see cref = "ToXmlString()"/>.
-        /// </remarks>
-        /// <param name = "writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToXmlString());
-        }
+        /// <remarks>Sets the currency.</remarks>
+        partial void OnReadXml(Money other) => m_Currency = other.m_Currency;
 
         #endregion
 

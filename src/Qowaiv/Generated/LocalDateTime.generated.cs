@@ -158,8 +158,10 @@ namespace Qowaiv
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(LocalDateTime other);
         /// <summary>Writes the local date time to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

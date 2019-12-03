@@ -157,8 +157,10 @@ namespace Qowaiv.Sql
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(Timestamp other);
         /// <summary>Writes the timestamp to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

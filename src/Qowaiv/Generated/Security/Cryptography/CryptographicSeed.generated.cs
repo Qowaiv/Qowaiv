@@ -159,8 +159,10 @@ namespace Qowaiv.Security.Cryptography
             var val = Parse(xml);
 #endif
             m_Value = val.m_Value;
+            OnReadXml(val);
         }
 
+        partial void OnReadXml(CryptographicSeed other);
         /// <summary>Writes the cryptographic seed to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.

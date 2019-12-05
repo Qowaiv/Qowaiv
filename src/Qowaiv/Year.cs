@@ -41,39 +41,25 @@ namespace Qowaiv
         /// <returns>
         /// true if year is a leap year; otherwise, false.
         /// </returns>
-        public bool IsLeapYear
+        public bool IsLeapYear => !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
+
+        private void FromJson(object json)
         {
-            get => !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
+            if (json is double dec && (int)dec == dec)
+            {
+                m_Value = Create((int)dec).m_Value;
+            }
+            else if (json is long num)
+            {
+                m_Value = Create((int)num).m_Value;
+            }
+            else
+            {
+                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
+            }
         }
 
-        /// <summary>Generates a year from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a year from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a year from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
-
-        /// <summary>Generates a year from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((int)jsonNumber).m_Value;
-
-        /// <summary>Generates a year from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a year into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson()
         {
             if (IsEmpty()) { return null; }

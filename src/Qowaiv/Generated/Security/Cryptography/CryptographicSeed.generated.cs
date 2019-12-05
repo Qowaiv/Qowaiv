@@ -179,6 +179,33 @@ namespace Qowaiv.Security.Cryptography
 namespace Qowaiv.Security.Cryptography
 {
     using System;
+    using Qowaiv.Json;
+
+    public partial struct CryptographicSeed : IJsonSerializable
+    {
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson() => FromJson(null);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(string jsonString) => FromJson(jsonString);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(long jsonInteger) => FromJson(jsonInteger);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(double jsonNumber) => FromJson(jsonNumber);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(DateTime jsonDate) => FromJson(jsonDate);
+        /// <inheritdoc/>
+        void IJsonSerializable.FromJson(object json) => FromJson(json);
+    }
+}
+
+namespace Qowaiv.Security.Cryptography
+{
+    using System;
     using System.Globalization;
 
     public partial struct CryptographicSeed : IFormattable

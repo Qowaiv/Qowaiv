@@ -70,39 +70,41 @@ namespace Qowaiv.Text.Json.Serialization
         {
             var type = QowaivType.GetNotNullableType(typeToConvert);
             var result = (IJsonSerializable)Activator.CreateInstance(type);
-
-            var isNullable = typeof(TSvo) != typeToConvert || typeToConvert.IsClass;
+            object token;
 
             try
             {
                 switch (reader.TokenType)
                 {
                     case JsonTokenType.String:
-                        result.FromJson(reader.GetString());
+                        token = reader.GetString();
+                        result.FromJson(token);
+                        break;
+                    case JsonTokenType.True:
+                        result.FromJson(true);
+                        break;
+                    case JsonTokenType.False:
+                        result.FromJson(false);
                         break;
 
                     case JsonTokenType.Number:
                         if (reader.TryGetInt64(out long num))
                         {
-                            result.FromJson(num);
+                            token = num;
                         }
                         else if (reader.TryGetDouble(out double dec))
                         {
-                            result.FromJson(dec);
+                            token = dec;
                         }
                         else
                         {
                             throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
                         }
+                        result.FromJson(token);
                         break;
 
-                    case JsonTokenType.Null:
-                        if (isNullable)
-                        {
-                            return default;
-                        }
-                        result.FromJson();
-                        break;
+                    case JsonTokenType.Null: 
+                        return default;
 
                     default:
                         throw new JsonException($"Unexpected token parsing { typeToConvert.FullName }. { reader.TokenType} is not supported.");
@@ -148,10 +150,6 @@ namespace Qowaiv.Text.Json.Serialization
             else if (obj is long num)
             {
                 writer.WriteNumberValue(num);
-            }
-            else if (obj is DateTime dt)
-            {
-                writer.WriteStringValue(dt);
             }
             else
             {

@@ -547,34 +547,19 @@ namespace Qowaiv
 
         #region (JSON) (De)serialization
 
-        /// <summary>Generates a Percentage from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        private void FromJson(object json)
+        {
+            if (json is double dec)
+            {
+                m_Value = (decimal)dec;
+            }
+            else
+            {
+                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
+            }
+        }
 
-        /// <summary>Generates a Percentage from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the Percentage.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a Percentage from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the Percentage.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a Percentage from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the Percentage.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber)=> m_Value = Create((decimal)jsonNumber).m_Value;
-
-        /// <summary>Generates a Percentage from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the Percentage.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a Percentage into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => ToString("0.############################%", CultureInfo.InvariantCulture);
 
         #endregion

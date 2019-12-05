@@ -179,39 +179,17 @@ namespace Qowaiv
 
         #endregion
 
-        #region (JSON) (De)serialization
+        private void FromJson(object json)
+        {
+            if (json is long num)
+            {
+                m_Value = FromDays((int)num).m_Value;
+            }
+            m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
+        }
 
-        /// <summary>Generates a date span from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates a date span from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the date span.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a date span from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the date span.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = new DateSpan(0, (int)jsonInteger).m_Value;
-
-        /// <summary>Generates a date span from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the date span.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a date span from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the date span.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a date span into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
-
-        #endregion
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

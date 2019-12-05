@@ -116,35 +116,13 @@ namespace Qowaiv.Financial
                 .Where(country => country.GetCurrency(measurement) == currency);
         }
 
-        /// <summary>Generates a currency from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
+        private void FromJson(object json)
+        {
+            var str = json is long num ? num.ToString("000") : Parsing.ToInvariant(json);
+            m_Value = Parse(str, CultureInfo.InvariantCulture).m_Value;
+        }
 
-
-        /// <summary>Generates a currency from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the currency.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a currency from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the currency.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger)=> m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a currency from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the currency.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a currency from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the currency.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a currency into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>

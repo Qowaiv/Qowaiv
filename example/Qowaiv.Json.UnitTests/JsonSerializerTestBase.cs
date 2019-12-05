@@ -107,10 +107,10 @@ namespace Qowaiv.Json.UnitTests
         }
 
         [Test]
-        public void Deserialize_Boolean_Throws()
+        public void Deserialize_Boolean_Yes()
         {
-            var x = Assert.Throws<TException>(() => Deserialize<Svo>("true"));
-            StringAssert.StartsWith("Unexpected token parsing Qowaiv.Json.UnitTests.Models.Svo. ", x.Message);
+            var actual = Deserialize<YesNo>("true");
+            Assert.AreEqual(YesNo.Yes, actual);
         }
 
         [Test]

@@ -363,8 +363,6 @@ namespace Qowaiv.Financial
         }
         #endregion
 
-        #region (De)serialization
-
         /// <summary>Initializes a new instance of Money based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>
         /// <param name="context">The streaming context.</param>
@@ -388,56 +386,28 @@ namespace Qowaiv.Financial
         /// <remarks>Sets the currency.</remarks>
         partial void OnReadXml(Money other) => m_Currency = other.m_Currency;
 
-        #endregion
-
-        #region (JSON) (De)serialization
-
-        /// <summary>Generates Money from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates Money from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
+        private void FromJson(object json)
         {
-            var money = Parse(jsonString, CultureInfo.InvariantCulture);
-            m_Value = money.m_Value;
-            m_Currency = money.m_Currency;
+            //if (json is double dec)
+            //{
+            //    m_Value = (decimal)dec;
+            //    m_Currency = Currency.Empty;
+            //}
+            //else if (json is long num)
+            //{
+            //    m_Value = (decimal)num;
+            //    m_Currency = Currency.Empty;
+            //}
+            //else
+            //{
+                var money = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture);
+                m_Value = money.m_Value;
+                m_Currency = money.m_Currency;
+            //}
         }
 
-        /// <summary>Generates Money from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger)
-        {
-            var money = Create(jsonInteger, Currency.Empty);
-            m_Value = money.m_Value;
-            m_Currency = money.m_Currency;
-        }
-
-        /// <summary>Generates Money from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber)
-        {
-            var money = Create((decimal)jsonNumber, Currency.Empty);
-            m_Value = money.m_Value;
-            m_Currency = money.m_Currency;
-        }
-
-        /// <summary>Generates Money from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts Money into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
-
-        #endregion
 
         /// <summary>Returns a <see cref="string"/> that represents the current Money for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -569,8 +539,8 @@ namespace Qowaiv.Financial
             }
 
             Currency currency = Currency.Empty;
-            if ((s_cur == "" || Currency.TryParse(s_cur, out currency)) &&
-                decimal.TryParse(s_num, NumberStyles.Number, GetNumberFormatInfo(formatProvider), out decimal value))
+            if ((s_cur == "" || Currency.TryParse(s_cur, formatProvider, out currency)) &&
+                decimal.TryParse(s_num, NumberStyles.Number, formatProvider, out decimal value))
             {
                 result = Create(value, currency);
                 return true;

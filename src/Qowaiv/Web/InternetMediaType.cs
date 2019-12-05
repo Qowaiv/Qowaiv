@@ -139,34 +139,9 @@ namespace Qowaiv.Web
             }
         }
 
-        /// <summary>Generates an Internet media type from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
+        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json)).m_Value;
 
-        /// <summary>Generates an Internet media type from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the Internet media type.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString).m_Value;
-
-        /// <summary>Generates an Internet media type from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the Internet media type.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates an Internet media type from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the Internet media type.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates an Internet media type from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the Internet media type.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an Internet media type into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current Internet media type for debug purposes.</summary>

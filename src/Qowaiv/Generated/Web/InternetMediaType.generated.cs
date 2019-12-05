@@ -176,6 +176,33 @@ namespace Qowaiv.Web
 namespace Qowaiv.Web
 {
     using System;
+    using Qowaiv.Json;
+
+    public partial struct InternetMediaType : IJsonSerializable
+    {
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson() => FromJson(null);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(string jsonString) => FromJson(jsonString);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(long jsonInteger) => FromJson(jsonInteger);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(double jsonNumber) => FromJson(jsonNumber);
+        /// <inheritdoc/>
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(DateTime jsonDate) => FromJson(jsonDate);
+        /// <inheritdoc/>
+        void IJsonSerializable.FromJson(object json) => FromJson(json);
+    }
+}
+
+namespace Qowaiv.Web
+{
+    using System;
     using System.Globalization;
 
     public partial struct InternetMediaType : IFormattable

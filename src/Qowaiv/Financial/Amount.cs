@@ -333,34 +333,9 @@ namespace Qowaiv.Financial
         [CLSCompliant(false)]
         public static Amount operator /(Amount amount, ushort factor) => amount.Divide(factor);
 
-        /// <summary>Generates an Amount from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
 
-        /// <summary>Generates an Amount from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates an Amount from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = jsonInteger;
-
-        /// <summary>Generates an Amount from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = (decimal)jsonNumber;
-
-        /// <summary>Generates an Amount from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an Amount into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>

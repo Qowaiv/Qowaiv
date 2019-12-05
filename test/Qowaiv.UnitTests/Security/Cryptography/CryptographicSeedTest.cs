@@ -337,15 +337,6 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_None_EmptyValue()
-        {
-            var act = JsonTester.Read<CryptographicSeed>();
-            var exp = CryptographicSeed.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>

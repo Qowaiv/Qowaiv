@@ -327,16 +327,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_Null_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Date>();
-            },
-            "JSON deserialization from null is not supported.");
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>

@@ -108,35 +108,10 @@ namespace Qowaiv
             }
             return string.Format(CultureInfo.CurrentCulture, "{0} <{1}>", displayName.Trim(), this);
         }
+       
+        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
 
-        /// <summary>Generates an email address from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates an email address from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates an email address from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates an email address from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates an email address from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an email address into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>

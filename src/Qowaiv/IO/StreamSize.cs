@@ -338,42 +338,31 @@ namespace Qowaiv.IO
 
         #endregion
 
-        /// <summary>Generates a stream size from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
+        private void FromJson(object json)
+        {
+            if (json is double dec)
+            {
+                m_Value = (long)dec;
+            }
+            else if (json is long num)
+            {
+                m_Value = num;
+            }
+            else
+            {
+                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
+            }
+        }
 
-        /// <summary>Generates a stream size from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the stream size.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a stream size from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the stream size.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = new StreamSize(jsonInteger).m_Value;
-
-        /// <summary>Generates a stream size from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the stream size.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = new StreamSize((long)jsonNumber).m_Value;
-
-        /// <summary>Generates a stream size from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the stream size.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a stream size into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()=> m_Value;
+        /// <inheritdoc />
+        object IJsonSerializable.ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay=> ToString(" F", CultureInfo.InvariantCulture); 
+        private string DebuggerDisplay => ToString(" F", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>
-        public override string ToString()=> ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
         /// <param name="format">
@@ -385,7 +374,7 @@ namespace Qowaiv.IO
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)=> ToString("0 byte", formatProvider);
+        public string ToString(IFormatProvider formatProvider) => ToString("0 byte", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
         /// <param name="format">
@@ -504,11 +493,11 @@ namespace Qowaiv.IO
         private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
         private static readonly string[] FullLabels1024 = { "byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte" };
 
-     
+
         /// <summary>Casts a stream size to a <see cref="string"/>.</summary>
         public static explicit operator string(StreamSize val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a stream size.</summary>
-        public static explicit operator StreamSize(string str)=>Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator StreamSize(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         /// <summary>Casts a stream size to a System.Int32.</summary>

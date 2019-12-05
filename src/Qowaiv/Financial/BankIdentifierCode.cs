@@ -87,34 +87,11 @@ namespace Qowaiv.Financial
         /// </remarks>
         public string BranchCode => Length != 11 ? string.Empty : m_Value.Substring(8);
 
-        /// <summary>Generates a BIC from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
 
-        /// <summary>Generates a BIC from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <inheritdoc />
+        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
 
-        /// <summary>Generates a BIC from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a BIC from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a BIC from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a BIC into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>

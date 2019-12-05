@@ -188,34 +188,10 @@ namespace Qowaiv
             info.AddValue("Value", m_Value);
         }
 
-        /// <summary>Generates a week date from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
+        /// <inheritdoc />
+        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
 
-        /// <summary>Generates a week date from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a week date from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a week date from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a week date from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => m_Value = (Date)jsonDate;
-
-        /// <summary>Converts a week date into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
 
         #endregion

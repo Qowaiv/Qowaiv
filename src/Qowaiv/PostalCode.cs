@@ -60,55 +60,14 @@ namespace Qowaiv
             return Country.All.Where(country => IsValid(postalcode, country));
         }
 
-        /// <summary>Generates a postal code from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson()
-        {
-            m_Value = default;
-        }
+        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
 
-        /// <summary>Generates a postal code from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the postal code.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
-
-        /// <summary>Generates a postal code from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the postal code.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a postal code from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the postal code.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a postal code from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the postal code.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a postal code into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current postal code for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "PostalCode: {0}{1}",
-                    ToString(),
-                    this == Empty ? "(empty)" : "");
-            }
-        }
+        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
         /// <param name="format">

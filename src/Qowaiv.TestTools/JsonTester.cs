@@ -7,6 +7,7 @@ namespace Qowaiv.TestTools
     public static class JsonTester
     {
         /// <summary>Applies <see cref="IJsonSerializable.FromJson()"/>.</summary>
+        [Obsolete("Drop test case.")]
         public static T Read<T>() where T : IJsonSerializable
         {
             T instance = default;
@@ -18,6 +19,7 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Applies <see cref="IJsonSerializable.FromJson(string)"/>.</summary>
+        [Obsolete("Use Read<T>(object) instead.")]
         public static T Read<T>(string val) where T : IJsonSerializable
         {
             T instance = NewInstance<T>();
@@ -26,6 +28,7 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Applies <see cref="IJsonSerializable.FromJson(long)"/>.</summary>
+        [Obsolete("Use Read<T>(object) instead.")]
         public static T Read<T>(long val) where T : IJsonSerializable
         {
             T instance = NewInstance<T>();
@@ -34,6 +37,7 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Applies <see cref="IJsonSerializable.FromJson(double)"/>.</summary>
+        [Obsolete("Use Read<T>(object) instead.")]
         public static T Read<T>(double val) where T : IJsonSerializable
         {
             T instance = NewInstance<T>();
@@ -42,7 +46,16 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Applies <see cref="IJsonSerializable.FromJson(DateTime)"/>.</summary>
+        [Obsolete("Use Read<T>(object) instead.")]
         public static T Read<T>(DateTime val) where T : IJsonSerializable
+        {
+            T instance = NewInstance<T>();
+            instance.FromJson(val);
+            return instance;
+        }
+
+        /// <summary>Applies <see cref="IJsonSerializable.FromJson(object)"/>.</summary>
+        public static T Read<T>(object val) where T : IJsonSerializable
         {
             T instance = NewInstance<T>();
             instance.FromJson(val);

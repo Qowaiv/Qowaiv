@@ -253,61 +253,41 @@ namespace Qowaiv
 
         #region (JSON) (De)serialization
 
-        /// <summary>Generates an email address collection from a JSON null object representation.</summary>
+        /// <inheritdoc />
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson() => ((IJsonSerializable)this).FromJson(null);
+
+        /// <inheritdoc />
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(string jsonString) => ((IJsonSerializable)this).FromJson((object)jsonString);
+
+        /// <inheritdoc />
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(long jsonInteger) => ((IJsonSerializable)this).FromJson((object)jsonInteger);
+
+        /// <inheritdoc />
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(double jsonNumber) => ((IJsonSerializable)this).FromJson((object)jsonNumber);
+
+        /// <inheritdoc />
+        [Obsolete("Use FromJson(object) instead.")]
+        void IJsonSerializable.FromJson(DateTime jsonDate) => ((IJsonSerializable)this).FromJson((object)jsonDate);
+
+        /// <inheritdoc />
+        void IJsonSerializable.FromJson(object json) => FromJson(Parsing.ToInvariant(json));
+
+        /// <inheritdoc />
+        object IJsonSerializable.ToJson() => ToJson();
+
+        /// <summary>Generates an email address collection from a JSON representation.</summary>
         /// <remarks>
-        /// As an email address collection is a reference type, this method
-        /// should never be called. Instead, the read will return null.
+        /// this is used by <see cref="IJsonSerializable.FromJson(object)"/> so that it can be changed by derived classes.
         /// </remarks>
-        [ExcludeFromCodeCoverage]
-        void IJsonSerializable.FromJson() { /* should read as null */ }
+        protected virtual void FromJson(string json) => AddRange(Parse(json, CultureInfo.InvariantCulture));
 
-        /// <summary>Generates an email address from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            AddRange(Parse(jsonString, CultureInfo.InvariantCulture));
-        }
-
-        /// <summary>Generates an email address collection from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { FromJson(jsonInteger); }
-        /// <summary>Generates an email address collection from a JSON integer representation.</summary>
+        /// <summary>Converts an email address collection into its JSON object representation.</summary>
         /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual void FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates an email address from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { FromJson(jsonNumber); }
-        /// <summary>Generates an email address from a JSON number representation.</summary>
-        /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual void FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates an email address from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { FromJson(jsonDate); }
-        /// <summary>Generates an email address from a JSON date representation.</summary>
-        /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual void FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an email address into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() { return ToJson(); }
-        /// <summary>Converts an email address into its JSON object representation.</summary>
-        /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
+        /// this is used by <see cref="IJsonSerializable.ToJson()"/> so that it can be changed by derived classes.
         /// </remarks>
         protected virtual object ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
 

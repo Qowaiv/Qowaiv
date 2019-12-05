@@ -55,34 +55,27 @@ namespace Qowaiv
         /// <summary>Returns true if the yes-no value represents yes, otherwise false.</summary>
         public bool IsYes() => m_Value == Yes.m_Value;
 
-        /// <summary>Generates a yes-no from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
+        private void FromJson(object json)
+        {
+            if (json is bool boolean)
+            {
+                m_Value = boolean ? Yes.m_Value : No.m_Value;
+            }
+            else if (json is double dec)
+            {
+                m_Value = Create((int)dec).m_Value;
+            }
+            else if (json is long num)
+            {
+                m_Value = Create((int)num).m_Value;
+            }
+            else
+            {
+                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
+            }
+        }
 
-        /// <summary>Generates a yes-no from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the yes-no.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a yes-no from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the yes-no.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
-
-        /// <summary>Generates a yes-no from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the yes-no.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((int)jsonNumber).m_Value;
-
-        /// <summary>Generates a yes-no from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the yes-no.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a yes-no into its JSON object representation.</summary>
+        /// <inheritdoc />
         object IJsonSerializable.ToJson() => SerializationValues[m_Value];
 
         /// <summary>Returns a <see cref="string"/> that represents the current yes-no for debug purposes.</summary>

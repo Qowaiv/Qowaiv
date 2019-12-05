@@ -301,28 +301,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_Null_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>
-            (() =>
-            {
-                JsonTester.Read<DateSpan>();
-            },
-            "JSON deserialization from null is not supported.");
-        }
-
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
-        {
-            Assert.Catch<FormatException>
-            (() =>
-            {
-                JsonTester.Read<DateSpan>("InvalidStringValue");
-            },
-            "Not a valid date span");
-        }
-
-        [Test]
         public void FromJson_StringValue_AreEqual()
         {
             var act = JsonTester.Read<DateSpan>(TestStruct.ToString(CultureInfo.InvariantCulture));

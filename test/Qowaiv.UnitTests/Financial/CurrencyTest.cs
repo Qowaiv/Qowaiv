@@ -435,60 +435,20 @@ namespace Qowaiv.UnitTests.Financial
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_None_EmptyValue()
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        [TestCase(int.MinValue)]
+        [TestCase(double.NaN)]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<Currency>();
-            var exp = Currency.Empty;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<Currency>(json));
         }
 
         [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        public void FromJson_EUR_EqualsTestStruct()
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Currency>("InvalidStringValue");
-            },
-            "Not a valid currency");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Currency>("EUR");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            var act = JsonTester.Read<Currency>((Int64)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Currency>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Currency>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<Currency>("EUR");
+            Assert.AreEqual(TestStruct, actual);
         }
 
         [Test]

@@ -409,62 +409,24 @@ namespace Qowaiv.Fiancial.UnitTests
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_None_EmptyValue()
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        [TestCase(int.MinValue)]
+        [TestCase(double.NaN)]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<YesNo>();
-            var exp = YesNo.Empty;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<YesNo>(json));
         }
 
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase("yes", "yes")]
+        [TestCase("yes", true)]
+        [TestCase("yes", 1)]
+        [TestCase("no", 0.0)]
+        [TestCase("?", "unknown")]
+        public void FromJson(YesNo expected, object json)
         {
-            Assert.Catch<FormatException>
-            (() =>
-            {
-                JsonTester.Read<YesNo>
-        ("InvalidStringValue");
-            },
-            "Not a valid Yes-no");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<YesNo>("yes");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            var act = JsonTester.Read<YesNo>(0);
-            var exp = YesNo.No;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AreEqual()
-        {
-            var act = JsonTester.Read<YesNo>(1.0);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-   
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>
-            (() =>
-            {
-                JsonTester.Read<YesNo>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<YesNo>(json);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]

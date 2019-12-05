@@ -66,31 +66,14 @@ namespace Qowaiv.Json
                 {
                     // Empty value for null-ables.
                     case JsonToken.Null:
-                        if (isNullable)
-                        {
-                            return null; 
-                        }
-                        result.FromJson();
-                        break;
+                        return isNullable ? null : result;
 
-                    // A string.
                     case JsonToken.String:
-                        result.FromJson((string)reader.Value);
-                        break;
-
-                    // A number without digits.
                     case JsonToken.Integer:
-                        result.FromJson((long)reader.Value);
-                        break;
-
-                    // A number with digits.
                     case JsonToken.Float:
-                        result.FromJson((double)reader.Value);
-                        break;
-
-                    // A date.
                     case JsonToken.Date:
-                        result.FromJson((DateTime)reader.Value);
+                    case JsonToken.Boolean:
+                        result.FromJson(reader.Value);
                         break;
 
                     // Other scenario's are not supported.    

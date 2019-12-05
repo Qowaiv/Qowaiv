@@ -222,13 +222,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_None_EmptyValue()
-        {
-            var act = JsonTester.Read<EmailAddressCollection>();
-            Assert.IsNull(act);
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>

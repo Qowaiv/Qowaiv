@@ -31,7 +31,7 @@ namespace Qowaiv.IO
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
     [OpenApiDataType(description: "Stream size notation (in byte).", type: "integer", format: "stream-size")]
     [TypeConverter(typeof(StreamSizeTypeConverter))]
-    public partial struct StreamSize : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
+    public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
     {
         /// <summary>Represents an empty/not set stream size.</summary>
         public static readonly StreamSize Zero;
@@ -338,24 +338,29 @@ namespace Qowaiv.IO
 
         #endregion
 
-        private void FromJson(object json)
-        {
-            if (json is double dec)
-            {
-                m_Value = (long)dec;
-            }
-            else if (json is long num)
-            {
-                m_Value = num;
-            }
-            else
-            {
-                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the stream size from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized stream size.
+        /// </returns>
+        public static StreamSize FromJson(double json) => new StreamSize((long)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value;
+        /// <summary>Deserializes the stream size from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized stream size.
+        /// </returns>
+        public static StreamSize FromJson(long json) => new StreamSize(json);
+
+        /// <summary>Serializes the stream size to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON number.
+        /// </returns>
+        public long ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

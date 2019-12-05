@@ -175,27 +175,24 @@ namespace Qowaiv
 namespace Qowaiv
 {
     using System;
+    using System.Globalization;
     using Qowaiv.Json;
 
-    public partial struct YesNo : IJsonSerializable
+    public partial struct YesNo
     {
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson() => FromJson(null);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(string jsonString) => FromJson(jsonString);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(long jsonInteger) => FromJson(jsonInteger);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(double jsonNumber) => FromJson(jsonNumber);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(DateTime jsonDate) => FromJson(jsonDate);
-        /// <inheritdoc/>
-        void IJsonSerializable.FromJson(object json) => FromJson(json);
+        /// <summary>Creates the yes-no from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized yes-no.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static YesNo FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static YesNo FromJson(string json) => Parse(json);
+#endif
     }
 }
 

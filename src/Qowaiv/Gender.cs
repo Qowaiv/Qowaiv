@@ -37,7 +37,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
     [TypeConverter(typeof(GenderTypeConverter))]
-    public partial struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
+    public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
     {
         /// <summary>Represents an empty/not set Gender.</summary>
         public static readonly Gender Empty;
@@ -94,24 +94,29 @@ namespace Qowaiv
         /// <summary>Converts the Gender to an int.</summary>
         private int? ToNullableInt32() => ToNullableInt32s[m_Value];
 
-        private void FromJson(object json)
-        {
-            if (json is double dec)
-            {
-                m_Value = Create((int)dec).m_Value;
-            }
-            else if (json is long num)
-            {
-                m_Value = Create((int)num).m_Value;
-            }
-            else
-            {
-                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the gender from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized gender.
+        /// </returns>
+        public static Gender FromJson(double json) => Create((int)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => GenderLabels[m_Value];
+        /// <summary>Deserializes the gender from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized gender.
+        /// </returns>
+        public static Gender FromJson(long json) => Create((int)json);
+
+        /// <summary>Serializes the gender to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => GenderLabels[m_Value];
 
         /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

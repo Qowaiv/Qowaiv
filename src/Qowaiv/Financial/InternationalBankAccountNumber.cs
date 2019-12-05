@@ -34,7 +34,7 @@ namespace Qowaiv.Financial
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007, for example, BE71096123456769.", type: "string", format: "iban", nullable: true)]
     [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
-    public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
+    public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
     {
         /// <summary>Represents the pattern of a (potential) valid IBAN.</summary>
         /// <remarks>
@@ -68,13 +68,11 @@ namespace Qowaiv.Financial
             }
         }
 
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson()
-        {
-            return m_Value == default ? null : ToUnformattedString();
-        }
+        /// <summary>Serializes the IBAN to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToUnformattedString();
 
         /// <summary>Returns a <see cref="string"/> that represents the current IBAN for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

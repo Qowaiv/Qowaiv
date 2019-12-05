@@ -346,16 +346,6 @@ namespace Qowaiv.Financial.UnitTests
         }
 
         [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Amount>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
-        }
-
-        [Test]
         public void ToJson_TestStruct_AreEqual()
         {
             var act = JsonTester.Write(TestStruct);

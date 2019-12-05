@@ -20,7 +20,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
     [OpenApiDataType(description: "House number notation.", type: "string", format: "house-number", nullable: true)]
     [TypeConverter(typeof(HouseNumberTypeConverter))]
-    public partial struct HouseNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
+    public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
     {
         /// <summary>Represents the pattern of a (potential) valid house number.</summary>
         public static readonly Regex Pattern = new Regex(@"^[1-9][0-9]{0,8}$", RegexOptions.Compiled);
@@ -69,24 +69,29 @@ namespace Qowaiv
             }
         }
 
-        private void FromJson(object json)
-        {
-            if (json is double dec)
-            {
-                m_Value = Create((int)dec).m_Value;
-            }
-            else if (json is long num)
-            {
-                m_Value = Create((int)num).m_Value;
-            }
-            else
-            {
-                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the house number from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized house number.
+        /// </returns>
+        public static HouseNumber FromJson(double json) => Create((int)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Deserializes the house number from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized house number.
+        /// </returns>
+        public static HouseNumber FromJson(long json) => Create((int)json);
+
+        /// <summary>Serializes the house number to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current house number for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

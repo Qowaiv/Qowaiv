@@ -21,7 +21,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
     [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9])?%")]
     [TypeConverter(typeof(PercentageTypeConverter))]
-    public partial struct Percentage : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
+    public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
     {
         /// <summary>The percentage mark (%).</summary>
         public static readonly string PercentageMark = "%";
@@ -547,20 +547,20 @@ namespace Qowaiv
 
         #region (JSON) (De)serialization
 
-        private void FromJson(object json)
-        {
-            if (json is double dec)
-            {
-                m_Value = (decimal)dec;
-            }
-            else
-            {
-                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the percentage from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized percentage.
+        /// </returns>
+        public static Percentage FromJson(double json) => new Percentage((decimal)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => ToString("0.############################%", CultureInfo.InvariantCulture);
+        /// <summary>Serializes the percentage to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString("0.############################%", CultureInfo.InvariantCulture);
 
         #endregion
 

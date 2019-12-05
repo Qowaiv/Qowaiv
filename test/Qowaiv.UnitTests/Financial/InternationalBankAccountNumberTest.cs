@@ -319,8 +319,6 @@ namespace Qowaiv.UnitTests.Financial
 
         [TestCase("Invalid input")]
         [TestCase("2017-06-11")]
-        [TestCase(int.MinValue)]
-        [TestCase(double.NaN)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<InternationalBankAccountNumber>(json));

@@ -20,7 +20,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
     [OpenApiDataType(description: "Date span, specified in years, months and days, for example 1Y+10M+16D.", type: "string", format: "date-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D")]
     [TypeConverter(typeof(DateSpanTypeConverter))]
-    public partial struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
+    public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
         public static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M(?<Days>([+-][0-9]{1,7}))D$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -179,17 +179,20 @@ namespace Qowaiv
 
         #endregion
 
-        private void FromJson(object json)
-        {
-            if (json is long num)
-            {
-                m_Value = FromDays((int)num).m_Value;
-            }
-            m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-        }
+        /// <summary>Deserializes the date span from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized date span.
+        /// </returns>
+        public static DateSpan FromJson(long json) => FromDays((int)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the date span to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

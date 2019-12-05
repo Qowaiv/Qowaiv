@@ -32,7 +32,7 @@ namespace Qowaiv.Globalization
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.", type: "string", format: "country", nullable: true)]
     [TypeConverter(typeof(CountryTypeConverter))]
-    public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
+    public partial struct Country : ISerializable, IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
     {
         /// <summary>Represents an empty/not set </summary>
         public static readonly Country Empty;
@@ -147,14 +147,20 @@ namespace Qowaiv.Globalization
             }
         }
 
-        private void FromJson(object json)
-        {
-            var str = json is long num ? num.ToString("000") : Parsing.ToInvariant(json);
-            m_Value = Parse(str, CultureInfo.InvariantCulture).m_Value;
-        }
+        /// <summary>Deserializes the country from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized country.
+        /// </returns>
+        public static Country FromJson(long json) => FromJson(json.ToString("000", CultureInfo.InvariantCulture));
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value;
+        /// <summary>Serializes the country to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -397,8 +397,7 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [TestCase("Invalid input")]
-        [TestCase(int.MinValue)]
-        [TestCase(1.5)]
+        [TestCase(long.MinValue)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<WeekDate>(json));

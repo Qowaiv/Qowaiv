@@ -30,7 +30,7 @@ namespace Qowaiv.Statistics
     [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(double))]
     [OpenApiDataType(description: "Elo rating system notation.", type: "number", format: "elo")]
     [TypeConverter(typeof(EloTypeConverter))]
-    public partial struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
+    public partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
     {
         /// <summary>Represents the zero value of an Elo.</summary>
         public static readonly Elo Zero;
@@ -120,24 +120,29 @@ namespace Qowaiv.Statistics
 
         #endregion
 
-        private void FromJson(object json)
-        {
-            if (json is double dec)
-            {
-                m_Value = Create(dec).m_Value;
-            }
-            else if (json is long num)
-            {
-                m_Value = Create(num).m_Value;
-            }
-            else
-            {
-                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the Elo from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized Elo.
+        /// </returns>
+        public static Elo FromJson(double json) => Create(json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value;
+        /// <summary>Deserializes the Elo from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized Elo.
+        /// </returns>
+        public static Elo FromJson(long json) => Create(json);
+
+        /// <summary>Serializes the Elo to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON number.
+        /// </returns>
+        public double ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Elo for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

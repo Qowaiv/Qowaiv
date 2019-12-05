@@ -177,27 +177,24 @@ namespace Qowaiv.Statistics
 namespace Qowaiv.Statistics
 {
     using System;
+    using System.Globalization;
     using Qowaiv.Json;
 
-    public partial struct Elo : IJsonSerializable
+    public partial struct Elo
     {
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson() => FromJson(null);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(string jsonString) => FromJson(jsonString);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(long jsonInteger) => FromJson(jsonInteger);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(double jsonNumber) => FromJson(jsonNumber);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(DateTime jsonDate) => FromJson(jsonDate);
-        /// <inheritdoc/>
-        void IJsonSerializable.FromJson(object json) => FromJson(json);
+        /// <summary>Creates the elo from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized elo.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Elo FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Elo FromJson(string json) => Parse(json);
+#endif
     }
 }
 

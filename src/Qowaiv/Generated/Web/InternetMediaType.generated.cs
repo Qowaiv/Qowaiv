@@ -176,27 +176,24 @@ namespace Qowaiv.Web
 namespace Qowaiv.Web
 {
     using System;
+    using System.Globalization;
     using Qowaiv.Json;
 
-    public partial struct InternetMediaType : IJsonSerializable
+    public partial struct InternetMediaType
     {
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson() => FromJson(null);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(string jsonString) => FromJson(jsonString);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(long jsonInteger) => FromJson(jsonInteger);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(double jsonNumber) => FromJson(jsonNumber);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(DateTime jsonDate) => FromJson(jsonDate);
-        /// <inheritdoc/>
-        void IJsonSerializable.FromJson(object json) => FromJson(json);
+        /// <summary>Creates the Internet media type from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized Internet media type.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static InternetMediaType FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static InternetMediaType FromJson(string json) => Parse(json);
+#endif
     }
 }
 

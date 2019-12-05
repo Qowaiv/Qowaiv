@@ -47,7 +47,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
     [OpenApiDataType(description: "Full-date notation as defined by ISO 8601, for example, 1997-W14-6.", type: "string", format: "date-weekbased")]
     [TypeConverter(typeof(WeekDateTypeConverter))]
-    public partial struct WeekDate : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
+    public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
     {
         /// <summary>Represents the pattern of a (potential) valid week date.</summary>
         public static readonly Regex Pattern = new Regex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -188,11 +188,11 @@ namespace Qowaiv
             info.AddValue("Value", m_Value);
         }
 
-        /// <inheritdoc />
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the week date to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         #endregion
 

@@ -21,7 +21,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [OpenApiDataType(description: "Month(-only) notation.", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
     [TypeConverter(typeof(MonthTypeConverter))]
-    public partial struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
+    public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
     {
         /// <summary>Represents the pattern of a (potential) valid month.</summary>
         public static readonly Regex Pattern = new Regex(@"^(0?[1-9]|10|11|12)$", RegexOptions.Compiled);
@@ -112,24 +112,29 @@ namespace Qowaiv
                 : DateTime.DaysInMonth((int)year, m_Value);
         }
 
-        private void FromJson(object json)
-        {
-            if (json is double dec)
-            {
-                m_Value = Create((int)dec).m_Value;
-            }
-            else if (json is long num)
-            {
-                m_Value = Create((int)num).m_Value;
-            }
-            else
-            {
-                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the month from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized month.
+        /// </returns>
+        public static Month FromJson(double json) => Create((int)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson()=> (m_Value == default) ? null : ToString("s", CultureInfo.InvariantCulture);
+        /// <summary>Deserializes the month from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized month.
+        /// </returns>
+        public static Month FromJson(long json) => Create((int)json);
+
+        /// <summary>Serializes the month to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString("s", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -302,7 +307,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new Month { m_Value = (byte)val.Value };
+                result = new Month((byte)val.Value);
                 return true;
             }
             return false;
@@ -312,7 +317,7 @@ namespace Qowaiv
         public static bool IsValid(int? val)
         {
             return val.HasValue
-                && val.Value >= January.m_Value 
+                && val.Value >= January.m_Value
                 && val.Value <= December.m_Value;
         }
 

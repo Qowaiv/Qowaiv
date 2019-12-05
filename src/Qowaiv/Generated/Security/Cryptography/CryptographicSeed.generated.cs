@@ -179,27 +179,24 @@ namespace Qowaiv.Security.Cryptography
 namespace Qowaiv.Security.Cryptography
 {
     using System;
+    using System.Globalization;
     using Qowaiv.Json;
 
-    public partial struct CryptographicSeed : IJsonSerializable
+    public partial struct CryptographicSeed
     {
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson() => FromJson(null);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(string jsonString) => FromJson(jsonString);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(long jsonInteger) => FromJson(jsonInteger);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(double jsonNumber) => FromJson(jsonNumber);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(DateTime jsonDate) => FromJson(jsonDate);
-        /// <inheritdoc/>
-        void IJsonSerializable.FromJson(object json) => FromJson(json);
+        /// <summary>Creates the cryptographic seed from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized cryptographic seed.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static CryptographicSeed FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static CryptographicSeed FromJson(string json) => Parse(json);
+#endif
     }
 }
 

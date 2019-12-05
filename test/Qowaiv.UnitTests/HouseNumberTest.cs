@@ -479,16 +479,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<HouseNumber>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
-        }
-
-        [Test]
         public void ToJson_DefaultValue_IsNull()
         {
             object act = JsonTester.Write(default(HouseNumber));

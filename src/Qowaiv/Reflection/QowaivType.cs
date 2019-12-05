@@ -43,26 +43,6 @@ namespace Qowaiv.Reflection
             return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
-        /// <summary>Returns true if the object type is an <see cref="IJsonSerializable"/>.</summary>
-        /// <param name="objectType">
-        /// The type to test for.
-        /// </param>
-        public static bool IsIJsonSerializable(Type objectType)
-        {
-            Guard.NotNull(objectType, nameof(objectType));
-            return objectType.GetInterfaces().Any(iface => iface == typeof(IJsonSerializable));
-        }
-
-        /// <summary>Returns true if the object type is a null-able <see cref="IJsonSerializable"/>.</summary>
-        /// <param name="objectType">
-        /// The type to test for.
-        /// </param>
-        public static bool IsNullableIJsonSerializable(Type objectType)
-        {
-            Guard.NotNull(objectType, nameof(objectType));
-            return IsNullable(objectType) && IsIJsonSerializable(objectType.GetGenericArguments()[0]);
-        }
-
         /// <summary>Returns true if the object type is a number.</summary>
         /// <param name="objectType">
         /// The type to test for.

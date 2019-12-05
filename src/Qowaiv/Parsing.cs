@@ -31,22 +31,6 @@ namespace Qowaiv
             return ClearSpacingAndMarkup(str).ToUpperInvariant();
         }
 
-        /// <summary>Applies <see cref="IFormattable.ToString(string, IFormatProvider)"/> 
-        /// when possible, otherwise <see cref="object.ToString()"/>.
-        /// </summary>
-        public static string ToInvariant(object obj)
-        {
-            if(obj is null)
-            {
-                return null;
-            }
-            if(obj is IFormattable f)
-            {
-                return f.ToString(null, CultureInfo.InvariantCulture);
-            }
-            return obj.ToString();
-        }
-
         /// <summary>Unifies the string.</summary>
         public static string ToUnified(string str)
         {

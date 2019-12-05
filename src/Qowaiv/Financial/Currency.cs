@@ -41,7 +41,7 @@ namespace Qowaiv.Financial
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Currency notation as defined by ISO 4217, for example, EUR.", type: "string", format: "currency", nullable: true)]
     [TypeConverter(typeof(CurrencyTypeConverter))]
-    public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
+    public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
     {
         /// <summary>Represents an empty/not set currency.</summary>
         public static readonly Currency Empty;
@@ -116,14 +116,20 @@ namespace Qowaiv.Financial
                 .Where(country => country.GetCurrency(measurement) == currency);
         }
 
-        private void FromJson(object json)
-        {
-            var str = json is long num ? num.ToString("000") : Parsing.ToInvariant(json);
-            m_Value = Parse(str, CultureInfo.InvariantCulture).m_Value;
-        }
+        /// <summary>Deserializes the currency from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized currency.
+        /// </returns>
+        public static Currency FromJson(long json) => FromJson(json.ToString("000", CultureInfo.InvariantCulture));
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the date to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

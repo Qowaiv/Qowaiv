@@ -20,7 +20,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
     [OpenApiDataType(description: "Year(-only) notation.", type: "integer", format: "year", nullable: true)]
     [TypeConverter(typeof(YearTypeConverter))]
-    public partial struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
+    public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
         public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
@@ -43,28 +43,39 @@ namespace Qowaiv
         /// </returns>
         public bool IsLeapYear => !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
 
-        private void FromJson(object json)
-        {
-            if (json is double dec && (int)dec == dec)
-            {
-                m_Value = Create((int)dec).m_Value;
-            }
-            else if (json is long num)
-            {
-                m_Value = Create((int)num).m_Value;
-            }
-            else
-            {
-                m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the year from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized year.
+        /// </returns>
+        public static Year FromJson(double json) => Create((int)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson()
+        /// <summary>Deserializes the year from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized year.
+        /// </returns>
+        public static Year FromJson(long json) => Create((int)json);
+
+        /// <summary>Serializes the year to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON node.
+        /// </returns>
+        public object ToJson()
         {
-            if (IsEmpty()) { return null; }
-            if (IsUnknown()) { return "?"; }
-            return m_Value;
+            if (IsEmpty())
+            {
+                return null;
+            }
+            if (IsUnknown())
+            {
+                return "?";
+            }
+            return (long)m_Value;
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current year for debug purposes.</summary>

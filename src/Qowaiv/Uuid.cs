@@ -34,12 +34,12 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
     [OpenApiDataType(description: "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.", type: "string", format: "uuid-base64", nullable: true)]
     [TypeConverter(typeof(UuidTypeConverter))]
-    public partial struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
+    public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
     {
         /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
         public static readonly Regex Pattern = new Regex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
 
-        /// <summary>Represents an empty/not set GUID.</summary>
+        /// <summary>Represents an empty/not set UUID.</summary>
         public static readonly Uuid Empty;
 
         /// <summary>Get the version of the UUID.</summary>
@@ -48,10 +48,11 @@ namespace Qowaiv
         /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
         public byte[] ToByteArray() => m_Value.ToByteArray();
 
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json)).m_Value;
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the UUID to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

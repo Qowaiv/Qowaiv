@@ -15,7 +15,7 @@ namespace Qowaiv.Sql
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
     [OpenApiDataType(description: "SQL Server timestamp notation, for example 0x00000000000007D9.", type: "string", format: "timestamp")]
     [TypeConverter(typeof(TimestampTypeConverter))]
-    public partial struct Timestamp : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
+    public partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
     {
         /// <summary>Gets the minimum value of a timestamp.</summary>
         public static readonly Timestamp MinValue;
@@ -26,24 +26,29 @@ namespace Qowaiv.Sql
         /// <summary>Represents the timestamp .</summary>
         public byte[] ToByteArray() => BitConverter.GetBytes(m_Value);
 
-        private void FromJson(object json)
-        {
-            if (json is double dec)
-            {
-                m_Value = Create((long)dec).m_Value;
-            }
-            else if (json is long num)
-            {
-                m_Value = Create(num).m_Value;
-            }
-            else
-            {
-                m_Value = Parse(json?.ToString(), CultureInfo.InvariantCulture).m_Value;
-            }
-        }
+        /// <summary>Deserializes the timestamp from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized timestamp.
+        /// </returns>
+        public static Timestamp FromJson(double json) => Create((long)json);
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
+        /// <summary>Deserializes the timestamp from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized timestamp.
+        /// </returns>
+        public static Timestamp FromJson(long json) => Create(json);
+
+        /// <summary>Serializes the timestamp to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current timestamp for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

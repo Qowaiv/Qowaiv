@@ -15,12 +15,21 @@ namespace Qowaiv.UnitTests.Json
         {
             var expected = typeof(Date).Assembly
                 .GetTypes()
-                .Where(tp => tp.GetInterfaces().Contains(typeof(IJsonSerializable)))
+                .Where(IsJsonSerializable)
                 .ToArray();
 
             var actual = expected.Where(tp => tp.GetCustomAttribute<OpenApiDataTypeAttribute>() != null).ToArray();
 
             Assert.AreEqual(expected, actual);
+        }
+
+        private bool IsJsonSerializable(Type type)
+        {
+            return type.GetMethods(BindingFlags.Static | BindingFlags.Public)
+                .Any(m => m.Name == "FromJson"
+                    && m.ReturnType == type
+                    && m.GetParameters().Length == 1
+                    && m.GetParameters()[0].ParameterType == typeof(string));
         }
 
         [Test]

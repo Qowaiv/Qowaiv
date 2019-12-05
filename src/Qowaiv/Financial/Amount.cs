@@ -19,7 +19,7 @@ namespace Qowaiv.Financial
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
     [OpenApiDataType(description: "Decimal representation of a currency amount.", type: "number", format: "amount")]
     [TypeConverter(typeof(AmountTypeConverter))]
-    public partial struct Amount : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
+    public partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
     {
         /// <summary>Represents an Amount of zero.</summary>
         public static readonly Amount Zero;
@@ -333,10 +333,11 @@ namespace Qowaiv.Financial
         [CLSCompliant(false)]
         public static Amount operator /(Amount amount, ushort factor) => amount.Divide(factor);
 
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value;
+        /// <summary>Serializes the amount to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON number.
+        /// </returns>
+        public double ToJson() => (double)m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -361,6 +362,25 @@ namespace Qowaiv.Financial
 
         /// <summary>Gets an XML string representation of the amount.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+
+        /// <summary>Deserializes the amount from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized amount.
+        /// </returns>
+        public static Amount FromJson(double json) => new Amount((decimal)json);
+
+        /// <summary>Deserializes the amountfrom a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized amount.
+        /// </returns>
+        public static Amount FromJson(long json) => new Amount(json);
+
 
         /// <summary>Casts an Amount to a <see cref="string"/>.</summary>
         public static explicit operator string(Amount val) => val.ToString(CultureInfo.CurrentCulture);

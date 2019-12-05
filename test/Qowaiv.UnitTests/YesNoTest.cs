@@ -411,8 +411,6 @@ namespace Qowaiv.Fiancial.UnitTests
 
         [TestCase("Invalid input")]
         [TestCase("2017-06-11")]
-        [TestCase(int.MinValue)]
-        [TestCase(double.NaN)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<YesNo>(json));
@@ -420,7 +418,7 @@ namespace Qowaiv.Fiancial.UnitTests
 
         [TestCase("yes", "yes")]
         [TestCase("yes", true)]
-        [TestCase("yes", 1)]
+        [TestCase("yes", 1L)]
         [TestCase("no", 0.0)]
         [TestCase("?", "unknown")]
         public void FromJson(YesNo expected, object json)

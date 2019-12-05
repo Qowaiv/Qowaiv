@@ -291,7 +291,6 @@ namespace Qowaiv.UnitTests.Statistics
 
         [TestCase("Invalid input")]
         [TestCase("2017-06-11")]
-        [TestCase(true)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<Elo>(json));

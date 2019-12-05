@@ -249,7 +249,6 @@ namespace Qowaiv.TestTools
             Assert.IsTrue(interfaces.Contains(typeof(ISerializable)), /*    */ $"{svo} should contain ISerializable.");
             Assert.IsTrue(interfaces.Contains(typeof(IXmlSerializable)), /* */ $"{svo} should contain IXmlSerializable.");
             Assert.IsTrue(interfaces.Contains(typeof(IFormattable)), /*     */ $"{svo} should contain IFormattable.");
-            Assert.IsTrue(interfaces.Contains(typeof(IJsonSerializable)), /**/ $"{svo} should contain IJsonSerializable.");
             Assert.IsTrue(interfaces.Contains(typeof(IComparable)), /*      */ $"{svo} should contain IComparable.");
             Assert.IsTrue(interfaces.Contains(iComparable), /*              */ $"{svo} should contain IComparable<{svo}>.");
         }

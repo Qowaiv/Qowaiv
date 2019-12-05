@@ -54,7 +54,7 @@ namespace Qowaiv.Web
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
     [OpenApiDataType(description: "Media type notation as defined by RFC 6838, for example, text/html.", type: "string", format: "internet-media-type", nullable: true)]
     [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
-    public partial struct InternetMediaType : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
+    public partial struct InternetMediaType : ISerializable, IXmlSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
     {
         /// <summary>Represents the pattern of a (potential) valid Internet media type.</summary>
         public static readonly Regex Pattern = new Regex('^' + PatternTopLevel + '/' + PatternSubtype + PatternSuffix + '$', RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -139,10 +139,11 @@ namespace Qowaiv.Web
             }
         }
 
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json)).m_Value;
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the Internet media type to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Internet media type for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

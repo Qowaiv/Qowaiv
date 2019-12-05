@@ -320,9 +320,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [TestCase("Invalid input")]
-        [TestCase(int.MinValue)]
-        [TestCase(true)]
-        [TestCase(1.5)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<Uuid>(json));

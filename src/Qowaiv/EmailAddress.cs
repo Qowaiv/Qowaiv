@@ -26,7 +26,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.", type: "string", format: "email", nullable: true)]
     [TypeConverter(typeof(EmailAddressTypeConverter))]
-    public partial struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
+    public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
     {
         /// <summary>An email address must not exceed 254 characters.</summary>
         /// <remarks>
@@ -108,11 +108,12 @@ namespace Qowaiv
             }
             return string.Format(CultureInfo.CurrentCulture, "{0} <{1}>", displayName.Trim(), this);
         }
-       
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the email address to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

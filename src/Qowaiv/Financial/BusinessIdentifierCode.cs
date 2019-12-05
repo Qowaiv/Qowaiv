@@ -38,7 +38,7 @@ namespace Qowaiv.Financial
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.", type: "string", format: "bic", nullable: true)]
     [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]
-    public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
+    public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
     {
         /// <remarks>
         /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
@@ -83,12 +83,12 @@ namespace Qowaiv.Financial
         /// </remarks>
         public string Branch => Length != 11 ? string.Empty : m_Value.Substring(8);
 
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
+        /// <summary>Serializes the BIC to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value;
 
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
-
-        /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture);

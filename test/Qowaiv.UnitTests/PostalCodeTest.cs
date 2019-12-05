@@ -407,17 +407,12 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [TestCase("Invalid input")]
-        [TestCase(int.MinValue)]
-        [TestCase(1.5)]
-        [TestCase(false)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<PostalCode>(json));
         }
 
         [TestCase("H0H0H0", "H0H0H0")]
-        [TestCase("12345", 12345L)]
-        [TestCase("1234", 1234.0)]
         public void FromJson(PostalCode expected, object json)
         {
             var actual = JsonTester.Read<PostalCode>(json);
@@ -545,13 +540,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("PostalCode: (empty)", default(PostalCode));
+            DebuggerDisplayAssert.HasResult("{empty}", default(PostalCode));
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("PostalCode: H0H0H0", TestStruct);
+            DebuggerDisplayAssert.HasResult("H0H0H0", TestStruct);
         }
 
         #endregion

@@ -22,7 +22,7 @@ namespace Qowaiv
     /// </remarks>
     [Serializable]
     [OpenApiDataType(description: "Comma separated list of email addresses defined by RFC 5322.", type: "string", format: "email-collection", nullable: true)]
-    public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSerializable, IJsonSerializable, IFormattable
+    public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSerializable, IFormattable
     {
         /// <summary>The email address separator is a comma.</summary>
         /// <remarks>
@@ -253,43 +253,20 @@ namespace Qowaiv
 
         #region (JSON) (De)serialization
 
-        /// <inheritdoc />
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson() => ((IJsonSerializable)this).FromJson(null);
+        /// <summary>Deserializes the email address collection from a JSON string.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized email address collection.
+        /// </returns>
+        public static EmailAddressCollection FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
 
-        /// <inheritdoc />
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(string jsonString) => ((IJsonSerializable)this).FromJson((object)jsonString);
-
-        /// <inheritdoc />
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(long jsonInteger) => ((IJsonSerializable)this).FromJson((object)jsonInteger);
-
-        /// <inheritdoc />
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(double jsonNumber) => ((IJsonSerializable)this).FromJson((object)jsonNumber);
-
-        /// <inheritdoc />
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(DateTime jsonDate) => ((IJsonSerializable)this).FromJson((object)jsonDate);
-
-        /// <inheritdoc />
-        void IJsonSerializable.FromJson(object json) => FromJson(Parsing.ToInvariant(json));
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => ToJson();
-
-        /// <summary>Generates an email address collection from a JSON representation.</summary>
-        /// <remarks>
-        /// this is used by <see cref="IJsonSerializable.FromJson(object)"/> so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual void FromJson(string json) => AddRange(Parse(json, CultureInfo.InvariantCulture));
-
-        /// <summary>Converts an email address collection into its JSON object representation.</summary>
-        /// <remarks>
-        /// this is used by <see cref="IJsonSerializable.ToJson()"/> so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual object ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the date to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public virtual string ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
         #endregion
 

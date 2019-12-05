@@ -175,27 +175,24 @@ namespace Qowaiv.Globalization
 namespace Qowaiv.Globalization
 {
     using System;
+    using System.Globalization;
     using Qowaiv.Json;
 
-    public partial struct Country : IJsonSerializable
+    public partial struct Country
     {
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson() => FromJson(null);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(string jsonString) => FromJson(jsonString);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(long jsonInteger) => FromJson(jsonInteger);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(double jsonNumber) => FromJson(jsonNumber);
-        /// <inheritdoc/>
-        [Obsolete("Use FromJson(object) instead.")]
-        void IJsonSerializable.FromJson(DateTime jsonDate) => FromJson(jsonDate);
-        /// <inheritdoc/>
-        void IJsonSerializable.FromJson(object json) => FromJson(json);
+        /// <summary>Creates the country from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized country.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Country FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Country FromJson(string json) => Parse(json);
+#endif
     }
 }
 

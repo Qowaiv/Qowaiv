@@ -27,7 +27,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Postal code notation.", type: "string", format: "postal-code", nullable: true)]
     [TypeConverter(typeof(PostalCodeTypeConverter))]
-    public partial struct PostalCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
+    public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
     {
         /// <summary>Represents the pattern of a (potential) valid postal code.</summary>
         public static readonly Regex Pattern = new Regex(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -60,10 +60,11 @@ namespace Qowaiv
             return Country.All.Where(country => IsValid(postalcode, country));
         }
 
-        private void FromJson(object json) => m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => m_Value;
+        /// <summary>Serializes the postal code to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current postal code for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

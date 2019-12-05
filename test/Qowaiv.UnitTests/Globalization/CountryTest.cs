@@ -449,8 +449,6 @@ namespace Qowaiv.UnitTests.Globalization
         [TestCase("Invalid input")]
         [TestCase("2017-06-11")]
         [TestCase(-3L)]
-        [TestCase(8.8)]
-        [TestCase(true)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<Country>(json));
@@ -458,7 +456,7 @@ namespace Qowaiv.UnitTests.Globalization
         [TestCase("NL", "Netherlands")]
         [TestCase("NL", "nl")]
         [TestCase("AF", 4L)]
-        [TestCase("BG", 100d)]
+        [TestCase("BG", 100L)]
         public void FromJson(Country expected, object json)
         {
             var actual = JsonTester.Read<Country>(json);

@@ -19,7 +19,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
     [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6, for example, 2017-06-10.", type: "string", format: "date")]
     [TypeConverter(typeof(DateTypeConverter))]
-    public partial struct Date : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
+    public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
     {
         private const string SerializableFormat = "yyyy-MM-dd";
 
@@ -351,21 +351,20 @@ namespace Qowaiv
 
         #endregion
 
-        #region (JSON) (De)serialization
+        /// <summary>Deserializes the date from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized date.
+        /// </returns>
+        public static Date FromJson(long json) => new Date(json);
 
-        private void FromJson(object json)
-        {
-            if (json is long num)
-            {
-                m_Value = new Date(num).m_Value;
-            }
-            m_Value = Parse(Parsing.ToInvariant(json), CultureInfo.InvariantCulture).m_Value;
-        }
-
-        /// <inheritdoc />
-        object IJsonSerializable.ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
-
-        #endregion
+        /// <summary>Serializes the date to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         #region IFormattable / ToString
 

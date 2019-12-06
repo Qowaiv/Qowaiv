@@ -179,7 +179,7 @@ namespace Qowaiv
 
         #endregion
 
-        #region (XML) (De)serialization
+        #region Serialization
 
         /// <summary>Initializes a new instance of email address based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>
@@ -248,11 +248,7 @@ namespace Qowaiv
             Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
-
-        #endregion
-
-        #region (JSON) (De)serialization
-
+      
         /// <summary>Deserializes the email address collection from a JSON string.</summary>
         /// <param name="json">
         /// The JSON number to deserialize.
@@ -262,7 +258,7 @@ namespace Qowaiv
         /// </returns>
         public static EmailAddressCollection FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
 
-        /// <summary>Serializes the date to a JSON node.</summary>
+        /// <summary>Serializes the email address collection to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>

@@ -125,7 +125,7 @@ namespace Qowaiv.Financial
         /// </returns>
         public static Currency FromJson(long json) => FromJson(json.ToString("000", CultureInfo.InvariantCulture));
 
-        /// <summary>Serializes the date to a JSON node.</summary>
+        /// <summary>Serializes the currency to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>

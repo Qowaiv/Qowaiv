@@ -539,7 +539,7 @@ namespace Qowaiv.Financial
                 s_cur = new string(buffer.ToArray());
             }
 
-            if (!decimal.TryParse(s_num, NumberStyles.Number, formatProvider, out var value))
+            if (!decimal.TryParse(s_num, NumberStyles.Currency, formatProvider, out var value))
             {
                 return false;
             }

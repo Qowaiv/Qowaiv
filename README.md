@@ -429,12 +429,6 @@ and if the data type is nullable, all when applicable.
     "format": "amount",
     "nullabe": false
   },
-  "Financial.BankIdentifierCode": {
-    "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
-    "type": "string",
-    "format": "bic",
-    "nullabe": true
-  },
   "Financial.BusinessIdentifierCode": {
     "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
     "type": "string",

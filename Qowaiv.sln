@@ -48,10 +48,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{932B4123-594C-494B-9B3E-7017D526E80F}"
 	ProjectSection(SolutionItems) = preProject
+		design\package-icon.png = design\package-icon.png
 		design\qowaiv logo.psd = design\qowaiv logo.psd
 		design\qowaiv-logo_linkedin_050x050.jpg = design\qowaiv-logo_linkedin_050x050.jpg
 		design\qowaiv-logo_linkedin_100x060.jpg = design\qowaiv-logo_linkedin_100x060.jpg
-		design\qowaiv-logo_nuget_064x064.gif = design\qowaiv-logo_nuget_064x064.gif
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2-39B5-40EB-8C44-1D6015C38D70}"

@@ -1,5 +1,16 @@
 ﻿# Release Notes
 
+### Released 2019-12-11
+#### Qowaiv 5.0.0
+* JSON serialization is convention based. (#115) breaking
+* Dropped `BankIdentifierCode`. (#116) breaking
+
+#### Qowaiv.Data.SqlClient 5.0.0
+* JSON serialization is convention based. (#115) breaking
+
+#### Qowaiv.TestTools 3.0.0
+* JSON serialization is convention based. (#115) breaking
+
 ### Released 2019-11-03
 #### Qowaiv 4.1.0
 * Introduction of `DateSpan` (#95)

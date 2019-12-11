@@ -88,9 +88,6 @@
   <data name="FormatException_InvalidFormat" xml:space="preserve">
     <value>Input string was not in a correct format.</value>
   </data>
-  <data name="FormatExceptionBankIdentifierCode" xml:space="preserve">
-    <value>Not a valid BIC</value>
-  </data>
   <data name="FormatExceptionBase32" xml:space="preserve">
     <value>Not a valid Base32 string</value>
   </data>

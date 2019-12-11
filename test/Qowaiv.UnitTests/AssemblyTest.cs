@@ -29,7 +29,6 @@ namespace Qowaiv.Tests
                 typeof(Year),
                 typeof(YesNo),
                 typeof(Financial.Amount),
-                typeof(Financial.BankIdentifierCode),
                 typeof(Financial.BusinessIdentifierCode),
                 typeof(Financial.Currency),
                 typeof(Financial.InternationalBankAccountNumber),

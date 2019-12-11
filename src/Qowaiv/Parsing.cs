@@ -1,6 +1,4 @@
 ﻿using Qowaiv.Formatting;
-using System;
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Qowaiv

@@ -22,7 +22,7 @@ namespace Qowaiv.UnitTests
         public void Abs(Type svo)
         {
             //Math.Abs
-            var methods = svo
+            var methods = svo?
                 .GetMethods(PublicInstance)
                 .ExcludeObsolete()
                 .Returns(svo)
@@ -271,7 +271,7 @@ namespace Qowaiv.UnitTests
         [TestCase(typeof(Percentage))]
         public void Round(Type svo)
         {
-            var methods = svo
+            var methods = svo?
                 .GetMethods(PublicInstance)
                 .Returns(svo)
                 .Where(m => m.Name == nameof(Round))
@@ -287,7 +287,7 @@ namespace Qowaiv.UnitTests
         [TestCase(typeof(Percentage))]
         public void Round_Decimals(Type svo)
         {
-            var methods = svo
+            var methods = svo?
                 .GetMethods(PublicInstance)
                 .Returns(svo)
                 .Where(m => m.Name == nameof(Round))
@@ -303,7 +303,7 @@ namespace Qowaiv.UnitTests
         [TestCase(typeof(Percentage))]
         public void Round_Decimals_DecimalRounding(Type svo)
         {
-            var methods = svo
+            var methods = svo?
                 .GetMethods(PublicInstance)
                 .Returns(svo)
                 .Where(m => m.Name == nameof(Round))
@@ -319,7 +319,7 @@ namespace Qowaiv.UnitTests
         [TestCase(typeof(Percentage), typeof(Percentage))]
         public void RoundToMultiple(Type svo, Type multiplyer)
         {
-            var methods = svo
+            var methods = svo?
                 .GetMethods(PublicInstance)
                 .Returns(svo)
                 .Where(m => m.Name == nameof(RoundToMultiple))
@@ -335,7 +335,7 @@ namespace Qowaiv.UnitTests
         [TestCase(typeof(Percentage), typeof(Percentage))]
         public void RoundToMultiple_DecimalRounding(Type svo, Type multiplyer)
         {
-            var methods = svo
+            var methods = svo?
                 .GetMethods(PublicInstance)
                 .Returns(svo)
                 .Where(m => m.Name == nameof(RoundToMultiple))

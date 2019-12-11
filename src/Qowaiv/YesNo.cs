@@ -32,7 +32,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [OpenApiDataType(description: "Yes-No notation.", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
     [TypeConverter(typeof(YesNoTypeConverter))]
-    public partial struct YesNo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
+    public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
     {
         /// <summary>Represents an empty/not set yes-no.</summary>
         public static readonly YesNo Empty;
@@ -55,35 +55,38 @@ namespace Qowaiv
         /// <summary>Returns true if the yes-no value represents yes, otherwise false.</summary>
         public bool IsYes() => m_Value == Yes.m_Value;
 
-        /// <summary>Generates a yes-no from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a yes-no from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the yes-no.
+        /// <summary>Deserializes the gender from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized gender.
+        /// </returns>
+        public static YesNo FromJson(double json) => Create((int)json);
 
-        /// <summary>Generates a yes-no from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the yes-no.
+        /// <summary>Deserializes the yes-no from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
+        /// <returns>
+        /// The deserialized yes-no.
+        /// </returns>
+        public static YesNo FromJson(long json) => Create((int)json);
 
-        /// <summary>Generates a yes-no from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the yes-no.
+        /// <summary>Deserializes the yes-no from a JSON boolean.</summary>
+        /// <param name="json">
+        /// The JSON boolean to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((int)jsonNumber).m_Value;
+        /// <returns>
+        /// The deserialized yes-no.
+        /// </returns>
+        public static YesNo FromJson(bool json) => json ? Yes : No;
 
-        /// <summary>Generates a yes-no from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the yes-no.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a yes-no into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => SerializationValues[m_Value];
+        /// <summary>Serializes the yes-no to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => SerializationValues[m_Value];
 
         /// <summary>Returns a <see cref="string"/> that represents the current yes-no for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

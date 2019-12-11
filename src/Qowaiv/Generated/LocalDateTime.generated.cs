@@ -179,6 +179,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct LocalDateTime
+    {
+        /// <summary>Creates the local date time from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized local date time.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static LocalDateTime FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static LocalDateTime FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct LocalDateTime : IFormattable
     {

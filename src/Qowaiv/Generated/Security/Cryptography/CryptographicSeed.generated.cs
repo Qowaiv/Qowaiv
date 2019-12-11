@@ -180,6 +180,30 @@ namespace Qowaiv.Security.Cryptography
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct CryptographicSeed
+    {
+        /// <summary>Creates the cryptographic seed from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized cryptographic seed.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static CryptographicSeed FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static CryptographicSeed FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Security.Cryptography
+{
+    using System;
+    using System.Globalization;
 
     public partial struct CryptographicSeed : IFormattable
     {

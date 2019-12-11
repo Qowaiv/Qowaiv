@@ -22,7 +22,7 @@ namespace Qowaiv
     /// </remarks>
     [Serializable]
     [OpenApiDataType(description: "Comma separated list of email addresses defined by RFC 5322.", type: "string", format: "email-collection", nullable: true)]
-    public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSerializable, IJsonSerializable, IFormattable
+    public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSerializable, IFormattable
     {
         /// <summary>The email address separator is a comma.</summary>
         /// <remarks>
@@ -179,7 +179,7 @@ namespace Qowaiv
 
         #endregion
 
-        #region (XML) (De)serialization
+        #region Serialization
 
         /// <summary>Initializes a new instance of email address based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>
@@ -248,68 +248,21 @@ namespace Qowaiv
             Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
-
-        #endregion
-
-        #region (JSON) (De)serialization
-
-        /// <summary>Generates an email address collection from a JSON null object representation.</summary>
-        /// <remarks>
-        /// As an email address collection is a reference type, this method
-        /// should never be called. Instead, the read will return null.
-        /// </remarks>
-        [ExcludeFromCodeCoverage]
-        void IJsonSerializable.FromJson() { /* should read as null */ }
-
-        /// <summary>Generates an email address from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the email address.
+      
+        /// <summary>Deserializes the email address collection from a JSON string.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            AddRange(Parse(jsonString, CultureInfo.InvariantCulture));
-        }
+        /// <returns>
+        /// The deserialized email address collection.
+        /// </returns>
+        public static EmailAddressCollection FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
 
-        /// <summary>Generates an email address collection from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(Int64 jsonInteger) { FromJson(jsonInteger); }
-        /// <summary>Generates an email address collection from a JSON integer representation.</summary>
-        /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual void FromJson(Int64 jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates an email address from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(Double jsonNumber) { FromJson(jsonNumber); }
-        /// <summary>Generates an email address from a JSON number representation.</summary>
-        /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual void FromJson(Double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates an email address from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) { FromJson(jsonDate); }
-        /// <summary>Generates an email address from a JSON date representation.</summary>
-        /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual void FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an email address into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() { return ToJson(); }
-        /// <summary>Converts an email address into its JSON object representation.</summary>
-        /// <remarks>
-        /// this is used by IJsonSerializable.FromJson() so that it can be changed by derived classes.
-        /// </remarks>
-        protected virtual object ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the email address collection to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public virtual string ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
         #endregion
 

@@ -175,6 +175,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Gender
+    {
+        /// <summary>Creates the gender from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized gender.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Gender FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Gender FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Gender : IFormattable
     {

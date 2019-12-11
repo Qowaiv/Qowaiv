@@ -222,13 +222,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_None_EmptyValue()
-        {
-            var act = JsonTester.Read<EmailAddressCollection>();
-            Assert.IsNull(act);
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>
@@ -244,36 +237,6 @@ namespace Qowaiv.UnitTests
             var exp = EmailAddressCollection.Parse("info@qowaiv.org, test@qowaiv.org");
 
             CollectionAssert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<EmailAddressCollection>(123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<EmailAddressCollection>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<EmailAddressCollection>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
         }
 
         [Test]

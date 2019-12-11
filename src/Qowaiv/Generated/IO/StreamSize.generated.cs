@@ -179,6 +179,30 @@ namespace Qowaiv.IO
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct StreamSize
+    {
+        /// <summary>Creates the stream size from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized stream size.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static StreamSize FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static StreamSize FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.IO
+{
+    using System;
+    using System.Globalization;
 
     public partial struct StreamSize
     {

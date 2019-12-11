@@ -177,6 +177,30 @@ namespace Qowaiv.Web
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct InternetMediaType
+    {
+        /// <summary>Creates the Internet media type from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized Internet media type.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static InternetMediaType FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static InternetMediaType FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Web
+{
+    using System;
+    using System.Globalization;
 
     public partial struct InternetMediaType : IFormattable
     {

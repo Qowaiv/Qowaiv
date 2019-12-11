@@ -357,59 +357,21 @@ namespace Qowaiv.UnitTests.IO
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_None_EmptyValue()
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<StreamSize>();
-            var exp = StreamSize.Zero;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<StreamSize>(json));
         }
-
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase(1600, "1600")]
+        [TestCase(17_000_000, "17MB")]
+        [TestCase(1_766, "1.766Kb")]
+        [TestCase(1234, 1234L)]
+        [TestCase(1258, 1258.9)]
+        public void FromJson(StreamSize expected, object json)
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<StreamSize>("InvalidStringValue");
-            },
-            "Not a valid stream size");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<StreamSize>("123456789");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            var act = JsonTester.Read<StreamSize>(123456789L);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AreEqual()
-        {
-            var act = JsonTester.Read<StreamSize>((Double)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<StreamSize>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<StreamSize>(json);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]

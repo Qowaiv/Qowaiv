@@ -37,7 +37,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
     [TypeConverter(typeof(GenderTypeConverter))]
-    public partial struct Gender : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
+    public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
     {
         /// <summary>Represents an empty/not set Gender.</summary>
         public static readonly Gender Empty;
@@ -94,35 +94,29 @@ namespace Qowaiv
         /// <summary>Converts the Gender to an int.</summary>
         private int? ToNullableInt32() => ToNullableInt32s[m_Value];
 
-        /// <summary>Generates a Gender from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a Gender from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the Gender.
+        /// <summary>Deserializes the gender from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized gender.
+        /// </returns>
+        public static Gender FromJson(double json) => Create((int)json);
 
-        /// <summary>Generates a Gender from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the Gender.
+        /// <summary>Deserializes the gender from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
+        /// <returns>
+        /// The deserialized gender.
+        /// </returns>
+        public static Gender FromJson(long json) => Create((int)json);
 
-        /// <summary>Generates a Gender from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the Gender.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a Gender from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the Gender.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a Gender into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => GenderLabels[m_Value];
+        /// <summary>Serializes the gender to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => GenderLabels[m_Value];
 
         /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

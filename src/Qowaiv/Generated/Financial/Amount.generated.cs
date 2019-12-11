@@ -178,6 +178,30 @@ namespace Qowaiv.Financial
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Amount
+    {
+        /// <summary>Creates the amount from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized amount.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Amount FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Amount FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Financial
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Amount : IFormattable
     {

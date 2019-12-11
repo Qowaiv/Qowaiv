@@ -31,7 +31,7 @@ namespace Qowaiv.IO
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
     [OpenApiDataType(description: "Stream size notation (in byte).", type: "integer", format: "stream-size")]
     [TypeConverter(typeof(StreamSizeTypeConverter))]
-    public partial struct StreamSize : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
+    public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
     {
         /// <summary>Represents an empty/not set stream size.</summary>
         public static readonly StreamSize Zero;
@@ -338,42 +338,36 @@ namespace Qowaiv.IO
 
         #endregion
 
-        /// <summary>Generates a stream size from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a stream size from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the stream size.
+        /// <summary>Deserializes the stream size from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized stream size.
+        /// </returns>
+        public static StreamSize FromJson(double json) => new StreamSize((long)json);
 
-        /// <summary>Generates a stream size from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the stream size.
+        /// <summary>Deserializes the stream size from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = new StreamSize(jsonInteger).m_Value;
+        /// <returns>
+        /// The deserialized stream size.
+        /// </returns>
+        public static StreamSize FromJson(long json) => new StreamSize(json);
 
-        /// <summary>Generates a stream size from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the stream size.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = new StreamSize((long)jsonNumber).m_Value;
-
-        /// <summary>Generates a stream size from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the stream size.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a stream size into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()=> m_Value;
+        /// <summary>Serializes the stream size to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON number.
+        /// </returns>
+        public long ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay=> ToString(" F", CultureInfo.InvariantCulture); 
+        private string DebuggerDisplay => ToString(" F", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>
-        public override string ToString()=> ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
         /// <param name="format">
@@ -385,7 +379,7 @@ namespace Qowaiv.IO
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)=> ToString("0 byte", formatProvider);
+        public string ToString(IFormatProvider formatProvider) => ToString("0 byte", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
         /// <param name="format">
@@ -504,11 +498,11 @@ namespace Qowaiv.IO
         private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
         private static readonly string[] FullLabels1024 = { "byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte" };
 
-     
+
         /// <summary>Casts a stream size to a <see cref="string"/>.</summary>
         public static explicit operator string(StreamSize val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a stream size.</summary>
-        public static explicit operator StreamSize(string str)=>Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator StreamSize(string str) => Parse(str, CultureInfo.CurrentCulture);
 
 
         /// <summary>Casts a stream size to a System.Int32.</summary>

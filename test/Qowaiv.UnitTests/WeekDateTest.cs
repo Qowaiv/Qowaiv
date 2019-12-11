@@ -396,61 +396,17 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_Null_AssertNotSupportedException()
+        [TestCase("Invalid input")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<WeekDate>();
-            },
-            "JSON deserialization from null is not supported.");
+            Assert.Catch<FormatException>(() => JsonTester.Read<WeekDate>(json));
         }
 
         [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        public void FromJson_1997W14D6_EqualsTestStruct()
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<WeekDate>("InvalidStringValue");
-            },
-            "Not a valid week date");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<WeekDate>("1997-W14-6");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<WeekDate>(123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<WeekDate>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AreEqual()
-        {
-            var act = JsonTester.Read<WeekDate>((DateTime)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
+            var actual = JsonTester.Read<WeekDate>("1997-W14-6");
+            Assert.AreEqual(TestStruct, actual);
         }
 
         [Test]

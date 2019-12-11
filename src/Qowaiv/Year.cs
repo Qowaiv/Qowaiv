@@ -20,7 +20,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
     [OpenApiDataType(description: "Year(-only) notation.", type: "integer", format: "year", nullable: true)]
     [TypeConverter(typeof(YearTypeConverter))]
-    public partial struct Year : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
+    public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
         public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
@@ -41,44 +41,41 @@ namespace Qowaiv
         /// <returns>
         /// true if year is a leap year; otherwise, false.
         /// </returns>
-        public bool IsLeapYear
+        public bool IsLeapYear => !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
+
+        /// <summary>Deserializes the year from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized year.
+        /// </returns>
+        public static Year FromJson(double json) => Create((int)json);
+
+        /// <summary>Deserializes the year from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized year.
+        /// </returns>
+        public static Year FromJson(long json) => Create((int)json);
+
+        /// <summary>Serializes the year to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON node.
+        /// </returns>
+        public object ToJson()
         {
-            get => !IsEmptyOrUnknown() && DateTime.IsLeapYear(m_Value);
-        }
-
-        /// <summary>Generates a year from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a year from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a year from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
-
-        /// <summary>Generates a year from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((int)jsonNumber).m_Value;
-
-        /// <summary>Generates a year from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the year.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a year into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            if (IsEmpty()) { return null; }
-            if (IsUnknown()) { return "?"; }
-            return m_Value;
+            if (IsEmpty())
+            {
+                return null;
+            }
+            if (IsUnknown())
+            {
+                return "?";
+            }
+            return (long)m_Value;
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current year for debug purposes.</summary>

@@ -26,7 +26,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.", type: "string", format: "email", nullable: true)]
     [TypeConverter(typeof(EmailAddressTypeConverter))]
-    public partial struct EmailAddress : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
+    public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
     {
         /// <summary>An email address must not exceed 254 characters.</summary>
         /// <remarks>
@@ -109,35 +109,11 @@ namespace Qowaiv
             return string.Format(CultureInfo.CurrentCulture, "{0} <{1}>", displayName.Trim(), this);
         }
 
-        /// <summary>Generates an email address from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates an email address from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates an email address from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates an email address from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates an email address from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the email address.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an email address into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the email address to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

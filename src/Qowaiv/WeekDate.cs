@@ -47,7 +47,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
     [OpenApiDataType(description: "Full-date notation as defined by ISO 8601, for example, 1997-W14-6.", type: "string", format: "date-weekbased")]
     [TypeConverter(typeof(WeekDateTypeConverter))]
-    public partial struct WeekDate : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
+    public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
     {
         /// <summary>Represents the pattern of a (potential) valid week date.</summary>
         public static readonly Regex Pattern = new Regex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -188,35 +188,11 @@ namespace Qowaiv
             info.AddValue("Value", m_Value);
         }
 
-        /// <summary>Generates a week date from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates a week date from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a week date from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a week date from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a week date from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the week date.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => m_Value = (Date)jsonDate;
-
-        /// <summary>Converts a week date into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the week date to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         #endregion
 

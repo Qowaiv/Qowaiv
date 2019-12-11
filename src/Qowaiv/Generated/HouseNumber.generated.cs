@@ -175,6 +175,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct HouseNumber
+    {
+        /// <summary>Creates the house number from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized house number.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static HouseNumber FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static HouseNumber FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct HouseNumber : IFormattable
     {

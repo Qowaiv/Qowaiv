@@ -176,6 +176,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct PostalCode
+    {
+        /// <summary>Creates the postal code from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized postal code.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static PostalCode FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static PostalCode FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct PostalCode : IFormattable
     {

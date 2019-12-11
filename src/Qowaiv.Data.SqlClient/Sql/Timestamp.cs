@@ -15,7 +15,7 @@ namespace Qowaiv.Sql
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
     [OpenApiDataType(description: "SQL Server timestamp notation, for example 0x00000000000007D9.", type: "string", format: "timestamp")]
     [TypeConverter(typeof(TimestampTypeConverter))]
-    public partial struct Timestamp : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
+    public partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
     {
         /// <summary>Gets the minimum value of a timestamp.</summary>
         public static readonly Timestamp MinValue;
@@ -26,35 +26,29 @@ namespace Qowaiv.Sql
         /// <summary>Represents the timestamp .</summary>
         public byte[] ToByteArray() => BitConverter.GetBytes(m_Value);
 
-        /// <summary>Generates a timestamp from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates a timestamp from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the timestamp.
+        /// <summary>Deserializes the timestamp from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized timestamp.
+        /// </returns>
+        public static Timestamp FromJson(double json) => Create((long)json);
 
-        /// <summary>Generates a timestamp from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the timestamp.
+        /// <summary>Deserializes the timestamp from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create(jsonInteger).m_Value;
+        /// <returns>
+        /// The deserialized timestamp.
+        /// </returns>
+        public static Timestamp FromJson(long json) => Create(json);
 
-        /// <summary>Generates a timestamp from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the timestamp.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((long)jsonNumber).m_Value;
-
-        /// <summary>Generates a timestamp from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the timestamp.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a timestamp into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the timestamp to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current timestamp for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

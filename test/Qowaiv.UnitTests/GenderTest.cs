@@ -416,15 +416,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_None_EmptyValue()
-        {
-            var act = JsonTester.Read<Gender>();
-            var exp = Gender.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>
@@ -433,42 +424,16 @@ namespace Qowaiv.UnitTests
             },
             "Not a valid gender");
         }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
+
+        [TestCase("male")]
+        [TestCase(1L)]
+        [TestCase(1d)]
+        public void FromJson_AreEqual(object json)
         {
-            var act = JsonTester.Read<Gender>("male");
+            var act = JsonTester.Read<Gender>(json);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            var act = JsonTester.Read<Gender>((Int64)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Gender>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Gender>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
         }
 
         [Test]

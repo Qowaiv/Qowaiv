@@ -178,6 +178,30 @@ namespace Qowaiv.Statistics
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Elo
+    {
+        /// <summary>Creates the elo from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized elo.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Elo FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Elo FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Statistics
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Elo : IFormattable
     {

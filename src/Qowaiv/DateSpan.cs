@@ -20,7 +20,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
     [OpenApiDataType(description: "Date span, specified in years, months and days, for example 1Y+10M+16D.", type: "string", format: "date-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D")]
     [TypeConverter(typeof(DateSpanTypeConverter))]
-    public partial struct DateSpan : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
+    public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
         public static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M(?<Days>([+-][0-9]{1,7}))D$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -179,39 +179,20 @@ namespace Qowaiv
 
         #endregion
 
-        #region (JSON) (De)serialization
-
-        /// <summary>Generates a date span from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates a date span from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the date span.
+        /// <summary>Deserializes the date span from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized date span.
+        /// </returns>
+        public static DateSpan FromJson(long json) => FromDays((int)json);
 
-        /// <summary>Generates a date span from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the date span.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = new DateSpan(0, (int)jsonInteger).m_Value;
-
-        /// <summary>Generates a date span from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the date span.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a date span from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the date span.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a date span into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => ToString(CultureInfo.InvariantCulture);
-
-        #endregion
+        /// <summary>Serializes the date span to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

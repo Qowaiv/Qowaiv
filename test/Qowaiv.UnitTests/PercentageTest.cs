@@ -354,16 +354,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_Null_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Percentage>();
-            },
-            "JSON deserialization from null is not supported.");
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>
@@ -382,33 +372,14 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Percentage>(123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
-        }
-
-        [Test]
         public void FromJson_DoubleValue_AreEqual()
         {
-            var act = JsonTester.Read<Percentage>((Double)TestStruct);
+            var act = JsonTester.Read<Percentage>((double)TestStruct);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Percentage>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
-        }
 
         [Test]
         public void ToJson_DefaultValue_IsZero()

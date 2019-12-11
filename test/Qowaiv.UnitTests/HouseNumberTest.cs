@@ -443,15 +443,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_None_EmptyValue()
-        {
-            var act = JsonTester.Read<HouseNumber>();
-            var exp = HouseNumber.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>
@@ -485,16 +476,6 @@ namespace Qowaiv.UnitTests
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<HouseNumber>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
         }
 
         [Test]

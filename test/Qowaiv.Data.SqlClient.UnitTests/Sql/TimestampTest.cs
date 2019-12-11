@@ -337,60 +337,20 @@ namespace Qowaiv.UnitTests.Sql
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_Null_AssertNotSupportedException()
+        [TestCase("InvalidStringValue")]
+        [TestCase("2017-06-11")]
+        public void FromJson_InvalidInput_Throws(object json)
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Timestamp>();
-            },
-            "JSON deserialization from null is not supported.");
+            Assert.Catch<FormatException>(() => JsonTester.Read<Timestamp>(json));
         }
-
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase("123456789")]
+        [TestCase(123456789L)]
+        [TestCase(123456789.0)]
+        public void FromJson_ValidInput_EqualsTestStruct(object json)
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Timestamp>("InvalidStringValue");
-            },
-            "Not a valid SQL timestamp");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Timestamp>("123456789");
+            var act = JsonTester.Read<Timestamp>(json);
             var exp = TestStruct;
-
             Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            var act = JsonTester.Read<Timestamp>(123456789L);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AreEqual()
-        {
-            var act = JsonTester.Read<Timestamp>(123456789.0);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Timestamp>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
         }
 
         [Test]

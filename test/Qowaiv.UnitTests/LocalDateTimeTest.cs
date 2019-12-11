@@ -281,16 +281,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_Null_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<LocalDateTime>();
-            },
-            "JSON deserialization from null is not supported.");
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>
@@ -312,25 +302,6 @@ namespace Qowaiv.UnitTests
         public void FromJson_Int64Value_AreEqual()
         {
             var act = JsonTester.Read<LocalDateTime>(627178398050010000L);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<LocalDateTime>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AreEqual()
-        {
-            var act = JsonTester.Read<LocalDateTime>((DateTime)TestStruct);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);

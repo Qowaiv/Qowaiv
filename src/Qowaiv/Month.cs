@@ -21,7 +21,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [OpenApiDataType(description: "Month(-only) notation.", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
     [TypeConverter(typeof(MonthTypeConverter))]
-    public partial struct Month : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
+    public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
     {
         /// <summary>Represents the pattern of a (potential) valid month.</summary>
         public static readonly Regex Pattern = new Regex(@"^(0?[1-9]|10|11|12)$", RegexOptions.Compiled);
@@ -112,35 +112,29 @@ namespace Qowaiv
                 : DateTime.DaysInMonth((int)year, m_Value);
         }
 
-        /// <summary>Generates a month from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a month from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the month.
+        /// <summary>Deserializes the month from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized month.
+        /// </returns>
+        public static Month FromJson(double json) => Create((int)json);
 
-        /// <summary>Generates a month from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the month.
+        /// <summary>Deserializes the month from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Create((int)jsonInteger).m_Value;
+        /// <returns>
+        /// The deserialized month.
+        /// </returns>
+        public static Month FromJson(long json) => Create((int)json);
 
-        /// <summary>Generates a month from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the month.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = Create((int)jsonNumber).m_Value;
-
-        /// <summary>Generates a month from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the month.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a month into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()=> (m_Value == default) ? null : ToString("s", CultureInfo.InvariantCulture);
+        /// <summary>Serializes the month to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString("s", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -313,7 +307,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new Month { m_Value = (byte)val.Value };
+                result = new Month((byte)val.Value);
                 return true;
             }
             return false;
@@ -323,7 +317,7 @@ namespace Qowaiv
         public static bool IsValid(int? val)
         {
             return val.HasValue
-                && val.Value >= January.m_Value 
+                && val.Value >= January.m_Value
                 && val.Value <= December.m_Value;
         }
 

@@ -420,60 +420,21 @@ namespace Qowaiv.UnitTests
         #endregion
 
         #region JSON (De)serialization tests
-
-        [Test]
-        public void FromJson_None_EmptyValue()
+        
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<Year>();
-            var exp = Year.Empty;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<Year>(json));
         }
 
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase(1600, 1600L)]
+        [TestCase(2017, 2017.0)]
+        [TestCase(1793, "1793")]
+        public void FromJson(Year expected, object json)
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Year>("InvalidStringValue");
-            },
-            "Not a valid year");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Year>("1979");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            var act = JsonTester.Read<Year>((Int64)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AreEqual()
-        {
-            var act = JsonTester.Read<Year>((Double)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Year>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<Year>(json);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]

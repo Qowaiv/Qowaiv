@@ -19,7 +19,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
     [OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information, for example, 2017-06-10 15:00.", type: "string", format: "local-date-time")]
     [TypeConverter(typeof(LocalDateTimeTypeConverter))]
-    public partial struct LocalDateTime : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
+    public partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
     {
         private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
 
@@ -183,19 +183,19 @@ namespace Qowaiv
         public int Minute => m_Value.Minute;
 
         /// <summary>Gets the seconds component of the date represented by this instance.</summary>
-        public int Second => m_Value.Second; 
+        public int Second => m_Value.Second;
 
         /// <summary>Gets the milliseconds component of the date represented by this instance.</summary>
-        public int Millisecond=> m_Value.Millisecond; 
+        public int Millisecond => m_Value.Millisecond;
 
         /// <summary>Gets the number of ticks that represent the date of this instance..</summary>
-        public long Ticks => m_Value.Ticks; 
+        public long Ticks => m_Value.Ticks;
 
         /// <summary>Gets the day of the week represented by this instance.</summary>
-        public DayOfWeek DayOfWeek=> m_Value.DayOfWeek; 
+        public DayOfWeek DayOfWeek => m_Value.DayOfWeek;
 
         /// <summary>Gets the day of the year represented by this instance.</summary>
-        public int DayOfYear => m_Value.DayOfYear; 
+        public int DayOfYear => m_Value.DayOfYear;
 
         /// <summary>Gets the date component of this instance.</summary>
         public Date Date => (Date)m_Value;
@@ -467,39 +467,20 @@ namespace Qowaiv
 
         #endregion
 
-        #region (JSON) (De)serialization
-
-        /// <summary>Generates a local date time from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates a local date time from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the local date time.
+        /// <summary>Deserializes the local date time from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to local date time.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=>  m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized local date time.
+        /// </returns>
+        public static LocalDateTime FromJson(long json) => new LocalDateTime(json);
 
-        /// <summary>Generates a local date time from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the local date time.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger)=>m_Value = new LocalDateTime(jsonInteger).m_Value;
-
-        /// <summary>Generates a local date time from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the local date time.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a local date time from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the local date time.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate)=>m_Value = new LocalDateTime(jsonDate).m_Value;
-
-        /// <summary>Converts a local date time into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()=>ToString(SerializableFormat, CultureInfo.InvariantCulture);
-
-        #endregion
+        /// <summary>Serializes the local date time to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current local date time for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

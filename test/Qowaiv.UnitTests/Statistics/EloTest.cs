@@ -289,60 +289,20 @@ namespace Qowaiv.UnitTests.Statistics
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_Null_AssertNotSupportedException()
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Elo>();
-            },
-            "JSON deserialization from null is not supported.");
+            Assert.Catch<FormatException>(() => JsonTester.Read<Elo>(json));
         }
-
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase(1600, "1600*")]
+        [TestCase(1700, "1700")]
+        [TestCase(1234, 1234L)]
+        [TestCase(1258.9, 1258.9)]
+        public void FromJson(Elo expected, object json)
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Elo>("InvalidStringValue");
-            },
-            "Not a valid Elo");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Elo>("1732.4");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            Elo act = JsonTester.Read<Elo>(1732L);
-            Elo exp = 1732;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AreEqual()
-        {
-            var act = JsonTester.Read<Elo>((Double)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Elo>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<Elo>(json);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]

@@ -176,6 +176,30 @@ namespace Qowaiv.Financial
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct InternationalBankAccountNumber
+    {
+        /// <summary>Creates the IBAN from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized IBAN.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static InternationalBankAccountNumber FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static InternationalBankAccountNumber FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Financial
+{
+    using System;
+    using System.Globalization;
 
     public partial struct InternationalBankAccountNumber : IFormattable
     {

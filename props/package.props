@@ -4,7 +4,7 @@
   <Import Project="common.props" />
 
   <PropertyGroup>
-    <PackageIconUrl>https://raw.githubusercontent.com/Qowaiv/Qowaiv/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
+    <PackageIcon>qowaiv-logo_nuget_064x064.gif</PackageIcon>
     <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
@@ -17,7 +17,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\src\Shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <!-- Shared assembly tags. -->
+    <Compile Include="$(MSBuildThisFileDirectory)..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <!-- Package icon. -->
+    <None Include="$(MSBuildThisFileDirectory)..\design\qowaiv-logo_nuget_064x064.gif" Pack="true" PackagePath="" />
   </ItemGroup>
-
 </Project>

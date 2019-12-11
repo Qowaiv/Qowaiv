@@ -306,60 +306,22 @@ namespace Qowaiv.UnitTests.Financial
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_Null_AssertNotSupportedException()
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Money>();
-            },
-            "JSON deserialization from null is not supported.");
+            Assert.Catch<FormatException>(() => JsonTester.Read<Money>(json));
         }
 
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase("EUR 42.17", "EUR 42.17")]
+        [TestCase("EUR 42.17", "EUR42.17")]
+        [TestCase("EUR 42.17", "€42.17")]
+        [TestCase("100", 100L)]
+        [TestCase("42.17", 42.17)]
+        public void FromJson(Money expected, object json)
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Money>("InvalidStringValue");
-            },
-            "Not a valid Money");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Money>("EUR 42.17");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            Money act = JsonTester.Read<Money>(42);
-            Money exp = 42 + Currency.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AreEqual()
-        {
-            var act = JsonTester.Read<Money>(-42.17);
-            var exp = -42.17 + Currency.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Money>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<Money>(json);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]

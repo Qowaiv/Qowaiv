@@ -319,61 +319,17 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_None_EmptyValue()
+        [TestCase("Invalid input")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<Uuid>();
-            var exp = Uuid.Empty;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<Uuid>(json));
         }
 
         [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        public void FromJson_1997W14D6_EqualsTestStruct()
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Uuid>("InvalidStringValue");
-            },
-            "Not a valid GUID");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Uuid>("Qowaiv_SVOLibrary_GUIA");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Uuid>(123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Uuid>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Uuid>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<Uuid>("Qowaiv_SVOLibrary_GUIA");
+            Assert.AreEqual(TestStruct, actual);
         }
 
         [Test]

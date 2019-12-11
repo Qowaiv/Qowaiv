@@ -178,6 +178,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Percentage
+    {
+        /// <summary>Creates the percentage from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized percentage.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Percentage FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Percentage FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Percentage
     {

@@ -270,15 +270,35 @@ lead to a dependency hell, Qowaiv provides them as code snippets:
 
 ## Serialization
 ### JSON
-Serializing data using JSON is de facto the default. However, .NET has no
-generic interface in the standard library to implement. To overcome this,
-Qowaiv has its own: [IJsonSerializable](src/Qowaiv/Json/IJsonSerializable.cs)
+Serializing data using JSON is de facto the default. Qowaiv has a (naming)
+based convention:
 
-Is has some from methods, and one `ToJson()` method. Depending on your
-serializer of choice (most likely [Newtonsoft](https://www.newtonsoft.com))
-You can implement it yourself:
-* [.NET Core 3.0](example/Qowaiv.Text.Json.Serialization/README.md)
-* [Newtonsoft implementation](example/Qowaiv.Json.Newtonsoft/README.md)
+``` C#
+public struct Svo
+{
+    public static Svo FromJson(string json);
+
+    // When appropriate for the SVO. Example: `Percentage`.
+    public static Svo FromJson(double json);
+
+    // When appropriate for the SVO. Example: `Amount`.
+    public static Svo FromJson(long json);
+
+    // When appropriate for the SVO. Example: `YesNo`.
+    public static Svo FromJson(bool json);
+
+    // In most cases `string` is returned, but there are exceptions:
+    // Amount: double ToJson();
+    // StreamSize: long ToJson();
+    // Year: object ToJson();
+    public object /* or string, bool, int, long, double, decimal */ ToJson();
+}
+```
+#### Implementations
+There are two _out-of-the-box_ implementations that that support this convention
+based contract.
+* [Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)  
+* [Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)  
 
 #### OpenAPI Specification
 The [OpenAPI Specification](https://swagger.io/docs/specification/about/)

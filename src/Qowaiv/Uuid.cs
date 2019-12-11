@@ -34,12 +34,12 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
     [OpenApiDataType(description: "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.", type: "string", format: "uuid-base64", nullable: true)]
     [TypeConverter(typeof(UuidTypeConverter))]
-    public partial struct Uuid : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
+    public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
     {
         /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
         public static readonly Regex Pattern = new Regex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
 
-        /// <summary>Represents an empty/not set GUID.</summary>
+        /// <summary>Represents an empty/not set UUID.</summary>
         public static readonly Uuid Empty;
 
         /// <summary>Get the version of the UUID.</summary>
@@ -48,35 +48,11 @@ namespace Qowaiv
         /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
         public byte[] ToByteArray() => m_Value.ToByteArray();
 
-        /// <summary>Generates a UUID from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a UUID from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the UUID.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString).m_Value;
-
-        /// <summary>Generates a UUID from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the UUID.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a UUID from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the UUID.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a UUID from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the UUID.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a UUID into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the UUID to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

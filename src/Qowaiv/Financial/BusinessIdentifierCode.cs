@@ -38,7 +38,7 @@ namespace Qowaiv.Financial
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.", type: "string", format: "bic", nullable: true)]
     [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]
-    public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
+    public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
     {
         /// <remarks>
         /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
@@ -83,37 +83,12 @@ namespace Qowaiv.Financial
         /// </remarks>
         public string Branch => Length != 11 ? string.Empty : m_Value.Substring(8);
 
-        /// <summary>Generates a BIC from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
+        /// <summary>Serializes the BIC to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value;
 
-        /// <summary>Generates a BIC from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a BIC from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a BIC from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a BIC from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the BIC.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a BIC into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
-
-        /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture);

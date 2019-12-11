@@ -465,15 +465,6 @@ namespace Qowaiv.UnitTests
         #region JSON (De)serialization tests
 
         [Test]
-        public void FromJson_None_EmptyValue()
-        {
-            var act = JsonTester.Read<Month>();
-            var exp = Month.Empty;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void FromJson_InvalidStringValue_AssertFormatException()
         {
             Assert.Catch<FormatException>(() =>
@@ -494,7 +485,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void FromJson_Int64Value_AreEqual()
         {
-            var act = JsonTester.Read<Month>(2);
+            var act = JsonTester.Read<Month>(2L);
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
@@ -507,16 +498,6 @@ namespace Qowaiv.UnitTests
             var exp = TestStruct;
 
             Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Month>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
         }
 
         [Test]

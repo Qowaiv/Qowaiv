@@ -176,6 +176,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct YesNo
+    {
+        /// <summary>Creates the yes-no from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized yes-no.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static YesNo FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static YesNo FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct YesNo : IFormattable
     {

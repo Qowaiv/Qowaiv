@@ -406,61 +406,17 @@ namespace Qowaiv.UnitTests
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_None_EmptyValue()
+        [TestCase("Invalid input")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<PostalCode>();
-            var exp = PostalCode.Empty;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<PostalCode>(json));
         }
 
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase("H0H0H0", "H0H0H0")]
+        public void FromJson(PostalCode expected, object json)
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<PostalCode>("InvalidStringValue");
-            },
-            "Not a valid postal code");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<PostalCode>("H0H0H0");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<PostalCode>(123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<PostalCode>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<PostalCode>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<PostalCode>(json);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -584,13 +540,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("PostalCode: (empty)", default(PostalCode));
+            DebuggerDisplayAssert.HasResult("{empty}", default(PostalCode));
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("PostalCode: H0H0H0", TestStruct);
+            DebuggerDisplayAssert.HasResult("H0H0H0", TestStruct);
         }
 
         #endregion

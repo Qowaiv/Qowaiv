@@ -21,7 +21,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
     [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9])?%")]
     [TypeConverter(typeof(PercentageTypeConverter))]
-    public partial struct Percentage : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
+    public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
     {
         /// <summary>The percentage mark (%).</summary>
         public static readonly string PercentageMark = "%";
@@ -547,35 +547,20 @@ namespace Qowaiv
 
         #region (JSON) (De)serialization
 
-        /// <summary>Generates a Percentage from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates a Percentage from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the Percentage.
+        /// <summary>Deserializes the percentage from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized percentage.
+        /// </returns>
+        public static Percentage FromJson(double json) => new Percentage((decimal)json);
 
-        /// <summary>Generates a Percentage from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the Percentage.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a Percentage from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the Percentage.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber)=> m_Value = Create((decimal)jsonNumber).m_Value;
-
-        /// <summary>Generates a Percentage from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the Percentage.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a Percentage into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => ToString("0.############################%", CultureInfo.InvariantCulture);
+        /// <summary>Serializes the percentage to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => ToString("0.############################%", CultureInfo.InvariantCulture);
 
         #endregion
 

@@ -175,6 +175,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Month
+    {
+        /// <summary>Creates the month from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized month.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Month FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Month FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Month : IFormattable
     {

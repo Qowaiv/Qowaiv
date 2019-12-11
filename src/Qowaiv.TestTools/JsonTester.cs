@@ -1,64 +1,67 @@
-﻿using Qowaiv.Json;
-using System;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Qowaiv.TestTools
 {
-    /// <summary>Helper class for accessing the <see cref="IJsonSerializable"/> interface.</summary>
+    /// <summary>Helper class for testing JSON conversion.</summary>
     public static class JsonTester
     {
-        /// <summary>Applies <see cref="IJsonSerializable.FromJson()"/>.</summary>
-        public static T Read<T>() where T : IJsonSerializable
+        /// <summary>Applies multiple FromJson scenario's.</summary>
+        public static T Read<T>(object val)
         {
-            T instance = default;
-            if (typeof(T).IsValueType)
+            var parameterType = val?.GetType();
+            var fromJson = typeof(T)
+                .GetMethods(BindingFlags.Static | BindingFlags.Public)
+                .FirstOrDefault(m => FromJson<T>(m, parameterType));
+
+            if (fromJson is null)
             {
-                instance.FromJson();
+                throw new InvalidOperationException($"Could not find {typeof(T).Name}.FromJson({parameterType.Name}).");
             }
-            return instance;
+            try
+            {
+                return (T)fromJson.Invoke(null, new[] { val });
+            }
+            catch (TargetInvocationException x)
+            {
+                if (x.InnerException is null)
+                {
+                    throw;
+                }
+                throw x.InnerException;
+            }
         }
 
-        /// <summary>Applies <see cref="IJsonSerializable.FromJson(string)"/>.</summary>
-        public static T Read<T>(string val) where T : IJsonSerializable
+        /// <summary>Applies <code>ToJson()</code>.</summary>
+        public static object Write<T>(T val)
         {
-            T instance = NewInstance<T>();
-            instance.FromJson(val);
-            return instance;
+            var toJson = typeof(T)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                .FirstOrDefault(ToJson);
+
+            if (toJson is null)
+            {
+                throw new InvalidOperationException($"Could not find {typeof(T).Name}.ToJson().");
+            }
+            return toJson.Invoke(val, Array.Empty<object>());
         }
 
-        /// <summary>Applies <see cref="IJsonSerializable.FromJson(long)"/>.</summary>
-        public static T Read<T>(long val) where T : IJsonSerializable
+        private static bool FromJson<T>(MethodInfo method, Type parameterType)
         {
-            T instance = NewInstance<T>();
-            instance.FromJson(val);
-            return instance;
+            return method.Name == nameof(FromJson)
+                && method.GetParameters().Length == 1
+                && method.GetParameters()[0].ParameterType == parameterType
+                && method.ReturnType == typeof(T)
+            ;
         }
 
-        /// <summary>Applies <see cref="IJsonSerializable.FromJson(double)"/>.</summary>
-        public static T Read<T>(double val) where T : IJsonSerializable
+        private static bool ToJson(MethodInfo method)
         {
-            T instance = NewInstance<T>();
-            instance.FromJson(val);
-            return instance;
+            return method.Name == nameof(ToJson)
+                && method.GetParameters().Length == 0
+                && method.ReturnType != null
+            ;
         }
-
-        /// <summary>Applies <see cref="IJsonSerializable.FromJson(DateTime)"/>.</summary>
-        public static T Read<T>(DateTime val) where T : IJsonSerializable
-        {
-            T instance = NewInstance<T>();
-            instance.FromJson(val);
-            return instance;
-        }
-
-        /// <summary>Applies <see cref="IJsonSerializable.ToJson()"/>.</summary>
-        public static object Write(IJsonSerializable val)
-        {
-            return val?.ToJson();
-        }
-
-        private static T NewInstance<T>() where T : IJsonSerializable
-        {
-            return typeof(T).IsValueType ? default : Activator.CreateInstance<T>();
-        }
-
     }
 }

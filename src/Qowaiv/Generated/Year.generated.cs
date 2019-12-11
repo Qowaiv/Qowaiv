@@ -175,6 +175,30 @@ namespace Qowaiv
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Year
+    {
+        /// <summary>Creates the year from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized year.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Year FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Year FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Year : IFormattable
     {

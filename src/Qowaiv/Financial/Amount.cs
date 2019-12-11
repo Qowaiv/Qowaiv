@@ -19,7 +19,7 @@ namespace Qowaiv.Financial
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
     [OpenApiDataType(description: "Decimal representation of a currency amount.", type: "number", format: "amount")]
     [TypeConverter(typeof(AmountTypeConverter))]
-    public partial struct Amount : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
+    public partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
     {
         /// <summary>Represents an Amount of zero.</summary>
         public static readonly Amount Zero;
@@ -333,35 +333,11 @@ namespace Qowaiv.Financial
         [CLSCompliant(false)]
         public static Amount operator /(Amount amount, ushort factor) => amount.Divide(factor);
 
-        /// <summary>Generates an Amount from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates an Amount from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates an Amount from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = jsonInteger;
-
-        /// <summary>Generates an Amount from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => m_Value = (decimal)jsonNumber;
-
-        /// <summary>Generates an Amount from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an Amount into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value;
+        /// <summary>Serializes the amount to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON number.
+        /// </returns>
+        public double ToJson() => (double)m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -386,6 +362,25 @@ namespace Qowaiv.Financial
 
         /// <summary>Gets an XML string representation of the amount.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+
+        /// <summary>Deserializes the amount from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized amount.
+        /// </returns>
+        public static Amount FromJson(double json) => new Amount((decimal)json);
+
+        /// <summary>Deserializes the amountfrom a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized amount.
+        /// </returns>
+        public static Amount FromJson(long json) => new Amount(json);
+
 
         /// <summary>Casts an Amount to a <see cref="string"/>.</summary>
         public static explicit operator string(Amount val) => val.ToString(CultureInfo.CurrentCulture);

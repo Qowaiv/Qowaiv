@@ -317,61 +317,18 @@ namespace Qowaiv.UnitTests.Financial
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_None_EmptyValue()
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<InternationalBankAccountNumber>();
-            var exp = InternationalBankAccountNumber.Empty;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<InternationalBankAccountNumber>(json));
         }
-
+    
         [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        public void FromJson_NL20INGB0001234567_EqualsTestStruct()
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<InternationalBankAccountNumber>("InvalidStringValue");
-            },
-            "Not a valid IBAN");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<InternationalBankAccountNumber>("NL20INGB0001234567");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<InternationalBankAccountNumber>(123456L);
-            },
-            "JSON deserialization from an integer is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<InternationalBankAccountNumber>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<InternationalBankAccountNumber>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<InternationalBankAccountNumber>("NL20INGB0001234567");
+            Assert.AreEqual(TestStruct, actual);
         }
 
         [Test]

@@ -176,6 +176,30 @@ namespace Qowaiv.Globalization
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Country
+    {
+        /// <summary>Creates the country from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized country.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Country FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Country FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Globalization
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Country : IFormattable
     {

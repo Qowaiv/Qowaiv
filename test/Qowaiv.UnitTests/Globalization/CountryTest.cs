@@ -446,60 +446,21 @@ namespace Qowaiv.UnitTests.Globalization
 
         #region JSON (De)serialization tests
 
-        [Test]
-        public void FromJson_None_EmptyValue()
+        [TestCase("Invalid input")]
+        [TestCase("2017-06-11")]
+        [TestCase(-3L)]
+        public void FromJson_Invalid_Throws(object json)
         {
-            var act = JsonTester.Read<Country>();
-            var exp = Country.Empty;
-
-            Assert.AreEqual(exp, act);
+            Assert.Catch<FormatException>(() => JsonTester.Read<Country>(json));
         }
-
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
+        [TestCase("NL", "Netherlands")]
+        [TestCase("NL", "nl")]
+        [TestCase("AF", 4L)]
+        [TestCase("BG", 100L)]
+        public void FromJson(Country expected, object json)
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Country>("not a country");
-            },
-            "Not a valid country");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Country>("VA");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            var act = JsonTester.Read<Country>(TestStruct.IsoNumericCode);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Country>(1234.56);
-            },
-            "JSON deserialization from a number is not supported.");
-        }
-
-        [Test]
-        public void FromJson_DateTimeValue_AssertNotSupportedException()
-        {
-            Assert.Catch<NotSupportedException>(() =>
-            {
-                JsonTester.Read<Country>(new DateTime(1972, 02, 14));
-            },
-            "JSON deserialization from a date is not supported.");
+            var actual = JsonTester.Read<Country>(json);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]

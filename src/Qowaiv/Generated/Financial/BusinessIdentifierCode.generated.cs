@@ -176,6 +176,30 @@ namespace Qowaiv.Financial
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct BusinessIdentifierCode
+    {
+        /// <summary>Creates the BIC from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized BIC.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static BusinessIdentifierCode FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static BusinessIdentifierCode FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Financial
+{
+    using System;
+    using System.Globalization;
 
     public partial struct BusinessIdentifierCode : IFormattable
     {

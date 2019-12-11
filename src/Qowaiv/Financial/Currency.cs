@@ -41,7 +41,7 @@ namespace Qowaiv.Financial
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Currency notation as defined by ISO 4217, for example, EUR.", type: "string", format: "currency", nullable: true)]
     [TypeConverter(typeof(CurrencyTypeConverter))]
-    public partial struct Currency : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
+    public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
     {
         /// <summary>Represents an empty/not set currency.</summary>
         public static readonly Currency Empty;
@@ -116,36 +116,20 @@ namespace Qowaiv.Financial
                 .Where(country => country.GetCurrency(measurement) == currency);
         }
 
-        /// <summary>Generates a currency from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-
-        /// <summary>Generates a currency from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the currency.
+        /// <summary>Deserializes the currency from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized currency.
+        /// </returns>
+        public static Currency FromJson(long json) => FromJson(json.ToString("000", CultureInfo.InvariantCulture));
 
-        /// <summary>Generates a currency from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the currency.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger)=> m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).m_Value;
-
-        /// <summary>Generates a currency from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the currency.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a currency from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the currency.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a currency into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the currency to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

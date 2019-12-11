@@ -178,6 +178,30 @@ namespace Qowaiv.Sql
 {
     using System;
     using System.Globalization;
+    using Qowaiv.Json;
+
+    public partial struct Timestamp
+    {
+        /// <summary>Creates the timestamp from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized timestamp.
+        /// </returns>
+        
+#if !NotCultureDependent
+        public static Timestamp FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+#else
+        public static Timestamp FromJson(string json) => Parse(json);
+#endif
+    }
+}
+
+namespace Qowaiv.Sql
+{
+    using System;
+    using System.Globalization;
 
     public partial struct Timestamp : IFormattable
     {

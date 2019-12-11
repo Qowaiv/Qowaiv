@@ -3,9 +3,10 @@
 namespace Qowaiv.Json
 {
     /// <summary>Provides custom formatting for XML serialization and deserialization.</summary>
+    [Obsolete("IJsonSerializable is not longer supported. Use a convention based serializer instead.", true)]
     public interface IJsonSerializable
     {
-        /// <summary>Generates an object from a JSON null object representation.</summary>
+        /// <summary>Generates an object from a JSON null representation.</summary>
         void FromJson();
 
         /// <summary>Generates an object from a JSON string representation.</summary>

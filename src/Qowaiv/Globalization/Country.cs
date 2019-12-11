@@ -32,7 +32,7 @@ namespace Qowaiv.Globalization
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.", type: "string", format: "country", nullable: true)]
     [TypeConverter(typeof(CountryTypeConverter))]
-    public partial struct Country : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
+    public partial struct Country : ISerializable, IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
     {
         /// <summary>Represents an empty/not set </summary>
         public static readonly Country Empty;
@@ -147,35 +147,20 @@ namespace Qowaiv.Globalization
             }
         }
 
-        /// <summary>Generates a Country from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates a Country from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the 
+        /// <summary>Deserializes the country from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString) => m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-    
-        /// <summary>Generates a Country from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => m_Value = Parse(jsonInteger.ToString("000", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized country.
+        /// </returns>
+        public static Country FromJson(long json) => FromJson(json.ToString("000", CultureInfo.InvariantCulture));
 
-        /// <summary>Generates a Country from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a Country from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the 
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a Country into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value;
+        /// <summary>Serializes the country to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

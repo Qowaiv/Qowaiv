@@ -34,7 +34,7 @@ namespace Qowaiv.Financial
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
     [OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007, for example, BE71096123456769.", type: "string", format: "iban", nullable: true)]
     [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
-    public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
+    public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
     {
         /// <summary>Represents the pattern of a (potential) valid IBAN.</summary>
         /// <remarks>
@@ -68,41 +68,11 @@ namespace Qowaiv.Financial
             }
         }
 
-        /// <summary>Generates an IBAN from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = default;
-
-        /// <summary>Generates an IBAN from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the IBAN.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString)
-        {
-            m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
-        }
-
-        /// <summary>Generates an IBAN from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the IBAN.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates an IBAN from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the IBAN.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates an IBAN from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the IBAN.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an IBAN into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson()
-        {
-            return m_Value == default ? null : ToUnformattedString();
-        }
+        /// <summary>Serializes the IBAN to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => m_Value == default ? null : ToUnformattedString();
 
         /// <summary>Returns a <see cref="string"/> that represents the current IBAN for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

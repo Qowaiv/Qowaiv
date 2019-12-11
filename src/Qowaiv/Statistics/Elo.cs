@@ -30,7 +30,7 @@ namespace Qowaiv.Statistics
     [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(double))]
     [OpenApiDataType(description: "Elo rating system notation.", type: "number", format: "elo")]
     [TypeConverter(typeof(EloTypeConverter))]
-    public partial struct Elo : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
+    public partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
     {
         /// <summary>Represents the zero value of an Elo.</summary>
         public static readonly Elo Zero;
@@ -120,39 +120,29 @@ namespace Qowaiv.Statistics
 
         #endregion
 
-        #region (JSON) (De)serialization
-
-        /// <summary>Generates an Elo from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => throw new NotSupportedException(QowaivMessages.JsonSerialization_NullNotSupported);
-
-        /// <summary>Generates an Elo from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the Elo.
+        /// <summary>Deserializes the Elo from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=>m_Value = Parse(jsonString, CultureInfo.InvariantCulture).m_Value;
+        /// <returns>
+        /// The deserialized Elo.
+        /// </returns>
+        public static Elo FromJson(double json) => Create(json);
 
-        /// <summary>Generates an Elo from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the Elo.
+        /// <summary>Deserializes the Elo from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
         /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger)=>m_Value = Create(jsonInteger).m_Value;
+        /// <returns>
+        /// The deserialized Elo.
+        /// </returns>
+        public static Elo FromJson(long json) => Create(json);
 
-        /// <summary>Generates an Elo from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the Elo.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber)=>m_Value = Create(jsonNumber).m_Value;
-
-        /// <summary>Generates an Elo from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the Elo.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts an Elo into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => m_Value;
-
-        #endregion
+        /// <summary>Serializes the Elo to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON number.
+        /// </returns>
+        public double ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Elo for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

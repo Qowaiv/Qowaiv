@@ -25,7 +25,7 @@ namespace Qowaiv.Security.Cryptography
     [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(byte[]))]
     [OpenApiDataType(description: "Base64 encoded cryptographic seed.", type: "string", format: "cryptographic-seed", nullable: true)]
     [TypeConverter(typeof(CryptographicSeedTypeConverter))]
-    public partial struct CryptographicSeed : ISerializable, IXmlSerializable, IJsonSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
+    public partial struct CryptographicSeed : ISerializable, IXmlSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
     {
         /// <summary>Represents an empty/not set cryptographic seed.</summary>
         public static readonly CryptographicSeed Empty;
@@ -45,39 +45,15 @@ namespace Qowaiv.Security.Cryptography
             return clone;
         }
 
-        /// <summary>Generates a cryptographic seed from a JSON null object representation.</summary>
-        void IJsonSerializable.FromJson() => m_Value = null;
-
-        /// <summary>Generates a cryptographic seed from a JSON string representation.</summary>
-        /// <param name="jsonString">
-        /// The JSON string that represents the cryptographic seed.
-        /// </param>
-        void IJsonSerializable.FromJson(string jsonString)=> m_Value = Parse(jsonString).m_Value;
-
-        /// <summary>Generates a cryptographic seed from a JSON integer representation.</summary>
-        /// <param name="jsonInteger">
-        /// The JSON integer that represents the cryptographic seed.
-        /// </param>
-        void IJsonSerializable.FromJson(long jsonInteger) => throw new NotSupportedException(QowaivMessages.JsonSerialization_Int64NotSupported);
-
-        /// <summary>Generates a cryptographic seed from a JSON number representation.</summary>
-        /// <param name="jsonNumber">
-        /// The JSON number that represents the cryptographic seed.
-        /// </param>
-        void IJsonSerializable.FromJson(double jsonNumber) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DoubleNotSupported);
-
-        /// <summary>Generates a cryptographic seed from a JSON date representation.</summary>
-        /// <param name="jsonDate">
-        /// The JSON Date that represents the cryptographic seed.
-        /// </param>
-        void IJsonSerializable.FromJson(DateTime jsonDate) => throw new NotSupportedException(QowaivMessages.JsonSerialization_DateTimeNotSupported);
-
-        /// <summary>Converts a cryptographic seed into its JSON object representation.</summary>
-        object IJsonSerializable.ToJson() => Length == 0 ? null : ToString(CultureInfo.InvariantCulture);
+        /// <summary>Serializes the cryptographic seed to a JSON node.</summary>
+        /// <returns>
+        /// The serialized JSON string.
+        /// </returns>
+        public string ToJson() => Length == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current cryptographic seed for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay=> IsEmpty()? "{empty}" : Base64.ToString(m_Value);
+        private string DebuggerDisplay => IsEmpty() ? "{empty}" : Base64.ToString(m_Value);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current cryptographic seed.</summary>
         /// <param name="format">
@@ -99,7 +75,8 @@ namespace Qowaiv.Security.Cryptography
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <inheritdoc />
-        public bool Equals(CryptographicSeed other) {
+        public bool Equals(CryptographicSeed other)
+        {
             if (Length == other.Length)
             {
                 for (var i = 0; i < Length; i++)
@@ -144,7 +121,7 @@ namespace Qowaiv.Security.Cryptography
         public static explicit operator CryptographicSeed(string str) => Parse(str);
 
         /// <summary>Casts a cryptographic seed to a System.byte[].</summary>
-        public static explicit operator byte[] (CryptographicSeed val) => val.ToByteArray();
+        public static explicit operator byte[](CryptographicSeed val) => val.ToByteArray();
         /// <summary>Casts a System.byte[] to a cryptographic seed.</summary>
         public static implicit operator CryptographicSeed(byte[] bytes) => Create(bytes);
 

@@ -124,6 +124,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The double.NaN value can not represent an Elo..
+        /// </summary>
+        public static string ArgumentOutOfRangeException_EloNotFromNaN {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRangeException_EloNotFromNaN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} operation could not be applied. There is a mismatch between {1} and {2}..
         /// </summary>
         public static string CurrencyMismatchException {

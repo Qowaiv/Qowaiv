@@ -38,6 +38,23 @@ namespace Qowaiv.UnitTests.Statistics
 
         #endregion
 
+        #region NaN
+
+        [Test]
+        public void Create_NaN_Throws()
+        {
+            var x = Assert.Catch<ArgumentOutOfRangeException>(() => Elo.Create(double.NaN));
+            StringAssert.StartsWith("The double.NaN value can not represent an Elo. ", x.Message);
+        }
+
+        [Test]
+        public void Parse_NaN_Throws()
+        {
+            Assert.Throws<FormatException>(() => Elo.Parse(double.NaN.ToString(CultureInfo.InvariantCulture)));
+        }
+
+        #endregion
+
         #region Methods
 
         [Test]

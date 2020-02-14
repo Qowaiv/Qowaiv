@@ -79,8 +79,8 @@
   <data name="ArgumentOutOfRangeException_DateSpan" xml:space="preserve">
     <value>The specified years, months and days results in an un-representable DateSpan.</value>
   </data>
-  <data name="ArgumentOutOfRangeException_EloNotFromNaN" xml:space="preserve">
-    <value>The double.NaN value can not represent an Elo.</value>
+  <data name="ArgumentOutOfRange_Elo" xml:space="preserve">
+    <value>The number can not represent an Elo.</value>
   </data>
   <data name="CurrencyMismatchException" xml:space="preserve">
     <value>The {0} operation could not be applied. There is a mismatch between {1} and {2}.</value>

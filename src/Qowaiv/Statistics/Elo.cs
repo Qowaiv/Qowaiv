@@ -208,7 +208,7 @@ namespace Qowaiv.Statistics
             {
                 var str = s.EndsWith("*", StringComparison.InvariantCultureIgnoreCase) ? s.Substring(0, s.Length - 1) : s;
 
-                if (double.TryParse(str, NumberStyles.Number, formatProvider, out var d) && !double.IsNaN(d))
+                if (double.TryParse(str, NumberStyles.Number, formatProvider, out var d) && !double.IsNaN(d) && !double.IsInfinity(d))
                 {
                     result = new Elo { m_Value = d };
                     return true;
@@ -226,9 +226,9 @@ namespace Qowaiv.Statistics
         /// </exception>
         public static Elo Create(double val)
         {
-            if (double.IsNaN(val))
+            if (double.IsNaN(val) || double.IsInfinity(val))
             {
-                throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.ArgumentOutOfRangeException_EloNotFromNaN);
+                throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.ArgumentOutOfRange_Elo);
             }
             return new Elo(val);
         }

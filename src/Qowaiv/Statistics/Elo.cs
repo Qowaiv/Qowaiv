@@ -146,7 +146,7 @@ namespace Qowaiv.Statistics
 
         /// <summary>Returns a <see cref="string"/> that represents the current Elo for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private double DebuggerDisplay=> m_Value;
+        private double DebuggerDisplay => m_Value;
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
         /// <param name="format">
@@ -170,10 +170,10 @@ namespace Qowaiv.Statistics
         /// <summary>Casts an Elo to a <see cref="string"/>.</summary>
         public static explicit operator string(Elo val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Elo.</summary>
-        public static explicit operator Elo(string str) =>Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Elo(string str) => Parse(str, CultureInfo.CurrentCulture);
 
         /// <summary>Casts a decimal to an Elo.</summary>
-        public static implicit operator Elo(decimal val)=>new Elo((double)val);
+        public static implicit operator Elo(decimal val) => new Elo((double)val);
         /// <summary>Casts a decimal to an Elo.</summary>
         public static implicit operator Elo(double val) => new Elo(val);
         /// <summary>Casts an integer to an Elo.</summary>
@@ -184,7 +184,7 @@ namespace Qowaiv.Statistics
         /// <summary>Casts an Elo to a double.</summary>
         public static explicit operator double(Elo val) => val.m_Value;
         /// <summary>Casts an Elo to an integer.</summary>
-        public static explicit operator int(Elo val) =>(int)Math.Round(val.m_Value);
+        public static explicit operator int(Elo val) => (int)Math.Round(val.m_Value);
 
         /// <summary>Converts the string to an Elo.
         /// A return value indicates whether the conversion succeeded.
@@ -207,7 +207,8 @@ namespace Qowaiv.Statistics
             if (!string.IsNullOrEmpty(s))
             {
                 var str = s.EndsWith("*", StringComparison.InvariantCultureIgnoreCase) ? s.Substring(0, s.Length - 1) : s;
-                if (double.TryParse(str, NumberStyles.Number, formatProvider, out double d))
+
+                if (double.TryParse(str, NumberStyles.Number, formatProvider, out var d) && !double.IsNaN(d) && !double.IsInfinity(d))
                 {
                     result = new Elo { m_Value = d };
                     return true;
@@ -216,13 +217,20 @@ namespace Qowaiv.Statistics
             return false;
         }
 
-        /// <summary >Creates an Elo from a Double. </summary >
-        /// <param name="val" >
-        /// A decimal describing an Elo.
-        /// </param >
-        /// <exception cref="FormatException" >
-        /// val is not a valid Elo.
-        /// </exception >
-        public static Elo Create(double val) => new Elo(val);
+        /// <summary>Creates an <see cref="Elo"/> from a <see cref="double"/>.</summary>
+        /// <param name="val">
+        /// A decimal describing an <see cref="Elo"/>.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// val is not a valid <see cref="Elo"/>.
+        /// </exception>
+        public static Elo Create(double val)
+        {
+            if (double.IsNaN(val) || double.IsInfinity(val))
+            {
+                throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.ArgumentOutOfRange_Elo);
+            }
+            return new Elo(val);
+        }
     }
 }

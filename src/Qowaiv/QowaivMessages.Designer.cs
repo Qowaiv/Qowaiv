@@ -106,6 +106,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number can not represent an Elo..
+        /// </summary>
+        public static string ArgumentOutOfRange_Elo {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_Elo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Percentages can only round to between -26 and 26 digits of precision..
         /// </summary>
         public static string ArgumentOutOfRange_PercentageRound {

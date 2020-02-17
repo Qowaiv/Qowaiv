@@ -15,7 +15,11 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
-        public static bool IsNearestRouding(this DecimalRounding mode)
+        [Obsolete("Misspelled method will be dropped when a next major release is published.")]
+        public static bool IsNearestRouding(this DecimalRounding mode) => mode.IsNearestRounding();
+
+        /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
+        public static bool IsNearestRounding(this DecimalRounding mode)
         {
             return mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;
         }
@@ -178,7 +182,7 @@ namespace Qowaiv
 
             var halfway = divisor >> 1;
 
-            if (remainder == halfway && mode.IsNearestRouding())
+            if (remainder == halfway && mode.IsNearestRounding())
             {
                 switch (mode)
                 {

@@ -16,7 +16,6 @@ namespace Qowaiv.Financial.UnitTests
         /// <summary>The test instance for most tests.</summary>
         public static readonly Amount TestStruct = (Amount)42.17m;
 
-
         public static NumberFormatInfo GetCustomNumberFormatInfo()
         {
             var info = new NumberFormatInfo
@@ -350,6 +349,19 @@ namespace Qowaiv.Financial.UnitTests
         {
             var act = JsonTester.Write(TestStruct);
             var exp = 42.17m;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void ToJson_ConstructedZero()
+        {
+            var pls = (Amount)12.456m;
+            var min = (Amount)(-12.456m);
+            var sum = min + pls;
+            
+            var act = sum.ToJson().ToString(CultureInfo.InvariantCulture);
+            var exp = "0";
+
             Assert.AreEqual(exp, act);
         }
 

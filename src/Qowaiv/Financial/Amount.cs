@@ -337,7 +337,12 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The serialized JSON number.
         /// </returns>
-        public double ToJson() => (double)m_Value;
+        /// <remarks>
+        /// Some <see cref="decimal.Zero"/> representations will be cast to a
+        /// <see cref="double"/> value that slightly smaller than 0, at least
+        /// enough to have a <see cref="string"/> representation of -0.
+        /// </remarks>
+        public double ToJson() => m_Value == decimal.Zero ? 0 : (double)m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

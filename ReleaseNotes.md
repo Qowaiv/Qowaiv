@@ -1,5 +1,12 @@
 ﻿# Release Notes
 
+### Released 2020-02-18
+#### Qowaiv 5.0.1
+* Fix minor issue with serializing Amount.Zero. (#121) fix
+* DecimalRound.IsNearestRouding => DecimalRound.IsNearestRounding (#119) fix
+* NaN, +oo, -oo are not longer valid values for Elo (#118) fix
+
+
 ### Released 2019-12-11
 #### Qowaiv 5.0.0
 * JSON serialization is convention based. (#115) breaking

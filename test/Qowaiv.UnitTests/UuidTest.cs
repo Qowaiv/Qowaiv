@@ -646,6 +646,35 @@ namespace Qowaiv.UnitTests
             Assert.AreNotEqual(expected, actual);
         }
 
+        [Test]
+        public void NewSequentialUuid_2020Y02M02D_StartsWithALQw6kQOkk()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(2020, 02, 02, 20, 20, 02, 020)))
+            {
+                var actual = Uuid.NewSequentialUuid();
+
+                Assert.AreEqual(UuidVersion.Random, actual.Version);
+                StringAssert.StartsWith("ALQw6kQOkk", actual.ToJson());
+            }
+        }
+
+        [Test]
+        public void NewSequentialUuid_MaxSupportedDate_StartsWith()
+        {
+            var ticks = (0xFF_FFFF_FFFF_FFFF << 5) + 0x8C1_2200_0000_0000;
+            var maxDate = new DateTime(ticks);
+
+            Assert.AreEqual(new DateTime(9306, 12, 04, 18,25, 41).AddTicks(7618400), maxDate);
+
+            using (Clock.SetTimeForCurrentThread(() => maxDate))
+            {
+                var actual = Uuid.NewSequentialUuid();
+
+                Assert.AreEqual(UuidVersion.Random, actual.Version);
+                StringAssert.StartsWith("________", actual.ToJson());
+            }
+        }
+
         #endregion
 
         #region Type converter tests

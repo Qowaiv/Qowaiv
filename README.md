@@ -5,7 +5,7 @@
 
 | version                                                                      | package                                                                     |
 |------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-5.0.0-blue.svg?cacheSeconds=3600)   |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-5.0.1-blue.svg?cacheSeconds=3600)   |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
 |![v](https://img.shields.io/badge/version-5.0.0-blue.svg?cacheSeconds=3600)   |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-3.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
@@ -114,13 +114,17 @@ var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
 var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
 var p = 3.14.Percent(); // Extension on double: 3.14%;
 
+// Casting
+var p = (Percentage)0.500; // 50%
+var p = (Percentage)0.33m; // 33%
+
 // Manipulation
 var p = 13.2.Percent();
 p++; // 14.2%;
 var total = 400;
-total *= (Percentage)0.5; // Total = 200;
+total *= 50.Percent(); // Total = 200;
 var value = 50.0;
-value += (Percentage)0.1; // value 55;
+value += 10.Percent(); // value 55;
 
 var rounded = 17.56.Percent().Round(1); // 17.6%;
 
@@ -135,6 +139,25 @@ Represents a postal code. It supports validation for all countries.
 The UUID (Universally unique identifier) aka GUID (Globally unique identifier) is an
 extension on the System.Guid. It is by default represented by a 22 length string, 
 instead of a 32 length string.
+
+#### Sequential UUID's
+Qowaiv supports sequential UUID's. The taken approach assignes the first 7 bytes
+with a representation of the current time. It sequential given the following limitations:
+* Generated between 2000-01-01 and 9306-12-04
+* Within a timespan of 32 ticks (0.32 nanoseconds) 25% change not to be sequential.
+
+``` C#
+var rnd = Uuid.NewUuid();
+UuidVersion version = rnd.Version; // UuidVersion.Random = 4
+
+var seq = Uuid.NewSequentialUuid(); // sequential random.
+
+var bytes = Encoding.ASCII.GetBytes("Qowaiv");
+
+var md5 = Uuid.GenerateWithMD5(bytes); //   lmZO_haEOTCwGsCcbIZFFg, UUID Version: 3
+var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version: 5
+
+```
 
 ### Week date
 Represents a week based date.

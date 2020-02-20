@@ -137,6 +137,28 @@ namespace Qowaiv
         /// <summary>Initializes a new instance of a UUID.</summary>
         public static Uuid NewUuid() => new Uuid(Guid.NewGuid());
 
+        /// <summary>Initializes a new  instance of a UUID that is sequential.</summary>
+        /// <remarks>
+        /// * The first 7 bytes are based on ticks from <see cref="Clock.UtcNow()"/>.
+        /// * The UUID's generated are sequential between 2000-01-01 and  9306-12-04.
+        /// * Withing a timespan of 32 ticks (0.32 nanoseconds) there is a 25% change
+        ///   that UUID's are not sequential.
+        /// </remarks>
+        public static Uuid NewSequentialUuid()
+        {
+            var ticks = Clock.UtcNow().Ticks - TicksYear2000;
+            var bytes = Guid.NewGuid().ToByteArray();
+            var time = BitConverter.GetBytes(ticks >> 5);
+
+            // flip order of the bytes.
+            for(var index = 0; index <= 6; index++)
+            {
+                bytes[index] = time[6 - index];
+            }
+            return new Guid(bytes);
+        }
+        private const long TicksYear2000 = 0x8C1_2200_0000_0000;
+
         /// <summary>Converts the string to a UUID.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

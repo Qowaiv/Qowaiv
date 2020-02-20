@@ -653,8 +653,8 @@ namespace Qowaiv.UnitTests
             {
                 var actual = Uuid.NewSequentialUuid();
 
-                Assert.AreEqual(UuidVersion.Random, actual.Version);
-                StringAssert.StartsWith("ALQw6kQOkk", actual.ToJson());
+                Assert.AreEqual(UuidVersion.Sequential, actual.Version);
+                StringAssert.StartsWith("6jC0AA5Ekm", actual.ToJson());
             }
         }
 
@@ -670,9 +670,26 @@ namespace Qowaiv.UnitTests
             {
                 var actual = Uuid.NewSequentialUuid();
 
-                Assert.AreEqual(UuidVersion.Random, actual.Version);
+                Assert.AreEqual(UuidVersion.Sequential, actual.Version);
                 StringAssert.StartsWith("________", actual.ToJson());
             }
+        }
+
+        [Test]
+        public void NewSequentialUuid_Multiple_IsOrdered()
+        {
+            var date = new DateTime(2020, 02, 02);
+            var uuids = new List<Uuid>(10000);
+
+            for (var i = 0; i < uuids.Capacity; i++)
+            {
+                using (Clock.SetTimeForCurrentThread(() => date))
+                {
+                    uuids.Add(Uuid.NewSequentialUuid());
+                }
+                date = date.AddTicks(879666 + i);
+            }
+            CollectionAssert.IsOrdered(uuids);
         }
 
         #endregion

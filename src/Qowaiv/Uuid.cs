@@ -148,14 +148,39 @@ namespace Qowaiv
         {
             var ticks = Clock.UtcNow().Ticks - TicksYear2000;
             var bytes = Guid.NewGuid().ToByteArray();
-            var time = BitConverter.GetBytes(ticks >> 5);
 
-            // flip order of the bytes.
-            for(var index = 0; index <= 6; index++)
-            {
-                bytes[index] = time[6 - index];
-            }
-            return new Guid(bytes);
+            // ticks removing 5 bit, should lead to 56 bit.
+            var time = ticks >> 5;
+
+            // we only need 4 bit of randomness in the c part.
+            var c_rnd = bytes[0] >> 4;
+
+            // the lowest 8 bits.
+            var c_time = (byte)time;
+            time >>= 8;
+
+            // The lowest 16 bits.
+            var b = (ushort)time;
+            time >>= 16;
+            // The highest 32 bits.
+            var a = (uint)time;
+            
+            // Copy the random bytes from Guid.NewGuid().
+            var d = bytes[08];
+            var e = bytes[09];
+            var f = bytes[10];
+            var g = bytes[11];
+            var h = bytes[12];
+            var i = bytes[13];
+            var j = bytes[14];
+            var k = bytes[15];
+
+            // construct c-part.
+            int c = c_time;
+            c |= c_rnd << 8;
+            c |= (int)UuidVersion.Sequential << 12;
+
+            return new Guid(a, b, (ushort)c, d, e, f, g, h, i, j, k);
         }
         private const long TicksYear2000 = 0x8C1_2200_0000_0000;
 

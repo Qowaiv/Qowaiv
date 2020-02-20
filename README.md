@@ -150,7 +150,7 @@ with a representation of the current time. It is sequential given the following 
 var rnd = Uuid.NewUuid();
 UuidVersion version = rnd.Version; // UuidVersion.Random = 4
 
-var seq = Uuid.NewSequentialUuid(); // sequential random.
+var seq = Uuid.NewSequentialUuid(); // sequential random, UUID Version: 6
 
 var bytes = Encoding.ASCII.GetBytes("Qowaiv");
 

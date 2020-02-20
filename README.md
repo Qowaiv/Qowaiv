@@ -141,8 +141,8 @@ extension on the System.Guid. It is by default represented by a 22 length string
 instead of a 32 length string.
 
 #### Sequential UUID's
-Qowaiv supports sequential UUID's. The taken approach assignes the first 7 bytes
-with a representation of the current time. It sequential given the following limitations:
+Qowaiv supports sequential UUID's. The taken approach assigns the first 7 bytes
+with a representation of the current time. It is sequential given the following limitations:
 * Generated between 2000-01-01 and 9306-12-04
 * Within a timespan of 32 ticks (0.32 nanoseconds) 25% change not to be sequential.
 

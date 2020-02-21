@@ -77,6 +77,11 @@ namespace Qowaiv.Globalization
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
+            if (obj is null)
+            {
+                return 1;
+            }
+
             if (obj is Country other)
             {
                 return CompareTo(other);

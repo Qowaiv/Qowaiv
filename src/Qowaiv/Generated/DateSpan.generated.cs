@@ -80,6 +80,11 @@ namespace Qowaiv
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
+            if (obj is null)
+            {
+                return 1;
+            }
+
             if (obj is DateSpan other)
             {
                 return CompareTo(other);

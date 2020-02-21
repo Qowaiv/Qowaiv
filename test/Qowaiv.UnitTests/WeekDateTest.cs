@@ -606,20 +606,14 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        /// <summary>Compare with null should throw an exception.</summary>
+        /// <summary>Compare with null should return 1.</summary>
         [Test]
-        public void CompareTo_null_ThrowsArgumentException()
+        public void CompareTo_null_1()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = null;
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be WeekDate."
-            );
+            object @null = null;
+            Assert.AreEqual(1, TestStruct.CompareTo(@null));
         }
+
         /// <summary>Compare with a random object should throw an exception.</summary>
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()

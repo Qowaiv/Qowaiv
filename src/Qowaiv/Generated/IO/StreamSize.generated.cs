@@ -80,6 +80,11 @@ namespace Qowaiv.IO
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
+            if (obj is null)
+            {
+                return 1;
+            }
+
             if (obj is StreamSize other)
             {
                 return CompareTo(other);

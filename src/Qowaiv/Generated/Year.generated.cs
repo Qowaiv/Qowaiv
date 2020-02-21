@@ -76,6 +76,11 @@ namespace Qowaiv
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
+            if (obj is null)
+            {
+                return 1;
+            }
+
             if (obj is Year other)
             {
                 return CompareTo(other);

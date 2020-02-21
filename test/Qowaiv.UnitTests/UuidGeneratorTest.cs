@@ -33,38 +33,6 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(expected, MaxDate);
         }
 
-        [Test]
-        public void Sequential_Prefilled_Index3ShouldBe255()
-        {
-            using (Clock.SetTimeForCurrentThread(() => new DateTime(2000, 01, 01)))
-            {
-                var actual = Uuid.NewSequential(UuidComparer.Default, true);
-                var expected = new byte?[]
-                {
-                    null, null, null, 0xFF,
-                };
-                AssertBytes(expected, actual);
-            }
-        }
-
-        [Test]
-        public void Sequential_SqlServerPrefilled_Index10ShouldBe255()
-        {
-            using (Clock.SetTimeForCurrentThread(() => new DateTime(2000, 01, 01)))
-            {
-                var actual = Uuid.NewSequential(UuidComparer.SqlServer, true);
-                var expected = new byte?[]
-                {
-                    null, null, null, null,
-
-                    null, null, null, null,
-
-                    null, null, 0xFF,
-                };
-                AssertBytes(expected, actual);
-            }
-        }
-
         /// <remarks>Due to the reordening the version ands up in index 7.</remarks>
         [Test]
         public void Sequential_MinDate_First6BytesAre0()

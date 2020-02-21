@@ -140,23 +140,25 @@ The UUID (Universally unique identifier) aka GUID (Globally unique identifier) i
 extension on the System.Guid. It is by default represented by a 22 length string, 
 instead of a 32 length string.
 
-#### Sequential UUID's
-Qowaiv supports sequential UUID's. The taken approach assigns the first 7 bytes
-with a representation of the current time. It is sequential given the following limitations:
-* Generated between 2000-01-01 and 9306-12-04
-* Within a timespan of 32 ticks (0.32 nanoseconds) 25% change not to be sequential.
-
 ``` C#
 var rnd = Uuid.NewUuid();
 UuidVersion version = rnd.Version; // UuidVersion.Random = 4
 
-var seq = Uuid.NewSequential(); // sequential random, UUID Version: 6
-
 var bytes = Encoding.ASCII.GetBytes("Qowaiv");
-
 var md5 = Uuid.GenerateWithMD5(bytes); //   lmZO_haEOTCwGsCcbIZFFg, UUID Version: 3
 var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version: 5
+```
 
+### UUID Comparer
+The UUID Comparer can sort both UUID's as GUID's, Furthermore, is support both
+.NET's default way of sorting as the sorting of SQL Server.
+
+``` C#
+var uuids = new List<Uuid>();
+uuids.Sort(UuidComparer.SqlServer);
+
+var guids = new List<Guid>();
+guids.Sort(UuidComparer.Default);
 ```
 
 ### Week date

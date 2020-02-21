@@ -81,6 +81,11 @@ namespace Qowaiv.Financial
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
+            if (obj is null)
+            {
+                return 1;
+            }
+
             if (obj is Money other)
             {
                 return CompareTo(other);

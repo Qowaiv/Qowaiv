@@ -81,6 +81,11 @@ namespace Qowaiv.Security.Cryptography
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
+            if (obj is null)
+            {
+                return 1;
+            }
+
             if (obj is CryptographicSeed other)
             {
                 return CompareTo(other);

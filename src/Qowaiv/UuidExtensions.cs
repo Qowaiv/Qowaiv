@@ -9,14 +9,14 @@ namespace Qowaiv
         public static UuidVersion GetVersion(this Guid guid)
         {
             var bytes = guid.ToByteArray();
-            var version = bytes[7] >> 4;
+            var version = bytes[Uuid.IndexOfVersion] >> 4;
             return (UuidVersion)version;
         }
 
         internal static void SetVersion(byte[] uuid, UuidVersion version)
         {
-            uuid[7] &= 0x0F;
-            uuid[7] |= unchecked((byte)((int)version << 4));
+            uuid[Uuid.IndexOfVersion] &= 0x0F;
+            uuid[Uuid.IndexOfVersion] |= unchecked((byte)((int)version << 4));
         }
     }
 }

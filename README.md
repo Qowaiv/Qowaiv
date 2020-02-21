@@ -151,11 +151,14 @@ var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version
 
 #### Comparer
 The UUID Comparer can sort both UUID's as GUID's, Furthermore, is support both
-.NET's default way of sorting as the sorting of SQL Server.
+.NET's default way of sorting as the sorting of SQL Server, or MongoDB.
 
 ``` C#
 var uuids = new List<Uuid>();
 uuids.Sort(UuidComparer.SqlServer);
+
+var uuids = new List<Uuid>();
+uuids.Sort(UuidComparer.MongoDb);
 
 var guids = new List<Guid>();
 guids.Sort(UuidComparer.Default);

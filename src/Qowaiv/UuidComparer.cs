@@ -10,6 +10,9 @@ namespace Qowaiv
         /// <summary>Gets the default comparer for <see cref="Guid"/> and <see cref="Uuid"/>.</summary>
         public static readonly UuidComparer Default = new UuidDefaultComparer();
 
+        /// <summary>Gets the comparer for <see cref="Guid"/> and <see cref="Uuid"/> that used the MongoDB byte priority.</summary>
+        public static readonly UuidComparer MongoDb = new UuidMongoDbComparer();
+
         /// <summary>Gets the comparer for <see cref="Guid"/> and <see cref="Uuid"/> that used the SQL Server byte priority.</summary>
         public static readonly UuidComparer SqlServer = new UuidSqlServerComparer();
 

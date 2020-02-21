@@ -79,6 +79,11 @@ namespace Qowaiv.Statistics
         /// <inheritdoc/>
         public int CompareTo(object obj)
         {
+            if (obj is null)
+            {
+                return 1;
+            }
+
             if (obj is Elo other)
             {
                 return CompareTo(other);

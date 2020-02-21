@@ -647,11 +647,23 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void NewSequentialUuid_2020Y02M02D_StartsWithALQw6kQOkk()
+        public void NewSequential_PrefilledGuid_StartsWith123F22FF()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(2000, 01, 01)))
+            {
+                Guid actual = Uuid.NewSequential(UuidComparer.Default, true);
+
+                Assert.AreEqual(UuidVersion.Sequential, actual.GetVersion());
+                StringAssert.StartsWith("123f22ff-", actual.ToString());
+            }
+        }
+
+        [Test]
+        public void NewSequential_2020Y02M02D_StartsWithALQw6kQOkk()
         {
             using (Clock.SetTimeForCurrentThread(() => new DateTime(2020, 02, 02, 20, 20, 02, 020)))
             {
-                var actual = Uuid.NewSequentialUuid();
+                var actual = Uuid.NewSequential();
 
                 Assert.AreEqual(UuidVersion.Sequential, actual.Version);
                 StringAssert.StartsWith("6jC0AA5Ekm", actual.ToJson());
@@ -659,7 +671,7 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void NewSequentialUuid_MaxSupportedDate_StartsWith()
+        public void NewSequential_MaxSupportedDate_StartsWith()
         {
             var ticks = (0xFF_FFFF_FFFF_FFFF << 5) + 0x8C1_2200_0000_0000;
             var maxDate = new DateTime(ticks);
@@ -668,7 +680,7 @@ namespace Qowaiv.UnitTests
 
             using (Clock.SetTimeForCurrentThread(() => maxDate))
             {
-                var actual = Uuid.NewSequentialUuid();
+                var actual = Uuid.NewSequential();
 
                 Assert.AreEqual(UuidVersion.Sequential, actual.Version);
                 StringAssert.StartsWith("________", actual.ToJson());
@@ -676,7 +688,7 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void NewSequentialUuid_Multiple_IsOrdered()
+        public void NewSequential_Multiple_IsOrdered()
         {
             var date = new DateTime(2020, 02, 02);
             var uuids = new List<Uuid>(10000);
@@ -685,11 +697,28 @@ namespace Qowaiv.UnitTests
             {
                 using (Clock.SetTimeForCurrentThread(() => date))
                 {
-                    uuids.Add(Uuid.NewSequentialUuid());
+                    uuids.Add(Uuid.NewSequential());
                 }
                 date = date.AddTicks(879666 + i);
             }
             CollectionAssert.IsOrdered(uuids);
+        }
+
+        [Test]
+        public void NewSequential_MultipleSqlServer_IsOrdered()
+        {
+            var date = new DateTime(2020, 02, 02);
+            var uuids = new List<Uuid>(10000);
+
+            for (var i = 0; i < uuids.Capacity; i++)
+            {
+                using (Clock.SetTimeForCurrentThread(() => date))
+                {
+                    uuids.Add(Uuid.NewSequential(UuidComparer.SqlServer, false));
+                }
+                date = date.AddTicks(879666 + i);
+            }
+            CollectionAssert.IsOrdered(uuids, UuidComparer.SqlServer);
         }
 
         #endregion

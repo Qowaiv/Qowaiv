@@ -149,17 +149,42 @@ var md5 = Uuid.GenerateWithMD5(bytes); //   lmZO_haEOTCwGsCcbIZFFg, UUID Version
 var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version: 5
 ```
 
-### UUID Comparer
+#### Comparer
 The UUID Comparer can sort both UUID's as GUID's, Furthermore, is support both
-.NET's default way of sorting as the sorting of SQL Server.
+.NET's default way of sorting as the sorting of SQL Server, or MongoDB.
 
 ``` C#
 var uuids = new List<Uuid>();
 uuids.Sort(UuidComparer.SqlServer);
 
+var uuids = new List<Uuid>();
+uuids.Sort(UuidComparer.MongoDb);
+
 var guids = new List<Guid>();
 guids.Sort(UuidComparer.Default);
 ```
+
+#### Sequential
+As UUID's are commonly used for the clustered key of a database table. For
+massive database with a lot of inserts (they go hand in hand normally) this can
+be a performance issue, as by default generated UUID's are not sequential, so
+the clustered index gets a lot of random inserts.
+
+By using a sequential UUID this problem can be minimized. Obviously, if you can
+fully rely on the sequential UUID generation by your database of choice, you
+should consider that, but in most cases you want to generate the ID upfront.
+In that case `Uuid.NewSequential()` comes handy:
+
+``` C#
+var uuid = Uuid.NewSequential(UuidComparer.SqlServer);
+```
+
+As databases might (like SQL Server does) order your UUID/GUID's differently
+that .NET does, this generator does that too. Also keep in mind that this generated ID
+is not perfectly sequential; first of all because it has a 0.32 nanosecond
+overlap, but more seriously, as some time may elapse between the generation and
+the storage in the database. Furthermore, these generated UUID's are not sequential
+once mixed with the sequential generated UUID's by your database.
 
 ### Week date
 Represents a week based date.

@@ -259,6 +259,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid fraction.
+        /// </summary>
+        public static string FormatExceptionFraction {
+            get {
+                return ResourceManager.GetString("FormatExceptionFraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid gender.
         /// </summary>
         public static string FormatExceptionGender {

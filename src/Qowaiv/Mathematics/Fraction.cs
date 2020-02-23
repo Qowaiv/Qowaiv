@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Qowaiv.Mathematics
 {
@@ -20,13 +21,14 @@ namespace Qowaiv.Mathematics
     [OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?")]
     [TypeConverter(typeof(FractionTypeConverter))]
     [StructLayout(LayoutKind.Sequential)]
-    public partial struct Fraction : ISerializable
+    public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
     {
         public static readonly Fraction Zero;
         public static readonly Fraction Epsilon = New(1, long.MaxValue);
+        public static readonly Fraction One = Create(1);
 
-        public static readonly Fraction MaxValue = New(long.MaxValue, 1);
-        public static readonly Fraction MinValue = New(long.MaxValue, 1);
+        public static readonly Fraction MaxValue = New(+long.MaxValue, 1);
+        public static readonly Fraction MinValue = New(-long.MaxValue, 1);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private long numerator;
@@ -63,17 +65,15 @@ namespace Qowaiv.Mathematics
             }
             else
             {
-                if (denominator < 0)
-                {
-                    this.numerator = -numerator;
-                    this.denominator = -denominator;
-                }
-                else
-                {
-                    this.numerator = numerator;
-                    this.denominator = denominator;
-                }
+                var negative = numerator < 0 ^ denominator < 0;
+                this.numerator = Math.Abs(numerator);
+                this.denominator = Math.Abs(denominator);
                 Reduce(ref this.numerator, ref this.denominator);
+
+                if (negative)
+                {
+                    this.numerator = -this.numerator;
+                }
             }
         }
 
@@ -101,7 +101,14 @@ namespace Qowaiv.Mathematics
 
         /// <summary>Returns true if the faction is zero.</summary>
         public bool IsZero() => numerator == 0;
+        private long AbsNumerator() => numerator < numerator ? -numerator : numerator;
 
+        /// <summary>Gets the sign of the fraction.</summary>
+        public int Sign() => Math.Sign(numerator);
+
+        internal Fraction Plus() => New(+numerator, denominator);
+        internal Fraction Negate() => New(-numerator, denominator);
+        
 
         public Fraction Multiply(long factor)
         {
@@ -174,13 +181,19 @@ namespace Qowaiv.Mathematics
 
         public Fraction Add(Fraction other)
         {
+            if (IsZero())
+            {
+                return other;
+            }
             if (other.IsZero())
             {
                 return this;
             }
-            long n0 = Numerator;
+
+
+            long n0 = AbsNumerator();
             long d0 = Denominator;
-            long n1 = other.Numerator;
+            long n1 = other.AbsNumerator();
             long d1 = other.Denominator;
 
             Reduce(ref n0, ref d1);
@@ -188,11 +201,20 @@ namespace Qowaiv.Mathematics
 
             checked
             {
-                var n = n0 * d1 + n1 * d0;
+                var n = (n0 * d1) * Sign() + (n1 * d0) * other.Sign();
                 var d = d0 * d1;
                 return New(n, d);
             }
         }
+
+        public Fraction Subtract(Fraction other) => Add(other.Negate());
+
+        public static Fraction operator +(Fraction fraction) => fraction.Plus();
+        public static Fraction operator -(Fraction fraction) => fraction.Negate();
+        
+
+        public static Fraction operator +(Fraction left, Fraction right) => left.Add(right);
+        public static Fraction operator -(Fraction left, Fraction right) => left.Subtract(right);
 
         internal decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
 
@@ -240,7 +262,7 @@ namespace Qowaiv.Mathematics
                 return formatted;
             }
 
-            return $"{Numerator}/{Denominator}";
+            return $"{Numerator}/{(Denominator == 0 ? 1 : Denominator)}";
         }
 
         /// <inheritdoc/>
@@ -264,8 +286,8 @@ namespace Qowaiv.Mathematics
         /// <inheritdoc/>
         public int CompareTo(Fraction other)
         {
-            // TODO: implement.
-            return 0;
+            var delta = this - other;
+            return delta.Sign();
         }
 
         /// <summary>Adds the underlying property of the fraction to the serialization info.</summary>
@@ -367,9 +389,14 @@ namespace Qowaiv.Mathematics
         /// </remarks>
         public static Fraction Create(decimal number, decimal error)
         {
+            if (number < long.MinValue || number > long.MaxValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
+            }
+
             if (error < Epsilon.ToDecimal() || error > 1)
             {
-                throw new ArgumentOutOfRangeException("The error should be between 1/long.MaxValue and 1.");
+                throw new ArgumentOutOfRangeException(nameof(error), QowaivMessages.ArgumentOutOfRange_FractionError);
             }
             if (number == decimal.Zero)
             {
@@ -436,12 +463,23 @@ namespace Qowaiv.Mathematics
             public bool OneOrMore => n >= d;
         }
 
-        /// <summary>Creates a fraction based on decimal number.</summary>
+        /// <summary>Creates a fraction based on a <see cref="decimal"/>.</summary>
         /// <param name="number">
         /// The decimal value to represent as a fraction.
         /// </param>
         public static Fraction Create(decimal number) => Create(number, Epsilon.ToDecimal());
 
-        public static Fraction Create(double number) => Create((decimal)number, Epsilon.ToDecimal());
+        /// <summary>Creates a fraction based on a <see cref="double"/>.</summary>
+        /// <param name="number">
+        /// The double value to represent as a fraction.
+        /// </param>
+        public static Fraction Create(double number)
+        {
+            if(number < (double)decimal.MinValue || number > (double)decimal.MaxValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
+            }
+            return Create((decimal)number, Epsilon.ToDecimal());
+        }
     }
 }

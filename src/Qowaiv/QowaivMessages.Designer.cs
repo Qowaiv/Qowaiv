@@ -115,6 +115,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The allowed error when converting a Decimal to a Fraction should be between Fraction.Epsilon and 1..
+        /// </summary>
+        public static string ArgumentOutOfRange_FractionError {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_FractionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Percentages can only round to between -26 and 26 digits of precision..
         /// </summary>
         public static string ArgumentOutOfRange_PercentageRound {
@@ -543,6 +552,15 @@ namespace Qowaiv {
         public static string OverflowException_DecimalRound {
             get {
                 return ResourceManager.GetString("OverflowException_DecimalRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value was either too large or too small for a Fraction..
+        /// </summary>
+        public static string OverflowException_Fraction {
+            get {
+                return ResourceManager.GetString("OverflowException_Fraction", resourceCulture);
             }
         }
     }

@@ -21,7 +21,7 @@ namespace Qowaiv.Mathematics
                 return Fraction.Create(dec);
             }
             // Percentages are fine.
-            if (Percentage.TryParse(s, out var percentage))
+            if (Percentage.TryParse(s, info, out var percentage))
             {
                 return Fraction.Create((decimal)percentage);
             }

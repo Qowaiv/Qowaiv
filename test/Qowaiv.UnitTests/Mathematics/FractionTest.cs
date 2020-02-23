@@ -166,7 +166,8 @@ namespace Qowaiv.UnitTests.Mathematics
             ISerializable obj = TestStruct;
             var info = new SerializationInfo(typeof(Fraction), new FormatterConverter());
             obj.GetObjectData(info, default);
-            Assert.AreEqual((long)2, info.GetValue("Value", typeof(long)));
+            Assert.AreEqual(-69, info.GetInt64("numerator"));
+            Assert.AreEqual(17, info.GetInt64("denominator"));
         }
 
         [Test]
@@ -191,14 +192,14 @@ namespace Qowaiv.UnitTests.Mathematics
         public void XmlSerialize_TestStruct_AreEqual()
         {
             var act = SerializationTest.XmlSerialize(TestStruct);
-            var exp = "xmlstring";
+            var exp = "-69/17";
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<FractionSerializeObject>("xmlstring");
+            var act = SerializationTest.XmlDeserialize<Fraction>("-69/17");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -266,7 +267,7 @@ namespace Qowaiv.UnitTests.Mathematics
 
         [TestCase("Invalid input")]
         [TestCase("2017-06-11")]
-        [TestCase(long.MinValue)]
+        [TestCase(double.MaxValue)]
         [TestCase(double.MinValue)]
         public void FromJson_Invalid_Throws(object json)
         {
@@ -286,7 +287,7 @@ namespace Qowaiv.UnitTests.Mathematics
         public void ToString_Zero_StringEmpty()
         {
             var act = Fraction.Zero.ToString();
-            var exp = "0";
+            var exp = "0/1";
             Assert.AreEqual(exp, act);
         }
 
@@ -294,29 +295,7 @@ namespace Qowaiv.UnitTests.Mathematics
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
-            Assert.AreEqual(exp, act);
-        }
-
-        [TestCase("en-US", "", "ComplexPattern", "ComplexPattern")]
-        [TestCase("nl-BE", null, "1600,1", "1600,1")]
-        [TestCase("en-GB", null, "1600.1", "1600.1")]
-        [TestCase("nl-BE", "0000", "800", "0800")]
-        [TestCase("en-GB", "0000", "800", "0800")]
-        public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
-        {
-            using (new CultureInfoScope(culture))
-            {
-                var actual = Fraction.Parse(str).ToString(format);
-                Assert.AreEqual(expected, actual);
-            }
-        }
-
-        [Test]
-        public void ToString_FormatValueSpanishEcuador_AreEqual()
-        {
-            var act = Fraction.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
-            var exp = "01700,0";
+            var exp = "Unit Test Formatter, value: '-69/17', format: 'Unit Test Format'";
             Assert.AreEqual(exp, act);
         }
 
@@ -329,31 +308,31 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("ComplexPattern", default(Fraction));
+            DebuggerDisplayAssert.HasResult("0/1", default(Fraction));
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
+            DebuggerDisplayAssert.HasResult("-69/17", TestStruct);
         }
 
         /// <summary>GetHash should not fail for Fraction.Zero.</summary>
         [Test]
         public void GetHash_Zero_Hash()
         {
-            Assert.AreEqual(-1, Fraction.Zero.GetHashCode());
+            Assert.AreEqual(0, Fraction.Zero.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
         [Test]
         public void GetHash_TestStruct_Hash()
         {
-            Assert.AreEqual(-1, TestStruct.GetHashCode());
+            Assert.AreEqual(132548, TestStruct.GetHashCode());
         }
 
         [Test]
-        public void Equals_EmptyEmpty_IsTrue()
+        public void Equals_ZeroZero_IsTrue()
         {
             Assert.IsTrue(Fraction.Zero.Equals(Fraction.Zero));
         }
@@ -361,8 +340,8 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            var l = Fraction.Parse("formatted", CultureInfo.InvariantCulture);
-            var r = Fraction.Parse("unformatted", CultureInfo.InvariantCulture);
+            var l = Fraction.Parse("+71,234/-71,234", CultureInfo.InvariantCulture);
+            var r = Fraction.Parse("-1", CultureInfo.InvariantCulture);
             Assert.IsTrue(l.Equals(r));
         }
 
@@ -422,10 +401,10 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void OrderBy_Fraction_AreEqual()
         {
-            var item0 = Fraction.Parse("ComplexRegexPatternA");
-            var item1 = Fraction.Parse("ComplexRegexPatternB");
-            var item2 = Fraction.Parse("ComplexRegexPatternC");
-            var item3 = Fraction.Parse("ComplexRegexPatternD");
+            var item0 = Fraction.Parse("1/40");
+            var item1 = Fraction.Parse("3/29");
+            var item2 = Fraction.Parse("5/21");
+            var item3 = Fraction.Parse("7234/17");
             var inp = new List<Fraction> { Fraction.Zero, item3, item2, item0, item1, Fraction.Zero };
             var exp = new List<Fraction> { Fraction.Zero, Fraction.Zero, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
@@ -436,10 +415,10 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void OrderByDescending_Fraction_AreEqual()
         {
-            var item0 = Fraction.Parse("ComplexRegexPatternA");
-            var item1 = Fraction.Parse("ComplexRegexPatternB");
-            var item2 = Fraction.Parse("ComplexRegexPatternC");
-            var item3 = Fraction.Parse("ComplexRegexPatternD");
+            var item0 = Fraction.Parse("1/40");
+            var item1 = Fraction.Parse("3/29");
+            var item2 = Fraction.Parse("5/21");
+            var item3 = Fraction.Parse("7234/17");
             var inp = new List<Fraction> { Fraction.Zero, item3, item2, item0, item1, Fraction.Zero };
             var exp = new List<Fraction> { item3, item2, item1, item0, Fraction.Zero, Fraction.Zero };
             var act = inp.OrderByDescending(item => item).ToList();

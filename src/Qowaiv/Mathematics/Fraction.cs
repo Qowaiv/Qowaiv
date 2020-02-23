@@ -2,16 +2,15 @@
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
+using Qowaiv.Conversion.Mathematics;
+using Qowaiv.Formatting;
+using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using Qowaiv.Conversion.Mathematics;
-using Qowaiv.Formatting;
-using Qowaiv.Json;
-using Qowaiv.Text;
 
 namespace Qowaiv.Mathematics
 {
@@ -34,6 +33,21 @@ namespace Qowaiv.Mathematics
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private long denominator;
 
+        /// <summary>Creates a new instance of the <see cref="Fraction"/> class.</summary>
+        /// <param name="numerator">
+        /// The numerator part of the fraction.
+        /// </param>
+        /// <param name="denominator">
+        /// The denominator part of the fraction.
+        /// </param>
+        /// <exception cref="DivideByZeroException">
+        /// if the <paramref name="denominator"/> is zero.
+        /// </exception>
+        /// <remarks>
+        /// If the fraction is negative, the numerator 'carries' the sign.
+        /// Furthermore, the numerator and denominator are reduced (so 2/4
+        /// becomes 1/2).
+        /// </remarks>
         public Fraction(long numerator, long denominator)
         {
             if (denominator == 0)
@@ -41,16 +55,26 @@ namespace Qowaiv.Mathematics
                 throw new DivideByZeroException();
             }
 
-            if (denominator < 0)
+            // In case of zero, is should represent the default case.
+            if (numerator == 0)
             {
-                denominator = -denominator;
-                numerator = -numerator;
+                this.numerator = default;
+                this.denominator = default;
             }
-
-            this.numerator = numerator;
-            this.denominator = denominator;
-
-            Reduce(ref this.numerator, ref this.denominator);
+            else
+            {
+                if (denominator < 0)
+                {
+                    this.numerator = -numerator;
+                    this.denominator = -denominator;
+                }
+                else
+                {
+                    this.numerator = numerator;
+                    this.denominator = denominator;
+                }
+                Reduce(ref this.numerator, ref this.denominator);
+            }
         }
 
         /// <summary>Initializes a new instance of the fraction based on the serialization info.</summary>
@@ -170,6 +194,8 @@ namespace Qowaiv.Mathematics
             }
         }
 
+        internal decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
+
         /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
         private static void Reduce(ref long a, ref long b)
         {
@@ -199,7 +225,6 @@ namespace Qowaiv.Mathematics
             }
             return a;
         }
-
 
         /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
         /// <param name = "format">
@@ -284,7 +309,7 @@ namespace Qowaiv.Mathematics
         #region (Explicit) casting
 
         public static explicit operator Fraction(long n) => n == 0 ? Zero : New(n, 1);
-        public static explicit operator decimal(Fraction fraction) => fraction.IsZero() ? decimal.Zero : fraction.numerator / (decimal)fraction.denominator;
+        public static explicit operator decimal(Fraction fraction) => fraction.ToDecimal();
         public static explicit operator double(Fraction fraction) => fraction.IsZero() ? 0d : fraction.numerator / (double)fraction.denominator;
 
         ///// <summary>Casts the fraction to a <see cref = "long "/>.</summary>
@@ -328,22 +353,95 @@ namespace Qowaiv.Mathematics
         }
 
 
-        public static Fraction Create(decimal number)
+        public static Fraction Create(long number) => number == 0 ? Zero : New(number, 1);
+
+        /// <summary>Creates a fraction based on decimal number.</summary>
+        /// <param name="number">
+        /// The decimal value to represent as a fraction.
+        /// </param>
+        /// <param name="error">
+        /// The allowed error.
+        /// </param>
+        /// <remarks>
+        /// Inspired by "Sjaak", see: https://stackoverflow.com/a/45314258/2266405
+        /// </remarks>
+        public static Fraction Create(decimal number, decimal error)
         {
-            throw new NotImplementedException();
+            if (error < Epsilon.ToDecimal() || error > 1)
+            {
+                throw new ArgumentOutOfRangeException("The error should be between 1/long.MaxValue and 1.");
+            }
+            if (number == decimal.Zero)
+            {
+                return Zero;
+            }
+
+            // Deal with negative values.
+            var sign = number < 0 ? -1 : 1;
+            var value = sign == 1 ? number : -number;
+            var integer = (long)value;
+            value -= integer;
+
+            // The boundaries.
+            var minValue = value - error;
+            var maxValue = value + error;
+
+            // Already within the error margin.
+            if (minValue < 0)
+            {
+                return Create(sign * integer);
+            }
+
+            if (maxValue > 1)
+            {
+                return Create(sign * ++integer);
+            }
+
+            // The two parts of the denominator to find.
+            long d_lo = 1;
+            long d_hi = (long)(1 / maxValue);
+
+            var f_lo = new DecimalFraction { n = minValue, d = 1 - d_hi * minValue };
+            var f_hi = new DecimalFraction { n = 1 - d_hi * maxValue, d = maxValue };
+
+            while (f_lo.OneOrMore)
+            {
+                // Improve the lower part.
+                var step = f_lo.Value;
+                f_lo.n -= step * f_lo.d;
+                f_hi.d -= step * f_hi.n;
+                d_lo += step * d_hi;
+
+                if (!f_hi.OneOrMore) { break; }
+
+                // improve the higher part.
+                step = f_hi.Value;
+                f_lo.d -= step * f_lo.n;
+                f_hi.n -= step * f_hi.d;
+                d_hi += step * d_lo;
+            }
+
+            long d = d_lo + d_hi;
+            long n = (long)(value * d + 0.5m);
+            return New(sign * (integer * d + n), d);
+        }
+        /// <remarks>
+        /// An in-memory helper class to store a decimal numerator and decimal denominator.
+        /// </remarks>
+        private ref struct DecimalFraction
+        {
+            public decimal n;
+            public decimal d;
+            public long Value => (long)(n / d);
+            public bool OneOrMore => n >= d;
         }
 
-        public static Fraction Create(long number)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>Creates a fraction based on decimal number.</summary>
+        /// <param name="number">
+        /// The decimal value to represent as a fraction.
+        /// </param>
+        public static Fraction Create(decimal number) => Create(number, Epsilon.ToDecimal());
 
-
-        private static Fraction Create(double json)
-        {
-            throw new NotImplementedException();
-        }
-
-
+        public static Fraction Create(double number) => Create((decimal)number, Epsilon.ToDecimal());
     }
 }

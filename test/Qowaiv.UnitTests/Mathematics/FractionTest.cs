@@ -40,8 +40,11 @@ namespace Qowaiv.UnitTests.Mathematics
 
         [TestCase(17, 1, "17")]
         [TestCase(17, 1, "+17")]
-        [TestCase(12, 1, "-12")]
+        [TestCase(-12, 1, "-12")]
         [TestCase(12_345, 1, "12,345")]
+        [TestCase(-1, 4, "-0.25")]
+        [TestCase(487, 1000, "48.70%")]
+        [TestCase(487, 1000, "487.0‰")]
         [TestCase(1, 3, "1/3")]
         [TestCase(1, 3, "+1/3")]
         [TestCase(-1, 3, "-1/3")]
@@ -69,24 +72,6 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual(default(Fraction), val);
         }
 
-        /// <summary>TryParse with specified string value should be valid.</summary>
-        [Test]
-        public void TyrParse_StringValue_IsValid()
-        {
-            string str = "string";
-            Assert.IsTrue(Fraction.TryParse(str, out var val));
-            Assert.AreEqual(str, val.ToString());
-        }
-
-        /// <summary>TryParse with specified string value should be invalid.</summary>
-        [Test]
-        public void TyrParse_StringValue_IsNotValid()
-        {
-            string str = "invalid";
-            Assert.IsFalse(Fraction.TryParse(str, out var val));
-            Assert.AreEqual(default(Fraction), val);
-        }
-
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
@@ -96,7 +81,6 @@ namespace Qowaiv.UnitTests.Mathematics
                 {
                     Fraction.Parse("InvalidInput");
                 }
-
                 , "Not a valid fraction");
             }
         }
@@ -121,6 +105,39 @@ namespace Qowaiv.UnitTests.Mathematics
                 var act = Fraction.TryParse("InvalidInput");
                 Assert.AreEqual(exp, act);
             }
+        }
+
+        [TestCase(0, 1, "0")]
+        [TestCase(00000003, 000000010, "0.3")]
+        [TestCase(00000033, 000000100, "0.33")]
+        [TestCase(00000333, 000001000, "0.333")]
+        [TestCase(00003333, 000010000, "0.3333")]
+        [TestCase(00033333, 000100000, "0.33333")]
+        [TestCase(00333333, 001000000, "0.333333")]
+        [TestCase(03333333, 010000000, "0.3333333")]
+        [TestCase(33333333, 100000000, "0.33333333")]
+        [TestCase(333333333, 1000000000, "0.333333333")]
+        [TestCase(1, 3, "0.33333333333333333333333")]
+        public void Create(long numerator, long denominator, decimal number)
+        {
+            var actual = Fraction.Create(number);
+            var expected = new Fraction(numerator, denominator);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(0, 1, 0, 8, "Should set zero")]
+        [TestCase(1, 4, 2, 8, "Should reduce")]
+        [TestCase(-1, 4, -2, 8, "Should reduce")]
+        [TestCase(1, 4, 3, 12, "Should reduce")]
+        [TestCase(-1, 4, -3, 12, "Should reduce")]
+        [TestCase(3, 7, -3, -7, "Should have no signs")]
+        [TestCase(-3, 7, 3, -7, "Should have no sign on denominator")]
+        [TestCase(-3, 7, -3, 7, "Should have no sign on denominator")]
+        public void Constructor(long e_n, long e_d, long numerator, long denominator, string description)
+        {
+            var actual = new Fraction(e_n, e_d);
+            var expected = new Fraction(numerator, denominator);
+            Assert.AreEqual(expected, actual, description);
         }
 
         [Test]

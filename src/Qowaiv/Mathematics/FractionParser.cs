@@ -5,20 +5,25 @@ namespace Qowaiv.Mathematics
 {
     internal static class FractionParser
     {
-        private const NumberStyles DenominatorStyle = NumberStyles.Integer;
-        private const NumberStyles NominatorStyle = DenominatorStyle;
+        private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands;
+        private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint;
 
         public static Fraction? Parse(string s, NumberFormatInfo info)
         {
-            // A integer is fine.
-            if (long.TryParse(s, NominatorStyle, info, out var lng))
+            // Integers are fine.
+            if (long.TryParse(s, IntegerStyle, info, out var lng))
             {
                 return Fraction.Create(lng);
             }
-            // Decimals are fine
-            if(decimal.TryParse(s, NominatorStyle, info, out var dec))
+            // Decimals are fine.
+            if (decimal.TryParse(s, DecimalStyle, info, out var dec) && dec >= long.MinValue && dec <= long.MaxValue)
             {
                 return Fraction.Create(dec);
+            }
+            // Percentages are fine.
+            if (Percentage.TryParse(s, out var percentage))
+            {
+                return Fraction.Create((decimal)percentage);
             }
 
             var plus = info.PositiveSign;
@@ -43,7 +48,7 @@ namespace Qowaiv.Mathematics
             }
 
             // Detect the nominator.
-            for(/**/; pos < str.Length; pos++)
+            for (/**/; pos < str.Length; pos++)
             {
                 var ch = str[pos];
 
@@ -51,7 +56,7 @@ namespace Qowaiv.Mathematics
                 {
                     nominator.Add(ch);
                 }
-                else if(IsDivisionOperator(ch))
+                else if (IsDivisionOperator(ch))
                 {
                     pos++;
                     break;

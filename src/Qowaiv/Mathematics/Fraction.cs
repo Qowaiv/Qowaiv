@@ -101,7 +101,7 @@ namespace Qowaiv.Mathematics
 
         /// <summary>Returns true if the faction is zero.</summary>
         public bool IsZero() => numerator == 0;
-        private long AbsNumerator() => numerator < numerator ? -numerator : numerator;
+        private long AbsNumerator() => numerator < 0 ? -numerator : numerator;
 
         /// <summary>Gets the sign of the fraction.</summary>
         public int Sign() => Math.Sign(numerator);
@@ -190,7 +190,6 @@ namespace Qowaiv.Mathematics
                 return this;
             }
 
-
             long n0 = AbsNumerator();
             long d0 = Denominator;
             long n1 = other.AbsNumerator();
@@ -201,9 +200,10 @@ namespace Qowaiv.Mathematics
 
             checked
             {
+                var d_gcd = Reduce(ref d0, ref d1);
                 var n = (n0 * d1) * Sign() + (n1 * d0) * other.Sign();
                 var d = d0 * d1;
-                return New(n, d);
+                return New(n / d_gcd, d);
             }
         }
 
@@ -219,17 +219,13 @@ namespace Qowaiv.Mathematics
         internal decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
 
         /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
-        private static void Reduce(ref long a, ref long b)
+        private static long Reduce(ref long a, ref long b)
         {
-            // while both are even.
-            while ((a & 1) == 0 && (b & 1) == 0)
-            {
-                a >>= 1;
-                b >>= 1;
-            }
             var gcd = Gcd(a, b);
             a /= gcd;
             b /= gcd;
+
+            return gcd;
         }
 
         /// <summary>Gets the Greatest Common Divisor.</summary>
@@ -238,14 +234,22 @@ namespace Qowaiv.Mathematics
         /// </remarks>
         private static long Gcd(long a, long b)
         {
+            var even = 1;
             long remainder;
+            // while both are even.
+            while ((a & 1) == 0 && (b & 1) == 0)
+            {
+                a >>= 1;
+                b >>= 1;
+                even <<= 1;
+            }
             while (b != 0)
             {
                 remainder = a % b;
                 a = b;
                 b = remainder;
             }
-            return a;
+            return a * even;
         }
 
         /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>

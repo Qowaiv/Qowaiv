@@ -22,5 +22,22 @@ namespace Qowaiv.UnitTests.Mathematics
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestCase("1/3", "1/4", "7/12")]
+        [TestCase("1/4", "1/3", "7/12")]
+        [TestCase("1/4", "1/12", "1/3")]
+        public void Add(Fraction left, Fraction right, Fraction expected)
+        {
+            var actual = left + right;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("1/3", "1/4", "1/12")]
+        [TestCase("1/4", "1/3", "-1/12")]
+        public void Subtract(Fraction left, Fraction right, Fraction expected)
+        {
+            var actual = left - right;
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

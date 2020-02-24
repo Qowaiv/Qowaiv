@@ -401,9 +401,9 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void OrderBy_Fraction_AreEqual()
         {
-            var item0 = Fraction.Parse("1/40");
-            var item1 = Fraction.Parse("3/29");
-            var item2 = Fraction.Parse("5/21");
+            var item0 = Fraction.Parse("3/40");
+            var item1 = Fraction.Parse("1/10");
+            var item2 = Fraction.Parse("7/30");
             var item3 = Fraction.Parse("7234/17");
             var inp = new List<Fraction> { Fraction.Zero, item3, item2, item0, item1, Fraction.Zero };
             var exp = new List<Fraction> { Fraction.Zero, Fraction.Zero, item0, item1, item2, item3 };
@@ -415,9 +415,9 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void OrderByDescending_Fraction_AreEqual()
         {
-            var item0 = Fraction.Parse("1/40");
-            var item1 = Fraction.Parse("3/29");
-            var item2 = Fraction.Parse("5/21");
+            var item0 = Fraction.Parse("3/41");
+            var item1 = Fraction.Parse("5/41");
+            var item2 = Fraction.Parse("7/30");
             var item3 = Fraction.Parse("7234/17");
             var inp = new List<Fraction> { Fraction.Zero, item3, item2, item0, item1, Fraction.Zero };
             var exp = new List<Fraction> { item3, item2, item1, item0, Fraction.Zero, Fraction.Zero };
@@ -448,69 +448,69 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual("Argument must be Fraction. (Parameter 'obj')", x.Message);
         }
 
-        //[Test]
-        //public void LessThan_17LT19_IsTrue()
-        //{
-        //    Fraction l = 17;
-        //    Fraction r = 19;
-        //    Assert.IsTrue(l < r);
-        //}
+        [Test]
+        public void LessThan_17LT19_IsTrue()
+        {
+            Fraction l = 17.DividedBy(2);
+            Fraction r = 19.DividedBy(2);
+            Assert.IsTrue(l < r);
+        }
 
-        //[Test]
-        //public void GreaterThan_21LT19_IsTrue()
-        //{
-        //    Fraction l = 21;
-        //    Fraction r = 19;
-        //    Assert.IsTrue(l > r);
-        //}
+        [Test]
+        public void GreaterThan_21LT19_IsTrue()
+        {
+            Fraction l = 21.DividedBy(2);
+            Fraction r = 19.DividedBy(2);
+            Assert.IsTrue(l > r);
+        }
 
-        //[Test]
-        //public void LessThanOrEqual_17LT19_IsTrue()
-        //{
-        //    Fraction l = 17;
-        //    Fraction r = 19;
-        //    Assert.IsTrue(l <= r);
-        //}
+        [Test]
+        public void LessThanOrEqual_17LT19_IsTrue()
+        {
+            Fraction l = 17.DividedBy(2);
+            Fraction r = 19.DividedBy(2);
+            Assert.IsTrue(l <= r);
+        }
 
-        //[Test]
-        //public void GreaterThanOrEqual_21LT19_IsTrue()
-        //{
-        //    Fraction l = 21;
-        //    Fraction r = 19;
-        //    Assert.IsTrue(l >= r);
-        //}
+        [Test]
+        public void GreaterThanOrEqual_21LT19_IsTrue()
+        {
+            Fraction l = 21.DividedBy(2);
+            Fraction r = 19.DividedBy(2);
+            Assert.IsTrue(l >= r);
+        }
 
-        //[Test]
-        //public void LessThanOrEqual_17LT17_IsTrue()
-        //{
-        //    Fraction l = 17;
-        //    Fraction r = 17;
-        //    Assert.IsTrue(l <= r);
-        //}
+        [Test]
+        public void LessThanOrEqual_17LT17_IsTrue()
+        {
+            Fraction l = 17.DividedBy(2);
+            Fraction r = 17.DividedBy(2);
+            Assert.IsTrue(l <= r);
+        }
 
-        //[Test]
-        //public void GreaterThanOrEqual_21LT21_IsTrue()
-        //{
-        //    Fraction l = 21;
-        //    Fraction r = 21;
-        //    Assert.IsTrue(l >= r);
-        //}
+        [Test]
+        public void GreaterThanOrEqual_21LT21_IsTrue()
+        {
+            Fraction l = 21.DividedBy(2);
+            Fraction r = 21.DividedBy(2);
+            Assert.IsTrue(l >= r);
+        }
 
-        //[Test]
-        //public void Explicit_Int32ToFraction_AreEqual()
-        //{
-        //    var exp = TestStruct;
-        //    var act = (Fraction)123456789;
-        //    Assert.AreEqual(exp, act);
-        //}
+        [Test]
+        public void Explicit_Int32ToFraction_AreEqual()
+        {
+            var exp = TestStruct;
+            var act = (Fraction)123456789;
+            Assert.AreEqual(exp, act);
+        }
 
-        //[Test]
-        //public void Explicit_FractionToInt32_AreEqual()
-        //{
-        //    var exp = 123456789;
-        //    var act = (int)TestStruct;
-        //    Assert.AreEqual(exp, act);
-        //}
+        [Test]
+        public void Explicit_FractionToInt32_AreEqual()
+        {
+            var exp = 123456789;
+            var act = (int)TestStruct;
+            Assert.AreEqual(exp, act);
+        }
 
         [Test]
         public void ConverterExists_Fraction_IsTrue()

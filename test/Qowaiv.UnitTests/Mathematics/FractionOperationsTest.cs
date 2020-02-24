@@ -131,7 +131,7 @@ namespace Qowaiv.UnitTests.Mathematics
             StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
         }
         [Test]
-        public void Add_long()
+        public void Add_FractionPlusLong()
         {
             var fraction = 1.DividedBy(3);
             var actual = fraction + 2L;
@@ -140,10 +140,28 @@ namespace Qowaiv.UnitTests.Mathematics
         }
 
         [Test]
-        public void Add_int()
+        public void Add_LongPlusFraction()
         {
             var fraction = 1.DividedBy(3);
-            var actual = fraction + 2L;
+            var actual = 2L + fraction;
+            var expected = 7.DividedBy(3);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Add_FractionPlusInt()
+        {
+            var fraction = 1.DividedBy(3);
+            var actual = fraction + 2;
+            var expected = 7.DividedBy(3);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Add_IntPlusFraction()
+        {
+            var fraction = 1.DividedBy(3);
+            var actual = 2 + fraction;
             var expected = 7.DividedBy(3);
             Assert.AreEqual(expected, actual);
         }
@@ -160,8 +178,56 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual(expected, left + right);
         }
 
+        [Test]
+        public void Subtract_Overflow()
+        {
+            var fraction = new Fraction(17, long.MaxValue - 3);
+            var x = Assert.Catch<OverflowException>(() => fraction.Subtract(8.DividedBy(long.MaxValue)));
+            StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
+        }
+        [Test]
+        public void Subtract_FractionMinLong()
+        {
+            var fraction = 1.DividedBy(3);
+            var actual = fraction - 2L;
+            var expected = -5.DividedBy(3);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Subtract_LongMinFraction()
+        {
+            var fraction = 1.DividedBy(3);
+            var actual = 2L - fraction;
+            var expected = 5.DividedBy(3);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Subtract_FractionMinInt()
+        {
+            var fraction = 1.DividedBy(3);
+            var actual = fraction - 2;
+            var expected = -5.DividedBy(3);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Subtract_IntMinFraction()
+        {
+            var fraction = 1.DividedBy(3);
+            var actual = 2 - fraction;
+            var expected = 5.DividedBy(3);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("1/4", "0", "1/4")]
+        [TestCase("0", "1/4", "-1/4")]
         [TestCase("1/3", "1/4", "1/12")]
         [TestCase("1/4", "1/3", "-1/12")]
+        [TestCase("1/4", "1/12", "1/6")]
+        [TestCase("-1/4", "-1/12", "-1/6")]
+        [TestCase("-1/4", "1/12", "-1/3")]
         public void Subtract(Fraction left, Fraction right, Fraction expected)
         {
             Assert.AreEqual(expected, left - right);

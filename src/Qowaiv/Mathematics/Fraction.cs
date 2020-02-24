@@ -343,11 +343,10 @@ namespace Qowaiv.Mathematics
         /// <inheritdoc/>
         public int CompareTo(Fraction other)
         {
-            if(denominator == other.denominator)
+            if (denominator == other.denominator || IsZero() || other.IsZero())
             {
                 return numerator.CompareTo(other.numerator);
             }
-
             // To prevent overflows, normalize the numerators as double only.
             var self = (double)numerator * other.denominator;
             var othr = (double)other.numerator * denominator;

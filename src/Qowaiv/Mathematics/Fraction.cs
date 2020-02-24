@@ -423,7 +423,7 @@ namespace Qowaiv.Mathematics
         {
             if (number < MinValue.numerator || number > MaxValue.numerator)
             {
-                throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
+                throw new OverflowException(QowaivMessages.OverflowException_Fraction);
             }
             return Create(number, MinimumError);
         }
@@ -432,7 +432,7 @@ namespace Qowaiv.Mathematics
         {
             if (number < MinValue.numerator || number > MaxValue.numerator)
             {
-                throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
+                throw new OverflowException(QowaivMessages.OverflowException_Fraction);
             }
             return Create((decimal)number, MinimumError);
         }
@@ -585,7 +585,7 @@ namespace Qowaiv.Mathematics
         /// <param name="number">
         /// The long value to represent as a fraction.
         /// </param>
-        private static Fraction Create(long number) => number == 0 ? Zero : New(number, 1);
+        public static Fraction Create(long number) => number == 0 ? Zero : New(number, 1);
 
         /// <summary>Creates a new instance of the <see cref="Fraction"/> class.</summary>
         /// <exception cref="OverflowException">

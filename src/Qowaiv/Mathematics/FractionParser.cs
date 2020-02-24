@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Text;
+using System;
 using System.Globalization;
 
 namespace Qowaiv.Mathematics
@@ -11,17 +12,17 @@ namespace Qowaiv.Mathematics
         public static Fraction? Parse(string s, NumberFormatInfo info)
         {
             // Integers are fine.
-            if (long.TryParse(s, IntegerStyle, info, out var lng))
+            if (long.TryParse(s, IntegerStyle, info, out var lng) && IsValid(lng))
             {
                 return Fraction.Create(lng);
             }
             // Decimals are fine.
-            if (decimal.TryParse(s, DecimalStyle, info, out var dec) && dec >= long.MinValue && dec <= long.MaxValue)
+            if (decimal.TryParse(s, DecimalStyle, info, out var dec) && IsValid(dec))
             {
                 return Fraction.Create(dec);
             }
             // Percentages are fine.
-            if (Percentage.TryParse(s, info, out var percentage))
+            if (Percentage.TryParse(s, info, out var percentage) && IsValid((decimal)percentage))
             {
                 return Fraction.Create((decimal)percentage);
             }
@@ -76,6 +77,12 @@ namespace Qowaiv.Mathematics
 
             return new Fraction(n, d);
         }
+
+        /// <summary>All long values are valid, except <see cref="long.MinValue"/>.</summary>
+        private static bool IsValid(long number) => number != long.MinValue;
+
+        /// <summary>Number should be in the range of <see cref="Fraction.MinValue"/> and <see cref="Fraction.MaxValue"/>.</summary>
+        private static bool IsValid(decimal number) => number >= Fraction.MinValue.Numerator && number <= Fraction.MaxValue.Numerator;
 
         /// <summary>Returns true if the <see cref="char"/> is /, : or ÷.</summary>
         private static bool IsDivisionOperator(char ch) => "/:÷".IndexOf(ch) != Parsing.NotFound;

@@ -267,16 +267,22 @@ namespace Qowaiv.UnitTests.Mathematics
 
         [TestCase("Invalid input")]
         [TestCase("2017-06-11")]
-        [TestCase(double.MaxValue)]
-        [TestCase(double.MinValue)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<Fraction>(json));
         }
 
+        [TestCase(double.MaxValue)]
+        [TestCase(double.MinValue)]
+        public void FromJson_Invalid_Overflows(object json)
+        {
+            Assert.Catch<OverflowException>(() => JsonTester.Read<Fraction>(json));
+        }
+
         [TestCase("4/1", 4L)]
         [TestCase("3/1", 3.0)]
         [TestCase("1/3", "14/42")]
+        [TestCase("13/100", "13%")]
         public void FromJson(Fraction expected, object json)
         {
             var actual = JsonTester.Read<Fraction>(json);
@@ -499,7 +505,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Explicit_Int32ToFraction_AreEqual()
         {
-            var exp = TestStruct;
+            var exp = 123456789.DividedBy(1);
             var act = (Fraction)123456789;
             Assert.AreEqual(exp, act);
         }
@@ -507,9 +513,25 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Explicit_FractionToInt32_AreEqual()
         {
-            var exp = 123456789;
-            var act = (int)TestStruct;
-            Assert.AreEqual(exp, act);
+            Assert.AreEqual(-69 / 17, (int)TestStruct);
+        }
+
+        [Test]
+        public void Explicit_FractionToInt64_AreEqual()
+        {
+            Assert.AreEqual(-69/17L, (long)TestStruct);
+        }
+
+        [Test]
+        public void Explicit_FractionToDouble_AreEqual()
+        {
+            Assert.AreEqual(-69 / 17d, (double)TestStruct);
+        }
+
+        [Test]
+        public void Explicit_FractionToDecimal_AreEqual()
+        {
+            Assert.AreEqual(-69 / 17m, (decimal)TestStruct);
         }
 
         [Test]
@@ -578,12 +600,18 @@ namespace Qowaiv.UnitTests.Mathematics
             }
         }
 
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase("0xFF")]
-        public void IsInvalid_String(string str)
+        [TestCase(null, "Null")]
+        [TestCase("", "String.Empty")]
+        [TestCase("NaN", "NaN")]
+        [TestCase("-Infinity", "-Infinity")]
+        [TestCase("+Infinity", "+Infinity")]
+        [TestCase("0xFF", "Hexa-decimal")]
+        [TestCase("9,223,372,036,854,775,808", "Long.MaxValue + 1")]
+        [TestCase("-9,223,372,036,854,775,808", "Long.MinValue")]
+        [TestCase("-9,223,372,036,854,775,809", "Long.MinValue - 1")]
+        public void IsInvalid_String(string str, string message)
         {
-            Assert.IsFalse(Fraction.IsValid(str));
+            Assert.IsFalse(Fraction.IsValid(str), message);
         }
 
         [TestCase("13/666")]

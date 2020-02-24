@@ -23,11 +23,22 @@ namespace Qowaiv.Mathematics
     [StructLayout(LayoutKind.Sequential)]
     public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
     {
+        /// <summary>Represents the zero (0) <see cref="Fraction"/> value.</summary>
+        /// <remarks>
+        /// Is the default value of <see cref="Fraction"/>.
+        /// </remarks>
         public static readonly Fraction Zero;
-        public static readonly Fraction Epsilon = New(1, long.MaxValue);
-        public static readonly Fraction One = Create(1);
 
+        /// <summary>Represents the one (1) <see cref="Fraction"/> value.</summary>
+        public static readonly Fraction One = New(1, 1);
+
+        /// <summary>Represents the smallest positive <see cref="Fraction"/> value that is greater than zero.</summary>
+        public static readonly Fraction Epsilon = New(1, long.MaxValue);
+
+        /// <summary>Represents the largest possible value of a <see cref="Fraction"/>.</summary>
         public static readonly Fraction MaxValue = New(+long.MaxValue, 1);
+
+        /// <summary>Represents the smallest possible value of a <see cref="Fraction"/>.</summary>
         public static readonly Fraction MinValue = New(-long.MaxValue, 1);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -101,31 +112,36 @@ namespace Qowaiv.Mathematics
 
         /// <summary>Returns true if the faction is zero.</summary>
         public bool IsZero() => numerator == 0;
-        private long AbsNumerator() => numerator < 0 ? -numerator : numerator;
 
         /// <summary>Gets the sign of the fraction.</summary>
         public int Sign() => Math.Sign(numerator);
 
+        /// <summary>Returns the absolute value of the fraction.</summary>
+        public Fraction Abs() => New(numerator.Abs(), denominator);
+
+        /// <summary>Pluses the fraction.</summary>
         internal Fraction Plus() => New(+numerator, denominator);
+
+        /// <summary>Negates the fraction.</summary>
         internal Fraction Negate() => New(-numerator, denominator);
-        
 
-        public Fraction Multiply(long factor)
+        /// <summary>Gets the inverse of a faction.</summary>
+        /// <exception cref="DivideByZeroException">
+        /// When the fraction is <see cref="Zero"/>.
+        /// </exception>
+        public Fraction Inverse()
         {
-            if (factor == 0)
+            if (IsZero())
             {
-                return Zero;
+                throw new DivideByZeroException();
             }
-
-            // TODO: support negative.
-            long n = Numerator;
-            long d = Denominator;
-            long f = factor;
-            Reduce(ref d, ref f);
-
-            return New(checked(n * f), d);
+            return New(Sign() * denominator, numerator.Abs());
         }
 
+        /// <summary>Multiplies the fraction with the factor.</summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
         public Fraction Multiply(Fraction factor)
         {
             if (factor.IsZero())
@@ -133,124 +149,152 @@ namespace Qowaiv.Mathematics
                 return Zero;
             }
 
-            // TODO: support negative.
-            long n0 = Numerator;
-            long d0 = Denominator;
-            long n1 = factor.Numerator;
-            long d1 = factor.Denominator;
+            var sign = Sign() * factor.Sign();
+            long n0 = numerator.Abs();
+            long d0 = denominator;
+            long n1 = factor.numerator.Abs();
+            long d1 = factor.denominator;
 
             Reduce(ref n0, ref d1);
             Reduce(ref n1, ref d0);
 
-            return New(checked(n0 * n1), checked(d0 * d1));
+            return checked(New(sign * n0 * n1, d0 * d1));
         }
 
+        /// <summary>Multiplies the fraction with the factor.</summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Fraction Multiply(long factor) => Multiply(Create(factor));
+
+        /// <summary>Multiplies the fraction with the factor.</summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Fraction Multiply(int factor) => Multiply((long)factor);
+
+        /// <summary>Divide the fraction by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Fraction Divide(Fraction factor) => Multiply(factor.Inverse());
+
+        /// <summary>Divide the fraction by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
         public Fraction Divide(long factor)
         {
             if (factor == 0)
             {
                 throw new DivideByZeroException();
             }
-            // TODO: support negative.
-            long n = Numerator;
-            long d = Denominator;
-            long f = factor;
-            Reduce(ref n, ref f);
-
-            return New(n, checked(d * f));
+            return Multiply(New(1, factor));
         }
 
-        public Fraction Divide(Fraction factor)
-        {
-            if (factor.IsZero())
-            {
-                throw new DivideByZeroException();
-            }
+        /// <summary>Divide the fraction by a specified factor.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        public Fraction Divide(int factor) => Divide((long)factor);
 
-            // TODO: support negative.
-            long n0 = Numerator;
-            long d0 = Denominator;
-            long n1 = factor.Denominator;
-            long d1 = factor.Numerator;
 
-            Reduce(ref n0, ref d1);
-            Reduce(ref n1, ref d0);
-
-            return New(checked(n0 * n1), checked(d0 * d1));
-        }
-
-        public Fraction Add(Fraction other)
+        /// <summary>Adds a fraction to the current fraction.
+        /// </summary>
+        /// <param name="fraction">
+        /// The fraction to add.
+        /// </param>
+        public Fraction Add(Fraction fraction)
         {
             if (IsZero())
             {
-                return other;
+                return fraction;
             }
-            if (other.IsZero())
+            if (fraction.IsZero())
             {
                 return this;
             }
 
-            long n0 = AbsNumerator();
-            long d0 = Denominator;
-            long n1 = other.AbsNumerator();
-            long d1 = other.Denominator;
+            long n0 = numerator.Abs();
+            long d0 = denominator;
+            long n1 = fraction.numerator.Abs();
+            long d1 = fraction.denominator;
 
             Reduce(ref n0, ref d1);
             Reduce(ref n1, ref d0);
 
             checked
             {
-                var d_gcd = Reduce(ref d0, ref d1);
-                var n = (n0 * d1) * Sign() + (n1 * d0) * other.Sign();
+                var n = (n0 * d1) * Sign() + (n1 * d0) * fraction.Sign();
                 var d = d0 * d1;
-                return New(n / d_gcd, d);
+                var sign = n.Sign();
+                n = n.Abs();
+                Reduce(ref n, ref d);
+                return New(n * sign, d);
             }
         }
+
+        /// <summary>Adds a number to the current fraction.
+        /// </summary>
+        /// <param name="number">
+        /// The number to add.
+        /// </param>
+        public Fraction Add(long number) => Add(Create(number));
+
+        /// <summary>Adds a number to the current fraction.
+        /// </summary>
+        /// <param name="number">
+        /// The number to add.
+        /// </param>
+        public Fraction Add(int number) => Add((long)number);
 
         public Fraction Subtract(Fraction other) => Add(other.Negate());
 
+        /// <summary>Pluses the fraction.</summary>
         public static Fraction operator +(Fraction fraction) => fraction.Plus();
+        /// <summary>Negates the fraction.</summary>
         public static Fraction operator -(Fraction fraction) => fraction.Negate();
-        
 
+        /// <summary>Multiplies the left and the right fractions.</summary>
+        public static Fraction operator *(Fraction left, Fraction right) => left.Multiply(right);
+        /// <summary>Multiplies the left and the right fractions.</summary>
+        public static Fraction operator *(Fraction left, long right) => left.Multiply(right);
+        /// <summary>Multiplies the left and the right fractions.</summary>
+        public static Fraction operator *(Fraction left, int right) => left.Multiply(right);
+        /// <summary>Multiplies the left and the right fraction.</summary>
+        public static Fraction operator *(long left, Fraction right) => right.Multiply(left);
+        /// <summary>Multiplies the left and the right fraction.</summary>
+        public static Fraction operator *(int left, Fraction right) => right.Multiply(left);
+
+        /// <summary>Divide the fraction by a specified factor.</summary>
+        public static Fraction operator /(Fraction fraction, Fraction factor) => fraction.Divide(factor);
+        /// <summary>Divide the fraction by a specified factor.</summary>
+        public static Fraction operator /(Fraction fraction, long factor) => fraction.Divide(factor);
+        /// <summary>Divide the fraction by a specified factor.</summary>
+        public static Fraction operator /(Fraction fraction, int factor) => fraction.Divide(factor);
+        /// <summary>Divide the fraction by a specified factor.</summary>
+        public static Fraction operator /(long number, Fraction factor) => Create(number).Divide(factor);
+        /// <summary>Divide the fraction by a specified factor.</summary>
+        public static Fraction operator /(int number, Fraction factor) => Create(number).Divide(factor);
+
+        /// <summary>Adds the left and the right fraction.</summary>
         public static Fraction operator +(Fraction left, Fraction right) => left.Add(right);
+        /// <summary>Adds the left and the right fraction.</summary>
+        public static Fraction operator +(Fraction left, long right) => left.Add(right);
+        /// <summary>Adds the left and the right fraction.</summary>
+        public static Fraction operator +(Fraction left, int right) => left.Add(right);
+        /// <summary>Adds the left and the right fraction.</summary>
+        public static Fraction operator +(long left, Fraction right) => right.Add(left);
+        /// <summary>Adds the left and the right fraction.</summary>
+        public static Fraction operator +(int left, Fraction right) => right.Add(left);
+
         public static Fraction operator -(Fraction left, Fraction right) => left.Subtract(right);
 
         internal decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
-
-        /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
-        private static long Reduce(ref long a, ref long b)
-        {
-            var gcd = Gcd(a, b);
-            a /= gcd;
-            b /= gcd;
-
-            return gcd;
-        }
-
-        /// <summary>Gets the Greatest Common Divisor.</summary>
-        /// <remarks>
-        /// See: https://en.wikipedia.org/wiki/Greatest_common_divisor
-        /// </remarks>
-        private static long Gcd(long a, long b)
-        {
-            var even = 1;
-            long remainder;
-            // while both are even.
-            while ((a & 1) == 0 && (b & 1) == 0)
-            {
-                a >>= 1;
-                b >>= 1;
-                even <<= 1;
-            }
-            while (b != 0)
-            {
-                remainder = a % b;
-                a = b;
-                b = remainder;
-            }
-            return a * even;
-        }
+        internal double ToDouble() => IsZero() ? 0d : numerator / (double)denominator;
 
         /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
         /// <param name = "format">
@@ -313,7 +357,7 @@ namespace Qowaiv.Mathematics
 
         /// <summary>Gets an XML string representation of the fraction.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
-        
+
         /// <summary>Deserializes the @FullNumber from a JSON number.</summary>
         /// <param name = "json">
         /// The JSON number to deserialize.
@@ -334,9 +378,9 @@ namespace Qowaiv.Mathematics
 
         #region (Explicit) casting
 
-        public static explicit operator Fraction(long n) => n == 0 ? Zero : New(n, 1);
+        public static explicit operator Fraction(long number) => Create(number);
         public static explicit operator decimal(Fraction fraction) => fraction.ToDecimal();
-        public static explicit operator double(Fraction fraction) => fraction.IsZero() ? 0d : fraction.numerator / (double)fraction.denominator;
+        public static explicit operator double(Fraction fraction) => fraction.ToDouble();
 
         ///// <summary>Casts the fraction to a <see cref = "long "/>.</summary>
         //public static explicit operator long(Fraction val) => val.m_Value;
@@ -370,7 +414,7 @@ namespace Qowaiv.Mathematics
 
             var fraction = FractionParser.Parse(s, formatProvider?.GetFormat<NumberFormatInfo>() ?? CultureInfo.InvariantCulture.NumberFormat);
 
-            if(fraction.HasValue)
+            if (fraction.HasValue)
             {
                 result = fraction.Value;
                 return true;
@@ -479,11 +523,46 @@ namespace Qowaiv.Mathematics
         /// </param>
         public static Fraction Create(double number)
         {
-            if(number < (double)decimal.MinValue || number > (double)decimal.MaxValue)
+            if (number < (double)decimal.MinValue || number > (double)decimal.MaxValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
             }
             return Create((decimal)number, Epsilon.ToDecimal());
+        }
+
+
+        /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
+        private static long Reduce(ref long a, ref long b)
+        {
+            var gcd = Gcd(a, b);
+            a /= gcd;
+            b /= gcd;
+
+            return gcd;
+        }
+
+        /// <summary>Gets the Greatest Common Divisor.</summary>
+        /// <remarks>
+        /// See: https://en.wikipedia.org/wiki/Greatest_common_divisor
+        /// </remarks>
+        private static long Gcd(long a, long b)
+        {
+            var even = 1;
+            long remainder;
+            // while both are even.
+            while ((a & 1) == 0 && (b & 1) == 0)
+            {
+                a >>= 1;
+                b >>= 1;
+                even <<= 1;
+            }
+            while (b != 0)
+            {
+                remainder = a % b;
+                a = b;
+                b = remainder;
+            }
+            return a * even;
         }
     }
 }

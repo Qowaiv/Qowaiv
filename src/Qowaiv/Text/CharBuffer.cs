@@ -79,6 +79,8 @@ namespace Qowaiv.Text
             return NotFound;
         }
 
+        public bool EndOfBuffer(int index) => index >= Length;
+
         public bool StartsWith(string str)
         {
             if(str.Length > Length)

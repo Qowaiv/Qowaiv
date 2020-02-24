@@ -1,13 +1,14 @@
 ﻿using Qowaiv.Text;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Qowaiv.Mathematics
 {
     internal static class FractionParser
     {
-        private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands;
-        private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint;
+        private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
+        private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;
 
         public static Fraction? Parse(string s, NumberFormatInfo info)
         {
@@ -29,53 +30,107 @@ namespace Qowaiv.Mathematics
 
             var plus = info.PositiveSign;
             var min = info.NegativeSign;
+            var integerSeperator = info.NumberGroupSeparator == " " ? '+' : ' ';
+
+            var sign = 1;
 
             var str = new CharBuffer(s).Trim();
-
-            // check for +
-            if (str.StartsWith(plus))
-            {
-                str.RemoveRange(0, plus.Length);
-            }
-
-            var nominator = new CharBuffer(str.Length);
-
             var pos = 0;
 
-            if (str.StartsWith(min))
+            // check for +/-.
+            if (str.StartsWith(plus))
             {
-                nominator.Add(min);
+                pos += plus.Length;
+            }
+            else if (str.StartsWith(min))
+            {
                 pos += min.Length;
+                sign = -1;
             }
 
-            // Detect the nominator.
-            for (/**/; pos < str.Length; pos++)
+            long integer = Parsing.NotFound;
+            long nominator = Parsing.NotFound;
+            var buffer = new CharBuffer(str.Length);
+
+            // Detect the nominator/integer.
+            for (; pos < str.Length; pos++)
             {
                 var ch = str[pos];
 
-                if (char.IsNumber(ch))
+                if (IsDivisionOperator(ch))
                 {
-                    nominator.Add(ch);
-                }
-                else if (IsDivisionOperator(ch))
-                {
+                    if (str.EndOfBuffer(pos) || !buffer.ParseInteger(info, out nominator))
+                    {
+                        return null;
+                    }
                     pos++;
                     break;
                 }
+                else if(ch == integerSeperator)
+                {
+                    if (str.EndOfBuffer(pos) || !buffer.ParseInteger(info, out integer))
+                    {
+                        return null;
+                    }
+                    pos++;
+                    break;
+                }
+                else
+                {
+                    buffer.Add(ch);
+                }
             }
-            if (!long.TryParse(nominator.ToString(), NumberStyles.Number, info, out var n))
+
+            // Detect the nominator.
+            if (integer != Parsing.NotFound)
+            {
+                for (; pos < str.Length; pos++)
+                {
+                    var ch = str[pos];
+
+                    if (IsDivisionOperator(ch))
+                    {
+                        if (str.EndOfBuffer(pos) || !buffer.ParseInteger(info, out nominator))
+                        {
+                            return null;
+                        }
+                        pos++;
+                        break;
+                    }
+                    buffer.Add(ch);
+                }
+            }
+
+            // Detect the denominator.
+            if (!long.TryParse(str.Substring(pos), IntegerStyle, info, out long denominator) || denominator == 0)
             {
                 return null;
             }
 
-            string denominator = str.Substring(pos);
-
-            if (!long.TryParse(denominator, NumberStyles.Number, info, out var d) || d == 0)
+            // Add the integer part if relevant.
+            if (integer != Parsing.NotFound) 
             {
-                return null;
+                try
+                {
+                    checked
+                    {
+                        nominator += integer * denominator;
+                    }
+                }
+                catch (OverflowException)
+                {
+                    return null;
+                }
             }
 
-            return new Fraction(n, d);
+            return new Fraction(sign * nominator, denominator);
+        }
+
+        private static bool ParseInteger(this CharBuffer buffer, NumberFormatInfo formatInfo, out long integer)
+        {
+            var result = long.TryParse(buffer.ToString(), IntegerStyle, formatInfo, out integer);
+            buffer.Clear();
+            return result;
         }
 
         /// <summary>All long values are valid, except <see cref="long.MinValue"/>.</summary>
@@ -87,7 +142,7 @@ namespace Qowaiv.Mathematics
         /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
         private static bool PotentialPercentage(string str)
         {
-            return "%‰‱".IndexOf(str, StringComparison.InvariantCulture) != Parsing.NotFound;
+            return str.Any(ch => "%‰‱".IndexOf(ch) != Parsing.NotFound);
         }
 
         /// <summary>Returns true if the <see cref="char"/> is /, : or ÷.</summary>

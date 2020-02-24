@@ -48,6 +48,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [TestCase(1, 3, "1/3")]
         [TestCase(1, 3, "+1/3")]
         [TestCase(-1, 3, "-1/3")]
+        [TestCase(4, 3, "1 1/3")]
         public void Parse(long numerator, long denominator, string str)
         {
             var expected = new Fraction(numerator, denominator);

@@ -21,8 +21,8 @@ namespace Qowaiv.Mathematics
             {
                 return Fraction.Create(dec);
             }
-            // Percentages are fine.
-            if (Percentage.TryParse(s, info, out var percentage) && IsValid((decimal)percentage))
+            // Percentages are fine
+            if (PotentialPercentage(s) && Percentage.TryParse(s, info, out var percentage) && IsValid((decimal)percentage))
             {
                 return Fraction.Create((decimal)percentage);
             }
@@ -83,6 +83,12 @@ namespace Qowaiv.Mathematics
 
         /// <summary>Number should be in the range of <see cref="Fraction.MinValue"/> and <see cref="Fraction.MaxValue"/>.</summary>
         private static bool IsValid(decimal number) => number >= Fraction.MinValue.Numerator && number <= Fraction.MaxValue.Numerator;
+
+        /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
+        private static bool PotentialPercentage(string str)
+        {
+            return "%‰‱".IndexOf(str, StringComparison.InvariantCulture) != Parsing.NotFound;
+        }
 
         /// <summary>Returns true if the <see cref="char"/> is /, : or ÷.</summary>
         private static bool IsDivisionOperator(char ch) => "/:÷".IndexOf(ch) != Parsing.NotFound;

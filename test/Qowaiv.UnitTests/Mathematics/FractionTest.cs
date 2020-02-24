@@ -606,9 +606,9 @@ namespace Qowaiv.UnitTests.Mathematics
         [TestCase("-Infinity", "-Infinity")]
         [TestCase("+Infinity", "+Infinity")]
         [TestCase("0xFF", "Hexa-decimal")]
-        [TestCase("9,223,372,036,854,775,808", "Long.MaxValue + 1")]
-        [TestCase("-9,223,372,036,854,775,808", "Long.MinValue")]
-        [TestCase("-9,223,372,036,854,775,809", "Long.MinValue - 1")]
+        [TestCase("9223372036854775808", "Long.MaxValue + 1")]
+        [TestCase("-9223372036854775808", "Long.MinValue")]
+        [TestCase("-9223372036854775809", "Long.MinValue - 1")]
         public void IsInvalid_String(string str, string message)
         {
             Assert.IsFalse(Fraction.IsValid(str), message);

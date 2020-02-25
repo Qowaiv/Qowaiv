@@ -144,6 +144,27 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void Create_Roundtrip()
+        {
+            var rnd = new Random();
+
+            var failures = new List<Fraction>();
+
+            for (var i = 0; i < 100; i++)
+            {
+                var expected = rnd.Next(1, int.MaxValue).DividedBy(rnd.Next(3, int.MaxValue));
+                var actual = Fraction.Create((decimal)expected);
+
+                if(actual != expected)
+                {
+                    failures.Add(expected);
+                }
+            }
+
+            CollectionAssert.AreEqual(Array.Empty<Fraction>(), failures);
+        }
+
         [TestCase("0/1", 0, 8, "Should set zero")]
         [TestCase("1/4", 2, 8, "Should reduce")]
         [TestCase("-1/4", -2, 8, "Should reduce")]

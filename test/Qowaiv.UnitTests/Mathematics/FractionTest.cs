@@ -46,9 +46,27 @@ namespace Qowaiv.UnitTests.Mathematics
         [TestCase(487, 1000, "48.70%")]
         [TestCase(487, 1000, "487.0‰")]
         [TestCase(1, 3, "1/3")]
+        [TestCase(1, 3, "1:3")]
+        [TestCase(1, 3, "1÷3")]
+        [TestCase(1, 3, "1⁄3")]
+        [TestCase(1, 3, "1⁄3")]
+        [TestCase(1, 3, "1⁄3")]
+        [TestCase(1, 3, "1∕3")]
         [TestCase(1, 3, "+1/3")]
         [TestCase(-1, 3, "-1/3")]
+        [TestCase(11, 43, "11/43")]
         [TestCase(4, 3, "1 1/3")]
+        [TestCase(21, 2, "10 1/2")]
+        [TestCase(1, 2, "½")]
+        [TestCase(-1, 2, "-½")]
+        [TestCase(3, 4, "¾")]
+        [TestCase(11, 4, "2¾")]
+        [TestCase(11, 4, "2 ¾")]
+        [TestCase(9, 7, "1²/₇")]
+        [TestCase(9, 7, "1 ²/₇")]
+        [TestCase(23, 47, "²³/₄₇")]
+        [TestCase(3, 7, "3/₇")]
+        [TestCase(3, 7, "³/7")]
         public void Parse(long numerator, long denominator, string str)
         {
             var expected = new Fraction(numerator, denominator);
@@ -607,6 +625,14 @@ namespace Qowaiv.UnitTests.Mathematics
         [TestCase("-Infinity", "-Infinity")]
         [TestCase("+Infinity", "+Infinity")]
         [TestCase("0xFF", "Hexa-decimal")]
+        [TestCase("15/", "Ends with an operator")]
+        [TestCase("1//4", "Two division operators")]
+        [TestCase("1/½", "Vulgar with division operator")]
+        [TestCase("½1", "Vulgar not at the end")]
+        [TestCase("²3/₇", "Normal and superscript mixed")]
+        [TestCase("²/₇3", "Normal and subscript mixed")]
+        [TestCase("²/3₇", "Normal and subscript mixed")]
+        [TestCase("₇/3", "Subscript first")]
         [TestCase("9223372036854775808", "Long.MaxValue + 1")]
         [TestCase("-9223372036854775808", "Long.MinValue")]
         [TestCase("-9223372036854775809", "Long.MinValue - 1")]
@@ -630,4 +656,3 @@ namespace Qowaiv.UnitTests.Mathematics
         public DateTime Date { get; set; }
     }
 }
-

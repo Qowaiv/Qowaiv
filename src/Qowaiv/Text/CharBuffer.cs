@@ -79,7 +79,7 @@ namespace Qowaiv.Text
             return NotFound;
         }
 
-        public bool EndOfBuffer(int index) => index >= Length;
+        public bool EndOfBuffer(int index) => index >= Length - 1;
 
         public bool StartsWith(string str)
         {

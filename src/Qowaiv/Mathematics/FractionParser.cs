@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Text;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -10,127 +11,246 @@ namespace Qowaiv.Mathematics
         private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
         private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;
 
-        public static Fraction? Parse(string s, NumberFormatInfo info)
+        [Flags]
+        private enum Tokens
         {
-            // Integers are fine.
-            if (long.TryParse(s, IntegerStyle, info, out var lng) && IsValid(lng))
+            None /*       */ = 0x00,
+            Operator /*   */ = 0x01,
+            Space /*      */ = 0x02,
+            Number /*     */ = 0x04,
+            SuperScript /**/ = 0x08,
+            SubScript   /**/ = 0x10,
+
+            Reset = Operator| Space,
+        }
+
+        /// <summary>Parses a <see cref="string"/> that potentially contains a <see cref="Fraction"/>.</summary>
+        /// <remarks>
+        /// Category                   |  Pattern                      | Example
+        /// ---------------------------------------------------------------------
+        /// Simple                     |        [0-9]+ [/:÷] [0/9]+    |   1/3
+        /// Simple with whole number   | [0-9]+ [0-9]+ [/:÷] [0/9]+    | 3 1/3
+        /// Single vulgar              |         [¼½¾]                 |     ¾
+        /// Whole number with vulgar   | [0-9]+ ?[¼½¾]                 |     ¾
+        /// </remarks>
+        public static Fraction? Parse(string s, NumberFormatInfo formatInfo)
+        {
+            if (ParseExternal(s, formatInfo, out var external))
             {
-                return Fraction.Create(lng);
-            }
-            // Decimals are fine.
-            if (decimal.TryParse(s, DecimalStyle, info, out var dec) && IsValid(dec))
-            {
-                return Fraction.Create(dec);
-            }
-            // Percentages are fine
-            if (PotentialPercentage(s) && Percentage.TryParse(s, info, out var percentage) && IsValid((decimal)percentage))
-            {
-                return Fraction.Create((decimal)percentage);
+                return external;
             }
 
-            var plus = info.PositiveSign;
-            var min = info.NegativeSign;
-            var integerSeperator = info.NumberGroupSeparator == " " ? '+' : ' ';
+            var plus = formatInfo.PositiveSign;
+            var min = formatInfo.NegativeSign;
+            var integerSeperator = formatInfo.NumberGroupSeparator == " " ? '+' : ' ';
 
             var sign = 1;
-
             var str = new CharBuffer(s).Trim();
-            var pos = 0;
+            var index = 0;
 
             // check for +/-.
             if (str.StartsWith(plus))
             {
-                pos += plus.Length;
+                index += plus.Length;
             }
             else if (str.StartsWith(min))
             {
-                pos += min.Length;
+                index += min.Length;
                 sign = -1;
             }
 
-            long integer = Parsing.NotFound;
-            long nominator = Parsing.NotFound;
-            var buffer = new CharBuffer(str.Length);
+            long integer = 0;
+            long nominator = 0;
 
-            // Detect the nominator/integer.
-            for (; pos < str.Length; pos++)
+            var buffer = new CharBuffer(str.Length - index);
+            var tokens = Tokens.None;
+
+            for (; index < str.Length; index++)
             {
-                var ch = str[pos];
+                var ch = str[index];
 
                 if (IsDivisionOperator(ch))
                 {
-                    if (str.EndOfBuffer(pos) || !buffer.ParseInteger(info, out nominator))
+                    // A second divide operator, or as last character is not allowed.
+                    if (tokens.HasAll(Tokens.Operator) || str.EndOfBuffer(index))
                     {
                         return null;
                     }
-                    pos++;
-                    break;
-                }
-                else if(ch == integerSeperator)
-                {
-                    if (str.EndOfBuffer(pos) || !buffer.ParseInteger(info, out integer))
+                    // On a '/' assume the buffer is filled with the nominator.
+                    if (!ParseInteger(buffer, formatInfo, out nominator))
                     {
                         return null;
                     }
-                    pos++;
-                    break;
+                    tokens |= Tokens.Operator;
+                    tokens &= Tokens.Reset;
                 }
-                else
+                else if (ch == integerSeperator)
                 {
-                    buffer.Add(ch);
-                }
-            }
-
-            // Detect the nominator.
-            if (integer != Parsing.NotFound)
-            {
-                for (; pos < str.Length; pos++)
-                {
-                    var ch = str[pos];
-
-                    if (IsDivisionOperator(ch))
+                    // A second spacer, or as last character is not allowed.
+                    if (tokens.HasAll(Tokens.Space) || str.EndOfBuffer(index))
                     {
-                        if (str.EndOfBuffer(pos) || !buffer.ParseInteger(info, out nominator))
+                        return null;
+                    }
+                    // On a ' ' assume the buffer is filled with the integer part.
+                    if (!ParseInteger(buffer, formatInfo, out integer))
+                    {
+                        return null;
+                    }
+                    tokens |= Tokens.Space;
+                    tokens &= Tokens.Reset;
+                }
+                else if (ch.IsVulgar(out var vulgar))
+                {
+                    // A vulgar is only allowed directly followed by an integer, or as single character.
+                    if (tokens.HasAny(Tokens.Operator | Tokens.SuperScript| Tokens.SubScript) || !str.EndOfBuffer(index))
+                    {
+                        return null;
+                    }
+
+                    // If the buffer is not empty (integer without a space).
+                    if (buffer.NotEmpty() && !buffer.ParseInteger(formatInfo, out integer))
+                    {
+                        return null;
+                    }
+
+                    // No overflow. :)
+                    if (integer == 0)
+                    {
+                        return sign == +1 ? vulgar : -vulgar;
+                    }
+                    // Only if not overflow.
+                    if (CalculateNominator(sign, integer, vulgar.Numerator, vulgar.Denominator, out nominator))
+                    {
+                        return nominator.DividedBy(vulgar.Denominator);
+                    }
+                    return null;
+                }
+                else if(ch.IsSuperScript(out char digit))
+                {
+                    if (tokens.HasAny(Tokens.SubScript | Tokens.Operator))
+                    {
+                        return null;
+                    }
+                    // If the buffer is not empty (integer without a space).
+                    if (tokens.HasNone(Tokens.Space | Tokens.SuperScript) && buffer.NotEmpty())
+                    {
+                        if (!buffer.ParseInteger(formatInfo, out integer))
                         {
                             return null;
                         }
-                        pos++;
-                        break;
+                        tokens |= Tokens.Space;
+                        tokens &= Tokens.Reset;
+                    }
+                    buffer.Add(digit);
+                    tokens |= Tokens.SuperScript;
+                }
+                else if(ch.IsSubScript(out digit))
+                {
+                    if (tokens.HasNone(Tokens.Operator) || tokens.HasAny(Tokens.SuperScript | Tokens.Number))
+                    {
+                        return null;
+                    }
+                    buffer.Add(digit);
+                    tokens |= Tokens.SubScript;
+                }
+                else
+                {
+                    if (tokens.HasAny(Tokens.SuperScript | Tokens.SubScript))
+                    {
+                        return null;
                     }
                     buffer.Add(ch);
+                    tokens |= Tokens.Number;
                 }
             }
 
-            // Detect the denominator.
-            if (!long.TryParse(str.Substring(pos), IntegerStyle, info, out long denominator) || denominator == 0)
+            // The remaining part should be the denominator.
+            if (!buffer.ParseInteger(formatInfo, out var denominator) || denominator == 0)
             {
                 return null;
             }
 
-            // Add the integer part if relevant.
-            if (integer != Parsing.NotFound) 
+            // No overflow.
+            if(CalculateNominator(sign, integer, nominator, denominator, out var combined))
             {
-                try
-                {
-                    checked
-                    {
-                        nominator += integer * denominator;
-                    }
-                }
-                catch (OverflowException)
-                {
-                    return null;
-                }
+                return combined.DividedBy(denominator);
             }
 
-            return new Fraction(sign * nominator, denominator);
+            return null;
         }
 
-        private static bool ParseInteger(this CharBuffer buffer, NumberFormatInfo formatInfo, out long integer)
+        /// <summary>Parse the fraction, using <see cref="long.Parse(string)"/>, <see cref="decimal.Parse(string)"/>, and <see cref="Percentage.Parse(string)"/>.</summary>
+        private static bool ParseExternal(string s, IFormatProvider formatInfo, out Fraction fraction)
+        {
+            fraction = default;
+
+            if (long.TryParse(s, IntegerStyle, formatInfo, out var lng) && IsValid(lng))
+            {
+                fraction = Fraction.Create(lng);
+                return true;
+            }
+
+            if (decimal.TryParse(s, DecimalStyle, formatInfo, out var dec) && IsValid(dec))
+            {
+                fraction = Fraction.Create(dec);
+                return true;
+            }
+
+            if (PotentialPercentage(s) && Percentage.TryParse(s, formatInfo, out var percentage) && IsValid((decimal)percentage))
+            {
+                fraction = Fraction.Create((decimal)percentage);
+                return true;
+            }
+
+            return false;
+        }
+
+        private static bool ParseInteger(this CharBuffer buffer, IFormatProvider formatInfo, out long integer)
         {
             var result = long.TryParse(buffer.ToString(), IntegerStyle, formatInfo, out integer);
             buffer.Clear();
             return result;
+        }
+
+        private static bool CalculateNominator(int sign, long integer, long nominator, long denominator, out long result)
+        {
+            try
+            {
+                checked
+                {
+                    result = (integer * denominator + nominator) * sign;
+                    return true;
+                }
+            }
+            catch (OverflowException)
+            {
+                result = default;
+                return false;
+            }
+        }
+
+        private static bool IsVulgar(this char ch, out Fraction fraction) => Vulgars.TryGetValue(ch, out fraction);
+
+        private static bool IsSuperScript(this char ch, out char digit)
+        {
+            digit = default;
+            var index = SuperScript.IndexOf(ch);
+
+            if (index == Parsing.NotFound) { return false; }
+
+            digit = (char)(index + '0');
+            return true;
+        }
+
+        private static bool IsSubScript(this char ch, out char digit)
+        {
+            digit = default;
+            var index = SubScript.IndexOf(ch);
+
+            if (index == Parsing.NotFound) { return false; }
+
+            digit = (char)(index + '0');
+            return true;
         }
 
         /// <summary>All long values are valid, except <see cref="long.MinValue"/>.</summary>
@@ -146,6 +266,43 @@ namespace Qowaiv.Mathematics
         }
 
         /// <summary>Returns true if the <see cref="char"/> is /, : or ÷.</summary>
-        private static bool IsDivisionOperator(char ch) => "/:÷".IndexOf(ch) != Parsing.NotFound;
+        private static bool IsDivisionOperator(char ch) => "/:÷⁄̸̷⁄∕".IndexOf(ch) != Parsing.NotFound;
+
+        private static bool HasAll(this Tokens tokens, Tokens flag) => (tokens & flag) == flag;
+        private static bool HasAny(this Tokens tokens, Tokens flag) => (tokens & flag) != 0;
+        private static bool HasNone(this Tokens tokens, Tokens flag) => (tokens & flag) == 0;
+
+        private const string SuperScript = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+        private const string SubScript = "₀₁₂₃₄₅₆₇₈₉";
+        private static readonly Dictionary<char, Fraction> Vulgars = new Dictionary<char, Fraction>
+        {
+            { '½', 1.DividedBy(2) },
+
+            { '⅓', 1.DividedBy(3) },
+            { '⅔', 2.DividedBy(3) },
+
+            { '¼', 1.DividedBy(4) },
+            { '¾', 3.DividedBy(4) },
+
+            { '⅕', 1.DividedBy(5) },
+            { '⅖', 2.DividedBy(5) },
+            { '⅗', 3.DividedBy(5) },
+            { '⅘', 4.DividedBy(5) },
+
+            { '⅙', 1.DividedBy(6) },
+            { '⅚', 5.DividedBy(6) },
+
+            { '⅐', 1.DividedBy(7) },
+
+            { '⅛', 1.DividedBy(8) },
+            { '⅜', 3.DividedBy(8) },
+            { '⅝', 5.DividedBy(8) },
+            { '⅞', 7.DividedBy(8) },
+
+            { '⅑', 1.DividedBy(9) },
+            { '⅒', 1.DividedBy(10) },
+
+            { '↉', Fraction.Zero },
+        };
     }
 }

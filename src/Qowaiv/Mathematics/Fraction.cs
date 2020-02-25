@@ -9,8 +9,11 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Mathematics
@@ -40,6 +43,51 @@ namespace Qowaiv.Mathematics
 
         /// <summary>Represents the smallest possible value of a <see cref="Fraction"/>.</summary>
         public static readonly Fraction MinValue = New(-long.MaxValue, 1);
+
+        internal static class Formatting
+        {
+            public const string SuperScript = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+            public const string SubScript = "₀₁₂₃₄₅₆₇₈₉";
+
+            public const char Backslash = '/';
+            public const char Colon = ':';
+            public const char DivisionSign = '÷';
+            public const char FractionSlash = (char)0x2044;
+            public const char DivisionSlash = (char)0x2215;
+            public const char ShortSlash = (char)0x337;
+            public const char LongSlash = (char)0x338;
+
+            /// <summary>The different supported division operator characters.</summary>
+            /// <remarks>
+            /// name           | c | code 
+            /// ---------------|---|------
+            /// backslash      | / |   5C
+            /// colon          | : |   3A
+            /// division sign  | ÷ |   F7
+            /// fraction slash | ⁄ | 2044
+            /// division slash | ∕ | 2215
+            /// short slash    | ̷  |  337
+            /// long slash     | ̸  |  338
+            /// </remarks>
+            public static readonly string Divisions = new string(new[]
+            {
+                Backslash,
+                Colon,
+                DivisionSign,
+                FractionSlash,
+                DivisionSlash,
+                ShortSlash,
+                LongSlash
+            });
+
+            public static readonly Regex Pattern = new Regex
+            (
+                @"^(\[(?<Integer>.+)\] ?)?(?<Numerator>.+?)(?<Operator>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegexOptions.Compiled
+            );
+
+            /// <summary>Returns true if the <see cref="char"/> is a supported division operator character.</summary>
+            public static bool IsDivisionCharacter(char ch) => Divisions.IndexOf(ch) != Parsing.NotFound;
+        }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private long numerator;
@@ -91,7 +139,7 @@ namespace Qowaiv.Mathematics
                 }
             }
         }
-  
+
         /// <summary>Gets the numerator of the fraction.</summary>
         public long Numerator => numerator;
 
@@ -188,7 +236,6 @@ namespace Qowaiv.Mathematics
         /// The factor to multiply with.
         /// </param>
         public Fraction Divide(int factor) => Divide((long)factor);
-
 
         /// <summary>Adds a fraction to the current fraction.</summary>
         /// <param name="fraction">
@@ -319,7 +366,66 @@ namespace Qowaiv.Mathematics
                 return formatted;
             }
 
-            return $"{Numerator}/{(Denominator == 0 ? 1 : Denominator)}";
+            var match = Formatting.Pattern.Match(format ?? @"0\0");
+
+            if (!match.Success)
+            {
+                // if no division operator character has been provided, format as a decimal.
+                if (!format.Any(ch => Formatting.IsDivisionCharacter(ch)))
+                {
+                    return ToDecimal().ToString(format, formatProvider);
+                }
+                throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
+            }
+
+            var iFormat = match.Groups["Integer"].Value;
+            var nFormat = match.Groups[nameof(Numerator)].Value;
+            var dFormat = match.Groups[nameof(Denominator)].Value;
+            var division = match.Groups["Operator"].Value;
+
+            var sb = new StringBuilder();
+
+            var n = numerator;
+            var d = denominator == 0 ? 1 : denominator;
+
+            if (!string.IsNullOrEmpty(iFormat))
+            {
+                n = numerator.Abs() % denominator;
+                sb.Append(ToLong().ToString(iFormat, formatProvider));
+
+            }
+            if (nFormat == "super")
+            {
+                if (sb.Length == 0 && Sign() == -1)
+                {
+                    sb.Append(formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-");
+                }
+                // use invariant as we want to convert to superscript.
+                var super = n.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
+                sb.Append(super);
+            }
+            else
+            {
+                if (sb.Length != 0)
+                {
+                    sb.Append(' ');
+                }
+                sb.Append(n.ToString(nFormat, formatProvider));
+            }
+
+            sb.Append(division);
+
+            if (dFormat == "sub")
+            {
+                // use invariant as we want to convert to superscript.
+                var super = d.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
+                sb.Append(super);
+            }
+            else
+            {
+                sb.Append(d.ToString(dFormat, formatProvider));
+            }
+            return sb.ToString();
         }
 
         /// <inheritdoc/>
@@ -387,6 +493,9 @@ namespace Qowaiv.Mathematics
 
         /// <summary>Gets an XML string representation of the fraction.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+
+        /// <summary>Gets an JSON representation of the fraction.</summary>
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Deserializes the fraction from a JSON number.</summary>
         /// <param name = "json">

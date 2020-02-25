@@ -344,6 +344,23 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual(exp, act);
         }
 
+        [TestCase("-2:7", "-2/7", "0:0")]
+        [TestCase("4÷3", "4/3", "0÷0")]
+        [TestCase("1 1/3", "4/3", "[0]0/0")]
+        [TestCase("-1 1/3", "-4/3", "[0]0/0")]
+        [TestCase(".33", "1/3", "#.00")]
+        [TestCase("5¹¹⁄₁₂", "71/12", "[0]super⁄sub")]
+        [TestCase("5¹¹⁄12", "71/12", "[0]super⁄0")]
+        [TestCase("5 11⁄₁₂", "71/12", "[0] 0⁄sub")]
+        [TestCase("-3¹⁄₂", "-7/2", "[0]super⁄sub")]
+        [TestCase("⁷¹⁄₁₂", "71/12", "super⁄sub")]
+        [TestCase("-⁷⁄₂", "-7/2", "super⁄sub")]
+        public void ToString_WithFormat(string expected, Fraction fraction, string format)
+        {
+            var formatted = fraction.ToString(format, CultureInfo.InvariantCulture);
+            Assert.AreEqual(expected, formatted);
+        }
+
         [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {

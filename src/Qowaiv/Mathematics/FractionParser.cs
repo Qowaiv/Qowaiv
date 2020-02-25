@@ -69,7 +69,7 @@ namespace Qowaiv.Mathematics
             {
                 var ch = str[index];
 
-                if (IsDivisionOperator(ch))
+                if (Fraction.Formatting.IsDivisionCharacter(ch))
                 {
                     // A second divide operator, or as last character is not allowed.
                     if (tokens.HasAll(Tokens.Operator) || str.EndOfBuffer(index))
@@ -234,7 +234,7 @@ namespace Qowaiv.Mathematics
         private static bool IsSuperScript(this char ch, out char digit)
         {
             digit = default;
-            var index = SuperScript.IndexOf(ch);
+            var index = Fraction.Formatting.SuperScript.IndexOf(ch);
 
             if (index == Parsing.NotFound) { return false; }
 
@@ -245,7 +245,7 @@ namespace Qowaiv.Mathematics
         private static bool IsSubScript(this char ch, out char digit)
         {
             digit = default;
-            var index = SubScript.IndexOf(ch);
+            var index = Fraction.Formatting.SubScript.IndexOf(ch);
 
             if (index == Parsing.NotFound) { return false; }
 
@@ -265,15 +265,10 @@ namespace Qowaiv.Mathematics
             return str.Any(ch => "%‰‱".IndexOf(ch) != Parsing.NotFound);
         }
 
-        /// <summary>Returns true if the <see cref="char"/> is /, : or ÷.</summary>
-        private static bool IsDivisionOperator(char ch) => "/:÷⁄̸̷⁄∕".IndexOf(ch) != Parsing.NotFound;
-
         private static bool HasAll(this Tokens tokens, Tokens flag) => (tokens & flag) == flag;
         private static bool HasAny(this Tokens tokens, Tokens flag) => (tokens & flag) != 0;
         private static bool HasNone(this Tokens tokens, Tokens flag) => (tokens & flag) == 0;
 
-        private const string SuperScript = "⁰¹²³⁴⁵⁶⁷⁸⁹";
-        private const string SubScript = "₀₁₂₃₄₅₆₇₈₉";
         private static readonly Dictionary<char, Fraction> Vulgars = new Dictionary<char, Fraction>
         {
             { '½', 1.DividedBy(2) },

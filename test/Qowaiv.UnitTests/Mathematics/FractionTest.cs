@@ -69,7 +69,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [TestCase(3, 7, "³/7")]
         public void Parse(long numerator, long denominator, string str)
         {
-            var expected = new Fraction(numerator, denominator);
+            var expected = numerator.DividedBy(denominator);
             var actual = Fraction.Parse(str, CultureInfo.InvariantCulture);
 
             Assert.AreEqual(expected, actual);
@@ -140,22 +140,21 @@ namespace Qowaiv.UnitTests.Mathematics
         public void Create(long numerator, long denominator, decimal number)
         {
             var actual = Fraction.Create(number);
-            var expected = new Fraction(numerator, denominator);
+            var expected = numerator.DividedBy(denominator);
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(0, 1, 0, 8, "Should set zero")]
-        [TestCase(1, 4, 2, 8, "Should reduce")]
-        [TestCase(-1, 4, -2, 8, "Should reduce")]
-        [TestCase(1, 4, 3, 12, "Should reduce")]
-        [TestCase(-1, 4, -3, 12, "Should reduce")]
-        [TestCase(3, 7, -3, -7, "Should have no signs")]
-        [TestCase(-3, 7, 3, -7, "Should have no sign on denominator")]
-        [TestCase(-3, 7, -3, 7, "Should have no sign on denominator")]
-        public void Constructor(long e_n, long e_d, long numerator, long denominator, string description)
+        [TestCase("0/1", 0, 8, "Should set zero")]
+        [TestCase("1/4", 2, 8, "Should reduce")]
+        [TestCase("-1/4", -2, 8, "Should reduce")]
+        [TestCase("1/4", 3, 12, "Should reduce")]
+        [TestCase("-1/4", -3, 12, "Should reduce")]
+        [TestCase("3/7", -3, -7, "Should have no signs")]
+        [TestCase("-3/7", 3, -7, "Should have no sign on denominator")]
+        [TestCase("-3/7", -3, 7, "Should have no sign on denominator")]
+        public void Constructor(Fraction expected, long numerator, long denominator, string description)
         {
-            var actual = new Fraction(e_n, e_d);
-            var expected = new Fraction(numerator, denominator);
+            var actual = new Fraction(numerator, denominator);
             Assert.AreEqual(expected, actual, description);
         }
 

@@ -54,7 +54,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Multiply_Overflow()
         {
-            var fraction = new Fraction(long.MaxValue - 3, 1);
+            var fraction = Fraction.Create(long.MaxValue - 3);
             var x = Assert.Catch<OverflowException>(() => fraction.Multiply(long.MaxValue - 4));
             StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
         }
@@ -126,7 +126,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Add_Overflow()
         {
-            var fraction = new Fraction(long.MaxValue - 3, 1);
+            var fraction = Fraction.Create(long.MaxValue - 3);
             var x = Assert.Catch<OverflowException>(() => fraction.Add(long.MaxValue - 4));
             StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
         }
@@ -181,7 +181,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Subtract_Overflow()
         {
-            var fraction = new Fraction(17, long.MaxValue - 3);
+            var fraction = 17.DividedBy(long.MaxValue - 3);
             var x = Assert.Catch<OverflowException>(() => fraction.Subtract(8.DividedBy(long.MaxValue)));
             StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
         }

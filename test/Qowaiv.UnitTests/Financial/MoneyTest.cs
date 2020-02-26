@@ -695,6 +695,15 @@ namespace Qowaiv.UnitTests.Financial
 
         #region Operations
 
+        [TestCase(-1, "EUR -1000")]
+        [TestCase(0, "EUR 0")]
+        [TestCase(+1, "EUR 100")]
+        public void Sign(int expected, Money value)
+        {
+            var actual = value.Sign();
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestCase(23.1234, -23.1234)]
         [TestCase(23.1234, +23.1234)]
         public void Abs(decimal expected, decimal value)

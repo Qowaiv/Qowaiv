@@ -711,7 +711,15 @@ namespace Qowaiv.Financial.UnitTests
 
         #endregion
 
-        #region Methods
+
+        [TestCase(-1, -1000)]
+        [TestCase(0, 0)]
+        [TestCase(+1, 1600)]
+        public void Sign(int expected, Amount value)
+        {
+            var actual = value.Sign();
+            Assert.AreEqual(expected, actual);
+        }
 
         [TestCase(1234.01, -1234.01)]
         [TestCase(1234.01, +1234.01)]
@@ -986,8 +994,6 @@ namespace Qowaiv.Financial.UnitTests
             var rounded = amount.RoundToMultiple(0.25m);
             Assert.AreEqual((Amount)123.75m, rounded);
         }
-
-        #endregion
 
         #region Type converter tests
 

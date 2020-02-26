@@ -329,14 +329,12 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            using (new CultureInfoScope("es-ES"))
-            {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '13/06/1988 22:10:05', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("M:d & h:m", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '6:13 & 10:10', format: 'M:d & h:m'";
 
-                Assert.AreEqual(exp, act);
-            }
+            Assert.AreEqual(exp, act);
         }
+
         [Test]
         public void ToString_TestStruct_ComplexPattern()
         {

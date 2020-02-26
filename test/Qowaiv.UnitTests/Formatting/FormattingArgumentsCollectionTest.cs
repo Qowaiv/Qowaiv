@@ -224,7 +224,7 @@ namespace Qowaiv.UnitTests.Formatting
                 collection.Add(typeof(Decimal), "0.000");
 
                 var act = collection.Format("{0:yyyy-MM-dd} * {0}", new Date(2014, 10, 8));
-                var exp = "Unit Test Formatter, value: '10/08/2014', format: 'yyyy-MM-dd' * Unit Test Formatter, value: '10/08/2014', format: ''";
+                var exp = "Unit Test Formatter, value: '2014-10-08', format: 'yyyy-MM-dd' * Unit Test Formatter, value: '10/08/2014', format: ''";
 
                 Assert.AreEqual(exp, act);
             }

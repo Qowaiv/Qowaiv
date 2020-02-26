@@ -372,13 +372,10 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            using (CultureInfoScope.NewInvariant())
-            {
-                var act = TestStruct.ToString("#.0", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '42.2', format: '#.0'";
+            var act = TestStruct.ToString("#.0", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '42.2', format: '#.0'";
 
-                Assert.AreEqual(exp, act);
-            }
+            Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToString_TestStruct_ComplexPattern()

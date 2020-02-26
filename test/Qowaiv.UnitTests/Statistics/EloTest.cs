@@ -341,13 +341,10 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            using (new CultureInfoScope(CultureInfo.InvariantCulture))
-            {
-                var act = TestStruct.ToString("00000", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '01732', format: '00000'";
+            var act = TestStruct.ToString("00000", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '01732', format: '00000'";
 
-                Assert.AreEqual(exp, act);
-            }
+            Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToString_TestStruct_ComplexPattern()

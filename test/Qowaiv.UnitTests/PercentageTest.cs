@@ -415,13 +415,10 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            using (CultureInfoScope.NewInvariant())
-            {
-                var act = TestStruct.ToString("%0.0", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '%17.5', format: '%0.0'";
+            var act = TestStruct.ToString("%0.0", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '%17.5', format: '%0.0'";
 
-                Assert.AreEqual(exp, act);
-            }
+            Assert.AreEqual(exp, act);
         }
 
         [Test]

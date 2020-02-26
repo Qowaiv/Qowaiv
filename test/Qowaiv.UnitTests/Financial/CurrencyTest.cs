@@ -487,8 +487,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'EUR', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("$: e", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '€: Euro', format: '$: e'";
 
             Assert.AreEqual(exp, act);
         }

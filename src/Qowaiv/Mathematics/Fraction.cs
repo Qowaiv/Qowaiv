@@ -57,7 +57,7 @@ namespace Qowaiv.Mathematics
             public const char ShortSlash = (char)0x337;
             public const char LongSlash = (char)0x338;
 
-            /// <summary>The different supported division operator characters.</summary>
+            /// <summary>The different supported fraction bar characters.</summary>
             /// <remarks>
             /// name           | c | code 
             /// ---------------|---|------
@@ -69,7 +69,7 @@ namespace Qowaiv.Mathematics
             /// short slash    | ̷  |  337
             /// long slash     | ̸  |  338
             /// </remarks>
-            public static readonly string Divisions = new string(new[]
+            public static readonly string FractionBars = new string(new[]
             {
                 Slash,
                 Colon,
@@ -82,11 +82,11 @@ namespace Qowaiv.Mathematics
 
             public static readonly Regex Pattern = new Regex
             (
-                @"^(\[(?<Integer>.+)\] ?)?(?<Numerator>.+?)(?<Operator>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegexOptions.Compiled
+                @"^(\[(?<Integer>.+)\] ?)?(?<Numerator>.+?)(?<Bar>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegexOptions.Compiled
             );
 
             /// <summary>Returns true if the <see cref="char"/> is a supported division operator character.</summary>
-            public static bool IsDivisionCharacter(char ch) => Divisions.IndexOf(ch) != Parsing.NotFound;
+            public static bool IsFractionBar(char ch) => FractionBars.IndexOf(ch) != Parsing.NotFound;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -371,7 +371,7 @@ namespace Qowaiv.Mathematics
             if (!match.Success)
             {
                 // if no division operator character has been provided, format as a decimal.
-                if (!format.Any(ch => Formatting.IsDivisionCharacter(ch)))
+                if (!format.Any(ch => Formatting.IsFractionBar(ch)))
                 {
                     return ToDecimal().ToString(format, formatProvider);
                 }
@@ -381,24 +381,31 @@ namespace Qowaiv.Mathematics
             var iFormat = match.Groups["Integer"].Value;
             var nFormat = match.Groups[nameof(Numerator)].Value;
             var dFormat = match.Groups[nameof(Denominator)].Value;
-            var division = match.Groups["Operator"].Value;
+            var division = match.Groups["Bar"].Value;
 
             var sb = new StringBuilder();
 
             var n = numerator;
             var d = denominator == 0 ? 1 : denominator;
+            var min = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
 
             if (!string.IsNullOrEmpty(iFormat))
             {
                 n = numerator.Abs() % denominator;
-                sb.Append(ToLong().ToString(iFormat, formatProvider));
+                var integer = ToLong();
+                sb.Append(integer.ToString(iFormat, formatProvider));
 
+                // For -0 n/d
+                if (integer == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(min))
+                {
+                    sb.Insert(0, min);
+                }
             }
             if (nFormat == "super")
             {
                 if (sb.Length == 0 && Sign() == -1)
                 {
-                    sb.Append(formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-");
+                    sb.Append(min);
                 }
                 // use invariant as we want to convert to superscript.
                 var super = n.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();

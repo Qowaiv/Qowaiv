@@ -69,7 +69,7 @@ namespace Qowaiv.Mathematics
             {
                 var ch = str[index];
 
-                if (Fraction.Formatting.IsDivisionCharacter(ch))
+                if (Fraction.Formatting.IsFractionBar(ch))
                 {
                     // A second divide operator, or as last character is not allowed.
                     if (tokens.HasAll(Tokens.Operator) || str.EndOfBuffer(index))

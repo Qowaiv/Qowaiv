@@ -156,7 +156,7 @@ namespace Qowaiv.UnitTests.Mathematics
                 var expected = rnd.Next(1, int.MaxValue).DividedBy(rnd.Next(3, int.MaxValue));
                 var actual = Fraction.Create((decimal)expected);
 
-                if(actual != expected)
+                if (actual != expected)
                 {
                     failures.Add(expected);
                 }
@@ -336,13 +336,13 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual(exp, act);
         }
 
-[Test]
-public void ToString_CustomFormatter_SupportsCustomFormatting()
-{
-    var act = TestStruct.ToString("[0] 0/000", new UnitTestFormatProvider());
-    var exp = "Unit Test Formatter, value: '-4 1/017', format: '[0] 0/000'";
-    Assert.AreEqual(exp, act);
-}
+        [Test]
+        public void ToString_CustomFormatter_SupportsCustomFormatting()
+        {
+            var act = TestStruct.ToString("[0] 0/000", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '-4 1/017', format: '[0] 0/000'";
+            Assert.AreEqual(exp, act);
+        }
 
         [TestCase("-2:7", "-2/7", "0:0")]
         [TestCase("4÷3", "4/3", "0÷0")]
@@ -353,6 +353,8 @@ public void ToString_CustomFormatter_SupportsCustomFormatting()
         [TestCase("5¹¹⁄12", "71/12", "[0]super⁄0")]
         [TestCase("5 11⁄₁₂", "71/12", "[0] 0⁄sub")]
         [TestCase("-3¹⁄₂", "-7/2", "[0]super⁄sub")]
+        [TestCase("-¹⁄₂", "-1/2", "[#]super⁄sub")]
+        [TestCase("-0¹⁄₂", "-1/2", "[0]super⁄sub")]
         [TestCase("⁷¹⁄₁₂", "71/12", "super⁄sub")]
         [TestCase("-⁷⁄₂", "-7/2", "super⁄sub")]
         public void ToString_WithFormat(string expected, Fraction fraction, string format)
@@ -575,7 +577,7 @@ public void ToString_CustomFormatter_SupportsCustomFormatting()
         [Test]
         public void Explicit_FractionToInt64_AreEqual()
         {
-            Assert.AreEqual(-69/17L, (long)TestStruct);
+            Assert.AreEqual(-69 / 17L, (long)TestStruct);
         }
 
         [Test]

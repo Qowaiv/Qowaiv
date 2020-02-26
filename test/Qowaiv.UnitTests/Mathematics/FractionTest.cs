@@ -336,13 +336,13 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void ToString_CustomFormatter_SupportsCustomFormatting()
-        {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: '-69/17', format: 'Unit Test Format'";
-            Assert.AreEqual(exp, act);
-        }
+[Test]
+public void ToString_CustomFormatter_SupportsCustomFormatting()
+{
+    var act = TestStruct.ToString("[0] 0/000", new UnitTestFormatProvider());
+    var exp = "Unit Test Formatter, value: '-4 1/017', format: '[0] 0/000'";
+    Assert.AreEqual(exp, act);
+}
 
         [TestCase("-2:7", "-2/7", "0:0")]
         [TestCase("4÷3", "4/3", "0÷0")]
@@ -370,13 +370,13 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("0/1", default(Fraction));
+            DebuggerDisplayAssert.HasResult("⁰⁄₁ = 0", default(Fraction));
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("-69/17", TestStruct);
+            DebuggerDisplayAssert.HasResult("-⁶⁹⁄₁₇ = -4.05882353", TestStruct);
         }
 
         /// <summary>GetHash should not fail for Fraction.Zero.</summary>

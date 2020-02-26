@@ -49,7 +49,7 @@ namespace Qowaiv.Mathematics
             public const string SuperScript = "⁰¹²³⁴⁵⁶⁷⁸⁹";
             public const string SubScript = "₀₁₂₃₄₅₆₇₈₉";
 
-            public const char Backslash = '/';
+            public const char Slash = '/';
             public const char Colon = ':';
             public const char DivisionSign = '÷';
             public const char FractionSlash = (char)0x2044;
@@ -61,7 +61,7 @@ namespace Qowaiv.Mathematics
             /// <remarks>
             /// name           | c | code 
             /// ---------------|---|------
-            /// backslash      | / |   5C
+            /// slash          | / |   5C
             /// colon          | : |   3A
             /// division sign  | ÷ |   F7
             /// fraction slash | ⁄ | 2044
@@ -71,7 +71,7 @@ namespace Qowaiv.Mathematics
             /// </remarks>
             public static readonly string Divisions = new string(new[]
             {
-                Backslash,
+                Slash,
                 Colon,
                 DivisionSign,
                 FractionSlash,
@@ -147,7 +147,7 @@ namespace Qowaiv.Mathematics
         public long Denominator => denominator;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => ToString("F", CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0:super⁄sub} = {0:0.########}", this);
 
         /// <summary>Returns true if the faction is zero.</summary>
         public bool IsZero() => numerator == 0;
@@ -366,7 +366,7 @@ namespace Qowaiv.Mathematics
                 return formatted;
             }
 
-            var match = Formatting.Pattern.Match(format ?? @"0\0");
+            var match = Formatting.Pattern.Match(string.IsNullOrEmpty(format) ? @"0/0" : format);
 
             if (!match.Success)
             {

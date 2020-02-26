@@ -287,9 +287,17 @@ var divide = = 3.DividedBy(5) / 2.DividedBy(3); // 9/10
 #### Formatting
 There are multiple types of formatting supported. Without
 a fraction bar, the fraction is formatted as a decimal.
+``` C#
+var dec = 17.DividedBy(5).ToString("0.##"); // 3,40
+```
+
+If the whole should be formatted as such the by adding the preferred formatting
+between brackets.
+``` C#
+var withWhole = 17.DividedBy(5).ToString("[0]0/0"); // 3 2/5
+``` 
+
 To specify fraction bar of choice, just define that one in the format:
-
-
 ##### Fraction bars
 name           | c | code 
 ---------------|---|------
@@ -300,17 +308,20 @@ fraction slash | ⁄ | 2044
 division slash | ∕ | 2215
 short slash    | ̷  | 0337
 long slash     | ̸  | 0338
-
 ``` C#
-var fraction = -17.DividedBy(5);
-
-var dec = fraction.ToString("0.##"); // -3,40
-var basic = fraction.ToString("0/0"); // -17/5
-var whole = fraction.ToString("[0]0/0"); // -3 2/5
-var super = fraction.ToString("[0]super/sub"); // -3²⁄₅
-var division = fraction.ToString("0/÷0"); // -17÷5
+var customBar = 3.DividedBy(4).ToString("0/÷0"); // 3÷4
 ```
 
+Unicode supports super- and subscript, and so does `Fraction`:
+```C#
+var super = -17.DividedBy(5).ToString("[0]super/sub"); // -3²⁄₅
+var super = 5.DividedBy(3).ToString("super/sub"); // ⁵⁄₃
+```
+
+The default format (so if you do not specify anything) is:
+```C#
+var basic = 3.DividedBy(4).ToString("0/0"); // 3/4
+```
 
 ## Qowaiv SQL types
 

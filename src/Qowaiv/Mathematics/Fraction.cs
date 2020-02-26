@@ -82,7 +82,7 @@ namespace Qowaiv.Mathematics
 
             public static readonly Regex Pattern = new Regex
             (
-                @"^(\[(?<Integer>.+)\] ?)?(?<Numerator>.+?)(?<Bar>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegexOptions.Compiled
+                @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegexOptions.Compiled
             );
 
             /// <summary>Returns true if the <see cref="char"/> is a supported division operator character.</summary>
@@ -144,7 +144,16 @@ namespace Qowaiv.Mathematics
         public long Numerator => numerator;
 
         /// <summary>Gets the denominator of the fraction.</summary>
-        public long Denominator => denominator;
+        public long Denominator => IsZero() ? 1 : denominator;
+
+        /// <summary>Get whole of the fraction.</summary>
+        public long Whole => IsZero() ? 0 : numerator / denominator;
+
+        /// <summary>Gets the remainder of the fraction.</summary>
+        /// <remarks>
+        /// The remainder is expressed as an absolute value.
+        /// </remarks>
+        public long Remainder => IsZero() ? 0 : (numerator % denominator).Abs();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0:super⁄sub} = {0:0.########}", this);
@@ -378,37 +387,36 @@ namespace Qowaiv.Mathematics
                 throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
             }
 
-            var iFormat = match.Groups["Integer"].Value;
+            var iFormat = match.Groups[nameof(Whole)].Value;
             var nFormat = match.Groups[nameof(Numerator)].Value;
             var dFormat = match.Groups[nameof(Denominator)].Value;
-            var division = match.Groups["Bar"].Value;
+            var bar = match.Groups[nameof(Formatting.FractionBars)].Value;
 
             var sb = new StringBuilder();
 
-            var n = numerator;
-            var d = denominator == 0 ? 1 : denominator;
-            var min = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
+            var remainder = numerator;
+            var negative = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
 
             if (!string.IsNullOrEmpty(iFormat))
             {
-                n = numerator.Abs() % denominator;
-                var integer = ToLong();
-                sb.Append(integer.ToString(iFormat, formatProvider));
+                remainder = Remainder;
+
+                sb.Append(Whole.ToString(iFormat, formatProvider));
 
                 // For -0 n/d
-                if (integer == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(min))
+                if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(negative))
                 {
-                    sb.Insert(0, min);
+                    sb.Insert(0, negative);
                 }
             }
             if (nFormat == "super")
             {
                 if (sb.Length == 0 && Sign() == -1)
                 {
-                    sb.Append(min);
+                    sb.Append(negative);
                 }
                 // use invariant as we want to convert to superscript.
-                var super = n.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
+                var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
                 sb.Append(super);
             }
             else
@@ -417,20 +425,20 @@ namespace Qowaiv.Mathematics
                 {
                     sb.Append(' ');
                 }
-                sb.Append(n.ToString(nFormat, formatProvider));
+                sb.Append(remainder.ToString(nFormat, formatProvider));
             }
 
-            sb.Append(division);
+            sb.Append(bar);
 
             if (dFormat == "sub")
             {
                 // use invariant as we want to convert to superscript.
-                var super = d.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
+                var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
                 sb.Append(super);
             }
             else
             {
-                sb.Append(d.ToString(dFormat, formatProvider));
+                sb.Append(Denominator.ToString(dFormat, formatProvider));
             }
             return sb.ToString();
         }
@@ -530,8 +538,6 @@ namespace Qowaiv.Mathematics
         private decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
         /// <summary>Casts the fraction to a <see cref="double"/>.</summary>
         private double ToDouble() => IsZero() ? 0d : numerator / (double)denominator;
-        /// <summary>Casts the fraction to a <see cref="long"/>.</summary>
-        private long ToLong() => IsZero() ? 0 : numerator / denominator;
 
         /// <summary>Casts a <see cref="decimal"/> to a fraction.</summary>
         private static Fraction Cast(decimal number)

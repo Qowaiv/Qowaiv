@@ -417,8 +417,8 @@ namespace Qowaiv.UnitTests
         {
             using (CultureInfoScope.NewInvariant())
             {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '17.51%', format: 'Unit Test Format'";
+                var act = TestStruct.ToString("%0.0", new UnitTestFormatProvider());
+                var exp = "Unit Test Formatter, value: '%17.5', format: '%0.0'";
 
                 Assert.AreEqual(exp, act);
             }

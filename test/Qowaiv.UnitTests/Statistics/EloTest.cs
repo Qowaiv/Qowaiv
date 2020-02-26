@@ -343,8 +343,8 @@ namespace Qowaiv.UnitTests.Statistics
         {
             using (new CultureInfoScope(CultureInfo.InvariantCulture))
             {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '1732.4', format: 'Unit Test Format'";
+                var act = TestStruct.ToString("00000", new UnitTestFormatProvider());
+                var exp = "Unit Test Formatter, value: '01732', format: '00000'";
 
                 Assert.AreEqual(exp, act);
             }

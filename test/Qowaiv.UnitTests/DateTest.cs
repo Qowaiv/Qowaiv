@@ -378,13 +378,10 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            using (new CultureInfoScope("nl-NL"))
-            {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '14-2-1970', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("d_M_yy", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '14_2_70', format: 'd_M_yy'";
 
-                Assert.AreEqual(exp, act);
-            }
+            Assert.AreEqual(exp, act);
         }
         [Test]
         public void ToString_TestStruct_ComplexPattern()

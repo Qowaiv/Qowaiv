@@ -477,8 +477,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'svo@qowaiv.org', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("U", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: 'SVO@QOWAIV.ORG', format: 'U'";
 
             Assert.AreEqual(exp, act);
         }

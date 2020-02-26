@@ -571,7 +571,7 @@ namespace Qowaiv.Mathematics
         /// <summary>Casts a <see cref="long"/> to a <see cref="Fraction"/>.</summary>
         public static explicit operator Fraction(long number) => Create(number);
         /// <summary>Casts a <see cref="long"/> to a <see cref="Fraction"/>.</summary>
-        public static explicit operator long(Fraction fraction) => fraction.ToLong();
+        public static explicit operator long(Fraction fraction) => fraction.Whole;
 
         #endregion
 

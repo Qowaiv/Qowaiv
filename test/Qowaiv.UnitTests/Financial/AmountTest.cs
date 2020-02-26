@@ -374,7 +374,7 @@ namespace Qowaiv.Financial.UnitTests
         {
             using (CultureInfoScope.NewInvariant())
             {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+                var act = TestStruct.ToString("#.", new UnitTestFormatProvider());
                 var exp = "Unit Test Formatter, value: '42.17', format: 'Unit Test Format'";
 
                 Assert.AreEqual(exp, act);

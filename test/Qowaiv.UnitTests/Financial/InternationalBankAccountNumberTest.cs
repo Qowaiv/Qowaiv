@@ -360,8 +360,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'NL20INGB0001234567', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("[f]", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '[nl20 ingb 0001 2345 67]', format: '[f]'";
 
             Assert.AreEqual(exp, act);
         }

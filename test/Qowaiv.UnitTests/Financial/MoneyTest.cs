@@ -350,14 +350,12 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            using (new CultureInfoScope("fr-FR"))
-            {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: '42,17 €', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("0.0", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '42.2', format: '0.0'";
 
-                Assert.AreEqual(exp, act);
-            }
+            Assert.AreEqual(exp, act);
         }
+
         [Test]
         public void ToString_TestStruct_ComplexPattern()
         {

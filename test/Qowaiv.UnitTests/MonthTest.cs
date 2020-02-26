@@ -537,13 +537,10 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            using (CultureInfoScope.NewInvariant())
-            {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: 'February', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("m", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '02', format: 'm'";
 
-                Assert.AreEqual(exp, act);
-            }
+            Assert.AreEqual(exp, act);
         }
 
         [Test]

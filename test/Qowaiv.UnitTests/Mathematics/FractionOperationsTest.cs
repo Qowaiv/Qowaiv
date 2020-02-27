@@ -130,6 +130,19 @@ namespace Qowaiv.UnitTests.Mathematics
             var x = Assert.Catch<OverflowException>(() => fraction.Add(long.MaxValue - 4));
             StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
         }
+        
+        [Test]
+        public void Add_WithPotentialOverflow_ShouldNotOverflow()
+        {
+            var l = 1.DividedBy(4_000_000_000L);
+            var r = 1.DividedBy(8_000_000_000L);
+
+            var actual = l + r;
+            var expected = 3.DividedBy(8_000_000_000L);
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [Test]
         public void Add_FractionPlusLong()
         {
@@ -173,6 +186,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [TestCase("1/4", "1/12", "1/3")]
         [TestCase("-1/4", "-1/12", "-1/3")]
         [TestCase("-1/4", "1/12", "-1/6")]
+        [TestCase("1/5", "2/5", "3/5")]
         public void Add(Fraction left, Fraction right, Fraction expected)
         {
             Assert.AreEqual(expected, left + right);

@@ -1463,6 +1463,15 @@ namespace Qowaiv.UnitTests
 
         #region Math-like methods tests
 
+        [TestCase(-1, "-3%")]
+        [TestCase(0, "0%")]
+        [TestCase(+1, "10%")]
+        public void Sign(int expected, Percentage percentage)
+        {
+            var actual = percentage.Sign();
+            Assert.AreEqual(expected, actual);
+        }
+
         [Test]
         public void Max_FirstLargest_First()
         {

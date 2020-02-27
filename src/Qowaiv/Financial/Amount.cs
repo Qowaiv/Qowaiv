@@ -5,6 +5,7 @@
 using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Mathematics;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -23,13 +24,16 @@ namespace Qowaiv.Financial
     {
         /// <summary>Represents an Amount of zero.</summary>
         public static readonly Amount Zero;
-        /// <summary>Represents the smallest possible value of an </summary>
+        /// <summary>Represents the smallest possible value of the amount.</summary>
         public static readonly Amount MinValue = new Amount(decimal.MinValue);
-        /// <summary>Represents the biggest possible value of an </summary>
+        /// <summary>Represents the biggest possible value of the amount.</summary>
         public static readonly Amount MaxValue = new Amount(decimal.MaxValue);
 
+        /// <summary>Gets the sign of the value of the amount.</summary>
+        public int Sign() => m_Value.Sign();
+
         /// <summary>Returns the absolute value of the amount.</summary>
-        public Amount Abs() => (Amount)Math.Abs(m_Value);
+        public Amount Abs() => (Amount)m_Value.Abs();
 
         /// <summary>Pluses the amount.</summary>
         internal Amount Plus() => (Amount)(+m_Value);

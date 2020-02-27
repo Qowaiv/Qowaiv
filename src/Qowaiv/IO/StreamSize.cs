@@ -5,6 +5,7 @@
 using Qowaiv.Conversion.IO;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -87,8 +88,11 @@ namespace Qowaiv.IO
 
         #region StreamSize manipulation
 
+        /// <summary>Gets the sign of the stream size.</summary>
+        public int Sign() => m_Value.Sign();
+
         /// <summary>Returns the absolute value of stream size.</summary>
-        public StreamSize Abs() => Math.Abs(m_Value);
+        public StreamSize Abs() => m_Value.Abs();
 
         /// <summary>Increases the stream size with one byte.</summary>
         internal StreamSize Increment() => Add(Byte);

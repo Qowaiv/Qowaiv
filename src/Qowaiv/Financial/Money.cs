@@ -5,6 +5,7 @@
 using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,10 +41,12 @@ namespace Qowaiv.Financial
         /// <summary>Gets the currency of the money.</summary>
         public Currency Currency => m_Currency;
 
-        #region Methods
+
+        /// <summary>Gets the sign of the value of the money.</summary>
+        public int Sign() => m_Value.Sign();
 
         /// <summary>Returns the absolute value of the money.</summary>
-        public Money Abs() => Math.Abs(m_Value) + Currency;
+        public Money Abs() => m_Value.Abs() + Currency;
 
         /// <summary>Pluses the money.</summary>
         internal Money Plus() => +m_Value + Currency;
@@ -350,8 +353,6 @@ namespace Qowaiv.Financial
         [CLSCompliant(false)]
         public static Money operator /(Money money, ushort factor) => money.Divide(factor);
 
-
-
         [DebuggerStepThrough]
         private static Currency HaveSameCurrency(Money l, Money r, string operation)
         {
@@ -361,7 +362,6 @@ namespace Qowaiv.Financial
             }
             return l.Currency;
         }
-        #endregion
 
         /// <summary>Initializes a new instance of Money based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>

@@ -5,6 +5,7 @@
 using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,6 +45,9 @@ namespace Qowaiv
         public static readonly Percentage MaxValue = decimal.MaxValue;
 
         #region Percentage manipulation
+
+        /// <summary>Gets the sign of the percentage.</summary>
+        public int Sign() => m_Value.Sign();
 
         /// <summary>Returns the absolute value of the percentage.</summary>
         public Percentage Abs() => Math.Abs(m_Value);

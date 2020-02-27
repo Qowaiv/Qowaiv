@@ -956,8 +956,14 @@ namespace Qowaiv.UnitTests.IO
 
         #endregion
 
-
-        #region Stream size manipulation tests
+        [TestCase(-1, "-23KB")]
+        [TestCase(0, "0KB")]
+        [TestCase(+1, "16KB")]
+        public void Sign(int expected, StreamSize size)
+        {
+            var actual = size.Sign();
+            Assert.AreEqual(expected, actual);
+        }
 
         [TestCase(1234, -1234)]
         [TestCase(1234, +1234)]
@@ -1223,8 +1229,6 @@ namespace Qowaiv.UnitTests.IO
 
             Assert.AreEqual(exp, act);
         }
-
-        #endregion
 
         #region Type converter tests
 

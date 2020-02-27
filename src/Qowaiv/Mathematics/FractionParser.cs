@@ -15,13 +15,13 @@ namespace Qowaiv.Mathematics
         private enum Tokens
         {
             None /*       */ = 0x00,
-            Operator /*   */ = 0x01,
+            Bar /*        */ = 0x01,
             Space /*      */ = 0x02,
             Number /*     */ = 0x04,
             SuperScript /**/ = 0x08,
             SubScript   /**/ = 0x10,
 
-            Reset = Operator| Space,
+            Reset = Bar| Space,
         }
 
         /// <summary>Parses a <see cref="string"/> that potentially contains a <see cref="Fraction"/>.</summary>
@@ -71,8 +71,8 @@ namespace Qowaiv.Mathematics
 
                 if (Fraction.Formatting.IsFractionBar(ch))
                 {
-                    // A second divide operator, or as last character is not allowed.
-                    if (tokens.HasAll(Tokens.Operator) || str.EndOfBuffer(index))
+                    // A second fraction bar, or as last character is not allowed.
+                    if (tokens.HasAll(Tokens.Bar) || str.EndOfBuffer(index))
                     {
                         return null;
                     }
@@ -81,7 +81,7 @@ namespace Qowaiv.Mathematics
                     {
                         return null;
                     }
-                    tokens |= Tokens.Operator;
+                    tokens |= Tokens.Bar;
                     tokens &= Tokens.Reset;
                 }
                 else if (ch == integerSeperator)
@@ -102,7 +102,7 @@ namespace Qowaiv.Mathematics
                 else if (ch.IsVulgar(out var vulgar))
                 {
                     // A vulgar is only allowed directly followed by an integer, or as single character.
-                    if (tokens.HasAny(Tokens.Operator | Tokens.SuperScript| Tokens.SubScript) || !str.EndOfBuffer(index))
+                    if (tokens.HasAny(Tokens.Bar | Tokens.SuperScript| Tokens.SubScript) || !str.EndOfBuffer(index))
                     {
                         return null;
                     }
@@ -127,7 +127,7 @@ namespace Qowaiv.Mathematics
                 }
                 else if(ch.IsSuperScript(out char digit))
                 {
-                    if (tokens.HasAny(Tokens.SubScript | Tokens.Operator))
+                    if (tokens.HasAny(Tokens.SubScript | Tokens.Bar))
                     {
                         return null;
                     }
@@ -146,7 +146,7 @@ namespace Qowaiv.Mathematics
                 }
                 else if(ch.IsSubScript(out digit))
                 {
-                    if (tokens.HasNone(Tokens.Operator) || tokens.HasAny(Tokens.SuperScript | Tokens.Number))
+                    if (tokens.HasNone(Tokens.Bar) || tokens.HasAny(Tokens.SuperScript | Tokens.Number))
                     {
                         return null;
                     }

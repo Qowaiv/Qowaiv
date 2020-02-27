@@ -85,7 +85,7 @@ namespace Qowaiv.Mathematics
                 @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegexOptions.Compiled
             );
 
-            /// <summary>Returns true if the <see cref="char"/> is a supported division operator character.</summary>
+            /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
             public static bool IsFractionBar(char ch) => FractionBars.IndexOf(ch) != Parsing.NotFound;
         }
 
@@ -408,7 +408,7 @@ namespace Qowaiv.Mathematics
 
             if (!match.Success)
             {
-                // if no division operator character has been provided, format as a decimal.
+                // if no fraction bar character has been provided, format as a decimal.
                 if (!format.Any(ch => Formatting.IsFractionBar(ch)))
                 {
                     return ToDecimal().ToString(format, formatProvider);
@@ -450,7 +450,7 @@ namespace Qowaiv.Mathematics
             }
             else
             {
-                if (sb.Length != 0)
+                if (sb.Length != 0 && sb[sb.Length - 1] != ' ')
                 {
                     sb.Append(' ');
                 }

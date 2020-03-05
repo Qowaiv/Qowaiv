@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -41,7 +42,11 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
         public TypeConverterModelBinder AddAssembly(Assembly assembly)
         {
             Guard.NotNull(assembly, nameof(assembly));
-            var tps = assembly.GetTypes();
+            var tps = assembly
+                .GetTypes()
+                .Where(tp => !tp.IsGenericType)
+                .ToArray();
+
             AddTypes(tps);
             return this;
         }

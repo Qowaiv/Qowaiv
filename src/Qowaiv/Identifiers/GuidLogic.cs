@@ -31,6 +31,12 @@ namespace Qowaiv.Identifiers
         public virtual int GetHashCode(object obj) => Id(obj).GetHashCode();
 
         /// <inheritdoc/>
+        public virtual byte[] ToByteArray(object obj) => obj is Guid guid ? guid.ToByteArray() : Array.Empty<byte>();
+
+        /// <inheritdoc/>
+        public virtual object FromBytes(byte[] bytes) => new Guid(bytes);
+
+        /// <inheritdoc/>
         public virtual string ToString(object obj, string format, IFormatProvider formatProvider)
         {
             var uuid = (Uuid)Id(obj);

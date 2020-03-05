@@ -39,6 +39,35 @@ namespace Qowaiv.UnitTests.Identifiers
             Assert.IsFalse(TestStruct.IsEmpty());
         }
 
+        [Test]
+        public void FromBytes_Null_IsEmpty()
+        {
+            var fromBytes = Id<ForGuid>.FromBytes(null);
+            Assert.AreEqual(Id<ForGuid>.Empty, fromBytes);
+        }
+
+        [Test]
+        public void FromBytes_Bytes_IsTestStruct()
+        {
+            var fromBytes = Id<ForGuid>.FromBytes(new byte[] { 171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4 });
+            Assert.AreEqual(TestStruct, fromBytes);
+        }
+
+        [Test]
+        public void ToByteArray_Empty_EmptyArray()
+        {
+            var bytes = Id<ForGuid>.Empty.ToByteArray();
+            Assert.AreEqual(Array.Empty<byte>(), bytes);
+        }
+
+        [Test]
+        public void ToByteArray_TestStruct_FilledArray()
+        {
+            var bytes = TestStruct.ToByteArray();
+            var exepected = new byte[] { 171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4 };
+            Assert.AreEqual(exepected, bytes);
+        }
+
         /// <summary>TryParse null should be valid.</summary>
         [Test]
         public void TyrParse_Null_IsValid()

@@ -22,6 +22,12 @@ namespace Qowaiv.Identifiers
         /// </summary>
         new int Compare(object x, object y);
 
+        /// <summary>Returns a <see cref="byte"/> that represents the underling value of the identifier.</summary>
+        byte[] ToByteArray(object obj);
+
+        /// <summary>Returns the underling value of the identifier represented by a <see cref="byte"/> array.</summary>
+        object FromBytes(byte[] bytes);
+
         /// <summary>Returns a formatted <see cref="string"/> that represents the underling value of the identifier.</summary>
         string ToString(object obj, string format, IFormatProvider formatProvider);
 

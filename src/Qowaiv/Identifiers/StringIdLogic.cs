@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text;
 
 namespace Qowaiv.Identifiers
 {
@@ -20,6 +21,13 @@ namespace Qowaiv.Identifiers
 
         /// <inheritdoc/>
         public virtual int GetHashCode(object obj) => (Id(obj) ?? string.Empty).GetHashCode();
+
+
+        /// <inheritdoc/>
+        public virtual byte[] ToByteArray(object obj) => obj is string str ? Encoding.ASCII.GetBytes(str) : Array.Empty<byte>();
+
+        /// <inheritdoc/>
+        public virtual object FromBytes(byte[] bytes) => Encoding.ASCII.GetString(bytes);
 
         /// <inheritdoc/>
         public virtual string ToString(object obj, string format, IFormatProvider formatProvider) => Id(obj);

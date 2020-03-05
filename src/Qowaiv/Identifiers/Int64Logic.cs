@@ -23,6 +23,12 @@ namespace Qowaiv.Identifiers
         public virtual int GetHashCode(object obj) => Id(obj).GetHashCode();
 
         /// <inheritdoc/>
+        public virtual byte[] ToByteArray(object obj) => obj is long num ? BitConverter.GetBytes(num) : Array.Empty<byte>();
+
+        /// <inheritdoc/>
+        public virtual object FromBytes(byte[] bytes) => BitConverter.ToInt64(bytes, 0);
+
+        /// <inheritdoc/>
         public virtual string ToString(object obj, string format, IFormatProvider formatProvider) => Id(obj).ToString(format, formatProvider);
 
         /// <inheritdoc/>

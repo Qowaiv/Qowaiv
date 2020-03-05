@@ -47,8 +47,8 @@ namespace Qowaiv.Identifiers
         }
 
         /// <summary>Initializes a new instance of the identifier based on the serialization info.</summary>
-        /// <param name = "info">The serialization info.</param>
-        /// <param name = "context">The streaming context.</param>
+        /// <param name="info">The serialization info.</param>
+        /// <param name="context">The streaming context.</param>
         private Id(SerializationInfo info, StreamingContext context)
         {
             Guard.NotNull(info, nameof(info));
@@ -58,11 +58,14 @@ namespace Qowaiv.Identifiers
         /// <summary>The inner value of the identifier.</summary>
         private object m_Value;
 
-        /// <summary>Returns true if the  identifier is empty, otherwise false.</summary>
+        /// <summary>Returns true if the identifier is empty, otherwise false.</summary>
         public bool IsEmpty()
             => m_Value == default
             || m_Value.Equals(Guid.Empty)
             || m_Value.Equals(0L);
+
+        /// <summary>Gets a <see cref="byte"/> array that represents the identifier.</summary>
+        public byte[] ToByteArray() => IsEmpty() ? Array.Empty<byte>() : logic.ToByteArray(m_Value);
 
         /// <inheritdoc/>
         public int CompareTo(object obj)
@@ -97,7 +100,7 @@ namespace Qowaiv.Identifiers
         public override bool Equals(object obj) => obj is Id<TIdentifier> other && Equals(other);
 
         /// <summary>Returns true if this instance and the other identifier are equal, otherwise false.</summary>
-        /// <param name = "other">
+        /// <param name="other">
         /// The <see cref = "Id{TIdentifier}" /> to compare with.
         /// </param>
         public bool Equals(Id<TIdentifier> other)
@@ -117,13 +120,13 @@ namespace Qowaiv.Identifiers
         public override int GetHashCode() => IsEmpty() ? 0 : logic.GetHashCode(m_Value);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name = "left">The left operand.</param>
-        /// <param name = "right">The right operand</param>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand</param>
         public static bool operator !=(Id<TIdentifier> left, Id<TIdentifier> right) => !(left == right);
 
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name = "left">The left operand.</param>
-        /// <param name = "right">The right operand</param>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand</param>
         public static bool operator ==(Id<TIdentifier> left, Id<TIdentifier> right) => left.Equals(right);
 
         /// <summary>Returns a <see cref="string"/> that represents the identifier for DEBUG purposes.</summary>
@@ -133,16 +136,17 @@ namespace Qowaiv.Identifiers
             get => $"{(IsEmpty()? "{empty}" : ToString(CultureInfo.InvariantCulture))} ({typeof(TIdentifier).Name})";
         }
 
-        /// <summary>Returns a <see cref = "string "/> that represents the identifier.</summary>
+        /// <summary>Returns a <see cref = "string"/> that represents the identifier.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the identifier.</summary>
-        /// <param name = "format">
+        
+        /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
+        /// <param name="format">
         /// The format that this describes the formatting.
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the identifier.</summary>
-        /// <param name = "formatProvider">
+        /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
+        /// <param name="formatProvider">
         /// The format provider.
         /// </param>
         public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
@@ -165,8 +169,8 @@ namespace Qowaiv.Identifiers
         }
 
         /// <summary>Adds the underlying property of the identifier to the serialization info.</summary>
-        /// <param name = "info">The serialization info.</param>
-        /// <param name = "context">The streaming context.</param>
+        /// <param name="info">The serialization info.</param>
+        /// <param name="context">The streaming context.</param>
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             Guard.NotNull(info, nameof(info));
@@ -180,7 +184,7 @@ namespace Qowaiv.Identifiers
         XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the identifier from an <see href = "XmlReader"/>.</summary>
-        /// <param name = "reader">An XML reader.</param>
+        /// <param name="reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
             Guard.NotNull(reader, nameof(reader));
@@ -189,7 +193,7 @@ namespace Qowaiv.Identifiers
         }
 
         /// <summary>Writes the identifier to an <see href = "XmlWriter"/>.</summary>
-        /// <param name = "writer">An XML writer.</param>
+        /// <param name="writer">An XML writer.</param>
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
             Guard.NotNull(writer, nameof(writer));
@@ -299,13 +303,24 @@ namespace Qowaiv.Identifiers
         }
 
         /// <summary>Creates the identifier from a JSON string.</summary>
-        /// <param name = "json">
+        /// <param name="json">
         /// The JSON string to deserialize.
         /// </param>
         /// <returns>
         /// The deserialized identifier.
         /// </returns>
         public static Id<TIdentifier> FromJson(string json) => Parse(json);
+
+        /// <summary>Creates the identfier for the <see cref="byte"/> array.</summary>
+        /// <param name="bytes">
+        /// The <see cref="byte"/> array that represents the underlying value.
+        /// </param>
+        public static Id<TIdentifier> FromBytes(byte[] bytes)
+        {
+            return bytes is null || bytes.Length == 0
+                ? Empty
+                : new Id<TIdentifier>(logic.FromBytes(bytes));
+        }
 
         /// <summary>Returns true if the value represents a valid identifier.</summary>
         /// <param name="val">

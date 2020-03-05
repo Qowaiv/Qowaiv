@@ -41,10 +41,7 @@ namespace Qowaiv.Identifiers
         public static readonly Id<TIdentifier> Empty;
 
         /// <summary>Creates a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
-        private Id(object value)
-        {
-            m_Value = value is Uuid uuid ? (Guid)uuid : value;
-        }
+        private Id(object value) => m_Value = value;
 
         /// <summary>Initializes a new instance of the identifier based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>

@@ -45,5 +45,8 @@ namespace Qowaiv.Identifiers
         /// True if the <see cref="string"/> could be parsed.
         /// </returns>
         bool TryParse(string str, out object id);
+        
+        /// <summary>Creates a new (random) underlying value.</summary>
+        object Next();
     }
 }

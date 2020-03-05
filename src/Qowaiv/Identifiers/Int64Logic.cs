@@ -47,6 +47,9 @@ namespace Qowaiv.Identifiers
             return false;
         }
 
+        /// <inheritdoc/>
+        public virtual object Next() => throw new NotSupportedException();
+
         private static long Id(object obj) => obj is long number ? number : 0;
     }
 }

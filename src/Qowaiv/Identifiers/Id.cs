@@ -322,6 +322,9 @@ namespace Qowaiv.Identifiers
                 : new Id<TIdentifier>(logic.FromBytes(bytes));
         }
 
+        /// <summary>Creates a new identifier.</summary>
+        public static Id<TIdentifier> Next() => new Id<TIdentifier>(logic.Next());
+
         /// <summary>Returns true if the value represents a valid identifier.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.

@@ -22,7 +22,6 @@ namespace Qowaiv.Identifiers
         /// <inheritdoc/>
         public virtual int GetHashCode(object obj) => (Id(obj) ?? string.Empty).GetHashCode();
 
-
         /// <inheritdoc/>
         public virtual byte[] ToByteArray(object obj) => obj is string str ? Encoding.ASCII.GetBytes(str) : Array.Empty<byte>();
 
@@ -41,6 +40,9 @@ namespace Qowaiv.Identifiers
             id = str;
             return true;
         }
+
+        /// <inheritdoc/>
+        public virtual object Next() => throw new NotSupportedException();
 
         private static string Id(object obj) => obj is string str ? str : null;
     }

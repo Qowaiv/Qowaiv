@@ -59,6 +59,9 @@ namespace Qowaiv.Identifiers
             return false;
         }
 
+        /// <inheritdoc/>
+        public virtual object Next() => Guid.NewGuid();
+
         private static Guid Id(object obj) => obj is Guid guid ? guid : Guid.Empty;
     }
 }

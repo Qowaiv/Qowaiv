@@ -5,7 +5,7 @@ using System.Globalization;
 namespace Qowaiv.Identifiers
 {
     /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="long"/>.</summary>
-    public abstract class Int64Logic : IIdentifierLogic
+    public abstract class Int64IdLogic : IIdentifierLogic
     {
         /// <summary>Returns the type of the underlying value (<see cref="long"/>).</summary>
         public Type BaseType => typeof(long);
@@ -30,6 +30,20 @@ namespace Qowaiv.Identifiers
 
         /// <inheritdoc/>
         public virtual string ToString(object obj, string format, IFormatProvider formatProvider) => Id(obj).ToString(format, formatProvider);
+
+        /// <inheritdoc/>
+        public virtual object FromJson(long obj)
+        {
+            if(obj == 0)
+            {
+                return null;
+            }
+            if(obj > 0)
+            {
+                return obj;
+            }
+            throw new InvalidCastException();
+        }
 
         /// <inheritdoc/>
         public virtual object ToJson(object obj) => Id(obj);

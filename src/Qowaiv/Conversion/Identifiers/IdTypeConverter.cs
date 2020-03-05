@@ -8,7 +8,7 @@ using System.Reflection;
 namespace Qowaiv.Conversion.Identifiers
 {
     /// <summary>Provides a conversion for strongly typed identifiers.</summary>
-    public sealed class IdTypeConverter: TypeConverter
+    public sealed class IdTypeConverter : TypeConverter
     {
         /// <summary>Accessor to the underlying value.</summary>
         private readonly FieldInfo m_Value;
@@ -43,7 +43,7 @@ namespace Qowaiv.Conversion.Identifiers
         /// <inheritdoc />
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return BaseConverter.CanConvertFrom(context, sourceType); 
+            return BaseConverter.CanConvertFrom(context, sourceType);
         }
 
         /// <inheritdoc />
@@ -55,19 +55,19 @@ namespace Qowaiv.Conversion.Identifiers
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is null)
+            if (value is null || value.Equals(string.Empty))
             {
                 return Ctor.Invoke(new object[] { null });
             }
             var id = BaseConverter.ConvertFrom(context, culture, value);
-            return Ctor.Invoke(new [] { id });
+            return Ctor.Invoke(new[] { id });
         }
 
         /// <inheritdoc />
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             var id = m_Value.GetValue(value);
-            return base.ConvertTo(context, culture, id, destinationType);
+            return BaseConverter.ConvertTo(context, culture, id, destinationType);
         }
     }
 }

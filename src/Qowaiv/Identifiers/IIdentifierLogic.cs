@@ -31,6 +31,9 @@ namespace Qowaiv.Identifiers
         /// <summary>Returns a formatted <see cref="string"/> that represents the underling value of the identifier.</summary>
         string ToString(object obj, string format, IFormatProvider formatProvider);
 
+        /// <summary>Derializes the underlying value from a JSON number.</summary>
+        object FromJson(long obj);
+
         /// <summary>Serializes the underlying value to a JSON node.</summary>
         object ToJson(object obj);
 
@@ -48,5 +51,6 @@ namespace Qowaiv.Identifiers
         
         /// <summary>Creates a new (random) underlying value.</summary>
         object Next();
+        
     }
 }

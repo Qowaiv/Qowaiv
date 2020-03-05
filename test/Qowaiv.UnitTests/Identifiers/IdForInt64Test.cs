@@ -4,35 +4,36 @@ using Qowaiv.Identifiers;
 using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Identifiers
 {
-    public sealed class ForGuid : GuidLogic { }
+    public sealed class ForInt64 : Int64IdLogic { }
 
     /// <summary>Tests the identifier SVO.</summary>
-    public class IdForGuidTest
+    public class IdForInt64Test
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly Id<ForGuid> TestStruct = Id<ForGuid>.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504");
+        public static readonly Id<ForInt64> TestStruct = Id<ForInt64>.Parse("123456789");
 
-        /// <summary>Id<ForGuid>.Empty should be equal to the default of identifier.</summary>
+        /// <summary>Id<ForInt64>.Empty should be equal to the default of identifier.</summary>
         [Test]
         public void Empty_None_EqualsDefault()
         {
-            Assert.AreEqual(default(Id<ForGuid>), Id<ForGuid>.Empty);
+            Assert.AreEqual(default(Id<ForInt64>), Id<ForInt64>.Empty);
         }
 
-        /// <summary>Id<ForGuid>.IsEmpty() should be true for the default of identifier.</summary>
+        /// <summary>Id<ForInt64>.IsEmpty() should be true for the default of identifier.</summary>
         [Test]
         public void IsEmpty_Default_IsTrue()
         {
-            Assert.IsTrue(default(Id<ForGuid>).IsEmpty());
+            Assert.IsTrue(default(Id<ForInt64>).IsEmpty());
         }
 
-        /// <summary>Id<ForGuid>.IsEmpty() should be false for the TestStruct.</summary>
+        /// <summary>Id<ForInt64>.IsEmpty() should be false for the TestStruct.</summary>
         [Test]
         public void IsEmpty_TestStruct_IsFalse()
         {
@@ -42,21 +43,21 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void FromBytes_Null_IsEmpty()
         {
-            var fromBytes = Id<ForGuid>.FromBytes(null);
-            Assert.AreEqual(Id<ForGuid>.Empty, fromBytes);
+            var fromBytes = Id<ForInt64>.FromBytes(null);
+            Assert.AreEqual(Id<ForInt64>.Empty, fromBytes);
         }
 
         [Test]
         public void FromBytes_Bytes_IsTestStruct()
         {
-            var fromBytes = Id<ForGuid>.FromBytes(new byte[] { 171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4 });
+            var fromBytes = Id<ForInt64>.FromBytes(new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 });
             Assert.AreEqual(TestStruct, fromBytes);
         }
 
         [Test]
         public void ToByteArray_Empty_EmptyArray()
         {
-            var bytes = Id<ForGuid>.Empty.ToByteArray();
+            var bytes = Id<ForInt64>.Empty.ToByteArray();
             Assert.AreEqual(Array.Empty<byte>(), bytes);
         }
 
@@ -64,7 +65,7 @@ namespace Qowaiv.UnitTests.Identifiers
         public void ToByteArray_TestStruct_FilledArray()
         {
             var bytes = TestStruct.ToByteArray();
-            var exepected = new byte[] { 171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4 };
+            var exepected = new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 };
             Assert.AreEqual(exepected, bytes);
         }
 
@@ -72,24 +73,24 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TyrParse_Null_IsValid()
         {
-            Assert.IsTrue(Id<ForGuid>.TryParse(null, out var val));
-            Assert.AreEqual(default(Id<ForGuid>), val);
+            Assert.IsTrue(Id<ForInt64>.TryParse(null, out var val));
+            Assert.AreEqual(default(Id<ForInt64>), val);
         }
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
         public void TyrParse_StringEmpty_IsValid()
         {
-            Assert.IsTrue(Id<ForGuid>.TryParse(string.Empty, out var val));
-            Assert.AreEqual(default(Id<ForGuid>), val);
+            Assert.IsTrue(Id<ForInt64>.TryParse(string.Empty, out var val));
+            Assert.AreEqual(default(Id<ForInt64>), val);
         }
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            string str = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
-            Assert.IsTrue(Id<ForGuid>.TryParse(str, out var val));
+            string str = "123456789";
+            Assert.IsTrue(Id<ForInt64>.TryParse(str, out var val));
             Assert.AreEqual(str, val.ToString());
         }
 
@@ -97,9 +98,9 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            string str = "0F5AB5AB-12CB-4629-878D";
-            Assert.IsFalse(Id<ForGuid>.TryParse(str, out var val));
-            Assert.AreEqual(default(Id<ForGuid>), val);
+            string str = "ABC";
+            Assert.IsFalse(Id<ForInt64>.TryParse(str, out var val));
+            Assert.AreEqual(default(Id<ForInt64>), val);
         }
 
         [Test]
@@ -109,7 +110,7 @@ namespace Qowaiv.UnitTests.Identifiers
             {
                 Assert.Catch<FormatException>(() =>
                 {
-                    Id<ForGuid>.Parse("InvalidInput");
+                    Id<ForInt64>.Parse("InvalidInput");
                 }
 
                 , "Not a valid identifier");
@@ -122,7 +123,7 @@ namespace Qowaiv.UnitTests.Identifiers
             using (new CultureInfoScope("en-GB"))
             {
                 var exp = TestStruct;
-                var act = Id<ForGuid>.TryParse(exp.ToString());
+                var act = Id<ForInt64>.TryParse(exp.ToString());
                 Assert.AreEqual(exp, act);
             }
         }
@@ -132,8 +133,8 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             using (new CultureInfoScope("en-GB"))
             {
-                var exp = default(Id<ForGuid>);
-                var act = Id<ForGuid>.TryParse("InvalidInput");
+                var exp = default(Id<ForInt64>);
+                var act = Id<ForInt64>.TryParse("InvalidInput");
                 Assert.AreEqual(exp, act);
             }
         }
@@ -141,14 +142,14 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void Constructor_SerializationInfoIsNull_Throws()
         {
-            Assert.Catch<ArgumentNullException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForGuid>>(null, default));
+            Assert.Catch<ArgumentNullException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForInt64>>(null, default));
         }
 
         [Test]
         public void Constructor_InvalidSerializationInfo_Throws()
         {
-            var info = new SerializationInfo(typeof(Id<ForGuid>), new FormatterConverter());
-            Assert.Catch<SerializationException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForGuid>>(info, default));
+            var info = new SerializationInfo(typeof(Id<ForInt64>), new FormatterConverter());
+            Assert.Catch<SerializationException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForInt64>>(info, default));
         }
 
         [Test]
@@ -162,9 +163,9 @@ namespace Qowaiv.UnitTests.Identifiers
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(Id<ForGuid>), new FormatterConverter());
+            var info = new SerializationInfo(typeof(Id<ForInt64>), new FormatterConverter());
             obj.GetObjectData(info, default);
-            Assert.AreEqual(Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), info.GetValue("Value", typeof(Guid)));
+            Assert.AreEqual(123456789L, info.GetValue("Value", typeof(long)));
         }
 
         [Test]
@@ -189,21 +190,21 @@ namespace Qowaiv.UnitTests.Identifiers
         public void XmlSerialize_TestStruct_AreEqual()
         {
             var act = SerializationTest.XmlSerialize(TestStruct);
-            var exp = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
+            var exp = "123456789";
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Id<ForGuid>>("0F5AB5AB-12CB-4629-878D-B18B88B9A504");
+            var act = SerializationTest.XmlDeserialize<Id<ForInt64>>("123456789");
             Assert.AreEqual(TestStruct, act);
         }
 
         [Test]
-        public void SerializeDeserialize_IdForGuidSerializeObject_AreEqual()
+        public void SerializeDeserialize_IdForInt64SerializeObject_AreEqual()
         {
-            var input = new IdForGuidSerializeObject
+            var input = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -211,7 +212,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var exp = new IdForGuidSerializeObject
+            var exp = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -226,9 +227,9 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void XmlSerializeDeserialize_IdForGuidSerializeObject_AreEqual()
+        public void XmlSerializeDeserialize_IdForInt64SerializeObject_AreEqual()
         {
-            var input = new IdForGuidSerializeObject
+            var input = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -236,7 +237,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var exp = new IdForGuidSerializeObject
+            var exp = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -251,9 +252,9 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void DataContractSerializeDeserialize_IdForGuidSerializeObject_AreEqual()
+        public void DataContractSerializeDeserialize_IdForInt64SerializeObject_AreEqual()
         {
-            var input = new IdForGuidSerializeObject
+            var input = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -261,7 +262,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var exp = new IdForGuidSerializeObject
+            var exp = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = TestStruct,
@@ -278,7 +279,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void SerializeDeserialize_Default_AreEqual()
         {
-            var input = new IdForGuidSerializeObject
+            var input = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -286,7 +287,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var exp = new IdForGuidSerializeObject
+            var exp = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -303,7 +304,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void XmlSerializeDeserialize_Default_AreEqual()
         {
-            var input = new IdForGuidSerializeObject
+            var input = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -311,7 +312,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var exp = new IdForGuidSerializeObject
+            var exp = new IdForInt64SerializeObject
             {
                 Id = 17,
                 Obj = default,
@@ -335,21 +336,23 @@ namespace Qowaiv.UnitTests.Identifiers
         [TestCase("2017-06-11")]
         public void FromJson_Invalid_Throws(object json)
         {
-            Assert.Catch<FormatException>(() => JsonTester.Read<Id<ForGuid>>(json));
+            Assert.Catch<FormatException>(() => JsonTester.Read<Id<ForInt64>>(json));
         }
 
-        [TestCase("0F5AB5AB-12CB-4629-878D-B18B88B9A504", "0F5AB5AB-12CB-4629-878D-B18B88B9A504")]
+        [TestCase("123456789", "123456789")]
+        [TestCase("12345678", 12345678L)]
         [TestCase("", "")]
-        public void FromJson(Id<ForGuid> expected, object json)
+        [TestCase("", 0L)]
+        public void FromJson(Id<ForInt64> expected, object json)
         {
-            var actual = JsonTester.Read<Id<ForGuid>>(json);
+            var actual = JsonTester.Read<Id<ForInt64>>(json);
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void ToString_Empty_StringEmpty()
         {
-            var act = Id<ForGuid>.Empty.ToString();
+            var act = Id<ForInt64>.Empty.ToString(CultureInfo.InvariantCulture);
             var exp = "";
             Assert.AreEqual(exp, act);
         }
@@ -357,34 +360,34 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("S", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'q7VaD8sSKUaHjbGLiLmlBA', format: 'S'";
+            var act = TestStruct.ToString("#,##0.0", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: '123,456,789.0', format: '#,##0.0'";
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void DebuggerDisplay_DebugToString_HasAttribute()
         {
-            DebuggerDisplayAssert.HasAttribute(typeof(Id<ForGuid>));
+            DebuggerDisplayAssert.HasAttribute(typeof(Id<ForInt64>));
         }
 
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("{empty} (ForGuid)", default(Id<ForGuid>));
+            DebuggerDisplayAssert.HasResult("{empty} (ForInt64)", default(Id<ForInt64>));
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("0f5ab5ab-12cb-4629-878d-b18b88b9a504 (ForGuid)", TestStruct);
+            DebuggerDisplayAssert.HasResult("123456789 (ForInt64)", TestStruct);
         }
 
-        /// <summary>GetHash should not fail for Id<ForGuid>.Empty.</summary>
+        /// <summary>GetHash should not fail for Id<ForInt64>.Empty.</summary>
         [Test]
         public void GetHash_Empty_Hash()
         {
-            Assert.AreEqual(0, Id<ForGuid>.Empty.GetHashCode());
+            Assert.AreEqual(0, Id<ForInt64>.Empty.GetHashCode());
         }
 
         /// <summary>GetHash should not fail for the test struct.</summary>
@@ -397,14 +400,14 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void Equals_EmptyEmpty_IsTrue()
         {
-            Assert.IsTrue(Id<ForGuid>.Empty.Equals(Id<ForGuid>.Empty));
+            Assert.IsTrue(Id<ForInt64>.Empty.Equals(Id<ForInt64>.Empty));
         }
 
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            var l = Id<ForGuid>.Parse("Qowaiv_SVOLibrary_GUIA");
-            var r = Id<ForGuid>.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+            var l = Id<ForInt64>.Parse("123456");
+            var r = Id<ForInt64>.Parse("+0000123456");
             Assert.IsTrue(l.Equals(r));
         }
 
@@ -417,13 +420,13 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(TestStruct.Equals(Id<ForGuid>.Empty));
+            Assert.IsFalse(TestStruct.Equals(Id<ForInt64>.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(Id<ForGuid>.Empty.Equals(TestStruct));
+            Assert.IsFalse(Id<ForInt64>.Empty.Equals(TestStruct));
         }
 
         [Test]
@@ -462,28 +465,28 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>Orders a list of identifiers ascending.</summary>
         [Test]
-        public void OrderBy_IdForGuid_AreEqual()
+        public void OrderBy_IdForInt64_AreEqual()
         {
-            var item0 = Id<ForGuid>.Parse("45140308-9961-40D7-8907-31592772F556");
-            var item1 = Id<ForGuid>.Parse("56AE40C9-A285-4B9B-A725-DE4B48F24BB0");
-            var item2 = Id<ForGuid>.Parse("63FBD011-595C-46EB-AF59-5E4C6AD23C41");
-            var item3 = Id<ForGuid>.Parse("BE236238-7A6D-4CE3-A955-B3D672593B8F");
-            var inp = new List<Id<ForGuid>> { Id<ForGuid>.Empty, item3, item2, item0, item1, Id<ForGuid>.Empty };
-            var exp = new List<Id<ForGuid>> { Id<ForGuid>.Empty, Id<ForGuid>.Empty, item0, item1, item2, item3 };
+            var item0 = Id<ForInt64>.Parse("032456");
+            var item1 = Id<ForInt64>.Parse("132456");
+            var item2 = Id<ForInt64>.Parse("232456");
+            var item3 = Id<ForInt64>.Parse("732456");
+            var inp = new List<Id<ForInt64>> { Id<ForInt64>.Empty, item3, item2, item0, item1, Id<ForInt64>.Empty };
+            var exp = new List<Id<ForInt64>> { Id<ForInt64>.Empty, Id<ForInt64>.Empty, item0, item1, item2, item3 };
             var act = inp.OrderBy(item => item).ToList();
             CollectionAssert.AreEqual(exp, act);
         }
 
         /// <summary>Orders a list of identifiers descending.</summary>
         [Test]
-        public void OrderByDescending_IdForGuid_AreEqual()
+        public void OrderByDescending_IdForInt64_AreEqual()
         {
-            var item0 = Id<ForGuid>.Parse("45140308-9961-40D7-8907-31592772F556");
-            var item1 = Id<ForGuid>.Parse("56AE40C9-A285-4B9B-A725-DE4B48F24BB0");
-            var item2 = Id<ForGuid>.Parse("63FBD011-595C-46EB-AF59-5E4C6AD23C41");
-            var item3 = Id<ForGuid>.Parse("BE236238-7A6D-4CE3-A955-B3D672593B8F");
-            var inp = new List<Id<ForGuid>> { Id<ForGuid>.Empty, item3, item2, item0, item1, Id<ForGuid>.Empty };
-            var exp = new List<Id<ForGuid>> { item3, item2, item1, item0, Id<ForGuid>.Empty, Id<ForGuid>.Empty };
+            var item0 = Id<ForInt64>.Parse("032456");
+            var item1 = Id<ForInt64>.Parse("132456");
+            var item2 = Id<ForInt64>.Parse("232456");
+            var item3 = Id<ForInt64>.Parse("732456");
+            var inp = new List<Id<ForInt64>> { Id<ForInt64>.Empty, item3, item2, item0, item1, Id<ForInt64>.Empty };
+            var exp = new List<Id<ForInt64>> { item3, item2, item1, item0, Id<ForInt64>.Empty, Id<ForInt64>.Empty };
             var act = inp.OrderByDescending(item => item).ToList();
             CollectionAssert.AreEqual(exp, act);
         }
@@ -508,54 +511,54 @@ namespace Qowaiv.UnitTests.Identifiers
         public void CompareTo_newObject_Throw()
         {
             var x = Assert.Catch<ArgumentException>(() => TestStruct.CompareTo(new object()));
-            Assert.AreEqual("Argument must be Id<ForGuid>. (Parameter 'obj')", x.Message);
+            Assert.AreEqual("Argument must be Id<ForInt64>. (Parameter 'obj')", x.Message);
         }
 
         [Test]
-        public void ConverterExists_IdForGuid_IsTrue()
+        public void ConverterExists_IdForInt64_IsTrue()
         {
-            TypeConverterAssert.ConverterExists(typeof(Id<ForGuid>));
+            TypeConverterAssert.ConverterExists(typeof(Id<ForInt64>));
         }
 
         [Test]
-        public void CanNotConvertFromInt32_IdForGuid_IsTrue()
+        public void CanNotConvertFromInt32_IdForInt64_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Id<ForGuid>), typeof(int));
+            TypeConverterAssert.CanNotConvertFrom(typeof(Id<ForInt64>), typeof(int));
         }
 
         [Test]
-        public void CanNotConvertToInt32_IdForGuid_IsTrue()
+        public void CanNotConvertToGuid_IdForInt64_IsTrue()
         {
-            TypeConverterAssert.CanNotConvertTo(typeof(Id<ForGuid>), typeof(int));
+            TypeConverterAssert.CanNotConvertTo(typeof(Id<ForInt64>), typeof(Guid));
         }
 
         [Test]
-        public void CanConvertFromString_IdForGuid_IsTrue()
+        public void CanConvertFromString_IdForInt64_IsTrue()
         {
-            TypeConverterAssert.CanConvertFromString(typeof(Id<ForGuid>));
+            TypeConverterAssert.CanConvertFromString(typeof(Id<ForInt64>));
         }
 
         [Test]
-        public void CanConvertToString_IdForGuid_IsTrue()
+        public void CanConvertToString_IdForInt64_IsTrue()
         {
-            TypeConverterAssert.CanConvertToString(typeof(Id<ForGuid>));
+            TypeConverterAssert.CanConvertToString(typeof(Id<ForInt64>));
         }
 
         [Test]
-        public void ConvertFrom_StringNull_IdForGuidEmpty()
+        public void ConvertFrom_StringNull_IdForInt64Empty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(Id<ForGuid>.Empty, (string)null);
+                TypeConverterAssert.ConvertFromEquals(Id<ForInt64>.Empty, (string)null);
             }
         }
 
         [Test]
-        public void ConvertFrom_StringEmpty_IdForGuid_Empty()
+        public void ConvertFrom_StringEmpty_IdForInt64_Empty()
         {
             using (new CultureInfoScope("en-GB"))
             {
-                TypeConverterAssert.ConvertFromEquals(Id<ForGuid>.Empty, string.Empty);
+                TypeConverterAssert.ConvertFromEquals(Id<ForInt64>.Empty, string.Empty);
             }
         }
 
@@ -578,33 +581,34 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void Next_100Items_AllUnique()
+        public void Next_NotSupported()
         {
-            var nexts = Enumerable.Range(0, 100).Select(i => Id<ForGuid>.Next()).ToArray();
-            CollectionAssert.AllItemsAreUnique(nexts);
+            Assert.Throws<NotSupportedException>(() => Id<ForInt64>.Next());
         }
 
         [TestCase(null)]
         [TestCase("")]
-        [TestCase("Complex")]
+        [TestCase("ABC")]
+        [TestCase("-1")]
         public void IsInvalid_String(string str)
         {
-            Assert.IsFalse(Id<ForGuid>.IsValid(str));
+            Assert.IsFalse(Id<ForInt64>.IsValid(str));
         }
 
-        [TestCase("0F5AB5AB-12CB-4629-878D-B18B88B9A504")]
-        [TestCase("Qowaiv_SVOLibrary_GUIA")]
+        [TestCase("0")]
+        [TestCase("1234")]
+        [TestCase("+123456")]
         public void IsValid_String(string str)
         {
-            Assert.IsTrue(Id<ForGuid>.IsValid(str));
+            Assert.IsTrue(Id<ForInt64>.IsValid(str));
         }
     }
 
     [Serializable]
-    public class IdForGuidSerializeObject
+    public class IdForInt64SerializeObject
     {
         public int Id { get; set; }
-        public Id<ForGuid> Obj { get; set; }
+        public Id<ForInt64> Obj { get; set; }
         public DateTime Date { get; set; }
     }
 }

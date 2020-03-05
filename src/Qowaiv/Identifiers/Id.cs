@@ -311,6 +311,15 @@ namespace Qowaiv.Identifiers
         /// </returns>
         public static Id<TIdentifier> FromJson(string json) => Parse(json);
 
+        /// <summary>Deserializes the date from a JSON number.</summary>
+        /// <param name="json">
+        /// The JSON number to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized date.
+        /// </returns>
+        public static Id<TIdentifier> FromJson(long json) => new Id<TIdentifier>(logic.FromJson(json));
+
         /// <summary>Creates the identfier for the <see cref="byte"/> array.</summary>
         /// <param name="bytes">
         /// The <see cref="byte"/> array that represents the underlying value.

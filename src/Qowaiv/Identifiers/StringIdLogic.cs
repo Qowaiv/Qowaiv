@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 
 namespace Qowaiv.Identifiers
@@ -30,6 +31,9 @@ namespace Qowaiv.Identifiers
 
         /// <inheritdoc/>
         public virtual string ToString(object obj, string format, IFormatProvider formatProvider) => Id(obj);
+
+        /// <inheritdoc/>
+        public virtual object FromJson(long obj) => obj.ToString(CultureInfo.InvariantCulture);
 
         /// <inheritdoc/>
         public virtual object ToJson(object obj) => Id(obj);

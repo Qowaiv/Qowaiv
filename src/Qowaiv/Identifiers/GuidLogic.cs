@@ -45,6 +45,9 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        public virtual object FromJson(long obj) => throw new NotSupportedException();
+
+        /// <inheritdoc/>
         public virtual object ToJson(object obj) => ToString(obj, DefaultFormat, CultureInfo.InvariantCulture);
 
         /// <inheritdoc/>

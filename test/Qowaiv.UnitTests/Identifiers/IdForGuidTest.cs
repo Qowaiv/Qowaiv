@@ -59,7 +59,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            string str = "string";
+            string str = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
             Assert.IsTrue(Id<ForGuid>.TryParse(str, out var val));
             Assert.AreEqual(str, val.ToString());
         }
@@ -68,7 +68,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TyrParse_StringValue_IsNotValid()
         {
-            string str = "invalid";
+            string str = "0F5AB5AB-12CB-4629-878D";
             Assert.IsFalse(Id<ForGuid>.TryParse(str, out var val));
             Assert.AreEqual(default(Id<ForGuid>), val);
         }
@@ -160,14 +160,14 @@ namespace Qowaiv.UnitTests.Identifiers
         public void XmlSerialize_TestStruct_AreEqual()
         {
             var act = SerializationTest.XmlSerialize(TestStruct);
-            var exp = "xmlstring";
+            var exp = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Id<ForGuid>>("xmlstring");
+            var act = SerializationTest.XmlDeserialize<Id<ForGuid>>("0F5AB5AB-12CB-4629-878D-B18B88B9A504");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -303,20 +303,14 @@ namespace Qowaiv.UnitTests.Identifiers
             Assert.IsNull(obj.GetSchema());
         }
 
-        [TestCase("Invalid input")]
         [TestCase("2017-06-11")]
-        [TestCase(long.MinValue)]
-        [TestCase(double.MinValue)]
         public void FromJson_Invalid_Throws(object json)
         {
             Assert.Catch<FormatException>(() => JsonTester.Read<Id<ForGuid>>(json));
         }
 
-        [TestCase("yes", "yes")]
-        [TestCase("yes", true)]
-        [TestCase("yes", 1)]
-        [TestCase("no", 0.0)]
-        [TestCase("?", "unknown")]
+        [TestCase("0F5AB5AB-12CB-4629-878D-B18B88B9A504", "0F5AB5AB-12CB-4629-878D-B18B88B9A504")]
+        [TestCase("", "")]
         public void FromJson(Id<ForGuid> expected, object json)
         {
             var actual = JsonTester.Read<Id<ForGuid>>(json);
@@ -334,23 +328,9 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
+            var act = TestStruct.ToString("S", new UnitTestFormatProvider());
+            var exp = "Unit Test Formatter, value: 'q7VaD8sSKUaHjbGLiLmlBA', format: 'S'";
             Assert.AreEqual(exp, act);
-        }
-
-        [TestCase("en-US", "", "ComplexPattern", "ComplexPattern")]
-        [TestCase("nl-BE", null, "1600,1", "1600,1")]
-        [TestCase("en-GB", null, "1600.1", "1600.1")]
-        [TestCase("nl-BE", "0000", "800", "0800")]
-        [TestCase("en-GB", "0000", "800", "0800")]
-        public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
-        {
-            using (new CultureInfoScope(culture))
-            {
-                var actual = Id<ForGuid>.Parse(str).ToString(format);
-                Assert.AreEqual(expected, actual);
-            }
         }
 
         [Test]
@@ -362,13 +342,13 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
-            DebuggerDisplayAssert.HasResult("{empty}", default(Id<ForGuid>));
+            DebuggerDisplayAssert.HasResult("{empty} (ForGuid)", default(Id<ForGuid>));
         }
 
         [Test]
         public void DebuggerDisplay_TestStruct_String()
         {
-            DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
+            DebuggerDisplayAssert.HasResult("0f5ab5ab-12cb-4629-878d-b18b88b9a504 (ForGuid)", TestStruct);
         }
 
         /// <summary>GetHash should not fail for Id<ForGuid>.Empty.</summary>

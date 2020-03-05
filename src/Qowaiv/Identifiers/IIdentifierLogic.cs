@@ -5,11 +5,17 @@ using System.ComponentModel;
 
 namespace Qowaiv.Identifiers
 {
-    /// <summary>Injectable logic for strongly typed identfiers.</summary>
+    /// <summary>Injectable logic for strongly typed identfiers (<see cref="Id{TIdentifier}"/>).</summary>
+    /// <remarks>
+    /// The logic is not called for <see cref="Id{TIdentifier}.Empty"/>.
+    /// </remarks>
     public interface IIdentifierLogic : IEqualityComparer<object>, IComparer<object>, IComparer
     {
         /// <summary>Returns a type converter for the type of the underlying value.</summary>
         TypeConverter Converter { get; }
+
+        /// <summary>Returns the type of the underlying value.</summary>
+        Type BaseType { get; }
 
         /// <summary>Compares the underlying values and returns a value indicating
         /// whether one is less than, equal to, or greater than the other.

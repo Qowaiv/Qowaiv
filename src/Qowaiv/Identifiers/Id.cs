@@ -14,6 +14,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Identifiers
@@ -38,9 +40,112 @@ namespace Qowaiv.Identifiers
         /// <summary>Represents an empty/not set identifier.</summary>
         public static readonly Id<TIdentifier> Empty;
 
+        /// <summary>Creates a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
+        private Id(object value)
+        {
+            m_Value = value is Uuid uuid ? (Guid)uuid : value;
+        }
+
+        /// <summary>Initializes a new instance of the identifier based on the serialization info.</summary>
+        /// <param name = "info">The serialization info.</param>
+        /// <param name = "context">The streaming context.</param>
+        private Id(SerializationInfo info, StreamingContext context)
+        {
+            Guard.NotNull(info, nameof(info));
+            m_Value = info.GetValue("Value", typeof(object));
+        }
+
+        /// <summary>The inner value of the identifier.</summary>
+        private object m_Value;
+
+        /// <summary>Returns true if the  identifier is empty, otherwise false.</summary>
+        public bool IsEmpty()
+            => m_Value == default
+            || m_Value.Equals(Guid.Empty)
+            || m_Value.Equals(0L);
+
+        /// <inheritdoc/>
+        public int CompareTo(object obj)
+        {
+            if (obj is null)
+            {
+                return 1;
+            }
+
+            if (obj is Id<TIdentifier> other)
+            {
+                return CompareTo(other);
+            }
+
+            throw new ArgumentException($"Argument must be Id<{typeof(TIdentifier).Name}>.", nameof(obj));
+        }
+
+        /// <inheritdoc/>
+        public int CompareTo(Id<TIdentifier> other)
+        {
+            var isEmpty = IsEmpty();
+            var otherIsEmpty = other.IsEmpty();
+
+            if (isEmpty || otherIsEmpty)
+            {
+                return otherIsEmpty.CompareTo(isEmpty);
+            }
+            return logic.Compare(m_Value, other.m_Value);
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is Id<TIdentifier> other && Equals(other);
+
+        /// <summary>Returns true if this instance and the other identifier are equal, otherwise false.</summary>
+        /// <param name = "other">
+        /// The <see cref = "Id{TIdentifier}" /> to compare with.
+        /// </param>
+        public bool Equals(Id<TIdentifier> other)
+        {
+            var isEmpty = IsEmpty();
+            var otherIsEmpty = other.IsEmpty();
+
+            if (isEmpty || otherIsEmpty)
+            {
+                return isEmpty == otherIsEmpty;
+            }
+
+            return logic.Equals(m_Value, other.m_Value);
+        }
+
+        /// <inheritdoc/>
+        public override int GetHashCode() => IsEmpty() ? 0 : logic.GetHashCode(m_Value);
+
+        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
+        /// <param name = "left">The left operand.</param>
+        /// <param name = "right">The right operand</param>
+        public static bool operator !=(Id<TIdentifier> left, Id<TIdentifier> right) => !(left == right);
+
+        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
+        /// <param name = "left">The left operand.</param>
+        /// <param name = "right">The right operand</param>
+        public static bool operator ==(Id<TIdentifier> left, Id<TIdentifier> right) => left.Equals(right);
+
         /// <summary>Returns a <see cref="string"/> that represents the identifier for DEBUG purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture);
+        private string DebuggerDisplay
+        {
+            get => $"{(IsEmpty()? "{empty}" : ToString(CultureInfo.InvariantCulture))} ({typeof(TIdentifier).Name})";
+        }
+
+        /// <summary>Returns a <see cref = "string "/> that represents the identifier.</summary>
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the identifier.</summary>
+        /// <param name = "format">
+        /// The format that this describes the formatting.
+        /// </param>
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the identifier.</summary>
+        /// <param name = "formatProvider">
+        /// The format provider.
+        /// </param>
+        public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the identifier.</summary>
         /// <param name="format">
@@ -59,8 +164,37 @@ namespace Qowaiv.Identifiers
             return IsEmpty() ? string.Empty : logic.ToString(m_Value, format, formatProvider);
         }
 
-        /// <summary>Gets an XML string representation of the identifier.</summary>
-        private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+        /// <summary>Adds the underlying property of the identifier to the serialization info.</summary>
+        /// <param name = "info">The serialization info.</param>
+        /// <param name = "context">The streaming context.</param>
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            Guard.NotNull(info, nameof(info));
+            info.AddValue("Value", m_Value);
+        }
+
+        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the identifier.</summary>
+        /// <remarks>
+        /// Returns null as no schema is required.
+        /// </remarks>
+        XmlSchema IXmlSerializable.GetSchema() => null;
+
+        /// <summary>Reads the identifier from an <see href = "XmlReader"/>.</summary>
+        /// <param name = "reader">An XML reader.</param>
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+            Guard.NotNull(reader, nameof(reader));
+            var xml = reader.ReadElementString();
+            m_Value = Parse(xml).m_Value;
+        }
+
+        /// <summary>Writes the identifier to an <see href = "XmlWriter"/>.</summary>
+        /// <param name = "writer">An XML writer.</param>
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            Guard.NotNull(writer, nameof(writer));
+            writer.WriteString(ToString(CultureInfo.InvariantCulture));
+        }
 
         /// <summary>Serializes the identifier to a JSON node.</summary>
         /// <returns>
@@ -68,17 +202,73 @@ namespace Qowaiv.Identifiers
         /// </returns>
         public object ToJson() => IsEmpty() ? null : logic.ToJson(m_Value);
 
+        private string CastToString()
+        {
+            if (logic.BaseType != typeof(string))
+            {
+                throw new InvalidCastException();
+            }
+            return m_Value as string;
+        }
+
+        private long CastToInt64()
+        {
+            if (logic.BaseType != typeof(long))
+            {
+                throw new InvalidCastException();
+            }
+            return m_Value is long num ? num : 0;
+        }
+
+        private Guid CastToGuid()
+        {
+            if (logic.BaseType != typeof(Guid))
+            {
+                throw new InvalidCastException();
+            }
+            return m_Value is Guid guid ? guid : Guid.Empty;
+        }
+
         /// <summary>Casts the identifier to a <see cref="string"/>.</summary>
-        public static explicit operator string(Id<TIdentifier> id) => id.m_Value is string str ? str : null;
+        public static explicit operator string(Id<TIdentifier> id) => id.CastToString();
 
         /// <summary>Casts the identifier to a <see cref="long"/>.</summary>
-        public static explicit operator long(Id<TIdentifier> id) => id.m_Value is long num ? num : 0;
+        public static explicit operator long(Id<TIdentifier> id) => id.CastToInt64();
 
         /// <summary>Casts the identifier to a <see cref="Guid"/>.</summary>
-        public static explicit operator Guid(Id<TIdentifier> id) => id.m_Value is Guid guid ? guid : Guid.Empty;
+        public static explicit operator Guid(Id<TIdentifier> id) => id.CastToGuid();
 
         /// <summary>Casts the identifier to a <see cref="Uuid"/>.</summary>
-        public static explicit operator Uuid(Id<TIdentifier> id) => id.m_Value is Uuid uuid ? uuid : Uuid.Empty;
+        public static explicit operator Uuid(Id<TIdentifier> id) => id.CastToGuid();
+
+        /// <summary>Converts the <see cref="string"/> to <see cref="Id{TIdentifier}"/>.</summary>
+        /// <param name="s">
+        /// A string containing the identifier to convert.
+        /// </param>
+        /// <returns>
+        /// The parsed identifier.
+        /// </returns>
+        /// <exception cref="FormatException">
+        /// <paramref name="s"/> is not in the correct format.
+        /// </exception>
+        public static Id<TIdentifier> Parse(string s)
+        {
+            return TryParse(s, out Id<TIdentifier> val)
+                ? val
+                : throw new FormatException();
+        }
+
+        /// <summary>Converts the <see cref="string"/> to <see cref="Id{TIdentifier}"/>.</summary>
+        /// <param name="s">
+        /// A string containing the identifier to convert.
+        /// </param>
+        /// <returns>
+        /// The identifier if the string was converted successfully, otherwise default.
+        /// </returns>
+        public static Id<TIdentifier> TryParse(string s)
+        {
+            return TryParse(s, out Id<TIdentifier> val) ? val : default;
+        }
 
         /// <summary>Converts the <see cref="string"/> to <see cref = "Id{TIdentifier}"/>.
         /// A return value indicates whether the conversion succeeded.
@@ -106,6 +296,24 @@ namespace Qowaiv.Identifiers
                 return true;
             }
             return false;
+        }
+
+        /// <summary>Creates the identifier from a JSON string.</summary>
+        /// <param name = "json">
+        /// The JSON string to deserialize.
+        /// </param>
+        /// <returns>
+        /// The deserialized identifier.
+        /// </returns>
+        public static Id<TIdentifier> FromJson(string json) => Parse(json);
+
+        /// <summary>Returns true if the value represents a valid identifier.</summary>
+        /// <param name="val">
+        /// The <see cref="string"/> to validate.
+        /// </param>
+        public static bool IsValid(string val)
+        {
+            return !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
         }
     }
 }

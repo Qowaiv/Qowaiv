@@ -6,7 +6,10 @@ namespace Qowaiv.Identifiers
     /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="string"/>.</summary>
     public abstract class StringIdLogic : IIdentifierLogic
     {
-        /// <inheritdoc/>
+        /// <summary>Returns the type of the underlying value (<see cref="string"/>).</summary>
+        public Type BaseType => typeof(string);
+
+        /// <summary>Returns a type converter for the type of the underlying value.</summary>
         public virtual TypeConverter Converter { get; } = TypeDescriptor.GetConverter(typeof(string));
 
         /// <inheritdoc/>

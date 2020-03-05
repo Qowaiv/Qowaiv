@@ -6,13 +6,20 @@ using System.Globalization;
 namespace Qowaiv.Identifiers
 {
     /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="Guid"/>.</summary>
+    /// <remarks>
+    /// For some logic, <see cref="Uuid"/> is used instead of <see cref="Guid"/>.
+    /// By doing so, Base64 representation is supported out of the box.
+    /// </remarks>
     public abstract class GuidLogic : IIdentifierLogic
     {
+        /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>
+        public Type BaseType => typeof(Guid);
+
         /// <inheritdoc/>
         public virtual TypeConverter Converter { get; } = new UuidTypeConverter();
 
         /// <summary>Gets the default format used to represent the <see cref="Guid"/> as <see cref="string"/>.</summary>
-        protected virtual string DefaultFormat => "D";
+        protected virtual string DefaultFormat => "d";
 
         /// <inheritdoc/>
         public virtual int Compare(object x, object y) => Id(x).CompareTo(Id(y));
@@ -47,7 +54,5 @@ namespace Qowaiv.Identifiers
         }
 
         private static Guid Id(object obj) => obj is Guid guid ? guid : Guid.Empty;
-
-        
     }
 }

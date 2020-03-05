@@ -7,6 +7,9 @@ namespace Qowaiv.Identifiers
     /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="long"/>.</summary>
     public abstract class Int64Logic : IIdentifierLogic
     {
+        /// <summary>Returns the type of the underlying value (<see cref="long"/>).</summary>
+        public Type BaseType => typeof(long);
+
         /// <inheritdoc/>
         public virtual TypeConverter Converter { get; } = TypeDescriptor.GetConverter(typeof(long));
 

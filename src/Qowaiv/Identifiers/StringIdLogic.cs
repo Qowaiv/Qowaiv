@@ -41,7 +41,29 @@ namespace Qowaiv.Identifiers
         /// <inheritdoc/>
         public virtual bool TryParse(string str, out object id)
         {
-            id = str;
+            id = default;
+
+            if (IsValid(str, out var normalized))
+            {
+                id = normalized;
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>Validates if the string matches the constrains.</summary>
+        /// <param name="str">
+        /// The string representing the identifier.
+        /// </param>
+        /// <param name="normalized">
+        /// The normalized string representing the identifier.
+        /// </param>
+        /// <returns>
+        /// True if valid.
+        /// </returns>
+        protected virtual bool IsValid(string str, out string normalized)
+        {
+            normalized = str;
             return true;
         }
 

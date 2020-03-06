@@ -186,6 +186,13 @@ namespace Qowaiv.Statistics
         /// <summary>Casts an Elo to an integer.</summary>
         public static explicit operator int(Elo val) => (int)Math.Round(val.m_Value);
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => m_Value;
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.Double;
+
         /// <summary>Converts the string to an Elo.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

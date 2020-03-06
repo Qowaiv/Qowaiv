@@ -16,9 +16,6 @@ Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
 Value Objects that can be used a wide variety of modeling scenarios, both
 inside and outside a Domain-driven context.
 
-It has been argued that 
-
-
 ### (Single) Value Objects
 A **Value Object** is an immutable type that is distinguishable only by the
 state of its properties. A **Single Value Object** (SVO) is a Value Object that

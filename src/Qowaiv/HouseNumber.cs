@@ -142,6 +142,13 @@ namespace Qowaiv
         /// <summary>Casts a System.Int64 to a house number.</summary>
         public static implicit operator HouseNumber(long val) => Create((int)val);
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => m_Value;
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.Int32;
+
         /// <summary>Converts the string to a house number.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

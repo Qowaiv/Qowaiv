@@ -414,6 +414,13 @@ namespace Qowaiv.Financial
         /// <summary>Casts an Amount to a int.</summary>
         public static explicit operator int(Amount val) => (int)val.m_Value;
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => m_Value;
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.Decimal;
+
         /// <summary>Converts the string to an 
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

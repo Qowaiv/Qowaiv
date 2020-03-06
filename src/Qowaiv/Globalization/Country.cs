@@ -231,10 +231,17 @@ namespace Qowaiv.Globalization
         public static explicit operator Country(string str) => Parse(str, CultureInfo.CurrentCulture);
 
         /// <summary>Casts a System.Globalization.RegionInfo to a </summary>
-        public static implicit operator Country(RegionInfo region) { return Create(region); }
+        public static implicit operator Country(RegionInfo region) => Create(region);
 
         /// <summary>Casts a Country to a System.Globalization.RegionInf.</summary>
-        public static explicit operator RegionInfo(Country val) { return val.ToRegionInfo(); }
+        public static explicit operator RegionInfo(Country val) =>val.ToRegionInfo();
+
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => m_Value ?? string.Empty;
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
 
         /// <summary>Converts the string to a 
         /// A return value indicates whether the conversion succeeded.

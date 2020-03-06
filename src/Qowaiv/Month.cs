@@ -6,7 +6,6 @@ using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -58,22 +57,21 @@ namespace Qowaiv
         public static readonly Month December /* */ = new Month(12);
 
         /// <summary>Represents all months (January till December).</summary>
-        public static readonly ReadOnlyCollection<Month> All = new ReadOnlyCollection<Month>(
-            new List<Month>
-            {
-                January,
-                February,
-                March,
-                April,
-                May,
-                June,
-                July,
-                August,
-                September,
-                October,
-                November,
-                December,
-            });
+        public static readonly IReadOnlyList<Month> All = new []
+        {
+            January,
+            February,
+            March,
+            April,
+            May,
+            June,
+            July,
+            August,
+            September,
+            October,
+            November,
+            December,
+        };
 
         /// <summary>Gets the full name of the month.</summary>
         public string FullName => GetFullName(CultureInfo.CurrentCulture);

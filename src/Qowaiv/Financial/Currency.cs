@@ -230,6 +230,13 @@ namespace Qowaiv.Financial
         /// <summary>Casts a <see cref="string"/> to a currency.</summary>
         public static explicit operator Currency(int val) => AllCurrencies.FirstOrDefault(c => c.IsoNumericCode == val);
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => m_Value ?? string.Empty;
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
+
         /// <summary>Converts the string to a currency.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

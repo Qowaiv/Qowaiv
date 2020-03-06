@@ -653,6 +653,14 @@ custom format is supplied at the format string - string.Format() the default
 formatting of the object is used, where FormattingArgumentsCollection.Format() 
 uses the default specified at the formatting collection of a type (if available).
 
+### IConvertable
+The `IConvertable` interface has limited value for other types than the .NET
+primitives. However, for some old constructs (like VB.NET's `CStr()`), just
+having an basic implementation helps.
+
+For that reason, all methods required by the interface are only explicitly
+accessable.
+
 ### Threading
 Because there are scenario's where you want to set typical values as a country 
 or a currency for the context of the current thread (like the culture info) 

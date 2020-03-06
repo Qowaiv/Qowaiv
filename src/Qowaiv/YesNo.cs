@@ -153,6 +153,13 @@ namespace Qowaiv
             return Empty;
         }
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => IsYes();
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.Boolean;
+
         private static readonly bool?[] BooleanValues = new bool?[] { null, false, true, null };
 
         /// <summary>Converts the string to a yes-no.

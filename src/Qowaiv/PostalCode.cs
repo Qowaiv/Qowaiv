@@ -110,6 +110,13 @@ namespace Qowaiv
         /// <summary>Casts a <see cref="string"/> to a postal code.</summary>
         public static explicit operator PostalCode(string str) => Parse(str, CultureInfo.CurrentCulture);
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => m_Value ?? string.Empty;
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
+
         /// <summary>Converts the string to a postal code.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

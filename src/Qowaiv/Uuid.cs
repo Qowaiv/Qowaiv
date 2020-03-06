@@ -140,6 +140,13 @@ namespace Qowaiv
         /// <summary>Casts a System.GUID to a Qowaiv.UUID.</summary>
         public static implicit operator Uuid(Guid val) => new Uuid(val);
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => ToString(CultureInfo.InvariantCulture);
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
+
         /// <summary>Initializes a new instance of a UUID.</summary>
         public static Uuid NewUuid() => new Uuid(Guid.NewGuid());
 

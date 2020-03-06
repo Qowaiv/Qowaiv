@@ -529,6 +529,13 @@ namespace Qowaiv.IO
         /// <summary>Casts a System.DoubleDecimal to a stream size.</summary>
         public static explicit operator StreamSize(decimal val) => new StreamSize((long)val);
 
+        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private IConvertible Convertable => m_Value;
+
+        /// <inheritdoc/>
+        TypeCode IConvertible.GetTypeCode() => TypeCode.Int64;
+
         /// <summary>Converts the string to a stream size.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

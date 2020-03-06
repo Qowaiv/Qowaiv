@@ -7,45 +7,50 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
+#define NotField
+#define NotIsEmpty
+#define NotIsUnknown
+#define NotIsEmptyOrUnknown
+#define NotEqualsSvo
 #define NotGetHashCodeClass
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
 
-    public partial struct Gender
+    public partial struct Fraction
     {
 #if !NotField
-        private Gender(byte value) => m_Value = value;
-        /// <summary>The inner value of the gender.</summary>
-        private byte m_Value;
+        private Fraction(long value) => m_Value = value;
+        /// <summary>The inner value of the fraction.</summary>
+        private long m_Value;
 #endif
 #if !NotIsEmpty
-        /// <summary>Returns true if the  gender is empty, otherwise false.</summary>
+        /// <summary>Returns true if the  fraction is empty, otherwise false.</summary>
         public bool IsEmpty() => m_Value == default;
 #endif
 #if !NotIsUnknown
-        /// <summary>Returns true if the  gender is unknown, otherwise false.</summary>
+        /// <summary>Returns true if the  fraction is unknown, otherwise false.</summary>
         public bool IsUnknown() => m_Value == Unknown.m_Value;
 #endif
 #if !NotIsEmptyOrUnknown
-        /// <summary>Returns true if the  gender is empty or unknown, otherwise false.</summary>
+        /// <summary>Returns true if the  fraction is empty or unknown, otherwise false.</summary>
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 #endif
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
 
-    public partial struct Gender : IEquatable<Gender>
+    public partial struct Fraction : IEquatable<Fraction>
     {
         /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is Gender other && Equals(other);
+        public override bool Equals(object obj) => obj is Fraction other && Equals(other);
 #if !NotEqualsSvo
-        /// <summary>Returns true if this instance and the other gender are equal, otherwise false.</summary>
-        /// <param name = "other">The <see cref = "Gender"/> to compare with.</param>
-        public bool Equals(Gender other) => m_Value == other.m_Value;
+        /// <summary>Returns true if this instance and the other fraction are equal, otherwise false.</summary>
+        /// <param name = "other">The <see cref = "Fraction"/> to compare with.</param>
+        public bool Equals(Fraction other) => m_Value == other.m_Value;
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
         public override int GetHashCode() => m_Value.GetHashCode();
@@ -58,20 +63,20 @@ namespace Qowaiv
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
         /// <param name = "right">The right operand</param>
-        public static bool operator !=(Gender left, Gender right) => !(left == right);
+        public static bool operator !=(Fraction left, Fraction right) => !(left == right);
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name = "left">The left operand.</param>
         /// <param name = "right">The right operand</param>
-        public static bool operator ==(Gender left, Gender right) => left.Equals(right);
+        public static bool operator ==(Fraction left, Fraction right) => left.Equals(right);
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
     using System.Collections.Generic;
 
-    public partial struct Gender : IComparable, IComparable<Gender>
+    public partial struct Fraction : IComparable, IComparable<Fraction>
     {
         /// <inheritdoc/>
         public int CompareTo(object obj)
@@ -81,7 +86,7 @@ namespace Qowaiv
                 return 1;
             }
 
-            if (obj is Gender other)
+            if (obj is Fraction other)
             {
                 return CompareTo(other);
             }
@@ -91,63 +96,36 @@ namespace Qowaiv
 
 #if !NotEqualsSvo
         /// <inheritdoc/>
-        public int CompareTo(Gender other) => Comparer<byte>.Default.Compare(m_Value, other.m_Value);
+        public int CompareTo(Fraction other) => Comparer<long>.Default.Compare(m_Value, other.m_Value);
 #endif
 #if !NoComparisonOperators
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        public static bool operator <(Gender l, Gender r) => l.CompareTo(r) < 0;
+        public static bool operator <(Fraction l, Fraction r) => l.CompareTo(r) < 0;
         /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        public static bool operator>(Gender l, Gender r) => l.CompareTo(r) > 0;
+        public static bool operator>(Fraction l, Fraction r) => l.CompareTo(r) > 0;
         /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        public static bool operator <=(Gender l, Gender r) => l.CompareTo(r) <= 0;
+        public static bool operator <=(Fraction l, Fraction r) => l.CompareTo(r) <= 0;
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        public static bool operator >=(Gender l, Gender r) => l.CompareTo(r) >= 0;
+        public static bool operator >=(Fraction l, Fraction r) => l.CompareTo(r) >= 0;
 #endif
     }
 }
 
-namespace Qowaiv
-{
-    using System;
-    using System.Runtime.Serialization;
-
-    public partial struct Gender : ISerializable
-    {
-        /// <summary>Initializes a new instance of the gender based on the serialization info.</summary>
-        /// <param name = "info">The serialization info.</param>
-        /// <param name = "context">The streaming context.</param>
-        private Gender(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            m_Value = (byte)info.GetValue("Value", typeof(byte));
-        }
-
-        /// <summary>Adds the underlying property of the gender to the serialization info.</summary>
-        /// <param name = "info">The serialization info.</param>
-        /// <param name = "context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
-    }
-}
-
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    public partial struct Gender : IXmlSerializable
+    public partial struct Fraction : IXmlSerializable
     {
-        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the gender.</summary>
+        /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the fraction.</summary>
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
         XmlSchema IXmlSerializable.GetSchema() => null;
-        /// <summary>Reads the gender from an <see href = "XmlReader"/>.</summary>
+        /// <summary>Reads the fraction from an <see href = "XmlReader"/>.</summary>
         /// <param name = "reader">An XML reader.</param>
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
@@ -162,8 +140,8 @@ namespace Qowaiv
             OnReadXml(val);
         }
 
-        partial void OnReadXml(Gender other);
-        /// <summary>Writes the gender to an <see href = "XmlWriter"/>.</summary>
+        partial void OnReadXml(Fraction other);
+        /// <summary>Writes the fraction to an <see href = "XmlWriter"/>.</summary>
         /// <remarks>
         /// Uses <see cref = "ToXmlString()"/>.
         /// </remarks>
@@ -176,45 +154,45 @@ namespace Qowaiv
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
     using System.Globalization;
     using Qowaiv.Json;
 
-    public partial struct Gender
+    public partial struct Fraction
     {
-        /// <summary>Creates the gender from a JSON string.</summary>
+        /// <summary>Creates the fraction from a JSON string.</summary>
         /// <param name = "json">
         /// The JSON string to deserialize.
         /// </param>
         /// <returns>
-        /// The deserialized gender.
+        /// The deserialized fraction.
         /// </returns>
         
 #if !NotCultureDependent
-        public static Gender FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+        public static Fraction FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
 #else
-        public static Gender FromJson(string json) => Parse(json);
+        public static Fraction FromJson(string json) => Parse(json);
 #endif
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
     using System.Globalization;
 
-    public partial struct Gender : IFormattable
+    public partial struct Fraction : IFormattable
     {
-        /// <summary>Returns a <see cref = "string "/> that represents the gender.</summary>
+        /// <summary>Returns a <see cref = "string "/> that represents the fraction.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the gender.</summary>
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
         /// <param name = "format">
         /// The format that this describes the formatting.
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-        /// <summary>Returns a formatted <see cref = "string "/> that represents the gender.</summary>
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
         /// <param name = "provider">
         /// The format provider.
         /// </param>
@@ -222,12 +200,12 @@ namespace Qowaiv
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
     using System.Collections.Generic;
 
-    public partial struct Gender : IConvertible
+    public partial struct Fraction : IConvertible
     {
         /// <inheritdoc/>
         object IConvertible.ToType(Type conversionType, IFormatProvider provider) => Convertable.ToType(conversionType, provider);
@@ -262,60 +240,60 @@ namespace Qowaiv
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
     using System.Globalization;
 
-    public partial struct Gender
+    public partial struct Fraction
     {
 #if !NotCultureDependent
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.</summary>
         /// <param name = "s">
-        /// A string containing the gender to convert.
+        /// A string containing the fraction to convert.
         /// </param>
         /// <returns>
-        /// The parsed gender.
+        /// The parsed fraction.
         /// </returns>
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Gender Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
+        public static Fraction Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.</summary>
         /// <param name = "s">
-        /// A string containing the gender to convert.
+        /// A string containing the fraction to convert.
         /// </param>
         /// <param name = "formatProvider">
         /// The specified format provider.
         /// </param>
         /// <returns>
-        /// The parsed gender.
+        /// The parsed fraction.
         /// </returns>
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Gender Parse(string s, IFormatProvider formatProvider)
+        public static Fraction Parse(string s, IFormatProvider formatProvider)
         {
-            return TryParse(s, formatProvider, out Gender val) ? val : throw new FormatException(QowaivMessages.FormatExceptionGender);
+            return TryParse(s, formatProvider, out Fraction val) ? val : throw new FormatException(QowaivMessages.FormatExceptionFraction);
         }
 
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.</summary>
         /// <param name = "s">
-        /// A string containing the gender to convert.
+        /// A string containing the fraction to convert.
         /// </param>
         /// <returns>
-        /// The gender if the string was converted successfully, otherwise default.
+        /// The fraction if the string was converted successfully, otherwise default.
         /// </returns>
-        public static Gender TryParse(string s)
+        public static Fraction TryParse(string s)
         {
-            return TryParse(s, CultureInfo.CurrentCulture, out Gender val) ? val : default;
+            return TryParse(s, CultureInfo.CurrentCulture, out Fraction val) ? val : default;
         }
 
-        /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name = "s">
-        /// A string containing the gender to convert.
+        /// A string containing the fraction to convert.
         /// </param>
         /// <param name = "result">
         /// The result of the parsing.
@@ -323,54 +301,54 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, out Gender result) => TryParse(s, CultureInfo.CurrentCulture, out result);
+        public static bool TryParse(string s, out Fraction result) => TryParse(s, CultureInfo.CurrentCulture, out result);
 #else
-        /// <summary>Converts the <see cref="string"/> to <see cref="Gender"/>.</summary>
+        /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
         /// <param name="s">
-        /// A string containing the gender to convert.
+        /// A string containing the fraction to convert.
         /// </param>
         /// <returns>
-        /// The parsed gender.
+        /// The parsed fraction.
         /// </returns>
         /// <exception cref="FormatException">
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
-        public static Gender Parse(string s)
+        public static Fraction Parse(string s)
         {
-            return TryParse(s, out Gender val)
+            return TryParse(s, out Fraction val)
                 ? val
-                : throw new FormatException(QowaivMessages.FormatExceptionGender);
+                : throw new FormatException(QowaivMessages.FormatExceptionFraction);
         }
 
-        /// <summary>Converts the <see cref="string"/> to <see cref="Gender"/>.</summary>
+        /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
         /// <param name="s">
-        /// A string containing the gender to convert.
+        /// A string containing the fraction to convert.
         /// </param>
         /// <returns>
-        /// The gender if the string was converted successfully, otherwise default.
+        /// The fraction if the string was converted successfully, otherwise default.
         /// </returns>
-        public static Gender TryParse(string s)
+        public static Fraction TryParse(string s)
         {
-            return TryParse(s, out Gender val) ? val : default;
+            return TryParse(s, out Fraction val) ? val : default;
         }
 #endif
     }
 }
 
-namespace Qowaiv
+namespace Qowaiv.Mathematics
 {
     using System;
     using System.Globalization;
 
-    public partial struct Gender
+    public partial struct Fraction
     {
 #if !NotCultureDependent
-        /// <summary>Returns true if the value represents a valid gender.</summary>
+        /// <summary>Returns true if the value represents a valid fraction.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
         public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
-        /// <summary>Returns true if the value represents a valid gender.</summary>
+        /// <summary>Returns true if the value represents a valid fraction.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
@@ -382,7 +360,7 @@ namespace Qowaiv
             return !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
         }
 #else
-        /// <summary>Returns true if the value represents a valid gender.</summary>
+        /// <summary>Returns true if the value represents a valid fraction.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>

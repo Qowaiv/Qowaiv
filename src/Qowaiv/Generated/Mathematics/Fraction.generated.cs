@@ -136,6 +136,9 @@ namespace Qowaiv.Mathematics
 #else
             var val = Parse(xml);
 #endif
+#if !NotField
+            m_Value = val.m_Value;
+#endif
             OnReadXml(val);
         }
 
@@ -192,10 +195,50 @@ namespace Qowaiv.Mathematics
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
-        /// <param name = "formatProvider">
+        /// <param name = "provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
+        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
+    }
+}
+
+namespace Qowaiv.Mathematics
+{
+    using System;
+    using System.Collections.Generic;
+
+    public partial struct Fraction : IConvertible
+    {
+        /// <inheritdoc/>
+        object IConvertible.ToType(Type conversionType, IFormatProvider provider) => Convertable.ToType(conversionType, provider);
+        /// <inheritdoc/>
+        bool IConvertible.ToBoolean(IFormatProvider provider) => Convertable.ToBoolean(provider);
+        /// <inheritdoc/>
+        byte IConvertible.ToByte(IFormatProvider provider) => Convertable.ToByte(provider);
+        /// <inheritdoc/>
+        char IConvertible.ToChar(IFormatProvider provider) => Convertable.ToChar(provider);
+        /// <inheritdoc/>
+        DateTime IConvertible.ToDateTime(IFormatProvider provider) => Convertable.ToDateTime(provider);
+        /// <inheritdoc/>
+        decimal IConvertible.ToDecimal(IFormatProvider provider) => Convertable.ToDecimal(provider);
+        /// <inheritdoc/>
+        double IConvertible.ToDouble(IFormatProvider provider) => Convertable.ToDouble(provider);
+        /// <inheritdoc/>
+        short IConvertible.ToInt16(IFormatProvider provider) => Convertable.ToInt16(provider);
+        /// <inheritdoc/>
+        int IConvertible.ToInt32(IFormatProvider provider) => Convertable.ToInt32(provider);
+        /// <inheritdoc/>
+        long IConvertible.ToInt64(IFormatProvider provider) => Convertable.ToInt64(provider);
+        /// <inheritdoc/>
+        sbyte IConvertible.ToSByte(IFormatProvider provider) => Convertable.ToSByte(provider);
+        /// <inheritdoc/>
+        float IConvertible.ToSingle(IFormatProvider provider) => Convertable.ToSingle(provider);
+        /// <inheritdoc/>
+        ushort IConvertible.ToUInt16(IFormatProvider provider) => Convertable.ToUInt16(provider);
+        /// <inheritdoc/>
+        uint IConvertible.ToUInt32(IFormatProvider provider) => Convertable.ToUInt32(provider);
+        /// <inheritdoc/>
+        ulong IConvertible.ToUInt64(IFormatProvider provider) => Convertable.ToUInt64(provider);
     }
 }
 

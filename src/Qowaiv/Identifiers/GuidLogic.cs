@@ -161,6 +161,29 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        public virtual bool TryCreate(object obj, out object id)
+        {
+            id = default;
+            
+            if(obj is Guid guid)
+            {
+                id = guid == Guid.Empty ? null : (object)guid;
+                return true;
+            }
+
+            if (obj is Uuid uuid)
+            {
+                id = guid == Guid.Empty ? null : (object)(Guid)uuid;
+                return true;
+            }
+            if (obj is string str && TryParse(str, out id))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <inheritdoc/>
         public virtual object Next() => Guid.NewGuid();
 
         private static Guid Id(object obj) => obj is Guid guid ? guid : Guid.Empty;

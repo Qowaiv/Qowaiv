@@ -48,6 +48,18 @@ namespace Qowaiv.Identifiers
         /// True if the <see cref="string"/> could be parsed.
         /// </returns>
         bool TryParse(string str, out object id);
+
+        /// <summary>Tries to create the underling value of the identifier.</summary>
+        /// <param name="obj">
+        /// The <see cref="object"/> that could represent the underlying value.
+        /// </param>
+        /// <param name="id">
+        /// The underlying value.
+        /// </param>
+        /// <returns>
+        /// True if the <see cref="object"/> could represent a valid underlying value.
+        /// </returns>
+        bool TryCreate(object obj, out object id);
         
         /// <summary>Creates a new (random) underlying value.</summary>
         object Next();

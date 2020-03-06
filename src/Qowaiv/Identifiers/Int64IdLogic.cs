@@ -42,7 +42,7 @@ namespace Qowaiv.Identifiers
             {
                 return obj;
             }
-            throw new InvalidCastException();
+            throw Exceptions.InvalidCast(typeof(long), typeof(Id<>).MakeGenericType(GetType()));
         }
 
         /// <inheritdoc/>
@@ -58,6 +58,28 @@ namespace Qowaiv.Identifiers
                 id = number == 0 ? null : (object)number;
                 return true;
             }
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public virtual bool TryCreate(object obj, out object id)
+        {
+            if (obj is long num)
+            {
+                id = num == 0L ? null : (object)num;
+                return true;
+            }
+
+            if (obj is int n)
+            {
+                id = n == 0 ? null : (object)(long)n;
+                return true;
+            }
+            if (TryParse(obj?.ToString(), out id))
+            {
+                return true;
+            }
+
             return false;
         }
 

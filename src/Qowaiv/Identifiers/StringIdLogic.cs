@@ -51,6 +51,9 @@ namespace Qowaiv.Identifiers
             return false;
         }
 
+        /// <inheritdoc/>
+        public virtual bool TryCreate(object obj, out object id) => TryParse(obj?.ToString(), out id);
+
         /// <summary>Validates if the string matches the constrains.</summary>
         /// <param name="str">
         /// The string representing the identifier.

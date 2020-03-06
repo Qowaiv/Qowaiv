@@ -207,7 +207,7 @@ namespace Qowaiv.Identifiers
         {
             if (logic.BaseType != typeof(string))
             {
-                throw new InvalidCastException();
+                throw Exceptions.InvalidCast(logic.BaseType, typeof(string));
             }
             return m_Value as string;
         }
@@ -216,7 +216,7 @@ namespace Qowaiv.Identifiers
         {
             if (logic.BaseType != typeof(long))
             {
-                throw new InvalidCastException();
+                throw Exceptions.InvalidCast(logic.BaseType, typeof(long));
             }
             return m_Value is long num ? num : 0;
         }
@@ -225,7 +225,7 @@ namespace Qowaiv.Identifiers
         {
             if (logic.BaseType != typeof(Guid))
             {
-                throw new InvalidCastException();
+                throw Exceptions.InvalidCast(logic.BaseType, typeof(Guid));
             }
             return m_Value is Guid guid ? guid : Guid.Empty;
         }
@@ -241,6 +241,18 @@ namespace Qowaiv.Identifiers
 
         /// <summary>Casts the identifier to a <see cref="Uuid"/>.</summary>
         public static explicit operator Uuid(Id<TIdentifier> id) => id.CastToGuid();
+
+        /// <summary>Casts the <see cref="string"/> to an identifier.</summary>
+        public static explicit operator Id<TIdentifier>(string id) => Create(id);
+
+        /// <summary>Casts the <see cref="long"/> to an identifier.</summary>
+        public static explicit operator Id<TIdentifier>(long id) => Create(id);
+
+        /// <summary>Casts the <see cref="Guid"/> to an identifier.</summary>
+        public static explicit operator Id<TIdentifier>(Guid id) => Create(id);
+
+        /// <summary>Casts the <see cref="Uuid"/> to an identifier.</summary>
+        public static explicit operator Id<TIdentifier>(Uuid id) => Create(id);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Id{TIdentifier}"/>.</summary>
         /// <param name="s">
@@ -326,6 +338,49 @@ namespace Qowaiv.Identifiers
             return bytes is null || bytes.Length == 0
                 ? Empty
                 : new Id<TIdentifier>(logic.FromBytes(bytes));
+        }
+
+
+        /// <summary>Creates an identifier from an <see cref="object"/>.</summary>
+        /// <param name="obj">
+        /// The <see cref="object"/> to create an indentifier from.
+        /// </param>
+        /// <exception cref="InvalidCastException">
+        /// if the identifier could not be created form the <see cref="object"/>.
+        /// </exception>
+        public static Id<TIdentifier> Create(object obj)
+        {
+            if(TryCreate(obj, out var id))
+            {
+                return id;
+            }
+            throw Exceptions.InvalidCast(obj?.GetType(), logic.BaseType);
+        }
+
+        /// <summary>Tries to create an identifier from an <see cref="object"/>.</summary>
+        /// <param name="obj">
+        /// The <see cref="object"/> to create an indentifier from.
+        /// </param>
+        /// <param name="id">
+        /// The created identifier.
+        /// </param>
+        /// <returns>
+        /// True if the identifier could be created.
+        /// </returns>
+        public static bool TryCreate(object obj, out Id<TIdentifier> id)
+        {
+            id = default;
+
+            if(obj is null)
+            {
+                return true;
+            }
+            if (logic.TryCreate(obj, out var underlying))
+            {
+                id = new Id<TIdentifier>(underlying);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>Creates a new identifier.</summary>

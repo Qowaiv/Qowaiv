@@ -31,6 +31,10 @@ All Qowaiv SVO's have been created as `struct`, not as `class`. The reason for
 doing this, is that for primitive like SVO's they should behave similar to the
 known primitives, like `double`, `int`, `DateTime`, `Guid`, etcetera.
 
+O consequence of this choice is that SVO's can not be `null`, and that all
+default initializations have a meaningful value. That can be `Empty`, `Zero`
+or what suits the SVO best.
+
 ### Support
 Multiple scenarios are supported:
 * Parsing

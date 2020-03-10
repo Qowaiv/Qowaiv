@@ -138,7 +138,7 @@ namespace Qowaiv
         /// <summary>Casts a yes-no to a <see cref="string"/>.</summary>
         public static explicit operator string(YesNo val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a yes-no.</summary>
-        public static explicit operator YesNo(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator YesNo(string str) => Cast.String<YesNo>(TryParse, str);
 
         /// <summary>Casts a yes-no to a nullable <see cref="bool"/>.</summary>
         public static explicit operator bool?(YesNo val) => BooleanValues[val.m_Value];
@@ -196,7 +196,7 @@ namespace Qowaiv
             if (Parsings[culture].TryGetValue(str, out byte val) ||
                 Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new YesNo { m_Value = val };
+                result = new YesNo(val);
                 return true;
             }
             return false;

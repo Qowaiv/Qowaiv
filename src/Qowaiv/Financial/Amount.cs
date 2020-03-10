@@ -379,7 +379,7 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The deserialized amount.
         /// </returns>
-        public static Amount FromJson(double json) => new Amount((decimal)json);
+        public static Amount FromJson(double json) => new Amount(Cast.ToDecimal<Amount>(json));
 
         /// <summary>Deserializes the amountfrom a JSON number.</summary>
         /// <param name="json">
@@ -394,7 +394,7 @@ namespace Qowaiv.Financial
         /// <summary>Casts an Amount to a <see cref="string"/>.</summary>
         public static explicit operator string(Amount val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
-        public static explicit operator Amount(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Amount(string str) => Cast.String<Amount>(TryParse, str);
 
         /// <summary>Casts a decimal an </summary>
         public static explicit operator Amount(decimal val) => Create(val);
@@ -457,6 +457,6 @@ namespace Qowaiv.Financial
         /// <param name="val" >
         /// A decimal describing an Amount.
         /// </param >
-        public static Amount Create(double val) => Create((decimal)val);
+        public static Amount Create(double val) => Create(Cast.ToDecimal<Amount>(val));
     }
 }

@@ -169,9 +169,9 @@ namespace Qowaiv.Financial
         private string ToXmlString() => ToUnformattedString();
 
         /// <summary>Casts an IBAN to a <see cref="string"/>.</summary>
-        public static explicit operator string(InternationalBankAccountNumber val) => val.ToString();
+        public static explicit operator string(InternationalBankAccountNumber val) => val.ToString(CultureInfo.InvariantCulture);
         /// <summary>Casts a <see cref="string"/> to a IBAN.</summary>
-        public static explicit operator InternationalBankAccountNumber(string str) => Parse(str, CultureInfo.InvariantCulture);
+        public static explicit operator InternationalBankAccountNumber(string str) => Cast.String<InternationalBankAccountNumber>(TryParse, str);
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

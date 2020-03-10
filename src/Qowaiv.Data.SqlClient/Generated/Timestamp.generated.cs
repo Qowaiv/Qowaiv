@@ -218,10 +218,10 @@ namespace Qowaiv.Sql
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the timestamp.</summary>
-        /// <param name = "formatProvider">
+        /// <param name = "provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
+        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
     }
 }
 

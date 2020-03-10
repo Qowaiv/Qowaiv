@@ -7,7 +7,6 @@ using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -52,28 +51,13 @@ namespace Qowaiv
         public static readonly Gender NotApplicable = new Gender(18);
 
         /// <summary>Contains not known, male, female, not applicable.</summary>
-        public static readonly IReadOnlyCollection<Gender> All = new ReadOnlyCollection<Gender>(new List<Gender>
-        {
-            Male,
-            Female,
-            NotApplicable,
-            Unknown
-        });
+        public static readonly IReadOnlyCollection<Gender> All = new [] { Male, Female, NotApplicable, Unknown, };
 
         /// <summary>Contains male and female.</summary>
-        public static readonly IReadOnlyCollection<Gender> MaleAndFemale = new ReadOnlyCollection<Gender>(new List<Gender>
-        {
-            Male,
-            Female
-        });
+        public static readonly IReadOnlyCollection<Gender> MaleAndFemale = new [] { Male, Female, };
 
         /// <summary>Contains male, female, not applicable.</summary>
-        public static readonly IReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new ReadOnlyCollection<Gender>(new List<Gender>
-        {
-            Male,
-            Female,
-            NotApplicable
-        });
+        public static readonly IReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new [] { Male, Female, NotApplicable, };
 
         /// <summary>Gets the display name.</summary>
         public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
@@ -290,7 +274,7 @@ namespace Qowaiv
 
         #region Resources
 
-        private static ResourceManager ResourceManager = new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
+        private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">
@@ -322,7 +306,7 @@ namespace Qowaiv
         #region Lookup
 
         /// <summary>Gets the valid values.</summary>
-        private static Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>
+        private static readonly Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>
         {
             { 0, 1 },
             { 1, 2 },
@@ -331,7 +315,7 @@ namespace Qowaiv
         };
 
 
-        private static Dictionary<byte, int?> ToNullableInt32s = new Dictionary<byte, int?>
+        private static readonly Dictionary<byte, int?> ToNullableInt32s = new Dictionary<byte, int?>
         {
             { 0, null },
             { 1, 0 },

@@ -1570,11 +1570,15 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_StringToPercentage_AreEqual()
         {
-            var exp = TestStruct;
-            var act = (Percentage)TestStruct.ToString();
+            using (new CultureInfoScope("nl-NL"))
+            {
+                var exp = TestStruct;
+                var act = (Percentage)TestStruct.ToString();
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
+
         [Test]
         public void Explicit_PercentageToString_AreEqual()
         {

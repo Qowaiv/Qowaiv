@@ -29,7 +29,7 @@ namespace Qowaiv
         /// <summary>Casts from a <see cref="string"/> to a SVO.</summary>
         public static TSvo String<TSvo>(TryParse<TSvo> tryParse, string str)
         {
-            if (tryParse(str, CultureInfo.InvariantCulture, out TSvo result))
+            if (tryParse(str, CultureInfo.CurrentCulture, out TSvo result))
             {
                 return result;
             }

@@ -380,10 +380,10 @@ namespace Qowaiv.IO
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
-        /// <param name="formatProvider">
+        /// <param name="provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString("0 byte", formatProvider);
+        public string ToString(IFormatProvider provider) => ToString("0 byte", provider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
         /// <param name="format">

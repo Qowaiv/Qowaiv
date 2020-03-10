@@ -598,15 +598,15 @@ namespace Qowaiv
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
-        /// <param name="formatProvider">
+        /// <param name="provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
+        public string ToString(IFormatProvider provider)
         {
-            DefaultFormats.TryGetValue(formatProvider ?? CultureInfo.CurrentCulture, out string format);
+            DefaultFormats.TryGetValue(provider ?? CultureInfo.CurrentCulture, out string format);
             format ??= "0.############################%";
 
-            return ToString(format, formatProvider);
+            return ToString(format, provider);
         }
 
         /// <summary>Gets the default format for different countries.</summary>

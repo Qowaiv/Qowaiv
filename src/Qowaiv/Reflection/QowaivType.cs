@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Qowaiv.Reflection
 {
@@ -89,5 +91,99 @@ namespace Qowaiv.Reflection
             }
             return objectType;
         }
+
+        /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
+        /// <param name="type">
+        /// The type to format as C# string.
+        /// </param>
+        public static string ToCSharpString(this Type type) => type.ToCSharpString(false);
+
+        /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
+        /// <param name="type">
+        /// The type to format as C# string.
+        /// </param>
+        /// <param name="withNamespace">
+        /// Should the namespace be displayed or not.
+        /// </param>
+        public static string ToCSharpString(this Type type, bool withNamespace)
+        {
+            Guard.NotNull(type, nameof(type));
+            return new StringBuilder().AppendType(type, withNamespace).ToString();
+        }
+
+        private static StringBuilder AppendType(this StringBuilder sb, Type type, bool withNamespace)
+        {
+            if (type.IsArray)
+            {
+                return sb.AppendType(type.GetElementType(), withNamespace).Append("[]");
+            }
+
+            if (primitives.TryGetValue(type, out var primitive))
+            {
+                return sb.Append(primitive);
+            }
+            
+            if (type.IsGenericTypeDefinition)
+            {
+                return sb
+                    .AppendNamespace(type, withNamespace)
+                    .Append(type.ToNonGeneric())
+                    .Append('<')
+                    .Append(new string(',', type.GetGenericArguments().Length - 1))
+                    .Append('>');
+            }
+
+            if (type.IsGenericType)
+            {
+                var arguments = type.GetGenericArguments();
+
+                // special case for nullables.
+                if (arguments.Length == 1 && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    return sb.AppendType(arguments[0], withNamespace).Append("?");
+                }
+
+                sb.AppendNamespace(type, withNamespace)
+                   .Append(type.ToNonGeneric())
+                   .Append('<')
+                   .AppendType(arguments[0], withNamespace);
+
+                for (var i = 1; i < arguments.Length; i++)
+                {
+                    sb.Append(", ").AppendType(arguments[i], withNamespace);
+                }
+                return sb.Append('>');
+            }
+
+            return sb.AppendNamespace(type, withNamespace).Append(type.Name);
+        }
+
+        private static StringBuilder AppendNamespace(this StringBuilder sb, Type type, bool withNamespace)
+        {
+            return withNamespace && !string.IsNullOrEmpty(type.Namespace)
+                ? sb.Append(type.Namespace).Append('.')
+                : sb;
+        }
+
+        private static string ToNonGeneric(this Type type) => type.Name.Substring(0, type.Name.IndexOf('`'));
+
+        private static readonly Dictionary<Type, string> primitives = new Dictionary<Type, string>
+        {
+            { typeof(object), "object" },
+            { typeof(string), "string" },
+            { typeof(bool), "bool" },
+            { typeof(byte), "byte" },
+            { typeof(sbyte), "sbyte" },
+            { typeof(short), "short" },
+            { typeof(ushort), "ushort" },
+            { typeof(int), "int" },
+            { typeof(uint), "uint" },
+            { typeof(long), "long" },
+            { typeof(ulong), "ulong" },
+            { typeof(float), "float" },
+            { typeof(double), "double" },
+            { typeof(decimal), "decimal" },
+        };
+
     }
 }

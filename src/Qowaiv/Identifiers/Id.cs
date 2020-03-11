@@ -130,12 +130,12 @@ namespace Qowaiv.Identifiers
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
         {
-            get => $"{(IsEmpty()? "{empty}" : ToString(CultureInfo.InvariantCulture))} ({typeof(TIdentifier).Name})";
+            get => $"{(IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture))} ({typeof(TIdentifier).Name})";
         }
 
         /// <summary>Returns a <see cref = "string"/> that represents the identifier.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
-        
+
         /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
         /// <param name="format">
         /// The format that this describes the formatting.
@@ -203,44 +203,26 @@ namespace Qowaiv.Identifiers
         /// </returns>
         public object ToJson() => IsEmpty() ? null : logic.ToJson(m_Value);
 
-        private string CastToString()
+        private TPrimitive CastToPrimitive<TPrimitive, TTo>()
         {
-            if (logic.BaseType != typeof(string))
+            if (logic.BaseType != typeof(TPrimitive))
             {
-                throw Exceptions.InvalidCast(logic.BaseType, typeof(string));
+                throw Exceptions.InvalidCast<Id<TIdentifier>, TTo>();
             }
-            return m_Value as string;
-        }
-
-        private long CastToInt64()
-        {
-            if (logic.BaseType != typeof(long))
-            {
-                throw Exceptions.InvalidCast(logic.BaseType, typeof(long));
-            }
-            return m_Value is long num ? num : 0;
-        }
-
-        private Guid CastToGuid()
-        {
-            if (logic.BaseType != typeof(Guid))
-            {
-                throw Exceptions.InvalidCast(logic.BaseType, typeof(Guid));
-            }
-            return m_Value is Guid guid ? guid : Guid.Empty;
+            return m_Value is null ? default : (TPrimitive)m_Value;
         }
 
         /// <summary>Casts the identifier to a <see cref="string"/>.</summary>
-        public static explicit operator string(Id<TIdentifier> id) => id.CastToString();
+        public static explicit operator string(Id<TIdentifier> id) => id.CastToPrimitive<string, string>();
 
         /// <summary>Casts the identifier to a <see cref="long"/>.</summary>
-        public static explicit operator long(Id<TIdentifier> id) => id.CastToInt64();
+        public static explicit operator long(Id<TIdentifier> id) => id.CastToPrimitive<long, long>();
 
         /// <summary>Casts the identifier to a <see cref="Guid"/>.</summary>
-        public static explicit operator Guid(Id<TIdentifier> id) => id.CastToGuid();
+        public static explicit operator Guid(Id<TIdentifier> id) => id.CastToPrimitive<Guid, Guid>();
 
         /// <summary>Casts the identifier to a <see cref="Uuid"/>.</summary>
-        public static explicit operator Uuid(Id<TIdentifier> id) => id.CastToGuid();
+        public static explicit operator Uuid(Id<TIdentifier> id) => id.CastToPrimitive<Guid, Uuid>();
 
         /// <summary>Casts the <see cref="string"/> to an identifier.</summary>
         public static explicit operator Id<TIdentifier>(string id) => Create(id);
@@ -340,7 +322,6 @@ namespace Qowaiv.Identifiers
                 : new Id<TIdentifier>(logic.FromBytes(bytes));
         }
 
-
         /// <summary>Creates an identifier from an <see cref="object"/>.</summary>
         /// <param name="obj">
         /// The <see cref="object"/> to create an indentifier from.
@@ -350,11 +331,11 @@ namespace Qowaiv.Identifiers
         /// </exception>
         public static Id<TIdentifier> Create(object obj)
         {
-            if(TryCreate(obj, out var id))
+            if (TryCreate(obj, out var id))
             {
                 return id;
             }
-            throw Exceptions.InvalidCast(obj?.GetType(), logic.BaseType);
+            throw Exceptions.InvalidCast(obj?.GetType(), typeof(Id<TIdentifier>));
         }
 
         /// <summary>Tries to create an identifier from an <see cref="object"/>.</summary>
@@ -371,7 +352,7 @@ namespace Qowaiv.Identifiers
         {
             id = default;
 
-            if(obj is null)
+            if (obj is null)
             {
                 return true;
             }
@@ -390,9 +371,6 @@ namespace Qowaiv.Identifiers
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>
-        public static bool IsValid(string val)
-        {
-            return !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
-        }
+        public static bool IsValid(string val) => !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
     }
 }

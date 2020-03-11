@@ -31,21 +31,21 @@ namespace Qowaiv.UnitTests.Identifiers
         public void Create_StringForInt64_Throws()
         {
             var x = Assert.Catch<InvalidCastException>(() => Id<ForInt64>.Create("NaN"));
-            Assert.AreEqual("Cast from System.String to System.Int64 is not valid.", x.Message);
+            Assert.AreEqual("Cast from string to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForInt64> is not valid.", x.Message);
         }
 
         [Test]
         public void Create_Int64ForGuid_Throws()
         {
             var x = Assert.Catch<InvalidCastException>(() => Id<ForGuid>.Create(13245L));
-            Assert.AreEqual("Cast from System.Int64 to System.Guid is not valid.", x.Message);
+            Assert.AreEqual("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForGuid> is not valid.", x.Message);
         }
 
         [Test]
         public void FromJson_NegativeValue_Throws()
         {
             var x = Assert.Catch<InvalidCastException>(() => Id<ForInt64>.FromJson(-1));
-            Assert.AreEqual("Cast from System.Int64 to Qowaiv.Identifiers.Id`1[Qowaiv.UnitTests.Identifiers.ForInt64] is not valid.", x.Message);
+            Assert.AreEqual("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForInt64> is not valid.", x.Message);
         }
 
         [Test]

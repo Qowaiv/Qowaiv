@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Reflection;
+using System;
+using System.Collections.Generic;
 
 namespace Qowaiv.UnitTests.Reflection
 {
@@ -27,6 +29,20 @@ namespace Qowaiv.UnitTests.Reflection
         public void IsNotNullOrDefaultValue_SomeObject()
         {
             Assert.IsFalse(QowaivType.IsNullOrDefaultValue(new QowaivTypeTest()));
+        }
+
+        [TestCase(typeof(string), "string")]
+        [TestCase(typeof(byte[]), "byte[]")]
+        [TestCase(typeof(Guid), "System.Guid")]
+        [TestCase(typeof(Dictionary<string, Action>), "System.Collections.Generic.Dictionary<string, System.Action>")]
+        [TestCase(typeof(long?), "long?")]
+        [TestCase(typeof(Dictionary<,>), "System.Collections.Generic.Dictionary<,>")]
+        [TestCase(typeof(Nullable<>), "System.Nullable<>")]
+        [TestCase(typeof(Dictionary<object, List<int?>>[]), "System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<int?>>[]")]
+        public void ToCSharpString(Type type, string expected)
+        {
+            var formatted = QowaivType.ToCSharpString(type, true);
+            Assert.AreEqual(expected, formatted);
         }
     }
 }

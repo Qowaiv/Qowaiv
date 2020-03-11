@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Qowaiv.Reflection;
 
 namespace Qowaiv
 {
@@ -15,8 +16,8 @@ namespace Qowaiv
             return new InvalidCastException(string.Format(
                 CultureInfo.CurrentCulture,
                 QowaivMessages.InvalidCastException_FromTo,
-                from,
-                to));
+                from.ToCSharpString(true),
+                to.ToCSharpString(true)));
         }
     }
 }

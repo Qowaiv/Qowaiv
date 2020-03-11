@@ -350,7 +350,7 @@ namespace Qowaiv.Globalization
             ResourceManager
                 .GetString("All")
                 .Split(';')
-                .Select(str => new Country { m_Value = str })
+                .Select(str => new Country(str))
                 .ToList());
 
         #endregion
@@ -422,9 +422,10 @@ namespace Qowaiv.Globalization
             {
                 if (Parsings.ContainsKey(culture)) { return; }
 
-                Parsings[culture] = new Dictionary<string, string>();
-
-                Parsings[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+                Parsings[culture] = new Dictionary<string, string>
+                {
+                    [Unknown.GetDisplayName(culture)] = Unknown.m_Value
+                };
 
                 foreach (var country in All)
                 {
@@ -448,7 +449,7 @@ namespace Qowaiv.Globalization
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static volatile object locker = new object();
+        private static readonly object locker = new object();
 
         #endregion
     }

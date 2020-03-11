@@ -238,7 +238,7 @@ namespace Qowaiv
             }
             if (Pattern.IsMatch(s))
             {
-                result = new Month { m_Value = byte.Parse(s, formatProvider) };
+                result = new Month(byte.Parse(s, formatProvider));
                 return true;
             }
             else
@@ -249,7 +249,7 @@ namespace Qowaiv
                 if (Parsings[culture].TryGetValue(str, out byte m) ||
                     Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
                 {
-                    result = new Month { m_Value = m };
+                    result = new Month(m);
                     return true;
                 }
             }

@@ -317,7 +317,7 @@ namespace Qowaiv.Financial
             ResourceManager
                 .GetString("All")
                 .Split(';')
-                .Select(str => new Currency { m_Value = str })
+                .Select(str => new Currency(str))
                 .ToList());
 
         #endregion
@@ -390,11 +390,12 @@ namespace Qowaiv.Financial
             {
                 if (Parsings.ContainsKey(culture)) { return; }
 
-                Parsings[culture] = new Dictionary<string, string>();
+                Parsings[culture] = new Dictionary<string, string>
+                {
+                    [Unknown.GetDisplayName(culture)] = Unknown.m_Value
+                };
 
-                Parsings[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
-
-                foreach (var country in Currency.AllCurrencies)
+                foreach (var country in AllCurrencies)
                 {
                     Parsings[culture][Parsing.ToUnified(country.GetDisplayName(culture))] = country.m_Value;
                 }

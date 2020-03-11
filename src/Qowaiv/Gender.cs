@@ -203,7 +203,7 @@ namespace Qowaiv
 
             if (Parsings[c].TryGetValue(str, out byte val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new Gender { m_Value = val };
+                result = new Gender(val);
                 return true;
             }
             return false;
@@ -263,7 +263,7 @@ namespace Qowaiv
 
             if (!val.HasValue || FromInt32s.TryGetValue(val.Value, out b))
             {
-                result = new Gender { m_Value = b };
+                result = new Gender(b);
                 return true;
             }
             return false;

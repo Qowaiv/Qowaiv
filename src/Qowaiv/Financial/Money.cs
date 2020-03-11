@@ -370,7 +370,7 @@ namespace Qowaiv.Financial
         {
             Guard.NotNull(info, nameof(info));
             m_Value = info.GetDecimal("Value");
-            m_Currency = Currency.Parse(info.GetString(nameof(Currency)));
+            m_Currency = Currency.Parse(info.GetString(nameof(Currency)), CultureInfo.InvariantCulture);
         }
 
         /// <summary>Adds the underlying property of Money to the serialization info.</summary>

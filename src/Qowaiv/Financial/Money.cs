@@ -473,7 +473,7 @@ namespace Qowaiv.Financial
         /// <summary>Casts Money to a <see cref="string"/>.</summary>
         public static explicit operator string(Money val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
-        public static explicit operator Money(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Money(string str) => Cast.String<Money>(TryParse, str);
 
         /// <summary>Casts Money to a decimal.</summary>
         public static explicit operator Amount(Money val) => (Amount)val.m_Value;

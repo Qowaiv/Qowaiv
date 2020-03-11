@@ -152,19 +152,19 @@ namespace Qowaiv
         /// <summary>Casts a Gender to a <see cref="string"/>.</summary>
         public static explicit operator string(Gender val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Gender.</summary>
-        public static explicit operator Gender(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Gender(string str) => Cast.String<Gender>(TryParse, str);
 
         /// <summary>Casts a Gender to a <see cref="byte"/>.</summary>
         public static explicit operator byte(Gender val) => (byte)val.ToInt32();
         /// <summary>Casts a Gender to a <see cref="int"/>.</summary>
         public static explicit operator int(Gender val) => val.ToInt32();
         /// <summary>Casts an <see cref="int"/> to a Gender.</summary>
-        public static implicit operator Gender(int val) => Create(val);
+        public static implicit operator Gender(int val) => Cast.Primitive<int, Gender>(TryCreate, val);
 
         /// <summary>Casts a Gender to a <see cref="int"/>.</summary>
         public static explicit operator int?(Gender val) => val.ToNullableInt32();
         /// <summary>Casts an <see cref="int"/> to a Gender.</summary>
-        public static implicit operator Gender(int? val) => Create(val);
+        public static implicit operator Gender(int? val) => Cast.Primitive<int, Gender>(TryCreate, val);
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -257,7 +257,7 @@ namespace Qowaiv
         /// </returns>
         public static bool TryCreate(int? val, out Gender result)
         {
-            result = Gender.Empty;
+            result = Empty;
 
             byte b = 0;
 

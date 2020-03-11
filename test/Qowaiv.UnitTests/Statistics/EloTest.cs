@@ -616,10 +616,13 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void Explicit_StringToElo_AreEqual()
         {
-            var exp = TestStruct;
-            var act = (Elo)TestStruct.ToString();
+            using (new CultureInfoScope("en-GB"))
+            {
+                var exp = TestStruct;
+                var act = (Elo)TestStruct.ToString(CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
         [Test]
         public void Explicit_EloToString_AreEqual()

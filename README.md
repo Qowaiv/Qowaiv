@@ -43,6 +43,7 @@ Multiple scenarios are supported:
 * Serialization (JSON, XML, in-memory)
 * Model binding
 * Domain-specific logic
+* Explicit and implicit casting
 
 ## Qowaiv types
 

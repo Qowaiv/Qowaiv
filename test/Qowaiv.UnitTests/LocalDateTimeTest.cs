@@ -527,10 +527,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_StringToLocalDateTime_AreEqual()
         {
-            var exp = TestStructNoMilliseconds;
-            var act = (LocalDateTime)TestStructNoMilliseconds.ToString();
+            using (new CultureInfoScope("en-GB"))
+            {
+                var exp = TestStructNoMilliseconds;
+                var act = (LocalDateTime)TestStructNoMilliseconds.ToString(CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
         [Test]
         public void Explicit_LocalDateTimeToString_AreEqual()

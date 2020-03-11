@@ -196,7 +196,7 @@ namespace Qowaiv
             if (Parsings[culture].TryGetValue(str, out byte val) ||
                 Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new YesNo { m_Value = val };
+                result = new YesNo(val);
                 return true;
             }
             return false;

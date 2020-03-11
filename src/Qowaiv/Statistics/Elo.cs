@@ -217,7 +217,7 @@ namespace Qowaiv.Statistics
 
                 if (double.TryParse(str, NumberStyles.Number, formatProvider, out var d) && !double.IsNaN(d) && !double.IsInfinity(d))
                 {
-                    result = new Elo { m_Value = d };
+                    result = new Elo(d);
                     return true;
                 }
             }

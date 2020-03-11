@@ -173,7 +173,7 @@ namespace Qowaiv.Security.Cryptography
             var bytes = new byte[val.Length];
             Array.Copy(val, bytes, val.Length);
 
-            return new CryptographicSeed { m_Value = bytes };
+            return new CryptographicSeed(bytes);
         }
 
         /// <summary>Creates a cryptographic seed from a GUID.</summary >

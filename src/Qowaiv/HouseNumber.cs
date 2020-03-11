@@ -241,7 +241,7 @@ namespace Qowaiv
             }
             if (IsValid(val.Value))
             {
-                result = new HouseNumber { m_Value = val.Value };
+                result = new HouseNumber(val.Value);
                 return true;
             }
             return false;

@@ -105,7 +105,7 @@ namespace Qowaiv
         internal DateSpan Plus() => this;
 
         /// <summary>Negates the date span.</summary>
-        public DateSpan Negate() => new DateSpan { m_Value = AsUInt64(-TotalMonths, -Days) };
+        public DateSpan Negate() => new DateSpan(AsUInt64(-TotalMonths, -Days));
 
         /// <summary>Returns a new date span whose value is the sum of the specified date span and this instance.</summary>
         ///<param name="other">
@@ -174,7 +174,7 @@ namespace Qowaiv
             {
                 throw new OverflowException(QowaivMessages.OverflowException_DateSpan);
             }
-            return new DateSpan { m_Value = AsUInt64(months, days) };
+            return new DateSpan(AsUInt64(months, days));
         }
 
         #endregion
@@ -383,7 +383,7 @@ namespace Qowaiv
 
                 if (!IsOutOfRange(months, d, totalDays))
                 {
-                    result = new DateSpan { m_Value = AsUInt64(months, d) };
+                    result = new DateSpan(AsUInt64(months, d));
                     return true;
                 }
             }

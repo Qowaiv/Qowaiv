@@ -722,7 +722,7 @@ namespace Qowaiv
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
-        public static Percentage Create(decimal val) => new Percentage { m_Value = val };
+        public static Percentage Create(decimal val) => new Percentage(val);
 
         /// <summary>Creates a Percentage from a Double.</summary >
         /// <param name="val" >

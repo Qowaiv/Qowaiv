@@ -108,7 +108,7 @@ namespace Qowaiv
         /// <summary>Casts a postal code to a <see cref="string"/>.</summary>
         public static explicit operator string(PostalCode val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a postal code.</summary>
-        public static explicit operator PostalCode(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator PostalCode(string str) => Cast.String<PostalCode>(TryParse, str);
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

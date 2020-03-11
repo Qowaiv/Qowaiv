@@ -170,12 +170,12 @@ namespace Qowaiv.Statistics
         /// <summary>Casts an Elo to a <see cref="string"/>.</summary>
         public static explicit operator string(Elo val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Elo.</summary>
-        public static explicit operator Elo(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Elo(string str) => Cast.String<Elo>(TryParse, str);
 
         /// <summary>Casts a decimal to an Elo.</summary>
         public static implicit operator Elo(decimal val) => new Elo((double)val);
         /// <summary>Casts a decimal to an Elo.</summary>
-        public static implicit operator Elo(double val) => new Elo(val);
+        public static implicit operator Elo(double val) => Create(val);
         /// <summary>Casts an integer to an Elo.</summary>
         public static implicit operator Elo(int val) => new Elo(val);
 
@@ -217,7 +217,7 @@ namespace Qowaiv.Statistics
 
                 if (double.TryParse(str, NumberStyles.Number, formatProvider, out var d) && !double.IsNaN(d) && !double.IsInfinity(d))
                 {
-                    result = new Elo { m_Value = d };
+                    result = new Elo(d);
                     return true;
                 }
             }

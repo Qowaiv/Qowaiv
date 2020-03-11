@@ -657,10 +657,13 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Explicit_StringToMoney_AreEqual()
         {
-            var exp = TestStruct;
-            var act = (Money)TestStruct.ToString();
+            using (new CultureInfoScope("fr-FR"))
+            {
+                var exp = TestStruct;
+                var act = (Money)TestStruct.ToString(CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
         [Test]
         public void Explicit_MoneyToString_AreEqual()

@@ -41,7 +41,7 @@ namespace Qowaiv.Globalization
         public static readonly Country Unknown = new Country("ZZ");
 
         /// <summary>Gets a country based on the current thread.</summary>
-        public static Country Current=>Thread.CurrentThread.GetValue<Country>();
+        public static Country Current => Thread.CurrentThread.GetValue<Country>();
 
         /// <summary>Gets the name of the country.</summary>
         /// <remarks>
@@ -64,31 +64,31 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// The two-letter code defined in ISO 3166-1 for the country.
         /// </returns>
-        public string IsoAlpha2Code=> GetResourceString("ISO2", CultureInfo.InvariantCulture); 
+        public string IsoAlpha2Code => GetResourceString("ISO2", CultureInfo.InvariantCulture);
 
         ///<summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
         /// <returns>
         /// The three-letter code defined in ISO 3166-1 for the country.
         /// </returns>
-        public string IsoAlpha3Code=>GetResourceString("ISO3", CultureInfo.InvariantCulture); 
+        public string IsoAlpha3Code => GetResourceString("ISO3", CultureInfo.InvariantCulture);
 
         ///<summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
         /// <returns>
         /// The numeric code defined in ISO 3166-1 for the country/region.
         /// </returns>
-        public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture)); 
+        public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture));
 
         /// <summary>Gets the country calling code as defined by ITU-T.</summary>
         /// <remarks>
         /// Recommendations E.123 and E.164, also called IDD (International Direct Dialing) or ISD (International Subscriber Dialling) codes.
         /// </remarks>
-        public string CallingCode => GetResourceString("CallingCode", CultureInfo.InvariantCulture); 
+        public string CallingCode => GetResourceString("CallingCode", CultureInfo.InvariantCulture);
 
         ///<summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
         public bool RegionInfoExists => !string.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture));
 
         /// <summary>Gets the start date from witch the country exists.</summary>
-        public Date StartDate=> m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
+        public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
 
         /// <summary>If the country does not exist anymore, the end date is given, otherwise null.</summary>
         public Date? EndDate
@@ -228,13 +228,13 @@ namespace Qowaiv.Globalization
         /// <summary>Casts a Country to a <see cref="string"/>.</summary>
         public static explicit operator string(Country val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
-        public static explicit operator Country(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Country(string str) => Cast.String<Country>(TryParse, str);
 
         /// <summary>Casts a System.Globalization.RegionInfo to a </summary>
         public static implicit operator Country(RegionInfo region) => Create(region);
 
         /// <summary>Casts a Country to a System.Globalization.RegionInf.</summary>
-        public static explicit operator RegionInfo(Country val) =>val.ToRegionInfo();
+        public static explicit operator RegionInfo(Country val) => val.ToRegionInfo();
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -280,7 +280,7 @@ namespace Qowaiv.Globalization
 
             if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new Country( val );
+                result = new Country(val);
                 return true;
             }
             return false;
@@ -350,7 +350,7 @@ namespace Qowaiv.Globalization
             ResourceManager
                 .GetString("All")
                 .Split(';')
-                .Select(str => new Country { m_Value = str })
+                .Select(str => new Country(str))
                 .ToList());
 
         #endregion
@@ -422,9 +422,10 @@ namespace Qowaiv.Globalization
             {
                 if (Parsings.ContainsKey(culture)) { return; }
 
-                Parsings[culture] = new Dictionary<string, string>();
-
-                Parsings[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+                Parsings[culture] = new Dictionary<string, string>
+                {
+                    [Unknown.GetDisplayName(culture)] = Unknown.m_Value
+                };
 
                 foreach (var country in All)
                 {
@@ -448,7 +449,7 @@ namespace Qowaiv.Globalization
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static volatile object locker = new object();
+        private static readonly object locker = new object();
 
         #endregion
     }

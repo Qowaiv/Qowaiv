@@ -79,6 +79,10 @@ namespace Qowaiv
         /// </remarks>
         public static object Value(Type type)
         {
+            if(type is null)
+            {
+                return null;
+            }
             if (UnknownValues.TryGetValue(type, out object unknown))
             {
                 return unknown;

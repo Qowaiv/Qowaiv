@@ -116,9 +116,9 @@ namespace Qowaiv.Security.Cryptography
         }
 
         /// <summary>Casts a cryptographic seed to a <see cref="string"/>.</summary>
-        public static explicit operator string(CryptographicSeed val) => val.ToString();
+        public static explicit operator string(CryptographicSeed val) => val.ToString(CultureInfo.InvariantCulture);
         /// <summary>Casts a <see cref="string"/> to a cryptographic seed.</summary>
-        public static explicit operator CryptographicSeed(string str) => Parse(str);
+        public static explicit operator CryptographicSeed(string str) => Cast.InvariantString<CryptographicSeed>(TryParse, str);
 
         /// <summary>Casts a cryptographic seed to a System.byte[].</summary>
         public static explicit operator byte[](CryptographicSeed val) => val.ToByteArray();
@@ -173,7 +173,7 @@ namespace Qowaiv.Security.Cryptography
             var bytes = new byte[val.Length];
             Array.Copy(val, bytes, val.Length);
 
-            return new CryptographicSeed { m_Value = bytes };
+            return new CryptographicSeed(bytes);
         }
 
         /// <summary>Creates a cryptographic seed from a GUID.</summary >

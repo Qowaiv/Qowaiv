@@ -370,7 +370,7 @@ namespace Qowaiv.Financial
         {
             Guard.NotNull(info, nameof(info));
             m_Value = info.GetDecimal("Value");
-            m_Currency = Currency.Parse(info.GetString(nameof(Currency)));
+            m_Currency = Currency.Parse(info.GetString(nameof(Currency)), CultureInfo.InvariantCulture);
         }
 
         /// <summary>Adds the underlying property of Money to the serialization info.</summary>
@@ -473,7 +473,7 @@ namespace Qowaiv.Financial
         /// <summary>Casts Money to a <see cref="string"/>.</summary>
         public static explicit operator string(Money val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a </summary>
-        public static explicit operator Money(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Money(string str) => Cast.String<Money>(TryParse, str);
 
         /// <summary>Casts Money to a decimal.</summary>
         public static explicit operator Amount(Money val) => (Amount)val.m_Value;

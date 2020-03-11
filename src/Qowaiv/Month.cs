@@ -200,13 +200,13 @@ namespace Qowaiv
         /// <summary>Casts a month to a <see cref="string"/>.</summary>
         public static explicit operator string(Month val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a month.</summary>
-        public static explicit operator Month(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Month(string str) => Cast.String<Month>(TryParse, str);
 
 
         /// <summary>Casts a month to a System.Int32.</summary>
         public static explicit operator int(Month val) => val.m_Value;
         /// <summary>Casts an System.Int32 to a month.</summary>
-        public static implicit operator Month(int val) => Create(val);
+        public static implicit operator Month(int val) => Cast.Primitive<int, Month>(TryCreate, val);
 
         /// <summary>Converts the string to a month.
         /// A return value indicates whether the conversion succeeded.
@@ -238,7 +238,7 @@ namespace Qowaiv
             }
             if (Pattern.IsMatch(s))
             {
-                result = new Month { m_Value = byte.Parse(s, formatProvider) };
+                result = new Month(byte.Parse(s, formatProvider));
                 return true;
             }
             else
@@ -249,7 +249,7 @@ namespace Qowaiv
                 if (Parsings[culture].TryGetValue(str, out byte m) ||
                     Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
                 {
-                    result = new Month { m_Value = m };
+                    result = new Month(m);
                     return true;
                 }
             }

@@ -70,7 +70,7 @@ namespace Qowaiv.Web
         public static readonly InternetMediaType Empty;
 
         /// <summary>Represents an unknown (but set) Internet media type.</summary>
-        public static readonly InternetMediaType Unknown = new InternetMediaType { m_Value = "application/octet-stream" };
+        public static readonly InternetMediaType Unknown = new InternetMediaType("application/octet-stream");
 
         /// <summary>Gets the number of characters of the Internet media type.</summary>
         public int Length => IsEmpty() ? 0 : m_Value.Length;
@@ -171,7 +171,7 @@ namespace Qowaiv.Web
         /// <summary>Casts an Internet media type to a <see cref="string"/>.</summary>
         public static explicit operator string(InternetMediaType val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Internet media type.</summary>
-        public static explicit operator InternetMediaType(string str) { return InternetMediaType.Parse(str); }
+        public static explicit operator InternetMediaType(string str) => Cast.InvariantString<InternetMediaType>(TryParse, str);
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

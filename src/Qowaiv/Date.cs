@@ -39,7 +39,7 @@ namespace Qowaiv
         public static Date Tomorrow => Clock.Tomorrow();
 
         #region Constructors
-           
+
         /// <summary>Initializes a new instance of the date structure to a specified number of ticks.</summary>
         /// <param name="ticks">
         /// A date expressed in 100-nanosecond units.
@@ -404,14 +404,14 @@ namespace Qowaiv
         public static implicit operator DateTime(Date val) => val.m_Value;
 
         /// <summary>Casts a <see cref="string"/> to a date.</summary>
-        public static explicit operator Date(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Date(string str) => Cast.String<Date>(TryParse, str);
         /// <summary>Casts a date time to a date.</summary>
-        public static explicit operator Date(DateTime val) { return new Date(val); }
+        public static explicit operator Date(DateTime val) => new Date(val);
 
         /// <summary>Casts a local date time to a date.</summary>
-        public static explicit operator Date(LocalDateTime val) { return val.Date; }
+        public static explicit operator Date(LocalDateTime val) => val.Date;
         /// <summary>Casts a week date to a date.</summary>
-        public static implicit operator Date(WeekDate val) { return val.Date; }
+        public static implicit operator Date(WeekDate val) => val.Date;
 
         #endregion
 

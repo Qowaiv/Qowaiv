@@ -222,10 +222,10 @@ namespace Qowaiv.Financial
         /// <summary>Casts a currency to a <see cref="string"/>.</summary>
         public static explicit operator string(Currency val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a currency.</summary>
-        public static explicit operator Currency(string str) =>Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator Currency(string str) => Cast.String<Currency>(TryParse, str);
 
         /// <summary>Casts a currency to a <see cref="string"/>.</summary>
-        public static explicit operator int(Currency val) { return val.IsoNumericCode; }
+        public static explicit operator int(Currency val) => val.IsoNumericCode;
 
         /// <summary>Casts a <see cref="string"/> to a currency.</summary>
         public static explicit operator Currency(int val) => AllCurrencies.FirstOrDefault(c => c.IsoNumericCode == val);
@@ -271,7 +271,7 @@ namespace Qowaiv.Financial
 
             if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new Currency( val );
+                result = new Currency(val);
                 return true;
             }
             foreach (var currency in AllCurrencies.Where(c => !string.IsNullOrEmpty(c.Symbol)))
@@ -317,7 +317,7 @@ namespace Qowaiv.Financial
             ResourceManager
                 .GetString("All")
                 .Split(';')
-                .Select(str => new Currency { m_Value = str })
+                .Select(str => new Currency(str))
                 .ToList());
 
         #endregion
@@ -390,11 +390,12 @@ namespace Qowaiv.Financial
             {
                 if (Parsings.ContainsKey(culture)) { return; }
 
-                Parsings[culture] = new Dictionary<string, string>();
+                Parsings[culture] = new Dictionary<string, string>
+                {
+                    [Unknown.GetDisplayName(culture)] = Unknown.m_Value
+                };
 
-                Parsings[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
-
-                foreach (var country in Currency.AllCurrencies)
+                foreach (var country in AllCurrencies)
                 {
                     Parsings[culture][Parsing.ToUnified(country.GetDisplayName(culture))] = country.m_Value;
                 }
@@ -430,7 +431,7 @@ namespace Qowaiv.Financial
         /// <summary>Creates money based on the amount and the currency.</summary>
         public static Money operator +(decimal val, Currency currency) => Money.Create(val, currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
-        public static Money operator +(double val, Currency currency) => Money.Create((decimal)val, currency);
+        public static Money operator +(double val, Currency currency) => Money.Create(Cast.ToDecimal<Money>(val), currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
         public static Money operator +(int val, Currency currency) => Money.Create(val, currency);
 

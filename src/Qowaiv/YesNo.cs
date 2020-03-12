@@ -11,7 +11,6 @@ using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -47,7 +46,7 @@ namespace Qowaiv
         public static readonly YesNo Unknown = new YesNo(3);
 
         /// <summary>Contains yes and no.</summary>
-        public static readonly IReadOnlyCollection<YesNo> YesAndNo = new ReadOnlyCollection<YesNo>(new List<YesNo> { Yes, No });
+        public static readonly IReadOnlyCollection<YesNo> YesAndNo = new[] { Yes, No };
 
         /// <summary>Returns true if the yes-no value represents no, otherwise false.</summary>
         public bool IsNo() => m_Value == No.m_Value;
@@ -139,7 +138,7 @@ namespace Qowaiv
         /// <summary>Casts a yes-no to a <see cref="string"/>.</summary>
         public static explicit operator string(YesNo val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a yes-no.</summary>
-        public static explicit operator YesNo(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator YesNo(string str) => Cast.String<YesNo>(TryParse, str);
 
         /// <summary>Casts a yes-no to a nullable <see cref="bool"/>.</summary>
         public static explicit operator bool?(YesNo val) => BooleanValues[val.m_Value];
@@ -197,7 +196,7 @@ namespace Qowaiv
             if (Parsings[culture].TryGetValue(str, out byte val) ||
                 Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {
-                result = new YesNo { m_Value = val };
+                result = new YesNo(val);
                 return true;
             }
             return false;
@@ -259,7 +258,7 @@ namespace Qowaiv
 
         #region Resources
 
-        private static ResourceManager ResourceManager = new ResourceManager("Qowaiv.YesNoLabels", typeof(YesNo).Assembly);
+        private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.YesNoLabels", typeof(YesNo).Assembly);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">

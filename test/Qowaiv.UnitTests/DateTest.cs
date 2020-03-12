@@ -644,10 +644,13 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_StringToDate_AreEqual()
         {
-            var exp = TestStruct;
-            var act = (Date)TestStruct.ToString();
+            using (new CultureInfoScope("es-EQ"))
+            {
+                var exp = TestStruct;
+                var act = (Date)TestStruct.ToString(CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(exp, act);
+                Assert.AreEqual(exp, act);
+            }
         }
         [Test]
         public void Explicit_DateToString_AreEqual()

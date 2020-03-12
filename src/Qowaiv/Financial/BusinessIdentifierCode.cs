@@ -117,7 +117,7 @@ namespace Qowaiv.Financial
         /// <summary>Casts a BIC to a <see cref="string"/>.</summary>
         public static explicit operator string(BusinessIdentifierCode val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a BIC.</summary>
-        public static explicit operator BusinessIdentifierCode(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator BusinessIdentifierCode(string str) => Cast.String<BusinessIdentifierCode>(TryParse, str);
 
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>

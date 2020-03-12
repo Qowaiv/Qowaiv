@@ -3,10 +3,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
 
-| version                                                                      | package                                                                     |
-|------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-5.0.1-blue.svg?cacheSeconds=3600)   |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
-|![v](https://img.shields.io/badge/version-5.0.0-blue.svg?cacheSeconds=3600)   |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
+| version                                                                       | package                                                                     |
+|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+|![v](https://img.shields.io/badge/version-5.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-5.0.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-3.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
 # Qowaiv
@@ -16,20 +16,45 @@ Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
 Value Objects that can be used a wide variety of modeling scenarios, both
 inside and outside a Domain-driven context.
 
-Supported scenarios include parsing, formatting, validation, (de)serialization,
-model binding, and domain specific logic.
+### (Single) Value Objects
+A **Value Object** is an immutable type that is distinguishable only by the
+state of its properties. A **Single Value Object** (SVO) is a Value Object that
+can be represented by a single scalar/primitive type.
 
-# Single Value Object
-A Value Object that can be represented by a single scalar.
+### Primitive Obsession
+**Primitive Obsession** is when the code relies too much on primitives. This is
+seen as bad design, as it leads to error-prone, cluttered code. Using SVO's
+instead, prevents this.
 
-## Technical requirements
-Visual Studio VS2017.3 or higher is required. Visual Studio can be downloaded
-here: [visualstudio.com/downloads](https://www.visualstudio.com/downloads/).
+### Struct v.s. Class
+All Qowaiv SVO's have been created as `struct`, not as `class`. The reason for
+doing this, is that for primitive like SVO's they should behave similar to the
+known primitives, like `double`, `int`, `DateTime`, `Guid`, etcetera.
+
+A consequence of this choice is that SVO's can not be `null`, and that all
+default initializations have a meaningful value. That can be `Empty`, `Zero`
+or what suits the SVO best.
+
+### Support
+Multiple scenarios are supported:
+* Parsing
+* Formatting
+* Validation
+* Serialization (JSON, XML, in-memory)
+* Model binding
+* Domain-specific logic
+* Explicit and implicit casting
 
 ## Qowaiv types
 
 ### Date
-Represents a date, so without hours (minutes, seconds, milliseconds).
+Represents a date, so without hours (minutes, seconds, milliseconds), opposed to `DateTime`.
+
+``` C#
+var date = new Date(2017, 06, 11);
+var next = date++; // 2017-06-12
+var casted = (Date)new DateTime(2017, 06, 11, 06, 15);
+```
 
 ### Date span
 Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
@@ -45,10 +70,6 @@ var age = DateSpan.Age(new Date(2017, 06, 11)); // 2Y+0M+121D on 2019-10-10
 var duration = DateSpan.Subtract(new Date(2019, 06, 10), new Date(2017, 06, 11)); // 1Y+11M+30D
 var date = new Date(2016, 06, 03).Add(age); // 2018-10-02
 ```
-
-### Elo
-Represents an Elo (rating), a method for calculating the relative skill levels of
-players in competitor-versus-competitor games.
 
 ### Email address
 Represents a (single) email address. Supports:
@@ -336,6 +357,18 @@ used typically as a mechanism for version-stamping table rows. The storage size 
 ### SVO Parameter factory class
 To create a (SQL) parameter with a SVO as value, use the SvoParamater factory
 class. It will return SQL parameter with a converted database proof value.
+
+## Qowaiv statistical types
+
+### Elo
+Represents an Elo (rating), a method for calculating the relative skill levels of
+players in competitor-versus-competitor games.
+
+``` C#
+Elo p0 = 1600;
+Elo p1 = 1500;
+var z = Elo.GetZScore(p0, p1); // 0.64 
+```
 
 ## Qowaiv web types
 

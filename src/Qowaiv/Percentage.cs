@@ -558,7 +558,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized percentage.
         /// </returns>
-        public static Percentage FromJson(double json) => new Percentage((decimal)json);
+        public static Percentage FromJson(double json) => new Percentage(Cast.ToDecimal<Percentage>(json));
 
         /// <summary>Serializes the percentage to a JSON node.</summary>
         /// <returns>
@@ -598,15 +598,15 @@ namespace Qowaiv
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
-        /// <param name="formatProvider">
+        /// <param name="provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider)
+        public string ToString(IFormatProvider provider)
         {
-            DefaultFormats.TryGetValue(formatProvider ?? CultureInfo.CurrentCulture, out string format);
+            DefaultFormats.TryGetValue(provider ?? CultureInfo.CurrentCulture, out string format);
             format ??= "0.############################%";
 
-            return ToString(format, formatProvider);
+            return ToString(format, provider);
         }
 
         /// <summary>Gets the default format for different countries.</summary>
@@ -662,8 +662,7 @@ namespace Qowaiv
         /// <summary>Casts a Percentage to a <see cref="string"/>.</summary>
         public static explicit operator string(Percentage val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a Percentage.</summary>
-        public static explicit operator Percentage(string str) => Parse(str, CultureInfo.CurrentCulture);
-
+        public static explicit operator Percentage(string str) => Cast.String<Percentage>(TryParse, str);
 
         /// <summary>Casts a decimal a Percentage.</summary>
         public static implicit operator Percentage(decimal val) => Create(val);
@@ -722,13 +721,13 @@ namespace Qowaiv
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
-        public static Percentage Create(decimal val) => new Percentage { m_Value = val };
+        public static Percentage Create(decimal val) => new Percentage(val);
 
         /// <summary>Creates a Percentage from a Double.</summary >
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
-        public static Percentage Create(double val) => Create((decimal)val);
+        public static Percentage Create(double val) => Create(Cast.ToDecimal<Percentage>(val));
 
         #region Parsing Helpers
 

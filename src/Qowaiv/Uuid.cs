@@ -133,7 +133,7 @@ namespace Qowaiv
         /// <summary>Casts a UUID to a <see cref="string"/>.</summary>
         public static explicit operator string(Uuid val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a UUID.</summary>
-        public static explicit operator Uuid(string str) => Parse(str);
+        public static explicit operator Uuid(string str) => Cast.InvariantString<Uuid>(TryParse, str);
 
         /// <summary>Casts a Qowaiv.UUID to a System.GUID.</summary>
         public static implicit operator Guid(Uuid val) => val.m_Value;
@@ -240,9 +240,9 @@ namespace Qowaiv
         public static Uuid GenerateWithMD5(byte[] data)
         {
             Guard.NotNull(data, nameof(data));
-            
+
             using var md5 = MD5.Create();
-            
+
             var hash = md5.ComputeHash(data);
             UuidExtensions.SetVersion(hash, UuidVersion.MD5);
             return new Guid(hash);
@@ -252,9 +252,9 @@ namespace Qowaiv
         public static Uuid GenerateWithSHA1(byte[] data)
         {
             Guard.NotNull(data, nameof(data));
-            
+
             using var sha1 = SHA1.Create();
-            
+
             var bytes = sha1.ComputeHash(data);
             var hash = new byte[ArraySize];
             Array.Copy(bytes, hash, ArraySize);

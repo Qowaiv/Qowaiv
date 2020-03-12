@@ -514,14 +514,14 @@ namespace Qowaiv
 
 
         /// <summary>Casts a <see cref="string"/> to a local date time.</summary>
-        public static explicit operator LocalDateTime(string str) => Parse(str, CultureInfo.CurrentCulture);
+        public static explicit operator LocalDateTime(string str) => Cast.String<LocalDateTime>(TryParse, str);
         /// <summary>Casts a date time to a local date time.</summary>
-        public static implicit operator LocalDateTime(DateTime val) { return new LocalDateTime(val); }
+        public static implicit operator LocalDateTime(DateTime val) => new LocalDateTime(val);
 
         /// <summary>Casts a date to a local date time.</summary>
-        public static explicit operator LocalDateTime(Date val) { return new LocalDateTime(val); }
+        public static explicit operator LocalDateTime(Date val) => new LocalDateTime(val);
         /// <summary>Casts a week date to a week date.</summary>
-        public static implicit operator LocalDateTime(WeekDate val) { return (LocalDateTime)val.Date; }
+        public static implicit operator LocalDateTime(WeekDate val) => (LocalDateTime)val.Date;
 
         #endregion
 

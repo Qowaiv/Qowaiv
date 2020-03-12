@@ -26,7 +26,7 @@ namespace Qowaiv.Identifiers
         public virtual byte[] ToByteArray(object obj) => obj is int num ? BitConverter.GetBytes(num) : Array.Empty<byte>();
 
         /// <inheritdoc/>
-        public virtual object FromBytes(byte[] bytes) => BitConverter.ToInt64(bytes, 0);
+        public virtual object FromBytes(byte[] bytes) => BitConverter.ToInt32(bytes, 0);
 
         /// <inheritdoc/>
         public virtual string ToString(object obj, string format, IFormatProvider formatProvider) => Id(obj).ToString(format, formatProvider);

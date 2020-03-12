@@ -143,10 +143,10 @@ namespace Qowaiv.Identifiers
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
-        /// <param name="formatProvider">
+        /// <param name="provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
+        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the identifier.</summary>
         /// <param name="format">
@@ -215,6 +215,9 @@ namespace Qowaiv.Identifiers
         /// <summary>Casts the identifier to a <see cref="string"/>.</summary>
         public static explicit operator string(Id<TIdentifier> id) => id.CastToPrimitive<string, string>();
 
+        /// <summary>Casts the identifier to a <see cref="int"/>.</summary>
+        public static explicit operator int(Id<TIdentifier> id) => id.CastToPrimitive<int, int>();
+
         /// <summary>Casts the identifier to a <see cref="long"/>.</summary>
         public static explicit operator long(Id<TIdentifier> id) => id.CastToPrimitive<long, long>();
 
@@ -226,6 +229,9 @@ namespace Qowaiv.Identifiers
 
         /// <summary>Casts the <see cref="string"/> to an identifier.</summary>
         public static explicit operator Id<TIdentifier>(string id) => Create(id);
+
+        /// <summary>Casts the <see cref="int"/> to an identifier.</summary>
+        public static explicit operator Id<TIdentifier>(int id) => Create(id);
 
         /// <summary>Casts the <see cref="long"/> to an identifier.</summary>
         public static explicit operator Id<TIdentifier>(long id) => Create(id);

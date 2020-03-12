@@ -4,14 +4,14 @@ using System.Globalization;
 
 namespace Qowaiv.Identifiers
 {
-    /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="long"/>.</summary>
-    public abstract class Int64IdLogic : IIdentifierLogic
+    /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="int"/>.</summary>
+    public abstract class Int32IdLogic : IIdentifierLogic
     {
-        /// <summary>Returns the type of the underlying value (<see cref="long"/>).</summary>
-        public Type BaseType => typeof(long);
+        /// <summary>Returns the type of the underlying value (<see cref="int"/>).</summary>
+        public Type BaseType => typeof(int);
 
         /// <inheritdoc/>
-        public virtual TypeConverter Converter { get; } = TypeDescriptor.GetConverter(typeof(long));
+        public virtual TypeConverter Converter { get; } = TypeDescriptor.GetConverter(typeof(int));
 
         /// <inheritdoc/>
         public virtual int Compare(object x, object y) => Id(x).CompareTo(Id(y));
@@ -23,7 +23,7 @@ namespace Qowaiv.Identifiers
         public virtual int GetHashCode(object obj) => Id(obj).GetHashCode();
 
         /// <inheritdoc/>
-        public virtual byte[] ToByteArray(object obj) => obj is long num ? BitConverter.GetBytes(num) : Array.Empty<byte>();
+        public virtual byte[] ToByteArray(object obj) => obj is int num ? BitConverter.GetBytes(num) : Array.Empty<byte>();
 
         /// <inheritdoc/>
         public virtual object FromBytes(byte[] bytes) => BitConverter.ToInt64(bytes, 0);
@@ -38,11 +38,11 @@ namespace Qowaiv.Identifiers
             {
                 return null;
             }
-            if (obj > 0)
+            if (obj > 0 && obj <= int.MaxValue)
             {
-                return obj;
+                return (int)obj;
             }
-            throw Exceptions.InvalidCast(typeof(long), typeof(Id<>).MakeGenericType(GetType()));
+            throw Exceptions.InvalidCast(typeof(int), typeof(Id<>).MakeGenericType(GetType()));
         }
 
         /// <inheritdoc/>
@@ -53,7 +53,7 @@ namespace Qowaiv.Identifiers
         {
             id = default;
 
-            if (long.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, out var number) && number >= 0)
+            if (int.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, out var number) && number >= 0)
             {
                 id = number == 0 ? null : (object)number;
                 return true;
@@ -64,15 +64,9 @@ namespace Qowaiv.Identifiers
         /// <inheritdoc/>
         public virtual bool TryCreate(object obj, out object id)
         {
-            if (obj is long num)
+            if (obj is int num)
             {
-                id = num == 0L ? null : (object)num;
-                return true;
-            }
-
-            if (obj is int n)
-            {
-                id = n == 0 ? null : (object)(long)n;
+                id = num == 0 ? null : (object)num;
                 return true;
             }
             if (TryParse(obj?.ToString(), out id))
@@ -86,6 +80,6 @@ namespace Qowaiv.Identifiers
         /// <inheritdoc/>
         public virtual object Next() => throw new NotSupportedException();
 
-        private static long Id(object obj) => obj is long number ? number : 0;
+        private static int Id(object obj) => obj is int number ? number : 0;
     }
 }

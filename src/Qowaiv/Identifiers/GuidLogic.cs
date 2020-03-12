@@ -164,8 +164,8 @@ namespace Qowaiv.Identifiers
         public virtual bool TryCreate(object obj, out object id)
         {
             id = default;
-            
-            if(obj is Guid guid)
+
+            if (obj is Guid guid)
             {
                 id = guid == Guid.Empty ? null : (object)guid;
                 return true;

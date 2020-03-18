@@ -91,7 +91,6 @@ namespace Qowaiv.Reflection
             }
             return objectType;
         }
-
         /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
         /// <param name="type">
         /// The type to format as C# string.
@@ -115,14 +114,18 @@ namespace Qowaiv.Reflection
         {
             if (type.IsArray)
             {
-                return sb.AppendType(type.GetElementType(), withNamespace).Append("[]");
+                return sb.AppendType(type.GetElementType(), withNamespace)
+                    .Append('[')
+                    .Append(',', type.GetArrayRank() - 1)
+                    .Append(']');
+
             }
 
             if (primitives.TryGetValue(type, out var primitive))
             {
                 return sb.Append(primitive);
             }
-            
+
             if (type.IsGenericTypeDefinition)
             {
                 return sb
@@ -140,7 +143,7 @@ namespace Qowaiv.Reflection
                 // special case for nullables.
                 if (arguments.Length == 1 && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
-                    return sb.AppendType(arguments[0], withNamespace).Append("?");
+                    return sb.AppendType(arguments[0], withNamespace).Append('?');
                 }
 
                 sb.AppendNamespace(type, withNamespace)
@@ -160,9 +163,16 @@ namespace Qowaiv.Reflection
 
         private static StringBuilder AppendNamespace(this StringBuilder sb, Type type, bool withNamespace)
         {
-            return withNamespace && !string.IsNullOrEmpty(type.Namespace)
-                ? sb.Append(type.Namespace).Append('.')
-                : sb;
+            if (type.IsNested)
+            {
+                sb.AppendType(type.DeclaringType, withNamespace).Append('.');
+            }
+            else if (withNamespace && !string.IsNullOrEmpty(type.Namespace))
+            {
+                sb.Append(type.Namespace).Append('.');
+            }
+
+            return sb;
         }
 
         private static string ToNonGeneric(this Type type) => type.Name.Substring(0, type.Name.IndexOf('`'));
@@ -184,6 +194,5 @@ namespace Qowaiv.Reflection
             { typeof(double), "double" },
             { typeof(decimal), "decimal" },
         };
-
     }
 }

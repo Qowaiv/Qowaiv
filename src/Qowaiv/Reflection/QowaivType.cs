@@ -143,7 +143,7 @@ namespace Qowaiv.Reflection
                 // special case for nullables.
                 if (arguments.Length == 1 && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
-                    return sb.AppendType(arguments[0], withNamespace).Append("?");
+                    return sb.AppendType(arguments[0], withNamespace).Append('?');
                 }
 
                 sb.AppendNamespace(type, withNamespace)

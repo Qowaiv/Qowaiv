@@ -60,10 +60,23 @@ namespace Qowaiv.UnitTests.Reflection
         [TestCase(typeof(NestedTest), "QowaivTypeTest.NestedTest")]
         public void ToCSharpStringWithoutNamespace(Type type, string expected)
         {
-            var formatted = QowaivType.ToCSharpString(type, false);
+            var formatted = QowaivType.ToCSharpString(type);
             Assert.AreEqual(expected, formatted);
         }
 
+        [Test]
+        public void ToCSharpString_GenericArgument()
+        {
+            var generic = typeof(GenericOf).GetMethod(nameof(GenericOf.Default)).ReturnType;
+            var formatted = QowaivType.ToCSharpString(generic);
+            Assert.AreEqual("QowaivTypeTest.GenericOf.TModel", formatted);
+        }
+
         internal class NestedTest { }
+
+        internal class GenericOf
+        {
+            public TModel Default<TModel>() => default;
+        }
     }
 }

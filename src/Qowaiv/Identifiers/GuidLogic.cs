@@ -40,7 +40,7 @@ namespace Qowaiv.Identifiers
         /// The object that is expected to be a <see cref="Guid"/>.
         /// </param>
         /// <param name="format">
-        /// The format that this describes the formatting.
+        /// The format that describes the formatting.
         /// </param>
         /// <param name="formatProvider">
         /// The format provider.

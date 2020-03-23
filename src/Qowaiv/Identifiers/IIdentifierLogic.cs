@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace Qowaiv.Identifiers
 {
-    /// <summary>Injectable logic for strongly typed identfiers (<see cref="Id{TIdentifier}"/>).</summary>
+    /// <summary>Injectable logic for strongly typed identifiers (<see cref="Id{TIdentifier}"/>).</summary>
     /// <remarks>
     /// The logic is not called for <see cref="Id{TIdentifier}.Empty"/>.
     /// </remarks>
@@ -22,13 +22,13 @@ namespace Qowaiv.Identifiers
         /// </summary>
         new int Compare(object x, object y);
 
-        /// <summary>Returns a <see cref="byte"/> that represents the underling value of the identifier.</summary>
+        /// <summary>Returns a <see cref="byte"/> that represents the underlying value of the identifier.</summary>
         byte[] ToByteArray(object obj);
 
-        /// <summary>Returns the underling value of the identifier represented by a <see cref="byte"/> array.</summary>
+        /// <summary>Returns the underlying value of the identifier represented by a <see cref="byte"/> array.</summary>
         object FromBytes(byte[] bytes);
 
-        /// <summary>Returns a formatted <see cref="string"/> that represents the underling value of the identifier.</summary>
+        /// <summary>Returns a formatted <see cref="string"/> that represents the underlying value of the identifier.</summary>
         string ToString(object obj, string format, IFormatProvider formatProvider);
 
         /// <summary>Derializes the underlying value from a JSON number.</summary>
@@ -37,7 +37,7 @@ namespace Qowaiv.Identifiers
         /// <summary>Serializes the underlying value to a JSON node.</summary>
         object ToJson(object obj);
 
-        /// <summary>Tries to parse the underling value of the identifier.</summary>
+        /// <summary>Tries to parse the underlying value of the identifier.</summary>
         /// <param name="str">
         /// The <see cref="string"/> to parse.
         /// </param>
@@ -49,7 +49,7 @@ namespace Qowaiv.Identifiers
         /// </returns>
         bool TryParse(string str, out object id);
 
-        /// <summary>Tries to create the underling value of the identifier.</summary>
+        /// <summary>Tries to create the underlying value of the identifier.</summary>
         /// <param name="obj">
         /// The <see cref="object"/> that could represent the underlying value.
         /// </param>

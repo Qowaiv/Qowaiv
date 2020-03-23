@@ -57,10 +57,10 @@ namespace Qowaiv
             return (decimal)value;
         }
 
-        /// <summary>Casts a <see cref="long"/> to <see cref="decimal"/> for the SVO.</summary>
-        public static decimal ToInt<TSvo>(long value)
+        /// <summary>Casts a <see cref="long"/> to <see cref="int"/> for the SVO.</summary>
+        public static int ToInt<TSvo>(long value)
         {
-            if (value < int.MaxValue || value > int.MaxValue)
+            if (value < int.MinValue || value > int.MaxValue)
             {
                 throw Exceptions.InvalidCast<long, TSvo>();
             }

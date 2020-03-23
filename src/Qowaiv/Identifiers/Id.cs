@@ -333,7 +333,7 @@ namespace Qowaiv.Identifiers
         /// The <see cref="object"/> to create an indentifier from.
         /// </param>
         /// <exception cref="InvalidCastException">
-        /// if the identifier could not be created form the <see cref="object"/>.
+        /// if the identifier could not be created from the <see cref="object"/>.
         /// </exception>
         public static Id<TIdentifier> Create(object obj)
         {

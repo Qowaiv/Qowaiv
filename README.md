@@ -241,7 +241,7 @@ Primitive Obsession is a common issue when dealing with identifiers. It is quite
 common to provide two or even more identifiers (of different identities) to a
 method, which can lead to nasty bugs.
 
-To overcome this, strongly-typed identifiers can safe the day: a specific type
+To overcome this, strongly-typed identifiers can save the day: a specific type
 per identifier per identity. Qowaiv's approach is to use an `Id<T>` where T is
 a class dealing with the logic/behavior of the underlying values. This gives a
 lot of flexibility, and requires hardly any code per identifier, as in 99% of
@@ -281,7 +281,7 @@ public sealed class ForCustomer : StringIdLogic
         return false;
     }
 
-    public override object Next() => 'C; + Rnd.Next(10_000, 9_999_999).ToString();
+    public override object Next() => 'C' + Rnd.Next(10_000, 9_999_999).ToString();
 }
 
 ```

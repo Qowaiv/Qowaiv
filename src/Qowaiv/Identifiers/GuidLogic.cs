@@ -46,35 +46,22 @@ namespace Qowaiv.Identifiers
         /// The format provider.
         /// </param>
         /// <remarks>
-        /// S
-        /// 22 base64 chars:
-        /// 0123465798aAbBcCdDeE_-
+        /// S => 22 base64 chars:  0123465798aAbBcCdDeE_-
         /// 
-        /// H
-        /// 26 base32 chars:
-        /// ABCDEFGHIJKLMNOPQRSTUVWXYZ234567
+        /// H => 26 base32 chars: ABCDEFGHIJKLMNOPQRSTUVWXYZ234567
         /// 
-        /// N
-        /// 32 digits:
-        /// 00000000000000000000000000000000
+        /// N => 32 digits: 00000000000000000000000000000000
         /// 
-        /// D
-        /// 32 digits separated by hyphens:
-        /// 00000000-0000-0000-0000-000000000000
+        /// D => 32 digits separated by hyphens: 00000000-0000-0000-0000-000000000000
         /// 
-        /// B
-        /// 32 digits separated by hyphens, enclosed in braces:
-        /// {00000000-0000-0000-0000-000000000000}
+        /// B => 32 digits separated by hyphens, enclosed in braces: {00000000-0000-0000-0000-000000000000}
         /// 
-        /// P
-        /// 32 digits separated by hyphens, enclosed in parentheses:
-        /// (00000000-0000-0000-0000-000000000000)
+        /// P => 32 digits separated by hyphens, enclosed in parentheses: (00000000-0000-0000-0000-000000000000)
         /// 
-        /// X
-        /// Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values that is also enclosed in braces:
-        /// {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
+        /// X => Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values 
+        ///     that is also enclosed in braces: {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
         /// 
-        /// the lowercase formats are lowercase (except the the 's').
+        /// the lowercase formats are lowercase (except the 's').
         /// </remarks>
         public virtual string ToString(object obj, string format, IFormatProvider formatProvider)
         {

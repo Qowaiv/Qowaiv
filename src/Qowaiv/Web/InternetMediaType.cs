@@ -151,7 +151,7 @@ namespace Qowaiv.Web
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Internet media type.</summary>
         /// <param name="format">
-        /// The format that this describes the formatting.
+        /// The format that describes the formatting.
         /// </param>
         /// <param name="formatProvider">
         /// The format provider.

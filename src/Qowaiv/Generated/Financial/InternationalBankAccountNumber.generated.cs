@@ -212,7 +212,7 @@ namespace Qowaiv.Financial
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the IBAN.</summary>
         /// <param name = "format">
-        /// The format that this describes the formatting.
+        /// The format that describes the formatting.
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the IBAN.</summary>

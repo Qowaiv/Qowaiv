@@ -54,6 +54,9 @@ namespace Qowaiv
         /// <summary>Returns true if the yes-no value represents yes, otherwise false.</summary>
         public bool IsYes() => m_Value == Yes.m_Value;
 
+        /// <summary>Returns true if the yes-no value represents yes or no.</summary>
+        public bool IsYesOrNo() => IsYes() || IsNo();
+
         /// <summary>Deserializes the gender from a JSON number.</summary>
         /// <param name="json">
         /// The JSON number to deserialize.

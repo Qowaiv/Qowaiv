@@ -85,6 +85,15 @@ namespace Qowaiv.Fiancial.UnitTests
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
         }
 
+        [TestCase(true, "yes")]
+        [TestCase(true, "no")]
+        [TestCase(false, "?")]
+        [TestCase(false, "")]
+        public void IsYesOrNo(bool expected, YesNo yesNo)
+        {
+            Assert.AreEqual(expected, yesNo.IsYesOrNo());
+        }
+
         #endregion
 
         #region Boolean mappings

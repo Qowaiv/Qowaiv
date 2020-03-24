@@ -6,10 +6,10 @@ using System.Globalization;
 
 namespace Qowaiv.Identifiers
 {
-    /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="Guid"/>.</summary>
-    public abstract class GuidLogic : IIdentifierLogic
+    /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="Guid"/>.</summary>
+    public abstract class GuidBehavior : IIdentifierBehavior
     {
-        internal static readonly GuidLogic Instance = new Default();
+        internal static readonly GuidBehavior Instance = new Default();
 
         /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>
         public Type BaseType => typeof(Guid);
@@ -175,6 +175,6 @@ namespace Qowaiv.Identifiers
 
         private static Guid Id(object obj) => obj is Guid guid ? guid : Guid.Empty;
 
-        private class Default : GuidLogic { }
+        private class Default : GuidBehavior { }
     }
 }

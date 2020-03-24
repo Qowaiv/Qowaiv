@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Identifiers
 {
-    public class ForString : StringIdLogic { }
+    public class ForString : StringIdBehavior { }
 
     /// <summary>Tests the identifier SVO.</summary>
     public class IdForStringTest

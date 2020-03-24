@@ -22,20 +22,18 @@ namespace Qowaiv.Identifiers
 {
     /// <summary>Represents a strongly typed identifier.</summary>
     /// <typeparam name="TIdentifier">
-    /// The type of the <see cref="IIdentifierLogic"/> that deals with the
-    /// identifier specific logic.
+    /// The type of the <see cref="IIdentifierBehavior"/> that deals with the
+    /// identifier specific behavior.
     /// </typeparam>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
     [OpenApiDataType(description: "identifier", type: "string/int")]
     [TypeConverter(typeof(IdTypeConverter))]
     public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
-        where TIdentifier : IIdentifierLogic, new()
+        where TIdentifier : IIdentifierBehavior, new()
     {
-        /// <summary>An singleton instance that deals with the identifier
-        /// specific logic.
-        /// </summary>
-        private static readonly TIdentifier logic = new TIdentifier();
+        /// <summary>An singleton instance that deals with the identifier specific behavior.</summary>
+        private static readonly TIdentifier behavior = new TIdentifier();
 
         /// <summary>Represents an empty/not set identifier.</summary>
         public static readonly Id<TIdentifier> Empty;
@@ -62,7 +60,7 @@ namespace Qowaiv.Identifiers
             || m_Value.Equals(0L);
 
         /// <summary>Gets a <see cref="byte"/> array that represents the identifier.</summary>
-        public byte[] ToByteArray() => IsEmpty() ? Array.Empty<byte>() : logic.ToByteArray(m_Value);
+        public byte[] ToByteArray() => IsEmpty() ? Array.Empty<byte>() : behavior.ToByteArray(m_Value);
 
         /// <inheritdoc/>
         public int CompareTo(object obj)
@@ -90,7 +88,7 @@ namespace Qowaiv.Identifiers
             {
                 return otherIsEmpty.CompareTo(isEmpty);
             }
-            return logic.Compare(m_Value, other.m_Value);
+            return behavior.Compare(m_Value, other.m_Value);
         }
 
         /// <inheritdoc/>
@@ -110,11 +108,11 @@ namespace Qowaiv.Identifiers
                 return isEmpty == otherIsEmpty;
             }
 
-            return logic.Equals(m_Value, other.m_Value);
+            return behavior.Equals(m_Value, other.m_Value);
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode() => IsEmpty() ? 0 : logic.GetHashCode(m_Value);
+        public override int GetHashCode() => IsEmpty() ? 0 : behavior.GetHashCode(m_Value);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -162,7 +160,7 @@ namespace Qowaiv.Identifiers
                 return formatted;
             }
 
-            return IsEmpty() ? string.Empty : logic.ToString(m_Value, format, formatProvider);
+            return IsEmpty() ? string.Empty : behavior.ToString(m_Value, format, formatProvider);
         }
 
         /// <summary>Adds the underlying property of the identifier to the serialization info.</summary>
@@ -201,11 +199,11 @@ namespace Qowaiv.Identifiers
         /// <returns>
         /// The serialized JSON node.
         /// </returns>
-        public object ToJson() => IsEmpty() ? null : logic.ToJson(m_Value);
+        public object ToJson() => IsEmpty() ? null : behavior.ToJson(m_Value);
 
         private TPrimitive CastToPrimitive<TPrimitive, TTo>()
         {
-            if (logic.BaseType != typeof(TPrimitive))
+            if (behavior.BaseType != typeof(TPrimitive))
             {
                 throw Exceptions.InvalidCast<Id<TIdentifier>, TTo>();
             }
@@ -291,7 +289,7 @@ namespace Qowaiv.Identifiers
             {
                 return true;
             }
-            if (logic.TryParse(s, out var id))
+            if (behavior.TryParse(s, out var id))
             {
                 result = new Id<TIdentifier>(id);
                 return true;
@@ -315,7 +313,7 @@ namespace Qowaiv.Identifiers
         /// <returns>
         /// The deserialized date.
         /// </returns>
-        public static Id<TIdentifier> FromJson(long json) => new Id<TIdentifier>(logic.FromJson(json));
+        public static Id<TIdentifier> FromJson(long json) => new Id<TIdentifier>(behavior.FromJson(json));
 
         /// <summary>Creates the identfier for the <see cref="byte"/> array.</summary>
         /// <param name="bytes">
@@ -325,7 +323,7 @@ namespace Qowaiv.Identifiers
         {
             return bytes is null || bytes.Length == 0
                 ? Empty
-                : new Id<TIdentifier>(logic.FromBytes(bytes));
+                : new Id<TIdentifier>(behavior.FromBytes(bytes));
         }
 
         /// <summary>Creates an identifier from an <see cref="object"/>.</summary>
@@ -362,7 +360,7 @@ namespace Qowaiv.Identifiers
             {
                 return true;
             }
-            if (logic.TryCreate(obj, out var underlying))
+            if (behavior.TryCreate(obj, out var underlying))
             {
                 id = new Id<TIdentifier>(underlying);
                 return true;
@@ -371,7 +369,7 @@ namespace Qowaiv.Identifiers
         }
 
         /// <summary>Creates a new identifier.</summary>
-        public static Id<TIdentifier> Next() => new Id<TIdentifier>(logic.Next());
+        public static Id<TIdentifier> Next() => new Id<TIdentifier>(behavior.Next());
 
         /// <summary>Returns true if the value represents a valid identifier.</summary>
         /// <param name="val">

@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Identifiers
 {
-    public sealed class ForInt32 : Int32IdLogic { }
+    public sealed class ForInt32 : Int32IdBehavior { }
 
     /// <summary>Tests the identifier SVO.</summary>
     public class IdForInt32Test

@@ -32,7 +32,7 @@ namespace Qowaiv.Conversion.Identifiers
                 m_Value = type.GetField(nameof(m_Value), BindingFlags.Instance | BindingFlags.NonPublic);
                 var ctors = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
                 Ctor = ctors.FirstOrDefault(ctor => ctor.GetParameters().Length == 1);
-                BaseConverter = ((IIdentifierLogic)Activator.CreateInstance(type.GetGenericArguments()[0])).Converter;
+                BaseConverter = ((IIdentifierBehavior)Activator.CreateInstance(type.GetGenericArguments()[0])).Converter;
             }
             else
             {

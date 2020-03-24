@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Qowaiv.Identifiers
 {
-    /// <summary>Implements <see cref="IIdentifierLogic"/> for an identifier based on <see cref="string"/>.</summary>
-    public abstract class StringIdLogic : IIdentifierLogic
+    /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="string"/>.</summary>
+    public abstract class StringIdBehavior : IIdentifierBehavior
     {
         /// <summary>Returns the type of the underlying value (<see cref="string"/>).</summary>
         public Type BaseType => typeof(string);

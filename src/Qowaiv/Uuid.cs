@@ -37,7 +37,7 @@ namespace Qowaiv
     [TypeConverter(typeof(UuidTypeConverter))]
     public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
     {
-        private static readonly UuidLogic logic = UuidLogic.Instance;
+        private static readonly UuidBehavior behavior = UuidBehavior.Instance;
 
         /// <summary>Gets the size of the <see cref="byte"/> array representation.</summary>
         public static readonly int ArraySize = 16;
@@ -111,7 +111,7 @@ namespace Qowaiv
             {
                 return formatted;
             }
-            return logic.ToString(m_Value, format, formatProvider);
+            return behavior.ToString(m_Value, format, formatProvider);
         }
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
@@ -203,7 +203,7 @@ namespace Qowaiv
         public static bool TryParse(string s, out Uuid result)
         {
             result = default;
-            if (logic.TryParse(s, out object id))
+            if (behavior.TryParse(s, out object id))
             {
                 result = id is Guid guid ? new Uuid(guid) : Empty;
                 return true;

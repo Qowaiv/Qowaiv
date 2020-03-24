@@ -26,7 +26,7 @@ namespace Qowaiv.Identifiers
         /// <inheritdoc/>
         TypeCode IConvertible.GetTypeCode()
         {
-            var tp = logic.BaseType;
+            var tp = behavior.BaseType;
 
             if (tp == typeof(long)) { return TypeCode.Int64; }
             if (tp == typeof(int)) { return TypeCode.Int32; }

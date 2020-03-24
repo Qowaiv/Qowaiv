@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Identifiers
 {
-    public sealed class ForGuid : GuidLogic { }
+    public sealed class ForGuid : GuidBehavior { }
 
     /// <summary>Tests the identifier SVO.</summary>
     public class IdForGuidTest

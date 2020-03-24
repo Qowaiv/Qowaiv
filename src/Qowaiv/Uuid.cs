@@ -8,6 +8,7 @@
 
 using Qowaiv.Conversion;
 using Qowaiv.Formatting;
+using Qowaiv.Identifiers;
 using Qowaiv.Json;
 using System;
 using System.ComponentModel;
@@ -36,6 +37,8 @@ namespace Qowaiv
     [TypeConverter(typeof(UuidTypeConverter))]
     public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
     {
+        private static readonly UuidBehavior behavior = UuidBehavior.Instance;
+
         /// <summary>Gets the size of the <see cref="byte"/> array representation.</summary>
         public static readonly int ArraySize = 16;
 
@@ -75,18 +78,27 @@ namespace Qowaiv
         /// S
         /// 22 base64 chars:
         /// 0123465798aAbBcCdDeE_-
+        /// 
+        /// H
+        /// 26 base32 chars:
+        /// ABCDEFGHIJKLMNOPQRSTUVWXYZ234567
+        /// 
         /// N
         /// 32 digits:
         /// 00000000000000000000000000000000
+        /// 
         /// D
         /// 32 digits separated by hyphens:
         /// 00000000-0000-0000-0000-000000000000
+        /// 
         /// B
         /// 32 digits separated by hyphens, enclosed in braces:
         /// {00000000-0000-0000-0000-000000000000}
+        /// 
         /// P
         /// 32 digits separated by hyphens, enclosed in parentheses:
         /// (00000000-0000-0000-0000-000000000000)
+        /// 
         /// X
         /// Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values that is also enclosed in braces:
         /// {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
@@ -99,32 +111,7 @@ namespace Qowaiv
             {
                 return formatted;
             }
-
-            if (IsEmpty()) { return string.Empty; }
-
-            switch (format)
-            {
-                case null:
-                case "":
-                case "s":
-                case "S":
-                    // avoid invalid URL characters
-                    return Convert.ToBase64String(ToByteArray()).Replace('+', '-').Replace('/', '_').Substring(0, 22);
-                case "N":
-                case "D":
-                case "B":
-                case "P": return m_Value.ToString(format, formatProvider).ToUpperInvariant();
-                case "X": return m_Value.ToString(format, formatProvider).ToUpperInvariant().Replace('X', 'x');
-
-                case "n":
-                case "d":
-                case "b":
-                case "p":
-                case "x":
-                    return m_Value.ToString(format, formatProvider);
-
-                default: throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
-            }
+            return behavior.ToString(m_Value, format, formatProvider);
         }
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
@@ -215,22 +202,10 @@ namespace Qowaiv
         /// </returns>
         public static bool TryParse(string s, out Uuid result)
         {
-            result = Empty;
-            if (string.IsNullOrEmpty(s))
+            result = default;
+            if (behavior.TryParse(s, out object id))
             {
-                return true;
-            }
-
-            if (Pattern.IsMatch(s))
-            {
-                var bytes = Convert.FromBase64String(s.Replace('-', '+').Replace('_', '/').Substring(0, 22) + "==");
-                result = new Uuid(new Guid(bytes));
-                return true;
-            }
-
-            if (Guid.TryParse(s, out Guid id))
-            {
-                result = new Uuid(id);
+                result = id is Guid guid ? new Uuid(guid) : Empty;
                 return true;
             }
             return false;

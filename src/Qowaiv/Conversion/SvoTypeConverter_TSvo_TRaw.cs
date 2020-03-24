@@ -34,7 +34,6 @@ namespace Qowaiv.Conversion
                 base.CanConvertTo(context, destinationType);
         }
 
-
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
@@ -55,7 +54,6 @@ namespace Qowaiv.Conversion
             }
             return base.ConvertTo(context, culture, value, destinationType);
         }
-
 
         /// <summary>Converts from the raw/underlying type.</summary>
         protected abstract TSvo FromRaw(TRaw raw);

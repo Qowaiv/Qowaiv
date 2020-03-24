@@ -156,57 +156,6 @@ var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
 ### Postal code
 Represents a postal code. It supports validation for all countries.
 
-### UUID aka GUID
-The UUID (Universally unique identifier) aka GUID (Globally unique identifier) is an
-extension on the System.Guid. It is by default represented by a 22 length string, 
-instead of a 32 length string.
-
-``` C#
-var rnd = Uuid.NewUuid();
-UuidVersion version = rnd.Version; // UuidVersion.Random = 4
-
-var bytes = Encoding.ASCII.GetBytes("Qowaiv");
-var md5 = Uuid.GenerateWithMD5(bytes); //   lmZO_haEOTCwGsCcbIZFFg, UUID Version: 3
-var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version: 5
-```
-
-#### Comparer
-The UUID Comparer can sort both UUID's as GUID's, Furthermore, is support both
-.NET's default way of sorting as the sorting of SQL Server, or MongoDB.
-
-``` C#
-var uuids = new List<Uuid>();
-uuids.Sort(UuidComparer.SqlServer);
-
-var uuids = new List<Uuid>();
-uuids.Sort(UuidComparer.MongoDb);
-
-var guids = new List<Guid>();
-guids.Sort(UuidComparer.Default);
-```
-
-#### Sequential
-As UUID's are commonly used for the clustered key of a database table. For
-massive database with a lot of inserts (they go hand in hand normally) this can
-be a performance issue, as by default generated UUID's are not sequential, so
-the clustered index gets a lot of random inserts.
-
-By using a sequential UUID this problem can be minimized. Obviously, if you can
-fully rely on the sequential UUID generation by your database of choice, you
-should consider that, but in most cases you want to generate the ID upfront.
-In that case `Uuid.NewSequential()` comes handy:
-
-``` C#
-var uuid = Uuid.NewSequential(UuidComparer.SqlServer);
-```
-
-As databases might (like SQL Server does) order your UUID/GUID's differently
-that .NET does, this generator does that too. Also keep in mind that this generated ID
-is not perfectly sequential; first of all because it has a 0.32 nanosecond
-overlap, but more seriously, as some time may elapse between the generation and
-the storage in the database. Furthermore, these generated UUID's are not sequential
-once mixed with the sequential generated UUID's by your database.
-
 ### Week date
 Represents a week based date.
 
@@ -284,6 +233,109 @@ used typically as a mechanism for version-stamping table rows. The storage size 
 ### SVO Parameter factory class
 To create a (SQL) parameter with a SVO as value, use the SvoParamater factory
 class. It will return SQL parameter with a converted database proof value.
+
+## Qowaiv identifiers
+
+### Strongly-typed identifiers
+Primitive Obsession is a common issue when dealing with identifiers. It is quite
+common to provide two or even more identifiers (of different identities) to a
+method, which can lead to nasty bugs.
+
+To overcome this, strongly-typed identifiers can save the day: a specific type
+per identifier per identity. Qowaiv's approach is to use an `Id<T>` where T is
+a class dealing with the logic/behavior of the underlying values. This gives a
+lot of flexibility, and requires hardly any code per identifier, as in 99% of
+the cases, you can fully rely on a base implementation (Guid, long, int, string).
+
+``` C#
+// Definition of the identifiers.
+public sealed class ForDocument : Int64IdLogic { }
+public sealed class ForPerson : GuidLogic { }
+public sealed class ForUser : GuidLogic { }
+
+// Creation
+var documentId = (Id<ForDocument>)123457L; // cast
+var personId = Id<ForPerson>.Parse("0bb59085-9184-4df9-b9d4-08e1ba65cef8"); // parse
+var userId = Id<ForUser>.Create(new Guid("0bb59085-9184-4df9-b9d4-08e1ba65cef8")); // create.
+var bytesId = Id<forDocument>.FromBytes(new byte[]{ 17, 0, 0, 0, 0, 0, 0, 0 }); // create from bytes.
+var nextId = Id<ForPerson>.Next(); // New ID, a random GUID in this case
+
+var same = personId.Equals(userId); // false, same GUID, different types.
+
+// Export
+var docId = (long)documentId; // cast
+var perId = personId.ToString(); // "0bb59085-9184-4df9-b9d4-08e1ba65cef8"
+var bytId = bytesId.ToByteArray();
+
+// Custom logic
+public sealed class ForCustomer : StringIdLogic
+{
+    protected override bool IsValid(string str, out string normalized)
+    {
+        normalized = default;
+        if (Regex.IsMatch("$C[1-9][0-9]{4,6}^"))
+        {
+            normalized = str;
+            return true;
+        }
+        return false;
+    }
+
+    public override object Next() => 'C' + Rnd.Next(10_000, 9_999_999).ToString();
+}
+
+```
+
+### UUID aka GUID
+The UUID (Universally unique identifier) aka GUID (Globally unique identifier) is an
+extension on the System.Guid. It is by default represented by a 22 length string, 
+instead of a 32 length string.
+
+``` C#
+var rnd = Uuid.NewUuid();
+UuidVersion version = rnd.Version; // UuidVersion.Random = 4
+
+var bytes = Encoding.ASCII.GetBytes("Qowaiv");
+var md5 = Uuid.GenerateWithMD5(bytes); //   lmZO_haEOTCwGsCcbIZFFg, UUID Version: 3
+var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version: 5
+```
+
+#### Comparer
+The UUID Comparer can sort both UUID's as GUID's, Furthermore, is support both
+.NET's default way of sorting as the sorting of SQL Server, or MongoDB.
+
+``` C#
+var uuids = new List<Uuid>();
+uuids.Sort(UuidComparer.SqlServer);
+
+var uuids = new List<Uuid>();
+uuids.Sort(UuidComparer.MongoDb);
+
+var guids = new List<Guid>();
+guids.Sort(UuidComparer.Default);
+```
+
+#### Sequential
+As UUID's are commonly used for the clustered key of a database table. For
+massive database with a lot of inserts (they go hand in hand normally) this can
+be a performance issue, as by default generated UUID's are not sequential, so
+the clustered index gets a lot of random inserts.
+
+By using a sequential UUID this problem can be minimized. Obviously, if you can
+fully rely on the sequential UUID generation by your database of choice, you
+should consider that, but in most cases you want to generate the ID upfront.
+In that case `Uuid.NewSequential()` comes handy:
+
+``` C#
+var uuid = Uuid.NewSequential(UuidComparer.SqlServer);
+```
+
+As databases might (like SQL Server does) order your UUID/GUID's differently
+that .NET does, this generator does that too. Also keep in mind that this generated ID
+is not perfectly sequential; first of all because it has a 0.32 nanosecond
+overlap, but more seriously, as some time may elapse between the generation and
+the storage in the database. Furthermore, these generated UUID's are not sequential
+once mixed with the sequential generated UUID's by your database.
 
 ## Qowaiv statistical types
 
@@ -542,6 +594,11 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "country",
     "nullabe": true
+  },
+  "Identifiers.Id<TIdentifier>": {
+    "description": "identifier",
+    "type": "string/int",
+    "nullabe": false
   },
   "IO.StreamSize": {
     "description": "Stream size notation (in byte).",

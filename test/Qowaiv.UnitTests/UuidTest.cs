@@ -3,6 +3,7 @@ using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -366,32 +367,24 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
-        [Test]
-        public void ToString_Formats_FormattedGuid()
+        [TestCase(null, "Qowaiv_SVOLibrary_GUIA")]
+        [TestCase("", "Qowaiv_SVOLibrary_GUIA")]
+        [TestCase("s", "Qowaiv_SVOLibrary_GUIA")]
+        [TestCase("S", "Qowaiv_SVOLibrary_GUIA")]
+        [TestCase("h", "ikgbvcx72jkofytow2v4x4muea")]
+        [TestCase("H", "IKGBVCX72JKOFYTOW2V4X4MUEA")]
+        [TestCase("b", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
+        [TestCase("B", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
+        [TestCase("d", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+        [TestCase("D", "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420")]
+        [TestCase("p", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
+        [TestCase("P", "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)")]
+        [TestCase("x", "{0x8a1a8c42,0xd2ff,0xe254,{0xe2,0x6e,0xb6,0xab,0xcb,0xf1,0x94,0x20}}")]
+        [TestCase("X", "{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}")]
+        public void ToString(string format, string expected)
         {
-            var formats = new string[] { null, "", "s", "S", "b", "B", "d", "D", "p", "P", "x", "X" };
-
-            var expected = new []
-            {
-                "Qowaiv_SVOLibrary_GUIA",
-                "Qowaiv_SVOLibrary_GUIA",
-                "Qowaiv_SVOLibrary_GUIA",
-                "Qowaiv_SVOLibrary_GUIA",
-                "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}",
-                "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}",
-                "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
-                "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420",
-                "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)",
-                "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)",
-                "{0x8a1a8c42,0xd2ff,0xe254,{0xe2,0x6e,0xb6,0xab,0xcb,0xf1,0x94,0x20}}",
-                "{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}"
-            };
-
-            for (var i = 0; i < expected.Length; i++)
-            {
-                var actual = TestStruct.ToString(formats[i]);
-                Assert.AreEqual(expected[i], actual);
-            }
+            var formatted = TestStruct.ToString(format, CultureInfo.InvariantCulture);
+            Assert.AreEqual(expected, formatted);
         }
 
         [Test]
@@ -725,18 +718,22 @@ namespace Qowaiv.UnitTests
 
         #region IsValid tests
 
-        [Test]
-        public void IsValid_Data_IsFalse()
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("Qowaiv_SVOLibrary_GUIAX")]
+        [TestCase("IKGBVCX72JKOFYTOW2V4X4MUEAZ")]
+        [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf1942")]
+        public void IsInvalid(string str)
         {
-            Assert.IsFalse(Uuid.IsValid("Complex"), "Complex");
-            Assert.IsFalse(Uuid.IsValid((String)null), "(String)null");
-            Assert.IsFalse(Uuid.IsValid(string.Empty), "string.Empty");
+            Assert.IsFalse(Uuid.IsValid(str));
         }
-        [Test]
-        public void IsValid_Data_IsTrue()
+
+        [TestCase("Qowaiv_SVOLibrary_GUIA")]
+        [TestCase("IKGBVCX72JKOFYTOW2V4X4MUEA")]
+        [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+        public void IsValid(string guid)
         {
-            Assert.IsTrue(Uuid.IsValid("Qowaiv_SVOLibrary_GUIA"), "Qowaiv_SVOLibrary_GUIA");
-            Assert.IsTrue(Uuid.IsValid("8a1a8c42-d2ff-e254-e26e-b6abcbf19420"), "8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+            Assert.IsTrue(Uuid.IsValid(guid));
         }
         #endregion
 

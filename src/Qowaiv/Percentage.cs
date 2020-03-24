@@ -593,7 +593,7 @@ namespace Qowaiv
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
         /// <param name="format">
-        /// The format that this describes the formatting.
+        /// The format that describes the formatting.
         /// </param>
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
@@ -619,7 +619,7 @@ namespace Qowaiv
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
         /// <param name="format">
-        /// The format that this describes the formatting.
+        /// The format that describes the formatting.
         /// </param>
         /// <param name="formatProvider">
         /// The format provider.

@@ -725,10 +725,19 @@ namespace Qowaiv.Fiancial.UnitTests
         [TestCase(true, "Y")]
         [TestCase(false, "N")]
         [TestCase(null, "?")]
-        public void Explicit_YesNoToBool(bool? expected, string str)
+        public void Explicit_YesNoToNullableBool(bool? expected, YesNo yesNo)
         {
-            var yesNo = YesNo.Parse(str);
             var casted = (bool?)yesNo;
+            Assert.AreEqual(expected, casted);
+        }
+
+        [TestCase(false, "")]
+        [TestCase(true, "Y")]
+        [TestCase(false, "N")]
+        [TestCase(false, "?")]
+        public void Explicit_YesNoToBool(bool expected, YesNo yesNo)
+        {
+            var casted = (bool)yesNo;
             Assert.AreEqual(expected, casted);
         }
 

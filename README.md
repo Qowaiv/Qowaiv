@@ -168,6 +168,22 @@ has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but
 Supports all kind of formatting (and both empty and unknown) that can not be
 achieved when modeling a property as `bool` instead of an `YesNo`.
 
+``` C#
+// Creation
+var yn = YesNo.Parse("ja", new CultureInfo("nl-NL")); // Parsing
+var answer = YesNo.Yes; // costants
+
+if(answer.IsEmptyOrUnknown())
+{
+   // Do logic.
+}
+
+if((bool)answer) // Equal to answer.IsYes()
+{
+    // Do logic.
+}
+```
+
 ## Qowaiv cryptographic types
 
 ### Seed

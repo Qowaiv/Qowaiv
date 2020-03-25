@@ -741,6 +741,19 @@ namespace Qowaiv.Fiancial.UnitTests
             Assert.AreEqual(expected, casted);
         }
 
+        [Test]
+        public void Implicit_InIfStatement()
+        {
+            Assert.Throws<DivideByZeroException>(() =>
+            {
+                var answer = YesNo.Yes;
+                if (answer)
+                {
+                    throw new DivideByZeroException();
+                }
+            });
+        }
+
         #endregion
 
         #region Type converter tests

@@ -199,6 +199,13 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Parse_WithoutIPv6Prefix_WithPrefix()
+        {
+            var email = EmailAddress.Parse("home@2607:f0d0:1002:51::4");
+            Assert.AreEqual("home@[IPv6:2607:f0d0:1002:51::4]", email.ToString());
+        }
+
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))

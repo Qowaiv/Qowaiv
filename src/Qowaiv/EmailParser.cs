@@ -22,6 +22,9 @@ namespace Qowaiv
         private const char Dot = '.';
         private const char Dash = '-';
         private const char Colon = ':';
+        private const char Quote = '"';
+
+        private const string IPv6Prefix = "IPv6:";
 
         /// <summary>Parses an email address string.</summary>
         /// <returns>
@@ -31,10 +34,10 @@ namespace Qowaiv
         internal static string Parse(string s)
         {
             var str = new CharBuffer(s)
-                .Trim()
-                .RemoveQuotedPrefix()
-                .RemoveDisplayName()
-                .RemoveComment()
+               .Trim()
+               .RemoveQuotedPrefix()
+               .RemoveDisplayName()
+               .RemoveComment()
             ;
 
             if (str.Empty())
@@ -104,12 +107,16 @@ namespace Qowaiv
                 // Domain part.
                 else
                 {
-                    // Potentially an email address of the type local@[ip-address].
-                    if (domain.Empty() && ch == '[' && str[end - 1] == ']')
+                    if (domain.Empty() && ch == '[')
                     {
-                        hasBrackets = true;
-                        end--;
-                        continue;
+                        // Potentially an email address of the type local@[ip-address].
+                        if (str[end - 1] == ']')
+                        {
+                            hasBrackets = true;
+                            end--;
+                            continue;
+                        }
+                        return null;
                     }
 
                     // Don't start with a dash or a dot.
@@ -148,15 +155,39 @@ namespace Qowaiv
                 return local.Add(domain);
             }
 
+            return ValidateIPDomain(local, domain);
+        }
+
+        private static string ValidateIPDomain(CharBuffer local, CharBuffer domain)
+        {
+            // strips the prefix if so.
+            var isIPv6 = domain.IsIPv6();
+
             // Validate The IP address.
             if (IPAddress.TryParse(domain, out IPAddress ip))
             {
-                // as IPAddress parse is too forgiving.
-                if (ip.AddressFamily == AddressFamily.InterNetwork && domain.Count(Dot) != 3)
+                var isIPv4 = ip.AddressFamily == AddressFamily.InterNetwork;
+                isIPv6 |= ip.AddressFamily == AddressFamily.InterNetworkV6;
+
+                // Only IPv4 and IPv6.
+                if (!isIPv4 && !isIPv6)
                 {
                     return null;
                 }
-                return local.Add('[').Add(ip.ToString()).Add(']');
+                // IPv6 prefix with an IPv4 address.
+                if (isIPv6 && ip.AddressFamily != AddressFamily.InterNetworkV6)
+                {
+                    return null;
+                }
+                // As IPAddress parse is too forgiving.
+                if (isIPv4 && domain.Count(Dot) != 3)
+                {
+                    return null;
+                }
+
+                return isIPv6
+                    ? local.Add('[').Add(IPv6Prefix).Add(ip.ToString()).Add(']')
+                    : local.Add('[').Add(ip.ToString()).Add(']');
             }
             return null;
         }
@@ -186,10 +217,9 @@ namespace Qowaiv
             if (domain.Length > DomainPartMaxLength)
             {
                 var lastDot = domain.LastIndexOf(Dot);
-                return lastDot != NotFound && domain.Length - lastDot > DomainPartMaxLength)
+                return lastDot != NotFound && domain.Length - lastDot > DomainPartMaxLength;
             }
             return false;
-
         }
 
         public static bool IsValidDomain(this CharBuffer buffer, int dot)
@@ -204,6 +234,13 @@ namespace Qowaiv
             {
                 return false;
             }
+
+            // If there is no dot, no extra requirements.
+            if (dot == NotFound)
+            {
+                return true;
+            }
+
             for (var i = start; i < buffer.Length; i++)
             {
                 var ch = buffer[i];
@@ -213,6 +250,16 @@ namespace Qowaiv
                 }
             }
             return true;
+        }
+
+        public static bool IsIPv6(this CharBuffer buffer)
+        {
+            if (buffer.StartsWith(IPv6Prefix))
+            {
+                buffer.RemoveRange(0, IPv6Prefix.Length);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>Removes the email address display name from the string.</summary>
@@ -228,7 +275,7 @@ namespace Qowaiv
             {
                 return buffer;
             }
-            if (buffer.First() == '"')
+            if (buffer.First() == Quote)
             {
                 var escape = false;
 
@@ -246,7 +293,7 @@ namespace Qowaiv
                         escape = !escape;
                     }
                     // The (potential) and character.
-                    else if (ch == '"')
+                    else if (ch == Quote)
                     {
                         // if not escaped.
                         if (!escape)
@@ -297,7 +344,6 @@ namespace Qowaiv
             }
             return buffer;
         }
-
 
         /// <summary>Removes email address comments from the string.</summary>
         /// <remarks>

@@ -79,6 +79,23 @@ namespace Qowaiv.Text
             return NotFound;
         }
 
+        /// <summary>Returns true if the buffer starts with the specified string.</summary>
+        public bool StartsWith(string str)
+        {
+            if(str.Length > Length)
+            {
+                return false;
+            }
+            for(var i = 0; i < str.Length; i++)
+            {
+                if(str[i] != buffer[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /// <summary>Counts the occurrences of the <see cref="char"/> in the buffer.</summary>
         public int Count(char ch)
         {

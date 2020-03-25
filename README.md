@@ -170,15 +170,15 @@ achieved when modeling a property as `bool` instead of an `YesNo`.
 
 ``` C#
 // Creation
-var yn = YesNo.Parse("ja", new CultureInfo("nl-NL")); // Parsing
-var answer = YesNo.Yes; // costants
+var yn = YesNo.Parse("ja", new CultureInfo("nl-NL"));
+var answer = YesNo.Yes;
 
-if(answer.IsEmptyOrUnknown())
+if (answer.IsEmptyOrUnknown())
 {
    // Do logic.
 }
 
-if(answer) // Equal to answer.IsYes()
+if (answer) // Equal to answer.IsYes()
 {
     // Do logic.
 }

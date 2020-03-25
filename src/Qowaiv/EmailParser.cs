@@ -11,6 +11,12 @@ namespace Qowaiv
     /// </remarks>
     internal static class EmailParser
     {
+        /// <summary>The maximum length of the local part is 64.</summary>
+        private const int LocalPartMaxLength = 64;
+
+        /// <summary>The maximum length of a (individual) domain part is 63.</summary>
+        private const int DomainPartMaxLength = 63;
+
         private const int NotFound = -1;
         private const char At = '@';
         private const char Dot = '.';
@@ -173,7 +179,17 @@ namespace Qowaiv
 
         private static bool TooLong(CharBuffer local, CharBuffer domain)
         {
-            return local.Length + (domain.Length < 2 ? 2 : domain.Length) >= EmailAddress.MaxLength;
+            if (local.Length > LocalPartMaxLength || local.Length + (domain.Length < 2 ? 2 : domain.Length) >= EmailAddress.MaxLength)
+            {
+                return true;
+            }
+            if (domain.Length > DomainPartMaxLength)
+            {
+                var lastDot = domain.LastIndexOf(Dot);
+                return lastDot != NotFound && domain.Length - lastDot > DomainPartMaxLength)
+            }
+            return false;
+
         }
 
         public static bool IsValidDomain(this CharBuffer buffer, int dot)
@@ -328,6 +344,5 @@ namespace Qowaiv
             }
             return buffer.Trim();
         }
-
     }
 }

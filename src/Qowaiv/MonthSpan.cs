@@ -72,9 +72,9 @@ namespace Qowaiv
 
         /// <summary>Serializes the month span to a JSON node.</summary>
         /// <returns>
-        /// The serialized JSON number.
+        /// The serialized JSON string.
         /// </returns>
-        public long ToJson() => m_Value;
+        public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Deserializes the month span from a JSON number.</summary>
         /// <param name = "json">

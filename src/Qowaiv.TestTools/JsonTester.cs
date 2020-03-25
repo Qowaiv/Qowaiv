@@ -17,7 +17,7 @@ namespace Qowaiv.TestTools
 
             if (fromJson is null)
             {
-                throw new InvalidOperationException($"Could not find {typeof(T).Name}.FromJson({parameterType.Name}).");
+                throw new InvalidOperationException($"Could not find {typeof(T).Name}.FromJson({parameterType?.Name ?? "null"}).");
             }
             try
             {

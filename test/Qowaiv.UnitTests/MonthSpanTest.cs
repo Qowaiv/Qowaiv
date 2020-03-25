@@ -45,7 +45,7 @@ namespace Qowaiv.UnitTests
             [Test]
             public void TyrParse_StringValue_IsValid()
             {
-                string str = "string";
+                string str = "0Y+0M";
                 Assert.IsTrue(MonthSpan.TryParse(str, out var val));
                 Assert.AreEqual(str, val.ToString());
             }
@@ -54,7 +54,7 @@ namespace Qowaiv.UnitTests
             [Test]
             public void TyrParse_StringValue_IsNotValid()
             {
-                string str = "invalid";
+                string str = "5Y#9M";
                 Assert.IsFalse(MonthSpan.TryParse(str, out var val));
                 Assert.AreEqual(default(MonthSpan), val);
             }
@@ -68,7 +68,6 @@ namespace Qowaiv.UnitTests
                     {
                         MonthSpan.Parse("InvalidInput");
                     }
-
                     , "Not a valid month span");
                 }
             }
@@ -121,7 +120,7 @@ namespace Qowaiv.UnitTests
                 ISerializable obj = TestStruct;
                 var info = new SerializationInfo(typeof(MonthSpan), new FormatterConverter());
                 obj.GetObjectData(info, default);
-                Assert.AreEqual(66, info.GetValue("Value", typeof(int)));
+                Assert.AreEqual(69, info.GetValue("Value", typeof(int)));
             }
 
             [Test]
@@ -146,7 +145,7 @@ namespace Qowaiv.UnitTests
             public void XmlSerialize_TestStruct_AreEqual()
             {
                 var act = SerializationTest.XmlSerialize(TestStruct);
-                var exp = "69";
+                var exp = "5Y+9M";
                 Assert.AreEqual(exp, act);
             }
 
@@ -219,52 +218,48 @@ namespace Qowaiv.UnitTests
                 Assert.IsNull(obj.GetSchema());
             }
 
-            [TestCase("Invalid input")]
             [TestCase("2017-06-11")]
-            [TestCase(long.MinValue)]
-            [TestCase(double.MinValue)]
+            [TestCase(int.MinValue)]
             public void FromJson_Invalid_Throws(object json)
             {
                 Assert.Catch<FormatException>(() => JsonTester.Read<MonthSpan>(json));
             }
 
-            [TestCase("yes", "yes")]
-            [TestCase("yes", true)]
-            [TestCase("yes", 1)]
-            [TestCase("no", 0.0)]
-            [TestCase("?", "unknown")]
-            public void FromJson(MonthSpan expected, object json)
+            [TestCase("5Y+9M", 69L)]
+            [TestCase(0, null)]
+            [TestCase("5Y+9M", "5Y+9M")]
+                public void FromJson(MonthSpan expected, object json)
             {
                 var actual = JsonTester.Read<MonthSpan>(json);
                 Assert.AreEqual(expected, actual);
             }
 
             [Test]
-            public void ToString_Empty_StringEmpty()
+            public void ToString_Zero_StringEmpty()
             {
                 var act = MonthSpan.Zero.ToString();
-                var exp = "";
+                var exp = "0Y+0M";
                 Assert.AreEqual(exp, act);
             }
 
             [Test]
             public void ToString_CustomFormatter_SupportsCustomFormatting()
             {
-                var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
-                var exp = "Unit Test Formatter, value: 'Some Formatted Value', format: 'Unit Test Format'";
+                var act = TestStruct.ToString("0.00", new UnitTestFormatProvider());
+                var exp = "Unit Test Formatter, value: '69.00', format: '0.00'";
                 Assert.AreEqual(exp, act);
             }
 
-            [TestCase("en-US", "", "ComplexPattern", "ComplexPattern")]
+            [TestCase("en-US", "F", "69", "5Y+")]
             [TestCase("nl-BE", null, "1600,1", "1600,1")]
             [TestCase("en-GB", null, "1600.1", "1600.1")]
             [TestCase("nl-BE", "0000", "800", "0800")]
             [TestCase("en-GB", "0000", "800", "0800")]
-            public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
+            public void ToString_UsingCultureWithPattern(string culture, string format, MonthSpan span, string expected)
             {
                 using (new CultureInfoScope(culture))
                 {
-                    var actual = MonthSpan.Parse(str).ToString(format);
+                    var actual = span.ToString(format);
                     Assert.AreEqual(expected, actual);
                 }
             }
@@ -286,20 +281,20 @@ namespace Qowaiv.UnitTests
             [Test]
             public void DebuggerDisplay_DefaultValue_String()
             {
-                DebuggerDisplayAssert.HasResult("ComplexPattern", default(MonthSpan));
+                DebuggerDisplayAssert.HasResult("0Y+0M", default(MonthSpan));
             }
 
             [Test]
             public void DebuggerDisplay_TestStruct_String()
             {
-                DebuggerDisplayAssert.HasResult("ComplexPattern", TestStruct);
+                DebuggerDisplayAssert.HasResult("5Y+9M", TestStruct);
             }
 
             /// <summary>GetHash should not fail for MonthSpan.Zero.</summary>
             [Test]
             public void GetHash_Zero_Hash()
             {
-                Assert.AreEqual(-1, MonthSpan.Zero.GetHashCode());
+                Assert.AreEqual(0, MonthSpan.Zero.GetHashCode());
             }
 
             /// <summary>GetHash should not fail for the test struct.</summary>
@@ -318,8 +313,8 @@ namespace Qowaiv.UnitTests
             [Test]
             public void Equals_FormattedAndUnformatted_IsTrue()
             {
-                var l = MonthSpan.Parse("formatted", CultureInfo.InvariantCulture);
-                var r = MonthSpan.Parse("unformatted", CultureInfo.InvariantCulture);
+                var l = MonthSpan.Parse("69", CultureInfo.InvariantCulture);
+                var r = MonthSpan.Parse("5Y+9M", CultureInfo.InvariantCulture);
                 Assert.IsTrue(l.Equals(r));
             }
 
@@ -379,10 +374,10 @@ namespace Qowaiv.UnitTests
             [Test]
             public void OrderBy_MonthSpan_AreEqual()
             {
-                var item0 = MonthSpan.Parse("ComplexRegexPatternA");
-                var item1 = MonthSpan.Parse("ComplexRegexPatternB");
-                var item2 = MonthSpan.Parse("ComplexRegexPatternC");
-                var item3 = MonthSpan.Parse("ComplexRegexPatternD");
+                var item0 = MonthSpan.FromMonths(1);
+                var item1 = MonthSpan.FromMonths(12);
+                var item2 = MonthSpan.FromMonths(13);
+                var item3 = MonthSpan.FromMonths(145);
                 var inp = new List<MonthSpan> { MonthSpan.Zero, item3, item2, item0, item1, MonthSpan.Zero };
                 var exp = new List<MonthSpan> { MonthSpan.Zero, MonthSpan.Zero, item0, item1, item2, item3 };
                 var act = inp.OrderBy(item => item).ToList();
@@ -393,10 +388,10 @@ namespace Qowaiv.UnitTests
             [Test]
             public void OrderByDescending_MonthSpan_AreEqual()
             {
-                var item0 = MonthSpan.Parse("ComplexRegexPatternA");
-                var item1 = MonthSpan.Parse("ComplexRegexPatternB");
-                var item2 = MonthSpan.Parse("ComplexRegexPatternC");
-                var item3 = MonthSpan.Parse("ComplexRegexPatternD");
+                var item0 = MonthSpan.FromMonths(1);
+                var item1 = MonthSpan.FromMonths(12);
+                var item2 = MonthSpan.FromMonths(13);
+                var item3 = MonthSpan.FromMonths(145);
                 var inp = new List<MonthSpan> { MonthSpan.Zero, item3, item2, item0, item1, MonthSpan.Zero };
                 var exp = new List<MonthSpan> { item3, item2, item1, item0, MonthSpan.Zero, MonthSpan.Zero };
                 var act = inp.OrderByDescending(item => item).ToList();
@@ -494,14 +489,14 @@ namespace Qowaiv.UnitTests
             public void Explicit_Int32ToMonthSpan_AreEqual()
             {
                 var exp = TestStruct;
-                var act = (MonthSpan)123456789;
+                var act = (MonthSpan)69;
                 Assert.AreEqual(exp, act);
             }
 
             [Test]
             public void Explicit_MonthSpanToInt32_AreEqual()
             {
-                var exp = 123456789;
+                var exp = 69;
                 var act = (int)TestStruct;
                 Assert.AreEqual(exp, act);
             }
@@ -510,18 +505,6 @@ namespace Qowaiv.UnitTests
             public void ConverterExists_MonthSpan_IsTrue()
             {
                 TypeConverterAssert.ConverterExists(typeof(MonthSpan));
-            }
-
-            [Test]
-            public void CanNotConvertFromInt32_MonthSpan_IsTrue()
-            {
-                TypeConverterAssert.CanNotConvertFrom(typeof(MonthSpan), typeof(int));
-            }
-
-            [Test]
-            public void CanNotConvertToInt32_MonthSpan_IsTrue()
-            {
-                TypeConverterAssert.CanNotConvertTo(typeof(MonthSpan), typeof(int));
             }
 
             [Test]
@@ -580,17 +563,12 @@ namespace Qowaiv.UnitTests
                 Assert.IsFalse(MonthSpan.IsValid(str));
             }
 
-            [TestCase("ComplexPattern")]
+            [TestCase("-30Y+50M+2D")]
+            [TestCase("+2Y+0M")]
+            [TestCase("69")]
             public void IsValid_String(string str)
             {
                 Assert.IsTrue(MonthSpan.IsValid(str));
-            }
-
-            [Test]
-            public void IsValid_DefaultValue_IsFalse()
-            {
-                int value = default;
-                Assert.IsFalse(MonthSpan.IsValid("69"));
             }
         }
 

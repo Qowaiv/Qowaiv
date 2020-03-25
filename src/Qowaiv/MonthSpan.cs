@@ -26,7 +26,7 @@ namespace Qowaiv
         public static readonly MonthSpan MaxValue = new MonthSpan(+9998 * 12);
 
         /// <summary>Gets the total of months.</summary>
-        public int TotalMonths =>m_Value;
+        public int TotalMonths => m_Value;
 
         /// <summary>Gets the years component of the month span.</summary>
         public int Years => TotalMonths / DateSpan.MonthsPerYear;
@@ -38,7 +38,7 @@ namespace Qowaiv
         /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => ToString("F", CultureInfo.InvariantCulture);
-       
+
         /// <summary>Returns a formatted <see cref = "string "/> that represents the month span.</summary>
         /// <param name = "format">
         /// The format that this describes the formatting.
@@ -46,11 +46,22 @@ namespace Qowaiv
         /// <param name = "formatProvider">
         /// The format provider.
         /// </param>
+        /// <remarks>
+        /// The formats:
+        /// 
+        /// F: as 0Y+0D.
+        /// All others format the total months.
+        /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
+            }
+
+            if (string.IsNullOrEmpty(format) || format == "F")
+            {
+                return string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M", Years, Months);
             }
 
             return m_Value.ToString(format, formatProvider);
@@ -80,7 +91,7 @@ namespace Qowaiv
         public static explicit operator string(MonthSpan val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref = "string "/> to a month span.</summary>
         public static explicit operator MonthSpan(string str) => Parse(str, CultureInfo.CurrentCulture);
-        
+
         /// <summary>Casts the month span to a <see cref = "int"/>.</summary>
         public static explicit operator int(MonthSpan val) => val.m_Value;
         /// <summary>Casts a <see cref = "int "/> to a month span.</summary>
@@ -121,25 +132,40 @@ namespace Qowaiv
             {
                 return true;
             }
-            return int.TryParse(s, NumberStyles.Integer, formatProvider, out var months) 
-                && TryCreate(months, out result);
+            if (int.TryParse(s, NumberStyles.Integer, formatProvider, out var months)
+                && TryCreate(months, out result))
+            {
+                return true;
+            }
+
+            if (DateSpan.TryParse(s, formatProvider, out var dateSpan))
+            {
+                result = FromMonths(dateSpan.TotalMonths);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>Creates a date span from months only.</summary>
         public static MonthSpan FromMonths(int months)
         {
-            if(TryCreate(months, out var monthSpan))
+            if (TryCreate(months, out var monthSpan))
             {
                 return monthSpan;
             }
-            throw new ArgumentException();
+            throw new ArgumentOutOfRangeException("months", QowaivMessages.FormatExceptionMonthSpan);
         }
 
-        public static bool TryCreate(int val, out MonthSpan monthSpan)
+        /// <summary>Tries to Create a date span from months only.</summary>
+        public static bool TryCreate(int months, out MonthSpan monthSpan)
         {
             monthSpan = default;
-            return true;
+            if (months >= MinValue.TotalMonths && months <= MaxValue.TotalMonths)
+            {
+                monthSpan = new MonthSpan(months);
+                return true;
+            }
+            return false;
         }
-
     }
 }

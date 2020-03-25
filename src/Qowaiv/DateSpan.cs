@@ -23,7 +23,7 @@ namespace Qowaiv
     public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
-        public static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M(?<Days>([+-][0-9]{1,7}))D$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static readonly Regex Pattern = new Regex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents the zero date span.</summary>
         public static readonly DateSpan Zero;
@@ -393,7 +393,7 @@ namespace Qowaiv
         private static int IntFromGroup(Match match, string group, IFormatProvider formatProvider)
         {
             var str = match.Groups[group].Value;
-            return int.Parse(str, formatProvider);
+            return string.IsNullOrEmpty(str) ? 0 : int.Parse(str, formatProvider);
         }
 
         /// <summary>Returns true if the combination of months and days can not be processed.</summary>

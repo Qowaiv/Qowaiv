@@ -340,6 +340,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid month span.
+        /// </summary>
+        public static string FormatExceptionMonthSpan {
+            get {
+                return ResourceManager.GetString("FormatExceptionMonthSpan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid percentage.
         /// </summary>
         public static string FormatExceptionPercentage {

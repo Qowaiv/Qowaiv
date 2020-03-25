@@ -67,7 +67,5 @@ namespace Qowaiv
 
             return (int)value;
         }
-
-
     }
 }

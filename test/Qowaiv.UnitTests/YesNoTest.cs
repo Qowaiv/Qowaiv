@@ -85,6 +85,15 @@ namespace Qowaiv.Fiancial.UnitTests
             Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
         }
 
+        [TestCase(true, "yes")]
+        [TestCase(true, "no")]
+        [TestCase(false, "?")]
+        [TestCase(false, "")]
+        public void IsYesOrNo(bool expected, YesNo yesNo)
+        {
+            Assert.AreEqual(expected, yesNo.IsYesOrNo());
+        }
+
         #endregion
 
         #region Boolean mappings
@@ -716,11 +725,33 @@ namespace Qowaiv.Fiancial.UnitTests
         [TestCase(true, "Y")]
         [TestCase(false, "N")]
         [TestCase(null, "?")]
-        public void Explicit_YesNoToBool(bool? expected, string str)
+        public void Explicit_YesNoToNullableBool(bool? expected, YesNo yesNo)
         {
-            var yesNo = YesNo.Parse(str);
             var casted = (bool?)yesNo;
             Assert.AreEqual(expected, casted);
+        }
+
+        [TestCase(false, "")]
+        [TestCase(true, "Y")]
+        [TestCase(false, "N")]
+        [TestCase(false, "?")]
+        public void Explicit_YesNoToBool(bool expected, YesNo yesNo)
+        {
+            var casted = (bool)yesNo;
+            Assert.AreEqual(expected, casted);
+        }
+
+        [Test]
+        public void Implicit_InIfStatement()
+        {
+            Assert.Throws<DivideByZeroException>(() =>
+            {
+                var answer = YesNo.Yes;
+                if (answer)
+                {
+                    throw new DivideByZeroException();
+                }
+            });
         }
 
         #endregion

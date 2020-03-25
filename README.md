@@ -178,7 +178,7 @@ if(answer.IsEmptyOrUnknown())
    // Do logic.
 }
 
-if((bool)answer) // Equal to answer.IsYes()
+if(answer) // Equal to answer.IsYes()
 {
     // Do logic.
 }

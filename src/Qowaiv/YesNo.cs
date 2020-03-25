@@ -145,6 +145,10 @@ namespace Qowaiv
 
         /// <summary>Casts a yes-no to a nullable <see cref="bool"/>.</summary>
         public static explicit operator bool?(YesNo val) => BooleanValues[val.m_Value];
+
+        /// <summary>Casts a yes-no to a <see cref="bool"/>.</summary>
+        public static implicit operator bool(YesNo val) => val.IsYes();
+
         /// <summary>Casts a nullable <see cref="bool"/> to a yes-no.</summary>
         public static explicit operator YesNo(bool? val)
         {
@@ -154,6 +158,9 @@ namespace Qowaiv
             }
             return Empty;
         }
+        
+        /// <summary>Casts a <see cref="bool"/> to a yes-no.</summary>
+        public static explicit operator YesNo(bool val) => val ? Yes : No;
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

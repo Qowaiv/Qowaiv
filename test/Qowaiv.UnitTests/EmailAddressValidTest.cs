@@ -9,15 +9,6 @@ namespace Qowaiv.UnitTests
         [TestCase("w.b.f@test.museum")]
         [TestCase("a.a@test.com")]
         [TestCase("ab@288.120.150.10.com")]
-        [TestCase("ab@188.120.150.10")]
-        [TestCase("ab@1.0.0.10")]
-        [TestCase("ab@120.25.254.120")]
-        [TestCase("ab@01.120.150.1")]
-        [TestCase("ab@88.120.150.021")]
-        [TestCase("ab@88.120.150.01")]
-        [TestCase("ab@[120.254.254.120]")]
-        [TestCase("local@2001:0db8:85a3:0000:0000:8a2e:0370:7334")]
-        [TestCase("local@[2001:0db8:85a3:0000:0000:8a2e:0370:7334]")]
         [TestCase("2@bde.cc")]
         [TestCase("-@bde.cc")]
         [TestCase("a2@bde.cc")]
@@ -36,8 +27,6 @@ namespace Qowaiv.UnitTests
         [TestCase("firstname.lastname@domain.com")]
         [TestCase("email@subdomain.domain.com")]
         [TestCase("firstname+lastname@domain.com")]
-        [TestCase("email@123.123.123.123")]
-        [TestCase("email@[123.123.123.123]")]
         [TestCase("1234567890@domain.com")]
         [TestCase("a@domain.com")]
         [TestCase("a.b.c.d@domain.com")]
@@ -74,10 +63,23 @@ namespace Qowaiv.UnitTests
         [TestCase(@"Test |<gaaf <email@domain.com>")]
         [TestCase("MailTo:casesensitve@domain.com")]
         [TestCase("mailto:email@domain.com")]
+        [TestCase(@"Joe Smith <mailto:""quoted""@domain.com>")]
         [TestCase("Joe Smith <mailto:email@domain.com>")]
         [TestCase("Joe Smith <mailto:email(with comment)@domain.com>")]
         [TestCase(@"""With extra < within quotes"" Display Name<email@domain.com>")]
         [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long")]
+        
+        // IP Based.
+        [TestCase("user@[IPv6:2001:db8:1ff::a0b:dbd0]")]
+        [TestCase("valid.ipv4.without-brackets@123.1.72.010")]
+        [TestCase("valid.ipv4.addr@[123.1.72.10]")]
+        [TestCase("valid.ipv6.addr@[IPv6:0::1]")]
+        [TestCase("valid.ipv6.without-brackets@2607:f0d0:1002:51::4")]
+        [TestCase("valid.ipv6.without-prefix@[2607:f0d0:1002:51::4]")]
+        [TestCase("valid.ipv6.addr@[IPv6:2607:f0d0:1002:51::4]")]
+        [TestCase("valid.ipv6.addr@[IPv6:fe80::230:48ff:fe33:bc33]")]
+        [TestCase("valid.ipv6.addr@[IPv6:fe80:0000:0000:0000:0202:b3ff:fe1e:8329]")]
+        [TestCase("valid.ipv6v4.addr@[IPv6:aaaa:aaaa:aaaa:aaaa:aaaa:aaaa:127.0.0.1]")]
 
         // https://github.com/jstedfast/EmailValidation
         [TestCase("伊昭傑@郵件.商務")] //  Chinese
@@ -92,19 +94,12 @@ namespace Qowaiv.UnitTests
         [TestCase("$A12345@example.com")]
         [TestCase("!def!xyz%abc@example.com")]
         [TestCase("_somename@example.com")]
-        [TestCase("valid.ipv4.addr@[123.1.72.10]")]
-        [TestCase("valid.ipv6.addr@[IPv6:0::1]")]
-        [TestCase("valid.ipv6.addr@[IPv6:2607:f0d0:1002:51::4]")]
-        [TestCase("valid.ipv6.addr@[IPv6:fe80::230:48ff:fe33:bc33]")]
-        [TestCase("valid.ipv6.addr@[IPv6:fe80:0000:0000:0000:0202:b3ff:fe1e:8329]")]
-        [TestCase("valid.ipv6v4.addr@[IPv6:aaaa:aaaa:aaaa:aaaa:aaaa:aaaa:127.0.0.1]")]
 
         // examples from wikipedia
         [TestCase("niceandsimple@example.com")]
         [TestCase("very.common@example.com")]
         [TestCase("a.little.lengthy.but.fine@dept.example.com")]
         [TestCase("disposable.style.email.with+symbol@example.com")]
-        [TestCase("user@[IPv6:2001:db8:1ff::a0b:dbd0]")]
         [TestCase("\"much.more unusual\"@example.com")]
         [TestCase("\"very.unusual.@.unusual.com\"@example.com")]
         [TestCase("\"very.(),:;<>[]\\\".VERY.\\\"very@\\\\ \\\"very\\\".unusual\"@strange.example.com")]
@@ -119,7 +114,6 @@ namespace Qowaiv.UnitTests
         [TestCase("very.common@example.com")]
         [TestCase("a.little.lengthy.but.fine@dept.example.com")]
         [TestCase("disposable.style.email.with+symbol@example.com")]
-        [TestCase("user@[IPv6:2001:db8:1ff::a0b:dbd0]")]
         [TestCase("\"much.more unusual\"@example.com")]
         [TestCase("\"very.unusual.@.unusual.com\"@example.com")]
         [TestCase("\"very.(),:;<>[]\\\".VERY.\\\"very@\\\\ \\\"very\\\".unusual\"@strange.example.com")]
@@ -140,7 +134,6 @@ namespace Qowaiv.UnitTests
         [TestCase("a@single-character-in-local.org")]
         [TestCase("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@letters-in-local.org")]
         [TestCase("backticksarelegit@test.com")]
-        [TestCase("bracketed-IP-instead-of-domain@[127.0.0.1]")]
         [TestCase("country-code-tld@sld.rw")]
         [TestCase("country-code-tld@sld.uk")]
         [TestCase("letters-in-sld@123.com")]
@@ -158,5 +151,5 @@ namespace Qowaiv.UnitTests
         [TestCase("uncommon-tld@sld.museum")]
         [TestCase("uncommon-tld@sld.travel")]
         public void Valid(string email) => Assert.IsTrue(EmailAddress.IsValid(email), email);
-   }
+    }
 }

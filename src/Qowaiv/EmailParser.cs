@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Text;
+using System;
 using System.Net;
 using System.Net.Sockets;
 
@@ -12,7 +13,7 @@ namespace Qowaiv
     internal static class EmailParser
     {
         /// <summary>The maximum length of the local part is 64.</summary>
-        private const int LocalPartMaxLength = 64;
+        private const int LocalMaxLength = 64;
 
         /// <summary>The maximum length of a (individual) domain part is 63.</summary>
         private const int DomainPartMaxLength = 63;
@@ -34,17 +35,35 @@ namespace Qowaiv
         /// null if the string was not a valid email address.
         /// a stripped lowercased email address if valid.
         /// </returns>
-        internal static string Parse(string s)
+        internal static string Parse(string str)
         {
-            var state = new State(s)
-                .HandleQuoteBlock()
+            return new State(str)
+                .RemoveQuotedDislayName()
                 .RemoveDisplayName()
                 .RemoveComment()
                 .DiscoverLocal()
                 .DiscoverDomain()
-            ;
+                .Parsed();
+        }
 
-            return state.Parsed();
+        /// <summary>Removes the quoted email address display name from the string.</summary>
+        /// <remarks>
+        /// example: "John Smith" john.smith@example.org
+        /// </remarks>
+        private static State RemoveQuotedDislayName(this State s)
+        {
+            if (s.Done || s.Buffer.First() != Quote)
+            {
+                return s;
+            }
+            // try to ad the quoted block to local.
+            return s.QuotedBlockToLocal(allowDisplayName: true);
+        }
+
+        private static State LocalToResult(this State s)
+        {
+            s.Result.Add(s.Local).Add(At);
+            return s;
         }
 
         /// <summary>Removes the email address display name from the string.</summary>
@@ -83,11 +102,11 @@ namespace Qowaiv
                     if (char.IsWhiteSpace(next))
                     {
                         // There is a second quote block, w
-                        if (s.RemovedQuotedPrefix)
+                        if (s.DisplayNameRemoved)
                         {
                             return s.Invalid();
                         }
-                        s.RemovedQuotedPrefix = true;
+                        s.DisplayNameRemoved = true;
                         s.Local.Clear();
                         s.Buffer.RemoveRange(0, pos + 1).Trim();
 
@@ -124,7 +143,7 @@ namespace Qowaiv
         /// </remarks>
         private static State RemoveDisplayName(this State s)
         {
-            if (s.Done || s.Buffer.Last() != '>' || s.Local.NotEmpty())
+            if (s.Done || s.Buffer.Last() != '>' || s.DisplayNameRemoved)
             {
                 return s;
             }
@@ -135,11 +154,12 @@ namespace Qowaiv
             {
                 return s.Invalid();
             }
+            s.DisplayNameRemoved = true;
             s.Buffer
                 .RemoveFromEnd(1)
                 .RemoveRange(0, lt + 1);
 
-            return s;
+            return s.HandleQuoteBlock();
         }
 
         /// <summary>Removes email address comments from the string.</summary>
@@ -195,40 +215,43 @@ namespace Qowaiv
             return s;
         }
 
-        private static State DiscoverLocal(this State s)
+        private static State DiscoverLocal(this State s, bool mailto = false)
         {
-            if (s.Done || s.Local.NotEmpty())
+            if (s.Done || s.Result.NotEmpty())
             {
                 return s;
             }
 
             var pos = 0;
-            var end = s.Buffer.Length;
+            var end = s.Buffer.Length - 1;
             var prev = default(char);
-            var mailto = false;
 
             do
             {
                 var ch = s.Buffer[pos++];
 
+                if(ch == Quote)
+                {
+                    return s.Local.Empty()
+                        ? s.QuotedBlockToLocal()
+                        : s.Invalid();
+                }
+
                 if (ch == At)
                 {
-                    // We should have a local and not ".@".
-                    if (s.Local.Empty() || prev == Dot)
-                    {
-                        return s.Invalid();
-                    }
-                    s.Result.Add(s.Local).Add(At);
                     s.Buffer.RemoveRange(0, pos);
-                    return s;
+                    // We should have a local and not ".@".
+                    return s.Local.NotEmpty() && prev != Dot
+                        ? s.LocalToResult()
+                        : s.Invalid();
                 }
 
                 // If no MailTo: detected yet, we should remove it.
                 if (!mailto && ch == Colon && s.Local.Equals(nameof(mailto), true))
                 {
+                    s.Buffer.RemoveRange(0, pos);
                     s.Local.Clear();
-                    mailto = true;
-                    continue;
+                    return s.DiscoverLocal(mailto: true);
                 }
 
                 // Don't start with a dot.
@@ -308,6 +331,7 @@ namespace Qowaiv
             if (validDomain && !hasBrackets && s.Domain.IsValidDomain(dot))
             {
                 s.Result.Add(s.Domain);
+                s.Domain.Clear();
                 return s;
             }
             return s.ValidateIPBasedDomain();
@@ -354,7 +378,66 @@ namespace Qowaiv
             {
                 s.Result.Add('[').Add(ip.ToString()).Add(']');
             }
+            s.Domain.Clear();
             return s;
+        }
+
+        /// <summary>Removes the email address display name from the string.</summary>
+        /// <remarks>
+        /// To indicate the message recipient, an email address also may have an
+        /// associated display name for the recipient, which is followed by the
+        /// address specification surrounded by angled brackets, for example:
+        /// John Smith &lt;john.smith@example.org&gt;.
+        /// </remarks>
+        private static State QuotedBlockToLocal(this State s, bool allowDisplayName = false)
+        {
+            s.Local.Add(Quote);
+            
+            var pos = 1;
+            var escape = false;
+
+            while(pos < s.Buffer.Length - 1)
+            {
+                var ch = s.Buffer[pos++];
+          
+                // The escape character is found.
+                if (ch == '\\')
+                {
+                    // toggle state.
+                    escape = !escape;
+                }
+                else if (ch == Quote && !escape)
+                {
+                    s.Local.Add(Quote);
+                    var next = s.Buffer[pos++];
+
+                    s.Buffer.RemoveRange(0, pos);
+
+                    // Quoted display name.
+                    if (allowDisplayName && char.IsWhiteSpace(next))
+                    {
+                        s.Local.Clear();
+                        s.Buffer.TrimLeft();
+                        s.DisplayNameRemoved = true;
+                        return s;
+                    }
+                    // Quoted/literal local part.
+                    return next == At && pos < LocalMaxLength
+                         ? s.LocalToResult()
+                         : s.Invalid();
+                }
+                else
+                {
+                    escape = false;
+                }
+                if (pos < LocalMaxLength)
+                {
+                    s.Local.Add(ch);
+                }
+            }
+
+            // The quote open was never closed.
+            return s.Invalid();
         }
 
         /// <summary>Valid email address characters for the local part also include: {}|/%$&amp;#~!?*`'^=+.</summary>
@@ -405,7 +488,7 @@ namespace Qowaiv
 
         private static bool IsIPv6(this CharBuffer buffer)
         {
-            if (buffer.StartsWith(IPv6Prefix))
+            if (buffer.StartsWith(IPv6Prefix.ToLowerInvariant()))
             {
                 buffer.RemoveRange(0, IPv6Prefix.Length);
                 return true;
@@ -416,14 +499,14 @@ namespace Qowaiv
         /// <summary>Internal state.</summary>
         private ref struct State
         {
-            public State(string s)
+            public State(string str)
             {
-                Buffer = new CharBuffer(s).Trim();
-                Local = new CharBuffer(LocalPartMaxLength);
+                Buffer = new CharBuffer(str).Trim();
+                Local = new CharBuffer(LocalMaxLength);
                 Domain = new CharBuffer(EmailAddress.MaxLength);
                 Result = new CharBuffer(EmailAddress.MaxLength);
 
-                RemovedQuotedPrefix = false;
+                DisplayNameRemoved = false;
             }
 
             public readonly CharBuffer Buffer;
@@ -431,17 +514,23 @@ namespace Qowaiv
             public readonly CharBuffer Domain;
             public readonly CharBuffer Result;
 
-            public bool RemovedQuotedPrefix;
+            public bool DisplayNameRemoved;
 
             public bool Done => Buffer.Empty() || TooLong();
 
             private bool TooLong()
             {
                 // if the local part is more then 64 charcaters.
-                if (Local.Length > LocalPartMaxLength || Local.Length + (Domain.Length < 2 ? 2 : Domain.Length) >= EmailAddress.MaxLength)
+                if (Local.Length > LocalMaxLength)
                 {
                     return true;
                 }
+                // The result will 
+                if (Result.Length + Domain.Length > EmailAddress.MaxLength)
+                {
+                    return true;
+                }
+
                 if (Domain.Length > DomainPartMaxLength)
                 {
                     var lastDot = Domain.LastIndexOf(Dot);

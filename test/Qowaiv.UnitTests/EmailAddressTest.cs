@@ -132,17 +132,24 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Parse_DomainPartShouldBeLowerCased()
+        public void Parse_DomainPart_ShouldBeLowerCased()
         {
             var email = EmailAddress.Parse("mail@UPPERCASE.com");
             Assert.AreEqual("mail@uppercase.com", email.ToString());
         }
 
         [Test]
-        public void Parse_LocalPartShouldNotBeLowerCased()
+        public void Parse_LocalPart_ShouldNotBeLowerCased()
         {
             var email = EmailAddress.Parse("MAIL@lowercase.com");
             Assert.AreEqual("MAIL@lowercase.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_QuotedLocalPart_ShouldNotBeStripped()
+        {
+            var email = EmailAddress.Parse(@"""Joe Smith"" ""Literal (c)""@domain.com (with comment)");
+            Assert.AreEqual(@"""Literal (c)""@domain.com", email.ToString());
         }
 
         [Test]

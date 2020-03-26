@@ -24,6 +24,9 @@ namespace Qowaiv
         private const char Colon = ':';
         private const char Quote = '"';
 
+        private const char BracketOpen = '[';
+        private const char BracketClose = ']';
+
         private const string IPv6Prefix = "IPv6:";
 
         /// <summary>Parses an email address string.</summary>
@@ -33,163 +36,325 @@ namespace Qowaiv
         /// </returns>
         internal static string Parse(string s)
         {
-            var str = new CharBuffer(s)
-               .Trim()
-               .RemoveQuotedPrefix()
-               .RemoveDisplayName()
-               .RemoveComment()
+            var state = new State(s)
+                .HandleQuoteBlock()
+                .RemoveDisplayName()
+                .RemoveComment()
+                .DiscoverLocal()
+                .DiscoverDomain()
             ;
 
-            if (str.Empty())
+            return state.Parsed();
+        }
+
+        /// <summary>Removes the email address display name from the string.</summary>
+        /// <remarks>
+        /// To indicate the message recipient, an email address also may have an
+        /// associated display name for the recipient, which is followed by the
+        /// address specification surrounded by angled brackets, for example:
+        /// John Smith &lt;john.smith@example.org&gt;.
+        /// </remarks>
+        private static State HandleQuoteBlock(this State s)
+        {
+            if (s.Done || s.Buffer.First() != Quote)
             {
-                return null;
+                return s;
             }
 
-            // buffers.
-            var local = new CharBuffer(EmailAddress.MaxLength);
-            var domain = new CharBuffer(EmailAddress.MaxLength);
+            s.Local.Add(Quote);
 
+            var escape = false;
+            for (var pos = 1; pos < s.Buffer.Length - 1; pos++)
+            {
+                var ch = s.Buffer[pos];
+
+                // The escape character is found.
+                if (ch == '\\')
+                {
+                    // toggle state.
+                    escape = !escape;
+                }
+                else if (ch == Quote && !escape)
+                {
+                    pos++;
+                    var next = s.Buffer[pos];
+
+                    // It is a prefix.
+                    if (char.IsWhiteSpace(next))
+                    {
+                        // There is a second quote block, w
+                        if (s.RemovedQuotedPrefix)
+                        {
+                            return s.Invalid();
+                        }
+                        s.RemovedQuotedPrefix = true;
+                        s.Local.Clear();
+                        s.Buffer.RemoveRange(0, pos + 1).Trim();
+
+                        // Removes the quoted block, and search for a quoted domain.
+                        return s.HandleQuoteBlock();
+                    }
+
+                    // We found a quoted 
+                    if (next == At)
+                    {
+                        s.Result.Add(s.Local).Add(Quote).Add(At);
+                        s.Buffer.RemoveRange(0, pos + 1);
+                        return s;
+                    }
+                    return s.Invalid();
+                }
+                else
+                {
+                    escape = false;
+                }
+                s.Local.Add(ch);
+            }
+
+            // The quote open was never closed.
+            return s.Invalid();
+        }
+
+        /// <summary>Removes the email address display name from the string.</summary>
+        /// <remarks>
+        /// To indicate the message recipient, an email address also may have an
+        /// associated display name for the recipient, which is followed by the
+        /// address specification surrounded by angled brackets, for example:
+        /// John Smith &lt;john.smith@example.org&gt;.
+        /// </remarks>
+        private static State RemoveDisplayName(this State s)
+        {
+            if (s.Done || s.Buffer.Last() != '>' || s.Local.NotEmpty())
+            {
+                return s;
+            }
+
+            var lt = s.Buffer.LastIndexOf('<');
+
+            if (lt == CharBuffer.NotFound)
+            {
+                return s.Invalid();
+            }
+            s.Buffer
+                .RemoveFromEnd(1)
+                .RemoveRange(0, lt + 1);
+
+            return s;
+        }
+
+        /// <summary>Removes email address comments from the string.</summary>
+        /// <remarks>
+        /// Comments are allowed in the domain as well as in the local-part:
+        /// john.smith@(comment)example.com and 
+        /// john.smith@example.com(comment) are equivalent to 
+        /// john.smith@example.com.
+        /// </remarks>
+        private static State RemoveComment(this State s)
+        {
+            var level = 0;
+            var length = 0;
+
+            for (var pos = s.Buffer.Length - 1; pos > -1; pos--)
+            {
+                var ch = s.Buffer[pos];
+                if (ch == ')')
+                {
+                    if (level == 0)
+                    {
+                        level++;
+                    }
+                    // not nested.
+                    else
+                    {
+                        return s.Invalid();
+                    }
+                }
+                else if (ch == '(')
+                {
+                    if (level == 1)
+                    {
+                        level--;
+                        s.Buffer.RemoveRange(pos, length + 2);
+                        length = 0;
+                    }
+                    else
+                    {
+                        return s.Invalid();
+                    }
+                }
+                else if (level == 1)
+                {
+                    length++;
+                }
+            }
+            if (level != 0)
+            {
+                return s.Invalid();
+            }
+            s.Buffer.Trim();
+            return s;
+        }
+
+        private static State DiscoverLocal(this State s)
+        {
+            if (s.Done || s.Local.NotEmpty())
+            {
+                return s;
+            }
+
+            var pos = 0;
+            var end = s.Buffer.Length;
+            var prev = default(char);
             var mailto = false;
-            var noAt = true;
+
+            do
+            {
+                var ch = s.Buffer[pos++];
+
+                if (ch == At)
+                {
+                    // We should have a local and not ".@".
+                    if (s.Local.Empty() || prev == Dot)
+                    {
+                        return s.Invalid();
+                    }
+                    s.Result.Add(s.Local).Add(At);
+                    s.Buffer.RemoveRange(0, pos);
+                    return s;
+                }
+
+                // If no MailTo: detected yet, we should remove it.
+                if (!mailto && ch == Colon && s.Local.Equals(nameof(mailto), true))
+                {
+                    s.Local.Clear();
+                    mailto = true;
+                    continue;
+                }
+
+                // Don't start with a dot.
+                if (!IsValidLocal(ch) || ch == Dot && s.Local.Empty())
+                {
+                    return s.Invalid();
+                }
+                s.Local.Add(ch);
+                prev = ch;
+            }
+            while (pos < end && !s.Done);
+
+            // If we end up here not @ was discovered.
+            return s.Invalid();
+        }
+
+        private static State DiscoverDomain(this State s)
+        {
+            if (s.Done)
+            {
+                return s;
+            }
+
+            var pos = 0;
+            var end = s.Buffer.Length;
             var prev = default(char);
             var hasBrackets = false;
             var dot = NotFound;
 
-            var end = str.Length;
+            var validDomain = true;
 
-            for (var pos = 0; pos < end; pos++)
+            do
             {
-                var ch = str[pos];
+                var ch = s.Buffer[pos++];
 
-                if (TooLong(local, domain))
+                // Potentially an email address of the type local@[ip-address].
+                if (ch == BracketOpen)
                 {
-                    return null;
-                }
-
-                // Never a double dot.
-                if (ch == Dot && prev == Dot)
-                {
-                    return null;
-                }
-
-                // @
-                if (ch == At)
-                {
-                    // No @ yet, and a not empty local part, and not predicated by a dot.
-                    if (noAt && local.NotEmpty() && prev != Dot)
+                    if (s.Domain.Empty() && s.Buffer.Last() == BracketClose)
                     {
-                        noAt = false;
-                        local.Add(At);
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                // Local part.
-                else if (noAt)
-                {
-                    // If no MailTo: detected yet, we should remove it.
-                    if (!mailto && ch == Colon && local.Equals(nameof(mailto), true))
-                    {
-                        local.Clear();
-                        mailto = true;
+                        hasBrackets = true;
+                        end--;
                         continue;
                     }
-
-                    // Don't start with a dot.
-                    if (!IsValidLocal(ch) || ch == Dot && local.Empty())
-                    {
-                        return null;
-                    }
-                    local.Add(ch);
+                    return s.Invalid();
                 }
-                // Domain part.
-                else
+
+                // Don't start with a dash or a dot.
+                if (s.Domain.Empty() && (ch == Dash || ch == Dot))
                 {
-                    if (domain.Empty() && ch == '[')
-                    {
-                        // Potentially an email address of the type local@[ip-address].
-                        if (str[end - 1] == ']')
-                        {
-                            hasBrackets = true;
-                            end--;
-                            continue;
-                        }
-                        return null;
-                    }
-
-                    // Don't start with a dash or a dot.
-                    if (!IsValidDomain(ch) || (domain.Empty() && (ch == Dash || ch == Dot)))
-                    {
-                        return null;
-                    }
-
-                    if (ch == Dot)
-                    {
-                        // No -.
-                        if (prev == Dash)
-                        {
-                            return null;
-                        }
-                        dot = domain.Length;
-                    }
-                    // No .-
-                    else if (ch == Dash && prev == Dot)
-                    {
-                        return null;
-                    }
-                    domain.AddLower(ch);
+                    return s.Invalid();
                 }
-                prev = ch;
-            }
 
-            if (noAt)
-            {
-                return null;
+                if (ch == Dot)
+                {
+                    // No -.
+                    if (prev == Dash)
+                    {
+                        return s.Invalid();
+                    }
+                    dot = s.Domain.Length;
+                }
+                // No .-
+                else if (ch == Dash && prev == Dot)
+                {
+                    return s.Invalid();
+                }
+                
+                validDomain &= IsValidDomain(ch);
+
+                s.Domain.AddLower(ch);
+                prev = s.Domain.Last();
             }
+            while (pos < end && !s.Done);
 
             // a valid extension is only applicable without brackets.
-            if (!hasBrackets && domain.IsValidDomain(dot))
+            if (validDomain && !hasBrackets && s.Domain.IsValidDomain(dot))
             {
-                return local.Add(domain);
+                s.Result.Add(s.Domain);
+                return s;
             }
-
-            return ValidateIPDomain(local, domain);
+            return s.ValidateIPBasedDomain();
         }
 
-        private static string ValidateIPDomain(CharBuffer local, CharBuffer domain)
+        private static State ValidateIPBasedDomain(this State s)
         {
+            if (s.Done)
+            {
+                return s;
+            }
             // strips the prefix if so.
-            var isIPv6 = domain.IsIPv6();
+            var isIPv6 = s.Domain.IsIPv6();
 
             // Validate The IP address.
-            if (IPAddress.TryParse(domain, out IPAddress ip))
+            if (!IPAddress.TryParse(s.Domain, out IPAddress ip))
             {
-                var isIPv4 = ip.AddressFamily == AddressFamily.InterNetwork;
-                isIPv6 |= ip.AddressFamily == AddressFamily.InterNetworkV6;
-
-                // Only IPv4 and IPv6.
-                if (!isIPv4 && !isIPv6)
-                {
-                    return null;
-                }
-                // IPv6 prefix with an IPv4 address.
-                if (isIPv6 && ip.AddressFamily != AddressFamily.InterNetworkV6)
-                {
-                    return null;
-                }
-                // As IPAddress parse is too forgiving.
-                if (isIPv4 && domain.Count(Dot) != 3)
-                {
-                    return null;
-                }
-
-                return isIPv6
-                    ? local.Add('[').Add(IPv6Prefix).Add(ip.ToString()).Add(']')
-                    : local.Add('[').Add(ip.ToString()).Add(']');
+                return s.Invalid();
             }
-            return null;
+            var isIPv4 = ip.AddressFamily == AddressFamily.InterNetwork;
+            isIPv6 |= ip.AddressFamily == AddressFamily.InterNetworkV6;
+
+            // Only IPv4 and IPv6.
+            if (!isIPv4 && !isIPv6)
+            {
+                return s.Invalid();
+            }
+            // IPv6 prefix with an IPv4 address.
+            if (isIPv6 && ip.AddressFamily != AddressFamily.InterNetworkV6)
+            {
+                return s.Invalid();
+            }
+            // As IPAddress parse is too forgiving.
+            if (isIPv4 && s.Domain.Count(Dot) != 3)
+            {
+                return s.Invalid();
+            }
+
+            if (isIPv6)
+            {
+                s.Result.Add('[').Add(IPv6Prefix).Add(ip.ToString()).Add(']');
+            }
+            else
+            {
+                s.Result.Add('[').Add(ip.ToString()).Add(']');
+            }
+            return s;
         }
 
         /// <summary>Valid email address characters for the local part also include: {}|/%$&amp;#~!?*`'^=+.</summary>
@@ -208,21 +373,7 @@ namespace Qowaiv
                 || char.IsLetterOrDigit(ch);
         }
 
-        private static bool TooLong(CharBuffer local, CharBuffer domain)
-        {
-            if (local.Length > LocalPartMaxLength || local.Length + (domain.Length < 2 ? 2 : domain.Length) >= EmailAddress.MaxLength)
-            {
-                return true;
-            }
-            if (domain.Length > DomainPartMaxLength)
-            {
-                var lastDot = domain.LastIndexOf(Dot);
-                return lastDot != NotFound && domain.Length - lastDot > DomainPartMaxLength;
-            }
-            return false;
-        }
-
-        public static bool IsValidDomain(this CharBuffer buffer, int dot)
+        private static bool IsValidDomain(this CharBuffer buffer, int dot)
         {
             if (buffer.IndexOf(Colon) != NotFound)
             {
@@ -252,7 +403,7 @@ namespace Qowaiv
             return true;
         }
 
-        public static bool IsIPv6(this CharBuffer buffer)
+        private static bool IsIPv6(this CharBuffer buffer)
         {
             if (buffer.StartsWith(IPv6Prefix))
             {
@@ -262,133 +413,57 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary>Removes the email address display name from the string.</summary>
-        /// <remarks>
-        /// To indicate the message recipient, an email address also may have an
-        /// associated display name for the recipient, which is followed by the
-        /// address specification surrounded by angled brackets, for example:
-        /// John Smith &lt;john.smith@example.org&gt;.
-        /// </remarks>
-        private static CharBuffer RemoveQuotedPrefix(this CharBuffer buffer)
+        /// <summary>Internal state.</summary>
+        private ref struct State
         {
-            if (buffer.Empty())
+            public State(string s)
             {
-                return buffer;
+                Buffer = new CharBuffer(s).Trim();
+                Local = new CharBuffer(LocalPartMaxLength);
+                Domain = new CharBuffer(EmailAddress.MaxLength);
+                Result = new CharBuffer(EmailAddress.MaxLength);
+
+                RemovedQuotedPrefix = false;
             }
-            if (buffer.First() == Quote)
+
+            public readonly CharBuffer Buffer;
+            public readonly CharBuffer Local;
+            public readonly CharBuffer Domain;
+            public readonly CharBuffer Result;
+
+            public bool RemovedQuotedPrefix;
+
+            public bool Done => Buffer.Empty() || TooLong();
+
+            private bool TooLong()
             {
-                var escape = false;
-
-                var pos = 1;
-                var end = buffer.Length - 1;
-
-                while (pos < end)
+                // if the local part is more then 64 charcaters.
+                if (Local.Length > LocalPartMaxLength || Local.Length + (Domain.Length < 2 ? 2 : Domain.Length) >= EmailAddress.MaxLength)
                 {
-                    var ch = buffer[pos++];
-
-                    // The escape character is found.
-                    if (ch == '\\')
-                    {
-                        // toggle state.
-                        escape = !escape;
-                    }
-                    // The (potential) and character.
-                    else if (ch == Quote)
-                    {
-                        // if not escaped.
-                        if (!escape)
-                        {
-                            // if followed by a whitespace.
-                            if (char.IsWhiteSpace(buffer[pos++]))
-                            {
-                                return buffer.RemoveRange(0, pos).Trim();
-                            }
-                            return buffer.Clear();
-                        }
-                        escape = false;
-                    }
-                    else
-                    {
-                        escape = false;
-                    }
+                    return true;
                 }
-                return buffer.Clear();
-            }
-            return buffer;
-        }
-
-        /// <summary>Removes the email address display name from the string.</summary>
-        /// <remarks>
-        /// To indicate the message recipient, an email address also may have an
-        /// associated display name for the recipient, which is followed by the
-        /// address specification surrounded by angled brackets, for example:
-        /// John Smith &lt;john.smith@example.org&gt;.
-        /// </remarks>
-        private static CharBuffer RemoveDisplayName(this CharBuffer buffer)
-        {
-            if (buffer.Empty())
-            {
-                return buffer;
-            }
-            if (buffer.Last() == '>')
-            {
-                var lt = buffer.LastIndexOf('<');
-
-                if (lt == CharBuffer.NotFound)
+                if (Domain.Length > DomainPartMaxLength)
                 {
-                    return buffer.Clear();
+                    var lastDot = Domain.LastIndexOf(Dot);
+                    return lastDot != NotFound && Domain.Length - lastDot > DomainPartMaxLength;
                 }
-                return buffer
-                    .RemoveFromEnd(1)
-                    .RemoveRange(0, lt + 1);
+                return false;
             }
-            return buffer;
-        }
 
-        /// <summary>Removes email address comments from the string.</summary>
-        /// <remarks>
-        /// Comments are allowed in the domain as well as in the local-part:
-        /// john.smith@(comment)example.com and 
-        /// john.smith@example.com(comment) are equivalent to 
-        /// john.smith@example.com.
-        /// </remarks>
-        private static CharBuffer RemoveComment(this CharBuffer buffer)
-        {
-            var level = 0;
-            var length = 0;
+            public override string ToString() => $"Buffer: {Buffer}, Result:{Result}";
 
-            for (var pos = buffer.Length - 1; pos > -1; pos--)
+            public State Invalid()
             {
-                var ch = buffer[pos];
-                if (ch == ')')
-                {
-                    if (level == 0)
-                    {
-                        level++;
-                    }
-                    // not nested.
-                    else { buffer.Clear(); }
-                }
-                else if (ch == '(')
-                {
-                    if (level == 1)
-                    {
-                        level--;
-                        buffer.RemoveRange(pos, length + 2);
-                        length = 0;
-                    }
-                    else { buffer.Clear(); }
-                }
-                else if (level == 1)
-                {
-                    length++;
-                }
+                Buffer.Clear();
+                return this;
             }
-            if (level != 0)
+
+            public string Parsed()
             {
-                return buffer.Clear();
+                return Done
+                    ? null
+                    : Result.ToString();
             }
-            return buffer.Trim();
         }
     }
 }

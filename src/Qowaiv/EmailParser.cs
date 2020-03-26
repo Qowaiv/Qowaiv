@@ -519,23 +519,19 @@ namespace Qowaiv
 
             private bool TooLong()
             {
-                // if the local part is more then 64 charcaters.
+                // if the local part is more then 64 characters.
                 if (Local.Length > LocalMaxLength)
                 {
                     return true;
                 }
-                // The result will 
+                // The result will be too long. 
                 if (Result.Length + Domain.Length > EmailAddress.MaxLength)
                 {
                     return true;
                 }
 
-                if (Domain.Length > DomainPartMaxLength)
-                {
-                    var lastDot = Domain.LastIndexOf(Dot);
-                    return lastDot != NotFound && Domain.Length - lastDot > DomainPartMaxLength;
-                }
-                return false;
+                return Domain.Length > DomainPartMaxLength
+                    && Domain.Length - (Domain.LastIndexOf(Dot) + 1) > DomainPartMaxLength;
             }
 
             public override string ToString() => $"Buffer: {Buffer}, Result:{Result}";

@@ -66,7 +66,6 @@ namespace Qowaiv.UnitTests
         [TestCase(@"Joe Smith <mailto:""quoted""@domain.com>")]
         [TestCase("Joe Smith <mailto:email@domain.com>")]
         [TestCase("Joe Smith <mailto:email(with comment)@domain.com>")]
-        [TestCase(@"""With extra < within quotes"" Display Name<email@domain.com>")]
         [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long")]
         
         // IP Based.

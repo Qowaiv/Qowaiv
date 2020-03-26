@@ -75,7 +75,9 @@ namespace Qowaiv.UnitTests
         [TestCase("email@mailto:domain.com")]
         [TestCase("mailto:mailto:email@domain.com")]
         [TestCase("Display Name <email@plus.com> (after name with display)")]
-        
+        [TestCase(@"""With extra  display name"" Display Name<email@domain.com>")]
+
+
         // examples from https://github.com/Sembiance/email-validator
         [TestCase("! #$%`|@invalid-characters-in-local.org")]
         [TestCase("(),:;`|@more-invalid-characters-in-local.org")]

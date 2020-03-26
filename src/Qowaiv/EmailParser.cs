@@ -1,5 +1,4 @@
 ﻿using Qowaiv.Text;
-using System;
 using System.Net;
 using System.Net.Sockets;
 
@@ -255,7 +254,7 @@ namespace Qowaiv
                 }
 
                 // Don't start with a dot.
-                if (!IsValidLocal(ch) || ch == Dot && s.Local.Empty())
+                if (!ch.IsValidLocal() || ch == Dot && s.Local.Empty())
                 {
                     return s.Invalid();
                 }
@@ -278,10 +277,8 @@ namespace Qowaiv
             var pos = 0;
             var end = s.Buffer.Length;
             var prev = default(char);
-            var hasBrackets = false;
+            var isIPAddress = false;
             var dot = NotFound;
-
-            var validDomain = true;
 
             do
             {
@@ -292,7 +289,7 @@ namespace Qowaiv
                 {
                     if (s.Domain.Empty() && s.Buffer.Last() == BracketClose)
                     {
-                        hasBrackets = true;
+                        isIPAddress = true;
                         end--;
                         continue;
                     }
@@ -319,16 +316,21 @@ namespace Qowaiv
                 {
                     return s.Invalid();
                 }
-                
-                validDomain &= IsValidDomain(ch);
-
+                if (ch == Colon)
+                {
+                    isIPAddress = true;
+                }
+                else if (!ch.IsValidDomain())
+                {
+                    return s.Invalid();
+                }
                 s.Domain.AddLower(ch);
                 prev = s.Domain.Last();
             }
             while (pos < end && !s.Done);
 
             // a valid extension is only applicable without brackets.
-            if (validDomain && !hasBrackets && s.Domain.IsValidDomain(dot))
+            if (!isIPAddress && s.Domain.IsValidDomain(dot))
             {
                 s.Result.Add(s.Domain);
                 s.Domain.Clear();
@@ -441,28 +443,26 @@ namespace Qowaiv
         }
 
         /// <summary>Valid email address characters for the local part also include: {}|/%$&amp;#~!?*`'^=+.</summary>
-        private static bool IsValidLocal(char ch)
-        {
-            return IsValid(ch)
-                || "{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
-        }
+        private static bool IsValidLocal(this char ch) => IsValid(ch) || "{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
 
-        private static bool IsValidDomain(char ch) => IsValid(ch) || ch == Colon;
+        private static bool IsValidDomain(this char ch) => IsValid(ch);
+        private static bool IsValidTopDomain(this char ch) => ch.IsLetter() || ch.IsNonASCII();
 
         /// <summary>Valid email address characters are letters, digits and ., _ and -.</summary>
         private static bool IsValid(char ch)
         {
-            return "._-".IndexOf(ch) != NotFound
-                || char.IsLetterOrDigit(ch);
+            return ch.IsLetter()
+                || ch.IsDigit()
+                || ch.IsExtra()
+                || ch.IsNonASCII();
         }
 
+        private static bool IsDigit(this char ch)=> ch >= '0' && ch <= '9';
+        private static bool IsLetter(this char ch) => (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+        private static bool IsExtra(this char ch) => "._-".IndexOf(ch) != NotFound;
+        private static bool IsNonASCII(this char ch) => ch > 127;
         private static bool IsValidDomain(this CharBuffer buffer, int dot)
         {
-            if (buffer.IndexOf(Colon) != NotFound)
-            {
-                return false;
-            }
-
             var start = dot + 1;
             if (buffer.Length - start < 2)
             {
@@ -477,8 +477,7 @@ namespace Qowaiv
 
             for (var i = start; i < buffer.Length; i++)
             {
-                var ch = buffer[i];
-                if (ch < 'a' || ch > 'z')
+                if (!buffer[i].IsValidTopDomain())
                 {
                     return false;
                 }

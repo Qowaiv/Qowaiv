@@ -305,8 +305,8 @@ namespace Qowaiv
 
                 if (ch == Dot)
                 {
-                    // No -.
-                    if (prev == Dash)
+                    // No -. or ..
+                    if (prev == Dash || prev == Dot)
                     {
                         return s.Invalid();
                     }
@@ -321,10 +321,7 @@ namespace Qowaiv
                 {
                     isIPAddress = true;
                 }
-                else if (!ch.IsValidDomain())
-                {
-                    return s.Invalid();
-                }
+                
                 s.Domain.AddLower(ch);
                 prev = s.Domain.Last();
             }

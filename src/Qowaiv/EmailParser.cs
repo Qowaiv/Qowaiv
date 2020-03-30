@@ -229,7 +229,7 @@ namespace Qowaiv
             {
                 var ch = s.Buffer[pos++];
 
-                if(ch == Quote)
+                if (ch == Quote)
                 {
                     return s.Local.Empty()
                         ? s.QuotedBlockToLocal()
@@ -252,12 +252,13 @@ namespace Qowaiv
                     s.Local.Clear();
                     return s.DiscoverLocal(mailto: true);
                 }
+                
+                // Obviously, invalid characters are not allowed.
+                if (!ch.IsValidLocal()) { return s.Invalid(); }
 
-                // Don't start with a dot.
-                if (!ch.IsValidLocal() || ch == Dot && s.Local.Empty())
-                {
-                    return s.Invalid();
-                }
+                // Don't start with a dot. and not ..
+                if (ch == Dot && (prev == Dot || s.Local.Empty())) { return s.Invalid(); }
+
                 s.Local.Add(ch);
                 prev = ch;
             }
@@ -421,7 +422,9 @@ namespace Qowaiv
                         s.Local.Clear();
                         s.Buffer.TrimLeft();
                         s.DisplayNameRemoved = true;
-                        return s;
+                        return s.Buffer.First() == Quote
+                            ? s.QuotedBlockToLocal(allowDisplayName: false)
+                            : s;
                     }
                     // Quoted/literal local part.
                     return next == At && pos < LocalMaxLength

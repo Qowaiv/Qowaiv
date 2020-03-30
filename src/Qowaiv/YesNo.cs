@@ -54,6 +54,9 @@ namespace Qowaiv
         /// <summary>Returns true if the yes-no value represents yes, otherwise false.</summary>
         public bool IsYes() => m_Value == Yes.m_Value;
 
+        /// <summary>Returns true if the yes-no value represents yes or no.</summary>
+        public bool IsYesOrNo() => IsYes() || IsNo();
+
         /// <summary>Deserializes the gender from a JSON number.</summary>
         /// <param name="json">
         /// The JSON number to deserialize.
@@ -142,6 +145,10 @@ namespace Qowaiv
 
         /// <summary>Casts a yes-no to a nullable <see cref="bool"/>.</summary>
         public static explicit operator bool?(YesNo val) => BooleanValues[val.m_Value];
+
+        /// <summary>Casts a yes-no to a <see cref="bool"/>.</summary>
+        public static implicit operator bool(YesNo val) => val.IsYes();
+
         /// <summary>Casts a nullable <see cref="bool"/> to a yes-no.</summary>
         public static explicit operator YesNo(bool? val)
         {
@@ -151,6 +158,9 @@ namespace Qowaiv
             }
             return Empty;
         }
+        
+        /// <summary>Casts a <see cref="bool"/> to a yes-no.</summary>
+        public static explicit operator YesNo(bool val) => val ? Yes : No;
 
         /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

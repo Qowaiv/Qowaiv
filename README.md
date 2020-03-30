@@ -1,4 +1,4 @@
-![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
+﻿![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
@@ -132,7 +132,7 @@ as `double.Parse("14%")`, which is `0.14`.
 Percentage p = 0.0314; // implicit cast: 3.14%
 var p = Percentage.Parse("3.14"); //  Parse: 3.14%;
 var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
-var p = Percentage.Parse("31.4�"); // Parse: 3.14%;
+var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
 var p = 3.14.Percent(); // Extension on double: 3.14%;
 
 // Casting
@@ -235,6 +235,79 @@ var rounded = money.Round(0); // EUR 125.00
 
 ### Country
 Represents a country based on an ISO 3166-1 code (or 3166-3 if the country does not longer exists).
+
+## Qowaiv mathimatical types
+
+### Fraction
+A fraction (from Latin _fractus_, "broken") represents a part of a whole or, more
+generally, any number of equal parts. It can be written as a/b (a divided by b).
+
+It is worth noticing that the `default` value of a `Fraction` is ``Fraction.Zero`
+and that `NaN` and `Infinity` are not supported.
+
+#### Creation
+Fractions can be created in multiple ways:
+``` C#
+Fraction fluent = 4.DividedBy(13); // Preferred way
+
+Fraction ctor = new Fraction(4, 13));
+
+Fraction parsed = Fraction.Parse("4/13");
+Fraction parsed = Fraction.Parse("4½"); // single fraction character
+Fraction parsed = Fraction.Parse("4²³⁄₄₇"); // Unicode super- and subscript
+
+Fraction fromFloating = Fraction.Create(0.3456786754m);
+
+Fraction casted = (Fraction)34;
+Fraction casted = (Fraction)0.3333;
+```
+
+#### Operations
+``` C#
+var add = 4.DividedBy(3) +  7.DividedBy(4); // 3 1/12
+var subtract = 4.DividedBy(3) - 2.DividedBy(3); // 2/3
+var multiply = 3.DividedBy(5) * 2.DividedBy(3); // 6/15
+var divide = = 3.DividedBy(5) / 2.DividedBy(3); // 9/10
+```
+
+#### Formatting
+There are multiple types of formatting supported. Without
+a fraction bar, the fraction is formatted as a decimal.
+``` C#
+var dec = 17.DividedBy(5).ToString("0.##"); // 3,40
+```
+
+If the whole should be formatted as such the by adding the preferred formatting
+between brackets.
+``` C#
+var withWhole = 17.DividedBy(5).ToString("[0]0/0"); // 3 2/5
+``` 
+
+To specify fraction bar of choice, just define that one in the format:
+##### Fraction bars
+name           | c | code 
+---------------|---|------
+slash          | / | 005C
+colon          | : | 003A
+division sign  | ÷ | 00F7
+fraction slash | ⁄ | 2044
+division slash | ∕ | 2215
+short slash    | ̷  | 0337
+long slash     | ̸  | 0338
+``` C#
+var customBar = 3.DividedBy(4).ToString("0/÷0"); // 3÷4
+```
+
+Unicode supports super- and subscript, and so does `Fraction`:
+```C#
+var super = -17.DividedBy(5).ToString("[0]super/sub"); // -3²⁄₅
+var super = 5.DividedBy(3).ToString("super/sub"); // ⁵⁄₃
+```
+
+The default format (so if you do not specify anything) is:
+```C#
+var basic = 3.DividedBy(4).ToString("0/0"); // 3/4
+```
 
 ## Qowaiv SQL types
 
@@ -383,7 +456,7 @@ By default, .NET support rounding of floating points (including `decimal`s).
 However, for some domains this support is too limited. To overcome this, Qowaiv
 has the static `DecimalRound` helper class, containing extension methods for rounding.
 
-#### �Negative� decimals
+#### ‘Negative’ decimals
 To round tenfold, hundredfold, etc. precision, a negative amount of decimals
 can be specified:
 ``` C#

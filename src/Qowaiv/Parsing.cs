@@ -8,6 +8,8 @@ namespace Qowaiv
         private static Regex SpacePattern = new Regex(@"\s", RegexOptions.Compiled);
         private static Regex SpaceAndMarkupPattern = new Regex(@"[\s\.\-_]", RegexOptions.Compiled);
 
+        public const int NotFound = -1;
+
         /// <summary>Clears spacing.</summary>
         public static string ClearSpacing(string str)
         {

@@ -271,7 +271,7 @@ namespace Qowaiv
             {
                 var lt = buffer.LastIndexOf('<');
 
-                if (lt == CharBuffer.NotFound)
+                if (lt == Parsing.NotFound)
                 {
                     return buffer.Clear();
                 }
@@ -281,7 +281,6 @@ namespace Qowaiv
             }
             return buffer;
         }
-
 
         /// <summary>Removes email address comments from the string.</summary>
         /// <remarks>
@@ -328,6 +327,5 @@ namespace Qowaiv
             }
             return buffer.Trim();
         }
-
     }
 }

@@ -243,14 +243,19 @@ namespace Qowaiv
         [ExcludeFromCodeCoverage]
         long IConvertible.ToInt64(IFormatProvider provider) => Convertable.ToInt64(provider);
         /// <inheritdoc/>
+        [ExcludeFromCodeCoverage]
         sbyte IConvertible.ToSByte(IFormatProvider provider) => Convertable.ToSByte(provider);
         /// <inheritdoc/>
+        [ExcludeFromCodeCoverage]
         float IConvertible.ToSingle(IFormatProvider provider) => Convertable.ToSingle(provider);
         /// <inheritdoc/>
+        [ExcludeFromCodeCoverage]
         ushort IConvertible.ToUInt16(IFormatProvider provider) => Convertable.ToUInt16(provider);
         /// <inheritdoc/>
+        [ExcludeFromCodeCoverage]
         uint IConvertible.ToUInt32(IFormatProvider provider) => Convertable.ToUInt32(provider);
         /// <inheritdoc/>
+        [ExcludeFromCodeCoverage]
         ulong IConvertible.ToUInt64(IFormatProvider provider) => Convertable.ToUInt64(provider);
     }
 }

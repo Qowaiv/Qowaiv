@@ -1328,31 +1328,29 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void GetStreamSize_Stream_17Byte()
         {
-            using (var stream = new MemoryStream(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 }))
-            {
-                StreamSize act = stream.GetStreamSize();
-                StreamSize exp = 17;
+            using var stream = new MemoryStream(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 });
 
-                Assert.AreEqual(exp, act);
-            }
+            StreamSize act = stream.GetStreamSize();
+            StreamSize exp = 17;
+
+            Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void GetStreamSize_FileInfo_9Byte()
         {
-            using (var dir = new TemporaryDirectory())
+            using var dir = new TemporaryDirectory();
+
+            FileInfo file = dir.CreateFile("GetStreamSize_FileInfo_9.test");
+            using (var writer = new StreamWriter(file.FullName, false))
             {
-                FileInfo file = dir.CreateFile("GetStreamSize_FileInfo_9.test");
-                using (var writer = new StreamWriter(file.FullName, false))
-                {
-                    writer.Write("Unit Test");
-                }
-
-                StreamSize act = file.GetStreamSize();
-                StreamSize exp = 9;
-
-                Assert.AreEqual(exp, act);
+                writer.Write("Unit Test");
             }
+
+            StreamSize act = file.GetStreamSize();
+            StreamSize exp = 9;
+
+            Assert.AreEqual(exp, act);
         }
 
         [Test]

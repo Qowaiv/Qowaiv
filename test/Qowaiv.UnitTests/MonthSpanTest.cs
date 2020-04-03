@@ -219,19 +219,25 @@ namespace Qowaiv.UnitTests
             }
 
             [TestCase("2017-06-11")]
-            [TestCase(int.MinValue)]
+            [TestCase((long)int.MinValue)]
             public void FromJson_Invalid_Throws(object json)
             {
-                Assert.Catch<FormatException>(() => JsonTester.Read<MonthSpan>(json));
+                Assert.Catch(() => JsonTester.Read<MonthSpan>(json));
             }
 
             [TestCase("5Y+9M", 69L)]
-            [TestCase(0, null)]
             [TestCase("5Y+9M", "5Y+9M")]
                 public void FromJson(MonthSpan expected, object json)
             {
                 var actual = JsonTester.Read<MonthSpan>(json);
                 Assert.AreEqual(expected, actual);
+            }
+
+            [Test]
+            public void FromsYear_3_36M()
+            {
+                var span = MonthSpan.FromYears(3);
+                Assert.AreEqual(MonthSpan.FromMonths(36), span);
             }
 
             [Test]
@@ -248,20 +254,6 @@ namespace Qowaiv.UnitTests
                 var act = TestStruct.ToString("0.00", new UnitTestFormatProvider());
                 var exp = "Unit Test Formatter, value: '69.00', format: '0.00'";
                 Assert.AreEqual(exp, act);
-            }
-
-            [TestCase("en-US", "F", "69", "5Y+")]
-            [TestCase("nl-BE", null, "1600,1", "1600,1")]
-            [TestCase("en-GB", null, "1600.1", "1600.1")]
-            [TestCase("nl-BE", "0000", "800", "0800")]
-            [TestCase("en-GB", "0000", "800", "0800")]
-            public void ToString_UsingCultureWithPattern(string culture, string format, MonthSpan span, string expected)
-            {
-                using (new CultureInfoScope(culture))
-                {
-                    var actual = span.ToString(format);
-                    Assert.AreEqual(expected, actual);
-                }
             }
 
             [Test]

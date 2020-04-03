@@ -34,7 +34,46 @@ namespace Qowaiv
         /// <summary>Gets the months component of the month span.</summary>
         public int Months => TotalMonths % DateSpan.MonthsPerYear;
 
+        #region Operations
 
+        /// <summary>Unary plus the month span.</summary>
+        /// <returns></returns>
+        internal MonthSpan Plus() => this;
+
+        /// <summary>Negates the month span.</summary>
+        public MonthSpan Negate() => new MonthSpan(-m_Value);
+
+        /// <summary>Returns a new month span whose value is the sum of the specified month span and this instance.</summary>
+        ///<param name="other">
+        /// The month span to add.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Add(MonthSpan other) => FromMonths(m_Value + other.m_Value);
+
+        /// <summary>Returns a new month span whose value is the subtraction of the specified month span and this instance.</summary>
+        ///<param name="other">
+        /// The month span to subtract.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Subtract(MonthSpan other) => FromMonths(m_Value - other.m_Value);
+
+        /// <summary>Unary plus the month span.</summary>
+        public static MonthSpan operator +(MonthSpan span) => span.Plus();
+
+        /// <summary>Negates the month span.</summary>
+        public static MonthSpan operator -(MonthSpan span) => span.Negate();
+
+        /// <summary>Adds two month spans.</summary>
+        public static MonthSpan operator +(MonthSpan l, MonthSpan r) => l.Add(r);
+
+        /// <summary>Subtracts two month spans.</summary>
+        public static MonthSpan operator -(MonthSpan l, MonthSpan r) => l.Subtract(r);
+
+        #endregion
         /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => ToString("F", CultureInfo.InvariantCulture);
@@ -83,7 +122,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized month span.
         /// </returns>
-        public static MonthSpan FromJson(long json) => FromMonths(Cast.ToInt<MonthSpan>(json));
+        public static MonthSpan FromJson(long json) => Cast.Primitive<long, MonthSpan>(TryCreate, json);
 
         #region (Explicit) casting
 
@@ -100,7 +139,7 @@ namespace Qowaiv
         /// <summary>Casts the month span to a <see cref="DateSpan"/>.</summary>
         public static implicit operator DateSpan(MonthSpan val) => DateSpan.FromMonths(val.m_Value);
         /// <summary>Casts a <see cref = "DateSpan"/> to a month span.</summary>
-        public static explicit operator MonthSpan(DateSpan val) => MonthSpan.FromMonths(val.TotalMonths);
+        public static explicit operator MonthSpan(DateSpan val) => FromMonths(val.TotalMonths);
 
         #endregion
 
@@ -146,23 +185,33 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary>Creates a date span from months only.</summary>
+        /// <summary>Creates a date span from years.</summary>
+        public static MonthSpan FromYears(int years)
+        {
+            if (TryCreate(years * DateSpan.MonthsPerYear, out var monthSpan))
+            {
+                return monthSpan;
+            }
+            throw new ArgumentOutOfRangeException(nameof(years), QowaivMessages.FormatExceptionMonthSpan);
+        }
+
+        /// <summary>Creates a date span from months.</summary>
         public static MonthSpan FromMonths(int months)
         {
             if (TryCreate(months, out var monthSpan))
             {
                 return monthSpan;
             }
-            throw new ArgumentOutOfRangeException("months", QowaivMessages.FormatExceptionMonthSpan);
+            throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionMonthSpan);
         }
 
         /// <summary>Tries to Create a date span from months only.</summary>
-        public static bool TryCreate(int months, out MonthSpan monthSpan)
+        public static bool TryCreate(long? months, out MonthSpan monthSpan)
         {
             monthSpan = default;
-            if (months >= MinValue.TotalMonths && months <= MaxValue.TotalMonths)
+            if (months.HasValue && months >= MinValue.TotalMonths && months <= MaxValue.TotalMonths)
             {
-                monthSpan = new MonthSpan(months);
+                monthSpan = new MonthSpan((int)months);
                 return true;
             }
             return false;

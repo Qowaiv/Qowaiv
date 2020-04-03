@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.UnitTests.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -83,14 +84,14 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TyrParse_NotADate_IsNotValid()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (new CultureInfoScope(TestCulture.Nl_NL))
             {
-                string str = "string";
+                string str = "not a date";
 
                 Assert.IsFalse(Date.TryParse(str, out Date val), "Valid");
-                Assert.AreEqual("1-1-0001", val.ToString(), "Value");
+                Assert.AreEqual(Date.MinValue, val, "Value");
             }
         }
 

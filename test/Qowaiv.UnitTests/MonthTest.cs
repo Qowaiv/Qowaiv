@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.UnitTests.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -569,10 +570,10 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_TestStructs_FormattedString()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (new CultureInfoScope(TestCulture.Nl_BE))
             {
                 var act = TestStruct.ToString("s");
-                var exp = "feb";
+                var exp = "feb.";
                 Assert.AreEqual(exp, act);
             }
         }

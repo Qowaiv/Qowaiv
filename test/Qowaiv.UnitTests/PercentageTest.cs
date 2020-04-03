@@ -578,7 +578,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_PercentageFaIR_FormattedString()
         {
-            using (new CultureInfoScope(TestCulture.FaIR))
+            using (new CultureInfoScope(TestCulture.Fa_IR))
             {
                 Assert.AreEqual("٪31,415", ((Percentage).31415).ToString());
             }

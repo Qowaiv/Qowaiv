@@ -209,18 +209,6 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void Create_CS_CSXX()
-        {
-            var cs = new RegionInfo("CS");
-            var exp = Country.CSXX;
-            var act = Country.Create(cs);
-
-            // We want to be sure that this country is still avialable in .NET.
-            Assert.AreEqual("Serbia and Montenegro (Former)", cs.DisplayName, "cs.DisplayName");
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void Create_NL_NL()
         {
             var exp = Country.NL;

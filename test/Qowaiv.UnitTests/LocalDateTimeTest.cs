@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.UnitTests.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -52,11 +53,11 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (new CultureInfoScope(TestCulture.Nl_NL))
             {
                 string str = "26-4-2015 17:07:13";
                 Assert.IsTrue(LocalDateTime.TryParse(str, out LocalDateTime val), "Valid");
-                Assert.AreEqual(str, val.ToString(), "Value");
+                Assert.AreEqual(new LocalDateTime(2015, 04, 26, 17, 07, 13, 000), val, "Value");
             }
         }
 

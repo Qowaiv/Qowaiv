@@ -6,7 +6,7 @@ namespace Qowaiv.UnitTests.Globalization
     public static class TestCulture
     {
         /// <summary>Gets an Iranian <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo FaIR
+        public static CultureInfo Fa_IR
         {
             get
             {
@@ -17,5 +17,31 @@ namespace Qowaiv.UnitTests.Globalization
             }
         }
 
+        public static CultureInfo Nl_NL => new CultureInfo("nl-NL");
+
+        public static CultureInfo Nl_BE
+        {
+            get
+            {
+                var culture = new CultureInfo("nl-BE");
+                culture.DateTimeFormat.AbbreviatedMonthNames = new[] 
+                {
+                    "jan.",
+                    "feb.",
+                    "mrt.",
+                    "april",
+                    "mei",
+                    "juni",
+                    "juli",
+                    "aug.",
+                    "sep.",
+                    "okt.",
+                    "nov.",
+                    "dec."
+                };
+
+                return culture;
+            }
+        }
     }
 }

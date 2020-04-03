@@ -99,5 +99,11 @@ namespace Qowaiv.UnitTests
         {
             Assert.AreEqual(+1, UuidComparer.Default.Compare((object)uuid, (object)guid));
         }
+
+        [Test]
+        public void Compare_UuidObject_Throws()
+        {
+            Assert.Throws<NotSupportedException>(() => UuidComparer.Default.Compare((object)uuid, new object()));
+        }
     }
 }

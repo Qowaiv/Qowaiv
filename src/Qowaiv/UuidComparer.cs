@@ -52,7 +52,7 @@ namespace Qowaiv
                     return Compare(a, b);
                 }
             }
-            throw new ArgumentException($"Both arguments must be GUID/UUID.");
+            throw new NotSupportedException("Both arguments must be GUID/UUID.");
         }
     }
 }

@@ -139,6 +139,19 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        public void TryCreate_Int_NotSuccessful()
+        {
+            Assert.IsFalse(Id<ForGuid>.TryCreate(17L, out _));
+        }
+
+        [Test]
+        public void TryCreate_Guid_Successful()
+        {
+            Assert.IsTrue(Id<ForGuid>.TryCreate(Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), out var id));
+            Assert.AreEqual(Id<ForGuid>.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), id);
+        }
+
+        [Test]
         public void Constructor_SerializationInfoIsNull_Throws()
         {
             Assert.Catch<ArgumentNullException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForGuid>>(null, default));
@@ -344,6 +357,13 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var actual = JsonTester.Read<Id<ForGuid>>(json);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ToJson_TestStruct_StringValue()
+        {
+            var json = TestStruct.ToJson();
+            Assert.AreEqual("0f5ab5ab-12cb-4629-878d-b18b88b9a504", json);
         }
 
         [Test]
@@ -597,6 +617,13 @@ namespace Qowaiv.UnitTests.Identifiers
         public void IsValid_String(string str)
         {
             Assert.IsTrue(Id<ForGuid>.IsValid(str));
+        }
+    
+        [Test]
+        public void GetCodeType_String()
+        {
+            var convertable = (IConvertible)TestStruct;
+            Assert.AreEqual(TypeCode.String, convertable.GetTypeCode());
         }
     }
 

@@ -7,7 +7,7 @@ namespace Qowaiv.UnitTests
     {
         private static readonly DateTime TestDateTime = new DateTime(2017, 06, 11, 06, 15, 00);
         private static readonly Func<DateTime> TestTimeFunction = () => TestDateTime;
-        private static readonly TimeZoneInfo TestTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. Australia Standard Time");
+        private static readonly TimeZoneInfo TestTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Australia/Melbourne");
 
         [Test]
         public void UtcNow_Default_EqualsSystemDateTimeNowUtc()

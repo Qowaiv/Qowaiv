@@ -104,6 +104,13 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        public void TryCreate_Int_Successful()
+        {
+            Assert.IsTrue(Id<ForInt64>.TryCreate(13L, out var id));
+            Assert.AreEqual(Id<ForInt64>.Parse("13"), id);
+        }
+
+        [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
             using (new CultureInfoScope("en-GB"))
@@ -347,6 +354,13 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var actual = JsonTester.Read<Id<ForInt64>>(json);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ToJson_TestStruct_LongValue()
+        {
+            var json = TestStruct.ToJson();
+            Assert.AreEqual(123456789L, json);
         }
 
         [Test]
@@ -602,6 +616,14 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             Assert.IsTrue(Id<ForInt64>.IsValid(str));
         }
+
+        [Test]
+        public void GetCodeType_String()
+        {
+            var convertable = (IConvertible)TestStruct;
+            Assert.AreEqual(TypeCode.Int64, convertable.GetTypeCode());
+        }
+
     }
 
     [Serializable]

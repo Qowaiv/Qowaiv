@@ -140,6 +140,13 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        public void TryCreate_Int_Successful()
+        {
+            Assert.IsTrue(Id<ForInt32>.TryCreate(13, out var id));
+            Assert.AreEqual(Id<ForInt32>.Parse("13"), id);
+        }
+
+        [Test]
         public void Constructor_SerializationInfoIsNull_Throws()
         {
             Assert.Catch<ArgumentNullException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForInt32>>(null, default));
@@ -347,6 +354,13 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var actual = JsonTester.Read<Id<ForInt32>>(json);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ToJson_TestStruct_LongValue()
+        {
+            var json = TestStruct.ToJson();
+            Assert.AreEqual(123456789L, json);
         }
 
         [Test]
@@ -601,6 +615,13 @@ namespace Qowaiv.UnitTests.Identifiers
         public void IsValid_String(string str)
         {
             Assert.IsTrue(Id<ForInt32>.IsValid(str));
+        }
+
+        [Test]
+        public void GetCodeType_String()
+        {
+            var convertable = (IConvertible)TestStruct;
+            Assert.AreEqual(TypeCode.Int32, convertable.GetTypeCode());
         }
     }
 

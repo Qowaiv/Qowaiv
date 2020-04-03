@@ -443,6 +443,9 @@ namespace Qowaiv.IO
         /// <summary>Gets an XML string representation of the stream size.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
+        /// <summary>Bind XML value.</summary>
+        partial void OnReadXml(StreamSize value) => m_Value = value.m_Value;
+
         private string ToFormattedString(IFormatProvider formatProvider, Match match)
         {
             var format = match.Groups["format"].Value;

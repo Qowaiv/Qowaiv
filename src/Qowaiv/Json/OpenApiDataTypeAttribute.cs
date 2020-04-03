@@ -29,7 +29,7 @@ namespace Qowaiv.Json
             Format = format;
             Nullable = nullable;
             Pattern = pattern;
-            Enum = @enum is null ? null : @enum.Split(',');
+            Enum = @enum?.Split(',');
         }
 
         /// <summary>Gets the bound .NET type of the OpenAPI Data Type.</summary>

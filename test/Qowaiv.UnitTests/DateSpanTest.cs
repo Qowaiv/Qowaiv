@@ -15,6 +15,8 @@ namespace Qowaiv.UnitTests
     {
         /// <summary>The test instance for most tests.</summary>
         public static readonly DateSpan TestStruct = new DateSpan(10, 3, -5);
+        public static readonly DateSpan Smaller = new DateSpan(10, 3, -5);
+        public static readonly DateSpan Bigger = new DateSpan(10, 3, +02);
 
         #region date span const tests
 
@@ -547,8 +549,47 @@ namespace Qowaiv.UnitTests
             "Argument must be DateSpan."
             );
         }
+
+        [Test]
+        public void Smaller_LessThan_Bigger_IsTrue()
+        {
+            Assert.IsTrue(Smaller < Bigger);
+        }
+        [Test]
+        public void Bigger_GreaterThan_Smaller_IsTrue()
+        {
+            Assert.IsTrue(Bigger > Smaller);
+        }
+
+        [Test]
+        public void Smaller_LessThanOrEqual_Bigger_IsTrue()
+        {
+            Assert.IsTrue(Smaller <= Bigger);
+        }
+        [Test]
+        public void Bigger_GreaterThanOrEqual_Smaller_IsTrue()
+        {
+            Assert.IsTrue(Bigger >= Smaller);
+        }
+
+        [Test]
+        public void Smaller_LessThanOrEqual_Smaller_IsTrue()
+        {
+            var left = Smaller;
+            var right = Smaller;
+            Assert.IsTrue(left <= right);
+        }
+
+        [Test]
+        public void Smaller_GreaterThanOrEqual_Smaller_IsTrue()
+        {
+            var left = Smaller;
+            var right = Smaller;
+            Assert.IsTrue(left >= right);
+        }
+
         #endregion
-    
+
         #region Properties
 
         [TestCase(1, 2, +3)]
@@ -598,6 +639,19 @@ namespace Qowaiv.UnitTests
         #endregion
 
         #region Operations
+
+        [Test]
+        public void Negate_TestStruct_Negated()
+        {
+            var negated = -TestStruct;
+            Assert.AreEqual(new DateSpan(-10, -3, +5), negated);
+        }
+        [Test]
+        public void Pluse_TestStruct_Unchanged()
+        {
+            var negated = +TestStruct;
+            Assert.AreEqual(TestStruct, negated);
+        }
 
         [Test]
         public void Mutate_Overflows()

@@ -384,7 +384,11 @@ namespace Qowaiv.Financial
         }
 
         /// <remarks>Sets the currency.</remarks>
-        partial void OnReadXml(Money other) => m_Currency = other.m_Currency;
+        partial void OnReadXml(Money value)
+        {
+            m_Value = value.m_Value;
+            m_Currency = value.m_Currency;
+        }
 
         /// <summary>Deserializes the money from a JSON number.</summary>
         /// <param name="json">

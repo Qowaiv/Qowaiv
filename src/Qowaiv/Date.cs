@@ -391,6 +391,9 @@ namespace Qowaiv
             return m_Value.ToString(f, formatProvider);
         }
 
+        /// <summary>Bind XML value.</summary>
+        partial void OnReadXml(Date value) => m_Value = value.m_Value;
+
         /// <summary>Gets an XML string representation of the @FullName.</summary>
         private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 

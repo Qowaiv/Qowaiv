@@ -3,7 +3,7 @@
   <Import Project="..\..\props\nopackage.props" />
   
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
-using Qowaiv.UnitTests.Globalization;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -578,7 +578,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_PercentageFaIR_FormattedString()
         {
-            using (new CultureInfoScope(TestCulture.Fa_IR))
+            using (new CultureInfoScope(TestCultures.Fa_IR))
             {
                 Assert.AreEqual("٪31,415", ((Percentage).31415).ToString());
             }

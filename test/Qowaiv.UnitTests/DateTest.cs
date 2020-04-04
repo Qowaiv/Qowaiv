@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
-using Qowaiv.UnitTests.Globalization;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TyrParse_NotADate_IsNotValid()
         {
-            using (new CultureInfoScope(TestCulture.Nl_NL))
+            using (new CultureInfoScope(TestCultures.Nl_NL))
             {
                 string str = "not a date";
 

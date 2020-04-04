@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
-using Qowaiv.UnitTests.Globalization;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -570,7 +570,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_TestStructs_FormattedString()
         {
-            using (new CultureInfoScope(TestCulture.Nl_BE))
+            using (new CultureInfoScope(TestCultures.Nl_BE))
             {
                 var act = TestStruct.ToString("s");
                 var exp = "feb.";
@@ -592,7 +592,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_TestStructMLower_FormattedString()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (new CultureInfoScope(TestCultures.Nl_BE))
             {
                 var act = TestStruct.ToString("m");
                 var exp = "02";

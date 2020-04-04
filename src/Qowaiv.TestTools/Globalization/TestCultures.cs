@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 
-namespace Qowaiv.UnitTests.Globalization
+namespace Qowaiv.TestTools.Globalization
 {
-    /// <summary>Represents customized test <see cref="CultureInfo"/>'s.</summary>
-    public static class TestCulture
+    /// <summary>Contains <see cref="CultureInfo"/>'s for test purposes.</summary>
+    public static class TestCultures
     {
-        /// <summary>Gets an Iranian <see cref="CultureInfo"/>.</summary>
+        /// <summary>Gets the Iranian (fa-IR) <see cref="CultureInfo"/>.</summary>
         public static CultureInfo Fa_IR
         {
             get
@@ -17,8 +17,10 @@ namespace Qowaiv.UnitTests.Globalization
             }
         }
 
+        /// <summary>Gets the Dutch (nl-NL) <see cref="CultureInfo"/>.</summary>
         public static CultureInfo Nl_NL => new CultureInfo("nl-NL");
 
+        /// <summary>Gets the Flemish (nl-BE) <see cref="CultureInfo"/>.</summary>
         public static CultureInfo Nl_BE
         {
             get
@@ -29,7 +31,7 @@ namespace Qowaiv.UnitTests.Globalization
                     "jan.",
                     "feb.",
                     "mrt.",
-                    "april",
+                    "apr.",
                     "mei",
                     "juni",
                     "juli",
@@ -37,7 +39,8 @@ namespace Qowaiv.UnitTests.Globalization
                     "sep.",
                     "okt.",
                     "nov.",
-                    "dec."
+                    "dec.",
+                    ""
                 };
 
                 return culture;

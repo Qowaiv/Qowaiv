@@ -15,7 +15,7 @@ jobs:
       - name: Generate coverage report
         run: dotnet test /p:CollectCoverage=true /p:Threshold=80 /p:ThresholdType=branch /p:ThresholdStat=total /p:CoverletOutputFormat=lcov
       - name: Publish coverage report to coveralls.io
-        uses: coverallsapp/github-action@v1.0.1
+        uses: coverallsapp/github-action@enable-code-coverage
         with:
           github-token: ${{ secrets.coveralls_io }}
           path-to-lcov: ./test/Qowaiv.UnitTests/coverage.info   

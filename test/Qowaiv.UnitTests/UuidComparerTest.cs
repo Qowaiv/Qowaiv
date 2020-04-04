@@ -6,6 +6,9 @@ namespace Qowaiv.UnitTests
 {
     public class UuidComparerTest
     {
+        private readonly Guid guid = Guid.Parse("40E56044-F781-43BD-A4AE-AA08882B4E28");
+        private readonly Uuid uuid = Uuid.Parse("BD411BB9-D8C9-4A4F-B739-57F2312E0BC5");
+
         /// <summary>Proves that the<paramref name="index0"/> has an higher priority than the paired
         /// <paramref name="index1"/>.
         /// </summary>
@@ -41,7 +44,6 @@ namespace Qowaiv.UnitTests
             return new Guid(bytes);
         }
 
-
         [Test]
         public void Compare_Default_IsOrderComarerGuidDefault()
         {
@@ -54,6 +56,54 @@ namespace Qowaiv.UnitTests
             uuids.Sort(UuidComparer.Default);
 
             CollectionAssert.IsOrdered(uuids, Comparer<Guid>.Default);
+        }
+    
+        [Test]
+        public void Compare_NullNull_Zero()
+        {
+            Assert.AreEqual(0, UuidComparer.Default.Compare(null, null));
+        }
+
+        [Test]
+        public void Compare_NullGuid_Minus1()
+        {
+            Assert.AreEqual(-1, UuidComparer.Default.Compare(null, Guid.NewGuid()));
+        }
+
+        [Test]
+        public void Compare_NullUuid_Minus1()
+        {
+            Assert.AreEqual(-1, UuidComparer.Default.Compare(null, Uuid.NewUuid()));
+        }
+
+        [Test]
+        public void Compare_GuidNull_Plus1()
+        {
+            Assert.AreEqual(+1, UuidComparer.Default.Compare(Guid.NewGuid(), null));
+        }
+
+        [Test]
+        public void Compare_UuidNull_Plus1()
+        {
+            Assert.AreEqual(+1, UuidComparer.Default.Compare(Uuid.NewUuid(), null));
+        }
+
+        [Test]
+        public void Compare_GuidUuid_Minus1()
+        {
+            Assert.AreEqual(-1, UuidComparer.Default.Compare((object)guid, (object)uuid));
+        }
+
+        [Test]
+        public void Compare_UuidGuid_Plus1()
+        {
+            Assert.AreEqual(+1, UuidComparer.Default.Compare((object)uuid, (object)guid));
+        }
+
+        [Test]
+        public void Compare_UuidObject_Throws()
+        {
+            Assert.Throws<NotSupportedException>(() => UuidComparer.Default.Compare((object)uuid, new object()));
         }
     }
 }

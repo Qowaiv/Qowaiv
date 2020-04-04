@@ -236,6 +236,22 @@ var rounded = money.Round(0); // EUR 125.00
 ### Country
 Represents a country based on an ISO 3166-1 code (or 3166-3 if the country does not longer exists).
 
+### CultureInfoScope
+A CultureInfoScope is a class that allows to specify the current (UI) for the
+duration/lifetime of specified scope.
+
+``` C#
+using(new CultureInfoScope("es-ES"))
+{
+    Console.WriteLine(234.12.ToString()); // 234,12
+}
+// or with an extension
+using(new CultureInfo("en-ES").Scoped())
+{
+    // ...
+}
+```
+
 ## Qowaiv mathimatical types
 
 ### Fraction

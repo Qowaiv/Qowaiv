@@ -505,6 +505,9 @@ namespace Qowaiv
         /// <summary>Gets an XML string representation of the @FullName.</summary>
         private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
+        /// <summary>Bind XML value.</summary>
+        partial void OnReadXml(LocalDateTime value) => m_Value = value.m_Value;
+
         #region (Explicit) casting
 
         /// <summary>Casts a local date time to a <see cref="string"/>.</summary>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NUnit.Framework;
 using Qowaiv.Globalization;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests
         [Test]
         public async Task BindModelAsync_InvalidDate_ErrorMessage()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var context = GetBindingContext(typeof(Date));
                 context.ValueProvider = new SimpleValueProvider { { TheModelName, "Rubbish" } };

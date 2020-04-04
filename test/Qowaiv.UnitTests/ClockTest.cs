@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.TestTools.Globalization;
 using System;
 
 namespace Qowaiv.UnitTests
@@ -7,7 +8,7 @@ namespace Qowaiv.UnitTests
     {
         private static readonly DateTime TestDateTime = new DateTime(2017, 06, 11, 06, 15, 00);
         private static readonly Func<DateTime> TestTimeFunction = () => TestDateTime;
-        private static readonly TimeZoneInfo TestTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. Australia Standard Time");
+        private static readonly TimeZoneInfo TestTimeZone = TestTimeZones.EastAustraliaStandardTime;
 
         [Test]
         public void UtcNow_Default_EqualsSystemDateTimeNowUtc()
@@ -120,7 +121,7 @@ namespace Qowaiv.UnitTests
         {
             using (Clock.SetTimeForCurrentThread(TestTimeFunction))
             {
-                var act = Clock.Today(TimeZoneInfo.FindSystemTimeZoneById("Alaskan Standard Time"));
+                var act = Clock.Today(TestTimeZones.AlaskanStandardTime);
                 var exp = new Date(2017, 06, 10);
 
                 Assert.AreEqual(exp, act);

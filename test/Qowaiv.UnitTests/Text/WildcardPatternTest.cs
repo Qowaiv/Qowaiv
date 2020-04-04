@@ -99,7 +99,7 @@ namespace Qowaiv.UnitTests.Text
         [TestCase("ıg*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
         public void IsMatch(string pattern, string input, bool isMatch, WildcardPatternOptions options = default, StringComparison comparsionType = default, string culture = null)
         {
-            using (culture is null ? CultureInfoScope.NewInvariant() : new CultureInfoScope("tr-TR"))
+            using (culture is null ? CultureInfoScope.NewInvariant() : new CultureInfoScope(culture))
             {
                 var actual = WildcardPattern.IsMatch(pattern, input, options, comparsionType);
                 Assert.AreEqual(isMatch, actual, "'{0}' should {2} match '{1}', with {3} and {4}.", pattern, input, isMatch ? "" : "not ", options, comparsionType);

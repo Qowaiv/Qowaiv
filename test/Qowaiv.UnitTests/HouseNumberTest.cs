@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -156,7 +157,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = HouseNumber.Parse("?");
                 var exp = HouseNumber.Unknown;
@@ -167,7 +168,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -181,7 +182,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = HouseNumber.TryParse(exp.ToString());
@@ -193,7 +194,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(HouseNumber);
                 var act = HouseNumber.TryParse("InvalidInput");
@@ -529,7 +530,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = HouseNumber.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -540,7 +541,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = HouseNumber.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -923,7 +924,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringNull_HouseNumberEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, (string)null);
             }
@@ -932,7 +933,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringEmpty_HouseNumberEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, string.Empty);
             }
@@ -941,7 +942,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -950,7 +951,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

@@ -5,6 +5,14 @@ namespace Qowaiv.UnitTests
 {
     public class DateSpanOperationTest
     {
+        [Test]
+        public void Add_DateSpan_ShouldAddDaysSecond()
+        {
+            var date = new DateTime(1999, 01, 30);
+            var span = DateSpan.FromMonths(1);
+            Assert.AreEqual(new DateTime(1999,02,28), date.Add(span));
+        }
+
         [TestCase("1999-01-30", "1999-02-28", 1, +0, false)]
         [TestCase("2000-01-30", "2000-02-29", 1, +0, false)]
         [TestCase("1999-01-30", "1999-02-27", 1, -1, false)]

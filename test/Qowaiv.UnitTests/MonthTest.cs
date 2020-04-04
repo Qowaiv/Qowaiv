@@ -170,7 +170,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = Month.Parse("?");
                 var exp = Month.Unknown;
@@ -181,7 +181,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -195,7 +195,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = Month.TryParse(exp.ToString());
@@ -207,7 +207,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_NullCulture_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 Assert.IsTrue(Month.TryParse(exp.ShortName, null, out Month act));
@@ -218,7 +218,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(Month);
                 var act = Month.TryParse("InvalidInput");
@@ -1034,7 +1034,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringNull_MonthEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Month.Empty, (string)null);
             }
@@ -1043,7 +1043,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringEmpty_MonthEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Month.Empty, string.Empty);
             }
@@ -1052,7 +1052,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -1061,7 +1061,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

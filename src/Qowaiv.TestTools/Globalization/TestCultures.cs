@@ -5,6 +5,9 @@ namespace Qowaiv.TestTools.Globalization
     /// <summary>Contains <see cref="CultureInfo"/>'s for test purposes.</summary>
     public static class TestCultures
     {
+        /// <summary>Gets the Britsh (en-GB) <see cref="CultureInfo"/>.</summary>
+        public static CultureInfo En_GB => new CultureInfo("en-GB");
+
         /// <summary>Gets the Iranian (fa-IR) <see cref="CultureInfo"/>.</summary>
         public static CultureInfo Fa_IR
         {

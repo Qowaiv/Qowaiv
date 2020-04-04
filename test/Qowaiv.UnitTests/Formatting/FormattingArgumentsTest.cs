@@ -2,6 +2,7 @@
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
@@ -50,7 +51,7 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_7_7Dot000()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 string act = new FormattingArguments("0.000").ToString((Object)7);
                 string exp = "7.000";

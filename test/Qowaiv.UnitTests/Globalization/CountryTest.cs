@@ -153,7 +153,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -167,7 +167,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = Country.TryParse(exp.ToString());
@@ -179,7 +179,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(Country);
                 var act = Country.TryParse("InvalidInput");
@@ -786,7 +786,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Name_Empty_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = "";
                 var act = Country.Empty.Name;
@@ -796,7 +796,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Name_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = "?";
                 var act = Country.Unknown.Name;
@@ -806,7 +806,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Name_TestStruct_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = "VA";
                 var act = TestStruct.Name;
@@ -817,7 +817,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void DisplayName_Empty_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = "";
                 var act = Country.Empty.DisplayName;
@@ -827,7 +827,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void DisplayName_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = "Unknown";
                 var act = Country.Unknown.DisplayName;
@@ -837,7 +837,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void DisplayName_TestStruct_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = "Holy See";
                 var act = TestStruct.DisplayName;
@@ -847,7 +847,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void GetDisplayName_TestStruct_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = "Holy See";
                 var act = TestStruct.GetDisplayName(null);
@@ -1034,7 +1034,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void ConvertFrom_StringNull_CountryEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Country.Empty, (string)null);
             }
@@ -1043,7 +1043,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void ConvertFrom_StringEmpty_CountryEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Country.Empty, string.Empty);
             }
@@ -1052,7 +1052,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(CountryTest.TestStruct, CountryTest.TestStruct.ToString());
             }
@@ -1061,7 +1061,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(CountryTest.TestStruct.ToString(), CountryTest.TestStruct);
             }

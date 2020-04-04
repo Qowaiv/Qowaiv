@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -92,7 +93,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -106,7 +107,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = Uuid.TryParse(exp.ToString());
@@ -118,7 +119,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(Uuid);
                 var act = Uuid.TryParse("InvalidInput");
@@ -669,7 +670,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringNull_UuidEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Uuid.Empty, (string)null);
             }
@@ -678,7 +679,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringEmpty_UuidEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Uuid.Empty, string.Empty);
             }
@@ -687,7 +688,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -696,7 +697,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

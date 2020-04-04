@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -138,7 +139,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = Year.Parse("?");
                 var exp = Year.Unknown;
@@ -149,7 +150,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -163,7 +164,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = Year.TryParse(exp.ToString());
@@ -175,7 +176,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(Year);
                 var act = Year.TryParse("InvalidInput");
@@ -815,7 +816,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringNull_YearEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Year.Empty, (string)null);
             }
@@ -824,7 +825,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringEmpty_YearEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Year.Empty, string.Empty);
             }
@@ -833,7 +834,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -842,7 +843,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

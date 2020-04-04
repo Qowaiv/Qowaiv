@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -177,7 +178,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void Parse_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = YesNo.Parse("?");
                 var exp = YesNo.Unknown;
@@ -188,7 +189,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -202,7 +203,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = YesNo.TryParse(exp.ToString());
@@ -214,7 +215,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(YesNo);
                 var act = YesNo.TryParse("InvalidInput");
@@ -790,7 +791,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void ConvertFrom_StringNull_YesNoEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(YesNo.Empty, (string)null);
             }
@@ -799,7 +800,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void ConvertFrom_StringEmpty_YesNoEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(YesNo.Empty, string.Empty);
             }
@@ -808,7 +809,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -817,7 +818,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

@@ -2,6 +2,7 @@
 using Qowaiv.Globalization;
 using Qowaiv.IO;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -60,7 +61,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -74,7 +75,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = StreamSize.TryParse(exp.ToString());
@@ -86,7 +87,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(StreamSize);
                 var act = StreamSize.TryParse("InvalidInput");
@@ -602,7 +603,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = StreamSize.Parse("1600.1").ToString();
                 var exp = "1600 byte";
@@ -624,7 +625,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = StreamSize.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -1264,7 +1265,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -1273,7 +1274,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

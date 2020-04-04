@@ -2,6 +2,7 @@
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -139,7 +140,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Parse_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = BusinessIdentifierCode.Parse("?");
                 var exp = BusinessIdentifierCode.Unknown;
@@ -150,7 +151,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -164,7 +165,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = BusinessIdentifierCode.TryParse(exp.ToString());
@@ -176,7 +177,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(BusinessIdentifierCode);
                 var act = BusinessIdentifierCode.TryParse("InvalidInput");
@@ -801,7 +802,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFrom_StringNull_BusinessIdentifierCodeEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(BusinessIdentifierCode.Empty, (string)null);
             }
@@ -810,7 +811,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFrom_StringEmpty_BusinessIdentifierCodeEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(BusinessIdentifierCode.Empty, string.Empty);
             }
@@ -819,7 +820,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -828,7 +829,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

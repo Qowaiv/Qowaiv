@@ -2,6 +2,7 @@
 using Qowaiv.Globalization;
 using Qowaiv.Mathematics;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -94,7 +95,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>(() =>
                 {
@@ -107,7 +108,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = Fraction.TryParse(exp.ToString());
@@ -118,7 +119,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(Fraction);
                 var act = Fraction.TryParse("InvalidInput");
@@ -627,7 +628,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void ConvertFrom_StringNull_FractionEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Fraction.Zero, (string)null);
             }
@@ -636,7 +637,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void ConvertFrom_StringEmpty_FractionEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Fraction.Zero, string.Empty);
             }
@@ -645,7 +646,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -654,7 +655,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

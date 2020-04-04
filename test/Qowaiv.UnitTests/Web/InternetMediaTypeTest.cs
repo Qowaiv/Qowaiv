@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using Qowaiv.Web;
 using System;
 using System.Collections.Generic;
@@ -151,7 +152,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void Parse_Unknown_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = InternetMediaType.Parse("?");
                 var exp = InternetMediaType.Unknown;
@@ -162,7 +163,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -176,7 +177,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = InternetMediaType.TryParse(exp.ToString());
@@ -188,7 +189,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(InternetMediaType);
                 var act = InternetMediaType.TryParse("InvalidInput");
@@ -901,7 +902,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ConvertFrom_StringNull_InternetMediaTypeEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(InternetMediaType.Empty, (string)null);
             }
@@ -910,7 +911,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ConvertFrom_StringEmpty_InternetMediaTypeEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(InternetMediaType.Empty, string.Empty);
             }
@@ -919,7 +920,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -928,7 +929,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

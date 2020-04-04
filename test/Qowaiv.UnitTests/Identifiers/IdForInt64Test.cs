@@ -2,6 +2,7 @@
 using Qowaiv.Globalization;
 using Qowaiv.Identifiers;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -113,7 +114,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>(() =>
                 {
@@ -127,7 +128,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = Id<ForInt64>.TryParse(exp.ToString());
@@ -138,7 +139,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(Id<ForInt64>);
                 var act = Id<ForInt64>.TryParse("InvalidInput");
@@ -561,7 +562,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFrom_StringNull_IdForInt64Empty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForInt64>.Empty, (string)null);
             }
@@ -570,7 +571,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFrom_StringEmpty_IdForInt64_Empty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForInt64>.Empty, string.Empty);
             }
@@ -579,7 +580,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -588,7 +589,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

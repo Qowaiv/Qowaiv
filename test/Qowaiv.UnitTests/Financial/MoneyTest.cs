@@ -2,6 +2,7 @@
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -55,7 +56,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -69,7 +70,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = TestStruct;
                 var act = Money.TryParse("€42.17");
@@ -81,7 +82,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var exp = default(Money);
                 var act = Money.TryParse("InvalidInput");
@@ -383,7 +384,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = Money.Parse("EUR 1600.1").ToString();
                 var exp = "€1,600.10";
@@ -394,7 +395,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_AED_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = Money.Parse("AED 1600.1").ToString();
                 var exp = "AED1,600.10";
@@ -416,7 +417,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 var act = Money.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -1046,7 +1047,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFrom_StringEmpty_MoneyEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(Money.Zero, "0");
             }
@@ -1055,7 +1056,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -1064,7 +1065,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (new CultureInfoScope(TestCultures.En_GB))
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

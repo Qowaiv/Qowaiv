@@ -13,7 +13,7 @@ jobs:
         with:
            dotnet-version: 3.1.100
       - name: Generate coverage report
-        run: dotnet test /p:CollectCoverage=true /p:ThresholdType=branch /p:CoverletOutputFormat=lcov /p:CoverletOutput='./test/Qowaiv.UnitTests/coverage.info'
+        run: dotnet test /p:CollectCoverage=true /p:Threshold=99 /p:ThresholdType=branch /p:ThresholdStat=total /p:CoverletOutputFormat=lcov
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@v1.0.1
         with:

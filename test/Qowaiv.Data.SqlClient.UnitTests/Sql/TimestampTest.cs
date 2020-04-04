@@ -408,7 +408,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Timestamp.Parse("1600").ToString();
                 var exp = "0x0000000000000640";
@@ -419,7 +419,7 @@ namespace Qowaiv.UnitTests.Sql
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Timestamp.Parse("800").ToString("0000");
                 var exp = "0800";

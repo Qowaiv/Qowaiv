@@ -361,7 +361,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Elo.Parse("1600,1").ToString();
                 var exp = "1600,1";
@@ -383,7 +383,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Elo.Parse("800").ToString("0000");
                 var exp = "0800";

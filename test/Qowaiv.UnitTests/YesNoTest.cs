@@ -157,7 +157,7 @@ namespace Qowaiv.Fiancial.UnitTests
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            using (new CultureInfoScope("en"))
+            using (TestCultures.En.Scoped())
             {
                 string str = "yes";
                 Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");

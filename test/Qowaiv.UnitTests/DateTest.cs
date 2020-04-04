@@ -387,7 +387,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("");
                 var exp = "14/02/1970";
@@ -645,7 +645,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_StringToDate_AreEqual()
         {
-            using (new CultureInfoScope("es-EQ"))
+            using (TestCultures.Es_EC.Scoped())
             {
                 var exp = TestStruct;
                 var act = (Date)TestStruct.ToString(CultureInfo.CurrentCulture);

@@ -430,7 +430,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_b_AreEqual()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = TestStruct.ToString("#,##0b");
                 var exp = "123.456.789b";
@@ -441,7 +441,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_kB_AreEqual()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = TestStruct.ToString("#,##0.00 kB");
                 var exp = "123.456,79 kB";
@@ -452,7 +452,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_MegaByte_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0.0 MegaByte");
                 var exp = "123,5 MegaByte";
@@ -463,7 +463,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_Negative_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = (-TestStruct).ToString("0.0 F");
                 var exp = "-123,5 Megabyte";
@@ -474,7 +474,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_GB_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0.00GB");
                 var exp = "0,12GB";
@@ -485,7 +485,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_GiB_AreEqual()
         {
-            using (new CultureInfoScope("de-DE"))
+            using (TestCultures.De_DE.Scoped())
             {
                 var act = TestStruct.ToString("0.0000 GiB");
                 var exp = "0,1150 GiB";
@@ -496,7 +496,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_tb_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.PB.ToString("tb");
                 var exp = "1000tb";
@@ -507,7 +507,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_pb_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.TB.ToString(" petabyte");
                 var exp = "0,001 petabyte";
@@ -518,7 +518,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_Exabyte_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.MaxValue.ToString("#,##0.## Exabyte");
                 var exp = "9,22 Exabyte";
@@ -529,7 +529,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceF_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("#,##0.## F");
                 var exp = "123,46 Megabyte";
@@ -539,7 +539,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceFLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0 f");
                 var exp = "123 megabyte";
@@ -550,7 +550,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceS_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0000 S");
                 var exp = "0123 MB";
@@ -560,7 +560,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceSLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0 s");
                 var exp = "123 mb";
@@ -570,7 +570,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_SLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0s");
                 var exp = "123mb";
@@ -581,7 +581,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_SpaceSiLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0.0 si");
                 var exp = "117,7 mib";
@@ -592,7 +592,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.Parse("1600,1").ToString();
                 var exp = "1600 byte";
@@ -614,7 +614,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.Parse("800").ToString("0000 byte");
                 var exp = "0800 byte";

@@ -476,7 +476,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_NullFormatProvider_FormattedString()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var act = TestStruct.ToString("f", null);
                 var exp = "Masculin";
@@ -495,7 +495,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToStringEmptyFormat_TestStruct_IsStringEmpty()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = TestStruct.ToString("");
                 var exp = "Mannelijk";
@@ -575,7 +575,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_esEC_AreEqual()
         {
-            using (new CultureInfoScope("es-EC"))
+            using (TestCultures.Es_EC.Scoped())
             {
                 ToStringAssert
                 (
@@ -614,7 +614,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_nlBE_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 ToStringAssert
                 (
@@ -953,7 +953,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DisplayName_None_AreEqual()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var exp = "Masculin";
                 var act = TestStruct.DisplayName;

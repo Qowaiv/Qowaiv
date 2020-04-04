@@ -389,7 +389,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Amount.Parse("1600,1").ToString();
                 var exp = "1600,1";
@@ -411,7 +411,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Amount.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -504,7 +504,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            using (new CultureInfoScope("en-US"))
+            using (TestCultures.En_US.Scoped())
             {
                 var l = Amount.Parse("$ 1,451.070");
                 var r = Amount.Parse("1451.07");

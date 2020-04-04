@@ -42,7 +42,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Current_CurrentCultureDeDE_Germany()
         {
-            using (new CultureInfoScope("de-DE"))
+            using (TestCultures.De_DE.Scoped())
             {
                 var act = Country.Current;
                 var exp = Country.DE;
@@ -54,7 +54,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Current_CurrentCultureEsEC_Ecuador()
         {
-            using (new CultureInfoScope("es-EC"))
+            using (TestCultures.Es_EC.Scoped())
             {
                 var act = Country.Current;
                 var exp = Country.EC;
@@ -66,7 +66,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Current_CurrentCultureEn_Empty()
         {
-            using (new CultureInfoScope("en"))
+            using (TestCultures.En.Scoped())
             {
                 var act = Country.Current;
                 var exp = Country.Empty;
@@ -589,7 +589,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var l = Country.Parse("België");
                 var r = Country.Parse("belgie");

@@ -36,7 +36,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TyrParse_StringValue_IsValid()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 Money exp = 42.17 + Currency.EUR;
                 Assert.IsTrue(Money.TryParse("€42,17", out Money act), "Valid");
@@ -94,7 +94,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Parse_EuroSpace12_Parsed()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var exp = 12 + Currency.EUR;
                 var act = Money.Parse("€ 12");
@@ -105,7 +105,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Parse_Min12Comma765SpaceEuro_Parsed()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var exp = -12.765 + Currency.EUR;
                 var act = Money.Parse("-12,765 €");
@@ -360,7 +360,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0.00");
                 var exp = "42,17";
@@ -371,7 +371,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 // 3: n $
                 CultureInfo.CurrentCulture.NumberFormat.CurrencyPositivePattern = 3;
@@ -406,7 +406,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Money.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -658,7 +658,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Explicit_StringToMoney_AreEqual()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var exp = TestStruct;
                 var act = (Money)TestStruct.ToString(CultureInfo.CurrentCulture);

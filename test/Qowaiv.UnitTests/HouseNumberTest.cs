@@ -530,7 +530,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = HouseNumber.Parse("800").ToString("0000");
                 var exp = "0800";

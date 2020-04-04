@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Globalization;
 
@@ -49,7 +50,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_DecimalWithFormatCollection_FormattedString()
         {
-            using (new CultureInfoScope("es-Es"))
+            using (TestCultures.Es_EC.Scoped())
             {
                 var collection = new FormattingArgumentsCollection();
                 collection.Add(typeof(Decimal), "0.000");
@@ -63,7 +64,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_DecimalWithNullCollection_FormattedString()
         {
-            using (new CultureInfoScope("es-Es"))
+            using (TestCultures.Es_EC.Scoped())
             {
                 var collection = (FormattingArgumentsCollection)null;
 

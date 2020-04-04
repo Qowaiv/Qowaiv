@@ -441,7 +441,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_NullFormatProvider_FormattedString()
         {
-            using (new CultureInfoScope("en-US"))
+            using (TestCultures.En_US.Scoped())
             {
                 var act = TestStruct.ToString(@"y-\WW-d", null);
                 var exp = "1997-W14-6";

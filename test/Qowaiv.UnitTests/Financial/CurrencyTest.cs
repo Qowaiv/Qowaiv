@@ -34,7 +34,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Current_CurrentCultureNlNL_Germany()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = Currency.Current;
                 var exp = Currency.EUR;
@@ -46,7 +46,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Current_CurrentCultureEsEC_Ecuador()
         {
-            using (new CultureInfoScope("es-EC"))
+            using (TestCultures.Es_EC.Scoped())
             {
                 var act = Currency.Current;
                 var exp = Currency.USD;
@@ -58,7 +58,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Current_CurrentCultureEn_Empty()
         {
-            using (new CultureInfoScope("en"))
+            using (TestCultures.En.Scoped())
             {
                 var act = Currency.Current;
                 var exp = Currency.Empty;
@@ -504,7 +504,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Currency.Parse("Amerikaanse dollar").ToString();
                 var exp = "USD";

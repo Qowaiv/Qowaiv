@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
+[![Build Status](https://github.com/Qowaiv/Qowaiv/workflows/.NET%20Core%203.1%20Build%20%26%20Test/badge.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Qowaiv/Qowaiv/badge.svg?branch=master)](https://coveralls.io/github/Qowaiv/Qowaiv?branch=master)
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|

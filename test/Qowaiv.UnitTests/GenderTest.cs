@@ -51,7 +51,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -65,7 +65,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_NotKnown_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = Gender.Unknown;
                 var act = Gender.Parse("Not known");
@@ -124,7 +124,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Gender.TryParse(exp.ToString());
@@ -136,7 +136,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(Gender);
                 var act = Gender.TryParse("InvalidInput");
@@ -152,7 +152,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Create_Nullable17_ThrowsArgumentOutOfRangeException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 ExceptionAssert.CatchArgumentOutOfRangeException(() =>
                 {
@@ -165,7 +165,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Create_17_ThrowsArgumentOutOfRangeException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 ExceptionAssert.CatchArgumentOutOfRangeException(() =>
                 {
@@ -506,7 +506,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Gender.Male.ToString(@"\x f \format \\ random");
                 var exp = @"\x Male format \ random";
@@ -562,7 +562,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_enGB_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 ToStringAssert
                 (
@@ -1040,7 +1040,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringNull_GenderEmpty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Gender.Empty, (string)null);
             }
@@ -1049,7 +1049,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringEmpty_GenderEmpty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Gender.Empty, string.Empty);
             }
@@ -1058,7 +1058,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, "Male");
             }
@@ -1067,7 +1067,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals("Male", TestStruct);
             }

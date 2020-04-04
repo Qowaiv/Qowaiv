@@ -99,7 +99,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -113,7 +113,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = InternationalBankAccountNumber.TryParse(exp.ToString());
@@ -125,7 +125,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(InternationalBankAccountNumber);
                 var act = InternationalBankAccountNumber.TryParse("InvalidInput");
@@ -710,7 +710,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFrom_StringNull_InternationalBankAccountNumberEmpty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumber.Empty, (string)null);
             }
@@ -719,7 +719,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFrom_StringEmpty_InternationalBankAccountNumberEmpty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumber.Empty, string.Empty);
             }
@@ -728,7 +728,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumberTest.TestStruct, InternationalBankAccountNumberTest.TestStruct.ToString());
             }
@@ -737,7 +737,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(InternationalBankAccountNumberTest.TestStruct.ToString(), InternationalBankAccountNumberTest.TestStruct);
             }

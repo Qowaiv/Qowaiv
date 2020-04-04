@@ -51,7 +51,7 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_7_7Dot000()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 string act = new FormattingArguments("0.000").ToString((Object)7);
                 string exp = "7.000";

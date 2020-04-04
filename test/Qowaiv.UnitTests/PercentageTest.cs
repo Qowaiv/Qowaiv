@@ -94,7 +94,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -437,7 +437,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_Zero_0()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Zero.ToString();
                 var exp = "0%";
@@ -448,7 +448,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_ZeroNullFormat_0()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Zero.ToString((String)null);
                 var exp = "0";
@@ -459,7 +459,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToPercentageString_TestStruct_0()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = TestStruct.ToString();
                 var exp = "17.51%";
@@ -469,7 +469,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToPerMilleString_TestStruct_0()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = TestStruct.ToPerMilleString();
                 var exp = "175.1‰";
@@ -479,7 +479,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToPerTenThousandMarkString_TestStruct_0()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = TestStruct.ToPerTenThousandMarkString();
                 var exp = "1751‱";
@@ -511,7 +511,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Parse("1600.1").ToString();
                 var exp = "1600.1%";
@@ -533,7 +533,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -552,7 +552,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_PercentageEnGB_FormattedString()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.AreEqual("31.415%", ((Percentage).31415).ToString());
             }
@@ -600,7 +600,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToStringWithFormat_PercentageEnGB_FormattedString()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.AreEqual("11.11", ((Percentage).1111).ToString("0.00"));
                 Assert.AreEqual("022.22%", ((Percentage).2222).ToString("000.00%"));
@@ -1650,7 +1650,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -1659,7 +1659,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

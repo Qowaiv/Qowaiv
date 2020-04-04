@@ -98,7 +98,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -112,7 +112,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Date.TryParse(exp.ToString());
@@ -124,7 +124,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(Date);
                 var act = Date.TryParse("InvalidInput");
@@ -398,7 +398,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = new Date(1988, 08, 08).ToString("yy-M-d");
                 var exp = "88-8-8";
@@ -876,7 +876,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -896,7 +896,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

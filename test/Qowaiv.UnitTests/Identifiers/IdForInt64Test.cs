@@ -114,7 +114,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>(() =>
                 {
@@ -128,7 +128,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Id<ForInt64>.TryParse(exp.ToString());
@@ -139,7 +139,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(Id<ForInt64>);
                 var act = Id<ForInt64>.TryParse("InvalidInput");
@@ -562,7 +562,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFrom_StringNull_IdForInt64Empty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForInt64>.Empty, (string)null);
             }
@@ -571,7 +571,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFrom_StringEmpty_IdForInt64_Empty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForInt64>.Empty, string.Empty);
             }
@@ -580,7 +580,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -589,7 +589,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

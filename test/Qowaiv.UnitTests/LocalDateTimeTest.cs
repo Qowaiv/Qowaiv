@@ -72,7 +72,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStructNoMilliseconds;
                 var act = LocalDateTime.TryParse(exp.ToString());
@@ -98,7 +98,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(LocalDateTime);
                 var act = LocalDateTime.TryParse("InvalidInput");
@@ -389,7 +389,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var l = LocalDateTime.Parse("14 february 2010", CultureInfo.InvariantCulture);
                 var r = LocalDateTime.Parse("2010-02-14", CultureInfo.InvariantCulture);
@@ -528,7 +528,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_StringToLocalDateTime_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStructNoMilliseconds;
                 var act = (LocalDateTime)TestStructNoMilliseconds.ToString(CultureInfo.CurrentCulture);
@@ -688,7 +688,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(LocalDateTimeTest.TestStructNoMilliseconds, LocalDateTimeTest.TestStructNoMilliseconds.ToString());
             }
@@ -697,7 +697,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(LocalDateTimeTest.TestStruct.ToString(), LocalDateTimeTest.TestStruct);
             }

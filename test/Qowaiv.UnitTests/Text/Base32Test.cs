@@ -71,7 +71,7 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void GetBytes_Q0waiv_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Assert.Throws<FormatException>(() =>
                 {

@@ -169,7 +169,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_Unknown_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = PostalCode.Parse("?");
                 var exp = PostalCode.Unknown;
@@ -179,7 +179,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -193,7 +193,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = PostalCode.TryParse(exp.ToString());
@@ -205,7 +205,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(PostalCode);
                 var act = PostalCode.TryParse("InvalidInput");
@@ -780,7 +780,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringNull_PostalCodeEmpty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(PostalCode.Empty, (string)null);
             }
@@ -789,7 +789,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringEmpty_PostalCodeEmpty()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(PostalCode.Empty, string.Empty);
             }
@@ -798,7 +798,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -807,7 +807,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope(TestCultures.En_GB))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

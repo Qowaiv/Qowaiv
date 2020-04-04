@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
     <ProjectReference Include="..\Qowaiv.AspNetCore.Mvc.ModelBinding\Qowaiv.AspNetCore.Mvc.ModelBinding.csproj" />
   </ItemGroup>
 

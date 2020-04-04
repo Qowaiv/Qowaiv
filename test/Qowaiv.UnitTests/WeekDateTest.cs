@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -152,7 +153,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -166,7 +167,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = WeekDate.TryParse(exp.ToString());
@@ -178,7 +179,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(WeekDate);
                 var act = WeekDate.TryParse("InvalidInput");
@@ -440,7 +441,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_NullFormatProvider_FormattedString()
         {
-            using (new CultureInfoScope("en-US"))
+            using (TestCultures.En_US.Scoped())
             {
                 var act = TestStruct.ToString(@"y-\WW-d", null);
                 var exp = "1997-W14-6";
@@ -837,7 +838,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -857,7 +858,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

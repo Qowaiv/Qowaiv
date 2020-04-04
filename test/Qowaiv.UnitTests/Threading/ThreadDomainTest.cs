@@ -2,6 +2,7 @@
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using Qowaiv.Threading;
 using System;
 using System.Threading;
@@ -115,10 +116,10 @@ namespace Qowaiv.UnitTests.Threading
         [Test]
         public void Remove_Country_BeforSetAndAfter()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 Assert.AreEqual(Country.BE, Thread.CurrentThread.GetValue<Country>(), "Before.");
-                Thread.CurrentThread.SetValue<Country>(Country.PT);
+                Thread.CurrentThread.SetValue(Country.PT);
                 Assert.AreEqual(Country.PT, Thread.CurrentThread.GetValue<Country>(), "Set.");
                 Thread.CurrentThread.RemoveValue(typeof(Country));
                 Assert.AreEqual(Country.BE, Thread.CurrentThread.GetValue<Country>(), "After.");

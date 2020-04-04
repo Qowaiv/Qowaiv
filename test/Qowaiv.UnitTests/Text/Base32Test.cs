@@ -2,6 +2,7 @@
 
 using NUnit.Framework;
 using Qowaiv.Globalization;
+using Qowaiv.TestTools.Globalization;
 using Qowaiv.Text;
 using System;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void GetBytes_Q0waiv_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Assert.Throws<FormatException>(() =>
                 {

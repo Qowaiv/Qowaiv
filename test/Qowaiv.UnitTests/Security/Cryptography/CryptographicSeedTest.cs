@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +79,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -92,7 +93,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = CryptographicSeed.TryParse(exp.ToString());
@@ -104,7 +105,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(CryptographicSeed);
                 var act = CryptographicSeed.TryParse("!");
@@ -649,7 +650,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void ConvertFrom_StringNull_CryptographicSeedEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(CryptographicSeed.Empty, (string)null);
             }
@@ -658,7 +659,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void ConvertFrom_StringEmpty_CryptographicSeedEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(CryptographicSeed.Empty, string.Empty);
             }
@@ -667,7 +668,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -676,7 +677,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

@@ -5,6 +5,8 @@ using Qowaiv.Reflection;
 using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -79,10 +81,13 @@ namespace Qowaiv.UnitTests
         }
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void AttributesMatches(Type svo)
-        {
-            SvoAssert.AttributesMatches(svo);
-        }
+        public void HasSerializableAttribute(Type svo) => TypeAssert.HasAttribute(svo, typeof(SerializableAttribute));
+
+        [TestCaseSource(nameof(SvoTypes))]
+        public void HasTypeConverterAttribute(Type svo) => TypeAssert.HasAttribute(svo, typeof(TypeConverterAttribute));
+
+        [TestCaseSource(nameof(SvoTypes))]
+        public void HasDebuggerDisplayAttribute(Type svo) => TypeAssert.HasAttribute(svo, typeof(DebuggerDisplayAttribute));
 
         [TestCaseSource(nameof(SvoTypes))]
         public void UnderlyingTypeMatches(Type svo)

@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Globalization;
 using Qowaiv.Globalization;
+using Qowaiv.TestTools;
 
 namespace Qowaiv.UnitTests.Globalization
 {
@@ -36,6 +37,16 @@ namespace Qowaiv.UnitTests.Globalization
 
             Assert.AreEqual(current, CultureInfo.CurrentCulture);
             Assert.AreEqual(currentUI, CultureInfo.CurrentUICulture);
+        }
+
+        [Test]
+        public void DebuggerDisplay_WithResult()
+        {
+            using (new CultureInfoScope("[en-NL", "en-US"))
+            {
+                using var scope = new CultureInfoScope("es-ES", "fr-FR");
+                DebuggerDisplayAssert.HasResult("CultureInfoScope: [es-ES/fr-FR], Previous: [en-NL/en-US]", scope);
+            }
         }
     }
 }

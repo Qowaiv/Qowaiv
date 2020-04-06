@@ -310,7 +310,7 @@ namespace Qowaiv.Globalization
         {
             if (region == null) { return default; }
             // In .NET, Serbia and Montenegro (CS) is still active.
-            if (region.TwoLetterISORegionName == "CS" && region.EnglishName.Contains("Montenegro"))
+            if (region.TwoLetterISORegionName == "CS")
             {
                 return CSXX;
             }

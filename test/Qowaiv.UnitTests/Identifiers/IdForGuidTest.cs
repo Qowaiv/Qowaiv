@@ -572,6 +572,12 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        public void ConvertFrom_Guid_TestStruct()
+        {
+            TypeConverterAssert.ConvertFromEquals(TestStruct, Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"));
+        }
+
+        [Test]
         public void ConvertFrom_StringEmpty_IdForGuid_Empty()
         {
             using (TestCultures.En_GB.Scoped())
@@ -596,6 +602,12 @@ namespace Qowaiv.UnitTests.Identifiers
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
+        }
+
+        [Test]
+        public void ConvertTo_Guid_TestStruct()
+        {
+            TypeConverterAssert.ConvertToEquals(Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), TestStruct);
         }
 
         [Test]

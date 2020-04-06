@@ -7,6 +7,32 @@ namespace Qowaiv.UnitTests.Reflection
 {
     public class QowaivTypeTest
     {
+        [TestCase(typeof(decimal))]
+        [TestCase(typeof(double))]
+        [TestCase(typeof(int))]
+        [TestCase(typeof(sbyte))]
+        [TestCase(typeof(ulong))]
+        public void IsNumeric(Type type)
+        {
+            Assert.IsTrue(QowaivType.IsNumeric(type));
+        }
+
+        [TestCase(typeof(object))]
+        [TestCase(typeof(string))]
+        [TestCase(typeof(QowaivTypeTest))]
+        public void IsNotNumeric(Type type)
+        {
+            Assert.IsFalse(QowaivType.IsNumeric(type));
+        }
+
+        [TestCase(typeof(int), typeof(int))]
+        [TestCase(typeof(int), typeof(int?))]
+        [TestCase(typeof(string), typeof(string))]
+        public void GetNotNullableType(Type expected, Type type)
+        {
+            Assert.AreEqual(expected, QowaivType.GetNotNullableType(type));
+        }
+
         [Test]
         public void IsNullOrDefaultValue_Null()
         {

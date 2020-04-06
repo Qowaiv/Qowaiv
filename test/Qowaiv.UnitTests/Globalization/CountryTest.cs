@@ -241,6 +241,37 @@ namespace Qowaiv.UnitTests.Globalization
             Assert.AreEqual(exp, act);
         }
 
+        [Test]
+        public void Create_CS_CSXX()
+        {
+            var cs = new RegionInfo("CS");
+            var country = Country.Create(cs);
+            Assert.AreEqual(Country.CSXX, country);
+        }
+
+        [TestCaseSource(typeof(Country), nameof(Country.All))]
+        public void RegionInfoExists(Country country)
+        {
+            var exceptions = new[]
+            {
+                Country.ANHH,
+                Country.BUMM,
+                Country.DDDE,
+                Country.HVBF,
+                Country.SUHH,
+                Country.YUCS,
+                Country.ZRCD,
+                Country.AQ,
+                Country.BV,
+                Country.EH,
+                Country.GS,
+                Country.HM,
+                Country.TF,
+            };
+
+            Assert.AreEqual(!exceptions.Contains(country), country.RegionInfoExists);
+        }
+
         #endregion
 
         #region (XML) (De)serialization tests

@@ -163,6 +163,12 @@ namespace Qowaiv
         /// <summary>Divides the month span by a factor.</summary>
         public static MonthSpan operator /(MonthSpan span, double factor) => span.Divide(factor);
 
+        /// <summary>Adds a month span to the date time.</summary>
+        public static DateTime operator +(DateTime dt, MonthSpan span) => dt.Add(span);
+
+        /// <summary>Subtracts a month span from the date time.</summary>
+        public static DateTime operator -(DateTime dt, MonthSpan span) => dt.Add(-span);
+
         #endregion
         /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -295,6 +301,46 @@ namespace Qowaiv
             throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionMonthSpan);
         }
 
+        /// <summary>Creates a month span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
+        /// <param name="d1">
+        /// The date to subtract from.
+        /// </param>
+        /// <param name="d2">
+        /// The date to subtract.
+        /// </param>
+        /// <returns>
+        /// Returns a month span describing the duration between t1 and t2.
+        /// </returns>
+        public static MonthSpan Subtract(Date d1, Date d2)
+        {
+            var max = d1;
+            var min = d2;
+
+            var negative = d1 < d2;
+
+            if (negative)
+            {
+                max = d2;
+                min = d1;
+            }
+
+            var test = min;
+
+            var months = 0;
+            
+            while(test < max)
+            {
+                test = test.AddMonths(1);
+                months++;
+            }
+            if (test > max)
+            {
+                months--;
+            }
+
+            return new MonthSpan(negative ? -months : +months);
+        }
+        
         /// <summary>Tries to Create a date span from months only.</summary>
         public static bool TryCreate(long? months, out MonthSpan monthSpan)
         {

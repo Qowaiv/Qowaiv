@@ -111,9 +111,9 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Constructor_5Years6Months_69Months()
+        public void Constructor_5Years9Months_69Months()
         {
-            var ctor = new MonthSpan(years: 5, months: 6);
+            var ctor = new MonthSpan(years: 5, months: 9);
             Assert.AreEqual(MonthSpan.FromMonths(69), ctor);
         }
 
@@ -415,10 +415,24 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
+        public void Add_2MonthsToDateTime_2MonthsLater()
+        {
+            var added = new DateTime(1979, 12, 31) + MonthSpan.FromMonths(2);
+            Assert.AreEqual(new DateTime(1980, 02, 28), added);
+        }
+
+        [Test]
         public void Subtract_19Months6Months_13Months()
         {
             var subtracted = MonthSpan.FromMonths(19) - MonthSpan.FromMonths(6);
             Assert.AreEqual(MonthSpan.FromMonths(13), subtracted);
+        }
+
+        [Test]
+        public void Subtract_9MonthsFromDateTime_9MonthsEarlier()
+        {
+            var added = new DateTime(2017, 06, 11) - MonthSpan.FromMonths(9);
+            Assert.AreEqual(new DateTime(2016, 09, 06), added);
         }
 
         [Test]
@@ -461,6 +475,18 @@ namespace Qowaiv.UnitTests
         {
             var multiplied = MonthSpan.FromMonths(16) / 3.4m;
             Assert.AreEqual(MonthSpan.FromMonths(4), multiplied);
+        }
+
+        [TestCase(0, "2020-04-30", "2020-04-01")]
+        [TestCase(1, "2020-04-30", "2020-03-31")]
+        [TestCase(11, "2020-01-01", "2019-01-02")]
+        [TestCase(9, "2020-01-01", "2019-03-13")]
+        [TestCase(10, "2020-01-01", "2019-03-01")]
+        [TestCase(-1, "2020-01-01", "2020-02-20")]
+        public void Subtract_TwoDates(MonthSpan expected, Date d1, Date d2)
+        {
+            var delta = MonthSpan.Subtract(d1, d2);
+            Assert.AreEqual(expected, delta);
         }
 
         /// <summary>Orders a list of month spans ascending.</summary>

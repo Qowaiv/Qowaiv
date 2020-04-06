@@ -159,7 +159,7 @@ namespace Qowaiv
         /// If true, days are added first, otherwise months are added first.
         /// </param>
         /// <returns>
-        /// A new date whose value is the sum of the date and time represented
+        /// A new date whose value is the sum of the date represented
         /// by this instance and the time interval represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -174,13 +174,29 @@ namespace Qowaiv
             ;
         }
 
-        /// <summary>Subtracts the specified date and time from this instance.</summary>
+        /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan"/>
+        /// to the value of this instance.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+        /// </param>
+        /// <returns>
+        /// A new date whose value is the sum of the date represented
+        /// by this instance and the time interval represented by value.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
+        /// </exception>
+        public Date Add(MonthSpan value) => AddMonths(value.TotalMonths);
+
+        /// <summary>Subtracts the specified date from this instance.</summary>
         /// <param name="value">
         /// An instance of date.
         /// </param>
         /// <returns>
-        /// A System.TimeSpan interval equal to the date and time represented by this
-        /// instance minus the date and time represented by value.
+        /// A System.TimeSpan interval equal to the date represented by this
+        /// instance minus the date represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
@@ -192,7 +208,7 @@ namespace Qowaiv
         /// An instance of <see cref="TimeSpan"/>.
         /// </param>
         /// <returns>
-        /// A date equal to the date and time represented by this instance
+        /// A date equal to the date represented by this instance
         /// minus the time interval represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -205,7 +221,7 @@ namespace Qowaiv
         /// An instance of <see cref="DateSpan"/>.
         /// </param>
         /// <returns>
-        /// A date equal to the date and time represented by this instance
+        /// A date equal to the date represented by this instance
         /// minus the time interval represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -221,7 +237,7 @@ namespace Qowaiv
         /// A number of years. The value parameter can be negative or positive.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and the number of years represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -237,7 +253,7 @@ namespace Qowaiv
         /// A number of months. The months parameter can be negative or positive.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and months.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -255,7 +271,7 @@ namespace Qowaiv
         /// or positive.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and the number of days represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -272,7 +288,7 @@ namespace Qowaiv
         /// negative.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and the time represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -289,7 +305,7 @@ namespace Qowaiv
         /// or positive.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and the number of hours represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -306,7 +322,7 @@ namespace Qowaiv
         /// or positive.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and the number of minutes represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -323,7 +339,7 @@ namespace Qowaiv
         /// or positive.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and the number of seconds represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -340,7 +356,7 @@ namespace Qowaiv
         /// negative or positive. Note that this value is rounded to the nearest integer.
         /// </param>
         /// <returns>
-        /// A date whose value is the sum of the date and time represented
+        /// A date whose value is the sum of the date represented
         /// by this instance and the number of milliseconds represented by value.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -425,6 +441,12 @@ namespace Qowaiv
 
         /// <summary>Subtracts the Time Span from the date.</summary>
         public static Date operator -(Date d, TimeSpan t) => d.Subtract(t);
+
+        /// <summary>Adds the month span to the date.</summary>
+        public static Date operator +(Date date, MonthSpan span) => date.Add(span);
+
+        /// <summary>Subtracts the month span to the date.</summary>
+        public static Date operator -(Date date, MonthSpan span) => date.Add(-span);
 
         /// <summary>Adds one day to the date.</summary>
         public static Date operator ++(Date d) => d.Increment();

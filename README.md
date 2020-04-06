@@ -131,8 +131,8 @@ Is a subset of the date span, so without the days precision.
 var ctor = new MonthSpan(years: 5, months: 6); // 69 months.
 var months = MonthSpan.FromMonths(13);
 var years = MonthSpan.FromYears(3); // 35 months.
+var delta = MonthSpan.Subtract(new Date(2020, 04, 01), new Date(2020, 02, 28)); // 1 month.
 ```
-
 
 ### Percentage
 Represents a percentage. It supports parsing from per mile and per ten thousand

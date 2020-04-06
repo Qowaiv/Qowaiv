@@ -643,6 +643,25 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void Add_1Year_AreEqual()
+        {
+            var act = TestStruct + MonthSpan.FromYears(1);
+            var exp = new LocalDateTime(1989, 06, 13, 22, 10, 05, 001);
+
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Subtract_1Month_AreEqual()
+        {
+            var act = TestStruct + MonthSpan.FromYears(1);
+            var exp = new LocalDateTime(1988, 05, 13, 22, 10, 05, 001);
+
+            Assert.AreEqual(exp, act);
+        }
+
         [Test]
         public void AddYears_Min12_AreEqual()
         {

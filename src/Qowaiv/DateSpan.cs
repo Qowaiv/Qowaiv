@@ -268,8 +268,8 @@ namespace Qowaiv
         /// </returns>
         public static DateSpan Age(Date t1, Date reference) => Subtract(reference, t1, DateSpanSettings.WithoutMonths);
 
-        /// <summary>Creates a date span on by subtracting t2 from t1.</summary>
-        /// <param name="t1">
+        /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="t2"/>.</summary>
+        /// <param name="d1">
         /// The date to subtract from.
         /// </param>
         /// <param name="t2">
@@ -278,13 +278,13 @@ namespace Qowaiv
         /// <returns>
         /// Returns a date span describing the duration between t1 and t2.
         /// </returns>
-        public static DateSpan Subtract(Date t1, Date t2) => Subtract(t1, t2, DateSpanSettings.Default);
+        public static DateSpan Subtract(Date d1, Date t2) => Subtract(d1, t2, DateSpanSettings.Default);
 
-        /// <summary>Creates a date span on by subtracting t2 from t1.</summary>
-        /// <param name="t1">
+        /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
+        /// <param name="d1">
         /// The date to subtract from.
         /// </param>
-        /// <param name="t2">
+        /// <param name="d2">
         /// The date to subtract.
         /// </param>
         /// <param name="settings">
@@ -293,7 +293,7 @@ namespace Qowaiv
         /// <returns>
         /// Returns a date span describing the duration between t1 and t2.
         /// </returns>
-        public static DateSpan Subtract(Date t1, Date t2, DateSpanSettings settings)
+        public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
         {
             var withYears = (settings & DateSpanSettings.WithoutYears) == default;
             var withMonths = (settings & DateSpanSettings.WithoutMonths) == default;
@@ -301,22 +301,22 @@ namespace Qowaiv
 
             if (daysOnly)
             {
-                var totalDays = (int)(t1 - t2).TotalDays;
+                var totalDays = (int)(d1 - d2).TotalDays;
                 return FromDays(totalDays);
             }
 
             var noMixedSings = (settings & DateSpanSettings.MixedSigns) == default;
             var daysFirst = (settings & DateSpanSettings.DaysFirst) != default;
 
-            var max = t1;
-            var min = t2;
+            var max = d1;
+            var min = d2;
 
-            var negative = t1 < t2;
+            var negative = d1 < d2;
 
             if (negative)
             {
-                max = t2;
-                min = t1;
+                max = d2;
+                min = d1;
             }
 
             var years = max.Year - min.Year;

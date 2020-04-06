@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests
 {
@@ -53,9 +55,27 @@ namespace Qowaiv.UnitTests
         }
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void ImplementsInterfaces(Type svo)
+        public void ImplementsISerializable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(ISerializable));
+
+        [TestCaseSource(nameof(SvoTypes))]
+        public void ImplementsIXmlSerializable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IXmlSerializable));
+
+        [TestCaseSource(nameof(SvoTypes))]
+        public void ImplementsIFormattable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IFormattable));
+
+        [TestCaseSource(nameof(SvoTypes))]
+        public void ImplementsIComparable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IComparable));
+
+        [TestCaseSource(nameof(SvoTypes))]
+        public void ImplementsIComparableOfT(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IComparable<>).MakeGenericType(svo));
+
+        [TestCaseSource(nameof(SvoTypes))]
+        public void ImplementsIConvertible(Type svo)
         {
-            SvoAssert.ImplementsInterfaces(svo);
+            // DateSpan is excluded.
+            if (typeof(DateSpan) == svo) { return; }
+
+            TypeAssert.ImplementsInterface(svo, typeof(IComparable<>).MakeGenericType(svo));
         }
 
         [TestCaseSource(nameof(SvoTypes))]

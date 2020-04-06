@@ -507,6 +507,7 @@ namespace Qowaiv.UnitTests
             object act = JsonTester.Write(default(Month));
             Assert.IsNull(act);
         }
+        
         [Test]
         public void ToJson_TestStruct_AreEqual()
         {

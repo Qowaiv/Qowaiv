@@ -12,6 +12,7 @@ namespace Qowaiv
     /// <summary>Represents a month span.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
+    [SingleValueObject(SingleValueStaticOptions.Continuous, underlyingType: typeof(int))]
     [OpenApiDataType(description: "month span", type: "MonthSpan", format: "MonthSpan")]
     [TypeConverter(typeof(Conversion.MonthSpanTypeConverter))]
     public partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
@@ -24,6 +25,21 @@ namespace Qowaiv
 
         /// <summary>Gets the maximum month span (+9998 years).</summary>
         public static readonly MonthSpan MaxValue = new MonthSpan(+9998 * 12);
+
+        /// <summary>Creates a new instance of the <see cref="MonthSpan"/> struct.</summary>
+        /// <param name="years">
+        /// The total of years of the month span.</param>
+        /// <param name="months">
+        /// The additional months on top of the years.
+        /// </param>
+        public MonthSpan(int years, int months)
+        {
+            if (!TryCreate(years * DateSpan.MonthsPerYear + months, out var span))
+            {
+                throw new ArgumentOutOfRangeException(QowaivMessages.FormatExceptionMonthSpan);
+            }
+            m_Value = span.m_Value;
+        }
 
         /// <summary>Gets the total of months.</summary>
         public int TotalMonths => m_Value;
@@ -61,6 +77,62 @@ namespace Qowaiv
         ///</exception>
         public MonthSpan Subtract(MonthSpan other) => FromMonths(m_Value - other.m_Value);
 
+
+        /// <summary>Returns a new month span whose value is the multiplication of the specified factor and this instance.</summary>
+        ///<param name="factor">
+        /// The factor to multiply with.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Multiply(int factor) => FromMonths(m_Value * factor);
+
+        /// <summary>Returns a new month span whose value is the multiplication of the specified factor and this instance.</summary>
+        ///<param name="factor">
+        /// The factor to multiply with.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Multiply(decimal factor) => FromMonths(Cast.ToInt<MonthSpan>((long)(m_Value * factor)));
+
+        /// <summary>Returns a new month span whose value is the multiplication of the specified factor and this instance.</summary>
+        ///<param name="factor">
+        /// The factor to multiply with.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Multiply(double factor) => Multiply(Cast.ToDecimal<MonthSpan>(factor));
+
+        /// <summary>Returns a new month span whose value is the division of the specified factor and this instance.</summary>
+        ///<param name="factor">
+        /// The factor to multiply with.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Divide(int factor) => FromMonths(m_Value / factor);
+
+        /// <summary>Returns a new month span whose value is the division of the specified factor and this instance.</summary>
+        ///<param name="factor">
+        /// The factor to multiply with.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Divide(decimal factor) => FromMonths(Cast.ToInt<MonthSpan>((long)(m_Value / factor)));
+
+        /// <summary>Returns a new month span whose value is the division of the specified factor and this instance.</summary>
+        ///<param name="factor">
+        /// The factor to multiply with.
+        ///</param>
+        ///<exception cref="OverflowException">
+        /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+        ///</exception>
+        public MonthSpan Divide(double factor) => Divide(Cast.ToDecimal<MonthSpan>(factor));
+
+
         /// <summary>Unary plus the month span.</summary>
         public static MonthSpan operator +(MonthSpan span) => span.Plus();
 
@@ -72,6 +144,24 @@ namespace Qowaiv
 
         /// <summary>Subtracts two month spans.</summary>
         public static MonthSpan operator -(MonthSpan l, MonthSpan r) => l.Subtract(r);
+
+        /// <summary>Multiplies the month span with a factor.</summary>
+        public static MonthSpan operator *(MonthSpan span, int factor) => span.Multiply(factor);
+
+        /// <summary>Multiplies the month span with a factor.</summary>
+        public static MonthSpan operator *(MonthSpan span, decimal factor) => span.Multiply(factor);
+
+        /// <summary>Multiplies the month span with a factor.</summary>
+        public static MonthSpan operator *(MonthSpan span, double factor) => span.Multiply(factor);
+
+        /// <summary>Divides the month span by a factor.</summary>
+        public static MonthSpan operator /(MonthSpan span, int factor) => span.Divide(factor);
+
+        /// <summary>Divides the month span by a factor.</summary>
+        public static MonthSpan operator /(MonthSpan span, decimal factor) => span.Divide(factor);
+
+        /// <summary>Divides the month span by a factor.</summary>
+        public static MonthSpan operator /(MonthSpan span, double factor) => span.Divide(factor);
 
         #endregion
         /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>

@@ -124,6 +124,16 @@ feb.ToString("M"); // 02
 feb.ToString("m"); // 2
 ```
 
+### Month span
+Is a subset of the date span, so without the days precision.
+
+``` C#
+var ctor = new MonthSpan(years: 5, months: 6); // 69 months.
+var months = MonthSpan.FromMonths(13);
+var years = MonthSpan.FromYears(3); // 35 months.
+```
+
+
 ### Percentage
 Represents a percentage. It supports parsing from per mile and per ten thousand
 too. The basic thought is that `Percentage.Parse("14%")` has the same result

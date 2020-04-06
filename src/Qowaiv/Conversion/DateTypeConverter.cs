@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace Qowaiv.Conversion
@@ -12,7 +13,8 @@ namespace Qowaiv.Conversion
         protected override Date FromString(string str, CultureInfo culture) => Date.Parse(str, culture);
 
         /// <inheritdoc />
-        protected override Date FromDate(Date date) => date;
+        [ExcludeFromCodeCoverage]
+        protected override Date FromDate(Date date) => throw new NotSupportedException();
 
         /// <inheritdoc />
         protected override Date FromDateTime(DateTime dateTime) => (Date)dateTime;
@@ -31,13 +33,14 @@ namespace Qowaiv.Conversion
         #region To's
 
         /// <inheritdoc />
-        protected override Date ToDate(Date date) => date;
+        [ExcludeFromCodeCoverage]
+        protected override Date ToDate(Date date) => throw new NotSupportedException();
 
         /// <inheritdoc />
         protected override DateTime ToDateTime(Date date) => date;
 
         /// <inheritdoc />
-        protected override DateTimeOffset ToDateTimeOffset(Date date) => ToDateTime(date);
+        protected override DateTimeOffset ToDateTimeOffset(Date date) => new DateTimeOffset(date, TimeSpan.Zero);
 
         /// <inheritdoc />
         protected override LocalDateTime ToLocalDateTime(Date date) => ToDateTime(date);

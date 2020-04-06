@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -62,7 +63,7 @@ namespace Qowaiv.Json
             get
             {
                 var sb = new StringBuilder();
-                sb.Append($@"{{ type: {Type}");
+                sb.Append($@"{{ type: {Type}, desc: {Description}");
 
                 if (!string.IsNullOrEmpty(Format))
                 {
@@ -93,6 +94,7 @@ namespace Qowaiv.Json
         /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the
         /// specified types that are decorated as such.
         /// </summary>
+        [ExcludeFromCodeCoverage]
         public static IEnumerable<OpenApiDataTypeAttribute> From(params Type[] types) => From(types?.AsEnumerable());
 
         /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the

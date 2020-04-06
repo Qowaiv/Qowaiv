@@ -376,7 +376,7 @@ namespace Qowaiv.Formatting
         /// </exception>
         public void Add(Type type, FormattingArguments arguments)
         {
-            Guard.ImplementsInterface(type, nameof(type), typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
+            Guard.ImplementsIFormattable(type, nameof(type));
             dict.Add(type, arguments);
         }
 
@@ -444,7 +444,7 @@ namespace Qowaiv.Formatting
         /// </exception>
         public void Set(Type type, FormattingArguments arguments)
         {
-            Guard.ImplementsInterface(type, nameof(type), typeof(IFormattable), QowaivMessages.ArgumentException_NotIFormattable);
+            Guard.ImplementsIFormattable(type, nameof(type));
             dict[type] = arguments;
         }
 

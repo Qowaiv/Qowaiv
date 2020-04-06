@@ -19,7 +19,7 @@ namespace Qowaiv.Conversion
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if(value is null)
+            if (value is null)
             {
                 return Activator.CreateInstance<T>();
             }
@@ -27,9 +27,9 @@ namespace Qowaiv.Conversion
             {
                 return FromString(str, culture);
             }
-            if(IsConvertable(value.GetType()))
+            if (IsConvertable(value.GetType()))
             {
-                if(value is DateTime dateTime)
+                if (value is DateTime dateTime)
                 {
                     return FromDateTime(dateTime);
                 }
@@ -80,7 +80,7 @@ namespace Qowaiv.Conversion
                 return typed.ToString(string.Empty, culture);
             }
 
-            if(IsConvertable(destinationType))
+            if (IsConvertable(destinationType))
             {
                 var date = Guard.IsInstanceOf<T>(value, nameof(value));
 

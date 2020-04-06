@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace Qowaiv.Conversion
@@ -24,7 +25,8 @@ namespace Qowaiv.Conversion
         protected override WeekDate FromLocalDateTime(LocalDateTime local) => FromDateTime(local);
 
         /// <inheritdoc />
-        protected override WeekDate FromWeekDate(WeekDate weekDate) => weekDate;
+        [ExcludeFromCodeCoverage]
+        protected override WeekDate FromWeekDate(WeekDate weekDate) => throw new NotSupportedException();
 
         #endregion
 
@@ -32,9 +34,8 @@ namespace Qowaiv.Conversion
 
         /// <inheritdoc />
         protected override DateTime ToDateTime(WeekDate date) => date;
-
         /// <inheritdoc />
-        protected override DateTimeOffset ToDateTimeOffset(WeekDate date) => new DateTimeOffset(date);
+        protected override DateTimeOffset ToDateTimeOffset(WeekDate date) => new DateTimeOffset(date, TimeSpan.Zero);
 
         /// <inheritdoc />
         protected override LocalDateTime ToLocalDateTime(WeekDate date) => date;
@@ -43,7 +44,8 @@ namespace Qowaiv.Conversion
         protected override Date ToDate(WeekDate date) => date;
 
         /// <inheritdoc />
-        protected override WeekDate ToWeekDate(WeekDate date) => date;
+        [ExcludeFromCodeCoverage]
+        protected override WeekDate ToWeekDate(WeekDate date) => throw new NotSupportedException();
 
         #endregion
     }

@@ -4,6 +4,7 @@ using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -692,6 +693,13 @@ namespace Qowaiv.UnitTests
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
+        }
+
+        [Test]
+        public void ConvertFromString_NoGuid_Throws()
+        {
+            var converter = TypeDescriptor.GetConverter(typeof(Uuid));
+            Assert.Throws<FormatException>(() => converter.ConvertFromString("not a valid GUID!"));
         }
 
         [Test]

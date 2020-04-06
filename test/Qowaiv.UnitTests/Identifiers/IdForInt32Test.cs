@@ -536,12 +536,6 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void CanNotConvertFromInt32_IdForInt32_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Id<ForInt32>), typeof(int));
-        }
-
-        [Test]
         public void CanNotConvertToGuid_IdForInt32_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(Id<ForInt32>), typeof(Guid));
@@ -569,6 +563,12 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        public void ConvertFrom_Int_TestStruct()
+        {
+            TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
+        }
+
+        [Test]
         public void ConvertFrom_StringEmpty_IdForInt32_Empty()
         {
             using (TestCultures.En_GB.Scoped())
@@ -593,6 +593,12 @@ namespace Qowaiv.UnitTests.Identifiers
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
+        }
+
+        [Test]
+        public void ConvertTo_Int_TestStruct()
+        {
+            TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
         }
 
         [Test]

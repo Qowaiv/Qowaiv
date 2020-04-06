@@ -85,7 +85,20 @@ namespace Qowaiv.Globalization
         public string CallingCode => GetResourceString("CallingCode", CultureInfo.InvariantCulture);
 
         ///<summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
-        public bool RegionInfoExists => !string.IsNullOrEmpty(GetResourceString("RegionInfoExists", CultureInfo.InvariantCulture));
+        public bool RegionInfoExists
+        {
+            get
+            {
+                try
+                {
+                    return ToRegionInfo() != null;
+                }
+                catch (NotSupportedException)
+                {
+                    return false;
+                }
+            }
+        }
 
         /// <summary>Gets the start date from witch the country exists.</summary>
         public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
@@ -297,7 +310,10 @@ namespace Qowaiv.Globalization
         {
             if (region == null) { return default; }
             // In .NET, Serbia and Montenegro (CS) is still active.
-            if (region.TwoLetterISORegionName == "CS") { return CSXX; }
+            if (region.TwoLetterISORegionName == "CS")
+            {
+                return CSXX;
+            }
 
             return All.FirstOrDefault(c => c.Name == region.TwoLetterISORegionName);
         }

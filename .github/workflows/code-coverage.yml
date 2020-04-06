@@ -1,0 +1,24 @@
+name: Code coverage
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+           dotnet-version: 3.1.100
+      - name: Generate coverage report
+        run: dotnet test /p:CollectCoverage=true /p:ThresholdType=branch /p:CoverletOutputFormat=lcov
+      - name: Publish coverage report to coveralls.io
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./test/Qowaiv.UnitTests/coverage.info   

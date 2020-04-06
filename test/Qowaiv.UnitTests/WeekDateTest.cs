@@ -849,6 +849,19 @@ namespace Qowaiv.UnitTests
         {
             TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTime(1997, 04, 05));
         }
+
+        [Test]
+        public void ConvertFrom_DateTimeOffset_Successful()
+        {
+            TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTimeOffset(1997, 04, 05, 00, 00, 00, TimeSpan.Zero));
+        }
+
+        [Test]
+        public void ConvertFrom_LocalDateTime_Successful()
+        {
+            TypeConverterAssert.ConvertFromEquals(TestStruct, new LocalDateTime(1997, 04, 05));
+        }
+
         [Test]
         public void ConvertFrom_Date_Successful()
         {
@@ -868,6 +881,21 @@ namespace Qowaiv.UnitTests
         public void ConverTo_DateTime_Successful()
         {
             TypeConverterAssert.ConvertToEquals(new DateTime(1997, 04, 05), TestStruct);
+        }
+
+        [Test]
+        public void ConverTo_LocalDateTime_Successful()
+        {
+            TypeConverterAssert.ConvertToEquals(new LocalDateTime(1997, 04, 05), TestStruct);
+        }
+
+        [Test]
+        public void ConverTo_DateTimeOffset_Successful()
+        {
+            using (Clock.SetTimeZoneForCurrentThread(TimeZoneInfo.Utc))
+            {
+                TypeConverterAssert.ConvertToEquals(new DateTimeOffset(1997, 04, 05, 00, 00, 00, TimeSpan.Zero), TestStruct);
+            }
         }
 
         [Test]

@@ -241,6 +241,22 @@ namespace Qowaiv.UnitTests.Globalization
             Assert.AreEqual(exp, act);
         }
 
+        [Test]
+        public void Create_CS_CSXX()
+        {
+            var cs = new RegionInfo("CS");
+            var country = Country.Create(cs);
+            Assert.AreEqual(Country.CSXX, country);
+        }
+
+        [TestCaseSource(typeof(Country), nameof(Country.All))]
+        public void RegionInfoExists(Country country)
+        {
+            // As the regions available depend on the environment running, we can't
+            // predict the outcome.
+            Assert.IsTrue(new[] { true, false }.Contains(country.RegionInfoExists));
+        }
+
         #endregion
 
         #region (XML) (De)serialization tests
@@ -979,6 +995,16 @@ namespace Qowaiv.UnitTests.Globalization
         public void ExistsOnDate_SerbiaAndMontenegro2012_IsFalse()
         {
             Assert.IsFalse(Country.CSXX.ExistsOnDate(new Date(2012, 01, 01)));
+        }
+
+        /// <remarks>
+        /// On 1980, Burkina Faso did not yet exist.
+        /// </remarks>
+        [Test]
+        public void GetCurrency_BF1980_Empty()
+        {
+            var currency = Country.BF.GetCurrency(new Date(1980, 01, 01));
+            Assert.AreEqual(Currency.Empty, currency);
         }
 
         [Test]

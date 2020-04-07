@@ -184,7 +184,7 @@ namespace Qowaiv
         /// <remarks>
         /// The formats:
         /// 
-        /// F: as 0Y+0D.
+        /// F: as 0Y+0M.
         /// All others format the total months.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
@@ -309,7 +309,7 @@ namespace Qowaiv
         /// The date to subtract.
         /// </param>
         /// <returns>
-        /// Returns a month span describing the duration between t1 and t2.
+        /// Returns a month span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
         /// </returns>
         public static MonthSpan Subtract(Date d1, Date d2)
         {

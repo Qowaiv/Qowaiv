@@ -133,7 +133,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
             Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
@@ -142,7 +142,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse "?" should be valid and the result should be Month.Unknown.</summary>
         [Test]
-        public void TyrParse_Questionmark_IsValid()
+        public void TryParse_Questionmark_IsValid()
         {
             string str = "?";
             Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
@@ -151,7 +151,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "December";
             Assert.IsTrue(Month.TryParse(str, out Month val), "Valid");
@@ -160,7 +160,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(Month.TryParse(str, out Month val), "Valid");

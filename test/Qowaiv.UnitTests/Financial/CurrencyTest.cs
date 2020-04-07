@@ -143,7 +143,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
             Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
@@ -152,7 +152,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse "?" should be valid and the result should be Currency.Unknown.</summary>
         [Test]
-        public void TyrParse_Questionmark_IsValid()
+        public void TryParse_Questionmark_IsValid()
         {
             string str = "?";
             Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
@@ -161,7 +161,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse "¤" should be valid and the result should be Currency.Unknown.</summary>
         [Test]
-        public void TyrParse_UnknownCurrencySymbol_IsValid()
+        public void TryParse_UnknownCurrencySymbol_IsValid()
         {
             string str = "¤";
             Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
@@ -170,7 +170,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "USD";
             Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
@@ -179,7 +179,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(Currency.TryParse(str, out Currency val), "Valid");

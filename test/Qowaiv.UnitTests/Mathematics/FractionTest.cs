@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests.Mathematics
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             Assert.IsTrue(Fraction.TryParse(string.Empty, out var val));
             Assert.AreEqual(default(Fraction), val);

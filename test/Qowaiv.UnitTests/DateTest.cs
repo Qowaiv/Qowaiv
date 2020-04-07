@@ -74,7 +74,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "1983-05-02";
 
@@ -84,7 +84,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_NotADate_IsNotValid()
+        public void TryParse_NotADate_IsNotValid()
         {
             using (new CultureInfoScope(TestCultures.Nl_NL))
             {

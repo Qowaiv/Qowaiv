@@ -61,7 +61,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -70,7 +70,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "NL20INGB0001234567";
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -79,7 +79,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_QuestionMark_IsValid()
+        public void TryParse_QuestionMark_IsValid()
         {
             string str = "?";
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -89,7 +89,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");

@@ -48,7 +48,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsInvalid()
+        public void TryParse_Null_IsInvalid()
         {
             string str = null;
             Assert.IsFalse(DateSpan.TryParse(str, out _));
@@ -56,7 +56,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsInvalid()
+        public void TryParse_StringEmpty_IsInvalid()
         {
             string str = string.Empty;
             Assert.IsFalse(DateSpan.TryParse(str, out _));
@@ -64,7 +64,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "5Y+3M+2D";
             Assert.IsTrue(DateSpan.TryParse(str, out DateSpan val), "Valid");
@@ -73,7 +73,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsInvalid()
+        public void TryParse_StringValue_IsInvalid()
         {
             string str = "InvalidString";
             Assert.IsFalse(DateSpan.TryParse(str, out _), "Valid");

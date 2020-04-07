@@ -33,7 +33,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             Assert.IsTrue(MonthSpan.TryParse(string.Empty, out var val));
             Assert.AreEqual(default(MonthSpan), val);
@@ -41,7 +41,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "0Y+0M";
             Assert.IsTrue(MonthSpan.TryParse(str, out var val));
@@ -50,7 +50,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "5Y#9M";
             Assert.IsFalse(MonthSpan.TryParse(str, out var val));

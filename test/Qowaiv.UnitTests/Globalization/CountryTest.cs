@@ -108,7 +108,7 @@ namespace Qowaiv.UnitTests.Globalization
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
             Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
@@ -117,7 +117,7 @@ namespace Qowaiv.UnitTests.Globalization
 
         /// <summary>TryParse "?" should be valid and the result should be Country.Unknown.</summary>
         [Test]
-        public void TyrParse_Questionmark_IsValid()
+        public void TryParse_Questionmark_IsValid()
         {
             string str = "?";
             Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
@@ -126,7 +126,7 @@ namespace Qowaiv.UnitTests.Globalization
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_NullCultureStringValue_IsValid()
+        public void TryParse_NullCultureStringValue_IsValid()
         {
             string str = "VA";
             Assert.IsTrue(Country.TryParse(str, null, out Country val), "Valid");
@@ -135,7 +135,7 @@ namespace Qowaiv.UnitTests.Globalization
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "VA";
             Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
@@ -144,7 +144,7 @@ namespace Qowaiv.UnitTests.Globalization
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(Country.TryParse(str, out Country val), "Valid");

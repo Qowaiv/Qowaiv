@@ -32,7 +32,7 @@ namespace Qowaiv.UnitTests.Sql
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
 
@@ -41,7 +41,7 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
-        public void TyrParse_0x00000000075BCD15_IsValid()
+        public void TryParse_0x00000000075BCD15_IsValid()
         {
             string str = "0x00000000075BCD15";
 
@@ -49,7 +49,7 @@ namespace Qowaiv.UnitTests.Sql
             Assert.AreEqual(TestStruct, val, "Value");
         }
         [Test]
-        public void TyrParse_123456789_IsValid()
+        public void TryParse_123456789_IsValid()
         {
             string str = "123456789";
 
@@ -59,7 +59,7 @@ namespace Qowaiv.UnitTests.Sql
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_invalidTimeStamp_IsNotValid()
+        public void TryParse_invalidTimeStamp_IsNotValid()
         {
             string str = "invalidTimeStamp";
 
@@ -68,7 +68,7 @@ namespace Qowaiv.UnitTests.Sql
         }
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_0xInvalidTimeStamp_IsNotValid()
+        public void TryParse_0xInvalidTimeStamp_IsNotValid()
         {
             string str = "0xInvalidTimeStamp";
 

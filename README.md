@@ -638,6 +638,13 @@ and if the data type is nullable, all when applicable.
       "?"
     ]
   },
+  "MonthSpan": {
+    "description": "Month span, specified in years and months, for example 1Y+10M.",
+    "type": "string",
+    "format": "month-span",
+    "pattern": "[+-]?[0-9]+Y[+-][0-9]+M",
+    "nullabe": false
+  },
   "Percentage": {
     "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
     "type": "string",
@@ -726,6 +733,13 @@ and if the data type is nullable, all when applicable.
     "description": "Stream size notation (in byte).",
     "type": "integer",
     "format": "stream-size",
+    "nullabe": false
+  },
+  "Mathematics.Fraction": {
+    "description": "Faction",
+    "type": "string",
+    "format": "faction",
+    "pattern": "-?[0-9]+(/[0-9]+)?",
     "nullabe": false
   },
   "Security.Cryptography.CryptographicSeed": {

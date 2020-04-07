@@ -72,7 +72,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             Assert.IsTrue(Id<ForString>.TryParse(null, out var val));
             Assert.AreEqual(default(Id<ForString>), val);

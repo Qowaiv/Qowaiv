@@ -42,7 +42,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             string str = null;
             Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");

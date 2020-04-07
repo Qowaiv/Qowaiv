@@ -100,7 +100,7 @@ namespace Qowaiv.UnitTests.Web
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             string str = null;
 

@@ -94,7 +94,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             string str = null;
             Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");

@@ -840,10 +840,10 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Subtract_12Months_AreEqual()
+        public void Subtract_3Months_AreEqual()
         {
             var subtracted = new Date(1971, 02, 14) - MonthSpan.FromMonths(3);
-            Assert.AreEqual(new Date(1970, 12, 14), subtracted);
+            Assert.AreEqual(new Date(1970, 11, 14), subtracted);
         }
 
         [Test]

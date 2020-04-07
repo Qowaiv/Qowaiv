@@ -248,6 +248,23 @@ namespace Qowaiv
         /// </exception>
         public LocalDateTime Add(DateSpan value) => Add(value, false);
 
+        /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>
+        /// to the value of this instance.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+        /// </param>
+        /// <returns>
+        /// A new date whose value is the sum of the date represented
+        /// by this instance and the time interval represented by value.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The resulting date is less than <see cref="MinValue"/> or greater
+        /// than <see cref="MaxValue"/>.
+        /// </exception>
+        public LocalDateTime Add(MonthSpan value) => AddMonths(value.TotalMonths);
+
+
         /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
         /// to the value of this instance.
         /// </summary>
@@ -536,6 +553,12 @@ namespace Qowaiv
         /// <summary>Subtracts the Time Span from the local date time.</summary>
         public static LocalDateTime operator -(LocalDateTime d, TimeSpan t) => d.Subtract(t);
 
+        /// <summary>Adds the month span to the date.</summary>
+        public static LocalDateTime operator +(LocalDateTime date, MonthSpan span) => date.Add(span);
+
+        /// <summary>Subtracts the month span from the date.</summary>
+        public static LocalDateTime operator -(LocalDateTime date, MonthSpan span) => date.Add(-span);
+        
         /// <summary>Adds one day to the local date time.</summary>
         public static LocalDateTime operator ++(LocalDateTime d) => d.Increment();
 

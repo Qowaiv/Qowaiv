@@ -100,7 +100,7 @@ namespace Qowaiv.UnitTests.Web
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             string str = null;
 
@@ -110,7 +110,7 @@ namespace Qowaiv.UnitTests.Web
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
 
             string str = string.Empty;
@@ -121,7 +121,7 @@ namespace Qowaiv.UnitTests.Web
 
         /// <summary>TryParse "?" should be valid and the result should be InternetMediaType.Unknown.</summary>
         [Test]
-        public void TyrParse_Questionmark_IsValid()
+        public void TryParse_Questionmark_IsValid()
         {
             string str = "?";
 
@@ -131,7 +131,7 @@ namespace Qowaiv.UnitTests.Web
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "application/atom+xml";
 
@@ -141,7 +141,7 @@ namespace Qowaiv.UnitTests.Web
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
 

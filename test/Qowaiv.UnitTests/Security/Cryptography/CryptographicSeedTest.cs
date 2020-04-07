@@ -42,7 +42,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             string str = null;
             Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
@@ -51,7 +51,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
             Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
@@ -60,7 +60,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "string==";
             Assert.IsTrue(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");
@@ -69,7 +69,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(CryptographicSeed.TryParse(str, out CryptographicSeed val), "Valid");

@@ -226,4 +226,7 @@
   <data name="OverflowException_Fraction" xml:space="preserve">
     <value>Value was either too large or too small for a Fraction.</value>
   </data>
+  <data name="FormatExceptionMonthSpan" xml:space="preserve">
+    <value>Not a valid month span</value>
+  </data>
 </root>

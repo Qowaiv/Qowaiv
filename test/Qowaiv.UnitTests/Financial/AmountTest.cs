@@ -42,7 +42,7 @@ namespace Qowaiv.Financial.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsInvalid()
+        public void TryParse_Null_IsInvalid()
         {
             string str = null;
             Assert.IsFalse(Amount.TryParse(str, out _));
@@ -50,7 +50,7 @@ namespace Qowaiv.Financial.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsInvalid()
+        public void TryParse_StringEmpty_IsInvalid()
         {
             string str = string.Empty;
             Assert.IsFalse(Amount.TryParse(str, out _));
@@ -58,7 +58,7 @@ namespace Qowaiv.Financial.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             using (CultureInfoScope.NewInvariant())
             {

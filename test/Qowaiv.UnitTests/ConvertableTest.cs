@@ -28,6 +28,7 @@ namespace Qowaiv.Tests
         [TestCase(typeof(HouseNumber), TypeCode.Int32)]
         [TestCase(typeof(LocalDateTime), TypeCode.DateTime)]
         [TestCase(typeof(Month), TypeCode.Byte)]
+        [TestCase(typeof(MonthSpan), TypeCode.Int32)]
         [TestCase(typeof(Percentage), TypeCode.Decimal)]
         [TestCase(typeof(PostalCode), TypeCode.String)]
         [TestCase(typeof(Uuid), TypeCode.String)]

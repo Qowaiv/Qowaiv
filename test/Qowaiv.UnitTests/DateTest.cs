@@ -74,7 +74,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "1983-05-02";
 
@@ -84,7 +84,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_NotADate_IsNotValid()
+        public void TryParse_NotADate_IsNotValid()
         {
             using (new CultureInfoScope(TestCultures.Nl_NL))
             {
@@ -831,6 +831,21 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void Add_12Months_AreEqual()
+        {
+            var added = new Date(1970, 02, 14) + MonthSpan.FromMonths(12);
+            Assert.AreEqual(new Date(1971, 02, 14), added);
+        }
+
+        [Test]
+        public void Subtract_3Months_AreEqual()
+        {
+            var subtracted = new Date(1971, 02, 14) - MonthSpan.FromMonths(3);
+            Assert.AreEqual(new Date(1970, 11, 14), subtracted);
+        }
+
         [Test]
         public void AddYears_Min12_AreEqual()
         {

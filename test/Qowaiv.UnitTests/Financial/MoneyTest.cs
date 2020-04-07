@@ -34,7 +34,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             using (TestCultures.Nl_NL.Scoped())
             {
@@ -46,7 +46,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(Money.TryParse(str, out Money val), "Valid");

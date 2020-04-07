@@ -124,6 +124,21 @@ feb.ToString("M"); // 02
 feb.ToString("m"); // 2
 ```
 
+### Month span
+Is a subset of the date span, so without the days precision.
+
+``` C#
+// Creation
+var ctor = new MonthSpan(years: 5, months: 6); // 69 months.
+var months = MonthSpan.FromMonths(13);
+var years = MonthSpan.FromYears(3); // 35 months.
+
+// operations
+var delta = MonthSpan.Subtract(new Date(2020, 04, 01), new Date(2020, 02, 28)); // 1 month.
+var prev = new Date(2017, 06, 11) - MonthSpan.FromMonths(9); // 2016-09-11
+var next = new DateTime(2010, 05, 02).Add(MonthSpan.FromMonths(2)); // 2010-07-02
+```
+
 ### Percentage
 Represents a percentage. It supports parsing from per mile and per ten thousand
 too. The basic thought is that `Percentage.Parse("14%")` has the same result
@@ -623,6 +638,13 @@ and if the data type is nullable, all when applicable.
       "?"
     ]
   },
+  "MonthSpan": {
+    "description": "Month span, specified in years and months, for example 1Y+10M.",
+    "type": "string",
+    "format": "month-span",
+    "pattern": "[+-]?[0-9]+Y[+-][0-9]+M",
+    "nullabe": false
+  },
   "Percentage": {
     "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
     "type": "string",
@@ -711,6 +733,13 @@ and if the data type is nullable, all when applicable.
     "description": "Stream size notation (in byte).",
     "type": "integer",
     "format": "stream-size",
+    "nullabe": false
+  },
+  "Mathematics.Fraction": {
+    "description": "Faction",
+    "type": "string",
+    "format": "faction",
+    "pattern": "-?[0-9]+(/[0-9]+)?",
     "nullabe": false
   },
   "Security.Cryptography.CryptographicSeed": {

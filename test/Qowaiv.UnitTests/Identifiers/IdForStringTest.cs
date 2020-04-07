@@ -72,7 +72,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             Assert.IsTrue(Id<ForString>.TryParse(null, out var val));
             Assert.AreEqual(default(Id<ForString>), val);
@@ -80,7 +80,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             Assert.IsTrue(Id<ForString>.TryParse(string.Empty, out var val));
             Assert.AreEqual(default(Id<ForString>), val);
@@ -88,7 +88,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
             Assert.IsTrue(Id<ForString>.TryParse(str, out var val));

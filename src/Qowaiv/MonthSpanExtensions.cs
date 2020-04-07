@@ -22,6 +22,6 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
         /// than <see cref="DateTime.MaxValue"/>.
         /// </exception>
-        public static DateTime Add(this DateTime d, MonthSpan value) => d.Add(value);
+        public static DateTime Add(this DateTime d, MonthSpan value) => d.AddMonths(value.TotalMonths);
     }
 }

@@ -248,16 +248,16 @@ namespace Qowaiv
         public static DateSpan FromYears(int years) => new DateSpan(years, 0, 0);
 
         /// <summary>Calculates the age (in years and days) for a given date for today.</summary>
-        /// <param name="t1">
+        /// <param name="date">
         /// The date to get the age for.
         /// </param>
         /// <returns>
         /// The age defined in years and days.
         /// </returns>
-        public static DateSpan Age(Date t1) => Age(t1, Clock.Today());
+        public static DateSpan Age(Date date) => Age(date, Clock.Today());
 
         /// <summary>Calculates the age (in years and days) for a given date for the reference date.</summary>
-        /// <param name="t1">
+        /// <param name="date">
         /// The date to get the age for.
         /// </param>
         /// <param name="reference">
@@ -266,19 +266,19 @@ namespace Qowaiv
         /// <returns>
         /// The age defined in years and days.
         /// </returns>
-        public static DateSpan Age(Date t1, Date reference) => Subtract(reference, t1, DateSpanSettings.WithoutMonths);
+        public static DateSpan Age(Date date, Date reference) => Subtract(reference, date, DateSpanSettings.WithoutMonths);
 
-        /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="t2"/>.</summary>
+        /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
         /// <param name="d1">
         /// The date to subtract from.
         /// </param>
-        /// <param name="t2">
+        /// <param name="d2">
         /// The date to subtract.
         /// </param>
         /// <returns>
-        /// Returns a date span describing the duration between t1 and t2.
+        /// Returns a date span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
         /// </returns>
-        public static DateSpan Subtract(Date d1, Date t2) => Subtract(d1, t2, DateSpanSettings.Default);
+        public static DateSpan Subtract(Date d1, Date d2) => Subtract(d1, d2, DateSpanSettings.Default);
 
         /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
         /// <param name="d1">
@@ -291,7 +291,7 @@ namespace Qowaiv
         /// The settings to apply.
         /// </param>
         /// <returns>
-        /// Returns a date span describing the duration between t1 and t2.
+        /// Returns a date span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
         /// </returns>
         public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
         {

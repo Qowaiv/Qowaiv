@@ -739,9 +739,9 @@ namespace Qowaiv.UnitTests
         [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
         [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
         [TestCase(-12, +01, "2017-06-11","2018-06-10", DateSpanSettings.MixedSigns)]
-        public void Subtract(int months, int days, Date t1, Date t2, DateSpanSettings settings)
+        public void Subtract(int months, int days, Date d1, Date d2, DateSpanSettings settings)
         {
-            var span = DateSpan.Subtract(t1, t2, settings);
+            var span = DateSpan.Subtract(d1, d2, settings);
             var expected = new DateSpan(0, months, days);
             Assert.AreEqual(expected, span);
         }

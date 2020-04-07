@@ -445,7 +445,7 @@ namespace Qowaiv
         /// <summary>Adds the month span to the date.</summary>
         public static Date operator +(Date date, MonthSpan span) => date.Add(span);
 
-        /// <summary>Subtracts the month span to the date.</summary>
+        /// <summary>Subtracts the month span from the date.</summary>
         public static Date operator -(Date date, MonthSpan span) => date.Add(-span);
 
         /// <summary>Adds one day to the date.</summary>

@@ -301,7 +301,7 @@ namespace Qowaiv
             throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionMonthSpan);
         }
 
-        /// <summary>Creates a month span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
+        /// <summary>Creates a month span by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
         /// <param name="d1">
         /// The date to subtract from.
         /// </param>

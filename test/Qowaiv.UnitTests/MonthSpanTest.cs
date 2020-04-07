@@ -418,7 +418,7 @@ namespace Qowaiv.UnitTests
         public void Add_2MonthsToDateTime_2MonthsLater()
         {
             var added = new DateTime(1979, 12, 31) + MonthSpan.FromMonths(2);
-            Assert.AreEqual(new DateTime(1980, 02, 28), added);
+            Assert.AreEqual(new DateTime(1980, 02, 29), added);
         }
 
         [Test]
@@ -432,7 +432,7 @@ namespace Qowaiv.UnitTests
         public void Subtract_9MonthsFromDateTime_9MonthsEarlier()
         {
             var added = new DateTime(2017, 06, 11) - MonthSpan.FromMonths(9);
-            Assert.AreEqual(new DateTime(2016, 09, 06), added);
+            Assert.AreEqual(new DateTime(2016, 09, 11), added);
         }
 
         [Test]

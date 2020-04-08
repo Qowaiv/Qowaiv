@@ -133,17 +133,24 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Parse_DomainPartShouldBeLowerCased()
+        public void Parse_DomainPart_ShouldBeLowerCased()
         {
             var email = EmailAddress.Parse("mail@UPPERCASE.com");
             Assert.AreEqual("mail@uppercase.com", email.ToString());
         }
 
         [Test]
-        public void Parse_LocalPartShouldNotBeLowerCased()
+        public void Parse_LocalPart_ShouldNotBeLowerCased()
         {
             var email = EmailAddress.Parse("MAIL@lowercase.com");
             Assert.AreEqual("MAIL@lowercase.com", email.ToString());
+        }
+
+        [Test]
+        public void Parse_QuotedLocalPart_ShouldNotBeStripped()
+        {
+            var email = EmailAddress.Parse(@"""Joe Smith"" ""Literal (c)""@domain.com (with comment)");
+            Assert.AreEqual(@"""Literal (c)""@domain.com", email.ToString());
         }
 
         [Test]
@@ -197,6 +204,13 @@ namespace Qowaiv.UnitTests
         {
             var email = EmailAddress.Parse("home@[127.0.0.1]");
             Assert.AreEqual("home@[127.0.0.1]", email.ToString());
+        }
+
+        [Test]
+        public void Parse_WithoutIPv6Prefix_WithPrefix()
+        {
+            var email = EmailAddress.Parse("home@2607:f0d0:1002:51::4");
+            Assert.AreEqual("home@[IPv6:2607:f0d0:1002:51::4]", email.ToString());
         }
 
         [Test]
@@ -288,16 +302,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = EmailAddressTest.TestStruct;
-            var exp = EmailAddressTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = EmailAddressTest.TestStruct;
-            var exp = EmailAddressTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
@@ -324,13 +338,13 @@ namespace Qowaiv.UnitTests
             var input = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -344,13 +358,13 @@ namespace Qowaiv.UnitTests
             var input = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -364,13 +378,13 @@ namespace Qowaiv.UnitTests
             var input = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.DataContractSerializeDeserialize(input);
@@ -584,52 +598,52 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
-            Assert.IsTrue(EmailAddressTest.TestStruct.Equals(EmailAddressTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(EmailAddressTest.TestStruct.Equals(EmailAddress.Empty));
+            Assert.IsFalse(TestStruct.Equals(EmailAddress.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(EmailAddress.Empty.Equals(EmailAddressTest.TestStruct));
+            Assert.IsFalse(EmailAddress.Empty.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
-            Assert.IsTrue(EmailAddressTest.TestStruct.Equals((object)EmailAddressTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
         }
 
         [Test]
         public void Equals_TestStructNull_IsFalse()
         {
-            Assert.IsFalse(EmailAddressTest.TestStruct.Equals(null));
+            Assert.IsFalse(TestStruct.Equals(null));
         }
 
         [Test]
         public void Equals_TestStructObject_IsFalse()
         {
-            Assert.IsFalse(EmailAddressTest.TestStruct.Equals(new object()));
+            Assert.IsFalse(TestStruct.Equals(new object()));
         }
 
         [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
-            var l = EmailAddressTest.TestStruct;
-            var r = EmailAddressTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsTrue(l == r);
         }
 
         [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
-            var l = EmailAddressTest.TestStruct;
-            var r = EmailAddressTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsFalse(l != r);
         }
 
@@ -811,10 +825,19 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void IPDomain_IPBasedEmail_None()
+        public void IPDomain_IPBasedEmail_SomeIPAddress()
         {
             var email = EmailAddress.Parse("qowaiv@172.16.254.1");
             var exp = IPAddress.Parse("172.16.254.1");
+            var act = email.IPDomain;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void IPDomain_IPv6BasedEmail_SomeIPV6ddress()
+        {
+            var email = EmailAddress.Parse("qowaiv@[IPv6:0::1]");
+            var exp = IPAddress.Parse("0::1");
             var act = email.IPDomain;
             Assert.AreEqual(exp, act);
         }
@@ -901,7 +924,7 @@ namespace Qowaiv.UnitTests
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(EmailAddressTest.TestStruct, EmailAddressTest.TestStruct.ToString());
+                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
         }
 
@@ -910,166 +933,10 @@ namespace Qowaiv.UnitTests
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(EmailAddressTest.TestStruct.ToString(), EmailAddressTest.TestStruct);
+                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
         }
 
-        #endregion
-
-        #region IsValid tests
-
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase("..@test.com")]
-        [TestCase(".a@test.com")]
-        [TestCase("ab@sd@dd")]
-        [TestCase(".@s.dd")]
-        [TestCase("ab@988.120.150.10")]
-        [TestCase("ab@120.256.256.120")]
-        [TestCase("ab@120.25.1111.120")]
-        [TestCase("ab@[188.120.150.10")]
-        [TestCase("ab@188.120.150.10]")]
-        [TestCase("ab@[188.120.150.10].com")]
-        [TestCase("a@b.-de.cc")]
-        [TestCase("a@bde-.cc")]
-        [TestCase("a@bde.c-c")]
-        [TestCase("a@bde.cc.")]
-        [TestCase("ab@b+de.cc")]
-        [TestCase("a..b@bde.cc")]
-        [TestCase("_@bde.cc,")]
-        [TestCase("plainaddress")]
-        [TestCase("plain.address")]
-        [TestCase("@%^%#$@#$@#.com")]
-        [TestCase("@domain.com")]
-        [TestCase("Joe Smith &lt;email@domain.com&gt;")]
-        [TestCase("email.domain.com")]
-        [TestCase("email@domain@domain.com")]
-        [TestCase(".email@domain.com")]
-        [TestCase("email.@domain.com")]
-        [TestCase("email..email@domain.com")]
-        [TestCase("email@-domain.com")]
-        [TestCase("email@domain-.com")]
-        [TestCase("email@domain.com-")]
-        [TestCase("email@.domain.com")]
-        [TestCase("email@domain.com.")]
-        [TestCase("email@domain..com")]
-        [TestCase("email@111.222.333")]
-        [TestCase("email@111.222.333.256")]
-        [TestCase("email@[123.123.123.123")]
-        [TestCase("email@[123.123.123].123")]
-        [TestCase("email@123.123.123.123]")]
-        [TestCase("email@123.123.[123.123]")]
-        [TestCase("email@{leftbracket.com")]
-        [TestCase("email@rightbracket}.com")]
-        [TestCase("email@p|pe.com")]
-        [TestCase("isis@100%.nl")]
-        [TestCase("email@dollar$.com")]
-        [TestCase("email@r&amp;d.com")]
-        [TestCase("email@#hash.com")]
-        [TestCase("email@wave~tilde.com")]
-        [TestCase("email@exclamation!mark.com")]
-        [TestCase("email@question?mark.com")]
-        [TestCase("email@obelix*asterisk.com")]
-        [TestCase("email@grave`accent.com")]
-        [TestCase("email@colon:colon.com")]
-        [TestCase("email@caret^xor.com")]
-        [TestCase("email@=qowaiv.com")]
-        [TestCase("email@plus+.com")]
-        [TestCase("email@domain.com>")]
-        [TestCase("email( (nested) )@plus.com")]
-        [TestCase("email)mirror(@plus.com")]
-        [TestCase("email@plus.com (not closed comment")]
-        [TestCase("email(with @ in comment)plus.com")]
-        [TestCase(@"""Joe Smith email@domain.com")]
-        [TestCase(@"""Joe Smith' email@domain.com")]
-        [TestCase(@"""Joe Smith""email@domain.com")]
-        [TestCase("email@mailto:domain.com")]
-        [TestCase("mailto:mailto:email@domain.com")]
-        [TestCase("Display Name <email@plus.com> (after name with display)")]
-        [TestCase("ReDoSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
-        public void IsInvalid(string email)
-        {
-            Assert.IsFalse(EmailAddress.IsValid(email), email);
-        }
-
-        [TestCase("w@com")]
-        [TestCase("w.b.f@test.com")]
-        [TestCase("w.b.f@test.museum")]
-        [TestCase("a.a@test.com")]
-        [TestCase("ab@288.120.150.10.com")]
-        [TestCase("ab@188.120.150.10")]
-        [TestCase("ab@1.0.0.10")]
-        [TestCase("ab@120.25.254.120")]
-        [TestCase("ab@01.120.150.1")]
-        [TestCase("ab@88.120.150.021")]
-        [TestCase("ab@88.120.150.01")]
-        [TestCase("ab@[120.254.254.120]")]
-        [TestCase("local@2001:0db8:85a3:0000:0000:8a2e:0370:7334")]
-        [TestCase("local@[2001:0db8:85a3:0000:0000:8a2e:0370:7334]")]
-        [TestCase("2@bde.cc")]
-        [TestCase("-@bde.cc")]
-        [TestCase("a2@bde.cc")]
-        [TestCase("a-b@bde.cc")]
-        [TestCase("ab@b-de.cc")]
-        [TestCase("a+b@bde.cc")]
-        [TestCase("f.f.f@bde.cc")]
-        [TestCase("ab_c@bde.cc")]
-        [TestCase("_-_@bde.cc")]
-        [TestCase("k.haak@12move.nl")]
-        [TestCase("K.HAAK@12MOVE.NL")]
-        [TestCase("email@domain.com")]
-        [TestCase("email@domain")]
-        [TestCase("あいうえお@domain.com")]
-        [TestCase("local@あいうえお.com")]
-        [TestCase("firstname.lastname@domain.com")]
-        [TestCase("email@subdomain.domain.com")]
-        [TestCase("firstname+lastname@domain.com")]
-        [TestCase("email@123.123.123.123")]
-        [TestCase("email@[123.123.123.123]")]
-        [TestCase("1234567890@domain.com")]
-        [TestCase("a@domain.com")]
-        [TestCase("a.b.c.d@domain.com")]
-        [TestCase("aap.123.noot.mies@domain.com")]
-        [TestCase("1@domain.com")]
-        [TestCase("email@domain-one.com")]
-        [TestCase("_______@domain.com")]
-        [TestCase("email@domain.topleveldomain")]
-        [TestCase("email@domain.co.jp")]
-        [TestCase("firstname-lastname@domain.com")]
-        [TestCase("firstname-lastname@d.com")]
-        [TestCase("FIRSTNAME-LASTNAME@d--n.com")]
-        [TestCase("first-name-last-name@d-a-n.com")]
-        [TestCase("{local{name{{with{@leftbracket.com")]
-        [TestCase("}local}name}}with{@rightbracket.com")]
-        [TestCase("|local||name|with|@pipe.com")]
-        [TestCase("%local%%name%with%@percentage.com")]
-        [TestCase("$local$$name$with$@dollar.com")]
-        [TestCase("&local&&name&with&$@amp.com")]
-        [TestCase("#local##name#with#@hash.com")]
-        [TestCase("~local~~name~with~@tilde.com")]
-        [TestCase("!local!!name!with!@exclamation.com")]
-        [TestCase("?local??name?with?@question.com")]
-        [TestCase("*local**name*with*@asterisk.com")]
-        [TestCase("`local``name`with`@grave-accent.com")]
-        [TestCase("^local^^name^with^@xor.com")]
-        [TestCase("=local==name=with=@equality.com")]
-        [TestCase("+local++name+with+@equality.com")]
-        [TestCase("Joe Smith <email@domain.com>")]
-        [TestCase("email@domain.com (joe Smith)")]
-        [TestCase(@"""Joe Smith"" email@domain.com")]
-        [TestCase(@"""Joe\\tSmith"" email@domain.com")]
-        [TestCase(@"""Joe\""Smith"" email@domain.com")]
-        [TestCase(@"Test |<gaaf <email@domain.com>")]
-        [TestCase("MailTo:casesensitve@domain.com")]
-        [TestCase("mailto:email@domain.com")]
-        [TestCase("Joe Smith <mailto:email@domain.com>")]
-        [TestCase("Joe Smith <mailto:email(with comment)@domain.com>")]
-        [TestCase(@"""With extra < within quotes"" Display Name<email@domain.com>")]
-        [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
-        public void IsValid(string email)
-        {
-            Assert.IsTrue(EmailAddress.IsValid(email), email);
-        }
         #endregion
     }
 

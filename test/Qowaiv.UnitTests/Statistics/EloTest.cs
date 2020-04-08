@@ -2,6 +2,7 @@
 using Qowaiv.Globalization;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -76,7 +77,7 @@ namespace Qowaiv.UnitTests.Statistics
 
         /// <summary>TryParse null should not be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsNotValid()
+        public void TryParse_Null_IsNotValid()
         {
             string str = null;
             Assert.IsFalse(Elo.TryParse(str, out _), "Valid");
@@ -84,7 +85,7 @@ namespace Qowaiv.UnitTests.Statistics
 
         /// <summary>TryParse string.Empty should not be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsNotValid()
+        public void TryParse_StringEmpty_IsNotValid()
         {
             string str = string.Empty;
             Assert.IsFalse(Elo.TryParse(str, out _));
@@ -92,7 +93,7 @@ namespace Qowaiv.UnitTests.Statistics
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "1400";
             Assert.IsTrue(Elo.TryParse(str, out Elo val), "Valid");
@@ -102,7 +103,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -116,7 +117,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Elo.TryParse(exp.ToString());
@@ -128,7 +129,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(Elo);
                 var act = Elo.TryParse("InvalidInput");
@@ -360,7 +361,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Elo.Parse("1600,1").ToString();
                 var exp = "1600,1";
@@ -371,7 +372,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Elo.Parse("1600.1").ToString();
                 var exp = "1600.1";
@@ -382,7 +383,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Elo.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -393,7 +394,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Elo.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -616,7 +617,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void Explicit_StringToElo_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = (Elo)TestStruct.ToString(CultureInfo.CurrentCulture);
@@ -821,7 +822,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(EloTest.TestStruct, EloTest.TestStruct.ToString());
             }
@@ -830,7 +831,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(EloTest.TestStruct.ToString(), EloTest.TestStruct);
             }

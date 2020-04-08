@@ -73,6 +73,9 @@
   <data name="ArgumentOutOfRange_DecimalRound" xml:space="preserve">
     <value>Decimals can only round to between -28 and 28 digits of precision.</value>
   </data>
+  <data name="ArgumentOutOfRange_FractionError" xml:space="preserve">
+    <value>The allowed error when converting a Decimal to a Fraction should be between Fraction.Epsilon and 1.</value>
+  </data>
   <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
     <value>Percentages can only round to between -26 and 26 digits of precision.</value>
   </data>
@@ -124,6 +127,9 @@
   <data name="FormatExceptionFinancialAmount" xml:space="preserve">
     <value>Not a valid amount</value>
   </data>
+  <data name="FormatExceptionFraction" xml:space="preserve">
+    <value>Not a valid fraction</value>
+  </data>
   <data name="FormatExceptionGender" xml:space="preserve">
     <value>Not a valid gender</value>
   </data>
@@ -159,6 +165,9 @@
   </data>
   <data name="FormatExceptionTimestamp" xml:space="preserve">
     <value>Not a valid SQL timestamp</value>
+  </data>
+  <data name="FormatExceptionUuid" xml:space="preserve">
+    <value>Not a valid GUID</value>
   </data>
   <data name="FormatExceptionWeekDate" xml:space="preserve">
     <value>Not a valid week date</value>
@@ -214,7 +223,10 @@
   <data name="OverflowException_DecimalRound" xml:space="preserve">
     <value>Decimal overflowed while rounding.</value>
   </data>
-  <data name="FormatExceptionUuid" xml:space="preserve">
-    <value>Not a valid GUID</value>
+  <data name="OverflowException_Fraction" xml:space="preserve">
+    <value>Value was either too large or too small for a Fraction.</value>
+  </data>
+  <data name="FormatExceptionMonthSpan" xml:space="preserve">
+    <value>Not a valid month span</value>
   </data>
 </root>

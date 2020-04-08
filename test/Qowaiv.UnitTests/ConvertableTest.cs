@@ -22,44 +22,13 @@ namespace Qowaiv.Tests
             })
             .ToArray();
 
-        /// <summary>This test should prevent us from forgetting to implement IConvertable.</summary>
-        [Test]
-        public void AllSvosImplementIConvertible()
-        {
-            var expected = new[]
-            {
-                typeof(Date),
-                typeof(EmailAddress),
-                typeof(Gender),
-                typeof(HouseNumber),
-                typeof(LocalDateTime),
-                typeof(Month),
-                typeof(Percentage),
-                typeof(PostalCode),
-                typeof(Uuid),
-                typeof(WeekDate),
-                typeof(Year),
-                typeof(YesNo),
-                typeof(Financial.Amount),
-                typeof(Financial.BusinessIdentifierCode),
-                typeof(Financial.Currency),
-                typeof(Financial.InternationalBankAccountNumber),
-                typeof(Financial.Money),
-                typeof(Globalization.Country),
-                typeof(IO.StreamSize),
-                typeof(Security.Cryptography.CryptographicSeed),
-                typeof(Statistics.Elo),
-                typeof(Web.InternetMediaType),
-            };
-            CollectionAssert.AreEqual(expected, Convertibles);
-        }
-
         [TestCase(typeof(Date), TypeCode.DateTime)]
         [TestCase(typeof(EmailAddress), TypeCode.String)]
         [TestCase(typeof(Gender), TypeCode.Int32)]
         [TestCase(typeof(HouseNumber), TypeCode.Int32)]
         [TestCase(typeof(LocalDateTime), TypeCode.DateTime)]
         [TestCase(typeof(Month), TypeCode.Byte)]
+        [TestCase(typeof(MonthSpan), TypeCode.Int32)]
         [TestCase(typeof(Percentage), TypeCode.Decimal)]
         [TestCase(typeof(PostalCode), TypeCode.String)]
         [TestCase(typeof(Uuid), TypeCode.String)]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Threading;
 
@@ -23,7 +24,8 @@ namespace Qowaiv.Globalization
         /// <remarks>
         /// No direct access.
         /// </remarks>
-        protected CultureInfoScope() { }
+        [ExcludeFromCodeCoverage]
+        private CultureInfoScope() { }
 
         /// <summary>Creates a new CultureInfo scope.</summary>
         /// <param name="name">
@@ -74,6 +76,7 @@ namespace Qowaiv.Globalization
 
         /// <summary>Gets the previous Current UI Culture.</summary>
         public CultureInfo PreviousUI { get; private set; }
+
         /// <summary>Gets the previous Current Culture.</summary>
         public CultureInfo Previous { get; private set; }
 

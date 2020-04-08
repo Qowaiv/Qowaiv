@@ -4,7 +4,7 @@ namespace Qowaiv.Text
 {
     internal class CharBuffer: IEquatable<string>
     {
-        public static readonly int NotFound = -1;
+        private const int NotFound = -1;
 
         private readonly char[] buffer;
 
@@ -79,7 +79,8 @@ namespace Qowaiv.Text
             return NotFound;
         }
 
-        /// <summary>Returns true if the buffer starts with the specified string.</summary>
+        public bool EndOfBuffer(int index) => index >= Length - 1;
+
         public bool StartsWith(string str)
         {
             if(str.Length > Length)
@@ -88,7 +89,7 @@ namespace Qowaiv.Text
             }
             for(var i = 0; i < str.Length; i++)
             {
-                if(str[i] != buffer[i])
+                if(buffer[i] != str[i])
                 {
                     return false;
                 }
@@ -164,6 +165,8 @@ namespace Qowaiv.Text
             Length = 0;
             return this;
         }
+
+        public string Substring(int startIndex) => new string(buffer, startIndex, Length - startIndex);
 
         /// <inheritdoc />
         public bool Equals(string other) => Equals(other, false);

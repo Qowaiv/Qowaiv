@@ -16,6 +16,9 @@ namespace Qowaiv.Conversion.Identifiers
         /// <summary>Accessor to the private constructor.</summary>
         private readonly ConstructorInfo Ctor;
 
+        /// <summary>The base type according to the <see cref="IIdentifierBehavior"/>.</summary>
+        private readonly Type BaseType;
+
         /// <summary>The <see cref="TypeConverter"/> of the underlying value.</summary>
         private readonly TypeConverter BaseConverter;
 
@@ -32,7 +35,9 @@ namespace Qowaiv.Conversion.Identifiers
                 m_Value = type.GetField(nameof(m_Value), BindingFlags.Instance | BindingFlags.NonPublic);
                 var ctors = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
                 Ctor = ctors.FirstOrDefault(ctor => ctor.GetParameters().Length == 1);
-                BaseConverter = ((IIdentifierBehavior)Activator.CreateInstance(type.GetGenericArguments()[0])).Converter;
+                var behavior = ((IIdentifierBehavior)Activator.CreateInstance(type.GetGenericArguments()[0]));
+                BaseType = behavior.BaseType;
+                BaseConverter = behavior.Converter;
             }
             else
             {
@@ -43,21 +48,25 @@ namespace Qowaiv.Conversion.Identifiers
         /// <inheritdoc />
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return BaseConverter.CanConvertFrom(context, sourceType);
+            return sourceType == BaseType || BaseConverter.CanConvertFrom(context, sourceType);
         }
 
         /// <inheritdoc />
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return BaseConverter.CanConvertTo(context, destinationType);
+            return destinationType == BaseType || BaseConverter.CanConvertTo(context, destinationType);
         }
 
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is null || value.Equals(string.Empty))
+            if (string.Empty.Equals(value))
             {
-                return Ctor.Invoke(new object[] { null });
+                value = null;
+            }
+            if (value is null || value.GetType() == BaseType)
+            {
+                return Ctor.Invoke(new[] { value });
             }
             var id = BaseConverter.ConvertFrom(context, culture, value);
             return Ctor.Invoke(new[] { id });
@@ -67,7 +76,9 @@ namespace Qowaiv.Conversion.Identifiers
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             var id = m_Value.GetValue(value);
-            return BaseConverter.ConvertTo(context, culture, id, destinationType);
+            return destinationType == BaseType
+                ? id
+                : BaseConverter.ConvertTo(context, culture, id, destinationType);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -50,7 +51,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -64,7 +65,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_NotKnown_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = Gender.Unknown;
                 var act = Gender.Parse("Not known");
@@ -74,7 +75,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             string str = null;
             Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
@@ -83,7 +84,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
             Assert.IsTrue(Gender.TryParse(str, out Gender val), "Valid");
@@ -92,7 +93,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             using (new CultureInfoScope("it-IT"))
             {
@@ -104,7 +105,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_M_IsValid()
+        public void TryParse_M_IsValid()
         {
             string str = "M";
             Assert.IsTrue(Gender.TryParse(str, null, out Gender val), "Valid");
@@ -113,7 +114,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(Gender.TryParse(str, out Gender val), "Valid");
@@ -123,7 +124,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Gender.TryParse(exp.ToString());
@@ -135,7 +136,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(Gender);
                 var act = Gender.TryParse("InvalidInput");
@@ -151,7 +152,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Create_Nullable17_ThrowsArgumentOutOfRangeException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 ExceptionAssert.CatchArgumentOutOfRangeException(() =>
                 {
@@ -164,7 +165,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Create_17_ThrowsArgumentOutOfRangeException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 ExceptionAssert.CatchArgumentOutOfRangeException(() =>
                 {
@@ -475,7 +476,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_NullFormatProvider_FormattedString()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var act = TestStruct.ToString("f", null);
                 var exp = "Masculin";
@@ -494,7 +495,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToStringEmptyFormat_TestStruct_IsStringEmpty()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = TestStruct.ToString("");
                 var exp = "Mannelijk";
@@ -505,7 +506,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Gender.Male.ToString(@"\x f \format \\ random");
                 var exp = @"\x Male format \ random";
@@ -561,7 +562,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_enGB_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 ToStringAssert
                 (
@@ -574,7 +575,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_esEC_AreEqual()
         {
-            using (new CultureInfoScope("es-EC"))
+            using (TestCultures.Es_EC.Scoped())
             {
                 ToStringAssert
                 (
@@ -613,7 +614,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_nlBE_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 ToStringAssert
                 (
@@ -952,7 +953,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DisplayName_None_AreEqual()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var exp = "Masculin";
                 var act = TestStruct.DisplayName;
@@ -1039,7 +1040,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFrom_StringNull_GenderEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Gender.Empty, (string)null);
             }
@@ -1048,7 +1049,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringEmpty_GenderEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Gender.Empty, string.Empty);
             }
@@ -1057,7 +1058,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, "Male");
             }
@@ -1066,7 +1067,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals("Male", TestStruct);
             }

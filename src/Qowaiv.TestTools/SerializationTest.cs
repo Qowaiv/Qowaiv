@@ -22,17 +22,16 @@ namespace Qowaiv.TestTools
         /// </param>
         public static T SerializeDeserialize<T>(T instance)
         {
-            using (var buffer = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(buffer, instance);
+            using var buffer = new MemoryStream();
 
-                // reset position.
-                buffer.Position = 0;
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(buffer, instance);
 
-                var result = (T)formatter.Deserialize(buffer);
-                return result;
-            }
+            // reset position.
+            buffer.Position = 0;
+
+            var result = (T)formatter.Deserialize(buffer);
+            return result;
         }
 
         /// <summary>Serializes an instance using an XmlSerializer.</summary>
@@ -44,19 +43,17 @@ namespace Qowaiv.TestTools
         /// </param>
         public static string XmlSerialize<T>(T instance)
         {
-            using (var stream = new MemoryStream())
-            {
-                var writer = new XmlTextWriter(stream, Encoding.UTF8);
-                var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
-                serializer.Serialize(writer, new SerializationWrapper<T> { Value = instance });
-                stream.Position = 0;
+            using var stream = new MemoryStream();
 
-                using (var reader = new StreamReader(stream))
-                {
-                    var xml = XDocument.Load(reader);
-                    return xml.Element("Wrapper")?.Element("Value")?.Value;
-                }
-            }
+            var writer = new XmlTextWriter(stream, Encoding.UTF8);
+            var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
+            serializer.Serialize(writer, new SerializationWrapper<T> { Value = instance });
+            stream.Position = 0;
+
+            var reader = new StreamReader(stream);
+
+            var xml = XDocument.Load(reader);
+            return xml.Element("Wrapper")?.Element("Value")?.Value;
         }
 
         /// <summary>Serializes an instance using an XmlSerializer.</summary>
@@ -70,22 +67,20 @@ namespace Qowaiv.TestTools
         {
             var value = new XElement("Value", xml);
             var doc = new XDocument(new XElement("Wrapper", value));
-            
-            using (var stream = new MemoryStream())
-            {
-                doc.Save(stream);
-                stream.Position = 0;
-                var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
-                try
-                {
-                    var wrapper = (SerializationWrapper<T>)serializer.Deserialize(stream);
-                    return wrapper.Value;
-                }
-                catch (Exception x)
-                {
-                    throw new SerializationException($"'{value.Value}' failed on: {x.Message}", x);
-                }
 
+            using var stream = new MemoryStream();
+
+            doc.Save(stream);
+            stream.Position = 0;
+            var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
+            try
+            {
+                var wrapper = (SerializationWrapper<T>)serializer.Deserialize(stream);
+                return wrapper.Value;
+            }
+            catch (Exception x)
+            {
+                throw new SerializationException($"'{value.Value}' failed on: {x.Message}", x);
             }
         }
 
@@ -98,14 +93,13 @@ namespace Qowaiv.TestTools
         /// </param>
         public static T XmlSerializeDeserialize<T>(T instance)
         {
-            using (var stream = new MemoryStream())
-            {
-                var writer = new XmlTextWriter(stream, Encoding.UTF8);
-                var serializer = new XmlSerializer(typeof(T));
-                serializer.Serialize(writer, instance);
-                stream.Position = 0;
-                return (T)serializer.Deserialize(stream);
-            }
+            using var stream = new MemoryStream();
+
+            var writer = new XmlTextWriter(stream, Encoding.UTF8);
+            var serializer = new XmlSerializer(typeof(T));
+            serializer.Serialize(writer, instance);
+            stream.Position = 0;
+            return (T)serializer.Deserialize(stream);
         }
 
         /// <summary>Serializes and deserializes an instance using an DataContractSerializer.</summary>
@@ -117,13 +111,12 @@ namespace Qowaiv.TestTools
         /// </param>
         public static T DataContractSerializeDeserialize<T>(T instance)
         {
-            using (var stream = new MemoryStream())
-            {
-                var serializer = new DataContractSerializer(typeof(T));
-                serializer.WriteObject(stream, instance);
-                stream.Position = 0;
-                return (T)serializer.ReadObject(stream);
-            }
+            using var stream = new MemoryStream();
+
+            var serializer = new DataContractSerializer(typeof(T));
+            serializer.WriteObject(stream, instance);
+            stream.Position = 0;
+            return (T)serializer.ReadObject(stream);
         }
 
         /// <summary>Invokes the Deserialize Constructor ( T(SerializationInfo, StreamingContext) ).</summary>

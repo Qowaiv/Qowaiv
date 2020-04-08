@@ -2,6 +2,7 @@
 using Qowaiv.Globalization;
 using Qowaiv.IO;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -33,7 +34,7 @@ namespace Qowaiv.UnitTests.IO
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsInvalid()
+        public void TryParse_Null_IsInvalid()
         {
             string str = null;
             Assert.IsFalse(StreamSize.TryParse(str, out _));
@@ -41,7 +42,7 @@ namespace Qowaiv.UnitTests.IO
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsInvalid()
+        public void TryParse_StringEmpty_IsInvalid()
         {
             string str = string.Empty;
             Assert.IsFalse(StreamSize.TryParse(str, out _));
@@ -49,7 +50,7 @@ namespace Qowaiv.UnitTests.IO
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "17kb";
 
@@ -60,7 +61,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -74,7 +75,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = StreamSize.TryParse(exp.ToString());
@@ -86,7 +87,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(StreamSize);
                 var act = StreamSize.TryParse("InvalidInput");
@@ -429,7 +430,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_b_AreEqual()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = TestStruct.ToString("#,##0b");
                 var exp = "123.456.789b";
@@ -440,7 +441,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_kB_AreEqual()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = TestStruct.ToString("#,##0.00 kB");
                 var exp = "123.456,79 kB";
@@ -451,7 +452,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_MegaByte_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0.0 MegaByte");
                 var exp = "123,5 MegaByte";
@@ -462,7 +463,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_Negative_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = (-TestStruct).ToString("0.0 F");
                 var exp = "-123,5 Megabyte";
@@ -473,7 +474,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_GB_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0.00GB");
                 var exp = "0,12GB";
@@ -484,7 +485,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_GiB_AreEqual()
         {
-            using (new CultureInfoScope("de-DE"))
+            using (TestCultures.De_DE.Scoped())
             {
                 var act = TestStruct.ToString("0.0000 GiB");
                 var exp = "0,1150 GiB";
@@ -495,7 +496,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_tb_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.PB.ToString("tb");
                 var exp = "1000tb";
@@ -506,7 +507,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_pb_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.TB.ToString(" petabyte");
                 var exp = "0,001 petabyte";
@@ -517,7 +518,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_Exabyte_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.MaxValue.ToString("#,##0.## Exabyte");
                 var exp = "9,22 Exabyte";
@@ -528,7 +529,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceF_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("#,##0.## F");
                 var exp = "123,46 Megabyte";
@@ -538,7 +539,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceFLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0 f");
                 var exp = "123 megabyte";
@@ -549,7 +550,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceS_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0000 S");
                 var exp = "0123 MB";
@@ -559,7 +560,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_spaceSLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0 s");
                 var exp = "123 mb";
@@ -569,7 +570,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_SLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0s");
                 var exp = "123mb";
@@ -580,7 +581,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_SpaceSiLower_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString("0.0 si");
                 var exp = "117,7 mib";
@@ -591,7 +592,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.Parse("1600,1").ToString();
                 var exp = "1600 byte";
@@ -602,7 +603,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = StreamSize.Parse("1600.1").ToString();
                 var exp = "1600 byte";
@@ -613,7 +614,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = StreamSize.Parse("800").ToString("0000 byte");
                 var exp = "0800 byte";
@@ -624,7 +625,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = StreamSize.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -1264,7 +1265,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -1273,7 +1274,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
@@ -1328,31 +1329,29 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void GetStreamSize_Stream_17Byte()
         {
-            using (var stream = new MemoryStream(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 }))
-            {
-                StreamSize act = stream.GetStreamSize();
-                StreamSize exp = 17;
+            using var stream = new MemoryStream(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 });
 
-                Assert.AreEqual(exp, act);
-            }
+            StreamSize act = stream.GetStreamSize();
+            StreamSize exp = 17;
+
+            Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void GetStreamSize_FileInfo_9Byte()
         {
-            using (var dir = new TemporaryDirectory())
+            using var dir = new TemporaryDirectory();
+
+            FileInfo file = dir.CreateFile("GetStreamSize_FileInfo_9.test");
+            using (var writer = new StreamWriter(file.FullName, false))
             {
-                FileInfo file = dir.CreateFile("GetStreamSize_FileInfo_9.test");
-                using (var writer = new StreamWriter(file.FullName, false))
-                {
-                    writer.Write("Unit Test");
-                }
-
-                StreamSize act = file.GetStreamSize();
-                StreamSize exp = 9;
-
-                Assert.AreEqual(exp, act);
+                writer.Write("Unit Test");
             }
+
+            StreamSize act = file.GetStreamSize();
+            StreamSize exp = 9;
+
+            Assert.AreEqual(exp, act);
         }
 
         [Test]

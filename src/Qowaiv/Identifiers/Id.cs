@@ -27,6 +27,7 @@ namespace Qowaiv.Identifiers
     /// </typeparam>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
+    [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(object))]
     [OpenApiDataType(description: "identifier", type: "string/int")]
     [TypeConverter(typeof(IdTypeConverter))]
     public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>

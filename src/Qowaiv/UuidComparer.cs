@@ -43,7 +43,7 @@ namespace Qowaiv
             {
                 if (y is null)
                 {
-                    return -1;
+                    return +1;
                 }
                 if (y is Guid || y is Uuid)
                 {
@@ -52,7 +52,7 @@ namespace Qowaiv
                     return Compare(a, b);
                 }
             }
-            throw new ArgumentException($"Both arguments must be GUID/UUID.");
+            throw new NotSupportedException("Both arguments must be GUID/UUID.");
         }
     }
 }

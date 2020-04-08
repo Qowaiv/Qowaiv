@@ -2,6 +2,7 @@
 using Qowaiv.Globalization;
 using Qowaiv.Identifiers;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -71,7 +72,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             Assert.IsTrue(Id<ForInt32>.TryParse(null, out var val));
             Assert.AreEqual(default(Id<ForInt32>), val);
@@ -79,7 +80,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             Assert.IsTrue(Id<ForInt32>.TryParse(string.Empty, out var val));
             Assert.AreEqual(default(Id<ForInt32>), val);
@@ -87,7 +88,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "123456789";
             Assert.IsTrue(Id<ForInt32>.TryParse(str, out var val));
@@ -96,7 +97,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "ABC";
             Assert.IsFalse(Id<ForInt32>.TryParse(str, out var val));
@@ -106,7 +107,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>(() =>
                 {
@@ -120,7 +121,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Id<ForInt32>.TryParse(exp.ToString());
@@ -131,12 +132,19 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(Id<ForInt32>);
                 var act = Id<ForInt32>.TryParse("InvalidInput");
                 Assert.AreEqual(exp, act);
             }
+        }
+
+        [Test]
+        public void TryCreate_Int_Successful()
+        {
+            Assert.IsTrue(Id<ForInt32>.TryCreate(13, out var id));
+            Assert.AreEqual(Id<ForInt32>.Parse("13"), id);
         }
 
         [Test]
@@ -350,6 +358,13 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        public void ToJson_TestStruct_LongValue()
+        {
+            var json = TestStruct.ToJson();
+            Assert.AreEqual(123456789L, json);
+        }
+
+        [Test]
         public void ToString_Empty_StringEmpty()
         {
             var act = Id<ForInt32>.Empty.ToString(CultureInfo.InvariantCulture);
@@ -521,12 +536,6 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void CanNotConvertFromInt32_IdForInt32_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Id<ForInt32>), typeof(int));
-        }
-
-        [Test]
         public void CanNotConvertToGuid_IdForInt32_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(Id<ForInt32>), typeof(Guid));
@@ -547,16 +556,22 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFrom_StringNull_IdForInt32Empty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForInt32>.Empty, (string)null);
             }
         }
 
         [Test]
+        public void ConvertFrom_Int_TestStruct()
+        {
+            TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
+        }
+
+        [Test]
         public void ConvertFrom_StringEmpty_IdForInt32_Empty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForInt32>.Empty, string.Empty);
             }
@@ -565,7 +580,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -574,10 +589,16 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
+        }
+
+        [Test]
+        public void ConvertTo_Int_TestStruct()
+        {
+            TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
         }
 
         [Test]
@@ -601,6 +622,13 @@ namespace Qowaiv.UnitTests.Identifiers
         public void IsValid_String(string str)
         {
             Assert.IsTrue(Id<ForInt32>.IsValid(str));
+        }
+
+        [Test]
+        public void GetCodeType_String()
+        {
+            var convertable = (IConvertible)TestStruct;
+            Assert.AreEqual(TypeCode.Int32, convertable.GetTypeCode());
         }
     }
 

@@ -2,6 +2,7 @@
 using Qowaiv.Globalization;
 using Qowaiv.Identifiers;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +72,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             Assert.IsTrue(Id<ForString>.TryParse(null, out var val));
             Assert.AreEqual(default(Id<ForString>), val);
@@ -79,7 +80,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             Assert.IsTrue(Id<ForString>.TryParse(string.Empty, out var val));
             Assert.AreEqual(default(Id<ForString>), val);
@@ -87,7 +88,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
             Assert.IsTrue(Id<ForString>.TryParse(str, out var val));
@@ -97,7 +98,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Id<ForString>.TryParse(exp.ToString());
@@ -498,7 +499,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFrom_StringNull_IdForStringEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForString>.Empty, (string)null);
             }
@@ -507,7 +508,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFrom_StringEmpty_IdForString_Empty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(Id<ForString>.Empty, string.Empty);
             }
@@ -516,7 +517,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -525,7 +526,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
@@ -549,6 +550,13 @@ namespace Qowaiv.UnitTests.Identifiers
         public void IsValid_String(string str)
         {
             Assert.IsTrue(Id<ForString>.IsValid(str));
+        }
+
+        [Test]
+        public void GetCodeType_String()
+        {
+            var convertable = (IConvertible)TestStruct;
+            Assert.AreEqual(TypeCode.String, convertable.GetTypeCode());
         }
     }
 

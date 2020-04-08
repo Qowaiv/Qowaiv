@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -34,7 +35,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsNotValid()
+        public void TryParse_Null_IsNotValid()
         {
             string str = null;
             Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
@@ -42,7 +43,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse string.MinValue should be valid.</summary>
         [Test]
-        public void TyrParse_StringMinValue_IsNotValid()
+        public void TryParse_StringMinValue_IsNotValid()
         {
             string str = string.Empty;
             Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
@@ -50,19 +51,19 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (new CultureInfoScope(TestCultures.Nl_NL))
             {
                 string str = "26-4-2015 17:07:13";
                 Assert.IsTrue(LocalDateTime.TryParse(str, out LocalDateTime val), "Valid");
-                Assert.AreEqual(str, val.ToString(), "Value");
+                Assert.AreEqual(new LocalDateTime(2015, 04, 26, 17, 07, 13, 000), val, "Value");
             }
         }
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "invalid format";
             Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
@@ -71,7 +72,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -85,7 +86,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStructNoMilliseconds;
                 var act = LocalDateTime.TryParse(exp.ToString());
@@ -97,7 +98,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(LocalDateTime);
                 var act = LocalDateTime.TryParse("InvalidInput");
@@ -388,7 +389,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var l = LocalDateTime.Parse("14 february 2010", CultureInfo.InvariantCulture);
                 var r = LocalDateTime.Parse("2010-02-14", CultureInfo.InvariantCulture);
@@ -527,7 +528,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_StringToLocalDateTime_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStructNoMilliseconds;
                 var act = (LocalDateTime)TestStructNoMilliseconds.ToString(CultureInfo.CurrentCulture);
@@ -642,6 +643,25 @@ namespace Qowaiv.UnitTests
 
             Assert.AreEqual(exp, act);
         }
+
+        [Test]
+        public void Add_1Year_AreEqual()
+        {
+            var act = TestStruct + MonthSpan.FromYears(1);
+            var exp = new LocalDateTime(1989, 06, 13, 22, 10, 05, 001);
+
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void Subtract_1Month_AreEqual()
+        {
+            var act = TestStruct - MonthSpan.FromMonths(1);
+            var exp = new LocalDateTime(1988, 05, 13, 22, 10, 05, 001);
+
+            Assert.AreEqual(exp, act);
+        }
+
         [Test]
         public void AddYears_Min12_AreEqual()
         {
@@ -687,7 +707,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(LocalDateTimeTest.TestStructNoMilliseconds, LocalDateTimeTest.TestStructNoMilliseconds.ToString());
             }
@@ -696,7 +716,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(LocalDateTimeTest.TestStruct.ToString(), LocalDateTimeTest.TestStruct);
             }

@@ -241,6 +241,9 @@ namespace Qowaiv
         /// <summary>Gets an XML string representation of the week date.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
+        /// <summary>Bind XML value.</summary>
+        partial void OnReadXml(WeekDate value) => m_Value = value.m_Value;
+
         /// <summary>Casts a week date to a <see cref="string"/>.</summary>
         public static explicit operator string(WeekDate val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a week date to a date time.</summary>

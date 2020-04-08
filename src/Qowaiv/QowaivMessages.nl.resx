@@ -136,4 +136,10 @@
   <data name="FormatExceptionUuid" xml:space="preserve">
     <value>Geen geldig GUID</value>
   </data>
+  <data name="FormatExceptionFraction" xml:space="preserve">
+    <value>Geen geldige breuk</value>
+  </data>
+  <data name="FormatExceptionMonthSpan" xml:space="preserve">
+    <value>Geen geldige duur in maanden</value>
+  </data>
 </root>

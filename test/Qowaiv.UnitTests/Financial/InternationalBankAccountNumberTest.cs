@@ -2,6 +2,7 @@
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsValid()
+        public void TryParse_Null_IsValid()
         {
             string str = null;
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -60,7 +61,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsValid()
+        public void TryParse_StringEmpty_IsValid()
         {
             string str = string.Empty;
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -69,7 +70,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "NL20INGB0001234567";
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -78,7 +79,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_QuestionMark_IsValid()
+        public void TryParse_QuestionMark_IsValid()
         {
             string str = "?";
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -88,7 +89,7 @@ namespace Qowaiv.UnitTests.Financial
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
@@ -98,7 +99,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -112,7 +113,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = InternationalBankAccountNumber.TryParse(exp.ToString());
@@ -124,7 +125,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(InternationalBankAccountNumber);
                 var act = InternationalBankAccountNumber.TryParse("InvalidInput");
@@ -709,7 +710,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFrom_StringNull_InternationalBankAccountNumberEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumber.Empty, (string)null);
             }
@@ -718,7 +719,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFrom_StringEmpty_InternationalBankAccountNumberEmpty()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumber.Empty, string.Empty);
             }
@@ -727,7 +728,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumberTest.TestStruct, InternationalBankAccountNumberTest.TestStruct.ToString());
             }
@@ -736,7 +737,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(InternationalBankAccountNumberTest.TestStruct.ToString(), InternationalBankAccountNumberTest.TestStruct);
             }

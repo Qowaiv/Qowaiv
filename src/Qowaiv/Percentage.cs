@@ -66,13 +66,13 @@ namespace Qowaiv
 
         /// <summary>Gets a percentage of the current percentage.</summary>
         /// <param name="p">
-        /// The percentage to get.
+        /// The percentage to multiply with.
         /// </param>
         public Percentage Multiply(Percentage p) => m_Value * p.m_Value;
 
         /// <summary>Divides the current percentage by a specified percentage.</summary>
         /// <param name="p">
-        /// The percentage to devides to..
+        /// The percentage to divides to.
         /// </param>
         public Percentage Divide(Percentage p) => m_Value / p.m_Value;
 

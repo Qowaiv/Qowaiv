@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -53,7 +54,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsInvalid()
+        public void TryParse_Null_IsInvalid()
         {
             string str = null;
             Assert.IsFalse(Percentage.TryParse(str, out Percentage val), "Valid");
@@ -62,7 +63,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsInvalid()
+        public void TryParse_StringEmpty_IsInvalid()
         {
             string str = string.Empty;
             Assert.IsFalse(Percentage.TryParse(str, out Percentage val), "Valid");
@@ -71,9 +72,9 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 string str = "17,51%";
                 Assert.IsTrue(Percentage.TryParse(str, out Percentage val), "Valid");
@@ -83,7 +84,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsNotValid()
+        public void TryParse_StringValue_IsNotValid()
         {
             string str = "string";
             Assert.IsFalse(Percentage.TryParse(str, out Percentage val), "Valid");
@@ -93,7 +94,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -107,7 +108,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ParseFrench_Percentage17Comma51_AreEqual()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 var act = Percentage.Parse("%17,51");
                 Assert.AreEqual(TestStruct, act);
@@ -424,7 +425,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_IFormatProviderNull_FormattedString()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = TestStruct.ToString((IFormatProvider)null);
                 var exp = "17,51%";
@@ -436,7 +437,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_Zero_0()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Zero.ToString();
                 var exp = "0%";
@@ -447,7 +448,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_ZeroNullFormat_0()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Zero.ToString((String)null);
                 var exp = "0";
@@ -458,7 +459,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToPercentageString_TestStruct_0()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = TestStruct.ToString();
                 var exp = "17.51%";
@@ -468,7 +469,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToPerMilleString_TestStruct_0()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = TestStruct.ToPerMilleString();
                 var exp = "175.1‰";
@@ -478,7 +479,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToPerTenThousandMarkString_TestStruct_0()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = TestStruct.ToPerTenThousandMarkString();
                 var exp = "1751‱";
@@ -489,7 +490,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Percentage.Parse("1600,1").ToString();
                 var exp = "1600,1%";
@@ -499,7 +500,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_ValueDutchNetherlands_AreEqual()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var act = Percentage.Parse("1600,1").ToString("");
                 var exp = "1600,1";
@@ -510,7 +511,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Parse("1600.1").ToString();
                 var exp = "1600.1%";
@@ -521,7 +522,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 var act = Percentage.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -532,7 +533,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var act = Percentage.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -551,7 +552,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_PercentageEnGB_FormattedString()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.AreEqual("31.415%", ((Percentage).31415).ToString());
             }
@@ -560,7 +561,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_PercentageNlBE_FormattedString()
         {
-            using (new CultureInfoScope("nl-BE"))
+            using (TestCultures.Nl_BE.Scoped())
             {
                 Assert.AreEqual("31,415%", ((Percentage).31415).ToString());
             }
@@ -569,7 +570,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_PercentageFrFR_FormattedString()
         {
-            using (new CultureInfoScope("fr-FR"))
+            using (TestCultures.Fr_FR.Scoped())
             {
                 Assert.AreEqual("%31,415", ((Percentage).31415).ToString());
             }
@@ -577,9 +578,9 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_PercentageFaIR_FormattedString()
         {
-            using (new CultureInfoScope("fa-IR"))
+            using (new CultureInfoScope(TestCultures.Fa_IR))
             {
-                Assert.AreEqual("%31/415", ((Percentage).31415).ToString());
+                Assert.AreEqual("٪31,415", ((Percentage).31415).ToString());
             }
         }
 
@@ -599,7 +600,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToStringWithFormat_PercentageEnGB_FormattedString()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.AreEqual("11.11", ((Percentage).1111).ToString("0.00"));
                 Assert.AreEqual("022.22%", ((Percentage).2222).ToString("000.00%"));
@@ -1570,7 +1571,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_StringToPercentage_AreEqual()
         {
-            using (new CultureInfoScope("nl-NL"))
+            using (TestCultures.Nl_NL.Scoped())
             {
                 var exp = TestStruct;
                 var act = (Percentage)TestStruct.ToString();
@@ -1649,7 +1650,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -1658,7 +1659,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

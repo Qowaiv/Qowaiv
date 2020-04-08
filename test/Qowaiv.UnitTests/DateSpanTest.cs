@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,6 +16,8 @@ namespace Qowaiv.UnitTests
     {
         /// <summary>The test instance for most tests.</summary>
         public static readonly DateSpan TestStruct = new DateSpan(10, 3, -5);
+        public static readonly DateSpan Smaller = new DateSpan(10, 3, -5);
+        public static readonly DateSpan Bigger = new DateSpan(10, 3, +02);
 
         #region date span const tests
 
@@ -45,7 +48,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse null should be valid.</summary>
         [Test]
-        public void TyrParse_Null_IsInvalid()
+        public void TryParse_Null_IsInvalid()
         {
             string str = null;
             Assert.IsFalse(DateSpan.TryParse(str, out _));
@@ -53,7 +56,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse string.Empty should be valid.</summary>
         [Test]
-        public void TyrParse_StringEmpty_IsInvalid()
+        public void TryParse_StringEmpty_IsInvalid()
         {
             string str = string.Empty;
             Assert.IsFalse(DateSpan.TryParse(str, out _));
@@ -61,7 +64,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsValid()
+        public void TryParse_StringValue_IsValid()
         {
             string str = "5Y+3M+2D";
             Assert.IsTrue(DateSpan.TryParse(str, out DateSpan val), "Valid");
@@ -70,7 +73,7 @@ namespace Qowaiv.UnitTests
 
         /// <summary>TryParse with specified string value should be invalid.</summary>
         [Test]
-        public void TyrParse_StringValue_IsInvalid()
+        public void TryParse_StringValue_IsInvalid()
         {
             string str = "InvalidString";
             Assert.IsFalse(DateSpan.TryParse(str, out _), "Valid");
@@ -79,7 +82,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -93,7 +96,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = DateSpan.TryParse(exp.ToString());
@@ -105,7 +108,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_InvalidInput_DefaultValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 var exp = default(DateSpan);
                 var act = DateSpan.TryParse("InvalidInput");
@@ -547,8 +550,47 @@ namespace Qowaiv.UnitTests
             "Argument must be DateSpan."
             );
         }
+
+        [Test]
+        public void Smaller_LessThan_Bigger_IsTrue()
+        {
+            Assert.IsTrue(Smaller < Bigger);
+        }
+        [Test]
+        public void Bigger_GreaterThan_Smaller_IsTrue()
+        {
+            Assert.IsTrue(Bigger > Smaller);
+        }
+
+        [Test]
+        public void Smaller_LessThanOrEqual_Bigger_IsTrue()
+        {
+            Assert.IsTrue(Smaller <= Bigger);
+        }
+        [Test]
+        public void Bigger_GreaterThanOrEqual_Smaller_IsTrue()
+        {
+            Assert.IsTrue(Bigger >= Smaller);
+        }
+
+        [Test]
+        public void Smaller_LessThanOrEqual_Smaller_IsTrue()
+        {
+            var left = Smaller;
+            var right = Smaller;
+            Assert.IsTrue(left <= right);
+        }
+
+        [Test]
+        public void Smaller_GreaterThanOrEqual_Smaller_IsTrue()
+        {
+            var left = Smaller;
+            var right = Smaller;
+            Assert.IsTrue(left >= right);
+        }
+
         #endregion
-    
+
         #region Properties
 
         [TestCase(1, 2, +3)]
@@ -598,6 +640,19 @@ namespace Qowaiv.UnitTests
         #endregion
 
         #region Operations
+
+        [Test]
+        public void Negate_TestStruct_Negated()
+        {
+            var negated = -TestStruct;
+            Assert.AreEqual(new DateSpan(-10, -3, +5), negated);
+        }
+        [Test]
+        public void Pluse_TestStruct_Unchanged()
+        {
+            var negated = +TestStruct;
+            Assert.AreEqual(TestStruct, negated);
+        }
 
         [Test]
         public void Mutate_Overflows()
@@ -684,9 +739,9 @@ namespace Qowaiv.UnitTests
         [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
         [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
         [TestCase(-12, +01, "2017-06-11","2018-06-10", DateSpanSettings.MixedSigns)]
-        public void Subtract(int months, int days, Date t1, Date t2, DateSpanSettings settings)
+        public void Subtract(int months, int days, Date d1, Date d2, DateSpanSettings settings)
         {
-            var span = DateSpan.Subtract(t1, t2, settings);
+            var span = DateSpan.Subtract(d1, d2, settings);
             var expected = new DateSpan(0, months, days);
             Assert.AreEqual(expected, span);
         }
@@ -727,7 +782,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertFromString_StringValue_TestStruct()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
@@ -736,7 +791,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ConvertToString_TestStruct_StringValue()
         {
-            using (new CultureInfoScope("en-GB"))
+            using (TestCultures.En_GB.Scoped())
             {
                 TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }

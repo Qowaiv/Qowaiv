@@ -82,9 +82,19 @@ namespace Qowaiv
         public bool IsIPBased => !IsEmptyOrUnknown() && m_Value[m_Value.Length - 1] == ']';
 
         /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None"/>.</summary>
-        public IPAddress IPDomain => IsIPBased
-            ? IPAddress.Parse(Domain.Substring(1, Domain.Length - 2))
-            : IPAddress.None;
+        public IPAddress IPDomain
+        {
+            get
+            {
+                if (!IsIPBased) { return IPAddress.None; }
+
+                var ip = Domain.StartsWith("[IPv6:", StringComparison.InvariantCulture)
+                    ? Domain.Substring(6, Domain.Length - 7)
+                    : Domain.Substring(1, Domain.Length - 2);
+
+                return IPAddress.Parse(ip);
+            }
+        }
 
         /// <summary>Gets the email address with a (prefix) display name.</summary>
         /// <param name="displayName">

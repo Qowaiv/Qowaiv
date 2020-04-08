@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Text
 {
-    internal class CharBuffer: IEquatable<string>
+    internal class CharBuffer : IEquatable<string>
     {
         private const int NotFound = -1;
 
@@ -69,7 +69,7 @@ namespace Qowaiv.Text
         /// </returns>
         public int LastIndexOf(char ch)
         {
-            for (var i = Length -1; i >= 0; i--)
+            for (var i = Length - 1; i >= 0; i--)
             {
                 if (buffer[i] == ch)
                 {
@@ -83,13 +83,13 @@ namespace Qowaiv.Text
 
         public bool StartsWith(string str)
         {
-            if(str.Length > Length)
+            if (str.Length > Length)
             {
                 return false;
             }
-            for(var i = 0; i < str.Length; i++)
+            for (var i = 0; i < str.Length; i++)
             {
-                if(buffer[i] != str[i])
+                if (buffer[i] != str[i])
                 {
                     return false;
                 }

@@ -302,16 +302,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = EmailAddressTest.TestStruct;
-            var exp = EmailAddressTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.SerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = EmailAddressTest.TestStruct;
-            var exp = EmailAddressTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializationTest.DataContractSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
@@ -338,13 +338,13 @@ namespace Qowaiv.UnitTests
             var input = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.SerializeDeserialize(input);
@@ -358,13 +358,13 @@ namespace Qowaiv.UnitTests
             var input = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.XmlSerializeDeserialize(input);
@@ -378,13 +378,13 @@ namespace Qowaiv.UnitTests
             var input = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var exp = new EmailAddressSerializeObject
             {
                 Id = 17,
-                Obj = EmailAddressTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
             var act = SerializationTest.DataContractSerializeDeserialize(input);
@@ -598,52 +598,52 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Equals_TestStructTestStruct_IsTrue()
         {
-            Assert.IsTrue(EmailAddressTest.TestStruct.Equals(EmailAddressTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructEmpty_IsFalse()
         {
-            Assert.IsFalse(EmailAddressTest.TestStruct.Equals(EmailAddress.Empty));
+            Assert.IsFalse(TestStruct.Equals(EmailAddress.Empty));
         }
 
         [Test]
         public void Equals_EmptyTestStruct_IsFalse()
         {
-            Assert.IsFalse(EmailAddress.Empty.Equals(EmailAddressTest.TestStruct));
+            Assert.IsFalse(EmailAddress.Empty.Equals(TestStruct));
         }
 
         [Test]
         public void Equals_TestStructObjectTestStruct_IsTrue()
         {
-            Assert.IsTrue(EmailAddressTest.TestStruct.Equals((object)EmailAddressTest.TestStruct));
+            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
         }
 
         [Test]
         public void Equals_TestStructNull_IsFalse()
         {
-            Assert.IsFalse(EmailAddressTest.TestStruct.Equals(null));
+            Assert.IsFalse(TestStruct.Equals(null));
         }
 
         [Test]
         public void Equals_TestStructObject_IsFalse()
         {
-            Assert.IsFalse(EmailAddressTest.TestStruct.Equals(new object()));
+            Assert.IsFalse(TestStruct.Equals(new object()));
         }
 
         [Test]
         public void OperatorIs_TestStructTestStruct_IsTrue()
         {
-            var l = EmailAddressTest.TestStruct;
-            var r = EmailAddressTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsTrue(l == r);
         }
 
         [Test]
         public void OperatorIsNot_TestStructTestStruct_IsFalse()
         {
-            var l = EmailAddressTest.TestStruct;
-            var r = EmailAddressTest.TestStruct;
+            var l = TestStruct;
+            var r = TestStruct;
             Assert.IsFalse(l != r);
         }
 
@@ -825,10 +825,19 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void IPDomain_IPBasedEmail_None()
+        public void IPDomain_IPBasedEmail_SomeIPAddress()
         {
             var email = EmailAddress.Parse("qowaiv@172.16.254.1");
             var exp = IPAddress.Parse("172.16.254.1");
+            var act = email.IPDomain;
+            Assert.AreEqual(exp, act);
+        }
+
+        [Test]
+        public void IPDomain_IPv6BasedEmail_SomeIPV6ddress()
+        {
+            var email = EmailAddress.Parse("qowaiv@[IPv6:0::1]");
+            var exp = IPAddress.Parse("0::1");
             var act = email.IPDomain;
             Assert.AreEqual(exp, act);
         }
@@ -915,7 +924,7 @@ namespace Qowaiv.UnitTests
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(EmailAddressTest.TestStruct, EmailAddressTest.TestStruct.ToString());
+                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
             }
         }
 
@@ -924,7 +933,7 @@ namespace Qowaiv.UnitTests
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(EmailAddressTest.TestStruct.ToString(), EmailAddressTest.TestStruct);
+                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
             }
         }
 

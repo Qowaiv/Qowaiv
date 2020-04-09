@@ -162,13 +162,6 @@ namespace Qowaiv
         /// <summary>Casts a <see cref="bool"/> to a yes-no.</summary>
         public static explicit operator YesNo(bool val) => val ? Yes : No;
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => IsYes();
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.Boolean;
-
         private static readonly bool?[] BooleanValues = new bool?[] { null, false, true, null };
 
         /// <summary>Converts the string to a yes-no.

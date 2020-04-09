@@ -562,14 +562,6 @@ namespace Qowaiv.Mathematics
 
         #endregion
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => ToDecimal();
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.Decimal;
-
-
         #region (Explicit) casting
 
         /// <summary>Casts the fraction to a <see cref="decimal"/>.</summary>

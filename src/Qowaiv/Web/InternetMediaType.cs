@@ -173,13 +173,6 @@ namespace Qowaiv.Web
         /// <summary>Casts a <see cref="string"/> to a Internet media type.</summary>
         public static explicit operator InternetMediaType(string str) => Cast.InvariantString<InternetMediaType>(TryParse, str);
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value ?? string.Empty;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
-
         /// <summary>Converts the string to an Internet media type.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

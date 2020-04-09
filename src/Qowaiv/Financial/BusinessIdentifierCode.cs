@@ -119,14 +119,6 @@ namespace Qowaiv.Financial
         /// <summary>Casts a <see cref="string"/> to a BIC.</summary>
         public static explicit operator BusinessIdentifierCode(string str) => Cast.String<BusinessIdentifierCode>(TryParse, str);
 
-
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value ?? string.Empty;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
-
         /// <summary>Converts the string to a BIC.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

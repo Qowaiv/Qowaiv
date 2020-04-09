@@ -181,13 +181,6 @@ namespace Qowaiv
 
         private string ToDefaultString() => IsUnknown() ? "?" : string.Empty;
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.Byte;
-
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<Month, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Month, IFormatProvider, string>>
         {

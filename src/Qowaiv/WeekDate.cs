@@ -259,13 +259,6 @@ namespace Qowaiv
         /// <summary>Casts a local date time to a week date.</summary>
         public static explicit operator WeekDate(LocalDateTime val) => Create(val.Date);
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.DateTime;
-
         /// <summary>Converts the string to a week date.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

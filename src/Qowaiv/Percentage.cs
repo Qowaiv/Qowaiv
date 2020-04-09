@@ -676,13 +676,6 @@ namespace Qowaiv
 
         #endregion
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.Decimal;
-
         /// <summary>Converts the string to a Percentage.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

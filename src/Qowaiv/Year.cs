@@ -122,13 +122,6 @@ namespace Qowaiv
         /// <summary>Casts an System.Int32 to a year.</summary>
         public static implicit operator Year(int val) => Cast.Primitive<int, Year>(TryCreate, val);
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.Int16;
-
         /// <summary>Converts the string to a year.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

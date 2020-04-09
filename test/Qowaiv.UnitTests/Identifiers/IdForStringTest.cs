@@ -551,13 +551,6 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             Assert.IsTrue(Id<ForString>.IsValid(str));
         }
-
-        [Test]
-        public void GetCodeType_String()
-        {
-            var convertable = (IConvertible)TestStruct;
-            Assert.AreEqual(TypeCode.String, convertable.GetTypeCode());
-        }
     }
 
     [Serializable]

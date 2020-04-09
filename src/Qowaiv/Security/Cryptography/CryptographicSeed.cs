@@ -125,13 +125,6 @@ namespace Qowaiv.Security.Cryptography
         /// <summary>Casts a System.byte[] to a cryptographic seed.</summary>
         public static implicit operator CryptographicSeed(byte[] bytes) => Create(bytes);
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => ToString(CultureInfo.InvariantCulture);
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
-
         /// <summary>Converts the string to a cryptographic seed.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

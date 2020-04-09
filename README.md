@@ -7,7 +7,7 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-5.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-5.1.1-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
 |![v](https://img.shields.io/badge/version-5.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-3.1.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
@@ -878,14 +878,6 @@ of string.Format(). The difference between these two methods is, that - when no
 custom format is supplied at the format string - string.Format() the default 
 formatting of the object is used, where FormattingArgumentsCollection.Format() 
 uses the default specified at the formatting collection of a type (if available).
-
-### IConvertable
-The `IConvertable` interface has limited value for other types than the .NET
-primitives. However, for some old constructs (like VB.NET's `CStr()`), just
-having an basic implementation helps.
-
-For that reason, all methods required by the interface are only explicitly
-accessable.
 
 ### Threading
 Because there are scenario's where you want to set typical values as a country 

@@ -72,15 +72,6 @@ namespace Qowaiv.UnitTests
         public void ImplementsIComparableOfT(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IComparable<>).MakeGenericType(svo));
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void ImplementsIConvertible(Type svo)
-        {
-            // DateSpan is excluded.
-            if (typeof(DateSpan) == svo) { return; }
-
-            TypeAssert.ImplementsInterface(svo, typeof(IComparable<>).MakeGenericType(svo));
-        }
-
-        [TestCaseSource(nameof(SvoTypes))]
         public void HasSerializableAttribute(Type svo) => TypeAssert.HasAttribute(svo, typeof(SerializableAttribute));
 
         [TestCaseSource(nameof(SvoTypes))]

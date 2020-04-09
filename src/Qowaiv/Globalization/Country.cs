@@ -249,13 +249,6 @@ namespace Qowaiv.Globalization
         /// <summary>Casts a Country to a System.Globalization.RegionInf.</summary>
         public static explicit operator RegionInfo(Country val) => val.ToRegionInfo();
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value ?? string.Empty;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
-
         /// <summary>Converts the string to a 
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

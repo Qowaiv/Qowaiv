@@ -171,13 +171,6 @@ namespace Qowaiv
         /// <summary>Gets an XML string representation of the email address.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value ?? string.Empty;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.String;
-
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>
         {

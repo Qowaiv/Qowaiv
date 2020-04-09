@@ -99,13 +99,6 @@ namespace Qowaiv.Sql
         [CLSCompliant(false)]
         public static implicit operator Timestamp(ulong val) => Create(val);
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => m_Value;
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.UInt64;
-
         /// <summary>Converts the string to a timestamp.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

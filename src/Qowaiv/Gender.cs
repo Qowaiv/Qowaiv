@@ -166,13 +166,6 @@ namespace Qowaiv
         /// <summary>Casts an <see cref="int"/> to a Gender.</summary>
         public static implicit operator Gender(int? val) => Cast.Primitive<int, Gender>(TryCreate, val);
 
-        /// <summary>Represents the underlying value as <see cref="IConvertible"/>.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IConvertible Convertable => ToInt32();
-
-        /// <inheritdoc/>
-        TypeCode IConvertible.GetTypeCode() => TypeCode.Int32;
-
         /// <summary>Converts the string to a Gender.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

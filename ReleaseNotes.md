@@ -1,6 +1,10 @@
 ﻿# Release Notes
 
-## Released 2020-04-08
+## Released 2020-04-01
+### Qowaiv 5.1.1
+* Revoked `IConvertable` () fix
+
+Released 2020-04-08
 ### Qowaiv 5.1.0
 * Introduction of strongly-typed identifier (#132)
 * Introduction of `MonthSpan` (#142)

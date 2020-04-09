@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.TestTools;
 
-namespace Qowaiv.Tests
+namespace Qowaiv.UnitTests
 {
     public class AssemblyTest
     {

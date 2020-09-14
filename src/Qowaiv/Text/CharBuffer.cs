@@ -1,5 +1,4 @@
-﻿using Qowaiv.Formatting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -33,6 +32,7 @@ namespace Qowaiv.Text
         public bool Matches(Regex regex) => regex.IsMatch(ToString());
 
         public char First() => buffer[0];
+        
         public char Last() => buffer[Length - 1];
 
         public CharBuffer Add(CharBuffer other)

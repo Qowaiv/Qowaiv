@@ -45,7 +45,7 @@ namespace Qowaiv.Mathematics
             var integerSeperator = formatInfo.NumberGroupSeparator == " " ? '+' : ' ';
 
             var sign = 1;
-            var str = new CharBuffer(s).Trim();
+            var str = s.Buffer().Trim();
             var index = 0;
 
             // check for +/-.

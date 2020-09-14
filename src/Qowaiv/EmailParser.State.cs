@@ -9,7 +9,7 @@ namespace Qowaiv
         {
             public State(string str)
             {
-                Input = new CharBuffer(str).Trim();
+                Input = str.Buffer().Trim();
                 Buffer = new CharBuffer(EmailAddress.MaxLength);
                 Result = new CharBuffer(EmailAddress.MaxLength);
 

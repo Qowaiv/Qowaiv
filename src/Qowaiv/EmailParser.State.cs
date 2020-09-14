@@ -22,9 +22,9 @@ namespace Qowaiv
 
             public bool DisplayNameRemoved;
 
-            public bool Done => Input.Empty() || TooLong();
+            public bool Done => Input.IsEmpty() || TooLong();
 
-            public bool IsLocal => Result.Empty();
+            public bool IsLocal => Result.IsEmpty();
 
             private bool TooLong()
             {

@@ -10,6 +10,7 @@ using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -128,22 +129,26 @@ namespace Qowaiv
         public static bool TryParse(string s, IFormatProvider formatProvider, out PostalCode result)
         {
             result = default;
-            if (string.IsNullOrEmpty(s))
+            var buffer = s.Buffer().Unify();
+
+            if (buffer.IsEmpty())
             {
                 return true;
             }
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            if (Qowaiv.Unknown.IsUnknown(s, culture))
+            else if (buffer.IsUnknown(formatProvider))
             {
                 result = Unknown;
                 return true;
             }
-            if (Pattern.IsMatch(s))
+            else if (buffer.Matches(Pattern))
             {
-                result = new PostalCode(Parsing.ClearSpacingAndMarkupToUpper(s));
+                result = new PostalCode(buffer);
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>

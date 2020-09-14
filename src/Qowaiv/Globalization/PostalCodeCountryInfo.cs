@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Qowaiv.Text;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace Qowaiv.Globalization
             return
                 !string.IsNullOrEmpty(postalcode) &&
                 HasPostalCode &&
-                ValidationPattern.IsMatch(Parsing.ClearSpacingAndMarkup(postalcode));
+                postalcode.Buffer().Unify().Matches(ValidationPattern);
         }
 
         /// <summary>Formats the postal code.</summary>

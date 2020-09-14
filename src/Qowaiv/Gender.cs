@@ -5,6 +5,7 @@
 using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -184,22 +185,26 @@ namespace Qowaiv
         public static bool TryParse(string s, IFormatProvider formatProvider, out Gender result)
         {
             result = Empty;
-            if (string.IsNullOrEmpty(s))
+            var buffer = s.Buffer().Unify();
+            
+            if (buffer.IsEmpty())
             {
                 return true;
             }
-            var c = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-
-            AddCulture(c);
-
-            var str = Parsing.ToUnified(s);
-
-            if (Parsings[c].TryGetValue(str, out byte val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            else
             {
-                result = new Gender(val);
-                return true;
+                var c = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+                AddCulture(c);
+                var str = buffer.ToString();
+
+                if (Parsings[c].TryGetValue(str, out byte val) ||
+                    Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+                {
+                    result = new Gender(val);
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         /// <summary>Creates a Gender from a int.</summary>

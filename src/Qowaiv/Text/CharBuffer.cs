@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Qowaiv.Formatting;
+using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Qowaiv.Text
 {
-    internal class CharBuffer : IEquatable<string>
+    internal sealed class CharBuffer : IEquatable<string>
     {
-        private const int NotFound = -1;
+        internal static readonly int NotFound = -1;
 
         private readonly char[] buffer;
 
@@ -19,8 +22,13 @@ namespace Qowaiv.Text
 
         public char this[int index] => buffer[index];
 
-        public bool Empty() => Length == 0;
+        public bool IsEmpty() => Length == 0;
         public bool NotEmpty() => Length != 0;
+
+        public bool IsUnknown(IFormatProvider provider) 
+            => Unknown.IsUnknown(ToString(), provider as CultureInfo);
+
+        public bool Matches(Regex regex) => regex.IsMatch(ToString());
 
         public char First() => buffer[0];
         public char Last() => buffer[Length - 1];
@@ -140,6 +148,7 @@ namespace Qowaiv.Text
             }
             return this;
         }
+       
         public CharBuffer RemoveFromEnd(int length)
         {
             Length -= length;
@@ -160,16 +169,90 @@ namespace Qowaiv.Text
             return this;
         }
 
+        public CharBuffer ClearSpacing() => ClearChars(IsWhiteSpace);
+
+        public CharBuffer ClearMarkup() => ClearChars(IsMarkup);
+
+        private CharBuffer ClearChars(Func<char, bool> applies)
+        {
+            if (NotEmpty() && applies(Last()))
+            {
+                return RemoveFromEnd(1).ClearSpacing();
+            }
+            else
+            {
+                for (var i = Length - 2; i >= 0; i--)
+                {
+                    if (applies(this[i]))
+                    {
+                        for (var p = i; p < Length - 1; p++)
+                        {
+                            buffer[p] = buffer[p + 1];
+                        }
+                        Length -= 1;
+                    }
+                }
+            }
+            return this;
+        }
+
         public CharBuffer Clear()
         {
             Length = 0;
             return this;
         }
 
+        public CharBuffer Uppercase()
+        {
+            for (var i = 0; i < Length; i++)
+            {
+                buffer[i] = char.ToUpper(buffer[i], CultureInfo.InvariantCulture);
+            }
+            return this;
+        }
+
+        public CharBuffer Unify()
+        {
+            if(IsEmpty())
+            {
+                return this;
+            }
+            var charBuffer = new CharBuffer(Length * 2);
+
+            for (var i = 0; i < Length; i++)
+            {
+                var ch = buffer[i];
+
+                var index = StringFormatter.DiacriticSearch.IndexOf(ch);
+                if (index == NotFound)
+                {
+                    if (StringFormatter.DiacriticLookup.TryGetValue(ch, out string chs))
+                    {
+                        charBuffer.Add(chs);
+                    }
+                    else
+                    {
+                        charBuffer.Add(ch);
+                    }
+                }
+                else
+                {
+                    charBuffer.Add(StringFormatter.DiacriticReplace[index]);
+                }
+            }
+            return charBuffer
+                .ClearSpacing()
+                .ClearMarkup()
+                .Uppercase();
+        }
+
         public string Substring(int startIndex) => new string(buffer, startIndex, Length - startIndex);
+
+        public string Substring(int startIndex, int length) => new string(buffer, startIndex, length);
 
         /// <inheritdoc />
         public bool Equals(string other) => Equals(other, false);
+        
         public bool Equals(string other, bool ignoreCase)
         {
             if (Length != other.Length)
@@ -193,5 +276,27 @@ namespace Qowaiv.Text
         public static implicit operator string(CharBuffer buffer) => buffer?.ToString();
 
         public override string ToString() => new string(buffer, 0, Length);
+
+        private static bool IsWhiteSpace(char ch) => char.IsWhiteSpace(ch);
+        
+        private static bool IsMarkup(char ch) => markup.IndexOf(ch) != NotFound;
+
+        private static readonly string markup = "-+._"
+            + (char)0x00B7 // middle dot
+            + (char)0x22C5 // dot operator
+            + (char)0x2202 // bullet
+            + (char)0x2012 // figure dash / minus
+            + (char)0x2013 // en dash
+            + (char)0x2014 // em dash
+            + (char)0x2015 // horizontal bar
+        ;
+    }
+
+    internal static class CharrBufferExtensions
+    {
+        public static CharBuffer Buffer(this string str)
+            => str is null
+            ? new CharBuffer(0)
+            : new CharBuffer(str);
     }
 }

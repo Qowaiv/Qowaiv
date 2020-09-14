@@ -10,6 +10,7 @@ using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -191,27 +192,30 @@ namespace Qowaiv.Financial
         public static bool TryParse(string s, IFormatProvider formatProvider, out InternationalBankAccountNumber result)
         {
             result = default;
-            if (string.IsNullOrEmpty(s))
+            var buffer = s.Buffer().Unify();
+            if (buffer.IsEmpty())
             {
                 return true;
             }
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            if (Qowaiv.Unknown.IsUnknown(s, culture))
+            else if (buffer.IsUnknown(formatProvider))
             {
                 result = Unknown;
                 return true;
             }
-            if (Pattern.IsMatch(s))
+            else if (buffer.Matches(Pattern))
             {
-                var str = Parsing.ClearSpacingToUpper(s);
-                var country = Country.TryParse(str.Substring(0, 2));
-
+                var country = Country.TryParse(buffer.Substring(0, 2));
                 const int mod = 97;
 
-                if (str.Length > 11 && !country.IsEmptyOrUnknown() &&
-                    (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern) || localizedPattern.IsMatch(str)))
+                if (buffer.Length > 11 
+                    && !country.IsEmptyOrUnknown() 
+                    && (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern) 
+                    || buffer.Matches(localizedPattern)))
                 {
-                    var validation = Alphanumeric.Replace(str.Substring(4) + str.Substring(0, 4), AlphanumericToNumeric);
+                    var validation = Alphanumeric.Replace(
+                        buffer.Substring(4) + 
+                        buffer.Substring(0, 4), 
+                        AlphanumericToNumeric);
 
                     int sum = 0;
                     int exp = 1;
@@ -223,7 +227,7 @@ namespace Qowaiv.Financial
                     }
                     if ((sum % mod) == 1)
                     {
-                        result = new InternationalBankAccountNumber(str);
+                        result = new InternationalBankAccountNumber(buffer);
                         return true;
                     }
                 }

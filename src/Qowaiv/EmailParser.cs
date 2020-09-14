@@ -211,7 +211,7 @@ namespace Qowaiv
                     return s.Buffer.NotEmpty() && prev != Dot ? s.LocalToResult() : s.Invalid();
                 }
 
-                if (ch == Quote && s.Buffer.Empty())
+                if (ch == Quote && s.Buffer.IsEmpty())
                 {
                     s.DisplayNameRemoved = true;
                     return s.CheckForQuotedBlock();
@@ -229,7 +229,7 @@ namespace Qowaiv
                 if (!ch.IsValidLocal()) { return s.Invalid(); }
 
                 // Don't start with a dot. and not ..
-                if (ch == Dot && (prev == Dot || s.Buffer.Empty())) { return s.Invalid(); }
+                if (ch == Dot && (prev == Dot || s.Buffer.IsEmpty())) { return s.Invalid(); }
 
                 s.Buffer.Add(ch);
                 prev = ch;
@@ -259,7 +259,7 @@ namespace Qowaiv
                 if (!isIP && !ch.IsValidDomain()) { return s.Invalid(); }
 
                 // Don't start with a dash or a dot.
-                if (s.Buffer.Empty() && (ch == Dash || ch == Dot)) { return s.Invalid(); }
+                if (s.Buffer.IsEmpty() && (ch == Dash || ch == Dot)) { return s.Invalid(); }
 
                 if (ch == Dot)
                 {

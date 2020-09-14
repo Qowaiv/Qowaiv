@@ -10,6 +10,7 @@ using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -137,26 +138,28 @@ namespace Qowaiv.Financial
         public static bool TryParse(string s, IFormatProvider formatProvider, out BusinessIdentifierCode result)
         {
             result = default;
-            if (string.IsNullOrEmpty(s))
+
+            var buffer = s.Buffer().Unify();
+
+            if (buffer.IsEmpty())
             {
                 return true;
             }
-            if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
+            else if (buffer.IsUnknown(formatProvider))
             {
                 result = Unknown;
                 return true;
             }
-            if (Pattern.IsMatch(s))
+            else if (buffer.Matches(Pattern) && 
+                !Country.TryParse(buffer.Substring(4, 2)).IsEmptyOrUnknown())
             {
-                result = new BusinessIdentifierCode(Parsing.ClearSpacingAndMarkupToUpper(s));
-                if (Country.TryParse(result.m_Value.Substring(4, 2)).IsEmptyOrUnknown())
-                {
-                    result = default;
-                    return false;
-                }
+                result = new BusinessIdentifierCode(buffer);
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
     }
 }

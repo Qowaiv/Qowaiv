@@ -1,11 +1,13 @@
 ﻿using Qowaiv.Formatting;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Qowaiv.Text
 {
-    internal sealed class CharBuffer : IEquatable<string>
+    internal sealed partial class CharBuffer : IEquatable<string>
     {
         internal static readonly int NotFound = -1;
 
@@ -212,39 +214,10 @@ namespace Qowaiv.Text
         }
 
         public CharBuffer Unify()
-        {
-            if(IsEmpty())
-            {
-                return this;
-            }
-            var charBuffer = new CharBuffer(Length * 2);
-
-            for (var i = 0; i < Length; i++)
-            {
-                var ch = buffer[i];
-
-                var index = StringFormatter.DiacriticSearch.IndexOf(ch);
-                if (index == NotFound)
-                {
-                    if (StringFormatter.DiacriticLookup.TryGetValue(ch, out string chs))
-                    {
-                        charBuffer.Add(chs);
-                    }
-                    else
-                    {
-                        charBuffer.Add(ch);
-                    }
-                }
-                else
-                {
-                    charBuffer.Add(StringFormatter.DiacriticReplace[index]);
-                }
-            }
-            return charBuffer
-                .ClearSpacing()
-                .ClearMarkup()
-                .Uppercase();
-        }
+        =>  ClearSpacing()
+            .ClearMarkup()
+            .Uppercase()
+            .ToNonDiacritic();
 
         public string Substring(int startIndex) => new string(buffer, startIndex, Length - startIndex);
 
@@ -277,6 +250,8 @@ namespace Qowaiv.Text
 
         public override string ToString() => new string(buffer, 0, Length);
 
+        private IEnumerable<char> Chars() => buffer.Take(Length);
+
         private static bool IsWhiteSpace(char ch) => char.IsWhiteSpace(ch);
         
         private static bool IsMarkup(char ch) => markup.IndexOf(ch) != NotFound;
@@ -290,13 +265,5 @@ namespace Qowaiv.Text
             + (char)0x2014 // em dash
             + (char)0x2015 // horizontal bar
         ;
-    }
-
-    internal static class CharrBufferExtensions
-    {
-        public static CharBuffer Buffer(this string str)
-            => str is null
-            ? new CharBuffer(0)
-            : new CharBuffer(str);
     }
 }

@@ -846,7 +846,6 @@ namespace Qowaiv.UnitTests.Financial
         [TestCase("AAAANLBB1", "Branch length of 1")]
         [TestCase("AAAANLBB12", "Branch length of 2")]
         [TestCase("ABCDXX01", "Not existing country")]
-        [TestCase("AAAANLBË", "Diacritic")]
         public void IsValid_False(string str, string message)
         {
             Assert.IsFalse(BusinessIdentifierCode.IsValid(str), "{0}, {1}", str, message);
@@ -861,6 +860,7 @@ namespace Qowaiv.UnitTests.Financial
         [TestCase("DABADKKK")]
         [TestCase("UNCRIT2B912")]
         [TestCase("DSBACNBXSHA")]
+        [TestCase("AAAANLBË")]
         public void IsValid_True(string str)
         {
             Assert.IsTrue(BusinessIdentifierCode.IsValid(str), str);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.Text;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,7 +34,7 @@ namespace Qowaiv.Formatting
         {
             return Apply(obj, format, formatProvider, tokens, '\\');
         }
-        
+
         /// <summary>Apply a format string instruction on an object.</summary>
         /// <typeparam name="T">
         /// The type of the object to format.
@@ -138,9 +139,8 @@ namespace Qowaiv.Formatting
         /// The string to remove the diacritics from.
         /// </param>
         public static string ToNonDiacritic(string str)
-        {
-            return ToNonDiacritic(str, string.Empty);
-        }
+            => ToNonDiacritic(str, string.Empty);
+
         /// <summary>Replaces diacritic characters by non diacritic ones.</summary>
         /// <param name="str">
         /// The string to remove the diacritics from.
@@ -149,48 +149,8 @@ namespace Qowaiv.Formatting
         /// Diacritics at the ignore, will not be changed.
         /// </param>
         public static string ToNonDiacritic(string str, string ignore)
-        {
-            if (string.IsNullOrEmpty(str)) { return str; }
-            var sb = new StringBuilder();
-
-            foreach (var ch in str)
-            {
-                if (ignore?.IndexOf(ch) > -1)
-                {
-                    sb.Append(ch);
-                }
-                else
-                {
-                    var index = DiacriticSearch.IndexOf(ch);
-                    if (index > -1)
-                    {
-                        sb.Append(DiacriticReplace[index]);
-                    }
-                    else
-                    {
-                        if (DiacriticLookup.TryGetValue(ch, out string chs))
-                        {
-                            sb.Append(chs);
-                        }
-                        else
-                        {
-                            sb.Append(ch);
-                        }
-                    }
-                }
-            }
-            return sb.ToString();
-        }
-
-        internal const string DiacriticSearch = /*  outlining */ "ÀÁÂÃÄÅĀĂĄǍǺàáâãäåāăąǎǻÇĆĈĊČƠçćĉċčơÐĎďđÈÉÊËĒĔĖĘĚèéêëēĕėęěÌÍÎÏĨĪĬĮİǏìíîïıĩīĭįǐĴĵĜĞĠĢĝğġģĤĦĥħĶķĸĹĻĽĿŁĺļľŀłÑŃŅŇŊñńņňŉŋÒÓÔÕÖØŌŎŐǑǾðòóôõöøōŏőǒǿŔŖŘŕŗřŚŜŞŠśŝşšŢŤŦţťŧÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛùúûüũūŭůűųưǔǖǘǚǜŴŵÝŶŸýÿŷŹŻŽźżž";
-        internal const string DiacriticReplace = /* outlining */ "AAAAAAAAAAAaaaaaaaaaaaCCCCCCccccccDDddEEEEEEEEEeeeeeeeeeIIIIIIIIIIiiiiiiiiiiJjGGGGggggHHhhKkkLLLLLlllllNNNNNnnnnnnOOOOOOOOOOOooooooooooooRRRrrrSSSSssssTTTtttUUUUUUUUUUUUUUUUuuuuuuuuuuuuuuuuWwYYYyyyZZZzzz";
-
-        internal static readonly Dictionary<char, string> DiacriticLookup = new Dictionary<char, string>
-        {
-            {'Æ', "AE"},{'Ǽ', "AE"},{'æ', "ae"}, {'ǽ',"ae"},
-            {'ß', "sz"},
-            {'Œ', "OE"},{'œ', "oe"},
-            {'Ĳ', "IJ"},{'ĳ', "ij"},
-        };
+         => string.IsNullOrEmpty(str)
+            ? str
+            : str.Buffer().ToNonDiacritic(ignore ?? string.Empty);
     }
 }

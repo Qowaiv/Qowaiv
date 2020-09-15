@@ -45,7 +45,7 @@ namespace Qowaiv.Mathematics
             var integerSeperator = formatInfo.NumberGroupSeparator == " " ? '+' : ' ';
 
             var sign = 1;
-            var str = new CharBuffer(s).Trim();
+            var str = s.Buffer().Trim();
             var index = 0;
 
             // check for +/-.
@@ -62,7 +62,7 @@ namespace Qowaiv.Mathematics
             long integer = 0;
             long nominator = 0;
 
-            var buffer = new CharBuffer(str.Length - index);
+            var buffer = CharBuffer.Empty(str.Length - index);
             var tokens = Tokens.None;
 
             for (; index < str.Length; index++)
@@ -207,7 +207,7 @@ namespace Qowaiv.Mathematics
 
         private static bool ParseInteger(this CharBuffer buffer, IFormatProvider formatInfo, out long integer)
         {
-            var result = long.TryParse(buffer.ToString(), IntegerStyle, formatInfo, out integer);
+            var result = long.TryParse(buffer, IntegerStyle, formatInfo, out integer);
             buffer.Clear();
             return result;
         }
@@ -236,7 +236,7 @@ namespace Qowaiv.Mathematics
             digit = default;
             var index = Fraction.Formatting.SuperScript.IndexOf(ch);
 
-            if (index == Parsing.NotFound) { return false; }
+            if (index == CharBuffer.NotFound) { return false; }
 
             digit = (char)(index + '0');
             return true;
@@ -247,7 +247,7 @@ namespace Qowaiv.Mathematics
             digit = default;
             var index = Fraction.Formatting.SubScript.IndexOf(ch);
 
-            if (index == Parsing.NotFound) { return false; }
+            if (index == CharBuffer.NotFound) { return false; }
 
             digit = (char)(index + '0');
             return true;
@@ -262,7 +262,7 @@ namespace Qowaiv.Mathematics
         /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
         private static bool PotentialPercentage(string str)
         {
-            return str.Any(ch => "%‰‱".IndexOf(ch) != Parsing.NotFound);
+            return str.Any(ch => "%‰‱".IndexOf(ch) != CharBuffer.NotFound);
         }
 
         private static bool HasAll(this Tokens tokens, Tokens flag) => (tokens & flag) == flag;

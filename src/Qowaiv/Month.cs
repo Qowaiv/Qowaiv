@@ -4,6 +4,7 @@
 using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -219,26 +220,27 @@ namespace Qowaiv
         public static bool TryParse(string s, IFormatProvider formatProvider, out Month result)
         {
             result = default;
-            if (string.IsNullOrEmpty(s))
+            var buffer = s.Buffer().Unify();
+            if (buffer.IsEmpty())
             {
                 return true;
             }
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            if (Qowaiv.Unknown.IsUnknown(s, culture))
+            else if (buffer.IsUnknown(formatProvider))
             {
                 result = Unknown;
                 return true;
             }
-            if (Pattern.IsMatch(s))
+            else if (buffer.Matches(Pattern))
             {
                 result = new Month(byte.Parse(s, formatProvider));
                 return true;
             }
             else
             {
+                var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
                 AddCulture(culture);
+                var str = buffer.ToString();
 
-                var str = Parsing.ToUnified(s);
                 if (Parsings[culture].TryGetValue(str, out byte m) ||
                     Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
                 {
@@ -262,7 +264,7 @@ namespace Qowaiv
             {
                 return result;
             }
-            throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionMonth);
+            throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionMonth);
         }
 
         /// <summary>Creates a month from a Byte.
@@ -329,10 +331,11 @@ namespace Qowaiv
 
                 Parsings[culture] = new Dictionary<string, byte>();
 
-                for (byte m = 1; m <= 12; m++)
+                foreach(var month in All)
                 {
-                    var full = Parsing.ToUnified(culture.DateTimeFormat.GetAbbreviatedMonthName(m));
-                    var shrt = Parsing.ToUnified(culture.DateTimeFormat.GetMonthName(m));
+                    var m = (byte)month;
+                    var full = culture.DateTimeFormat.GetAbbreviatedMonthName(m).Buffer().Unify().ToString();
+                    var shrt = culture.DateTimeFormat.GetMonthName(m).Buffer().Unify().ToString();
 
                     if (!Parsings[CultureInfo.InvariantCulture].ContainsKey(full))
                     {

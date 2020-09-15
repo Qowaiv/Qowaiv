@@ -5,6 +5,7 @@
 using Qowaiv.Conversion.Mathematics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -87,7 +88,7 @@ namespace Qowaiv.Mathematics
             );
 
             /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
-            public static bool IsFractionBar(char ch) => FractionBars.IndexOf(ch) != Parsing.NotFound;
+            public static bool IsFractionBar(char ch) => FractionBars.IndexOf(ch) != CharBuffer.NotFound;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

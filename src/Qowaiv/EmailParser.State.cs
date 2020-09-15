@@ -9,9 +9,9 @@ namespace Qowaiv
         {
             public State(string str)
             {
-                Input = new CharBuffer(str).Trim();
-                Buffer = new CharBuffer(EmailAddress.MaxLength);
-                Result = new CharBuffer(EmailAddress.MaxLength);
+                Input = str.Buffer().Trim();
+                Buffer = CharBuffer.Empty(EmailAddress.MaxLength);
+                Result = CharBuffer.Empty(EmailAddress.MaxLength);
 
                 DisplayNameRemoved = false;
             }
@@ -22,9 +22,9 @@ namespace Qowaiv
 
             public bool DisplayNameRemoved;
 
-            public bool Done => Input.Empty() || TooLong();
+            public bool Done => Input.IsEmpty() || TooLong();
 
-            public bool IsLocal => Result.Empty();
+            public bool IsLocal => Result.IsEmpty();
 
             private bool TooLong()
             {

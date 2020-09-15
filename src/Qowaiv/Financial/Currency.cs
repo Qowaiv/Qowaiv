@@ -10,6 +10,7 @@ using Qowaiv.Conversion.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using Qowaiv.Threading;
 using System;
 using System.Collections.Generic;
@@ -248,31 +249,37 @@ namespace Qowaiv.Financial
         public static bool TryParse(string s, IFormatProvider formatProvider, out Currency result)
         {
             result = Empty;
-            if (string.IsNullOrEmpty(s))
+            var buffer = s.Buffer().Unify();
+            if (buffer.IsEmpty())
             {
                 return true;
             }
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            if (Qowaiv.Unknown.IsUnknown(s, culture) || s == Unknown.Symbol)
+            else if (buffer.IsUnknown(formatProvider) || buffer.Equals(Unknown.Symbol))
             {
                 result = Unknown;
                 return true;
             }
-            AddCulture(culture);
-
-            var str = Parsing.ToUnified(s);
-
-            if (Parsings[culture].TryGetValue(str, out string val) || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            else
             {
-                result = new Currency(val);
-                return true;
-            }
-            foreach (var currency in AllCurrencies.Where(c => !string.IsNullOrEmpty(c.Symbol)))
-            {
-                if (currency.Symbol == str)
+                var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+
+                AddCulture(culture);
+                var str = buffer.ToString();
+
+                if (Parsings[culture].TryGetValue(str, out string val) || 
+                    Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
                 {
-                    result = currency;
+                    result = new Currency(val);
                     return true;
+                }
+
+                foreach (var currency in AllCurrencies.Where(c => !string.IsNullOrEmpty(c.Symbol)))
+                {
+                    if (currency.Symbol == str)
+                    {
+                        result = currency;
+                        return true;
+                    }
                 }
             }
             return false;
@@ -367,30 +374,29 @@ namespace Qowaiv.Financial
         {
             foreach (var country in AllCurrencies)
             {
+                var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Buffer().Unify();
                 Parsings[CultureInfo.InvariantCulture][country.IsoCode.ToUpperInvariant()] = country.m_Value;
                 Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
-                Parsings[CultureInfo.InvariantCulture][Parsing.ToUnified(country.GetDisplayName(CultureInfo.InvariantCulture))] = country.m_Value;
+                Parsings[CultureInfo.InvariantCulture][unified] = country.m_Value;
             }
         }
 
         /// <summary>Adds a culture to the parsings.</summary>
-        /// <param name="culture">
-        /// The culture to add.
-        /// </param>
         private static void AddCulture(CultureInfo culture)
         {
             lock (locker)
             {
-                if (Parsings.ContainsKey(culture)) { return; }
-
-                Parsings[culture] = new Dictionary<string, string>
+                if (!Parsings.ContainsKey(culture))
                 {
-                    [Unknown.GetDisplayName(culture)] = Unknown.m_Value
-                };
-
-                foreach (var country in AllCurrencies)
-                {
-                    Parsings[culture][Parsing.ToUnified(country.GetDisplayName(culture))] = country.m_Value;
+                    Parsings[culture] = new Dictionary<string, string>
+                    {
+                        [Unknown.GetDisplayName(culture)] = Unknown.m_Value
+                    };
+                    foreach (var country in AllCurrencies)
+                    {
+                        var unified = country.GetDisplayName(culture).Buffer().Unify();
+                        Parsings[culture][unified] = country.m_Value;
+                    }
                 }
             }
         }

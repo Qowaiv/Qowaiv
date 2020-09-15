@@ -9,6 +9,7 @@
 using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
+using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -182,25 +183,29 @@ namespace Qowaiv
         public static bool TryParse(string s, IFormatProvider formatProvider, out YesNo result)
         {
             result = Empty;
-            if (string.IsNullOrEmpty(s))
+            var buffer = s.Buffer().Unify();
+            
+            if (buffer.IsEmpty())
             {
                 return true;
             }
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            if (Qowaiv.Unknown.IsUnknown(s, culture))
+            else if(buffer.IsUnknown(formatProvider))
             {
                 result = Unknown;
                 return true;
             }
-            AddCulture(culture);
-
-            var str = Parsing.ToUnified(s);
-
-            if (Parsings[culture].TryGetValue(str, out byte val) ||
-                Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+            else
             {
-                result = new YesNo(val);
-                return true;
+                var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+                AddCulture(culture);
+                var str = buffer.ToString();
+
+                if (Parsings[culture].TryGetValue(str, out byte val) ||
+                    Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
+                {
+                    result = new YesNo(val);
+                    return true;
+                }
             }
             return false;
         }

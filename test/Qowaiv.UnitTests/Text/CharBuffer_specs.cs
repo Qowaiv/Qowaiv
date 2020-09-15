@@ -98,7 +98,6 @@ namespace CharBuffer_specs
         }
     }
 
-
     public class Trim
     {
         [Test]
@@ -130,6 +129,37 @@ namespace CharBuffer_specs
         {
             var buffer = "abcDeéf".Buffer().Uppercase();
             Assert.AreEqual("ABCDEÉF", buffer);
+        }
+    }
+
+    public class StartsWith_String
+    {
+        [Test]
+        public void Longer_then_buffer_is_false()
+        {
+            var buffer = " test".Buffer().RemoveFromEnd(1);
+            Assert.IsFalse(buffer.StartsWith("testx"));
+        }
+
+        [Test]
+        public void That_matches_buffer_but_not_al_visible_is_false()
+        {
+            var buffer = " test".Buffer().Trim().RemoveFromEnd(1);
+            Assert.IsFalse(buffer.StartsWith("test"));
+        }
+
+        [Test]
+        public void Not_matching_buffer_is_false()
+        {
+            var buffer = " test".Buffer().Trim();
+            Assert.IsFalse(buffer.StartsWith("xe"));
+        }
+
+        [Test]
+        public void Matching_buffer_is_true()
+        {
+            var buffer = " test".Buffer().Trim();
+            Assert.IsTrue(buffer.StartsWith("tes"));
         }
     }
 

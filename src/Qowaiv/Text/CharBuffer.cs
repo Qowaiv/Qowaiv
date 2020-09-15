@@ -50,7 +50,7 @@ namespace Qowaiv.Text
         public char Last() => buffer[end - 1];
 
         /// <summary>Returns true if index is the end of the buffer.</summary>
-        public bool EndOfBuffer(int index) => index >= Length;
+        public bool EndOfBuffer(int index) => index >= Length - 1;
 
         /// <inheritdoc />
         public bool Equals(string other) => Equals(other, false);

@@ -4,7 +4,7 @@
     {
         public static CharBuffer Buffer(this string str)
            => str is null
-           ? new CharBuffer(0)
+           ? CharBuffer.Empty(0)
            : new CharBuffer(str);
     }
 }

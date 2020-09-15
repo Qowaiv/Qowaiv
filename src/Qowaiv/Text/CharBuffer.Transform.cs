@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Qowaiv.Text
 {
@@ -126,6 +127,23 @@ namespace Qowaiv.Text
             return this;
         }
 
+        /// <summary>Transforms all characters of to the buffer to their uppercase variant.</summary>
+        public CharBuffer Uppercase()
+        {
+            for (var i = start; i < end; i++)
+            {
+                buffer[i] = char.ToUpper(buffer[i], CultureInfo.InvariantCulture);
+            }
+            return this;
+        }
+
+        /// <summary>Unifies the buffer applying <see cref="RemoveMarkup"/>, <see cref="Uppercase"/>
+        /// and <see cref="ToNonDiacritic(string)"/>.
+        /// </summary>
+        public CharBuffer Unify()
+            => RemoveMarkup()
+            .Uppercase()
+            .ToNonDiacritic();
 
         private static bool IsWhiteSpace(char ch) => char.IsWhiteSpace(ch);
 

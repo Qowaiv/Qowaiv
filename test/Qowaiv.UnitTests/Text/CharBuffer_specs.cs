@@ -6,7 +6,7 @@ namespace CharBuffer_specs
 {
     public class Add
     {
-        private CharBuffer WithCapacity() => new CharBuffer(16);
+        private CharBuffer WithCapacity() => CharBuffer.Empty(16);
 
         [Test]
         public void A_char_can_be_added()
@@ -120,6 +120,16 @@ namespace CharBuffer_specs
         {
             var buffer = "  content ".Buffer().TrimRight();
             Assert.AreEqual("  content", buffer);
+        }
+    }
+
+    public class Uppercase
+    {
+        [Test]
+        public void Transforms_all_characters_to__uppercase_alternatives()
+        {
+            var buffer = "abcDeéf".Buffer().Uppercase();
+            Assert.AreEqual("ABCDEÉF", buffer);
         }
     }
 

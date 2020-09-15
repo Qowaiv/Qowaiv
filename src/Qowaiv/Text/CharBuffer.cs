@@ -15,7 +15,7 @@ namespace Qowaiv.Text
         private int end;
 
         /// <summary>Initializes a new instance of the <see cref="CharBuffer"/> class.</summary>
-        public CharBuffer(int capacity) => buffer = new char[capacity];
+        private CharBuffer(int capacity) => buffer = new char[capacity];
 
         /// <summary>Initializes a new instance of the <see cref="CharBuffer"/> class.</summary>
         public CharBuffer(string str) : this(str.Length) => Add(str);
@@ -36,102 +36,26 @@ namespace Qowaiv.Text
         /// <summary>Returns true if the buffer is not empty.</summary>
         public bool NotEmpty() => !IsEmpty();
 
+        /// <summary>Returns true if the buffer represents an unknown value.</summary>
         public bool IsUnknown(IFormatProvider provider) 
             => Unknown.IsUnknown(ToString(), provider as CultureInfo);
 
+        /// <summary>Returns true if the buffer matches the specfied <see cref="Regex"/>.</summary>
         public bool Matches(Regex regex) => regex.IsMatch(ToString());
 
+        /// <summary>Gets the first <see cref="char"/> of the buffer.</summary>
         public char First() => buffer[start];
 
+        /// <summary>Gets the last <see cref="char"/> of the buffer.</summary>
         public char Last() => buffer[end - 1];
 
-        /// <summary>Gets the index of the <see cref="char"/> in the buffer.</summary>
-        /// <returns>
-        /// -1 if not found, otherwise the index of the <see cref="char"/>.
-        /// </returns>
-        public int IndexOf(char ch)
-        {
-            for (var i = start; i < end; i++)
-            {
-                if (buffer[i] == ch)
-                {
-                    return i - start;
-                }
-            }
-            return NotFound;
-        }
-
-        /// <summary>Gets the last index of the <see cref="char"/> in the buffer.</summary>
-        /// <returns>
-        /// -1 if not found, otherwise the index of the <see cref="char"/>.
-        /// </returns>
-        public int LastIndexOf(char ch)
-        {
-            for (var i =end-1; i >= start; i--)
-            {
-                if (buffer[i] == ch)
-                {
-                    return i - start;
-                }
-            }
-            return NotFound;
-        }
-
+        /// <summary>Returns true if index is the end of the buffer.</summary>
         public bool EndOfBuffer(int index) => index >= Length;
-
-        public bool StartsWith(string str)
-        {
-            if (str.Length > Length)
-            {
-                return false;
-            }
-            for (var i = 0; i < str.Length; i++)
-            {
-                if (this[i] != str[i])
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        /// <summary>Counts the occurrences of the <see cref="char"/> in the buffer.</summary>
-        public int Count(char ch)
-        {
-            var count = 0;
-            for (var i = start; i < end; i++)
-            {
-                if (buffer[i] == ch)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-   
-      
-
-        public CharBuffer Uppercase()
-        {
-            for (var i = start; i < end; i++)
-            {
-                buffer[i] = char.ToUpper(buffer[i], CultureInfo.InvariantCulture);
-            }
-            return this;
-        }
-
-        public CharBuffer Unify()
-        =>  RemoveMarkup()
-            .Uppercase()
-            .ToNonDiacritic();
-
-        public string Substring(int startIndex) => new string(buffer, startIndex + start, Length - startIndex);
-
-        public string Substring(int startIndex, int length) => new string(buffer, startIndex + start, length);
 
         /// <inheritdoc />
         public bool Equals(string other) => Equals(other, false);
         
+        /// <summary>Returns true if the buffer equals the <see cref="string"/>.</summary>
         public bool Equals(string other, bool ignoreCase)
         {
             if (Length != other.Length)
@@ -140,9 +64,9 @@ namespace Qowaiv.Text
             }
             for (var i = 0; i < Length; i++)
             {
-                if (buffer[i + start] != other[i])
+                if (this[i] != other[i])
                 {
-                    if (ignoreCase && char.ToUpperInvariant(buffer[i + start]) == char.ToUpperInvariant(other[i]))
+                    if (ignoreCase && char.ToUpperInvariant(this[i]) == char.ToUpperInvariant(other[i]))
                     {
                         continue;
                     }
@@ -160,12 +84,10 @@ namespace Qowaiv.Text
         /// <inheritdoc />
         public override int GetHashCode() => throw new NotSupportedException();
 
-        public static implicit operator string(CharBuffer buffer) => buffer?.ToString();
+        /// <summary>Enumerates through all (visible) chars of the buffer.</summary>
+        private IEnumerable<char> Enumerate() => buffer.Skip(start).Take(Length);
 
-        public override string ToString() => new string(buffer, start, Length);
-
-        private IEnumerable<char> Chars() => buffer.Skip(start).Take(Length);
-
-        
+        /// <summary>Creates an empty buffer with the specified capacity.</summary>
+        public static CharBuffer Empty(int capacity) => new CharBuffer(capacity);
     }
 }

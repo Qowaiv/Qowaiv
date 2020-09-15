@@ -62,7 +62,7 @@ namespace Qowaiv.Mathematics
             long integer = 0;
             long nominator = 0;
 
-            var buffer = new CharBuffer(str.Length - index);
+            var buffer = CharBuffer.Empty(str.Length - index);
             var tokens = Tokens.None;
 
             for (; index < str.Length; index++)

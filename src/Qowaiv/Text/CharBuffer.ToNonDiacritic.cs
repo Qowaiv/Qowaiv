@@ -12,7 +12,7 @@ namespace Qowaiv.Text
             }
             var charBuffer = new CharBuffer(Length * 2);
 
-            foreach (var ch in Chars())
+            foreach (var ch in Enumerate())
             {
                 if (ignore.IndexOf(ch) != NotFound)
                 {

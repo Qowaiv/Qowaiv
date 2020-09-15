@@ -132,6 +132,33 @@ namespace CharBuffer_specs
         }
     }
 
+    public class Count
+    {
+        [Test]
+        public void Gets_the_total_of_specified_char()
+        {
+            var buffer = " let us count this   ".Buffer().Trim();
+            Assert.AreEqual(3, buffer.Count(' '));
+        }
+    }
+
+    public class IndexOf
+    {
+        [Test]
+        public void Gets_index_of_char()
+        {
+            var buffer = " 0123456777   ".Buffer().Trim();
+            Assert.AreEqual(7, buffer.IndexOf('7'));
+        }
+
+        [Test]
+        public void Last_gets_last_index_of_char()
+        {
+            var buffer = " 7123456789   ".Buffer().Trim();
+            Assert.AreEqual(7, buffer.LastIndexOf('7'));
+        }
+    }
+
     public class StartsWith_String
     {
         [Test]

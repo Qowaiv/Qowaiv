@@ -135,7 +135,7 @@ namespace CharBuffer_specs
     public class Count
     {
         [Test]
-        public void Gets_the_total_of_specified_char()
+        public void Returns_the_total_of_specified_char()
         {
             var buffer = " let us count this   ".Buffer().Trim();
             Assert.AreEqual(3, buffer.Count(' '));
@@ -145,14 +145,14 @@ namespace CharBuffer_specs
     public class IndexOf
     {
         [Test]
-        public void Gets_index_of_char()
+        public void Returns_index_of_char()
         {
             var buffer = " 0123456777   ".Buffer().Trim();
             Assert.AreEqual(7, buffer.IndexOf('7'));
         }
 
         [Test]
-        public void Last_gets_last_index_of_char()
+        public void Last_returns_last_index_of_char()
         {
             var buffer = " 7123456789   ".Buffer().Trim();
             Assert.AreEqual(7, buffer.LastIndexOf('7'));
@@ -187,6 +187,23 @@ namespace CharBuffer_specs
         {
             var buffer = " test".Buffer().Trim();
             Assert.IsTrue(buffer.StartsWith("tes"));
+        }
+    }
+
+    public class Substring
+    {
+        [Test]
+        public void With_start_index_returns_substring()
+        {
+            var buffer = " test ".Buffer().Trim();
+            Assert.AreEqual("st", buffer.Substring(2));
+        }
+
+        [Test]
+        public void With_start_index_and_length_returns_substring()
+        {
+            var buffer = " test ".Buffer().Trim();
+            Assert.AreEqual("es", buffer.Substring(1, 2));
         }
     }
 

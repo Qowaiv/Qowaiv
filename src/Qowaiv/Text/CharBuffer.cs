@@ -11,51 +11,39 @@ namespace Qowaiv.Text
         internal static readonly int NotFound = -1;
 
         private readonly char[] buffer;
+        private int start;
+        private int end;
 
+        /// <summary>Initializes a new instance of the <see cref="CharBuffer"/> class.</summary>
         public CharBuffer(int capacity) => buffer = new char[capacity];
 
-        public CharBuffer(string str) : this(str.Length)
+        /// <summary>Initializes a new instance of the <see cref="CharBuffer"/> class.</summary>
+        public CharBuffer(string str) : this(str.Length) => Add(str);
+
+        /// <summary>Gets the length of the buffer.</summary>
+        public int Length => end - start;
+
+        /// <summary>Gets <see cref="char"/> on the specified index.</summary>
+        public char this[int index]
         {
-            Add(str);
+            get => buffer[index + start];
+            private set => buffer[index + start] = value;
         }
 
-        public int Length { get; private set; }
-
-        public char this[int index] => buffer[index];
-
+        /// <summary>Returns true if the buffer is empty.</summary>
         public bool IsEmpty() => Length == 0;
-        public bool NotEmpty() => Length != 0;
+        
+        /// <summary>Returns true if the buffer is not empty.</summary>
+        public bool NotEmpty() => !IsEmpty();
 
         public bool IsUnknown(IFormatProvider provider) 
             => Unknown.IsUnknown(ToString(), provider as CultureInfo);
 
         public bool Matches(Regex regex) => regex.IsMatch(ToString());
 
-        public char First() => buffer[0];
-        
-        public char Last() => buffer[Length - 1];
+        public char First() => buffer[start];
 
-        public CharBuffer Add(CharBuffer other)
-        {
-            Array.Copy(other.buffer, 0, buffer, Length, other.Length);
-            Length += other.Length;
-            return this;
-        }
-
-        public CharBuffer Add(string str)
-        {
-            foreach (var ch in str)
-            {
-                Add(ch);
-            }
-            return this;
-        }
-        public CharBuffer Add(char ch)
-        {
-            buffer[Length++] = ch;
-            return this;
-        }
-        public CharBuffer AddLower(char ch) => Add(char.ToLowerInvariant(ch));
+        public char Last() => buffer[end - 1];
 
         /// <summary>Gets the index of the <see cref="char"/> in the buffer.</summary>
         /// <returns>
@@ -63,11 +51,11 @@ namespace Qowaiv.Text
         /// </returns>
         public int IndexOf(char ch)
         {
-            for (var i = 0; i < Length; i++)
+            for (var i = start; i < end; i++)
             {
                 if (buffer[i] == ch)
                 {
-                    return i;
+                    return i - start;
                 }
             }
             return NotFound;
@@ -79,17 +67,17 @@ namespace Qowaiv.Text
         /// </returns>
         public int LastIndexOf(char ch)
         {
-            for (var i = Length - 1; i >= 0; i--)
+            for (var i =end-1; i >= start; i--)
             {
                 if (buffer[i] == ch)
                 {
-                    return i;
+                    return i - start;
                 }
             }
             return NotFound;
         }
 
-        public bool EndOfBuffer(int index) => index >= Length - 1;
+        public bool EndOfBuffer(int index) => index >= Length;
 
         public bool StartsWith(string str)
         {
@@ -99,7 +87,7 @@ namespace Qowaiv.Text
             }
             for (var i = 0; i < str.Length; i++)
             {
-                if (buffer[i] != str[i])
+                if (this[i] != str[i])
                 {
                     return false;
                 }
@@ -111,7 +99,7 @@ namespace Qowaiv.Text
         public int Count(char ch)
         {
             var count = 0;
-            for (var i = 0; i < Length; i++)
+            for (var i = start; i < end; i++)
             {
                 if (buffer[i] == ch)
                 {
@@ -120,93 +108,12 @@ namespace Qowaiv.Text
             }
             return count;
         }
-
-        public CharBuffer Trim()
-        {
-            return TrimRight()
-                .TrimLeft();
-        }
-        public CharBuffer TrimLeft()
-        {
-            for (var trim = 0; trim < Length; trim++)
-            {
-                if (!char.IsWhiteSpace(buffer[trim]))
-                {
-                    RemoveRange(0, trim);
-                    return this;
-                }
-            }
-            return this;
-        }
-        public CharBuffer TrimRight()
-        {
-            for (var trim = Length - 1; trim > -1; trim--)
-            {
-                if (!char.IsWhiteSpace(buffer[trim]))
-                {
-                    Length = trim + 1;
-                    return this;
-                }
-            }
-            return this;
-        }
-       
-        public CharBuffer RemoveFromEnd(int length)
-        {
-            Length -= length;
-            return this;
-        }
-
-        public CharBuffer RemoveRange(int index, int length)
-        {
-            if (length == 0)
-            {
-                return this;
-            }
-            for (var i = index + length; i < Length; i++)
-            {
-                buffer[i - length] = buffer[i];
-            }
-            Length -= length;
-            return this;
-        }
-
-        public CharBuffer ClearSpacing() => ClearChars(IsWhiteSpace);
-
-        public CharBuffer ClearMarkup() => ClearChars(IsMarkup);
-
-        private CharBuffer ClearChars(Func<char, bool> applies)
-        {
-            if (NotEmpty() && applies(Last()))
-            {
-                return RemoveFromEnd(1).ClearSpacing();
-            }
-            else
-            {
-                for (var i = Length - 2; i >= 0; i--)
-                {
-                    if (applies(this[i]))
-                    {
-                        for (var p = i; p < Length - 1; p++)
-                        {
-                            buffer[p] = buffer[p + 1];
-                        }
-                        Length -= 1;
-                    }
-                }
-            }
-            return this;
-        }
-
-        public CharBuffer Clear()
-        {
-            Length = 0;
-            return this;
-        }
+   
+      
 
         public CharBuffer Uppercase()
         {
-            for (var i = 0; i < Length; i++)
+            for (var i = start; i < end; i++)
             {
                 buffer[i] = char.ToUpper(buffer[i], CultureInfo.InvariantCulture);
             }
@@ -214,14 +121,13 @@ namespace Qowaiv.Text
         }
 
         public CharBuffer Unify()
-        =>  ClearSpacing()
-            .ClearMarkup()
+        =>  RemoveMarkup()
             .Uppercase()
             .ToNonDiacritic();
 
-        public string Substring(int startIndex) => new string(buffer, startIndex, Length - startIndex);
+        public string Substring(int startIndex) => new string(buffer, startIndex + start, Length - startIndex);
 
-        public string Substring(int startIndex, int length) => new string(buffer, startIndex, length);
+        public string Substring(int startIndex, int length) => new string(buffer, startIndex + start, length);
 
         /// <inheritdoc />
         public bool Equals(string other) => Equals(other, false);
@@ -234,9 +140,9 @@ namespace Qowaiv.Text
             }
             for (var i = 0; i < Length; i++)
             {
-                if (buffer[i] != other[i])
+                if (buffer[i + start] != other[i])
                 {
-                    if (ignoreCase && char.ToUpperInvariant(buffer[i]) == char.ToUpperInvariant(other[i]))
+                    if (ignoreCase && char.ToUpperInvariant(buffer[i + start]) == char.ToUpperInvariant(other[i]))
                     {
                         continue;
                     }
@@ -246,24 +152,20 @@ namespace Qowaiv.Text
             return true;
         }
 
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+            => (obj is string str && Equals(str)) 
+            || ReferenceEquals(this, obj);
+
+        /// <inheritdoc />
+        public override int GetHashCode() => throw new NotSupportedException();
+
         public static implicit operator string(CharBuffer buffer) => buffer?.ToString();
 
-        public override string ToString() => new string(buffer, 0, Length);
+        public override string ToString() => new string(buffer, start, Length);
 
-        private IEnumerable<char> Chars() => buffer.Take(Length);
+        private IEnumerable<char> Chars() => buffer.Skip(start).Take(Length);
 
-        private static bool IsWhiteSpace(char ch) => char.IsWhiteSpace(ch);
         
-        private static bool IsMarkup(char ch) => markup.IndexOf(ch) != NotFound;
-
-        private static readonly string markup = "-+._"
-            + (char)0x00B7 // middle dot
-            + (char)0x22C5 // dot operator
-            + (char)0x2202 // bullet
-            + (char)0x2012 // figure dash / minus
-            + (char)0x2013 // en dash
-            + (char)0x2014 // em dash
-            + (char)0x2015 // horizontal bar
-        ;
     }
 }

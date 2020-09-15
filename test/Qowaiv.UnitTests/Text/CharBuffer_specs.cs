@@ -1,0 +1,152 @@
+﻿using NUnit.Framework;
+using Qowaiv.Text;
+using System.Globalization;
+
+namespace CharBuffer_specs
+{
+    public class Add
+    {
+        private CharBuffer WithCapacity() => new CharBuffer(16);
+
+        [Test]
+        public void A_char_can_be_added()
+        {
+            var buffer = WithCapacity().Add('c');
+            Assert.AreEqual("c", buffer);
+        }
+
+        [Test]
+        public void A_char_can_be_added_as_lowercase()
+        {
+            var buffer = WithCapacity().AddLower('C');
+            Assert.AreEqual("c", buffer);
+        }
+
+        [Test]
+        public void A_string_can_be_added()
+        {
+            var buffer = WithCapacity().Add("string");
+            Assert.AreEqual("string", buffer);
+        }
+
+        [Test]
+        public void A_CharBuffer_can_be_added()
+        {
+            var other = " string ".Buffer().Trim();
+            var buffer = WithCapacity().Add(other);
+            Assert.AreEqual("string", buffer);
+        }
+    }
+
+    public class Remove
+    {
+        [Test]
+        public void FromStart_removes_characters_from_the_start()
+        {
+            var buffer = " test ".Buffer().Trim().RemoveFromStart(2);
+            Assert.AreEqual("st", buffer);
+        }
+        
+        [Test]
+        public void FromEnd_removes_characters_from_the_end()
+        {
+            var buffer = " test ".Buffer().Trim().RemoveFromEnd(2);
+            Assert.AreEqual("te", buffer);
+        }
+
+        [Test]
+        public void Range_removes_specified_range()
+        {
+            var buffer = " test ".Buffer().Trim().RemoveRange(1, 2);
+            Assert.AreEqual("tt", buffer);
+        }
+
+        [TestCase('\t')]
+        [TestCase(' ')]
+        [TestCase('\r')]
+        [TestCase('\n')]
+        [TestCase((char)0160)]
+        public void WhiteSpace_removes_all_white_space_chars(char ch)
+        {
+            var buffer = $"{ch} Hello.{ch}world!  ".Buffer().RemoveWhiteSpace();
+            Assert.AreEqual("Hello.world!", buffer);
+        }
+
+        [TestCase('.')]
+        [TestCase('-')]
+        [TestCase('_')]
+        [TestCase((char)0x00B7)] // middle dot
+        [TestCase((char)0x22C5)] // dot operator
+        [TestCase((char)0x2202)] // bullet
+        [TestCase((char)0x2012)] // figure dash / minus
+        [TestCase((char)0x2013)] // en dash
+        [TestCase((char)0x2014)] // em dash
+        [TestCase((char)0x2015)] // horizontal bar
+        public void Markup_removes_all_markup_chars(char ch)
+        {
+            var buffer = $"{ch} Hello,{ch}world!  ".Buffer().RemoveMarkup();
+            Assert.AreEqual("Hello,world!", buffer);
+        }
+    }
+
+    public class Clear
+    {
+        [Test]
+        public void Empties_the_buffer()
+        {
+            Assert.IsTrue("test".Buffer().Clear().IsEmpty());
+        }
+    }
+
+
+    public class Trim
+    {
+        [Test]
+        public void Trims_left_and_right_spaces()
+        {
+            var buffer = "  content ".Buffer().Trim();
+            Assert.AreEqual("content", buffer);
+        }
+
+        [Test]
+        public void Left_trims_left_spaces()
+        {
+            var buffer = "  content ".Buffer().TrimLeft();
+            Assert.AreEqual("content ", buffer);
+        }
+
+        [Test]
+        public void Right_trims_right_spaces()
+        {
+            var buffer = "  content ".Buffer().TrimRight();
+            Assert.AreEqual("  content", buffer);
+        }
+    }
+
+    public class IsEmpty
+    {
+        [Test]
+        public void Is_true_for_buffer_without_visable_content()
+        {
+            var buffer = "   ".Buffer().Trim();
+            Assert.IsTrue(buffer.IsEmpty());
+        }
+    }
+
+    public class IsUnknown
+    {
+        [Test]
+        public void Is_true_when_the_ToString_represents_an_unknown_value()
+        {
+            var buffer = "?".Buffer();
+            Assert.IsTrue(buffer.IsUnknown(CultureInfo.InvariantCulture));
+        }
+        
+        [Test]
+        public void Is_false_when_the_ToString_does_not_represent_an_unknown_value()
+        {
+            var buffer = "some value".Buffer();
+            Assert.IsFalse(buffer.IsUnknown(CultureInfo.InvariantCulture));
+        }
+    }
+}

@@ -25,7 +25,7 @@ namespace Qowaiv
     /// <remarks>
     /// A yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
     /// has an "empty"(unset) and "unknown" value.It maps easily with a <see cref="bool"/>, but
-    /// Supports all kind of formatting(and both empty and unknown) that can not be
+    /// supports all kinds of formatting(and both empty and unknown) that can not be
     /// achieved when modeling a property as <see cref="bool"/> instead of an <see cref="YesNo"/>.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
@@ -37,10 +37,10 @@ namespace Qowaiv
         /// <summary>Represents an empty/not set yes-no.</summary>
         public static readonly YesNo Empty;
 
-        /// <summary>Represents an unknown (but set) yes-no.</summary>
+        /// <summary>Represents a no.</summary>
         public static readonly YesNo No = new YesNo(1);
 
-        /// <summary>Represents an unknown (but set) yes-no.</summary>
+        /// <summary>Represents a yes.</summary>
         public static readonly YesNo Yes = new YesNo(2);
 
         /// <summary>Represents an unknown (but set) yes-no.</summary>
@@ -58,12 +58,12 @@ namespace Qowaiv
         /// <summary>Returns true if the yes-no value represents yes or no.</summary>
         public bool IsYesOrNo() => IsYes() || IsNo();
 
-        /// <summary>Deserializes the gender from a JSON number.</summary>
+        /// <summary>Deserializes the yes-no from a JSON number.</summary>
         /// <param name="json">
         /// The JSON number to deserialize.
         /// </param>
         /// <returns>
-        /// The deserialized gender.
+        /// The deserialized yes-no.
         /// </returns>
         public static YesNo FromJson(double json) => Create((int)json);
 
@@ -210,9 +210,9 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary >Creates a yes-no from a byte. </summary >
+        /// <summary >Creates a yes-no from a number. </summary >
         /// <param name="val" >
-        /// A decimal describing a yes-no.
+        /// A number describing a yes-no.
         /// </param >
         /// <exception cref="FormatException" >
         /// val is not a valid yes-no.
@@ -226,11 +226,11 @@ namespace Qowaiv
             throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionYesNo);
         }
 
-        /// <summary >Creates a yes-no from a byte.
+        /// <summary >Creates a yes-no from a number.
         /// A return value indicates whether the creation succeeded.
         /// </summary >
         /// <param name="val" >
-        /// A byte describing a yes-no.
+        /// A number describing a yes-no.
         /// </param >
         /// <param name="result" >
         /// The result of the creation.

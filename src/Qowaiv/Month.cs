@@ -269,7 +269,7 @@ namespace Qowaiv
 
         /// <summary>Creates a month from a Byte.
         /// A return value indicates whether the conversion succeeded.
-        /// </summary >
+        /// </summary>
         /// <param name="val" >
         /// A decimal describing a month.
         /// </param >
@@ -287,7 +287,7 @@ namespace Qowaiv
 
         /// <summary>Creates a month from a Byte.
         /// A return value indicates whether the creation succeeded.
-        /// </summary >
+        /// </summary>
         /// <param name="val" >
         /// A Byte describing a month.
         /// </param >

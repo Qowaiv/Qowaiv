@@ -440,13 +440,13 @@ namespace Qowaiv.Financial
             return false;
         }
 
-        /// <summary>Creates an Amount from a Decimal.</summary >
+        /// <summary>Creates an Amount from a Decimal.</summary>
         /// <param name="val" >
         /// A decimal describing an Amount.
         /// </param >
         public static Amount Create(decimal val) => new Amount(val);
 
-        /// <summary>Creates an Amount from a Double.</summary >
+        /// <summary>Creates an Amount from a Double.</summary>
         /// <param name="val" >
         /// A decimal describing an Amount.
         /// </param >

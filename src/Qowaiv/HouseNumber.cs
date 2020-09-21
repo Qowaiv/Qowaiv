@@ -178,7 +178,7 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary>Creates a house number from a Int32. </summary >
+        /// <summary>Creates a house number from a Int32.</summary>
         /// <param name="val" >
         /// A decimal describing a house number.
         /// </param >
@@ -196,7 +196,7 @@ namespace Qowaiv
 
         /// <summary>Creates a house number from a Int32.
         /// A return value indicates whether the conversion succeeded.
-        /// </summary >
+        /// </summary>
         /// <param name="val" >
         /// A decimal describing a house number.
         /// </param >
@@ -214,7 +214,7 @@ namespace Qowaiv
 
         /// <summary>Creates a house number from a Int32.
         /// A return value indicates whether the creation succeeded.
-        /// </summary >
+        /// </summary>
         /// <param name="val" >
         /// A Int32 describing a house number.
         /// </param >

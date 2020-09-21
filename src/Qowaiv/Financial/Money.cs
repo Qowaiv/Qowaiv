@@ -558,7 +558,7 @@ namespace Qowaiv.Financial
             return true;
         }
 
-        /// <summary >Creates Money from a Decimal. </summary >
+        /// <summary>Creates Money from a Decimal.</summary>
         /// <param name="val" >
         /// The amount.
         /// </param>
@@ -567,7 +567,7 @@ namespace Qowaiv.Financial
             return Create(val, Currency.Current);
         }
 
-        /// <summary >Creates Money from a Decimal. </summary >
+        /// <summary>Creates Money from a Decimal.</summary>
         /// <param name="val" >
         /// A decimal describing the amount.
         /// </param >

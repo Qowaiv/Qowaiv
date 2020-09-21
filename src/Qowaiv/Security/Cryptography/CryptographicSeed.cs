@@ -153,7 +153,7 @@ namespace Qowaiv.Security.Cryptography
             return false;
         }
 
-        /// <summary>Creates a cryptographic seed from a byte[]. </summary >
+        /// <summary>Creates a cryptographic seed from a byte[].</summary>
         /// <param name="val" >
         /// A byte array describing a cryptographic seed.
         /// </param >
@@ -169,13 +169,13 @@ namespace Qowaiv.Security.Cryptography
             return new CryptographicSeed(bytes);
         }
 
-        /// <summary>Creates a cryptographic seed from a GUID.</summary >
+        /// <summary>Creates a cryptographic seed from a GUID.</summary>
         /// <param name="id" >
         /// A GUID describing a cryptographic seed.
         /// </param >
         public static CryptographicSeed Create(Guid id) => Create(id.ToByteArray());
 
-        /// <summary>Creates a cryptographic seed from a UUID.</summary >
+        /// <summary>Creates a cryptographic seed from a UUID.</summary>
         /// <param name="id" >
         /// A UUID describing a cryptographic seed.
         /// </param >

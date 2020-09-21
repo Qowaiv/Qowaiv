@@ -210,7 +210,7 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary >Creates a yes-no from a number. </summary >
+        /// <summary>Creates a yes-no from a number.</summary>
         /// <param name="val" >
         /// A number describing a yes-no.
         /// </param >
@@ -226,9 +226,9 @@ namespace Qowaiv
             throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionYesNo);
         }
 
-        /// <summary >Creates a yes-no from a number.
+        /// <summary>Creates a yes-no from a number.
         /// A return value indicates whether the creation succeeded.
-        /// </summary >
+        /// </summary>
         /// <param name="val" >
         /// A number describing a yes-no.
         /// </param >

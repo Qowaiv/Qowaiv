@@ -136,20 +136,20 @@ namespace Qowaiv.Sql
             return false;
         }
 
-        /// <summary>Creates a timestamp from a Int64. </summary >
+        /// <summary>Creates a timestamp from a Int64.</summary>
         /// <param name="val" >
         /// A decimal describing a timestamp.
         /// </param >
         [CLSCompliant(false)]
         public static Timestamp Create(ulong val) => new Timestamp(val);
 
-        /// <summary>Creates a timestamp from a Int64. </summary >
+        /// <summary>Creates a timestamp from a Int64.</summary>
         /// <param name="val" >
         /// A decimal describing a timestamp.
         /// </param >
         public static Timestamp Create(long val) => Create(BitConverter.GetBytes(val));
 
-        /// <summary>Creates a timestamp from a Int64. </summary >
+        /// <summary>Creates a timestamp from a Int64.</summary>
         /// <param name="bytes" >
         /// A byte array describing a timestamp.
         /// </param >

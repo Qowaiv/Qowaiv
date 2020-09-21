@@ -710,13 +710,13 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary>Creates a Percentage from a Decimal.</summary >
+        /// <summary>Creates a Percentage from a Decimal.</summary>
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
         public static Percentage Create(decimal val) => new Percentage(val);
 
-        /// <summary>Creates a Percentage from a Double.</summary >
+        /// <summary>Creates a Percentage from a Double.</summary>
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >

@@ -293,7 +293,7 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary>Creates a week date from a date time.</summary >
+        /// <summary>Creates a week date from a date time.</summary>
         /// <param name="val" >
         /// A decimal describing a week date.
         /// </param >

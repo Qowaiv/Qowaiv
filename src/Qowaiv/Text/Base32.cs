@@ -80,7 +80,7 @@ namespace Qowaiv.Text
             return new string(chars);
         }
 
-        /// <summary>Gets the bytes for a given Base32 string. </summary>
+        /// <summary>Gets the bytes for a given Base32 string.</summary>
         /// <param name="s">
         /// The Base32 string
         /// </param>

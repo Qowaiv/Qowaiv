@@ -439,7 +439,6 @@ namespace Qowaiv.IO
             return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
         }
 
-
         /// <summary>Gets an XML string representation of the stream size.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
@@ -501,10 +500,8 @@ namespace Qowaiv.IO
         private static readonly Regex FormattedPattern = new Regex("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegexOptions.Compiled | RegexOptions.RightToLeft);
         private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
         private static readonly string[] FullLabels = { "byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte" };
-
         private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
         private static readonly string[] FullLabels1024 = { "byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte" };
-
 
         /// <summary>Casts a stream size to a <see cref="string"/>.</summary>
         public static explicit operator string(StreamSize val) => val.ToString(CultureInfo.CurrentCulture);
@@ -605,7 +602,6 @@ namespace Qowaiv.IO
         /// </param>
         public static StreamSize FromTerabytes(double size) { return TB * size; }
 
-
         /// <summary>Creates a stream size based on the size in kibibytes.</summary>
         /// <param name="size">
         /// The size in kilobytes.
@@ -629,7 +625,6 @@ namespace Qowaiv.IO
         /// The size in terabytes.
         /// </param>
         public static StreamSize FromTebibytes(double size) { return TiB * size; }
-
 
         /// <summary>Creates a stream size from a file info.</summary>
         public static StreamSize FromByteArray(byte[] bytes)

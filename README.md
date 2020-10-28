@@ -100,6 +100,14 @@ Represents a collection of unique email addresses, excluding the empty and unkno
 ### Stream size
 Represents the size of a file or stream.
 
+``` C#
+StreamSize fromMb = StreamSize.FromMegabytes(14.2);
+StreamSize parsed = StreamSize.Parse("117.2Kb");
+
+fromMb.ToString("#,#00.0 Kilobytes"); // 14,200.0 Kilobytes
+fromMb.ToString("S"); // 14.2Mb
+```
+
 ### Gender
 Represents a gender based on an ISO 5218 code.
 
@@ -235,7 +243,7 @@ var iban = InternationalBankAccountNumber.Parse("nl20ingb0001234567");
 
 iban.Country; // Country.NL
 iban.Length; // 18
-iban.ToString("F");// NL20 INGB 0001 2345 67
+iban.ToString("F"); // NL20 INGB 0001 2345 67
 ```
 
 ### Money

@@ -123,6 +123,7 @@ namespace Qowaiv.Financial
             }
             return FormattedPattern.Replace(m_Value, "$0 ");
         }
+        
         /// <summary>Formats the IBAN with spaces as lowercase.</summary>
         private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
 
@@ -172,6 +173,7 @@ namespace Qowaiv.Financial
 
         /// <summary>Casts an IBAN to a <see cref="string"/>.</summary>
         public static explicit operator string(InternationalBankAccountNumber val) => val.ToString(CultureInfo.InvariantCulture);
+        
         /// <summary>Casts a <see cref="string"/> to a IBAN.</summary>
         public static explicit operator InternationalBankAccountNumber(string str) => Cast.String<InternationalBankAccountNumber>(TryParse, str);
 
@@ -203,9 +205,10 @@ namespace Qowaiv.Financial
                 result = Unknown;
                 return true;
             }
-            else if (buffer.Length > 11 && buffer.Matches(Pattern)
+            else if (buffer.Length > 11 
+                && buffer.Matches(Pattern)
                 && ValidForCountry(buffer) 
-                && (Checksum(buffer)))
+                && (Mod97(buffer)))
             {
                 result = new InternationalBankAccountNumber(buffer);
                 return true;
@@ -221,7 +224,7 @@ namespace Qowaiv.Financial
                 || buffer.Matches(localizedPattern));
         }
 
-        private static bool Checksum(CharBuffer buffer)
+        private static bool Mod97(CharBuffer buffer)
         {
             var digits = Digits(buffer);
             int sum = 0;

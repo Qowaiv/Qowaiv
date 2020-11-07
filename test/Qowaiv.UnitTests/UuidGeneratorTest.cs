@@ -108,15 +108,15 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Sequential_Multiple_IsOrdered() => MultipleSequential(UuidComparer.Default);
+        public void Sequential_Multiple_IsOrdered() => AssertMultipleSequential(UuidComparer.Default);
 
         [Test]
-        public void Sequential_MultipleMongoDb_IsOrdered() => MultipleSequential(UuidComparer.MongoDb);
+        public void Sequential_MultipleMongoDb_IsOrdered() => AssertMultipleSequential(UuidComparer.MongoDb);
 
         [Test]
-        public void Sequential_MultipleSqlServer_IsOrdered() => MultipleSequential(UuidComparer.SqlServer);
+        public void Sequential_MultipleSqlServer_IsOrdered() => AssertMultipleSequential(UuidComparer.SqlServer);
 
-        private static void MultipleSequential(UuidComparer comparer)
+        private static void AssertMultipleSequential(UuidComparer comparer)
         {
             var ids = new List<Uuid>(MultipleCount);
 

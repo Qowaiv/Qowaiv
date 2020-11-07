@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
@@ -122,6 +123,7 @@ namespace Qowaiv.Financial
             }
             return FormattedPattern.Replace(m_Value, "$0 ");
         }
+        
         /// <summary>Formats the IBAN with spaces as lowercase.</summary>
         private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
 
@@ -171,6 +173,7 @@ namespace Qowaiv.Financial
 
         /// <summary>Casts an IBAN to a <see cref="string"/>.</summary>
         public static explicit operator string(InternationalBankAccountNumber val) => val.ToString(CultureInfo.InvariantCulture);
+        
         /// <summary>Casts a <see cref="string"/> to a IBAN.</summary>
         public static explicit operator InternationalBankAccountNumber(string str) => Cast.String<InternationalBankAccountNumber>(TryParse, str);
 
@@ -202,51 +205,50 @@ namespace Qowaiv.Financial
                 result = Unknown;
                 return true;
             }
-            else if (buffer.Matches(Pattern))
+            else if (buffer.Length > 11 
+                && buffer.Matches(Pattern)
+                && ValidForCountry(buffer) 
+                && (Mod97(buffer)))
             {
-                var country = Country.TryParse(buffer.Substring(0, 2));
-                const int mod = 97;
-
-                if (buffer.Length > 11 
-                    && !country.IsEmptyOrUnknown() 
-                    && (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern) 
-                    || buffer.Matches(localizedPattern)))
-                {
-                    var validation = Alphanumeric.Replace(
-                        buffer.Substring(4) + 
-                        buffer.Substring(0, 4), 
-                        AlphanumericToNumeric);
-
-                    int sum = 0;
-                    int exp = 1;
-
-                    for (int pos = validation.Length - 1; pos >= 0; pos--)
-                    {
-                        sum += exp * AlphanumericAndNumericLookup.IndexOf(validation[pos]);
-                        exp = (exp * 10) % mod;
-                    }
-                    if ((sum % mod) == 1)
-                    {
-                        result = new InternationalBankAccountNumber(buffer);
-                        return true;
-                    }
-                }
+                result = new InternationalBankAccountNumber(buffer);
+                return true;
             }
             return false;
         }
 
+        private static bool ValidForCountry(CharBuffer buffer)
+        {
+            var country = Country.TryParse(buffer.Substring(0, 2));
+            return !country.IsEmptyOrUnknown()
+                && (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern)
+                || buffer.Matches(localizedPattern));
+        }
+
+        private static bool Mod97(CharBuffer buffer)
+        {
+            var digits = Digits(buffer);
+            int sum = 0;
+            int exp = 1;
+
+            for (int pos = digits.Length - 1; pos >= 0; pos--)
+            {
+                sum += exp * AlphanumericAndNumericLookup.IndexOf(digits[pos]);
+                exp = (exp * 10) % 97;
+            }
+            return sum % 97 == 1;
+        }
+
+        private static CharBuffer Digits(CharBuffer input)
+        {
+            var digits = CharBuffer.Empty(input.Length * 2);
+            foreach(var ch in input.Skip(4).Concat(input.Take(4)))
+            {
+                digits.Add(AlphanumericAndNumericLookup.IndexOf(ch).ToString());
+            }
+            return digits;
+        }
+
         /// <summary>Contains a lookup for alphanumeric and numeric chars.</summary>
         private const string AlphanumericAndNumericLookup = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        /// <summary>Matches on Alphanumeric uppercase chars.</summary>
-        private static readonly Regex Alphanumeric = new Regex("[A-Z]", RegexOptions.Compiled);
-
-        /// <summary>Replaces A by 11, B by 12 etcetera.</summary>
-        private static string AlphanumericToNumeric(Capture match)
-        {
-            return AlphanumericAndNumericLookup
-                .IndexOf(match.Value, StringComparison.Ordinal)
-                .ToString(CultureInfo.InvariantCulture);
-        }
     }
 }

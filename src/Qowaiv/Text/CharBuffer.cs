@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Qowaiv.Text
 {
-    internal sealed partial class CharBuffer : IEquatable<string>
+    internal sealed partial class CharBuffer : IEquatable<string>, IEnumerable<char>
     {
         internal static readonly int NotFound = -1;
 
@@ -40,7 +41,7 @@ namespace Qowaiv.Text
         public bool IsUnknown(IFormatProvider provider) 
             => Unknown.IsUnknown(ToString(), provider as CultureInfo);
 
-        /// <summary>Returns true if the buffer matches the specfied <see cref="Regex"/>.</summary>
+        /// <summary>Returns true if the buffer matches the specified <see cref="Regex"/>.</summary>
         public bool Matches(Regex regex) => regex.IsMatch(ToString());
 
         /// <summary>Gets the first <see cref="char"/> of the buffer.</summary>
@@ -84,10 +85,20 @@ namespace Qowaiv.Text
         /// <inheritdoc />
         public override int GetHashCode() => throw new NotSupportedException();
 
+        /// <inheritdoc />
+        public IEnumerator<char> GetEnumerator() => Enumerate().GetEnumerator();
+
+        /// <inheritdoc />
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
         /// <summary>Enumerates through all (visible) chars of the buffer.</summary>
         private IEnumerable<char> Enumerate() => buffer.Skip(start).Take(Length);
 
         /// <summary>Creates an empty buffer with the specified capacity.</summary>
         public static CharBuffer Empty(int capacity) => new CharBuffer(capacity);
+
+
+
+        
     }
 }

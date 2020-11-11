@@ -195,6 +195,9 @@ var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
 ### Postal code
 Represents a postal code. It supports validation for all countries.
 
+### Telephone number
+
+
 ### Week date
 Represents a week based date.
 

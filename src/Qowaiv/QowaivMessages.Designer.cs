@@ -385,6 +385,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid telephone number.
+        /// </summary>
+        public static string FormatExceptionTelephoneNumber {
+            get {
+                return ResourceManager.GetString("FormatExceptionTelephoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid SQL timestamp.
         /// </summary>
         public static string FormatExceptionTimestamp {

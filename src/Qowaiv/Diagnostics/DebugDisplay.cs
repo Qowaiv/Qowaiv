@@ -11,7 +11,7 @@ namespace Qowaiv.Diagnostics
 
         public static string DebuggerDisplay<Svo>(this Svo svo, string format) where Svo : struct, IFormattable
         {
-            if (svo.Equals(default(Svo)) && typeof(Svo).GetCustomAttribute<SingleValueObjectAttribute>().StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue))
+            if (svo.Equals(default(Svo)) && HasEmptyValue<Svo>())
             {
                 return Empty;
             }
@@ -24,5 +24,10 @@ namespace Qowaiv.Diagnostics
                 return string.Format(CultureInfo.InvariantCulture, format, svo);
             }
         }
+
+        private static bool HasEmptyValue<Svo>()
+            => typeof(Svo)
+            .GetCustomAttribute<SingleValueObjectAttribute>()
+            .StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue);
     }
 }

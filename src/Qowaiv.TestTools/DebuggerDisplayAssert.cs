@@ -20,7 +20,7 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute"/> of a certain <see cref="object"/>.</summary>
-        //[DebuggerStepThrough]
+        [DebuggerStepThrough]
         public static void HasResult(object expected, object value)
         {
             Assert.IsNotNull(value, "The supplied value should not be null.");

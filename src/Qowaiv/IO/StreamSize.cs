@@ -27,7 +27,7 @@ namespace Qowaiv.IO
     /// the file depends on the file system. The maximum stream size a file system
     /// supports depends on the number of bits reserved to store size information
     /// and the total size of the file system. This value type can not represent
-    /// stream sizes bigger than Int64.MaxValue.
+    /// stream sizes bigger than long.MaxValue.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
@@ -55,7 +55,6 @@ namespace Qowaiv.IO
 
         /// <summary>Represents 1 Petabyte (1,000,000,000,000,000 byte).</summary>
         public static readonly StreamSize PB = new StreamSize(1_000_000_000_000_000L);
-
 
         /// <summary>Represents 1 kibibyte (1,024 byte).</summary>
         public static readonly StreamSize KiB = new StreamSize(1L << 10);
@@ -137,66 +136,64 @@ namespace Qowaiv.IO
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Multiply(Decimal factor) { return (StreamSize)(m_Value * factor); }
+        public StreamSize Multiply(decimal factor) => (StreamSize)(m_Value * factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Multiply(Double factor) { return Multiply((Decimal)factor); }
+        public StreamSize Multiply(double factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Multiply(Single factor) { return Multiply((Decimal)factor); }
+        public StreamSize Multiply(float factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Multiply(Percentage factor) { return Multiply((Decimal)factor); }
-
-
-        /// <summary>Multiplies the stream size with a specified factor.</summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public StreamSize Multiply(Int64 factor) { return Multiply((Decimal)factor); }
+        public StreamSize Multiply(Percentage factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Multiply(Int32 factor) { return Multiply((Decimal)factor); }
+        public StreamSize Multiply(long factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Multiply(Int16 factor) { return Multiply((Decimal)factor); }
-
+        public StreamSize Multiply(int factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        [CLSCompliant(false)]
-        public StreamSize Multiply(UInt64 factor) { return Multiply((Decimal)factor); }
+        public StreamSize Multiply(short factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public StreamSize Multiply(UInt32 factor) { return Multiply((Decimal)factor); }
+        public StreamSize Multiply(ulong factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public StreamSize Multiply(UInt16 factor) { return Multiply((Decimal)factor); }
+        public StreamSize Multiply(uint factor) => Multiply((decimal)factor);
+
+        /// <summary>Multiplies the stream size with a specified factor.</summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public StreamSize Multiply(ushort factor) => Multiply((decimal)factor);
 
         #endregion
 
@@ -206,140 +203,156 @@ namespace Qowaiv.IO
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Divide(Decimal factor) { return (StreamSize)(m_Value / factor); }
+        public StreamSize Divide(decimal factor) => (StreamSize)(m_Value / factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Divide(Double factor) { return Divide((Decimal)factor); }
+        public StreamSize Divide(double factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Divide(Single factor) { return Divide((Decimal)factor); }
+        public StreamSize Divide(float factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Divide(Percentage factor) { return Divide((Decimal)factor); }
-
-
-        /// <summary>Divide the stream size by a specified factor.</summary>
-        /// <param name="factor">
-        /// The factor to multiply with.
-        /// </param>
-        public StreamSize Divide(Int64 factor) { return Divide((Decimal)factor); }
+        public StreamSize Divide(Percentage factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Divide(Int32 factor) { return Divide((Decimal)factor); }
+        public StreamSize Divide(long factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        public StreamSize Divide(Int16 factor) { return Divide((Decimal)factor); }
-
+        public StreamSize Divide(int factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
-        [CLSCompliant(false)]
-        public StreamSize Divide(UInt64 factor) { return Divide((Decimal)factor); }
+        public StreamSize Divide(short factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public StreamSize Divide(UInt32 factor) { return Divide((Decimal)factor); }
+        public StreamSize Divide(ulong factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
-        public StreamSize Divide(UInt16 factor) { return Divide((Decimal)factor); }
+        public StreamSize Divide(uint factor) => Divide((decimal)factor);
+
+        /// <summary>Divide the stream size by a specified factor.</summary>
+        /// <param name="factor">
+        /// The factor to multiply with.
+        /// </param>
+        [CLSCompliant(false)]
+        public StreamSize Divide(ushort factor) => Divide((decimal)factor);
 
         #endregion
 
         /// <summary>Increases the stream size with one byte.</summary>
         public static StreamSize operator ++(StreamSize streamSize) => streamSize.Increment();
+
         /// <summary>Decreases the stream size with one byte.</summary>
         public static StreamSize operator --(StreamSize streamSize) => streamSize.Decrement();
 
         /// <summary>Unitary plusses the stream size.</summary>
-        public static StreamSize operator +(StreamSize streamSize) { return streamSize.Plus(); }
+        public static StreamSize operator +(StreamSize streamSize) => streamSize.Plus();
+
         /// <summary>Negates the stream size.</summary>
-        public static StreamSize operator -(StreamSize streamSize) { return streamSize.Negate(); }
+        public static StreamSize operator -(StreamSize streamSize) => streamSize.Negate();
 
         /// <summary>Adds the left and the right stream size.</summary>
         public static StreamSize operator +(StreamSize l, StreamSize r) => l.Add(r);
+
         /// <summary>Subtracts the right from the left stream size.</summary>
         public static StreamSize operator -(StreamSize l, StreamSize r) => l.Subtract(r);
 
         /// <summary>Adds the percentage to the stream size.</summary>
         public static StreamSize operator +(StreamSize streamSize, Percentage p) => streamSize.Add(p);
+
         /// <summary>Subtracts the percentage from the stream size.</summary>
         public static StreamSize operator -(StreamSize streamSize, Percentage p) => streamSize.Subtract(p);
 
         /// <summary>Multiplies the stream size with the factor.</summary>
-        public static StreamSize operator *(StreamSize streamSize, Decimal factor) { return streamSize.Multiply(factor); }
-        /// <summary>Multiplies the stream size with the factor.</summary>
-        public static StreamSize operator *(StreamSize streamSize, Double factor) { return streamSize.Multiply(factor); }
-        /// <summary>Multiplies the stream size with the factor.</summary>
-        public static StreamSize operator *(StreamSize streamSize, Single factor) { return streamSize.Multiply(factor); }
-        /// <summary>Multiplies the stream size with the factor.</summary>
-        public static StreamSize operator *(StreamSize streamSize, Percentage factor) { return streamSize.Multiply(factor); }
+        public static StreamSize operator *(StreamSize streamSize, decimal factor) => streamSize.Multiply(factor);
 
         /// <summary>Multiplies the stream size with the factor.</summary>
-        public static StreamSize operator *(StreamSize streamSize, Int64 factor) { return streamSize.Multiply(factor); }
+        public static StreamSize operator *(StreamSize streamSize, double factor) => streamSize.Multiply(factor);
+
         /// <summary>Multiplies the stream size with the factor.</summary>
-        public static StreamSize operator *(StreamSize streamSize, Int32 factor) { return streamSize.Multiply(factor); }
+        public static StreamSize operator *(StreamSize streamSize, float factor) => streamSize.Multiply(factor);
+
         /// <summary>Multiplies the stream size with the factor.</summary>
-        public static StreamSize operator *(StreamSize streamSize, Int16 factor) { return streamSize.Multiply(factor); }
+        public static StreamSize operator *(StreamSize streamSize, Percentage factor) => streamSize.Multiply(factor);
+
+        /// <summary>Multiplies the stream size with the factor.</summary>
+        public static StreamSize operator *(StreamSize streamSize, long factor) => streamSize.Multiply(factor);
+
+        /// <summary>Multiplies the stream size with the factor.</summary>
+        public static StreamSize operator *(StreamSize streamSize, int factor) => streamSize.Multiply(factor);
+
+        /// <summary>Multiplies the stream size with the factor.</summary>
+        public static StreamSize operator *(StreamSize streamSize, short factor) => streamSize.Multiply(factor);
 
         /// <summary>Multiplies the stream size with the factor.</summary>
         [CLSCompliant(false)]
-        public static StreamSize operator *(StreamSize streamSize, UInt64 factor) { return streamSize.Multiply(factor); }
+        public static StreamSize operator *(StreamSize streamSize, ulong factor) => streamSize.Multiply(factor);
+
         /// <summary>Multiplies the stream size with the factor.</summary>
         [CLSCompliant(false)]
-        public static StreamSize operator *(StreamSize streamSize, UInt32 factor) { return streamSize.Multiply(factor); }
+        public static StreamSize operator *(StreamSize streamSize, uint factor) => streamSize.Multiply(factor);
+
         /// <summary>Multiplies the stream size with the factor.</summary>
         [CLSCompliant(false)]
-        public static StreamSize operator *(StreamSize streamSize, UInt16 factor) { return streamSize.Multiply(factor); }
+        public static StreamSize operator *(StreamSize streamSize, ushort factor) => streamSize.Multiply(factor);
 
         /// <summary>Divides the stream size by the factor.</summary>
-        public static StreamSize operator /(StreamSize streamSize, Decimal factor) { return streamSize.Divide(factor); }
-        /// <summary>Divides the stream size by the factor.</summary>
-        public static StreamSize operator /(StreamSize streamSize, Double factor) { return streamSize.Divide(factor); }
-        /// <summary>Divides the stream size by the factor.</summary>
-        public static StreamSize operator /(StreamSize streamSize, Single factor) { return streamSize.Divide(factor); }
-        /// <summary>Divides the stream size by the factor.</summary>
-        public static StreamSize operator /(StreamSize streamSize, Percentage factor) { return streamSize.Divide(factor); }
+        public static StreamSize operator /(StreamSize streamSize, decimal factor) => streamSize.Divide(factor);
 
         /// <summary>Divides the stream size by the factor.</summary>
-        public static StreamSize operator /(StreamSize streamSize, Int64 factor) { return streamSize.Divide(factor); }
+        public static StreamSize operator /(StreamSize streamSize, double factor) => streamSize.Divide(factor);
+
         /// <summary>Divides the stream size by the factor.</summary>
-        public static StreamSize operator /(StreamSize streamSize, Int32 factor) { return streamSize.Divide(factor); }
+        public static StreamSize operator /(StreamSize streamSize, float factor) => streamSize.Divide(factor);
+
         /// <summary>Divides the stream size by the factor.</summary>
-        public static StreamSize operator /(StreamSize streamSize, Int16 factor) { return streamSize.Divide(factor); }
+        public static StreamSize operator /(StreamSize streamSize, Percentage factor) => streamSize.Divide(factor);
+
+        /// <summary>Divides the stream size by the factor.</summary>
+        public static StreamSize operator /(StreamSize streamSize, long factor) => streamSize.Divide(factor);
+
+        /// <summary>Divides the stream size by the factor.</summary>
+        public static StreamSize operator /(StreamSize streamSize, int factor) => streamSize.Divide(factor);
+
+        /// <summary>Divides the stream size by the factor.</summary>
+        public static StreamSize operator /(StreamSize streamSize, short factor) => streamSize.Divide(factor);
 
         /// <summary>Divides the stream size by the factor.</summary>
         [CLSCompliant(false)]
-        public static StreamSize operator /(StreamSize streamSize, UInt64 factor) { return streamSize.Divide(factor); }
+        public static StreamSize operator /(StreamSize streamSize, ulong factor) => streamSize.Divide(factor);
+
         /// <summary>Divides the stream size by the factor.</summary>
         [CLSCompliant(false)]
-        public static StreamSize operator /(StreamSize streamSize, UInt32 factor) { return streamSize.Divide(factor); }
+        public static StreamSize operator /(StreamSize streamSize, uint factor) => streamSize.Divide(factor);
+
         /// <summary>Divides the stream size by the factor.</summary>
         [CLSCompliant(false)]
-        public static StreamSize operator /(StreamSize streamSize, UInt16 factor) { return streamSize.Divide(factor); }
+        public static StreamSize operator /(StreamSize streamSize, ushort factor) => streamSize.Divide(factor);
 
         #endregion
 
@@ -440,7 +453,6 @@ namespace Qowaiv.IO
             return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
         }
 
-
         /// <summary>Gets an XML string representation of the stream size.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
@@ -502,34 +514,32 @@ namespace Qowaiv.IO
         private static readonly Regex FormattedPattern = new Regex("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegexOptions.Compiled | RegexOptions.RightToLeft);
         private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
         private static readonly string[] FullLabels = { "byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte" };
-
         private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
         private static readonly string[] FullLabels1024 = { "byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte" };
-
 
         /// <summary>Casts a stream size to a <see cref="string"/>.</summary>
         public static explicit operator string(StreamSize val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a <see cref="string"/> to a stream size.</summary>
         public static explicit operator StreamSize(string str) => Cast.String<StreamSize>(TryParse, str);
 
-        /// <summary>Casts a stream size to a System.Int32.</summary>
+        /// <summary>Casts a stream size to a System.int.</summary>
         public static explicit operator int(StreamSize val) => (int)val.m_Value;
-        /// <summary>Casts an System.Int32 to a stream size.</summary>
+        /// <summary>Casts an int to a stream size.</summary>
         public static implicit operator StreamSize(int val) => new StreamSize(val);
 
-        /// <summary>Casts a stream size to a System.Int64.</summary>
+        /// <summary>Casts a stream size to a System.long.</summary>
         public static explicit operator long(StreamSize val) => val.m_Value;
-        /// <summary>Casts a System.Int64 to a stream size.</summary>
+        /// <summary>Casts a long to a stream size.</summary>
         public static implicit operator StreamSize(long val) => new StreamSize(val);
 
         /// <summary>Casts a stream size to a System.Double.</summary>
         public static explicit operator double(StreamSize val) => val.m_Value;
-        /// <summary>Casts a System.Double to a stream size.</summary>
+        /// <summary>Casts a double to a stream size.</summary>
         public static explicit operator StreamSize(double val) => new StreamSize((long)val);
 
         /// <summary>Casts a stream size to a System.Decimal.</summary>
         public static explicit operator decimal(StreamSize val) => val.m_Value;
-        /// <summary>Casts a System.DoubleDecimal to a stream size.</summary>
+        /// <summary>Casts a decimal to a stream size.</summary>
         public static explicit operator StreamSize(decimal val) => new StreamSize((long)val);
 
         /// <summary>Converts the string to a stream size.
@@ -586,72 +596,61 @@ namespace Qowaiv.IO
         /// <param name="size">
         /// The size in kilobytes.
         /// </param>
-        public static StreamSize FromKilobytes(double size) { return KB * size; }
+        public static StreamSize FromKilobytes(double size) => KB * size;
 
         /// <summary>Creates a stream size based on the size in megabytes.</summary>
         /// <param name="size">
         /// The size in megabytes.
         /// </param>
-        public static StreamSize FromMegabytes(double size) { return MB * size; }
+        public static StreamSize FromMegabytes(double size) => MB * size;
 
         /// <summary>Creates a stream size based on the size in gigabytes.</summary>
         /// <param name="size">
         /// The size in gigabytes.
         /// </param>
-        public static StreamSize FromGigabytes(double size) { return GB * size; }
+        public static StreamSize FromGigabytes(double size) => GB * size;
 
         /// <summary>Creates a stream size based on the size in terabytes.</summary>
         /// <param name="size">
         /// The size in terabytes.
         /// </param>
-        public static StreamSize FromTerabytes(double size) { return TB * size; }
-
+        public static StreamSize FromTerabytes(double size) => TB * size;
 
         /// <summary>Creates a stream size based on the size in kibibytes.</summary>
         /// <param name="size">
         /// The size in kilobytes.
         /// </param>
-        public static StreamSize FromKibibytes(double size) { return KiB * size; }
+        public static StreamSize FromKibibytes(double size) => KiB * size;
 
         /// <summary>Creates a stream size based on the size in mebibytes.</summary>
         /// <param name="size">
         /// The size in megabytes.
         /// </param>
-        public static StreamSize FromMebibytes(double size) { return MiB * size; }
+        public static StreamSize FromMebibytes(double size) => MiB * size;
 
         /// <summary>Creates a stream size based on the size in gigabytes.</summary>
         /// <param name="size">
         /// The size in gigabytes.
         /// </param>
-        public static StreamSize FromGibibytes(double size) { return GiB * size; }
+        public static StreamSize FromGibibytes(double size) => GiB * size;
 
         /// <summary>Creates a stream size based on the size in tebibytes.</summary>
         /// <param name="size">
         /// The size in terabytes.
         /// </param>
-        public static StreamSize FromTebibytes(double size) { return TiB * size; }
-
+        public static StreamSize FromTebibytes(double size) => TiB * size;
 
         /// <summary>Creates a stream size from a file info.</summary>
         public static StreamSize FromByteArray(byte[] bytes)
-        {
-            Guard.NotNull(bytes, nameof(bytes));
-            return new StreamSize(bytes.Length);
-        }
+            => new StreamSize(Guard.NotNull(bytes, nameof(bytes)).Length);
 
         /// <summary>Creates a stream size from a file info.</summary>
         public static StreamSize FromFileInfo(FileInfo fileInfo)
-        {
-            Guard.NotNull(fileInfo, nameof(fileInfo));
-            return new StreamSize(fileInfo.Length);
-        }
+            => new StreamSize(Guard.NotNull(fileInfo, nameof(fileInfo)).Length);
 
         /// <summary>Creates a stream size from a stream.</summary>
         public static StreamSize FromStream(Stream stream)
-        {
-            Guard.NotNull(stream, nameof(stream));
-            return new StreamSize(stream.Length);
-        }
+            => new StreamSize(Guard.NotNull(stream, nameof(stream)).Length);
 
         private static string GetStreamSizeMarker(string input)
         {
@@ -673,15 +672,15 @@ namespace Qowaiv.IO
             return string.Empty;
         }
         private static string GetWithoutStreamSizeMarker(string input, string streamSizeMarker)
-        {
-            if (string.IsNullOrEmpty(streamSizeMarker)) { return input; }
-            return input.Substring(0, input.Length - streamSizeMarker.Length);
-        }
+            => string.IsNullOrEmpty(streamSizeMarker)
+            ? input
+            : input.Substring(0, input.Length - streamSizeMarker.Length);
+
         private static long GetMultiplier(string streamSizeMarker)
-        {
-            if (string.IsNullOrEmpty(streamSizeMarker)) { return 1; }
-            return MultiplierLookup[streamSizeMarker.ToUpperInvariant().Trim()];
-        }
+            => string.IsNullOrEmpty(streamSizeMarker)
+            ? 1
+            : MultiplierLookup[streamSizeMarker.ToUpperInvariant().Trim()];
+
         private static readonly Dictionary<string, long> MultiplierLookup = new Dictionary<string, long>
         {
             { "KILOBYTE", 1000L },
@@ -704,7 +703,6 @@ namespace Qowaiv.IO
             { "TEBIBYTE", 1L << 40 },
             { "PEBIBYTE", 1L << 50 },
             { "EXBIBYTE", 1L << 60 },
-
 
             { "KIB", 1L << 10 },
             { "MIB", 1L << 20 },

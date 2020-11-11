@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -196,7 +197,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0:#,###0} Years, {1:#,###0} Months, {2:#,###0} Days", Years, Months, Days);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
         /// <summary>Returns a formatted <see cref="string" /> that represents the current date span.</summary>
         /// <param name="format">

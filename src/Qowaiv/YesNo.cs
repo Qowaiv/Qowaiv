@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Text;
@@ -93,7 +94,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current yes-no for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString("f", CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:f}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current yes-no.</summary>
         /// <param name="format">

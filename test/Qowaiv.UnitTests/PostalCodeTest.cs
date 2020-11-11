@@ -532,24 +532,6 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(PostalCode));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("{empty}", default(PostalCode));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("H0H0H0", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -69,7 +70,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current postal code for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
         /// <param name="format">

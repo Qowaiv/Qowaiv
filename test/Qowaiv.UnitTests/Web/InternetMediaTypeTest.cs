@@ -504,23 +504,6 @@ namespace Qowaiv.UnitTests.Web
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("{empty}", default(InternetMediaType));
-        }
-        [Test]
-        public void DebuggerDisplay_Unknown_String()
-        {
-            DebuggerDisplayAssert.HasResult("application/octet-stream", InternetMediaType.Unknown);
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("application/x-chess-pgn", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

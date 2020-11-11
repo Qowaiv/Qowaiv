@@ -612,30 +612,6 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Month));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("Month: (empty)", default(Month));
-        }
-
-        [Test]
-        public void DebuggerDisplay_Unknown_String()
-        {
-            DebuggerDisplayAssert.HasResult("Month: (unknown)", Month.Unknown);
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("Month: February (02)", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

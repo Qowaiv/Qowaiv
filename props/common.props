@@ -9,7 +9,6 @@
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
     <LangVersion>latest</LangVersion>
-    <CodeAnalysisRuleSet>..\..\Qowaiv.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

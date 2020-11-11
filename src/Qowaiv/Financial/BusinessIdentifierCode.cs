@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Financial;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -92,7 +93,7 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
         /// <param name="format">

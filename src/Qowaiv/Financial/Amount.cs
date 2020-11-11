@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Financial;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Mathematics;
@@ -350,7 +351,7 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "¤{0:0.00########}", m_Value);
+        private string DebuggerDisplay => this.DebuggerDisplay("¤{0:0.00########}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">

@@ -366,24 +366,6 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.AreEqual(expected, formatted);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Fraction));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("⁰⁄₁ = 0", default(Fraction));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("-⁶⁹⁄₁₇ = -4.05882353", TestStruct);
-        }
-
         /// <summary>GetHash should not fail for Fraction.Zero.</summary>
         [Test]
         public void GetHash_Zero_Hash()

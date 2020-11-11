@@ -410,18 +410,6 @@ namespace Qowaiv.UnitTests.Statistics
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Elo));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_DoubleValueOfTheTestStruct()
-        {
-            DebuggerDisplayAssert.HasResult(1732.4000000000001, TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

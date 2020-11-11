@@ -446,18 +446,6 @@ namespace Qowaiv.UnitTests.Sql
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Timestamp));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("0x00000000075BCD15", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

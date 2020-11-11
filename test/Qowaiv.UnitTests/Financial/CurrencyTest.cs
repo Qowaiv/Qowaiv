@@ -522,30 +522,6 @@ namespace Qowaiv.UnitTests.Financial
                 Assert.AreEqual(exp, act);
             }
         }
-
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Currency));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("{empty}", default(Currency));
-        }
-        [Test]
-        public void DebuggerDisplay_Unknown_String()
-        {
-            DebuggerDisplayAssert.HasResult("?", Currency.Unknown);
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("Euro (EUR/978)", TestStruct);
-        }
-
         #endregion
 
         #region IFormatProvider

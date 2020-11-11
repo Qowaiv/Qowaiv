@@ -295,24 +295,6 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(MonthSpan));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("0Y+0M", default(MonthSpan));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("5Y+9M", TestStruct);
-        }
-
         /// <summary>GetHash should not fail for MonthSpan.Zero.</summary>
         [Test]
         public void GetHash_Zero_Hash()

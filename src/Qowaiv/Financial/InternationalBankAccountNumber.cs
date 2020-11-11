@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Financial;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -78,21 +79,7 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns a <see cref="string"/> that represents the current IBAN for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (m_Value == default)
-                {
-                    return "{empty}";
-                }
-                if (m_Value == Unknown.m_Value)
-                {
-                    return "?";
-                }
-                return ToFormattedString();
-            }
-        }
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
         /// <summary>Formats the IBAN without spaces.</summary>
         private string ToUnformattedString()

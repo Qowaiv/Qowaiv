@@ -370,24 +370,6 @@ namespace Qowaiv.UnitTests
             }
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(DateSpan));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("0 Years, 0 Months, 0 Days", default(DateSpan));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("10 Years, 3 Months, -5 Days", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

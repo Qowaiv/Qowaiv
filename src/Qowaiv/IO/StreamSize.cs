@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.IO;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Mathematics;
@@ -381,7 +382,7 @@ namespace Qowaiv.IO
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => ToString(" F", CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0: F}");
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);

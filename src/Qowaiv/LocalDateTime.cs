@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -501,7 +502,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current local date time for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => ToString("yyyy-MM-dd hh:mm:ss.FFF", CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:yyyy-MM-dd hh:mm:ss.FFF}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
         /// <param name="format">

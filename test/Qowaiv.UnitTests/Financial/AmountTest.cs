@@ -456,25 +456,7 @@ namespace Qowaiv.Financial.UnitTests
             var exp = "12#345#678*2350";
             Assert.AreEqual(exp, act);
         }
-
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Amount));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("¤0.00", default(Amount));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("¤42.17", TestStruct);
-        }
-
+      
         #endregion
 
         #region IEquatable tests

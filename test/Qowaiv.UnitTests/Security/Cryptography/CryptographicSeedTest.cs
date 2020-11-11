@@ -397,24 +397,6 @@ namespace Qowaiv.Security.Cryptography.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(CryptographicSeed));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("{empty}", default(CryptographicSeed));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("Qowaig==", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

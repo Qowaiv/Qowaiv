@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -95,15 +96,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current house number for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (IsEmpty()) { return "HouseNumber: (empty)"; }
-                if (IsUnknown()) { return "HouseNumber: (unknown)"; }
-                return string.Format(CultureInfo.InvariantCulture, "HouseNumber: {0}", m_Value);
-            }
-        }
+        private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current house number.</summary>
         /// <param name="format">

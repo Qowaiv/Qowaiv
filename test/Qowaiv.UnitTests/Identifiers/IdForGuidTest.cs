@@ -383,24 +383,6 @@ namespace Qowaiv.UnitTests.Identifiers
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Id<ForGuid>));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("{empty} (ForGuid)", default(Id<ForGuid>));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("0f5ab5ab-12cb-4629-878d-b18b88b9a504 (ForGuid)", TestStruct);
-        }
-
         /// <summary>GetHash should not fail for Id<ForGuid>.Empty.</summary>
         [Test]
         public void GetHash_Empty_Hash()

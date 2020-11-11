@@ -474,12 +474,6 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("1997-W14-6", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

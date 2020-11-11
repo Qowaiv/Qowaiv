@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Identifiers;
 using Qowaiv.Json;
@@ -65,7 +66,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => ToString(CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:S}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current UUID.</summary>
         /// <param name="format">

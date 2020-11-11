@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Web;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -147,7 +148,9 @@ namespace Qowaiv.Web
 
         /// <summary>Returns a <see cref="string"/> that represents the current Internet media type for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => IsEmpty() 
+            ? DebugDisplay.Empty
+            : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Internet media type.</summary>
         /// <param name="format">

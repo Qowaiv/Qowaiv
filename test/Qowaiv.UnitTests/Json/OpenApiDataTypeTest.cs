@@ -64,20 +64,6 @@ namespace Qowaiv.UnitTests.Json
 
             Assert.IsTrue(true, "Test should pass.");
         }
-    
-        [Test]
-        public void DebuggerDisplay_IsDescriptive()
-        {
-            var attribute = new OpenApiDataTypeAttribute(
-                description: "Year",
-                type: "integer",
-                format: "0000",
-                nullable: true,
-                pattern: "^[0-9]{4}$");
-
-            DebuggerDisplayAssert.HasResult("{ type: integer, desc: Year, format: 0000, pattern: ^[0-9]{4}$, nullable: true }", attribute);
-                
-        }
     }
     internal class OpenApiDataType
     {

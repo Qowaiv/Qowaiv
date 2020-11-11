@@ -456,16 +456,5 @@ namespace Qowaiv.UnitTests.Formatting
         }
 
         #endregion
-
-        [Test]
-        public void DebuggerDisplay_FormattingArgumentsCollection_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(FormattingArgumentsCollection));
-        }
-        [Test]
-        public void DebuggerDisplay_FormattingArgumentsCollection_String()
-        {
-            DebuggerDisplayAssert.HasResult("FormattingArgumentsCollection: 'en-GB', Items: 0", new FormattingArgumentsCollection(new CultureInfo("en-GB")));
-        }
     }
 }

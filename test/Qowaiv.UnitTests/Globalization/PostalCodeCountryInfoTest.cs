@@ -81,29 +81,6 @@ namespace Qowaiv.UnitTests.Globalization
 
             Assert.AreEqual(exp, act);
         }
-
-        [Test]
-        public void DebuggerDisplay_Empty_AreEqual()
-        {
-            DebuggerDisplayAssert.HasResult("Postal code[], none", PostalCodeCountryInfo.GetInstance(Country.Empty));
-        }
-
-        [Test]
-        public void DebuggerDisplay_BE_AreEqual()
-        {
-            DebuggerDisplayAssert.HasResult("Postal code[BE], Pattern: ^[1-9][0-9]{3}$", PostalCodeCountryInfo.GetInstance(Country.BE));
-        }
-
-        [Test]
-        public void DebuggerDisplay_CA_AreEqual()
-        {
-            DebuggerDisplayAssert.HasResult("Postal code[CA], Pattern: ^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$, Format: $1 $2", PostalCodeCountryInfo.GetInstance(Country.CA));
-        }
-
-        [Test]
-        public void DebuggerDisplay_VA_AreEqual()
-        {
-            DebuggerDisplayAssert.HasResult("Postal code[VA], Value: 00120", PostalCodeCountryInfo.GetInstance(Country.VA));
-        }
+     
     }
 }

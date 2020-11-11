@@ -8,7 +8,7 @@ namespace Qowaiv.TestTools.UnitTests
         [Test]
         public void HasDebuggerDisplay_ViaParent_Successful()
         {
-            DebuggerDisplayAssert.HasAttribute(typeof(WithDubuggerDisplayChild));
+            DebuggerDisplayAssert.HasAttribute(typeof(WithDebuggerDisplayChild));
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace Qowaiv.TestTools.UnitTests
         [Test]
         public void HasResult_ViaParent_StringValue()
         {
-            DebuggerDisplayAssert.HasResult("WithDubuggerDisplayChild", new WithDubuggerDisplayChild());
+            DebuggerDisplayAssert.HasResult("WithDebuggerDisplayChild", new WithDebuggerDisplayChild());
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace Qowaiv.TestTools.UnitTests
         }
     }
 
-    internal class WithDubuggerDisplayChild : WithDebuggerDisplay { }
+    internal class WithDebuggerDisplayChild : WithDebuggerDisplay { }
 
     [DebuggerDisplay("{DebuggerDisplay}")]
     internal class WithDebuggerDisplay

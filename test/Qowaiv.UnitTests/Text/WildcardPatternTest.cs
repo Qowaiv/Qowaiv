@@ -168,16 +168,5 @@ namespace Qowaiv.UnitTests.Text
         }
 
         #endregion
-
-        [Test]
-        public void DebuggerDisplay_Simple_DebuggerString()
-        {
-            DebuggerDisplayAssert.HasResult("{t?st*}", new WildcardPattern("t?st*"));
-        }
-        [Test]
-        public void DebuggerDisplay_TestPattern_DebuggerString()
-        {
-            DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", TestPattern);
-        }
     }
 }

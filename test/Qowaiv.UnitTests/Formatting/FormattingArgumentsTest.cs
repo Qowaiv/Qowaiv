@@ -256,17 +256,6 @@ namespace Qowaiv.UnitTests.Formatting
             Assert.AreEqual(exp, act);
         }
         #endregion
-
-        [Test]
-        public void DebuggerDisplay_FormattingArgumentsCollection_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(FormattingArguments));
-        }
-        [Test]
-        public void DebuggerDisplay_FormattingArgumentsCollection_String()
-        {
-            DebuggerDisplayAssert.HasResult("Format: 'yyyy-MM-dd', Provider: en-GB", new FormattingArguments("yyyy-MM-dd", new CultureInfo("en-GB")));
-        }
     }
 
     [Serializable]

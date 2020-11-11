@@ -411,12 +411,6 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Elo));
-        }
-
-        [Test]
         public void DebuggerDisplay_TestStruct_DoubleValueOfTheTestStruct()
         {
             DebuggerDisplayAssert.HasResult(1732.4000000000001, TestStruct);

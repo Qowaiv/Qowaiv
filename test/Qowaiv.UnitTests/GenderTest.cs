@@ -515,24 +515,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Gender));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("{empty}", default(Gender));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("Male", TestStruct);
-        }
-
-        [Test]
         public void ToString_InvariantCulture_AreEqual()
         {
             using (new CultureInfoScope(CultureInfo.InvariantCulture))

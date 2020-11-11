@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Globalization;
+using Qowaiv.Diagnostics;
 using Qowaiv.Financial;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
@@ -184,11 +185,11 @@ namespace Qowaiv.Globalization
             {
                 if (IsEmpty())
                 {
-                    return "{empty}";
+                    return DebugDisplay.Empty;
                 }
                 if (IsUnknown())
                 {
-                    return "?";
+                    return DebugDisplay.Unknown;
                 }
                 return string.Format(CultureInfo.InvariantCulture, "{0} ({1}/{2})", EnglishName, IsoAlpha2Code, IsoAlpha3Code);
             }

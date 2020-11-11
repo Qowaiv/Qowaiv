@@ -506,29 +506,6 @@ namespace Qowaiv.Fiancial.UnitTests
             }
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(YesNo));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("{empty}", default(YesNo));
-        }
-        [Test]
-        public void DebuggerDisplay_Unknown_String()
-        {
-            DebuggerDisplayAssert.HasResult("unknown", YesNo.Unknown);
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("yes", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

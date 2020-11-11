@@ -398,12 +398,6 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         }
 
         [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(CryptographicSeed));
-        }
-
-        [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("{empty}", default(CryptographicSeed));

@@ -642,12 +642,6 @@ namespace Qowaiv.UnitTests.IO
         }
 
         [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(StreamSize));
-        }
-
-        [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("0 byte", default(StreamSize));

@@ -557,29 +557,6 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(HouseNumber));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("HouseNumber: (empty)", default(HouseNumber));
-        }
-        [Test]
-        public void DebuggerDisplay_Unknown_String()
-        {
-            DebuggerDisplayAssert.HasResult("HouseNumber: (unknown)", HouseNumber.Unknown);
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("HouseNumber: 123456789", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

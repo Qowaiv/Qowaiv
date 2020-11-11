@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -127,15 +128,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (IsEmpty()) { return "{empty}"; }
-                if (IsUnknown()) { return "?"; }
-                return ToString(CultureInfo.InvariantCulture);
-            }
-        }
+        private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current email address.</summary>
         /// <param name="format">

@@ -367,12 +367,6 @@ namespace Qowaiv.UnitTests.Mathematics
         }
 
         [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Fraction));
-        }
-
-        [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("⁰⁄₁ = 0", default(Fraction));

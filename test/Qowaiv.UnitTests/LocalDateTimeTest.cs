@@ -345,12 +345,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(LocalDateTime));
-        }
-
-        [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("0001-01-01 12:00:00", default(LocalDateTime));

@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Financial;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -134,22 +135,8 @@ namespace Qowaiv.Financial
 
         /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (IsEmpty())
-                {
-                    return "{empty}";
-                }
-                if (IsUnknown())
-                {
-                    return "?";
-                }
-                return string.Format(CultureInfo.InvariantCulture, "{0} ({1}/{2:000})", EnglishName, IsoCode, IsoNumericCode);
-            }
-        }
-
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:e (i/0)}");
+        
         /// <summary>Returns a formatted <see cref="string"/> that represents the current currency.</summary>
         /// <param name="format">
         /// The format that describes the formatting.

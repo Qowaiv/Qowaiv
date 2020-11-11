@@ -398,24 +398,6 @@ namespace Qowaiv.UnitTests
             }, "Input string was not in a correct format.");
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Uuid));
-        }
-
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("", default(Uuid));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("Qowaiv_SVOLibrary_GUIA", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

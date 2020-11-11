@@ -2,6 +2,7 @@
 // To support XML serialization, the underlying value has to be mutable but the struct is inmutable.
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Text;
@@ -137,16 +138,8 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (IsEmpty()) { return "Month: (empty)"; }
-                if (IsUnknown()) { return "Month: (unknown)"; }
-                return string.Format(CultureInfo.InvariantCulture, "Month: {0:f} ({0:m})", this);
-            }
-        }
-
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:f (m)}");
+        
         /// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
         /// <param name="format">
         /// The format that describes the formatting.

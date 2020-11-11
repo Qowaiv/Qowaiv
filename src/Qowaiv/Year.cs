@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -80,15 +81,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current year for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (IsEmpty()) { return "Year: (empty)"; }
-                if (IsUnknown()) { return "Year: (unknown)"; }
-                return string.Format(CultureInfo.InvariantCulture, "Year: {0}", m_Value);
-            }
-        }
+        private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current year.</summary>
         /// <param name="format">

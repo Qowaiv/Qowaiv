@@ -433,18 +433,6 @@ namespace Qowaiv.UnitTests.Financial
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(Money));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("EUR 42.17", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

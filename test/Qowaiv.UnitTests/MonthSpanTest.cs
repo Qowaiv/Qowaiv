@@ -296,12 +296,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void DebuggerDisplay_DebugToString_HasAttribute()
-        {
-            DebuggerDisplayAssert.HasAttribute(typeof(MonthSpan));
-        }
-
-        [Test]
         public void DebuggerDisplay_DefaultValue_String()
         {
             DebuggerDisplayAssert.HasResult("0Y+0M", default(MonthSpan));

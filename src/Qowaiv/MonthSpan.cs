@@ -1,4 +1,5 @@
-﻿using Qowaiv.Formatting;
+﻿using Qowaiv.Diagnostics;
+using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
 using System.ComponentModel;
@@ -172,7 +173,7 @@ namespace Qowaiv
         #endregion
         /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => ToString("F", CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
         /// <summary>Returns a formatted <see cref = "string "/> that represents the month span.</summary>
         /// <param name = "format">

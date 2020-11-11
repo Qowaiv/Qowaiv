@@ -641,18 +641,6 @@ namespace Qowaiv.UnitTests.IO
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("0 byte", default(StreamSize));
-        }
-
-        [Test]
-        public void DebuggerDisplay_TestStruct_String()
-        {
-            DebuggerDisplayAssert.HasResult("123.5 Megabyte", TestStruct);
-        }
-
         #endregion
 
         #region IEquatable tests

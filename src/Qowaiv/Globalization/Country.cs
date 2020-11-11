@@ -179,21 +179,7 @@ namespace Qowaiv.Globalization
 
         /// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get
-            {
-                if (IsEmpty())
-                {
-                    return DebugDisplay.Empty;
-                }
-                if (IsUnknown())
-                {
-                    return DebugDisplay.Unknown;
-                }
-                return string.Format(CultureInfo.InvariantCulture, "{0} ({1}/{2})", EnglishName, IsoAlpha2Code, IsoAlpha3Code);
-            }
-        }
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:e (2/3)}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">

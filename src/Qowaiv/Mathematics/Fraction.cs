@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Mathematics;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Text;
@@ -158,7 +159,7 @@ namespace Qowaiv.Mathematics
         public long Remainder => IsZero() ? 0 : (numerator % denominator).Abs();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0:super⁄sub} = {0:0.########}", this);
+        private string DebuggerDisplay => this.DebuggerDisplay("{0:super⁄sub} = {0:0.########}");
 
         /// <summary>Returns true if the faction is zero.</summary>
         public bool IsZero() => numerator == 0;

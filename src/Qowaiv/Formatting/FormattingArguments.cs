@@ -119,13 +119,8 @@ namespace Qowaiv.Formatting
         /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Format: '{0}', Provider: {1}", Format, FormatProvider);
-            }
-        }
+            => string.Format(CultureInfo.InvariantCulture,
+                "Format: '{0}', Provider: {1}", Format, FormatProvider);
 
         #endregion
 

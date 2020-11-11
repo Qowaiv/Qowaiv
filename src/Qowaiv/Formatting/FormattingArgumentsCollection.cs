@@ -517,13 +517,8 @@ namespace Qowaiv.Formatting
         /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments collection for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count);
-            }
-        }
+            => string.Format(CultureInfo.InvariantCulture,
+                "FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count);
+            
     }
 }

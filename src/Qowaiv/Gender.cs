@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Text;
@@ -105,7 +106,9 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : GetDisplayName(CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => IsEmpty() 
+            ? DebugDisplay.Empty
+            : GetDisplayName(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Gender.</summary>
         /// <param name="format">

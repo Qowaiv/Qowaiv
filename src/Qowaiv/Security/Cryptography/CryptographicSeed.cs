@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Security.Cryptography;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Text;
@@ -53,7 +54,9 @@ namespace Qowaiv.Security.Cryptography
 
         /// <summary>Returns a <see cref="string"/> that represents the current cryptographic seed for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() ? "{empty}" : Base64.ToString(m_Value);
+        private string DebuggerDisplay => IsEmpty() 
+            ? DebugDisplay.Empty 
+            : Base64.ToString(m_Value);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current cryptographic seed.</summary>
         /// <param name="format">

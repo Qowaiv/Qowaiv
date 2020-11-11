@@ -402,12 +402,6 @@ namespace Qowaiv.UnitTests
         #region IFormattable / ToString tests
 
         [Test]
-        public void DebuggerDisplay_DefaultValue_String()
-        {
-            DebuggerDisplayAssert.HasResult("17.51%", TestStruct);
-        }
-
-        [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
             var act = TestStruct.ToString("%0.0", new UnitTestFormatProvider());

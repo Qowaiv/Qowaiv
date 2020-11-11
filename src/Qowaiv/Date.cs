@@ -3,6 +3,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -386,7 +387,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current Date for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => ToString(SerializableFormat, CultureInfo.InvariantCulture);
+        private string DebuggerDisplay => this.DebuggerDisplay($"{{0:{SerializableFormat}}}");
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
         /// <param name="format">

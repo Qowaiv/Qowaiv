@@ -7,6 +7,7 @@
 // See README.md => Hashing
 
 using Qowaiv.Conversion.Identifiers;
+using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -127,11 +128,10 @@ namespace Qowaiv.Identifiers
 
         /// <summary>Returns a <see cref="string"/> that represents the identifier for DEBUG purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get => $"{(IsEmpty() ? "{empty}" : ToString(CultureInfo.InvariantCulture))} ({typeof(TIdentifier).Name})";
-        }
-
+        private string DebuggerDisplay => IsEmpty()
+            ? $"{DebugDisplay.Empty} ({typeof(TIdentifier).Name})"
+            : $"{this} ({typeof(TIdentifier).Name})";
+        
         /// <summary>Returns a <see cref = "string"/> that represents the identifier.</summary>
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
 

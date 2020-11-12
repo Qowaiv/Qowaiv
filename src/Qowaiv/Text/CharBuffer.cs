@@ -96,9 +96,5 @@ namespace Qowaiv.Text
 
         /// <summary>Creates an empty buffer with the specified capacity.</summary>
         public static CharBuffer Empty(int capacity) => new CharBuffer(capacity);
-
-
-
-        
     }
 }

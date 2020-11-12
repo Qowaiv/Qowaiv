@@ -63,11 +63,14 @@ namespace Qowaiv.Financial
                 {
                     return Country.Empty;
                 }
-                if (m_Value == Unknown.m_Value)
+                else if (m_Value == Unknown.m_Value)
                 {
                     return Country.Unknown;
                 }
-                return Country.Parse(m_Value.Substring(0, 2), CultureInfo.InvariantCulture);
+                else
+                {
+                    return Country.Parse(m_Value.Substring(0, 2), CultureInfo.InvariantCulture);
+                }
             }
         }
 
@@ -88,11 +91,14 @@ namespace Qowaiv.Financial
             {
                 return string.Empty;
             }
-            if (m_Value == Unknown.m_Value)
+            else if (m_Value == Unknown.m_Value)
             {
                 return "?";
             }
-            return m_Value;
+            else
+            {
+                return m_Value;
+            }
         }
         /// <summary>Formats the IBAN without spaces as lowercase.</summary>
         private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();
@@ -192,7 +198,8 @@ namespace Qowaiv.Financial
                 result = Unknown;
                 return true;
             }
-            else if (buffer.Length > 11 
+            else if (buffer.Length >= 12 
+                && buffer.Length <= 32
                 && buffer.Matches(Pattern)
                 && ValidForCountry(buffer) 
                 && (Mod97(buffer)))
@@ -235,7 +242,6 @@ namespace Qowaiv.Financial
             return digits;
         }
 
-        /// <summary>Contains a lookup for alphanumeric and numeric chars.</summary>
         private const string AlphanumericAndNumericLookup = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 }

@@ -198,7 +198,8 @@ namespace Qowaiv.Financial
                 result = Unknown;
                 return true;
             }
-            else if (buffer.Length > 11 
+            else if (buffer.Length >= 12 
+                && buffer.Length <= 32
                 && buffer.Matches(Pattern)
                 && ValidForCountry(buffer) 
                 && (Mod97(buffer)))

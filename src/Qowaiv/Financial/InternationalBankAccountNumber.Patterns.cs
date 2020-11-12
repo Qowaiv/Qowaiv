@@ -86,7 +86,7 @@ namespace Qowaiv.Financial
             Bban(Country.SI, "15n", checksum: 56),
             Bban(Country.SK, "20n"),
             Bban(Country.SM, "1a,10n,12c"),
-            Bban(Country.ST, "2n,23n"),
+            Bban(Country.ST, "21n"),
             Bban(Country.SV, "4a,20n"),
             Bban(Country.TL, "19n", checksum: 38),
             Bban(Country.TN, "20n", checksum: 59),

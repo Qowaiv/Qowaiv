@@ -121,87 +121,196 @@ namespace IBAN_specs
         }
     }
 
-    public class Input
+    public class Inut_is_invalid_when
     {
-        [TestCase("?", "Unknown")]
-        [TestCase("AE950 2100000006  93123456", "United Arab Emirates ()")]
-        [TestCase("AE95 0210 0000 0069 3123 456", "United Arab Emirates")]
-        [TestCase("AL47 2121 1009 0000 0002 3569 8741", "Albania")]
-        [TestCase("AD12 0001 2030 2003 5910 0100", "Andorra")]
-        [TestCase("AT61 1904 3002 3457 3201", "Austria")]
-        [TestCase("BA39 1290 0794 0102 8494", "Bosnia and Herzegovina")]
-        [TestCase("BE43 0689 9999 9501", "Belgium")]
-        [TestCase("BG80 BNBG 9661 1020 3456 78", "Bulgaria")]
-        [TestCase("BH29 BMAG 1299 1234 56BH 00", "Bahrain")]
-        [TestCase("BY13 NBRB 3600 9000 0000 2Z00 AB00", "Belarus")]
-        [TestCase("CH36 0838 7000 0010 8017 3", "Switzerland")]
-        [TestCase("CY17 0020 0128 0000 0012 0052 7600", "Cyprus")]
-        [TestCase("CZ65 0800 0000 1920 0014 5399", "Czech Republic")]
-        [TestCase("DE68 2105 0170 0012 3456 78", "Germany")]
-        [TestCase("DK50 0040 0440 1162 43", "Denmark")]
-        [TestCase("DO28 BAGR 0000 0001 2124 5361 1324", "Dominican Republic")]
-        [TestCase("EE38 2200 2210 2014 5685", "Estonia")]
-        [TestCase("ES91 2100 0418 4502 0005 1332", "Spain")]
-        [TestCase("FI21 1234 5600 0007 85", "Finland")]
-        [TestCase("FO20 0040 0440 1162 43", "Faroe Islands")]
-        [TestCase("FR14 2004 1010 0505 0001 3M02 606", "Frankrijk")]
-        [TestCase("GB82 WEST 1234 5698 7654 32", "United Kingdom")]
-        [TestCase("GE29 NB00 0000 0101 9049 17", "Georgia")]
-        [TestCase("GI75 NWBK 0000 0000 7099 453", "Gibraltar")]
-        [TestCase("GL20 0040 0440 1162 43", "Greenland")]
-        [TestCase("GR16 0110 1250 0000 0001 2300 695", "Greece")]
-        [TestCase("HR12 1001 0051 8630 0016 0", "United Kingdom")]
-        [TestCase("HU42 1177 3016 1111 1018 0000 0000", "Hungary")]
-        [TestCase("IE29 AIBK 9311 5212 3456 78", "Ireland")]
-        [TestCase("IL62 0108 0000 0009 9999 999", "Israel")]
-        [TestCase("IS14 0159 2600 7654 5510 7303 39", "Iceland")]
-        [TestCase("IT60 X054 2811 1010 0000 0123 456", "Italy")]
-        [TestCase("KW81 CBKU 0000 0000 0000 1234 5601 01", "Kuwait")]
-        [TestCase("KZ75 125K ZT20 6910 0100", "Kazakhstan")]
-        [TestCase("LB30 0999 0000 0001 0019 2557 9115", "Lebanon")]
-        [TestCase("LI21 0881 0000 2324 013A A", "Liechtenstein")]
-        [TestCase("LT12 1000 0111 0100 1000", "Lithuania")]
-        [TestCase("LU28 0019 4006 4475 0000", "Luxembourg")]
-        [TestCase("LV80 BANK 0000 4351 9500 1", "Latvia")]
-        [TestCase("MC11 1273 9000 7000 1111 1000 H79", "Monaco")]
-        [TestCase("ME25 5050 0001 2345 6789 51", "Montenegro")]
-        [TestCase("MK07 2501 2000 0058 984", "Macedonia")]
-        [TestCase("MR13 0002 0001 0100 0012 3456 753", "Mauritania")]
-        [TestCase("MT84 MALT 0110 0001 2345 MTLC AST0 01S", "Malta")]
-        [TestCase("MU17 BOMM 0101 1010 3030 0200 000M UR", "Mauritius")]
-        [TestCase("NL20 INGB 0001 2345 67", "Netherlands")]
-        [TestCase("NL44 RABO 0123 4567 89", "Netherlands")]
-        [TestCase("NO93 8601 1117 947", "Norway")]
-        [TestCase("PL61 1090 1014 0000 0712 1981 2874", "Poland")]
-        [TestCase("PT50 0002 0123 1234 5678 9015 4", "Portugal")]
-        [TestCase("RO49 AAAA 1B31 0075 9384 0000", "Romania")]
-        [TestCase("RS35 2600 0560 1001 6113 79", "Romania")]
-        [TestCase("SA84 4000 0108 0540 1173 0013", "Saudi Arabia")]
-        [TestCase("SE35 5000 0000 0549 1000 0003", "Sweden")]
-        [TestCase("SI56 1910 0000 0123 438", "Slovenia")]
-        [TestCase("SK31 1200 0000 1987 4263 7541", "Slovakia")]
-        [TestCase("SM86 U032 2509 8000 0000 0270 100", "San Marino")]
-        [TestCase("TL38 0010 0123 4567 8910 106", "Timor Leste")]
-        [TestCase("TN59 1000 6035 1835 9847 8831", "Tunisia")]
-        [TestCase("TR33 0006 1005 1978 6457 8413 26", "Turkey")]
-        [TestCase("UA21 3996 2200 0002 6007 2335 6600 1", "Ukraine")]
-        [TestCase("VA59 0011 2300 0012 3456 78", "Vatican City")]
+        [Test]
+        public void @null()
+        {
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid(null));
+        }
+
+        [Test]
+        public void string_empty()
+        {
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid(string.Empty));
+        }
+
+        [Test]
+        public void country_does_not_exist()
+        {
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX950210000000693123456"));
+        }
+
+        [Test]
+        public void shorter_then_12()
+        {
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB007"));
+        }
+
+        [Test]
+        public void longer_then_32()
+        {
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20 INGB 0070 3456 7890 1234 5678 9012 1"));
+        }
+
+        [Test]
+        public void other_then_alpha_numeric()
+        {
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid("AE20 #$12 0070 3456 7890 1234 5678"));
+        }
+
+        [Test]
+        public void country_does_not_support_IBAN()
+        {
+            Assert.IsFalse(InternationalBankAccountNumber.IsValid("US20INGB0001234567"));
+        }
+    }
+
+    public class Input_is_valid
+    {
+        [Test]
+        public void for_unkown_IBANs()
+        {
+            Assert.IsTrue(InternationalBankAccountNumber.IsValid("?"));
+        }
+
+        [Test]
+        public void despite_irregular_whitespacing()
+        {
+            Assert.IsTrue(InternationalBankAccountNumber.IsValid("AE950 2100000006  93123456"));
+        }
+
+        [TestCaseSource(nameof(ValidForCountry))]
+        public void for_country(Country country, string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                Assert.Inconclusive($"No IBAN test for {country.EnglishName} ({country.IsoAlpha2Code}).");
+            }
+            else
+            {
+                Assert.IsTrue(InternationalBankAccountNumber.TryParse(input, out InternationalBankAccountNumber iban),
+                    $"{input} is invalid for {country.EnglishName}.");
+                Assert.AreEqual(country, iban.Country);
+            }
+        }
+
+        [Test]
+        public void for_country_has_tests_for_all_supported()
+        {
+            var supported = ValidForCountry.Select(array => array[0]).Cast<Country>();
+            Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
+        }
+
         public void is_valid_for(string input, string description)
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid(input), description);
         }
 
-        [TestCase("", "string.Empty")]
-        [TestCase(null, "(String)null")]
-        [TestCase("XX950210000000693123456", "Not existing country.")]
-        [TestCase("Garbage in, garbage out", "Wrong pattern.")]
-        [TestCase("NL20INGB007", "Too short.")]
-        [TestCase("NL20INGB000123456Z", "Wrong Dutch sub pattern.")]
-        [TestCase("XX20INGB0001234567", "Non-existing country.")]
-        [TestCase("US20INGB0001234567", "Country without pattern.")]
-        public void is_invalid_for(string input, string description)
+        internal static readonly object[][] ValidForCountry = new object[][]
         {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid(input), description);
-        }
+           new object[]{ Country.AD, "AD12 0001 2030 2003 5910 0100" },
+           new object[]{ Country.AE, "AE95 0210 0000 0069 3123 456" },
+           new object[]{ Country.AL, "AL47 2121 1009 0000 0002 3569 8741" },
+           new object[]{ Country.AO, "AO44 1234 1234 1234 1234 1234 1" },
+           new object[]{ Country.AT, "AT61 1904 3002 3457 3201" },
+           new object[]{ Country.AZ, "AZ21 NABZ 0000 0000 1370 1000 1944" },
+           new object[]{ Country.BA, "BA39 1290 0794 0102 8494" },
+           new object[]{ Country.BE, "BE43 0689 9999 9501" },
+           new object[]{ Country.BF, "BF45 1234 1234 1234 1234 1234 123" },
+           new object[]{ Country.BG, "BG80 BNBG 9661 1020 3456 78" },
+           new object[]{ Country.BH, "BH29 BMAG 1299 1234 56BH 00" },
+           new object[]{ Country.BI, "BI33 1234 1234 1234" },
+           new object[]{ Country.BJ, "BJ83 A123 1234 1234 1234 1234 1234" },
+           new object[]{ Country.BR, "BR97 0036 0305 0000 1000 9795 493P 1" },
+           new object[]{ Country.BY, "BY13 NBRB 3600 9000 0000 2Z00 AB00" },
+           new object[]{ Country.CG, "" },
+           new object[]{ Country.CH, "CH36 0838 7000 0010 8017 3" },
+           new object[]{ Country.CI, "" },
+           new object[]{ Country.CM, "CM15 1234 1234 1234 1234 1234 123" },
+           new object[]{ Country.CR, "CR05 0152 0200 1026 2840 66" },
+           new object[]{ Country.CV, "CV05 1234 1234 1234 1234 1234 1" },
+           new object[]{ Country.CY, "CY17 0020 0128 0000 0012 0052 7600" },
+           new object[]{ Country.CZ, "CZ65 0800 0000 1920 0014 5399" },
+           new object[]{ Country.DE, "DE68 2105 0170 0012 3456 78" },
+           new object[]{ Country.DJ, "" },
+           new object[]{ Country.DK, "DK50 0040 0440 1162 43" },
+           new object[]{ Country.DO, "DO28 BAGR 0000 0001 2124 5361 1324" },
+           new object[]{ Country.DZ, "DZ35 1234 1234 1234 1234 1234" },
+           new object[]{ Country.EE, "EE38 2200 2210 2014 5685" },
+           new object[]{ Country.EG, "" },
+           new object[]{ Country.ES, "ES91 2100 0418 4502 0005 1332" },
+           new object[]{ Country.FI, "FI21 1234 5600 0007 85" },
+           new object[]{ Country.FO, "FO20 0040 0440 1162 43" },
+           new object[]{ Country.FR, "FR14 2004 1010 0505 0001 3M02 606" },
+           new object[]{ Country.GA, "" },
+           new object[]{ Country.GB, "GB82 WEST 1234 5698 7654 32" },
+           new object[]{ Country.GE, "GE29 NB00 0000 0101 9049 17" },
+           new object[]{ Country.GI, "GI75 NWBK 0000 0000 7099 453" },
+           new object[]{ Country.GL, "GL20 0040 0440 1162 43" },
+           new object[]{ Country.GQ, "" },
+           new object[]{ Country.GR, "GR16 0110 1250 0000 0001 2300 695" },
+           new object[]{ Country.GT, "GT82 TRAJ 0102 0000 0012 1002 9690" },
+           new object[]{ Country.GW, "" },
+           new object[]{ Country.HN, "" },
+           new object[]{ Country.HR, "HR12 1001 0051 8630 0016 0" },
+           new object[]{ Country.HU, "HU42 1177 3016 1111 1018 0000 0000" },
+           new object[]{ Country.IE, "IE29 AIBK 9311 5212 3456 78" },
+           new object[]{ Country.IL, "IL62 0108 0000 0009 9999 999" },
+           new object[]{ Country.IQ, "IQ98 NBIQ 8501 2345 6789 012" },
+           new object[]{ Country.IR, "IR08 1234 1234 1234 1234 1234 12" },
+           new object[]{ Country.IS, "IS14 0159 2600 7654 5510 7303 39" },
+           new object[]{ Country.IT, "IT60 X054 2811 1010 0000 0123 456" },
+           new object[]{ Country.JO, "JO94 CBJO 0010 0000 0000 0131 0003 02" },
+           new object[]{ Country.KM, "" },
+           new object[]{ Country.KW, "KW81 CBKU 0000 0000 0000 1234 5601 01" },
+           new object[]{ Country.KZ, "KZ75 125K ZT20 6910 0100" },
+           new object[]{ Country.LB, "LB30 0999 0000 0001 0019 2557 9115" },
+           new object[]{ Country.LC, "LC55 HEMM 0001 0001 0012 0012 0002 3015" },
+           new object[]{ Country.LI, "LI21 0881 0000 2324 013A A" },
+           new object[]{ Country.LT, "LT12 1000 0111 0100 1000" },
+           new object[]{ Country.LU, "LU28 0019 4006 4475 0000" },
+           new object[]{ Country.LV, "LV80 BANK 0000 4351 9500 1" },
+           new object[]{ Country.MA, "" },
+           new object[]{ Country.MC, "MC11 1273 9000 7000 1111 1000 H79" },
+           new object[]{ Country.MD, "MD24 AG00 0225 1000 1310 4168" },
+           new object[]{ Country.ME, "ME25 5050 0001 2345 6789 51" },
+           new object[]{ Country.MG, "MG40 1234 1234 1234 1234 1234 123" },
+           new object[]{ Country.MK, "MK07 2501 2000 0058 984" },
+           new object[]{ Country.ML, "ML75 A123 1234 1234 1234 1234 1234" },
+           new object[]{ Country.MR, "MR13 0002 0001 0100 0012 3456 753" },
+           new object[]{ Country.MT, "MT84 MALT 0110 0001 2345 MTLC AST0 01S" },
+           new object[]{ Country.MU, "MU17 BOMM 0101 1010 3030 0200 000M UR" },
+           new object[]{ Country.MZ, "MZ97 1234 1234 1234 1234 1234 1" },
+           new object[]{ Country.NE, "" },
+           new object[]{ Country.NI, "" },
+           new object[]{ Country.NL, "NL20 INGB 0001 2345 67" },
+           new object[]{ Country.NO, "NO93 8601 1117 947" },
+           new object[]{ Country.PK, "PK36 SCBL 0000 0011 2345 6702" },
+           new object[]{ Country.PL, "PL61 1090 1014 0000 0712 1981 2874" },
+           new object[]{ Country.PS, "PS92 PALS 0000 0000 0400 1234 5670 2" },
+           new object[]{ Country.PT, "PT50 0002 0123 1234 5678 9015 4" },
+           new object[]{ Country.QA, "QA58 DOHB 0000 1234 5678 90AB CDEF G" },
+           new object[]{ Country.RO, "RO49 AAAA 1B31 0075 9384 0000" },
+           new object[]{ Country.RS, "RS35 2600 0560 1001 6113 79" },
+           new object[]{ Country.SA, "SA84 4000 0108 0540 1173 0013" },
+           new object[]{ Country.SC, "" },
+           new object[]{ Country.SE, "SE35 5000 0000 0549 1000 0003" },
+           new object[]{ Country.SI, "SI56 1910 0000 0123 438" },
+           new object[]{ Country.SK, "SK31 1200 0000 1987 4263 7541" },
+           new object[]{ Country.SM, "SM86 U032 2509 8000 0000 0270 100" },
+           new object[]{ Country.SN, "SN15 A123 1234 1234 1234 1234 1234" },
+           new object[]{ Country.ST, "ST23 0001 0001 0051 8453 1014 6" },
+           new object[]{ Country.SV, "SV62 CENR 0000 0000 0000 0070 0025" },
+           new object[]{ Country.TD, "" },
+           new object[]{ Country.TG, "" },
+           new object[]{ Country.TL, "TL38 0010 0123 4567 8910 106" },
+           new object[]{ Country.TN, "TN59 1000 6035 1835 9847 8831" },
+           new object[]{ Country.TR, "TR33 0006 1005 1978 6457 8413 26" },
+           new object[]{ Country.UA, "UA21 3996 2200 0002 6007 2335 6600 1" },
+           new object[]{ Country.VA, "VA59 0011 2300 0012 3456 78" },
+           new object[]{ Country.VG, "VG96 VPVG 0000 0123 4567 8901" },
+           new object[]{ Country.XK, "XK05 1212 0123 4567 8906" },
+        };
     }
 }

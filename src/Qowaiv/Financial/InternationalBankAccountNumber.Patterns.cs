@@ -60,7 +60,7 @@ namespace Qowaiv.Financial
             Bban(Country.GQ, "23n"),
             Bban(Country.GR, "7n,16c"),
             Bban(Country.GT, "4c,20c"),
-            Bban(Country.GW, "a2,19n"),
+            Bban(Country.GW, "2a,19n"),
             Bban(Country.HN, "4a,20n"),
             Bban(Country.HR, "17n"),
             Bban(Country.HU, "24n"),

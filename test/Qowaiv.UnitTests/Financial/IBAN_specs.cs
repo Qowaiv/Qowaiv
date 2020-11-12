@@ -122,7 +122,7 @@ namespace IBAN_specs
         }
     }
 
-    public class Inut_is_invalid_when
+    public class Input_is_invalid_when
     {
         [Test]
         public void @null()
@@ -170,7 +170,7 @@ namespace IBAN_specs
     public class Input_is_valid
     {
         [Test]
-        public void for_unkown_IBANs()
+        public void for_unknown_IBANs()
         {
             Assert.IsTrue(InternationalBankAccountNumber.IsValid("?"));
         }

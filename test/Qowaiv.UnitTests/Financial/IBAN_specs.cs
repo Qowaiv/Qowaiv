@@ -114,7 +114,6 @@ namespace IBAN_specs
                 Country.VA,
                 Country.VG,
                 Country.XK,
-
             };
 
             Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));

@@ -143,19 +143,19 @@ namespace IBAN_specs
         }
 
         [Test]
-        public void shorter_then_12()
+        public void shorter_than_12()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB007"));
         }
 
         [Test]
-        public void longer_then_32()
+        public void longer_than_32()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20 INGB 0070 3456 7890 1234 5678 9012 1"));
         }
 
         [Test]
-        public void other_then_alpha_numeric()
+        public void other_than_alpha_numeric()
         {
             Assert.IsFalse(InternationalBankAccountNumber.IsValid("AE20 #$12 0070 3456 7890 1234 5678"));
         }
@@ -203,12 +203,7 @@ namespace IBAN_specs
             Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
         }
 
-        public void is_valid_for(string input, string description)
-        {
-            Assert.IsTrue(InternationalBankAccountNumber.IsValid(input), description);
-        }
-
-        internal static readonly object[][] ValidForCountry = new object[][]
+        private static readonly object[][] ValidForCountry = new object[][]
         {
            new object[]{ Country.AD, "AD12 0001 2030 2003 5910 0100" },
            new object[]{ Country.AE, "AE95 0210 0000 0069 3123 456" },

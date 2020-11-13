@@ -1,14 +1,16 @@
 using NUnit.Framework;
+using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
+using Qowaiv.UnitTests;
+using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace Qowaiv.Fiancial.UnitTests
+namespace YesNo_specs
 {
     /// <summary>Tests the Yes-no SVO.</summary>
     public class YesNoTest
@@ -221,288 +223,6 @@ namespace Qowaiv.Fiancial.UnitTests
                 var act = YesNo.TryParse("InvalidInput");
 
                 Assert.AreEqual(exp, act);
-            }
-        }
-
-        #endregion
-
-        #region (XML) (De)serialization tests
-
-        [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<YesNo>
-        (null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(YesNo), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<YesNo>
-        (info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void GetObjectData_SerializationInfo_AreEqual()
-        {
-            ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(YesNo), new System.Runtime.Serialization.FormatterConverter());
-            obj.GetObjectData(info, default);
-
-            Assert.AreEqual((Byte)2, info.GetByte("Value"));
-        }
-
-        [Test]
-        public void SerializeDeserialize_TestStruct_AreEqual()
-        {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.SerializeDeserialize(input);
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void DataContractSerializeDeserialize_TestStruct_AreEqual()
-        {
-            var input = TestStruct;
-            var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void XmlSerialize_TestStruct_AreEqual()
-        {
-            var act = SerializationTest.XmlSerialize(TestStruct);
-            var exp = "yes";
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void XmlDeserialize_XmlString_AreEqual()
-        {
-            var act = SerializationTest.XmlDeserialize<YesNo>("yes");
-            Assert.AreEqual(TestStruct, act);
-        }
-
-        [Test]
-        public void SerializeDeserialize_YesNoSerializeObject_AreEqual()
-        {
-            var input = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var exp = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var act = SerializationTest.SerializeDeserialize(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
-        }
-        [Test]
-        public void XmlSerializeDeserialize_YesNoSerializeObject_AreEqual()
-        {
-            var input = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var exp = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
-        }
-        [Test]
-        public void DataContractSerializeDeserialize_YesNoSerializeObject_AreEqual()
-        {
-            var input = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var exp = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = TestStruct,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
-        }
-
-        [Test]
-        public void SerializeDeserialize_Default_AreEqual()
-        {
-            var input = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = default,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var exp = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = default,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var act = SerializationTest.SerializeDeserialize(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
-        }
-        [Test]
-        public void XmlSerializeDeserialize_Default_AreEqual()
-        {
-            var input = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = default,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var exp = new YesNoSerializeObject
-            {
-                Id = 17,
-                Obj = default,
-                Date = new DateTime(1970, 02, 14),
-            };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
-        }
-
-        [Test]
-        public void GetSchema_None_IsNull()
-        {
-            IXmlSerializable obj = TestStruct;
-            Assert.IsNull(obj.GetSchema());
-        }
-
-        #endregion
-
-        #region JSON (De)serialization tests
-
-        [TestCase("Invalid input")]
-        [TestCase("2017-06-11")]
-        public void FromJson_Invalid_Throws(object json)
-        {
-            Assert.Catch<FormatException>(() => JsonTester.Read<YesNo>(json));
-        }
-
-        [TestCase("yes", "yes")]
-        [TestCase("yes", true)]
-        [TestCase("yes", 1L)]
-        [TestCase("no", 0.0)]
-        [TestCase("?", "unknown")]
-        public void FromJson(YesNo expected, object json)
-        {
-            var actual = JsonTester.Read<YesNo>(json);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void ToJson_DefaultValue_IsNull()
-        {
-            object act = JsonTester.Write(default(YesNo));
-            Assert.IsNull(act);
-        }
-        [Test]
-        public void ToJson_Yes_AreEqual()
-        {
-            var act = JsonTester.Write(YesNo.Yes);
-            var exp = "yes";
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
-        #region IFormattable / Tostring tests
-
-        [Test]
-        public void ToString_Empty_StringEmpty()
-        {
-            var act = YesNo.Empty.ToString();
-            var exp = "";
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void ToString_Unknown_QuestionMark()
-        {
-            var act = YesNo.Unknown.ToString("c");
-            var exp = "?";
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void ToString_CustomFormatter_SupportsCustomFormatting()
-        {
-            var act = TestStruct.ToString("B", new UnitTestFormatProvider());
-            var exp = "Unit Test Formatter, value: 'True', format: 'B'";
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [TestCase("en-GB", null, "Yes", "yes")]
-        [TestCase("nl-BE", "f", "Yes", "ja")]
-        [TestCase("es-EQ", "F", "Yes", "Si")]
-        [TestCase("en-GB", null, "No", "no")]
-        [TestCase("nl-BE", "f", "No", "nee")]
-        [TestCase("es-EQ", "F", "No", "No")]
-        [TestCase("en-GB", "C", "Yes", "Y")]
-        [TestCase("nl-BE", "C", "Yes", "J")]
-        [TestCase("es-EQ", "C", "Yes", "S")]
-        [TestCase("en-GB", "C", "No", "N")]
-        [TestCase("nl-BE", "c", "No", "n")]
-        [TestCase("es-EQ", "c", "No", "n")]
-        [TestCase("en-US", "B", "Yes", "True")]
-        [TestCase("en-US", "b", "No", "false")]
-        [TestCase("en-US", "i", "Yes", "1")]
-        [TestCase("en-US", "i", "No", "0")]
-        [TestCase("en-US", "i", "?", "?")]
-        public void ToString_UsingCultureWithPattern(string culture, string format, string str, string expected)
-        {
-            using (new CultureInfoScope(culture))
-            {
-                var actual = YesNo.Parse(str).ToString(format);
-                Assert.AreEqual(expected, actual);
             }
         }
 
@@ -821,11 +541,139 @@ namespace Qowaiv.Fiancial.UnitTests
         #endregion
     }
 
-    [Serializable]
-    public class YesNoSerializeObject
+    public class Has_custom_formatting
     {
-        public int Id { get; set; }
-        public YesNo Obj { get; set; }
-        public DateTime Date { get; set; }
+        [Test]
+        public void default_value_is_represented_as_string_empty()
+        {
+            Assert.AreEqual(string.Empty, default(YesNo).ToString());
+        }
+
+        [Test]
+        public void unknown_value_is_represented_as_unknown()
+        {
+            Assert.AreEqual("unknown", YesNo.Unknown.ToString());
+        }
+
+        [Test]
+        public void custom_format_provider_is_applied()
+        {
+            var formatted = Svo.YesNo.ToString("B", new UnitTestFormatProvider());
+            Assert.AreEqual("Unit Test Formatter, value: 'True', format: 'B'", formatted);
+        }
+
+        [TestCase("en-GB", null, "Yes", "yes")]
+        [TestCase("nl-BE", "f", "Yes", "ja")]
+        [TestCase("es-EQ", "F", "Yes", "Si")]
+        [TestCase("en-GB", null, "No", "no")]
+        [TestCase("nl-BE", "f", "No", "nee")]
+        [TestCase("es-EQ", "F", "No", "No")]
+        [TestCase("en-GB", "C", "Yes", "Y")]
+        [TestCase("nl-BE", "C", "Yes", "J")]
+        [TestCase("es-EQ", "C", "Yes", "S")]
+        [TestCase("en-GB", "C", "No", "N")]
+        [TestCase("nl-BE", "c", "No", "n")]
+        [TestCase("es-EQ", "c", "No", "n")]
+        [TestCase("en-US", "B", "Yes", "True")]
+        [TestCase("en-US", "b", "No", "false")]
+        [TestCase("en-US", "i", "Yes", "1")]
+        [TestCase("en-US", "i", "No", "0")]
+        [TestCase("en-US", "i", "?", "?")]
+        public void culture_dependend(CultureInfo culture, string format, YesNo svo, string expected)
+        {
+            using (culture.Scoped())
+            {
+                Assert.AreEqual(expected, svo.ToString(format));
+            }
+        }
+    }
+
+    public class Supports_JSON_serialization
+    {
+        [TestCase("yes", "yes")]
+        [TestCase("yes", true)]
+        [TestCase("yes", 1L)]
+        [TestCase("yes", 1.1)]
+        [TestCase("no", 0.0)]
+        [TestCase("?", "unknown")]
+        public void convension_based_deserialization(YesNo expected, object json)
+        {
+            var actual = JsonTester.Read<YesNo>(json);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(null, "")]
+        [TestCase("yes", "yes")]
+        public void convension_based_serialization(object expected, YesNo svo)
+        {
+            var serialized = JsonTester.Write(svo);
+            Assert.AreEqual(expected, serialized);
+        }
+
+        [TestCase("Invalid input", typeof(FormatException))]
+        [TestCase("2017-06-11", typeof(FormatException))]
+        [TestCase(5L, typeof(ArgumentOutOfRangeException))]
+        public void throws_for_invalid_json(object json, Type exceptionType)
+        {
+            var exception = Assert.Catch(() => JsonTester.Read<YesNo>(json));
+            Assert.IsInstanceOf(exceptionType, exception);
+        }
+    }
+
+    public class Supports_XML_serialization
+    {
+        [Test]
+        public void using_XmlSerializer_to_serialize()
+        {
+            var xml = SerializationTest.XmlSerialize(Svo.YesNo);
+            Assert.AreEqual("yes", xml);
+        }
+
+        [Test]
+        public void using_XmlSerializer_to_deserialize()
+        {
+            var svo = SerializationTest.XmlDeserialize<YesNo>("yes");
+            Assert.AreEqual(Svo.YesNo, svo);
+        }
+
+        [Test]
+        public void using_data_contract_serializer()
+        {
+            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.YesNo);
+            Assert.AreEqual(Svo.YesNo, round_tripped);
+        }
+
+        [Test]
+        public void as_part_of_a_structure()
+        {
+            var structure = XmlStructure.New(Svo.YesNo);
+            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+
+            Assert.AreEqual(structure, round_tripped);
+        }
+
+        [Test]
+        public void has_no_custom_XML_schema()
+        {
+            IXmlSerializable obj = Svo.YesNo;
+            Assert.IsNull(obj.GetSchema());
+        }
+    }
+
+    public class Supports_binary_serialization
+    {
+        [Test]
+        public void using_BinaryFormatter()
+        {
+            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.YesNo);
+            Assert.AreEqual(Svo.YesNo, round_tripped);
+        }
+
+        [Test]
+        public void storing_byte_in_SerializationInfo()
+        {
+            var info = SerializationTest.GetSerializationInfo(Svo.YesNo);
+            Assert.AreEqual((byte)2, info.GetByte("Value"));
+        }
     }
 }

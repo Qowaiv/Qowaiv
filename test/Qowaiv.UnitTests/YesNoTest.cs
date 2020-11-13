@@ -6,8 +6,8 @@ using Qowaiv.TestTools.Globalization;
 using Qowaiv.UnitTests;
 using Qowaiv.UnitTests.TestTools;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Xml.Serialization;
 
 namespace YesNo_specs
@@ -17,17 +17,6 @@ namespace YesNo_specs
     {
         /// <summary>The test instance for most tests.</summary>
         public static readonly YesNo TestStruct = YesNo.Yes;
-
-        #region Yes-no const tests
-
-        /// <summary>YesNo.Empty should be equal to the default of Yes-no.</summary>
-        [Test]
-        public void Empty_None_EqualsDefault()
-        {
-            Assert.AreEqual(default(YesNo), YesNo.Empty);
-        }
-
-        #endregion
 
         #region Yes-no IsEmpty tests
 
@@ -123,111 +112,6 @@ namespace YesNo_specs
 
         #endregion
 
-        #region TryParse tests
-
-        /// <summary>TryParse null should be valid.</summary>
-        [Test]
-        public void TryParse_Null_IsValid()
-        {
-            string str = null;
-
-            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
-            Assert.AreEqual(string.Empty, val.ToString(), "Value");
-        }
-
-        /// <summary>TryParse string.Empty should be valid.</summary>
-        [Test]
-        public void TryParse_StringEmpty_IsValid()
-        {
-            string str = string.Empty;
-
-            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
-            Assert.AreEqual(string.Empty, val.ToString(), "Value");
-        }
-
-        /// <summary>TryParse "?" should be valid and the result should be YesNo.Unknown.</summary>
-        [Test]
-        public void TryParse_Questionmark_IsValid()
-        {
-            string str = "?";
-
-            Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
-            Assert.IsTrue(val.IsUnknown(), "Value");
-        }
-
-        /// <summary>TryParse with specified string value should be valid.</summary>
-        [Test]
-        public void TryParse_StringValue_IsValid()
-        {
-            using (TestCultures.En.Scoped())
-            {
-                string str = "yes";
-                Assert.IsTrue(YesNo.TryParse(str, out YesNo val), "Valid");
-                Assert.AreEqual(str, val.ToString(), "Value");
-            }
-        }
-
-        /// <summary>TryParse with specified string value should be invalid.</summary>
-        [Test]
-        public void TryParse_StringValue_IsNotValid()
-        {
-            string str = "string";
-
-            Assert.IsFalse(YesNo.TryParse(str, out YesNo val), "Valid");
-            Assert.AreEqual(string.Empty, val.ToString(), "Value");
-        }
-
-        [Test]
-        public void Parse_Unknown_AreEqual()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var act = YesNo.Parse("?");
-                var exp = YesNo.Unknown;
-                Assert.AreEqual(exp, act);
-            }
-        }
-
-        [Test]
-        public void Parse_InvalidInput_ThrowsFormatException()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                Assert.Catch<FormatException>
-                (() =>
-                {
-                    YesNo.Parse("InvalidInput");
-                },
-                "Not a valid Yes-no");
-            }
-        }
-
-        [Test]
-        public void TryParse_TestStructInput_AreEqual()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = TestStruct;
-                var act = YesNo.TryParse(exp.ToString());
-
-                Assert.AreEqual(exp, act);
-            }
-        }
-
-        [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(YesNo);
-                var act = YesNo.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
-
-        #endregion
-
         #region IEquatable tests
 
         /// <summary>GetHash should not fail for YesNo.Empty.</summary>
@@ -242,283 +126,6 @@ namespace YesNo_specs
         public void GetHash_TestStruct_Hash()
         {
             Assert.AreEqual(2, TestStruct.GetHashCode());
-        }
-
-        [Test]
-        public void Equals_EmptyEmpty_IsTrue()
-        {
-            Assert.IsTrue(YesNo.Empty.Equals(YesNo.Empty));
-        }
-
-        [Test]
-        public void Equals_FormattedAndUnformatted_IsTrue()
-        {
-            var l = YesNo.Parse("Yes", CultureInfo.InvariantCulture);
-            var r = YesNo.Parse("yes", CultureInfo.InvariantCulture);
-
-            Assert.IsTrue(l.Equals(r));
-        }
-
-        [Test]
-        public void Equals_TestStructTestStruct_IsTrue()
-        {
-            Assert.IsTrue(TestStruct.Equals(TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructEmpty_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.Equals(YesNo.Empty));
-        }
-
-        [Test]
-        public void Equals_EmptyTestStruct_IsFalse()
-        {
-            Assert.IsFalse(YesNo.Empty.Equals(TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructObjectTestStruct_IsTrue()
-        {
-            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructNull_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.Equals(null));
-        }
-
-        [Test]
-        public void Equals_TestStructObject_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.Equals(new object()));
-        }
-
-        [Test]
-        public void OperatorIs_TestStructTestStruct_IsTrue()
-        {
-            var l = TestStruct;
-            var r = TestStruct;
-            Assert.IsTrue(l == r);
-        }
-
-        [Test]
-        public void OperatorIsNot_TestStructTestStruct_IsFalse()
-        {
-            var l = TestStruct;
-            var r = TestStruct;
-            Assert.IsFalse(l != r);
-        }
-
-        #endregion
-
-        #region IComparable tests
-
-        /// <summary>Orders a list of Yes-nos ascending.</summary>
-        [Test]
-        public void OrderBy_YesNo_AreEqual()
-        {
-            var item0 = YesNo.No;
-            var item1 = YesNo.Yes;
-            var item2 = YesNo.Unknown;
-
-            var inp = new []{ YesNo.Empty, item2, item0, item1, YesNo.Empty };
-            var exp = new []{ YesNo.Empty, YesNo.Empty, item0, item1, item2 };
-            var act = inp.OrderBy(item => item).ToList();
-
-            CollectionAssert.AreEqual(exp, act);
-        }
-
-        /// <summary>Orders a list of Yes-nos descending.</summary>
-        [Test]
-        public void OrderByDescending_YesNo_AreEqual()
-        {
-            var item0 = YesNo.No;
-            var item1 = YesNo.Yes;
-            var item2 = YesNo.Unknown;
-
-            var inp = new []{ YesNo.Empty, item2, item0, item1, YesNo.Empty };
-            var exp = new []{ item2, item1, item0, YesNo.Empty, YesNo.Empty };
-            var act = inp.OrderByDescending(item => item).ToList();
-
-            CollectionAssert.AreEqual(exp, act);
-        }
-
-        /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [Test]
-        public void CompareTo_ObjectTestStruct_0()
-        {
-            object other = TestStruct;
-
-            var exp = 0;
-            var act = TestStruct.CompareTo(other);
-
-            Assert.AreEqual(exp, act);
-        }
-
-        /// <summary>Compare with null should return 1.</summary>
-        [Test]
-        public void CompareTo_null_1()
-        {
-            object @null = null;
-            Assert.AreEqual(1, TestStruct.CompareTo(@null));
-        }
-
-        /// <summary>Compare with a random object should throw an exception.</summary>
-        [Test]
-        public void CompareTo_newObject_ThrowsArgumentException()
-        {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-            {
-                TestStruct.CompareTo(new object());
-            },
-            "obj",
-            "Argument must be YesNo."
-            );
-        }
-
-        #endregion
-
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToYesNo_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (YesNo)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_YesNoToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void Explicit_BoolToYesNo_Empty()
-        {
-            var yesNo = (YesNo)default(bool?);
-            Assert.AreEqual(YesNo.Empty, yesNo);
-        }
-        [Test]
-        public void Explicit_BoolToYesNo_No()
-        {
-            var yesNo = (YesNo)false;
-            Assert.AreEqual(YesNo.No, yesNo);
-        }
-        [Test]
-        public void Explicit_BoolToYesNo_Yes()
-        {
-            var yesNo = (YesNo)true;
-            Assert.AreEqual(YesNo.Yes, yesNo);
-        }
-
-        [TestCase(null, "")]
-        [TestCase(true, "Y")]
-        [TestCase(false, "N")]
-        [TestCase(null, "?")]
-        public void Explicit_YesNoToNullableBool(bool? expected, YesNo yesNo)
-        {
-            var casted = (bool?)yesNo;
-            Assert.AreEqual(expected, casted);
-        }
-
-        [TestCase(false, "")]
-        [TestCase(true, "Y")]
-        [TestCase(false, "N")]
-        [TestCase(false, "?")]
-        public void Explicit_YesNoToBool(bool expected, YesNo yesNo)
-        {
-            var casted = (bool)yesNo;
-            Assert.AreEqual(expected, casted);
-        }
-
-        [Test]
-        public void Implicit_InIfStatement()
-        {
-            Assert.Throws<DivideByZeroException>(() =>
-            {
-                var answer = YesNo.Yes;
-                if (answer)
-                {
-                    throw new DivideByZeroException();
-                }
-            });
-        }
-
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_YesNo_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(YesNo));
-        }
-
-        [Test]
-        public void CanNotConvertFromInt32_YesNo_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(YesNo), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_YesNo_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(YesNo), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_YesNo_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(YesNo));
-        }
-
-        [Test]
-        public void CanConvertToString_YesNo_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(YesNo));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_YesNoEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(YesNo.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_YesNoEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(YesNo.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
         }
 
         #endregion
@@ -539,6 +146,116 @@ namespace YesNo_specs
             Assert.IsTrue(YesNo.IsValid("Unknown"));
         }
         #endregion
+    }
+
+    public class Has_constant
+    {
+        [Test]
+        public void Empty_represent_default_value()
+        {
+            Assert.AreEqual(default(YesNo), YesNo.Empty);
+        }
+    }
+
+    public class Is_equal_by_value
+    {
+        [Test]
+        public void not_equal_to_null()
+        {
+            Assert.IsFalse(Svo.YesNo.Equals(null));
+        }
+
+        [Test]
+        public void not_equal_to_other_type()
+        {
+            Assert.IsFalse(Svo.YesNo.Equals(new object()));
+        }
+
+        [Test]
+        public void not_equal_to_different_value()
+        {
+            Assert.IsFalse(Svo.YesNo.Equals(YesNo.Unknown));
+        }
+
+        [Test]
+        public void equal_to_same_value()
+        {
+            Assert.IsTrue(Svo.YesNo.Equals(YesNo.Yes));
+        }
+
+        [Test]
+        public void equal_operator_returns_true_for_same_values()
+        {
+            Assert.IsTrue(YesNo.Yes == Svo.YesNo);
+        }
+
+        [Test]
+        public void equal_operator_returns_false_for_different_values()
+        {
+            Assert.IsFalse(YesNo.Yes == YesNo.No);
+        }
+
+        [Test]
+        public void not_equal_operator_returns_false_for_same_values()
+        {
+            Assert.IsFalse(YesNo.Yes != Svo.YesNo);
+        }
+
+        [Test]
+        public void not_equal_operator_returns_true_for_different_values()
+        {
+            Assert.IsTrue(YesNo.Yes != YesNo.No);
+        }
+    }
+
+    public class Can_be_parsed
+    {
+        [Test]
+        public void from_null_string_represents_Empty()
+        {
+            Assert.AreEqual(YesNo.Empty, YesNo.Parse(null));
+        }
+
+        [Test]
+        public void from_empty_string_represents_Empty()
+        {
+            Assert.AreEqual(YesNo.Empty, YesNo.Parse(string.Empty));
+        }
+
+        [Test]
+        public void from_question_mark_represents_Unknown()
+        {
+            Assert.AreEqual(YesNo.Unknown, YesNo.Parse("?"));
+        }
+
+        [TestCase("en", "y")]
+        [TestCase("nl", "j")]
+        [TestCase("nl", "ja")]
+        [TestCase("fr", "oui")]
+        public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+        {
+            using (culture.Scoped())
+            {
+                var parsed = YesNo.Parse(input);
+                Assert.AreEqual(Svo.YesNo, parsed);
+            }
+        }
+
+        [Test]
+        public void from_valid_input_only_otherwise_throws_on_Parse()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                var exception = Assert.Throws<FormatException>(() => YesNo.Parse("invalid input"));
+                Assert.AreEqual("Not a valid yes-no value", exception.Message);
+            }
+        }
+
+        [Test]
+        public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        {
+            Assert.IsFalse(YesNo.TryParse("invalid input", out _));
+        }
     }
 
     public class Has_custom_formatting
@@ -584,6 +301,143 @@ namespace YesNo_specs
             using (culture.Scoped())
             {
                 Assert.AreEqual(expected, svo.ToString(format));
+            }
+        }
+    }
+
+    public class Is_comparable
+    {
+        [Test]
+        public void to_null()
+        {
+            Assert.AreEqual(1, Svo.YesNo.CompareTo(null));
+        }
+
+        [Test]
+        public void to_YesNo_only()
+        {
+            Assert.Throws<ArgumentException>(() => Svo.YesNo.CompareTo(new object()));
+        }
+
+        [Test]
+        public void can_be_sorted()
+        {
+            var sorted = new[]
+            {
+                YesNo.Empty,
+                YesNo.Empty,
+                YesNo.No,
+                YesNo.Yes,
+                YesNo.Unknown,
+            };
+            var list = new List<YesNo>{ sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
+            list.Sort();
+
+            Assert.AreEqual(sorted, list);
+        }
+    }
+
+    public class Casts
+    {
+        [Test]
+        public void explicitly_from_string()
+        {
+            var casted = (YesNo)"yes";
+            Assert.AreEqual(YesNo.Yes, casted);
+        }
+
+        [Test]
+        public void explicitly_to_string()
+        {
+            var casted = (string)Svo.YesNo;
+            Assert.AreEqual("yes", casted);
+        }
+
+        [Test]
+        public void yes_implicitly_to_true()
+        {
+            var result = YesNo.Yes ? "passed" : "failed";
+            Assert.AreEqual("passed", result);
+        }
+
+        [Test]
+        public void no_implicitly_to_false()
+        {
+            var result = YesNo.No ? "passed" : "failed";
+            Assert.AreNotEqual("passed", result);
+        }
+
+        [TestCase(null, "")]
+        [TestCase(true, "y")]
+        [TestCase(false, "n")]
+        public void explicitly_from_nullable_boolean(bool? value, YesNo expected)
+        {
+            var casted = (YesNo)value;
+            Assert.AreEqual(expected, casted);
+        }
+
+        [TestCase("", null)]
+        [TestCase("y", true)]
+        [TestCase("n", false)]
+        [TestCase("?", null)]
+        public void explicitly_to_nullable_boolean(YesNo svo, bool? expected)
+        {
+            var casted = (bool?)svo;
+            Assert.AreEqual(expected, casted);
+        }
+
+        [TestCase("", null)]
+        [TestCase("y", true)]
+        [TestCase("n", false)]
+        [TestCase("?", false)]
+        public void explicitly_to_boolean(YesNo svo, bool expected)
+        {
+            var casted = (bool)svo;
+            Assert.AreEqual(expected, casted);
+        }
+    }
+
+    public class Supports_type_conversion
+    {
+        [Test]
+        public void via_TypeConverter_registered_with_attribute()
+        {
+            TypeConverterAssert.ConverterExists(typeof(YesNo));
+        }
+
+        [Test]
+        public void from_null_string()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                TypeConverterAssert.ConvertFromEquals(default(YesNo), null);
+            }
+        }
+
+        [Test]
+        public void from_empty_string()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                TypeConverterAssert.ConvertFromEquals(default(YesNo), string.Empty);
+            }
+        }
+
+        [Test]
+        public void from_string()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                TypeConverterAssert.ConvertFromEquals(Svo.YesNo, Svo.YesNo.ToString());
+            }
+        }
+
+        [Test]
+        public void to_string()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                TypeConverterAssert.ConvertToStringEquals(Svo.YesNo.ToString(), Svo.YesNo);
             }
         }
     }

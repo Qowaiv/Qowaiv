@@ -112,24 +112,6 @@ namespace YesNo_specs
 
         #endregion
 
-        #region IEquatable tests
-
-        /// <summary>GetHash should not fail for YesNo.Empty.</summary>
-        [Test]
-        public void GetHash_Empty_Hash()
-        {
-            Assert.AreEqual(0, YesNo.Empty.GetHashCode());
-        }
-
-        /// <summary>GetHash should not fail for the test struct.</summary>
-        [Test]
-        public void GetHash_TestStruct_Hash()
-        {
-            Assert.AreEqual(2, TestStruct.GetHashCode());
-        }
-
-        #endregion
-
         #region IsValid tests
 
         [TestCase(null)]
@@ -205,6 +187,13 @@ namespace YesNo_specs
         public void not_equal_operator_returns_true_for_different_values()
         {
             Assert.IsTrue(YesNo.Yes != YesNo.No);
+        }
+    
+        [TestCase("", 0)]
+        [TestCase("yes", 2)]
+        public void hash_code_is_value_based(YesNo svo, int hashcode)
+        {
+            Assert.AreEqual(hashcode, svo.GetHashCode());
         }
     }
 
@@ -314,6 +303,13 @@ namespace YesNo_specs
         }
 
         [Test]
+        public void to_YesNo_as_object()
+        {
+            object obj = Svo.YesNo;
+            Assert.AreEqual(0, Svo.YesNo.CompareTo(obj));
+        }
+
+        [Test]
         public void to_YesNo_only()
         {
             Assert.Throws<ArgumentException>(() => Svo.YesNo.CompareTo(new object()));
@@ -351,6 +347,13 @@ namespace YesNo_specs
         {
             var casted = (string)Svo.YesNo;
             Assert.AreEqual("yes", casted);
+        }
+
+        [TestCase("yes", true)]
+        [TestCase("no", false)]
+        public void explicitly_from_boolean(YesNo casted, bool boolean)
+        {
+            Assert.AreEqual(casted, (YesNo)boolean);
         }
 
         [Test]
@@ -446,6 +449,7 @@ namespace YesNo_specs
     {
         [TestCase("yes", "yes")]
         [TestCase("yes", true)]
+        [TestCase("no", false)]
         [TestCase("yes", 1L)]
         [TestCase("yes", 1.1)]
         [TestCase("no", 0.0)]

@@ -15,105 +15,6 @@ namespace YesNo_specs
     /// <summary>Tests the Yes-no SVO.</summary>
     public class YesNoTest
     {
-        /// <summary>The test instance for most tests.</summary>
-        public static readonly YesNo TestStruct = YesNo.Yes;
-
-        #region Yes-no IsEmpty tests
-
-        /// <summary>YesNo.IsEmpty() should be true for the default of Yes-no.</summary>
-        [Test]
-        public void IsEmpty_Default_IsTrue()
-        {
-            Assert.IsTrue(default(YesNo).IsEmpty());
-        }
-        /// <summary>YesNo.IsEmpty() should be false for YesNo.Unknown.</summary>
-        [Test]
-        public void IsEmpty_Unknown_IsFalse()
-        {
-            Assert.IsFalse(YesNo.Unknown.IsEmpty());
-        }
-        /// <summary>YesNo.IsEmpty() should be false for the TestStruct.</summary>
-        [Test]
-        public void IsEmpty_TestStruct_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.IsEmpty());
-        }
-
-        /// <summary>YesNo.IsUnknown() should be false for the default of Yes-no.</summary>
-        [Test]
-        public void IsUnknown_Default_IsFalse()
-        {
-            Assert.IsFalse(default(YesNo).IsUnknown());
-        }
-        /// <summary>YesNo.IsUnknown() should be true for YesNo.Unknown.</summary>
-        [Test]
-        public void IsUnknown_Unknown_IsTrue()
-        {
-            Assert.IsTrue(YesNo.Unknown.IsUnknown());
-        }
-        /// <summary>YesNo.IsUnknown() should be false for the TestStruct.</summary>
-        [Test]
-        public void IsUnknown_TestStruct_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.IsUnknown());
-        }
-
-        /// <summary>YesNo.IsEmptyOrUnknown() should be true for the default of Yes-no.</summary>
-        [Test]
-        public void IsEmptyOrUnknown_Default_IsFalse()
-        {
-            Assert.IsTrue(default(YesNo).IsEmptyOrUnknown());
-        }
-        /// <summary>YesNo.IsEmptyOrUnknown() should be true for YesNo.Unknown.</summary>
-        [Test]
-        public void IsEmptyOrUnknown_Unknown_IsTrue()
-        {
-            Assert.IsTrue(YesNo.Unknown.IsEmptyOrUnknown());
-        }
-        /// <summary>YesNo.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
-        [Test]
-        public void IsEmptyOrUnknown_TestStruct_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
-        }
-
-        [TestCase(true, "yes")]
-        [TestCase(true, "no")]
-        [TestCase(false, "?")]
-        [TestCase(false, "")]
-        public void IsYesOrNo(bool expected, YesNo yesNo)
-        {
-            Assert.AreEqual(expected, yesNo.IsYesOrNo());
-        }
-
-        #endregion
-
-        #region Boolean mappings
-
-        [TestCase(false, "")]
-        [TestCase(false, "N")]
-        [TestCase(true, "Y")]
-        [TestCase(false, "?")]
-        public void IsYes(bool expected, string str)
-        {
-            var yesNo = YesNo.Parse(str);
-            Assert.AreEqual(expected, yesNo.IsYes());
-        }
-
-        [TestCase(false, "")]
-        [TestCase(true, "N")]
-        [TestCase(false, "Y")]
-        [TestCase(false, "?")]
-        public void IsNo(bool expected, string str)
-        {
-            var yesNo = YesNo.Parse(str);
-            Assert.AreEqual(expected, yesNo.IsNo());
-        }
-
-        #endregion
-
-        #region IsValid tests
-
         [TestCase(null)]
         [TestCase("")]
         [TestCase("Complex")]
@@ -127,7 +28,65 @@ namespace YesNo_specs
         {
             Assert.IsTrue(YesNo.IsValid("Unknown"));
         }
-        #endregion
+    }
+
+    public class With_domain_logic
+    {
+        [TestCase(false, "yes")]
+        [TestCase(false, "no")]
+        [TestCase(false, "?")]
+        [TestCase(true, "")]
+        public void IsEmpty_returns(bool result, YesNo svo)
+        {
+            Assert.AreEqual(result, svo.IsEmpty());
+        }
+
+        [TestCase(false, "yes")]
+        [TestCase(false, "no")]
+        [TestCase(true, "?")]
+        [TestCase(true, "")]
+        public void IsEmptyOrUnknown_returns(bool result, YesNo svo)
+        {
+            Assert.AreEqual(result, svo.IsEmptyOrUnknown());
+        }
+
+        [TestCase(false, "yes")]
+        [TestCase(false, "no")]
+        [TestCase(true, "?")]
+        [TestCase(false, "")]
+        public void IsUnknown_returns(bool result, YesNo svo)
+        {
+            Assert.AreEqual(result, svo.IsUnknown());
+        }
+
+        [TestCase(true, "yes")]
+        [TestCase(true, "no")]
+        [TestCase(false, "?")]
+        [TestCase(false, "")]
+        public void IsYesOrNo_returns(bool result, YesNo svo)
+        {
+            Assert.AreEqual(result, svo.IsYesOrNo());
+        }
+
+        [TestCase(false, "")]
+        [TestCase(false, "N")]
+        [TestCase(true, "Y")]
+        [TestCase(false, "?")]
+
+        public void IsYes_returns(bool result, YesNo svo)
+        {
+            Assert.AreEqual(result, svo.IsYes());
+        }
+
+        [TestCase(false, "")]
+        [TestCase(true, "N")]
+        [TestCase(false, "Y")]
+        [TestCase(false, "?")]
+
+        public void IsNo_returns(bool result, YesNo svo)
+        {
+            Assert.AreEqual(result, svo.IsNo());
+        }
     }
 
     public class Has_constant

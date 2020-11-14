@@ -66,7 +66,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized gender.
         /// </returns>
-        public static YesNo FromJson(double json) => Create((int)json);
+        public static YesNo FromJson(double json) => FromJson<double>((int)json);
 
         /// <summary>Deserializes the yes-no from a JSON number.</summary>
         /// <param name="json">
@@ -75,7 +75,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized yes-no.
         /// </returns>
-        public static YesNo FromJson(long json) => Create((int)json);
+        public static YesNo FromJson(long json) => FromJson<long>(json);
 
         /// <summary>Deserializes the yes-no from a JSON boolean.</summary>
         /// <param name="json">
@@ -85,6 +85,15 @@ namespace Qowaiv
         /// The deserialized yes-no.
         /// </returns>
         public static YesNo FromJson(bool json) => json ? Yes : No;
+
+        private static YesNo FromJson<TFrom>(long val)
+        => val switch
+        {
+            0 => No,
+            1 => Yes,
+            byte.MaxValue or short.MaxValue or int.MaxValue or long.MaxValue => Unknown,
+            _ => throw Exceptions.InvalidCast<TFrom, YesNo>(),
+        };
 
         /// <summary>Serializes the yes-no to a JSON node.</summary>
         /// <returns>
@@ -207,60 +216,6 @@ namespace Qowaiv
                     result = new YesNo(val);
                     return true;
                 }
-            }
-            return false;
-        }
-
-        /// <summary >Creates a yes-no from a byte. </summary >
-        /// <param name="val" >
-        /// A decimal describing a yes-no.
-        /// </param >
-        /// <exception cref="FormatException" >
-        /// val is not a valid yes-no.
-        /// </exception >
-        private static YesNo Create(int? val)
-        {
-            if (TryCreate(val, out YesNo result))
-            {
-                return result;
-            }
-            throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionYesNo);
-        }
-
-        /// <summary >Creates a yes-no from a byte.
-        /// A return value indicates whether the creation succeeded.
-        /// </summary >
-        /// <param name="val" >
-        /// A byte describing a yes-no.
-        /// </param >
-        /// <param name="result" >
-        /// The result of the creation.
-        /// </param >
-        /// <returns >
-        /// True if a yes-no was created successfully, otherwise false.
-        /// </returns >
-        private static bool TryCreate(int? val, out YesNo result)
-        {
-            result = Empty;
-
-            if (!val.HasValue)
-            {
-                return true;
-            }
-            if (val == 0)
-            {
-                result = No;
-                return true;
-            }
-            if (val == 1)
-            {
-                result = Yes;
-                return true;
-            }
-            if (val == byte.MaxValue || val == short.MaxValue || val == int.MaxValue)
-            {
-                result = Unknown;
-                return true;
             }
             return false;
         }

@@ -188,7 +188,7 @@ namespace YesNo_specs
         {
             Assert.IsTrue(YesNo.Yes != YesNo.No);
         }
-    
+
         [TestCase("", 0)]
         [TestCase("yes", 2)]
         public void hash_code_is_value_based(YesNo svo, int hashcode)
@@ -292,6 +292,17 @@ namespace YesNo_specs
                 Assert.AreEqual(expected, svo.ToString(format));
             }
         }
+
+        [Test]
+        public void with_current_thread_culture_as_default()
+        {
+            using (new CultureInfoScope(
+                culture: TestCultures.Nl_NL,
+                cultureUI: TestCultures.En_GB))
+            {
+                Assert.AreEqual("ja", Svo.YesNo.ToString(provider: null));
+            }
+        }
     }
 
     public class Is_comparable
@@ -326,7 +337,7 @@ namespace YesNo_specs
                 YesNo.Yes,
                 YesNo.Unknown,
             };
-            var list = new List<YesNo>{ sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
+            var list = new List<YesNo> { sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
             list.Sort();
 
             Assert.AreEqual(sorted, list);
@@ -453,6 +464,10 @@ namespace YesNo_specs
         [TestCase("yes", 1L)]
         [TestCase("yes", 1.1)]
         [TestCase("no", 0.0)]
+        [TestCase("?", (long)byte.MaxValue)]
+        [TestCase("?", (long)short.MaxValue)]
+        [TestCase("?", (long)int.MaxValue)]
+        [TestCase("?", long.MaxValue)]
         [TestCase("?", "unknown")]
         public void convension_based_deserialization(YesNo expected, object json)
         {
@@ -470,7 +485,7 @@ namespace YesNo_specs
 
         [TestCase("Invalid input", typeof(FormatException))]
         [TestCase("2017-06-11", typeof(FormatException))]
-        [TestCase(5L, typeof(ArgumentOutOfRangeException))]
+        [TestCase(5L, typeof(InvalidCastException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
         {
             var exception = Assert.Catch(() => JsonTester.Read<YesNo>(json));

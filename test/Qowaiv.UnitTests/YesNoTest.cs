@@ -12,24 +12,6 @@ using System.Xml.Serialization;
 
 namespace YesNo_specs
 {
-    /// <summary>Tests the Yes-no SVO.</summary>
-    public class YesNoTest
-    {
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase("Complex")]
-        public void IsInvalid_String(string pattern)
-        {
-            Assert.IsFalse(YesNo.IsValid(pattern));
-        }
-
-        [Test]
-        public void IsValid_Data_IsTrue()
-        {
-            Assert.IsTrue(YesNo.IsValid("Unknown"));
-        }
-    }
-
     public class With_domain_logic
     {
         [TestCase(false, "yes")]

@@ -231,23 +231,10 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        internal string GetResourceString(string prefix, IFormatProvider formatProvider)
-        {
-            return GetResourceString(prefix, formatProvider as CultureInfo);
-        }
-
-        /// <summary>Get resource string.</summary>
-        /// <param name="prefix">
-        /// The prefix of the resource key.
-        /// </param>
-        /// <param name="culture">
-        /// The culture.
-        /// </param>
-        internal string GetResourceString(string prefix, CultureInfo culture)
-        {
-            if (IsEmpty()) { return string.Empty; }
-            return ResourceManager.GetString(prefix + LookupSuffix[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
-        }
+        private string GetResourceString(string prefix, IFormatProvider formatProvider)
+        => IsEmpty()
+            ? string.Empty
+            : ResourceManager.Localized(formatProvider, prefix, LookupSuffix[m_Value]);
 
         #endregion
 

@@ -257,11 +257,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static YesNo Parse(string s, IFormatProvider formatProvider)
-        {
-            return TryParse(s, formatProvider, out YesNo val) ? val : throw new FormatException(QowaivMessages.FormatExceptionYesNo);
-        }
-
+        public static YesNo Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out YesNo val) ? val : throw new FormatException(QowaivMessages.FormatExceptionYesNo);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "YesNo"/>.</summary>
         /// <param name = "s">
         /// A string containing the yes-no to convert.
@@ -269,11 +265,7 @@ namespace Qowaiv
         /// <returns>
         /// The yes-no if the string was converted successfully, otherwise default.
         /// </returns>
-        public static YesNo TryParse(string s)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out YesNo val) ? val : default;
-        }
-
+        public static YesNo TryParse(string s) => TryParse(s, null, out YesNo val) ? val : default;
         /// <summary>Converts the <see cref = "string "/> to <see cref = "YesNo"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -286,7 +278,7 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, out YesNo result) => TryParse(s, CultureInfo.CurrentCulture, out result);
+        public static bool TryParse(string s, out YesNo result) => TryParse(s, null, out result);
 #else
         /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
         /// <param name="s">
@@ -299,11 +291,9 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         public static YesNo Parse(string s)
-        {
-            return TryParse(s, out YesNo val)
-                ? val
-                : throw new FormatException(QowaivMessages.FormatExceptionYesNo);
-        }
+            => TryParse(s, out YesNo val)
+            ? val
+            : throw new FormatException(QowaivMessages.FormatExceptionYesNo);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
         /// <param name="s">
@@ -312,10 +302,7 @@ namespace Qowaiv
         /// <returns>
         /// The yes-no if the string was converted successfully, otherwise default.
         /// </returns>
-        public static YesNo TryParse(string s)
-        {
-            return TryParse(s, out YesNo val) ? val : default;
-        }
+        public static YesNo TryParse(string s) => TryParse(s, out YesNo val) ? val : default;
 #endif
     }
 }
@@ -332,7 +319,7 @@ namespace Qowaiv
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
-        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
+        public static bool IsValid(string val) => IsValid(val, null);
         /// <summary>Returns true if the value represents a valid yes-no.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
@@ -340,19 +327,15 @@ namespace Qowaiv
         /// <param name = "formatProvider">
         /// The <see cref = "IFormatProvider"/> to interpret the <see cref = "string "/> value with.
         /// </param>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            return !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
-        }
+        public static bool IsValid(string val, IFormatProvider formatProvider) => !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
 #else
         /// <summary>Returns true if the value represents a valid yes-no.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>
         public static bool IsValid(string val)
-        {
-            return !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
-        }
+            => !string.IsNullOrWhiteSpace(val)
+            && TryParse(val, out _);
 #endif
     }
 }

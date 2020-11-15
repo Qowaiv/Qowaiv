@@ -71,6 +71,61 @@ namespace YesNo_specs
         }
     }
 
+    public class Is_valid_for
+    {
+        [TestCase("?")]
+        [TestCase("unknown")]
+        public void strings_representing_unknown(string input)
+        {
+            Assert.IsTrue(YesNo.IsValid(input));
+        }
+
+        [TestCase("ja", "nl")]
+        [TestCase("yes", "en-GB")]
+        [TestCase("y", null)]
+        [TestCase("true", null)]
+        public void strings_representing_yes(string input, CultureInfo culture)
+        {
+            Assert.IsTrue(YesNo.IsValid(input, culture));
+        }
+
+        [TestCase("nee", "nl")]
+        [TestCase("no", "en-GB")]
+        [TestCase("n", null)]
+        [TestCase("false", null)]
+        public void strings_representing_no(string input, CultureInfo culture)
+        {
+            Assert.IsTrue(YesNo.IsValid(input, culture));
+        }
+    }
+
+    public class Is_not_valid_for
+    {
+        [Test]
+        public void string_empty()
+        {
+            Assert.IsFalse(YesNo.IsValid(string.Empty));
+        }
+
+        [Test]
+        public void string_null()
+        {
+            Assert.IsFalse(YesNo.IsValid(null));
+        }
+
+        [Test]
+        public void whitespace()
+        {
+            Assert.IsFalse(YesNo.IsValid(" "));
+        }
+
+        [Test]
+        public void garbage()
+        {
+            Assert.IsFalse(YesNo.IsValid("garbage"));
+        }
+    }
+
     public class Has_constant
     {
         [Test]
@@ -185,6 +240,18 @@ namespace YesNo_specs
         public void from_valid_input_only_otherwise_return_false_on_TryParse()
         {
             Assert.IsFalse(YesNo.TryParse("invalid input", out _));
+        }
+    
+        [Test]
+        public void from_invalid_as_empty_with_TryParse()
+        {
+            Assert.AreEqual(default(YesNo), YesNo.TryParse("invalid input"));
+        }
+
+        [Test]
+        public void with_TryParse_returns_SVO()
+        {
+            Assert.AreEqual(Svo.YesNo, YesNo.TryParse("yes"));
         }
     }
 
@@ -488,6 +555,17 @@ namespace YesNo_specs
         {
             var info = SerializationTest.GetSerializationInfo(Svo.YesNo);
             Assert.AreEqual((byte)2, info.GetByte("Value"));
+        }
+    }
+
+    public class Debug_experience
+    {
+        [TestCase("{empty}", "")]
+        [TestCase("{unknown}", "?")]
+        [TestCase("yes", "Y")]
+        public void with_custom_display(object display, YesNo svo)
+        {
+            DebuggerDisplayAssert.HasResult(display, svo);
         }
     }
 }

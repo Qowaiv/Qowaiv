@@ -498,6 +498,8 @@ namespace Year_specs
     public class Supports_JSON_serialization
     {
         [TestCase("?", "unknown")]
+        [TestCase(2017, "2017")]
+        [TestCase(2017, 2017L)]
         public void convension_based_deserialization(Year expected, object json)
         {
             var actual = JsonTester.Read<Year>(json);
@@ -505,7 +507,7 @@ namespace Year_specs
         }
 
         [TestCase(null, "")]
-       [TestCase("?", "unknown")]
+        [TestCase("?", "unknown")]
         [TestCase(2017L, "2017")]
         public void convension_based_serialization(object expected, Year svo)
         {

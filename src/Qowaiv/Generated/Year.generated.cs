@@ -7,6 +7,7 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
+#define NoComparisonOperators
 #define NotGetHashCodeClass
 namespace Qowaiv
 {

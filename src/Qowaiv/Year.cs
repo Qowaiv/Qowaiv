@@ -107,6 +107,20 @@ namespace Qowaiv
         /// <summary>Gets an XML string representation of the @FullName.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
+        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
+        public static bool operator <(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) < 0;
+       
+        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
+        public static bool operator >(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) > 0;
+        
+        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
+        public static bool operator <=(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) <= 0;
+        
+        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
+        public static bool operator >=(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) >= 0;
+
+        private static bool HaveValue(Year l, Year r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
+
         /// <summary>Casts a year to a <see cref="string"/>.</summary>
         public static explicit operator string(Year val) => val.ToString(CultureInfo.CurrentCulture);
         

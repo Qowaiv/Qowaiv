@@ -107,24 +107,22 @@ namespace Qowaiv
         /// the lowercase formats are lowercase (except the the 's').
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-            return behavior.ToString(m_Value, format, formatProvider);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : behavior.ToString(m_Value, format, formatProvider);
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a UUID to a <see cref="string"/>.</summary>
         public static explicit operator string(Uuid val) => val.ToString(CultureInfo.CurrentCulture);
+
         /// <summary>Casts a <see cref="string"/> to a UUID.</summary>
         public static explicit operator Uuid(string str) => Cast.InvariantString<Uuid>(TryParse, str);
 
         /// <summary>Casts a Qowaiv.UUID to a System.GUID.</summary>
         public static implicit operator Guid(Uuid val) => val.m_Value;
+
         /// <summary>Casts a System.GUID to a Qowaiv.UUID.</summary>
         public static implicit operator Uuid(Guid val) => new Uuid(val);
 
@@ -153,7 +151,7 @@ namespace Qowaiv
         public static Uuid NewSequential(UuidComparer comparer)
         {
             var sequential = Clock.UtcNow().Ticks - TicksYear1970;
-            if (sequential < 0) { throw new InvalidOperationException(QowaivMessages.InvalidOperation_SequentialUUID);  }
+            if (sequential < 0) { throw new InvalidOperationException(QowaivMessages.InvalidOperation_SequentialUUID); }
             if (sequential > MaxTicks) { throw new InvalidOperationException(QowaivMessages.InvalidOperation_SequentialUUID); }
             sequential >>= 5;
 

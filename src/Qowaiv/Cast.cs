@@ -18,65 +18,43 @@ namespace Qowaiv
         /// <summary>Casts from a primitive (not <see cref="string"/>) to a SVO.</summary>
         public static TSvo Primitive<TPrimitive, TSvo>(TryCreate<TPrimitive, TSvo> tryCreate, TPrimitive? value)
             where TPrimitive : struct
-        {
-            if (tryCreate(value, out TSvo result))
-            {
-                return result;
-            }
-            throw Exceptions.InvalidCast<TPrimitive, TSvo>();
-        }
+            => tryCreate(value, out TSvo result)
+            ? result
+            : throw Exceptions.InvalidCast<TPrimitive, TSvo>();
 
         /// <summary>Casts from a <see cref="string"/> to a SVO.</summary>
         public static TSvo String<TSvo>(TryParse<TSvo> tryParse, string str)
-        {
-            if (tryParse(str, CultureInfo.CurrentCulture, out TSvo result))
-            {
-                return result;
-            }
-            throw Exceptions.InvalidCast<string, TSvo>();
-        }
+            => tryParse(str, CultureInfo.CurrentCulture, out TSvo result)
+            ? result
+            : throw Exceptions.InvalidCast<string, TSvo>();
 
         /// <summary>Casts from a <see cref="string"/> that is not culture dependent to a SVO.</summary>
         public static TSvo InvariantString<TSvo>(TryParseInvariant<TSvo> tryParse, string str)
-        {
-            if (tryParse(str, out TSvo result))
-            {
-                return result;
-            }
-            throw Exceptions.InvalidCast<string, TSvo>();
-        }
+            => tryParse(str, out TSvo result)
+            ? result
+            : throw Exceptions.InvalidCast<string, TSvo>();
 
         /// <summary>Casts a <see cref="double"/> to <see cref="decimal"/> for the SVO.</summary>
         public static decimal ToDecimal<TSvo>(double value)
-        {
-            if (double.IsNaN(value) || double.IsInfinity(value) || value < (double)decimal.MinValue || value > (double)decimal.MaxValue)
-            {
-                throw Exceptions.InvalidCast<double, TSvo>();
-            }
-
-            return (decimal)value;
-        }
+            => double.IsNaN(value) 
+            || double.IsInfinity(value) 
+            || value < (double)decimal.MinValue 
+            || value > (double)decimal.MaxValue
+            ? throw Exceptions.InvalidCast<double, TSvo>()
+            : (decimal)value;
 
         /// <summary>Casts a <see cref="double"/> to <see cref="int"/> for the SVO.</summary>
         public static int ToInt<TSvo>(double value)
-        {
-            if (value < int.MinValue || value > int.MaxValue)
-            {
-                throw Exceptions.InvalidCast<long, TSvo>();
-            }
-
-            return (int)value;
-        }
+            => value < int.MinValue
+            || value > int.MaxValue
+            ? throw Exceptions.InvalidCast<long, TSvo>()
+            : (int)value;
 
         /// <summary>Casts a <see cref="long"/> to <see cref="int"/> for the SVO.</summary>
         public static int ToInt<TSvo>(long value)
-        {
-            if (value < int.MinValue || value > int.MaxValue)
-            {
-                throw Exceptions.InvalidCast<long, TSvo>();
-            }
-
-            return (int)value;
-        }
+            => value < int.MinValue
+            || value > int.MaxValue
+            ? throw Exceptions.InvalidCast<long, TSvo>()
+            : (int)value;
     }
 }

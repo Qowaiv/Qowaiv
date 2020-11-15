@@ -51,7 +51,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized year.
         /// </returns>
-        public static Year FromJson(double json) => Create((int)json);
+        public static Year FromJson(double json) => Create(Cast.ToInt<Year>(json));
 
         /// <summary>Deserializes the year from a JSON number.</summary>
         /// <param name="json">
@@ -60,7 +60,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized year.
         /// </returns>
-        public static Year FromJson(long json) => Create((int)json);
+        public static Year FromJson(long json) => Create(Cast.ToInt<Year>(json));
 
         /// <summary>Serializes the year to a JSON node.</summary>
         /// <returns>

@@ -266,6 +266,34 @@ namespace Year_specs
         }
     }
 
+    public class Can_be_created_from_int
+    {
+        [Test]
+        public void empty_for_not_set_int()
+        {
+            Assert.AreEqual(Year.Empty, Year.TryCreate(default));
+        }
+
+        [Test]
+        public void empty_for_not_invalid_int()
+        {
+            Assert.AreEqual(Year.Empty, Year.TryCreate(-10));
+        }
+
+        [Test]
+        public void within_range()
+        {
+            Assert.AreEqual(Svo.Year, Year.TryCreate(1979));
+        }
+
+        [TestCase(0)]
+        [TestCase(10000)]
+        public void but_not_outside_1_to_9999(int year)
+        {
+            Assert.IsFalse(Year.TryCreate(year, out _));
+        }
+    }
+
     public class Has_custom_formatting
     {
         [Test]
@@ -346,11 +374,35 @@ namespace Year_specs
             Assert.AreEqual(sorted, list);
         }
     
+        [Test]
+        public void by_operators_for_different_values()
+        {
+            Year smaller = 1979;
+            Year bigger = 2017;
+
+            Assert.IsTrue(smaller < bigger);
+            Assert.IsTrue(smaller <= bigger);
+            Assert.IsFalse(smaller > bigger);
+            Assert.IsFalse(smaller >= bigger);
+        }
+
+        [Test]
+        public void by_operators_for_equal_values()
+        {
+            Year left = 2071;
+            Year right = 2071;
+
+            Assert.IsFalse(left < right);
+            Assert.IsTrue(left <= right);
+            Assert.IsFalse(left > right);
+            Assert.IsTrue(left >= right);
+        }
+
         [TestCase("", 1979)]
         [TestCase("?", 1979)]
         [TestCase(1979, "")]
         [TestCase(1979, "?")]
-        public void operators_return_false_when_any_argument_empty_or_unknown(Year l, Year r)
+        public void by_operators_for_empty_or_unknown_always_false(Year l, Year r)
         {
             Assert.IsFalse(l <= r);
             Assert.IsFalse(l < r);

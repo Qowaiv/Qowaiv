@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using Qowaiv.Formatting;
 using Qowaiv.Mathematics;
 using Qowaiv.Reflection;
 using Qowaiv.TestTools;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;

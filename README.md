@@ -201,6 +201,17 @@ Represents a week based date.
 ### Year
 Represents a year in the range [1-9999].
 
+``` C#
+Year year = 2017; // implicit;
+bool isLeap = year.IsLeapYear;
+
+// behavior similar to double.NaN
+Assert.IsFalse(Year.Empty < (Year)2000);
+Assert.IsFalse(Year.Empty > (Year)2000);
+Assert.IsFalse(Year.Unknown < (Year)2000);
+Assert.IsFalse(Year.Unknown > (Year)2000);
+```
+
 ### Yes-no
 A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
 has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but

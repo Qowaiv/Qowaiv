@@ -51,7 +51,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized year.
         /// </returns>
-        public static Year FromJson(double json) => Create((int)json);
+        public static Year FromJson(double json) => Create(Cast.ToInt<Year>(json));
 
         /// <summary>Deserializes the year from a JSON number.</summary>
         /// <param name="json">
@@ -60,7 +60,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized year.
         /// </returns>
-        public static Year FromJson(long json) => Create((int)json);
+        public static Year FromJson(long json) => Create(Cast.ToInt<Year>(json));
 
         /// <summary>Serializes the year to a JSON node.</summary>
         /// <returns>
@@ -72,11 +72,14 @@ namespace Qowaiv
             {
                 return null;
             }
-            if (IsUnknown())
+            else if (IsUnknown())
             {
                 return "?";
             }
-            return (long)m_Value;
+            else
+            {
+                return (long)m_Value;
+            }
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current year for debug purposes.</summary>
@@ -96,16 +99,31 @@ namespace Qowaiv
             {
                 return formatted;
             }
-            if (IsEmpty()) { return string.Empty; }
-            if (IsUnknown()) { return "?"; }
-            return m_Value.ToString(format, formatProvider);
+            else if (IsEmpty()) { return string.Empty; }
+            else if (IsUnknown()) { return "?"; }
+            else { return m_Value.ToString(format, formatProvider); }
         }
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
+        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
+        public static bool operator <(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) < 0;
+       
+        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
+        public static bool operator >(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) > 0;
+        
+        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
+        public static bool operator <=(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) <= 0;
+        
+        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
+        public static bool operator >=(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) >= 0;
+
+        private static bool HaveValue(Year l, Year r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
+
         /// <summary>Casts a year to a <see cref="string"/>.</summary>
         public static explicit operator string(Year val) => val.ToString(CultureInfo.CurrentCulture);
+        
         /// <summary>Casts a <see cref="string"/> to a year.</summary>
         public static explicit operator Year(string str) => Cast.String<Year>(TryParse, str);
 
@@ -159,13 +177,9 @@ namespace Qowaiv
         /// val is not a valid year.
         /// </exception >
         public static Year Create(int? val)
-        {
-            if (TryCreate(val, out Year result))
-            {
-                return result;
-            }
-            throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionYear);
-        }
+            => TryCreate(val, out Year result)
+            ? result
+            : throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionYear);
 
         /// <summary>Creates a year from a Int32.
         /// A return value indicates whether the conversion succeeded.
@@ -177,13 +191,9 @@ namespace Qowaiv
         /// A year if the creation was successfully, otherwise Year.Empty.
         /// </returns >
         public static Year TryCreate(int? val)
-        {
-            if (TryCreate(val, out Year result))
-            {
-                return result;
-            }
-            return Empty;
-        }
+            => TryCreate(val, out Year result)
+            ? result
+            : default;
 
         /// <summary>Creates a year from a Int32.
         /// A return value indicates whether the creation succeeded.
@@ -205,19 +215,21 @@ namespace Qowaiv
             {
                 return true;
             }
-            if (IsValid(val.Value))
+            else if (IsValid(val.Value))
             {
                 result = new Year((short)val.Value);
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>Returns true if the val represents a valid year, otherwise false.</summary>
         public static bool IsValid(int? val)
-        {
-            if (!val.HasValue) { return false; }
-            return val.Value >= MinValue.m_Value && val.Value <= MaxValue.m_Value;
-        }
+            => val.HasValue
+            && val.Value >= MinValue.m_Value 
+            && val.Value <= MaxValue.m_Value;
     }
 }

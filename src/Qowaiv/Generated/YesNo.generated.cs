@@ -81,13 +81,14 @@ namespace Qowaiv
             {
                 return 1;
             }
-
-            if (obj is YesNo other)
+            else if (obj is YesNo other)
             {
                 return CompareTo(other);
             }
-
-            throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
+            else
+            {
+                throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
+            }
         }
 
 #if !NotEqualsSvo
@@ -126,11 +127,7 @@ namespace Qowaiv
         /// <summary>Adds the underlying property of the yes-no to the serialization info.</summary>
         /// <param name = "info">The serialization info.</param>
         /// <param name = "context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => Guard.NotNull(info, nameof(info)).AddValue("Value", m_Value);
     }
 }
 
@@ -171,11 +168,7 @@ namespace Qowaiv
         /// Uses <see cref = "ToXmlString()"/>.
         /// </remarks>
         /// <param name = "writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToXmlString());
-        }
+        void IXmlSerializable.WriteXml(XmlWriter writer) => Guard.NotNull(writer, nameof(writer)).WriteString(ToXmlString());
     }
 }
 

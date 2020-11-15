@@ -439,7 +439,7 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sequential UUID can not be generated before 1970-01-01..
+        ///   Looks up a localized string similar to Sequential UUID can only be generated between 1970-01-01 and 9276-12-03..
         /// </summary>
         public static string InvalidOperation_SequentialUUID {
             get {

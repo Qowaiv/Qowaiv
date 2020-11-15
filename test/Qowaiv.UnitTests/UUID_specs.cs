@@ -244,16 +244,17 @@ namespace UUID_specs
         {
             using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01).AddTicks(-1)))
             {
-                var exception = Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
-                Assert.AreEqual("Sequential UUID can not be generated before 1970-01-01.", exception.Message);
+                Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
             }
         }
 
         [Test]
         public void until_3_Dec_9276()
         {
-            var expected = new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
-            Assert.AreEqual(expected, MaxDate);
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(9276, 12, 04)))
+            {
+                Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
+            }
         }
 
         /// <remarks>Due to the reordening the version ands up in index 7.</remarks>
@@ -340,7 +341,8 @@ namespace UUID_specs
         public void is_ordened_for_SQL_Server() => AssertIsOrdened(UuidComparer.SqlServer);
 
         private const int MultipleCount = 10000;
-        internal DateTime MaxDate => new DateTime((0xFF_FFFF_FFFF_FFFF << 5) + 0x89F_7FF5_F7B5_8000);
+        
+        private DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
 
         private static void AssertIsOrdened(UuidComparer comparer)
         {

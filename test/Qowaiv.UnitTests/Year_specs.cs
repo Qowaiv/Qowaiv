@@ -1,18 +1,14 @@
 ﻿using NUnit.Framework;
+using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
-using Qowaiv.UnitTests.Json;
+using Qowaiv.UnitTests;
+using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Threading;
 using System.Xml.Serialization;
-using Qowaiv;
-using Qowaiv.UnitTests.TestTools;
-using Qowaiv.UnitTests;
 
 namespace Year_specs
 {
@@ -362,8 +358,8 @@ namespace Year_specs
         {
             var sorted = new Year[]
             {
-                default(Year), 
-                default(Year),
+                default, 
+                default,
                 1970,
                 1971,
                 1972,

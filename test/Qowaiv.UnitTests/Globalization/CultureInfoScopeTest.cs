@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using System.Globalization;
 using Qowaiv.Globalization;
-using Qowaiv.TestTools;
+using System.Globalization;
 
 namespace Qowaiv.UnitTests.Globalization
 {

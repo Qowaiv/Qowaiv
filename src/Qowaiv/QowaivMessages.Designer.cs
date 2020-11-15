@@ -439,6 +439,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sequential UUID can not be generated before 1970-01-01..
+        /// </summary>
+        public static string InvalidOperation_SequentialUUID {
+            get {
+                return ResourceManager.GetString("InvalidOperation_SequentialUUID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sequence contains no elements..
         /// </summary>
         public static string InvalidOperationException_NoElements {

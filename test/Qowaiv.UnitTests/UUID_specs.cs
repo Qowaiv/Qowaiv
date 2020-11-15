@@ -8,6 +8,8 @@ using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace UUID_specs
@@ -57,6 +59,37 @@ namespace UUID_specs
         public void garbage()
         {
             Assert.IsFalse(Uuid.IsValid("garbage"));
+        }
+    }
+
+    public class Has_version
+    {
+        [Test]
+        public void Random_for_new()
+        {
+            var id = Uuid.NewUuid();
+            Assert.AreEqual(UuidVersion.Random, id.Version);
+        }
+
+        [Test]
+        public void Sequential_for_new_sequential()
+        {
+            var id = Uuid.NewSequential();
+            Assert.AreEqual(UuidVersion.Sequential, id.Version);
+        }
+
+        [Test]
+        public void MD5_for_generated_with_MD5()
+        {
+            var id = Uuid.GenerateWithMD5(Encoding.UTF8.GetBytes("Qowaiv"));
+            Assert.AreEqual(UuidVersion.MD5, id.Version);
+        }
+
+        [Test]
+        public void SHA1_for_generated_with_SHA1()
+        {
+            var id = Uuid.GenerateWithSHA1(Encoding.UTF8.GetBytes("Qowaiv"));
+            Assert.AreEqual(UuidVersion.SHA1, id.Version);
         }
     }
 
@@ -181,6 +214,220 @@ namespace UUID_specs
         }
     }
 
+    public class Can_be_created
+    {
+        [Test]
+        public void Randomly()
+        {
+            Assert.AreNotEqual(Uuid.Empty, Uuid.NewUuid());
+        }
+
+        [Test]
+        public void with_MD5()
+        {
+            var hashed = Uuid.GenerateWithMD5(Encoding.UTF8.GetBytes("Qowaiv"));
+            Assert.AreEqual(Uuid.Parse("lmZO_haEOTCwGsCcbIZFFg"), hashed);
+        }
+
+        [Test]
+        public void with_SHA1()
+        {
+            var hashed = Uuid.GenerateWithSHA1(Encoding.UTF8.GetBytes("Qowaiv"));
+            Assert.AreEqual(Uuid.Parse("39h-Y1rR51ym_t78x9h0bA"), hashed);
+        }
+    }
+
+    public class Can_be_created_squential
+    {
+        [Test]
+        public void from_1_Jan_1970_on()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01).AddTicks(-1)))
+            {
+                var exception = Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
+                Assert.AreEqual("Sequential UUID can not be generated before 1970-01-01.", exception.Message);
+            }
+        }
+
+        [Test]
+        public void until_3_Dec_9276()
+        {
+            var expected = new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
+            Assert.AreEqual(expected, MaxDate);
+        }
+
+        /// <remarks>Due to the reordening the version ands up in index 7.</remarks>
+        [Test]
+        public void on_min_date_first_6_bytes_are_0_for_default()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01)))
+            {
+                var actual = Uuid.NewSequential();
+                var expected = new byte?[]
+                {
+                    0, 0, 0, 0,
+
+                    0, 0, null, 0x60,
+                };
+                AssertBytes(expected, actual);
+            }
+        }
+
+        [Test]
+        public void on_min_date_first_6_bytes_are_0_for_SQL_Server()
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01)))
+            {
+                var actual = Uuid.NewSequential(UuidComparer.SqlServer);
+                var expected = new byte?[]
+                {
+                    null, null, null, null,
+
+                    null, null, null, null,
+
+                    0, null, 0, 0,
+
+                    0, 0, 0, 0,
+                };
+                AssertBytes(expected, actual);
+            }
+        }
+
+        /// <remarks>Due to the reordening the version ands up in index 7.</remarks>
+        [Test]
+        public void on_max_date_first_7_bytes_are_255_for_default()
+        {
+            using (Clock.SetTimeForCurrentThread(() => MaxDate))
+            {
+                var actual = Uuid.NewSequential();
+                var expected = new byte?[]
+                {
+                    0xFF, 0xFF, 0xFF, 0xFF,
+
+                    0xFF, 0xFF, null, 0x6F,
+                };
+                AssertBytes(expected, actual);
+            }
+        }
+
+        [Test]
+        public void on_max_date_first_7_bytes_are_255_for_SQL_Server()
+        {
+            using (Clock.SetTimeForCurrentThread(() => MaxDate))
+            {
+                var actual = Uuid.NewSequential(UuidComparer.SqlServer);
+                var expected = new byte?[]
+                {
+                    null, null, null, null,
+
+                    null, null, null, null,
+
+                    0xFF, null, 0xFF, 0xFF,
+
+                    0xFF, 0xFF, 0xFF, 0xFF,
+                };
+                AssertBytes(expected, actual);
+            }
+        }
+
+        [Test]
+        public void is_ordened_for_default() => AssertIsOrdened(UuidComparer.Default);
+
+        [Test]
+        public void is_ordened_for_MongoDb() => AssertIsOrdened(UuidComparer.MongoDb);
+
+        [Test]
+        public void is_ordened_for_SQL_Server() => AssertIsOrdened(UuidComparer.SqlServer);
+
+        private const int MultipleCount = 10000;
+        internal DateTime MaxDate => new DateTime((0xFF_FFFF_FFFF_FFFF << 5) + 0x89F_7FF5_F7B5_8000);
+
+        private static void AssertIsOrdened(UuidComparer comparer)
+        {
+            var ids = new List<Uuid>(MultipleCount);
+
+            foreach (var date in GetTimes().Take(MultipleCount))
+            {
+                using (Clock.SetTimeForCurrentThread(() => date))
+                {
+                    var id = Uuid.NewSequential(comparer);
+                    Console.WriteLine(ToString(id, comparer));
+                    ids.Add(id);
+                }
+            }
+            CollectionAssert.IsOrdered(ids, comparer);
+        }
+
+        private static void AssertBytes(byte?[] expected, Uuid actual)
+        {
+            var act = new List<string>();
+            var exp = new List<string>();
+            var fail = false;
+
+            var bytes = actual.ToByteArray();
+
+            for (var i = 0; i < bytes.Length; i++)
+            {
+                var a = bytes[i].ToString("X2");
+
+                if (i < expected.Length && expected[i].HasValue)
+                {
+                    var e = expected[i].Value.ToString("X2");
+
+                    if (e == a)
+                    {
+                        act.Add(a);
+                        exp.Add(e);
+                    }
+                    else
+                    {
+                        act.Add('[' + a + ']');
+                        exp.Add('[' + e + ']');
+                        fail = true;
+                    }
+                }
+                else
+                {
+                    act.Add(a);
+                    exp.Add("..");
+                }
+            }
+
+            if (fail)
+            {
+                Assert.Fail($@"Expected: [{(string.Join(", ", exp))}]
+Actual:   [{(string.Join(", ", act))}]");
+            }
+
+            Assert.AreEqual(UuidVersion.Sequential, actual.Version);
+        }
+
+        private static IEnumerable<DateTime> GetTimes()
+        {
+            var i = 17;
+
+            var date = new DateTime(1970, 01, 01);
+
+            while (true)
+            {
+                date = date.AddSeconds(3).AddTicks(i++);
+                yield return date;
+            }
+        }
+
+        private static string ToString(Uuid uuid, UuidComparer comparer)
+        {
+            var bytes = uuid.ToByteArray();
+            var sb = new StringBuilder(48);
+
+            foreach (var index in comparer.Priority)
+            {
+                sb.Append(bytes[index].ToString("X2")).Append(" ");
+            }
+            return sb.ToString();
+        }
+    }
+
     public class Has_custom_formatting
     {
         [Test]
@@ -198,18 +445,19 @@ namespace UUID_specs
 
         [TestCase("en-GB", null, "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
         [TestCase("en-GB", "S", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        [TestCase("en-GB", "H", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        [TestCase("en-GB", "N", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        [TestCase("en-GB", "n", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        [TestCase("en-GB", "D", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        [TestCase("en-GB", "d", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+        [TestCase("en-GB", "H", "Qowaiv_SVOLibrary_GUIA", "IKGBVCX72JKOFYTOW2V4X4MUEA")]
+        [TestCase("en-GB", "h", "Qowaiv_SVOLibrary_GUIA", "ikgbvcx72jkofytow2v4x4muea")]
+        [TestCase("en-GB", "N", "Qowaiv_SVOLibrary_GUIA", "8A1A8C42D2FFE254E26EB6ABCBF19420")]
+        [TestCase("en-GB", "n", "Qowaiv_SVOLibrary_GUIA", "8a1a8c42d2ffe254e26eb6abcbf19420")]
+        [TestCase("en-GB", "D", "Qowaiv_SVOLibrary_GUIA", "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420")]
+        [TestCase("en-GB", "d", "Qowaiv_SVOLibrary_GUIA", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
         [TestCase("nl-BE", "B", "Qowaiv_SVOLibrary_GUIA", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
         [TestCase("nl-BE", "b", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
         [TestCase("nl-BE", "B", "Qowaiv_SVOLibrary_GUIA", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
         [TestCase("nl-BE", "b", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
-        [TestCase("nl-BE", "P", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
-        [TestCase("nl-BE", "p", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
-        [TestCase("nl-BE", "X", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
+        [TestCase("nl-BE", "P", "Qowaiv_SVOLibrary_GUIA", "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)")]
+        [TestCase("nl-BE", "p", "Qowaiv_SVOLibrary_GUIA", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
+        [TestCase("nl-BE", "X", "Qowaiv_SVOLibrary_GUIA", "{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}")]
         public void culture_indpendend(CultureInfo culture, string format, Uuid svo, string expected)
         {
             using (culture.Scoped())
@@ -252,12 +500,12 @@ namespace UUID_specs
         [Test]
         public void can_be_sorted()
         {
-            var sorted = new Uuid[] 
+            var sorted = new Uuid[]
             {
-                default, 
+                default,
                 default,
                 Uuid.Parse("Qowaiv_SVOLibrary_GUI0"),
-                Uuid.Parse("Qowaiv_SVOLibrary_GUI1"), 
+                Uuid.Parse("Qowaiv_SVOLibrary_GUI1"),
                 Uuid.Parse("Qowaiv_SVOLibrary_GUI2"),
                 Uuid.Parse("Qowaiv_SVOLibrary_GUI3"),
             };
@@ -343,21 +591,30 @@ namespace UUID_specs
         }
 
         [Test]
-        public void from_int()
+        public void from_Guid()
         {
-            TypeConverterAssert.ConvertFromEquals(Svo.Uuid, -17);
+            TypeConverterAssert.ConvertFromEquals(Svo.Uuid, Svo.Guid);
         }
 
         [Test]
-        public void to_int()
+        public void to_Guid()
         {
-            TypeConverterAssert.ConvertToEquals(17, Svo.Uuid);
+            TypeConverterAssert.ConvertToEquals(Svo.Guid, Svo.Uuid);
         }
     }
 
     public class Supports_JSON_serialization
     {
         [TestCase(null, "")]
+        [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+        public void convension_based_deserialization(Uuid expected, object json)
+        {
+            var actual = JsonTester.Read<Uuid>(json);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(null, "")]
+        [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
         public void convension_based_serialization(object expected, Uuid svo)
         {
             var serialized = JsonTester.Write(svo);
@@ -365,8 +622,6 @@ namespace UUID_specs
         }
 
         [TestCase("Invalid input", typeof(FormatException))]
-        [TestCase("2017-06-11", typeof(FormatException))]
-        [TestCase(5L, typeof(InvalidCastException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
         {
             var exception = Assert.Catch(() => JsonTester.Read<Uuid>(json));
@@ -427,6 +682,13 @@ namespace UUID_specs
         {
             var info = SerializationTest.GetSerializationInfo(Svo.Uuid);
             Assert.AreEqual(Svo.Guid, info.GetValue("Value", typeof(Guid)));
+        }
+
+        [Test]
+        public void export_to_byte_array_equal_to_GUID_equivalent()
+        {
+            var bytes = Svo.Uuid.ToByteArray();
+            Assert.AreEqual(((Guid)Svo.Uuid).ToByteArray(), bytes);
         }
     }
 

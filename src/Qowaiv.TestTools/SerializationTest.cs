@@ -13,6 +13,39 @@ namespace Qowaiv.TestTools
     /// <summary>Helps with serialization testing.</summary>
     public static class SerializationTest
     {
+        /// <summary>Serializes and deserializes an instance using <see cref="BinaryFormatter"/>.</summary>
+        /// <typeparam name="T">
+        /// Type of the instance.
+        /// </typeparam>
+        /// <param name="instance">
+        /// The instance to serialize and deserialize.
+        /// </param>
+        public static T BinaryFormatterSerializeDeserialize<T>(T instance)
+        {
+            using var buffer = new MemoryStream();
+
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(buffer, instance);
+            buffer.Position = 0;
+
+            return (T)formatter.Deserialize(buffer);
+        }
+
+        /// <summary>Get <see cref="SerializationInfo"/> filled by <see cref="ISerializable.GetObjectData(SerializationInfo, StreamingContext)"/>.</summary>
+        /// <typeparam name="T">
+        /// Type of the instance.
+        /// </typeparam>
+        /// <param name="instance">
+        /// The instance to retrieve the object data from.
+        /// </param>
+        public static SerializationInfo GetSerializationInfo<T>(T instance) where T: ISerializable
+        {
+            ISerializable obj = instance;
+            var info = new SerializationInfo(typeof(YesNo), new FormatterConverter());
+            obj.GetObjectData(info, default);
+            return info;
+        }
+
         /// <summary>Serializes and deserializes an instance.</summary>
         /// <typeparam name="T">
         /// Type of the instance.
@@ -20,6 +53,7 @@ namespace Qowaiv.TestTools
         /// <param name="instance">
         /// The instance to serialize and deserialize.
         /// </param>
+        [Obsolete("use BinaryFormatterSerializeDeserialize<T>(instance) instead.")]
         public static T SerializeDeserialize<T>(T instance)
         {
             using var buffer = new MemoryStream();

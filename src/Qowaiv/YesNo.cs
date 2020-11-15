@@ -66,7 +66,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized gender.
         /// </returns>
-        public static YesNo FromJson(double json) => Create((int)json);
+        public static YesNo FromJson(double json) => FromJson<double>((int)json);
 
         /// <summary>Deserializes the yes-no from a JSON number.</summary>
         /// <param name="json">
@@ -75,7 +75,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized yes-no.
         /// </returns>
-        public static YesNo FromJson(long json) => Create((int)json);
+        public static YesNo FromJson(long json) => FromJson<long>(json);
 
         /// <summary>Deserializes the yes-no from a JSON boolean.</summary>
         /// <param name="json">
@@ -85,6 +85,18 @@ namespace Qowaiv
         /// The deserialized yes-no.
         /// </returns>
         public static YesNo FromJson(bool json) => json ? Yes : No;
+
+        private static YesNo FromJson<TFrom>(long val)
+        => val switch
+        {
+            0 => No,
+            1 => Yes,
+            byte.MaxValue => Unknown,
+            short.MaxValue => Unknown,
+            int.MaxValue => Unknown,
+            long.MaxValue => Unknown,
+            _ => throw Exceptions.InvalidCast<TFrom, YesNo>(),
+        };
 
         /// <summary>Serializes the yes-no to a JSON node.</summary>
         /// <returns>
@@ -160,7 +172,7 @@ namespace Qowaiv
             }
             return Empty;
         }
-        
+
         /// <summary>Casts a <see cref="bool"/> to a yes-no.</summary>
         public static explicit operator YesNo(bool val) => val ? Yes : No;
 
@@ -185,12 +197,12 @@ namespace Qowaiv
         {
             result = Empty;
             var buffer = s.Buffer().Unify();
-            
+
             if (buffer.IsEmpty())
             {
                 return true;
             }
-            else if(buffer.IsUnknown(formatProvider))
+            else if (buffer.IsUnknown(formatProvider))
             {
                 result = Unknown;
                 return true;
@@ -211,60 +223,6 @@ namespace Qowaiv
             return false;
         }
 
-        /// <summary >Creates a yes-no from a byte. </summary >
-        /// <param name="val" >
-        /// A decimal describing a yes-no.
-        /// </param >
-        /// <exception cref="FormatException" >
-        /// val is not a valid yes-no.
-        /// </exception >
-        private static YesNo Create(int? val)
-        {
-            if (TryCreate(val, out YesNo result))
-            {
-                return result;
-            }
-            throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionYesNo);
-        }
-
-        /// <summary >Creates a yes-no from a byte.
-        /// A return value indicates whether the creation succeeded.
-        /// </summary >
-        /// <param name="val" >
-        /// A byte describing a yes-no.
-        /// </param >
-        /// <param name="result" >
-        /// The result of the creation.
-        /// </param >
-        /// <returns >
-        /// True if a yes-no was created successfully, otherwise false.
-        /// </returns >
-        private static bool TryCreate(int? val, out YesNo result)
-        {
-            result = Empty;
-
-            if (!val.HasValue)
-            {
-                return true;
-            }
-            if (val == 0)
-            {
-                result = No;
-                return true;
-            }
-            if (val == 1)
-            {
-                result = Yes;
-                return true;
-            }
-            if (val == byte.MaxValue || val == short.MaxValue || val == int.MaxValue)
-            {
-                result = Unknown;
-                return true;
-            }
-            return false;
-        }
-
         #region Resources
 
         private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.YesNoLabels", typeof(YesNo).Assembly);
@@ -276,23 +234,10 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        internal string GetResourceString(string prefix, IFormatProvider formatProvider)
-        {
-            return GetResourceString(prefix, formatProvider as CultureInfo);
-        }
-
-        /// <summary>Get resource string.</summary>
-        /// <param name="prefix">
-        /// The prefix of the resource key.
-        /// </param>
-        /// <param name="culture">
-        /// The culture.
-        /// </param>
-        internal string GetResourceString(string prefix, CultureInfo culture)
-        {
-            if (IsEmpty()) { return string.Empty; }
-            return ResourceManager.GetString(prefix + LookupSuffix[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
-        }
+        private string GetResourceString(string prefix, IFormatProvider formatProvider)
+        => IsEmpty()
+            ? string.Empty
+            : ResourceManager.Localized(formatProvider, prefix, LookupSuffix[m_Value]);
 
         #endregion
 

@@ -91,7 +91,10 @@ namespace Qowaiv
         {
             0 => No,
             1 => Yes,
-            byte.MaxValue or short.MaxValue or int.MaxValue or long.MaxValue => Unknown,
+            byte.MaxValue => Unknown,
+            short.MaxValue => Unknown,
+            int.MaxValue => Unknown,
+            long.MaxValue => Unknown,
             _ => throw Exceptions.InvalidCast<TFrom, YesNo>(),
         };
 
@@ -169,7 +172,7 @@ namespace Qowaiv
             }
             return Empty;
         }
-        
+
         /// <summary>Casts a <see cref="bool"/> to a yes-no.</summary>
         public static explicit operator YesNo(bool val) => val ? Yes : No;
 
@@ -194,12 +197,12 @@ namespace Qowaiv
         {
             result = Empty;
             var buffer = s.Buffer().Unify();
-            
+
             if (buffer.IsEmpty())
             {
                 return true;
             }
-            else if(buffer.IsUnknown(formatProvider))
+            else if (buffer.IsUnknown(formatProvider))
             {
                 result = Unknown;
                 return true;

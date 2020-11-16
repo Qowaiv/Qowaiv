@@ -8,11 +8,9 @@ namespace Qowaiv
         private const int ScaleMask = 0x00FF0000;
         private const int SignMask = unchecked((int)0x80000000);
 
-        /// <summary>Returns true if the rounding is direct; the nearest of the two options is not relevent.</summary>
+        /// <summary>Returns true if the rounding is direct; the nearest of the two options is not relevant.</summary>
         public static bool IsDirectRounding(this DecimalRounding mode)
-        {
-            return mode >= DecimalRounding.Truncate && mode <= DecimalRounding.Floor;
-        }
+            => mode >= DecimalRounding.Truncate && mode <= DecimalRounding.Floor;
 
         /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
         [Obsolete("Misspelled method will be dropped when a next major release is published.")]
@@ -20,9 +18,7 @@ namespace Qowaiv
 
         /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
         public static bool IsNearestRounding(this DecimalRounding mode)
-        {
-            return mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;
-        }
+            => mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;
 
         /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
         /// <param name="value">

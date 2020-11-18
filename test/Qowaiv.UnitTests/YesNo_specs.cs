@@ -293,7 +293,7 @@ namespace YesNo_specs
         [TestCase("en-US", "i", "Yes", "1")]
         [TestCase("en-US", "i", "No", "0")]
         [TestCase("en-US", "i", "?", "?")]
-        public void culture_dependend(CultureInfo culture, string format, YesNo svo, string expected)
+        public void culture_dependent(CultureInfo culture, string format, YesNo svo, string expected)
         {
             using (culture.Scoped())
             {
@@ -477,7 +477,7 @@ namespace YesNo_specs
         [TestCase("?", (long)int.MaxValue)]
         [TestCase("?", long.MaxValue)]
         [TestCase("?", "unknown")]
-        public void convension_based_deserialization(YesNo expected, object json)
+        public void convention_based_deserialization(YesNo expected, object json)
         {
             var actual = JsonTester.Read<YesNo>(json);
             Assert.AreEqual(expected, actual);
@@ -485,7 +485,7 @@ namespace YesNo_specs
 
         [TestCase(null, "")]
         [TestCase("yes", "yes")]
-        public void convension_based_serialization(object expected, YesNo svo)
+        public void convention_based_serialization(object expected, YesNo svo)
         {
             var serialized = JsonTester.Write(svo);
             Assert.AreEqual(expected, serialized);

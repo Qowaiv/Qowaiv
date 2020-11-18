@@ -314,7 +314,7 @@ namespace Year_specs
         [TestCase("en-GB", null, 1979, "1979")]
         [TestCase("nl-BE", "#,##0", 1979, "1.979")]
         [TestCase("en-US", "00000", 1979, "01979")]
-        public void culture_dependend(CultureInfo culture, string format, Year svo, string expected)
+        public void culture_dependent(CultureInfo culture, string format, Year svo, string expected)
         {
             using (culture.Scoped())
             {
@@ -500,7 +500,7 @@ namespace Year_specs
         [TestCase("?", "unknown")]
         [TestCase(2017, "2017")]
         [TestCase(2017, 2017L)]
-        public void convension_based_deserialization(Year expected, object json)
+        public void convention_based_deserialization(Year expected, object json)
         {
             var actual = JsonTester.Read<Year>(json);
             Assert.AreEqual(expected, actual);
@@ -509,7 +509,7 @@ namespace Year_specs
         [TestCase(null, "")]
         [TestCase("?", "unknown")]
         [TestCase(2017L, "2017")]
-        public void convension_based_serialization(object expected, Year svo)
+        public void convention_based_serialization(object expected, Year svo)
         {
             var serialized = JsonTester.Write(svo);
             Assert.AreEqual(expected, serialized);

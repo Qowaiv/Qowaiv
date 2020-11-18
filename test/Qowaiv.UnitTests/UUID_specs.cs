@@ -217,9 +217,10 @@ namespace UUID_specs
     public class Can_be_created
     {
         [Test]
-        public void Randomly()
+        public void with_global_unique_value()
         {
-            Assert.AreNotEqual(Uuid.Empty, Uuid.NewUuid());
+            CollectionAssert.AllItemsAreUnique(Enumerable.Range(0, 10_000)
+                 .Select(i => Uuid.NewUuid()));
         }
 
         [Test]
@@ -237,7 +238,7 @@ namespace UUID_specs
         }
     }
 
-    public class Can_be_created_squential
+    public class Can_be_created_sequential
     {
         [Test]
         public void from_1_Jan_1970_on()
@@ -332,19 +333,19 @@ namespace UUID_specs
         }
 
         [Test]
-        public void is_ordened_for_default() => AssertIsOrdened(UuidComparer.Default);
+        public void is_sorted_for_default() => AssertIsSorted(UuidComparer.Default);
 
         [Test]
-        public void is_ordened_for_MongoDb() => AssertIsOrdened(UuidComparer.MongoDb);
+        public void is_sorted_for_MongoDb() => AssertIsSorted(UuidComparer.MongoDb);
 
         [Test]
-        public void is_ordened_for_SQL_Server() => AssertIsOrdened(UuidComparer.SqlServer);
+        public void is_sorted_for_SQL_Server() => AssertIsSorted(UuidComparer.SqlServer);
 
         private const int MultipleCount = 10000;
         
         private DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
 
-        private static void AssertIsOrdened(UuidComparer comparer)
+        private static void AssertIsSorted(UuidComparer comparer)
         {
             var ids = new List<Uuid>(MultipleCount);
 
@@ -460,7 +461,7 @@ Actual:   [{(string.Join(", ", act))}]");
         [TestCase("nl-BE", "P", "Qowaiv_SVOLibrary_GUIA", "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)")]
         [TestCase("nl-BE", "p", "Qowaiv_SVOLibrary_GUIA", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
         [TestCase("nl-BE", "X", "Qowaiv_SVOLibrary_GUIA", "{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}")]
-        public void culture_indpendend(CultureInfo culture, string format, Uuid svo, string expected)
+        public void culture_independent(CultureInfo culture, string format, Uuid svo, string expected)
         {
             using (culture.Scoped())
             {
@@ -609,7 +610,7 @@ Actual:   [{(string.Join(", ", act))}]");
     {
         [TestCase(null, "")]
         [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        public void convension_based_deserialization(Uuid expected, object json)
+        public void convention_based_deserialization(Uuid expected, object json)
         {
             var actual = JsonTester.Read<Uuid>(json);
             Assert.AreEqual(expected, actual);
@@ -617,7 +618,7 @@ Actual:   [{(string.Join(", ", act))}]");
 
         [TestCase(null, "")]
         [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        public void convension_based_serialization(object expected, Uuid svo)
+        public void convention_based_serialization(object expected, Uuid svo)
         {
             var serialized = JsonTester.Write(svo);
             Assert.AreEqual(expected, serialized);

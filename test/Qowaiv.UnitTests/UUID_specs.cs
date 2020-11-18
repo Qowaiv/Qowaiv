@@ -258,77 +258,59 @@ namespace UUID_specs
             }
         }
 
-        /// <remarks>Due to the reordening the version ands up in index 7.</remarks>
         [Test]
         public void on_min_date_first_6_bytes_are_0_for_default()
         {
             using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01)))
             {
-                var actual = Uuid.NewSequential();
-                var expected = new byte?[]
-                {
-                    0, 0, 0, 0,
+                AssertPattern(Uuid.NewSequential(),
 
+                    0, 0, 0, 0,
                     0, 0, null, 0x60,
-                };
-                AssertBytes(expected, actual);
+                    null, null, null, null,
+                    null, null, null, null);
             }
         }
 
         [Test]
-        public void on_min_date_first_6_bytes_are_0_for_SQL_Server()
+        public void on_min_date_last_6_bytes_are_0_for_SQL_Server()
         {
             using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01)))
             {
-                var actual = Uuid.NewSequential(UuidComparer.SqlServer);
-                var expected = new byte?[]
-                {
-                    null, null, null, null,
+                AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
 
                     null, null, null, null,
-
+                    null, null, null, null,
                     0, null, 0, 0,
-
-                    0, 0, 0, 0,
-                };
-                AssertBytes(expected, actual);
+                    0, 0, 0, 0);
             }
         }
 
-        /// <remarks>Due to the reordening the version ands up in index 7.</remarks>
         [Test]
-        public void on_max_date_first_7_bytes_are_255_for_default()
+        public void on_max_date_first_6_bytes_are_255_for_default()
         {
             using (Clock.SetTimeForCurrentThread(() => MaxDate))
-            {
-                var actual = Uuid.NewSequential();
-                var expected = new byte?[]
-                {
-                    0xFF, 0xFF, 0xFF, 0xFF,
+            { 
+                AssertPattern(Uuid.NewSequential(),
 
+                    0xFF, 0xFF, 0xFF, 0xFF,
                     0xFF, 0xFF, null, 0x6F,
-                };
-                AssertBytes(expected, actual);
+                    null, null, null, null,
+                    null, null, null, null);
             }
         }
 
         [Test]
-        public void on_max_date_first_7_bytes_are_255_for_SQL_Server()
+        public void on_max_date_last_6_bytes_are_255_for_SQL_Server()
         {
             using (Clock.SetTimeForCurrentThread(() => MaxDate))
             {
-                var actual = Uuid.NewSequential(UuidComparer.SqlServer);
-                var expected = new byte?[]
-                {
+                AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
+                
                     null, null, null, null,
-
                     null, null, null, null,
-
                     0xFF, null, 0xFF, 0xFF,
-
-                    0xFF, 0xFF, 0xFF, 0xFF,
-                };
-                AssertBytes(expected, actual);
+                    0xFF, 0xFF, 0xFF, 0xFF);
             }
         }
 
@@ -361,7 +343,7 @@ namespace UUID_specs
             CollectionAssert.IsOrdered(ids, comparer);
         }
 
-        private static void AssertBytes(byte?[] expected, Uuid actual)
+        private static void AssertPattern(Uuid actual, params byte?[] pattern)
         {
             var act = new List<string>();
             var exp = new List<string>();
@@ -373,9 +355,9 @@ namespace UUID_specs
             {
                 var a = bytes[i].ToString("X2");
 
-                if (i < expected.Length && expected[i].HasValue)
+                if (pattern[i].HasValue)
                 {
-                    var e = expected[i].Value.ToString("X2");
+                    var e = pattern[i].Value.ToString("X2");
 
                     if (e == a)
                     {

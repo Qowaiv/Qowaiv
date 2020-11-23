@@ -335,7 +335,7 @@ namespace YesNo_specs
         }
 
         [Test]
-        public void can_be_sorted()
+        public void can_be_sorted_using_compare()
         {
             var sorted = new[]
             {

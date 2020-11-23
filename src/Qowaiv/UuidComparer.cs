@@ -34,18 +34,18 @@ namespace Qowaiv
                 {
                     return 0;
                 }
-                if (y is Guid || y is Uuid)
+                else if (y is Guid || y is Uuid)
                 {
                     return -1;
                 }
             }
-            if (x is Guid || x is Uuid)
+            else if (x is Guid || x is Uuid)
             {
                 if (y is null)
                 {
                     return +1;
                 }
-                if (y is Guid || y is Uuid)
+                else if (y is Guid || y is Uuid)
                 {
                     var a = x is Guid g ? g : (Guid)(Uuid)x;
                     var b = y is Guid h ? h : (Guid)(Uuid)y;

@@ -107,24 +107,22 @@ namespace Qowaiv
         /// the lowercase formats are lowercase (except the the 's').
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-            return behavior.ToString(m_Value, format, formatProvider);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : behavior.ToString(m_Value, format, formatProvider);
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a UUID to a <see cref="string"/>.</summary>
         public static explicit operator string(Uuid val) => val.ToString(CultureInfo.CurrentCulture);
+
         /// <summary>Casts a <see cref="string"/> to a UUID.</summary>
         public static explicit operator Uuid(string str) => Cast.InvariantString<Uuid>(TryParse, str);
 
         /// <summary>Casts a Qowaiv.UUID to a System.GUID.</summary>
         public static implicit operator Guid(Uuid val) => val.m_Value;
+
         /// <summary>Casts a System.GUID to a Qowaiv.UUID.</summary>
         public static implicit operator Uuid(Guid val) => new Uuid(val);
 
@@ -138,7 +136,7 @@ namespace Qowaiv
         /// * Withing a timespan of 32 ticks (0.32 nanoseconds) the sequential part
         /// of UUID's are identical.
         /// </remarks>
-        public static Uuid NewSequential() => NewSequential(UuidComparer.Default);
+        public static Uuid NewSequential() => NewSequential(null);
 
         /// <summary>Initializes a new  instance of a UUID that is sequential.</summary>
         /// <param name="comparer">
@@ -152,8 +150,12 @@ namespace Qowaiv
         /// </remarks>
         public static Uuid NewSequential(UuidComparer comparer)
         {
+            var sequential = Clock.UtcNow().Ticks - TicksYear1970;
+            if (sequential < 0) { throw new InvalidOperationException(QowaivMessages.InvalidOperation_SequentialUUID); }
+            if (sequential > MaxTicks) { throw new InvalidOperationException(QowaivMessages.InvalidOperation_SequentialUUID); }
+            sequential >>= 5;
+
             var prioritizer = (comparer ?? UuidComparer.Default).Priority;
-            var sequential = (Clock.UtcNow().Ticks - TicksYear1970) >> 5;
 
             // replace the version byte with a fully random one.
             var random = Guid.NewGuid().ToByteArray();
@@ -181,6 +183,7 @@ namespace Qowaiv
             return new Guid(bytes);
         }
         private const long TicksYear1970 = 0x89F_7FF5_F7B5_8000;
+        private const long MaxTicks = 0x1FFF_FFFF_FFFF_FFFF;
 
         /// <summary>Converts the string to a UUID.
         /// A return value indicates whether the conversion succeeded.

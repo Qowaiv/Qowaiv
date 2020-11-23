@@ -293,7 +293,7 @@ namespace YesNo_specs
         [TestCase("en-US", "i", "Yes", "1")]
         [TestCase("en-US", "i", "No", "0")]
         [TestCase("en-US", "i", "?", "?")]
-        public void culture_dependend(CultureInfo culture, string format, YesNo svo, string expected)
+        public void culture_dependent(CultureInfo culture, string format, YesNo svo, string expected)
         {
             using (culture.Scoped())
             {
@@ -335,7 +335,7 @@ namespace YesNo_specs
         }
 
         [Test]
-        public void can_be_sorted()
+        public void can_be_sorted_using_compare()
         {
             var sorted = new[]
             {
@@ -477,7 +477,7 @@ namespace YesNo_specs
         [TestCase("?", (long)int.MaxValue)]
         [TestCase("?", long.MaxValue)]
         [TestCase("?", "unknown")]
-        public void convension_based_deserialization(YesNo expected, object json)
+        public void convention_based_deserialization(YesNo expected, object json)
         {
             var actual = JsonTester.Read<YesNo>(json);
             Assert.AreEqual(expected, actual);
@@ -485,7 +485,7 @@ namespace YesNo_specs
 
         [TestCase(null, "")]
         [TestCase("yes", "yes")]
-        public void convension_based_serialization(object expected, YesNo svo)
+        public void convention_based_serialization(object expected, YesNo svo)
         {
             var serialized = JsonTester.Write(svo);
             Assert.AreEqual(expected, serialized);
@@ -558,12 +558,12 @@ namespace YesNo_specs
         }
     }
 
-    public class Debug_experience
+    public class Debugger
     {
         [TestCase("{empty}", "")]
         [TestCase("{unknown}", "?")]
         [TestCase("yes", "Y")]
-        public void with_custom_display(object display, YesNo svo)
+        public void has_custom_display(object display, YesNo svo)
         {
             DebuggerDisplayAssert.HasResult(display, svo);
         }

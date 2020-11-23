@@ -314,7 +314,7 @@ namespace Year_specs
         [TestCase("en-GB", null, 1979, "1979")]
         [TestCase("nl-BE", "#,##0", 1979, "1.979")]
         [TestCase("en-US", "00000", 1979, "01979")]
-        public void culture_dependend(CultureInfo culture, string format, Year svo, string expected)
+        public void culture_dependent(CultureInfo culture, string format, Year svo, string expected)
         {
             using (culture.Scoped())
             {
@@ -354,7 +354,7 @@ namespace Year_specs
         }
 
         [Test]
-        public void can_be_sorted()
+        public void can_be_sorted_using_compare()
         {
             var sorted = new Year[]
             {
@@ -498,16 +498,18 @@ namespace Year_specs
     public class Supports_JSON_serialization
     {
         [TestCase("?", "unknown")]
-        public void convension_based_deserialization(Year expected, object json)
+        [TestCase(2017, "2017")]
+        [TestCase(2017, 2017L)]
+        public void convention_based_deserialization(Year expected, object json)
         {
             var actual = JsonTester.Read<Year>(json);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase(null, "")]
-       [TestCase("?", "unknown")]
+        [TestCase("?", "unknown")]
         [TestCase(2017L, "2017")]
-        public void convension_based_serialization(object expected, Year svo)
+        public void convention_based_serialization(object expected, Year svo)
         {
             var serialized = JsonTester.Write(svo);
             Assert.AreEqual(expected, serialized);
@@ -580,12 +582,12 @@ namespace Year_specs
         }
     }
 
-    public class Debug_experience
+    public class Debugger
     {
         [TestCase("{empty}", "")]
         [TestCase("{unknown}", "?")]
         [TestCase("1979", (short)1979)]
-        public void with_custom_display(object display, Year svo)
+        public void has_custom_display(object display, Year svo)
         {
             DebuggerDisplayAssert.HasResult(display, svo);
         }

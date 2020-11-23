@@ -558,12 +558,12 @@ namespace YesNo_specs
         }
     }
 
-    public class Debug_experience
+    public class Debugger
     {
         [TestCase("{empty}", "")]
         [TestCase("{unknown}", "?")]
         [TestCase("yes", "Y")]
-        public void with_custom_display(object display, YesNo svo)
+        public void has_custom_display(object display, YesNo svo)
         {
             DebuggerDisplayAssert.HasResult(display, svo);
         }

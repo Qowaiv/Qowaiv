@@ -677,11 +677,11 @@ Actual:   [{(string.Join(", ", act))}]");
         }
     }
 
-    public class Debug_experience
+    public class Debugger
     {
         [TestCase("{empty}", "")]
         [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-        public void with_custom_display(object display, Uuid svo)
+        public void has_custom_display(object display, Uuid svo)
         {
             DebuggerDisplayAssert.HasResult(display, svo);
         }

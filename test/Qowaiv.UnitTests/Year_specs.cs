@@ -582,12 +582,12 @@ namespace Year_specs
         }
     }
 
-    public class Debug_experience
+    public class Debugger
     {
         [TestCase("{empty}", "")]
         [TestCase("{unknown}", "?")]
         [TestCase("1979", (short)1979)]
-        public void with_custom_display(object display, Year svo)
+        public void has_custom_display(object display, Year svo)
         {
             DebuggerDisplayAssert.HasResult(display, svo);
         }

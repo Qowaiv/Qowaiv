@@ -95,7 +95,6 @@ namespace Postal_code_specs
                 Country.PG,
             },
             postalCode.IsValidFor());
-
         }
     }
 

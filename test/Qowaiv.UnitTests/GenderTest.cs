@@ -276,7 +276,7 @@ namespace Qowaiv.UnitTests
         {
             var input = GenderTest.TestStruct;
             var exp = GenderTest.TestStruct;
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -318,7 +318,7 @@ namespace Qowaiv.UnitTests
                 Obj = GenderTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -379,7 +379,7 @@ namespace Qowaiv.UnitTests
                 Obj = Gender.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

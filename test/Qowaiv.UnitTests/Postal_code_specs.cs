@@ -285,6 +285,42 @@ namespace Postal_code_specs
             }
         }
 
+        [TestCase("AD", "765", "AD-765")]
+        [TestCase("AI", "2640", "AI-2640")]
+        [TestCase("AR", "Z1230ABC", "Z 1230 ABC")]
+        [TestCase("AS", "987654321", "98765 4321")]
+        [TestCase("AX", "22123", "22-123")]
+        [TestCase("AZ", "2123", "AZ-2123")]
+        [TestCase("BB", "01234", "BB-01234")]
+        [TestCase("BM", "AB34", "AB 34")]
+        [TestCase("BR", "01012345", "01012-345")]
+        [TestCase("CA", "H0H0H0", "H0H 0H0")]
+        [TestCase("CL", "1234567", "123-4567")]
+        [TestCase("CU", "12345", "CP12345")]
+        [TestCase("CZ", "12345", "123 45")]
+        [TestCase("DK", "1234", "DK-1234")]
+        [TestCase("FI", "12345", "12-345")]
+        [TestCase("FM", "969414321", "96941-4321")]
+        [TestCase("FO", "123", "FO-123")]
+        [TestCase("GA", "1234", "12 34")]
+        [TestCase("GB", "EC1A1BB", "EC1A 1BB")]
+        [TestCase("GG", "999JS", "GY99 9JS")]
+        [TestCase("GL", "3977", "GL-3977")]
+        [TestCase("GR", "12345", "123 45")]
+        [TestCase("GS", "SIQQ1ZZ", "SIQQ 1ZZ")]
+        [TestCase("GU", "969329999", "96932-9999")]
+        [TestCase("IM", "00DF", "IM0 0DF")]
+        [TestCase("IO", "BBND1ZZ", "BBND 1ZZ")]
+        [TestCase("IR", "0123456789", "01234-56789")]
+        [TestCase("JE", "999MO", "JE99 9MO")]
+        [TestCase("JP", "1234567", "1234-567")]
+        [TestCase("KR", "123456", "123-456")]
+        [TestCase("NL", "2624DP", "2624 DP")]
+        public void per_country(string format, PostalCode svo, string expected)
+        {
+           Assert.AreEqual(expected, svo.ToString(format));
+        }
+
         [Test]
         public void with_current_thread_culture_as_default()
         {
@@ -557,7 +593,7 @@ namespace Postal_code_specs
             new PostalCodes(Country.GB, "M11AA", "M11aA", "M11AA", "m11AA", "m11aa", "B338TH", "B338TH", "CR26XH", "CR26XH", "DN551PT", "DN551PT", "W1A1HQ", "W1A1HQ", "EC1A1BB", "EC1A1BB"),
             new PostalCodes(Country.GE, "0123", "1234", "2000", "3248", "4945", "5640", "6208", "7645", "6752", "8782", "9999"),
             new PostalCodes(Country.GF, "97300", "97301", "97312", "97320", "97332", "97340", "97356", "97362", "97376", "97367", "97387", "97399"),
-            new PostalCodes(Country.GG, "00DF", "03DS", "14RF", "20WK", "34SD", "44PJ", "54KF", "60LS", "74JD", "65MO", "88DF", "99JS", "000DF", "015DS", "126RF", "204WK", "328SD", "405PJ", "560KF", "628LS", "765JD", "672MO", "872DF", "999JS"),
+            new PostalCodes(Country.GG, "00DF", "03DS", "14RF", "20WK", "34SD", "44PJ", "54KF", "60LS", "74JD", "65MO", "88DF", "99JS", "000DF", "015DS", "126RF", "204WK", "328SD", "405PJ", "560KF", "628LS", "765JD", "672MO", "872DF", "999JS", "GY999JS"),
             new PostalCodes(Country.GI, "GX111AA"),
             new PostalCodes(Country.GL, "3999", "gl-3999", "GL-3999", "gL 3999", "GL3999", "GL3990"),
             new PostalCodes(Country.GP, "97100", "97101", "97112", "97120", "97132", "97140", "97156", "97162", "97176", "97167", "97187", "97199"),
@@ -580,13 +616,13 @@ namespace Postal_code_specs
             new PostalCodes(Country.IR, "0000000000", "0144942325", "1282353436", "2037570044", "3243436478", "4008279475", "5697836450", "6282469088", "7611343495", "6767185502", "8752391832", "9999999999"),
             new PostalCodes(Country.IS, "000", "035", "146", "204", "348", "445", "540", "608", "745", "652", "882", "999"),
             new PostalCodes(Country.IT, "00123", "02123", "31001", "42007", "54006", "91008"),
-            new PostalCodes(Country.JE, "00AS", "25GS", "36DF", "44DS", "78RF", "75WK", "50SD", "88PJ", "95KF", "02LS", "32JD", "99MO", "00AS", "042GS", "153DF", "274DS", "337RF", "477WK", "535SD", "668PJ", "749KF", "680LS", "893JD", "999MO"),
+            new PostalCodes(Country.JE, "00AS", "25GS", "36DF", "44DS", "78RF", "75WK", "50SD", "88PJ", "95KF", "02LS", "32JD", "99MO", "00AS", "042GS", "153DF", "274DS", "337RF", "477WK", "535SD", "668PJ", "749KF", "680LS", "893JD", "999MO", "JE999MO"),
             new PostalCodes(Country.JO, "00000", "01235", "12346", "20004", "32648", "40945", "56640", "62908", "76345", "67552", "87182", "99999"),
             new PostalCodes(Country.JP, "000-0000", "000-0999", "010-0000", "0100999", "880-0123", "900-0123"),
             new PostalCodes(Country.KG, "000000", "023145", "134256", "200074", "364238", "494075", "564630", "690268", "734645", "655782", "818792", "999999"),
             new PostalCodes(Country.KH, "00000", "01235", "12346", "20004", "32648", "40945", "56640", "62908", "76345", "67552", "87182", "99999"),
             new PostalCodes(Country.KR, "110000", "342600", "610185", "410-185", "710-185"),
-            new PostalCodes(Country.KY, "00000", "01235", "12346", "20004", "32648", "40945", "56640", "62908", "76345", "67552", "87182", "99999"),
+            new PostalCodes(Country.KY, "00000", "01235", "12346", "20004", "32648", "40945", "56640", "62908", "76345", "67552", "87182", "99999", "KY99999"),
             new PostalCodes(Country.KZ, "000000", "023145", "134256", "200074", "364238", "494075", "564630", "690268", "734645", "655782", "818792"),
             new PostalCodes(Country.LA, "00000", "01235", "12346", "20004", "32648", "40945", "56640", "62908", "76345", "67552", "87182", "99999"),
             new PostalCodes(Country.LB, "00000000", "01442325", "12853436", "20370044", "32436478", "40079475", "56936450", "62869088", "76143495", "67685502", "87591832", "99999999"),

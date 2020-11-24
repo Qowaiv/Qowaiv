@@ -195,6 +195,12 @@ var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
 ### Postal code
 Represents a postal code. It supports validation for all countries.
 
+``` C#
+var dutch = PostalCode.Parse("2624DP");
+dutch.IsValid(Country.NL); // true
+dutch.IsValid(Country.BE); // false
+```
+
 ### Week date
 Represents a week based date.
 

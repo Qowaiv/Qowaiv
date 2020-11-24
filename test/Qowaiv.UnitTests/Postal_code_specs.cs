@@ -77,6 +77,26 @@ namespace Postal_code_specs
         }
         private static readonly IEnumerable<object[]> ValidForCountry = PostalCodes.Valid
             .SelectMany(codes => codes.ToArrays());
+
+        [Test]
+        public void multiple_countries()
+        {
+            var postalCode = PostalCode.Parse("666");
+            CollectionAssert.AreEqual(new []
+            { 
+                Country.AD,
+                Country.BH,
+                Country.BT,
+                Country.FO,
+                Country.IS,
+                Country.LS,
+                Country.MG,
+                Country.OM,
+                Country.PG,
+            },
+            postalCode.IsValidFor());
+
+        }
     }
 
     public class Is_not_valid_for

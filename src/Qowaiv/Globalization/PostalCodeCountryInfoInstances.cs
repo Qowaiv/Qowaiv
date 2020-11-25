@@ -297,7 +297,7 @@ namespace Qowaiv.Globalization
             { Country.MA, New(Country.MA, @"^[1-9][0-9]{4}$", "^(..)(...)$", "$1 $2") },
 
             // MC: Monaco, http://en.wikipedia.org/wiki/Postal_codes_in_France
-            { Country.MC, New(Country.MC, @"^(MC)?980[0-9]{2}$", "^(MC)?(...)$", "MC-$2") },
+            { Country.MC, New(Country.MC, @"^(MC)?980[0-9]{2}$") },
 
             // MD: Moldova, http://en.wikipedia.org/wiki/Postal_codes_in_Moldova
             { Country.MD, New(Country.MD, @"^(MD)?[0-9]{4}$", "^(MD)?(....)$", "MD-$2") },
@@ -529,7 +529,6 @@ namespace Qowaiv.Globalization
 
             // ZM: Zambia, http://en.wikipedia.org/wiki/List_of_postal_codes
             { Country.ZM, New(Country.ZM, @"^[0-9]{5}$") },
-
         };
     }
 }

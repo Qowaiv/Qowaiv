@@ -284,43 +284,22 @@ namespace Postal_code_specs
                 Assert.AreEqual(expected, svo.ToString(format));
             }
         }
-
-        [TestCase("AD", "765", "AD-765")]
-        [TestCase("AI", "2640", "AI-2640")]
-        [TestCase("AR", "Z1230ABC", "Z 1230 ABC")]
-        [TestCase("AS", "987654321", "98765 4321")]
-        [TestCase("AX", "22123", "22-123")]
-        [TestCase("AZ", "2123", "AZ-2123")]
-        [TestCase("BB", "01234", "BB-01234")]
-        [TestCase("BM", "AB34", "AB 34")]
-        [TestCase("BR", "01012345", "01012-345")]
-        [TestCase("CA", "H0H0H0", "H0H 0H0")]
-        [TestCase("CL", "1234567", "123-4567")]
-        [TestCase("CU", "12345", "CP12345")]
-        [TestCase("CZ", "12345", "123 45")]
-        [TestCase("DK", "1234", "DK-1234")]
-        [TestCase("FI", "12345", "12-345")]
-        [TestCase("FM", "969414321", "96941-4321")]
-        [TestCase("FO", "123", "FO-123")]
-        [TestCase("GA", "1234", "12 34")]
-        [TestCase("GB", "EC1A1BB", "EC1A 1BB")]
-        [TestCase("GG", "999JS", "GY99 9JS")]
-        [TestCase("GL", "3977", "GL-3977")]
-        [TestCase("GR", "12345", "123 45")]
-        [TestCase("GS", "SIQQ1ZZ", "SIQQ 1ZZ")]
-        [TestCase("GU", "969329999", "96932-9999")]
-        [TestCase("IM", "00DF", "IM0 0DF")]
-        [TestCase("IO", "BBND1ZZ", "BBND 1ZZ")]
-        [TestCase("IR", "0123456789", "01234-56789")]
-        [TestCase("JE", "999MO", "JE99 9MO")]
-        [TestCase("JP", "1234567", "1234-567")]
-        [TestCase("KR", "123456", "123-456")]
-        [TestCase("NL", "2624DP", "2624 DP")]
-        public void per_country(string format, PostalCode svo, string expected)
+    
+        [TestCaseSource(nameof(FormattedPostalCodes))]
+        public void per_country(Country country, PostalCode svo, string expected)
         {
-           Assert.AreEqual(expected, svo.ToString(format));
+           Assert.AreEqual(expected, svo.ToString(country));
         }
 
+        [Test]
+        public void for_58_countries()
+        {
+            Assert.AreEqual(58, PostalCodeCountryInfo.GetCountriesWithFormatting().Count());
+            CollectionAssert.AreEqual(
+                PostalCodeCountryInfo.GetCountriesWithFormatting(),
+                FormattedPostalCodes.Select(record => record[0]));
+        }
+        
         [Test]
         public void with_current_thread_culture_as_default()
         {
@@ -329,6 +308,68 @@ namespace Postal_code_specs
                 Assert.AreEqual("H0H0H0", Svo.PostalCode.ToString(provider: null));
             }
         }
+
+        private static IEnumerable<object[]> FormattedPostalCodes = new[]
+        {
+            new object[] { Country.AD, PostalCode.Parse("765"), "AD-765" },
+            new object[] { Country.AI, PostalCode.Parse("2640"), "AI-2640" },
+            new object[] { Country.AR, PostalCode.Parse("Z1230ABC"), "Z 1230 ABC" },
+            new object[] { Country.AS, PostalCode.Parse("987654321"), "98765 4321" },
+            new object[] { Country.AX, PostalCode.Parse("22123"), "22-123" },
+            new object[] { Country.AZ, PostalCode.Parse("2123"), "AZ-2123" },
+            new object[] { Country.BB, PostalCode.Parse("01234"), "BB-01234" },
+            new object[] { Country.BM, PostalCode.Parse("AB34"), "AB 34" },
+            new object[] { Country.BR, PostalCode.Parse("01012345"), "01012-345" },
+            new object[] { Country.CA, PostalCode.Parse("H0H0H0"), "H0H 0H0" },
+            new object[] { Country.CL, PostalCode.Parse("1234567"), "123-4567" },
+            new object[] { Country.CU, PostalCode.Parse("12345"), "CP12345" },
+            new object[] { Country.CZ, PostalCode.Parse("12345"), "123 45" },
+            new object[] { Country.DK, PostalCode.Parse("1234"), "DK-1234" },
+            new object[] { Country.FI, PostalCode.Parse("12345"), "12-345" },
+            new object[] { Country.FK, PostalCode.Parse("FIQQ1ZZ"), "FIQQ 1ZZ" },
+            new object[] { Country.FM, PostalCode.Parse("969414321"), "96941-4321" },
+            new object[] { Country.FO, PostalCode.Parse("123"), "FO-123" },
+            new object[] { Country.GA, PostalCode.Parse("1234"), "12 34" },
+            new object[] { Country.GB, PostalCode.Parse("EC1A1BB"), "EC1A 1BB" },
+            new object[] { Country.GG, PostalCode.Parse("999JS"), "GY99 9JS" },
+            new object[] { Country.GI, PostalCode.Parse("GX111AA"), "GX11 1AA" },
+            new object[] { Country.GL, PostalCode.Parse("3977"), "GL-3977" },
+            new object[] { Country.GR, PostalCode.Parse("12345"), "123 45" },
+            new object[] { Country.GS, PostalCode.Parse("SIQQ1ZZ"), "SIQQ 1ZZ" },
+            new object[] { Country.GU, PostalCode.Parse("969329999"), "96932-9999" },
+            new object[] { Country.IM, PostalCode.Parse("00DF"), "IM0 0DF" },
+            new object[] { Country.IO, PostalCode.Parse("BBND1ZZ"), "BBND 1ZZ" },
+            new object[] { Country.IR, PostalCode.Parse("0123456789"), "01234-56789" },
+            new object[] { Country.JE, PostalCode.Parse("999MO"), "JE99 9MO" },
+            new object[] { Country.JP, PostalCode.Parse("1234567"), "1234-567" },
+            new object[] { Country.KR, PostalCode.Parse("123456"), "123-456" },
+            new object[] { Country.KY, PostalCode.Parse("12345"), "KY1-2345" },
+            new object[] { Country.LB, PostalCode.Parse("12345678"), "1234 5678" },
+            new object[] { Country.LT, PostalCode.Parse("12345"), "LT-12345" },
+            new object[] { Country.LV, PostalCode.Parse("1234"), "LV-1234" },
+            new object[] { Country.MA, PostalCode.Parse("12345"), "12 345" },
+            new object[] { Country.MD, PostalCode.Parse("1234"), "MD-1234" },
+            new object[] { Country.MH, PostalCode.Parse("969701234"), "96970-1234" },
+            new object[] { Country.MP, PostalCode.Parse("969501234"), "96950-1234" },
+            new object[] { Country.MT, PostalCode.Parse("ABC1234"), "ABC 1234" },
+            new object[] { Country.NL, PostalCode.Parse("2624DP"), "2624 DP" },
+            new object[] { Country.PL, PostalCode.Parse("12345"), "12-345" },
+            new object[] { Country.PN, PostalCode.Parse("PCRN1ZZ"), "PCRN 1ZZ" },
+            new object[] { Country.PT, PostalCode.Parse("1234567"), "1234 567" },
+            new object[] { Country.PW, PostalCode.Parse("969401234"), "96940-1234" },
+            new object[] { Country.SA, PostalCode.Parse("123456789"), "12345-6789" },
+            new object[] { Country.SE, PostalCode.Parse("12345"), "123 45" },
+            new object[] { Country.SH, PostalCode.Parse("STHL1ZZ"), "STHL 1ZZ" },
+            new object[] { Country.SI, PostalCode.Parse("1234"), "SI-1234" },
+            new object[] { Country.SK, PostalCode.Parse("12345"), "123 45" },
+            new object[] { Country.SN, PostalCode.Parse("12345"), "CP12345" },
+            new object[] { Country.TC, PostalCode.Parse("TKCA1ZZ"), "TKCA 1ZZ" },
+            new object[] { Country.US, PostalCode.Parse("123456789"), "12345-6789" },
+            new object[] { Country.VC, PostalCode.Parse("1234"), "VC1234" },
+            new object[] { Country.VE, PostalCode.Parse("1234X"), "1234-X" },
+            new object[] { Country.VG, PostalCode.Parse("1169"), "VG1169" },
+            new object[] { Country.VI, PostalCode.Parse("008501234"), "00850-1234" },
+        };
     }
 
     public class Is_comparable
@@ -511,6 +552,60 @@ namespace Postal_code_specs
         {
             var info = SerializationTest.GetSerializationInfo(Svo.PostalCode);
             Assert.AreEqual("H0H0H0", info.GetString("Value"));
+        }
+    }
+
+    public class Not_supported_by
+    {
+        [Test]
+        public void _77_countries()
+        {
+            var exp = new[] { Country.AE, Country.AG, Country.AO, Country.AQ, Country.AW, Country.BF, Country.BI, Country.BJ, Country.BQ, Country.BS, Country.BV, Country.BW, Country.BZ, Country.CD, Country.CF, Country.CG, Country.CI, Country.CK, Country.CM, Country.CW, Country.DJ, Country.DM, Country.DO, Country.EH, Country.ER, Country.FJ, Country.GD, Country.GH, Country.GM, Country.GN, Country.GQ, Country.GY, Country.HK, Country.IE, Country.JM, Country.KE, Country.KI, Country.KM, Country.KN, Country.KP, Country.KW, Country.LC, Country.ML, Country.MO, Country.MR, Country.MS, Country.MU, Country.MV, Country.MW, Country.NR, Country.NU, Country.QA, Country.RW, Country.SB, Country.SC, Country.SJ, Country.SL, Country.SO, Country.SR, Country.SS, Country.ST, Country.SX, Country.SY, Country.TF, Country.TG, Country.TK, Country.TL, Country.TO, Country.TV, Country.TZ, Country.UG, Country.UM, Country.UZ, Country.VU, Country.WS, Country.YE, Country.ZW };
+            var act = PostalCodeCountryInfo.GetCountriesWithoutPostalCode().ToArray();
+
+            foreach (var item in act)
+            {
+                Console.WriteLine(item);
+            }
+            CollectionAssert.AreEqual(exp, act);
+        }
+    }
+    public class For_10_countries
+    { 
+        [Test]
+        public void only_1_postal_code_exists()
+        {
+            var exp = new Dictionary<Country, string>
+            {
+                { Country.AI, "AI-2640" },
+                { Country.FK, "FIQQ 1ZZ" },
+                { Country.GI, "GX11 1AA" },
+                { Country.GS, "SIQQ 1ZZ" },
+                { Country.IO, "BBND 1ZZ" },
+                { Country.PN, "PCRN 1ZZ" },
+                { Country.SH, "STHL 1ZZ" },
+                { Country.SV, "01101" },
+                { Country.TC, "TKCA 1ZZ" },
+                { Country.VA, "00120" },
+
+            };
+            var act = PostalCodeCountryInfo.GetCountriesWithSingleValue().ToArray();
+
+            foreach (var item in act)
+            {
+                Console.WriteLine(item);
+            }
+
+            Assert.AreEqual(exp.Keys.Count, act.Length, "act.Length");
+
+            CollectionAssert.AreEqual(exp.Keys, act);
+
+            foreach (var kvp in exp)
+            {
+                var info = PostalCodeCountryInfo.GetInstance(kvp.Key);
+
+                Assert.AreEqual(kvp.Value, info.GetSingleValue(), "GetSingleValue(), {0}.", kvp.Key);
+            }
         }
     }
 
@@ -715,4 +810,3 @@ namespace Postal_code_specs
         };
     }
 }
-

@@ -17,7 +17,7 @@ namespace Qowaiv.Globalization
             Country country,
             Regex validationPattern,
             Regex formattingSearchPattern,
-            string formattingReplacePattern, 
+            string formattingReplacePattern,
             bool isSingleValue)
         {
             Country = country;
@@ -31,20 +31,20 @@ namespace Qowaiv.Globalization
         public Country Country { get; }
 
         /// <summary>Returns true if the country has a postal code system, otherwise false.</summary>
-        public bool HasPostalCode=> ValidationPattern != null;
+        public bool HasPostalCode => ValidationPattern != null;
 
         /// <summary>Returns true if the country has supports formatting, otherwise false.</summary>
-        public bool HasFormatting =>FormattingSearchPattern != null;
+        public bool HasFormatting => FormattingSearchPattern != null;
 
         /// <summary>Returns true if the country has only one postal code, otherwise false.</summary>
-        public bool IsSingleValue { get; private set; }
+        public bool IsSingleValue { get; }
 
         /// <summary>Gets the postal code validation pattern for the country.</summary>
         private Regex ValidationPattern { get; }
-        
+
         /// <summary>Gets the postal code formatting search pattern for the country.</summary>
         private Regex FormattingSearchPattern { get; }
-        
+
         /// <summary>Gets the postal code formatting replace pattern for the country.</summary>
         private string FormattingReplacePattern { get; }
 
@@ -56,9 +56,9 @@ namespace Qowaiv.Globalization
         /// Returns false if the country does not have postal codes.
         /// </remarks>
         public bool IsValid(string postalcode)
-            =>  !string.IsNullOrEmpty(postalcode) 
-            &&  HasPostalCode 
-            &&  postalcode.Buffer().Unify().Matches(ValidationPattern);
+            => !string.IsNullOrEmpty(postalcode)
+            && HasPostalCode
+            && postalcode.Buffer().Unify().Matches(ValidationPattern);
 
         /// <summary>Formats the postal code.</summary>
         /// <param name="postalcode">
@@ -89,8 +89,8 @@ namespace Qowaiv.Globalization
 
         /// <summary>Gets the single value if supported, otherwise string.Empty.</summary>
         public string GetSingleValue()
-            => IsSingleValue 
-            ? FormattingReplacePattern 
+            => IsSingleValue
+            ? FormattingReplacePattern
             : string.Empty;
 
         /// <summary>Returns a <see cref="string"/> that represents the current postal code country info for debug purposes.</summary>

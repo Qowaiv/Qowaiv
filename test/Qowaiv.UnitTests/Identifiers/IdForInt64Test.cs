@@ -181,7 +181,7 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
 
@@ -228,7 +228,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -303,7 +303,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

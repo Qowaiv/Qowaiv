@@ -167,7 +167,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -209,7 +209,7 @@ namespace Qowaiv.UnitTests.Financial
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -270,7 +270,7 @@ namespace Qowaiv.UnitTests.Financial
                 Obj = default,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.SerializeDeserialize(input);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

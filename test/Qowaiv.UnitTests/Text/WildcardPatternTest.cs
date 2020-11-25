@@ -157,7 +157,7 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.SerializeDeserialize(TestPattern);
+            var act = SerializationTest.BinaryFormatterSerializeDeserialize(TestPattern);
             DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", act);
         }
         [Test]

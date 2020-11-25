@@ -41,7 +41,7 @@ namespace Qowaiv
         public static readonly PostalCode Unknown = new PostalCode("ZZZZZZZZZ");
 
         /// <summary>Gets the number of characters of postal code.</summary>
-        public int Length => m_Value is null ? 0 : m_Value.Length;
+        public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
 
         /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>
         /// <param name="country">

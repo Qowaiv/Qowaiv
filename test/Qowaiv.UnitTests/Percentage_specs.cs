@@ -14,6 +14,9 @@ namespace Percentage_specs
 {
     public class Is_valid_for
     {
+        [TestCase("1751‱", "en")]
+        [TestCase("175.1‰", "en")]
+        [TestCase("17.51", "en")]
         [TestCase("17.51%", "en")]
         [TestCase("17,51%", "nl")]
         public void strings_representing_SVO(string input, CultureInfo culture)
@@ -40,6 +43,22 @@ namespace Percentage_specs
         public void whitespace()
         {
             Assert.IsFalse(Percentage.IsValid(" "));
+        }
+
+        [TestCase("‱1‱")]
+        [TestCase("‱1‰")]
+        [TestCase("‱1%")]
+        public void two_marks(string str)
+        {
+            Assert.IsFalse(Percentage.IsValid(str));
+        }
+
+        [TestCase("1‱1")]
+        [TestCase("1‰1")]
+        [TestCase("1%1")]
+        public void mark_in_the_middle(string str)
+        {
+            Assert.IsFalse(Percentage.IsValid(str));
         }
 
         [Test]

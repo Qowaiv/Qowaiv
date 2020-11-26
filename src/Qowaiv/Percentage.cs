@@ -6,6 +6,7 @@ using Qowaiv.Conversion;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using Qowaiv.Mathematics;
+using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -749,12 +750,16 @@ namespace Qowaiv
 
         private static PercentageMarkerType GetMarkerType(string str, NumberFormatInfo info)
         {
-            var cent = info == null ? PercentageMark : info.PercentSymbol;
-            var mille = info == null ? PerMilleMark : info.PerMilleSymbol;
+            var cent = info?.PercentSymbol ?? PercentageMark;
+            var mille = info?.PerMilleSymbol ?? PerMilleMark;
 
-            var count = Count(str, PercentageMark) + Count(str, PerMilleMark) + Count(str, PerTenThousandMark);
-            if (cent != PercentageMark) { count += Count(str, cent); }
-            if (mille != PerMilleMark) { count += Count(str, mille); }
+            var buffer = str.Buffer();
+
+            var count = buffer.Count(PercentageMark) +
+                buffer.Count(PerMilleMark) + 
+                buffer.Count(PerTenThousandMark);
+            if (cent != PercentageMark) { count +=buffer.Count(cent); }
+            if (mille != PerMilleMark) { count += buffer.Count(mille); }
             if (count > 1) { return PercentageMarkerType.Invalid; }
 
             if (str.EndsWith(PercentageMark, StringComparison.Ordinal)) { return PercentageMarkerType.PercentageAfter; }
@@ -789,18 +794,12 @@ namespace Qowaiv
         private static string RemoveMarks(string str, IFormatProvider formatprovider)
         {
             var info = NumberFormatInfo.GetInstance(formatprovider);
-            return str
-                .Replace(PercentageMark, "")
-                .Replace(PerMilleMark, "")
-                .Replace(PerTenThousandMark, "")
-                .Replace(info.PercentSymbol, "")
-                .Replace(info.PerMilleSymbol, "");
-        }
-
-        private static int Count(string s, string sub)
-        {
-            var rep = s.Replace(sub, string.Empty);
-            return (s.Length - rep.Length) / sub.Length;
+            return str.Buffer()
+                .Remove(PercentageMark)
+                .Remove(PerMilleMark)
+                .Remove(PerTenThousandMark)
+                .Remove(info.PercentSymbol)
+                .Remove(info.PerMilleSymbol);
         }
 
         /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>

@@ -27,7 +27,6 @@ namespace Qowaiv.TestTools
             var formatter = new BinaryFormatter();
             formatter.Serialize(buffer, instance);
             buffer.Position = 0;
-
             return (T)formatter.Deserialize(buffer);
         }
 

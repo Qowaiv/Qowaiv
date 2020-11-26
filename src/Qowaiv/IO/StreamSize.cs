@@ -469,8 +469,9 @@ namespace Qowaiv.IO
             var sb = new StringBuilder();
             if (m_Value < 0)
             {
-                var cultureInfo = formatProvider as CultureInfo;
-                var sign = cultureInfo == null ? "-" : cultureInfo.NumberFormat.NegativeSign;
+                var sign = formatProvider is CultureInfo cultureInfo 
+                    ?  cultureInfo.NumberFormat.NegativeSign
+                    : "-";
                 sb.Append(sign);
             }
 

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SVO_specs
 {
-    public class All
+    public static class All
     {
         internal static readonly Type[] NoneSvos = new[] { typeof(FormattingArguments) };
 

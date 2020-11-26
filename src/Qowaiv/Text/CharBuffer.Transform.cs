@@ -46,6 +46,31 @@ namespace Qowaiv.Text
             return this;
         }
 
+        /// <summary>Removes all instances of <param name="str"/> from the buffer.</summary>
+        public CharBuffer Remove(string str)
+        {
+            var match = 0;
+            for (var i = 0; i < Length; i++)
+            {
+                if(str[match] == this[i])
+                {
+                    match++;
+                    
+                    if (match == str.Length)
+                    {
+                        i -= match - 1;
+                        RemoveRange(i, match);
+                        match = 0;
+                    }
+                }
+                else
+                {
+                    match = 0;
+                }
+            }
+            return this;
+        }
+
         /// <summary>Removes a specified length from the start of the buffer.</summary>
         public CharBuffer RemoveFromStart(int length)
         {

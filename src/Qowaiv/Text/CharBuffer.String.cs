@@ -16,6 +16,30 @@
             return count;
         }
 
+        /// <summary>Counts the occurrences of the <see cref="string"/> in the buffer.</summary>
+        public int Count(string str)
+        {
+            var count = 0;
+            var match = 0;
+            for (var i = start; i < end; i++)
+            {
+                if (buffer[i] == str[match])
+                {
+                    match++;
+                    if(match == str.Length)
+                    {
+                        count++;
+                        match = 0;
+                    }
+                }
+                else
+                {
+                    match = 0;
+                }
+            }
+            return count;
+        }
+
         /// <summary>Gets the index of the <see cref="char"/> in the buffer.</summary>
         /// <returns>
         /// -1 if not found, otherwise the index of the <see cref="char"/>.

@@ -160,7 +160,7 @@ namespace Qowaiv.Identifiers
 
             if (obj is Uuid uuid)
             {
-                id = guid == Guid.Empty ? null : (object)(Guid)uuid;
+                id = uuid == Uuid.Empty ? null : (object)(Guid)uuid;
                 return true;
             }
             if (obj is string str && TryParse(str, out id))

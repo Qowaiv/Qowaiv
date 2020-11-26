@@ -8,7 +8,6 @@ using Qowaiv.Mathematics;
 using Qowaiv.Security.Cryptography;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools;
-using Qowaiv.UnitTests.Globalization;
 using Qowaiv.UnitTests.Identifiers;
 using Qowaiv.Web;
 using System;

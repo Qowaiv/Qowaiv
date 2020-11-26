@@ -312,7 +312,7 @@ namespace Qowaiv
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
-        public static bool IsValid(string val) => IsValid(val, null);
+        public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
         /// <summary>Returns true if the value represents a valid yes-no.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.

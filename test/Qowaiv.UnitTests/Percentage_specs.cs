@@ -173,6 +173,14 @@ namespace Percentage_specs
             }
         }
 
+        [TestCase("175.1<>", "en")]
+        [TestCase("17,51#", "nl")]
+        public void with_custom_culture_with_different_symbols(string input, CultureInfo culture)
+        {
+            var parsed = Percentage.Parse(input, culture.WithPercentageSymbols("#", "<>"));
+            Assert.AreEqual(Svo.Percentage, parsed);
+        }
+
         [Test]
         public void from_valid_input_only_otherwise_throws_on_Parse()
         {

@@ -23,6 +23,16 @@ namespace Percentage_specs
         {
             Assert.IsTrue(Percentage.IsValid(input, culture));
         }
+
+        [TestCase("175.1<>", "en")]
+        [TestCase("17,51#", "nl")]
+        public void custom_culture_with_different_symbols(string input, CultureInfo culture)
+        {
+            using(culture.WithPercentageSymbols("#", "<>").Scoped())
+            {
+                Assert.IsTrue(Percentage.IsValid(input));
+            }
+        }
     }
 
     public class Is_not_valid_for

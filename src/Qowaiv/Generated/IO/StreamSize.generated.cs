@@ -84,13 +84,14 @@ namespace Qowaiv.IO
             {
                 return 1;
             }
-
-            if (obj is StreamSize other)
+            else if (obj is StreamSize other)
             {
                 return CompareTo(other);
             }
-
-            throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
+            else
+            {
+                throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
+            }
         }
 
 #if !NotEqualsSvo
@@ -129,11 +130,7 @@ namespace Qowaiv.IO
         /// <summary>Adds the underlying property of the stream size to the serialization info.</summary>
         /// <param name = "info">The serialization info.</param>
         /// <param name = "context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue("Value", m_Value);
-        }
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => Guard.NotNull(info, nameof(info)).AddValue("Value", m_Value);
     }
 }
 
@@ -174,11 +171,7 @@ namespace Qowaiv.IO
         /// Uses <see cref = "ToXmlString()"/>.
         /// </remarks>
         /// <param name = "writer">An XML writer.</param>
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            Guard.NotNull(writer, nameof(writer));
-            writer.WriteString(ToXmlString());
-        }
+        void IXmlSerializable.WriteXml(XmlWriter writer) => Guard.NotNull(writer, nameof(writer)).WriteString(ToXmlString());
     }
 }
 
@@ -238,11 +231,7 @@ namespace Qowaiv.IO
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static StreamSize Parse(string s, IFormatProvider formatProvider)
-        {
-            return TryParse(s, formatProvider, out StreamSize val) ? val : throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
-        }
-
+        public static StreamSize Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out StreamSize val) ? val : throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "StreamSize"/>.</summary>
         /// <param name = "s">
         /// A string containing the stream size to convert.
@@ -250,11 +239,7 @@ namespace Qowaiv.IO
         /// <returns>
         /// The stream size if the string was converted successfully, otherwise default.
         /// </returns>
-        public static StreamSize TryParse(string s)
-        {
-            return TryParse(s, CultureInfo.CurrentCulture, out StreamSize val) ? val : default;
-        }
-
+        public static StreamSize TryParse(string s) => TryParse(s, null, out StreamSize val) ? val : default;
         /// <summary>Converts the <see cref = "string "/> to <see cref = "StreamSize"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -267,7 +252,7 @@ namespace Qowaiv.IO
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        public static bool TryParse(string s, out StreamSize result) => TryParse(s, CultureInfo.CurrentCulture, out result);
+        public static bool TryParse(string s, out StreamSize result) => TryParse(s, null, out result);
 #else
         /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
         /// <param name="s">
@@ -280,11 +265,9 @@ namespace Qowaiv.IO
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         public static StreamSize Parse(string s)
-        {
-            return TryParse(s, out StreamSize val)
-                ? val
-                : throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
-        }
+            => TryParse(s, out StreamSize val)
+            ? val
+            : throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
         /// <param name="s">
@@ -293,10 +276,7 @@ namespace Qowaiv.IO
         /// <returns>
         /// The stream size if the string was converted successfully, otherwise default.
         /// </returns>
-        public static StreamSize TryParse(string s)
-        {
-            return TryParse(s, out StreamSize val) ? val : default;
-        }
+        public static StreamSize TryParse(string s) => TryParse(s, out StreamSize val) ? val : default;
 #endif
     }
 }
@@ -313,7 +293,7 @@ namespace Qowaiv.IO
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
-        public static bool IsValid(string val) => IsValid(val, CultureInfo.CurrentCulture);
+        public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
         /// <summary>Returns true if the value represents a valid stream size.</summary>
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
@@ -321,19 +301,15 @@ namespace Qowaiv.IO
         /// <param name = "formatProvider">
         /// The <see cref = "IFormatProvider"/> to interpret the <see cref = "string "/> value with.
         /// </param>
-        public static bool IsValid(string val, IFormatProvider formatProvider)
-        {
-            return !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
-        }
+        public static bool IsValid(string val, IFormatProvider formatProvider) => !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
 #else
         /// <summary>Returns true if the value represents a valid stream size.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>
         public static bool IsValid(string val)
-        {
-            return !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
-        }
+            => !string.IsNullOrWhiteSpace(val)
+            && TryParse(val, out _);
 #endif
     }
 }

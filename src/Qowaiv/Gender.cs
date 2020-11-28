@@ -196,7 +196,7 @@ namespace Qowaiv
             }
             else
             {
-                var c = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+                var c = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
                 AddCulture(c);
                 var str = buffer.ToString();
 

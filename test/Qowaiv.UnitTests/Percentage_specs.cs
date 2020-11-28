@@ -89,13 +89,13 @@ namespace Percentage_specs
         [Test]
         public void One_represent_1_percent()
         {
-            Assert.AreEqual(1.Percent(), Percentage.One);
+            Assert.AreEqual("1%", Percentage.One.ToString("0%", CultureInfo.InvariantCulture));
         }
 
         [Test]
         public void Hundred_represent_100_percent()
         {
-            Assert.AreEqual(100.Percent(), Percentage.Hundred);
+            Assert.AreEqual("100%", Percentage.Hundred.ToString("0%", CultureInfo.InvariantCulture));
         }
     }
 
@@ -210,6 +210,30 @@ namespace Percentage_specs
             {
                 Assert.AreEqual(Svo.Percentage, Percentage.TryParse("17.51%"));
             }
+        }
+    }
+
+    public class Can_be_created_with_percentage_extension
+    {
+        [Test]
+        public void from_int()
+        {
+            var p = 3.Percent();
+            Assert.AreEqual("3%", p.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void from_double()
+        {
+            var p = 3.14.Percent();
+            Assert.AreEqual("3.14%", p.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void from_decimal()
+        {
+            var p = 3.14m.Percent();
+            Assert.AreEqual("3.14%", p.ToString(CultureInfo.InvariantCulture));
         }
     }
 
@@ -351,6 +375,69 @@ namespace Percentage_specs
         {
             var casted = (double)Svo.Percentage;
             Assert.AreEqual(0.1751, casted);
+        }
+    }
+
+    public class Can_be_rounded
+    {
+        [Test]
+        public void zero_decimals()
+        {
+            var actual = Svo.Percentage.Round();
+            Assert.AreEqual(18.Percent(), actual);
+        }
+
+        [Test]
+        public void one_decimal()
+        {
+            var actual = Svo.Percentage.Round(1);
+            Assert.AreEqual(17.5.Percent(), actual);
+        }
+
+        [Test]
+        public void away_from_zero()
+        {
+            var actual = 16.5.Percent().Round(0, DecimalRounding.AwayFromZero);
+            Assert.AreEqual(17.Percent(), actual);
+        }
+
+        [Test]
+        public void to_even()
+        {
+            var actual = 16.5.Percent().Round(0, DecimalRounding.ToEven);
+            Assert.AreEqual(16.Percent(), actual);
+        }
+
+        [Test]
+        public void to_multiple()
+        {
+            var actual = 16.4.Percent().RoundToMultiple(3.Percent());
+            Assert.AreEqual(15.Percent(), actual);
+        }
+
+        [Test]
+        public void up_to_26_digits()
+        {
+            var exception = Assert.Catch<ArgumentOutOfRangeException>(() => Svo.Percentage.Round(27));
+            StringAssert.StartsWith("Percentages can only round to between -26 and 26 digits of precision.", exception.Message);
+        }
+
+        [Test]
+        public void up_to_minus_26_digits()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => Svo.Percentage.Round(-27));
+        }
+    }
+
+    public class Sign_is_queriable
+    {
+        [TestCase(-1, "-3%")]
+        [TestCase(0, "0%")]
+        [TestCase(+1, "10%")]
+        public void Sign(int expected, Percentage percentage)
+        {
+            var actual = percentage.Sign();
+            Assert.AreEqual(expected, actual);
         }
     }
 

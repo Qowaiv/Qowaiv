@@ -35,9 +35,9 @@ namespace Qowaiv
         /// <summary>Represents 0 percent.</summary>
         public static readonly Percentage Zero;
         /// <summary>Represents 1 percent.</summary>
-        public static readonly Percentage One = 0.01m;
+        public static readonly Percentage One = 1.Percent();
         /// <summary>Represents 100 percent.</summary>
-        public static readonly Percentage Hundred = 1m;
+        public static readonly Percentage Hundred = 100.Percent();
 
         /// <summary>Gets the minimum value of a percentage.</summary>
         public static readonly Percentage MinValue = decimal.MinValue;

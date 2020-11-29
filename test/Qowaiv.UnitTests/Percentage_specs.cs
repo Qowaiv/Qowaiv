@@ -59,7 +59,7 @@ namespace Percentage_specs
         [TestCase("‱1‱")]
         [TestCase("‱1‰")]
         [TestCase("‱1%")]
-        public void two_marks(string str)
+        public void two_symbols(string str)
         {
             Assert.IsFalse(Percentage.IsValid(str));
         }
@@ -67,7 +67,7 @@ namespace Percentage_specs
         [TestCase("1‱1")]
         [TestCase("1‰1")]
         [TestCase("1%1")]
-        public void mark_in_the_middle(string str)
+        public void symbol_in_the_middle(string str)
         {
             Assert.IsFalse(Percentage.IsValid(str));
         }
@@ -247,7 +247,7 @@ namespace Percentage_specs
             Assert.AreEqual("Unit Test Formatter, value: '17.510%', format: '0.000%'", formatted);
         }
 
-        [TestCase("en-GB", null, "17.51%", "17.51")]
+        [TestCase("en-GB", null, "17.51%", "17.51%")]
         [TestCase("nl-BE", "0.000%", "17.51%", "17,510%")]
         public void culture_dependent(CultureInfo culture, string format, Percentage svo, string expected)
         {

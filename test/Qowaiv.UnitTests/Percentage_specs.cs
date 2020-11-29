@@ -271,7 +271,7 @@ namespace Percentage_specs
         {
             using(TestCultures.En_GB.Scoped())
             {
-                Assert.AreEqual("175.1‰", Svo.Percentage.ToPerMilleString());
+                Assert.AreEqual("175.1‰", Svo.Percentage.ToString("PM"));
             }
         }
 
@@ -280,7 +280,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Assert.AreEqual("1751‱", Svo.Percentage.ToPerTenThousandMarkString());
+                Assert.AreEqual("1751‱", Svo.Percentage.ToString("PT"));
             }
         }
     }

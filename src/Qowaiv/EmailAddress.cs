@@ -39,7 +39,7 @@ namespace Qowaiv
         /// <remarks>
         /// http://www.codeproject.com/KB/recipes/EmailRegexValidator.aspx
         /// </remarks>
-        [Obsolete("Usage is discouraged. A regular expression for parsing email address is slow.")]
+        [Obsolete("Usage is discouraged. Will be dropped when the next major version is released.")]
         public static readonly Regex Pattern = new Regex(
             @"
                 ^

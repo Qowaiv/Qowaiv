@@ -203,6 +203,28 @@ namespace Qowaiv
     using System;
     using System.Globalization;
 
+    public partial struct Percentage : IFormattable
+    {
+        /// <summary>Returns a <see cref = "string "/> that represents the percentage.</summary>
+        public override string ToString() => ToString(CultureInfo.CurrentCulture);
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the percentage.</summary>
+        /// <param name = "format">
+        /// The format that describes the formatting.
+        /// </param>
+        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+        /// <summary>Returns a formatted <see cref = "string "/> that represents the percentage.</summary>
+        /// <param name = "provider">
+        /// The format provider.
+        /// </param>
+        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
+    }
+}
+
+namespace Qowaiv
+{
+    using System;
+    using System.Globalization;
+
     public partial struct Percentage
     {
 #if !NotCultureDependent

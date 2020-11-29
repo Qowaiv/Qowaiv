@@ -417,13 +417,6 @@ namespace Percentage_specs
         }
 
         [Test]
-        public void _long()
-        {
-            var multiplied = 17.Percent() * 2L;
-            Assert.AreEqual(34.Percent(), multiplied);
-        }
-
-        [Test]
         public void _uint()
         {
             var multiplied = 17.Percent() * 2U;
@@ -431,9 +424,30 @@ namespace Percentage_specs
         }
 
         [Test]
+        public void _long()
+        {
+            var multiplied = 17.Percent() * 2L;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
         public void _ulong()
         {
             var multiplied = 17.Percent() * 2UL;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _short()
+        {
+            var multiplied = 17.Percent() * ((short)2);
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _ushort()
+        {
+            var multiplied = 17.Percent() * ((ushort)2);
             Assert.AreEqual(34.Percent(), multiplied);
         }
     }
@@ -476,13 +490,6 @@ namespace Percentage_specs
         }
 
         [Test]
-        public void _long()
-        {
-            var multiplied = 17.Percent() / 2L;
-            Assert.AreEqual(8.5.Percent(), multiplied);
-        }
-
-        [Test]
         public void _uint()
         {
             var multiplied = 17.Percent() / 2U;
@@ -490,9 +497,30 @@ namespace Percentage_specs
         }
 
         [Test]
+        public void _long()
+        {
+            var multiplied = 17.Percent() / 2L;
+            Assert.AreEqual(8.5.Percent(), multiplied);
+        }
+
+        [Test]
         public void _ulong()
         {
             var multiplied = 17.Percent() / 2UL;
+            Assert.AreEqual(8.5.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _short()
+        {
+            var multiplied = 17.Percent() / ((short)2);
+            Assert.AreEqual(8.5.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _ushort()
+        {
+            var multiplied = 17.Percent() / ((ushort)2);
             Assert.AreEqual(8.5.Percent(), multiplied);
         }
     }
@@ -549,13 +577,6 @@ namespace Percentage_specs
         }
 
         [Test]
-        public void _long()
-        {
-            var addition = 400L + 17.Percent();
-            Assert.AreEqual(468L, addition);
-        }
-
-        [Test]
         public void _uint()
         {
             var addition = 400U + 17.Percent();
@@ -563,10 +584,31 @@ namespace Percentage_specs
         }
 
         [Test]
+        public void _long()
+        {
+            var addition = 400L + 17.Percent();
+            Assert.AreEqual(468L, addition);
+        }
+
+        [Test]
         public void _ulong()
         {
             var addition = 400UL + 17.Percent();
             Assert.AreEqual(468UL, addition);
+        }
+
+        [Test]
+        public void _short()
+        {
+            var addition = ((short)400) + 17.Percent();
+            Assert.AreEqual((short)468, addition);
+        }
+
+        [Test]
+        public void _ushort()
+        {
+            var addition = ((ushort)400) + 17.Percent();
+            Assert.AreEqual((ushort)468, addition);
         }
     }
 

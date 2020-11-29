@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv;
+using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -305,7 +306,7 @@ namespace Percentage_specs
         }
 
         [Test]
-        public void by_operators_for_different_values()
+        public void _operators_for_different_values()
         {
             Percentage smaller = 17.51.Percent();
             Percentage bigger = 84.17.Percent();
@@ -316,7 +317,7 @@ namespace Percentage_specs
         }
 
         [Test]
-        public void by_operators_for_equal_values()
+        public void _operators_for_equal_values()
         {
             Percentage left = 17.51.Percent();
             Percentage right = 17.51.Percent();
@@ -375,6 +376,197 @@ namespace Percentage_specs
         {
             var casted = (double)Svo.Percentage;
             Assert.AreEqual(0.1751, casted);
+        }
+    }
+
+    public class Can_be_multiplied_by
+    {
+        [Test]
+        public void _percentage()
+        {
+            var multiplied = 17.Percent() * 42.Percent();
+            Assert.AreEqual(7.14.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _decimal()
+        {
+            var multiplied = 17.Percent() * 0.42m;
+            Assert.AreEqual(7.14.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _double()
+        {
+            var multiplied = 17.Percent() * 0.42;
+            Assert.AreEqual(7.14.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _float()
+        {
+            var multiplied = 17.Percent() * 0.42F;
+            Assert.AreEqual(7.14.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _int()
+        {
+            var multiplied = 17.Percent() * 2;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _long()
+        {
+            var multiplied = 17.Percent() * 2L;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _uint()
+        {
+            var multiplied = 17.Percent() * 2U;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _ulong()
+        {
+            var multiplied = 17.Percent() * 2UL;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+    }
+
+    public class Can_be_devided_by
+    {
+        [Test]
+        public void _percentage()
+        {
+            var multiplied = 17.Percent() / 50.Percent();
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _decimal()
+        {
+            var multiplied = 17.Percent() / 0.5m;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _double()
+        {
+            var multiplied = 17.Percent() / 0.5;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _float()
+        {
+            var multiplied = 17.Percent() / 0.5F;
+            Assert.AreEqual(34.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _int()
+        {
+            var multiplied = 17.Percent() / 2;
+            Assert.AreEqual(8.5.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _long()
+        {
+            var multiplied = 17.Percent() / 2L;
+            Assert.AreEqual(8.5.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _uint()
+        {
+            var multiplied = 17.Percent() / 2U;
+            Assert.AreEqual(8.5.Percent(), multiplied);
+        }
+
+        [Test]
+        public void _ulong()
+        {
+            var multiplied = 17.Percent() / 2UL;
+            Assert.AreEqual(8.5.Percent(), multiplied);
+        }
+    }
+
+    public class Can_be_added_to
+    {
+        [Test]
+        public void _percentage()
+        {
+            var addition = 13.Percent() + 34.Percent();
+            Assert.AreEqual(47.Percent(), addition);
+        }
+
+        [Test]
+        public void _amount()
+        {
+            var addition = (Amount)44 + 50.Percent();
+            Assert.AreEqual((Amount)66, addition);
+        }
+
+        [Test]
+        public void _money()
+        {
+            var addition = (44.6 + Currency.EUR)+ 50.Percent();
+            Assert.AreEqual(66.9 + Currency.EUR, addition);
+        }
+
+        [Test]
+        public void _decimal()
+        {
+            var addition = 34.586m + 75.Percent();
+            Assert.AreEqual(60.5255m, addition);
+        }
+
+        [Test]
+        public void _double()
+        {
+            var addition = 34.586 + 75.Percent();
+            Assert.That(addition, Is.EqualTo(60.5255).Within(0.00001));
+        }
+
+        [Test]
+        public void _float()
+        {
+            var addition = 34.586f + 75.Percent();
+            Assert.That(addition, Is.EqualTo(60.5255f).Within(0.00001));
+        }
+
+        [Test]
+        public void _int()
+        {
+            var addition = 400 + 17.Percent();
+            Assert.AreEqual(468, addition);
+        }
+
+        [Test]
+        public void _long()
+        {
+            var addition = 400L + 17.Percent();
+            Assert.AreEqual(468L, addition);
+        }
+
+        [Test]
+        public void _uint()
+        {
+            var addition = 400U + 17.Percent();
+            Assert.AreEqual(468U, addition);
+        }
+
+        [Test]
+        public void _ulong()
+        {
+            var addition = 400UL + 17.Percent();
+            Assert.AreEqual(468UL, addition);
         }
     }
 
@@ -605,4 +797,3 @@ namespace Percentage_specs
         }
     }
 }
-

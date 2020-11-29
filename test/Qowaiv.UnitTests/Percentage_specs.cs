@@ -786,6 +786,93 @@ namespace Percentage_specs
         }
     }
 
+    public class Can_get_100_percent_based_on_percentage
+    {
+        [Test]
+        public void _percentage()
+        {
+            var addition = 13.Percent() / 25.Percent();
+            Assert.AreEqual(52.Percent(), addition);
+        }
+
+        [Test]
+        public void _amount()
+        {
+            var addition = (Amount)44.6 / 80.Percent();
+            Assert.AreEqual((Amount)55.75, addition);
+        }
+
+        [Test]
+        public void _money()
+        {
+            var addition = (44.6 + Currency.EUR) / 80.Percent();
+            Assert.AreEqual(55.75 + Currency.EUR, addition);
+        }
+
+        [Test]
+        public void _decimal()
+        {
+            var addition = 34.586m / 75.Percent();
+            Assert.That(addition, Is.EqualTo(46.11467m).Within(0.00001));
+        }
+
+        [Test]
+        public void _double()
+        {
+            var addition = 34.586 / 75.Percent();
+            Assert.That(addition, Is.EqualTo(46.11467).Within(0.00001));
+        }
+
+        [Test]
+        public void _float()
+        {
+            var addition = 34.586f / 75.Percent();
+            Assert.That(addition, Is.EqualTo(46.11467f).Within(0.00001));
+        }
+
+        [Test]
+        public void _int()
+        {
+            var addition = 400 / 17.Percent();
+            Assert.AreEqual(2352, addition);
+        }
+
+        [Test]
+        public void _uint()
+        {
+            var addition = 400U / 17.Percent();
+            Assert.AreEqual(2352U, addition);
+        }
+
+        [Test]
+        public void _long()
+        {
+            var addition = 400L / 17.Percent();
+            Assert.AreEqual(2352L, addition);
+        }
+
+        [Test]
+        public void _ulong()
+        {
+            var addition = 400UL / 17.Percent();
+            Assert.AreEqual(2352UL, addition);
+        }
+
+        [Test]
+        public void _short()
+        {
+            var addition = ((short)400) / 17.Percent();
+            Assert.AreEqual((short)2352, addition);
+        }
+
+        [Test]
+        public void _ushort()
+        {
+            var addition = ((ushort)400) / 17.Percent();
+            Assert.AreEqual((ushort)2352, addition);
+        }
+    }
+
 
     public class Can_be_rounded
     {

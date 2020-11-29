@@ -633,6 +633,19 @@ namespace Percentage_specs
         }
     }
 
+    public class Abs_is_queriable
+    {
+        [TestCase("3%", "-3%")]
+        [TestCase("0%", "0%")]
+        [TestCase("10%", "10%")]
+        public void Abs(Percentage expected, Percentage percentage)
+        {
+            var actual = percentage.Abs();
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+
     public class Supports_type_conversion
     {
         [Test]

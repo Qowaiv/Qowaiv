@@ -612,7 +612,6 @@ namespace Percentage_specs
         }
     }
 
-
     public class Can_be_subtracted_from
     {
         [Test]
@@ -699,6 +698,94 @@ namespace Percentage_specs
             Assert.AreEqual((ushort)332, addition);
         }
     }
+
+    public class Can_get_a_percentage_of
+    {
+        [Test]
+        public void _percentage()
+        {
+            var addition = 13.Percent() * 34.Percent();
+            Assert.AreEqual(4.42.Percent(), addition);
+        }
+
+        [Test]
+        public void _amount()
+        {
+            var addition = (Amount)44.6 * 80.Percent();
+            Assert.AreEqual((Amount)35.68, addition);
+        }
+
+        [Test]
+        public void _money()
+        {
+            var addition = (44.6 + Currency.EUR) * 80.Percent();
+            Assert.AreEqual(35.68 + Currency.EUR, addition);
+        }
+
+        [Test]
+        public void _decimal()
+        {
+            var addition = 34.586m * 75.Percent();
+            Assert.AreEqual(25.9395m, addition);
+        }
+
+        [Test]
+        public void _double()
+        {
+            var addition = 34.586 * 75.Percent();
+            Assert.That(addition, Is.EqualTo(25.9395).Within(0.00001));
+        }
+
+        [Test]
+        public void _float()
+        {
+            var addition = 34.586f * 75.Percent();
+            Assert.That(addition, Is.EqualTo(25.9395f).Within(0.00001));
+        }
+
+        [Test]
+        public void _int()
+        {
+            var addition = 400 * 17.Percent();
+            Assert.AreEqual(68, addition);
+        }
+
+        [Test]
+        public void _uint()
+        {
+            var addition = 400U * 17.Percent();
+            Assert.AreEqual(68U, addition);
+        }
+
+        [Test]
+        public void _long()
+        {
+            var addition = 400L * 17.Percent();
+            Assert.AreEqual(68L, addition);
+        }
+
+        [Test]
+        public void _ulong()
+        {
+            var addition = 400UL * 17.Percent();
+            Assert.AreEqual(68UL, addition);
+        }
+
+        [Test]
+        public void _short()
+        {
+            var addition = ((short)400) * 17.Percent();
+            Assert.AreEqual((short)68, addition);
+        }
+
+        [Test]
+        public void _ushort()
+        {
+            var addition = ((ushort)400) * 17.Percent();
+            Assert.AreEqual((ushort)68, addition);
+        }
+    }
+
 
     public class Can_be_rounded
     {

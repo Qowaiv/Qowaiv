@@ -590,13 +590,13 @@ namespace Qowaiv
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current Percentage.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString((IFormatProvider)null);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
         /// <param name="format">
         /// The format that describes the formatting.
         /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(string format) => ToString(format, null);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
         /// <param name="provider">

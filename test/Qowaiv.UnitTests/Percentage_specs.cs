@@ -265,6 +265,24 @@ namespace Percentage_specs
                 Assert.AreEqual("17,51%", Svo.Percentage.ToString(provider: null));
             }
         }
+    
+        [Test]
+        public void using_per_mille_sign()
+        {
+            using(TestCultures.En_GB.Scoped())
+            {
+                Assert.AreEqual("175.1‰", Svo.Percentage.ToPerMilleString());
+            }
+        }
+
+        [Test]
+        public void using_per_then_thousand_sign()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Assert.AreEqual("1751‱", Svo.Percentage.ToPerTenThousandMarkString());
+            }
+        }
     }
 
     public class Is_comparable
@@ -873,7 +891,6 @@ namespace Percentage_specs
         }
     }
 
-
     public class Can_be_rounded
     {
         [Test]
@@ -923,9 +940,59 @@ namespace Percentage_specs
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => Svo.Percentage.Round(-27));
         }
+    
+        [Test, Obsolete("Only exists for guidance towards decimal rounding methods.")]
+        public void using_system_midpoint_rounding()
+        {
+            var rounded = Svo.Percentage.Round(0, MidpointRounding.AwayFromZero);
+            Assert.AreEqual(18.Percent(), rounded);
+        }
     }
 
-    public class Sign_is_queriable
+    public class Can_be_increased
+    {
+        [Test]
+        public void with_1_percent()
+        {
+            var increased = Svo.Percentage;
+            increased++;
+            Assert.AreEqual(18.51.Percent(), increased);
+        }
+    }
+
+    public class Can_be_decreased
+    {
+        [Test]
+        public void with_1_percent()
+        {
+            var decreased = Svo.Percentage;
+            decreased--;
+            Assert.AreEqual(16.51.Percent(), decreased);
+        }
+    }
+
+    public class Can_be_negated
+    {
+        [TestCase("17.51%", "-17.51%")]
+        [TestCase("-17.51%", "17.51%")]
+        public void negate(Percentage negated, Percentage input)
+        {
+            Assert.AreEqual(negated, -input);
+        }
+    }
+
+    public class Can_be_plussed
+    {
+        [TestCase("-17.51%", "-17.51%")]
+        [TestCase("17.51%", "17.51%")]
+        public void plus(Percentage negated, Percentage input)
+        {
+            Assert.AreEqual(negated, +input);
+        }
+    }
+
+
+    public class Can_get
     {
         [TestCase(-1, "-3%")]
         [TestCase(0, "0%")]
@@ -935,20 +1002,50 @@ namespace Percentage_specs
             var actual = percentage.Sign();
             Assert.AreEqual(expected, actual);
         }
-    }
-
-    public class Abs_is_queriable
-    {
+   
         [TestCase("3%", "-3%")]
         [TestCase("0%", "0%")]
         [TestCase("10%", "10%")]
-        public void Abs(Percentage expected, Percentage percentage)
+        public void absolute_value(Percentage expected, Percentage percentage)
         {
             var actual = percentage.Abs();
             Assert.AreEqual(expected, actual);
         }
     }
 
+    public class Can_get_maximum_of
+    {
+        [Test]
+        public void two_values()
+        {
+            var max = Percentage.Max(15.Percent(), 66.Percent());
+            Assert.AreEqual(66.Percent(), max);
+        }
+
+        [Test]
+        public void multiple_values()
+        {
+            var max = Percentage.Max(15.Percent(), 66.Percent(), -117.Percent());
+            Assert.AreEqual(66.Percent(), max);
+        }
+    }
+
+    public class Can_get_minimum_of
+    {
+        [Test]
+        public void two_values()
+        {
+            var min = Percentage.Min(15.Percent(), 66.Percent());
+            Assert.AreEqual(15.Percent(), min);
+        }
+
+        [Test]
+        public void multiple_values()
+        {
+            var min = Percentage.Min(15.Percent(), 66.Percent(), -117.Percent());
+            Assert.AreEqual(-117.Percent(), min);
+        }
+    }
 
     public class Supports_type_conversion
     {

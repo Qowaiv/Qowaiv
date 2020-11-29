@@ -669,7 +669,7 @@ namespace Qowaiv
                 var symbolInfo = SymbolInfo.Resolve(s.Buffer(), numberInfo);
 
                 if (symbolInfo.Symbol != SymbolPosition.Invalid &&
-                    decimal.TryParse(s, NumberStyles.Number, numberInfo,
+                    decimal.TryParse(symbolInfo.Buffer, NumberStyles.Number, numberInfo,
                     out decimal dec))
                 {
                     dec *= Dividers[symbolInfo.Symbol];

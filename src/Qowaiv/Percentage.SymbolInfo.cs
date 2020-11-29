@@ -20,71 +20,81 @@ namespace Qowaiv
         internal ref struct SymbolInfo
         {
             private static SymbolInfo Invalid => new SymbolInfo { Symbol = SymbolPosition.Invalid };
-            private int Start { get; set; }
-            private int Position { get; set; }
+
             public SymbolPosition Symbol { get; private set; }
             public CharBuffer Buffer { get; private set; }
+            public override string ToString() => Buffer;
 
-            private string Sub() => Buffer.Substring(Start, Position);
-            private bool IsStart() => Position == 0;
-            private bool IsLast() => Position == Buffer.Length - 1;
-            private bool IsInvalid()
-                => Symbol != SymbolPosition.None
-                || (!IsStart() && !IsLast());
-            private void Trim()
-            {
-                if (IsStart())
-                {
-                    Buffer.RemoveFromStart(Position);
-                    Start = 0;
-                    Position = 0;
-                }
-                else
-                {
-                    Buffer.RemoveFromEnd(Position - Start);
-                    Position = Start;
-                }
-            }
+            private static bool IsInvalid(SymbolPosition symbol) => symbol == SymbolPosition.Invalid;
 
             public static SymbolInfo Resolve(CharBuffer buffer, NumberFormatInfo numberInfo)
             {
-                var info = new SymbolInfo { Buffer = buffer };
+                var symbol = SymbolPosition.None;
 
-                while (!info.IsLast())
+                if (buffer.StartsWith(PercentSymbol))
                 {
-                    info.Position++;
-                    var sub = info.Sub();
-                    if (sub == PercentSymbol || sub == numberInfo.PercentSymbol)
-                    {
-                        if (info.IsInvalid()) { return Invalid; }
-                        else
-                        {
-                            info.Symbol = info.IsStart() ? SymbolPosition.PercentBefore : SymbolPosition.PercentAfter;
-                            info.Trim();
-                        }
-                    }
-                    else if (sub == PerMilleSymbol || sub == numberInfo.PerMilleSymbol)
-                    {
-                        if (info.IsInvalid()) { return Invalid; }
-                        else
-                        {
-                            info.Symbol = info.IsStart() ? SymbolPosition.PerMilleBefore : SymbolPosition.PerMilleAfter;
-                            info.Trim();
-                        }
-                    }
-                    else if (sub == PerTenThousandSymbol)
-                    {
-                        if (info.IsInvalid()) { return Invalid; }
-                        else
-                        {
-                            info.Symbol = info.IsStart() ? SymbolPosition.PerTenThousandBefore : SymbolPosition.PerTenThousandAfter;
-                            info.Trim();
-                        }
-                    }
-                    else { info.Start = info.Position; }
+                    buffer.RemoveFromStart(1);
+                    symbol = SymbolPosition.PercentBefore;
+                }
+                else if (buffer.StartsWith(numberInfo.PercentSymbol))
+                {
+                    buffer.RemoveFromStart(numberInfo.PercentSymbol.Length);
+                    symbol = SymbolPosition.PercentBefore;
+                }
+                else if (buffer.StartsWith(PerMilleSymbol))
+                {
+                    buffer.RemoveFromStart(1);
+                    symbol = SymbolPosition.PerMilleBefore;
+                }
+                else if (buffer.StartsWith(numberInfo.PerMilleSymbol))
+                {
+                    buffer.RemoveFromStart(numberInfo.PerMilleSymbol.Length);
+                    symbol = SymbolPosition.PerMilleBefore;
+                }
+                else if (buffer.StartsWith(PerTenThousandSymbol))
+                {
+                    buffer.RemoveFromStart(1);
+                    symbol = SymbolPosition.PerTenThousandAfter;
                 }
 
-                return info;
+                if (buffer.EndsWith(PercentSymbol))
+                {
+                    if (IsInvalid(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(1);
+                    symbol = SymbolPosition.PercentAfter;
+                }
+                else if (buffer.EndsWith(numberInfo.PercentSymbol))
+                {
+                    if (IsInvalid(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(numberInfo.PercentSymbol.Length);
+                    symbol = SymbolPosition.PercentAfter;
+                }
+                else if (buffer.EndsWith(PerMilleSymbol))
+                {
+                    if (IsInvalid(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(1);
+                    symbol = SymbolPosition.PerMilleAfter;
+                }
+                else if (buffer.EndsWith(numberInfo.PerMilleSymbol))
+                {
+                    if (IsInvalid(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(numberInfo.PerMilleSymbol.Length);
+                    symbol = SymbolPosition.PerMilleAfter;
+                }
+                else if (buffer.EndsWith(PerTenThousandSymbol))
+                {
+                    if (IsInvalid(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(1);
+                    symbol = SymbolPosition.PerTenThousandAfter;
+                }
+
+                return buffer.Contains(PercentSymbol) ||
+                    buffer.Contains(PerMilleSymbol) ||
+                    buffer.Contains(PerTenThousandSymbol) ||
+                    buffer.Contains(numberInfo.PercentSymbol) ||
+                    buffer.Contains(numberInfo.PerMilleSymbol)
+                    ? Invalid
+                    : new SymbolInfo { Buffer = buffer, Symbol = symbol };
             }
         }
     }

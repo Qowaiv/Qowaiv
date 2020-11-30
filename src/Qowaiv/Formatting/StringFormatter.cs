@@ -121,17 +121,17 @@ namespace Qowaiv.Formatting
         /// </returns>
         public static bool TryApplyCustomFormatter(string format, object obj, IFormatProvider formatProvider, out string formatted)
         {
-            formatted = null;
-            if (formatProvider != null)
+            var customFormatter = formatProvider?.GetFormat<ICustomFormatter>();
+            if (customFormatter is null)
             {
-                var customFormatter = formatProvider.GetFormat<ICustomFormatter>();
-                if (customFormatter != null)
-                {
-                    formatted = customFormatter.Format(format, obj, formatProvider);
-                    return true;
-                }
+                formatted = null;
+                return false;
             }
-            return false;
+            else
+            {
+                formatted = customFormatter.Format(format, obj, formatProvider);
+                return true;
+            }
         }
 
         /// <summary>Replaces diacritic characters by non diacritic ones.</summary>

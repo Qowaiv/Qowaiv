@@ -40,6 +40,28 @@
             return count;
         }
 
+        /// <summary>Counts the occurrences of the <see cref="string"/> in the buffer.</summary>
+        public bool Contains(string str)
+        {
+            var match = 0;
+            for (var i = start; i < end; i++)
+            {
+                if (buffer[i] == str[match])
+                {
+                    match++;
+                    if (match == str.Length)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    match = 0;
+                }
+            }
+            return false;
+        }
+
         /// <summary>Gets the index of the <see cref="char"/> in the buffer.</summary>
         /// <returns>
         /// -1 if not found, otherwise the index of the <see cref="char"/>.
@@ -88,7 +110,25 @@
             }
             return true;
         }
-        
+
+        public bool EndsWith(string str)
+        {
+            if (str.Length > Length)
+            {
+                return false;
+            }
+
+            var offset = Length - str.Length;
+            for (var i = 0; i < str.Length; i++)
+            {
+                if (this[offset + i] != str[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /// <summary>Retrieves a substring from the buffer..</summary>
         public string Substring(int startIndex) => new string(buffer, startIndex + start, Length - startIndex);
 

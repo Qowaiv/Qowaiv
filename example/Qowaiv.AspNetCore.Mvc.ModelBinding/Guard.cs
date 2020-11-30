@@ -136,23 +136,6 @@ namespace Qowaiv
             return (T)parameter;
         }
 
-        /// <summary>Guards the parameter to be of the specified type, otherwise throws an argument exception.</summary>
-        /// <param name="param">
-        /// The parameter to guard.
-        /// </param>
-        /// <param name="paramName">
-        /// The name of the parameter.
-        /// </param>
-        [DebuggerStepThrough, Obsolete("Use IsInstanceOf<T> instead.")]
-        public static T IsTypeOf<T>([ValidatedNotNull]object param, string paramName)
-        {
-            if (param is T)
-            {
-                return (T)param;
-            }
-            throw new ArgumentException(string.Format(Messages.ArgumentException_NotAnInstanceOf, typeof(T)), paramName);
-        }
-
         /// <summary>Guards the parameter if the type is not null and implements the specified interface,
         /// otherwise throws an argument (null) exception.
         /// </summary>

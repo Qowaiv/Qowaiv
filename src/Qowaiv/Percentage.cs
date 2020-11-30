@@ -8,7 +8,6 @@ using Qowaiv.Json;
 using Qowaiv.Mathematics;
 using Qowaiv.Text;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -25,19 +24,23 @@ namespace Qowaiv
     [TypeConverter(typeof(PercentageTypeConverter))]
     public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
     {
-        /// <summary>The percentage mark (%).</summary>
-        public static readonly string PercentageMark = "%";
-        /// <summary>The per mille mark (‰).</summary>
-        public static readonly string PerMilleMark = "‰";
-        /// <summary>The per ten thousand mark (0/000).</summary>
-        public static readonly string PerTenThousandMark = "‱";
+        /// <summary>The percentage symbol (%).</summary>
+        public static readonly string PercentSymbol = "%";
+
+        /// <summary>The per mille symbol (‰).</summary>
+        public static readonly string PerMilleSymbol = "‰";
+
+        /// <summary>The per ten thousand symbol (0/000).</summary>
+        public static readonly string PerTenThousandSymbol = "‱";
 
         /// <summary>Represents 0 percent.</summary>
         public static readonly Percentage Zero;
+        
         /// <summary>Represents 1 percent.</summary>
-        public static readonly Percentage One = 0.01m;
+        public static readonly Percentage One = 1.Percent();
+        
         /// <summary>Represents 100 percent.</summary>
-        public static readonly Percentage Hundred = 1m;
+        public static readonly Percentage Hundred = 100.Percent();
 
         /// <summary>Gets the minimum value of a percentage.</summary>
         public static readonly Percentage MinValue = decimal.MinValue;
@@ -493,7 +496,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="mode"/> is not a valid value of <see cref="MidpointRounding"/>.
         /// </exception>
-        [Obsolete("Use  Round(decimals, DecimalRounding) instead")]
+        [Obsolete("Use  Round(decimals, DecimalRounding) instead.")]
         public Percentage Round(int decimals, MidpointRounding mode) => Round(decimals, (DecimalRounding)mode);
 
         /// <summary>Rounds the percentage to a specified number of fractional
@@ -565,7 +568,7 @@ namespace Qowaiv
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
-        public string ToJson() => ToString("0.############################%", CultureInfo.InvariantCulture);
+        public string ToJson() => ToString(PercentFormat, CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -577,46 +580,6 @@ namespace Qowaiv
         {
             get => ToString("0.00##########################%", CultureInfo.InvariantCulture);
         }
-
-        /// <summary>Returns a <see cref="string"/> that represents the current Percentage formatted with a per ten Thousand mark.</summary>
-        public string ToPerTenThousandMarkString()
-        {
-            return ToString("0.############################‱", CultureInfo.InvariantCulture);
-        }
-        /// <summary>Returns a <see cref="string"/> that represents the current Percentage formatted with a per mille mark.</summary>
-        public string ToPerMilleString()
-        {
-            return ToString("0.############################‰", CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>Returns a <see cref="string"/> that represents the current Percentage.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
-        /// <param name="format">
-        /// The format that describes the formatting.
-        /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
-
-        /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
-        /// <param name="provider">
-        /// The format provider.
-        /// </param>
-        public string ToString(IFormatProvider provider)
-        {
-            DefaultFormats.TryGetValue(provider ?? CultureInfo.CurrentCulture, out string format);
-            format ??= "0.############################%";
-
-            return ToString(format, provider);
-        }
-
-        /// <summary>Gets the default format for different countries.</summary>
-        private static readonly Dictionary<IFormatProvider, string> DefaultFormats = new Dictionary<IFormatProvider, string>
-        {
-            { new CultureInfo("fr-FR"), "%0.############################" },
-            { new CultureInfo("fa-IR"), "%0.############################" },
-        };
-
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
         /// <param name="format">
@@ -632,29 +595,32 @@ namespace Qowaiv
                 return formatted;
             }
 
-            var marker = GetMarkerType(format ?? string.Empty, null);
-            if (marker == PercentageMarkerType.Invalid)
+            formatProvider ??= CultureInfo.CurrentCulture;
+            format = Format(format, formatProvider);
+
+            var numberInfo = GetNumberFormatInfo(formatProvider);
+            var symbolInfo = SymbolInfo.Resolve(format.Buffer(), numberInfo);
+            if (symbolInfo.Symbol == SymbolPosition.Invalid)
             {
                 throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
             }
-            var decimalVal = m_Value / Dividers[marker];
-            var info = GetNumberFormatInfo(formatProvider);
-            var str = decimalVal.ToString(RemoveMarks(format ?? string.Empty, null), info);
+            var dec = m_Value / Factors[symbolInfo.Symbol];
+            var str = dec.ToString(symbolInfo.Buffer, numberInfo);
 
-            switch (marker)
+            return symbolInfo.Symbol switch
             {
-                case PercentageMarkerType.PercentageBefore: str = info.PercentSymbol + str; break;
-                case PercentageMarkerType.PercentageAfter: str += info.PercentSymbol; break;
-                case PercentageMarkerType.PerMilleBefore: str = info.PerMilleSymbol + str; break;
-                case PercentageMarkerType.PerMilleAfter: str += info.PerMilleSymbol; break;
-                case PercentageMarkerType.PerTenThousandBefore: str = PerTenThousandMark + str; break;
-                case PercentageMarkerType.PerTenThousandAfter: str += PerTenThousandMark; break;
-            }
-            return str;
+                SymbolPosition.PercentBefore => numberInfo.PercentSymbol + str,
+                SymbolPosition.PerMilleBefore => numberInfo.PerMilleSymbol + str,
+                SymbolPosition.PerTenThousandBefore => PerTenThousandSymbol + str,
+                SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
+                SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
+                SymbolPosition.PerTenThousandAfter => str + PerTenThousandSymbol,
+                _ => str,
+            };
         }
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
-        private string ToXmlString() => ToString("0.############################%", CultureInfo.InvariantCulture);
+        private string ToXmlString() => ToString(PercentFormat, CultureInfo.InvariantCulture);
 
         #endregion
 
@@ -698,12 +664,15 @@ namespace Qowaiv
 
             if (!string.IsNullOrEmpty(s))
             {
-                var info = GetNumberFormatInfo(formatProvider);
-                var marker = GetMarkerType(s, info);
-                s = RemoveMarks(s, info);
-                if (marker != PercentageMarkerType.Invalid && decimal.TryParse(s, NumberStyles.Number, info, out decimal dec))
+                formatProvider ??= CultureInfo.CurrentCulture;
+                var numberInfo = GetNumberFormatInfo(formatProvider);
+                var symbolInfo = SymbolInfo.Resolve(s.Buffer(), numberInfo);
+
+                if (symbolInfo.Symbol != SymbolPosition.Invalid &&
+                    decimal.TryParse(symbolInfo.Buffer, NumberStyles.Number, numberInfo,
+                    out decimal dec))
                 {
-                    dec *= Dividers[marker];
+                    dec *= Factors[symbolInfo.Symbol];
                     result = Create(dec);
                     return true;
                 }
@@ -722,105 +691,5 @@ namespace Qowaiv
         /// A decimal describing a Percentage.
         /// </param >
         public static Percentage Create(double val) => Create(Cast.ToDecimal<Percentage>(val));
-
-        #region Parsing Helpers
-
-        internal enum PercentageMarkerType
-        {
-            None = 0,
-            PercentageBefore,
-            PercentageAfter,
-            PerMilleBefore,
-            PerMilleAfter,
-            PerTenThousandBefore,
-            PerTenThousandAfter,
-            Invalid,
-        }
-
-        internal static readonly Dictionary<PercentageMarkerType, decimal> Dividers = new Dictionary<PercentageMarkerType, decimal>
-        {
-            { PercentageMarkerType.None, 0.01m },
-            { PercentageMarkerType.PercentageBefore, 0.01m },
-            { PercentageMarkerType.PercentageAfter, 0.01m },
-            { PercentageMarkerType.PerMilleBefore, 0.001m },
-            { PercentageMarkerType.PerMilleAfter, 0.001m },
-            { PercentageMarkerType.PerTenThousandBefore, 0.0001m },
-            { PercentageMarkerType.PerTenThousandAfter, 0.0001m },
-        };
-
-        private static PercentageMarkerType GetMarkerType(string str, NumberFormatInfo info)
-        {
-            var cent = info?.PercentSymbol ?? PercentageMark;
-            var mille = info?.PerMilleSymbol ?? PerMilleMark;
-
-            var buffer = str.Buffer();
-
-            var count = buffer.Count(PercentageMark) +
-                buffer.Count(PerMilleMark) + 
-                buffer.Count(PerTenThousandMark);
-            if (cent != PercentageMark) { count +=buffer.Count(cent); }
-            if (mille != PerMilleMark) { count += buffer.Count(mille); }
-            if (count > 1) { return PercentageMarkerType.Invalid; }
-
-            if (str.EndsWith(PercentageMark, StringComparison.Ordinal)) { return PercentageMarkerType.PercentageAfter; }
-            if (str.StartsWith(PercentageMark, StringComparison.Ordinal)) { return PercentageMarkerType.PercentageBefore; }
-            if (str.Contains(PercentageMark)) { return PercentageMarkerType.Invalid; }
-
-            if (cent != PercentageMark)
-            {
-                if (str.EndsWith(cent, StringComparison.Ordinal)) { return PercentageMarkerType.PercentageAfter; }
-                if (str.StartsWith(cent, StringComparison.Ordinal)) { return PercentageMarkerType.PercentageBefore; }
-                if (str.Contains(cent)) { return PercentageMarkerType.Invalid; }
-            }
-
-            if (str.EndsWith(PerMilleMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerMilleAfter; }
-            if (str.StartsWith(PerMilleMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerMilleBefore; }
-            if (str.Contains(PerMilleMark)) { return PercentageMarkerType.Invalid; }
-
-            if (mille != PerMilleMark)
-            {
-                if (str.EndsWith(mille, StringComparison.Ordinal)) { return PercentageMarkerType.PerMilleAfter; }
-                if (str.StartsWith(mille, StringComparison.Ordinal)) { return PercentageMarkerType.PerMilleBefore; }
-                if (str.Contains(mille)) { return PercentageMarkerType.Invalid; }
-            }
-
-            if (str.EndsWith(PerTenThousandMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerTenThousandAfter; }
-            if (str.StartsWith(PerTenThousandMark, StringComparison.Ordinal)) { return PercentageMarkerType.PerTenThousandBefore; }
-            if (str.Contains(PerTenThousandMark)) { return PercentageMarkerType.Invalid; }
-            return PercentageMarkerType.None;
-        }
-
-        /// <summary>Removers all percentage/per mille/per ten thousand marks from the string.</summary>
-        private static string RemoveMarks(string str, IFormatProvider formatprovider)
-        {
-            var info = NumberFormatInfo.GetInstance(formatprovider);
-            return str.Buffer()
-                .Remove(PercentageMark)
-                .Remove(PerMilleMark)
-                .Remove(PerTenThousandMark)
-                .Remove(info.PercentSymbol)
-                .Remove(info.PerMilleSymbol);
-        }
-
-        /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
-        /// <remarks>
-        /// Because the options for formatting and parsing percentages as provided 
-        /// by the .NET framework are not sufficient, internally we use number
-        /// settings. For parsing and formatting however we like to use the
-        /// percentage properties of the <see cref="NumberFormatInfo"/> instead of
-        /// the number properties, so we copy them for desired behavior.
-        /// </remarks>
-        private static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
-        {
-            var info = NumberFormatInfo.GetInstance(formatProvider);
-            info = (NumberFormatInfo)info.Clone();
-            info.NumberDecimalDigits = info.PercentDecimalDigits;
-            info.NumberDecimalSeparator = info.PercentDecimalSeparator;
-            info.NumberGroupSeparator = info.PercentGroupSeparator;
-            info.NumberGroupSizes = info.PercentGroupSizes;
-            return info;
-        }
-
-        #endregion
     }
 }

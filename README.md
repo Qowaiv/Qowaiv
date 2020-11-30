@@ -190,6 +190,9 @@ var rounded = 17.56.Percent().Round(1); // 17.6%;
 
 var max = Percentage.Max(1.4.Percent(), 1.8.Percent()); // 1.8%;
 var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
+
+var perMille = 15.5.Percent().ToString("PM"); // 155‰
+var perTenThousand = 0.34.Percent().ToString("PT"); // 34‱
 ```
 
 ### Postal code

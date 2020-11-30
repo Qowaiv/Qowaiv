@@ -64,5 +64,17 @@ namespace Qowaiv.TestTools.Globalization
                 return culture;
             }
         }
+    
+        /// <summary>Updates percentage symbols of the culture.</summary>
+        public static CultureInfo WithPercentageSymbols(this CultureInfo culture, string percentSymbol, string perMilleSymbol)
+        {
+            culture ??= CultureInfo.CurrentCulture;
+            var info = (NumberFormatInfo)culture.NumberFormat.Clone();
+            var custom = new CultureInfo(culture.Name);
+            info.PercentSymbol = percentSymbol;
+            info.PerMilleSymbol = perMilleSymbol;
+            custom.NumberFormat = info;
+            return custom;
+        }
     }
 }

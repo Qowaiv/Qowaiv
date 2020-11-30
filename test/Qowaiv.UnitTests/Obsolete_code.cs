@@ -1,8 +1,10 @@
 ﻿using NUnit.Framework;
 using Qowaiv;
+using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.UnitTests;
+using Qowaiv.Web;
 using System;
 
 namespace Obsolete_code
@@ -48,5 +50,36 @@ namespace Obsolete_code
                 Assert.AreEqual("1751‱", Svo.Percentage.ToPerTenThousandMarkString());
             }
         }
+    }
+
+    [Obsolete("Will become private when the next major version is released.")]
+    public class Will_become_private
+    {
+        [Test]
+        public void BIC() => Assert.NotNull(BusinessIdentifierCode.Pattern);
+
+        [Test]
+        public void internet_media_type() => Assert.NotNull(InternetMediaType.Pattern);
+
+        [Test]
+        public void date_span() => Assert.NotNull(DateSpan.Pattern);
+
+        [Test]
+        public void house_number() => Assert.NotNull(HouseNumber.Pattern);
+
+        [Test]
+        public void month() => Assert.NotNull(Month.Pattern);
+
+        [Test]
+        public void postal_code() => Assert.NotNull(PostalCode.Pattern);
+
+        [Test]
+        public void UUID() => Assert.NotNull(Uuid.Pattern);
+        
+        [Test]
+        public void week_date() => Assert.NotNull(WeekDate.Pattern);
+
+        [Test]
+        public void year() => Assert.NotNull(Year.Pattern);
     }
 }

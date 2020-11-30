@@ -24,6 +24,7 @@ namespace Qowaiv
     public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
+        [Obsolete("Will become private when the next major version is released.")]
         public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
 
         /// <summary>Represents an empty/not set year.</summary>

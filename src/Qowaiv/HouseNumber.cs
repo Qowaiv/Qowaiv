@@ -24,6 +24,7 @@ namespace Qowaiv
     public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
     {
         /// <summary>Represents the pattern of a (potential) valid house number.</summary>
+        [Obsolete("Will become private when the next major version is released.")]
         public static readonly Regex Pattern = new Regex(@"^[1-9][0-9]{0,8}$", RegexOptions.Compiled);
 
         /// <summary>Represents an empty/not set house number.</summary>

@@ -45,6 +45,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
         /// </remarks>
+        [Obsolete("Will become private when the next major version is released.")]
         public static readonly Regex Pattern = new Regex(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents an empty/not set BIC.</summary>

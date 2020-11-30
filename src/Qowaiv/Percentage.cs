@@ -590,14 +590,14 @@ namespace Qowaiv
         /// </param>
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            formatProvider ??= CultureInfo.CurrentCulture;
-            format = Format(format, formatProvider);
-
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
             {
                 return formatted;
             }
-           
+
+            formatProvider ??= CultureInfo.CurrentCulture;
+            format = Format(format, formatProvider);
+
             var numberInfo = GetNumberFormatInfo(formatProvider);
             var symbolInfo = SymbolInfo.Resolve(format.Buffer(), numberInfo);
             if (symbolInfo.Symbol == SymbolPosition.Invalid)

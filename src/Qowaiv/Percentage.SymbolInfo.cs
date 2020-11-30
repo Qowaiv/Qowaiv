@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Text;
+using System;
 using System.Globalization;
 
 namespace Qowaiv
@@ -17,38 +18,46 @@ namespace Qowaiv
             Invalid,
         }
 
-        internal ref struct SymbolInfo
+        internal readonly struct SymbolInfo : IEquatable<SymbolInfo>
         {
-            private static SymbolInfo Invalid => new SymbolInfo { Symbol = SymbolPosition.Invalid };
+            private static SymbolInfo Invalid => new SymbolInfo(SymbolPosition.Invalid, default);
 
-            public SymbolPosition Symbol { get; private set; }
-            public CharBuffer Buffer { get; private set; }
+            private SymbolInfo(SymbolPosition symbol, CharBuffer buffer)
+            {
+                Symbol = symbol;
+                Buffer = buffer;
+            }
+
+            public SymbolPosition Symbol { get;}
+            public CharBuffer Buffer { get;  }
             public override string ToString() => Buffer;
 
-            private static bool IsInvalid(SymbolPosition symbol) => symbol == SymbolPosition.Invalid;
+            public bool Equals(SymbolInfo other) => base.Equals(other);
+
+            private static bool NotNone(SymbolPosition symbol) => symbol != SymbolPosition.None;
 
             public static SymbolInfo Resolve(CharBuffer buffer, NumberFormatInfo numberInfo)
             {
                 var symbol = SymbolPosition.None;
 
-                if (buffer.StartsWith(PercentSymbol))
-                {
-                    buffer.RemoveFromStart(1);
-                    symbol = SymbolPosition.PercentBefore;
-                }
-                else if (buffer.StartsWith(numberInfo.PercentSymbol))
+                if (buffer.StartsWith(numberInfo.PercentSymbol))
                 {
                     buffer.RemoveFromStart(numberInfo.PercentSymbol.Length);
+                    symbol = SymbolPosition.PercentBefore;
+                }
+                else if (buffer.StartsWith(numberInfo.PerMilleSymbol))
+                {
+                    buffer.RemoveFromStart(numberInfo.PerMilleSymbol.Length);
+                    symbol = SymbolPosition.PerMilleBefore;
+                }
+                else if (buffer.StartsWith(PercentSymbol))
+                {
+                    buffer.RemoveFromStart(1);
                     symbol = SymbolPosition.PercentBefore;
                 }
                 else if (buffer.StartsWith(PerMilleSymbol))
                 {
                     buffer.RemoveFromStart(1);
-                    symbol = SymbolPosition.PerMilleBefore;
-                }
-                else if (buffer.StartsWith(numberInfo.PerMilleSymbol))
-                {
-                    buffer.RemoveFromStart(numberInfo.PerMilleSymbol.Length);
                     symbol = SymbolPosition.PerMilleBefore;
                 }
                 else if (buffer.StartsWith(PerTenThousandSymbol))
@@ -57,33 +66,33 @@ namespace Qowaiv
                     symbol = SymbolPosition.PerTenThousandAfter;
                 }
 
-                if (buffer.EndsWith(PercentSymbol))
+                if (buffer.EndsWith(numberInfo.PercentSymbol))
                 {
-                    if (IsInvalid(symbol)) { return Invalid; }
-                    buffer.RemoveFromEnd(1);
+                    if (NotNone(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(numberInfo.PercentSymbol.Length);
                     symbol = SymbolPosition.PercentAfter;
                 }
-                else if (buffer.EndsWith(numberInfo.PercentSymbol))
+                else if (buffer.EndsWith(numberInfo.PerMilleSymbol))
                 {
-                    if (IsInvalid(symbol)) { return Invalid; }
-                    buffer.RemoveFromEnd(numberInfo.PercentSymbol.Length);
+                    if (NotNone(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(numberInfo.PerMilleSymbol.Length);
+                    symbol = SymbolPosition.PerMilleAfter;
+                }
+                else if (buffer.EndsWith(PercentSymbol))
+                {
+                    if (NotNone(symbol)) { return Invalid; }
+                    buffer.RemoveFromEnd(1);
                     symbol = SymbolPosition.PercentAfter;
                 }
                 else if (buffer.EndsWith(PerMilleSymbol))
                 {
-                    if (IsInvalid(symbol)) { return Invalid; }
+                    if (NotNone(symbol)) { return Invalid; }
                     buffer.RemoveFromEnd(1);
-                    symbol = SymbolPosition.PerMilleAfter;
-                }
-                else if (buffer.EndsWith(numberInfo.PerMilleSymbol))
-                {
-                    if (IsInvalid(symbol)) { return Invalid; }
-                    buffer.RemoveFromEnd(numberInfo.PerMilleSymbol.Length);
                     symbol = SymbolPosition.PerMilleAfter;
                 }
                 else if (buffer.EndsWith(PerTenThousandSymbol))
                 {
-                    if (IsInvalid(symbol)) { return Invalid; }
+                    if (NotNone(symbol)) { return Invalid; }
                     buffer.RemoveFromEnd(1);
                     symbol = SymbolPosition.PerTenThousandAfter;
                 }
@@ -94,7 +103,7 @@ namespace Qowaiv
                     buffer.Contains(numberInfo.PercentSymbol) ||
                     buffer.Contains(numberInfo.PerMilleSymbol)
                     ? Invalid
-                    : new SymbolInfo { Buffer = buffer, Symbol = symbol };
+                    : new SymbolInfo(symbol, buffer);
             }
         }
     }

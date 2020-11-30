@@ -604,7 +604,7 @@ namespace Qowaiv
             {
                 throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
             }
-            var dec = m_Value / Dividers[symbolInfo.Symbol];
+            var dec = m_Value / Factors[symbolInfo.Symbol];
             var str = dec.ToString(symbolInfo.Buffer, numberInfo);
 
             return symbolInfo.Symbol switch
@@ -672,7 +672,7 @@ namespace Qowaiv
                     decimal.TryParse(symbolInfo.Buffer, NumberStyles.Number, numberInfo,
                     out decimal dec))
                 {
-                    dec *= Dividers[symbolInfo.Symbol];
+                    dec *= Factors[symbolInfo.Symbol];
                     result = Create(dec);
                     return true;
                 }

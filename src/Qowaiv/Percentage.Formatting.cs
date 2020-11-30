@@ -29,7 +29,7 @@ namespace Qowaiv
             return info;
         }
 
-        internal static readonly Dictionary<SymbolPosition, decimal> Dividers = new Dictionary<SymbolPosition, decimal>
+        internal static readonly Dictionary<SymbolPosition, decimal> Factors = new Dictionary<SymbolPosition, decimal>
         {
             { SymbolPosition.None, 0.01m },
             { SymbolPosition.PercentBefore, 0.01m },

@@ -610,12 +610,12 @@ namespace Qowaiv
             return symbolInfo.Symbol switch
             {
                 SymbolPosition.PercentBefore => numberInfo.PercentSymbol + str,
-                SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
                 SymbolPosition.PerMilleBefore => numberInfo.PerMilleSymbol + str,
-                SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
                 SymbolPosition.PerTenThousandBefore => PerTenThousandSymbol + str,
+                SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
+                SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
                 SymbolPosition.PerTenThousandAfter => str + PerTenThousandSymbol,
-                _ => symbolInfo.Buffer,
+                _ => str,
             };
         }
 

@@ -63,7 +63,7 @@ namespace Qowaiv
                 else if (buffer.StartsWith(PerTenThousandSymbol))
                 {
                     buffer.RemoveFromStart(1);
-                    symbol = SymbolPosition.PerTenThousandAfter;
+                    symbol = SymbolPosition.PerTenThousandBefore;
                 }
 
                 if (buffer.EndsWith(numberInfo.PercentSymbol))

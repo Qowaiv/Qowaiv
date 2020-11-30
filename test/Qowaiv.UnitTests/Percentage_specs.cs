@@ -241,6 +241,33 @@ namespace Percentage_specs
     public class Has_custom_formatting
     {
         [Test]
+        public void _default()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Assert.AreEqual("17.51%", Svo.Percentage.ToString());
+            }
+        }
+
+        [Test]
+        public void with_null_pattern_equal_to_default()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Assert.AreEqual(Svo.Percentage.ToString(), Svo.Percentage.ToString(default(string)));
+            }
+        }
+
+        [Test]
+        public void with_string_empty_pattern_equal_to_default()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Assert.AreEqual(Svo.Percentage.ToString(), Svo.Percentage.ToString(string.Empty));
+            }
+        }
+
+        [Test]
         public void custom_format_provider_is_applied()
         {
             var formatted = Svo.Percentage.ToString("0.000%", new UnitTestFormatProvider());
@@ -249,6 +276,13 @@ namespace Percentage_specs
 
         [TestCase("en-GB", null, "17.51%", "17.51%")]
         [TestCase("nl-BE", "0.000%", "17.51%", "17,510%")]
+        [TestCase("en", "%0.###", "17.51%", "%17.51")]
+        [TestCase("en", "‰0.###", "17.51%", "‰175.1")]
+        [TestCase("en", "‱0.###", "17.51%", "‱1751")]
+        [TestCase("en", "0.###%", "17.51%", "17.51%")]
+        [TestCase("en", "0.###‰", "17.51%", "175.1‰")]
+        [TestCase("en", "0.###‱", "17.51%", "1751‱")]
+        [TestCase("en", "0.###", "17.51%", "17.51")]
         public void culture_dependent(CultureInfo culture, string format, Percentage svo, string expected)
         {
             using (culture.Scoped())
@@ -266,6 +300,13 @@ namespace Percentage_specs
             }
         }
     
+        [TestCase("fr-FR", "%")]
+        [TestCase("fa-IR", "٪")]
+        public void with_percent_sign_before_for(CultureInfo culture, string sign)
+        {
+            StringAssert.StartsWith(sign, Svo.Percentage.ToString(culture));
+        }
+
         [Test]
         public void using_per_mille_sign()
         {
@@ -282,6 +323,15 @@ namespace Percentage_specs
             {
                 Assert.AreEqual("1751‱", Svo.Percentage.ToString("PT"));
             }
+        }
+    }
+
+    public class Formatting_is_invalid
+    {
+        [Test]
+        public void when_multiple_symbols_are_specified()
+        {
+            Assert.Catch<FormatException>(() => Svo.Percentage.ToString("0%%"));
         }
     }
 
@@ -1015,11 +1065,12 @@ namespace Percentage_specs
 
     public class Can_get_maximum_of
     {
-        [Test]
-        public void two_values()
+        [TestCase("12%", "12%", "5%")]
+        [TestCase("15%", "5%", "15%")]
+        [TestCase("12%", "12%", "12%")]
+        public void two_values(Percentage max, Percentage p0, Percentage p1)
         {
-            var max = Percentage.Max(15.Percent(), 66.Percent());
-            Assert.AreEqual(66.Percent(), max);
+            Assert.AreEqual(max, Percentage.Max(p0, p1));
         }
 
         [Test]
@@ -1032,11 +1083,12 @@ namespace Percentage_specs
 
     public class Can_get_minimum_of
     {
-        [Test]
-        public void two_values()
+        [TestCase("5%", "12%", "5%")]
+        [TestCase("5%", "5%", "15%")]
+        [TestCase("5%", "5%", "5%")]
+        public void two_values(Percentage min, Percentage p0, Percentage p1)
         {
-            var min = Percentage.Min(15.Percent(), 66.Percent());
-            Assert.AreEqual(15.Percent(), min);
+            Assert.AreEqual(min, Percentage.Min(p0, p1));
         }
 
         [Test]

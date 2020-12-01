@@ -2,6 +2,7 @@
 using Qowaiv;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
+using Qowaiv.Json;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.UnitTests;
@@ -9,6 +10,8 @@ using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace Percentage_specs
@@ -1235,6 +1238,43 @@ namespace Percentage_specs
             IXmlSerializable obj = Svo.Percentage;
             Assert.IsNull(obj.GetSchema());
         }
+    }
+
+    public class Is_Open_API_data_type
+    {
+        internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Percentage)).FirstOrDefault();
+
+        [Test]
+        public void with_description()
+        {
+            Assert.AreEqual(
+                "Ratio expressed as a fraction of 100 denoted using the " +
+                "percent sign '%', for example 13.76%.",
+                Attribute.Description);
+        }
+
+        [Test]
+        public void has_type()
+        {
+            Assert.AreEqual("string", Attribute.Type);
+        }
+
+        [Test]
+        public void has_format()
+        {
+            Assert.AreEqual("percentage", Attribute.Format);
+        }
+
+
+        [TestCase("17.51%")]
+        [TestCase("-4.1%")]
+        [TestCase("-0.1%")]
+        [TestCase("31%")]
+        public void pattern_matches(string input)
+        {
+            Assert.IsTrue(Regex.IsMatch(input, Attribute.Pattern));
+        }
+
     }
 
     public class Supports_binary_serialization

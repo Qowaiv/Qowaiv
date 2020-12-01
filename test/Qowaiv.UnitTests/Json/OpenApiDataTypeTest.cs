@@ -37,11 +37,11 @@ namespace Qowaiv.UnitTests.Json
         {
             var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly)
                 .OrderBy(attr => attr.DataType.Namespace)
-                .ThenBy(attr=>attr.DataType.Name);
+                .ThenBy(attr => attr.DataType.Name);
 
             var all = new Dictionary<string, OpenApiDataType>();
 
-            foreach(var attribute in attributes)
+            foreach (var attribute in attributes)
             {
                 var name = $"{attribute.DataType.Namespace}.{attribute.DataType.Name}".Replace("Qowaiv.", "", StringComparison.InvariantCulture);
 

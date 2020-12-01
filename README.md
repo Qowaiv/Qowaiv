@@ -694,7 +694,7 @@ and if the data type is nullable, all when applicable.
     "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
     "type": "string",
     "format": "percentage",
-    "pattern": "-?[0-9]+(\\.[0-9])?%",
+    "pattern": "-?[0-9]+(\\.[0-9]+)?%",
     "nullabe": false
   },
   "PostalCode": {

@@ -4,6 +4,7 @@ namespace Qowaiv.UnitTests
 {
     public static class Svo
     {
+        public static readonly Month Month = Month.February;
         public static readonly Percentage Percentage = 17.51.Percent();
         public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
 

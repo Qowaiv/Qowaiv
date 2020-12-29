@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Json;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.UnitTests;
@@ -652,6 +653,38 @@ Actual:   [{(string.Join(", ", act))}]");
             Assert.IsNull(obj.GetSchema());
         }
     }
+
+    public class Is_Open_API_data_type
+    {
+        internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Uuid)).FirstOrDefault();
+
+        [Test]
+        public void with_description()
+        {
+            Assert.AreEqual(
+                "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.",
+                Attribute.Description);
+        }
+
+        [Test]
+        public void has_type()
+        {
+            Assert.AreEqual("string", Attribute.Type);
+        }
+
+        [Test]
+        public void has_format()
+        {
+            Assert.AreEqual("uuid-base64", Attribute.Format);
+        }
+
+        [Test]
+        public void pattern_is_null()
+        {
+            Assert.IsNull(Attribute.Pattern);
+        }
+    }
+
 
     public class Supports_binary_serialization
     {

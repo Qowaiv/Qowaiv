@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Json;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.UnitTests;
@@ -8,6 +9,7 @@ using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace YesNo_specs
@@ -538,6 +540,37 @@ namespace YesNo_specs
         {
             IXmlSerializable obj = Svo.YesNo;
             Assert.IsNull(obj.GetSchema());
+        }
+    }
+
+    public class Is_Open_API_data_type
+    {
+        internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(YesNo)).FirstOrDefault();
+
+        [Test]
+        public void with_description()
+        {
+            Assert.AreEqual(
+                "Yes-No notation.",
+                Attribute.Description);
+        }
+
+        [Test]
+        public void has_type()
+        {
+            Assert.AreEqual("string", Attribute.Type);
+        }
+
+        [Test]
+        public void has_format()
+        {
+            Assert.AreEqual("yes-no", Attribute.Format);
+        }
+
+        [Test]
+        public void pattern_is_null()
+        {
+            Assert.IsNull(Attribute.Pattern);
         }
     }
 

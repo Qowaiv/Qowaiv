@@ -310,8 +310,6 @@ namespace Qowaiv
             && val.Value >= January.m_Value
             && val.Value <= December.m_Value;
 
-        #region Lookup
-
         private static void AddCulture(CultureInfo culture)
         {
             lock (locker)
@@ -373,7 +371,5 @@ namespace Qowaiv
 
         /// <summary>The locker for adding a culture.</summary>
         private static readonly object locker = new object();
-
-        #endregion
     }
 }

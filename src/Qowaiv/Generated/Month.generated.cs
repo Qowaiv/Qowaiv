@@ -8,6 +8,7 @@
 // ------------------------------------------------------------------------------
 
 #define NotGetHashCodeClass
+#define NoComparisonOperators
 namespace Qowaiv
 {
     using System;

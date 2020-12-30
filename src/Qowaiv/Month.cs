@@ -77,26 +77,22 @@ namespace Qowaiv
         };
 
         /// <summary>Gets the full name of the month.</summary>
-        public string FullName => GetFullName(CultureInfo.CurrentCulture);
+        public string FullName => GetFullName(null);
 
         /// <summary>Gets the short name of the month.</summary>
-        public string ShortName => GetShortName(CultureInfo.CurrentCulture);
+        public string ShortName => GetShortName(null);
 
         /// <summary>Gets the full name of the month.</summary>
         public string GetFullName(IFormatProvider formatProvider)
-        {
-            return IsEmptyOrUnknown()
-                ? ToDefaultString()
-                : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetMonthName(m_Value);
-        }
+            => IsEmptyOrUnknown()
+            ? ToDefaultString()
+            : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetMonthName(m_Value);
 
         /// <summary>Gets the short name of the month.</summary>
         public string GetShortName(IFormatProvider formatProvider)
-        {
-            return IsEmptyOrUnknown()
-                ? ToDefaultString()
-                : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
-        }
+            => IsEmptyOrUnknown()
+            ? ToDefaultString()
+            : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
 
         /// <summary>Returns the number of days for the month.</summary>
         /// <param name="year">
@@ -106,12 +102,9 @@ namespace Qowaiv
         /// If the year of month is empty or unknown -1 is returned.
         /// </remarks>
         public int Days(Year year)
-        {
-            return
-                year.IsEmptyOrUnknown() || IsEmptyOrUnknown()
-                ? -1
-                : DateTime.DaysInMonth((int)year, m_Value);
-        }
+            => year.IsEmptyOrUnknown() || IsEmptyOrUnknown()
+            ? -1
+            : DateTime.DaysInMonth((int)year, m_Value);
 
         /// <summary>Deserializes the month from a JSON number.</summary>
         /// <param name="json">
@@ -187,14 +180,29 @@ namespace Qowaiv
 
         /// <summary>Casts a month to a <see cref="string"/>.</summary>
         public static explicit operator string(Month val) => val.ToString(CultureInfo.CurrentCulture);
+
         /// <summary>Casts a <see cref="string"/> to a month.</summary>
         public static explicit operator Month(string str) => Cast.String<Month>(TryParse, str);
 
-
         /// <summary>Casts a month to a System.Int32.</summary>
         public static explicit operator int(Month val) => val.m_Value;
+
         /// <summary>Casts an System.Int32 to a month.</summary>
         public static implicit operator Month(int val) => Cast.Primitive<int, Month>(TryCreate, val);
+
+        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
+        public static bool operator <(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) < 0;
+
+        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
+        public static bool operator >(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) > 0;
+
+        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
+        public static bool operator <=(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) <= 0;
+
+        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
+        public static bool operator >=(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) >= 0;
+
+        private static bool HaveValue(Month l, Month r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
 
         /// <summary>Converts the string to a month.
         /// A return value indicates whether the conversion succeeded.
@@ -224,9 +232,9 @@ namespace Qowaiv
                 result = Unknown;
                 return true;
             }
-            else if (buffer.Matches(Pattern))
+            else if (byte.TryParse(s, NumberStyles.None, formatProvider, out var n) && IsValid(n))
             {
-                result = new Month(byte.Parse(s, formatProvider));
+                result = new Month(n);
                 return true;
             }
             else
@@ -253,13 +261,9 @@ namespace Qowaiv
         /// val is not a valid month.
         /// </exception>
         public static Month Create(int? val)
-        {
-            if (TryCreate(val, out Month result))
-            {
-                return result;
-            }
-            throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionMonth);
-        }
+            => TryCreate(val, out Month result)
+            ? result
+            : throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionMonth);
 
         /// <summary>Creates a month from a Byte.
         /// A return value indicates whether the conversion succeeded.
@@ -271,13 +275,9 @@ namespace Qowaiv
         /// A month if the creation was successfully, otherwise Month.Empty.
         /// </returns >
         public static Month TryCreate(int? val)
-        {
-            if (TryCreate(val, out Month result))
-            {
-                return result;
-            }
-            return Empty;
-        }
+            => TryCreate(val, out Month result)
+            ? result
+            : default;
 
         /// <summary>Creates a month from a Byte.
         /// A return value indicates whether the creation succeeded.
@@ -295,27 +295,20 @@ namespace Qowaiv
         {
             result = Empty;
 
-            if (!val.HasValue)
-            {
-                return true;
-            }
-            if (IsValid(val.Value))
+            if (!val.HasValue) { return true; }
+            else if (IsValid(val.Value))
             {
                 result = new Month((byte)val.Value);
                 return true;
             }
-            return false;
+            else { return false; }
         }
 
         /// <summary>Returns true if the val represents a valid month, otherwise false.</summary>
         public static bool IsValid(int? val)
-        {
-            return val.HasValue
-                && val.Value >= January.m_Value
-                && val.Value <= December.m_Value;
-        }
-
-        #region Lookup
+            => val.HasValue
+            && val.Value >= January.m_Value
+            && val.Value <= December.m_Value;
 
         private static void AddCulture(CultureInfo culture)
         {
@@ -378,7 +371,5 @@ namespace Qowaiv
 
         /// <summary>The locker for adding a culture.</summary>
         private static readonly object locker = new object();
-
-        #endregion
     }
 }

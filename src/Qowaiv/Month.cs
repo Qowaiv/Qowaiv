@@ -77,22 +77,22 @@ namespace Qowaiv
         };
 
         /// <summary>Gets the full name of the month.</summary>
-        public string FullName => GetFullName(CultureInfo.CurrentCulture);
+        public string FullName => GetFullName(null);
 
         /// <summary>Gets the short name of the month.</summary>
-        public string ShortName => GetShortName(CultureInfo.CurrentCulture);
+        public string ShortName => GetShortName(null);
 
         /// <summary>Gets the full name of the month.</summary>
         public string GetFullName(IFormatProvider formatProvider)
             => IsEmptyOrUnknown()
             ? ToDefaultString()
-            : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetMonthName(m_Value);
+            : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetMonthName(m_Value);
 
         /// <summary>Gets the short name of the month.</summary>
         public string GetShortName(IFormatProvider formatProvider)
             => IsEmptyOrUnknown()
             ? ToDefaultString()
-            : (formatProvider as CultureInfo ?? CultureInfo.InvariantCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
+            : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
 
         /// <summary>Returns the number of days for the month.</summary>
         /// <param name="year">
@@ -295,16 +295,13 @@ namespace Qowaiv
         {
             result = Empty;
 
-            if (!val.HasValue)
-            {
-                return true;
-            }
-            if (IsValid(val.Value))
+            if (!val.HasValue) { return true; }
+            else if (IsValid(val.Value))
             {
                 result = new Month((byte)val.Value);
                 return true;
             }
-            return false;
+            else { return false; }
         }
 
         /// <summary>Returns true if the val represents a valid month, otherwise false.</summary>

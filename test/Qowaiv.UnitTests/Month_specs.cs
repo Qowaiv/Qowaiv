@@ -43,8 +43,10 @@ namespace Month_specs
 
     public class Days
     {
-        [TestCase(28, "Feburary", 1999)]
-        [TestCase(29, "Feburary", 2020)]
+        [TestCase(-1, "", 1999)]
+        [TestCase(-1, "February", "?")]
+        [TestCase(28, "February", 1999)]
+        [TestCase(29, "February", 2020)]
         [TestCase(31, "January", 2020)]
         [TestCase(30, "November", 2020)]
         public void per_year(int days, Month month, Year year)
@@ -53,39 +55,61 @@ namespace Month_specs
         }
     }
 
-    public class Name
+    public class Short_name
     {
         [Test]
-        public void short_name_picks_current_culture()
+        public void is_string_empty_for_empty()
+        {
+            Assert.AreEqual(string.Empty, Month.Empty.ShortName);
+        }
+        [Test]
+        public void is_question_mark_for_unknown()
+        {
+            Assert.AreEqual("?", Month.Unknown.ShortName);
+        }
+        [Test]
+        public void picks_current_culture()
         {
             using (TestCultures.Nl_BE.Scoped())
             {
-                Assert.AreEqual("feb", Svo.Month.ShortName);
+                Assert.AreEqual("feb.", Svo.Month.ShortName);
             }
         }
-
         [Test]
-        public void full_name_picks_current_culture()
+        public void supports_custom_culture()
+        {
+            Assert.AreEqual("feb.", Svo.Month.GetShortName(TestCultures.Nl_BE));
+        }
+    }
+
+    public class Full_name
+    {
+        [Test]
+        public void is_string_empty_for_empty()
+        {
+            Assert.AreEqual(string.Empty, Month.Empty.FullName);
+        }
+        [Test]
+        public void is_question_mark_for_unknown()
+        {
+            Assert.AreEqual("?", Month.Unknown.FullName);
+        }
+        [Test]
+        public void picks_current_culture()
         {
             using (TestCultures.Nl_BE.Scoped())
             {
                 Assert.AreEqual("februari", Svo.Month.FullName);
             }
         }
-
         [Test]
-        public void get_short_name_supports_custom_culture()
-        {
-            Assert.AreEqual("feb", Svo.Month.GetShortName(TestCultures.Nl_BE));
-        }
-
-        [Test]
-        public void get_full_name_supports_custom_culture()
+        public void supports_custom_culture()
         {
             Assert.AreEqual("februari", Svo.Month.GetFullName(TestCultures.Nl_BE));
         }
+    }
 
-        public class Is_valid_for
+    public class Is_valid_for
     {
         [TestCase("?")]
         [TestCase("unknown")]
@@ -257,6 +281,19 @@ namespace Month_specs
         }
     }
 
+    public class Can_be_created
+    {
+        [Test]
+        public void with_TryCreate_returns_SVO()
+        {
+            Assert.AreEqual(Svo.Month, Month.TryCreate(2));
+        }
+        [Test]
+        public void with_TryCreate_returns_Empty()
+        {
+            Assert.AreEqual(Month.Empty, Month.TryCreate(null));
+        }
+    }
     public class Has_custom_formatting
     {
         [Test]
@@ -354,14 +391,14 @@ namespace Month_specs
         [Test]
         public void can_be_sorted_using_compare()
         {
-            var sorted = new []
-            { 
-                default, 
+            var sorted = new[]
+            {
+                default,
                 default,
                 Month.January,
                 Month.February,
-                Month.March, 
-                Month.Unknown, 
+                Month.March,
+                Month.Unknown,
             };
             var list = new List<Month> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
             list.Sort();
@@ -494,8 +531,8 @@ namespace Month_specs
     public class Supports_JSON_serialization
     {
         [TestCase("?", "unknown")]
-        [TestCase("Febuary", 2.0)]
-        [TestCase("Febuary", 2L)]
+        [TestCase("February", 2.0)]
+        [TestCase("February", 2L)]
         public void convention_based_deserialization(Month expected, object json)
         {
             var actual = JsonTester.Read<Month>(json);
@@ -513,6 +550,7 @@ namespace Month_specs
         [TestCase("Invalid input", typeof(FormatException))]
         [TestCase("2017-06-11", typeof(FormatException))]
         [TestCase(-1L, typeof(ArgumentOutOfRangeException))]
+        [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
         {
             var exception = Assert.Catch(() => JsonTester.Read<Month>(json));

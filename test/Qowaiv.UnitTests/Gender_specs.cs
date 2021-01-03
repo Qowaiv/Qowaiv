@@ -16,6 +16,7 @@ namespace Gender_specs
 {
     public class With_domain_logic
     {
+        [TestCase(false, "Male")]
         [TestCase(false, "Female")]
         [TestCase(false, "?")]
         [TestCase(true, "")]
@@ -24,6 +25,7 @@ namespace Gender_specs
             Assert.AreEqual(result, svo.IsEmpty());
         }
 
+        [TestCase(false, "Male")]
         [TestCase(false, "Female")]
         [TestCase(true, "?")]
         [TestCase(true, "")]
@@ -32,12 +34,40 @@ namespace Gender_specs
             Assert.AreEqual(result, svo.IsEmptyOrUnknown());
         }
 
+        [TestCase(false, "Male")]
         [TestCase(false, "Female")]
         [TestCase(true, "?")]
         [TestCase(false, "")]
         public void IsUnknown_returns(bool result, Gender svo)
         {
             Assert.AreEqual(result, svo.IsUnknown());
+        }
+
+        [TestCase(true, "Male")]
+        [TestCase(true, "Female")]
+        [TestCase(false, "?")]
+        [TestCase(false, "")]
+        public void IsMaleOrFemale_returns(bool result, Gender svo)
+        {
+            Assert.AreEqual(result, svo.IsMaleOrFemale());
+        }
+    }
+
+    public class Display_name
+    {
+        [Test]
+        public void for_current_culture_by_default()
+        {
+            using (TestCultures.Nl_BE.Scoped())
+            {
+                Assert.AreEqual("Vrouwelijk", Svo.Gender.DisplayName);
+            }
+        }
+
+        [Test]
+        public void for_custom_culture_if_specified()
+        {
+            Assert.AreEqual("Mujer", Svo.Gender.GetDisplayName(TestCultures.Es_EC));
         }
     }
 
@@ -302,51 +332,17 @@ namespace Gender_specs
         [Test]
         public void can_be_sorted_using_compare()
         {
-            var sorted = new [] 
+            var sorted = new[]
             {
-                default, 
                 default,
+                default,
+                Gender.Unknown,
                 Gender.Male,
-                Gender.Female, 
-                Gender.Unknown, 
+                Gender.Female,
             };
             var list = new List<Gender> { sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
             list.Sort();
             Assert.AreEqual(sorted, list);
-        }
-
-        [Test]
-        public void by_operators_for_different_values()
-        {
-            Gender smaller = Gender.Parse("Female");
-            Gender bigger = Gender.Parse("biggerValue");
-            Assert.IsTrue(smaller < bigger);
-            Assert.IsTrue(smaller <= bigger);
-            Assert.IsFalse(smaller > bigger);
-            Assert.IsFalse(smaller >= bigger);
-        }
-
-        [Test]
-        public void by_operators_for_equal_values()
-        {
-            Gender left = Gender.Parse("Female");
-            Gender right = Gender.Parse("Female");
-            Assert.IsFalse(left < right);
-            Assert.IsTrue(left <= right);
-            Assert.IsFalse(left > right);
-            Assert.IsTrue(left >= right);
-        }
-
-        [TestCase("", "Female")]
-        [TestCase("?", "Female")]
-        [TestCase("Female", "")]
-        [TestCase("Female", "?")]
-        public void by_operators_for_empty_or_unknown_always_false(Gender l, Gender r)
-        {
-            Assert.IsFalse(l <= r);
-            Assert.IsFalse(l < r);
-            Assert.IsFalse(l > r);
-            Assert.IsFalse(l >= r);
         }
     }
 
@@ -371,6 +367,36 @@ namespace Gender_specs
         {
             var casted = (byte)Svo.Gender;
             Assert.AreEqual((byte)2, casted);
+        }
+
+        [Test]
+        public void explicitly_to_int()
+        {
+            var casted = (int)Svo.Gender;
+            Assert.AreEqual(2, casted);
+        }
+
+        [TestCase(2, "Female")]
+        [TestCase(null, "?")]
+        public void explicitly_to_nullable_int(int casted, Gender gender)
+        {
+            Assert.AreEqual(casted, (int?)gender);
+        }
+
+        [TestCase("Female", 2)]
+        [TestCase("", null)]
+        public void implictly_from_nullable_int(Gender casted, int? value)
+        {
+            Gender gender = value;
+            Assert.AreEqual(casted, gender);
+        }
+
+        [TestCase("Female", 2)]
+        [TestCase("?", 0)]
+        public void implictly_from_int(Gender casted, int value)
+        {
+            Gender gender = value;
+            Assert.AreEqual(casted, gender);
         }
     }
 
@@ -422,6 +448,8 @@ namespace Gender_specs
     public class Supports_JSON_serialization
     {
         [TestCase("?", "unknown")]
+        [TestCase("Female", 2L)]
+        [TestCase("Female", 2d)]
         public void convention_based_deserialization(Gender expected, object json)
         {
             var actual = JsonTester.Read<Gender>(json);
@@ -429,6 +457,7 @@ namespace Gender_specs
         }
 
         [TestCase(null, "")]
+
         public void convention_based_serialization(object expected, Gender svo)
         {
             var serialized = JsonTester.Write(svo);
@@ -438,6 +467,7 @@ namespace Gender_specs
         [TestCase("Invalid input", typeof(FormatException))]
         [TestCase("2017-06-11", typeof(FormatException))]
         [TestCase(5L, typeof(ArgumentOutOfRangeException))]
+        [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
         {
             var exception = Assert.Catch(() => JsonTester.Read<Gender>(json));
@@ -447,11 +477,12 @@ namespace Gender_specs
 
     public class Supports_XML_serialization
     {
-        [Test]
-        public void using_XmlSerializer_to_serialize()
+
+        [TestCase("", "")]
+        [TestCase("Female", "F")]
+        public void using_XmlSerializer_to_serialize(string xml, Gender gender)
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Gender);
-            Assert.AreEqual("Female", xml);
+            Assert.AreEqual(xml, SerializationTest.XmlSerialize(gender));
         }
 
         [Test]

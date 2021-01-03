@@ -22,10 +22,7 @@ namespace Qowaiv
         /// <param name="val">
         /// The string value to test.
         /// </param>
-        public static bool IsUnknown(string val)
-        {
-            return IsUnknown(val, CultureInfo.CurrentCulture);
-        }
+        public static bool IsUnknown(string val) => IsUnknown(val, null);
 
         /// <summary>Returns true if the string represents unknown, otherwise false.</summary>
         /// <param name="val">
@@ -37,31 +34,30 @@ namespace Qowaiv
         public static bool IsUnknown(string val, CultureInfo culture)
         {
             if (string.IsNullOrEmpty(val)) { return false; }
-
-            var c = culture ?? CultureInfo.InvariantCulture;
-
-            if (!StringValues.TryGetValue(c, out string[] values))
+            else
             {
-                lock (addCulturelocker)
+                var c = culture ?? CultureInfo.CurrentCulture;
+                if (!Strings.TryGetValue(c, out string[] values))
                 {
-                    if (!StringValues.TryGetValue(c, out values))
+                    lock (addCulture)
                     {
-                        values = ResourceManager
-                            .GetString("Values", c)
-                            .Split(';')
-                            .Select(v => v.ToUpper(c))
-                            .ToArray();
-
-                        StringValues[c] = values;
+                        if (!Strings.TryGetValue(c, out values))
+                        {
+                            values = ResourceManager
+                                .GetString("Values", c)
+                                .Split(';')
+                                .Select(v => v.ToUpper(c))
+                                .ToArray();
+                            Strings[c] = values;
+                        }
                     }
                 }
-            }
-            return
-                values.Contains(val.ToUpper(c)) ||
+                return values.Contains(val.ToUpper(c)) ||
                 (
                     !c.Equals(CultureInfo.InvariantCulture) &&
-                    StringValues[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant())
+                    Strings[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant())
                 );
+            }
         }
 
         /// <summary>Gets the value that represents set but unknown.</summary>
@@ -79,50 +75,36 @@ namespace Qowaiv
         /// </remarks>
         public static object Value(Type type)
         {
-            if(type is null)
+            if (type is null) { return null; }
+            else if (Values.TryGetValue(type, out object unknown)) { return unknown; }
+            else
             {
-                return null;
-            }
-            if (UnknownValues.TryGetValue(type, out object unknown))
-            {
+                lock (AddUnknown)
+                {
+                    if (!Values.TryGetValue(type, out unknown))
+                    {
+                        var field = type.GetField(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
+                        if (field?.FieldType == type) { unknown = field.GetValue(null); }
+                        else
+                        {
+                            var property = type.GetProperty(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
+                            if (property?.PropertyType == type) { unknown = property.GetValue(null); }
+                        }
+                        Values[type] = unknown;
+                    }
+                }
                 return unknown;
             }
-            lock (addUknownValuelocker)
-            {
-                if (!UnknownValues.TryGetValue(type, out unknown))
-                {
-                    var field = type.GetField(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                    if (field?.FieldType == type)
-                    {
-                        unknown = field.GetValue(null);
-                    }
-                    else
-                    {
-                        var property = type.GetProperty(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                        if (property?.PropertyType == type)
-                        {
-                            unknown = property.GetValue(null);
-                        }
-                    }
-                    UnknownValues[type] = unknown;
-                }
-            }
-            return unknown;
         }
 
         /// <summary>The resource manager managing the culture based string values.</summary>
-        private readonly static Dictionary<CultureInfo, string[]> StringValues = new Dictionary<CultureInfo, string[]>
+        private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
+        private readonly static Dictionary<CultureInfo, string[]> Strings = new Dictionary<CultureInfo, string[]>
         {
             { CultureInfo.InvariantCulture, new []{ "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
         };
-
-        private static readonly Dictionary<Type, object> UnknownValues = new Dictionary<Type, object>();
-
-        /// <summary>The resource manager managing the culture based string values.</summary>
-        private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
-
-        /// <summary>The locker for adding a culture.</summary>
-        private static readonly object addCulturelocker = new object();
-        private static readonly object addUknownValuelocker = new object();
+        private static readonly Dictionary<Type, object> Values = new Dictionary<Type, object>();
+        private static readonly object addCulture = new object();
+        private static readonly object AddUnknown = new object();
     }
 }

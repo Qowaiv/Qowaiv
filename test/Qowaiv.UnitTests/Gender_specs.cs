@@ -80,6 +80,14 @@ namespace Gender_specs
             Assert.IsTrue(Gender.IsValid(input));
         }
 
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(9)]
+        public void numbers(int? number)
+        {
+            Assert.IsTrue(Gender.IsValid(number));
+        }
+
         [TestCase("Female", "nl")]
         [TestCase("Female", "nl")]
         public void strings_representing_SVO(string input, CultureInfo culture)
@@ -112,6 +120,15 @@ namespace Gender_specs
         public void garbage()
         {
             Assert.IsFalse(Gender.IsValid("garbage"));
+        }
+
+        [TestCase(null)]
+        [TestCase(0)]
+        [TestCase(3)]
+        [TestCase(10)]
+        public void numbers(int? number)
+        {
+            Assert.IsFalse(Gender.IsValid(number));
         }
     }
 
@@ -311,9 +328,10 @@ namespace Gender_specs
     public class Is_comparable
     {
         [Test]
-        public void to_null()
+        public void to_null_is_1()
         {
-            Assert.AreEqual(4, Svo.Gender.CompareTo(null));
+            object obj = null;
+            Assert.AreEqual(1, Svo.Gender.CompareTo(obj));
         }
 
         [Test]

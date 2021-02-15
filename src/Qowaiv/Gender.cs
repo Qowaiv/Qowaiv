@@ -75,7 +75,7 @@ namespace Qowaiv
         /// The culture of the display name.
         /// </param>
         /// <returns></returns>
-        public string GetDisplayName(CultureInfo culture) => GetResourceString("", culture ?? CultureInfo.CurrentCulture);
+        public string GetDisplayName(CultureInfo culture) => GetResourceString(string.Empty, culture);
 
         /// <summary>Converts the Gender to an int.</summary>
         private int ToInt32() => m_Value >> 1;
@@ -135,12 +135,14 @@ namespace Qowaiv
             {
                 return formatted;
             }
+            else
+            {
+                // If no format specified, use the default format.
+                if (string.IsNullOrEmpty(format)) { format = "f"; }
 
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { format = "f"; }
-
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
+                // Apply the format.
+                return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
+            }
         }
 
         /// <summary>The format token instructions.</summary>
@@ -282,7 +284,10 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
-        public static bool IsValid(int? val) => val.HasValue && FromInt32s.ContainsKey(val.Value);
+        public static bool IsValid(int? val)
+            => val.HasValue
+            && val != 0
+            && FromInt32s.ContainsKey(val.Value);
 
         private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
 
@@ -294,9 +299,7 @@ namespace Qowaiv
         /// The format provider.
         /// </param>
         private string GetResourceString(string prefix, IFormatProvider formatProvider)
-        {
-            return GetResourceString(prefix, formatProvider as CultureInfo);
-        }
+            => GetResourceString(prefix, formatProvider as CultureInfo);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">
@@ -306,10 +309,9 @@ namespace Qowaiv
         /// The culture.
         /// </param>
         private string GetResourceString(string prefix, CultureInfo culture)
-        {
-            if (IsEmpty()) { return string.Empty; }
-            return ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
-        }
+            => IsEmpty()
+            ? string.Empty
+            : ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture);
 
         /// <summary>Gets the valid values.</summary>
         private static readonly Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>

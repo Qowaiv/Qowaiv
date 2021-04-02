@@ -50,6 +50,18 @@ namespace Obsolete_code
                 Assert.AreEqual("1751‱", Svo.Percentage.ToPerTenThousandMarkString());
             }
         }
+
+        [Test]
+        public void Gender_LessThen() => Assert.IsFalse(Svo.Gender < Gender.Female);
+        
+        [Test]
+        public void Gender_LessThenOrEqual() => Assert.IsTrue(Svo.Gender <= Gender.Female);
+
+        [Test]
+        public void Gender_GreaterThen() => Assert.IsFalse(Svo.Gender > Gender.Female);
+
+        [Test]
+        public void Gender_GreaterThenOrEqual() => Assert.IsTrue(Svo.Gender >= Gender.Female);
     }
 
     [Obsolete("Will become private when the next major version is released.")]

@@ -4,26 +4,6 @@ using System.Globalization;
 
 namespace Unknown_specs
 {
-    public class Not_unknown
-    {
-        [Test]
-        public void Null()
-        {
-            Assert.IsFalse(Unknown.IsUnknown(null));
-        }
-
-        [Test]
-        public void string_empty()
-        {
-            Assert.IsFalse(Unknown.IsUnknown(string.Empty));
-        }
-
-        [Test]
-        public void string_not_representing_unknown_for_specified_culture()
-        {
-            Assert.IsFalse(Unknown.IsUnknown("onbekend", CultureInfo.InvariantCulture));
-        }
-    }
     public class Is_unknown
     {
         [Test]
@@ -44,7 +24,29 @@ namespace Unknown_specs
             Assert.IsTrue(Unknown.IsUnknown("Não SABe", new CultureInfo("pt-PT")));
         }
     }
-    public class Unknown_value_can_be_resoved_for
+
+    public class Is_not_unknown
+    {
+        [Test]
+        public void Null()
+        {
+            Assert.IsFalse(Unknown.IsUnknown(null));
+        }
+
+        [Test]
+        public void string_empty()
+        {
+            Assert.IsFalse(Unknown.IsUnknown(string.Empty));
+        }
+
+        [Test]
+        public void string_not_representing_unknown_for_specified_culture()
+        {
+            Assert.IsFalse(Unknown.IsUnknown("onbekend", CultureInfo.InvariantCulture));
+        }
+    }
+   
+    public class Can_be_resoved_for
     {
         [Test]
         public void value_type_with_unknown_value()
@@ -62,17 +64,28 @@ namespace Unknown_specs
             public static ClassWithUnknownValue Unknown { get; } = new ClassWithUnknownValue();
         }
     }
-    public class Unknown_value_can_not_be_resoved_for
+    public class Can_not_be_resoved_for
     {
         [Test]
-        public void for_value_type_without_unknown_value()
-        {
-            Assert.IsNull(Unknown.Value(typeof(Uuid)));
-        }
+        public void null_type()
+            => Assert.IsNull(Unknown.Value(null));
+
         [Test]
-        public void for_reference_type_without_unknown_value()
+        public void value_type_without_unknown_value()
+            => Assert.IsNull(Unknown.Value(typeof(Uuid)));
+
+        [Test]
+        public void value_type_with_unknown_value_of_wrong_type()
+            => Assert.IsNull(Unknown.Value(typeof(ClassWithUnknownValueOfWrongType)));
+
+        [Test]
+        public void reference_type_without_unknown_value()
+            => Assert.IsNull(Unknown.Value(typeof(object)));
+
+        private class ClassWithUnknownValueOfWrongType
         {
-            Assert.IsNull(Unknown.Value(typeof(object)));
+            private ClassWithUnknownValueOfWrongType() { }
+            public static object Unknown { get; } = new object();
         }
     }
 }

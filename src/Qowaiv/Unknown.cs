@@ -75,23 +75,20 @@ namespace Qowaiv
         /// </remarks>
         public static object Value(Type type)
         {
-            if (type is not null)
+            if (type is null) { return null; }
+            else
             {
                 var field = type.GetField(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                if (field?.FieldType == type)
+                if (field is not null)
                 {
-                    return field.GetValue(null); 
+                    return field.FieldType == type ? field.GetValue(null) : null;
                 }
-                else if (field is null)
+                else
                 {
                     var property = type.GetProperty(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                    if (property?.PropertyType == type)
-                    {
-                        return property.GetValue(null); 
-                    }
+                    return property?.PropertyType == type ? property.GetValue(null) : null;
                 }
             }
-            return null;
         }
 
         /// <summary>The resource manager managing the culture based string values.</summary>

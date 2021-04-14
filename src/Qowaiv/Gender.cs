@@ -1,4 +1,7 @@
 ﻿#pragma warning disable S2328
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
+
 // "GetHashCode" should not reference mutable fields
 // See README.md => Hashing
 
@@ -53,16 +56,16 @@ namespace Qowaiv
         public static readonly Gender NotApplicable = new Gender(18);
 
         /// <summary>Contains not known, male, female, not applicable.</summary>
-        public static readonly IReadOnlyCollection<Gender> All = new [] { Male, Female, NotApplicable, Unknown, };
+        public static readonly IReadOnlyCollection<Gender> All = new[] { Male, Female, NotApplicable, Unknown, };
 
         /// <summary>Contains male and female.</summary>
-        public static readonly IReadOnlyCollection<Gender> MaleAndFemale = new [] { Male, Female, };
+        public static readonly IReadOnlyCollection<Gender> MaleAndFemale = new[] { Male, Female, };
 
         /// <summary>Contains male, female, not applicable.</summary>
-        public static readonly IReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new [] { Male, Female, NotApplicable, };
+        public static readonly IReadOnlyCollection<Gender> MaleFemaleAndNotApplicable = new[] { Male, Female, NotApplicable, };
 
         /// <summary>Gets the display name.</summary>
-        public string DisplayName => GetDisplayName(CultureInfo.CurrentCulture);
+        public string DisplayName => GetDisplayName(null);
 
         /// <summary>Returns true if the Gender is male or female, otherwise false.</summary>
         public bool IsMaleOrFemale() => Equals(Male) || Equals(Female);
@@ -72,7 +75,7 @@ namespace Qowaiv
         /// The culture of the display name.
         /// </param>
         /// <returns></returns>
-        public string GetDisplayName(CultureInfo culture) => GetResourceString("", culture);
+        public string GetDisplayName(CultureInfo culture) => GetResourceString(string.Empty, culture);
 
         /// <summary>Converts the Gender to an int.</summary>
         private int ToInt32() => m_Value >> 1;
@@ -106,7 +109,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => IsEmpty() 
+        private string DebuggerDisplay => IsEmpty()
             ? DebugDisplay.Empty
             : GetDisplayName(CultureInfo.InvariantCulture);
 
@@ -132,12 +135,14 @@ namespace Qowaiv
             {
                 return formatted;
             }
+            else
+            {
+                // If no format specified, use the default format.
+                if (string.IsNullOrEmpty(format)) { format = "f"; }
 
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { format = "f"; }
-
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
+                // Apply the format.
+                return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
+            }
         }
 
         /// <summary>The format token instructions.</summary>
@@ -155,20 +160,40 @@ namespace Qowaiv
 
         /// <summary>Casts a Gender to a <see cref="string"/>.</summary>
         public static explicit operator string(Gender val) => val.ToString(CultureInfo.CurrentCulture);
+
         /// <summary>Casts a <see cref="string"/> to a Gender.</summary>
         public static explicit operator Gender(string str) => Cast.String<Gender>(TryParse, str);
 
         /// <summary>Casts a Gender to a <see cref="byte"/>.</summary>
         public static explicit operator byte(Gender val) => (byte)val.ToInt32();
+
         /// <summary>Casts a Gender to a <see cref="int"/>.</summary>
         public static explicit operator int(Gender val) => val.ToInt32();
+
         /// <summary>Casts an <see cref="int"/> to a Gender.</summary>
         public static implicit operator Gender(int val) => Cast.Primitive<int, Gender>(TryCreate, val);
 
         /// <summary>Casts a Gender to a <see cref="int"/>.</summary>
         public static explicit operator int?(Gender val) => val.ToNullableInt32();
+
         /// <summary>Casts an <see cref="int"/> to a Gender.</summary>
         public static implicit operator Gender(int? val) => Cast.Primitive<int, Gender>(TryCreate, val);
+
+        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
+        [Obsolete("Will be dropped when the next major version is released.")]
+        public static bool operator <(Gender l, Gender r) => l.CompareTo(r) < 0;
+
+        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
+        [Obsolete("Will be dropped when the next major version is released.")]
+        public static bool operator >(Gender l, Gender r) => l.CompareTo(r) > 0;
+
+        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
+        [Obsolete("Will be dropped when the next major version is released.")]
+        public static bool operator <=(Gender l, Gender r) => l.CompareTo(r) <= 0;
+
+        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
+        [Obsolete("Will be dropped when the next major version is released.")]
+        public static bool operator >=(Gender l, Gender r) => l.CompareTo(r) >= 0;
 
         /// <summary>Converts the string to a Gender.
         /// A return value indicates whether the conversion succeeded.
@@ -189,7 +214,7 @@ namespace Qowaiv
         {
             result = Empty;
             var buffer = s.Buffer().Unify();
-            
+
             if (buffer.IsEmpty())
             {
                 return true;
@@ -218,13 +243,9 @@ namespace Qowaiv
         /// val is not a valid Gender.
         /// </exception>
         public static Gender Create(int? val)
-        {
-            if (TryCreate(val, out Gender result))
-            {
-                return result;
-            }
-            throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionGender);
-        }
+            => TryCreate(val, out Gender result)
+            ? result
+            : throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionGender);
 
         /// <summary>Creates a Gender from a int.
         /// A return value indicates whether the conversion succeeded.
@@ -236,13 +257,7 @@ namespace Qowaiv
         /// A Gender if the creation was successfully, otherwise Gender.Empty.
         /// </returns>
         public static Gender TryCreate(int? val)
-        {
-            if (TryCreate(val, out Gender result))
-            {
-                return result;
-            }
-            return Empty;
-        }
+            => TryCreate(val, out Gender result) ? result : default;
 
         /// <summary>Creates a Gender from a int.
         /// A return value indicates whether the creation succeeded.
@@ -258,22 +273,21 @@ namespace Qowaiv
         /// </returns>
         public static bool TryCreate(int? val, out Gender result)
         {
-            result = Empty;
-
-            byte b = 0;
-
-            if (!val.HasValue || FromInt32s.TryGetValue(val.Value, out b))
+            result = default;
+            if (!val.HasValue) { return true; }
+            else if (FromInt32s.TryGetValue(val.Value, out byte b))
             {
                 result = new Gender(b);
                 return true;
             }
-            return false;
+            else { return false; }
         }
 
         /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
-        public static bool IsValid(int? val) => val.HasValue && FromInt32s.ContainsKey(val.Value);
-
-        #region Resources
+        public static bool IsValid(int? val)
+            => val.HasValue
+            && val != 0
+            && FromInt32s.ContainsKey(val.Value);
 
         private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
 
@@ -284,10 +298,8 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
-        internal string GetResourceString(string prefix, IFormatProvider formatProvider)
-        {
-            return GetResourceString(prefix, formatProvider as CultureInfo);
-        }
+        private string GetResourceString(string prefix, IFormatProvider formatProvider)
+            => GetResourceString(prefix, formatProvider as CultureInfo);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">
@@ -296,15 +308,10 @@ namespace Qowaiv
         /// <param name="culture">
         /// The culture.
         /// </param>
-        internal string GetResourceString(string prefix, CultureInfo culture)
-        {
-            if (IsEmpty()) { return string.Empty; }
-            return ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
-        }
-
-        #endregion
-
-        #region Lookup
+        private string GetResourceString(string prefix, CultureInfo culture)
+            => IsEmpty()
+            ? string.Empty
+            : ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture);
 
         /// <summary>Gets the valid values.</summary>
         private static readonly Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>
@@ -314,7 +321,6 @@ namespace Qowaiv
             { 2, 4 },
             { 9, 18 },
         };
-
 
         private static readonly Dictionary<byte, int?> ToNullableInt32s = new Dictionary<byte, int?>
         {
@@ -391,7 +397,5 @@ namespace Qowaiv
 
         /// <summary>The locker for adding a culture.</summary>
         private static readonly object Locker = new object();
-
-        #endregion
     }
 }

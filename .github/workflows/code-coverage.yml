@@ -11,10 +11,10 @@ jobs:
  
     steps:
       - uses: actions/checkout@v1
-      - name: Setup .NET Core
+      - name: Setup .NET 5.0
         uses: actions/setup-dotnet@v1
         with:
-           dotnet-version: 3.1.100
+           dotnet-version: 5.0.100
       - name: Generate coverage report
         run: dotnet test /p:CollectCoverage=true /p:ThresholdType=branch /p:CoverletOutputFormat=lcov
       - name: Publish coverage report to coveralls.io

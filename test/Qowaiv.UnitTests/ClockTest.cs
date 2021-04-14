@@ -10,23 +10,7 @@ namespace Qowaiv.UnitTests
         private static readonly Func<DateTime> TestTimeFunction = () => TestDateTime;
         private static readonly TimeZoneInfo TestTimeZone = TestTimeZones.EastAustraliaStandardTime;
 
-        [Test]
-        public void UtcNow_Default_EqualsSystemDateTimeNowUtc()
-        {
-            var act = Clock.UtcNow();
-            var exp = DateTime.UtcNow;
-
-            Assert.That(act, Is.EqualTo(exp).Within(TimeSpan.FromTicks(100)));
-        }
-        [Test]
-        public void TimeZone_Default_TimeZoneInfoLocal()
-        {
-            var act = Clock.TimeZone;
-            var exp = TimeZoneInfo.Local;
-
-            Assert.AreEqual(exp, act);
-        }
-
+      
         /// <remarks>
         /// Just to hit the code path. We can't guarantee that stuff is cleaned up in time.
         /// </remarks>
@@ -54,26 +38,7 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void UtcNow_CurrentThread_EqualsTestDateTime()
-        {
-            using (Clock.SetTimeForCurrentThread(TestTimeFunction))
-            {
-                var act = Clock.UtcNow();
-                var exp = TestDateTime;
-                Assert.AreEqual(exp, act);
-            }
-        }
-        [Test]
-        public void TimeZone_CurrentThread_EqualsTestDateTime()
-        {
-            using (Clock.SetTimeZoneForCurrentThread(TestTimeZone))
-            {
-                var act = Clock.TimeZone;
-                var exp = TestTimeZone;
-                Assert.AreEqual(exp, act);
-            }
-        }
+
 
         [Test]
         public void NowWithOffset_WestEuropeanWithoutDaylightSaving_Plus1()

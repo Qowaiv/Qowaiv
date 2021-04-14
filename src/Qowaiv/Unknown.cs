@@ -75,26 +75,23 @@ namespace Qowaiv
         /// </remarks>
         public static object Value(Type type)
         {
-            if (type is null) { return null; }
-            else if (Values.TryGetValue(type, out object unknown)) { return unknown; }
-            else
+            if (type is not null)
             {
-                lock (AddUnknown)
+                var field = type.GetField(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
+                if (field?.FieldType == type)
                 {
-                    if (!Values.TryGetValue(type, out unknown))
+                    return field.GetValue(null); 
+                }
+                else if (field is null)
+                {
+                    var property = type.GetProperty(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
+                    if (property?.PropertyType == type)
                     {
-                        var field = type.GetField(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                        if (field?.FieldType == type) { unknown = field.GetValue(null); }
-                        else
-                        {
-                            var property = type.GetProperty(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
-                            if (property?.PropertyType == type) { unknown = property.GetValue(null); }
-                        }
-                        Values[type] = unknown;
+                        return property.GetValue(null); 
                     }
                 }
-                return unknown;
             }
+            return null;
         }
 
         /// <summary>The resource manager managing the culture based string values.</summary>
@@ -103,8 +100,6 @@ namespace Qowaiv
         {
             { CultureInfo.InvariantCulture, new []{ "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
         };
-        private static readonly Dictionary<Type, object> Values = new Dictionary<Type, object>();
         private static readonly object addCulture = new object();
-        private static readonly object AddUnknown = new object();
     }
 }

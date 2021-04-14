@@ -46,7 +46,7 @@ namespace Unknown_specs
         }
     }
    
-    public class Can_be_resoved_for
+    public class Can_be_resolved_for
     {
         [Test]
         public void value_type_with_unknown_value()
@@ -64,7 +64,7 @@ namespace Unknown_specs
             public static ClassWithUnknownValue Unknown { get; } = new ClassWithUnknownValue();
         }
     }
-    public class Can_not_be_resoved_for
+    public class Can_not_be_resolved_for
     {
         [Test]
         public void null_type()

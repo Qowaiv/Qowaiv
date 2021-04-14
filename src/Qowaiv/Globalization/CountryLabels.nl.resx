@@ -13,7 +13,7 @@
     <comment>United Arab Emirates (AE)</comment>
   </data>
   <data name="AG_DisplayName">
-    <value>Antigua En Barbuda</value>
+    <value>Antigua en Barbuda</value>
     <comment>Antigua And Barbuda (AG)</comment>
   </data>
   <data name="AL_DisplayName">
@@ -49,7 +49,7 @@
     <comment>Azerbaijan (AZ)</comment>
   </data>
   <data name="BA_DisplayName">
-    <value>Bosnië En Herzegovina</value>
+    <value>Bosnië en Herzegovina</value>
     <comment>Bosnia And Herzegovina (BA)</comment>
   </data>
   <data name="BE_DisplayName">
@@ -213,7 +213,7 @@
     <comment>Greece (GR)</comment>
   </data>
   <data name="GS_DisplayName">
-    <value>Zuid-Georgia En De Zuidelijke Sandwicheilanden</value>
+    <value>Zuid-Georgia en de Zuidelijke Sandwicheilanden</value>
     <comment>South Georgia And The South Sandwich Islands (GS)</comment>
   </data>
   <data name="GW_DisplayName">
@@ -225,7 +225,7 @@
     <comment>Hong Kong (HK)</comment>
   </data>
   <data name="HM_DisplayName">
-    <value>Heard En Mcdonaldeilanden</value>
+    <value>Heard en McDonaldeilanden</value>
     <comment>Heard Island And Mcdonald Islands (HM)</comment>
   </data>
   <data name="HR_DisplayName">
@@ -293,7 +293,7 @@
     <comment>Comoros (KM)</comment>
   </data>
   <data name="KN_DisplayName">
-    <value>Saint Kitts En Nevis</value>
+    <value>Saint Kitts en Nevis</value>
     <comment>Saint Kitts And Nevis (KN)</comment>
   </data>
   <data name="KP_DisplayName">
@@ -481,7 +481,7 @@
     <comment>Slovenia (SI)</comment>
   </data>
   <data name="SJ_DisplayName">
-    <value>Spitsbergen En Jan Mayen</value>
+    <value>Spitsbergen en Jan Mayen</value>
     <comment>Svalbard And Jan Mayen (SJ)</comment>
   </data>
   <data name="SK_DisplayName">
@@ -497,7 +497,7 @@
     <comment>South Sudan (SS)</comment>
   </data>
   <data name="ST_DisplayName">
-    <value>Sao Tomé En Principe</value>
+    <value>Sao Tomé en Principe</value>
     <comment>Sao Tome And Principe (ST)</comment>
   </data>
   <data name="SY_DisplayName">
@@ -505,7 +505,7 @@
     <comment>Syrian Arab Republic (SY)</comment>
   </data>
   <data name="TC_DisplayName">
-    <value>Turks- En Caicoseilanden</value>
+    <value>Turks- en Caicoseilanden</value>
     <comment>Turks And Caicos Islands (TC)</comment>
   </data>
   <data name="TD_DisplayName">
@@ -513,7 +513,7 @@
     <comment>Chad (TD)</comment>
   </data>
   <data name="TF_DisplayName">
-    <value>Franse Zuidelijke En Antarctische Gebieden</value>
+    <value>Franse Zuidelijke en Antarctische Gebieden</value>
     <comment>French Southern Territories (TF)</comment>
   </data>
   <data name="TJ_DisplayName">
@@ -537,7 +537,7 @@
     <comment>Turkey (TR)</comment>
   </data>
   <data name="TT_DisplayName">
-    <value>Trinidad En Tobago</value>
+    <value>Trinidad en Tobago</value>
     <comment>Trinidad And Tobago (TT)</comment>
   </data>
   <data name="UA_DisplayName">
@@ -549,7 +549,7 @@
     <comment>Uganda (UG)</comment>
   </data>
   <data name="UM_DisplayName">
-    <value>Kleine Pacifische Eilanden Van De Verenigde Staten</value>
+    <value>Kleine Pacifische Eilanden van de Verenigde Staten</value>
     <comment>United States Minor Outlying Islands (UM)</comment>
   </data>
   <data name="US_DisplayName">
@@ -565,7 +565,7 @@
     <comment>Holy See (VA)</comment>
   </data>
   <data name="VC_DisplayName">
-    <value>Saint Vincent En De Grenadines</value>
+    <value>Saint Vincent en de Grenadines</value>
     <comment>Saint Vincent And The Grenadines (VC)</comment>
   </data>
   <data name="VG_DisplayName">
@@ -581,7 +581,7 @@
     <comment>Viet Nam (VN)</comment>
   </data>
   <data name="WF_DisplayName">
-    <value>Wallis En Futuna</value>
+    <value>Wallis en Futuna</value>
     <comment>Wallis And Futuna (WF)</comment>
   </data>
   <data name="YE_DisplayName">
@@ -609,7 +609,7 @@
     <comment>Czechoslovakia (CS)</comment>
   </data>
   <data name="CSXX_DisplayName">
-    <value>Servië En Montenegro</value>
+    <value>Servië en Montenegro</value>
     <comment>Serbia And Montenegro (CS)</comment>
   </data>
   <data name="DDDE_DisplayName">

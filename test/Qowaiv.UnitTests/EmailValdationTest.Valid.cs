@@ -67,7 +67,7 @@ namespace Qowaiv.UnitTests
         [TestCase("Joe Smith <mailto:email@domain.com>")]
         [TestCase("Joe Smith <mailto:email(with comment)@domain.com>")]
         [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long")]
-
+        
         ////// IP Based.
         [TestCase("user@[IPv6:2001:db8:1ff::a0b:dbd0]")]
         [TestCase("valid.ipv4.without-brackets@123.1.72.010")]

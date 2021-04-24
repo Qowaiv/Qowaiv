@@ -5,8 +5,9 @@ namespace Qowaiv
     /// <summary>
     /// 
     /// # Grammar
-    /// mail  => [local] [domain]
+    /// mail  => [mailto] [local] [domain]
     /// local  => ([l] ^.) [l] ([l] ^.){1,65} &amp;&amp; !..
+    /// mailto => (mailto:)?
     /// l => @._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
     /// domain => .+
     /// </summary>
@@ -19,6 +20,7 @@ namespace Qowaiv
 
         public static string Parse(string str)
             => new State(str)
+                .MailTo()
                 .Local()
                 .Domain()
                 .Parsed();
@@ -56,6 +58,15 @@ namespace Qowaiv
                 else { return state.Invalid(); }
             }
             return state.Invalid();
+        }
+
+        private static State MailTo(this State state)
+        {
+            if (state.Input.StartsWith("MAILTO:", ignoreCase: true))
+            {
+                state.Input.RemoveFromStart(7);
+            }
+            return state;
         }
 
         private static State Domain(this State state)

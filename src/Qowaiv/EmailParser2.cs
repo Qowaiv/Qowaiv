@@ -1,20 +1,29 @@
 ﻿using Qowaiv.Text;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Qowaiv
 {
     /// <summary>
     /// 
     /// # Grammar
-    /// display   => (.+ &lt; [address] &gt;) | [address]
-    /// email     => [mailto] [local] [domain]
-    /// local     => [quoted] | [localpart]
-    /// mailto    => (mailto:)?
-    /// quoted    => ".+"
-    /// localpart => [l]{1,64}@ &amp;&amp; not ..
-    /// l         => ._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
-    /// domain    => [top]+(\.[d]+)* &amp;&amp; not .. | .- | -.
-    /// top       => [a-z] [non-ASCII]
-    /// d         => _- [a-z][0-9] [non-ASCII]
+    /// display    => (.+ &lt; [address] &gt;) | [address]
+    /// email      => [mailto] [local] [domain]
+    /// mailto     => (mailto:)?
+    /// local      => [quoted] | [localpart]
+    /// quoted     => ".+"
+    /// 
+    /// localpart  => [l]{1,64}@ &amp;&amp; not ..
+    /// l          => ._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
+    /// 
+    /// domain     => [domainpart] | [ip]
+    /// domainpart => [top]+(\.[d]+)* &amp;&amp; not .. | .- | -.
+    /// top        => [a-z] [non-ASCII]
+    /// d          => _- [a-z][0-9] [non-ASCII]
+    /// ip         => [ip4] | [ip6]
+    /// ip4        => IpAdress.TryParse() &amp;&amp; 3 dots &amp;&amp; Ip4mask
+    /// ip6        => (IPv6:)? IpAdress.TryParse() &amp;&amp; Ip6mask
     /// </summary>
     internal static class EmailParser2
     {
@@ -77,7 +86,6 @@ namespace Qowaiv
                 if (ch.IsAt())
                 {
                     state.Result.Add(state.Input).Add(ch);
-                    state.Buffer.Clear();
                     return state;
                 }
             }
@@ -103,7 +111,6 @@ namespace Qowaiv
                     else
                     {
                         state.Result.Add(state.Buffer).Add(ch);
-                        state.Buffer.Clear();
                         return state;
                     }
                 }
@@ -119,7 +126,10 @@ namespace Qowaiv
         private static State Domain(this State state)
         {
             var dot = NotFound;
-            while (state.Input.NotEmpty() && state.Buffer.Length + state.Result.Length < EmailAddress.MaxLength)
+            state.Buffer.Clear();
+
+            while (state.Input.NotEmpty()
+                && state.Buffer.Length + state.Result.Length < EmailAddress.MaxLength)
             {
                 var ch = state.Next();
 
@@ -139,7 +149,7 @@ namespace Qowaiv
                         state.Buffer.Add(ch);
                     }
                 }
-                else if(ch.IsDash())
+                else if (ch.IsDash())
                 {
                     if (state.Buffer.IsEmpty()
                         || state.Input.IsEmpty()
@@ -149,22 +159,54 @@ namespace Qowaiv
                     }
                     else { state.Buffer.Add(ch); }
                 }
-                else if ((ch.IsTopDomain() && dot == NotFound) || ch.IsDomain())
+                else if (ch.IsDomain())
                 {
                     state.Buffer.AddLower(ch);
                 }
-                else { return state.Invalid(); }
+                else
+                {
+                    state.Buffer.AddLower(ch);
+                    return state.IP();
+                }
             }
 
-            if (state.Input.IsEmpty() && state.Buffer.Length > 1)
+            if (state.Input.IsEmpty()
+                && state.Buffer.Length > 1
+                && (dot == NotFound
+                || state.Buffer.Skip(dot + 1).All(IsTopDomain)))
             {
                 state.Result.Add(state.Buffer);
                 return state;
             }
-            else
+            else { return state.IP(); }
+        }
+
+        private static State IP(this State state)
+        {
+            if (state.Buffer.First().IsBracketStart())
             {
-                return state.Invalid();
+                if (state.Input.Last().IsBracketEnd())
+                {
+                    state.Buffer.RemoveFromStart(1);
+                    state.Input.RemoveFromEnd(1);
+                }
+                else { return state.Invalid(); }
             }
+            var isIp6 = state.Input.StartsWith("IPv6:", ignoreCase: true);
+            if (isIp6) { state.Input.RemoveFromStart(6); }
+
+            state.Buffer.Add(state.Input);
+
+            if (IPAddress.TryParse(state.Buffer, out var ip) && ip.IsValid(state.Buffer, isIp6))
+            {
+                state.Result
+                    .Add('[')
+                    .Add(ip.AddressFamily == AddressFamily.InterNetworkV6 ? "IPv6:" : string.Empty)
+                    .Add(ip.ToString())
+                    .Add(']');
+                return state;
+            }
+            else { return state.Invalid(); }
         }
 
         private static State Quoted(this State state)
@@ -222,6 +264,15 @@ namespace Qowaiv
         private static bool IsGt(this char ch) => ch == '>';
         private static bool IsQuote(this char ch) => ch == '"';
         private static bool IsEscape(this char ch) => ch == '\\';
+        private static bool IsBracketStart(this char ch) => ch == '[';
+        private static bool IsBracketEnd(this char ch) => ch == ']';
+
+        private static bool IsValid(this IPAddress a, CharBuffer buffer,  bool isIp6)
+            => a.AddressFamily == AddressFamily.InterNetworkV6
+            || (
+                a.AddressFamily == AddressFamily.InterNetwork
+                && !isIp6
+                && buffer.Count('.') == 3);
 
         /// <summary>Internal state.</summary>
         private ref struct State

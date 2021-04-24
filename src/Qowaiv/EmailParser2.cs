@@ -5,14 +5,17 @@ namespace Qowaiv
     /// <summary>
     /// 
     /// # Grammar
-    /// mail  => local at domain
-    /// local  => [^@]{1,64}@
-    /// domain => .+}
+    /// mail  => [local] [domain]
+    /// local  => [l] {1,65}
+    /// l => @._- [a-z][0-9] [{}|/%$&#~!?*`'^=+] [non-ASCII]
+    /// domain => .+
     /// </summary>
     internal static class EmailParser2
     {
         /// <summary>The maximum length of the local part is 64.</summary>
         private const int LocalMaxLength = 64;
+        
+        private const int NotFound = -1;
 
         public static string Parse(string str)
             => new State(str)
@@ -25,14 +28,18 @@ namespace Qowaiv
             while (state.Input.NotEmpty() && state.Buffer.Length < LocalMaxLength)
             {
                 var ch = state.Input.Next();
-                state.Buffer.Add(ch);
-
-                if (state.Buffer.Last().At())
+                if (ch.IsLocal())
                 {
-                    state.Result.Add(state.Buffer);
-                    state.Buffer.Clear();
-                    return state;
+                    state.Buffer.Add(ch);
+
+                    if (ch.IsAt())
+                    {
+                        state.Result.Add(state.Buffer);
+                        state.Buffer.Clear();
+                        return state;
+                    }
                 }
+                else { return state.Invalid(); }
             }
             return state.Invalid();
         }
@@ -49,13 +56,23 @@ namespace Qowaiv
                 : state.Invalid();
         }
 
-        private static bool At(this char ch) => ch == '@';
-        private static bool Digit(this char ch) => ch >= '0' && ch <= '9';
-        private static bool Letter(this char ch) => (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
-        private static bool Underscore(this char ch) => ch == '_';
-        private static bool Dot(this char ch) => ch == '.';
-        private static bool Dash(this char ch) => ch == '-';
-        private static bool NonASCII(this char ch) => ch > 127;
+        private static bool IsAt(this char ch) => ch == '@';
+        private static bool IsLocal(this char ch)
+            => ch.IsDigit()
+            || ch.IsLetter()
+            || ch.IsUnderscore()
+            || ch.IsDot()
+            || ch.IsDash()
+            || ch.IsNonASCII()
+            || ch.IsLocalASCII();
+
+        private static bool IsDigit(this char ch) => ch >= '0' && ch <= '9';
+        private static bool IsLetter(this char ch) => (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+        private static bool IsUnderscore(this char ch) => ch == '_';
+        private static bool IsDot(this char ch) => ch == '.';
+        private static bool IsDash(this char ch) => ch == '-';
+        private static bool IsNonASCII(this char ch) => ch > 127;
+        private static bool IsLocalASCII(this char ch) => "@{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
 
         /// <summary>Internal state.</summary>
         private ref struct State

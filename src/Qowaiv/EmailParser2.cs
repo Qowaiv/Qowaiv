@@ -5,11 +5,12 @@ namespace Qowaiv
     /// <summary>
     /// 
     /// # Grammar
-    /// mail  => [mailto] [local] [domain]
-    /// local  => ([l] ^.) [l] ([l] ^.){1,65} &amp;&amp; !..
-    /// mailto => (mailto:)?
-    /// l => @._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
-    /// domain => .+
+    /// display => (.+ &lt; [address] &gt;) | [address]
+    /// email   => [mailto] [local] [domain]
+    /// local   => ([l] ^.) [l] ([l] ^.){1,65} &amp;&amp; !..
+    /// mailto  => (mailto:)?
+    /// l       => @._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
+    /// domain  => .+
     /// </summary>
     internal static class EmailParser2
     {
@@ -20,11 +21,42 @@ namespace Qowaiv
 
         public static string Parse(string str)
             => new State(str)
+                .DisplayName()
                 .MailTo()
                 .Local()
                 .Domain()
                 .Parsed();
-    
+
+        private static State DisplayName(this State state)
+        {
+            if (state.Input.IsEmpty() || !state.Input.Last().IsGt()) 
+            {
+                return state;
+            }
+            else
+            {
+                var lt = state.Input.LastIndexOf('<');
+                if (lt == NotFound)
+                {
+                    return state.Invalid();
+                }
+                else
+                {
+                    state.Input.RemoveFromEnd(1).RemoveRange(0, lt + 1);
+                    return state;
+                }
+            }
+        }
+
+        private static State MailTo(this State state)
+        {
+            if (state.Input.StartsWith("MAILTO:", ignoreCase: true))
+            {
+                state.Input.RemoveFromStart(7);
+            }
+            return state;
+        }
+
         private static State Local(this State state)
         {
             while (state.Input.NotEmpty() && state.Buffer.Length < LocalMaxLength)
@@ -60,15 +92,6 @@ namespace Qowaiv
             return state.Invalid();
         }
 
-        private static State MailTo(this State state)
-        {
-            if (state.Input.StartsWith("MAILTO:", ignoreCase: true))
-            {
-                state.Input.RemoveFromStart(7);
-            }
-            return state;
-        }
-
         private static State Domain(this State state)
         {
             while (state.Input.NotEmpty() && state.Buffer.Length + state.Result.Length < EmailAddress.MaxLength)
@@ -99,6 +122,8 @@ namespace Qowaiv
         private static bool IsDash(this char ch) => ch == '-';
         private static bool IsNonASCII(this char ch) => ch > 127;
         private static bool IsLocalASCII(this char ch) => "{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
+        private static bool IsGt(this char ch) => ch == '>';
+        private static bool IsLt(this char ch) => ch == '<';
 
         /// <summary>Internal state.</summary>
         private ref struct State

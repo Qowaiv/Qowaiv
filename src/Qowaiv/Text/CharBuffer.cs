@@ -44,6 +44,9 @@ namespace Qowaiv.Text
         /// <summary>Returns true if the buffer matches the specified <see cref="Regex"/>.</summary>
         public bool Matches(Regex regex) => regex.IsMatch(ToString());
 
+        /// <summary>Gets the first <see cref="char"/> of the buffer, and removes it.</summary>
+        public char Next() => buffer[start++];
+
         /// <summary>Gets the first <see cref="char"/> of the buffer.</summary>
         public char First() => buffer[start];
 

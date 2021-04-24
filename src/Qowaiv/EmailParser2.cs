@@ -6,8 +6,8 @@ namespace Qowaiv
     /// 
     /// # Grammar
     /// mail  => [local] [domain]
-    /// local  => [l] {1,65}
-    /// l => @._- [a-z][0-9] [{}|/%$&#~!?*`'^=+] [non-ASCII]
+    /// local  => ([l] ^.) [l] ([l] ^.){1,65} &amp;&amp; !..
+    /// l => @._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
     /// domain => .+
     /// </summary>
     internal static class EmailParser2
@@ -27,16 +27,30 @@ namespace Qowaiv
         {
             while (state.Input.NotEmpty() && state.Buffer.Length < LocalMaxLength)
             {
-                var ch = state.Input.Next();
+                var ch = state.Next();
+                
+                if (ch.IsDot() && state.Buffer.NotEmpty() && state.Buffer.Last().IsDot())
+                {
+                    return state.Invalid();
+                }
                 if (ch.IsLocal())
                 {
                     state.Buffer.Add(ch);
 
                     if (ch.IsAt())
                     {
-                        state.Result.Add(state.Buffer);
-                        state.Buffer.Clear();
-                        return state;
+                        if (state.Buffer.Length == 1 
+                            || state.Buffer.First().IsDot()
+                            || state.Buffer.Last().IsDot())
+                        {
+                            return state.Invalid();
+                        }
+                        else
+                        {
+                            state.Result.Add(state.Buffer);
+                            state.Buffer.Clear();
+                            return state;
+                        }
                     }
                 }
                 else { return state.Invalid(); }
@@ -48,7 +62,7 @@ namespace Qowaiv
         {
             while (state.Input.NotEmpty() && state.Buffer.Length + state.Result.Length < EmailAddress.MaxLength)
             {
-                var ch = state.Input.Next();
+                var ch = state.Next();
                 state.Buffer.Add(ch);
             }
             return state.Input.IsEmpty()
@@ -58,13 +72,14 @@ namespace Qowaiv
 
         private static bool IsAt(this char ch) => ch == '@';
         private static bool IsLocal(this char ch)
-            => ch.IsDigit()
+            => ch.IsAt()
+            || ch.IsDigit()
             || ch.IsLetter()
             || ch.IsUnderscore()
             || ch.IsDot()
             || ch.IsDash()
-            || ch.IsNonASCII()
-            || ch.IsLocalASCII();
+            || ch.IsLocalASCII()
+            || ch.IsNonASCII();
 
         private static bool IsDigit(this char ch) => ch >= '0' && ch <= '9';
         private static bool IsLetter(this char ch) => (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
@@ -72,7 +87,7 @@ namespace Qowaiv
         private static bool IsDot(this char ch) => ch == '.';
         private static bool IsDash(this char ch) => ch == '-';
         private static bool IsNonASCII(this char ch) => ch > 127;
-        private static bool IsLocalASCII(this char ch) => "@{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
+        private static bool IsLocalASCII(this char ch) => "{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
 
         /// <summary>Internal state.</summary>
         private ref struct State
@@ -88,6 +103,14 @@ namespace Qowaiv
             public readonly CharBuffer Buffer;
             public readonly CharBuffer Result;
             public override string ToString() => $"Buffer: {Input}, Result:{Result}";
+
+            /// <summary>Gets the first <see cref="char"/> of the buffer, and removes it.</summary>
+            public char Next()
+            {
+                var ch = Input.First();
+                Input.RemoveFromStart(1);
+                return ch;
+            }
 
             public State Invalid()
             {

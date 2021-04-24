@@ -207,7 +207,7 @@ namespace Qowaiv
                 result = Unknown;
                 return true;
             }
-            else if (EmailParser2.Parse(s) is string email)
+            else if (EmailParser.Parse(s) is string email)
             {
                 result = new EmailAddress(email);
                 return true;

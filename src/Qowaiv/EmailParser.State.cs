@@ -4,7 +4,6 @@ namespace Qowaiv
 {
     internal static partial class EmailParser
     {
-        /// <summary>Internal state.</summary>
         private ref struct State
         {
             public State(string str)
@@ -12,47 +11,50 @@ namespace Qowaiv
                 Input = str.Buffer().Trim();
                 Buffer = CharBuffer.Empty(EmailAddress.MaxLength);
                 Result = CharBuffer.Empty(EmailAddress.MaxLength);
-
-                DisplayNameRemoved = false;
             }
 
             public readonly CharBuffer Input;
             public readonly CharBuffer Buffer;
             public readonly CharBuffer Result;
+            public override string ToString() => $"Buffer: {Input}, Result:{Result}";
 
-            public bool DisplayNameRemoved;
-
-            public bool Done => Input.IsEmpty() || TooLong();
-
-            public bool IsLocal => Result.IsEmpty();
-
-            private bool TooLong()
+            /// <summary>Gets the first <see cref="char"/> of the buffer, and removes it.</summary>
+            public char Next()
             {
-                // if the local part is more then 64 characters.
-                if (IsLocal && Buffer.Length > LocalMaxLength)
-                {
-                    return true;
-                }
-                // The result will be too long. 
-                if (Result.Length + Buffer.Length > EmailAddress.MaxLength)
-                {
-                    return true;
-                }
-
-                return !IsLocal 
-                    && Buffer.Length > DomainPartMaxLength
-                    && Buffer.Length - (Buffer.LastIndexOf(Dot) + 1) > DomainPartMaxLength;
+                var ch = Input.First();
+                Input.RemoveFromStart(1);
+                return ch;
             }
 
-            public override string ToString() => $"Buffer: {Input}, Result:{Result}";
+            public char Prev()
+            {
+                var ch = Input.Last();
+                Input.RemoveFromEnd(1);
+                return ch;
+            }
+
+            public char NextNoComment()
+            {
+                var ch = Next();
+                if (!ch.IsCommentStart()) { return ch; }
+
+                while (Input.NotEmpty() && !ch.IsCommentEnd())
+                {
+                    ch = Next();
+                    if (ch.IsCommentStart()) { return default; }
+                }
+                return NextNoComment();
+            }
 
             public State Invalid()
             {
                 Input.Clear();
+                Buffer.Clear();
+                Result.Clear();
                 return this;
             }
 
-            public string Parsed() => Done ? null : Result.ToString();
+            public string Parsed() => Result.IsEmpty() ? null : Result.ToString();
         }
     }
 }

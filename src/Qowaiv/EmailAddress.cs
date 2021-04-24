@@ -202,19 +202,17 @@ namespace Qowaiv
             {
                 return true;
             }
-            if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
+            else if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
             {
                 result = Unknown;
                 return true;
             }
-            string email = EmailParser.Parse(s);
-
-            if (email is null)
+            else if (EmailParser2.Parse(s) is string email)
             {
-                return false;
+                result = new EmailAddress(email);
+                return true;
             }
-            result = new EmailAddress(email);
-            return true;
+            else { return false; }
         }
     }
 }

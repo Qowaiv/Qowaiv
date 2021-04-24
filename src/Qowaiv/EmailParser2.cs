@@ -8,7 +8,7 @@ namespace Qowaiv
     /// <summary>
     /// 
     /// # Grammar
-    /// display    => (.+ &lt; [address] &gt;) | [address]
+    /// display    => (.+ &lt; [address] &gt;) | [address] (.+) | [address]
     /// email      => [mailto] [local] [domain]
     /// mailto     => (mailto:)?
     /// local      => [quoted] | [localpart]
@@ -45,11 +45,8 @@ namespace Qowaiv
 
         private static State DisplayName(this State state)
         {
-            if (state.Input.IsEmpty() || !state.Input.Last().IsGt())
-            {
-                return state;
-            }
-            else
+            if (state.Input.IsEmpty()) { return state.Invalid(); }
+            else if (state.Input.Last().IsGt())
             {
                 var lt = state.Input.LastIndexOf('<');
                 if (lt == NotFound)
@@ -62,6 +59,23 @@ namespace Qowaiv
                     return state;
                 }
             }
+            else if (state.Input.Last().IsCommentEnd())
+            {
+                state.Prev();
+                while (state.Input.NotEmpty())
+                {
+                    var ch = state.Prev();
+                    if (ch.IsCommentEnd()) { return state.Invalid(); }
+                    else if (ch.IsCommentStart())
+                    {
+                        state.Input.TrimRight();
+                        return state;
+                    }
+                }
+                return state.Invalid();
+
+            }
+            else { return state; }
         }
 
         private static State MailTo(this State state)
@@ -96,7 +110,7 @@ namespace Qowaiv
         {
             while (state.Input.NotEmpty() && state.Buffer.Length <= LocalMaxLength)
             {
-                var ch = state.Next();
+                var ch = state.NextNoComment();
 
                 if (ch.IsDot() && (state.Buffer.IsEmpty() || state.Buffer.Last().IsDot()))
                 {
@@ -131,7 +145,7 @@ namespace Qowaiv
             while (state.Input.NotEmpty()
                 && state.Buffer.Length + state.Result.Length < EmailAddress.MaxLength)
             {
-                var ch = state.Next();
+                var ch = state.NextNoComment();
 
                 if (ch.IsDot())
                 {
@@ -266,8 +280,10 @@ namespace Qowaiv
         private static bool IsEscape(this char ch) => ch == '\\';
         private static bool IsBracketStart(this char ch) => ch == '[';
         private static bool IsBracketEnd(this char ch) => ch == ']';
+        private static bool IsCommentStart(this char ch) => ch == '(';
+        private static bool IsCommentEnd(this char ch) => ch == ')';
 
-        private static bool IsValid(this IPAddress a, CharBuffer buffer,  bool isIp6)
+        private static bool IsValid(this IPAddress a, CharBuffer buffer, bool isIp6)
             => a.AddressFamily == AddressFamily.InterNetworkV6
             || (
                 a.AddressFamily == AddressFamily.InterNetwork
@@ -295,6 +311,26 @@ namespace Qowaiv
                 var ch = Input.First();
                 Input.RemoveFromStart(1);
                 return ch;
+            }
+
+            public char Prev()
+            {
+                var ch = Input.Last();
+                Input.RemoveFromEnd(1);
+                return ch;
+            }
+
+            public char NextNoComment()
+            {
+                var ch = Next();
+                if (!ch.IsCommentStart()) { return ch; }
+
+                while (Input.NotEmpty() && !ch.IsCommentEnd())
+                {
+                    ch = Next();
+                    if (ch.IsCommentStart()) { return default; }
+                }
+                return NextNoComment();
             }
 
             public State Invalid()

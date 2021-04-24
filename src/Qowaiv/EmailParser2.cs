@@ -12,7 +12,8 @@ namespace Qowaiv
     /// quoted    => ".+"
     /// localpart => [l]{1,64}@ &amp;&amp; not ..
     /// l         => ._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
-    /// domain    => d+(\.d+)* &amp;&amp; not .. | .- | -.
+    /// domain    => [top]+(\.[d]+)* &amp;&amp; not .. | .- | -.
+    /// top       => [a-z] [non-ASCII]
     /// d         => _- [a-z][0-9] [non-ASCII]
     /// </summary>
     internal static class EmailParser2
@@ -148,9 +149,9 @@ namespace Qowaiv
                     }
                     else { state.Buffer.Add(ch); }
                 }
-                else if (ch.IsDomain())
+                else if ((ch.IsTopDomain() && dot == NotFound) || ch.IsDomain())
                 {
-                    state.Buffer.Add(ch);
+                    state.Buffer.AddLower(ch);
                 }
                 else { return state.Invalid(); }
             }
@@ -202,9 +203,12 @@ namespace Qowaiv
             || ch.IsNonASCII();
 
         private static bool IsDomain(this char ch)
-            => ch.IsDigit()
-            || ch.IsLetter()
-            || ch.IsUnderscore()
+            => ch.IsTopDomain()
+            || ch.IsDigit()
+            || ch.IsUnderscore();
+
+        private static bool IsTopDomain(this char ch)
+            => ch.IsLetter()
             || ch.IsNonASCII();
 
         private static bool IsAt(this char ch) => ch == '@';

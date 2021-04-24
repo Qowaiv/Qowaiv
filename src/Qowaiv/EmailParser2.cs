@@ -7,16 +7,18 @@ namespace Qowaiv
     /// # Grammar
     /// display => (.+ &lt; [address] &gt;) | [address]
     /// email   => [mailto] [local] [domain]
-    /// local   => ([l] ^.) [l] ([l] ^.){1,65} &amp;&amp; !..
-    /// mailto  => (mailto:)?
-    /// l       => @._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
-    /// domain  => .+
+    /// local     => [quoted] | [localpart]
+    /// quoted    => ".+"
+    /// localpart => ([l] ^.) [l] ([l] ^.){1,64}@ &amp;&amp; !..
+    /// mailto    => (mailto:)?
+    /// l         => @._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
+    /// domain    => .+
     /// </summary>
     internal static class EmailParser2
     {
         /// <summary>The maximum length of the local part is 64.</summary>
         private const int LocalMaxLength = 64;
-        
+
         private const int NotFound = -1;
 
         public static string Parse(string str)
@@ -29,7 +31,7 @@ namespace Qowaiv
 
         private static State DisplayName(this State state)
         {
-            if (state.Input.IsEmpty() || !state.Input.Last().IsGt()) 
+            if (state.Input.IsEmpty() || !state.Input.Last().IsGt())
             {
                 return state;
             }
@@ -58,8 +60,28 @@ namespace Qowaiv
         }
 
         private static State Local(this State state)
+            => state.Input.NotEmpty() && state.Input.First().IsQuote()
+            ? state.LocalQuoted()
+            : state.LocalPart();
+
+        private static State LocalQuoted(this State state)
         {
-            while (state.Input.NotEmpty() && state.Buffer.Length < LocalMaxLength)
+            if (state.Quoted().Buffer.NotEmpty() && state.Input.NotEmpty())
+            {
+                var ch = state.Next();
+                if (ch.IsAt())
+                {
+                    state.Result.Add(state.Input).Add(ch);
+                    state.Buffer.Clear();
+                    return state;
+                }
+            }
+            return state.Invalid();
+        }
+
+        private static State LocalPart(this State state)
+        {
+            while (state.Input.NotEmpty() && state.Buffer.Length <= LocalMaxLength)
             {
                 var ch = state.Next();
                 
@@ -104,6 +126,34 @@ namespace Qowaiv
                 : state.Invalid();
         }
 
+
+        private static State Quoted(this State state)
+        {
+            if (state.Input.IsEmpty() || !state.Input.First().IsQuote())
+            {
+                return state;
+            }
+
+            var escaped = false;
+            while (state.Input.NotEmpty() && state.Buffer.Length < LocalMaxLength)
+            {
+                var ch = state.Next();
+                state.Buffer.Add(ch);
+
+                if (!escaped && ch.IsQuote() && state.Buffer.Length > 1)
+                {
+                    return state;
+                }
+                else if (ch.IsEscape())
+                {
+                    escaped = !escaped;
+                }
+                else { escaped = false; }
+            }
+            return state.Invalid();
+        }
+
+
         private static bool IsAt(this char ch) => ch == '@';
         private static bool IsLocal(this char ch)
             => ch.IsAt()
@@ -123,7 +173,8 @@ namespace Qowaiv
         private static bool IsNonASCII(this char ch) => ch > 127;
         private static bool IsLocalASCII(this char ch) => "{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
         private static bool IsGt(this char ch) => ch == '>';
-        private static bool IsLt(this char ch) => ch == '<';
+        private static bool IsQuote(this char ch) => ch == '"';
+        private static bool IsEscape(this char ch) => ch == '\\';
 
         /// <summary>Internal state.</summary>
         private ref struct State

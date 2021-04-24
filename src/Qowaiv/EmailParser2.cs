@@ -5,16 +5,16 @@ using System.Net.Sockets;
 
 namespace Qowaiv
 {
-    /// <summary>
-    /// 
-    /// # Grammar
-    /// display    => (.+ &lt; [address] &gt;) | [address] (.+) | [address]
+    /// <summary>Parses an email address with the following grammar:
+    /// at         => @
+    /// root       => [quoted] ( [at] [domain] | [ ] [email] ) | [display]
+    /// display    => (.+ &lt; [email] &gt;) | [email] (.+) | [email]
     /// email      => [mailto] [local] [domain]
     /// mailto     => (mailto:)?
-    /// local      => [quoted] | [localpart]
+    /// local      => ([quoted] | [localpart]) [at]
     /// quoted     => ".+"
     /// 
-    /// localpart  => [l]{1,64}@ &amp;&amp; not ..
+    /// localpart  => [l]{1,64} &amp;&amp; not ..
     /// l          => ._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
     /// 
     /// domain     => [domainpart] | [ip]
@@ -27,21 +27,35 @@ namespace Qowaiv
     /// </summary>
     internal static class EmailParser2
     {
-        /// <summary>The maximum length of the local part is 64.</summary>
         private const int LocalMaxLength = 64;
-
-        /// <summary>The maximum length of a (individual) domain part is 63.</summary>
         private const int DomainPartMaxLength = 63;
-
         private const int NotFound = -1;
 
         public static string Parse(string str)
-            => new State(str)
-                .DisplayName()
-                .MailTo()
-                .Local()
-                .Domain()
-                .Parsed();
+            => new State(str).Root().Parsed();
+
+        private static State Root(this State state)
+        {
+            state.Quoted();
+
+            if (state.Buffer.NotEmpty() && state.Input.NotEmpty())
+            {
+                var ch = state.Next();
+                if (ch.IsAt())
+                {
+                    state.Result.Add(state.Buffer).Add(ch);
+                    return state.Domain();
+                }
+                else if (char.IsWhiteSpace(ch))
+                {
+                    state.Buffer.Clear();
+                    state.Input.TrimLeft();
+                    return state.Email();
+                }
+                else { return state.Invalid(); }
+            }
+            else { return state.DisplayName().Email(); }
+        }
 
         private static State DisplayName(this State state)
         {
@@ -78,6 +92,12 @@ namespace Qowaiv
             else { return state; }
         }
 
+        private static State Email(this State state)
+            => state
+            .MailTo()
+            .Local()
+            .Domain();
+
         private static State MailTo(this State state)
         {
             if (state.Input.StartsWith("MAILTO:", ignoreCase: true))
@@ -97,9 +117,9 @@ namespace Qowaiv
             if (state.Quoted().Buffer.NotEmpty() && state.Input.NotEmpty())
             {
                 var ch = state.Next();
-                if (ch.IsAt())
+                if (ch.IsAt() && state.Buffer.Length < LocalMaxLength)
                 {
-                    state.Result.Add(state.Input).Add(ch);
+                    state.Result.Add(state.Buffer).Add(ch);
                     return state;
                 }
             }
@@ -231,7 +251,7 @@ namespace Qowaiv
             }
 
             var escaped = false;
-            while (state.Input.NotEmpty() && state.Buffer.Length < LocalMaxLength)
+            while (state.Input.NotEmpty())
             {
                 var ch = state.Next();
                 state.Buffer.Add(ch);

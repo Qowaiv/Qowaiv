@@ -85,7 +85,7 @@ namespace Qowaiv
             {
                 var ch = state.Next();
                 
-                if (ch.IsDot() && state.Buffer.NotEmpty() && state.Buffer.Last().IsDot())
+                if (ch.IsDot() && (state.Buffer.IsEmpty() || state.Buffer.Last().IsDot()))
                 {
                     return state.Invalid();
                 }
@@ -95,9 +95,7 @@ namespace Qowaiv
 
                     if (ch.IsAt())
                     {
-                        if (state.Buffer.Length == 1 
-                            || state.Buffer.First().IsDot()
-                            || state.Buffer.Last().IsDot())
+                        if (state.Buffer.Length == 1 || state.Buffer.Last().IsDot())
                         {
                             return state.Invalid();
                         }

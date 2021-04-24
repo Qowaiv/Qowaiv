@@ -5,19 +5,23 @@ namespace Qowaiv
     /// <summary>
     /// 
     /// # Grammar
-    /// display => (.+ &lt; [address] &gt;) | [address]
-    /// email   => [mailto] [local] [domain]
+    /// display   => (.+ &lt; [address] &gt;) | [address]
+    /// email     => [mailto] [local] [domain]
     /// local     => [quoted] | [localpart]
-    /// quoted    => ".+"
-    /// localpart => ([l] ^.) [l] ([l] ^.){1,64}@ &amp;&amp; !..
     /// mailto    => (mailto:)?
-    /// l         => @._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
-    /// domain    => .+
+    /// quoted    => ".+"
+    /// localpart => [l]{1,64}@ &amp;&amp; not ..
+    /// l         => ._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
+    /// domain    => d+(\.d+)* &amp;&amp; not .. | .- | -.
+    /// d         => _- [a-z][0-9] [non-ASCII]
     /// </summary>
     internal static class EmailParser2
     {
         /// <summary>The maximum length of the local part is 64.</summary>
         private const int LocalMaxLength = 64;
+
+        /// <summary>The maximum length of a (individual) domain part is 63.</summary>
+        private const int DomainPartMaxLength = 63;
 
         private const int NotFound = -1;
 
@@ -84,28 +88,27 @@ namespace Qowaiv
             while (state.Input.NotEmpty() && state.Buffer.Length <= LocalMaxLength)
             {
                 var ch = state.Next();
-                
+
                 if (ch.IsDot() && (state.Buffer.IsEmpty() || state.Buffer.Last().IsDot()))
                 {
                     return state.Invalid();
                 }
-                if (ch.IsLocal())
+                else if (ch.IsAt())
+                {
+                    if (state.Buffer.IsEmpty() || state.Buffer.Last().IsDot())
+                    {
+                        return state.Invalid();
+                    }
+                    else
+                    {
+                        state.Result.Add(state.Buffer).Add(ch);
+                        state.Buffer.Clear();
+                        return state;
+                    }
+                }
+                else if (ch.IsLocal())
                 {
                     state.Buffer.Add(ch);
-
-                    if (ch.IsAt())
-                    {
-                        if (state.Buffer.Length == 1 || state.Buffer.Last().IsDot())
-                        {
-                            return state.Invalid();
-                        }
-                        else
-                        {
-                            state.Result.Add(state.Buffer);
-                            state.Buffer.Clear();
-                            return state;
-                        }
-                    }
                 }
                 else { return state.Invalid(); }
             }
@@ -114,16 +117,54 @@ namespace Qowaiv
 
         private static State Domain(this State state)
         {
+            var dot = NotFound;
             while (state.Input.NotEmpty() && state.Buffer.Length + state.Result.Length < EmailAddress.MaxLength)
             {
                 var ch = state.Next();
-                state.Buffer.Add(ch);
-            }
-            return state.Input.IsEmpty()
-                ? state
-                : state.Invalid();
-        }
 
+                if (ch.IsDot())
+                {
+                    if (state.Buffer.IsEmpty()
+                        || state.Input.IsEmpty()
+                        || state.Buffer.Last().IsDot()
+                        || state.Buffer.Last().IsDash()
+                        || state.Buffer.Length - dot > DomainPartMaxLength)
+                    {
+                        return state.Invalid();
+                    }
+                    else
+                    {
+                        dot = state.Buffer.Length;
+                        state.Buffer.Add(ch);
+                    }
+                }
+                else if(ch.IsDash())
+                {
+                    if (state.Buffer.IsEmpty()
+                        || state.Input.IsEmpty()
+                        || state.Buffer.Last().IsDot())
+                    {
+                        return state.Invalid();
+                    }
+                    else { state.Buffer.Add(ch); }
+                }
+                else if (ch.IsDomain())
+                {
+                    state.Buffer.Add(ch);
+                }
+                else { return state.Invalid(); }
+            }
+
+            if (state.Input.IsEmpty() && state.Buffer.Length > 1)
+            {
+                state.Result.Add(state.Buffer);
+                return state;
+            }
+            else
+            {
+                return state.Invalid();
+            }
+        }
 
         private static State Quoted(this State state)
         {
@@ -151,11 +192,8 @@ namespace Qowaiv
             return state.Invalid();
         }
 
-
-        private static bool IsAt(this char ch) => ch == '@';
         private static bool IsLocal(this char ch)
-            => ch.IsAt()
-            || ch.IsDigit()
+            => ch.IsDigit()
             || ch.IsLetter()
             || ch.IsUnderscore()
             || ch.IsDot()
@@ -163,6 +201,13 @@ namespace Qowaiv
             || ch.IsLocalASCII()
             || ch.IsNonASCII();
 
+        private static bool IsDomain(this char ch)
+            => ch.IsDigit()
+            || ch.IsLetter()
+            || ch.IsUnderscore()
+            || ch.IsNonASCII();
+
+        private static bool IsAt(this char ch) => ch == '@';
         private static bool IsDigit(this char ch) => ch >= '0' && ch <= '9';
         private static bool IsLetter(this char ch) => (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
         private static bool IsUnderscore(this char ch) => ch == '_';
@@ -200,6 +245,7 @@ namespace Qowaiv
             public State Invalid()
             {
                 Input.Clear();
+                Buffer.Clear();
                 Result.Clear();
                 return this;
             }

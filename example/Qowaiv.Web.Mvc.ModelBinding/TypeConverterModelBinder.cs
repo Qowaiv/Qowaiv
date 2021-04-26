@@ -44,7 +44,7 @@ namespace Qowaiv.Web.Mvc.ModelBinding
         {
             Guard.NotNull(assembly, nameof(assembly));
             var tps = assembly.GetTypes()
-                .Where(tp => QowaivType.IsSingleValueObject(tp))
+                .Where(tp => tp.GetCustomAttribute<SingleValueObjectAttribute>() != null)
                 .ToArray();
             AddTypes(tps);
         }

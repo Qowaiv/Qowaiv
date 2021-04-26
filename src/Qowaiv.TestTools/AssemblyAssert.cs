@@ -28,7 +28,7 @@ namespace Qowaiv.TestTools
         {
             var assembly = typeof(T).Assembly;
             var svos = assembly.GetTypes()
-               .Where(tp => QowaivType.IsSingleValueObject(tp))
+               .Where(tp => tp.GetCustomAttribute<SingleValueObjectAttribute>() != null)
                .OrderBy(tp => tp.Namespace)
                .ThenBy(tp => tp.Name)
                .ToArray();
@@ -66,7 +66,7 @@ namespace Qowaiv.TestTools
 
             foreach (var svo in svos)
             {
-                var attr = QowaivType.GetSingleValueObjectAttribute(svo);
+                var attr = svo.GetCustomAttribute<SingleValueObjectAttribute>();
 
                 SvoAssert.UnderlyingTypeMatches(svo, attr);
                 SvoAssert.ParseMatches(svo, attr);

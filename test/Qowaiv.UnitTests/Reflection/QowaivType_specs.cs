@@ -27,6 +27,18 @@ namespace Reflection.QowaivType_specs
             => Assert.That(QowaivType.IsNullOrDefaultValue(17), Is.False);
     }
 
+    public class IsNullable
+    {
+        [TestCase(typeof(string))]
+        [TestCase(typeof(int))]
+        public void False_for_not_nullable(Type type)
+            => Assert.That(QowaivType.IsNullable(type), Is.False);
+
+        [Test]
+        public void True_for_nullable()
+            => Assert.That(QowaivType.IsNullable(typeof(int?)), Is.True);
+    }
+
     public class NotNullableType
     {
         [TestCase(typeof(string))]

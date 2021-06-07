@@ -201,7 +201,7 @@ namespace Qowaiv
             if (state.Input.IsEmpty()
                 && state.Buffer.Length > 1
                 && (dot == NotFound
-                || state.HasValidTopDomain(dot)))
+                || state.ValidTopDomain(dot)))
             {
                 state.Result.Add(state.Buffer);
                 return state;
@@ -261,12 +261,10 @@ namespace Qowaiv
             return state.Invalid();
         }
 
-        private static bool HasValidTopDomain(this State state, int dot)
+        private static bool ValidTopDomain(this State state, int dot)
         {
             var topDomain = state.Buffer.Substring(dot + 1);
-            return topDomain.StartsWith("xn--", StringComparison.Ordinal) && topDomain.Length > 5
-                ? topDomain.Skip(4).All(ch => IsTopDomain(ch) || ch.IsDash() || ch.IsDigit())
-                : topDomain.All(IsTopDomain);
+            return topDomain.IsPunycode() || topDomain.All(IsTopDomain);
         }
 
         private static bool IsValid(this IPAddress a, CharBuffer buffer, bool isIp6)
@@ -275,5 +273,11 @@ namespace Qowaiv
                 a.AddressFamily == AddressFamily.InterNetwork
                 && !isIp6
                 && buffer.Count('.') == 3);
+
+        private static bool IsPunycode(this string str)
+            => str.StartsWith("xn--", StringComparison.Ordinal)
+            && str.Length > 5
+            && str.All(ch => IsTopDomain(ch) || ch.IsDash() || ch.IsDigit());
+
     }
 }

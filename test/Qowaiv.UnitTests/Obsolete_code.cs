@@ -2,6 +2,7 @@
 using Qowaiv;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
+using Qowaiv.Reflection;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.UnitTests;
 using Qowaiv.Web;
@@ -62,6 +63,9 @@ namespace Obsolete_code
 
         [Test]
         public void Gender_GreaterThenOrEqual() => Assert.IsTrue(Svo.Gender >= Gender.Female);
+
+        [Test]
+        public void QowaivType_IsSingleValueObject() => Assert.IsTrue(QowaivType.IsSingleValueObject(typeof(Percentage)));
     }
 
     [Obsolete("Will become private when the next major version is released.")]

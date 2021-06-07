@@ -16,7 +16,7 @@ namespace Qowaiv
             public readonly CharBuffer Input;
             public readonly CharBuffer Buffer;
             public readonly CharBuffer Result;
-            public override string ToString() => $"Buffer: {Input}, Result:{Result}";
+            public override string ToString() => $"In: {Input}, Buf: {Buffer}, Res:{Result}";
 
             /// <summary>Gets the first <see cref="char"/> of the buffer, and removes it.</summary>
             public char Next()

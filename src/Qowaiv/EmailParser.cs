@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Text;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -166,7 +167,7 @@ namespace Qowaiv
                         || state.Input.IsEmpty()
                         || state.Buffer.Last().IsDot()
                         || state.Buffer.Last().IsDash()
-                        || state.Buffer.Length - dot > DomainPartMaxLength)
+                        || state.Buffer.Length - dot - 1 > DomainPartMaxLength)
                     {
                         return state.Invalid();
                     }
@@ -200,7 +201,7 @@ namespace Qowaiv
             if (state.Input.IsEmpty()
                 && state.Buffer.Length > 1
                 && (dot == NotFound
-                || state.Buffer.Skip(dot + 1).All(IsTopDomain)))
+                || state.HasValidTopDomain(dot)))
             {
                 state.Result.Add(state.Buffer);
                 return state;
@@ -258,6 +259,14 @@ namespace Qowaiv
                 else { escaped = false; }
             }
             return state.Invalid();
+        }
+
+        private static bool HasValidTopDomain(this State state, int dot)
+        {
+            var topDomain = state.Buffer.Substring(dot + 1);
+            return topDomain.StartsWith("xn--", StringComparison.Ordinal) && topDomain.Length > 5
+                ? topDomain.Skip(4).All(ch => IsTopDomain(ch) || ch.IsDash() || ch.IsDigit())
+                : topDomain.All(IsTopDomain);
         }
 
         private static bool IsValid(this IPAddress a, CharBuffer buffer, bool isIp6)

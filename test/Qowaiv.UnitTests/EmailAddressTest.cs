@@ -149,7 +149,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Parse_QuotedLocalPart_ShouldNotBeStripped()
         {
-            var email = EmailAddress.Parse(@"""Joe Smith"" ""Literal (c)""@domain.com (with comment)");
+            var email = EmailAddress.Parse(@"""Joe Smith"" ""Literal (c)""@domain.com");
             Assert.AreEqual(@"""Literal (c)""@domain.com", email.ToString());
         }
 

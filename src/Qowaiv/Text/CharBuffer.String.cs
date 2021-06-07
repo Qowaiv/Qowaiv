@@ -95,18 +95,30 @@
         }
 
         /// <summary>Returns true if buffer starts with the specified string.</summary>
-        public bool StartsWith(string str)
+        public bool StartsWith(string str, bool ignoreCase = false)
         {
             if (str.Length > Length)
             {
                 return false;
             }
+            return ignoreCase 
+                ? StartsWithCaseInsensitve(str)
+                : StartsWithCaseSensitve(str);
+        }
+
+        private bool StartsWithCaseSensitve(string str)
+        {
             for (var i = 0; i < str.Length; i++)
             {
-                if (this[i] != str[i])
-                {
-                    return false;
-                }
+                if (this[i] != str[i]) { return false; }
+            }
+            return true;
+        }
+        private bool StartsWithCaseInsensitve(string str)
+        {
+            for (var i = 0; i < str.Length; i++)
+            {
+                if (char.ToUpperInvariant(this[i]) != char.ToUpperInvariant(str[i])) { return false; }
             }
             return true;
         }

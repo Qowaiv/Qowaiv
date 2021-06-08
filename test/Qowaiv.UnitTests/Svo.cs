@@ -5,7 +5,8 @@ namespace Qowaiv.UnitTests
 {
     public static class Svo
     {
-        public static readonly DateTime DateTime = new DateTime(2017, 06, 11, 06, 15, 00);
+        public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00);
+        public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
         public static readonly Gender Gender = Gender.Female;
         public static readonly Month Month = Month.February;
         public static readonly Percentage Percentage = 17.51.Percent();

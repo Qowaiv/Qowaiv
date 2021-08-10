@@ -424,6 +424,7 @@ namespace Email_address_specs
         }
 
         [TestCase(null, "")]
+        [TestCase("info@qowaiv.org", "info@qowaiv.org")]
         public void convention_based_serialization(object expected, EmailAddress svo)
         {
             var serialized = JsonTester.Write(svo);

@@ -108,6 +108,7 @@ namespace Qowaiv
             => state.Input.NotEmpty() && state.Input.First().IsQuote()
             ? state.LocalQuoted()
             : state.LocalPart();
+
         private static State LocalQuoted(this State state)
         {
             if (state.Quoted().Buffer.NotEmpty() && state.Input.NotEmpty())

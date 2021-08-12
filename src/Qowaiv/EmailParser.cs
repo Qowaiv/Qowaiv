@@ -8,7 +8,7 @@ namespace Qowaiv
 {
     /// <summary>Parses an email address with the following grammar:
     /// at         => @
-    /// root       => [quoted] ( [at] [domain] | [ ] [email] ) | [display]
+    /// root       => [quoted] ( [at] [domain] | [display] [email] )
     /// display    => (.+ &lt; [email] &gt;) | [email] (.+) | [email]
     /// email      => [mailto] [local] [domain]
     /// mailto     => (mailto:)?
@@ -44,8 +44,15 @@ namespace Qowaiv
                 var ch = state.Next();
                 if (ch.IsAt())
                 {
-                    state.Result.Add(state.Buffer).Add(ch);
-                    return state.Domain();
+                    if (state.Buffer.Length < 3 || state.Buffer.Length > LocalMaxLength)
+                    {
+                        return state.Invalid();
+                    }
+                    else
+                    {
+                        state.Result.Add(state.Buffer).Add(ch);
+                        return state.Domain();
+                    }
                 }
                 else if (char.IsWhiteSpace(ch))
                 {
@@ -108,12 +115,13 @@ namespace Qowaiv
             => state.Input.NotEmpty() && state.Input.First().IsQuote()
             ? state.LocalQuoted()
             : state.LocalPart();
+
         private static State LocalQuoted(this State state)
         {
             if (state.Quoted().Buffer.NotEmpty() && state.Input.NotEmpty())
             {
                 var ch = state.Next();
-                if (ch.IsAt() && state.Buffer.Length < LocalMaxLength)
+                if (ch.IsAt() && state.Buffer.Length <= LocalMaxLength)
                 {
                     state.Result.Add(state.Buffer).Add(ch);
                     return state;
@@ -237,10 +245,7 @@ namespace Qowaiv
         }
         private static State Quoted(this State state)
         {
-            if (state.Input.IsEmpty() || !state.Input.First().IsQuote())
-            {
-                return state;
-            }
+            if (!state.Input.First().IsQuote()) { return state; }
 
             var escaped = false;
             while (state.Input.NotEmpty())

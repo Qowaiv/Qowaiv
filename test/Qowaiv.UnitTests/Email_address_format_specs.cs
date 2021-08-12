@@ -5,6 +5,25 @@ using System.Collections.Generic;
 
 namespace Email_address_format_specs
 {
+    public class Length
+    {
+        [TestCase("the-total-length@of-an-entire-address.cannot-be-longer-than-two-hundred-and-fifty-four-characters.and-this-address-is-254-characters-exactly.so-it-should-be-valid.and-im-going-to-add-some-more-words-here.to-increase-the-length-blah-blah-blah-blah-bla.org")]
+        [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long")]
+        [TestCase("Display name is ignored <i234567890(comments are ignored)_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long>")]
+        public void maximum_is_254(string max)
+        {
+            Assert.That(EmailAddress.IsValid(max), Is.True);
+            Assert.That(EmailAddress.Parse(max).Length, Is.EqualTo(254));
+        }
+
+        [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long1")]
+        public void not_more_then_255(string max)
+        {
+            Assert.That(max?.Length, Is.AtLeast(255));
+            Assert.That(EmailAddress.IsValid(max), Is.False);
+        }
+    }
+
     public class Local_part
     {
         public static IEnumerable<char> WithoutLimitations
@@ -23,12 +42,25 @@ namespace Email_address_format_specs
         [TestCase(64)]
         public void length_between_1_and_64(int length)
             => Assert.That(EmailAddress.IsValid($"{new string('a', length)}@qowaiv.org"), Is.True);
-        
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(17)]
+        [TestCase(62)]
+        public void length_between_1_and_62_quoted(int length)
+           => Assert.That(EmailAddress.IsValid($@"""{new string('a', length)}""@qowaiv.org"), Is.True);
+
         [TestCase(65)]
         [TestCase(66)]
         [TestCase(99)]
         public void length_not_above_64(int length)
             => Assert.That(EmailAddress.IsValid($"{new string('a', length)}@qowaiv.org"), Is.False);
+
+        [TestCase(63)]
+        [TestCase(64)]
+        [TestCase(99)]
+        public void length_not_above_62_quoted(int length)
+            => Assert.That(EmailAddress.IsValid($@"""{new string('a', length)}""@qowaiv.org"), Is.False);
 
 
         [TestCaseSource(nameof(WithoutLimitations))]
@@ -60,6 +92,19 @@ namespace Email_address_format_specs
  
     public class Domain_part
     {
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(17)]
+        [TestCase(63)]
+        public void part_between_1_and_63(int length)
+          => Assert.That(EmailAddress.IsValid($"info@{new string('a', length)}.qowaiv.org"), Is.True);
+
+        [TestCase(64)]
+        [TestCase(65)]
+        [TestCase(99)]
+        public void part_not_above_63(int length)
+            => Assert.That(EmailAddress.IsValid($"info@{new string('a', length)}.qowaiv.org"), Is.False);
+
         public static IEnumerable<char> Forbidden => "!#$%&'*+/=?^`{}|~";
 
         [TestCaseSource(nameof(Forbidden))]
@@ -188,6 +233,10 @@ namespace Email_address_format_specs
         [TestCase("Display Name >info@qowaiv.org<")]
         [TestCase("Display Name info@qowaiv.org<>")]
         [TestCase("info@qowaiv.org (")]
+        [TestCase("info@qowaiv.org )")]
+        [TestCase("info@qowaiv.org ))")]
+        [TestCase("info@qowaiv.org ())")]
+        [TestCase("info@qowaiv.org (()")]
         [TestCase("info@qowaiv.org )(")]
         [TestCase(@"""Display Name info@qowaiv.org")]
         [TestCase(@"Display"" info@qowaiv.org")]
@@ -203,6 +252,7 @@ namespace Email_address_format_specs
         [TestCase("info@qow(domain part)aiv.org")]
         [TestCase("in(with @)fo@qowaiv.org")]
         [TestCase("info@qow(with @)aiv.org")]
+        [TestCase("in(multiple 1)fo@qow(multiple 2)aiv.or(multiple 3)g")]
         public void are_ignored(string email)
             => Assert.That(EmailAddress.Parse(email), Is.EqualTo(Svo.EmailAddress));
         

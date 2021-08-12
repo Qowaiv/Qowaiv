@@ -44,8 +44,15 @@ namespace Qowaiv
                 var ch = state.Next();
                 if (ch.IsAt())
                 {
-                    state.Result.Add(state.Buffer).Add(ch);
-                    return state.Domain();
+                    if (state.Buffer.Length > LocalMaxLength)
+                    {
+                        return state.Invalid();
+                    }
+                    else
+                    {
+                        state.Result.Add(state.Buffer).Add(ch);
+                        return state.Domain();
+                    }
                 }
                 else if (char.IsWhiteSpace(ch))
                 {
@@ -238,10 +245,7 @@ namespace Qowaiv
         }
         private static State Quoted(this State state)
         {
-            if (state.Input.IsEmpty() || !state.Input.First().IsQuote())
-            {
-                return state;
-            }
+            if (!state.Input.First().IsQuote()) { return state; }
 
             var escaped = false;
             while (state.Input.NotEmpty())

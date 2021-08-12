@@ -5,8 +5,20 @@ namespace Qowaiv.UnitTests
     // Check: https://github.com/nunit/nunit3-vs-adapter/issues/622
     public partial class EmailValdationTest
     {
+        [TestCase(null, "null")]
+        [TestCase("", "String.Empty")]
+        [TestCase("..@test.com", "Double dot local")]
+        [TestCase(".a@test.com", "Starts with a dot")]
+        [TestCase("ab@sd@dd", "Two @")]
+        [TestCase(".@s.dd")]
         [TestCase("ends-with@")]
         [TestCase("domain.part.of1@a")]
+        [TestCase("ab@988.120.150.10")]
+        [TestCase("ab@120.256.256.120")]
+        [TestCase("ab@120.25.1111.120")]
+        [TestCase("ab@[188.120.150.10")]
+        [TestCase("ab@188.120.150.10]")]
+        [TestCase("ab@[188.120.150.10].com")]
         [TestCase("a@b.-de.cc")]
         [TestCase("a@bde-.cc")]
         [TestCase("a@bde.c-c")]
@@ -36,6 +48,7 @@ namespace Qowaiv.UnitTests
         [TestCase("email@[123.123.123].123")]
         [TestCase("email@123.123.123.123]")]
         [TestCase("email@123.123.[123.123]")]
+        [TestCase("ipv4.with.ipv6prefix.addr@[IPv6:123.1.72.10]")]
         [TestCase("email@{leftbracket.com")]
         [TestCase("email@rightbracket}.com")]
         [TestCase("email@p|pe.com")]
@@ -57,10 +70,22 @@ namespace Qowaiv.UnitTests
         [TestCase("email)mirror(@plus.com")]
         [TestCase("email@plus.com (not closed comment")]
         [TestCase("email(with @ in comment)plus.com")]
+        [TestCase(@"""Joe Smith email@domain.com")]
+        [TestCase(@"""Joe Smith' email@domain.com")]
+        [TestCase(@"""Joe Smith""email@domain.com")]
+        [TestCase("email@mailto:domain.com")]
+        [TestCase("mailto:mailto:email@domain.com")]
         [TestCase("Display Name <email@plus.com> (after name with display)")]
         [TestCase(@"""With extra  display name"" Display Name<email@domain.com>")]
 
+        [TestCase("mail(commment)to:comment-in-mailto@domain.com")]
+
         //// examples from https://github.com/Sembiance/email-validator
+        [TestCase("@missing-local.org")]
+        [TestCase("IP-and-port@127.0.0.1:25")]
+        [TestCase("another-invalid-ip@127.0.0.256")]
+        [TestCase("invalid")]
+        [TestCase("invalid-ip@127.0.0.1.26")]
         [TestCase("local-ends-with-dot.@sld.com")]
         [TestCase("missing-at-sign.net")]
         [TestCase("missing-sld@.com")]
@@ -70,6 +95,7 @@ namespace Qowaiv.UnitTests
         [TestCase("the-character-limit@for-each-part.of-the-domain.is-sixty-three-characters.this-is-exactly-sixty-four-characters-so-it-is-invalid-blah-blah.com")]
         [TestCase("the-local-part-is-invalid-if-it-is-longer-than-sixty-four-characters@sld.net")]
         [TestCase("the-total-length@of-an-entire-address.cannot-be-longer-than-two-hundred-and-fifty-four-characters.and-this-address-is-255-characters-exactly.so-it-should-be-invalid.and-im-going-to-add-some-more-words-here.to-increase-the-lenght-blah-blah-blah-blah-bl.org")]
+        [TestCase("two..consecutive-dots@sld.com")]
         public void Invalid(string email, string message = null) => Assert.IsFalse(EmailAddress.IsValid(email), message);
-   }
+    }
 }

@@ -8,7 +8,7 @@ namespace Qowaiv
 {
     /// <summary>Parses an email address with the following grammar:
     /// at         => @
-    /// root       => [quoted] ( [at] [domain] | [ ] [email] ) | [display]
+    /// root       => [quoted] ( [at] [domain] | [display] [email] )
     /// display    => (.+ &lt; [email] &gt;) | [email] (.+) | [email]
     /// email      => [mailto] [local] [domain]
     /// mailto     => (mailto:)?
@@ -44,7 +44,7 @@ namespace Qowaiv
                 var ch = state.Next();
                 if (ch.IsAt())
                 {
-                    if (state.Buffer.Length > LocalMaxLength)
+                    if (state.Buffer.Length < 3 || state.Buffer.Length > LocalMaxLength)
                     {
                         return state.Invalid();
                     }
@@ -121,7 +121,7 @@ namespace Qowaiv
             if (state.Quoted().Buffer.NotEmpty() && state.Input.NotEmpty())
             {
                 var ch = state.Next();
-                if (ch.IsAt() && state.Buffer.Length < LocalMaxLength)
+                if (ch.IsAt() && state.Buffer.Length <= LocalMaxLength)
                 {
                     state.Result.Add(state.Buffer).Add(ch);
                     return state;
@@ -253,7 +253,7 @@ namespace Qowaiv
                 var ch = state.Next();
                 state.Buffer.Add(ch);
 
-                if (!escaped && ch.IsQuote() && state.Buffer.Length > 2)
+                if (!escaped && ch.IsQuote() && state.Buffer.Length > 1)
                 {
                     return state;
                 }

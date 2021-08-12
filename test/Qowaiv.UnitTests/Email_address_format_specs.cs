@@ -48,7 +48,10 @@ namespace Email_address_format_specs
         [TestCase(17)]
         [TestCase(62)]
         public void length_between_1_and_62_quoted(int length)
-           => Assert.That(EmailAddress.IsValid($@"""{new string('a', length)}""@qowaiv.org"), Is.True);
+        {
+            Assert.That(EmailAddress.IsValid($@"""{new string('a', length)}""@qowaiv.org"), Is.True);
+            Assert.That(EmailAddress.IsValid($@"Display <""{new string('a', length)}""@qowaiv.org>"), Is.True);
+        }
 
         [TestCase(65)]
         [TestCase(66)]
@@ -60,7 +63,10 @@ namespace Email_address_format_specs
         [TestCase(64)]
         [TestCase(99)]
         public void length_not_above_62_quoted(int length)
-            => Assert.That(EmailAddress.IsValid($@"""{new string('a', length)}""@qowaiv.org"), Is.False);
+        {
+            Assert.That(EmailAddress.IsValid($@"""{new string('a', length)}""@qowaiv.org"), Is.False);
+            Assert.That(EmailAddress.IsValid($@"Display <""{new string('a', length)}""@qowaiv.org>"), Is.False);
+        }
 
 
         [TestCaseSource(nameof(WithoutLimitations))]
@@ -219,11 +225,6 @@ namespace Email_address_format_specs
             => Assert.That(EmailAddress.Parse(comments), Is.EqualTo(Svo.EmailAddress));
 
         [TestCase("Display Name <info@qowaiv.org> (after name with display)")]
-        [TestCase(@""""" ifno@qowaiv.org")]
-        public void empty_not_allowed(string empty)
-            => Assert.That(EmailAddress.IsValid(empty), Is.False);
-
-        [TestCase("Display Name <info@qowaiv.org> (after name with display)")]
         [TestCase(@"""With extra  display name"" Display Name<info@qowaiv.org>")]
         public void mixing_not_allowed(string mixed)
             => Assert.That(EmailAddress.IsValid(mixed), Is.False);
@@ -239,6 +240,7 @@ namespace Email_address_format_specs
         [TestCase("info@qowaiv.org (()")]
         [TestCase("info@qowaiv.org )(")]
         [TestCase(@"""Display Name info@qowaiv.org")]
+        [TestCase(@"Display Name <""Display Name info@qowaiv.org>")]
         [TestCase(@"Display"" info@qowaiv.org")]
         public void mismatches(string mismatch)
             => Assert.That(EmailAddress.IsValid(mismatch), Is.False);

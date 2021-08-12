@@ -207,6 +207,9 @@ var argentina = PostalCode.Parse("Z1230ABC");
 argentina.ToString("AR"); // Z 1230 ABC
 ```
 
+### Telephone number
+
+
 ### Week date
 Represents a week based date.
 

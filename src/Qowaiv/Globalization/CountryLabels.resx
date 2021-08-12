@@ -89,7 +89,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="AG_CallingCode">
-    <value>+1 268</value>
+    <value>+1268</value>
   </data>
   <data name="AI_DisplayName">
     <value>Anguilla</value>
@@ -107,7 +107,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="AI_CallingCode">
-    <value>+1 264</value>
+    <value>+1264</value>
   </data>
   <data name="AL_DisplayName">
     <value>Albania</value>
@@ -212,7 +212,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="AS_CallingCode">
-    <value>+1 684</value>
+    <value>+1684</value>
   </data>
   <data name="AT_DisplayName">
     <value>Austria</value>
@@ -338,7 +338,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="BB_CallingCode">
-    <value>+1 247</value>
+    <value>+1247</value>
   </data>
   <data name="BD_DisplayName">
     <value>Bangladesh</value>
@@ -500,7 +500,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="BM_CallingCode">
-    <value>+1 441</value>
+    <value>+1441</value>
   </data>
   <data name="BN_DisplayName">
     <value>Brunei Darussalam</value>
@@ -590,7 +590,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="BS_CallingCode">
-    <value>+1 242</value>
+    <value>+1242</value>
   </data>
   <data name="BT_DisplayName">
     <value>Bhutan</value>
@@ -1094,7 +1094,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="DM_CallingCode">
-    <value>+1 767</value>
+    <value>+1767</value>
   </data>
   <data name="DO_DisplayName">
     <value>Dominican Republic</value>
@@ -1418,7 +1418,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="GD_CallingCode">
-    <value>+1 473</value>
+    <value>+1473</value>
   </data>
   <data name="GE_DisplayName">
     <value>Georgia</value>
@@ -1670,7 +1670,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="GU_CallingCode">
-    <value>+1 671</value>
+    <value>+1671</value>
   </data>
   <data name="GW_DisplayName">
     <value>Guinea-Bissau</value>
@@ -2030,7 +2030,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="JM_CallingCode">
-    <value>+1 876</value>
+    <value>+1876</value>
   </data>
   <data name="JO_DisplayName">
     <value>Jordan</value>
@@ -2174,7 +2174,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="KN_CallingCode">
-    <value>+1 869</value>
+    <value>+1869</value>
   </data>
   <data name="KP_DisplayName">
     <value>Korea</value>
@@ -2246,7 +2246,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="KY_CallingCode">
-    <value>+1 345</value>
+    <value>+1345</value>
   </data>
   <data name="KZ_DisplayName">
     <value>Kazakhstan</value>
@@ -2318,7 +2318,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="LC_CallingCode">
-    <value>+1 758</value>
+    <value>+1758</value>
   </data>
   <data name="LI_DisplayName">
     <value>Liechtenstein</value>
@@ -2696,7 +2696,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="MP_CallingCode">
-    <value>+1 670</value>
+    <value>+1670</value>
   </data>
   <data name="MQ_DisplayName">
     <value>Martinique</value>
@@ -2750,7 +2750,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="MS_CallingCode">
-    <value>+1 664</value>
+    <value>+1664</value>
   </data>
   <data name="MT_DisplayName">
     <value>Malta</value>
@@ -3290,7 +3290,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="PR_CallingCode">
-    <value>+1 787</value>
+    <value>+1787</value>
   </data>
   <data name="PS_DisplayName">
     <value>Palestinian Territory</value>
@@ -3812,7 +3812,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="SX_CallingCode">
-    <value>+1 721</value>
+    <value>+1721</value>
   </data>
   <data name="SY_DisplayName">
     <value>Syrian Arab Republic</value>
@@ -3866,7 +3866,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="TC_CallingCode">
-    <value>+1 649</value>
+    <value>+1649</value>
   </data>
   <data name="TD_DisplayName">
     <value>Chad</value>
@@ -4082,7 +4082,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="TT_CallingCode">
-    <value>+1 868</value>
+    <value>+1868</value>
   </data>
   <data name="TV_DisplayName">
     <value>Tuvalu</value>
@@ -4280,7 +4280,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="VC_CallingCode">
-    <value>+1 784</value>
+    <value>+1784</value>
   </data>
   <data name="VE_DisplayName">
     <value>Venezuela</value>
@@ -4316,7 +4316,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="VG_CallingCode">
-    <value>+1 284</value>
+    <value>+1284</value>
   </data>
   <data name="VI_DisplayName">
     <value>Virgin Islands</value>
@@ -4334,7 +4334,7 @@
     <value>1974-01-01</value>
   </data>
   <data name="VI_CallingCode">
-    <value>+1 340</value>
+    <value>+1340</value>
   </data>
   <data name="VN_DisplayName">
     <value>Viet Nam</value>

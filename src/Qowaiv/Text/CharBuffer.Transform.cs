@@ -170,9 +170,9 @@ namespace Qowaiv.Text
             .Uppercase()
             .ToNonDiacritic();
 
-        private static bool IsWhiteSpace(char ch) => char.IsWhiteSpace(ch);
+        internal static bool IsWhiteSpace(char ch) => char.IsWhiteSpace(ch);
 
-        private static bool IsMarkup(char ch) => IsWhiteSpace(ch) || markup.IndexOf(ch) != NotFound;
+        internal static bool IsMarkup(char ch) => IsWhiteSpace(ch) || markup.IndexOf(ch) != NotFound;
 
         private static readonly string markup = "-._"
             + (char)0x00B7 // middle dot

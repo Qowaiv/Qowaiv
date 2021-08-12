@@ -85,7 +85,7 @@ namespace Qowaiv.Reflection
             }
             else if (Nullable.GetUnderlyingType(type) is Type underlyging)
             {
-                return sb.AppendType(underlyging, withNamespace).Append("?");
+                return sb.AppendType(underlyging, withNamespace).Append('?');
             }
             else if (type.IsArray)
             {

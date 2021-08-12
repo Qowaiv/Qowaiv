@@ -12,9 +12,10 @@ namespace Email_address_format_specs
          + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
          + "!#$%&'*+-/=?^_`{}|~";
 
-        [Test]
-        public void not_empty()
-            => Assert.That(EmailAddress.IsValid($"@qowaiv.org"), Is.False);
+        [TestCase("")]
+        [TestCase(@"""""")]
+        public void not_empty(string empty)
+            => Assert.That(EmailAddress.IsValid($"{empty}@qowaiv.org"), Is.False);
 
         [TestCase(1)]
         [TestCase(2)]
@@ -49,9 +50,84 @@ namespace Email_address_format_specs
         [Test]
         public void dot_dot_is_forbidden_sequence()
             => Assert.That(EmailAddress.IsValid("in..fo@qowaiv.org"), Is.False);
+
+        [TestCase(@""" ""@qowaiv.org")]
+        [TestCase(@"""info@qowaiv.org""@qowaiv.org")]
+        [TestCase(@"""i n f o""@qowaiv.org")]
+        public void quoted_allows_anything(string quoted)
+             => Assert.That(EmailAddress.IsValid(quoted), Is.True);
     }
  
-    public class address_sign
+    public class Domain_part
+    {
+        public static IEnumerable<char> Forbidden => "!#$%&'*+/=?^`{}|~";
+
+        [TestCaseSource(nameof(Forbidden))]
+        public void forbidden_char(char ch)
+             => Assert.That(EmailAddress.IsValid($"info@qo{ch}waiv.org"), Is.False);
+
+        [Test]
+        public void not_empty()
+            => Assert.That(EmailAddress.IsValid("info@"), Is.False);
+
+        [Test]
+        public void not_length_1()
+            => Assert.That(EmailAddress.IsValid("info@q"), Is.False);
+
+        [TestCase("org")]
+        [TestCase("com")]
+        [TestCase("museum")]
+        [TestCase("topleveldomain")]
+        [TestCase("co.jp")]
+        public void top_level_domain_can_contain_any_letter(string topLevelDomain)
+            => Assert.That(EmailAddress.IsValid($"info@qowaiv.{topLevelDomain}"), Is.True);
+
+        [TestCase("xn--bcher-kva8445foa")]
+        [TestCase("xn--eckwd4c7cu47r2wf")]
+        [TestCase("xn--3e0b707e")]
+        public void can_be_punycode(string punycode)
+            => Assert.That(EmailAddress.IsValid($"info@qowaiv.{punycode}"), Is.True);
+
+        [Test]
+        public void dots_can_seperate_parts()
+            => Assert.That(EmailAddress.IsValid("info@one.two.three.4.5.qowaiv.org"), Is.True);
+
+        [TestCase]
+        public void dot_is_optional()
+            => Assert.That(EmailAddress.IsValid("info@qowaiv"), Is.True);
+
+        [Test]
+        public void can_not_start_with_dot()
+            => Assert.That(EmailAddress.IsValid("info@.qowaiv.org"), Is.False);
+
+        [Test]
+        public void can_not_end_with_dot()
+            => Assert.That(EmailAddress.IsValid("info@qowaiv.org."), Is.False);
+
+        [Test]
+        public void dot_dot_is_forbidden_sequence()
+            => Assert.That(EmailAddress.IsValid("info@qowaiv..org"), Is.False);
+
+        [Test]
+        public void dashes_can_seperate_parts()
+           => Assert.That(EmailAddress.IsValid("info@one-two-three-4-5-qowaiv.org"), Is.True);
+
+        [TestCase("info@-qowaiv.org")]
+        [TestCase("info@qowaiv.-org")]
+        public void can_not_start_with_dash(string mail)
+           => Assert.That(EmailAddress.IsValid(mail), Is.False);
+
+        [TestCase("info@qowaiv.org-")]
+        [TestCase("info@qowaiv-.org")]
+        public void can_not_end_with_dash(string mail)
+            => Assert.That(EmailAddress.IsValid(mail), Is.False);
+
+        [Test]
+        public void dash_dash_is_an_allowed_sequence()
+            => Assert.That(EmailAddress.IsValid("info@qow--aiv.org"), Is.True);
+    }
+
+    public class Address_sign
     {
         [TestCase(null)]
         [TestCase("")]
@@ -84,6 +160,10 @@ namespace Email_address_format_specs
         public void not_with_single_quotes()
             => Assert.That(EmailAddress.IsValid("'Joe Smith' info@qowaiv.org"), Is.False);
 
+        [Test]
+        public void not_with_encoded_brackets()
+            => Assert.That(EmailAddress.IsValid("Joe Smith &lt;info@qowaiv.org&gt;"), Is.False);
+
         [TestCase("Joe Smith <info@qowaiv.org>")]
         [TestCase(@"Test |<gaaf <info@qowaiv.org>")]
         public void Brackets(string brackets)
@@ -92,6 +172,27 @@ namespace Email_address_format_specs
         [TestCase("info@qowaiv.org (Joe Smith)")]
         public void Comments_afterwards(string comments)
             => Assert.That(EmailAddress.Parse(comments), Is.EqualTo(Svo.EmailAddress));
+
+        [TestCase("Display Name <info@qowaiv.org> (after name with display)")]
+        [TestCase(@""""" ifno@qowaiv.org")]
+        public void empty_not_allowed(string empty)
+            => Assert.That(EmailAddress.IsValid(empty), Is.False);
+
+        [TestCase("Display Name <info@qowaiv.org> (after name with display)")]
+        [TestCase(@"""With extra  display name"" Display Name<info@qowaiv.org>")]
+        public void mixing_not_allowed(string mixed)
+            => Assert.That(EmailAddress.IsValid(mixed), Is.False);
+
+        [TestCase("Display Name info@qowaiv.org>")]
+        [TestCase("Display Name <info@qowaiv.org>>")]
+        [TestCase("Display Name >info@qowaiv.org<")]
+        [TestCase("Display Name info@qowaiv.org<>")]
+        [TestCase("info@qowaiv.org (")]
+        [TestCase("info@qowaiv.org )(")]
+        [TestCase(@"""Display Name info@qowaiv.org")]
+        [TestCase(@"Display"" info@qowaiv.org")]
+        public void mismatches(string mismatch)
+            => Assert.That(EmailAddress.IsValid(mismatch), Is.False);
     }
 
     public class Comments
@@ -104,6 +205,16 @@ namespace Email_address_format_specs
         [TestCase("info@qow(with @)aiv.org")]
         public void are_ignored(string email)
             => Assert.That(EmailAddress.Parse(email), Is.EqualTo(Svo.EmailAddress));
+        
+        [Test]
+        public void not_nested()
+            => Assert.That(EmailAddress.IsValid("in( nested(extra) )fo@qowaiv.org"), Is.False);
+
+        [TestCase("inf(o@qowaiv.org")]
+        [TestCase("info)@qowaiv.org")]
+        [TestCase("in)wrong order(fo@qowaiv.org")]
+        public void not_matching(string notMatching)
+           => Assert.That(EmailAddress.IsValid("notMatching"), Is.False);
     }
 
     public class MailTo_prefix
@@ -189,6 +300,19 @@ namespace Email_address_format_specs
         [Test]
         public void ip_v4_valid_without_brackets()
             => Assert.That(EmailAddress.IsValid("valid.ipv4.without-brackets@123.1.72.010"), Is.True);
+
+
+        [TestCase("email@111.222.333")]
+        [TestCase("email@111.222.333.256")]
+        public void ip_v4_four_groups_within_range(string ip4Based)
+            => Assert.That(EmailAddress.IsValid(ip4Based), Is.False);
+
+        [TestCase("email@[123.123.123.123")]
+        [TestCase("email@[123.123.123].123")]
+        [TestCase("email@123.123.123.123]")]
+        [TestCase("email@123.123.[123.123]")]
+        public void brackets_must_match(string ip4Based)
+            => Assert.That(EmailAddress.IsValid(ip4Based), Is.False);
 
         [TestCase("user@[IPv6:2001:db8:1ff::a0b:dbd0]")]
         [TestCase("valid.ipv6.addr@[IPv6:0::1]")]

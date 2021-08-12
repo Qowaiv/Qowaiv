@@ -249,7 +249,7 @@ namespace Qowaiv
                 var ch = state.Next();
                 state.Buffer.Add(ch);
 
-                if (!escaped && ch.IsQuote() && state.Buffer.Length > 1)
+                if (!escaped && ch.IsQuote() && state.Buffer.Length > 2)
                 {
                     return state;
                 }

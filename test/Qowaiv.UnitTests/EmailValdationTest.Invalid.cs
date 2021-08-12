@@ -5,12 +5,6 @@ namespace Qowaiv.UnitTests
     // Check: https://github.com/nunit/nunit3-vs-adapter/issues/622
     public partial class EmailValdationTest
     {
-        [TestCase(null, "null")]
-        [TestCase("", "String.Empty")]
-        [TestCase("..@test.com", "Double dot local")]
-        [TestCase(".a@test.com", "Starts with a dot")]
-        [TestCase("ab@sd@dd", "Two @")]
-        [TestCase(".@s.dd")]
         [TestCase("ends-with@")]
         [TestCase("domain.part.of1@a")]
         [TestCase("a@b.-de.cc")]
@@ -63,17 +57,10 @@ namespace Qowaiv.UnitTests
         [TestCase("email)mirror(@plus.com")]
         [TestCase("email@plus.com (not closed comment")]
         [TestCase("email(with @ in comment)plus.com")]
-        [TestCase(@"""Joe Smith email@domain.com")]
-        [TestCase(@"""Joe Smith' email@domain.com")]
-        [TestCase(@"""Joe Smith""email@domain.com")]
         [TestCase("Display Name <email@plus.com> (after name with display)")]
         [TestCase(@"""With extra  display name"" Display Name<email@domain.com>")]
 
-        [TestCase("mail(commment)to:comment-in-mailto@domain.com")]
-
         //// examples from https://github.com/Sembiance/email-validator
-        [TestCase("@missing-local.org")]
-        [TestCase("invalid")]
         [TestCase("local-ends-with-dot.@sld.com")]
         [TestCase("missing-at-sign.net")]
         [TestCase("missing-sld@.com")]
@@ -83,7 +70,6 @@ namespace Qowaiv.UnitTests
         [TestCase("the-character-limit@for-each-part.of-the-domain.is-sixty-three-characters.this-is-exactly-sixty-four-characters-so-it-is-invalid-blah-blah.com")]
         [TestCase("the-local-part-is-invalid-if-it-is-longer-than-sixty-four-characters@sld.net")]
         [TestCase("the-total-length@of-an-entire-address.cannot-be-longer-than-two-hundred-and-fifty-four-characters.and-this-address-is-255-characters-exactly.so-it-should-be-invalid.and-im-going-to-add-some-more-words-here.to-increase-the-lenght-blah-blah-blah-blah-bl.org")]
-        [TestCase("two..consecutive-dots@sld.com")]
         public void Invalid(string email, string message = null) => Assert.IsFalse(EmailAddress.IsValid(email), message);
    }
 }

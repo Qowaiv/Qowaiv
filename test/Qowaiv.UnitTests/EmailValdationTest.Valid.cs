@@ -14,8 +14,6 @@ namespace Qowaiv.UnitTests
         [TestCase("email@domain.topleveldomain")]
         [TestCase("email@domain.co.jp")]
         [TestCase("FIRSTNAME-LASTNAME@d--n.com")]
-        [TestCase("email(with @ comment)@domain.com")]
-        [TestCase("email@dom(with comment)ain.com")]
         [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long")]
         
         
@@ -38,7 +36,6 @@ namespace Qowaiv.UnitTests
         [TestCase("local@dash-in-sld.com")]
         [TestCase("local@sld.newTLD")]
         [TestCase("local@sub.domains.com")]
-        [TestCase("mixed-1234-in-{+^}-local@sld.net")]
         [TestCase("one-character-third-level@a.example.com")]
         [TestCase("one-letter-sld@x.org")]
         [TestCase("punycode-numbers-in-tld@sld.xn--3e0b707e")]

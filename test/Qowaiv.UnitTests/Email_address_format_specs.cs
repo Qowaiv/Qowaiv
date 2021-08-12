@@ -5,43 +5,63 @@ using System.Collections.Generic;
 
 namespace Email_address_format_specs
 {
-    public class Length
+    public class Local_part
     {
-        [Test]
-        public void local_between_1_and_64([Range(1, 64)] int length)
-            => Assert.That(EmailAddress.IsValid($"{new string('a', length)}@qowaiv.org"), Is.True);
+        public static IEnumerable<char> WithoutLimitations
+         => "abcdefghijklmnopqrstuvwxyz"
+         + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+         + "!#$%&'*+-/=?^_`{}|~";
 
         [Test]
-        public void local_not_empty()
+        public void not_empty()
             => Assert.That(EmailAddress.IsValid($"@qowaiv.org"), Is.False);
 
-        [Test]
-        public void local_not_above_64([Range(65, 66)] int length)
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(17)]
+        [TestCase(64)]
+        public void length_between_1_and_64(int length)
+            => Assert.That(EmailAddress.IsValid($"{new string('a', length)}@qowaiv.org"), Is.True);
+        
+        [TestCase(65)]
+        [TestCase(66)]
+        [TestCase(99)]
+        public void length_not_above_64(int length)
             => Assert.That(EmailAddress.IsValid($"{new string('a', length)}@qowaiv.org"), Is.False);
-    }
 
-    public class Characters
-    {
-        public static IEnumerable<char> LocalWithoutLimitations
-            => "abcdefghijklmnopqrstuvwxyz"
-            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            + "!#$%&'*+-/=?^_`{}|~";
 
-        [TestCaseSource(nameof(LocalWithoutLimitations))]
-        public void without_limitiations_for_local(char ch)
+        [TestCaseSource(nameof(WithoutLimitations))]
+        public void char_without_limitiations(char ch)
             => Assert.That(EmailAddress.IsValid($"{new string(ch, 64)}@qowaiv.org"), Is.True);
 
         [Test]
-        public void local_can_not_start_with_dot()
+        public void dots_can_seperate_parts()
+            => Assert.That(EmailAddress.IsValid("zero.one.two.three.four.five.6.7.8.9@qowaiv.org"), Is.True);
+
+        [Test]
+        public void can_not_start_with_dot()
             => Assert.That(EmailAddress.IsValid(".info@qowaiv.org"), Is.False);
 
         [Test]
-        public void local_can_not_end_with_dot()
+        public void can_not_end_with_dot()
             => Assert.That(EmailAddress.IsValid("info.@qowaiv.org"), Is.False);
 
         [Test]
-        public void local_can_not_have_two_concurrend_dots()
+        public void dot_dot_is_forbidden_sequence()
             => Assert.That(EmailAddress.IsValid("in..fo@qowaiv.org"), Is.False);
+    }
+ 
+    public class address_sign
+    {
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("info_at_qowaiv.org")]
+        public void is_required(string email)
+            => Assert.That(EmailAddress.IsValid(email), Is.False);
+
+        [Test]
+        public void not_multiple_times()
+            => Assert.That(EmailAddress.IsValid("info@qowaiv@org"), Is.False);
     }
 
     public class Display_name
@@ -52,6 +72,18 @@ namespace Email_address_format_specs
         public void Quoted(string quoted)
             => Assert.That(EmailAddress.Parse(quoted), Is.EqualTo(Svo.EmailAddress));
 
+        [Test]
+        public void quoted_requires_spacing()
+            => Assert.That(EmailAddress.IsValid(@"""Joe Smith""info@qowaiv.org"), Is.False);
+
+        [Test]
+        public void quote_must_be_closed()
+            => Assert.That(EmailAddress.IsValid(@"""Joe Smith info@qowaiv.org"), Is.False);
+
+        [Test]
+        public void not_with_single_quotes()
+            => Assert.That(EmailAddress.IsValid("'Joe Smith' info@qowaiv.org"), Is.False);
+
         [TestCase("Joe Smith <info@qowaiv.org>")]
         [TestCase(@"Test |<gaaf <info@qowaiv.org>")]
         public void Brackets(string brackets)
@@ -60,6 +92,18 @@ namespace Email_address_format_specs
         [TestCase("info@qowaiv.org (Joe Smith)")]
         public void Comments_afterwards(string comments)
             => Assert.That(EmailAddress.Parse(comments), Is.EqualTo(Svo.EmailAddress));
+    }
+
+    public class Comments
+    {
+        [TestCase("info@qowaiv.org(afterwards)")]
+        [TestCase("(before)info@qowaiv.org")]
+        [TestCase("in(local part)fo@qowaiv.org")]
+        [TestCase("info@qow(domain part)aiv.org")]
+        [TestCase("in(with @)fo@qowaiv.org")]
+        [TestCase("info@qow(with @)aiv.org")]
+        public void are_ignored(string email)
+            => Assert.That(EmailAddress.Parse(email), Is.EqualTo(Svo.EmailAddress));
     }
 
     public class MailTo_prefix
@@ -104,6 +148,11 @@ namespace Email_address_format_specs
         [TestCase("at_end_mailto:@qowaiv.org")]
         public void only_once_at_start(string mail)
            => Assert.That(EmailAddress.IsValid(mail), Is.False);
+
+        [Test]    
+        public void not_with_comment_within()
+            => Assert.That(EmailAddress.IsValid("mai(comment)lto:info@qowaiv.org"), Is.False);
+
     }
 
     public class Escape_character

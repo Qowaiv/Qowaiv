@@ -20,7 +20,7 @@ namespace Qowaiv.Json
         public OpenApiDataTypeAttribute(
             string description,
             string type,
-            string example,
+            object example,
             string format = null,
             bool nullable = false,
             string pattern = null,
@@ -28,7 +28,7 @@ namespace Qowaiv.Json
         {
             Description = Guard.NotNullOrEmpty(description, nameof(description));
             Type = Guard.NotNullOrEmpty(type, nameof(type));
-            Example = Guard.NotNullOrEmpty(example, nameof(example));
+            Example = Guard.NotNull(example, nameof(example));
             Format = format;
             Nullable = nullable;
             Pattern = pattern;
@@ -66,7 +66,7 @@ namespace Qowaiv.Json
         public string Type { get; }
 
         /// <summary>Gets the example of the OpenAPI Data Type.</summary>
-        public string Example { get; }
+        public object Example { get; }
 
         /// <summary>Gets the format of the OpenAPI Data Type.</summary>
         public string Format { get; }

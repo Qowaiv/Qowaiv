@@ -31,7 +31,7 @@ namespace Qowaiv.IO
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
-    [OpenApiDataType(description: "Stream size notation (in byte).", example: "1024", type: "integer", format: "stream-size")]
+    [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
     [TypeConverter(typeof(StreamSizeTypeConverter))]
     public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
     {

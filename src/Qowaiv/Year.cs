@@ -19,7 +19,7 @@ namespace Qowaiv
     /// <summary>Represents a year.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
-    [OpenApiDataType(description: "Year(-only) notation.", example: "1983", type: "integer", format: "year", nullable: true)]
+    [OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
     [TypeConverter(typeof(YearTypeConverter))]
     public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {

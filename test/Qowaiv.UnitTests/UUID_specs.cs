@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -659,32 +660,20 @@ Actual:   [{(string.Join(", ", act))}]");
         internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Uuid)).FirstOrDefault();
 
         [Test]
-        public void with_description()
-        {
-            Assert.AreEqual(
-                "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.",
-                Attribute.Description);
-        }
+        public void with_description() => Attribute.Description.Should().Be("Universally unique identifier, Base64 encoded.");
 
         [Test]
-        public void has_type()
-        {
-            Assert.AreEqual("string", Attribute.Type);
-        }
+        public void with_example() => Attribute.Example.Should().Be("lmZO_haEOTCwGsCcbIZFFg");
 
         [Test]
-        public void has_format()
-        {
-            Assert.AreEqual("uuid-base64", Attribute.Format);
-        }
+        public void has_type() => Attribute.Type.Should().Be("string");
 
         [Test]
-        public void pattern_is_null()
-        {
-            Assert.IsNull(Attribute.Pattern);
-        }
+        public void has_format() => Attribute.Format.Should().Be("uuid-base64");
+
+        [Test]
+        public void pattern_is_null() => Attribute.Pattern.Should().BeNull();
     }
-
 
     public class Supports_binary_serialization
     {

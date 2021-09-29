@@ -39,7 +39,7 @@ namespace Qowaiv
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
-    [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
+    [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", example:"female", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
     [TypeConverter(typeof(GenderTypeConverter))]
     public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
     {

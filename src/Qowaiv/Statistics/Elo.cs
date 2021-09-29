@@ -28,7 +28,7 @@ namespace Qowaiv.Statistics
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
     [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(double))]
-    [OpenApiDataType(description: "Elo rating system notation.", type: "number", format: "elo")]
+    [OpenApiDataType(description: "Elo rating system notation.", example: "1600", type: "number", format: "elo")]
     [TypeConverter(typeof(EloTypeConverter))]
     public partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
     {

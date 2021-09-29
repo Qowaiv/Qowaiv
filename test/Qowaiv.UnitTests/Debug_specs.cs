@@ -28,12 +28,13 @@ namespace Debug_specs
         {
             var attribute = new OpenApiDataTypeAttribute(
                 description: "Year",
+                example: "1983",
                 type: "integer",
                 format: "0000",
                 nullable: true,
                 pattern: "^[0-9]{4}$");
 
-            DebuggerDisplayAssert.HasResult("{ type: integer, desc: Year, format: 0000, pattern: ^[0-9]{4}$, nullable: true }", attribute);
+            DebuggerDisplayAssert.HasResult("{ type: integer, desc: Year, example: 1983, format: 0000, pattern: ^[0-9]{4}$, nullable: true }", attribute);
 
         }
 

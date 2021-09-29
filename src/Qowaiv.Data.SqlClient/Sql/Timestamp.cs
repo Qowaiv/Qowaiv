@@ -13,7 +13,7 @@ namespace Qowaiv.Sql
     /// <summary>Represents a timestamp.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
-    [OpenApiDataType(description: "SQL Server timestamp notation, for example 0x00000000000007D9.", type: "string", format: "timestamp")]
+    [OpenApiDataType(description: "SQL Server timestamp notation.", example: "0x00000000000007D9", type: "string", format: "timestamp")]
     [TypeConverter(typeof(TimestampTypeConverter))]
     public partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
     {

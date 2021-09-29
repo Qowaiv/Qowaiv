@@ -767,7 +767,7 @@ and if the data type is nullable, all when applicable.
     "format": "country",
     "nullabe": true
   },
-  "Identifiers.Id`1": {
+  "Identifiers.Id<TIdentifier>": {
     "description": "identifier",
     "example": "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
     "type": "string/int",

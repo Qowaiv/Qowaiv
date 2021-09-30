@@ -7,7 +7,7 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-5.1.1-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-5.1.2-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
 |![v](https://img.shields.io/badge/version-5.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-3.1.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
@@ -614,84 +614,75 @@ and if the data type is nullable, all when applicable.
 ``` json
 {
   "Date": {
-    "description": "Full-date notation as defined by RFC 3339, section 5.6, for example, 2017-06-10.",
+    "description": "Full-date notation as defined by RFC 3339, section 5.6.",
+    "example": "2017-06-10",
     "type": "string",
     "format": "date",
     "nullabe": false
   },
   "DateSpan": {
-    "description": "Date span, specified in years, months and days, for example 1Y+10M+16D.",
+    "description": "Date span, specified in years, months and days.",
+    "example": "1Y+10M+16D",
     "type": "string",
     "format": "date-span",
     "pattern": "[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D",
     "nullabe": false
   },
   "EmailAddress": {
-    "description": "Email notation as defined by RFC 5322, for example, svo@qowaiv.org.",
+    "description": "Email notation as defined by RFC 5322.",
+    "example": "svo@qowaiv.org",
     "type": "string",
     "format": "email",
     "nullabe": true
   },
   "EmailAddressCollection": {
     "description": "Comma separated list of email addresses defined by RFC 5322.",
+    "example": "info@qowaiv.org,test@test.com",
     "type": "string",
     "format": "email-collection",
     "nullabe": true
   },
   "Gender": {
     "description": "Gender as specified by ISO/IEC 5218.",
+    "example": "female",
     "type": "string",
     "format": "gender",
     "nullabe": true,
-    "enum": [
-      "NotKnown",
-      "Male",
-      "Female",
-      "NotApplicable"
-    ]
+    "enum": ["NotKnown", "Male", "Female", "NotApplicable"]
   },
   "HouseNumber": {
     "description": "House number notation.",
+    "example": "13",
     "type": "string",
     "format": "house-number",
     "nullabe": true
   },
   "LocalDateTime": {
-    "description": "Date-time notation as defined by RFC 3339, without time zone information, for example, 2017-06-10 15:00.",
+    "description": "Date-time notation as defined by RFC 3339, without time zone information.",
+    "example": "2017-06-10 15:00",
     "type": "string",
     "format": "local-date-time",
     "nullabe": false
   },
   "Month": {
     "description": "Month(-only) notation.",
+    "example": "Jun",
     "type": "string",
     "format": "month",
     "nullabe": true,
-    "enum": [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-      "?"
-    ]
+    "enum": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"]
   },
   "MonthSpan": {
-    "description": "Month span, specified in years and months, for example 1Y+10M.",
+    "description": "Month span, specified in years and months.",
+    "example": "1Y+10M",
     "type": "string",
     "format": "month-span",
     "pattern": "[+-]?[0-9]+Y[+-][0-9]+M",
     "nullabe": false
   },
   "Percentage": {
-    "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%', for example 13.76%.",
+    "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.",
+    "example": "13.76%",
     "type": "string",
     "format": "percentage",
     "pattern": "-?[0-9]+(\\.[0-9]+)?%",
@@ -699,89 +690,99 @@ and if the data type is nullable, all when applicable.
   },
   "PostalCode": {
     "description": "Postal code notation.",
+    "example": "2624DP",
     "type": "string",
     "format": "postal-code",
     "nullabe": true
   },
   "Uuid": {
-    "description": "Universally unique identifier, Base64 encoded, for example lmZO_haEOTCwGsCcbIZFFg.",
+    "description": "Universally unique identifier, Base64 encoded.",
+    "example": "lmZO_haEOTCwGsCcbIZFFg",
     "type": "string",
     "format": "uuid-base64",
     "nullabe": true
   },
   "WeekDate": {
-    "description": "Full-date notation as defined by ISO 8601, for example, 1997-W14-6.",
+    "description": "Full-date notation as defined by ISO 8601.",
+    "example": "1997-W14-6",
     "type": "string",
     "format": "date-weekbased",
     "nullabe": false
   },
   "Year": {
     "description": "Year(-only) notation.",
+    "example": 1983,
     "type": "integer",
     "format": "year",
     "nullabe": true
   },
   "YesNo": {
     "description": "Yes-No notation.",
+    "example": "yes",
     "type": "string",
     "format": "yes-no",
     "nullabe": true,
-    "enum": [
-      "yes",
-      "no",
-      "?"
-    ]
+    "enum": ["yes", "no", "?"]
   },
   "Financial.Amount": {
     "description": "Decimal representation of a currency amount.",
+    "example": 15.95,
     "type": "number",
     "format": "amount",
     "nullabe": false
   },
   "Financial.BusinessIdentifierCode": {
-    "description": "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.",
+    "description": "Business Identifier Code, as defined by ISO 9362.",
+    "example": "DEUTDEFF",
     "type": "string",
     "format": "bic",
     "nullabe": true
   },
   "Financial.Currency": {
-    "description": "Currency notation as defined by ISO 4217, for example, EUR.",
+    "description": "Currency notation as defined by ISO 4217.",
+    "example": "EUR",
     "type": "string",
     "format": "currency",
     "nullabe": true
   },
   "Financial.InternationalBankAccountNumber": {
-    "description": "International Bank Account Number notation as defined by ISO 13616:2007, for example, BE71096123456769.",
+    "description": "International Bank Account Number notation as defined by ISO 13616:2007.",
+    "example": "BE71096123456769.",
     "type": "string",
     "format": "iban",
     "nullabe": true
   },
   "Financial.Money": {
-    "description": "Combined currency and amount notation as defined by ISO 4217, for example, EUR 12.47.",
+    "description": "Combined currency and amount notation as defined by ISO 4217.",
+    "example": "EUR12.47",
     "type": "string",
     "format": "money",
     "pattern": "[A-Z]{3} -?[0-9]+(\\.[0-9]+)?",
     "nullabe": false
   },
   "Globalization.Country": {
-    "description": "Country notation as defined by ISO 3166-1 alpha-2, for example, NL.",
+    "description": "Country notation as defined by ISO 3166-1 alpha-2.",
+    "example": "NL",
     "type": "string",
     "format": "country",
     "nullabe": true
   },
   "Identifiers.Id<TIdentifier>": {
     "description": "identifier",
-    "type": "string/int",
+    "example": "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
+    "type": "any",
     "nullabe": false
   },
   "IO.StreamSize": {
     "description": "Stream size notation (in byte).",
+    "example": 1024",
     "type": "integer",
     "format": "stream-size",
     "nullabe": false
   },
   "Mathematics.Fraction": {
     "description": "Faction",
+    "example": "13/42",
     "type": "string",
     "format": "faction",
     "pattern": "-?[0-9]+(/[0-9]+)?",
@@ -789,18 +790,21 @@ and if the data type is nullable, all when applicable.
   },
   "Security.Cryptography.CryptographicSeed": {
     "description": "Base64 encoded cryptographic seed.",
+    "example": "Qowaiv==",
     "type": "string",
     "format": "cryptographic-seed",
     "nullabe": true
   },
   "Statistics.Elo": {
     "description": "Elo rating system notation.",
+    "example": 1600,
     "type": "number",
     "format": "elo",
     "nullabe": false
   },
   "Web.InternetMediaType": {
-    "description": "Media type notation as defined by RFC 6838, for example, text/html.",
+    "description": "Media type notation as defined by RFC 6838.",
+    "example": "text/html",
     "type": "string",
     "format": "internet-media-type",
     "nullabe": true
@@ -815,21 +819,22 @@ OpenApi this could be done like below:
 /// <summary>Extensions on <see cref="SwaggerGenOptions"/>.</summary>
 public static class SwaggerGenOptionsSvoExtensions
 {
-	/// <summary>Maps Qowaiv SVO's.</summary>
-	public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
-	{
-		var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
-		foreach (var attr in attributes)
-		{
-			options.MapType(attr.DataType, () => new OpenApiSchema
-			{
-				Type = attr.Type,
-				Format = attr.Format,
-				Pattern = attr.Pattern,
-				Nullable = attr.Nullable,
-			});
-		}
-	}
+    /// <summary>Maps Qowaiv SVO's.</summary>
+    public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
+    {
+        var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
+        foreach (var attr in attributes)
+        {
+            options.MapType(attr.DataType, () => new OpenApiSchema
+            {
+                Type = attr.Type,
+                Example = attr.Example, // convert to IOpenApiAny of choice
+                Format = attr.Format,
+                Pattern = attr.Pattern,
+                Nullable = attr.Nullable,
+            });
+        }
+    }
 }
 ```
             
@@ -949,7 +954,7 @@ public interface IClock
 
 public class Clock : IClock
 {
-	public DateTime UtcNow() => DateTime.UtcNow;
+    public DateTime UtcNow() => DateTime.UtcNow;
 }
 ```
 

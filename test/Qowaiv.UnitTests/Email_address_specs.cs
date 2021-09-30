@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -482,29 +483,21 @@ namespace Email_address_specs
     public class Is_Open_API_data_type
     {
         internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(EmailAddress)).FirstOrDefault();
-        [Test]
-        public void with_description()
-        {
-            Assert.AreEqual("Email notation as defined by RFC 5322, for example, svo@qowaiv.org.", Attribute.Description);
-        }
 
         [Test]
-        public void has_type()
-        {
-            Assert.AreEqual("string", Attribute.Type);
-        }
+        public void with_description() => Attribute.Description.Should().Be("Email notation as defined by RFC 5322.");
 
         [Test]
-        public void has_format()
-        {
-            Assert.AreEqual("email", Attribute.Format);
-        }
+        public void with_example() => Attribute.Example.Should().Be("svo@qowaiv.org");
 
         [Test]
-        public void pattern_is_null()
-        {
-            Assert.IsNull(Attribute.Pattern);
-        }
+        public void has_type() => Attribute.Type.Should().Be("string");
+
+        [Test]
+        public void has_format() => Attribute.Format.Should().Be("email");
+
+        [Test]
+        public void pattern_is_null()=> Attribute.Pattern.Should().BeNull();
     }
 
     public class Supports_binary_serialization

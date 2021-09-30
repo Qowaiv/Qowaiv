@@ -48,6 +48,7 @@ namespace Qowaiv.UnitTests.Json
                 all[name] = new OpenApiDataType
                 {
                     description = attribute.Description,
+                    example = attribute.Example,
                     type = attribute.Type,
                     format = attribute.Format,
                     pattern = attribute.Pattern,
@@ -67,6 +68,7 @@ namespace Qowaiv.UnitTests.Json
     internal class OpenApiDataType
     {
         public string description { get; set; }
+        public object example { get; set; }
         public string type { get; set; }
         public string format { get; set; }
         public string pattern { get; set; }

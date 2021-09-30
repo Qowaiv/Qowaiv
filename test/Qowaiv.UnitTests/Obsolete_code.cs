@@ -2,6 +2,7 @@
 using Qowaiv;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
+using Qowaiv.Json;
 using Qowaiv.Reflection;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.UnitTests;
@@ -66,6 +67,9 @@ namespace Obsolete_code
 
         [Test]
         public void QowaivType_IsSingleValueObject() => Assert.IsTrue(QowaivType.IsSingleValueObject(typeof(Percentage)));
+
+        [Test]
+        public void OpenApiDataType_ctor_without_example()=> Assert.NotNull(new OpenApiDataTypeAttribute(description: "Postal code notation.", type: "string", format: "postal-code", nullable: true));
     }
 
     [Obsolete("Will become private when the next major version is released.")]

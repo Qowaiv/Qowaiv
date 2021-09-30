@@ -38,7 +38,7 @@ namespace Qowaiv.Financial
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-    [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362, for example, DEUTDEFF.", type: "string", format: "bic", nullable: true)]
+    [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362.", example: "DEUTDEFF", type: "string", format: "bic", nullable: true)]
     [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]
     public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
     {

@@ -31,7 +31,7 @@ namespace Qowaiv.UnitTests
                 .Where(pars => pars.Length == 0)
                 .ToArray();
 
-            Assert.IsTrue(methods.Length == 1, nameof(methods));
+            Assert.IsTrue(methods?.Length == 1, nameof(methods));
         }
 
         [TestCase(typeof(Amount))]

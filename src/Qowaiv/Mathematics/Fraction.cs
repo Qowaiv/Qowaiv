@@ -24,7 +24,7 @@ namespace Qowaiv.Mathematics
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
     [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Tuple<long, long>))]
-    [OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?")]
+    [OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
     [TypeConverter(typeof(FractionTypeConverter))]
     [StructLayout(LayoutKind.Sequential)]
     public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>

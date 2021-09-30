@@ -20,6 +20,26 @@ namespace Qowaiv.Json
         public OpenApiDataTypeAttribute(
             string description,
             string type,
+            object example,
+            string format = null,
+            bool nullable = false,
+            string pattern = null,
+            string @enum = null)
+        {
+            Description = Guard.NotNullOrEmpty(description, nameof(description));
+            Type = Guard.NotNullOrEmpty(type, nameof(type));
+            Example = Guard.NotNull(example, nameof(example));
+            Format = format;
+            Nullable = nullable;
+            Pattern = pattern;
+            Enum = @enum?.Split(',');
+        }
+
+        /// <summary>Creates a new instance of a <see cref="OpenApiDataTypeAttribute"/>.</summary>
+        [Obsolete("Use the constructor that provides an example as well.")]
+        public OpenApiDataTypeAttribute(
+            string description,
+            string type,
             string format = null,
             bool nullable = false,
             string pattern = null,
@@ -45,6 +65,9 @@ namespace Qowaiv.Json
         /// <summary>Gets the type of the OpenAPI Data Type.</summary>
         public string Type { get; }
 
+        /// <summary>Gets the example of the OpenAPI Data Type.</summary>
+        public object Example { get; }
+
         /// <summary>Gets the format of the OpenAPI Data Type.</summary>
         public string Format { get; }
 
@@ -63,7 +86,7 @@ namespace Qowaiv.Json
             get
             {
                 var sb = new StringBuilder();
-                sb.Append($@"{{ type: {Type}, desc: {Description}");
+                sb.Append($@"{{ type: {Type}, desc: {Description}, example: {Example}");
 
                 if (!string.IsNullOrEmpty(Format))
                 {

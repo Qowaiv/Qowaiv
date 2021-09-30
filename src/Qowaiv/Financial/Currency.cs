@@ -41,7 +41,7 @@ namespace Qowaiv.Financial
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-    [OpenApiDataType(description: "Currency notation as defined by ISO 4217, for example, EUR.", type: "string", format: "currency", nullable: true)]
+    [OpenApiDataType(description: "Currency notation as defined by ISO 4217.", example: "EUR", type: "string", format: "currency", nullable: true)]
     [TypeConverter(typeof(CurrencyTypeConverter))]
     public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
     {

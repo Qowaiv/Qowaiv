@@ -19,7 +19,7 @@ namespace Qowaiv
     /// <summary>Represents a house number.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
-    [OpenApiDataType(description: "House number notation.", type: "string", format: "house-number", nullable: true)]
+    [OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
     [TypeConverter(typeof(HouseNumberTypeConverter))]
     public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
     {

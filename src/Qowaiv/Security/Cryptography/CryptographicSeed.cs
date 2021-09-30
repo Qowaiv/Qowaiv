@@ -24,7 +24,7 @@ namespace Qowaiv.Security.Cryptography
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
     [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(byte[]))]
-    [OpenApiDataType(description: "Base64 encoded cryptographic seed.", type: "string", format: "cryptographic-seed", nullable: true)]
+    [OpenApiDataType(description: "Base64 encoded cryptographic seed.", example: "Qowaiv==", type: "string", format: "cryptographic-seed", nullable: true)]
     [TypeConverter(typeof(CryptographicSeedTypeConverter))]
     public partial struct CryptographicSeed : ISerializable, IXmlSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
     {

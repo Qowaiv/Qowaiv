@@ -14,7 +14,7 @@ namespace Qowaiv
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable]
     [SingleValueObject(SingleValueStaticOptions.Continuous, underlyingType: typeof(int))]
-    [OpenApiDataType(description: "Month span, specified in years and months, for example 1Y+10M.", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
+    [OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
     [TypeConverter(typeof(Conversion.MonthSpanTypeConverter))]
     public partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
     {

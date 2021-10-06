@@ -204,17 +204,17 @@ namespace Qowaiv.Globalization
     public partial struct Country : IFormattable
     {
         /// <summary>Returns a <see cref = "string "/> that represents the country.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString((IFormatProvider)null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the country.</summary>
         /// <param name = "format">
         /// The format that describes the formatting.
         /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(string format) => ToString(format, null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the country.</summary>
         /// <param name = "provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
+        public string ToString(IFormatProvider provider) => ToString(null, provider);
     }
 }
 

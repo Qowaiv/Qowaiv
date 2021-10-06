@@ -138,19 +138,9 @@ namespace Qowaiv.Financial
         /// F: as formatted uppercase.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format))
-            {
-                return ToUnformattedString();
-            }
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("U"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>

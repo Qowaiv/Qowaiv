@@ -150,19 +150,9 @@ namespace Qowaiv
         /// m: as number without leading zero.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-            // Apply the format.
-            return StringFormatter.Apply
-            (
-                this, string.IsNullOrEmpty(format) ? "f" : format,
-                formatProvider ?? CultureInfo.CurrentCulture, FormatTokens
-            );
-        }
-
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>Gets an XML string representation of the month.</summary>
         private string ToXmlString() => ToString("s", CultureInfo.InvariantCulture);

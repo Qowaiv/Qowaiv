@@ -155,18 +155,9 @@ namespace Qowaiv.Financial
         /// f: as formatted/display name.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { return this.Name; }
-
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Currency, IFormatProvider, string>>

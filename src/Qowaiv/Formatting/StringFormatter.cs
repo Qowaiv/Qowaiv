@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Qowaiv.Formatting
@@ -46,7 +47,7 @@ namespace Qowaiv.Formatting
         /// The format string.
         /// </param>
         /// <param name="formatProvider">
-        /// The format provider.
+        /// The format provider, if null <see cref="CultureInfo.CurrentCulture"/> is used.
         /// </param>
         /// <param name="tokens">
         /// An dictionary with character based tokens.
@@ -61,7 +62,6 @@ namespace Qowaiv.Formatting
         {
             Guard.NotNull((object)obj, nameof(obj));
             Guard.NotNullOrEmpty(format, nameof(format));
-            Guard.NotNull(formatProvider, nameof(formatProvider));
             Guard.NotNull(tokens, nameof(tokens));
 
             var sb = new StringBuilder();
@@ -88,7 +88,7 @@ namespace Qowaiv.Formatting
                 // If a token match, apply.
                 else if (tokens.TryGetValue(ch, out Func<T, IFormatProvider, string> action))
                 {
-                    sb.Append(action.Invoke(obj, formatProvider));
+                    sb.Append(action.Invoke(obj, formatProvider ?? CultureInfo.CurrentCulture));
                 }
                 // Append char.
                 else

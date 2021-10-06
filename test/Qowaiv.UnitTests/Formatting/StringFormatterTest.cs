@@ -42,16 +42,6 @@ namespace Qowaiv.UnitTests.Formatting
         }
 
         [Test]
-        public void Apply_NullFormatProvider_ThrowsArugmentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                StringFormatter.Apply(Int32.MinValue, "0", null, null);
-            },
-            "formatProvider");
-        }
-
-        [Test]
         public void Apply_NullTokens_ThrowsArugmentNullException()
         {
             ExceptionAssert.CatchArgumentNullException(() =>

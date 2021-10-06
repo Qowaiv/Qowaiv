@@ -199,18 +199,9 @@ namespace Qowaiv.Globalization
         /// f: as formatted/display name.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { return Name; }
-
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
 
         /// <summary>Gets an XML string representation of the country.</summary>
         private string ToXmlString() => m_Value;

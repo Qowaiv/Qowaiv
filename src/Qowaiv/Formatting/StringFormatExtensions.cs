@@ -75,6 +75,9 @@ namespace Qowaiv.Formatting
             return (TFormat)provider.GetFormat(typeof(TFormat));
         }
 
+        /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)"/>,
+        /// otherwise the string value.
+        /// </summary>
         internal static string WithDefault(this string str, string @default)
             => string.IsNullOrEmpty(str) ? @default : str;
     }

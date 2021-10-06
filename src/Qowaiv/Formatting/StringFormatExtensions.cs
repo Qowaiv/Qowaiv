@@ -24,24 +24,6 @@ namespace Qowaiv.Formatting
             return textInfo.ToUpper(str);
         }
 
-        /// <summary>Converts the specified string to an lowercase string.</summary> 
-        /// <param name="str">
-        /// The string to convert to lowercase.
-        /// </param>
-        /// <param name="provider"></param>
-        /// <returns>
-        /// The uppercase equivalent of the current string.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// str is null or the provider is null.
-        /// </exception>
-        public static string ToLower(this string str, IFormatProvider provider)
-        {
-            Guard.NotNull(provider, nameof(provider));
-            var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
-            return textInfo.ToLower(str);
-        }
-
         /// <summary>Converts the specified string to title case (except for words that are entirely
         /// in uppercase, which are considered to be acronyms).
         /// 

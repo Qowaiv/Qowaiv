@@ -159,7 +159,7 @@ namespace Qowaiv
         private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>
         {
             { 'U', (svo, provider) => svo.m_Value.ToUpper(provider) },
-            { 'l', (svo, provider) => svo.Local.ToLower(provider) },
+            { 'l', (svo, provider) => svo.Local },
             { 'L', (svo, provider) => svo.Local.ToUpper(provider) },
             { 'd', (svo, provider) => svo.Domain },
             { 'D', (svo, provider) => svo.Domain.ToUpper(provider) },

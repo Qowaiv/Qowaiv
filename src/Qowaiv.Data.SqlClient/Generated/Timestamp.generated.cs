@@ -238,7 +238,7 @@ namespace Qowaiv.Sql
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Timestamp Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Timestamp Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
         /// <param name = "s">
         /// A string containing the timestamp to convert.

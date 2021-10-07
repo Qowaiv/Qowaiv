@@ -236,7 +236,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Year Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Year Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.</summary>
         /// <param name = "s">
         /// A string containing the year to convert.

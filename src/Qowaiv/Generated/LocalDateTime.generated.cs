@@ -239,7 +239,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static LocalDateTime Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static LocalDateTime Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "LocalDateTime"/>.</summary>
         /// <param name = "s">
         /// A string containing the local date time to convert.

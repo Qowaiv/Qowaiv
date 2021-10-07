@@ -235,7 +235,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static HouseNumber Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static HouseNumber Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "HouseNumber"/>.</summary>
         /// <param name = "s">
         /// A string containing the house number to convert.

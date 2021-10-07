@@ -217,7 +217,7 @@ namespace Qowaiv.Mathematics
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Fraction Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Fraction Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.</summary>
         /// <param name = "s">
         /// A string containing the fraction to convert.

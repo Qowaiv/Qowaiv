@@ -217,7 +217,7 @@ namespace Qowaiv.Financial
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Money Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Money Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Money"/>.</summary>
         /// <param name = "s">
         /// A string containing the money to convert.

@@ -256,18 +256,13 @@ namespace Qowaiv.Globalization
                 result = Unknown;
                 return true;
             }
+            else if (ParseValues.TryGetValue(formatProvider, buffer.ToString(), out var val))
+            {
+                result = new Country(val);
+                return true;
+            }
             else
             {
-                var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-                AddCulture(culture);
-                var str = buffer.ToString();
-
-                if (Parsings[culture].TryGetValue(str, out string val) ||
-                    Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
-                {
-                    result = new Country(val);
-                    return true;
-                }
                 return false;
             }
         }
@@ -344,7 +339,39 @@ namespace Qowaiv.Globalization
 
         #endregion
 
-        #region Resources
+
+        private static readonly CountryValues ParseValues = new();
+
+        private sealed class CountryValues : LocalizedValues<string>
+        {
+            public CountryValues() : base(new Dictionary<string, string>
+            {
+                { "ZZ", "ZZ" },
+                { "ZZZ", "ZZ" },
+                { "999", "ZZ" },
+                { "unknown", "ZZ" },
+            })
+            {
+                foreach (var country in All)
+                {
+                    var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Buffer().Unify();
+                    this[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
+                    this[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
+                    this[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
+                    this[CultureInfo.InvariantCulture][unified] = country.m_Value;
+                }
+            }
+
+            protected override void AddCulture(CultureInfo culture)
+            {
+                this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+                foreach (var country in All)
+                {
+                    var unified = country.GetDisplayName(culture).Buffer().Unify();
+                    this[culture][unified] = country.m_Value;
+                }
+            }
+        }
 
         internal static ResourceManager ResourceManager
         {
@@ -368,9 +395,7 @@ namespace Qowaiv.Globalization
         /// The format provider.
         /// </param>
         internal string GetResourceString(string postfix, IFormatProvider formatProvider)
-        {
-            return GetResourceString(postfix, formatProvider as CultureInfo);
-        }
+            => GetResourceString(postfix, formatProvider as CultureInfo);
 
         /// <summary>Get resource string.</summary>
         /// <param name="postfix">
@@ -380,68 +405,8 @@ namespace Qowaiv.Globalization
         /// The culture.
         /// </param>
         internal string GetResourceString(string postfix, CultureInfo culture)
-        {
-            if (m_Value == default) { return string.Empty; }
-            return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
-        }
-
-        #endregion
-
-        #region Lookup
-
-        /// <summary>Initializes the country lookup.</summary>
-        static Country()
-        {
-            foreach (var country in All)
-            {
-                var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Buffer().Unify();
-                Parsings[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
-                Parsings[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
-                Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
-                Parsings[CultureInfo.InvariantCulture][unified] = country.m_Value;
-            }
-        }
-
-        /// <summary>Adds a culture to the parsing collections.</summary>
-        /// <param name="culture">
-        /// The culture to add.
-        /// </param>
-        private static void AddCulture(CultureInfo culture)
-        {
-            lock (locker)
-            {
-                if (Parsings.ContainsKey(culture)) { return; }
-
-                Parsings[culture] = new Dictionary<string, string>
-                {
-                    [Unknown.GetDisplayName(culture)] = Unknown.m_Value
-                };
-
-                foreach (var country in All)
-                {
-                    var unified = country.GetDisplayName(culture).Buffer().Unify();
-                    Parsings[culture][unified] = country.m_Value;
-                }
-            }
-        }
-
-        /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>
-        {
-            {
-                CultureInfo.InvariantCulture, new Dictionary<string, string>
-                {
-                    { "ZZ", "ZZ" },
-                    { "ZZZ", "ZZ" },
-                    { "999", "ZZ" },
-                    { "unknown", "ZZ" },
-                }
-            },
-        };
-
-        /// <summary>The locker for adding a culture.</summary>
-        private static readonly object locker = new object();
-
-        #endregion
+            => IsEmpty()
+            ? string.Empty
+            : ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
     }
 }

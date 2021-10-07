@@ -236,7 +236,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Gender Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Gender Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
         /// <param name = "s">
         /// A string containing the gender to convert.

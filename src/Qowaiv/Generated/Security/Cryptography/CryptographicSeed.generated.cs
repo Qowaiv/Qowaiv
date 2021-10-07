@@ -240,7 +240,7 @@ namespace Qowaiv.Security.Cryptography
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static CryptographicSeed Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static CryptographicSeed Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "CryptographicSeed"/>.</summary>
         /// <param name = "s">
         /// A string containing the cryptographic seed to convert.

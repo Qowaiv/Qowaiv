@@ -236,7 +236,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static YesNo Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static YesNo Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "YesNo"/>.</summary>
         /// <param name = "s">
         /// A string containing the yes-no to convert.

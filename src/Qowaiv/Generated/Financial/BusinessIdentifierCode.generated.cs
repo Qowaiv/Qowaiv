@@ -236,7 +236,7 @@ namespace Qowaiv.Financial
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static BusinessIdentifierCode Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static BusinessIdentifierCode Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "BusinessIdentifierCode"/>.</summary>
         /// <param name = "s">
         /// A string containing the BIC to convert.

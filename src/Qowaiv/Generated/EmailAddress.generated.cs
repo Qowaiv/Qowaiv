@@ -236,7 +236,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static EmailAddress Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static EmailAddress Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "EmailAddress"/>.</summary>
         /// <param name = "s">
         /// A string containing the email address to convert.

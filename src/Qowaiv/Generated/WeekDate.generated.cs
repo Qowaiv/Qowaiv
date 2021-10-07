@@ -216,7 +216,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static WeekDate Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static WeekDate Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "WeekDate"/>.</summary>
         /// <param name = "s">
         /// A string containing the week date to convert.

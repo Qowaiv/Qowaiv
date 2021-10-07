@@ -238,7 +238,7 @@ namespace Qowaiv.Statistics
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Elo Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Elo Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Elo"/>.</summary>
         /// <param name = "s">
         /// A string containing the elo to convert.

@@ -238,7 +238,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static MonthSpan Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static MonthSpan Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "MonthSpan"/>.</summary>
         /// <param name = "s">
         /// A string containing the month span to convert.

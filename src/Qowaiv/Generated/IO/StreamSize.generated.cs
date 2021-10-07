@@ -217,7 +217,7 @@ namespace Qowaiv.IO
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static StreamSize Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static StreamSize Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "StreamSize"/>.</summary>
         /// <param name = "s">
         /// A string containing the stream size to convert.

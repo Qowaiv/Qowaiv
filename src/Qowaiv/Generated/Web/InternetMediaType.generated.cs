@@ -237,7 +237,7 @@ namespace Qowaiv.Web
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static InternetMediaType Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static InternetMediaType Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "InternetMediaType"/>.</summary>
         /// <param name = "s">
         /// A string containing the Internet media type to convert.

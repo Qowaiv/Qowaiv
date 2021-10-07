@@ -9,6 +9,7 @@
 using Qowaiv.Conversion;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
+using Qowaiv.Globalization;
 using Qowaiv.Json;
 using Qowaiv.Text;
 using System;
@@ -124,18 +125,9 @@ namespace Qowaiv
         /// b/B: as boolean (true/false) (Title cased).
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { format = "f"; }
-
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider as CultureInfo ?? CultureInfo.CurrentCulture, FormatTokens);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<YesNo, IFormatProvider, string>>
@@ -207,23 +199,55 @@ namespace Qowaiv
                 result = Unknown;
                 return true;
             }
+            else if (ParseValues.TryGetValue(formatProvider, buffer.ToString(), out var val))
+            {
+                result = new YesNo(val);
+                return true;
+            }
             else
             {
-                var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-                AddCulture(culture);
-                var str = buffer.ToString();
-
-                if (Parsings[culture].TryGetValue(str, out byte val) ||
-                    Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
-                {
-                    result = new YesNo(val);
-                    return true;
-                }
+                return false;
             }
-            return false;
         }
 
-        #region Resources
+        private static readonly YesNoValues ParseValues = new();
+
+        /// <summary>Gets the yes-no labels.</summary>
+        /// <remarks>
+        /// Used for both serialization and resource lookups.
+        /// </remarks>
+        private static readonly string[] LookupSuffix = { null, "No", "Yes", "Unknown" };
+        private static readonly string[] SerializationValues = { null, "no", "yes", "?" };
+        
+        private sealed class YesNoValues : LocalizedValues<byte>
+        {
+            public YesNoValues() : base(new Dictionary<string, byte>
+            {
+                { "", 0 },
+                { "0", 1 },
+                { "1", 2 },
+                { "FALSE", 1 },
+                { "TRUE", 2 },
+                { "NO", 1 },
+                { "YES", 2 },
+                { "N", 1 },
+                { "Y", 2 },
+            }) { }
+
+            protected override void AddCulture(CultureInfo culture)
+            {
+                foreach (var value in YesAndNo)
+                {
+                    var label = value.ToString("", culture).ToUpper(culture);
+                    var @char = value.ToString("c", culture).ToUpper(culture);
+                    var @bool = value.ToString("b", culture).ToUpper(culture);
+
+                    this[culture][label] = value.m_Value;
+                    this[culture][@char] = value.m_Value;
+                    this[culture][@bool] = value.m_Value;
+                }
+            }
+        }
 
         private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.YesNoLabels", typeof(YesNo).Assembly);
 
@@ -235,68 +259,9 @@ namespace Qowaiv
         /// The format provider.
         /// </param>
         private string GetResourceString(string prefix, IFormatProvider formatProvider)
-        => IsEmpty()
+            => IsEmpty()
             ? string.Empty
             : ResourceManager.Localized(formatProvider, prefix, LookupSuffix[m_Value]);
 
-        #endregion
-
-        #region Lookup
-
-        /// <summary>Gets the yes-no labels.</summary>
-        /// <remarks>
-        /// Used for both serialization and resource lookups.
-        /// </remarks>
-        private static readonly string[] LookupSuffix = { null, "No", "Yes", "Unknown" };
-        private static readonly string[] SerializationValues = { null, "no", "yes", "?" };
-
-        /// <summary>Adds a culture to the parsings.</summary>
-        /// <param name="culture">
-        /// The culture to add.
-        /// </param>
-        private static void AddCulture(CultureInfo culture)
-        {
-            lock (Locker)
-            {
-                if (Parsings.ContainsKey(culture)) { return; }
-
-                Parsings[culture] = new Dictionary<string, byte>();
-
-                foreach (var value in YesAndNo)
-                {
-                    var label = value.ToString("", culture).ToUpper(culture);
-                    var @char = value.ToString("c", culture).ToUpper(culture);
-                    var @bool = value.ToString("b", culture).ToUpper(culture);
-
-                    Parsings[culture][label] = value.m_Value;
-                    Parsings[culture][@char] = value.m_Value;
-                    Parsings[culture][@bool] = value.m_Value;
-                }
-            }
-        }
-
-        /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>
-        {
-            {
-                CultureInfo.InvariantCulture, new Dictionary<string, byte>
-                {
-                    { "", 0 },
-                    { "0", 1 },
-                    { "1", 2 },
-                    { "FALSE", 1 },
-                    { "TRUE", 2 },
-                    { "NO", 1 },
-                    { "YES", 2 },
-                    { "N", 1 },
-                    { "Y", 2 },
-                }
-            }
-        };
-
-        /// <summary>The locker for adding a culture.</summary>
-        private static readonly object Locker = new object();
-
-        #endregion
     }
 }

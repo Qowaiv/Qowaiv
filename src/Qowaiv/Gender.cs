@@ -130,20 +130,9 @@ namespace Qowaiv
         /// f: as formatted/display name.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-            else
-            {
-                // If no format specified, use the default format.
-                if (string.IsNullOrEmpty(format)) { format = "f"; }
-
-                // Apply the format.
-                return StringFormatter.Apply(this, format, formatProvider ?? CultureInfo.CurrentCulture, FormatTokens);
-            }
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<Gender, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Gender, IFormatProvider, string>>

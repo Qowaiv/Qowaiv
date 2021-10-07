@@ -155,18 +155,9 @@ namespace Qowaiv.Financial
         /// f: as formatted/display name.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { return this.Name; }
-
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Currency, IFormatProvider, string>>
@@ -246,30 +237,15 @@ namespace Qowaiv.Financial
                 result = Unknown;
                 return true;
             }
+            else if (ParseValues.TryGetValue(formatProvider, buffer.ToString(), out var val))
+            {
+                result = new Currency(val);
+                return true;
+            }
             else
             {
-                var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-
-                AddCulture(culture);
-                var str = buffer.ToString();
-
-                if (Parsings[culture].TryGetValue(str, out string val) || 
-                    Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
-                {
-                    result = new Currency(val);
-                    return true;
-                }
-
-                foreach (var currency in AllCurrencies.Where(c => !string.IsNullOrEmpty(c.Symbol)))
-                {
-                    if (currency.Symbol == str)
-                    {
-                        result = currency;
-                        return true;
-                    }
-                }
+                return false;
             }
-            return false;
         }
 
         #region Get currencies
@@ -309,7 +285,40 @@ namespace Qowaiv.Financial
 
         #endregion
 
-        #region Resources
+        private static readonly CurrencyValues ParseValues = new();
+
+        private sealed class CurrencyValues : LocalizedValues<string>
+        {
+            public CurrencyValues() : base(new Dictionary<string, string>
+            {
+                { "ZZZ", "ZZZ" },
+                { "999", "ZZZ" },
+                { "unknown", "ZZZ" },
+            })
+            {
+                foreach (var currency in AllCurrencies)
+                {
+                    var unified = currency.GetDisplayName(CultureInfo.InvariantCulture).Buffer().Unify();
+                    this[CultureInfo.InvariantCulture][currency.IsoCode.ToUpperInvariant()] = currency.m_Value;
+                    this[CultureInfo.InvariantCulture][currency.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = currency.m_Value;
+                    this[CultureInfo.InvariantCulture][unified] = currency.m_Value;
+                    if (!string.IsNullOrEmpty(currency.Symbol))
+                    {
+                        this[CultureInfo.InvariantCulture][currency.Symbol] = currency.m_Value;
+                    }
+                }
+            }
+
+            protected override void AddCulture(CultureInfo culture)
+            {
+                this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+                foreach (var country in AllCurrencies)
+                {
+                    var unified = country.GetDisplayName(culture).Buffer().Unify();
+                    this[culture][unified] = country.m_Value;
+                }
+            }
+        }
 
         /// <summary>This is done so that it will be available when called by another initialization.</summary>
         internal static ResourceManager ResourceManager
@@ -326,7 +335,6 @@ namespace Qowaiv.Financial
         }
         private static ResourceManager s_ResourceManager;
 
-
         /// <summary>Get resource string.</summary>
         /// <param name="postfix">
         /// The prefix of the resource key.
@@ -335,9 +343,7 @@ namespace Qowaiv.Financial
         /// The format provider.
         /// </param>
         internal string GetResourceString(string postfix, IFormatProvider formatProvider)
-        {
-            return GetResourceString(postfix, formatProvider as CultureInfo);
-        }
+            => GetResourceString(postfix, formatProvider as CultureInfo);
 
         /// <summary>Get resource string.</summary>
         /// <param name="postfix">
@@ -347,64 +353,9 @@ namespace Qowaiv.Financial
         /// The culture.
         /// </param>
         internal string GetResourceString(string postfix, CultureInfo culture)
-        {
-            if (m_Value == default) { return string.Empty; }
-            return ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
-        }
-
-        #endregion
-
-        #region Lookup
-
-        /// <summary>Initializes the country lookup.</summary>
-        static Currency()
-        {
-            foreach (var country in AllCurrencies)
-            {
-                var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Buffer().Unify();
-                Parsings[CultureInfo.InvariantCulture][country.IsoCode.ToUpperInvariant()] = country.m_Value;
-                Parsings[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
-                Parsings[CultureInfo.InvariantCulture][unified] = country.m_Value;
-            }
-        }
-
-        /// <summary>Adds a culture to the parsings.</summary>
-        private static void AddCulture(CultureInfo culture)
-        {
-            lock (locker)
-            {
-                if (!Parsings.ContainsKey(culture))
-                {
-                    Parsings[culture] = new Dictionary<string, string>
-                    {
-                        [Unknown.GetDisplayName(culture)] = Unknown.m_Value
-                    };
-                    foreach (var country in AllCurrencies)
-                    {
-                        var unified = country.GetDisplayName(culture).Buffer().Unify();
-                        Parsings[culture][unified] = country.m_Value;
-                    }
-                }
-            }
-        }
-
-        /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, string>> Parsings = new Dictionary<CultureInfo, Dictionary<string, string>>
-        {
-            {
-                CultureInfo.InvariantCulture, new Dictionary<string, string>
-                {
-                    { "ZZZ", "ZZZ" },
-                    { "999", "ZZZ" },
-                    { "unknown", "ZZZ" },
-                }
-            },
-        };
-
-        /// <summary>The locker for adding a culture.</summary>
-        private static readonly object locker = new object();
-
-        #endregion
+            => IsEmpty()
+            ? string.Empty
+            : ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
 
         #region Money creation operators
 

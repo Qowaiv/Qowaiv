@@ -148,18 +148,9 @@ namespace Qowaiv
         /// D: as domain uppercased.
         /// </remarks>
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-
-            // If no format specified, use the default format.
-            if (string.IsNullOrEmpty(format)) { return m_Value ?? string.Empty; }
-
-            // Apply the format.
-            return StringFormatter.Apply(this, format, formatProvider, FormatTokens);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>Gets an XML string representation of the email address.</summary>
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
@@ -167,11 +158,11 @@ namespace Qowaiv
         /// <summary>The format token instructions.</summary>
         private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>
         {
-            { 'U', (svo, provider) => svo.m_Value.ToUpperInvariant() },
+            { 'U', (svo, provider) => svo.m_Value.ToUpper(provider) },
             { 'l', (svo, provider) => svo.Local },
-            { 'L', (svo, provider) => svo.Local.ToUpperInvariant() },
+            { 'L', (svo, provider) => svo.Local.ToUpper(provider) },
             { 'd', (svo, provider) => svo.Domain },
-            { 'D', (svo, provider) => svo.Domain.ToUpperInvariant() },
+            { 'D', (svo, provider) => svo.Domain.ToUpper(provider) },
             { 'f', (svo, provider) => svo.m_Value ?? string.Empty },
         };
 

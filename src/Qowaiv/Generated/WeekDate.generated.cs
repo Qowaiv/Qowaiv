@@ -184,17 +184,17 @@ namespace Qowaiv
     public partial struct WeekDate : IFormattable
     {
         /// <summary>Returns a <see cref = "string "/> that represents the week date.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString((IFormatProvider)null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the week date.</summary>
         /// <param name = "format">
         /// The format that describes the formatting.
         /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(string format) => ToString(format, null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the week date.</summary>
         /// <param name = "provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
+        public string ToString(IFormatProvider provider) => ToString(null, provider);
     }
 }
 
@@ -216,7 +216,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static WeekDate Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static WeekDate Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "WeekDate"/>.</summary>
         /// <param name = "s">
         /// A string containing the week date to convert.

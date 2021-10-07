@@ -7,8 +7,8 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
-#define NotGetHashCodeClass
 #define NoComparisonOperators
+#define NotGetHashCodeClass
 namespace Qowaiv
 {
     using System;
@@ -204,17 +204,17 @@ namespace Qowaiv
     public partial struct Month : IFormattable
     {
         /// <summary>Returns a <see cref = "string "/> that represents the month.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString((IFormatProvider)null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the month.</summary>
         /// <param name = "format">
         /// The format that describes the formatting.
         /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(string format) => ToString(format, null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the month.</summary>
         /// <param name = "provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
+        public string ToString(IFormatProvider provider) => ToString(null, provider);
     }
 }
 
@@ -236,7 +236,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Month Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Month Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Month"/>.</summary>
         /// <param name = "s">
         /// A string containing the month to convert.

@@ -206,17 +206,17 @@ namespace Qowaiv.Statistics
     public partial struct Elo : IFormattable
     {
         /// <summary>Returns a <see cref = "string "/> that represents the elo.</summary>
-        public override string ToString() => ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => ToString((IFormatProvider)null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the elo.</summary>
         /// <param name = "format">
         /// The format that describes the formatting.
         /// </param>
-        public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(string format) => ToString(format, null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the elo.</summary>
         /// <param name = "provider">
         /// The format provider.
         /// </param>
-        public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
+        public string ToString(IFormatProvider provider) => ToString(null, provider);
     }
 }
 
@@ -238,7 +238,7 @@ namespace Qowaiv.Statistics
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
-        public static Elo Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+        public static Elo Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Elo"/>.</summary>
         /// <param name = "s">
         /// A string containing the elo to convert.

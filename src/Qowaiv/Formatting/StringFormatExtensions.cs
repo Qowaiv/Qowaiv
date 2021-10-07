@@ -23,6 +23,7 @@ namespace Qowaiv.Formatting
             var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
             return textInfo.ToUpper(str);
         }
+
         /// <summary>Converts the specified string to title case (except for words that are entirely
         /// in uppercase, which are considered to be acronyms).
         /// 
@@ -55,5 +56,11 @@ namespace Qowaiv.Formatting
             Guard.NotNull(provider, nameof(provider));
             return (TFormat)provider.GetFormat(typeof(TFormat));
         }
+
+        /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)"/>,
+        /// otherwise the string value.
+        /// </summary>
+        internal static string WithDefault(this string str, string @default)
+            => string.IsNullOrEmpty(str) ? @default : str;
     }
 }

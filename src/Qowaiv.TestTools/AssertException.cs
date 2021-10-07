@@ -7,6 +7,7 @@ namespace Qowaiv.TestTools
     /// <remarks>
     /// Exists to be independent to external test frameworks.
     /// </remarks>
+    [Serializable]
     public class AssertException : Exception
     {
         /// <inheritdoc />

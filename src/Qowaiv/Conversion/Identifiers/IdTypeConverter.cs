@@ -32,8 +32,8 @@ namespace Qowaiv.Conversion.Identifiers
 
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Id<>) && type.GetGenericArguments().Length == 1)
             {
-                m_Value = type.GetField(nameof(m_Value), BindingFlags.Instance | BindingFlags.NonPublic);
-                var ctors = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+                m_Value = type.GetField(nameof(m_Value), NonPublicInstance);
+                var ctors = type.GetConstructors(NonPublicInstance);
                 Ctor = ctors.FirstOrDefault(ctor => ctor.GetParameters().Length == 1);
                 var behavior = ((IIdentifierBehavior)Activator.CreateInstance(type.GetGenericArguments()[0]));
                 BaseType = behavior.BaseType;
@@ -45,17 +45,15 @@ namespace Qowaiv.Conversion.Identifiers
             }
         }
 
+        private const BindingFlags NonPublicInstance = (BindingFlags)36;
+
         /// <inheritdoc />
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return sourceType == BaseType || BaseConverter.CanConvertFrom(context, sourceType);
-        }
+            => sourceType == BaseType || BaseConverter.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc />
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-        {
-            return destinationType == BaseType || BaseConverter.CanConvertTo(context, destinationType);
-        }
+            => destinationType == BaseType || BaseConverter.CanConvertTo(context, destinationType);
 
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)

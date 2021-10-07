@@ -395,7 +395,7 @@ Actual:   [{(string.Join(", ", act))}]");
 
             var date = new DateTime(1970, 01, 01);
 
-            while (true)
+            while (date < DateTime.MaxValue)
             {
                 date = date.AddSeconds(3).AddTicks(i++);
                 yield return date;

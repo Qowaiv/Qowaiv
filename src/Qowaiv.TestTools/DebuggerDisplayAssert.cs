@@ -30,7 +30,7 @@ namespace Qowaiv.TestTools
             PropertyInfo prop;
             do
             {
-                prop = tp.GetProperty("DebuggerDisplay", BindingFlags.Instance | BindingFlags.NonPublic);
+                prop = tp.GetProperty("DebuggerDisplay", NonPublicInstance);
                 tp = tp.BaseType;
             }
             while (prop is null && !(tp is null));
@@ -41,5 +41,7 @@ namespace Qowaiv.TestTools
 
             Assert.AreEqual(expected, actual);
         }
+
+        private const BindingFlags NonPublicInstance = (BindingFlags)36;
     }
 }

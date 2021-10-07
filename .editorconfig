@@ -29,3 +29,6 @@ dotnet_diagnostic.S101.severity = none
 
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none
+dotnet_diagnostic.S2437.severity=warning
+dotnet_diagnostic.S4487.severity=warning
+

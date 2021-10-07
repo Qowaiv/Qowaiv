@@ -23,3 +23,9 @@ csharp_prefer_simple_default_expression = true:warning
 dotnet_style_prefer_compound_assignment = true:warning
 # IDE0059: Unnecessary assignment of a value
 csharp_style_unused_value_assignment_preference = discard_variable:warning
+
+# S101: Types should be named in PascalCase
+dotnet_diagnostic.S101.severity = none
+
+# S4136: Method overloads should be grouped together
+dotnet_diagnostic.S4136.severity = none

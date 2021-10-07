@@ -279,7 +279,7 @@ namespace Qowaiv.UnitTests
                 .Where(pars => pars.Length == 0)
                 .ToArray();
 
-            Assert.IsTrue(methods.Length == 1, nameof(methods));
+            Assert.IsTrue(methods?.Length == 1, nameof(methods));
         }
 
         [TestCase(typeof(Amount))]
@@ -295,7 +295,7 @@ namespace Qowaiv.UnitTests
                 .Where(pars => pars.Length == 1 && pars[0] == typeof(int))
                 .ToArray();
 
-            Assert.IsTrue(methods.Length == 1, nameof(methods));
+            Assert.IsTrue(methods?.Length == 1, nameof(methods));
         }
 
         [TestCase(typeof(Amount))]
@@ -311,7 +311,7 @@ namespace Qowaiv.UnitTests
                 .Where(pars => pars.Length == 2 && pars[0] == typeof(int) && pars[1] == typeof(DecimalRounding))
                 .ToArray();
 
-            Assert.IsTrue(methods.Length == 1, nameof(methods));
+            Assert.IsTrue(methods?.Length == 1, nameof(methods));
         }
 
         [TestCase(typeof(Amount), typeof(decimal))]
@@ -327,7 +327,7 @@ namespace Qowaiv.UnitTests
                 .Where(pars => pars.Length == 1 && pars[0] == multiplyer)
                 .ToArray();
 
-            Assert.IsTrue(methods.Length == 1, nameof(methods));
+            Assert.IsTrue(methods?.Length == 1, nameof(methods));
         }
 
         [TestCase(typeof(Amount), typeof(decimal))]
@@ -343,7 +343,7 @@ namespace Qowaiv.UnitTests
                 .Where(pars => pars.Length == 2 && pars[0] == multiplyer && pars[1] == typeof(DecimalRounding))
                 .ToArray();
 
-            Assert.IsTrue(methods.Length == 1, nameof(methods));
+            Assert.IsTrue(methods?.Length == 1, nameof(methods));
         }
 
     }

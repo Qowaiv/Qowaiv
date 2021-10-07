@@ -8,7 +8,6 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
-    <CodeAnalysisRuleSet>..\..\Qowaiv.nopackage.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
 </Project>

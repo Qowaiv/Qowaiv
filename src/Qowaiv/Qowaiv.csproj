@@ -6,6 +6,10 @@
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>5.1.2</Version>
+    <PackageReleaseNotes>
+v5.1.2
+- Extend Open API documentation with explicit example. #188
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

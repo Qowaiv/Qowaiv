@@ -828,13 +828,21 @@ public static class SwaggerGenOptionsSvoExtensions
             options.MapType(attr.DataType, () => new OpenApiSchema
             {
                 Type = attr.Type,
-                Example = attr.Example, // convert to IOpenApiAny of choice
+                Example = attr.Example(),
                 Format = attr.Format,
                 Pattern = attr.Pattern,
                 Nullable = attr.Nullable,
             });
         }
     }
+
+    private static IOpenApiAny Example(this OpenApiDataTypeAttribute attr)
+        => attr.Type switch
+        {
+            "integer" => new OpenApiInteger((int)attr.Example),
+            "number" => new OpenApiDouble((double)attr.Example),
+            _ => new OpenApiString(attr.Example.ToString()),
+        };
 }
 ```
             

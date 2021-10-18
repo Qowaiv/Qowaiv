@@ -175,6 +175,6 @@ namespace Qowaiv.Identifiers
 
         private static Guid Id(object obj) => obj is Guid guid ? guid : Guid.Empty;
 
-        private class Default : GuidBehavior { }
+        private sealed class Default : GuidBehavior { }
     }
 }

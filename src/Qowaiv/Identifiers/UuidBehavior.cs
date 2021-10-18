@@ -8,6 +8,6 @@
         /// <summary>Gets the default format used to represent the <see cref="System.Guid"/> as <see cref="string"/>.</summary>
         protected override string DefaultFormat => "S";
 
-        private class Default : UuidBehavior { }
+        private sealed class Default : UuidBehavior { }
     }
 }

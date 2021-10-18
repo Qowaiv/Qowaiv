@@ -14,7 +14,7 @@ namespace Qowaiv.Conversion
             {
                 return id is Guid guid ? guid : Guid.Empty;
             }
-            throw new FormatException(QowaivMessages.FormatExceptionUuid);
+            else throw new FormatException(QowaivMessages.FormatExceptionUuid);
         }
     }
 }

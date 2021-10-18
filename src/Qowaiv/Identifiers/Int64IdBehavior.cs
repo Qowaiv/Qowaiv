@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.Conversion.Identifiers;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 
@@ -11,7 +12,7 @@ namespace Qowaiv.Identifiers
         public Type BaseType => typeof(long);
 
         /// <inheritdoc/>
-        public virtual TypeConverter Converter { get; } = TypeDescriptor.GetConverter(typeof(long));
+        public virtual TypeConverter Converter => new IdBehaviorConverter(this, typeof(long), typeof(int), typeof(string));
 
         /// <inheritdoc/>
         public virtual int Compare(object x, object y) => Id(x).CompareTo(Id(y));

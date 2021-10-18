@@ -8,11 +8,15 @@ namespace Qowaiv.Identifiers
     /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="long"/>.</summary>
     public abstract class Int64IdBehavior : IIdentifierBehavior
     {
+        /// <summary>Creates a new instance of the <see cref="Int64IdBehavior"/> class.</summary>
+        protected Int64IdBehavior()
+            => Converter = new IdBehaviorConverter(this, typeof(long), typeof(int), typeof(string));
+
         /// <summary>Returns the type of the underlying value (<see cref="long"/>).</summary>
         public Type BaseType => typeof(long);
 
         /// <inheritdoc/>
-        public virtual TypeConverter Converter => new IdBehaviorConverter(this, typeof(long), typeof(int), typeof(string));
+        public virtual TypeConverter Converter { get; }
 
         /// <inheritdoc/>
         public virtual int Compare(object x, object y) => Id(x).CompareTo(Id(y));

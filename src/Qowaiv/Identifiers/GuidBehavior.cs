@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion;
+﻿using Qowaiv.Conversion.Identifiers;
 using Qowaiv.Text;
 using System;
 using System.ComponentModel;
@@ -11,11 +11,15 @@ namespace Qowaiv.Identifiers
     {
         internal static readonly GuidBehavior Instance = new Default();
 
+        /// <summary>Creates a new instance of the <see cref="GuidBehavior"/> class.</summary>
+        protected GuidBehavior()
+            => Converter = new IdBehaviorConverter(this, typeof(Guid), typeof(Uuid), typeof(string));
+
         /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>
         public Type BaseType => typeof(Guid);
 
         /// <inheritdoc/>
-        public virtual TypeConverter Converter { get; } = new GuidTypeConverter();
+        public virtual TypeConverter Converter { get; }
 
         /// <summary>Gets the default format used to represent the <see cref="Guid"/> as <see cref="string"/>.</summary>
         protected virtual string DefaultFormat => "d";

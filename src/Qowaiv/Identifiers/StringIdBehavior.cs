@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.Conversion.Identifiers;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Text;
@@ -8,11 +9,15 @@ namespace Qowaiv.Identifiers
     /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="string"/>.</summary>
     public abstract class StringIdBehavior : IIdentifierBehavior
     {
+        /// <summary>Creates a new instance of the <see cref="GuidBehavior"/> class.</summary>
+        protected StringIdBehavior()
+            => Converter = new IdBehaviorConverter(this, typeof(string), typeof(Guid), typeof(Uuid), typeof(long), typeof(int));
+
         /// <summary>Returns the type of the underlying value (<see cref="string"/>).</summary>
         public Type BaseType => typeof(string);
 
         /// <summary>Returns a type converter for the type of the underlying value.</summary>
-        public virtual TypeConverter Converter { get; } = TypeDescriptor.GetConverter(typeof(string));
+        public virtual TypeConverter Converter { get; }
 
         /// <inheritdoc/>
         public virtual int Compare(object x, object y) => string.Compare(Id(x), Id(y), StringComparison.InvariantCulture);

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv;
+using Qowaiv.Conversion;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -24,6 +25,13 @@ namespace Obsolete_code
         public void Email_address_regex_pattern_is_slow_and_incomplete()
         {
             Assert.NotNull(EmailAddress.Pattern);
+        }
+
+        [Test]
+        public void GuidTypeConverter()
+        {
+            var converter = new GuidTypeConverter();
+            Assert.NotNull(converter.ConvertFrom(Guid.NewGuid().ToString()));
         }
 
         [Test]

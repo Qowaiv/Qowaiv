@@ -1,10 +1,13 @@
 ﻿using Qowaiv.Identifiers;
 using Qowaiv.TestTools.Globalization;
 using System;
-using Int32Id = Qowaiv.Identifiers.Id<Qowaiv.UnitTests.ForInt32>;
-using Int64Id = Qowaiv.Identifiers.Id<Qowaiv.UnitTests.ForInt64>;
+using CustomGuid = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForGuid>;
+using CustomUuid = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForUuid>;
+using Int32Id = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForInt32>;
+using Int64Id = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForInt64>;
+using StringId = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForString>;
 
-namespace Qowaiv.UnitTests
+namespace Qowaiv.Specs
 {
     public static class Svo
     {
@@ -24,6 +27,9 @@ namespace Qowaiv.UnitTests
 
         public static readonly Int32Id Int32Id = Int32Id.Create(17);
         public static readonly Int64Id Int64Id = Int64Id.Create(9876543210L);
+        public static readonly StringId StringId = StringId.Parse("Qowaiv-ID");
+        public static readonly CustomGuid CustomGuid = CustomGuid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        public static readonly CustomUuid CustomUuid = CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
     }
 
     public sealed class ForInt32 : Int32IdBehavior
@@ -47,4 +53,8 @@ namespace Qowaiv.UnitTests
             ? base.TryParse(str?[6..], out id)
             : base.TryParse(str, out id);
     }
+
+    public class ForString : StringIdBehavior { }
+    public class ForGuid : GuidBehavior { }
+    public class ForUuid : UuidBehavior { }
 }

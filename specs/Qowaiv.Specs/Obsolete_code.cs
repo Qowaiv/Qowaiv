@@ -5,8 +5,8 @@ using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
 using Qowaiv.Reflection;
+using Qowaiv.Specs;
 using Qowaiv.TestTools.Globalization;
-using Qowaiv.UnitTests;
 using Qowaiv.Web;
 using System;
 

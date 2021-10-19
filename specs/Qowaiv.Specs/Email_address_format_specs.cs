@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv;
-using Qowaiv.UnitTests;
+using Qowaiv.Specs;
 using System.Collections.Generic;
 
 namespace Email_address_format_specs

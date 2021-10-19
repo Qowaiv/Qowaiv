@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Mathematics;
 using Qowaiv.Reflection;
 using Qowaiv.TestTools;
@@ -18,9 +19,7 @@ namespace Qowaiv.UnitTests
 
         [TestCaseSource(nameof(SvoTypes))]
         public void IsSingleValueObject(Type svoType)
-        {
-            Assert.IsTrue(QowaivType.IsSingleValueObject(svoType));
-        }
+            => svoType.GetCustomAttribute<SingleValueObjectAttribute>().Should().NotBeNull();
 
         [TestCaseSource(nameof(SvoTypes))]
         public void ParseMatches(Type svo)

@@ -1,5 +1,8 @@
-﻿using Qowaiv.TestTools.Globalization;
+﻿using Qowaiv.Identifiers;
+using Qowaiv.TestTools.Globalization;
 using System;
+using Int32Id = Qowaiv.Identifiers.Id<Qowaiv.UnitTests.ForInt32>;
+using Int64Id = Qowaiv.Identifiers.Id<Qowaiv.UnitTests.ForInt64>;
 
 namespace Qowaiv.UnitTests
 {
@@ -18,5 +21,30 @@ namespace Qowaiv.UnitTests
 
         public static readonly Year Year = 1979;
         public static readonly YesNo YesNo = YesNo.Yes;
+
+        public static readonly Int32Id Int32Id = Int32Id.Create(17);
+        public static readonly Int64Id Int64Id = Int64Id.Create(9876543210L);
+    }
+
+    public sealed class ForInt32 : Int32IdBehavior
+    {
+        public override string ToString(object obj, string format, IFormatProvider formatProvider)
+            => $"PREFIX{obj:format}";
+
+        public override bool TryParse(string str, out object id)
+            => (str ?? "").StartsWith("PREFIX")
+            ? base.TryParse(str?[6..], out id)
+            : base.TryParse(str, out id);
+    }
+
+    public sealed class ForInt64 : Int64IdBehavior
+    {
+        public override string ToString(object obj, string format, IFormatProvider formatProvider)
+            => $"PREFIX{obj:format}";
+
+        public override bool TryParse(string str, out object id)
+            => (str ?? "").StartsWith("PREFIX")
+            ? base.TryParse(str?[6..], out id)
+            : base.TryParse(str, out id);
     }
 }

@@ -518,12 +518,6 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void CanNotConvertFromInt32_IdForInt64_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Id<ForInt64>), typeof(int));
-        }
-
-        [Test]
         public void CanNotConvertToGuid_IdForInt64_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(Id<ForInt64>), typeof(Guid));

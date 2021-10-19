@@ -5,6 +5,7 @@ using System.Globalization;
 namespace Qowaiv.Conversion
 {
     /// <summary>Provides a conversion for a GUID.</summary>
+    [Obsolete("Will be dropped when the next major version is released.")]
     public class GuidTypeConverter : SvoTypeConverter<Guid>
     {
         /// <inheritdoc />
@@ -14,7 +15,7 @@ namespace Qowaiv.Conversion
             {
                 return id is Guid guid ? guid : Guid.Empty;
             }
-            throw new FormatException(QowaivMessages.FormatExceptionUuid);
+            else throw new FormatException(QowaivMessages.FormatExceptionUuid);
         }
     }
 }

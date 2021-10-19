@@ -31,7 +31,7 @@ namespace Qowaiv.Identifiers
         /// <summary>Returns a formatted <see cref="string"/> that represents the underlying value of the identifier.</summary>
         string ToString(object obj, string format, IFormatProvider formatProvider);
 
-        /// <summary>Derializes the underlying value from a JSON number.</summary>
+        /// <summary>Deserializes the underlying value from a JSON number.</summary>
         object FromJson(long obj);
 
         /// <summary>Serializes the underlying value to a JSON node.</summary>

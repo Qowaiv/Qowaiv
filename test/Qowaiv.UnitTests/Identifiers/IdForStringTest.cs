@@ -455,12 +455,6 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void CanNotConvertFromInt32_IdForString_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Id<ForString>), typeof(int));
-        }
-
-        [Test]
         public void CanNotConvertToInt32_IdForString_IsTrue()
         {
             TypeConverterAssert.CanNotConvertTo(typeof(Id<ForString>), typeof(int));

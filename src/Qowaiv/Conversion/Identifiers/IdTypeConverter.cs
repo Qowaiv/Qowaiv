@@ -58,16 +58,15 @@ namespace Qowaiv.Conversion.Identifiers
         /// <inheritdoc />
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (string.Empty.Equals(value))
+            if (string.Empty.Equals(value) || value is null)
             {
-                value = null;
+                return Ctor.Invoke(new object[] { null });
             }
-            if (value is null || value.GetType() == BaseType)
+            else
             {
-                return Ctor.Invoke(new[] { value });
+                var id = BaseConverter.ConvertFrom(context, culture, value);
+                return Ctor.Invoke(new[] { id });
             }
-            var id = BaseConverter.ConvertFrom(context, culture, value);
-            return Ctor.Invoke(new[] { id });
         }
 
         /// <inheritdoc />
@@ -75,8 +74,7 @@ namespace Qowaiv.Conversion.Identifiers
         {
             var id = m_Value.GetValue(value);
             return destinationType == BaseType
-                ? id
-                : BaseConverter.ConvertTo(context, culture, id, destinationType);
+                ? id : BaseConverter.ConvertTo(context, culture, id, destinationType);
         }
     }
 }

@@ -59,6 +59,6 @@ namespace Qowaiv.Identifiers
         /// <inheritdoc />
         public sealed override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             => TryCreate(value, out var result)
-            ? result : base.ConvertFrom(context, culture, value);
+            ? result : throw Exceptions.InvalidCast(value.GetType(), typeof(Id<>).MakeGenericType(GetType()));
     }
 }

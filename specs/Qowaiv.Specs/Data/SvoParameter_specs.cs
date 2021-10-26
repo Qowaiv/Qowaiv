@@ -57,8 +57,8 @@ namespace Data.SvoParameter_specs
         public void SVO_lacks_cast_promised_in_attribute()
         {
             Action create = () => SvoParameter.CreateForSql("par", new StructWithoutRequiredCast("test"));
-            create.Should().Throw< InvalidCastException >()
-                .WithMessage("Cast from Qowaiv.UnitTests.Data.StructWithoutRequiredCast to System.String is not valid.");
+            create.Should().Throw<InvalidCastException>()
+                .WithMessage("Cast from Data.SvoParameter_specs.StructWithoutRequiredCast to System.String is not valid.");
         }
     }
 

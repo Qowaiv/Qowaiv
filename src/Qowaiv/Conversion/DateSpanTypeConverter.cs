@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion
@@ -7,8 +8,6 @@ namespace Qowaiv.Conversion
     /// <summary>Provides a conversion for a date span.</summary>
     public class DateSpanTypeConverter : TypeConverter
     {
-        #region Convert From
-
         /// <summary>Returns whether this converter can convert an string to
         /// a date span, using the specified context.
         /// </summary>
@@ -21,10 +20,10 @@ namespace Qowaiv.Conversion
         /// <returns>
         /// true if this converter can perform the conversion; otherwise, false.
         /// </returns>
+        [Pure]
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
-        }
+            => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+
         /// <summary>Converts a string to a date span, using the specified
         /// context and culture information.
         /// </summary>
@@ -43,6 +42,7 @@ namespace Qowaiv.Conversion
         /// <exception cref="NotSupportedException">
         /// The conversion cannot be performed.
         /// </exception>
+        [Pure]
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             var str = value as string;
@@ -52,36 +52,5 @@ namespace Qowaiv.Conversion
             }
             return base.ConvertFrom(context, culture, value);
         }
-        #endregion
-
-        #region Convert To
-
-        /// <summary>Converts a date span to string, using the specified context and culture information.</summary>
-        /// <param name="culture">
-        /// A System.Globalization.CultureInfo. If null is passed, the current culture is assumed.
-        /// </param>
-        /// <param name="context">
-        /// An System.ComponentModel.ITypeDescriptorContext that provides a format context.
-        /// </param>
-        /// <param name="value">
-        /// The date span to convert.
-        /// </param>
-        /// <param name="destinationType">
-        /// The System.Type to convert the value parameter to.
-        /// </param>
-        /// <returns>
-        /// A string that represents the converted date span.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// The destinationType parameter is null.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// The conversion cannot be performed.
-        /// </exception>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
-        #endregion
     }
 }

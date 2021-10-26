@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 
@@ -39,16 +40,11 @@ namespace Qowaiv.Formatting
         /// </param>
         public FormattingArguments(string format) : this(format, null) { }
 
-        #region Properties
-
         /// <summary>Gets the format.</summary>
         public string Format { get; }
+
         /// <summary>Gets the format provider.</summary>
         public IFormatProvider FormatProvider { get; }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>Formats the object using the formatting arguments.</summary>
         /// <param name="obj">
@@ -57,6 +53,7 @@ namespace Qowaiv.Formatting
         /// <returns>
         /// A formatted string representing the object.
         /// </returns>
+        [Pure]
         public string ToString(IFormattable obj)
         {
             if (obj == null)
@@ -80,17 +77,11 @@ namespace Qowaiv.Formatting
         /// <remarks>
         /// If the object does not implement IFormattable, the ToString() will be used.
         /// </remarks>
+        [Pure]
         public string ToString(object obj)
-        {
-            return
-                (obj is IFormattable formattable)
-                ? ToString(formattable)
-                : obj?.ToString();
-        }
-
-        #endregion
-
-        #region (De)serialization
+            => obj is IFormattable formattable
+            ? ToString(formattable)
+            : obj?.ToString();
 
         /// <summary>Initializes a new instance of formatting arguments based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>
@@ -112,38 +103,32 @@ namespace Qowaiv.Formatting
             info.AddValue(nameof(FormatProvider), FormatProvider);
         }
 
-        #endregion
-
-        #region IFormattable / ToString
-
         /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay
-            => string.Format(CultureInfo.InvariantCulture,
-                "Format: '{0}', Provider: {1}", Format, FormatProvider);
-
-        #endregion
-
-        #region IEquatable
+            => string.Format(CultureInfo.InvariantCulture, "Format: '{0}', Provider: {1}", Format, FormatProvider);
 
         /// <inheritdoc />
+        [Pure]
         public override bool Equals(object obj) => obj is FormattingArguments args && Equals(args);
 
         /// <inheritdoc />
+        [Pure]
         public bool Equals(FormattingArguments other)
         {
             if (Format != other.Format)
             {
                 return false;
             }
-            if (FormatProvider is null)
+            else if (FormatProvider is null)
             {
                 return other.FormatProvider is null;
             }
-            return FormatProvider.Equals(other.FormatProvider);
+            else return FormatProvider.Equals(other.FormatProvider);
         }
 
         /// <inheritdoc />
+        [Pure]
         public override int GetHashCode()
         {
             int hash = (Format == null) ? 0 : Format.GetHashCode();
@@ -158,10 +143,9 @@ namespace Qowaiv.Formatting
         /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand</param>
+        [Pure]
         public static bool operator ==(FormattingArguments left, FormattingArguments right)
-        {
-            return left.Equals(right);
-        }
+            => left.Equals(right);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
         /// <param name="left">The left operand.</param>
@@ -170,7 +154,5 @@ namespace Qowaiv.Formatting
         {
             return !(left == right);
         }
-
-        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Formatting
@@ -17,6 +18,7 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentNullException">
         /// str is null or the provider is null.
         /// </exception>
+        [Pure]
         public static string ToUpper(this string str, IFormatProvider provider)
         {
             Guard.NotNull(provider, nameof(provider));
@@ -36,6 +38,7 @@ namespace Qowaiv.Formatting
         /// <exception cref="ArgumentNullException">
         /// str is null or the provider is null.
         /// </exception>
+        [Pure]
         public static string ToTitleCase(this string str, IFormatProvider provider)
         {
             Guard.NotNull(provider, nameof(provider));
@@ -51,6 +54,7 @@ namespace Qowaiv.Formatting
         /// An instance of the object specified by formatType, if the System.IFormatProvider
         /// implementation can supply that type of object; otherwise, null.
         /// </returns>
+        [Pure]
         public static TFormat GetFormat<TFormat>(this IFormatProvider provider)
         {
             Guard.NotNull(provider, nameof(provider));
@@ -60,6 +64,7 @@ namespace Qowaiv.Formatting
         /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)"/>,
         /// otherwise the string value.
         /// </summary>
+        [Pure]
         internal static string WithDefault(this string str, string @default)
             => string.IsNullOrEmpty(str) ? @default : str;
     }

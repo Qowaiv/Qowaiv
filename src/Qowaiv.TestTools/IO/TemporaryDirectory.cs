@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.IO;
 
 namespace Qowaiv.TestTools.IO
@@ -30,12 +31,14 @@ namespace Qowaiv.TestTools.IO
         public static implicit operator DirectoryInfo(TemporaryDirectory dir) => dir?.Root;
 
         /// <summary>Represents the temporary directory as <see cref="string"/>.</summary>
+        [Pure]
         public override string ToString() => Root.ToString();
 
         /// <summary>The underlying <see cref="DirectoryInfo"/>.</summary>
         private readonly DirectoryInfo Root;
 
         /// <summary>Creates a file in the temporary directory.</summary>
+        [Pure]
         public FileInfo CreateFile(string fileName) => new(Path.Combine(FullName, fileName));
 
         /// <summary>Disposes the temporary directory by deleting it and its content.</summary>

@@ -13,6 +13,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -56,15 +57,18 @@ namespace Qowaiv.Identifiers
         private object m_Value;
 
         /// <summary>Returns true if the identifier is empty, otherwise false.</summary>
+        [Pure]
         public bool IsEmpty()
             => m_Value == default
             || m_Value.Equals(Guid.Empty)
             || m_Value.Equals(0L);
 
         /// <summary>Gets a <see cref="byte"/> array that represents the identifier.</summary>
+        [Pure]
         public byte[] ToByteArray() => IsEmpty() ? Array.Empty<byte>() : behavior.ToByteArray(m_Value);
 
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(object obj)
         {
             if (obj is null)
@@ -81,6 +85,7 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(Id<TIdentifier> other)
         {
             var isEmpty = IsEmpty();
@@ -94,12 +99,14 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        [Pure]
         public override bool Equals(object obj) => obj is Id<TIdentifier> other && Equals(other);
 
         /// <summary>Returns true if this instance and the other identifier are equal, otherwise false.</summary>
         /// <param name="other">
         /// The <see cref = "Id{TIdentifier}" /> to compare with.
         /// </param>
+        [Pure]
         public bool Equals(Id<TIdentifier> other)
         {
             var isEmpty = IsEmpty();
@@ -114,6 +121,7 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode() => IsEmpty() ? 0 : behavior.GetHashCode(m_Value);
 
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
@@ -131,20 +139,23 @@ namespace Qowaiv.Identifiers
         private string DebuggerDisplay => IsEmpty()
             ? $"{DebugDisplay.Empty} ({typeof(TIdentifier).Name})"
             : $"{this} ({typeof(TIdentifier).Name})";
-        
+
         /// <summary>Returns a <see cref = "string"/> that represents the identifier.</summary>
+        [Pure]
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
         /// <param name="format">
         /// The format that describes the formatting.
         /// </param>
+        [Pure]
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
         /// <param name="provider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the identifier.</summary>
@@ -154,6 +165,7 @@ namespace Qowaiv.Identifiers
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -177,6 +189,7 @@ namespace Qowaiv.Identifiers
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
+        [Pure]
         XmlSchema IXmlSerializable.GetSchema() => null;
 
         /// <summary>Reads the identifier from an <see href = "XmlReader"/>.</summary>
@@ -200,8 +213,10 @@ namespace Qowaiv.Identifiers
         /// <returns>
         /// The serialized JSON node.
         /// </returns>
+        [Pure]
         public object ToJson() => IsEmpty() ? null : behavior.ToJson(m_Value);
 
+        [Pure]
         private TPrimitive CastToPrimitive<TPrimitive, TTo>()
         {
             if (behavior.BaseType != typeof(TPrimitive))
@@ -251,6 +266,7 @@ namespace Qowaiv.Identifiers
         /// <exception cref="FormatException">
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
+        [Pure]
         public static Id<TIdentifier> Parse(string s)
         {
             return TryParse(s, out Id<TIdentifier> val)
@@ -265,6 +281,7 @@ namespace Qowaiv.Identifiers
         /// <returns>
         /// The identifier if the string was converted successfully, otherwise default.
         /// </returns>
+        [Pure]
         public static Id<TIdentifier> TryParse(string s)
         {
             return TryParse(s, out Id<TIdentifier> val) ? val : default;
@@ -305,6 +322,7 @@ namespace Qowaiv.Identifiers
         /// <returns>
         /// The deserialized identifier.
         /// </returns>
+        [Pure]
         public static Id<TIdentifier> FromJson(string json) => Parse(json);
 
         /// <summary>Deserializes the date from a JSON number.</summary>
@@ -314,12 +332,14 @@ namespace Qowaiv.Identifiers
         /// <returns>
         /// The deserialized date.
         /// </returns>
+        [Pure]
         public static Id<TIdentifier> FromJson(long json) => new Id<TIdentifier>(behavior.FromJson(json));
 
         /// <summary>Creates the identfier for the <see cref="byte"/> array.</summary>
         /// <param name="bytes">
         /// The <see cref="byte"/> array that represents the underlying value.
         /// </param>
+        [Pure]
         public static Id<TIdentifier> FromBytes(byte[] bytes)
         {
             return bytes is null || bytes.Length == 0
@@ -334,14 +354,11 @@ namespace Qowaiv.Identifiers
         /// <exception cref="InvalidCastException">
         /// if the identifier could not be created from the <see cref="object"/>.
         /// </exception>
+        [Pure]
         public static Id<TIdentifier> Create(object obj)
-        {
-            if (TryCreate(obj, out var id))
-            {
-                return id;
-            }
-            throw Exceptions.InvalidCast(obj?.GetType(), typeof(Id<TIdentifier>));
-        }
+            =>TryCreate(obj, out var id)
+            ? id
+            : throw Exceptions.InvalidCast(obj?.GetType(), typeof(Id<TIdentifier>));
 
         /// <summary>Tries to create an identifier from an <see cref="object"/>.</summary>
         /// <param name="obj">
@@ -361,21 +378,23 @@ namespace Qowaiv.Identifiers
             {
                 return true;
             }
-            if (behavior.TryCreate(obj, out var underlying))
+            else if (behavior.TryCreate(obj, out var underlying))
             {
                 id = new Id<TIdentifier>(underlying);
                 return true;
             }
-            return false;
+            else return false;
         }
 
         /// <summary>Creates a new identifier.</summary>
+        [Pure]
         public static Id<TIdentifier> Next() => new Id<TIdentifier>(behavior.Next());
 
         /// <summary>Returns true if the value represents a valid identifier.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>
+        [Pure]
         public static bool IsValid(string val) => !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
     }
 }

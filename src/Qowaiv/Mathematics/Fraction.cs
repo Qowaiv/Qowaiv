@@ -10,6 +10,7 @@ using Qowaiv.Text;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -72,7 +73,7 @@ namespace Qowaiv.Mathematics
             /// short slash    | ̷  |  337
             /// long slash     | ̸  |  338
             /// </remarks>
-            public static readonly string FractionBars = new string(new[]
+            public static readonly string FractionBars = new(new[]
             {
                 Slash,
                 Colon,
@@ -89,6 +90,7 @@ namespace Qowaiv.Mathematics
             );
 
             /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
+            [Pure]
             public static bool IsFractionBar(char ch) => FractionBars.IndexOf(ch) != CharBuffer.NotFound;
         }
 
@@ -162,153 +164,153 @@ namespace Qowaiv.Mathematics
         private string DebuggerDisplay => this.DebuggerDisplay("{0:super⁄sub} = {0:0.########}");
 
         /// <summary>Returns true if the faction is zero.</summary>
+        [Pure]
         public bool IsZero() => numerator == 0;
 
         /// <summary>Gets the sign of the fraction.</summary>
+        [Pure]
         public int Sign() => Math.Sign(numerator);
 
         /// <summary>Returns the absolute value of the fraction.</summary>
+        [Pure]
         public Fraction Abs() => New(numerator.Abs(), denominator);
 
         /// <summary>Pluses the fraction.</summary>
+        [Pure]
         internal Fraction Plus() => New(+numerator, denominator);
 
         /// <summary>Negates the fraction.</summary>
+        [Pure]
         internal Fraction Negate() => New(-numerator, denominator);
 
         /// <summary>Gets the inverse of a faction.</summary>
         /// <exception cref="DivideByZeroException">
         /// When the fraction is <see cref="Zero"/>.
         /// </exception>
+        [Pure]
         public Fraction Inverse()
-        {
-            if (IsZero())
-            {
-                throw new DivideByZeroException();
-            }
-            return New(Sign() * denominator, numerator.Abs());
-        }
+            =>IsZero()
+            ? throw new DivideByZeroException()
+            : New(Sign() * denominator, numerator.Abs());
 
         /// <summary>Multiplies the fraction with the factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Fraction Multiply(Fraction factor)
         {
-            if (factor.IsZero())
+            if (factor.IsZero()) return Zero;
+            else
             {
-                return Zero;
+                var sign = Sign() * factor.Sign();
+                long n0 = numerator.Abs();
+                long d0 = denominator;
+                long n1 = factor.numerator.Abs();
+                long d1 = factor.denominator;
+
+                Reduce(ref n0, ref d1);
+                Reduce(ref n1, ref d0);
+
+                return checked(New(sign * n0 * n1, d0 * d1));
             }
-
-            var sign = Sign() * factor.Sign();
-            long n0 = numerator.Abs();
-            long d0 = denominator;
-            long n1 = factor.numerator.Abs();
-            long d1 = factor.denominator;
-
-            Reduce(ref n0, ref d1);
-            Reduce(ref n1, ref d0);
-
-            return checked(New(sign * n0 * n1, d0 * d1));
         }
 
         /// <summary>Multiplies the fraction with the factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Fraction Multiply(long factor) => Multiply(Create(factor));
 
         /// <summary>Multiplies the fraction with the factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Fraction Multiply(int factor) => Multiply((long)factor);
 
         /// <summary>Divide the fraction by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Fraction Divide(Fraction factor) => Multiply(factor.Inverse());
 
         /// <summary>Divide the fraction by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Fraction Divide(long factor)
-        {
-            if (factor == 0)
-            {
-                throw new DivideByZeroException();
-            }
-            return Multiply(New(1, factor));
-        }
+            =>factor == 0
+            ? throw new DivideByZeroException()
+            : Multiply(New(1, factor));
 
         /// <summary>Divide the fraction by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Fraction Divide(int factor) => Divide((long)factor);
 
         /// <summary>Adds a fraction to the current fraction.</summary>
         /// <param name="fraction">
         /// The fraction to add.
         /// </param>
+        [Pure]
         public Fraction Add(Fraction fraction)
         {
-            if (IsZero())
+            if (IsZero()) return fraction;
+            else if (fraction.IsZero()) return this;
+            else
             {
-                return fraction;
-            }
-            if (fraction.IsZero())
-            {
-                return this;
-            }
+                long n0 = numerator.Abs();
+                long d0 = denominator;
+                long n1 = fraction.numerator.Abs();
+                long d1 = fraction.denominator;
 
-            long n0 = numerator.Abs();
-            long d0 = denominator;
-            long n1 = fraction.numerator.Abs();
-            long d1 = fraction.denominator;
+                Reduce(ref n0, ref d1);
+                Reduce(ref n1, ref d0);
 
-            Reduce(ref n0, ref d1);
-            Reduce(ref n1, ref d0);
-
-            checked
-            {
-                long n;
-                long d;
-
-                // Same denominator.
-                if (d0 == d1)
+                checked
                 {
-                    d = d0;
-                }
-                // d0 is a multiple of d1
-                else if (d0 > d1 && d0 % d1 == 0)
-                {
-                    d = d0;
-                    n1 *= d0 / d1;
-                }
-                // d1 is a multiple of d0
-                else if (d1 % d0 == 0)
-                {
-                    d = d1;
-                    n0 *= d1 / d0;
-                }
-                else
-                {
-                    d = d0 * d1;
-                    n0 *= d1;
-                    n1 *= d0;
-                }
+                    long n;
+                    long d;
 
-                n = n0 * Sign() + n1 * fraction.Sign();
+                    // Same denominator.
+                    if (d0 == d1)
+                    {
+                        d = d0;
+                    }
+                    // d0 is a multiple of d1
+                    else if (d0 > d1 && d0 % d1 == 0)
+                    {
+                        d = d0;
+                        n1 *= d0 / d1;
+                    }
+                    // d1 is a multiple of d0
+                    else if (d1 % d0 == 0)
+                    {
+                        d = d1;
+                        n0 *= d1 / d0;
+                    }
+                    else
+                    {
+                        d = d0 * d1;
+                        n0 *= d1;
+                        n1 *= d0;
+                    }
 
-                var sign = n.Sign();
-                n = n.Abs();
+                    n = n0 * Sign() + n1 * fraction.Sign();
 
-                Reduce(ref n, ref d);
+                    var sign = n.Sign();
+                    n = n.Abs();
 
-                return New(n * sign, d);
+                    Reduce(ref n, ref d);
+
+                    return New(n * sign, d);
+                }
             }
         }
 
@@ -316,30 +318,35 @@ namespace Qowaiv.Mathematics
         /// <param name="number">
         /// The number to add.
         /// </param>
+        [Pure]
         public Fraction Add(long number) => Add(Create(number));
 
         /// <summary>Adds a number to the current fraction.</summary>
         /// <param name="number">
         /// The number to add.
         /// </param>
+        [Pure]
         public Fraction Add(int number) => Add((long)number);
 
         /// <summary>Subtracts a fraction from the current fraction.</summary>
         /// <param name="fraction">
         /// The fraction to subtract.
         /// </param>
+        [Pure]
         public Fraction Subtract(Fraction fraction) => Add(fraction.Negate());
 
         /// <summary>Subtracts a number from the current fraction.</summary>
         /// <param name="number">
         /// The number to subtract.
         /// </param>
+        [Pure]
         public Fraction Subtract(long number) => Subtract(Create(number));
 
         /// <summary>Subtracts a number from the current fraction.</summary>
         /// <param name="number">
         /// The number to subtract.
         /// </param>
+        [Pure]
         public Fraction Subtract(int number) => Subtract((long)number);
 
         /// <summary>Pluses the fraction.</summary>
@@ -400,6 +407,7 @@ namespace Qowaiv.Mathematics
         /// <param name = "formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -476,6 +484,7 @@ namespace Qowaiv.Mathematics
         }
 
         /// <inheritdoc/>
+        [Pure]
         public bool Equals(Fraction other)
         {
             // to deal with zero (default should be zero).
@@ -488,12 +497,14 @@ namespace Qowaiv.Mathematics
         }
 
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode()
         {
             return (denominator * 113 * numerator).GetHashCode();
         }
 
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(Fraction other)
         {
             if (denominator == other.denominator || IsZero() || other.IsZero())
@@ -539,9 +550,11 @@ namespace Qowaiv.Mathematics
         }
 
         /// <summary>Gets an XML string representation of the fraction.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Gets an JSON representation of the fraction.</summary>
+        [Pure]
         public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Deserializes the fraction from a JSON number.</summary>
@@ -551,6 +564,7 @@ namespace Qowaiv.Mathematics
         /// <returns>
         /// The deserialized fraction.
         /// </returns>
+        [Pure]
         public static Fraction FromJson(double json) => Cast(json);
 
         /// <summary>Deserializes the fraction from a JSON number.</summary>
@@ -560,6 +574,7 @@ namespace Qowaiv.Mathematics
         /// <returns>
         /// The deserialized fraction.
         /// </returns>
+        [Pure]
         public static Fraction FromJson(long json) => New(json, 1);
 
         #endregion
@@ -567,28 +582,26 @@ namespace Qowaiv.Mathematics
         #region (Explicit) casting
 
         /// <summary>Casts the fraction to a <see cref="decimal"/>.</summary>
+        [Pure]
         private decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
+
         /// <summary>Casts the fraction to a <see cref="double"/>.</summary>
+        [Pure]
         private double ToDouble() => IsZero() ? 0d : numerator / (double)denominator;
 
         /// <summary>Casts a <see cref="decimal"/> to a fraction.</summary>
+        [Pure]
         private static Fraction Cast(decimal number)
-        {
-            if (number < MinValue.numerator || number > MaxValue.numerator)
-            {
-                throw new OverflowException(QowaivMessages.OverflowException_Fraction);
-            }
-            return Create(number, MinimumError);
-        }
+            => number < MinValue.numerator || number > MaxValue.numerator
+            ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
+            : Create(number, MinimumError);
+
         /// <summary>Casts a <see cref="double"/> to a fraction.</summary>
+        [Pure]
         private static Fraction Cast(double number)
-        {
-            if (number < MinValue.numerator || number > MaxValue.numerator)
-            {
-                throw new OverflowException(QowaivMessages.OverflowException_Fraction);
-            }
-            return Create((decimal)number, MinimumError);
-        }
+            => number < MinValue.numerator || number > MaxValue.numerator
+            ?    throw new OverflowException(QowaivMessages.OverflowException_Fraction)
+            : Create((decimal)number, MinimumError);
 
         /// <summary>Casts a <see cref="decimal"/> to a <see cref="Fraction"/>.</summary>
         public static explicit operator Fraction(decimal number) => Cast(number);
@@ -655,6 +668,7 @@ namespace Qowaiv.Mathematics
         /// <remarks>
         /// Inspired by "Sjaak", see: https://stackoverflow.com/a/45314258/2266405
         /// </remarks>
+        [Pure]
         public static Fraction Create(decimal number, decimal error)
         {
             if (number < long.MinValue || number > long.MaxValue)
@@ -724,25 +738,24 @@ namespace Qowaiv.Mathematics
         /// <param name="number">
         /// The decimal value to represent as a fraction.
         /// </param>
+        [Pure]
         public static Fraction Create(decimal number) => Create(number, MinimumError);
 
         /// <summary>Creates a fraction based on a <see cref="double"/>.</summary>
         /// <param name="number">
         /// The double value to represent as a fraction.
         /// </param>
+        [Pure]
         public static Fraction Create(double number)
-        {
-            if (number < (double)decimal.MinValue || number > (double)decimal.MaxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
-            }
-            return Create((decimal)number, MinimumError);
-        }
+            =>number < (double)decimal.MinValue || number > (double)decimal.MaxValue
+            ? throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction)
+            : Create((decimal)number, MinimumError);
 
         /// <summary>Creates a fraction based on a <see cref="long"/>.</summary>
         /// <param name="number">
         /// The long value to represent as a fraction.
         /// </param>
+        [Pure]
         public static Fraction Create(long number) => number == 0 ? Zero : New(number, 1);
 
         /// <summary>Creates a new instance of the <see cref="Fraction"/> class.</summary>
@@ -753,14 +766,11 @@ namespace Qowaiv.Mathematics
         /// This pseudo constructor differs from the public constructor that it
         /// does not reduce any value, nor checks the denominator.
         /// </remarks>
+        [Pure]
         private static Fraction New(long n, long d)
-        {
-            if (n == long.MinValue)
-            {
-                throw new OverflowException(QowaivMessages.OverflowException_Fraction);
-            }
-            return new Fraction { numerator = n, denominator = d, };
-        }
+            => n == long.MinValue
+            ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
+            : new Fraction { numerator = n, denominator = d, };
 
         #region internal tooling
 
@@ -790,6 +800,7 @@ namespace Qowaiv.Mathematics
         /// <remarks>
         /// See: https://en.wikipedia.org/wiki/Greatest_common_divisor
         /// </remarks>
+        [Pure]
         private static long Gcd(long a, long b)
         {
             var even = 1;

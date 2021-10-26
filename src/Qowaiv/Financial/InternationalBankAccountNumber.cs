@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -78,6 +79,7 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value == default ? null : ToUnformattedString();
 
         /// <summary>Returns a <see cref="string"/> that represents the current IBAN for debug purposes.</summary>
@@ -85,6 +87,7 @@ namespace Qowaiv.Financial
         private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
         /// <summary>Formats the IBAN without spaces.</summary>
+        [Pure]
         private string ToUnformattedString()
         {
             if (m_Value == default)
@@ -101,9 +104,11 @@ namespace Qowaiv.Financial
             }
         }
         /// <summary>Formats the IBAN without spaces as lowercase.</summary>
+        [Pure]
         private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();
 
         /// <summary>Formats the IBAN with spaces.</summary>
+        [Pure]
         private string ToFormattedString()
         {
             if (m_Value == default)
@@ -116,8 +121,9 @@ namespace Qowaiv.Financial
             }
             return FormattedPattern.Replace(m_Value, "$0 ");
         }
-        
+
         /// <summary>Formats the IBAN with spaces as lowercase.</summary>
+        [Pure]
         private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
 
         private static readonly Regex FormattedPattern = new Regex(@"\w{4}(?!$)", RegexOptions.Compiled);
@@ -137,6 +143,7 @@ namespace Qowaiv.Financial
         /// f: as formatted lowercase.
         /// F: as formatted uppercase.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
@@ -152,6 +159,7 @@ namespace Qowaiv.Financial
         };
 
         /// <summary>Gets an XML string representation of the IBAN.</summary>
+        [Pure]
         private string ToXmlString() => ToUnformattedString();
 
         /// <summary>Casts an IBAN to a <see cref="string"/>.</summary>
@@ -200,6 +208,7 @@ namespace Qowaiv.Financial
             return false;
         }
 
+        [Pure]
         private static bool ValidForCountry(CharBuffer buffer)
         {
             var country = Country.TryParse(buffer.Substring(0, 2));
@@ -208,6 +217,7 @@ namespace Qowaiv.Financial
                 || buffer.Matches(localizedPattern));
         }
 
+        [Pure]
         private static bool Mod97(CharBuffer buffer)
         {
             var digits = Digits(buffer);
@@ -222,6 +232,7 @@ namespace Qowaiv.Financial
             return sum % 97 == 1;
         }
 
+        [Pure]
         private static CharBuffer Digits(CharBuffer input)
         {
             var digits = CharBuffer.Empty(input.Length * 2);

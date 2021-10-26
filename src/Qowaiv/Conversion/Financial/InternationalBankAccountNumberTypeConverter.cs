@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Financial;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion.Financial
@@ -7,6 +8,7 @@ namespace Qowaiv.Conversion.Financial
     public class InternationalBankAccountNumberTypeConverter : SvoTypeConverter<InternationalBankAccountNumber>
     {
         /// <inheritdoc/>
+        [Pure]
         protected override InternationalBankAccountNumber FromString(string str, CultureInfo culture) => InternationalBankAccountNumber.Parse(str, culture);
     }
 }

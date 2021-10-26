@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 
@@ -8,6 +9,7 @@ namespace Qowaiv.TestTools
     public static class JsonTester
     {
         /// <summary>Applies multiple FromJson scenario's.</summary>
+        [Pure]
         public static T Read<T>(object val)
         {
             var parameterType = val?.GetType();
@@ -34,6 +36,7 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Applies <code>ToJson()</code>.</summary>
+        [Pure]
         public static object Write<T>(T val)
         {
             var toJson = typeof(T)
@@ -47,21 +50,17 @@ namespace Qowaiv.TestTools
             return toJson.Invoke(val, Array.Empty<object>());
         }
 
+        [Pure]
         private static bool FromJson<T>(MethodInfo method, Type parameterType)
-        {
-            return method.Name == nameof(FromJson)
-                && method.GetParameters().Length == 1
-                && method.GetParameters()[0].ParameterType == parameterType
-                && method.ReturnType == typeof(T)
-            ;
-        }
+            => method.Name == nameof(FromJson)
+            && method.GetParameters().Length == 1
+            && method.GetParameters()[0].ParameterType == parameterType
+            && method.ReturnType == typeof(T);
 
+        [Pure]
         private static bool ToJson(MethodInfo method)
-        {
-            return method.Name == nameof(ToJson)
+            => method.Name == nameof(ToJson)
                 && method.GetParameters().Length == 0
-                && method.ReturnType != null
-            ;
-        }
+                && method.ReturnType != null;
     }
 }

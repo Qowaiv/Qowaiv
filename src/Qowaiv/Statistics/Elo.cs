@@ -8,6 +8,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -48,6 +49,7 @@ namespace Qowaiv.Statistics
         /// <param name="elo1">
         /// The second Elo.
         /// </param>
+        [Pure]
         public static double GetZScore(Elo elo0, Elo elo1)
         {
             var elo_div = elo1 - elo0;
@@ -59,29 +61,33 @@ namespace Qowaiv.Statistics
         #region Elo manipulation
 
         /// <summary>Increases the Elo with one.</summary>
+        [Pure]
         public Elo Increment() => Add(1d);
 
         /// <summary>Decreases the Elo with one.</summary>
+        [Pure]
         public Elo Decrement() => Subtract(1d);
 
-
         /// <summary>Pluses the Elo.</summary>
+        [Pure]
         public Elo Plus() => Create(+m_Value);
 
         /// <summary>Negates the Elo.</summary>
+        [Pure]
         public Elo Negate() => Create(-m_Value);
-
 
         /// <summary>Multiplies the current Elo with a factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Elo Multiply(double factor) => m_Value * factor;
 
         /// <summary>Divides the current Elo by a factor.</summary>
         /// <param name="factor">
         /// The factor to divides by.
         /// </param>
+        [Pure]
         public Elo Divide(double factor) => m_Value / factor;
 
         /// <summary>Adds Elo to the current Elo.
@@ -89,6 +95,7 @@ namespace Qowaiv.Statistics
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public Elo Add(Elo p) => m_Value + p.m_Value;
 
         /// <summary>Subtracts Elo from the current Elo.
@@ -96,8 +103,8 @@ namespace Qowaiv.Statistics
         /// <param name="p">
         /// The percentage to Subtract.
         /// </param>
+        [Pure]
         public Elo Subtract(Elo p) => m_Value - p.m_Value;
-
 
         /// <summary>Increases the Elo with one.</summary>
         public static Elo operator ++(Elo elo) => elo.Increment();
@@ -127,6 +134,7 @@ namespace Qowaiv.Statistics
         /// <returns>
         /// The deserialized Elo.
         /// </returns>
+        [Pure]
         public static Elo FromJson(double json) => Create(json);
 
         /// <summary>Deserializes the Elo from a JSON number.</summary>
@@ -136,12 +144,14 @@ namespace Qowaiv.Statistics
         /// <returns>
         /// The deserialized Elo.
         /// </returns>
+        [Pure]
         public static Elo FromJson(long json) => Create(json);
 
         /// <summary>Serializes the Elo to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON number.
         /// </returns>
+        [Pure]
         public double ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Elo for debug purposes.</summary>
@@ -155,16 +165,14 @@ namespace Qowaiv.Statistics
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-            return m_Value.ToString(format, formatProvider);
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : m_Value.ToString(format, formatProvider);
 
         /// <summary>Gets an XML string representation of the Elo.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts an Elo to a <see cref="string"/>.</summary>
@@ -224,13 +232,10 @@ namespace Qowaiv.Statistics
         /// <exception cref="ArgumentException">
         /// val is not a valid <see cref="Elo"/>.
         /// </exception>
+        [Pure]
         public static Elo Create(double val)
-        {
-            if (double.IsNaN(val) || double.IsInfinity(val))
-            {
-                throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.ArgumentOutOfRange_Elo);
-            }
-            return new Elo(val);
-        }
+            => double.IsNaN(val) || double.IsInfinity(val)
+            ? throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.ArgumentOutOfRange_Elo)
+            : new Elo(val);
     }
 }

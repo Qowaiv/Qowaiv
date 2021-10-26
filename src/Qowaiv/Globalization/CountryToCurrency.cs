@@ -4,6 +4,7 @@
 
 using Qowaiv.Financial;
 using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Globalization
 {
@@ -24,22 +25,21 @@ namespace Qowaiv.Globalization
         public Date StartDate { get; }
 
         /// <inheritdoc />
+        [Pure]
         public override int GetHashCode()
-        {
-            return Country.GetHashCode()
-                ^ Currency.GetHashCode()
-                ^ StartDate.GetHashCode();
-        }
+            => Country.GetHashCode()
+            ^ Currency.GetHashCode()
+            ^ StartDate.GetHashCode();
 
         /// <inheritdoc />
+        [Pure]
         public override bool Equals(object obj) => obj is CountryToCurrency other && Equals(other);
 
         /// <inheritdoc />
+        [Pure]
         public bool Equals(CountryToCurrency other)
-        {
-            return Country.Equals(other.Country)
-                && Currency.Equals(other.Currency)
-                && StartDate.Equals(other.StartDate);
-        }
+            => Country.Equals(other.Country)
+            && Currency.Equals(other.Currency)
+            && StartDate.Equals(other.StartDate);
     }
 }

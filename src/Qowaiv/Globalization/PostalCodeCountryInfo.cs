@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,7 @@ namespace Qowaiv.Globalization
         /// <remarks>
         /// Returns false if the country does not have postal codes.
         /// </remarks>
+        [Pure]
         public bool IsValid(string postalcode)
             => !string.IsNullOrEmpty(postalcode)
             && HasPostalCode
@@ -71,6 +73,7 @@ namespace Qowaiv.Globalization
         /// If the country supports formatting and if the postal code is valid
         /// for the country.
         /// </remarks>
+        [Pure]
         public string Format(string postalcode)
         {
             if (HasFormatting && IsValid(postalcode))
@@ -81,13 +84,11 @@ namespace Qowaiv.Globalization
             {
                 return "?";
             }
-            else
-            {
-                return postalcode ?? string.Empty;
-            }
+            else return postalcode ?? string.Empty;
         }
 
         /// <summary>Gets the single value if supported, otherwise string.Empty.</summary>
+        [Pure]
         public string GetSingleValue()
             => IsSingleValue
             ? FormattingReplacePattern
@@ -128,14 +129,17 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>Gets countries without a postal code system.</summary>
+        [Pure]
         public static IEnumerable<Country> GetCountriesWithoutPostalCode()
             => Country.GetExisting().Where(country => !GetInstance(country).HasPostalCode);
 
         /// <summary>Gets countries with postal codes with formatting.</summary>
+        [Pure]
         public static IEnumerable<Country> GetCountriesWithFormatting()
             => Country.GetExisting().Where(country => GetInstance(country).HasFormatting);
 
         /// <summary>Gets countries with a single postal code value.</summary>
+        [Pure]
         public static IEnumerable<Country> GetCountriesWithSingleValue()
             => Country.GetExisting().Where(country => GetInstance(country).IsSingleValue);
 
@@ -143,6 +147,7 @@ namespace Qowaiv.Globalization
         /// <param name="country">
         /// The specified country.
         /// </param>
+        [Pure]
         public static PostalCodeCountryInfo GetInstance(Country country)
             => Instances.TryGetValue(country, out PostalCodeCountryInfo instance)
             ? instance
@@ -152,6 +157,7 @@ namespace Qowaiv.Globalization
         /// <remarks>
         /// Used for initializing the Instances dictionary.
         /// </remarks>
+        [Pure]
         private static PostalCodeCountryInfo New(Country country, string validation, string search = null, string replace = null, bool isSingle = false)
             => new PostalCodeCountryInfo(
                 country: country,

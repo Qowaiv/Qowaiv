@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Qowaiv.Diagnostics.Contracts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Text;
 
@@ -53,6 +55,7 @@ namespace Qowaiv.Formatting
         /// <returns>
         /// A formatted string representing the object.
         /// </returns>
+        [Pure]
         public string ToString(IFormattable obj)
         {
             if (obj is null)
@@ -63,9 +66,7 @@ namespace Qowaiv.Formatting
                 return null;
 #pragma warning restore S2225
             }
-            var arguments = Get(obj.GetType());
-
-            return arguments.ToString(obj);
+            return Get(obj.GetType()).ToString(obj);
         }
 
         /// <summary>Formats the object using the formatting arguments of the collection.</summary>
@@ -78,13 +79,11 @@ namespace Qowaiv.Formatting
         /// <remarks>
         /// If the object does not implement IFormattable, the ToString() will be used.
         /// </remarks>
+        [Pure]
         public string ToString(object obj)
-        {
-            return
-                obj is IFormattable formattable
-                ? ToString(formattable)
-                : obj?.ToString();
-        }
+            => obj is IFormattable formattable
+            ? ToString(formattable)
+            : obj?.ToString();
 
         /// <summary>Replaces the format item in a specified string with the string representation
         /// of a corresponding object in a specified array. 
@@ -109,6 +108,7 @@ namespace Qowaiv.Formatting
         /// <remarks>
         /// This implementation is a (tweaked) copy of the implementation of <see cref="string"/>.Format().
         /// </remarks>
+        [Pure]
         public string Format(string format, params object[] args)
         {
             Guard.NotNull(format, nameof(format));
@@ -297,6 +297,7 @@ namespace Qowaiv.Formatting
         }
 
         private static void FormatError() => throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
+        
         private static void FormatErrorIndexOutOfRange() => throw new FormatException(QowaivMessages.FormatException_IndexOutOfRange);
 
         #region Collection/dictionary related
@@ -380,7 +381,6 @@ namespace Qowaiv.Formatting
             dict.Add(type, arguments);
         }
 
-
         /// <summary>Sets a format for the specified type.</summary>
         /// <param name="type">
         /// The type to specify a format for.
@@ -452,6 +452,7 @@ namespace Qowaiv.Formatting
         /// <param name="type">
         /// The type to test for.
         /// </param>
+        [Pure]
         public bool Contains(Type type) => dict.ContainsKey(type);
 
         /// <summary>Removes the formatting arguments for the specified type.</summary>
@@ -461,6 +462,7 @@ namespace Qowaiv.Formatting
         /// <returns>
         /// True if type was removed, otherwise false.
         /// </returns>
+        [CollectionMutation]
         public bool Remove(Type type) => dict.Remove(type);
 
         /// <summary>Gets the formatting arguments for the specified type.</summary>
@@ -474,29 +476,29 @@ namespace Qowaiv.Formatting
         /// If no specific formatting arguments are specified for the type, the
         /// default formatting arguments are returned.
         /// </remarks>
+        [Pure]
         public FormattingArguments Get(Type type)
         {
             string format = null;
             IFormatProvider formatProvider = null;
-
 
             if (dict.TryGetValue(type, out FormattingArguments arguments))
             {
                 format = arguments.Format;
                 formatProvider = arguments.FormatProvider;
             }
-            arguments = new FormattingArguments(format, formatProvider ?? this.FormatProvider);
-
-            return arguments;
+            return new FormattingArguments(format, formatProvider ?? this.FormatProvider);
         }
 
         /// <summary>Gets a collection containing the types for the collection.</summary>
         public ICollection<Type> Types => dict.Keys;
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
+        [Pure]
         IEnumerator<KeyValuePair<Type, FormattingArguments>> IEnumerable<KeyValuePair<Type, FormattingArguments>>.GetEnumerator() => GetEnumerator();
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
+        [Pure]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
@@ -504,6 +506,7 @@ namespace Qowaiv.Formatting
         /// this is used by IEnumerable.GetObjectData() so that it can be
         /// changed by derived classes.
         /// </remarks>
+        [Pure]
         protected virtual IEnumerator<KeyValuePair<Type, FormattingArguments>> GetEnumerator() => dict.GetEnumerator();
 
         /// <summary>Clears all formatting arguments in the collection.</summary>
@@ -519,6 +522,6 @@ namespace Qowaiv.Formatting
         private string DebuggerDisplay
             => string.Format(CultureInfo.InvariantCulture,
                 "FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count);
-            
+ 
     }
 }

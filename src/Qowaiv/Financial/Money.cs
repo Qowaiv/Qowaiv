@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -44,21 +45,27 @@ namespace Qowaiv.Financial
 
 
         /// <summary>Gets the sign of the value of the money.</summary>
+        [Pure]
         public int Sign() => m_Value.Sign();
 
         /// <summary>Returns the absolute value of the money.</summary>
+        [Pure]
         public Money Abs() => m_Value.Abs() + Currency;
 
         /// <summary>Pluses the money.</summary>
+        [Pure]
         internal Money Plus() => +m_Value + Currency;
 
         /// <summary>Negates the money.</summary>
+        [Pure]
         internal Money Negate() => -m_Value + Currency;
 
         /// <summary>Increases the money with one (of the current currency).</summary>
+        [Pure]
         internal Money Increment() => (m_Value + 1) + Currency;
 
         /// <summary>Decreases the money with one (of the current currency).</summary>
+        [Pure]
         internal Money Decrement() => (m_Value - 1) + Currency;
 
         /// <summary>Decreases the amount with one.</summary>
@@ -66,30 +73,35 @@ namespace Qowaiv.Financial
         /// <param name="money">
         /// The money to add.
         /// </param>
+        [Pure]
         public Money Add(Money money) => (m_Value + money.m_Value) + HaveSameCurrency(this, money, "addition");
 
         /// <summary>Adds the specified percentage to the amount.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public Money Add(Percentage p) => m_Value.Add(p) + Currency;
 
         /// <summary>Subtracts a amount from the current amount.</summary>
         /// <param name="money">
         /// The money to Subtract.
         /// </param>
+        [Pure]
         public Money Subtract(Money money) => (m_Value - money.m_Value) + HaveSameCurrency(this, money, "subtraction");
 
         /// <summary>AddsSubtract the specified percentage from the amount.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public Money Subtract(Percentage p) => m_Value.Subtract(p) + Currency;
 
         /// <summary>Gets a percentage of the money.</summary>
         /// <param name="p">
         /// The percentage to get.
         /// </param>
+        [Pure]
         public Money Multiply(Percentage p) => (m_Value * p) + Currency;
 
         /// <summary>Multiplies the money with a specified factor.
@@ -97,6 +109,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Multiply(decimal factor) => (m_Value * factor) + Currency;
 
         /// <summary>Multiplies the money with a specified factor.
@@ -104,6 +117,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Multiply(double factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the money with a specified factor.
@@ -111,6 +125,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Multiply(float factor) => Multiply((decimal)factor);
 
 
@@ -119,6 +134,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Multiply(long factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the money with a specified factor.
@@ -126,6 +142,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Multiply(int factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the money with a specified factor.
@@ -133,6 +150,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Multiply(short factor) => Multiply((decimal)factor);
 
 
@@ -142,6 +160,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Money Multiply(ulong factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the money with a specified factor.
@@ -150,6 +169,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Money Multiply(uint factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the money with a specified factor.
@@ -158,13 +178,14 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Money Multiply(ushort factor) => Multiply((decimal)factor);
-
 
         /// <summary>Divides the money by a specified money.</summary>
         /// <param name="p">
         /// The money to devides to..
         /// </param>
+        [Pure]
         public Money Divide(Percentage p) => (m_Value / p) + Currency;
 
         /// <summary>Divides the money by a specified factor.
@@ -172,6 +193,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Divide(decimal factor) => (m_Value / factor) + Currency;
 
         /// <summary>Divides the money by a specified factor.
@@ -179,6 +201,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Divide(double factor) => Divide((decimal)factor);
 
         /// <summary>Divides the money by a specified factor.
@@ -186,14 +209,15 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Divide(float factor) => Divide((decimal)factor);
-
 
         /// <summary>Divides the money by a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Divide(long factor) => Divide((decimal)factor);
 
         /// <summary>Divides the money by a specified factor.
@@ -201,6 +225,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Divide(int factor) => Divide((decimal)factor);
 
         /// <summary>Divides the money by a specified factor.
@@ -208,6 +233,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Money Divide(short factor) => Divide((decimal)factor);
 
 
@@ -217,6 +243,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Money Divide(ulong factor) => Divide((decimal)factor);
 
         /// <summary>Divides the money by a specified factor.
@@ -225,6 +252,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Money Divide(uint factor) => Divide((decimal)factor);
 
         /// <summary>Divides the money by a specified factor.
@@ -233,9 +261,11 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Money Divide(ushort factor) => Divide((decimal)factor);
 
         /// <summary>Rounds the money value to the preferred number decimal places, based on its currency.</summary>
+        [Pure]
         public Money Round() => Round(Currency.Digits);
 
         /// <summary>Rounds the money value to a specified number of decimal places.</summary>
@@ -245,6 +275,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
+        [Pure]
         public Money Round(int decimals) => Round(decimals, DecimalRounding.BankersRound);
 
         /// <summary>Rounds the money value to a specified number of decimal places.</summary>
@@ -257,12 +288,14 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
+        [Pure]
         public Money Round(int decimals, DecimalRounding mode) => m_Value.Round(decimals, mode) + Currency;
 
         /// <summary>Rounds the money value to the closed number that is a multiple of the specified factor.</summary>
         /// <param name="multipleOf">
         /// The factor of which the number should be multiple of.
         /// </param>
+        [Pure]
         public Money RoundToMultiple(decimal multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.BankersRound);
 
         /// <summary>Rounds the money value to the closed number that is a multiple of the specified factor.</summary>
@@ -272,6 +305,7 @@ namespace Qowaiv.Financial
         /// <param name="mode">
         /// The rounding method used to determine the closed by number.
         /// </param>
+        [Pure]
         public Money RoundToMultiple(decimal multipleOf, DecimalRounding mode) => m_Value.RoundToMultiple(multipleOf, mode) + Currency;
 
         /// <summary>Increases the money with one (of the current currency).</summary>
@@ -355,14 +389,11 @@ namespace Qowaiv.Financial
         public static Money operator /(Money money, ushort factor) => money.Divide(factor);
 
         [DebuggerStepThrough]
+        [Pure]
         private static Currency HaveSameCurrency(Money l, Money r, string operation)
-        {
-            if (l.Currency != r.Currency)
-            {
-                throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
-            }
-            return l.Currency;
-        }
+            => l.Currency == r.Currency
+            ? l.Currency
+            : throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
 
         /// <summary>Initializes a new instance of Money based on the serialization info.</summary>
         /// <param name="info">The serialization info.</param>
@@ -398,6 +429,7 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The deserialized money.
         /// </returns>
+        [Pure]
         public static Money FromJson(long json) => (decimal)json + Currency.Empty;
 
         /// <summary>Deserializes the money from a JSON number.</summary>
@@ -407,12 +439,14 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The deserialized money.
         /// </returns>
+        [Pure]
         public static Money FromJson(double json) => json + Currency.Empty;
 
         /// <summary>Serializes the money to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current Money for debug purposes.</summary>
@@ -426,6 +460,7 @@ namespace Qowaiv.Financial
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -437,16 +472,19 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>Gets an XML string representation of the money.</summary>
+        [Pure]
         private string ToXmlString() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
 
         /// <summary>Returns true if this instance and the other <see cref="Money"/> are equal, otherwise false.</summary>
         /// <param name="other">The <see cref="Money"/> to compare with.</param>
+        [Pure]
         public bool Equals(Money other) => m_Value == other.m_Value && m_Currency == other.m_Currency;
 
         /// <summary>Returns the hash code for this </summary>
         /// <returns>
         /// A 32-bit signed integer hash code.
         /// </returns>
+        [Pure]
         public override int GetHashCode() => m_Value.GetHashCode() ^ m_Currency.GetHashCode();
 
         /// <summary>Compares this instance with a specified Money and indicates
@@ -460,6 +498,7 @@ namespace Qowaiv.Financial
         /// A 32-bit signed integer that indicates whether this instance precedes, follows,
         /// or appears in the same position in the sort order as the value parameter.
         /// </returns>
+        [Pure]
         public int CompareTo(Money other)
         {
             var compare = m_Currency.CompareTo(other.m_Currency);
@@ -560,6 +599,7 @@ namespace Qowaiv.Financial
         /// <param name="val" >
         /// The amount.
         /// </param>
+        [Pure]
         public static Money Create(decimal val)
         {
             return Create(val, Currency.Current);
@@ -572,6 +612,7 @@ namespace Qowaiv.Financial
         /// <param name="currency">
         /// The currency of the amount.
         /// </param>
+        [Pure]
         public static Money Create(decimal val, Currency currency)
         {
             return new Money { m_Value = val, m_Currency = currency };
@@ -585,6 +626,7 @@ namespace Qowaiv.Financial
         /// currency properties of the <see cref="NumberFormatInfo"/> instead of
         /// the number properties, so we copy them for desired behavior.
         /// </remarks>
+        [Pure]
         internal static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
         {
             var info = NumberFormatInfo.GetInstance(formatProvider);

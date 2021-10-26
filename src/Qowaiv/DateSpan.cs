@@ -9,6 +9,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -83,6 +84,7 @@ namespace Qowaiv
             : this(years * MonthsPerYear + months, days) { }
 
         /// <summary>Converts the combination of months and days to a <see cref="ulong"/>.</summary>
+        [Pure]
         private static ulong AsUInt64(long months, long days) => (uint)days | ((ulong)months << MonthShift);
 
         /// <summary>Gets the total of months.</summary>
@@ -104,9 +106,11 @@ namespace Qowaiv
 
         /// <summary>Unary plus the date span.</summary>
         /// <returns></returns>
+        [Pure]
         internal DateSpan Plus() => this;
 
         /// <summary>Negates the date span.</summary>
+        [Pure]
         public DateSpan Negate() => new DateSpan(AsUInt64(-TotalMonths, -Days));
 
         /// <summary>Returns a new date span whose value is the sum of the specified date span and this instance.</summary>
@@ -116,6 +120,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public DateSpan Add(DateSpan other)
         {
             long days = (long)Days + other.Days;
@@ -130,6 +135,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public DateSpan Subtract(DateSpan other)
         {
             long days = (long)Days - other.Days;
@@ -144,6 +150,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public DateSpan AddDays(int days) => Mutate(TotalMonths, Days + (long)days);
 
         /// <summary>Returns a new date span whose value is the sum of the months to add this instance.</summary>
@@ -153,6 +160,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public DateSpan AddMonths(int months) => Mutate(TotalMonths + (long)months, Days);
 
         /// <summary>Returns a new date span whose value is the sum of the years to add this instance.</summary>
@@ -162,12 +170,14 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public DateSpan AddYears(int years) => Mutate(TotalMonths + years * (long)MonthsPerYear, Days);
 
         /// <summary>Mutates the months and days.</summary>
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         private static DateSpan Mutate(long months, long days)
         {
             var totalDays = months * DaysPerMonth + days;
@@ -188,12 +198,14 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized date span.
         /// </returns>
+        [Pure]
         public static DateSpan FromJson(long json) => FromDays((int)json);
 
         /// <summary>Serializes the date span to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
@@ -207,6 +219,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -217,15 +230,19 @@ namespace Qowaiv
         }
 
         /// <summary>Gets an XML string representation of the date span.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <inheritdoc/>
+        [Pure]
         public bool Equals(DateSpan other) => m_Value == other.m_Value;
 
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(DateSpan other) => TotalDays.CompareTo(other.TotalDays);
 
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode() => m_Value.GetHashCode();
 
         /// <summary>Unary plus the date span.</summary>
@@ -241,12 +258,15 @@ namespace Qowaiv
         public static DateSpan operator -(DateSpan l, DateSpan r) => l.Subtract(r);
 
         /// <summary>Creates a date span from days only.</summary>
+        [Pure]
         public static DateSpan FromDays(int days) => new DateSpan(0, 0, days);
 
         /// <summary>Creates a date span from months only.</summary>
+        [Pure]
         public static DateSpan FromMonths(int months) => new DateSpan(0, months, 0);
 
         /// <summary>Creates a date span from months only.</summary>
+        [Pure]
         public static DateSpan FromYears(int years) => new DateSpan(years, 0, 0);
 
         /// <summary>Calculates the age (in years and days) for a given date for today.</summary>
@@ -256,6 +276,7 @@ namespace Qowaiv
         /// <returns>
         /// The age defined in years and days.
         /// </returns>
+        [Pure]
         public static DateSpan Age(Date date) => Age(date, Clock.Today());
 
         /// <summary>Calculates the age (in years and days) for a given date for the reference date.</summary>
@@ -268,6 +289,7 @@ namespace Qowaiv
         /// <returns>
         /// The age defined in years and days.
         /// </returns>
+        [Pure]
         public static DateSpan Age(Date date, Date reference) => Subtract(reference, date, DateSpanSettings.WithoutMonths);
 
         /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
@@ -280,6 +302,7 @@ namespace Qowaiv
         /// <returns>
         /// Returns a date span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
         /// </returns>
+        [Pure]
         public static DateSpan Subtract(Date d1, Date d2) => Subtract(d1, d2, DateSpanSettings.Default);
 
         /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
@@ -295,6 +318,7 @@ namespace Qowaiv
         /// <returns>
         /// Returns a date span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
         /// </returns>
+        [Pure]
         public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
         {
             var withYears = (settings & DateSpanSettings.WithoutYears) == default;
@@ -392,6 +416,7 @@ namespace Qowaiv
             return false;
         }
 
+        [Pure]
         private static int IntFromGroup(Match match, string group, IFormatProvider formatProvider)
         {
             var str = match.Groups[group].Value;
@@ -399,14 +424,13 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the combination of months and days can not be processed.</summary>
+        [Pure]
         private static bool IsOutOfRange(long months, long days, double totalDays)
-        {
-            return months > MaxValue.TotalMonths
-                || months < MinValue.TotalMonths
-                || totalDays > MaxValue.TotalDays
-                || totalDays < MinValue.TotalDays
-                || days > +MaxDays
-                || days < -MaxDays;
-        }
+            => months > MaxValue.TotalMonths
+            || months < MinValue.TotalMonths
+            || totalDays > MaxValue.TotalDays
+            || totalDays < MinValue.TotalDays
+            || days > +MaxDays
+            || days < -MaxDays;
     }
 }

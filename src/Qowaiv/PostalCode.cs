@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -51,12 +52,14 @@ namespace Qowaiv
         /// <remarks>
         /// Returns false if the country does not have postal codes.
         /// </remarks>
+        [Pure]
         public bool IsValid(Country country)
         {
             return IsValid(m_Value, country);
         }
 
         /// <summary>Returns a collection countries where the postal code is valid for.</summary>
+        [Pure]
         public IEnumerable<Country> IsValidFor()
         {
             var postalcode = m_Value;
@@ -67,6 +70,7 @@ namespace Qowaiv
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current postal code for debug purposes.</summary>
@@ -80,6 +84,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -98,6 +103,7 @@ namespace Qowaiv
         /// or the country does not have special formattings, 
         /// the unformatted value is returned.
         /// </remarks>
+        [Pure]
         public string ToString(Country country)
         {
             // send a question mark in case of Unknown.
@@ -106,6 +112,7 @@ namespace Qowaiv
         }
 
         /// <summary>Gets an XML string representation of the postal code.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a postal code to a <see cref="string"/>.</summary>
@@ -163,6 +170,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns false if the country does not have postal codes.
         /// </remarks>
+        [Pure]
         public static bool IsValid(string postalcode, Country country)
         {
             return PostalCodeCountryInfo.GetInstance(country).IsValid(postalcode);

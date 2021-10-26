@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.Contracts;
+using System.Globalization;
 
 namespace Qowaiv.Conversion
 {
@@ -6,6 +7,7 @@ namespace Qowaiv.Conversion
     public class EmailAddressTypeConverter : SvoTypeConverter<EmailAddress>
     {
         /// <inheritdoc/>
+        [Pure]
         protected override EmailAddress FromString(string str, CultureInfo culture) => EmailAddress.Parse(str, culture);
     }
 }

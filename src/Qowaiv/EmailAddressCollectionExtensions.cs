@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -6,9 +7,8 @@ namespace Qowaiv
     public static class EmailAddressCollectionExtensions
     {
         /// <summary>Converts the enumeration into an email address collection.</summary>
+        [Pure]
         public static EmailAddressCollection ToCollection(this IEnumerable<EmailAddress> emailaddresses)
-        {
-            return new EmailAddressCollection(emailaddresses);
-        }
+            => new(emailaddresses);
     }
 }

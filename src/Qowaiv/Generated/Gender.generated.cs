@@ -12,6 +12,7 @@
 namespace Qowaiv
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public partial struct Gender
     {
@@ -22,14 +23,17 @@ namespace Qowaiv
 #endif
 #if !NotIsEmpty
         /// <summary>Returns true if the  gender is empty, otherwise false.</summary>
+        [Pure]
         public bool IsEmpty() => m_Value == default;
 #endif
 #if !NotIsUnknown
         /// <summary>Returns true if the  gender is unknown, otherwise false.</summary>
+        [Pure]
         public bool IsUnknown() => m_Value == Unknown.m_Value;
 #endif
 #if !NotIsEmptyOrUnknown
         /// <summary>Returns true if the  gender is empty or unknown, otherwise false.</summary>
+        [Pure]
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 #endif
     }
@@ -38,21 +42,26 @@ namespace Qowaiv
 namespace Qowaiv
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public partial struct Gender : IEquatable<Gender>
     {
         /// <inheritdoc/>
+        [Pure]
         public override bool Equals(object obj) => obj is Gender other && Equals(other);
 #if !NotEqualsSvo
         /// <summary>Returns true if this instance and the other gender are equal, otherwise false.</summary>
         /// <param name = "other">The <see cref = "Gender"/> to compare with.</param>
+        [Pure]
         public bool Equals(Gender other) => m_Value == other.m_Value;
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode() => m_Value.GetHashCode();
 #endif
 #if !NotGetHashCodeClass
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
 #endif
 #endif
@@ -71,10 +80,12 @@ namespace Qowaiv
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
 
     public partial struct Gender : IComparable, IComparable<Gender>
     {
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(object obj)
         {
             if (obj is null)
@@ -93,6 +104,7 @@ namespace Qowaiv
 
 #if !NotEqualsSvo
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(Gender other) => Comparer<byte>.Default.Compare(m_Value, other.m_Value);
 #endif
 #if !NoComparisonOperators
@@ -111,6 +123,7 @@ namespace Qowaiv
 namespace Qowaiv
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
 
     public partial struct Gender : ISerializable
@@ -133,6 +146,7 @@ namespace Qowaiv
 
 namespace Qowaiv
 {
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
@@ -144,6 +158,7 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
+        [Pure]
         XmlSchema IXmlSerializable.GetSchema() => null;
         /// <summary>Reads the gender from an <see href = "XmlReader"/>.</summary>
         /// <param name = "reader">An XML reader.</param>
@@ -175,6 +190,7 @@ namespace Qowaiv
 namespace Qowaiv
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using Qowaiv.Json;
 
@@ -189,8 +205,10 @@ namespace Qowaiv
         /// </returns>
         
 #if !NotCultureDependent
+        [Pure]
         public static Gender FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
 #else
+        [Pure]
         public static Gender FromJson(string json) => Parse(json);
 #endif
     }
@@ -199,21 +217,25 @@ namespace Qowaiv
 namespace Qowaiv
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Gender : IFormattable
     {
         /// <summary>Returns a <see cref = "string "/> that represents the gender.</summary>
+        [Pure]
         public override string ToString() => ToString((IFormatProvider)null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the gender.</summary>
         /// <param name = "format">
         /// The format that describes the formatting.
         /// </param>
+        [Pure]
         public string ToString(string format) => ToString(format, null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the gender.</summary>
         /// <param name = "provider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(IFormatProvider provider) => ToString(null, provider);
     }
 }
@@ -221,6 +243,7 @@ namespace Qowaiv
 namespace Qowaiv
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Gender
@@ -236,6 +259,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
+        [Pure]
         public static Gender Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
         /// <param name = "s">
@@ -250,6 +274,7 @@ namespace Qowaiv
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
+        [Pure]
         public static Gender Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Gender val) ? val : throw new FormatException(QowaivMessages.FormatExceptionGender);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
         /// <param name = "s">
@@ -258,6 +283,7 @@ namespace Qowaiv
         /// <returns>
         /// The gender if the string was converted successfully, otherwise default.
         /// </returns>
+        [Pure]
         public static Gender TryParse(string s) => TryParse(s, null, out Gender val) ? val : default;
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.
         /// A return value indicates whether the conversion succeeded.
@@ -271,6 +297,7 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
+        [Pure]
         public static bool TryParse(string s, out Gender result) => TryParse(s, null, out result);
 #else
         /// <summary>Converts the <see cref="string"/> to <see cref="Gender"/>.</summary>
@@ -283,6 +310,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
+        [Pure]
         public static Gender Parse(string s)
             => TryParse(s, out Gender val)
             ? val
@@ -295,6 +323,7 @@ namespace Qowaiv
         /// <returns>
         /// The gender if the string was converted successfully, otherwise default.
         /// </returns>
+        [Pure]
         public static Gender TryParse(string s) => TryParse(s, out Gender val) ? val : default;
 #endif
     }
@@ -303,6 +332,7 @@ namespace Qowaiv
 namespace Qowaiv
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Gender
@@ -312,6 +342,7 @@ namespace Qowaiv
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
+        [Pure]
         public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
         /// <summary>Returns true if the value represents a valid gender.</summary>
         /// <param name = "val">
@@ -320,12 +351,14 @@ namespace Qowaiv
         /// <param name = "formatProvider">
         /// The <see cref = "IFormatProvider"/> to interpret the <see cref = "string "/> value with.
         /// </param>
+        [Pure]
         public static bool IsValid(string val, IFormatProvider formatProvider) => !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
 #else
         /// <summary>Returns true if the value represents a valid gender.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>
+        [Pure]
         public static bool IsValid(string val)
             => !string.IsNullOrWhiteSpace(val)
             && TryParse(val, out _);

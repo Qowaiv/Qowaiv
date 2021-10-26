@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -121,12 +122,14 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// Returns a localized display name.
         /// </returns>
+        [Pure]
         public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
 
         /// <summary>Returns true if the country exists at the given date, otherwise false.</summary>
         /// <param name="measurement">
         /// The date of existence.
         /// </param>
+        [Pure]
         public bool ExistsOnDate(Date measurement)
         {
             return StartDate <= measurement && (!EndDate.HasValue || EndDate.Value >= measurement);
@@ -136,6 +139,7 @@ namespace Qowaiv.Globalization
         /// <param name="measurement">
         /// The date of measurement.
         /// </param>
+        [Pure]
         public Currency GetCurrency(Date measurement)
         {
             if (!ExistsOnDate(measurement))
@@ -149,6 +153,7 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>Converts the CountryInfo to a RegionInfo.</summary>
+        [Pure]
         public RegionInfo ToRegionInfo()
         {
             try
@@ -169,12 +174,14 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// The deserialized country.
         /// </returns>
+        [Pure]
         public static Country FromJson(long json) => FromJson(json.ToString("000", CultureInfo.InvariantCulture));
 
         /// <summary>Serializes the country to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
@@ -198,12 +205,14 @@ namespace Qowaiv.Globalization
         /// e: as English name.
         /// f: as formatted/display name.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
             : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
 
         /// <summary>Gets an XML string representation of the country.</summary>
+        [Pure]
         private string ToXmlString() => m_Value;
 
         /// <summary>The format token instructions.</summary>
@@ -274,6 +283,7 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// Returns a country that represents the same region as region info.
         /// </returns>
+        [Pure]
         public static Country Create(RegionInfo region)
         {
             if (region == null) { return default; }
@@ -294,6 +304,7 @@ namespace Qowaiv.Globalization
         /// Returns a country that represents the country specified at the culture if
         /// any, otherwise Empty.
         /// </returns>
+        [Pure]
         public static Country Create(CultureInfo culture)
         {
             if (culture == null || culture == CultureInfo.InvariantCulture || culture.IsNeutralCulture)
@@ -312,10 +323,8 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// A list of existing countries.
         /// </returns>
-        public static IEnumerable<Country> GetExisting()
-        {
-            return GetExisting(Date.Today);
-        }
+        [Pure]
+        public static IEnumerable<Country> GetExisting()=> GetExisting(Date.Today);
 
         /// <summary>Gets all countries existing on the specified measurement date.</summary>
         /// <param name="measurement">
@@ -324,6 +333,7 @@ namespace Qowaiv.Globalization
         /// <returns>
         /// A list of existing countries.
         /// </returns>
+        [Pure]
         public static IEnumerable<Country> GetExisting(Date measurement)
         {
             return All.Where(country => country.ExistsOnDate(measurement));
@@ -394,6 +404,7 @@ namespace Qowaiv.Globalization
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         internal string GetResourceString(string postfix, IFormatProvider formatProvider)
             => GetResourceString(postfix, formatProvider as CultureInfo);
 
@@ -404,6 +415,7 @@ namespace Qowaiv.Globalization
         /// <param name="culture">
         /// The culture.
         /// </param>
+        [Pure]
         internal string GetResourceString(string postfix, CultureInfo culture)
             => IsEmpty()
             ? string.Empty

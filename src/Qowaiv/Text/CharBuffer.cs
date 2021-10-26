@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -32,31 +33,40 @@ namespace Qowaiv.Text
         }
 
         /// <summary>Returns true if the buffer is empty.</summary>
+        [Pure]
         public bool IsEmpty() => Length == 0;
-        
+
         /// <summary>Returns true if the buffer is not empty.</summary>
+        [Pure]
         public bool NotEmpty() => !IsEmpty();
 
         /// <summary>Returns true if the buffer represents an unknown value.</summary>
+        [Pure]
         public bool IsUnknown(IFormatProvider provider) 
             => Unknown.IsUnknown(ToString(), provider as CultureInfo);
 
         /// <summary>Returns true if the buffer matches the specified <see cref="Regex"/>.</summary>
+        [Pure]
         public bool Matches(Regex regex) => regex.IsMatch(ToString());
 
         /// <summary>Gets the first <see cref="char"/> of the buffer.</summary>
+        [Pure]
         public char First() => buffer[start];
 
         /// <summary>Gets the last <see cref="char"/> of the buffer.</summary>
+        [Pure]
         public char Last() => buffer[end - 1];
 
         /// <summary>Returns true if index is the end of the buffer.</summary>
+        [Pure]
         public bool EndOfBuffer(int index) => index >= Length - 1;
 
         /// <inheritdoc />
+        [Pure]
         public bool Equals(string other) => Equals(other, false);
-        
+
         /// <summary>Returns true if the buffer equals the <see cref="string"/>.</summary>
+        [Pure]
         public bool Equals(string other, bool ignoreCase)
         {
             if (Length != other.Length)
@@ -78,23 +88,31 @@ namespace Qowaiv.Text
         }
 
         /// <inheritdoc />
+        [Pure]
         public override bool Equals(object obj)
             => (obj is string str && Equals(str)) 
             || ReferenceEquals(this, obj);
 
         /// <inheritdoc />
-        public override int GetHashCode() => throw new NotSupportedException();
+        [Pure]
+#pragma warning disable S3877 // Exceptions should not be thrown from unexpected methods
+        public override int GetHashCode() => throw new NotSupportedException("Char Buffers can not be stored in hash sets.");
+#pragma warning restore S3877 // Exceptions should not be thrown from unexpected methods
 
         /// <inheritdoc />
+        [Pure]
         public IEnumerator<char> GetEnumerator() => Enumerate().GetEnumerator();
 
         /// <inheritdoc />
+        [Pure]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>Enumerates through all (visible) chars of the buffer.</summary>
+        [Pure]
         private IEnumerable<char> Enumerate() => buffer.Skip(start).Take(Length);
 
         /// <summary>Creates an empty buffer with the specified capacity.</summary>
-        public static CharBuffer Empty(int capacity) => new CharBuffer(capacity);
+        [Pure]
+        public static CharBuffer Empty(int capacity) => new(capacity);
     }
 }

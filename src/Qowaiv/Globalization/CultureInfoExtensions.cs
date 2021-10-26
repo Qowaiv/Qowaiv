@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Qowaiv.Diagnostics.Contracts;
+using System.Globalization;
 
 namespace Qowaiv.Globalization
 {
@@ -6,6 +7,7 @@ namespace Qowaiv.Globalization
     public static class CultureInfoExtensions
     {
         /// <summary>Gets a <see cref="CultureInfoScope"/> based on the <see cref="CultureInfo"/>.</summary>
-        public static CultureInfoScope Scoped(this CultureInfo culture) => new CultureInfoScope(culture);
+        [Impure]
+        public static CultureInfoScope Scoped(this CultureInfo culture) => new(culture);
     }
 }

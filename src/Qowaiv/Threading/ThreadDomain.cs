@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace Qowaiv.Threading
@@ -88,6 +89,7 @@ namespace Qowaiv.Threading
         /// If the type is generic, or has no converter, or a convertor that can not
         /// convert from string.
         /// </exception>
+        [Pure]
         public T Get<T>()
         {
             var type = Guard(typeof(T), Values.ContainsKey(typeof(T)));
@@ -142,6 +144,7 @@ namespace Qowaiv.Threading
         /// If the type is generic, or has no converter, or a convertor that can not
         /// convert from string.
         /// </exception>
+        [Pure]
         private static Type Guard(Type type, bool inCollection)
         {
             if (!inCollection)

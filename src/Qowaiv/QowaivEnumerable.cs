@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Financial;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -31,6 +32,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -77,6 +79,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -121,6 +124,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount Average(this IEnumerable<Amount> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -157,6 +161,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount? Average(this IEnumerable<Amount?> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -208,6 +213,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Money> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -266,6 +272,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Money?> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -322,6 +329,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money Average(this IEnumerable<Money> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -371,6 +379,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money? Average(this IEnumerable<Money?> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -433,6 +442,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -478,6 +488,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -522,6 +533,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount Sum(this IEnumerable<Amount> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -558,6 +570,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all amount elements have the same currency.
         /// </exception>
+        [Pure]
         public static Amount? Sum(this IEnumerable<Amount?> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -609,6 +622,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Money> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -667,6 +681,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Money?> selector)
         {
             Guard.NotNull(source, nameof(source));
@@ -723,6 +738,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money Sum(this IEnumerable<Money> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -772,6 +788,7 @@ namespace Qowaiv
         /// <exception cref="CurrencyMismatchException">
         /// not all money elements have the same currency.
         /// </exception>
+        [Pure]
         public static Money? Sum(this IEnumerable<Money?> source)
         {
             Guard.NotNull(source, nameof(source));
@@ -810,6 +827,7 @@ namespace Qowaiv
             return total + currency;
         }
 
-        private static InvalidOperationException NoElements() => new InvalidOperationException(QowaivMessages.InvalidOperationException_NoElements);
+        [Pure]
+        private static InvalidOperationException NoElements() => new(QowaivMessages.InvalidOperationException_NoElements);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Identifiers;
 using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion
@@ -9,6 +10,7 @@ namespace Qowaiv.Conversion
     public class GuidTypeConverter : SvoTypeConverter<Guid>
     {
         /// <inheritdoc />
+        [Pure]
         protected override Guid FromString(string str, CultureInfo culture)
         {
             if (GuidBehavior.Instance.TryParse(str, out var id))

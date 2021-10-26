@@ -14,6 +14,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
@@ -57,12 +58,14 @@ namespace Qowaiv
         public UuidVersion Version => m_Value.GetVersion();
 
         /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
+        [Pure] 
         public byte[] ToByteArray() => m_Value.ToByteArray();
 
         /// <summary>Serializes the UUID to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
@@ -107,12 +110,14 @@ namespace Qowaiv
         /// 
         /// the lowercase formats are lowercase (except the the 's').
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
             : behavior.ToString(m_Value, format, formatProvider);
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a UUID to a <see cref="string"/>.</summary>
@@ -128,6 +133,7 @@ namespace Qowaiv
         public static implicit operator Uuid(Guid val) => new Uuid(val);
 
         /// <summary>Initializes a new instance of a UUID.</summary>
+        [Pure]
         public static Uuid NewUuid() => new Uuid(Guid.NewGuid());
 
         /// <summary>Initializes a new  instance of a UUID that is sequential.</summary>
@@ -137,6 +143,7 @@ namespace Qowaiv
         /// * Withing a timespan of 32 ticks (0.32 nanoseconds) the sequential part
         /// of UUID's are identical.
         /// </remarks>
+        [Pure]
         public static Uuid NewSequential() => NewSequential(null);
 
         /// <summary>Initializes a new  instance of a UUID that is sequential.</summary>
@@ -149,6 +156,7 @@ namespace Qowaiv
         /// * Withing a timespan of 32 ticks (0.32 nanoseconds) the sequential part
         /// of UUID's are identical.
         /// </remarks>
+        [Pure]
         public static Uuid NewSequential(UuidComparer comparer)
         {
             var sequential = Clock.UtcNow().Ticks - TicksYear1970;
@@ -198,6 +206,7 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
+        [Pure]
         public static bool TryParse(string s, out Uuid result)
         {
             result = default;
@@ -210,6 +219,7 @@ namespace Qowaiv
         }
 
         /// <summary>Generates an <see cref="Uuid"/> applying a <see cref="MD5"/> hash on the data.</summary>
+        [Pure]
         public static Uuid GenerateWithMD5(byte[] data)
         {
             Guard.NotNull(data, nameof(data));
@@ -222,6 +232,7 @@ namespace Qowaiv
         }
 
         /// <summary>Generates an <see cref="Uuid"/> applying a <see cref="SHA1"/> hash on the data.</summary>
+        [Pure]
         public static Uuid GenerateWithSHA1(byte[] data)
         {
             Guard.NotNull(data, nameof(data));

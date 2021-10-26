@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -114,6 +115,7 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Gets the year of week part of the week date.</summary>
+        [Pure]
         private int GetDatePart(int part)
         {
             int year = m_Value.Year;
@@ -161,6 +163,7 @@ namespace Qowaiv
         /// - the first week with the majority (four or more) of its days in the starting year,
         /// - the week starting with the Monday in the period 29 December – 4 January.
         /// </remarks>
+        [Pure]
         public static Date GetFirstDayOfFirstWeekOfYear(int year)
         {
             var start = new Date(year, 01, 04);
@@ -194,6 +197,7 @@ namespace Qowaiv
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         #endregion
@@ -217,6 +221,7 @@ namespace Qowaiv
         /// W: as week without leading zero.
         /// d: as day.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
@@ -232,6 +237,7 @@ namespace Qowaiv
         };
 
         /// <summary>Gets an XML string representation of the week date.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Bind XML value.</summary>
@@ -290,10 +296,8 @@ namespace Qowaiv
         /// <param name="val" >
         /// A decimal describing a week date.
         /// </param >
-        public static WeekDate Create(Date val)
-        {
-            return new WeekDate { m_Value = val };
-        }
+        [Pure]
+        public static WeekDate Create(Date val) => new() { m_Value = val };
 
         private static bool TryCreate(int year, int week, int day, out Date dt)
         {

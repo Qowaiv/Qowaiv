@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -22,6 +23,7 @@ namespace Qowaiv
         /// <param name="val">
         /// The string value to test.
         /// </param>
+        [Pure] 
         public static bool IsUnknown(string val) => IsUnknown(val, null);
 
         /// <summary>Returns true if the string represents unknown, otherwise false.</summary>
@@ -31,6 +33,7 @@ namespace Qowaiv
         /// <param name="culture">
         /// The culture to test for.
         /// </param>
+        [Pure]
         public static bool IsUnknown(string val, CultureInfo culture)
         {
             if (string.IsNullOrEmpty(val)) { return false; }
@@ -73,6 +76,7 @@ namespace Qowaiv
         /// <remarks>
         /// The unknown value is expected to be static field or property of the type with the name "Unknown".
         /// </remarks>
+        [Pure]
         public static object Value(Type type)
         {
             if (type is null) { return null; }
@@ -92,11 +96,11 @@ namespace Qowaiv
         }
 
         /// <summary>The resource manager managing the culture based string values.</summary>
-        private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
-        private readonly static Dictionary<CultureInfo, string[]> Strings = new Dictionary<CultureInfo, string[]>
+        private static readonly ResourceManager ResourceManager = new("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
+        private readonly static Dictionary<CultureInfo, string[]> Strings = new()
         {
             { CultureInfo.InvariantCulture, new []{ "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
         };
-        private static readonly object addCulture = new object();
+        private static readonly object addCulture = new();
     }
 }

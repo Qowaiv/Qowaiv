@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Text
 {
@@ -10,11 +11,11 @@ namespace Qowaiv.Text
     public static class Base64
     {
         /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
+        [Pure]
         public static string ToString(byte[] bytes)
-        {
-            if (bytes == null || bytes.Length == 0) { return string.Empty; }
-            return Convert.ToBase64String(bytes);
-        }
+            => bytes == null || bytes.Length == 0
+            ? string.Empty
+            : Convert.ToBase64String(bytes);
         
         /// <summary>Tries to get the corresponding bytes of the Base64 string.</summary>
         /// <param name="s">

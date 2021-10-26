@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Text;
 
@@ -31,6 +32,7 @@ namespace Qowaiv.Formatting
         /// <remarks>
         /// Uses the escape character '\'.
         /// </remarks>
+        [Pure]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
         {
             return Apply(obj, format, formatProvider, tokens, '\\');
@@ -58,6 +60,7 @@ namespace Qowaiv.Formatting
         /// <returns>
         /// An formatted string.
         /// </returns>
+        [Pure]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
         {
             Guard.NotNull((object)obj, nameof(obj));
@@ -138,6 +141,7 @@ namespace Qowaiv.Formatting
         /// <param name="str">
         /// The string to remove the diacritics from.
         /// </param>
+        [Pure]
         public static string ToNonDiacritic(string str)
             => ToNonDiacritic(str, string.Empty);
 
@@ -148,6 +152,7 @@ namespace Qowaiv.Formatting
         /// <param name="ignore">
         /// Diacritics at the ignore, will not be changed.
         /// </param>
+        [Pure]
         public static string ToNonDiacritic(string str, string ignore)
          => string.IsNullOrEmpty(str)
             ? str

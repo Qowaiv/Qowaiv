@@ -9,6 +9,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -209,9 +210,11 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Adds one day to the local date time.</summary>
+        [Pure]
         internal LocalDateTime Increment() => AddDays(+1);
 
         /// <summary>Subtracts one day from the local date time.</summary>
+        [Pure]
         internal LocalDateTime Decrement() => AddDays(-1);
 
         /// <summary>Returns a new local date time that adds the value of the specified System.TimeSpan
@@ -228,6 +231,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime Add(TimeSpan value)
         {
             return new LocalDateTime(m_Value.Ticks + value.Ticks);
@@ -247,6 +251,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public LocalDateTime Add(DateSpan value) => Add(value, false);
 
         /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>
@@ -263,8 +268,8 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public LocalDateTime Add(MonthSpan value) => AddMonths(value.TotalMonths);
-
 
         /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
         /// to the value of this instance.
@@ -283,12 +288,12 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public LocalDateTime Add(DateSpan value, bool daysFirst)
         {
             return daysFirst
                 ? AddDays(value.Days).AddMonths(value.TotalMonths)
-                : AddMonths(value.TotalMonths).AddDays(value.Days)
-            ;
+                : AddMonths(value.TotalMonths).AddDays(value.Days);
         }
 
         /// <summary>Subtracts the specified local date time and time from this instance.</summary>
@@ -302,6 +307,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than date.MinValue or greater than date.MaxValue.
         /// </exception>
+        [Pure]
         public TimeSpan Subtract(LocalDateTime value)
         {
             return new TimeSpan(this.Ticks - value.Ticks);
@@ -318,6 +324,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than date.MinValue or greater than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime Subtract(TimeSpan value)
         {
             return new LocalDateTime(this.Ticks - value.Ticks);
@@ -338,6 +345,7 @@ namespace Qowaiv
         /// value or the resulting date is less than date.MinValue
         /// or greater than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime AddYears(int value)
         {
             return new LocalDateTime(m_Value.AddYears(value));
@@ -358,6 +366,7 @@ namespace Qowaiv
         /// than date.MaxValue.-or- months is less than -120,000 or greater
         /// than 120,000.
         /// </exception>
+        [Pure]
         public LocalDateTime AddMonths(int months)
         {
             return new LocalDateTime(m_Value.AddMonths(months));
@@ -378,6 +387,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime AddDays(double value)
         {
             return new LocalDateTime(m_Value.AddDays(value));
@@ -398,6 +408,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime AddTicks(long value)
         {
             return new LocalDateTime(Ticks + value);
@@ -418,6 +429,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime AddHours(double value)
         {
             return new LocalDateTime(m_Value.AddHours(value));
@@ -438,6 +450,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime AddMinutes(double value)
         {
             return new LocalDateTime(m_Value.AddMinutes(value));
@@ -458,6 +471,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime AddSeconds(double value)
         {
             return new LocalDateTime(m_Value.AddSeconds(value));
@@ -478,6 +492,7 @@ namespace Qowaiv
         /// The resulting date is less than date.MinValue or greater
         /// than date.MaxValue.
         /// </exception>
+        [Pure]
         public LocalDateTime AddMilliseconds(double value)
         {
             return new LocalDateTime(m_Value.AddMilliseconds(value));
@@ -492,12 +507,14 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized local date time.
         /// </returns>
+        [Pure]
         public static LocalDateTime FromJson(long json) => new LocalDateTime(json);
 
         /// <summary>Serializes the local date time to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current local date time for debug purposes.</summary>
@@ -511,6 +528,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -521,6 +539,7 @@ namespace Qowaiv
         }
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
+        [Pure]
         private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         /// <summary>Bind XML value.</summary>

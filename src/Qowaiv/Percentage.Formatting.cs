@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv
@@ -18,6 +19,7 @@ namespace Qowaiv
         /// percentage properties of the <see cref="NumberFormatInfo"/> instead of
         /// the number properties, so we copy them for desired behavior.
         /// </remarks>
+        [Pure]
         private static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
         {
             var info = NumberFormatInfo.GetInstance(formatProvider);
@@ -41,6 +43,7 @@ namespace Qowaiv
         };
 
         /// <summary>Resolves the format.</summary>
+        [Pure]
         private static string Format(string format, IFormatProvider formatProvider)
         {
             if (string.IsNullOrEmpty(format))

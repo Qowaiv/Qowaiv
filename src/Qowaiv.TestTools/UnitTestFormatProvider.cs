@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.TestTools
@@ -13,6 +14,7 @@ namespace Qowaiv.TestTools
         /// <remarks>
         /// Supports ICustomFormatter.
         /// </remarks>
+        [Pure]
         public object GetFormat(Type formatType)
         {
             return (typeof(ICustomFormatter).IsAssignableFrom(formatType)) ? this : null;
@@ -28,6 +30,7 @@ namespace Qowaiv.TestTools
         /// <param name="formatProvider">
         /// The specified formatProvider.
         /// </param>
+        [Pure]
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
             var str = "Unit Test Formatter, value: '{0:" + format + "}', format: '{1}'";

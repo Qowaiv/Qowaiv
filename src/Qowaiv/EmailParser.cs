@@ -1,5 +1,7 @@
-﻿using Qowaiv.Text;
+﻿using Qowaiv.Diagnostics.Contracts;
+using Qowaiv.Text;
 using System;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -32,9 +34,11 @@ namespace Qowaiv
         private const int DomainPartMaxLength = 63;
         private const int NotFound = -1;
 
+        [Pure]
         public static string Parse(string str)
             => new State(str).Root().Parsed();
-        
+
+        [FluentSyntax]
         private static State Root(this State state)
         {
             state.Quoted();
@@ -64,6 +68,8 @@ namespace Qowaiv
             }
             else { return state.DisplayName().Email(); }
         }
+
+        [FluentSyntax]
         private static State DisplayName(this State state)
         {
             if (state.Input.IsEmpty()) { return state.Invalid(); }
@@ -98,11 +104,15 @@ namespace Qowaiv
             }
             else { return state; }
         }
+        
+        [FluentSyntax]
         private static State Email(this State state)
             => state
             .MailTo()
             .Local()
             .Domain();
+
+        [FluentSyntax]
         private static State MailTo(this State state)
         {
             if (state.Input.StartsWith("MAILTO:", ignoreCase: true))
@@ -111,11 +121,14 @@ namespace Qowaiv
             }
             return state;
         }
+
+        [FluentSyntax]
         private static State Local(this State state)
             => state.Input.NotEmpty() && state.Input.First().IsQuote()
             ? state.LocalQuoted()
             : state.LocalPart();
 
+        [FluentSyntax]
         private static State LocalQuoted(this State state)
         {
             if (state.Quoted().Buffer.NotEmpty() && state.Input.NotEmpty())
@@ -129,6 +142,8 @@ namespace Qowaiv
             }
             return state.Invalid();
         }
+        
+        [FluentSyntax]
         private static State LocalPart(this State state)
         {
             while (state.Input.NotEmpty() && state.Buffer.Length <= LocalMaxLength)
@@ -159,6 +174,8 @@ namespace Qowaiv
             }
             return state.Invalid();
         }
+
+        [FluentSyntax]
         private static State Domain(this State state)
         {
             var dot = NotFound;
@@ -216,6 +233,8 @@ namespace Qowaiv
             }
             else { return state.IP(); }
         }
+
+        [FluentSyntax]
         private static State IP(this State state)
         {
             if (state.Buffer.First().IsBracketStart())
@@ -243,6 +262,8 @@ namespace Qowaiv
             }
             else { return state.Invalid(); }
         }
+
+        [FluentSyntax]
         private static State Quoted(this State state)
         {
             if (!state.Input.First().IsQuote()) { return state; }
@@ -266,12 +287,14 @@ namespace Qowaiv
             return state.Invalid();
         }
 
+        [Pure]
         private static bool ValidTopDomain(this State state, int dot)
         {
             var topDomain = state.Buffer.Substring(dot + 1);
             return topDomain.IsPunycode() || topDomain.All(IsTopDomain);
         }
 
+        [Pure]
         private static bool IsValid(this IPAddress a, CharBuffer buffer, bool isIp6)
             => a.AddressFamily == AddressFamily.InterNetworkV6
             || (
@@ -279,10 +302,10 @@ namespace Qowaiv
                 && !isIp6
                 && buffer.Count('.') == 3);
 
+        [Pure]
         private static bool IsPunycode(this string str)
             => str.StartsWith("xn--", StringComparison.Ordinal)
             && str.Length > 5
             && str.All(ch => IsTopDomain(ch) || ch.IsDash() || ch.IsDigit());
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Resources;
+﻿using System.Diagnostics.Contracts;
+using System.Resources;
 
 namespace System.Globalization
 {
@@ -8,9 +9,9 @@ namespace System.Globalization
         /// <see cref="IFormatProvider"/> defaulting to 
         /// <see cref="CultureInfo.CurrentCulture"/> if not a culture.
         /// </summary>
+        [Pure]
         public static string Localized(this ResourceManager manager, IFormatProvider provider, params string[] keys)
-            => manager
-            .GetString(
+            => manager.GetString(
                 string.Concat(keys),
                 provider as CultureInfo ?? CultureInfo.CurrentCulture)
             ?? string.Empty;

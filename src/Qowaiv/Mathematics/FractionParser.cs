@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 
@@ -33,6 +34,7 @@ namespace Qowaiv.Mathematics
         /// Single vulgar              |         [¼½¾]                 |     ¾
         /// Whole number with vulgar   | [0-9]+ ?[¼½¾]                 |     ¾
         /// </remarks>
+        [Pure]
         public static Fraction? Parse(string s, NumberFormatInfo formatInfo)
         {
             if (ParseExternal(s, formatInfo, out var external))
@@ -254,19 +256,27 @@ namespace Qowaiv.Mathematics
         }
 
         /// <summary>All long values are valid, except <see cref="long.MinValue"/>.</summary>
+        [Pure]
         private static bool IsValid(long number) => number != long.MinValue;
 
         /// <summary>Number should be in the range of <see cref="Fraction.MinValue"/> and <see cref="Fraction.MaxValue"/>.</summary>
+        [Pure]
         private static bool IsValid(decimal number) => number >= Fraction.MinValue.Numerator && number <= Fraction.MaxValue.Numerator;
 
         /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
+        [Pure]
         private static bool PotentialPercentage(string str)
         {
             return str.Any(ch => "%‰‱".IndexOf(ch) != CharBuffer.NotFound);
         }
 
+        [Pure]
         private static bool HasAll(this Tokens tokens, Tokens flag) => (tokens & flag) == flag;
+
+        [Pure]
         private static bool HasAny(this Tokens tokens, Tokens flag) => (tokens & flag) != 0;
+
+        [Pure]
         private static bool HasNone(this Tokens tokens, Tokens flag) => (tokens & flag) == 0;
 
         private static readonly Dictionary<char, Fraction> Vulgars = new Dictionary<char, Fraction>

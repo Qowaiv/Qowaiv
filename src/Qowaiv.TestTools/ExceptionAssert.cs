@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Qowaiv.TestTools.Diagnostics.Contracts;
+using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.TestTools
 {
@@ -17,6 +19,7 @@ namespace Qowaiv.TestTools
         /// The catch exception.
         /// </returns>
         [DebuggerStepThrough]
+        [Assertion]
         public static ArgumentNullException CatchArgumentNullException(Action code, string paramName)
         {
             var exception = Assert.Catch<ArgumentNullException>(code);
@@ -41,6 +44,7 @@ namespace Qowaiv.TestTools
         /// The caught exception.
         /// </returns>
         [DebuggerStepThrough]
+        [Assertion]
         public static ArgumentException CatchArgumentException(Action code, string paramName, string exceptionMessage, params object[] args)
         {
             var exception = Assert.Catch<ArgumentException>(code);
@@ -66,6 +70,7 @@ namespace Qowaiv.TestTools
         /// The caught exception.
         /// </returns>
         [DebuggerStepThrough]
+        [Assertion]
         public static ArgumentOutOfRangeException CatchArgumentOutOfRangeException(Action code, string paramName, string exceptionMessage, params object[] args)
         {
             var exception = Assert.Catch<ArgumentOutOfRangeException>(code);
@@ -75,6 +80,7 @@ namespace Qowaiv.TestTools
         }
 
         /// <summary>Gets the argument message.</summary>
+        [Pure]
         private static string GetMessage(string paramName, string exceptionMessage, params object[] args)
         {
             var message = string.Format(exceptionMessage, args);

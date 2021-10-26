@@ -1,7 +1,5 @@
-﻿#pragma warning disable IDE0060 // Remove unused parameter
-// ThreadDomain works per thread, and with this extension method, the behavior is virtually extended to System.Threading.Thread.
-
-using System;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace Qowaiv.Threading
@@ -10,6 +8,7 @@ namespace Qowaiv.Threading
     public static class ThreadExtensions
     {
         /// <summary>Gets the value of T.</summary>
+        [Pure]
         public static T GetValue<T>(this Thread thread) => ThreadDomain.Current.Get<T>();
 
         /// <summary>Sets the value for T.</summary>

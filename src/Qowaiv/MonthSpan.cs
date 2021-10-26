@@ -4,6 +4,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -55,9 +56,11 @@ namespace Qowaiv
 
         /// <summary>Unary plus the month span.</summary>
         /// <returns></returns>
+        [Pure]
         internal MonthSpan Plus() => this;
 
         /// <summary>Negates the month span.</summary>
+        [Pure]
         public MonthSpan Negate() => new MonthSpan(-m_Value);
 
         /// <summary>Returns a new month span whose value is the sum of the specified month span and this instance.</summary>
@@ -67,6 +70,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Add(MonthSpan other) => FromMonths(m_Value + other.m_Value);
 
         /// <summary>Returns a new month span whose value is the subtraction of the specified month span and this instance.</summary>
@@ -76,8 +80,8 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Subtract(MonthSpan other) => FromMonths(m_Value - other.m_Value);
-
 
         /// <summary>Returns a new month span whose value is the multiplication of the specified factor and this instance.</summary>
         ///<param name="factor">
@@ -86,6 +90,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Multiply(int factor) => FromMonths(m_Value * factor);
 
         /// <summary>Returns a new month span whose value is the multiplication of the specified factor and this instance.</summary>
@@ -95,6 +100,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Multiply(decimal factor) => FromMonths(Cast.ToInt<MonthSpan>((long)(m_Value * factor)));
 
         /// <summary>Returns a new month span whose value is the multiplication of the specified factor and this instance.</summary>
@@ -104,6 +110,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Multiply(double factor) => Multiply(Cast.ToDecimal<MonthSpan>(factor));
 
         /// <summary>Returns a new month span whose value is the division of the specified factor and this instance.</summary>
@@ -113,6 +120,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Divide(int factor) => FromMonths(m_Value / factor);
 
         /// <summary>Returns a new month span whose value is the division of the specified factor and this instance.</summary>
@@ -122,6 +130,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Divide(decimal factor) => FromMonths(Cast.ToInt<MonthSpan>((long)(m_Value / factor)));
 
         /// <summary>Returns a new month span whose value is the division of the specified factor and this instance.</summary>
@@ -131,6 +140,7 @@ namespace Qowaiv
         ///<exception cref="OverflowException">
         /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         ///</exception>
+        [Pure]
         public MonthSpan Divide(double factor) => Divide(Cast.ToDecimal<MonthSpan>(factor));
 
 
@@ -171,6 +181,7 @@ namespace Qowaiv
         public static DateTime operator -(DateTime dt, MonthSpan span) => dt.Add(-span);
 
         #endregion
+
         /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
@@ -188,6 +199,7 @@ namespace Qowaiv
         /// F: as 0Y+0M.
         /// All others format the total months.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -204,12 +216,14 @@ namespace Qowaiv
         }
 
         /// <summary>Gets an XML string representation of the month span.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Serializes the month span to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Deserializes the month span from a JSON number.</summary>
@@ -219,6 +233,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized month span.
         /// </returns>
+        [Pure]
         public static MonthSpan FromJson(long json) => Cast.Primitive<long, MonthSpan>(TryCreate, json);
 
         #region (Explicit) casting
@@ -277,6 +292,7 @@ namespace Qowaiv
         }
 
         /// <summary>Creates a date span from years.</summary>
+        [Pure]
         public static MonthSpan FromYears(int years)
         {
             if (TryCreate(years * DateSpan.MonthsPerYear, out var monthSpan))
@@ -287,6 +303,7 @@ namespace Qowaiv
         }
 
         /// <summary>Creates a date span from months.</summary>
+        [Pure]
         public static MonthSpan FromMonths(int months)
         {
             if (TryCreate(months, out var monthSpan))
@@ -306,6 +323,7 @@ namespace Qowaiv
         /// <returns>
         /// Returns a month span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
         /// </returns>
+        [Pure]
         public static MonthSpan Subtract(Date d1, Date d2)
         {
             var max = d1;
@@ -322,8 +340,8 @@ namespace Qowaiv
             var test = min;
 
             var months = 0;
-            
-            while(test < max)
+
+            while (test < max)
             {
                 test = test.AddMonths(1);
                 months++;
@@ -335,7 +353,7 @@ namespace Qowaiv
 
             return new MonthSpan(negative ? -months : +months);
         }
-        
+
         /// <summary>Tries to Create a date span from months only.</summary>
         public static bool TryCreate(long? months, out MonthSpan monthSpan)
         {

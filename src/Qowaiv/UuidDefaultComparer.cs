@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -16,6 +17,7 @@ namespace Qowaiv
         public override IReadOnlyList<int> Priority { get; } = new[] { 3, 2, 1, 0, 5, 4, 7, 6, 8, 9, 10, 11, 12, 13, 14, 15 };
 
         /// <inheritdoc/>
+        [Pure]
         public override int Compare(Guid x, Guid y) => x.CompareTo(y);
     }
 }

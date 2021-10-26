@@ -1,8 +1,11 @@
-﻿namespace Qowaiv.Text
+﻿using System.Diagnostics.Contracts;
+
+namespace Qowaiv.Text
 {
     internal partial class CharBuffer
     {
         /// <summary>Counts the occurrences of the <see cref="char"/> in the buffer.</summary>
+        [Pure]
         public int Count(char ch)
         {
             var count = 0;
@@ -17,6 +20,7 @@
         }
 
         /// <summary>Counts the occurrences of the <see cref="string"/> in the buffer.</summary>
+        [Pure]
         public int Count(string str)
         {
             var count = 0;
@@ -41,6 +45,7 @@
         }
 
         /// <summary>Counts the occurrences of the <see cref="string"/> in the buffer.</summary>
+        [Pure]
         public bool Contains(string str)
         {
             var match = 0;
@@ -66,6 +71,7 @@
         /// <returns>
         /// -1 if not found, otherwise the index of the <see cref="char"/>.
         /// </returns>
+        [Pure]
         public int IndexOf(char ch)
         {
             for (var i = start; i < end; i++)
@@ -82,6 +88,7 @@
         /// <returns>
         /// -1 if not found, otherwise the index of the <see cref="char"/>.
         /// </returns>
+        [Pure]
         public int LastIndexOf(char ch)
         {
             for (var i = end - 1; i >= start; i--)
@@ -95,6 +102,7 @@
         }
 
         /// <summary>Returns true if buffer starts with the specified string.</summary>
+        [Pure]
         public bool StartsWith(string str, bool ignoreCase = false)
         {
             if (str.Length > Length)
@@ -106,6 +114,7 @@
                 : StartsWithCaseSensitve(str);
         }
 
+        [Pure]
         private bool StartsWithCaseSensitve(string str)
         {
             for (var i = 0; i < str.Length; i++)
@@ -114,6 +123,7 @@
             }
             return true;
         }
+        [Pure]
         private bool StartsWithCaseInsensitve(string str)
         {
             for (var i = 0; i < str.Length; i++)
@@ -123,6 +133,7 @@
             return true;
         }
 
+        [Pure]
         public bool EndsWith(string str)
         {
             if (str.Length > Length)
@@ -142,12 +153,15 @@
         }
 
         /// <summary>Retrieves a substring from the buffer..</summary>
+        [Pure]
         public string Substring(int startIndex) => new string(buffer, startIndex + start, Length - startIndex);
 
         /// <summary>Retrieves a substring from the buffer..</summary>
+        [Pure]
         public string Substring(int startIndex, int length) => new string(buffer, startIndex + start, length);
 
         /// <inheritdoc />
+        [Pure]
         public override string ToString() => new string(buffer, start, Length);
 
         /// <summary>Implicitly casts a buffer to a <see cref="string"/>.</summary>

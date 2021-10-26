@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.Serialization;
@@ -52,12 +53,15 @@ namespace Qowaiv
         public static readonly IReadOnlyCollection<YesNo> YesAndNo = new[] { Yes, No };
 
         /// <summary>Returns true if the yes-no value represents no, otherwise false.</summary>
+        [Pure]
         public bool IsNo() => m_Value == No.m_Value;
 
         /// <summary>Returns true if the yes-no value represents yes, otherwise false.</summary>
+        [Pure]
         public bool IsYes() => m_Value == Yes.m_Value;
 
         /// <summary>Returns true if the yes-no value represents yes or no.</summary>
+        [Pure]
         public bool IsYesOrNo() => IsYes() || IsNo();
 
         /// <summary>Deserializes the gender from a JSON number.</summary>
@@ -67,6 +71,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized gender.
         /// </returns>
+        [Pure]
         public static YesNo FromJson(double json) => FromJson<double>((int)json);
 
         /// <summary>Deserializes the yes-no from a JSON number.</summary>
@@ -76,6 +81,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized yes-no.
         /// </returns>
+        [Pure]
         public static YesNo FromJson(long json) => FromJson<long>(json);
 
         /// <summary>Deserializes the yes-no from a JSON boolean.</summary>
@@ -85,8 +91,10 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized yes-no.
         /// </returns>
+        [Pure]
         public static YesNo FromJson(bool json) => json ? Yes : No;
 
+        [Pure]
         private static YesNo FromJson<TFrom>(long val)
         => val switch
         {
@@ -103,6 +111,7 @@ namespace Qowaiv
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => SerializationValues[m_Value];
 
         /// <summary>Returns a <see cref="string"/> that represents the current yes-no for debug purposes.</summary>
@@ -124,6 +133,7 @@ namespace Qowaiv
         /// f/F: as formatted string (Title cased).
         /// b/B: as boolean (true/false) (Title cased).
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
@@ -142,6 +152,7 @@ namespace Qowaiv
         };
 
         /// <summary>Gets an XML string representation of the yes-no.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a yes-no to a <see cref="string"/>.</summary>
@@ -249,7 +260,7 @@ namespace Qowaiv
             }
         }
 
-        private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.YesNoLabels", typeof(YesNo).Assembly);
+        private static readonly ResourceManager ResourceManager = new("Qowaiv.YesNoLabels", typeof(YesNo).Assembly);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">
@@ -258,6 +269,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         private string GetResourceString(string prefix, IFormatProvider formatProvider)
             => IsEmpty()
             ? string.Empty

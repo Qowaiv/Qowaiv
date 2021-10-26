@@ -10,6 +10,7 @@ using Qowaiv.Mathematics;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -31,22 +32,28 @@ namespace Qowaiv.Financial
         public static readonly Amount MaxValue = new Amount(decimal.MaxValue);
 
         /// <summary>Gets the sign of the value of the amount.</summary>
+        [Pure]
         public int Sign() => m_Value.Sign();
 
         /// <summary>Returns the absolute value of the amount.</summary>
+        [Pure]
         public Amount Abs() => (Amount)m_Value.Abs();
 
         /// <summary>Pluses the amount.</summary>
+        [Pure]
         internal Amount Plus() => (Amount)(+m_Value);
 
         /// <summary>Negates the amount.</summary>
 
+        [Pure]
         internal Amount Negate() => (Amount)(-m_Value);
 
         /// <summary>Increases the amount with one.</summary>
+        [Pure]
         internal Amount Increment() => (Amount)(m_Value + 1);
 
         /// <summary>Decreases the amount with one.</summary>
+        [Pure]
         internal Amount Decrement() => (Amount)(m_Value - 1);
 
         /// <summary>Decreases the amount with one.</summary>
@@ -54,30 +61,35 @@ namespace Qowaiv.Financial
         /// <param name="amount">
         /// The amount to add.
         /// </param>
+        [Pure]
         public Amount Add(Amount amount) => (Amount)(m_Value + amount.m_Value);
 
         /// <summary>Adds the specified percentage to the amount.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public Amount Add(Percentage p) => (Amount)(m_Value.Add(p));
 
         /// <summary>Subtracts a amount from the current amount.</summary>
         /// <param name="amount">
         /// The amount to Subtract.
         /// </param>
+        [Pure]
         public Amount Subtract(Amount amount) => (Amount)(m_Value - amount.m_Value);
 
         /// <summary>AddsSubtract the specified percentage from the amount.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public Amount Subtract(Percentage p) => (Amount)(m_Value.Subtract(p));
 
         /// <summary>Gets a percentage of the current amount.</summary>
         /// <param name="p">
         /// The percentage to get.
         /// </param>
+        [Pure]
         public Amount Multiply(Percentage p) => (Amount)(m_Value * p);
 
         /// <summary>Multiplies the amount with a specified factor.
@@ -85,6 +97,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Multiply(decimal factor) => (Amount)(m_Value * factor);
 
         /// <summary>Multiplies the amount with a specified factor.
@@ -92,6 +105,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Multiply(double factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the amount with a specified factor.
@@ -99,6 +113,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Multiply(float factor) => Multiply((decimal)factor);
 
 
@@ -107,6 +122,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Multiply(long factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the amount with a specified factor.
@@ -114,6 +130,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Multiply(int factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the amount with a specified factor.
@@ -121,8 +138,8 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Multiply(short factor) => Multiply((decimal)factor);
-
 
         /// <summary>Multiplies the amount with a specified factor.
         /// </summary>
@@ -130,6 +147,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Amount Multiply(ulong factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the amount with a specified factor.
@@ -138,6 +156,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Amount Multiply(uint factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the amount with a specified factor.
@@ -146,13 +165,14 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Amount Multiply(ushort factor) => Multiply((decimal)factor);
-
 
         /// <summary>Divides the amount by a specified amount.</summary>
         /// <param name="p">
         /// The amount to divides to..
         /// </param>
+        [Pure]
         public Amount Divide(Percentage p) => (Amount)(m_Value / p);
 
         /// <summary>Divides the amount by a specified factor.
@@ -160,6 +180,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Divide(decimal factor) => (Amount)(m_Value / factor);
 
         /// <summary>Divides the amount by a specified factor.
@@ -167,6 +188,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Divide(double factor) => Divide((decimal)factor);
 
         /// <summary>Divides the amount by a specified factor.
@@ -174,14 +196,15 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Divide(float factor) => Divide((decimal)factor);
-
 
         /// <summary>Divides the amount by a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Divide(long factor) => Divide((decimal)factor);
 
         /// <summary>Divides the amount by a specified factor.
@@ -189,6 +212,7 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Divide(int factor) => Divide((decimal)factor);
 
         /// <summary>Divides the amount by a specified factor.
@@ -196,8 +220,8 @@ namespace Qowaiv.Financial
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Amount Divide(short factor) => Divide((decimal)factor);
-
 
         /// <summary>Divides the amount by a specified factor.
         /// </summary>
@@ -205,6 +229,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Amount Divide(ulong factor) => Divide((decimal)factor);
 
         /// <summary>Divides the amount by a specified factor.
@@ -213,6 +238,7 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Amount Divide(uint factor) => Divide((decimal)factor);
 
         /// <summary>Divides the amount by a specified factor.
@@ -221,10 +247,11 @@ namespace Qowaiv.Financial
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public Amount Divide(ushort factor) => Divide((decimal)factor);
 
-
         /// <summary>Rounds the amount value to the 0 decimal places</summary>
+        [Pure]
         public Amount Round() => Round(0);
 
         /// <summary>Rounds the amount value to a specified number of decimal places.</summary>
@@ -234,6 +261,7 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
+        [Pure]
         public Amount Round(int decimals) => Round(decimals, DecimalRounding.BankersRound);
 
         /// <summary>Rounds the amount value to a specified number of decimal places.</summary>
@@ -246,12 +274,14 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
+        [Pure]
         public Amount Round(int decimals, DecimalRounding mode) => (Amount)m_Value.Round(decimals, mode);
 
         /// <summary>Rounds the amount value to the closed number that is a multiple of the specified factor.</summary>
         /// <param name="multipleOf">
         /// The factor of which the number should be multiple of.
         /// </param>
+        [Pure]
         public Amount RoundToMultiple(decimal multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.BankersRound);
 
         /// <summary>Rounds the amount value to the closed number that is a multiple of the specified factor.</summary>
@@ -261,21 +291,24 @@ namespace Qowaiv.Financial
         /// <param name="mode">
         /// The rounding method used to determine the closed by number.
         /// </param>
+        [Pure]
         public Amount RoundToMultiple(decimal multipleOf, DecimalRounding mode) => (Amount)m_Value.RoundToMultiple(multipleOf, mode);
-
 
         /// <summary>Unitary plusses the amount.</summary>
         public static Amount operator +(Amount amount) => amount.Plus();
+
         /// <summary>Negates the amount.</summary>
         public static Amount operator -(Amount amount) => amount.Negate();
 
         /// <summary>Increases the amount with one.</summary>
         public static Amount operator ++(Amount amount) => amount.Increment();
+        
         /// <summary>Decreases the amount with one.</summary>
         public static Amount operator --(Amount amount) => amount.Decrement();
 
         /// <summary>Adds the left and the right amount.</summary>
         public static Amount operator +(Amount l, Amount r) => l.Add(r);
+        
         /// <summary>Adds the percentage to the amount.</summary>
         public static Amount operator +(Amount amount, Percentage p) => amount.Add(p);
 
@@ -283,7 +316,6 @@ namespace Qowaiv.Financial
         public static Amount operator -(Amount l, Amount r) => l.Subtract(r);
         /// <summary>Subtracts the percentage from the amount.</summary>
         public static Amount operator -(Amount amount, Percentage p) => amount.Subtract(p);
-
 
         /// <summary>Multiplies the amount with the factor.</summary>
         public static Amount operator *(Amount amount, Percentage factor) => amount.Multiply(factor);
@@ -347,6 +379,7 @@ namespace Qowaiv.Financial
         /// <see cref="double"/> value that slightly smaller than 0, at least
         /// enough to have a <see cref="string"/> representation of -0.
         /// </remarks>
+        [Pure]
         public double ToJson() => m_Value == decimal.Zero ? 0 : (double)m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
@@ -360,6 +393,7 @@ namespace Qowaiv.Financial
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -371,6 +405,7 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>Gets an XML string representation of the amount.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Deserializes the amount from a JSON number.</summary>
@@ -380,6 +415,7 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The deserialized amount.
         /// </returns>
+        [Pure]
         public static Amount FromJson(double json) => new Amount(Cast.ToDecimal<Amount>(json));
 
         /// <summary>Deserializes the amountfrom a JSON number.</summary>
@@ -389,20 +425,24 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The deserialized amount.
         /// </returns>
+        [Pure]
         public static Amount FromJson(long json) => new Amount(json);
-
 
         /// <summary>Casts an Amount to a <see cref="string"/>.</summary>
         public static explicit operator string(Amount val) => val.ToString(CultureInfo.CurrentCulture);
+
         /// <summary>Casts a <see cref="string"/> to a </summary>
         public static explicit operator Amount(string str) => Cast.String<Amount>(TryParse, str);
 
         /// <summary>Casts a decimal an </summary>
         public static explicit operator Amount(decimal val) => Create(val);
+
         /// <summary>Casts a decimal an </summary>
         public static explicit operator Amount(double val) => Create(val);
+
         /// <summary>Casts a long an </summary>
         public static explicit operator Amount(long val) => Create((decimal)val);
+
         /// <summary>Casts a int an </summary>
         public static explicit operator Amount(int val) => Create((decimal)val);
 
@@ -445,12 +485,14 @@ namespace Qowaiv.Financial
         /// <param name="val" >
         /// A decimal describing an Amount.
         /// </param >
-        public static Amount Create(decimal val) => new Amount(val);
+        [Pure]
+        public static Amount Create(decimal val) => new(val);
 
         /// <summary>Creates an Amount from a Double.</summary >
         /// <param name="val" >
         /// A decimal describing an Amount.
         /// </param >
+        [Pure]
         public static Amount Create(double val) => Create(Cast.ToDecimal<Amount>(val));
     }
 }

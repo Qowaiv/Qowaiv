@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.Diagnostics.Contracts;
+using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -18,8 +19,6 @@ namespace Qowaiv.Globalization
     [DebuggerDisplay("{DebuggerDisplay}")]
     public class CultureInfoScope : IDisposable
     {
-        #region Constructors
-
         /// <summary>Creates a new CultureInfo scope.</summary>
         /// <remarks>
         /// No direct access.
@@ -72,8 +71,6 @@ namespace Qowaiv.Globalization
             Thread.CurrentThread.CurrentUICulture = cultureUI;
         }
 
-        #endregion
-
         /// <summary>Gets the previous Current UI Culture.</summary>
         public CultureInfo PreviousUI { get; private set; }
 
@@ -83,30 +80,21 @@ namespace Qowaiv.Globalization
         /// <summary>Represents the CultureInfo scope as <see cref="string"/>.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}: [{1}/{2}], Previous: [{3}/{4}]",
-                    GetType().Name,
-                    Thread.CurrentThread.CurrentCulture.Name,
-                    Thread.CurrentThread.CurrentUICulture.Name,
-                    Previous.Name,
-                    PreviousUI.Name);
-            }
-        }
-
-        #region Factory Methods
+            => string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}: [{1}/{2}], Previous: [{3}/{4}]",
+                GetType().Name,
+                Thread.CurrentThread.CurrentCulture.Name,
+                Thread.CurrentThread.CurrentUICulture.Name,
+                Previous.Name,
+                PreviousUI.Name);
 
         /// <summary>Gets a new invariant CultureInfo Scope.</summary>
+        [Impure]
         public static CultureInfoScope NewInvariant()
-        {
-            return new CultureInfoScope(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
-        }
-
-        #endregion
-
+            => new(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
+        
+        
         #region IDisposable
 
         /// <summary></summary>

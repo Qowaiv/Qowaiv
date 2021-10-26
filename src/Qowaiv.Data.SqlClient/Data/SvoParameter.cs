@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 
@@ -21,34 +22,38 @@ namespace Qowaiv.Data
         /// A <see cref="SqlParameter"/> with a converted value if the value is a 
         /// single value object, otherwise with a non-converted value.
         /// </returns>
+        [Pure]
         public static SqlParameter CreateForSql(string parameterName, object value)
         {
             // If null, return DBNull.
-            if (value == null) { return new SqlParameter(parameterName, DBNull.Value); }
-
-            var sourceType = value.GetType();
-
-            lock (locker)
+            if (value == null) return new SqlParameter(parameterName, DBNull.Value);
+            else
             {
-                if (!Attributes.TryGetValue(sourceType, out SingleValueObjectAttribute attr))
-                {
-                    attr = QowaivType.GetSingleValueObjectAttribute(sourceType);
-                }
-                // No attribute, so not supported.
-                if (attr == null)
-                {
-                    Attributes[sourceType] = null;
-                    return new SqlParameter(parameterName, value);
-                }
+                var sourceType = value.GetType();
 
-                if (IsDbNullValue(value, sourceType, attr))
+                lock (locker)
                 {
-                    return new SqlParameter(parameterName, DBNull.Value);
+                    if (!Attributes.TryGetValue(sourceType, out SingleValueObjectAttribute attr))
+                    {
+                        attr = sourceType.GetCustomAttribute<SingleValueObjectAttribute>();
+                    }
+                    // No attribute, so not supported.
+                    if (attr == null)
+                    {
+                        Attributes[sourceType] = null;
+                        return new SqlParameter(parameterName, value);
+                    }
+                    else if (IsDbNullValue(value, sourceType, attr))
+                    {
+                        return new SqlParameter(parameterName, DBNull.Value);
+                    }
+                    else
+                    {
+                        MethodInfo cast = GetCast(sourceType, attr);
+                        var casted = cast.Invoke(null, new[] { value });
+                        return new SqlParameter(parameterName, casted);
+                    }
                 }
-
-                MethodInfo cast = GetCast(sourceType, attr);
-                var casted = cast.Invoke(null, new[] { value });
-                return new SqlParameter(parameterName, casted);
             }
         }
 

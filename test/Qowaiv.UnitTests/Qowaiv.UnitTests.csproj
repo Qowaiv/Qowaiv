@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="TestTools\**" />
+    <EmbeddedResource Remove="TestTools\**" />
+    <None Remove="TestTools\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="FluentAssertions" Version="6.1.0" />
+    <PackageReference Include="FluentAssertions" Version="6.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0">
@@ -24,10 +30,6 @@
     <ProjectReference Include="..\..\specs\Qowaiv.Specs\Qowaiv.Specs.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="TestTools\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
-﻿using Qowaiv.Reflection;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -11,6 +10,7 @@ namespace Qowaiv.TestTools
     public static class AssemblyAssert
     {
         /// <summary>Asserts that the assembly (of the specified <see cref="Type"/>) has the expected public key.</summary>
+        [Obsolete("Use .Should().HavePublicKey() instead.")]
         [DebuggerStepThrough]
         public static void HasPublicKey<T>(string publicKey)
         {

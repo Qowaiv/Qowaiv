@@ -8,7 +8,6 @@ using Qowaiv.Mathematics;
 using Qowaiv.Security.Cryptography;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools;
-using Qowaiv.UnitTests.Identifiers;
 using Qowaiv.Web;
 using System;
 using System.Collections.Generic;
@@ -16,6 +15,11 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using CustomGuid = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForGuid>;
+using CustomUuid = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForUuid>;
+using Int32Id = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForInt32>;
+using Int64Id = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForInt64>;
+using StringId = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForString>;
 
 namespace Debug_SVO_specs
 {
@@ -48,10 +52,11 @@ namespace Debug_SVO_specs
         [TestCase(typeof(Percentage), "0.00%")]
         [TestCase(typeof(StreamSize), "0 byte")]
         [TestCase(typeof(WeekDate), "0001-W01-1")]
-        [TestCase(typeof(Id<ForGuid>), "{empty} (ForGuid)")]
-        [TestCase(typeof(Id<ForInt32>), "{empty} (ForInt32)")]
-        [TestCase(typeof(Id<ForInt64>), "{empty} (ForInt64)")]
-        [TestCase(typeof(Id<ForString>), "{empty} (ForString)")]
+        [TestCase(typeof(CustomGuid), "{empty} (ForGuid)")]
+        [TestCase(typeof(CustomUuid), "{empty} (ForUuid)")]
+        [TestCase(typeof(Int32Id), "{empty} (ForInt32)")]
+        [TestCase(typeof(Int64Id), "{empty} (ForInt64)")]
+        [TestCase(typeof(StringId), "{empty} (ForString)")]
         public void display(Type svoType, object debuggerDisplay)
         {
             var empty = Activator.CreateInstance(svoType);
@@ -110,10 +115,10 @@ namespace Debug_SVO_specs
         [TestCase(typeof(Uuid), "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
         [TestCase(typeof(WeekDate), "1997-W14-6", "1997-W14-6")]
         [TestCase(typeof(YesNo), "Y", "yes")]
-        [TestCase(typeof(Id<ForGuid>), "702e186f-f026-4f47-ae4d-fd5f16751f32", "702e186f-f026-4f47-ae4d-fd5f16751f32 (ForGuid)")]
-        [TestCase(typeof(Id<ForInt32>), "123", "123 (ForInt32)")]
-        [TestCase(typeof(Id<ForInt64>), "123456789", "123456789 (ForInt64)")]
-        [TestCase(typeof(Id<ForString>), "QOWAIV-ID", "QOWAIV-ID (ForString)")]
+        [TestCase(typeof(CustomGuid), "702e186f-f026-4f47-ae4d-fd5f16751f32", "702e186f-f026-4f47-ae4d-fd5f16751f32 (ForGuid)")]
+        [TestCase(typeof(Int32Id), "123", "PREFIXformat (ForInt32)")]
+        [TestCase(typeof(Int64Id), "123456789", "PREFIXformat (ForInt64)")]
+        [TestCase(typeof(StringId), "QOWAIV-ID", "QOWAIV-ID (ForString)")]
         public void invariant_representation(Type svoType, string value, object debuggerDisplay)
         {
             var converter = TypeDescriptor.GetConverter(svoType);

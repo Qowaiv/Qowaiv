@@ -178,7 +178,7 @@ namespace Qowaiv.Reflection
         /// <param name="objectType">
         /// The type to test for.
         /// </param>
-        [Obsolete("Use TypeGetCustomAttribute<SingleValueObjectAttribute>(). Will be dropped when the next major version is released.")]
+        [Obsolete("Use Type.GetCustomAttribute<SingleValueObjectAttribute>(). Will be dropped when the next major version is released.")]
         public static SingleValueObjectAttribute GetSingleValueObjectAttribute(Type objectType)
             => Guard.NotNull(objectType, nameof(objectType))
             .GetCustomAttribute<SingleValueObjectAttribute>();

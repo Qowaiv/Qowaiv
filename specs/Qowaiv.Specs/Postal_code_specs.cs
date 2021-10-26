@@ -2,15 +2,13 @@
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
+using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
-using Qowaiv.UnitTests;
-using Qowaiv.UnitTests.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace Postal_code_specs

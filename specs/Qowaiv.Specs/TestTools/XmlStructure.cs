@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Qowaiv.UnitTests.TestTools
+namespace Qowaiv.TestTools
 {
     public static class XmlStructure
     {
         public static XmlStructure<TSvo> New<TSvo>(TSvo svo) where TSvo : struct
-            => new XmlStructure<TSvo> { Svo = svo };
+            => new() { Svo = svo };
     }
 
     [Serializable]

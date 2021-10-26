@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="TestTools\**" />
-    <EmbeddedResource Remove="TestTools\**" />
-    <None Remove="TestTools\**" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.cs" Link="Qowaiv.Text\CharBuffer.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.String.cs" Link="Qowaiv.Text\CharBuffer.String.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.ToNonDiacritic.cs" Link="Qowaiv.Text\CharBuffer.ToNonDiacritic.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.Transform.cs" Link="Qowaiv.Text\CharBuffer.Transform.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharrBufferExtensions.cs" Link="Qowaiv.Text\CharrBufferExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\specs\Qowaiv.Specs\Qowaiv.Specs.csproj" />
+    <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
   </ItemGroup>

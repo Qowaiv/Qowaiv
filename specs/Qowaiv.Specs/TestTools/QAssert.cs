@@ -2,9 +2,9 @@
 using System;
 using System.Diagnostics;
 
-namespace Qowaiv.UnitTests.TestTools
+namespace Qowaiv.TestTools
 {
-    internal static class QAssert
+    public static class QAssert
     {
         /// <remarks>A cast can not be applied unless you assign it, therefore a <see cref="Func{TResult}"/>.</remarks>
         [DebuggerStepThrough]

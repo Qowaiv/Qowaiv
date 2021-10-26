@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Financial;
-using Qowaiv.UnitTests.TestTools;
+using Qowaiv.TestTools;
 
 namespace Cast_specs
 {

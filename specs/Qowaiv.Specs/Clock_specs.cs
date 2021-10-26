@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv;
+using Qowaiv.Specs;
 using Qowaiv.TestTools.Globalization;
-using Qowaiv.UnitTests;
 using System;
 
 namespace Clock_specs

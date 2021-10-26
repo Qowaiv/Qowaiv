@@ -74,7 +74,8 @@ namespace Qowaiv.Conversion.Identifiers
         {
             var id = m_Value.GetValue(value);
             return destinationType == BaseType
-                ? id : BaseConverter.ConvertTo(context, culture, id, destinationType);
+                ? id 
+                : BaseConverter.ConvertTo(context, culture, id, destinationType);
         }
     }
 }

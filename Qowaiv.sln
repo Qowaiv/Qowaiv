@@ -59,6 +59,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.TestTools", "src\Qow
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Specs", "specs\Qowaiv.Specs\Qowaiv.Specs.csproj", "{9CCFB684-06FA-48B1-8732-0A520B639E11}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{7F291C39-7785-41A7-8678-2E79B347E7AD}"
+	ProjectSection(SolutionItems) = preProject
+		shared\Guard.cs = shared\Guard.cs
+		shared\ProductInfo.cs = shared\ProductInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +113,7 @@ Global
 		{932B4123-594C-494B-9B3E-7017D526E80F} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{9CCFB684-06FA-48B1-8732-0A520B639E11} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{7F291C39-7785-41A7-8678-2E79B347E7AD} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

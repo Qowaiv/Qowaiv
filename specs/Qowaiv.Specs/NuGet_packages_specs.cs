@@ -7,7 +7,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 
-namespace NuGet_pakcages_specs
+namespace NuGet_packages_specs
 {
     public class All_NuGet_Packages
     {

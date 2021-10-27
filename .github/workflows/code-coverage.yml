@@ -1,6 +1,8 @@
 name: Code coverage
 on:
-  [push]
+  push:
+    branches:
+    - master
 
 jobs:
   build:

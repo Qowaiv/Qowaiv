@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
@@ -462,9 +464,10 @@ namespace Qowaiv.UnitTests
         [Test]
         public void DaysPerMonth_ShouldMatchTheCalculatedValue()
         {
-            var time = new Date(2000, 01, 01) - Date.MinValue;
-            double daysPerMonth = time.TotalDays / 2000 / 12;
-            Assert.AreEqual(daysPerMonth, DateSpan.DaysPerMonth, 0.000000001);
+            var date = new Date(2000, 01, 01) - Date.MinValue;
+            double daysPerMonth = date.TotalDays / 2000 / 12;
+            var DateSpan_DaysPerMonth = (double)typeof(DateSpan).GetField("DaysPerMonth", (BindingFlags)int.MaxValue).GetValue(null);
+            DateSpan_DaysPerMonth.Should().BeApproximately(daysPerMonth, precision: 0.000000001);
         }
 
         /// <summary>Orders a list of date spans ascending.</summary>

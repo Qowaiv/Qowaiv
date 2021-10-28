@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Statistics
@@ -7,10 +8,8 @@ namespace Qowaiv.Statistics
     public static class EloExtensions
     {
         /// <summary>Gets the average Elo.</summary>
+        [Pure]
         public static Elo Avarage(this IEnumerable<Elo> elos)
-        {
-            var doubles = elos.Select(elo => (double)elo);
-            return doubles.Average();
-        }
+            => elos.Select(elo => (double)elo).Average();
     }
 }

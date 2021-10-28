@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -20,12 +21,15 @@ namespace Qowaiv
         public abstract IReadOnlyList<int> Priority { get; }
 
         /// <inheritdoc/>
+        [Pure]
         public abstract int Compare(Guid x, Guid y);
 
         /// <inheritdoc/>
+        [Pure]
         public int Compare(Uuid x, Uuid y) => Compare((Guid)x, (Guid)y);
 
         /// <inheritdoc/>
+        [Pure]
         public int Compare(object x, object y)
         {
             if (x is null)

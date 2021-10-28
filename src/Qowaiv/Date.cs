@@ -9,6 +9,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -113,9 +114,11 @@ namespace Qowaiv
         #region Methods
 
         /// <summary>Adds one day to the date.</summary>
+        [Pure]
         internal Date Increment() => AddDays(+1);
 
         /// <summary>Subtracts one day from the date.</summary>
+        [Pure]
         internal Date Decrement() => AddDays(-1);
 
         /// <summary>Returns a new date that adds the value of the specified <see cref="TimeSpan"/>
@@ -132,6 +135,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date Add(TimeSpan value) => new Date(Ticks + value.Ticks);
 
         /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
@@ -148,6 +152,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date Add(DateSpan value) => Add(value, false);
 
         /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
@@ -167,6 +172,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date Add(DateSpan value, bool daysFirst)
         {
             return daysFirst
@@ -189,6 +195,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date Add(MonthSpan value) => AddMonths(value.TotalMonths);
 
         /// <summary>Subtracts the specified date from this instance.</summary>
@@ -202,6 +209,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public TimeSpan Subtract(Date value) => new TimeSpan(Ticks - value.Ticks);
 
         /// <summary>Subtracts the specified duration from this instance.</summary>
@@ -215,6 +223,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date Subtract(TimeSpan value) => new Date(Ticks - value.Ticks);
 
         /// <summary>Subtracts the specified duration from this instance.</summary>
@@ -228,6 +237,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date Subtract(DateSpan value) => Add(-value);
 
         /// <summary>Returns a new date that adds the specified number of years to
@@ -245,6 +255,7 @@ namespace Qowaiv
         /// value or the resulting date is less than <see cref="MinValue"/>
         /// or greater than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date AddYears(int value) => new Date(m_Value.AddYears(value));
 
         /// <summary>Returns a new date that adds the specified number of months to
@@ -262,6 +273,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.-or- months is less than -120,000 or greater
         /// than 120,000.
         /// </exception>
+        [Pure]
         public Date AddMonths(int months) => new Date(m_Value.AddMonths(months));
 
         /// <summary>Returns a new date that adds the specified number of days to the
@@ -279,6 +291,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date AddDays(double value) => new Date(m_Value.AddDays(value));
 
         /// <summary>Returns a new date that adds the specified number of ticks to
@@ -296,6 +309,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date AddTicks(long value) => new Date(Ticks + value);
 
         /// <summary>Returns a new date that adds the specified number of hours to
@@ -313,6 +327,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date AddHours(double value) => new Date(m_Value.AddHours(value));
 
         /// <summary>Returns a new date that adds the specified number of minutes to
@@ -330,6 +345,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date AddMinutes(double value) => new Date(m_Value.AddMinutes(value));
 
         /// <summary>Returns a new date that adds the specified number of seconds to
@@ -347,6 +363,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date AddSeconds(double value) => new Date(m_Value.AddSeconds(value));
 
         /// <summary>Returns a new date that adds the specified number of milliseconds
@@ -364,6 +381,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="MinValue"/> or greater
         /// than <see cref="MaxValue"/>.
         /// </exception>
+        [Pure]
         public Date AddMilliseconds(double value) => new Date(m_Value.AddMilliseconds(value));
 
         #endregion
@@ -375,12 +393,14 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized date.
         /// </returns>
+        [Pure]
         public static Date FromJson(long json) => new Date(json);
 
         /// <summary>Serializes the date to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         #region IFormattable / ToString
@@ -396,6 +416,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             // We don't want to see hh:mm pop up.
@@ -412,6 +433,7 @@ namespace Qowaiv
         partial void OnReadXml(Date value) => m_Value = value.m_Value;
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
+        [Pure]
         private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
         #endregion

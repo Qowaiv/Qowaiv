@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Qowaiv.Diagnostics.Contracts;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Text;
 
@@ -9,6 +11,7 @@ namespace Qowaiv.Reflection
     public static class QowaivType
     {
         /// <summary>Returns true if the value is null or equal to the default value.</summary>
+        [Pure]
         public static bool IsNullOrDefaultValue(object value)
             => value is null || value.Equals(Activator.CreateInstance(value.GetType()));
 
@@ -16,6 +19,7 @@ namespace Qowaiv.Reflection
         /// <param name="objectType">
         /// The type to test for.
         /// </param>
+        [Pure]
         public static bool IsNullable(Type objectType)
             => Nullable.GetUnderlyingType(objectType) != null;
 
@@ -23,6 +27,7 @@ namespace Qowaiv.Reflection
         /// <param name="objectType">
         /// The type to test for.
         /// </param>
+        [Pure]
         public static bool IsNumeric(Type objectType)
         {
             var code = Type.GetTypeCode(GetNotNullableType(objectType));
@@ -41,6 +46,7 @@ namespace Qowaiv.Reflection
         /// * <see cref="Date"/>
         /// * <see cref="WeekDate"/>
         /// </remarks>
+        [Pure]
         public static bool IsDate(Type objectType)
         {
             var type = GetNotNullableType(objectType);
@@ -55,6 +61,7 @@ namespace Qowaiv.Reflection
         /// <param name="objectType">
         /// The type to test for.
         /// </param>
+        [Pure]
         public static Type GetNotNullableType(Type objectType)
             => Nullable.GetUnderlyingType(objectType) ?? objectType;
 
@@ -62,6 +69,7 @@ namespace Qowaiv.Reflection
         /// <param name="type">
         /// The type to format as C# string.
         /// </param>
+        [Pure]
         public static string ToCSharpString(this Type type) => type.ToCSharpString(false);
 
         /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
@@ -71,12 +79,14 @@ namespace Qowaiv.Reflection
         /// <param name="withNamespace">
         /// Should the namespace be displayed or not.
         /// </param>
+        [Pure]
         public static string ToCSharpString(this Type type, bool withNamespace)
         {
             Guard.NotNull(type, nameof(type));
             return new StringBuilder().AppendType(type, withNamespace).ToString();
         }
 
+        [FluentSyntax]
         private static StringBuilder AppendType(this StringBuilder sb, Type type, bool withNamespace)
         {
             if (primitives.TryGetValue(type, out var primitive))
@@ -130,6 +140,7 @@ namespace Qowaiv.Reflection
             }
         }
 
+        [FluentSyntax]
         private static StringBuilder AppendNamespace(this StringBuilder sb, Type type, bool withNamespace)
         {
             if (type.IsNested)
@@ -143,6 +154,7 @@ namespace Qowaiv.Reflection
             return sb;
         }
 
+        [Pure]
         private static string ToNonGeneric(this Type type) => type.Name.Substring(0, type.Name.IndexOf('`'));
 
         private static readonly Dictionary<Type, string> primitives = new Dictionary<Type, string>

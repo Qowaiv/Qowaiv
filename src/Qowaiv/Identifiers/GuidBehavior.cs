@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Text;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Identifiers
@@ -17,19 +18,24 @@ namespace Qowaiv.Identifiers
         protected virtual string DefaultFormat => "d";
 
         /// <inheritdoc/>
+        [Pure]
         public override int Compare(object x, object y) => Id(x).CompareTo(Id(y));
 
         /// <inheritdoc/>
+        [Pure]
         public override bool Equals(object x, object y) => Id(x).Equals(Id(y));
 
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode(object obj) => Id(obj).GetHashCode();
 
         /// <inheritdoc/>
+        [Pure]
         public override byte[] ToByteArray(object obj) 
             => obj is Guid guid ? guid.ToByteArray() : Array.Empty<byte>();
 
         /// <inheritdoc/>
+        [Pure]
         public override object FromBytes(byte[] bytes) => new Guid(bytes);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the <see cref="Guid"/>.</summary>
@@ -60,6 +66,7 @@ namespace Qowaiv.Identifiers
         /// 
         /// the lowercase formats are lowercase (except the 's').
         /// </remarks>
+        [Pure]
         public override string ToString(object obj, string format, IFormatProvider formatProvider)
         {
             var id = Id(obj);
@@ -82,9 +89,11 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        [Pure]
         public override object ToJson(object obj) => ToString(obj, DefaultFormat, CultureInfo.InvariantCulture);
 
         /// <inheritdoc/>
+        [Pure]
         public override bool TryParse(string str, out object id)
         {
             if (string.IsNullOrEmpty(str))
@@ -126,6 +135,7 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        [Pure]
         public override bool TryCreate(object obj, out object id)
         {
             if (obj is Guid guid)
@@ -151,14 +161,17 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        [Pure]
         public override object Next() => Guid.NewGuid();
 
         /// <inheritdoc />
+        [Pure]
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             => sourceType == typeof(Guid)
             || sourceType == typeof(Uuid)
             || base.CanConvertFrom(context, sourceType);
 
+        [Pure]
         private static Guid Id(object obj) => obj is Guid guid ? guid : Guid.Empty;
 
         private sealed class Default : GuidBehavior { }

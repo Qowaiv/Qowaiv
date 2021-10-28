@@ -9,6 +9,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -78,6 +79,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized house number.
         /// </returns>
+        [Pure]
         public static HouseNumber FromJson(double json) => Create((int)json);
 
         /// <summary>Deserializes the house number from a JSON number.</summary>
@@ -87,12 +89,14 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized house number.
         /// </returns>
+        [Pure]
         public static HouseNumber FromJson(long json) => Create((int)json);
 
         /// <summary>Serializes the house number to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current house number for debug purposes.</summary>
@@ -106,6 +110,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -119,6 +124,7 @@ namespace Qowaiv
 
 
         /// <summary>Gets an XML string representation of the house number.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a house number to a <see cref="string"/>.</summary>
@@ -179,6 +185,7 @@ namespace Qowaiv
         /// <exception cref="FormatException" >
         /// val is not a valid house number.
         /// </exception >
+        [Pure]
         public static HouseNumber Create(int? val)
         {
             if (TryCreate(val, out HouseNumber result))
@@ -197,6 +204,7 @@ namespace Qowaiv
         /// <returns >
         /// A house number if the creation was successfully, otherwise Empty.
         /// </returns >
+        [Pure]
         public static HouseNumber TryCreate(int? val)
         {
             if (TryCreate(val, out HouseNumber result))
@@ -226,20 +234,19 @@ namespace Qowaiv
             {
                 return true;
             }
-            if (IsValid(val.Value))
+            else if (IsValid(val.Value))
             {
                 result = new HouseNumber(val.Value);
                 return true;
             }
-            return false;
+            else return false;
         }
 
         /// <summary>Returns true if the val represents a valid house number, otherwise false.</summary>
+        [Pure]
         public static bool IsValid(int? val)
-        {
-            if (!val.HasValue) { return false; }
-
-            return val.Value >= MinValue.m_Value && val.Value <= MaxValue.m_Value;
-        }
+            => val.HasValue
+            && val >= MinValue.m_Value
+            && val <= MaxValue.m_Value;
     }
 }

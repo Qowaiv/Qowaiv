@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Web;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion.Web
@@ -7,6 +8,7 @@ namespace Qowaiv.Conversion.Web
     public class InternetMediaTypeTypeConverter : SvoTypeConverter<InternetMediaType>
     {
         /// <inheritdoc/>
+        [Pure]
         protected override InternetMediaType FromString(string str, CultureInfo culture) => InternetMediaType.Parse(str);
     }
 }

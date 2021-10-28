@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.Contracts;
+using System.Globalization;
 
 namespace Qowaiv.Conversion
 {
@@ -6,12 +7,15 @@ namespace Qowaiv.Conversion
     public class PercentageTypeConverter : NumericTypeConverter<Percentage, decimal>
     {
         /// <inheritdoc/>
+        [Pure]
         protected override Percentage FromRaw(decimal raw) => raw;
 
         /// <inheritdoc/>
+        [Pure]
         protected override Percentage FromString(string str, CultureInfo culture) => Percentage.Parse(str, culture);
 
         /// <inheritdoc/>
+        [Pure]
         protected override decimal ToRaw(Percentage svo) => (decimal)svo;
     }
 }

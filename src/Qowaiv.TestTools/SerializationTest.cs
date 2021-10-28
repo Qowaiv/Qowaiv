@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -20,6 +21,7 @@ namespace Qowaiv.TestTools
         /// <param name="instance">
         /// The instance to serialize and deserialize.
         /// </param>
+        [Pure]
         public static T BinaryFormatterSerializeDeserialize<T>(T instance)
         {
             using var buffer = new MemoryStream();
@@ -37,7 +39,8 @@ namespace Qowaiv.TestTools
         /// <param name="instance">
         /// The instance to retrieve the object data from.
         /// </param>
-        public static SerializationInfo GetSerializationInfo<T>(T instance) where T: ISerializable
+        [Pure]
+        public static SerializationInfo GetSerializationInfo<T>(T instance) where T : ISerializable
         {
             ISerializable obj = instance;
             var info = new SerializationInfo(typeof(YesNo), new FormatterConverter());
@@ -74,6 +77,7 @@ namespace Qowaiv.TestTools
         /// <param name="instance">
         /// The instance to (XML) serialize.
         /// </param>
+        [Pure]
         public static string XmlSerialize<T>(T instance)
         {
             using var stream = new MemoryStream();
@@ -96,6 +100,7 @@ namespace Qowaiv.TestTools
         /// <param name="xml">
         /// The xml string to (XML) deserialize.
         /// </param>
+        [Pure]
         public static T XmlDeserialize<T>(string xml)
         {
             var value = new XElement("Value", xml);
@@ -124,6 +129,7 @@ namespace Qowaiv.TestTools
         /// <param name="instance">
         /// The instance to (XML) serialize and (XML) deserialize.
         /// </param>
+        [Pure]
         public static T XmlSerializeDeserialize<T>(T instance)
         {
             using var stream = new MemoryStream();
@@ -142,6 +148,7 @@ namespace Qowaiv.TestTools
         /// <param name="instance">
         /// The instance to (XML) serialize and (XML) deserialize.
         /// </param>
+        [Pure]
         public static T DataContractSerializeDeserialize<T>(T instance)
         {
             using var stream = new MemoryStream();
@@ -165,9 +172,10 @@ namespace Qowaiv.TestTools
         /// <remarks>
         /// This can throw target invocation exceptions, if so, the inner exception is thrown.
         /// </remarks>
+        [Pure]
         public static T DeserializeUsingConstructor<T>(SerializationInfo info, StreamingContext context)
         {
-            var ctor = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new [] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
+            var ctor = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new[] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
             Assert.IsNotNull(ctor, $"No {typeof(T).Name}(SerializationInfo, StreamingContext) constructor found.");
 
             try
@@ -184,10 +192,8 @@ namespace Qowaiv.TestTools
         /// <typeparam name="T">
         /// The type to (de)serialize.
         /// </typeparam>
+        [Pure]
         public static SerializationInfo GetSerializationInfo<T>()
-        {
-            var info = new SerializationInfo(typeof(T), new FormatterConverter());
-            return info;
-        }
+            => new(typeof(T), new FormatterConverter());
     }
 }

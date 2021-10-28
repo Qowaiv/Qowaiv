@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -6,6 +7,7 @@ namespace Qowaiv
     public static class UuidExtensions
     {
         /// <summary>Gets the version of the <see cref="Guid"/>.</summary>
+        [Pure]
         public static UuidVersion GetVersion(this Guid guid)
         {
             var bytes = guid.ToByteArray();

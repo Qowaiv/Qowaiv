@@ -14,6 +14,7 @@
 namespace Qowaiv.Sql
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public partial struct Timestamp
     {
@@ -24,14 +25,17 @@ namespace Qowaiv.Sql
 #endif
 #if !NotIsEmpty
         /// <summary>Returns true if the  timestamp is empty, otherwise false.</summary>
+        [Pure]
         public bool IsEmpty() => m_Value == default;
 #endif
 #if !NotIsUnknown
         /// <summary>Returns true if the  timestamp is unknown, otherwise false.</summary>
+        [Pure]
         public bool IsUnknown() => m_Value == Unknown.m_Value;
 #endif
 #if !NotIsEmptyOrUnknown
         /// <summary>Returns true if the  timestamp is empty or unknown, otherwise false.</summary>
+        [Pure]
         public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 #endif
     }
@@ -40,21 +44,26 @@ namespace Qowaiv.Sql
 namespace Qowaiv.Sql
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public partial struct Timestamp : IEquatable<Timestamp>
     {
         /// <inheritdoc/>
+        [Pure]
         public override bool Equals(object obj) => obj is Timestamp other && Equals(other);
 #if !NotEqualsSvo
         /// <summary>Returns true if this instance and the other timestamp are equal, otherwise false.</summary>
         /// <param name = "other">The <see cref = "Timestamp"/> to compare with.</param>
+        [Pure]
         public bool Equals(Timestamp other) => m_Value == other.m_Value;
 #if !NotGetHashCodeStruct
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode() => m_Value.GetHashCode();
 #endif
 #if !NotGetHashCodeClass
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
 #endif
 #endif
@@ -73,10 +82,12 @@ namespace Qowaiv.Sql
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
 
     public partial struct Timestamp : IComparable, IComparable<Timestamp>
     {
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(object obj)
         {
             if (obj is null)
@@ -95,6 +106,7 @@ namespace Qowaiv.Sql
 
 #if !NotEqualsSvo
         /// <inheritdoc/>
+        [Pure]
         public int CompareTo(Timestamp other) => Comparer<ulong>.Default.Compare(m_Value, other.m_Value);
 #endif
 #if !NoComparisonOperators
@@ -113,6 +125,7 @@ namespace Qowaiv.Sql
 namespace Qowaiv.Sql
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
 
     public partial struct Timestamp : ISerializable
@@ -135,6 +148,7 @@ namespace Qowaiv.Sql
 
 namespace Qowaiv.Sql
 {
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
@@ -146,6 +160,7 @@ namespace Qowaiv.Sql
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
+        [Pure]
         XmlSchema IXmlSerializable.GetSchema() => null;
         /// <summary>Reads the timestamp from an <see href = "XmlReader"/>.</summary>
         /// <param name = "reader">An XML reader.</param>
@@ -177,6 +192,7 @@ namespace Qowaiv.Sql
 namespace Qowaiv.Sql
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using Qowaiv.Json;
 
@@ -191,8 +207,10 @@ namespace Qowaiv.Sql
         /// </returns>
         
 #if !NotCultureDependent
+        [Pure]
         public static Timestamp FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
 #else
+        [Pure]
         public static Timestamp FromJson(string json) => Parse(json);
 #endif
     }
@@ -201,21 +219,25 @@ namespace Qowaiv.Sql
 namespace Qowaiv.Sql
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Timestamp : IFormattable
     {
         /// <summary>Returns a <see cref = "string "/> that represents the timestamp.</summary>
+        [Pure]
         public override string ToString() => ToString((IFormatProvider)null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the timestamp.</summary>
         /// <param name = "format">
         /// The format that describes the formatting.
         /// </param>
+        [Pure]
         public string ToString(string format) => ToString(format, null);
         /// <summary>Returns a formatted <see cref = "string "/> that represents the timestamp.</summary>
         /// <param name = "provider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(IFormatProvider provider) => ToString(null, provider);
     }
 }
@@ -223,6 +245,7 @@ namespace Qowaiv.Sql
 namespace Qowaiv.Sql
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Timestamp
@@ -238,6 +261,7 @@ namespace Qowaiv.Sql
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
+        [Pure]
         public static Timestamp Parse(string s) => Parse(s, null);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
         /// <param name = "s">
@@ -252,6 +276,7 @@ namespace Qowaiv.Sql
         /// <exception cref = "FormatException">
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
+        [Pure]
         public static Timestamp Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Timestamp val) ? val : throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
         /// <param name = "s">
@@ -260,6 +285,7 @@ namespace Qowaiv.Sql
         /// <returns>
         /// The timestamp if the string was converted successfully, otherwise default.
         /// </returns>
+        [Pure]
         public static Timestamp TryParse(string s) => TryParse(s, null, out Timestamp val) ? val : default;
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.
         /// A return value indicates whether the conversion succeeded.
@@ -273,6 +299,7 @@ namespace Qowaiv.Sql
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
+        [Pure]
         public static bool TryParse(string s, out Timestamp result) => TryParse(s, null, out result);
 #else
         /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
@@ -285,6 +312,7 @@ namespace Qowaiv.Sql
         /// <exception cref="FormatException">
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
+        [Pure]
         public static Timestamp Parse(string s)
             => TryParse(s, out Timestamp val)
             ? val
@@ -297,6 +325,7 @@ namespace Qowaiv.Sql
         /// <returns>
         /// The timestamp if the string was converted successfully, otherwise default.
         /// </returns>
+        [Pure]
         public static Timestamp TryParse(string s) => TryParse(s, out Timestamp val) ? val : default;
 #endif
     }
@@ -305,6 +334,7 @@ namespace Qowaiv.Sql
 namespace Qowaiv.Sql
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Timestamp
@@ -314,6 +344,7 @@ namespace Qowaiv.Sql
         /// <param name = "val">
         /// The <see cref = "string "/> to validate.
         /// </param>
+        [Pure]
         public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
         /// <summary>Returns true if the value represents a valid timestamp.</summary>
         /// <param name = "val">
@@ -322,12 +353,14 @@ namespace Qowaiv.Sql
         /// <param name = "formatProvider">
         /// The <see cref = "IFormatProvider"/> to interpret the <see cref = "string "/> value with.
         /// </param>
+        [Pure]
         public static bool IsValid(string val, IFormatProvider formatProvider) => !string.IsNullOrWhiteSpace(val) && TryParse(val, formatProvider, out _);
 #else
         /// <summary>Returns true if the value represents a valid timestamp.</summary>
         /// <param name="val">
         /// The <see cref="string"/> to validate.
         /// </param>
+        [Pure]
         public static bool IsValid(string val)
             => !string.IsNullOrWhiteSpace(val)
             && TryParse(val, out _);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Reflection;
 
@@ -9,22 +10,15 @@ namespace Qowaiv.Diagnostics
         public const string Empty = "{empty}";
         public const string Unknown = "{unknown}";
 
+        [Pure]
         public static string DebuggerDisplay<Svo>(this Svo svo, string format) where Svo : struct, IFormattable
         {
-            if (svo.Equals(default(Svo)) && HasEmptyValue<Svo>())
-            {
-                return Empty;
-            }
-            else if (svo.Equals(Qowaiv.Unknown.Value(typeof(Svo))))
-            {
-                return Unknown;
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, format, svo);
-            }
+            if (svo.Equals(default(Svo)) && HasEmptyValue<Svo>()) return Empty;
+            else if (svo.Equals(Qowaiv.Unknown.Value(typeof(Svo)))) return Unknown;
+            else return string.Format(CultureInfo.InvariantCulture, format, svo);
         }
 
+        [Pure]
         private static bool HasEmptyValue<Svo>()
             => typeof(Svo)
             .GetCustomAttribute<SingleValueObjectAttribute>()

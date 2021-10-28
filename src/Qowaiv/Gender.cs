@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.Serialization;
@@ -68,6 +69,7 @@ namespace Qowaiv
         public string DisplayName => GetDisplayName(null);
 
         /// <summary>Returns true if the Gender is male or female, otherwise false.</summary>
+        [Pure]
         public bool IsMaleOrFemale() => Equals(Male) || Equals(Female);
 
         /// <summary>Gets the display name for a specified culture.</summary>
@@ -75,12 +77,15 @@ namespace Qowaiv
         /// The culture of the display name.
         /// </param>
         /// <returns></returns>
+        [Pure]
         public string GetDisplayName(CultureInfo culture) => GetResourceString(string.Empty, culture);
 
         /// <summary>Converts the Gender to an int.</summary>
+        [Pure]
         private int ToInt32() => m_Value >> 1;
 
         /// <summary>Converts the Gender to an int.</summary>
+        [Pure]
         private int? ToNullableInt32() => ToNullableInt32s[m_Value];
 
         /// <summary>Deserializes the gender from a JSON number.</summary>
@@ -90,6 +95,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized gender.
         /// </returns>
+        [Pure]
         public static Gender FromJson(double json) => Create((int)json);
 
         /// <summary>Deserializes the gender from a JSON number.</summary>
@@ -99,12 +105,14 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized gender.
         /// </returns>
+        [Pure]
         public static Gender FromJson(long json) => Create((int)json);
 
         /// <summary>Serializes the gender to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => GenderLabels[m_Value];
 
         /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
@@ -129,6 +137,7 @@ namespace Qowaiv
         /// s: as Symbol.
         /// f: as formatted/display name.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
@@ -145,6 +154,7 @@ namespace Qowaiv
         };
 
         /// <summary>Gets an XML string representation of the gender.</summary>
+        [Pure]
         private string ToXmlString() => GenderLabels[m_Value] ?? string.Empty;
 
         /// <summary>Casts a Gender to a <see cref="string"/>.</summary>
@@ -231,6 +241,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// val is not a valid Gender.
         /// </exception>
+        [Pure]
         public static Gender Create(int? val)
             => TryCreate(val, out Gender result)
             ? result
@@ -245,6 +256,7 @@ namespace Qowaiv
         /// <returns>
         /// A Gender if the creation was successfully, otherwise Gender.Empty.
         /// </returns>
+        [Pure]
         public static Gender TryCreate(int? val)
             => TryCreate(val, out Gender result) ? result : default;
 
@@ -273,6 +285,7 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid Gender, otherwise false.</summary>
+        [Pure]
         public static bool IsValid(int? val)
             => val.HasValue
             && val != 0
@@ -287,6 +300,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         private string GetResourceString(string prefix, IFormatProvider formatProvider)
             => GetResourceString(prefix, formatProvider as CultureInfo);
 
@@ -297,6 +311,7 @@ namespace Qowaiv
         /// <param name="culture">
         /// The culture.
         /// </param>
+        [Pure]
         private string GetResourceString(string prefix, CultureInfo culture)
             => IsEmpty()
             ? string.Empty
@@ -385,6 +400,6 @@ namespace Qowaiv
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static readonly object Locker = new object();
+        private static readonly object Locker = new();
     }
 }

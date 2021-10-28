@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Formatting;
 using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -16,6 +17,7 @@ namespace Qowaiv
         /// <returns>
         /// A formatted string representing the object.
         /// </returns>
+        [Pure]
         public static string ToString(this IFormattable formattable, FormattingArguments arguments)
         {
             if (formattable == null)
@@ -39,6 +41,7 @@ namespace Qowaiv
         /// <returns>
         /// A formatted string representing the object.
         /// </returns>
+        [Pure]
         public static string ToString(this IFormattable formattable, FormattingArgumentsCollection argumentsCollection)
         {
             if (formattable == null)

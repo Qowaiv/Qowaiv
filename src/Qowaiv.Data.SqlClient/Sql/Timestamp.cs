@@ -4,6 +4,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -24,6 +25,7 @@ namespace Qowaiv.Sql
         public static readonly Timestamp MaxValue = new Timestamp(ulong.MaxValue);
 
         /// <summary>Represents the timestamp .</summary>
+        [Pure]
         public byte[] ToByteArray() => BitConverter.GetBytes(m_Value);
 
         /// <summary>Deserializes the timestamp from a JSON number.</summary>
@@ -33,6 +35,7 @@ namespace Qowaiv.Sql
         /// <returns>
         /// The deserialized timestamp.
         /// </returns>
+        [Pure]
         public static Timestamp FromJson(double json) => Create((long)json);
 
         /// <summary>Deserializes the timestamp from a JSON number.</summary>
@@ -42,12 +45,14 @@ namespace Qowaiv.Sql
         /// <returns>
         /// The deserialized timestamp.
         /// </returns>
+        [Pure]
         public static Timestamp FromJson(long json) => Create(json);
 
         /// <summary>Serializes the timestamp to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current timestamp for debug purposes.</summary>
@@ -61,6 +66,7 @@ namespace Qowaiv.Sql
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -75,6 +81,7 @@ namespace Qowaiv.Sql
         }
 
         /// <summary>Gets an XML string representation of the timestamp.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a timestamp to a <see cref="string"/>.</summary>
@@ -139,20 +146,23 @@ namespace Qowaiv.Sql
         /// <summary>Creates a timestamp from a Int64. </summary >
         /// <param name="val" >
         /// A decimal describing a timestamp.
-        /// </param >
+        /// </param>
+        [Pure]
         [CLSCompliant(false)]
         public static Timestamp Create(ulong val) => new Timestamp(val);
 
         /// <summary>Creates a timestamp from a Int64. </summary >
         /// <param name="val" >
         /// A decimal describing a timestamp.
-        /// </param >
+        /// </param>
+        [Pure]
         public static Timestamp Create(long val) => Create(BitConverter.GetBytes(val));
 
         /// <summary>Creates a timestamp from a Int64. </summary >
         /// <param name="bytes" >
         /// A byte array describing a timestamp.
-        /// </param >
+        /// </param>
+        [Pure]
         public static Timestamp Create(byte[] bytes)
         {
             Guard.HasAny(bytes, nameof(bytes));

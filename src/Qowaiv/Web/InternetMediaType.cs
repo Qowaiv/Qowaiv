@@ -13,6 +13,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Resources;
@@ -145,6 +146,7 @@ namespace Qowaiv.Web
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current Internet media type for debug purposes.</summary>
@@ -160,20 +162,19 @@ namespace Qowaiv.Web
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-            {
-                return formatted;
-            }
-            return m_Value ?? string.Empty;
-        }
+            => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted
+            : m_Value ?? string.Empty;
 
         /// <summary>Gets an XML string representation of the Internet media type.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts an Internet media type to a <see cref="string"/>.</summary>
         public static explicit operator string(InternetMediaType val) => val.ToString(CultureInfo.CurrentCulture);
+        
         /// <summary>Casts a <see cref="string"/> to a Internet media type.</summary>
         public static explicit operator InternetMediaType(string str) => Cast.InvariantString<InternetMediaType>(TryParse, str);
 
@@ -196,17 +197,17 @@ namespace Qowaiv.Web
             {
                 return true;
             }
-            if (Qowaiv.Unknown.IsUnknown(s, CultureInfo.InvariantCulture))
+            else if (Qowaiv.Unknown.IsUnknown(s, CultureInfo.InvariantCulture))
             {
                 result = Unknown;
                 return true;
             }
-            if (Pattern.IsMatch(s))
+            else if (Pattern.IsMatch(s))
             {
                 result = new InternetMediaType(s.ToLowerInvariant());
                 return true;
             }
-            return false;
+            else return false;
         }
 
         /// <summary>Gets the Internet media type base on the file.</summary>
@@ -216,13 +217,11 @@ namespace Qowaiv.Web
         /// <remarks>
         /// Based on the extension of the file.
         /// </remarks>
+        [Pure]
         public static InternetMediaType FromFile(FileInfo file)
-        {
-            return
-                file is null
-                ? Empty
-                : FromFile(file.Name);
-        }
+            => file is null
+            ? Empty
+            : FromFile(file.Name);
 
         /// <summary>Gets the Internet media type base on the filename.</summary>
         /// <param name="filename">
@@ -231,6 +230,7 @@ namespace Qowaiv.Web
         /// <remarks>
         /// Based on the extension of the filename.
         /// </remarks>
+        [Pure]
         public static InternetMediaType FromFile(string filename)
         {
             if (string.IsNullOrEmpty(filename))

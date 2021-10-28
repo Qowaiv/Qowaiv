@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Qowaiv.Diagnostics.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -106,36 +108,34 @@ namespace Qowaiv.Json
             }
         }
 
-
         /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s specified in the assemblies.</summary>
+        [Pure]
         public static IEnumerable<OpenApiDataTypeAttribute> From(params Assembly[] assemblies)
-        {
-            Guard.NotNull(assemblies, nameof(assemblies));
-            return From(assemblies.SelectMany(assembly => assembly.GetTypes()));
-        }
+            => From(Guard.NotNull(assemblies, nameof(assemblies))
+                .SelectMany(assembly => assembly.GetTypes()));
 
         /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the
         /// specified types that are decorated as such.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        public static IEnumerable<OpenApiDataTypeAttribute> From(params Type[] types) => From(types?.AsEnumerable());
+        [Pure]
+        public static IEnumerable<OpenApiDataTypeAttribute> From(params Type[] types) 
+            => From(types?.AsEnumerable() ?? Array.Empty<Type>());
 
         /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the
         /// specified types that are decorated as such.
         /// </summary>
+        [Pure]
         public static IEnumerable<OpenApiDataTypeAttribute> From(IEnumerable<Type> types)
-        {
-            Guard.NotNull(types, nameof(types));
+            => Guard.NotNull(types, nameof(types))
+            .Where(type => type is not null && type.GetCustomAttributes<OpenApiDataTypeAttribute>().Any())
+            .Select(type => type.GetCustomAttribute<OpenApiDataTypeAttribute>().WithDataType(type));
 
-            foreach(var type in types)
-            {
-                var attr = type?.GetCustomAttribute<OpenApiDataTypeAttribute>();
-                if(attr != null)
-                {
-                    attr.DataType = type;
-                    yield return attr;
-                }
-            }
+        [FluentSyntax]
+        private  OpenApiDataTypeAttribute WithDataType(Type type)
+        {
+            DataType = type;
+            return this;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -22,6 +23,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
         /// than <see cref="DateTime.MaxValue"/>.
         /// </exception>
+        [Pure]
         public static DateTime Add(this DateTime d, DateSpan value) => d.Add(value, false);
 
         /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
@@ -44,12 +46,10 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
         /// than <see cref="DateTime.MaxValue"/>.
         /// </exception>
+        [Pure]
         public static DateTime Add(this DateTime d, DateSpan value, bool daysFirst)
-        {
-            return daysFirst
-                ? d.AddDays(value.Days).AddMonths(value.TotalMonths)
-                : d.AddMonths(value.TotalMonths).AddDays(value.Days)
-            ;
-        }
+            => daysFirst
+            ? d.AddDays(value.Days).AddMonths(value.TotalMonths)
+            : d.AddMonths(value.TotalMonths).AddDays(value.Days);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Qowaiv.Diagnostics.Contracts;
+using System.Globalization;
 
 namespace Qowaiv.TestTools.Globalization
 {
@@ -66,6 +67,7 @@ namespace Qowaiv.TestTools.Globalization
         }
     
         /// <summary>Updates percentage symbols of the culture.</summary>
+        [FluentSyntax]
         public static CultureInfo WithPercentageSymbols(this CultureInfo culture, string percentSymbol, string perMilleSymbol)
         {
             culture ??= CultureInfo.CurrentCulture;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Text
 {
@@ -28,6 +29,7 @@ namespace Qowaiv.Text
         /// <remarks>
         /// Uppercase by default.
         /// </remarks>
+        [Pure]
         public static string ToString(byte[] bytes) => ToString(bytes, false);
 
         /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
@@ -37,6 +39,7 @@ namespace Qowaiv.Text
         /// <param name="lowerCase">
         /// An indicator to specify lower case or upper case.
         /// </param>
+        [Pure]
         public static string ToString(byte[] bytes, bool lowerCase)
         {
             if (bytes == null || bytes.Length == 0)
@@ -90,6 +93,7 @@ namespace Qowaiv.Text
         /// <exception cref="FormatException">
         /// If the string is not a valid Base32 string.
         /// </exception>
+        [Pure]
         public static byte[] GetBytes(string s)
         {
             if (TryGetBytes(s, out byte[] bytes))
@@ -109,6 +113,7 @@ namespace Qowaiv.Text
         /// <returns>
         /// True if the string is a Base32 string, otherwise false.
         /// </returns>
+        [Pure]
         public static bool TryGetBytes(string s, out byte[] bytes)
         {
             if (string.IsNullOrEmpty(s))

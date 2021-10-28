@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -35,6 +36,7 @@ namespace Qowaiv
         /// To prevent unexpected behaviour, the result is always converted to
         /// <see cref="DateTimeKind.Utc"/> if needed.
         /// </remarks>
+        [Pure]
         public static DateTime UtcNow()
         {
             var utcNow = (threadUtcNow ?? globalUtcNow).Invoke();
@@ -47,21 +49,25 @@ namespace Qowaiv
         public static TimeZoneInfo TimeZone => threadTimeZone ?? globalTimeZone;
 
         /// <summary>Gets the current <see cref="LocalDateTime"/>.</summary>
+        [Pure]
         public static LocalDateTime Now() => Now(TimeZone);
 
         /// <summary>Gets the current <see cref="LocalDateTime"/> for the specified time zone.</summary>
         /// <param name="timeZone">
         /// The specified time zone.
         /// </param>
+        [Pure]
         public static LocalDateTime Now(TimeZoneInfo timeZone) => TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), Guard.NotNull(timeZone, nameof(timeZone)));
 
         /// <summary>Gets the current <see cref="DateTimeOffset"/>.</summary>
+        [Pure]
         public static DateTimeOffset NowWithOffset() => NowWithOffset(TimeZone);
 
         /// <summary>Gets the current <see cref="DateTimeOffset"/> for the specified time zone.</summary>
         /// <param name="timeZone">
         /// The specified time zone.
         /// </param>
+        [Pure]
         public static DateTimeOffset NowWithOffset(TimeZoneInfo timeZone)
         {
             Guard.NotNull(timeZone, nameof(timeZone));
@@ -71,21 +77,25 @@ namespace Qowaiv
         }
 
         /// <summary>Gets the yesterday for the local <see cref="DateTime"/>.</summary>
+        [Pure]
         public static Date Yesterday() => Yesterday(TimeZone);
 
         /// <summary>Gets the yesterday for the specified time zone.</summary>
         /// <param name="timeZone">
         /// The specified time zone.
         /// </param>
+        [Pure]
         public static Date Yesterday(TimeZoneInfo timeZone) => Today(timeZone).AddDays(-1);
 
         /// <summary>Gets the today for the local <see cref="DateTime"/>.</summary>
+        [Pure]
         public static Date Today() => Today(TimeZone);
 
         /// <summary>Gets the today for the specified time zone.</summary>
         /// <param name="timeZone">
         /// The specified time zone.
         /// </param>
+        [Pure]
         public static Date Today(TimeZoneInfo timeZone)
         {
             Guard.NotNull(timeZone, nameof(timeZone));
@@ -93,11 +103,14 @@ namespace Qowaiv
         }
 
         /// <summary>Gets the tomorrow for the local <see cref="DateTime"/>.</summary>
+        [Pure]
         public static Date Tomorrow() => Tomorrow(TimeZone);
+
         /// <summary>Gets the tomorrow for the specified time zone.</summary>
         /// <param name="timeZone">
         /// The specified time zone.
         /// </param>
+        [Pure]
         public static Date Tomorrow(TimeZoneInfo timeZone) => Today(timeZone).AddDays(+1);
 
         /// <summary>Sets the <see cref="DateTime"/> function globally (for the full Application Domain).</summary>

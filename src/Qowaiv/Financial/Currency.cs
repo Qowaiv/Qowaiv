@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -96,21 +97,22 @@ namespace Qowaiv.Financial
         /// The culture of the display name.
         /// </param>
         /// <returns></returns>
+        [Pure]
         public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
 
         /// <summary>Returns true if the currency exists at the given date, otherwise false.</summary>
         /// <param name="measurement">
         /// The date of existence.
         /// </param>
+        [Pure]
         public bool ExistsOnDate(Date measurement)
-        {
-            return StartDate <= measurement && (!EndDate.HasValue || EndDate.Value >= measurement);
-        }
+            => StartDate <= measurement && (!EndDate.HasValue || EndDate.Value >= measurement);
 
         /// <summary>Gets the countries using this currency at the given date.</summary>
         /// <param name="measurement">
         /// The date of measurement.
         /// </param>
+        [Pure]
         public IEnumerable<Country> GetCountries(Date measurement)
         {
             var currency = this;
@@ -125,18 +127,20 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The deserialized currency.
         /// </returns>
+        [Pure]
         public static Currency FromJson(long json) => FromJson(json.ToString("000", CultureInfo.InvariantCulture));
 
         /// <summary>Serializes the currency to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => this.DebuggerDisplay("{0:e (i/0)}");
-        
+
         /// <summary>Returns a formatted <see cref="string"/> that represents the current currency.</summary>
         /// <param name="format">
         /// The format that describes the formatting.
@@ -154,6 +158,7 @@ namespace Qowaiv.Financial
         /// e: as English name.
         /// f: as formatted/display name.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
@@ -173,13 +178,14 @@ namespace Qowaiv.Financial
 
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
+        [Pure]
         object IFormatProvider.GetFormat(Type formatType)
-        {
-            if (formatType != typeof(NumberFormatInfo)) { return null; }
-            return GetNumberFormatInfo(CultureInfo.CurrentCulture);
-        }
+            => formatType == typeof(NumberFormatInfo)
+            ? GetNumberFormatInfo(CultureInfo.CurrentCulture)
+            : null;
 
         /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
         /// <remarks>
@@ -189,6 +195,7 @@ namespace Qowaiv.Financial
         /// currency properties of the <see cref="NumberFormatInfo"/> instead of
         /// the number properties, so we copy them for desired behavior.
         /// </remarks>
+        [Pure]
         internal NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
         {
             var info = NumberFormatInfo.GetInstance(formatProvider);
@@ -254,10 +261,8 @@ namespace Qowaiv.Financial
         /// <returns>
         /// A list of existing currencies.
         /// </returns>
-        public static IEnumerable<Currency> GetExisting()
-        {
-            return GetExisting(Date.Today);
-        }
+        [Pure]
+        public static IEnumerable<Currency> GetExisting() => GetExisting(Date.Today);
 
         /// <summary>Gets all countries existing on the specified measurement date.</summary>
         /// <param name="measurement">
@@ -266,17 +271,16 @@ namespace Qowaiv.Financial
         /// <returns>
         /// A list of existing countries.
         /// </returns>
+        [Pure]
         public static IEnumerable<Currency> GetExisting(Date measurement)
-        {
-            return AllCurrencies.Where(currency => currency.ExistsOnDate(measurement));
-        }
+            => AllCurrencies.Where(currency => currency.ExistsOnDate(measurement));
 
         /// <summary>Gets a collection of all country info's.</summary>
         /// <remarks>
         /// We'd like to call this All, but because of CLS-compliance, we can not,
         /// because ALL exists.
         /// </remarks>
-        public static readonly ReadOnlyCollection<Currency> AllCurrencies = new ReadOnlyCollection<Currency>(
+        public static readonly ReadOnlyCollection<Currency> AllCurrencies = new(
             ResourceManager
                 .GetString("All")
                 .Split(';')
@@ -342,6 +346,7 @@ namespace Qowaiv.Financial
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         internal string GetResourceString(string postfix, IFormatProvider formatProvider)
             => GetResourceString(postfix, formatProvider as CultureInfo);
 
@@ -352,6 +357,7 @@ namespace Qowaiv.Financial
         /// <param name="culture">
         /// The culture.
         /// </param>
+        [Pure]
         internal string GetResourceString(string postfix, CultureInfo culture)
             => IsEmpty()
             ? string.Empty

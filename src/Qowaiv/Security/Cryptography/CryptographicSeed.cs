@@ -14,6 +14,7 @@ using Qowaiv.Text;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -35,6 +36,7 @@ namespace Qowaiv.Security.Cryptography
         public int Length => m_Value is null ? 0 : m_Value.Length;
 
         /// <summary>Returns a byte array that contains the value of this instance.</summary>
+        [Pure]
         public byte[] ToByteArray()
         {
             var clone = new byte[Length];
@@ -50,6 +52,7 @@ namespace Qowaiv.Security.Cryptography
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => Length == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current cryptographic seed for debug purposes.</summary>
@@ -65,6 +68,7 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -75,9 +79,11 @@ namespace Qowaiv.Security.Cryptography
         }
 
         /// <summary>Gets an XML string representation of the cryptographic seed.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <inheritdoc />
+        [Pure]
         public bool Equals(CryptographicSeed other)
         {
             if (Length == other.Length)
@@ -92,6 +98,7 @@ namespace Qowaiv.Security.Cryptography
         }
 
         /// <inheritdoc />
+        [Pure]
         public override int GetHashCode()
         {
             var hash = 0;
@@ -103,6 +110,7 @@ namespace Qowaiv.Security.Cryptography
         }
 
         /// <inheritdoc />
+        [Pure]
         public int CompareTo(CryptographicSeed other)
         {
             var minLength = Math.Min(Length, other.Length);
@@ -160,6 +168,7 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="val" >
         /// A byte array describing a cryptographic seed.
         /// </param >
+        [Pure]
         public static CryptographicSeed Create(byte[] val)
         {
             if (val == null || val.Length == 0)
@@ -176,12 +185,14 @@ namespace Qowaiv.Security.Cryptography
         /// <param name="id" >
         /// A GUID describing a cryptographic seed.
         /// </param >
+        [Pure]
         public static CryptographicSeed Create(Guid id) => Create(id.ToByteArray());
 
         /// <summary>Creates a cryptographic seed from a UUID.</summary >
         /// <param name="id" >
         /// A UUID describing a cryptographic seed.
         /// </param >
+        [Pure]
         public static CryptographicSeed Create(Uuid id) => Create(id.ToByteArray());
     }
 }

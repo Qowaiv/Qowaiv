@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text;
@@ -156,11 +157,13 @@ namespace Qowaiv.Text
         /// <exception cref="ArgumentNullException">
         /// input is null.
         /// </exception>
+        [Pure]
         public bool IsMatch(string input)
         {
             Guard.NotNull(input, nameof(input));
             return IsMatch(input, 0, 0);
         }
+
         /// <summary>Handles the actual matching.</summary>
         /// <param name="input">
         /// The input to match.
@@ -172,6 +175,7 @@ namespace Qowaiv.Text
         /// the current position of the input.
         /// </param>
         /// <returns></returns>
+        [Pure]
         private bool IsMatch(string input, int p, int i)
         {
             // At least on of the indexes is at the end.
@@ -218,6 +222,8 @@ namespace Qowaiv.Text
             // No match, exit.
             return false;
         }
+
+        [Pure]
         private bool Equals(char l, char r)
         {
             if (l == r) { return true; }
@@ -245,10 +251,10 @@ namespace Qowaiv.Text
         /// <exception cref="ArgumentNullException">
         /// input is null.
         /// </exception>
+        [Pure]
         public static bool IsMatch(string pattern, string input)
-        {
-            return IsMatch(pattern, input, WildcardPatternOptions.None, StringComparison.CurrentCulture);
-        }
+            => IsMatch(pattern, input, WildcardPatternOptions.None, StringComparison.CurrentCulture);
+
         /// <summary>Indicates whether the specified wildcard pattern finds a match in the specified input string.</summary>
         /// <param name="pattern">
         /// The string that represents the wildcard pattern.
@@ -268,6 +274,7 @@ namespace Qowaiv.Text
         /// <exception cref="ArgumentNullException">
         /// input is null.
         /// </exception>
+        [Pure]
         public static bool IsMatch(string pattern, string input, WildcardPatternOptions options, StringComparison comparisonType)
         {
             var wildcard = new WildcardPattern(pattern, options, comparisonType);

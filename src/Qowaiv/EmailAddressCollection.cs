@@ -1,12 +1,14 @@
 ﻿#pragma warning disable S927 // parameter names should match base declaration and other partial definitions
 // In this class, it makes more sense to rename item to email.
 
+using Qowaiv.Diagnostics.Contracts;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -70,6 +72,7 @@ namespace Qowaiv
         /// <param name="item">
         /// The email address to add.
         /// </param>
+        [CollectionMutation]
         public bool Add(EmailAddress item)
         {
             if (item.IsEmptyOrUnknown()) { return false; }
@@ -109,6 +112,7 @@ namespace Qowaiv
 
         /// <summary>Returns true if the collection contains the specified email address.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public bool Contains(EmailAddress item) => hashset.Contains(item);
 
         /// <summary>Copies the email addresses of the collection to an
@@ -119,14 +123,17 @@ namespace Qowaiv
 
         /// <summary>Removes the email address from the collection.</summary>
         [ExcludeFromCodeCoverage]
+        [CollectionMutation]
         public bool Remove(EmailAddress item) => hashset.Remove(item);
 
         /// <summary>Gets an enumerator to loop through all email addresses of the collection.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public IEnumerator<EmailAddress> GetEnumerator() => hashset.GetEnumerator();
 
         /// <summary>Gets an enumerator to loop through all email addresses of the collection.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion
@@ -143,26 +150,32 @@ namespace Qowaiv
 
         /// <summary>Determines whether the current set is a proper (strict) subset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public bool IsProperSubsetOf(IEnumerable<EmailAddress> other) => hashset.IsProperSubsetOf(other);
 
         /// <summary>Determines whether the current set is a proper (strict) superset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public bool IsProperSupersetOf(IEnumerable<EmailAddress> other) => hashset.IsProperSupersetOf(other);
 
         /// <summary>Determines whether a set is a subset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public bool IsSubsetOf(IEnumerable<EmailAddress> other) => hashset.IsSubsetOf(other);
 
         /// <summary>Determines whether a set is a superset of a specified collection.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public bool IsSupersetOf(IEnumerable<EmailAddress> other) => hashset.IsSupersetOf(other);
 
         /// <summary>Determines whether the current set overlaps with the specified collection.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public bool Overlaps(IEnumerable<EmailAddress> other) => hashset.Overlaps(other);
 
         /// <summary>Determines whether the current set and the specified collection contain the same elements.</summary>
         [ExcludeFromCodeCoverage]
+        [Pure]
         public bool SetEquals(IEnumerable<EmailAddress> other) => hashset.SetEquals(other);
 
         /// <summary>Modifies the current set so that it contains only elements that are present
@@ -210,12 +223,14 @@ namespace Qowaiv
         /// <remarks>
         /// Returns null as no schema is required.
         /// </remarks>
+        [Pure]
         XmlSchema IXmlSerializable.GetSchema() { return GetSchema(); }
 
         /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize an email address.</summary>
         /// <remarks>
         /// this is used by IXmlSerializable.GetSchema() so that it can be changed by derived classes.
         /// </remarks>
+        [Pure]
         protected virtual XmlSchema GetSchema() { return null; }
 
         /// <summary>Reads the email address from an <see href="XmlReader"/>.</summary>
@@ -248,7 +263,7 @@ namespace Qowaiv
             Guard.NotNull(writer, nameof(writer));
             writer.WriteString(ToString(CultureInfo.InvariantCulture));
         }
-      
+
         /// <summary>Deserializes the email address collection from a JSON string.</summary>
         /// <param name="json">
         /// The JSON number to deserialize.
@@ -256,12 +271,14 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized email address collection.
         /// </returns>
+        [Pure]
         public static EmailAddressCollection FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
 
         /// <summary>Serializes the email address collection to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public virtual string ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
         #endregion
@@ -269,18 +286,21 @@ namespace Qowaiv
         #region IFormattable / ToString
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address collection.</summary>
+        [Pure]
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
         /// <param name="format">
         /// The format that describes the formatting.
         /// </param>
+        [Pure]
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
@@ -290,6 +310,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -314,6 +335,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
+        [Pure]
         public static EmailAddressCollection Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
 
         /// <summary>Converts the string to an email address collection.</summary>
@@ -329,6 +351,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// s is not in the correct format.
         /// </exception>
+        [Pure]
         public static EmailAddressCollection Parse(string s, IFormatProvider formatProvider)
         {
             if (TryParse(s, formatProvider, out EmailAddressCollection val))
@@ -347,6 +370,7 @@ namespace Qowaiv
         /// <returns>
         /// The email address if the string was converted successfully, otherwise an empty EmailAddressCollection().
         /// </returns>
+        [Pure]
         public static EmailAddressCollection TryParse(string s)
         {
             if (TryParse(s, out EmailAddressCollection val))
@@ -388,8 +412,6 @@ namespace Qowaiv
         /// <returns>
         /// True if the string was converted successfully, otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "2",
-            Justification = "result is set when called Add().")]
         public static bool TryParse(string s, IFormatProvider formatProvider, out EmailAddressCollection result)
         {
             result = new EmailAddressCollection();

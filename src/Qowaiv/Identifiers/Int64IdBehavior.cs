@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Identifiers
@@ -11,27 +12,36 @@ namespace Qowaiv.Identifiers
         public sealed override Type BaseType => typeof(long);
 
         /// <inheritdoc/>
+        [Pure]
         public override int Compare(object x, object y) => Id(x).CompareTo(Id(y));
 
         /// <inheritdoc/>
+        [Pure]
         public override bool Equals(object x, object y) => Id(x).Equals(Id(y));
 
         /// <inheritdoc/>
+        [Pure]
         public override int GetHashCode(object obj) => Id(obj).GetHashCode();
 
         /// <inheritdoc/>
+        [Pure]
         public override byte[] ToByteArray(object obj)
-            => obj is long num ? BitConverter.GetBytes(num) : Array.Empty<byte>();
+            => obj is long num 
+            ? BitConverter.GetBytes(num) 
+            : Array.Empty<byte>();
 
         /// <inheritdoc/>
+        [Pure]
         public override object FromBytes(byte[] bytes)
             => BitConverter.ToInt64(bytes, 0);
 
         /// <inheritdoc/>
+        [Pure]
         public override string ToString(object obj, string format, IFormatProvider formatProvider)
             => Id(obj).ToString(format, formatProvider);
 
         /// <inheritdoc/>
+        [Pure]
         public sealed override object FromJson(long obj)
         {
             if (obj == 0) return null;
@@ -40,6 +50,7 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc/>
+        [Pure]
         public override object ToJson(object obj) => Id(obj);
 
         /// <inheritdoc/>
@@ -78,11 +89,13 @@ namespace Qowaiv.Identifiers
         }
 
         /// <inheritdoc />
+        [Pure]
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             => sourceType == typeof(long)
             || sourceType == typeof(int)
             || base.CanConvertFrom(context, sourceType);
 
+        [Pure]
         private static long Id(object obj) => obj is long number ? number : 0;
     }
 }

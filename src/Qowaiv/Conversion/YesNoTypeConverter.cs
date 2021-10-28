@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion
@@ -6,6 +7,7 @@ namespace Qowaiv.Conversion
     public class YesNoTypeConverter : SvoTypeConverter<YesNo>
     {
         /// <inheritdoc/>
+        [Pure]
         protected override YesNo FromString(string str, CultureInfo culture) => YesNo.Parse(str, culture);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -22,6 +23,7 @@ namespace Qowaiv
         /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
         /// than <see cref="DateTime.MaxValue"/>.
         /// </exception>
+        [Pure]
         public static DateTime Add(this DateTime d, MonthSpan value) => d.AddMonths(value.TotalMonths);
     }
 }

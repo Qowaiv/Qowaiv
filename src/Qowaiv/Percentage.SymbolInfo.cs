@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Text;
 using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv
@@ -30,12 +31,17 @@ namespace Qowaiv
 
             public SymbolPosition Symbol { get;}
             public CharBuffer Buffer { get;  }
+
+            [Pure]
             public override string ToString() => Buffer;
 
+            [Pure]
             public bool Equals(SymbolInfo other) => base.Equals(other);
 
+            [Pure]
             private static bool NotNone(SymbolPosition symbol) => symbol != SymbolPosition.None;
 
+            [Pure]
             public static SymbolInfo Resolve(CharBuffer buffer, NumberFormatInfo numberInfo)
             {
                 var symbol = SymbolPosition.None;
@@ -97,11 +103,11 @@ namespace Qowaiv
                     symbol = SymbolPosition.PerTenThousandAfter;
                 }
 
-                return buffer.Contains(PercentSymbol) ||
-                    buffer.Contains(PerMilleSymbol) ||
-                    buffer.Contains(PerTenThousandSymbol) ||
-                    buffer.Contains(numberInfo.PercentSymbol) ||
-                    buffer.Contains(numberInfo.PerMilleSymbol)
+                return buffer.Contains(PercentSymbol)
+                    || buffer.Contains(PerMilleSymbol)
+                    || buffer.Contains(PerTenThousandSymbol)
+                    || buffer.Contains(numberInfo.PercentSymbol)
+                    || buffer.Contains(numberInfo.PerMilleSymbol)
                     ? Invalid
                     : new SymbolInfo(symbol, buffer);
             }

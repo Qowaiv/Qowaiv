@@ -15,6 +15,7 @@ using Qowaiv.Text;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -90,6 +91,7 @@ namespace Qowaiv.Financial
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
@@ -103,6 +105,7 @@ namespace Qowaiv.Financial
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -115,10 +118,12 @@ namespace Qowaiv.Financial
         }
 
         /// <summary>Gets an XML string representation of the BIC.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Casts a BIC to a <see cref="string"/>.</summary>
         public static explicit operator string(BusinessIdentifierCode val) => val.ToString(CultureInfo.CurrentCulture);
+        
         /// <summary>Casts a <see cref="string"/> to a BIC.</summary>
         public static explicit operator BusinessIdentifierCode(string str) => Cast.String<BusinessIdentifierCode>(TryParse, str);
 

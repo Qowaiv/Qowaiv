@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -9,6 +10,7 @@ namespace Qowaiv
         private const int SignMask = unchecked((int)0x80000000);
 
         /// <summary>Returns true if the rounding is direct; the nearest of the two options is not relevant.</summary>
+        [Pure]
         public static bool IsDirectRounding(this DecimalRounding mode)
             => mode >= DecimalRounding.Truncate && mode <= DecimalRounding.Floor;
 
@@ -17,6 +19,7 @@ namespace Qowaiv
         public static bool IsNearestRouding(this DecimalRounding mode) => mode.IsNearestRounding();
 
         /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
+        [Pure]
         public static bool IsNearestRounding(this DecimalRounding mode)
             => mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;
 
@@ -30,6 +33,7 @@ namespace Qowaiv
         /// <returns>
         /// A rounded number that is multiple to the specified factor.
         /// </returns>
+        [Pure]
         public static decimal RoundToMultiple(this decimal value, decimal multipleOf) => value.RoundToMultiple(multipleOf, DecimalRounding.ToEven);
 
         /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
@@ -45,6 +49,7 @@ namespace Qowaiv
         /// <returns>
         /// A rounded number that is multiple to the specified factor.
         /// </returns>
+        [Pure]
         public static decimal RoundToMultiple(this decimal value, decimal multipleOf, DecimalRounding mode)
         {
             Guard.Positive(multipleOf, nameof(multipleOf));
@@ -59,6 +64,7 @@ namespace Qowaiv
         /// The integer that is nearest to the <paramref name="value"/> parameter. If the <paramref name="value"/> is halfway between two integers,
         /// it is rounded away from zero.
         /// </returns>
+        [Pure]
         public static decimal Round(this decimal value) => value.Round(0);
 
         /// <summary>Rounds a decimal value to a specified number of decimal places.</summary>
@@ -74,6 +80,7 @@ namespace Qowaiv
         /// <remarks>
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
+        [Pure]
         public static decimal Round(this decimal value, int decimals) => value.Round(decimals, DecimalRounding.ToEven);
 
         /// <summary>Rounds a decimal value to a specified number of decimal places.</summary>
@@ -92,6 +99,7 @@ namespace Qowaiv
         /// <remarks>
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
+        [Pure]
         public static decimal Round(this decimal value, int decimals, DecimalRounding mode)
         {
             Guard.DefinedEnum(mode, nameof(mode));
@@ -153,14 +161,11 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the rounding should be up, otherwise false.</summary>
+        [Pure]
         private static bool ShouldRoundUp(ulong b0, ulong remainder, ulong divisor, DecimalRounding mode, bool isPositive)
         {
-            if (remainder == 0 || mode == DecimalRounding.Truncate)
-            {
-                return false;
-            }
-
-            if (mode.IsDirectRounding())
+            if (remainder == 0 || mode == DecimalRounding.Truncate) return false;
+            else if (mode.IsDirectRounding())
             {
                 switch (mode)
                 {
@@ -175,7 +180,6 @@ namespace Qowaiv
                         return !isPositive;
                 }
             }
-
             var halfway = divisor >> 1;
 
             if (remainder == halfway && mode.IsNearestRounding())
@@ -202,17 +206,16 @@ namespace Qowaiv
                         return (Random().Next() & 1) == 0;
                 }
             }
-
             if (mode == DecimalRounding.StochasticRounding)
             {
                 var ratio = remainder / (double)divisor;
                 return Random().NextDouble() <= ratio;
             }
-
             return remainder >= halfway;
         }
 
         /// <summary>Multiplies the decimal with an <see cref="uint"/> factor.</summary>
+        [Pure]
         private static void InternalMultiply(ref uint b0, ref uint b1, ref uint b2, uint factor)
         {
             ulong overflow = 0;
@@ -244,6 +247,7 @@ namespace Qowaiv
         }
 
         /// <summary>Divides the decimal with an <see cref="uint"/> divisor.</summary>
+        [Pure]
         private static ulong InternalDivide(ref uint b0, ref uint b1, ref uint b2, uint divisor)
         {
             ulong remainder = 0;
@@ -270,6 +274,7 @@ namespace Qowaiv
         }
 
         /// <summary>Adds an <see cref="uint"/> to the decimal.</summary>
+        [Pure]
         private static void InternalAdd(ref uint b0, ref uint b1, ref uint b2, uint addition)
         {
             ulong overflow;
@@ -320,6 +325,7 @@ namespace Qowaiv
         /// <remarks>
         /// creates a new instance if required.
         /// </remarks>
+        [Pure]
         private static Random Random()
         {
             if (_rnd is null)

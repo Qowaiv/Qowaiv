@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
@@ -89,45 +90,55 @@ namespace Qowaiv.IO
         #region StreamSize manipulation
 
         /// <summary>Gets the sign of the stream size.</summary>
+        [Pure]
         public int Sign() => m_Value.Sign();
 
         /// <summary>Returns the absolute value of stream size.</summary>
+        [Pure]
         public StreamSize Abs() => m_Value.Abs();
 
         /// <summary>Increases the stream size with one byte.</summary>
+        [Pure]
         internal StreamSize Increment() => Add(Byte);
 
         /// <summary>Decreases the stream size with one percent.</summary>
+        [Pure]
         internal StreamSize Decrement() => Subtract(Byte);
 
         /// <summary>Pluses the stream size.</summary>
+        [Pure]
         internal StreamSize Plus() => +m_Value;
 
         /// <summary>Negates the stream size.</summary>
+        [Pure]
         internal StreamSize Negate() => -m_Value;
 
         /// <summary>Adds a stream size to the current stream size.</summary>
         /// <param name="streamSize">
         /// The stream size to add.
         /// </param>
+        [Pure]
         public StreamSize Add(StreamSize streamSize) => m_Value + streamSize.m_Value;
 
         /// <summary>Adds the specified percentage to the stream size.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public StreamSize Add(Percentage p) => m_Value.Add(p);
 
         /// <summary>Subtracts a stream size from the current stream size.</summary>
         /// <param name="streamSize">
         /// The stream size to Subtract.
         /// </param>
+        [Pure]
         public StreamSize Subtract(StreamSize streamSize) => m_Value - streamSize.m_Value;
 
         /// <summary>AddsSubtract the specified percentage from the stream size.</summary>
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public StreamSize Subtract(Percentage p) => m_Value.Subtract(p);
 
         #region Multiply
@@ -136,42 +147,49 @@ namespace Qowaiv.IO
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Multiply(decimal factor) => (StreamSize)(m_Value * factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Multiply(double factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Multiply(float factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Multiply(Percentage factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Multiply(long factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Multiply(int factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Multiply(short factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
@@ -179,6 +197,7 @@ namespace Qowaiv.IO
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public StreamSize Multiply(ulong factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
@@ -186,6 +205,7 @@ namespace Qowaiv.IO
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public StreamSize Multiply(uint factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the stream size with a specified factor.</summary>
@@ -193,6 +213,7 @@ namespace Qowaiv.IO
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public StreamSize Multiply(ushort factor) => Multiply((decimal)factor);
 
         #endregion
@@ -203,42 +224,49 @@ namespace Qowaiv.IO
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Divide(decimal factor) => (StreamSize)(m_Value / factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Divide(double factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Divide(float factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Divide(Percentage factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Divide(long factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Divide(int factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public StreamSize Divide(short factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
@@ -246,6 +274,7 @@ namespace Qowaiv.IO
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public StreamSize Divide(ulong factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
@@ -253,6 +282,7 @@ namespace Qowaiv.IO
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public StreamSize Divide(uint factor) => Divide((decimal)factor);
 
         /// <summary>Divide the stream size by a specified factor.</summary>
@@ -260,6 +290,7 @@ namespace Qowaiv.IO
         /// The factor to multiply with.
         /// </param>
         [CLSCompliant(false)]
+        [Pure]
         public StreamSize Divide(ushort factor) => Divide((decimal)factor);
 
         #endregion
@@ -363,6 +394,7 @@ namespace Qowaiv.IO
         /// <returns>
         /// The deserialized stream size.
         /// </returns>
+        [Pure]
         public static StreamSize FromJson(double json) => new StreamSize((long)json);
 
         /// <summary>Deserializes the stream size from a JSON number.</summary>
@@ -372,12 +404,14 @@ namespace Qowaiv.IO
         /// <returns>
         /// The deserialized stream size.
         /// </returns>
+        [Pure]
         public static StreamSize FromJson(long json) => new StreamSize(json);
 
         /// <summary>Serializes the stream size to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON number.
         /// </returns>
+        [Pure]
         public long ToJson() => m_Value;
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
@@ -385,18 +419,21 @@ namespace Qowaiv.IO
         private string DebuggerDisplay => this.DebuggerDisplay("{0: F}");
 
         /// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>
+        [Pure]
         public override string ToString() => ToString(CultureInfo.CurrentCulture);
-
+      
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
         /// <param name="format">
         /// The format that describes the formatting.
         /// </param>
+        [Pure]
         public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
         /// <param name="provider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(IFormatProvider provider) => ToString("0 byte", provider);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
@@ -431,6 +468,7 @@ namespace Qowaiv.IO
         /// 1238900.ToString("#,##0.00 Kilobyte") => 1,239.00 Kilobyte
         /// 1238900.ToString("#,##0") => 1,238,900
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -454,11 +492,13 @@ namespace Qowaiv.IO
         }
 
         /// <summary>Gets an XML string representation of the stream size.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Bind XML value.</summary>
         partial void OnReadXml(StreamSize value) => m_Value = value.m_Value;
 
+        [Pure]
         private string ToFormattedString(IFormatProvider formatProvider, Match match)
         {
             var format = match.Groups["format"].Value;
@@ -597,62 +637,74 @@ namespace Qowaiv.IO
         /// <param name="size">
         /// The size in kilobytes.
         /// </param>
+        [Pure]
         public static StreamSize FromKilobytes(double size) => KB * size;
 
         /// <summary>Creates a stream size based on the size in megabytes.</summary>
         /// <param name="size">
         /// The size in megabytes.
         /// </param>
+        [Pure]
         public static StreamSize FromMegabytes(double size) => MB * size;
 
         /// <summary>Creates a stream size based on the size in gigabytes.</summary>
         /// <param name="size">
         /// The size in gigabytes.
         /// </param>
+        [Pure]
         public static StreamSize FromGigabytes(double size) => GB * size;
 
         /// <summary>Creates a stream size based on the size in terabytes.</summary>
         /// <param name="size">
         /// The size in terabytes.
         /// </param>
+        [Pure]
         public static StreamSize FromTerabytes(double size) => TB * size;
 
         /// <summary>Creates a stream size based on the size in kibibytes.</summary>
         /// <param name="size">
         /// The size in kilobytes.
         /// </param>
+        [Pure]
         public static StreamSize FromKibibytes(double size) => KiB * size;
 
         /// <summary>Creates a stream size based on the size in mebibytes.</summary>
         /// <param name="size">
         /// The size in megabytes.
         /// </param>
+        [Pure]
         public static StreamSize FromMebibytes(double size) => MiB * size;
 
         /// <summary>Creates a stream size based on the size in gigabytes.</summary>
         /// <param name="size">
         /// The size in gigabytes.
         /// </param>
+        [Pure]
         public static StreamSize FromGibibytes(double size) => GiB * size;
 
         /// <summary>Creates a stream size based on the size in tebibytes.</summary>
         /// <param name="size">
-        /// The size in terabytes.
+        /// The size in tebibytes.
         /// </param>
+        [Pure]
         public static StreamSize FromTebibytes(double size) => TiB * size;
 
         /// <summary>Creates a stream size from a file info.</summary>
+        [Pure]
         public static StreamSize FromByteArray(byte[] bytes)
-            => new StreamSize(Guard.NotNull(bytes, nameof(bytes)).Length);
+            => new(Guard.NotNull(bytes, nameof(bytes)).Length);
 
         /// <summary>Creates a stream size from a file info.</summary>
+        [Pure]
         public static StreamSize FromFileInfo(FileInfo fileInfo)
-            => new StreamSize(Guard.NotNull(fileInfo, nameof(fileInfo)).Length);
+            => new(Guard.NotNull(fileInfo, nameof(fileInfo)).Length);
 
         /// <summary>Creates a stream size from a stream.</summary>
+        [Pure]
         public static StreamSize FromStream(Stream stream)
-            => new StreamSize(Guard.NotNull(stream, nameof(stream)).Length);
+            => new(Guard.NotNull(stream, nameof(stream)).Length);
 
+        [Pure]
         private static string GetStreamSizeMarker(string input)
         {
             if (string.IsNullOrEmpty(input)) { return string.Empty; }
@@ -672,11 +724,14 @@ namespace Qowaiv.IO
             }
             return string.Empty;
         }
+
+        [Pure]
         private static string GetWithoutStreamSizeMarker(string input, string streamSizeMarker)
             => string.IsNullOrEmpty(streamSizeMarker)
             ? input
             : input.Substring(0, input.Length - streamSizeMarker.Length);
 
+        [Pure]
         private static long GetMultiplier(string streamSizeMarker)
             => string.IsNullOrEmpty(streamSizeMarker)
             ? 1

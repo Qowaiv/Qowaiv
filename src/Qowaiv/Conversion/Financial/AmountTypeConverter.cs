@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Financial;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion.Financial
@@ -7,12 +8,15 @@ namespace Qowaiv.Conversion.Financial
     public class AmountTypeConverter : NumericTypeConverter<Amount, decimal>
     {
         /// <inheritdoc/>
+        [Pure]
         protected override Amount FromRaw(decimal raw) => (Amount)raw;
 
         /// <inheritdoc/>
+        [Pure]
         protected override Amount FromString(string str, CultureInfo culture) => Amount.Parse(str, culture);
 
         /// <inheritdoc/>
+        [Pure]
         protected override decimal ToRaw(Amount svo) => (decimal)svo;
     }
 }

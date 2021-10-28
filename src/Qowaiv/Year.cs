@@ -9,6 +9,7 @@ using Qowaiv.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -52,6 +53,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized year.
         /// </returns>
+        [Pure]
         public static Year FromJson(double json) => Create(Cast.ToInt<Year>(json));
 
         /// <summary>Deserializes the year from a JSON number.</summary>
@@ -61,26 +63,19 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized year.
         /// </returns>
+        [Pure]
         public static Year FromJson(long json) => Create(Cast.ToInt<Year>(json));
 
         /// <summary>Serializes the year to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON node.
         /// </returns>
+        [Pure]
         public object ToJson()
         {
-            if (IsEmpty())
-            {
-                return null;
-            }
-            else if (IsUnknown())
-            {
-                return "?";
-            }
-            else
-            {
-                return (long)m_Value;
-            }
+            if (IsEmpty()) return null;
+            else if (IsUnknown()) return "?";
+            else return (long)m_Value;
         }
 
         /// <summary>Returns a <see cref="string"/> that represents the current year for debug purposes.</summary>
@@ -94,6 +89,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -106,6 +102,7 @@ namespace Qowaiv
         }
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
@@ -120,6 +117,7 @@ namespace Qowaiv
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
         public static bool operator >=(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) >= 0;
 
+        [Pure]
         private static bool HaveValue(Year l, Year r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
 
         /// <summary>Casts a year to a <see cref="string"/>.</summary>
@@ -177,6 +175,7 @@ namespace Qowaiv
         /// <exception cref="FormatException" >
         /// val is not a valid year.
         /// </exception >
+        [Pure]
         public static Year Create(int? val)
             => TryCreate(val, out Year result)
             ? result
@@ -191,6 +190,7 @@ namespace Qowaiv
         /// <returns >
         /// A year if the creation was successfully, otherwise Year.Empty.
         /// </returns >
+        [Pure]
         public static Year TryCreate(int? val)
             => TryCreate(val, out Year result)
             ? result
@@ -221,13 +221,11 @@ namespace Qowaiv
                 result = new Year((short)val.Value);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            else return false;
         }
 
         /// <summary>Returns true if the val represents a valid year, otherwise false.</summary>
+        [Pure]
         public static bool IsValid(int? val)
             => val.HasValue
             && val.Value >= MinValue.m_Value 

@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Identifiers;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -48,14 +49,17 @@ namespace Qowaiv.Conversion.Identifiers
         private const BindingFlags NonPublicInstance = (BindingFlags)36;
 
         /// <inheritdoc />
+        [Pure]
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             => sourceType == BaseType || BaseConverter.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc />
+        [Pure]
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             => destinationType == BaseType || BaseConverter.CanConvertTo(context, destinationType);
 
         /// <inheritdoc />
+        [Pure]
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             if (string.Empty.Equals(value) || value is null)
@@ -70,6 +74,7 @@ namespace Qowaiv.Conversion.Identifiers
         }
 
         /// <inheritdoc />
+        [Pure]
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             var id = m_Value.GetValue(value);

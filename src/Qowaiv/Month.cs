@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -83,12 +84,14 @@ namespace Qowaiv
         public string ShortName => GetShortName(null);
 
         /// <summary>Gets the full name of the month.</summary>
+        [Pure]
         public string GetFullName(IFormatProvider formatProvider)
             => IsEmptyOrUnknown()
             ? ToDefaultString()
             : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetMonthName(m_Value);
 
         /// <summary>Gets the short name of the month.</summary>
+        [Pure]
         public string GetShortName(IFormatProvider formatProvider)
             => IsEmptyOrUnknown()
             ? ToDefaultString()
@@ -101,6 +104,7 @@ namespace Qowaiv
         /// <remarks>
         /// If the year of month is empty or unknown -1 is returned.
         /// </remarks>
+        [Pure]
         public int Days(Year year)
             => year.IsEmptyOrUnknown() || IsEmptyOrUnknown()
             ? -1
@@ -113,6 +117,7 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized month.
         /// </returns>
+        [Pure]
         public static Month FromJson(double json) => Create((int)json);
 
         /// <summary>Deserializes the month from a JSON number.</summary>
@@ -122,18 +127,20 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized month.
         /// </returns>
+        [Pure]
         public static Month FromJson(long json) => Create((int)json);
 
         /// <summary>Serializes the month to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value == default ? null : ToString("s", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string DebuggerDisplay => this.DebuggerDisplay("{0:f (m)}");
-        
+
         /// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
         /// <param name="format">
         /// The format that describes the formatting.
@@ -149,14 +156,17 @@ namespace Qowaiv
         /// M: as number with leading zero.
         /// m: as number without leading zero.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
             : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>Gets an XML string representation of the month.</summary>
+        [Pure]
         private string ToXmlString() => ToString("s", CultureInfo.InvariantCulture);
 
+        [Pure]
         private string ToDefaultString() => IsUnknown() ? "?" : string.Empty;
 
         /// <summary>The format token instructions.</summary>
@@ -192,6 +202,7 @@ namespace Qowaiv
         /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
         public static bool operator >=(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) >= 0;
 
+        [Pure]
         private static bool HaveValue(Month l, Month r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
 
         /// <summary>Converts the string to a month.
@@ -250,6 +261,7 @@ namespace Qowaiv
         /// <exception cref="FormatException">
         /// val is not a valid month.
         /// </exception>
+        [Pure]
         public static Month Create(int? val)
             => TryCreate(val, out Month result)
             ? result
@@ -264,6 +276,7 @@ namespace Qowaiv
         /// <returns >
         /// A month if the creation was successfully, otherwise Month.Empty.
         /// </returns >
+        [Pure]
         public static Month TryCreate(int? val)
             => TryCreate(val, out Month result)
             ? result
@@ -295,10 +308,11 @@ namespace Qowaiv
         }
 
         /// <summary>Returns true if the val represents a valid month, otherwise false.</summary>
+        [Pure]
         public static bool IsValid(int? val)
             => val.HasValue
-            && val.Value >= January.m_Value
-            && val.Value <= December.m_Value;
+            && val >= January.m_Value
+            && val <= December.m_Value;
 
         private static void AddCulture(CultureInfo culture)
         {
@@ -360,6 +374,6 @@ namespace Qowaiv
         };
 
         /// <summary>The locker for adding a culture.</summary>
-        private static readonly object locker = new object();
+        private static readonly object locker = new();
     }
 }

@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Net;
 using System.Runtime.Serialization;
@@ -107,6 +108,7 @@ namespace Qowaiv
         /// <exception cref="InvalidOperationException">
         /// When the email address is empty or unknown.
         /// </exception>
+        [Pure]
         public string WithDisplayName(string displayName)
         {
             if (IsEmptyOrUnknown())
@@ -124,6 +126,7 @@ namespace Qowaiv
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
         /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
@@ -147,12 +150,14 @@ namespace Qowaiv
         /// d: as domain.
         /// D: as domain uppercased.
         /// </remarks>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
             => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
             ? formatted
             : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>Gets an XML string representation of the email address.</summary>
+        [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>The format token instructions.</summary>
@@ -168,6 +173,7 @@ namespace Qowaiv
 
         /// <summary>Casts an email address to a <see cref="string"/>.</summary>
         public static explicit operator string(EmailAddress val) => val.ToString(CultureInfo.CurrentCulture);
+        
         /// <summary>Casts a <see cref="string"/> to a email address.</summary>
         public static explicit operator EmailAddress(string str) => Cast.String<EmailAddress>(TryParse, str);
 

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Text
 {
     internal partial class CharBuffer
     {
+        [Pure]
         public CharBuffer ToNonDiacritic(string ignore = "")
         {
             if (IsEmpty())

@@ -9,8 +9,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
-
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>

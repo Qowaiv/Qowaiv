@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Sql;
 using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion.Sql
@@ -9,12 +10,15 @@ namespace Qowaiv.Conversion.Sql
     public class TimestampTypeConverter : NumericTypeConverter<Timestamp, ulong>
     {
         /// <inheritdoc/>
+        [Pure]
         protected override Timestamp FromRaw(ulong raw) => raw;
 
         /// <inheritdoc/>
+        [Pure]
         protected override Timestamp FromString(string str, CultureInfo culture) => Timestamp.Parse(str, culture);
 
         /// <inheritdoc/>
+        [Pure]
         protected override ulong ToRaw(Timestamp svo) => (ulong)svo;
     }
 }

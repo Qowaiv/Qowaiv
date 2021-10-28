@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Reflection;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace Qowaiv.Conversion
@@ -11,33 +12,33 @@ namespace Qowaiv.Conversion
         where TRaw : struct, IFormattable
     {
         /// <inheritdoc />
+        [Pure]
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
-        }
-        
-        /// <inheritdoc />
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-        {
-            return IsConvertable(destinationType) || base.CanConvertTo(context, destinationType);
-        }
+            => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc />
+        [Pure]
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            => IsConvertable(destinationType) || base.CanConvertTo(context, destinationType);
+
+        /// <inheritdoc />
+        [Pure]
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             if (value is null)
             {
                 return Activator.CreateInstance<TSvo>();
             }
-            if(IsConvertable(value.GetType()))
+            else if (IsConvertable(value.GetType()))
             {
                 var raw = (TRaw)Convert.ChangeType(value, typeof(TRaw));
                 return FromRaw(raw);
             }
-            return base.ConvertFrom(context, culture, value);
+            else return base.ConvertFrom(context, culture, value);
         }
 
         /// <inheritdoc />
+        [Pure]
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             Guard.NotNull(destinationType, nameof(destinationType));
@@ -47,18 +48,17 @@ namespace Qowaiv.Conversion
             {
                 return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
             }
-
-            if(IsConvertable(destinationType))
+            else if (IsConvertable(destinationType))
             {
                 var svo = Guard.IsInstanceOf<TSvo>(value, nameof(value));
                 var raw = ToRaw(svo);
                 return Convert.ChangeType(raw, QowaivType.GetNotNullableType(destinationType));
             }
-
-            return base.ConvertTo(context, culture, value, destinationType);
+            else return base.ConvertTo(context, culture, value, destinationType);
         }
 
         /// <summary>Returns true if the conversion is supported.</summary>
+        [Pure]
         protected virtual bool IsConvertable(Type type) => type != typeof(TSvo) && QowaivType.IsNumeric(type);
     }
 }

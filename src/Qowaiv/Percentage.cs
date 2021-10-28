@@ -10,6 +10,7 @@ using Qowaiv.Text;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -51,33 +52,41 @@ namespace Qowaiv
         #region Percentage manipulation
 
         /// <summary>Gets the sign of the percentage.</summary>
+        [Pure]
         public int Sign() => m_Value.Sign();
 
         /// <summary>Returns the absolute value of the percentage.</summary>
+        [Pure]
         public Percentage Abs() => Math.Abs(m_Value);
 
         /// <summary>Increases the percentage with one percent.</summary>
+        [Pure]
         internal Percentage Increment() => Add(One);
 
         /// <summary>Decreases the percentage with one percent.</summary>
+        [Pure]
         internal Percentage Decrement() => Subtract(One);
 
         /// <summary>Pluses the percentage.</summary>
+        [Pure]
         internal Percentage Plus() => +m_Value;
 
         /// <summary>Negates the percentage.</summary>
+        [Pure]
         internal Percentage Negate() => -m_Value;
 
         /// <summary>Gets a percentage of the current percentage.</summary>
         /// <param name="p">
         /// The percentage to multiply with.
         /// </param>
+        [Pure]
         public Percentage Multiply(Percentage p) => m_Value * p.m_Value;
 
         /// <summary>Divides the current percentage by a specified percentage.</summary>
         /// <param name="p">
         /// The percentage to divides to.
         /// </param>
+        [Pure]
         public Percentage Divide(Percentage p) => m_Value / p.m_Value;
 
         /// <summary>Adds a percentage to the current percentage.
@@ -85,6 +94,7 @@ namespace Qowaiv
         /// <param name="p">
         /// The percentage to add.
         /// </param>
+        [Pure]
         public Percentage Add(Percentage p) => m_Value + p.m_Value;
 
         /// <summary>Subtracts a percentage from the current percentage.
@@ -92,6 +102,7 @@ namespace Qowaiv
         /// <param name="p">
         /// The percentage to Subtract.
         /// </param>
+        [Pure]
         public Percentage Subtract(Percentage p) => m_Value - p.m_Value;
 
         #region Multiply
@@ -101,6 +112,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Multiply(decimal factor) => m_Value * factor;
 
         /// <summary>Multiplies the percentage with a specified factor.
@@ -108,6 +120,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Multiply(double factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the percentage with a specified factor.
@@ -115,14 +128,15 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Multiply(float factor) => Multiply((decimal)factor);
-
 
         /// <summary>Multiplies the percentage with a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Multiply(long factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the percentage with a specified factor.
@@ -130,6 +144,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Multiply(int factor) => Multiply((decimal)factor);
 
         /// <summary>Multiplies the percentage with a specified factor.
@@ -137,14 +152,15 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Multiply(short factor) => Multiply((decimal)factor);
-
 
         /// <summary>Multiplies the percentage with a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         [CLSCompliant(false)]
         public Percentage Multiply(ulong factor) => Multiply((decimal)factor);
 
@@ -153,6 +169,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         [CLSCompliant(false)]
         public Percentage Multiply(uint factor) => Multiply((decimal)factor);
 
@@ -161,6 +178,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         [CLSCompliant(false)]
         public Percentage Multiply(ushort factor) => Multiply((decimal)factor);
 
@@ -173,6 +191,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Divide(decimal factor) => m_Value / factor;
 
         /// <summary>Divide the percentage by a specified factor.
@@ -180,6 +199,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Divide(double factor) => Divide((decimal)factor);
 
         /// <summary>Divide the percentage by a specified factor.
@@ -187,14 +207,15 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Divide(float factor) => Divide((decimal)factor);
-
 
         /// <summary>Divide the percentage by a specified factor.
         /// </summary>
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Divide(long factor) => Divide((decimal)factor);
 
         /// <summary>Divide the percentage by a specified factor.
@@ -202,6 +223,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Divide(int factor) => Divide((decimal)factor);
 
         /// <summary>Divide the percentage by a specified factor.
@@ -209,6 +231,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         public Percentage Divide(short factor) => Divide((decimal)factor);
 
 
@@ -217,6 +240,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         [CLSCompliant(false)]
         public Percentage Divide(ulong factor) => Divide((decimal)factor);
 
@@ -225,6 +249,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         [CLSCompliant(false)]
         public Percentage Divide(uint factor) => Divide((decimal)factor);
 
@@ -233,6 +258,7 @@ namespace Qowaiv
         /// <param name="factor">
         /// The factor to multiply with.
         /// </param>
+        [Pure]
         [CLSCompliant(false)]
         public Percentage Divide(ushort factor) => Divide((decimal)factor);
 
@@ -419,6 +445,7 @@ namespace Qowaiv
         /// <returns>
         /// Parameter val1 or val2, whichever is larger.
         /// </returns>
+        [Pure]
         public static Percentage Max(Percentage val1, Percentage val2) => val1 > val2 ? val1 : val2;
 
         /// <summary>Returns the largest of the percentages.</summary>
@@ -428,6 +455,7 @@ namespace Qowaiv
         /// <returns>
         /// The percentage with the largest value.
         /// </returns>
+        [Pure]
         public static Percentage Max(params Percentage[] values) => Guard.NotNull(values, nameof(values)).Max();
 
         /// <summary>Returns the smaller of two percentages.</summary>
@@ -440,6 +468,7 @@ namespace Qowaiv
         /// <returns>
         /// Parameter val1 or val2, whichever is smaller.
         /// </returns>
+        [Pure]
         public static Percentage Min(Percentage val1, Percentage val2) => val1 < val2 ? val1 : val2;
 
         /// <summary>Returns the smallest of the percentages.</summary>
@@ -449,6 +478,7 @@ namespace Qowaiv
         /// <returns>
         /// The percentage with the smallest value.
         /// </returns>
+        [Pure]
         public static Percentage Min(params Percentage[] values) => Guard.NotNull(values, nameof(values)).Min();
 
         /// <summary>Rounds the percentage.</summary>
@@ -457,6 +487,7 @@ namespace Qowaiv
         /// fractional digits. If the percentage has no fractional digits,
         /// the percentage is returned unchanged.
         /// </returns>
+        [Pure]
         public Percentage Round() => Round(0);
 
         /// <summary>Rounds the percentage to a specified number of fractional digits.</summary>
@@ -472,6 +503,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="decimals"/> is less than 0 or greater than 26.
         /// </exception>
+        [Pure]
         public Percentage Round(int decimals) => Round(decimals, DecimalRounding.AwayFromZero);
 
         /// <summary>Rounds the percentage to a specified number of fractional
@@ -521,6 +553,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="mode"/> is not a valid value of <see cref="DecimalRounding"/>.
         /// </exception>
+        [Pure]
         public Percentage Round(int decimals, DecimalRounding mode)
         {
             if ((decimals < -26) || (decimals > 26))
@@ -534,6 +567,7 @@ namespace Qowaiv
         /// <param name="multipleOf">
         /// The percentage of which the number should be multiple of.
         /// </param>
+        [Pure]
         public Percentage RoundToMultiple(Percentage multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.AwayFromZero);
 
         /// <summary>Rounds the percentage to a specified multiple of the specified percentage.</summary>
@@ -546,6 +580,7 @@ namespace Qowaiv
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="mode"/> is not a valid value of <see cref="DecimalRounding"/>.
         /// </exception>
+        [Pure]
         public Percentage RoundToMultiple(Percentage multipleOf, DecimalRounding mode)
         {
             return m_Value.RoundToMultiple((decimal)multipleOf, mode);
@@ -562,12 +597,14 @@ namespace Qowaiv
         /// <returns>
         /// The deserialized percentage.
         /// </returns>
+        [Pure]
         public static Percentage FromJson(double json) => new Percentage(Cast.ToDecimal<Percentage>(json));
 
         /// <summary>Serializes the percentage to a JSON node.</summary>
         /// <returns>
         /// The serialized JSON string.
         /// </returns>
+        [Pure]
         public string ToJson() => ToString(PercentFormat, CultureInfo.InvariantCulture);
 
         #endregion
@@ -576,10 +613,7 @@ namespace Qowaiv
 
         /// <summary>Returns a <see cref="string"/> that represents the current Percentage for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-        {
-            get => ToString("0.00##########################%", CultureInfo.InvariantCulture);
-        }
+        private string DebuggerDisplay => ToString("0.00##########################%", CultureInfo.InvariantCulture);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
         /// <param name="format">
@@ -588,6 +622,7 @@ namespace Qowaiv
         /// <param name="formatProvider">
         /// The format provider.
         /// </param>
+        [Pure]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
@@ -620,6 +655,7 @@ namespace Qowaiv
         }
 
         /// <summary>Gets an XML string representation of the @FullName.</summary>
+        [Pure]
         private string ToXmlString() => ToString(PercentFormat, CultureInfo.InvariantCulture);
 
         #endregion
@@ -684,12 +720,14 @@ namespace Qowaiv
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
-        public static Percentage Create(decimal val) => new Percentage(val);
+        [Pure]
+        public static Percentage Create(decimal val) => new(val);
 
         /// <summary>Creates a Percentage from a Double.</summary >
         /// <param name="val" >
         /// A decimal describing a Percentage.
         /// </param >
+        [Pure]
         public static Percentage Create(double val) => Create(Cast.ToDecimal<Percentage>(val));
     }
 }

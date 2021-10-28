@@ -58,6 +58,7 @@ namespace Qowaiv.Data
         }
 
         /// <summary>Returns true if the value should be represented by a <see cref="DBNull.Value"/>, otherwise false.</summary>
+        [Pure]
         private static bool IsDbNullValue(object value, Type sourceType, SingleValueObjectAttribute attr)
         {
             if (attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue))
@@ -72,6 +73,7 @@ namespace Qowaiv.Data
         /// <exception cref="InvalidCastException">
         /// If the required cast is not defined.
         /// </exception>
+        [Pure]
         private static MethodInfo GetCast(Type sourceType, SingleValueObjectAttribute attr)
         {
             if (!Casts.TryGetValue(sourceType, out MethodInfo cast))
@@ -102,6 +104,6 @@ namespace Qowaiv.Data
         private static readonly Dictionary<Type, MethodInfo> Casts = new Dictionary<Type, MethodInfo>();
 
         /// <summary>The locker for adding a casts and unsupported types.</summary>
-        private static readonly object locker = new object();
+        private static readonly object locker = new();
     }
 }

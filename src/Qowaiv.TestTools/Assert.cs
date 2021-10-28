@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.TestTools.Diagnostics.Contracts;
+using System;
 using System.Diagnostics;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace Qowaiv.TestTools
     /// <summary>Minimized assert helper class, to prevent dependencies on test frameworks.</summary>
     internal static class Assert
     {
+        [Assertion]
         public static TException Catch<TException>(Action code) where TException : Exception
         {
             try

@@ -10,6 +10,7 @@ using Qowaiv.Globalization;
 using Qowaiv.Text;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -18,6 +19,7 @@ namespace Qowaiv.Financial
     public partial struct InternationalBankAccountNumber
     {
         /// <summary>Constructs a <see cref="Regex"/> based on its BBAN pattern.</summary>
+        [Pure]
         private static KeyValuePair<Country, Regex> Bban(Country country, string bban, int? checksum = default)
         {
             var blocks = bban.Split(',').Select(b => b.Buffer());

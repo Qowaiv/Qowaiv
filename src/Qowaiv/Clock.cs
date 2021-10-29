@@ -139,7 +139,10 @@ namespace Qowaiv
         private static void SetThreadUtcNow(Func<DateTime> time) => threadUtcNow = time;
         private static void SetThreadTimeZone(TimeZoneInfo timeZone) => threadTimeZone = timeZone;
 
+#pragma warning disable QW0001 // Use a testable Time Provider
+        // This is the testable time provider.
         private static Func<DateTime> globalUtcNow = () => DateTime.UtcNow;
+#pragma warning restore QW0001 // Use a testable Time Provider
         private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
         [ThreadStatic]

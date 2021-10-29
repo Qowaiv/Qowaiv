@@ -1,4 +1,6 @@
-﻿using Qowaiv.Text;
+﻿using Qowaiv.Diagnostics.Contracts;
+using Qowaiv.Text;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv
 {
@@ -16,9 +18,12 @@ namespace Qowaiv
             public readonly CharBuffer Input;
             public readonly CharBuffer Buffer;
             public readonly CharBuffer Result;
+            
+            [Pure]
             public override string ToString() => $"In: {Input}, Buf: {Buffer}, Res:{Result}";
 
             /// <summary>Gets the first <see cref="char"/> of the buffer, and removes it.</summary>
+            [Impure]
             public char Next()
             {
                 var ch = Input.First();
@@ -26,6 +31,7 @@ namespace Qowaiv
                 return ch;
             }
 
+            [Impure]
             public char Prev()
             {
                 var ch = Input.Last();
@@ -33,6 +39,7 @@ namespace Qowaiv
                 return ch;
             }
 
+            [Impure]
             public char NextNoComment()
             {
                 var ch = Next();
@@ -46,6 +53,7 @@ namespace Qowaiv
                 return NextNoComment();
             }
 
+            [Impure]
             public State Invalid()
             {
                 Input.Clear();
@@ -54,6 +62,7 @@ namespace Qowaiv
                 return this;
             }
 
+            [Pure]
             public string Parsed() => Result.IsEmpty() ? null : Result.ToString();
         }
     }

@@ -17,6 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Qowaiv.Analyzers.CSharp" Version="0.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Shared assembly tags. -->
     <Compile Include="$(MSBuildThisFileDirectory)..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
     <!-- Package icon. -->

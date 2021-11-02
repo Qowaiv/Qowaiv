@@ -430,6 +430,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hashing is not supported by {0}..
+        /// </summary>
+        public static string HashingNotSupported {
+            get {
+                return ResourceManager.GetString("HashingNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cast from {0} to {1} is not valid..
         /// </summary>
         public static string InvalidCastException_FromTo {

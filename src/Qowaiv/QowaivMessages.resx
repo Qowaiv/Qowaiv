@@ -186,4 +186,7 @@
   <data name="InvalidOperation_SequentialUUID" xml:space="preserve">
     <value>Sequential UUID can only be generated between 1970-01-01 and 9276-12-03.</value>
   </data>
+  <data name="HashingNotSupported" xml:space="preserve">
+    <value>Hashing is not supported by {0}.</value>
+  </data>
 </root>

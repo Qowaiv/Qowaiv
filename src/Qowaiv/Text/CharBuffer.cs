@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.Hashing;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -95,9 +96,7 @@ namespace Qowaiv.Text
 
         /// <inheritdoc />
         [Pure]
-#pragma warning disable S3877 // Exceptions should not be thrown from unexpected methods
-        public override int GetHashCode() => throw new NotSupportedException("Char Buffers can not be stored in hash sets.");
-#pragma warning restore S3877 // Exceptions should not be thrown from unexpected methods
+        public override int GetHashCode() => Hash.NotSupportedBy<CharBuffer>();
 
         /// <inheritdoc />
         [Pure]

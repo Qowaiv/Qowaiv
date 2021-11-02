@@ -9,19 +9,6 @@ namespace Qowaiv.TestTools
     /// <summary>Contains assert methods on <see cref="Assembly"/>'s.</summary>
     public static class AssemblyAssert
     {
-        /// <summary>Asserts that the assembly (of the specified <see cref="Type"/>) has the expected public key.</summary>
-        [Obsolete("Use .Should().HavePublicKey() instead.")]
-        [DebuggerStepThrough]
-        public static void HasPublicKey<T>(string publicKey)
-        {
-            var assembly = typeof(T).Assembly;
-            var bytes = assembly.GetName().GetPublicKey();
-            var act = BitConverter.ToString(bytes).Replace("-", "");
-
-            Console.WriteLine(act);
-            Assert.AreEqual(publicKey, act);
-        }
-
         /// <summary>Asserts that the assembly (of the specified <see cref="Type"/>) has the expected SVO's.</summary>
         [DebuggerStepThrough]
         public static void ContainsSvos<T>(params Type[] expected)

@@ -36,30 +36,6 @@ namespace Qowaiv
         /// </remarks>
         public const int MaxLength = 254;
 
-        /// <summary>Represents the pattern of a (potential) valid email address.</summary>
-        /// <remarks>
-        /// http://www.codeproject.com/KB/recipes/EmailRegexValidator.aspx
-        /// </remarks>
-        [Obsolete("Usage is discouraged. Will be dropped when the next major version is released.")]
-        public static readonly Regex Pattern = new Regex(
-            @"
-                ^
-                    [\w{}|/%$&#~!?*`'^=+-]+(\.[\w{}|/%$&#~!?*`'^=+-]+)*
-                @ 
-                (
-                    (
-                        (\[(?=.*]$))?
-                        (( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )\.){3}
-                         ( [0-9] | [1-9][0-9] | 1[0-9]{2} | 2[0-4][0-9] | 25[0-5] )
-                        ((?<=@\[.*)])?
-                    )
-                |
-                    (\w+([-]+\w+)*\.)*
-                    [a-z]{2,}
-                )
-                $
-            ", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
-
         /// <summary>Represents an empty/not set email address.</summary>
         public static readonly EmailAddress Empty;
 

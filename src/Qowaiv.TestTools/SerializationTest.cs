@@ -48,28 +48,6 @@ namespace Qowaiv.TestTools
             return info;
         }
 
-        /// <summary>Serializes and deserializes an instance.</summary>
-        /// <typeparam name="T">
-        /// Type of the instance.
-        /// </typeparam>
-        /// <param name="instance">
-        /// The instance to serialize and deserialize.
-        /// </param>
-        [Obsolete("use BinaryFormatterSerializeDeserialize<T>(instance) instead.")]
-        public static T SerializeDeserialize<T>(T instance)
-        {
-            using var buffer = new MemoryStream();
-
-            var formatter = new BinaryFormatter();
-            formatter.Serialize(buffer, instance);
-
-            // reset position.
-            buffer.Position = 0;
-
-            var result = (T)formatter.Deserialize(buffer);
-            return result;
-        }
-
         /// <summary>Serializes an instance using an XmlSerializer.</summary>
         /// <typeparam name="T">
         /// Type of the instance.

@@ -15,7 +15,7 @@
         Random = 4,
         /// <summary>Generated using <see cref="System.Security.Cryptography.SHA1"/> hashing.</summary>
         SHA1 = 5,
-        /// <summary>Generated with the first 7 bytes <see cref="System.DateTime.UtcNow"/> based, and 9 bytes randomly.</summary>
+        /// <summary>Generated with the first 7 bytes <see cref="Clock.UtcNow()"/> based, and 9 bytes randomly.</summary>
         Sequential = 6,
     }
 }

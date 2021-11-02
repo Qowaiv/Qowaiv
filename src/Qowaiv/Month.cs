@@ -25,10 +25,6 @@ namespace Qowaiv
     [TypeConverter(typeof(MonthTypeConverter))]
     public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
     {
-        /// <summary>Represents the pattern of a (potential) valid month.</summary>
-        [Obsolete("Will become private when the next major version is released.")]
-        public static readonly Regex Pattern = new Regex(@"^(0?[1-9]|10|11|12)$", RegexOptions.Compiled);
-
         /// <summary>Represents an empty/not set month.</summary>
         public static readonly Month Empty;
 

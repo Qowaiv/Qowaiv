@@ -157,7 +157,7 @@ namespace Qowaiv.Reflection
         [Pure]
         private static string ToNonGeneric(this Type type) => type.Name.Substring(0, type.Name.IndexOf('`'));
 
-        private static readonly Dictionary<Type, string> primitives = new Dictionary<Type, string>
+        private static readonly Dictionary<Type, string> primitives = new()
         {
             { typeof(void), "void" },
             { typeof(object), "object" },
@@ -176,23 +176,5 @@ namespace Qowaiv.Reflection
             { typeof(double), "double" },
             { typeof(decimal), "decimal" },
         };
-
-
-        /// <summary>Returns true if the type is a Single Value Object, otherwise false.</summary>
-        /// <param name="objectType">
-        /// The type to test for.
-        /// </param>
-        [Obsolete("Will be dropped when the next major version is released.")]
-        public static bool IsSingleValueObject(Type objectType)
-            => GetSingleValueObjectAttribute(objectType) != null;
-
-        /// <summary>Gets the <see cref="SingleValueObjectAttribute"/> of the type, if any.</summary>
-        /// <param name="objectType">
-        /// The type to test for.
-        /// </param>
-        [Obsolete("Use Type.GetCustomAttribute<SingleValueObjectAttribute>(). Will be dropped when the next major version is released.")]
-        public static SingleValueObjectAttribute GetSingleValueObjectAttribute(Type objectType)
-            => Guard.NotNull(objectType, nameof(objectType))
-            .GetCustomAttribute<SingleValueObjectAttribute>();
     }
 }

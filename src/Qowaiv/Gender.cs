@@ -178,22 +178,6 @@ namespace Qowaiv
         /// <summary>Casts an <see cref="int"/> to a Gender.</summary>
         public static implicit operator Gender(int? val) => Cast.Primitive<int, Gender>(TryCreate, val);
 
-        /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-        [Obsolete("Will be dropped when the next major version is released.")]
-        public static bool operator <(Gender l, Gender r) => l.CompareTo(r) < 0;
-
-        /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-        [Obsolete("Will be dropped when the next major version is released.")]
-        public static bool operator >(Gender l, Gender r) => l.CompareTo(r) > 0;
-
-        /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-        [Obsolete("Will be dropped when the next major version is released.")]
-        public static bool operator <=(Gender l, Gender r) => l.CompareTo(r) <= 0;
-
-        /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-        [Obsolete("Will be dropped when the next major version is released.")]
-        public static bool operator >=(Gender l, Gender r) => l.CompareTo(r) >= 0;
-
         /// <summary>Converts the string to a Gender.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

@@ -15,10 +15,6 @@ namespace Qowaiv
             => mode >= DecimalRounding.Truncate && mode <= DecimalRounding.Floor;
 
         /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
-        [Obsolete("Misspelled method. Will be dropped when the next major version is released.")]
-        public static bool IsNearestRouding(this DecimalRounding mode) => mode.IsNearestRounding();
-
-        /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
         [Pure]
         public static bool IsNearestRounding(this DecimalRounding mode)
             => mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;

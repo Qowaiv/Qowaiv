@@ -703,9 +703,7 @@ Actual:   [{(string.Join(", ", act))}]");
         [TestCase("{empty}", "")]
         [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
         public void has_custom_display(object display, Uuid svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

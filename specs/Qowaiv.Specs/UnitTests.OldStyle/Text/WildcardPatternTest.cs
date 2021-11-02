@@ -121,13 +121,13 @@ namespace Qowaiv.UnitTests.Text
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var act = SerializeDeserialize.Binary(TestPattern);
-            DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", act);
+            act.Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
             var act = SerializeDeserialize.DataContract(TestPattern);
-            DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", act);
+            act.Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
         }
 
         #endregion

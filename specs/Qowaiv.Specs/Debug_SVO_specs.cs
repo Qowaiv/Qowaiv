@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
@@ -12,6 +13,7 @@ using Qowaiv.Web;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -27,9 +29,7 @@ namespace Debug_SVO_specs
     {
         [TestCaseSource(nameof(Svos))]
         public void are_decorated_with_DebuggerDisplay_attribute(Type svoType)
-        {
-            DebuggerDisplayAssert.HasAttribute(svoType);
-        }
+            => svoType.Should().BeDecoratedWith<DebuggerDisplayAttribute>();
     }
 
     public class Default_value : DebugerDisplayTest
@@ -38,7 +38,7 @@ namespace Debug_SVO_specs
         public void displays_empty(Type svoType)
         {
             var empty = Activator.CreateInstance(svoType);
-            DebuggerDisplayAssert.HasResult("{empty}", empty);
+            empty.Should().HaveDebuggerDisplay("{empty}");
         }
 
         [TestCase(typeof(Amount), "¤0.00")]
@@ -57,10 +57,10 @@ namespace Debug_SVO_specs
         [TestCase(typeof(Int32Id), "{empty} (ForInt32)")]
         [TestCase(typeof(Int64Id), "{empty} (ForInt64)")]
         [TestCase(typeof(StringId), "{empty} (ForString)")]
-        public void display(Type svoType, object debuggerDisplay)
+        public void display(Type svoType, object display)
         {
             var empty = Activator.CreateInstance(svoType);
-            DebuggerDisplayAssert.HasResult(debuggerDisplay, empty);
+            empty.Should().HaveDebuggerDisplay(display);
         }
     }
 
@@ -71,21 +71,21 @@ namespace Debug_SVO_specs
         public void displays_unknown_for(Type svoType)
         {
             var unknown = Unknown.Value(svoType);
-            DebuggerDisplayAssert.HasResult("{unknown}", unknown);
+            unknown.Should().HaveDebuggerDisplay("{unknown}");
         }
 
         [Test]
         public void displays_application_octet_stream_for_internet_media_type()
         {
             var unknown = InternetMediaType.Unknown;
-            DebuggerDisplayAssert.HasResult("application/octet-stream", unknown);
+            unknown.Should().HaveDebuggerDisplay("application/octet-stream");
         }
 
         [Test]
         public void displays_not_known_for_gender()
         {
             var unknown = Gender.Unknown;
-            DebuggerDisplayAssert.HasResult("Not known", unknown);
+            unknown.Should().HaveDebuggerDisplay("Not known");
         }
     }
     public class Displays 
@@ -123,7 +123,7 @@ namespace Debug_SVO_specs
         {
             var converter = TypeDescriptor.GetConverter(svoType);
             var svo = converter.ConvertFromString(null, CultureInfo.InvariantCulture, value);
-            DebuggerDisplayAssert.HasResult(debuggerDisplay, svo);
+            svo.Should().HaveDebuggerDisplay(debuggerDisplay);
         }
     }
 

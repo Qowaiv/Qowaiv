@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
@@ -596,8 +597,6 @@ namespace YesNo_specs
         [TestCase("{unknown}", "?")]
         [TestCase("yes", "Y")]
         public void has_custom_display(object display, YesNo svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }

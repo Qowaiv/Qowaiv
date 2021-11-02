@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -620,9 +621,7 @@ namespace Year_specs
         [TestCase("{unknown}", "?")]
         [TestCase("1979", (short)1979)]
         public void has_custom_display(object display, Year svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

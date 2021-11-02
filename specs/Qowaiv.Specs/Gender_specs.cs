@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -589,9 +590,7 @@ namespace Gender_specs
         [TestCase("Not known", "?")]
         [TestCase("Female", "Female")]
         public void has_custom_display(object display, Gender svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

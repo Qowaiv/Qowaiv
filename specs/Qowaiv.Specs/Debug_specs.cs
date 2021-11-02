@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
-using Qowaiv.TestTools;
 using Qowaiv.Text;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Debug_specs
@@ -16,9 +17,7 @@ namespace Debug_specs
         [TestCase(typeof(PostalCodeCountryInfo))]
         [TestCase(typeof(WildcardPattern))]
         public void decorated_with_DebuggerDisplay_attribute(Type svoType)
-        {
-            DebuggerDisplayAssert.HasAttribute(svoType);
-        }
+        => svoType.Should().BeDecoratedWith<DebuggerDisplayAttribute>();
     }
 
     public class Debugger_displays
@@ -34,27 +33,23 @@ namespace Debug_specs
                 nullable: true,
                 pattern: "^[0-9]{4}$");
 
-            DebuggerDisplayAssert.HasResult("{ type: integer, desc: Year, example: 1983, format: 0000, pattern: ^[0-9]{4}$, nullable: true }", attribute);
-
+            attribute.Should().HaveDebuggerDisplay("{ type: integer, desc: Year, example: 1983, format: 0000, pattern: ^[0-9]{4}$, nullable: true }");
         }
 
         [Test]
         public void empty_postal_code_country_data_for_empty_country()
-        {
-            DebuggerDisplayAssert.HasResult("Postal code[], none", PostalCodeCountryInfo.GetInstance(Country.Empty));
-        }
+            => PostalCodeCountryInfo.GetInstance(Country.Empty)
+            .Should().HaveDebuggerDisplay("Postal code[], none");
 
         [Test]
         public void postal_code_pattern_and_county_for_county_with_postal_codes()
-        {
-            DebuggerDisplayAssert.HasResult("Postal code[BE], Pattern: ^[1-9][0-9]{3}$", PostalCodeCountryInfo.GetInstance(Country.BE));
-        }
+            => PostalCodeCountryInfo.GetInstance(Country.BE)
+            .Should().HaveDebuggerDisplay("Postal code[BE], Pattern: ^[1-9][0-9]{3}$");
 
         [Test]
         public void postal_code_value_and_county_for_county_with_one_postal_code()
-        {
-            DebuggerDisplayAssert.HasResult("Postal code[VA], Value: 00120", PostalCodeCountryInfo.GetInstance(Country.VA));
-        }
+            => PostalCodeCountryInfo.GetInstance(Country.VA)
+            .Should().HaveDebuggerDisplay("Postal code[VA], Value: 00120");
 
         [Test]
         public void current_and_previous_cultures_for_culture_info_scope()
@@ -62,35 +57,29 @@ namespace Debug_specs
             using (new CultureInfoScope("en-NL", "en-US"))
             {
                 using var scope = new CultureInfoScope("es-ES", "fr-FR");
-                DebuggerDisplayAssert.HasResult("CultureInfoScope: [es-ES/fr-FR], Previous: [en-NL/en-US]", scope);
+                scope.Should().HaveDebuggerDisplay("CultureInfoScope: [es-ES/fr-FR], Previous: [en-NL/en-US]");
             }
         }
   
         [Test]
         public void formatting_arguments_without_pattern_if_not_specified()
-        {
-            DebuggerDisplayAssert.HasResult("FormattingArgumentsCollection: 'en-GB', Items: 0", new FormattingArgumentsCollection(new CultureInfo("en-GB")));
-        }
+            => ((object)new FormattingArgumentsCollection(new CultureInfo("en-GB")))
+            .Should().HaveDebuggerDisplay("FormattingArgumentsCollection: 'en-GB', Items: 0");
 
 
         [Test]
         public void formatting_arguments_with_pattern_if_specified()
-        {
-            DebuggerDisplayAssert.HasResult("Format: 'yyyy-MM-dd', Provider: en-GB", new FormattingArguments("yyyy-MM-dd", new CultureInfo("en-GB")));
-        }
+            => new FormattingArguments("yyyy-MM-dd", new CultureInfo("en-GB"))
+            .Should().HaveDebuggerDisplay("Format: 'yyyy-MM-dd', Provider: en-GB");
 
         [Test]
         public void wildcard_pattern()
-        {
-            var pattern = new WildcardPattern("t?st*");
-            DebuggerDisplayAssert.HasResult("{t?st*}", pattern);
-        }
+            => new WildcardPattern("t?st*")
+            .Should().HaveDebuggerDisplay("{t?st*}");
 
         [Test]
         public void wildcard_pattern_with_options_if_not_default()
-        {
-            var pattern = new WildcardPattern("t?st*", WildcardPatternOptions.SingleOrTrailing, StringComparison.Ordinal);
-            DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", pattern);
-        }
+            => new WildcardPattern("t?st*", WildcardPatternOptions.SingleOrTrailing, StringComparison.Ordinal)
+            .Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
     }
 }

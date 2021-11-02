@@ -522,9 +522,7 @@ namespace Email_address_specs
         [TestCase("{unknown}", "?")]
         [TestCase("info@qowaiv.org", "info@qowaiv.org")]
         public void has_custom_display(object display, EmailAddress svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

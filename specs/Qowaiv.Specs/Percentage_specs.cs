@@ -1284,8 +1284,6 @@ namespace Percentage_specs
     {
         [TestCase("17.51%", "17.51%")]
         public void has_custom_display(object display, Percentage svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }

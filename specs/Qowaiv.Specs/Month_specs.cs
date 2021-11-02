@@ -648,8 +648,6 @@ namespace Month_specs
         [TestCase("{unknown}", "?")]
         [TestCase("February (02)", "February")]
         public void has_custom_display(object display, Month svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }

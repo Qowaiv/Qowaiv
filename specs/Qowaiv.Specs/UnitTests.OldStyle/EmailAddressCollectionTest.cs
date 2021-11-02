@@ -15,55 +15,7 @@ namespace Qowaiv.UnitTests
             return EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
         }
 
-        #region Constructor
-
-        [Test]
-        public void Ctor_NullArray_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                new EmailAddressCollection((EmailAddress[])null);
-            },
-            "emails");
-        }
-
-        #endregion
-
         #region (XML) (De)serialization tests
-
-        [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                Serialize.DeserializeUsingConstructor<EmailAddress>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(EmailAddress), new System.Runtime.Serialization.FormatterConverter());
-                Serialize.DeserializeUsingConstructor<EmailAddress>(info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = GetTestInstance();
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
 
         [Test]
         public void GetObjectData_SerializationInfo_AreEqual()

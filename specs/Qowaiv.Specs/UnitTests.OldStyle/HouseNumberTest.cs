@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -237,33 +238,9 @@ namespace Qowaiv.UnitTests
             Assert.AreEqual(exp, act);
         }
 
-        [Test]
-        public void Create_Int32MinValue_ThrowsArgumentOutOfRangeException()
-        {
-            ExceptionAssert.CatchArgumentOutOfRangeException
-            (() =>
-            {
-                HouseNumber.Create(Int32.MinValue);
-            },
-            "val",
-            "Not a valid house number");
-        }
-
         #endregion
 
         #region (XML) (De)serialization tests
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
 
         [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
@@ -671,15 +648,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be HouseNumber."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]

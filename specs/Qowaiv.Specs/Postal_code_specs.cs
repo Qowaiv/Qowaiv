@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -646,9 +647,7 @@ namespace Postal_code_specs
         [TestCase("{unknown}", "?")]
         [TestCase("H0H0H0", "H0H0H0")]
         public void has_custom_display(object display, PostalCode svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 
     internal class PostalCodes

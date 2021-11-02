@@ -532,21 +532,21 @@ namespace Year_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Year);
+            var xml = Serialize.Xml(Svo.Year);
             Assert.AreEqual("1979", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Year>("1979");
+            var svo =Deserialize.Xml<Year>("1979");
             Assert.AreEqual(Svo.Year, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Year);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Year);
             Assert.AreEqual(Svo.Year, round_tripped);
         }
 
@@ -554,7 +554,7 @@ namespace Year_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Year);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -602,14 +602,14 @@ namespace Year_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Year);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Year);
             Assert.AreEqual(Svo.Year, round_tripped);
         }
 
         [Test]
         public void storing_short_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Year);
+            var info = Serialize.GetInfo(Svo.Year);
             Assert.AreEqual((short)1979, info.GetInt16("Value"));
         }
     }

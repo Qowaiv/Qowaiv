@@ -138,28 +138,6 @@ namespace Qowaiv.UnitTests
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<Date>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(Date), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Date>(info, default);
-            });
-        }
-
-        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.CatchArgumentNullException
@@ -186,7 +164,7 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -194,14 +172,14 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
 
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "1970-02-14";
             Assert.AreEqual(exp, act);
         }
@@ -209,7 +187,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Date>("1970-02-14");
+            var act =Deserialize.Xml<Date>("1970-02-14");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -229,7 +207,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -249,7 +227,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -269,7 +247,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -290,7 +268,7 @@ namespace Qowaiv.UnitTests
                 Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -310,7 +288,7 @@ namespace Qowaiv.UnitTests
                 Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

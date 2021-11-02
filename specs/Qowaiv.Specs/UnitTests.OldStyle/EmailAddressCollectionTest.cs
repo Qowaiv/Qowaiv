@@ -37,7 +37,7 @@ namespace Qowaiv.UnitTests
             ExceptionAssert.CatchArgumentNullException
             (() =>
             {
-                SerializationTest.DeserializeUsingConstructor<EmailAddress>(null, default);
+                Serialize.DeserializeUsingConstructor<EmailAddress>(null, default);
             },
             "info");
         }
@@ -49,7 +49,7 @@ namespace Qowaiv.UnitTests
             (() =>
             {
                 var info = new SerializationInfo(typeof(EmailAddress), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<EmailAddress>(info, default);
+                Serialize.DeserializeUsingConstructor<EmailAddress>(info, default);
             });
         }
 
@@ -80,7 +80,7 @@ namespace Qowaiv.UnitTests
         {
             var input = GetTestInstance();
             var exp = GetTestInstance();
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             CollectionAssert.AreEqual(exp, act);
         }
         [Test]
@@ -88,14 +88,14 @@ namespace Qowaiv.UnitTests
         {
             var input = GetTestInstance();
             var exp = GetTestInstance();
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             CollectionAssert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(GetTestInstance());
+            var act = Serialize.Xml(GetTestInstance());
             var exp = "info@qowaiv.org,test@qowaiv.org";
             Assert.AreEqual(exp, act);
         }
@@ -103,7 +103,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
+            var act =Deserialize.Xml<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
             Assert.AreEqual(GetTestInstance(), act);
         }
 
@@ -123,7 +123,7 @@ namespace Qowaiv.UnitTests
                 Obj = GetTestInstance(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -143,7 +143,7 @@ namespace Qowaiv.UnitTests
                 Obj = GetTestInstance(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -163,7 +163,7 @@ namespace Qowaiv.UnitTests
                 Obj = GetTestInstance(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -184,7 +184,7 @@ namespace Qowaiv.UnitTests
                 Obj = new EmailAddressCollection(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -204,7 +204,7 @@ namespace Qowaiv.UnitTests
                 Obj = new EmailAddressCollection(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

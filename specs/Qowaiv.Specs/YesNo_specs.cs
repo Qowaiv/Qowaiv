@@ -507,21 +507,21 @@ namespace YesNo_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.YesNo);
+            var xml = Serialize.Xml(Svo.YesNo);
             Assert.AreEqual("yes", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<YesNo>("yes");
+            var svo =Deserialize.Xml<YesNo>("yes");
             Assert.AreEqual(Svo.YesNo, svo);
         }
 
         [Test]
         public void using_data_contract_serializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.YesNo);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.YesNo);
             Assert.AreEqual(Svo.YesNo, round_tripped);
         }
 
@@ -529,7 +529,7 @@ namespace YesNo_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.YesNo);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
 
             Assert.AreEqual(structure, round_tripped);
         }
@@ -578,14 +578,14 @@ namespace YesNo_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.YesNo);
+            var round_tripped = SerializeDeserialize.Binary(Svo.YesNo);
             Assert.AreEqual(Svo.YesNo, round_tripped);
         }
 
         [Test]
         public void storing_byte_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.YesNo);
+            var info = Serialize.GetInfo(Svo.YesNo);
             Assert.AreEqual((byte)2, info.GetByte("Value"));
         }
     }

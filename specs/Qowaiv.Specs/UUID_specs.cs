@@ -620,21 +620,21 @@ Actual:   [{(string.Join(", ", act))}]");
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Uuid);
+            var xml = Serialize.Xml(Svo.Uuid);
             Assert.AreEqual("Qowaiv_SVOLibrary_GUIA", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Uuid>("Qowaiv_SVOLibrary_GUIA");
+            var svo =Deserialize.Xml<Uuid>("Qowaiv_SVOLibrary_GUIA");
             Assert.AreEqual(Svo.Uuid, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Uuid);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Uuid);
             Assert.AreEqual(Svo.Uuid, round_tripped);
         }
 
@@ -642,7 +642,7 @@ Actual:   [{(string.Join(", ", act))}]");
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Uuid);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -679,14 +679,14 @@ Actual:   [{(string.Join(", ", act))}]");
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Uuid);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Uuid);
             Assert.AreEqual(Svo.Uuid, round_tripped);
         }
 
         [Test]
         public void storing_Guid_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Uuid);
+            var info = Serialize.GetInfo(Svo.Uuid);
             Assert.AreEqual(Svo.Guid, info.GetValue("Value", typeof(Guid)));
         }
 

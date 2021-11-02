@@ -109,28 +109,6 @@ namespace Qowaiv.UnitTests.Text
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(WildcardPattern), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(info, default);
-            });
-        }
-
-        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.CatchArgumentNullException
@@ -157,13 +135,13 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(TestPattern);
+            var act = SerializeDeserialize.Binary(TestPattern);
             DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", act);
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.DataContractSerializeDeserialize(TestPattern);
+            var act = SerializeDeserialize.DataContract(TestPattern);
             DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", act);
         }
 

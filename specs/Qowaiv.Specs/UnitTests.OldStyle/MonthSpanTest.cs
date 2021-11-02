@@ -118,19 +118,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_Throws()
-        {
-            Assert.Catch<ArgumentNullException>(() => SerializationTest.DeserializeUsingConstructor<MonthSpan>(null, default));
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_Throws()
-        {
-            var info = new SerializationInfo(typeof(MonthSpan), new FormatterConverter());
-            Assert.Catch<SerializationException>(() => SerializationTest.DeserializeUsingConstructor<MonthSpan>(info, default));
-        }
-
-        [Test]
         public void GetObjectData_NulSerializationInfo_Throws()
         {
             ISerializable obj = TestStruct;
@@ -151,7 +138,7 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
 
@@ -160,14 +147,14 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "5Y+9M";
             Assert.AreEqual(exp, act);
         }
@@ -175,7 +162,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<MonthSpan>("69");
+            var act =Deserialize.Xml<MonthSpan>("69");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -184,7 +171,7 @@ namespace Qowaiv.UnitTests
         {
             var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
             var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -195,7 +182,7 @@ namespace Qowaiv.UnitTests
         {
             var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
             var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -206,7 +193,7 @@ namespace Qowaiv.UnitTests
         {
             var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
             var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -217,7 +204,7 @@ namespace Qowaiv.UnitTests
         {
             var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
             var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -228,7 +215,7 @@ namespace Qowaiv.UnitTests
         {
             var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
             var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

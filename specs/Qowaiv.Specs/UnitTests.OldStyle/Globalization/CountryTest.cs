@@ -262,28 +262,6 @@ namespace Qowaiv.UnitTests.Globalization
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<Country>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(Country), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Country>(info, default);
-            });
-        }
-
-        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.CatchArgumentNullException
@@ -310,7 +288,7 @@ namespace Qowaiv.UnitTests.Globalization
         {
             var input = CountryTest.TestStruct;
             var exp = CountryTest.TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -318,14 +296,14 @@ namespace Qowaiv.UnitTests.Globalization
         {
             var input = CountryTest.TestStruct;
             var exp = CountryTest.TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "VA";
             Assert.AreEqual(exp, act);
         }
@@ -333,7 +311,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Country>("VA");
+            var act =Deserialize.Xml<Country>("VA");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -353,7 +331,7 @@ namespace Qowaiv.UnitTests.Globalization
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -373,7 +351,7 @@ namespace Qowaiv.UnitTests.Globalization
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -393,7 +371,7 @@ namespace Qowaiv.UnitTests.Globalization
                 Obj = CountryTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -414,7 +392,7 @@ namespace Qowaiv.UnitTests.Globalization
                 Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -434,7 +412,7 @@ namespace Qowaiv.UnitTests.Globalization
                 Obj = Country.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

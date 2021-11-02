@@ -248,28 +248,6 @@ namespace Qowaiv.UnitTests.Financial
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<Currency>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(Currency), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Currency>(info, default);
-            });
-        }
-
-        [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
             ExceptionAssert.CatchArgumentNullException
@@ -296,7 +274,7 @@ namespace Qowaiv.UnitTests.Financial
         {
             var input = CurrencyTest.TestStruct;
             var exp = CurrencyTest.TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -304,14 +282,14 @@ namespace Qowaiv.UnitTests.Financial
         {
             var input = CurrencyTest.TestStruct;
             var exp = CurrencyTest.TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "EUR";
             Assert.AreEqual(exp, act);
         }
@@ -319,7 +297,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Currency>("EUR");
+            var act =Deserialize.Xml<Currency>("EUR");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -338,7 +316,7 @@ namespace Qowaiv.UnitTests.Financial
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -358,7 +336,7 @@ namespace Qowaiv.UnitTests.Financial
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -378,7 +356,7 @@ namespace Qowaiv.UnitTests.Financial
                 Obj = CurrencyTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -399,7 +377,7 @@ namespace Qowaiv.UnitTests.Financial
                 Obj = Currency.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -419,7 +397,7 @@ namespace Qowaiv.UnitTests.Financial
                 Obj = Currency.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

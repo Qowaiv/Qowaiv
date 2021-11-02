@@ -181,19 +181,6 @@ namespace Qowaiv.UnitTests.Mathematics
         }
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_Throws()
-        {
-            Assert.Catch<ArgumentNullException>(() => SerializationTest.DeserializeUsingConstructor<Fraction>(null, default));
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_Throws()
-        {
-            var info = new SerializationInfo(typeof(Fraction), new FormatterConverter());
-            Assert.Catch<SerializationException>(() => SerializationTest.DeserializeUsingConstructor<Fraction>(info, default));
-        }
-
-        [Test]
         public void GetObjectData_NulSerializationInfo_Throws()
         {
             ISerializable obj = TestStruct;
@@ -215,7 +202,7 @@ namespace Qowaiv.UnitTests.Mathematics
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
 
@@ -224,14 +211,14 @@ namespace Qowaiv.UnitTests.Mathematics
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "-69/17";
             Assert.AreEqual(exp, act);
         }
@@ -239,7 +226,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Fraction>("-69/17");
+            var act =Deserialize.Xml<Fraction>("-69/17");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -248,7 +235,7 @@ namespace Qowaiv.UnitTests.Mathematics
         {
             var input = new FractionSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
             var exp = new FractionSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -259,7 +246,7 @@ namespace Qowaiv.UnitTests.Mathematics
         {
             var input = new FractionSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
             var exp = new FractionSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -270,7 +257,7 @@ namespace Qowaiv.UnitTests.Mathematics
         {
             var input = new FractionSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
             var exp = new FractionSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -281,7 +268,7 @@ namespace Qowaiv.UnitTests.Mathematics
         {
             var input = new FractionSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
             var exp = new FractionSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -292,7 +279,7 @@ namespace Qowaiv.UnitTests.Mathematics
         {
             var input = new FractionSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
             var exp = new FractionSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

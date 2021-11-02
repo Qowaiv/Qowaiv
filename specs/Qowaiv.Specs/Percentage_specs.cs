@@ -1206,21 +1206,21 @@ namespace Percentage_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Percentage);
+            var xml = Serialize.Xml(Svo.Percentage);
             Assert.AreEqual("17.51%", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Percentage>("17.51%");
+            var svo =Deserialize.Xml<Percentage>("17.51%");
             Assert.AreEqual(Svo.Percentage, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Percentage);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Percentage);
             Assert.AreEqual(Svo.Percentage, round_tripped);
         }
 
@@ -1228,7 +1228,7 @@ namespace Percentage_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Percentage);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -1268,14 +1268,14 @@ namespace Percentage_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Percentage);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Percentage);
             Assert.AreEqual(Svo.Percentage, round_tripped);
         }
 
         [Test]
         public void storing_decimal_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Percentage);
+            var info = Serialize.GetInfo(Svo.Percentage);
             Assert.AreEqual(0.1751m, info.GetDecimal("Value"));
         }
     }

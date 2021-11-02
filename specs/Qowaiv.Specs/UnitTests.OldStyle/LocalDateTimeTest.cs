@@ -111,27 +111,6 @@ namespace Qowaiv.UnitTests
 
         #region (XML) (De)serialization tests
 
-        [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<LocalDateTime>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(LocalDateTime), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<LocalDateTime>(info, default);
-            });
-        }
 
         [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
@@ -160,7 +139,7 @@ namespace Qowaiv.UnitTests
         {
             var input = LocalDateTimeTest.TestStructNoMilliseconds;
             var exp = LocalDateTimeTest.TestStructNoMilliseconds;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -168,14 +147,14 @@ namespace Qowaiv.UnitTests
         {
             var input = LocalDateTimeTest.TestStructNoMilliseconds;
             var exp = LocalDateTimeTest.TestStructNoMilliseconds;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "1988-06-13 22:10:05.001";
             Assert.AreEqual(exp, act);
         }
@@ -183,7 +162,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<LocalDateTime>("1988-06-13 22:10:05.001");
+            var act =Deserialize.Xml<LocalDateTime>("1988-06-13 22:10:05.001");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -203,7 +182,7 @@ namespace Qowaiv.UnitTests
                 Obj = LocalDateTimeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -223,7 +202,7 @@ namespace Qowaiv.UnitTests
                 Obj = LocalDateTimeTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -243,7 +222,7 @@ namespace Qowaiv.UnitTests
                 Obj = LocalDateTimeTest.TestStructNoMilliseconds,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -264,7 +243,7 @@ namespace Qowaiv.UnitTests
                 Obj = LocalDateTime.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");

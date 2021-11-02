@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -562,21 +563,21 @@ namespace Month_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Month);
-            Assert.AreEqual("Feb", xml);
+            var xml = Serialize.Xml(Svo.Month);
+            xml.Should().Be("Feb");
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Month>("Feb");
-            Assert.AreEqual(Svo.Month, svo);
+            var svo = Deserialize.Xml<Month>("Feb");
+            Svo.Month.Should().Be(svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Month);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Month);
             Assert.AreEqual(Svo.Month, round_tripped);
         }
 
@@ -584,7 +585,7 @@ namespace Month_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Month);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -629,14 +630,14 @@ namespace Month_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Month);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Month);
             Assert.AreEqual(Svo.Month, round_tripped);
         }
 
         [Test]
         public void storing_byte_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Month);
+            var info = Serialize.GetInfo(Svo.Month);
             Assert.AreEqual((byte)2, info.GetByte("Value"));
         }
     }

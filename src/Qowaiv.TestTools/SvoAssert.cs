@@ -1,5 +1,4 @@
-﻿using Qowaiv.TestTools.Diagnostics.Contracts;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.IO;
 using Qowaiv.TestTools;
@@ -169,18 +170,6 @@ namespace Qowaiv.UnitTests.IO
         #endregion
 
         #region (XML) (De)serialization tests
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
 
         [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
@@ -765,15 +754,8 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be StreamSize."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]
@@ -1278,16 +1260,6 @@ namespace Qowaiv.UnitTests.IO
         #region Extension tests
 
         [Test]
-        public void GetStreamSize_NullStream_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                Stream stream = null;
-                stream.GetStreamSize();
-            }
-            , "stream");
-        }
-        [Test]
         public void GetStreamSize_Stream_17Byte()
         {
             using var stream = new MemoryStream(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 });
@@ -1313,28 +1285,6 @@ namespace Qowaiv.UnitTests.IO
             StreamSize exp = 9;
 
             Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void GetStreamSize_NullFileInfo_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                FileInfo fileInfo = null;
-                fileInfo.GetStreamSize();
-            }
-            , "fileInfo");
-        }
-
-        [Test]
-        public void GetStreamSize_NullDirectoryInfo_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                DirectoryInfo directoryInfo = null;
-                directoryInfo.GetStreamSize();
-            }
-            , "directoryInfo");
         }
 
         [Test]

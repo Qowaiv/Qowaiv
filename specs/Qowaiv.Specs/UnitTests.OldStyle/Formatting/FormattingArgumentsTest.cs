@@ -74,18 +74,6 @@ namespace Qowaiv.UnitTests.Formatting
         #region (De)serialization tests
 
         [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;

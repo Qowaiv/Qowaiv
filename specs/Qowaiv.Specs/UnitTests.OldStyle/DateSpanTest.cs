@@ -493,14 +493,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-            {
-                TestStruct.CompareTo(new object());
-            },
-            "obj",
-            "Argument must be DateSpan."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]

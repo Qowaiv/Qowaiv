@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -33,86 +34,71 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_Y0_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(0000, 10, 4);
-            },
-            "year",
-            "Year should be in range [1,9999].");
+            Action create = () => new WeekDate(0000, 10, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year should be in range [1,9999].");
         }
         [Test]
         public void Ctor_Y10000_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(10000, 10, 4);
-            },
-            "year",
-            "Year should be in range [1,9999].");
+            Action create = () => new WeekDate(10000, 10, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year should be in range [1,9999].");
         }
 
         [Test]
         public void Ctor_W0_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 0, 4);
-            },
-            "week",
-            "Week should be in range [1,53].");
+            Action create = () => new WeekDate(1980, 0, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Week should be in range [1,53].");
         }
         [Test]
         public void Ctor_W54_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 54, 4);
-            },
-            "week",
-            "Week should be in range [1,53].");
+            Action create = () => new WeekDate(1980, 54, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Week should be in range [1,53].");
         }
 
         [Test]
         public void Ctor_D0_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 10, 0);
-            },
-            "day",
-            "Day should be in range [1,7].");
+            Action create = () => new WeekDate(1980, 10, 0);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Day should be in range [1,7]."); 
         }
         [Test]
         public void Ctor_D8_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 10, 8);
-            },
-            "day",
-            "Day should be in range [1,7].");
+            Action create = () => new WeekDate(1980, 10, 8);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Day should be in range [1,7].");
+
         }
 
         [Test]
         public void Ctor_Y9999W52D6_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(9999, 52, 6);
-            },
-            null,
-            "Year, Week, and Day parameters describe an un-representable Date.");
+            Action create = () => new WeekDate(9999, 52, 6);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
         }
 
         [Test]
         public void Ctor_Y9999W53D1_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(9999, 53, 6);
-            },
-            null,
-            "Year, Week, and Day parameters describe an un-representable Date.");
+            Action create = () => new WeekDate(9999, 32, 6);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
         }
 
         #endregion
@@ -207,18 +193,6 @@ namespace Qowaiv.UnitTests
         #endregion
 
         #region (XML) (De)serialization tests
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
 
         [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
@@ -591,15 +565,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be WeekDate."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]

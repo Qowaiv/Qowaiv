@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.Text;
@@ -14,22 +15,18 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void Ctor_InvalidPattern_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException(() =>
-            {
-                new WildcardPattern("**");
-            },
-            "pattern",
-            "The wildcard pattern is invalid.");
+            Action create = () => new WildcardPattern("**");
+            create.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("The wildcard pattern is invalid.");
         }
         [Test]
         public void Ctor_InvalidPatternSql_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException(() =>
-            {
-                new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
-            },
-            "pattern",
-            "The wildcard pattern is invalid.");
+            Action create = () => new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
+            create.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("The wildcard pattern is invalid.");
         }
 
         [TestCase("*", "matches", true)]
@@ -107,18 +104,6 @@ namespace Qowaiv.UnitTests.Text
         }
   
         #region (XML) (De)serialization tests
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = new WildcardPattern("*");
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
 
         [Test]
         public void GetObjectData_SerializationInfo_AreEqual()

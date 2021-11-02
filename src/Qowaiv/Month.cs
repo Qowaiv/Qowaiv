@@ -1,7 +1,4 @@
-﻿#pragma warning disable S2328 // "GetHashCode" should not reference mutable fields
-// To support XML serialization, the underlying value has to be mutable but the struct is inmutable.
-
-using Qowaiv.Conversion;
+﻿using Qowaiv.Conversion;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;

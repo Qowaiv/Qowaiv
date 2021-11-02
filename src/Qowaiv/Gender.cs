@@ -2,13 +2,6 @@
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 
-#pragma warning disable S2328
-// "Equals" and the comparison operators should be overridden when implementing "IComparable"
-// See README.md => Sortable
-
-// "GetHashCode" should not reference mutable fields
-// See README.md => Hashing
-
 using Qowaiv.Conversion;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;

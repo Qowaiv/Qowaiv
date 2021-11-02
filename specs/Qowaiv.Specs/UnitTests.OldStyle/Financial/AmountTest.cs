@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -122,13 +123,8 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void GetObjectData_Null_ThrowsArgumentNullException()
         {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]
@@ -585,15 +581,8 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be Amount."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]

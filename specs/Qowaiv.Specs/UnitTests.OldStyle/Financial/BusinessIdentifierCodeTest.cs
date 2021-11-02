@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
@@ -191,22 +192,10 @@ namespace Qowaiv.UnitTests.Financial
         #region (XML) (De)serialization tests
 
         [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
-            var info = new SerializationInfo(typeof(BusinessIdentifierCode), new System.Runtime.Serialization.FormatterConverter());
+            var info = new SerializationInfo(typeof(BusinessIdentifierCode), new FormatterConverter());
             obj.GetObjectData(info, default);
 
             Assert.AreEqual(TestStruct.ToString(), info.GetString("Value"));
@@ -567,15 +556,8 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be BusinessIdentifierCode."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         #endregion

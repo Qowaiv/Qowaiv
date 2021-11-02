@@ -27,11 +27,8 @@ namespace Qowaiv.TestTools
             }
             catch (TargetInvocationException x)
             {
-                if (x.InnerException is null)
-                {
-                    throw;
-                }
-                throw x.InnerException;
+                if (x.InnerException is null) throw;
+                else throw x.InnerException;
             }
         }
 
@@ -43,11 +40,9 @@ namespace Qowaiv.TestTools
                 .GetMethods(BindingFlags.Instance | BindingFlags.Public)
                 .FirstOrDefault(ToJson);
 
-            if (toJson is null)
-            {
-                throw new InvalidOperationException($"Could not find {typeof(T).Name}.ToJson().");
-            }
-            return toJson.Invoke(val, Array.Empty<object>());
+            return toJson is null
+                ? throw new InvalidOperationException($"Could not find {typeof(T).Name}.ToJson().")
+                : toJson.Invoke(val, Array.Empty<object>());
         }
 
         [Pure]
@@ -60,7 +55,7 @@ namespace Qowaiv.TestTools
         [Pure]
         private static bool ToJson(MethodInfo method)
             => method.Name == nameof(ToJson)
-                && method.GetParameters().Length == 0
-                && method.ReturnType != null;
+            && method.GetParameters().Length == 0
+            && method.ReturnType != null;
     }
 }

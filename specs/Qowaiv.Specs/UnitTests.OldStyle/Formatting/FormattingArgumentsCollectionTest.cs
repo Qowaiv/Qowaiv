@@ -248,7 +248,7 @@ namespace Qowaiv.UnitTests.Formatting
             Action add = () => collection.Add(typeof(Type), "");
             add.Should()
                 .Throw<ArgumentException>()
-                .WithMessage("The argument must implement System.IFormattable.");
+                .WithMessage("The argument must implement System.IFormattable. (Parameter 'type')");
         }
 
         [Test]

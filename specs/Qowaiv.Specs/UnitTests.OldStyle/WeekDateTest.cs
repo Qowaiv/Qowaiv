@@ -37,7 +37,7 @@ namespace Qowaiv.UnitTests
             Action create = () => new WeekDate(0000, 10, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .WithMessage("Year should be in range [1,9999].");
+                .WithMessage("Year should be in range [1,9999]. (Parameter 'year')");
         }
         [Test]
         public void Ctor_Y10000_ThrowsArgumentOutofRangeException()
@@ -45,7 +45,7 @@ namespace Qowaiv.UnitTests
             Action create = () => new WeekDate(10000, 10, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .WithMessage("Year should be in range [1,9999].");
+                .WithMessage("Year should be in range [1,9999]. (Parameter 'year')");
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Qowaiv.UnitTests
             Action create = () => new WeekDate(1980, 0, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .WithMessage("Week should be in range [1,53].");
+                .WithMessage("Week should be in range [1,53]. (Parameter 'week')");
         }
         [Test]
         public void Ctor_W54_ThrowsArgumentOutofRangeException()
@@ -62,7 +62,7 @@ namespace Qowaiv.UnitTests
             Action create = () => new WeekDate(1980, 54, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .WithMessage("Week should be in range [1,53].");
+                .WithMessage("Week should be in range [1,53]. (Parameter 'week')");
         }
 
         [Test]
@@ -71,16 +71,16 @@ namespace Qowaiv.UnitTests
             Action create = () => new WeekDate(1980, 10, 0);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .WithMessage("Day should be in range [1,7]."); 
+                .WithMessage("Day should be in range [1,7]. (Parameter 'day')"); 
         }
+
         [Test]
         public void Ctor_D8_ThrowsArgumentOutofRangeException()
         {
             Action create = () => new WeekDate(1980, 10, 8);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .WithMessage("Day should be in range [1,7].");
-
+                .WithMessage("Day should be in range [1,7]. (Parameter 'day')");
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_Y9999W53D1_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(9999, 32, 6);
+            Action create = () => new WeekDate(9999, 53, 6);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");

@@ -18,7 +18,7 @@ namespace Qowaiv.UnitTests.Text
             Action create = () => new WildcardPattern("**");
             create.Should()
                 .Throw<ArgumentException>()
-                .WithMessage("The wildcard pattern is invalid.");
+                .WithMessage("The wildcard pattern is invalid. (Parameter 'pattern')");
         }
         [Test]
         public void Ctor_InvalidPatternSql_ThrowsArgumentException()
@@ -26,7 +26,7 @@ namespace Qowaiv.UnitTests.Text
             Action create = () => new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
             create.Should()
                 .Throw<ArgumentException>()
-                .WithMessage("The wildcard pattern is invalid.");
+                .WithMessage("The wildcard pattern is invalid. (Parameter 'pattern')");
         }
 
         [TestCase("*", "matches", true)]

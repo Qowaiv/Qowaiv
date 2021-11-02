@@ -3,8 +3,6 @@ using Qowaiv.Hashing;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
 
 namespace Qowaiv.Security.Cryptography
 {
@@ -20,6 +18,9 @@ namespace Qowaiv.Security.Cryptography
 
         private Secret(string value) => m_Value = value;
 
+        /// <summary>Returns true if the secret is empty/not set.</summary>
+        [Pure]
+        public bool IsEmpty() => m_Value is null;
 
         /// <summary>Gets a string representing this secret.</summary>
         [Pure]
@@ -35,7 +36,7 @@ namespace Qowaiv.Security.Cryptography
 
         /// <inheritdoc />
         [Pure]
-        public override int GetHashCode() => HashingNotSupported.For<Secret>();
+        public override int GetHashCode() => Hash.NotSupportedBy<Secret>();
 
         /// <inheritdoc />
         [Pure]
@@ -43,10 +44,7 @@ namespace Qowaiv.Security.Cryptography
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-            => m_Value is null
-            ? DebugDisplay.Empty
-            : Value();
+        private string DebuggerDisplay => m_Value is null ? DebugDisplay.Empty : Value();
 
         /// <summary>Creates a secret from an UTF8 string.</summary >
         /// <param name="str" >
@@ -56,7 +54,7 @@ namespace Qowaiv.Security.Cryptography
         public static Secret Parse(string str)
             => string.IsNullOrEmpty(str)
             ? Empty
-            : new(Encoding.UTF8.GetBytes(str));
+            : new(str);
      
         /// <summary>Creates a secret from a JSON string node.</summary>
         [Pure]

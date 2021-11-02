@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Security.Cryptography;
 
 namespace Qowaiv.Security.Cryptography
@@ -10,7 +11,7 @@ namespace Qowaiv.Security.Cryptography
         {
             Guard.NotNull(algorithm, nameof(algorithm));
             var hash = algorithm.ComputeHash(buffer);
-            return Secret.Create(hash);
+            throw new NotSupportedException();
         }
     }
 }

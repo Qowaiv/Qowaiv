@@ -10,30 +10,38 @@ namespace Qowaiv.Hashing
         [Pure]
         public static int Code(string str)
         {
-            str ??= string.Empty;
-            unchecked
+            if (string.IsNullOrEmpty(str)) return 0;
+            else
             {
-                int hash1 = (5381 << 16) + 5381;
-                int hash2 = hash1;
-
-                for (int i = 0; i < str.Length; i += 2)
+                unchecked
                 {
-                    hash1 = ((hash1 << 5) + hash1) ^ str[i];
-                    if (i == str.Length - 1) break;
-                    else  hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
+                    int hash1 = (5381 << 16) + 5381;
+                    int hash2 = hash1;
+
+                    for (int i = 0; i < str.Length; i += 2)
+                    {
+                        hash1 = ((hash1 << 5) + hash1) ^ str[i];
+                        if (i == str.Length - 1) break;
+                        else hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
+                    }
+                    return Code(hash1 + (hash2 * 1566083941));
                 }
-                return Code(hash1 + (hash2 * 1566083941));
             }
         }
 
         /// <summary>Gets a randomized hashcode for an <see cref="int"/>.</summary>
         [Pure]
-        public static int Code(int value) => Randomizer ^ value;
+        public static int Code(int value) 
+            => value == 0
+            ? 0
+            : Randomizer ^ value;
         
         /// <summary>Gets a randomized hashcode for a struct.</summary>
         [Pure]
         public static int Code<T>(T value) where T : struct
-            => Randomizer ^ value.GetHashCode();
+            => default(T).Equals(value)
+            ? 0
+            : Randomizer ^ value.GetHashCode();
 
         /// <summary>Randomizer hash based on <see cref="string.GetHashCode()"/>.</summary>
         private static int Randomizer = "Qowaiv".GetHashCode();

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -9,6 +10,51 @@ using System;
 
 namespace Date_specs
 {
+    public class Is_equal_by_value
+    {
+        [Test]
+        public void not_equal_to_null()
+            => Svo.Date.Equals(null).Should().BeFalse();
+
+        [Test]
+        public void not_equal_to_other_type()
+            => Svo.Date.Equals(new object()).Should().BeFalse();
+
+        [Test]
+        public void not_equal_to_different_value()
+            => Svo.Date.Equals(Date.MinValue).Should().BeFalse();
+
+        [Test]
+        public void equal_to_same_value()
+            => Svo.Date.Equals(new Date(2017, 06, 11)).Should().BeTrue();
+
+        [Test]
+        public void equal_operator_returns_true_for_same_values()
+            => (new Date(2017, 06, 11) == Svo.Date).Should().BeTrue();
+
+        [Test]
+        public void equal_operator_returns_false_for_different_values()
+            => (new Date(2017, 06, 11) == Date.MinValue).Should().BeFalse();
+
+        [Test]
+        public void not_equal_operator_returns_false_for_same_values()
+            => (new Date(2017, 06, 11) != Svo.Date).Should().BeFalse();
+
+        [Test]
+        public void not_equal_operator_returns_true_for_different_values()
+            => (new Date(2017, 06, 11) != Date.MinValue).Should().BeTrue();
+
+        [TestCase("", 0)]
+        [TestCase("yes", 20170609)]
+        public void hash_code_is_value_based(YesNo svo, int hash)
+        {
+            using (Hash.WithFixedRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
+        }
+    }
+
     public class Supports_type_conversion
     {
         [Test]

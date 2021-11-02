@@ -315,26 +315,6 @@ namespace Qowaiv.UnitTests
 
         #region IEquatable tests
 
-        /// <summary>GetHash should not fail for LocalDateTime.MinValue.</summary>
-        [Test]
-        public void GetHash_MinValue_Hash()
-        {
-            Assert.AreEqual(0, LocalDateTime.MinValue.GetHashCode());
-        }
-
-        /// <summary>GetHash should not fail for the test struct.</summary>
-        [Test]
-        public void GetHash_TestStruct_Hash()
-        {
-            Assert.AreEqual(304475390, LocalDateTimeTest.TestStruct.GetHashCode());
-        }
-
-        [Test]
-        public void Equals_MinValueMinValue_IsTrue()
-        {
-            Assert.IsTrue(LocalDateTime.MinValue.Equals(LocalDateTime.MinValue));
-        }
-
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
@@ -345,58 +325,6 @@ namespace Qowaiv.UnitTests
 
                 Assert.IsTrue(l.Equals(r));
             }
-        }
-
-        [Test]
-        public void Equals_TestStructTestStruct_IsTrue()
-        {
-            Assert.IsTrue(LocalDateTimeTest.TestStruct.Equals(LocalDateTimeTest.TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructMinValue_IsFalse()
-        {
-            Assert.IsFalse(LocalDateTimeTest.TestStruct.Equals(LocalDateTime.MinValue));
-        }
-
-        [Test]
-        public void Equals_MinValueTestStruct_IsFalse()
-        {
-            Assert.IsFalse(LocalDateTime.MinValue.Equals(LocalDateTimeTest.TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructObjectTestStruct_IsTrue()
-        {
-            Assert.IsTrue(LocalDateTimeTest.TestStruct.Equals((object)LocalDateTimeTest.TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructNull_IsFalse()
-        {
-            Assert.IsFalse(LocalDateTimeTest.TestStruct.Equals(null));
-        }
-
-        [Test]
-        public void Equals_TestStructObject_IsFalse()
-        {
-            Assert.IsFalse(LocalDateTimeTest.TestStruct.Equals(new object()));
-        }
-
-        [Test]
-        public void OperatorIs_TestStructTestStruct_IsTrue()
-        {
-            var l = LocalDateTimeTest.TestStruct;
-            var r = LocalDateTimeTest.TestStruct;
-            Assert.IsTrue(l == r);
-        }
-
-        [Test]
-        public void OperatorIsNot_TestStructTestStruct_IsFalse()
-        {
-            var l = LocalDateTimeTest.TestStruct;
-            var r = LocalDateTimeTest.TestStruct;
-            Assert.IsFalse(l != r);
         }
 
         #endregion

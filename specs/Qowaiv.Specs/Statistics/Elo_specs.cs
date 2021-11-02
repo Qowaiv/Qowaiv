@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Specs;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools;
@@ -8,6 +9,51 @@ using Qowaiv.TestTools.Globalization;
 
 namespace Statistics.Elo_specs
 {
+    public class Is_equal_by_value
+    {
+        [Test]
+        public void not_equal_to_null()
+            => Svo.Elo.Equals(null).Should().BeFalse();
+
+        [Test]
+        public void not_equal_to_other_type()
+            => Svo.Elo.Equals(new object()).Should().BeFalse();
+
+        [Test]
+        public void not_equal_to_different_value()
+            => Svo.Elo.Equals(Elo.MinValue).Should().BeFalse();
+
+        [Test]
+        public void equal_to_same_value()
+            => Svo.Elo.Equals(Elo.Create(1732.4)).Should().BeTrue();
+
+        [Test]
+        public void equal_operator_returns_true_for_same_values()
+            => (Elo.Create(1732.4) == Svo.Elo).Should().BeTrue();
+
+        [Test]
+        public void equal_operator_returns_false_for_different_values()
+            => (Elo.Create(1732.4) == Elo.MinValue).Should().BeFalse();
+
+        [Test]
+        public void not_equal_operator_returns_false_for_same_values()
+            => (Elo.Create(1732.4) != Svo.Elo).Should().BeFalse();
+
+        [Test]
+        public void not_equal_operator_returns_true_for_different_values()
+            => (Elo.Create(1732.4) != Elo.MinValue).Should().BeTrue();
+
+        [TestCase("0", 0)]
+        [TestCase("1732.4", -667857040)]
+        public void hash_code_is_value_based(Elo svo, int hash)
+        {
+            using (Hash.WithFixedRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
+        }
+    }
+
     public class Supports_type_conversion
     {
         [Test]
@@ -56,6 +102,15 @@ namespace Statistics.Elo_specs
         [Test]
         public void to_double()
             => Converting.Value(Svo.Elo).To<double>().Should().Be(1732.4);
+    
+        [TestCase("0", 0)]
+        [TestCase("1732.4", -667857040)]
+        public void hash_code_is_value_based(Elo svo, int hash)
+        {
+            using (Hash.WithFixedRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
+        }
     }
-
 }

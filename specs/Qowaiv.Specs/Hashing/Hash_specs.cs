@@ -10,12 +10,9 @@ namespace Hashing.Hash_specs
         [Test]
         public void Null_String_is_supported()
         {
-            using (Hash.WithFixedRandomizer())
-            {
-                string nil = null;
-                var hash = Hash.Code(nil);
-                hash.Should().Be(740020621);
-            }
+            string nil = null;
+            var hash = Hash.Code(nil);
+            hash.Should().Be(0);
         }
     }
     public class Get_hash_code_with_fixed_randomizer

@@ -16,7 +16,7 @@ namespace Qowaiv.UnitTests
     public class WeekDateTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly WeekDate TestStruct = new WeekDate(1997, 14, 6);
+        public static readonly WeekDate TestStruct = new(1997, 14, 6);
 
         #region week date const tests
 
@@ -572,16 +572,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThan_17LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 17, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 17, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l < r);
         }
         [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 21, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 21, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l > r);
         }
@@ -589,16 +589,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 17, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 17, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 21, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 21, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l >= r);
         }
@@ -606,16 +606,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 17, 5);
-            WeekDate r = new WeekDate(1980, 17, 5);
+            WeekDate l = new(1980, 17, 5);
+            WeekDate r = new(1980, 17, 5);
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 21, 5);
-            WeekDate r = new WeekDate(1980, 21, 5);
+            WeekDate l = new(1980, 21, 5);
+            WeekDate r = new(1980, 21, 5);
 
             Assert.IsTrue(l >= r);
         }
@@ -652,7 +652,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_WeekDateToInt32_AreEqual()
         {
-            DateTime exp = new DateTime(1997, 04, 05);
+            DateTime exp = new(1997, 04, 05);
             DateTime act = TestStruct;
 
             Assert.AreEqual(exp, act);

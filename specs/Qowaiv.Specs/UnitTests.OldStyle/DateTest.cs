@@ -17,7 +17,7 @@ namespace Qowaiv.UnitTests
     public class DateTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly Date TestStruct = new Date(1970, 02, 14);
+        public static readonly Date TestStruct = new(1970, 02, 14);
 
         #region Date const tests
 
@@ -533,16 +533,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThan_17LT19_IsTrue()
         {
-            Date l = new Date(1990, 10, 17);
-            Date r = new Date(1990, 10, 19);
+            Date l = new(1990, 10, 17);
+            Date r = new(1990, 10, 19);
 
             Assert.IsTrue(l < r);
         }
         [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
-            Date l = new Date(1990, 10, 21);
-            Date r = new Date(1990, 10, 19);
+            Date l = new(1990, 10, 21);
+            Date r = new(1990, 10, 19);
 
             Assert.IsTrue(l > r);
         }
@@ -550,16 +550,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
-            Date l = new Date(1990, 10, 17);
-            Date r = new Date(1990, 10, 19);
+            Date l = new(1990, 10, 17);
+            Date r = new(1990, 10, 19);
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
-            Date l = new Date(1990, 10, 21);
-            Date r = new Date(1990, 10, 19);
+            Date l = new(1990, 10, 21);
+            Date r = new(1990, 10, 19);
 
             Assert.IsTrue(l >= r);
         }
@@ -567,16 +567,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
-            Date l = new Date(1990, 10, 17);
-            Date r = new Date(1990, 10, 17);
+            Date l = new(1990, 10, 17);
+            Date r = new(1990, 10, 17);
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
-            Date l = new Date(1990, 10, 21);
-            Date r = new Date(1990, 10, 21);
+            Date l = new(1990, 10, 21);
+            Date r = new(1990, 10, 21);
 
             Assert.IsTrue(l >= r);
         }
@@ -616,7 +616,7 @@ namespace Qowaiv.UnitTests
         public void Implicit_DateToWeekDate_AreEqual()
         {
             WeekDate exp = TestStruct;
-            WeekDate act = new WeekDate(1970, 07, 6);
+            WeekDate act = new(1970, 07, 6);
 
             Assert.AreEqual(exp, act);
         }
@@ -633,7 +633,7 @@ namespace Qowaiv.UnitTests
         public void Implicit_DateToDateTime_AreEqual()
         {
             DateTime exp = TestStruct;
-            DateTime act = new DateTime(1970, 02, 14);
+            DateTime act = new(1970, 02, 14);
 
             Assert.AreEqual(exp, act);
         }

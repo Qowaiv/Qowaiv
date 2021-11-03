@@ -946,9 +946,7 @@ namespace Qowaiv.Financial.UnitTests
 
         [Test]
         public void ConverterExists_Amount_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Amount));
-        }
+            => typeof(Amount).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanConvertFromInt32()

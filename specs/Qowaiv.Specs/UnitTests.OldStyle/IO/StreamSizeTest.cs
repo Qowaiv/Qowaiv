@@ -1178,10 +1178,8 @@ namespace Qowaiv.UnitTests.IO
 
         [Test]
         public void ConverterExists_StreamSize_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(StreamSize));
-        }
-
+            => typeof(StreamSize).Should().HaveTypeConverterDefined();
+        
         [Test]
         public void CanConvertFromInt32_StreamSize_IsTrue()
         {

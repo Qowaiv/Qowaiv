@@ -747,10 +747,8 @@ namespace Qowaiv.UnitTests
 
         [Test]
         public void ConverterExists_WeekDate_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(WeekDate));
-        }
-
+            => typeof(WeekDate).Should().HaveTypeConverterDefined();
+        
         [Test]
         public void CanNotConvertFromInt32_WeekDate_IsTrue()
         {

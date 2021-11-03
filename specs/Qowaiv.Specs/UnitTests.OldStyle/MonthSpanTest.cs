@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using System;
@@ -591,10 +592,8 @@ namespace Qowaiv.UnitTests
 
         [Test]
         public void ConverterExists_MonthSpan_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(MonthSpan));
-        }
-
+            => typeof(MonthSpan).Should().HaveTypeConverterDefined();
+        
         [Test]
         public void CanConvertFromString_MonthSpan_IsTrue()
         {

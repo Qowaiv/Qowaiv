@@ -815,9 +815,7 @@ namespace Qowaiv.UnitTests.Web
 
         [Test]
         public void ConverterExists_InternetMediaType_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(InternetMediaType));
-        }
+            => typeof(InternetMediaType).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_InternetMediaType_IsTrue()

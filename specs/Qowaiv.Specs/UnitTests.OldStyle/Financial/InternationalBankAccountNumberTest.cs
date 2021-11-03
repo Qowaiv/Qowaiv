@@ -615,9 +615,7 @@ namespace Qowaiv.UnitTests.Financial
 
         [Test]
         public void ConverterExists_InternationalBankAccountNumber_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(InternationalBankAccountNumber));
-        }
+            => typeof(InternationalBankAccountNumber).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_InternationalBankAccountNumber_IsTrue()

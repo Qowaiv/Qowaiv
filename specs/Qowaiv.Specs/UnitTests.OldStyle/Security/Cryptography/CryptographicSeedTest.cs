@@ -562,9 +562,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
 
         [Test]
         public void ConverterExists_CryptographicSeed_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(CryptographicSeed));
-        }
+            => typeof(CryptographicSeed).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_CryptographicSeed_IsTrue()

@@ -803,9 +803,7 @@ namespace Qowaiv.UnitTests
 
         [Test]
         public void ConverterExists_Date_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Date));
-        }
+            => typeof(Date).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_Date_IsTrue()

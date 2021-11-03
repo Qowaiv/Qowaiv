@@ -377,9 +377,7 @@ namespace Qowaiv.UnitTests
     public class EmailAddressCollectionSerializeObject
     {
         public int Id { get; set; }
-#pragma warning disable S4004 // Collection properties should be readonly
         public EmailAddressCollection Obj { get; set; }
-#pragma warning restore S4004 // Collection properties should be readonly
         public DateTime Date { get; set; }
     }
 }

@@ -970,9 +970,7 @@ namespace Qowaiv.UnitTests.Globalization
 
         [Test]
         public void ConverterExists_Country_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Country));
-        }
+            => typeof(Country).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_Country_IsTrue()

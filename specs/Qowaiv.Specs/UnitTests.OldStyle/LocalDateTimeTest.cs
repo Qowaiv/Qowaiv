@@ -619,9 +619,7 @@ namespace Qowaiv.UnitTests
 
         [Test]
         public void ConverterExists_LocalDateTime_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(LocalDateTime));
-        }
+            => typeof(LocalDateTime).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_LocalDateTime_IsTrue()

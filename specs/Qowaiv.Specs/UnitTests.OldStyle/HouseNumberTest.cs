@@ -824,9 +824,7 @@ namespace Qowaiv.UnitTests
 
         [Test]
         public void ConverterExists_HouseNumber_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(HouseNumber));
-        }
+            => typeof(HouseNumber).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromDateTime_HouseNumber_IsTrue()

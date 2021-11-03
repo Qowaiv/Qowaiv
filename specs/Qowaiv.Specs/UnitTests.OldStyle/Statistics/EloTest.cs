@@ -740,9 +740,7 @@ namespace Qowaiv.UnitTests.Statistics
 
         [Test]
         public void ConverterExists_Elo_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Elo));
-        }
+            => typeof(Elo).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32()

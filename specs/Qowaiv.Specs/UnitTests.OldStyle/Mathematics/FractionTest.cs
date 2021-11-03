@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.Mathematics;
 using Qowaiv.TestTools;
@@ -566,9 +567,7 @@ namespace Qowaiv.UnitTests.Mathematics
 
         [Test]
         public void ConverterExists_Fraction_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Fraction));
-        }
+            => typeof(Fraction).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_Fraction_IsTrue()

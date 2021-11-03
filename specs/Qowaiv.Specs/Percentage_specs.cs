@@ -1106,9 +1106,7 @@ namespace Percentage_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Percentage));
-        }
+            => typeof(Percentage).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()

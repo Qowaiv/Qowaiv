@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.Identifiers;
 using Qowaiv.TestTools;
@@ -503,9 +504,7 @@ namespace Qowaiv.UnitTests.Identifiers
 
         [Test]
         public void ConverterExists_IdForGuid_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Id<ForGuid>));
-        }
+            => typeof(Id<ForGuid>).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_IdForGuid_IsTrue()

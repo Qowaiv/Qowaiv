@@ -536,10 +536,8 @@ Actual:   [{(string.Join(", ", act))}]");
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Uuid));
-        }
-
+            => typeof(Uuid).Should().HaveTypeConverterDefined();
+        
         [Test]
         public void from_null_string()
         {

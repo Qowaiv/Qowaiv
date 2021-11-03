@@ -708,9 +708,7 @@ namespace Qowaiv.UnitTests.Financial
 
         [Test]
         public void ConverterExists_BusinessIdentifierCode_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(BusinessIdentifierCode));
-        }
+            => typeof(BusinessIdentifierCode).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_BusinessIdentifierCode_IsTrue()

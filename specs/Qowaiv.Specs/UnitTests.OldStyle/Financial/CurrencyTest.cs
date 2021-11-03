@@ -779,9 +779,7 @@ namespace Qowaiv.UnitTests.Financial
 
         [Test]
         public void ConverterExists_Currency_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Currency));
-        }
+            => typeof(Currency).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_Currency_IsTrue()

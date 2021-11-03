@@ -698,9 +698,7 @@ namespace Qowaiv.UnitTests
 
         [Test]
         public void ConverterExists_DateSpan_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(DateSpan));
-        }
+            => typeof(DateSpan).Should().HaveTypeConverterDefined();
 
         [Test]
         public void CanNotConvertFromInt32_DateSpan_IsTrue()

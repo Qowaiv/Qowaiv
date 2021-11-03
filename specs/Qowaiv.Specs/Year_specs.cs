@@ -444,9 +444,7 @@ namespace Year_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Year));
-        }
+            => typeof(Year).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()

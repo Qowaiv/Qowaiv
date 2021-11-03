@@ -5,6 +5,7 @@ using System.Diagnostics;
 namespace Qowaiv.TestTools
 {
     /// <summary>Verifies conditions in unit tests for type converters.</summary>
+    [Obsolete("Use Converting.Value(value) and Converting.To<T>()")]
     public static class TypeConverterAssert
     {
         /// <summary>Asserts that the type converter for the specified type can convert from string.</summary>

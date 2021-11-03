@@ -1,4 +1,7 @@
-﻿using Qowaiv.Identifiers;
+﻿using Qowaiv.Financial;
+using Qowaiv.Globalization;
+using Qowaiv.Identifiers;
+using Qowaiv.Security.Cryptography;
 using Qowaiv.TestTools.Globalization;
 using System;
 using CustomGuid = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForGuid>;
@@ -11,6 +14,10 @@ namespace Qowaiv.Specs
 {
     public static class Svo
     {
+        public static readonly Amount Amount = (Amount)42.17m;
+        public static readonly BusinessIdentifierCode BusinessIdentifierCode = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+        public static readonly Country Country = Country.VA;
+        public static readonly CryptographicSeed CryptographicSeed = CryptographicSeed.Parse("Qowaiv==");
         public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00);
         public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
         public static readonly Gender Gender = Gender.Female;

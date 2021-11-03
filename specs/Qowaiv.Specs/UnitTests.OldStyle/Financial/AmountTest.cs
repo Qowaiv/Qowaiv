@@ -942,55 +942,6 @@ namespace Qowaiv.Financial.UnitTests
             Assert.AreEqual((Amount)123.75m, rounded);
         }
 
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_Amount_IsTrue()
-            => typeof(Amount).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanConvertFromInt32()
-        {
-            TypeConverterAssert.ConvertFromEquals((Amount)123, 123);
-        }
-        [Test]
-        public void CanConvertToInt32()
-        {
-            TypeConverterAssert.ConvertToEquals(1234, (Amount)1234);
-        }
-
-        [Test]
-        public void CanConvertFromString_Amount_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Amount));
-        }
-
-        [Test]
-        public void CanConvertToString_Amount_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Amount));
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        #endregion
-
         #region IsValid tests
 
         [Test]

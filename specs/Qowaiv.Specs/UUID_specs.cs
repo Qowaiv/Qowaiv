@@ -543,7 +543,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Uuid), null);
+                Converting.To<Uuid>().From(null).Should().Be(default);
             }
         }
 
@@ -552,7 +552,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Uuid), string.Empty);
+                Converting.To<Uuid>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -561,7 +561,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Uuid, Svo.Uuid.ToString());
+                Converting.To<Uuid>().From("Qowaiv_SVOLibrary_GUID").Should().Be(Svo.Uuid);
             }
         }
 
@@ -570,21 +570,18 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Uuid.ToString(), Svo.Uuid);
+                Converting.Value(Svo.Uuid).ToString().Should().Be("Qowaiv_SVOLibrary_GUIA");
             }
         }
 
         [Test]
         public void from_Guid()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Uuid, Svo.Guid);
-        }
+            => Converting.To<Uuid>().From(Svo.Guid).Should().Be(Svo.Uuid);
+
 
         [Test]
-        public void to_Guid()
-        {
-            TypeConverterAssert.ConvertToEquals(Svo.Guid, Svo.Uuid);
-        }
+        public void to_Guid() 
+            => Converting.Value(Svo.Uuid).To<Guid>().Should().Be(Svo.Guid);
     }
 
     public class Supports_JSON_serialization

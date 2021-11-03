@@ -1113,7 +1113,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Percentage), null);
+                Converting.To<Percentage>().From(null).Should().Be(Percentage.Zero);
             }
         }
 
@@ -1122,7 +1122,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Percentage, Svo.Percentage.ToString());
+                Converting.To<Percentage>().From("17%").Should().Be(Svo.Percentage);
             }
         }
 
@@ -1131,45 +1131,33 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Percentage.ToString(), Svo.Percentage);
+                Converting.Value(1700.Percent()).ToString().Should().Be("17%");
             }
         }
 
         [Test]
         public void from_int()
-        {
-            TypeConverterAssert.ConvertFromEquals(-1700.Percent(), -17);
-        }
+            => Converting.To<Percentage>().From(-17).Should().Be(-1700.Percent());
 
         [Test]
         public void to_int()
-        {
-            TypeConverterAssert.ConvertToEquals(17, 1700.Percent());
-        }
-
+            => Converting.Value(1700.Percent()).To<int>().Should().Be(17);
+        
         [Test]
         public void from_decimal()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Percentage, 0.1751m);
-        }
+            => Converting.To<Percentage>().From(0.1751m).Should().Be(Svo.Percentage);
 
         [Test]
         public void to_decimal()
-        {
-            TypeConverterAssert.ConvertToEquals(0.1751m, Svo.Percentage);
-        }
-
+            => Converting.Value(Svo.Percentage).To<decimal>().Should().Be(0.1751m);
+        
         [Test]
         public void from_double()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Percentage, 0.1751);
-        }
+            => Converting.To<Percentage>().From(0.1751).Should().Be(Svo.Percentage);
 
         [Test]
         public void to_double()
-        {
-            TypeConverterAssert.ConvertToEquals(0.1751, Svo.Percentage);
-        }
+            => Converting.Value(Svo.Percentage).To<double>().Should().Be(0.1751);
     }
 
     public class Supports_JSON_serialization

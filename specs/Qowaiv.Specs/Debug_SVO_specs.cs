@@ -117,7 +117,7 @@ namespace Debug_SVO_specs
         [TestCase(typeof(YesNo), "Y", "yes")]
         [TestCase(typeof(CustomGuid), "702e186f-f026-4f47-ae4d-fd5f16751f32", "702e186f-f026-4f47-ae4d-fd5f16751f32 (ForGuid)")]
         [TestCase(typeof(Int32Id), "123", "PREFIXformat (ForInt32)")]
-        [TestCase(typeof(Int64Id), "123456789", "PREFIXformat (ForInt64)")]
+        [TestCase(typeof(Int64Id), "123456789", "PREFIX123456789 (ForInt64)")]
         [TestCase(typeof(StringId), "QOWAIV-ID", "QOWAIV-ID (ForString)")]
         public void invariant_representation(Type svoType, string value, object debuggerDisplay)
         {

@@ -470,14 +470,6 @@ namespace Postal_code_specs
                 Converting.Value(Svo.PostalCode).ToString().Should().Be("H0H0H0");
             }
         }
-
-        [Test]
-        public void from_int()
-            => Converting.To<PostalCode>().From(123456789).Should().Be(Svo.PostalCode);
-
-        [Test]
-        public void to_int()
-            => Converting.Value(Svo.PostalCode).To<int>().Should().Be(123456789);
     }
 
 

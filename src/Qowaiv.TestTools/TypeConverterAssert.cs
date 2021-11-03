@@ -5,16 +5,9 @@ using System.Diagnostics;
 namespace Qowaiv.TestTools
 {
     /// <summary>Verifies conditions in unit tests for type converters.</summary>
+    [Obsolete("Use Converting.Value(value) and Converting.To<T>()")]
     public static class TypeConverterAssert
     {
-        /// <summary>Asserts that the type converter exists for the specified type.</summary>
-        [DebuggerStepThrough]
-        public static void ConverterExists(Type type)
-        {
-            var converter = TypeDescriptor.GetConverter(type);
-            Assert.IsNotNull(converter, $"No TypeConverter could be resolved for '{type}'.");
-        }
-
         /// <summary>Asserts that the type converter for the specified type can convert from string.</summary>
         [DebuggerStepThrough]
         public static void CanConvertFromString(Type type)

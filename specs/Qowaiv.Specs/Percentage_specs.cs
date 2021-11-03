@@ -1106,16 +1106,14 @@ namespace Percentage_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Percentage));
-        }
+            => typeof(Percentage).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Percentage), null);
+                Converting.To<Percentage>().From(null).Should().Be(Percentage.Zero);
             }
         }
 
@@ -1124,7 +1122,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Percentage, Svo.Percentage.ToString());
+                Converting.To<Percentage>().From("17.51%").Should().Be(Svo.Percentage);
             }
         }
 
@@ -1133,45 +1131,33 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Percentage.ToString(), Svo.Percentage);
+                Converting.Value(Svo.Percentage).ToString().Should().Be("17.51%");
             }
         }
 
         [Test]
         public void from_int()
-        {
-            TypeConverterAssert.ConvertFromEquals(-1700.Percent(), -17);
-        }
+            => Converting.To<Percentage>().From(-17).Should().Be(-1700.Percent());
 
         [Test]
         public void to_int()
-        {
-            TypeConverterAssert.ConvertToEquals(17, 1700.Percent());
-        }
-
+            => Converting.Value(1700.Percent()).To<int>().Should().Be(17);
+        
         [Test]
         public void from_decimal()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Percentage, 0.1751m);
-        }
+            => Converting.To<Percentage>().From(0.1751m).Should().Be(Svo.Percentage);
 
         [Test]
         public void to_decimal()
-        {
-            TypeConverterAssert.ConvertToEquals(0.1751m, Svo.Percentage);
-        }
-
+            => Converting.Value(Svo.Percentage).To<decimal>().Should().Be(0.1751m);
+        
         [Test]
         public void from_double()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Percentage, 0.1751);
-        }
+            => Converting.To<Percentage>().From(0.1751).Should().Be(Svo.Percentage);
 
         [Test]
         public void to_double()
-        {
-            TypeConverterAssert.ConvertToEquals(0.1751, Svo.Percentage);
-        }
+            => Converting.Value(Svo.Percentage).To<double>().Should().Be(0.1751);
     }
 
     public class Supports_JSON_serialization
@@ -1206,21 +1192,21 @@ namespace Percentage_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Percentage);
+            var xml = Serialize.Xml(Svo.Percentage);
             Assert.AreEqual("17.51%", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Percentage>("17.51%");
+            var svo =Deserialize.Xml<Percentage>("17.51%");
             Assert.AreEqual(Svo.Percentage, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Percentage);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Percentage);
             Assert.AreEqual(Svo.Percentage, round_tripped);
         }
 
@@ -1228,7 +1214,7 @@ namespace Percentage_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Percentage);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -1268,14 +1254,14 @@ namespace Percentage_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Percentage);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Percentage);
             Assert.AreEqual(Svo.Percentage, round_tripped);
         }
 
         [Test]
         public void storing_decimal_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Percentage);
+            var info = Serialize.GetInfo(Svo.Percentage);
             Assert.AreEqual(0.1751m, info.GetDecimal("Value"));
         }
     }
@@ -1284,8 +1270,6 @@ namespace Percentage_specs
     {
         [TestCase("17.51%", "17.51%")]
         public void has_custom_display(object display, Percentage svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }

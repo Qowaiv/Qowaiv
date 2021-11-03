@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Formatting;
-using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,47 +9,6 @@ namespace Qowaiv.UnitTests.Formatting
     [TestFixture]
     public class StringFormatterTest
     {
-        [Test]
-        public void Apply_NullObject_ThrowsArugmentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                StringFormatter.Apply<object>(null, null, null, null);
-            },
-            "obj");
-        }
-
-        [Test]
-        public void Apply_StringEmptyFormat_ThrowsArugmentException()
-        {
-            ExceptionAssert.CatchArgumentException(() =>
-            {
-                StringFormatter.Apply(new object(), string.Empty, null, null);
-            },
-            "format",
-            "Argument cannot be an empty string.");
-        }
-
-        [Test]
-        public void Apply_NullFormat_ThrowsArugmentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                StringFormatter.Apply<object>(new object(), null, null, null);
-            },
-            "format");
-        }
-
-        [Test]
-        public void Apply_NullTokens_ThrowsArugmentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                StringFormatter.Apply(Int32.MinValue, "0", CultureInfo.InvariantCulture, null);
-            },
-            "tokens");
-        }
-
         [Test]
         public void Apply_InvalidFormat_ThrowsFormatException()
         {

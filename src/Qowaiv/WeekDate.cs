@@ -1,8 +1,4 @@
-﻿#pragma warning disable S2328
-// "GetHashCode" should not reference mutable fields
-// See README.md => Hashing
-
-using Qowaiv.Conversion;
+﻿using Qowaiv.Conversion;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
@@ -52,8 +48,7 @@ namespace Qowaiv
     public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
     {
         /// <summary>Represents the pattern of a (potential) valid week date.</summary>
-        [Obsolete("Will become private when the next major version is released.")]
-        public static readonly Regex Pattern = new Regex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex Pattern = new(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents the minimum value of the week date.</summary>
         public static readonly WeekDate MinValue = new WeekDate { m_Value = Date.MinValue };

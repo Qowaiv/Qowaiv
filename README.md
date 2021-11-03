@@ -877,16 +877,6 @@ read-only, because this interface first create default instance and then
 sets the value. Only if somebody intentionally misuses the `IXmlSerialization`
 interface, can change a value during the lifetime of a SVO.
 
-Therefor
-
-``` CSharp
-#pragma warning disable S2328
-// "GetHashCode" should not reference mutable fields
-// See README.md => Hashing
-```
-
-is fine.
-
 ### Sortable
 SVO's support sorting. So, LINQ expressions like OrderBy() and OrderByDescending()
 work out of the box, just like Array.Sort(), and List.Sort(). However, the

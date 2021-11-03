@@ -2,10 +2,6 @@
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 
-#pragma warning disable S2328
-// "GetHashCode" should not reference mutable fields
-// See README.md => Hashing
-
 using Qowaiv.Conversion.Web;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
@@ -59,8 +55,7 @@ namespace Qowaiv.Web
     public partial struct InternetMediaType : ISerializable, IXmlSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
     {
         /// <summary>Represents the pattern of a (potential) valid Internet media type.</summary>
-        [Obsolete("Will become private when the next major version is released.")]
-        public static readonly Regex Pattern = new Regex('^' + PatternTopLevel + '/' + PatternSubtype + PatternSuffix + '$', RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex Pattern = new('^' + PatternTopLevel + '/' + PatternSubtype + PatternSuffix + '$', RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>The pattern of the top level.</summary>
         private const string PatternTopLevel = @"(?<toplevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))";

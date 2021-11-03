@@ -37,24 +37,6 @@ namespace Qowaiv.Json
             Enum = @enum?.Split(',');
         }
 
-        /// <summary>Creates a new instance of a <see cref="OpenApiDataTypeAttribute"/>.</summary>
-        [Obsolete("Use the constructor that provides an example as well.")]
-        public OpenApiDataTypeAttribute(
-            string description,
-            string type,
-            string format = null,
-            bool nullable = false,
-            string pattern = null,
-            string @enum = null)
-        {
-            Description = Guard.NotNullOrEmpty(description, nameof(description));
-            Type = Guard.NotNullOrEmpty(type, nameof(type));
-            Format = format;
-            Nullable = nullable;
-            Pattern = pattern;
-            Enum = @enum?.Split(',');
-        }
-
         /// <summary>Gets the bound .NET type of the OpenAPI Data Type.</summary>
         /// <remarks>
         /// Only set when received via one of the <c>From()</c> factory methods.

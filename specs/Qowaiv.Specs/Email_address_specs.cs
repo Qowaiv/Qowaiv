@@ -373,9 +373,7 @@ namespace Email_address_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(EmailAddress));
-        }
+            => typeof(EmailAddress).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
@@ -445,21 +443,21 @@ namespace Email_address_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.EmailAddress);
+            var xml = Serialize.Xml(Svo.EmailAddress);
             Assert.AreEqual("info@qowaiv.org", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<EmailAddress>("info@qowaiv.org");
+            var svo =Deserialize.Xml<EmailAddress>("info@qowaiv.org");
             Assert.AreEqual(Svo.EmailAddress, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.EmailAddress);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.EmailAddress);
             Assert.AreEqual(Svo.EmailAddress, round_tripped);
         }
 
@@ -467,7 +465,7 @@ namespace Email_address_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.EmailAddress);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -504,14 +502,14 @@ namespace Email_address_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.EmailAddress);
+            var round_tripped = SerializeDeserialize.Binary(Svo.EmailAddress);
             Assert.AreEqual(Svo.EmailAddress, round_tripped);
         }
 
         [Test]
         public void storing_string_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.EmailAddress);
+            var info = Serialize.GetInfo(Svo.EmailAddress);
             Assert.AreEqual("info@qowaiv.org", info.GetString("Value"));
         }
     }
@@ -522,9 +520,7 @@ namespace Email_address_specs
         [TestCase("{unknown}", "?")]
         [TestCase("info@qowaiv.org", "info@qowaiv.org")]
         public void has_custom_display(object display, EmailAddress svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

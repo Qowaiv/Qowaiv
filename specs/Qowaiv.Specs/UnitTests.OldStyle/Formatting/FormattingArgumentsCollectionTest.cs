@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Formatting;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
@@ -12,15 +13,6 @@ namespace Qowaiv.UnitTests.Formatting
     public class FormattingArgumentsCollectionTest
     {
         [Test]
-        public void Ctor_Null_ThrowsFormatException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                new FormattingArgumentsCollection(null);
-            },
-            "formatProvider");
-        }
-        [Test]
         public void Ctor_WithParent_ThrowsFormatException()
         {
             var parent = new FormattingArgumentsCollection(new CultureInfo("nl"));
@@ -32,27 +24,6 @@ namespace Qowaiv.UnitTests.Formatting
             parent.Add(typeof(Gender), "f");
             Assert.AreEqual(2, parent.Count, "parent.Count");
             Assert.AreEqual(1, act.Count, "act.Count");
-        }
-
-        [Test]
-        public void Format_NullFormat_ThrowArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                var collection = new FormattingArgumentsCollection();
-                collection.Format(null, null);
-            }
-            , "format");
-        }
-        [Test]
-        public void Format_NullArugment_ThrowArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                var collection = new FormattingArgumentsCollection();
-                collection.Format("Value: '{0}'", null);
-            }
-            , "args");
         }
 
         [Test]
@@ -271,37 +242,24 @@ namespace Qowaiv.UnitTests.Formatting
         #region Collection manipulation
 
         [Test]
-        public void Add_NullType_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                var collection = new FormattingArgumentsCollection();
-                collection.Add(null, "");
-            },
-            "type");
-        }
-        [Test]
         public void Add_NotIFormattebleType_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException(() =>
-            {
-                var collection = new FormattingArgumentsCollection();
-                collection.Add(typeof(Type), "");
-            },
-            "type",
-            "The argument must implement System.IFormattable.");
+            var collection = new FormattingArgumentsCollection();
+            Action add = () => collection.Add(typeof(Type), "");
+            add.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("The argument must implement System.IFormattable. (Parameter 'type')");
         }
+
         [Test]
         public void Add_DuplicateKey_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException(() =>
-            {
-                var collection = new FormattingArgumentsCollection();
-                collection.Add(typeof(Int32), "New");
-                collection.Add(typeof(Int32), "Update");
-            },
-            null,
-            "An item with the same key has already been added. Key: System.Int32");
+            var collection = new FormattingArgumentsCollection();
+            collection.Add(typeof(int), "New");
+            Action add = () => collection.Add(typeof(int), "Update");
+            add.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("An item with the same key has already been added. Key: System.Int32");
         }
 
         [Test]

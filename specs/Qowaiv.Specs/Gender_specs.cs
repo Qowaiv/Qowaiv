@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -421,9 +422,7 @@ namespace Gender_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Gender));
-        }
+            => typeof(Gender).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
@@ -499,20 +498,20 @@ namespace Gender_specs
         [TestCase("Female", "F")]
         public void using_XmlSerializer_to_serialize(string xml, Gender gender)
         {
-            Assert.AreEqual(xml, SerializationTest.XmlSerialize(gender));
+            Assert.AreEqual(xml, Serialize.Xml(gender));
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Gender>("Female");
+            var svo =Deserialize.Xml<Gender>("Female");
             Assert.AreEqual(Svo.Gender, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Gender);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Gender);
             Assert.AreEqual(Svo.Gender, round_tripped);
         }
 
@@ -520,7 +519,7 @@ namespace Gender_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Gender);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -571,14 +570,14 @@ namespace Gender_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Gender);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Gender);
             Assert.AreEqual(Svo.Gender, round_tripped);
         }
 
         [Test]
         public void storing_byte_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Gender);
+            var info = Serialize.GetInfo(Svo.Gender);
             Assert.AreEqual((byte)4, info.GetByte("Value"));
         }
     }
@@ -589,9 +588,7 @@ namespace Gender_specs
         [TestCase("Not known", "?")]
         [TestCase("Female", "Female")]
         public void has_custom_display(object display, Gender svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

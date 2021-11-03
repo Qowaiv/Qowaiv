@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.Text;
@@ -14,22 +15,18 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void Ctor_InvalidPattern_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException(() =>
-            {
-                new WildcardPattern("**");
-            },
-            "pattern",
-            "The wildcard pattern is invalid.");
+            Action create = () => new WildcardPattern("**");
+            create.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("The wildcard pattern is invalid. (Parameter 'pattern')");
         }
         [Test]
         public void Ctor_InvalidPatternSql_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException(() =>
-            {
-                new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
-            },
-            "pattern",
-            "The wildcard pattern is invalid.");
+            Action create = () => new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
+            create.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("The wildcard pattern is invalid. (Parameter 'pattern')");
         }
 
         [TestCase("*", "matches", true)]
@@ -109,40 +106,6 @@ namespace Qowaiv.UnitTests.Text
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(WildcardPattern), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<WildcardPattern>(info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = new WildcardPattern("*");
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestPattern;
@@ -157,14 +120,14 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(TestPattern);
-            DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", act);
+            var act = SerializeDeserialize.Binary(TestPattern);
+            act.Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
         }
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.DataContractSerializeDeserialize(TestPattern);
-            DebuggerDisplayAssert.HasResult("{t?st*}, SingleOrTrailing, Ordinal", act);
+            var act = SerializeDeserialize.DataContract(TestPattern);
+            act.Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
         }
 
         #endregion

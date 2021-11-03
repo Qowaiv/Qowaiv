@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -138,40 +139,6 @@ namespace Qowaiv.UnitTests
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<Date>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(Date), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Date>(info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -186,7 +153,7 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -194,14 +161,14 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
 
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "1970-02-14";
             Assert.AreEqual(exp, act);
         }
@@ -209,7 +176,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Date>("1970-02-14");
+            var act =Deserialize.Xml<Date>("1970-02-14");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -229,7 +196,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -249,7 +216,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -269,7 +236,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -290,7 +257,7 @@ namespace Qowaiv.UnitTests
                 Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -310,7 +277,7 @@ namespace Qowaiv.UnitTests
                 Obj = Date.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -559,15 +526,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be Date."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]
@@ -835,109 +795,6 @@ namespace Qowaiv.UnitTests
             var exp = new Date(1958, 02, 14);
 
             Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_Date_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Date));
-        }
-
-        [Test]
-        public void CanNotConvertFromInt32_Date_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Date), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_Date_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(Date), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_Date_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Date));
-        }
-
-        [Test]
-        public void CanConvertToString_Date_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Date));
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_DateTime_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTime(1970, 02, 14));
-        }
-
-        [Test]
-        public void ConvertFrom_DateTimeOffset_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTimeOffset(1970, 02, 14, 00, 00, 00, TimeSpan.Zero));
-        }
-
-        [Test]
-        public void ConvertFrom_WeekDate_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, WeekDate.Create(TestStruct));
-        }
-
-        [Test]
-        public void ConvertFrom_LocalDateTime_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, new LocalDateTime(1970, 02, 14));
-        }
-
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        [Test]
-        public void ConverTo_DateTime_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(new DateTime(1970, 02, 14), TestStruct);
-        }
-
-        [Test]
-        public void ConverTo_LocalDateTime_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(new LocalDateTime(1970, 02, 14), TestStruct);
-        }
-
-        [Test]
-        public void ConverTo_DateTimeOffset_Successful()
-        {
-            using (Clock.SetTimeZoneForCurrentThread(TimeZoneInfo.Utc))
-            {
-                TypeConverterAssert.ConvertToEquals(new DateTimeOffset(1970, 02, 14, 00, 00, 00, TimeSpan.Zero), TestStruct);
-            }
-        }
-
-        [Test]
-        public void ConverTo_WeekDate_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(WeekDate.Create(TestStruct), TestStruct);
         }
 
         #endregion

@@ -2,10 +2,6 @@
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 
-#pragma warning disable S2328
-// "GetHashCode" should not reference mutable fields
-// See README.md => Hashing
-
 using Qowaiv.Conversion;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
@@ -33,8 +29,7 @@ namespace Qowaiv
     public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
     {
         /// <summary>Represents the pattern of a (potential) valid postal code.</summary>
-        [Obsolete("Will become private when the next major version is released.")]
-        public static readonly Regex Pattern = new Regex(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex Pattern = new(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents an empty/not set postal code.</summary>
         public static readonly PostalCode Empty;

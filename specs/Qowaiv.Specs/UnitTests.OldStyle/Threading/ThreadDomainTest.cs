@@ -19,25 +19,6 @@ namespace Qowaiv.UnitTests.Threading
         }
 
         [Test]
-        public void Register_TypeNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                ThreadDomain.Register(null, null);
-            },
-            "type");
-        }
-        [Test]
-        public void Register_ActionNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                ThreadDomain.Register(typeof(Int32), null);
-            },
-            "creator");
-        }
-
-        [Test]
         public void Get_NullableDecimal_ThrowsNotSupportedException()
         {
             var x = Assert.Catch<NotSupportedException>(() => ThreadDomain.Current.Get<decimal?>());
@@ -101,16 +82,6 @@ namespace Qowaiv.UnitTests.Threading
 
             Assert.AreEqual(exp0, act0, "Old");
 
-        }
-
-        [Test]
-        public void Remove_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                ThreadDomain.Current.Remove(null);
-            },
-            "type");
         }
 
         [Test]

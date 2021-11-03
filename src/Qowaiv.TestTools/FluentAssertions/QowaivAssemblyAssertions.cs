@@ -1,7 +1,6 @@
 ﻿using FluentAssertions.Execution;
 using FluentAssertions.Reflection;
 using Qowaiv;
-using Qowaiv.TestTools.Diagnostics.Contracts;
 using System;
 using System.Reflection;
 
@@ -12,7 +11,7 @@ namespace FluentAssertions
     {
         /// <summary>Asserts the <see cref="Assembly"/> to have a specific public key.</summary>
         [CLSCompliant(false)]
-        [Assertion]
+        [CustomAssertion]
         public static AndConstraint<AssemblyAssertions> HavePublicKey(this AssemblyAssertions assertions, string publicKey, string because = "", params object[] becauseArgs)
         {
             Guard.NotNull(assertions, nameof(assertions));

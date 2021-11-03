@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools;
@@ -143,40 +144,6 @@ namespace Qowaiv.UnitTests.Statistics
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<Elo>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(Elo), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<Elo>(info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -191,7 +158,7 @@ namespace Qowaiv.UnitTests.Statistics
         {
             var input = EloTest.TestStruct;
             var exp = EloTest.TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -199,14 +166,14 @@ namespace Qowaiv.UnitTests.Statistics
         {
             var input = EloTest.TestStruct;
             var exp = EloTest.TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "1732.4";
             Assert.AreEqual(exp, act);
         }
@@ -214,7 +181,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Elo>("1732.4");
+            var act =Deserialize.Xml<Elo>("1732.4");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -233,7 +200,7 @@ namespace Qowaiv.UnitTests.Statistics
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -253,7 +220,7 @@ namespace Qowaiv.UnitTests.Statistics
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -273,7 +240,7 @@ namespace Qowaiv.UnitTests.Statistics
                 Obj = EloTest.TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -294,7 +261,7 @@ namespace Qowaiv.UnitTests.Statistics
                 Obj = Elo.Zero,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -537,15 +504,8 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be Elo."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]
@@ -774,57 +734,6 @@ namespace Qowaiv.UnitTests.Statistics
 
             Assert.AreEqual(exp, act);
         }
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_Elo_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Elo));
-        }
-
-        [Test]
-        public void CanNotConvertFromInt32()
-        {
-            TypeConverterAssert.ConvertFromEquals((Elo)1600, 1600);
-        }
-        [Test]
-        public void CanConvertToInt32()
-        {
-            TypeConverterAssert.ConvertToEquals(1600, (Elo)1600);
-        }
-
-        [Test]
-        public void CanConvertFromString_Elo_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Elo));
-        }
-
-        [Test]
-        public void CanConvertToString_Elo_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Elo));
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(EloTest.TestStruct, EloTest.TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(EloTest.TestStruct.ToString(), EloTest.TestStruct);
-            }
-        }
-
         #endregion
 
         #region IsValid tests

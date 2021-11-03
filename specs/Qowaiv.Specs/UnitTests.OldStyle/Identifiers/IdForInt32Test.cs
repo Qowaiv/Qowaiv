@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.Identifiers;
 using Qowaiv.TestTools;
@@ -148,19 +149,6 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_Throws()
-        {
-            Assert.Catch<ArgumentNullException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForInt32>>(null, default));
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_Throws()
-        {
-            var info = new SerializationInfo(typeof(Id<ForInt32>), new FormatterConverter());
-            Assert.Catch<SerializationException>(() => SerializationTest.DeserializeUsingConstructor<Id<ForInt32>>(info, default));
-        }
-
-        [Test]
         public void GetObjectData_NulSerializationInfo_Throws()
         {
             ISerializable obj = TestStruct;
@@ -181,7 +169,7 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
 
@@ -190,14 +178,14 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "123456789";
             Assert.AreEqual(exp, act);
         }
@@ -205,7 +193,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<Id<ForInt32>>("123456789");
+            var act =Deserialize.Xml<Id<ForInt32>>("123456789");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -228,7 +216,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -253,7 +241,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -278,7 +266,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -303,7 +291,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -328,7 +316,7 @@ namespace Qowaiv.UnitTests.Identifiers
             }
 
             ;
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -513,10 +501,8 @@ namespace Qowaiv.UnitTests.Identifiers
 
         [Test]
         public void ConverterExists_IdForInt32_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Id<ForInt32>));
-        }
-
+            => typeof(Id<ForInt32>).Should().HaveTypeConverterDefined();
+        
         [Test]
         public void CanNotConvertToGuid_IdForInt32_IsTrue()
         {

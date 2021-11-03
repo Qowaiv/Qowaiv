@@ -16,10 +16,8 @@ namespace Qowaiv.TestTools
         /// </remarks>
         [Pure]
         public object GetFormat(Type formatType)
-        {
-            return (typeof(ICustomFormatter).IsAssignableFrom(formatType)) ? this : null;
-        }
-
+            => (typeof(ICustomFormatter).IsAssignableFrom(formatType)) ? this : null;
+        
         /// <summary>Formats the object as String.</summary>
         /// <param name="format">
         /// The format to use.

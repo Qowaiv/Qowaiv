@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -149,40 +150,6 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<CryptographicSeed>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(CryptographicSeed), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<CryptographicSeed>(info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -197,7 +164,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -205,14 +172,14 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "Qowaig==";
             Assert.AreEqual(exp, act);
         }
@@ -220,7 +187,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<CryptographicSeed>("Qowaig==");
+            var act =Deserialize.Xml<CryptographicSeed>("Qowaig==");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -239,7 +206,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -259,7 +226,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -279,7 +246,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -300,7 +267,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
                 Obj = CryptographicSeed.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -320,7 +287,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
                 Obj = CryptographicSeed.Empty,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -542,15 +509,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be CryptographicSeed."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         #endregion
@@ -596,75 +556,6 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         #endregion
 
         #region Properties
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_CryptographicSeed_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(CryptographicSeed));
-        }
-
-        [Test]
-        public void CanNotConvertFromInt32_CryptographicSeed_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(CryptographicSeed), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_CryptographicSeed_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(CryptographicSeed), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_CryptographicSeed_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(CryptographicSeed));
-        }
-
-        [Test]
-        public void CanConvertToString_CryptographicSeed_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(CryptographicSeed));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_CryptographicSeedEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(CryptographicSeed.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_CryptographicSeedEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(CryptographicSeed.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
         #endregion
 
         #region IsValid tests

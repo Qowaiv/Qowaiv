@@ -1,8 +1,4 @@
-﻿#pragma warning disable S2328
-// "GetHashCode" should not reference mutable fields
-// See README.md => Hashing
-
-using Qowaiv.Conversion;
+﻿using Qowaiv.Conversion;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
@@ -25,8 +21,7 @@ namespace Qowaiv
     public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
-        [Obsolete("Will become private when the next major version is released.")]
-        public static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
+        private static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
 
         /// <summary>Represents an empty/not set year.</summary>
         public static readonly Year Empty;

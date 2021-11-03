@@ -46,28 +46,32 @@ namespace Qowaiv.UnitTests
         }
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void ImplementsISerializable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(ISerializable));
+        public void ImplementsISerializable(Type svo) => svo.Should().Implement<ISerializable>();
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void ImplementsIXmlSerializable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IXmlSerializable));
+        public void ImplementsIXmlSerializable(Type svo) => svo.Should().Implement<IXmlSerializable>();
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void ImplementsIFormattable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IFormattable));
+        public void ImplementsIFormattable(Type svo) => svo.Should().Implement<IFormattable>();
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void ImplementsIComparable(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IComparable));
+        public void ImplementsIComparable(Type svo) => svo.Should().Implement<IComparable>();
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void ImplementsIComparableOfT(Type svo) => TypeAssert.ImplementsInterface(svo, typeof(IComparable<>).MakeGenericType(svo));
+        public void ImplementsIComparableOfT(Type svo)
+        {
+            var comparable = typeof(IComparable<>).MakeGenericType(svo);
+            svo.Should().Implement(comparable);
+        }
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void HasSerializableAttribute(Type svo) => TypeAssert.HasAttribute(svo, typeof(SerializableAttribute));
+        public void HasSerializableAttribute(Type svo) =>  svo.Should().BeDecoratedWith<SerializableAttribute>();
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void HasTypeConverterAttribute(Type svo) => TypeAssert.HasAttribute(svo, typeof(TypeConverterAttribute));
+        public void HasTypeConverterAttribute(Type svo) => svo.Should().BeDecoratedWith<TypeConverterAttribute>();
 
         [TestCaseSource(nameof(SvoTypes))]
-        public void HasDebuggerDisplayAttribute(Type svo) => TypeAssert.HasAttribute(svo, typeof(DebuggerDisplayAttribute));
+        public void HasDebuggerDisplayAttribute(Type svo) => svo.Should().BeDecoratedWith<DebuggerDisplayAttribute>();
 
         [TestCaseSource(nameof(SvoTypes))]
         public void UnderlyingTypeMatches(Type svo)

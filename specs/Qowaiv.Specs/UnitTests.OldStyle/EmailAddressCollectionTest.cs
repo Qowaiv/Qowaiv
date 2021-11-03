@@ -15,55 +15,7 @@ namespace Qowaiv.UnitTests
             return EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
         }
 
-        #region Constructor
-
-        [Test]
-        public void Ctor_NullArray_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException(() =>
-            {
-                new EmailAddressCollection((EmailAddress[])null);
-            },
-            "emails");
-        }
-
-        #endregion
-
         #region (XML) (De)serialization tests
-
-        [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<EmailAddress>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(EmailAddress), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<EmailAddress>(info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = GetTestInstance();
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
 
         [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
@@ -80,7 +32,7 @@ namespace Qowaiv.UnitTests
         {
             var input = GetTestInstance();
             var exp = GetTestInstance();
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             CollectionAssert.AreEqual(exp, act);
         }
         [Test]
@@ -88,14 +40,14 @@ namespace Qowaiv.UnitTests
         {
             var input = GetTestInstance();
             var exp = GetTestInstance();
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             CollectionAssert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(GetTestInstance());
+            var act = Serialize.Xml(GetTestInstance());
             var exp = "info@qowaiv.org,test@qowaiv.org";
             Assert.AreEqual(exp, act);
         }
@@ -103,7 +55,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
+            var act =Deserialize.Xml<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
             Assert.AreEqual(GetTestInstance(), act);
         }
 
@@ -123,7 +75,7 @@ namespace Qowaiv.UnitTests
                 Obj = GetTestInstance(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -143,7 +95,7 @@ namespace Qowaiv.UnitTests
                 Obj = GetTestInstance(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -163,7 +115,7 @@ namespace Qowaiv.UnitTests
                 Obj = GetTestInstance(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -184,7 +136,7 @@ namespace Qowaiv.UnitTests
                 Obj = new EmailAddressCollection(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -204,7 +156,7 @@ namespace Qowaiv.UnitTests
                 Obj = new EmailAddressCollection(),
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -425,9 +377,7 @@ namespace Qowaiv.UnitTests
     public class EmailAddressCollectionSerializeObject
     {
         public int Id { get; set; }
-#pragma warning disable S4004 // Collection properties should be readonly
         public EmailAddressCollection Obj { get; set; }
-#pragma warning restore S4004 // Collection properties should be readonly
         public DateTime Date { get; set; }
     }
 }

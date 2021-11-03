@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -33,86 +34,71 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_Y0_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(0000, 10, 4);
-            },
-            "year",
-            "Year should be in range [1,9999].");
+            Action create = () => new WeekDate(0000, 10, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year should be in range [1,9999]. (Parameter 'year')");
         }
         [Test]
         public void Ctor_Y10000_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(10000, 10, 4);
-            },
-            "year",
-            "Year should be in range [1,9999].");
+            Action create = () => new WeekDate(10000, 10, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year should be in range [1,9999]. (Parameter 'year')");
         }
 
         [Test]
         public void Ctor_W0_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 0, 4);
-            },
-            "week",
-            "Week should be in range [1,53].");
+            Action create = () => new WeekDate(1980, 0, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Week should be in range [1,53]. (Parameter 'week')");
         }
         [Test]
         public void Ctor_W54_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 54, 4);
-            },
-            "week",
-            "Week should be in range [1,53].");
+            Action create = () => new WeekDate(1980, 54, 4);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Week should be in range [1,53]. (Parameter 'week')");
         }
 
         [Test]
         public void Ctor_D0_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 10, 0);
-            },
-            "day",
-            "Day should be in range [1,7].");
+            Action create = () => new WeekDate(1980, 10, 0);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Day should be in range [1,7]. (Parameter 'day')"); 
         }
+
         [Test]
         public void Ctor_D8_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(1980, 10, 8);
-            },
-            "day",
-            "Day should be in range [1,7].");
+            Action create = () => new WeekDate(1980, 10, 8);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Day should be in range [1,7]. (Parameter 'day')");
         }
 
         [Test]
         public void Ctor_Y9999W52D6_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(9999, 52, 6);
-            },
-            null,
-            "Year, Week, and Day parameters describe an un-representable Date.");
+            Action create = () => new WeekDate(9999, 52, 6);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
         }
 
         [Test]
         public void Ctor_Y9999W53D1_ThrowsArgumentOutofRangeException()
         {
-            ExceptionAssert.CatchArgumentOutOfRangeException(() =>
-            {
-                new WeekDate(9999, 53, 6);
-            },
-            null,
-            "Year, Week, and Day parameters describe an un-representable Date.");
+            Action create = () => new WeekDate(9999, 53, 6);
+            create.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
         }
 
         #endregion
@@ -209,40 +195,6 @@ namespace Qowaiv.UnitTests
         #region (XML) (De)serialization tests
 
         [Test]
-        public void Constructor_SerializationInfoIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                SerializationTest.DeserializeUsingConstructor<WeekDate>(null, default);
-            },
-            "info");
-        }
-
-        [Test]
-        public void Constructor_InvalidSerializationInfo_ThrowsSerializationException()
-        {
-            Assert.Catch<SerializationException>
-            (() =>
-            {
-                var info = new SerializationInfo(typeof(WeekDate), new System.Runtime.Serialization.FormatterConverter());
-                SerializationTest.DeserializeUsingConstructor<WeekDate>(info, default);
-            });
-        }
-
-        [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.CatchArgumentNullException
-            (() =>
-            {
-                ISerializable obj = TestStruct;
-                obj.GetObjectData(null, default);
-            },
-            "info");
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -257,7 +209,7 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
         [Test]
@@ -265,14 +217,14 @@ namespace Qowaiv.UnitTests
         {
             var input = TestStruct;
             var exp = TestStruct;
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void XmlSerialize_TestStruct_AreEqual()
         {
-            var act = SerializationTest.XmlSerialize(TestStruct);
+            var act = Serialize.Xml(TestStruct);
             var exp = "1997-W14-6";
             Assert.AreEqual(exp, act);
         }
@@ -280,7 +232,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act = SerializationTest.XmlDeserialize<WeekDate>("1997-W14-6");
+            var act =Deserialize.Xml<WeekDate>("1997-W14-6");
             Assert.AreEqual(TestStruct, act);
         }
 
@@ -299,7 +251,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -319,7 +271,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -339,7 +291,7 @@ namespace Qowaiv.UnitTests
                 Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.DataContractSerializeDeserialize(input);
+            var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -360,7 +312,7 @@ namespace Qowaiv.UnitTests
                 Obj = WeekDate.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.BinaryFormatterSerializeDeserialize(input);
+            var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -380,7 +332,7 @@ namespace Qowaiv.UnitTests
                 Obj = WeekDate.MinValue,
                 Date = new DateTime(1970, 02, 14),
             };
-            var act = SerializationTest.XmlSerializeDeserialize(input);
+            var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
@@ -613,15 +565,8 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            ExceptionAssert.CatchArgumentException
-            (() =>
-                {
-                    object other = new object();
-                    TestStruct.CompareTo(other);
-                },
-                "obj",
-                "Argument must be WeekDate."
-            );
+            Action compare = () => TestStruct.CompareTo(new object());
+            compare.Should().Throw<ArgumentException>();
         }
 
         [Test]
@@ -795,108 +740,6 @@ namespace Qowaiv.UnitTests
         }
 
 
-
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_WeekDate_IsTrue()
-        {
-            TypeConverterAssert.ConverterExists(typeof(WeekDate));
-        }
-
-        [Test]
-        public void CanNotConvertFromInt32_WeekDate_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(WeekDate), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_WeekDate_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(WeekDate), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_WeekDate_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(WeekDate));
-        }
-
-        [Test]
-        public void CanConvertToString_WeekDate_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(WeekDate));
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_DateTime_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTime(1997, 04, 05));
-        }
-
-        [Test]
-        public void ConvertFrom_DateTimeOffset_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, new DateTimeOffset(1997, 04, 05, 00, 00, 00, TimeSpan.Zero));
-        }
-
-        [Test]
-        public void ConvertFrom_LocalDateTime_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, new LocalDateTime(1997, 04, 05));
-        }
-
-        [Test]
-        public void ConvertFrom_Date_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, (Date)TestStruct);
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        [Test]
-        public void ConverTo_DateTime_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(new DateTime(1997, 04, 05), TestStruct);
-        }
-
-        [Test]
-        public void ConverTo_LocalDateTime_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(new LocalDateTime(1997, 04, 05), TestStruct);
-        }
-
-        [Test]
-        public void ConverTo_DateTimeOffset_Successful()
-        {
-            using (Clock.SetTimeZoneForCurrentThread(TimeZoneInfo.Utc))
-            {
-                TypeConverterAssert.ConvertToEquals(new DateTimeOffset(1997, 04, 05, 00, 00, 00, TimeSpan.Zero), TestStruct);
-            }
-        }
-
-        [Test]
-        public void ConverTo_Date_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals((Date)TestStruct, TestStruct);
-        }
 
         #endregion
 

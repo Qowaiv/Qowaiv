@@ -1122,7 +1122,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Percentage>().From("17%").Should().Be(Svo.Percentage);
+                Converting.To<Percentage>().From("17.51%").Should().Be(Svo.Percentage);
             }
         }
 
@@ -1131,7 +1131,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(1700.Percent()).ToString().Should().Be("17%");
+                Converting.Value(Svo.Percentage).ToString().Should().Be("17.51%");
             }
         }
 

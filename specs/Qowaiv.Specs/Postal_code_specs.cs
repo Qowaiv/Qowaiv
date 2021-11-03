@@ -440,7 +440,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(PostalCode), null);
+                Converting.To<PostalCode>().From(null).Should().Be(default);
             }
         }
 
@@ -449,7 +449,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(PostalCode), string.Empty);
+                Converting.To<PostalCode>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -458,7 +458,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.PostalCode, Svo.PostalCode.ToString());
+                Converting.To<PostalCode>().From("H0H0H0").Should().Be(Svo.PostalCode);
             }
         }
 
@@ -467,10 +467,19 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.PostalCode.ToString(), Svo.PostalCode);
+                Converting.Value(Svo.PostalCode).ToString().Should().Be("H0H0H0");
             }
         }
+
+        [Test]
+        public void from_int()
+            => Converting.To<PostalCode>().From(123456789).Should().Be(Svo.PostalCode);
+
+        [Test]
+        public void to_int()
+            => Converting.Value(Svo.PostalCode).To<int>().Should().Be(123456789);
     }
+
 
     public class Supports_JSON_serialization
     {

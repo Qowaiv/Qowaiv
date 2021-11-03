@@ -451,7 +451,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Year), null);
+                Converting.To<Year>().From(null).Should().Be(default);
             }
         }
 
@@ -460,7 +460,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Year), string.Empty);
+                Converting.To<Year>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -469,7 +469,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Year, Svo.Year.ToString());
+                Converting.To<Year>().From("1979").Should().Be(Svo.Year);
             }
         }
 
@@ -478,21 +478,17 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Year.ToString(), Svo.Year);
+                Converting.Value(Svo.Year).ToString().Should().Be("1979");
             }
         }
 
         [Test]
         public void from_int()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Year, 1979);
-        }
+            => Converting.To<Year>().From(1979).Should().Be(Svo.Year);
 
         [Test]
         public void to_int()
-        {
-            TypeConverterAssert.ConvertToEquals(1979, Svo.Year);
-        }
+            => Converting.Value(Svo.Year).To<int>().Should().Be(1979);
     }
 
     public class Supports_JSON_serialization

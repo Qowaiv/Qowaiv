@@ -476,13 +476,13 @@ namespace Month_specs
         [Test]
         public void via_TypeConverter_registered_with_attribute()
             => typeof(Month).Should().HaveTypeConverterDefined();
-        
+
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Month), null);
+                Converting.To<Month>().From(null).Should().Be(default);
             }
         }
 
@@ -491,7 +491,7 @@ namespace Month_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Month), string.Empty);
+                Converting.To<Month>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -500,7 +500,7 @@ namespace Month_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Month, Svo.Month.ToString());
+                Converting.To<Month>().From("February").Should().Be(Svo.Month);
             }
         }
 
@@ -509,22 +509,19 @@ namespace Month_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Month.ToString(), Svo.Month);
+                Converting.Value(Svo.Month).ToString().Should().Be("February");
             }
         }
 
         [Test]
         public void from_int()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Month, 2);
-        }
+            => Converting.To<Month>().From(2).Should().Be(Svo.Month);
 
         [Test]
         public void to_int()
-        {
-            TypeConverterAssert.ConvertToEquals(2, Svo.Month);
-        }
+            => Converting.Value(Svo.Month).To<int>().Should().Be(2);
     }
+
 
     public class Supports_JSON_serialization
     {

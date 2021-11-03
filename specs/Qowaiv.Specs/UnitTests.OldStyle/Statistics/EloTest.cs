@@ -736,55 +736,6 @@ namespace Qowaiv.UnitTests.Statistics
         }
         #endregion
 
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_Elo_IsTrue()
-            => typeof(Elo).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromInt32()
-        {
-            TypeConverterAssert.ConvertFromEquals((Elo)1600, 1600);
-        }
-        [Test]
-        public void CanConvertToInt32()
-        {
-            TypeConverterAssert.ConvertToEquals(1600, (Elo)1600);
-        }
-
-        [Test]
-        public void CanConvertFromString_Elo_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Elo));
-        }
-
-        [Test]
-        public void CanConvertToString_Elo_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Elo));
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(EloTest.TestStruct, EloTest.TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(EloTest.TestStruct.ToString(), EloTest.TestStruct);
-            }
-        }
-
-        #endregion
-
         #region IsValid tests
 
         [Test]

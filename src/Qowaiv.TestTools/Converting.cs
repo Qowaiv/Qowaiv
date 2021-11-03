@@ -8,11 +8,11 @@ namespace Qowaiv.TestTools
     {
         /// <summary>Creates a new instance of the <see cref="ConvertTo{T}"/> class.</summary>
         [Pure]
-        public static ConvertTo<T> Value<T>(T value) => new ConvertTo<T>(value);
+        public static ConvertTo<T> Value<T>(T value) => new(value);
 
         /// <summary>Creates a new instance of the <see cref="ConvertFrom{T}"/> class.</summary>
         [Pure]
-        public static ConvertFrom<T> To<T>() => new ConvertFrom<T>();
+        public static ConvertFrom<T> To<T>() => new();
     }
 
     /// <summary>ConvertFrom builder.</summary>

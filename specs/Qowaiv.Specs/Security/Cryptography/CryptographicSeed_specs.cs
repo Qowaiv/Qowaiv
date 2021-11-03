@@ -46,7 +46,7 @@ namespace Security.Cryptography.CryptographicSeed_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.CryptographicSeed).ToString().Should().Be("Qowaiv==");
+                Converting.Value(Svo.CryptographicSeed).ToString().Should().Be("Qowaig==");
             }
         }
     }

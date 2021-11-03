@@ -1,33 +1,25 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv.Globalization;
+using Qowaiv.IO;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 
-namespace Globalization.Country_specs
+namespace IO.StreamSize_specs
 {
     public class Supports_type_conversion
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-            => typeof(Country).Should().HaveTypeConverterDefined();
+            => typeof(StreamSize).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Country>().From(null).Should().Be(default);
-            }
-        }
-
-        [Test]
-        public void from_empty_string()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                Converting.To<Country>().From(string.Empty).Should().Be(default);
+                Converting.To<StreamSize>().From(null).Should().Be(default);
             }
         }
 
@@ -36,7 +28,7 @@ namespace Globalization.Country_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Country>().From("VA").Should().Be(Svo.Country);
+                Converting.To<StreamSize>().From("123456789").Should().Be(Svo.StreamSize);
             }
         }
 
@@ -45,9 +37,16 @@ namespace Globalization.Country_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Country).ToString().Should().Be("VA");
+                Converting.Value(Svo.StreamSize).ToString().Should().Be("123456789 byte");
             }
         }
-    }
 
+        [Test]
+        public void from_long()
+            => Converting.To<StreamSize>().From(123456789L).Should().Be(Svo.StreamSize);
+
+        [Test]
+        public void to_long()
+            => Converting.Value(Svo.StreamSize).To<long>().Should().Be(123456789);
+    }
 }

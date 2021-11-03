@@ -1174,55 +1174,6 @@ namespace Qowaiv.UnitTests.IO
             Assert.AreEqual(exp, act);
         }
 
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_StreamSize_IsTrue()
-            => typeof(StreamSize).Should().HaveTypeConverterDefined();
-        
-        [Test]
-        public void CanConvertFromInt32_StreamSize_IsTrue()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
-        }
-        [Test]
-        public void CanConvertToInt32()
-        {
-            TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
-        }
-
-        [Test]
-        public void CanConvertFromString_StreamSize_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(StreamSize));
-        }
-
-        [Test]
-        public void CanConvertToString_StreamSize_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(StreamSize));
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        #endregion
-
         #region IsValid tests
 
         [Test]

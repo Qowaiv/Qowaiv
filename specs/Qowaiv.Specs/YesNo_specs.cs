@@ -432,7 +432,7 @@ namespace YesNo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(YesNo), null);
+                Converting.To<YesNo>().From(null).Should().Be(default);
             }
         }
 
@@ -441,7 +441,7 @@ namespace YesNo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(YesNo), string.Empty);
+                Converting.To<YesNo>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -450,7 +450,7 @@ namespace YesNo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.YesNo, Svo.YesNo.ToString());
+                Converting.To<YesNo>().From("Yes").Should().Be(Svo.YesNo);
             }
         }
 
@@ -459,7 +459,7 @@ namespace YesNo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.YesNo.ToString(), Svo.YesNo);
+                Converting.Value(Svo.YesNo).ToString().Should().Be("yes");
             }
         }
     }

@@ -961,64 +961,6 @@ namespace Qowaiv.UnitTests.Financial
 
         #endregion
 
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_Money_IsTrue()
-            => typeof(Money).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromInt32_Money_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Money), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_Money_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(Money), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_Money_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Money));
-        }
-
-        [Test]
-        public void CanConvertToString_Money_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Money));
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_MoneyEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Money.Zero, "0");
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        #endregion
-
         #region IsValid tests
 
         [Test]

@@ -16,6 +16,9 @@ indent_size = 2
 # IDE warnings
 [*.cs]
 
+# CA1806: Do not ignore method results
+dotnet_diagnostic.CA1806.severity = warning
+
 # IDE0018: Inline variable declaration
 csharp_style_inlined_variable_declaration = true:warning
 

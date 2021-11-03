@@ -504,7 +504,7 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            Action compare = () => TestStruct.CompareTo(new object());
+            Func<int> compare = () => TestStruct.CompareTo(new object());
             compare.Should().Throw<ArgumentException>();
         }
 

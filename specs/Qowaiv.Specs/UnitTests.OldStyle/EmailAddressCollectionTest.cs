@@ -10,10 +10,8 @@ namespace Qowaiv.UnitTests
     [TestFixture]
     public class EmailAddressCollectionTest
     {
-        public EmailAddressCollection GetTestInstance()
-        {
-            return EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
-        }
+        public static EmailAddressCollection GetTestInstance() 
+            => EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
 
         #region (XML) (De)serialization tests
 
@@ -323,7 +321,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_Null_EmptyCollection()
         {
-            EmailAddressCollection exp = new EmailAddressCollection();
+            EmailAddressCollection exp = new();
             Assert.IsTrue(EmailAddressCollection.TryParse(null, out EmailAddressCollection act));
             CollectionAssert.AreEqual(exp, act);
         }
@@ -331,7 +329,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void TryParse_StringEmpty_EmptyCollection()
         {
-            EmailAddressCollection exp = new EmailAddressCollection();
+            EmailAddressCollection exp = new();
             Assert.IsTrue(EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act));
             CollectionAssert.AreEqual(exp, act);
         }

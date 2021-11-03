@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -443,16 +444,14 @@ namespace Year_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Year));
-        }
+            => typeof(Year).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Year), null);
+                Converting.To<Year>().From(null).Should().Be(default);
             }
         }
 
@@ -461,7 +460,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Year), string.Empty);
+                Converting.To<Year>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -470,7 +469,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Year, Svo.Year.ToString());
+                Converting.To<Year>().From("1979").Should().Be(Svo.Year);
             }
         }
 
@@ -479,21 +478,17 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Year.ToString(), Svo.Year);
+                Converting.Value(Svo.Year).ToString().Should().Be("1979");
             }
         }
 
         [Test]
         public void from_int()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Year, 1979);
-        }
+            => Converting.To<Year>().From(1979).Should().Be(Svo.Year);
 
         [Test]
         public void to_int()
-        {
-            TypeConverterAssert.ConvertToEquals(1979, Svo.Year);
-        }
+            => Converting.Value(Svo.Year).To<int>().Should().Be(1979);
     }
 
     public class Supports_JSON_serialization
@@ -532,21 +527,21 @@ namespace Year_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Year);
+            var xml = Serialize.Xml(Svo.Year);
             Assert.AreEqual("1979", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Year>("1979");
+            var svo =Deserialize.Xml<Year>("1979");
             Assert.AreEqual(Svo.Year, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Year);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Year);
             Assert.AreEqual(Svo.Year, round_tripped);
         }
 
@@ -554,7 +549,7 @@ namespace Year_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Year);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -602,14 +597,14 @@ namespace Year_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Year);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Year);
             Assert.AreEqual(Svo.Year, round_tripped);
         }
 
         [Test]
         public void storing_short_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Year);
+            var info = Serialize.GetInfo(Svo.Year);
             Assert.AreEqual((short)1979, info.GetInt16("Value"));
         }
     }
@@ -620,9 +615,7 @@ namespace Year_specs
         [TestCase("{unknown}", "?")]
         [TestCase("1979", (short)1979)]
         public void has_custom_display(object display, Year svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

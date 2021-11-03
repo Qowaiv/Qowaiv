@@ -23,6 +23,8 @@ csharp_prefer_simple_default_expression = true:warning
 dotnet_style_prefer_compound_assignment = true:warning
 # IDE0059: Unnecessary assignment of a value
 csharp_style_unused_value_assignment_preference = discard_variable:warning
+# IDE0079: Unnecessary supression
+dotnet_diagnostic.IDE0079.severity = warning
 
 # QW0003: Decorate Pure functions
 dotnet_diagnostic.QW0003.severity = warning
@@ -30,11 +32,13 @@ dotnet_diagnostic.QW0003.severity = warning
 # S101: Types should be named in PascalCase
 dotnet_diagnostic.S101.severity = none
 
+# S2328: GetHashCode() should not reference mutable fields
+dotnet_diagnostic.S2328.severity = none
+
 # S3376: Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3376.severity = none
 
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none
-dotnet_diagnostic.S2437.severity=warning
-dotnet_diagnostic.S4487.severity=warning
-
+dotnet_diagnostic.S2437.severity = warning
+dotnet_diagnostic.S4487.severity = warning

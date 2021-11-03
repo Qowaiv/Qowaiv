@@ -2,10 +2,6 @@
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 
-#pragma warning disable S2328
-// "GetHashCode" should not reference mutable fields
-// See README.md => Hashing
-
 using Qowaiv.Conversion.Financial;
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
@@ -365,10 +361,6 @@ namespace Qowaiv.Financial
 
         #region Money creation operators
 
-#pragma warning disable S4069
-        // Operator overloads should have named alternatives
-        // In this case, Money.Create is the best way to achieve this. The name Add would be confusing.
-
         /// <summary>Creates money based on the amount and the currency.</summary>
         public static Money operator +(Amount val, Currency currency) => Money.Create((decimal)val, currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
@@ -377,8 +369,6 @@ namespace Qowaiv.Financial
         public static Money operator +(double val, Currency currency) => Money.Create(Cast.ToDecimal<Money>(val), currency);
         /// <summary>Creates money based on the amount and the currency.</summary>
         public static Money operator +(int val, Currency currency) => Money.Create(val, currency);
-
-#pragma warning restore S4069 // Operator overloads should have named alternatives
 
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
 using Qowaiv.Json;
@@ -432,16 +433,14 @@ namespace Postal_code_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(PostalCode));
-        }
+            => typeof(PostalCode).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(PostalCode), null);
+                Converting.To<PostalCode>().From(null).Should().Be(default);
             }
         }
 
@@ -450,7 +449,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(PostalCode), string.Empty);
+                Converting.To<PostalCode>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -459,7 +458,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.PostalCode, Svo.PostalCode.ToString());
+                Converting.To<PostalCode>().From("H0H0H0").Should().Be(Svo.PostalCode);
             }
         }
 
@@ -468,10 +467,11 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.PostalCode.ToString(), Svo.PostalCode);
+                Converting.Value(Svo.PostalCode).ToString().Should().Be("H0H0H0");
             }
         }
     }
+
 
     public class Supports_JSON_serialization
     {
@@ -504,21 +504,21 @@ namespace Postal_code_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.PostalCode);
+            var xml = Serialize.Xml(Svo.PostalCode);
             Assert.AreEqual("H0H0H0", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<PostalCode>("H0H0H0");
+            var svo =Deserialize.Xml<PostalCode>("H0H0H0");
             Assert.AreEqual(Svo.PostalCode, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.PostalCode);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.PostalCode);
             Assert.AreEqual(Svo.PostalCode, round_tripped);
         }
 
@@ -526,7 +526,7 @@ namespace Postal_code_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.PostalCode);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -574,14 +574,14 @@ namespace Postal_code_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.PostalCode);
+            var round_tripped = SerializeDeserialize.Binary(Svo.PostalCode);
             Assert.AreEqual(Svo.PostalCode, round_tripped);
         }
 
         [Test]
         public void storing_string_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.PostalCode);
+            var info = Serialize.GetInfo(Svo.PostalCode);
             Assert.AreEqual("H0H0H0", info.GetString("Value"));
         }
     }
@@ -646,9 +646,7 @@ namespace Postal_code_specs
         [TestCase("{unknown}", "?")]
         [TestCase("H0H0H0", "H0H0H0")]
         public void has_custom_display(object display, PostalCode svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 
     internal class PostalCodes

@@ -1,4 +1,5 @@
-﻿using Qowaiv.Financial;
+﻿using Qowaiv.Diagnostics.Contracts;
+using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using System;
 using System.Collections.Concurrent;
@@ -144,7 +145,7 @@ namespace Qowaiv.Threading
         /// If the type is generic, or has no converter, or a convertor that can not
         /// convert from string.
         /// </exception>
-        [Pure]
+        [Impure]
         private static Type Guard(Type type, bool inCollection)
         {
             if (!inCollection)

@@ -1,5 +1,4 @@
-﻿using Qowaiv.TestTools.Diagnostics.Contracts;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Text;
 
@@ -8,25 +7,6 @@ namespace Qowaiv.TestTools
     /// <summary>Minimized assert helper class, to prevent dependencies on test frameworks.</summary>
     internal static class Assert
     {
-        [Assertion]
-        public static TException Catch<TException>(Action code) where TException : Exception
-        {
-            try
-            {
-                code();
-            }
-            catch (Exception x)
-            {
-                if (x is TException caught)
-                {
-                    return caught;
-                }
-                Fail($"Expected a {typeof(TException)} to be thrown, but a {x.GetType()} has been.");
-            }
-            Fail($"Expected a {typeof(TException)} to be thrown, but no exception has been.");
-            return default;
-        }
-
         [DebuggerStepThrough]
         public static void IsNotNull([ValidatedNotNull]object obj, string message = null)
         {

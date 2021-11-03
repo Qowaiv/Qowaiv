@@ -536,16 +536,14 @@ Actual:   [{(string.Join(", ", act))}]");
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(Uuid));
-        }
-
+            => typeof(Uuid).Should().HaveTypeConverterDefined();
+        
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Uuid), null);
+                Converting.To<Uuid>().From(null).Should().Be(default);
             }
         }
 
@@ -554,7 +552,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Uuid), string.Empty);
+                Converting.To<Uuid>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -563,7 +561,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Uuid, Svo.Uuid.ToString());
+                Converting.To<Uuid>().From("Qowaiv_SVOLibrary_GUID").Should().Be(Svo.Uuid);
             }
         }
 
@@ -572,21 +570,18 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Uuid.ToString(), Svo.Uuid);
+                Converting.Value(Svo.Uuid).ToString().Should().Be("Qowaiv_SVOLibrary_GUIA");
             }
         }
 
         [Test]
         public void from_Guid()
-        {
-            TypeConverterAssert.ConvertFromEquals(Svo.Uuid, Svo.Guid);
-        }
+            => Converting.To<Uuid>().From(Svo.Guid).Should().Be(Svo.Uuid);
+
 
         [Test]
-        public void to_Guid()
-        {
-            TypeConverterAssert.ConvertToEquals(Svo.Guid, Svo.Uuid);
-        }
+        public void to_Guid() 
+            => Converting.Value(Svo.Uuid).To<Guid>().Should().Be(Svo.Guid);
     }
 
     public class Supports_JSON_serialization
@@ -620,21 +615,21 @@ Actual:   [{(string.Join(", ", act))}]");
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.Uuid);
+            var xml = Serialize.Xml(Svo.Uuid);
             Assert.AreEqual("Qowaiv_SVOLibrary_GUIA", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<Uuid>("Qowaiv_SVOLibrary_GUIA");
+            var svo =Deserialize.Xml<Uuid>("Qowaiv_SVOLibrary_GUIA");
             Assert.AreEqual(Svo.Uuid, svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.Uuid);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Uuid);
             Assert.AreEqual(Svo.Uuid, round_tripped);
         }
 
@@ -642,7 +637,7 @@ Actual:   [{(string.Join(", ", act))}]");
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.Uuid);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
             Assert.AreEqual(structure, round_tripped);
         }
 
@@ -679,14 +674,14 @@ Actual:   [{(string.Join(", ", act))}]");
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.Uuid);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Uuid);
             Assert.AreEqual(Svo.Uuid, round_tripped);
         }
 
         [Test]
         public void storing_Guid_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.Uuid);
+            var info = Serialize.GetInfo(Svo.Uuid);
             Assert.AreEqual(Svo.Guid, info.GetValue("Value", typeof(Guid)));
         }
 
@@ -703,9 +698,7 @@ Actual:   [{(string.Join(", ", act))}]");
         [TestCase("{empty}", "")]
         [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
         public void has_custom_display(object display, Uuid svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

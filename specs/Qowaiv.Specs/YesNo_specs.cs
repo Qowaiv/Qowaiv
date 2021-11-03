@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
@@ -424,16 +425,14 @@ namespace YesNo_specs
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-        {
-            TypeConverterAssert.ConverterExists(typeof(YesNo));
-        }
+            => typeof(YesNo).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(YesNo), null);
+                Converting.To<YesNo>().From(null).Should().Be(default);
             }
         }
 
@@ -442,7 +441,7 @@ namespace YesNo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(YesNo), string.Empty);
+                Converting.To<YesNo>().From(string.Empty).Should().Be(default);
             }
         }
 
@@ -451,7 +450,7 @@ namespace YesNo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.YesNo, Svo.YesNo.ToString());
+                Converting.To<YesNo>().From("Yes").Should().Be(Svo.YesNo);
             }
         }
 
@@ -460,7 +459,7 @@ namespace YesNo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.YesNo.ToString(), Svo.YesNo);
+                Converting.Value(Svo.YesNo).ToString().Should().Be("yes");
             }
         }
     }
@@ -507,21 +506,21 @@ namespace YesNo_specs
         [Test]
         public void using_XmlSerializer_to_serialize()
         {
-            var xml = SerializationTest.XmlSerialize(Svo.YesNo);
+            var xml = Serialize.Xml(Svo.YesNo);
             Assert.AreEqual("yes", xml);
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo = SerializationTest.XmlDeserialize<YesNo>("yes");
+            var svo =Deserialize.Xml<YesNo>("yes");
             Assert.AreEqual(Svo.YesNo, svo);
         }
 
         [Test]
         public void using_data_contract_serializer()
         {
-            var round_tripped = SerializationTest.DataContractSerializeDeserialize(Svo.YesNo);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.YesNo);
             Assert.AreEqual(Svo.YesNo, round_tripped);
         }
 
@@ -529,7 +528,7 @@ namespace YesNo_specs
         public void as_part_of_a_structure()
         {
             var structure = XmlStructure.New(Svo.YesNo);
-            var round_tripped = SerializationTest.XmlSerializeDeserialize(structure);
+            var round_tripped = SerializeDeserialize.Xml(structure);
 
             Assert.AreEqual(structure, round_tripped);
         }
@@ -578,14 +577,14 @@ namespace YesNo_specs
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializationTest.BinaryFormatterSerializeDeserialize(Svo.YesNo);
+            var round_tripped = SerializeDeserialize.Binary(Svo.YesNo);
             Assert.AreEqual(Svo.YesNo, round_tripped);
         }
 
         [Test]
         public void storing_byte_in_SerializationInfo()
         {
-            var info = SerializationTest.GetSerializationInfo(Svo.YesNo);
+            var info = Serialize.GetInfo(Svo.YesNo);
             Assert.AreEqual((byte)2, info.GetByte("Value"));
         }
     }
@@ -596,8 +595,6 @@ namespace YesNo_specs
         [TestCase("{unknown}", "?")]
         [TestCase("yes", "Y")]
         public void has_custom_display(object display, YesNo svo)
-        {
-            DebuggerDisplayAssert.HasResult(display, svo);
-        }
+            => svo.Should().HaveDebuggerDisplay(display);
     }
 }

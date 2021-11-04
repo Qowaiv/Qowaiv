@@ -27,10 +27,10 @@ namespace Qowaiv
         public static readonly DateSpan Zero;
 
         /// <summary>Represents the maximum value of the date span.</summary>
-        public static readonly DateSpan MaxValue = new DateSpan(AsUInt64(MonthsPerYear * +9998 + 11, +30));
+        public static readonly DateSpan MaxValue = new(AsUInt64(MonthsPerYear * +9998 + 11, +30));
 
         /// <summary>Represents the minimum value of the date span.</summary>
-        public static readonly DateSpan MinValue = new DateSpan(AsUInt64(MonthsPerYear * -9998 - 11, -30) );
+        public static readonly DateSpan MinValue = new(AsUInt64(MonthsPerYear * -9998 - 11, -30) );
 
         /// <summary>The average amount of days per month, taken leap years into account.</summary>
         internal const double DaysPerMonth = 30.421625;
@@ -106,7 +106,7 @@ namespace Qowaiv
 
         /// <summary>Negates the date span.</summary>
         [Pure]
-        public DateSpan Negate() => new DateSpan(AsUInt64(-TotalMonths, -Days));
+        public DateSpan Negate() => new(AsUInt64(-TotalMonths, -Days));
 
         /// <summary>Returns a new date span whose value is the sum of the specified date span and this instance.</summary>
         ///<param name="other">
@@ -254,15 +254,15 @@ namespace Qowaiv
 
         /// <summary>Creates a date span from days only.</summary>
         [Pure]
-        public static DateSpan FromDays(int days) => new DateSpan(0, 0, days);
+        public static DateSpan FromDays(int days) => new(0, 0, days);
 
         /// <summary>Creates a date span from months only.</summary>
         [Pure]
-        public static DateSpan FromMonths(int months) => new DateSpan(0, months, 0);
+        public static DateSpan FromMonths(int months) => new(0, months, 0);
 
         /// <summary>Creates a date span from months only.</summary>
         [Pure]
-        public static DateSpan FromYears(int years) => new DateSpan(years, 0, 0);
+        public static DateSpan FromYears(int years) => new(years, 0, 0);
 
         /// <summary>Calculates the age (in years and days) for a given date for today.</summary>
         /// <param name="date">

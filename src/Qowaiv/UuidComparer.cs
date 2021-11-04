@@ -32,31 +32,20 @@ namespace Qowaiv
         [Pure]
         public int Compare(object x, object y)
         {
-            if (x is null)
+            var guidX = Cast(x);
+            var guidY = Cast(y);
+
+            if (guidX is null) return guidY is null ? 0 : -1;
+            else if (guidY is null) return +1;
+            else return Compare(guidX.Value, guidY.Value);
+
+            static Guid? Cast(object obj)
             {
-                if (y is null)
-                {
-                    return 0;
-                }
-                else if (y is Guid || y is Uuid)
-                {
-                    return -1;
-                }
+                if (obj is null) return default;
+                else if (obj is Guid guid) return guid;
+                else if (obj is Uuid uuid) return uuid;
+                else throw new NotSupportedException("Both arguments must be GUID/UUID.");
             }
-            else if (x is Guid || x is Uuid)
-            {
-                if (y is null)
-                {
-                    return +1;
-                }
-                else if (y is Guid || y is Uuid)
-                {
-                    var a = x is Guid g ? g : (Guid)(Uuid)x;
-                    var b = y is Guid h ? h : (Guid)(Uuid)y;
-                    return Compare(a, b);
-                }
-            }
-            throw new NotSupportedException("Both arguments must be GUID/UUID.");
         }
     }
 }

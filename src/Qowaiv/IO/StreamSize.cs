@@ -36,43 +36,43 @@ namespace Qowaiv.IO
         public static readonly StreamSize Zero;
 
         /// <summary>Represents 1 Byte.</summary>
-        public static readonly StreamSize Byte = new StreamSize(1L);
+        public static readonly StreamSize Byte = new(1L);
 
         /// <summary>Represents 1 kilobyte (1,000 byte).</summary>
-        public static readonly StreamSize KB = new StreamSize(1_000L);
+        public static readonly StreamSize KB = new(1_000L);
 
         /// <summary>Represents 1 Megabyte (1,000,000 byte).</summary>
-        public static readonly StreamSize MB = new StreamSize(1_000_000L);
+        public static readonly StreamSize MB = new(1_000_000L);
 
         /// <summary>Represents 1 Gigabyte (1,000,000,000 byte).</summary>
-        public static readonly StreamSize GB = new StreamSize(1_000_000_000L);
+        public static readonly StreamSize GB = new(1_000_000_000L);
 
         /// <summary>Represents 1 Terabyte (1,000,000,000,000 byte).</summary>
-        public static readonly StreamSize TB = new StreamSize(1_000_000_000_000L);
+        public static readonly StreamSize TB = new(1_000_000_000_000L);
 
         /// <summary>Represents 1 Petabyte (1,000,000,000,000,000 byte).</summary>
-        public static readonly StreamSize PB = new StreamSize(1_000_000_000_000_000L);
+        public static readonly StreamSize PB = new(1_000_000_000_000_000L);
 
         /// <summary>Represents 1 kibibyte (1,024 byte).</summary>
-        public static readonly StreamSize KiB = new StreamSize(1L << 10);
+        public static readonly StreamSize KiB = new(1L << 10);
 
         /// <summary>Represents 1 Mebibyte (1,048,576 byte).</summary>
-        public static readonly StreamSize MiB = new StreamSize(1L << 20);
+        public static readonly StreamSize MiB = new(1L << 20);
 
         /// <summary>Represents 1 Gibibyte (1,073,741,824 byte).</summary>
-        public static readonly StreamSize GiB = new StreamSize(1L << 30);
+        public static readonly StreamSize GiB = new(1L << 30);
 
         /// <summary>Represents 1 Tebibyte (1,099,511,627,776 byte).</summary>
-        public static readonly StreamSize TiB = new StreamSize(1L << 40);
+        public static readonly StreamSize TiB = new(1L << 40);
 
         /// <summary>Represents 1 Petabyte (1,125,899,906,842,624 byte).</summary>
-        public static readonly StreamSize PiB = new StreamSize(1L << 50);
+        public static readonly StreamSize PiB = new(1L << 50);
 
         /// <summary>Represents the minimum stream size that can be represented.</summary>
-        public static readonly StreamSize MinValue = new StreamSize(long.MinValue);
+        public static readonly StreamSize MinValue = new(long.MinValue);
 
         /// <summary>Represents the maximum stream size that can be represented.</summary>
-        public static readonly StreamSize MaxValue = new StreamSize(long.MaxValue);
+        public static readonly StreamSize MaxValue = new(long.MaxValue);
 
         /// <summary>Initializes a new instance of a stream size.</summary>
         /// <param name="size">
@@ -391,7 +391,7 @@ namespace Qowaiv.IO
         /// The deserialized stream size.
         /// </returns>
         [Pure]
-        public static StreamSize FromJson(double json) => new StreamSize((long)json);
+        public static StreamSize FromJson(double json) => new((long)json);
 
         /// <summary>Deserializes the stream size from a JSON number.</summary>
         /// <param name="json">
@@ -401,7 +401,7 @@ namespace Qowaiv.IO
         /// The deserialized stream size.
         /// </returns>
         [Pure]
-        public static StreamSize FromJson(long json) => new StreamSize(json);
+        public static StreamSize FromJson(long json) => new(json);
 
         /// <summary>Serializes the stream size to a JSON node.</summary>
         /// <returns>
@@ -548,7 +548,7 @@ namespace Qowaiv.IO
             return sb.ToString();
         }
 
-        private static readonly Regex FormattedPattern = new Regex("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegexOptions.Compiled | RegexOptions.RightToLeft);
+        private static readonly Regex FormattedPattern = new("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegexOptions.Compiled | RegexOptions.RightToLeft);
         private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
         private static readonly string[] FullLabels = { "byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte" };
         private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
@@ -562,22 +562,22 @@ namespace Qowaiv.IO
         /// <summary>Casts a stream size to a System.int.</summary>
         public static explicit operator int(StreamSize val) => (int)val.m_Value;
         /// <summary>Casts an int to a stream size.</summary>
-        public static implicit operator StreamSize(int val) => new StreamSize(val);
+        public static implicit operator StreamSize(int val) => new(val);
 
         /// <summary>Casts a stream size to a System.long.</summary>
         public static explicit operator long(StreamSize val) => val.m_Value;
         /// <summary>Casts a long to a stream size.</summary>
-        public static implicit operator StreamSize(long val) => new StreamSize(val);
+        public static implicit operator StreamSize(long val) => new(val);
 
         /// <summary>Casts a stream size to a System.Double.</summary>
         public static explicit operator double(StreamSize val) => val.m_Value;
         /// <summary>Casts a double to a stream size.</summary>
-        public static explicit operator StreamSize(double val) => new StreamSize((long)val);
+        public static explicit operator StreamSize(double val) => new((long)val);
 
         /// <summary>Casts a stream size to a System.Decimal.</summary>
         public static explicit operator decimal(StreamSize val) => val.m_Value;
         /// <summary>Casts a decimal to a stream size.</summary>
-        public static explicit operator StreamSize(decimal val) => new StreamSize((long)val);
+        public static explicit operator StreamSize(decimal val) => new((long)val);
 
         /// <summary>Converts the string to a stream size.
         /// A return value indicates whether the conversion succeeded.
@@ -703,22 +703,24 @@ namespace Qowaiv.IO
         [Pure]
         private static string GetStreamSizeMarker(string input)
         {
-            if (string.IsNullOrEmpty(input)) { return string.Empty; }
-
-            var length = input.Length;
-
-            foreach (var marker in MultiplierLookup.Keys)
+            if (string.IsNullOrEmpty(input)) return string.Empty;
+            else
             {
-                if (input.ToUpperInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
+                var length = input.Length;
+
+                foreach (var marker in MultiplierLookup.Keys)
                 {
-                    return input.Substring(length - marker.Length - 1);
+                    if (input.ToUpperInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
+                    {
+                        return input.Substring(length - marker.Length - 1);
+                    }
+                    else if (input.ToUpperInvariant().EndsWith(marker, StringComparison.Ordinal))
+                    {
+                        return input.Substring(length - marker.Length);
+                    }
                 }
-                if (input.ToUpperInvariant().EndsWith(marker, StringComparison.Ordinal))
-                {
-                    return input.Substring(length - marker.Length);
-                }
+                return string.Empty;
             }
-            return string.Empty;
         }
 
         [Pure]
@@ -733,7 +735,7 @@ namespace Qowaiv.IO
             ? 1
             : MultiplierLookup[streamSizeMarker.ToUpperInvariant().Trim()];
 
-        private static readonly Dictionary<string, long> MultiplierLookup = new Dictionary<string, long>
+        private static readonly Dictionary<string, long> MultiplierLookup = new()
         {
             { "KILOBYTE", 1000L },
             { "MEGABYTE", 1000000L },

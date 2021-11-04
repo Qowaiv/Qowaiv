@@ -21,19 +21,19 @@ namespace Qowaiv
     public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
     {
         /// <summary>Represents the pattern of a (potential) valid year.</summary>
-        private static readonly Regex Pattern = new Regex(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
+        private static readonly Regex Pattern = new(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
 
         /// <summary>Represents an empty/not set year.</summary>
         public static readonly Year Empty;
 
         /// <summary>Represents an unknown (but set) year.</summary>
-        public static readonly Year Unknown = new Year(short.MaxValue);
+        public static readonly Year Unknown = new(short.MaxValue);
 
         /// <summary>Represents the smallest possible year 1.</summary>
-        public static readonly Year MinValue = new Year(1);
+        public static readonly Year MinValue = new(1);
 
         /// <summary>Represents the largest possible year 9999.</summary>
-        public static readonly Year MaxValue = new Year(9999);
+        public static readonly Year MaxValue = new(9999);
 
         /// <summary>Returns an indication whether the specified year is a leap year.</summary>
         /// <returns>

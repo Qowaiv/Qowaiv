@@ -31,7 +31,7 @@ namespace Qowaiv
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay}")]
     [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
-    [OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example:"lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
+    [OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
     [TypeConverter(typeof(UuidTypeConverter))]
     public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
     {
@@ -53,7 +53,7 @@ namespace Qowaiv
         public UuidVersion Version => m_Value.GetVersion();
 
         /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
-        [Pure] 
+        [Pure]
         public byte[] ToByteArray() => m_Value.ToByteArray();
 
         /// <summary>Serializes the UUID to a JSON node.</summary>
@@ -125,11 +125,11 @@ namespace Qowaiv
         public static implicit operator Guid(Uuid val) => val.m_Value;
 
         /// <summary>Casts a System.GUID to a Qowaiv.UUID.</summary>
-        public static implicit operator Uuid(Guid val) => new Uuid(val);
+        public static implicit operator Uuid(Guid val) => new(val);
 
         /// <summary>Initializes a new instance of a UUID.</summary>
         [Pure]
-        public static Uuid NewUuid() => new Uuid(Guid.NewGuid());
+        public static Uuid NewUuid() => new(Guid.NewGuid());
 
         /// <summary>Initializes a new  instance of a UUID that is sequential.</summary>
         /// <remarks>

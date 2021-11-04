@@ -23,15 +23,15 @@ namespace Qowaiv
         /// </param>
         public SingleValueObjectAttribute(SingleValueStaticOptions staticOptions, Type underlyingType)
         {
-            this.StaticOptions = staticOptions;
-            this.UnderlyingType = underlyingType;
+            StaticOptions = staticOptions;
+            UnderlyingType = underlyingType;
         }
 
         /// <summary>The available static options of the single value object.</summary>
-        public SingleValueStaticOptions StaticOptions { get; private set; }
+        public SingleValueStaticOptions StaticOptions { get; }
 
         /// <summary>The underlying type of the single value object.</summary>
-        public Type UnderlyingType { get; private set; }
+        public Type UnderlyingType { get; }
 
         /// <summary>Gets and set the database type.</summary>
         /// <remarks>

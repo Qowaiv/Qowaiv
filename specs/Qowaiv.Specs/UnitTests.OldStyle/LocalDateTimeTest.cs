@@ -16,10 +16,10 @@ namespace Qowaiv.UnitTests
     public class LocalDateTimeTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly LocalDateTime TestStruct = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001);
+        public static readonly LocalDateTime TestStruct = new(1988, 06, 13, 22, 10, 05, 001);
 
         /// <summary>The test instance for most tests.</summary>
-        public static readonly LocalDateTime TestStructNoMilliseconds = new LocalDateTime(2001, 07, 30, 21, 55, 08);
+        public static readonly LocalDateTime TestStructNoMilliseconds = new(2001, 07, 30, 21, 55, 08);
 
         #region local date time const tests
 
@@ -459,7 +459,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            Action compare = () => TestStruct.CompareTo(new object());
+            Func<int> compare = () => TestStruct.CompareTo(new object());
             compare.Should().Throw<ArgumentException>();
         }
 

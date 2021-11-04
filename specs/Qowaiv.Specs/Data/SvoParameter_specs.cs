@@ -6,6 +6,7 @@ using Qowaiv.Data;
 using Qowaiv.Financial;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Data.SvoParameter_specs
 {
@@ -56,7 +57,7 @@ namespace Data.SvoParameter_specs
         [Test]
         public void SVO_lacks_cast_promised_in_attribute()
         {
-            Action create = () => SvoParameter.CreateForSql("par", new StructWithoutRequiredCast("test"));
+            Func<SqlParameter> create = () => SvoParameter.CreateForSql("par", new StructWithoutRequiredCast("test"));
             create.Should().Throw<InvalidCastException>()
                 .WithMessage("Cast from Data.SvoParameter_specs.StructWithoutRequiredCast to System.String is not valid.");
         }

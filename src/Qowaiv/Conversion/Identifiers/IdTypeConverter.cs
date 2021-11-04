@@ -40,10 +40,7 @@ namespace Qowaiv.Conversion.Identifiers
                 BaseType = behavior.BaseType;
                 BaseConverter = behavior.Converter;
             }
-            else
-            {
-                throw new ArgumentException("Incompatible type", nameof(type));
-            }
+            else throw new ArgumentException("Incompatible type", nameof(type));
         }
 
         private const BindingFlags NonPublicInstance = (BindingFlags)36;

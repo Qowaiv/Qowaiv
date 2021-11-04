@@ -66,7 +66,7 @@ namespace Qowaiv.Data
                 var defaultValue = Activator.CreateInstance(sourceType);
                 return Equals(value, defaultValue);
             }
-            return false;
+            else return false;
         }
 
         /// <summary>Gets the cast needed for casting to the database type.</summary>
@@ -92,16 +92,13 @@ namespace Qowaiv.Data
                     cast = methods[0];
                     Casts[sourceType] = cast;
                 }
-                else
-                {
-                    throw new InvalidCastException(string.Format(QowaivMessages.InvalidCastException_FromTo, sourceType, returnType));
-                }
+                else throw new InvalidCastException(string.Format(QowaivMessages.InvalidCastException_FromTo, sourceType, returnType));
             }
             return cast;
         }
 
-        private static readonly Dictionary<Type, SingleValueObjectAttribute> Attributes = new Dictionary<Type, SingleValueObjectAttribute>();
-        private static readonly Dictionary<Type, MethodInfo> Casts = new Dictionary<Type, MethodInfo>();
+        private static readonly Dictionary<Type, SingleValueObjectAttribute> Attributes = new();
+        private static readonly Dictionary<Type, MethodInfo> Casts = new();
 
         /// <summary>The locker for adding a casts and unsupported types.</summary>
         private static readonly object locker = new();

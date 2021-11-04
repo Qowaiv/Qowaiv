@@ -594,7 +594,7 @@ namespace Qowaiv
         /// The deserialized percentage.
         /// </returns>
         [Pure]
-        public static Percentage FromJson(double json) => new Percentage(Cast.ToDecimal<Percentage>(json));
+        public static Percentage FromJson(double json) => new(Cast.ToDecimal<Percentage>(json));
 
         /// <summary>Serializes the percentage to a JSON node.</summary>
         /// <returns>

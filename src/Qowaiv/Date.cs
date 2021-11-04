@@ -22,10 +22,10 @@ namespace Qowaiv
         private const string SerializableFormat = "yyyy-MM-dd";
 
         /// <summary>Represents the largest possible value date. This field is read-only.</summary>
-        public static readonly Date MaxValue = new Date(DateTime.MaxValue);
+        public static readonly Date MaxValue = new(DateTime.MaxValue);
 
         /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
-        public static readonly Date MinValue = new Date(DateTime.MinValue);
+        public static readonly Date MinValue = new(DateTime.MinValue);
 
         /// <summary>Gets the day before today.</summary>
         public static Date Yesterday => Clock.Yesterday();
@@ -132,7 +132,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date Add(TimeSpan value) => new Date(Ticks + value.Ticks);
+        public Date Add(TimeSpan value) => new(Ticks + value.Ticks);
 
         /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
         /// to the value of this instance.
@@ -206,7 +206,7 @@ namespace Qowaiv
         /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public TimeSpan Subtract(Date value) => new TimeSpan(Ticks - value.Ticks);
+        public TimeSpan Subtract(Date value) => new(Ticks - value.Ticks);
 
         /// <summary>Subtracts the specified duration from this instance.</summary>
         /// <param name="value">
@@ -220,7 +220,7 @@ namespace Qowaiv
         /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date Subtract(TimeSpan value) => new Date(Ticks - value.Ticks);
+        public Date Subtract(TimeSpan value) => new(Ticks - value.Ticks);
 
         /// <summary>Subtracts the specified duration from this instance.</summary>
         /// <param name="value">
@@ -252,7 +252,7 @@ namespace Qowaiv
         /// or greater than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date AddYears(int value) => new Date(m_Value.AddYears(value));
+        public Date AddYears(int value) => new(m_Value.AddYears(value));
 
         /// <summary>Returns a new date that adds the specified number of months to
         /// the value of this instance.
@@ -270,7 +270,7 @@ namespace Qowaiv
         /// than 120,000.
         /// </exception>
         [Pure]
-        public Date AddMonths(int months) => new Date(m_Value.AddMonths(months));
+        public Date AddMonths(int months) => new(m_Value.AddMonths(months));
 
         /// <summary>Returns a new date that adds the specified number of days to the
         /// value of this instance.
@@ -288,7 +288,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date AddDays(double value) => new Date(m_Value.AddDays(value));
+        public Date AddDays(double value) => new(m_Value.AddDays(value));
 
         /// <summary>Returns a new date that adds the specified number of ticks to
         /// the value of this instance.
@@ -306,7 +306,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date AddTicks(long value) => new Date(Ticks + value);
+        public Date AddTicks(long value) => new(Ticks + value);
 
         /// <summary>Returns a new date that adds the specified number of hours to
         /// the value of this instance.
@@ -324,7 +324,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date AddHours(double value) => new Date(m_Value.AddHours(value));
+        public Date AddHours(double value) => new(m_Value.AddHours(value));
 
         /// <summary>Returns a new date that adds the specified number of minutes to
         /// the value of this instance.
@@ -342,7 +342,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date AddMinutes(double value) => new Date(m_Value.AddMinutes(value));
+        public Date AddMinutes(double value) => new(m_Value.AddMinutes(value));
 
         /// <summary>Returns a new date that adds the specified number of seconds to
         /// the value of this instance.
@@ -360,7 +360,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date AddSeconds(double value) => new Date(m_Value.AddSeconds(value));
+        public Date AddSeconds(double value) => new(m_Value.AddSeconds(value));
 
         /// <summary>Returns a new date that adds the specified number of milliseconds
         /// to the value of this instance.
@@ -378,7 +378,7 @@ namespace Qowaiv
         /// than <see cref="MaxValue"/>.
         /// </exception>
         [Pure]
-        public Date AddMilliseconds(double value) => new Date(m_Value.AddMilliseconds(value));
+        public Date AddMilliseconds(double value) => new(m_Value.AddMilliseconds(value));
 
         #endregion
 
@@ -390,7 +390,7 @@ namespace Qowaiv
         /// The deserialized date.
         /// </returns>
         [Pure]
-        public static Date FromJson(long json) => new Date(json);
+        public static Date FromJson(long json) => new(json);
 
         /// <summary>Serializes the date to a JSON node.</summary>
         /// <returns>
@@ -444,7 +444,7 @@ namespace Qowaiv
         /// <summary>Casts a <see cref="string"/> to a date.</summary>
         public static explicit operator Date(string str) => Cast.String<Date>(TryParse, str);
         /// <summary>Casts a date time to a date.</summary>
-        public static explicit operator Date(DateTime val) => new Date(val);
+        public static explicit operator Date(DateTime val) => new(val);
 
         /// <summary>Casts a local date time to a date.</summary>
         public static explicit operator Date(LocalDateTime val) => val.Date;

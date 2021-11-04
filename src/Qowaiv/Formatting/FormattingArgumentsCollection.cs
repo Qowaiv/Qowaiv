@@ -43,7 +43,7 @@ namespace Qowaiv.Formatting
         }
 
         /// <summary>The underlying dictionary.</summary>
-        private readonly Dictionary<Type, FormattingArguments> dict = new Dictionary<Type, FormattingArguments>();
+        private readonly Dictionary<Type, FormattingArguments> dict = new();
 
         /// <summary>Gets the default format provider of the collection.</summary>
         public IFormatProvider FormatProvider { get; protected set; }
@@ -117,8 +117,6 @@ namespace Qowaiv.Formatting
             // This code is here as reference, so we don't want to touch it.
 #pragma warning disable S125 // Sections of code should not be "commented out"
 #pragma warning disable S1854 // Dead stores should be removed
-#pragma warning disable S121 // Control structures should use curly braces
-#pragma warning disable S3240 // The simplest possible condition syntax should be used
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
 
             var sb = new StringBuilder();
@@ -255,9 +253,7 @@ namespace Qowaiv.Formatting
 
                 if (s == null)
                 {
-                    IFormattable formattableArg = arg as IFormattable;
-
-                    if (formattableArg != null)
+                    if (arg is IFormattable formattableArg)
                     {
                         if (sFmt == null && fmt != null)
                         {
@@ -291,8 +287,6 @@ namespace Qowaiv.Formatting
 
 #pragma warning restore S1854 // Dead stores should be removed
 #pragma warning restore S125 // Sections of code should not be "commented out"
-#pragma warning restore S121 // Control structures should use curly braces
-#pragma warning restore S3240 // The simplest possible condition syntax should be used
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
         }
 

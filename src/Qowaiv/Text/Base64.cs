@@ -34,7 +34,7 @@ namespace Qowaiv.Text
         {
             if (string.IsNullOrEmpty(s))
             {
-                bytes = new byte[0];
+                bytes = Array.Empty<byte>();
                 return true;
             }
             try
@@ -44,7 +44,7 @@ namespace Qowaiv.Text
             }
             catch 
             {
-                bytes = new byte[0];
+                bytes = Array.Empty<byte>();
                 return false;
             }
         }

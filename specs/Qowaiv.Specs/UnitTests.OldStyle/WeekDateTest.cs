@@ -16,7 +16,7 @@ namespace Qowaiv.UnitTests
     public class WeekDateTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly WeekDate TestStruct = new WeekDate(1997, 14, 6);
+        public static readonly WeekDate TestStruct = new(1997, 14, 6);
 
         #region week date const tests
 
@@ -34,7 +34,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_Y0_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(0000, 10, 4);
+            Func<WeekDate> create = () => new WeekDate(0000, 10, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Year should be in range [1,9999]. (Parameter 'year')");
@@ -42,7 +42,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_Y10000_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(10000, 10, 4);
+            Func<WeekDate> create = () => new WeekDate(10000, 10, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Year should be in range [1,9999]. (Parameter 'year')");
@@ -51,7 +51,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_W0_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(1980, 0, 4);
+            Func<WeekDate> create = () => new WeekDate(1980, 0, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Week should be in range [1,53]. (Parameter 'week')");
@@ -59,7 +59,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_W54_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(1980, 54, 4);
+            Func<WeekDate> create = () => new WeekDate(1980, 54, 4);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Week should be in range [1,53]. (Parameter 'week')");
@@ -68,7 +68,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_D0_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(1980, 10, 0);
+            Func<WeekDate> create = () => new WeekDate(1980, 10, 0);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Day should be in range [1,7]. (Parameter 'day')"); 
@@ -77,7 +77,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_D8_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(1980, 10, 8);
+            Func<WeekDate> create = () => new WeekDate(1980, 10, 8);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Day should be in range [1,7]. (Parameter 'day')");
@@ -86,7 +86,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_Y9999W52D6_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(9999, 52, 6);
+            Func<WeekDate> create = () => new WeekDate(9999, 52, 6);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
@@ -95,7 +95,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Ctor_Y9999W53D1_ThrowsArgumentOutofRangeException()
         {
-            Action create = () => new WeekDate(9999, 53, 6);
+            Func<WeekDate> create = () => new WeekDate(9999, 53, 6);
             create.Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
@@ -565,23 +565,23 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            Action compare = () => TestStruct.CompareTo(new object());
+            Func<int> compare = () => TestStruct.CompareTo(new object());
             compare.Should().Throw<ArgumentException>();
         }
 
         [Test]
         public void LessThan_17LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 17, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 17, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l < r);
         }
         [Test]
         public void GreaterThan_21LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 21, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 21, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l > r);
         }
@@ -589,16 +589,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThanOrEqual_17LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 17, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 17, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 21, 5);
-            WeekDate r = new WeekDate(1980, 19, 5);
+            WeekDate l = new(1980, 21, 5);
+            WeekDate r = new(1980, 19, 5);
 
             Assert.IsTrue(l >= r);
         }
@@ -606,16 +606,16 @@ namespace Qowaiv.UnitTests
         [Test]
         public void LessThanOrEqual_17LT17_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 17, 5);
-            WeekDate r = new WeekDate(1980, 17, 5);
+            WeekDate l = new(1980, 17, 5);
+            WeekDate r = new(1980, 17, 5);
 
             Assert.IsTrue(l <= r);
         }
         [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
         {
-            WeekDate l = new WeekDate(1980, 21, 5);
-            WeekDate r = new WeekDate(1980, 21, 5);
+            WeekDate l = new(1980, 21, 5);
+            WeekDate r = new(1980, 21, 5);
 
             Assert.IsTrue(l >= r);
         }
@@ -652,7 +652,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void Explicit_WeekDateToInt32_AreEqual()
         {
-            DateTime exp = new DateTime(1997, 04, 05);
+            DateTime exp = new(1997, 04, 05);
             DateTime act = TestStruct;
 
             Assert.AreEqual(exp, act);

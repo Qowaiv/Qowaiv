@@ -143,7 +143,6 @@ namespace Qowaiv.Identifiers
                 id = guid == Guid.Empty ? null : (object)guid;
                 return true;
             }
-
             else if (obj is Uuid uuid)
             {
                 id = uuid == Uuid.Empty ? null : (object)(Guid)uuid;

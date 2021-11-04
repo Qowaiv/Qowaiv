@@ -80,8 +80,7 @@ namespace Qowaiv.Mathematics
                 LongSlash
             });
 
-            public static readonly Regex Pattern = new Regex
-            (
+            public static readonly Regex Pattern = new            (
                 @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegexOptions.Compiled
             );
 
@@ -698,7 +697,7 @@ namespace Qowaiv.Mathematics
 
             if (maxValue > 1)
             {
-                return Create(sign * ++integer);
+                return Create(sign * (integer + 1));
             }
 
             // The two parts of the denominator to find.

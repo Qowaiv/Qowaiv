@@ -1,7 +1,4 @@
-﻿#pragma warning disable S927 // parameter names should match base declaration and other partial definitions
-// In this class, it makes more sense to rename item to email.
-
-using Qowaiv.Diagnostics.Contracts;
+﻿using Qowaiv.Diagnostics.Contracts;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
 using System;
@@ -45,7 +42,7 @@ namespace Qowaiv
         /// 
         /// So this construction is required.
         /// </remarks>
-        private readonly HashSet<EmailAddress> hashset = new HashSet<EmailAddress>();
+        private readonly HashSet<EmailAddress> hashset = new();
 
         /// <summary>Initiates a new collection of email addresses.</summary>
         public EmailAddressCollection() { }

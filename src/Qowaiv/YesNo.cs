@@ -37,13 +37,13 @@ namespace Qowaiv
         public static readonly YesNo Empty;
 
         /// <summary>Represents an unknown (but set) yes-no.</summary>
-        public static readonly YesNo No = new YesNo(1);
+        public static readonly YesNo No = new(1);
 
         /// <summary>Represents an unknown (but set) yes-no.</summary>
-        public static readonly YesNo Yes = new YesNo(2);
+        public static readonly YesNo Yes = new(2);
 
         /// <summary>Represents an unknown (but set) yes-no.</summary>
-        public static readonly YesNo Unknown = new YesNo(3);
+        public static readonly YesNo Unknown = new(3);
 
         /// <summary>Contains yes and no.</summary>
         public static readonly IReadOnlyCollection<YesNo> YesAndNo = new[] { Yes, No };
@@ -136,7 +136,7 @@ namespace Qowaiv
             : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<YesNo, IFormatProvider, string>>
+        private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new()
         {
             { 'c', (svo, provider) => svo.GetResourceString("ch_", provider) },
             { 'C', (svo, provider) => svo.GetResourceString("ch_", provider).ToUpper(provider) },

@@ -60,14 +60,14 @@ namespace Qowaiv.Text
             {
                 if (pattern.Contains("%%"))
                 {
-                    throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, "pattern");
+                    throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, nameof(pattern));
                 }
                 SingleChar = '_';
                 MultipleChars = '%';
             }
             else if (pattern.Contains("**"))
             {
-                throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, "pattern");
+                throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, nameof(pattern));
             }
             else { /* No arugument exceptions. */ }
 

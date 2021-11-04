@@ -310,7 +310,7 @@ namespace Postal_code_specs
             }
         }
 
-        private static IEnumerable<object[]> FormattedPostalCodes = new[]
+        private readonly static IEnumerable<object[]> FormattedPostalCodes = new[]
         {
             new object[] { Country.AD, PostalCode.Parse("765"), "AD-765" },
             new object[] { Country.AI, PostalCode.Parse("2640"), "AI-2640" },

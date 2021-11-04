@@ -108,24 +108,22 @@ namespace Qowaiv.Mathematics
                     {
                         return null;
                     }
-
                     // If the buffer is not empty (integer without a space).
-                    if (buffer.NotEmpty() && !buffer.ParseInteger(formatInfo, out integer))
+                    else if (buffer.NotEmpty() && !buffer.ParseInteger(formatInfo, out integer))
                     {
                         return null;
                     }
-
                     // No overflow. :)
-                    if (integer == 0)
+                    else if (integer == 0)
                     {
                         return sign == +1 ? vulgar : -vulgar;
                     }
                     // Only if not overflow.
-                    if (CalculateNominator(sign, integer, vulgar.Numerator, vulgar.Denominator, out nominator))
+                    else if (CalculateNominator(sign, integer, vulgar.Numerator, vulgar.Denominator, out nominator))
                     {
                         return nominator.DividedBy(vulgar.Denominator);
                     }
-                    return null;
+                    else return null;
                 }
                 else if(ch.IsSuperScript(out char digit))
                 {
@@ -134,7 +132,7 @@ namespace Qowaiv.Mathematics
                         return null;
                     }
                     // If the buffer is not empty (integer without a space).
-                    if (tokens.HasNone(Tokens.Space | Tokens.SuperScript) && buffer.NotEmpty())
+                    else if (tokens.HasNone(Tokens.Space | Tokens.SuperScript) && buffer.NotEmpty())
                     {
                         if (!buffer.ParseInteger(formatInfo, out integer))
                         {
@@ -279,7 +277,7 @@ namespace Qowaiv.Mathematics
         [Pure]
         private static bool HasNone(this Tokens tokens, Tokens flag) => (tokens & flag) == 0;
 
-        private static readonly Dictionary<char, Fraction> Vulgars = new Dictionary<char, Fraction>
+        private static readonly Dictionary<char, Fraction> Vulgars = new()
         {
             { '½', 1.DividedBy(2) },
 

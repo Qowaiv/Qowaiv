@@ -10,12 +10,12 @@ namespace Qowaiv.UnitTests.Text
 {
     public class WildcardPatternTest
     {
-        public static readonly WildcardPattern TestPattern = new WildcardPattern("t?st*", WildcardPatternOptions.SingleOrTrailing, StringComparison.Ordinal);
+        public static readonly WildcardPattern TestPattern = new("t?st*", WildcardPatternOptions.SingleOrTrailing, StringComparison.Ordinal);
 
         [Test]
         public void Ctor_InvalidPattern_ThrowsArgumentException()
         {
-            Action create = () => new WildcardPattern("**");
+            Func<WildcardPattern> create = () => new WildcardPattern("**");
             create.Should()
                 .Throw<ArgumentException>()
                 .WithMessage("The wildcard pattern is invalid. (Parameter 'pattern')");
@@ -23,7 +23,7 @@ namespace Qowaiv.UnitTests.Text
         [Test]
         public void Ctor_InvalidPatternSql_ThrowsArgumentException()
         {
-            Action create = () => new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
+            Func<WildcardPattern> create = () => new WildcardPattern("%%", WildcardPatternOptions.SqlWildcards, StringComparison.CurrentCulture);
             create.Should()
                 .Throw<ArgumentException>()
                 .WithMessage("The wildcard pattern is invalid. (Parameter 'pattern')");

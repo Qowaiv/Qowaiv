@@ -9,7 +9,6 @@ namespace Qowaiv.Statistics
     {
         /// <summary>Gets the average Elo.</summary>
         [Pure]
-        public static Elo Avarage(this IEnumerable<Elo> elos)
-            => elos.Select(elo => (double)elo).Average();
+        public static Elo Avarage(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
     }
 }

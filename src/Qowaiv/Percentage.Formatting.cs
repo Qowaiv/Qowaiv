@@ -31,7 +31,7 @@ namespace Qowaiv
             return info;
         }
 
-        internal static readonly Dictionary<SymbolPosition, decimal> Factors = new Dictionary<SymbolPosition, decimal>
+        internal static readonly Dictionary<SymbolPosition, decimal> Factors = new()
         {
             { SymbolPosition.None, 0.01m },
             { SymbolPosition.PercentBefore, 0.01m },
@@ -48,7 +48,7 @@ namespace Qowaiv
         {
             if (string.IsNullOrEmpty(format))
             {
-                return formatProvider is CultureInfo culture && DefaultFormats.TryGetValue(culture.Name, out format)
+                return DefaultFormats.TryGetValue(formatProvider, out format)
                     ? format
                     : PercentFormat;
             }
@@ -64,10 +64,10 @@ namespace Qowaiv
         }
 
         /// <summary>Gets the default format for different countries.</summary>
-        private static readonly Dictionary<string, string> DefaultFormats = new Dictionary<string, string>
+        private static readonly Dictionary<IFormatProvider, string> DefaultFormats = new()
         {
-            { "fr-FR", "%0.############################" },
-            { "fa-IR", "%0.############################" },
+            { new CultureInfo("fr-FR"), "%0.############################" },
+            { new CultureInfo("fa-IR"), "%0.############################" },
         };
     }
 }

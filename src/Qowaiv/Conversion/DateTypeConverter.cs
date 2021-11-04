@@ -8,8 +8,6 @@ namespace Qowaiv.Conversion
     /// <summary>Provides a conversion for a Date.</summary>
     public class DateTypeConverter : DateTypeConverter<Date>
     {
-        #region From's
-
         /// <inheritdoc />
         [Pure]
         protected override Date FromString(string str, CultureInfo culture) => Date.Parse(str, culture);
@@ -35,10 +33,6 @@ namespace Qowaiv.Conversion
         [Pure]
         protected override Date FromWeekDate(WeekDate weekDate) => weekDate;
 
-        #endregion
-
-        #region To's
-
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         [Pure]
@@ -50,7 +44,7 @@ namespace Qowaiv.Conversion
 
         /// <inheritdoc />
         [Pure]
-        protected override DateTimeOffset ToDateTimeOffset(Date date) => new DateTimeOffset(date, TimeSpan.Zero);
+        protected override DateTimeOffset ToDateTimeOffset(Date date) => new(date, TimeSpan.Zero);
 
         /// <inheritdoc />
         [Pure]
@@ -59,7 +53,5 @@ namespace Qowaiv.Conversion
         /// <inheritdoc />
         [Pure]
         protected override WeekDate ToWeekDate(Date date) => date;
-
-        #endregion
     }
 }

@@ -15,8 +15,10 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Ctor_WithParent_ThrowsFormatException()
         {
-            var parent = new FormattingArgumentsCollection(new CultureInfo("nl"));
-            parent.Add(typeof(Date), "yyyy-MM");
+            var parent = new FormattingArgumentsCollection(new CultureInfo("nl"))
+            {
+                { typeof(Date), "yyyy-MM" }
+            };
 
             var act = new FormattingArgumentsCollection(new CultureInfo("nl-BE"), parent);
             Assert.AreEqual(1, act.Count, "act.Count");
@@ -175,9 +177,11 @@ namespace Qowaiv.UnitTests.Formatting
         {
             using (CultureInfoScope.NewInvariant())
             {
-                var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"));
-                collection.Add(typeof(Date), "yyyy-MM-dd HH:mm");
-                collection.Add(typeof(Decimal), "0.000");
+                var collection = new FormattingArgumentsCollection(new CultureInfo("nl-BE"))
+                {
+                    { typeof(Date), "yyyy-MM-dd HH:mm" },
+                    { typeof(decimal), "0.000" }
+                };
 
                 var act = collection.Format("{0:000.00} - {1} * {1:dd-MM-yyyy} - {2} - {3} - {4}", 3, new Date(2014, 10, 8), 666, 0.8m, 0.9);
                 var exp = "003,00 - 2014-10-08 00:00 * 08-10-2014 - 666 - 0,800 - 0,9";
@@ -190,9 +194,11 @@ namespace Qowaiv.UnitTests.Formatting
         {
             using (CultureInfoScope.NewInvariant())
             {
-                var collection = new FormattingArgumentsCollection(new UnitTestFormatProvider());
-                collection.Add(typeof(Date), "yyyy-MM-dd HH:mm");
-                collection.Add(typeof(Decimal), "0.000");
+                var collection = new FormattingArgumentsCollection(new UnitTestFormatProvider())
+                {
+                    { typeof(Date), "yyyy-MM-dd HH:mm" },
+                    { typeof(decimal), "0.000" }
+                };
 
                 var act = collection.Format("{0:yyyy-MM-dd} * {0}", new Date(2014, 10, 8));
                 var exp = "Unit Test Formatter, value: '2014-10-08', format: 'yyyy-MM-dd' * Unit Test Formatter, value: '10/08/2014', format: ''";
@@ -231,8 +237,10 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_7_007()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "000");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "000" }
+            };
             string act = collection.ToString((Object)7);
             string exp = "007";
 
@@ -254,8 +262,10 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Add_DuplicateKey_ThrowsArgumentException()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(int), "New");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "New" }
+            };
             Action add = () => collection.Add(typeof(int), "Update");
             add.Should()
                 .Throw<ArgumentException>()
@@ -265,24 +275,30 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Add_Int32Format_Contains1Item()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "Int32Format");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "Int32Format" }
+            };
 
             Assert.AreEqual(1, collection.Count, "Count");
         }
         [Test]
         public void Add_Int32CultureInfo_Contains1Item()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), new CultureInfo("nl-NL"));
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), new CultureInfo("nl-NL") }
+            };
 
             Assert.AreEqual(1, collection.Count, "Count");
         }
         [Test]
         public void Add_Int32FormatAndFormatProvider_Contains1Item()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "Int32Format", new CultureInfo("nl-NL"));
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(Int32), "Int32Format", new CultureInfo("nl-NL") }
+            };
 
             Assert.AreEqual(1, collection.Count, "Count");
         }
@@ -333,8 +349,10 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Remove_AddedInt32_Successful()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "Int32Format");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "Int32Format" }
+            };
             var act = collection.Remove(typeof(Int32));
             var exp = true;
 
@@ -359,9 +377,11 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void GetEnumerator_IEnumerableKeyValuePair_IsNotNull()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "Int32Format");
-            collection.Add(typeof(Date), "Date");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "Int32Format" },
+                { typeof(Date), "Date" }
+            };
 
             var ienumerable = collection as IEnumerable<KeyValuePair<Type, FormattingArguments>>;
 
@@ -371,9 +391,11 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void GetEnumerator_IEnumerable_IsNotNull()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "Int32Format");
-            collection.Add(typeof(Date), "Date");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "Int32Format" },
+                { typeof(Date), "Date" }
+            };
 
             var ienumerable = collection as IEnumerable;
 
@@ -384,9 +406,11 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Clear_CollectionWithTwoItems_0Items()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "Int32Format");
-            collection.Add(typeof(Date), "Date");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "Int32Format" },
+                { typeof(Date), "Date" }
+            };
             collection.Clear();
 
             var act = collection.Count;
@@ -398,8 +422,10 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Contains_FilledCollectionInt32_IsTrue()
         {
-            var collection = new FormattingArgumentsCollection();
-            collection.Add(typeof(Int32), "00");
+            var collection = new FormattingArgumentsCollection
+            {
+                { typeof(int), "00" }
+            };
             var act = collection.Contains(typeof(Int32));
             var exp = true;
             Assert.AreEqual(exp, act);

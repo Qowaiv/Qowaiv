@@ -154,15 +154,15 @@ namespace Qowaiv.Text
 
         /// <summary>Retrieves a substring from the buffer..</summary>
         [Pure]
-        public string Substring(int startIndex) => new string(buffer, startIndex + start, Length - startIndex);
+        public string Substring(int startIndex) => new(buffer, startIndex + start, Length - startIndex);
 
         /// <summary>Retrieves a substring from the buffer..</summary>
         [Pure]
-        public string Substring(int startIndex, int length) => new string(buffer, startIndex + start, length);
+        public string Substring(int startIndex, int length) => new(buffer, startIndex + start, length);
 
         /// <inheritdoc />
         [Pure]
-        public override string ToString() => new string(buffer, start, Length);
+        public override string ToString() => new(buffer, start, Length);
 
         /// <summary>Implicitly casts a buffer to a <see cref="string"/>.</summary>
         public static implicit operator string(CharBuffer buffer) => buffer?.ToString();

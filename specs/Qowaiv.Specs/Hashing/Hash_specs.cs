@@ -114,7 +114,7 @@ namespace Hashing.Hash_specs
         [Test]
         public void for_type_throws_exception()
         {
-            Action hash = () => Hash.NotSupportedBy<string>();
+            Func<int> hash = () => Hash.NotSupportedBy<string>();
             hash.Should().Throw<HashingNotSupported>()
                 .WithMessage("Hashing is not supported by System.String.");
         }

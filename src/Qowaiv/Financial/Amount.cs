@@ -23,9 +23,9 @@ namespace Qowaiv.Financial
         /// <summary>Represents an Amount of zero.</summary>
         public static readonly Amount Zero;
         /// <summary>Represents the smallest possible value of the amount.</summary>
-        public static readonly Amount MinValue = new Amount(decimal.MinValue);
+        public static readonly Amount MinValue = new(decimal.MinValue);
         /// <summary>Represents the biggest possible value of the amount.</summary>
-        public static readonly Amount MaxValue = new Amount(decimal.MaxValue);
+        public static readonly Amount MaxValue = new(decimal.MaxValue);
 
         /// <summary>Gets the sign of the value of the amount.</summary>
         [Pure]
@@ -412,7 +412,7 @@ namespace Qowaiv.Financial
         /// The deserialized amount.
         /// </returns>
         [Pure]
-        public static Amount FromJson(double json) => new Amount(Cast.ToDecimal<Amount>(json));
+        public static Amount FromJson(double json) => new(Cast.ToDecimal<Amount>(json));
 
         /// <summary>Deserializes the amountfrom a JSON number.</summary>
         /// <param name="json">
@@ -422,7 +422,7 @@ namespace Qowaiv.Financial
         /// The deserialized amount.
         /// </returns>
         [Pure]
-        public static Amount FromJson(long json) => new Amount(json);
+        public static Amount FromJson(long json) => new(json);
 
         /// <summary>Casts an Amount to a <see cref="string"/>.</summary>
         public static explicit operator string(Amount val) => val.ToString(CultureInfo.CurrentCulture);

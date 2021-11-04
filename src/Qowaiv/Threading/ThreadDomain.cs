@@ -68,7 +68,7 @@ namespace Qowaiv.Threading
 
             Creators.TryAdd(type, creator);
         }
-        private static readonly ConcurrentDictionary<Type, Func<Thread, object>> Creators = new ConcurrentDictionary<Type, Func<Thread, object>>();
+        private static readonly ConcurrentDictionary<Type, Func<Thread, object>> Creators = new();
 
         /// <summary>Constructor.</summary>
         /// <remarks>

@@ -39,7 +39,7 @@ namespace Qowaiv.Conversion
 
         /// <inheritdoc />
         [Pure]
-        protected override DateTimeOffset ToDateTimeOffset(LocalDateTime date) => new DateTimeOffset(date, TimeSpan.Zero);
+        protected override DateTimeOffset ToDateTimeOffset(LocalDateTime date) => new(date, TimeSpan.Zero);
 
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]

@@ -462,6 +462,26 @@ namespace YesNo_specs
                 Converting.Value(Svo.YesNo).ToString().Should().Be("yes");
             }
         }
+
+        [TestCase(true, "yes")]
+        [TestCase(false, "no")]
+        public void from_boolean(bool from, YesNo yesNo)
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Converting.To<YesNo>().From(from).Should().Be(yesNo);
+            }
+        }
+
+        [TestCase("yes", true)]
+        [TestCase( "no", false)]
+        public void to_boolean(YesNo yesNo, bool boolean)
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Converting.Value(yesNo).To<bool>().Should().Be(boolean);
+            }
+        }
     }
 
     public class Supports_JSON_serialization

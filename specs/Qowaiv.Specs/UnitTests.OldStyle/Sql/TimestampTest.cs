@@ -132,7 +132,7 @@ namespace Qowaiv.UnitTests.Sql
         {
             Func< Timestamp> create = () => Timestamp.Create(new byte[] { 1, 2, 3, 4, 5, 6 });
             create.Should().Throw<ArgumentException>()
-                .WithMessage("The byte array should have size of 8.");
+                .WithMessage("The byte array should have size of 8. (Parameter 'bytes')");
         }
         [Test]
         public void Create_NegativeInteger_18446744073709551593()

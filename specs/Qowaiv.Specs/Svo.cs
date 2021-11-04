@@ -1,5 +1,7 @@
 ﻿using Qowaiv.Financial;
+using Qowaiv.Formatting;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Identifiers;
 using Qowaiv.IO;
 using Qowaiv.Mathematics;
@@ -40,8 +42,6 @@ namespace Qowaiv.Specs
         public static readonly InternetMediaType InternetMediaType = InternetMediaType.Parse("application/x-chess-pgn");
         public static readonly LocalDateTime LocalDateTime = new(2017, 06, 11, 06, 15, 00);
         public static readonly Money Money = 42.17 + Currency.EUR;
-        public static readonly HouseNumber HouseNumber = 123456789;
-        public static readonly LocalDateTime LocalDateTime = new(2017, 06, 11, 06, 15, 00);
         public static readonly Month Month = Month.February;
         public static readonly MonthSpan MonthSpan = MonthSpan.FromMonths(69);
         public static readonly Percentage Percentage = 17.51.Percent();
@@ -64,6 +64,16 @@ namespace Qowaiv.Specs
         public static IEnumerable<object> All() => typeof(Svo)
             .GetFields(BindingFlags.Public | BindingFlags.Static)
             .Select(field => field.GetValue(null));
+
+        public static IEnumerable<Type> AllTypes()
+             => typeof(SingleValueObjectAttribute).Assembly
+            .GetTypes()
+            .Where(tp => tp.IsValueType && tp.IsPublic && !tp.IsEnum && !tp.IsAbstract)
+            .Except(new[]
+            {
+                typeof(FormattingArguments),
+                typeof(Hash),
+            });
     }
 
     public sealed class ForInt32 : Int32IdBehavior

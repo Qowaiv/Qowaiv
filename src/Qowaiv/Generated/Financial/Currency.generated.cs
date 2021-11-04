@@ -270,7 +270,7 @@ namespace Qowaiv.Financial
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Currency Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Currency val) ? val : throw new FormatException(QowaivMessages.FormatExceptionCurrency);
+        public static Currency Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCurrency);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Currency"/>.</summary>
         /// <param name = "s">
         /// A string containing the currency to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv.Financial
         /// The currency if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Currency TryParse(string s) => TryParse(s, null, out Currency val) ? val : default;
+        public static Currency? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Currency"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the currency to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The currency if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Currency? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Currency val) ? val : default(Currency? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Currency"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv.Financial
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Currency Parse(string s)
-            => TryParse(s, out Currency val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionCurrency);
+        public static Currency Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionCurrency);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv.Financial
         /// The currency if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Currency TryParse(string s) => TryParse(s, out Currency val) ? val : default;
+        public static Currency? TryParse(string s) => TryParse(s, out Currency val) ? val : default(Currency?);
 #endif
     }
 }

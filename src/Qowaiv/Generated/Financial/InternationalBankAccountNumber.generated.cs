@@ -270,7 +270,7 @@ namespace Qowaiv.Financial
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static InternationalBankAccountNumber Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out InternationalBankAccountNumber val) ? val : throw new FormatException(QowaivMessages.FormatExceptionInternationalBankAccountNumber);
+        public static InternationalBankAccountNumber Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionInternationalBankAccountNumber);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "InternationalBankAccountNumber"/>.</summary>
         /// <param name = "s">
         /// A string containing the IBAN to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv.Financial
         /// The IBAN if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static InternationalBankAccountNumber TryParse(string s) => TryParse(s, null, out InternationalBankAccountNumber val) ? val : default;
+        public static InternationalBankAccountNumber? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "InternationalBankAccountNumber"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the IBAN to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The IBAN if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static InternationalBankAccountNumber? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out InternationalBankAccountNumber val) ? val : default(InternationalBankAccountNumber? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "InternationalBankAccountNumber"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv.Financial
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static InternationalBankAccountNumber Parse(string s)
-            => TryParse(s, out InternationalBankAccountNumber val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionInternationalBankAccountNumber);
+        public static InternationalBankAccountNumber Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionInternationalBankAccountNumber);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv.Financial
         /// The IBAN if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static InternationalBankAccountNumber TryParse(string s) => TryParse(s, out InternationalBankAccountNumber val) ? val : default;
+        public static InternationalBankAccountNumber? TryParse(string s) => TryParse(s, out InternationalBankAccountNumber val) ? val : default(InternationalBankAccountNumber?);
 #endif
     }
 }

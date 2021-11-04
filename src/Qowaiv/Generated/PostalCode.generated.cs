@@ -270,7 +270,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static PostalCode Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out PostalCode val) ? val : throw new FormatException(QowaivMessages.FormatExceptionPostalCode);
+        public static PostalCode Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionPostalCode);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "PostalCode"/>.</summary>
         /// <param name = "s">
         /// A string containing the postal code to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv
         /// The postal code if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static PostalCode TryParse(string s) => TryParse(s, null, out PostalCode val) ? val : default;
+        public static PostalCode? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "PostalCode"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the postal code to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The postal code if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static PostalCode? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out PostalCode val) ? val : default(PostalCode? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "PostalCode"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static PostalCode Parse(string s)
-            => TryParse(s, out PostalCode val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionPostalCode);
+        public static PostalCode Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionPostalCode);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="PostalCode"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv
         /// The postal code if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static PostalCode TryParse(string s) => TryParse(s, out PostalCode val) ? val : default;
+        public static PostalCode? TryParse(string s) => TryParse(s, out PostalCode val) ? val : default(PostalCode?);
 #endif
     }
 }

@@ -270,7 +270,7 @@ namespace Qowaiv.Globalization
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Country Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Country val) ? val : throw new FormatException(QowaivMessages.FormatExceptionCountry);
+        public static Country Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCountry);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Country"/>.</summary>
         /// <param name = "s">
         /// A string containing the country to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv.Globalization
         /// The country if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Country TryParse(string s) => TryParse(s, null, out Country val) ? val : default;
+        public static Country? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Country"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the country to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The country if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Country? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Country val) ? val : default(Country? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Country"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv.Globalization
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Country Parse(string s)
-            => TryParse(s, out Country val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionCountry);
+        public static Country Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionCountry);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv.Globalization
         /// The country if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Country TryParse(string s) => TryParse(s, out Country val) ? val : default;
+        public static Country? TryParse(string s) => TryParse(s, out Country val) ? val : default(Country?);
 #endif
     }
 }

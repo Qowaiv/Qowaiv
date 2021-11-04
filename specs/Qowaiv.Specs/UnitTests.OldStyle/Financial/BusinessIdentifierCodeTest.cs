@@ -176,16 +176,8 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(BusinessIdentifierCode);
-                var act = BusinessIdentifierCode.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+           => BusinessIdentifierCode.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

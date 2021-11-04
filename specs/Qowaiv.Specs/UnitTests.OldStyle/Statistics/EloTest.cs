@@ -128,16 +128,8 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(Elo);
-                var act = Elo.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Elo.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

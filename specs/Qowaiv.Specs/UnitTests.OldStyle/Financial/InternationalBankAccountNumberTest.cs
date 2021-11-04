@@ -122,16 +122,8 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(InternationalBankAccountNumber);
-                var act = InternationalBankAccountNumber.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => InternationalBankAccountNumber.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

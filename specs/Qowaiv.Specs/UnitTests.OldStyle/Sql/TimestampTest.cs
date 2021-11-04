@@ -104,16 +104,8 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = Timestamp.MinValue;
-                var act = Timestamp.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Timestamp.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

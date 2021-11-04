@@ -104,16 +104,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(CryptographicSeed);
-                var act = CryptographicSeed.TryParse("!");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => CryptographicSeed.TryParse("!").Should().BeNull();
 
         #endregion
 

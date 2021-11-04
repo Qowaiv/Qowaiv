@@ -256,10 +256,8 @@ namespace Year_specs
         }
 
         [Test]
-        public void from_invalid_as_empty_with_TryParse()
-        {
-            Assert.AreEqual(default(Year), Year.TryParse("invalid input"));
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Year.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void with_TryParse_returns_SVO()

@@ -242,10 +242,8 @@ namespace Postal_code_specs
         }
 
         [Test]
-        public void from_invalid_as_empty_with_TryParse()
-        {
-            Assert.AreEqual(default(PostalCode), PostalCode.TryParse("invalid input"));
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => PostalCode.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void with_TryParse_returns_SVO()

@@ -13,14 +13,19 @@ namespace Qowaiv.Globalization
     [DebuggerDisplay("{DebuggerDisplay}")]
     public sealed partial class PostalCodeCountryInfo
     {
-        /// <summary>Creates a new instance of the <see cref="PostalCodeCountryInfo"/> class.</summary>
-        private PostalCodeCountryInfo(Country country, string validation, string search = null, string replace = null, bool isSingle = false)
+        /// <summary>Constructor.</summary>
+        private PostalCodeCountryInfo(
+            Country country,
+            Regex validationPattern,
+            Regex formattingSearchPattern,
+            string formattingReplacePattern,
+            bool isSingleValue)
         {
             Country = country;
-            ValidationPattern = new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            FormattingSearchPattern = string.IsNullOrEmpty(search) ? null : new Regex(search, RegexOptions.Compiled);
-            FormattingReplacePattern = replace;
-            IsSingleValue = isSingle;
+            ValidationPattern = validationPattern;
+            FormattingSearchPattern = formattingSearchPattern;
+            FormattingReplacePattern = formattingReplacePattern;
+            IsSingleValue = isSingleValue;
         }
 
         /// <summary>Gets the country.</summary>
@@ -103,7 +108,7 @@ namespace Qowaiv.Globalization
                 }
                 else
                 {
-                    if (IsSingleValue)
+                    if (this.IsSingleValue)
                     {
                         sb.Append("Value: ").Append(FormattingReplacePattern);
                     }
@@ -146,6 +151,19 @@ namespace Qowaiv.Globalization
         public static PostalCodeCountryInfo GetInstance(Country country)
             => Instances.TryGetValue(country, out PostalCodeCountryInfo instance)
             ? instance
-            : new(country, null, null, null, false);
+            : new PostalCodeCountryInfo(country, null, null, null, false);
+
+        /// <summary>Creates a new instance.</summary>
+        /// <remarks>
+        /// Used for initializing the Instances dictionary.
+        /// </remarks>
+        [Pure]
+        private static PostalCodeCountryInfo New(Country country, string validation, string search = null, string replace = null, bool isSingle = false)
+            => new(
+                country: country,
+                validationPattern: new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                formattingSearchPattern: string.IsNullOrEmpty(search) ? null : new Regex(search, RegexOptions.Compiled),
+                formattingReplacePattern: replace,
+                isSingleValue: isSingle);
     }
 }

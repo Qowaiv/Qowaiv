@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Json;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
@@ -213,10 +214,13 @@ namespace Month_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("February", 2)]
-        public void hash_code_is_value_based(Month svo, int hashcode)
+        [TestCase("February", 20170609)]
+        public void hash_code_is_value_based(Month svo, int hash)
         {
-            Assert.AreEqual(hashcode, svo.GetHashCode());
+            using (Hash.WithoutRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
         }
     }
 

@@ -1,16 +1,108 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Hashing
 {
-    /// <summary>Helper class for getting randomized hashcodes.</summary>
-    public static class Hash
+    /// <summary>Helper struct for getting randomized hashcodes.</summary>
+    /// <remarks>
+    /// Inspired by https://rehansaeed.com/gethashcode-made-easy
+    /// </remarks>
+    public readonly struct Hash : IEquatable<Hash>
     {
-        /// <summary>Gets a randomized hashcode for a <see cref="string"/>.</summary>
+        /// <summary>Randomizer hash based on <see cref="string.GetHashCode()"/>.</summary>
+        private static int Randomized = "QOWAIV".GetHashCode();
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly int Value;
+
+        /// <summary>Creates a new instance of the <see cref="Hash"/> struct.</summary>
+        private Hash(int val) => Value = val;
+
+        /// <inheritdoc />
         [Pure]
-        public static int Code(string str)
+        public override string ToString() => Value.ToString();
+
+        /// <inheritdoc />
+        [Pure]
+        public override bool Equals(object obj) => obj is Hash other && Equals(other);
+
+        /// <inheritdoc />
+        [Pure]
+        public bool Equals(Hash other) => Value == other.Value;
+
+        /// <summary>Throws a <see cref="HashingNotSupported" />.</summary>
+        [Pure]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override int GetHashCode() => NotSupportedBy<Hash>();
+
+        /// <summary>extends the hash with the added item.</summary>
+        /// <typeparam name="T">
+        /// The type of the item.
+        /// </typeparam>
+        /// <param name="item">
+        /// The item.
+        /// </param>
+        /// <returns>The new hash.</returns>
+        [Pure]
+        public Hash And<T>(T item) => new(Combine(Value, HashCode(item)));
+
+        /// <summary>
+        /// Adds the hash code of the specified items in the collection.
+        /// </summary>
+        /// <typeparam name="T">The type of the items.</typeparam>
+        /// <param name="items">The collection.</param>
+        /// <returns>The new hash code.</returns>
+        [Pure]
+        public Hash AndEach<T>(IEnumerable<T> items)
+            => items is null
+            ? this
+            : new(HashCode(Value, items));
+
+        /// <summary>Implicitly casts a <see cref="Hash"/> to an <see cref="int"/>.</summary>
+        public static implicit operator int(Hash hash) => hash.Value;
+
+        /// <summary>Gets a randomized hash for the item.</summary>
+        [Pure]
+        public static Hash Code<T>(T item)
+            => Equals(default(T), item)
+            ? default
+            : new(Randomized ^ HashCode(item));
+
+        /// <summary>Indicates that hashing is not supported by the type.</summary>
+        [Pure]
+        public static int NotSupportedBy<T>()
+            => throw new HashingNotSupported(string.Format(QowaivMessages.HashingNotSupported, typeof(T)));
+
+        /// <summary>Fixes the base hash for the scope of the statement.</summary>
+        /// <remarks>
+        /// This should only be used in tests.
+        /// </remarks>
+        public static IDisposable WithoutRandomizer() => new Scope();
+
+        /// <summary>Combines two hashes with <code>((h1 &lt;&lt; 5) + h1) ^ h2</code>.</summary>
+        [Pure]
+        private static int Combine(int h1, int h2) => unchecked(((h1 << 5) + h1) ^ h2);
+
+        /// <summary>Gets a hash, based on its type.</summary>
+        [Pure]
+        private static int HashCode<T>(T obj)
+            => obj switch
+            {
+                null => 0,
+                int int32 => int32,
+                string str => HashCode(str),
+                IEnumerable enumerable => HashCode(0, enumerable),
+                _ => obj.GetHashCode(),
+            };
+
+        /// <summary>Gets a deterministic hash of a string.</summary>
+        [Pure]
+        private static int HashCode(string str)
         {
-            str ??= string.Empty;
             unchecked
             {
                 int hash1 = (5381 << 16) + 5381;
@@ -20,31 +112,28 @@ namespace Qowaiv.Hashing
                 {
                     hash1 = ((hash1 << 5) + hash1) ^ str[i];
                     if (i == str.Length - 1) break;
-                    else  hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
+                    else hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
                 }
-                return Code(hash1 + (hash2 * 1566083941));
+                return hash1 + (hash2 * 1566083941);
             }
         }
 
-        /// <summary>Gets a randomized hashcode for an <see cref="int"/>.</summary>
+        /// <summary>Gets a hash for an enumerable.</summary>
         [Pure]
-        public static int Code(int value) => Randomizer ^ value;
-        
-        /// <summary>Gets a randomized hashcode for a struct.</summary>
-        [Pure]
-        public static int Code<T>(T value) where T : struct
-            => Randomizer ^ value.GetHashCode();
-
-        /// <summary>Randomizer hash based on <see cref="string.GetHashCode()"/>.</summary>
-        private static int Randomizer = "Qowaiv".GetHashCode();
-
-        /// <summary>Indicates that hashing is not supported by the type.</summary>
-        [Pure]
-        public static int NotSupportedBy<T>() 
-            => throw new HashingNotSupported(string.Format(QowaivMessages.HashingNotSupported, typeof(T)));
-
-        /// <summary>Fixes the base hash for the scope of the statement.</summary>
-        public static IDisposable WithFixedRandomizer() => new Scope();
+        private static int HashCode(int hash, IEnumerable items)
+        {
+            var enumerator = items.GetEnumerator();
+            if (enumerator.MoveNext())
+            {
+                var updated = Combine(hash, HashCode(enumerator.Current));
+                while (enumerator.MoveNext())
+                {
+                    updated = Combine(updated, HashCode(enumerator.Current));
+                }
+                return updated;
+            }
+            else return Combine(hash, 17);
+        }
 
 #pragma warning disable S3010 // Static fields should not be updated in constructors
 #pragma warning disable S2696 // Instance members should not write to "static" fields
@@ -55,11 +144,10 @@ namespace Qowaiv.Hashing
 
             public Scope()
             {
-                Current = Randomizer;
-                Randomizer = 20170611;
+                Current = Randomized;
+                Randomized = 20170611;
             }
-
-            public void Dispose() => Randomizer = Current;
+            public void Dispose() => Randomized = Current;
         }
     }
 }

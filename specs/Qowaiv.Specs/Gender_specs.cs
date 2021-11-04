@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Json;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
@@ -192,11 +193,14 @@ namespace Gender_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("Male", 2)]
-        [TestCase("Female", 4)]
-        public void hash_code_is_value_based(Gender svo, int hashcode)
+        [TestCase("Male", 20170609)]
+        [TestCase("Female", 20170615)]
+        public void hash_code_is_value_based(Gender svo, int hash)
         {
-            Assert.AreEqual(hashcode, svo.GetHashCode());
+            using (Hash.WithoutRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
         }
     }
 

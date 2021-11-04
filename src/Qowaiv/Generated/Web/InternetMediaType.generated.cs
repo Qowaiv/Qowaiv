@@ -9,7 +9,6 @@
 
 #define NotCultureDependent
 #define NoComparisonOperators
-#define NotGetHashCodeStruct
 namespace Qowaiv.Web
 {
     using System;
@@ -44,6 +43,7 @@ namespace Qowaiv.Web
 {
     using System;
     using System.Diagnostics.Contracts;
+    using Qowaiv.Hashing;
 
     public partial struct InternetMediaType : IEquatable<InternetMediaType>
     {
@@ -55,15 +55,10 @@ namespace Qowaiv.Web
         /// <param name = "other">The <see cref = "InternetMediaType"/> to compare with.</param>
         [Pure]
         public bool Equals(InternetMediaType other) => m_Value == other.m_Value;
-#if !NotGetHashCodeStruct
+#if !NotGetHashCode
         /// <inheritdoc/>
         [Pure]
-        public override int GetHashCode() => m_Value.GetHashCode();
-#endif
-#if !NotGetHashCodeClass
-        /// <inheritdoc/>
-        [Pure]
-        public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+        public override int GetHashCode() => Hash.Code(m_Value);
 #endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>

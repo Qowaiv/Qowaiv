@@ -381,20 +381,6 @@ namespace Qowaiv.UnitTests.Statistics
 
         #region IEquatable tests
 
-        /// <summary>GetHash should not fail for Elo.Empty.</summary>
-        [Test]
-        public void GetHash_Empty_Hash()
-        {
-            Assert.AreEqual(0, Elo.Zero.GetHashCode());
-        }
-
-        /// <summary>GetHash should not fail for the test struct.</summary>
-        [Test]
-        public void GetHash_TestStruct_Hash()
-        {
-            Assert.AreEqual(-654145533, EloTest.TestStruct.GetHashCode());
-        }
-
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
@@ -402,46 +388,6 @@ namespace Qowaiv.UnitTests.Statistics
             var r = Elo.Parse("1,600.00*", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
-        }
-
-        [Test]
-        public void Equals_TestStructTestStruct_IsTrue()
-        {
-            Assert.IsTrue(EloTest.TestStruct.Equals(EloTest.TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructObjectTestStruct_IsTrue()
-        {
-            Assert.IsTrue(EloTest.TestStruct.Equals((object)EloTest.TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructNull_IsFalse()
-        {
-            Assert.IsFalse(EloTest.TestStruct.Equals(null));
-        }
-
-        [Test]
-        public void Equals_TestStructObject_IsFalse()
-        {
-            Assert.IsFalse(EloTest.TestStruct.Equals(new object()));
-        }
-
-        [Test]
-        public void OperatorIs_TestStructTestStruct_IsTrue()
-        {
-            var l = EloTest.TestStruct;
-            var r = EloTest.TestStruct;
-            Assert.IsTrue(l == r);
-        }
-
-        [Test]
-        public void OperatorIsNot_TestStructTestStruct_IsFalse()
-        {
-            var l = EloTest.TestStruct;
-            var r = EloTest.TestStruct;
-            Assert.IsFalse(l != r);
         }
 
         #endregion

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Qowaiv.Mathematics;
 using Qowaiv.Reflection;
+using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Qowaiv.UnitTests
 {
     public class SingleValueObjectTest
     {
-        private static IEnumerable<Type> SvoTypes => SVO_specs.All.Types;
+        private static IEnumerable<Type> SvoTypes => Svo.AllTypes();
 
         [TestCaseSource(nameof(SvoTypes))]
         public void IsSingleValueObject(Type svoType)

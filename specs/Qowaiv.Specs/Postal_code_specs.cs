@@ -637,7 +637,7 @@ namespace Postal_code_specs
         public PostalCodes(Country country, params string[] values)
         {
             Country = country;
-            Values = values.Select(v => PostalCode.TryParse(v)).ToArray();
+            Values = values.Select(v => PostalCode.Parse(v)).ToArray();
         }
 
         public Country Country { get; }

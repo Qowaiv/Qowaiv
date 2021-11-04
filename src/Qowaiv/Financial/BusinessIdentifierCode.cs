@@ -146,8 +146,9 @@ namespace Qowaiv.Financial
                 result = Unknown;
                 return true;
             }
-            else if (buffer.Matches(Pattern) && 
-                !Country.TryParse(buffer.Substring(4, 2)).IsEmptyOrUnknown())
+            else if (buffer.Matches(Pattern)
+                && Country.TryParse(buffer.Substring(4, 2), out var country)
+                && !country.IsEmptyOrUnknown())
             {
                 result = new BusinessIdentifierCode(buffer);
                 return true;

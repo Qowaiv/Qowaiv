@@ -45,13 +45,13 @@ namespace Qowaiv
         public static readonly Gender Empty;
 
         /// <summary>Represents a not known/unknown gender.</summary>
-        public static readonly Gender Unknown = new Gender(1);
+        public static readonly Gender Unknown = new(1);
         /// <summary>Represents a male.</summary>
-        public static readonly Gender Male = new Gender(2);
+        public static readonly Gender Male = new(2);
         /// <summary>Represents a female.</summary>
-        public static readonly Gender Female = new Gender(4);
+        public static readonly Gender Female = new(4);
         /// <summary>Represents a not applicable gender.</summary>
-        public static readonly Gender NotApplicable = new Gender(18);
+        public static readonly Gender NotApplicable = new(18);
 
         /// <summary>Contains not known, male, female, not applicable.</summary>
         public static readonly IReadOnlyCollection<Gender> All = new[] { Male, Female, NotApplicable, Unknown, };
@@ -141,7 +141,7 @@ namespace Qowaiv
             : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Gender, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Gender, IFormatProvider, string>>
+        private static readonly Dictionary<char, Func<Gender, IFormatProvider, string>> FormatTokens = new()
         {
             { 'i', (svo, provider) => svo.GetResourceString("int_", provider) },
             { 'c', (svo, provider) => svo.GetResourceString("char_", provider) },
@@ -226,7 +226,7 @@ namespace Qowaiv
         public static Gender Create(int? val)
             => TryCreate(val, out Gender result)
             ? result
-            : throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionGender);
+            : throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionGender);
 
         /// <summary>Creates a Gender from a int.
         /// A return value indicates whether the conversion succeeded.
@@ -272,7 +272,7 @@ namespace Qowaiv
             && val != 0
             && FromInt32s.ContainsKey(val.Value);
 
-        private static readonly ResourceManager ResourceManager = new ResourceManager("Qowaiv.GenderLabels", typeof(Gender).Assembly);
+        private static readonly ResourceManager ResourceManager = new("Qowaiv.GenderLabels", typeof(Gender).Assembly);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">
@@ -299,7 +299,7 @@ namespace Qowaiv
             : ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture);
 
         /// <summary>Gets the valid values.</summary>
-        private static readonly Dictionary<int, byte> FromInt32s = new Dictionary<int, byte>
+        private static readonly Dictionary<int, byte> FromInt32s = new()
         {
             { 0, 1 },
             { 1, 2 },
@@ -307,7 +307,7 @@ namespace Qowaiv
             { 9, 18 },
         };
 
-        private static readonly Dictionary<byte, int?> ToNullableInt32s = new Dictionary<byte, int?>
+        private static readonly Dictionary<byte, int?> ToNullableInt32s = new()
         {
             { 0, null },
             { 1, 0 },
@@ -320,7 +320,7 @@ namespace Qowaiv
         /// <remarks>
         /// Used for both serialization and resource lookups.
         /// </remarks>
-        private static readonly Dictionary<byte, string> GenderLabels = new Dictionary<byte, string>
+        private static readonly Dictionary<byte, string> GenderLabels = new()
         {
             { 0, null },
             { 1, "NotKnown" },
@@ -353,10 +353,10 @@ namespace Qowaiv
         }
 
         /// <summary>Represents the parsing keys.</summary>
-        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new Dictionary<CultureInfo, Dictionary<string, byte>>
+        private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new()
         {
             {
-                CultureInfo.InvariantCulture, new Dictionary<string, byte>
+                CultureInfo.InvariantCulture, new()
                 {
                     { "", 0 },
                     { "0", 1 },

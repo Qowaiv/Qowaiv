@@ -27,13 +27,13 @@ namespace Qowaiv
         public static readonly HouseNumber Empty;
 
         /// <summary>Represents an unknown (but set) house number.</summary>
-        public static readonly HouseNumber Unknown = new HouseNumber(int.MaxValue);
+        public static readonly HouseNumber Unknown = new(int.MaxValue);
 
         /// <summary>Represents the smallest possible House number 1.</summary>
-        public static readonly HouseNumber MinValue = new HouseNumber(1);
+        public static readonly HouseNumber MinValue = new(1);
 
         /// <summary>Represents the largest possible House number 999999999.</summary>
-        public static readonly HouseNumber MaxValue = new HouseNumber(999_999_999);
+        public static readonly HouseNumber MaxValue = new(999_999_999);
 
         /// <summary>Returns true if the house number is odd, otherwise false.</summary>
         /// <remarks>
@@ -187,7 +187,7 @@ namespace Qowaiv
             {
                 return result;
             }
-            throw new ArgumentOutOfRangeException("val", QowaivMessages.FormatExceptionHouseNumber);
+            throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionHouseNumber);
         }
 
         /// <summary>Creates a house number from a Int32.

@@ -21,7 +21,7 @@ namespace Qowaiv
 
         internal readonly struct SymbolInfo : IEquatable<SymbolInfo>
         {
-            private static SymbolInfo Invalid => new SymbolInfo(SymbolPosition.Invalid, default);
+            private static SymbolInfo Invalid => new(SymbolPosition.Invalid, default);
 
             private SymbolInfo(SymbolPosition symbol, CharBuffer buffer)
             {

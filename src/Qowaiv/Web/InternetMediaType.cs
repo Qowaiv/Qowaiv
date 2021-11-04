@@ -68,7 +68,7 @@ namespace Qowaiv.Web
         public static readonly InternetMediaType Empty;
 
         /// <summary>Represents an unknown (but set) Internet media type.</summary>
-        public static readonly InternetMediaType Unknown = new InternetMediaType("application/octet-stream");
+        public static readonly InternetMediaType Unknown = new("application/octet-stream");
 
         /// <summary>Gets the number of characters of the Internet media type.</summary>
         public int Length => IsEmpty() ? 0 : m_Value.Length;
@@ -235,6 +235,6 @@ namespace Qowaiv.Web
             var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
             return string.IsNullOrEmpty(str) ? Unknown : new InternetMediaType(str);
         }
-        internal readonly static ResourceManager ResourceManager = new ResourceManager("Qowaiv.Web.InternetMediaType.FromFile", typeof(InternetMediaType).Assembly);
+        internal readonly static ResourceManager ResourceManager = new("Qowaiv.Web.InternetMediaType.FromFile", typeof(InternetMediaType).Assembly);
     }
 }

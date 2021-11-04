@@ -34,9 +34,7 @@ namespace Qowaiv.Formatting
         /// </remarks>
         [Pure]
         public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
-        {
-            return Apply(obj, format, formatProvider, tokens, '\\');
-        }
+            => Apply(obj, format, formatProvider, tokens, '\\');
 
         /// <summary>Apply a format string instruction on an object.</summary>
         /// <typeparam name="T">

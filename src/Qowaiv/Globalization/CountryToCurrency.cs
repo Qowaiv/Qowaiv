@@ -1,8 +1,4 @@
-﻿#pragma warning disable S3898
-// Value types should implement "IEquatable<T>"
-// Equals of this type is never called.
-
-using Qowaiv.Financial;
+﻿using Qowaiv.Financial;
 using System;
 using System.Diagnostics.Contracts;
 

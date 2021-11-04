@@ -50,7 +50,7 @@ namespace Qowaiv.Conversion
             {
                 return DateSpan.Parse(str, culture);
             }
-            return base.ConvertFrom(context, culture, value);
+            else return base.ConvertFrom(context, culture, value);
         }
     }
 }

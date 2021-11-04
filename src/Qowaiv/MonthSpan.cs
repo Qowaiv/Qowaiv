@@ -23,10 +23,10 @@ namespace Qowaiv
         public static readonly MonthSpan Zero;
 
         /// <summary>Gets the minimum month span (-9998 years).</summary>
-        public static readonly MonthSpan MinValue = new MonthSpan(-9998 * 12);
+        public static readonly MonthSpan MinValue = new(-9998 * 12);
 
         /// <summary>Gets the maximum month span (+9998 years).</summary>
-        public static readonly MonthSpan MaxValue = new MonthSpan(+9998 * 12);
+        public static readonly MonthSpan MaxValue = new(+9998 * 12);
 
         /// <summary>Creates a new instance of the <see cref="MonthSpan"/> struct.</summary>
         /// <param name="years">
@@ -61,7 +61,7 @@ namespace Qowaiv
 
         /// <summary>Negates the month span.</summary>
         [Pure]
-        public MonthSpan Negate() => new MonthSpan(-m_Value);
+        public MonthSpan Negate() => new(-m_Value);
 
         /// <summary>Returns a new month span whose value is the sum of the specified month span and this instance.</summary>
         ///<param name="other">

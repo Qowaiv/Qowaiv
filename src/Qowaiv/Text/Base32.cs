@@ -42,45 +42,44 @@ namespace Qowaiv.Text
         [Pure]
         public static string ToString(byte[] bytes, bool lowerCase)
         {
-            if (bytes == null || bytes.Length == 0)
+            if (bytes == null || bytes.Length == 0) return string.Empty;
+            else
             {
-                return string.Empty;
-            }
+                var lookup = lowerCase ? LowerCaseBitChars : UpperCaseBitChars;
 
-            var lookup = lowerCase ? LowerCaseBitChars : UpperCaseBitChars;
+                // Determine the string size.
+                var bitLength = bytes.Length << 3;
+                var chars = new char[1 + (bitLength - 1) / BitPerChar];
 
-            // Determine the string size.
-            var bitLength = bytes.Length << 3;
-            var chars = new char[1 + (bitLength - 1) / BitPerChar];
+                var indexChars = 0;
+                var indexBytes = 0;
+                int buffer = bytes[indexBytes++];
+                var overFlow = BitShift;
 
-            var indexChars = 0;
-            var indexBytes = 0;
-            int buffer = bytes[indexBytes++];
-            var overFlow = BitShift;
-
-            while (indexChars < chars.Length)
-            {
-                // Get the 5 bits, from the buffer to chars.
-                // A negative overflow can only occur at the end.
-                var bits = overFlow < 0 ? (buffer << -overFlow) : (buffer >> overFlow);
-                chars[indexChars++] = lookup[bits & BitsMask];
-
-                // If the buffer is too small, and there are bytes left.
-                if (overFlow < BitPerChar && indexBytes < bytes.Length)
+                while (indexChars < chars.Length)
                 {
-                    // Make place at the beginning of the buffer.
-                    buffer <<= BitPerByte;
-                    // Add the bits.
-                    buffer |= bytes[indexBytes++];
-                    // Update the overflow.
-                    overFlow += BitShift;
+                    // Get the 5 bits, from the buffer to chars.
+                    // A negative overflow can only occur at the end.
+                    var bits = overFlow < 0 ? (buffer << -overFlow) : (buffer >> overFlow);
+                    chars[indexChars++] = lookup[bits & BitsMask];
+
+                    // If the buffer is too small, and there are bytes left.
+                    if (overFlow < BitPerChar && indexBytes < bytes.Length)
+                    {
+                        // Make place at the beginning of the buffer.
+                        buffer <<= BitPerByte;
+                        // Add the bits.
+                        buffer |= bytes[indexBytes++];
+                        // Update the overflow.
+                        overFlow += BitShift;
+                    }
+                    else
+                    {
+                        overFlow -= BitPerChar;
+                    }
                 }
-                else
-                {
-                    overFlow -= BitPerChar;
-                }
+                return new string(chars);
             }
-            return new string(chars);
         }
 
         /// <summary>Gets the bytes for a given Base32 string. </summary>
@@ -118,7 +117,7 @@ namespace Qowaiv.Text
         {
             if (string.IsNullOrEmpty(s))
             {
-                bytes = new byte[0];
+                bytes = Array.Empty<byte>();
                 return true;
             }
 
@@ -136,14 +135,14 @@ namespace Qowaiv.Text
                 // the char is not a valid base32 char.
                 if (ch > MaxChar)
                 {
-                    bytes = new byte[0];
+                    bytes = Array.Empty<byte>();
                     return false;
                 }
                 var charValue = CharValues[ch];
                 // the char is not a valid base32 char, although it is in the lookup.
                 if (charValue == byte.MaxValue)
                 {
-                    bytes = new byte[0];
+                    bytes = Array.Empty<byte>();
                     return false;
                 }
 

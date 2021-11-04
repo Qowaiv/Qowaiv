@@ -35,7 +35,7 @@ namespace Qowaiv
         public static readonly PostalCode Empty;
 
         /// <summary>Represents an unknown (but set) postal code.</summary>
-        public static readonly PostalCode Unknown = new PostalCode("ZZZZZZZZZ");
+        public static readonly PostalCode Unknown = new("ZZZZZZZZZ");
 
         /// <summary>Gets the number of characters of postal code.</summary>
         public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;

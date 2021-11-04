@@ -33,10 +33,10 @@ namespace Qowaiv.Statistics
         public static readonly Elo Zero;
 
         /// <summary>Represents the minimum value of an Elo.</summary>
-        public static readonly Elo MinValue = new Elo(double.MinValue);
+        public static readonly Elo MinValue = new(double.MinValue);
 
         /// <summary>Represents the maximum value of an Elo.</summary>
-        public static readonly Elo MaxValue = new Elo(double.MaxValue);
+        public static readonly Elo MaxValue = new(double.MaxValue);
 
         /// <summary>Gets an z-score based on the two Elo's.</summary>
         /// <param name="elo0">
@@ -177,11 +177,11 @@ namespace Qowaiv.Statistics
         public static explicit operator Elo(string str) => Cast.String<Elo>(TryParse, str);
 
         /// <summary>Casts a decimal to an Elo.</summary>
-        public static implicit operator Elo(decimal val) => new Elo((double)val);
+        public static implicit operator Elo(decimal val) => new((double)val);
         /// <summary>Casts a decimal to an Elo.</summary>
         public static implicit operator Elo(double val) => Create(val);
         /// <summary>Casts an integer to an Elo.</summary>
-        public static implicit operator Elo(int val) => new Elo(val);
+        public static implicit operator Elo(int val) => new(val);
 
         /// <summary>Casts an Elo to a decimal.</summary>
         public static explicit operator decimal(Elo val) => (decimal)val.m_Value;

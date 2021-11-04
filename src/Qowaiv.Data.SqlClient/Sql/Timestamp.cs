@@ -22,7 +22,7 @@ namespace Qowaiv.Sql
         public static readonly Timestamp MinValue;
 
         /// <summary>Gets the maximum value of a timestamp.</summary>
-        public static readonly Timestamp MaxValue = new Timestamp(ulong.MaxValue);
+        public static readonly Timestamp MaxValue = new(ulong.MaxValue);
 
         /// <summary>Represents the timestamp .</summary>
         [Pure]
@@ -149,7 +149,7 @@ namespace Qowaiv.Sql
         /// </param>
         [Pure]
         [CLSCompliant(false)]
-        public static Timestamp Create(ulong val) => new Timestamp(val);
+        public static Timestamp Create(ulong val) => new(val);
 
         /// <summary>Creates a timestamp from a Int64. </summary >
         /// <param name="val" >
@@ -166,9 +166,8 @@ namespace Qowaiv.Sql
         public static Timestamp Create(byte[] bytes)
         {
             Guard.HasAny(bytes, nameof(bytes));
-            if (bytes.Length != 8) { throw new ArgumentException(QowaivMessages.ArgumentException_TimestampArrayShouldHaveSize8, "bytes"); }
-
-            return Create(BitConverter.ToUInt64(bytes, 0));
+            if (bytes.Length == 8) return Create(BitConverter.ToUInt64(bytes, 0));
+            else throw new ArgumentException(QowaivMessages.ArgumentException_TimestampArrayShouldHaveSize8, nameof(bytes));
         }
     }
 }

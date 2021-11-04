@@ -51,25 +51,25 @@ namespace Qowaiv
         private static readonly Regex Pattern = new(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents the minimum value of the week date.</summary>
-        public static readonly WeekDate MinValue = new WeekDate { m_Value = Date.MinValue };
+        public static readonly WeekDate MinValue = new() { m_Value = Date.MinValue };
 
         /// <summary>Represents the maximum value of the week date.</summary>
-        public static readonly WeekDate MaxValue = new WeekDate { m_Value = Date.MaxValue };
+        public static readonly WeekDate MaxValue = new() { m_Value = Date.MaxValue };
 
         /// <summary>Creates a date based on Week Year, week number, and day of the week.</summary>
         public WeekDate(int year, int week, int day)
         {
             if (year < 1 || year > 9999)
             {
-                throw new ArgumentOutOfRangeException("year", "Year should be in range [1,9999].");
+                throw new ArgumentOutOfRangeException(nameof(year), "Year should be in range [1,9999].");
             }
             if (week < 1 || week > 53)
             {
-                throw new ArgumentOutOfRangeException("week", "Week should be in range [1,53].");
+                throw new ArgumentOutOfRangeException(nameof(week), "Week should be in range [1,53].");
             }
             if (day < 1 || day > DaysPerWeek)
             {
-                throw new ArgumentOutOfRangeException("day", "Day should be in range [1,7].");
+                throw new ArgumentOutOfRangeException(nameof(day), "Day should be in range [1,7].");
             }
 
             if (!TryCreate(year, week, day, out Date dt))
@@ -223,7 +223,7 @@ namespace Qowaiv
             : StringFormatter.Apply(this, format.WithDefault(@"y-\Ww-d"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<WeekDate, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<WeekDate, IFormatProvider, string>>
+        private static readonly Dictionary<char, Func<WeekDate, IFormatProvider, string>> FormatTokens = new()
         {
             { 'y', (svo, provider) => svo.Year.ToString("0000", provider) },
             { 'w', (svo, provider) => svo.Week.ToString("00", provider) },

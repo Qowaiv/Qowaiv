@@ -19,6 +19,9 @@ indent_size = 2
 # CA1806: Do not ignore method results
 dotnet_diagnostic.CA1806.severity = warning
 
+# CA1825: Avoid unnecessary zero-length array allocations
+dotnet_diagnostic.CA1825.severity = warning
+
 # IDE0018: Inline variable declaration
 csharp_style_inlined_variable_declaration = true:warning
 

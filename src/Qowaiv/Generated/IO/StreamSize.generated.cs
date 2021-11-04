@@ -11,7 +11,6 @@
 #define NotIsEmpty
 #define NotIsUnknown
 #define NotIsEmptyOrUnknown
-#define NotGetHashCodeClass
 namespace Qowaiv.IO
 {
     using System;
@@ -46,6 +45,7 @@ namespace Qowaiv.IO
 {
     using System;
     using System.Diagnostics.Contracts;
+    using Qowaiv.Hashing;
 
     public partial struct StreamSize : IEquatable<StreamSize>
     {
@@ -57,15 +57,10 @@ namespace Qowaiv.IO
         /// <param name = "other">The <see cref = "StreamSize"/> to compare with.</param>
         [Pure]
         public bool Equals(StreamSize other) => m_Value == other.m_Value;
-#if !NotGetHashCodeStruct
+#if !NotGetHashCode
         /// <inheritdoc/>
         [Pure]
-        public override int GetHashCode() => m_Value.GetHashCode();
-#endif
-#if !NotGetHashCodeClass
-        /// <inheritdoc/>
-        [Pure]
-        public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+        public override int GetHashCode() => Hash.Code(m_Value);
 #endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>

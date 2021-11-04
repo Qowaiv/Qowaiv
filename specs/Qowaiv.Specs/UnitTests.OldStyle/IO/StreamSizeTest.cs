@@ -613,26 +613,6 @@ namespace Qowaiv.UnitTests.IO
 
         #region IEquatable tests
 
-        /// <summary>GetHash should not fail for StreamSize.Zero.</summary>
-        [Test]
-        public void GetHash_Empty_0()
-        {
-            Assert.AreEqual(0, StreamSize.Zero.GetHashCode());
-        }
-
-        /// <summary>GetHash should not fail for the test struct.</summary>
-        [Test]
-        public void GetHash_TestStruct_123456789()
-        {
-            Assert.AreEqual(123456789, TestStruct.GetHashCode());
-        }
-
-        [Test]
-        public void Equals_EmptyEmpty_IsTrue()
-        {
-            Assert.IsTrue(StreamSize.Zero.Equals(StreamSize.Zero));
-        }
-
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
@@ -640,58 +620,6 @@ namespace Qowaiv.UnitTests.IO
             var r = StreamSize.Parse("12345", CultureInfo.InvariantCulture);
 
             Assert.IsTrue(l.Equals(r));
-        }
-
-        [Test]
-        public void Equals_TestStructTestStruct_IsTrue()
-        {
-            Assert.IsTrue(TestStruct.Equals(TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructEmpty_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.Equals(StreamSize.Zero));
-        }
-
-        [Test]
-        public void Equals_EmptyTestStruct_IsFalse()
-        {
-            Assert.IsFalse(StreamSize.Zero.Equals(TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructObjectTestStruct_IsTrue()
-        {
-            Assert.IsTrue(TestStruct.Equals((object)TestStruct));
-        }
-
-        [Test]
-        public void Equals_TestStructNull_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.Equals(null));
-        }
-
-        [Test]
-        public void Equals_TestStructObject_IsFalse()
-        {
-            Assert.IsFalse(TestStruct.Equals(new object()));
-        }
-
-        [Test]
-        public void OperatorIs_TestStructTestStruct_IsTrue()
-        {
-            var l = TestStruct;
-            var r = TestStruct;
-            Assert.IsTrue(l == r);
-        }
-
-        [Test]
-        public void OperatorIsNot_TestStructTestStruct_IsFalse()
-        {
-            var l = TestStruct;
-            var r = TestStruct;
-            Assert.IsFalse(l != r);
         }
 
         #endregion

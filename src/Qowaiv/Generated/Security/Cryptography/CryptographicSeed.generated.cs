@@ -12,7 +12,6 @@
 #define NotIsEmptyOrUnknown
 #define NoComparisonOperators
 #define NotEqualsSvo
-#define NotGetHashCodeStruct
 namespace Qowaiv.Security.Cryptography
 {
     using System;
@@ -47,6 +46,7 @@ namespace Qowaiv.Security.Cryptography
 {
     using System;
     using System.Diagnostics.Contracts;
+    using Qowaiv.Hashing;
 
     public partial struct CryptographicSeed : IEquatable<CryptographicSeed>
     {
@@ -58,15 +58,10 @@ namespace Qowaiv.Security.Cryptography
         /// <param name = "other">The <see cref = "CryptographicSeed"/> to compare with.</param>
         [Pure]
         public bool Equals(CryptographicSeed other) => m_Value == other.m_Value;
-#if !NotGetHashCodeStruct
+#if !NotGetHashCode
         /// <inheritdoc/>
         [Pure]
-        public override int GetHashCode() => m_Value.GetHashCode();
-#endif
-#if !NotGetHashCodeClass
-        /// <inheritdoc/>
-        [Pure]
-        public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+        public override int GetHashCode() => Hash.Code(m_Value);
 #endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>

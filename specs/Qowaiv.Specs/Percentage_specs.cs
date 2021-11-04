@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Json;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
@@ -154,10 +155,13 @@ namespace Percentage_specs
         }
 
         [TestCase("0%", 0)]
-        [TestCase("17.51%", 263895)]
-        public void hash_code_is_value_based(Percentage svo, int hashcode)
+        [TestCase("17.51%", 20431268)]
+        public void hash_code_is_value_based(Percentage svo, int hash)
         {
-            Assert.AreEqual(hashcode, svo.GetHashCode());
+            using (Hash.WithoutRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
         }
     }
 

@@ -1,9 +1,12 @@
 ﻿using Qowaiv.Financial;
+using Qowaiv.Formatting;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Identifiers;
 using Qowaiv.IO;
 using Qowaiv.Mathematics;
 using Qowaiv.Security.Cryptography;
+using Qowaiv.Sql;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.Web;
@@ -43,8 +46,9 @@ namespace Qowaiv.Specs
         public static readonly MonthSpan MonthSpan = MonthSpan.FromMonths(69);
         public static readonly Percentage Percentage = 17.51.Percent();
         public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
-        public static readonly StreamSize StreamSize = 123456789L;
+        public static readonly StreamSize StreamSize = 123456789;
         public static readonly TimeZoneInfo TimeZone = TestTimeZones.EastAustraliaStandardTime;
+        public static readonly Timestamp Timestamp = 1234567890L;
         public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
         public static readonly WeekDate WeekDate = new(2017, 23, 7);
         public static readonly Year Year = 1979;
@@ -60,6 +64,16 @@ namespace Qowaiv.Specs
         public static IEnumerable<object> All() => typeof(Svo)
             .GetFields(BindingFlags.Public | BindingFlags.Static)
             .Select(field => field.GetValue(null));
+
+        public static IEnumerable<Type> AllTypes()
+             => typeof(SingleValueObjectAttribute).Assembly
+            .GetTypes()
+            .Where(tp => tp.IsValueType && tp.IsPublic && !tp.IsEnum && !tp.IsAbstract)
+            .Except(new[]
+            {
+                typeof(FormattingArguments),
+                typeof(Hash),
+            });
     }
 
     public sealed class ForInt32 : Int32IdBehavior

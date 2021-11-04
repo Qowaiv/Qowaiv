@@ -2,10 +2,15 @@
 using Qowaiv.Globalization;
 using Qowaiv.Identifiers;
 using Qowaiv.IO;
+using Qowaiv.Mathematics;
 using Qowaiv.Security.Cryptography;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools.Globalization;
+using Qowaiv.Web;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using CustomGuid = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForGuid>;
 using CustomUuid = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForUuid>;
 using Int32Id = Qowaiv.Identifiers.Id<Qowaiv.Specs.ForInt32>;
@@ -20,14 +25,22 @@ namespace Qowaiv.Specs
         public static readonly BusinessIdentifierCode BusinessIdentifierCode = BusinessIdentifierCode.Parse("AEGONL2UXXX");
         public static readonly Country Country = Country.VA;
         public static readonly CryptographicSeed CryptographicSeed = CryptographicSeed.Parse("Qowaiv==");
+        public static readonly Currency Currency = Currency.EUR;
         public static readonly Date Date = new(2017, 06, 11);
+        public static readonly DateSpan DateSpan = new(10, 3, -5);
         public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00);
         public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
         public static readonly Elo Elo = 1732.4;
+        public static readonly Fraction Fraction = -69.DividedBy(17);
         public static readonly Gender Gender = Gender.Female;
         public static readonly Guid Guid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        public static readonly HouseNumber HouseNumber = 123456789L;
+        public static readonly InternationalBankAccountNumber Iban = InternationalBankAccountNumber.Parse("NL20 INGB 0001 2345 67");
+        public static readonly InternetMediaType InternetMediaType = InternetMediaType.Parse("application/x-chess-pgn");
+        public static readonly LocalDateTime LocalDateTime = new(2017, 06, 11, 06, 15, 00);
         public static readonly Money Money = 42.17 + Currency.EUR;
         public static readonly Month Month = Month.February;
+        public static readonly MonthSpan MonthSpan = MonthSpan.FromMonths(69);
         public static readonly Percentage Percentage = 17.51.Percent();
         public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
         public static readonly StreamSize StreamSize = 123456789L;
@@ -42,6 +55,11 @@ namespace Qowaiv.Specs
         public static readonly StringId StringId = StringId.Parse("Qowaiv-ID");
         public static readonly CustomGuid CustomGuid = CustomGuid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
         public static readonly CustomUuid CustomUuid = CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
+
+
+        public static IEnumerable<object> All() => typeof(Svo)
+            .GetFields(BindingFlags.Public | BindingFlags.Static)
+            .Select(field => field.GetValue(null));
     }
 
     public sealed class ForInt32 : Int32IdBehavior

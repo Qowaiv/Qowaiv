@@ -7,6 +7,7 @@ using Qowaiv.Identifiers;
 using Qowaiv.IO;
 using Qowaiv.Mathematics;
 using Qowaiv.Security.Cryptography;
+using Qowaiv.Specs;
 using Qowaiv.Statistics;
 using Qowaiv.TestTools;
 using Qowaiv.Web;
@@ -131,13 +132,19 @@ namespace Debug_SVO_specs
     {
         protected DebugerDisplayTest() { }
 
-        internal static IEnumerable<Type> Svos => SVO_specs.All.Types;
+        internal static IEnumerable<Type> Svos => Svo.AllTypes();
 
         internal static IEnumerable<Type> SvosWithEmpty => Svos
-            .Where(svo => !svo.IsGenericType && svo.GetCustomAttribute<SingleValueObjectAttribute>().StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue));
+            .Where(svo
+                => !svo.IsGenericType 
+                && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
+                && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue));
 
         internal static IEnumerable<Type> SvosWithUnknown => Svos
-            .Where(svo => !svo.IsGenericType && svo.GetCustomAttribute<SingleValueObjectAttribute>().StaticOptions.HasFlag(SingleValueStaticOptions.HasUnknownValue))
+            .Where(svo 
+                => !svo.IsGenericType
+                && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
+                && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasUnknownValue))
             .Except(new[] { typeof(Gender), typeof(InternetMediaType) });
 
     }

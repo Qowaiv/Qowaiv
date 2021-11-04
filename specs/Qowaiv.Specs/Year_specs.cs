@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Json;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
@@ -201,10 +202,13 @@ namespace Year_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("1979", 1979)]
-        public void hash_code_is_value_based(Year svo, int hashcode)
+        [TestCase("1979", 20168904)]
+        public void hash_code_is_value_based(Year svo, int hash)
         {
-            Assert.AreEqual(hashcode, svo.GetHashCode());
+            using (Hash.WithoutRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
         }
     }
 

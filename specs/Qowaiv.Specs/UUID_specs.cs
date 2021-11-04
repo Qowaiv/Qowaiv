@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.Json;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
@@ -154,10 +155,13 @@ namespace UUID_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("Qowaiv_SVOLibrary_GUIA", -479411820)]
-        public void hash_code_is_value_based(Uuid svo, int hashcode)
+        [TestCase("Qowaiv_SVOLibrary_GUIA", -497088793)]
+        public void hash_code_is_value_based(Uuid svo, int hash)
         {
-            Assert.AreEqual(hashcode, svo.GetHashCode());
+            using (Hash.WithoutRandomizer())
+            {
+                svo.GetHashCode().Should().Be(hash);
+            }
         }
     }
 

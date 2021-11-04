@@ -8,7 +8,6 @@
 // ------------------------------------------------------------------------------
 
 #define NoComparisonOperators
-#define NotGetHashCodeStruct
 namespace Qowaiv.Financial
 {
     using System;
@@ -43,6 +42,7 @@ namespace Qowaiv.Financial
 {
     using System;
     using System.Diagnostics.Contracts;
+    using Qowaiv.Hashing;
 
     public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>
     {
@@ -54,15 +54,10 @@ namespace Qowaiv.Financial
         /// <param name = "other">The <see cref = "InternationalBankAccountNumber"/> to compare with.</param>
         [Pure]
         public bool Equals(InternationalBankAccountNumber other) => m_Value == other.m_Value;
-#if !NotGetHashCodeStruct
+#if !NotGetHashCode
         /// <inheritdoc/>
         [Pure]
-        public override int GetHashCode() => m_Value.GetHashCode();
-#endif
-#if !NotGetHashCodeClass
-        /// <inheritdoc/>
-        [Pure]
-        public override int GetHashCode() => m_Value is null ? 0 : m_Value.GetHashCode();
+        public override int GetHashCode() => Hash.Code(m_Value);
 #endif
 #endif
         /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>

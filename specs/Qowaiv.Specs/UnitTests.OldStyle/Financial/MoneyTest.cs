@@ -545,7 +545,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            Action compare = () => TestStruct.CompareTo(new object());
+            Func<int> compare = () => TestStruct.CompareTo(new object());
             compare.Should().Throw<ArgumentException>();
         }
 
@@ -682,16 +682,18 @@ namespace Qowaiv.UnitTests.Financial
         public void Increase_TestStruct_Plus1()
         {
             var act = TestStruct;
+            act++;
             var exp = 43.17 + Currency.EUR;
-            Assert.AreEqual(exp, ++act);
+            Assert.AreEqual(exp, act);
         }
 
         [Test]
         public void Decrease_TestStruct_Minus1()
         {
             var act = TestStruct;
+            act--;
             var exp = 41.17 + Currency.EUR;
-            Assert.AreEqual(exp, --act);
+            Assert.AreEqual(exp, act);
         }
 
         [Test]

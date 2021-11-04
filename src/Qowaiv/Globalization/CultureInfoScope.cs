@@ -94,7 +94,6 @@ namespace Qowaiv.Globalization
         public static CultureInfoScope NewInvariant()
             => new(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
         
-        
         #region IDisposable
 
         /// <summary></summary>

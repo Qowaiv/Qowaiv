@@ -22,10 +22,10 @@ namespace Qowaiv
         private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
 
         /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
-        public static readonly LocalDateTime MinValue = new LocalDateTime(DateTime.MinValue);
+        public static readonly LocalDateTime MinValue = new(DateTime.MinValue);
 
         /// <summary>Represents the largest possible value date. This field is read-only.</summary>
-        public static readonly LocalDateTime MaxValue = new LocalDateTime(DateTime.MaxValue);
+        public static readonly LocalDateTime MaxValue = new(DateTime.MaxValue);
 
         #region Constructors
 
@@ -504,7 +504,7 @@ namespace Qowaiv
         /// The deserialized local date time.
         /// </returns>
         [Pure]
-        public static LocalDateTime FromJson(long json) => new LocalDateTime(json);
+        public static LocalDateTime FromJson(long json) => new(json);
 
         /// <summary>Serializes the local date time to a JSON node.</summary>
         /// <returns>
@@ -552,10 +552,10 @@ namespace Qowaiv
         /// <summary>Casts a <see cref="string"/> to a local date time.</summary>
         public static explicit operator LocalDateTime(string str) => Cast.String<LocalDateTime>(TryParse, str);
         /// <summary>Casts a date time to a local date time.</summary>
-        public static implicit operator LocalDateTime(DateTime val) => new LocalDateTime(val);
+        public static implicit operator LocalDateTime(DateTime val) => new(val);
 
         /// <summary>Casts a date to a local date time.</summary>
-        public static explicit operator LocalDateTime(Date val) => new LocalDateTime(val);
+        public static explicit operator LocalDateTime(Date val) => new(val);
         /// <summary>Casts a week date to a week date.</summary>
         public static implicit operator LocalDateTime(WeekDate val) => (LocalDateTime)val.Date;
 

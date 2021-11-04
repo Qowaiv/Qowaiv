@@ -46,7 +46,7 @@ namespace Qowaiv.Financial
         public static readonly Currency Empty;
 
         /// <summary>Represents an unknown (but set) currency.</summary>
-        public static readonly Currency Unknown = new Currency("ZZZ");
+        public static readonly Currency Unknown = new("ZZZ");
 
         /// <summary>Gets a currency based on the current thread.</summary>
         public static Currency Current => Thread.CurrentThread.GetValue<Currency>();
@@ -161,7 +161,7 @@ namespace Qowaiv.Financial
             : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Currency, IFormatProvider, string>>
+        private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new()
         {
             { 'n', (svo, provider) => svo.Name },
             { 'i', (svo, provider) => svo.IsoCode },
@@ -327,7 +327,7 @@ namespace Qowaiv.Financial
             {
                 if (s_ResourceManager == null)
                 {
-                    ResourceManager temp = new ResourceManager("Qowaiv.Financial.CurrencyLabels", typeof(Currency).Assembly);
+                    ResourceManager temp = new("Qowaiv.Financial.CurrencyLabels", typeof(Currency).Assembly);
                     s_ResourceManager = temp;
                 }
                 return s_ResourceManager;

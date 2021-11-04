@@ -9,7 +9,7 @@ namespace Qowaiv.Conversion
     /// <summary>Provides a conversion for a Date types.</summary>
     public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFormattable
     {
-             /// <inheritdoc />
+        /// <inheritdoc />
         [Pure]
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
@@ -22,9 +22,9 @@ namespace Qowaiv.Conversion
             else if (value is string str) return FromString(str, culture);
             else if (IsConvertable(value.GetType()))
             {
-                if (value is DateTime dateTime)  return FromDateTime(dateTime);
+                if (value is DateTime dateTime) return FromDateTime(dateTime);
                 else if (value is DateTimeOffset offset) return FromDateTimeOffset(offset);
-                else if (value is LocalDateTime local)    return FromLocalDateTime(local);
+                else if (value is LocalDateTime local) return FromLocalDateTime(local);
                 else if (value is Date date) return FromDate(date);
                 else if (value is WeekDate weekDate) return FromWeekDate(weekDate);
             }
@@ -48,44 +48,24 @@ namespace Qowaiv.Conversion
             {
                 return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
             }
-
-            if (destinationType == typeof(string))
+            else if (destinationType == typeof(string))
             {
                 var typed = Guard.IsInstanceOf<T>(value, nameof(value));
                 return typed.ToString(string.Empty, culture);
             }
-
-            if (IsConvertable(destinationType))
+            else if (IsConvertable(destinationType))
             {
                 var date = Guard.IsInstanceOf<T>(value, nameof(value));
-
                 var type = QowaivType.GetNotNullableType(destinationType);
 
-                if (type == typeof(DateTime))
-                {
-                    return ToDateTime(date);
-                }
-                if (type == typeof(DateTimeOffset))
-                {
-                    return ToDateTimeOffset(date);
-                }
-                if (type == typeof(LocalDateTime))
-                {
-                    return ToLocalDateTime(date);
-                }
-                if (type == typeof(Date))
-                {
-                    return ToDate(date);
-                }
-                if (type == typeof(WeekDate))
-                {
-                    return ToWeekDate(date);
-                }
+                if (type == typeof(DateTime)) return ToDateTime(date);
+                else if (type == typeof(DateTimeOffset)) return ToDateTimeOffset(date);
+                else if (type == typeof(LocalDateTime)) return ToLocalDateTime(date);
+                else if (type == typeof(Date)) return ToDate(date);
+                else if (type == typeof(WeekDate)) return ToWeekDate(date);
             }
-
             return base.ConvertTo(context, culture, value, destinationType);
         }
-
 
         /// <summary>Converts from <see cref="string"/>.</summary>
         [Pure]
@@ -133,7 +113,7 @@ namespace Qowaiv.Conversion
 
         [Pure]
         private static bool IsConvertable(Type type)
-            => type != typeof(T) 
+            => type != typeof(T)
             && (type == typeof(string) || QowaivType.IsDate(type));
     }
 }

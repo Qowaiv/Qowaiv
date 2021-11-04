@@ -32,7 +32,7 @@ namespace Qowaiv.Identifiers
         where TIdentifier : IIdentifierBehavior, new()
     {
         /// <summary>An singleton instance that deals with the identifier specific behavior.</summary>
-        private static readonly TIdentifier behavior = new TIdentifier();
+        private static readonly TIdentifier behavior = new();
 
         /// <summary>Represents an empty/not set identifier.</summary>
         public static readonly Id<TIdentifier> Empty;
@@ -329,7 +329,7 @@ namespace Qowaiv.Identifiers
         /// The deserialized date.
         /// </returns>
         [Pure]
-        public static Id<TIdentifier> FromJson(long json) => new Id<TIdentifier>(behavior.FromJson(json));
+        public static Id<TIdentifier> FromJson(long json) => new(behavior.FromJson(json));
 
         /// <summary>Creates the identfier for the <see cref="byte"/> array.</summary>
         /// <param name="bytes">
@@ -384,7 +384,7 @@ namespace Qowaiv.Identifiers
 
         /// <summary>Creates a new identifier.</summary>
         [Pure]
-        public static Id<TIdentifier> Next() => new Id<TIdentifier>(behavior.Next());
+        public static Id<TIdentifier> Next() => new(behavior.Next());
 
         /// <summary>Returns true if the value represents a valid identifier.</summary>
         /// <param name="val">

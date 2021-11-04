@@ -51,6 +51,6 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>The locker for adding a culture.</summary>
-        protected readonly object locker = new object();
+        protected readonly object locker = new();
     }
 }

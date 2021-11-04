@@ -1,4 +1,5 @@
-﻿using Qowaiv.Text;
+﻿using Qowaiv.Hashing;
+using Qowaiv.Text;
 using System;
 using System.Diagnostics.Contracts;
 using System.Globalization;
@@ -21,7 +22,7 @@ namespace Qowaiv
 
         internal readonly struct SymbolInfo : IEquatable<SymbolInfo>
         {
-            private static SymbolInfo Invalid => new SymbolInfo(SymbolPosition.Invalid, default);
+            private static SymbolInfo Invalid => new(SymbolPosition.Invalid, default);
 
             private SymbolInfo(SymbolPosition symbol, CharBuffer buffer)
             {
@@ -36,7 +37,13 @@ namespace Qowaiv
             public override string ToString() => Buffer;
 
             [Pure]
+            public override bool Equals(object obj) => obj is SymbolInfo other && Equals(other);
+
+            [Pure]
             public bool Equals(SymbolInfo other) => base.Equals(other);
+
+            [Pure]
+            public override int GetHashCode() => Hash.NotSupportedBy<SymbolInfo>();
 
             [Pure]
             private static bool NotNone(SymbolPosition symbol) => symbol != SymbolPosition.None;

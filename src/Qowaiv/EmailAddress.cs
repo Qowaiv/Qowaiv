@@ -36,7 +36,7 @@ namespace Qowaiv
         public static readonly EmailAddress Empty;
 
         /// <summary>Represents an unknown (but set) email address.</summary>
-        public static readonly EmailAddress Unknown = new EmailAddress("?");
+        public static readonly EmailAddress Unknown = new("?");
 
         /// <summary>Gets the number of characters of email address.</summary>
         public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
@@ -133,7 +133,7 @@ namespace Qowaiv
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<EmailAddress, IFormatProvider, string>>
+        private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new()
         {
             { 'U', (svo, provider) => svo.m_Value.ToUpper(provider) },
             { 'l', (svo, provider) => svo.Local },

@@ -40,13 +40,13 @@ namespace Qowaiv.Financial
         /// <remarks>
         /// Pairs of IBAN characters can be divided by maximum 2 spacing characters.
         /// </remarks>
-        public static readonly Regex Pattern = new Regex(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Represents an empty/not set IBAN.</summary>
         public static readonly InternationalBankAccountNumber Empty;
 
         /// <summary>Represents an unknown (but set) IBAN.</summary>
-        public static readonly InternationalBankAccountNumber Unknown = new InternationalBankAccountNumber("ZZ");
+        public static readonly InternationalBankAccountNumber Unknown = new("ZZ");
 
         /// <summary>Gets the number of characters of IBAN.</summary>
         public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
@@ -122,7 +122,7 @@ namespace Qowaiv.Financial
         [Pure]
         private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
 
-        private static readonly Regex FormattedPattern = new Regex(@"\w{4}(?!$)", RegexOptions.Compiled);
+        private static readonly Regex FormattedPattern = new(@"\w{4}(?!$)", RegexOptions.Compiled);
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current IBAN.</summary>
         /// <param name="format">
@@ -146,7 +146,7 @@ namespace Qowaiv.Financial
             : StringFormatter.Apply(this, format.WithDefault("U"), formatProvider, FormatTokens);
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>>
+        private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new()
         {
             { 'u', (svo, provider) => svo.ToUnformattedLowercaseString() },
             { 'U', (svo, provider) => svo.ToUnformattedString() },

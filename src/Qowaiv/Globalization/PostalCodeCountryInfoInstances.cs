@@ -1,15 +1,11 @@
-﻿#pragma warning disable S1192 
-// String literals should not be duplicated
-// It should be defined per country.
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Qowaiv.Globalization
 {
     public partial class PostalCodeCountryInfo
     {
         /// <summary>Gets the country based settings.</summary>
-        private static readonly Dictionary<Country, PostalCodeCountryInfo> Instances = new Dictionary<Country, PostalCodeCountryInfo>
+        private static readonly Dictionary<Country, PostalCodeCountryInfo> Instances = new()
         {
             // AD: Andorra, http://en.wikipedia.org/wiki/Postal_codes_in_Andorra
             { Country.AD, New(Country.AD, @"^(AD)?[1-7][0-9]{2}$", "^(AD)?(...)$", "AD-$2") },
@@ -18,7 +14,7 @@ namespace Qowaiv.Globalization
             { Country.AF, New(Country.AF, @"^(0[1-9]|[1-3][0-9]|4[0-3])([0-9]{2})(?<!00)$") },
 
             // AI: Anguilla, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.AI, New(Country.AI, @"^(AI)?2640$", "^.+$", "AI-2640", isSingle:true) },
+            { Country.AI, New(Country.AI, @"^(AI)?2640$", "^.+$", "AI-2640", isSingle: true) },
 
             // AL: Albania, http://en.wikipedia.org/wiki/Postal_codes_in_Albania
             { Country.AL, New(Country.AL, @"^[1-9][0-9]{3}$") },
@@ -147,7 +143,7 @@ namespace Qowaiv.Globalization
             { Country.FI, New(Country.FI, @"^[0-9]{5}$", "^(..)(...)$", "$1-$2") },
 
             // FK: Falkland Islands, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.FK, New(Country.FK, @"^FIQQ1ZZ$", "^.+$", "FIQQ 1ZZ", isSingle:true) },
+            { Country.FK, New(Country.FK, @"^FIQQ1ZZ$", "^.+$", "FIQQ 1ZZ", isSingle: true) },
 
             // FM: Micronesia, http://en.wikipedia.org/wiki/ZIP_Code
             { Country.FM, New(Country.FM, @"^9694[1234]([0-9]{4})?$", "^(.{5})(....)$", "$1-$2") },
@@ -174,7 +170,7 @@ namespace Qowaiv.Globalization
             { Country.GG, New(Country.GG, @"^(GY)?[0-9]{2,3}[A-Z]{2}$", "^(GY)?(...?)(...)$", "GY$2 $3") },
 
             // GI: Gibraltar, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.GI, New(Country.GI, @"^GX111AA$", "^.+$", "GX11 1AA", isSingle:true) },
+            { Country.GI, New(Country.GI, @"^GX111AA$", "^.+$", "GX11 1AA", isSingle: true) },
 
             // GL: Greenland, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Greenland
             { Country.GL, New(Country.GL, @"^(GL)?39[0-9]{2}$", "^(GL)?(....)$", "GL-$2") },
@@ -186,7 +182,7 @@ namespace Qowaiv.Globalization
             { Country.GR, New(Country.GR, @"^[1-9][0-9]{4}$", "^(...)(..)$", "$1 $2") },
 
             // GS: South Georgia And The South Sandwich Islands, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.GS, New(Country.GS, @"^SIQQ1ZZ$", "^.+$", "SIQQ 1ZZ", isSingle:true) },
+            { Country.GS, New(Country.GS, @"^SIQQ1ZZ$", "^.+$", "SIQQ 1ZZ", isSingle: true) },
 
             // GT: Guatemala, http://en.wikipedia.org/wiki/List_of_postal_codes
             { Country.GT, New(Country.GT, @"^[0-9]{5}$") },
@@ -225,7 +221,7 @@ namespace Qowaiv.Globalization
             { Country.IN, New(Country.IN, @"^[1-9][0-9]{5}$") },
 
             // IO: British Indian Ocean Territory, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.IO, New(Country.IO, @"^BBND1ZZ$", "^.+$", "BBND 1ZZ", isSingle:true) },
+            { Country.IO, New(Country.IO, @"^BBND1ZZ$", "^.+$", "BBND 1ZZ", isSingle: true) },
 
             // IQ: Iraq, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Iraq
             { Country.IQ, New(Country.IQ, @"^[13456][0-9]{4}$") },
@@ -399,7 +395,7 @@ namespace Qowaiv.Globalization
             { Country.PM, New(Country.PM, @"^97500$") },
 
             // PN: Pitcairn, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.PN, New(Country.PN, @"^PCRN1ZZ$", "^.+$", "PCRN 1ZZ", isSingle:true) },
+            { Country.PN, New(Country.PN, @"^PCRN1ZZ$", "^.+$", "PCRN 1ZZ", isSingle: true) },
 
             // PR: Puerto Rico, http://en.wikipedia.org/wiki/Postal_codes_in_Puerto_Rico
             { Country.PR, New(Country.PR, @"^[0-9]{5}$") },
@@ -441,7 +437,7 @@ namespace Qowaiv.Globalization
             { Country.SG, New(Country.SG, @"^[0-9]{5}$") },
 
             // SH: Saint Helena, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.SH, New(Country.SH, @"^STHL1ZZ$", "^.+$", "STHL 1ZZ", isSingle:true) },
+            { Country.SH, New(Country.SH, @"^STHL1ZZ$", "^.+$", "STHL 1ZZ", isSingle: true) },
 
             // SI: Slovenia, http://en.wikipedia.org/wiki/List_of_postal_codes
             { Country.SI, New(Country.SI, @"^(SI)?[0-9]{4}$", "^(SI)?(....)$", "SI-$2") },
@@ -456,13 +452,13 @@ namespace Qowaiv.Globalization
             { Country.SN, New(Country.SN, @"^(CP)?[0-9]{5}$", "^(..)?(.{5})$", "CP$2") },
 
             // SV: El Salvador, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.SV, New(Country.SV, @"^01101$", null, "01101", isSingle:true) },
+            { Country.SV, New(Country.SV, @"^01101$", null, "01101", isSingle: true) },
 
             // SZ: Swaziland, http://en.wikipedia.org/wiki/List_of_postal_codes. The letter identifies one of the country's four districts.
             { Country.SZ, New(Country.SZ, @"^[HLMS][0-9]{3}$") },
 
             // TC: Turks And Caicos Islands, http://en.wikipedia.org/wiki/List_of_postal_codes
-            { Country.TC, New(Country.TC, @"^TKCA1ZZ$", "^.+$", "TKCA 1ZZ", isSingle:true) },
+            { Country.TC, New(Country.TC, @"^TKCA1ZZ$", "^.+$", "TKCA 1ZZ", isSingle: true) },
 
             // TD: Chad, http://en.wikipedia.org/wiki/List_of_postal_codes
             { Country.TD, New(Country.TD, @"^[0-9]{5}$") },
@@ -498,7 +494,7 @@ namespace Qowaiv.Globalization
             { Country.UY, New(Country.UY, @"^[0-9]{5}$") },
 
             // VA: Holy See, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy
-            { Country.VA, New(Country.VA, @"^00120$", null, "00120", isSingle:true) },
+            { Country.VA, New(Country.VA, @"^00120$", null, "00120", isSingle: true) },
 
             // VC: Saint Vincent And The Grenadines, http://www.svgpost.gov.vc/index.php?option=com_content&view=article&id=3&Itemid=7
             { Country.VC, New(Country.VC, @"^(VC)?[0-9]{4}$", "^(VC)?(....)$", "VC$2") },

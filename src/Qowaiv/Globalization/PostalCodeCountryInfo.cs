@@ -159,7 +159,7 @@ namespace Qowaiv.Globalization
         /// </remarks>
         [Pure]
         private static PostalCodeCountryInfo New(Country country, string validation, string search = null, string replace = null, bool isSingle = false)
-            => new PostalCodeCountryInfo(
+            => new(
                 country: country,
                 validationPattern: new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase),
                 formattingSearchPattern: string.IsNullOrEmpty(search) ? null : new Regex(search, RegexOptions.Compiled),

@@ -11,9 +11,7 @@ namespace System.Globalization
         /// </summary>
         [Pure]
         public static string Localized(this ResourceManager manager, IFormatProvider provider, params string[] keys)
-            => manager.GetString(
-                string.Concat(keys),
-                provider as CultureInfo ?? CultureInfo.CurrentCulture)
+            => manager.GetString(string.Concat(keys), provider as CultureInfo ?? CultureInfo.CurrentCulture)
             ?? string.Empty;
     }
 }

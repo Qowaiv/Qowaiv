@@ -13,7 +13,7 @@ namespace Qowaiv.UnitTests.Formatting
     public class FormattingArgumentsTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly FormattingArguments TestStruct = new FormattingArguments("0.000", new CultureInfo("fr-BE"));
+        public static readonly FormattingArguments TestStruct = new("0.000", new CultureInfo("fr-BE"));
 
         [Test]
         public void ToString_IFormattableNull_IsNull()

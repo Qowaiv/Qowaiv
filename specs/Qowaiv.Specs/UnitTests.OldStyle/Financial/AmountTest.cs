@@ -121,13 +121,6 @@ namespace Qowaiv.Financial.UnitTests
         #region (XML) (De)serialization tests
 
         [Test]
-        public void GetObjectData_Null_ThrowsArgumentNullException()
-        {
-            Action compare = () => TestStruct.CompareTo(new object());
-            compare.Should().Throw<ArgumentException>();
-        }
-
-        [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
             ISerializable obj = TestStruct;
@@ -581,7 +574,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            Action compare = () => TestStruct.CompareTo(new object());
+            Func<int> compare = () => TestStruct.CompareTo(new object());
             compare.Should().Throw<ArgumentException>();
         }
 
@@ -696,14 +689,16 @@ namespace Qowaiv.Financial.UnitTests
         public void Decrement_EqualsTestStruct()
         {
             Amount amount = (Amount)43.17;
-            Assert.AreEqual(TestStruct, --amount);
+            amount--;
+            Assert.AreEqual(TestStruct, amount);
         }
 
         [Test]
         public void Increment_EqualsTestStruct()
         {
             Amount amount = (Amount)41.17;
-            Assert.AreEqual(TestStruct, ++amount);
+            amount++;
+            Assert.AreEqual(TestStruct, amount);
         }
 
         [Test]

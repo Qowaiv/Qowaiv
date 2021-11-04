@@ -7,19 +7,19 @@ namespace Qowaiv.TestTools.Globalization
     public static class TestCultures
     {
         /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo De_DE => new CultureInfo("de-DE");
+        public static CultureInfo De_DE => new("de-DE");
 
         /// <summary>Gets the English (en) <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo En => new CultureInfo("en");
+        public static CultureInfo En => new("en");
 
         /// <summary>Gets the British (en-GB) <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo En_GB => new CultureInfo("en-GB");
+        public static CultureInfo En_GB => new("en-GB");
 
         /// <summary>Gets the American (en-US) <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo En_US => new CultureInfo("en-US");
+        public static CultureInfo En_US => new("en-US");
 
         /// <summary>Gets the Ecuadorian (es-EC) <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo Es_EC => new CultureInfo("es-EC");
+        public static CultureInfo Es_EC => new("es-EC");
 
         /// <summary>Gets the Iranian (fa-IR) <see cref="CultureInfo"/>.</summary>
         public static CultureInfo Fa_IR
@@ -34,10 +34,10 @@ namespace Qowaiv.TestTools.Globalization
         }
 
         /// <summary>Gets the French (fr-FR) <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo Fr_FR => new CultureInfo("fr-FR");
+        public static CultureInfo Fr_FR => new("fr-FR");
 
         /// <summary>Gets the Dutch (nl-NL) <see cref="CultureInfo"/>.</summary>
-        public static CultureInfo Nl_NL => new CultureInfo("nl-NL");
+        public static CultureInfo Nl_NL => new("nl-NL");
 
         /// <summary>Gets the Flemish (nl-BE) <see cref="CultureInfo"/>.</summary>
         public static CultureInfo Nl_BE
@@ -45,7 +45,7 @@ namespace Qowaiv.TestTools.Globalization
             get
             {
                 var culture = new CultureInfo("nl-BE");
-                culture.DateTimeFormat.AbbreviatedMonthNames = new[] 
+                culture.DateTimeFormat.AbbreviatedMonthNames = new[]
                 {
                     "jan.",
                     "feb.",
@@ -65,7 +65,7 @@ namespace Qowaiv.TestTools.Globalization
                 return culture;
             }
         }
-    
+
         /// <summary>Updates percentage symbols of the culture.</summary>
         [FluentSyntax]
         public static CultureInfo WithPercentageSymbols(this CultureInfo culture, string percentSymbol, string perMilleSymbol)

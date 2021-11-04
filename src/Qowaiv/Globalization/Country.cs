@@ -37,7 +37,7 @@ namespace Qowaiv.Globalization
         public static readonly Country Empty;
 
         /// <summary>Represents an unknown (but set) </summary>
-        public static readonly Country Unknown = new Country("ZZ");
+        public static readonly Country Unknown = new("ZZ");
 
         /// <summary>Gets a country based on the current thread.</summary>
         public static Country Current => Thread.CurrentThread.GetValue<Country>();
@@ -212,7 +212,7 @@ namespace Qowaiv.Globalization
         private string ToXmlString() => m_Value;
 
         /// <summary>The format token instructions.</summary>
-        private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new Dictionary<char, Func<Country, IFormatProvider, string>>
+        private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new()
         {
             { 'n', (svo, provider) => svo.Name },
             { '2', (svo, provider) => svo.GetResourceString("ISO2", provider) },
@@ -336,7 +336,7 @@ namespace Qowaiv.Globalization
         }
 
         /// <summary>Gets a collection of all country info's.</summary>
-        public static readonly ReadOnlyCollection<Country> All = new ReadOnlyCollection<Country>(
+        public static readonly ReadOnlyCollection<Country> All = new(
             ResourceManager
                 .GetString("All")
                 .Split(';')
@@ -383,11 +383,7 @@ namespace Qowaiv.Globalization
         {
             get
             {
-                if (s_ResourceManager == null)
-                {
-                    ResourceManager temp = new ResourceManager("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
-                    s_ResourceManager = temp;
-                }
+                s_ResourceManager ??= new("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
                 return s_ResourceManager;
             }
         }

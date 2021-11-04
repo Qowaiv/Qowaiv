@@ -64,9 +64,9 @@ namespace Qowaiv
                     state.Input.TrimLeft();
                     return state.Email();
                 }
-                else { return state.Invalid(); }
+                else return state.Invalid();
             }
-            else { return state.DisplayName().Email(); }
+            else return state.DisplayName().Email();
         }
 
         [FluentSyntax]
@@ -170,7 +170,7 @@ namespace Qowaiv
                 {
                     state.Buffer.Add(ch);
                 }
-                else { return state.Invalid(); }
+                else return state.Invalid();
             }
             return state.Invalid();
         }
@@ -231,7 +231,7 @@ namespace Qowaiv
                 state.Result.Add(state.Buffer);
                 return state;
             }
-            else { return state.IP(); }
+            else return state.IP();
         }
 
         [FluentSyntax]
@@ -244,7 +244,7 @@ namespace Qowaiv
                     state.Buffer.RemoveFromStart(1);
                     state.Input.RemoveFromEnd(1);
                 }
-                else { return state.Invalid(); }
+                else return state.Invalid();
             }
             var isIp6 = state.Input.StartsWith("IPv6:", ignoreCase: true);
             if (isIp6) { state.Input.RemoveFromStart(6); }
@@ -260,7 +260,7 @@ namespace Qowaiv
                     .Add(']');
                 return state;
             }
-            else { return state.Invalid(); }
+            else return state.Invalid();
         }
 
         [FluentSyntax]

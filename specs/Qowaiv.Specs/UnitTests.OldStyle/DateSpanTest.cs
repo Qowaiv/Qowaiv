@@ -17,9 +17,9 @@ namespace Qowaiv.UnitTests
     public class DateSpanTest
     {
         /// <summary>The test instance for most tests.</summary>
-        public static readonly DateSpan TestStruct = new DateSpan(10, 3, -5);
-        public static readonly DateSpan Smaller = new DateSpan(10, 3, -5);
-        public static readonly DateSpan Bigger = new DateSpan(10, 3, +02);
+        public static readonly DateSpan TestStruct = new(10, 3, -5);
+        public static readonly DateSpan Smaller = new(10, 3, -5);
+        public static readonly DateSpan Bigger = new(10, 3, +02);
 
         #region date span const tests
 
@@ -493,7 +493,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void CompareTo_newObject_ThrowsArgumentException()
         {
-            Action compare = () => TestStruct.CompareTo(new object());
+            Func<int> compare = () => TestStruct.CompareTo(new object());
             compare.Should().Throw<ArgumentException>();
         }
 

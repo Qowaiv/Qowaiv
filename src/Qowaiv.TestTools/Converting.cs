@@ -29,7 +29,7 @@ namespace Qowaiv.TestTools
         public T From(object value) => (T)Converter().ConvertFrom(value);
 
         [Pure]
-        private TypeConverter Converter() => TypeDescriptor.GetConverter(typeof(T));
+        private static TypeConverter Converter() => TypeDescriptor.GetConverter(typeof(T));
     }
 
     /// <summary>ConvertTo builder.</summary>
@@ -49,7 +49,7 @@ namespace Qowaiv.TestTools
         public override string ToString() => Converter().ConvertToString(Subject);
 
         [Pure]
-        private TypeConverter Converter() => TypeDescriptor.GetConverter(typeof(T));
+        private static TypeConverter Converter() => TypeDescriptor.GetConverter(typeof(T));
     }
 
     

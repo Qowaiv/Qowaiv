@@ -27,14 +27,16 @@ namespace Qowaiv.Financial
             foreach(var block in blocks)
             {
                 var type = block.Last();
-                int.TryParse(block.RemoveFromEnd(1), out int length);
 
-                switch (type)
+                if (!int.TryParse(block.RemoveFromEnd(1), out int length) && type == ']')
+                {
+                    pattern.Add(block.RemoveFromStart(1));
+                }
+                else switch (type)
                 {
                     case 'n': pattern.Add("[0-9]").Add('{').Add(length.ToString()).Add('}'); break;
                     case 'a': pattern.Add("[A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
                     case 'c': pattern.Add("[0-9A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
-                    case ']': pattern.Add(block.RemoveFromStart(1)); break;
                     default: throw new FormatException();
                 }
             }

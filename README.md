@@ -872,10 +872,9 @@ To support hashing (`object.GetHashCode()`) the hash code should always return
 the same value, for the same object. As SVO's are equal by value, the hash
 is calculated based on the underlying value.
 
-Due to IXmlSerialization support, however, the underlying value is not
-read-only, because this interface first create default instance and then
-sets the value. Only if somebody intentionally misuses the `IXmlSerialization`
-interface, can change a value during the lifetime of a SVO.
+For security messures, however, this is only true within the same app domain.
+By having different hashes for the same value for different app domains, there
+is good defense against hash flooding.
 
 ### Sortable
 SVO's support sorting. So, LINQ expressions like OrderBy() and OrderByDescending()

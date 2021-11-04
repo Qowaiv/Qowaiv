@@ -9,25 +9,7 @@ namespace Qowaiv.Hashing
         /// <summary>Gets a randomized hashcode for a <see cref="string"/>.</summary>
         [Pure]
         public static int Code(string str)
-        {
-            if (string.IsNullOrEmpty(str)) return 0;
-            else
-            {
-                unchecked
-                {
-                    int hash1 = (5381 << 16) + 5381;
-                    int hash2 = hash1;
-
-                    for (int i = 0; i < str.Length; i += 2)
-                    {
-                        hash1 = ((hash1 << 5) + hash1) ^ str[i];
-                        if (i == str.Length - 1) break;
-                        else hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
-                    }
-                    return Code(hash1 + (hash2 * 1566083941));
-                }
-            }
-        }
+            => Code(Detministic(str));
 
         /// <summary>Gets a randomized hashcode for an <see cref="int"/>.</summary>
         [Pure]
@@ -51,7 +33,29 @@ namespace Qowaiv.Hashing
         public static int NotSupportedBy<T>() 
             => throw new HashingNotSupported(string.Format(QowaivMessages.HashingNotSupported, typeof(T)));
 
+        [Pure]
+        private static int Detministic(string str)
+        {
+            if (string.IsNullOrEmpty(str)) return 0;
+            else unchecked
+            {
+                int hash1 = (5381 << 16) + 5381;
+                int hash2 = hash1;
+
+                for (int i = 0; i < str.Length; i += 2)
+                {
+                    hash1 = ((hash1 << 5) + hash1) ^ str[i];
+                    if (i == str.Length - 1) break;
+                    else hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
+                }
+                return hash1 + (hash2 * 1566083941);
+            }
+        }
+
         /// <summary>Fixes the base hash for the scope of the statement.</summary>
+        /// <remarks>
+        /// This should only be used in test code.
+        /// </remarks>
         public static IDisposable WithFixedRandomizer() => new Scope();
 
 #pragma warning disable S3010 // Static fields should not be updated in constructors

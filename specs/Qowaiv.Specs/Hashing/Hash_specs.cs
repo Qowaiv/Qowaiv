@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv.Hashing;
+using Qowaiv.Specs;
 using System;
 
 namespace Hashing.Hash_specs
@@ -11,8 +12,60 @@ namespace Hashing.Hash_specs
         public void Null_String_is_supported()
         {
             string nil = null;
-            var hash = Hash.Code(nil);
+            int hash = Hash.Code(nil);
             hash.Should().Be(0);
+        }
+
+        [Test]
+        public void Supports_fluent_syntax()
+        {
+            using (Hash.WithoutRandomizer())
+            {
+                int hash = Hash.Code(12)
+                    .And(Svo.EmailAddress)
+                    .And(Svo.DateTime);
+                hash.Should().Be(1013828080);
+            }
+        }
+
+        [Test]
+        public void Supports_fluent_syntax_empty_collection()
+        {
+            using (Hash.WithoutRandomizer())
+            {
+                int hash = Hash.Code(12)
+                    .AndEach(Array.Empty<byte>());
+                hash.Should().Be(665630542);
+            }
+        }
+
+        [Test]
+        public void Supports_fluent_syntax_for_collection()
+        {
+            using (Hash.WithoutRandomizer())
+            {
+                int hash = Hash.Code(12)
+                    .AndEach(new[] { 1234, 123, 2345, 213 });
+                hash.Should().Be(2057503178);
+            }
+        }
+
+        [Test]
+        public void Different_order_different_hash()
+        {
+            using (Hash.WithoutRandomizer())
+            {
+                int hash = Hash.Code(12).AndEach(new[] { 1234, 123, 2345, 213 });
+                int other = Hash.Code(12).AndEach(new[] { 123, 1234, 2345, 213 });
+                hash.Should().NotBe(other);
+            }
+        }
+
+        [Test]
+        public void GetHashCode_is_not_supported()
+        {
+            Func<int> call = () => Hash.Code(12).GetHashCode();
+            call.Should().Throw<HashingNotSupported>();
         }
     }
     public class Get_hash_code_with_fixed_randomizer
@@ -20,9 +73,9 @@ namespace Hashing.Hash_specs
         [Test]
         public void String_is_fixed()
         {
-            using(Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
-                var hash = Hash.Code("QOWAIV string");
+                int hash = Hash.Code("QOWAIV string");
                 hash.Should().Be(1211348473);
             }
         }
@@ -30,9 +83,9 @@ namespace Hashing.Hash_specs
         [Test]
         public void Int32_is_fixed()
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
-                var hash = Hash.Code(17);
+                int hash = Hash.Code(17);
                 hash.Should().Be(20170594);
             }
         }
@@ -40,9 +93,9 @@ namespace Hashing.Hash_specs
         [Test]
         public void Int64_is_fixed()
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
-                var hash = Hash.Code(12345678909876L);
+                int hash = Hash.Code(12345678909876L);
                 hash.Should().Be(1929223677);
             }
         }
@@ -54,7 +107,7 @@ namespace Hashing.Hash_specs
         public void String_is_different_from_fixed()
         {
             int fix;
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 fix = Hash.Code("QOWAIV string");
             }
@@ -65,7 +118,7 @@ namespace Hashing.Hash_specs
         public void Int32_is_different_from_fixed()
         {
             int fix;
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 fix = Hash.Code(17);
             }
@@ -76,7 +129,7 @@ namespace Hashing.Hash_specs
         public void Int64_is_different_from_fixed()
         {
             int fix;
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 fix = Hash.Code(12345678909876L);
             }

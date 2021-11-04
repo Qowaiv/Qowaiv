@@ -47,7 +47,7 @@ namespace Statistics.Elo_specs
         [TestCase("1732.4", -667857040)]
         public void hash_code_is_value_based(Elo svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }
@@ -107,7 +107,7 @@ namespace Statistics.Elo_specs
         [TestCase("1732.4", -667857040)]
         public void hash_code_is_value_based(Elo svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

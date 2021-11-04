@@ -876,6 +876,27 @@ For security messures, however, this is only true within the same app domain.
 By having different hashes for the same value for different app domains, there
 is good defense against hash flooding.
 
+for test purposes, it is possible to generate a hashcode without using the randomizer:
+``` C#
+using(Hash.WithoutRandomizer())
+{
+    var hash = Hash.Code("QOWAIV string");
+    hash.Should().Be(1211348473);
+}
+```
+
+``Hash.Code()` also supports a fluent syntax, to get hashcodes for complex objects:
+``` C#
+public int GetHashCode()
+    => Hash.Code(Prop)
+    .And(Other)
+    .AndEach(Collection);
+```
+
+This works out of the box because `Hash` can be implicitly cast to an `int`.
+Calling `Hash.GetHashCode()` is not allowed, just use the implicit cast.
+
+
 ### Sortable
 SVO's support sorting. So, LINQ expressions like OrderBy() and OrderByDescending()
 work out of the box, just like Array.Sort(), and List.Sort(). However, the

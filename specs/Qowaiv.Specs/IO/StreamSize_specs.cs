@@ -47,7 +47,7 @@ namespace IO.StreamSize_specs
         [TestCase("123456789 byte", 107481702)]
         public void hash_code_is_value_based(StreamSize svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

@@ -158,7 +158,7 @@ namespace UUID_specs
         [TestCase("Qowaiv_SVOLibrary_GUIA", -497088793)]
         public void hash_code_is_value_based(Uuid svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

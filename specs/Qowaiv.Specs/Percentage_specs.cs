@@ -158,7 +158,7 @@ namespace Percentage_specs
         [TestCase("17.51%", 20431268)]
         public void hash_code_is_value_based(Percentage svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

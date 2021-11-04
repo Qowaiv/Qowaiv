@@ -217,7 +217,7 @@ namespace Month_specs
         [TestCase("February", 20170609)]
         public void hash_code_is_value_based(Month svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

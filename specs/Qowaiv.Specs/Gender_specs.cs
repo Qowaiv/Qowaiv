@@ -197,7 +197,7 @@ namespace Gender_specs
         [TestCase("Female", 20170615)]
         public void hash_code_is_value_based(Gender svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

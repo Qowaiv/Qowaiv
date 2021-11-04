@@ -44,7 +44,7 @@ namespace LocalDateTime_specs
         [TestCase("2017-06-11 06:15", 961707490)]
         public void hash_code_is_value_based(LocalDateTime svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

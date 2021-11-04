@@ -134,10 +134,16 @@ namespace Debug_SVO_specs
         internal static IEnumerable<Type> Svos => SVO_specs.All.Types;
 
         internal static IEnumerable<Type> SvosWithEmpty => Svos
-            .Where(svo => !svo.IsGenericType && svo.GetCustomAttribute<SingleValueObjectAttribute>().StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue));
+            .Where(svo
+                => !svo.IsGenericType 
+                && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
+                && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue));
 
         internal static IEnumerable<Type> SvosWithUnknown => Svos
-            .Where(svo => !svo.IsGenericType && svo.GetCustomAttribute<SingleValueObjectAttribute>().StaticOptions.HasFlag(SingleValueStaticOptions.HasUnknownValue))
+            .Where(svo 
+                => !svo.IsGenericType
+                && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
+                && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasUnknownValue))
             .Except(new[] { typeof(Gender), typeof(InternetMediaType) });
 
     }

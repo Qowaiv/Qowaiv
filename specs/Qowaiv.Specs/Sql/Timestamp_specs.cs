@@ -44,7 +44,7 @@ namespace Sql.Timestamp_specs
         [TestCase("1234567890", 1218823585)]
         public void hash_code_is_value_based(Timestamp svo, int hash)
         {
-            using (Hash.WithFixedRandomizer())
+            using (Hash.WithoutRandomizer())
             {
                 svo.GetHashCode().Should().Be(hash);
             }

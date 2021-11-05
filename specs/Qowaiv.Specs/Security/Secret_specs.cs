@@ -5,9 +5,29 @@ using Qowaiv.Security;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using System;
+using System.Security.Cryptography;
 
 namespace Security.Secret_specs
 {
+    public class Cryptographic_seed_can_be_created
+    {
+        [Test]
+        public void from_empty()
+        {
+            var algorithm = MD5.Create();
+            Secret.Empty.ComputeHash(algorithm).ToByteArray()
+                .Should().BeEquivalentTo(new byte[] { 0xD4, 0x1D, 0x8C, 0xD9, 0x8F, 0x00, 0xB2, 0x04, 0xE9, 0x80, 0x09, 0x98, 0xEC, 0xF8, 0x42, 0x7E });
+        }
+
+        [Test]
+        public void from_none_empty()
+        {
+            var algorithm = MD5.Create();
+            Svo.Secret.ComputeHash(algorithm).ToByteArray()
+                .Should().BeEquivalentTo(new byte[] { 0xB5, 0x95, 0xC7, 0x15, 0x1A, 0x69, 0x18, 0x94, 0x8D, 0xAE, 0xAE, 0xE4, 0xA8, 0xA2, 0xEB, 0x70 });
+        }
+    }
+
     public class With_domain_logic
     {
         [TestCase(false, "Ken sent me!")]
@@ -101,6 +121,7 @@ namespace Security.Secret_specs
             => JsonTester.Read<Secret>("Ken sent me!").Value().Should().Be(Svo.Secret.Value());
 
     }
+    
     public class Does_not_supports_JSON_serialization
     {
         [Test]

@@ -1,10 +1,13 @@
 ﻿using Qowaiv.Conversion.Security;
 using Qowaiv.Diagnostics;
 using Qowaiv.Hashing;
+using Qowaiv.Security.Cryptography;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Qowaiv.Security
 {
@@ -28,6 +31,14 @@ namespace Qowaiv.Security
         /// <summary>Gets a string representing this secret.</summary>
         [Pure]
         public string Value() => m_Value ?? string.Empty;
+
+        /// <summary>Computes a <see cref="CryptographicSeed"/> for the secret.</summary>
+        /// <param name="algorithm">
+        /// The algorithm to 
+        /// </param>
+        [Pure]
+        public CryptographicSeed ComputeHash(HashAlgorithm algorithm)
+            => algorithm.ComputeCryptographicSeed(Encoding.UTF8.GetBytes(Value()));
 
         /// <inheritdoc />
         [Pure]

@@ -517,6 +517,11 @@ converter to convert from string. serializing to JSON, or converting it
 to another type are not supported, and `ToString()` returns `*****`. The
 only way to access its value is by calling the `Value()` method.
 
+``` C#
+var secret = Secret.Parse("Ken sent me!");
+var encrypted = secret.ComputeHash(sha516);
+```
+
 ## Qowaiv statistical types
 
 ### Elo

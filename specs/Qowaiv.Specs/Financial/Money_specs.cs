@@ -19,7 +19,7 @@ namespace Financial.Money_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Money>().From("€42.17").Should().Be(Svo.Money);
+                Converting.From("€42.17").To<Money>().Should().Be(Svo.Money);
             }
         }
 
@@ -28,7 +28,7 @@ namespace Financial.Money_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Money).ToString().Should().Be("€42.17");
+                Converting.ToString().From(Svo.Money).Should().Be("€42.17");
             }
         }
     }

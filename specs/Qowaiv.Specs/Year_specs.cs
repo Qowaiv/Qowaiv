@@ -455,7 +455,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Year>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<Year>().Should().Be(Year.Empty);
             }
         }
 
@@ -464,7 +464,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Year>().From(string.Empty).Should().Be(default);
+                Converting.From(string.Empty).To<Year>().Should().Be(Year.Empty);
             }
         }
 
@@ -473,7 +473,7 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Year>().From("1979").Should().Be(Svo.Year);
+                Converting.From("1979").To<Year>().Should().Be(Svo.Year);
             }
         }
 
@@ -482,17 +482,17 @@ namespace Year_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Year).ToString().Should().Be("1979");
+                Converting.ToString().From(Svo.Year).Should().Be("1979");
             }
         }
 
         [Test]
         public void from_int()
-            => Converting.To<Year>().From(1979).Should().Be(Svo.Year);
+            => Converting.From(1979).To<Year>().Should().Be(Svo.Year);
 
         [Test]
         public void to_int()
-            => Converting.Value(Svo.Year).To<int>().Should().Be(1979);
+            => Converting.To<int>().From(Svo.Year).Should().Be(1979);
     }
 
     public class Supports_JSON_serialization

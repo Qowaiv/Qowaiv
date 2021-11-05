@@ -1,12 +1,15 @@
-﻿using Qowaiv.Diagnostics;
+﻿using Qowaiv.Conversion.Security;
+using Qowaiv.Diagnostics;
 using Qowaiv.Hashing;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 
-namespace Qowaiv.Security.Cryptography
+namespace Qowaiv.Security
 {
     /// <summary>Represents a secret.</summary>
+    [TypeConverter(typeof(SecretTypeConverter))]
     [DebuggerDisplay("{DebuggerDisplay}")]
     public readonly struct Secret : IEquatable<Secret>
     {
@@ -30,17 +33,30 @@ namespace Qowaiv.Security.Cryptography
         [Pure]
         public override bool Equals(object obj) => obj is Secret other && Equals(other);
 
-        /// <inheritdoc />
+        /// <summary>Returns true if both are empty, otherwise false.</summary>
+        /// <remarks>
+        /// Secrets are supposed to be passed around, without knowing its content.
+        /// </remarks>
         [Pure]
-        public bool Equals(Secret other) => m_Value == other.m_Value;
+        public bool Equals(Secret other) => IsEmpty() && other.IsEmpty();
 
         /// <inheritdoc />
         [Pure]
         public override int GetHashCode() => Hash.NotSupportedBy<Secret>();
 
-        /// <inheritdoc />
+        /// <summary>Represents the secret as "*****".</summary>
+        /// <remarks>
+        /// To prevent unintended exposure. 
+        /// </remarks>
         [Pure]
-        public override string ToString() => m_Value is null ? string.Empty : "???";
+        public override string ToString() => m_Value is null ? string.Empty : "*****";
+
+        /// <summary>Converts the secret to a JSON null node.</summary>
+        /// <remarks>
+        /// To prevent unintended exposure. 
+        /// </remarks>
+        [Pure]
+        public object ToJson() => null;
 
         /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

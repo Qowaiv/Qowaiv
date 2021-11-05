@@ -19,7 +19,7 @@ namespace Financial.BIC_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<BusinessIdentifierCode>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<BusinessIdentifierCode>().Should().Be(default);
             }
         }
 
@@ -28,7 +28,7 @@ namespace Financial.BIC_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<BusinessIdentifierCode>().From(string.Empty).Should().Be(default);
+                Converting.From(string.Empty).To<BusinessIdentifierCode>().Should().Be(default);
             }
         }
 
@@ -37,7 +37,7 @@ namespace Financial.BIC_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<BusinessIdentifierCode>().From("AEGONL2UXXX").Should().Be(Svo.BusinessIdentifierCode);
+                Converting.From("AEGONL2UXXX").To<BusinessIdentifierCode>().Should().Be(Svo.BusinessIdentifierCode);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Financial.BIC_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.BusinessIdentifierCode).ToString().Should().Be("AEGONL2UXXX");
+                Converting.ToString().From(Svo.BusinessIdentifierCode).Should().Be("AEGONL2UXXX");
             }
         }
     }

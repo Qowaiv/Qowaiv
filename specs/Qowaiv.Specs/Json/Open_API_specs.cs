@@ -53,7 +53,7 @@ namespace Json.Open_API_specs
             => typeof(Date).Assembly
             .GetTypes()
             .Where(IsJsonSerializable)
-            .Except(new []{ typeof(Qowaiv.Security.Cryptography.Secret) });
+            .Except(new []{ typeof(Qowaiv.Security.Secret) });
 
         private static bool IsJsonSerializable(Type type)
             => type.GetMethods(BindingFlags.Static | BindingFlags.Public)

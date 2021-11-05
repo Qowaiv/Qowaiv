@@ -19,7 +19,7 @@ namespace Financial.Amount_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Amount>().From(null).Should().Be(Amount.Zero);
+                Converting.From<string>(null).To<Amount>().Should().Be(Amount.Zero);
             }
         }
 
@@ -28,7 +28,7 @@ namespace Financial.Amount_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Amount>().From("42.17").Should().Be(Svo.Amount);
+                Converting.From("42.17").To<Amount>().Should().Be(Svo.Amount);
             }
         }
 
@@ -37,25 +37,25 @@ namespace Financial.Amount_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Amount).ToString().Should().Be("42.17");
+                Converting.To<string>().From(Svo.Amount).Should().Be("42.17");
             }
         }
 
         [Test]
         public void from_decimal()
-            => Converting.To<Amount>().From(42.17m).Should().Be(Svo.Amount);
+            => Converting.From(42.17m).To<Amount>().Should().Be(Svo.Amount);
 
         [Test]
         public void from_double()
-            => Converting.To<Amount>().From(42.17).Should().Be(Svo.Amount);
+            => Converting.From(42.17).To<Amount>().Should().Be(Svo.Amount);
 
         [Test]
         public void to_decimal()
-            => Converting.Value(Svo.Amount).To<decimal>().Should().Be(42.17m);
+            => Converting.To<decimal>().From(Svo.Amount).Should().Be(42.17m);
 
         [Test]
         public void to_double()
-            => Converting.Value(Svo.Amount).To<double>().Should().Be(42.17);
+            => Converting.To<double>().From(Svo.Amount).Should().Be(42.17);
     }
 
 }

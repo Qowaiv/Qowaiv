@@ -4,80 +4,10 @@ using System.Diagnostics.Contracts;
 namespace Qowaiv
 {
     /// <summary>Extensions on <see cref="decimal"/> rounding.</summary>
-    public static class DecimalRound
+    internal static class DecimalRound
     {
         private const int ScaleMask = 0x00FF0000;
         private const int SignMask = unchecked((int)0x80000000);
-
-        /// <summary>Returns true if the rounding is direct; the nearest of the two options is not relevant.</summary>
-        [Pure]
-        public static bool IsDirectRounding(this DecimalRounding mode)
-            => mode >= DecimalRounding.Truncate && mode <= DecimalRounding.Floor;
-
-        /// <summary>Returns true if rounding is to the nearest. These modes have half-way tie-breaking rule.</summary>
-        [Pure]
-        public static bool IsNearestRounding(this DecimalRounding mode)
-            => mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;
-
-        /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
-        /// <param name="value">
-        /// The value to round to.
-        /// </param>
-        /// <param name="multipleOf">
-        /// The factor of which the number should be multiple of.
-        /// </param>
-        /// <returns>
-        /// A rounded number that is multiple to the specified factor.
-        /// </returns>
-        [Pure]
-        public static decimal RoundToMultiple(this decimal value, decimal multipleOf) => value.RoundToMultiple(multipleOf, DecimalRounding.ToEven);
-
-        /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
-        /// <param name="value">
-        /// The value to round to.
-        /// </param>
-        /// <param name="multipleOf">
-        /// The factor of which the number should be multiple of.
-        /// </param>
-        /// <param name="mode">
-        /// The rounding method used to determine the closed by number.
-        /// </param>
-        /// <returns>
-        /// A rounded number that is multiple to the specified factor.
-        /// </returns>
-        [Pure]
-        public static decimal RoundToMultiple(this decimal value, decimal multipleOf, DecimalRounding mode)
-        {
-            Guard.Positive(multipleOf, nameof(multipleOf));
-            return (value / multipleOf).Round(0, mode) * multipleOf;
-        }
-
-        /// <summary>Rounds a decimal value to the nearest integer.</summary>
-        /// <param name="value">
-        /// A decimal number to round.
-        /// </param>
-        /// <returns>
-        /// The integer that is nearest to the <paramref name="value"/> parameter. If the <paramref name="value"/> is halfway between two integers,
-        /// it is rounded away from zero.
-        /// </returns>
-        [Pure]
-        public static decimal Round(this decimal value) => value.Round(0);
-
-        /// <summary>Rounds a decimal value to a specified number of decimal places.</summary>
-        /// <param name="value">
-        /// A decimal number to round.
-        /// </param>
-        /// <param name="decimals">
-        /// A value from -28 to 28 that specifies the number of decimal places to round to.
-        /// </param>
-        /// <returns>
-        /// The decimal number equivalent to <paramref name="value"/> rounded to <paramref name="decimals"/> number of decimal places.
-        /// </returns>
-        /// <remarks>
-        /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
-        /// </remarks>
-        [Pure]
-        public static decimal Round(this decimal value, int decimals) => value.Round(decimals, DecimalRounding.ToEven);
 
         /// <summary>Rounds a decimal value to a specified number of decimal places.</summary>
         /// <param name="value">
@@ -96,7 +26,7 @@ namespace Qowaiv
         /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
         /// </remarks>
         [Pure]
-        public static decimal Round(this decimal value, int decimals, DecimalRounding mode)
+        public static decimal Round(decimal value, int decimals, DecimalRounding mode)
         {
             Guard.DefinedEnum(mode, nameof(mode));
 
@@ -160,6 +90,7 @@ namespace Qowaiv
         [Pure]
         private static bool ShouldRoundUp(ulong b0, ulong remainder, ulong divisor, DecimalRounding mode, bool isPositive)
         {
+            var halfway = divisor >> 1;
             if (remainder == 0 || mode == DecimalRounding.Truncate) return false;
             else if (mode.IsDirectRounding())
             {
@@ -176,9 +107,7 @@ namespace Qowaiv
                         return !isPositive;
                 }
             }
-            var halfway = divisor >> 1;
-
-            if (remainder == halfway && mode.IsNearestRounding())
+            else if (remainder == halfway && mode.IsNearestRounding())
             {
                 switch (mode)
                 {
@@ -202,7 +131,7 @@ namespace Qowaiv
                         return (Random().Next() & 1) == 0;
                 }
             }
-            if (mode == DecimalRounding.StochasticRounding)
+            else if (mode == DecimalRounding.StochasticRounding)
             {
                 var ratio = remainder / (double)divisor;
                 return Random().NextDouble() <= ratio;
@@ -324,10 +253,7 @@ namespace Qowaiv
         [Pure]
         private static Random Random()
         {
-            if (_rnd is null)
-            {
-                _rnd = new Random();
-            }
+            _rnd ??= new Random();
             return _rnd;
         }
 

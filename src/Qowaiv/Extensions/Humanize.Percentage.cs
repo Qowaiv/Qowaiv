@@ -1,0 +1,20 @@
+﻿using System.Diagnostics.Contracts;
+
+namespace Qowaiv
+{
+    /// <summary>Extensions to create <see cref="Percentage"/>s, inspired by Humanizer.NET.</summary>
+    public static class HumanizePercentage
+    {
+        /// <summary>Interprets the <see cref="int"/> if it was written with a '%' sign.</summary>
+        [Pure]
+        public static Percentage Percent(this int number) => number * 0.01m;
+
+        /// <summary>Interprets the <see cref="double"/> if it was written with a '%' sign.</summary>
+        [Pure]
+        public static Percentage Percent(this double number) => number * 0.01;
+
+        /// <summary>Interprets the <see cref="decimal"/> if it was written with a '%' sign.</summary>
+        [Pure]
+        public static Percentage Percent(this decimal number) => number * 0.01m;
+    }
+}

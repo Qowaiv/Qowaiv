@@ -1,10 +1,10 @@
 ﻿using Qowaiv.Diagnostics.Contracts;
-using System.Globalization;
+using Qowaiv.Globalization;
 
-namespace Qowaiv.Globalization
+namespace System.Globalization
 {
     /// <summary>Extensions on <see cref="CultureInfo"/>.</summary>
-    public static class CultureInfoExtensions
+    public static class QowaivCultureInfoExtensions
     {
         /// <summary>Gets a <see cref="CultureInfoScope"/> based on the <see cref="CultureInfo"/>.</summary>
         [Impure]

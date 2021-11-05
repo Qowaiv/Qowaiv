@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Qowaiv;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 
-namespace Qowaiv.Formatting
+namespace System
 {
-    /// <summary>Formatting extensions on <see cref="string"/> and <see cref="IFormatProvider"/>.</summary>
-    public static class StringFormatExtensions
+    /// <summary>Extensions on <see cref="string"/>.</summary>
+    public static class QowaivSystemExtensions
     {
         /// <summary>Converts the specified string to an uppercase string.</summary> 
         /// <param name="str">

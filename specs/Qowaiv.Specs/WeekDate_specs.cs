@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv;
-using Qowaiv.Globalization;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using System;
+using System.Globalization;
 
 namespace WeekDate_specs
 {

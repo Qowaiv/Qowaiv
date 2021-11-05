@@ -1,11 +1,10 @@
 ﻿using Qowaiv.Formatting;
-using System;
 using System.Diagnostics.Contracts;
 
-namespace Qowaiv
+namespace System
 {
-    /// <summary>Extensions on System.IFormattable.</summary>
-    public static class IFormattableExtensions
+    /// <summary>Extensions on <see cref="IFormattable"/>.</summary>
+    public static class QowaivFormattableExtensions
     {
         /// <summary>Formats the object using the formatting arguments.</summary>
         /// <param name="formattable">
@@ -20,7 +19,7 @@ namespace Qowaiv
         [Pure]
         public static string ToString(this IFormattable formattable, FormattingArguments arguments)
         {
-            if (formattable == null)
+            if (formattable is null)
             {
 #pragma warning disable S2225
                 // "ToString()" method should not return null

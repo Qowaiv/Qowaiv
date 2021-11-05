@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv.Financial;
-using Qowaiv.Globalization;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
+using System.Globalization;
 
 namespace Financial.Money_specs
 {

@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv;
-using Qowaiv.Globalization;
 using Qowaiv.Hashing;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using System;
+using System.Globalization;
 
 namespace Date_specs
 {

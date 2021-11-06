@@ -49,7 +49,7 @@ namespace Qowaiv.Specs
         public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
         public static readonly Secret Secret = Secret.Parse("Ken sent me!");
         public static readonly StreamSize StreamSize = 123456789;
-        public static readonly TimeZoneInfo TimeZone = TestTimeZones.EastAustraliaStandardTime;
+        public static readonly TimeZoneInfo TimeZone = TestTimeZones.LeidenTime;
         public static readonly Timestamp Timestamp = 1234567890L;
         public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
         public static readonly WeekDate WeekDate = new(2017, 23, 7);

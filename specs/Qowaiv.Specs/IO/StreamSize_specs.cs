@@ -5,8 +5,10 @@ using Qowaiv.IO;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
+using Qowaiv.TestTools.IO;
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace IO.StreamSize_specs
 {
@@ -110,6 +112,35 @@ namespace IO.StreamSize_specs
 
         [Test]
         public void GiB_from_double() => 17.4.GiB().Should().Be(StreamSize.FromGibibytes(17.4));
+    }
+
+    public class Created_from_IO
+    {
+        [Test]
+        public void Directory_info()
+        {
+            using var dir = new TemporaryDirectory();
+
+            for (var i = 0; i < 10; i++)
+            {
+                var file = dir.CreateFile($"text_{i}.md");
+                using var writer = file.AppendText();
+                writer.Write("Hello, world!");
+            }
+            var size = ((DirectoryInfo)dir).GetStreamSize();
+            size.Should().Be(130.Bytes());
+        }
+
+        [Test]
+        public void File_info()
+        {
+            using var dir = new TemporaryDirectory();
+            var file = dir.CreateFile($"text.md");
+            using var writer = file.AppendText();
+            writer.Write("Hello, world!");
+            writer.Flush();
+            file.GetStreamSize().Should().Be(13.Bytes());
+        }
     }
 
     public class Is_equal_by_value

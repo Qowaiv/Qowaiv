@@ -3,7 +3,7 @@
 namespace Qowaiv.Mathematics
 {
     /// <summary>Extensions to create <see cref="Percentage"/>s, inspired by Humanizer.NET.</summary>
-    public static class HumanizeFraction
+    public static class NumberToFractionExtensions
     {
         /// <summary>Divides the <paramref name="numerator"/> by the <paramref name="denominator"/>.</summary>
         [Pure]

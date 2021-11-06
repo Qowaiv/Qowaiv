@@ -3,7 +3,7 @@
 namespace Qowaiv
 {
     /// <summary>Extensions to create <see cref="Percentage"/>s, inspired by Humanizer.NET.</summary>
-    public static class HumanizePercentage
+    public static class NumberToPercentageExtensions
     {
         /// <summary>Interprets the <see cref="int"/> if it was written with a '%' sign.</summary>
         [Pure]

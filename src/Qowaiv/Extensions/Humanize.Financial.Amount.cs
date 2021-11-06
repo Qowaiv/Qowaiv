@@ -3,7 +3,7 @@
 namespace Qowaiv.Financial
 {
     /// <summary>Extensions to create <see cref="Financial.Amount"/>s, inspired by Humanizer.NET.</summary>
-    public static class HumanizeAmount
+    public static class NumberToAmountExtensions
     {
         /// <summary>Converts the <see cref="decimal"/> to a <see cref="Financial.Amount"/>.</summary>
         [Pure]

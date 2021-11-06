@@ -6,51 +6,48 @@ namespace Qowaiv.TestTools
     /// <summary>Helper method to convert objects using <see cref="TypeConverter"/>s.</summary>
     public static class Converting
     {
-        /// <summary>Creates a new instance of the <see cref="ConvertTo{T}"/> class.</summary>
+        /// <summary>Creates a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
         [Pure]
-        public static ConvertTo<T> Value<T>(T value) => new(value);
+        public static ConvertFrom<From> From<From>(From subject) => new(subject);
 
-        /// <summary>Creates a new instance of the <see cref="ConvertFrom{T}"/> class.</summary>
+        /// <summary>Creates a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
         [Pure]
-        public static ConvertFrom<T> To<T>() => new();
+        public static ConvertTo<To> To<To>() => new();
+
+        /// <summary>Creates a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
+        [Pure]
+        public static new ConvertTo<string> ToString() => new();
     }
 
-    /// <summary>ConvertFrom builder.</summary>
-    public sealed class ConvertFrom<T>
+    /// <summary>Type converter builder to apply <see cref="TypeConverter.ConvertFrom(object)"/>.</summary>
+    public sealed class ConvertFrom<TFrom>
     {
-        internal ConvertFrom() { }
+        internal ConvertFrom(TFrom subject) => Subject = subject;
 
-        /// <summary>Converts the text to the desired type using the <see cref="TypeConverter"/> of the desired type.</summary>
-        [Pure]
-        public T FromString(string text) => (T)Converter().ConvertFromString(text);
+        /// <summary>The subject that can be converted to a destination type.</summary>
+        public TFrom Subject { get; }
 
-        /// <summary>Converts the value to the desired type using the <see cref="TypeConverter"/> of the desired type.</summary>
+        /// <summary>Converts the value to the destination type, using its <see cref="TypeConverter"/>.</summary>
         [Pure]
-        public T From(object value) => (T)Converter().ConvertFrom(value);
+        public To To<To>() 
+            => typeof(TFrom) == typeof(string)
+            ? (To)Converter<To>().ConvertFromString(Subject as string)
+            : (To)Converter<To>().ConvertFrom(Subject);
 
         [Pure]
-        private static TypeConverter Converter() => TypeDescriptor.GetConverter(typeof(T));
+        private static TypeConverter Converter<To>() => TypeDescriptor.GetConverter(typeof(To));
     }
 
-    /// <summary>ConvertTo builder.</summary>
-    public sealed class ConvertTo<T>
+    /// <summary>Type converter builder to apply <see cref="TypeConverter.ConvertTo(object, System.Type)"/>.</summary>
+    public sealed class ConvertTo<To>
     {
-        internal ConvertTo(T subject) => Subject = subject;
+        internal ConvertTo() { }
 
-        /// <summary>The subject that can be convertered to a destination type.</summary>
-        public T Subject { get; }
-
-        /// <summary>Converts the value to a string, using the <see cref="TypeConverter"/> defined for the type of the value.</summary>
+        /// <summary>Converts the value to the destination type, using the <see cref="TypeConverter"/> of the subject.</summary>
         [Pure]
-        public TDesintation To<TDesintation>() => (TDesintation)Converter().ConvertTo(Subject, typeof(TDesintation));
-
-        /// <summary>Converts the value to a destination type, using the <see cref="TypeConverter"/> defined for the type of the value.</summary>
-        [Pure]
-        public override string ToString() => Converter().ConvertToString(Subject);
+        public To From<From>(From subject) => (To)Converter<From>().ConvertTo(subject, typeof(To));
 
         [Pure]
-        private static TypeConverter Converter() => TypeDescriptor.GetConverter(typeof(T));
+        private static TypeConverter Converter<From>() => TypeDescriptor.GetConverter(typeof(From));
     }
-
-    
 }

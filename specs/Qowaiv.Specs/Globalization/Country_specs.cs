@@ -18,7 +18,7 @@ namespace Globalization.Country_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Country>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<Country>().Should().Be(default);
             }
         }
 
@@ -27,7 +27,7 @@ namespace Globalization.Country_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Country>().From(string.Empty).Should().Be(default);
+                Converting.From(string.Empty).To<Country>().Should().Be(default);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Globalization.Country_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Country>().From("VA").Should().Be(Svo.Country);
+                Converting.From("VA").To<Country>().Should().Be(Svo.Country);
             }
         }
 
@@ -45,7 +45,7 @@ namespace Globalization.Country_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Country).ToString().Should().Be("VA");
+                Converting.ToString().From(Svo.Country).Should().Be("VA");
             }
         }
     }

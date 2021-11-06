@@ -65,7 +65,7 @@ namespace IO.StreamSize_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<StreamSize>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<StreamSize>().Should().Be(StreamSize.Zero);
             }
         }
 
@@ -74,7 +74,7 @@ namespace IO.StreamSize_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<StreamSize>().From("123456789").Should().Be(Svo.StreamSize);
+                Converting.From("123456789").To<StreamSize>().Should().Be(Svo.StreamSize);
             }
         }
 
@@ -83,16 +83,16 @@ namespace IO.StreamSize_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.StreamSize).ToString().Should().Be("123456789 byte");
+                Converting.ToString().From(Svo.StreamSize).Should().Be("123456789 byte");
             }
         }
 
         [Test]
         public void from_long()
-            => Converting.To<StreamSize>().From(123456789L).Should().Be(Svo.StreamSize);
+            => Converting.From(123456789L).To<StreamSize>().Should().Be(Svo.StreamSize);
 
         [Test]
         public void to_long()
-            => Converting.Value(Svo.StreamSize).To<long>().Should().Be(123456789);
+            => Converting.To<long>().From(Svo.StreamSize).Should().Be(123456789);
     }
 }

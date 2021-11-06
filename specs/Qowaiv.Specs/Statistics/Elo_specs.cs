@@ -65,7 +65,7 @@ namespace Statistics.Elo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Elo>().From(null).Should().Be(Elo.Zero);
+                Converting.From<string>(null).To<Elo>().Should().Be(Elo.Zero);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Statistics.Elo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Elo>().From("1732.4").Should().Be(Svo.Elo);
+                Converting.From("1732.4").To<Elo>().Should().Be(Svo.Elo);
             }
         }
 
@@ -83,25 +83,25 @@ namespace Statistics.Elo_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Elo).ToString().Should().Be("1732.4");
+                Converting.ToString().From(Svo.Elo).Should().Be("1732.4");
             }
         }
 
         [Test]
         public void from_decimal()
-            => Converting.To<Elo>().From(1732.4m).Should().Be(Svo.Elo);
+            => Converting.From(1732.4m).To<Elo>().Should().Be(Svo.Elo);
 
         [Test]
         public void from_double()
-            => Converting.To<Elo>().From(1732.4).Should().Be(Svo.Elo);
+            => Converting.From(1732.4).To<Elo>().Should().Be(Svo.Elo);
 
         [Test]
         public void to_decimal()
-            => Converting.Value(Svo.Elo).To<decimal>().Should().Be(1732.4m);
+            => Converting.To<decimal>().From(Svo.Elo).Should().Be(1732.4m);
 
         [Test]
         public void to_double()
-            => Converting.Value(Svo.Elo).To<double>().Should().Be(1732.4);
+            => Converting.To<double>().From(Svo.Elo).Should().Be(1732.4);
     
         [TestCase("0", 0)]
         [TestCase("1732.4", -667857040)]

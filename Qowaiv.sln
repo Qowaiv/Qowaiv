@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
 	ProjectSection(SolutionItems) = preProject

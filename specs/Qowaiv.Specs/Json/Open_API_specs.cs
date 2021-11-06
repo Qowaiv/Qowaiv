@@ -11,11 +11,11 @@ using System.Reflection;
 namespace Json.Open_API_specs
 {
     public class SVOs
-    { 
+    {
         [TestCaseSource(nameof(JsonSerializable))]
         public void Has_OpenApiDataType_attribute(Type svo)
             => svo.Should().BeDecoratedWith<OpenApiDataTypeAttribute>();
-     
+
         [Test]
         public void For_README_md()
         {
@@ -52,7 +52,8 @@ namespace Json.Open_API_specs
         private static IEnumerable<Type> JsonSerializable
             => typeof(Date).Assembly
             .GetTypes()
-            .Where(IsJsonSerializable);
+            .Where(IsJsonSerializable)
+            .Except(new []{ typeof(Qowaiv.Security.Secret) });
 
         private static bool IsJsonSerializable(Type type)
             => type.GetMethods(BindingFlags.Static | BindingFlags.Public)

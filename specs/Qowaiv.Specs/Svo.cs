@@ -5,6 +5,7 @@ using Qowaiv.Hashing;
 using Qowaiv.Identifiers;
 using Qowaiv.IO;
 using Qowaiv.Mathematics;
+using Qowaiv.Security;
 using Qowaiv.Security.Cryptography;
 using Qowaiv.Sql;
 using Qowaiv.Statistics;
@@ -46,6 +47,7 @@ namespace Qowaiv.Specs
         public static readonly MonthSpan MonthSpan = MonthSpan.FromMonths(69);
         public static readonly Percentage Percentage = 17.51.Percent();
         public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
+        public static readonly Secret Secret = Secret.Parse("Ken sent me!");
         public static readonly StreamSize StreamSize = 123456789;
         public static readonly TimeZoneInfo TimeZone = TestTimeZones.EastAustraliaStandardTime;
         public static readonly Timestamp Timestamp = 1234567890L;
@@ -72,6 +74,7 @@ namespace Qowaiv.Specs
             .Except(new[]
             {
                 typeof(FormattingArguments),
+                typeof(Secret),
                 typeof(Hash),
             });
     }

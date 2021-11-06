@@ -19,7 +19,7 @@ namespace Security.Cryptography.CryptographicSeed_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<CryptographicSeed>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<CryptographicSeed>().Should().Be(default);
             }
         }
 
@@ -28,7 +28,7 @@ namespace Security.Cryptography.CryptographicSeed_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<CryptographicSeed>().From(string.Empty).Should().Be(default);
+                Converting.From(string.Empty).To<CryptographicSeed>().Should().Be(default);
             }
         }
 
@@ -37,7 +37,7 @@ namespace Security.Cryptography.CryptographicSeed_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<CryptographicSeed>().From("Qowaiv==").Should().Be(Svo.CryptographicSeed);
+                Converting.From("Qowaiv==").To<CryptographicSeed>().Should().Be(Svo.CryptographicSeed);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Security.Cryptography.CryptographicSeed_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.CryptographicSeed).ToString().Should().Be("Qowaig==");
+                Converting.ToString().From(Svo.CryptographicSeed).Should().Be("Qowaig==");
             }
         }
     }

@@ -165,6 +165,6 @@ namespace Qowaiv.Text
         public override string ToString() => new(buffer, start, Length);
 
         /// <summary>Implicitly casts a buffer to a <see cref="string"/>.</summary>
-        public static implicit operator string(CharBuffer buffer) => buffer?.ToString();
+        public static implicit operator string(CharBuffer buffer) => buffer.ToString();
     }
 }

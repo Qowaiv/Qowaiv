@@ -6,9 +6,50 @@ using Qowaiv.IO;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
+using System;
+using System.Globalization;
 
 namespace IO.StreamSize_specs
 {
+    public class Can_be_parsed
+    {
+        [TestCase("en", "123456789")]
+        [TestCase("en", "123456.789 kB")]
+        [TestCase("en", "123456.789 kilobyte")]
+        [TestCase("en", "123.456789 MB")]
+        [TestCase("nl", "123,456789 MB")]
+        [TestCase("nl", "0,123456789 GB")]
+        public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+        {
+            using (culture.Scoped())
+            {
+                StreamSize.Parse(input).Should().Be(Svo.StreamSize);
+            }
+        }
+
+        [Test]
+        public void from_valid_input_only_otherwise_throws_on_Parse()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Func<StreamSize> parse = () => StreamSize.Parse("invalid input");
+                parse.Should().Throw<FormatException>().WithMessage("Not a valid stream size");
+            }
+        }
+
+        [Test]
+        public void from_valid_input_only_otherwise_return_false_on_TryParse()
+            => (StreamSize.TryParse("invalid input", out _)).Should().BeFalse();
+
+        [Test]
+        public void from_invalid_as_null_with_TryParse()
+            => StreamSize.TryParse("invalid input").Should().Be(StreamSize.Zero);
+
+        [Test]
+        public void with_TryParse_returns_SVO()
+            => StreamSize.TryParse("123456789").Should().Be(Svo.StreamSize);
+    }
+
     public class Is_equal_by_value
     {
         [Test]
@@ -69,12 +110,13 @@ namespace IO.StreamSize_specs
             }
         }
 
-        [Test]
-        public void from_string()
+        [TestCase("123456789")]
+        [TestCase("123456.789 kB")]
+        public void from_string(string str)
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.From("123456789").To<StreamSize>().Should().Be(Svo.StreamSize);
+                Converting.From(str).To<StreamSize>().Should().Be(Svo.StreamSize);
             }
         }
 

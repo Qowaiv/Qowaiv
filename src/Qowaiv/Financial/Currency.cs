@@ -320,20 +320,17 @@ namespace Qowaiv.Financial
             }
         }
 
-        /// <summary>This is done so that it will be available when called by another initialization.</summary>
-        internal static ResourceManager ResourceManager
+        /// <remarks>This is done so that it will be available when called by another initialization.</remarks>
+        private static ResourceManager ResourceManager
         {
             get
             {
-                if (s_ResourceManager == null)
-                {
-                    ResourceManager temp = new("Qowaiv.Financial.CurrencyLabels", typeof(Currency).Assembly);
-                    s_ResourceManager = temp;
-                }
-                return s_ResourceManager;
+                rm ??= new("Qowaiv.Financial.CurrencyLabels", typeof(Currency).Assembly);
+                return rm;
             }
         }
-        private static ResourceManager s_ResourceManager;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static ResourceManager rm;
 
         /// <summary>Get resource string.</summary>
         /// <param name="postfix">
@@ -343,21 +340,8 @@ namespace Qowaiv.Financial
         /// The format provider.
         /// </param>
         [Pure]
-        internal string GetResourceString(string postfix, IFormatProvider formatProvider)
-            => GetResourceString(postfix, formatProvider as CultureInfo);
-
-        /// <summary>Get resource string.</summary>
-        /// <param name="postfix">
-        /// The prefix of the resource key.
-        /// </param>
-        /// <param name="culture">
-        /// The culture.
-        /// </param>
-        [Pure]
-        internal string GetResourceString(string postfix, CultureInfo culture)
-            => IsEmpty()
-            ? string.Empty
-            : ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
+        private string GetResourceString(string postfix, IFormatProvider formatProvider)
+            => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
 
         #region Money creation operators
 

@@ -40,6 +40,14 @@ namespace Hashing.Hash_specs
         }
 
         [Test]
+        public void Supports_fluent_syntax_null_collection()
+        {
+            var hash = Hash.Code(12);
+            var adjusted = hash.AndEach<int>(null);
+            adjusted.Should().Be(hash);
+        }
+
+        [Test]
         public void Supports_fluent_syntax_for_collection()
         {
             using (Hash.WithoutRandomizer())
@@ -168,5 +176,24 @@ namespace Hashing.Hash_specs
             hash.Should().Throw<HashingNotSupported>()
                 .WithMessage("Hashing is not supported by System.String.");
         }
+    }
+
+    public class Is_equal_by_value
+    {
+        [Test]
+        public void not_equal_to_null()
+            => Svo.Hash.Equals(null).Should().BeFalse();
+
+        [Test]
+        public void not_equal_to_other_type()
+            => Svo.Hash.Equals(new object()).Should().BeFalse();
+
+        [Test]
+        public void not_equal_to_different_value()
+            => Svo.Hash.Equals(Hash.Code(17)).Should().BeFalse();
+
+        [Test]
+        public void equal_to_same_value()
+            => Svo.Hash.Equals(Hash.Code("QOWAIV")).Should().BeTrue();
     }
 }

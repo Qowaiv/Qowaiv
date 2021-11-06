@@ -267,9 +267,6 @@ namespace Qowaiv
         /// </param>
         [Pure]
         private string GetResourceString(string prefix, IFormatProvider formatProvider)
-            => IsEmpty()
-            ? string.Empty
-            : ResourceManager.Localized(formatProvider, prefix, LookupSuffix[m_Value]);
-
+            => ResourceManager.Localized(formatProvider, prefix, LookupSuffix[m_Value]);
     }
 }

@@ -283,20 +283,7 @@ namespace Qowaiv
         /// </param>
         [Pure]
         private string GetResourceString(string prefix, IFormatProvider formatProvider)
-            => GetResourceString(prefix, formatProvider as CultureInfo);
-
-        /// <summary>Get resource string.</summary>
-        /// <param name="prefix">
-        /// The prefix of the resource key.
-        /// </param>
-        /// <param name="culture">
-        /// The culture.
-        /// </param>
-        [Pure]
-        private string GetResourceString(string prefix, CultureInfo culture)
-            => IsEmpty()
-            ? string.Empty
-            : ResourceManager.GetString(prefix + GenderLabels[m_Value], culture ?? CultureInfo.CurrentCulture);
+            => ResourceManager.Localized(formatProvider, prefix, GenderLabels[m_Value]);
 
         /// <summary>Gets the valid values.</summary>
         private static readonly Dictionary<int, byte> FromInt32s = new()

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Qowaiv.Conversion.Security;
 using Qowaiv.Hashing;
 using Qowaiv.Security;
 using Qowaiv.Specs;
@@ -35,6 +36,7 @@ namespace Security.Secret_specs
         public void IsEmpty_returns(bool result, Secret svo)
             => svo.IsEmpty().Should().Be(result);
     }
+   
     public class Has_constant
     {
         [Test]
@@ -112,6 +114,11 @@ namespace Security.Secret_specs
         [Test]
         public void convertered_is_null()
             => Converting.ToString().From(Svo.Secret).Should().BeNull();
+
+        [TestCase(typeof(string))]
+        [TestCase(typeof(byte[]))]
+        public void can_convert_to_always_return_false(Type type)
+            => new SecretTypeConverter().CanConvertTo(type).Should().BeFalse();
     }
 
     public class Supports_JSON_deserialization
@@ -127,6 +134,17 @@ namespace Security.Secret_specs
         [Test]
         public void serializes_to_null()
             => JsonTester.Write(Svo.Secret).Should().BeNull();
+    }
+
+    public class ToString
+    {
+        [Test]
+        public void does_not_reveal_content()
+            => Svo.Secret.ToString().Should().Be("*****");
+
+        [Test]
+        public void does_not_reveal_content_for_empty()
+           => Secret.Empty.ToString().Should().Be(string.Empty);
     }
 
     public class Debugger

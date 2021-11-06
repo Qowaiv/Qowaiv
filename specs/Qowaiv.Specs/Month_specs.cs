@@ -486,7 +486,7 @@ namespace Month_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Month>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<Month>().Should().Be(default);
             }
         }
 
@@ -495,7 +495,7 @@ namespace Month_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Month>().From(string.Empty).Should().Be(default);
+                Converting.From(string.Empty).To<Month>().Should().Be(default);
             }
         }
 
@@ -504,7 +504,7 @@ namespace Month_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Month>().From("February").Should().Be(Svo.Month);
+                Converting.From("February").To<Month>().Should().Be(Svo.Month);
             }
         }
 
@@ -513,17 +513,17 @@ namespace Month_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Month).ToString().Should().Be("February");
+                Converting.ToString().From(Svo.Month).Should().Be("February");
             }
         }
 
         [Test]
         public void from_int()
-            => Converting.To<Month>().From(2).Should().Be(Svo.Month);
+            => Converting.From(2).To<Month>().Should().Be(Svo.Month);
 
         [Test]
         public void to_int()
-            => Converting.Value(Svo.Month).To<int>().Should().Be(2);
+            => Converting.To<int>().From(Svo.Month).Should().Be(2);
     }
 
 

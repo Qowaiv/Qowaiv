@@ -547,7 +547,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Uuid>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<Uuid>().Should().Be(default);
             }
         }
 
@@ -556,7 +556,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Uuid>().From(string.Empty).Should().Be(default);
+                Converting.From(string.Empty).To<Uuid>().Should().Be(default);
             }
         }
 
@@ -565,7 +565,7 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Uuid>().From("Qowaiv_SVOLibrary_GUID").Should().Be(Svo.Uuid);
+                Converting.From("Qowaiv_SVOLibrary_GUID").To<Uuid>().Should().Be(Svo.Uuid);
             }
         }
 
@@ -574,18 +574,17 @@ Actual:   [{(string.Join(", ", act))}]");
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Uuid).ToString().Should().Be("Qowaiv_SVOLibrary_GUIA");
+                Converting.ToString().From(Svo.Uuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
             }
         }
 
         [Test]
         public void from_Guid()
-            => Converting.To<Uuid>().From(Svo.Guid).Should().Be(Svo.Uuid);
-
+            => Converting.From(Svo.Guid).To<Uuid>().Should().Be(Svo.Uuid);
 
         [Test]
         public void to_Guid() 
-            => Converting.Value(Svo.Uuid).To<Guid>().Should().Be(Svo.Guid);
+            => Converting.To<Guid>().From(Svo.Uuid).Should().Be(Svo.Guid);
     }
 
     public class Supports_JSON_serialization

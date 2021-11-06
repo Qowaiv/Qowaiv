@@ -1117,7 +1117,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Percentage>().From(null).Should().Be(Percentage.Zero);
+                Converting.From<string>(null).To<Percentage>().Should().Be(Percentage.Zero);
             }
         }
 
@@ -1126,7 +1126,7 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<Percentage>().From("17.51%").Should().Be(Svo.Percentage);
+                Converting.From("17.51%").To<Percentage>().Should().Be(Svo.Percentage);
             }
         }
 
@@ -1135,33 +1135,33 @@ namespace Percentage_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.Percentage).ToString().Should().Be("17.51%");
+                Converting.ToString().From(Svo.Percentage).Should().Be("17.51%");
             }
         }
 
         [Test]
         public void from_int()
-            => Converting.To<Percentage>().From(-17).Should().Be(-1700.Percent());
+            => Converting.From(-17).To<Percentage>().Should().Be(-1700.Percent());
 
         [Test]
         public void to_int()
-            => Converting.Value(1700.Percent()).To<int>().Should().Be(17);
+            => Converting.To<int>().From(1700.Percent()).Should().Be(17);
         
         [Test]
         public void from_decimal()
-            => Converting.To<Percentage>().From(0.1751m).Should().Be(Svo.Percentage);
+            => Converting.From(0.1751m).To<Percentage>().Should().Be(Svo.Percentage);
 
         [Test]
         public void to_decimal()
-            => Converting.Value(Svo.Percentage).To<decimal>().Should().Be(0.1751m);
+            => Converting.To<decimal>().From(Svo.Percentage).Should().Be(0.1751m);
         
         [Test]
         public void from_double()
-            => Converting.To<Percentage>().From(0.1751).Should().Be(Svo.Percentage);
+            => Converting.From(0.1751).To<Percentage>().Should().Be(Svo.Percentage);
 
         [Test]
         public void to_double()
-            => Converting.Value(Svo.Percentage).To<double>().Should().Be(0.1751);
+            => Converting.To<double>().From(Svo.Percentage).Should().Be(0.1751);
     }
 
     public class Supports_JSON_serialization

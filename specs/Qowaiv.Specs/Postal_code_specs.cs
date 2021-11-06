@@ -440,7 +440,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<PostalCode>().From(null).Should().Be(default);
+                Converting.From<string>(null).To<PostalCode>().Should().Be(default);
             }
         }
 
@@ -449,7 +449,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<PostalCode>().From(string.Empty).Should().Be(default);
+                Converting.From(string.Empty).To<PostalCode>().Should().Be(default);
             }
         }
 
@@ -458,7 +458,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.To<PostalCode>().From("H0H0H0").Should().Be(Svo.PostalCode);
+                Converting.From("H0H0H0").To<PostalCode>().Should().Be(Svo.PostalCode);
             }
         }
 
@@ -467,7 +467,7 @@ namespace Postal_code_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Converting.Value(Svo.PostalCode).ToString().Should().Be("H0H0H0");
+                Converting.ToString().From(Svo.PostalCode).Should().Be("H0H0H0");
             }
         }
     }

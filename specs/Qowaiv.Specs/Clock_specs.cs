@@ -16,7 +16,7 @@ namespace Clock_specs
         [Test]
         public void TimeZone_equals_TimeZoneInfo_Local()
             => Clock.TimeZone.Should().Be(TimeZoneInfo.Local);
-        
+
         [Test]
         public void Now_equals_UTC_now_with_the_time_zone_offset()
         {
@@ -32,7 +32,7 @@ namespace Clock_specs
             using (Clock.SetTimeAndTimeZoneForCurrentThread(() => Svo.DateTime, Svo.TimeZone))
             {
                 var date_time_offset = new DateTimeOffset(new DateTime(2017, 06, 11, 16, 15, 0, DateTimeKind.Unspecified), TimeSpan.FromHours(+10));
-                Assert.That(Clock.NowWithOffset(), Is.EqualTo(date_time_offset));
+                Clock.NowWithOffset().Should().Be(date_time_offset);
             }
         }
     }
@@ -44,14 +44,14 @@ namespace Clock_specs
         public void UtcNow_can_be_set()
         {
             Clock.SetTime(() => Svo.DateTime);
-            Assert.That(Clock.UtcNow(), Is.EqualTo(Svo.DateTime));
+            Clock.UtcNow().Should().Be(Svo.DateTime);
         }
 
         [Test]
         public void TimeZone_can_be_set()
         {
             Clock.SetTimeZone(Svo.TimeZone);
-            Assert.That(Clock.TimeZone, Is.EqualTo(Svo.TimeZone));
+            Clock.TimeZone.Should().Be(Svo.TimeZone);
         }
 
         [TearDown]
@@ -71,7 +71,7 @@ namespace Clock_specs
         {
             using (Clock.SetTimeForCurrentThread(() => new DateTime(2017, 06, 11, 06, 15, 0, kind)))
             {
-                Assert.That(Clock.UtcNow().Kind, Is.EqualTo(DateTimeKind.Utc));
+                Clock.UtcNow().Kind.Should().Be(DateTimeKind.Utc);
             }
         }
     }
@@ -159,7 +159,7 @@ namespace Clock_specs
         {
             using (Clock.SetTimeAndTimeZoneForCurrentThread(() => Svo.DateTime, Svo.TimeZone))
             {
-                Assert.That(Clock.Tomorrow(TestTimeZones.AlaskanStandardTime), Is.EqualTo(new Date(2017, 06, 11)));
+                Clock.Tomorrow(TestTimeZones.AlaskanStandardTime).Should().Be(new Date(2017, 06, 11));
             }
         }
 
@@ -168,7 +168,7 @@ namespace Clock_specs
         {
             using (Clock.SetTimeAndTimeZoneForCurrentThread(() => Svo.DateTime, Svo.TimeZone))
             {
-                Assert.That(Clock.Tomorrow(), Is.EqualTo(new Date(2017, 06, 12)));
+                Clock.Tomorrow().Should().Be(new Date(2017, 06, 12));
             }
         }
     }

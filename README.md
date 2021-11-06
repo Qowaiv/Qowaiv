@@ -908,7 +908,7 @@ using(Hash.WithoutRandomizer())
 public int GetHashCode()
     => Hash.Code(Prop)
     .And(Other)
-    .AndEach(Collection);
+    .And(Collection); // takes all items into account
 ```
 
 This works out of the box because `Hash` can be implicitly cast to an `int`.

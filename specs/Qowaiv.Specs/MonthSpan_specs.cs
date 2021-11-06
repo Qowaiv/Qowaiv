@@ -41,7 +41,7 @@ namespace MonthSpan_specs
             => (MonthSpan.FromMonths(69) != MonthSpan.MinValue).Should().BeTrue();
 
         [TestCase("0Y+0M", 0)]
-        [TestCase("5Y+9M", 20170550)]
+        [TestCase("5Y+9M", 665630102)]
         public void hash_code_is_value_based(MonthSpan svo, int hash)
         {
             using (Hash.WithoutRandomizer())

@@ -38,6 +38,7 @@ namespace Qowaiv.Specs
         public static readonly Fraction Fraction = -69.DividedBy(17);
         public static readonly Gender Gender = Gender.Female;
         public static readonly Guid Guid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        public static readonly Hash Hash = Hash.Code("QOWAIV");
         public static readonly HouseNumber HouseNumber = 123456789L;
         public static readonly InternationalBankAccountNumber Iban = InternationalBankAccountNumber.Parse("NL20 INGB 0001 2345 67");
         public static readonly InternetMediaType InternetMediaType = InternetMediaType.Parse("application/x-chess-pgn");
@@ -49,7 +50,7 @@ namespace Qowaiv.Specs
         public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
         public static readonly Secret Secret = Secret.Parse("Ken sent me!");
         public static readonly StreamSize StreamSize = 123456789;
-        public static readonly TimeZoneInfo TimeZone = TestTimeZones.EastAustraliaStandardTime;
+        public static readonly TimeZoneInfo TimeZone = TestTimeZones.LeidenTime;
         public static readonly Timestamp Timestamp = 1234567890L;
         public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
         public static readonly WeekDate WeekDate = new(2017, 23, 7);

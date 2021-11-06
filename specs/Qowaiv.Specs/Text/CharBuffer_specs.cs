@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Text;
 using System.Globalization;
 
@@ -157,7 +158,14 @@ namespace CharBuffer_specs
         public void Returns_index_of_char()
         {
             var buffer = " 0123456777   ".Buffer().Trim();
-            Assert.AreEqual(7, buffer.IndexOf('7'));
+            buffer.IndexOf('7').Should().Be(7);
+        }
+
+        [Test]
+        public void Returns_minus_one_if_not_found()
+        {
+            var buffer = " 0123456777   ".Buffer().Trim();
+            buffer.IndexOf('A').Should().Be(-1);
         }
 
         [Test]

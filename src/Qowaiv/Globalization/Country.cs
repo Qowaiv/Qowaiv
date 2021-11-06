@@ -379,15 +379,16 @@ namespace Qowaiv.Globalization
             }
         }
 
-        internal static ResourceManager ResourceManager
+        private static ResourceManager ResourceManager
         {
             get
             {
-                s_ResourceManager ??= new("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
-                return s_ResourceManager;
+                rm ??= new("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
+                return rm;
             }
         }
-        private static ResourceManager s_ResourceManager;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static ResourceManager rm;
 
         /// <summary>Get resource string.</summary>
         /// <param name="postfix">
@@ -397,20 +398,7 @@ namespace Qowaiv.Globalization
         /// The format provider.
         /// </param>
         [Pure]
-        internal string GetResourceString(string postfix, IFormatProvider formatProvider)
-            => GetResourceString(postfix, formatProvider as CultureInfo);
-
-        /// <summary>Get resource string.</summary>
-        /// <param name="postfix">
-        /// The prefix of the resource key.
-        /// </param>
-        /// <param name="culture">
-        /// The culture.
-        /// </param>
-        [Pure]
-        internal string GetResourceString(string postfix, CultureInfo culture)
-            => IsEmpty()
-            ? string.Empty
-            : ResourceManager.GetString(m_Value + '_' + postfix, culture ?? CultureInfo.CurrentCulture) ?? string.Empty;
+        private string GetResourceString(string postfix, IFormatProvider formatProvider)
+            => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
     }
 }

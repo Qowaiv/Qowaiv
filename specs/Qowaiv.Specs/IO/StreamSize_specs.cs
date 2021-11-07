@@ -85,7 +85,7 @@ namespace IO.StreamSize_specs
             => (StreamSize.Byte * 123456789 != StreamSize.MinValue).Should().BeTrue();
 
         [TestCase("0 byte", 0)]
-        [TestCase("123456789 byte", 107481702)]
+        [TestCase("123456789 byte", 553089222)]
         public void hash_code_is_value_based(StreamSize svo, int hash)
         {
             using (Hash.WithoutRandomizer())

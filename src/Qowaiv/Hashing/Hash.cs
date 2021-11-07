@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -48,19 +47,10 @@ namespace Qowaiv.Hashing
         /// </param>
         /// <returns>The new hash.</returns>
         [Pure]
-        public Hash And<T>(T item) => new(Combine(Value, HashCode(item)));
-
-        /// <summary>
-        /// Adds the hash code of the specified items in the collection.
-        /// </summary>
-        /// <typeparam name="T">The type of the items.</typeparam>
-        /// <param name="items">The collection.</param>
-        /// <returns>The new hash code.</returns>
-        [Pure]
-        public Hash AndEach<T>(IEnumerable<T> items)
-            => items is null
+        public Hash And<T>(T item)
+            => Equals(default(T), item)
             ? this
-            : new(HashCode(Value, items));
+            : new(Combine(Value, HashCode(item)));
 
         /// <summary>Implicitly casts a <see cref="Hash"/> to an <see cref="int"/>.</summary>
         public static implicit operator int(Hash hash) => hash.Value;
@@ -70,7 +60,7 @@ namespace Qowaiv.Hashing
         public static Hash Code<T>(T item)
             => Equals(default(T), item)
             ? default
-            : new(Randomized ^ HashCode(item));
+            : new(Combine(Randomized, HashCode(item)));
 
         /// <summary>Indicates that hashing is not supported by the type.</summary>
         [Pure]
@@ -95,7 +85,7 @@ namespace Qowaiv.Hashing
                 null => 0,
                 int int32 => int32,
                 string str => HashCode(str),
-                IEnumerable enumerable => HashCode(0, enumerable),
+                IEnumerable enumerable => HashCodes(enumerable),
                 _ => obj.GetHashCode(),
             };
 
@@ -110,9 +100,9 @@ namespace Qowaiv.Hashing
 
                 for (int i = 0; i < str.Length; i += 2)
                 {
-                    hash1 = ((hash1 << 5) + hash1) ^ str[i];
+                    hash1 = Combine(hash1, str[i]);
                     if (i == str.Length - 1) break;
-                    else hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
+                    else hash2 = Combine(hash2, str[i + 1]);
                 }
                 return hash1 + (hash2 * 1566083941);
             }
@@ -120,8 +110,9 @@ namespace Qowaiv.Hashing
 
         /// <summary>Gets a hash for an enumerable.</summary>
         [Pure]
-        private static int HashCode(int hash, IEnumerable items)
+        private static int HashCodes(IEnumerable items)
         {
+            int hash = 0;
             var enumerator = items.GetEnumerator();
             if (enumerator.MoveNext())
             {
@@ -132,7 +123,7 @@ namespace Qowaiv.Hashing
                 }
                 return updated;
             }
-            else return Combine(hash, 17);
+            else return 17;
         }
 
 #pragma warning disable S3010 // Static fields should not be updated in constructors

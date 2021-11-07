@@ -44,9 +44,9 @@ namespace Date_specs
         public void not_equal_operator_returns_true_for_different_values()
             => (new Date(2017, 06, 11) != Date.MinValue).Should().BeTrue();
 
-        [TestCase("", 0)]
-        [TestCase("yes", 20170609)]
-        public void hash_code_is_value_based(YesNo svo, int hash)
+        [TestCase("0001-01-01", 0)]
+        [TestCase("2017-06-11", -489585265)]
+        public void hash_code_is_value_based(Date svo, int hash)
         {
             using (Hash.WithoutRandomizer())
             {

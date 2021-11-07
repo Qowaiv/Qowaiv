@@ -7,7 +7,7 @@ namespace CharBuffer_specs
 {
     public class Add
     {
-        private CharBuffer WithCapacity() => CharBuffer.Empty(16);
+        private static CharBuffer WithCapacity() => CharBuffer.Empty(16);
 
         [Test]
         public void A_char_can_be_added()

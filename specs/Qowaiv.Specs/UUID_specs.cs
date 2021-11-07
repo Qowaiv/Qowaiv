@@ -155,7 +155,7 @@ namespace UUID_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("Qowaiv_SVOLibrary_GUIA", -497088793)]
+        [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
         public void hash_code_is_value_based(Uuid svo, int hash)
         {
             using (Hash.WithoutRandomizer())
@@ -330,7 +330,7 @@ namespace UUID_specs
 
         private const int MultipleCount = 10000;
         
-        private DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
+        private static DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
 
         private static void AssertIsSorted(UuidComparer comparer)
         {
@@ -412,7 +412,7 @@ Actual:   [{(string.Join(", ", act))}]");
 
             foreach (var index in comparer.Priority)
             {
-                sb.Append(bytes[index].ToString("X2")).Append(" ");
+                sb.Append(bytes[index].ToString("X2")).Append(' ');
             }
             return sb.ToString();
         }

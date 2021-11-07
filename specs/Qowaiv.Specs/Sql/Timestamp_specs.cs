@@ -41,7 +41,7 @@ namespace Sql.Timestamp_specs
             => (Timestamp.Create(1234567890L) != Timestamp.MinValue).Should().BeTrue();
 
         [TestCase("0", 0)]
-        [TestCase("1234567890", 1218823585)]
+        [TestCase("1234567890", 1849341697)]
         public void hash_code_is_value_based(Timestamp svo, int hash)
         {
             using (Hash.WithoutRandomizer())

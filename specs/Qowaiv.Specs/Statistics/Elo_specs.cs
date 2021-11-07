@@ -44,7 +44,7 @@ namespace Statistics.Elo_specs
             => (Elo.Create(1732.4) != Elo.MinValue).Should().BeTrue();
 
         [TestCase("0", 0)]
-        [TestCase("1732.4", -667857040)]
+        [TestCase("1732.4", -22135344)]
         public void hash_code_is_value_based(Elo svo, int hash)
         {
             using (Hash.WithoutRandomizer())
@@ -104,7 +104,7 @@ namespace Statistics.Elo_specs
             => Converting.To<double>().From(Svo.Elo).Should().Be(1732.4);
     
         [TestCase("0", 0)]
-        [TestCase("1732.4", -667857040)]
+        [TestCase("1732.4", -22135344)]
         public void hash_code_is_value_based(Elo svo, int hash)
         {
             using (Hash.WithoutRandomizer())

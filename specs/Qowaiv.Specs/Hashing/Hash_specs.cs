@@ -24,7 +24,7 @@ namespace Hashing.Hash_specs
                 int hash = Hash.Code(12)
                     .And(Svo.EmailAddress)
                     .And(Svo.DateTime);
-                hash.Should().Be(1013828080);
+                hash.Should().Be(-1238227536);
             }
         }
 
@@ -34,8 +34,8 @@ namespace Hashing.Hash_specs
             using (Hash.WithoutRandomizer())
             {
                 int hash = Hash.Code(12)
-                    .AndEach(Array.Empty<byte>());
-                hash.Should().Be(665630542);
+                    .And(Array.Empty<byte>());
+                hash.Should().Be(490959278);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Hashing.Hash_specs
         public void Supports_fluent_syntax_null_collection()
         {
             var hash = Hash.Code(12);
-            var adjusted = hash.AndEach<int>(null);
+            var adjusted = hash.And<object>(null);
             adjusted.Should().Be(hash);
         }
 
@@ -53,8 +53,8 @@ namespace Hashing.Hash_specs
             using (Hash.WithoutRandomizer())
             {
                 int hash = Hash.Code(12)
-                    .AndEach(new[] { 1234, 123, 2345, 213 });
-                hash.Should().Be(2057503178);
+                    .And(new[] { 1234, 123, 2345, 213 });
+                hash.Should().Be(535185610);
             }
         }
 
@@ -63,9 +63,9 @@ namespace Hashing.Hash_specs
         {
             using (Hash.WithoutRandomizer())
             {
-                int hash = Hash.Code(12).AndEach(new[] { 1234, 123, 2345, 213 });
-                int other = Hash.Code(12).AndEach(new[] { 123, 1234, 2345, 213 });
-                hash.Should().NotBe(other);
+                int hash = Hash.Code(12).And(new[] { 1234, 123, 2345, 213 });
+                int othr = Hash.Code(12).And(new[] { 123, 1234, 2345, 213 });
+                hash.Should().NotBe(othr);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Hashing.Hash_specs
             using (Hash.WithoutRandomizer())
             {
                 int hash = Hash.Code("QOWAIV string");
-                hash.Should().Be(1211348473);
+                hash.Should().Be(1856816985);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Hashing.Hash_specs
             using (Hash.WithoutRandomizer())
             {
                 int hash = Hash.Code(17);
-                hash.Should().Be(20170594);
+                hash.Should().Be(665630146);
             }
         }
 
@@ -104,7 +104,7 @@ namespace Hashing.Hash_specs
             using (Hash.WithoutRandomizer())
             {
                 int hash = Hash.Code(12345678909876L);
-                hash.Should().Be(1929223677);
+                hash.Should().Be(1415769949);
             }
         }
     }

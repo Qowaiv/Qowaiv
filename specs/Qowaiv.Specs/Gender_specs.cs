@@ -193,8 +193,8 @@ namespace Gender_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("Male", 20170609)]
-        [TestCase("Female", 20170615)]
+        [TestCase("Male", 665630161)]
+        [TestCase("Female", 665630167)]
         public void hash_code_is_value_based(Gender svo, int hash)
         {
             using (Hash.WithoutRandomizer())

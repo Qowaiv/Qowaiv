@@ -41,7 +41,7 @@ namespace HouseNumber_specs
             => (HouseNumber.Create(123456789) != HouseNumber.MinValue).Should().BeTrue();
 
         [TestCase("", 0)]
-        [TestCase("yes", 20170609)]
+        [TestCase("yes", 665630161)]
         public void hash_code_is_value_based(YesNo svo, int hash)
         {
             using (Hash.WithoutRandomizer())

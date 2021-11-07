@@ -155,7 +155,7 @@ namespace Percentage_specs
         }
 
         [TestCase("0%", 0)]
-        [TestCase("17.51%", 20431268)]
+        [TestCase("17.51%", 665367300)]
         public void hash_code_is_value_based(Percentage svo, int hash)
         {
             using (Hash.WithoutRandomizer())

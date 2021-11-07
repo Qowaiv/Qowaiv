@@ -202,7 +202,7 @@ namespace Year_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("1979", 20168904)]
+        [TestCase("1979", 665629288)]
         public void hash_code_is_value_based(Year svo, int hash)
         {
             using (Hash.WithoutRandomizer())

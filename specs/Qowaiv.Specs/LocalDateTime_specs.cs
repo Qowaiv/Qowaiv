@@ -41,7 +41,7 @@ namespace LocalDateTime_specs
             => (new LocalDateTime(2017, 06, 11, 06, 15, 00) != LocalDateTime.MinValue).Should().BeTrue();
 
         [TestCase("0001-01-01", 0)]
-        [TestCase("2017-06-11 06:15", 961707490)]
+        [TestCase("2017-06-11 06:15", 533532482)]
         public void hash_code_is_value_based(LocalDateTime svo, int hash)
         {
             using (Hash.WithoutRandomizer())

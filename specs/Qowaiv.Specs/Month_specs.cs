@@ -214,7 +214,7 @@ namespace Month_specs
         }
 
         [TestCase("", 0)]
-        [TestCase("February", 20170609)]
+        [TestCase("February", 665630161)]
         public void hash_code_is_value_based(Month svo, int hash)
         {
             using (Hash.WithoutRandomizer())

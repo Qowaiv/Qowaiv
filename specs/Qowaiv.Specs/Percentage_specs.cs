@@ -406,26 +406,6 @@ namespace Percentage_specs
     public class Casts
     {
         [Test]
-        public void explicitly_from_string()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var casted = (Percentage)"17.51%";
-                Assert.AreEqual(Svo.Percentage, casted);
-            }
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            using (TestCultures.Nl_NL.Scoped())
-            {
-                var casted = (string)Svo.Percentage;
-                Assert.AreEqual("17,51%", casted);
-            }
-        }
-
-        [Test]
         public void explicitly_from_decimal()
         {
             var casted = (Percentage)0.1751m;

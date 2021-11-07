@@ -562,27 +562,6 @@ namespace Qowaiv.UnitTests.Financial
 
         #endregion
 
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToBusinessIdentifierCode_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (BusinessIdentifierCode)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_BusinessIdentifierCodeToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region Properties
 
         [Test]

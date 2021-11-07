@@ -508,20 +508,6 @@ Actual:   [{(string.Join(", ", act))}]");
     public class Casts
     {
         [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (Uuid)"Qowaiv_SVOLibrary_GUIA";
-            Assert.AreEqual(Svo.Uuid, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.Uuid;
-            Assert.AreEqual("Qowaiv_SVOLibrary_GUIA", casted);
-        }
-
-        [Test]
         public void explicitly_from_Guid()
         {
             var casted = (Uuid)Svo.Guid;

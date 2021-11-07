@@ -122,18 +122,15 @@ namespace Qowaiv
         [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Casts a house number to a <see cref="string"/>.</summary>
-        public static explicit operator string(HouseNumber val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a house number.</summary>
-        public static explicit operator HouseNumber(string str) => Cast.String<HouseNumber>(TryParse, str);
-
         /// <summary>Casts a house number to a System.Int32.</summary>
         public static explicit operator int(HouseNumber val) => val.m_Value;
+        
         /// <summary>Casts an System.Int32 to a house number.</summary>
         public static implicit operator HouseNumber(int val) => Cast.Primitive<int, HouseNumber>(TryCreate, val);
 
         /// <summary>Casts a house number to a System.Int64.</summary>
         public static explicit operator long(HouseNumber val) => val.m_Value;
+        
         /// <summary>Casts a System.Int64 to a house number.</summary>
         public static implicit operator HouseNumber(long val) => Cast.Primitive<int, HouseNumber>(TryCreate, (int)val);
 

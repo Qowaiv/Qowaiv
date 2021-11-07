@@ -40,10 +40,10 @@ namespace Qowaiv
         public static readonly Percentage Hundred = 100.Percent();
 
         /// <summary>Gets the minimum value of a percentage.</summary>
-        public static readonly Percentage MinValue = decimal.MinValue;
+        public static readonly Percentage MinValue = new(decimal.MinValue);
 
         /// <summary>Gets the maximum value of a percentage.</summary>
-        public static readonly Percentage MaxValue = decimal.MaxValue;
+        public static readonly Percentage MaxValue = new(decimal.MaxValue);
 
         #region Percentage manipulation
 
@@ -53,7 +53,7 @@ namespace Qowaiv
 
         /// <summary>Returns the absolute value of the percentage.</summary>
         [Pure]
-        public Percentage Abs() => Math.Abs(m_Value);
+        public Percentage Abs() => new(Math.Abs(m_Value));
 
         /// <summary>Increases the percentage with one percent.</summary>
         [Pure]
@@ -65,25 +65,25 @@ namespace Qowaiv
 
         /// <summary>Pluses the percentage.</summary>
         [Pure]
-        internal Percentage Plus() => +m_Value;
+        internal Percentage Plus() => new(+m_Value);
 
         /// <summary>Negates the percentage.</summary>
         [Pure]
-        internal Percentage Negate() => -m_Value;
+        internal Percentage Negate() => new(-m_Value);
 
         /// <summary>Gets a percentage of the current percentage.</summary>
         /// <param name="p">
         /// The percentage to multiply with.
         /// </param>
         [Pure]
-        public Percentage Multiply(Percentage p) => m_Value * p.m_Value;
+        public Percentage Multiply(Percentage p) =>new(m_Value * p.m_Value);
 
         /// <summary>Divides the current percentage by a specified percentage.</summary>
         /// <param name="p">
         /// The percentage to divides to.
         /// </param>
         [Pure]
-        public Percentage Divide(Percentage p) => m_Value / p.m_Value;
+        public Percentage Divide(Percentage p) => new(m_Value / p.m_Value);
 
         /// <summary>Adds a percentage to the current percentage.
         /// </summary>
@@ -91,7 +91,7 @@ namespace Qowaiv
         /// The percentage to add.
         /// </param>
         [Pure]
-        public Percentage Add(Percentage p) => m_Value + p.m_Value;
+        public Percentage Add(Percentage p) => new(m_Value + p.m_Value);
 
         /// <summary>Subtracts a percentage from the current percentage.
         /// </summary>
@@ -99,7 +99,7 @@ namespace Qowaiv
         /// The percentage to Subtract.
         /// </param>
         [Pure]
-        public Percentage Subtract(Percentage p) => m_Value - p.m_Value;
+        public Percentage Subtract(Percentage p) => new(m_Value - p.m_Value);
 
         #region Multiply
 
@@ -109,7 +109,7 @@ namespace Qowaiv
         /// The factor to multiply with.
         /// </param>
         [Pure]
-        public Percentage Multiply(decimal factor) => m_Value * factor;
+        public Percentage Multiply(decimal factor) => new(m_Value * factor);
 
         /// <summary>Multiplies the percentage with a specified factor.
         /// </summary>
@@ -188,7 +188,7 @@ namespace Qowaiv
         /// The factor to multiply with.
         /// </param>
         [Pure]
-        public Percentage Divide(decimal factor) => m_Value / factor;
+        public Percentage Divide(decimal factor) => new(m_Value / factor);
 
         /// <summary>Divide the percentage by a specified factor.
         /// </summary>
@@ -551,20 +551,17 @@ namespace Qowaiv
         /// </exception>
         [Pure]
         public Percentage Round(int decimals, DecimalRounding mode)
-        {
-            if ((decimals < -26) || (decimals > 26))
-            {
-                throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentageRound);
-            }
-            return m_Value.Round(decimals + 2, mode);
-        }
+            => decimals >= -26 && decimals <= 26
+            ? new(m_Value.Round(decimals + 2, mode))
+            : throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentageRound);
 
         /// <summary>Rounds the percentage to a specified multiple of the specified percentage.</summary>
         /// <param name="multipleOf">
         /// The percentage of which the number should be multiple of.
         /// </param>
         [Pure]
-        public Percentage RoundToMultiple(Percentage multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.AwayFromZero);
+        public Percentage RoundToMultiple(Percentage multipleOf)
+            => RoundToMultiple(multipleOf, DecimalRounding.AwayFromZero);
 
         /// <summary>Rounds the percentage to a specified multiple of the specified percentage.</summary>
         /// <param name="multipleOf">
@@ -578,9 +575,7 @@ namespace Qowaiv
         /// </exception>
         [Pure]
         public Percentage RoundToMultiple(Percentage multipleOf, DecimalRounding mode)
-        {
-            return m_Value.RoundToMultiple((decimal)multipleOf, mode);
-        }
+            => new(m_Value.RoundToMultiple((decimal)multipleOf, mode));
 
         #endregion
 
@@ -658,18 +653,15 @@ namespace Qowaiv
 
         #region (Explicit) casting
 
-        /// <summary>Casts a Percentage to a <see cref="string"/>.</summary>
-        public static explicit operator string(Percentage val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a Percentage.</summary>
-        public static explicit operator Percentage(string str) => Cast.String<Percentage>(TryParse, str);
-
         /// <summary>Casts a decimal a Percentage.</summary>
-        public static implicit operator Percentage(decimal val) => Create(val);
+        public static explicit operator Percentage(decimal val) => Create(val);
+        
         /// <summary>Casts a decimal a Percentage.</summary>
-        public static implicit operator Percentage(double val) => Create(val);
+        public static explicit operator Percentage(double val) => Create(val);
 
         /// <summary>Casts a Percentage to a decimal.</summary>
         public static explicit operator decimal(Percentage val) => val.m_Value;
+        
         /// <summary>Casts a Percentage to a double.</summary>
         public static explicit operator double(Percentage val) => (double)val.m_Value;
 

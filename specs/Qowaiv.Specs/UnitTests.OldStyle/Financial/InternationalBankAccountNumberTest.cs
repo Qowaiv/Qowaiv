@@ -541,27 +541,6 @@ namespace Qowaiv.UnitTests.Financial
         }
         #endregion
 
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToInternationalBankAccountNumber_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (InternationalBankAccountNumber)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_InternationalBankAccountNumberToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region Properties
 
         [Test]

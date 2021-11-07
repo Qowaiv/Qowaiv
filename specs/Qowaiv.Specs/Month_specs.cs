@@ -447,20 +447,6 @@ namespace Month_specs
     public class Casts
     {
         [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (Month)"February";
-            Assert.AreEqual(Svo.Month, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.Month;
-            Assert.AreEqual("February", casted);
-        }
-
-        [Test]
         public void explicitly_from_byte()
         {
             var casted = (Month)2;

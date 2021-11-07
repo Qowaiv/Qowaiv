@@ -674,23 +674,6 @@ namespace Qowaiv.UnitTests.IO
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToStreamSize_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (StreamSize)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_StreamSizeToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void Implicit_Int32ToStreamSize_AreEqual()
         {
             StreamSize exp = TestStruct;

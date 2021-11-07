@@ -238,18 +238,15 @@ namespace Qowaiv
 
         #region (Explicit) casting
 
-        /// <summary>Casts the month span to a <see cref = "string"/>.</summary>
-        public static explicit operator string(MonthSpan val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref = "string "/> to a month span.</summary>
-        public static explicit operator MonthSpan(string str) => Parse(str, CultureInfo.CurrentCulture);
-
         /// <summary>Casts the month span to a <see cref = "int"/>.</summary>
         public static explicit operator int(MonthSpan val) => val.m_Value;
+
         /// <summary>Casts a <see cref = "int "/> to a month span.</summary>
         public static explicit operator MonthSpan(int val) => FromMonths(val);
 
         /// <summary>Casts the month span to a <see cref="DateSpan"/>.</summary>
         public static implicit operator DateSpan(MonthSpan val) => DateSpan.FromMonths(val.m_Value);
+
         /// <summary>Casts a <see cref = "DateSpan"/> to a month span.</summary>
         public static explicit operator MonthSpan(DateSpan val) => FromMonths(val.TotalMonths);
 

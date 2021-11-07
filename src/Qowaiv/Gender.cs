@@ -155,12 +155,6 @@ namespace Qowaiv
         [Pure]
         private string ToXmlString() => GenderLabels[m_Value] ?? string.Empty;
 
-        /// <summary>Casts a Gender to a <see cref="string"/>.</summary>
-        public static explicit operator string(Gender val) => val.ToString(CultureInfo.CurrentCulture);
-
-        /// <summary>Casts a <see cref="string"/> to a Gender.</summary>
-        public static explicit operator Gender(string str) => Cast.String<Gender>(TryParse, str);
-
         /// <summary>Casts a Gender to a <see cref="byte"/>.</summary>
         public static explicit operator byte(Gender val) => (byte)val.ToInt32();
 

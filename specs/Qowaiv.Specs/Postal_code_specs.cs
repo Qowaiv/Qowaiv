@@ -412,23 +412,6 @@ namespace Postal_code_specs
         }
     }
 
-    public class Casts
-    {
-        [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (PostalCode)"H0H0H0";
-            Assert.AreEqual(Svo.PostalCode, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.PostalCode;
-            Assert.AreEqual("H0H0H0", casted);
-        }
-    }
-
     public class Supports_type_conversion
     {
         [Test]

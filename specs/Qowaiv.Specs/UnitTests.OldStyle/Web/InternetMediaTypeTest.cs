@@ -621,27 +621,6 @@ namespace Qowaiv.UnitTests.Web
         }
         #endregion
 
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToInternetMediaType_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (InternetMediaType)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_InternetMediaTypeToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region Properties
 
         [Test]

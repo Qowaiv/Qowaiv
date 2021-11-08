@@ -440,7 +440,6 @@ namespace Sex_specs
         }
 
         [TestCase(null, "")]
-
         public void convention_based_serialization(object expected, Sex svo)
         {
             var serialized = JsonTester.Write(svo);

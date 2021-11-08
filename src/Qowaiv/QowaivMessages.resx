@@ -181,4 +181,7 @@
   <data name="HashingNotSupported" xml:space="preserve">
     <value>Hashing is not supported by {0}.</value>
   </data>
+  <data name="FormatExceptionSex" xml:space="preserve">
+    <value>Not a valid sex</value>
+  </data>
 </root>

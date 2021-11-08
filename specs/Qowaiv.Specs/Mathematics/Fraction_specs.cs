@@ -1,15 +1,10 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mathematics.Fraction_specs
 {
-    public class Has_humanzizer_creators
+    public class Has_humanizer_creators
     {
         [Test]
         public void int_DividedBy_int()

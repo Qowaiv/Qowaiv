@@ -13,17 +13,17 @@ namespace Extensions.Type_specs
         [TestCase(typeof(double), "double")]
         [TestCase(typeof(object), "object")]
         public void Uses_primitive_names(Type primitive, string csharpString)
-            => Assert.That(primitive.ToCSharpString(), Is.EqualTo(csharpString));
+            => primitive.ToCSharpString().Should().Be(csharpString);
 
         [Test]
         public void Uses_question_mark_for_nullables()
-            => Assert.That(typeof(int?).ToCSharpString(), Is.EqualTo("int?"));
+            => (typeof(int?)).ToCSharpString().Should().Be("int?");
 
         [TestCase(typeof(int[]), "int[]")]
         [TestCase(typeof(int[,]), "int[,]")]
         [TestCase(typeof(int[,,]), "int[,,]")]
         public void Supports_arrays(Type array, string csharpString)
-            => Assert.That(array.ToCSharpString(), Is.EqualTo(csharpString));
+            => array.ToCSharpString().Should().Be(csharpString);
 
         [TestCase(typeof(int[][]), "int[][]")]
         [TestCase(typeof(int[][,]), "int[][,]")]

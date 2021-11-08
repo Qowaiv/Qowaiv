@@ -273,7 +273,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static LocalDateTime Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out LocalDateTime val) ? val : throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
+        public static LocalDateTime Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "LocalDateTime"/>.</summary>
         /// <param name = "s">
         /// A string containing the local date time to convert.
@@ -282,7 +282,19 @@ namespace Qowaiv
         /// The local date time if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static LocalDateTime TryParse(string s) => TryParse(s, null, out LocalDateTime val) ? val : default;
+        public static LocalDateTime? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "LocalDateTime"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the local date time to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The local date time if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static LocalDateTime? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out LocalDateTime val) ? val : default(LocalDateTime? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "LocalDateTime"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -309,10 +321,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static LocalDateTime Parse(string s)
-            => TryParse(s, out LocalDateTime val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
+        public static LocalDateTime Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
         /// <param name="s">
@@ -322,7 +331,7 @@ namespace Qowaiv
         /// The local date time if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static LocalDateTime TryParse(string s) => TryParse(s, out LocalDateTime val) ? val : default;
+        public static LocalDateTime? TryParse(string s) => TryParse(s, out LocalDateTime val) ? val : default(LocalDateTime?);
 #endif
     }
 }

@@ -270,7 +270,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static EmailAddress Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out EmailAddress val) ? val : throw new FormatException(QowaivMessages.FormatExceptionEmailAddress);
+        public static EmailAddress Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionEmailAddress);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "EmailAddress"/>.</summary>
         /// <param name = "s">
         /// A string containing the email address to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv
         /// The email address if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static EmailAddress TryParse(string s) => TryParse(s, null, out EmailAddress val) ? val : default;
+        public static EmailAddress? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "EmailAddress"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the email address to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The email address if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static EmailAddress? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out EmailAddress val) ? val : default(EmailAddress? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "EmailAddress"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static EmailAddress Parse(string s)
-            => TryParse(s, out EmailAddress val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionEmailAddress);
+        public static EmailAddress Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionEmailAddress);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv
         /// The email address if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static EmailAddress TryParse(string s) => TryParse(s, out EmailAddress val) ? val : default;
+        public static EmailAddress? TryParse(string s) => TryParse(s, out EmailAddress val) ? val : default(EmailAddress?);
 #endif
     }
 }

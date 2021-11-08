@@ -250,7 +250,7 @@ namespace Qowaiv.Mathematics
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Fraction Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Fraction val) ? val : throw new FormatException(QowaivMessages.FormatExceptionFraction);
+        public static Fraction Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.</summary>
         /// <param name = "s">
         /// A string containing the fraction to convert.
@@ -259,7 +259,19 @@ namespace Qowaiv.Mathematics
         /// The fraction if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Fraction TryParse(string s) => TryParse(s, null, out Fraction val) ? val : default;
+        public static Fraction? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the fraction to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The fraction if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Fraction? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Fraction val) ? val : default(Fraction? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -286,10 +298,7 @@ namespace Qowaiv.Mathematics
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Fraction Parse(string s)
-            => TryParse(s, out Fraction val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionFraction);
+        public static Fraction Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
         /// <param name="s">
@@ -299,7 +308,7 @@ namespace Qowaiv.Mathematics
         /// The fraction if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Fraction TryParse(string s) => TryParse(s, out Fraction val) ? val : default;
+        public static Fraction? TryParse(string s) => TryParse(s, out Fraction val) ? val : default(Fraction?);
 #endif
     }
 }

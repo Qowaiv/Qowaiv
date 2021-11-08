@@ -273,7 +273,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Date Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Date val) ? val : throw new FormatException(QowaivMessages.FormatExceptionDate);
+        public static Date Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDate);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Date"/>.</summary>
         /// <param name = "s">
         /// A string containing the date to convert.
@@ -282,7 +282,19 @@ namespace Qowaiv
         /// The date if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Date TryParse(string s) => TryParse(s, null, out Date val) ? val : default;
+        public static Date? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Date"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the date to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The date if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Date? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Date val) ? val : default(Date? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Date"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -309,10 +321,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Date Parse(string s)
-            => TryParse(s, out Date val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionDate);
+        public static Date Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionDate);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.</summary>
         /// <param name="s">
@@ -322,7 +331,7 @@ namespace Qowaiv
         /// The date if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Date TryParse(string s) => TryParse(s, out Date val) ? val : default;
+        public static Date? TryParse(string s) => TryParse(s, out Date val) ? val : default(Date?);
 #endif
     }
 }

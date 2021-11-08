@@ -270,7 +270,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Month Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Month val) ? val : throw new FormatException(QowaivMessages.FormatExceptionMonth);
+        public static Month Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionMonth);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Month"/>.</summary>
         /// <param name = "s">
         /// A string containing the month to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv
         /// The month if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Month TryParse(string s) => TryParse(s, null, out Month val) ? val : default;
+        public static Month? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Month"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the month to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The month if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Month? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Month val) ? val : default(Month? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Month"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Month Parse(string s)
-            => TryParse(s, out Month val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionMonth);
+        public static Month Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionMonth);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv
         /// The month if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Month TryParse(string s) => TryParse(s, out Month val) ? val : default;
+        public static Month? TryParse(string s) => TryParse(s, out Month val) ? val : default(Month?);
 #endif
     }
 }

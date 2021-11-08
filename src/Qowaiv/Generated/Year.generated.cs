@@ -270,7 +270,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Year Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Year val) ? val : throw new FormatException(QowaivMessages.FormatExceptionYear);
+        public static Year Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionYear);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.</summary>
         /// <param name = "s">
         /// A string containing the year to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv
         /// The year if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Year TryParse(string s) => TryParse(s, null, out Year val) ? val : default;
+        public static Year? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the year to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The year if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Year? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Year val) ? val : default(Year? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Year"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Year Parse(string s)
-            => TryParse(s, out Year val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionYear);
+        public static Year Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionYear);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Year"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv
         /// The year if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Year TryParse(string s) => TryParse(s, out Year val) ? val : default;
+        public static Year? TryParse(string s) => TryParse(s, out Year val) ? val : default(Year?);
 #endif
     }
 }

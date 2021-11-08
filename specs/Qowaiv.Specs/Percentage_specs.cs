@@ -206,10 +206,8 @@ namespace Percentage_specs
         }
 
         [Test]
-        public void from_invalid_as_empty_with_TryParse()
-        {
-            Assert.AreEqual(default(Percentage), Percentage.TryParse("invalid input"));
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Percentage.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void with_TryParse_returns_SVO()

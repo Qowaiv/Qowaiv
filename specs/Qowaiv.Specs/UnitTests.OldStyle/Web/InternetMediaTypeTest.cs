@@ -188,16 +188,8 @@ namespace Qowaiv.UnitTests.Web
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(InternetMediaType);
-                var act = InternetMediaType.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => InternetMediaType.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

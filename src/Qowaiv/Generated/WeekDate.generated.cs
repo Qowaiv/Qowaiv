@@ -249,7 +249,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static WeekDate Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out WeekDate val) ? val : throw new FormatException(QowaivMessages.FormatExceptionWeekDate);
+        public static WeekDate Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionWeekDate);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "WeekDate"/>.</summary>
         /// <param name = "s">
         /// A string containing the week date to convert.
@@ -258,7 +258,19 @@ namespace Qowaiv
         /// The week date if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static WeekDate TryParse(string s) => TryParse(s, null, out WeekDate val) ? val : default;
+        public static WeekDate? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "WeekDate"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the week date to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The week date if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static WeekDate? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out WeekDate val) ? val : default(WeekDate? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "WeekDate"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -285,10 +297,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static WeekDate Parse(string s)
-            => TryParse(s, out WeekDate val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionWeekDate);
+        public static WeekDate Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionWeekDate);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
         /// <param name="s">
@@ -298,7 +307,7 @@ namespace Qowaiv
         /// The week date if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static WeekDate TryParse(string s) => TryParse(s, out WeekDate val) ? val : default;
+        public static WeekDate? TryParse(string s) => TryParse(s, out WeekDate val) ? val : default(WeekDate?);
 #endif
     }
 }

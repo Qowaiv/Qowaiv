@@ -270,7 +270,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Gender Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Gender val) ? val : throw new FormatException(QowaivMessages.FormatExceptionGender);
+        public static Gender Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionGender);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
         /// <param name = "s">
         /// A string containing the gender to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv
         /// The gender if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Gender TryParse(string s) => TryParse(s, null, out Gender val) ? val : default;
+        public static Gender? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the gender to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The gender if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Gender? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Gender val) ? val : default(Gender? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Gender"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Gender Parse(string s)
-            => TryParse(s, out Gender val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionGender);
+        public static Gender Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionGender);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Gender"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv
         /// The gender if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Gender TryParse(string s) => TryParse(s, out Gender val) ? val : default;
+        public static Gender? TryParse(string s) => TryParse(s, out Gender val) ? val : default(Gender?);
 #endif
     }
 }

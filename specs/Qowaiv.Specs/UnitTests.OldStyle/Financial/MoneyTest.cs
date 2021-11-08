@@ -601,30 +601,6 @@ namespace Qowaiv.UnitTests.Financial
         }
         #endregion
 
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToMoney_AreEqual()
-        {
-            using (TestCultures.Fr_FR.Scoped())
-            {
-                var exp = TestStruct;
-                var act = (Money)TestStruct.ToString(CultureInfo.CurrentCulture);
-
-                Assert.AreEqual(exp, act);
-            }
-        }
-        [Test]
-        public void Explicit_MoneyToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region Properties
 
         [Test]

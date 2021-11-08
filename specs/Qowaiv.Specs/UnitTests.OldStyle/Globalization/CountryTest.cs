@@ -680,23 +680,6 @@ namespace Qowaiv.UnitTests.Globalization
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToCountry_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (Country)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_CountryToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void Implicit_RegionInfoToCountry_AreEqual()
         {
             Country exp = Country.NL;

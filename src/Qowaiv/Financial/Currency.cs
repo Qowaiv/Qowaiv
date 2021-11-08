@@ -201,17 +201,6 @@ namespace Qowaiv.Financial
             return info;
         }
 
-        /// <summary>Casts a currency to a <see cref="string"/>.</summary>
-        public static explicit operator string(Currency val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a currency.</summary>
-        public static explicit operator Currency(string str) => Cast.String<Currency>(TryParse, str);
-
-        /// <summary>Casts a currency to a <see cref="string"/>.</summary>
-        public static explicit operator int(Currency val) => val.IsoNumericCode;
-
-        /// <summary>Casts a <see cref="string"/> to a currency.</summary>
-        public static explicit operator Currency(int val) => AllCurrencies.FirstOrDefault(c => c.IsoNumericCode == val);
-
         /// <summary>Converts the string to a currency.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

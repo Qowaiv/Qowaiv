@@ -631,24 +631,6 @@ namespace Qowaiv.UnitTests
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToHouseNumber_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (HouseNumber)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_HouseNumberToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-
-        [Test]
         public void Explicit_Int32ToHouseNumber_AreEqual()
         {
             var exp = TestStruct;

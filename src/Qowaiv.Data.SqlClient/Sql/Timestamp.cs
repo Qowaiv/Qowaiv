@@ -84,24 +84,22 @@ namespace Qowaiv.Sql
         [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Casts a timestamp to a <see cref="string"/>.</summary>
-        public static explicit operator string(Timestamp val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a timestamp.</summary>
-        public static explicit operator Timestamp(string str) => Parse(str, CultureInfo.CurrentCulture);
-
         /// <summary>Casts a timestamp to a System.Int32.</summary>
         public static explicit operator byte[](Timestamp val) => val.ToByteArray();
+        
         /// <summary>Casts an System.Int32 to a timestamp.</summary>
         public static explicit operator Timestamp(byte[] val) => Create(val);
 
         /// <summary>Casts a timestamp to a System.Int64.</summary>
         public static explicit operator long(Timestamp val) => BitConverter.ToInt64(val.ToByteArray(), 0);
+        
         /// <summary>Casts a System.Int64 to a timestamp.</summary>
         public static explicit operator Timestamp(long val) => Create(val);
 
         /// <summary>Casts a timestamp to a System.UInt64.</summary>
         [CLSCompliant(false)]
         public static explicit operator ulong(Timestamp val) => val.m_Value;
+        
         /// <summary>Casts a System.UInt64 to a timestamp.</summary>
         [CLSCompliant(false)]
         public static implicit operator Timestamp(ulong val) => Create(val);

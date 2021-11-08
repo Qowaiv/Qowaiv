@@ -238,18 +238,15 @@ namespace Qowaiv
         /// <summary>Bind XML value.</summary>
         partial void OnReadXml(WeekDate value) => m_Value = value.m_Value;
 
-        /// <summary>Casts a week date to a <see cref="string"/>.</summary>
-        public static explicit operator string(WeekDate val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a week date to a date time.</summary>
         public static implicit operator DateTime(WeekDate val) => val.m_Value;
 
-        /// <summary>Casts a <see cref="string"/> to a week date.</summary>
-        public static explicit operator WeekDate(string str) => Cast.String<WeekDate>(TryParse, str);
         /// <summary>Casts a date time to a week date.</summary>
         public static explicit operator WeekDate(DateTime val) => Create((Date)val);
 
         /// <summary>Casts a date to a week date.</summary>
         public static implicit operator WeekDate(Date val) => Create(val);
+        
         /// <summary>Casts a local date time to a week date.</summary>
         public static explicit operator WeekDate(LocalDateTime val) => Create(val.Date);
 

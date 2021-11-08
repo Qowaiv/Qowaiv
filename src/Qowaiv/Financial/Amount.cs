@@ -424,12 +424,6 @@ namespace Qowaiv.Financial
         [Pure]
         public static Amount FromJson(long json) => new(json);
 
-        /// <summary>Casts an Amount to a <see cref="string"/>.</summary>
-        public static explicit operator string(Amount val) => val.ToString(CultureInfo.CurrentCulture);
-
-        /// <summary>Casts a <see cref="string"/> to a </summary>
-        public static explicit operator Amount(string str) => Cast.String<Amount>(TryParse, str);
-
         /// <summary>Casts a decimal an </summary>
         public static explicit operator Amount(decimal val) => Create(val);
 

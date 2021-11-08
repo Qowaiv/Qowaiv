@@ -122,15 +122,11 @@ namespace Qowaiv.Security.Cryptography
             return Length.CompareTo(other.Length);
         }
 
-        /// <summary>Casts a cryptographic seed to a <see cref="string"/>.</summary>
-        public static explicit operator string(CryptographicSeed val) => val.ToString(CultureInfo.InvariantCulture);
-        /// <summary>Casts a <see cref="string"/> to a cryptographic seed.</summary>
-        public static explicit operator CryptographicSeed(string str) => Cast.InvariantString<CryptographicSeed>(TryParse, str);
-
         /// <summary>Casts a cryptographic seed to a System.byte[].</summary>
         public static explicit operator byte[](CryptographicSeed val) => val.ToByteArray();
+        
         /// <summary>Casts a System.byte[] to a cryptographic seed.</summary>
-        public static implicit operator CryptographicSeed(byte[] bytes) => Create(bytes);
+        public static explicit operator CryptographicSeed(byte[] bytes) => Create(bytes);
 
         /// <summary>Converts the string to a cryptographic seed.
         /// A return value indicates whether the conversion succeeded.

@@ -158,12 +158,6 @@ namespace Qowaiv.Financial
         [Pure]
         private string ToXmlString() => ToUnformattedString();
 
-        /// <summary>Casts an IBAN to a <see cref="string"/>.</summary>
-        public static explicit operator string(InternationalBankAccountNumber val) => val.ToString(CultureInfo.InvariantCulture);
-        
-        /// <summary>Casts a <see cref="string"/> to a IBAN.</summary>
-        public static explicit operator InternationalBankAccountNumber(string str) => Cast.String<InternationalBankAccountNumber>(TryParse, str);
-
         /// <summary>Converts the string to an IBAN.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

@@ -624,24 +624,6 @@ namespace Qowaiv.UnitTests
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToWeekDate_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (WeekDate)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_WeekDateToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-
-        [Test]
         public void Explicit_Int32ToWeekDate_AreEqual()
         {
             var exp = TestStruct;

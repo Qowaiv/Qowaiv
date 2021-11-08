@@ -39,6 +39,7 @@ namespace Qowaiv
     [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
     [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", example:"female", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
     [TypeConverter(typeof(GenderTypeConverter))]
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
     {
         /// <summary>Represents an empty/not set Gender.</summary>
@@ -272,7 +273,7 @@ namespace Qowaiv
             && val != 0
             && FromInt32s.ContainsKey(val.Value);
 
-        private static readonly ResourceManager ResourceManager = new("Qowaiv.GenderLabels", typeof(Gender).Assembly);
+        private static readonly ResourceManager ResourceManager = new("Qowaiv.SexLabels", typeof(Gender).Assembly);
 
         /// <summary>Get resource string.</summary>
         /// <param name="prefix">

@@ -15,6 +15,7 @@ using System.Xml.Serialization;
 
 namespace Gender_specs
 {
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class With_domain_logic
     {
         [TestCase(false, "Male")]
@@ -54,6 +55,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Display_name
     {
         [Test]
@@ -72,6 +74,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_valid_for
     {
         [TestCase("?")]
@@ -97,6 +100,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_not_valid_for
     {
         [Test]
@@ -133,6 +137,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Has_constant
     {
         [Test]
@@ -142,6 +147,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_equal_by_value
     {
         [Test]
@@ -204,6 +210,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Can_be_parsed
     {
         [Test]
@@ -263,6 +270,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Has_custom_formatting
     {
         [Test]
@@ -329,6 +337,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_comparable
     {
         [Test]
@@ -368,6 +377,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Casts
     {
         [Test]
@@ -422,6 +432,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Supports_type_conversion
     {
         [Test]
@@ -465,6 +476,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Supports_JSON_serialization
     {
         [TestCase("?", "unknown")]
@@ -495,6 +507,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Supports_XML_serialization
     {
 
@@ -535,6 +548,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_Open_API_data_type
     {
         internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Gender)).FirstOrDefault();
@@ -569,6 +583,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Supports_binary_serialization
     {
         [Test]
@@ -586,6 +601,7 @@ namespace Gender_specs
         }
     }
 
+    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Debugger
     {
         [TestCase("{empty}", "")]

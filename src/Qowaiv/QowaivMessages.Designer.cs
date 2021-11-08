@@ -376,6 +376,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid sex.
+        /// </summary>
+        public static string FormatExceptionSex {
+            get {
+                return ResourceManager.GetString("FormatExceptionSex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid stream size.
         /// </summary>
         public static string FormatExceptionStreamSize {

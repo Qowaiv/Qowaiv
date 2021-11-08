@@ -29,12 +29,6 @@ namespace Cast_specs
         [TestCase(int.MaxValue)]
         [TestCase(1_000_000)]
         [TestCase(-1)]
-        [TestCase(11)]
-        public void int_to_Gender(int num) => QAssert.InvalidCast(() => (Gender)num);
-
-        [TestCase(int.MaxValue)]
-        [TestCase(1_000_000)]
-        [TestCase(-1)]
         [TestCase(13)]
         public void int_to_Month(int num) => QAssert.InvalidCast(() => (Month)num);
 

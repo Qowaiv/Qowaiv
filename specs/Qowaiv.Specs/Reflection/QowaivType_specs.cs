@@ -3,7 +3,6 @@ using Qowaiv;
 using Qowaiv.Financial;
 using Qowaiv.Reflection;
 using System;
-using System.Collections.Generic;
 using System.Numerics;
 
 namespace Reflection.QowaivType_specs
@@ -96,72 +95,5 @@ namespace Reflection.QowaivType_specs
         [TestCase(typeof(BigInteger))]
         public void Is_false_for_all_other_types(Type type)
             => Assert.That(QowaivType.IsDate(type), Is.False);
-    }
-    public class CSharpString
-    {
-        [TestCase(typeof(void), "void")]
-        [TestCase(typeof(byte), "byte")]
-        [TestCase(typeof(float), "float")]
-        [TestCase(typeof(double), "double")]
-        [TestCase(typeof(object), "object")]
-        public void Uses_primitive_names(Type primitive, string csharpString)
-            => Assert.That(QowaivType.ToCSharpString(primitive), Is.EqualTo(csharpString));
-
-        [Test]
-        public void Uses_question_mark_for_nullables()
-            => Assert.That(QowaivType.ToCSharpString(typeof(int?)), Is.EqualTo("int?"));
-
-        [TestCase(typeof(int[]), "int[]")]
-        [TestCase(typeof(int[,]), "int[,]")]
-        [TestCase(typeof(int[,,]), "int[,,]")]
-        public void Supports_arrays(Type array, string csharpString)
-            => Assert.That(QowaivType.ToCSharpString(array), Is.EqualTo(csharpString));
-
-        [TestCase(typeof(int[][]), "int[][]")]
-        [TestCase(typeof(int[][,]), "int[][,]")]
-        [TestCase(typeof(int[][][]), "int[][][]")]
-        public void Supports_jagged_arrays(Type jaggedArray, string csharpString)
-            => Assert.That(QowaivType.ToCSharpString(jaggedArray), Is.EqualTo(csharpString));
-
-        [TestCase(typeof(Nullable<>), "Nullable<>")]
-        [TestCase(typeof(Dictionary<,>), "Dictionary<,>")]
-        public void Supports_generic_type_definitions(Type definition, string csharpString)
-            => Assert.That(QowaivType.ToCSharpString(definition), Is.EqualTo(csharpString));
-
-        [TestCase(typeof(IList<Guid>), "IList<Guid>")]
-        [TestCase(typeof(Dictionary<int, string>), "Dictionary<int, string>")]
-        [TestCase(typeof(Dictionary<object, List<int?>>[]), "Dictionary<object, List<int?>>[]")]
-        public void Supports_generic_type(Type definition, string csharpString)
-            => Assert.That(QowaivType.ToCSharpString(definition), Is.EqualTo(csharpString));
-
-        [TestCase(typeof(NestedType), "CSharpString.NestedType")]
-        public void Supports_nested_types(Type nestedType, string csharpString)
-           => Assert.That(QowaivType.ToCSharpString(nestedType), Is.EqualTo(csharpString));
-
-        [Test]
-        public void Supports_generic_arguments()
-        {
-            var generic = typeof(GenericOf).GetMethod(nameof(GenericOf.Default)).ReturnType;
-           Assert.That(QowaivType.ToCSharpString(generic), Is.EqualTo("CSharpString.GenericOf.TModel"));
-        }
-
-        [TestCase(typeof(string), "string")]
-        [TestCase(typeof(byte[]), "byte[]")]
-        [TestCase(typeof(Guid), "System.Guid")]
-        [TestCase(typeof(Dictionary<string, Action>), "System.Collections.Generic.Dictionary<string, System.Action>")]
-        [TestCase(typeof(long?), "long?")]
-        [TestCase(typeof(Dictionary<,>), "System.Collections.Generic.Dictionary<,>")]
-        [TestCase(typeof(Nullable<>), "System.Nullable<>")]
-        [TestCase(typeof(Dictionary<object, List<int?>>[]), "System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<int?>>[]")]
-        [TestCase(typeof(NestedType), "Reflection.QowaivType_specs.CSharpString.NestedType")]
-        public void With_namespaces_if_specified(Type type, string csharpString)
-            => Assert.That(QowaivType.ToCSharpString(type, withNamespace: true), Is.EqualTo(csharpString));
-
-        internal class NestedType { }
-
-        internal class GenericOf
-        {
-            public TModel Default<TModel>() => default;
-        }
     }
 }

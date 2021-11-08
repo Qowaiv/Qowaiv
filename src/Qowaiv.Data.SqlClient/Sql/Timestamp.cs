@@ -73,11 +73,11 @@ namespace Qowaiv.Sql
             {
                 return formatted;
             }
-            if (string.IsNullOrEmpty(format))
+            else if (string.IsNullOrEmpty(format))
             {
                 return string.Format(formatProvider, "0x{0:X16}", m_Value);
             }
-            return m_Value.ToString(format, formatProvider);
+            else return m_Value.ToString(format, formatProvider);
         }
 
         /// <summary>Gets an XML string representation of the timestamp.</summary>
@@ -124,23 +124,19 @@ namespace Qowaiv.Sql
         public static bool TryParse(string s, IFormatProvider formatProvider, out Timestamp result)
         {
             result = default;
-            ulong val;
-
             if (string.IsNullOrEmpty(s)) { return false; }
-            if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+            if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase) &&
+                ulong.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out var val))
             {
-                if (ulong.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out val))
-                {
-                    result = Create(val);
-                    return true;
-                }
+                result = Create(val);
+                return true;
             }
             else if (ulong.TryParse(s, NumberStyles.Number, formatProvider, out val))
             {
                 result = new Timestamp(val);
                 return true;
             }
-            return false;
+            else return false;
         }
 
         /// <summary>Creates a timestamp from a Int64. </summary >

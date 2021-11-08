@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Qowaiv.Globalization;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.Text;
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace Text.Base32_specs

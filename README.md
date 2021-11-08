@@ -166,8 +166,7 @@ as `double.Parse("14%")`, which is `0.14`.
 
 ``` C#
 // Creation
-Percentage p = 0.0314; // implicit cast: 3.14%
-var p = Percentage.Parse("3.14"); //  Parse: 3.14%;
+var p = Percentage.Parse("3.14");  // Parse: 3.14%;
 var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
 var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
 var p = 3.14.Percent(); // Extension on double: 3.14%;

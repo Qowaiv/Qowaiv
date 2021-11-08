@@ -222,11 +222,6 @@ namespace Qowaiv.Globalization
             { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
         };
 
-        /// <summary>Casts a Country to a <see cref="string"/>.</summary>
-        public static explicit operator string(Country val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a </summary>
-        public static explicit operator Country(string str) => Cast.String<Country>(TryParse, str);
-
         /// <summary>Casts a System.Globalization.RegionInfo to a </summary>
         public static implicit operator Country(RegionInfo region) => Create(region);
 

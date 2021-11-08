@@ -369,20 +369,6 @@ namespace YesNo_specs
 
     public class Casts
     {
-        [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (YesNo)"yes";
-            Assert.AreEqual(YesNo.Yes, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.YesNo;
-            Assert.AreEqual("yes", casted);
-        }
-
         [TestCase("yes", true)]
         [TestCase("no", false)]
         public void explicitly_from_boolean(YesNo casted, bool boolean)

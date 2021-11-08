@@ -630,28 +630,6 @@ namespace Qowaiv.Financial.UnitTests
         }
         #endregion
 
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToAmount_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (Amount)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_AmountToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
-
         [TestCase(-1, -1000)]
         [TestCase(0, 0)]
         [TestCase(+1, 1600)]

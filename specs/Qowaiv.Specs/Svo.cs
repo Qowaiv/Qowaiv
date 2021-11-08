@@ -56,7 +56,7 @@ namespace Qowaiv.Specs
         public static readonly Timestamp Timestamp = 1234567890L;
         public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
         public static readonly WeekDate WeekDate = new(2017, 23, 7);
-        public static readonly Year Year = 1979;
+        public static readonly Year Year = 1979.Year();
         public static readonly YesNo YesNo = YesNo.Yes;
 
         public static readonly Int32Id Int32Id = Int32Id.Create(17);

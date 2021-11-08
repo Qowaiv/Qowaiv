@@ -115,12 +115,6 @@ namespace Qowaiv
         [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Casts a UUID to a <see cref="string"/>.</summary>
-        public static explicit operator string(Uuid val) => val.ToString(CultureInfo.CurrentCulture);
-
-        /// <summary>Casts a <see cref="string"/> to a UUID.</summary>
-        public static explicit operator Uuid(string str) => Cast.InvariantString<Uuid>(TryParse, str);
-
         /// <summary>Casts a Qowaiv.UUID to a System.GUID.</summary>
         public static implicit operator Guid(Uuid val) => val.m_Value;
 

@@ -167,12 +167,6 @@ namespace Qowaiv.Web
         [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Casts an Internet media type to a <see cref="string"/>.</summary>
-        public static explicit operator string(InternetMediaType val) => val.ToString(CultureInfo.CurrentCulture);
-        
-        /// <summary>Casts a <see cref="string"/> to a Internet media type.</summary>
-        public static explicit operator InternetMediaType(string str) => Cast.InvariantString<InternetMediaType>(TryParse, str);
-
         /// <summary>Converts the string to an Internet media type.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

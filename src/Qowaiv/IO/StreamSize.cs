@@ -553,28 +553,27 @@ namespace Qowaiv.IO
         private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
         private static readonly string[] FullLabels1024 = { "byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte" };
 
-        /// <summary>Casts a stream size to a <see cref="string"/>.</summary>
-        public static explicit operator string(StreamSize val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a stream size.</summary>
-        public static explicit operator StreamSize(string str) => Cast.String<StreamSize>(TryParse, str);
-
         /// <summary>Casts a stream size to a System.int.</summary>
         public static explicit operator int(StreamSize val) => (int)val.m_Value;
+
         /// <summary>Casts an int to a stream size.</summary>
         public static implicit operator StreamSize(int val) => new(val);
 
         /// <summary>Casts a stream size to a System.long.</summary>
         public static explicit operator long(StreamSize val) => val.m_Value;
+
         /// <summary>Casts a long to a stream size.</summary>
         public static implicit operator StreamSize(long val) => new(val);
 
         /// <summary>Casts a stream size to a System.Double.</summary>
         public static explicit operator double(StreamSize val) => val.m_Value;
+
         /// <summary>Casts a double to a stream size.</summary>
         public static explicit operator StreamSize(double val) => new((long)val);
 
         /// <summary>Casts a stream size to a System.Decimal.</summary>
         public static explicit operator decimal(StreamSize val) => val.m_Value;
+        
         /// <summary>Casts a decimal to a stream size.</summary>
         public static explicit operator StreamSize(decimal val) => new((long)val);
 

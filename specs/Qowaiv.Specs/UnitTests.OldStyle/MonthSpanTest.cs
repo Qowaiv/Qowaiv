@@ -487,22 +487,6 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void Explicit_StringToMonthSpan_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (MonthSpan)TestStruct.ToString();
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void Explicit_MonthSpanToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void Explicit_Int32ToMonthSpan_AreEqual()
         {
             var exp = TestStruct;

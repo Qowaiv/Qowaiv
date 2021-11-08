@@ -138,14 +138,14 @@ namespace Year_specs
         [Test]
         public void MinValue_represents_1()
         {
-            Year min = 1;
+            Year min = 1.Year();
             Assert.AreEqual(min, Year.MinValue);
         }
 
         [Test]
         public void MaxValue_represents_9999()
         {
-            Year max = 9999;
+            Year max = 9999.Year();
             Assert.AreEqual(max, Year.MaxValue);
         }
     }
@@ -167,38 +167,38 @@ namespace Year_specs
         [Test]
         public void not_equal_to_different_value()
         {
-            Year other = 2017;
+            Year other = 2017.Year();
             Assert.IsFalse(Svo.Year.Equals(other));
         }
 
         [Test]
         public void equal_to_same_value()
         {
-            Assert.IsTrue(Svo.Year.Equals(1979));
+            Assert.IsTrue(Svo.Year.Equals(1979.Year()));
         }
 
         [Test]
         public void equal_operator_returns_true_for_same_values()
         {
-            Assert.IsTrue(Svo.Year == 1979);
+            Assert.IsTrue(Svo.Year == 1979.Year());
         }
 
         [Test]
         public void equal_operator_returns_false_for_different_values()
         {
-            Assert.IsFalse(Svo.Year == 2017);
+            Assert.IsFalse(Svo.Year == 2017.Year());
         }
 
         [Test]
         public void not_equal_operator_returns_false_for_same_values()
         {
-            Assert.IsFalse(Svo.Year != 1979);
+            Assert.IsFalse(Svo.Year != 1979.Year());
         }
 
         [Test]
         public void not_equal_operator_returns_true_for_different_values()
         {
-            Assert.IsTrue(Svo.Year != 2017);
+            Assert.IsTrue(Svo.Year != 2017.Year());
         }
 
         [TestCase("", 0)]
@@ -366,9 +366,9 @@ namespace Year_specs
             {
                 default, 
                 default,
-                1970,
-                1971,
-                1972,
+                1970.Year(),
+                1971.Year(),
+                1972.Year(),
                 Year.Unknown,
             };
             var list = new List<Year> { sorted[3], sorted[5], sorted[4], sorted[2], sorted[0], sorted[1] };
@@ -379,8 +379,8 @@ namespace Year_specs
         [Test]
         public void by_operators_for_different_values()
         {
-            Year smaller = 1979;
-            Year bigger = 2017;
+            Year smaller = 1979.Year();
+            Year bigger = 2017.Year();
 
             Assert.IsTrue(smaller < bigger);
             Assert.IsTrue(smaller <= bigger);
@@ -391,8 +391,8 @@ namespace Year_specs
         [Test]
         public void by_operators_for_equal_values()
         {
-            Year left = 2071;
-            Year right = 2071;
+            Year left = 2071.Year();
+            Year right = 2071.Year();
 
             Assert.IsFalse(left < right);
             Assert.IsTrue(left <= right);
@@ -415,20 +415,6 @@ namespace Year_specs
 
     public class Casts
     {
-        [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (Year)"1979";
-            Assert.AreEqual(Svo.Year, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.Year;
-            Assert.AreEqual("1979", casted);
-        }
-
         [Test]
         public void explicitly_from_short()
         {

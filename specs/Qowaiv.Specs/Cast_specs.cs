@@ -38,44 +38,4 @@ namespace Cast_specs
         [TestCase(10_000)]
         public void int_to_Year(int num) => QAssert.InvalidCast(() => (Year)num);
     }
-    public class Invalid_string_to
-    {
-        private static readonly string InvalidString = "$%$!@$%$D!@@!!!!!";
-
-        [Test]
-        public void Date() => QAssert.InvalidCast(() => (Date)InvalidString);
-
-        [Test]
-        public void EmailAddress() => QAssert.InvalidCast(() => (EmailAddress)InvalidString);
-
-        [Test]
-        public void Gender() => QAssert.InvalidCast(() => (Gender)InvalidString);
-
-        [Test]
-        public void HouseNumber() => QAssert.InvalidCast(() => (HouseNumber)InvalidString);
-
-        [Test]
-        public void LocalDateTime() => QAssert.InvalidCast(() => (LocalDateTime)InvalidString);
-
-        [Test]
-        public void Month() => QAssert.InvalidCast(() => (Month)InvalidString);
-
-        [Test]
-        public void Percentage() => QAssert.InvalidCast(() => (Percentage)InvalidString);
-
-        [Test]
-        public void PostalCode() => QAssert.InvalidCast(() => (PostalCode)InvalidString);
-
-        [Test]
-        public void UUID() => QAssert.InvalidCast(() => (Uuid)InvalidString);
-        
-        [Test]
-        public void WeekDate() => QAssert.InvalidCast(() => (WeekDate)InvalidString);
-
-        [Test]
-        public void Year() => QAssert.InvalidCast(() => (Year)InvalidString);
-
-        [Test]
-        public void YesNo() => QAssert.InvalidCast(() => (YesNo)InvalidString);
-    }
 }

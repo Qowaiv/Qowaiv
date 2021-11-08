@@ -171,22 +171,21 @@ namespace Qowaiv.Statistics
         [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Casts an Elo to a <see cref="string"/>.</summary>
-        public static explicit operator string(Elo val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a Elo.</summary>
-        public static explicit operator Elo(string str) => Cast.String<Elo>(TryParse, str);
-
         /// <summary>Casts a decimal to an Elo.</summary>
         public static implicit operator Elo(decimal val) => new((double)val);
+        
         /// <summary>Casts a decimal to an Elo.</summary>
         public static implicit operator Elo(double val) => Create(val);
+        
         /// <summary>Casts an integer to an Elo.</summary>
         public static implicit operator Elo(int val) => new(val);
 
         /// <summary>Casts an Elo to a decimal.</summary>
         public static explicit operator decimal(Elo val) => (decimal)val.m_Value;
+        
         /// <summary>Casts an Elo to a double.</summary>
         public static explicit operator double(Elo val) => val.m_Value;
+        
         /// <summary>Casts an Elo to an integer.</summary>
         public static explicit operator int(Elo val) => (int)Math.Round(val.m_Value);
 

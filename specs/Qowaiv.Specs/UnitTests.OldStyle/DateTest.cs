@@ -513,26 +513,6 @@ namespace Qowaiv.UnitTests
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToDate_AreEqual()
-        {
-            using (TestCultures.Es_EC.Scoped())
-            {
-                var exp = TestStruct;
-                var act = (Date)TestStruct.ToString(CultureInfo.CurrentCulture);
-
-                Assert.AreEqual(exp, act);
-            }
-        }
-        [Test]
-        public void Explicit_DateToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void Implicit_WeekDateToDate_AreEqual()
         {
             Date exp = new WeekDate(1970, 07, 6);

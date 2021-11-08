@@ -115,17 +115,11 @@ namespace Qowaiv
         [Pure]
         private static bool HaveValue(Year l, Year r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
 
-        /// <summary>Casts a year to a <see cref="string"/>.</summary>
-        public static explicit operator string(Year val) => val.ToString(CultureInfo.CurrentCulture);
-        
-        /// <summary>Casts a <see cref="string"/> to a year.</summary>
-        public static explicit operator Year(string str) => Cast.String<Year>(TryParse, str);
-
         /// <summary>Casts a year to a System.Int32.</summary>
         public static explicit operator int(Year val) => val.m_Value;
 
         /// <summary>Casts an System.Int32 to a year.</summary>
-        public static implicit operator Year(int val) => Cast.Primitive<int, Year>(TryCreate, val);
+        public static explicit operator Year(int val) => Cast.Primitive<int, Year>(TryCreate, val);
 
         /// <summary>Converts the string to a year.
         /// A return value indicates whether the conversion succeeded.

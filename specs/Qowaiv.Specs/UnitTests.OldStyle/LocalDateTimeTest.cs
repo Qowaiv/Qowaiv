@@ -393,30 +393,6 @@ namespace Qowaiv.UnitTests
 
         #endregion
 
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToLocalDateTime_AreEqual()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = TestStructNoMilliseconds;
-                var act = (LocalDateTime)TestStructNoMilliseconds.ToString(CultureInfo.CurrentCulture);
-
-                Assert.AreEqual(exp, act);
-            }
-        }
-        [Test]
-        public void Explicit_LocalDateTimeToString_AreEqual()
-        {
-            var exp = TestStructNoMilliseconds.ToString();
-            var act = (string)TestStructNoMilliseconds;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region Properties
         #endregion
 

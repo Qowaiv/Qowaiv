@@ -717,52 +717,6 @@ namespace Qowaiv.UnitTests.Financial
         }
         #endregion
 
-        #region Casting tests
-
-        [Test]
-        public void Explicit_StringToCurrency_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (Currency)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_CurrencyToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void Explicit_Int32ToCurrency_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (Currency)TestStruct.IsoCode;
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_Minus3ToCurrency_CurrencyEmpty()
-        {
-            var exp = Currency.Empty;
-            var act = (Currency)(-3);
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_CurrencyToInt32_AreEqual()
-        {
-            var exp = TestStruct.IsoNumericCode;
-            var act = (Int32)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region Properties
 
         [Test]

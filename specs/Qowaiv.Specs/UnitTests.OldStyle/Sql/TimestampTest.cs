@@ -546,25 +546,6 @@ namespace Qowaiv.UnitTests.Sql
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToTimestamp_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (Timestamp)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_TimestampToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-
-
-        [Test]
         public void Explicit_ByteArrayToTimestamp_AreEqual()
         {
             var exp = TestStruct;

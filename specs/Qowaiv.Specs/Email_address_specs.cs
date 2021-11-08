@@ -352,23 +352,6 @@ namespace Email_address_specs
         }
     }
 
-    public class Casts
-    {
-        [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (EmailAddress)"info@qowaiv.org";
-            Assert.AreEqual(Svo.EmailAddress, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.EmailAddress;
-            Assert.AreEqual("info@qowaiv.org", casted);
-        }
-    }
-
     public class Supports_type_conversion
     {
         [Test]

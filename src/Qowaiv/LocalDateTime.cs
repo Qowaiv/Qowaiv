@@ -543,19 +543,15 @@ namespace Qowaiv
 
         #region (Explicit) casting
 
-        /// <summary>Casts a local date time to a <see cref="string"/>.</summary>
-        public static explicit operator string(LocalDateTime val) => val.ToString(CultureInfo.CurrentCulture);
         /// <summary>Casts a local date time to a date time.</summary>
         public static implicit operator DateTime(LocalDateTime val) => val.m_Value;
 
-
-        /// <summary>Casts a <see cref="string"/> to a local date time.</summary>
-        public static explicit operator LocalDateTime(string str) => Cast.String<LocalDateTime>(TryParse, str);
         /// <summary>Casts a date time to a local date time.</summary>
         public static implicit operator LocalDateTime(DateTime val) => new(val);
 
         /// <summary>Casts a date to a local date time.</summary>
         public static explicit operator LocalDateTime(Date val) => new(val);
+
         /// <summary>Casts a week date to a week date.</summary>
         public static implicit operator LocalDateTime(WeekDate val) => (LocalDateTime)val.Date;
 

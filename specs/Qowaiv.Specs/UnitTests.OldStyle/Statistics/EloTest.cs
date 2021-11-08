@@ -507,27 +507,7 @@ namespace Qowaiv.UnitTests.Statistics
         #endregion
 
         #region Casting tests
-
-        [Test]
-        public void Explicit_StringToElo_AreEqual()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = TestStruct;
-                var act = (Elo)TestStruct.ToString(CultureInfo.CurrentCulture);
-
-                Assert.AreEqual(exp, act);
-            }
-        }
-        [Test]
-        public void Explicit_EloToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
+        
         [Test]
         public void Implicit_DoubleToElo_AreEqual()
         {

@@ -116,12 +116,6 @@ namespace Qowaiv.Financial
         [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Casts a BIC to a <see cref="string"/>.</summary>
-        public static explicit operator string(BusinessIdentifierCode val) => val.ToString(CultureInfo.CurrentCulture);
-        
-        /// <summary>Casts a <see cref="string"/> to a BIC.</summary>
-        public static explicit operator BusinessIdentifierCode(string str) => Cast.String<BusinessIdentifierCode>(TryParse, str);
-
         /// <summary>Converts the string to a BIC.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

@@ -381,20 +381,6 @@ namespace Gender_specs
     public class Casts
     {
         [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (Gender)"Female";
-            Assert.AreEqual(Svo.Gender, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.Gender;
-            Assert.AreEqual("Female", casted);
-        }
-
-        [Test]
         public void explicitly_to_byte()
         {
             var casted = (byte)Svo.Gender;

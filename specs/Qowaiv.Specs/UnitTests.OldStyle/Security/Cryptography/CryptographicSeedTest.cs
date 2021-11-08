@@ -391,8 +391,8 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void Equals_SameLengthDifferentValues_IsFalse()
         {
-            CryptographicSeed left = new byte[] { 1, 2, 3 };
-            CryptographicSeed right = new byte[] { 1, 2, 4 };
+            var left = (CryptographicSeed)new byte[] { 1, 2, 3 };
+            var right = (CryptographicSeed)new byte[] { 1, 2, 4 };
 
             Assert.IsFalse(left.Equals(right));
         }
@@ -518,40 +518,12 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         #region Casting tests
 
         [Test]
-        public void Explicit_StringToCryptographicSeed_AreEqual()
-        {
-            var exp = TestStruct;
-            var act = (CryptographicSeed)TestStruct.ToString();
-
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void Explicit_CryptographicSeedToString_AreEqual()
-        {
-            var exp = TestStruct.ToString();
-            var act = (string)TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
         public void Explicit_ByteArrayToCryptographicSeed_AreEqual()
-        {
-            CryptographicSeed exp = TestStruct;
-            CryptographicSeed act = new Byte[] { 66, 140, 26, 138 };
+            => ((CryptographicSeed)new byte[] { 66, 140, 26, 138 }).Should().Be(TestStruct);
 
-            Assert.AreEqual(exp, act);
-            Assert.AreNotSame(exp, act);
-        }
         [Test]
         public void Explicit_CryptographicSeedToByteArray_AreEqual()
-        {
-            var exp = TestStruct.ToByteArray();
-            var act = (Byte[])TestStruct;
-
-            Assert.AreEqual(exp, act);
-            Assert.AreNotSame(exp, act);
-        }
+            => ((byte[])TestStruct).Should().BeEquivalentTo(new byte[] { 66, 140, 26, 138 });
 
         #endregion
 

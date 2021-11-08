@@ -67,7 +67,7 @@ namespace Qowaiv.UnitTests.Threading
         [Test]
         public void Set_MultiThreads_()
         {
-            ThreadDomain.Current.Set<Percentage>(0.031418m);
+            ThreadDomain.Current.Set<Percentage>(3.1418m.Percent());
 
             Task.Factory.StartNew(() =>
             {

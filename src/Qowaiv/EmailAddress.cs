@@ -143,12 +143,6 @@ namespace Qowaiv
             { 'f', (svo, provider) => svo.m_Value ?? string.Empty },
         };
 
-        /// <summary>Casts an email address to a <see cref="string"/>.</summary>
-        public static explicit operator string(EmailAddress val) => val.ToString(CultureInfo.CurrentCulture);
-        
-        /// <summary>Casts a <see cref="string"/> to a email address.</summary>
-        public static explicit operator EmailAddress(string str) => Cast.String<EmailAddress>(TryParse, str);
-
         /// <summary>Converts the string to an email address.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

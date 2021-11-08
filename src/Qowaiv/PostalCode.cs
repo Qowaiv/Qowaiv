@@ -110,11 +110,6 @@ namespace Qowaiv
         [Pure]
         private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>Casts a postal code to a <see cref="string"/>.</summary>
-        public static explicit operator string(PostalCode val) => val.ToString(CultureInfo.CurrentCulture);
-        /// <summary>Casts a <see cref="string"/> to a postal code.</summary>
-        public static explicit operator PostalCode(string str) => Cast.String<PostalCode>(TryParse, str);
-
         /// <summary>Converts the string to a postal code.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>

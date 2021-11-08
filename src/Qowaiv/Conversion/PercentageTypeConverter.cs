@@ -8,7 +8,7 @@ namespace Qowaiv.Conversion
     {
         /// <inheritdoc/>
         [Pure]
-        protected override Percentage FromRaw(decimal raw) => raw;
+        protected override Percentage FromRaw(decimal raw) => Percentage.Create(raw);
 
         /// <inheritdoc/>
         [Pure]

@@ -606,7 +606,7 @@ namespace Qowaiv.Mathematics
         /// <summary>Casts a <see cref="Percentage"/> to a <see cref="Fraction"/>.</summary>
         public static explicit operator Fraction(Percentage number) => Cast((decimal)number);
         /// <summary>Casts a <see cref="Percentage"/> to a <see cref="Fraction"/>.</summary>
-        public static explicit operator Percentage(Fraction fraction) => fraction.ToDecimal();
+        public static explicit operator Percentage(Fraction fraction) => Percentage.Create(fraction.ToDecimal());
 
         /// <summary>Casts a <see cref="double"/> to a <see cref="Fraction"/>.</summary>
         public static explicit operator Fraction(double number) => Cast(number);

@@ -190,13 +190,9 @@ namespace Qowaiv
             result = Empty;
             var buffer = s.Buffer().Unify();
 
-            if (buffer.IsEmpty())
-            {
-                return true;
-            }
-            else if (buffer.ToString() is { } str
-                && (Parsings[AddCulture(formatProvider)].TryGetValue(str, out byte val)
-                || Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val)))
+            if (buffer.IsEmpty()) return true;
+            else if (Parsings[AddCulture(formatProvider)].TryGetValue(buffer, out byte val)
+                || Parsings[CultureInfo.InvariantCulture].TryGetValue(buffer, out val))
             {
                 result = new Sex(val);
                 return true;

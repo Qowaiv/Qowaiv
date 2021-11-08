@@ -51,7 +51,7 @@ namespace IO.StreamSize_specs
             => StreamSize.TryParse("123456789").Should().Be(Svo.StreamSize);
     }
 
-    public class Has_humanzizer_creators
+    public class Has_humanizer_creators
     {
         [Test]
         public void Bytes_from_int() => 17_000.Bytes().Should().Be(StreamSize.FromKilobytes(17));

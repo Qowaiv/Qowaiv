@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.Contracts;
-using System.Resources;
+using System.Globalization;
 
-namespace System.Globalization
+namespace System.Resources
 {
-    internal static class ResourceManagerExtensions
+    internal static class QowaivResourceManagerExtensions
     {
         /// <summary>Localizing the resource using the 
         /// <see cref="IFormatProvider"/> defaulting to 

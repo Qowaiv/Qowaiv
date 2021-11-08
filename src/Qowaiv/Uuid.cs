@@ -182,7 +182,7 @@ namespace Qowaiv
             }
 
             // setting the version.
-            UuidExtensions.SetVersion(bytes, UuidVersion.Sequential);
+            SetVersion(bytes, UuidVersion.Sequential);
 
             return new Guid(bytes);
         }
@@ -222,7 +222,7 @@ namespace Qowaiv
             using var md5 = MD5.Create();
 
             var hash = md5.ComputeHash(data);
-            UuidExtensions.SetVersion(hash, UuidVersion.MD5);
+            SetVersion(hash, UuidVersion.MD5);
             return new Guid(hash);
         }
 
@@ -237,8 +237,14 @@ namespace Qowaiv
             var bytes = sha1.ComputeHash(data);
             var hash = new byte[ArraySize];
             Array.Copy(bytes, hash, ArraySize);
-            UuidExtensions.SetVersion(hash, UuidVersion.SHA1);
+            SetVersion(hash, UuidVersion.SHA1);
             return new Guid(hash);
+        }
+
+        private static void SetVersion(byte[] uuid, UuidVersion version)
+        {
+            uuid[IndexOfVersion] &= 0x0F;
+            uuid[IndexOfVersion] |= unchecked((byte)((int)version << 4));
         }
     }
 }

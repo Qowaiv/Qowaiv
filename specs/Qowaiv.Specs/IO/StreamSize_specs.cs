@@ -1,13 +1,14 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using Qowaiv.Globalization;
 using Qowaiv.Hashing;
 using Qowaiv.IO;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
+using Qowaiv.TestTools.IO;
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace IO.StreamSize_specs
 {
@@ -48,6 +49,98 @@ namespace IO.StreamSize_specs
         [Test]
         public void with_TryParse_returns_SVO()
             => StreamSize.TryParse("123456789").Should().Be(Svo.StreamSize);
+    }
+
+    public class Has_humanizer_creators
+    {
+        [Test]
+        public void Bytes_from_int() => 17_000.Bytes().Should().Be(StreamSize.FromKilobytes(17));
+
+        [Test]
+        public void Bytes_from_long() => 17_123L.Bytes().Should().Be(StreamSize.FromKilobytes(17.123));
+
+        [Test]
+        public void KB_from_int() => 17.KB().Should().Be(StreamSize.FromKilobytes(17));
+
+        [Test]
+        public void KB_from_long() => 17L.KB().Should().Be(StreamSize.FromKilobytes(17));
+
+        [Test]
+        public void KB_from_double() => 17.4.KB().Should().Be(StreamSize.FromKilobytes(17.4));
+
+        [Test]
+        public void MB_from_int() => 17.MB().Should().Be(StreamSize.FromMegabytes(17));
+
+        [Test]
+        public void MB_from_long() => 17L.MB().Should().Be(StreamSize.FromMegabytes(17));
+
+        [Test]
+        public void MB_from_double() => 17.4.MB().Should().Be(StreamSize.FromMegabytes(17.4));
+
+        [Test]
+        public void GB_from_int() => 17.GB().Should().Be(StreamSize.FromGigabytes(17));
+
+        [Test]
+        public void GB_from_long() => 17L.GB().Should().Be(StreamSize.FromGigabytes(17));
+
+        [Test]
+        public void GB_from_double() => 17.4.GB().Should().Be(StreamSize.FromGigabytes(17.4));
+
+        [Test]
+        public void KiB_from_int() => 17.KiB().Should().Be(StreamSize.FromKibibytes(17));
+
+        [Test]
+        public void KiB_from_long() => 17L.KiB().Should().Be(StreamSize.FromKibibytes(17));
+
+        [Test]
+        public void KiB_from_double() => 17.4.KiB().Should().Be(StreamSize.FromKibibytes(17.4));
+
+        [Test]
+        public void MiB_from_int() => 17.MiB().Should().Be(StreamSize.FromMebibytes(17));
+
+        [Test]
+        public void MiB_from_long() => 17L.MiB().Should().Be(StreamSize.FromMebibytes(17));
+
+        [Test]
+        public void MiB_from_double() => 17.4.MiB().Should().Be(StreamSize.FromMebibytes(17.4));
+
+        [Test]
+        public void GiB_from_int() => 17.GiB().Should().Be(StreamSize.FromGibibytes(17));
+
+        [Test]
+        public void GiB_from_long() => 17L.GiB().Should().Be(StreamSize.FromGibibytes(17));
+
+        [Test]
+        public void GiB_from_double() => 17.4.GiB().Should().Be(StreamSize.FromGibibytes(17.4));
+    }
+
+    public class Created_from_IO
+    {
+        [Test]
+        public void Directory_info()
+        {
+            using var dir = new TemporaryDirectory();
+
+            for (var i = 0; i < 10; i++)
+            {
+                var file = dir.CreateFile($"text_{i}.md");
+                using var writer = file.AppendText();
+                writer.Write("Hello, world!");
+            }
+            var size = ((DirectoryInfo)dir).GetStreamSize();
+            size.Should().Be(130.Bytes());
+        }
+
+        [Test]
+        public void File_info()
+        {
+            using var dir = new TemporaryDirectory();
+            var file = dir.CreateFile($"text.md");
+            using var writer = file.AppendText();
+            writer.Write("Hello, world!");
+            writer.Flush();
+            file.GetStreamSize().Should().Be(13.Bytes());
+        }
     }
 
     public class Is_equal_by_value

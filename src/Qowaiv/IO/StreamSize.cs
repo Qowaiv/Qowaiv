@@ -2,7 +2,6 @@
 using Qowaiv.Diagnostics;
 using Qowaiv.Formatting;
 using Qowaiv.Json;
-using Qowaiv.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -471,20 +470,20 @@ namespace Qowaiv.IO
             {
                 return formatted;
             }
-
-            var match = FormattedPattern.Match(format ?? string.Empty);
-            if (match.Success)
+            else if (FormattedPattern.Match(format ?? string.Empty) is { Success: true } match)
             {
                 return ToFormattedString(formatProvider, match);
             }
+            else
+            {
+                var streamSizeMarker = GetStreamSizeMarker(format);
+                var decimalFormat = GetWithoutStreamSizeMarker(format, streamSizeMarker);
+                var mp = GetMultiplier(streamSizeMarker);
 
-            var streamSizeMarker = GetStreamSizeMarker(format);
-            var decimalFormat = GetWithoutStreamSizeMarker(format, streamSizeMarker);
-            var mp = GetMultiplier(streamSizeMarker);
+                decimal size = (decimal)m_Value / (decimal)mp;
 
-            decimal size = (decimal)m_Value / (decimal)mp;
-
-            return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
+                return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
+            }
         }
 
         /// <summary>Gets an XML string representation of the stream size.</summary>
@@ -597,36 +596,35 @@ namespace Qowaiv.IO
         public static bool TryParse(string s, IFormatProvider formatProvider, out StreamSize result)
         {
             result = default;
-            if (string.IsNullOrEmpty(s))
+            if (string.IsNullOrEmpty(s)) return false;
+            else
             {
-                return false;
-            }
 
-            var streamSizeMarker = GetStreamSizeMarker(s);
-            var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
-            var factor = GetMultiplier(streamSizeMarker);
+                var streamSizeMarker = GetStreamSizeMarker(s);
+                var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
+                var factor = GetMultiplier(streamSizeMarker);
 
-            if (long.TryParse(size, NumberStyles.Number, formatProvider, out long sizeInt64) &&
-                sizeInt64 <= long.MaxValue / factor &&
-                sizeInt64 >= long.MinValue / factor)
-            {
-                result = new StreamSize(sizeInt64 * factor);
-                return true;
-            }
-
-            if (decimal.TryParse(size, NumberStyles.Number, formatProvider, out decimal sizeDecimal) &&
-                sizeDecimal <= decimal.MaxValue / factor &&
-                sizeDecimal >= decimal.MinValue / factor)
-            {
-                sizeDecimal *= factor;
-
-                if (sizeDecimal <= long.MaxValue && sizeDecimal >= long.MinValue)
+                if (long.TryParse(size, NumberStyles.Number, formatProvider, out long sizeInt64) &&
+                    sizeInt64 <= long.MaxValue / factor &&
+                    sizeInt64 >= long.MinValue / factor)
                 {
-                    result = new StreamSize((long)sizeDecimal);
+                    result = new StreamSize(sizeInt64 * factor);
                     return true;
                 }
+                else if (decimal.TryParse(size, NumberStyles.Number, formatProvider, out decimal sizeDecimal) &&
+                    sizeDecimal <= decimal.MaxValue / factor &&
+                    sizeDecimal >= decimal.MinValue / factor)
+                {
+                    sizeDecimal *= factor;
+
+                    if (sizeDecimal <= long.MaxValue && sizeDecimal >= long.MinValue)
+                    {
+                        result = new StreamSize((long)sizeDecimal);
+                        return true;
+                    }
+                }
+                return false;
             }
-            return false;
         }
 
         /// <summary>Creates a stream size based on the size in kilobytes.</summary>

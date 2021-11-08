@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using Qowaiv.Globalization;
 using Qowaiv.Identifiers;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using SpecialInt64 = Qowaiv.Identifiers.Id<Identifiers.Id_for_Int64_specs.ForSpecialInt64>;
 
 namespace Identifiers.Id_for_Int64_specs

@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Qowaiv.Threading;
 using System.Diagnostics.Contracts;
-using System.Threading;
 
-namespace Qowaiv.Threading
+namespace System.Threading
 {
-    /// <summary>Extensions on System.Threading.Thread.</summary>
-    public static class ThreadExtensions
+    /// <summary>Extensions on <see cref="Thread"/>.</summary>
+    public static class QowaivThreadExtensions
     {
         /// <summary>Gets the value of T.</summary>
         [Pure]

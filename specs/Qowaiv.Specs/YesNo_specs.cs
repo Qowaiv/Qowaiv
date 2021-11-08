@@ -282,6 +282,15 @@ namespace YesNo_specs
             Assert.AreEqual("Unit Test Formatter, value: 'True', format: 'B'", formatted);
         }
 
+        [Test]
+        public void with_empty_format_provider()
+        {
+            using (TestCultures.Es_EC.Scoped())
+            {
+                Svo.YesNo.ToString(FormatProvider.Empty).Should().Be("si");
+            }
+        }
+
         [TestCase("en-GB", null, "Yes", "yes")]
         [TestCase("nl-BE", "f", "Yes", "ja")]
         [TestCase("es-EQ", "F", "Yes", "Si")]

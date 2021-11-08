@@ -6,8 +6,8 @@ using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Qowaiv.UnitTests.Financial

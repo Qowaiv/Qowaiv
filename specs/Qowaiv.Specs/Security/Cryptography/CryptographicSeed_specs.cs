@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using Qowaiv.Globalization;
 using Qowaiv.Security.Cryptography;
 using Qowaiv.Specs;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
+using System.Globalization;
 
 namespace Security.Cryptography.CryptographicSeed_specs
 {

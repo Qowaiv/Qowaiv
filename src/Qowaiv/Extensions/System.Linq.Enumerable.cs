@@ -1,12 +1,14 @@
-﻿using Qowaiv.Financial;
-using System;
+﻿using Qowaiv;
+using Qowaiv.Financial;
+using Qowaiv.IO;
+using Qowaiv.Statistics;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace Qowaiv
+namespace System.Linq
 {
-    /// <summary>Extensions on <see cref="IEnumerable{T}"/> of Qowaiv types.</summary>
-    public static class QowaivEnumerable
+    /// <summary>Extensions on <see cref="IEnumerable{T}"/>.</summary>
+    public static class QowaivEnumerableExtensions
     {
         /// <summary>Computes the average of a sequence of <see cref="Amount"/> values that are obtained
         /// by invoking a transform function on each element of the input sequence.
@@ -50,11 +52,9 @@ namespace Qowaiv
                 }
             }
 
-            if (count == 0)
-            {
-                throw NoElements();
-            }
-            return (Amount)(total /count);
+            return count == 0
+                ? throw NoElements()
+                : (total / count).Amount();
         }
 
         /// <summary>Computes the average of a sequence of nullable <see cref="Amount"/> values that are
@@ -105,7 +105,7 @@ namespace Qowaiv
             {
                 return null;
             }
-            return (Amount)(total / count);
+            return (total / count).Amount();
         }
 
         /// <summary>Computes the average of a sequence of <see cref="Amount"/> values.</summary>
@@ -140,11 +140,9 @@ namespace Qowaiv
                     total += (decimal)amount;
                 }
             }
-            if (count == 0)
-            {
-                throw NoElements();
-            }
-            return (Amount)(total /count);
+            return count == 0
+                ? throw NoElements()
+                : (total / count).Amount();
         }
 
         /// <summary>Computes the average of a sequence of nullable <see cref="Amount"/> values.</summary>
@@ -185,9 +183,8 @@ namespace Qowaiv
             {
                 return null;
             }
-            return (Amount)(total /count);
+            return (total / count).Amount();
         }
-
 
         /// <summary>Computes the average of a sequence of <see cref="Money"/> values that are obtained
         /// by invoking a transform function on each element of the input sequence.
@@ -243,11 +240,9 @@ namespace Qowaiv
                 }
             }
 
-            if (count == 0)
-            {
-                throw NoElements();
-            }
-            return (total / count) + currency;
+            return count == 0
+                ? throw NoElements()
+                : (total / count) + currency;
         }
 
         /// <summary>Computes the average of a sequence of nullable <see cref="Money"/> values that are
@@ -306,7 +301,7 @@ namespace Qowaiv
                     }
                 }
             }
-            if(count == 0)
+            if (count == 0)
             {
                 return null;
             }
@@ -358,11 +353,9 @@ namespace Qowaiv
                 }
             }
 
-            if (count == 0)
-            {
-                throw NoElements();
-            }
-            return (total / count) + currency;
+            return count == 0
+                ? throw NoElements()
+                : (total / count) + currency;
         }
 
         /// <summary>Computes the average of a sequence of nullable <see cref="Money"/> values.</summary>
@@ -418,6 +411,16 @@ namespace Qowaiv
             return (total / count) + currency;
         }
 
+        /// <summary>Gets the average Elo.</summary>
+        [Pure]
+        public static Elo Average(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
+
+        /// <summary>Computes the average of a sequence of stream sizes.</summary>
+        [Pure]
+        public static StreamSize Average(this IEnumerable<StreamSize> streamSizes)
+            => new((long)streamSizes.Average(streamSize => (long)streamSize));
+
+
         /// <summary>Computes the sum of a sequence of <see cref="Amount"/> values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
@@ -459,11 +462,10 @@ namespace Qowaiv
                     total += (decimal)amount;
                 }
             }
-            if (none)
-            {
-                throw NoElements();
-            }
-            return (Amount)total;
+
+            return none
+                ? throw NoElements()
+                : total.Amount();
         }
 
         /// <summary>Computes the sum of a sequence of nullable <see cref="Amount"/> values that are
@@ -510,11 +512,8 @@ namespace Qowaiv
                     }
                 }
             }
-            if (none)
-            {
-                return null;
-            }
-            return (Amount)total;
+            if (none) return null;
+            else return total.Amount();
         }
 
         /// <summary>Computes the sum of a sequence of <see cref="Amount"/> values.</summary>
@@ -549,11 +548,9 @@ namespace Qowaiv
                     total += (decimal)amount;
                 }
             }
-            if (none)
-            {
-                throw NoElements();
-            }
-            return (Amount)total;
+            return none
+                ? throw NoElements()
+                : total.Amount();
         }
 
         /// <summary>Computes the sum of a sequence of nullable <see cref="Amount"/> values.</summary>
@@ -590,11 +587,8 @@ namespace Qowaiv
                     }
                 }
             }
-            if (none)
-            {
-                return null;
-            }
-            return (Amount)total;
+            if (none) return null;
+            else return total.Amount();
         }
 
 
@@ -652,11 +646,9 @@ namespace Qowaiv
                 }
             }
 
-            if (none)
-            {
-                throw NoElements();
-            }
-            return total + currency;
+            return none
+                ? throw NoElements()
+                : total + currency;
         }
 
         /// <summary>Computes the sum of a sequence of nullable <see cref="Money"/> values that are
@@ -715,11 +707,8 @@ namespace Qowaiv
                     }
                 }
             }
-            if (none)
-            {
-                return null;
-            }
-            return total + currency;
+            if (none) return null;
+            else return total + currency;
         }
 
         /// <summary>Computes the sum of a sequence of <see cref="Money"/> values.</summary>
@@ -820,12 +809,19 @@ namespace Qowaiv
                     }
                 }
             }
-            if (none)
-            {
-                return null;
-            }
-            return total + currency;
+            if (none) return null;
+            else return total + currency;
         }
+
+        /// <summary>Computes the sum of a sequence of stream sizes.</summary>
+        [Pure]
+        public static StreamSize Sum(this IEnumerable<StreamSize> streamSizes)
+            => new(streamSizes.Sum(streamSize => (long)streamSize));
+
+        /// <summary>Converts the enumeration into an <see cref="EmailAddressCollection"/>.</summary>
+        [Pure]
+        public static EmailAddressCollection ToCollection(this IEnumerable<EmailAddress> adresses)
+            => new(adresses);
 
         [Pure]
         private static InvalidOperationException NoElements() => new(QowaivMessages.InvalidOperationException_NoElements);

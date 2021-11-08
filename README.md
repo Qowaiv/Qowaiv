@@ -103,6 +103,7 @@ Represents the size of a file or stream.
 ``` C#
 StreamSize fromMb = StreamSize.FromMegabytes(14.2);
 StreamSize parsed = StreamSize.Parse("117.2Kb");
+StreamSize humanizer = 142.23.KB(); // Bytes(), KiB(), MB(), MiB(), GB(), GiB()
 
 // Short notation
 new StreamSize(8900).ToString("s") => 8900b

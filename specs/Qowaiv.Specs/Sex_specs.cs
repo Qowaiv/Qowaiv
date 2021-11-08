@@ -29,9 +29,7 @@ namespace Sex_specs
         [TestCase(true, "?")]
         [TestCase(true, "")]
         public void IsEmptyOrUnknown_returns(bool result, Sex svo)
-        {
-            Assert.AreEqual(result, svo.IsEmptyOrUnknown());
-        }
+            => svo.IsEmptyOrUnknown().Should().Be(result);
 
         [TestCase(false, "Male")]
         [TestCase(false, "Female")]
@@ -240,7 +238,7 @@ namespace Sex_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Assert.AreEqual("Female", Svo.Sex.ToString());
+                Svo.Sex.ToString().Should().Be("Female");
             }
         }
 

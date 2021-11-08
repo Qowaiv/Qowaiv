@@ -247,13 +247,11 @@ namespace YesNo_specs
         {
             Assert.IsFalse(YesNo.TryParse("invalid input", out _));
         }
-    
-        [Test]
-        public void from_invalid_as_empty_with_TryParse()
-        {
-            Assert.AreEqual(default(YesNo), YesNo.TryParse("invalid input"));
-        }
 
+        [Test]
+        public void from_invalid_as_null_with_TryParse()
+            => YesNo.TryParse("invalid input").Should().BeNull();
+            
         [Test]
         public void with_TryParse_returns_SVO()
         {

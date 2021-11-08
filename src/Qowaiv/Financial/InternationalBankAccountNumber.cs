@@ -200,12 +200,10 @@ namespace Qowaiv.Financial
 
         [Pure]
         private static bool ValidForCountry(CharBuffer buffer)
-        {
-            var country = Country.TryParse(buffer.Substring(0, 2));
-            return !country.IsEmptyOrUnknown()
-                && (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern)
-                || buffer.Matches(localizedPattern));
-        }
+            => Country.TryParse(buffer.Substring(0, 2), out var country)
+            && !country.IsEmptyOrUnknown()
+            && (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern)
+            || buffer.Matches(localizedPattern));
 
         [Pure]
         private static bool Mod97(CharBuffer buffer)

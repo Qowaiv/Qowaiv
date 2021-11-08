@@ -81,16 +81,8 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(Money);
-                var act = Money.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Money.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void Parse_EuroSpace12_Parsed()

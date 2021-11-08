@@ -44,7 +44,7 @@ namespace IO.StreamSize_specs
 
         [Test]
         public void from_invalid_as_null_with_TryParse()
-            => StreamSize.TryParse("invalid input").Should().Be(StreamSize.Zero);
+            => StreamSize.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void with_TryParse_returns_SVO()

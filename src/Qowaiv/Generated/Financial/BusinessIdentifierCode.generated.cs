@@ -270,7 +270,7 @@ namespace Qowaiv.Financial
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static BusinessIdentifierCode Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out BusinessIdentifierCode val) ? val : throw new FormatException(QowaivMessages.FormatExceptionBusinessIdentifierCode);
+        public static BusinessIdentifierCode Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionBusinessIdentifierCode);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "BusinessIdentifierCode"/>.</summary>
         /// <param name = "s">
         /// A string containing the BIC to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv.Financial
         /// The BIC if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static BusinessIdentifierCode TryParse(string s) => TryParse(s, null, out BusinessIdentifierCode val) ? val : default;
+        public static BusinessIdentifierCode? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "BusinessIdentifierCode"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the BIC to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The BIC if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static BusinessIdentifierCode? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out BusinessIdentifierCode val) ? val : default(BusinessIdentifierCode? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "BusinessIdentifierCode"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv.Financial
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static BusinessIdentifierCode Parse(string s)
-            => TryParse(s, out BusinessIdentifierCode val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionBusinessIdentifierCode);
+        public static BusinessIdentifierCode Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionBusinessIdentifierCode);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="BusinessIdentifierCode"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv.Financial
         /// The BIC if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static BusinessIdentifierCode TryParse(string s) => TryParse(s, out BusinessIdentifierCode val) ? val : default;
+        public static BusinessIdentifierCode? TryParse(string s) => TryParse(s, out BusinessIdentifierCode val) ? val : default(BusinessIdentifierCode?);
 #endif
     }
 }

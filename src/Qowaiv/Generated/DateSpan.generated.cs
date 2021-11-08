@@ -273,7 +273,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static DateSpan Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out DateSpan val) ? val : throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
+        public static DateSpan Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "DateSpan"/>.</summary>
         /// <param name = "s">
         /// A string containing the date span to convert.
@@ -282,7 +282,19 @@ namespace Qowaiv
         /// The date span if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static DateSpan TryParse(string s) => TryParse(s, null, out DateSpan val) ? val : default;
+        public static DateSpan? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "DateSpan"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the date span to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The date span if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static DateSpan? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out DateSpan val) ? val : default(DateSpan? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "DateSpan"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -309,10 +321,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static DateSpan Parse(string s)
-            => TryParse(s, out DateSpan val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
+        public static DateSpan Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>
         /// <param name="s">
@@ -322,7 +331,7 @@ namespace Qowaiv
         /// The date span if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static DateSpan TryParse(string s) => TryParse(s, out DateSpan val) ? val : default;
+        public static DateSpan? TryParse(string s) => TryParse(s, out DateSpan val) ? val : default(DateSpan?);
 #endif
     }
 }

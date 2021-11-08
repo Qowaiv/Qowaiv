@@ -36,6 +36,7 @@ namespace Qowaiv.Specs
         public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
         public static readonly Elo Elo = 1732.4;
         public static readonly Fraction Fraction = -69.DividedBy(17);
+        [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
         public static readonly Gender Gender = Gender.Female;
         public static readonly Guid Guid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
         public static readonly Hash Hash = Hash.Code("QOWAIV");
@@ -49,6 +50,7 @@ namespace Qowaiv.Specs
         public static readonly Percentage Percentage = 17.51.Percent();
         public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
         public static readonly Secret Secret = Secret.Parse("Ken sent me!");
+        public static readonly Sex Sex = Sex.Female;
         public static readonly StreamSize StreamSize = 123456789;
         public static readonly TimeZoneInfo TimeZone = TestTimeZones.LeidenTime;
         public static readonly Timestamp Timestamp = 1234567890L;

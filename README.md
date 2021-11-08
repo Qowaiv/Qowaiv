@@ -122,9 +122,6 @@ new StreamSize(1238900).ToString("#,##0.00 Kilobyte") => 1,239.00 Kilobyte
 new StreamSize(1238900).ToString("#,##0") => 1,238,900
 ```
 
-### Gender
-Represents a gender based on an ISO 5218 code.
-
 ### House number
 Represents a house number in the range [1-999999999].
 
@@ -205,6 +202,19 @@ dutch.IsValid(Country.BE); // false
 
 var argentina = PostalCode.Parse("Z1230ABC");
 argentina.ToString("AR"); // Z 1230 ABC
+```
+
+### Sex
+Represents a sex based on an ISO 5218 code.
+
+``` C#
+var sex = Sex.Female;
+var parsed = Sex.Parse("Male");
+
+sex.ToString("s"); // ♀
+sex.ToString("c"); // f
+sex.ToString("", new CultureInfo("pt")); // Feminino
+sex.ToString("h", new CultureInfo("en-GB")); // Mrs.
 ```
 
 ### Week date

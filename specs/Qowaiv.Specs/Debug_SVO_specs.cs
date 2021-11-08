@@ -83,9 +83,9 @@ namespace Debug_SVO_specs
         }
 
         [Test]
-        public void displays_not_known_for_gender()
+        public void displays_not_known_for_sex()
         {
-            var unknown = Gender.Unknown;
+            var unknown = Sex.Unknown;
             unknown.Should().HaveDebuggerDisplay("Not known");
         }
     }
@@ -101,7 +101,6 @@ namespace Debug_SVO_specs
         [TestCase(typeof(Elo), "1600", 1600d)]
         [TestCase(typeof(EmailAddress), "svo@qowaiv.org", "svo@qowaiv.org")]
         [TestCase(typeof(Fraction), "-69/17", "-⁶⁹⁄₁₇ = -4.05882353")]
-        [TestCase(typeof(Gender), "F", "Female")]
         [TestCase(typeof(HouseNumber), "123456789", "123456789")]
         [TestCase(typeof(InternationalBankAccountNumber), "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
         [TestCase(typeof(InternetMediaType), "application/x-chess-pgn", "application/x-chess-pgn")]
@@ -145,7 +144,7 @@ namespace Debug_SVO_specs
                 => !svo.IsGenericType
                 && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
                 && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasUnknownValue))
-            .Except(new[] { typeof(Gender), typeof(InternetMediaType) });
+            .Except(new[] { typeof(Gender), typeof(Sex), typeof(InternetMediaType) });
 
     }
 }

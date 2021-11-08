@@ -83,15 +83,8 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (new CultureInfoScope("en-GB"))
-            {
-                var exp = default(MonthSpan);
-                var act = MonthSpan.TryParse("InvalidInput");
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+           => MonthSpan.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void FromYears_20k_Throws()

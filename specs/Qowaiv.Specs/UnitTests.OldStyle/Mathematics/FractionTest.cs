@@ -118,15 +118,8 @@ namespace Qowaiv.UnitTests.Mathematics
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(Fraction);
-                var act = Fraction.TryParse("InvalidInput");
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Fraction.TryParse("invalid input").Should().BeNull();
 
         [TestCase(0, 1, "0")]
         [TestCase(00000003, 000000010, "0.3")]

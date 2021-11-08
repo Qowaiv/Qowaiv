@@ -86,7 +86,7 @@ namespace Qowaiv
             {
                 return formatted;
             }
-            return ToString(Country.TryParse(format));
+            return ToString(Country.TryParse(format) ?? default);
         }
 
         /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>

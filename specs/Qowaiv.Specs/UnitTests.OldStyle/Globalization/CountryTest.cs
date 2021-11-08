@@ -179,16 +179,8 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(Country);
-                var act = Country.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Country.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

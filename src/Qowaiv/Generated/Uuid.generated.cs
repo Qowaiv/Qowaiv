@@ -273,7 +273,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Uuid Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Uuid val) ? val : throw new FormatException(QowaivMessages.FormatExceptionUuid);
+        public static Uuid Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionUuid);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Uuid"/>.</summary>
         /// <param name = "s">
         /// A string containing the UUID to convert.
@@ -282,7 +282,19 @@ namespace Qowaiv
         /// The UUID if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Uuid TryParse(string s) => TryParse(s, null, out Uuid val) ? val : default;
+        public static Uuid? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Uuid"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the UUID to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The UUID if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Uuid? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Uuid val) ? val : default(Uuid? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Uuid"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -309,10 +321,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Uuid Parse(string s)
-            => TryParse(s, out Uuid val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionUuid);
+        public static Uuid Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionUuid);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
         /// <param name="s">
@@ -322,7 +331,7 @@ namespace Qowaiv
         /// The UUID if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Uuid TryParse(string s) => TryParse(s, out Uuid val) ? val : default;
+        public static Uuid? TryParse(string s) => TryParse(s, out Uuid val) ? val : default(Uuid?);
 #endif
     }
 }

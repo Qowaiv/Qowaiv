@@ -272,7 +272,7 @@ namespace Qowaiv.Sql
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Timestamp Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Timestamp val) ? val : throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
+        public static Timestamp Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
         /// <param name = "s">
         /// A string containing the timestamp to convert.
@@ -281,7 +281,19 @@ namespace Qowaiv.Sql
         /// The timestamp if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Timestamp TryParse(string s) => TryParse(s, null, out Timestamp val) ? val : default;
+        public static Timestamp? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the timestamp to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The timestamp if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Timestamp? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Timestamp val) ? val : default(Timestamp? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Timestamp"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -308,10 +320,7 @@ namespace Qowaiv.Sql
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Timestamp Parse(string s)
-            => TryParse(s, out Timestamp val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
+        public static Timestamp Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
         /// <param name="s">
@@ -321,7 +330,7 @@ namespace Qowaiv.Sql
         /// The timestamp if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Timestamp TryParse(string s) => TryParse(s, out Timestamp val) ? val : default;
+        public static Timestamp? TryParse(string s) => TryParse(s, out Timestamp val) ? val : default(Timestamp?);
 #endif
     }
 }

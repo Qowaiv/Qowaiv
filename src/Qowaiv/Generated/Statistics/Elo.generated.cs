@@ -272,7 +272,7 @@ namespace Qowaiv.Statistics
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Elo Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Elo val) ? val : throw new FormatException(QowaivMessages.FormatExceptionElo);
+        public static Elo Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionElo);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Elo"/>.</summary>
         /// <param name = "s">
         /// A string containing the elo to convert.
@@ -281,7 +281,19 @@ namespace Qowaiv.Statistics
         /// The elo if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Elo TryParse(string s) => TryParse(s, null, out Elo val) ? val : default;
+        public static Elo? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Elo"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the elo to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The elo if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Elo? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Elo val) ? val : default(Elo? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Elo"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -308,10 +320,7 @@ namespace Qowaiv.Statistics
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Elo Parse(string s)
-            => TryParse(s, out Elo val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionElo);
+        public static Elo Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionElo);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
         /// <param name="s">
@@ -321,7 +330,7 @@ namespace Qowaiv.Statistics
         /// The elo if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Elo TryParse(string s) => TryParse(s, out Elo val) ? val : default;
+        public static Elo? TryParse(string s) => TryParse(s, out Elo val) ? val : default(Elo?);
 #endif
     }
 }

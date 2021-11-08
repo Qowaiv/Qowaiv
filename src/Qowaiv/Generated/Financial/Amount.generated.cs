@@ -272,7 +272,7 @@ namespace Qowaiv.Financial
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Amount Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Amount val) ? val : throw new FormatException(QowaivMessages.FormatExceptionFinancialAmount);
+        public static Amount Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionFinancialAmount);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Amount"/>.</summary>
         /// <param name = "s">
         /// A string containing the amount to convert.
@@ -281,7 +281,19 @@ namespace Qowaiv.Financial
         /// The amount if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Amount TryParse(string s) => TryParse(s, null, out Amount val) ? val : default;
+        public static Amount? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Amount"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the amount to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The amount if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Amount? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Amount val) ? val : default(Amount? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Amount"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -308,10 +320,7 @@ namespace Qowaiv.Financial
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Amount Parse(string s)
-            => TryParse(s, out Amount val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionFinancialAmount);
+        public static Amount Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionFinancialAmount);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>
         /// <param name="s">
@@ -321,7 +330,7 @@ namespace Qowaiv.Financial
         /// The amount if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Amount TryParse(string s) => TryParse(s, out Amount val) ? val : default;
+        public static Amount? TryParse(string s) => TryParse(s, out Amount val) ? val : default(Amount?);
 #endif
     }
 }

@@ -123,16 +123,8 @@ namespace Qowaiv.UnitTests
         }
 
         [Test]
-        public void TryParse_InvalidInput_DefaultValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                var exp = default(Date);
-                var act = Date.TryParse("InvalidInput");
-
-                Assert.AreEqual(exp, act);
-            }
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => Date.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

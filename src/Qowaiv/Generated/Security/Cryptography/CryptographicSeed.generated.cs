@@ -274,7 +274,7 @@ namespace Qowaiv.Security.Cryptography
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static CryptographicSeed Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out CryptographicSeed val) ? val : throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
+        public static CryptographicSeed Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "CryptographicSeed"/>.</summary>
         /// <param name = "s">
         /// A string containing the cryptographic seed to convert.
@@ -283,7 +283,19 @@ namespace Qowaiv.Security.Cryptography
         /// The cryptographic seed if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static CryptographicSeed TryParse(string s) => TryParse(s, null, out CryptographicSeed val) ? val : default;
+        public static CryptographicSeed? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "CryptographicSeed"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the cryptographic seed to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The cryptographic seed if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static CryptographicSeed? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out CryptographicSeed val) ? val : default(CryptographicSeed? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "CryptographicSeed"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -310,10 +322,7 @@ namespace Qowaiv.Security.Cryptography
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static CryptographicSeed Parse(string s)
-            => TryParse(s, out CryptographicSeed val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
+        public static CryptographicSeed Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="CryptographicSeed"/>.</summary>
         /// <param name="s">
@@ -323,7 +332,7 @@ namespace Qowaiv.Security.Cryptography
         /// The cryptographic seed if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static CryptographicSeed TryParse(string s) => TryParse(s, out CryptographicSeed val) ? val : default;
+        public static CryptographicSeed? TryParse(string s) => TryParse(s, out CryptographicSeed val) ? val : default(CryptographicSeed?);
 #endif
     }
 }

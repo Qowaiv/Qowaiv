@@ -272,7 +272,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Percentage Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Percentage val) ? val : throw new FormatException(QowaivMessages.FormatExceptionPercentage);
+        public static Percentage Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionPercentage);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Percentage"/>.</summary>
         /// <param name = "s">
         /// A string containing the percentage to convert.
@@ -281,7 +281,19 @@ namespace Qowaiv
         /// The percentage if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Percentage TryParse(string s) => TryParse(s, null, out Percentage val) ? val : default;
+        public static Percentage? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "Percentage"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the percentage to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The percentage if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static Percentage? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Percentage val) ? val : default(Percentage? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "Percentage"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -308,10 +320,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static Percentage Parse(string s)
-            => TryParse(s, out Percentage val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionPercentage);
+        public static Percentage Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionPercentage);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
         /// <param name="s">
@@ -321,7 +330,7 @@ namespace Qowaiv
         /// The percentage if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static Percentage TryParse(string s) => TryParse(s, out Percentage val) ? val : default;
+        public static Percentage? TryParse(string s) => TryParse(s, out Percentage val) ? val : default(Percentage?);
 #endif
     }
 }

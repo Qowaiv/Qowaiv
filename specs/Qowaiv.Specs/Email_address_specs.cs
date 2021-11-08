@@ -219,10 +219,8 @@ namespace Email_address_specs
         }
 
         [Test]
-        public void from_invalid_as_empty_with_TryParse()
-        {
-            Assert.AreEqual(default(EmailAddress), EmailAddress.TryParse("invalid input"));
-        }
+        public void from_invalid_as_null_with_TryParse()
+            => EmailAddress.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void with_TryParse_returns_SVO()

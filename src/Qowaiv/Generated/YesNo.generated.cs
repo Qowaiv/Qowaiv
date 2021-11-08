@@ -270,7 +270,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static YesNo Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out YesNo val) ? val : throw new FormatException(QowaivMessages.FormatExceptionYesNo);
+        public static YesNo Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionYesNo);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "YesNo"/>.</summary>
         /// <param name = "s">
         /// A string containing the yes-no to convert.
@@ -279,7 +279,19 @@ namespace Qowaiv
         /// The yes-no if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static YesNo TryParse(string s) => TryParse(s, null, out YesNo val) ? val : default;
+        public static YesNo? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "YesNo"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the yes-no to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The yes-no if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static YesNo? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out YesNo val) ? val : default(YesNo? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "YesNo"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -306,10 +318,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static YesNo Parse(string s)
-            => TryParse(s, out YesNo val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionYesNo);
+        public static YesNo Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionYesNo);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
         /// <param name="s">
@@ -319,7 +328,7 @@ namespace Qowaiv
         /// The yes-no if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static YesNo TryParse(string s) => TryParse(s, out YesNo val) ? val : default;
+        public static YesNo? TryParse(string s) => TryParse(s, out YesNo val) ? val : default(YesNo?);
 #endif
     }
 }

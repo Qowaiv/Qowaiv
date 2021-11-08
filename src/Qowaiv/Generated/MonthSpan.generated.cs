@@ -272,7 +272,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static MonthSpan Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out MonthSpan val) ? val : throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
+        public static MonthSpan Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "MonthSpan"/>.</summary>
         /// <param name = "s">
         /// A string containing the month span to convert.
@@ -281,7 +281,19 @@ namespace Qowaiv
         /// The month span if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static MonthSpan TryParse(string s) => TryParse(s, null, out MonthSpan val) ? val : default;
+        public static MonthSpan? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "MonthSpan"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the month span to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The month span if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static MonthSpan? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out MonthSpan val) ? val : default(MonthSpan? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "MonthSpan"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -308,10 +320,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static MonthSpan Parse(string s)
-            => TryParse(s, out MonthSpan val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
+        public static MonthSpan Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
         /// <param name="s">
@@ -321,7 +330,7 @@ namespace Qowaiv
         /// The month span if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static MonthSpan TryParse(string s) => TryParse(s, out MonthSpan val) ? val : default;
+        public static MonthSpan? TryParse(string s) => TryParse(s, out MonthSpan val) ? val : default(MonthSpan?);
 #endif
     }
 }

@@ -269,7 +269,7 @@ namespace Qowaiv
         /// <paramref name = "s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static HouseNumber Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out HouseNumber val) ? val : throw new FormatException(QowaivMessages.FormatExceptionHouseNumber);
+        public static HouseNumber Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionHouseNumber);
         /// <summary>Converts the <see cref = "string "/> to <see cref = "HouseNumber"/>.</summary>
         /// <param name = "s">
         /// A string containing the house number to convert.
@@ -278,7 +278,19 @@ namespace Qowaiv
         /// The house number if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static HouseNumber TryParse(string s) => TryParse(s, null, out HouseNumber val) ? val : default;
+        public static HouseNumber? TryParse(string s) => TryParse(s, null);
+        /// <summary>Converts the <see cref = "string "/> to <see cref = "HouseNumber"/>.</summary>
+        /// <param name = "s">
+        /// A string containing the house number to convert.
+        /// </param>
+        /// <param name = "formatProvider">
+        /// The specified format provider.
+        /// </param>
+        /// <returns>
+        /// The house number if the string was converted successfully, otherwise default.
+        /// </returns>
+        [Pure]
+        public static HouseNumber? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out HouseNumber val) ? val : default(HouseNumber? );
         /// <summary>Converts the <see cref = "string "/> to <see cref = "HouseNumber"/>.
         /// A return value indicates whether the conversion succeeded.
         /// </summary>
@@ -305,10 +317,7 @@ namespace Qowaiv
         /// <paramref name="s"/> is not in the correct format.
         /// </exception>
         [Pure]
-        public static HouseNumber Parse(string s)
-            => TryParse(s, out HouseNumber val)
-            ? val
-            : throw new FormatException(QowaivMessages.FormatExceptionHouseNumber);
+        public static HouseNumber Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionHouseNumber);
 
         /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
         /// <param name="s">
@@ -318,7 +327,7 @@ namespace Qowaiv
         /// The house number if the string was converted successfully, otherwise default.
         /// </returns>
         [Pure]
-        public static HouseNumber TryParse(string s) => TryParse(s, out HouseNumber val) ? val : default;
+        public static HouseNumber? TryParse(string s) => TryParse(s, out HouseNumber val) ? val : default(HouseNumber?);
 #endif
     }
 }

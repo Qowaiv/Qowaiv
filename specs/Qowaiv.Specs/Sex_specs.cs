@@ -13,34 +13,29 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace Gender_specs
+namespace Sex_specs
 {
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class With_domain_logic
     {
         [TestCase(false, "Male")]
         [TestCase(false, "Female")]
         [TestCase(false, "?")]
         [TestCase(true, "")]
-        public void IsEmpty_returns(bool result, Gender svo)
-        {
-            Assert.AreEqual(result, svo.IsEmpty());
-        }
+        public void IsEmpty_returns(bool result, Sex svo)
+            => svo.IsEmpty().Should().Be(result);
 
         [TestCase(false, "Male")]
         [TestCase(false, "Female")]
         [TestCase(true, "?")]
         [TestCase(true, "")]
-        public void IsEmptyOrUnknown_returns(bool result, Gender svo)
-        {
-            Assert.AreEqual(result, svo.IsEmptyOrUnknown());
-        }
+        public void IsEmptyOrUnknown_returns(bool result, Sex svo)
+            => svo.IsEmptyOrUnknown().Should().Be(result);
 
         [TestCase(false, "Male")]
         [TestCase(false, "Female")]
         [TestCase(true, "?")]
         [TestCase(false, "")]
-        public void IsUnknown_returns(bool result, Gender svo)
+        public void IsUnknown_returns(bool result, Sex svo)
         {
             Assert.AreEqual(result, svo.IsUnknown());
         }
@@ -49,13 +44,12 @@ namespace Gender_specs
         [TestCase(true, "Female")]
         [TestCase(false, "?")]
         [TestCase(false, "")]
-        public void IsMaleOrFemale_returns(bool result, Gender svo)
+        public void IsMaleOrFemale_returns(bool result, Sex svo)
         {
             Assert.AreEqual(result, svo.IsMaleOrFemale());
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Display_name
     {
         [Test]
@@ -63,25 +57,24 @@ namespace Gender_specs
         {
             using (TestCultures.Nl_BE.Scoped())
             {
-                Assert.AreEqual("Vrouwelijk", Svo.Gender.DisplayName);
+                Assert.AreEqual("Vrouwelijk", Svo.Sex.DisplayName);
             }
         }
 
         [Test]
         public void for_custom_culture_if_specified()
         {
-            Assert.AreEqual("Mujer", Svo.Gender.GetDisplayName(TestCultures.Es_EC));
+            Assert.AreEqual("Mujer", Svo.Sex.GetDisplayName(TestCultures.Es_EC));
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_valid_for
     {
         [TestCase("?")]
         [TestCase("unknown")]
         public void strings_representing_unknown(string input)
         {
-            Assert.IsTrue(Gender.IsValid(input));
+            Assert.IsTrue(Sex.IsValid(input));
         }
 
         [TestCase(1)]
@@ -89,42 +82,41 @@ namespace Gender_specs
         [TestCase(9)]
         public void numbers(int? number)
         {
-            Assert.IsTrue(Gender.IsValid(number));
+            Assert.IsTrue(Sex.IsValid(number));
         }
 
         [TestCase("Female", "nl")]
         [TestCase("Female", "nl")]
         public void strings_representing_SVO(string input, CultureInfo culture)
         {
-            Assert.IsTrue(Gender.IsValid(input, culture));
+            Assert.IsTrue(Sex.IsValid(input, culture));
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_not_valid_for
     {
         [Test]
         public void string_empty()
         {
-            Assert.IsFalse(Gender.IsValid(string.Empty));
+            Assert.IsFalse(Sex.IsValid(string.Empty));
         }
 
         [Test]
         public void string_null()
         {
-            Assert.IsFalse(Gender.IsValid((string)null));
+            Assert.IsFalse(Sex.IsValid((string)null));
         }
 
         [Test]
         public void whitespace()
         {
-            Assert.IsFalse(Gender.IsValid(" "));
+            Assert.IsFalse(Sex.IsValid(" "));
         }
 
         [Test]
         public void garbage()
         {
-            Assert.IsFalse(Gender.IsValid("garbage"));
+            Assert.IsFalse(Sex.IsValid("garbage"));
         }
 
         [TestCase(null)]
@@ -133,75 +125,57 @@ namespace Gender_specs
         [TestCase(10)]
         public void numbers(int? number)
         {
-            Assert.IsFalse(Gender.IsValid(number));
+            Assert.IsFalse(Sex.IsValid(number));
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Has_constant
     {
         [Test]
         public void Empty_represent_default_value()
         {
-            Assert.AreEqual(default(Gender), Gender.Empty);
+            Assert.AreEqual(default(Sex), Sex.Empty);
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_equal_by_value
     {
         [Test]
         public void not_equal_to_null()
-        {
-            Assert.IsFalse(Svo.Gender.Equals(null));
-        }
+            => Svo.Sex.Equals(null).Should().BeFalse();
 
         [Test]
         public void not_equal_to_other_type()
-        {
-            Assert.IsFalse(Svo.Gender.Equals(new object()));
-        }
+            => Svo.Sex.Equals(new object()).Should().BeFalse();
 
         [Test]
         public void not_equal_to_different_value()
-        {
-            Assert.IsFalse(Svo.Gender.Equals(Gender.Male));
-        }
+            => Svo.Sex.Equals(Sex.Male).Should().BeFalse();
 
         [Test]
         public void equal_to_same_value()
-        {
-            Assert.IsTrue(Svo.Gender.Equals(Gender.Female));
-        }
+            => Svo.Sex.Equals(Sex.Female).Should().BeTrue();
 
         [Test]
         public void equal_operator_returns_true_for_same_values()
-        {
-            Assert.IsTrue(Svo.Gender == Gender.Female);
-        }
+            => (Svo.Sex == Sex.Female).Should().BeTrue();
 
         [Test]
         public void equal_operator_returns_false_for_different_values()
-        {
-            Assert.IsFalse(Svo.Gender == Gender.Male);
-        }
+            => (Svo.Sex == Sex.Male).Should().BeFalse();
 
         [Test]
         public void not_equal_operator_returns_false_for_same_values()
-        {
-            Assert.IsFalse(Svo.Gender != Gender.Female);
-        }
+            => (Svo.Sex != Sex.Female).Should().BeFalse();
 
         [Test]
         public void not_equal_operator_returns_true_for_different_values()
-        {
-            Assert.IsTrue(Svo.Gender != Gender.Male);
-        }
+            => (Svo.Sex != Sex.Male).Should().BeTrue();
 
         [TestCase("", 0)]
         [TestCase("Male", 665630161)]
         [TestCase("Female", 665630167)]
-        public void hash_code_is_value_based(Gender svo, int hash)
+        public void hash_code_is_value_based(Sex svo, int hash)
         {
             using (Hash.WithoutRandomizer())
             {
@@ -210,34 +184,26 @@ namespace Gender_specs
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Can_be_parsed
     {
         [Test]
         public void from_null_string_represents_Empty()
-        {
-            Assert.AreEqual(Gender.Empty, Gender.Parse(null));
-        }
+            => Sex.Parse(null).Should().Be(Sex.Empty);
 
         [Test]
         public void from_empty_string_represents_Empty()
-        {
-            Assert.AreEqual(Gender.Empty, Gender.Parse(string.Empty));
-        }
+            => Sex.Parse(string.Empty).Should().Be(Sex.Empty);
 
         [Test]
         public void from_question_mark_represents_Unknown()
-        {
-            Assert.AreEqual(Gender.Unknown, Gender.Parse("?"));
-        }
+           => Sex.Parse("?").Should().Be(Sex.Unknown);
 
         [TestCase("en", "Female")]
         public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
         {
             using (culture.Scoped())
             {
-                var parsed = Gender.Parse(input);
-                Assert.AreEqual(Svo.Gender, parsed);
+                Sex.Parse(input).Should().Be(Svo.Sex);
             }
         }
 
@@ -246,31 +212,25 @@ namespace Gender_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                var exception = Assert.Throws<FormatException>(() => Gender.Parse("invalid input"));
-                Assert.AreEqual("Not a valid gender", exception.Message);
+                Func<Sex> parse = () => Sex.Parse("invalid input");
+                parse.Should().Throw<FormatException>()
+                    .WithMessage("Not a valid sex");
             }
         }
 
         [Test]
         public void from_valid_input_only_otherwise_return_false_on_TryParse()
-        {
-            Assert.IsFalse(Gender.TryParse("invalid input", out _));
-        }
+            => (Sex.TryParse("invalid input", out _)).Should().BeFalse();
 
         [Test]
         public void from_invalid_as_empty_with_TryParse()
-        {
-            Assert.AreEqual(default(Gender), Gender.TryParse("invalid input"));
-        }
+            => Sex.TryParse("invalid input").Should().BeNull();
 
         [Test]
         public void with_TryParse_returns_SVO()
-        {
-            Assert.AreEqual(Svo.Gender, Gender.TryParse("Female"));
-        }
+            => Sex.TryParse("Female").Should().Be(Svo.Sex);
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Has_custom_formatting
     {
         [Test]
@@ -278,7 +238,7 @@ namespace Gender_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Assert.AreEqual("Female", Svo.Gender.ToString());
+                Svo.Sex.ToString().Should().Be("Female");
             }
         }
 
@@ -287,7 +247,7 @@ namespace Gender_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Assert.AreEqual(Svo.Gender.ToString(), Svo.Gender.ToString(default(string)));
+                Assert.AreEqual(Svo.Sex.ToString(), Svo.Sex.ToString(default(string)));
             }
         }
 
@@ -296,20 +256,20 @@ namespace Gender_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                Assert.AreEqual(Svo.Gender.ToString(), Svo.Gender.ToString(string.Empty));
+                Assert.AreEqual(Svo.Sex.ToString(), Svo.Sex.ToString(string.Empty));
             }
         }
 
         [Test]
         public void default_value_is_represented_as_string_empty()
         {
-            Assert.AreEqual(string.Empty, default(Gender).ToString());
+            Assert.AreEqual(string.Empty, default(Sex).ToString());
         }
 
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.Gender.ToString("s", new UnitTestFormatProvider());
+            var formatted = Svo.Sex.ToString("s", new UnitTestFormatProvider());
             Assert.AreEqual("Unit Test Formatter, value: '♀', format: 's'", formatted);
         }
 
@@ -319,7 +279,7 @@ namespace Gender_specs
         [TestCase("nl-BE", "i", "Female", "2")]
         [TestCase("nl-BE", "h", "Female", "Mevr.")]
         [TestCase("nl-BE", "f", "Female", "Vrouwelijk")]
-        public void culture_dependent(CultureInfo culture, string format, Gender svo, string expected)
+        public void culture_dependent(CultureInfo culture, string format, Sex svo, string expected)
         {
             using (culture.Scoped())
             {
@@ -332,32 +292,31 @@ namespace Gender_specs
         {
             using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
             {
-                Assert.AreEqual("Vrouwelijk", Svo.Gender.ToString(provider: null));
+                Assert.AreEqual("Vrouwelijk", Svo.Sex.ToString(provider: null));
             }
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_comparable
     {
         [Test]
         public void to_null_is_1()
         {
             object obj = null;
-            Assert.AreEqual(1, Svo.Gender.CompareTo(obj));
+            Assert.AreEqual(1, Svo.Sex.CompareTo(obj));
         }
 
         [Test]
-        public void to_Gender_as_object()
+        public void to_Sex_as_object()
         {
-            object obj = Svo.Gender;
-            Assert.AreEqual(0, Svo.Gender.CompareTo(obj));
+            object obj = Svo.Sex;
+            Assert.AreEqual(0, Svo.Sex.CompareTo(obj));
         }
 
         [Test]
-        public void to_Gender_only()
+        public void to_Sex_only()
         {
-            Assert.Throws<ArgumentException>(() => Svo.Gender.CompareTo(new object()));
+            Assert.Throws<ArgumentException>(() => Svo.Sex.CompareTo(new object()));
         }
 
         [Test]
@@ -367,84 +326,69 @@ namespace Gender_specs
             {
                 default,
                 default,
-                Gender.Unknown,
-                Gender.Male,
-                Gender.Female,
+                Sex.Unknown,
+                Sex.Male,
+                Sex.Female,
             };
-            var list = new List<Gender> { sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
+            var list = new List<Sex> { sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
             list.Sort();
             Assert.AreEqual(sorted, list);
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Casts
     {
         [Test]
-        public void explicitly_from_string()
-        {
-            var casted = (Gender)"Female";
-            Assert.AreEqual(Svo.Gender, casted);
-        }
-
-        [Test]
-        public void explicitly_to_string()
-        {
-            var casted = (string)Svo.Gender;
-            Assert.AreEqual("Female", casted);
-        }
-
-        [Test]
         public void explicitly_to_byte()
         {
-            var casted = (byte)Svo.Gender;
+            var casted = (byte)Svo.Sex;
             Assert.AreEqual((byte)2, casted);
         }
 
         [Test]
         public void explicitly_to_int()
         {
-            var casted = (int)Svo.Gender;
+            var casted = (int)Svo.Sex;
             Assert.AreEqual(2, casted);
         }
 
         [TestCase(2, "Female")]
         [TestCase(null, "?")]
-        public void explicitly_to_nullable_int(int casted, Gender gender)
+        public void explicitly_to_nullable_int(int casted, Sex sex)
         {
-            Assert.AreEqual(casted, (int?)gender);
+            Assert.AreEqual(casted, (int?)sex);
         }
 
         [TestCase("Female", 2)]
         [TestCase("", null)]
-        public void implictly_from_nullable_int(Gender casted, int? value)
+        public void implictly_from_nullable_int(Sex casted, int? value)
         {
-            Gender gender = value;
-            Assert.AreEqual(casted, gender);
+            Sex sex = value;
+            Assert.AreEqual(casted, sex);
         }
 
         [TestCase("Female", 2)]
         [TestCase("?", 0)]
-        public void implictly_from_int(Gender casted, int value)
+        public void implictly_from_int(Sex casted, int value)
         {
-            Gender gender = value;
-            Assert.AreEqual(casted, gender);
+            Sex sex = value;
+            Assert.AreEqual(casted, sex);
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
+    [TestFixture(Ignore = "Wait for merge")]
     public class Supports_type_conversion
     {
         [Test]
         public void via_TypeConverter_registered_with_attribute()
-            => typeof(Gender).Should().HaveTypeConverterDefined();
+            => typeof(Sex).Should().HaveTypeConverterDefined();
 
         [Test]
         public void from_null_string()
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Gender), null);
+                //Converting.From(null).To<Sex>().Should().Be(Sex.Empty);
             }
         }
 
@@ -453,7 +397,7 @@ namespace Gender_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(default(Gender), string.Empty);
+                //Converting.From(string.Empty).To<Sex>().Should().Be(Sex.Empty);
             }
         }
 
@@ -462,7 +406,7 @@ namespace Gender_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertFromEquals(Svo.Gender, Svo.Gender.ToString());
+                //Converting.From("SvoValue").To<Sex>().Should().Be(Svo.Sex);
             }
         }
 
@@ -471,26 +415,32 @@ namespace Gender_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Gender.ToString(), Svo.Gender);
+                Converting.ToString().From(Svo.Sex).Should().Be("Female");
             }
         }
+
+        [Test]
+        public void from_int()
+            => Converting.From(17).To<Sex>().Should().Be(Svo.Sex);
+
+        [Test]
+        public void to_int()
+            => Converting.To<int>().From(Svo.Sex).Should().Be(2);
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Supports_JSON_serialization
     {
         [TestCase("?", "unknown")]
         [TestCase("Female", 2L)]
         [TestCase("Female", 2d)]
-        public void convention_based_deserialization(Gender expected, object json)
+        public void convention_based_deserialization(Sex expected, object json)
         {
-            var actual = JsonTester.Read<Gender>(json);
+            var actual = JsonTester.Read<Sex>(json);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase(null, "")]
-
-        public void convention_based_serialization(object expected, Gender svo)
+        public void convention_based_serialization(object expected, Sex svo)
         {
             var serialized = JsonTester.Write(svo);
             Assert.AreEqual(expected, serialized);
@@ -502,60 +452,57 @@ namespace Gender_specs
         [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
         {
-            var exception = Assert.Catch(() => JsonTester.Read<Gender>(json));
+            var exception = Assert.Catch(() => JsonTester.Read<Sex>(json));
             Assert.IsInstanceOf(exceptionType, exception);
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Supports_XML_serialization
     {
-
-        [TestCase("", "")]
-        [TestCase("Female", "F")]
-        public void using_XmlSerializer_to_serialize(string xml, Gender gender)
+        [Test]
+        public void using_XmlSerializer_to_serialize()
         {
-            Assert.AreEqual(xml, Serialize.Xml(gender));
+            var xml = Serialize.Xml(Svo.Sex);
+            xml.Should().Be("Female");
         }
 
         [Test]
         public void using_XmlSerializer_to_deserialize()
         {
-            var svo =Deserialize.Xml<Gender>("Female");
-            Assert.AreEqual(Svo.Gender, svo);
+            var svo = Deserialize.Xml<Sex>("Female");
+            Svo.Sex.Should().Be(svo);
         }
 
         [Test]
         public void using_DataContractSerializer()
         {
-            var round_tripped = SerializeDeserialize.DataContract(Svo.Gender);
-            Assert.AreEqual(Svo.Gender, round_tripped);
+            var round_tripped = SerializeDeserialize.DataContract(Svo.Sex);
+            Svo.Sex.Should().Be(round_tripped);
         }
 
         [Test]
         public void as_part_of_a_structure()
         {
-            var structure = XmlStructure.New(Svo.Gender);
+            var structure = XmlStructure.New(Svo.Sex);
             var round_tripped = SerializeDeserialize.Xml(structure);
-            Assert.AreEqual(structure, round_tripped);
+            structure.Should().Be(round_tripped);
         }
 
         [Test]
         public void has_no_custom_XML_schema()
         {
-            IXmlSerializable obj = Svo.Gender;
+            IXmlSerializable obj = Svo.Sex;
             Assert.IsNull(obj.GetSchema());
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Is_Open_API_data_type
     {
-        internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Gender)).FirstOrDefault();
+        internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Sex)).FirstOrDefault();
         [Test]
         public void with_description()
         {
-            Assert.AreEqual("Gender as specified by ISO/IEC 5218.", Attribute.Description);
+            Assert.AreEqual("Sex as specified by ISO/IEC 5218.", Attribute.Description);
         }
 
         [Test]
@@ -567,7 +514,7 @@ namespace Gender_specs
         [Test]
         public void has_format()
         {
-            Assert.AreEqual("gender", Attribute.Format);
+            Assert.AreEqual("sex", Attribute.Format);
         }
 
         [Test]
@@ -583,32 +530,30 @@ namespace Gender_specs
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Supports_binary_serialization
     {
         [Test]
         public void using_BinaryFormatter()
         {
-            var round_tripped = SerializeDeserialize.Binary(Svo.Gender);
-            Assert.AreEqual(Svo.Gender, round_tripped);
+            var round_tripped = SerializeDeserialize.Binary(Svo.Sex);
+            Svo.Sex.Should().Be(round_tripped);
         }
 
         [Test]
-        public void storing_byte_in_SerializationInfo()
+        public void storing_Byte_in_SerializationInfo()
         {
-            var info = Serialize.GetInfo(Svo.Gender);
-            Assert.AreEqual((byte)4, info.GetByte("Value"));
+            var info = Serialize.GetInfo(Svo.Sex);
+            info.GetByte("Value").Should().Be((byte)4);
         }
     }
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
     public class Debugger
     {
         [TestCase("{empty}", "")]
         [TestCase("Not known", "?")]
         [TestCase("Female", "Female")]
-        public void has_custom_display(object display, Gender svo)
-            => svo.Should().HaveDebuggerDisplay(display);
+        public void has_custom_display(object display, Sex svo)
+           => svo.Should().HaveDebuggerDisplay(display);
     }
 }
 

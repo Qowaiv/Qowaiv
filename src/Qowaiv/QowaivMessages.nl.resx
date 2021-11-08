@@ -88,4 +88,7 @@
   <data name="FormatExceptionMonthSpan" xml:space="preserve">
     <value>Geen geldige duur in maanden</value>
   </data>
+  <data name="FormatExceptionSex" xml:space="preserve">
+    <value>Geen geldig geslacht</value>
+  </data>
 </root>

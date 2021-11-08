@@ -413,7 +413,7 @@ namespace System.Linq
 
         /// <summary>Gets the average Elo.</summary>
         [Pure]
-        public static Elo Avarage(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
+        public static Elo Average(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
 
         /// <summary>Computes the average of a sequence of stream sizes.</summary>
         [Pure]

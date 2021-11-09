@@ -87,6 +87,7 @@ public static class Svo
         {
                 typeof(FormattingArguments),
                 typeof(Secret),
+                typeof(CryptographicSeed),
                 typeof(Hash),
         });
 }

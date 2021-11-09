@@ -1,6 +1,8 @@
 ﻿global using FluentAssertions;
 global using NUnit.Framework;
 global using Qowaiv;
+global using Qowaiv.Conversion.Security;
+global using Qowaiv.Conversion.Security.Cryptography;
 global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Financial;
 global using Qowaiv.Formatting;
@@ -29,6 +31,7 @@ global using System.Globalization;
 global using System.Linq;
 global using System.Reflection;
 global using System.Runtime.Serialization;
+global using System.Security.Cryptography;
 global using System.Text;
 global using System.Text.RegularExpressions;
 global using System.Xml.Serialization;

@@ -14,7 +14,6 @@ using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Net;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace Qowaiv

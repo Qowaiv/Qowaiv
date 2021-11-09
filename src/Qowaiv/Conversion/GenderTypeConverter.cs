@@ -1,13 +1,10 @@
-﻿using System.Diagnostics.Contracts;
-using System.Globalization;
+﻿namespace Qowaiv.Conversion;
 
-namespace Qowaiv.Conversion
+/// <summary>Provides a conversion for a Gender.</summary>
+public class GenderTypeConverter : SvoTypeConverter<Gender>
 {
-    /// <summary>Provides a conversion for a Gender.</summary>
-    public class GenderTypeConverter : SvoTypeConverter<Gender>
-    {
-        /// <inheritdoc/>
-        [Pure]
-        protected override Gender FromString(string str, CultureInfo culture) => Gender.Parse(str, culture);
-    }
+    /// <inheritdoc/>
+    [Pure]
+    protected override Gender FromString(string str, CultureInfo culture) => Gender.Parse(str, culture);
 }
+

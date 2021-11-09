@@ -55,6 +55,9 @@ dotnet_diagnostic.S2328.severity = none
 # S3376: Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3376.severity = none
 
+# S3903: Types should be defined in named namespaces
+dotnet_diagnostic.S3903.severity = none
+
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none
 dotnet_diagnostic.S2437.severity = warning

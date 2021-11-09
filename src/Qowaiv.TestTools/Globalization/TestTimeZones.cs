@@ -35,8 +35,6 @@ namespace Qowaiv.TestTools.Globalization
             TimeZoneInfo.AdjustmentRule[] adjustmentRules,
             bool disableDaylightSavingTime)
         {
-            //var ctors = typeof(TimeZoneInfo).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-            //var pars = ctors[1].GetParameters();
             var ctor = typeof(TimeZoneInfo).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
                 .First(ct => ct.GetParameters() is { Length: 8 } pars
                     && pars[0].ParameterType == typeof(string)

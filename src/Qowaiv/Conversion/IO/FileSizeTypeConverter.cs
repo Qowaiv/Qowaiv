@@ -1,22 +1,20 @@
 ﻿using Qowaiv.IO;
-using System.Diagnostics.Contracts;
-using System.Globalization;
 
-namespace Qowaiv.Conversion.IO
+namespace Qowaiv.Conversion.IO;
+
+/// <summary>Provides a conversion for a stream size.</summary>
+public class StreamSizeTypeConverter : NumericTypeConverter<StreamSize, long>
 {
-    /// <summary>Provides a conversion for a stream size.</summary>
-    public class StreamSizeTypeConverter : NumericTypeConverter<StreamSize, long>
-    {
-        /// <inheritdoc/>
-        [Pure]
-        protected override StreamSize FromRaw(long raw) => raw;
+    /// <inheritdoc/>
+    [Pure]
+    protected override StreamSize FromRaw(long raw) => raw;
 
-        /// <inheritdoc/>
-        [Pure]
-        protected override StreamSize FromString(string str, CultureInfo culture) => StreamSize.Parse(str, culture);
+    /// <inheritdoc/>
+    [Pure]
+    protected override StreamSize FromString(string str, CultureInfo culture) => StreamSize.Parse(str, culture);
 
-        /// <inheritdoc/>
-        [Pure]
-        protected override long ToRaw(StreamSize svo) => (long)svo;
-    }
+    /// <inheritdoc/>
+    [Pure]
+    protected override long ToRaw(StreamSize svo) => (long)svo;
 }
+

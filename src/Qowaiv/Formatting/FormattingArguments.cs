@@ -1,158 +1,151 @@
-﻿using System;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Globalization;
-using System.Runtime.Serialization;
+﻿namespace Qowaiv.Formatting;
 
-namespace Qowaiv.Formatting
+/// <summary>Represents formatting arguments.</summary>
+[DebuggerDisplay("{DebuggerDisplay}")]
+[Serializable]
+public struct FormattingArguments : ISerializable, IEquatable<FormattingArguments>
 {
-    /// <summary>Represents formatting arguments.</summary>
-    [DebuggerDisplay("{DebuggerDisplay}")]
-    [Serializable]
-    public struct FormattingArguments : ISerializable, IEquatable<FormattingArguments>
+    /// <summary>Represents empty/not set formatting arguments.</summary>
+    public static readonly FormattingArguments None;
+
+    /// <summary>Initializes a new instance of new formatting arguments.</summary>
+    /// <param name="format">
+    /// The format.
+    /// </param>
+    /// <param name="formatProvider">
+    /// The format provider.
+    /// </param>
+    public FormattingArguments(string format, IFormatProvider formatProvider)
     {
-        /// <summary>Represents empty/not set formatting arguments.</summary>
-        public static readonly FormattingArguments None;
+        Format = format;
+        FormatProvider = formatProvider;
+    }
 
-        /// <summary>Initializes a new instance of new formatting arguments.</summary>
-        /// <param name="format">
-        /// The format.
-        /// </param>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-        public FormattingArguments(string format, IFormatProvider formatProvider)
+    /// <summary>Initializes a new instance of new formatting arguments.</summary>
+    /// <param name="formatProvider">
+    /// The format provider.
+    /// </param>
+
+    public FormattingArguments(IFormatProvider formatProvider) : this(null, formatProvider) { }
+
+    /// <summary>Initializes a new instance of new formatting arguments.</summary>
+    /// <param name="format">
+    /// The format.
+    /// </param>
+    public FormattingArguments(string format) : this(format, null) { }
+
+    /// <summary>Gets the format.</summary>
+    public string Format { get; }
+
+    /// <summary>Gets the format provider.</summary>
+    public IFormatProvider FormatProvider { get; }
+
+    /// <summary>Formats the object using the formatting arguments.</summary>
+    /// <param name="obj">
+    /// The IFormattable object to get the formatted string representation from.
+    /// </param>
+    /// <returns>
+    /// A formatted string representing the object.
+    /// </returns>
+    [Pure]
+    public string ToString(IFormattable obj)
+    {
+        if (obj == null)
         {
-            Format = format;
-            FormatProvider = formatProvider;
-        }
-
-        /// <summary>Initializes a new instance of new formatting arguments.</summary>
-        /// <param name="formatProvider">
-        /// The format provider.
-        /// </param>
-
-        public FormattingArguments(IFormatProvider formatProvider) : this(null, formatProvider) { }
-
-        /// <summary>Initializes a new instance of new formatting arguments.</summary>
-        /// <param name="format">
-        /// The format.
-        /// </param>
-        public FormattingArguments(string format) : this(format, null) { }
-
-        /// <summary>Gets the format.</summary>
-        public string Format { get; }
-
-        /// <summary>Gets the format provider.</summary>
-        public IFormatProvider FormatProvider { get; }
-
-        /// <summary>Formats the object using the formatting arguments.</summary>
-        /// <param name="obj">
-        /// The IFormattable object to get the formatted string representation from.
-        /// </param>
-        /// <returns>
-        /// A formatted string representing the object.
-        /// </returns>
-        [Pure]
-        public string ToString(IFormattable obj)
-        {
-            if (obj == null)
-            {
 #pragma warning disable S2225
-                // "ToString()" method should not return null
-                // if the origin is null, it should not become string.Empty.
-                return null;
+            // "ToString()" method should not return null
+            // if the origin is null, it should not become string.Empty.
+            return null;
 #pragma warning restore S2225
-            }
-            return obj.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
         }
+        return obj.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
+    }
 
-        /// <summary>Formats the object using the formatting arguments.</summary>
-        /// <param name="obj">
-        /// The object to get the formatted string representation from.
-        /// </param>
-        /// <returns>
-        /// A formatted string representing the object.
-        /// </returns>
-        /// <remarks>
-        /// If the object does not implement IFormattable, the ToString() will be used.
-        /// </remarks>
-        [Pure]
-        public string ToString(object obj)
-            => obj is IFormattable formattable
-            ? ToString(formattable)
-            : obj?.ToString();
+    /// <summary>Formats the object using the formatting arguments.</summary>
+    /// <param name="obj">
+    /// The object to get the formatted string representation from.
+    /// </param>
+    /// <returns>
+    /// A formatted string representing the object.
+    /// </returns>
+    /// <remarks>
+    /// If the object does not implement IFormattable, the ToString() will be used.
+    /// </remarks>
+    [Pure]
+    public string ToString(object obj)
+        => obj is IFormattable formattable
+        ? ToString(formattable)
+        : obj?.ToString();
 
-        /// <summary>Initializes a new instance of formatting arguments based on the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        private FormattingArguments(SerializationInfo info, StreamingContext context)
+    /// <summary>Initializes a new instance of formatting arguments based on the serialization info.</summary>
+    /// <param name="info">The serialization info.</param>
+    /// <param name="context">The streaming context.</param>
+    private FormattingArguments(SerializationInfo info, StreamingContext context)
+    {
+        Guard.NotNull(info, nameof(info));
+        Format = info.GetString(nameof(Format));
+        FormatProvider = (IFormatProvider)info.GetValue(nameof(FormatProvider), typeof(IFormatProvider));
+    }
+
+    /// <summary>Adds the underlying property of formatting arguments to the serialization info.</summary>
+    /// <param name="info">The serialization info.</param>
+    /// <param name="context">The streaming context.</param>
+    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        Guard.NotNull(info, nameof(info));
+        info.AddValue(nameof(Format), Format);
+        info.AddValue(nameof(FormatProvider), FormatProvider);
+    }
+
+    /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments for debug purposes.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string DebuggerDisplay
+        => string.Format(CultureInfo.InvariantCulture, "Format: '{0}', Provider: {1}", Format, FormatProvider);
+
+    /// <inheritdoc />
+    [Pure]
+    public override bool Equals(object obj) => obj is FormattingArguments args && Equals(args);
+
+    /// <inheritdoc />
+    [Pure]
+    public bool Equals(FormattingArguments other)
+    {
+        if (Format != other.Format)
         {
-            Guard.NotNull(info, nameof(info));
-            Format = info.GetString(nameof(Format));
-            FormatProvider = (IFormatProvider)info.GetValue(nameof(FormatProvider), typeof(IFormatProvider));
+            return false;
         }
-
-        /// <summary>Adds the underlying property of formatting arguments to the serialization info.</summary>
-        /// <param name="info">The serialization info.</param>
-        /// <param name="context">The streaming context.</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        else if (FormatProvider is null)
         {
-            Guard.NotNull(info, nameof(info));
-            info.AddValue(nameof(Format), Format);
-            info.AddValue(nameof(FormatProvider), FormatProvider);
+            return other.FormatProvider is null;
         }
+        else return FormatProvider.Equals(other.FormatProvider);
+    }
 
-        /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments for debug purposes.</summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay
-            => string.Format(CultureInfo.InvariantCulture, "Format: '{0}', Provider: {1}", Format, FormatProvider);
+    /// <inheritdoc />
+    [Pure]
+    public override int GetHashCode()
+    {
+        int hash = (Format == null) ? 0 : Format.GetHashCode();
 
-        /// <inheritdoc />
-        [Pure]
-        public override bool Equals(object obj) => obj is FormattingArguments args && Equals(args);
-
-        /// <inheritdoc />
-        [Pure]
-        public bool Equals(FormattingArguments other)
+        if (FormatProvider != null)
         {
-            if (Format != other.Format)
-            {
-                return false;
-            }
-            else if (FormatProvider is null)
-            {
-                return other.FormatProvider is null;
-            }
-            else return FormatProvider.Equals(other.FormatProvider);
+            hash ^= FormatProvider.GetHashCode();
         }
+        return hash;
+    }
 
-        /// <inheritdoc />
-        [Pure]
-        public override int GetHashCode()
-        {
-            int hash = (Format == null) ? 0 : Format.GetHashCode();
+    /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand</param>
+    [Pure]
+    public static bool operator ==(FormattingArguments left, FormattingArguments right)
+        => left.Equals(right);
 
-            if (FormatProvider != null)
-            {
-                hash ^= FormatProvider.GetHashCode();
-            }
-            return hash;
-        }
-
-        /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        [Pure]
-        public static bool operator ==(FormattingArguments left, FormattingArguments right)
-            => left.Equals(right);
-
-        /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand</param>
-        public static bool operator !=(FormattingArguments left, FormattingArguments right)
-        {
-            return !(left == right);
-        }
+    /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand</param>
+    public static bool operator !=(FormattingArguments left, FormattingArguments right)
+    {
+        return !(left == right);
     }
 }

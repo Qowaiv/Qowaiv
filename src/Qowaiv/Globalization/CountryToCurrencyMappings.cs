@@ -1,12 +1,11 @@
 using Qowaiv.Financial;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Qowaiv.Globalization
+namespace Qowaiv.Globalization;
+
+internal partial struct CountryToCurrency
 {
-    internal partial struct CountryToCurrency
-    {
-        public static readonly ReadOnlyCollection<CountryToCurrency> All = new(new List<CountryToCurrency>
+    public static readonly ReadOnlyCollection<CountryToCurrency> All = new(new List<CountryToCurrency>
         {
             new(Country.AD, Currency.ADP),
             new(Country.AD, Currency.EUR, new Date(2002, 01, 01)),
@@ -321,5 +320,4 @@ namespace Qowaiv.Globalization
             new(Country.HVBF, Currency.XOF),
             new(Country.BQAQ, Currency.GBP),
         });
-    }
 }

@@ -116,7 +116,7 @@ namespace Qowaiv.Security.Cryptography
         /// A byte array describing a cryptographic seed.
         /// </param >
         [Pure]
-        public static CryptographicSeed Create(byte[] val)
+        public static CryptographicSeed Create(params byte[] val)
             => val == null || val.Length == 0
             ? Empty
             : new CryptographicSeed(val.ToArray());

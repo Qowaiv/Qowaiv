@@ -13,7 +13,7 @@ namespace Security.Secret_specs
     public class Cryptographic_seed_can_be_created
     {
         [Test]
-        public void from_empty()
+        public void from_empty_secret()
         {
             var algorithm = MD5.Create();
             Secret.Empty.ComputeHash(algorithm).ToByteArray()
@@ -21,7 +21,7 @@ namespace Security.Secret_specs
         }
 
         [Test]
-        public void from_none_empty()
+        public void from_none_empty_secret()
         {
             var algorithm = MD5.Create();
             Svo.Secret.ComputeHash(algorithm).ToByteArray()
@@ -35,6 +35,10 @@ namespace Security.Secret_specs
         [TestCase(true, "")]
         public void IsEmpty_returns(bool result, Secret svo)
             => svo.IsEmpty().Should().Be(result);
+
+        [Test]
+        public void value_accessable_via_Value_method()
+            => Svo.Secret.Value().Should().Be("Ken sent me!");
     }
    
     public class Has_constant

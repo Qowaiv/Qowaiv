@@ -461,7 +461,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("#,##0", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("#,##0", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '123,456,789', format: '#,##0'";
 
             Assert.AreEqual(exp, act);
@@ -716,90 +716,6 @@ namespace Qowaiv.UnitTests
             var exp = 4;
             Assert.AreEqual(exp, act);
         }
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_HouseNumber_IsTrue()
-            => typeof(HouseNumber).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromDateTime_HouseNumber_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(HouseNumber), typeof(DateTime));
-        }
-       
-        [Test]
-        public void CanConvertFromString_HouseNumber_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(HouseNumber));
-        }
-
-        [Test]
-        public void CanConvertToString_HouseNumber_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(HouseNumber));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_HouseNumberEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_HouseNumberEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        [Test]
-        public void ConvertFromUnderlyingType_NullableInt64_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(HouseNumber.Empty, default(long?));
-        }
-        [Test]
-        public void ConvertFrom_Int_Successful()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
-        }
-
-        [Test]
-        public void ConvertToUnderlyingType_Int_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
-        }
-        [Test]
-        public void ConvertToUnderlyingType_NullableInt_Successful()
-        {
-            TypeConverterAssert.ConvertToEquals(default(int?), HouseNumber.Empty);
-        }
-
         #endregion
 
         #region IsValid tests

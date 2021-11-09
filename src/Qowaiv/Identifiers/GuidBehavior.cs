@@ -97,7 +97,7 @@ public abstract class GuidBehavior : IdentifierBehavior
         }
         else if (Guid.TryParse(str, out Guid guid))
         {
-            id = guid == Guid.Empty ? null : (object)guid;
+            id = guid == Guid.Empty ? null : guid;
             return true;
         }
         else if (Uuid.Pattern.IsMatch(str))
@@ -134,12 +134,12 @@ public abstract class GuidBehavior : IdentifierBehavior
     {
         if (obj is Guid guid)
         {
-            id = guid == Guid.Empty ? null : (object)guid;
+            id = guid == Guid.Empty ? null : guid;
             return true;
         }
         else if (obj is Uuid uuid)
         {
-            id = uuid == Uuid.Empty ? null : (object)(Guid)uuid;
+            id = uuid == Uuid.Empty ? null : (Guid)uuid;
             return true;
         }
         else if (obj is string str && TryParse(str, out id))
@@ -163,6 +163,20 @@ public abstract class GuidBehavior : IdentifierBehavior
         => sourceType == typeof(Guid)
         || sourceType == typeof(Uuid)
         || base.CanConvertFrom(context, sourceType);
+
+    /// <inheritdoc />
+    [Pure]
+    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        => destinationType == typeof(Guid)
+        || destinationType == typeof(Uuid)
+        || base.CanConvertTo(context, destinationType);
+
+    /// <inheritdoc />
+    [Pure]
+    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        => destinationType == typeof(Uuid) && value is Guid guid
+        ? (Uuid)guid
+        : base.ConvertTo(context, culture, value, destinationType);
 
     [Pure]
     private static Guid Id(object obj) => obj is Guid guid ? guid : Guid.Empty;

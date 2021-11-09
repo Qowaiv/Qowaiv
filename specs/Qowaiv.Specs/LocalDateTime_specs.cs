@@ -1,10 +1,4 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Qowaiv;
-using Qowaiv.Hashing;
-using Qowaiv.Specs;
-
-namespace LocalDateTime_specs
+﻿namespace LocalDateTime_specs
 {
     public class Is_equal_by_value
     {
@@ -49,5 +43,71 @@ namespace LocalDateTime_specs
                 svo.GetHashCode().Should().Be(hash);
             }
         }
+    }
+
+    public class Supports_type_conversion
+    {
+        [Test]
+        public void via_TypeConverter_registered_with_attribute()
+            => typeof(Date).Should().HaveTypeConverterDefined();
+
+        [Test]
+        public void from_null_string()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Converting.From<string>(null).To<LocalDateTime>().Should().Be(default);
+            }
+        }
+
+        [Test]
+        public void from_string()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Converting.From("2017-06-11 06:15:00").To<LocalDateTime>().Should().Be(Svo.LocalDateTime);
+            }
+        }
+
+        [Test]
+        public void to_string()
+        {
+            using (TestCultures.En_GB.Scoped())
+            {
+                Converting.ToString().From(Svo.LocalDateTime).Should().Be("11/06/2017 06:15:00");
+            }
+        }
+
+        [Test]
+        public void from_DateTime()
+            => Converting.From(Svo.DateTime).To<LocalDateTime>().Should().Be(Svo.LocalDateTime);
+
+        [Test]
+        public void from_DateTimeOffset()
+            => Converting.From(Svo.DateTimeOffset).To<LocalDateTime>().Should().Be(Svo.LocalDateTime);
+
+        [Test]
+        public void from_Date()
+            => Converting.From(Svo.Date).To<LocalDateTime>().Should().Be(new LocalDateTime(2017, 06, 11));
+
+        [Test]
+        public void from_WeekDate()
+            => Converting.From(Svo.WeekDate).To<LocalDateTime>().Should().Be(new LocalDateTime(2017, 06, 11));
+
+        [Test]
+        public void to_DateTime()
+            => Converting.To<DateTime>().From(Svo.LocalDateTime).Should().Be(Svo.DateTime);
+
+        [Test]
+        public void to_DateTimeOffset()
+            => Converting.To<DateTimeOffset>().From(Svo.LocalDateTime).Should().Be(Svo.DateTimeOffset);
+           
+        [Test]
+        public void to_Date()
+            => Converting.To<Date>().From(Svo.LocalDateTime).Should().Be(Svo.Date);
+
+        [Test]
+        public void to_WeekDate()
+            => Converting.To<WeekDate>().From(Svo.LocalDateTime).Should().Be(Svo.WeekDate);
     }
 }

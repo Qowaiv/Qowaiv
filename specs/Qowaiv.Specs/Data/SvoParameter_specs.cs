@@ -1,10 +1,5 @@
-﻿using FluentAssertions;
-using FluentAssertions.Primitives;
-using NUnit.Framework;
-using Qowaiv;
+﻿using FluentAssertions.Primitives;
 using Qowaiv.Data;
-using Qowaiv.Financial;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -33,8 +28,8 @@ namespace Data.SvoParameter_specs
             .Should().Be("par", DBNull.Value, DbType.String);
 
         [Test]
-        public void Gender_as_byte()
-            => SvoParameter.CreateForSql("par", Gender.Female)
+        public void Sex_as_byte()
+            => SvoParameter.CreateForSql("par", Sex.Female)
             .Should().Be("par", (byte)2, DbType.Byte);
 
         [Test]

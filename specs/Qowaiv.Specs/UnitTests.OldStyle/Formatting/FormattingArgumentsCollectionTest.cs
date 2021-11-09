@@ -194,7 +194,7 @@ namespace Qowaiv.UnitTests.Formatting
         {
             using (CultureInfoScope.NewInvariant())
             {
-                var collection = new FormattingArgumentsCollection(new UnitTestFormatProvider())
+                var collection = new FormattingArgumentsCollection(FormatProvider.CustomFormatter)
                 {
                     { typeof(Date), "yyyy-MM-dd HH:mm" },
                     { typeof(decimal), "0.000" }

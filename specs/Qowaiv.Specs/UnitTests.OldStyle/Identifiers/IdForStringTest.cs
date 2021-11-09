@@ -308,7 +308,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("S", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("S", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: 'Qowaiv-ID', format: 'S'";
             Assert.AreEqual(exp, act);
         }
@@ -434,64 +434,6 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var x = Assert.Catch<ArgumentException>(() => TestStruct.CompareTo(new object()));
             Assert.AreEqual("Argument must be Id<ForString>. (Parameter 'obj')", x.Message);
-        }
-
-        [Test]
-        public void ConverterExists_IdForString_IsTrue()
-            => typeof(Id<ForString>).Should().HaveTypeConverterDefined();
-        
-        [Test]
-        public void CanNotConvertToInt32_IdForString_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(Id<ForString>), typeof(int));
-        }
-
-        [Test]
-        public void CanConvertFromString_IdForString_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Id<ForString>));
-        }
-
-        [Test]
-        public void CanConvertToString_IdForString_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Id<ForString>));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_IdForStringEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Id<ForString>.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_IdForString_Empty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Id<ForString>.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
         }
 
         [Test]

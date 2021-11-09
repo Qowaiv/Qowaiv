@@ -269,7 +269,7 @@ namespace Sex_specs
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.Sex.ToString("s", new UnitTestFormatProvider());
+            var formatted = Svo.Sex.ToString("s", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: '♀', format: 's'", formatted);
         }
 
@@ -388,7 +388,7 @@ namespace Sex_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                //Converting.From(null).To<Sex>().Should().Be(Sex.Empty);
+                Converting.From<string>(null).To<Sex>().Should().Be(Sex.Empty);
             }
         }
 
@@ -397,7 +397,7 @@ namespace Sex_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                //Converting.From(string.Empty).To<Sex>().Should().Be(Sex.Empty);
+               Converting.From(string.Empty).To<Sex>().Should().Be(Sex.Empty);
             }
         }
 
@@ -406,7 +406,7 @@ namespace Sex_specs
         {
             using (TestCultures.En_GB.Scoped())
             {
-                //Converting.From("SvoValue").To<Sex>().Should().Be(Svo.Sex);
+                Converting.From("SvoValue").To<Sex>().Should().Be(Svo.Sex);
             }
         }
 

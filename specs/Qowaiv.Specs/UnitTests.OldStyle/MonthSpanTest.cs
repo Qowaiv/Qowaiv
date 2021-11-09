@@ -263,7 +263,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("0.00", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("0.00", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '69.00', format: '0.00'";
             Assert.AreEqual(exp, act);
         }
@@ -493,58 +493,6 @@ namespace Qowaiv.UnitTests
             var exp = 69;
             var act = (int)TestStruct;
             Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void ConverterExists_MonthSpan_IsTrue()
-            => typeof(MonthSpan).Should().HaveTypeConverterDefined();
-        
-        [Test]
-        public void CanConvertFromString_MonthSpan_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(MonthSpan));
-        }
-
-        [Test]
-        public void CanConvertToString_MonthSpan_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(MonthSpan));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_MonthSpanEmpty()
-        {
-            using (new CultureInfoScope("en-GB"))
-            {
-                TypeConverterAssert.ConvertFromEquals(MonthSpan.Zero, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_MonthSpanEmpty()
-        {
-            using (new CultureInfoScope("en-GB"))
-            {
-                TypeConverterAssert.ConvertFromEquals(MonthSpan.Zero, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (new CultureInfoScope("en-GB"))
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (new CultureInfoScope("en-GB"))
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
         }
 
         [TestCase(null)]

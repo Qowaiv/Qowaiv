@@ -287,16 +287,13 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     {
         result = default;
 
-        if (string.IsNullOrEmpty(s))
-        {
-            return true;
-        }
-        if (behavior.TryParse(s, out var id))
+        if (string.IsNullOrEmpty(s)) return true;
+        else if (behavior.TryParse(s, out var id))
         {
             result = new Id<TIdentifier>(id);
             return true;
         }
-        return false;
+        else return false;
     }
 
     /// <summary>Creates the identifier from a JSON string.</summary>

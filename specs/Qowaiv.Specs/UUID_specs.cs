@@ -427,7 +427,7 @@ Actual:   [{(string.Join(", ", act))}]");
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.Uuid.ToString("B", new UnitTestFormatProvider());
+            var formatted = Svo.Uuid.ToString("B", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: '{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}', format: 'B'", formatted);
         }
 

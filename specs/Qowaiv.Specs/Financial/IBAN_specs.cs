@@ -1,17 +1,12 @@
-﻿using NUnit.Framework;
-using Qowaiv.Financial;
-using Qowaiv.Globalization;
-using System.Linq;
+﻿namespace IBAN_specs;
 
-namespace IBAN_specs
+public class Supported
 {
-    public class Supported
+    [Test]
+    public void by_103_Countries()
     {
-        [Test]
-        public void by_103_Countries()
+        var supported = new[]
         {
-            var supported = new[] 
-            {
                 Country.AD,
                 Country.AE,
                 Country.AL,
@@ -117,94 +112,137 @@ namespace IBAN_specs
                 Country.XK,
             };
 
-            Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
-            Assert.AreEqual(103, InternationalBankAccountNumber.Supported.Count);
+        Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
+        Assert.AreEqual(103, InternationalBankAccountNumber.Supported.Count);
+    }
+}
+
+public class Supports_type_conversion
+{
+    [Test]
+    public void via_TypeConverter_registered_with_attribute()
+        => typeof(InternationalBankAccountNumber).Should().HaveTypeConverterDefined();
+
+    [Test]
+    public void from_null_string()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Converting.From<string>(null).To<InternationalBankAccountNumber>().Should().Be(InternationalBankAccountNumber.Empty);
         }
     }
 
-    public class Input_is_invalid_when
+    [Test]
+    public void from_empty_string()
     {
-        [Test]
-        public void @null()
+        using (TestCultures.En_GB.Scoped())
         {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid(null));
-        }
-
-        [Test]
-        public void string_empty()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid(string.Empty));
-        }
-
-        [Test]
-        public void country_does_not_exist()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX950210000000693123456"));
-        }
-
-        [Test]
-        public void shorter_than_12()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB007"));
-        }
-
-        [Test]
-        public void longer_than_32()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20 INGB 0070 3456 7890 1234 5678 9012 1"));
-        }
-
-        [Test]
-        public void other_than_alpha_numeric()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("AE20 #$12 0070 3456 7890 1234 5678"));
-        }
-
-        [Test]
-        public void country_does_not_support_IBAN()
-        {
-            Assert.IsFalse(InternationalBankAccountNumber.IsValid("US20INGB0001234567"));
+            Converting.From(string.Empty).To<InternationalBankAccountNumber>().Should().Be(InternationalBankAccountNumber.Empty);
         }
     }
 
-    public class Input_is_valid
+    [Test]
+    public void from_string()
     {
-        [Test]
-        public void for_unknown_IBANs()
+        using (TestCultures.En_GB.Scoped())
         {
-            Assert.IsTrue(InternationalBankAccountNumber.IsValid("?"));
+            Converting.From("NL20 INGB 0001 2345 67").To<InternationalBankAccountNumber>().Should().Be(Svo.Iban);
         }
+    }
 
-        [Test]
-        public void despite_irregular_whitespacing()
+    [Test]
+    public void to_string()
+    {
+        using (TestCultures.En_GB.Scoped())
         {
-            Assert.IsTrue(InternationalBankAccountNumber.IsValid("AE950 2100000006  93123456"));
+            Converting.ToString().From(Svo.Iban).Should().Be("NL20INGB0001234567");
         }
+    }
+}
 
-        [TestCaseSource(nameof(ValidForCountry))]
-        public void for_country(Country country, string input)
+public class Input_is_invalid_when
+{
+    [Test]
+    public void @null()
+    {
+        Assert.IsFalse(InternationalBankAccountNumber.IsValid(null));
+    }
+
+    [Test]
+    public void string_empty()
+    {
+        Assert.IsFalse(InternationalBankAccountNumber.IsValid(string.Empty));
+    }
+
+    [Test]
+    public void country_does_not_exist()
+    {
+        Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX950210000000693123456"));
+    }
+
+    [Test]
+    public void shorter_than_12()
+    {
+        Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB007"));
+    }
+
+    [Test]
+    public void longer_than_32()
+    {
+        Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20 INGB 0070 3456 7890 1234 5678 9012 1"));
+    }
+
+    [Test]
+    public void other_than_alpha_numeric()
+    {
+        Assert.IsFalse(InternationalBankAccountNumber.IsValid("AE20 #$12 0070 3456 7890 1234 5678"));
+    }
+
+    [Test]
+    public void country_does_not_support_IBAN()
+    {
+        Assert.IsFalse(InternationalBankAccountNumber.IsValid("US20INGB0001234567"));
+    }
+}
+
+public class Input_is_valid
+{
+    [Test]
+    public void for_unknown_IBANs()
+    {
+        Assert.IsTrue(InternationalBankAccountNumber.IsValid("?"));
+    }
+
+    [Test]
+    public void despite_irregular_whitespacing()
+    {
+        Assert.IsTrue(InternationalBankAccountNumber.IsValid("AE950 2100000006  93123456"));
+    }
+
+    [TestCaseSource(nameof(ValidForCountry))]
+    public void for_country(Country country, string input)
+    {
+        if (string.IsNullOrEmpty(input))
         {
-            if (string.IsNullOrEmpty(input))
-            {
-                Assert.Inconclusive($"No IBAN test for {country.EnglishName} ({country.IsoAlpha2Code}).");
-            }
-            else
-            {
-                Assert.IsTrue(InternationalBankAccountNumber.TryParse(input, out InternationalBankAccountNumber iban),
-                    $"{input} is invalid for {country.EnglishName}.");
-                Assert.AreEqual(country, iban.Country);
-            }
+            Assert.Inconclusive($"No IBAN test for {country.EnglishName} ({country.IsoAlpha2Code}).");
         }
-
-        [Test]
-        public void for_country_has_tests_for_all_supported()
+        else
         {
-            var supported = ValidForCountry.Select(array => array[0]).Cast<Country>();
-            Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
+            Assert.IsTrue(InternationalBankAccountNumber.TryParse(input, out InternationalBankAccountNumber iban),
+                $"{input} is invalid for {country.EnglishName}.");
+            Assert.AreEqual(country, iban.Country);
         }
+    }
 
-        private static readonly object[][] ValidForCountry = new object[][]
-        {
+    [Test]
+    public void for_country_has_tests_for_all_supported()
+    {
+        var supported = ValidForCountry.Select(array => array[0]).Cast<Country>();
+        Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
+    }
+
+    private static readonly object[][] ValidForCountry = new object[][]
+    {
            new object[]{ Country.AD, "AD12 0001 2030 2003 5910 0100" },
            new object[]{ Country.AE, "AE95 0210 0000 0069 3123 456" },
            new object[]{ Country.AL, "AL47 2121 1009 0000 0002 3569 8741" },
@@ -308,6 +346,5 @@ namespace IBAN_specs
            new object[]{ Country.VA, "VA59 0011 2300 0012 3456 78" },
            new object[]{ Country.VG, "VG96 VPVG 0000 0123 4567 8901" },
            new object[]{ Country.XK, "XK05 1212 0123 4567 8906" },
-        };
-    }
+    };
 }

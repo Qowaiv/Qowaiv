@@ -311,7 +311,7 @@ namespace Year_specs
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.Year.ToString("#,##0", new UnitTestFormatProvider());
+            var formatted = Svo.Year.ToString("#,##0", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: '1,979', format: '#,##0'", formatted);
         }
 

@@ -366,7 +366,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("S", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("S", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: 'q7VaD8sSKUaHjbGLiLmlBA', format: 'S'";
             Assert.AreEqual(exp, act);
         }
@@ -500,82 +500,6 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var x = Assert.Catch<ArgumentException>(() => TestStruct.CompareTo(new object()));
             Assert.AreEqual("Argument must be Id<ForGuid>. (Parameter 'obj')", x.Message);
-        }
-
-        [Test]
-        public void ConverterExists_IdForGuid_IsTrue()
-            => typeof(Id<ForGuid>).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromInt32_IdForGuid_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Id<ForGuid>), typeof(int));
-        }
-
-        [Test]
-        public void CanNotConvertToInt32_IdForGuid_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(Id<ForGuid>), typeof(int));
-        }
-
-        [Test]
-        public void CanConvertFromString_IdForGuid_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Id<ForGuid>));
-        }
-
-        [Test]
-        public void CanConvertToString_IdForGuid_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Id<ForGuid>));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_IdForGuidEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Id<ForGuid>.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_Guid_TestStruct()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"));
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_IdForGuid_Empty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Id<ForGuid>.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        [Test]
-        public void ConvertTo_Guid_TestStruct()
-        {
-            TypeConverterAssert.ConvertToEquals(Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), TestStruct);
         }
 
         [Test]

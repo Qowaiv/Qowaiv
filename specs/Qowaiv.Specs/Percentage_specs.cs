@@ -275,7 +275,7 @@ namespace Percentage_specs
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.Percentage.ToString("0.000%", new UnitTestFormatProvider());
+            var formatted = Svo.Percentage.ToString("0.000%", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: '17.510%', format: '0.000%'", formatted);
         }
 

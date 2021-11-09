@@ -340,7 +340,7 @@ namespace Month_specs
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.Month.ToString("f", new UnitTestFormatProvider());
+            var formatted = Svo.Month.ToString("f", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: 'February', format: 'f'", formatted);
         }
 

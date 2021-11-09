@@ -307,7 +307,7 @@ namespace Gender_specs
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.Gender.ToString("s", new UnitTestFormatProvider());
+            var formatted = Svo.Gender.ToString("s", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: '♀', format: 's'", formatted);
         }
 
@@ -413,50 +413,6 @@ namespace Gender_specs
         {
             Gender gender = value;
             Assert.AreEqual(casted, gender);
-        }
-    }
-
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
-    public class Supports_type_conversion
-    {
-        [Test]
-        public void via_TypeConverter_registered_with_attribute()
-            => typeof(Gender).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void from_null_string()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(default(Gender), null);
-            }
-        }
-
-        [Test]
-        public void from_empty_string()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(default(Gender), string.Empty);
-            }
-        }
-
-        [Test]
-        public void from_string()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Svo.Gender, Svo.Gender.ToString());
-            }
-        }
-
-        [Test]
-        public void to_string()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(Svo.Gender.ToString(), Svo.Gender);
-            }
         }
     }
 

@@ -318,7 +318,7 @@ namespace Qowaiv.UnitTests.Financial
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("[f]", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("[f]", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '[nl20 ingb 0001 2345 67]', format: '[f]'";
 
             Assert.AreEqual(exp, act);
@@ -578,73 +578,6 @@ namespace Qowaiv.UnitTests.Financial
             var exp = Country.NL;
             var act = TestStruct.Country;
             Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_InternationalBankAccountNumber_IsTrue()
-            => typeof(InternationalBankAccountNumber).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromInt32_InternationalBankAccountNumber_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(InternationalBankAccountNumber), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_InternationalBankAccountNumber_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(InternationalBankAccountNumber), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_InternationalBankAccountNumber_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(InternationalBankAccountNumber));
-        }
-
-        [Test]
-        public void CanConvertToString_InternationalBankAccountNumber_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(InternationalBankAccountNumber));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_InternationalBankAccountNumberEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumber.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_InternationalBankAccountNumberEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumber.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(InternationalBankAccountNumberTest.TestStruct, InternationalBankAccountNumberTest.TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(InternationalBankAccountNumberTest.TestStruct.ToString(), InternationalBankAccountNumberTest.TestStruct);
-            }
         }
 
         #endregion

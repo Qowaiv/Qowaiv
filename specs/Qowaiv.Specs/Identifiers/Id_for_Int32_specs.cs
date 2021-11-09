@@ -1,39 +1,53 @@
-﻿using NUnit.Framework;
-using Qowaiv.Specs;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System.Globalization;
+﻿namespace Identifiers.Id_for_Int32_specs;
 
-namespace Identifiers.Id_for_Int32_specs
+public class Supports_type_conversion
 {
-    public class Supports_type_conversion
+    [Test]
+    public void via_TypeConverter_registered_with_attribute()
+        => typeof(Int32Id).Should().HaveTypeConverterDefined();
+
+    [Test]
+    public void from_null_string()
     {
-        [Test]
-        public void from_int()
+        using (TestCultures.En_GB.Scoped())
         {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Svo.Int32Id, 17);
-            }
-        }
-
-        [Test]
-        public void from_string_reperesenting_number()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Svo.Int32Id, "17");
-            }
-        }
-
-        [Test]
-        public void from_string_not_reperesenting_number()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Svo.Int32Id, "PREFIX17");
-            }
+            Converting.From<string>(null).To<Int32Id>().Should().Be(Int32Id.Empty);
         }
     }
+
+    [Test]
+    public void from_empty_string()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Converting.From(string.Empty).To<Int32Id>().Should().Be(Int32Id.Empty);
+        }
+    }
+
+    [Test]
+    public void from_string()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Converting.From("PREFIX17").To<Int32Id>().Should().Be(Svo.Int32Id);
+        }
+    }
+
+    [Test]
+    public void to_string()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Converting.ToString().From(Svo.Int32Id).Should().Be("17");
+        }
+    }
+
+    [Test]
+    public void from_int()
+        => Converting.From(17).To<Int32Id>().Should().Be(Svo.Int32Id);
+
+    [Test]
+    public void to_int()
+        => Converting.To<int>().From(Svo.Int32Id).Should().Be(17);
 }
 

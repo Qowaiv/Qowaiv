@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 namespace System
 {
     /// <summary>Extensions on <see cref="short"/>.</summary>
-    public static class Qowaivshort16Extensions
+    public static class QowaivInt16Extensions
     {
         /// <summary>Adds the specified percentage to the <see cref="short"/>.</summary>
         /// <param name="num">

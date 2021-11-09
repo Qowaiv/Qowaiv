@@ -41,7 +41,7 @@ namespace Json.Open_API_specs
                 };
             }
 
-            Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented, new JsonSerializerSettings
+            Console.WriteLine(JsonConvert.SerializeObject(all, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
             }));

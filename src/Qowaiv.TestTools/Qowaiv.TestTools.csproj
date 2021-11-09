@@ -20,8 +20,4 @@
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Diagnostics\" />
-  </ItemGroup>
-
 </Project>

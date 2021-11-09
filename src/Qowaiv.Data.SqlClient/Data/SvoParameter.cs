@@ -1,106 +1,99 @@
-﻿using Qowaiv.Reflection;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace Qowaiv.Data
+namespace Qowaiv.Data;
+
+/// <summary>Factory class for creating database parameters.</summary>
+public static class SvoParameter
 {
-    /// <summary>Factory class for creating database parameters.</summary>
-    public static class SvoParameter
+    /// <summary>Creates a <see cref="SqlParameter"/> based on the single value object.</summary>
+    /// <param name="parameterName">
+    /// The name of the parameter to map.
+    /// </param>
+    /// <param name="value">
+    /// An <see cref="object"/>that is the value of the <see cref="SqlParameter"/>.
+    /// </param>
+    /// <returns>
+    /// A <see cref="SqlParameter"/> with a converted value if the value is a 
+    /// single value object, otherwise with a non-converted value.
+    /// </returns>
+    [Pure]
+    public static SqlParameter CreateForSql(string parameterName, object value)
     {
-        /// <summary>Creates a <see cref="SqlParameter"/> based on the single value object.</summary>
-        /// <param name="parameterName">
-        /// The name of the parameter to map.
-        /// </param>
-        /// <param name="value">
-        /// An <see cref="object"/>that is the value of the <see cref="SqlParameter"/>.
-        /// </param>
-        /// <returns>
-        /// A <see cref="SqlParameter"/> with a converted value if the value is a 
-        /// single value object, otherwise with a non-converted value.
-        /// </returns>
-        [Pure]
-        public static SqlParameter CreateForSql(string parameterName, object value)
+        // If null, return DBNull.
+        if (value == null) return new SqlParameter(parameterName, DBNull.Value);
+        else
         {
-            // If null, return DBNull.
-            if (value == null) return new SqlParameter(parameterName, DBNull.Value);
-            else
-            {
-                var sourceType = value.GetType();
+            var sourceType = value.GetType();
 
-                lock (locker)
+            lock (locker)
+            {
+                if (!Attributes.TryGetValue(sourceType, out SingleValueObjectAttribute attr))
                 {
-                    if (!Attributes.TryGetValue(sourceType, out SingleValueObjectAttribute attr))
-                    {
-                        attr = sourceType.GetCustomAttribute<SingleValueObjectAttribute>();
-                    }
-                    // No attribute, so not supported.
-                    if (attr == null)
-                    {
-                        Attributes[sourceType] = null;
-                        return new SqlParameter(parameterName, value);
-                    }
-                    else if (IsDbNullValue(value, sourceType, attr))
-                    {
-                        return new SqlParameter(parameterName, DBNull.Value);
-                    }
-                    else
-                    {
-                        MethodInfo cast = GetCast(sourceType, attr);
-                        var casted = cast.Invoke(null, new[] { value });
-                        return new SqlParameter(parameterName, casted);
-                    }
+                    attr = sourceType.GetCustomAttribute<SingleValueObjectAttribute>();
+                }
+                // No attribute, so not supported.
+                if (attr == null)
+                {
+                    Attributes[sourceType] = null;
+                    return new SqlParameter(parameterName, value);
+                }
+                else if (IsDbNullValue(value, sourceType, attr))
+                {
+                    return new SqlParameter(parameterName, DBNull.Value);
+                }
+                else
+                {
+                    MethodInfo cast = GetCast(sourceType, attr);
+                    var casted = cast.Invoke(null, new[] { value });
+                    return new SqlParameter(parameterName, casted);
                 }
             }
         }
-
-        /// <summary>Returns true if the value should be represented by a <see cref="DBNull.Value"/>, otherwise false.</summary>
-        [Pure]
-        private static bool IsDbNullValue(object value, Type sourceType, SingleValueObjectAttribute attr)
-        {
-            if (attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue))
-            {
-                var defaultValue = Activator.CreateInstance(sourceType);
-                return Equals(value, defaultValue);
-            }
-            else return false;
-        }
-
-        /// <summary>Gets the cast needed for casting to the database type.</summary>
-        /// <exception cref="InvalidCastException">
-        /// If the required cast is not defined.
-        /// </exception>
-        [Pure]
-        private static MethodInfo GetCast(Type sourceType, SingleValueObjectAttribute attr)
-        {
-            if (!Casts.TryGetValue(sourceType, out MethodInfo cast))
-            {
-                var returnType = attr.DatabaseType ?? attr.UnderlyingType;
-                var methods = sourceType.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                    .Where(m =>
-                        m.IsHideBySig &&
-                        m.IsSpecialName &&
-                        m.GetParameters().Length == 1 &&
-                        m.ReturnType == returnType)
-                    .ToList();
-
-                if (methods.Any())
-                {
-                    cast = methods[0];
-                    Casts[sourceType] = cast;
-                }
-                else throw new InvalidCastException(string.Format(QowaivMessages.InvalidCastException_FromTo, sourceType, returnType));
-            }
-            return cast;
-        }
-
-        private static readonly Dictionary<Type, SingleValueObjectAttribute> Attributes = new();
-        private static readonly Dictionary<Type, MethodInfo> Casts = new();
-
-        /// <summary>The locker for adding a casts and unsupported types.</summary>
-        private static readonly object locker = new();
     }
+
+    /// <summary>Returns true if the value should be represented by a <see cref="DBNull.Value"/>, otherwise false.</summary>
+    [Pure]
+    private static bool IsDbNullValue(object value, Type sourceType, SingleValueObjectAttribute attr)
+    {
+        if (attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue))
+        {
+            var defaultValue = Activator.CreateInstance(sourceType);
+            return Equals(value, defaultValue);
+        }
+        else return false;
+    }
+
+    /// <summary>Gets the cast needed for casting to the database type.</summary>
+    /// <exception cref="InvalidCastException">
+    /// If the required cast is not defined.
+    /// </exception>
+    [Pure]
+    private static MethodInfo GetCast(Type sourceType, SingleValueObjectAttribute attr)
+    {
+        if (!Casts.TryGetValue(sourceType, out MethodInfo cast))
+        {
+            var returnType = attr.DatabaseType ?? attr.UnderlyingType;
+            var methods = sourceType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Where(m =>
+                    m.IsHideBySig &&
+                    m.IsSpecialName &&
+                    m.GetParameters().Length == 1 &&
+                    m.ReturnType == returnType)
+                .ToList();
+
+            if (methods.Any())
+            {
+                cast = methods[0];
+                Casts[sourceType] = cast;
+            }
+            else throw new InvalidCastException(string.Format(QowaivMessages.InvalidCastException_FromTo, sourceType, returnType));
+        }
+        return cast;
+    }
+
+    private static readonly Dictionary<Type, SingleValueObjectAttribute> Attributes = new();
+    private static readonly Dictionary<Type, MethodInfo> Casts = new();
+
+    /// <summary>The locker for adding a casts and unsupported types.</summary>
+    private static readonly object locker = new();
 }

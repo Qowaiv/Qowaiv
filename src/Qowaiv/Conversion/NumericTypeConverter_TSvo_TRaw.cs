@@ -1,64 +1,59 @@
 ﻿using Qowaiv.Reflection;
-using System;
-using System.ComponentModel;
-using System.Diagnostics.Contracts;
-using System.Globalization;
 
-namespace Qowaiv.Conversion
+namespace Qowaiv.Conversion;
+
+/// <summary>Provides a conversion for numeric types.</summary>
+public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, TRaw>
+    where TSvo : struct, IFormattable
+    where TRaw : struct, IFormattable
 {
-    /// <summary>Provides a conversion for numeric types.</summary>
-    public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, TRaw>
-        where TSvo : struct, IFormattable
-        where TRaw : struct, IFormattable
+    /// <inheritdoc />
+    [Pure]
+    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
+
+    /// <inheritdoc />
+    [Pure]
+    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        => IsConvertable(destinationType) || base.CanConvertTo(context, destinationType);
+
+    /// <inheritdoc />
+    [Pure]
+    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
     {
-        /// <inheritdoc />
-        [Pure]
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-            => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
-
-        /// <inheritdoc />
-        [Pure]
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-            => IsConvertable(destinationType) || base.CanConvertTo(context, destinationType);
-
-        /// <inheritdoc />
-        [Pure]
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        if (value is null)
         {
-            if (value is null)
-            {
-                return Activator.CreateInstance<TSvo>();
-            }
-            else if (IsConvertable(value.GetType()))
-            {
-                var raw = (TRaw)Convert.ChangeType(value, typeof(TRaw));
-                return FromRaw(raw);
-            }
-            else return base.ConvertFrom(context, culture, value);
+            return Activator.CreateInstance<TSvo>();
         }
-
-        /// <inheritdoc />
-        [Pure]
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        else if (IsConvertable(value.GetType()))
         {
-            Guard.NotNull(destinationType, nameof(destinationType));
-
-            // If the value is null or default value.
-            if (QowaivType.IsNullOrDefaultValue(value))
-            {
-                return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
-            }
-            else if (IsConvertable(destinationType))
-            {
-                var svo = Guard.IsInstanceOf<TSvo>(value, nameof(value));
-                var raw = ToRaw(svo);
-                return Convert.ChangeType(raw, QowaivType.GetNotNullableType(destinationType));
-            }
-            else return base.ConvertTo(context, culture, value, destinationType);
+            var raw = (TRaw)Convert.ChangeType(value, typeof(TRaw));
+            return FromRaw(raw);
         }
-
-        /// <summary>Returns true if the conversion is supported.</summary>
-        [Pure]
-        protected virtual bool IsConvertable(Type type) => type != typeof(TSvo) && QowaivType.IsNumeric(type);
+        else return base.ConvertFrom(context, culture, value);
     }
+
+    /// <inheritdoc />
+    [Pure]
+    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    {
+        Guard.NotNull(destinationType, nameof(destinationType));
+
+        // If the value is null or default value.
+        if (QowaivType.IsNullOrDefaultValue(value))
+        {
+            return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
+        }
+        else if (IsConvertable(destinationType))
+        {
+            var svo = Guard.IsInstanceOf<TSvo>(value, nameof(value));
+            var raw = ToRaw(svo);
+            return Convert.ChangeType(raw, QowaivType.GetNotNullableType(destinationType));
+        }
+        else return base.ConvertTo(context, culture, value, destinationType);
+    }
+
+    /// <summary>Returns true if the conversion is supported.</summary>
+    [Pure]
+    protected virtual bool IsConvertable(Type type) => type != typeof(TSvo) && QowaivType.IsNumeric(type);
 }

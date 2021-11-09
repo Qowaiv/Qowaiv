@@ -1,13 +1,8 @@
 ﻿#pragma warning disable S5773 // Types allowed to be deserialized should be restricted
 // Test code, os no risk
 
-using System.Diagnostics.Contracts;
 using System.IO;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Qowaiv.TestTools
 {

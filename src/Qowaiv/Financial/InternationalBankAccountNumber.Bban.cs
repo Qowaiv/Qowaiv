@@ -3,45 +3,38 @@
 // See README.md => Sortable
 
 using Qowaiv.Globalization;
-using Qowaiv.Text;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text.RegularExpressions;
 
-namespace Qowaiv.Financial
+namespace Qowaiv.Financial;
+
+public partial struct InternationalBankAccountNumber
 {
-    public partial struct InternationalBankAccountNumber
+    /// <summary>Constructs a <see cref="Regex"/> based on its BBAN pattern.</summary>
+    [Pure]
+    private static KeyValuePair<Country, Regex> Bban(Country country, string bban, int? checksum = default)
     {
-        /// <summary>Constructs a <see cref="Regex"/> based on its BBAN pattern.</summary>
-        [Pure]
-        private static KeyValuePair<Country, Regex> Bban(Country country, string bban, int? checksum = default)
+        var blocks = bban.Split(',').Select(b => b.Buffer());
+        var pattern = CharBuffer.Empty(64)
+            .Add('^')
+            .Add(country.IsoAlpha2Code)
+            .Add(checksum.HasValue ? checksum.Value.ToString("00") : "[0-9][0-9]");
+
+        foreach (var block in blocks)
         {
-            var blocks = bban.Split(',').Select(b => b.Buffer());
-            var pattern = CharBuffer.Empty(64)
-                .Add('^')
-                .Add(country.IsoAlpha2Code)
-                .Add(checksum.HasValue ? checksum.Value.ToString("00") : "[0-9][0-9]");
+            var type = block.Last();
 
-            foreach(var block in blocks)
+            if (!int.TryParse(block.RemoveFromEnd(1), out int length) && type == ']')
             {
-                var type = block.Last();
-
-                if (!int.TryParse(block.RemoveFromEnd(1), out int length) && type == ']')
-                {
-                    pattern.Add(block.RemoveFromStart(1));
-                }
-                else switch (type)
+                pattern.Add(block.RemoveFromStart(1));
+            }
+            else switch (type)
                 {
                     case 'n': pattern.Add("[0-9]").Add('{').Add(length.ToString()).Add('}'); break;
                     case 'a': pattern.Add("[A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
                     case 'c': pattern.Add("[0-9A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
                     default: throw new FormatException();
                 }
-            }
-
-            return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Add('$'), RegexOptions.Compiled));
         }
+
+        return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Add('$'), RegexOptions.Compiled));
     }
 }

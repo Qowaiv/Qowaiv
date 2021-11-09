@@ -1,58 +1,54 @@
-﻿using Qowaiv.Formatting;
-using System.Diagnostics.Contracts;
+﻿namespace System;
 
-namespace System
+/// <summary>Extensions on <see cref="IFormattable"/>.</summary>
+public static class QowaivFormattableExtensions
 {
-    /// <summary>Extensions on <see cref="IFormattable"/>.</summary>
-    public static class QowaivFormattableExtensions
+    /// <summary>Formats the object using the formatting arguments.</summary>
+    /// <param name="formattable">
+    /// The object to format.
+    /// </param>
+    /// <param name="arguments">
+    /// The formatting arguments
+    /// </param>
+    /// <returns>
+    /// A formatted string representing the object.
+    /// </returns>
+    [Pure]
+    public static string ToString(this IFormattable formattable, FormattingArguments arguments)
     {
-        /// <summary>Formats the object using the formatting arguments.</summary>
-        /// <param name="formattable">
-        /// The object to format.
-        /// </param>
-        /// <param name="arguments">
-        /// The formatting arguments
-        /// </param>
-        /// <returns>
-        /// A formatted string representing the object.
-        /// </returns>
-        [Pure]
-        public static string ToString(this IFormattable formattable, FormattingArguments arguments)
+        if (formattable is null)
         {
-            if (formattable is null)
-            {
 #pragma warning disable S2225
-                // "ToString()" method should not return null
-                // if the origin is null, it should not become string.Empty.
-                return null;
+            // "ToString()" method should not return null
+            // if the origin is null, it should not become string.Empty.
+            return null;
 #pragma warning restore S2225
-            }
-            return arguments.ToString(formattable);
         }
+        return arguments.ToString(formattable);
+    }
 
-        /// <summary>Formats the object using the formatting arguments collection.</summary>
-        /// <param name="formattable">
-        /// The object to format.
-        /// </param>
-        /// <param name="argumentsCollection">
-        /// The formatting arguments collection.
-        /// </param>
-        /// <returns>
-        /// A formatted string representing the object.
-        /// </returns>
-        [Pure]
-        public static string ToString(this IFormattable formattable, FormattingArgumentsCollection argumentsCollection)
+    /// <summary>Formats the object using the formatting arguments collection.</summary>
+    /// <param name="formattable">
+    /// The object to format.
+    /// </param>
+    /// <param name="argumentsCollection">
+    /// The formatting arguments collection.
+    /// </param>
+    /// <returns>
+    /// A formatted string representing the object.
+    /// </returns>
+    [Pure]
+    public static string ToString(this IFormattable formattable, FormattingArgumentsCollection argumentsCollection)
+    {
+        if (formattable == null)
         {
-            if (formattable == null)
-            {
-#pragma warning disable S2225 
-                // "ToString()" method should not return null
-                // if the origin is null, it should not become string.Empty.
-                return null;
+#pragma warning disable S2225
+            // "ToString()" method should not return null
+            // if the origin is null, it should not become string.Empty.
+            return null;
 #pragma warning restore S2225
-            }
-
-            return (argumentsCollection ?? new FormattingArgumentsCollection()).ToString(formattable);
         }
+
+        return (argumentsCollection ?? new FormattingArgumentsCollection()).ToString(formattable);
     }
 }

@@ -3,21 +3,18 @@
 // See README.md => Sortable
 
 using Qowaiv.Globalization;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text.RegularExpressions;
 
-namespace Qowaiv.Financial
+namespace Qowaiv.Financial;
+
+public partial struct InternationalBankAccountNumber
 {
-    public partial struct InternationalBankAccountNumber
+    /// <summary>Gets the localized patterns.</summary>
+    /// <remarks>
+    /// See http://en.wikipedia.org/wiki/International_Bank_Account_Number.
+    /// </remarks>
+    private static readonly Dictionary<Country, Regex> LocalizedPatterns = new[]
     {
-        /// <summary>Gets the localized patterns.</summary>
-        /// <remarks>
-        /// See http://en.wikipedia.org/wiki/International_Bank_Account_Number.
-        /// </remarks>
-        private static readonly Dictionary<Country, Regex> LocalizedPatterns = new[]
-        {
             Bban(Country.AD, "8n,12c"),
             Bban(Country.AE, "3n,16n"),
             Bban(Country.AL, "8n,16c"),
@@ -122,9 +119,8 @@ namespace Qowaiv.Financial
             Bban(Country.VG, "4c,16n"),
             Bban(Country.XK, "4n,10n,2n"),
         }
-        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-        /// <summary>A list with countries supporting IBAN.</summary>
-        public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(LocalizedPatterns.Select(kvp => kvp.Key).ToList());
-    }
+    /// <summary>A list with countries supporting IBAN.</summary>
+    public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(LocalizedPatterns.Select(kvp => kvp.Key).ToList());
 }

@@ -1,5 +1,4 @@
-﻿using Qowaiv.Diagnostics.Contracts;
-using Qowaiv.Globalization;
+﻿using Qowaiv.Globalization;
 
 namespace System.Globalization
 {

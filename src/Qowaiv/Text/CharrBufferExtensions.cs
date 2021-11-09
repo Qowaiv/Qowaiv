@@ -1,13 +1,10 @@
-﻿using System.Diagnostics.Contracts;
+﻿namespace Qowaiv.Text;
 
-namespace Qowaiv.Text
+internal static class CharrBufferExtensions
 {
-    internal static class CharrBufferExtensions
-    {
-        [Pure]
-        public static CharBuffer Buffer(this string str)
-           => str is null
-           ? CharBuffer.Empty(0)
-           : new CharBuffer(str);
-    }
+    [Pure]
+    public static CharBuffer Buffer(this string str)
+       => str is null
+       ? CharBuffer.Empty(0)
+       : new CharBuffer(str);
 }

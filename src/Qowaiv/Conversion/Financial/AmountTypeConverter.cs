@@ -1,22 +1,20 @@
 ﻿using Qowaiv.Financial;
-using System.Diagnostics.Contracts;
-using System.Globalization;
 
-namespace Qowaiv.Conversion.Financial
+namespace Qowaiv.Conversion.Financial;
+
+/// <summary>Provides a conversion for an Amount.</summary>
+public class AmountTypeConverter : NumericTypeConverter<Amount, decimal>
 {
-    /// <summary>Provides a conversion for an Amount.</summary>
-    public class AmountTypeConverter : NumericTypeConverter<Amount, decimal>
-    {
-        /// <inheritdoc/>
-        [Pure]
-        protected override Amount FromRaw(decimal raw) => (Amount)raw;
+    /// <inheritdoc/>
+    [Pure]
+    protected override Amount FromRaw(decimal raw) => (Amount)raw;
 
-        /// <inheritdoc/>
-        [Pure]
-        protected override Amount FromString(string str, CultureInfo culture) => Amount.Parse(str, culture);
+    /// <inheritdoc/>
+    [Pure]
+    protected override Amount FromString(string str, CultureInfo culture) => Amount.Parse(str, culture);
 
-        /// <inheritdoc/>
-        [Pure]
-        protected override decimal ToRaw(Amount svo) => (decimal)svo;
-    }
+    /// <inheritdoc/>
+    [Pure]
+    protected override decimal ToRaw(Amount svo) => (decimal)svo;
 }
+

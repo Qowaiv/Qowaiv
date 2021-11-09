@@ -276,7 +276,7 @@ namespace YesNo_specs
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.YesNo.ToString("B", new UnitTestFormatProvider());
+            var formatted = Svo.YesNo.ToString("B", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: 'True', format: 'B'", formatted);
         }
 

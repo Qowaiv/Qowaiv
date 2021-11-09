@@ -450,7 +450,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: 'application/x-chess-pgn', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);
@@ -778,73 +778,6 @@ namespace Qowaiv.UnitTests.Web
             var exp = InternetMediaSuffixType.xml;
             var act = mime.Suffix;
             Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_InternetMediaType_IsTrue()
-            => typeof(InternetMediaType).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromInt32_InternetMediaType_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(InternetMediaType), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_InternetMediaType_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(InternetMediaType), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_InternetMediaType_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(InternetMediaType));
-        }
-
-        [Test]
-        public void CanConvertToString_InternetMediaType_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(InternetMediaType));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_InternetMediaTypeEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(InternetMediaType.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_InternetMediaTypeEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(InternetMediaType.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
         }
 
         #endregion

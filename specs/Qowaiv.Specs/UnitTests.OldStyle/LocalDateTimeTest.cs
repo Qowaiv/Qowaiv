@@ -289,7 +289,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("M:d & h:m", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("M:d & h:m", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '6:13 & 10:10', format: 'M:d & h:m'";
 
             Assert.AreEqual(exp, act);
@@ -507,55 +507,6 @@ namespace Qowaiv.UnitTests
             var exp = new LocalDateTime(1976, 06, 13, 22, 10, 05, 001);
 
             Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
-        #region Type converter tests
-
-        [Test]
-        public void ConverterExists_LocalDateTime_IsTrue()
-            => typeof(LocalDateTime).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromInt32_LocalDateTime_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(LocalDateTime), typeof(Int32));
-        }
-        [Test]
-        public void CanNotConvertToInt32_LocalDateTime_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(LocalDateTime), typeof(Int32));
-        }
-
-        [Test]
-        public void CanConvertFromString_LocalDateTime_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(LocalDateTime));
-        }
-
-        [Test]
-        public void CanConvertToString_LocalDateTime_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(LocalDateTime));
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(LocalDateTimeTest.TestStructNoMilliseconds, LocalDateTimeTest.TestStructNoMilliseconds.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(LocalDateTimeTest.TestStruct.ToString(), LocalDateTimeTest.TestStruct);
-            }
         }
 
         #endregion

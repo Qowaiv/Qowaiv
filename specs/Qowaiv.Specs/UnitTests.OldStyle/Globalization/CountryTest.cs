@@ -448,7 +448,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("e (3)", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("e (3)", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: 'Holy See (VAT)', format: 'e (3)'";
 
             Assert.AreEqual(exp, act);

@@ -343,7 +343,7 @@ namespace Qowaiv.Security.Cryptography.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("Unit Test Format", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: 'Qowaig==', format: 'Unit Test Format'";
 
             Assert.AreEqual(exp, act);

@@ -321,7 +321,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("[0] 0/000", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("[0] 0/000", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '-4 1/017', format: '[0] 0/000'";
             Assert.AreEqual(exp, act);
         }
@@ -561,66 +561,6 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void ConverterExists_Fraction_IsTrue()
             => typeof(Fraction).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void CanNotConvertFromInt32_Fraction_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertFrom(typeof(Fraction), typeof(int));
-        }
-
-        [Test]
-        public void CanNotConvertToInt32_Fraction_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(Fraction), typeof(int));
-        }
-
-        [Test]
-        public void CanConvertFromString_Fraction_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Fraction));
-        }
-
-        [Test]
-        public void CanConvertToString_Fraction_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Fraction));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_FractionEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Fraction.Zero, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_FractionEmpty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Fraction.Zero, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
 
         [TestCase(null, "Null")]
         [TestCase("", "String.Empty")]

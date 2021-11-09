@@ -269,7 +269,7 @@ namespace Postal_code_specs
         [Test]
         public void custom_format_provider_is_applied()
         {
-            var formatted = Svo.PostalCode.ToString("SomeFormat", new UnitTestFormatProvider());
+            var formatted = Svo.PostalCode.ToString("SomeFormat", FormatProvider.CustomFormatter);
             Assert.AreEqual("Unit Test Formatter, value: 'H0H0H0', format: 'SomeFormat'", formatted);
         }
 

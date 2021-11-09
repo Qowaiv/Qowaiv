@@ -338,7 +338,7 @@ namespace Qowaiv.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("d_M_yy", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("d_M_yy", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '14_2_70', format: 'd_M_yy'";
 
             Assert.AreEqual(exp, act);

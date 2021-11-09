@@ -363,7 +363,7 @@ namespace Qowaiv.UnitTests.Identifiers
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("#,##0.0", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("#,##0.0", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '123,456,789.0', format: '#,##0.0'";
             Assert.AreEqual(exp, act);
         }
@@ -497,76 +497,6 @@ namespace Qowaiv.UnitTests.Identifiers
         {
             var x = Assert.Catch<ArgumentException>(() => TestStruct.CompareTo(new object()));
             Assert.AreEqual("Argument must be Id<ForInt32>. (Parameter 'obj')", x.Message);
-        }
-
-        [Test]
-        public void ConverterExists_IdForInt32_IsTrue()
-            => typeof(Id<ForInt32>).Should().HaveTypeConverterDefined();
-        
-        [Test]
-        public void CanNotConvertToGuid_IdForInt32_IsTrue()
-        {
-            TypeConverterAssert.CanNotConvertTo(typeof(Id<ForInt32>), typeof(Guid));
-        }
-
-        [Test]
-        public void CanConvertFromString_IdForInt32_IsTrue()
-        {
-            TypeConverterAssert.CanConvertFromString(typeof(Id<ForInt32>));
-        }
-
-        [Test]
-        public void CanConvertToString_IdForInt32_IsTrue()
-        {
-            TypeConverterAssert.CanConvertToString(typeof(Id<ForInt32>));
-        }
-
-        [Test]
-        public void ConvertFrom_StringNull_IdForInt32Empty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Id<ForInt32>.Empty, (string)null);
-            }
-        }
-
-        [Test]
-        public void ConvertFrom_Int_TestStruct()
-        {
-            TypeConverterAssert.ConvertFromEquals(TestStruct, 123456789);
-        }
-
-        [Test]
-        public void ConvertFrom_StringEmpty_IdForInt32_Empty()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(Id<ForInt32>.Empty, string.Empty);
-            }
-        }
-
-        [Test]
-        public void ConvertFromString_StringValue_TestStruct()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertFromEquals(TestStruct, TestStruct.ToString());
-            }
-        }
-
-        [Test]
-        public void ConvertToString_TestStruct_StringValue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                TypeConverterAssert.ConvertToStringEquals(TestStruct.ToString(), TestStruct);
-            }
-        }
-
-        [Test]
-        public void ConvertTo_Int_TestStruct()
-        {
-            TypeConverterAssert.ConvertToEquals(123456789, TestStruct);
         }
 
         [Test]

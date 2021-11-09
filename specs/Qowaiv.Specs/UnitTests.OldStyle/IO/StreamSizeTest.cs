@@ -306,7 +306,7 @@ namespace Qowaiv.UnitTests.IO
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("0.0 F", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("0.0 F", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '123.5 Megabyte', format: '0.0 F'";
 
             Assert.AreEqual(exp, act);

@@ -332,7 +332,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void ToString_CustomFormatter_SupportsCustomFormatting()
         {
-            var act = TestStruct.ToString("#.0", new UnitTestFormatProvider());
+            var act = TestStruct.ToString("#.0", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '42.2', format: '#.0'";
 
             Assert.AreEqual(exp, act);

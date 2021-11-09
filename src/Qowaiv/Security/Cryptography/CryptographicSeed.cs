@@ -1,178 +1,128 @@
-﻿#pragma warning disable S1210
-// "Equals" and the comparison operators should be overridden when implementing "IComparable"
-// See README.md => Sortable
+﻿using Qowaiv.Conversion.Security.Cryptography;
+using Qowaiv.Diagnostics;
+using Qowaiv.Hashing;
+using Qowaiv.Text;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Linq;
 
-using Qowaiv.Conversion.Security.Cryptography;
-
-namespace Qowaiv.Security.Cryptography;
-
-/// <summary>Represents a cryptographic seed.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
-[SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(byte[]))]
-[OpenApiDataType(description: "Base64 encoded cryptographic seed.", example: "Qowaiv==", type: "string", format: "cryptographic-seed", nullable: true)]
-[TypeConverter(typeof(CryptographicSeedTypeConverter))]
-public partial struct CryptographicSeed : ISerializable, IXmlSerializable, IFormattable, IEquatable<CryptographicSeed>, IComparable, IComparable<CryptographicSeed>
+namespace Qowaiv.Security.Cryptography
 {
-    /// <summary>Represents an empty/not set cryptographic seed.</summary>
-    public static readonly CryptographicSeed Empty;
-
-    /// <summary>Gets the length of the cryptographic seed.</summary>
-    public int Length => m_Value is null ? 0 : m_Value.Length;
-
-    /// <summary>Returns a byte array that contains the value of this instance.</summary>
-    [Pure]
-    public byte[] ToByteArray()
+    /// <summary>Represents a cryptographic seed.</summary>
+    [TypeConverter(typeof(CryptographicSeedTypeConverter))]
+    [DebuggerDisplay("{DebuggerDisplay}")]
+    public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     {
-        var clone = new byte[Length];
+        /// <summary>Represents an empty/not set cryptographic seed.</summary>
+        public static readonly CryptographicSeed Empty;
 
-        if (Length > 0)
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly byte[] m_Value;
+
+        private CryptographicSeed(byte[] value) => m_Value = value;
+
+        /// <summary>Returns true if the cryptographic seed is empty/not set.</summary>
+        [Pure]
+        public bool IsEmpty() => m_Value is null;
+
+        /// <summary>Gets a string representing this cryptographic seed.</summary>
+        [Pure]
+        public string Value() => Base64.ToString(m_Value);
+
+        /// <summary>Returns a byte array that contains the value of this instance.</summary>
+        [Pure]
+        public byte[] ToByteArray()
         {
-            Array.Copy(m_Value, clone, clone.Length);
-        }
-        return clone;
-    }
-
-    /// <summary>Serializes the cryptographic seed to a JSON node.</summary>
-    /// <returns>
-    /// The serialized JSON string.
-    /// </returns>
-    [Pure]
-    public string ToJson() => Length == 0 ? null : ToString(CultureInfo.InvariantCulture);
-
-    /// <summary>Returns a <see cref="string"/> that represents the current cryptographic seed for debug purposes.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay => IsEmpty()
-        ? DebugDisplay.Empty
-        : Base64.ToString(m_Value);
-
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current cryptographic seed.</summary>
-    /// <param name="format">
-    /// The format that describes the formatting.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The format provider.
-    /// </param>
-    [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        return Base64.ToString(m_Value);
-    }
-
-    /// <summary>Gets an XML string representation of the cryptographic seed.</summary>
-    [Pure]
-    private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
-
-    /// <inheritdoc />
-    [Pure]
-    public bool Equals(CryptographicSeed other)
-    {
-        if (Length == other.Length)
-        {
-            for (var i = 0; i < Length; i++)
+            if (m_Value is null || m_Value.Length == 0) return Array.Empty<byte>();
+            else
             {
-                if (!m_Value[i].Equals(other.m_Value[i])) { return false; }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /// <inheritdoc />
-    [Pure]
-    public override int GetHashCode()
-    {
-        var hash = 0;
-        for (var i = 0; i < Length; i++)
-        {
-            hash ^= m_Value[i] << ((i * 17) % 24);
-        }
-        return hash;
-    }
-
-    /// <inheritdoc />
-    [Pure]
-    public int CompareTo(CryptographicSeed other)
-    {
-        var minLength = Math.Min(Length, other.Length);
-
-        for (var i = 0; i < minLength; i++)
-        {
-            var compare = m_Value[i].CompareTo(other.m_Value[i]);
-            if (compare != 0)
-            {
-                return compare;
+                var clone = new byte[m_Value.Length];
+                Array.Copy(m_Value, clone, clone.Length);
+                return clone;
             }
         }
-        return Length.CompareTo(other.Length);
-    }
+       
+        /// <inheritdoc />
+        [Pure]
+        public override bool Equals(object obj) => obj is CryptographicSeed other && Equals(other);
 
-    /// <summary>Casts a cryptographic seed to a System.byte[].</summary>
-    public static explicit operator byte[](CryptographicSeed val) => val.ToByteArray();
+        /// <summary>Returns true if both are empty, otherwise false.</summary>
+        /// <remarks>
+        /// Secrets are supposed to be passed around, without knowing its content.
+        /// </remarks>
+        [Pure]
+        public bool Equals(CryptographicSeed other) => IsEmpty() && other.IsEmpty();
 
-    /// <summary>Casts a System.byte[] to a cryptographic seed.</summary>
-    public static explicit operator CryptographicSeed(byte[] bytes) => Create(bytes);
+        /// <inheritdoc />
+        [Pure]
+        public override int GetHashCode() => Hash.NotSupportedBy<CryptographicSeed>();
 
-    /// <summary>Converts the string to a cryptographic seed.
-    /// A return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="s">
-    /// A string containing a cryptographic seed to convert.
-    /// </param>
-    /// <param name="result">
-    /// The result of the parsing.
-    /// </param>
-    /// <returns>
-    /// True if the string was converted successfully, otherwise false.
-    /// </returns>
-    public static bool TryParse(string s, out CryptographicSeed result)
-    {
-        result = Empty;
-        if (string.IsNullOrEmpty(s))
+        /// <summary>Represents the cryptographic seed as "*****".</summary>
+        /// <remarks>
+        /// To prevent unintended exposure. 
+        /// </remarks>
+        [Pure]
+        public override string ToString() => m_Value is null ? string.Empty : "*****";
+
+        /// <summary>Converts the cryptographic seed to a JSON null node.</summary>
+        /// <remarks>
+        /// To prevent unintended exposure. 
+        /// </remarks>
+        [Pure]
+        public object ToJson() => null;
+
+        /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private string DebuggerDisplay => m_Value is null ? DebugDisplay.Empty : Value();
+
+        /// <summary>Creates a cryptographic seed from an UTF8 string.</summary >
+        /// <param name="str" >
+        /// A cryptographic seed describing a cryptographic seed.
+        /// </param >
+        [Pure]
+        public static CryptographicSeed Parse(string str)
+            => TryParse(str, out var seed)
+            ? seed
+            : throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
+
+        /// <summary>Converts the string to a cryptographic seed.
+        /// A return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="s">
+        /// A string containing a cryptographic seed to convert.
+        /// </param>
+        /// <param name="result">
+        /// The result of the parsing.
+        /// </param>
+        /// <returns>
+        /// True if the string was converted successfully, otherwise false.
+        /// </returns>
+        public static bool TryParse(string s, out CryptographicSeed result)
         {
-            return true;
+            result = Empty;
+            if (string.IsNullOrEmpty(s)) return true;
+            else if (Base64.TryGetBytes(s, out byte[] bytes))
+            {
+                result = Create(bytes);
+                return true;
+            }
+            else return false;
         }
 
-        if (Base64.TryGetBytes(s, out byte[] bytes))
-        {
-            result = Create(bytes);
-            return true;
-        }
-        return false;
+        /// <summary>Creates a cryptographic seed from a byte[].</summary>
+        /// <param name="val" >
+        /// A byte array describing a cryptographic seed.
+        /// </param >
+        [Pure]
+        public static CryptographicSeed Create(byte[] val)
+            => val == null || val.Length == 0
+            ? Empty
+            : new CryptographicSeed(val.ToArray());
+
+        /// <summary>Creates a cryptographic seed from a JSON string node.</summary>
+        [Pure]
+        public static CryptographicSeed FromJson(string json) => Parse(json);
     }
-
-    /// <summary>Creates a cryptographic seed from a byte[]. </summary >
-    /// <param name="val" >
-    /// A byte array describing a cryptographic seed.
-    /// </param >
-    [Pure]
-    public static CryptographicSeed Create(byte[] val)
-    {
-        if (val == null || val.Length == 0)
-        {
-            return Empty;
-        }
-        var bytes = new byte[val.Length];
-        Array.Copy(val, bytes, val.Length);
-
-        return new CryptographicSeed(bytes);
-    }
-
-    /// <summary>Creates a cryptographic seed from a GUID.</summary >
-    /// <param name="id" >
-    /// A GUID describing a cryptographic seed.
-    /// </param >
-    [Pure]
-    public static CryptographicSeed Create(Guid id) => Create(id.ToByteArray());
-
-    /// <summary>Creates a cryptographic seed from a UUID.</summary >
-    /// <param name="id" >
-    /// A UUID describing a cryptographic seed.
-    /// </param >
-    [Pure]
-    public static CryptographicSeed Create(Uuid id) => Create(id.ToByteArray());
 }

@@ -60,7 +60,7 @@ public static class Svo
     public static readonly Timestamp Timestamp = 1234567890L;
     public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
     public static readonly WeekDate WeekDate = new(2017, 23, 7);
-    public static readonly Year Year = 1979.Year();
+    public static readonly Year Year = 1979.CE();
     public static readonly YesNo YesNo = YesNo.Yes;
 
     /// <summary>PREFIX17</summary>

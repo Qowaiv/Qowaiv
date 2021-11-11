@@ -404,9 +404,9 @@ namespace Percentage_specs
     public class Casts
     {
         [Test]
-        public void explicitly_from_decimal()
+        public void immplictly_from_decimal()
         {
-            var casted = (Percentage)0.1751m;
+            Percentage casted = 0.1751m;
             Assert.AreEqual(Svo.Percentage, casted);
         }
 

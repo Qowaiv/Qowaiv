@@ -329,6 +329,9 @@ public partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IE
     [CLSCompliant(false)]
     public static Amount operator *(Amount amount, ushort factor) => amount.Multiply(factor);
 
+    /// <summary>Divides the amount by an other amount.</summary>
+    public static decimal operator /(Amount numerator, Amount denominator) => numerator.m_Value / denominator.m_Value;
+
     /// <summary>Divides the amount by the percentage.</summary>
     public static Amount operator /(Amount amount, Percentage p) => amount.Divide(p);
     /// <summary>Divides the amount by the factor.</summary>

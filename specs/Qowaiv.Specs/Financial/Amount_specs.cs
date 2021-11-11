@@ -58,4 +58,14 @@ namespace Financial.Amount_specs
             => Converting.To<double>().From(Svo.Amount).Should().Be(42.17);
     }
 
+
+    public class Has_operators
+    {
+        [Test]
+        public void to_divide_amount_by_amount_as_decimal()
+        {
+            var ratio = Svo.Amount / 2.Amount();
+            ratio.Should().Be(21.085m);
+        }
+    }
 }

@@ -170,10 +170,10 @@ var p = Percentage.Parse("3.14");  // Parse: 3.14%;
 var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
 var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
 var p = 3.14.Percent(); // Extension on double: 3.14%;
+Percentage p = 0.0314m; // Implicit casting from decimal: 3.14%.
 
-// Casting
+// Explicit casting
 var p = (Percentage)0.500; // 50%
-var p = (Percentage)0.33m; // 33%
 
 // Manipulation
 var p = 13.2.Percent();

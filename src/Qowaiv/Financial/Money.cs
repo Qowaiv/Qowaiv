@@ -248,6 +248,18 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     [Pure]
     public Money Divide(ushort factor) => Divide((decimal)factor);
 
+    /// <summary>Divides the money by a specified factor.
+    /// </summary>
+    /// <param name="denominator">
+    /// The factor to multiply with.
+    /// </param>
+    [Pure]
+    private decimal Divide(Money denominator)
+    {
+        _ = HaveSameCurrency(this, denominator, "division");
+        return m_Value / denominator.m_Value;
+    }
+
     /// <summary>Rounds the money value to the preferred number decimal places, based on its currency.</summary>
     [Pure]
     public Money Round() => Round(Currency.Digits);
@@ -371,6 +383,9 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// <summary>Divides the money by the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator /(Money money, ushort factor) => money.Divide(factor);
+
+    /// <summary>Divides  money by money to get there ratio.</summary>
+    public static decimal operator /(Money numerator, Money denominator) => numerator.Divide(denominator);
 
     [DebuggerStepThrough]
     [Pure]

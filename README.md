@@ -58,6 +58,9 @@ var next = date++; // 2017-06-12
 var casted = (Date)new DateTime(2017, 06, 11, 06, 15);
 ```
 
+As, since .NET 6.0, `System.DateOnly` is available, `Qowaiv.Date` can be casted to (and from)
+this type, if (and only if), the .NET 6.0 version of the package is usaged.
+
 ### Date span
 Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
 Adding one month to a date in January result in adding a different number of days, 

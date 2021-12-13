@@ -14,7 +14,7 @@ public class ThreadDomain
     static ThreadDomain()
     {
         Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
-        Register(typeof(Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Date.Today));
+        Register(typeof(Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Clock.Today()));
     }
 
     /// <summary>Gets the current thread domain.</summary>

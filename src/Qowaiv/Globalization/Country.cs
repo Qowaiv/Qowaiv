@@ -299,7 +299,7 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
     /// A list of existing countries.
     /// </returns>
     [Pure]
-    public static IEnumerable<Country> GetExisting() => GetExisting(Date.Today);
+    public static IEnumerable<Country> GetExisting() => GetExisting(Clock.Today());
 
     /// <summary>Gets all countries existing on the specified measurement date.</summary>
     /// <param name="measurement">

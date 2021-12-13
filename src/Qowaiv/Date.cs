@@ -16,12 +16,15 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     public static readonly Date MinValue = new(DateTime.MinValue);
 
     /// <summary>Gets the day before today.</summary>
+    [Obsolete("Use Clock.Yesterday() instead. Will be dropped when the next major version is released.")]
     public static Date Yesterday => Clock.Yesterday();
 
     /// <summary>Gets the current date.</summary>
+    [Obsolete("Use Clock.Today() instead. Will be dropped when the next major version is released.")]
     public static Date Today => Clock.Today();
 
     /// <summary>Gets the day after today.</summary>
+    [Obsolete("Use Clock.Tomorrow() instead. Will be dropped when the next major version is released.")]
     public static Date Tomorrow => Clock.Tomorrow();
 
     #region Constructors

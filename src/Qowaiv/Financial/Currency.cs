@@ -231,7 +231,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// A list of existing currencies.
     /// </returns>
     [Pure]
-    public static IEnumerable<Currency> GetExisting() => GetExisting(Date.Today);
+    public static IEnumerable<Currency> GetExisting() => GetExisting(Clock.Today());
 
     /// <summary>Gets all countries existing on the specified measurement date.</summary>
     /// <param name="measurement">

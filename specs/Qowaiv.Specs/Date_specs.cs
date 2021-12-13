@@ -1,5 +1,14 @@
 ﻿namespace Date_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void MinValue_represent_0001_01_01() => Date.MinValue.Should().Be(new Date(0001, 01, 01));
+
+    [Test]
+    public void MaxValue_represents_9999_12_13() => Date.MaxValue.Should().Be(new Date(9999, 12, 31));
+}
+
 public class Is_equal_by_value
 {
     [Test]

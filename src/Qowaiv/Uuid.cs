@@ -49,7 +49,7 @@ public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+    public string ToJson() => m_Value == Guid.Empty ? null : ToString(CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

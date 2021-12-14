@@ -514,20 +514,13 @@ public partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormatta
     /// </param>
     [Pure]
     public string ToString(string format, IFormatProvider formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        return m_Value.ToString(format, formatProvider);
-    }
+        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+        ? formatted
+        : m_Value.ToString(format, formatProvider);
 
     /// <summary>Gets an XML string representation of the @FullName.</summary>
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
-
-    /// <summary>Bind XML value.</summary>
-    partial void OnReadXml(LocalDateTime value) => m_Value = value.m_Value;
 
     #region (Explicit) casting
 

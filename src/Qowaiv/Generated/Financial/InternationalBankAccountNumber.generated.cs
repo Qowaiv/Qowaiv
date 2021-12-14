@@ -136,9 +136,7 @@ public partial struct InternationalBankAccountNumber : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(InternationalBankAccountNumber value);
 
     /// <summary>Writes the IBAN to an <see href="XmlWriter" />.</summary>
     /// <remarks>

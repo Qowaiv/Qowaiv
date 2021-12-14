@@ -407,17 +407,11 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     public string ToString(string format, IFormatProvider formatProvider)
     {
         // We don't want to see hh:mm pop up.
-        var f = string.IsNullOrEmpty(format) ? "d" : format;
-
-        if (StringFormatter.TryApplyCustomFormatter(f, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        return m_Value.ToString(f, formatProvider);
+        format = format.WithDefault("d");
+        return StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            ? formatted 
+            : m_Value.ToString(format, formatProvider);
     }
-
-    /// <summary>Bind XML value.</summary>
-    partial void OnReadXml(Date value) => m_Value = value.m_Value;
 
     /// <summary>Gets an XML string representation of the @FullName.</summary>
     [Pure]

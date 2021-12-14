@@ -136,9 +136,7 @@ public partial struct PostalCode : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(PostalCode value);
 
     /// <summary>Writes the postal code to an <see href="XmlWriter" />.</summary>
     /// <remarks>

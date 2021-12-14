@@ -138,9 +138,7 @@ public partial struct Percentage : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(Percentage value);
 
     /// <summary>Writes the percentage to an <see href="XmlWriter" />.</summary>
     /// <remarks>

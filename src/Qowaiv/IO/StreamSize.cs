@@ -477,9 +477,6 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Bind XML value.</summary>
-    partial void OnReadXml(StreamSize value) => m_Value = value.m_Value;
-
     [Pure]
     private string ToFormattedString(IFormatProvider formatProvider, Match match)
     {

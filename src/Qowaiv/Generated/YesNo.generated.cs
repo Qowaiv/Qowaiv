@@ -136,9 +136,7 @@ public partial struct YesNo : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(YesNo value);
 
     /// <summary>Writes the yes-no to an <see href="XmlWriter" />.</summary>
     /// <remarks>

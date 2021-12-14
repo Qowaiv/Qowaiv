@@ -147,9 +147,7 @@ public partial struct HouseNumber : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(HouseNumber value);
 
     /// <summary>Writes the house number to an <see href="XmlWriter" />.</summary>
     /// <remarks>

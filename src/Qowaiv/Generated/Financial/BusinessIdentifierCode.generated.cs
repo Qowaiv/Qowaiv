@@ -136,9 +136,7 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(BusinessIdentifierCode value);
 
     /// <summary>Writes the BIC to an <see href="XmlWriter" />.</summary>
     /// <remarks>

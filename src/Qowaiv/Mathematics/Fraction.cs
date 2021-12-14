@@ -524,7 +524,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     }
 
     /// <remarks>Sets the currency.</remarks>
-    partial void OnReadXml(Fraction other)
+    private void OnReadXml(Fraction other)
     {
         numerator = other.numerator;
         denominator = other.denominator;

@@ -136,9 +136,7 @@ public partial struct Sex : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(Sex value);
 
     /// <summary>Writes the sex to an <see href="XmlWriter" />.</summary>
     /// <remarks>

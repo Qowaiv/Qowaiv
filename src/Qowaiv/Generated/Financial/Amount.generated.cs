@@ -6,37 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NotIsEmpty
-#define NotIsUnknown
-#define NotIsEmptyOrUnknown
-
 namespace Qowaiv.Financial;
 
 public partial struct Amount
 {
-#if !NotField
     private Amount(decimal value) => m_Value = value;
 
     /// <summary>The inner value of the amount.</summary>
     private decimal m_Value;
-#endif
 
-#if !NotIsEmpty
-    /// <summary>Returns true if the  amount is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
-    /// <summary>Returns true if the  amount is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
-    /// <summary>Returns true if the  amount is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct Amount : IEquatable<Amount>
@@ -45,18 +23,15 @@ public partial struct Amount : IEquatable<Amount>
     [Pure]
     public override bool Equals(object obj) => obj is Amount other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other amount are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Amount" /> to compare with.</param>
     [Pure]
     public bool Equals(Amount other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -78,12 +53,9 @@ public partial struct Amount : IComparable, IComparable<Amount>
         else if (obj is Amount other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(Amount other) => Comparer<decimal>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(Amount l, Amount r) => l.CompareTo(r) < 0;
 
@@ -95,7 +67,6 @@ public partial struct Amount : IComparable, IComparable<Amount>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Amount l, Amount r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct Amount : IFormattable
@@ -146,13 +117,8 @@ public partial struct Amount
     /// <returns>
     /// The deserialized amount.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static Amount FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static Amount FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct Amount : IXmlSerializable
@@ -170,17 +136,11 @@ public partial struct Amount : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(Amount other);
+    partial void OnReadXml(Amount value);
 
     /// <summary>Writes the amount to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -193,7 +153,6 @@ public partial struct Amount : IXmlSerializable
 
 public partial struct Amount
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>
     /// <param name="s">
     /// A string containing the amount to convert.
@@ -260,35 +219,10 @@ public partial struct Amount
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out Amount result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>
-    /// <param name="s">
-    /// A string containing the amount to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed amount.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static Amount Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionFinancialAmount);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>
-    /// <param name="s">
-    /// A string containing the amount to convert.
-    /// </param>
-    /// <returns>
-    /// The amount if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static Amount? TryParse(string s) => TryParse(s, out Amount val) ? val : default(Amount?);
-#endif
 }
 
 public partial struct Amount
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid amount.</summary>
     /// <param name="val">
@@ -308,15 +242,5 @@ public partial struct Amount
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid amount.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

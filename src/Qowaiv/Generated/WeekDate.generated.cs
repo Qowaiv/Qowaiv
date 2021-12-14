@@ -6,38 +6,11 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NotField
-#define NotIsEmpty
-#define NotIsUnknown
-#define NotIsEmptyOrUnknown
-
 namespace Qowaiv;
 
 public partial struct WeekDate
 {
-#if !NotField
-    private WeekDate(Qowaiv.Date value) => m_Value = value;
 
-    /// <summary>The inner value of the week date.</summary>
-    private Qowaiv.Date m_Value;
-#endif
-
-#if !NotIsEmpty
-    /// <summary>Returns true if the  week date is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
-    /// <summary>Returns true if the  week date is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
-    /// <summary>Returns true if the  week date is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct WeekDate : IEquatable<WeekDate>
@@ -46,18 +19,15 @@ public partial struct WeekDate : IEquatable<WeekDate>
     [Pure]
     public override bool Equals(object obj) => obj is WeekDate other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other week date are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="WeekDate" /> to compare with.</param>
     [Pure]
     public bool Equals(WeekDate other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -79,12 +49,9 @@ public partial struct WeekDate : IComparable, IComparable<WeekDate>
         else if (obj is WeekDate other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(WeekDate other) => Comparer<Qowaiv.Date>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(WeekDate l, WeekDate r) => l.CompareTo(r) < 0;
 
@@ -96,7 +63,6 @@ public partial struct WeekDate : IComparable, IComparable<WeekDate>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(WeekDate l, WeekDate r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct WeekDate : IFormattable
@@ -120,7 +86,6 @@ public partial struct WeekDate : IFormattable
     public string ToString(IFormatProvider provider) => ToString(null, provider);
 }
 
-
 public partial struct WeekDate
 {
     /// <summary>Creates the week date from a JSON string.</summary>
@@ -130,13 +95,8 @@ public partial struct WeekDate
     /// <returns>
     /// The deserialized week date.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static WeekDate FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static WeekDate FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct WeekDate : IXmlSerializable
@@ -154,17 +114,10 @@ public partial struct WeekDate : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
-        m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(WeekDate other);
+    partial void OnReadXml(WeekDate value);
 
     /// <summary>Writes the week date to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -177,7 +130,6 @@ public partial struct WeekDate : IXmlSerializable
 
 public partial struct WeekDate
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
     /// <param name="s">
     /// A string containing the week date to convert.
@@ -244,35 +196,10 @@ public partial struct WeekDate
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out WeekDate result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
-    /// <param name="s">
-    /// A string containing the week date to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed week date.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static WeekDate Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionWeekDate);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
-    /// <param name="s">
-    /// A string containing the week date to convert.
-    /// </param>
-    /// <returns>
-    /// The week date if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static WeekDate? TryParse(string s) => TryParse(s, out WeekDate val) ? val : default(WeekDate?);
-#endif
 }
 
 public partial struct WeekDate
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid week date.</summary>
     /// <param name="val">
@@ -292,15 +219,5 @@ public partial struct WeekDate
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid week date.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

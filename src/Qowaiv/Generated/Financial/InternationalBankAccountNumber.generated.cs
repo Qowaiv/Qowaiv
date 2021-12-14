@@ -6,35 +6,24 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NoComparisonOperators
-
 namespace Qowaiv.Financial;
 
 public partial struct InternationalBankAccountNumber
 {
-#if !NotField
     private InternationalBankAccountNumber(string value) => m_Value = value;
 
     /// <summary>The inner value of the IBAN.</summary>
     private string m_Value;
-#endif
 
-#if !NotIsEmpty
     /// <summary>Returns true if the  IBAN is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
     /// <summary>Returns true if the  IBAN is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
     /// <summary>Returns true if the  IBAN is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>
@@ -43,18 +32,15 @@ public partial struct InternationalBankAccountNumber : IEquatable<InternationalB
     [Pure]
     public override bool Equals(object obj) => obj is InternationalBankAccountNumber other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other IBAN are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="InternationalBankAccountNumber" /> to compare with.</param>
     [Pure]
     public bool Equals(InternationalBankAccountNumber other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -76,24 +62,9 @@ public partial struct InternationalBankAccountNumber : IComparable, IComparable<
         else if (obj is InternationalBankAccountNumber other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(InternationalBankAccountNumber other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
-    /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-    public static bool operator <(InternationalBankAccountNumber l, InternationalBankAccountNumber r) => l.CompareTo(r) < 0;
-
-    /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-    public static bool operator >(InternationalBankAccountNumber l, InternationalBankAccountNumber r) => l.CompareTo(r) > 0;
-
-    /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-    public static bool operator <=(InternationalBankAccountNumber l, InternationalBankAccountNumber r) => l.CompareTo(r) <= 0;
-
-    /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-    public static bool operator >=(InternationalBankAccountNumber l, InternationalBankAccountNumber r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct InternationalBankAccountNumber : IFormattable
@@ -144,13 +115,8 @@ public partial struct InternationalBankAccountNumber
     /// <returns>
     /// The deserialized IBAN.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static InternationalBankAccountNumber FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static InternationalBankAccountNumber FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct InternationalBankAccountNumber : IXmlSerializable
@@ -168,17 +134,11 @@ public partial struct InternationalBankAccountNumber : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(InternationalBankAccountNumber other);
+    partial void OnReadXml(InternationalBankAccountNumber value);
 
     /// <summary>Writes the IBAN to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -191,7 +151,6 @@ public partial struct InternationalBankAccountNumber : IXmlSerializable
 
 public partial struct InternationalBankAccountNumber
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.</summary>
     /// <param name="s">
     /// A string containing the IBAN to convert.
@@ -258,35 +217,10 @@ public partial struct InternationalBankAccountNumber
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out InternationalBankAccountNumber result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.</summary>
-    /// <param name="s">
-    /// A string containing the IBAN to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed IBAN.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static InternationalBankAccountNumber Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionInternationalBankAccountNumber);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.</summary>
-    /// <param name="s">
-    /// A string containing the IBAN to convert.
-    /// </param>
-    /// <returns>
-    /// The IBAN if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static InternationalBankAccountNumber? TryParse(string s) => TryParse(s, out InternationalBankAccountNumber val) ? val : default(InternationalBankAccountNumber?);
-#endif
 }
 
 public partial struct InternationalBankAccountNumber
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid IBAN.</summary>
     /// <param name="val">
@@ -306,15 +240,5 @@ public partial struct InternationalBankAccountNumber
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid IBAN.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

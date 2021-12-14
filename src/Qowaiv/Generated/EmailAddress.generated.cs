@@ -6,35 +6,24 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NoComparisonOperators
-
 namespace Qowaiv;
 
 public partial struct EmailAddress
 {
-#if !NotField
     private EmailAddress(string value) => m_Value = value;
 
     /// <summary>The inner value of the email address.</summary>
     private string m_Value;
-#endif
 
-#if !NotIsEmpty
     /// <summary>Returns true if the  email address is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
     /// <summary>Returns true if the  email address is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
     /// <summary>Returns true if the  email address is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct EmailAddress : IEquatable<EmailAddress>
@@ -43,18 +32,15 @@ public partial struct EmailAddress : IEquatable<EmailAddress>
     [Pure]
     public override bool Equals(object obj) => obj is EmailAddress other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other email address are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="EmailAddress" /> to compare with.</param>
     [Pure]
     public bool Equals(EmailAddress other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -76,24 +62,9 @@ public partial struct EmailAddress : IComparable, IComparable<EmailAddress>
         else if (obj is EmailAddress other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(EmailAddress other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
-    /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-    public static bool operator <(EmailAddress l, EmailAddress r) => l.CompareTo(r) < 0;
-
-    /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-    public static bool operator >(EmailAddress l, EmailAddress r) => l.CompareTo(r) > 0;
-
-    /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-    public static bool operator <=(EmailAddress l, EmailAddress r) => l.CompareTo(r) <= 0;
-
-    /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-    public static bool operator >=(EmailAddress l, EmailAddress r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct EmailAddress : IFormattable
@@ -144,13 +115,8 @@ public partial struct EmailAddress
     /// <returns>
     /// The deserialized email address.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static EmailAddress FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static EmailAddress FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct EmailAddress : IXmlSerializable
@@ -168,17 +134,11 @@ public partial struct EmailAddress : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(EmailAddress other);
+    partial void OnReadXml(EmailAddress value);
 
     /// <summary>Writes the email address to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -191,7 +151,6 @@ public partial struct EmailAddress : IXmlSerializable
 
 public partial struct EmailAddress
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>
     /// <param name="s">
     /// A string containing the email address to convert.
@@ -258,35 +217,10 @@ public partial struct EmailAddress
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out EmailAddress result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>
-    /// <param name="s">
-    /// A string containing the email address to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed email address.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static EmailAddress Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionEmailAddress);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>
-    /// <param name="s">
-    /// A string containing the email address to convert.
-    /// </param>
-    /// <returns>
-    /// The email address if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static EmailAddress? TryParse(string s) => TryParse(s, out EmailAddress val) ? val : default(EmailAddress?);
-#endif
 }
 
 public partial struct EmailAddress
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid email address.</summary>
     /// <param name="val">
@@ -306,15 +240,5 @@ public partial struct EmailAddress
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid email address.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

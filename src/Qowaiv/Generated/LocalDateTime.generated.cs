@@ -8,11 +8,6 @@
 // ------------------------------------------------------------------------------
 namespace Qowaiv;
 
-public partial struct LocalDateTime
-{
-
-}
-
 public partial struct LocalDateTime : IEquatable<LocalDateTime>
 {
     /// <inheritdoc />
@@ -133,9 +128,8 @@ public partial struct LocalDateTime : IXmlSerializable
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
-        OnReadXml(val);
+        m_Value = val.m_Value;
     }
-    partial void OnReadXml(LocalDateTime value);
 
     /// <summary>Writes the local date time to an <see href="XmlWriter" />.</summary>
     /// <remarks>

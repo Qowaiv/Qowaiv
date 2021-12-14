@@ -8,11 +8,6 @@
 // ------------------------------------------------------------------------------
 namespace Qowaiv;
 
-public partial struct Date
-{
-
-}
-
 public partial struct Date : IEquatable<Date>
 {
     /// <inheritdoc />
@@ -133,9 +128,8 @@ public partial struct Date : IXmlSerializable
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
-        OnReadXml(val);
+        m_Value = val.m_Value;
     }
-    partial void OnReadXml(Date value);
 
     /// <summary>Writes the date to an <see href="XmlWriter" />.</summary>
     /// <remarks>

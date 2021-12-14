@@ -415,7 +415,7 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     }
 
     /// <remarks>Sets the currency.</remarks>
-    partial void OnReadXml(Money value)
+    private void OnReadXml(Money value)
     {
         m_Value = value.m_Value;
         m_Currency = value.m_Currency;
@@ -466,8 +466,11 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
         {
             return formatted;
         }
-        var numberFormatInfo = Currency.GetNumberFormatInfo(formatProvider);
-        return m_Value.ToString(string.IsNullOrEmpty(format) ? "C" : format, numberFormatInfo);
+        else
+        {
+            var numberFormatInfo = Currency.GetNumberFormatInfo(formatProvider);
+            return m_Value.ToString(string.IsNullOrEmpty(format) ? "C" : format, numberFormatInfo);
+        }
     }
 
     /// <summary>Gets an XML string representation of the money.</summary>
@@ -499,14 +502,9 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// </returns>
     [Pure]
     public int CompareTo(Money other)
-    {
-        var compare = m_Currency.CompareTo(other.m_Currency);
-        if (compare == 0)
-        {
-            compare = m_Value.CompareTo(other.m_Value);
-        }
-        return compare;
-    }
+        => m_Currency.CompareTo(other.m_Currency) is var compare && compare == 0
+        ? m_Value.CompareTo(other.m_Value)
+        : compare;
 
     #region (Explicit) casting
 

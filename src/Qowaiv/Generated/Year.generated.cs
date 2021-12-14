@@ -136,9 +136,7 @@ public partial struct Year : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(Year value);
 
     /// <summary>Writes the year to an <see href="XmlWriter" />.</summary>
     /// <remarks>

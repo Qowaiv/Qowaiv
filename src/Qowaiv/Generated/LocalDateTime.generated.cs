@@ -6,38 +6,11 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NotField
-#define NotIsEmpty
-#define NotIsUnknown
-#define NotIsEmptyOrUnknown
-
 namespace Qowaiv;
 
 public partial struct LocalDateTime
 {
-#if !NotField
-    private LocalDateTime(DateTime value) => m_Value = value;
 
-    /// <summary>The inner value of the local date time.</summary>
-    private DateTime m_Value;
-#endif
-
-#if !NotIsEmpty
-    /// <summary>Returns true if the  local date time is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
-    /// <summary>Returns true if the  local date time is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
-    /// <summary>Returns true if the  local date time is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct LocalDateTime : IEquatable<LocalDateTime>
@@ -46,18 +19,15 @@ public partial struct LocalDateTime : IEquatable<LocalDateTime>
     [Pure]
     public override bool Equals(object obj) => obj is LocalDateTime other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other local date time are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="LocalDateTime" /> to compare with.</param>
     [Pure]
     public bool Equals(LocalDateTime other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -79,12 +49,9 @@ public partial struct LocalDateTime : IComparable, IComparable<LocalDateTime>
         else if (obj is LocalDateTime other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(LocalDateTime other) => Comparer<DateTime>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) < 0;
 
@@ -96,7 +63,6 @@ public partial struct LocalDateTime : IComparable, IComparable<LocalDateTime>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct LocalDateTime : IFormattable
@@ -147,13 +113,8 @@ public partial struct LocalDateTime
     /// <returns>
     /// The deserialized local date time.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static LocalDateTime FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static LocalDateTime FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct LocalDateTime : IXmlSerializable
@@ -171,17 +132,10 @@ public partial struct LocalDateTime : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
-        m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(LocalDateTime other);
+    partial void OnReadXml(LocalDateTime value);
 
     /// <summary>Writes the local date time to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -194,7 +148,6 @@ public partial struct LocalDateTime : IXmlSerializable
 
 public partial struct LocalDateTime
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
     /// <param name="s">
     /// A string containing the local date time to convert.
@@ -261,35 +214,10 @@ public partial struct LocalDateTime
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out LocalDateTime result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
-    /// <param name="s">
-    /// A string containing the local date time to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed local date time.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static LocalDateTime Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
-    /// <param name="s">
-    /// A string containing the local date time to convert.
-    /// </param>
-    /// <returns>
-    /// The local date time if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static LocalDateTime? TryParse(string s) => TryParse(s, out LocalDateTime val) ? val : default(LocalDateTime?);
-#endif
 }
 
 public partial struct LocalDateTime
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid local date time.</summary>
     /// <param name="val">
@@ -309,15 +237,5 @@ public partial struct LocalDateTime
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid local date time.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

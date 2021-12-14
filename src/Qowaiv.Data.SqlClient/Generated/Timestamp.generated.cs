@@ -6,37 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NotIsEmpty
-#define NotIsUnknown
-#define NotIsEmptyOrUnknown
-
 namespace Qowaiv.Sql;
 
 public partial struct Timestamp
 {
-#if !NotField
     private Timestamp(ulong value) => m_Value = value;
 
     /// <summary>The inner value of the timestamp.</summary>
     private ulong m_Value;
-#endif
 
-#if !NotIsEmpty
-    /// <summary>Returns true if the  timestamp is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
-    /// <summary>Returns true if the  timestamp is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
-    /// <summary>Returns true if the  timestamp is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct Timestamp : IEquatable<Timestamp>
@@ -45,18 +23,15 @@ public partial struct Timestamp : IEquatable<Timestamp>
     [Pure]
     public override bool Equals(object obj) => obj is Timestamp other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other timestamp are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Timestamp" /> to compare with.</param>
     [Pure]
     public bool Equals(Timestamp other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -78,12 +53,9 @@ public partial struct Timestamp : IComparable, IComparable<Timestamp>
         else if (obj is Timestamp other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(Timestamp other) => Comparer<ulong>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(Timestamp l, Timestamp r) => l.CompareTo(r) < 0;
 
@@ -95,7 +67,6 @@ public partial struct Timestamp : IComparable, IComparable<Timestamp>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Timestamp l, Timestamp r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct Timestamp : IFormattable
@@ -146,13 +117,8 @@ public partial struct Timestamp
     /// <returns>
     /// The deserialized timestamp.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static Timestamp FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static Timestamp FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct Timestamp : IXmlSerializable
@@ -170,17 +136,11 @@ public partial struct Timestamp : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(Timestamp other);
+    partial void OnReadXml(Timestamp value);
 
     /// <summary>Writes the timestamp to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -193,7 +153,6 @@ public partial struct Timestamp : IXmlSerializable
 
 public partial struct Timestamp
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
     /// <param name="s">
     /// A string containing the timestamp to convert.
@@ -260,35 +219,10 @@ public partial struct Timestamp
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out Timestamp result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
-    /// <param name="s">
-    /// A string containing the timestamp to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed timestamp.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static Timestamp Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
-    /// <param name="s">
-    /// A string containing the timestamp to convert.
-    /// </param>
-    /// <returns>
-    /// The timestamp if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static Timestamp? TryParse(string s) => TryParse(s, out Timestamp val) ? val : default(Timestamp?);
-#endif
 }
 
 public partial struct Timestamp
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid timestamp.</summary>
     /// <param name="val">
@@ -308,15 +242,5 @@ public partial struct Timestamp
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid timestamp.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

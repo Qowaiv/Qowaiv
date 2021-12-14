@@ -6,37 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NotIsEmpty
-#define NotIsUnknown
-#define NotIsEmptyOrUnknown
-
 namespace Qowaiv;
 
 public partial struct MonthSpan
 {
-#if !NotField
     private MonthSpan(int value) => m_Value = value;
 
     /// <summary>The inner value of the month span.</summary>
     private int m_Value;
-#endif
 
-#if !NotIsEmpty
-    /// <summary>Returns true if the  month span is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
-    /// <summary>Returns true if the  month span is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
-    /// <summary>Returns true if the  month span is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct MonthSpan : IEquatable<MonthSpan>
@@ -45,18 +23,15 @@ public partial struct MonthSpan : IEquatable<MonthSpan>
     [Pure]
     public override bool Equals(object obj) => obj is MonthSpan other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other month span are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="MonthSpan" /> to compare with.</param>
     [Pure]
     public bool Equals(MonthSpan other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -78,12 +53,9 @@ public partial struct MonthSpan : IComparable, IComparable<MonthSpan>
         else if (obj is MonthSpan other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(MonthSpan other) => Comparer<int>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(MonthSpan l, MonthSpan r) => l.CompareTo(r) < 0;
 
@@ -95,7 +67,6 @@ public partial struct MonthSpan : IComparable, IComparable<MonthSpan>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(MonthSpan l, MonthSpan r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct MonthSpan : IFormattable
@@ -146,13 +117,8 @@ public partial struct MonthSpan
     /// <returns>
     /// The deserialized month span.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static MonthSpan FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static MonthSpan FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct MonthSpan : IXmlSerializable
@@ -170,17 +136,11 @@ public partial struct MonthSpan : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(MonthSpan other);
+    partial void OnReadXml(MonthSpan value);
 
     /// <summary>Writes the month span to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -193,7 +153,6 @@ public partial struct MonthSpan : IXmlSerializable
 
 public partial struct MonthSpan
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
     /// <param name="s">
     /// A string containing the month span to convert.
@@ -260,35 +219,10 @@ public partial struct MonthSpan
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out MonthSpan result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
-    /// <param name="s">
-    /// A string containing the month span to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed month span.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static MonthSpan Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
-    /// <param name="s">
-    /// A string containing the month span to convert.
-    /// </param>
-    /// <returns>
-    /// The month span if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static MonthSpan? TryParse(string s) => TryParse(s, out MonthSpan val) ? val : default(MonthSpan?);
-#endif
 }
 
 public partial struct MonthSpan
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid month span.</summary>
     /// <param name="val">
@@ -308,15 +242,5 @@ public partial struct MonthSpan
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid month span.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

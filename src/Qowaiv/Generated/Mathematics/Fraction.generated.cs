@@ -6,39 +6,11 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NotField
-#define NotIsEmpty
-#define NotIsUnknown
-#define NotIsEmptyOrUnknown
-#define NotEqualsSvo
-
 namespace Qowaiv.Mathematics;
 
 public partial struct Fraction
 {
-#if !NotField
-    private Fraction(long value) => m_Value = value;
 
-    /// <summary>The inner value of the fraction.</summary>
-    private long m_Value;
-#endif
-
-#if !NotIsEmpty
-    /// <summary>Returns true if the  fraction is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
-    /// <summary>Returns true if the  fraction is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
-    /// <summary>Returns true if the  fraction is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct Fraction : IEquatable<Fraction>
@@ -47,18 +19,6 @@ public partial struct Fraction : IEquatable<Fraction>
     [Pure]
     public override bool Equals(object obj) => obj is Fraction other && Equals(other);
 
-#if !NotEqualsSvo
-    /// <summary>Returns true if this instance and the other fraction are equal, otherwise false.</summary>
-    /// <param name="other">The <see cref="Fraction" /> to compare with.</param>
-    [Pure]
-    public bool Equals(Fraction other) => m_Value == other.m_Value;
-
-#if !NotGetHashCode
-    /// <inheritdoc />
-    [Pure]
-    public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -80,12 +40,6 @@ public partial struct Fraction : IComparable, IComparable<Fraction>
         else if (obj is Fraction other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
-    /// <inheritdoc />
-    [Pure]
-    public int CompareTo(Fraction other) => Comparer<long>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(Fraction l, Fraction r) => l.CompareTo(r) < 0;
 
@@ -97,7 +51,6 @@ public partial struct Fraction : IComparable, IComparable<Fraction>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Fraction l, Fraction r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct Fraction : IFormattable
@@ -121,7 +74,6 @@ public partial struct Fraction : IFormattable
     public string ToString(IFormatProvider provider) => ToString(null, provider);
 }
 
-
 public partial struct Fraction
 {
     /// <summary>Creates the fraction from a JSON string.</summary>
@@ -131,13 +83,8 @@ public partial struct Fraction
     /// <returns>
     /// The deserialized fraction.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static Fraction FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static Fraction FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct Fraction : IXmlSerializable
@@ -155,17 +102,10 @@ public partial struct Fraction : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
-        m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(Fraction other);
+    partial void OnReadXml(Fraction value);
 
     /// <summary>Writes the fraction to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -178,7 +118,6 @@ public partial struct Fraction : IXmlSerializable
 
 public partial struct Fraction
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
     /// A string containing the fraction to convert.
@@ -245,35 +184,10 @@ public partial struct Fraction
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out Fraction result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
-    /// <param name="s">
-    /// A string containing the fraction to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed fraction.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static Fraction Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
-    /// <param name="s">
-    /// A string containing the fraction to convert.
-    /// </param>
-    /// <returns>
-    /// The fraction if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static Fraction? TryParse(string s) => TryParse(s, out Fraction val) ? val : default(Fraction?);
-#endif
 }
 
 public partial struct Fraction
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid fraction.</summary>
     /// <param name="val">
@@ -293,15 +207,5 @@ public partial struct Fraction
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid fraction.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

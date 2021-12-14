@@ -6,35 +6,24 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NoComparisonOperators
-
 namespace Qowaiv;
 
 public partial struct Month
 {
-#if !NotField
     private Month(byte value) => m_Value = value;
 
     /// <summary>The inner value of the month.</summary>
     private byte m_Value;
-#endif
 
-#if !NotIsEmpty
     /// <summary>Returns true if the  month is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
     /// <summary>Returns true if the  month is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
     /// <summary>Returns true if the  month is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct Month : IEquatable<Month>
@@ -43,18 +32,15 @@ public partial struct Month : IEquatable<Month>
     [Pure]
     public override bool Equals(object obj) => obj is Month other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other month are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Month" /> to compare with.</param>
     [Pure]
     public bool Equals(Month other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -76,24 +62,9 @@ public partial struct Month : IComparable, IComparable<Month>
         else if (obj is Month other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(Month other) => Comparer<byte>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
-    /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-    public static bool operator <(Month l, Month r) => l.CompareTo(r) < 0;
-
-    /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-    public static bool operator >(Month l, Month r) => l.CompareTo(r) > 0;
-
-    /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-    public static bool operator <=(Month l, Month r) => l.CompareTo(r) <= 0;
-
-    /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-    public static bool operator >=(Month l, Month r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct Month : IFormattable
@@ -144,13 +115,8 @@ public partial struct Month
     /// <returns>
     /// The deserialized month.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static Month FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static Month FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct Month : IXmlSerializable
@@ -168,17 +134,11 @@ public partial struct Month : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(Month other);
+    partial void OnReadXml(Month value);
 
     /// <summary>Writes the month to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -191,7 +151,6 @@ public partial struct Month : IXmlSerializable
 
 public partial struct Month
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.</summary>
     /// <param name="s">
     /// A string containing the month to convert.
@@ -258,35 +217,10 @@ public partial struct Month
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out Month result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.</summary>
-    /// <param name="s">
-    /// A string containing the month to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed month.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static Month Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionMonth);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.</summary>
-    /// <param name="s">
-    /// A string containing the month to convert.
-    /// </param>
-    /// <returns>
-    /// The month if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static Month? TryParse(string s) => TryParse(s, out Month val) ? val : default(Month?);
-#endif
 }
 
 public partial struct Month
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid month.</summary>
     /// <param name="val">
@@ -306,15 +240,5 @@ public partial struct Month
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid month.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

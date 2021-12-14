@@ -6,35 +6,24 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-
-
 namespace Qowaiv;
 
 public partial struct HouseNumber
 {
-#if !NotField
     private HouseNumber(int value) => m_Value = value;
 
     /// <summary>The inner value of the house number.</summary>
     private int m_Value;
-#endif
 
-#if !NotIsEmpty
     /// <summary>Returns true if the  house number is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
     /// <summary>Returns true if the  house number is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
     /// <summary>Returns true if the  house number is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct HouseNumber : IEquatable<HouseNumber>
@@ -43,18 +32,15 @@ public partial struct HouseNumber : IEquatable<HouseNumber>
     [Pure]
     public override bool Equals(object obj) => obj is HouseNumber other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other house number are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="HouseNumber" /> to compare with.</param>
     [Pure]
     public bool Equals(HouseNumber other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -76,12 +62,9 @@ public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
         else if (obj is HouseNumber other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(HouseNumber other) => Comparer<int>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(HouseNumber l, HouseNumber r) => l.CompareTo(r) < 0;
 
@@ -93,7 +76,6 @@ public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(HouseNumber l, HouseNumber r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct HouseNumber : IFormattable
@@ -144,13 +126,8 @@ public partial struct HouseNumber
     /// <returns>
     /// The deserialized house number.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static HouseNumber FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static HouseNumber FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct HouseNumber : IXmlSerializable
@@ -168,17 +145,11 @@ public partial struct HouseNumber : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(HouseNumber other);
+    partial void OnReadXml(HouseNumber value);
 
     /// <summary>Writes the house number to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -191,7 +162,6 @@ public partial struct HouseNumber : IXmlSerializable
 
 public partial struct HouseNumber
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
     /// <param name="s">
     /// A string containing the house number to convert.
@@ -258,35 +228,10 @@ public partial struct HouseNumber
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out HouseNumber result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
-    /// <param name="s">
-    /// A string containing the house number to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed house number.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static HouseNumber Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionHouseNumber);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
-    /// <param name="s">
-    /// A string containing the house number to convert.
-    /// </param>
-    /// <returns>
-    /// The house number if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static HouseNumber? TryParse(string s) => TryParse(s, out HouseNumber val) ? val : default(HouseNumber?);
-#endif
 }
 
 public partial struct HouseNumber
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid house number.</summary>
     /// <param name="val">
@@ -306,15 +251,5 @@ public partial struct HouseNumber
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid house number.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

@@ -8,11 +8,6 @@
 // ------------------------------------------------------------------------------
 namespace Qowaiv;
 
-public partial struct WeekDate
-{
-
-}
-
 public partial struct WeekDate : IEquatable<WeekDate>
 {
     /// <inheritdoc />
@@ -115,9 +110,8 @@ public partial struct WeekDate : IXmlSerializable
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
         var val = Parse(xml, CultureInfo.InvariantCulture);
-        OnReadXml(val);
+        m_Value = val.m_Value;
     }
-    partial void OnReadXml(WeekDate value);
 
     /// <summary>Writes the week date to an <see href="XmlWriter" />.</summary>
     /// <remarks>

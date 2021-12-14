@@ -8,11 +8,6 @@
 // ------------------------------------------------------------------------------
 namespace Qowaiv.Mathematics;
 
-public partial struct Fraction
-{
-
-}
-
 public partial struct Fraction : IEquatable<Fraction>
 {
     /// <inheritdoc />
@@ -105,7 +100,6 @@ public partial struct Fraction : IXmlSerializable
         var val = Parse(xml, CultureInfo.InvariantCulture);
         OnReadXml(val);
     }
-    partial void OnReadXml(Fraction value);
 
     /// <summary>Writes the fraction to an <see href="XmlWriter" />.</summary>
     /// <remarks>

@@ -8,11 +8,6 @@
 // ------------------------------------------------------------------------------
 namespace Qowaiv.Financial;
 
-public partial struct Money
-{
-
-}
-
 public partial struct Money : IEquatable<Money>
 {
     /// <inheritdoc />
@@ -105,7 +100,6 @@ public partial struct Money : IXmlSerializable
         var val = Parse(xml, CultureInfo.InvariantCulture);
         OnReadXml(val);
     }
-    partial void OnReadXml(Money value);
 
     /// <summary>Writes the money to an <see href="XmlWriter" />.</summary>
     /// <remarks>

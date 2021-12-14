@@ -130,9 +130,7 @@ public partial struct Uuid : IXmlSerializable
         var xml = reader.ReadElementString();
         var val = Parse(xml);
         m_Value = val.m_Value;
-        OnReadXml(val);
     }
-    partial void OnReadXml(Uuid value);
 
     /// <summary>Writes the UUID to an <see href="XmlWriter" />.</summary>
     /// <remarks>

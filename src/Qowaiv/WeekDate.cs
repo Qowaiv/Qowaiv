@@ -221,9 +221,6 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Bind XML value.</summary>
-    partial void OnReadXml(WeekDate value) => m_Value = value.m_Value;
-
     /// <summary>Casts a week date to a date time.</summary>
     public static implicit operator DateTime(WeekDate val) => val.m_Value;
 

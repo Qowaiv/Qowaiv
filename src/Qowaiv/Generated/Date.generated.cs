@@ -6,13 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct Date : IEquatable<Date>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Date other && Equals(other);
+    public override bool Equals(object? obj) => obj is Date other && Equals(other);
 
     /// <summary>Returns true if this instance and the other date are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Date" /> to compare with.</param>
@@ -38,7 +40,7 @@ public partial struct Date : IComparable, IComparable<Date>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Date other) { return CompareTo(other); }
@@ -46,7 +48,9 @@ public partial struct Date : IComparable, IComparable<Date>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(Date other) => Comparer<DateTime>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(Date l, Date r) => l.CompareTo(r) < 0;
 
@@ -64,21 +68,21 @@ public partial struct Date : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the date.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the date.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the date.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Date : ISerializable
@@ -89,7 +93,7 @@ public partial struct Date : ISerializable
     private Date(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (DateTime)info.GetValue("Value", typeof(DateTime));
+        m_Value = info.GetValue("Value", typeof(DateTime)) is DateTime val ? val : default(DateTime);
     }
 
     /// <summary>Adds the underlying property of the date to the serialization info.</summary>
@@ -109,7 +113,7 @@ public partial struct Date
     /// The deserialized date.
     /// </returns>
     [Pure]
-    public static Date FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static Date FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Date : IXmlSerializable
@@ -119,7 +123,7 @@ public partial struct Date : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the date from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -153,7 +157,7 @@ public partial struct Date
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Date Parse(string s) => Parse(s, null);
+    public static Date Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.</summary>
     /// <param name="s">
@@ -169,7 +173,7 @@ public partial struct Date
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Date Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDate);
+    public static Date Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDate);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.</summary>
     /// <param name="s">
@@ -179,7 +183,7 @@ public partial struct Date
     /// The date if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Date? TryParse(string s) => TryParse(s, null);
+    public static Date? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.</summary>
     /// <param name="s">
@@ -192,7 +196,7 @@ public partial struct Date
     /// The date if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Date? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Date val) ? val : default(Date?);
+    public static Date? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Date?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -207,7 +211,7 @@ public partial struct Date
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Date result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Date result) => TryParse(s, null, out result);
 }
 
 public partial struct Date
@@ -218,7 +222,7 @@ public partial struct Date
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid date.</summary>
     /// <param name="val">
@@ -228,7 +232,7 @@ public partial struct Date
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

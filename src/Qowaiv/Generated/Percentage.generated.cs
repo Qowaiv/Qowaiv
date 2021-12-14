@@ -6,6 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct Percentage
@@ -21,7 +23,7 @@ public partial struct Percentage : IEquatable<Percentage>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Percentage other && Equals(other);
+    public override bool Equals(object? obj) => obj is Percentage other && Equals(other);
 
     /// <summary>Returns true if this instance and the other percentage are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Percentage" /> to compare with.</param>
@@ -47,7 +49,7 @@ public partial struct Percentage : IComparable, IComparable<Percentage>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Percentage other) { return CompareTo(other); }
@@ -55,7 +57,9 @@ public partial struct Percentage : IComparable, IComparable<Percentage>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(Percentage other) => Comparer<decimal>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(Percentage l, Percentage r) => l.CompareTo(r) < 0;
 
@@ -73,21 +77,21 @@ public partial struct Percentage : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the percentage.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the percentage.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the percentage.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Percentage : ISerializable
@@ -98,7 +102,7 @@ public partial struct Percentage : ISerializable
     private Percentage(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (decimal)info.GetValue("Value", typeof(decimal));
+        m_Value = info.GetValue("Value", typeof(decimal)) is decimal val ? val : default(decimal);
     }
 
     /// <summary>Adds the underlying property of the percentage to the serialization info.</summary>
@@ -118,7 +122,7 @@ public partial struct Percentage
     /// The deserialized percentage.
     /// </returns>
     [Pure]
-    public static Percentage FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static Percentage FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Percentage : IXmlSerializable
@@ -128,7 +132,7 @@ public partial struct Percentage : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the percentage from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -162,7 +166,7 @@ public partial struct Percentage
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Percentage Parse(string s) => Parse(s, null);
+    public static Percentage Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
     /// <param name="s">
@@ -178,7 +182,7 @@ public partial struct Percentage
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Percentage Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionPercentage);
+    public static Percentage Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionPercentage);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
     /// <param name="s">
@@ -188,7 +192,7 @@ public partial struct Percentage
     /// The percentage if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Percentage? TryParse(string s) => TryParse(s, null);
+    public static Percentage? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
     /// <param name="s">
@@ -201,7 +205,7 @@ public partial struct Percentage
     /// The percentage if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Percentage? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Percentage val) ? val : default(Percentage?);
+    public static Percentage? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Percentage?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -216,7 +220,7 @@ public partial struct Percentage
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Percentage result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Percentage result) => TryParse(s, null, out result);
 }
 
 public partial struct Percentage
@@ -227,7 +231,7 @@ public partial struct Percentage
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid percentage.</summary>
     /// <param name="val">
@@ -237,7 +241,7 @@ public partial struct Percentage
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

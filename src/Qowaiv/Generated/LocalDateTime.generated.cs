@@ -6,13 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct LocalDateTime : IEquatable<LocalDateTime>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is LocalDateTime other && Equals(other);
+    public override bool Equals(object? obj) => obj is LocalDateTime other && Equals(other);
 
     /// <summary>Returns true if this instance and the other local date time are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="LocalDateTime" /> to compare with.</param>
@@ -38,7 +40,7 @@ public partial struct LocalDateTime : IComparable, IComparable<LocalDateTime>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is LocalDateTime other) { return CompareTo(other); }
@@ -46,7 +48,9 @@ public partial struct LocalDateTime : IComparable, IComparable<LocalDateTime>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(LocalDateTime other) => Comparer<DateTime>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) < 0;
 
@@ -64,21 +68,21 @@ public partial struct LocalDateTime : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the local date time.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the local date time.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the local date time.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct LocalDateTime : ISerializable
@@ -89,7 +93,7 @@ public partial struct LocalDateTime : ISerializable
     private LocalDateTime(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (DateTime)info.GetValue("Value", typeof(DateTime));
+        m_Value = info.GetValue("Value", typeof(DateTime)) is DateTime val ? val : default(DateTime);
     }
 
     /// <summary>Adds the underlying property of the local date time to the serialization info.</summary>
@@ -109,7 +113,7 @@ public partial struct LocalDateTime
     /// The deserialized local date time.
     /// </returns>
     [Pure]
-    public static LocalDateTime FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static LocalDateTime FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct LocalDateTime : IXmlSerializable
@@ -119,7 +123,7 @@ public partial struct LocalDateTime : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the local date time from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -153,7 +157,7 @@ public partial struct LocalDateTime
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static LocalDateTime Parse(string s) => Parse(s, null);
+    public static LocalDateTime Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
     /// <param name="s">
@@ -169,7 +173,7 @@ public partial struct LocalDateTime
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static LocalDateTime Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
+    public static LocalDateTime Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
     /// <param name="s">
@@ -179,7 +183,7 @@ public partial struct LocalDateTime
     /// The local date time if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static LocalDateTime? TryParse(string s) => TryParse(s, null);
+    public static LocalDateTime? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
     /// <param name="s">
@@ -192,7 +196,7 @@ public partial struct LocalDateTime
     /// The local date time if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static LocalDateTime? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out LocalDateTime val) ? val : default(LocalDateTime?);
+    public static LocalDateTime? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(LocalDateTime?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -207,7 +211,7 @@ public partial struct LocalDateTime
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out LocalDateTime result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out LocalDateTime result) => TryParse(s, null, out result);
 }
 
 public partial struct LocalDateTime
@@ -218,7 +222,7 @@ public partial struct LocalDateTime
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid local date time.</summary>
     /// <param name="val">
@@ -228,7 +232,7 @@ public partial struct LocalDateTime
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

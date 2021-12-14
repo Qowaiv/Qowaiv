@@ -6,6 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct Uuid
@@ -24,7 +26,7 @@ public partial struct Uuid : IEquatable<Uuid>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Uuid other && Equals(other);
+    public override bool Equals(object? obj) => obj is Uuid other && Equals(other);
 
     /// <summary>Returns true if this instance and the other UUID are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Uuid" /> to compare with.</param>
@@ -50,7 +52,7 @@ public partial struct Uuid : IComparable, IComparable<Uuid>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Uuid other) { return CompareTo(other); }
@@ -58,28 +60,30 @@ public partial struct Uuid : IComparable, IComparable<Uuid>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(Uuid other) => Comparer<Guid>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
 }
 
 public partial struct Uuid : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the UUID.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the UUID.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the UUID.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Uuid : ISerializable
@@ -90,7 +94,7 @@ public partial struct Uuid : ISerializable
     private Uuid(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (Guid)info.GetValue("Value", typeof(Guid));
+        m_Value = info.GetValue("Value", typeof(Guid)) is Guid val ? val : default(Guid);
     }
 
     /// <summary>Adds the underlying property of the UUID to the serialization info.</summary>
@@ -120,7 +124,7 @@ public partial struct Uuid : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the UUID from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -154,7 +158,7 @@ public partial struct Uuid
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Uuid Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionUuid);
+    public static Uuid Parse(string? s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionUuid);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
     /// <param name="s">
@@ -164,7 +168,7 @@ public partial struct Uuid
     /// The UUID if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Uuid? TryParse(string s) => TryParse(s, out Uuid val) ? val : default(Uuid?);
+    public static Uuid? TryParse(string? s) => TryParse(s, out var val) ? val : default(Uuid?);
 }
 
 public partial struct Uuid

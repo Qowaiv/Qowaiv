@@ -6,14 +6,16 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv.Financial;
 
 public partial struct Currency
 {
-    private Currency(string value) => m_Value = value;
+    private Currency(string? value) => m_Value = value;
 
     /// <summary>The inner value of the currency.</summary>
-    private string m_Value;
+    private string? m_Value;
 
     /// <summary>Returns true if the  currency is empty, otherwise false.</summary>
     [Pure]
@@ -24,13 +26,22 @@ public partial struct Currency
     /// <summary>Returns true if the  currency is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+
+    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    [Pure]
+    private int Kind()
+    {
+        if (IsEmpty()) return 0;
+        else if (IsUnknown()) return +2;
+        else return +1;
+    }
 }
 
 public partial struct Currency : IEquatable<Currency>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Currency other && Equals(other);
+    public override bool Equals(object? obj) => obj is Currency other && Equals(other);
 
     /// <summary>Returns true if this instance and the other currency are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Currency" /> to compare with.</param>
@@ -56,7 +67,7 @@ public partial struct Currency : IComparable, IComparable<Currency>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Currency other) { return CompareTo(other); }
@@ -64,28 +75,30 @@ public partial struct Currency : IComparable, IComparable<Currency>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(Currency other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
 }
 
 public partial struct Currency : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the currency.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the currency.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the currency.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Currency : ISerializable
@@ -96,7 +109,7 @@ public partial struct Currency : ISerializable
     private Currency(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (string)info.GetValue("Value", typeof(string));
+        m_Value = info.GetValue("Value", typeof(string)) is string val ? val : default(string);
     }
 
     /// <summary>Adds the underlying property of the currency to the serialization info.</summary>
@@ -116,7 +129,7 @@ public partial struct Currency
     /// The deserialized currency.
     /// </returns>
     [Pure]
-    public static Currency FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static Currency FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Currency : IXmlSerializable
@@ -126,7 +139,7 @@ public partial struct Currency : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the currency from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -160,7 +173,7 @@ public partial struct Currency
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Currency Parse(string s) => Parse(s, null);
+    public static Currency Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>
     /// <param name="s">
@@ -176,7 +189,7 @@ public partial struct Currency
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Currency Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCurrency);
+    public static Currency Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCurrency);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>
     /// <param name="s">
@@ -186,7 +199,7 @@ public partial struct Currency
     /// The currency if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Currency? TryParse(string s) => TryParse(s, null);
+    public static Currency? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>
     /// <param name="s">
@@ -199,7 +212,7 @@ public partial struct Currency
     /// The currency if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Currency? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Currency val) ? val : default(Currency?);
+    public static Currency? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Currency?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -214,7 +227,7 @@ public partial struct Currency
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Currency result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Currency result) => TryParse(s, null, out result);
 }
 
 public partial struct Currency
@@ -225,7 +238,7 @@ public partial struct Currency
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid currency.</summary>
     /// <param name="val">
@@ -235,7 +248,7 @@ public partial struct Currency
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

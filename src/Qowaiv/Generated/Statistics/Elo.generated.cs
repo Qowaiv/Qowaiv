@@ -6,37 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-
-#define NotIsEmpty
-#define NotIsUnknown
-#define NotIsEmptyOrUnknown
-
 namespace Qowaiv.Statistics;
 
 public partial struct Elo
 {
-#if !NotField
     private Elo(double value) => m_Value = value;
 
     /// <summary>The inner value of the elo.</summary>
     private double m_Value;
-#endif
 
-#if !NotIsEmpty
-    /// <summary>Returns true if the  elo is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
-#endif
-#if !NotIsUnknown
-    /// <summary>Returns true if the  elo is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-#endif
-#if !NotIsEmptyOrUnknown
-    /// <summary>Returns true if the  elo is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-#endif
 }
 
 public partial struct Elo : IEquatable<Elo>
@@ -45,18 +23,15 @@ public partial struct Elo : IEquatable<Elo>
     [Pure]
     public override bool Equals(object obj) => obj is Elo other && Equals(other);
 
-#if !NotEqualsSvo
     /// <summary>Returns true if this instance and the other elo are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Elo" /> to compare with.</param>
     [Pure]
     public bool Equals(Elo other) => m_Value == other.m_Value;
 
-#if !NotGetHashCode
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash.Code(m_Value);
-#endif
-#endif
+
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
@@ -78,12 +53,9 @@ public partial struct Elo : IComparable, IComparable<Elo>
         else if (obj is Elo other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-#if !NotEqualsSvo
     /// <inheritdoc />
     [Pure]
     public int CompareTo(Elo other) => Comparer<double>.Default.Compare(m_Value, other.m_Value);
-#endif
-#if !NoComparisonOperators
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(Elo l, Elo r) => l.CompareTo(r) < 0;
 
@@ -95,7 +67,6 @@ public partial struct Elo : IComparable, IComparable<Elo>
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Elo l, Elo r) => l.CompareTo(r) >= 0;
-#endif
 }
 
 public partial struct Elo : IFormattable
@@ -146,13 +117,8 @@ public partial struct Elo
     /// <returns>
     /// The deserialized elo.
     /// </returns>
-#if !NotCultureDependent
     [Pure]
     public static Elo FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
-#else
-    [Pure]
-    public static Elo FromJson(string json) => Parse(json);
-#endif
 }
 
 public partial struct Elo : IXmlSerializable
@@ -170,17 +136,11 @@ public partial struct Elo : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-#if !NotCultureDependent
         var val = Parse(xml, CultureInfo.InvariantCulture);
-#else
-        var val = Parse(xml);
-#endif
-#if !NotField
         m_Value = val.m_Value;
-#endif
         OnReadXml(val);
     }
-    partial void OnReadXml(Elo other);
+    partial void OnReadXml(Elo value);
 
     /// <summary>Writes the elo to an <see href="XmlWriter" />.</summary>
     /// <remarks>
@@ -193,7 +153,6 @@ public partial struct Elo : IXmlSerializable
 
 public partial struct Elo
 {
-#if !NotCultureDependent
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
     /// <param name="s">
     /// A string containing the elo to convert.
@@ -260,35 +219,10 @@ public partial struct Elo
     /// </returns>
     [Pure]
     public static bool TryParse(string s, out Elo result) => TryParse(s, null, out result);
-#else
-    /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
-    /// <param name="s">
-    /// A string containing the elo to convert.
-    /// </param>
-    /// <returns>
-    /// The parsed elo.
-    /// </returns>
-    /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
-    /// </exception>
-    [Pure]
-    public static Elo Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionElo);
-
-    /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
-    /// <param name="s">
-    /// A string containing the elo to convert.
-    /// </param>
-    /// <returns>
-    /// The elo if the string was converted successfully, otherwise default.
-    /// </returns>
-    [Pure]
-    public static Elo? TryParse(string s) => TryParse(s, out Elo val) ? val : default(Elo?);
-#endif
 }
 
 public partial struct Elo
 {
-#if !NotCultureDependent
 
     /// <summary>Returns true if the value represents a valid elo.</summary>
     /// <param name="val">
@@ -308,15 +242,5 @@ public partial struct Elo
     public static bool IsValid(string val, IFormatProvider formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
-#else
-    /// <summary>Returns true if the value represents a valid elo.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
-#endif
 }
 

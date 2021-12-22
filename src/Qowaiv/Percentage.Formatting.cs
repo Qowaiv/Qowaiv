@@ -48,7 +48,7 @@ namespace Qowaiv
         {
             if (string.IsNullOrEmpty(format))
             {
-                return DefaultFormats.TryGetValue(formatProvider, out format)
+                return formatProvider is CultureInfo culture && DefaultFormats.TryGetValue(culture.Name, out format)
                     ? format
                     : PercentFormat;
             }
@@ -64,10 +64,10 @@ namespace Qowaiv
         }
 
         /// <summary>Gets the default format for different countries.</summary>
-        private static readonly Dictionary<IFormatProvider, string> DefaultFormats = new Dictionary<IFormatProvider, string>
+        private static readonly Dictionary<string, string> DefaultFormats = new Dictionary<string, string>
         {
-            { new CultureInfo("fr-FR"), "%0.############################" },
-            { new CultureInfo("fa-IR"), "%0.############################" },
+            { "fr-FR", "%0.############################" },
+            { "fa-IR", "%0.############################" },
         };
     }
 }

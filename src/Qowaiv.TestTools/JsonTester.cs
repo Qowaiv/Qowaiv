@@ -7,7 +7,7 @@ public static class JsonTester
 {
     /// <summary>Applies multiple FromJson scenario's.</summary>
     [Pure]
-    public static T Read<T>(object val)
+    public static T? Read<T>(object? val)
     {
         var parameterType = val?.GetType();
         var fromJson = typeof(T)
@@ -20,7 +20,7 @@ public static class JsonTester
         }
         try
         {
-            return (T)fromJson.Invoke(null, new[] { val });
+            return (T?)fromJson.Invoke(null, new[] { val });
         }
         catch (TargetInvocationException x)
         {
@@ -31,7 +31,7 @@ public static class JsonTester
 
     /// <summary>Applies <code>ToJson()</code>.</summary>
     [Pure]
-    public static object Write<T>(T val)
+    public static object? Write<T>(T val)
     {
         var toJson = typeof(T)
             .GetMethods(BindingFlags.Instance | BindingFlags.Public)
@@ -43,7 +43,7 @@ public static class JsonTester
     }
 
     [Pure]
-    private static bool FromJson<T>(MethodInfo method, Type parameterType)
+    private static bool FromJson<T>(MethodInfo method, Type? parameterType)
         => method.Name == nameof(FromJson)
         && method.GetParameters().Length == 1
         && method.GetParameters()[0].ParameterType == parameterType

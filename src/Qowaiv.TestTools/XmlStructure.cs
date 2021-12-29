@@ -26,12 +26,12 @@ public sealed class XmlStructure<TSvo>
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is XmlStructure<TSvo> other && Equals(other);
+    public override bool Equals(object? obj) => obj is XmlStructure<TSvo> other && Equals(other);
 
     /// <inheritdoc />
     [Pure]
-    public bool Equals(XmlStructure<TSvo> other)
-        => other != null
+    public bool Equals(XmlStructure<TSvo>? other)
+        => other is { }
         && Id.Equals(other.Id)
         && Svo.Equals(other.Svo)
         && Date.Equals(other.Date);

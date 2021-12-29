@@ -451,7 +451,7 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
     /// 1238900.ToString("#,##0") => 1,238,900
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
@@ -478,7 +478,7 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
     [Pure]
-    private string ToFormattedString(IFormatProvider formatProvider, Match match)
+    private string ToFormattedString(IFormatProvider? formatProvider, Match match)
     {
         var format = match.Groups["format"].Value;
         var streamSizeMarker = match.Groups["streamSizeMarker"].Value;
@@ -576,7 +576,7 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out StreamSize result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out StreamSize result)
     {
         result = default;
         if (string.IsNullOrEmpty(s)) return false;
@@ -682,10 +682,9 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
         => new(Guard.NotNull(stream, nameof(stream)).Length);
 
     [Pure]
-    private static string GetStreamSizeMarker(string input)
+    private static string GetStreamSizeMarker(string? input)
     {
-        if (string.IsNullOrEmpty(input)) return string.Empty;
-        else
+        if (input is { Length: > 0 })
         {
             var length = input.Length;
 
@@ -702,13 +701,14 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
             }
             return string.Empty;
         }
+        else return string.Empty;
     }
 
     [Pure]
-    private static string GetWithoutStreamSizeMarker(string input, string streamSizeMarker)
-        => string.IsNullOrEmpty(streamSizeMarker)
-        ? input
-        : input.Substring(0, input.Length - streamSizeMarker.Length);
+    private static string GetWithoutStreamSizeMarker(string? input, string streamSizeMarker)
+        => input is { Length: > 0 }
+        ? input.Substring(0, input.Length - streamSizeMarker.Length)
+        : string.Empty;
 
     [Pure]
     private static long GetMultiplier(string streamSizeMarker)

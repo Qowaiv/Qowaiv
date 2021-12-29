@@ -26,13 +26,13 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
     public static readonly EmailAddress Unknown = new("?");
 
     /// <summary>Gets the number of characters of email address.</summary>
-    public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
+    public int Length => m_Value is { Length: > 1 } ? m_Value.Length : 0;
 
     /// <summary>Gets the local part of the Email Address.</summary>
-    public string Local => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, m_Value.IndexOf('@'));
+    public string Local => m_Value is { Length: > 1 } ? m_Value.Substring(0, m_Value.IndexOf('@')) : string.Empty;
 
     /// <summary>Gets the domain part of the Email Address.</summary>
-    public string Domain => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(m_Value.IndexOf('@') + 1);
+    public string Domain => m_Value is { Length: > 1 } ? m_Value.Substring(m_Value.IndexOf('@') + 1) : string.Empty;
 
     /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
     /// <remarks>
@@ -40,20 +40,21 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
     /// can simply be checked by checking the last character of the string
     /// value.
     /// </remarks>
-    public bool IsIPBased => !IsEmptyOrUnknown() && m_Value[m_Value.Length - 1] == ']';
+    public bool IsIPBased => m_Value is { Length: > 1 } && m_Value[m_Value.Length - 1] == ']';
 
     /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None"/>.</summary>
     public IPAddress IPDomain
     {
         get
         {
-            if (!IsIPBased) { return IPAddress.None; }
-
-            var ip = Domain.StartsWith("[IPv6:", StringComparison.InvariantCulture)
-                ? Domain.Substring(6, Domain.Length - 7)
-                : Domain.Substring(1, Domain.Length - 2);
-
-            return IPAddress.Parse(ip);
+            if (IsIPBased)
+            {
+                var ip = Domain.StartsWith("[IPv6:", StringComparison.InvariantCulture)
+                    ? Domain.Substring(6, Domain.Length - 7)
+                    : Domain.Substring(1, Domain.Length - 2);
+                return IPAddress.Parse(ip);
+            }
+            else return IPAddress.None;
         }
     }
 
@@ -86,7 +87,7 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+    public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -110,7 +111,7 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
     /// D: as domain uppercased.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
@@ -122,7 +123,7 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new()
     {
-        { 'U', (svo, provider) => svo.m_Value.ToUpper(provider) },
+        { 'U', (svo, provider) => svo.m_Value?.ToUpper(provider) ?? string.Empty },
         { 'l', (svo, provider) => svo.Local },
         { 'L', (svo, provider) => svo.Local.ToUpper(provider) },
         { 'd', (svo, provider) => svo.Domain },
@@ -145,7 +146,7 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out EmailAddress result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out EmailAddress result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
@@ -162,6 +163,6 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
             result = new EmailAddress(email);
             return true;
         }
-        else { return false; }
+        else return false;
     }
 }

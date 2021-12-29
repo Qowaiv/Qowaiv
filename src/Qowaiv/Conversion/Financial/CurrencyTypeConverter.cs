@@ -7,6 +7,6 @@ public class CurrencyTypeConverter : SvoTypeConverter<Currency>
 {
     /// <inheritdoc/>
     [Pure]
-    protected override Currency FromString(string str, CultureInfo culture) => Currency.Parse(str, culture);
+    protected override Currency FromString(string? str, CultureInfo? culture) => Currency.Parse(str, culture);
 }
 

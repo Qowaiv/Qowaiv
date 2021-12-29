@@ -23,7 +23,7 @@ namespace Qowaiv.AspNetCore.Mvc.ModelBinding
     public class TypeConverterModelBinder : IModelBinderProvider, IModelBinder
     {
         /// <summary>A Dictionary that keeps track of the registered type converters.</summary>
-        private readonly ConcurrentDictionary<Type, TypeConverter> TypeConverters = new ConcurrentDictionary<Type, TypeConverter>();
+        private readonly ConcurrentDictionary<Type, TypeConverter> TypeConverters = new();
 
         /// <summary>Static constructor.</summary>
         /// <remarks>

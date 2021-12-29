@@ -189,19 +189,17 @@ public partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable,
     /// All others format the total months.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
             return formatted;
         }
-
-        if (string.IsNullOrEmpty(format) || format == "F")
+        else if (string.IsNullOrEmpty(format) || format == "F")
         {
             return string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M", Years, Months);
         }
-
-        return m_Value.ToString(format, formatProvider);
+        else return m_Value.ToString(format, formatProvider);
     }
 
     /// <summary>Gets an XML string representation of the month span.</summary>
@@ -256,25 +254,24 @@ public partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable,
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out MonthSpan result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out MonthSpan result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        if (int.TryParse(s, NumberStyles.Integer, formatProvider, out var months)
+        else if (int.TryParse(s, NumberStyles.Integer, formatProvider, out var months)
             && TryCreate(months, out result))
         {
             return true;
         }
-
-        if (DateSpan.TryParse(s, formatProvider, out var dateSpan))
+        else if (DateSpan.TryParse(s, formatProvider, out var dateSpan))
         {
             result = FromMonths(dateSpan.TotalMonths);
             return true;
         }
-        return false;
+        else return false;
     }
 
     /// <summary>Creates a date span from years.</summary>

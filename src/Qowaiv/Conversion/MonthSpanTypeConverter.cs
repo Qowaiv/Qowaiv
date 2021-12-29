@@ -9,7 +9,7 @@ public class MonthSpanTypeConverter : NumericTypeConverter<MonthSpan, int>
 
     /// <inheritdoc/>
     [Pure]
-    protected override MonthSpan FromString(string str, CultureInfo culture) => MonthSpan.Parse(str, culture);
+    protected override MonthSpan FromString(string? str, CultureInfo? culture) => MonthSpan.Parse(str, culture);
 
     /// <inheritdoc/>
     [Pure]

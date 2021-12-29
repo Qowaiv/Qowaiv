@@ -9,7 +9,7 @@ public class PercentageTypeConverter : NumericTypeConverter<Percentage, decimal>
 
     /// <inheritdoc/>
     [Pure]
-    protected override Percentage FromString(string str, CultureInfo culture) => Percentage.Parse(str, culture);
+    protected override Percentage FromString(string? str, CultureInfo? culture) => Percentage.Parse(str, culture);
 
     /// <inheritdoc/>
     [Pure]

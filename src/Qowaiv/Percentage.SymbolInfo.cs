@@ -16,7 +16,7 @@ public partial struct Percentage
 
     internal readonly struct SymbolInfo : IEquatable<SymbolInfo>
     {
-        private static SymbolInfo Invalid => new(SymbolPosition.Invalid, default);
+        private static SymbolInfo Invalid => new(SymbolPosition.Invalid, CharBuffer.Empty(0));
 
         private SymbolInfo(SymbolPosition symbol, CharBuffer buffer)
         {
@@ -31,7 +31,7 @@ public partial struct Percentage
         public override string ToString() => Buffer;
 
         [Pure]
-        public override bool Equals(object obj) => obj is SymbolInfo other && Equals(other);
+        public override bool Equals(object? obj) => obj is SymbolInfo other && Equals(other);
 
         [Pure]
         public bool Equals(SymbolInfo other) => base.Equals(other);

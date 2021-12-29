@@ -35,7 +35,7 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     public static readonly InternationalBankAccountNumber Unknown = new("ZZ");
 
     /// <summary>Gets the number of characters of IBAN.</summary>
-    public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
+    public int Length => m_Value is { Length: > 2 } ? m_Value.Length : 0;
 
     /// <summary>Gets the country of IBAN.</summary>
     public Country Country
@@ -62,7 +62,7 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value == default ? null : ToUnformattedString();
+    public string? ToJson() => m_Value == default ? null : ToUnformattedString();
 
     /// <summary>Returns a <see cref="string"/> that represents the current IBAN for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -126,7 +126,7 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     /// F: as formatted uppercase.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault("U"), formatProvider, FormatTokens);
@@ -159,7 +159,7 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out InternationalBankAccountNumber result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out InternationalBankAccountNumber result)
     {
         result = default;
         var buffer = s.Buffer().Unify();
@@ -188,7 +188,7 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     private static bool ValidForCountry(CharBuffer buffer)
         => Country.TryParse(buffer.Substring(0, 2), out var country)
         && !country.IsEmptyOrUnknown()
-        && (!LocalizedPatterns.TryGetValue(country, out Regex localizedPattern)
+        && (!LocalizedPatterns.TryGetValue(country, out var localizedPattern)
         || buffer.Matches(localizedPattern));
 
     [Pure]

@@ -94,7 +94,7 @@ public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEq
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => SerializationValues[m_Value];
+    public string? ToJson() => SerializationValues[m_Value];
 
     /// <summary>Returns a <see cref="string"/> that represents the current yes-no for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -116,7 +116,7 @@ public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEq
     /// b/B: as boolean (true/false) (Title cased).
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
@@ -173,7 +173,7 @@ public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEq
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out YesNo result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out YesNo result)
     {
         result = Empty;
         var buffer = s.Buffer().Unify();
@@ -192,10 +192,7 @@ public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEq
             result = new YesNo(val);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        else return false;
     }
 
     private static readonly YesNoValues ParseValues = new();
@@ -204,8 +201,8 @@ public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEq
     /// <remarks>
     /// Used for both serialization and resource lookups.
     /// </remarks>
-    private static readonly string[] LookupSuffix = { null, "No", "Yes", "Unknown" };
-    private static readonly string[] SerializationValues = { null, "no", "yes", "?" };
+    private static readonly string?[] LookupSuffix = { null, "No", "Yes", "Unknown" };
+    private static readonly string?[] SerializationValues = { null, "no", "yes", "?" };
 
     private sealed class YesNoValues : LocalizedValues<byte>
     {

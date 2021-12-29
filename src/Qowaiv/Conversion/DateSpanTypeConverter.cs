@@ -16,7 +16,7 @@ public class DateSpanTypeConverter : TypeConverter
     /// true if this converter can perform the conversion; otherwise, false.
     /// </returns>
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 
     /// <summary>Converts a string to a date span, using the specified
@@ -38,7 +38,7 @@ public class DateSpanTypeConverter : TypeConverter
     /// The conversion cannot be performed.
     /// </exception>
     [Pure]
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
     {
         var str = value as string;
         if (value is null || str != null)

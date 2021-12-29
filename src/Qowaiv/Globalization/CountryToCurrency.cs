@@ -27,7 +27,7 @@ internal partial struct CountryToCurrency : IEquatable<CountryToCurrency>
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is CountryToCurrency other && Equals(other);
+    public override bool Equals(object? obj) => obj is CountryToCurrency other && Equals(other);
 
     /// <inheritdoc />
     [Pure]

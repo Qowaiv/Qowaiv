@@ -56,21 +56,21 @@ public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEq
         };
 
     /// <summary>Gets the full name of the month.</summary>
-    public string FullName => GetFullName(null);
+    public string FullName => GetFullName(formatProvider: null);
 
     /// <summary>Gets the short name of the month.</summary>
-    public string ShortName => GetShortName(null);
+    public string ShortName => GetShortName(formatProvider: null);
 
     /// <summary>Gets the full name of the month.</summary>
     [Pure]
-    public string GetFullName(IFormatProvider formatProvider)
+    public string GetFullName(IFormatProvider? formatProvider)
         => IsEmptyOrUnknown()
         ? ToDefaultString()
         : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetMonthName(m_Value);
 
     /// <summary>Gets the short name of the month.</summary>
     [Pure]
-    public string GetShortName(IFormatProvider formatProvider)
+    public string GetShortName(IFormatProvider? formatProvider)
         => IsEmptyOrUnknown()
         ? ToDefaultString()
         : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
@@ -113,7 +113,7 @@ public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEq
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value == default ? null : ToString("s", CultureInfo.InvariantCulture);
+    public string? ToJson() => m_Value == default ? null : ToString("s", CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -135,7 +135,7 @@ public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEq
     /// m: as number without leading zero.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
@@ -192,7 +192,7 @@ public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEq
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Month result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Month result)
     {
         result = default;
         var buffer = s.Buffer().Unify();

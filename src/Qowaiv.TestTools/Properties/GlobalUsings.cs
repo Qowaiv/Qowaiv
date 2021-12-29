@@ -1,4 +1,7 @@
-﻿global using System;
+﻿global using Qowaiv;
+global using Qowaiv.Diagnostics;
+global using Qowaiv.Diagnostics.Contracts;
+global using System;
 global using System.Collections;
 global using System.Collections.Generic;
 global using System.ComponentModel;
@@ -12,5 +15,3 @@ global using System.Runtime.Serialization;
 global using System.Text;
 global using System.Xml;
 global using System.Xml.Serialization;
-global using Qowaiv.Diagnostics.Contracts;
-global using Qowaiv;

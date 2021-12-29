@@ -5,5 +5,5 @@ public class PostalCodeTypeConverter : SvoTypeConverter<PostalCode>
 {
     /// <inheritdoc/>
     [Pure]
-    protected override PostalCode FromString(string str, CultureInfo culture) => PostalCode.Parse(str, culture);
+    protected override PostalCode FromString(string? str, CultureInfo? culture) => PostalCode.Parse(str, culture);
 }

@@ -9,7 +9,7 @@ public class MonthTypeConverter : NumericTypeConverter<Month, byte>
 
     /// <inheritdoc />
     [Pure]
-    protected override Month FromString(string str, CultureInfo culture) => Month.Parse(str, culture);
+    protected override Month FromString(string? str, CultureInfo? culture) => Month.Parse(str, culture);
 
     /// <inheritdoc />
     [Pure]

@@ -9,7 +9,7 @@ public sealed class SingleValueObjectAttribute : Attribute
     /// The parameterless constructor is marked private so it can not be used or tested.
     /// </remarks>
     [ExcludeFromCodeCoverage]
-    private SingleValueObjectAttribute() { }
+    private SingleValueObjectAttribute() : this(default, typeof(object)) { }
 
     /// <summary>Initializes a new instance of a single value object attribute.</summary>
     /// <param name="staticOptions">
@@ -34,5 +34,5 @@ public sealed class SingleValueObjectAttribute : Attribute
     /// <remarks>
     /// Use this if the database type is different from the underlying type.
     /// </remarks>
-    public Type DatabaseType { get; set; }
+    public Type? DatabaseType { get; set; }
 }

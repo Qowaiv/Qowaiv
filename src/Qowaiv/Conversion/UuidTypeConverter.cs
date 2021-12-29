@@ -5,7 +5,7 @@ public class UuidTypeConverter : SvoTypeConverter<Uuid, Guid>
 {
     /// <inheritdoc />
     [Pure]
-    protected override Uuid FromString(string str, CultureInfo culture) => Uuid.Parse(str);
+    protected override Uuid FromString(string? str, CultureInfo? culture) => Uuid.Parse(str);
 
     /// <inheritdoc />
     [Pure]

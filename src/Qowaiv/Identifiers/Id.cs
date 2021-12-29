@@ -26,7 +26,7 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     public static readonly Id<TIdentifier> Empty;
 
     /// <summary>Creates a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
-    private Id(object value) => m_Value = value;
+    private Id(object? value) => m_Value = value;
 
     /// <summary>Initializes a new instance of the identifier based on the serialization info.</summary>
     /// <param name="info">The serialization info.</param>
@@ -38,7 +38,7 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     }
 
     /// <summary>The inner value of the identifier.</summary>
-    private object m_Value;
+    private object? m_Value;
 
     /// <summary>Returns true if the identifier is empty, otherwise false.</summary>
     [Pure]
@@ -53,19 +53,11 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
 
     /// <inheritdoc/>
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
-        if (obj is null)
-        {
-            return 1;
-        }
-
-        if (obj is Id<TIdentifier> other)
-        {
-            return CompareTo(other);
-        }
-
-        throw new ArgumentException($"Argument must be Id<{typeof(TIdentifier).Name}>.", nameof(obj));
+        if (obj is null) return 1;
+        else if (obj is Id<TIdentifier> other) return CompareTo(other);
+        else throw new ArgumentException($"Argument must be Id<{typeof(TIdentifier).Name}>.", nameof(obj));
     }
 
     /// <inheritdoc/>
@@ -84,7 +76,7 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
 
     /// <inheritdoc/>
     [Pure]
-    public override bool Equals(object obj) => obj is Id<TIdentifier> other && Equals(other);
+    public override bool Equals(object? obj) => obj is Id<TIdentifier> other && Equals(other);
 
     /// <summary>Returns true if this instance and the other identifier are equal, otherwise false.</summary>
     /// <param name="other">
@@ -92,21 +84,13 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     /// </param>
     [Pure]
     public bool Equals(Id<TIdentifier> other)
-    {
-        var isEmpty = IsEmpty();
-        var otherIsEmpty = other.IsEmpty();
-
-        if (isEmpty || otherIsEmpty)
-        {
-            return isEmpty == otherIsEmpty;
-        }
-
-        return behavior.Equals(m_Value, other.m_Value);
-    }
+        => m_Value is null || other.m_Value is null
+        ? m_Value == other.m_Value
+        : behavior.Equals(m_Value, other.m_Value);
 
     /// <inheritdoc/>
     [Pure]
-    public override int GetHashCode() => IsEmpty() ? 0 : behavior.GetHashCode(m_Value);
+    public override int GetHashCode() => m_Value is null ? 0 : behavior.GetHashCode(m_Value);
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
@@ -150,14 +134,13 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
             return formatted;
         }
-
-        return IsEmpty() ? string.Empty : behavior.ToString(m_Value, format, formatProvider);
+        else return IsEmpty() ? string.Empty : behavior.ToString(m_Value, format, formatProvider);
     }
 
     /// <summary>Adds the underlying property of the identifier to the serialization info.</summary>
@@ -174,7 +157,7 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => null;
 
     /// <summary>Reads the identifier from an <see href = "XmlReader"/>.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -198,20 +181,20 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     /// The serialized JSON node.
     /// </returns>
     [Pure]
-    public object ToJson() => IsEmpty() ? null : behavior.ToJson(m_Value);
+    public object? ToJson() => IsEmpty() ? null : behavior.ToJson(m_Value);
 
     [Pure]
-    private TPrimitive CastToPrimitive<TPrimitive, TTo>()
+    private TPrimitive? CastToPrimitive<TPrimitive, TTo>()
     {
-        if (behavior.BaseType != typeof(TPrimitive))
+        if (behavior.BaseType == typeof(TPrimitive))
         {
-            throw Exceptions.InvalidCast<Id<TIdentifier>, TTo>();
+            return m_Value is TPrimitive primitive ? primitive : default;
         }
-        return m_Value is null ? default : (TPrimitive)m_Value;
+        else throw Exceptions.InvalidCast<Id<TIdentifier>, TTo>();
     }
 
     /// <summary>Casts the identifier to a <see cref="string"/>.</summary>
-    public static explicit operator string(Id<TIdentifier> id) => id.CastToPrimitive<string, string>();
+    public static explicit operator string?(Id<TIdentifier> id) => id.CastToPrimitive<string, string>();
 
     /// <summary>Casts the identifier to a <see cref="int"/>.</summary>
     public static explicit operator int(Id<TIdentifier> id) => id.CastToPrimitive<int, int>();
@@ -339,7 +322,7 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     public static Id<TIdentifier> Create(object obj)
         => TryCreate(obj, out var id)
         ? id
-        : throw Exceptions.InvalidCast(obj?.GetType(), typeof(Id<TIdentifier>));
+        : throw Exceptions.InvalidCast(obj.GetType(), typeof(Id<TIdentifier>));
 
     /// <summary>Tries to create an identifier from an <see cref="object"/>.</summary>
     /// <param name="obj">

@@ -28,20 +28,19 @@ public static class Unknown
     /// The culture to test for.
     /// </param>
     [Pure]
-    public static bool IsUnknown(string val, CultureInfo culture)
+    public static bool IsUnknown(string? val, CultureInfo? culture)
     {
-        if (string.IsNullOrEmpty(val)) { return false; }
-        else
+        if (val is { Length: > 0 })
         {
             var c = culture ?? CultureInfo.CurrentCulture;
-            if (!Strings.TryGetValue(c, out string[] values))
+            if (!Strings.TryGetValue(c, out var values))
             {
                 lock (addCulture)
                 {
                     if (!Strings.TryGetValue(c, out values))
                     {
-                        values = ResourceManager
-                            .GetString("Values", c)
+                        values = Not.Null(ResourceManager
+                            .GetString("Values", c))
                             .Split(';')
                             .Select(v => v.ToUpper(c))
                             .ToArray();
@@ -55,6 +54,7 @@ public static class Unknown
                 Strings[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant())
             );
         }
+        else return false;
     }
 
     /// <summary>Gets the value that represents set but unknown.</summary>
@@ -71,10 +71,9 @@ public static class Unknown
     /// The unknown value is expected to be static field or property of the type with the name "Unknown".
     /// </remarks>
     [Pure]
-    public static object Value(Type type)
+    public static object? Value(Type type)
     {
-        if (type is null) { return null; }
-        else
+        if (type is not null)
         {
             var field = type.GetField(nameof(Unknown), BindingFlags.Public | BindingFlags.Static);
             if (field is not null)
@@ -87,6 +86,7 @@ public static class Unknown
                 return property?.PropertyType == type ? property.GetValue(null) : null;
             }
         }
+        else return null;
     }
 
     /// <summary>The resource manager managing the culture based string values.</summary>

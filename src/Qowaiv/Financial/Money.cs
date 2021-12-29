@@ -460,7 +460,7 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
@@ -534,59 +534,58 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Money result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Money result)
     {
         result = default;
-        if (string.IsNullOrEmpty(s))
+        if (s is { Length: > 0 })
         {
-            return false;
-        }
+            string s_num;
+            string s_cur;
 
-        string s_num;
-        string s_cur;
+            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
 
-        var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+            var buffer = new List<char>(s.Length);
+            var min = culture.NumberFormat.NegativeSign[0];
+            var pls = culture.NumberFormat.PositiveSign[0];
 
-        var buffer = new List<char>(s.Length);
-        var min = culture.NumberFormat.NegativeSign[0];
-        var pls = culture.NumberFormat.PositiveSign[0];
-
-        foreach (var ch in s)
-        {
-            if (ch == min || ch == pls || (ch >= '0' && ch <= '9')) { break; }
-            buffer.Add(ch);
-        }
-        if (buffer.Count > 0)
-        {
-            s_num = s.Substring(buffer.Count);
-            s_cur = new string(buffer.ToArray());
-        }
-        else
-        {
-            for (var pos = s.Length - 1; pos >= 0; pos--)
+            foreach (var ch in s)
             {
-                var ch = s[pos];
                 if (ch == min || ch == pls || (ch >= '0' && ch <= '9')) { break; }
-                buffer.Insert(0, ch);
+                buffer.Add(ch);
+            }
+            if (buffer.Count > 0)
+            {
+                s_num = s.Substring(buffer.Count);
+                s_cur = new string(buffer.ToArray());
+            }
+            else
+            {
+                for (var pos = s.Length - 1; pos >= 0; pos--)
+                {
+                    var ch = s[pos];
+                    if (ch == min || ch == pls || (ch >= '0' && ch <= '9')) { break; }
+                    buffer.Insert(0, ch);
+                }
+
+                s_num = s.Substring(0, s.Length - buffer.Count);
+                s_cur = new string(buffer.ToArray());
             }
 
-            s_num = s.Substring(0, s.Length - buffer.Count);
-            s_cur = new string(buffer.ToArray());
-        }
+            if (!decimal.TryParse(s_num, NumberStyles.Currency, formatProvider, out var value))
+            {
+                return false;
+            }
 
-        if (!decimal.TryParse(s_num, NumberStyles.Currency, formatProvider, out var value))
-        {
-            return false;
-        }
+            Currency currency = default;
 
-        Currency currency = default;
-
-        if (s_cur != string.Empty && !Currency.TryParse(s_cur, formatProvider, out currency))
-        {
-            return false;
+            if (s_cur != string.Empty && !Currency.TryParse(s_cur, formatProvider, out currency))
+            {
+                return false;
+            }
+            result = value + currency;
+            return true;
         }
-        result = value + currency;
-        return true;
+        else return false;
     }
 
     /// <summary >Creates Money from a Decimal. </summary >
@@ -594,10 +593,7 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// The amount.
     /// </param>
     [Pure]
-    public static Money Create(decimal val)
-    {
-        return Create(val, Currency.Current);
-    }
+    public static Money Create(decimal val) => Create(val, Currency.Current);
 
     /// <summary >Creates Money from a Decimal. </summary >
     /// <param name="val" >
@@ -607,10 +603,7 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// The currency of the amount.
     /// </param>
     [Pure]
-    public static Money Create(decimal val, Currency currency)
-    {
-        return new Money { m_Value = val, m_Currency = currency };
-    }
+    public static Money Create(decimal val, Currency currency) => new() { m_Value = val, m_Currency = currency };
 
     /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
     /// <remarks>
@@ -621,7 +614,7 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// the number properties, so we copy them for desired behavior.
     /// </remarks>
     [Pure]
-    internal static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+    internal static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
     {
         var info = NumberFormatInfo.GetInstance(formatProvider);
         info = (NumberFormatInfo)info.Clone();

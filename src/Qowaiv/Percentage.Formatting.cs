@@ -39,23 +39,18 @@ public partial struct Percentage
 
     /// <summary>Resolves the format.</summary>
     [Pure]
-    private static string Format(string format, IFormatProvider formatProvider)
+    private static string Format(string? format, IFormatProvider formatProvider)
     {
-        if (string.IsNullOrEmpty(format))
-        {
-            return DefaultFormats.TryGetValue(formatProvider, out format)
-                ? format
-                : PercentFormat;
-        }
-        else
-        {
+        if (format is { Length: > 0 })
             return format switch
             {
                 "PM" => PerMilleFormat,
                 "PT" => PerTenThousendFormat,
                 _ => format,
             };
-        }
+        else return DefaultFormats.TryGetValue(formatProvider, out format)
+                ? format
+                : PercentFormat;
     }
 
     /// <summary>Gets the default format for different countries.</summary>

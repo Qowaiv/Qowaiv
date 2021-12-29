@@ -13,6 +13,7 @@
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
+    <Nullable>enable</Nullable>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 

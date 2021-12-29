@@ -5,7 +5,7 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
 {
     /// <inheritdoc />
     [Pure]
-    protected override LocalDateTime FromString(string str, CultureInfo culture) => LocalDateTime.Parse(str, culture);
+    protected override LocalDateTime FromString(string? str, CultureInfo? culture) => LocalDateTime.Parse(str, culture);
 
     /// <inheritdoc />
     [Pure]

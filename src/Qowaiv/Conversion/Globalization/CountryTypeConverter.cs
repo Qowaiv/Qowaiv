@@ -7,6 +7,6 @@ public class CountryTypeConverter : SvoTypeConverter<Country>
 {
     /// <inheritdoc/>
     [Pure]
-    protected override Country FromString(string str, CultureInfo culture) => Country.Parse(str, culture);
+    protected override Country FromString(string? str, CultureInfo? culture) => Country.Parse(str, culture);
 }
 

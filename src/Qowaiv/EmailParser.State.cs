@@ -4,7 +4,7 @@ internal static partial class EmailParser
 {
     private ref struct State
     {
-        public State(string str)
+        public State(string? str)
         {
             Input = str.Buffer().Trim();
             Buffer = CharBuffer.Empty(EmailAddress.MaxLength);
@@ -59,6 +59,6 @@ internal static partial class EmailParser
         }
 
         [Pure]
-        public string Parsed() => Result.IsEmpty() ? null : Result.ToString();
+        public string? Parsed() => Result.IsEmpty() ? null : Result.ToString();
     }
 }

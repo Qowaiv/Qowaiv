@@ -11,7 +11,7 @@ public class EloTypeConverter : NumericTypeConverter<Elo, double>
 
     /// <inheritdoc/>
     [Pure]
-    protected override Elo FromString(string str, CultureInfo culture) => Elo.Parse(str, culture);
+    protected override Elo FromString(string? str, CultureInfo? culture) => Elo.Parse(str, culture);
 
     /// <inheritdoc/>
     [Pure]

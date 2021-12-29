@@ -5,19 +5,19 @@ public class YesNoTypeConverter : SvoTypeConverter<YesNo>
 {
     /// <inheritdoc/>
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => sourceType == typeof(bool)
         || base.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc/>
     [Pure]
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         => destinationType == typeof(bool)
         || base.CanConvertTo(context, destinationType);
 
     /// <inheritdoc/>
     [Pure]
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
     {
         if (value is bool boolean)
         {
@@ -28,7 +28,7 @@ public class YesNoTypeConverter : SvoTypeConverter<YesNo>
 
     /// <inheritdoc/>
     [Pure]
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         if (destinationType == typeof(bool) && value is YesNo yesNo)
         {
@@ -39,5 +39,5 @@ public class YesNoTypeConverter : SvoTypeConverter<YesNo>
 
     /// <inheritdoc/>
     [Pure]
-    protected override YesNo FromString(string str, CultureInfo culture) => YesNo.Parse(str, culture);
+    protected override YesNo FromString(string? str, CultureInfo? culture) => YesNo.Parse(str, culture);
 }

@@ -14,7 +14,7 @@ public static class Deserialize
     /// The xml string to (XML) deserialize.
     /// </param>
     [Pure]
-    public static T Xml<T>(string xml)
+    public static T? Xml<T>(string xml)
     {
         var value = new XElement("Value", xml);
         var doc = new XDocument(new XElement("Wrapper", value));
@@ -26,8 +26,7 @@ public static class Deserialize
         var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
         try
         {
-            var wrapper = (SerializationWrapper<T>)serializer.Deserialize(stream);
-            return wrapper.Value;
+            return Not.Null((SerializationWrapper<T>?)serializer.Deserialize(stream)).Value;
         }
         catch (Exception x)
         {

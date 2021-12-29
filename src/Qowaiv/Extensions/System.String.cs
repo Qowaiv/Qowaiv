@@ -53,16 +53,16 @@ public static class QowaivSystemExtensions
     /// implementation can supply that type of object; otherwise, null.
     /// </returns>
     [Pure]
-    public static TFormat GetFormat<TFormat>(this IFormatProvider provider)
+    public static TFormat? GetFormat<TFormat>(this IFormatProvider provider)
     {
         Guard.NotNull(provider, nameof(provider));
-        return (TFormat)provider.GetFormat(typeof(TFormat));
+        return (TFormat?)provider.GetFormat(typeof(TFormat));
     }
 
     /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)"/>,
     /// otherwise the string value.
     /// </summary>
     [Pure]
-    internal static string WithDefault(this string str, string @default)
-        => string.IsNullOrEmpty(str) ? @default : str;
+    internal static string WithDefault(this string? str, string @default = "")
+        => str is { Length: > 0 } ? str : @default;
 }

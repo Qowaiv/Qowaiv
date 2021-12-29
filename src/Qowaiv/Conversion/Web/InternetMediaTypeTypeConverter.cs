@@ -7,5 +7,5 @@ public class InternetMediaTypeTypeConverter : SvoTypeConverter<InternetMediaType
 {
     /// <inheritdoc/>
     [Pure]
-    protected override InternetMediaType FromString(string str, CultureInfo culture) => InternetMediaType.Parse(str);
+    protected override InternetMediaType FromString(string? str, CultureInfo? culture) => InternetMediaType.Parse(str);
 }

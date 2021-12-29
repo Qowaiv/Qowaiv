@@ -30,7 +30,7 @@ public static class Serialize
     /// The instance to (XML) serialize.
     /// </param>
     [Pure]
-    public static string Xml<T>(T instance)
+    public static string? Xml<T>(T instance)
     {
         using var stream = new MemoryStream();
 

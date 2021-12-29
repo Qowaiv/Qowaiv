@@ -513,7 +513,7 @@ public partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormatta
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : m_Value.ToString(format, formatProvider);
@@ -578,7 +578,7 @@ public partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormatta
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out LocalDateTime result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out LocalDateTime result)
     {
         return TryParse(s, formatProvider, DateTimeStyles.None, out result);
     }
@@ -603,14 +603,17 @@ public partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormatta
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, DateTimeStyles styles, out LocalDateTime result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, DateTimeStyles styles, out LocalDateTime result)
     {
         if (DateTime.TryParse(s, formatProvider, styles, out DateTime dt))
         {
             result = new LocalDateTime(dt);
             return true;
         }
-        result = MinValue;
-        return false;
+        else
+        {
+            result = MinValue;
+            return false;
+        }
     }
 }

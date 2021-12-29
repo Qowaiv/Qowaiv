@@ -30,8 +30,7 @@ internal static partial class EmailParser
     private const int NotFound = -1;
 
     [Pure]
-    public static string Parse(string str)
-        => new State(str).Root().Parsed();
+    public static string? Parse(string? str) => new State(str).Root().Parsed();
 
     [FluentSyntax]
     private static State Root(this State state)

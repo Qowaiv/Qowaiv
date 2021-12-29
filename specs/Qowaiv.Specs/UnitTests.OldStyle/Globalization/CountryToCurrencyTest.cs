@@ -20,7 +20,7 @@ namespace Qowaiv.UnitTests.Globalization
         [TestCaseSource(nameof(GetCountriesWithCurrency))]
         public void GetCurrency_ExistOnEndDate(Country country)
         {
-            var test = country.EndDate ?? Date.Today;
+            var test = country.EndDate ?? Clock.Today();
             Assert.AreNotEqual(Currency.Empty, country.GetCurrency(test), "{0} ({0:f}) on {1:yyyy-MM-dd}", country, test);
         }
     }

@@ -6,6 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct YesNo
@@ -24,13 +26,22 @@ public partial struct YesNo
     /// <summary>Returns true if the  yes-no is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+
+    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    [Pure]
+    private int Kind()
+    {
+        if (IsEmpty()) return 0;
+        else if (IsUnknown()) return +2;
+        else return +1;
+    }
 }
 
 public partial struct YesNo : IEquatable<YesNo>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is YesNo other && Equals(other);
+    public override bool Equals(object? obj) => obj is YesNo other && Equals(other);
 
     /// <summary>Returns true if this instance and the other yes-no are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="YesNo" /> to compare with.</param>
@@ -56,7 +67,7 @@ public partial struct YesNo : IComparable, IComparable<YesNo>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is YesNo other) { return CompareTo(other); }
@@ -64,28 +75,30 @@ public partial struct YesNo : IComparable, IComparable<YesNo>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(YesNo other) => Comparer<byte>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
 }
 
 public partial struct YesNo : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the yes-no.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the yes-no.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the yes-no.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct YesNo : ISerializable
@@ -96,7 +109,7 @@ public partial struct YesNo : ISerializable
     private YesNo(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (byte)info.GetValue("Value", typeof(byte));
+        m_Value = info.GetValue("Value", typeof(byte)) is byte val ? val : default(byte);
     }
 
     /// <summary>Adds the underlying property of the yes-no to the serialization info.</summary>
@@ -116,7 +129,7 @@ public partial struct YesNo
     /// The deserialized yes-no.
     /// </returns>
     [Pure]
-    public static YesNo FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static YesNo FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct YesNo : IXmlSerializable
@@ -126,7 +139,7 @@ public partial struct YesNo : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the yes-no from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -160,7 +173,7 @@ public partial struct YesNo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static YesNo Parse(string s) => Parse(s, null);
+    public static YesNo Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
     /// <param name="s">
@@ -176,7 +189,7 @@ public partial struct YesNo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static YesNo Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionYesNo);
+    public static YesNo Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionYesNo);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
     /// <param name="s">
@@ -186,7 +199,7 @@ public partial struct YesNo
     /// The yes-no if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static YesNo? TryParse(string s) => TryParse(s, null);
+    public static YesNo? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
     /// <param name="s">
@@ -199,7 +212,7 @@ public partial struct YesNo
     /// The yes-no if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static YesNo? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out YesNo val) ? val : default(YesNo?);
+    public static YesNo? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(YesNo?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -214,7 +227,7 @@ public partial struct YesNo
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out YesNo result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out YesNo result) => TryParse(s, null, out result);
 }
 
 public partial struct YesNo
@@ -225,7 +238,7 @@ public partial struct YesNo
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid yes-no.</summary>
     /// <param name="val">
@@ -235,7 +248,7 @@ public partial struct YesNo
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

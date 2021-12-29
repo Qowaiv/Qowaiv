@@ -6,14 +6,16 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv.Web;
 
 public partial struct InternetMediaType
 {
-    private InternetMediaType(string value) => m_Value = value;
+    private InternetMediaType(string? value) => m_Value = value;
 
     /// <summary>The inner value of the Internet media type.</summary>
-    private string m_Value;
+    private string? m_Value;
 
     /// <summary>Returns true if the  Internet media type is empty, otherwise false.</summary>
     [Pure]
@@ -24,13 +26,22 @@ public partial struct InternetMediaType
     /// <summary>Returns true if the  Internet media type is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+
+    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    [Pure]
+    private int Kind()
+    {
+        if (IsEmpty()) return 0;
+        else if (IsUnknown()) return +2;
+        else return +1;
+    }
 }
 
 public partial struct InternetMediaType : IEquatable<InternetMediaType>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is InternetMediaType other && Equals(other);
+    public override bool Equals(object? obj) => obj is InternetMediaType other && Equals(other);
 
     /// <summary>Returns true if this instance and the other Internet media type are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="InternetMediaType" /> to compare with.</param>
@@ -56,7 +67,7 @@ public partial struct InternetMediaType : IComparable, IComparable<InternetMedia
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is InternetMediaType other) { return CompareTo(other); }
@@ -64,28 +75,30 @@ public partial struct InternetMediaType : IComparable, IComparable<InternetMedia
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(InternetMediaType other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
 }
 
 public partial struct InternetMediaType : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the Internet media type.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the Internet media type.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the Internet media type.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct InternetMediaType : ISerializable
@@ -96,7 +109,7 @@ public partial struct InternetMediaType : ISerializable
     private InternetMediaType(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (string)info.GetValue("Value", typeof(string));
+        m_Value = info.GetValue("Value", typeof(string)) is string val ? val : default(string);
     }
 
     /// <summary>Adds the underlying property of the Internet media type to the serialization info.</summary>
@@ -126,7 +139,7 @@ public partial struct InternetMediaType : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the Internet media type from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -160,7 +173,7 @@ public partial struct InternetMediaType
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static InternetMediaType Parse(string s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionInternetMediaType);
+    public static InternetMediaType Parse(string? s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionInternetMediaType);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
     /// <param name="s">
@@ -170,7 +183,7 @@ public partial struct InternetMediaType
     /// The Internet media type if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static InternetMediaType? TryParse(string s) => TryParse(s, out InternetMediaType val) ? val : default(InternetMediaType?);
+    public static InternetMediaType? TryParse(string? s) => TryParse(s, out var val) ? val : default(InternetMediaType?);
 }
 
 public partial struct InternetMediaType

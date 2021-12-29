@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Text;
+﻿#nullable enable
+
+namespace Qowaiv.Text;
 
 internal sealed partial class CharBuffer : IEquatable<string>, IEnumerable<char>
 {
@@ -34,7 +36,7 @@ internal sealed partial class CharBuffer : IEquatable<string>, IEnumerable<char>
 
     /// <summary>Returns true if the buffer represents an unknown value.</summary>
     [Pure]
-    public bool IsUnknown(IFormatProvider provider)
+    public bool IsUnknown(IFormatProvider? provider)
         => Unknown.IsUnknown(ToString(), provider as CultureInfo);
 
     /// <summary>Returns true if the buffer matches the specified <see cref="Regex"/>.</summary>
@@ -55,33 +57,33 @@ internal sealed partial class CharBuffer : IEquatable<string>, IEnumerable<char>
 
     /// <inheritdoc />
     [Pure]
-    public bool Equals(string other) => Equals(other, false);
+    public bool Equals(string? other) => Equals(other, false);
 
     /// <summary>Returns true if the buffer equals the <see cref="string"/>.</summary>
     [Pure]
-    public bool Equals(string other, bool ignoreCase)
+    public bool Equals(string? other, bool ignoreCase)
     {
-        if (Length != other.Length)
+        if (Length == other?.Length)
         {
-            return false;
-        }
-        for (var i = 0; i < Length; i++)
-        {
-            if (this[i] != other[i])
+            for (var i = 0; i < Length; i++)
             {
-                if (ignoreCase && char.ToUpperInvariant(this[i]) == char.ToUpperInvariant(other[i]))
+                if (this[i] != other[i])
                 {
-                    continue;
+                    if (ignoreCase && char.ToUpperInvariant(this[i]) == char.ToUpperInvariant(other[i]))
+                    {
+                        continue;
+                    }
+                    return false;
                 }
-                return false;
             }
+            return true;
         }
-        return true;
+        else return false;
     }
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
         => (obj is string str && Equals(str))
         || ReferenceEquals(this, obj);
 

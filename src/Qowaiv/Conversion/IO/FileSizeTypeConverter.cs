@@ -11,7 +11,7 @@ public class StreamSizeTypeConverter : NumericTypeConverter<StreamSize, long>
 
     /// <inheritdoc/>
     [Pure]
-    protected override StreamSize FromString(string str, CultureInfo culture) => StreamSize.Parse(str, culture);
+    protected override StreamSize FromString(string? str, CultureInfo? culture) => StreamSize.Parse(str, culture);
 
     /// <inheritdoc/>
     [Pure]

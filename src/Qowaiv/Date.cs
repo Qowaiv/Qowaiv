@@ -404,7 +404,7 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         // We don't want to see hh:mm pop up.
         format = format.WithDefault("d");
@@ -475,7 +475,7 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Date result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Date result)
         => TryParse(s, formatProvider, DateTimeStyles.None, out result);
 
     /// <summary>Converts the string to a 
@@ -498,7 +498,7 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, DateTimeStyles styles, out Date result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, DateTimeStyles styles, out Date result)
     {
         if (DateTime.TryParse(s, formatProvider, styles, out DateTime dt))
         {

@@ -7,6 +7,6 @@ public class InternationalBankAccountNumberTypeConverter : SvoTypeConverter<Inte
 {
     /// <inheritdoc/>
     [Pure]
-    protected override InternationalBankAccountNumber FromString(string str, CultureInfo culture) => InternationalBankAccountNumber.Parse(str, culture);
+    protected override InternationalBankAccountNumber FromString(string? str, CultureInfo? culture) => InternationalBankAccountNumber.Parse(str, culture);
 }
 

@@ -9,7 +9,7 @@ public class YearTypeConverter : NumericTypeConverter<Year, int>
 
     /// <inheritdoc/>
     [Pure]
-    protected override Year FromString(string str, CultureInfo culture) => Year.Parse(str, culture);
+    protected override Year FromString(string? str, CultureInfo? culture) => Year.Parse(str, culture);
 
     /// <inheritdoc/>
     [Pure]

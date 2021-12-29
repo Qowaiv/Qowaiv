@@ -162,7 +162,7 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value;
+    public string? ToJson() => m_Value;
 
     /// <summary>Returns a <see cref="string"/> that represents the current Country for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -186,14 +186,14 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
     /// f: as formatted/display name.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
 
     /// <summary>Gets an XML string representation of the country.</summary>
     [Pure]
-    private string ToXmlString() => m_Value;
+    private string ToXmlString() => m_Value ?? String.Empty;
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new()
@@ -227,7 +227,7 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Country result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Country result)
     {
         result = Empty;
         var buffer = s.Buffer().Unify();
@@ -245,10 +245,7 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
             result = new Country(val);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        else return false;
     }
 
     /// <summary>Creates a country based on a region info.</summary>
@@ -316,8 +313,8 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
 
     /// <summary>Gets a collection of all country info's.</summary>
     public static readonly ReadOnlyCollection<Country> All = new(
-        ResourceManager
-            .GetString("All")
+        Not.Null(ResourceManager
+            .GetString("All"))
             .Split(';')
             .Select(str => new Country(str))
             .ToList());
@@ -327,9 +324,9 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
 
     private static readonly CountryValues ParseValues = new();
 
-    private sealed class CountryValues : LocalizedValues<string>
+    private sealed class CountryValues : LocalizedValues<string?>
     {
-        public CountryValues() : base(new Dictionary<string, string>
+        public CountryValues() : base(new Dictionary<string, string?>
             {
                 { "ZZ", "ZZ" },
                 { "ZZZ", "ZZ" },
@@ -367,7 +364,7 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
         }
     }
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private static ResourceManager rm;
+    private static ResourceManager? rm;
 
     /// <summary>Get resource string.</summary>
     /// <param name="postfix">

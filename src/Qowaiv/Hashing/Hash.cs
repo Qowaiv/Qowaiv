@@ -21,7 +21,7 @@ public readonly struct Hash : IEquatable<Hash>
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Hash other && Equals(other);
+    public override bool Equals(object? obj) => obj is Hash other && Equals(other);
 
     /// <inheritdoc />
     [Pure]

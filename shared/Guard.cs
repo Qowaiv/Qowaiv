@@ -4,6 +4,15 @@
 //    See: https://github.com/Corniel/Grenadiers/blob/master/LICENSE.md
 // </copyright>
 //-----------------------------------------------------------------------
+#nullable enable
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Linq;
 
 namespace Qowaiv;
 
@@ -26,7 +35,7 @@ internal static partial class Guard
     /// The guarded parameter.
     /// </returns>
     [DebuggerStepThrough]
-    public static T NotNull<T>([ValidatedNotNull] T parameter, string paramName)
+    public static T NotNull<T>([ValidatedNotNull] T? parameter, string paramName)
         where T : class
         => parameter ?? throw new ArgumentNullException(paramName);
 
@@ -128,9 +137,9 @@ internal static partial class Guard
     /// The guarded parameter.
     /// </returns>
     [DebuggerStepThrough]
-    public static T IsInstanceOf<T>([ValidatedNotNull] object parameter, string paramName)
-        => NotNull(parameter, paramName) is T instance
-        ? instance
+    public static T IsInstanceOf<T>([ValidatedNotNull] object? parameter, string paramName)
+        => NotNull(parameter, paramName) is T guarded
+        ? guarded
         : throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Messages.ArgumentException_NotAnInstanceOf, typeof(T)), paramName);
 
 
@@ -142,11 +151,11 @@ internal static partial class Guard
     /// The guarded parameter.
     /// </returns>
     [DebuggerStepThrough]
-    public static T HasAny<T>([ValidatedNotNull] T parameter, string paramName)
+    public static T HasAny<T>([ValidatedNotNull] T? parameter, string paramName)
         where T : class, ICollection
-        => NotNull(parameter, paramName).Count == 0
+        => NotNull(parameter, paramName) is var guarded && guarded.Count == 0
         ? throw new ArgumentException(Messages.ArgumentException_EmptyCollection, paramName)
-        : parameter;
+        : guarded;
 
     /// <summary>Guards that the parameter is not null or an empty enumerable, otherwise throws an argument (null) exception.</summary>
     /// <typeparam name="T">The type to guard; must be an <see cref="IEnumerable" />.</typeparam>
@@ -156,9 +165,9 @@ internal static partial class Guard
     /// The guarded parameter.
     /// </returns>
     [DebuggerStepThrough]
-    public static IEnumerable<T> HasAny<T>([ValidatedNotNull] IEnumerable<T> parameter, string paramName)
-        => NotNull(parameter, paramName).Any()
-        ? parameter
+    public static IEnumerable<T> HasAny<T>([ValidatedNotNull] IEnumerable<T>? parameter, string paramName)
+        => NotNull(parameter, paramName) is var guarded && guarded.Any()
+        ? guarded
         : throw new ArgumentException(Messages.ArgumentException_EmptyCollection, paramName);
 
     /// <summary>Guards that the parameter is not null or an empty string, otherwise throws an argument (null) exception.</summary>
@@ -168,10 +177,10 @@ internal static partial class Guard
     /// The guarded parameter.
     /// </returns>
     [DebuggerStepThrough]
-    public static string NotNullOrEmpty([ValidatedNotNull] string parameter, string paramName)
-        => NotNull(parameter, paramName) == string.Empty
-        ? throw new ArgumentException(Messages.ArgumentException_StringEmpty, paramName)
-        : parameter;
+    public static string NotNullOrEmpty([ValidatedNotNull] string? parameter, string paramName)
+        => NotNull(parameter, paramName) is { Length: > 0 } guarded
+        ? guarded
+        : throw new ArgumentException(Messages.ArgumentException_StringEmpty, paramName);
 
     /// <summary>Guards that the parameter is not an empty <see cref="Guid"/>, otherwise throws an argument exception.</summary>
     /// <param name="parameter">The parameter to guard.</param>

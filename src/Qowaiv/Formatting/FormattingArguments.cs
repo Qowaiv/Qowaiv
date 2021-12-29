@@ -3,7 +3,7 @@
 /// <summary>Represents formatting arguments.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
-public struct FormattingArguments : ISerializable, IEquatable<FormattingArguments>
+public readonly struct FormattingArguments : ISerializable, IEquatable<FormattingArguments>
 {
     /// <summary>Represents empty/not set formatting arguments.</summary>
     public static readonly FormattingArguments None;
@@ -15,7 +15,7 @@ public struct FormattingArguments : ISerializable, IEquatable<FormattingArgument
     /// <param name="formatProvider">
     /// The format provider.
     /// </param>
-    public FormattingArguments(string format, IFormatProvider formatProvider)
+    public FormattingArguments(string? format, IFormatProvider? formatProvider)
     {
         Format = format;
         FormatProvider = formatProvider;
@@ -26,19 +26,19 @@ public struct FormattingArguments : ISerializable, IEquatable<FormattingArgument
     /// The format provider.
     /// </param>
 
-    public FormattingArguments(IFormatProvider formatProvider) : this(null, formatProvider) { }
+    public FormattingArguments(IFormatProvider? formatProvider) : this(format: null, formatProvider) { }
 
     /// <summary>Initializes a new instance of new formatting arguments.</summary>
     /// <param name="format">
     /// The format.
     /// </param>
-    public FormattingArguments(string format) : this(format, null) { }
+    public FormattingArguments(string? format) : this(format, formatProvider: null) { }
 
     /// <summary>Gets the format.</summary>
-    public string Format { get; }
+    public string? Format { get; }
 
     /// <summary>Gets the format provider.</summary>
-    public IFormatProvider FormatProvider { get; }
+    public IFormatProvider? FormatProvider { get; }
 
     /// <summary>Formats the object using the formatting arguments.</summary>
     /// <param name="obj">
@@ -48,19 +48,9 @@ public struct FormattingArguments : ISerializable, IEquatable<FormattingArgument
     /// A formatted string representing the object.
     /// </returns>
     [Pure]
-    public string ToString(IFormattable obj)
-    {
-        if (obj == null)
-        {
-#pragma warning disable S2225
-            // "ToString()" method should not return null
-            // if the origin is null, it should not become string.Empty.
-            return null;
-#pragma warning restore S2225
-        }
-        return obj.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
-    }
-
+    public string? ToString(IFormattable? obj)
+        => obj?.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
+    
     /// <summary>Formats the object using the formatting arguments.</summary>
     /// <param name="obj">
     /// The object to get the formatted string representation from.
@@ -72,7 +62,7 @@ public struct FormattingArguments : ISerializable, IEquatable<FormattingArgument
     /// If the object does not implement IFormattable, the ToString() will be used.
     /// </remarks>
     [Pure]
-    public string ToString(object obj)
+    public string? ToString(object? obj)
         => obj is IFormattable formattable
         ? ToString(formattable)
         : obj?.ToString();
@@ -84,7 +74,7 @@ public struct FormattingArguments : ISerializable, IEquatable<FormattingArgument
     {
         Guard.NotNull(info, nameof(info));
         Format = info.GetString(nameof(Format));
-        FormatProvider = (IFormatProvider)info.GetValue(nameof(FormatProvider), typeof(IFormatProvider));
+        FormatProvider = (IFormatProvider?)info.GetValue(nameof(FormatProvider), typeof(IFormatProvider));
     }
 
     /// <summary>Adds the underlying property of formatting arguments to the serialization info.</summary>
@@ -104,7 +94,7 @@ public struct FormattingArguments : ISerializable, IEquatable<FormattingArgument
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is FormattingArguments args && Equals(args);
+    public override bool Equals(object? obj) => obj is FormattingArguments args && Equals(args);
 
     /// <inheritdoc />
     [Pure]

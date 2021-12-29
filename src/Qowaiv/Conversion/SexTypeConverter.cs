@@ -5,5 +5,5 @@ public class SexTypeConverter : SvoTypeConverter<Sex>
 {
     /// <inheritdoc/>
     [Pure]
-    protected override Sex FromString(string str, CultureInfo culture) => Sex.Parse(str, culture);
+    protected override Sex FromString(string? str, CultureInfo? culture) => Sex.Parse(str, culture);
 }

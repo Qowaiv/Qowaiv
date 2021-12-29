@@ -46,11 +46,11 @@ public partial struct InternetMediaType : ISerializable, IXmlSerializable, IForm
     private static readonly Regex Pattern = new('^' + PatternTopLevel + '/' + PatternSubtype + PatternSuffix + '$', RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     /// <summary>The pattern of the top level.</summary>
-    private const string PatternTopLevel = @"(?<toplevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))";
+    private const string PatternTopLevel = @"(?<TopLevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))";
     /// <summary>The pattern of the subtype.</summary>
-    private const string PatternSubtype = @"(?<subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)";
+    private const string PatternSubtype = @"(?<Subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)";
     /// <summary>The pattern of the suffix.</summary>
-    private const string PatternSuffix = @"(\+(?<suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?";
+    private const string PatternSuffix = @"(\+(?<Suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?";
 
     /// <summary>Represents an empty/not set Internet media type.</summary>
     public static readonly InternetMediaType Empty;
@@ -59,17 +59,13 @@ public partial struct InternetMediaType : ISerializable, IXmlSerializable, IForm
     public static readonly InternetMediaType Unknown = new("application/octet-stream");
 
     /// <summary>Gets the number of characters of the Internet media type.</summary>
-    public int Length => IsEmpty() ? 0 : m_Value.Length;
+    public int Length => m_Value?.Length ?? 0;
 
     /// <summary>Gets the top-level of the Internet media type.</summary>
     public string TopLevel
-    {
-        get
-        {
-            if (IsEmpty()) { return string.Empty; }
-            return Pattern.Match(m_Value).Groups["toplevel"].Value;
-        }
-    }
+        => m_Value is null
+        ? string.Empty
+        : Pattern.Match(m_Value).Groups[nameof(TopLevel)].Value;
 
     /// <summary>Gets the top-level type of the Internet media type.</summary>
     /// <remarks>
@@ -79,58 +75,44 @@ public partial struct InternetMediaType : ISerializable, IXmlSerializable, IForm
     {
         get
         {
-            if (IsEmpty())
+            if (!IsEmpty())
             {
-                return InternetMediaTopLevelType.None;
-            }
-            return
-                Enum.TryParse(TopLevel, true, out InternetMediaTopLevelType type)
+                return Enum.TryParse(TopLevel, true, out InternetMediaTopLevelType type)
                 ? type
                 : InternetMediaTopLevelType.Unregistered;
+            }
+            else return InternetMediaTopLevelType.None;
         }
     }
 
     /// <summary>Gets the subtype of the Internet media type.</summary>
     public string Subtype
-    {
-        get
-        {
-            if (IsEmpty()) { return string.Empty; }
-            return Pattern.Match(m_Value).Groups["subtype"].Value;
-        }
-    }
+        => m_Value is null
+        ? string.Empty
+        : Pattern.Match(m_Value).Groups[nameof(Subtype)].Value;
 
     /// <summary>Gets the suffix of the Internet media type.</summary>
     public InternetMediaSuffixType Suffix
-    {
-        get
-        {
-            Enum.TryParse(Pattern.Match(m_Value ?? string.Empty).Groups["suffix"].Value, true, out InternetMediaSuffixType type);
-            return type;
-        }
-    }
+        => m_Value is { } && Enum.TryParse(Pattern.Match(m_Value).Groups[nameof(Suffix)].Value, true, out InternetMediaSuffixType type)
+        ? type
+        : InternetMediaSuffixType.None;
+
     /// <summary>Returns true if Internet media type is a registered type, otherwise false.</summary>
     /// <remarks>
     /// This is based on a naming convention, not on actual registration.
     /// </remarks>
     public bool IsRegistered
-    {
-        get
-        {
-            return
-                TopLevelType != InternetMediaTopLevelType.None &&
-                TopLevelType != InternetMediaTopLevelType.Unregistered &&
-                !Subtype.StartsWith("x-", StringComparison.Ordinal) &&
-                !Subtype.StartsWith("x.", StringComparison.Ordinal);
-        }
-    }
+        => TopLevelType != InternetMediaTopLevelType.None 
+        && TopLevelType != InternetMediaTopLevelType.Unregistered 
+        && !Subtype.StartsWith("x-", StringComparison.Ordinal) 
+        && !Subtype.StartsWith("x.", StringComparison.Ordinal);
 
     /// <summary>Serializes the Internet media type to a JSON node.</summary>
     /// <returns>
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value;
+    public string? ToJson() => m_Value;
 
     /// <summary>Returns a <see cref="string"/> that represents the current Internet media type for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -146,7 +128,7 @@ public partial struct InternetMediaType : ISerializable, IXmlSerializable, IForm
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : m_Value ?? string.Empty;
@@ -167,10 +149,10 @@ public partial struct InternetMediaType : ISerializable, IXmlSerializable, IForm
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, out InternetMediaType result)
+    public static bool TryParse(string? s, out InternetMediaType result)
     {
         result = default;
-        if (string.IsNullOrEmpty(s))
+        if (s is not { Length: > 0})
         {
             return true;
         }

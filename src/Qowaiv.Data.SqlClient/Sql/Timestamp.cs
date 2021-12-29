@@ -56,7 +56,7 @@ public partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable,
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
@@ -108,10 +108,10 @@ public partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable,
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Timestamp result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Timestamp result)
     {
         result = default;
-        if (string.IsNullOrEmpty(s)) { return false; }
+        if (s is not { Length: > 0 }) { return false; }
         if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase) &&
             ulong.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out var val))
         {

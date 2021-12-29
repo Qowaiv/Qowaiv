@@ -6,6 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv.Statistics;
 
 public partial struct Elo
@@ -21,7 +23,7 @@ public partial struct Elo : IEquatable<Elo>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Elo other && Equals(other);
+    public override bool Equals(object? obj) => obj is Elo other && Equals(other);
 
     /// <summary>Returns true if this instance and the other elo are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Elo" /> to compare with.</param>
@@ -47,7 +49,7 @@ public partial struct Elo : IComparable, IComparable<Elo>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Elo other) { return CompareTo(other); }
@@ -55,7 +57,9 @@ public partial struct Elo : IComparable, IComparable<Elo>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(Elo other) => Comparer<double>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(Elo l, Elo r) => l.CompareTo(r) < 0;
 
@@ -73,21 +77,21 @@ public partial struct Elo : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the elo.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the elo.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the elo.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Elo : ISerializable
@@ -98,7 +102,7 @@ public partial struct Elo : ISerializable
     private Elo(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (double)info.GetValue("Value", typeof(double));
+        m_Value = info.GetValue("Value", typeof(double)) is double val ? val : default(double);
     }
 
     /// <summary>Adds the underlying property of the elo to the serialization info.</summary>
@@ -118,7 +122,7 @@ public partial struct Elo
     /// The deserialized elo.
     /// </returns>
     [Pure]
-    public static Elo FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static Elo FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Elo : IXmlSerializable
@@ -128,7 +132,7 @@ public partial struct Elo : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the elo from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -162,7 +166,7 @@ public partial struct Elo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Elo Parse(string s) => Parse(s, null);
+    public static Elo Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
     /// <param name="s">
@@ -178,7 +182,7 @@ public partial struct Elo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Elo Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionElo);
+    public static Elo Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionElo);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
     /// <param name="s">
@@ -188,7 +192,7 @@ public partial struct Elo
     /// The elo if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Elo? TryParse(string s) => TryParse(s, null);
+    public static Elo? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
     /// <param name="s">
@@ -201,7 +205,7 @@ public partial struct Elo
     /// The elo if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Elo? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Elo val) ? val : default(Elo?);
+    public static Elo? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Elo?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -216,7 +220,7 @@ public partial struct Elo
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Elo result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Elo result) => TryParse(s, null, out result);
 }
 
 public partial struct Elo
@@ -227,7 +231,7 @@ public partial struct Elo
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid elo.</summary>
     /// <param name="val">
@@ -237,7 +241,7 @@ public partial struct Elo
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

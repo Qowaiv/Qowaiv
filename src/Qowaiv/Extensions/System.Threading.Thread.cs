@@ -7,7 +7,7 @@ public static class QowaivThreadExtensions
 {
     /// <summary>Gets the value of T.</summary>
     [Pure]
-    public static T GetValue<T>(this Thread thread) => ThreadDomain.Current.Get<T>();
+    public static T? GetValue<T>(this Thread thread) => ThreadDomain.Current.Get<T>();
 
     /// <summary>Sets the value for T.</summary>
     public static void SetValue<T>(this Thread thread, T value) => ThreadDomain.Current.Set(value);

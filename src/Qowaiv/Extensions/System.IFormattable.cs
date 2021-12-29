@@ -14,18 +14,10 @@ public static class QowaivFormattableExtensions
     /// A formatted string representing the object.
     /// </returns>
     [Pure]
-    public static string ToString(this IFormattable formattable, FormattingArguments arguments)
-    {
-        if (formattable is null)
-        {
-#pragma warning disable S2225
-            // "ToString()" method should not return null
-            // if the origin is null, it should not become string.Empty.
-            return null;
-#pragma warning restore S2225
-        }
-        return arguments.ToString(formattable);
-    }
+    public static string? ToString(this IFormattable? formattable, FormattingArguments arguments)
+        => formattable is { }
+        ? arguments.ToString(formattable)
+        : null;
 
     /// <summary>Formats the object using the formatting arguments collection.</summary>
     /// <param name="formattable">
@@ -38,17 +30,8 @@ public static class QowaivFormattableExtensions
     /// A formatted string representing the object.
     /// </returns>
     [Pure]
-    public static string ToString(this IFormattable formattable, FormattingArgumentsCollection argumentsCollection)
-    {
-        if (formattable == null)
-        {
-#pragma warning disable S2225
-            // "ToString()" method should not return null
-            // if the origin is null, it should not become string.Empty.
-            return null;
-#pragma warning restore S2225
-        }
-
-        return (argumentsCollection ?? new FormattingArgumentsCollection()).ToString(formattable);
-    }
+    public static string? ToString(this IFormattable? formattable, FormattingArgumentsCollection? argumentsCollection)
+      => formattable is { }
+        ? (argumentsCollection ?? new FormattingArgumentsCollection()).ToString(formattable)
+        : null;
 }

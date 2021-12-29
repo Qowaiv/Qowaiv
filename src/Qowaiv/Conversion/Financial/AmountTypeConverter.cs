@@ -11,7 +11,7 @@ public class AmountTypeConverter : NumericTypeConverter<Amount, decimal>
 
     /// <inheritdoc/>
     [Pure]
-    protected override Amount FromString(string str, CultureInfo culture) => Amount.Parse(str, culture);
+    protected override Amount FromString(string? str, CultureInfo? culture) => Amount.Parse(str, culture);
 
     /// <inheritdoc/>
     [Pure]

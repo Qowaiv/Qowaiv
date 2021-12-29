@@ -7,9 +7,9 @@ public sealed partial class PostalCodeCountryInfo
     /// <summary>Constructor.</summary>
     private PostalCodeCountryInfo(
         Country country,
-        Regex validationPattern,
-        Regex formattingSearchPattern,
-        string formattingReplacePattern,
+        Regex? validationPattern,
+        Regex? formattingSearchPattern,
+        string? formattingReplacePattern,
         bool isSingleValue)
     {
         Country = country;
@@ -32,13 +32,13 @@ public sealed partial class PostalCodeCountryInfo
     public bool IsSingleValue { get; }
 
     /// <summary>Gets the postal code validation pattern for the country.</summary>
-    private Regex ValidationPattern { get; }
+    private Regex? ValidationPattern { get; }
 
     /// <summary>Gets the postal code formatting search pattern for the country.</summary>
-    private Regex FormattingSearchPattern { get; }
+    private Regex? FormattingSearchPattern { get; }
 
     /// <summary>Gets the postal code formatting replace pattern for the country.</summary>
-    private string FormattingReplacePattern { get; }
+    private string? FormattingReplacePattern { get; }
 
     /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>
     /// <param name="postalcode">
@@ -48,9 +48,9 @@ public sealed partial class PostalCodeCountryInfo
     /// Returns false if the country does not have postal codes.
     /// </remarks>
     [Pure]
-    public bool IsValid(string postalcode)
+    public bool IsValid(string? postalcode)
         => !string.IsNullOrEmpty(postalcode)
-        && HasPostalCode
+        && ValidationPattern is { }
         && postalcode.Buffer().Unify().Matches(ValidationPattern);
 
     /// <summary>Formats the postal code.</summary>
@@ -67,9 +67,9 @@ public sealed partial class PostalCodeCountryInfo
     [Pure]
     public string Format(string postalcode)
     {
-        if (HasFormatting && IsValid(postalcode))
+        if (FormattingSearchPattern is { } && IsValid(postalcode))
         {
-            return FormattingSearchPattern.Replace(postalcode, FormattingReplacePattern);
+            return FormattingSearchPattern.Replace(postalcode, FormattingReplacePattern ?? string.Empty);
         }
         else if (Unknown.IsUnknown(postalcode, CultureInfo.InvariantCulture))
         {
@@ -81,7 +81,7 @@ public sealed partial class PostalCodeCountryInfo
     /// <summary>Gets the single value if supported, otherwise string.Empty.</summary>
     [Pure]
     public string GetSingleValue()
-        => IsSingleValue
+        => IsSingleValue && FormattingReplacePattern is { }
         ? FormattingReplacePattern
         : string.Empty;
 
@@ -97,22 +97,17 @@ public sealed partial class PostalCodeCountryInfo
             {
                 sb.Append("none");
             }
+            else if (IsSingleValue)
+            {
+                sb.Append("Value: ").Append(FormattingReplacePattern);
+            }
             else
             {
-                if (this.IsSingleValue)
-                {
-                    sb.Append("Value: ").Append(FormattingReplacePattern);
-                }
-                else
-                {
-                    sb.Append("Pattern: ")
-                    .Append(ValidationPattern);
+                sb.Append("Pattern: ").Append(ValidationPattern);
 
-                    if (HasFormatting)
-                    {
-                        sb.Append(", Format: ")
-                        .Append(FormattingReplacePattern);
-                    }
+                if (HasFormatting)
+                {
+                    sb.Append(", Format: ").Append(FormattingReplacePattern);
                 }
             }
             return sb.ToString();
@@ -140,16 +135,16 @@ public sealed partial class PostalCodeCountryInfo
     /// </param>
     [Pure]
     public static PostalCodeCountryInfo GetInstance(Country country)
-        => Instances.TryGetValue(country, out PostalCodeCountryInfo instance)
+        => Instances.TryGetValue(country, out var instance)
         ? instance
-        : new PostalCodeCountryInfo(country, null, null, null, false);
+        : new(country, null, null, null, false);
 
     /// <summary>Creates a new instance.</summary>
     /// <remarks>
     /// Used for initializing the Instances dictionary.
     /// </remarks>
     [Pure]
-    private static PostalCodeCountryInfo New(Country country, string validation, string search = null, string replace = null, bool isSingle = false)
+    private static PostalCodeCountryInfo New(Country country, string validation, string? search = null, string? replace = null, bool isSingle = false)
         => new(
             country: country,
             validationPattern: new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase),

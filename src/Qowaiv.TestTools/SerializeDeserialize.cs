@@ -21,9 +21,9 @@ namespace Qowaiv.TestTools
         {
             using var buffer = new MemoryStream();
             var formatter = new BinaryFormatter();
-            formatter.Serialize(buffer, instance);
+            formatter.Serialize(buffer, instance ?? throw new ArgumentNullException(nameof(instance)));
             buffer.Position = 0;
-            return (T)formatter.Deserialize(buffer);
+            return Not.Null((T?)formatter.Deserialize(buffer));
         }
 
         /// <summary>Serializes and deserializes an instance using a <see cref="DataContractSerializer"/>.</summary>
@@ -41,7 +41,7 @@ namespace Qowaiv.TestTools
             var serializer = new DataContractSerializer(typeof(T));
             serializer.WriteObject(stream, instance);
             stream.Position = 0;
-            return (T)serializer.ReadObject(stream);
+            return Not.Null((T?)serializer.ReadObject(stream));
         }
 
         /// <summary>Serializes and deserializes an instance using an <see cref="XmlSerializer"/>.</summary>
@@ -59,7 +59,7 @@ namespace Qowaiv.TestTools
             var serializer = new XmlSerializer(typeof(T));
             serializer.Serialize(writer, instance);
             stream.Position = 0;
-            return (T)serializer.Deserialize(stream);
+            return Not.Null((T?)serializer.Deserialize(stream));
         }
     }
 }

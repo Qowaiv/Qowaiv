@@ -17,7 +17,6 @@ internal static class DebugDisplay
 
     [Pure]
     private static bool HasEmptyValue<Svo>()
-        => typeof(Svo)
-        .GetCustomAttribute<SingleValueObjectAttribute>()
-        .StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue);
+        => typeof(Svo).GetCustomAttribute<SingleValueObjectAttribute>()?
+        .StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue) ?? false;
 }

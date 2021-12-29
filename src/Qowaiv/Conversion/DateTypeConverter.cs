@@ -5,7 +5,7 @@ public class DateTypeConverter : DateTypeConverter<Date>
 {
     /// <inheritdoc />
     [Pure]
-    protected override Date FromString(string str, CultureInfo culture) => Date.Parse(str, culture);
+    protected override Date FromString(string? str, CultureInfo? culture) => Date.Parse(str, culture);
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]

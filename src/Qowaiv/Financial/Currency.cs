@@ -115,7 +115,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+    public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -139,7 +139,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// f: as formatted/display name.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
@@ -162,7 +162,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
     [Pure]
-    object IFormatProvider.GetFormat(Type formatType)
+    object? IFormatProvider.GetFormat(Type? formatType)
         => formatType == typeof(NumberFormatInfo)
         ? GetNumberFormatInfo(CultureInfo.CurrentCulture)
         : null;
@@ -176,7 +176,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// the number properties, so we copy them for desired behavior.
     /// </remarks>
     [Pure]
-    internal NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+    internal NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
     {
         var info = NumberFormatInfo.GetInstance(formatProvider);
         info = (NumberFormatInfo)info.Clone();
@@ -200,7 +200,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Currency result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Currency result)
     {
         result = Empty;
         var buffer = s.Buffer().Unify();
@@ -218,10 +218,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
             result = new Currency(val);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        else return false;
     }
 
     #region Get currencies
@@ -250,8 +247,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// because ALL exists.
     /// </remarks>
     public static readonly ReadOnlyCollection<Currency> AllCurrencies = new(
-        ResourceManager
-            .GetString("All")
+        (ResourceManager.GetString("All") ?? string.Empty)
             .Split(';')
             .Select(str => new Currency(str))
             .ToList());
@@ -260,9 +256,9 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
 
     private static readonly CurrencyValues ParseValues = new();
 
-    private sealed class CurrencyValues : LocalizedValues<string>
+    private sealed class CurrencyValues : LocalizedValues<string?>
     {
-        public CurrencyValues() : base(new Dictionary<string, string>
+        public CurrencyValues() : base(new Dictionary<string, string?>
             {
                 { "ZZZ", "ZZZ" },
                 { "999", "ZZZ" },
@@ -303,7 +299,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
         }
     }
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private static ResourceManager rm;
+    private static ResourceManager? rm;
 
     /// <summary>Get resource string.</summary>
     /// <param name="postfix">
@@ -313,7 +309,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string postfix, IFormatProvider formatProvider)
+    private string GetResourceString(string postfix, IFormatProvider? formatProvider)
         => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
 
     #region Money creation operators

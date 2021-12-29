@@ -79,7 +79,7 @@ public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattabl
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
+    public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current house number for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -93,15 +93,15 @@ public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattabl
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
             return formatted;
         }
-        if (IsUnknown()) { return "?"; }
-        if (IsEmpty()) { return string.Empty; }
-        return m_Value.ToString(format, formatProvider);
+        else if (IsUnknown()) return "?";
+        else if (IsEmpty()) return string.Empty;
+        else return m_Value.ToString(format, formatProvider);
     }
 
 
@@ -136,7 +136,7 @@ public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattabl
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out HouseNumber result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out HouseNumber result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
@@ -149,12 +149,12 @@ public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattabl
             result = Unknown;
             return true;
         }
-        if (Pattern.IsMatch(s))
+        else if (Pattern.IsMatch(s))
         {
             result = new HouseNumber(int.Parse(s, formatProvider));
             return true;
         }
-        return false;
+        else return false;
     }
 
     /// <summary>Creates a house number from a Int32. </summary >

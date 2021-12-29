@@ -7,5 +7,5 @@ public class FractionTypeConverter : SvoTypeConverter<Fraction>
 {
     /// <inheritdoc/>
     [Pure]
-    protected override Fraction FromString(string str, CultureInfo culture) => Fraction.Parse(str, culture);
+    protected override Fraction FromString(string? str, CultureInfo? culture) => Fraction.Parse(str, culture);
 }

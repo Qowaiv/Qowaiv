@@ -53,7 +53,7 @@ public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// The serialized JSON node.
     /// </returns>
     [Pure]
-    public object ToJson()
+    public object? ToJson()
     {
         if (IsEmpty()) return null;
         else if (IsUnknown()) return "?";
@@ -72,7 +72,7 @@ public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
@@ -123,25 +123,24 @@ public partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Year result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Year result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-        if (Qowaiv.Unknown.IsUnknown(s, culture))
+        else if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo ?? CultureInfo.InvariantCulture))
         {
             result = Unknown;
             return true;
         }
-        if (Pattern.IsMatch(s))
+        else if (Pattern.IsMatch(s))
         {
             result = new Year(short.Parse(s, formatProvider));
             return true;
         }
-        return false;
+        else return false;
     }
 
     /// <summary>Creates a year from a Int32. </summary >

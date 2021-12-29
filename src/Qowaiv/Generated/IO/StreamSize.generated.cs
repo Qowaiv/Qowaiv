@@ -6,13 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv.IO;
 
 public partial struct StreamSize : IEquatable<StreamSize>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is StreamSize other && Equals(other);
+    public override bool Equals(object? obj) => obj is StreamSize other && Equals(other);
 
     /// <summary>Returns true if this instance and the other stream size are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="StreamSize" /> to compare with.</param>
@@ -38,7 +40,7 @@ public partial struct StreamSize : IComparable, IComparable<StreamSize>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is StreamSize other) { return CompareTo(other); }
@@ -46,7 +48,9 @@ public partial struct StreamSize : IComparable, IComparable<StreamSize>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(StreamSize other) => Comparer<long>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(StreamSize l, StreamSize r) => l.CompareTo(r) < 0;
 
@@ -68,7 +72,7 @@ public partial struct StreamSize : ISerializable
     private StreamSize(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (long)info.GetValue("Value", typeof(long));
+        m_Value = info.GetValue("Value", typeof(long)) is long val ? val : default(long);
     }
 
     /// <summary>Adds the underlying property of the stream size to the serialization info.</summary>
@@ -88,7 +92,7 @@ public partial struct StreamSize
     /// The deserialized stream size.
     /// </returns>
     [Pure]
-    public static StreamSize FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static StreamSize FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct StreamSize : IXmlSerializable
@@ -98,7 +102,7 @@ public partial struct StreamSize : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the stream size from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -132,7 +136,7 @@ public partial struct StreamSize
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static StreamSize Parse(string s) => Parse(s, null);
+    public static StreamSize Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
     /// <param name="s">
@@ -148,7 +152,7 @@ public partial struct StreamSize
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static StreamSize Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
+    public static StreamSize Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
     /// <param name="s">
@@ -158,7 +162,7 @@ public partial struct StreamSize
     /// The stream size if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static StreamSize? TryParse(string s) => TryParse(s, null);
+    public static StreamSize? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
     /// <param name="s">
@@ -171,7 +175,7 @@ public partial struct StreamSize
     /// The stream size if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static StreamSize? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out StreamSize val) ? val : default(StreamSize?);
+    public static StreamSize? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(StreamSize?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -186,7 +190,7 @@ public partial struct StreamSize
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out StreamSize result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out StreamSize result) => TryParse(s, null, out result);
 }
 
 public partial struct StreamSize
@@ -197,7 +201,7 @@ public partial struct StreamSize
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid stream size.</summary>
     /// <param name="val">
@@ -207,7 +211,7 @@ public partial struct StreamSize
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

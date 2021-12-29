@@ -68,15 +68,13 @@ public class WildcardPattern : ISerializable
         ComparisonType = comparisonType;
     }
 
-    #region Serializable
-
     /// <summary>Initializes a new instance of a wild card pattern based on the serialization info.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     protected WildcardPattern(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        Pattern = info.GetString("Pattern");
+        Pattern = Guard.NotNullOrEmpty(info.GetString("Pattern"), "Pattern");
         Options = (WildcardPatternOptions)info.GetInt32("Options");
         ComparisonType = (StringComparison)info.GetInt32("ComparisonType");
     }
@@ -101,44 +99,34 @@ public class WildcardPattern : ISerializable
         info.AddValue("ComparisonType", (int)ComparisonType);
     }
 
-    #endregion
-
     /// <summary>The wildcard pattern options.</summary>
     public WildcardPatternOptions Options { get; private set; }
+
     /// <summary>The comparison type.</summary>
     public StringComparison ComparisonType { get; private set; }
 
     /// <summary>The wildcard pattern.</summary>
     protected string Pattern { get; private set; }
+
     /// <summary>The wildcard single char.</summary>
     protected char SingleChar { get; set; }
+
     /// <summary>The wildcard multiple chars.</summary>
     protected char MultipleChars { get; set; }
 
     /// <summary>Returns true if matching is culture independent, otherwise false.</summary>
+    /// <remarks>
+    /// The second test is never hit (yet) because we only need this when ignore case.
+    /// </remarks>
     protected bool IsCultureIndependent
-    {
-        get
-        {
-            return
-                // The first test is never hit (yet) because we only need
-                // this when ignore case.
-                //ComparisonType == StringComparison.InvariantCulture || 
-                ComparisonType == StringComparison.InvariantCultureIgnoreCase;
-        }
-    }
-
+        => ComparisonType == StringComparison.InvariantCultureIgnoreCase;
+        // || ComparisonType == StringComparison.InvariantCulture
+      
     /// <summary>Returns true if the case should be ignored, otherwise false.</summary>
     protected bool IgnoreCase
-    {
-        get
-        {
-            return
-                ComparisonType == StringComparison.CurrentCultureIgnoreCase ||
-                ComparisonType == StringComparison.InvariantCultureIgnoreCase ||
-                ComparisonType == StringComparison.OrdinalIgnoreCase;
-        }
-    }
+        => ComparisonType == StringComparison.CurrentCultureIgnoreCase 
+        || ComparisonType == StringComparison.InvariantCultureIgnoreCase 
+        || ComparisonType == StringComparison.OrdinalIgnoreCase;
 
     /// <summary>Indicates whether the wildcard pattern finds a match in the specified input string.</summary>
     /// <param name="input">

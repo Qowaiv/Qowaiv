@@ -600,35 +600,37 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
             return formatted;
         }
-
-        formatProvider ??= CultureInfo.CurrentCulture;
-        format = Format(format, formatProvider);
-
-        var numberInfo = GetNumberFormatInfo(formatProvider);
-        var symbolInfo = SymbolInfo.Resolve(format.Buffer(), numberInfo);
-        if (symbolInfo.Symbol == SymbolPosition.Invalid)
+        else
         {
-            throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
+            formatProvider ??= CultureInfo.CurrentCulture;
+            format = Format(format, formatProvider);
+
+            var numberInfo = GetNumberFormatInfo(formatProvider);
+            var symbolInfo = SymbolInfo.Resolve(format.Buffer(), numberInfo);
+            if (symbolInfo.Symbol == SymbolPosition.Invalid)
+            {
+                throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
+            }
+            var dec = m_Value / Factors[symbolInfo.Symbol];
+            var str = dec.ToString(symbolInfo.Buffer, numberInfo);
+
+            return symbolInfo.Symbol switch
+            {
+                SymbolPosition.PercentBefore => numberInfo.PercentSymbol + str,
+                SymbolPosition.PerMilleBefore => numberInfo.PerMilleSymbol + str,
+                SymbolPosition.PerTenThousandBefore => PerTenThousandSymbol + str,
+                SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
+                SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
+                SymbolPosition.PerTenThousandAfter => str + PerTenThousandSymbol,
+                _ => str,
+            };
         }
-        var dec = m_Value / Factors[symbolInfo.Symbol];
-        var str = dec.ToString(symbolInfo.Buffer, numberInfo);
-
-        return symbolInfo.Symbol switch
-        {
-            SymbolPosition.PercentBefore => numberInfo.PercentSymbol + str,
-            SymbolPosition.PerMilleBefore => numberInfo.PerMilleSymbol + str,
-            SymbolPosition.PerTenThousandBefore => PerTenThousandSymbol + str,
-            SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
-            SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
-            SymbolPosition.PerTenThousandAfter => str + PerTenThousandSymbol,
-            _ => str,
-        };
     }
 
     /// <summary>Gets an XML string representation of the @FullName.</summary>
@@ -668,7 +670,7 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Percentage result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Percentage result)
     {
         result = Zero;
 

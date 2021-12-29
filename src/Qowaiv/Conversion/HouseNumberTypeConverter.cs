@@ -9,7 +9,7 @@ public class HouseNumberTypeConverter : NumericTypeConverter<HouseNumber, int>
 
     /// <inheritdoc />
     [Pure]
-    protected override HouseNumber FromString(string str, CultureInfo culture) => HouseNumber.Parse(str, culture);
+    protected override HouseNumber FromString(string? str, CultureInfo? culture) => HouseNumber.Parse(str, culture);
 
     /// <inheritdoc />
     [Pure]

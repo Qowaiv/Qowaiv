@@ -49,7 +49,7 @@ public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value == Guid.Empty ? null : ToString(CultureInfo.InvariantCulture);
+    public string? ToJson() => m_Value == Guid.Empty ? null : ToString(CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -94,7 +94,7 @@ public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// the lowercase formats are lowercase (except the the 's').
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : behavior.ToString(m_Value, format, formatProvider);
@@ -134,7 +134,7 @@ public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// of UUID's are identical.
     /// </remarks>
     [Pure]
-    public static Uuid NewSequential(UuidComparer comparer)
+    public static Uuid NewSequential(UuidComparer? comparer)
     {
         var sequential = Clock.UtcNow().Ticks - TicksYear1970;
         if (sequential < 0) { throw new InvalidOperationException(QowaivMessages.InvalidOperation_SequentialUUID); }
@@ -184,10 +184,10 @@ public partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Uuid result)
+    public static bool TryParse(string? s, out Uuid result)
     {
         result = default;
-        if (behavior.TryParse(s, out object id))
+        if (behavior.TryParse(s, out var id))
         {
             result = id is Guid guid ? new Uuid(guid) : Empty;
             return true;

@@ -61,7 +61,7 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
     /// </param>
     /// <returns></returns>
     [Pure]
-    public string GetDisplayName(CultureInfo culture) => GetResourceString(string.Empty, culture);
+    public string GetDisplayName(CultureInfo? culture) => GetResourceString(string.Empty, culture);
 
     /// <summary>Converts the Gender to an int.</summary>
     [Pure]
@@ -96,7 +96,7 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => GenderLabels[m_Value];
+    public string? ToJson() => GenderLabels[m_Value];
 
     /// <summary>Returns a <see cref="string"/> that represents the current Gender for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -121,7 +121,7 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
     /// f: as formatted/display name.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
@@ -170,7 +170,7 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Gender result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Gender result)
     {
         result = Empty;
         var buffer = s.Buffer().Unify();
@@ -262,7 +262,7 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string prefix, IFormatProvider formatProvider)
+    private string GetResourceString(string prefix, IFormatProvider? formatProvider)
         => ResourceManager.Localized(formatProvider, prefix, GenderLabels[m_Value]);
 
     /// <summary>Gets the valid values.</summary>
@@ -287,7 +287,7 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
     /// <remarks>
     /// Used for both serialization and resource lookups.
     /// </remarks>
-    private static readonly Dictionary<byte, string> GenderLabels = new()
+    private static readonly Dictionary<byte, string?> GenderLabels = new()
     {
         { 0, null },
         { 1, "NotKnown" },

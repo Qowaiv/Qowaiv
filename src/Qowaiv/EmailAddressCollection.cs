@@ -206,14 +206,14 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() { return GetSchema(); }
+    XmlSchema? IXmlSerializable.GetSchema() => GetSchema();
 
     /// <summary>Gets the <see href="XmlSchema"/> to (de) XML serialize an email address.</summary>
     /// <remarks>
     /// this is used by IXmlSerializable.GetSchema() so that it can be changed by derived classes.
     /// </remarks>
     [Pure]
-    protected virtual XmlSchema GetSchema() { return null; }
+    protected virtual XmlSchema? GetSchema() => null;
 
     /// <summary>Reads the email address from an <see href="XmlReader"/>.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -261,7 +261,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public virtual string ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
+    public virtual string? ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
     #endregion
 
@@ -293,15 +293,10 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-
-        return String.Join(Separator, this.Select(emailaddress => emailaddress.ToString(format, formatProvider)));
-    }
+    public string ToString(string? format, IFormatProvider? formatProvider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+        ? formatted
+        : string.Join(Separator, this.Select(emailaddress => emailaddress.ToString(format, formatProvider)));
 
     #endregion
 
@@ -334,7 +329,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// s is not in the correct format.
     /// </exception>
     [Pure]
-    public static EmailAddressCollection Parse(string s, IFormatProvider formatProvider)
+    public static EmailAddressCollection Parse(string? s, IFormatProvider formatProvider)
     {
         if (TryParse(s, formatProvider, out EmailAddressCollection val))
         {
@@ -394,28 +389,27 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out EmailAddressCollection result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out EmailAddressCollection result)
     {
         result = new EmailAddressCollection();
-        if (string.IsNullOrEmpty(s))
+        if (s is { Length: > 0 })
         {
-            return true;
-        }
-        var strs = s.Split(Separators, StringSplitOptions.RemoveEmptyEntries).Select(str => str.Trim());
-
-        foreach (var str in strs)
-        {
-            if (EmailAddress.TryParse(str, formatProvider, out EmailAddress email))
+            var strs = s.Split(Separators, StringSplitOptions.RemoveEmptyEntries).Select(str => str.Trim());
+            foreach (var str in strs)
             {
-                result.Add(email);
+                if (EmailAddress.TryParse(str, formatProvider, out EmailAddress email))
+                {
+                    result.Add(email);
+                }
+                else
+                {
+                    result.Clear();
+                    return false;
+                }
             }
-            else
-            {
-                result.Clear();
-                return false;
-            }
+            return result.Any();
         }
-        return result.Any();
+        else return true;
     }
 
     #endregion

@@ -8,34 +8,34 @@ public abstract class Int32IdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override int Compare(object x, object y) => Id(x).CompareTo(Id(y));
+    public override int Compare(object? x, object? y) => Id(x).CompareTo(Id(y));
 
     /// <inheritdoc/>
     [Pure]
-    public override bool Equals(object x, object y) => Id(x).Equals(Id(y));
+    public override bool Equals(object? x, object? y) => Id(x).Equals(Id(y));
 
     /// <inheritdoc/>
     [Pure]
-    public override int GetHashCode(object obj) => Id(obj).GetHashCode();
+    public override int GetHashCode(object? obj) => Id(obj).GetHashCode();
 
     /// <inheritdoc/>
     [Pure]
-    public override byte[] ToByteArray(object obj)
+    public override byte[] ToByteArray(object? obj)
         => obj is int num
         ? BitConverter.GetBytes(num)
         : Array.Empty<byte>();
 
     /// <inheritdoc/>
     [Pure]
-    public override object FromBytes(byte[] bytes) => BitConverter.ToInt32(bytes, 0);
+    public override object? FromBytes(byte[] bytes) => BitConverter.ToInt32(bytes, 0);
 
     /// <inheritdoc/>
     [Pure]
-    public override string ToString(object obj, string format, IFormatProvider formatProvider) => Id(obj).ToString(format, formatProvider);
+    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider) => Id(obj).ToString(format, formatProvider);
 
     /// <inheritdoc/>
     [Pure]
-    public override object FromJson(long obj)
+    public override object? FromJson(long obj)
     {
         if (obj == 0)
         {
@@ -50,11 +50,11 @@ public abstract class Int32IdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override object ToJson(object obj) => Id(obj);
+    public override object? ToJson(object? obj) => Id(obj);
 
     /// <inheritdoc/>
     [Pure]
-    public override bool TryParse(string str, out object id)
+    public override bool TryParse(string? str, out object? id)
     {
         if (int.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, out var number) && number >= 0)
         {
@@ -69,7 +69,7 @@ public abstract class Int32IdBehavior : IdentifierBehavior
     }
 
     /// <inheritdoc/>
-    public override bool TryCreate(object obj, out object id)
+    public override bool TryCreate(object? obj, out object? id)
     {
         if (obj is int num)
         {
@@ -85,10 +85,10 @@ public abstract class Int32IdBehavior : IdentifierBehavior
 
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => sourceType == typeof(int)
         || base.CanConvertFrom(context, sourceType);
 
     [Pure]
-    private static int Id(object obj) => obj is int number ? number : 0;
+    private static int Id(object? obj) => obj is int number ? number : 0;
 }

@@ -13,17 +13,17 @@ public abstract class SvoTypeConverter<TSvo> : TypeConverter
 {
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
         => value is null || value is string
         ? FromString(value as string, culture)
         : base.ConvertFrom(context, culture, value);
 
     /// <summary>Converts from <see cref="string"/>.</summary>
     [Pure]
-    protected abstract TSvo FromString(string str, CultureInfo culture);
+    protected abstract TSvo FromString(string? str, CultureInfo? culture);
 }

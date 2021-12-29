@@ -35,7 +35,7 @@ public readonly struct Secret : IEquatable<Secret>
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Secret other && Equals(other);
+    public override bool Equals(object? obj) => obj is Secret other && Equals(other);
 
     /// <summary>Returns true if both are empty, otherwise false.</summary>
     /// <remarks>
@@ -60,7 +60,7 @@ public readonly struct Secret : IEquatable<Secret>
     /// To prevent unintended exposure. 
     /// </remarks>
     [Pure]
-    public object ToJson() => null;
+    public object? ToJson() => null;
 
     /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -6,6 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct Sex
@@ -24,13 +26,22 @@ public partial struct Sex
     /// <summary>Returns true if the  sex is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+
+    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    [Pure]
+    private int Kind()
+    {
+        if (IsEmpty()) return 0;
+        else if (IsUnknown()) return +2;
+        else return +1;
+    }
 }
 
 public partial struct Sex : IEquatable<Sex>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Sex other && Equals(other);
+    public override bool Equals(object? obj) => obj is Sex other && Equals(other);
 
     /// <summary>Returns true if this instance and the other sex are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Sex" /> to compare with.</param>
@@ -56,7 +67,7 @@ public partial struct Sex : IComparable, IComparable<Sex>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Sex other) { return CompareTo(other); }
@@ -64,28 +75,30 @@ public partial struct Sex : IComparable, IComparable<Sex>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(Sex other) => Comparer<byte>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
 }
 
 public partial struct Sex : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the sex.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the sex.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the sex.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Sex : ISerializable
@@ -96,7 +109,7 @@ public partial struct Sex : ISerializable
     private Sex(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (byte)info.GetValue("Value", typeof(byte));
+        m_Value = info.GetValue("Value", typeof(byte)) is byte val ? val : default(byte);
     }
 
     /// <summary>Adds the underlying property of the sex to the serialization info.</summary>
@@ -116,7 +129,7 @@ public partial struct Sex
     /// The deserialized sex.
     /// </returns>
     [Pure]
-    public static Sex FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static Sex FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Sex : IXmlSerializable
@@ -126,7 +139,7 @@ public partial struct Sex : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the sex from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -160,7 +173,7 @@ public partial struct Sex
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Sex Parse(string s) => Parse(s, null);
+    public static Sex Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Sex"/>.</summary>
     /// <param name="s">
@@ -176,7 +189,7 @@ public partial struct Sex
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Sex Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionSex);
+    public static Sex Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionSex);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Sex"/>.</summary>
     /// <param name="s">
@@ -186,7 +199,7 @@ public partial struct Sex
     /// The sex if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Sex? TryParse(string s) => TryParse(s, null);
+    public static Sex? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Sex"/>.</summary>
     /// <param name="s">
@@ -199,7 +212,7 @@ public partial struct Sex
     /// The sex if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Sex? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Sex val) ? val : default(Sex?);
+    public static Sex? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Sex?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Sex"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -214,7 +227,7 @@ public partial struct Sex
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Sex result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Sex result) => TryParse(s, null, out result);
 }
 
 public partial struct Sex
@@ -225,7 +238,7 @@ public partial struct Sex
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid sex.</summary>
     /// <param name="val">
@@ -235,7 +248,7 @@ public partial struct Sex
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

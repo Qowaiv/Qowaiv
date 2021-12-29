@@ -26,7 +26,7 @@ public static class StringFormatter
     /// Uses the escape character '\'.
     /// </remarks>
     [Pure]
-    public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
+    public static string Apply<T>(T obj, string format, IFormatProvider? formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
         => Apply(obj, format, formatProvider, tokens, '\\');
 
     /// <summary>Apply a format string instruction on an object.</summary>
@@ -52,9 +52,9 @@ public static class StringFormatter
     /// An formatted string.
     /// </returns>
     [Pure]
-    public static string Apply<T>(T obj, string format, IFormatProvider formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
+    public static string Apply<T>(T obj, string format, IFormatProvider? formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
     {
-        Guard.NotNull((object)obj, nameof(obj));
+        Guard.NotNull((object?)obj, nameof(obj));
         Guard.NotNullOrEmpty(format, nameof(format));
         Guard.NotNull(tokens, nameof(tokens));
 
@@ -80,7 +80,7 @@ public static class StringFormatter
                 isEscape = true;
             }
             // If a token match, apply.
-            else if (tokens.TryGetValue(ch, out Func<T, IFormatProvider, string> action))
+            else if (tokens.TryGetValue(ch, out var action))
             {
                 sb.Append(action.Invoke(obj, formatProvider ?? CultureInfo.CurrentCulture));
             }
@@ -113,12 +113,12 @@ public static class StringFormatter
     /// <returns>
     /// True, if the format provider supports custom formatting, otherwise false.
     /// </returns>
-    public static bool TryApplyCustomFormatter(string format, object obj, IFormatProvider formatProvider, out string formatted)
+    public static bool TryApplyCustomFormatter(string? format, object obj, IFormatProvider? formatProvider, out string formatted)
     {
         var customFormatter = formatProvider?.GetFormat<ICustomFormatter>();
         if (customFormatter is null)
         {
-            formatted = null;
+            formatted = string.Empty;
             return false;
         }
         else

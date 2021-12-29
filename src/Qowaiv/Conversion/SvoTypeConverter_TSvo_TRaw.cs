@@ -14,28 +14,28 @@ public abstract class SvoTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => sourceType == typeof(TRaw)
         || sourceType == typeof(TRaw?)
         || base.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         => destinationType == typeof(TRaw)
         || destinationType == typeof(TRaw?)
         || base.CanConvertTo(context, destinationType);
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
         => value is TRaw raw
         ? FromRaw(raw)
         : base.ConvertFrom(context, culture, value);
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         if (destinationType == typeof(TRaw) || destinationType == typeof(TRaw?))
         {

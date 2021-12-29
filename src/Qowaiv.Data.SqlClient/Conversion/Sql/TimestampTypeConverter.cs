@@ -12,7 +12,7 @@ public class TimestampTypeConverter : NumericTypeConverter<Timestamp, ulong>
 
     /// <inheritdoc/>
     [Pure]
-    protected override Timestamp FromString(string str, CultureInfo culture) => Timestamp.Parse(str, culture);
+    protected override Timestamp FromString(string? str, CultureInfo? culture) => Timestamp.Parse(str, culture);
 
     /// <inheritdoc/>
     [Pure]

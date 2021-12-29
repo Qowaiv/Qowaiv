@@ -20,7 +20,7 @@ public static class FormatProvider
     {
         /// <summary>Always returns null.</summary>
         [Pure]
-        public object GetFormat(Type formatType) => null;
+        public object? GetFormat(Type? formatType) => null;
     }
 
     /// <summary>Represents the unit test format provider.</summary>
@@ -34,7 +34,7 @@ public static class FormatProvider
         /// Supports ICustomFormatter.
         /// </remarks>
         [Pure]
-        public object GetFormat(Type formatType)
+        public object? GetFormat(Type? formatType)
             => (typeof(ICustomFormatter).IsAssignableFrom(formatType)) ? this : null;
 
         /// <summary>Formats the object as String.</summary>
@@ -48,7 +48,7 @@ public static class FormatProvider
         /// The specified formatProvider.
         /// </param>
         [Pure]
-        public string Format(string format, object arg, IFormatProvider formatProvider)
+        public string Format(string? format, object? arg, IFormatProvider? formatProvider)
         {
             var str = "Unit Test Formatter, value: '{0:" + format + "}', format: '{1}'";
             return string.Format(CultureInfo.InvariantCulture, str, arg, format);

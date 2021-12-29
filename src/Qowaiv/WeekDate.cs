@@ -60,7 +60,7 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
 
         if (!TryCreate(year, week, day, out Date dt))
         {
-            throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception)null);
+            throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception?)null);
         }
         m_Value = dt;
     }
@@ -203,7 +203,7 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
     /// d: as day.
     /// </remarks>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : StringFormatter.Apply(this, format.WithDefault(@"y-\Ww-d"), formatProvider, FormatTokens);
@@ -248,7 +248,7 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out WeekDate result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out WeekDate result)
     {
         result = MinValue;
         var match = Pattern.Match(s ?? string.Empty);

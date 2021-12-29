@@ -15,10 +15,10 @@ public sealed class OpenApiDataTypeAttribute : Attribute
         string description,
         string type,
         object example,
-        string format = null,
+        string? format = null,
         bool nullable = false,
-        string pattern = null,
-        string @enum = null)
+        string? pattern = null,
+        string? @enum = null)
     {
         Description = Guard.NotNullOrEmpty(description, nameof(description));
         Type = Guard.NotNullOrEmpty(type, nameof(type));
@@ -33,7 +33,7 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     /// <remarks>
     /// Only set when received via one of the <c>From()</c> factory methods.
     /// </remarks>
-    public Type DataType { get; internal set; }
+    public Type? DataType { get; internal set; }
 
     /// <summary>Gets the description of the OpenAPI Data Type.</summary>
     public string Description { get; }
@@ -45,16 +45,16 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     public object Example { get; }
 
     /// <summary>Gets the format of the OpenAPI Data Type.</summary>
-    public string Format { get; }
+    public string? Format { get; }
 
     /// <summary>Gets if the OpenAPI Data Type is nullable or not.</summary>
     public bool Nullable { get; }
 
     /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
-    public string Pattern { get; }
+    public string? Pattern { get; }
 
     /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
-    public string[] Enum { get; }
+    public string[]? Enum { get; }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
@@ -103,7 +103,7 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     public static IEnumerable<OpenApiDataTypeAttribute> From(IEnumerable<Type> types)
         => Guard.NotNull(types, nameof(types))
         .Where(type => type is not null && type.GetCustomAttributes<OpenApiDataTypeAttribute>().Any())
-        .Select(type => type.GetCustomAttribute<OpenApiDataTypeAttribute>().WithDataType(type));
+        .Select(type => Not.Null(type.GetCustomAttribute<OpenApiDataTypeAttribute>()).WithDataType(type));
 
     [FluentSyntax]
     private OpenApiDataTypeAttribute WithDataType(Type type)

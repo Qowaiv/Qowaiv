@@ -255,5 +255,5 @@ internal static class DecimalRound
     }
 
     [ThreadStatic]
-    private static Random _rnd;
+    private static Random? _rnd;
 }

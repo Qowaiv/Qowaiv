@@ -39,43 +39,36 @@ public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, 
     public static readonly BusinessIdentifierCode Unknown = new("ZZZZZZZZZZZ");
 
     /// <summary>Gets the number of characters of BIC.</summary>
-    public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
+    public int Length => IsUnknown() ? 0 : m_Value?.Length ?? 0;
 
     /// <summary>Gets the institution code or business code.</summary>
-    public string Business => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(0, 4);
+    public string Business
+        => m_Value is { Length: >= 4 } && !IsUnknown()
+        ? m_Value.Substring(0, 4)
+        : string.Empty;
 
     /// <summary>Gets the country info of the country code.</summary>
     public Country Country
-    {
-        get
-        {
-            if (IsEmpty())
-            {
-                return Country.Empty;
-            }
-            if (IsUnknown())
-            {
-                return Country.Unknown;
-            }
-            return Country.Parse(m_Value.Substring(4, 2), CultureInfo.InvariantCulture);
-        }
-    }
+        => m_Value is { Length: >= 6 }
+        ? Country.Parse(m_Value.Substring(4, 2), CultureInfo.InvariantCulture)
+        : Country.Empty;
 
     /// <summary>Gets the location code.</summary>
-    public string Location => IsEmptyOrUnknown() ? string.Empty : m_Value.Substring(6, 2);
+    public string Location 
+        => m_Value is { Length: >= 8 } && !IsUnknown()  ? m_Value.Substring(6, 2) : string.Empty;
 
     /// <summary>Gets the branch code.</summary>
     /// <remarks>
     /// Is optional, XXX for primary office.
     /// </remarks>
-    public string Branch => Length != 11 ? string.Empty : m_Value.Substring(8);
+    public string Branch => m_Value is { Length: 11 } && !IsUnknown() ? m_Value.Substring(8) : string.Empty;
 
     /// <summary>Serializes the BIC to a JSON node.</summary>
     /// <returns>
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value;
+    public string? ToJson() => m_Value;
 
     /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -89,15 +82,14 @@ public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, 
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
             return formatted;
         }
-        if (IsEmpty()) { return string.Empty; }
-        if (IsUnknown()) { return "?"; }
-        return m_Value;
+        else if (IsUnknown()) return "?";
+        else return m_Value ?? string.Empty;
     }
 
     /// <summary>Gets an XML string representation of the BIC.</summary>
@@ -119,7 +111,7 @@ public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, 
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out BusinessIdentifierCode result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out BusinessIdentifierCode result)
     {
         result = default;
 
@@ -141,9 +133,6 @@ public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, 
             result = new BusinessIdentifierCode(buffer);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        else return false;
     }
 }

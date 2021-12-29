@@ -18,14 +18,24 @@ public class CultureInfoScope : IDisposable
     /// <remarks>
     /// No direct access.
     /// </remarks>
-    [ExcludeFromCodeCoverage]
-    private CultureInfoScope() { }
+    private CultureInfoScope()
+    {
+        Previous = Thread.CurrentThread.CurrentCulture;
+        PreviousUI = Thread.CurrentThread.CurrentUICulture;
+    }
 
     /// <summary>Creates a new CultureInfo scope.</summary>
-    /// <param name="name">
-    /// Name of the culture.
+    /// <param name="culture">
+    /// The culture.
     /// </param>
-    public CultureInfoScope(string name) : this(name, name) { }
+    /// <param name="cultureUI">
+    /// The UI culture.
+    /// </param>
+    public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI) : this()
+    {
+        Thread.CurrentThread.CurrentCulture = Guard.NotNull(culture, nameof(culture));
+        Thread.CurrentThread.CurrentUICulture = Guard.NotNull(cultureUI, nameof(cultureUI));
+    }
 
     /// <summary>Creates a new CultureInfo scope.</summary>
     /// <param name="name">
@@ -38,40 +48,25 @@ public class CultureInfoScope : IDisposable
     (
         new CultureInfo(Guard.NotNullOrEmpty(name, nameof(name))),
         new CultureInfo(Guard.NotNullOrEmpty(nameUI, nameof(nameUI)))
-    )
-    { }
+    ) { }
+
+    /// <summary>Creates a new CultureInfo scope.</summary>
+    /// <param name="name">
+    /// Name of the culture.
+    /// </param>
+    public CultureInfoScope(string name) : this(name, name) { }
 
     /// <summary>Creates a new CultureInfo scope.</summary>
     /// <param name="culture">
     /// The culture.
     /// </param>
-    public CultureInfoScope(CultureInfo culture)
-        : this(culture, culture) { }
-
-    /// <summary>Creates a new CultureInfo scope.</summary>
-    /// <param name="culture">
-    /// The culture.
-    /// </param>
-    /// <param name="cultureUI">
-    /// The UI culture.
-    /// </param>
-    public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI)
-    {
-        Guard.NotNull(culture, nameof(culture));
-        Guard.NotNull(cultureUI, nameof(cultureUI));
-
-        Previous = Thread.CurrentThread.CurrentCulture;
-        PreviousUI = Thread.CurrentThread.CurrentUICulture;
-
-        Thread.CurrentThread.CurrentCulture = culture;
-        Thread.CurrentThread.CurrentUICulture = cultureUI;
-    }
+    public CultureInfoScope(CultureInfo culture) : this(culture, culture) { }
 
     /// <summary>Gets the previous Current UI Culture.</summary>
-    public CultureInfo PreviousUI { get; private set; }
+    public CultureInfo PreviousUI { get; }
 
     /// <summary>Gets the previous Current Culture.</summary>
-    public CultureInfo Previous { get; private set; }
+    public CultureInfo Previous { get; }
 
     /// <summary>Represents the CultureInfo scope as <see cref="string"/>.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -90,21 +85,16 @@ public class CultureInfoScope : IDisposable
     public static CultureInfoScope NewInvariant()
         => new(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
 
-    #region IDisposable
-
-    /// <summary></summary>
+    /// <inheritdoc />
     public void Dispose()
     {
         Dispose(true);
-
-        // Use SupressFinalize in case a subclass 
-        // of this type implements a finalizer.
         GC.SuppressFinalize(this);
     }
 
-    /// <summary>Disposes the scope by setting the privious cultures back.</summary>
+    /// <summary>Disposes the scope by setting the previous cultures back.</summary>
     /// <param name="disposing">
-    /// Should dispose actualy dispose something.
+    /// Should dispose actually dispose something.
     /// </param>
     protected virtual void Dispose(bool disposing)
     {
@@ -112,12 +102,10 @@ public class CultureInfoScope : IDisposable
         {
             Thread.CurrentThread.CurrentCulture = Previous;
             Thread.CurrentThread.CurrentUICulture = PreviousUI;
-            Disposed = false;
+            Disposed = true;
         }
     }
 
     /// <summary>Gets and set if the CultureInfo Scope is disposed.</summary>
-    protected bool Disposed { get; set; }
-
-    #endregion
+    protected bool Disposed;
 }

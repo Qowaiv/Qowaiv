@@ -5,7 +5,7 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
 {
     /// <inheritdoc />
     [Pure]
-    protected override WeekDate FromString(string str, CultureInfo culture) => WeekDate.Parse(str, culture);
+    protected override WeekDate FromString(string? str, CultureInfo? culture) => WeekDate.Parse(str, culture);
 
     /// <inheritdoc />
     [Pure]

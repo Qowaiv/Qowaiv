@@ -28,10 +28,10 @@ public sealed class IdTypeConverter : TypeConverter
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Id<>) && type.GetGenericArguments().Length == 1)
         {
-            m_Value = type.GetField(nameof(m_Value), NonPublicInstance);
+            m_Value = Not.Null(type.GetField(nameof(m_Value), NonPublicInstance));
             var ctors = type.GetConstructors(NonPublicInstance);
-            Ctor = ctors.FirstOrDefault(ctor => ctor.GetParameters().Length == 1);
-            var behavior = ((IIdentifierBehavior)Activator.CreateInstance(type.GetGenericArguments()[0]));
+            Ctor = ctors.First(ctor => ctor.GetParameters().Length == 1);
+            var behavior = Not.Null((IIdentifierBehavior?)Activator.CreateInstance(type.GetGenericArguments()[0]));
             BaseType = behavior.BaseType;
             BaseConverter = behavior.Converter;
         }
@@ -42,21 +42,21 @@ public sealed class IdTypeConverter : TypeConverter
 
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => sourceType == BaseType || BaseConverter.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         => destinationType == BaseType || BaseConverter.CanConvertTo(context, destinationType);
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
     {
         if (string.Empty.Equals(value) || value is null)
         {
-            return Ctor.Invoke(new object[] { null });
+            return Ctor.Invoke(new object?[] { null });
         }
         else
         {
@@ -67,7 +67,7 @@ public sealed class IdTypeConverter : TypeConverter
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         var id = m_Value.GetValue(value);
         return destinationType == BaseType

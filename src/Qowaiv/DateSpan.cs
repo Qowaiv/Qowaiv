@@ -48,7 +48,7 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     {
         if (IsOutOfRange(months, days, TotalDays))
         {
-            throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception)null);
+            throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception?)null);
         }
     }
 
@@ -202,14 +202,10 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        return string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M{2:+0;-0;+0}D", Years, Months, Days);
-    }
+    public string ToString(string? format, IFormatProvider? formatProvider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+        ? formatted
+        : string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M{2:+0;-0;+0}D", Years, Months, Days);
 
     /// <summary>Gets an XML string representation of the date span.</summary>
     [Pure]
@@ -369,7 +365,7 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out DateSpan result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out DateSpan result)
     {
         result = default;
 
@@ -399,7 +395,7 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     }
 
     [Pure]
-    private static int IntFromGroup(Match match, string group, IFormatProvider formatProvider)
+    private static int IntFromGroup(Match match, string group, IFormatProvider? formatProvider)
     {
         var str = match.Groups[group].Value;
         return string.IsNullOrEmpty(str) ? 0 : int.Parse(str, formatProvider);

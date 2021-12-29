@@ -27,7 +27,7 @@ public static class SvoParameter
 
             lock (locker)
             {
-                if (!Attributes.TryGetValue(sourceType, out SingleValueObjectAttribute attr))
+                if (!Attributes.TryGetValue(sourceType, out var attr))
                 {
                     attr = sourceType.GetCustomAttribute<SingleValueObjectAttribute>();
                 }
@@ -70,28 +70,22 @@ public static class SvoParameter
     [Pure]
     private static MethodInfo GetCast(Type sourceType, SingleValueObjectAttribute attr)
     {
-        if (!Casts.TryGetValue(sourceType, out MethodInfo cast))
+        if (!Casts.TryGetValue(sourceType, out var cast))
         {
             var returnType = attr.DatabaseType ?? attr.UnderlyingType;
-            var methods = sourceType.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(m =>
+            cast = sourceType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .FirstOrDefault(m =>
                     m.IsHideBySig &&
                     m.IsSpecialName &&
                     m.GetParameters().Length == 1 &&
                     m.ReturnType == returnType)
-                .ToList();
-
-            if (methods.Any())
-            {
-                cast = methods[0];
-                Casts[sourceType] = cast;
-            }
-            else throw new InvalidCastException(string.Format(QowaivMessages.InvalidCastException_FromTo, sourceType, returnType));
+                ?? throw new InvalidCastException(string.Format(QowaivMessages.InvalidCastException_FromTo, sourceType, returnType));
+            Casts[sourceType] = cast;
         }
         return cast;
     }
 
-    private static readonly Dictionary<Type, SingleValueObjectAttribute> Attributes = new();
+    private static readonly Dictionary<Type, SingleValueObjectAttribute?> Attributes = new();
     private static readonly Dictionary<Type, MethodInfo> Casts = new();
 
     /// <summary>The locker for adding a casts and unsupported types.</summary>

@@ -7,5 +7,5 @@ public class BusinessIdentifierCodeTypeConverter : SvoTypeConverter<BusinessIden
 {
     /// <inheritdoc/>
     [Pure]
-    protected override BusinessIdentifierCode FromString(string str, CultureInfo culture) => BusinessIdentifierCode.Parse(str, culture);
+    protected override BusinessIdentifierCode FromString(string? str, CultureInfo? culture) => BusinessIdentifierCode.Parse(str, culture);
 }

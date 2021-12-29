@@ -23,7 +23,7 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     public static readonly PostalCode Unknown = new("ZZZZZZZZZ");
 
     /// <summary>Gets the number of characters of postal code.</summary>
-    public int Length => IsEmptyOrUnknown() ? 0 : m_Value.Length;
+    public int Length => m_Value is null || IsUnknown() ? 0 : m_Value.Length;
 
     /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>
     /// <param name="country">
@@ -33,10 +33,7 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     /// Returns false if the country does not have postal codes.
     /// </remarks>
     [Pure]
-    public bool IsValid(Country country)
-    {
-        return IsValid(m_Value, country);
-    }
+    public bool IsValid(Country country) => IsValid(m_Value, country);
 
     /// <summary>Returns a collection countries where the postal code is valid for.</summary>
     [Pure]
@@ -51,7 +48,7 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => m_Value;
+    public string? ToJson() => m_Value;
 
     /// <summary>Returns a <see cref="string"/> that represents the current postal code for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -65,14 +62,10 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        return ToString(Country.TryParse(format) ?? default);
-    }
+    public string ToString(string? format, IFormatProvider? formatProvider) 
+        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+        ? formatted
+        : ToString(Country.TryParse(format) ?? default);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
     /// <param name="country">
@@ -87,7 +80,7 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     public string ToString(Country country)
     {
         // send a question mark in case of Unknown.
-        var normalized = Unknown.m_Value == m_Value ? "?" : m_Value;
+        var normalized = Unknown.m_Value == m_Value ? "?" : m_Value ?? string.Empty;
         return PostalCodeCountryInfo.GetInstance(country).Format(normalized);
     }
 
@@ -110,7 +103,7 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out PostalCode result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out PostalCode result)
     {
         result = default;
         var buffer = s.Buffer().Unify();
@@ -129,10 +122,7 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
             result = new PostalCode(buffer);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        else return false;
     }
 
     /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>
@@ -146,7 +136,7 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     /// Returns false if the country does not have postal codes.
     /// </remarks>
     [Pure]
-    public static bool IsValid(string postalcode, Country country)
+    public static bool IsValid(string? postalcode, Country country)
     {
         return PostalCodeCountryInfo.GetInstance(country).IsValid(postalcode);
     }

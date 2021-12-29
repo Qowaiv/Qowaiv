@@ -6,6 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct HouseNumber
@@ -24,13 +26,22 @@ public partial struct HouseNumber
     /// <summary>Returns true if the  house number is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+
+    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    [Pure]
+    private int Kind()
+    {
+        if (IsEmpty()) return 0;
+        else if (IsUnknown()) return +2;
+        else return +1;
+    }
 }
 
 public partial struct HouseNumber : IEquatable<HouseNumber>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is HouseNumber other && Equals(other);
+    public override bool Equals(object? obj) => obj is HouseNumber other && Equals(other);
 
     /// <summary>Returns true if this instance and the other house number are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="HouseNumber" /> to compare with.</param>
@@ -56,7 +67,7 @@ public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is HouseNumber other) { return CompareTo(other); }
@@ -64,7 +75,9 @@ public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(HouseNumber other) => Comparer<int>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(HouseNumber l, HouseNumber r) => l.CompareTo(r) < 0;
 
@@ -82,21 +95,21 @@ public partial struct HouseNumber : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the house number.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the house number.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the house number.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct HouseNumber : ISerializable
@@ -107,7 +120,7 @@ public partial struct HouseNumber : ISerializable
     private HouseNumber(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (int)info.GetValue("Value", typeof(int));
+        m_Value = info.GetValue("Value", typeof(int)) is int val ? val : default(int);
     }
 
     /// <summary>Adds the underlying property of the house number to the serialization info.</summary>
@@ -127,7 +140,7 @@ public partial struct HouseNumber
     /// The deserialized house number.
     /// </returns>
     [Pure]
-    public static HouseNumber FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static HouseNumber FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct HouseNumber : IXmlSerializable
@@ -137,7 +150,7 @@ public partial struct HouseNumber : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the house number from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -171,7 +184,7 @@ public partial struct HouseNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static HouseNumber Parse(string s) => Parse(s, null);
+    public static HouseNumber Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
     /// <param name="s">
@@ -187,7 +200,7 @@ public partial struct HouseNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static HouseNumber Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionHouseNumber);
+    public static HouseNumber Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionHouseNumber);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
     /// <param name="s">
@@ -197,7 +210,7 @@ public partial struct HouseNumber
     /// The house number if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static HouseNumber? TryParse(string s) => TryParse(s, null);
+    public static HouseNumber? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
     /// <param name="s">
@@ -210,7 +223,7 @@ public partial struct HouseNumber
     /// The house number if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static HouseNumber? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out HouseNumber val) ? val : default(HouseNumber?);
+    public static HouseNumber? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(HouseNumber?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -225,7 +238,7 @@ public partial struct HouseNumber
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out HouseNumber result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out HouseNumber result) => TryParse(s, null, out result);
 }
 
 public partial struct HouseNumber
@@ -236,7 +249,7 @@ public partial struct HouseNumber
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid house number.</summary>
     /// <param name="val">
@@ -246,7 +259,7 @@ public partial struct HouseNumber
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

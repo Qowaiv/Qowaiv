@@ -25,7 +25,7 @@ public abstract class UuidComparer : IComparer<Uuid>, IComparer<Guid>, IComparer
 
     /// <inheritdoc/>
     [Pure]
-    public int Compare(object x, object y)
+    public int Compare(object? x, object? y)
     {
         var guidX = Cast(x);
         var guidY = Cast(y);
@@ -34,7 +34,7 @@ public abstract class UuidComparer : IComparer<Uuid>, IComparer<Guid>, IComparer
         else if (guidY is null) return +1;
         else return Compare(guidX.Value, guidY.Value);
 
-        static Guid? Cast(object obj)
+        static Guid? Cast(object? obj)
         {
             if (obj is null) return default;
             else if (obj is Guid guid) return guid;

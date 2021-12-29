@@ -26,7 +26,7 @@ public sealed class TemporaryDirectory : IDisposable
     public string FullName => Root.FullName;
 
     /// <summary>Casts the temporary directory to a <see cref="DirectoryInfo"/>.</summary>
-    public static implicit operator DirectoryInfo(TemporaryDirectory dir) => dir?.Root;
+    public static implicit operator DirectoryInfo?(TemporaryDirectory dir) => dir?.Root;
 
     /// <summary>Represents the temporary directory as <see cref="string"/>.</summary>
     [Pure]

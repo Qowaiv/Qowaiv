@@ -6,6 +6,6 @@ public class GenderTypeConverter : SvoTypeConverter<Gender>
 {
     /// <inheritdoc/>
     [Pure]
-    protected override Gender FromString(string str, CultureInfo culture) => Gender.Parse(str, culture);
+    protected override Gender FromString(string? str, CultureInfo? culture) => Gender.Parse(str, culture);
 }
 

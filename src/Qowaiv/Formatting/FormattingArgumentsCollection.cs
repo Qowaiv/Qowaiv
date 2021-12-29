@@ -5,13 +5,13 @@
 public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, FormattingArguments>>
 {
     /// <summary>Initializes a new instance of a formatting arguments collection based on the current culture.</summary>
-    public FormattingArgumentsCollection() : this(CultureInfo.CurrentCulture) { }
+    public FormattingArgumentsCollection() : this(formatProvider: null) { }
 
     /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
     /// <param name="formatProvider">
     /// The default format provider.
     /// </param>
-    public FormattingArgumentsCollection(IFormatProvider formatProvider) : this(formatProvider, null) { }
+    public FormattingArgumentsCollection(IFormatProvider? formatProvider) : this(formatProvider, parent: null) { }
 
     /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
     /// <param name="formatProvider">
@@ -20,11 +20,11 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <param name="parent">
     /// the optional parent collection to inherit item from.
     /// </param>
-    public FormattingArgumentsCollection(IFormatProvider formatProvider, FormattingArgumentsCollection parent)
+    public FormattingArgumentsCollection(IFormatProvider? formatProvider, FormattingArgumentsCollection? parent)
     {
-        FormatProvider = Guard.NotNull(formatProvider, nameof(formatProvider));
+        FormatProvider = formatProvider?? CultureInfo.CurrentCulture;
 
-        if (parent != null)
+        if (parent is not null)
         {
             foreach (var kvp in parent.dict)
             {
@@ -47,18 +47,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// A formatted string representing the object.
     /// </returns>
     [Pure]
-    public string ToString(IFormattable obj)
-    {
-        if (obj is null)
-        {
-#pragma warning disable S2225
-            // "ToString()" method should not return null
-            // if the origin is null, it should not become string.Empty.
-            return null;
-#pragma warning restore S2225
-        }
-        return Get(obj.GetType()).ToString(obj);
-    }
+    public string? ToString(IFormattable? obj) => Get(obj?.GetType()).ToString(obj);
 
     /// <summary>Formats the object using the formatting arguments of the collection.</summary>
     /// <param name="obj">
@@ -71,7 +60,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// If the object does not implement IFormattable, the ToString() will be used.
     /// </remarks>
     [Pure]
-    public string ToString(object obj)
+    public string? ToString(object obj)
         => obj is IFormattable formattable
         ? ToString(formattable)
         : obj?.ToString();
@@ -102,10 +91,12 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     [Pure]
     public string Format(string format, params object[] args)
     {
+
         Guard.NotNull(format, nameof(format));
         Guard.NotNull(args, nameof(args));
 
         // This code is here as reference, so we don't want to touch it.
+#nullable disable
 #pragma warning disable S125 // Sections of code should not be "commented out"
 #pragma warning disable S1854 // Dead stores should be removed
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
@@ -279,6 +270,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 #pragma warning restore S1854 // Dead stores should be removed
 #pragma warning restore S125 // Sections of code should not be "commented out"
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
+#nullable enable
     }
 
     private static void FormatError() => throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
@@ -462,17 +454,17 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// default formatting arguments are returned.
     /// </remarks>
     [Pure]
-    public FormattingArguments Get(Type type)
+    public FormattingArguments Get(Type? type)
     {
-        string format = null;
-        IFormatProvider formatProvider = null;
+        string? format = null;
+        IFormatProvider? formatProvider = null;
 
-        if (dict.TryGetValue(type, out FormattingArguments arguments))
+        if (type is not null && dict.TryGetValue(type, out var arguments))
         {
             format = arguments.Format;
             formatProvider = arguments.FormatProvider;
         }
-        return new FormattingArguments(format, formatProvider ?? this.FormatProvider);
+        return new(format, formatProvider ?? FormatProvider);
     }
 
     /// <summary>Gets a collection containing the types for the collection.</summary>

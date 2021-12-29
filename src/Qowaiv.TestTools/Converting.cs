@@ -26,10 +26,12 @@ public sealed class ConvertFrom<TFrom>
 
     /// <summary>Converts the value to the destination type, using its <see cref="TypeConverter"/>.</summary>
     [Pure]
-    public To To<To>()
+    public To? To<To>()
+#nullable disable // should not be a problem here
         => typeof(TFrom) == typeof(string)
         ? (To)Converter<To>().ConvertFromString(Subject as string)
         : (To)Converter<To>().ConvertFrom(Subject);
+#nullable enable
 
     [Pure]
     private static TypeConverter Converter<To>() => TypeDescriptor.GetConverter(typeof(To));
@@ -42,7 +44,7 @@ public sealed class ConvertTo<To>
 
     /// <summary>Converts the value to the destination type, using the <see cref="TypeConverter"/> of the subject.</summary>
     [Pure]
-    public To From<From>(From subject) => (To)Converter<From>().ConvertTo(subject, typeof(To));
+    public To? From<From>(From subject) => (To?)Converter<From>().ConvertTo(subject, typeof(To));
 
     [Pure]
     private static TypeConverter Converter<From>() => TypeDescriptor.GetConverter(typeof(From));

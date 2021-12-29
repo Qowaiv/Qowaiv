@@ -7,12 +7,12 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 {
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
     {
         if (value is null) return Activator.CreateInstance<T>();
         else if (value is string str) return FromString(str, culture);
@@ -29,13 +29,13 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         => (destinationType != typeof(T) && QowaivType.IsDate(destinationType))
         || base.CanConvertTo(context, destinationType);
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         Guard.NotNull(destinationType, nameof(destinationType));
 
@@ -65,7 +65,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 
     /// <summary>Converts from <see cref="string"/>.</summary>
     [Pure]
-    protected abstract T FromString(string str, CultureInfo culture);
+    protected abstract T FromString(string? str, CultureInfo? culture);
 
     /// <summary>Converts from <see cref="DateTime"/>.</summary>
     [Pure]

@@ -6,14 +6,16 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv.Globalization;
 
 public partial struct Country
 {
-    private Country(string value) => m_Value = value;
+    private Country(string? value) => m_Value = value;
 
     /// <summary>The inner value of the country.</summary>
-    private string m_Value;
+    private string? m_Value;
 
     /// <summary>Returns true if the  country is empty, otherwise false.</summary>
     [Pure]
@@ -24,13 +26,22 @@ public partial struct Country
     /// <summary>Returns true if the  country is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+
+    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    [Pure]
+    private int Kind()
+    {
+        if (IsEmpty()) return 0;
+        else if (IsUnknown()) return +2;
+        else return +1;
+    }
 }
 
 public partial struct Country : IEquatable<Country>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Country other && Equals(other);
+    public override bool Equals(object? obj) => obj is Country other && Equals(other);
 
     /// <summary>Returns true if this instance and the other country are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Country" /> to compare with.</param>
@@ -56,7 +67,7 @@ public partial struct Country : IComparable, IComparable<Country>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Country other) { return CompareTo(other); }
@@ -64,28 +75,30 @@ public partial struct Country : IComparable, IComparable<Country>
     }
     /// <inheritdoc />
     [Pure]
+#nullable disable
     public int CompareTo(Country other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
+#nullable enable
 }
 
 public partial struct Country : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the country.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the country.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the country.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Country : ISerializable
@@ -96,7 +109,7 @@ public partial struct Country : ISerializable
     private Country(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (string)info.GetValue("Value", typeof(string));
+        m_Value = info.GetValue("Value", typeof(string)) is string val ? val : default(string);
     }
 
     /// <summary>Adds the underlying property of the country to the serialization info.</summary>
@@ -116,7 +129,7 @@ public partial struct Country
     /// The deserialized country.
     /// </returns>
     [Pure]
-    public static Country FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static Country FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Country : IXmlSerializable
@@ -126,7 +139,7 @@ public partial struct Country : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the country from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -160,7 +173,7 @@ public partial struct Country
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Country Parse(string s) => Parse(s, null);
+    public static Country Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
     /// <param name="s">
@@ -176,7 +189,7 @@ public partial struct Country
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Country Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCountry);
+    public static Country Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCountry);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
     /// <param name="s">
@@ -186,7 +199,7 @@ public partial struct Country
     /// The country if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Country? TryParse(string s) => TryParse(s, null);
+    public static Country? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
     /// <param name="s">
@@ -199,7 +212,7 @@ public partial struct Country
     /// The country if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Country? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Country val) ? val : default(Country?);
+    public static Country? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Country?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -214,7 +227,7 @@ public partial struct Country
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Country result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Country result) => TryParse(s, null, out result);
 }
 
 public partial struct Country
@@ -225,7 +238,7 @@ public partial struct Country
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid country.</summary>
     /// <param name="val">
@@ -235,7 +248,7 @@ public partial struct Country
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

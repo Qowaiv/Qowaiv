@@ -6,13 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv.Mathematics;
 
 public partial struct Fraction : IEquatable<Fraction>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is Fraction other && Equals(other);
+    public override bool Equals(object? obj) => obj is Fraction other && Equals(other);
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
@@ -29,7 +31,7 @@ public partial struct Fraction : IComparable, IComparable<Fraction>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is Fraction other) { return CompareTo(other); }
@@ -52,21 +54,21 @@ public partial struct Fraction : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the fraction.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the fraction.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the fraction.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct Fraction
@@ -79,7 +81,7 @@ public partial struct Fraction
     /// The deserialized fraction.
     /// </returns>
     [Pure]
-    public static Fraction FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static Fraction FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Fraction : IXmlSerializable
@@ -89,7 +91,7 @@ public partial struct Fraction : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the fraction from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -123,7 +125,7 @@ public partial struct Fraction
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Fraction Parse(string s) => Parse(s, null);
+    public static Fraction Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
@@ -139,7 +141,7 @@ public partial struct Fraction
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Fraction Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
+    public static Fraction Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
@@ -149,7 +151,7 @@ public partial struct Fraction
     /// The fraction if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Fraction? TryParse(string s) => TryParse(s, null);
+    public static Fraction? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
@@ -162,7 +164,7 @@ public partial struct Fraction
     /// The fraction if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Fraction? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out Fraction val) ? val : default(Fraction?);
+    public static Fraction? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Fraction?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -177,7 +179,7 @@ public partial struct Fraction
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out Fraction result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Fraction result) => TryParse(s, null, out result);
 }
 
 public partial struct Fraction
@@ -188,7 +190,7 @@ public partial struct Fraction
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid fraction.</summary>
     /// <param name="val">
@@ -198,7 +200,7 @@ public partial struct Fraction
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

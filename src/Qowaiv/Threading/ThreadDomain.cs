@@ -30,7 +30,7 @@ public class ThreadDomain
         }
     }
     [ThreadStatic]
-    private static ThreadDomain s_Current;
+    private static ThreadDomain? s_Current;
 
     /// <summary>Registers a creator function for the type that can create 
     /// an instance of type based on a thread.
@@ -66,13 +66,10 @@ public class ThreadDomain
     /// <remarks>
     /// No public accessor.
     /// </remarks>
-    protected ThreadDomain()
-    {
-        Values = new Dictionary<Type, object>();
-    }
+    protected ThreadDomain() => Values = new();
 
     /// <summary>The underlying dictionary.</summary>
-    protected Dictionary<Type, object> Values { get; private set; }
+    protected Dictionary<Type, object?> Values { get; private set; }
 
     /// <summary>Gets the current value of T.</summary>
     /// <typeparam name="T">
@@ -83,23 +80,19 @@ public class ThreadDomain
     /// convert from string.
     /// </exception>
     [Pure]
-    public T Get<T>()
+    public T? Get<T>()
     {
         var type = Guard(typeof(T), Values.ContainsKey(typeof(T)));
 
-
-        if (!Values.TryGetValue(type, out object value))
+        if (Values.TryGetValue(type, out var value) && value is T typed)
         {
-            if (Creators.TryGetValue(type, out Func<Thread, object> func))
-            {
-                value = func.Invoke(Thread.CurrentThread);
-            }
-            else
-            {
-                value = default(T);
-            }
+            return typed;
         }
-        return (T)value;
+        else if (Creators.TryGetValue(type, out var func) && func.Invoke(Thread.CurrentThread) is T invoked)
+        {
+            return invoked;
+        }
+        else return default;
     }
 
     /// <summary>Sets the value for T.</summary>
@@ -113,7 +106,7 @@ public class ThreadDomain
     /// If the type is generic, or has no converter, or a convertor that can not
     /// convert from string.
     /// </exception>
-    public void Set<T>(T value)
+    public void Set<T>(T? value)
     {
         var type = Guard(typeof(T), Values.ContainsKey(typeof(T)));
         Values[type] = value;

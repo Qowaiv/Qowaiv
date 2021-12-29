@@ -23,7 +23,7 @@ namespace Qowaiv.UnitTests.Formatting
             var act = new FormattingArgumentsCollection(new CultureInfo("nl-BE"), parent);
             Assert.AreEqual(1, act.Count, "act.Count");
 
-            parent.Add(typeof(Gender), "f");
+            parent.Add(typeof(Sex), "f");
             Assert.AreEqual(2, parent.Count, "parent.Count");
             Assert.AreEqual(1, act.Count, "act.Count");
         }

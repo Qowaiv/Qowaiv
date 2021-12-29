@@ -38,7 +38,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is CryptographicSeed other && Equals(other);
+    public override bool Equals(object? obj) => obj is CryptographicSeed other && Equals(other);
 
     /// <summary>Returns true if both are empty, otherwise false.</summary>
     /// <remarks>
@@ -63,7 +63,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     /// To prevent unintended exposure. 
     /// </remarks>
     [Pure]
-    public object ToJson() => null;
+    public object? ToJson() => null;
 
     /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

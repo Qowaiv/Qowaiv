@@ -5,7 +5,7 @@ public static class QowaivType
 {
     /// <summary>Returns true if the value is null or equal to the default value.</summary>
     [Pure]
-    public static bool IsNullOrDefaultValue(object value)
+    public static bool IsNullOrDefaultValue(object? value)
         => value is null || value.Equals(Activator.CreateInstance(value.GetType()));
 
     /// <summary>Returns true if the object is null-able, otherwise false.</summary>
@@ -13,8 +13,7 @@ public static class QowaivType
     /// The type to test for.
     /// </param>
     [Pure]
-    public static bool IsNullable(Type objectType)
-        => Nullable.GetUnderlyingType(objectType) != null;
+    public static bool IsNullable(Type objectType) => Nullable.GetUnderlyingType(objectType) is not null;
 
     /// <summary>Returns true if the object type is a number.</summary>
     /// <param name="objectType">
@@ -40,9 +39,9 @@ public static class QowaivType
     /// * <see cref="WeekDate"/>
     /// </remarks>
     [Pure]
-    public static bool IsDate(Type objectType)
+    public static bool IsDate(Type? objectType)
     {
-        var type = GetNotNullableType(objectType);
+        var type = objectType is null ? null : GetNotNullableType(objectType);
         return type == typeof(DateTime)
             || type == typeof(DateTimeOffset)
             || type == typeof(LocalDateTime)

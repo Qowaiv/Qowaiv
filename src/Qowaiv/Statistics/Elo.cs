@@ -153,7 +153,7 @@ public partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEqua
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : m_Value.ToString(format, formatProvider);
@@ -195,10 +195,10 @@ public partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEqua
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Elo result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Elo result)
     {
         result = Zero;
-        if (!string.IsNullOrEmpty(s))
+        if (s is { Length: > 0 })
         {
             var str = s.EndsWith("*", StringComparison.InvariantCultureIgnoreCase) ? s.Substring(0, s.Length - 1) : s;
 

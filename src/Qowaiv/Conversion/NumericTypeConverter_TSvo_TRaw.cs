@@ -9,17 +9,17 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
 {
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         => IsConvertable(destinationType) || base.CanConvertTo(context, destinationType);
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
     {
         if (value is null)
         {
@@ -35,7 +35,7 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
 
     /// <inheritdoc />
     [Pure]
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         Guard.NotNull(destinationType, nameof(destinationType));
 
@@ -55,5 +55,8 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
 
     /// <summary>Returns true if the conversion is supported.</summary>
     [Pure]
-    protected virtual bool IsConvertable(Type type) => type != typeof(TSvo) && QowaivType.IsNumeric(type);
+    protected virtual bool IsConvertable(Type? type) 
+        => type is not null 
+        && type != typeof(TSvo) 
+        && QowaivType.IsNumeric(type);
 }

@@ -25,7 +25,7 @@ internal partial class CharBuffer
                 {
                     charBuffer.Add(DiacriticReplace[replace]);
                 }
-                else if (DiacriticLookup.TryGetValue(ch, out string chs))
+                else if (DiacriticLookup.TryGetValue(ch, out var chs))
                 {
                     charBuffer.Add(chs);
                 }

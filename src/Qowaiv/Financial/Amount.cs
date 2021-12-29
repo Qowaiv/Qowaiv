@@ -382,15 +382,10 @@ public partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IE
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        var info = Money.GetNumberFormatInfo(formatProvider);
-        return m_Value.ToString(format, info);
-    }
+    public string ToString(string? format, IFormatProvider? formatProvider) 
+        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+        ? formatted
+        : m_Value.ToString(format, Money.GetNumberFormatInfo(formatProvider));
 
     /// <summary>Gets an XML string representation of the amount.</summary>
     [Pure]
@@ -452,7 +447,7 @@ public partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IE
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Amount result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Amount result)
     {
         result = default;
         if (Money.TryParse(s, formatProvider, out Money money))

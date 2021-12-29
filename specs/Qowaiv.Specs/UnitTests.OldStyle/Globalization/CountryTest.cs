@@ -933,7 +933,7 @@ namespace Qowaiv.UnitTests.Globalization
         [Test]
         public void GetCurrency_NLToday_EUR()
         {
-            var act = Country.NL.GetCurrency(Date.Today);
+            var act = Country.NL.GetCurrency(Clock.Today());
             var exp = Currency.EUR;
 
             Assert.AreEqual(act, exp);

@@ -6,6 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+#nullable enable
+
 namespace Qowaiv;
 
 public partial struct DateSpan
@@ -21,7 +23,7 @@ public partial struct DateSpan : IEquatable<DateSpan>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is DateSpan other && Equals(other);
+    public override bool Equals(object? obj) => obj is DateSpan other && Equals(other);
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
@@ -38,7 +40,7 @@ public partial struct DateSpan : IComparable, IComparable<DateSpan>
 {
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj is null) { return 1; }
         else if (obj is DateSpan other) { return CompareTo(other); }
@@ -61,21 +63,21 @@ public partial struct DateSpan : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the date span.</summary>
     [Pure]
-    public override string ToString() => ToString((IFormatProvider)null);
+    public override string ToString() => ToString(provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the date span.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, null);
+    public string ToString(string? format) => ToString(format, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the date span.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString(null, provider);
+    public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
 public partial struct DateSpan : ISerializable
@@ -86,7 +88,7 @@ public partial struct DateSpan : ISerializable
     private DateSpan(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = (ulong)info.GetValue("Value", typeof(ulong));
+        m_Value = info.GetValue("Value", typeof(ulong)) is ulong val ? val : default(ulong);
     }
 
     /// <summary>Adds the underlying property of the date span to the serialization info.</summary>
@@ -106,7 +108,7 @@ public partial struct DateSpan
     /// The deserialized date span.
     /// </returns>
     [Pure]
-    public static DateSpan FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static DateSpan FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct DateSpan : IXmlSerializable
@@ -116,7 +118,7 @@ public partial struct DateSpan : IXmlSerializable
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
-    XmlSchema IXmlSerializable.GetSchema() => null;
+    XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
     /// <summary>Reads the date span from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
@@ -150,7 +152,7 @@ public partial struct DateSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static DateSpan Parse(string s) => Parse(s, null);
+    public static DateSpan Parse(string? s) => Parse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>
     /// <param name="s">
@@ -166,7 +168,7 @@ public partial struct DateSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static DateSpan Parse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
+    public static DateSpan Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>
     /// <param name="s">
@@ -176,7 +178,7 @@ public partial struct DateSpan
     /// The date span if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static DateSpan? TryParse(string s) => TryParse(s, null);
+    public static DateSpan? TryParse(string? s) => TryParse(s, null);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>
     /// <param name="s">
@@ -189,7 +191,7 @@ public partial struct DateSpan
     /// The date span if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static DateSpan? TryParse(string s, IFormatProvider formatProvider) => TryParse(s, formatProvider, out DateSpan val) ? val : default(DateSpan?);
+    public static DateSpan? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(DateSpan?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -204,7 +206,7 @@ public partial struct DateSpan
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string s, out DateSpan result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out DateSpan result) => TryParse(s, null, out result);
 }
 
 public partial struct DateSpan
@@ -215,7 +217,7 @@ public partial struct DateSpan
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val) => IsValid(val, (IFormatProvider)null);
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid date span.</summary>
     /// <param name="val">
@@ -225,7 +227,7 @@ public partial struct DateSpan
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string val, IFormatProvider formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }

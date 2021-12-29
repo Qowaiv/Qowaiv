@@ -389,79 +389,75 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string format, IFormatProvider formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider)
     {
         if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
         {
             return formatted;
         }
-
-        var match = Formatting.Pattern.Match(string.IsNullOrEmpty(format) ? @"0/0" : format);
-
-        if (!match.Success)
+        else if (Formatting.Pattern.Match(format.WithDefault("0/0")) is { Success: true } match)
         {
-            // if no fraction bar character has been provided, format as a decimal.
-            if (!format.Any(ch => Formatting.IsFractionBar(ch)))
+            var iFormat = match.Groups[nameof(Whole)].Value;
+            var nFormat = match.Groups[nameof(Numerator)].Value;
+            var dFormat = match.Groups[nameof(Denominator)].Value;
+            var bar = match.Groups[nameof(Formatting.FractionBars)].Value;
+
+            var sb = new StringBuilder();
+
+            var remainder = numerator;
+            var negative = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
+
+            if (!string.IsNullOrEmpty(iFormat))
             {
-                return ToDecimal().ToString(format, formatProvider);
+                remainder = Remainder;
+
+                sb.Append(Whole.ToString(iFormat, formatProvider));
+
+                // For -0 n/d
+                if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(negative))
+                {
+                    sb.Insert(0, negative);
+                }
             }
-            throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
-        }
-
-        var iFormat = match.Groups[nameof(Whole)].Value;
-        var nFormat = match.Groups[nameof(Numerator)].Value;
-        var dFormat = match.Groups[nameof(Denominator)].Value;
-        var bar = match.Groups[nameof(Formatting.FractionBars)].Value;
-
-        var sb = new StringBuilder();
-
-        var remainder = numerator;
-        var negative = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
-
-        if (!string.IsNullOrEmpty(iFormat))
-        {
-            remainder = Remainder;
-
-            sb.Append(Whole.ToString(iFormat, formatProvider));
-
-            // For -0 n/d
-            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(negative))
+            if (nFormat == "super")
             {
-                sb.Insert(0, negative);
+                if (sb.Length == 0 && Sign() == -1)
+                {
+                    sb.Append(negative);
+                }
+                // use invariant as we want to convert to superscript.
+                var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
+                sb.Append(super);
             }
-        }
-        if (nFormat == "super")
-        {
-            if (sb.Length == 0 && Sign() == -1)
+            else
             {
-                sb.Append(negative);
+                if (sb.Length != 0 && sb[sb.Length - 1] != ' ')
+                {
+                    sb.Append(' ');
+                }
+                sb.Append(remainder.ToString(nFormat, formatProvider));
             }
-            // use invariant as we want to convert to superscript.
-            var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
-            sb.Append(super);
-        }
-        else
-        {
-            if (sb.Length != 0 && sb[sb.Length - 1] != ' ')
+
+            sb.Append(bar);
+
+            if (dFormat == "sub")
             {
-                sb.Append(' ');
+                // use invariant as we want to convert to superscript.
+                var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
+                sb.Append(super);
             }
-            sb.Append(remainder.ToString(nFormat, formatProvider));
+            else
+            {
+                sb.Append(Denominator.ToString(dFormat, formatProvider));
+            }
+            return sb.ToString();
         }
-
-        sb.Append(bar);
-
-        if (dFormat == "sub")
+        // if no fraction bar character has been provided, format as a decimal.
+        else if (!format.WithDefault().Any(ch => Formatting.IsFractionBar(ch)))
         {
-            // use invariant as we want to convert to superscript.
-            var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
-            sb.Append(super);
+            return ToDecimal().ToString(format, formatProvider);
         }
-        else
-        {
-            sb.Append(Denominator.ToString(dFormat, formatProvider));
-        }
-        return sb.ToString();
+        else throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
     }
 
     /// <inheritdoc/>
@@ -621,22 +617,19 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, IFormatProvider formatProvider, out Fraction result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Fraction result)
     {
         result = Zero;
-        if (string.IsNullOrEmpty(s))
+        if (s is not { Length: > 0 })
         {
             return true;
         }
-
-        var fraction = FractionParser.Parse(s, formatProvider?.GetFormat<NumberFormatInfo>() ?? CultureInfo.InvariantCulture.NumberFormat);
-
-        if (fraction.HasValue)
+        else if (FractionParser.Parse(s, formatProvider?.GetFormat<NumberFormatInfo>() ?? CultureInfo.InvariantCulture.NumberFormat) is { } fraction)
         {
-            result = fraction.Value;
+            result = fraction;
             return true;
         }
-        return false;
+        else return false;
     }
 
     /// <summary>Creates a fraction based on decimal number.</summary>

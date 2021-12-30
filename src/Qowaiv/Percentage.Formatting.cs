@@ -41,22 +41,21 @@ public partial struct Percentage
     [Pure]
     private static string Format(string? format, IFormatProvider formatProvider)
     {
-        if (format is { Length: > 0 })
-            return format switch
-            {
-                "PM" => PerMilleFormat,
-                "PT" => PerTenThousendFormat,
-                _ => format,
-            };
-        else return DefaultFormats.TryGetValue(formatProvider, out format)
-                ? format
-                : PercentFormat;
+        if (format is { Length: > 0 }) return format switch
+        {
+            "PM" => PerMilleFormat,
+            "PT" => PerTenThousendFormat,
+            _ => format,
+        };
+        else return formatProvider is CultureInfo culture && DefaultFormats.TryGetValue(culture.Name, out format)
+            ? format
+            : PercentFormat;
     }
 
     /// <summary>Gets the default format for different countries.</summary>
-    private static readonly Dictionary<IFormatProvider, string> DefaultFormats = new()
+    private static readonly Dictionary<string, string> DefaultFormats = new()
     {
-        { new CultureInfo("fr-FR"), "%0.############################" },
-        { new CultureInfo("fa-IR"), "%0.############################" },
+        { "fr-FR", "%0.############################" },
+        { "fa-IR", "%0.############################" },
     };
 }

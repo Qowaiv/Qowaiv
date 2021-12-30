@@ -5,9 +5,7 @@ public class With_domain_logic
     [TestCase("")]
     [TestCase("?")]
     public void has_length_zero_for_empty_and_unknown(EmailAddress svo)
-    {
-        Assert.AreEqual(0, svo.Length);
-    }
+        => svo.Length.Should().Be(0);
 
     [TestCase(15, "info@qowaiv.org")]
     public void has_length(int length, EmailAddress svo)

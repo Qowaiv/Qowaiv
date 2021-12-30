@@ -1,53 +1,44 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Qowaiv.Financial;
-using Qowaiv.Specs;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System.Globalization;
+﻿namespace Financial.BIC_specs;
 
-namespace Financial.BIC_specs
+public class Supports_type_conversion
 {
-    public class Supports_type_conversion
+    [Test]
+    public void via_TypeConverter_registered_with_attribute()
+        => typeof(BusinessIdentifierCode).Should().HaveTypeConverterDefined();
+
+    [Test]
+    public void from_null_string()
     {
-        [Test]
-        public void via_TypeConverter_registered_with_attribute()
-            => typeof(BusinessIdentifierCode).Should().HaveTypeConverterDefined();
-
-        [Test]
-        public void from_null_string()
+        using (TestCultures.En_GB.Scoped())
         {
-            using (TestCultures.En_GB.Scoped())
-            {
-                Converting.From<string>(null).To<BusinessIdentifierCode>().Should().Be(default);
-            }
+            Converting.From<string>(null).To<BusinessIdentifierCode>().Should().Be(default);
         }
+    }
 
-        [Test]
-        public void from_empty_string()
+    [Test]
+    public void from_empty_string()
+    {
+        using (TestCultures.En_GB.Scoped())
         {
-            using (TestCultures.En_GB.Scoped())
-            {
-                Converting.From(string.Empty).To<BusinessIdentifierCode>().Should().Be(default);
-            }
+            Converting.From(string.Empty).To<BusinessIdentifierCode>().Should().Be(default);
         }
+    }
 
-        [Test]
-        public void from_string()
+    [Test]
+    public void from_string()
+    {
+        using (TestCultures.En_GB.Scoped())
         {
-            using (TestCultures.En_GB.Scoped())
-            {
-                Converting.From("AEGONL2UXXX").To<BusinessIdentifierCode>().Should().Be(Svo.BusinessIdentifierCode);
-            }
+            Converting.From("AEGONL2UXXX").To<BusinessIdentifierCode>().Should().Be(Svo.BusinessIdentifierCode);
         }
+    }
 
-        [Test]
-        public void to_string()
+    [Test]
+    public void to_string()
+    {
+        using (TestCultures.En_GB.Scoped())
         {
-            using (TestCultures.En_GB.Scoped())
-            {
-                Converting.ToString().From(Svo.BusinessIdentifierCode).Should().Be("AEGONL2UXXX");
-            }
+            Converting.ToString().From(Svo.BusinessIdentifierCode).Should().Be("AEGONL2UXXX");
         }
     }
 }

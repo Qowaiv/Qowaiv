@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Specs;
+﻿namespace Qowaiv.TestTools;
 
 public static class Svo
 {
@@ -78,18 +78,6 @@ public static class Svo
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(field => field.GetValue(null));
-
-    public static IEnumerable<Type> AllTypes()
-         => typeof(SingleValueObjectAttribute).Assembly
-        .GetTypes()
-        .Where(tp => tp.IsValueType && tp.IsPublic && !tp.IsEnum && !tp.IsAbstract)
-        .Except(new[]
-        {
-                typeof(FormattingArguments),
-                typeof(Secret),
-                typeof(CryptographicSeed),
-                typeof(Hash),
-        });
 }
 
 public sealed class ForInt32 : Int32IdBehavior

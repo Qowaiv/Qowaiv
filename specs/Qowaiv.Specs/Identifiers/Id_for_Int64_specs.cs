@@ -51,7 +51,7 @@ public class Supports_type_conversion
     {
         Func<Int64Id> convert = () => Converting.From(str).To<Int64Id>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from string to Qowaiv.Identifiers.Id<Qowaiv.Specs.ForInt64> is not valid.");
+            .WithMessage("Cast from string to Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt64> is not valid.");
     }
 
     [TestCase(-17)]
@@ -60,6 +60,6 @@ public class Supports_type_conversion
     {
         Func<Int64Id> convert = () => Converting.From(number).To<Int64Id>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.Specs.ForInt64> is not valid.");
+            .WithMessage("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt64> is not valid.");
     }
 }

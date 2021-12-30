@@ -1,13 +1,13 @@
 ﻿namespace Debug_SVO_specs;
 
-public class All : DebugerDisplayTest
+public class All : SvoTypeTest
 {
-    [TestCaseSource(nameof(Svos))]
+    [TestCaseSource(nameof(AllSvos))]
     public void are_decorated_with_DebuggerDisplay_attribute(Type svoType)
         => svoType.Should().BeDecoratedWith<DebuggerDisplayAttribute>();
 }
 
-public class Default_value : DebugerDisplayTest
+public class Default_value : SvoTypeTest
 {
     [TestCaseSource(nameof(SvosWithEmpty))]
     public void displays_empty(Type svoType)
@@ -39,28 +39,16 @@ public class Default_value : DebugerDisplayTest
     }
 }
 
-public class Unknown_value : DebugerDisplayTest
+public class Unknown_value : SvoTypeTest
 {
+    public static IEnumerable<Type> SvosWithDefaultUnknown
+        => SvosWithUnknown.Except(new[] { typeof(Sex), typeof(InternetMediaType) });
 
-    [TestCaseSource(nameof(SvosWithUnknown))]
+    [TestCaseSource(nameof(SvosWithDefaultUnknown))]
     public void displays_unknown_for(Type svoType)
     {
         var unknown = Unknown.Value(svoType);
         unknown.Should().HaveDebuggerDisplay("{unknown}");
-    }
-
-    [Test]
-    public void displays_application_octet_stream_for_internet_media_type()
-    {
-        var unknown = InternetMediaType.Unknown;
-        unknown.Should().HaveDebuggerDisplay("application/octet-stream");
-    }
-
-    [Test]
-    public void displays_not_known_for_sex()
-    {
-        var unknown = Sex.Unknown;
-        unknown.Should().HaveDebuggerDisplay("Not known");
     }
 }
 public class Displays
@@ -101,23 +89,3 @@ public class Displays
     }
 }
 
-public class DebugerDisplayTest
-{
-    protected DebugerDisplayTest() { }
-
-    internal static IEnumerable<Type> Svos => Svo.AllTypes();
-
-    internal static IEnumerable<Type> SvosWithEmpty => Svos
-        .Where(svo
-            => !svo.IsGenericType
-            && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
-            && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue));
-
-    internal static IEnumerable<Type> SvosWithUnknown => Svos
-        .Where(svo
-            => !svo.IsGenericType
-            && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
-            && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasUnknownValue))
-        .Except(new[] { typeof(Gender), typeof(Sex), typeof(InternetMediaType) });
-
-}

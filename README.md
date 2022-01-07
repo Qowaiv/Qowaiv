@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
 ![Build Status](https://github.com/Qowaiv/Qowaiv/workflows/Build%20%26%20Test/badge.svg?branch=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Qowaiv_Qowaiv&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Qowaiv_Qowaiv)
 [![Coverage Status](https://coveralls.io/repos/github/Qowaiv/Qowaiv/badge.svg?branch=master)](https://coveralls.io/github/Qowaiv/Qowaiv?branch=master)
 
 | version                                                                       | package                                                                     |

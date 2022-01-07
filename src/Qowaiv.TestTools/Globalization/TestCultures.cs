@@ -1,8 +1,17 @@
-﻿namespace Qowaiv.TestTools.Globalization;
+﻿using System.Reflection;
+
+namespace Qowaiv.TestTools.Globalization;
 
 /// <summary>Contains <see cref="CultureInfo"/>'s for test purposes.</summary>
 public static class TestCultures
 {
+    /// <summary>Selects a culture, first checking a culture defined here.</summary>
+    [Pure]
+    public static CultureInfo Select(string name)
+        => typeof(TestCultures).GetFields(BindingFlags.Public | BindingFlags.Static)
+        .Select(field => (CultureInfo)field.GetValue(null))
+        .FirstOrDefault(culture => culture.Name == name) ?? new CultureInfo(name);
+
     /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo De_DE => new("de-DE");
 

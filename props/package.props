@@ -12,6 +12,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <SignAssembly>true</SignAssembly>
+    <DebugType>portable</DebugType>
     <DelaySign>false</DelaySign>
     <Nullable>enable</Nullable>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>

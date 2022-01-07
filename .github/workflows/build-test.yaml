@@ -46,11 +46,13 @@ jobs:
           /o:"qowaiv" `
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" `
           /d:sonar.host.url="https://sonarcloud.io" `
-          /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml"
+          /d:sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml `
+          /d:sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
 
           dotnet dotnet build --configuration Release
 
           dotnet test specs/Qowaiv.Specs `
+          --logger trx `
           /p:CollectCoverage=true `
           /p:ThresholdType=branch `
           /p:CoverletOutputFormat=opencover

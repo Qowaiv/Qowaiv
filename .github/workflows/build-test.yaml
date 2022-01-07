@@ -43,8 +43,11 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Qowaiv_Qowaiv" /o:"qowaiv" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           
-          echo Run tests
-          dotnet test --configuration Release
+          echo Build with dotnet
+          dotnet build --configuration Release
+          
+          echo Run unit tests
+          dotnet test --no-build --configuration Release
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
          

@@ -41,9 +41,13 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Qowaiv_Qowaiv" /o:"qowaiv" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Qowaiv_Qowaiv" /o:"qowaiv" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
 
-          dotnet test --configuration Release 
+          dotnet test `
+          --configuration release `
+          --collect:"XPlat Code Coverage" `
+          --results-directory TestResults/ `
+          --logger "trx;LogFileName=unittests.trx" `
+          -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-         

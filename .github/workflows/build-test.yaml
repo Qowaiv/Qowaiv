@@ -51,8 +51,6 @@ jobs:
           dotnet dotnet build --configuration Release
 
           dotnet test specs/Qowaiv.Specs `
-          --no-build `
-          --nologo `
           /p:CollectCoverage=true `
           /p:ThresholdType=branch `
           /p:CoverletOutputFormat=opencover

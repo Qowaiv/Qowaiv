@@ -2,7 +2,7 @@
 
 public class Dummy : IDisposable
 {
-    public void X() => throw new NullReferenceException();
+    public int X() => throw new NullReferenceException();
 
 
     public void Dispose()

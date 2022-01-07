@@ -49,12 +49,6 @@ jobs:
           /d:sonar.host.url="https://sonarcloud.io" `
           /d:sonar.cs.opencover.reportsPaths="**\TestResults\coverage.trx"
 
-          dotnet build --configuration release
-
-          dotnet test `
-          --no-build `
-          --configuration release `
-          --results-directory TestResults `
-          --logger "trx;LogFileName=coverage.trx"
+          dotnet test /p:CollectCoverage=true /p:ThresholdType=branch /p:CoverletOutputFormat=lcov
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

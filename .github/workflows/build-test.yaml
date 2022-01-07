@@ -29,13 +29,15 @@ jobs:
           path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Build
+        run: dotnet build --configuration Release
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Build and analyze
+      - name: Analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -48,8 +50,6 @@ jobs:
           /d:sonar.host.url="https://sonarcloud.io" `
           /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
           /d:sonar.cs.vstest.reportsPaths="**/*.trx"
-
-          dotnet dotnet build --configuration Release
 
           dotnet test specs/Qowaiv.Specs `
           --logger trx `

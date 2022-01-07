@@ -289,10 +289,10 @@ public class Has_custom_formatting
     }
 
     [TestCase("fr-FR", "%")]
-    //[TestCase("fa-IR", "#٪")]
+    [TestCase("fa-IR", "٪")]
     public void with_percent_sign_before_for(string culture, string sign)
         => Svo.Percentage.ToString(TestCultures.Select(culture)).Should().StartWith(sign);
-    
+
     [Test]
     public void using_per_mille_sign()
     {

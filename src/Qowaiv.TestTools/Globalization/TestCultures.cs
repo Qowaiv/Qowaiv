@@ -8,8 +8,8 @@ public static class TestCultures
     /// <summary>Selects a culture, first checking a culture defined here.</summary>
     [Pure]
     public static CultureInfo Select(string name)
-        => typeof(TestCultures).GetFields(BindingFlags.Public | BindingFlags.Static)
-        .Select(field => (CultureInfo?)field.GetValue(null))
+        => typeof(TestCultures).GetProperties(BindingFlags.Public | BindingFlags.Static)
+        .Select(prop => (CultureInfo?)prop.GetValue(null))
         .FirstOrDefault(culture => culture?.Name == name) ?? new CultureInfo(name);
 
     /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
@@ -33,7 +33,7 @@ public static class TestCultures
         get
         {
             var culture = new CultureInfo("fa-IR");
-            culture.NumberFormat.PercentSymbol = "#٪";
+            culture.NumberFormat.PercentSymbol = "٪";
             culture.NumberFormat.PercentDecimalSeparator = ",";
             return culture;
         }

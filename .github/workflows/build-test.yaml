@@ -31,15 +31,13 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Build
         run: dotnet build --configuration Release
-      - name: Test
-        run: dotnet test specs/Qowaiv.Specs --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Analyze
+      - name: Test & Analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -52,5 +50,7 @@ jobs:
           /d:sonar.host.url="https://sonarcloud.io" `
           /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
           /d:sonar.cs.vstest.reportsPaths="**/*.trx"
+
+          dotnet test specs/Qowaiv.Specs --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

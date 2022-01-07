@@ -46,13 +46,8 @@ jobs:
           /o:"qowaiv" `
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" `
           /d:sonar.host.url="https://sonarcloud.io" `
-          /d:sonar.cs.opencover.reportsPaths="**/coverage.trx"
+          /d:sonar.cs.opencover.reportsPaths="**/*"
 
-          dotnet test `
-          --configuration release `
-          --collect:"XPlat Code Coverage" `
-          --results-directory TestResults/ `
-          --logger "trx;LogFileName=coverage.trx" `
-          -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          dotnet test --configuration release
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

@@ -51,6 +51,10 @@ jobs:
           /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
           /d:sonar.cs.vstest.reportsPaths="**/*.trx"
 
-          dotnet test specs/Qowaiv.Specs --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          dotnet test specs/Qowaiv.Specs `
+          --logger trx `
+          /p:CollectCoverage=true `
+          /p:ThresholdType=branch `
+          /p:CoverletOutputFormat=opencover
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

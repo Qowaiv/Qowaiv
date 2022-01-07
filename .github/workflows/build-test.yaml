@@ -50,9 +50,7 @@ jobs:
 
           dotnet test `
           --configuration release `
-          --collect:"XPlat Code Coverage" `
-          --results-directory TestResults/ `
-          --logger "trx;LogFileName=coverage.trx" `
-          -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          --results-directory TestResults `
+          --logger "trx;LogFileName=coverage.trx"
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

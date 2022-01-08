@@ -483,7 +483,7 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
         var format = match.Groups["format"].Value;
         var streamSizeMarker = match.Groups["streamSizeMarker"].Value;
 
-        var isKibi = streamSizeMarker.Contains("i");
+        var isKibi = streamSizeMarker.Contains('i');
 
         var sb = new StringBuilder();
         if (m_Value < 0)

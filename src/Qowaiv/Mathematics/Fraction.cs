@@ -650,11 +650,11 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     [Pure]
     public static Fraction Create(decimal number, decimal error)
     {
-        if (number < long.MinValue || number > long.MaxValue)
+        if (!number.IsInRange(long.MinValue, long.MaxValue))
         {
             throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
         }
-        if (error < MinimumError || error > 1)
+        if (!error.IsInRange(MinimumError, 1))
         {
             throw new ArgumentOutOfRangeException(nameof(error), QowaivMessages.ArgumentOutOfRange_FractionError);
         }

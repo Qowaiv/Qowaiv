@@ -619,19 +619,22 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
             }
             var dec = m_Value / Factors[symbolInfo.Symbol];
             var str = dec.ToString(symbolInfo.Buffer, numberInfo);
-
-            return symbolInfo.Symbol switch
-            {
-                SymbolPosition.PercentBefore => numberInfo.PercentSymbol + str,
-                SymbolPosition.PerMilleBefore => numberInfo.PerMilleSymbol + str,
-                SymbolPosition.PerTenThousandBefore => PerTenThousandSymbol + str,
-                SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
-                SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
-                SymbolPosition.PerTenThousandAfter => str + PerTenThousandSymbol,
-                _ => str,
-            };
+            return ToString(str, symbolInfo, numberInfo);
         }
     }
+
+    [Pure]
+    private static string ToString(string str, SymbolInfo symbolInfo, NumberFormatInfo numberInfo) 
+        => symbolInfo.Symbol switch
+        {
+            SymbolPosition.PercentBefore => numberInfo.PercentSymbol + str,
+            SymbolPosition.PerMilleBefore => numberInfo.PerMilleSymbol + str,
+            SymbolPosition.PerTenThousandBefore => PerTenThousandSymbol + str,
+            SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
+            SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
+            SymbolPosition.PerTenThousandAfter => str + PerTenThousandSymbol,
+            _ => str,
+        };
 
     /// <summary>Gets an XML string representation of the @FullName.</summary>
     [Pure]

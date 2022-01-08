@@ -52,4 +52,8 @@ public static class QowaivInt64Extensions
     /// <summary>Gets the sign of the <see cref="long"/>.</summary>
     [Pure]
     public static int Sign(this long number) => Math.Sign(number);
+
+    /// <summary>Returns true if the number is in the specified range.</summary>
+    [Pure]
+    internal static bool IsInRange(this long num, long low, long max) => num >= low && num <= max;
 }

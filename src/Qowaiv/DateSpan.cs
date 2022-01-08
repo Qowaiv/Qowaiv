@@ -299,7 +299,7 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     [Pure]
     public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
     {
-        if ((settings & (DateSpanSettings.WithoutYears | DateSpanSettings.WithoutMonths)) == default)
+        if ((settings & (DateSpanSettings.DaysOnly)) == DateSpanSettings.DaysOnly)
         {
             return FromDays((int)(d1 - d2).TotalDays);
         }
@@ -405,10 +405,7 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     /// <summary>Returns true if the combination of months and days can not be processed.</summary>
     [Pure]
     private static bool IsOutOfRange(long months, long days, double totalDays)
-        => months > MaxValue.TotalMonths
-        || months < MinValue.TotalMonths
-        || totalDays > MaxValue.TotalDays
-        || totalDays < MinValue.TotalDays
-        || days > +MaxDays
-        || days < -MaxDays;
+        => !months.IsInRange(MinValue.TotalMonths, MaxValue.TotalMonths)
+        || !days.IsInRange(-MaxDays, +MaxDays)
+        || !totalDays.IsInRange(MinValue.TotalDays, MaxValue.TotalDays);
 }

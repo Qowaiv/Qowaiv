@@ -172,8 +172,7 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
             result = Unknown;
             return true;
         }
-        else if (buffer.Length >= 12
-            && buffer.Length <= 32
+        else if (buffer.Length.IsInRange(12, 32)
             && buffer.Matches(Pattern)
             && ValidForCountry(buffer)
             && (Mod97(buffer)))

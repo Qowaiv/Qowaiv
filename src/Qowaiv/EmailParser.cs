@@ -182,14 +182,7 @@ internal static partial class EmailParser
 
             if (ch.IsDot())
             {
-                if (state.Buffer.IsEmpty()
-                    || state.Input.IsEmpty()
-                    || state.Buffer.Last().IsDot()
-                    || state.Buffer.Last().IsDash()
-                    || state.Buffer.Length - dot - 1 > DomainPartMaxLength)
-                {
-                    return state.Invalid();
-                }
+                if (state.UnexpectedDotInDomain(dot)) state.Invalid();
                 else
                 {
                     dot = state.Buffer.Length;
@@ -198,12 +191,7 @@ internal static partial class EmailParser
             }
             else if (ch.IsDash())
             {
-                if (state.Buffer.IsEmpty()
-                    || state.Input.IsEmpty()
-                    || state.Buffer.Last().IsDot())
-                {
-                    return state.Invalid();
-                }
+                if (state.UnexpectedDashInDomain()) return state.Invalid();
                 else { state.Buffer.Add(ch); }
             }
             else if (ch.IsDomain())
@@ -216,7 +204,12 @@ internal static partial class EmailParser
                 return state.IP();
             }
         }
+        return state.TopDomainOrIP(dot);
+    }
 
+    [FluentSyntax]
+    private static State TopDomainOrIP(this State state, int dot)
+    {
         if (state.Input.IsEmpty()
             && state.Buffer.Length > 1
             && (dot == NotFound
@@ -227,6 +220,20 @@ internal static partial class EmailParser
         }
         else return state.IP();
     }
+
+    [Pure]
+    private static bool UnexpectedDotInDomain(this State state, int dot)
+        => state.Buffer.IsEmpty()
+        || state.Input.IsEmpty()
+        || state.Buffer.Last().IsDot()
+        || state.Buffer.Last().IsDash()
+        || state.Buffer.Length - dot - 1 > DomainPartMaxLength;
+
+    [Pure]
+    private static bool UnexpectedDashInDomain(this State state)
+        => state.Buffer.IsEmpty()
+        || state.Input.IsEmpty()
+        || state.Buffer.Last().IsDot();
 
     [FluentSyntax]
     private static State IP(this State state)

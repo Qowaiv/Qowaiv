@@ -19,6 +19,12 @@ internal static class FractionParser
     }
 
     /// <summary>Parses a <see cref="string"/> that potentially contains a <see cref="Fraction"/>.</summary>
+    [Pure]
+    public static Fraction? Parse(string s, NumberFormatInfo formatInfo)
+        => ParseExternal(s, formatInfo, out var external)
+        ? external
+        : ParseInternal(s, formatInfo);
+
     /// <remarks>
     /// Category                   |  Pattern                      | Example
     /// ---------------------------------------------------------------------
@@ -28,46 +34,27 @@ internal static class FractionParser
     /// Whole number with vulgar   | [0-9]+ ?[¼½¾]                 |     ¾
     /// </remarks>
     [Pure]
-    public static Fraction? Parse(string s, NumberFormatInfo formatInfo)
+    private static Fraction? ParseInternal(string s, NumberFormatInfo formatInfo)
     {
-        if (ParseExternal(s, formatInfo, out var external))
-        {
-            return external;
-        }
-
-        var plus = formatInfo.PositiveSign;
-        var min = formatInfo.NegativeSign;
         var integerSeperator = formatInfo.NumberGroupSeparator == " " ? '+' : ' ';
 
-        var sign = 1;
         var str = s.Buffer().Trim();
-        var index = 0;
-
-        // check for +/-.
-        if (str.StartsWith(plus))
-        {
-            index += plus.Length;
-        }
-        else if (str.StartsWith(min))
-        {
-            index += min.Length;
-            sign = -1;
-        }
+        var sign = str.Sign(formatInfo);
 
         long integer = 0;
         long nominator = 0;
 
-        var buffer = CharBuffer.Empty(str.Length - index);
+        var buffer = CharBuffer.Empty(str.Length);
         var tokens = Tokens.None;
 
-        for (; index < str.Length; index++)
+        while(str.NotEmpty())
         {
-            var ch = str[index];
+            var ch = str.Next();
 
             if (Fraction.Formatting.IsFractionBar(ch))
             {
                 // A second fraction bar, or as last character is not allowed.
-                if (tokens.HasAll(Tokens.Bar) || str.EndOfBuffer(index))
+                if (tokens.HasAll(Tokens.Bar) || str.IsEmpty())
                 {
                     return null;
                 }
@@ -82,7 +69,7 @@ internal static class FractionParser
             else if (ch == integerSeperator)
             {
                 // A second spacer, or as last character is not allowed.
-                if (tokens.HasAll(Tokens.Space) || str.EndOfBuffer(index))
+                if (tokens.HasAll(Tokens.Space) || str.IsEmpty())
                 {
                     return null;
                 }
@@ -97,7 +84,7 @@ internal static class FractionParser
             else if (ch.IsVulgar(out var vulgar))
             {
                 // A vulgar is only allowed directly followed by an integer, or as single character.
-                if (tokens.HasAny(Tokens.Bar | Tokens.SuperScript | Tokens.SubScript) || !str.EndOfBuffer(index))
+                if (tokens.HasAny(Tokens.Bar | Tokens.SuperScript | Tokens.SubScript) || str.NotEmpty())
                 {
                     return null;
                 }
@@ -170,6 +157,32 @@ internal static class FractionParser
         }
 
         return null;
+    }
+
+
+    /// <summary>Gets the first <see cref="char"/> of the buffer, and removes it.</summary>
+    [Impure]
+    private static char Next(this CharBuffer buffer)
+    {
+        var ch = buffer.First();
+        buffer.RemoveFromStart(1);
+        return ch;
+    }
+
+    [Impure]
+    private static int Sign(this CharBuffer buffer, NumberFormatInfo formatInfo)
+    {
+        if (buffer.StartsWith(formatInfo.NegativeSign))
+        {
+            buffer.RemoveFromStart(formatInfo.NegativeSign.Length);
+            return -1;
+        }
+        else if (buffer.StartsWith(formatInfo.PositiveSign))
+        {
+            buffer.RemoveFromStart(formatInfo.PositiveSign.Length);
+            return +1;
+        }
+        else return +1; 
     }
 
     /// <summary>Parse the fraction, using <see cref="long.Parse(string)"/>, <see cref="decimal.Parse(string)"/>, and <see cref="Percentage.Parse(string)"/>.</summary>

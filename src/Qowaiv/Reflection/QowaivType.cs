@@ -42,11 +42,12 @@ public static class QowaivType
     public static bool IsDate(Type? objectType)
     {
         var type = objectType is null ? null : GetNotNullableType(objectType);
-        return type == typeof(DateTime)
-            || type == typeof(DateTimeOffset)
-            || type == typeof(LocalDateTime)
-            || type == typeof(Date)
-            || type == typeof(WeekDate);
+        return type.IsAnyOf(
+            typeof(DateTime),
+            typeof(DateTimeOffset),
+            typeof(LocalDateTime),
+            typeof(Date),
+            typeof(WeekDate));
     }
 
     /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>

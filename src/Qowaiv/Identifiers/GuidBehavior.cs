@@ -76,8 +76,7 @@ public abstract class GuidBehavior : IdentifierBehavior
                 "H" => Base32.ToString(id.ToByteArray(), false),
                 "N" or "D" or "B" or "P" => id.ToString(format, formatProvider).ToUpperInvariant(),
                 "X" => id.ToString(format, formatProvider).ToUpperInvariant().Replace('X', 'x'),
-                "n" or "d" or "b" or "p" or "x" => id.ToString(format, formatProvider),
-                _ => throw new FormatException(QowaivMessages.FormatException_InvalidFormat),
+                _ => id.ToString(format, formatProvider),
             };
         }
     }

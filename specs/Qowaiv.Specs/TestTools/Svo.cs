@@ -106,7 +106,7 @@ public sealed class ForInt64 : Int64IdBehavior
         ? base.TryParse(str?[6..], out id)
         : base.TryParse(str, out id) && IsValid(id);
 
-    private static bool IsValid(long number) => number % 2 == 1;
+    private static bool IsValid(long number) => (number & 1) == 1;
 }
 
 public class ForString : StringIdBehavior { }

@@ -200,9 +200,9 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
         for (int pos = digits.Length - 1; pos >= 0; pos--)
         {
             sum += exp * AlphanumericAndNumericLookup.IndexOf(digits[pos]);
-            exp = (exp * 10) % 97;
+            exp = (exp * 10).Mod(97);
         }
-        return sum % 97 == 1;
+        return sum.Mod(97) == 1;
     }
 
     [Pure]

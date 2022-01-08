@@ -45,6 +45,14 @@ public static class QowaivInt32Extensions
     [Pure]
     public static int Divide(this int num, Percentage p) => (int)((decimal)num).Divide(p);
 
+    /// <summary>Gets a (positive) modulo.</summary>
+    [Pure]
+    internal static int Mod(this int n, int modulo)
+    {
+        var m = n % modulo;
+        return m < 0 ? m + modulo : m;
+    }
+
     /// <summary>Returns true if the number is in the specified range.</summary>
     [Pure]
     internal static bool IsInRange(this int num, int low, int max) => num >= low && num <= max;

@@ -26,13 +26,13 @@ public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattabl
     /// <remarks>
     /// The empty and unknown value are not odd.
     /// </remarks>
-    public bool IsOdd => !IsEmptyOrUnknown() && m_Value % 2 == 1;
+    public bool IsOdd => !IsEmptyOrUnknown() && m_Value.Mod(2) == 1;
 
     /// <summary>Returns true if the House number is even, otherwise false.</summary>
     /// <remarks>
     /// The empty and unknown value are not even.
     /// </remarks>
-    public bool IsEven => !IsEmptyOrUnknown() && m_Value % 2 == 0;
+    public bool IsEven => !IsEmptyOrUnknown() && m_Value.Mod(2) == 0;
 
     /// <summary>Gets the number of digits.</summary>
     public int Length

@@ -87,8 +87,14 @@ dotnet_diagnostic.S1185.severity = warning
 # S1479: Consider reworking this 'switch' to reduce the number of 'case's to at most 30
 dotnet_diagnostic.S1479.severity = warning
 
+# S1541: Methods and properties should not be too complex
+dotnet_diagnostic.S1541.severity = warning
+
 # S1858: "ToString()" calls should not be redundant
 dotnet_diagnostic.S1858.severity = warning
+
+# S2197: Modulus results should not be checked for direct equa
+dotnet_diagnostic.S2197.severity = warning
 
 # S2328: GetHashCode() should not reference mutable fields
 dotnet_diagnostic.S2328.severity = none

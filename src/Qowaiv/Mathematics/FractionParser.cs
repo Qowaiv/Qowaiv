@@ -84,16 +84,14 @@ internal static partial class FractionParser
     {
         long factor = 1;
         number = 0;
-        while (buffer.NotEmpty())
+        while (buffer.NotEmpty()
+            && buffer.Last() is var ch
+            && lookup.IndexOf(ch) is var index 
+            && index != CharBuffer.NotFound)
         {
-            var ch = buffer.Last();
-            if (lookup.IndexOf(ch) is var index && index != CharBuffer.NotFound)
-            {
-                buffer.RemoveFromEnd(1);
-                number += index * factor;
-                factor *= 10;
-            }
-            else break;
+            buffer.RemoveFromEnd(1);
+            number += index * factor;
+            factor *= 10;
         }
         return factor > 1 || buffer.Integer(numberInfo, out number);
     }

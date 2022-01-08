@@ -87,6 +87,9 @@ dotnet_diagnostic.S1144.severity = warning
 # S1185: Overriding members should do more than simply call the same member in the base class
 dotnet_diagnostic.S1185.severity = warning
 
+# S1227: break statements should not be used except for switch cases
+dotnet_diagnostic.S1227.severity = warning
+
 # S1479: Consider reworking this 'switch' to reduce the number of 'case's to at most 30
 dotnet_diagnostic.S1479.severity = warning
 

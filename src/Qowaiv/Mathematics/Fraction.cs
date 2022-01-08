@@ -625,17 +625,16 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     /// </returns>
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Fraction result)
     {
-        result = Zero;
-        if (s is not { Length: > 0 })
-        {
-            return true;
-        }
-        else if (FractionParser.Parse(s, formatProvider?.GetFormat<NumberFormatInfo>() ?? CultureInfo.InvariantCulture.NumberFormat) is { } fraction)
+        if (s is { Length: > 0 } && FractionParser.Parse(s, formatProvider?.GetFormat<NumberFormatInfo>() ?? CultureInfo.InvariantCulture.NumberFormat) is { } fraction)
         {
             result = fraction;
             return true;
         }
-        else return false;
+        else
+        {
+            result = Zero;
+            return false;
+        }
     }
 
     /// <summary>Creates a fraction based on decimal number.</summary>

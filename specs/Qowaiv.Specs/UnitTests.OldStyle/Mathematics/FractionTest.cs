@@ -40,59 +40,6 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.IsFalse(TestStruct.IsZero());
         }
 
-        [TestCase(17, 1, "17")]
-        [TestCase(17, 1, "+17")]
-        [TestCase(-12, 1, "-12")]
-        [TestCase(12_345, 1, "12,345")]
-        [TestCase(-1, 4, "-0.25")]
-        [TestCase(487, 1000, "48.70%")]
-        [TestCase(487, 1000, "487.0‰")]
-        [TestCase(1, 3, "1/3")]
-        [TestCase(1, 3, "1:3")]
-        [TestCase(1, 3, "1÷3")]
-        [TestCase(1, 3, "1⁄3")]
-        [TestCase(1, 3, "1⁄3")]
-        [TestCase(1, 3, "1⁄3")]
-        [TestCase(1, 3, "1∕3")]
-        [TestCase(1, 3, "+1/3")]
-        [TestCase(-1, 3, "-1/3")]
-        [TestCase(11, 43, "11/43")]
-        [TestCase(4, 3, "1 1/3")]
-        [TestCase(21, 2, "10 1/2")]
-        [TestCase(1, 2, "½")]
-        [TestCase(-1, 2, "-½")]
-        [TestCase(3, 4, "¾")]
-        [TestCase(11, 4, "2¾")]
-        [TestCase(11, 4, "2 ¾")]
-        [TestCase(9, 7, "1²/₇")]
-        [TestCase(9, 7, "1 ²/₇")]
-        [TestCase(23, 47, "²³/₄₇")]
-        [TestCase(3, 7, "3/₇")]
-        [TestCase(3, 7, "³/7")]
-        public void Parse(long numerator, long denominator, string str)
-        {
-            var expected = numerator.DividedBy(denominator);
-            var actual = Fraction.Parse(str, CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        /// <summary>TryParse null should be valid.</summary>
-        [Test]
-        public void TryParse_Null_IsValid()
-        {
-            Assert.IsTrue(Fraction.TryParse(null, out var val));
-            Assert.AreEqual(default(Fraction), val);
-        }
-
-        /// <summary>TryParse string.Empty should be valid.</summary>
-        [Test]
-        public void TryParse_StringEmpty_IsValid()
-        {
-            Assert.IsTrue(Fraction.TryParse(string.Empty, out var val));
-            Assert.AreEqual(default(Fraction), val);
-        }
-
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {

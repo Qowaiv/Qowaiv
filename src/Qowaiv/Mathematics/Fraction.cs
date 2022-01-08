@@ -397,60 +397,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
         else if (Formatting.Pattern.Match(format.WithDefault("0/0")) is { Success: true } match)
         {
-            var iFormat = match.Groups[nameof(Whole)].Value;
-            var nFormat = match.Groups[nameof(Numerator)].Value;
-            var dFormat = match.Groups[nameof(Denominator)].Value;
-            var bar = match.Groups[nameof(Formatting.FractionBars)].Value;
-
-            var sb = new StringBuilder();
-
-            var remainder = numerator;
-            var negative = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
-
-            if (!string.IsNullOrEmpty(iFormat))
-            {
-                remainder = Remainder;
-
-                sb.Append(Whole.ToString(iFormat, formatProvider));
-
-                // For -0 n/d
-                if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(negative))
-                {
-                    sb.Insert(0, negative);
-                }
-            }
-            if (nFormat == "super")
-            {
-                if (sb.Length == 0 && Sign() == -1)
-                {
-                    sb.Append(negative);
-                }
-                // use invariant as we want to convert to superscript.
-                var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
-                sb.Append(super);
-            }
-            else
-            {
-                if (sb.Length != 0 && sb[sb.Length - 1] != ' ')
-                {
-                    sb.Append(' ');
-                }
-                sb.Append(remainder.ToString(nFormat, formatProvider));
-            }
-
-            sb.Append(bar);
-
-            if (dFormat == "sub")
-            {
-                // use invariant as we want to convert to superscript.
-                var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
-                sb.Append(super);
-            }
-            else
-            {
-                sb.Append(Denominator.ToString(dFormat, formatProvider));
-            }
-            return sb.ToString();
+            return ToStringWithFractionBar(formatProvider, match);
         }
         // if no fraction bar character has been provided, format as a decimal.
         else if (!format.WithDefault().Any(ch => Formatting.IsFractionBar(ch)))
@@ -458,6 +405,65 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
             return ToDecimal().ToString(format, formatProvider);
         }
         else throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
+    }
+
+    [Pure]
+    private string ToStringWithFractionBar(IFormatProvider? formatProvider, Match match)
+    {
+        var iFormat = match.Groups[nameof(Whole)].Value;
+        var nFormat = match.Groups[nameof(Numerator)].Value;
+        var dFormat = match.Groups[nameof(Denominator)].Value;
+        var bar = match.Groups[nameof(Formatting.FractionBars)].Value;
+
+        var sb = new StringBuilder();
+
+        var remainder = numerator;
+        var negative = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
+
+        if (!string.IsNullOrEmpty(iFormat))
+        {
+            remainder = Remainder;
+
+            sb.Append(Whole.ToString(iFormat, formatProvider));
+
+            // For -0 n/d
+            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(negative))
+            {
+                sb.Insert(0, negative);
+            }
+        }
+        if (nFormat == "super")
+        {
+            if (sb.Length == 0 && Sign() == -1)
+            {
+                sb.Append(negative);
+            }
+            // use invariant as we want to convert to superscript.
+            var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
+            sb.Append(super);
+        }
+        else
+        {
+            if (sb.Length != 0 && sb[sb.Length - 1] != ' ')
+            {
+                sb.Append(' ');
+            }
+            sb.Append(remainder.ToString(nFormat, formatProvider));
+        }
+
+        sb.Append(bar);
+
+        if (dFormat == "sub")
+        {
+            // use invariant as we want to convert to superscript.
+            var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
+            sb.Append(super);
+        }
+        else
+        {
+            sb.Append(Denominator.ToString(dFormat, formatProvider));
+        }
+        return sb.ToString();
     }
 
     /// <inheritdoc/>

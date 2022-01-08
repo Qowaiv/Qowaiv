@@ -147,13 +147,14 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new()
     {
-        { 'n', (svo, provider) => svo.Name },
-        { 'i', (svo, provider) => svo.IsoCode },
         { '0', (svo, provider) => svo.IsoNumericCode.ToString("000", provider) },
-        { 's', (svo, provider) => svo.Symbol },
-        { '$', (svo, provider) => svo.Symbol },
-        { 'e', (svo, provider) => svo.EnglishName },
         { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
+        { 'n', (svo, _) => svo.Name },
+        { 'i', (svo, _) => svo.IsoCode },
+        { 's', (svo, _) => svo.Symbol },
+        { '$', (svo, _) => svo.Symbol },
+        { 'e', (svo, _) => svo.EnglishName },
+        
     };
 
 

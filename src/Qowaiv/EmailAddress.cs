@@ -124,11 +124,11 @@ public partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattab
     private static readonly Dictionary<char, Func<EmailAddress, IFormatProvider, string>> FormatTokens = new()
     {
         { 'U', (svo, provider) => svo.m_Value?.ToUpper(provider) ?? string.Empty },
-        { 'l', (svo, provider) => svo.Local },
         { 'L', (svo, provider) => svo.Local.ToUpper(provider) },
-        { 'd', (svo, provider) => svo.Domain },
         { 'D', (svo, provider) => svo.Domain.ToUpper(provider) },
-        { 'f', (svo, provider) => svo.m_Value ?? string.Empty },
+        { 'l', (svo, _) => svo.Local },
+        { 'd', (svo, _) => svo.Domain },
+        { 'f', (svo, _) => svo.m_Value ?? string.Empty },
     };
 
     /// <summary>Converts the string to an email address.

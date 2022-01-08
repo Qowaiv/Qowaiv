@@ -63,7 +63,9 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     /// To prevent unintended exposure. 
     /// </remarks>
     [Pure]
+#pragma warning disable CA1822 // part of the contract
     public object? ToJson() => null;
+#pragma warning restore CA1822
 
     /// <summary>Returns a <see cref="string" /> that represents the current date span for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

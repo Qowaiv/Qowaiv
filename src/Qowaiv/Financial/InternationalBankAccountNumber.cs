@@ -134,10 +134,10 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new()
     {
-        { 'u', (svo, provider) => svo.ToUnformattedLowercaseString() },
-        { 'U', (svo, provider) => svo.ToUnformattedString() },
-        { 'f', (svo, provider) => svo.ToFormattedLowercaseString() },
-        { 'F', (svo, provider) => svo.ToFormattedString() },
+        { 'u', (svo, _) => svo.ToUnformattedLowercaseString() },
+        { 'U', (svo, _) => svo.ToUnformattedString() },
+        { 'f', (svo, _) => svo.ToFormattedLowercaseString() },
+        { 'F', (svo, _) => svo.ToFormattedString() },
     };
 
     /// <summary>Gets an XML string representation of the IBAN.</summary>

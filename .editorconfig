@@ -15,12 +15,8 @@ indent_size = 2
 
 # IDE warnings
 [*.cs]
-
-# CA1806: Do not ignore method results
-dotnet_diagnostic.CA1806.severity = warning
-
-# CA1825: Avoid unnecessary zero-length array allocations
-dotnet_diagnostic.CA1825.severity = warning
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
 
 # IDE0018: Inline variable declaration
 csharp_style_inlined_variable_declaration = true:warning
@@ -43,22 +39,87 @@ dotnet_diagnostic.IDE0090.severity = warning
 # IDE1006: Naming Styles
 dotnet_diagnostic.IDE1006.severity = none
 
+# CA1069: Enums values should not be duplicated
+dotnet_diagnostic.CA1069.severity = warning
+
+# CA1806: Do not ignore method results
+dotnet_diagnostic.CA1806.severity = warning
+
+# CA1816: Dispose methods should call SuppressFinalize
+dotnet_diagnostic.CA1816.severity = warning
+
+# CA1822: Member that does not access instance data can be marked as static
+dotnet_diagnostic.CA1822.severity = warning
+
+# CA1825: Avoid unnecessary zero-length array allocations
+dotnet_diagnostic.CA1825.severity = warning
+
+# CA2016: Forward the 'CancellationToken' parameter to methods
+dotnet_diagnostic.CA2016.severity = warning
+
+# CA2211: Non-constant fields should not be visible
+dotnet_diagnostic.CA2211.severity = warning
+
+# CA2254: Template should be a static expression
+dotnet_diagnostic.CA2254.severity = warning
+
 # QW0003: Decorate Pure functions
 dotnet_diagnostic.QW0003.severity = warning
+
+# S100: Properties should be named in PascalCase
+dotnet_diagnostic.S100.severity = none
 
 # S101: Types should be named in PascalCase
 dotnet_diagnostic.S101.severity = none
 
+# S107: Methods should not have too many parameters
+dotnet_diagnostic.S107.severity = warning
+
+# S1144: Unused private types or members should be removed
+dotnet_diagnostic.S1144.severity = warning
+
+# S1185: Overriding members should do more than simply call the same member in the base class
+dotnet_diagnostic.S1185.severity = warning
+
+# S1479: Consider reworking this 'switch' to reduce the number of 'case's to at most 30
+dotnet_diagnostic.S1479.severity = warning
+
+# S1858: "ToString()" calls should not be redundant
+dotnet_diagnostic.S1858.severity = warning
+
 # S2328: GetHashCode() should not reference mutable fields
 dotnet_diagnostic.S2328.severity = none
+
+# S2178: Short-circuit logic should be used in boolean contexts
+# '&' is used instead of && to accommodate expressions with nullable booleans too.
+dotnet_diagnostic.S2178.severity = none
+
+# S2302: "nameof" should be used
+dotnet_diagnostic.S2302.severity = warning
+
+# S2342: Rename this enumeration to match naming convention
+dotnet_diagnostic.S2342.severity = warning
+
+# S2436: Types and methods should not have too many generic parameters
+dotnet_diagnostic.S2436.severity = warning
+
+# S3215: interface instances should not be cast to concrete types
+dotnet_diagnostic.S3215.severity = warning
+
+# S3257: Declarations and initializations should be as concise as possible
+dotnet_diagnostic.S3257.severity = warning
 
 # S3376: Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3376.severity = none
 
-# S3903: Types should be defined in named namespaces
-dotnet_diagnostic.S3903.severity = none
+# S3776: Cognitive Complexity of methods should not be too high
+dotnet_diagnostic.S3776.severity = warning
+
+# S3925: "ISerializable" should be implemented correctly
+dotnet_diagnostic.S3925.severity = warning
+
+# S3376: Attribute, EventArgs, and Exception type names should end with the type being extended
+dotnet_diagnostic.S3376.severity = none
 
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none
-dotnet_diagnostic.S2437.severity = warning
-dotnet_diagnostic.S4487.severity = warning

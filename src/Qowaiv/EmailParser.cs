@@ -222,9 +222,13 @@ internal static partial class EmailParser
     }
 
     [Pure]
-    private static bool UnexpectedDotInDomain(this State state, int dot)
+    private static bool IsEmpty(this State state)
         => state.Buffer.IsEmpty()
-        || state.Input.IsEmpty()
+        || state.Input.IsEmpty();
+
+    [Pure]
+    private static bool UnexpectedDotInDomain(this State state, int dot)
+        => state.IsEmpty()
         || state.Buffer.Last().IsDot()
         || state.Buffer.Last().IsDash()
         || state.Buffer.Length - dot - 1 > DomainPartMaxLength;

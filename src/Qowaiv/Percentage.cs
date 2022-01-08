@@ -612,7 +612,7 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
             format = Format(format, formatProvider);
 
             var numberInfo = GetNumberFormatInfo(formatProvider);
-            var symbolInfo = SymbolInfo.Resolve(format.Buffer(), numberInfo);
+            var symbolInfo = SymbolInfo.Get(format.Buffer(), numberInfo);
             if (symbolInfo.Symbol == SymbolPosition.Invalid)
             {
                 throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
@@ -678,7 +678,7 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
         {
             formatProvider ??= CultureInfo.CurrentCulture;
             var numberInfo = GetNumberFormatInfo(formatProvider);
-            var symbolInfo = SymbolInfo.Resolve(s.Buffer(), numberInfo);
+            var symbolInfo = SymbolInfo.Get(s.Buffer(), numberInfo);
 
             if (symbolInfo.Symbol != SymbolPosition.Invalid &&
                 decimal.TryParse(symbolInfo.Buffer, NumberStyles.Number, numberInfo,

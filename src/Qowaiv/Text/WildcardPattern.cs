@@ -142,82 +142,9 @@ public class WildcardPattern : ISerializable
     public bool IsMatch(string input)
     {
         Guard.NotNull(input, nameof(input));
-        return IsMatch(input, 0, 0);
+        return Match(new(Pattern), new(input));
     }
 
-    /// <summary>Handles the actual matching.</summary>
-    /// <param name="input">
-    /// The input to match.
-    /// </param>
-    /// <param name="p">
-    /// the current position of the pattern.
-    /// </param>
-    /// <param name="i">
-    /// the current position of the input.
-    /// </param>
-    /// <returns></returns>
-    [Pure]
-    private bool IsMatch(string input, int p, int i)
-    {
-        // At least on of the indexes is at the end.
-        if (Pattern.Length == p || input.Length == i)
-        {
-            // If we reach at the end of both strings, we are done.
-            if (Pattern.Length == p && input.Length == i)
-            {
-                return true;
-            }
-            // If we are the end of input, this is valid only when the pattern has a '*'
-            // and that is also the last character.
-            return input.Length == i && Pattern[p] == MultipleChars && p == Pattern.Length - 1;
-        }
-
-        var chP = Pattern[p];
-        var chI = input[i];
-
-        // If the first string contains '?'.
-        if (chP == SingleChar)
-        {
-            // First test trailing, then non trailing.
-            if (Options.HasFlag(WildcardPatternOptions.SingleOrTrailing))
-            {
-                return IsMatch(input, p + 1, i) || IsMatch(input, p + 1, i + 1);
-            }
-            return IsMatch(input, p + 1, i + 1);
-        }
-
-        // If there is *, then there are two possibilities:
-        // - We consider current character of second string.
-        // - We ignore current character of second string.
-        if (chP == MultipleChars)
-        {
-            return IsMatch(input, p + 1, i) || IsMatch(input, p, i + 1);
-        }
-
-        // If the current characters of both strings match.
-        if (Equals(chP, chI))
-        {
-            return IsMatch(input, p + 1, i + 1);
-        }
-
-        // No match, exit.
-        return false;
-    }
-
-    [Pure]
-    private bool Equals(char l, char r)
-    {
-        if (l == r) { return true; }
-
-        if (IgnoreCase)
-        {
-            var culture = IsCultureIndependent ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture;
-            var ll = Char.ToLower(l, culture);
-            var rl = Char.ToLower(r, culture);
-            return ll == rl;
-        }
-        return false;
-    }
 
     /// <summary>Indicates whether the specified wildcard pattern finds a match in the specified input string.</summary>
     /// <param name="pattern">
@@ -262,6 +189,55 @@ public class WildcardPattern : ISerializable
         return wildcard.IsMatch(input);
     }
 
+
+    /// <summary>Handles the actual matching.</summary>
+    [Pure]
+    private bool Match(Substring pattern, Substring input)
+    {
+        // Match if end of pattern or if we only have a '*' left.
+        if (input.IsEnd())
+        {
+            return pattern.IsEnd() || (pattern.Ch == MultipleChars && pattern.Left == 1);
+        }
+        else if (pattern.IsEnd()) return false;
+        else return MatchChar(pattern, input);
+    }
+
+    [Pure]
+    private bool MatchChar(Substring pattern, Substring input)
+    {
+        // If there is *, then there are two possibilities:
+        // - We consider current character of second string.
+        // - We ignore current character of second string.
+        if (pattern.Ch == MultipleChars)
+        {
+            return Match(pattern.Next(), input) || Match(pattern, input.Next());
+        }
+        // If the first string contains '?'.
+        else if (pattern.Ch == SingleChar)
+        {
+            return Options.HasFlag(WildcardPatternOptions.SingleOrTrailing)
+                ? Match(pattern.Next(), input) || Match(pattern.Next(), input.Next())
+                : Match(pattern.Next(), input.Next());
+        }
+        // If the current characters of both strings match.
+        else return Equals(pattern.Ch, input.Ch) && Match(pattern.Next(), input.Next());
+    }
+
+    [Pure]
+    private bool Equals(char l, char r)
+    {
+        if (l == r) return true;
+        else if (IgnoreCase)
+        {
+            var culture = IsCultureIndependent ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture;
+            var ll = char.ToLower(l, culture);
+            var rl = char.ToLower(r, culture);
+            return ll == rl;
+        }
+        else return false;
+    }
+
     /// <summary>Represents the wildcard pattern as debug string.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
@@ -280,5 +256,22 @@ public class WildcardPattern : ISerializable
             }
             return sb.ToString();
         }
+    }
+
+    private readonly struct Substring
+    {
+        public Substring(string str, int pos = 0)
+        {
+            Value = str;
+            Position = pos;
+        }
+        public readonly int Position;
+        public readonly string Value;
+        public char Ch => Value[Position];
+        public int Left => Value.Length - Position;
+        [Pure]
+        public bool IsEnd() => Position >= Value.Length;
+        [Pure]
+        public Substring Next() => new(Value, Position + 1);
     }
 }

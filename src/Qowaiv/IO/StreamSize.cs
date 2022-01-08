@@ -515,21 +515,23 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
             sb.Append(' ');
             streamSizeMarker = streamSizeMarker.Substring(1);
         }
-
-        switch (streamSizeMarker)
-        {
-            case "s": sb.Append(ShortLabels[order].ToLowerInvariant()); break;
-            case "S": sb.Append(ShortLabels[order]); break;
-            case "f": sb.Append(FullLabels[order].ToLowerInvariant()); break;
-            case "F": sb.Append(FullLabels[order]); break;
-
-            case "si": sb.Append(ShortLabels1024[order].ToLowerInvariant()); break;
-            case "Si": sb.Append(ShortLabels1024[order]); break;
-            case "fi": sb.Append(FullLabels1024[order].ToLowerInvariant()); break;
-            case "Fi": sb.Append(FullLabels1024[order]); break;
-        }
-        return sb.ToString();
+        return AppendExtension(sb, streamSizeMarker, order).ToString();
     }
+
+    [FluentSyntax]
+    private static StringBuilder AppendExtension(StringBuilder sb, string streamSizeMarker, int order) 
+        => streamSizeMarker switch
+        {
+            "s" => sb.Append(ShortLabels[order].ToLowerInvariant()),
+            "S" => sb.Append(ShortLabels[order]),
+            "f" => sb.Append(FullLabels[order].ToLowerInvariant()),
+            "F" => sb.Append(FullLabels[order]),
+            "si" => sb.Append(ShortLabels1024[order].ToLowerInvariant()),
+            "Si" => sb.Append(ShortLabels1024[order]),
+            "fi" => sb.Append(FullLabels1024[order].ToLowerInvariant()),
+            "Fi" => sb.Append(FullLabels1024[order]),
+            _ => sb,
+        };
 
     private static readonly Regex FormattedPattern = new("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegexOptions.Compiled | RegexOptions.RightToLeft);
     private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };

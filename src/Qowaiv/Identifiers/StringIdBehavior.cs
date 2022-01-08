@@ -76,11 +76,7 @@ public abstract class StringIdBehavior : IdentifierBehavior
     /// <inheritdoc />
     [Pure]
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
-        => sourceType == typeof(Guid)
-        || sourceType == typeof(Uuid)
-        || sourceType == typeof(long)
-        || sourceType == typeof(long)
-        || sourceType == typeof(int)
+        => sourceType.IsAnyOf(typeof(Guid), typeof(Uuid), typeof(long), typeof(int))
         || base.CanConvertFrom(context, sourceType);
 
     [Pure]

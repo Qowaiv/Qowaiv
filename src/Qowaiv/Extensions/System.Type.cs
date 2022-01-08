@@ -1,5 +1,4 @@
 ﻿using Qowaiv;
-using System.Text;
 
 namespace System;
 
@@ -27,6 +26,9 @@ public static class QowaivTypeExtensions
         Guard.NotNull(type, nameof(type));
         return new StringBuilder().AppendType(type, withNamespace).ToString();
     }
+
+    [Pure]
+    internal static bool IsAnyOf(this Type? type, params Type[] types) => types.Contains(type);
 
     [FluentSyntax]
     private static StringBuilder AppendType(this StringBuilder sb, Type type, bool withNamespace)

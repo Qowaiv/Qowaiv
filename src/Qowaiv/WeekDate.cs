@@ -279,9 +279,7 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
         dt = default;
 
         // Year 0 is not preserved by the regex.
-        if (year < 1 ||
-            // year 9999 can lead to overflow.
-            year == 9999 && ((week == 52 && day > 5) || week == 53))
+        if (year < 1 || EndOf9999(year, week, day))
         {
             return false;
         }
@@ -300,5 +298,8 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
             return false;
         }
         return true;
+
+        static bool EndOf9999(int year, int week, int day)
+            => year == 9999 && ((week == 52 && day > 5) || week == 53);
     }
 }

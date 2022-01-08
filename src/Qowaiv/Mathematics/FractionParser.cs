@@ -1,219 +1,164 @@
 ﻿namespace Qowaiv.Mathematics;
 
-internal static class FractionParser
+internal static partial class FractionParser
 {
-    private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
-    private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;
-
-    [Flags]
-    private enum Tokens
-    {
-        None /*       */ = 0x00,
-        Bar /*        */ = 0x01,
-        Space /*      */ = 0x02,
-        Number /*     */ = 0x04,
-        SuperScript /**/ = 0x08,
-        SubScript   /**/ = 0x10,
-
-        Reset = Bar | Space,
-    }
-
-    /// <summary>Parses a <see cref="string"/> that potentially contains a <see cref="Fraction"/>.</summary>
+    /// <summary>Parses a faction.</summary>
     /// <remarks>
-    /// Category                   |  Pattern                      | Example
-    /// ---------------------------------------------------------------------
-    /// Simple                     |        [0-9]+ [/:÷] [0/9]+    |   1/3
-    /// Simple with whole number   | [0-9]+ [0-9]+ [/:÷] [0/9]+    | 3 1/3
-    /// Single vulgar              |         [¼½¾]                 |     ¾
-    /// Whole number with vulgar   | [0-9]+ ?[¼½¾]                 |     ¾
+    /// Fraction Grammar
+    /// 
+    /// parse       => [external] | [complex]
+    /// external    => long.Parse() | decimal.Parse() | Percentage.Parse()
+    /// complex     => [sign] [integer]? [fraction]
+    /// fraction    => [vulgar] | [regular]
+    /// regular     => [numerator] [bar] [denominator]
+    /// numerator   => [integer] | [super]+
+    /// denominator => [integer] | [sub]+
+    /// vulgar      => ½|⅓|⅔|..
+    /// sign        => (+|-)?
+    /// bar         => /|:|÷|..
+    /// super       => ⁰|¹|²|³|⁴|⁵|⁶|⁷|⁸|⁹
+    /// sub         => ₀|₁|₂|₃|₄|₅|₆|₇|₈|₉
+    /// integer     => long.Parse()
     /// </remarks>
     [Pure]
     public static Fraction? Parse(string s, NumberFormatInfo formatInfo)
+        => External(s, formatInfo) 
+        ?? Complex(s.Buffer(), formatInfo);
+
+    [Impure]
+    private static Fraction? Complex(this CharBuffer buffer, NumberFormatInfo numberInfo)
     {
-        if (ParseExternal(s, formatInfo, out var external))
+        var s = buffer.Sign(numberInfo);
+        
+        // double signs.
+        if (s.HasValue && buffer.Sign(numberInfo) is { }) return null;
+        
+        var sign = s ?? 1;
+        if (buffer.Fraction(numberInfo) is { } fractional)
         {
-            return external;
-        }
-
-        var plus = formatInfo.PositiveSign;
-        var min = formatInfo.NegativeSign;
-        var integerSeperator = formatInfo.NumberGroupSeparator == " " ? '+' : ' ';
-
-        var sign = 1;
-        var str = s.Buffer().Trim();
-        var index = 0;
-
-        // check for +/-.
-        if (str.StartsWith(plus))
-        {
-            index += plus.Length;
-        }
-        else if (str.StartsWith(min))
-        {
-            index += min.Length;
-            sign = -1;
-        }
-
-        long integer = 0;
-        long nominator = 0;
-
-        var buffer = CharBuffer.Empty(str.Length - index);
-        var tokens = Tokens.None;
-
-        for (; index < str.Length; index++)
-        {
-            var ch = str[index];
-
-            if (Fraction.Formatting.IsFractionBar(ch))
+            if (buffer.IsEmpty())
             {
-                // A second fraction bar, or as last character is not allowed.
-                if (tokens.HasAll(Tokens.Bar) || str.EndOfBuffer(index))
-                {
-                    return null;
-                }
-                // On a '/' assume the buffer is filled with the nominator.
-                if (!ParseInteger(buffer, formatInfo, out nominator))
-                {
-                    return null;
-                }
-                tokens |= Tokens.Bar;
-                tokens &= Tokens.Reset;
+                return fractional * sign;
             }
-            else if (ch == integerSeperator)
+            else if (buffer.Separator(numberInfo).Integer(numberInfo, out var integer)
+                && Calculate(sign, integer, fractional.Numerator, fractional.Denominator, out var numerator))
             {
-                // A second spacer, or as last character is not allowed.
-                if (tokens.HasAll(Tokens.Space) || str.EndOfBuffer(index))
-                {
-                    return null;
-                }
-                // On a ' ' assume the buffer is filled with the integer part.
-                if (!ParseInteger(buffer, formatInfo, out integer))
-                {
-                    return null;
-                }
-                tokens |= Tokens.Space;
-                tokens &= Tokens.Reset;
+                return numerator.DividedBy(fractional.Denominator);
             }
-            else if (ch.IsVulgar(out var vulgar))
-            {
-                // A vulgar is only allowed directly followed by an integer, or as single character.
-                if (tokens.HasAny(Tokens.Bar | Tokens.SuperScript | Tokens.SubScript) || !str.EndOfBuffer(index))
-                {
-                    return null;
-                }
-                // If the buffer is not empty (integer without a space).
-                else if (buffer.NotEmpty() && !buffer.ParseInteger(formatInfo, out integer))
-                {
-                    return null;
-                }
-                // No overflow. :)
-                else if (integer == 0)
-                {
-                    return sign == +1 ? vulgar : -vulgar;
-                }
-                // Only if not overflow.
-                else if (CalculateNominator(sign, integer, vulgar.Numerator, vulgar.Denominator, out nominator))
-                {
-                    return nominator.DividedBy(vulgar.Denominator);
-                }
-                else return null;
-            }
-            else if (ch.IsSuperScript(out char digit))
-            {
-                if (tokens.HasAny(Tokens.SubScript | Tokens.Bar))
-                {
-                    return null;
-                }
-                // If the buffer is not empty (integer without a space).
-                else if (tokens.HasNone(Tokens.Space | Tokens.SuperScript) && buffer.NotEmpty())
-                {
-                    if (!buffer.ParseInteger(formatInfo, out integer))
-                    {
-                        return null;
-                    }
-                    tokens |= Tokens.Space;
-                    tokens &= Tokens.Reset;
-                }
-                buffer.Add(digit);
-                tokens |= Tokens.SuperScript;
-            }
-            else if (ch.IsSubScript(out digit))
-            {
-                if (tokens.HasNone(Tokens.Bar) || tokens.HasAny(Tokens.SuperScript | Tokens.Number))
-                {
-                    return null;
-                }
-                buffer.Add(digit);
-                tokens |= Tokens.SubScript;
-            }
-            else
-            {
-                if (tokens.HasAny(Tokens.SuperScript | Tokens.SubScript))
-                {
-                    return null;
-                }
-                buffer.Add(ch);
-                tokens |= Tokens.Number;
-            }
+            else return null;
         }
-
-        // The remaining part should be the denominator.
-        if (!buffer.ParseInteger(formatInfo, out var denominator) || denominator == 0)
-        {
-            return null;
-        }
-
-        // No overflow.
-        if (CalculateNominator(sign, integer, nominator, denominator, out var combined))
-        {
-            return combined.DividedBy(denominator);
-        }
-
-        return null;
+        else return null;
     }
 
-    /// <summary>Parse the fraction, using <see cref="long.Parse(string)"/>, <see cref="decimal.Parse(string)"/>, and <see cref="Percentage.Parse(string)"/>.</summary>
-    private static bool ParseExternal(string s, IFormatProvider formatInfo, out Fraction fraction)
+    [Impure]
+    private static Fraction? Fraction(this CharBuffer buffer, NumberFormatInfo numberInfo)
+        => buffer.Vulgar()
+        ?? buffer.Regular(numberInfo);
+
+    [Impure]
+    private static Fraction? Vulgar(this CharBuffer buffer)
     {
-        fraction = default;
-
-        if (long.TryParse(s, IntegerStyle, formatInfo, out var lng) && IsValid(lng))
+        if (Vulgars.TryGetValue(buffer.Last(), out var vulgar))
         {
-            fraction = Fraction.Create(lng);
-            return true;
+            buffer.RemoveFromEnd(1);
+            return vulgar;
         }
-
-        if (decimal.TryParse(s, DecimalStyle, formatInfo, out var dec) && IsValid(dec))
-        {
-            fraction = Fraction.Create(dec);
-            return true;
-        }
-
-        if (PotentialPercentage(s) && Percentage.TryParse(s, formatInfo, out var percentage) && IsValid((decimal)percentage))
-        {
-            fraction = Fraction.Create((decimal)percentage);
-            return true;
-        }
-
-        return false;
+        else return null;
     }
 
-    private static bool ParseInteger(this CharBuffer buffer, IFormatProvider formatInfo, out long integer)
+    [Impure]
+    private static Fraction? Regular(this CharBuffer buffer, NumberFormatInfo numberInfo)
+        => buffer.Denominator(numberInfo, out var denominator)
+        && buffer.Bar()
+        && buffer.Numerator(numberInfo, out var numerator)
+        ? numerator.DividedBy(denominator)
+        : null;
+
+    private static bool Numerator(this CharBuffer buffer, NumberFormatInfo numberInfo, out long numerator)
+        => buffer.Integer(Mathematics.Fraction.Formatting.SuperScript, numberInfo, out numerator);
+
+    private static bool Denominator(this CharBuffer buffer, NumberFormatInfo numberInfo, out long denominator)
+        => buffer.Integer(Mathematics.Fraction.Formatting.SubScript, numberInfo, out denominator);
+
+    private static bool Integer(this CharBuffer buffer, string lookup, NumberFormatInfo numberInfo, out long number)
     {
-        var result = long.TryParse(buffer, IntegerStyle, formatInfo, out integer);
-        buffer.Clear();
-        return result;
+        long factor = 1;
+        number = 0;
+        while (buffer.NotEmpty()
+            && buffer.Last() is var ch
+            && lookup.IndexOf(ch) is var index 
+            && index != CharBuffer.NotFound)
+        {
+            buffer.RemoveFromEnd(1);
+            number += index * factor;
+            factor *= 10;
+        }
+        return factor > 1 || buffer.Integer(numberInfo, out number);
     }
 
-    private static bool CalculateNominator(int sign, long integer, long nominator, long denominator, out long result)
+    private static bool Integer(this CharBuffer buffer, NumberFormatInfo numberInfo, out long integer)
+    {
+        integer = default;
+        var index = buffer.Length;
+        var exit = Mathematics.Fraction.Formatting.FractionBars 
+            + numberInfo.PositiveSign 
+            + numberInfo.Separator();
+
+        while (index > 0 && exit.IndexOf(buffer[index - 1]) == CharBuffer.NotFound)
+        {
+            index--;
+        }
+        if (index < buffer.Length && long.TryParse(buffer.Substring(index), IntegerStyle, numberInfo, out integer))
+        {
+            buffer.RemoveFromEnd(buffer.Length - index);
+            return true;
+        }
+        else return false;
+    }
+
+    [Impure]
+    private static bool Bar(this CharBuffer buffer)
+    {
+        if (buffer.NotEmpty() && Mathematics.Fraction.Formatting.IsFractionBar(buffer.Last()))
+        {
+            buffer.RemoveFromEnd(1);
+            return true;
+        }
+        else return false;
+    }
+
+    [Impure]
+    private static CharBuffer Separator(this CharBuffer buffer, NumberFormatInfo numberInfo)
+    {
+        if (buffer.Last() == numberInfo.Separator())
+        {
+            buffer.RemoveFromEnd(1);
+        }
+        return buffer;
+    }
+      
+    [Impure]
+    private static int? Sign(this CharBuffer buffer, NumberFormatInfo formatInfo)
+    {
+        if (buffer.StartsWith(formatInfo.NegativeSign))
+        {
+            buffer.RemoveFromStart(formatInfo.NegativeSign.Length);
+            return -1;
+        }
+        else if (buffer.StartsWith(formatInfo.PositiveSign))
+        {
+            buffer.RemoveFromStart(formatInfo.PositiveSign.Length);
+            return +1;
+        }
+        else return null; 
+    }
+
+    private static bool Calculate(int sign, long integer, long numerator, long denominator, out long result)
     {
         try
         {
-            checked
-            {
-                result = (integer * denominator + nominator) * sign;
-                return true;
-            }
+            result = checked((integer * denominator + numerator) * sign);
+            return true;
         }
         catch (OverflowException)
         {
@@ -221,55 +166,38 @@ internal static class FractionParser
             return false;
         }
     }
-
-    private static bool IsVulgar(this char ch, out Fraction fraction) => Vulgars.TryGetValue(ch, out fraction);
-
-    private static bool IsSuperScript(this char ch, out char digit)
+ 
+    /// <summary>Parse the fraction, using <see cref="long.Parse(string)"/>, <see cref="decimal.Parse(string)"/>, and <see cref="Percentage.Parse(string)"/>.</summary>
+    [Pure]
+    private static Fraction? External(string s, IFormatProvider formatInfo)
     {
-        digit = default;
-        var index = Fraction.Formatting.SuperScript.IndexOf(ch);
+        if (long.TryParse(s, IntegerStyle, formatInfo, out var lng) && ValidLong(lng))
+        {
+            return Mathematics.Fraction.Create(lng);
+        }
+        else if (decimal.TryParse(s, DecimalStyle, formatInfo, out var dec) && ValidDec(dec))
+        {
+            return Mathematics.Fraction.Create(dec);
+        }
+        else if (PotentialPercentage(s) && Percentage.TryParse(s, formatInfo, out var percentage) && ValidDec((decimal)percentage))
+        {
+            return Mathematics.Fraction.Create((decimal)percentage);
+        }
+        else return null;
 
-        if (index == CharBuffer.NotFound) { return false; }
-
-        digit = (char)(index + '0');
-        return true;
+        static bool ValidLong(long number) => number != long.MinValue;
+        static bool ValidDec(decimal number) => number >= Mathematics.Fraction.MinValue.Numerator && number <= Mathematics.Fraction.MaxValue.Numerator;
     }
 
-    private static bool IsSubScript(this char ch, out char digit)
-    {
-        digit = default;
-        var index = Fraction.Formatting.SubScript.IndexOf(ch);
-
-        if (index == CharBuffer.NotFound) { return false; }
-
-        digit = (char)(index + '0');
-        return true;
-    }
-
-    /// <summary>All long values are valid, except <see cref="long.MinValue"/>.</summary>
     [Pure]
-    private static bool IsValid(long number) => number != long.MinValue;
-
-    /// <summary>Number should be in the range of <see cref="Fraction.MinValue"/> and <see cref="Fraction.MaxValue"/>.</summary>
-    [Pure]
-    private static bool IsValid(decimal number) => number >= Fraction.MinValue.Numerator && number <= Fraction.MaxValue.Numerator;
+    private static char Separator(this NumberFormatInfo numberInfo) => numberInfo.NumberGroupSeparator == " " ? '+' : ' ';
 
     /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
     [Pure]
-    private static bool PotentialPercentage(string str)
-    {
-        return str.Any(ch => "%‰‱".IndexOf(ch) != CharBuffer.NotFound);
-    }
+    private static bool PotentialPercentage(string str) => str.Any(ch => "%‰‱".IndexOf(ch) != CharBuffer.NotFound);
 
-    [Pure]
-    private static bool HasAll(this Tokens tokens, Tokens flag) => (tokens & flag) == flag;
-
-    [Pure]
-    private static bool HasAny(this Tokens tokens, Tokens flag) => (tokens & flag) != 0;
-
-    [Pure]
-    private static bool HasNone(this Tokens tokens, Tokens flag) => (tokens & flag) == 0;
-
+    private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
+    private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;
     private static readonly Dictionary<char, Fraction> Vulgars = new()
     {
         { '½', 1.DividedBy(2) },
@@ -298,6 +226,6 @@ internal static class FractionParser
         { '⅑', 1.DividedBy(9) },
         { '⅒', 1.DividedBy(10) },
 
-        { '↉', Fraction.Zero },
+        { '↉', Mathematics.Fraction.Zero },
     };
 }

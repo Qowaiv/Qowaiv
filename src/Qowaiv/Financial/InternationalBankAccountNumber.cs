@@ -134,10 +134,10 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new()
     {
-        { 'u', (svo, provider) => svo.ToUnformattedLowercaseString() },
-        { 'U', (svo, provider) => svo.ToUnformattedString() },
-        { 'f', (svo, provider) => svo.ToFormattedLowercaseString() },
-        { 'F', (svo, provider) => svo.ToFormattedString() },
+        { 'u', (svo, _) => svo.ToUnformattedLowercaseString() },
+        { 'U', (svo, _) => svo.ToUnformattedString() },
+        { 'f', (svo, _) => svo.ToFormattedLowercaseString() },
+        { 'F', (svo, _) => svo.ToFormattedString() },
     };
 
     /// <summary>Gets an XML string representation of the IBAN.</summary>
@@ -172,8 +172,7 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
             result = Unknown;
             return true;
         }
-        else if (buffer.Length >= 12
-            && buffer.Length <= 32
+        else if (buffer.Length.IsInRange(12, 32)
             && buffer.Matches(Pattern)
             && ValidForCountry(buffer)
             && (Mod97(buffer)))
@@ -201,9 +200,9 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
         for (int pos = digits.Length - 1; pos >= 0; pos--)
         {
             sum += exp * AlphanumericAndNumericLookup.IndexOf(digits[pos]);
-            exp = (exp * 10) % 97;
+            exp = (exp * 10).Mod(97);
         }
-        return sum % 97 == 1;
+        return sum.Mod(97) == 1;
     }
 
     [Pure]

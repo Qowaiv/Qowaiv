@@ -131,4 +131,8 @@ public static class QowaivDecimalExtensions
     /// </remarks>
     [Pure]
     public static decimal Round(this decimal value, int decimals, DecimalRounding mode) => DecimalRound.Round(value, decimals, mode);
+
+    /// <summary>Returns true if the number is in the specified range.</summary>
+    [Pure]
+    internal static bool IsInRange(this decimal num, decimal low, decimal max) => num >= low && num <= max;
 }

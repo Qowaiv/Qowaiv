@@ -345,8 +345,7 @@ public class Is_comparable
     [Test]
     public void can_be_sorted_using_compare()
     {
-        var sorted = new Year[]
-        {
+        var sorted = new[] {
                 default,
                 default,
                 1970.CE(),

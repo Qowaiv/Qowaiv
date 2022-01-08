@@ -39,8 +39,7 @@ internal static class Cast
     public static decimal ToDecimal<TSvo>(double value)
         => double.IsNaN(value)
         || double.IsInfinity(value)
-        || value < (double)decimal.MinValue
-        || value > (double)decimal.MaxValue
+        || !value.IsInRange((double)decimal.MinValue, (double)decimal.MaxValue)
         ? throw Exceptions.InvalidCast<double, TSvo>()
         : (decimal)value;
 

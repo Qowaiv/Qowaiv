@@ -198,11 +198,11 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new()
     {
-        { 'n', (svo, provider) => svo.Name },
+        { 'n', (svo, _) => svo.Name },
+        { 'e', (svo, _) => svo.EnglishName },
         { '2', (svo, provider) => svo.GetResourceString("ISO2", provider) },
         { '3', (svo, provider) => svo.GetResourceString("ISO3", provider) },
         { '0', (svo, provider) => svo.GetResourceString("ISO", provider) },
-        { 'e', (svo, provider) => svo.EnglishName },
         { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
     };
 

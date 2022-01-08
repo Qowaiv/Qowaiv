@@ -299,56 +299,57 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     [Pure]
     public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
     {
-        var withYears = (settings & DateSpanSettings.WithoutYears) == default;
-        var withMonths = (settings & DateSpanSettings.WithoutMonths) == default;
-        var daysOnly = !withYears && !withMonths;
-
-        if (daysOnly)
+        if ((settings & (DateSpanSettings.DaysOnly)) == DateSpanSettings.DaysOnly)
         {
-            var totalDays = (int)(d1 - d2).TotalDays;
-            return FromDays(totalDays);
+            return FromDays((int)(d1 - d2).TotalDays);
         }
+        else return d1 < d2 
+            ? Subtraction(d2, d1, settings).Negate() 
+            : Subtraction(d1, d2, settings);
+    }
 
+    [Pure]
+    private static DateSpan Subtraction(Date max, Date min, DateSpanSettings settings)
+    {
         var noMixedSings = (settings & DateSpanSettings.MixedSigns) == default;
         var daysFirst = (settings & DateSpanSettings.DaysFirst) != default;
 
-        var max = d1;
-        var min = d2;
+        return (settings & DateSpanSettings.WithoutMonths) == default
+            ? SubtractWithMonths(max, min, noMixedSings, daysFirst)
+            : SubtractWithoutMonths(max, min, noMixedSings, daysFirst);
+    }
 
-        var negative = d1 < d2;
-
-        if (negative)
-        {
-            max = d2;
-            min = d1;
-        }
-
-        var years = max.Year - min.Year;
-        var months = withMonths ? max.Month - min.Month : 0;
-        var days = withMonths
-            ? max.Day - min.Day
-            : max.DayOfYear - min.DayOfYear;
+    [Pure]
+    private static DateSpan SubtractWithMonths(Date max, Date min, bool noMixedSings, bool daysFirst)
+    {
+        var months = max.Month - min.Month;
+        var days = max.Day - min.Day;
 
         if (days < 0 && noMixedSings)
         {
-            if (withMonths)
-            {
-                months--;
-                var sub = daysFirst ? min : max.AddMonths(-1);
-                days += DateTime.DaysInMonth(sub.Year, sub.Month);
-            }
-            else
-            {
-                years--;
-                var sub = daysFirst ? min : max.AddYears(-1);
-                days += DateTime.IsLeapYear(sub.Year) ? DaysPerLeapYear : DaysPerYear;
-            }
+            months--;
+            var sub = daysFirst ? min : max.AddMonths(-1);
+            days += DateTime.DaysInMonth(sub.Year, sub.Month);
         }
-
-        return negative
-            ? new DateSpan(-years, -months, -days)
-            : new DateSpan(+years, +months, +days);
+        return new DateSpan(max.Year - min.Year, months, days);
     }
+
+    [Pure]
+    private static DateSpan SubtractWithoutMonths(Date max, Date min, bool noMixedSings, bool daysFirst)
+    {
+        var years = max.Year - min.Year;
+        var days = max.DayOfYear - min.DayOfYear;
+
+        if (days < 0 && noMixedSings)
+        {
+            years--;
+            var sub = daysFirst ? min : max.AddYears(-1);
+            days += DateTime.IsLeapYear(sub.Year) ? DaysPerLeapYear : DaysPerYear;
+        }
+        return new DateSpan(years, 0, days);
+    }
+
+    
 
     /// <summary>Converts the string to a date span.
     /// A return value indicates whether the conversion succeeded.
@@ -404,10 +405,7 @@ public partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, 
     /// <summary>Returns true if the combination of months and days can not be processed.</summary>
     [Pure]
     private static bool IsOutOfRange(long months, long days, double totalDays)
-        => months > MaxValue.TotalMonths
-        || months < MinValue.TotalMonths
-        || totalDays > MaxValue.TotalDays
-        || totalDays < MinValue.TotalDays
-        || days > +MaxDays
-        || days < -MaxDays;
+        => !months.IsInRange(MinValue.TotalMonths, MaxValue.TotalMonths)
+        || !days.IsInRange(-MaxDays, +MaxDays)
+        || !totalDays.IsInRange(MinValue.TotalDays, MaxValue.TotalDays);
 }

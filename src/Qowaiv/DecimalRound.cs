@@ -89,51 +89,49 @@ internal static class DecimalRound
     {
         var halfway = divisor >> 1;
         if (remainder == 0 || mode == DecimalRounding.Truncate) return false;
-        else if (mode.IsDirectRounding())
+        else return DirectRoundingUp(mode, isPositive)
+            ?? NearestRoundingUp(b0, remainder, halfway, mode, isPositive)
+            ?? StochasticRoundingUp(remainder, divisor, mode)
+            ?? remainder >= halfway;
+    }
+
+    [Pure]
+    private static bool? DirectRoundingUp(DecimalRounding mode, bool isPositive)
+        => mode switch
         {
-            switch (mode)
-            {
-                case DecimalRounding.DirectAwayFromZero:
-                    return true;
-                case DecimalRounding.DirectTowardsZero:
-                    return false;
+            DecimalRounding.DirectAwayFromZero => true,
+            DecimalRounding.DirectTowardsZero => false,
+            DecimalRounding.Ceiling => isPositive,
+            DecimalRounding.Floor => !isPositive,
+            _ => null,
+        };
 
-                case DecimalRounding.Ceiling:
-                    return isPositive;
-                case DecimalRounding.Floor:
-                    return !isPositive;
-            }
-        }
-        else if (remainder == halfway && mode.IsNearestRounding())
+    [Pure]
+    private static bool? NearestRoundingUp(ulong b0, ulong remainder, ulong halfway, DecimalRounding mode, bool isPositive)
+        => remainder == halfway
+        ? mode switch
         {
-            switch (mode)
-            {
-                case DecimalRounding.ToEven:
-                    return (b0 & 1) == 1;
-                case DecimalRounding.ToOdd:
-                    return (b0 & 1) == 0;
-
-                case DecimalRounding.AwayFromZero:
-                    return true;
-                case DecimalRounding.TowardsZero:
-                    return false;
-
-                case DecimalRounding.Up:
-                    return isPositive;
-                case DecimalRounding.Down:
-                    return !isPositive;
-
-                // Pick a 50-50 random.
-                case DecimalRounding.RandomTieBreaking:
-                    return (Random().Next() & 1) == 0;
-            }
+            DecimalRounding.ToEven => (b0 & 1) == 1,
+            DecimalRounding.ToOdd => (b0 & 1) == 0,
+            DecimalRounding.AwayFromZero => true,
+            DecimalRounding.TowardsZero => false,
+            DecimalRounding.Up => isPositive,
+            DecimalRounding.Down => !isPositive,
+            // Pick a 50-50 random.
+            DecimalRounding.RandomTieBreaking => (Random().Next() & 1) == 0,
+            _ => null,
         }
-        else if (mode == DecimalRounding.StochasticRounding)
+        : null;
+
+    [Pure]
+    private static bool? StochasticRoundingUp(ulong remainder, ulong divisor, DecimalRounding mode)
+    {
+        if (mode == DecimalRounding.StochasticRounding)
         {
             var ratio = remainder / (double)divisor;
             return Random().NextDouble() <= ratio;
         }
-        return remainder >= halfway;
+        else return null;
     }
 
     /// <summary>Multiplies the decimal with an <see cref="uint"/> factor.</summary>

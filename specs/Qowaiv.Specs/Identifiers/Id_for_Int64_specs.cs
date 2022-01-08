@@ -54,7 +54,7 @@ public class Supports_type_conversion
             .WithMessage("Cast from string to Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt64> is not valid.");
     }
 
-    [TestCase(-17)]
+    [TestCase(-18)]
     [TestCase(666)]
     public void from_invalid_number(long number)
     {

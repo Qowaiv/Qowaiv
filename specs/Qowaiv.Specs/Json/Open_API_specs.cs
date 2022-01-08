@@ -10,8 +10,8 @@ public class SVOs : SvoTypeTest
     public void For_README_md()
     {
         var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly)
-           .OrderBy(attr => attr.DataType.Namespace)
-           .ThenBy(attr => attr.DataType.Name);
+            .OrderBy(attr => attr.DataType.Namespace)
+            .ThenBy(attr => attr.DataType.Name);
 
         var all = new Dictionary<string, OpenApiDataType>();
 
@@ -36,7 +36,7 @@ public class SVOs : SvoTypeTest
             NullValueHandling = NullValueHandling.Ignore,
         }));
 
-        Assert.IsTrue(true, "Test should pass.");
+        all.Should().NotBeEmpty();
     }
 
     private class OpenApiDataType

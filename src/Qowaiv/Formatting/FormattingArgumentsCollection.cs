@@ -89,7 +89,9 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// This implementation is a (tweaked) copy of the implementation of <see cref="string"/>.Format().
     /// </remarks>
     [Pure]
+#pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
     public string Format(string format, params object[] args)
+#pragma warning restore S3776 // Cognitive Complexity of methods should not be too high
     {
 
         Guard.NotNull(format, nameof(format));

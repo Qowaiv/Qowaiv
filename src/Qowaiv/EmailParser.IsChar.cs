@@ -4,6 +4,7 @@ internal static partial class EmailParser
 {
     [Pure]
     private static bool IsLocal(this char ch)
+#pragma warning disable S1067 // Expression is not that complex
         => ch.IsDigit()
         || ch.IsLetter()
         || ch.IsUnderscore()
@@ -11,6 +12,7 @@ internal static partial class EmailParser
         || ch.IsDash()
         || ch.IsLocalASCII()
         || ch.IsNonASCII();
+#pragma warning restore S1067
 
     [Pure]
     private static bool IsDomain(this char ch)

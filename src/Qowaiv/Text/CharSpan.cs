@@ -10,7 +10,7 @@
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly int End;
 
-        public CharSpan(string str) : this(str, 0, str.Length - 1) { }
+        public CharSpan(string str) : this(str, 0, str.Length) { }
 
         private CharSpan(string str, int start, int end)
         {
@@ -20,7 +20,7 @@
         }
 
         /// <summary>Gets the number of characters in the char span.</summary>
-        public int Length => End - Start + 1;
+        public int Length => End - Start;
 
         /// <summary>Gets the char on the specific index.</summary>
         public char this[int index] => m_Value[Start + index];
@@ -35,7 +35,7 @@
         public char First() => m_Value[Start];
 
         [Pure]
-        public char Last() => m_Value[End];
+        public char Last() => m_Value[End - 1];
 
         [Pure]
         public CharSpan TrimLeft() => TrimLeft(char.IsWhiteSpace, out _);
@@ -43,16 +43,16 @@
         [Pure]
         public CharSpan TrimLeft(Func<char, bool> predicate, out CharSpan trimmed)
         {
-            for(var index = Start; index <= End; index++)
+            for (var index = Start; index < End; index++)
             {
                 if (!predicate(m_Value[index]))
                 {
-                    trimmed = new(m_Value, Start, index - 1);
+                    trimmed = new(m_Value, Start, index);
                     return new(m_Value, index, End);
                 }
             }
-            trimmed = default;
-            return this;
+            trimmed = this;
+            return default;
         }
 
         [Pure]
@@ -61,16 +61,16 @@
         [Pure]
         public CharSpan TrimRight(Func<char, bool> predicate, out CharSpan trimmed)
         {
-            for (var index = End; index >= Start; index--)
+            for (var index = End - 1; index >= Start; index--)
             {
                 if (!predicate(m_Value[index]))
                 {
                     trimmed = new(m_Value, index + 1, End);
-                    return new(m_Value, Start, index);
+                    return new(m_Value, Start, index + 1);
                 }
             }
-            trimmed = default;
-            return this;
+            trimmed = this;
+            return default;
         }
 
         /// <inheritdoc />
@@ -84,11 +84,11 @@
         [Pure]
         public bool Equals(CharSpan other)
         {
-            if(Length == other.Length)
+            if (Length == other.Length)
             {
-                for(var i = 0; i < Length; i++)
+                for (var i = 0; i < Length; i++)
                 {
-                    if(this[i] != other[i]) return false;
+                    if (this[i] != other[i]) return false;
                 }
                 return true;
             }

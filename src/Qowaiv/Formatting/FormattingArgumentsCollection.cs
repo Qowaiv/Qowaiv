@@ -89,20 +89,20 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// This implementation is a (tweaked) copy of the implementation of <see cref="string"/>.Format().
     /// </remarks>
     [Pure]
-#pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
-    public string Format(string format, params object[] args)
-#pragma warning restore S3776 // Cognitive Complexity of methods should not be too high
-    {
-
-        Guard.NotNull(format, nameof(format));
-        Guard.NotNull(args, nameof(args));
-
-        // This code is here as reference, so we don't want to touch it.
+    // This code is here as reference, so we don't want to touch it.
 #nullable disable
 #pragma warning disable S125 // Sections of code should not be "commented out"
 #pragma warning disable S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
+#pragma warning disable S1227 // break statements should not be used except for switch cases
+#pragma warning disable S1541 // Methods and properties should not be too complex
 #pragma warning disable S1854 // Dead stores should be removed
+#pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
+
+    public string Format(string format, params object[] args)
+    {
+        Guard.NotNull(format, nameof(format));
+        Guard.NotNull(args, nameof(args));
 
         var sb = new StringBuilder();
         int pos = 0;
@@ -148,6 +148,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
             }
 
             if (pos == len) break;
+
             pos++;
             if (pos == len || (ch = format[pos]) < '0' || ch > '9') FormatError();
             int index = 0;
@@ -270,13 +271,15 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
             if (leftJustify && pad > 0) sb.Append(' ', pad);
         }
         return sb.ToString();
-
+    }
+#pragma warning restore S3776 // Cognitive Complexity of methods should not be too high
 #pragma warning restore S1854 // Dead stores should be removed
+#pragma warning restore S1541 // Methods and properties should not be too complex
+#pragma warning restore S1227 // break statements should not be used except for switch cases
 #pragma warning restore S125 // Sections of code should not be "commented out"
 #pragma warning restore S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 #nullable enable
-    }
 
     private static void FormatError() => throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
 

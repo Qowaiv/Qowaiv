@@ -78,6 +78,9 @@ dotnet_diagnostic.S101.severity = none
 # S107: Methods should not have too many parameters
 dotnet_diagnostic.S107.severity = warning
 
+# S134: Control flow statements "if", "switch", "for", "foreach", "while", "do" and "try" should not be nested too deeply
+dotnet_diagnostic.S134.severity = warning
+
 # S1067: Expressions should not be too complex
 dotnet_diagnostic.S1067.severity = warning
 

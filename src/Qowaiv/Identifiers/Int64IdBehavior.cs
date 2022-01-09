@@ -1,8 +1,11 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="long"/>.</summary>
-public abstract class Int64IdBehavior : IdentifierBehavior
+public class Int64IdBehavior : IdentifierBehavior
 {
+    /// <summary>Creates a new instance of the <see cref="Int64IdBehavior"/> class.</summary>
+    protected Int64IdBehavior() { }
+
     /// <summary>Returns the type of the underlying value (<see cref="long"/>).</summary>
     public sealed override Type BaseType => typeof(long);
 

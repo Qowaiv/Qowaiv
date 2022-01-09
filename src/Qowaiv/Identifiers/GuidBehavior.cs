@@ -1,9 +1,12 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="Guid"/>.</summary>
-public abstract class GuidBehavior : IdentifierBehavior
+public class GuidBehavior : IdentifierBehavior
 {
-    internal static readonly GuidBehavior Instance = new Default();
+    internal static readonly GuidBehavior Instance = new();
+
+    /// <summary>Creates a new instance of the <see cref="GuidBehavior"/> class.</summary>
+    protected GuidBehavior() { }
 
     /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>
     public sealed override Type BaseType => typeof(Guid);
@@ -186,6 +189,4 @@ public abstract class GuidBehavior : IdentifierBehavior
 
     [Pure]
     private static Guid Id(object? obj) => obj is Guid guid ? guid : Guid.Empty;
-
-    private sealed class Default : GuidBehavior { }
 }

@@ -1,8 +1,11 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="string"/>.</summary>
-public abstract class StringIdBehavior : IdentifierBehavior
+public class StringIdBehavior : IdentifierBehavior
 {
+    /// <summary>Creates a new instance of the <see cref="StringIdBehavior"/> class.</summary>
+    protected StringIdBehavior() { }
+
     /// <summary>Returns the type of the underlying value (<see cref="string"/>).</summary>
     public sealed override Type BaseType => typeof(string);
 

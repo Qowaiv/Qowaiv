@@ -397,7 +397,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
         else if (Formatting.Pattern.Match(format.WithDefault("0/0")) is { Success: true } match)
         {
-            return ToStringWithFractionBar(formatProvider, match);
+            return ToString(formatProvider, match);
         }
         // if no fraction bar character has been provided, format as a decimal.
         else if (!format.WithDefault().Any(ch => Formatting.IsFractionBar(ch)))
@@ -408,35 +408,40 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     }
 
     [Pure]
-    private string ToStringWithFractionBar(IFormatProvider? formatProvider, Match match)
+    private string ToString(IFormatProvider? formatProvider, Match match)
     {
-        var iFormat = match.Groups[nameof(Whole)].Value;
-        var nFormat = match.Groups[nameof(Numerator)].Value;
-        var dFormat = match.Groups[nameof(Denominator)].Value;
-        var bar = match.Groups[nameof(Formatting.FractionBars)].Value;
-
         var sb = new StringBuilder();
+        var remainder = AppendWhole(sb, match.Groups[nameof(Whole)].Value, formatProvider);
+        AppendNumerator(sb, remainder, match.Groups[nameof(Numerator)].Value, formatProvider);
+        sb.Append(match.Groups[nameof(Formatting.FractionBars)].Value);
+        AppendDenominator(sb, match.Groups[nameof(Denominator)].Value, formatProvider);
+        return sb.ToString();
+    }
 
-        var remainder = numerator;
-        var negative = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
-
-        if (!string.IsNullOrEmpty(iFormat))
+    [Impure]
+    private long AppendWhole(StringBuilder sb, string format, IFormatProvider? formatProvider)
+    {
+        if (!string.IsNullOrEmpty(format))
         {
-            remainder = Remainder;
-
-            sb.Append(Whole.ToString(iFormat, formatProvider));
+            sb.Append(Whole.ToString(format, formatProvider));
 
             // For -0 n/d
-            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(negative))
+            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(formatProvider.NegativeSign()))
             {
-                sb.Insert(0, negative);
+                sb.Insert(0, formatProvider.NegativeSign());
             }
+            return Remainder;
         }
-        if (nFormat == "super")
+        else return numerator;
+    }
+
+    private void AppendNumerator(StringBuilder sb, long remainder, string format, IFormatProvider? formatProvider)
+    {
+        if (format == "super")
         {
             if (sb.Length == 0 && Sign() == -1)
             {
-                sb.Append(negative);
+                sb.Append(formatProvider.NegativeSign());
             }
             // use invariant as we want to convert to superscript.
             var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
@@ -448,12 +453,13 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
             {
                 sb.Append(' ');
             }
-            sb.Append(remainder.ToString(nFormat, formatProvider));
+            sb.Append(remainder.ToString(format, formatProvider));
         }
+    }
 
-        sb.Append(bar);
-
-        if (dFormat == "sub")
+    private void AppendDenominator(StringBuilder sb, string format, IFormatProvider? formatProvider)
+    {
+        if (format == "sub")
         {
             // use invariant as we want to convert to superscript.
             var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
@@ -461,9 +467,8 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
         else
         {
-            sb.Append(Denominator.ToString(dFormat, formatProvider));
+            sb.Append(Denominator.ToString(format, formatProvider));
         }
-        return sb.ToString();
     }
 
     /// <inheritdoc/>
@@ -481,10 +486,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
 
     /// <inheritdoc/>
     [Pure]
-    public override int GetHashCode()
-    {
-        return (denominator * 113 * numerator).GetHashCode();
-    }
+    public override int GetHashCode() => unchecked(denominator * 113 * numerator).GetHashCode();
 
     /// <inheritdoc/>
     [Pure]

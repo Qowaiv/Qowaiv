@@ -1,6 +1,6 @@
 ﻿namespace Qowaiv.Mathematics;
 
-internal static partial class FractionParser
+internal static class FractionParser
 {
     /// <summary>Parses a faction.</summary>
     /// <remarks>

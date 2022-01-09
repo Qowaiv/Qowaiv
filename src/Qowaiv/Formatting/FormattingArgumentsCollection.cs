@@ -100,6 +100,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
         // This code is here as reference, so we don't want to touch it.
 #nullable disable
 #pragma warning disable S125 // Sections of code should not be "commented out"
+#pragma warning disable S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
 #pragma warning disable S1854 // Dead stores should be removed
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
 
@@ -124,6 +125,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 pos++;
                 if (ch == '}')
                 {
+
 
                     if (pos < len && format[pos] == '}') // Treat as escape character for }}
                         pos++;
@@ -271,6 +273,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 
 #pragma warning restore S1854 // Dead stores should be removed
 #pragma warning restore S125 // Sections of code should not be "commented out"
+#pragma warning restore S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 #nullable enable
     }

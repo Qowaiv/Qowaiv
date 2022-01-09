@@ -121,18 +121,21 @@ internal partial class CharBuffer
         {
             return RemoveFromStart(1).ClearChars(applies);
         }
-        else
+        else return ClearBlock(applies);
+    }
+
+    [FluentSyntax]
+    private CharBuffer ClearBlock(Func<char, bool> applies)
+    {
+        for (var i = Length - 2; i >= 0; i--)
         {
-            for (var i = Length - 2; i >= 0; i--)
+            if (applies(this[i]))
             {
-                if (applies(this[i]))
+                for (var p = i; p < Length - 1; p++)
                 {
-                    for (var p = i; p < Length - 1; p++)
-                    {
-                        this[p] = this[p + 1];
-                    }
-                    end -= 1;
+                    this[p] = this[p + 1];
                 }
+                end -= 1;
             }
         }
         return this;

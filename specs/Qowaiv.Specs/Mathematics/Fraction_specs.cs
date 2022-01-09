@@ -94,6 +94,11 @@ public class Can_be_created
     public void from_decimals(long numerator, long denominator, decimal number)
         => Fraction.Create(number).Should().Be(numerator.DividedBy(denominator));
 
+    [TestCase(0, 1, 0.5, 0.6)]
+    [TestCase(1, 1, 0.6, 0.5)]
+    public void from_decimals_with_error(long numerator, long denominator, decimal number, decimal error)
+        => Fraction.Create(number, error).Should().Be(numerator.DividedBy(denominator));
+    
     [TestCase(100)]
     public void from_decimals_without_precision_loss(int runs)
     {

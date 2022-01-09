@@ -65,4 +65,7 @@ public static class QowaivSystemExtensions
     [Pure]
     internal static string WithDefault(this string? str, string @default = "")
         => str is { Length: > 0 } ? str : @default;
+
+    [Pure]
+    internal static CharSpan CharSpan(this string? str) => str is null ? default : new(str);
 }

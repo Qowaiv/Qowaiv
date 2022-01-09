@@ -58,7 +58,6 @@ public class Can_be_parsed
     [TestCase("1∕3")]
     public void from_multiple_bar_chars(string bar)
        => Fraction.Parse(bar, CultureInfo.InvariantCulture).Should().Be(1.DividedBy(3));
-
 }
 
 public class Can_not_be_parsed
@@ -78,6 +77,65 @@ public class Can_not_be_parsed
     [TestCase("3/+7")]
     public void plus_sign_denominator(string denominator) => Fraction.TryParse(denominator).Should().BeNull();
 }
+
+public class Can_be_created
+{
+    [TestCase(0, 1, "0")]
+    [TestCase(00000003, 000000010, "0.3")]
+    [TestCase(00000033, 000000100, "0.33")]
+    [TestCase(00000333, 000001000, "0.333")]
+    [TestCase(00003333, 000010000, "0.3333")]
+    [TestCase(00033333, 000100000, "0.33333")]
+    [TestCase(00333333, 001000000, "0.333333")]
+    [TestCase(03333333, 010000000, "0.3333333")]
+    [TestCase(33333333, 100000000, "0.33333333")]
+    [TestCase(333333333, 1000000000, "0.333333333")]
+    [TestCase(1, 3, "0.33333333333333333333333")]
+    public void from_decimals(long numerator, long denominator, decimal number)
+        => Fraction.Create(number).Should().Be(numerator.DividedBy(denominator));
+
+    [TestCase(0, 1, 0.5, 0.6)]
+    [TestCase(1, 1, 0.6, 0.5)]
+    public void from_decimals_with_error(long numerator, long denominator, decimal number, decimal error)
+        => Fraction.Create(number, error).Should().Be(numerator.DividedBy(denominator));
+    
+    [TestCase(100)]
+    public void from_decimals_without_precision_loss(int runs)
+    {
+        var rnd = new Random();
+        var failures = new List<Fraction>(runs);
+
+        foreach(var fraction in Enumerable.Range(0, runs).Select(i => rnd.Next(int.MinValue, int.MaxValue).DividedBy(rnd.Next(3, int.MaxValue))))
+        {
+            var created = Fraction.Create((decimal)fraction);
+            if (created != fraction)
+            {
+                failures.Add(fraction);
+            }
+        }
+        failures.Should().BeEmpty();
+    }
+}
+
+public class Can_not_be_created
+{
+    [TestCase(-10e18)]
+    [TestCase(+10e18)]
+    public void from_decimal_out_of_long_range(decimal dec)
+    {
+        Func<Fraction> create = () => Fraction.Create(dec);
+        create.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [TestCase(1e-19)]
+    [TestCase(+1.000001)]
+    public void from_decimal_with_error_out_of_range(decimal error)
+    {
+        Func<Fraction> create = () => Fraction.Create(0, error);
+        create.Should().Throw<ArgumentOutOfRangeException>();
+    }
+}
+
 public class Has_humanizer_creators
 {
     [Test]

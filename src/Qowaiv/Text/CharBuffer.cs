@@ -1,5 +1,7 @@
 ﻿#nullable enable
 
+using System.Runtime.CompilerServices;
+
 namespace Qowaiv.Text;
 
 internal sealed partial class CharBuffer : IEquatable<string>, IEnumerable<char>
@@ -67,12 +69,8 @@ internal sealed partial class CharBuffer : IEquatable<string>, IEnumerable<char>
         {
             for (var i = 0; i < Length; i++)
             {
-                if (this[i] != other[i])
+                if (!Equals(this[i], other[i], ignoreCase))
                 {
-                    if (ignoreCase && char.ToUpperInvariant(this[i]) == char.ToUpperInvariant(other[i]))
-                    {
-                        continue;
-                    }
                     return false;
                 }
             }
@@ -80,6 +78,11 @@ internal sealed partial class CharBuffer : IEquatable<string>, IEnumerable<char>
         }
         else return false;
     }
+
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool Equals(char x, char y, bool ignoreCase)
+        => x == y || (ignoreCase && char.ToUpperInvariant(x) == char.ToUpperInvariant(y));
 
     /// <inheritdoc />
     [Pure]

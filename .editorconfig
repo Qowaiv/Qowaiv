@@ -63,6 +63,9 @@ dotnet_diagnostic.CA2016.severity = warning
 # CA2211: Non-constant fields should not be visible
 dotnet_diagnostic.CA2211.severity = warning
 
+# CA2231: Overload operator equals on overriding value type Equals
+dotnet_diagnostic.CA2231.severity = none
+
 # CA2254: Template should be a static expression
 dotnet_diagnostic.CA2254.severity = warning
 
@@ -77,6 +80,9 @@ dotnet_diagnostic.S101.severity = none
 
 # S107: Methods should not have too many parameters
 dotnet_diagnostic.S107.severity = warning
+
+# S134: Control flow statements "if", "switch", "for", "foreach", "while", "do" and "try" should not be nested too deeply
+dotnet_diagnostic.S134.severity = warning
 
 # S1067: Expressions should not be too complex
 dotnet_diagnostic.S1067.severity = warning
@@ -98,6 +104,9 @@ dotnet_diagnostic.S1541.severity = warning
 
 # S1858: "ToString()" calls should not be redundant
 dotnet_diagnostic.S1858.severity = warning
+
+# S1694: An abstract class should have both abstract and concrete methods
+dotnet_diagnostic.S1694.severity = warning
 
 # S2197: Modulus results should not be checked for direct equa
 dotnet_diagnostic.S2197.severity = warning
@@ -138,6 +147,9 @@ dotnet_diagnostic.S3925.severity = warning
 
 # S3376: Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3376.severity = none
+
+# S3900: Arguments of public methods should be validated against null
+dotnet_diagnostic.S3900.severity = warning
 
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none

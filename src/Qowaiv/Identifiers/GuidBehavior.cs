@@ -1,9 +1,12 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="Guid"/>.</summary>
-public abstract class GuidBehavior : IdentifierBehavior
+public class GuidBehavior : IdentifierBehavior
 {
-    internal static readonly GuidBehavior Instance = new Default();
+    internal static readonly GuidBehavior Instance = new();
+
+    /// <summary>Creates a new instance of the <see cref="GuidBehavior"/> class.</summary>
+    protected GuidBehavior() { }
 
     /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>
     public sealed override Type BaseType => typeof(Guid);
@@ -64,22 +67,29 @@ public abstract class GuidBehavior : IdentifierBehavior
     public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
     {
         var id = Id(obj);
-
-        if (id == Guid.Empty) return string.Empty;
-        else
-        {
-            format = string.IsNullOrEmpty(format) ? DefaultFormat : format;
-            return format switch
-            {
-                null or "" or "s" or "S" => Convert.ToBase64String(id.ToByteArray()).Replace('+', '-').Replace('/', '_').Substring(0, 22),// avoid invalid URL characters
-                "h" => Base32.ToString(id.ToByteArray(), true),
-                "H" => Base32.ToString(id.ToByteArray(), false),
-                "N" or "D" or "B" or "P" => id.ToString(format, formatProvider).ToUpperInvariant(),
-                "X" => id.ToString(format, formatProvider).ToUpperInvariant().Replace('X', 'x'),
-                _ => id.ToString(format, formatProvider),
-            };
-        }
+        return id == Guid.Empty 
+            ? string.Empty
+            : Tostring(id, format.WithDefault(DefaultFormat), formatProvider);
     }
+
+#pragma warning disable S1541 // Not that complex
+    [Pure]
+    private static string Tostring(Guid id, string format, IFormatProvider? formatProvider)
+        => format switch
+        {
+            "s" or "S" => ToBase64String(id),
+            "h" => Base32.ToString(id.ToByteArray(), true),
+            "H" => Base32.ToString(id.ToByteArray(), false),
+            "N" or "D" or "B" or "P" => id.ToString(format, formatProvider).ToUpperInvariant(),
+            "X" => id.ToString(format, formatProvider).ToUpperInvariant().Replace('X', 'x'),
+            _ => id.ToString(format, formatProvider),
+        };
+#pragma warning restore S1541 // Methods and properties should not be too complex
+
+    /// <remarks>Avoids invalid URL characters.</remarks>
+    [Pure]
+    private static string ToBase64String(Guid id)
+        => Convert.ToBase64String(id.ToByteArray()).Replace('+', '-').Replace('/', '_').Substring(0, 22);
 
     /// <inheritdoc/>
     [Pure]
@@ -179,6 +189,4 @@ public abstract class GuidBehavior : IdentifierBehavior
 
     [Pure]
     private static Guid Id(object? obj) => obj is Guid guid ? guid : Guid.Empty;
-
-    private sealed class Default : GuidBehavior { }
 }

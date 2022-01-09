@@ -95,8 +95,10 @@ public readonly struct Hash : IEquatable<Hash>
             for (int i = 0; i < str.Length; i += 2)
             {
                 hash1 = Combine(hash1, str[i]);
-                if (i == str.Length - 1) break;
-                else hash2 = Combine(hash2, str[i + 1]);
+                if (i != str.Length - 1)
+                {
+                    hash2 = Combine(hash2, str[i + 1]);
+                }
             }
             return hash1 + (hash2 * 1566083941);
         }

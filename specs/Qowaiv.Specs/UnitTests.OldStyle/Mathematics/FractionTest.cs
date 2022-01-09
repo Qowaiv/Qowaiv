@@ -68,45 +68,6 @@ namespace Qowaiv.UnitTests.Mathematics
         public void from_invalid_as_null_with_TryParse()
             => Fraction.TryParse("invalid input").Should().BeNull();
 
-        [TestCase(0, 1, "0")]
-        [TestCase(00000003, 000000010, "0.3")]
-        [TestCase(00000033, 000000100, "0.33")]
-        [TestCase(00000333, 000001000, "0.333")]
-        [TestCase(00003333, 000010000, "0.3333")]
-        [TestCase(00033333, 000100000, "0.33333")]
-        [TestCase(00333333, 001000000, "0.333333")]
-        [TestCase(03333333, 010000000, "0.3333333")]
-        [TestCase(33333333, 100000000, "0.33333333")]
-        [TestCase(333333333, 1000000000, "0.333333333")]
-        [TestCase(1, 3, "0.33333333333333333333333")]
-        public void Create(long numerator, long denominator, decimal number)
-        {
-            var actual = Fraction.Create(number);
-            var expected = numerator.DividedBy(denominator);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void Create_Roundtrip()
-        {
-            var rnd = new Random();
-
-            var failures = new List<Fraction>();
-
-            for (var i = 0; i < 100; i++)
-            {
-                var expected = rnd.Next(1, int.MaxValue).DividedBy(rnd.Next(3, int.MaxValue));
-                var actual = Fraction.Create((decimal)expected);
-
-                if (actual != expected)
-                {
-                    failures.Add(expected);
-                }
-            }
-
-            CollectionAssert.AreEqual(Array.Empty<Fraction>(), failures);
-        }
-
         [TestCase("0/1", 0, 8, "Should set zero")]
         [TestCase("1/4", 2, 8, "Should reduce")]
         [TestCase("-1/4", -2, 8, "Should reduce")]

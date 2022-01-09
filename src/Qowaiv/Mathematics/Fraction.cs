@@ -397,7 +397,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
         else if (Formatting.Pattern.Match(format.WithDefault("0/0")) is { Success: true } match)
         {
-            return ToStringWithFractionBar(formatProvider, match);
+            return ToString(formatProvider, match);
         }
         // if no fraction bar character has been provided, format as a decimal.
         else if (!format.WithDefault().Any(ch => Formatting.IsFractionBar(ch)))
@@ -408,35 +408,40 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     }
 
     [Pure]
-    private string ToStringWithFractionBar(IFormatProvider? formatProvider, Match match)
+    private string ToString(IFormatProvider? formatProvider, Match match)
     {
-        var iFormat = match.Groups[nameof(Whole)].Value;
-        var nFormat = match.Groups[nameof(Numerator)].Value;
-        var dFormat = match.Groups[nameof(Denominator)].Value;
-        var bar = match.Groups[nameof(Formatting.FractionBars)].Value;
-
         var sb = new StringBuilder();
+        var remainder = AppendWhole(sb, match.Groups[nameof(Whole)].Value, formatProvider);
+        AppendNumerator(sb, remainder, match.Groups[nameof(Numerator)].Value, formatProvider);
+        sb.Append(match.Groups[nameof(Formatting.FractionBars)].Value);
+        AppendDenominator(sb, match.Groups[nameof(Denominator)].Value, formatProvider);
+        return sb.ToString();
+    }
 
-        var remainder = numerator;
-        var negative = formatProvider?.GetFormat<NumberFormatInfo>()?.NegativeSign ?? "-";
-
-        if (!string.IsNullOrEmpty(iFormat))
+    [Impure]
+    private long AppendWhole(StringBuilder sb, string format, IFormatProvider? formatProvider)
+    {
+        if (!string.IsNullOrEmpty(format))
         {
-            remainder = Remainder;
-
-            sb.Append(Whole.ToString(iFormat, formatProvider));
+            sb.Append(Whole.ToString(format, formatProvider));
 
             // For -0 n/d
-            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(negative))
+            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(formatProvider.NegativeSign()))
             {
-                sb.Insert(0, negative);
+                sb.Insert(0, formatProvider.NegativeSign());
             }
+            return Remainder;
         }
-        if (nFormat == "super")
+        else return numerator;
+    }
+
+    private void AppendNumerator(StringBuilder sb, long remainder, string format, IFormatProvider? formatProvider)
+    {
+        if (format == "super")
         {
             if (sb.Length == 0 && Sign() == -1)
             {
-                sb.Append(negative);
+                sb.Append(formatProvider.NegativeSign());
             }
             // use invariant as we want to convert to superscript.
             var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
@@ -448,12 +453,13 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
             {
                 sb.Append(' ');
             }
-            sb.Append(remainder.ToString(nFormat, formatProvider));
+            sb.Append(remainder.ToString(format, formatProvider));
         }
+    }
 
-        sb.Append(bar);
-
-        if (dFormat == "sub")
+    private void AppendDenominator(StringBuilder sb, string format, IFormatProvider? formatProvider)
+    {
+        if (format == "sub")
         {
             // use invariant as we want to convert to superscript.
             var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
@@ -461,9 +467,8 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
         else
         {
-            sb.Append(Denominator.ToString(dFormat, formatProvider));
+            sb.Append(Denominator.ToString(format, formatProvider));
         }
-        return sb.ToString();
     }
 
     /// <inheritdoc/>
@@ -481,10 +486,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
 
     /// <inheritdoc/>
     [Pure]
-    public override int GetHashCode()
-    {
-        return (denominator * 113 * numerator).GetHashCode();
-    }
+    public override int GetHashCode() => unchecked(denominator * 113 * numerator).GetHashCode();
 
     /// <inheritdoc/>
     [Pure]
@@ -637,82 +639,6 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
     }
 
-    /// <summary>Creates a fraction based on decimal number.</summary>
-    /// <param name="number">
-    /// The decimal value to represent as a fraction.
-    /// </param>
-    /// <param name="error">
-    /// The allowed error.
-    /// </param>
-    /// <remarks>
-    /// Inspired by "Sjaak", see: https://stackoverflow.com/a/45314258/2266405
-    /// </remarks>
-    [Pure]
-    public static Fraction Create(decimal number, decimal error)
-    {
-        if (!number.IsInRange(long.MinValue, long.MaxValue))
-        {
-            throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
-        }
-        if (!error.IsInRange(MinimumError, 1))
-        {
-            throw new ArgumentOutOfRangeException(nameof(error), QowaivMessages.ArgumentOutOfRange_FractionError);
-        }
-        if (number == decimal.Zero)
-        {
-            return Zero;
-        }
-
-        // Deal with negative values.
-        var sign = number < 0 ? -1 : 1;
-        var value = sign == 1 ? number : -number;
-        var integer = (long)value;
-        value -= integer;
-
-        // The boundaries.
-        var minValue = value - error;
-        var maxValue = value + error;
-
-        // Already within the error margin.
-        if (minValue < 0)
-        {
-            return Create(sign * integer);
-        }
-
-        if (maxValue > 1)
-        {
-            return Create(sign * (integer + 1));
-        }
-
-        // The two parts of the denominator to find.
-        long d_lo = 1;
-        long d_hi = (long)(1 / maxValue);
-
-        var f_lo = new DecimalFraction { n = minValue, d = 1 - d_hi * minValue };
-        var f_hi = new DecimalFraction { n = 1 - d_hi * maxValue, d = maxValue };
-
-        while (f_lo.OneOrMore)
-        {
-            // Improve the lower part.
-            var step = f_lo.Value;
-            f_lo.n -= step * f_lo.d;
-            f_hi.d -= step * f_hi.n;
-            d_lo += step * d_hi;
-
-            if (!f_hi.OneOrMore) { break; }
-
-            // improve the higher part.
-            step = f_hi.Value;
-            f_lo.d -= step * f_lo.n;
-            f_hi.n -= step * f_hi.d;
-            d_hi += step * d_lo;
-        }
-
-        long d = d_lo + d_hi;
-        long n = (long)(value * d + 0.5m);
-        return New(sign * (integer * d + n), d);
-    }
-
     /// <summary>Creates a fraction based on a <see cref="decimal"/>.</summary>
     /// <param name="number">
     /// The decimal value to represent as a fraction.
@@ -751,22 +677,6 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
         : new Fraction { numerator = n, denominator = d, };
 
-    #region internal tooling
-
-    /// <summary>The minimum error that can be provided to the Create from floating-point.</summary>
-    private const decimal MinimumError = 1m / long.MaxValue;
-
-    /// <remarks>
-    /// An in-memory helper class to store a decimal numerator and decimal denominator.
-    /// </remarks>
-    private ref struct DecimalFraction
-    {
-        public decimal n;
-        public decimal d;
-        public long Value => (long)(n / d);
-        public bool OneOrMore => n >= d;
-    }
-
     /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
     private static void Reduce(ref long a, ref long b)
     {
@@ -799,6 +709,4 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
         return a * even;
     }
-
-    #endregion
 }

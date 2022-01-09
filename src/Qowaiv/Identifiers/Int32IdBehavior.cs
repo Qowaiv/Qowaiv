@@ -1,8 +1,11 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="int"/>.</summary>
-public abstract class Int32IdBehavior : IdentifierBehavior
+public class Int32IdBehavior : IdentifierBehavior
 {
+    /// <summary>Creates a new instance of the <see cref="Int32IdBehavior"/> class.</summary>
+    protected Int32IdBehavior() { }
+
     /// <summary>Returns the type of the underlying value (<see cref="int"/>).</summary>
     public sealed override Type BaseType => typeof(int);
 

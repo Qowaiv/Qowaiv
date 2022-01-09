@@ -488,10 +488,7 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
         var sb = new StringBuilder();
         if (m_Value < 0)
         {
-            var sign = formatProvider is CultureInfo cultureInfo
-                ? cultureInfo.NumberFormat.NegativeSign
-                : "-";
-            sb.Append(sign);
+            sb.Append(formatProvider.NegativeSign());
         }
 
         decimal size = Math.Abs(m_Value);

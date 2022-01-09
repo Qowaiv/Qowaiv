@@ -639,82 +639,6 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
     }
 
-    /// <summary>Creates a fraction based on decimal number.</summary>
-    /// <param name="number">
-    /// The decimal value to represent as a fraction.
-    /// </param>
-    /// <param name="error">
-    /// The allowed error.
-    /// </param>
-    /// <remarks>
-    /// Inspired by "Sjaak", see: https://stackoverflow.com/a/45314258/2266405
-    /// </remarks>
-    [Pure]
-    public static Fraction Create(decimal number, decimal error)
-    {
-        if (!number.IsInRange(long.MinValue, long.MaxValue))
-        {
-            throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
-        }
-        if (!error.IsInRange(MinimumError, 1))
-        {
-            throw new ArgumentOutOfRangeException(nameof(error), QowaivMessages.ArgumentOutOfRange_FractionError);
-        }
-        if (number == decimal.Zero)
-        {
-            return Zero;
-        }
-
-        // Deal with negative values.
-        var sign = number < 0 ? -1 : 1;
-        var value = sign == 1 ? number : -number;
-        var integer = (long)value;
-        value -= integer;
-
-        // The boundaries.
-        var minValue = value - error;
-        var maxValue = value + error;
-
-        // Already within the error margin.
-        if (minValue < 0)
-        {
-            return Create(sign * integer);
-        }
-
-        if (maxValue > 1)
-        {
-            return Create(sign * (integer + 1));
-        }
-
-        // The two parts of the denominator to find.
-        long d_lo = 1;
-        long d_hi = (long)(1 / maxValue);
-
-        var f_lo = new DecimalFraction { n = minValue, d = 1 - d_hi * minValue };
-        var f_hi = new DecimalFraction { n = 1 - d_hi * maxValue, d = maxValue };
-
-        while (f_lo.OneOrMore)
-        {
-            // Improve the lower part.
-            var step = f_lo.Value;
-            f_lo.n -= step * f_lo.d;
-            f_hi.d -= step * f_hi.n;
-            d_lo += step * d_hi;
-
-            if (!f_hi.OneOrMore) { break; }
-
-            // improve the higher part.
-            step = f_hi.Value;
-            f_lo.d -= step * f_lo.n;
-            f_hi.n -= step * f_hi.d;
-            d_hi += step * d_lo;
-        }
-
-        long d = d_lo + d_hi;
-        long n = (long)(value * d + 0.5m);
-        return New(sign * (integer * d + n), d);
-    }
-
     /// <summary>Creates a fraction based on a <see cref="decimal"/>.</summary>
     /// <param name="number">
     /// The decimal value to represent as a fraction.
@@ -753,22 +677,6 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
         : new Fraction { numerator = n, denominator = d, };
 
-    #region internal tooling
-
-    /// <summary>The minimum error that can be provided to the Create from floating-point.</summary>
-    private const decimal MinimumError = 1m / long.MaxValue;
-
-    /// <remarks>
-    /// An in-memory helper class to store a decimal numerator and decimal denominator.
-    /// </remarks>
-    private ref struct DecimalFraction
-    {
-        public decimal n;
-        public decimal d;
-        public long Value => (long)(n / d);
-        public bool OneOrMore => n >= d;
-    }
-
     /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
     private static void Reduce(ref long a, ref long b)
     {
@@ -801,6 +709,4 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         }
         return a * even;
     }
-
-    #endregion
 }

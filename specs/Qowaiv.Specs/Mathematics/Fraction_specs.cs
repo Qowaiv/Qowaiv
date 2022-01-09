@@ -58,7 +58,6 @@ public class Can_be_parsed
     [TestCase("1∕3")]
     public void from_multiple_bar_chars(string bar)
        => Fraction.Parse(bar, CultureInfo.InvariantCulture).Should().Be(1.DividedBy(3));
-
 }
 
 public class Can_not_be_parsed
@@ -110,6 +109,25 @@ public class Can_be_created
             }
         }
         failures.Should().BeEmpty();
+    }
+}
+
+public class Can_not_be_created
+{
+    [TestCase(-10e18)]
+    [TestCase(+10e18)]
+    public void from_decimal_out_of_long_range(decimal dec)
+    {
+        Func<Fraction> create = () => Fraction.Create(dec);
+        create.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [TestCase(1e-19)]
+    [TestCase(+1.000001)]
+    public void from_decimal_with_error_out_of_range(decimal error)
+    {
+        Func<Fraction> create = () => Fraction.Create(0, error);
+        create.Should().Throw<ArgumentOutOfRangeException>();
     }
 }
 

@@ -12,10 +12,10 @@ public partial struct InternationalBankAccountNumber
     [Pure]
     private static KeyValuePair<Country, Regex> Bban(Country country, string bban, int? checksum = default)
     {
-        var pattern = CharBuffer.Empty(64)
-            .Add('^')
-            .Add(country.IsoAlpha2Code)
-            .Add(checksum.HasValue ? checksum.Value.ToString("00") : "[0-9][0-9]");
+        var pattern = new StringBuilder(64)
+            .Append('^')
+            .Append(country.IsoAlpha2Code)
+            .Append(checksum.HasValue ? checksum.Value.ToString("00") : "[0-9][0-9]");
 
         foreach (var block in bban.Split(','))
         {
@@ -23,14 +23,14 @@ public partial struct InternationalBankAccountNumber
 
             if (!int.TryParse(block.Substring(0, block.Length - 1), out int length) && type == ']')
             {
-                pattern.Add(block.Substring(1, block.Length - 2));
+                pattern.Append(block.Substring(1, block.Length - 2));
             }
             else
             {
-                pattern.Add(CharType(type)).Add('{').Add(length.ToString()).Add('}');
+                pattern.Append(CharType(type)).Append('{').Append(length.ToString()).Append('}');
             }
         }
-        return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Add('$'), RegexOptions.Compiled));
+        return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Append('$').ToString(), RegexOptions.Compiled));
 
         static string CharType(char type) => type switch { 'n' => "[0-9]", 'a' => "[A-Z]", 'c' => "[0-9A-Z]", _ => throw new FormatException() };
     }

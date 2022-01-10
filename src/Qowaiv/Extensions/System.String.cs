@@ -67,7 +67,7 @@ public static class QowaivSystemExtensions
         => str is { Length: > 0 } ? str : @default;
 
     [Pure]
-    internal static string Unify(this string? str) => Parser.Unify(str);
+    internal static string Unify(this string? str) => str.Buffer().Unify();
 
     [Pure]
     internal static bool IsEmpty(this string? str) => string.IsNullOrEmpty(str);

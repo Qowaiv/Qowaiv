@@ -16,6 +16,8 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
     /// <summary>The per ten thousand symbol (0/000).</summary>
     public static readonly string PerTenThousandSymbol = "‱";
 
+    private const string NumberFormat = "0.############################";
+
     /// <summary>Represents 0 percent.</summary>
     public static readonly Percentage Zero;
 
@@ -582,7 +584,7 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => ToString(PercentFormat, CultureInfo.InvariantCulture);
+    public string ToJson() => ToString(NumberFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
     #endregion
 
@@ -606,39 +608,16 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
         {
             return formatted;
         }
-        else
+        else if (FormatInfo.TryParse(format, formatProvider, out var info))
         {
-            formatProvider ??= CultureInfo.CurrentCulture;
-            format = Format(format, formatProvider);
-
-            var numberInfo = GetNumberFormatInfo(formatProvider);
-            var symbolInfo = SymbolInfo.Get(format.Buffer(), numberInfo);
-            if (symbolInfo.Symbol == SymbolPosition.Invalid)
-            {
-                throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
-            }
-            var dec = m_Value / Factors[symbolInfo.Symbol];
-            var str = dec.ToString(symbolInfo.Buffer, numberInfo);
-            return ToString(str, symbolInfo, numberInfo);
+            return info.ToString(m_Value);
         }
+        else throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
     }
-
-    [Pure]
-    private static string ToString(string str, SymbolInfo symbolInfo, NumberFormatInfo numberInfo) 
-        => symbolInfo.Symbol switch
-        {
-            SymbolPosition.PercentBefore => numberInfo.PercentSymbol + str,
-            SymbolPosition.PerMilleBefore => numberInfo.PerMilleSymbol + str,
-            SymbolPosition.PerTenThousandBefore => PerTenThousandSymbol + str,
-            SymbolPosition.PercentAfter => str + numberInfo.PercentSymbol,
-            SymbolPosition.PerMilleAfter => str + numberInfo.PerMilleSymbol,
-            SymbolPosition.PerTenThousandAfter => str + PerTenThousandSymbol,
-            _ => str,
-        };
 
     /// <summary>Gets an XML string representation of the @FullName.</summary>
     [Pure]
-    private string ToXmlString() => ToString(PercentFormat, CultureInfo.InvariantCulture);
+    private string ToXmlString() => ToString(NumberFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
     #endregion
 
@@ -677,20 +656,12 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
     {
         result = Zero;
 
-        if (!string.IsNullOrEmpty(s))
+        if (s is { Length: > 0} 
+            && FormatInfo.TryParse(s, formatProvider, out var info)
+            && decimal.TryParse(info.Format, NumberStyles.Number, info.Provider, out var dec))
         {
-            formatProvider ??= CultureInfo.CurrentCulture;
-            var numberInfo = GetNumberFormatInfo(formatProvider);
-            var symbolInfo = SymbolInfo.Get(s.Buffer(), numberInfo);
-
-            if (symbolInfo.Symbol != SymbolPosition.Invalid &&
-                decimal.TryParse(symbolInfo.Buffer, NumberStyles.Number, numberInfo,
-                out decimal dec))
-            {
-                dec *= Factors[symbolInfo.Symbol];
-                result = Create(dec);
-                return true;
-            }
+            result = new(dec * info.Factor);
+            return true;
         }
         return false;
     }

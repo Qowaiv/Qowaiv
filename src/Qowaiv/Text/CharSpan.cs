@@ -79,7 +79,7 @@
 
         /// <inheritdoc />
         [Pure]
-        public override bool Equals(object obj) => obj is CharSpan other && Equals(other);
+        public override bool Equals(object? obj) => obj is CharSpan other && Equals(other);
 
         [Pure]
         public bool Equals(CharSpan other)

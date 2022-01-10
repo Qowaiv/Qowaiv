@@ -176,18 +176,18 @@ public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEq
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out YesNo result)
     {
         result = Empty;
-        var buffer = s.Buffer().Unify();
+        var str = s.Unify();
 
-        if (buffer.IsEmpty())
+        if (str.IsEmpty())
         {
             return true;
         }
-        else if (buffer.IsUnknown(formatProvider))
+        else if (str.IsUnknown(formatProvider))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, buffer.ToString(), out var val))
+        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
         {
             result = new YesNo(val);
             return true;
@@ -207,26 +207,19 @@ public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEq
     private sealed class YesNoValues : LocalizedValues<byte>
     {
         public YesNoValues() : base(new Dictionary<string, byte>
-            {
-                { "", 0 },
-                { "0", 1 },
-                { "1", 2 },
-                { "FALSE", 1 },
-                { "TRUE", 2 },
-                { "NO", 1 },
-                { "YES", 2 },
-                { "N", 1 },
-                { "Y", 2 },
-            })
-        { }
+        {
+            { "", 0 },
+            { "0", 1 }, { "N", 1 }, { "NO", 1 }, { "FALSE", 1 },
+            { "1", 2 }, { "Y", 2 }, { "YES", 2 },{ "TRUE", 2 },
+        }) { }
 
         protected override void AddCulture(CultureInfo culture)
         {
             foreach (var value in YesAndNo)
             {
-                var label = value.ToString("", culture).ToUpper(culture);
-                var @char = value.ToString("c", culture).ToUpper(culture);
-                var @bool = value.ToString("b", culture).ToUpper(culture);
+                var label = value.ToString("", culture).Unify();
+                var @char = value.ToString("c", culture).Unify();
+                var @bool = value.ToString("b", culture).Unify();
 
                 this[culture][label] = value.m_Value;
                 this[culture][@char] = value.m_Value;

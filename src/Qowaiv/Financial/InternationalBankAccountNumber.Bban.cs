@@ -27,12 +27,12 @@ public partial struct InternationalBankAccountNumber
                 pattern.Add(block.RemoveFromStart(1));
             }
             else switch (type)
-                {
-                    case 'n': pattern.Add("[0-9]").Add('{').Add(length.ToString()).Add('}'); break;
-                    case 'a': pattern.Add("[A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
-                    case 'c': pattern.Add("[0-9A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
-                    default: throw new FormatException();
-                }
+            {
+                case 'n': pattern.Add("[0-9]").Add('{').Add(length.ToString()).Add('}'); break;
+                case 'a': pattern.Add("[A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
+                case 'c': pattern.Add("[0-9A-Z]").Add('{').Add(length.ToString()).Add('}'); break;
+                default: throw new FormatException();
+            }
         }
 
         return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Add('$'), RegexOptions.Compiled));

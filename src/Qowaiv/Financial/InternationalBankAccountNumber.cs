@@ -162,59 +162,46 @@ public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerial
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out InternationalBankAccountNumber result)
     {
         result = default;
-        var buffer = s.Buffer().Unify();
-        if (buffer.IsEmpty())
+        var str = s.Unify();
+        if (str.IsEmpty())
         {
             return true;
         }
-        else if (buffer.IsUnknown(formatProvider))
+        else if (str.IsUnknown(formatProvider))
         {
             result = Unknown;
             return true;
         }
-        else if (buffer.Length.IsInRange(12, 32)
-            && buffer.Matches(Pattern)
-            && ValidForCountry(buffer)
-            && (Mod97(buffer)))
+        else if (str.Length.IsInRange(12, 32)
+            && str.Matches(Pattern)
+            && ValidForCountry(str)
+            && (Mod97(str)))
         {
-            result = new InternationalBankAccountNumber(buffer);
+            result = new InternationalBankAccountNumber(str);
             return true;
         }
         return false;
     }
 
     [Pure]
-    private static bool ValidForCountry(CharBuffer buffer)
-        => Country.TryParse(buffer.Substring(0, 2), out var country)
+    private static bool ValidForCountry(string iban)
+        => Country.TryParse(iban.Substring(0, 2), out var country)
         && !country.IsEmptyOrUnknown()
         && (!LocalizedPatterns.TryGetValue(country, out var localizedPattern)
-        || buffer.Matches(localizedPattern));
+        || iban.Matches(localizedPattern));
 
     [Pure]
-    private static bool Mod97(CharBuffer buffer)
+    private static bool Mod97(string iban)
     {
-        var digits = Digits(buffer);
-        int sum = 0;
-        int exp = 1;
-
-        for (int pos = digits.Length - 1; pos >= 0; pos--)
+        var digits = iban.Substring(4) + iban.Substring(0, 4);
+        var mod = 0;
+        foreach (var digit in digits)
         {
-            sum += exp * AlphanumericAndNumericLookup.IndexOf(digits[pos]);
-            exp = (exp * 10).Mod(97);
+            var index = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(digit);
+            mod *= index > 9 ? 100 : 10;
+            mod += index;
+            mod = mod.Mod(97);
         }
-        return sum.Mod(97) == 1;
+        return mod == 1;
     }
-
-    [Pure]
-    private static CharBuffer Digits(CharBuffer input)
-    {
-        var digits = CharBuffer.Empty(input.Length * 2);
-        foreach (var ch in input.Skip(4).Concat(input.Take(4)))
-        {
-            digits.Add(AlphanumericAndNumericLookup.IndexOf(ch).ToString());
-        }
-        return digits;
-    }
-
-    private const string AlphanumericAndNumericLookup = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 }

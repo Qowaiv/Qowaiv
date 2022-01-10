@@ -51,7 +51,7 @@ public sealed partial class PostalCodeCountryInfo
     public bool IsValid(string? postalcode)
         => !string.IsNullOrEmpty(postalcode)
         && ValidationPattern is { }
-        && postalcode.Buffer().Unify().Matches(ValidationPattern);
+        && postalcode.Unify().Matches(ValidationPattern);
 
     /// <summary>Formats the postal code.</summary>
     /// <param name="postalcode">

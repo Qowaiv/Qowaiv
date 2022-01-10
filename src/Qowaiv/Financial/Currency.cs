@@ -204,17 +204,17 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Currency result)
     {
         result = Empty;
-        var buffer = s.Buffer().Unify();
-        if (buffer.IsEmpty())
+        var str = s.Unify();
+        if (str.IsEmpty())
         {
             return true;
         }
-        else if (buffer.IsUnknown(formatProvider) || buffer.Equals(Unknown.Symbol))
+        else if (str.IsUnknown(formatProvider) || str.Equals(Unknown.Symbol))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, buffer.ToString(), out var val))
+        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
         {
             result = new Currency(val);
             return true;
@@ -268,7 +268,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
         {
             foreach (var currency in AllCurrencies)
             {
-                var unified = currency.GetDisplayName(CultureInfo.InvariantCulture).Buffer().Unify();
+                var unified = currency.GetDisplayName(CultureInfo.InvariantCulture).Unify();
                 this[CultureInfo.InvariantCulture][currency.IsoCode.ToUpperInvariant()] = currency.m_Value;
                 this[CultureInfo.InvariantCulture][currency.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = currency.m_Value;
                 this[CultureInfo.InvariantCulture][unified] = currency.m_Value;
@@ -284,7 +284,7 @@ public partial struct Currency : ISerializable, IXmlSerializable, IFormattable, 
             this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
             foreach (var country in AllCurrencies)
             {
-                var unified = country.GetDisplayName(culture).Buffer().Unify();
+                var unified = country.GetDisplayName(culture).Unify();
                 this[culture][unified] = country.m_Value;
             }
         }

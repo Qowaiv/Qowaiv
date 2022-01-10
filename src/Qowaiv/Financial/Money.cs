@@ -560,7 +560,7 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     private static bool CandidateCurrency(char ch, string numbers)
         => !char.IsDigit(ch)
         && !char.IsWhiteSpace(ch)
-        && numbers.IndexOf(ch) == -1;
+        && numbers.Contains(ch);
 
     /// <summary >Creates Money from a Decimal. </summary >
     /// <param name="val" >

@@ -66,6 +66,9 @@ dotnet_diagnostic.CA2211.severity = warning
 # CA2231: Overload operator equals on overriding value type Equals
 dotnet_diagnostic.CA2231.severity = none
 
+# CA2249: Consider using 'string.Contains' instead of 'string.IndexOf'
+dotnet_diagnostic.CA2249.severity = warning
+
 # CA2254: Template should be a static expression
 dotnet_diagnostic.CA2254.severity = warning
 

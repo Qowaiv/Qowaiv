@@ -118,6 +118,7 @@ namespace Qowaiv.UnitTests.Text
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var act = SerializeDeserialize.Binary(TestPattern);

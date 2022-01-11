@@ -123,6 +123,7 @@ namespace Qowaiv.Financial.UnitTests
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = TestStruct;
@@ -156,6 +157,7 @@ namespace Qowaiv.Financial.UnitTests
 
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_AmountSerializeObject_AreEqual()
         {
             var input = new AmountSerializeObject
@@ -217,6 +219,7 @@ namespace Qowaiv.Financial.UnitTests
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new AmountSerializeObject

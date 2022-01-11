@@ -130,6 +130,7 @@ namespace Qowaiv.UnitTests.Financial
         #region (XML) (De)serialization tests
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = InternationalBankAccountNumberTest.TestStruct;
@@ -161,8 +162,8 @@ namespace Qowaiv.UnitTests.Financial
             Assert.AreEqual(TestStruct, act);
         }
 
-
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
         {
             var input = new InternationalBankAccountNumberSerializeObject
@@ -224,6 +225,7 @@ namespace Qowaiv.UnitTests.Financial
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new InternationalBankAccountNumberSerializeObject

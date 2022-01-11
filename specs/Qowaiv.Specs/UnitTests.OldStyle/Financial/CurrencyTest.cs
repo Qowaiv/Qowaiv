@@ -238,6 +238,7 @@ public class CurrencyTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
     {
         var input = CurrencyTest.TestStruct;
@@ -270,6 +271,7 @@ public class CurrencyTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_CurrencySerializeObject_AreEqual()
     {
         var input = new CurrencySerializeObject
@@ -331,6 +333,7 @@ public class CurrencyTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Empty_AreEqual()
     {
         var input = new CurrencySerializeObject

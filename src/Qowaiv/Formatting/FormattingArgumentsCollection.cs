@@ -93,6 +93,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 #nullable disable
 #pragma warning disable S125 // Sections of code should not be "commented out"
 #pragma warning disable S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
+#pragma warning disable S138 // Functions should not have too many lines of code
 #pragma warning disable S1227 // break statements should not be used except for switch cases
 #pragma warning disable S1541 // Methods and properties should not be too complex
 #pragma warning disable S1854 // Dead stores should be removed
@@ -276,8 +277,9 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 #pragma warning restore S1854 // Dead stores should be removed
 #pragma warning restore S1541 // Methods and properties should not be too complex
 #pragma warning restore S1227 // break statements should not be used except for switch cases
-#pragma warning restore S125 // Sections of code should not be "commented out"
+#pragma warning restore S138 // Functions should not have too many lines of code
 #pragma warning restore S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
+#pragma warning restore S125 // Sections of code should not be "commented out"
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 #nullable enable
 

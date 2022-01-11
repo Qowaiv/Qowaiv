@@ -85,6 +85,7 @@ namespace Qowaiv.UnitTests.Formatting
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new FormattableArgumentsSerializeObject

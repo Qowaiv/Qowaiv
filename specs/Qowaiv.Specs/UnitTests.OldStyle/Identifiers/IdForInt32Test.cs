@@ -165,6 +165,7 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = TestStruct;
@@ -198,6 +199,7 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_IdForInt32SerializeObject_AreEqual()
         {
             var input = new IdForInt32SerializeObject
@@ -273,6 +275,7 @@ namespace Qowaiv.UnitTests.Identifiers
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new IdForInt32SerializeObject

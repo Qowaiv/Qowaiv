@@ -116,6 +116,7 @@ public class DateSpanTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
     {
         var input = TestStruct;
@@ -141,6 +142,7 @@ public class DateSpanTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_DateSpanSerializeObject_AreEqual()
     {
         var input = new DateSpanSerializeObject
@@ -202,6 +204,7 @@ public class DateSpanTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
     {
         var input = new DateSpanSerializeObject

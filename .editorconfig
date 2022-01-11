@@ -54,6 +54,12 @@ dotnet_diagnostic.CA1822.severity = warning
 # CA1825: Avoid unnecessary zero-length array allocations
 dotnet_diagnostic.CA1825.severity = warning
 
+# CA1830: Prefer strongly-typed Append and Insert method overloads on StringBuilder
+dotnet_diagnostic.CA1845.severity = warning
+
+# CA1845: Use span-based 'string.Concat'
+dotnet_diagnostic.CA1845.severity = none
+
 # CA1846: Prefer 'AsSpan' over 'Substring'
 dotnet_diagnostic.CA1846.severity = none
 

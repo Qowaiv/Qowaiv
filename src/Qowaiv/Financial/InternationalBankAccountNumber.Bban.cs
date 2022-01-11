@@ -27,7 +27,7 @@ public partial struct InternationalBankAccountNumber
             }
             else
             {
-                pattern.Append(CharType(type)).Append('{').Append(length.ToString()).Append('}');
+                pattern.Append(CharType(type)).Append('{').Append(length).Append('}');
             }
         }
         return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Append('$').ToString(), RegexOptions.Compiled));

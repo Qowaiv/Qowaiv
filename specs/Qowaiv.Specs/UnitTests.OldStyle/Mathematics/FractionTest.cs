@@ -100,6 +100,7 @@ namespace Qowaiv.UnitTests.Mathematics
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = TestStruct;
@@ -133,6 +134,7 @@ namespace Qowaiv.UnitTests.Mathematics
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_FractionSerializeObject_AreEqual()
         {
             var input = new FractionSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
@@ -166,6 +168,7 @@ namespace Qowaiv.UnitTests.Mathematics
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new FractionSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };

@@ -567,6 +567,7 @@ public class Is_Open_API_data_type
 public class Supports_binary_serialization
 {
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Year);

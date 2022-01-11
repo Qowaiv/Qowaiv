@@ -146,6 +146,7 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = EloTest.TestStruct;
@@ -178,6 +179,7 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_EloSerializeObject_AreEqual()
         {
             var input = new EloSerializeObject
@@ -239,6 +241,7 @@ namespace Qowaiv.UnitTests.Statistics
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Zero_AreEqual()
         {
             var input = new EloSerializeObject

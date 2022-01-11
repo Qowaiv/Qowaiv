@@ -101,6 +101,7 @@ public class DateTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
     {
         var input = TestStruct;
@@ -132,8 +133,8 @@ public class DateTest
         Assert.AreEqual(TestStruct, act);
     }
 
-
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_DateSerializeObject_AreEqual()
     {
         var input = new DateSerializeObject
@@ -195,6 +196,7 @@ public class DateTest
     }
 
     [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_MinValue_AreEqual()
     {
         var input = new DateSerializeObject

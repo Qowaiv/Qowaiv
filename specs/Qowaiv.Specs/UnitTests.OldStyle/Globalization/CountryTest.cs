@@ -265,6 +265,7 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
         {
             var input = CountryTest.TestStruct;
@@ -298,6 +299,7 @@ namespace Qowaiv.UnitTests.Globalization
 
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_CountrySerializeObject_AreEqual()
         {
             var input = new CountrySerializeObject
@@ -359,6 +361,7 @@ namespace Qowaiv.UnitTests.Globalization
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Empty_AreEqual()
         {
             var input = new CountrySerializeObject

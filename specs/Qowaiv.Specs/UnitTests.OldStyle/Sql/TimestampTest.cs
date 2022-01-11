@@ -150,6 +150,7 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TestStruct_AreEqual()
             =>  SerializeDeserialize.Binary(TestStruct).Should().Be(TestStruct);
 
@@ -173,6 +174,7 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_TimestampSerializeObject_AreEqual()
         {
             var input = new TimestampSerializeObject
@@ -234,6 +236,7 @@ namespace Qowaiv.UnitTests.Sql
         }
 
         [Test]
+        [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Default_AreEqual()
         {
             var input = new TimestampSerializeObject

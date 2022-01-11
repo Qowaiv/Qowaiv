@@ -36,15 +36,6 @@ public class Add
 
 public class Remove
 {
-    [TestCase("Test", "this is a Test!", "this is a !")]
-    [TestCase("x", "What a fxckin' xwxsxmx feature.", "What a fckin' wsm feature.")]
-    [TestCase("%", "-3%", "-3")]
-    public void string_values_from_buffer(string remove, string input, string expected)
-    {
-        var buffer = input.Buffer();
-        Assert.AreEqual(expected, buffer.Remove(remove).ToString());
-    }
-
     [Test]
     public void FromStart_removes_characters_from_the_start()
     {

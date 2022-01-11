@@ -72,7 +72,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
 
         /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
         [Pure]
-        public static bool IsFractionBar(char ch) => FractionBars.IndexOf(ch) != CharBuffer.NotFound;
+        public static bool IsFractionBar(char ch) => FractionBars.Contains(ch);
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

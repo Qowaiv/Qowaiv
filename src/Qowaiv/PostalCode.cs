@@ -106,20 +106,19 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out PostalCode result)
     {
         result = default;
-        var buffer = s.Buffer().Unify();
-
-        if (buffer.IsEmpty())
+        var str = s.Unify();
+        if (str.IsEmpty())
         {
             return true;
         }
-        else if (buffer.IsUnknown(formatProvider))
+        else if (str.IsUnknown(formatProvider))
         {
             result = Unknown;
             return true;
         }
-        else if (buffer.Matches(Pattern))
+        else if (str.Matches(Pattern))
         {
-            result = new PostalCode(buffer);
+            result = new PostalCode(str);
             return true;
         }
         else return false;
@@ -137,7 +136,5 @@ public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable
     /// </remarks>
     [Pure]
     public static bool IsValid(string? postalcode, Country country)
-    {
-        return PostalCodeCountryInfo.GetInstance(country).IsValid(postalcode);
-    }
+        => PostalCodeCountryInfo.GetInstance(country).IsValid(postalcode);
 }

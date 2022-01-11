@@ -537,56 +537,30 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Money result)
     {
         result = default;
-        if (s is { Length: > 0 })
+
+        var currency = Currency.Empty;
+        var signs = formatProvider.NegativeSign() + formatProvider.PositiveSign();
+        var span = s.CharSpan().TrimLeft(ch => CandidateCurrency(ch, signs), out var candidate);
+        
+        if (candidate.IsEmpty())
         {
-            string s_num;
-            string s_cur;
+            span = span.TrimRight(ch => CandidateCurrency(ch, signs), out candidate);
+        }
 
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-
-            var buffer = new List<char>(s.Length);
-            var min = culture.NumberFormat.NegativeSign[0];
-            var pls = culture.NumberFormat.PositiveSign[0];
-
-            foreach (var ch in s)
-            {
-                if (ch == min || ch == pls || (ch >= '0' && ch <= '9')) { break; }
-                buffer.Add(ch);
-            }
-            if (buffer.Count > 0)
-            {
-                s_num = s.Substring(buffer.Count);
-                s_cur = new string(buffer.ToArray());
-            }
-            else
-            {
-                for (var pos = s.Length - 1; pos >= 0; pos--)
-                {
-                    var ch = s[pos];
-                    if (ch == min || ch == pls || (ch >= '0' && ch <= '9')) { break; }
-                    buffer.Insert(0, ch);
-                }
-
-                s_num = s.Substring(0, s.Length - buffer.Count);
-                s_cur = new string(buffer.ToArray());
-            }
-
-            if (!decimal.TryParse(s_num, NumberStyles.Currency, formatProvider, out var value))
-            {
-                return false;
-            }
-
-            Currency currency = default;
-
-            if (s_cur != string.Empty && !Currency.TryParse(s_cur, formatProvider, out currency))
-            {
-                return false;
-            }
-            result = value + currency;
+        if ((candidate.IsEmpty() || Currency.TryParse(candidate.ToString(), out currency))
+            && decimal.TryParse(span.ToString(), NumberStyles.Currency, formatProvider, out var amount))
+        {
+            result = amount + currency;
             return true;
         }
         else return false;
     }
+
+    [Pure]
+    private static bool CandidateCurrency(char ch, string forbidden)
+        => !char.IsDigit(ch)
+        && !char.IsWhiteSpace(ch)
+        && !forbidden.Contains(ch);
 
     /// <summary >Creates Money from a Decimal. </summary >
     /// <param name="val" >

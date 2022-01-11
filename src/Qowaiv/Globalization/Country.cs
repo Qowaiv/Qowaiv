@@ -230,17 +230,17 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Country result)
     {
         result = Empty;
-        var buffer = s.Buffer().Unify();
-        if (buffer.IsEmpty())
+        var str = s.Unify();
+        if (str.IsEmpty())
         {
             return true;
         }
-        else if (buffer.IsUnknown(formatProvider))
+        else if (str.IsUnknown(formatProvider))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, buffer.ToString(), out var val))
+        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
         {
             result = new Country(val);
             return true;
@@ -336,7 +336,7 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
         {
             foreach (var country in All)
             {
-                var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Buffer().Unify();
+                var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Unify();
                 this[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
                 this[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
                 this[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
@@ -349,7 +349,7 @@ public partial struct Country : ISerializable, IXmlSerializable, IFormattable, I
             this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
             foreach (var country in All)
             {
-                var unified = country.GetDisplayName(culture).Buffer().Unify();
+                var unified = country.GetDisplayName(culture).Unify();
                 this[culture][unified] = country.m_Value;
             }
         }

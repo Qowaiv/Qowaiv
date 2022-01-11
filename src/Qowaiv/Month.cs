@@ -1,4 +1,6 @@
-﻿namespace Qowaiv;
+﻿using Qowaiv.Globalization;
+
+namespace Qowaiv;
 
 /// <summary>Represents a month.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -195,12 +197,12 @@ public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEq
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Month result)
     {
         result = default;
-        var buffer = s.Buffer().Unify();
-        if (buffer.IsEmpty())
+        var str = s.Unify();
+        if (str.IsEmpty())
         {
             return true;
         }
-        else if (buffer.IsUnknown(formatProvider))
+        else if (str.IsUnknown(formatProvider))
         {
             result = Unknown;
             return true;
@@ -210,20 +212,12 @@ public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEq
             result = new Month(n);
             return true;
         }
-        else
+        else if (ParseValues.TryGetValue(formatProvider, str, out byte m))
         {
-            var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
-            AddCulture(culture);
-            var str = buffer.ToString();
-
-            if (Parsings[culture].TryGetValue(str, out byte m) ||
-                Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out m))
-            {
-                result = new Month(m);
-                return true;
-            }
+            result = new Month(m);
+            return true;
         }
-        return false;
+        else return false;
     }
 
     /// <summary>Creates a month from a Byte.</summary>
@@ -286,66 +280,36 @@ public partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEq
         && val >= January.m_Value
         && val <= December.m_Value;
 
-    private static void AddCulture(CultureInfo culture)
+    private static readonly MonthValues ParseValues = new();
+
+    private sealed class MonthValues : LocalizedValues<byte>
     {
-        lock (locker)
+        public MonthValues() : base(new Dictionary<string, byte>
         {
-            if (culture == null || Parsings.ContainsKey(culture)) { return; }
+            {"JAN", 1},  {"JANUARY", 1},
+            {"FEB", 2},  {"FEBRUARY", 2},
+            {"MAR", 3},  {"MARCH", 3},
+            {"APR", 4},  {"APRIL", 4},
+            {"MAY", 5},
+            {"JUN", 6},  {"JUNE", 6},
+            {"JUL", 7},  {"JULY", 7},
+            {"AUG", 8},  {"AUGUST", 8},
+            {"SEP", 9},  {"SEPTEMBER", 9},
+            {"OCT", 10}, {"OCTOBER", 10},
+            {"NOV", 11}, {"NOVEMBER", 11},
+            {"DEC", 12}, {"DECEMBER", 12},
+        }) { }
 
-            Parsings[culture] = new Dictionary<string, byte>();
-
+        protected override void AddCulture(CultureInfo culture)
+        {
             foreach (var month in All)
             {
                 var m = (byte)month;
-                var full = culture.DateTimeFormat.GetAbbreviatedMonthName(m).Buffer().Unify().ToString();
-                var shrt = culture.DateTimeFormat.GetMonthName(m).Buffer().Unify().ToString();
-
-                if (!Parsings[CultureInfo.InvariantCulture].ContainsKey(full))
-                {
-                    Parsings[culture][full] = m;
-                }
-                if (!Parsings[CultureInfo.InvariantCulture].ContainsKey(shrt))
-                {
-                    Parsings[culture][shrt] = m;
-                }
+                var full = culture.DateTimeFormat.GetAbbreviatedMonthName(m).Unify();
+                var shrt = culture.DateTimeFormat.GetMonthName(m).Unify();
+                this[culture][full] = m;
+                this[culture][shrt] = m;
             }
         }
     }
-
-    /// <summary>Represents the parsing keys.</summary>
-    private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new()
-    {
-        {
-            CultureInfo.InvariantCulture,
-            new Dictionary<string, byte>
-                {
-                    {"JANUARY", 1},
-                    {"FEBRUARY", 2},
-                    {"MARCH", 3},
-                    {"APRIL", 4},
-                    {"MAY", 5},
-                    {"JUNE", 6},
-                    {"JULY", 7},
-                    {"AUGUST", 8},
-                    {"SEPTEMBER", 9},
-                    {"OCTOBER", 10},
-                    {"NOVEMBER", 11},
-                    {"DECEMBER", 12},
-                    {"JAN", 1},
-                    {"FEB", 2},
-                    {"MAR", 3},
-                    {"APR", 4},
-                    {"JUN", 6},
-                    {"JUL", 7},
-                    {"AUG", 8},
-                    {"SEP", 9},
-                    {"OCT", 10},
-                    {"NOV", 11},
-                    {"DEC", 12},
-                }
-        }
-    };
-
-    /// <summary>The locker for adding a culture.</summary>
-    private static readonly object locker = new();
 }

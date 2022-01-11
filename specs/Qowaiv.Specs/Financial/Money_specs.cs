@@ -1,5 +1,28 @@
 ﻿namespace Financial.Money_specs;
 
+public class Can_be_parsed
+{
+    [TestCase("€ 42.17")]
+    [TestCase("€42.17")]
+    [TestCase("€+42.17")]
+    [TestCase("EUR42.17")]
+    [TestCase("EUR+42.17")]
+    [TestCase("EUR 42.17")]
+    public void with_currency_before(string before)
+        => Money.Parse(before, CultureInfo.InvariantCulture).Should().Be(Svo.Money);
+
+    [TestCase("42.17 €")]
+    [TestCase("42.17€")]
+    [TestCase("42.17 EUR")]
+    [TestCase("42.17EUR")]
+    public void with_currency_after(string after)
+        => Money.Parse(after, CultureInfo.InvariantCulture).Should().Be(Svo.Money);
+
+    [Test]
+    public void with_out_currency()
+        => Money.Parse("42.17", CultureInfo.InvariantCulture).Should().Be(42.17 + Currency.Empty);
+}
+
 public class Supports_type_conversion
 {
     [Test]

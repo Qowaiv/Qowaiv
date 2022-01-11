@@ -2,6 +2,8 @@
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 
+using Qowaiv.Globalization;
+
 namespace Qowaiv;
 
 /// <summary>Represents a Sex.</summary>
@@ -172,11 +174,7 @@ public partial struct Sex : ISerializable, IXmlSerializable, IFormattable, IEqua
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Sex result)
     {
         result = Empty;
-        var buffer = s.Buffer().Unify();
-
-        if (buffer.IsEmpty()) return true;
-        else if (Parsings[AddCulture(formatProvider)].TryGetValue(buffer, out byte val)
-            || Parsings[CultureInfo.InvariantCulture].TryGetValue(buffer, out val))
+        if (ParseValues.TryGetValue(formatProvider, s.Unify(), out var val))
         {
             result = new Sex(val);
             return true;
@@ -285,60 +283,28 @@ public partial struct Sex : ISerializable, IXmlSerializable, IFormattable, IEqua
         { 18, "NotApplicable" }
     };
 
-    /// <summary>Adds a culture to the parsings.</summary>
-    [Impure]
-    private static CultureInfo AddCulture(IFormatProvider? formatProvider)
+    private static readonly SexValues ParseValues = new();
+
+    private sealed class SexValues : LocalizedValues<byte>
     {
-        var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
-        lock (Locker)
+        public SexValues() : base(new Dictionary<string, byte>
         {
-            if (Parsings.ContainsKey(culture)) return culture;
-            else
+            { "", 0 },
+            { "0", 1 },  { "?", 1 },  { "NOTKNOWN", 1 }, { "UNKNOWN", 1 },
+            { "1", 2 },  { "M", 2 },  { "♂", 2 },{ "MALE", 2 },
+            { "2", 4 },  { "F", 4 },  { "♀", 4 },{ "FEMALE", 4 },
+            { "9", 18 }, { "X", 18 }, { "NOTAPPLICABLE", 18 },
+        }) { }
+
+        protected override void AddCulture(CultureInfo culture)
+        {
+            foreach (var sex in All)
             {
-                Parsings[culture] = new Dictionary<string, byte>();
-
-                foreach (var sex in All)
-                {
-                    var longname = sex.ToString("", culture).ToUpper(culture);
-                    var shortname = sex.ToString("c", culture).ToUpper(culture);
-
-                    Parsings[culture][longname] = sex.m_Value;
-                    Parsings[culture][shortname] = sex.m_Value;
-                }
+                var full = sex.ToString("", culture).Unify();
+                var shrt = sex.ToString("c", culture).Unify();
+                this[culture][full] = sex.m_Value;
+                this[culture][shrt] = sex.m_Value;
             }
-            return culture;
         }
     }
-
-    /// <summary>Represents the parsing keys.</summary>
-    private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new()
-    {
-        {
-            CultureInfo.InvariantCulture,
-            new()
-            {
-                { "", 0 },
-                { "0", 1 },
-                { "1", 2 },
-                { "2", 4 },
-                { "9", 18 },
-                { "?", 1 },
-                { "M", 2 },
-                { "F", 4 },
-                { "X", 18 },
-                { "♂", 2 },
-                { "♀", 4 },
-                { "NOTKNOWN", 1 },
-                { "NOT KNOWN", 1 },
-                { "UNKNOWN", 1 },
-                { "MALE", 2 },
-                { "FEMALE", 4 },
-                { "NOTAPPLICABLE", 18 },
-                { "NOT APPLICABLE", 18 }
-            }
-        }
-    };
-
-    /// <summary>The locker for adding a culture.</summary>
-    private static readonly object Locker = new();
 }

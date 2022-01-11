@@ -65,4 +65,20 @@ public static class QowaivSystemExtensions
     [Pure]
     internal static string WithDefault(this string? str, string @default = "")
         => str is { Length: > 0 } ? str : @default;
+
+    [Pure]
+    internal static string Unify(this string? str) => str.Buffer().Unify();
+
+    [Pure]
+    internal static bool IsEmpty(this string? str) => string.IsNullOrEmpty(str);
+
+    [Pure]
+    internal static bool IsUnknown(this string? str, IFormatProvider? formatProvider)
+        => Unknown.IsUnknown(str, formatProvider as CultureInfo);
+
+    [Pure]
+    internal static bool Matches(this string str, Regex pattern) => pattern.IsMatch(str);
+
+    [Pure]
+    internal static CharSpan CharSpan(this string? str) => str is null ? default : new(str);
 }

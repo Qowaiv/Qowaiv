@@ -173,9 +173,9 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Gender result)
     {
         result = Empty;
-        var buffer = s.Buffer().Unify();
+        var str = s.Unify();
 
-        if (buffer.IsEmpty())
+        if (str.IsEmpty())
         {
             return true;
         }
@@ -183,8 +183,6 @@ public partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IE
         {
             var c = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
             AddCulture(c);
-            var str = buffer.ToString();
-
             if (Parsings[c].TryGetValue(str, out byte val) ||
                 Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
             {

@@ -54,6 +54,15 @@ dotnet_diagnostic.CA1822.severity = warning
 # CA1825: Avoid unnecessary zero-length array allocations
 dotnet_diagnostic.CA1825.severity = warning
 
+# CA1830: Prefer strongly-typed Append and Insert method overloads on StringBuilder
+dotnet_diagnostic.CA1845.severity = warning
+
+# CA1845: Use span-based 'string.Concat'
+dotnet_diagnostic.CA1845.severity = none
+
+# CA1846: Prefer 'AsSpan' over 'Substring'
+dotnet_diagnostic.CA1846.severity = none
+
 # CA1847: Use char literal for a single character lookup
 dotnet_diagnostic.CA1847.severity = warning
 
@@ -65,6 +74,9 @@ dotnet_diagnostic.CA2211.severity = warning
 
 # CA2231: Overload operator equals on overriding value type Equals
 dotnet_diagnostic.CA2231.severity = none
+
+# CA2249: Consider using 'string.Contains' instead of 'string.IndexOf'
+dotnet_diagnostic.CA2249.severity = warning
 
 # CA2254: Template should be a static expression
 dotnet_diagnostic.CA2254.severity = warning

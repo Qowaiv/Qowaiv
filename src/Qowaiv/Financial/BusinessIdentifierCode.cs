@@ -114,23 +114,21 @@ public partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, 
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out BusinessIdentifierCode result)
     {
         result = default;
-
-        var buffer = s.Buffer().Unify();
-
-        if (buffer.IsEmpty())
+        var str = s.Unify();
+        if (str.IsEmpty())
         {
             return true;
         }
-        else if (buffer.IsUnknown(formatProvider))
+        else if (str.IsUnknown(formatProvider))
         {
             result = Unknown;
             return true;
         }
-        else if (buffer.Matches(Pattern)
-            && Country.TryParse(buffer.Substring(4, 2), out var country)
+        else if (Pattern.IsMatch(str) 
+            && Country.TryParse(str.Substring(4, 2), out var country)
             && !country.IsEmptyOrUnknown())
         {
-            result = new BusinessIdentifierCode(buffer);
+            result = new BusinessIdentifierCode(str);
             return true;
         }
         else return false;

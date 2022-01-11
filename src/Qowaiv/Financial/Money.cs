@@ -557,10 +557,10 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     }
 
     [Pure]
-    private static bool CandidateCurrency(char ch, string numbers)
+    private static bool CandidateCurrency(char ch, string forbidden)
         => !char.IsDigit(ch)
         && !char.IsWhiteSpace(ch)
-        && numbers.Contains(ch);
+        && !forbidden.Contains(ch);
 
     /// <summary >Creates Money from a Decimal. </summary >
     /// <param name="val" >

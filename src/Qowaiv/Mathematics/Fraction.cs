@@ -627,7 +627,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     /// </returns>
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Fraction result)
     {
-        if (s is { Length: > 0 } && FractionParser.Parse(s, formatProvider?.GetFormat<NumberFormatInfo>() ?? CultureInfo.InvariantCulture.NumberFormat) is { } fraction)
+        if (s is { Length: > 0 } && FractionParser.Parse(s, formatProvider) is { } fraction)
         {
             result = fraction;
             return true;

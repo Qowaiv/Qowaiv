@@ -21,136 +21,89 @@ internal static class FractionParser
     /// integer     => long.Parse()
     /// </remarks>
     [Pure]
-    public static Fraction? Parse(string s, NumberFormatInfo formatInfo)
-        => External(s, formatInfo) 
-        ?? Complex(s.Buffer(), formatInfo);
+    public static Fraction? Parse(string s, IFormatProvider? provider)
+        => External(s, provider) ?? Complex(s.CharSpan(), provider);
 
-    [Impure]
-    private static Fraction? Complex(this CharBuffer buffer, NumberFormatInfo numberInfo)
-    {
-        var s = buffer.Sign(numberInfo);
-        
-        // double signs.
-        if (s.HasValue && buffer.Sign(numberInfo) is { }) return null;
-        
-        var sign = s ?? 1;
-        if (buffer.Fraction(numberInfo) is { } fractional)
-        {
-            if (buffer.IsEmpty())
-            {
-                return fractional * sign;
-            }
-            else if (buffer.Separator(numberInfo).Integer(numberInfo, out var integer)
-                && Calculate(sign, integer, fractional.Numerator, fractional.Denominator, out var numerator))
-            {
-                return numerator.DividedBy(fractional.Denominator);
-            }
-            else return null;
-        }
-        else return null;
-    }
-
-    [Impure]
-    private static Fraction? Fraction(this CharBuffer buffer, NumberFormatInfo numberInfo)
-        => buffer.Vulgar()
-        ?? buffer.Regular(numberInfo);
-
-    [Impure]
-    private static Fraction? Vulgar(this CharBuffer buffer)
-    {
-        if (Vulgars.TryGetValue(buffer.Last(), out var vulgar))
-        {
-            buffer.RemoveFromEnd(1);
-            return vulgar;
-        }
-        else return null;
-    }
-
-    [Impure]
-    private static Fraction? Regular(this CharBuffer buffer, NumberFormatInfo numberInfo)
-        => buffer.Denominator(numberInfo, out var denominator)
-        && buffer.Bar()
-        && buffer.Numerator(numberInfo, out var numerator)
-        ? numerator.DividedBy(denominator)
+    [Pure]
+    private static Fraction? Complex(CharSpan span, IFormatProvider? provider)
+#pragma warning disable S1067 // Expressions should not be too complex
+        => Fractional(span, provider, out var fraction) is { } fractional
+        && Integer(fractional.TrimRight(), provider, out var integer) is var number
+        && Sign(number ?? fractional, provider, out var sign)
+        && Calculate(sign, integer, fraction.Numerator, fraction.Denominator, out var numerator)
+        ? numerator.DividedBy(fraction.Denominator)
         : null;
+#pragma warning restore S1067 // Expressions should not be too complex
 
-    private static bool Numerator(this CharBuffer buffer, NumberFormatInfo numberInfo, out long numerator)
-        => buffer.Integer(Mathematics.Fraction.Formatting.SuperScript, numberInfo, out numerator);
+    private static CharSpan? Fractional(CharSpan span, IFormatProvider? provider, out Fraction fraction)
+        => Vulgar(span, out fraction) ?? Regular(span, provider, out fraction);
 
-    private static bool Denominator(this CharBuffer buffer, NumberFormatInfo numberInfo, out long denominator)
-        => buffer.Integer(Mathematics.Fraction.Formatting.SubScript, numberInfo, out denominator);
-
-    private static bool Integer(this CharBuffer buffer, string lookup, NumberFormatInfo numberInfo, out long number)
+    private static CharSpan? Vulgar(CharSpan span, out Fraction fraction)
     {
-        long factor = 1;
-        number = 0;
-        while (buffer.NotEmpty()
-            && buffer.Last() is var ch
-            && lookup.IndexOf(ch) is var index 
-            && index != CharBuffer.NotFound)
+        var next = span.Last(out var ch);
+        return Vulgars.TryGetValue(ch, out fraction)
+            ? next : null;
+    }
+    
+    private static CharSpan? Regular(CharSpan span, IFormatProvider? provider, out Fraction fraction)
+    {
+        fraction = default;
+        if (Denominator(span, provider, out var denominator) is { } first
+            && Bar(first) is { } bar
+            && Numerator(bar, provider, out var numerator) is { } next)
         {
-            buffer.RemoveFromEnd(1);
-            number += index * factor;
-            factor *= 10;
+            fraction = numerator.DividedBy(denominator);
+            return next;
         }
-        return factor > 1 || buffer.Integer(numberInfo, out number);
+        else return null;
+    }
+    
+    private static CharSpan? Denominator(CharSpan span, IFormatProvider? provider, out long denominator)
+    {
+        var next = Integer(span, provider, out denominator) 
+            ?? Integer(span, Fraction.Formatting.SubScript, out denominator);
+        return denominator > 0 ? next : null;
+    }
+    
+    private static CharSpan? Numerator(CharSpan span, IFormatProvider? provider, out long numerator)
+        => Integer(span, provider, out numerator)
+        ?? Integer(span, Fraction.Formatting.SuperScript, out numerator);
+
+    [Pure]
+    private static CharSpan? Bar(CharSpan span)
+    {
+        var next = span.Last(out char ch);
+        return Fraction.Formatting.IsFractionBar(ch) ? next : null;
     }
 
-    private static bool Integer(this CharBuffer buffer, NumberFormatInfo numberInfo, out long integer)
+    private static CharSpan? Integer(CharSpan span, string digits, out long integer)
     {
-        integer = default;
-        var index = buffer.Length;
-        var exit = Mathematics.Fraction.Formatting.FractionBars 
-            + numberInfo.PositiveSign 
-            + numberInfo.Separator();
-
-        while (index > 0 && exit.IndexOf(buffer[index - 1]) == CharBuffer.NotFound)
+        var next = span.TrimRight(ch => digits.Contains(ch), out var trimmed);
+        integer = 0;
+        foreach(var ch in trimmed)
         {
-            index--;
+            integer *= 10;
+            integer += digits.IndexOf(ch);
         }
-        if (index < buffer.Length && long.TryParse(buffer.Substring(index), IntegerStyle, numberInfo, out integer))
-        {
-            buffer.RemoveFromEnd(buffer.Length - index);
-            return true;
-        }
-        else return false;
+        return trimmed.NotEmpty() ? next : null;
     }
 
-    [Impure]
-    private static bool Bar(this CharBuffer buffer)
+    private static CharSpan? Integer(CharSpan span, IFormatProvider? provider, out long integer)
     {
-        if (buffer.NotEmpty() && Mathematics.Fraction.Formatting.IsFractionBar(buffer.Last()))
-        {
-            buffer.RemoveFromEnd(1);
-            return true;
-        }
-        else return false;
-    }
+        var exit = Fraction.Formatting.FractionBars
+            + provider.PositiveSign()
+            + provider.NegativeSign()
+            + provider.Separator();
 
-    [Impure]
-    private static CharBuffer Separator(this CharBuffer buffer, NumberFormatInfo numberInfo)
-    {
-        if (buffer.Last() == numberInfo.Separator())
-        {
-            buffer.RemoveFromEnd(1);
-        }
-        return buffer;
+        var next = span.TrimRight(ch => !exit.Contains(ch), out var trimmed);
+        return long.TryParse(trimmed.ToString(), IntegerStyle, provider, out integer)
+            ? next : null;
     }
-      
-    [Impure]
-    private static int? Sign(this CharBuffer buffer, NumberFormatInfo formatInfo)
+    
+    public static bool Sign(CharSpan span, IFormatProvider? provider, out int sign)
     {
-        if (buffer.StartsWith(formatInfo.NegativeSign))
-        {
-            buffer.RemoveFromStart(formatInfo.NegativeSign.Length);
-            return -1;
-        }
-        else if (buffer.StartsWith(formatInfo.PositiveSign))
-        {
-            buffer.RemoveFromStart(formatInfo.PositiveSign.Length);
-            return +1;
-        }
-        else return null; 
+        sign = span.Equals(provider.NegativeSign()) ? -1 : +1;
+        return sign == -1 || span.IsEmpty() || span.Equals(provider.PositiveSign());
     }
 
     private static bool Calculate(int sign, long integer, long numerator, long denominator, out long result)
@@ -169,28 +122,32 @@ internal static class FractionParser
  
     /// <summary>Parse the fraction, using <see cref="long.Parse(string)"/>, <see cref="decimal.Parse(string)"/>, and <see cref="Percentage.Parse(string)"/>.</summary>
     [Pure]
-    private static Fraction? External(string s, IFormatProvider formatInfo)
+    private static Fraction? External(string s, IFormatProvider? formatInfo)
     {
         if (long.TryParse(s, IntegerStyle, formatInfo, out var lng) && ValidLong(lng))
         {
-            return Mathematics.Fraction.Create(lng);
+            return Fraction.Create(lng);
         }
         else if (decimal.TryParse(s, DecimalStyle, formatInfo, out var dec) && ValidDec(dec))
         {
-            return Mathematics.Fraction.Create(dec);
+            return Fraction.Create(dec);
         }
         else if (PotentialPercentage(s) && Percentage.TryParse(s, formatInfo, out var percentage) && ValidDec((decimal)percentage))
         {
-            return Mathematics.Fraction.Create((decimal)percentage);
+            return Fraction.Create((decimal)percentage);
         }
         else return null;
 
         static bool ValidLong(long number) => number != long.MinValue;
-        static bool ValidDec(decimal number) => number >= Mathematics.Fraction.MinValue.Numerator && number <= Mathematics.Fraction.MaxValue.Numerator;
+        static bool ValidDec(decimal number) => number >= Fraction.MinValue.Numerator && number <= Fraction.MaxValue.Numerator;
     }
 
     [Pure]
-    private static char Separator(this NumberFormatInfo numberInfo) => numberInfo.NumberGroupSeparator == " " ? '+' : ' ';
+    private static char Separator(this IFormatProvider? provider)
+    {
+        var seperator = provider?.GetFormat<NumberFormatInfo>()?.NumberGroupSeparator ?? ".";
+        return seperator == " " ? '+' : ' ';
+    }
 
     /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
     [Pure]
@@ -198,6 +155,7 @@ internal static class FractionParser
 
     private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
     private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;
+    
     private static readonly Dictionary<char, Fraction> Vulgars = new()
     {
         { '½', 1.DividedBy(2) },
@@ -226,6 +184,6 @@ internal static class FractionParser
         { '⅑', 1.DividedBy(9) },
         { '⅒', 1.DividedBy(10) },
 
-        { '↉', Mathematics.Fraction.Zero },
+        { '↉', Fraction.Zero },
     };
 }

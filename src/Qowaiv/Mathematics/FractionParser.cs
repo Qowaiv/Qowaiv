@@ -151,7 +151,7 @@ internal static class FractionParser
 
     /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
     [Pure]
-    private static bool PotentialPercentage(string str) => str.Any(ch => "%‰‱".IndexOf(ch) != CharBuffer.NotFound);
+    private static bool PotentialPercentage(string str) => str.Any(ch => "%‰‱".Contains(ch));
 
     private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
     private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;

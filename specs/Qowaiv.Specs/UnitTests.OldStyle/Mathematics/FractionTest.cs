@@ -281,7 +281,7 @@ namespace Qowaiv.UnitTests.Mathematics
         [Test]
         public void Equals_FormattedAndUnformatted_IsTrue()
         {
-            var l = Fraction.Parse("+71,234/-71,234", CultureInfo.InvariantCulture);
+            var l = Fraction.Parse("-71,234/71,234", CultureInfo.InvariantCulture);
             var r = Fraction.Parse("-1", CultureInfo.InvariantCulture);
             Assert.IsTrue(l.Equals(r));
         }

@@ -45,7 +45,6 @@ public class Can_be_parsed
     [TestCase(11, 43, "11/43")]
     [TestCase(4, 3, "1 1/3")]
     [TestCase(21, 2, "10 1/2")]
-    [TestCase(3, 7, "-3/-7")]
     public void from_fraction_strings(long numerator, long denominator, string str)
         => Fraction.Parse(str, CultureInfo.InvariantCulture).Should().Be(numerator.DividedBy(denominator));
 
@@ -76,6 +75,10 @@ public class Can_not_be_parsed
 
     [TestCase("3/+7")]
     public void plus_sign_denominator(string denominator) => Fraction.TryParse(denominator).Should().BeNull();
+
+    [TestCase("3/0")]
+    [TestCase("²/₀")]
+    public void zero_denominator(string divideByZero) => Fraction.TryParse(divideByZero).Should().BeNull();
 }
 
 public class Can_be_created

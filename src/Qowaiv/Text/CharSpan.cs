@@ -1,7 +1,7 @@
 ﻿namespace Qowaiv.Text
 {
 
-    internal readonly struct CharSpan : IEquatable<CharSpan>
+    internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IEnumerable<char>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string m_Value;
@@ -35,7 +35,11 @@
         public char First() => m_Value[Start];
 
         [Pure]
-        public char Last() => m_Value[End - 1];
+        public CharSpan Last(out char ch)
+        {
+            ch = m_Value[End - 1];
+            return  new(m_Value, Start, End - 1);
+        }
 
         [Pure]
         public CharSpan TrimLeft() => TrimLeft(char.IsWhiteSpace, out _);
@@ -96,6 +100,15 @@
         }
 
         [Pure]
+        public bool Equals(string? other) => Equals(other.CharSpan());
+
+        [Pure]
         public override int GetHashCode() => Hash.Code(ToString());
+
+        [Pure]
+        public IEnumerator<char> GetEnumerator() => m_Value.Skip(Start).Take(Length).GetEnumerator();
+        
+        [Pure]
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -28,10 +28,10 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
     public static readonly Percentage Hundred = 100.Percent();
 
     /// <summary>Gets the minimum value of a percentage.</summary>
-    public static readonly Percentage MinValue = new(decimal.MinValue);
+    public static readonly Percentage MinValue = new(decimal.MinValue / 10_000);
 
     /// <summary>Gets the maximum value of a percentage.</summary>
-    public static readonly Percentage MaxValue = new(decimal.MaxValue);
+    public static readonly Percentage MaxValue = new(decimal.MaxValue / 10_000);
 
     #region Percentage manipulation
 
@@ -656,7 +656,7 @@ public partial struct Percentage : ISerializable, IXmlSerializable, IFormattable
     {
         result = Zero;
 
-        if (s is { Length: > 0} 
+        if (s is { Length: > 0 }
             && FormatInfo.TryParse(s, formatProvider, out var info)
             && decimal.TryParse(info.Format, NumberStyles.Number, info.Provider, out var dec))
         {

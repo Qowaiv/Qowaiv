@@ -310,6 +310,18 @@ public class Has_custom_formatting
             Assert.AreEqual("1751‱", Svo.Percentage.ToString("PT"));
         }
     }
+
+    [TestCase("0.##%", "792281625142643375935439503.35%")]
+    [TestCase("0.#‰", "7922816251426433759354395033.5‰")]
+    [TestCase("0‱", "79228162514264337593543950335‱")]
+    public void for_max_value(string format, string formatted)
+        => Percentage.MaxValue.ToString(format, CultureInfo.InvariantCulture).Should().Be(formatted);
+
+    [TestCase("0.##%", "-792281625142643375935439503.35%")]
+    [TestCase("0.#‰", "-7922816251426433759354395033.5‰")]
+    [TestCase("0‱", "-79228162514264337593543950335‱")]
+    public void for_min_value(string format, string formatted)
+        => Percentage.MinValue.ToString(format, CultureInfo.InvariantCulture).Should().Be(formatted);
 }
 
 public class Formatting_is_invalid

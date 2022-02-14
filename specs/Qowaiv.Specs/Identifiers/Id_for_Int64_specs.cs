@@ -1,5 +1,20 @@
 ﻿namespace Identifiers.Id_for_Int64_specs;
 
+public class Supports_JSON_serialization
+{
+    [TestCase(0, null)]
+    [TestCase(123456789L, "123456789")]
+    public void convention_based_deserialization(Int64Id svo, object json)
+        => JsonTester.Read<Int64Id>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase(null, 0)]
+    [TestCase("123456789", 123456789L)]
+    [TestCase("123456789", "123456789")]
+    public void convention_based_serialization(object json, Int64Id svo)
+        => JsonTester.Write(svo).Should().Be(json);
+}
+
 public class Supports_type_conversion
 {
     [Test]

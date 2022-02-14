@@ -49,7 +49,7 @@ public class Int64IdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override object? ToJson(object? obj) => Id(obj);
+    public override object? ToJson(object? obj)=> Id(obj).ToString();
 
     /// <inheritdoc/>
     public override bool TryParse(string? str, out object? id)

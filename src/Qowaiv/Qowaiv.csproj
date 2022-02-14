@@ -5,8 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.0.0</Version>
+    <Version>6.0.1</Version>
     <PackageReleaseNotes>
+v6.0.1
+- Int64 based id serializes to a JSON string #236 
+- Percentage.MaxValue representable as a string #235
 v6.0.0
 - Added .NET 6.0 version to the package. #216
 - Sex as replacement Gender (ISO 5218). #214

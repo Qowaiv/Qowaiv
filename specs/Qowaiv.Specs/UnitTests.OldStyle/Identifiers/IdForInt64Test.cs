@@ -338,23 +338,6 @@ namespace Qowaiv.UnitTests.Identifiers
             Assert.Catch<FormatException>(() => JsonTester.Read<Id<ForInt64>>(json));
         }
 
-        [TestCase("123456789", "123456789")]
-        [TestCase("12345678", 12345678L)]
-        [TestCase("", "")]
-        [TestCase("", 0L)]
-        public void FromJson(Id<ForInt64> expected, object json)
-        {
-            var actual = JsonTester.Read<Id<ForInt64>>(json);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void ToJson_TestStruct_LongValue()
-        {
-            var json = TestStruct.ToJson();
-            Assert.AreEqual(123456789L, json);
-        }
-
         [Test]
         public void ToString_Empty_StringEmpty()
         {

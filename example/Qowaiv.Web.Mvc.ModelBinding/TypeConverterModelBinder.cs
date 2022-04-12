@@ -17,7 +17,7 @@ namespace Qowaiv.Web.Mvc.ModelBinding;
 public class TypeConverterModelBinder : DefaultModelBinder
 {
     /// <summary>A Dictionary that keeps track of the registered type converters.</summary>
-    private static readonly ConcurrentDictionary<Type, TypeConverter> TypeConverters = new ConcurrentDictionary<Type, TypeConverter>();
+    private static readonly ConcurrentDictionary<Type, TypeConverter> TypeConverters = new();
 
     /// <summary>Static constructor.</summary>
     /// <remarks>

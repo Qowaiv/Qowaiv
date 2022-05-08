@@ -19,6 +19,7 @@ namespace Qowaiv.Financial;
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769.", type: "string", format: "iban", nullable: true)]
+[OpenApi.OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769.", type: "string", format: "iban", nullable: true)]
 [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
 public partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 {

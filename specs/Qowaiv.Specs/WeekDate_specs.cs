@@ -65,3 +65,16 @@ public class Supports_type_conversion
     public void to_LocalDateTime()
         => Converting.To<LocalDateTime>().From(Svo.WeekDate).Should().Be(new LocalDateTime(2017, 06, 11));
 }
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(WeekDate))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(WeekDate),
+           description: "Full-date notation as defined by ISO 8601.",
+           example: "1997-W14-6",
+           type: "string",
+           format: "date-weekbased"));
+}

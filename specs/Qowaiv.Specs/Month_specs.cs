@@ -567,7 +567,20 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Month))
+        .Should().BeEquivalentTo(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(Month),
+            description: "Month(-only) notation.",
+            type: "string",
+            example: "Jun",
+            format: "month",
+            @enum: new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?" },
+            nullable: true));
+
     internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Month)).FirstOrDefault();
+    
     [Test]
     public void with_description()
     {

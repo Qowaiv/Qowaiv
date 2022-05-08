@@ -95,3 +95,17 @@ public class Supports_type_conversion
     public void to_int()
         => Converting.To<int>().From(Svo.MonthSpan).Should().Be(69);
 }
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(MonthSpan))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(MonthSpan),
+           description: "Month span, specified in years and months.",
+           example: "1Y+10M",
+           type: "string",
+           format: "month-span",
+           pattern: @"[+-]?[0-9]+Y[+-][0-9]+M"));
+}

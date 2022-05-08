@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="Uuid"/>.</summary>
+[OpenApi.OpenApiDataType(description: "UUID based identifier", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 public class UuidBehavior : GuidBehavior
 {
     internal new static readonly UuidBehavior Instance = new();

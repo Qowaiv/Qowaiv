@@ -4,6 +4,7 @@
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
 [OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information.", example: "2017-06-10 15:00", type: "string", format: "local-date-time")]
+[OpenApi.OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information.", example: "2017-06-10 15:00", type: "string", format: "local-date-time")]
 [TypeConverter(typeof(LocalDateTimeTypeConverter))]
 public partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
 {

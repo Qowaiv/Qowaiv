@@ -44,3 +44,17 @@ public class Is_equal_by_value
         }
     }
 }
+
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Timestamp))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(Timestamp),
+            description: "SQL Server timestamp notation.",
+            example: "0x00000000000007D9",
+            type: "string",
+            format: "timestamp"));
+}

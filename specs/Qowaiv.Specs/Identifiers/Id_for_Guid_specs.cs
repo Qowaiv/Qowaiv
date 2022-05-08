@@ -60,3 +60,15 @@ public class Supports_type_conversion
         => Converting.To<Uuid>().From(Svo.CustomGuid).Should().Be(Svo.Uuid);
 }
 
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(ForGuid))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(CustomGuid),
+            description: "GUID based identifier",
+            example: "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
+            type: "string",
+            format: "guid"));
+}

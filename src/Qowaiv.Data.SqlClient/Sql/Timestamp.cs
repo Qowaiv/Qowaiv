@@ -4,6 +4,7 @@
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
 [OpenApiDataType(description: "SQL Server timestamp notation.", example: "0x00000000000007D9", type: "string", format: "timestamp")]
+[OpenApi.OpenApiDataType(description: "SQL Server timestamp notation.", example: "0x00000000000007D9", type: "string", format: "timestamp")]
 [TypeConverter(typeof(Conversion.Sql.TimestampTypeConverter))]
 public partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
 {

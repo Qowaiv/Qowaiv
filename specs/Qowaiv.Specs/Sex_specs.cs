@@ -474,7 +474,20 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Sex))
+       .Should().BeEquivalentTo(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(Sex),
+           description: "Sex as specified by ISO/IEC 5218.",
+           type: "string",
+           example: "female",
+           format: "sex",
+           @enum: new[] { "NotKnown", "Male", "Female", "NotApplicable" },
+           nullable: true));
+
     internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Sex)).FirstOrDefault();
+    
     [Test]
     public void with_description()
     {

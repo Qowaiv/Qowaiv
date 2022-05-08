@@ -507,6 +507,17 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(PostalCode))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(PostalCode),
+            description: "Postal code notation.",
+            type: "string",
+            example: "2624DP",
+            format: "postal-code",
+            nullable: true));
+
     internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(PostalCode)).FirstOrDefault();
 
     [Test]

@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="string"/>.</summary>
+[OpenApi.OpenApiDataType(description: "String based identifier", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "identifier", nullable: true)]
 public class StringIdBehavior : IdentifierBehavior
 {
     /// <summary>Creates a new instance of the <see cref="StringIdBehavior"/> class.</summary>

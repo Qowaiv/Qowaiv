@@ -622,6 +622,17 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Uuid))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(Uuid),
+           description: "Universally unique identifier, Base64 encoded.",
+           example: "lmZO_haEOTCwGsCcbIZFFg",
+           type: "string",
+           format: "uuid-base64",
+           nullable: true));
+
     internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Uuid)).FirstOrDefault();
 
     [Test]

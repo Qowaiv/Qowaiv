@@ -1210,6 +1210,17 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
+    [Test]
+    public void with_info()
+         => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage))
+         .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+             dataType: typeof(Percentage),
+             description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.",
+             type: "string",
+             example: "13.76%",
+             format: "percentage",
+             pattern: @"-?[0-9]+(\.[0-9]+)?%"));
+
     internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Percentage)).FirstOrDefault();
 
     [Test]

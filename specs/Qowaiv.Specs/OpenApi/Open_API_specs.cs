@@ -36,6 +36,16 @@ public class Open_API_data_type
             example: "custom example",
             format: "custom-uuid"));
 
+    [Test]
+        public void has_custom_debug_display()
+            => new OpenApiDataType(
+            dataType: typeof(Date),
+            description: "Custom description",
+            type: "string",
+            example: "custom example",
+            format: "custom-uuid",
+            pattern: "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+        .Should().HaveDebuggerDisplay("{ type: string, desc: Custom description, example: custom example, format: custom-uuid, pattern: [0-9]{4}-[0-9]{2}-[0-9]{2} }");
 
     [OpenApiDataType(description: "Custom description", example: "custom example", type: "string", format: "custom-uuid")]
     internal sealed class DecoratedId : UuidBehavior { }

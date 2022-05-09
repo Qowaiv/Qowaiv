@@ -47,30 +47,4 @@ public sealed class OpenApiDataTypeAttribute : Attribute
 
     /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
     public string[]? Enum { get; }
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay
-    {
-        get
-        {
-            var sb = new StringBuilder();
-            sb.Append($@"{{ type: {Type}, desc: {Description}, example: {Example}");
-
-            if (!string.IsNullOrEmpty(Format))
-            {
-                sb.Append($@", format: {Format}");
-            }
-            if (!string.IsNullOrEmpty(Pattern))
-            {
-                sb.Append($@", pattern: {Pattern}");
-            }
-            if (Nullable)
-            {
-                sb.Append($", nullable: true");
-            }
-            sb.Append(" }");
-
-            return sb.ToString();
-        }
-    }
 }

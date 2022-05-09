@@ -91,36 +91,18 @@ public sealed record OpenApiDataType
     /// The type to create an <see cref="OpenApiDataType" /> for.
     /// </param>
     [Pure]
-    public static OpenApiDataType? FromType(Type type)
-    {
-        Guard.NotNull(type, nameof(type));
-
-        if (type.GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr)
-        {
-            return new(
-                dataType: AsDataType(type),
-                description: attr.Description,
-                type: attr.Type,
-                example: attr.Example,
-                format: attr.Format,
-                nullable: attr.Nullable,
-                pattern: attr.Pattern,
-                @enum: attr.Enum);
-        }
-        else if (type.GetCustomAttributes<Json.OpenApiDataTypeAttribute>().FirstOrDefault() is { } obsolete)
-        {
-            return new(
-                dataType: AsDataType(type),
-                description: obsolete.Description,
-                type: obsolete.Type,
-                example: obsolete.Example,
-                format: obsolete.Format,
-                nullable: obsolete.Nullable,
-                pattern: obsolete.Pattern,
-                @enum: obsolete.Enum);
-        }
-        else return null;
-    }
+    public static OpenApiDataType? FromType(Type type) 
+        => Guard.NotNull(type, nameof(type)).GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr
+        ? new(
+            dataType: AsDataType(type),
+            description: attr.Description,
+            type: attr.Type,
+            example: attr.Example,
+            format: attr.Format,
+            nullable: attr.Nullable,
+            pattern: attr.Pattern,
+            @enum: attr.Enum)
+        : null;
 
     [Pure]
     private static Type AsDataType(Type type)

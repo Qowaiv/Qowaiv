@@ -23,7 +23,8 @@ public class Open_API_data_type
             description: "UUID based identifier",
             type: "string",
             example: "lmZO_haEOTCwGsCcbIZFFg",
-            format: "uuid-base64"));
+            format: "uuid-base64",
+            nullable: true));
 
     [Test]
     public void IIDentifierBehavior_is_resolved_as_Id_type()

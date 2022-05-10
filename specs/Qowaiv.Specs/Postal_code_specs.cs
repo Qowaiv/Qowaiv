@@ -517,34 +517,6 @@ public class Is_Open_API_data_type
             example: "2624DP",
             format: "postal-code",
             nullable: true));
-
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(PostalCode)).FirstOrDefault();
-
-    [Test]
-    public void with_description()
-    {
-        Assert.AreEqual(
-            "Postal code notation.",
-            Attribute.Description);
-    }
-
-    [Test]
-    public void has_type()
-    {
-        Assert.AreEqual("string", Attribute.Type);
-    }
-
-    [Test]
-    public void has_format()
-    {
-        Assert.AreEqual("postal-code", Attribute.Format);
-    }
-
-    [Test]
-    public void pattern_is_null()
-    {
-        Assert.IsNull(Attribute.Pattern);
-    }
 }
 
 public class Supports_binary_serialization

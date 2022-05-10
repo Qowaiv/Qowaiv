@@ -545,34 +545,6 @@ public class Is_Open_API_data_type
           type: "integer",
           format: "year",
           nullable: true));
-
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Year)).FirstOrDefault();
-
-    [Test]
-    public void with_description()
-    {
-        Assert.AreEqual(
-            "Year(-only) notation.",
-            Attribute.Description);
-    }
-
-    [Test]
-    public void has_type()
-    {
-        Assert.AreEqual("integer", Attribute.Type);
-    }
-
-    [Test]
-    public void has_format()
-    {
-        Assert.AreEqual("year", Attribute.Format);
-    }
-
-    [Test]
-    public void pattern_is_null()
-    {
-        Assert.IsNull(Attribute.Pattern);
-    }
 }
 
 public class Supports_binary_serialization

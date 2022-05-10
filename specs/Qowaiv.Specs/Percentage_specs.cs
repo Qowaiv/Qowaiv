@@ -1221,25 +1221,12 @@ public class Is_Open_API_data_type
              format: "percentage",
              pattern: @"-?[0-9]+(\.[0-9]+)?%"));
 
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Percentage)).FirstOrDefault();
-
-    [Test]
-    public void with_description() => Attribute.Description.Should().Be("Ratio expressed as a fraction of 100 denoted using the percent sign '%'.");
-
-    [Test]
-    public void with_example() => Attribute.Example.Should().Be("13.76%");
-
-    [Test]
-    public void has_type() => Attribute.Type.Should().Be("string");
-
-    [Test]
-    public void has_format() => Attribute.Format.Should().Be("percentage");
-
     [TestCase("17.51%")]
     [TestCase("-4.1%")]
     [TestCase("-0.1%")]
     [TestCase("31%")]
-    public void pattern_matches(string input) => Regex.IsMatch(input, Attribute.Pattern).Should().BeTrue();
+    public void pattern_matches(string input) 
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage)).Matches(input).Should().BeTrue();
 }
 
 public class Supports_binary_serialization

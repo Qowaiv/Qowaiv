@@ -485,38 +485,6 @@ public class Is_Open_API_data_type
            format: "sex",
            @enum: new[] { "NotKnown", "Male", "Female", "NotApplicable" },
            nullable: true));
-
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Sex)).FirstOrDefault();
-    
-    [Test]
-    public void with_description()
-    {
-        Assert.AreEqual("Sex as specified by ISO/IEC 5218.", Attribute.Description);
-    }
-
-    [Test]
-    public void has_type()
-    {
-        Assert.AreEqual("string", Attribute.Type);
-    }
-
-    [Test]
-    public void has_format()
-    {
-        Assert.AreEqual("sex", Attribute.Format);
-    }
-
-    [Test]
-    public void has_enum()
-    {
-        Assert.AreEqual(new[] { "NotKnown", "Male", "Female", "NotApplicable" }, Attribute.Enum);
-    }
-
-    [Test]
-    public void pattern_is_null()
-    {
-        Assert.IsNull(Attribute.Pattern);
-    }
 }
 
 public class Supports_binary_serialization

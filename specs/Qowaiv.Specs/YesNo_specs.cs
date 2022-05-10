@@ -556,34 +556,6 @@ public class Is_Open_API_data_type
             format: "yes-no",
             @enum: new[] { "yes", "no", "?" },
             nullable: true));
-
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(YesNo)).FirstOrDefault();
-
-    [Test]
-    public void with_description()
-    {
-        Assert.AreEqual(
-            "Yes-No notation.",
-            Attribute.Description);
-    }
-
-    [Test]
-    public void has_type()
-    {
-        Assert.AreEqual("string", Attribute.Type);
-    }
-
-    [Test]
-    public void has_format()
-    {
-        Assert.AreEqual("yes-no", Attribute.Format);
-    }
-
-    [Test]
-    public void pattern_is_null()
-    {
-        Assert.IsNull(Attribute.Pattern);
-    }
 }
 
 public class Supports_binary_serialization

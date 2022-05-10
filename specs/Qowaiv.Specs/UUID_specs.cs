@@ -632,23 +632,6 @@ public class Is_Open_API_data_type
            type: "string",
            format: "uuid-base64",
            nullable: true));
-
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Uuid)).FirstOrDefault();
-
-    [Test]
-    public void with_description() => Attribute.Description.Should().Be("Universally unique identifier, Base64 encoded.");
-
-    [Test]
-    public void with_example() => Attribute.Example.Should().Be("lmZO_haEOTCwGsCcbIZFFg");
-
-    [Test]
-    public void has_type() => Attribute.Type.Should().Be("string");
-
-    [Test]
-    public void has_format() => Attribute.Format.Should().Be("uuid-base64");
-
-    [Test]
-    public void pattern_is_null() => Attribute.Pattern.Should().BeNull();
 }
 
 public class Supports_binary_serialization

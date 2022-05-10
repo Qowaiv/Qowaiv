@@ -877,9 +877,9 @@ and if the data type is nullable, all when applicable.
 }
 ```
   
-#### OpenApi using Swagger 
-When using [Swagger](https://swagger.io/resources/open-api/) to implement
-OpenApi this could be done like below:
+#### Open API using Swagger 
+When using [Swagger](https://swagger.io/resources/open-api/) to communicate
+an Open API definition, this could be done like below:
 ``` C#
 /// <summary>Extensions on <see cref="SwaggerGenOptions"/>.</summary>
 public static class SwaggerGenOptionsSvoExtensions

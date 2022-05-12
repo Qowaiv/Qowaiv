@@ -833,7 +833,7 @@ and if the data type is nullable, all when applicable.
   },
   "Identifiers.StringIdBehavior": {
     "description": "String based identifier",
-    "example": "lmZO_haEOTCwGsCcbIZFFg",
+    "example": "Order-UK-2022-215",
     "type": "string",
     "format": "identifier",
     "nullabe": true

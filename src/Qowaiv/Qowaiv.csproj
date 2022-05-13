@@ -5,8 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.0.1</Version>
+    <Version>6.0.2</Version>
     <PackageReleaseNotes>
+v6.0.2
+- Extend Open API support for ID&lt;T&gt;. #239
 v6.0.1
 - Int64 based id serializes to a JSON string #236 
 - Percentage.MaxValue representable as a string #235

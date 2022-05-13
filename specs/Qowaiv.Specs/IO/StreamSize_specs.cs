@@ -218,3 +218,16 @@ public class Supports_type_conversion
     public void to_long()
         => Converting.To<long>().From(Svo.StreamSize).Should().Be(123456789);
 }
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(StreamSize))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(StreamSize),
+            description: "Stream size notation (in byte).",
+            example: 1024,
+            type: "integer",
+            format: "stream-size"));
+}

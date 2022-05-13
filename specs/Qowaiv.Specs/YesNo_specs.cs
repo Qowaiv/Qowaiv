@@ -545,33 +545,17 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(YesNo)).FirstOrDefault();
-
     [Test]
-    public void with_description()
-    {
-        Assert.AreEqual(
-            "Yes-No notation.",
-            Attribute.Description);
-    }
-
-    [Test]
-    public void has_type()
-    {
-        Assert.AreEqual("string", Attribute.Type);
-    }
-
-    [Test]
-    public void has_format()
-    {
-        Assert.AreEqual("yes-no", Attribute.Format);
-    }
-
-    [Test]
-    public void pattern_is_null()
-    {
-        Assert.IsNull(Attribute.Pattern);
-    }
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(YesNo))
+        .Should().BeEquivalentTo(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(YesNo),
+            description: "Yes-No notation.",
+            example: "yes",
+            type: "string",
+            format: "yes-no",
+            @enum: new[] { "yes", "no", "?" },
+            nullable: true));
 }
 
 public class Supports_binary_serialization

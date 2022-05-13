@@ -8,7 +8,7 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-6.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-6.0.2-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
 |![v](https://img.shields.io/badge/version-6.0.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-6.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
@@ -685,14 +685,6 @@ and if the data type is nullable, all when applicable.
     "format": "email-collection",
     "nullabe": true
   },
-  "Gender": {
-    "description": "Gender as specified by ISO/IEC 5218.",
-    "example": "female",
-    "type": "string",
-    "format": "gender",
-    "nullabe": true,
-    "enum": ["NotKnown", "Male", "Female", "NotApplicable"]
-  },
   "HouseNumber": {
     "description": "House number notation.",
     "example": "13",
@@ -737,6 +729,14 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "postal-code",
     "nullabe": true
+  },
+  "Sex": {
+    "description": "Sex as specified by ISO/IEC 5218.",
+    "example": "female",
+    "type": "string",
+    "format": "sex",
+    "nullabe": true,
+    "enum": ["NotKnown", "Male", "Female", "NotApplicable"]
   },
   "Uuid": {
     "description": "Universally unique identifier, Base64 encoded.",
@@ -810,15 +810,44 @@ and if the data type is nullable, all when applicable.
     "format": "country",
     "nullabe": true
   },
-  "Identifiers.Id<TIdentifier>": {
-    "description": "identifier",
+  "Identifiers.GuidBehavior": {
+    "description": "GUID based identifier",
     "example": "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
-    "type": "any",
-    "nullabe": false
+    "type": "string",
+    "format": "guid",
+    "nullabe": true
+  },
+  "Identifiers.Int32IdBehavior": {
+    "description": "Int32 based identifier",
+    "example": 17,
+    "type": "integer",
+    "format": "identifier",
+    "nullabe": true
+  },
+  "Identifiers.Int64IdBehavior": {
+    "description": "Int64 based identifier",
+    "example": 17,
+    "type": "integer",
+    "format": "identifier",
+    "nullabe": true
+  },
+  "Identifiers.StringIdBehavior": {
+    "description": "String based identifier",
+    "example": "Order-UK-2022-215",
+    "type": "string",
+    "format": "identifier",
+    "nullabe": true
+  },
+  "Identifiers.UuidBehavior": {
+    "description": "UUID based identifier",
+    "example": "lmZO_haEOTCwGsCcbIZFFg",
+    "type": "string",
+    "format": "uuid-base64",
+    "nullabe": true
   },
   "IO.StreamSize": {
     "description": "Stream size notation (in byte).",
-    "example": 1024",
+    "example": 1024,
     "type": "integer",
     "format": "stream-size",
     "nullabe": false
@@ -833,7 +862,7 @@ and if the data type is nullable, all when applicable.
   },
   "Statistics.Elo": {
     "description": "Elo rating system notation.",
-    "example": 1600,
+    "example": 1600.0,
     "type": "number",
     "format": "elo",
     "nullabe": false
@@ -848,9 +877,9 @@ and if the data type is nullable, all when applicable.
 }
 ```
   
-#### OpenApi using Swagger 
-When using [Swagger](https://swagger.io/resources/open-api/) to implement
-OpenApi this could be done like below:
+#### Open API using Swagger 
+When using [Swagger](https://swagger.io/resources/open-api/) to communicate
+an Open API definition, this could be done like below:
 ``` C#
 /// <summary>Extensions on <see cref="SwaggerGenOptions"/>.</summary>
 public static class SwaggerGenOptionsSvoExtensions
@@ -858,25 +887,26 @@ public static class SwaggerGenOptionsSvoExtensions
     /// <summary>Maps Qowaiv SVO's.</summary>
     public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
     {
-        var attributes = OpenApiDataTypeAttribute.From(typeof(Date).Assembly);
-        foreach (var attr in attributes)
+        var infos = OpenApiDataTypes.FromAssemblies(typeof(Date).Assembly);
+        foreach (var info in infos)
         {
-            options.MapType(attr.DataType, () => new OpenApiSchema
+            options.MapType(info.DataType, () => new OpenApiSchema
             {
-                Type = attr.Type,
-                Example = attr.Example(),
-                Format = attr.Format,
-                Pattern = attr.Pattern,
-                Nullable = attr.Nullable,
+                Type = info.Type,
+                Example = info.Example(),
+                Format = info.Format,
+                Pattern = info.Pattern,
+                Nullable = info.Nullable,
             });
         }
+        return options;
     }
 
-    private static IOpenApiAny Example(this OpenApiDataTypeAttribute attr)
-        => attr.Type switch
+    private static IOpenApiAny Example(this OpenApiDataType info)
+        => info.Example switch
         {
-            "integer" => new OpenApiInteger((int)attr.Example),
-            "number" => new OpenApiDouble((double)attr.Example),
+            int integer => new OpenApiInteger(integer),
+            double floating => new OpenApiDouble(floating),
             _ => new OpenApiString(attr.Example.ToString()),
         };
 }

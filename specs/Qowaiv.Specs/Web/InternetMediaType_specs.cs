@@ -42,3 +42,17 @@ public class Supports_type_conversion
         }
     }
 }
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(InternetMediaType))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(InternetMediaType),
+            description: "Media type notation as defined by RFC 6838.",
+            example: "text/html",
+            type: "string",
+            format: "internet-media-type",
+            nullable: true));
+}

@@ -474,36 +474,17 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Sex)).FirstOrDefault();
     [Test]
-    public void with_description()
-    {
-        Assert.AreEqual("Sex as specified by ISO/IEC 5218.", Attribute.Description);
-    }
-
-    [Test]
-    public void has_type()
-    {
-        Assert.AreEqual("string", Attribute.Type);
-    }
-
-    [Test]
-    public void has_format()
-    {
-        Assert.AreEqual("sex", Attribute.Format);
-    }
-
-    [Test]
-    public void has_enum()
-    {
-        Assert.AreEqual(new[] { "NotKnown", "Male", "Female", "NotApplicable" }, Attribute.Enum);
-    }
-
-    [Test]
-    public void pattern_is_null()
-    {
-        Assert.IsNull(Attribute.Pattern);
-    }
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Sex))
+       .Should().BeEquivalentTo(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(Sex),
+           description: "Sex as specified by ISO/IEC 5218.",
+           type: "string",
+           example: "female",
+           format: "sex",
+           @enum: new[] { "NotKnown", "Male", "Female", "NotApplicable" },
+           nullable: true));
 }
 
 public class Supports_binary_serialization

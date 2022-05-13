@@ -444,22 +444,16 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(EmailAddress)).FirstOrDefault();
-
     [Test]
-    public void with_description() => Attribute.Description.Should().Be("Email notation as defined by RFC 5322.");
-
-    [Test]
-    public void with_example() => Attribute.Example.Should().Be("svo@qowaiv.org");
-
-    [Test]
-    public void has_type() => Attribute.Type.Should().Be("string");
-
-    [Test]
-    public void has_format() => Attribute.Format.Should().Be("email");
-
-    [Test]
-    public void pattern_is_null() => Attribute.Pattern.Should().BeNull();
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(EmailAddress))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(EmailAddress),
+           description: "Email notation as defined by RFC 5322.",
+           type: "string",
+           example: "svo@qowaiv.org",
+           format: "email",
+           nullable: true));
 }
 
 public class Supports_binary_serialization

@@ -77,3 +77,17 @@ public class Supports_type_conversion
             .WithMessage("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt64> is not valid.");
     }
 }
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(ForInt64))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(Int64Id),
+            description: "Int64 based identifier",
+            example: 17,
+            type: "integer",
+            format: "identifier",
+            nullable: true));
+}

@@ -120,6 +120,19 @@ public class Supports_type_conversion
         => Converting.To<WeekDate>().From(Svo.Date).Should().Be(new WeekDate(2017, 23, 7));
 }
 
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Date))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(Date),
+           description: "Full-date notation as defined by RFC 3339, section 5.6.",
+           example: "2017-06-10",
+           type: "string",
+           format: "date"));
+}
+
 public class Casts_with_dotnet_6_0
 {
     [Test]

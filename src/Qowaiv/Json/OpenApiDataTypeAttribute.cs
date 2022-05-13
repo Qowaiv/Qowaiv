@@ -83,7 +83,9 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     }
 
     /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s specified in the assemblies.</summary>
+    [ExcludeFromCodeCoverage]
     [Pure]
+    [Obsolete("Use Qowaiv.OpenApi.OpenApiDataTypes.FromAssemblies() instead.")]
     public static IEnumerable<OpenApiDataTypeAttribute> From(params Assembly[] assemblies)
         => From(Guard.NotNull(assemblies, nameof(assemblies))
             .SelectMany(assembly => assembly.GetTypes()));
@@ -93,13 +95,16 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Pure]
+    [Obsolete("Use Qowaiv.OpenApi.OpenApiDataTypes.FromTypes() instead.")]
     public static IEnumerable<OpenApiDataTypeAttribute> From(params Type[] types)
         => From(types?.AsEnumerable() ?? Array.Empty<Type>());
 
     /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the
     /// specified types that are decorated as such.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Pure]
+    [Obsolete("Use Qowaiv.OpenApi.OpenApiDataTypes.FromTypes() instead.")]
     public static IEnumerable<OpenApiDataTypeAttribute> From(IEnumerable<Type> types)
         => Guard.NotNull(types, nameof(types))
         .Where(type => type is not null && type.GetCustomAttributes<OpenApiDataTypeAttribute>().Any())

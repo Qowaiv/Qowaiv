@@ -51,3 +51,16 @@ public class Supports_type_conversion
         => Converting.To<int>().From(Svo.Int32Id).Should().Be(17);
 }
 
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(ForInt32))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(Int32Id),
+            description: "Int32 based identifier",
+            example: 17,
+            type: "integer",
+            format: "identifier",
+            nullable: true));
+}

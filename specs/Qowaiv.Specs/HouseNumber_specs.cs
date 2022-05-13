@@ -95,3 +95,17 @@ public class Supports_type_conversion
     public void to_long()
         => Converting.To<long>().From(Svo.HouseNumber).Should().Be(123456789L);
 }
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(HouseNumber))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(HouseNumber),
+           description: "House number notation.",
+           example: "13",
+           type: "string",
+           format: "house-number",
+           nullable: true));
+}

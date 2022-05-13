@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="Guid"/>.</summary>
+[OpenApi.OpenApiDataType(description: "GUID based identifier", example: "8a1a8c42-d2ff-e254-e26e-b6abcbf19420", type: "string", format: "guid", nullable: true)]
 public class GuidBehavior : IdentifierBehavior
 {
     internal static readonly GuidBehavior Instance = new();

@@ -182,3 +182,17 @@ public class Supports_type_conversion
         }
     }
 }
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Fraction))
+        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+            dataType: typeof(Fraction),
+            description: "Faction",
+            type: "string",
+            format: "faction",
+            pattern: "-?[0-9]+(/[0-9]+)?",
+            example: "13/42"));
+}

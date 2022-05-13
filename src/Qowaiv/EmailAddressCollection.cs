@@ -6,6 +6,7 @@
 /// </remarks>
 [Serializable]
 [OpenApiDataType(description: "Comma separated list of email addresses defined by RFC 5322.", example: "info@qowaiv.org,test@test.com", type: "string", format: "email-collection", nullable: true)]
+[OpenApi.OpenApiDataType(description: "Comma separated list of email addresses defined by RFC 5322.", example: "info@qowaiv.org,test@test.com", type: "string", format: "email-collection", nullable: true)]
 public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSerializable, IFormattable
 {
     /// <summary>The email address separator is a comma.</summary>

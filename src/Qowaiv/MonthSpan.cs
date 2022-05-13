@@ -5,7 +5,8 @@
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, underlyingType: typeof(int))]
 [OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
-[TypeConverter(typeof(Conversion.MonthSpanTypeConverter))]
+[OpenApi.OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
+[TypeConverter(typeof(MonthSpanTypeConverter))]
 public partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
 {
     /// <summary>Represents a month span with a zero duration.</summary>

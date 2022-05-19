@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="100" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="101" xml:space="preserve">
+    <value>Switching Protocols</value>
+  </data>
+  <data name="102" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="103" xml:space="preserve">
+    <value>Early Hints</value>
+  </data>
+  <data name="200" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="201" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="202" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="203" xml:space="preserve">
+    <value>Non-Authoritative Information</value>
+  </data>
+  <data name="204" xml:space="preserve">
+    <value>No Content</value>
+  </data>
+  <data name="205" xml:space="preserve">
+    <value>Reset Content</value>
+  </data>
+  <data name="206" xml:space="preserve">
+    <value>Partial Content</value>
+  </data>
+  <data name="207" xml:space="preserve">
+    <value>Multi-Status</value>
+  </data>
+  <data name="208" xml:space="preserve">
+    <value>Already Reported</value>
+  </data>
+  <data name="226" xml:space="preserve">
+    <value>IM Used</value>
+  </data>
+  <data name="300" xml:space="preserve">
+    <value>Multiple Choices</value>
+  </data>
+  <data name="301" xml:space="preserve">
+    <value>Moved Permanently</value>
+  </data>
+  <data name="302" xml:space="preserve">
+    <value>Found</value>
+  </data>
+  <data name="303" xml:space="preserve">
+    <value>See Other</value>
+  </data>
+  <data name="304" xml:space="preserve">
+    <value>Not Modified</value>
+  </data>
+  <data name="305" xml:space="preserve">
+    <value>Use Proxy</value>
+  </data>
+  <data name="306" xml:space="preserve">
+    <value>Switch Proxy</value>
+  </data>
+  <data name="307" xml:space="preserve">
+    <value>Temporary Redirect</value>
+  </data>
+  <data name="308" xml:space="preserve">
+    <value>Permanent Redirect</value>
+  </data>
+  <data name="400" xml:space="preserve">
+    <value>Bad Request</value>
+  </data>
+  <data name="401" xml:space="preserve">
+    <value>Unauthorized</value>
+  </data>
+  <data name="402" xml:space="preserve">
+    <value>Payment Required</value>
+  </data>
+  <data name="403" xml:space="preserve">
+    <value>Forbidden</value>
+  </data>
+  <data name="404" xml:space="preserve">
+    <value>Not Found</value>
+  </data>
+  <data name="405" xml:space="preserve">
+    <value>Method Not Allowed</value>
+  </data>
+  <data name="406" xml:space="preserve">
+    <value>Not Acceptable</value>
+  </data>
+  <data name="407" xml:space="preserve">
+    <value>Proxy Authentication Required</value>
+  </data>
+  <data name="408" xml:space="preserve">
+    <value>Request Timeout</value>
+  </data>
+  <data name="409" xml:space="preserve">
+    <value>Conflict</value>
+  </data>
+  <data name="410" xml:space="preserve">
+    <value>Gone</value>
+  </data>
+  <data name="411" xml:space="preserve">
+    <value>Length Required</value>
+  </data>
+  <data name="412" xml:space="preserve">
+    <value>Precondition Failed</value>
+  </data>
+  <data name="413" xml:space="preserve">
+    <value>Payload Too Large</value>
+  </data>
+  <data name="414" xml:space="preserve">
+    <value>URI Too Long</value>
+  </data>
+  <data name="415" xml:space="preserve">
+    <value>Unsupported Media</value>
+  </data>
+  <data name="416" xml:space="preserve">
+    <value>Range Not Satisfiable</value>
+  </data>
+  <data name="417" xml:space="preserve">
+    <value>Expectation Failed</value>
+  </data>
+  <data name="418" xml:space="preserve">
+    <value>I'm a teapot</value>
+  </data>
+  <data name="421" xml:space="preserve">
+    <value>Misdirected Request</value>
+  </data>
+  <data name="422" xml:space="preserve">
+    <value>Unprocessable Entity</value>
+  </data>
+  <data name="423" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="424" xml:space="preserve">
+    <value>Failed Dependency</value>
+  </data>
+  <data name="425" xml:space="preserve">
+    <value>Too Early</value>
+  </data>
+  <data name="426" xml:space="preserve">
+    <value>Upgrade Required</value>
+  </data>
+  <data name="428" xml:space="preserve">
+    <value>Precondition Required</value>
+  </data>
+  <data name="429" xml:space="preserve">
+    <value>Too Many Requests</value>
+  </data>
+  <data name="431" xml:space="preserve">
+    <value>Request Header Fields Too Large</value>
+  </data>
+  <data name="451" xml:space="preserve">
+    <value>Unavailable For Legal Reasons</value>
+  </data>
+  <data name="500" xml:space="preserve">
+    <value>Internal Server Error</value>
+  </data>
+  <data name="501" xml:space="preserve">
+    <value>Not Implemented</value>
+  </data>
+  <data name="502" xml:space="preserve">
+    <value>Bad Gateway</value>
+  </data>
+  <data name="503" xml:space="preserve">
+    <value>Service Unavailable</value>
+  </data>
+  <data name="504" xml:space="preserve">
+    <value>Gateway Timeout</value>
+  </data>
+  <data name="505" xml:space="preserve">
+    <value>HTTP Version Not Supported</value>
+  </data>
+  <data name="506" xml:space="preserve">
+    <value>Variant Also Negotiates</value>
+  </data>
+  <data name="507" xml:space="preserve">
+    <value>Insufficient Storage</value>
+  </data>
+  <data name="508" xml:space="preserve">
+    <value>Loop Detected</value>
+  </data>
+  <data name="510" xml:space="preserve">
+    <value>Not Extended</value>
+  </data>
+  <data name="511" xml:space="preserve">
+    <value>Network Authentication Required</value>
+  </data>
+</root>

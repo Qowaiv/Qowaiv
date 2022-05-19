@@ -37,6 +37,9 @@ public static class Svo
     /// <summary>123.456.789</summary>
     public static readonly HouseNumber HouseNumber = 123456789L;
 
+    /// <summary>418 I'm a teapot</summary>
+    public static readonly HttpReponseStatus HttpResponseStatus = HttpReponseStatus.N418_Im_a_teapot;
+
     /// <summary>NL20 INGB 0001 2345 67</summary>
     public static readonly InternationalBankAccountNumber Iban = InternationalBankAccountNumber.Parse("NL20 INGB 0001 2345 67");
 

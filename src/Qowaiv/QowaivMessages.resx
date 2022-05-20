@@ -1,9 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <data name="ArgumentException_InvalidWildcardPattern" xml:space="preserve">
     <value>The wildcard pattern is invalid.</value>
   </data>
@@ -21,6 +29,9 @@
   </data>
   <data name="ArgumentOutOfRange_FractionError" xml:space="preserve">
     <value>The allowed error when converting a Decimal to a Fraction should be between Fraction.Epsilon and 1.</value>
+  </data>
+    <data name="ArgumentOutOfRange_HttpResponseCode" xml:space="preserve">
+    <value>HTTP response codes should be in the range 1xx to 5xx.</value>
   </data>
   <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
     <value>Percentages can only round to between -26 and 26 digits of precision.</value>

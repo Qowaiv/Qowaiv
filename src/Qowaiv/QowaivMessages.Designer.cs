@@ -19,7 +19,7 @@ namespace Qowaiv {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class QowaivMessages {
@@ -120,6 +120,15 @@ namespace Qowaiv {
         public static string ArgumentOutOfRange_FractionError {
             get {
                 return ResourceManager.GetString("ArgumentOutOfRange_FractionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTTP response codes should be in the range 1xx to 5xx..
+        /// </summary>
+        public static string ArgumentOutOfRange_HttpResponseCode {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_HttpResponseCode", resourceCulture);
             }
         }
         

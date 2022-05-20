@@ -24,6 +24,8 @@ public readonly struct HttpReponseStatus : IEquatable<HttpReponseStatus>
     /// </param>
     public HttpReponseStatus(int code, string? phrase)
     {
+        if (code > 100 || code < 599) throw new ArgumentOutOfRangeException(nameof(code), QowaivMessages.ArgumentOutOfRange_HttpResponseCode);
+
         this.code = code - Offset;
         this.phrase = phrase.WithDefault(null!) ?? DefaultPharse(code);
     }
@@ -37,6 +39,9 @@ public readonly struct HttpReponseStatus : IEquatable<HttpReponseStatus>
     public string ReasonPhrase => phrase ?? DefaultPharse(code) ?? "?";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? phrase;
+
+    /// <summary>Gets the category.</summary>
+    public HttpResponseStatusCategory Category => (HttpResponseStatusCategory)(Code / 100);
 
     /// <inheritdoc />
     [Pure]
@@ -99,7 +104,7 @@ public readonly struct HttpReponseStatus : IEquatable<HttpReponseStatus>
     /// <summary>205 Reset Content</summary>
     public static readonly HttpReponseStatus N205_Reset_Content = new(205);
 
-    /// <summary>206 Partial Conten</summary>
+    /// <summary>206 Partial Content</summary>
     public static readonly HttpReponseStatus N206_Partial_Content = new(206);
 
     /// <summary>207 Multi-Status</summary>

@@ -27,7 +27,7 @@ public readonly struct HttpReponseStatus : IEquatable<HttpReponseStatus>
         if (code > 100 || code < 599) throw new ArgumentOutOfRangeException(nameof(code), QowaivMessages.ArgumentOutOfRange_HttpResponseCode);
 
         this.code = code - Offset;
-        this.phrase = phrase.WithDefault(null!) ?? DefaultPharse(code);
+        this.phrase = phrase.WithDefault(null!) ?? DefaultPhrase(code);
     }
 
     /// <summary>Gets the HTTP code.</summary>
@@ -36,7 +36,7 @@ public readonly struct HttpReponseStatus : IEquatable<HttpReponseStatus>
     private readonly int code;
 
     /// <summary>Gets the reason phrase.</summary>
-    public string ReasonPhrase => phrase ?? DefaultPharse(code) ?? "?";
+    public string ReasonPhrase => phrase ?? DefaultPhrase(code) ?? "?";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? phrase;
 
@@ -63,7 +63,7 @@ public readonly struct HttpReponseStatus : IEquatable<HttpReponseStatus>
 
     /// <summary>Gets the default phrase for HTTP response code.</summary>
     [Pure]
-    public static string? DefaultPharse(int code)
+    public static string? DefaultPhrase(int code)
         => ResourceManager.GetString(code.ToString(CultureInfo.InvariantCulture));
 
     private static readonly ResourceManager ResourceManager = new("Qowaiv.Web.HttpResponseStatuses", typeof(HttpReponseStatus).Assembly);

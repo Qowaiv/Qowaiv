@@ -14,7 +14,7 @@ public class Constants
     }
 
     [TestCaseSource(nameof(Fields))]
-    public void name_reflacts_phrase(FieldInfo field)
+    public void name_reflects_phrase(FieldInfo field)
     {
         var status = (HttpReponseStatus)field.GetValue(null);
         var reflaction = status.ReasonPhrase

@@ -55,12 +55,12 @@ public partial struct Currency : IEquatable<Currency>
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
-    public static bool operator !=(Currency left, Currency right) => !(left == right);
+    public static bool operator ==(Currency left, Currency right) => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
-    public static bool operator ==(Currency left, Currency right) => left.Equals(right);
+    public static bool operator !=(Currency left, Currency right) => !(left == right);
 }
 
 public partial struct Currency : IComparable, IComparable<Currency>

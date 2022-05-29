@@ -28,12 +28,12 @@ public partial struct WeekDate : IEquatable<WeekDate>
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
-    public static bool operator !=(WeekDate left, WeekDate right) => !(left == right);
+    public static bool operator ==(WeekDate left, WeekDate right) => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
-    public static bool operator ==(WeekDate left, WeekDate right) => left.Equals(right);
+    public static bool operator !=(WeekDate left, WeekDate right) => !(left == right);
 }
 
 public partial struct WeekDate : IComparable, IComparable<WeekDate>

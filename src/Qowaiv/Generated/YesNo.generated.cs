@@ -55,12 +55,12 @@ public partial struct YesNo : IEquatable<YesNo>
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
-    public static bool operator !=(YesNo left, YesNo right) => !(left == right);
+    public static bool operator ==(YesNo left, YesNo right) => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand</param>
-    public static bool operator ==(YesNo left, YesNo right) => left.Equals(right);
+    public static bool operator !=(YesNo left, YesNo right) => !(left == right);
 }
 
 public partial struct YesNo : IComparable, IComparable<YesNo>

@@ -81,7 +81,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly long denominator;
 
-    /// <summary>Creates a new instance of the <see cref="Fraction"/> class.</summary>
+    /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
     /// <param name="numerator">
     /// The numerator part of the fraction.
     /// </param>
@@ -96,34 +96,45 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// Furthermore, the numerator and denominator are reduced (so 2/4
     /// becomes 1/2).
     /// </remarks>
-    public Fraction(long numerator, long denominator)
-    {
-        if (numerator == long.MinValue)
-        {
-            throw new ArgumentOutOfRangeException(nameof(numerator), QowaivMessages.OverflowException_Fraction);
-        }
-        if (denominator == 0 || denominator == long.MinValue)
-        {
-            throw new ArgumentOutOfRangeException(nameof(denominator), QowaivMessages.OverflowException_Fraction);
-        }
+    public Fraction(long numerator, long denominator) : this(numerator, denominator, true) { }
 
-        // In case of zero, is should represent the default case.
-        if (numerator == 0)
+    /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
+    private Fraction(long numerator, long denominator, bool guard)
+    {
+        if (guard)
         {
-            this.numerator = default;
-            this.denominator = default;
+            if (numerator == long.MinValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(numerator), QowaivMessages.OverflowException_Fraction);
+            }
+            if (denominator == 0 || denominator == long.MinValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(denominator), QowaivMessages.OverflowException_Fraction);
+            }
+
+            // In case of zero, is should represent the default case.
+            if (numerator == 0)
+            {
+                this.numerator = default;
+                this.denominator = default;
+            }
+            else
+            {
+                var negative = numerator < 0 ^ denominator < 0;
+                this.numerator = Math.Abs(numerator);
+                this.denominator = Math.Abs(denominator);
+                Reduce(ref this.numerator, ref this.denominator);
+
+                if (negative)
+                {
+                    this.numerator = -this.numerator;
+                }
+            }
         }
         else
         {
-            var negative = numerator < 0 ^ denominator < 0;
-            this.numerator = Math.Abs(numerator);
-            this.denominator = Math.Abs(denominator);
-            Reduce(ref this.numerator, ref this.denominator);
-
-            if (negative)
-            {
-                this.numerator = -this.numerator;
-            }
+            this.numerator = numerator;
+            this.denominator = denominator;
         }
     }
 
@@ -669,7 +680,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     private static Fraction New(long n, long d)
         => n == long.MinValue
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
-        : new(numerator: n, denominator: d);
+        : new(numerator: n, denominator: d, guard: false);
 
     /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
     private static void Reduce(ref long a, ref long b)

@@ -8,8 +8,8 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-6.0.2-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
-|![v](https://img.shields.io/badge/version-6.0.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
+|![v](https://img.shields.io/badge/version-6.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-6.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-6.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
 # Qowaiv
@@ -922,7 +922,8 @@ void IXmlSerializable.ReadXml(XmlReader reader)
 {
     var s = reader.ReadElementString();
     var val = Parse(s, CultureInfo.InvariantCulture);
-    m_Value = val.m_Value;
+    // This is a work-around to keep the structs read-only.
+    System.Runtime.CompilerServices.Unsafe.AsRef(this) = val;
 }
 
 void IXmlSerializable.WriteXml(XmlWriter writer)

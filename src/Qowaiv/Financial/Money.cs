@@ -567,7 +567,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// The amount.
     /// </param>
     [Pure]
-    public static Money Create(decimal val) => Create(val, Currency.Current);
+    public static Money Create(decimal val) => new(val, Currency.Current);
 
     /// <summary >Creates Money from a Decimal. </summary >
     /// <param name="val" >

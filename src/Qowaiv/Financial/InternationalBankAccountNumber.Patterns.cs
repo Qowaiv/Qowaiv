@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace Qowaiv.Financial;
 
-public partial struct InternationalBankAccountNumber
+public readonly partial struct InternationalBankAccountNumber
 {
     /// <summary>Gets the localized patterns.</summary>
     /// <remarks>

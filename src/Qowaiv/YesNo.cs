@@ -18,7 +18,7 @@ namespace Qowaiv;
 [OpenApiDataType(description: "Yes-No notation.", example: "yes", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
 [OpenApi.OpenApiDataType(description: "Yes-No notation.", example: "yes", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
 [TypeConverter(typeof(YesNoTypeConverter))]
-public partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
+public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
 {
     /// <summary>Represents an empty/not set yes-no.</summary>
     public static readonly YesNo Empty;

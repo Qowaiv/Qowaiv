@@ -1,6 +1,6 @@
 ﻿namespace Qowaiv;
 
-public partial struct Percentage
+public readonly partial struct Percentage
 {
     internal enum Position
     {

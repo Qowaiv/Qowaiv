@@ -1,6 +1,6 @@
 ﻿namespace Qowaiv.Mathematics;
 
-public partial struct Fraction
+public readonly partial struct Fraction
 {
     /// <summary>Creates a fraction based on decimal number.</summary>
     /// <param name="number">

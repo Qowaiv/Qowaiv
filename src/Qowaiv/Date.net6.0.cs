@@ -2,7 +2,7 @@
 
 namespace Qowaiv;
 
-public partial struct Date
+public readonly partial struct Date
 {
     /// <summary>Casts a <see cref="Date"/> implictly to a <see cref="DateOnly"/>.</summary>
     public static implicit operator DateOnly(Date date) => new(date.Year, date.Month, date.Day);

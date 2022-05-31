@@ -6,7 +6,7 @@
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]
-public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
+public readonly partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
 {
     private const string SerializableFormat = "yyyy-MM-dd";
 
@@ -27,8 +27,6 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// <summary>Gets the day after today.</summary>
     [Obsolete("Use Clock.Tomorrow() instead. Will be dropped when the next major version is released.")]
     public static Date Tomorrow => Clock.Tomorrow();
-
-    #region Constructors
 
     /// <summary>Initializes a new instance of the date structure to a specified number of ticks.</summary>
     /// <param name="ticks">
@@ -67,14 +65,7 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     /// <remarks>
     /// The date of the date time is taken.
     /// </remarks>
-    private Date(DateTime dt)
-    {
-        m_Value = dt.Date;
-    }
-
-    #endregion
-
-    #region Properties
+    private Date(DateTime dt) => m_Value = dt.Date;
 
     /// <summary>Gets the year component of the date represented by this instance.</summary>
     public int Year => m_Value.Year;
@@ -95,9 +86,7 @@ public partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEqu
     public int DayOfYear => m_Value.DayOfYear;
 
     /// <summary>The inner value of the date.</summary>
-    private DateTime m_Value;
-
-    #endregion
+    private readonly DateTime m_Value;
 
     #region Methods
 

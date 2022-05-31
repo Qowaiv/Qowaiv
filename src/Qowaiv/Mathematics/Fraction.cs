@@ -11,7 +11,7 @@ namespace Qowaiv.Mathematics;
 [OpenApi.OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [TypeConverter(typeof(FractionTypeConverter))]
 [StructLayout(LayoutKind.Sequential)]
-public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
+public readonly partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
 {
     /// <summary>Represents the zero (0) <see cref="Fraction"/> value.</summary>
     /// <remarks>
@@ -77,9 +77,9 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private long numerator;
+    private readonly long numerator;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private long denominator;
+    private readonly long denominator;
 
     /// <summary>Creates a new instance of the <see cref="Fraction"/> class.</summary>
     /// <param name="numerator">
@@ -528,13 +528,6 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
         info.AddValue(nameof(denominator), denominator);
     }
 
-    /// <remarks>Sets the currency.</remarks>
-    private void OnReadXml(Fraction other)
-    {
-        numerator = other.numerator;
-        denominator = other.denominator;
-    }
-
     /// <summary>Gets an XML string representation of the fraction.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
@@ -676,7 +669,7 @@ public partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, 
     private static Fraction New(long n, long d)
         => n == long.MinValue
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
-        : new Fraction { numerator = n, denominator = d, };
+        : new(numerator: n, denominator: d);
 
     /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
     private static void Reduce(ref long a, ref long b)

@@ -32,16 +32,16 @@
 [OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [TypeConverter(typeof(WeekDateTypeConverter))]
-public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
+public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
     private static readonly Regex Pattern = new(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     /// <summary>Represents the minimum value of the week date.</summary>
-    public static readonly WeekDate MinValue = new() { m_Value = Date.MinValue };
+    public static readonly WeekDate MinValue = new(Date.MinValue);
 
     /// <summary>Represents the maximum value of the week date.</summary>
-    public static readonly WeekDate MaxValue = new() { m_Value = Date.MaxValue };
+    public static readonly WeekDate MaxValue = new(Date.MaxValue);
 
     /// <summary>Creates a date based on Week Year, week number, and day of the week.</summary>
     public WeekDate(int year, int week, int day)
@@ -66,10 +66,13 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
         m_Value = dt;
     }
 
+    /// <summary>Creates a date based on a <see cref="Qowaiv.Date"/>.</summary>
+    private WeekDate(Date date) => m_Value = date;
+
     #region Properties
 
     /// <summary>The inner value of the week date.</summary>
-    private Date m_Value;
+    private readonly Date m_Value;
 
     /// <summary>Gets the year component represented by this instance.</summary>
     /// <remarks>
@@ -261,7 +264,7 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
 
             if (TryCreate(year, week, day, out Date dt))
             {
-                result = new WeekDate { m_Value = dt };
+                result = new(dt);
                 return true;
             }
         }
@@ -273,7 +276,7 @@ public partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, 
     /// A decimal describing a week date.
     /// </param >
     [Pure]
-    public static WeekDate Create(Date val) => new() { m_Value = val };
+    public static WeekDate Create(Date val) => new(val);
 
     private static bool TryCreate(int year, int week, int day, out Date dt)
     {

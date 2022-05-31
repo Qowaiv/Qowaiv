@@ -6,7 +6,7 @@ using Qowaiv.Globalization;
 
 namespace Qowaiv.Financial;
 
-public partial struct InternationalBankAccountNumber
+public readonly partial struct InternationalBankAccountNumber
 {
     /// <summary>Constructs a <see cref="Regex"/> based on its BBAN pattern.</summary>
     [Pure]

@@ -27,7 +27,7 @@ namespace Qowaiv;
 [OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [OpenApi.OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]
-public partial struct Sex : ISerializable, IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
+public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
 {
     /// <summary>Represents an empty/not set Sex.</summary>
     public static readonly Sex Empty;

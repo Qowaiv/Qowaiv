@@ -393,19 +393,6 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("¤{0:0.00########}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-    /// <param name="format">
-    /// The format that describes the formatting.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The format provider.
-    /// </param>
-    [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) 
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
-        ? formatted
-        : m_Value.ToString(format, Money.GetNumberFormatInfo(formatProvider));
-
     /// <summary>Gets an XML string representation of the amount.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);

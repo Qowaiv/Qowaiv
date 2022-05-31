@@ -10,12 +10,12 @@
 
 namespace Qowaiv.Financial;
 
-public partial struct InternationalBankAccountNumber
+public readonly partial struct InternationalBankAccountNumber
 {
     private InternationalBankAccountNumber(string? value) => m_Value = value;
 
     /// <summary>The inner value of the IBAN.</summary>
-    private string? m_Value;
+    private readonly string? m_Value;
 
     /// <summary>Returns true if the  IBAN is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct InternationalBankAccountNumber : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the IBAN to an <see href="XmlWriter" />.</summary>

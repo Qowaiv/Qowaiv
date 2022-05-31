@@ -10,12 +10,12 @@
 
 namespace Qowaiv.Financial;
 
-public partial struct BusinessIdentifierCode
+public readonly partial struct BusinessIdentifierCode
 {
     private BusinessIdentifierCode(string? value) => m_Value = value;
 
     /// <summary>The inner value of the BIC.</summary>
-    private string? m_Value;
+    private readonly string? m_Value;
 
     /// <summary>Returns true if the  BIC is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the BIC to an <see href="XmlWriter" />.</summary>

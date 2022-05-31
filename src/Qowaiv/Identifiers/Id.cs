@@ -16,7 +16,7 @@ namespace Qowaiv.Identifiers;
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(object))]
 [OpenApiDataType(description: "identifier", example: "8a1a8c42-d2ff-e254-e26e-b6abcbf19420", type: "any")]
 [TypeConverter(typeof(IdTypeConverter))]
-public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
+public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
     where TIdentifier : IIdentifierBehavior, new()
 {
     /// <summary>An singleton instance that deals with the identifier specific behavior.</summary>
@@ -38,7 +38,7 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     }
 
     /// <summary>The inner value of the identifier.</summary>
-    private object? m_Value;
+    private readonly object? m_Value;
 
     /// <summary>Returns true if the identifier is empty, otherwise false.</summary>
     [Pure]
@@ -165,7 +165,7 @@ public partial struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormat
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        m_Value = Parse(xml).m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml);
     }
 
     /// <summary>Writes the identifier to an <see href = "XmlWriter"/>.</summary>

@@ -10,12 +10,12 @@
 
 namespace Qowaiv;
 
-public partial struct DateSpan
+public readonly partial struct DateSpan
 {
     private DateSpan(ulong value) => m_Value = value;
 
     /// <summary>The inner value of the date span.</summary>
-    private ulong m_Value;
+    private readonly ulong m_Value;
 
 }
 
@@ -126,8 +126,7 @@ public partial struct DateSpan : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the date span to an <see href="XmlWriter" />.</summary>

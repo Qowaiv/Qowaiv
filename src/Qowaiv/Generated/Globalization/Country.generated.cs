@@ -10,12 +10,12 @@
 
 namespace Qowaiv.Globalization;
 
-public partial struct Country
+public readonly partial struct Country
 {
     private Country(string? value) => m_Value = value;
 
     /// <summary>The inner value of the country.</summary>
-    private string? m_Value;
+    private readonly string? m_Value;
 
     /// <summary>Returns true if the  country is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct Country : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the country to an <see href="XmlWriter" />.</summary>

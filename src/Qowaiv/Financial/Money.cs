@@ -9,7 +9,7 @@ namespace Qowaiv.Financial;
 [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217.", example: "EUR12.47", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
 [OpenApi.OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217.", example: "EUR12.47", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
 [TypeConverter(typeof(MoneyTypeConverter))]
-public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
+public readonly partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
 {
     /// <summary>Represents an Amount of zero.</summary>
     public static readonly Money Zero;
@@ -18,9 +18,15 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// <summary>Represents the biggest possible value of an </summary>
     public static readonly Money MaxValue = decimal.MaxValue + Currency.Empty;
 
+    private Money(decimal val, Currency currency)
+    {
+        m_Value = val;
+        m_Currency = currency;
+    }
+
     /// <summary>The inner value of the </summary>
-    private decimal m_Value;
-    private Currency m_Currency;
+    private readonly decimal m_Value;
+    private readonly Currency m_Currency;
 
     /// <summary>Gets the amount of the money.</summary>
     public Amount Amount => (Amount)m_Value;
@@ -415,13 +421,6 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
         info.AddValue(nameof(Currency), m_Currency.Name);
     }
 
-    /// <remarks>Sets the currency.</remarks>
-    private void OnReadXml(Money value)
-    {
-        m_Value = value.m_Value;
-        m_Currency = value.m_Currency;
-    }
-
     /// <summary>Deserializes the money from a JSON number.</summary>
     /// <param name="json">
     /// The JSON number to deserialize.
@@ -578,7 +577,7 @@ public partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEq
     /// The currency of the amount.
     /// </param>
     [Pure]
-    public static Money Create(decimal val, Currency currency) => new() { m_Value = val, m_Currency = currency };
+    public static Money Create(decimal val, Currency currency) => new(val, currency);
 
     /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
     /// <remarks>

@@ -10,12 +10,12 @@
 
 namespace Qowaiv;
 
-public partial struct YesNo
+public readonly partial struct YesNo
 {
     private YesNo(byte value) => m_Value = value;
 
     /// <summary>The inner value of the yes-no.</summary>
-    private byte m_Value;
+    private readonly byte m_Value;
 
     /// <summary>Returns true if the  yes-no is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct YesNo : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the yes-no to an <see href="XmlWriter" />.</summary>

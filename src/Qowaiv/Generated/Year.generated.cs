@@ -10,12 +10,12 @@
 
 namespace Qowaiv;
 
-public partial struct Year
+public readonly partial struct Year
 {
     private Year(short value) => m_Value = value;
 
     /// <summary>The inner value of the year.</summary>
-    private short m_Value;
+    private readonly short m_Value;
 
     /// <summary>Returns true if the  year is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct Year : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the year to an <see href="XmlWriter" />.</summary>

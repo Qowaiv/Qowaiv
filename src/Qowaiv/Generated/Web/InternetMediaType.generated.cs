@@ -10,12 +10,12 @@
 
 namespace Qowaiv.Web;
 
-public partial struct InternetMediaType
+public readonly partial struct InternetMediaType
 {
     private InternetMediaType(string? value) => m_Value = value;
 
     /// <summary>The inner value of the Internet media type.</summary>
-    private string? m_Value;
+    private readonly string? m_Value;
 
     /// <summary>Returns true if the  Internet media type is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct InternetMediaType : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml);
     }
 
     /// <summary>Writes the Internet media type to an <see href="XmlWriter" />.</summary>

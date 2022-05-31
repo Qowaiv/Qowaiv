@@ -10,12 +10,12 @@
 
 namespace Qowaiv;
 
-public partial struct PostalCode
+public readonly partial struct PostalCode
 {
     private PostalCode(string? value) => m_Value = value;
 
     /// <summary>The inner value of the postal code.</summary>
-    private string? m_Value;
+    private readonly string? m_Value;
 
     /// <summary>Returns true if the  postal code is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct PostalCode : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the postal code to an <see href="XmlWriter" />.</summary>

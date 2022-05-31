@@ -10,12 +10,12 @@
 
 namespace Qowaiv.Financial;
 
-public partial struct Amount
+public readonly partial struct Amount
 {
     private Amount(decimal value) => m_Value = value;
 
     /// <summary>The inner value of the amount.</summary>
-    private decimal m_Value;
+    private readonly decimal m_Value;
 
 }
 
@@ -140,8 +140,7 @@ public partial struct Amount : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the amount to an <see href="XmlWriter" />.</summary>

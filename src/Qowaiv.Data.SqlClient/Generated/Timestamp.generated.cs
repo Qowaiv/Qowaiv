@@ -10,12 +10,12 @@
 
 namespace Qowaiv.Sql;
 
-public partial struct Timestamp
+public readonly partial struct Timestamp
 {
     private Timestamp(ulong value) => m_Value = value;
 
     /// <summary>The inner value of the timestamp.</summary>
-    private ulong m_Value;
+    private readonly ulong m_Value;
 
 }
 
@@ -140,8 +140,7 @@ public partial struct Timestamp : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the timestamp to an <see href="XmlWriter" />.</summary>

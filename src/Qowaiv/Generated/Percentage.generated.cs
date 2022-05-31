@@ -10,12 +10,12 @@
 
 namespace Qowaiv;
 
-public partial struct Percentage
+public readonly partial struct Percentage
 {
     private Percentage(decimal value) => m_Value = value;
 
     /// <summary>The inner value of the percentage.</summary>
-    private decimal m_Value;
+    private readonly decimal m_Value;
 
 }
 
@@ -140,8 +140,7 @@ public partial struct Percentage : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the percentage to an <see href="XmlWriter" />.</summary>

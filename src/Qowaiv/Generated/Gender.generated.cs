@@ -10,12 +10,12 @@
 
 namespace Qowaiv;
 
-public partial struct Gender
+public readonly partial struct Gender
 {
     private Gender(byte value) => m_Value = value;
 
     /// <summary>The inner value of the gender.</summary>
-    private byte m_Value;
+    private readonly byte m_Value;
 
     /// <summary>Returns true if the  gender is empty, otherwise false.</summary>
     [Pure]
@@ -147,8 +147,7 @@ public partial struct Gender : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the gender to an <see href="XmlWriter" />.</summary>

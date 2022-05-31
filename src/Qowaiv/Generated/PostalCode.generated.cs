@@ -10,7 +10,7 @@
 
 namespace Qowaiv;
 
-public readonly partial struct PostalCode
+public partial struct PostalCode
 {
     private PostalCode(string? value) => m_Value = value;
 
@@ -27,14 +27,14 @@ public readonly partial struct PostalCode
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
-    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
-    [Pure]
-    private int Kind()
-    {
-        if (IsEmpty()) return 0;
-        else if (IsUnknown()) return +2;
-        else return +1;
-    }
+    ///// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    //[Pure]
+    //private int Kind()
+    //{
+    //    if (IsEmpty()) return 0;
+    //    else if (IsUnknown()) return +2;
+    //    else return +1;
+    //}
 }
 
 public partial struct PostalCode : IEquatable<PostalCode>

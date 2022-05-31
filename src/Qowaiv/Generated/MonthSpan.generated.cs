@@ -10,7 +10,7 @@
 
 namespace Qowaiv;
 
-public readonly partial struct MonthSpan
+public partial struct MonthSpan
 {
     private MonthSpan(int value) => m_Value = value;
 

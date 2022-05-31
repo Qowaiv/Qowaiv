@@ -10,7 +10,7 @@
 
 namespace Qowaiv.Statistics;
 
-public readonly partial struct Elo
+public partial struct Elo
 {
     private Elo(double value) => m_Value = value;
 

@@ -10,7 +10,7 @@
 
 namespace Qowaiv.Financial;
 
-public readonly partial struct InternationalBankAccountNumber
+public partial struct InternationalBankAccountNumber
 {
     private InternationalBankAccountNumber(string? value) => m_Value = value;
 
@@ -27,14 +27,14 @@ public readonly partial struct InternationalBankAccountNumber
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
-    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
-    [Pure]
-    private int Kind()
-    {
-        if (IsEmpty()) return 0;
-        else if (IsUnknown()) return +2;
-        else return +1;
-    }
+    ///// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
+    //[Pure]
+    //private int Kind()
+    //{
+    //    if (IsEmpty()) return 0;
+    //    else if (IsUnknown()) return +2;
+    //    else return +1;
+    //}
 }
 
 public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>

@@ -10,7 +10,7 @@
 
 namespace Qowaiv;
 
-public readonly partial struct Uuid
+public partial struct Uuid
 {
     private Uuid(Guid value) => m_Value = value;
 

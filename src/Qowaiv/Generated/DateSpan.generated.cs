@@ -10,7 +10,7 @@
 
 namespace Qowaiv;
 
-public readonly partial struct DateSpan
+public partial struct DateSpan
 {
     private DateSpan(ulong value) => m_Value = value;
 

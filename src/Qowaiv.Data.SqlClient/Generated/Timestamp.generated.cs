@@ -10,7 +10,7 @@
 
 namespace Qowaiv.Sql;
 
-public readonly partial struct Timestamp
+public partial struct Timestamp
 {
     private Timestamp(ulong value) => m_Value = value;
 

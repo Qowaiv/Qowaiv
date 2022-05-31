@@ -10,7 +10,7 @@
 
 namespace Qowaiv.Financial;
 
-public readonly partial struct Amount
+public partial struct Amount
 {
     private Amount(decimal value) => m_Value = value;
 

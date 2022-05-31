@@ -10,7 +10,7 @@
 
 namespace Qowaiv;
 
-public readonly partial struct Percentage
+public partial struct Percentage
 {
     private Percentage(decimal value) => m_Value = value;
 

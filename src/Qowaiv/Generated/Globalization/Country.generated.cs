@@ -26,15 +26,6 @@ public partial struct Country
     /// <summary>Returns true if the  country is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-
-    ///// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
-    //[Pure]
-    //private int Kind()
-    //{
-    //    if (IsEmpty()) return 0;
-    //    else if (IsUnknown()) return +2;
-    //    else return +1;
-    //}
 }
 
 public partial struct Country : IEquatable<Country>

@@ -15,7 +15,7 @@ public partial struct MonthSpan
     private MonthSpan(int value) => m_Value = value;
 
     /// <summary>The inner value of the month span.</summary>
-    private int m_Value;
+    private readonly int m_Value;
 
 }
 
@@ -140,8 +140,7 @@ public partial struct MonthSpan : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the month span to an <see href="XmlWriter" />.</summary>

@@ -16,7 +16,7 @@ namespace Qowaiv.Globalization;
 [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2.", example: "NL", type: "string", format: "country", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2.", example: "NL", type: "string", format: "country", nullable: true)]
 [TypeConverter(typeof(CountryTypeConverter))]
-public partial struct Country : ISerializable, IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
+public readonly partial struct Country : ISerializable, IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
 {
     /// <summary>Represents an empty/not set </summary>
     public static readonly Country Empty;

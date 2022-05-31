@@ -17,7 +17,7 @@ namespace Qowaiv.IO;
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [OpenApi.OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]
-public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
+public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
 {
     /// <summary>Represents an empty/not set stream size.</summary>
     public static readonly StreamSize Zero;
@@ -68,7 +68,7 @@ public partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable
     public StreamSize(long size) => m_Value = size;
 
     /// <summary>The inner value of the stream size.</summary>
-    private long m_Value;
+    private readonly long m_Value;
 
     #region StreamSize manipulation
 

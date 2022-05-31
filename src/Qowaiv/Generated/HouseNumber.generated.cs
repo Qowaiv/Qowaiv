@@ -15,7 +15,7 @@ public partial struct HouseNumber
     private HouseNumber(int value) => m_Value = value;
 
     /// <summary>The inner value of the house number.</summary>
-    private int m_Value;
+    private readonly int m_Value;
 
     /// <summary>Returns true if the  house number is empty, otherwise false.</summary>
     [Pure]
@@ -26,15 +26,6 @@ public partial struct HouseNumber
     /// <summary>Returns true if the  house number is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-
-    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
-    [Pure]
-    private int Kind()
-    {
-        if (IsEmpty()) return 0;
-        else if (IsUnknown()) return +2;
-        else return +1;
-    }
 }
 
 public partial struct HouseNumber : IEquatable<HouseNumber>
@@ -158,8 +149,7 @@ public partial struct HouseNumber : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the house number to an <see href="XmlWriter" />.</summary>

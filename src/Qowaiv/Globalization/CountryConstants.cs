@@ -4,7 +4,7 @@
 
 namespace Qowaiv.Globalization;
 
-public partial struct Country
+public readonly partial struct Country
 {
     /// <summary>Describes the country Andorra (AD).</summary>
     public static readonly Country AD = new("AD");

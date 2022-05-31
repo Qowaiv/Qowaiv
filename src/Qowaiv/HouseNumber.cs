@@ -6,7 +6,7 @@
 [OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
 [OpenApi.OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
 [TypeConverter(typeof(HouseNumberTypeConverter))]
-public partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
+public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
 {
     /// <summary>Represents the pattern of a (potential) valid house number.</summary>
     private static readonly Regex Pattern = new(@"^[1-9][0-9]{0,8}$", RegexOptions.Compiled);

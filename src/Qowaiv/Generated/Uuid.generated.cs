@@ -15,7 +15,7 @@ public partial struct Uuid
     private Uuid(Guid value) => m_Value = value;
 
     /// <summary>The inner value of the UUID.</summary>
-    private Guid m_Value;
+    private readonly Guid m_Value;
 
     /// <summary>Returns true if the  UUID is empty, otherwise false.</summary>
     [Pure]
@@ -132,8 +132,7 @@ public partial struct Uuid : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml);
     }
 
     /// <summary>Writes the UUID to an <see href="XmlWriter" />.</summary>

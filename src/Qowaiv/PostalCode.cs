@@ -12,7 +12,7 @@ namespace Qowaiv;
 [OpenApiDataType(description: "Postal code notation.", example: "2624DP", type: "string", format: "postal-code", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Postal code notation.", example: "2624DP", type: "string", format: "postal-code", nullable: true)]
 [TypeConverter(typeof(PostalCodeTypeConverter))]
-public partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
+public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
 {
     /// <summary>Represents the pattern of a (potential) valid postal code.</summary>
     private static readonly Regex Pattern = new(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);

@@ -4,7 +4,7 @@
 
 namespace Qowaiv.Financial;
 
-public partial struct Currency
+public readonly partial struct Currency
 {
     /// <summary>Describes the currency United Arab Emirates dirham (AED).</summary>
     public static readonly Currency AED = new("AED");

@@ -15,7 +15,7 @@ public partial struct BusinessIdentifierCode
     private BusinessIdentifierCode(string? value) => m_Value = value;
 
     /// <summary>The inner value of the BIC.</summary>
-    private string? m_Value;
+    private readonly string? m_Value;
 
     /// <summary>Returns true if the  BIC is empty, otherwise false.</summary>
     [Pure]
@@ -26,15 +26,6 @@ public partial struct BusinessIdentifierCode
     /// <summary>Returns true if the  BIC is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-
-    /// <summary>0: Empty, +1: Known, +2: Unknown.</summary>
-    [Pure]
-    private int Kind()
-    {
-        if (IsEmpty()) return 0;
-        else if (IsUnknown()) return +2;
-        else return +1;
-    }
 }
 
 public partial struct BusinessIdentifierCode : IEquatable<BusinessIdentifierCode>
@@ -147,8 +138,7 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        var val = Parse(xml, CultureInfo.InvariantCulture);
-        m_Value = val.m_Value;
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the BIC to an <see href="XmlWriter" />.</summary>

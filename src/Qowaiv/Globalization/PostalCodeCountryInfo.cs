@@ -147,8 +147,8 @@ public sealed partial class PostalCodeCountryInfo
     private static PostalCodeCountryInfo New(Country country, string validation, string? search = null, string? replace = null, bool isSingle = false)
         => new(
             country: country,
-            validationPattern: new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase),
-            formattingSearchPattern: string.IsNullOrEmpty(search) ? null : new Regex(search, RegexOptions.Compiled),
+            validationPattern: new Regex(validation, RegexOptions.Compiled | RegexOptions.IgnoreCase, Regexes.MaxDuration),
+            formattingSearchPattern: string.IsNullOrEmpty(search) ? null : new Regex(search, RegexOptions.Compiled, Regexes.MaxDuration),
             formattingReplacePattern: replace,
             isSingleValue: isSingle);
 }

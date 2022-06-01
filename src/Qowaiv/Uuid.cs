@@ -33,7 +33,7 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     internal const int IndexOfVersion = 7;
 
     /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
-    internal static readonly Regex Pattern = new(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled);
+    internal static readonly Regex Pattern = new(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegexOptions.Compiled, Regexes.MaxDuration);
 
     /// <summary>Represents an empty/not set UUID.</summary>
     public static readonly Uuid Empty;

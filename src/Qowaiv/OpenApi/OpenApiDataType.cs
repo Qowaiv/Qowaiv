@@ -86,7 +86,7 @@ public sealed record OpenApiDataType
     /// <summary>Returns true if the pattern matches the input, or the is no pattern restriction.</summary>
     [Pure]
     public bool Matches(string? str)
-        => Pattern is null || Regex.IsMatch(str!, Pattern, RegexOptions.None, Regexes.MaxDuration);
+        => Pattern is null || Regex.IsMatch(str!, Pattern, RegexOptions.None, Regexes.MatchTimeout);
 
     /// <summary>
     /// Creates an <see cref="OpenApiDataType"/> based on a type, null if not

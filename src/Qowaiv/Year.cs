@@ -11,7 +11,7 @@ public readonly partial struct Year : ISerializable, IXmlSerializable, IFormatta
     /// <summary>Represents the pattern of a (potential) valid year.</summary>
     private static readonly Regex Pattern = new(@"(^[0-9]{1,4}$)(?<!^0+$)", 
         RegexOptions.Compiled,
-        Regexes.MaxDuration);
+        Regexes.MatchTimeout);
 
     /// <summary>Represents an empty/not set year.</summary>
     public static readonly Year Empty;

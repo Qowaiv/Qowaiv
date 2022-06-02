@@ -531,7 +531,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
             _ => sb,
         };
 
-    private static readonly Regex FormattedPattern = new("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegexOptions.Compiled | RegexOptions.RightToLeft, Regexes.MaxDuration);
+    private static readonly Regex FormattedPattern = new("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegexOptions.Compiled | RegexOptions.RightToLeft, Regexes.MatchTimeout);
     private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
     private static readonly string[] FullLabels = { "byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte" };
     private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };

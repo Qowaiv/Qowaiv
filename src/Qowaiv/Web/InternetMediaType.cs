@@ -47,7 +47,7 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     private static readonly Regex Pattern = new(
         '^' + PatternTopLevel + '/' + PatternSubtype + PatternSuffix + '$',
         RegexOptions.Compiled | RegexOptions.IgnoreCase,
-        Regexes.MaxDuration);
+        Regexes.MatchTimeout);
 
     /// <summary>The pattern of the top level.</summary>
     private const string PatternTopLevel = @"(?<TopLevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))";

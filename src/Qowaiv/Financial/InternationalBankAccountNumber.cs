@@ -27,7 +27,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// <remarks>
     /// Pairs of IBAN characters can be divided by maximum 2 spacing characters.
     /// </remarks>
-    private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Regexes.MaxDuration);
+    private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Regexes.MatchTimeout);
 
     /// <summary>Represents an empty/not set IBAN.</summary>
     public static readonly InternationalBankAccountNumber Empty;

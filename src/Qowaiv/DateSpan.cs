@@ -9,7 +9,7 @@ namespace Qowaiv;
 public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
 {
     /// <summary>Represents the pattern of a (potential) valid year.</summary>
-    private static readonly Regex Pattern = new(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Regexes.MaxDuration);
+    private static readonly Regex Pattern = new(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Regexes.MatchTimeout);
 
     /// <summary>Represents the zero date span.</summary>
     public static readonly DateSpan Zero;

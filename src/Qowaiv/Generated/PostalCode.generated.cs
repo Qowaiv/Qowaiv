@@ -17,13 +17,13 @@ public partial struct PostalCode
     /// <summary>The inner value of the postal code.</summary>
     private readonly string? m_Value;
 
-    /// <summary>Returns true if the  postal code is empty, otherwise false.</summary>
+    /// <summary>Returns true if the postal code is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-    /// <summary>Returns true if the  postal code is unknown, otherwise false.</summary>
+    /// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-    /// <summary>Returns true if the  postal code is empty or unknown, otherwise false.</summary>
+    /// <summary>Returns true if the postal code is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
@@ -222,7 +222,6 @@ public partial struct PostalCode
 
 public partial struct PostalCode
 {
-
     /// <summary>Returns true if the value represents a valid postal code.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

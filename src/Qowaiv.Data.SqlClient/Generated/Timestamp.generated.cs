@@ -224,7 +224,6 @@ public partial struct Timestamp
 
 public partial struct Timestamp
 {
-
     /// <summary>Returns true if the value represents a valid timestamp.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

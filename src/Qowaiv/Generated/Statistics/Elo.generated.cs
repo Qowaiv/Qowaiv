@@ -224,7 +224,6 @@ public partial struct Elo
 
 public partial struct Elo
 {
-
     /// <summary>Returns true if the value represents a valid elo.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

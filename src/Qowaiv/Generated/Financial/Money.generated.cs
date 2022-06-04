@@ -183,7 +183,6 @@ public partial struct Money
 
 public partial struct Money
 {
-
     /// <summary>Returns true if the value represents a valid money.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

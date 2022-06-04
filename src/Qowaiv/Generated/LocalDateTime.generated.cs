@@ -215,7 +215,6 @@ public partial struct LocalDateTime
 
 public partial struct LocalDateTime
 {
-
     /// <summary>Returns true if the value represents a valid local date time.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

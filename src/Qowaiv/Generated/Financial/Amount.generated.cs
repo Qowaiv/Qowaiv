@@ -224,7 +224,6 @@ public partial struct Amount
 
 public partial struct Amount
 {
-
     /// <summary>Returns true if the value represents a valid amount.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

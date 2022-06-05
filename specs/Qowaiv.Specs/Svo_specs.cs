@@ -350,11 +350,11 @@ public class Supports_JSON_serialization
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input!", typeof(FormatException))]
-    [TestCase(5L, typeof(InvalidCastException))]
+    [TestCase(5L, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {
         Func<CustomSvo> read = () => JsonTester.Read<CustomSvo>(json);
-        read.Should().Throw<Exception>().BeOfType(exceptionType);
+        read.Should().Throw<Exception>().Subject.Single().Should().BeOfType(exceptionType);
     }
 }
 

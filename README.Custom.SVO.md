@@ -53,7 +53,7 @@ If defined, the `Regex` pattern can act as second line of defense:
 ``` C#
 public sealed class ForMySvo : SvoBehavior
 {
-    public override Regex Pattern => new("^()[A-Z][0-9])+$");
+    public override Regex Pattern => new("^([A-Z][0-9])+$");
 }
 ```
 
@@ -112,3 +112,9 @@ public sealed class ForMySvo : SvoBehavior
         : str;
 }
 ```
+
+## Limitations
+It might be worth to point out that this approach has its limitations. Defining
+extra properties on a `Svo<TSvoBehavior>` is not possible, neither are casts,
+operation overloads or factory methods. Extra methods are, but only as extension
+methods.

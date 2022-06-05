@@ -21,7 +21,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     public static readonly Svo<TSvoBehavior> Empty;
 
     /// <summary>Represents an unknown (but set) Single Value Object.</summary>
-    public static readonly Svo<TSvoBehavior> Unknown = new($"{char.MaxValue}");
+    public static readonly Svo<TSvoBehavior> Unknown = new(SvoBehavior.unknown);
 
     /// <summary>Creates a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     private Svo(string? value) => m_Value = value;
@@ -51,7 +51,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     
     /// <summary>Returns true if the Single Value Object is unknown, otherwise false.</summary>
     [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
+    public bool IsUnknown() => m_Value == SvoBehavior.unknown;
     
     /// <summary>Returns true if the Single Value Object is empty or unknown, otherwise false.</summary>
     [Pure]
@@ -68,6 +68,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
         else if (obj is Svo<TSvoBehavior> other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
+    
     /// <inheritdoc />
     [Pure]
     public int CompareTo(Svo<TSvoBehavior> other) => behavior.Compare(m_Value, other.m_Value);
@@ -126,21 +127,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// </param>
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (IsEmpty())
-        {
-            return string.Empty;
-        }
-        else if (IsUnknown())
-        {
-            return behavior.Unknown(format, formatProvider);
-        }
-        else return behavior.ToString(m_Value!, format, formatProvider);
-    }
+        => behavior.ToString(m_Value, format, formatProvider);
     
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the Single Value Object.</summary>
     /// <remarks>
@@ -168,7 +155,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
 
     /// <summary>Gets an XML string representation of the Single Value Object.</summary>
     [Pure]
-    private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+    private string ToXmlString() => behavior.ToXml(m_Value);
 
     /// <summary>Creates the Single Value Object from a JSON string.</summary>
     /// <param name="json">
@@ -185,10 +172,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string? ToJson()
-        => IsEmpty()
-        ? null
-        : behavior.ToJson(m_Value!);
+    public string? ToJson() => behavior.ToJson(m_Value);
 
     /// <summary>Casts the Single Value Object to a <see cref="string"/>.</summary>
     public static explicit operator string(Svo<TSvoBehavior> val) => val.ToString(CultureInfo.CurrentCulture);
@@ -201,7 +185,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
+    public static bool IsValid(string? val) => IsValid(val, formatProvider: null);
 
     /// <summary>Returns true if the value represents a valid month.</summary>
     /// <param name="val">
@@ -245,7 +229,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     [Pure]
     public static Svo<TSvoBehavior> Parse(string? s, IFormatProvider? formatProvider)
         => TryParse(s, formatProvider) 
-        ?? throw new FormatException(behavior.InvalidFormat(s));
+        ?? throw behavior.InvalidFormat(s);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
     /// <param name="s">
@@ -268,12 +252,31 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// The Single Value Object if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Svo<TSvoBehavior>? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Svo<TSvoBehavior>?);
+    public static Svo<TSvoBehavior>? TryParse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider, out var val)
+        ? val 
+        : default(Svo<TSvoBehavior>?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
+    /// A string containing the Single Value Object to convert.
+    /// </param>
+    /// <param name="result">
+    /// The result of the parsing.
+    /// </param>
+    /// <returns>
+    /// True if the string was converted successfully, otherwise false.
+    /// </returns>
+    [Pure]
+    public static bool TryParse(string? s, out Svo<TSvoBehavior> result)
+        => TryParse(s, null, out result);
+
+    /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.
+    /// A return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="str">
     /// A string containing the Single Value Object to convert.
     /// </param>
     /// <param name="formatProvider">
@@ -286,38 +289,10 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Svo<TSvoBehavior> result)
+    public static bool TryParse(string? str, IFormatProvider? formatProvider, out Svo<TSvoBehavior> result)
     {
-        var str = behavior.Normalize(s);
-        if(string.IsNullOrWhiteSpace(str))
-        {
-            result = Empty;
-            return true;
-        }
-        else if (behavior.IsUnknown(str, formatProvider))
-        {
-            result = Unknown;
-            return true;
-        }
-        else if (WithinSize(str)
-            && IsMatch(str)
-            && behavior.TryParse(str, formatProvider, out var parsed))
-        {
-            result = new(parsed);
-            return true;
-        }
-        else
-        {
-            result = Empty;
-            return false;
-        }
-        
-        static bool WithinSize(string str)
-            => (behavior.MaxLength is null || str.Length <= behavior.MaxLength)
-            && (behavior.MinLength is null || str.Length >= behavior.MinLength);
-
-        static bool IsMatch(string str) 
-            => behavior.Pattern is null
-            || behavior.Pattern.IsMatch(str);
+        var success = behavior.TryParse(str, formatProvider, out var parsed);
+        result = new(parsed);
+        return success;
     }
 }

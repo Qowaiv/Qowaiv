@@ -11,8 +11,8 @@ public sealed class SvoTypeConverter : TypeConverter
     /// <summary>Accessor to the private constructor.</summary>
     private readonly ConstructorInfo Ctor;
 
-    /// <summary>The <see cref="TypeConverter"/> of the underlying value.</summary>
-    private readonly TypeConverter BaseConverter;
+    /// <summary>The <see cref="SvoBehavior"/> of the underlying value.</summary>
+    private readonly SvoBehavior Behavior;
 
     /// <summary>Creates a new instance of the <see cref="SvoTypeConverter"/> class.</summary>
     /// <param name="type">
@@ -27,8 +27,7 @@ public sealed class SvoTypeConverter : TypeConverter
             m_Value = Not.Null(type.GetField(nameof(m_Value), NonPublicInstance));
             var ctors = type.GetConstructors(NonPublicInstance);
             Ctor = ctors.First(ctor => ctor.GetParameters().Length == 1);
-            var behavior = Not.Null((SvoBehavior?)Activator.CreateInstance(type.GetGenericArguments()[0]));
-            BaseConverter = behavior;
+            Behavior = Not.Null((SvoBehavior?)Activator.CreateInstance(type.GetGenericArguments()[0]));
         }
         else throw new ArgumentException("Incompatible type", nameof(type));
     }
@@ -38,12 +37,12 @@ public sealed class SvoTypeConverter : TypeConverter
     /// <inheritdoc />
     [Pure]
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
-        => BaseConverter.CanConvertFrom(context, sourceType);
+        => Behavior.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc />
     [Pure]
     public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
-        => BaseConverter.CanConvertTo(context, destinationType);
+        => Behavior.CanConvertTo(context, destinationType);
 
     /// <inheritdoc />
     [Pure]
@@ -55,7 +54,7 @@ public sealed class SvoTypeConverter : TypeConverter
         }
         else
         {
-            var id = BaseConverter.ConvertFrom(context, culture, value);
+            var id = Behavior.ConvertFrom(context, culture, value);
             return Ctor.Invoke(new[] { id });
         }
     }
@@ -65,6 +64,6 @@ public sealed class SvoTypeConverter : TypeConverter
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         var str = m_Value.GetValue(value);
-        return BaseConverter.ConvertTo(context, culture, str, destinationType);
+        return Behavior.ConvertTo(context, culture, str, destinationType);
     }
 }

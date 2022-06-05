@@ -148,9 +148,9 @@ public class Can_be_parsed
         }
     }
 
-    //[Test]
-    //public void from_valid_input_only_otherwise_return_false_on_TryParse()
-    //    => (CustomSvo.TryParse("invalid input", out _)).Should().BeFalse();
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => (CustomSvo.TryParse("invalid input", out _)).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -168,7 +168,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual("QOWAIV", Svo.CustomSvo.ToString());
+            Svo.CustomSvo.ToString().Should().Be("QOWAIV");
         }
     }
 
@@ -177,7 +177,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.CustomSvo.ToString(), Svo.CustomSvo.ToString(default(string)));
+            Svo.CustomSvo.ToString().Should().Be(Svo.CustomSvo.ToString(default(string)));
         }
     }
 
@@ -186,21 +186,17 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.CustomSvo.ToString(), Svo.CustomSvo.ToString(string.Empty));
+            Svo.CustomSvo.ToString().Should().Be(Svo.CustomSvo.ToString(string.Empty));
         }
     }
 
     [Test]
     public void default_value_is_represented_as_string_empty()
-    {
-        Assert.AreEqual(string.Empty, default(CustomSvo).ToString());
-    }
+        => default(CustomSvo).ToString().Should().BeEmpty();
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
-    {
-        Assert.AreEqual("?", CustomSvo.Unknown.ToString());
-    }
+        => CustomSvo.Unknown.ToString().Should().Be("?");
 
     [Test]
     public void with_empty_format_provider()
@@ -218,8 +214,8 @@ public class Has_custom_formatting
         Assert.AreEqual("Unit Test Formatter, value: 'QOWAIV', format: 'SomeFormat'", formatted);
     }
 
-    [TestCase("en-GB", null, "QOWAIV", "SvoFormat")]
-    [TestCase("nl-BE", "f", "QOWAIV", "SvoFormat")]
+    [TestCase("en-GB", null, "QOWAIV", "QOWAIV")]
+    [TestCase("nl-BE", "f", "QOWAIV", "QOWAIV")]
     public void culture_dependent(CultureInfo culture, string format, CustomSvo svo, string expected)
     {
         using (culture.Scoped())
@@ -302,7 +298,7 @@ public class Supports_type_conversion
 {
     [Test]
     public void via_TypeConverter_registered_with_attribute()
-        => typeof(Svo).Should().HaveTypeConverterDefined();
+        => typeof(CustomSvo).Should().HaveTypeConverterDefined();
 
     [Test]
     public void from_null_string()
@@ -339,14 +335,6 @@ public class Supports_type_conversion
             Converting.ToString().From(Svo.CustomSvo).Should().Be("QOWAIV");
         }
     }
-
-    [Test]
-    public void from_int()
-        => Converting.From(17).To<CustomSvo>().Should().Be(Svo.CustomSvo);
-
-    [Test]
-    public void to_int()
-        => Converting.To<int>().From(Svo.CustomSvo).Should().Be(17);
 }
 
 public class Supports_JSON_serialization
@@ -411,25 +399,16 @@ public class Supports_XML_serialization
 
 public class Is_Open_API_data_type
 {
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Svo)).FirstOrDefault();
-
     [Test]
-    public void with_description() => Attribute.Description.Should().Be("description");
-
-    [Test]
-    public void has_type() => Attribute.Type.Should().Be("string");
-
-    [Test]
-    public void has_format() => Attribute.Format.Should().Be("format");
-
-    [Test]
-    public void has_example() => Attribute.Example.Should().Be("example");
-
-    [TestCase("QOWAIV")]
-    public void pattern_matches(string input) => Regex.IsMatch(input, Attribute.Pattern).Should().BeTrue();
-
-    [Test]
-    public void pattern_is_null() => Attribute.Pattern.Should().BeNull();
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(CustomSvo))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(CustomSvo),
+           description: "Description",
+           example: "example",
+           type: "string",
+           format: "format",
+           pattern: null));
 }
 
 public class Supports_binary_serialization
@@ -453,7 +432,7 @@ public class Supports_binary_serialization
 public class Debugger
 {
     [TestCase("{empty}", "")]
-    [TestCase("?", "?")]
+    [TestCase("{unknown}", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
     public void has_custom_display(object display, CustomSvo svo)
         => svo.Should().HaveDebuggerDisplay(display);

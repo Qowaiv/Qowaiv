@@ -96,4 +96,19 @@ public sealed class ForMySvo : SvoBehavior
 ```
 
 ## Formatting
-Todo...
+By default the formatting is simple: `string.Empty` for the empty state, `"?"`
+for the unknown state, and the internally stored string for the rest. The empty
+state behavior is not overridable, the other two are:
+
+```  C#
+public sealed class ForMySvo : SvoBehavior
+{
+    public override string FormatUnknown(string? format, IFormatProvider? formatProvider) 
+        => "Unknown";
+
+    public override string Format(string str, string? format, IFormatProvider? formatProvider)
+        => format == "l"
+        ? str.ToLower()
+        : str;
+}
+```

@@ -56,7 +56,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
 
     /// <summary>Gets the length of string representation of Single Value Object.</summary>
     [Pure]
-    public virtual int Length(string str) => str.Length;
+    public virtual int Length(string str) => str?.Length ?? 0;
 
     /// <summary>Normalizes the string input before being validated.</summary>
     /// <param name="str">

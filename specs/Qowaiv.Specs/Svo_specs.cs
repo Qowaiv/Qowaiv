@@ -401,13 +401,13 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(CustomSvo))
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(ForCustomSvo))
        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
            dataType: typeof(CustomSvo),
-           description: "Description",
-           example: "example",
+           description: "Custom SVO Example",
+           example: "QOWAIV",
            type: "string",
-           format: "format",
+           format: "custom",
            pattern: null));
 }
 

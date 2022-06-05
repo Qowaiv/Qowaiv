@@ -82,7 +82,7 @@ public static class Svo
         .Select(field => field.GetValue(null));
 }
 
-[OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
+[OpenApi.OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
 public sealed class ForCustomSvo : SvoBehavior
 {
     public override int MinLength => 3;

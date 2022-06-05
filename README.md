@@ -48,6 +48,10 @@ Multiple scenarios are supported:
 * Domain-specific logic
 * Explicit and implicit casting
 
+## Building your own
+If you need a Single Value Object that is not provided by Qowaiv you can build
+your own. How to do that can be red [here](README.Custom.SVO.md).
+
 ## Qowaiv types
 
 ### Date

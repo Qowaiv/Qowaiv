@@ -155,7 +155,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
 
     /// <summary>Gets an XML string representation of the Single Value Object.</summary>
     [Pure]
-    private string ToXmlString() => behavior.ToXml(m_Value);
+    private string? ToXmlString() => behavior.ToXml(m_Value);
 
     /// <summary>Creates the Single Value Object from a JSON string.</summary>
     /// <param name="json">
@@ -197,8 +197,8 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     [Pure]
     public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
-        && !behavior.IsUnknown(val, formatProvider)
-        && TryParse(val, formatProvider, out _);
+        && !behavior.IsUnknown(val!, formatProvider)
+        && behavior.TryParse(val, formatProvider, out _);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
     /// <param name="s">
@@ -229,7 +229,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     [Pure]
     public static Svo<TSvoBehavior> Parse(string? s, IFormatProvider? formatProvider)
         => TryParse(s, formatProvider) 
-        ?? throw behavior.InvalidFormat(s);
+        ?? throw behavior.InvalidFormat(s, formatProvider);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
     /// <param name="s">

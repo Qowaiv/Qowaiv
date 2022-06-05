@@ -20,7 +20,7 @@ public partial class SvoBehavior : TypeConverter
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         => TryParse(value?.ToString(), culture, out var parsed)
         ? parsed
-        : throw InvalidFormat(value?.ToString());
+        : throw InvalidFormat(value?.ToString(), culture);
 
     /// <inheritdoc />
     [Pure]

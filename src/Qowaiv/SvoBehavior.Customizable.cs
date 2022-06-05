@@ -50,7 +50,7 @@ public partial class SvoBehavior : TypeConverter, IComparer<string>
 
     /// <inheritdoc />
     [Pure]
-    public virtual int Compare(string? x, string? y) => Comparer<string>.Default.Compare(x, y);
+    public virtual int Compare(string? x, string? y) => Comparer<string>.Default.Compare(x!, y!);
 
     /// <summary>Gets the length of string representation of Single Value Object.</summary>
     [Pure]
@@ -119,12 +119,14 @@ public partial class SvoBehavior : TypeConverter, IComparer<string>
         else return str;
     }
 
+    /// <summary>Creates a <see cref="FormatException"/> using the <see cref="InvalidFormatMessage(string?, IFormatProvider?)"/>.</summary>
     [Pure]
-    public virtual FormatException InvalidFormat(string? str)
-        => new(InvalidFormatMessage(str));
+    public virtual FormatException InvalidFormat(string? str, IFormatProvider? formatProvider)
+        => new(InvalidFormatMessage(str, formatProvider));
 
+    /// <summary>Composes an invalid format message.</summary>
     [Pure]
-    public virtual string InvalidFormatMessage(string? str)
+    public virtual string InvalidFormatMessage(string? str, IFormatProvider? formatProvider)
         => GetType().Name.StartsWith("For")
         ? $"Not a valid {GetType().Name.Substring(3)}"
         : $"Not a valid {GetType().Name}";

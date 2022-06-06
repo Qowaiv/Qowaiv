@@ -183,7 +183,6 @@ public partial struct Fraction
 
 public partial struct Fraction
 {
-
     /// <summary>Returns true if the value represents a valid fraction.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

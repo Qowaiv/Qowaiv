@@ -215,7 +215,6 @@ public partial struct Date
 
 public partial struct Date
 {
-
     /// <summary>Returns true if the value represents a valid date.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

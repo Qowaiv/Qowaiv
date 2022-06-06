@@ -9,7 +9,9 @@
 public readonly partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
 {
     /// <summary>Represents the pattern of a (potential) valid year.</summary>
-    private static readonly Regex Pattern = new(@"(^[0-9]{1,4}$)(?<!^0+$)", RegexOptions.Compiled);
+    private static readonly Regex Pattern = new(@"(^[0-9]{1,4}$)(?<!^0+$)", 
+        RegexOptions.Compiled,
+        Regexes.MatchTimeout);
 
     /// <summary>Represents an empty/not set year.</summary>
     public static readonly Year Empty;

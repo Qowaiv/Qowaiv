@@ -17,13 +17,13 @@ public partial struct YesNo
     /// <summary>The inner value of the yes-no.</summary>
     private readonly byte m_Value;
 
-    /// <summary>Returns true if the  yes-no is empty, otherwise false.</summary>
+    /// <summary>Returns true if the yes-no is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-    /// <summary>Returns true if the  yes-no is unknown, otherwise false.</summary>
+    /// <summary>Returns true if the yes-no is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-    /// <summary>Returns true if the  yes-no is empty or unknown, otherwise false.</summary>
+    /// <summary>Returns true if the yes-no is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
@@ -222,7 +222,6 @@ public partial struct YesNo
 
 public partial struct YesNo
 {
-
     /// <summary>Returns true if the value represents a valid yes-no.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

@@ -224,7 +224,6 @@ public partial struct MonthSpan
 
 public partial struct MonthSpan
 {
-
     /// <summary>Returns true if the value represents a valid month span.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

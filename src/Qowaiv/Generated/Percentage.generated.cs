@@ -224,7 +224,6 @@ public partial struct Percentage
 
 public partial struct Percentage
 {
-
     /// <summary>Returns true if the value represents a valid percentage.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

@@ -17,7 +17,7 @@ public partial struct Uuid
     /// <summary>The inner value of the UUID.</summary>
     private readonly Guid m_Value;
 
-    /// <summary>Returns true if the  UUID is empty, otherwise false.</summary>
+    /// <summary>Returns true if the UUID is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
 }

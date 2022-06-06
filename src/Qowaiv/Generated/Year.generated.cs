@@ -17,13 +17,13 @@ public partial struct Year
     /// <summary>The inner value of the year.</summary>
     private readonly short m_Value;
 
-    /// <summary>Returns true if the  year is empty, otherwise false.</summary>
+    /// <summary>Returns true if the year is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-    /// <summary>Returns true if the  year is unknown, otherwise false.</summary>
+    /// <summary>Returns true if the year is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-    /// <summary>Returns true if the  year is empty or unknown, otherwise false.</summary>
+    /// <summary>Returns true if the year is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
@@ -222,7 +222,6 @@ public partial struct Year
 
 public partial struct Year
 {
-
     /// <summary>Returns true if the value represents a valid year.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

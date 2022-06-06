@@ -17,13 +17,13 @@ public partial struct BusinessIdentifierCode
     /// <summary>The inner value of the BIC.</summary>
     private readonly string? m_Value;
 
-    /// <summary>Returns true if the  BIC is empty, otherwise false.</summary>
+    /// <summary>Returns true if the BIC is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-    /// <summary>Returns true if the  BIC is unknown, otherwise false.</summary>
+    /// <summary>Returns true if the BIC is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
-    /// <summary>Returns true if the  BIC is empty or unknown, otherwise false.</summary>
+    /// <summary>Returns true if the BIC is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
@@ -222,7 +222,6 @@ public partial struct BusinessIdentifierCode
 
 public partial struct BusinessIdentifierCode
 {
-
     /// <summary>Returns true if the value represents a valid BIC.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

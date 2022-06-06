@@ -210,7 +210,6 @@ public partial struct DateSpan
 
 public partial struct DateSpan
 {
-
     /// <summary>Returns true if the value represents a valid date span.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

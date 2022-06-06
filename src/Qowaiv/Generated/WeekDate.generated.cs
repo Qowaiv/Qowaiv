@@ -197,7 +197,6 @@ public partial struct WeekDate
 
 public partial struct WeekDate
 {
-
     /// <summary>Returns true if the value represents a valid week date.</summary>
     /// <param name="val">
     /// The <see cref="string"/> to validate.

@@ -82,6 +82,8 @@ public static class Svo
         .Select(field => field.GetValue(null));
 }
 
+public sealed class WithDefaultBehavior : SvoBehavior { }
+
 [OpenApi.OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
 public sealed class ForCustomSvo : SvoBehavior
 {

@@ -43,4 +43,5 @@ global using Int64Id = Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt64>;
 global using StringId = Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForString>;
 global using CustomUuid = Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForUuid>;
 global using CustomSvo = Qowaiv.Svo<Qowaiv.TestTools.ForCustomSvo>;
+global using GenericSvo = Qowaiv.Svo<Qowaiv.TestTools.WithDefaultBehavior>;
 global using Svo = Qowaiv.TestTools.Svo;

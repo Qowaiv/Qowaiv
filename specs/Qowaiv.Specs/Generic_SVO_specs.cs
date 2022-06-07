@@ -1,4 +1,23 @@
-﻿namespace Svo_specs;
+﻿namespace Generic_SVO_specs;
+
+public class Default_behavior
+{
+    [Test]
+    public void MinLength_is_0()
+        => new WithDefaultBehavior().MinLength.Should().Be(0);
+
+    [Test]
+    public void MaxLength_is_int_MaxValue()
+        => new WithDefaultBehavior().MaxLength.Should().Be(int.MaxValue);
+
+    [Test]
+    public void Regex_Pattern_is_null()
+        => new WithDefaultBehavior().Pattern.Should().BeNull();
+
+    [Test]
+    public void ToJson_returns_underlying_value()
+        => GenericSvo.Empty.ToJson().Should().BeEmpty();
+}
 
 public class With_domain_logic
 {

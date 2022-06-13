@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.TestTools;
+﻿using Qowaiv.Customization;
+
+namespace Qowaiv.TestTools;
 
 public static class Svo
 {

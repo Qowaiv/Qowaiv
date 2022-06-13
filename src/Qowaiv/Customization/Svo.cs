@@ -2,14 +2,16 @@
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 
-namespace Qowaiv;
+using Qowaiv.Conversion.Customization;
+
+namespace Qowaiv.Customization;
 
 /// <summary>Represents a Single Value Object.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Single Value Object", type: "Svo", format: "Svo", example: "ABC")]
-[TypeConverter(typeof(Conversion.SvoTypeConverter))]
+[TypeConverter(typeof(SvoTypeConverter))]
 public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
     where TSvoBehavior : SvoBehavior, new()
 {
@@ -48,17 +50,17 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// <summary>Returns true if the Single Value Object is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
-    
+
     /// <summary>Returns true if the Single Value Object is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == SvoBehavior.unknown;
-    
+
     /// <summary>Returns true if the Single Value Object is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 
     /// <summary>Gets the number of characters of Single Value Object.</summary>
-    public int Length  => IsEmptyOrUnknown() ? 0 : behavior.Length(m_Value!);
+    public int Length => IsEmptyOrUnknown() ? 0 : behavior.Length(m_Value!);
 
     /// <inheritdoc />
     [Pure]
@@ -68,7 +70,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
         else if (obj is Svo<TSvoBehavior> other) { return CompareTo(other); }
         else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
     }
-    
+
     /// <inheritdoc />
     [Pure]
     public int CompareTo(Svo<TSvoBehavior> other) => behavior.Compare(m_Value, other.m_Value);
@@ -128,7 +130,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
         => behavior.ToString(m_Value, format, formatProvider);
-    
+
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the Single Value Object.</summary>
     /// <remarks>
     /// Returns null as no schema is required.
@@ -228,7 +230,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// </exception>
     [Pure]
     public static Svo<TSvoBehavior> Parse(string? s, IFormatProvider? formatProvider)
-        => TryParse(s, formatProvider) 
+        => TryParse(s, formatProvider)
         ?? throw behavior.InvalidFormat(s, formatProvider);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
@@ -252,9 +254,9 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// The Single Value Object if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Svo<TSvoBehavior>? TryParse(string? s, IFormatProvider? formatProvider) 
+    public static Svo<TSvoBehavior>? TryParse(string? s, IFormatProvider? formatProvider)
         => TryParse(s, formatProvider, out var val)
-        ? val 
+        ? val
         : default(Svo<TSvoBehavior>?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.

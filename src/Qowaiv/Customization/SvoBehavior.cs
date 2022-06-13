@@ -1,7 +1,7 @@
 ﻿#pragma warning disable S1694 // An abstract class should have both abstract and concrete methods
 // Justification: SvoBehavior instances can be created via reflection, this one should then be excluded.
 
-namespace Qowaiv;
+namespace Qowaiv.Customization;
 
 /// <summary>Handles the behavior of a custom Single Value Object.</summary>
 public abstract class SvoBehavior : TypeConverter, IComparer<string>
@@ -200,7 +200,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
         }
 
         bool WithinSize(string str)
-            => str.Length >= MinLength 
+            => str.Length >= MinLength
             && str.Length <= MaxLength;
 
         bool IsMatch(string str)

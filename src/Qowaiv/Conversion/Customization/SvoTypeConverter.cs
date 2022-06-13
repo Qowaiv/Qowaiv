@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿using Qowaiv.Customization;
+using System.Reflection;
 
-namespace Qowaiv.Conversion;
+namespace Qowaiv.Conversion.Customization;
 
 /// <summary>Provides a conversion for strongly typed identifiers.</summary>
 public sealed class SvoTypeConverter : TypeConverter

@@ -1,4 +1,4 @@
-﻿namespace Generic_SVO_specs;
+﻿namespace Customization.SVO_specs;
 
 public class Default_behavior
 {
@@ -169,7 +169,7 @@ public class Can_be_parsed
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-        => (CustomSvo.TryParse("invalid input", out _)).Should().BeFalse();
+        => CustomSvo.TryParse("invalid input", out _).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -420,8 +420,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(ForCustomSvo))
-       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+       => OpenApi.OpenApiDataType.FromType(typeof(ForCustomSvo))
+       .Should().Be(new OpenApi.OpenApiDataType(
            dataType: typeof(CustomSvo),
            description: "Custom SVO Example",
            example: "QOWAIV",

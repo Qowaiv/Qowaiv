@@ -127,6 +127,9 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
         => new(InvalidFormatMessage(str, formatProvider));
 
     /// <summary>Composes an invalid format message.</summary>
+    /// <remarks>
+    /// A 'For'-prefix will be stripped from the name in the message.
+    /// </remarks>
     [Pure]
     public virtual string InvalidFormatMessage(string? str, IFormatProvider? formatProvider)
         => GetType().Name.StartsWith("For")

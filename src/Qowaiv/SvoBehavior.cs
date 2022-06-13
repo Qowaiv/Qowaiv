@@ -20,7 +20,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// </remarks>
     public virtual int MaxLength => int.MaxValue;
 
-    /// <summary>If specified, it defines the maximum length the string representation of the Single Value Object may be.</summary>
+    /// <summary>If specified, it defines what string input is considered to be a valid Single Value Object.</summary>
     public virtual Regex? Pattern => null;
 
     /// <summary>Returns true when the input string is considered the unknown state of the Single Value Object.</summary>

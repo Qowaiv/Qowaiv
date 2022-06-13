@@ -96,7 +96,7 @@ public sealed record OpenApiDataType
     /// The type to create an <see cref="OpenApiDataType" /> for.
     /// </param>
     [Pure]
-    public static OpenApiDataType? FromType(Type type) 
+    public static OpenApiDataType? FromType(Type type)
         => Guard.NotNull(type, nameof(type)).GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr
         ? new(
             dataType: AsDataType(type),
@@ -119,7 +119,7 @@ public sealed record OpenApiDataType
     private static Type? IdDataType(Type type)
          => !type.IsAbstract
         && type.GetInterfaces().Contains(typeof(IIdentifierBehavior))
-        && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any())
+        && HasPublicParameterlessCtor(type)
         ? typeof(Id<>).MakeGenericType(type)
         : null;
 
@@ -127,7 +127,11 @@ public sealed record OpenApiDataType
     private static Type? SvoDataType(Type type)
        => !type.IsAbstract
       && type.IsSubclassOf(typeof(SvoBehavior))
-      && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any())
+      && HasPublicParameterlessCtor(type)
       ? typeof(Svo<>).MakeGenericType(type)
       : null;
+
+    [Pure]
+    private static bool HasPublicParameterlessCtor(Type type) 
+        => type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
 }

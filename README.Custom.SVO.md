@@ -5,8 +5,8 @@ it still results in quite some lines of code (easily 400), that needs
 maintenance, and unit test coverage.
 
 Another way to deal with this, is by providing a generic SVO where the actual
-behavior is injectable. Qowaiv has two flavors: `Id<TIdBehavior` and
-`Svo<TSvoBehavior`. In this document we focus on latter. 
+behavior is injectable. Qowaiv has two flavors: `Id<TIdBehavior>` and
+`Svo<TSvoBehavior>`. In this document we focus on latter. 
 
 ``` C#
 public sealed class ForMyCustomSvo : SvoBehavior { /* .. */ }
@@ -36,14 +36,14 @@ with implementing some custom behavior, we can achieve some nice results.
 Ensuring the validness of a SVO is key. The following mechanisms are provided:
 
 ### Setting the minimum and/or maximum length
-By simply setting the `MinValue` and/or the `MaxValue` strings exceeding
+By simply setting the `MinLength` and/or the `MaxLength` strings exceeding
 these constrains are rejected:
 
 ``` C#
 public sealed class ForMySvo : SvoBehavior
 {
-    public override int MinValue => 3;
-    public override int MaxValue => 9;
+    public override int MinLength => 3;
+    public override int MaxLength => 9;
 }
 ```
 

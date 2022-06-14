@@ -16,7 +16,7 @@ public class Default_behavior
 
     [Test]
     public void ToJson_returns_underlying_value()
-        => GenericSvo.Empty.ToJson().Should().BeEmpty();
+        => GenericSvo.Empty.ToJson().Should().BeNull();
 }
 
 public class With_domain_logic

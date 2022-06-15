@@ -5,8 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.1.1</Version>
+    <Version>6.1.2</Version>
     <PackageReleaseNotes>
+v6.1.2
+- Sums on empty collections should not throw #251
 v6.1.1
 - Limit match durations on Regular Expressions #246 
 v6.1.0

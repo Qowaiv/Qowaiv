@@ -21,6 +21,25 @@ public class Amounts
     }
 
     [Test]
+    public void Average_on_selected_selected_collection_is_caluculated()
+    => collection.Average(Selection).Should().Be(8.Amount());
+
+    [Test]
+    public void Average_on_selected_nullables_can_be_calulated()
+        => nullables.Average(Selection).Should().Be(8.Amount());
+
+    [Test]
+    public void Average_on_selected_empty_collection_throws()
+    {
+        Func<Amount> average = () => Array.Empty<Amount>().Average(Selection);
+        average.Should().Throw<InvalidOperationException>();
+    }
+
+    [Test]
+    public void Average_on_selected_nullable_empty_collection_is_zero()
+        => Array.Empty<Amount?>().Average(Selection).Should().BeNull();
+       
+    [Test]
     public void Average_on_nullable_empty_collection_is_zero()
         => Array.Empty<Amount?>().Average().Should().BeNull();
 
@@ -39,6 +58,24 @@ public class Amounts
     [Test]
     public void Sum_on_nullable_empty_collection_is_zero()
         => Array.Empty<Amount?>().Sum().Should().BeNull();
+
+    [Test]
+    public void Sum_on_selected_collection_is_caluculated()
+      => collection.Sum(Selection).Should().Be(24.Amount());
+
+    [Test]
+    public void Sum_on_selected_nullables_can_be_calulated()
+        => nullables.Sum(Selection).Should().Be(24.Amount());
+
+    [Test]
+    public void Sum_on_selected_empty_collection_is_zero()
+        => Array.Empty<Amount>().Sum(Selection).Should().Be(Amount.Zero);
+
+    [Test]
+    public void Sum_on_selected_nullable_empty_collection_is_zero()
+        => Array.Empty<Amount?>().Sum(Selection).Should().BeNull();
+
+    static T Selection<T>(T value) => value;
 }
 
 public class Moneys
@@ -82,6 +119,40 @@ public class Moneys
         average.Should().Throw<CurrencyMismatchException>();
     }
 
+
+    [Test]
+    public void Average_on_selected_collection_is_caluculated()
+        => collection.Average(Selection).Should().Be(8 + Currency.EUR);
+
+    [Test]
+    public void Average_on_selected_nullables_can_be_calulated()
+        => nullables.Average(Selection).Should().Be(8 + Currency.EUR);
+
+    [Test]
+    public void Average_on_selected_empty_collection_throws()
+    {
+        Func<Money> average = () => Array.Empty<Money>().Average(Selection);
+        average.Should().Throw<InvalidOperationException>();
+    }
+
+    [Test]
+    public void Average_on_selected_nullable_empty_collection_is_zero()
+        => Array.Empty<Money?>().Average(Selection).Should().BeNull();
+
+    [Test]
+    public void Average_on_selected_mixed_currencies_throws()
+    {
+        Func<Money> average = () => mixed.Average(Selection);
+        average.Should().Throw<CurrencyMismatchException>();
+    }
+
+    [Test]
+    public void Average_on_selected_mixed_nullables_currencies_throws()
+    {
+        Func<Money?> average = () => mixedNulables.Average(Selection);
+        average.Should().Throw<CurrencyMismatchException>();
+    }
+
     [Test]
     public void Sum_on_collection_is_caluculated()
         => collection.Sum().Should().Be(24 + Currency.EUR);
@@ -111,4 +182,36 @@ public class Moneys
         Func<Money?> average = () => mixedNulables.Sum();
         average.Should().Throw<CurrencyMismatchException>();
     }
+
+    [Test]
+    public void Sum_on_selected_collection_is_caluculated()
+        => collection.Sum(Selection).Should().Be(24 + Currency.EUR);
+
+    [Test]
+    public void Sum_on_selected_nullables_can_be_calulated()
+        => nullables.Sum(Selection).Should().Be(24 + Currency.EUR);
+
+    [Test]
+    public void Sum_on_selected_empty_collection_throws()
+        => Array.Empty<Money>().Sum(Selection).Should().Be(Money.Zero);
+
+    [Test]
+    public void Sum_on_selected_nullable_empty_collection_is_zero()
+        => Array.Empty<Money?>().Sum(Selection).Should().BeNull();
+
+    [Test]
+    public void Sum_on_selected_mixed_currencies_throws()
+    {
+        Func<Money> average = () => mixed.Sum(Selection);
+        average.Should().Throw<CurrencyMismatchException>();
+    }
+
+    [Test]
+    public void Sum_on_selected_mixed_nullables_currencies_throws()
+    {
+        Func<Money?> average = () => mixedNulables.Sum(Selection);
+        average.Should().Throw<CurrencyMismatchException>();
+    }
+
+    static T Selection<T>(T value) => value;
 }

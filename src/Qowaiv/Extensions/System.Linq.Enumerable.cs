@@ -449,11 +449,9 @@ public static class QowaivEnumerableExtensions
         Guard.NotNull(source, nameof(source));
 
         var total = decimal.Zero;
-        var none = true;
 
         foreach (var item in source)
         {
-            none = false;
             var amount = selector(item);
             checked
             {
@@ -461,9 +459,7 @@ public static class QowaivEnumerableExtensions
             }
         }
 
-        return none
-            ? throw NoElements()
-            : total.Amount();
+        return total.Amount();
     }
 
     /// <summary>Computes the sum of a sequence of nullable <see cref="Amount"/> values that are
@@ -510,8 +506,7 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (none) return null;
-        else return total.Amount();
+        return none ? null : total.Amount();
     }
 
     /// <summary>Computes the sum of a sequence of <see cref="Amount"/> values.</summary>
@@ -536,19 +531,15 @@ public static class QowaivEnumerableExtensions
         Guard.NotNull(source, nameof(source));
 
         var total = decimal.Zero;
-        var none = true;
 
         foreach (var amount in source)
         {
-            none = false;
             checked
             {
                 total += (decimal)amount;
             }
         }
-        return none
-            ? throw NoElements()
-            : total.Amount();
+        return total.Amount();
     }
 
     /// <summary>Computes the sum of a sequence of nullable <see cref="Amount"/> values.</summary>
@@ -585,8 +576,7 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (none) return null;
-        else return total.Amount();
+       return none ? null : total.Amount();
     }
 
 
@@ -622,11 +612,9 @@ public static class QowaivEnumerableExtensions
         var currency = Currency.Empty;
         var first = true;
         var total = decimal.Zero;
-        var none = true;
 
         foreach (var item in source)
         {
-            none = false;
             var money = selector(item);
 
             if (first)
@@ -643,10 +631,7 @@ public static class QowaivEnumerableExtensions
                 total += (decimal)money;
             }
         }
-
-        return none
-            ? throw NoElements()
-            : total + currency;
+        return total + currency;
     }
 
     /// <summary>Computes the sum of a sequence of nullable <see cref="Money"/> values that are
@@ -705,8 +690,7 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (none) return null;
-        else return total + currency;
+        return none ? null : total + currency;
     }
 
     /// <summary>Computes the sum of a sequence of <see cref="Money"/> values.</summary>
@@ -733,12 +717,9 @@ public static class QowaivEnumerableExtensions
         var currency = Currency.Empty;
         var first = true;
         var total = decimal.Zero;
-        var none = true;
 
         foreach (var money in source)
         {
-            none = false;
-
             if (first)
             {
                 first = false;
@@ -752,11 +733,6 @@ public static class QowaivEnumerableExtensions
             {
                 total += (decimal)money;
             }
-        }
-
-        if (none)
-        {
-            throw NoElements();
         }
         return total + currency;
     }
@@ -807,8 +783,7 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (none) return null;
-        else return total + currency;
+        return none ? null : total + currency;
     }
 
     /// <summary>Computes the sum of a sequence of stream sizes.</summary>

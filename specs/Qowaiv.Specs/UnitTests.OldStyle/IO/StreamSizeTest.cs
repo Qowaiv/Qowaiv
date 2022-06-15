@@ -1,19 +1,4 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Qowaiv.Globalization;
-using Qowaiv.IO;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using Qowaiv.TestTools.IO;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Xml.Serialization;
-
-namespace Qowaiv.UnitTests.IO
+﻿namespace Qowaiv.UnitTests.IO
 {
     /// <summary>Tests the stream size SVO.</summary>
     public class StreamSizeTest

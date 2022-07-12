@@ -10,7 +10,7 @@
 v6.1.2
 - Sums on empty collections should not throw #251
 v6.1.1
-- Limit match durations on Regular Expressions #246 
+- Limit match durations on Regular Expressions #246
 v6.1.0
 - All SVO's are read-only #243
 v6.0.2

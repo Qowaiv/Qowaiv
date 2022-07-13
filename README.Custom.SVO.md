@@ -6,7 +6,7 @@ maintenance, and unit test coverage.
 
 Another way to deal with this, is by providing a generic SVO where the actual
 behavior is injectable. Qowaiv has two flavors: `Id<TIdBehavior>` and
-`Svo<TSvoBehavior>`. In this document we focus on latter. 
+`Svo<TSvoBehavior>`. In this document we focus on the latter. 
 
 ``` C#
 public sealed class ForMyCustomSvo : SvoBehavior { /* .. */ }
@@ -48,7 +48,9 @@ public sealed class ForMySvo : SvoBehavior
 ```
 
 ### A regular expression pattern
-If defined, the `Regex` pattern can act as second line of defense:
+If defined, the `Regex` pattern can act as a second line of defense. As in the
+following example, where we ensure that all characters that make up the SVO are
+alphanumeric:
 
 ``` C#
 public sealed class ForMySvo : SvoBehavior
@@ -56,8 +58,6 @@ public sealed class ForMySvo : SvoBehavior
     public override Regex Pattern => new("^([A-Z][0-9])+$");
 }
 ```
-
-In this example by ensuring that all chars representing the SVO are alpha-numeric.
 
 ### Overriding the validation method
 For more complex scenarios, the first options provided might not be sufficient.
@@ -114,7 +114,7 @@ public sealed class ForMySvo : SvoBehavior
 ```
 
 ## Limitations
-It might be worth to point out that this approach has its limitations. Defining
-extra properties on a `Svo<TSvoBehavior>` is not possible, neither are casts,
+It should be pointed out that this approach has its limitations. Defining extra
+properties on a `Svo<TSvoBehavior>` is not possible, neither are casts,
 operation overloads or factory methods. Extra methods are, but only as extension
 methods.

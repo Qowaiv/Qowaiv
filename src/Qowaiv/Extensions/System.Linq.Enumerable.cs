@@ -437,9 +437,6 @@ public static class QowaivEnumerableExtensions
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
     /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
     /// <exception cref="CurrencyMismatchException">
     /// not all amount elements have the same currency.
     /// </exception>
@@ -519,9 +516,6 @@ public static class QowaivEnumerableExtensions
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
     /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
     /// <exception cref="CurrencyMismatchException">
     /// not all amount elements have the same currency.
     /// </exception>
@@ -597,9 +591,6 @@ public static class QowaivEnumerableExtensions
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
     /// </exception>
     /// <exception cref="CurrencyMismatchException">
     /// not all money elements have the same currency.
@@ -702,9 +693,6 @@ public static class QowaivEnumerableExtensions
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
     /// </exception>
     /// <exception cref="CurrencyMismatchException">
     /// not all money elements have the same currency.

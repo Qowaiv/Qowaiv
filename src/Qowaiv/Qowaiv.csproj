@@ -5,14 +5,16 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.1.2</Version>
+    <Version>6.2.0</Version>
     <PackageReleaseNotes>
+v6.2.0
+-  Introduction of Svo&lt;SvoBehavior&gt; as a generic for string based SVO's. #248 
 v6.1.2
-- Sums on empty collections should not throw #251
+- Sums on empty collections should not throw. #251
 v6.1.1
-- Limit match durations on Regular Expressions #246
+- Limit match durations on Regular Expressions. #246
 v6.1.0
-- All SVO's are read-only #243
+- All SVO's are read-only. #243
 v6.0.2
 - Extend Open API support for ID&lt;T&gt;. #239
 v6.0.1

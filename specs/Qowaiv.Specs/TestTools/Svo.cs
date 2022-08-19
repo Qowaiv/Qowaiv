@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.TestTools;
+﻿using Qowaiv.Customization;
+
+namespace Qowaiv.TestTools;
 
 public static class Svo
 {
@@ -18,9 +20,9 @@ public static class Svo
 
     /// <summary>2017-06-11 06:15:00U</summary>
     public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00);
+    
     /// <summary>2017-06-11 06:15:00 +0:00</summary>
     public static readonly DateTimeOffset DateTimeOffset = new(2017, 06, 11, 06, 15, 00, TimeSpan.Zero);
-
 
     /// <summary>info@qowaiv.org</summary>
     public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
@@ -63,6 +65,8 @@ public static class Svo
     public static readonly Year Year = 1979.CE();
     public static readonly YesNo YesNo = YesNo.Yes;
 
+    public static readonly CustomSvo CustomSvo = CustomSvo.Parse("QOWAIV");
+
     /// <summary>PREFIX17</summary>
     public static readonly Int32Id Int32Id = Int32Id.Create(17);
 
@@ -78,6 +82,19 @@ public static class Svo
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(field => field.GetValue(null));
+}
+
+public sealed class WithDefaultBehavior : SvoBehavior { }
+
+[OpenApi.OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
+public sealed class ForCustomSvo : SvoBehavior
+{
+    public override int MinLength => 3;
+    public override int MaxLength => 16;
+    public override Regex Pattern => new("^[A-Z]+$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(1));
+
+    public override string NormalizeInput(string str, IFormatProvider formatProvider) 
+        => str?.Replace("-", "").ToUpper(formatProvider ?? CultureInfo.InvariantCulture) ?? string.Empty;
 }
 
 public sealed class ForInt32 : Int32IdBehavior

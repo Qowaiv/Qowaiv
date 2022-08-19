@@ -8,7 +8,7 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-6.1.2-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-6.2.0-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
 |![v](https://img.shields.io/badge/version-6.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-6.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
@@ -47,6 +47,10 @@ Multiple scenarios are supported:
 * Model binding
 * Domain-specific logic
 * Explicit and implicit casting
+
+## Building your own
+If you need a Single Value Object that is not provided by Qowaiv you can build
+your own. How to do that can be read [here](README.Custom.SVO.md).
 
 ## Qowaiv types
 

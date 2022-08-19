@@ -1,4 +1,5 @@
-﻿using Qowaiv.Identifiers;
+﻿using Qowaiv.Customization;
+using Qowaiv.Identifiers;
 using System.Reflection;
 
 namespace Qowaiv.OpenApi;
@@ -96,7 +97,7 @@ public sealed record OpenApiDataType
     /// The type to create an <see cref="OpenApiDataType" /> for.
     /// </param>
     [Pure]
-    public static OpenApiDataType? FromType(Type type) 
+    public static OpenApiDataType? FromType(Type type)
         => Guard.NotNull(type, nameof(type)).GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr
         ? new(
             dataType: AsDataType(type),
@@ -111,9 +112,27 @@ public sealed record OpenApiDataType
 
     [Pure]
     private static Type AsDataType(Type type)
-        => !type.IsAbstract 
+        => IdDataType(type)
+        ?? SvoDataType(type)
+        ?? type;
+
+    [Pure]
+    private static Type? IdDataType(Type type)
+         => !type.IsAbstract
         && type.GetInterfaces().Contains(typeof(IIdentifierBehavior))
-        && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any())
+        && HasPublicParameterlessCtor(type)
         ? typeof(Id<>).MakeGenericType(type)
-        : type;
+        : null;
+
+    [Pure]
+    private static Type? SvoDataType(Type type)
+       => !type.IsAbstract
+      && type.IsSubclassOf(typeof(SvoBehavior))
+      && HasPublicParameterlessCtor(type)
+      ? typeof(Svo<>).MakeGenericType(type)
+      : null;
+
+    [Pure]
+    private static bool HasPublicParameterlessCtor(Type type) 
+        => type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
 }

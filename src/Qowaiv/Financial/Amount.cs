@@ -412,16 +412,16 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     [Pure]
     public static Amount FromJson(long json) => new(json);
 
-    /// <summary>Casts a decimal an </summary>
+    /// <summary>Casts a decimal to an amount.</summary>
     public static explicit operator Amount(decimal val) => Create(val);
 
-    /// <summary>Casts a decimal an </summary>
+    /// <summary>Casts a decimal to an amount.</summary>
     public static explicit operator Amount(double val) => Create(val);
 
-    /// <summary>Casts a long an </summary>
+    /// <summary>Casts a long to an amount.</summary>
     public static explicit operator Amount(long val) => Create((decimal)val);
 
-    /// <summary>Casts a int an </summary>
+    /// <summary>Casts a int to an amount.</summary>
     public static explicit operator Amount(int val) => Create((decimal)val);
 
     /// <summary>Casts an Amount to a decimal.</summary>
@@ -430,8 +430,16 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     public static explicit operator double(Amount val) => (double)val.m_Value;
     /// <summary>Casts an Amount to a long.</summary>
     public static explicit operator long(Amount val) => (long)val.m_Value;
-    /// <summary>Casts an Amount to a int.</summary>
+    /// <summary>Casts an Amount to an int.</summary>
     public static explicit operator int(Amount val) => (int)val.m_Value;
+
+    /// <summary>Adds the left and the right amount.</summary>
+    [Obsolete("Explicitly convert the added value to Percentage or Amount.", false)]
+    public static Amount operator +(Amount amount, decimal other) => amount + other.Amount();
+
+    /// <summary>Subtracts the left and the right amount.</summary>
+    [Obsolete("Explicitly convert the subtracted value to Percentage or Amount.", false)]
+    public static Amount operator -(Amount amount, decimal other) => amount - other.Amount();
 
     /// <summary>Converts the string to an 
     /// A return value indicates whether the conversion succeeded.

@@ -255,7 +255,7 @@ public class Has_custom_formatting
     [Test]
     public void unknown_value_is_represented_as_unknown()
     {
-        Assert.AreEqual("unknown", YesNo.Unknown.ToString());
+        Assert.AreEqual("unknown", YesNo.Unknown.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]

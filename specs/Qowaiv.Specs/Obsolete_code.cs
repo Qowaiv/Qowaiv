@@ -13,13 +13,13 @@ public class Will_be_dropped
     public void Date_Tomorrow() => Date.Tomorrow.Should().Be(Clock.Tomorrow());
 
     [Test]
-    public void Amount_Addition_with_implicit_cast() => (50.Amount() + 49m).Should().Be(99.Amount());
+    public void Amount_Addition_with_decimal() => (50.Amount() + 49m).Should().Be(99.Amount());
 
     [Test]
-    public void Amount_Subtraction_with_implicit_cast() => (90.Amount() - 20m).Should().Be(70.Amount());
+    public void Amount_Subtraction_with_decimal() => (90.Amount() - 20m).Should().Be(70.Amount());
 
     [Test]
-    public void Amount_Implictly_from_decimal()
+    public void Percentage_Implicit_cast_from_decimal()
     {
         Percentage casted = 0.1751m;
         casted.Should().Be(Svo.Percentage);

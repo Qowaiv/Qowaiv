@@ -624,10 +624,10 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
 
     #region (Explicit) casting
 
-    /// <summary>Casts a decimal a Percentage.</summary>
+    /// <summary>Casts a decimal to a Percentage.</summary>
     public static implicit operator Percentage(decimal val) => new(val);
 
-    /// <summary>Casts a decimal a Percentage.</summary>
+    /// <summary>Casts a decimal to a Percentage.</summary>
     public static explicit operator Percentage(double val) => Create(val);
 
     /// <summary>Casts a Percentage to a decimal.</summary>

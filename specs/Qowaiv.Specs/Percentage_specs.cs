@@ -404,13 +404,6 @@ public class Casts
     }
    
     [Test]
-    public void immplictly_from_decimal()
-    {
-        Percentage casted = 0.1751m;
-        Assert.AreEqual(Svo.Percentage, casted);
-    }
-
-    [Test]
     public void explicitly_to_decimal()
     {
         var casted = (decimal)Svo.Percentage;

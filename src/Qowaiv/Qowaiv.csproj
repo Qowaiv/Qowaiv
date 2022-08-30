@@ -5,8 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.2.0</Version>
+    <Version>6.2.1</Version>
     <PackageReleaseNotes>
+v6.2.1
+- Prevent implicit casting by introducing obsolete operator overloads. #257 (fix)
 v6.2.0
 -  Introduction of Svo&lt;SvoBehavior&gt; as a generic for string based SVO's. #248 
 v6.1.2

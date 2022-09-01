@@ -1,4 +1,5 @@
-﻿using Qowaiv.Customization;
+﻿using Qowaiv.Chemistry;
+using Qowaiv.Customization;
 
 namespace Qowaiv.TestTools;
 
@@ -6,6 +7,9 @@ public static class Svo
 {
     public static readonly Amount Amount = (Amount)42.17m;
     public static readonly BusinessIdentifierCode BusinessIdentifierCode = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+
+    /// <summary>10028-14-5 (Nobelium)</summary>
+    public static readonly CasRegistryNumber CasRegistryNumber = CasRegistryNumber.Create(10028_14_5);
     public static readonly Country Country = Country.VA;
     public static readonly CryptographicSeed CryptographicSeed = CryptographicSeed.Parse("Qowaiv==");
 
@@ -77,8 +81,7 @@ public static class Svo
     /// <summary>8A1A8C42-D2FF-E254-E26E-B6ABCBF19420</summary>
     public static readonly CustomGuid CustomGuid = CustomGuid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420");
     public static readonly CustomUuid CustomUuid = CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
-
-
+    
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(field => field.GetValue(null));

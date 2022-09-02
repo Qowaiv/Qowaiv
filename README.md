@@ -8,7 +8,7 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-6.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-6.2.2-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
 |![v](https://img.shields.io/badge/version-6.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-6.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
@@ -262,6 +262,22 @@ if (answer) // Equal to answer.IsYes()
 {
     // Do logic.
 }
+```
+
+## Qowaiv chemistry types
+
+### CAS Registry Number
+A CAS Registry Number, is a unique numerical identifier assigned by the
+Chemical Abstracts Service (CAS), US to every chemical substance described
+in the open scientific literature. It includes all substances described
+from 1957 through the present, plus some substances from as far back as the
+early 1800's.
+
+``` C#
+// Creation
+var fromString = CasRegistryNumber.Parse("7732-18-5");
+var fromInt32 = 7732_18_5.CasNr();
+var fromInt64 = 7732_18_5L.CasNr();
 ```
 
 ## Qowaiv financial types
@@ -770,6 +786,13 @@ and if the data type is nullable, all when applicable.
     "format": "yes-no",
     "nullabe": true,
     "enum": ["yes", "no", "?"]
+  },
+  "Chemistry.CasRegistryNumber": {
+    "description": "CAS Registry Number",
+    "example": "7732-18-5",
+    "type": "string",
+    "format": "cas-nr",
+    "pattern": "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]"
   },
   "Financial.Amount": {
     "description": "Decimal representation of a currency amount.",

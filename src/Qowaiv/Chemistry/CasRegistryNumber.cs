@@ -4,11 +4,18 @@
 
 namespace Qowaiv.Chemistry;
 
-/// <summary>Represents a CAS Registry Number.</summary>
+/// <summary>
+/// A CAS Registry Number, is a unique numerical identifier assigned by the
+/// Chemical Abstracts Service (CAS), US to every chemical substance described
+/// in the open scientific literature. It includes all substances described
+/// from 1957 through the present, plus some substances from as far back as the
+/// early 1800's.
+/// </summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(long))]
-[OpenApiDataType(description: "CAS Registry Number", type: "CasRegistryNumber", format: "CasRegistryNumber", example: "ABC")]
+[OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
+[OpenApi.OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
 [TypeConverter(typeof(Conversion.Chemistry.CasRegistryNumberTypeConverter))]
 public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
 {
@@ -23,7 +30,7 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
 
     /// <summary>Returns a <see cref="string" /> that represents the CAS Registry Number for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
+    private string DebuggerDisplay => this.DebuggerDisplay("{0:f}");
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the CAS Registry Number.</summary>
     /// <param name="format">
@@ -32,6 +39,12 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
     /// <param name="formatProvider">
     /// The format provider.
     /// </param>
+    /// <remarks>
+    /// The formats:
+    /// f: as formatted.
+    /// 
+    /// other (not empty) formats are applied on the number (long).
+    /// </remarks>
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
@@ -39,7 +52,9 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
         {
             return formatted;
         }
-        return format.WithDefault("f") == "f"
+        else if (IsEmpty()) return string.Empty;
+        else if (IsUnknown()) return "?";
+        else return format.WithDefault("f") == "f"
             ? m_Value.ToString(@"#00\-00\-0", formatProvider)
             : m_Value.ToString(format, formatProvider);
     }
@@ -64,12 +79,6 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
     /// </returns>
     [Pure]
     public static CasRegistryNumber FromJson(long json) => Create(json);
-
-    /// <summary>Casts the CAS Registry Number to a <see cref="string"/>.</summary>
-    public static explicit operator string(CasRegistryNumber val) => val.ToString(CultureInfo.CurrentCulture);
-
-    /// <summary>Casts a <see cref="string"/> to a CAS Registry Number.</summary>
-    public static explicit operator CasRegistryNumber(string str) => Parse(str, CultureInfo.CurrentCulture);
 
     /// <summary>Casts the CAS Registry Number to a <see cref="long"/>.</summary>
     public static explicit operator long(CasRegistryNumber val) => val.m_Value;
@@ -109,14 +118,26 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
         else return long.TryParse(str, out var number) && TryCreate(number, out result);
     }
 
-    public static bool TryCreate(long? val, out CasRegistryNumber result)
+    /// <summary>Creates a CAS Registry Number from a long.
+    /// A return value indicates whether the creation succeeded.
+    /// </summary>
+    /// <param name="val">
+    /// A long describing a CAS Registry Number.
+    /// </param>
+    /// <param name="result">
+    /// The result of the creation.
+    /// </param>
+    /// <returns>
+    /// True if a CAS Registry Number was created successfully, otherwise false.
+    /// </returns>
+    public static bool TryCreate(long val, out CasRegistryNumber result)
     {
         result = default;
-        if (val is null) return true;
-        else if (val >= 1000)
+        if (val == 0) return true;
+        else if (val >= 10_000 && val <= 9_999_999_999)
         {
-            var checksum = val.Value % 10;
-            var buffer = val.Value / 10;
+            var checksum = val % 10;
+            var buffer = val / 10;
             var sum = 0L;
             var factor = 0;
 
@@ -128,7 +149,7 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
 
             if (sum % 10 == checksum)
             {
-                result = new(val.Value);
+                result = new(val);
                 return true;
             }
             else return false;
@@ -136,10 +157,16 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
         else return false;
     }
 
+    /// <summary>Creates a CAS Registry Number from a long.</summary>
+    /// <param name="val">
+    /// A decimal describing a CAS Registry Number.
+    /// </param>
+    /// <exception cref="FormatException">
+    /// val is not a valid CAS Registry Number.
+    /// </exception>
     [Pure]
-    public static CasRegistryNumber Create(long? val)
+    public static CasRegistryNumber Create(long val)
         => TryCreate(val, out var result)
         ? result
         : throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionCasRegistryNumber);
 }
-

@@ -5,12 +5,19 @@ namespace Qowaiv.TestTools;
 
 public static class Svo
 {
-    public static readonly Amount Amount = (Amount)42.17m;
+    /// <summary>¤42.17</summary>
+    public static readonly Amount Amount = 42.17.Amount();
+
+    /// <summary>AEGONL2UXXX</summary>
     public static readonly BusinessIdentifierCode BusinessIdentifierCode = BusinessIdentifierCode.Parse("AEGONL2UXXX");
 
     /// <summary>10028-14-5 (Nobelium)</summary>
-    public static readonly CasRegistryNumber CasRegistryNumber = CasRegistryNumber.Create(10028_14_5);
+    public static readonly CasRegistryNumber CasRegistryNumber = 10028_14_5.CasNr();
+    
+    /// <summary>Holy See (VA)</summary>
     public static readonly Country Country = Country.VA;
+
+    /// <summary>Qowaiv==</summary>
     public static readonly CryptographicSeed CryptographicSeed = CryptographicSeed.Parse("Qowaiv==");
 
     /// <summary>EUR</summary>

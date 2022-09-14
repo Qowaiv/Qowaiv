@@ -5,8 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.2.1</Version>
+    <Version>6.2.2</Version>
     <PackageReleaseNotes>
+v6.2.2
+- Introduction of CasRegistryNumber. #258
 v6.2.1
 - Prevent implicit casting by introducing obsolete operator overloads. #257 (fix)
 v6.2.0

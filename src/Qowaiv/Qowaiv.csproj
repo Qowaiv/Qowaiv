@@ -12,7 +12,7 @@ v6.2.2
 v6.2.1
 - Prevent implicit casting by introducing obsolete operator overloads. #257 (fix)
 v6.2.0
--  Introduction of Svo&lt;SvoBehavior&gt; as a generic for string based SVO's. #248 
+-  Introduction of Svo&lt;SvoBehavior&gt; as a generic for string based SVO's. #248
 v6.1.2
 - Sums on empty collections should not throw. #251
 v6.1.1
@@ -22,7 +22,7 @@ v6.1.0
 v6.0.2
 - Extend Open API support for ID&lt;T&gt;. #239
 v6.0.1
-- Int64 based id serializes to a JSON string #236 
+- Int64 based id serializes to a JSON string #236
 - Percentage.MaxValue representable as a string #235
 v6.0.0
 - Added .NET 6.0 version to the package. #216
@@ -50,6 +50,10 @@ v5.1.2
   <ItemGroup>
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
     <Compile Include="..\..\shared\Not.cs" Link="Diagnostics\Not.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Json\*Converter.cs" Condition="'$(TargetFramework)'=='netstandard2.0'" />
   </ItemGroup>
 
   <ItemGroup>

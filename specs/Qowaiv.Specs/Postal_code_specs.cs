@@ -444,6 +444,22 @@ public class Supports_JSON_serialization
 {
     [TestCase("?", "unknown")]
     [TestCase("1234", "1234")]
+    public void System_Text_JSON_based_deserialization(PostalCode expected, string json)
+    {
+        var actual = System.Text.Json.JsonSerializer.Deserialize<PostalCode>(json);
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestCase(null, "")]
+    [TestCase("1234", "1234")]
+    public void System_Text_JSON_serialization(object expected, PostalCode svo)
+    {
+        var serialized = System.Text.Json.JsonSerializer.Serialize(svo);
+        Assert.AreEqual(expected, serialized);
+    }
+
+    [TestCase("?", "unknown")]
+    [TestCase("1234", "1234")]
     public void convention_based_deserialization(PostalCode expected, object json)
     {
         var actual = JsonTester.Read<PostalCode>(json);

@@ -17,6 +17,9 @@ namespace Qowaiv.Chemistry;
 [OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
 [OpenApi.OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
 [TypeConverter(typeof(Conversion.Chemistry.CasRegistryNumberTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Chemistry.CasRegistryNumberJsonConverter))]
+#endif
 public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
 {
     /// <summary>Represents an empty/not set CAS Registry Number.</summary>

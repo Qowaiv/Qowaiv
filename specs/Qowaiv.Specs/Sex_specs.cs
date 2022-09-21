@@ -408,7 +408,20 @@ public class Supports_JSON_serialization
 {
     [TestCase("?", "unknown")]
     [TestCase("Female", 2L)]
+    [TestCase("Female", 2.0)]
+    [TestCase("Female", "Female")]
+    public void System_Text_JSON_deserialization(Sex svo, object json)
+        => JsonTester.Read_System_Text_JSON<Sex>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("Female", "Female")]
+    public void System_Text_JSON_serialization(object json, Sex svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("?", "unknown")]
+    [TestCase("Female", 2L)]
     [TestCase("Female", 2d)]
+    [TestCase("Female", "Female")]
     public void convention_based_deserialization(Sex expected, object json)
     {
         var actual = JsonTester.Read<Sex>(json);
@@ -416,6 +429,7 @@ public class Supports_JSON_serialization
     }
 
     [TestCase(null, "")]
+    [TestCase("Female", "Female")]
     public void convention_based_serialization(object expected, Sex svo)
     {
         var serialized = JsonTester.Write(svo);

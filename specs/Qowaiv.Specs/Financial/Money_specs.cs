@@ -48,6 +48,41 @@ public class Supports_type_conversion
     }
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase("EUR 42.17", "EUR 42.17")]
+    [TestCase("EUR 42.17", "EUR42.17")]
+    [TestCase("EUR 42.17", "€42.17")]
+    [TestCase("100", 100L)]
+    [TestCase("42.17", 42.17)]
+    public void System_Text_JSON_deserialization(Money svo, object json)
+        => JsonTester.Read_System_Text_JSON<Money>(json).Should().Be(svo);
+
+    [TestCase("EUR42.17", "EUR42.17")]
+    public void System_Text_JSON_serialization(object json, Money svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("EUR 42.17", "EUR 42.17")]
+    [TestCase("EUR 42.17", "EUR42.17")]
+    [TestCase("EUR 42.17", "€42.17")]
+    [TestCase("100", 100L)]
+    [TestCase("42.17", 42.17)]
+    public void convention_based_deserialization(Money svo, object json)
+        => JsonTester.Read<Money>(json).Should().Be(svo);
+
+    [TestCase("EUR42.17", "EUR42.17")]
+    public void convention_based_serialization(object json, Money svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<Money>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
 public class Has_operators
 {
     [Test]

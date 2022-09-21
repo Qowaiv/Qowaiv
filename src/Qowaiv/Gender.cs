@@ -24,6 +24,9 @@ namespace Qowaiv;
 [Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", example: "female", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(GenderTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.GenderJsonConverter))]
+#endif
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
 public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
 {

@@ -19,6 +19,9 @@ namespace Qowaiv.Statistics;
 [OpenApiDataType(description: "Elo rating system notation.", example: 1600, type: "number", format: "elo")]
 [OpenApi.OpenApiDataType(description: "Elo rating system notation.", example: 1600d, type: "number", format: "elo")]
 [TypeConverter(typeof(EloTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Statistics.EloJsonConverter))]
+#endif
 public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
 {
     /// <summary>Represents the zero value of an Elo.</summary>

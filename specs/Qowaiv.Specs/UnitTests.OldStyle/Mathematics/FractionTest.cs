@@ -197,30 +197,6 @@ namespace Qowaiv.UnitTests.Mathematics
             Assert.IsNull(obj.GetSchema());
         }
 
-        [TestCase("Invalid input")]
-        [TestCase("2017-06-11")]
-        public void FromJson_Invalid_Throws(object json)
-        {
-            Assert.Catch<FormatException>(() => JsonTester.Read<Fraction>(json));
-        }
-
-        [TestCase(double.MaxValue)]
-        [TestCase(double.MinValue)]
-        public void FromJson_Invalid_Overflows(object json)
-        {
-            Assert.Catch<OverflowException>(() => JsonTester.Read<Fraction>(json));
-        }
-
-        [TestCase("4/1", 4L)]
-        [TestCase("3/1", 3.0)]
-        [TestCase("1/3", "14/42")]
-        [TestCase("13/100", "13%")]
-        public void FromJson(Fraction expected, object json)
-        {
-            var actual = JsonTester.Read<Fraction>(json);
-            Assert.AreEqual(expected, actual);
-        }
-
         [Test]
         public void ToString_Zero_StringEmpty()
         {

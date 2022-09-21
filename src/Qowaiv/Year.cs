@@ -6,6 +6,9 @@
 [OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [TypeConverter(typeof(YearTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.YearJsonConverter))]
+#endif
 public readonly partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
 {
     /// <summary>Represents the pattern of a (potential) valid year.</summary>

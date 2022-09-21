@@ -120,6 +120,38 @@ public class Supports_type_conversion
         => Converting.To<WeekDate>().From(Svo.Date).Should().Be(new WeekDate(2017, 23, 7));
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase("2012-04-23", "2012-04-23")]
+    [TestCase("2012-04-23", "2012-04-23T18:25:43.511Z")]
+    [TestCase("2012-04-23", "2012-04-23T10:25:43-05:00")]
+    public void System_Text_JSON_deserialization(Date svo, object json)
+        => JsonTester.Read_System_Text_JSON<Date>(json).Should().Be(svo);
+
+    [TestCase("2012-04-23", "2012-04-23")]
+    public void System_Text_JSON_serialization(object json, Date svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("2012-04-23", "2012-04-23")]
+    [TestCase("2012-04-23", "2012-04-23T18:25:43.511Z")]
+    [TestCase("2012-04-23", "2012-04-23T10:25:43-05:00")]
+    public void convention_based_deserialization(Date svo, object json)
+        => JsonTester.Read<Date>(json).Should().Be(svo);
+
+    [TestCase("2012-04-23", "2012-04-23")]
+    public void convention_based_serialization(object json, Date svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("yyyy-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<Date>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
+
 public class Is_Open_API_data_type
 {
     [Test]

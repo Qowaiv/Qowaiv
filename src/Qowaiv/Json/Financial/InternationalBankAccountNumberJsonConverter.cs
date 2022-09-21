@@ -1,0 +1,19 @@
+﻿#if NET5_0_OR_GREATER
+
+using Qowaiv.Financial;
+
+namespace Qowaiv.Json.Financial;
+
+/// <summary>Provides a JSON conversion for a postal code.</summary>
+public sealed class InternationalBankAccountNumberJsonConverter : SvoJsonConverter<InternationalBankAccountNumber>
+{
+    /// <inheritdoc />
+    [Pure]
+    protected override InternationalBankAccountNumber FromJson(string? json) => InternationalBankAccountNumber.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
+    protected override object? ToJson(InternationalBankAccountNumber svo) => svo.ToJson();
+}
+
+#endif

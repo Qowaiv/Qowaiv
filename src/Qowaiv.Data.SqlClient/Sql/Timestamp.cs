@@ -6,6 +6,9 @@
 [OpenApiDataType(description: "SQL Server timestamp notation.", example: "0x00000000000007D9", type: "string", format: "timestamp")]
 [OpenApi.OpenApiDataType(description: "SQL Server timestamp notation.", example: "0x00000000000007D9", type: "string", format: "timestamp")]
 [TypeConverter(typeof(Conversion.Sql.TimestampTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.TimestampJsonConverter))]
+#endif
 public readonly partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
 {
     /// <summary>Gets the minimum value of a timestamp.</summary>

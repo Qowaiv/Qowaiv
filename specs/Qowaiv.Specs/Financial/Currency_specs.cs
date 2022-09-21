@@ -42,3 +42,36 @@ public class Supports_type_conversion
         }
     }
 }
+
+public class Supports_JSON_serialization
+{
+    [TestCase(null, null)]
+    [TestCase("EUR", 978L)]
+    [TestCase("EUR", 978.0)]
+    [TestCase("EUR", "EUR")]
+    public void System_Text_JSON_deserialization(Currency svo, object json)
+        => JsonTester.Read_System_Text_JSON<Currency>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("EUR", "EUR")]
+    public void System_Text_JSON_serialization(object json, Currency svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("EUR", "EUR")]
+    public void convention_based_deserialization(Currency svo, object json)
+        => JsonTester.Read<Currency>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("EUR", "EUR")]
+    public void convention_based_serialization(object json, Currency svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<Currency>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}

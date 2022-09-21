@@ -501,6 +501,17 @@ public class Supports_JSON_serialization
     [TestCase("?", "unknown")]
     [TestCase("February", 2.0)]
     [TestCase("February", 2L)]
+    public void System_Text_JSON_deserialization(Month svo, object json)
+        => JsonTester.Read_System_Text_JSON<Month>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("Feb", "February")]
+    public void System_Text_JSON_serialization(object json, Month svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("?", "unknown")]
+    [TestCase("February", 2.0)]
+    [TestCase("February", 2L)]
     public void convention_based_deserialization(Month expected, object json)
     {
         var actual = JsonTester.Read<Month>(json);

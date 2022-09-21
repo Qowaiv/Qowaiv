@@ -96,6 +96,36 @@ public class Supports_type_conversion
         => Converting.To<int>().From(Svo.MonthSpan).Should().Be(69);
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase("5Y+9M", 69L)]
+    [TestCase("5Y+9M", "5Y+9M")]
+    public void System_Text_JSON_deserialization(MonthSpan svo, object json)
+        => JsonTester.Read_System_Text_JSON<MonthSpan>(json).Should().Be(svo);
+
+    [TestCase("5Y+9M", "5Y+9M")]
+    public void System_Text_JSON_serialization(object json, MonthSpan svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("5Y+9M", 69L)]
+    [TestCase("5Y+9M", "5Y+9M")]
+    public void convention_based_deserialization(MonthSpan svo, object json)
+        => JsonTester.Read<MonthSpan>(json).Should().Be(svo);
+
+    [TestCase("5Y+9M", "5Y+9M")]
+    public void convention_based_serialization(object json, MonthSpan svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<MonthSpan>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
+
 public class Is_Open_API_data_type
 {
     [Test]

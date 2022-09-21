@@ -479,6 +479,25 @@ public class Supports_JSON_serialization
     [TestCase("?", (long)int.MaxValue)]
     [TestCase("?", long.MaxValue)]
     [TestCase("?", "unknown")]
+    public void System_Text_JSON_deserialization(YesNo svo, object json)
+        => JsonTester.Read_System_Text_JSON<YesNo>(json).Should().Be(svo);
+    
+    [TestCase(null, "")]
+    [TestCase("yes", "yes")]
+    public void System_Text_JSON_serialization(object json, YesNo svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("yes", "yes")]
+    [TestCase("yes", true)]
+    [TestCase("no", false)]
+    [TestCase("yes", 1L)]
+    [TestCase("yes", 1.1)]
+    [TestCase("no", 0.0)]
+    [TestCase("?", (long)byte.MaxValue)]
+    [TestCase("?", (long)short.MaxValue)]
+    [TestCase("?", (long)int.MaxValue)]
+    [TestCase("?", long.MaxValue)]
+    [TestCase("?", "unknown")]
     public void convention_based_deserialization(YesNo expected, object json)
     {
         var actual = JsonTester.Read<YesNo>(json);

@@ -183,6 +183,43 @@ public class Supports_type_conversion
     }
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase("4/1", 4L)]
+    [TestCase("3/1", 3.0)]
+    [TestCase("1/3", "14/42")]
+    [TestCase("13/100", "13%")]
+    public void System_Text_JSON_deserialization(Fraction svo, object json)
+        => JsonTester.Read_System_Text_JSON<Fraction>(json).Should().Be(svo);
+
+    [TestCase("1/3", "1/3")]
+    [TestCase("4/3", "4/3")]
+    public void System_Text_JSON_serialization(object json, Fraction svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("4/1", 4L)]
+    [TestCase("3/1", 3.0)]
+    [TestCase("1/3", "14/42")]
+    [TestCase("13/100", "13%")]
+    public void convention_based_deserialization(Fraction svo, object json)
+        => JsonTester.Read<Fraction>(json).Should().Be(svo);
+
+    [TestCase("1/3", "1/3")]
+    [TestCase("4/3", "4/3")]
+    public void convention_based_serialization(object json, Fraction svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase(double.MaxValue, typeof(OverflowException))]
+    [TestCase(double.MinValue, typeof(OverflowException))]
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<Fraction>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
+
 public class Is_Open_API_data_type
 {
     [Test]

@@ -43,6 +43,43 @@ public class Supports_type_conversion
     }
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase(null, "")]
+    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    public void System_Text_JSON_deserialization(InternetMediaType svo, object json)
+    => JsonTester.Read_System_Text_JSON<InternetMediaType>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    public void System_Text_JSON_serialization(object json, InternetMediaType svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, "")]
+    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    public void convention_based_deserialization(InternetMediaType svo, object json)
+        => JsonTester.Read<InternetMediaType>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    public void convention_based_serialization(object json, InternetMediaType svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<InternetMediaType>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+
+    [TestCase("Invalid input")]
+    [TestCase("2017-06-11")]
+    public void FromJson_Invalid_Throws(object json)
+    {
+        Assert.Catch<FormatException>(() => JsonTester.Read<InternetMediaType>(json));
+    }
+}
+
 public class Is_Open_API_data_type
 {
     [Test]

@@ -557,6 +557,17 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+    [TestCase("", null)]
+    [TestCase("", "")]
+    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    public void System_Text_JSON_deserialization(Uuid svo, object json)
+    => JsonTester.Read_System_Text_JSON<Uuid>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    public void System_Text_JSON_serialization(object json, Uuid svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
     [TestCase(null, "")]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void convention_based_deserialization(Uuid expected, object json)

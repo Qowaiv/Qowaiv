@@ -400,38 +400,6 @@ namespace Qowaiv.UnitTests.Web
 
         #endregion
 
-        #region JSON (De)serialization tests
-
-        [TestCase("Invalid input")]
-        [TestCase("2017-06-11")]
-        public void FromJson_Invalid_Throws(object json)
-        {
-            Assert.Catch<FormatException>(() => JsonTester.Read<InternetMediaType>(json));
-        }
-     
-        [Test]
-        public void FromJson_ApplicationXChesPgn_EqualsTestStruct()
-        {
-            var actual = JsonTester.Read<InternetMediaType>("application/x-chess-pgn");
-            Assert.AreEqual(TestStruct, actual);
-        }
-
-        [Test]
-        public void ToJson_DefaultValue_IsNull()
-        {
-            object act = JsonTester.Write(default(InternetMediaType));
-            Assert.IsNull(act);
-        }
-        [Test]
-        public void ToJson_TestStruct_AreEqual()
-        {
-            var act = JsonTester.Write(TestStruct);
-            var exp = "application/x-chess-pgn";
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region IFormattable / ToString tests
 
         [Test]

@@ -7,6 +7,9 @@
 [OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
 [OpenApi.OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
 [TypeConverter(typeof(MonthSpanTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthSpanJsonConverter))]
+#endif
 public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
 {
     /// <summary>Represents a month span with a zero duration.</summary>

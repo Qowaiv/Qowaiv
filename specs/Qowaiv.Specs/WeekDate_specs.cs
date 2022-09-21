@@ -66,6 +66,33 @@ public class Supports_type_conversion
         => Converting.To<LocalDateTime>().From(Svo.WeekDate).Should().Be(new LocalDateTime(2017, 06, 11));
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase("1997-W14-6", "1997-W14-6")]
+    public void System_Text_JSON_deserialization(WeekDate svo, object json)
+        => JsonTester.Read_System_Text_JSON<WeekDate>(json).Should().Be(svo);
+
+    [TestCase("1997-W14-6", "1997-W14-6")]
+    public void System_Text_JSON_serialization(object json, WeekDate svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("1997-W14-6", "1997-W14-6")]
+    public void convention_based_deserialization(WeekDate svo, object json)
+        => JsonTester.Read<WeekDate>(json).Should().Be(svo);
+
+    [TestCase("1997-W14-6", "1997-W14-6")]
+    public void convention_based_serialization(object json, WeekDate svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("yyyy-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<WeekDate>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
 public class Is_Open_API_data_type
 {
     [Test]

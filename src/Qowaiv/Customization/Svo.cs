@@ -12,6 +12,9 @@ namespace Qowaiv.Customization;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Single Value Object", type: "Svo", format: "Svo", example: "ABC")]
 [TypeConverter(typeof(SvoTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Customization.GenericSvoJsonConverter))]
+#endif
 public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
     where TSvoBehavior : SvoBehavior, new()
 {

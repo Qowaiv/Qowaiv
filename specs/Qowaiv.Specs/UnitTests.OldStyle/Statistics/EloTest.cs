@@ -1,17 +1,4 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Qowaiv.Globalization;
-using Qowaiv.Statistics;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Xml.Serialization;
-
-namespace Qowaiv.UnitTests.Statistics
+﻿namespace Qowaiv.UnitTests.Statistics
 {
     /// <summary>Tests the Elo SVO.</summary>
     public class EloTest
@@ -267,34 +254,6 @@ namespace Qowaiv.UnitTests.Statistics
         {
             IXmlSerializable obj = TestStruct;
             Assert.IsNull(obj.GetSchema());
-        }
-
-        #endregion
-
-        #region JSON (De)serialization tests
-
-        [TestCase("Invalid input")]
-        [TestCase("2017-06-11")]
-        public void FromJson_Invalid_Throws(object json)
-        {
-            Assert.Catch<FormatException>(() => JsonTester.Read<Elo>(json));
-        }
-        [TestCase(1600, "1600*")]
-        [TestCase(1700, "1700")]
-        [TestCase(1234, 1234L)]
-        [TestCase(1258.9, 1258.9)]
-        public void FromJson(Elo expected, object json)
-        {
-            var actual = JsonTester.Read<Elo>(json);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void ToJson_TestStruct_AreEqual()
-        {
-            var act = JsonTester.Write(TestStruct);
-            var exp = 1732.4000000000001;
-            Assert.AreEqual(exp, act);
         }
 
         #endregion

@@ -219,6 +219,42 @@ public class Supports_type_conversion
         => Converting.To<long>().From(Svo.StreamSize).Should().Be(123456789);
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase(1600, "1600")]
+    [TestCase(17_000_000, "17MB")]
+    [TestCase(1_766, "1.766Kb")]
+    [TestCase(1234, 1234L)]
+    [TestCase(1258, 1258.9)]
+    public void System_Text_JSON_deserialization(StreamSize svo, object json)
+        => JsonTester.Read_System_Text_JSON<StreamSize>(json).Should().Be(svo);
+
+    [TestCase(123456789L, 123456789L)]
+    [TestCase(123456789L, "123456789")]
+    public void System_Text_JSON_serialization(object json, StreamSize svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(1600, "1600")]
+    [TestCase(17_000_000, "17MB")]
+    [TestCase(1_766, "1.766Kb")]
+    [TestCase(1234, 1234L)]
+    [TestCase(1258, 1258.9)]
+    public void convention_based_deserialization(StreamSize svo, object json)
+        => JsonTester.Read<StreamSize>(json).Should().Be(svo);
+
+    [TestCase(123456789L, 123456789L)]
+    [TestCase(123456789L, "123456789")]
+    public void convention_based_serialization(object json, StreamSize svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<StreamSize>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
 public class Is_Open_API_data_type
 {
     [Test]

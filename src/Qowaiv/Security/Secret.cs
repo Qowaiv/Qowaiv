@@ -7,6 +7,9 @@ namespace Qowaiv.Security;
 /// <summary>Represents a secret.</summary>
 [TypeConverter(typeof(SecretTypeConverter))]
 [DebuggerDisplay("{DebuggerDisplay}")]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.SecretJsonConverter))]
+#endif
 public readonly struct Secret : IEquatable<Secret>
 {
     /// <summary>Represents an empty/not set secret.</summary>

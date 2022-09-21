@@ -360,6 +360,16 @@ public class Supports_JSON_serialization
 {
     [TestCase("?", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
+    public void System_Text_JSON_deserialization(CustomSvo svo, object json)
+        => JsonTester.Read_System_Text_JSON<CustomSvo>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("QOWAIV", "QOWAIV")]
+    public void System_Text_JSON__serialization(object json, CustomSvo svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("?", "?")]
+    [TestCase("QOWAIV", "QOWAIV")]
     public void convention_based_deserialization(CustomSvo svo, object json)
         => JsonTester.Read<CustomSvo>(json).Should().Be(svo);
 

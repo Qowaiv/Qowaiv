@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿#if NET5_0_OR_GREATER
+
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Qowaiv.Json;
@@ -7,43 +9,27 @@ namespace Qowaiv.Json;
 /// <typeparam name="TSvo">
 /// The type of SVO.
 /// </typeparam>
-public class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: struct
+public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: struct
 {
-    private readonly Func<TSvo, object?> ToJson;
-    private readonly Func<string?, TSvo> FromJson;
-    private readonly Func<long, TSvo> FromInt64;
-    private readonly Func<double, TSvo> FromDouble;
-    private readonly Func<bool, TSvo> FromBoolean;
+    /// <summary>Represent the SVO as a JSON node.</summary>
+    [Pure]
+    protected abstract object? ToJson(TSvo svo);
 
-    /// <summary>Creates a new instance of the <see cref="SvoJsonConverter{TSvo}"/>.</summary>
-    /// <param name="toJson">
-    /// Represents the SVO as JSON node.
-    /// </param>
-    /// <param name="fromString">
-    /// Creates the SVO from a JSON string.
-    /// </param>
-    /// <param name="fromInt64">
-    /// Creates the SVO from a JSON number (optional).
-    /// </param>
-    /// <param name="fromDouble">
-    /// Creates the SVO from a JSON number (optional).
-    /// </param>
-    /// <param name="fromBoolean">
-    /// Creates the SVO form a JSON boolean. (optional)
-    /// </param>
-    protected SvoJsonConverter(
-        Func<TSvo, object?> toJson,
-        Func<string?, TSvo> fromString,
-        Func<long, TSvo>? fromInt64 = null,
-        Func<double, TSvo>? fromDouble = null,
-        Func<bool, TSvo>? fromBoolean = null)
-    {
-        ToJson = Guard.NotNull(toJson, nameof(toJson));
-        FromJson = Guard.NotNull(fromString, nameof(fromString));
-        FromInt64 = fromInt64 ?? ((n) => fromString(n.ToString(CultureInfo.InvariantCulture)));
-        FromDouble = fromDouble ?? ((n) => fromString(n.ToString(CultureInfo.InvariantCulture)));
-        FromBoolean = fromBoolean ?? ((n) => fromString(n.ToString(CultureInfo.InvariantCulture)));
-    }
+    /// <summary>Creates the SVO based on its JSON string representation.</summary>
+    [Pure]
+    protected abstract TSvo FromJson(string? json);
+
+    /// <summary>Creates the SVO based on its JSON (long) number representation.</summary>
+    [Pure]
+    protected virtual TSvo FromJson(long json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
+
+    /// <summary>Creates the SVO based on its JSON (double) number representation.</summary>
+    [Pure]
+    protected virtual TSvo FromJson(double json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
+
+    /// <summary>Creates the SVO based on its JSON boolean representation.</summary>
+    [Pure]
+    protected virtual TSvo FromJson(bool json) => FromJson(json ? "true" : "false");
 
     /// <inheritdoc />
     public sealed override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -53,8 +39,8 @@ public class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: struct
             return reader.TokenType switch
             {
                 JsonTokenType.String => FromJson(reader.GetString()),
-                JsonTokenType.True => FromBoolean(true),
-                JsonTokenType.False => FromBoolean(false),
+                JsonTokenType.True => FromJson(true),
+                JsonTokenType.False => FromJson(false),
                 JsonTokenType.Number => ReadNumber(ref reader),
                 JsonTokenType.Null => default,
                 _ => throw new JsonException($"Unexpected token parsing {typeToConvert.FullName}. {reader.TokenType} is not supported."),
@@ -70,11 +56,11 @@ public class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: struct
         {
             if (reader.TryGetInt64(out long num))
             {
-                return FromInt64(num);
+                return FromJson(num);
             }
             else if (reader.TryGetDouble(out double dec))
             {
-                return FromDouble(dec);
+                return FromJson(dec);
             }
             else throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
         }
@@ -127,3 +113,4 @@ public class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: struct
         }
     }
 }
+#endif

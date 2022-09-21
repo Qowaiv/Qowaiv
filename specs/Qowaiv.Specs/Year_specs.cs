@@ -468,6 +468,21 @@ public class Supports_JSON_serialization
     [TestCase("?", "unknown")]
     [TestCase(2017, "2017")]
     [TestCase(2017, 2017L)]
+    [TestCase(2017, 2017.0)]
+    public void System_Text_JSON_deserialization(Year svo, object json)
+    => JsonTester.Read_System_Text_JSON<Year>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("?", "unknown")]
+    [TestCase(2017L, "2017")]
+    public void System_Text_JSON_serialization(object json, Year svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+
+    [TestCase("?", "unknown")]
+    [TestCase(2017, "2017")]
+    [TestCase(2017, 2017L)]
+    [TestCase(2017, 2017.0)]
     public void convention_based_deserialization(Year expected, object json)
     {
         var actual = JsonTester.Read<Year>(json);

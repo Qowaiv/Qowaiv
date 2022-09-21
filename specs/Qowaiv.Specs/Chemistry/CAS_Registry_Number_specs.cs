@@ -383,6 +383,16 @@ public class Supports_JSON_serialization
 {
     [TestCase("?", "unknown")]
     [TestCase("10028-14-5", 10028_14_5L)]
+    public void System_Text_JSON_deserialization(CasRegistryNumber svo, object json)
+      => JsonTester.Read_System_Text_JSON<CasRegistryNumber>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("10028-14-5", "10028-14-5")]
+    public void System_Text_JSON_serialization(object json, CasRegistryNumber svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("?", "unknown")]
+    [TestCase("10028-14-5", 10028_14_5L)]
     public void convention_based_deserialization(CasRegistryNumber svo, object json)
         => JsonTester.Read<CasRegistryNumber>(json).Should().Be(svo);
 

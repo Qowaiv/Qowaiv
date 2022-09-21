@@ -22,6 +22,9 @@ namespace Qowaiv;
 [OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 [TypeConverter(typeof(UuidTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.UuidJsonConverter))]
+#endif
 public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
 {
     private static readonly UuidBehavior behavior = UuidBehavior.Instance;

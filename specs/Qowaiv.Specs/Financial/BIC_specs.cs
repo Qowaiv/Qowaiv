@@ -42,3 +42,34 @@ public class Supports_type_conversion
         }
     }
 }
+
+public class Supports_JSON_serialization
+{
+    [TestCase("", null)]
+    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    public void System_Text_JSON_deserialization(BusinessIdentifierCode svo, object json)
+        => JsonTester.Read_System_Text_JSON<BusinessIdentifierCode>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    public void System_Text_JSON_serialization(object json, BusinessIdentifierCode svo)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    public void convention_based_deserialization(BusinessIdentifierCode svo, object json)
+        => JsonTester.Read<BusinessIdentifierCode>(json).Should().Be(svo);
+
+    [TestCase(null, "")]
+    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    public void convention_based_serialization(object json, BusinessIdentifierCode svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<BusinessIdentifierCode>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}

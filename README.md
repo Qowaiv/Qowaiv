@@ -8,7 +8,7 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-6.2.2-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-6.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
 |![v](https://img.shields.io/badge/version-6.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
 |![v](https://img.shields.io/badge/version-6.0.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
@@ -659,11 +659,16 @@ public struct Svo
     public object /* or string, bool, int, long, double, decimal */ ToJson();
 }
 ```
+
 #### Implementations
-There are two _out-of-the-box_ implementations that that support this convention
+There are two _out-of-the-box_ implementations that support this convention
 based contract.
 * [Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)  
 * [Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)  
+
+For the .NET 5.0, and higher versions of the package, when using `System.Text.Json`,
+no custom serialization registration is required for Qowaiv SVO's: all have been
+decorated with the `[JsonConverter]` attribute.
 
 #### OpenAPI Specification
 The [OpenAPI Specification](https://swagger.io/docs/specification/about/)

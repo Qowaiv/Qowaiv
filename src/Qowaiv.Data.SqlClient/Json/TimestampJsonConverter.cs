@@ -11,6 +11,14 @@ public sealed class TimestampJsonConverter : SvoJsonConverter<Timestamp>
 
     /// <inheritdoc />
     [Pure]
+    protected override Timestamp FromJson(long json) => Timestamp.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
+    protected override Timestamp FromJson(double json) => Timestamp.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
     protected override object? ToJson(Timestamp svo) => svo.ToJson();
 }
 

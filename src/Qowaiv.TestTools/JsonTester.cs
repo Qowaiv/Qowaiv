@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
 using System.Text.Json;
 #endif
 namespace Qowaiv.TestTools;
@@ -7,7 +7,7 @@ namespace Qowaiv.TestTools;
 /// <summary>Helper class for testing JSON conversion.</summary>
 public static class JsonTester
 {
-#if NET6_0_OR_GREATER
+#if NET5_0_OR_GREATER
     /// <summary>
     /// 
     /// </summary>

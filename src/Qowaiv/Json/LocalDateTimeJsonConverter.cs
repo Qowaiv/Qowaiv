@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Json;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for a local date time.</summary>
 public sealed class LocalDateTimeJsonConverter : SvoJsonConverter<LocalDateTime>
 {
     /// <inheritdoc />

@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Json;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for a month span.</summary>
 public sealed class MonthSpanJsonConverter : SvoJsonConverter<MonthSpan>
 {
     /// <inheritdoc />

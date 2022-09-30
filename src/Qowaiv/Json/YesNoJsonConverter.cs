@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Json;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for a yes-no.</summary>
 public sealed class YesNoJsonConverter : SvoJsonConverter<YesNo>
 {
     /// <inheritdoc />

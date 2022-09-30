@@ -4,7 +4,7 @@ using Qowaiv.Financial;
 
 namespace Qowaiv.Json.Financial;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for an IBAN.</summary>
 public sealed class InternationalBankAccountNumberJsonConverter : SvoJsonConverter<InternationalBankAccountNumber>
 {
     /// <inheritdoc />

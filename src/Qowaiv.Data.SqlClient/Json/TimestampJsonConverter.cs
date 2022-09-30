@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Sql.Json;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for a timestamp.</summary>
 public sealed class TimestampJsonConverter : SvoJsonConverter<Timestamp>
 {
     /// <inheritdoc />

@@ -4,7 +4,7 @@ using Qowaiv.Web;
 
 namespace Qowaiv.Json.Web;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for an Internet media type.</summary>
 public sealed class InternetMediaTypeJsonConverter : SvoJsonConverter<InternetMediaType>
 {
     /// <inheritdoc />

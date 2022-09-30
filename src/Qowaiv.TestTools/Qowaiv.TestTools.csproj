@@ -5,8 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.0.0</Version>
+    <Version>6.3.0</Version>
     <PackageReleaseNotes>
+v6.3.0
+- JSON serialization via System.Text.Json does not longer require a custom converter. #259
 v6.0.0
 - Added .NET 6.0 version to the package. #216
 - Added Serialize, SerializeDeserialize, and Converting helpers. #218

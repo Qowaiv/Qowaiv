@@ -4,7 +4,7 @@ using Qowaiv.Globalization;
 
 namespace Qowaiv.Json.Globalization;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for a country.</summary>
 public sealed class CountryJsonConverter : SvoJsonConverter<Country>
 {
     /// <inheritdoc />

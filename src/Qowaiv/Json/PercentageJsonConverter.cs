@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Json;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for a percentage.</summary>
 public sealed class PercentageJsonConverter : SvoJsonConverter<Percentage>
 {
     /// <inheritdoc />

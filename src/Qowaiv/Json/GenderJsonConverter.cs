@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Json;
 
-/// <summary>Provides a JSON conversion for a postal code.</summary>
+/// <summary>Provides a JSON conversion for a gender.</summary>
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
 public sealed class GenderJsonConverter : SvoJsonConverter<Gender>
 {

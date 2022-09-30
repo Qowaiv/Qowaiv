@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 using System.Text.Json;
 #endif
 namespace Qowaiv.TestTools;
@@ -7,10 +7,8 @@ namespace Qowaiv.TestTools;
 /// <summary>Helper class for testing JSON conversion.</summary>
 public static class JsonTester
 {
-#if NET5_0_OR_GREATER
-    /// <summary>
-    /// 
-    /// </summary>
+#if NET6_0_OR_GREATER
+    /// <summary>Reads the JSON using System.Text.Json.</summary>
     [Pure]
     public static T? Read_System_Text_JSON<T>(object? val)
     {
@@ -27,10 +25,10 @@ public static class JsonTester
             };
 
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary>Writes the JSON using System.Text.Json.</summary>
+    /// <remarks>
+    /// <see cref="JsonSerializer.SerializeToElement"/> is only available in .NET 6.0 
+    /// </remarks>
     [Pure]
     public static object? Write_System_Text_JSON(object? svo)
     {

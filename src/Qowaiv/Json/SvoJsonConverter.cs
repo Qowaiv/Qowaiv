@@ -69,6 +69,8 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: s
     /// <inheritdoc />
     public sealed override void Write(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
     {
+        Guard.NotNull(writer, nameof(writer));
+
         var obj = ToJson(value);
 
         if (obj is null)

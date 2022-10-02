@@ -641,7 +641,7 @@ based convention:
 ``` C#
 public struct Svo
 {
-    public static Svo FromJson(string json);
+    public static Svo FromJson(string? json);
 
     // When appropriate for the SVO. Example: `Percentage`.
     public static Svo FromJson(double json);

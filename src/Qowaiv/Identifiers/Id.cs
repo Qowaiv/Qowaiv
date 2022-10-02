@@ -237,7 +237,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Id<TIdentifier> Parse(string s)
+    public static Id<TIdentifier> Parse(string? s)
     {
         return TryParse(s, out Id<TIdentifier> val)
             ? val
@@ -252,7 +252,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// The identifier if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Id<TIdentifier> TryParse(string s)
+    public static Id<TIdentifier> TryParse(string? s)
     {
         return TryParse(s, out Id<TIdentifier> val) ? val : default;
     }
@@ -269,7 +269,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, out Id<TIdentifier> result)
+    public static bool TryParse(string? s, out Id<TIdentifier> result)
     {
         result = default;
 
@@ -290,7 +290,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// The deserialized identifier.
     /// </returns>
     [Pure]
-    public static Id<TIdentifier> FromJson(string json) => Parse(json);
+    public static Id<TIdentifier> FromJson(string? json) => Parse(json);
 
     /// <summary>Deserializes the date from a JSON number.</summary>
     /// <param name="json">

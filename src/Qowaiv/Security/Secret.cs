@@ -76,12 +76,12 @@ public readonly struct Secret : IEquatable<Secret>
     /// A secret describing a cryptographic seed.
     /// </param >
     [Pure]
-    public static Secret Parse(string str)
-        => string.IsNullOrEmpty(str)
+    public static Secret Parse(string? str)
+        => str is not { Length: > 0 }
         ? Empty
         : new(str);
 
     /// <summary>Creates a secret from a JSON string node.</summary>
     [Pure]
-    public static Secret FromJson(string json) => Parse(json);
+    public static Secret FromJson(string? json) => Parse(json);
 }

@@ -255,7 +255,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// The deserialized email address collection.
     /// </returns>
     [Pure]
-    public static EmailAddressCollection FromJson(string json) => Parse(json, CultureInfo.InvariantCulture);
+    public static EmailAddressCollection FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 
     /// <summary>Serializes the email address collection to a JSON node.</summary>
     /// <returns>

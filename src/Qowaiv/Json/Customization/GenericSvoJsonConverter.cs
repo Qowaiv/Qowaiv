@@ -43,6 +43,8 @@ public sealed class GenericSvoJsonConverter : JsonConverter<object>
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
+        Guard.NotNull(writer, nameof(writer));
+
         string? json = ((dynamic)value).ToJson();
         if (json is null)
         {

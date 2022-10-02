@@ -43,6 +43,8 @@ public sealed class IdJsonConverter : JsonConverter<object>
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
+        Guard.NotNull(writer, nameof(writer));
+
         object? obj = ((dynamic)value).ToJson();
         
         if (obj is null)

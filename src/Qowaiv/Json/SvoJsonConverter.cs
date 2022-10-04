@@ -11,26 +11,6 @@ namespace Qowaiv.Json;
 /// </typeparam>
 public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: struct
 {
-    /// <summary>Represent the SVO as a JSON node.</summary>
-    [Pure]
-    protected abstract object? ToJson(TSvo svo);
-
-    /// <summary>Creates the SVO based on its JSON string representation.</summary>
-    [Pure]
-    protected abstract TSvo FromJson(string? json);
-
-    /// <summary>Creates the SVO based on its JSON (long) number representation.</summary>
-    [Pure]
-    protected virtual TSvo FromJson(long json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
-
-    /// <summary>Creates the SVO based on its JSON (double) number representation.</summary>
-    [Pure]
-    protected virtual TSvo FromJson(double json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
-
-    /// <summary>Creates the SVO based on its JSON boolean representation.</summary>
-    [Pure]
-    protected virtual TSvo FromJson(bool json) => FromJson(json ? "true" : "false");
-
     /// <inheritdoc />
     public sealed override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -51,21 +31,8 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: s
             if (x is JsonException) throw;
             else throw new JsonException(x.Message, x);
         }
-
-        TSvo ReadNumber(ref Utf8JsonReader reader)
-        {
-            if (reader.TryGetInt64(out long num))
-            {
-                return FromJson(num);
-            }
-            else if (reader.TryGetDouble(out double dec))
-            {
-                return FromJson(dec);
-            }
-            else throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
-        }
     }
-   
+
     /// <inheritdoc />
     public sealed override void Write(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
     {
@@ -113,6 +80,39 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: s
         {
             writer.WriteStringValue(obj.ToString());
         }
+    }
+
+    /// <summary>Represent the SVO as a JSON node.</summary>
+    [Pure]
+    protected abstract object? ToJson(TSvo svo);
+
+    /// <summary>Creates the SVO based on its JSON string representation.</summary>
+    [Pure]
+    protected abstract TSvo FromJson(string? json);
+
+    /// <summary>Creates the SVO based on its JSON (long) number representation.</summary>
+    [Pure]
+    protected virtual TSvo FromJson(long json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
+
+    /// <summary>Creates the SVO based on its JSON (double) number representation.</summary>
+    [Pure]
+    protected virtual TSvo FromJson(double json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
+
+    /// <summary>Creates the SVO based on its JSON boolean representation.</summary>
+    [Pure]
+    protected virtual TSvo FromJson(bool json) => FromJson(json ? "true" : "false");
+
+    private TSvo ReadNumber(ref Utf8JsonReader reader)
+    {
+        if (reader.TryGetInt64(out long num))
+        {
+            return FromJson(num);
+        }
+        else if (reader.TryGetDouble(out double dec))
+        {
+            return FromJson(dec);
+        }
+        else throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
     }
 }
 #endif

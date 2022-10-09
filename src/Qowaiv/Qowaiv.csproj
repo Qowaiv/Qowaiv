@@ -8,7 +8,7 @@
     <Version>6.3.0</Version>
     <PackageReleaseNotes>
 v6.3.0
-- JSON serialization via System.Text.Json does not longer require a custom converter. #259
+- JSON serialization via System.Text.Json no longer requires a custom converter. #259
 v6.2.2
 - Introduction of CasRegistryNumber. #258
 v6.2.1

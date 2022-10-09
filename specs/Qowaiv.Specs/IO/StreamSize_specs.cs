@@ -221,30 +221,28 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase(1600, "1600")]
-    [TestCase(17_000_000, "17MB")]
-    [TestCase(1_766, "1.766Kb")]
-    [TestCase(1234, 1234L)]
-    [TestCase(1258, 1258.9)]
-    public void System_Text_JSON_deserialization(StreamSize svo, object json)
+    [TestCase("1600", 1_600)]
+    [TestCase("17MB", 17_000_000)]
+    [TestCase("1.766Kb", 1_766)]
+    [TestCase(1234L, 1234)]
+    [TestCase(1258.9, 1258)]
+    public void System_Text_JSON_deserialization(object json, StreamSize svo)
         => JsonTester.Read_System_Text_JSON<StreamSize>(json).Should().Be(svo);
 
-    [TestCase(123456789L, 123456789L)]
-    [TestCase(123456789L, "123456789")]
-    public void System_Text_JSON_serialization(object json, StreamSize svo)
+    [TestCase("1600", 1_600)]
+    [TestCase("17MB", 17_000_000)]
+    [TestCase("1.766Kb", 1_766)]
+    [TestCase(1234L, 1234)]
+    [TestCase(1258.9, 1258)]
+    public void convention_based_deserialization(object json, StreamSize svo)
+       => JsonTester.Read<StreamSize>(json).Should().Be(svo);
+
+    [TestCase(17L, 17L)]
+    public void System_Text_JSON_serialization(StreamSize svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase(1600, "1600")]
-    [TestCase(17_000_000, "17MB")]
-    [TestCase(1_766, "1.766Kb")]
-    [TestCase(1234, 1234L)]
-    [TestCase(1258, 1258.9)]
-    public void convention_based_deserialization(StreamSize svo, object json)
-        => JsonTester.Read<StreamSize>(json).Should().Be(svo);
-
-    [TestCase(123456789L, 123456789L)]
-    [TestCase(123456789L, "123456789")]
-    public void convention_based_serialization(object json, StreamSize svo)
+    [TestCase(17L, 17L)]
+    public void convention_based_serialization(StreamSize svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

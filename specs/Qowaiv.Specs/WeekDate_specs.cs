@@ -69,19 +69,19 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
     [TestCase("1997-W14-6", "1997-W14-6")]
-    public void System_Text_JSON_deserialization(WeekDate svo, object json)
+    public void System_Text_JSON_deserialization(object json, WeekDate svo)
         => JsonTester.Read_System_Text_JSON<WeekDate>(json).Should().Be(svo);
 
     [TestCase("1997-W14-6", "1997-W14-6")]
-    public void System_Text_JSON_serialization(object json, WeekDate svo)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
-    [TestCase("1997-W14-6", "1997-W14-6")]
-    public void convention_based_deserialization(WeekDate svo, object json)
+    public void convention_based_deserialization(object json, WeekDate svo)
         => JsonTester.Read<WeekDate>(json).Should().Be(svo);
 
     [TestCase("1997-W14-6", "1997-W14-6")]
-    public void convention_based_serialization(object json, WeekDate svo)
+    public void System_Text_JSON_serialization(WeekDate svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase("1997-W14-6", "1997-W14-6")]
+    public void convention_based_serialization(WeekDate svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

@@ -124,7 +124,6 @@ public class Supports_JSON_deserialization
     [Test]
     public void convention_based_deserialization()
         => JsonTester.Read<Secret>("Ken sent me!").Value().Should().Be(Svo.Secret.Value());
-
 }
 
 public class Does_not_supports_JSON_serialization

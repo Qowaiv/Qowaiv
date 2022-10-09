@@ -164,22 +164,22 @@ public class Supports_JSON_serialization
 {
     [TestCase(null, null)]
     [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
-    public void System_Text_JSON_deserialization(InternationalBankAccountNumber svo, object json)
+    public void System_Text_JSON_deserialization(object json, InternationalBankAccountNumber svo)
         => JsonTester.Read_System_Text_JSON<InternationalBankAccountNumber>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
     [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
-    public void System_Text_JSON_serialization(object json, InternationalBankAccountNumber svo)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
-    [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
-    public void convention_based_deserialization(InternationalBankAccountNumber svo, object json)
-        => JsonTester.Read<InternationalBankAccountNumber>(json).Should().Be(svo);
+    public void convention_based_deserialization(object json, InternationalBankAccountNumber svo)
+       => JsonTester.Read<InternationalBankAccountNumber>(json).Should().Be(svo);
 
     [TestCase(null, null)]
     [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
-    public void convention_based_serialization(object json, InternationalBankAccountNumber svo)
-        => JsonTester.Write(svo).Should().Be(json);
+    public void System_Text_JSON_serialization(InternationalBankAccountNumber svo, object json)
+    => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
+    public void convention_based_serialization(InternationalBankAccountNumber svo, object json)
+       => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase("2017-06-11", typeof(FormatException))]

@@ -46,24 +46,25 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
     [TestCase(null, null)]
-    [TestCase("EUR", 978L)]
-    [TestCase("EUR", 978.0)]
+    [TestCase(978L, "EUR")]
+    [TestCase(978d, "EUR")]
     [TestCase("EUR", "EUR")]
-    public void System_Text_JSON_deserialization(Currency svo, object json)
+    public void System_Text_JSON_deserialization(object json, Currency svo)
         => JsonTester.Read_System_Text_JSON<Currency>(json).Should().Be(svo);
 
+    [TestCase(978L, "EUR")]
+    [TestCase("EUR", "EUR")]
+    public void convention_based_deserialization(object json, Currency svo)
+       => JsonTester.Read<Currency>(json).Should().Be(svo);
+
     [TestCase(null, null)]
     [TestCase("EUR", "EUR")]
-    public void System_Text_JSON_serialization(object json, Currency svo)
+    public void System_Text_JSON_serialization(Currency svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase("EUR", "EUR")]
-    public void convention_based_deserialization(Currency svo, object json)
-        => JsonTester.Read<Currency>(json).Should().Be(svo);
-
     [TestCase(null, null)]
     [TestCase("EUR", "EUR")]
-    public void convention_based_serialization(object json, Currency svo)
+    public void convention_based_serialization(Currency svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

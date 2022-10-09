@@ -406,35 +406,30 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("?", "unknown")]
-    [TestCase("Female", 2L)]
-    [TestCase("Female", 2.0)]
+    [TestCase("?", "?")]
+    [TestCase(null, null)]
+    [TestCase(2L, "Female")]
+    [TestCase(2d, "Female")]
     [TestCase("Female", "Female")]
-    public void System_Text_JSON_deserialization(Sex svo, object json)
+    public void System_Text_JSON_deserialization(object json, Sex svo)
         => JsonTester.Read_System_Text_JSON<Sex>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
+    [TestCase("?", "?")]
+    [TestCase(2L, "Female")]
+    [TestCase(2d, "Female")]
     [TestCase("Female", "Female")]
-    public void System_Text_JSON_serialization(object json, Sex svo)
+    public void convention_based_deserialization(object json, Sex svo)
+        => JsonTester.Read<Sex>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("Female", "Female")]
+    public void System_Text_JSON_serialization(Sex svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase("?", "unknown")]
-    [TestCase("Female", 2L)]
-    [TestCase("Female", 2d)]
+    [TestCase(null, null)]
     [TestCase("Female", "Female")]
-    public void convention_based_deserialization(Sex expected, object json)
-    {
-        var actual = JsonTester.Read<Sex>(json);
-        Assert.AreEqual(expected, actual);
-    }
-
-    [TestCase(null, "")]
-    [TestCase("Female", "Female")]
-    public void convention_based_serialization(object expected, Sex svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    public void convention_based_serialization(Sex svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase("2017-06-11", typeof(FormatException))]

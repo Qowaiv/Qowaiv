@@ -465,38 +465,30 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("?", "unknown")]
-    [TestCase(2017, "2017")]
-    [TestCase(2017, 2017L)]
-    [TestCase(2017, 2017.0)]
-    public void System_Text_JSON_deserialization(Year svo, object json)
-    => JsonTester.Read_System_Text_JSON<Year>(json).Should().Be(svo);
+    [TestCase("?", "?")]
+    [TestCase(null, null)]
+    [TestCase(2017d, 2017)]
+    [TestCase(2017L, 2017)]
+    [TestCase("2017", 2017)]
+    public void System_Text_JSON_deserialization(object json, Year svo)
+        => JsonTester.Read_System_Text_JSON<Year>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
-    [TestCase("?", "unknown")]
-    [TestCase(2017L, "2017")]
-    public void System_Text_JSON_serialization(object json, Year svo)
+    [TestCase("?", "?")]
+    [TestCase(2017d, 2017)]
+    [TestCase(2017L, 2017)]
+    [TestCase("2017", 2017)]
+    public void convention_based_deserialization(object json, Year svo)
+        => JsonTester.Read<Year>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase(2017, 2017L)]
+    public void System_Text_JSON_serialization(Year svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-
-    [TestCase("?", "unknown")]
-    [TestCase(2017, "2017")]
+    [TestCase(null, null)]
     [TestCase(2017, 2017L)]
-    [TestCase(2017, 2017.0)]
-    public void convention_based_deserialization(Year expected, object json)
-    {
-        var actual = JsonTester.Read<Year>(json);
-        Assert.AreEqual(expected, actual);
-    }
-
-    [TestCase(null, "")]
-    [TestCase("?", "unknown")]
-    [TestCase(2017L, "2017")]
-    public void convention_based_serialization(object expected, Year svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    public void convention_based_serialization(Year svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase("2017-06-11", typeof(FormatException))]

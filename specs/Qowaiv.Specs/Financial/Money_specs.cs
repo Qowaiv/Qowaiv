@@ -51,27 +51,27 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
     [TestCase("EUR 42.17", "EUR 42.17")]
-    [TestCase("EUR 42.17", "EUR42.17")]
-    [TestCase("EUR 42.17", "€42.17")]
-    [TestCase("100", 100L)]
-    [TestCase("42.17", 42.17)]
-    public void System_Text_JSON_deserialization(Money svo, object json)
+    [TestCase("EUR42.17", "EUR 42.17")]
+    [TestCase("€42.17", "EUR 42.17")]
+    [TestCase(100L, "100.00")]
+    [TestCase(42.17, "42.17")]
+    public void System_Text_JSON_deserialization(object json, Money svo)
         => JsonTester.Read_System_Text_JSON<Money>(json).Should().Be(svo);
 
+    [TestCase("EUR 42.17", "EUR 42.17")]
+    [TestCase("EUR42.17", "EUR 42.17")]
+    [TestCase("€42.17", "EUR 42.17")]
+    [TestCase(100L, "100.00")]
+    [TestCase(42.17, "42.17")]
+    public void convention_based_deserialization(object json, Money svo)
+       => JsonTester.Read<Money>(json).Should().Be(svo);
+
     [TestCase("EUR42.17", "EUR42.17")]
-    public void System_Text_JSON_serialization(object json, Money svo)
+    public void System_Text_JSON_serialization(Money svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase("EUR 42.17", "EUR 42.17")]
-    [TestCase("EUR 42.17", "EUR42.17")]
-    [TestCase("EUR 42.17", "€42.17")]
-    [TestCase("100", 100L)]
-    [TestCase("42.17", 42.17)]
-    public void convention_based_deserialization(Money svo, object json)
-        => JsonTester.Read<Money>(json).Should().Be(svo);
-
     [TestCase("EUR42.17", "EUR42.17")]
-    public void convention_based_serialization(object json, Money svo)
+    public void convention_based_serialization(Money svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

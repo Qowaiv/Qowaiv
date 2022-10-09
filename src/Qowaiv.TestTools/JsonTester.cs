@@ -12,16 +12,16 @@ public static class JsonTester
     [Pure]
     public static T? Read_System_Text_JSON<T>(object? val)
     {
-        return JsonSerializer.Deserialize<T>(ToString(val)?? string.Empty);
+        return JsonSerializer.Deserialize<T>(ToString(val));
 
-        static string? ToString(object? val)
+        static string ToString(object? val)
             => val switch
             {
                 string str => @$"""{str}""",
                 bool boolean => boolean ? "true" : "false",
                 IFormattable f => f.ToString(null, CultureInfo.InvariantCulture),
                 null => "null",
-                _ => val?.ToString(),
+                _ => val?.ToString() ?? string.Empty,
             };
 
     }

@@ -558,31 +558,24 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
     [TestCase("", null)]
-    [TestCase("", "")]
+    [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    public void System_Text_JSON_deserialization(Uuid svo, object json)
-    => JsonTester.Read_System_Text_JSON<Uuid>(json).Should().Be(svo);
+    public void System_Text_JSON_deserialization(object json, Uuid svo)
+        => JsonTester.Read_System_Text_JSON<Uuid>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    public void System_Text_JSON_serialization(object json, Uuid svo)
+    public void convention_based_deserialization(object json, Uuid svo)
+       => JsonTester.Read<Uuid>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    public void System_Text_JSON_serialization(Uuid svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase(null, "")]
+    [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    public void convention_based_deserialization(Uuid expected, object json)
-    {
-        var actual = JsonTester.Read<Uuid>(json);
-        Assert.AreEqual(expected, actual);
-    }
-
-    [TestCase(null, "")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    public void convention_based_serialization(object expected, Uuid svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    public void convention_based_serialization(Uuid svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)

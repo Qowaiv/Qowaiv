@@ -107,28 +107,26 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase(1600, "1600*")]
-    [TestCase(1700, "1700")]
-    [TestCase(1234, 1234L)]
+    [TestCase("1600*", 1600.0)]
+    [TestCase("1700", 1700.0)]
+    [TestCase(1234L, 1234.0)]
     [TestCase(1258.9, 1258.9)]
-    public void System_Text_JSON_deserialization(Elo svo, object json)
+    public void System_Text_JSON_deserialization(object json, Elo svo)
         => JsonTester.Read_System_Text_JSON<Elo>(json).Should().Be(svo);
 
-    [TestCase(1234, 1234L)]
+    [TestCase("1600*", 1600.0)]
+    [TestCase("1700", 1700.0)]
+    [TestCase(1234L, 1234.0)]
     [TestCase(1258.9, 1258.9)]
-    public void System_Text_JSON_serialization(object json, Elo svo)
+    public void convention_based_deserialization(object json, Elo svo)
+       => JsonTester.Read<Elo>(json).Should().Be(svo);
+
+    [TestCase(1258.9, 1258.9)]
+    public void System_Text_JSON_serialization(Elo svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
-    [TestCase(1600, "1600*")]
-    [TestCase(1700, "1700")]
-    [TestCase(1234, 1234L)]
+       
     [TestCase(1258.9, 1258.9)]
-    public void convention_based_deserialization(Elo svo, object json)
-        => JsonTester.Read<Elo>(json).Should().Be(svo);
-
-    [TestCase(1234, 1234L)]
-    [TestCase(1258.9, 1258.9)]
-    public void convention_based_serialization(object json, Elo svo)
+    public void convention_based_serialization(Elo svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

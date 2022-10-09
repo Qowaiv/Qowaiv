@@ -113,22 +113,22 @@
 
     public class Supports_JSON_serialization
     {
-        [TestCase("1988-06-13 22:10:05.001", 627178398050010000L)]
+        [TestCase(627178398050010000L, "1988-06-13 22:10:05.001")]
         [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
-        public void System_Text_JSON_deserialization(LocalDateTime svo, object json)
+        public void System_Text_JSON_deserialization(object json, LocalDateTime svo)
             => JsonTester.Read_System_Text_JSON<LocalDateTime>(json).Should().Be(svo);
 
+        [TestCase(627178398050010000L, "1988-06-13 22:10:05.001")]
         [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
-        public void System_Text_JSON_serialization(object json, LocalDateTime svo)
+        public void convention_based_deserialization(object json, LocalDateTime svo)
+          => JsonTester.Read<LocalDateTime>(json).Should().Be(svo);
+
+        [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+        public void System_Text_JSON_serialization(LocalDateTime svo, object json)
             => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-        [TestCase("1988-06-13 22:10:05.001", 627178398050010000L)]
         [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
-        public void convention_based_deserialization(LocalDateTime svo, object json)
-            => JsonTester.Read<LocalDateTime>(json).Should().Be(svo);
-
-        [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
-        public void convention_based_serialization(object json, LocalDateTime svo)
+        public void convention_based_serialization(LocalDateTime svo, object json)
             => JsonTester.Write(svo).Should().Be(json);
 
         [TestCase("Invalid input", typeof(FormatException))]

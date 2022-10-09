@@ -45,23 +45,23 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("", null)]
+    [TestCase(null, null)]
     [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
-    public void System_Text_JSON_deserialization(BusinessIdentifierCode svo, object json)
+    public void System_Text_JSON_deserialization(object json, BusinessIdentifierCode svo)
         => JsonTester.Read_System_Text_JSON<BusinessIdentifierCode>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
     [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
-    public void System_Text_JSON_serialization(object json, BusinessIdentifierCode svo)
+    public void convention_based_deserialization(object json, BusinessIdentifierCode svo)
+    => JsonTester.Read<BusinessIdentifierCode>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    public void System_Text_JSON_serialization(BusinessIdentifierCode svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
+    [TestCase(null, null)]
     [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
-    public void convention_based_deserialization(BusinessIdentifierCode svo, object json)
-        => JsonTester.Read<BusinessIdentifierCode>(json).Should().Be(svo);
-
-    [TestCase(null, "")]
-    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
-    public void convention_based_serialization(object json, BusinessIdentifierCode svo)
+    public void convention_based_serialization(BusinessIdentifierCode svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

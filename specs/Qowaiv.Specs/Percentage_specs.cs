@@ -1137,34 +1137,26 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("17.51%", "17.51")]
-    [TestCase("17.51%", "175.1‰")]
-    [TestCase("17.51%", 0.1751)]
-    [TestCase("100%", 1L)]
-    public void System_Text_JSON_deserialization(Percentage svo, object json)
+    [TestCase("17.51", "17.51%")]
+    [TestCase("175.1‰", "17.51%")]
+    [TestCase(0.1751, "17.51%")]
+    [TestCase(1L, "100%")]
+    public void System_Text_JSON_deserialization(object json, Percentage svo)
         => JsonTester.Read_System_Text_JSON<Percentage>(json).Should().Be(svo);
 
+    [TestCase("17.51", "17.51%")]
+    [TestCase("175.1‰", "17.51%")]
+    [TestCase(0.1751, "17.51%")]
+    public void convention_based_deserialization(object json, Percentage svo)
+        => JsonTester.Read<Percentage>(json).Should().Be(svo);
+
     [TestCase("17.51%", "17.51%")]
-    [TestCase("0%", "0%")]
-    public void System_Text_JSON_serialization(object json, Percentage svo)
+    public void System_Text_JSON_serialization(Percentage svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase("17.51%", "17.51")]
-    [TestCase("17.51%", "175.1‰")]
-    [TestCase("17.51%", 0.1751)]
-    public void convention_based_deserialization(Percentage expected, object json)
-    {
-        var actual = JsonTester.Read<Percentage>(json);
-        Assert.AreEqual(expected, actual);
-    }
-
     [TestCase("17.51%", "17.51%")]
-    [TestCase("0%", "0%")]
-    public void convention_based_serialization(object expected, Percentage svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    public void convention_based_serialization(Percentage svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)

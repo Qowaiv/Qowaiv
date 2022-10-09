@@ -2,26 +2,28 @@
 
 public class Supports_JSON_serialization
 {
-    [TestCase("", "")]
-    [TestCase(123456789L, "123456789")]
-    public void System_Text_JSON_deserialization(Int64Id svo, object json)
+    [TestCase("", null)]
+    [TestCase(null, null)]
+    [TestCase(17.0, 017L)]
+    [TestCase(123456789L, 123456789L)]
+    [TestCase("123456789", 123456789L)]
+    public void System_Text_JSON_deserialization(object json, Int64Id svo)
         => JsonTester.Read_System_Text_JSON<Int64Id>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
+    [TestCase("", null)]
+    [TestCase(123456789L, 123456789L)]
     [TestCase("123456789", 123456789L)]
-    [TestCase("123456789", "123456789")]
-    public void System_Text_JSON_serialization(object json, Int64Id svo)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
-    [TestCase("", "")]
-    [TestCase(123456789L, "123456789")]
-    public void convention_based_deserialization(Int64Id svo, object json)
+    public void convention_based_deserialization(object json, Int64Id svo)
         => JsonTester.Read<Int64Id>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
-    [TestCase("123456789", 123456789L)]
-    [TestCase("123456789", "123456789")]
-    public void convention_based_serialization(object json, Int64Id svo)
+    [TestCase(null, null)]
+    [TestCase(123456789L, "123456789")]
+    public void System_Text_JSON_serialization(Int64Id svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase(123456789L, "123456789")]
+    public void convention_based_serialization(Int64Id svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 }
 

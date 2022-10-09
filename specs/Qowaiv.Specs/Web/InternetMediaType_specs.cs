@@ -45,24 +45,23 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase(null, "")]
+    [TestCase(null, null)]
     [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
-    public void System_Text_JSON_deserialization(InternetMediaType svo, object json)
-    => JsonTester.Read_System_Text_JSON<InternetMediaType>(json).Should().Be(svo);
+    public void System_Text_JSON_deserialization(object json, InternetMediaType svo)
+        => JsonTester.Read_System_Text_JSON<InternetMediaType>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
     [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
-    public void System_Text_JSON_serialization(object json, InternetMediaType svo)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
-    [TestCase(null, "")]
-    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
-    public void convention_based_deserialization(InternetMediaType svo, object json)
+    public void convention_based_deserialization(object json, InternetMediaType svo)
         => JsonTester.Read<InternetMediaType>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
+    [TestCase(null, null)]
     [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
-    public void convention_based_serialization(object json, InternetMediaType svo)
+    public void System_Text_JSON_serialization(InternetMediaType svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    public void convention_based_serialization(InternetMediaType svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

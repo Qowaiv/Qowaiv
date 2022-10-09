@@ -34,15 +34,15 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, DateSpan svo)
         => JsonTester.Read_System_Text_JSON<DateSpan>(json).Should().Be(svo);
 
-    [TestCase("1Y+8M+3D", "1Y+8M+3D")]
-    public void System_Text_JSON_serialization(DateSpan svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
     [TestCase(0L, "0Y+0M+0D")]
     [TestCase("0Y+0M+0D", "0Y+0M+0D")]
     [TestCase("1Y+8M+3D", "1Y+8M+3D")]
     public void convention_based_deserialization(object json, DateSpan svo)
         => JsonTester.Read<DateSpan>(json).Should().Be(svo);
+
+    [TestCase("1Y+8M+3D", "1Y+8M+3D")]
+    public void System_Text_JSON_serialization(DateSpan svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase("1Y+8M+3D", "1Y+8M+3D")]
     public void convention_based_serialization(DateSpan svo, object json)

@@ -379,31 +379,25 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("?", "unknown")]
+    [TestCase("?", "?")]
     [TestCase("info@qowaiv.org", "info@qowaiv.org")]
-    public void System_Text_JSON_deserialization(EmailAddress svo, object json)
+    public void System_Text_JSON_deserialization(object json, EmailAddress svo)
         => JsonTester.Read_System_Text_JSON<EmailAddress>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
+    [TestCase("?", "?")]
+    [TestCase("info@qowaiv.org", "info@qowaiv.org")]
+    public void convention_based_deserialization(object json, EmailAddress svo)
+        => JsonTester.Read<EmailAddress>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
     [TestCase("info@qowaiv.org", "info@qowaiv.org")]
     public void System_Text_JSON_serialization(object json, EmailAddress svo)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase("?", "unknown")]
+    [TestCase(null, null)]
     [TestCase("info@qowaiv.org", "info@qowaiv.org")]
-    public void convention_based_deserialization(EmailAddress expected, object json)
-    {
-        var actual = JsonTester.Read<EmailAddress>(json);
-        Assert.AreEqual(expected, actual);
-    }
-
-    [TestCase(null, "")]
-    [TestCase("info@qowaiv.org", "info@qowaiv.org")]
-    public void convention_based_serialization(object expected, EmailAddress svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    public void convention_based_serialization(object json, EmailAddress svo)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase("2017-06-11", typeof(FormatException))]

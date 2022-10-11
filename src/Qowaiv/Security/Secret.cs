@@ -7,6 +7,9 @@ namespace Qowaiv.Security;
 /// <summary>Represents a secret.</summary>
 [TypeConverter(typeof(SecretTypeConverter))]
 [DebuggerDisplay("{DebuggerDisplay}")]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.SecretJsonConverter))]
+#endif
 public readonly struct Secret : IEquatable<Secret>
 {
     /// <summary>Represents an empty/not set secret.</summary>
@@ -73,12 +76,12 @@ public readonly struct Secret : IEquatable<Secret>
     /// A secret describing a cryptographic seed.
     /// </param >
     [Pure]
-    public static Secret Parse(string str)
-        => string.IsNullOrEmpty(str)
+    public static Secret Parse(string? str)
+        => str is not { Length: > 0 }
         ? Empty
         : new(str);
 
     /// <summary>Creates a secret from a JSON string node.</summary>
     [Pure]
-    public static Secret FromJson(string json) => Parse(json);
+    public static Secret FromJson(string? json) => Parse(json);
 }

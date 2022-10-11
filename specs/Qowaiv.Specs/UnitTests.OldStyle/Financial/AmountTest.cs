@@ -269,67 +269,6 @@ namespace Qowaiv.Financial.UnitTests
 
         #endregion
 
-        #region JSON (De)serialization tests
-
-        [Test]
-        public void FromJson_InvalidStringValue_AssertFormatException()
-        {
-            Assert.Catch<FormatException>(() =>
-            {
-                JsonTester.Read<Amount>("InvalidStringValue");
-            },
-            "Not a valid Amount");
-        }
-        [Test]
-        public void FromJson_StringValue_AreEqual()
-        {
-            var act = JsonTester.Read<Amount>("42.17");
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_Int64Value_AreEqual()
-        {
-            Amount act = JsonTester.Read<Amount>((long)TestStruct);
-            Amount exp = (Amount)42;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void FromJson_DoubleValue_AreEqual()
-        {
-            var act = JsonTester.Read<Amount>((double)TestStruct);
-            var exp = TestStruct;
-
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void ToJson_TestStruct_AreEqual()
-        {
-            var act = JsonTester.Write(TestStruct);
-            var exp = 42.17m;
-            Assert.AreEqual(exp, act);
-        }
-
-        [Test]
-        public void ToJson_ConstructedZero()
-        {
-            var pls = (Amount)12.456m;
-            var min = (Amount)(-12.456m);
-            var sum = min + pls;
-            
-            var act = sum.ToJson().ToString(CultureInfo.InvariantCulture);
-            var exp = "0";
-
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region IFormattable / ToString tests
 
         [Test]

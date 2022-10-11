@@ -49,6 +49,38 @@ public class Supports_type_conversion
     public void to_double()
         => Converting.To<double>().From(Svo.Amount).Should().Be(42.17);
 
+
+    public class Supports_JSON_serialization
+    {
+        [TestCase("1234.56", 1234.56)]
+        [TestCase(1234.56, 1234.56)]
+        [TestCase(1234L, 1234.00)]
+        public void System_Text_JSON_deserialization(object json, Amount svo)
+            => JsonTester.Read_System_Text_JSON<Amount>(json).Should().Be(svo);
+
+        [TestCase("1234.56", 1234.56)]
+        [TestCase(1234.56, 1234.56)]
+        [TestCase(1234L, 1234.00)]
+        public void convention_based_deserialization(object json, Amount svo)
+          => JsonTester.Read<Amount>(json).Should().Be(svo);
+
+        [TestCase(1234.56, 1234.56)]
+        public void System_Text_JSON_serialization(Amount svo, object json)
+            => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+        [TestCase(1234.56, 1234.56)]
+        public void convention_based_serialization(Amount svo, object json)
+            => JsonTester.Write(svo).Should().Be(json);
+
+        [TestCase("Invalid input", typeof(FormatException))]
+        [TestCase("2017-06-11", typeof(FormatException))]
+        public void throws_for_invalid_json(object json, Type exceptionType)
+        {
+            var exception = Assert.Catch(() => JsonTester.Read<Amount>(json));
+            Assert.IsInstanceOf(exceptionType, exception);
+        }
+    }
+
     public class Has_operators
     {
         [Test]

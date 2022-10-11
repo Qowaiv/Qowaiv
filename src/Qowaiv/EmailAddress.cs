@@ -12,6 +12,9 @@ namespace Qowaiv;
 [OpenApiDataType(description: "Email notation as defined by RFC 5322.", example: "svo@qowaiv.org", type: "string", format: "email", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Email notation as defined by RFC 5322.", example: "svo@qowaiv.org", type: "string", format: "email", nullable: true)]
 [TypeConverter(typeof(EmailAddressTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.EmailAddressJsonConverter))]
+#endif
 public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>
 {
     /// <summary>An email address must not exceed 254 characters.</summary>

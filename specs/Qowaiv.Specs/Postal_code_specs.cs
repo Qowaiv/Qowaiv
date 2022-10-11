@@ -1,4 +1,6 @@
-﻿namespace Postal_code_specs;
+﻿using System.Text.Json;
+
+namespace Postal_code_specs;
 
 public class With_domain_logic
 {
@@ -442,21 +444,26 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("?", "unknown")]
+    [TestCase("?", "?")]
+    [TestCase(null, null)]
     [TestCase("1234", "1234")]
-    public void convention_based_deserialization(PostalCode expected, object json)
-    {
-        var actual = JsonTester.Read<PostalCode>(json);
-        Assert.AreEqual(expected, actual);
-    }
+    public void System_Text_JSON_deserialization(object json, PostalCode svo)
+        => JsonTester.Read_System_Text_JSON<PostalCode>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
+    [TestCase("?", "?")]
     [TestCase("1234", "1234")]
-    public void convention_based_serialization(object expected, PostalCode svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    public void convention_based_deserialization(object json, PostalCode svo)
+      => JsonTester.Read<PostalCode>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("1234", "1234")]
+    public void System_Text_JSON_based_serialization(PostalCode svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase("1234", "1234")]
+    public void convention_based_serialization(PostalCode svo, string json)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("01234567890", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)

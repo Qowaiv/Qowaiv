@@ -42,3 +42,41 @@ public class Supports_type_conversion
         }
     }
 }
+
+public class Supports_JSON_serialization
+{
+    [TestCase("Netherlands", "NL")]
+    [TestCase("nl", "NL")]
+    [TestCase(4.00, "AF")]
+    [TestCase(100L, "BG")]
+    [TestCase(null, null)]
+    [TestCase("?", "?")]
+    public void System_Text_JSON_deserialization(object json, Country svo)
+        => JsonTester.Read_System_Text_JSON<Country>(json).Should().Be(svo);
+
+    [TestCase("Netherlands", "NL")]
+    [TestCase("nl", "NL")]
+    [TestCase(100L, "BG")]
+    [TestCase("?", "?")]
+    public void convention_based_deserialization(object json, Country svo)
+        => JsonTester.Read<Country>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("NL", "NL")]
+    public void System_Text_JSON_serialization(Country svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase("NL", "NL")]
+    public void convention_based_serialization(Country svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<Country>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}

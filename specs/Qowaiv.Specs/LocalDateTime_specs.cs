@@ -110,4 +110,34 @@
         public void to_WeekDate()
             => Converting.To<WeekDate>().From(Svo.LocalDateTime).Should().Be(Svo.WeekDate);
     }
+
+    public class Supports_JSON_serialization
+    {
+        [TestCase(627178398050010000L, "1988-06-13 22:10:05.001")]
+        [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+        public void System_Text_JSON_deserialization(object json, LocalDateTime svo)
+            => JsonTester.Read_System_Text_JSON<LocalDateTime>(json).Should().Be(svo);
+
+        [TestCase(627178398050010000L, "1988-06-13 22:10:05.001")]
+        [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+        public void convention_based_deserialization(object json, LocalDateTime svo)
+          => JsonTester.Read<LocalDateTime>(json).Should().Be(svo);
+
+        [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+        public void System_Text_JSON_serialization(LocalDateTime svo, object json)
+            => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+        [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+        public void convention_based_serialization(LocalDateTime svo, object json)
+            => JsonTester.Write(svo).Should().Be(json);
+
+        [TestCase("Invalid input", typeof(FormatException))]
+        [TestCase("yyyy-06-11", typeof(FormatException))]
+        [TestCase(true, typeof(InvalidOperationException))]
+        public void throws_for_invalid_json(object json, Type exceptionType)
+        {
+            var exception = Assert.Catch(() => JsonTester.Read<LocalDateTime>(json));
+            Assert.IsInstanceOf(exceptionType, exception);
+        }
+    }
 }

@@ -468,30 +468,46 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+    [TestCase(null, null)]
     [TestCase("yes", "yes")]
-    [TestCase("yes", true)]
-    [TestCase("no", false)]
-    [TestCase("yes", 1L)]
-    [TestCase("yes", 1.1)]
-    [TestCase("no", 0.0)]
-    [TestCase("?", (long)byte.MaxValue)]
-    [TestCase("?", (long)short.MaxValue)]
-    [TestCase("?", (long)int.MaxValue)]
-    [TestCase("?", long.MaxValue)]
-    [TestCase("?", "unknown")]
-    public void convention_based_deserialization(YesNo expected, object json)
-    {
-        var actual = JsonTester.Read<YesNo>(json);
-        Assert.AreEqual(expected, actual);
-    }
+    [TestCase("no", "no")]
+    [TestCase(true, "yes")]
+    [TestCase(false, "no")]
+    [TestCase(1L, "yes")]
+    [TestCase(1.0, "yes")]
+    [TestCase(0.0, "no")]
+    [TestCase((long)byte.MaxValue, "?")]
+    [TestCase((long)short.MaxValue, "?")]
+    [TestCase((long)int.MaxValue, "?")]
+    [TestCase(long.MaxValue, "?")]
+    [TestCase("?", "?")]
+    public void System_Text_JSON_deserialization(object json, YesNo svo)
+        => JsonTester.Read_System_Text_JSON<YesNo>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
     [TestCase("yes", "yes")]
-    public void convention_based_serialization(object expected, YesNo svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    [TestCase("no", "no")]
+    [TestCase(true, "yes")]
+    [TestCase(false, "no")]
+    [TestCase(1L, "yes")]
+    [TestCase(1.0, "yes")]
+    [TestCase(0.0, "no")]
+    [TestCase((long)byte.MaxValue, "?")]
+    [TestCase((long)short.MaxValue, "?")]
+    [TestCase((long)int.MaxValue, "?")]
+    [TestCase(long.MaxValue, "?")]
+    [TestCase("?", "?")]
+    public void convention_based_deserialization(object json, YesNo svo)
+        => JsonTester.Read<YesNo>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("yes", "yes")]
+    public void System_Text_JSON_serialization(YesNo svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase("yes", "yes")]
+    public void convention_based_serialization(YesNo svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase("2017-06-11", typeof(FormatException))]

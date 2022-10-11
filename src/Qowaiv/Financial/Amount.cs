@@ -8,6 +8,9 @@ namespace Qowaiv.Financial;
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [OpenApi.OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [TypeConverter(typeof(AmountTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.AmountJsonConverter))]
+#endif
 public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
 {
     /// <summary>Represents an Amount of zero.</summary>

@@ -245,42 +245,6 @@
 
         #endregion
 
-        #region JSON (De)serialization tests
-
-        [TestCase("Invalid input")]
-        [TestCase("2017-06-11")]
-        public void FromJson_Invalid_Throws(object json)
-        {
-            Assert.Catch<FormatException>(() => JsonTester.Read<StreamSize>(json));
-        }
-        [TestCase(1600, "1600")]
-        [TestCase(17_000_000, "17MB")]
-        [TestCase(1_766, "1.766Kb")]
-        [TestCase(1234, 1234L)]
-        [TestCase(1258, 1258.9)]
-        public void FromJson(StreamSize expected, object json)
-        {
-            var actual = JsonTester.Read<StreamSize>(json);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void ToJson_DefaultValue_IsZero()
-        {
-            object act = JsonTester.Write(default(StreamSize));
-            object exp = 0;
-            Assert.AreEqual(exp, act);
-        }
-        [Test]
-        public void ToJson_TestStruct_AreEqual()
-        {
-            var act = JsonTester.Write(TestStruct);
-            var exp = 123456789L;
-            Assert.AreEqual(exp, act);
-        }
-
-        #endregion
-
         #region IFormattable / ToString tests
 
         [Test]

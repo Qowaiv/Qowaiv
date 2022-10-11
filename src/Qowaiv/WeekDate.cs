@@ -32,6 +32,9 @@
 [OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [TypeConverter(typeof(WeekDateTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.WeekDateJsonConverter))]
+#endif
 public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>

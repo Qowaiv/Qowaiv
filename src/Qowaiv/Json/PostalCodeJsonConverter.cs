@@ -1,0 +1,17 @@
+﻿#if NET5_0_OR_GREATER
+
+namespace Qowaiv.Json;
+
+/// <summary>Provides a JSON conversion for a postal code.</summary>
+public sealed class PostalCodeJsonConverter : SvoJsonConverter<PostalCode>
+{
+    /// <inheritdoc />
+    [Pure]
+    protected override PostalCode FromJson(string? json) => PostalCode.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
+    protected override object? ToJson(PostalCode svo) => svo.ToJson();
+}
+
+#endif

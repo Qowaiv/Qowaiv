@@ -126,13 +126,20 @@ public class Does_not_support_type_converstion_to
 public class Supports_JSON_deserialization
 {
     [Test]
+    public void System_Text_JSON_deserialization()
+        => JsonTester.Read_System_Text_JSON<CryptographicSeed>("Qowaiv==").Value().Should().Be(Svo.CryptographicSeed.Value());
+
+    [Test]
     public void convention_based_deserialization()
         => JsonTester.Read<CryptographicSeed>("Qowaiv==").Value().Should().Be(Svo.CryptographicSeed.Value());
-
 }
 
 public class Does_not_supports_JSON_serialization
 {
+    [Test]
+    public void serializes_to_null_System_Text_JSON()
+       => JsonTester.Write_System_Text_JSON(Svo.CryptographicSeed).Should().BeNull();
+
     [Test]
     public void serializes_to_null()
         => JsonTester.Write(Svo.CryptographicSeed).Should().BeNull();

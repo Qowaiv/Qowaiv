@@ -89,7 +89,7 @@ public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-        => CasRegistryNumber.Empty.Should().Be(default(CasRegistryNumber));
+        => CasRegistryNumber.Empty.Should().Be(default);
 }
 
 public class Is_equal_by_value
@@ -381,14 +381,24 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("?", "unknown")]
-    [TestCase("10028-14-5", 10028_14_5L)]
-    public void convention_based_deserialization(CasRegistryNumber svo, object json)
-        => JsonTester.Read<CasRegistryNumber>(json).Should().Be(svo);
+    [TestCase("?", "?")]
+    [TestCase(10028_14_5L, "10028-14-5")]
+    public void System_Text_JSON_deserialization(object json, CasRegistryNumber svo)
+      => JsonTester.Read_System_Text_JSON<CasRegistryNumber>(json).Should().Be(svo);
+    
+    [TestCase("?", "?")]
+    [TestCase(10028_14_5L, "10028-14-5")]
+    public void convention_based_deserialization(object json, CasRegistryNumber svo)
+       => JsonTester.Read<CasRegistryNumber>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
+    [TestCase(null, null)]
     [TestCase("10028-14-5", "10028-14-5")]
-    public void convention_based_serialization(object json, CasRegistryNumber svo)
+    public void System_Text_JSON_serialization(CasRegistryNumber svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase("10028-14-5", "10028-14-5")]
+    public void convention_based_serialization(CasRegistryNumber svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]

@@ -383,39 +383,6 @@ public class CurrencyTest
 
     #endregion
 
-    #region JSON (De)serialization tests
-
-    [TestCase("Invalid input")]
-    [TestCase("2017-06-11")]
-    [TestCase(long.MinValue)]
-    public void FromJson_Invalid_Throws(object json)
-    {
-        Assert.Catch<FormatException>(() => JsonTester.Read<Currency>(json));
-    }
-
-    [Test]
-    public void FromJson_EUR_EqualsTestStruct()
-    {
-        var actual = JsonTester.Read<Currency>("EUR");
-        Assert.AreEqual(TestStruct, actual);
-    }
-
-    [Test]
-    public void ToJson_DefaultValue_IsNull()
-    {
-        object act = JsonTester.Write(default(Currency));
-        Assert.IsNull(act);
-    }
-    [Test]
-    public void ToJson_TestStruct_AreEqual()
-    {
-        var act = JsonTester.Write(TestStruct);
-        var exp = "EUR";
-        Assert.AreEqual(exp, act);
-    }
-
-    #endregion
-
     #region IFormattable / ToString tests
 
     [Test]

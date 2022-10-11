@@ -25,6 +25,9 @@ namespace Qowaiv.Financial;
 [OpenApiDataType(description: "Currency notation as defined by ISO 4217.", example: "EUR", type: "string", format: "currency", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Currency notation as defined by ISO 4217.", example: "EUR", type: "string", format: "currency", nullable: true)]
 [TypeConverter(typeof(CurrencyTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.CurrencyJsonConverter))]
+#endif
 public readonly partial struct Currency : ISerializable, IXmlSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
 {
     /// <summary>Represents an empty/not set currency.</summary>

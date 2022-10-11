@@ -96,6 +96,43 @@ public class Supports_type_conversion
         => Converting.To<long>().From(Svo.HouseNumber).Should().Be(123456789L);
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase(null, null)]
+    [TestCase("?", "?")]
+    [TestCase("17", "17")]
+    [TestCase(17d, "17")]
+    [TestCase(17L, "17")]
+    public void System_Text_JSON_deserialization(object json, HouseNumber svo)
+        => JsonTester.Read_System_Text_JSON<HouseNumber>(json).Should().Be(svo);
+
+    [TestCase("?", "?")]
+    [TestCase("17", "17")]
+    [TestCase(17d, "17")]
+    [TestCase(17L, "17")]
+    public void convention_based_deserialization(HouseNumber svo, object json)
+       => JsonTester.Read<HouseNumber>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase(17, "17")]
+    public void System_Text_JSON_serialization(HouseNumber svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase(17, "17")]
+    public void convention_based_serialization(HouseNumber svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<HouseNumber>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
+
 public class Is_Open_API_data_type
 {
     [Test]

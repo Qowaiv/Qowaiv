@@ -246,55 +246,6 @@ public class DateTest
 
     #endregion
 
-    #region JSON (De)serialization tests
-
-    [Test]
-    public void FromJson_InvalidStringValue_AssertFormatException()
-    {
-        Assert.Catch<FormatException>(() =>
-        {
-            JsonTester.Read<Date>("InvalidStringValue");
-        },
-        "Not a valid date");
-    }
-
-    [TestCase("2012-04-23")]
-    [TestCase("2012-04-23T18:25:43.511Z")]
-    [TestCase("2012-04-23T10:25:43-05:00")]
-    public void FromJson_StringValue_AreEqual(string str)
-    {
-        var act = JsonTester.Read<Date>(str);
-        var exp = new Date(2012, 04, 23);
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromJson_Int64Value_AreEqual()
-    {
-        var act = JsonTester.Read<Date>(TestStruct.Ticks);
-        var exp = TestStruct;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void ToJson_DefaultValue_AreEqual()
-    {
-        object act = JsonTester.Write(default(Date));
-        object exp = "0001-01-01";
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void ToJson_TestStruct_AreEqual()
-    {
-        var act = JsonTester.Write(TestStruct);
-        var exp = "1970-02-14";
-        Assert.AreEqual(exp, act);
-    }
-
-    #endregion
-
     #region IFormattable / Tostring tests
 
     [Test]

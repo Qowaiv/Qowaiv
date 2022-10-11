@@ -5,6 +5,9 @@ namespace Qowaiv.Security.Cryptography;
 /// <summary>Represents a cryptographic seed.</summary>
 [TypeConverter(typeof(CryptographicSeedTypeConverter))]
 [DebuggerDisplay("{DebuggerDisplay}")]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.Cryptography.CryptographicSeedJsonConverter))]
+#endif
 public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
 {
     /// <summary>Represents an empty/not set cryptographic seed.</summary>
@@ -76,7 +79,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     /// A cryptographic seed describing a cryptographic seed.
     /// </param >
     [Pure]
-    public static CryptographicSeed Parse(string str)
+    public static CryptographicSeed Parse(string? str)
         => TryParse(str, out var seed)
         ? seed
         : throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
@@ -93,10 +96,10 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, out CryptographicSeed result)
+    public static bool TryParse(string? s, out CryptographicSeed result)
     {
         result = Empty;
-        if (string.IsNullOrEmpty(s)) return true;
+        if (s is not { Length: > 0 }) return true;
         else if (Base64.TryGetBytes(s, out byte[] bytes))
         {
             result = Create(bytes);
@@ -117,5 +120,5 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
 
     /// <summary>Creates a cryptographic seed from a JSON string node.</summary>
     [Pure]
-    public static CryptographicSeed FromJson(string json) => Parse(json);
+    public static CryptographicSeed FromJson(string? json) => Parse(json);
 }

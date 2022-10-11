@@ -254,36 +254,6 @@ public class DateSpanTest
 
     #endregion
 
-    #region JSON (De)serialization tests
-
-    [Test]
-    public void FromJson_StringValue_AreEqual()
-    {
-        var act = JsonTester.Read<DateSpan>(TestStruct.ToString(CultureInfo.InvariantCulture));
-        var exp = TestStruct;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void ToJson_DefaultValue_AreEqual()
-    {
-        object act = JsonTester.Write(default(DateSpan));
-        object exp = "0Y+0M+0D";
-
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void ToJson_TestStruct_AreEqual()
-    {
-        var act = JsonTester.Write(TestStruct);
-        var exp = TestStruct.ToString(CultureInfo.InvariantCulture);
-
-        Assert.AreEqual(exp, act);
-    }
-
-    #endregion
-
     #region IFormattable / Tostring tests
 
     [Test]

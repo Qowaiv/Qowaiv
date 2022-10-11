@@ -45,6 +45,43 @@ public class Is_equal_by_value
     }
 }
 
+public class Supports_JSON_serialization
+{
+    [TestCase(null, null)]
+    [TestCase(1849341697d, "0x000000006E3AB701")]
+    [TestCase(1849341697L, "0x000000006E3AB701")]
+    [TestCase("1849341697", "0x000000006E3AB701")]
+    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    public void System_Text_JSON_deserialization(object json, Timestamp svo)
+        => JsonTester.Read_System_Text_JSON<Timestamp>(json).Should().Be(svo);
+
+    [TestCase(1849341697d, "0x000000006E3AB701")]
+    [TestCase(1849341697L, "0x000000006E3AB701")]
+    [TestCase("1849341697", "0x000000006E3AB701")]
+    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    public void convention_based_deserialization(object json, Timestamp svo)
+      => JsonTester.Read<Timestamp>(json).Should().Be(svo);
+
+    [TestCase(null, "0x0000000000000000")]
+    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    public void System_Text_JSON_serialization(Timestamp svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, "0x0000000000000000")]
+    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    public void convention_based_serialization(Timestamp svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017-06-11", typeof(FormatException))]
+    [TestCase(true, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        var exception = Assert.Catch(() => JsonTester.Read<Timestamp>(json));
+        Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
+
 
 public class Is_Open_API_data_type
 {

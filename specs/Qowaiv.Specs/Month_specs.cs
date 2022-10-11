@@ -498,22 +498,30 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("?", "unknown")]
-    [TestCase("February", 2.0)]
-    [TestCase("February", 2L)]
-    public void convention_based_deserialization(Month expected, object json)
-    {
-        var actual = JsonTester.Read<Month>(json);
-        Assert.AreEqual(expected, actual);
-    }
+    [TestCase(null, null)]
+    [TestCase("?", "?")]
+    [TestCase(2.0, "February")]
+    [TestCase(2L, "February")]
+    [TestCase("feb", "February")]
+    public void System_Text_JSON_deserialization(object json, Month svo)
+        => JsonTester.Read_System_Text_JSON<Month>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
-    [TestCase("Feb", "February")]
-    public void convention_based_serialization(object expected, Month svo)
-    {
-        var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
-    }
+    [TestCase("?", "?")]
+    [TestCase(2.0, "February")]
+    [TestCase(2L, "February")]
+    [TestCase("feb", "February")]
+    public void convention_based_deserialization(object json, Month svo)
+        => JsonTester.Read<Month>(json).Should().Be(svo);
+
+    [TestCase(null, null)]
+    [TestCase("Feb", "Feb")]
+    public void System_Text_JSON_serialization(Month svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(null, null)]
+    [TestCase("Feb", "Feb")]
+    public void convention_based_serialization(Month svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
 
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase("2017-06-11", typeof(FormatException))]

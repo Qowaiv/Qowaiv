@@ -6,6 +6,9 @@
 [OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information.", example: "2017-06-10 15:00", type: "string", format: "local-date-time")]
 [OpenApi.OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information.", example: "2017-06-10 15:00", type: "string", format: "local-date-time")]
 [TypeConverter(typeof(LocalDateTimeTypeConverter))]
+#if NET5_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.LocalDateTimeJsonConverter))]
+#endif
 public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
 {
     private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";

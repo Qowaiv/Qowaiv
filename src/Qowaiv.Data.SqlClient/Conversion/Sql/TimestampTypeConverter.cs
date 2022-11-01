@@ -4,6 +4,7 @@ namespace Qowaiv.Conversion.Sql;
 
 /// <summary>Provides a conversion for a time stamp.</summary>
 [CLSCompliant(false /* based on the non compliant UInt64. */)]
+[Inheritable]
 public class TimestampTypeConverter : NumericTypeConverter<Timestamp, ulong>
 {
     /// <inheritdoc/>

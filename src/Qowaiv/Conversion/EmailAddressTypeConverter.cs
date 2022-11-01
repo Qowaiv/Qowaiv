@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for an email address.</summary>
+[Inheritable]
 public class EmailAddressTypeConverter : SvoTypeConverter<EmailAddress>
 {
     /// <inheritdoc/>

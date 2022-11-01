@@ -3,7 +3,8 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a sex.</summary>
-public sealed class SexJsonConverter : SvoJsonConverter<Sex>
+[Inheritable]
+public class SexJsonConverter : SvoJsonConverter<Sex>
 {
     /// <inheritdoc />
     [Pure]

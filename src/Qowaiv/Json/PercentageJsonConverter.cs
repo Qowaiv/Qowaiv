@@ -3,7 +3,8 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a percentage.</summary>
-public sealed class PercentageJsonConverter : SvoJsonConverter<Percentage>
+[Inheritable]
+public class PercentageJsonConverter : SvoJsonConverter<Percentage>
 {
     /// <inheritdoc />
     [Pure]

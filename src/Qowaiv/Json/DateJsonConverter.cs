@@ -3,7 +3,8 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a date.</summary>
-public sealed class DateJsonConverter : SvoJsonConverter<Date>
+[Inheritable]
+public class DateJsonConverter : SvoJsonConverter<Date>
 {
     /// <inheritdoc />
     [Pure]

@@ -5,7 +5,8 @@ using Qowaiv.Statistics;
 namespace Qowaiv.Json.Statistics;
 
 /// <summary>Provides a JSON conversion for an Elo.</summary>
-public sealed class EloJsonConverter : SvoJsonConverter<Elo>
+[Inheritable]
+public class EloJsonConverter : SvoJsonConverter<Elo>
 {
     /// <inheritdoc />
     [Pure]

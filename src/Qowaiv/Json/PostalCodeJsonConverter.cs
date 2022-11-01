@@ -3,7 +3,8 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a postal code.</summary>
-public sealed class PostalCodeJsonConverter : SvoJsonConverter<PostalCode>
+[Inheritable]
+public class PostalCodeJsonConverter : SvoJsonConverter<PostalCode>
 {
     /// <inheritdoc />
     [Pure]

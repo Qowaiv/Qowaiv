@@ -1,6 +1,7 @@
 namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a date span.</summary>
+[Inheritable]
 public class DateSpanTypeConverter : TypeConverter
 {
     /// <summary>Returns whether this converter can convert an string to

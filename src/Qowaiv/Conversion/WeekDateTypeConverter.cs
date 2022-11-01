@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a week date.</summary>
+[Inheritable]
 public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
 {
     /// <inheritdoc />

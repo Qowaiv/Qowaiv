@@ -1,7 +1,7 @@
 ﻿namespace Qowaiv;
 
 /// <summary>Implements the <see cref="UuidComparer"/> for SQL Server.</summary>
-internal class UuidSqlServerComparer : UuidComparer
+internal sealed class UuidSqlServerComparer : UuidComparer
 {
     /// <inheritdoc/>
     /// <remarks>

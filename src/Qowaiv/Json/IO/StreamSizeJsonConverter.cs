@@ -5,7 +5,8 @@ using Qowaiv.IO;
 namespace Qowaiv.Json.IO;
 
 /// <summary>Provides a JSON conversion for a stream size.</summary>
-public sealed class StreamSizeJsonConverter : SvoJsonConverter<StreamSize>
+[Inheritable]
+public class StreamSizeJsonConverter : SvoJsonConverter<StreamSize>
 {
     /// <inheritdoc />
     [Pure]

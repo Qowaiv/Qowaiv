@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a postal code.</summary>
+[Inheritable]
 public class PostalCodeTypeConverter : SvoTypeConverter<PostalCode>
 {
     /// <inheritdoc/>

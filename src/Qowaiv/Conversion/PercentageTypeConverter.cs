@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a Percentage.</summary>
+[Inheritable]
 public class PercentageTypeConverter : NumericTypeConverter<Percentage, decimal>
 {
     /// <inheritdoc/>

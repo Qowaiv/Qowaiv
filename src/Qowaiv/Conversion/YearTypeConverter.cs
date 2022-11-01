@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a year.</summary>
+[Inheritable]
 public class YearTypeConverter : NumericTypeConverter<Year, int>
 {
     /// <inheritdoc/>

@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a month.</summary>
+[Inheritable]
 public class MonthTypeConverter : NumericTypeConverter<Month, byte>
 {
     /// <inheritdoc />

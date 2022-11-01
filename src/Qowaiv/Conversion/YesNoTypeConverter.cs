@@ -1,6 +1,7 @@
 namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a Yes-no.</summary>
+[Inheritable]
 public class YesNoTypeConverter : SvoTypeConverter<YesNo>
 {
     /// <inheritdoc/>

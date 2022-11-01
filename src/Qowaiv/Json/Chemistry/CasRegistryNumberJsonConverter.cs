@@ -5,7 +5,8 @@ using Qowaiv.Chemistry;
 namespace Qowaiv.Json.Chemistry;
 
 /// <summary>Provides a JSON conversion for a CAS registry.</summary>
-public sealed class CasRegistryNumberJsonConverter : SvoJsonConverter<CasRegistryNumber>
+[Inheritable]
+public class CasRegistryNumberJsonConverter : SvoJsonConverter<CasRegistryNumber>
 {
     /// <inheritdoc />
     [Pure]

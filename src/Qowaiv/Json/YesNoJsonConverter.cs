@@ -3,7 +3,8 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a yes-no.</summary>
-public sealed class YesNoJsonConverter : SvoJsonConverter<YesNo>
+[Inheritable]
+public class YesNoJsonConverter : SvoJsonConverter<YesNo>
 {
     /// <inheritdoc />
     [Pure]

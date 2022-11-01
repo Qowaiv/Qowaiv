@@ -3,7 +3,8 @@
 namespace Qowaiv.Conversion.Chemistry;
 
 /// <summary>Provides a conversion for a house number.</summary>
-public sealed class CasRegistryNumberTypeConverter : NumericTypeConverter<CasRegistryNumber, long>
+[Inheritable]
+public class CasRegistryNumberTypeConverter : NumericTypeConverter<CasRegistryNumber, long>
 {
     /// <inheritdoc />
     [Pure]

@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a local date time.</summary>
+[Inheritable]
 public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
 {
     /// <inheritdoc />

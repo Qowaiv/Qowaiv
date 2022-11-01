@@ -5,7 +5,8 @@ using Qowaiv.Web;
 namespace Qowaiv.Json.Web;
 
 /// <summary>Provides a JSON conversion for an Internet media type.</summary>
-public sealed class InternetMediaTypeJsonConverter : SvoJsonConverter<InternetMediaType>
+[Inheritable]
+public class InternetMediaTypeJsonConverter : SvoJsonConverter<InternetMediaType>
 {
     /// <inheritdoc />
     [Pure]

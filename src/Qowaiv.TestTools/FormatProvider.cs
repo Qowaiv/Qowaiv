@@ -16,7 +16,7 @@ public static class FormatProvider
     public static readonly IFormatProvider Empty = new EmptyFormatProvider();
 
     /// <summary>Represents a format provider, that contains no format types.</summary>
-    private class EmptyFormatProvider : IFormatProvider
+    private sealed class EmptyFormatProvider : IFormatProvider
     {
         /// <summary>Always returns null.</summary>
         [Pure]
@@ -24,7 +24,7 @@ public static class FormatProvider
     }
 
     /// <summary>Represents the unit test format provider.</summary>
-    private class CustomFormatProvider: IFormatProvider, ICustomFormatter
+    private sealed class CustomFormatProvider: IFormatProvider, ICustomFormatter
     {
         /// <summary>Returns an object that provides formatting services for the specified type.</summary>
         /// <param name="formatType">

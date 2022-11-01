@@ -3,6 +3,7 @@
 namespace Qowaiv.Conversion.Financial;
 
 /// <summary>Provides a conversion for an IBAN.</summary>
+[Inheritable]
 public class InternationalBankAccountNumberTypeConverter : SvoTypeConverter<InternationalBankAccountNumber>
 {
     /// <inheritdoc/>

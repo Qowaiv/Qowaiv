@@ -3,7 +3,8 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a UUID.</summary>
-public sealed class UuidJsonConverter : SvoJsonConverter<Uuid>
+[Inheritable]
+public class UuidJsonConverter : SvoJsonConverter<Uuid>
 {
     /// <inheritdoc />
     [Pure]

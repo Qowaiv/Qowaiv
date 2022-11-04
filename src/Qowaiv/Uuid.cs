@@ -204,10 +204,11 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     public static Uuid GenerateWithMD5(byte[] data)
     {
         Guard.NotNull(data, nameof(data));
-
-        using var md5 = MD5.Create();
-
-        var hash = md5.ComputeHash(data);
+#if NETSTANDARD
+        var hash = MD5.Create().ComputeHash(data);
+#else
+        var hash = MD5.HashData(data);
+#endif
         SetVersion(hash, UuidVersion.MD5);
         return new Guid(hash);
     }
@@ -217,10 +218,11 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     public static Uuid GenerateWithSHA1(byte[] data)
     {
         Guard.NotNull(data, nameof(data));
-
-        using var sha1 = SHA1.Create();
-
-        var bytes = sha1.ComputeHash(data);
+#if NETSTANDARD
+        var bytes = SHA1.Create().ComputeHash(data);
+#else
+        var bytes = SHA1.HashData(data);
+#endif
         var hash = new byte[ArraySize];
         Array.Copy(bytes, hash, ArraySize);
         SetVersion(hash, UuidVersion.SHA1);

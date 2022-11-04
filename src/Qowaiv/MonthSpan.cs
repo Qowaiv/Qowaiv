@@ -36,14 +36,7 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <param name="months">
     /// The additional months on top of the years.
     /// </param>
-    public MonthSpan(int years, int months)
-    {
-        if (!TryCreate(years * DateSpan.MonthsPerYear + months, out var span))
-        {
-            throw new ArgumentOutOfRangeException(QowaivMessages.FormatExceptionMonthSpan);
-        }
-        m_Value = span.m_Value;
-    }
+    public MonthSpan(int years, int months) : this(Create(years, months)) { }
 
     /// <summary>Gets the total of months.</summary>
     public int TotalMonths => m_Value;
@@ -380,4 +373,10 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
         }
         return false;
     }
+
+    [Pure]
+    private static int Create(int years, int months)
+        => TryCreate(years * DateSpan.MonthsPerYear + months, out var span)
+        ? span.TotalMonths
+        : throw new ArgumentOutOfRangeException(QowaivMessages.FormatExceptionMonthSpan);
 }

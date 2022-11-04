@@ -103,9 +103,9 @@ public readonly partial struct Percentage
             var before = Befores.Contains(culture?.Name);
             return str switch
             {
-                null or "" => before ? PercentSymbol + Percentage.NumberFormat : Percentage.NumberFormat + PercentSymbol,
-                "PM" => before ? PerMilleSymbol + Percentage.NumberFormat : Percentage.NumberFormat + PerMilleSymbol,
-                "PT" => before ? PerTenThousandSymbol + Percentage.NumberFormat : Percentage.NumberFormat + PerTenThousandSymbol,
+                null or "" => before ? PercentSymbol + Percentage.DefaultFormat : Percentage.DefaultFormat + PercentSymbol,
+                "PM" => before ? PerMilleSymbol + Percentage.DefaultFormat : Percentage.DefaultFormat + PerMilleSymbol,
+                "PT" => before ? PerTenThousandSymbol + Percentage.DefaultFormat : Percentage.DefaultFormat + PerTenThousandSymbol,
                 _ => str,
             };
         }

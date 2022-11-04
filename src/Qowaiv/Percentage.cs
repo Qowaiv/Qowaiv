@@ -34,7 +34,7 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// <summary>The per ten thousand symbol (0/000).</summary>
     public static readonly string PerTenThousandSymbol = "‱";
 
-    private const string NumberFormat = "0.############################";
+    private const string DefaultFormat = "0.############################";
 
     /// <summary>Represents 0 percent.</summary>
     public static readonly Percentage Zero;
@@ -602,7 +602,7 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => ToString(NumberFormat + PercentSymbol, CultureInfo.InvariantCulture);
+    public string ToJson() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
     #endregion
 
@@ -635,7 +635,7 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
 
     /// <summary>Gets an XML string representation of the @FullName.</summary>
     [Pure]
-    private string ToXmlString() => ToString(NumberFormat + PercentSymbol, CultureInfo.InvariantCulture);
+    private string ToXmlString() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
     #endregion
 

@@ -52,13 +52,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <param name="days">
     /// Number of days.
     /// </param>
-    public DateSpan(int months, int days) : this(AsUInt64(months, days))
-    {
-        if (IsOutOfRange(months, days, TotalDays))
-        {
-            throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception?)null);
-        }
-    }
+    public DateSpan(int months, int days) : this(Create(months, days)) { }
 
     /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
     /// <param name="years">
@@ -409,6 +403,13 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
         var str = match.Groups[group].Value;
         return string.IsNullOrEmpty(str) ? 0 : int.Parse(str, formatProvider);
     }
+
+    [Pure]
+    private static ulong Create(int months, int days)
+        => IsOutOfRange(months, days, days + months * DaysPerMonth)
+        ? throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception?)null)
+        : AsUInt64(months, days);
+
 
     /// <summary>Returns true if the combination of months and days can not be processed.</summary>
     [Pure]

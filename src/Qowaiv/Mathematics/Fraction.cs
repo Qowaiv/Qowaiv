@@ -110,7 +110,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// becomes 1/2).
     /// </remarks>
     public Fraction(long numerator, long denominator) 
-        : this(new Data(numerator, denominator).Guard().Reduce()) { }
+        : this(new Data(numerator, denominator).Guard().Simplify()) { }
 
     /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
     private Fraction(Data data)
@@ -509,7 +509,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
         var n = info.GetInt64(nameof(numerator));
         var d = info.GetInt64(nameof(denominator));
-        var data = new Data(n, d).Guard().Reduce();
+        var data = new Data(n, d).Guard().Simplify();
 
         numerator = data.numerator;
         denominator = data.denominator;
@@ -701,6 +701,9 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         return a * even;
     }
 
+    /// <remarks>
+    /// to pass the two components around during creation.
+    /// </remarks>
     private ref struct Data
     {
         public long numerator;
@@ -715,6 +718,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         [FluentSyntax]
         public Data Guard()
         {
+#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one 
             if (numerator == long.MinValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(numerator), QowaivMessages.OverflowException_Fraction);
@@ -723,18 +727,19 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
             {
                 throw new ArgumentOutOfRangeException(nameof(denominator), QowaivMessages.OverflowException_Fraction);
             }
+#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
             return this;
         }
 
         /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
         [FluentSyntax]
-        public Data Reduce()
+        public Data Simplify()
         {
             var negative = numerator < 0 ^ denominator < 0;
             numerator = Math.Abs(numerator);
             denominator = Math.Abs(denominator);
 
-            Fraction.Reduce(ref numerator, ref denominator);
+            Reduce(ref numerator, ref denominator);
             
             if (negative)
             {

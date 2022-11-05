@@ -3,6 +3,7 @@
 namespace Qowaiv.Conversion.Financial;
 
 /// <summary>Provides a conversion for a currency.</summary>
+[Inheritable]
 public class CurrencyTypeConverter : SvoTypeConverter<Currency>
 {
     /// <inheritdoc/>

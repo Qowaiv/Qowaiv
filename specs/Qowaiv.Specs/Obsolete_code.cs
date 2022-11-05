@@ -28,3 +28,26 @@ public class Will_be_dropped
 
 [Obsolete("Will become private when the next major version is released.")]
 public class Will_become_private { }
+
+public class Will_seal
+{
+    [Test]
+    public void _2_types()
+    {
+        var decorated = typeof(Qowaiv.Date).Assembly.GetTypes().Concat(
+        typeof(Qowaiv.Data.SvoParameter).Assembly.GetTypes())
+        .Where(tp => tp.GetCustomAttributes<WillBeSealedAttribute>().Any())
+        .OrderBy(tp => tp.FullName);
+
+        foreach (var tp in decorated)
+        {
+            Console.WriteLine($"typeof({tp.FullName}),");
+        }
+
+        decorated.Should().BeEquivalentTo(new[]
+        {
+            typeof(Qowaiv.Conversion.Security.Cryptography.CryptographicSeedTypeConverter),
+            typeof(Qowaiv.Conversion.Security.SecretTypeConverter),
+        });
+    }
+}

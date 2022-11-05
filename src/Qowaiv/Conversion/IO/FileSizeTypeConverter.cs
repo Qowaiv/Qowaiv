@@ -3,6 +3,7 @@
 namespace Qowaiv.Conversion.IO;
 
 /// <summary>Provides a conversion for a stream size.</summary>
+[Inheritable]
 public class StreamSizeTypeConverter : NumericTypeConverter<StreamSize, long>
 {
     /// <inheritdoc/>

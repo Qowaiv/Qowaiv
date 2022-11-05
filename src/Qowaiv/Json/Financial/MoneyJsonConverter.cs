@@ -5,7 +5,8 @@ using Qowaiv.Financial;
 namespace Qowaiv.Json.Financial;
 
 /// <summary>Provides a JSON conversion for money.</summary>
-public sealed class MoneyJsonConverter : SvoJsonConverter<Money>
+[Inheritable]
+public class MoneyJsonConverter : SvoJsonConverter<Money>
 {
     /// <inheritdoc />
     [Pure]

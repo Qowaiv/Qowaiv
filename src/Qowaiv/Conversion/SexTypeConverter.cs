@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a Sex.</summary>
+[Inheritable]
 public class SexTypeConverter : SvoTypeConverter<Sex>
 {
     /// <inheritdoc/>

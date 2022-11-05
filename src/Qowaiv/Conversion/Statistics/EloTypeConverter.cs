@@ -3,6 +3,7 @@
 namespace Qowaiv.Conversion.Statistics;
 
 /// <summary>Provides a conversion for an Elo.</summary>
+[Inheritable]
 public class EloTypeConverter : NumericTypeConverter<Elo, double>
 {
     /// <inheritdoc/>

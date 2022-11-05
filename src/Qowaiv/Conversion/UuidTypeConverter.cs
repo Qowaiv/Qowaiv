@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a GUID.</summary>
+[Inheritable]
 public class UuidTypeConverter : SvoTypeConverter<Uuid, Guid>
 {
     /// <inheritdoc />

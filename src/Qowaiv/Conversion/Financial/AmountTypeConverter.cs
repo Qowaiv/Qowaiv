@@ -3,6 +3,7 @@
 namespace Qowaiv.Conversion.Financial;
 
 /// <summary>Provides a conversion for an Amount.</summary>
+[Inheritable]
 public class AmountTypeConverter : NumericTypeConverter<Amount, decimal>
 {
     /// <inheritdoc/>

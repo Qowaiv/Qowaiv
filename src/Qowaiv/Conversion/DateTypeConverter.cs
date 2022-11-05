@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a Date.</summary>
+[Inheritable]
 public class DateTypeConverter : DateTypeConverter<Date>
 {
     /// <inheritdoc />

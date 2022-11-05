@@ -1,7 +1,7 @@
 ﻿namespace Qowaiv;
 
 /// <summary>The default implementation of the <see cref="UuidComparer"/>.</summary>
-internal class UuidDefaultComparer : UuidComparer
+internal sealed class UuidDefaultComparer : UuidComparer
 {
     /// <inheritdoc/>
     /// <remarks>

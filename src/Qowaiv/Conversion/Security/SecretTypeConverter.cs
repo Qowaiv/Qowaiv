@@ -1,8 +1,7 @@
-﻿using Qowaiv.Security;
-
-namespace Qowaiv.Conversion.Security;
+﻿namespace Qowaiv.Conversion.Security;
 
 /// <summary>Provides a conversion for a cryptographic seed.</summary>
+[WillBeSealed]
 public class SecretTypeConverter : TypeConverter
 {
     /// <summary>A secret can only be converted from a string.</summary>

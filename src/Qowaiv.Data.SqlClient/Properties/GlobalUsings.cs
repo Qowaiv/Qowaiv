@@ -1,4 +1,5 @@
-﻿global using Qowaiv.Formatting;
+﻿global using Qowaiv.Diagnostics.Contracts;
+global using Qowaiv.Formatting;
 global using Qowaiv.Hashing;
 global using Qowaiv.Json;
 global using System;

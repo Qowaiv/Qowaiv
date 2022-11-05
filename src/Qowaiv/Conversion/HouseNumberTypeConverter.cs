@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a house number.</summary>
+[Inheritable]
 public class HouseNumberTypeConverter : NumericTypeConverter<HouseNumber, int>
 {
     /// <inheritdoc />

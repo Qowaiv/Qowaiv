@@ -4,7 +4,7 @@ namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a month span.</summary>
 [Inheritable]
-public sealed class MonthSpanJsonConverter : SvoJsonConverter<MonthSpan>
+public class MonthSpanJsonConverter : SvoJsonConverter<MonthSpan>
 {
     /// <inheritdoc />
     [Pure]

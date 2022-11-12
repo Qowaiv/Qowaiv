@@ -5,8 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.3.0</Version>
+    <Version>6.3.1</Version>
     <PackageReleaseNotes>
+v6.3.1
+- Extend allowed durations on regular expression. ##263
 v6.3.0
 - JSON serialization via System.Text.Json no longer requires a custom converter. #259
 v6.2.2

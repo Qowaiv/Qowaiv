@@ -7,15 +7,10 @@
 [OpenApi.OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [TypeConverter(typeof(YearTypeConverter))]
 #if NET5_0_OR_GREATER
-[System.Text.Json.Serialization.JsonConverter(typeof(Json.YearJsonConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(YearJsonConverter))]
 #endif
 public readonly partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
 {
-    /// <summary>Represents the pattern of a (potential) valid year.</summary>
-    private static readonly Regex Pattern = new(@"(^[0-9]{1,4}$)(?<!^0+$)", 
-        RegexOptions.Compiled,
-        Regexes.MatchTimeout);
-
     /// <summary>Represents an empty/not set year.</summary>
     public static readonly Year Empty;
 
@@ -141,9 +136,11 @@ public readonly partial struct Year : ISerializable, IXmlSerializable, IFormatta
             result = Unknown;
             return true;
         }
-        else if (Pattern.IsMatch(s))
+        else if (short.TryParse(s, NumberStyles.None, formatProvider, out var year)
+            && year >= MinValue.m_Value
+            && year <= MaxValue.m_Value)
         {
-            result = new Year(short.Parse(s, formatProvider));
+            result = new(year);
             return true;
         }
         else return false;

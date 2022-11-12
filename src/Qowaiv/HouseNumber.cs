@@ -7,13 +7,10 @@
 [OpenApi.OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
 [TypeConverter(typeof(HouseNumberTypeConverter))]
 #if NET5_0_OR_GREATER
-[System.Text.Json.Serialization.JsonConverter(typeof(Json.HouseNumberJsonConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(HouseNumberJsonConverter))]
 #endif
 public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
 {
-    /// <summary>Represents the pattern of a (potential) valid house number.</summary>
-    private static readonly Regex Pattern = new(@"^[1-9][0-9]{0,8}$", RegexOptions.Compiled, Regexes.MatchTimeout);
-
     /// <summary>Represents an empty/not set house number.</summary>
     public static readonly HouseNumber Empty;
 
@@ -153,9 +150,11 @@ public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IF
             result = Unknown;
             return true;
         }
-        else if (Pattern.IsMatch(s))
+        else if (int.TryParse(s, NumberStyles.None, culture, out var number) 
+            && number >= MinValue.m_Value 
+            && number <= MaxValue.m_Value)
         {
-            result = new HouseNumber(int.Parse(s, formatProvider));
+            result = new(number);
             return true;
         }
         else return false;

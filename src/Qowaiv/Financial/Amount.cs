@@ -14,6 +14,8 @@ namespace Qowaiv.Financial;
 public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Amount>, IDecrementOperators<Amount>
+    , IAdditionOperators<Amount, Amount, Amount>, ISubtractionOperators<Amount, Amount, Amount>
+    , IAdditionOperators<Amount, Percentage, Amount>, ISubtractionOperators<Amount, Percentage, Amount>
 #endif
 {
     /// <summary>Represents an Amount of zero.</summary>

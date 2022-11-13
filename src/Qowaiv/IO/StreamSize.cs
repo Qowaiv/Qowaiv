@@ -23,6 +23,8 @@ namespace Qowaiv.IO;
 public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<StreamSize>, IDecrementOperators<StreamSize>
+    , IAdditionOperators<StreamSize, StreamSize, StreamSize>, ISubtractionOperators<StreamSize, StreamSize, StreamSize>
+    , IAdditionOperators<StreamSize, Percentage, StreamSize>, ISubtractionOperators<StreamSize, Percentage, StreamSize>
 #endif
 {
     /// <summary>Represents an empty/not set stream size.</summary>

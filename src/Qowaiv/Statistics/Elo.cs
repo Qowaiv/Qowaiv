@@ -25,6 +25,7 @@ namespace Qowaiv.Statistics;
 public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Elo>, IDecrementOperators<Elo>
+    , IAdditionOperators<Elo, Elo, Elo>, ISubtractionOperators<Elo, Elo, Elo>
 #endif
 {
     /// <summary>Represents the zero value of an Elo.</summary>

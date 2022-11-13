@@ -31,7 +31,7 @@ public partial struct Gender
 
 public partial struct Gender : IEquatable<Gender>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Gender, Gender, bool>
+    , IEqualityOperators<Gender, Gender, bool>
 #endif
 {
     /// <inheritdoc />

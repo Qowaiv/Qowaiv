@@ -10,6 +10,9 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.PercentageJsonConverter))]
 #endif
 public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<Percentage>, IDecrementOperators<Percentage>
+#endif
 {
     /// <summary>The percentage symbol (%).</summary>
     public static readonly string PercentSymbol = "%";

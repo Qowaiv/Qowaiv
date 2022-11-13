@@ -31,7 +31,7 @@ public partial struct Month
 
 public partial struct Month : IEquatable<Month>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Month, Month, bool>
+    , IEqualityOperators<Month, Month, bool>
 #endif
 {
     /// <inheritdoc />

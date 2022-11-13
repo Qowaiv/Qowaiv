@@ -13,6 +13,9 @@ namespace Qowaiv.Financial;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.MoneyJsonConverter))]
 #endif
 public readonly partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<Money>, IDecrementOperators<Money>
+#endif
 {
     /// <summary>Represents an Amount of zero.</summary>
     public static readonly Money Zero;

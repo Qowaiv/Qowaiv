@@ -23,6 +23,9 @@ namespace Qowaiv.Statistics;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Statistics.EloJsonConverter))]
 #endif
 public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<Elo>, IDecrementOperators<Elo>
+#endif
 {
     /// <summary>Represents the zero value of an Elo.</summary>
     public static readonly Elo Zero;

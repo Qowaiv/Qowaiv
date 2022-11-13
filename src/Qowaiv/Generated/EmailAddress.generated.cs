@@ -31,7 +31,7 @@ public partial struct EmailAddress
 
 public partial struct EmailAddress : IEquatable<EmailAddress>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<EmailAddress, EmailAddress, bool>
+    , IEqualityOperators<EmailAddress, EmailAddress, bool>
 #endif
 {
     /// <inheritdoc />

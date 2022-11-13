@@ -31,7 +31,7 @@ public partial struct HouseNumber
 
 public partial struct HouseNumber : IEquatable<HouseNumber>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<HouseNumber, HouseNumber, bool>
+    , IEqualityOperators<HouseNumber, HouseNumber, bool>
 #endif
 {
     /// <inheritdoc />
@@ -60,7 +60,7 @@ public partial struct HouseNumber : IEquatable<HouseNumber>
 
 public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IComparisonOperators<HouseNumber, HouseNumber, bool>
+    , IComparisonOperators<HouseNumber, HouseNumber, bool>
 #endif
 {
     /// <inheritdoc />

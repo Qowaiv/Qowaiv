@@ -22,7 +22,7 @@ public partial struct MonthSpan
 
 public partial struct MonthSpan : IEquatable<MonthSpan>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<MonthSpan, MonthSpan, bool>
+    , IEqualityOperators<MonthSpan, MonthSpan, bool>
 #endif
 {
     /// <inheritdoc />
@@ -51,7 +51,7 @@ public partial struct MonthSpan : IEquatable<MonthSpan>
 
 public partial struct MonthSpan : IComparable, IComparable<MonthSpan>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IComparisonOperators<MonthSpan, MonthSpan, bool>
+    , IComparisonOperators<MonthSpan, MonthSpan, bool>
 #endif
 {
     /// <inheritdoc />

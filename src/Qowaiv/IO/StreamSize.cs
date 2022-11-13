@@ -21,6 +21,9 @@ namespace Qowaiv.IO;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.IO.StreamSizeJsonConverter))]
 #endif
 public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<StreamSize>, IDecrementOperators<StreamSize>
+#endif
 {
     /// <summary>Represents an empty/not set stream size.</summary>
     public static readonly StreamSize Zero;

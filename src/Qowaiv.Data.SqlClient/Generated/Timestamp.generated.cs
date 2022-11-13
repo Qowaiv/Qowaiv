@@ -22,7 +22,7 @@ public partial struct Timestamp
 
 public partial struct Timestamp : IEquatable<Timestamp>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Timestamp, Timestamp, bool>
+    , IEqualityOperators<Timestamp, Timestamp, bool>
 #endif
 {
     /// <inheritdoc />
@@ -51,7 +51,7 @@ public partial struct Timestamp : IEquatable<Timestamp>
 
 public partial struct Timestamp : IComparable, IComparable<Timestamp>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IComparisonOperators<Timestamp, Timestamp, bool>
+    , IComparisonOperators<Timestamp, Timestamp, bool>
 #endif
 {
     /// <inheritdoc />

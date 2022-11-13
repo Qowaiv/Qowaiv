@@ -10,6 +10,9 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateJsonConverter))]
 #endif
 public readonly partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<Date>, IDecrementOperators<Date>
+#endif
 {
     private const string SerializableFormat = "yyyy-MM-dd";
 

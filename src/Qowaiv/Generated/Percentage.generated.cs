@@ -22,7 +22,7 @@ public partial struct Percentage
 
 public partial struct Percentage : IEquatable<Percentage>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Percentage, Percentage, bool>
+    , IEqualityOperators<Percentage, Percentage, bool>
 #endif
 {
     /// <inheritdoc />
@@ -51,7 +51,7 @@ public partial struct Percentage : IEquatable<Percentage>
 
 public partial struct Percentage : IComparable, IComparable<Percentage>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IComparisonOperators<Percentage, Percentage, bool>
+    , IComparisonOperators<Percentage, Percentage, bool>
 #endif
 {
     /// <inheritdoc />

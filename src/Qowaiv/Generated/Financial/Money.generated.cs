@@ -13,7 +13,7 @@ namespace Qowaiv.Financial;
 
 public partial struct Money : IEquatable<Money>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Money, Money, bool>
+    , IEqualityOperators<Money, Money, bool>
 #endif
 {
     /// <inheritdoc />
@@ -33,7 +33,7 @@ public partial struct Money : IEquatable<Money>
 
 public partial struct Money : IComparable, IComparable<Money>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IComparisonOperators<Money, Money, bool>
+    , IComparisonOperators<Money, Money, bool>
 #endif
 {
     /// <inheritdoc />

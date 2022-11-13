@@ -22,7 +22,7 @@ public partial struct Elo
 
 public partial struct Elo : IEquatable<Elo>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Elo, Elo, bool>
+    , IEqualityOperators<Elo, Elo, bool>
 #endif
 {
     /// <inheritdoc />
@@ -51,7 +51,7 @@ public partial struct Elo : IEquatable<Elo>
 
 public partial struct Elo : IComparable, IComparable<Elo>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IComparisonOperators<Elo, Elo, bool>
+    , IComparisonOperators<Elo, Elo, bool>
 #endif
 {
     /// <inheritdoc />

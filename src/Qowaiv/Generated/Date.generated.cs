@@ -13,7 +13,7 @@ namespace Qowaiv;
 
 public partial struct Date : IEquatable<Date>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Date, Date, bool>
+    , IEqualityOperators<Date, Date, bool>
 #endif
 {
     /// <inheritdoc />
@@ -42,7 +42,7 @@ public partial struct Date : IEquatable<Date>
 
 public partial struct Date : IComparable, IComparable<Date>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IComparisonOperators<Date, Date, bool>
+    , IComparisonOperators<Date, Date, bool>
 #endif
 {
     /// <inheritdoc />

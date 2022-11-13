@@ -31,7 +31,7 @@ public partial struct InternetMediaType
 
 public partial struct InternetMediaType : IEquatable<InternetMediaType>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<InternetMediaType, InternetMediaType, bool>
+    , IEqualityOperators<InternetMediaType, InternetMediaType, bool>
 #endif
 {
     /// <inheritdoc />

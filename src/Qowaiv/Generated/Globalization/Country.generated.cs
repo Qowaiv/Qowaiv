@@ -31,7 +31,7 @@ public partial struct Country
 
 public partial struct Country : IEquatable<Country>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Country, Country, bool>
+    , IEqualityOperators<Country, Country, bool>
 #endif
 {
     /// <inheritdoc />

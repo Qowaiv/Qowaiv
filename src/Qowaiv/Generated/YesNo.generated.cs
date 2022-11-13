@@ -31,7 +31,7 @@ public partial struct YesNo
 
 public partial struct YesNo : IEquatable<YesNo>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<YesNo, YesNo, bool>
+    , IEqualityOperators<YesNo, YesNo, bool>
 #endif
 {
     /// <inheritdoc />

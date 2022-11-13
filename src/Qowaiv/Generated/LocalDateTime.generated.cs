@@ -13,7 +13,7 @@ namespace Qowaiv;
 
 public partial struct LocalDateTime : IEquatable<LocalDateTime>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<LocalDateTime,LocalDateTime,bool>
+    , System.Numerics.IEqualityOperators<LocalDateTime, LocalDateTime, bool>
 #endif
 {
     /// <inheritdoc />
@@ -41,6 +41,9 @@ public partial struct LocalDateTime : IEquatable<LocalDateTime>
 }
 
 public partial struct LocalDateTime : IComparable, IComparable<LocalDateTime>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IComparisonOperators<LocalDateTime, LocalDateTime, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]

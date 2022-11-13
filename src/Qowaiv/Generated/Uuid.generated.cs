@@ -25,7 +25,7 @@ public partial struct Uuid
 
 public partial struct Uuid : IEquatable<Uuid>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Uuid,Uuid,bool>
+    , System.Numerics.IEqualityOperators<Uuid, Uuid, bool>
 #endif
 {
     /// <inheritdoc />

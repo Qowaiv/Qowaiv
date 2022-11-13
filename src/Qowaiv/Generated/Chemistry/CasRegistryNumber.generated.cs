@@ -31,7 +31,7 @@ public partial struct CasRegistryNumber
 
 public partial struct CasRegistryNumber : IEquatable<CasRegistryNumber>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<CasRegistryNumber,CasRegistryNumber,bool>
+    , System.Numerics.IEqualityOperators<CasRegistryNumber, CasRegistryNumber, bool>
 #endif
 {
     /// <inheritdoc />

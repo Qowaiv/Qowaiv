@@ -31,7 +31,7 @@ public partial struct InternationalBankAccountNumber
 
 public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<InternationalBankAccountNumber,InternationalBankAccountNumber,bool>
+    , System.Numerics.IEqualityOperators<InternationalBankAccountNumber, InternationalBankAccountNumber, bool>
 #endif
 {
     /// <inheritdoc />

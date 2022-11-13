@@ -31,7 +31,7 @@ public partial struct Currency
 
 public partial struct Currency : IEquatable<Currency>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Currency,Currency,bool>
+    , System.Numerics.IEqualityOperators<Currency, Currency, bool>
 #endif
 {
     /// <inheritdoc />

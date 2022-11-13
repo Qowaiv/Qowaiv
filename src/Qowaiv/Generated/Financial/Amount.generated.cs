@@ -22,7 +22,7 @@ public partial struct Amount
 
 public partial struct Amount : IEquatable<Amount>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Amount,Amount,bool>
+    , System.Numerics.IEqualityOperators<Amount, Amount, bool>
 #endif
 {
     /// <inheritdoc />
@@ -50,6 +50,9 @@ public partial struct Amount : IEquatable<Amount>
 }
 
 public partial struct Amount : IComparable, IComparable<Amount>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IComparisonOperators<Amount, Amount, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]

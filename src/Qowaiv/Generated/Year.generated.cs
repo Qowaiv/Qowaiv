@@ -31,7 +31,7 @@ public partial struct Year
 
 public partial struct Year : IEquatable<Year>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Year,Year,bool>
+    , System.Numerics.IEqualityOperators<Year, Year, bool>
 #endif
 {
     /// <inheritdoc />

@@ -31,7 +31,7 @@ public partial struct BusinessIdentifierCode
 
 public partial struct BusinessIdentifierCode : IEquatable<BusinessIdentifierCode>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<BusinessIdentifierCode,BusinessIdentifierCode,bool>
+    , System.Numerics.IEqualityOperators<BusinessIdentifierCode, BusinessIdentifierCode, bool>
 #endif
 {
     /// <inheritdoc />

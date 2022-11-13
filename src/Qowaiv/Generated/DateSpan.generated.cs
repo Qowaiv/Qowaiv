@@ -22,7 +22,7 @@ public partial struct DateSpan
 
 public partial struct DateSpan : IEquatable<DateSpan>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<DateSpan,DateSpan,bool>
+    , System.Numerics.IEqualityOperators<DateSpan, DateSpan, bool>
 #endif
 {
     /// <inheritdoc />
@@ -41,6 +41,9 @@ public partial struct DateSpan : IEquatable<DateSpan>
 }
 
 public partial struct DateSpan : IComparable, IComparable<DateSpan>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IComparisonOperators<DateSpan, DateSpan, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]

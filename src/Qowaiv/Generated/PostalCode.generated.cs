@@ -31,7 +31,7 @@ public partial struct PostalCode
 
 public partial struct PostalCode : IEquatable<PostalCode>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<PostalCode,PostalCode,bool>
+    , System.Numerics.IEqualityOperators<PostalCode, PostalCode, bool>
 #endif
 {
     /// <inheritdoc />

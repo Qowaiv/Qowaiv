@@ -13,7 +13,7 @@ namespace Qowaiv.Mathematics;
 
 public partial struct Fraction : IEquatable<Fraction>
 #if NET7_0_OR_GREATER
-    , System.Numerics.IEqualityOperators<Fraction,Fraction,bool>
+    , System.Numerics.IEqualityOperators<Fraction, Fraction, bool>
 #endif
 {
     /// <inheritdoc />
@@ -32,6 +32,9 @@ public partial struct Fraction : IEquatable<Fraction>
 }
 
 public partial struct Fraction : IComparable, IComparable<Fraction>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IComparisonOperators<Fraction, Fraction, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]

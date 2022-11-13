@@ -244,15 +244,11 @@ public class Has_custom_formatting
 {
     [Test]
     public void default_value_is_represented_as_string_empty()
-    {
-        Assert.AreEqual(string.Empty, default(PostalCode).ToString());
-    }
+        => default(PostalCode).ToString().Should().BeEmpty();
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
-    {
-        Assert.AreEqual("?", PostalCode.Unknown.ToString());
-    }
+        => PostalCode.Unknown.ToString().Should().Be("?");
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -274,9 +270,7 @@ public class Has_custom_formatting
 
     [TestCaseSource(nameof(FormattedPostalCodes))]
     public void per_country(Country country, PostalCode svo, string expected)
-    {
-        Assert.AreEqual(expected, svo.ToString(country));
-    }
+        => svo.ToString(country).Should().Be(expected);
 
     [Test]
     public void for_58_countries()

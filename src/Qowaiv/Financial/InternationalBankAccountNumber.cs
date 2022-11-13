@@ -30,7 +30,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// <remarks>
     /// Pairs of IBAN characters can be divided by maximum 2 spacing characters.
     /// </remarks>
-    private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Regexes.MatchTimeout);
+    private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegOptions.IgnoreCase, RegOptions.Timeout);
 
     /// <summary>Represents an empty/not set IBAN.</summary>
     public static readonly InternationalBankAccountNumber Empty;
@@ -105,14 +105,22 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
         {
             return "?";
         }
-        return FormattedPattern.Replace(m_Value, "$0 ");
+        return string.Join(" ", Chunk(m_Value));
+
+        static IEnumerable<string> Chunk(string str)
+        {
+            for (var i = 0; i < str.Length; i += 4)
+            {
+                yield return str.Length - i > 4
+                    ? str.Substring(i, 4)
+                    : str.Substring(i);
+            }
+        }
     }
 
     /// <summary>Formats the IBAN with spaces as lowercase.</summary>
     [Pure]
     private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
-
-    private static readonly Regex FormattedPattern = new(@"\w{4}(?!$)", RegexOptions.Compiled);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current IBAN.</summary>
     /// <param name="format">

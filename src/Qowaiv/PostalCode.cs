@@ -18,7 +18,7 @@ namespace Qowaiv;
 public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
 {
     /// <summary>Represents the pattern of a (potential) valid postal code.</summary>
-    private static readonly Regex Pattern = new(@"^.{2,10}$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Regexes.MatchTimeout);
+    private static readonly Regex Pattern = new(@"^.{2,10}$", RegOptions.IgnoreCase, RegOptions.Timeout);
 
     /// <summary>Represents an empty/not set postal code.</summary>
     public static readonly PostalCode Empty;

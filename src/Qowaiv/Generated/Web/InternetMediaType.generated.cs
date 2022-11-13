@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Web;
@@ -29,6 +30,9 @@ public partial struct InternetMediaType
 }
 
 public partial struct InternetMediaType : IEquatable<InternetMediaType>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<InternetMediaType,InternetMediaType,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -120,7 +124,7 @@ public partial struct InternetMediaType
     /// The deserialized Internet media type.
     /// </returns>
     [Pure]
-    public static InternetMediaType FromJson(string? json) => Parse(json);
+    public static InternetMediaType FromJson(string json) => Parse(json);
 }
 
 public partial struct InternetMediaType : IXmlSerializable
@@ -187,4 +191,3 @@ public partial struct InternetMediaType
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, out _);
 }
-

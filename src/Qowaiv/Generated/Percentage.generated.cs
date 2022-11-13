@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
@@ -20,6 +21,9 @@ public partial struct Percentage
 }
 
 public partial struct Percentage : IEquatable<Percentage>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<Percentage,Percentage,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -243,4 +247,3 @@ public partial struct Percentage
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

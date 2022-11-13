@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Chemistry;
@@ -29,6 +30,9 @@ public partial struct CasRegistryNumber
 }
 
 public partial struct CasRegistryNumber : IEquatable<CasRegistryNumber>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<CasRegistryNumber,CasRegistryNumber,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -241,4 +245,3 @@ public partial struct CasRegistryNumber
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

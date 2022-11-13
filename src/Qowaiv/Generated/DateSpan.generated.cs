@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
@@ -20,6 +21,9 @@ public partial struct DateSpan
 }
 
 public partial struct DateSpan : IEquatable<DateSpan>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<DateSpan,DateSpan,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -229,4 +233,3 @@ public partial struct DateSpan
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

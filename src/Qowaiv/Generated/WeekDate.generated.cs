@@ -6,11 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
 
 public partial struct WeekDate : IEquatable<WeekDate>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<WeekDate,WeekDate,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -49,7 +53,7 @@ public partial struct WeekDate : IComparable, IComparable<WeekDate>
     /// <inheritdoc />
     [Pure]
 #nullable disable
-    public int CompareTo(WeekDate other) => Comparer<Qowaiv.Date>.Default.Compare(m_Value, other.m_Value);
+    public int CompareTo(WeekDate other) => Comparer<Date>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
     public static bool operator <(WeekDate l, WeekDate r) => l.CompareTo(r) < 0;
@@ -216,4 +220,3 @@ public partial struct WeekDate
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

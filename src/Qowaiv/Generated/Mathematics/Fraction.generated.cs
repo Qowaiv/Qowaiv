@@ -6,11 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Mathematics;
 
 public partial struct Fraction : IEquatable<Fraction>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<Fraction,Fraction,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -202,4 +206,3 @@ public partial struct Fraction
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

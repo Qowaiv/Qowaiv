@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
@@ -20,6 +21,9 @@ public partial struct MonthSpan
 }
 
 public partial struct MonthSpan : IEquatable<MonthSpan>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<MonthSpan,MonthSpan,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -243,4 +247,3 @@ public partial struct MonthSpan
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

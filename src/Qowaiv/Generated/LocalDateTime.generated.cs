@@ -6,11 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
 
 public partial struct LocalDateTime : IEquatable<LocalDateTime>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<LocalDateTime,LocalDateTime,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -234,4 +238,3 @@ public partial struct LocalDateTime
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

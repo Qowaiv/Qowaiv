@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Financial;
@@ -20,6 +21,9 @@ public partial struct Amount
 }
 
 public partial struct Amount : IEquatable<Amount>
+#if NET7_0_OR_GREATER
+    , System.Numerics.IEqualityOperators<Amount,Amount,bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -243,4 +247,3 @@ public partial struct Amount
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

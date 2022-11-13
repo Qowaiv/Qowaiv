@@ -22,5 +22,5 @@ internal static class RegOptions
 #endif
     public const RegexOptions IgnoreCase = Default | RegexOptions.IgnoreCase;
     public const RegexOptions RightToLeft = RegexOptions.Compiled | RegexOptions.RightToLeft;
-    public const RegexOptions WithBackTracking = RegexOptions.Compiled;
+    public const RegexOptions WithBackTracking = RegexOptions.Compiled | RegexOptions.IgnoreCase;
 }

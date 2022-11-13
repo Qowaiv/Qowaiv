@@ -48,16 +48,11 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
 {
     /// <summary>Represents the pattern of a (potential) valid Internet media type.</summary>
     private static readonly Regex Pattern = new(
-        '^' + PatternTopLevel + '/' + PatternSubtype + PatternSuffix + '$',
-        RegexOptions.Compiled | RegexOptions.IgnoreCase,
-        Regexes.MatchTimeout);
-
-    /// <summary>The pattern of the top level.</summary>
-    private const string PatternTopLevel = @"(?<TopLevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))";
-    /// <summary>The pattern of the subtype.</summary>
-    private const string PatternSubtype = @"(?<Subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)";
-    /// <summary>The pattern of the suffix.</summary>
-    private const string PatternSuffix = @"(\+(?<Suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?";
+        @"^(?<TopLevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))/" +
+        @"(?<Subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)" +
+        @"(\+(?<Suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?$",
+        RegOptions.IgnoreCase,
+        RegOptions.Timeout);
 
     /// <summary>Represents an empty/not set Internet media type.</summary>
     public static readonly InternetMediaType Empty;

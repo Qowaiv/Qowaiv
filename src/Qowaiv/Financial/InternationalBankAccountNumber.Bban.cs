@@ -30,7 +30,7 @@ public readonly partial struct InternationalBankAccountNumber
                 pattern.Append(CharType(type)).Append('{').Append(length).Append('}');
             }
         }
-        return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Append('$').ToString(), RegexOptions.Compiled, Regexes.MatchTimeout));
+        return new KeyValuePair<Country, Regex>(country, new Regex(pattern.Append('$').ToString(), RegOptions.Default, RegOptions.Timeout));
 
         static string CharType(char type) => type switch { 'n' => "[0-9]", 'a' => "[A-Z]", 'c' => "[0-9A-Z]", _ => throw new FormatException() };
     }

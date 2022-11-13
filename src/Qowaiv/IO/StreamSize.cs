@@ -23,6 +23,7 @@ namespace Qowaiv.IO;
 public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<StreamSize>, IDecrementOperators<StreamSize>
+    , IUnaryPlusOperators<StreamSize, StreamSize>, IUnaryNegationOperators<StreamSize, StreamSize>
     , IAdditionOperators<StreamSize, StreamSize, StreamSize>, ISubtractionOperators<StreamSize, StreamSize, StreamSize>
     , IAdditionOperators<StreamSize, Percentage, StreamSize>, ISubtractionOperators<StreamSize, Percentage, StreamSize>
 #endif

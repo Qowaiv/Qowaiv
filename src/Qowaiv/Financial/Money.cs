@@ -15,6 +15,7 @@ namespace Qowaiv.Financial;
 public readonly partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Money>, IDecrementOperators<Money>
+    , IUnaryPlusOperators<Money, Money>, IUnaryNegationOperators<Money, Money>
     , IAdditionOperators<Money, Money, Money>, ISubtractionOperators<Money, Money, Money>
     , IAdditionOperators<Money, Percentage, Money>, ISubtractionOperators<Money, Percentage, Money>
 #endif

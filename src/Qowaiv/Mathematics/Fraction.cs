@@ -17,6 +17,7 @@ namespace Qowaiv.Mathematics;
 public readonly partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
 #if NET7_0_OR_GREATER
     , IAdditionOperators<Fraction, Fraction, Fraction>, ISubtractionOperators<Fraction, Fraction, Fraction>
+    , IUnaryPlusOperators<Fraction, Fraction>, IUnaryNegationOperators<Fraction, Fraction>
     , IAdditionOperators<Fraction, long, Fraction>, ISubtractionOperators<Fraction, long, Fraction>
     , IAdditionOperators<Fraction, int, Fraction>, ISubtractionOperators<Fraction, int, Fraction>
 #endif

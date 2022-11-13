@@ -12,6 +12,7 @@
 #endif
 public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
 #if NET7_0_OR_GREATER
+    , IUnaryPlusOperators<MonthSpan, MonthSpan>, IUnaryNegationOperators<MonthSpan, MonthSpan>
     , IAdditionOperators<MonthSpan, MonthSpan, MonthSpan>, ISubtractionOperators<MonthSpan, MonthSpan, MonthSpan>
 #endif
 {

@@ -12,6 +12,7 @@
 public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Percentage>, IDecrementOperators<Percentage>
+    , IUnaryPlusOperators<Percentage, Percentage>, IUnaryNegationOperators<Percentage, Percentage>
     , IAdditionOperators<Percentage, Percentage, Percentage>, ISubtractionOperators<Percentage, Percentage, Percentage>
 #endif
 {

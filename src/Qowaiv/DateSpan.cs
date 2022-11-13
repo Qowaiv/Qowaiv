@@ -11,6 +11,7 @@ namespace Qowaiv;
 #endif
 public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
 #if NET7_0_OR_GREATER
+    , IUnaryPlusOperators<DateSpan, DateSpan>, IUnaryNegationOperators<DateSpan, DateSpan>
     , IAdditionOperators<DateSpan, DateSpan, DateSpan>, ISubtractionOperators<DateSpan, DateSpan, DateSpan>
 #endif
 {

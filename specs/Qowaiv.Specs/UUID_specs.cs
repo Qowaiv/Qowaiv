@@ -322,9 +322,7 @@ public class Can_be_created_sequential
         {
             using (Clock.SetTimeForCurrentThread(() => date))
             {
-                var id = Uuid.NewSequential(comparer);
-                Console.WriteLine(ToString(id, comparer));
-                ids.Add(id);
+                ids.Add(Uuid.NewSequential(comparer));
             }
         }
         CollectionAssert.IsOrdered(ids, comparer);

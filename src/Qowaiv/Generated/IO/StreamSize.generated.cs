@@ -6,11 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.IO;
 
 public partial struct StreamSize : IEquatable<StreamSize>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<StreamSize, StreamSize, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -37,6 +41,9 @@ public partial struct StreamSize : IEquatable<StreamSize>
 }
 
 public partial struct StreamSize : IComparable, IComparable<StreamSize>
+#if NET7_0_OR_GREATER
+    , IComparisonOperators<StreamSize, StreamSize, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -213,4 +220,3 @@ public partial struct StreamSize
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

@@ -10,6 +10,10 @@ namespace Qowaiv;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateSpanJsonConverter))]
 #endif
 public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
+#if NET7_0_OR_GREATER
+    , IUnaryPlusOperators<DateSpan, DateSpan>, IUnaryNegationOperators<DateSpan, DateSpan>
+    , IAdditionOperators<DateSpan, DateSpan, DateSpan>, ISubtractionOperators<DateSpan, DateSpan, DateSpan>
+#endif
 {
     /// <summary>Represents the pattern of a (potential) valid year.</summary>
     private static readonly Regex Pattern = new(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegOptions.IgnoreCase, RegOptions.Timeout);

@@ -21,6 +21,21 @@ namespace Qowaiv.IO;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.IO.StreamSizeJsonConverter))]
 #endif
 public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<StreamSize>, IDecrementOperators<StreamSize>
+    , IUnaryPlusOperators<StreamSize, StreamSize>, IUnaryNegationOperators<StreamSize, StreamSize>
+    , IAdditionOperators<StreamSize, StreamSize, StreamSize>, ISubtractionOperators<StreamSize, StreamSize, StreamSize>
+    , IAdditionOperators<StreamSize, Percentage, StreamSize>, ISubtractionOperators<StreamSize, Percentage, StreamSize>
+    , IMultiplyOperators<StreamSize, Percentage, StreamSize>, IDivisionOperators<StreamSize, Percentage, StreamSize>
+    , IMultiplyOperators<StreamSize, decimal, StreamSize>, IDivisionOperators<StreamSize, decimal, StreamSize>
+    , IMultiplyOperators<StreamSize, double, StreamSize>, IDivisionOperators<StreamSize, double, StreamSize>
+    , IMultiplyOperators<StreamSize, long, StreamSize>, IDivisionOperators<StreamSize, long, StreamSize>
+    , IMultiplyOperators<StreamSize, int, StreamSize>, IDivisionOperators<StreamSize, int, StreamSize>
+    , IMultiplyOperators<StreamSize, short, StreamSize>, IDivisionOperators<StreamSize, short, StreamSize>
+    , IMultiplyOperators<StreamSize, ulong, StreamSize>, IDivisionOperators<StreamSize, ulong, StreamSize>
+    , IMultiplyOperators<StreamSize, uint, StreamSize>, IDivisionOperators<StreamSize, uint, StreamSize>
+    , IMultiplyOperators<StreamSize, ushort, StreamSize>, IDivisionOperators<StreamSize, ushort, StreamSize>
+#endif
 {
     /// <summary>Represents an empty/not set stream size.</summary>
     public static readonly StreamSize Zero;

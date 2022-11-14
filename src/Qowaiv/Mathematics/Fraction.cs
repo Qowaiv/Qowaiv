@@ -15,6 +15,14 @@ namespace Qowaiv.Mathematics;
 #endif
 [StructLayout(LayoutKind.Sequential)]
 public readonly partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
+#if NET7_0_OR_GREATER
+    , IAdditionOperators<Fraction, Fraction, Fraction>, ISubtractionOperators<Fraction, Fraction, Fraction>
+    , IUnaryPlusOperators<Fraction, Fraction>, IUnaryNegationOperators<Fraction, Fraction>
+    , IAdditionOperators<Fraction, long, Fraction>, ISubtractionOperators<Fraction, long, Fraction>
+    , IAdditionOperators<Fraction, int, Fraction>, ISubtractionOperators<Fraction, int, Fraction>
+    , IMultiplyOperators<Fraction, long, Fraction>, IDivisionOperators<Fraction, long, Fraction>
+    , IMultiplyOperators<Fraction, int, Fraction>, IDivisionOperators<Fraction, int, Fraction>
+#endif
 {
     /// <summary>Represents the zero (0) <see cref="Fraction"/> value.</summary>
     /// <remarks>

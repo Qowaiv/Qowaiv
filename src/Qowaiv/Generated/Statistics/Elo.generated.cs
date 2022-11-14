@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Statistics;
@@ -20,6 +21,9 @@ public partial struct Elo
 }
 
 public partial struct Elo : IEquatable<Elo>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<Elo, Elo, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -46,6 +50,9 @@ public partial struct Elo : IEquatable<Elo>
 }
 
 public partial struct Elo : IComparable, IComparable<Elo>
+#if NET7_0_OR_GREATER
+    , IComparisonOperators<Elo, Elo, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -243,4 +250,3 @@ public partial struct Elo
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

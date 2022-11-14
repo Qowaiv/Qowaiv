@@ -6,11 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Financial;
 
 public partial struct Money : IEquatable<Money>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<Money, Money, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -28,6 +32,9 @@ public partial struct Money : IEquatable<Money>
 }
 
 public partial struct Money : IComparable, IComparable<Money>
+#if NET7_0_OR_GREATER
+    , IComparisonOperators<Money, Money, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -202,4 +209,3 @@ public partial struct Money
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

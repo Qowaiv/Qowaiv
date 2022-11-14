@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Globalization;
@@ -29,6 +30,9 @@ public partial struct Country
 }
 
 public partial struct Country : IEquatable<Country>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<Country, Country, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -241,4 +245,3 @@ public partial struct Country
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

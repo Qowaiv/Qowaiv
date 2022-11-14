@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
@@ -23,6 +24,9 @@ public partial struct Uuid
 }
 
 public partial struct Uuid : IEquatable<Uuid>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<Uuid, Uuid, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -114,7 +118,7 @@ public partial struct Uuid
     /// The deserialized UUID.
     /// </returns>
     [Pure]
-    public static Uuid FromJson(string? json) => Parse(json);
+    public static Uuid FromJson(string json) => Parse(json);
 }
 
 public partial struct Uuid : IXmlSerializable
@@ -181,4 +185,3 @@ public partial struct Uuid
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, out _);
 }
-

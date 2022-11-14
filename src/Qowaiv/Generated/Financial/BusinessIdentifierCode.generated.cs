@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Financial;
@@ -29,6 +30,9 @@ public partial struct BusinessIdentifierCode
 }
 
 public partial struct BusinessIdentifierCode : IEquatable<BusinessIdentifierCode>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<BusinessIdentifierCode, BusinessIdentifierCode, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -241,4 +245,3 @@ public partial struct BusinessIdentifierCode
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

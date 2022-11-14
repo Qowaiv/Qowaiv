@@ -6,11 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
 
 public partial struct Date : IEquatable<Date>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<Date, Date, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -37,6 +41,9 @@ public partial struct Date : IEquatable<Date>
 }
 
 public partial struct Date : IComparable, IComparable<Date>
+#if NET7_0_OR_GREATER
+    , IComparisonOperators<Date, Date, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -234,4 +241,3 @@ public partial struct Date
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

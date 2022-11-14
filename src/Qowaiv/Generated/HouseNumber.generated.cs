@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv;
@@ -29,6 +30,9 @@ public partial struct HouseNumber
 }
 
 public partial struct HouseNumber : IEquatable<HouseNumber>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<HouseNumber, HouseNumber, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -55,6 +59,9 @@ public partial struct HouseNumber : IEquatable<HouseNumber>
 }
 
 public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
+#if NET7_0_OR_GREATER
+    , IComparisonOperators<HouseNumber, HouseNumber, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -252,4 +259,3 @@ public partial struct HouseNumber
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

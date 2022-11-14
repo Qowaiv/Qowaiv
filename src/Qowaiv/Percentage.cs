@@ -10,6 +10,20 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.PercentageJsonConverter))]
 #endif
 public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<Percentage>, IDecrementOperators<Percentage>
+    , IUnaryPlusOperators<Percentage, Percentage>, IUnaryNegationOperators<Percentage, Percentage>
+    , IAdditionOperators<Percentage, Percentage, Percentage>, ISubtractionOperators<Percentage, Percentage, Percentage>
+    , IMultiplyOperators<Percentage, Percentage, Percentage>, IDivisionOperators<Percentage, Percentage, Percentage>
+    , IMultiplyOperators<Percentage, decimal, Percentage>, IDivisionOperators<Percentage, decimal, Percentage>
+    , IMultiplyOperators<Percentage, double, Percentage>, IDivisionOperators<Percentage, double, Percentage>
+    , IMultiplyOperators<Percentage, long, Percentage>, IDivisionOperators<Percentage, long, Percentage>
+    , IMultiplyOperators<Percentage, int, Percentage>, IDivisionOperators<Percentage, int, Percentage>
+    , IMultiplyOperators<Percentage, short, Percentage>, IDivisionOperators<Percentage, short, Percentage>
+    , IMultiplyOperators<Percentage, ulong, Percentage>, IDivisionOperators<Percentage, ulong, Percentage>
+    , IMultiplyOperators<Percentage, uint, Percentage>, IDivisionOperators<Percentage, uint, Percentage>
+    , IMultiplyOperators<Percentage, ushort, Percentage>, IDivisionOperators<Percentage, ushort, Percentage>
+#endif
 {
     /// <summary>The percentage symbol (%).</summary>
     public static readonly string PercentSymbol = "%";

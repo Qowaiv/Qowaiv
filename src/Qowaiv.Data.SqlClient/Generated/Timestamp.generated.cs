@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
 #nullable enable
 
 namespace Qowaiv.Sql;
@@ -20,6 +21,9 @@ public partial struct Timestamp
 }
 
 public partial struct Timestamp : IEquatable<Timestamp>
+#if NET7_0_OR_GREATER
+    , IEqualityOperators<Timestamp, Timestamp, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -46,6 +50,9 @@ public partial struct Timestamp : IEquatable<Timestamp>
 }
 
 public partial struct Timestamp : IComparable, IComparable<Timestamp>
+#if NET7_0_OR_GREATER
+    , IComparisonOperators<Timestamp, Timestamp, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -243,4 +250,3 @@ public partial struct Timestamp
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);
 }
-

@@ -1,4 +1,6 @@
-﻿namespace Qowaiv;
+﻿using System.Numerics;
+
+namespace Qowaiv;
 
 /// <summary>Represents a local date time.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -10,6 +12,12 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.LocalDateTimeJsonConverter))]
 #endif
 public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
+#if NET7_0_OR_GREATER
+    , IIncrementOperators<LocalDateTime>, IDecrementOperators<LocalDateTime>
+    , IAdditionOperators<LocalDateTime, TimeSpan, LocalDateTime>, ISubtractionOperators<LocalDateTime, TimeSpan, LocalDateTime>
+    , IAdditionOperators<LocalDateTime, MonthSpan, LocalDateTime>, ISubtractionOperators<LocalDateTime, MonthSpan, LocalDateTime>
+    , ISubtractionOperators<LocalDateTime, LocalDateTime, TimeSpan>
+#endif
 {
     private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
 

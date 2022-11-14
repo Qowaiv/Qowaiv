@@ -160,10 +160,10 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     public static MonthSpan operator -(MonthSpan span) => span.Negate();
 
     /// <summary>Increases the month span with one month.</summary>
-    public static MonthSpan operator ++(MonthSpan amount) => amount.Increment();
+    public static MonthSpan operator ++(MonthSpan span) => span.Increment();
 
     /// <summary>Decreases the monthspan with one month.</summary>
-    public static MonthSpan operator --(MonthSpan amount) => amount.Decrement();
+    public static MonthSpan operator --(MonthSpan span) => span.Decrement();
 
     /// <summary>Adds two month spans.</summary>
     public static MonthSpan operator +(MonthSpan l, MonthSpan r) => l.Add(r);

@@ -295,48 +295,6 @@ public class MonthSpanTest
         Assert.AreEqual(new DateTime(2016, 09, 11), added);
     }
 
-    [Test]
-    public void Multiply_5MonthsWith3_15Months()
-    {
-        var multiplied = MonthSpan.FromMonths(5) * 3;
-        Assert.AreEqual(MonthSpan.FromMonths(15), multiplied);
-    }
-
-    [Test]
-    public void Multiply_5MonthsWith3Dot3m_16Months()
-    {
-        var multiplied = MonthSpan.FromMonths(5) * 3.3m;
-        Assert.AreEqual(MonthSpan.FromMonths(16), multiplied);
-    }
-
-    [Test]
-    public void Multiply_5MonthsWith3Dot3_16Months()
-    {
-        var multiplied = MonthSpan.FromMonths(5) * 3.3;
-        Assert.AreEqual(MonthSpan.FromMonths(16), multiplied);
-    }
-
-    [Test]
-    public void Divide_16MonthsWith3_5Months()
-    {
-        var multiplied = MonthSpan.FromMonths(16) / 3;
-        Assert.AreEqual(MonthSpan.FromMonths(5), multiplied);
-    }
-
-    [Test]
-    public void Divide_16MonthsWith3Dot4_4Months()
-    {
-        var multiplied = MonthSpan.FromMonths(16) / 3.4;
-        Assert.AreEqual(MonthSpan.FromMonths(4), multiplied);
-    }
-
-    [Test]
-    public void Divide_16MonthsWith3Dot4m_4Months()
-    {
-        var multiplied = MonthSpan.FromMonths(16) / 3.4m;
-        Assert.AreEqual(MonthSpan.FromMonths(4), multiplied);
-    }
-
     [TestCase(0, "2020-04-30", "2020-04-01")]
     [TestCase(1, "2020-04-30", "2020-03-31")]
     [TestCase(11, "2020-01-01", "2019-01-02")]

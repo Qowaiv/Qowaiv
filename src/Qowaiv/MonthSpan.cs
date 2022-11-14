@@ -12,11 +12,13 @@
 #endif
 public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
 #if NET7_0_OR_GREATER
+    , IIncrementOperators<MonthSpan>, IDecrementOperators<MonthSpan>
     , IUnaryPlusOperators<MonthSpan, MonthSpan>, IUnaryNegationOperators<MonthSpan, MonthSpan>
     , IAdditionOperators<MonthSpan, MonthSpan, MonthSpan>, ISubtractionOperators<MonthSpan, MonthSpan, MonthSpan>
     , IMultiplyOperators<MonthSpan, decimal, MonthSpan>, IDivisionOperators<MonthSpan, decimal, MonthSpan>
     , IMultiplyOperators<MonthSpan, double, MonthSpan>, IDivisionOperators<MonthSpan, double, MonthSpan>
     , IMultiplyOperators<MonthSpan, int, MonthSpan>, IDivisionOperators<MonthSpan, int, MonthSpan>
+    , IMultiplyOperators<MonthSpan, short, MonthSpan>, IDivisionOperators<MonthSpan, short, MonthSpan>
 #endif
 {
     /// <summary>Represents a month span with a zero duration.</summary>
@@ -62,6 +64,14 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <summary>Negates the month span.</summary>
     [Pure]
     public MonthSpan Negate() => new(-m_Value);
+
+    /// <summary>Increases the month span with one month.</summary>
+    [Pure]
+    private MonthSpan Increment() => new(m_Value + 1);
+
+    /// <summary>Decreases the month span with one month.</summary>
+    [Pure]
+    private MonthSpan Decrement() => new(m_Value - 1);
 
     /// <summary>Returns a new month span whose value is the sum of the specified month span and this instance.</summary>
     ///<param name="other">
@@ -143,12 +153,17 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     [Pure]
     public MonthSpan Divide(double factor) => Divide(Cast.ToDecimal<MonthSpan>(factor));
 
-
     /// <summary>Unary plus the month span.</summary>
     public static MonthSpan operator +(MonthSpan span) => span.Plus();
 
     /// <summary>Negates the month span.</summary>
     public static MonthSpan operator -(MonthSpan span) => span.Negate();
+
+    /// <summary>Increases the month span with one month.</summary>
+    public static MonthSpan operator ++(MonthSpan amount) => amount.Increment();
+
+    /// <summary>Decreases the monthspan with one month.</summary>
+    public static MonthSpan operator --(MonthSpan amount) => amount.Decrement();
 
     /// <summary>Adds two month spans.</summary>
     public static MonthSpan operator +(MonthSpan l, MonthSpan r) => l.Add(r);
@@ -160,6 +175,9 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     public static MonthSpan operator *(MonthSpan span, int factor) => span.Multiply(factor);
 
     /// <summary>Multiplies the month span with a factor.</summary>
+    public static MonthSpan operator *(MonthSpan span, short factor) => span.Multiply(factor);
+
+    /// <summary>Multiplies the month span with a factor.</summary>
     public static MonthSpan operator *(MonthSpan span, decimal factor) => span.Multiply(factor);
 
     /// <summary>Multiplies the month span with a factor.</summary>
@@ -167,6 +185,9 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
 
     /// <summary>Divides the month span by a factor.</summary>
     public static MonthSpan operator /(MonthSpan span, int factor) => span.Divide(factor);
+
+    /// <summary>Divides the month span by a factor.</summary>
+    public static MonthSpan operator /(MonthSpan span, short factor) => span.Divide(factor);
 
     /// <summary>Divides the month span by a factor.</summary>
     public static MonthSpan operator /(MonthSpan span, decimal factor) => span.Divide(factor);

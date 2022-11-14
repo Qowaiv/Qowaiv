@@ -14,6 +14,9 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
 #if NET7_0_OR_GREATER
     , IUnaryPlusOperators<MonthSpan, MonthSpan>, IUnaryNegationOperators<MonthSpan, MonthSpan>
     , IAdditionOperators<MonthSpan, MonthSpan, MonthSpan>, ISubtractionOperators<MonthSpan, MonthSpan, MonthSpan>
+    , IMultiplyOperators<MonthSpan, decimal, MonthSpan>, IDivisionOperators<MonthSpan, decimal, MonthSpan>
+    , IMultiplyOperators<MonthSpan, double, MonthSpan>, IDivisionOperators<MonthSpan, double, MonthSpan>
+    , IMultiplyOperators<MonthSpan, int, MonthSpan>, IDivisionOperators<MonthSpan, int, MonthSpan>
 #endif
 {
     /// <summary>Represents a month span with a zero duration.</summary>

@@ -17,6 +17,15 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     , IUnaryPlusOperators<Amount, Amount>, IUnaryNegationOperators<Amount, Amount>
     , IAdditionOperators<Amount, Amount, Amount>, ISubtractionOperators<Amount, Amount, Amount>
     , IAdditionOperators<Amount, Percentage, Amount>, ISubtractionOperators<Amount, Percentage, Amount>
+    , IMultiplyOperators<Amount, Percentage, Amount>, IDivisionOperators<Amount, Percentage, Amount>
+    , IMultiplyOperators<Amount, decimal, Amount>, IDivisionOperators<Amount, decimal, Amount>
+    , IMultiplyOperators<Amount, double, Amount>, IDivisionOperators<Amount, double, Amount>
+    , IMultiplyOperators<Amount, long, Amount>, IDivisionOperators<Amount, long, Amount>
+    , IMultiplyOperators<Amount, int, Amount>, IDivisionOperators<Amount, int, Amount>
+    , IMultiplyOperators<Amount, short, Amount>, IDivisionOperators<Amount, short, Amount>
+    , IMultiplyOperators<Amount, ulong, Amount>, IDivisionOperators<Amount, ulong, Amount>
+    , IMultiplyOperators<Amount, uint, Amount>, IDivisionOperators<Amount, uint, Amount>
+    , IMultiplyOperators<Amount, ushort, Amount>, IDivisionOperators<Amount, ushort, Amount>
 #endif
 {
     /// <summary>Represents an Amount of zero.</summary>

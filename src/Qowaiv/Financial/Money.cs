@@ -18,6 +18,15 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     , IUnaryPlusOperators<Money, Money>, IUnaryNegationOperators<Money, Money>
     , IAdditionOperators<Money, Money, Money>, ISubtractionOperators<Money, Money, Money>
     , IAdditionOperators<Money, Percentage, Money>, ISubtractionOperators<Money, Percentage, Money>
+    , IMultiplyOperators<Money, Percentage, Money>, IDivisionOperators<Money, Percentage, Money>
+    , IMultiplyOperators<Money, decimal, Money>, IDivisionOperators<Money, decimal, Money>
+    , IMultiplyOperators<Money, double, Money>, IDivisionOperators<Money, double, Money>
+    , IMultiplyOperators<Money, long, Money>, IDivisionOperators<Money, long, Money>
+    , IMultiplyOperators<Money, int, Money>, IDivisionOperators<Money, int, Money>
+    , IMultiplyOperators<Money, short, Money>, IDivisionOperators<Money, short, Money>
+    , IMultiplyOperators<Money, ulong, Money>, IDivisionOperators<Money, ulong, Money>
+    , IMultiplyOperators<Money, uint, Money>, IDivisionOperators<Money, uint, Money>
+    , IMultiplyOperators<Money, ushort, Money>, IDivisionOperators<Money, ushort, Money>
 #endif
 {
     /// <summary>Represents an Amount of zero.</summary>

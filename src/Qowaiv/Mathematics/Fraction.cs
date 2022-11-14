@@ -20,6 +20,8 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     , IUnaryPlusOperators<Fraction, Fraction>, IUnaryNegationOperators<Fraction, Fraction>
     , IAdditionOperators<Fraction, long, Fraction>, ISubtractionOperators<Fraction, long, Fraction>
     , IAdditionOperators<Fraction, int, Fraction>, ISubtractionOperators<Fraction, int, Fraction>
+    , IMultiplyOperators<Fraction, long, Fraction>, IDivisionOperators<Fraction, long, Fraction>
+    , IMultiplyOperators<Fraction, int, Fraction>, IDivisionOperators<Fraction, int, Fraction>
 #endif
 {
     /// <summary>Represents the zero (0) <see cref="Fraction"/> value.</summary>

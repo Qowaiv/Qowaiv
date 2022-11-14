@@ -27,6 +27,7 @@ public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattab
     , IIncrementOperators<Elo>, IDecrementOperators<Elo>
     , IUnaryPlusOperators<Elo, Elo>, IUnaryNegationOperators<Elo, Elo>
     , IAdditionOperators<Elo, Elo, Elo>, ISubtractionOperators<Elo, Elo, Elo>
+    , IMultiplyOperators<Elo, double, Elo>, IDivisionOperators<Elo, double, Elo>
 #endif
 {
     /// <summary>Represents the zero value of an Elo.</summary>
@@ -104,20 +105,25 @@ public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattab
 
     /// <summary>Increases the Elo with one.</summary>
     public static Elo operator ++(Elo elo) => elo.Increment();
+    
     /// <summary>Decreases the Elo with one.</summary>
     public static Elo operator --(Elo elo) => elo.Decrement();
 
     /// <summary>Unitary plusses the Elo.</summary>
     public static Elo operator +(Elo elo) => elo.Plus();
+    
     /// <summary>Negates the Elo.</summary>
     public static Elo operator -(Elo elo) => elo.Negate();
 
     /// <summary>Multiplies the Elo with the factor.</summary>
     public static Elo operator *(Elo elo, double factor) => elo.Multiply(factor);
+    
     /// <summary>Divides the Elo by the factor.</summary>
     public static Elo operator /(Elo elo, double factor) => elo.Divide(factor);
+    
     /// <summary>Adds the left and the right Elo.</summary>
     public static Elo operator +(Elo l, Elo r) => l.Add(r);
+    
     /// <summary>Subtracts the right from the left Elo.</summary>
     public static Elo operator -(Elo l, Elo r) => l.Subtract(r);
 

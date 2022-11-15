@@ -45,6 +45,52 @@ public class Is_equal_by_value
     }
 }
 
+public class Can_be_transformed
+{
+    [Test]
+    public void negate() => (-Svo.MonthSpan).Should().Be(MonthSpan.FromMonths(-69));
+
+    [Test]
+    public void increment()
+    {
+        var span = Svo.MonthSpan;
+        span++;
+        span.Should().Be(MonthSpan.FromMonths(70));
+    }
+    [Test]
+    public void decrement()
+    {
+        var span = Svo.MonthSpan;
+        span--;
+        span.Should().Be(MonthSpan.FromMonths(68));
+    }
+
+    [Test]
+    public void multiply_by_int() => (Svo.MonthSpan * 3).Should().Be(MonthSpan.FromMonths(207));
+
+    [Test]
+    public void multiply_by_short() => (Svo.MonthSpan * (short)3).Should().Be(MonthSpan.FromMonths(207));
+
+    [Test]
+    public void multiply_by_double() => (Svo.MonthSpan * 0.60869).Should().Be(MonthSpan.FromMonths(42));
+    
+    [Test]
+    public void multiply_by_decimal() => (Svo.MonthSpan * 0.60869m).Should().Be(MonthSpan.FromMonths(42));
+
+    [Test]
+    public void divide_by_int() => (Svo.MonthSpan / 3).Should().Be(MonthSpan.FromMonths(23));
+
+    [Test]
+    public void divide_by_short() => (Svo.MonthSpan / (short)3).Should().Be(MonthSpan.FromMonths(23));
+
+    [Test]
+    public void divide_by_double() => (Svo.MonthSpan / 4.0588).Should().Be(MonthSpan.FromMonths(17));
+    
+    [Test]
+    public void divide_by_decimal() => (Svo.MonthSpan / 4.0588m).Should().Be(MonthSpan.FromMonths(17));
+
+}
+
 public class Supports_type_conversion
 {
     [Test]

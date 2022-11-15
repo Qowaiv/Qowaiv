@@ -509,10 +509,13 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
         var n = info.GetInt64(nameof(numerator));
         var d = info.GetInt64(nameof(denominator));
-        var data = new Data(n, d).Guard().Simplify();
 
-        numerator = data.numerator;
-        denominator = data.denominator;
+        if (n != default || d != default)
+        {
+            var data = new Data(n, d).Guard().Simplify();
+            numerator = data.numerator;
+            denominator = data.denominator;
+        }
     }
 
     /// <summary>Adds the underlying property of the fraction to the serialization info.</summary>

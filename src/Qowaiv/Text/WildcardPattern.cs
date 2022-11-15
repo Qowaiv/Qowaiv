@@ -47,25 +47,15 @@ public class WildcardPattern : ISerializable
     public WildcardPattern(string pattern, WildcardPatternOptions options, StringComparison comparisonType)
         : this()
     {
-        Pattern = Guard.NotNullOrEmpty(pattern, nameof(pattern));
+        Pattern = GuardPattern(pattern, options);
+        Options = options;
+        ComparisonType = comparisonType;
 
-        if (options.HasFlag(WildcardPatternOptions.SqlWildcards))
+        if (Options.HasFlag(WildcardPatternOptions.SqlWildcards))
         {
-            if (pattern.Contains("%%"))
-            {
-                throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, nameof(pattern));
-            }
             SingleChar = '_';
             MultipleChars = '%';
         }
-        else if (pattern.Contains("**"))
-        {
-            throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, nameof(pattern));
-        }
-        else { /* No arugument exceptions. */ }
-
-        Options = options;
-        ComparisonType = comparisonType;
     }
 
     /// <summary>Initializes a new instance of a wild card pattern based on the serialization info.</summary>
@@ -74,10 +64,35 @@ public class WildcardPattern : ISerializable
     protected WildcardPattern(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        Pattern = Guard.NotNullOrEmpty(info.GetString("Pattern"), "Pattern");
         Options = (WildcardPatternOptions)info.GetInt32("Options");
+        Pattern = GuardPattern(info.GetString("Pattern"), Options);
         ComparisonType = (StringComparison)info.GetInt32("ComparisonType");
+
+        if (Options.HasFlag(WildcardPatternOptions.SqlWildcards))
+        {
+            SingleChar = '_';
+            MultipleChars = '%';
+        }
     }
+
+    private static string GuardPattern(string? pattern, WildcardPatternOptions options)
+    {
+        pattern = Guard.NotNullOrEmpty(pattern, nameof(pattern));
+
+        if (options.HasFlag(WildcardPatternOptions.SqlWildcards))
+        {
+            if (pattern.Contains("%%"))
+            {
+                throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, nameof(pattern));
+            }
+        }
+        else if (pattern.Contains("**"))
+        {
+            throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, nameof(pattern));
+        }
+        return pattern;
+    }
+
 
     /// <summary>Adds the underlying property of a wild card pattern to the serialization info.</summary>
     /// <param name="info">The serialization info.</param>
@@ -199,7 +214,10 @@ public class WildcardPattern : ISerializable
         {
             return pattern.IsEnd() || (pattern.Ch == MultipleChars && pattern.Left == 1);
         }
-        else if (pattern.IsEnd()) return false;
+        else if (pattern.IsEnd())
+        {
+            return false;
+        }
         else return MatchChar(pattern, input);
     }
 

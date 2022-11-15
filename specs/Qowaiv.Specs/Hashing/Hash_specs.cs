@@ -157,7 +157,6 @@ public class Get_hash_code_without_fixed_randomizer
     {
         var first = Hash.Code(1712345678909876L);
         first.Should().Be(Hash.Code(1712345678909876L));
-        Console.WriteLine(first);
     }
 }
 

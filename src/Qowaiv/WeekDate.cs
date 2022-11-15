@@ -50,27 +50,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     public static readonly WeekDate MaxValue = new(Date.MaxValue);
 
     /// <summary>Creates a date based on Week Year, week number, and day of the week.</summary>
-    public WeekDate(int year, int week, int day)
-    {
-        if (year < 1 || year > 9999)
-        {
-            throw new ArgumentOutOfRangeException(nameof(year), "Year should be in range [1,9999].");
-        }
-        if (week < 1 || week > 53)
-        {
-            throw new ArgumentOutOfRangeException(nameof(week), "Week should be in range [1,53].");
-        }
-        if (day < 1 || day > DaysPerWeek)
-        {
-            throw new ArgumentOutOfRangeException(nameof(day), "Day should be in range [1,7].");
-        }
-
-        if (!TryCreate(year, week, day, out Date dt))
-        {
-            throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception?)null);
-        }
-        m_Value = dt;
-    }
+    public WeekDate(int year, int week, int day) : this(Create(year, week, day)) { }
 
     /// <summary>Creates a date based on a <see cref="Qowaiv.Date"/>.</summary>
     private WeekDate(Date date) => m_Value = date;
@@ -311,5 +291,25 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
 
         static bool EndOf9999(int year, int week, int day)
             => year == 9999 && ((week == 52 && day > 5) || week == 53);
+    }
+
+    [Pure]
+    private static Date Create(int year, int week, int day)
+    {
+        if (year < 1 || year > 9999)
+        {
+            throw new ArgumentOutOfRangeException(nameof(year), "Year should be in range [1,9999].");
+        }
+        if (week < 1 || week > 53)
+        {
+            throw new ArgumentOutOfRangeException(nameof(week), "Week should be in range [1,53].");
+        }
+        if (day < 1 || day > DaysPerWeek)
+        {
+            throw new ArgumentOutOfRangeException(nameof(day), "Day should be in range [1,7].");
+        }
+        return TryCreate(year, week, day, out Date dt)
+            ? dt
+            : throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception?)null);
     }
 }

@@ -152,8 +152,11 @@ dotnet_diagnostic.S2436.severity = warning
 # S2701: Literal boolean values should not be used in assertions
 dotnet_diagnostic.S2701.severity = warning
 
-# S3215: interface instances should not be cast to concrete types
+# S3215: Interface instances should not be cast to concrete types
 dotnet_diagnostic.S3215.severity = warning
+
+# S3218: Inner class members should not shadow outer class "static" or type members
+dotnet_diagnostic.3218.severity = warning
 
 # S3257: Declarations and initializations should be as concise as possible
 dotnet_diagnostic.S3257.severity = warning

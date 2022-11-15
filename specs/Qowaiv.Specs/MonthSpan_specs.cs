@@ -72,10 +72,10 @@ public class Can_be_transformed
     public void multiply_by_short() => (Svo.MonthSpan * (short)3).Should().Be(MonthSpan.FromMonths(207));
 
     [Test]
-    public void multiply_by_double() => (Svo.MonthSpan * 0.60869).Should().Be(MonthSpan.FromMonths(42));
+    public void multiply_by_double() => (Svo.MonthSpan * 0.608698).Should().Be(MonthSpan.FromMonths(42));
     
     [Test]
-    public void multiply_by_decimal() => (Svo.MonthSpan * 0.60869m).Should().Be(MonthSpan.FromMonths(42));
+    public void multiply_by_decimal() => (Svo.MonthSpan * 0.608698m).Should().Be(MonthSpan.FromMonths(42));
 
     [Test]
     public void divide_by_int() => (Svo.MonthSpan / 3).Should().Be(MonthSpan.FromMonths(23));

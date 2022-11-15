@@ -109,46 +109,14 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// Furthermore, the numerator and denominator are reduced (so 2/4
     /// becomes 1/2).
     /// </remarks>
-    public Fraction(long numerator, long denominator) : this(numerator, denominator, true) { }
+    public Fraction(long numerator, long denominator) 
+        : this(new Data(numerator, denominator).Guard().Simplify()) { }
 
     /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
-    private Fraction(long numerator, long denominator, bool guard)
+    private Fraction(Data data)
     {
-        if (guard)
-        {
-            if (numerator == long.MinValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(numerator), QowaivMessages.OverflowException_Fraction);
-            }
-            if (denominator == 0 || denominator == long.MinValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(denominator), QowaivMessages.OverflowException_Fraction);
-            }
-
-            // In case of zero, is should represent the default case.
-            if (numerator == 0)
-            {
-                this.numerator = default;
-                this.denominator = default;
-            }
-            else
-            {
-                var negative = numerator < 0 ^ denominator < 0;
-                this.numerator = Math.Abs(numerator);
-                this.denominator = Math.Abs(denominator);
-                Reduce(ref this.numerator, ref this.denominator);
-
-                if (negative)
-                {
-                    this.numerator = -this.numerator;
-                }
-            }
-        }
-        else
-        {
-            this.numerator = numerator;
-            this.denominator = denominator;
-        }
+        numerator = data.numerator;
+        denominator = data.denominator;
     }
 
     /// <summary>Gets the numerator of the fraction.</summary>
@@ -538,8 +506,16 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     private Fraction(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        numerator = info.GetInt64(nameof(numerator));
-        denominator = info.GetInt64(nameof(denominator));
+
+        var n = info.GetInt64(nameof(numerator));
+        var d = info.GetInt64(nameof(denominator));
+
+        if (n != default || d != default)
+        {
+            var data = new Data(n, d).Guard().Simplify();
+            numerator = data.numerator;
+            denominator = data.denominator;
+        }
     }
 
     /// <summary>Adds the underlying property of the fraction to the serialization info.</summary>
@@ -693,7 +669,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     private static Fraction New(long n, long d)
         => n == long.MinValue
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
-        : new(numerator: n, denominator: d, guard: false);
+        : new(new Data(numerator: n, denominator: d));
 
     /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
     private static void Reduce(ref long a, ref long b)
@@ -726,5 +702,53 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
             b = remainder;
         }
         return a * even;
+    }
+
+    /// <remarks>
+    /// to pass the two components around during creation.
+    /// </remarks>
+    private ref struct Data
+    {
+        public long numerator;
+        public long denominator;
+
+        public Data(long numerator, long denominator)
+        {
+            this.numerator = numerator;
+            this.denominator = denominator;
+        }
+
+        [FluentSyntax]
+        public Data Guard()
+        {
+#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one 
+            if (numerator == long.MinValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(numerator), QowaivMessages.OverflowException_Fraction);
+            }
+            if (denominator == 0 || denominator == long.MinValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(denominator), QowaivMessages.OverflowException_Fraction);
+            }
+#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
+            return this;
+        }
+
+        /// <summary>Reduce the numbers based on the greatest common divisor.</summary>
+        [FluentSyntax]
+        public Data Simplify()
+        {
+            var negative = numerator < 0 ^ denominator < 0;
+            numerator = Math.Abs(numerator);
+            denominator = Math.Abs(denominator);
+
+            Reduce(ref numerator, ref denominator);
+            
+            if (negative)
+            {
+                numerator = -numerator;
+            }
+            return this;
+        }
     }
 }

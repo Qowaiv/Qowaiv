@@ -118,7 +118,7 @@ public partial struct Uuid
     /// The deserialized UUID.
     /// </returns>
     [Pure]
-    public static Uuid FromJson(string json) => Parse(json);
+    public static Uuid FromJson(string? json) => Parse(json);
 }
 
 public partial struct Uuid : IXmlSerializable

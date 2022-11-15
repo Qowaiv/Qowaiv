@@ -542,17 +542,22 @@ public class Not_supported_by
 {
     [Test]
     public void _77_countries()
-    {
-        var exp = new[] { Country.AE, Country.AG, Country.AO, Country.AQ, Country.AW, Country.BF, Country.BI, Country.BJ, Country.BQ, Country.BS, Country.BV, Country.BW, Country.BZ, Country.CD, Country.CF, Country.CG, Country.CI, Country.CK, Country.CM, Country.CW, Country.DJ, Country.DM, Country.DO, Country.EH, Country.ER, Country.FJ, Country.GD, Country.GH, Country.GM, Country.GN, Country.GQ, Country.GY, Country.HK, Country.IE, Country.JM, Country.KE, Country.KI, Country.KM, Country.KN, Country.KP, Country.KW, Country.LC, Country.ML, Country.MO, Country.MR, Country.MS, Country.MU, Country.MV, Country.MW, Country.NR, Country.NU, Country.QA, Country.RW, Country.SB, Country.SC, Country.SJ, Country.SL, Country.SO, Country.SR, Country.SS, Country.ST, Country.SX, Country.SY, Country.TF, Country.TG, Country.TK, Country.TL, Country.TO, Country.TV, Country.TZ, Country.UG, Country.UM, Country.UZ, Country.VU, Country.WS, Country.YE, Country.ZW };
-        var act = PostalCodeCountryInfo.GetCountriesWithoutPostalCode().ToArray();
-
-        foreach (var item in act)
+        => PostalCodeCountryInfo.GetCountriesWithoutPostalCode().Should().BeEquivalentTo(new[]
         {
-            Console.WriteLine(item);
-        }
-        CollectionAssert.AreEqual(exp, act);
-    }
+            Country.AE, Country.AG, Country.AO, Country.AQ, Country.AW, Country.BF, Country.BI,
+            Country.BJ, Country.BQ, Country.BS, Country.BV, Country.BW, Country.BZ, Country.CD,
+            Country.CF, Country.CG, Country.CI, Country.CK, Country.CM, Country.CW, Country.DJ,
+            Country.DM, Country.DO, Country.EH, Country.ER, Country.FJ, Country.GD, Country.GH,
+            Country.GM, Country.GN, Country.GQ, Country.GY, Country.HK, Country.IE, Country.JM,
+            Country.KE, Country.KI, Country.KM, Country.KN, Country.KP, Country.KW, Country.LC,
+            Country.ML, Country.MO, Country.MR, Country.MS, Country.MU, Country.MV, Country.MW,
+            Country.NR, Country.NU, Country.QA, Country.RW, Country.SB, Country.SC, Country.SJ,
+            Country.SL, Country.SO, Country.SR, Country.SS, Country.ST, Country.SX, Country.SY,
+            Country.TF, Country.TG, Country.TK, Country.TL, Country.TO, Country.TV, Country.TZ,
+            Country.UG, Country.UM, Country.UZ, Country.VU, Country.WS, Country.YE, Country.ZW
+        });
 }
+
 public class For_10_countries
 {
     [Test]
@@ -573,11 +578,6 @@ public class For_10_countries
 
             };
         var act = PostalCodeCountryInfo.GetCountriesWithSingleValue().ToArray();
-
-        foreach (var item in act)
-        {
-            Console.WriteLine(item);
-        }
 
         Assert.AreEqual(exp.Keys.Count, act.Length, "act.Length");
 

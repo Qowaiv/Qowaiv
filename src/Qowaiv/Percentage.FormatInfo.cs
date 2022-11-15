@@ -73,7 +73,10 @@ public readonly partial struct Percentage
 
 
         [Pure]
+#pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members
+        // This is the only proper name for this function.
         public static bool TryParse(string? format, IFormatProvider? formatProvider, out FormatInfo info)
+#pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
         {
             format = WithDefault(format, formatProvider as CultureInfo);
             
@@ -103,9 +106,9 @@ public readonly partial struct Percentage
             var before = Befores.Contains(culture?.Name);
             return str switch
             {
-                null or "" => before ? PercentSymbol + Percentage.NumberFormat : Percentage.NumberFormat + PercentSymbol,
-                "PM" => before ? PerMilleSymbol + Percentage.NumberFormat : Percentage.NumberFormat + PerMilleSymbol,
-                "PT" => before ? PerTenThousandSymbol + Percentage.NumberFormat : Percentage.NumberFormat + PerTenThousandSymbol,
+                null or "" => before ? PercentSymbol + Percentage.DefaultFormat : Percentage.DefaultFormat + PercentSymbol,
+                "PM" => before ? PerMilleSymbol + Percentage.DefaultFormat : Percentage.DefaultFormat + PerMilleSymbol,
+                "PT" => before ? PerTenThousandSymbol + Percentage.DefaultFormat : Percentage.DefaultFormat + PerTenThousandSymbol,
                 _ => str,
             };
         }

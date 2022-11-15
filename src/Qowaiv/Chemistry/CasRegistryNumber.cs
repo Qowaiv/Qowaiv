@@ -146,7 +146,8 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
 
             while (buffer > 0)
             {
-                sum += (buffer % 10) * ++factor;
+                factor++;
+                sum += (buffer % 10) * factor;
                 buffer /= 10;
             }
 

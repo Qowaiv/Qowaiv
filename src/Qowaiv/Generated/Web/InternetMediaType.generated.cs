@@ -124,7 +124,7 @@ public partial struct InternetMediaType
     /// The deserialized Internet media type.
     /// </returns>
     [Pure]
-    public static InternetMediaType FromJson(string json) => Parse(json);
+    public static InternetMediaType FromJson(string? json) => Parse(json);
 }
 
 public partial struct InternetMediaType : IXmlSerializable

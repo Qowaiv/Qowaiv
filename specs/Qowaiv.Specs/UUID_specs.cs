@@ -384,18 +384,6 @@ Actual:   [{(string.Join(", ", act))}]");
             yield return date;
         }
     }
-
-    private static string ToString(Uuid uuid, UuidComparer comparer)
-    {
-        var bytes = uuid.ToByteArray();
-        var sb = new StringBuilder(48);
-
-        foreach (var index in comparer.Priority)
-        {
-            sb.Append(bytes[index].ToString("X2")).Append(' ');
-        }
-        return sb.ToString();
-    }
 }
 
 public class Has_custom_formatting

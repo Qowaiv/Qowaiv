@@ -39,11 +39,6 @@ public class Will_seal
         .Where(tp => tp.GetCustomAttributes<WillBeSealedAttribute>().Any())
         .OrderBy(tp => tp.FullName);
 
-        foreach (var tp in decorated)
-        {
-            Console.WriteLine($"typeof({tp.FullName}),");
-        }
-
         decorated.Should().BeEquivalentTo(new[]
         {
             typeof(Qowaiv.Conversion.Security.Cryptography.CryptographicSeedTypeConverter),

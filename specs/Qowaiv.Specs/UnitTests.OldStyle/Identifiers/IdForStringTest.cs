@@ -66,7 +66,6 @@ namespace Qowaiv.UnitTests.Identifiers
         public void ToByteArray_TestStruct_FilledArray()
         {
             var bytes = TestStruct.ToByteArray();
-            Console.WriteLine(string.Join(", ", bytes));
             var exepected = new byte[] { 81, 111, 119, 97, 105, 118, 45, 73, 68 };
             Assert.AreEqual(exepected, bytes);
         }

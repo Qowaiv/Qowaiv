@@ -71,12 +71,12 @@ public class README_md
                     nullabe = info.Nullable,
                     @enum = info.Enum?.ToArray(),
                 });
-
+#if DEBUG
         Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented, new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore,
         }));
-
+#endif
         all.Should().NotBeEmpty();
     }
 

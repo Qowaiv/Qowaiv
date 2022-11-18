@@ -10,6 +10,9 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateJsonConverter))]
 #endif
 public readonly partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
+#if NET6_0_OR_GREATER
+    , ISpanFormattable
+#endif
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Date>, IDecrementOperators<Date>
     , IAdditionOperators<Date, TimeSpan, Date>, ISubtractionOperators<Date, TimeSpan, Date>
@@ -412,7 +415,17 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
             : m_Value.ToString(format, formatProvider);
     }
 
-    /// <summary>Gets an XML string representation of the @FullName.</summary>
+#if NET6_0_OR_GREATER
+    /// <inheritdoc />
+    public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+    {
+        format = format.WithDefault("d");
+        return StringFormatter.TryApplyCustomFormatter(this, destination, out charsWritten, format, provider)
+            || m_Value.TryFormat(destination, out charsWritten, format, provider);
+    }
+#endif
+
+    /// <summary>Gets an XML string representation of the date.</summary>
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 

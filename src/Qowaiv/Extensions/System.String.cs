@@ -66,6 +66,15 @@ public static class QowaivSystemExtensions
     internal static string WithDefault(this string? str, string @default = "")
         => str is { Length: > 0 } ? str : @default;
 
+#if NET6_0_OR_GREATER
+    /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)"/>,
+    /// otherwise the string value.
+    /// </summary>
+    [Pure]
+    internal static ReadOnlySpan<char> WithDefault(this ReadOnlySpan<char> str, ReadOnlySpan<char> @default)
+        => str.IsEmpty ? @default : str;
+#endif
+
     [Pure]
     internal static string Unify(this string? str) => str.Buffer().Unify();
 

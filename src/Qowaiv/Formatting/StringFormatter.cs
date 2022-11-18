@@ -1,4 +1,7 @@
-﻿namespace Qowaiv.Formatting;
+﻿using Microsoft.VisualBasic;
+using System.ComponentModel;
+
+namespace Qowaiv.Formatting;
 
 /// <summary>A string formatter class.</summary>
 public static class StringFormatter
@@ -127,6 +130,41 @@ public static class StringFormatter
             return true;
         }
     }
+
+#if NET6_0_OR_GREATER
+
+    /// <summary>Tries to apply the custom formatter to format the object.</summary>
+    /// <param name="obj">
+    /// The object to format.
+    /// </param>
+    /// <param name="destination">
+    /// The span in which to write this instance's value formatted as a span of characters.
+    /// </param>
+    /// <param name="format">
+    /// The format to apply
+    /// </param>
+    /// <param name="charsWritten">
+    /// When this method returns, contains the number of characters that were written in destination.
+    /// </param>
+    /// <param name="provider">
+    /// The format provider.
+    /// </param>
+    /// <returns>
+    /// True, if the format provider supports custom formatting, otherwise false.
+    /// </returns>
+    public static bool TryApplyCustomFormatter(object obj, Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+    {
+        if (TryApplyCustomFormatter(format.ToString(), obj, provider, out var formatted))
+        {
+            return destination.TryWrite(formatted, out charsWritten);
+        }
+        else
+        {
+            charsWritten = 0;
+            return false;
+        }
+    }
+#endif
 
     /// <summary>Replaces diacritic characters by non diacritic ones.</summary>
     /// <param name="str">

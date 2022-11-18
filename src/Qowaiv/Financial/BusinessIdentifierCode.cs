@@ -103,8 +103,14 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
     /// <inheritdoc />
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(this, destination, out charsWritten, format, provider)) return true;
-        else if (IsUnknown()) return destination.TryWrite('?', out charsWritten);
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out var formatted))
+        {
+            return destination.TryWrite(formatted, out charsWritten);
+        }
+        else if (IsUnknown())
+        {
+            return destination.TryWrite('?', out charsWritten);
+        }
         else return destination.TryWrite(m_Value, out charsWritten);
     }
 

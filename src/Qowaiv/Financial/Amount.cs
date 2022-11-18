@@ -412,8 +412,9 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
 #if NET6_0_OR_GREATER
     /// <inheritdoc />
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-        => StringFormatter.TryApplyCustomFormatter(this, destination, out charsWritten, format, provider)
-        || m_Value.TryFormat(destination, out charsWritten, format, Money.GetNumberFormatInfo(provider));
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out var formatted)
+        ? destination.TryWrite(formatted, out charsWritten)
+        : m_Value.TryFormat(destination, out charsWritten, format, Money.GetNumberFormatInfo(provider));
 #endif
 
     /// <summary>Gets an XML string representation of the amount.</summary>

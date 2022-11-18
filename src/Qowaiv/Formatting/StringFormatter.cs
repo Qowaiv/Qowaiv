@@ -132,38 +132,24 @@ public static class StringFormatter
     }
 
 #if NET6_0_OR_GREATER
-
     /// <summary>Tries to apply the custom formatter to format the object.</summary>
-    /// <param name="obj">
-    /// The object to format.
-    /// </param>
-    /// <param name="destination">
-    /// The span in which to write this instance's value formatted as a span of characters.
-    /// </param>
     /// <param name="format">
     /// The format to apply
     /// </param>
-    /// <param name="charsWritten">
-    /// When this method returns, contains the number of characters that were written in destination.
+    /// <param name="obj">
+    /// The object to format.
     /// </param>
-    /// <param name="provider">
+    /// <param name="formatProvider">
     /// The format provider.
+    /// </param>
+    /// <param name="formatted">
+    /// The formatted result.
     /// </param>
     /// <returns>
     /// True, if the format provider supports custom formatting, otherwise false.
     /// </returns>
-    public static bool TryApplyCustomFormatter(object obj, Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        if (TryApplyCustomFormatter(format.ToString(), obj, provider, out var formatted))
-        {
-            return destination.TryWrite(formatted, out charsWritten);
-        }
-        else
-        {
-            charsWritten = 0;
-            return false;
-        }
-    }
+    public static bool TryApplyCustomFormatter(ReadOnlySpan<char> format, object obj, IFormatProvider? formatProvider, out string formatted)
+        => TryApplyCustomFormatter(format.ToString(), obj, formatProvider, out formatted);
 #endif
 
     /// <summary>Replaces diacritic characters by non diacritic ones.</summary>

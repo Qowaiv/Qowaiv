@@ -420,8 +420,9 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {
         format = format.WithDefault("d");
-        return StringFormatter.TryApplyCustomFormatter(this, destination, out charsWritten, format, provider)
-            || m_Value.TryFormat(destination, out charsWritten, format, provider);
+        return StringFormatter.TryApplyCustomFormatter(format, this, provider, out var formatted)
+            ? destination.TryWrite(formatted, out charsWritten)
+            : m_Value.TryFormat(destination, out charsWritten, format, provider);
     }
 #endif
 

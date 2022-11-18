@@ -155,6 +155,9 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
 }
 
 public partial struct BusinessIdentifierCode
+#if NET7_0_OR_GREATER
+    : IParsable<BusinessIdentifierCode>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="BusinessIdentifierCode"/>.</summary>
     /// <param name="s">

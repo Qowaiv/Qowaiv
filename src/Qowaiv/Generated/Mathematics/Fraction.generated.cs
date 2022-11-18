@@ -119,6 +119,9 @@ public partial struct Fraction : IXmlSerializable
 }
 
 public partial struct Fraction
+#if NET7_0_OR_GREATER
+    : IParsable<Fraction>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">

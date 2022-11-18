@@ -155,6 +155,9 @@ public partial struct Sex : IXmlSerializable
 }
 
 public partial struct Sex
+#if NET7_0_OR_GREATER
+    : IParsable<Sex>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Sex"/>.</summary>
     /// <param name="s">

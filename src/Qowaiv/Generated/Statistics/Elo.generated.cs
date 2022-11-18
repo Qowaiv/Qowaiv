@@ -160,6 +160,9 @@ public partial struct Elo : IXmlSerializable
 }
 
 public partial struct Elo
+#if NET7_0_OR_GREATER
+    : IParsable<Elo>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
     /// <param name="s">

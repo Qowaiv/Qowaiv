@@ -151,6 +151,9 @@ public partial struct LocalDateTime : IXmlSerializable
 }
 
 public partial struct LocalDateTime
+#if NET7_0_OR_GREATER
+    : IParsable<LocalDateTime>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
     /// <param name="s">

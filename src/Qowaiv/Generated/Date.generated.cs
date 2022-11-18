@@ -151,6 +151,9 @@ public partial struct Date : IXmlSerializable
 }
 
 public partial struct Date
+#if NET7_0_OR_GREATER
+    : IParsable<Date>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.</summary>
     /// <param name="s">

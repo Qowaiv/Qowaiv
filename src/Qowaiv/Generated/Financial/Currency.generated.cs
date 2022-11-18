@@ -155,6 +155,9 @@ public partial struct Currency : IXmlSerializable
 }
 
 public partial struct Currency
+#if NET7_0_OR_GREATER
+    : IParsable<Currency>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>
     /// <param name="s">

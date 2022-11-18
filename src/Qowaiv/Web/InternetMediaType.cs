@@ -145,20 +145,23 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     /// <param name="s">
     /// A string containing an Internet media type to convert.
     /// </param>
+    /// <param name="provider">
+    /// The specified format provider.
+    /// </param>
     /// <param name="result">
     /// The result of the parsing.
     /// </param>
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, out InternetMediaType result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out InternetMediaType result)
     {
         result = default;
         if (s is not { Length: > 0})
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s, CultureInfo.InvariantCulture))
+        else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
         {
             result = Unknown;
             return true;

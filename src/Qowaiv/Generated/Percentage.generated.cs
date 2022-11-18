@@ -160,6 +160,9 @@ public partial struct Percentage : IXmlSerializable
 }
 
 public partial struct Percentage
+#if NET7_0_OR_GREATER
+    : IParsable<Percentage>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
     /// <param name="s">

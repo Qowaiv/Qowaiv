@@ -155,6 +155,9 @@ public partial struct PostalCode : IXmlSerializable
 }
 
 public partial struct PostalCode
+#if NET7_0_OR_GREATER
+    : IParsable<PostalCode>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="PostalCode"/>.</summary>
     /// <param name="s">

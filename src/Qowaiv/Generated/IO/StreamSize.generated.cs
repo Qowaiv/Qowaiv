@@ -130,6 +130,9 @@ public partial struct StreamSize : IXmlSerializable
 }
 
 public partial struct StreamSize
+#if NET7_0_OR_GREATER
+    : IParsable<StreamSize>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
     /// <param name="s">

@@ -155,6 +155,9 @@ public partial struct Country : IXmlSerializable
 }
 
 public partial struct Country
+#if NET7_0_OR_GREATER
+    : IParsable<Country>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
     /// <param name="s">

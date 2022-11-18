@@ -155,6 +155,9 @@ public partial struct YesNo : IXmlSerializable
 }
 
 public partial struct YesNo
+#if NET7_0_OR_GREATER
+    : IParsable<YesNo>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
     /// <param name="s">

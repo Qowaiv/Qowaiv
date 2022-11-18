@@ -113,7 +113,6 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
         }
         else return destination.TryWrite(m_Value, out charsWritten);
     }
-
 #endif
 
     /// <summary>Gets an XML string representation of the BIC.</summary>

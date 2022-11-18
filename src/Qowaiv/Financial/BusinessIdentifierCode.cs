@@ -30,9 +30,6 @@ namespace Qowaiv.Financial;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.BusinessIdentifierCodeJsonConverter))]
 #endif
 public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
-#if NET6_0_OR_GREATER
-    , ISpanFormattable
-#endif
 {
     /// <remarks>
     /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
@@ -98,22 +95,6 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
         else if (IsUnknown()) return "?";
         else return m_Value ?? string.Empty;
     }
-
-#if NET6_0_OR_GREATER
-    /// <inheritdoc />
-    public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out var formatted))
-        {
-            return destination.TryWrite(formatted, out charsWritten);
-        }
-        else if (IsUnknown())
-        {
-            return destination.TryWrite('?', out charsWritten);
-        }
-        else return destination.TryWrite(m_Value, out charsWritten);
-    }
-#endif
 
     /// <summary>Gets an XML string representation of the BIC.</summary>
     [Pure]

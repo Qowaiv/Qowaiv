@@ -181,6 +181,9 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     /// <param name="s">
     /// A string containing a UUID to convert.
     /// </param>
+    /// <param name="provider">
+    /// The specified format provider.
+    /// </param>
     /// <param name="result">
     /// The result of the parsing.
     /// </param>
@@ -188,7 +191,7 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string? s, out Uuid result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Uuid result)
     {
         result = default;
         if (behavior.TryParse(s, out var id))

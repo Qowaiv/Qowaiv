@@ -4,7 +4,7 @@ namespace System;
 /// <summary>Extensions on <see cref="Span{T}"/>.</summary>
 internal static class QowaivSpanExtensions
 {
-    /// <summary>Tries to write a nullable <see cref="string"/> to a <see cref="Span{char}"/>.</summary>
+    /// <summary>Tries to write a nullable <see cref="string"/> to a <see cref="Span{T}"/>&lt;<see cref="char"/>&gt;.</summary>
     [Pure]
     public static bool TryWrite(this Span<char> span, string? value, out int charsWritten)
     {
@@ -28,7 +28,7 @@ internal static class QowaivSpanExtensions
         }
     }
 
-    /// <summary>Tries to write a <see cref="char"/> to a <see cref="Span{char}"/>.</summary>
+    /// <summary>Tries to write a <see cref="char"/> to a <see cref="Span{T}"/>&lt;<see cref="char"/>&gt;.</summary>
     [Pure]
     public static bool TryWrite(this Span<char> span, char ch, out int charsWritten)
     {

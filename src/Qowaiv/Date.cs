@@ -9,9 +9,11 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateJsonConverter))]
 #endif
-public readonly partial struct Date : ISerializable, IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
+public readonly partial struct Date : ISerializable, IXmlSerializable, IEquatable<Date>, IComparable, IComparable<Date>
 #if NET6_0_OR_GREATER
     , ISpanFormattable
+#else
+    , IFormattable
 #endif
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Date>, IDecrementOperators<Date>

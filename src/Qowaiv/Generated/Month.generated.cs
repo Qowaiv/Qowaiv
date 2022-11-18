@@ -155,6 +155,9 @@ public partial struct Month : IXmlSerializable
 }
 
 public partial struct Month
+#if NET7_0_OR_GREATER
+    : IParsable<Month>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.</summary>
     /// <param name="s">

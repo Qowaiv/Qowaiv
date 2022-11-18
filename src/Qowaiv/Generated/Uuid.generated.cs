@@ -149,6 +149,9 @@ public partial struct Uuid : IXmlSerializable
 }
 
 public partial struct Uuid
+#if NET7_0_OR_GREATER
+    : IParsable<Uuid>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
     /// <param name="s">
@@ -161,7 +164,23 @@ public partial struct Uuid
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Uuid Parse(string? s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionUuid);
+    public static Uuid Parse(string? s) => Parse(s, null);
+
+    /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
+    /// <param name="s">
+    /// A string containing the UUID to convert.
+    /// </param>
+    /// <param name="formatProvider">
+    /// The specified format provider.
+    /// </param>
+    /// <returns>
+    /// The parsed UUID.
+    /// </returns>
+    /// <exception cref="FormatException">
+    /// <paramref name="s"/> is not in the correct format.
+    /// </exception>
+    [Pure]
+    public static Uuid Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionUuid);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
     /// <param name="s">
@@ -171,7 +190,38 @@ public partial struct Uuid
     /// The UUID if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Uuid? TryParse(string? s) => TryParse(s, out var val) ? val : default(Uuid?);
+    public static Uuid? TryParse(string? s) => TryParse(s, null);
+
+    /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
+    /// <param name="s">
+    /// A string containing the UUID to convert.
+    /// </param>
+    /// <param name="formatProvider">
+    /// The specified format provider.
+    /// </param>
+    /// <returns>
+    /// The UUID if the string was converted successfully, otherwise default.
+    /// </returns>
+    [Pure]
+    public static Uuid? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Uuid?);
+
+    /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.
+    /// A return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="s">
+    /// A string containing the UUID to convert.
+    /// </param>
+    /// <param name="provider">
+    /// The specified format provider.
+    /// </param>
+    /// <param name="result">
+    /// The result of the parsing.
+    /// </param>
+    /// <returns>
+    /// True if the string was converted successfully, otherwise false.
+    /// </returns>
+    [Pure]
+    public static bool TryParse(string? s, IFormatProvider? provider, out Uuid result) => TryParse(s, null, out result);
 }
 
 public partial struct Uuid

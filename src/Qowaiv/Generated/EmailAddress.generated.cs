@@ -155,6 +155,9 @@ public partial struct EmailAddress : IXmlSerializable
 }
 
 public partial struct EmailAddress
+#if NET7_0_OR_GREATER
+    : IParsable<EmailAddress>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>
     /// <param name="s">

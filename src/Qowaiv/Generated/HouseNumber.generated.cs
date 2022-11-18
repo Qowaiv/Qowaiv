@@ -169,6 +169,9 @@ public partial struct HouseNumber : IXmlSerializable
 }
 
 public partial struct HouseNumber
+#if NET7_0_OR_GREATER
+    : IParsable<HouseNumber>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>
     /// <param name="s">

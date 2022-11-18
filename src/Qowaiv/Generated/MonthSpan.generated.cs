@@ -160,6 +160,9 @@ public partial struct MonthSpan : IXmlSerializable
 }
 
 public partial struct MonthSpan
+#if NET7_0_OR_GREATER
+    : IParsable<MonthSpan>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
     /// <param name="s">

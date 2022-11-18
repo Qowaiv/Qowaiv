@@ -155,6 +155,9 @@ public partial struct Year : IXmlSerializable
 }
 
 public partial struct Year
+#if NET7_0_OR_GREATER
+    : IParsable<Year>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Year"/>.</summary>
     /// <param name="s">

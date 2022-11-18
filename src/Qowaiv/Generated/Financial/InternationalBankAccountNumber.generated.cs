@@ -155,6 +155,9 @@ public partial struct InternationalBankAccountNumber : IXmlSerializable
 }
 
 public partial struct InternationalBankAccountNumber
+#if NET7_0_OR_GREATER
+    : IParsable<InternationalBankAccountNumber>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.</summary>
     /// <param name="s">

@@ -155,6 +155,9 @@ public partial struct InternetMediaType : IXmlSerializable
 }
 
 public partial struct InternetMediaType
+#if NET7_0_OR_GREATER
+    : IParsable<InternetMediaType>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
     /// <param name="s">
@@ -167,7 +170,23 @@ public partial struct InternetMediaType
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static InternetMediaType Parse(string? s) => TryParse(s) ?? throw new FormatException(QowaivMessages.FormatExceptionInternetMediaType);
+    public static InternetMediaType Parse(string? s) => Parse(s, null);
+
+    /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
+    /// <param name="s">
+    /// A string containing the Internet media type to convert.
+    /// </param>
+    /// <param name="formatProvider">
+    /// The specified format provider.
+    /// </param>
+    /// <returns>
+    /// The parsed Internet media type.
+    /// </returns>
+    /// <exception cref="FormatException">
+    /// <paramref name="s"/> is not in the correct format.
+    /// </exception>
+    [Pure]
+    public static InternetMediaType Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionInternetMediaType);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
     /// <param name="s">
@@ -177,7 +196,35 @@ public partial struct InternetMediaType
     /// The Internet media type if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static InternetMediaType? TryParse(string? s) => TryParse(s, out var val) ? val : default(InternetMediaType?);
+    public static InternetMediaType? TryParse(string? s) => TryParse(s, null);
+
+    /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
+    /// <param name="s">
+    /// A string containing the Internet media type to convert.
+    /// </param>
+    /// <param name="formatProvider">
+    /// The specified format provider.
+    /// </param>
+    /// <returns>
+    /// The Internet media type if the string was converted successfully, otherwise default.
+    /// </returns>
+    [Pure]
+    public static InternetMediaType? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(InternetMediaType?);
+
+    /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.
+    /// A return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="s">
+    /// A string containing the Internet media type to convert.
+    /// </param>
+    /// <param name="result">
+    /// The result of the parsing.
+    /// </param>
+    /// <returns>
+    /// True if the string was converted successfully, otherwise false.
+    /// </returns>
+    [Pure]
+    public static bool TryParse(string? s, out InternetMediaType result) => TryParse(s, null, out result);
 }
 
 public partial struct InternetMediaType

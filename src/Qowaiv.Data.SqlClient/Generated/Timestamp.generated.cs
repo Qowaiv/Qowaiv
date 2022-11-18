@@ -160,6 +160,9 @@ public partial struct Timestamp : IXmlSerializable
 }
 
 public partial struct Timestamp
+#if NET7_0_OR_GREATER
+    : IParsable<Timestamp>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
     /// <param name="s">

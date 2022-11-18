@@ -133,6 +133,9 @@ public partial struct WeekDate : IXmlSerializable
 }
 
 public partial struct WeekDate
+#if NET7_0_OR_GREATER
+    : IParsable<WeekDate>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
     /// <param name="s">

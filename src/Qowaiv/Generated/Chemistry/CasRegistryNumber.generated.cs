@@ -155,6 +155,9 @@ public partial struct CasRegistryNumber : IXmlSerializable
 }
 
 public partial struct CasRegistryNumber
+#if NET7_0_OR_GREATER
+    : IParsable<CasRegistryNumber>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.</summary>
     /// <param name="s">

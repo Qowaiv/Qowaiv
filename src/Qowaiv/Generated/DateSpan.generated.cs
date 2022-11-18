@@ -146,6 +146,9 @@ public partial struct DateSpan : IXmlSerializable
 }
 
 public partial struct DateSpan
+#if NET7_0_OR_GREATER
+    : IParsable<DateSpan>
+#endif
 {
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>
     /// <param name="s">

@@ -1,8 +1,8 @@
 ﻿namespace Qowaiv.TestTools
 {
-    public class SvoTypeTest
+    public class SingleValueObjectSpecs
     {
-        protected SvoTypeTest() { }
+        protected SingleValueObjectSpecs() { }
 
         public static IEnumerable<Type> AllSvos
             => AppDomain.CurrentDomain.GetAssemblies()

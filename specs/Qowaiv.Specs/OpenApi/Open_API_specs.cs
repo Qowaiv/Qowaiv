@@ -6,7 +6,7 @@ using OpenApiDataTypeAttribute = Qowaiv.OpenApi.OpenApiDataTypeAttribute;
 
 namespace Open_API_specs;
 
-public class OpenApiDataType_attributes : SvoTypeTest
+public class OpenApiDataType_attributes : SingleValueObjectSpecs
 {
     public static IEnumerable<Type> Decoratable
         => JsonSerializable.Where(tp => !tp.IsGenericType);

@@ -1,7 +1,7 @@
 ﻿#if NET5_0_OR_GREATER
 namespace Json.System_Text_JSON_specs;
 
-public class All_SVO_s : SvoTypeTest
+public class All_SVO_s : SingleValueObjectSpecs
 {
 	[TestCaseSource(nameof(AllSvos))]
 	public void have_JSON_Type_converter_attribute(Type type)

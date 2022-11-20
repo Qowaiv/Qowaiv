@@ -412,7 +412,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
             : m_Value.ToString(format, formatProvider);
     }
 
-    /// <summary>Gets an XML string representation of the @FullName.</summary>
+    /// <summary>Gets an XML string representation of the date.</summary>
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 

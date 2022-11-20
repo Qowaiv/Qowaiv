@@ -530,7 +530,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
         ? formatted
         : m_Value.ToString(format, formatProvider);
 
-    /// <summary>Gets an XML string representation of the @FullName.</summary>
+    /// <summary>Gets an XML string representation of the local date time.</summary>
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 

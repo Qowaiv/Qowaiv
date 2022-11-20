@@ -162,7 +162,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     };
 
 
-    /// <summary>Gets an XML string representation of the @FullName.</summary>
+    /// <summary>Gets an XML string representation of the currency.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 

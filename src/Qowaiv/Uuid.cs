@@ -103,7 +103,7 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
         ? formatted
         : behavior.ToString(m_Value, format, formatProvider);
 
-    /// <summary>Gets an XML string representation of the @FullName.</summary>
+    /// <summary>Gets an XML string representation of the UUID.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 

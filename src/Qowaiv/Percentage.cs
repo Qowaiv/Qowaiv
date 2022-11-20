@@ -633,7 +633,7 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
         else throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
     }
 
-    /// <summary>Gets an XML string representation of the @FullName.</summary>
+    /// <summary>Gets an XML string representation of the percentage.</summary>
     [Pure]
     private string ToXmlString() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 

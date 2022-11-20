@@ -84,7 +84,7 @@ public readonly partial struct Year : ISerializable, IXmlSerializable, IFormatta
         else { return m_Value.ToString(format, formatProvider); }
     }
 
-    /// <summary>Gets an XML string representation of the @FullName.</summary>
+    /// <summary>Gets an XML string representation of the year.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 

@@ -124,7 +124,7 @@ public partial struct InternetMediaType
     /// The deserialized Internet media type.
     /// </returns>
     [Pure]
-    public static InternetMediaType FromJson(string? json) => Parse(json);
+    public static InternetMediaType FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct InternetMediaType : IXmlSerializable
@@ -142,7 +142,7 @@ public partial struct InternetMediaType : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml);
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the Internet media type to an <see href="XmlWriter" />.</summary>
@@ -234,7 +234,17 @@ public partial struct InternetMediaType
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val)
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
+
+    /// <summary>Returns true if the value represents a valid Internet media type.</summary>
+    /// <param name="val">
+    /// The <see cref="string"/> to validate.
+    /// </param>
+    /// <param name="formatProvider">
+    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
+    /// </param>
+    [Pure]
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
+        && TryParse(val, formatProvider, out _);
 }

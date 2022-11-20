@@ -59,12 +59,12 @@ public class Can_be_created
 public class Can_not_be_created
 {
     [TestCase(7)]
-    [TestCase(8)]
+    [TestCase(9)]
     public void form_byte_arrays_with_a_length_other_than_8(int length)
     {
         Func<Timestamp> create = () => Timestamp.Create(new byte[length]);
         create.Should().Throw<ArgumentException>()
-           .WithMessage("The byte array should have size of 8. (Parameter 'bytes')");
+           .WithMessage("The byte array should have size of 8.*");
     }
 }
 

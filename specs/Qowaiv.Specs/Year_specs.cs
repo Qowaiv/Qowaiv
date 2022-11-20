@@ -187,10 +187,10 @@ public class Is_equal_by_value
         }
 
     [TestCase("", 0)]
-#if NET20
-    [TestCase("1979", -994020281)]
-#else
+#if NET5_0_OR_GREATER
     [TestCase("1979", 665629288)]
+#else
+    [TestCase("1979", 538423912)]
 #endif
     public void hash_code_is_value_based(Year svo, int hash)
     {

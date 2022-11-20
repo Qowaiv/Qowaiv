@@ -8,8 +8,7 @@ public class With_domain_logic
     [TestCase("?")]
     public void has_length_zero_for_empty_and_unknown(CasRegistryNumber svo)
         => svo.Length.Should().Be(0);
-
-    
+  
     [TestCase(5, "73–24–5")]
     [TestCase(7, "7732-18-5")]
     [TestCase(8, "10028-14-5")]

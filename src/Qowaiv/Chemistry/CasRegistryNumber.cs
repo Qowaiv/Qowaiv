@@ -20,7 +20,7 @@ namespace Qowaiv.Chemistry;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Chemistry.CasRegistryNumberJsonConverter))]
 #endif
-public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
+public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
 {
     /// <summary>Represents an empty/not set CAS Registry Number.</summary>
     public static readonly CasRegistryNumber Empty;
@@ -34,44 +34,6 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
     /// <summary>Returns a <see cref="string" /> that represents the CAS Registry Number for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:f}");
-
-    /// <summary>Returns a formatted <see cref="string" /> that represents the CAS Registry Number.</summary>
-    /// <param name="format">
-    /// The format that this describes the formatting.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The format provider.
-    /// </param>
-    /// <remarks>
-    /// The formats:
-    /// f: as formatted.
-    /// 
-    /// other (not empty) formats are applied on the number (long).
-    /// </remarks>
-    [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-    {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (IsEmpty()) return string.Empty;
-        else if (IsUnknown()) return "?";
-        else return format.WithDefault("f") == "f"
-            ? m_Value.ToString(@"#00\-00\-0", formatProvider)
-            : m_Value.ToString(format, formatProvider);
-    }
-
-    /// <summary>Gets an XML string representation of the CAS Registry Number.</summary>
-    [Pure]
-    private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
-
-    /// <summary>Serializes the CAS Registry Number to a JSON node.</summary>
-    /// <returns>
-    /// The serialized JSON string.
-    /// </returns>
-    [Pure]
-    public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
     /// <summary>Deserializes the CAS Registry Number from a JSON number.</summary>
     /// <param name="json">

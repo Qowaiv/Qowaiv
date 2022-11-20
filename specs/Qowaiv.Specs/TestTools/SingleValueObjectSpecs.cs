@@ -12,6 +12,9 @@
                 => type.GetCustomAttributes<SingleValueObjectAttribute>().Any() 
                 && !type.GetCustomAttributes<ObsoleteAttribute>().Any());
 
+        public static IEnumerable<Type> AllSvosExceptGeneric
+            => AllSvos.Where(svo => !svo.IsGenericType);
+
         public static IEnumerable<Type> SvosWithEmpty 
             => AllSvos.Where(svo
                 => !svo.IsGenericType

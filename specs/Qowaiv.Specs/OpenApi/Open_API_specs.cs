@@ -51,6 +51,7 @@ public class Open_API_data_type
     internal sealed class DecoratedId : UuidBehavior { }
 }
 
+#if NET5_0_OR_GREATER
 public class README_md
 {
     [Test]
@@ -91,4 +92,4 @@ public class README_md
         public string[] @enum { get; init; }
     }
 }
-
+#endif

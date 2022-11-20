@@ -543,20 +543,20 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("", null)]
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void System_Text_JSON_deserialization(object json, Uuid svo)
         => JsonTester.Read_System_Text_JSON<Uuid>(json).Should().Be(svo);
-
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    public void convention_based_deserialization(object json, Uuid svo)
-       => JsonTester.Read<Uuid>(json).Should().Be(svo);
-
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void System_Text_JSON_serialization(Uuid svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
+    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    public void convention_based_deserialization(object json, Uuid svo)
+       => JsonTester.Read<Uuid>(json).Should().Be(svo);
 
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]

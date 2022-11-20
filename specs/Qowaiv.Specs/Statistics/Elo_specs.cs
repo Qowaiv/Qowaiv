@@ -45,6 +45,27 @@ public class Is_equal_by_value
     }
 }
 
+public class Is_Finite_only
+{
+    [TestCase(double.NaN)]
+    [TestCase(double.PositiveInfinity)]
+    [TestCase(double.NegativeInfinity)]
+    public void Can_not_create(double dbl)
+    {
+        Action create = () => Elo.Create(dbl);
+        create.Should().Throw<ArgumentException>()
+            .WithMessage("The number can not represent an Elo.*");
+    }
+
+    [TestCase(double.NaN)]
+    [TestCase(double.PositiveInfinity)]
+    [TestCase(double.NegativeInfinity)]
+    public void Can_not_parse(double dbl)
+    {
+        Assert.Throws<FormatException>(() => Elo.Parse(dbl.ToString(CultureInfo.InvariantCulture)));
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]

@@ -45,6 +45,29 @@ public class Is_equal_by_value
     }
 }
 
+public class Can_be_created
+{
+    [Test]
+    public void from_byte_arrays_with_length_8()
+        => Timestamp.Create(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }).Should().Be((Timestamp)578437695752307201L);
+
+    [Test]
+    public void from_negative_numbers()
+        => Timestamp.Create(-23).Should().Be((Timestamp)18446744073709551593L);
+}
+
+public class Can_not_be_created
+{
+    [TestCase(7)]
+    [TestCase(8)]
+    public void form_byte_arrays_with_a_length_other_than_8(int length)
+    {
+        Func<Timestamp> create = () => Timestamp.Create(new byte[length]);
+        create.Should().Throw<ArgumentException>()
+           .WithMessage("The byte array should have size of 8. (Parameter 'bytes')");
+    }
+}
+
 public class Supports_JSON_serialization
 {
 #if NET6_0_OR_GREATER

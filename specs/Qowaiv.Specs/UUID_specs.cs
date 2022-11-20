@@ -139,7 +139,11 @@ public class Is_equal_by_value
     }
 
     [TestCase("", 0)]
+#if NET20
     [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
+#else
+    [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
+#endif
     public void hash_code_is_value_based(Uuid svo, int hash)
     {
         using (Hash.WithoutRandomizer())

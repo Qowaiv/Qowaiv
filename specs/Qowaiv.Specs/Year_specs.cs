@@ -187,7 +187,11 @@ public class Is_equal_by_value
         }
 
     [TestCase("", 0)]
+#if NET20
+    [TestCase("1979", -994020281)]
+#else
     [TestCase("1979", 665629288)]
+#endif
     public void hash_code_is_value_based(Year svo, int hash)
     {
         using (Hash.WithoutRandomizer())

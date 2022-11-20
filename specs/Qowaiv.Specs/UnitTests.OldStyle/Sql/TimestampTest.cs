@@ -96,34 +96,6 @@ public class TimestampTest
 
     #endregion
 
-    #region Create tests
-
-    [Test]
-    public void Create_Length8ByteArray_Is578437695752307201()
-    {
-        Timestamp act = Timestamp.Create(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 });
-        Timestamp exp = 578437695752307201L;
-
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void Create_Length6ByteArray_throwsArgumentException()
-    {
-        Func< Timestamp> create = () => Timestamp.Create(new byte[] { 1, 2, 3, 4, 5, 6 });
-        create.Should().Throw<ArgumentException>()
-            .WithMessage("The byte array should have size of 8. (Parameter 'bytes')");
-    }
-    [Test]
-    public void Create_NegativeInteger_18446744073709551593()
-    {
-        Timestamp act = Timestamp.Create(-23);
-        Timestamp exp = 18446744073709551593L;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    #endregion
-
     #region (XML) (De)serialization tests
 
     [Test]

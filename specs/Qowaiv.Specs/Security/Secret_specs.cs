@@ -117,10 +117,11 @@ public class Does_not_support_type_converstion_to
 
 public class Supports_JSON_deserialization
 {
+#if NET6_0_OR_GREATER
     [Test]
     public void System_Text_JSON_deserialization()
          => JsonTester.Read_System_Text_JSON<Secret>("Ken sent me!").Value().Should().Be(Svo.Secret.Value());
-
+#endif
     [Test]
     public void convention_based_deserialization()
         => JsonTester.Read<Secret>("Ken sent me!").Value().Should().Be(Svo.Secret.Value());
@@ -128,10 +129,11 @@ public class Supports_JSON_deserialization
 
 public class Does_not_supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [Test]
     public void serializes_to_null_System_Text_JSON()
         => JsonTester.Write_System_Text_JSON(Svo.Secret).Should().BeNull();
-
+#endif
     [Test]
     public void serializes_to_null()
         => JsonTester.Write(Svo.Secret).Should().BeNull();

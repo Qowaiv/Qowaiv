@@ -144,20 +144,21 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(69d, "5Y+9M")]
     [TestCase(69L, "5Y+9M")]
     [TestCase("5Y+9M", "5Y+9M")]
     public void System_Text_JSON_deserialization(object json, MonthSpan svo)
         => JsonTester.Read_System_Text_JSON<MonthSpan>(json).Should().Be(svo);
 
+    [TestCase("5Y+9M", "5Y+9M")]
+    public void System_Text_JSON_serialization(MonthSpan svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase(69L, "5Y+9M")]
     [TestCase("5Y+9M", "5Y+9M")]
     public void convention_based_deserialization(object json, MonthSpan svo)
         => JsonTester.Read<MonthSpan>(json).Should().Be(svo);
-
-    [TestCase("5Y+9M", "5Y+9M")]
-    public void System_Text_JSON_serialization(MonthSpan svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase("5Y+9M", "5Y+9M")]
     public void convention_based_serialization(MonthSpan svo, object json)

@@ -498,6 +498,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("?", "?")]
     [TestCase(2.0, "February")]
@@ -506,17 +507,17 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Month svo)
         => JsonTester.Read_System_Text_JSON<Month>(json).Should().Be(svo);
 
+    [TestCase(null, null)]
+    [TestCase("Feb", "Feb")]
+    public void System_Text_JSON_serialization(Month svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("?", "?")]
     [TestCase(2.0, "February")]
     [TestCase(2L, "February")]
     [TestCase("feb", "February")]
     public void convention_based_deserialization(object json, Month svo)
         => JsonTester.Read<Month>(json).Should().Be(svo);
-
-    [TestCase(null, null)]
-    [TestCase("Feb", "Feb")]
-    public void System_Text_JSON_serialization(Month svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase(null, null)]
     [TestCase("Feb", "Feb")]

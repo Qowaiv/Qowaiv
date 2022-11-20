@@ -221,6 +221,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("1600", 1_600)]
     [TestCase("17MB", 17_000_000)]
     [TestCase("1.766Kb", 1_766)]
@@ -229,6 +230,10 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, StreamSize svo)
         => JsonTester.Read_System_Text_JSON<StreamSize>(json).Should().Be(svo);
 
+    [TestCase(17L, 17L)]
+    public void System_Text_JSON_serialization(StreamSize svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("1600", 1_600)]
     [TestCase("17MB", 17_000_000)]
     [TestCase("1.766Kb", 1_766)]
@@ -236,10 +241,6 @@ public class Supports_JSON_serialization
     [TestCase(1258.9, 1258)]
     public void convention_based_deserialization(object json, StreamSize svo)
        => JsonTester.Read<StreamSize>(json).Should().Be(svo);
-
-    [TestCase(17L, 17L)]
-    public void System_Text_JSON_serialization(StreamSize svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase(17L, 17L)]
     public void convention_based_serialization(StreamSize svo, object json)

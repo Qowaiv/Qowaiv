@@ -358,22 +358,24 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("?", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
     public void System_Text_JSON_deserialization(object json, CustomSvo svo)
         => JsonTester.Read_System_Text_JSON<CustomSvo>(json).Should().Be(svo);
-
+    
+    [TestCase(null, null)]
+    [TestCase("QOWAIV", "QOWAIV")]
+    public void System_Text_JSON__serialization(CustomSvo svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("?", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
     public void convention_based_deserialization(object json, CustomSvo svo)
        => JsonTester.Read<CustomSvo>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("QOWAIV", "QOWAIV")]
-    public void System_Text_JSON__serialization(CustomSvo svo, object json)
-      => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
+    
     [TestCase(null, null)]
     [TestCase("QOWAIV", "QOWAIV")]
     public void convention_based_serialization(CustomSvo svo, object json)

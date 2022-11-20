@@ -45,6 +45,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase(978L, "EUR")]
     [TestCase(978d, "EUR")]
@@ -52,15 +53,15 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Currency svo)
         => JsonTester.Read_System_Text_JSON<Currency>(json).Should().Be(svo);
 
-    [TestCase(978L, "EUR")]
-    [TestCase("EUR", "EUR")]
-    public void convention_based_deserialization(object json, Currency svo)
-       => JsonTester.Read<Currency>(json).Should().Be(svo);
-
     [TestCase(null, null)]
     [TestCase("EUR", "EUR")]
     public void System_Text_JSON_serialization(Currency svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
+    [TestCase(978L, "EUR")]
+    [TestCase("EUR", "EUR")]
+    public void convention_based_deserialization(object json, Currency svo)
+       => JsonTester.Read<Currency>(json).Should().Be(svo);
 
     [TestCase(null, null)]
     [TestCase("EUR", "EUR")]

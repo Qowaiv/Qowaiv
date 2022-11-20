@@ -185,6 +185,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(4L, "4/1")]
     [TestCase(3d, "3/1")]
     [TestCase("13%", "13/100")]
@@ -192,6 +193,11 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Fraction svo)
         => JsonTester.Read_System_Text_JSON<Fraction>(json).Should().Be(svo);
 
+    [TestCase("1/3", "1/3")]
+    [TestCase("4/3", "4/3")]
+    public void System_Text_JSON_serialization(Fraction svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase(4L, "4/1")]
     [TestCase(3d, "3/1")]
     [TestCase("13%", "13/100")]
@@ -199,11 +205,6 @@ public class Supports_JSON_serialization
     public void convention_based_deserialization(object json, Fraction svo)
         => JsonTester.Read<Fraction>(json).Should().Be(svo);
 
-    [TestCase("1/3", "1/3")]
-    [TestCase("4/3", "4/3")]
-    public void System_Text_JSON_serialization(Fraction svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-    
     [TestCase("1/3", "1/3")]
     [TestCase("4/3", "4/3")]
     public void convention_based_serialization(Fraction svo, object json)

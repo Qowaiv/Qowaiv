@@ -98,6 +98,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("?", "?")]
     [TestCase("17", "17")]
@@ -106,17 +107,17 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, HouseNumber svo)
         => JsonTester.Read_System_Text_JSON<HouseNumber>(json).Should().Be(svo);
 
+    [TestCase(null, null)]
+    [TestCase(17, "17")]
+    public void System_Text_JSON_serialization(HouseNumber svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("?", "?")]
     [TestCase("17", "17")]
     [TestCase(17d, "17")]
     [TestCase(17L, "17")]
     public void convention_based_deserialization(HouseNumber svo, object json)
-       => JsonTester.Read<HouseNumber>(json).Should().Be(svo);
-
-    [TestCase(null, null)]
-    [TestCase(17, "17")]
-    public void System_Text_JSON_serialization(HouseNumber svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+        => JsonTester.Read<HouseNumber>(json).Should().Be(svo);
 
     [TestCase(null, null)]
     [TestCase(17, "17")]

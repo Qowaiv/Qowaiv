@@ -2,6 +2,7 @@
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("", null)]
     [TestCase(null, null)]
     [TestCase(17.0, 017L)]
@@ -10,16 +11,16 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Int64Id svo)
         => JsonTester.Read_System_Text_JSON<Int64Id>(json).Should().Be(svo);
 
+    [TestCase(null, null)]
+    [TestCase(123456789L, "123456789")]
+    public void System_Text_JSON_serialization(Int64Id svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("", null)]
     [TestCase(123456789L, 123456789L)]
     [TestCase("123456789", 123456789L)]
     public void convention_based_deserialization(object json, Int64Id svo)
         => JsonTester.Read<Int64Id>(json).Should().Be(svo);
-
-    [TestCase(null, null)]
-    [TestCase(123456789L, "123456789")]
-    public void System_Text_JSON_serialization(Int64Id svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase(null, null)]
     [TestCase(123456789L, "123456789")]

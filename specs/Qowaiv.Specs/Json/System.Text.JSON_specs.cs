@@ -1,4 +1,5 @@
-﻿namespace Json.System_Text_JSON_specs;
+﻿#if NET5_0_OR_GREATER
+namespace Json.System_Text_JSON_specs;
 
 public class All_SVO_s : SvoTypeTest
 {
@@ -10,3 +11,4 @@ public class All_SVO_s : SvoTypeTest
 		typeof(SvoJsonConverter<>).MakeGenericType(type).Should().NotBeAssignableTo(converterType);
 	}
 }
+#endif

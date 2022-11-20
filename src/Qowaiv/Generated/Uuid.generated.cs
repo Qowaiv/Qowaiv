@@ -118,7 +118,7 @@ public partial struct Uuid
     /// The deserialized UUID.
     /// </returns>
     [Pure]
-    public static Uuid FromJson(string? json) => Parse(json);
+    public static Uuid FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 
 public partial struct Uuid : IXmlSerializable
@@ -136,7 +136,7 @@ public partial struct Uuid : IXmlSerializable
     {
         Guard.NotNull(reader, nameof(reader));
         var xml = reader.ReadElementString();
-        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml);
+        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the UUID to an <see href="XmlWriter" />.</summary>
@@ -211,9 +211,6 @@ public partial struct Uuid
     /// <param name="s">
     /// A string containing the UUID to convert.
     /// </param>
-    /// <param name="provider">
-    /// The specified format provider.
-    /// </param>
     /// <param name="result">
     /// The result of the parsing.
     /// </param>
@@ -221,7 +218,7 @@ public partial struct Uuid
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string? s, IFormatProvider? provider, out Uuid result) => TryParse(s, null, out result);
+    public static bool TryParse(string? s, out Uuid result) => TryParse(s, null, out result);
 }
 
 public partial struct Uuid
@@ -231,7 +228,17 @@ public partial struct Uuid
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
-    public static bool IsValid(string val)
+    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
+
+    /// <summary>Returns true if the value represents a valid UUID.</summary>
+    /// <param name="val">
+    /// The <see cref="string"/> to validate.
+    /// </param>
+    /// <param name="formatProvider">
+    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
+    /// </param>
+    [Pure]
+    public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, out _);
+        && TryParse(val, formatProvider, out _);
 }

@@ -96,6 +96,15 @@ public partial struct BusinessIdentifierCode : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
+#if NET6_0_OR_GREATER
+public partial struct BusinessIdentifierCode : ISpanFormattable
+{
+    /// <inheritdoc />
+    public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        => destination.TryWrite(ToString(format.ToString(), provider), out charsWritten);
+}
+#endif
+
 public partial struct BusinessIdentifierCode : ISerializable
 {
     /// <summary>Initializes a new instance of the BIC based on the serialization info.</summary>

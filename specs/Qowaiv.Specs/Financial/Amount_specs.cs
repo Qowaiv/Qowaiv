@@ -91,3 +91,13 @@ public class Supports_type_conversion
         }
     }
 }
+
+public class Supports_try_format
+{
+    [Test]
+    public void On_interpolated_strings()
+    {
+        FormattableString.Invariant($"{Svo.Amount}").Should().Be("42.17");
+    }
+
+}

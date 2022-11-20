@@ -12,6 +12,9 @@ namespace Qowaiv.Financial;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.AmountJsonConverter))]
 #endif
 public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
+#if NET6_0_OR_GREATER
+    , ISpanFormattable
+#endif
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Amount>, IDecrementOperators<Amount>
     , IUnaryPlusOperators<Amount, Amount>, IUnaryNegationOperators<Amount, Amount>
@@ -401,10 +404,18 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) 
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : m_Value.ToString(format, Money.GetNumberFormatInfo(formatProvider));
+
+#if NET6_0_OR_GREATER
+    /// <inheritdoc />
+    public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out var formatted)
+        ? destination.TryWrite(formatted, out charsWritten)
+        : m_Value.TryFormat(destination, out charsWritten, format, Money.GetNumberFormatInfo(provider));
+#endif
 
     /// <summary>Gets an XML string representation of the amount.</summary>
     [Pure]

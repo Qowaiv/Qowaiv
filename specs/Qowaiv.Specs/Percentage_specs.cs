@@ -138,7 +138,11 @@ public class Is_equal_by_value
     }
 
     [TestCase("0%", 0)]
+#if NET5_0_OR_GREATER
     [TestCase("17.51%", 665367300)]
+#else
+    [TestCase("17.51%", 1521030558)]
+#endif
     public void hash_code_is_value_based(Percentage svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -1137,6 +1141,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("17.51", "17.51%")]
     [TestCase("175.1‰", "17.51%")]
     [TestCase(0.1751, "17.51%")]
@@ -1144,15 +1149,15 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Percentage svo)
         => JsonTester.Read_System_Text_JSON<Percentage>(json).Should().Be(svo);
 
+    [TestCase("17.51%", "17.51%")]
+    public void System_Text_JSON_serialization(Percentage svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("17.51", "17.51%")]
     [TestCase("175.1‰", "17.51%")]
     [TestCase(0.1751, "17.51%")]
     public void convention_based_deserialization(object json, Percentage svo)
         => JsonTester.Read<Percentage>(json).Should().Be(svo);
-
-    [TestCase("17.51%", "17.51%")]
-    public void System_Text_JSON_serialization(Percentage svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase("17.51%", "17.51%")]
     public void convention_based_serialization(Percentage svo, object json)

@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace Postal_code_specs;
+﻿namespace Postal_code_specs;
 
 public class With_domain_logic
 {
@@ -438,21 +436,22 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(null, null)]
     [TestCase("1234", "1234")]
     public void System_Text_JSON_deserialization(object json, PostalCode svo)
         => JsonTester.Read_System_Text_JSON<PostalCode>(json).Should().Be(svo);
 
-    [TestCase("?", "?")]
-    [TestCase("1234", "1234")]
-    public void convention_based_deserialization(object json, PostalCode svo)
-      => JsonTester.Read<PostalCode>(json).Should().Be(svo);
-
     [TestCase(null, null)]
     [TestCase("1234", "1234")]
     public void System_Text_JSON_based_serialization(PostalCode svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
+    [TestCase("?", "?")]
+    [TestCase("1234", "1234")]
+    public void convention_based_deserialization(object json, PostalCode svo)
+      => JsonTester.Read<PostalCode>(json).Should().Be(svo);
 
     [TestCase(null, null)]
     [TestCase("1234", "1234")]

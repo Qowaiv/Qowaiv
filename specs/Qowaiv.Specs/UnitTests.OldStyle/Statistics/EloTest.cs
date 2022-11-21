@@ -27,27 +27,6 @@
 
         #endregion
 
-        #region NaN and +oo and -oo
-
-        [TestCase(double.NaN)]
-        [TestCase(double.PositiveInfinity)]
-        [TestCase(double.NegativeInfinity)]
-        public void Create_Throws(double dbl)
-        {
-            var x = Assert.Catch<ArgumentOutOfRangeException>(() => Elo.Create(dbl));
-            StringAssert.StartsWith("The number can not represent an Elo. ", x.Message);
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(double.PositiveInfinity)]
-        [TestCase(double.NegativeInfinity)]
-        public void Parse_Throws(double dbl)
-        {
-            Assert.Throws<FormatException>(() => Elo.Parse(dbl.ToString(CultureInfo.InvariantCulture)));
-        }
-
-        #endregion
-
         #region Methods
 
         [Test]

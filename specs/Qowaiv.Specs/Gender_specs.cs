@@ -404,17 +404,18 @@ public class Casts
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("?", "unknown")]
     [TestCase("Female", 2L)]
     [TestCase("Female", 2d)]
     public void System_Text_JSON_deserialization(Gender svo, object json)
-    => JsonTester.Read_System_Text_JSON<Gender>(json).Should().Be(svo);
+        => JsonTester.Read_System_Text_JSON<Gender>(json).Should().Be(svo);
 
     [TestCase(null, "")]
     [TestCase("Female", "Female")]
     public void System_Text_JSON_serialization(object json, Gender svo)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
+#endif
     [TestCase("?", "unknown")]
     [TestCase("Female", 2L)]
     [TestCase("Female", 2d)]

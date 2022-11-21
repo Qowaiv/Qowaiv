@@ -1,7 +1,42 @@
 ﻿namespace Identifiers.Id_for_Int64_specs;
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.Int64Id.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_Int64Id_as_object()
+    {
+        object obj = Svo.Int64Id;
+        Svo.Int64Id.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Int64Id_only()
+        => Assert.Throws<ArgumentException>(() => Svo.Int64Id.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            Int64Id.Empty,
+            Int64Id.Create(1L),
+            Int64Id.Create(3L),
+            Int64Id.Create(7L),
+            Int64Id.Create(11L),
+            Int64Id.Create(17L),
+        };
+
+        var list = new List<Int64Id> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+}
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("", null)]
     [TestCase(null, null)]
     [TestCase(17.0, 017L)]
@@ -10,16 +45,16 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Int64Id svo)
         => JsonTester.Read_System_Text_JSON<Int64Id>(json).Should().Be(svo);
 
+    [TestCase(null, null)]
+    [TestCase(123456789L, "123456789")]
+    public void System_Text_JSON_serialization(Int64Id svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("", null)]
     [TestCase(123456789L, 123456789L)]
     [TestCase("123456789", 123456789L)]
     public void convention_based_deserialization(object json, Int64Id svo)
         => JsonTester.Read<Int64Id>(json).Should().Be(svo);
-
-    [TestCase(null, null)]
-    [TestCase(123456789L, "123456789")]
-    public void System_Text_JSON_serialization(Int64Id svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase(null, null)]
     [TestCase(123456789L, "123456789")]

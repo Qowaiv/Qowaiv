@@ -1,4 +1,6 @@
-﻿namespace MonthSpan_specs;
+﻿using NUnit.Framework.Interfaces;
+
+namespace MonthSpan_specs;
 
 public class Is_equal_by_value
 {
@@ -88,7 +90,65 @@ public class Can_be_transformed
     
     [Test]
     public void divide_by_decimal() => (Svo.MonthSpan / 4.0588m).Should().Be(MonthSpan.FromMonths(17));
+}
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.MonthSpan.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_MonthSpan_as_object()
+    {
+        object obj = Svo.MonthSpan;
+        Svo.MonthSpan.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_MonthSpan_only()
+        => Assert.Throws<ArgumentException>(() => Svo.MonthSpan.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            MonthSpan.FromMonths(-3),
+            MonthSpan.Zero,
+            MonthSpan.FromMonths(1),
+            MonthSpan.FromMonths(12),
+            MonthSpan.FromMonths(13),
+            MonthSpan.FromMonths(145),
+        };
+
+        var list = new List<MonthSpan> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        var smaller = MonthSpan.FromMonths(17);
+        var bigger = MonthSpan.FromMonths(42);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+       var left = MonthSpan.FromMonths(17);
+       var right = MonthSpan.FromMonths(17);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Supports_type_conversion
@@ -144,20 +204,21 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(69d, "5Y+9M")]
     [TestCase(69L, "5Y+9M")]
     [TestCase("5Y+9M", "5Y+9M")]
     public void System_Text_JSON_deserialization(object json, MonthSpan svo)
         => JsonTester.Read_System_Text_JSON<MonthSpan>(json).Should().Be(svo);
 
+    [TestCase("5Y+9M", "5Y+9M")]
+    public void System_Text_JSON_serialization(MonthSpan svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase(69L, "5Y+9M")]
     [TestCase("5Y+9M", "5Y+9M")]
     public void convention_based_deserialization(object json, MonthSpan svo)
         => JsonTester.Read<MonthSpan>(json).Should().Be(svo);
-
-    [TestCase("5Y+9M", "5Y+9M")]
-    public void System_Text_JSON_serialization(MonthSpan svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase("5Y+9M", "5Y+9M")]
     public void convention_based_serialization(MonthSpan svo, object json)

@@ -139,6 +139,65 @@ public class Can_not_be_created
     }
 }
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.Fraction.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_Fraction_as_object()
+    {
+        object obj = Svo.Fraction;
+        Svo.Fraction.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Fraction_only()
+        => Assert.Throws<ArgumentException>(() => Svo.Fraction.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            (-1).DividedBy(12),
+            Fraction.Zero,
+            1.DividedBy(42),
+            1.DividedBy(17),
+            1.DividedBy(11),
+            201.DividedBy(42),
+        };
+
+        var list = new List<Fraction> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        var smaller = 1.DividedBy(17);
+        var bigger = 2.DividedBy(3);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        var left = 1.DividedBy(17);
+        var right = 1.DividedBy(17);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
+}
+
 public class Has_humanizer_creators
 {
     [Test]
@@ -185,6 +244,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase(4L, "4/1")]
     [TestCase(3d, "3/1")]
     [TestCase("13%", "13/100")]
@@ -192,6 +252,11 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Fraction svo)
         => JsonTester.Read_System_Text_JSON<Fraction>(json).Should().Be(svo);
 
+    [TestCase("1/3", "1/3")]
+    [TestCase("4/3", "4/3")]
+    public void System_Text_JSON_serialization(Fraction svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase(4L, "4/1")]
     [TestCase(3d, "3/1")]
     [TestCase("13%", "13/100")]
@@ -199,11 +264,6 @@ public class Supports_JSON_serialization
     public void convention_based_deserialization(object json, Fraction svo)
         => JsonTester.Read<Fraction>(json).Should().Be(svo);
 
-    [TestCase("1/3", "1/3")]
-    [TestCase("4/3", "4/3")]
-    public void System_Text_JSON_serialization(Fraction svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-    
     [TestCase("1/3", "1/3")]
     [TestCase("4/3", "4/3")]
     public void convention_based_serialization(Fraction svo, object json)

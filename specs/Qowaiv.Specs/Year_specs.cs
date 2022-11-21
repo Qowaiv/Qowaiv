@@ -187,7 +187,11 @@ public class Is_equal_by_value
         }
 
     [TestCase("", 0)]
+#if NET5_0_OR_GREATER
     [TestCase("1979", 665629288)]
+#else
+    [TestCase("1979", 538423912)]
+#endif
     public void hash_code_is_value_based(Year svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -465,6 +469,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(null, null)]
     [TestCase(2017d, 2017)]
@@ -473,17 +478,17 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Year svo)
         => JsonTester.Read_System_Text_JSON<Year>(json).Should().Be(svo);
 
+    [TestCase(null, null)]
+    [TestCase(2017, 2017L)]
+    public void System_Text_JSON_serialization(Year svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("?", "?")]
     [TestCase(2017d, 2017)]
     [TestCase(2017L, 2017)]
     [TestCase("2017", 2017)]
     public void convention_based_deserialization(object json, Year svo)
         => JsonTester.Read<Year>(json).Should().Be(svo);
-
-    [TestCase(null, null)]
-    [TestCase(2017, 2017L)]
-    public void System_Text_JSON_serialization(Year svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase(null, null)]
     [TestCase(2017, 2017L)]

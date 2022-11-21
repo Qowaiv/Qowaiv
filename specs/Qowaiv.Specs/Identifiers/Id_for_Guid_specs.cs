@@ -1,5 +1,40 @@
 ﻿namespace Identifiers.Id_for_Guid_specs;
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.CustomGuid.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_CustomGuid_as_object()
+    {
+        object obj = Svo.CustomGuid;
+        Svo.CustomGuid.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_CustomGuid_only()
+        => Assert.Throws<ArgumentException>(() => Svo.CustomGuid.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            CustomGuid.Empty,
+            CustomGuid.Parse("33ef5805-c472-4b1f-88bb-2f0723c43889"),
+            CustomGuid.Parse("58617a65-2a14-4a9a-82a8-c1a82c956c25"),
+            CustomGuid.Parse("853634b4-e474-4b0f-b9ba-01fc732b56d8"),
+            CustomGuid.Parse("93ca7b43-8fb3-44e5-a21f-feeebb8e0f6f"),
+            CustomGuid.Parse("f5e6c39a-adcf-4eca-bcf2-6b8317ac502c"),
+        };
+
+        var list = new List<CustomGuid> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]

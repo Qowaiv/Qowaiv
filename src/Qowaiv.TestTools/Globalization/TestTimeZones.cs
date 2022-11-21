@@ -22,6 +22,9 @@ public static class TestTimeZones
         disableDaylightSavingTime: true);
 
     /// <summary>Creates a custom <see cref="TimeZoneInfo"/>for testing purposes.</summary>
+    /// <remarks>
+    /// Prior to .NET 6, the non-public constructor had 7 arguments, afterwards 8.
+    /// </remarks>
     [Pure]
     public static TimeZoneInfo New(
         string id,
@@ -33,22 +36,26 @@ public static class TestTimeZones
         bool disableDaylightSavingTime)
     {
         var ctor = typeof(TimeZoneInfo).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
-            .First(ct => ct.GetParameters() is { Length: 8 } pars
+            .FirstOrDefault(ct => ct.GetParameters() is { Length: >= 7 } pars
                 && pars[0].ParameterType == typeof(string)
                 && pars[1].ParameterType == typeof(TimeSpan)
-                && pars[6].ParameterType == typeof(bool));
+                && pars[6].ParameterType == typeof(bool))
+            ?? throw new InvalidOperationException("No constructor could be found to create a custom time zone.");
         try
         {
-            return (TimeZoneInfo)ctor.Invoke(new object[] {
-                    id,
-                    baseUtcOffset,
-                    displayName,
-                    standardDisplayName,
-                    daylightDisplayName,
-                    adjustmentRules,
-                    disableDaylightSavingTime,
-                    false
-                });
+            var args = new List<object>
+            {
+                id,
+                baseUtcOffset,
+                displayName,
+                standardDisplayName,
+                daylightDisplayName,
+                adjustmentRules,
+                disableDaylightSavingTime
+            };
+            if (ctor.GetParameters().Length == 8) { args.Add(true); }
+
+            return (TimeZoneInfo)ctor.Invoke(args.ToArray());
         }
         catch (TargetInvocationException x) { throw x.InnerException ?? x; }
     }

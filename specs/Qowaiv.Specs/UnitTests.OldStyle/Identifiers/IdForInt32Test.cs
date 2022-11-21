@@ -451,57 +451,6 @@ namespace Qowaiv.UnitTests.Identifiers
             Assert.IsFalse(l != r);
         }
 
-        /// <summary>Orders a list of identifiers ascending.</summary>
-        [Test]
-        public void OrderBy_IdForInt32_AreEqual()
-        {
-            var item0 = Id<ForInt32>.Parse("032456");
-            var item1 = Id<ForInt32>.Parse("132456");
-            var item2 = Id<ForInt32>.Parse("232456");
-            var item3 = Id<ForInt32>.Parse("732456");
-            var inp = new List<Id<ForInt32>> { Id<ForInt32>.Empty, item3, item2, item0, item1, Id<ForInt32>.Empty };
-            var exp = new List<Id<ForInt32>> { Id<ForInt32>.Empty, Id<ForInt32>.Empty, item0, item1, item2, item3 };
-            var act = inp.OrderBy(item => item).ToList();
-            CollectionAssert.AreEqual(exp, act);
-        }
-
-        /// <summary>Orders a list of identifiers descending.</summary>
-        [Test]
-        public void OrderByDescending_IdForInt32_AreEqual()
-        {
-            var item0 = Id<ForInt32>.Parse("032456");
-            var item1 = Id<ForInt32>.Parse("132456");
-            var item2 = Id<ForInt32>.Parse("232456");
-            var item3 = Id<ForInt32>.Parse("732456");
-            var inp = new List<Id<ForInt32>> { Id<ForInt32>.Empty, item3, item2, item0, item1, Id<ForInt32>.Empty };
-            var exp = new List<Id<ForInt32>> { item3, item2, item1, item0, Id<ForInt32>.Empty, Id<ForInt32>.Empty };
-            var act = inp.OrderByDescending(item => item).ToList();
-            CollectionAssert.AreEqual(exp, act);
-        }
-
-        /// <summary>Compare with a to object casted instance should be fine.</summary>
-        [Test]
-        public void CompareTo_ObjectTestStruct_0()
-        {
-            Assert.AreEqual(0, TestStruct.CompareTo((object)TestStruct));
-        }
-
-        /// <summary>Compare with null should return 1.</summary>
-        [Test]
-        public void CompareTo_null_1()
-        {
-            object @null = null;
-            Assert.AreEqual(1, TestStruct.CompareTo(@null));
-        }
-
-        /// <summary>Compare with a random object should throw an exception.</summary>
-        [Test]
-        public void CompareTo_newObject_Throw()
-        {
-            var x = Assert.Catch<ArgumentException>(() => TestStruct.CompareTo(new object()));
-            Assert.AreEqual("Argument must be Id<ForInt32>. (Parameter 'obj')", x.Message);
-        }
-
         [Test]
         public void Next_NotSupported()
         {

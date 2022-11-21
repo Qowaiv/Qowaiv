@@ -139,7 +139,11 @@ public class Is_equal_by_value
     }
 
     [TestCase("", 0)]
+#if NET5_0_OR_GREATER
     [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
+#else
+    [TestCase("Qowaiv_SVOLibrary_GUIA", -917906459)]
+#endif
     public void hash_code_is_value_based(Uuid svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -543,20 +547,20 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("", null)]
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void System_Text_JSON_deserialization(object json, Uuid svo)
         => JsonTester.Read_System_Text_JSON<Uuid>(json).Should().Be(svo);
-
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    public void convention_based_deserialization(object json, Uuid svo)
-       => JsonTester.Read<Uuid>(json).Should().Be(svo);
-
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void System_Text_JSON_serialization(Uuid svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
+    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    public void convention_based_deserialization(object json, Uuid svo)
+       => JsonTester.Read<Uuid>(json).Should().Be(svo);
 
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]

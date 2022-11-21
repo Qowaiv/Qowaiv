@@ -50,6 +50,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
     [TestCase("EUR 42.17", "EUR 42.17")]
     [TestCase("EUR42.17", "EUR 42.17")]
     [TestCase("€42.17", "EUR 42.17")]
@@ -58,18 +59,18 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_deserialization(object json, Money svo)
         => JsonTester.Read_System_Text_JSON<Money>(json).Should().Be(svo);
 
+    [TestCase("EUR42.17", "EUR42.17")]
+    public void System_Text_JSON_serialization(Money svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("EUR 42.17", "EUR 42.17")]
     [TestCase("EUR42.17", "EUR 42.17")]
     [TestCase("€42.17", "EUR 42.17")]
     [TestCase(100L, "100.00")]
     [TestCase(42.17, "42.17")]
     public void convention_based_deserialization(object json, Money svo)
-       => JsonTester.Read<Money>(json).Should().Be(svo);
-
-    [TestCase("EUR42.17", "EUR42.17")]
-    public void System_Text_JSON_serialization(Money svo, object json)
-        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
-
+        => JsonTester.Read<Money>(json).Should().Be(svo);
+    
     [TestCase("EUR42.17", "EUR42.17")]
     public void convention_based_serialization(Money svo, object json)
         => JsonTester.Write(svo).Should().Be(json);

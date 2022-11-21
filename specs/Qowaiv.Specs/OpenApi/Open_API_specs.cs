@@ -1,4 +1,7 @@
-﻿using Qowaiv.OpenApi;
+﻿#if NET5_0_OR_GREATER
+using Newtonsoft.Json;
+#endif
+using Qowaiv.OpenApi;
 using OpenApiDataTypeAttribute = Qowaiv.OpenApi.OpenApiDataTypeAttribute;
 
 namespace Open_API_specs;
@@ -51,6 +54,7 @@ public class Open_API_data_type
     internal sealed class DecoratedId : UuidBehavior { }
 }
 
+#if NET5_0_OR_GREATER
 public class README_md
 {
     [Test]
@@ -91,4 +95,4 @@ public class README_md
         public string[] @enum { get; init; }
     }
 }
-
+#endif

@@ -399,17 +399,17 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
         // We don't want to see hh:mm pop up.
         format = format.WithDefault("d");
-        return StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+        return StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
             ? formatted 
-            : m_Value.ToString(format, formatProvider);
+            : m_Value.ToString(format, provider);
     }
 
     /// <summary>Gets an XML string representation of the date.</summary>
@@ -465,7 +465,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <param name="s">
     /// A string containing a Date to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -474,8 +474,8 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Date result)
-        => TryParse(s, formatProvider, DateTimeStyles.None, out result);
+    public static bool TryParse(string? s, IFormatProvider? provider, out Date result)
+        => TryParse(s, provider, DateTimeStyles.None, out result);
 
     /// <summary>Converts the string to a 
     /// A return value indicates whether the conversion succeeded.
@@ -483,7 +483,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <param name="s">
     /// A string containing a Date to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="styles">
@@ -497,9 +497,9 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, DateTimeStyles styles, out Date result)
+    public static bool TryParse(string? s, IFormatProvider? provider, DateTimeStyles styles, out Date result)
     {
-        if (DateTime.TryParse(s, formatProvider, styles, out DateTime dt))
+        if (DateTime.TryParse(s, provider, styles, out DateTime dt))
         {
             result = new Date(dt);
             return true;

@@ -474,19 +474,19 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
         else
         {
-            var numberFormatInfo = Currency.GetNumberFormatInfo(formatProvider);
+            var numberFormatInfo = Currency.GetNumberFormatInfo(provider);
             return m_Value.ToString(string.IsNullOrEmpty(format) ? "C" : format, numberFormatInfo);
         }
     }
@@ -543,7 +543,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// <param name="s">
     /// A string containing Money to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -552,12 +552,12 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Money result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Money result)
     {
         result = default;
 
         var currency = Currency.Empty;
-        var signs = formatProvider.NegativeSign() + formatProvider.PositiveSign();
+        var signs = provider.NegativeSign() + provider.PositiveSign();
         var span = s.CharSpan().TrimLeft(ch => CandidateCurrency(ch, signs), out var candidate);
         
         if (candidate.IsEmpty())
@@ -566,7 +566,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         }
 
         if ((candidate.IsEmpty() || Currency.TryParse(candidate.ToString(), out currency))
-            && decimal.TryParse(span.ToString(), NumberStyles.Currency, formatProvider, out var amount))
+            && decimal.TryParse(span.ToString(), NumberStyles.Currency, provider, out var amount))
         {
             result = amount + currency;
             return true;
@@ -606,9 +606,9 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// the number properties, so we copy them for desired behavior.
     /// </remarks>
     [Pure]
-    internal static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
+    internal static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? provider)
     {
-        var info = NumberFormatInfo.GetInstance(formatProvider);
+        var info = NumberFormatInfo.GetInstance(provider);
         info = (NumberFormatInfo)info.Clone();
         info.NumberDecimalDigits = info.CurrencyDecimalDigits;
         info.NumberDecimalSeparator = info.CurrencyDecimalSeparator;

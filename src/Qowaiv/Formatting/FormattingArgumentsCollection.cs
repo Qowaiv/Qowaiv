@@ -5,24 +5,24 @@
 public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, FormattingArguments>>
 {
     /// <summary>Initializes a new instance of a formatting arguments collection based on the current culture.</summary>
-    public FormattingArgumentsCollection() : this(formatProvider: null) { }
+    public FormattingArgumentsCollection() : this(provider: null) { }
 
     /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The default format provider.
     /// </param>
-    public FormattingArgumentsCollection(IFormatProvider? formatProvider) : this(formatProvider, parent: null) { }
+    public FormattingArgumentsCollection(IFormatProvider? provider) : this(provider, parent: null) { }
 
     /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The default format provider.
     /// </param>
     /// <param name="parent">
     /// the optional parent collection to inherit item from.
     /// </param>
-    public FormattingArgumentsCollection(IFormatProvider? formatProvider, FormattingArgumentsCollection? parent)
+    public FormattingArgumentsCollection(IFormatProvider? provider, FormattingArgumentsCollection? parent)
     {
-        FormatProvider = formatProvider?? CultureInfo.CurrentCulture;
+        FormatProvider = provider?? CultureInfo.CurrentCulture;
 
         if (parent is not null)
         {
@@ -311,7 +311,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <param name="type">
     /// The type to specify a format for.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <exception cref="ArgumentNullException">
@@ -323,7 +323,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <exception cref="ArgumentException">
     /// An element with the same type already exists in the collection.
     /// </exception>
-    public void Add(Type type, IFormatProvider formatProvider) => Add(type, new FormattingArguments(formatProvider));
+    public void Add(Type type, IFormatProvider provider) => Add(type, new FormattingArguments(provider));
 
     /// <summary>Adds a format and format provider for the specified type.</summary>
     /// <param name="type">
@@ -332,7 +332,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <param name="format">
     /// The format.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <exception cref="ArgumentNullException">
@@ -344,7 +344,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <exception cref="ArgumentException">
     /// An element with the same type already exists in the collection.
     /// </exception>
-    public void Add(Type type, string format, IFormatProvider formatProvider) => Add(type, new FormattingArguments(format, formatProvider));
+    public void Add(Type type, string format, IFormatProvider provider) => Add(type, new FormattingArguments(format, provider));
 
     /// <summary>Adds a format and format provider for the specified type.</summary>
     /// <param name="type">
@@ -387,7 +387,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <param name="type">
     /// The type to specify a format for.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <exception cref="ArgumentNullException">
@@ -396,7 +396,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <exception cref="NotSupportedException">
     /// The type represents a type not implementing System.IFormattable.
     /// </exception>
-    public void Set(Type type, IFormatProvider formatProvider) => Set(type, new FormattingArguments(formatProvider));
+    public void Set(Type type, IFormatProvider provider) => Set(type, new FormattingArguments(provider));
 
     /// <summary>Sets a format and format provider for the specified type.</summary>
     /// <param name="type">
@@ -405,7 +405,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <param name="format">
     /// The format.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <exception cref="ArgumentNullException">
@@ -414,7 +414,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <exception cref="NotSupportedException">
     /// The type represents a type not implementing System.IFormattable.
     /// </exception>
-    public void Set(Type type, string format, IFormatProvider formatProvider) => Set(type, new FormattingArguments(format, formatProvider));
+    public void Set(Type type, string format, IFormatProvider provider) => Set(type, new FormattingArguments(format, provider));
 
     /// <summary>Sets a format and format provider for the specified type.</summary>
     /// <param name="type">
@@ -467,14 +467,14 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     public FormattingArguments Get(Type? type)
     {
         string? format = null;
-        IFormatProvider? formatProvider = null;
+        IFormatProvider? provider = null;
 
         if (type is not null && dict.TryGetValue(type, out var arguments))
         {
             format = arguments.Format;
-            formatProvider = arguments.FormatProvider;
+            provider = arguments.FormatProvider;
         }
-        return new(format, formatProvider ?? FormatProvider);
+        return new(format, provider ?? FormatProvider);
     }
 
     /// <summary>Gets a collection containing the types for the collection.</summary>

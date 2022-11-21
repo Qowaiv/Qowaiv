@@ -176,7 +176,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -190,10 +190,10 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// f: as formatted/display name.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("n"), provider, FormatTokens);
 
     /// <summary>Gets an XML string representation of the country.</summary>
     [Pure]
@@ -222,7 +222,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// <param name="s">
     /// A string containing a Country to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <param name="result">
@@ -231,7 +231,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Country result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Country result)
     {
         result = Empty;
         var str = s.Unify();
@@ -239,12 +239,12 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
+        else if (ParseValues.TryGetValue(provider, str, out var val))
         {
             result = new Country(val);
             return true;
@@ -374,10 +374,10 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// <param name="postfix">
     /// The prefix of the resource key.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string postfix, IFormatProvider formatProvider)
-        => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
+    private string GetResourceString(string postfix, IFormatProvider provider)
+        => ResourceManager.Localized(provider, $"{m_Value}_{postfix}");
 }

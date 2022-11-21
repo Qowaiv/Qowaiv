@@ -32,7 +32,7 @@ public class StringIdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider) => Id(obj) ?? string.Empty;
+    public override string ToString(object? obj, string? format, IFormatProvider? provider) => Id(obj) ?? string.Empty;
 
     /// <inheritdoc/>
     [Pure]

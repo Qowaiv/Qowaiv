@@ -12,27 +12,27 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// <param name="format">
     /// The format.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
-    public FormattingArguments(string? format, IFormatProvider? formatProvider)
+    public FormattingArguments(string? format, IFormatProvider? provider)
     {
         Format = format;
-        FormatProvider = formatProvider;
+        FormatProvider = provider;
     }
 
     /// <summary>Initializes a new instance of new formatting arguments.</summary>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
 
-    public FormattingArguments(IFormatProvider? formatProvider) : this(format: null, formatProvider) { }
+    public FormattingArguments(IFormatProvider? provider) : this(format: null, provider) { }
 
     /// <summary>Initializes a new instance of new formatting arguments.</summary>
     /// <param name="format">
     /// The format.
     /// </param>
-    public FormattingArguments(string? format) : this(format, formatProvider: null) { }
+    public FormattingArguments(string? format) : this(format, provider: null) { }
 
     /// <summary>Gets the format.</summary>
     public string? Format { get; }

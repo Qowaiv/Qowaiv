@@ -82,7 +82,7 @@ public partial struct LocalDateTime : IFormattable
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string? format) => ToString(format, formatProvider: null);
+    public string ToString(string? format) => ToString(format, provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the local date time.</summary>
     /// <param name="provider">
@@ -172,7 +172,7 @@ public partial struct LocalDateTime
     /// <param name="s">
     /// A string containing the local date time to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -182,7 +182,7 @@ public partial struct LocalDateTime
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static LocalDateTime Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
+    public static LocalDateTime Parse(string? s, IFormatProvider? provider) => TryParse(s, provider) ?? throw new FormatException(QowaivMessages.FormatExceptionLocalDateTime);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>
     /// <param name="s">
@@ -198,14 +198,14 @@ public partial struct LocalDateTime
     /// <param name="s">
     /// A string containing the local date time to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The local date time if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static LocalDateTime? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(LocalDateTime?);
+    public static LocalDateTime? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(LocalDateTime?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -236,11 +236,11 @@ public partial struct LocalDateTime
     /// <param name="val">
     /// The <see cref="string"/> to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? provider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
+        && TryParse(val, provider, out _);
 }

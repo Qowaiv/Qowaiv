@@ -204,7 +204,7 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <param name = "format">
     /// The format that this describes the formatting.
     /// </param>
-    /// <param name = "formatProvider">
+    /// <param name = "provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -214,17 +214,17 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// All others format the total months.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
         else if (string.IsNullOrEmpty(format) || format == "F")
         {
-            return string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M", Years, Months);
+            return string.Format(provider, "{0}Y{1:+0;-0;+0}M", Years, Months);
         }
-        else return m_Value.ToString(format, formatProvider);
+        else return m_Value.ToString(format, provider);
     }
 
     /// <summary>Gets an XML string representation of the month span.</summary>
@@ -270,7 +270,7 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <param name = "s">
     /// A string containing the month span to convert.
     /// </param>
-    /// <param name = "formatProvider">
+    /// <param name = "provider">
     /// The specified format provider.
     /// </param>
     /// <param name = "result">
@@ -279,19 +279,19 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out MonthSpan result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out MonthSpan result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        else if (int.TryParse(s, NumberStyles.Integer, formatProvider, out var months)
+        else if (int.TryParse(s, NumberStyles.Integer, provider, out var months)
             && TryCreate(months, out result))
         {
             return true;
         }
-        else if (DateSpan.TryParse(s, formatProvider, out var dateSpan))
+        else if (DateSpan.TryParse(s, provider, out var dateSpan))
         {
             result = FromMonths(dateSpan.TotalMonths);
             return true;

@@ -75,22 +75,22 @@ public readonly partial struct Percentage
         [Pure]
 #pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members
         // This is the only proper name for this function.
-        public static bool TryParse(string? format, IFormatProvider? formatProvider, out FormatInfo info)
+        public static bool TryParse(string? format, IFormatProvider? provider, out FormatInfo info)
 #pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
         {
-            format = WithDefault(format, formatProvider as CultureInfo);
+            format = WithDefault(format, provider as CultureInfo);
             
             var position = Position.None;
             var symbol = Symbol.None;
-            var provider = NumberFormat(formatProvider);
+            var numberFormatProvider = NumberFormat(provider);
             
-            Scan(ref format, ref position, ref symbol, provider, Symbol.Percent);
-            Scan(ref format, ref position, ref symbol, provider, Symbol.PerMille);
-            Scan(ref format, ref position, ref symbol, provider, Symbol.PerTenThousand);
+            Scan(ref format, ref position, ref symbol, numberFormatProvider, Symbol.Percent);
+            Scan(ref format, ref position, ref symbol, numberFormatProvider, Symbol.PerMille);
+            Scan(ref format, ref position, ref symbol, numberFormatProvider, Symbol.PerTenThousand);
 
             if (position != Position.Contains)
             {
-                info = new(format, provider, symbol, position);
+                info = new(format, numberFormatProvider, symbol, position);
                 return true;
             }
             else
@@ -114,9 +114,9 @@ public readonly partial struct Percentage
         }
 
         [Pure]
-        private static NumberFormatInfo NumberFormat(IFormatProvider? formatProvider)
+        private static NumberFormatInfo NumberFormat(IFormatProvider? provider)
         {
-            var info = NumberFormatInfo.GetInstance(formatProvider ?? CultureInfo.CurrentCulture);
+            var info = NumberFormatInfo.GetInstance(provider ?? CultureInfo.CurrentCulture);
             info = (NumberFormatInfo)info.Clone();
             info.NumberDecimalDigits = info.PercentDecimalDigits;
             info.NumberDecimalSeparator = info.PercentDecimalSeparator;

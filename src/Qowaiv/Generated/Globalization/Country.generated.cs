@@ -86,7 +86,7 @@ public partial struct Country : IFormattable
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string? format) => ToString(format, formatProvider: null);
+    public string ToString(string? format) => ToString(format, provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the country.</summary>
     /// <param name="provider">
@@ -176,7 +176,7 @@ public partial struct Country
     /// <param name="s">
     /// A string containing the country to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -186,7 +186,7 @@ public partial struct Country
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Country Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCountry);
+    public static Country Parse(string? s, IFormatProvider? provider) => TryParse(s, provider) ?? throw new FormatException(QowaivMessages.FormatExceptionCountry);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
     /// <param name="s">
@@ -202,14 +202,14 @@ public partial struct Country
     /// <param name="s">
     /// A string containing the country to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The country if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Country? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Country?);
+    public static Country? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Country?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -240,11 +240,11 @@ public partial struct Country
     /// <param name="val">
     /// The <see cref="string"/> to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? provider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
+        && TryParse(val, provider, out _);
 }

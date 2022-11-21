@@ -68,7 +68,7 @@ public partial struct Fraction : IFormattable
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string? format) => ToString(format, formatProvider: null);
+    public string ToString(string? format) => ToString(format, provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the fraction.</summary>
     /// <param name="provider">
@@ -140,7 +140,7 @@ public partial struct Fraction
     /// <param name="s">
     /// A string containing the fraction to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -150,7 +150,7 @@ public partial struct Fraction
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Fraction Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
+    public static Fraction Parse(string? s, IFormatProvider? provider) => TryParse(s, provider) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
@@ -166,14 +166,14 @@ public partial struct Fraction
     /// <param name="s">
     /// A string containing the fraction to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The fraction if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Fraction? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Fraction?);
+    public static Fraction? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Fraction?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -204,11 +204,11 @@ public partial struct Fraction
     /// <param name="val">
     /// The <see cref="string"/> to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? provider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
+        && TryParse(val, provider, out _);
 }

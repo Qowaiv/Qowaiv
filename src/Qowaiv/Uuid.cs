@@ -63,7 +63,7 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -98,10 +98,10 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     /// the lowercase formats are lowercase (except the the 's').
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : behavior.ToString(m_Value, format, formatProvider);
+        : behavior.ToString(m_Value, format, provider);
 
     /// <summary>Gets an XML string representation of the UUID.</summary>
     [Pure]

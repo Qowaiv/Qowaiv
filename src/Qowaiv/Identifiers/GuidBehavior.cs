@@ -43,7 +43,7 @@ public class GuidBehavior : IdentifierBehavior
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -65,25 +65,25 @@ public class GuidBehavior : IdentifierBehavior
     /// the lowercase formats are lowercase (except the 's').
     /// </remarks>
     [Pure]
-    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
+    public override string ToString(object? obj, string? format, IFormatProvider? provider)
     {
         var id = Id(obj);
         return id == Guid.Empty 
             ? string.Empty
-            : Tostring(id, format.WithDefault(DefaultFormat), formatProvider);
+            : Tostring(id, format.WithDefault(DefaultFormat), provider);
     }
 
 #pragma warning disable S1541 // Not that complex
     [Pure]
-    private static string Tostring(Guid id, string format, IFormatProvider? formatProvider)
+    private static string Tostring(Guid id, string format, IFormatProvider? provider)
         => format switch
         {
             "s" or "S" => ToBase64String(id),
             "h" => Base32.ToString(id.ToByteArray(), true),
             "H" => Base32.ToString(id.ToByteArray(), false),
-            "N" or "D" or "B" or "P" => id.ToString(format, formatProvider).ToUpperInvariant(),
-            "X" => id.ToString(format, formatProvider).ToUpperInvariant().Replace('X', 'x'),
-            _ => id.ToString(format, formatProvider),
+            "N" or "D" or "B" or "P" => id.ToString(format, provider).ToUpperInvariant(),
+            "X" => id.ToString(format, provider).ToUpperInvariant().Replace('X', 'x'),
+            _ => id.ToString(format, provider),
         };
 #pragma warning restore S1541 // Methods and properties should not be too complex
 

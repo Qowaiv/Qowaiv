@@ -126,12 +126,12 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
         : m_Value ?? string.Empty;
 

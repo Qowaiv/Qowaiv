@@ -73,8 +73,8 @@ public static class QowaivSystemExtensions
     internal static bool IsEmpty(this string? str) => string.IsNullOrEmpty(str);
 
     [Pure]
-    internal static bool IsUnknown(this string? str, IFormatProvider? formatProvider)
-        => Unknown.IsUnknown(str, formatProvider as CultureInfo);
+    internal static bool IsUnknown(this string? str, IFormatProvider? provider)
+        => Unknown.IsUnknown(str, provider as CultureInfo);
 
     [Pure]
     internal static bool Matches(this string str, Regex pattern) => pattern.IsMatch(str);

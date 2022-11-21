@@ -69,19 +69,19 @@ public readonly partial struct Year : ISerializable, IXmlSerializable, IFormatta
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
         else if (IsEmpty()) { return string.Empty; }
         else if (IsUnknown()) { return "?"; }
-        else { return m_Value.ToString(format, formatProvider); }
+        else { return m_Value.ToString(format, provider); }
     }
 
     /// <summary>Gets an XML string representation of the year.</summary>
@@ -115,7 +115,7 @@ public readonly partial struct Year : ISerializable, IXmlSerializable, IFormatta
     /// <param name="s">
     /// A string containing a year to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -124,19 +124,19 @@ public readonly partial struct Year : ISerializable, IXmlSerializable, IFormatta
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Year result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Year result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo ?? CultureInfo.InvariantCulture))
+        else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo ?? CultureInfo.InvariantCulture))
         {
             result = Unknown;
             return true;
         }
-        else if (short.TryParse(s, NumberStyles.None, formatProvider, out var year)
+        else if (short.TryParse(s, NumberStyles.None, provider, out var year)
             && year >= MinValue.m_Value
             && year <= MaxValue.m_Value)
         {

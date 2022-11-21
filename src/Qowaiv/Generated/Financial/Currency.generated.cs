@@ -86,7 +86,7 @@ public partial struct Currency : IFormattable
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string? format) => ToString(format, formatProvider: null);
+    public string ToString(string? format) => ToString(format, provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the currency.</summary>
     /// <param name="provider">
@@ -176,7 +176,7 @@ public partial struct Currency
     /// <param name="s">
     /// A string containing the currency to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -186,7 +186,7 @@ public partial struct Currency
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Currency Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCurrency);
+    public static Currency Parse(string? s, IFormatProvider? provider) => TryParse(s, provider) ?? throw new FormatException(QowaivMessages.FormatExceptionCurrency);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>
     /// <param name="s">
@@ -202,14 +202,14 @@ public partial struct Currency
     /// <param name="s">
     /// A string containing the currency to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The currency if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Currency? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Currency?);
+    public static Currency? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Currency?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -240,11 +240,11 @@ public partial struct Currency
     /// <param name="val">
     /// The <see cref="string"/> to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? provider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
+        && TryParse(val, provider, out _);
 }

@@ -13,7 +13,7 @@ public static class StringFormatter
     /// <param name="format">
     /// The format string.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <param name="tokens">
@@ -26,8 +26,8 @@ public static class StringFormatter
     /// Uses the escape character '\'.
     /// </remarks>
     [Pure]
-    public static string Apply<T>(T obj, string format, IFormatProvider? formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
-        => Apply(obj, format, formatProvider, tokens, '\\');
+    public static string Apply<T>(T obj, string format, IFormatProvider? provider, Dictionary<char, Func<T, IFormatProvider, string>> tokens)
+        => Apply(obj, format, provider, tokens, '\\');
 
     /// <summary>Apply a format string instruction on an object.</summary>
     /// <typeparam name="T">
@@ -39,7 +39,7 @@ public static class StringFormatter
     /// <param name="format">
     /// The format string.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider, if null <see cref="CultureInfo.CurrentCulture"/> is used.
     /// </param>
     /// <param name="tokens">
@@ -52,7 +52,7 @@ public static class StringFormatter
     /// An formatted string.
     /// </returns>
     [Pure]
-    public static string Apply<T>(T obj, string format, IFormatProvider? formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
+    public static string Apply<T>(T obj, string format, IFormatProvider? provider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
     {
         Guard.NotNull((object?)obj, nameof(obj));
         Guard.NotNullOrEmpty(format, nameof(format));
@@ -82,7 +82,7 @@ public static class StringFormatter
             // If a token match, apply.
             else if (tokens.TryGetValue(ch, out var action))
             {
-                sb.Append(action.Invoke(obj, formatProvider ?? CultureInfo.CurrentCulture));
+                sb.Append(action.Invoke(obj, provider ?? CultureInfo.CurrentCulture));
             }
             // Append char.
             else
@@ -104,7 +104,7 @@ public static class StringFormatter
     /// <param name="obj">
     /// The object to format.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <param name="formatted">
@@ -113,9 +113,9 @@ public static class StringFormatter
     /// <returns>
     /// True, if the format provider supports custom formatting, otherwise false.
     /// </returns>
-    public static bool TryApplyCustomFormatter(string? format, object obj, IFormatProvider? formatProvider, out string formatted)
+    public static bool TryApplyCustomFormatter(string? format, object obj, IFormatProvider? provider, out string formatted)
     {
-        var customFormatter = formatProvider?.GetFormat<ICustomFormatter>();
+        var customFormatter = provider?.GetFormat<ICustomFormatter>();
         if (customFormatter is null)
         {
             formatted = string.Empty;
@@ -123,7 +123,7 @@ public static class StringFormatter
         }
         else
         {
-            formatted = customFormatter.Format(format, obj, formatProvider);
+            formatted = customFormatter.Format(format, obj, provider);
             return true;
         }
     }

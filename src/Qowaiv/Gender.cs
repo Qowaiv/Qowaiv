@@ -111,7 +111,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -124,10 +124,10 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// f: as formatted/display name.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("f"), provider, FormatTokens);
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Gender, IFormatProvider, string>> FormatTokens = new()
@@ -164,7 +164,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <param name="s">
     /// A string containing a Gender to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -173,7 +173,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Gender result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Gender result)
     {
         result = Empty;
         var str = s.Unify();
@@ -184,7 +184,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
         }
         else
         {
-            var c = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
+            var c = provider as CultureInfo ?? CultureInfo.CurrentCulture;
             AddCulture(c);
             if (Parsings[c].TryGetValue(str, out byte val) ||
                 Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))
@@ -259,12 +259,12 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <param name="prefix">
     /// The prefix of the resource key.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string prefix, IFormatProvider? formatProvider)
-        => ResourceManager.Localized(formatProvider, prefix, GenderLabels[m_Value]);
+    private string GetResourceString(string prefix, IFormatProvider? provider)
+        => ResourceManager.Localized(provider, prefix, GenderLabels[m_Value]);
 
     /// <summary>Gets the valid values.</summary>
     private static readonly Dictionary<int, byte> FromInt32s = new()

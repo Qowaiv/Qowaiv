@@ -126,7 +126,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -138,10 +138,10 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// F: as formatted uppercase.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("U"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("U"), provider, FormatTokens);
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new()
@@ -162,7 +162,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// <param name="s">
     /// A string containing an IBAN to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -171,7 +171,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out InternationalBankAccountNumber result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out InternationalBankAccountNumber result)
     {
         result = default;
         var str = s.Unify();
@@ -179,7 +179,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;

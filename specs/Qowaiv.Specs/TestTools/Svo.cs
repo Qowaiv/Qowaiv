@@ -103,14 +103,14 @@ public sealed class ForCustomSvo : SvoBehavior
     public override int MaxLength => 16;
     public override Regex Pattern => new("^[A-Z]+$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(1));
 
-    public override string NormalizeInput(string str, IFormatProvider formatProvider) 
-        => str?.Replace("-", "").ToUpper(formatProvider ?? CultureInfo.InvariantCulture) ?? string.Empty;
+    public override string NormalizeInput(string str, IFormatProvider provider) 
+        => str?.Replace("-", "").ToUpper(provider ?? CultureInfo.InvariantCulture) ?? string.Empty;
 }
 
 public sealed class ForInt32 : Int32IdBehavior
 {
-    public override string ToString(object obj, string format, IFormatProvider formatProvider)
-       => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
+    public override string ToString(object obj, string format, IFormatProvider provider)
+       => string.Format(provider, $"PREFIX{{0:{format}}}", obj);
 
     public override bool TryParse(string str, out object id)
         => (str ?? "").StartsWith("PREFIX")
@@ -120,8 +120,8 @@ public sealed class ForInt32 : Int32IdBehavior
 
 public sealed class ForInt64 : Int64IdBehavior
 {
-    public override string ToString(object obj, string format, IFormatProvider formatProvider)
-       => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
+    public override string ToString(object obj, string format, IFormatProvider provider)
+       => string.Format(provider, $"PREFIX{{0:{format}}}", obj);
 
     public override bool TryCreate(object obj, out object id)
         => base.TryCreate(obj, out id)

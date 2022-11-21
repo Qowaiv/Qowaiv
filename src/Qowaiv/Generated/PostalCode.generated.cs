@@ -86,7 +86,7 @@ public partial struct PostalCode : IFormattable
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string? format) => ToString(format, formatProvider: null);
+    public string ToString(string? format) => ToString(format, provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the postal code.</summary>
     /// <param name="provider">
@@ -176,7 +176,7 @@ public partial struct PostalCode
     /// <param name="s">
     /// A string containing the postal code to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -186,7 +186,7 @@ public partial struct PostalCode
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static PostalCode Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionPostalCode);
+    public static PostalCode Parse(string? s, IFormatProvider? provider) => TryParse(s, provider) ?? throw new FormatException(QowaivMessages.FormatExceptionPostalCode);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="PostalCode"/>.</summary>
     /// <param name="s">
@@ -202,14 +202,14 @@ public partial struct PostalCode
     /// <param name="s">
     /// A string containing the postal code to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The postal code if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static PostalCode? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(PostalCode?);
+    public static PostalCode? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(PostalCode?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="PostalCode"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -240,11 +240,11 @@ public partial struct PostalCode
     /// <param name="val">
     /// The <see cref="string"/> to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? provider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
+        && TryParse(val, provider, out _);
 }

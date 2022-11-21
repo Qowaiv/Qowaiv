@@ -4,7 +4,7 @@
 internal delegate bool TryCreate<TPrimitive, TSvo>(TPrimitive? value, out TSvo result) where TPrimitive : struct;
 
 /// <summary>Culture dependent TryParse factory method.</summary>
-internal delegate bool TryParse<TSvo>(string str, IFormatProvider formatProvider, out TSvo result);
+internal delegate bool TryParse<TSvo>(string str, IFormatProvider provider, out TSvo result);
 
 /// <summary>Culture independent TryParse factory method.</summary>
 internal delegate bool TryParseInvariant<TSvo>(string str, out TSvo result);

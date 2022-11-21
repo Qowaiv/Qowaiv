@@ -35,7 +35,7 @@ public class Int32IdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider) => Id(obj).ToString(format, formatProvider);
+    public override string ToString(object? obj, string? format, IFormatProvider? provider) => Id(obj).ToString(format, provider);
 
     /// <inheritdoc/>
     [Pure]

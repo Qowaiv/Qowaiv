@@ -28,7 +28,7 @@ public interface IIdentifierBehavior : IEqualityComparer<object>, IComparer<obje
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the underlying value of the identifier.</summary>
     [Pure]
-    string ToString(object? obj, string? format, IFormatProvider? formatProvider);
+    string ToString(object? obj, string? format, IFormatProvider? provider);
 
     /// <summary>Deserializes the underlying value from a JSON number.</summary>
     [Pure]

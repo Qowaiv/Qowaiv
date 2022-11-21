@@ -108,7 +108,7 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -120,10 +120,10 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
     /// b/B: as boolean (true/false) (Title cased).
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("f"), provider, FormatTokens);
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<YesNo, IFormatProvider, string>> FormatTokens = new()
@@ -168,7 +168,7 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
     /// <param name="s">
     /// A string containing a yes-no to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -177,7 +177,7 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out YesNo result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out YesNo result)
     {
         result = Empty;
         var str = s.Unify();
@@ -186,12 +186,12 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
+        else if (ParseValues.TryGetValue(provider, str, out var val))
         {
             result = new YesNo(val);
             return true;
@@ -238,10 +238,10 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
     /// <param name="prefix">
     /// The prefix of the resource key.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string prefix, IFormatProvider formatProvider)
-        => ResourceManager.Localized(formatProvider, prefix, LookupSuffix[m_Value]);
+    private string GetResourceString(string prefix, IFormatProvider provider)
+        => ResourceManager.Localized(provider, prefix, LookupSuffix[m_Value]);
 }

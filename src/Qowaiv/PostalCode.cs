@@ -59,12 +59,12 @@ public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFo
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) 
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider) 
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
         : ToString(Country.TryParse(format) ?? default);
 
@@ -95,7 +95,7 @@ public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFo
     /// <param name="s">
     /// A string containing a postal code to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -104,7 +104,7 @@ public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFo
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out PostalCode result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out PostalCode result)
     {
         result = default;
         var str = s.Unify();
@@ -112,7 +112,7 @@ public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFo
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;

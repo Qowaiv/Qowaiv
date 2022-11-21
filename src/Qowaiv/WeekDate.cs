@@ -181,7 +181,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -193,10 +193,10 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// d: as day.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault(@"y-\Ww-d"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault(@"y-\Ww-d"), provider, FormatTokens);
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<WeekDate, IFormatProvider, string>> FormatTokens = new()
@@ -229,7 +229,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <param name="s">
     /// A string containing a week date to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -238,15 +238,15 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out WeekDate result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out WeekDate result)
     {
         result = MinValue;
         var match = Pattern.Match(s ?? string.Empty);
         if (match.Success)
         {
-            var year = int.Parse(match.Groups["year"].Value, formatProvider);
-            var week = int.Parse(match.Groups["week"].Value, formatProvider);
-            var day = int.Parse(match.Groups["day"].Value, formatProvider);
+            var year = int.Parse(match.Groups["year"].Value, provider);
+            var week = int.Parse(match.Groups["week"].Value, provider);
+            var day = int.Parse(match.Groups["day"].Value, provider);
 
             if (TryCreate(year, week, day, out Date dt))
             {

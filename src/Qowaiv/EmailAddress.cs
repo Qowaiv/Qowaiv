@@ -101,7 +101,7 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -115,10 +115,10 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
     /// D: as domain uppercased.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("f"), provider, FormatTokens);
 
     /// <summary>Gets an XML string representation of the email address.</summary>
     [Pure]
@@ -141,7 +141,7 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
     /// <param name="s">
     /// A string containing an email address to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -150,14 +150,14 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out EmailAddress result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out EmailAddress result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
+        else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
         {
             result = Unknown;
             return true;

@@ -113,7 +113,7 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -126,10 +126,10 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// f: as formatted/display name.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("f"), provider, FormatTokens);
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Sex, IFormatProvider, string>> FormatTokens = new()
@@ -166,7 +166,7 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// <param name="s">
     /// A string containing a Sex to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -175,10 +175,10 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Sex result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Sex result)
     {
         result = Empty;
-        if (ParseValues.TryGetValue(formatProvider, s.Unify(), out var val))
+        if (ParseValues.TryGetValue(provider, s.Unify(), out var val))
         {
             result = new Sex(val);
             return true;
@@ -249,12 +249,12 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// <param name="prefix">
     /// The prefix of the resource key.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string prefix, IFormatProvider? formatProvider)
-        => ResourceManager.Localized(formatProvider, prefix, SexLabels[m_Value]);
+    private string GetResourceString(string prefix, IFormatProvider? provider)
+        => ResourceManager.Localized(provider, prefix, SexLabels[m_Value]);
 
     /// <summary>Gets the valid values.</summary>
     private static readonly Dictionary<int, byte> FromInt32s = new()

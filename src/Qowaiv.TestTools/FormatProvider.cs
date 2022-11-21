@@ -44,11 +44,11 @@ public static class FormatProvider
         /// <param name="arg">
         /// The object to format.
         /// </param>
-        /// <param name="formatProvider">
-        /// The specified formatProvider.
+        /// <param name="provider">
+        /// The specified provider.
         /// </param>
         [Pure]
-        public string Format(string? format, object? arg, IFormatProvider? formatProvider)
+        public string Format(string? format, object? arg, IFormatProvider? provider)
         {
             var str = "Unit Test Formatter, value: '{0:" + format + "}', format: '{1}'";
             return string.Format(CultureInfo.InvariantCulture, str, arg, format);

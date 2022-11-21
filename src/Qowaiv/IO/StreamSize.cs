@@ -441,7 +441,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -470,15 +470,15 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// 1238900.ToString("#,##0") => 1,238,900
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
         else if (FormattedPattern.Match(format ?? string.Empty) is { Success: true } match)
         {
-            return ToFormattedString(formatProvider, match);
+            return ToFormattedString(provider, match);
         }
         else
         {
@@ -488,7 +488,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
 
             decimal size = (decimal)m_Value / (decimal)mp;
 
-            return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
+            return size.ToString(decimalFormat, provider) + streamSizeMarker;
         }
     }
 
@@ -497,7 +497,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
     [Pure]
-    private string ToFormattedString(IFormatProvider? formatProvider, Match match)
+    private string ToFormattedString(IFormatProvider? provider, Match match)
     {
         var format = match.Groups["format"].Value;
         var streamSizeMarker = match.Groups["streamSizeMarker"].Value;
@@ -507,7 +507,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
         var sb = new StringBuilder();
         if (m_Value < 0)
         {
-            sb.Append(formatProvider.NegativeSign());
+            sb.Append(provider.NegativeSign());
         }
 
         decimal size = Math.Abs(m_Value);
@@ -524,7 +524,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
             }
         }
 
-        sb.Append(size.ToString(format, formatProvider));
+        sb.Append(size.ToString(format, provider));
 
         if (streamSizeMarker[0] == ' ')
         {
@@ -585,7 +585,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <param name="s">
     /// A string containing a stream size to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -594,7 +594,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out StreamSize result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out StreamSize result)
     {
         result = default;
         if (string.IsNullOrEmpty(s)) return false;
@@ -605,14 +605,14 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
             var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
             var factor = GetMultiplier(streamSizeMarker);
 
-            if (long.TryParse(size, NumberStyles.Number, formatProvider, out long sizeInt64) &&
+            if (long.TryParse(size, NumberStyles.Number, provider, out long sizeInt64) &&
                 sizeInt64 <= long.MaxValue / factor &&
                 sizeInt64 >= long.MinValue / factor)
             {
                 result = new StreamSize(sizeInt64 * factor);
                 return true;
             }
-            else if (decimal.TryParse(size, NumberStyles.Number, formatProvider, out decimal sizeDecimal) &&
+            else if (decimal.TryParse(size, NumberStyles.Number, provider, out decimal sizeDecimal) &&
                 sizeDecimal <= decimal.MaxValue / factor &&
                 sizeDecimal >= decimal.MinValue / factor)
             {

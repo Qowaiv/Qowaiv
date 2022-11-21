@@ -49,7 +49,7 @@ public abstract class IdentifierBehavior : TypeConverter, IIdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public abstract string ToString(object? obj, string? format, IFormatProvider? formatProvider);
+    public abstract string ToString(object? obj, string? format, IFormatProvider? provider);
 
     /// <inheritdoc/>
     [Pure]

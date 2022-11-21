@@ -91,7 +91,7 @@ public partial struct MonthSpan : IFormattable
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string? format) => ToString(format, formatProvider: null);
+    public string ToString(string? format) => ToString(format, provider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the month span.</summary>
     /// <param name="provider">
@@ -181,7 +181,7 @@ public partial struct MonthSpan
     /// <param name="s">
     /// A string containing the month span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -191,7 +191,7 @@ public partial struct MonthSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static MonthSpan Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
+    public static MonthSpan Parse(string? s, IFormatProvider? provider) => TryParse(s, provider) ?? throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
     /// <param name="s">
@@ -207,14 +207,14 @@ public partial struct MonthSpan
     /// <param name="s">
     /// A string containing the month span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The month span if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static MonthSpan? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(MonthSpan?);
+    public static MonthSpan? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(MonthSpan?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -245,11 +245,11 @@ public partial struct MonthSpan
     /// <param name="val">
     /// The <see cref="string"/> to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
+    public static bool IsValid(string? val, IFormatProvider? provider)
         => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
+        && TryParse(val, provider, out _);
 }

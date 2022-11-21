@@ -66,7 +66,7 @@ Therefore, is also possible to override `IsValid()`:
 ``` C#
 public sealed class ForMySvo : SvoBehavior
 {
-    public override bool IsValid(string str, IFormatProvider? formatProvider, out string validated)
+    public override bool IsValid(string str, IFormatProvider? provider, out string validated)
     {
         if (long.TryParse(str, out var number))
         {
@@ -89,7 +89,7 @@ By default the input is trimmed, but if preferred, extra measures can be taken:
 ```  C#
 public sealed class ForMySvo : SvoBehavior
 {
-    public override string NormalizeInput(string str, IFormatProvider formatProvider) 
+    public override string NormalizeInput(string str, IFormatProvider provider) 
         => str?.Replace("-", "").ToUpperInvariant()
         ?? string.Empty;
 }
@@ -103,10 +103,10 @@ state behavior is not overridable, the other two are:
 ```  C#
 public sealed class ForMySvo : SvoBehavior
 {
-    public override string FormatUnknown(string? format, IFormatProvider? formatProvider) 
+    public override string FormatUnknown(string? format, IFormatProvider? provider) 
         => "Unknown";
 
-    public override string Format(string str, string? format, IFormatProvider? formatProvider)
+    public override string Format(string str, string? format, IFormatProvider? provider)
         => format == "l"
         ? str.ToLower()
         : str;

@@ -616,17 +616,17 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
-        else if (FormatInfo.TryParse(format, formatProvider, out var info))
+        else if (FormatInfo.TryParse(format, provider, out var info))
         {
             return info.ToString(m_Value);
         }
@@ -661,7 +661,7 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// <param name="s">
     /// A string containing a Percentage to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <param name="result">
@@ -670,12 +670,12 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Percentage result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Percentage result)
     {
         result = Zero;
 
         if (s is { Length: > 0 }
-            && FormatInfo.TryParse(s, formatProvider, out var info)
+            && FormatInfo.TryParse(s, provider, out var info)
             && decimal.TryParse(info.Format, NumberStyles.Number, info.Provider, out var dec))
         {
             result = new(dec * info.Factor);

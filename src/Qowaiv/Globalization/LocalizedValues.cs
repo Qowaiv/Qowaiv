@@ -17,9 +17,9 @@ internal abstract class LocalizedValues<TValue> : Dictionary<CultureInfo, Dictio
     /// </param>
     protected abstract void AddCulture(CultureInfo culture);
 
-    public bool TryGetValue(IFormatProvider? formatProvider, string str, out TValue? value)
+    public bool TryGetValue(IFormatProvider? provider, string str, out TValue? value)
     {
-        if (this[CheckCulture(formatProvider)].TryGetValue(str, out value) ||
+        if (this[CheckCulture(provider)].TryGetValue(str, out value) ||
             this[CultureInfo.InvariantCulture].TryGetValue(str, out value))
         {
             return true;
@@ -32,9 +32,9 @@ internal abstract class LocalizedValues<TValue> : Dictionary<CultureInfo, Dictio
     }
 
     [Pure]
-    private CultureInfo CheckCulture(IFormatProvider? formatProvider)
+    private CultureInfo CheckCulture(IFormatProvider? provider)
     {
-        var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
+        var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
         if (!ContainsKey(culture))
         {
             lock (locker)

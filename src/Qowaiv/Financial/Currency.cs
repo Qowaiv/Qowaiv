@@ -129,7 +129,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -143,10 +143,10 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// f: as formatted/display name.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("n"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("n"), provider, FormatTokens);
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new()
@@ -181,9 +181,9 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// the number properties, so we copy them for desired behavior.
     /// </remarks>
     [Pure]
-    internal NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
+    internal NumberFormatInfo GetNumberFormatInfo(IFormatProvider? provider)
     {
-        var info = NumberFormatInfo.GetInstance(formatProvider);
+        var info = NumberFormatInfo.GetInstance(provider);
         info = (NumberFormatInfo)info.Clone();
         info.CurrencySymbol = string.IsNullOrEmpty(Symbol) ? IsoCode : Symbol;
         info.CurrencyDecimalDigits = Digits;
@@ -196,7 +196,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// <param name="s">
     /// A string containing a currency to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -205,7 +205,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Currency result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Currency result)
     {
         result = Empty;
         var str = s.Unify();
@@ -213,12 +213,12 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider) || str.Equals(Unknown.Symbol))
+        else if (str.IsUnknown(provider) || str.Equals(Unknown.Symbol))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
+        else if (ParseValues.TryGetValue(provider, str, out var val))
         {
             result = new Currency(val);
             return true;
@@ -310,12 +310,12 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// <param name="postfix">
     /// The prefix of the resource key.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string postfix, IFormatProvider? formatProvider)
-        => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
+    private string GetResourceString(string postfix, IFormatProvider? provider)
+        => ResourceManager.Localized(provider, $"{m_Value}_{postfix}");
 
     #region Money creation operators
 

@@ -200,14 +200,14 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M{2:+0;-0;+0}D", Years, Months, Days);
+        : string.Format(provider, "{0}Y{1:+0;-0;+0}M{2:+0;-0;+0}D", Years, Months, Days);
 
     /// <summary>Gets an XML string representation of the date span.</summary>
     [Pure]
@@ -359,7 +359,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <param name="s">
     /// A string containing a date span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -368,7 +368,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out DateSpan result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out DateSpan result)
     {
         result = default;
 
@@ -381,9 +381,9 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
 
         if (match.Success)
         {
-            var y = IntFromGroup(match, nameof(Years), formatProvider);
-            var m = IntFromGroup(match, nameof(Months), formatProvider);
-            var d = IntFromGroup(match, nameof(Days), formatProvider);
+            var y = IntFromGroup(match, nameof(Years), provider);
+            var m = IntFromGroup(match, nameof(Months), provider);
+            var d = IntFromGroup(match, nameof(Days), provider);
 
             var months = y * 12 + m;
             var totalDays = d + months * DaysPerMonth;
@@ -398,10 +398,10 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     }
 
     [Pure]
-    private static int IntFromGroup(Match match, string group, IFormatProvider? formatProvider)
+    private static int IntFromGroup(Match match, string group, IFormatProvider? provider)
     {
         var str = match.Groups[group].Value;
-        return string.IsNullOrEmpty(str) ? 0 : int.Parse(str, formatProvider);
+        return string.IsNullOrEmpty(str) ? 0 : int.Parse(str, provider);
     }
 
     [Pure]

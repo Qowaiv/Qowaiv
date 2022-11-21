@@ -90,19 +90,19 @@ public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IF
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
         else if (IsUnknown()) return "?";
         else if (IsEmpty()) return string.Empty;
-        else return m_Value.ToString(format, formatProvider);
+        else return m_Value.ToString(format, provider);
     }
 
 
@@ -128,7 +128,7 @@ public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IF
     /// <param name="s">
     /// A string containing a house number to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -137,14 +137,14 @@ public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IF
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out HouseNumber result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out HouseNumber result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+        var culture = provider as CultureInfo ?? CultureInfo.InvariantCulture;
         if (Qowaiv.Unknown.IsUnknown(s, culture))
         {
             result = Unknown;

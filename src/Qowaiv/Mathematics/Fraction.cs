@@ -378,63 +378,63 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// <param name = "format">
     /// The format that this describes the formatting.
     /// </param>
-    /// <param name = "formatProvider">
+    /// <param name = "provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
         else if (Formatting.Pattern.Match(format.WithDefault("0/0")) is { Success: true } match)
         {
-            return ToString(formatProvider, match);
+            return ToString(provider, match);
         }
         // if no fraction bar character has been provided, format as a decimal.
         else if (!format.WithDefault().Any(ch => Formatting.IsFractionBar(ch)))
         {
-            return ToDecimal().ToString(format, formatProvider);
+            return ToDecimal().ToString(format, provider);
         }
         else throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
     }
 
     [Pure]
-    private string ToString(IFormatProvider? formatProvider, Match match)
+    private string ToString(IFormatProvider? provider, Match match)
     {
         var sb = new StringBuilder();
-        var remainder = AppendWhole(sb, match.Groups[nameof(Whole)].Value, formatProvider);
-        AppendNumerator(sb, remainder, match.Groups[nameof(Numerator)].Value, formatProvider);
+        var remainder = AppendWhole(sb, match.Groups[nameof(Whole)].Value, provider);
+        AppendNumerator(sb, remainder, match.Groups[nameof(Numerator)].Value, provider);
         sb.Append(match.Groups[nameof(Formatting.FractionBars)].Value);
-        AppendDenominator(sb, match.Groups[nameof(Denominator)].Value, formatProvider);
+        AppendDenominator(sb, match.Groups[nameof(Denominator)].Value, provider);
         return sb.ToString();
     }
 
     [Impure]
-    private long AppendWhole(StringBuilder sb, string format, IFormatProvider? formatProvider)
+    private long AppendWhole(StringBuilder sb, string format, IFormatProvider? provider)
     {
         if (!string.IsNullOrEmpty(format))
         {
-            sb.Append(Whole.ToString(format, formatProvider));
+            sb.Append(Whole.ToString(format, provider));
 
             // For -0 n/d
-            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(formatProvider.NegativeSign()))
+            if (Whole == 0 && Sign() == -1 && sb.Length != 0 && !sb.ToString().Contains(provider.NegativeSign()))
             {
-                sb.Insert(0, formatProvider.NegativeSign());
+                sb.Insert(0, provider.NegativeSign());
             }
             return Remainder;
         }
         else return numerator;
     }
 
-    private void AppendNumerator(StringBuilder sb, long remainder, string format, IFormatProvider? formatProvider)
+    private void AppendNumerator(StringBuilder sb, long remainder, string format, IFormatProvider? provider)
     {
         if (format == "super")
         {
             if (sb.Length == 0 && Sign() == -1)
             {
-                sb.Append(formatProvider.NegativeSign());
+                sb.Append(provider.NegativeSign());
             }
             // use invariant as we want to convert to superscript.
             var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
@@ -446,11 +446,11 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
             {
                 sb.Append(' ');
             }
-            sb.Append(remainder.ToString(format, formatProvider));
+            sb.Append(remainder.ToString(format, provider));
         }
     }
 
-    private void AppendDenominator(StringBuilder sb, string format, IFormatProvider? formatProvider)
+    private void AppendDenominator(StringBuilder sb, string format, IFormatProvider? provider)
     {
         if (format == "sub")
         {
@@ -460,7 +460,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         }
         else
         {
-            sb.Append(Denominator.ToString(format, formatProvider));
+            sb.Append(Denominator.ToString(format, provider));
         }
     }
 
@@ -610,7 +610,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// <param name = "s">
     /// A string containing the fraction to convert.
     /// </param>
-    /// <param name = "formatProvider">
+    /// <param name = "provider">
     /// The specified format provider.
     /// </param>
     /// <param name = "result">
@@ -619,9 +619,9 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Fraction result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Fraction result)
     {
-        if (s is { Length: > 0 } && FractionParser.Parse(s, formatProvider) is { } fraction)
+        if (s is { Length: > 0 } && FractionParser.Parse(s, provider) is { } fraction)
         {
             result = fraction;
             return true;

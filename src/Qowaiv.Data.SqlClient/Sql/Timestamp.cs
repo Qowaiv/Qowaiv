@@ -56,21 +56,21 @@ public readonly partial struct Timestamp : ISerializable, IXmlSerializable, IFor
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
         else if (string.IsNullOrEmpty(format))
         {
-            return string.Format(formatProvider, "0x{0:X16}", m_Value);
+            return string.Format(provider, "0x{0:X16}", m_Value);
         }
-        else return m_Value.ToString(format, formatProvider);
+        else return m_Value.ToString(format, provider);
     }
 
     /// <summary>Gets an XML string representation of the timestamp.</summary>
@@ -103,7 +103,7 @@ public readonly partial struct Timestamp : ISerializable, IXmlSerializable, IFor
     /// <param name="s">
     /// A string containing a timestamp to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -112,17 +112,17 @@ public readonly partial struct Timestamp : ISerializable, IXmlSerializable, IFor
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Timestamp result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Timestamp result)
     {
         result = default;
         if (s is not { Length: > 0 }) { return false; }
         if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase) &&
-            ulong.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out var val))
+            ulong.TryParse(s.Substring(2), NumberStyles.HexNumber, provider, out var val))
         {
             result = Create(val);
             return true;
         }
-        else if (ulong.TryParse(s, NumberStyles.Number, formatProvider, out val))
+        else if (ulong.TryParse(s, NumberStyles.Number, provider, out val))
         {
             result = new Timestamp(val);
             return true;

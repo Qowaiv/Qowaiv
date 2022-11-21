@@ -82,13 +82,13 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted))
         {
             return formatted;
         }
@@ -106,7 +106,7 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
     /// <param name="s">
     /// A string containing a BIC to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -115,7 +115,7 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out BusinessIdentifierCode result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out BusinessIdentifierCode result)
     {
         result = default;
         var str = s.Unify();
@@ -123,7 +123,7 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;

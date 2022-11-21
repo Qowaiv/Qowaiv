@@ -62,24 +62,24 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
         };
 
     /// <summary>Gets the full name of the month.</summary>
-    public string FullName => GetFullName(formatProvider: null);
+    public string FullName => GetFullName(provider: null);
 
     /// <summary>Gets the short name of the month.</summary>
-    public string ShortName => GetShortName(formatProvider: null);
+    public string ShortName => GetShortName(provider: null);
 
     /// <summary>Gets the full name of the month.</summary>
     [Pure]
-    public string GetFullName(IFormatProvider? formatProvider)
+    public string GetFullName(IFormatProvider? provider)
         => IsEmptyOrUnknown()
         ? ToDefaultString()
-        : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetMonthName(m_Value);
+        : (provider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetMonthName(m_Value);
 
     /// <summary>Gets the short name of the month.</summary>
     [Pure]
-    public string GetShortName(IFormatProvider? formatProvider)
+    public string GetShortName(IFormatProvider? provider)
         => IsEmptyOrUnknown()
         ? ToDefaultString()
-        : (formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
+        : (provider as CultureInfo ?? CultureInfo.CurrentCulture).DateTimeFormat.GetAbbreviatedMonthName(m_Value);
 
     /// <summary>Returns the number of days for the month.</summary>
     /// <param name="year">
@@ -129,7 +129,7 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
@@ -141,10 +141,10 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
     /// m: as number without leading zero.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider)
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("f"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("f"), provider, FormatTokens);
 
     /// <summary>Gets an XML string representation of the month.</summary>
     [Pure]
@@ -189,7 +189,7 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
     /// <param name="s">
     /// A string containing a month to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -198,7 +198,7 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Month result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Month result)
     {
         result = default;
         var str = s.Unify();
@@ -206,17 +206,17 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;
         }
-        else if (byte.TryParse(s, NumberStyles.None, formatProvider, out var n) && IsValid(n))
+        else if (byte.TryParse(s, NumberStyles.None, provider, out var n) && IsValid(n))
         {
             result = new Month(n);
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out byte m))
+        else if (ParseValues.TryGetValue(provider, str, out byte m))
         {
             result = new Month(m);
             return true;

@@ -27,24 +27,24 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// <param name="str">
     /// The input string to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The optional format provider.
     /// </param>
     [Pure]
-    public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Unknown.IsUnknown(str, formatProvider as CultureInfo);
+    public virtual bool IsUnknown(string str, IFormatProvider? provider) => Unknown.IsUnknown(str, provider as CultureInfo);
 
     /// <summary>Validates if the input <see cref="string"/> is valid given its format provider.</summary>
     /// <param name="str">
     /// The input string to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The optional format provider.
     /// </param>
     /// <param name="validated">
     /// The validated (and potentially transformed) result.
     /// </param>
     [Pure]
-    public virtual bool IsValid(string str, IFormatProvider? formatProvider, out string validated)
+    public virtual bool IsValid(string str, IFormatProvider? provider, out string validated)
     {
         validated = str;
         return true;
@@ -62,11 +62,11 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// <param name="str">
     /// The input string to validate.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The optional format provider.
     /// </param>
     [Pure]
-    public virtual string NormalizeInput(string? str, IFormatProvider? formatProvider)
+    public virtual string NormalizeInput(string? str, IFormatProvider? provider)
         => str?.Trim() ?? string.Empty;
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the 
@@ -75,11 +75,11 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// <param name="format">
     /// The format that this describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public virtual string FormatUnknown(string? format, IFormatProvider? formatProvider) => "?";
+    public virtual string FormatUnknown(string? format, IFormatProvider? provider) => "?";
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the Single Value Object.</summary>
     /// <param name="str">
@@ -88,14 +88,14 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// <param name="format">
     /// The format that this describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <remarks>
     /// Not called for empty and unknown.
     /// </remarks>
     [Pure]
-    public virtual string Format(string str, string? format, IFormatProvider? formatProvider) => str;
+    public virtual string Format(string str, string? format, IFormatProvider? provider) => str;
 
     /// <summary>Serializes the Single Value Object to a JSON string.</summary>
     /// <param name="str">
@@ -123,15 +123,15 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
 
     /// <summary>Creates a <see cref="FormatException"/> using the <see cref="InvalidFormatMessage(string?, IFormatProvider?)"/>.</summary>
     [Pure]
-    public virtual FormatException InvalidFormat(string? str, IFormatProvider? formatProvider)
-        => new(InvalidFormatMessage(str, formatProvider));
+    public virtual FormatException InvalidFormat(string? str, IFormatProvider? provider)
+        => new(InvalidFormatMessage(str, provider));
 
     /// <summary>Composes an invalid format message.</summary>
     /// <remarks>
     /// A 'For'-prefix will be stripped from the name in the message.
     /// </remarks>
     [Pure]
-    public virtual string InvalidFormatMessage(string? str, IFormatProvider? formatProvider)
+    public virtual string InvalidFormatMessage(string? str, IFormatProvider? provider)
         => GetType().Name.StartsWith("For")
         ? $"Not a valid {GetType().Name.Substring(3)}"
         : $"Not a valid {GetType().Name}";
@@ -164,7 +164,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// <param name="str">
     /// A string containing the Single Value Object to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="validated">
@@ -174,22 +174,22 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    internal bool TryParse(string? str, IFormatProvider? formatProvider, out string? validated)
+    internal bool TryParse(string? str, IFormatProvider? provider, out string? validated)
     {
-        var normalized = NormalizeInput(str, formatProvider);
+        var normalized = NormalizeInput(str, provider);
         if (string.IsNullOrWhiteSpace(normalized))
         {
             validated = null;
             return true;
         }
-        else if (IsUnknown(normalized, formatProvider))
+        else if (IsUnknown(normalized, provider))
         {
             validated = unknown;
             return true;
         }
         else if (WithinSize(normalized)
             && IsMatch(normalized)
-            && IsValid(normalized, formatProvider, out validated))
+            && IsValid(normalized, provider, out validated))
         {
             return true;
         }
@@ -215,13 +215,13 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// <param name="format">
     /// The format that this describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    internal string ToString(string? str, string? format, IFormatProvider? formatProvider)
+    internal string ToString(string? str, string? format, IFormatProvider? provider)
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, str!, formatProvider, out string formatted))
+        if (StringFormatter.TryApplyCustomFormatter(format, str!, provider, out string formatted))
         {
             return formatted;
         }
@@ -231,8 +231,8 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
         }
         else if (str == unknown)
         {
-            return FormatUnknown(format, formatProvider);
+            return FormatUnknown(format, provider);
         }
-        else return Format(str, format, formatProvider);
+        else return Format(str, format, provider);
     }
 }

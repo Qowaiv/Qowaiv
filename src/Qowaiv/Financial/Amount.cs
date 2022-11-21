@@ -397,14 +397,14 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) 
-        => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+    public string ToString(string? format, IFormatProvider? provider) 
+        => StringFormatter.TryApplyCustomFormatter(format, this, provider, out string formatted)
         ? formatted
-        : m_Value.ToString(format, Money.GetNumberFormatInfo(formatProvider));
+        : m_Value.ToString(format, Money.GetNumberFormatInfo(provider));
 
     /// <summary>Gets an XML string representation of the amount.</summary>
     [Pure]
@@ -465,7 +465,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     /// <param name="s">
     /// A string containing an Amount to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -474,10 +474,10 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Amount result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Amount result)
     {
         result = default;
-        if (Money.TryParse(s, formatProvider, out Money money))
+        if (Money.TryParse(s, provider, out Money money))
         {
             result = (Amount)(decimal)money;
             return true;

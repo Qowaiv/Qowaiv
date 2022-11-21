@@ -256,7 +256,7 @@ namespace Qowaiv.UnitTests.Formatting
             Action add = () => collection.Add(typeof(Type), "");
             add.Should()
                 .Throw<ArgumentException>()
-                .WithMessage("The argument must implement System.IFormattable. (Parameter 'type')");
+                .WithMessage("The argument must implement System.IFormattable.*");
         }
 
         [Test]
@@ -269,7 +269,7 @@ namespace Qowaiv.UnitTests.Formatting
             Action add = () => collection.Add(typeof(int), "Update");
             add.Should()
                 .Throw<ArgumentException>()
-                .WithMessage("An item with the same key has already been added. Key: System.Int32");
+                .WithMessage("An item with the same key has already been added.*");
         }
 
         [Test]

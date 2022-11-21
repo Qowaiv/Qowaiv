@@ -1,5 +1,39 @@
 ﻿namespace Identifiers.Id_for_Int32_specs;
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.Int32Id.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_Int32Id_as_object()
+    {
+        object obj = Svo.Int32Id;
+        Svo.Int32Id.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Int32Id_only()
+        => Assert.Throws<ArgumentException>(() => Svo.Int32Id.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            default,
+            Int32Id.Create(1),
+            Int32Id.Create(2),
+            Int32Id.Create(3),
+            Int32Id.Create(4),
+            Int32Id.Create(17),
+        };
+
+        var list = new List<Int32Id> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+}
 public class Supports_type_conversion
 {
     [Test]

@@ -1,5 +1,56 @@
 ﻿namespace WeekDate_specs;
 
+public class Can_not_be_created
+{
+    [TestCase(0)]
+    [TestCase(10000)]
+    public void for_years_below_1_or_above_9999(int year)
+    {
+        Func<WeekDate> create = () => new WeekDate(year, 10, 4);
+        create.Should()
+            .Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Year should be in range [1,9999].*");
+    }
+
+    [TestCase(0)]
+    [TestCase(54)]
+    public void for_weeks_below_1_or_above_53(int week)
+    {
+        Func<WeekDate> create = () => new WeekDate(1980, week, 4);
+        create.Should()
+            .Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Week should be in range [1,53].*");
+    }
+
+    [TestCase(0)]
+    [TestCase(8)]
+    public void for_days_below_1_or_above_7(int day)
+    {
+        Func<WeekDate> create = () => new WeekDate(1980, 10, day);
+        create.Should()
+            .Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Day should be in range [1,7].*");
+    }
+
+    [Test]
+    public void for_date_above_week_date_max()
+    {
+        Func<WeekDate> create = () => new WeekDate(9999, 52, 6);
+        create.Should()
+            .Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
+    }
+
+    [Test]
+    public void for_date_above_week_date_max_with_invalid_week_nuber()
+    {
+        Func<WeekDate> create = () => new WeekDate(9999, 53, 6);
+        create.Should()
+            .Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]

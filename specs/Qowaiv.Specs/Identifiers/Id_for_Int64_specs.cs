@@ -1,5 +1,39 @@
 ﻿namespace Identifiers.Id_for_Int64_specs;
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.Int64Id.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_Int64Id_as_object()
+    {
+        object obj = Svo.Int64Id;
+        Svo.Int64Id.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Int64Id_only()
+        => Assert.Throws<ArgumentException>(() => Svo.Int64Id.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            Int64Id.Empty,
+            Int64Id.Create(1L),
+            Int64Id.Create(3L),
+            Int64Id.Create(7L),
+            Int64Id.Create(11L),
+            Int64Id.Create(17L),
+        };
+
+        var list = new List<Int64Id> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+}
 public class Supports_JSON_serialization
 {
 #if NET6_0_OR_GREATER

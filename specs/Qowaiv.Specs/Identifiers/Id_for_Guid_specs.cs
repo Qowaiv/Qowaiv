@@ -33,7 +33,6 @@ public class Is_comparable
         list.Sort();
         list.Should().BeEquivalentTo(sorted);
     }
-
 }
 
 public class Supports_type_conversion

@@ -139,6 +139,65 @@ public class Can_not_be_created
     }
 }
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.Fraction.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_Fraction_as_object()
+    {
+        object obj = Svo.Fraction;
+        Svo.Fraction.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Fraction_only()
+        => Assert.Throws<ArgumentException>(() => Svo.Fraction.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            (-1).DividedBy(12),
+            Fraction.Zero,
+            1.DividedBy(42),
+            1.DividedBy(17),
+            1.DividedBy(11),
+            201.DividedBy(42),
+        };
+
+        var list = new List<Fraction> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        var smaller = 1.DividedBy(17);
+        var bigger = 2.DividedBy(3);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        var left = 1.DividedBy(17);
+        var right = 1.DividedBy(17);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
+}
+
 public class Has_humanizer_creators
 {
     [Test]

@@ -76,8 +76,23 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
 
     /// <inheritdoc />
     [Pure]
+#if NET5_0_OR_GREATER
     public int CompareTo(Svo<TSvoBehavior> other) => behavior.Compare(m_Value, other.m_Value);
-
+#else
+    public int CompareTo(Svo<TSvoBehavior> other)
+    {
+        // Comparing with char.max value does not work as accpected in older versions of .NET
+        if (IsUnknown() || other.IsUnknown())
+        {
+            if (IsUnknown())
+            {
+                return other.IsUnknown() ? 0 : +1;
+            }
+            else return -1;
+        }
+        else return behavior.Compare(m_Value, other.m_Value);
+    }
+#endif
     /// <inheritdoc />
     [Pure]
     public override bool Equals(object? obj) => obj is Svo<TSvoBehavior> other && Equals(other);

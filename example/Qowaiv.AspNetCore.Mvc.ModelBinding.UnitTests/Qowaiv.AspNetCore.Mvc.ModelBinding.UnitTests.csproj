@@ -3,11 +3,11 @@
   <Import Project="..\..\props\nopackage.props" />
   
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.*" />
     <PackageReference Include="nunit" Version="3.*" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.*">
       <PrivateAssets>all</PrivateAssets>

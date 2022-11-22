@@ -138,11 +138,7 @@ public class Is_equal_by_value
     }
 
     [TestCase("0%", 0)]
-#if NET5_0_OR_GREATER
     [TestCase("17.51%", 665367300)]
-#else
-    [TestCase("17.51%", 1521030558)]
-#endif
     public void hash_code_is_value_based(Percentage svo, int hash)
     {
         using (Hash.WithoutRandomizer())

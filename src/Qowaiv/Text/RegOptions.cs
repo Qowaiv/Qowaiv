@@ -8,12 +8,11 @@ internal static class RegOptions
     /// the match time-out is set 1 ms.
     /// </summary>
 #if DEBUG
-    public static readonly TimeSpan Timeout = TimeSpan.FromMilliseconds(10);
+    public static readonly TimeSpan Timeout = TimeSpan.FromMilliseconds(100);
 #else
-    public static readonly TimeSpan Timeout = TimeSpan.FromMilliseconds(1);
+    public static readonly TimeSpan Timeout = TimeSpan.FromMilliseconds(10);
 #endif
-
-    public static readonly TimeSpan Replacement = TimeSpan.FromMilliseconds(50);
+    public static readonly TimeSpan Replacement = TimeSpan.FromMilliseconds(100);
 
 #if NET7_0_OR_GREATER
     public const RegexOptions Default = RegexOptions.Compiled | RegexOptions.NonBacktracking;

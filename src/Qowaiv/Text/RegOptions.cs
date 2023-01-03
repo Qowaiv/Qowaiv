@@ -17,9 +17,9 @@ internal static class RegOptions
 #if NET7_0_OR_GREATER
     public const RegexOptions Default = RegexOptions.Compiled | RegexOptions.NonBacktracking;
 #else
-    public const RegexOptions Default = RegexOptions.Compiled;
+    public const RegexOptions Default = RegexOptions.Compiled | RegexOptions.CultureInvariant;
 #endif
     public const RegexOptions IgnoreCase = Default | RegexOptions.IgnoreCase;
     public const RegexOptions RightToLeft = RegexOptions.Compiled | RegexOptions.RightToLeft;
-    public const RegexOptions WithBackTracking = RegexOptions.Compiled | RegexOptions.IgnoreCase;
+    public const RegexOptions WithBackTracking = RegexOptions.CultureInvariant | RegexOptions.IgnoreCase;
 }

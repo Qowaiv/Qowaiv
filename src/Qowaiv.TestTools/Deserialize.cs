@@ -26,7 +26,7 @@ public static class Deserialize
         var serializer = new XmlSerializer(typeof(SerializationWrapper<T>));
         try
         {
-            return Not.Null((SerializationWrapper<T>?)serializer.Deserialize(stream)).Value;
+            return ((SerializationWrapper<T>?)serializer.Deserialize(stream))!.Value;
         }
         catch (Exception x)
         {

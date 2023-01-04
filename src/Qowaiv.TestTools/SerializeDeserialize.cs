@@ -24,7 +24,7 @@ public static class SerializeDeserialize
         var formatter = new BinaryFormatter();
         formatter.Serialize(buffer, instance ?? throw new ArgumentNullException(nameof(instance)));
         buffer.Position = 0;
-        return Not.Null((T?)formatter.Deserialize(buffer));
+        return (T)formatter.Deserialize(buffer)!;
     }
 
     /// <summary>Serializes and deserializes an instance using a <see cref="DataContractSerializer"/>.</summary>
@@ -42,7 +42,7 @@ public static class SerializeDeserialize
         var serializer = new DataContractSerializer(typeof(T));
         serializer.WriteObject(stream, instance);
         stream.Position = 0;
-        return Not.Null((T?)serializer.ReadObject(stream));
+        return (T)serializer.ReadObject(stream)!;
     }
 
     /// <summary>Serializes and deserializes an instance using an <see cref="XmlSerializer"/>.</summary>
@@ -60,6 +60,6 @@ public static class SerializeDeserialize
         var serializer = new XmlSerializer(typeof(T));
         serializer.Serialize(writer, instance);
         stream.Position = 0;
-        return Not.Null((T?)serializer.Deserialize(stream));
+        return (T)serializer.Deserialize(stream)!;
     }
 }

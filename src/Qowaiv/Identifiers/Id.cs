@@ -325,7 +325,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     public static Id<TIdentifier> Create(object obj)
         => TryCreate(obj, out var id)
         ? id
-        : throw Exceptions.InvalidCast(Not.Null(obj?.GetType()), typeof(Id<TIdentifier>));
+        : throw Exceptions.InvalidCast(obj?.GetType(), typeof(Id<TIdentifier>));
 
     /// <summary>Tries to create an identifier from an <see cref="object"/>.</summary>
     /// <param name="obj">

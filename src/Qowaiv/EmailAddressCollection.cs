@@ -333,7 +333,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// s is not in the correct format.
     /// </exception>
     [Pure]
-    public static EmailAddressCollection Parse(string? s, IFormatProvider formatProvider)
+    public static EmailAddressCollection Parse(string? s, IFormatProvider? formatProvider)
     {
         if (TryParse(s, formatProvider, out EmailAddressCollection val))
         {

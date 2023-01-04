@@ -47,12 +47,11 @@ public static class QowaivTypeExtensions
             do
             {
                 array.Append('[').Append(',', type.GetArrayRank() - 1).Append(']');
-                type = Not.Null(type.GetElementType());
+                type = type.GetElementType()!;
             }
             while (type.IsArray);
 
-            return sb.AppendType(type, withNamespace)
-                .Append(array);
+            return sb.AppendType(type, withNamespace).Append(array);
         }
         else if (type.IsGenericTypeDefinition)
         {
@@ -86,7 +85,7 @@ public static class QowaivTypeExtensions
     {
         if (type.IsNested)
         {
-            sb.AppendType(Not.Null(type.DeclaringType), withNamespace).Append('.');
+            sb.AppendType(type.DeclaringType!, withNamespace).Append('.');
         }
         else if (withNamespace && !string.IsNullOrEmpty(type.Namespace))
         {

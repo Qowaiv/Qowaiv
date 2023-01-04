@@ -108,7 +108,7 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     public static IEnumerable<OpenApiDataTypeAttribute> From(IEnumerable<Type> types)
         => Guard.NotNull(types, nameof(types))
         .Where(type => type is not null && type.GetCustomAttributes<OpenApiDataTypeAttribute>().Any())
-        .Select(type => Not.Null(type.GetCustomAttribute<OpenApiDataTypeAttribute>()).WithDataType(type));
+        .Select(type => type.GetCustomAttribute<OpenApiDataTypeAttribute>()!.WithDataType(type));
 
     [FluentSyntax]
     private OpenApiDataTypeAttribute WithDataType(Type type)

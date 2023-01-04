@@ -23,7 +23,7 @@ public static class QowaivDebuggerDisplayAssertions
             .ForCondition(prop is not null)
             .FailWith($"'{assertions.Subject?.GetType()}' has no DebuggerDisplay defined"))
         {
-            return Not.Null(prop).GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
+            return prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
         }
         else return new AndConstraint<ObjectAssertions>(assertions);
     }
@@ -43,7 +43,7 @@ public static class QowaivDebuggerDisplayAssertions
             .ForCondition(prop is not null)
             .FailWith($"'{assertions.Subject?.GetType()}' has no DebuggerDisplay defined"))
         {
-           Not.Null(prop).GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
+           prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
         }
         return new AndConstraint<ComparableTypeAssertions<T>>(assertions);
     }

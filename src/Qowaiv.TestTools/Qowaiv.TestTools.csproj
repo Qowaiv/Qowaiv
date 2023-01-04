@@ -20,7 +20,6 @@ v6.0.0
 
   <ItemGroup>
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
-    <Compile Include="..\..\shared\Not.cs" Link="Diagnostics\Not.cs" />
   </ItemGroup>
   
   <ItemGroup>

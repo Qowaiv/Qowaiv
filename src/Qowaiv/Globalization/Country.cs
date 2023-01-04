@@ -316,15 +316,13 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     }
 
     /// <summary>Gets a collection of all country info's.</summary>
-    public static readonly ReadOnlyCollection<Country> All = new(
-        Not.Null(ResourceManager
-            .GetString("All"))
-            .Split(';')
-            .Select(str => new Country(str))
-            .ToList());
+    public static readonly ReadOnlyCollection<Country> All = new(ResourceManager
+        .GetString("All")!
+        .Split(';')
+        .Select(str => new Country(str))
+        .ToList());
 
     #endregion
-
 
     private static readonly CountryValues ParseValues = new();
 

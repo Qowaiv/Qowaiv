@@ -31,7 +31,7 @@ public sealed class IdTypeConverter : TypeConverter
             m_Value = type.GetField(nameof(m_Value), NonPublicInstance)!;
             var ctors = type.GetConstructors(NonPublicInstance);
             Ctor = ctors.First(ctor => ctor.GetParameters().Length == 1);
-            var behavior = (IIdentifierBehavior?)Activator.CreateInstance(type.GetGenericArguments()[0])!;
+            var behavior = (IIdentifierBehavior)Activator.CreateInstance(type.GetGenericArguments()[0])!;
             BaseType = behavior.BaseType;
             BaseConverter = behavior.Converter;
         }

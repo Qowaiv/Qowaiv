@@ -1,13 +1,13 @@
 ﻿namespace Debug_SVO_specs;
 
-public class All : SvoTypeTest
+public class All : SingleValueObjectSpecs
 {
     [TestCaseSource(nameof(AllSvos))]
     public void are_decorated_with_DebuggerDisplay_attribute(Type svoType)
         => svoType.Should().BeDecoratedWith<DebuggerDisplayAttribute>();
 }
 
-public class Default_value : SvoTypeTest
+public class Default_value : SingleValueObjectSpecs
 {
     [TestCaseSource(nameof(SvosWithEmpty))]
     public void displays_empty(Type svoType)
@@ -39,7 +39,7 @@ public class Default_value : SvoTypeTest
     }
 }
 
-public class Unknown_value : SvoTypeTest
+public class Unknown_value : SingleValueObjectSpecs
 {
     public static IEnumerable<Type> SvosWithDefaultUnknown
         => SvosWithUnknown.Except(new[] { typeof(Sex), typeof(InternetMediaType) });

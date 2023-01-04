@@ -1,8 +1,8 @@
 ﻿namespace Qowaiv.TestTools
 {
-    public class SvoTypeTest
+    public class SingleValueObjectSpecs
     {
-        protected SvoTypeTest() { }
+        protected SingleValueObjectSpecs() { }
 
         public static IEnumerable<Type> AllSvos
             => AppDomain.CurrentDomain.GetAssemblies()
@@ -11,6 +11,9 @@
             .Where(type 
                 => type.GetCustomAttributes<SingleValueObjectAttribute>().Any() 
                 && !type.GetCustomAttributes<ObsoleteAttribute>().Any());
+
+        public static IEnumerable<Type> AllSvosExceptGeneric
+            => AllSvos.Where(svo => !svo.IsGenericType);
 
         public static IEnumerable<Type> SvosWithEmpty 
             => AllSvos.Where(svo

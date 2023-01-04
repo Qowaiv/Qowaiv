@@ -20,6 +20,6 @@ internal static class RegOptions
     public const RegexOptions Default = RegexOptions.Compiled | RegexOptions.CultureInvariant;
 #endif
     public const RegexOptions IgnoreCase = Default | RegexOptions.IgnoreCase;
-    public const RegexOptions RightToLeft = RegexOptions.Compiled | RegexOptions.RightToLeft;
+    public const RegexOptions RightToLeft = RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.RightToLeft;
     public const RegexOptions WithBackTracking = RegexOptions.CultureInvariant | RegexOptions.IgnoreCase;
 }

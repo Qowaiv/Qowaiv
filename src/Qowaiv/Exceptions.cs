@@ -9,12 +9,12 @@ internal static class Exceptions
 
     /// <summary>Creates an <see cref="InvalidCastException"/>.</summary>
     [Pure]
-    public static InvalidCastException InvalidCast(Type from, Type to)
+    public static InvalidCastException InvalidCast(Type? from, Type to)
     {
         return new InvalidCastException(string.Format(
             CultureInfo.CurrentCulture,
             QowaivMessages.InvalidCastException_FromTo,
-            from.ToCSharpString(true),
+            from?.ToCSharpString(true) ?? "{null}",
             to.ToCSharpString(true)));
     }
 }

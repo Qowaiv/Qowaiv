@@ -39,8 +39,8 @@ public static class Unknown
                 {
                     if (!Strings.TryGetValue(c, out values))
                     {
-                        values = Not.Null(ResourceManager
-                            .GetString("Values", c))
+                        values = ResourceManager
+                            .GetString("Values", c)!
                             .Split(';')
                             .Select(v => v.ToUpper(c))
                             .ToArray();

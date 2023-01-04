@@ -25,10 +25,10 @@ public sealed class SvoTypeConverter : TypeConverter
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Svo<>) && type.GetGenericArguments().Length == 1)
         {
-            m_Value = Not.Null(type.GetField(nameof(m_Value), NonPublicInstance));
+            m_Value = type.GetField(nameof(m_Value), NonPublicInstance)!;
             var ctors = type.GetConstructors(NonPublicInstance);
             Ctor = ctors.First(ctor => ctor.GetParameters().Length == 1);
-            Behavior = Not.Null((SvoBehavior?)Activator.CreateInstance(type.GetGenericArguments()[0]));
+            Behavior = (SvoBehavior)Activator.CreateInstance(type.GetGenericArguments()[0])!;
         }
         else throw new ArgumentException("Incompatible type", nameof(type));
     }

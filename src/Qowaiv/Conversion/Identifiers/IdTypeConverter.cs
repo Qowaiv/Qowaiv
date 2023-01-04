@@ -28,10 +28,10 @@ public sealed class IdTypeConverter : TypeConverter
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Id<>) && type.GetGenericArguments().Length == 1)
         {
-            m_Value = Not.Null(type.GetField(nameof(m_Value), NonPublicInstance));
+            m_Value = type.GetField(nameof(m_Value), NonPublicInstance)!;
             var ctors = type.GetConstructors(NonPublicInstance);
             Ctor = ctors.First(ctor => ctor.GetParameters().Length == 1);
-            var behavior = Not.Null((IIdentifierBehavior?)Activator.CreateInstance(type.GetGenericArguments()[0]));
+            var behavior = (IIdentifierBehavior?)Activator.CreateInstance(type.GetGenericArguments()[0])!;
             BaseType = behavior.BaseType;
             BaseConverter = behavior.Converter;
         }

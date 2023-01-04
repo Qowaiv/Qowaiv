@@ -2,7 +2,7 @@
 
 public class ToString_with_format_and_provider
 {
-    internal static IEnumerable<IFormattable> Svos => Svo.All().OfType<IFormattable>();
+    private static IEnumerable<IFormattable> Svos => Svo.All().OfType<IFormattable>();
 
     [TestCaseSource(nameof(Svos))]
     public void null_and_string_empty_are_equal(IFormattable svo)

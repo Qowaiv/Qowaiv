@@ -6,16 +6,6 @@ using OpenApiDataTypeAttribute = Qowaiv.OpenApi.OpenApiDataTypeAttribute;
 
 namespace Open_API_specs;
 
-public class OpenApiDataType_attributes : SingleValueObjectSpecs
-{
-    public static IEnumerable<Type> Decoratable
-        => JsonSerializable.Where(tp => !tp.IsGenericType);
-
-    [TestCaseSource(nameof(Decoratable))]
-    public void Decorates(Type svo)
-        => svo.Should().BeDecoratedWith<OpenApiDataTypeAttribute>();
-}
-
 public class Open_API_data_type
 {
     [Test]

@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace SVO_contract_specs;
+﻿namespace SVO_contract_specs;
 
 public class Implements : SingleValueObjectSpecs
 {
@@ -24,7 +22,7 @@ public class Implements : SingleValueObjectSpecs
 
 #if NET7_0_OR_GREATER
     [TestCaseSource(nameof(AllSvosExceptGeneric))]
-    public void IEqualityOperators(Type type) => type.Should().Implement(typeof(IEqualityOperators<,,>).MakeGenericType(type, type, typeof(bool)));
+    public void IEqualityOperators(Type type) => type.Should().Implement(typeof(System.Numerics.IEqualityOperators<,,>).MakeGenericType(type, type, typeof(bool)));
 
     [TestCaseSource(nameof(AllSvosExceptGeneric))]
     public void IParsable(Type type) => type.Should().Implement(typeof(IParsable<>).MakeGenericType(type));

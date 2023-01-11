@@ -97,8 +97,6 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <summary>The inner value of the date.</summary>
     private readonly DateTime m_Value;
 
-    #region Methods
-
     /// <summary>Adds one day to the date.</summary>
     [Pure]
     internal Date Increment() => AddDays(+1);
@@ -370,7 +368,19 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     [Pure]
     public Date AddMilliseconds(double value) => new(m_Value.AddMilliseconds(value));
 
-    #endregion
+    /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
+    /// <param name="month">
+    /// The <see cref="Qowaiv.Month"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool InMonth(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
+
+    /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
+    /// <param name="year">
+    /// The <see cref="Qowaiv.Year"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool InYear(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
 
     /// <summary>Deserializes the date from a JSON number.</summary>
     /// <param name="json">

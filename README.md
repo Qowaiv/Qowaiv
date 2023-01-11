@@ -150,6 +150,9 @@ feb.ToString("f", new CultureInfo("nl-NL")); // februari
 feb.ToString("s"); // Feb
 feb.ToString("M"); // 02
 feb.ToString("m"); // 2
+
+// Querying on date (time) models.
+new DateTime(2014, 02, 14).InMonth(feb); // true
 ```
 
 ### Month span
@@ -236,10 +239,13 @@ Year year = 2017.CE(); // Extention, Common Era
 bool isLeap = year.IsLeapYear;
 
 // behavior similar to double.NaN
-Assert.IsFalse(Year.Empty < (Year)2000);
-Assert.IsFalse(Year.Empty > (Year)2000);
-Assert.IsFalse(Year.Unknown < (Year)2000);
-Assert.IsFalse(Year.Unknown > (Year)2000);
+(Year.Empty < 2000.CE()).Should().BeFalse();
+(Year.Empty > 2000.CE()).Should().BeFalse();
+(Year.Unknown < 2000.CE()).Should().BeFalse();
+(Year.Unknown > 2000.CE()).Should().BeFalse();
+
+// Querying on date (time) models.
+new DateTime(2017, 02, 14).InYear(year); // true
 ```
 
 ### Yes-no

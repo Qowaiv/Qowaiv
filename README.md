@@ -64,7 +64,7 @@ var casted = (Date)new DateTime(2017, 06, 11, 06, 15);
 ```
 
 As, since .NET 6.0, `System.DateOnly` is available, `Qowaiv.Date` can be casted to (and from)
-this type, if (and only if), the .NET 6.0 version of the package is usaged.
+this type, if (and only if), the .NET 6.0 version of the package is used.
 
 ### Date span
 Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
@@ -144,7 +144,7 @@ Represents a month in the range [1-12].
 ``` C#
 Month feb = Month.Parse("February");
 Month may = Month.May;
-Month dec = 12;
+Month dec = (Month)12;
 
 feb.ToString("f", new CultureInfo("nl-NL")); // februari
 feb.ToString("s"); // Feb
@@ -232,7 +232,7 @@ Represents a week based date.
 Represents a year in the range [1-9999].
 
 ``` C#
-Year year = 2017; // implicit;
+Year year = 2017.CE(); // Extention, Common Era
 bool isLeap = year.IsLeapYear;
 
 // behavior similar to double.NaN
@@ -357,7 +357,7 @@ Fractions can be created in multiple ways:
 ``` C#
 Fraction fluent = 4.DividedBy(13); // Preferred way
 
-Fraction ctor = new Fraction(4, 13));
+Fraction ctor = new(4, 13);
 
 Fraction parsed = Fraction.Parse("4/13");
 Fraction parsed = Fraction.Parse("4½"); // single fraction character
@@ -392,15 +392,16 @@ var withWhole = 17.DividedBy(5).ToString("[0]0/0"); // 3 2/5
 
 To specify fraction bar of choice, just define that one in the format:
 ##### Fraction bars
-name           | c | code 
----------------|---|------
-slash          | / | 005C
-colon          | : | 003A
-division sign  | ÷ | 00F7
-fraction slash | ⁄ | 2044
-division slash | ∕ | 2215
-short slash    | ̷  | 0337
-long slash     | ̸  | 0338
+name           |   c    | code 
+---------------|:------:|------
+slash          |   /    | 005C
+colon          |   :    | 003A
+division sign  |   ÷    | 00F7
+fraction slash |   ⁄    | 2044
+division slash |   ∕    | 2215
+short slash    | &0337; | 0337
+long slash     | &0338; | 0338
+
 ``` C#
 var customBar = 3.DividedBy(4).ToString("0/÷0"); // 3÷4
 ```
@@ -574,8 +575,8 @@ Represents an Elo (rating), a method for calculating the relative skill levels o
 players in competitor-versus-competitor games.
 
 ``` C#
-Elo p0 = 1600;
-Elo p1 = 1500;
+var p0 = 1600.Elo();
+var p1 = 1500.Elo();
 var z = Elo.GetZScore(p0, p1); // 0.64 
 ```
 

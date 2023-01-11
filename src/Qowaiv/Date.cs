@@ -373,14 +373,14 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// The <see cref="Qowaiv.Month"/> the date should be in.
     /// </param>
     [Pure]
-    public bool InMonth(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
+    public bool In(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
 
     /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
     /// <param name="year">
     /// The <see cref="Qowaiv.Year"/> the date should be in.
     /// </param>
     [Pure]
-    public bool InYear(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
+    public bool In(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
 
     /// <summary>Deserializes the date from a JSON number.</summary>
     /// <param name="json">

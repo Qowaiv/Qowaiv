@@ -58,38 +58,38 @@ public class Can_be_related_to
 {
     [Test]
     public void matching_month()
-        => new Date(2017, 06, 11).InMonth(Month.June).Should().BeTrue();
+        => new Date(2017, 06, 11).In(Month.June).Should().BeTrue();
 
     [Test]
     public void none_matching_month()
-       => new Date(2017, 06, 11).InMonth(Month.February).Should().BeFalse();
+       => new Date(2017, 06, 11).In(Month.February).Should().BeFalse();
 
     [Test]
     public void matching_year()
-        => new Date(2017, 06, 11).InYear(2017.CE()).Should().BeTrue();
+        => new Date(2017, 06, 11).In(2017.CE()).Should().BeTrue();
 
     [Test]
     public void none_matching_year()
-       => new Date(2017, 06, 11).InYear(2018.CE()).Should().BeFalse();
+       => new Date(2017, 06, 11).In(2018.CE()).Should().BeFalse();
 }
 
 public class Can_not_be_related_to
 {
     [Test]
     public void month_empty()
-        => new Date(2017, 06, 11).InMonth(Month.Empty).Should().BeFalse();
+        => new Date(2017, 06, 11).In(Month.Empty).Should().BeFalse();
 
     [Test]
     public void month_unknown()
-       => new Date(2017, 06, 11).InMonth(Month.Unknown).Should().BeFalse();
+       => new Date(2017, 06, 11).In(Month.Unknown).Should().BeFalse();
 
     [Test]
     public void year_empty()
-        => new Date(2017, 06, 11).InYear(Year.Empty).Should().BeFalse();
+        => new Date(2017, 06, 11).In(Year.Empty).Should().BeFalse();
 
     [Test]
     public void year_unknown()
-       => new Date(2017, 06, 11).InYear(Year.Unknown).Should().BeFalse();
+       => new Date(2017, 06, 11).In(Year.Unknown).Should().BeFalse();
 }
 
 public class Supports_type_conversion

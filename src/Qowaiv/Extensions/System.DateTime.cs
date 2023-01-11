@@ -79,7 +79,7 @@ public static class QowaivDateTimeExtensions
     /// The <see cref="Month"/> the date should be in.
     /// </param>
     [Pure]
-    public static bool InMonth(this DateTime d, Month month) => !month.IsEmptyOrUnknown() && d.Month == (int)month;
+    public static bool In(this DateTime d, Month month) => !month.IsEmptyOrUnknown() && d.Month == (int)month;
 
     /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
     /// <param name="d">
@@ -89,5 +89,5 @@ public static class QowaivDateTimeExtensions
     /// The <see cref="Year"/> the date should be in.
     /// </param>
     [Pure]
-    public static bool InYear(this DateTime d, Year year) => !year.IsEmptyOrUnknown() && d.Year == (int)year;
+    public static bool In(this DateTime d, Year year) => !year.IsEmptyOrUnknown() && d.Year == (int)year;
 }

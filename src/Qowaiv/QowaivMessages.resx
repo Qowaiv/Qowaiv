@@ -300,4 +300,7 @@
   <data name="FormatExceptionCasRegistryNumber" xml:space="preserve">
     <value>Not a valid CAS Registry Number</value>
   </data>
+  <data name="ArgumentOutOfRangeException_AddDateSpan" xml:space="preserve">
+    <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
+  </data>
 </root>

@@ -24,6 +24,22 @@ public class Will_be_dropped
         Percentage casted = 0.1751m;
         casted.Should().Be(Svo.Percentage);
     }
+
+    [TestCase("1999-01-30", "1999-02-28", 1, +0, false)]
+    [TestCase("2000-01-30", "2000-02-29", 1, +0, false)]
+    [TestCase("1999-01-30", "1999-02-27", 1, -1, false)]
+    [TestCase("1999-01-30", "1999-02-28", 1, -1, true)]
+    public void DateTime_Add_DateSpan(DateTime dateTime, DateTime expected, int months, int days, bool daysFirst)
+    {
+        var span = new DateSpan(months, days);
+
+        var date = (Date)dateTime;
+        var local = (LocalDateTime)dateTime;
+
+        Assert.AreEqual(expected, dateTime.Add(span, daysFirst));
+        Assert.AreEqual((Date)expected, date.Add(span, daysFirst));
+        Assert.AreEqual((LocalDateTime)expected, local.Add(span, daysFirst));
+    }
 }
 
 [Obsolete("Will become private when the next major version is released.")]

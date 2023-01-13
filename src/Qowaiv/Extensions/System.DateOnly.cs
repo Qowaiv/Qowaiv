@@ -1,9 +1,11 @@
-﻿using Qowaiv;
+﻿#if NET6_0_OR_GREATER
+
+using Qowaiv;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="DateTime"/>.</summary>
-public static class QowaivDateTimeExtensions
+/// <summary>Extensions on <see cref="DateOnly"/>.</summary>
+public static class QowaivDateOnlyExtensions
 {
     /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
@@ -19,38 +21,11 @@ public static class QowaivDateTimeExtensions
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
-    /// than <see cref="DateTime.MaxValue"/>.
+    /// The resulting date is less than <see cref="DateOnly.MinValue"/> or greater
+    /// than <see cref="DateOnly.MaxValue"/>.
     /// </exception>
     [Pure]
-    public static DateTime Add(this DateTime d, DateSpan value) => d.Add(value, DateSpanSettings.Default);
-
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
-    /// to the value of this instance.
-    /// </summary>
-    /// <param name="d">
-    /// The date time to add a <see cref="DateSpan"/> to.
-    /// </param>
-    /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
-    /// </param>
-    /// <param name="daysFirst">
-    /// If true, days are added first, otherwise months are added first.
-    /// </param>
-    /// <returns>
-    /// A new date whose value is the sum of the date and time represented
-    /// by this instance and the time interval represented by value.
-    /// </returns>
-    /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
-    /// than <see cref="DateTime.MaxValue"/>.
-    /// </exception>
-    [Pure]
-    [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
-    public static DateTime Add(this DateTime d, DateSpan value, bool daysFirst)
-        => daysFirst
-        ? d.AddDays(value.Days).AddMonths(value.TotalMonths)
-        : d.AddMonths(value.TotalMonths).AddDays(value.Days);
+    public static DateOnly Add(this DateOnly d, DateSpan value) => d.Add(value, DateSpanSettings.Default);
 
     /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
@@ -69,14 +44,14 @@ public static class QowaivDateTimeExtensions
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
-    /// than <see cref="DateTime.MaxValue"/>.
+    /// The resulting date is less than <see cref="DateOnly.MinValue"/> or greater
+    /// than <see cref="DateOnly.MaxValue"/>.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
     /// </exception>
     [Pure]
-    public static DateTime Add(this DateTime d, DateSpan value, DateSpanSettings settings) => settings switch
+    public static DateOnly Add(this DateOnly d, DateSpan value, DateSpanSettings settings) => settings switch
     {
         DateSpanSettings.DaysFirst => d.AddDays(value.Days).AddMonths(value.TotalMonths),
         DateSpanSettings.Default => d.AddMonths(value.TotalMonths).AddDays(value.Days),
@@ -97,9 +72,11 @@ public static class QowaivDateTimeExtensions
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="DateTime.MinValue"/> or greater
-    /// than <see cref="DateTime.MaxValue"/>.
+    /// The resulting date is less than <see cref="DateOnly.MinValue"/> or greater
+    /// than <see cref="DateOnly.MaxValue"/>.
     /// </exception>
     [Pure]
-    public static DateTime Add(this DateTime d, MonthSpan value) => d.AddMonths(value.TotalMonths);
+    public static DateOnly Add(this DateOnly d, MonthSpan value) => d.AddMonths(value.TotalMonths);
 }
+
+#endif

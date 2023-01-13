@@ -11,13 +11,23 @@
     <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <SignAssembly>true</SignAssembly>
-    <DebugType>portable</DebugType>
-    <DelaySign>false</DelaySign>
     <Nullable>enable</Nullable>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
     <!-- We ship package version for obsolete versions too -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Debug Symbols">
+    <DebugType>portable</DebugType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>    
+  </PropertyGroup>
+
+  <PropertyGroup Label="Signing">
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

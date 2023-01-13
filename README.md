@@ -152,7 +152,7 @@ feb.ToString("M"); // 02
 feb.ToString("m"); // 2
 
 // Querying on date (time) models.
-new DateTime(2014, 02, 14).In(feb); // true
+new DateTime(2014, 02, 14).IsIn(feb); // true
 ```
 
 ### Month span
@@ -245,7 +245,7 @@ bool isLeap = year.IsLeapYear;
 (Year.Unknown > 2000.CE()).Should().BeFalse();
 
 // Querying on date (time) models.
-new DateTime(2017, 02, 14).In(year); // true
+new DateTime(2017, 02, 14).IsIn(year); // true
 ```
 
 ### Yes-no

@@ -81,7 +81,7 @@ public static class QowaivDateOnlyExtensions
     /// The <see cref="Month"/> the date should be in.
     /// </param>
     [Pure]
-    public static bool In(this DateOnly d, Month month) => !month.IsEmptyOrUnknown() && d.Month == (int)month;
+    public static bool IsIn(this DateOnly d, Month month) => !month.IsEmptyOrUnknown() && d.Month == (int)month;
 
     /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
     /// <param name="d">
@@ -91,7 +91,7 @@ public static class QowaivDateOnlyExtensions
     /// The <see cref="Year"/> the date should be in.
     /// </param>
     [Pure]
-    public static bool In(this DateOnly d, Year year) => !year.IsEmptyOrUnknown() && d.Year == (int)year;
+    public static bool IsIn(this DateOnly d, Year year) => !year.IsEmptyOrUnknown() && d.Year == (int)year;
 }
 
 #endif

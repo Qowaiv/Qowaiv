@@ -6,8 +6,7 @@ Qowaiv is a (Single) Value Object library. It aims to model reusable, immutable,
 both inside and outside a Domain-driven context.
 
 ## Package
-This package contains a SQL Timestamp SVO, and a way to provide SVO's as
-SQL parameter.
+This package contains helpers to make writing unit tests for SVO's easier.
 
 ## Further reading
 More info can be found at https://github.com/Qowaiv/Qowaiv.

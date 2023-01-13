@@ -2,7 +2,11 @@
 <Project>
 
   <PropertyGroup>
-    <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
+    <Description>
+      Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
+      Value Objects that can be used a wide variety of modeling scenarios, both
+      inside and outside a Domain-driven context.
+    </Description>
     <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Fons Sonnemans;Jack Kester;Hanif Hafez Nezami;Laura Kramer;Patrick Evers;Vincent Lesierse;Wilko Frieke</Authors>
     <Owners>Qowaiv community</Owners>
     <PackageTags>qowaiv domain model</PackageTags>

@@ -133,6 +133,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding a date span only supports &apos;Default&apos; and &apos;DaysFirst&apos;..
+        /// </summary>
+        public static string ArgumentOutOfRangeException_AddDateSpan {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRangeException_AddDateSpan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified years, months and days results in an un-representable DateSpan..
         /// </summary>
         public static string ArgumentOutOfRangeException_DateSpan {

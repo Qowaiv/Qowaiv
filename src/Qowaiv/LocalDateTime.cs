@@ -246,7 +246,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// than <see cref="MaxValue"/>.
     /// </exception>
     [Pure]
-    public LocalDateTime Add(DateSpan value) => Add(value, false);
+    public LocalDateTime Add(DateSpan value) => Add(value, DateSpanSettings.Default);
 
     /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>
     /// to the value of this instance.
@@ -282,6 +282,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// The resulting date is less than <see cref="MinValue"/> or greater
     /// than <see cref="MaxValue"/>.
     /// </exception>
+    [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
     [Pure]
     public LocalDateTime Add(DateSpan value, bool daysFirst)
     {
@@ -289,6 +290,35 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
             ? AddDays(value.Days).AddMonths(value.TotalMonths)
             : AddMonths(value.TotalMonths).AddDays(value.Days);
     }
+
+
+    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// to the value of this instance.
+    /// </summary>
+    /// <param name="value">
+    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// </param>
+    /// <param name="settings">
+    /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.
+    /// </param>
+    /// <returns>
+    /// A new date whose value is the sum of the date represented
+    /// by this instance and the time interval represented by value.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="MinValue"/> or greater
+    /// than <see cref="MaxValue"/>.
+    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
+    /// </exception>
+    [Pure]
+    public LocalDateTime Add(DateSpan value, DateSpanSettings settings) => settings switch
+    {
+        DateSpanSettings.DaysFirst => AddDays(value.Days).AddMonths(value.TotalMonths),
+        DateSpanSettings.Default => AddMonths(value.TotalMonths).AddDays(value.Days),
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
+    };
 
     /// <summary>Subtracts the specified local date time and time from this instance.</summary>
     /// <param name="value">

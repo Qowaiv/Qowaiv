@@ -80,7 +80,7 @@ public static class QowaivDateTimeExtensions
     {
         DateSpanSettings.DaysFirst => d.AddDays(value.Days).AddMonths(value.TotalMonths),
         DateSpanSettings.Default => d.AddMonths(value.TotalMonths).AddDays(value.Days),
-        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_DateSpan)
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
     };
 
     /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>

@@ -319,7 +319,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     {
         DateSpanSettings.DaysFirst => AddDays(value.Days).AddMonths(value.TotalMonths),
         DateSpanSettings.Default => AddMonths(value.TotalMonths).AddDays(value.Days),
-        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_DateSpan)
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
     };
 
     /// <summary>Subtracts the specified local date time and time from this instance.</summary>

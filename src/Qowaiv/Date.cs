@@ -190,7 +190,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     {
         DateSpanSettings.DaysFirst => AddDays(value.Days).AddMonths(value.TotalMonths),
         DateSpanSettings.Default => AddMonths(value.TotalMonths).AddDays(value.Days),
-        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_DateSpan)
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
     };
 
     /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan"/>

@@ -1,4 +1,4 @@
-﻿namespace DateSpan_specs;
+﻿namespace Date_span_specs;
 
 public class Supports_type_conversion
 {

@@ -5,7 +5,7 @@ namespace System;
 /// <summary>Extensions on <see cref="DateTime"/>.</summary>
 public static class QowaivDateTimeExtensions
 {
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">
@@ -25,7 +25,7 @@ public static class QowaivDateTimeExtensions
     [Pure]
     public static DateTime Add(this DateTime d, DateSpan value) => d.Add(value, DateSpanSettings.Default);
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">
@@ -52,7 +52,7 @@ public static class QowaivDateTimeExtensions
         ? d.AddDays(value.Days).AddMonths(value.TotalMonths)
         : d.AddMonths(value.TotalMonths).AddDays(value.Days);
 
-    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
@@ -83,7 +83,7 @@ public static class QowaivDateTimeExtensions
         _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
     };
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>
+    /// <summary>Returns a new date time that adds the value of the specified <see cref="MonthSpan"/>
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">
@@ -102,4 +102,24 @@ public static class QowaivDateTimeExtensions
     /// </exception>
     [Pure]
     public static DateTime Add(this DateTime d, MonthSpan value) => d.AddMonths(value.TotalMonths);
+
+    /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
+    /// <param name="d">
+    /// The date to check.
+    /// </param>
+    /// <param name="month">
+    /// The <see cref="Month"/> the date should be in.
+    /// </param>
+    [Pure]
+    public static bool IsIn(this DateTime d, Month month) => !month.IsEmptyOrUnknown() && d.Month == (int)month;
+
+    /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
+    /// <param name="d">
+    /// The date time to check.
+    /// </param>
+    /// <param name="year">
+    /// The <see cref="Year"/> the date should be in.
+    /// </param>
+    [Pure]
+    public static bool IsIn(this DateTime d, Year year) => !year.IsEmptyOrUnknown() && d.Year == (int)year;
 }

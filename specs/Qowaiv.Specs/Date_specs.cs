@@ -78,6 +78,44 @@ public class Can_not_be_adjusted_with
         .Should().Throw<ArgumentOutOfRangeException>().WithMessage("Adding a date span only supports 'Default' and 'DaysFirst'.*");
 }
 
+public class Can_be_related_to
+{
+    [Test]
+    public void matching_month()
+        => new Date(2017, 06, 11).IsIn(Month.June).Should().BeTrue();
+
+    [Test]
+    public void none_matching_month()
+       => new Date(2017, 06, 11).IsIn(Month.February).Should().BeFalse();
+
+    [Test]
+    public void matching_year()
+        => new Date(2017, 06, 11).IsIn(2017.CE()).Should().BeTrue();
+
+    [Test]
+    public void none_matching_year()
+       => new Date(2017, 06, 11).IsIn(2018.CE()).Should().BeFalse();
+}
+
+public class Can_not_be_related_to
+{
+    [Test]
+    public void month_empty()
+        => new Date(2017, 06, 11).IsIn(Month.Empty).Should().BeFalse();
+
+    [Test]
+    public void month_unknown()
+       => new Date(2017, 06, 11).IsIn(Month.Unknown).Should().BeFalse();
+
+    [Test]
+    public void year_empty()
+        => new Date(2017, 06, 11).IsIn(Year.Empty).Should().BeFalse();
+
+    [Test]
+    public void year_unknown()
+       => new Date(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
+}
+
 public class Supports_type_conversion
 {
     [Test]
@@ -193,16 +231,16 @@ public class Is_Open_API_data_type
 public class Casts_with_dotnet_6_0
 {
     [Test]
-    public void implictly_from_DateOnly()
+    public void implictly_from_Date()
     {
-        DateOnly casted = Svo.Date;
-        casted.Should().Be(new DateOnly(2017, 06, 11));
+        Date casted = Svo.Date;
+        casted.Should().Be(new Date(2017, 06, 11));
     }
 
     [Test]
-    public void explicitly_to_DateOnly()
+    public void explicitly_to_Date()
     {
-        var casted = (Date)new DateOnly(2017,06,11);
+        var casted = (Date)new Date(2017,06,11);
         casted.Should().Be(Svo.Date);
     }
 }

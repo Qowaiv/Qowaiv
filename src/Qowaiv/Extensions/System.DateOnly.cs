@@ -11,7 +11,7 @@ public static class QowaivDateOnlyExtensions
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">
-    /// The date time to add a <see cref="DateSpan"/> to.
+    /// The date to add a <see cref="DateSpan"/> to.
     /// </param>
     /// <param name="value">
     /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
@@ -25,35 +25,40 @@ public static class QowaivDateOnlyExtensions
     /// than <see cref="DateOnly.MaxValue"/>.
     /// </exception>
     [Pure]
-    public static DateOnly Add(this DateOnly d, DateSpan value) => d.Add(value, false);
+    public static DateOnly Add(this DateOnly d, DateSpan value) => d.Add(value, DateSpanSettings.Default);
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
     /// </summary>
-    /// <param name="d">
-    /// The date to add a <see cref="DateSpan"/> to.
-    /// </param>
     /// <param name="value">
     /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
     /// </param>
-    /// <param name="daysFirst">
-    /// If true, days are added first, otherwise months are added first.
+    /// <param name="d">
+    /// The date to add a <see cref="MonthSpan"/> to.
+    /// </param>
+    /// <param name="settings">
+    /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.
     /// </param>
     /// <returns>
-    /// A new date whose value is the sum of the date and time represented
+    /// A new date whose value is the sum of the date represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The resulting date is less than <see cref="DateOnly.MinValue"/> or greater
     /// than <see cref="DateOnly.MaxValue"/>.
     /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
+    /// </exception>
     [Pure]
-    public static DateOnly Add(this DateOnly d, DateSpan value, bool daysFirst)
-        => daysFirst
-        ? d.AddDays(value.Days).AddMonths(value.TotalMonths)
-        : d.AddMonths(value.TotalMonths).AddDays(value.Days);
+    public static DateOnly Add(this DateOnly d, DateSpan value, DateSpanSettings settings) => settings switch
+    {
+        DateSpanSettings.DaysFirst => d.AddDays(value.Days).AddMonths(value.TotalMonths),
+        DateSpanSettings.Default => d.AddMonths(value.TotalMonths).AddDays(value.Days),
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
+    };
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>
+    /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan"/>
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">

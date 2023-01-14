@@ -1,0 +1,408 @@
+﻿namespace Year_month_specs;
+
+public class With_domain_logic
+{
+   
+}
+
+public class Is_valid_for
+{
+    [TestCase("2017-06", "nl")]
+    public void strings_representing_SVO(string input, CultureInfo culture)
+        => YearMonth.IsValid(input, culture).Should().BeTrue();
+}
+
+public class Is_not_valid_for
+{
+    [Test]
+    public void string_empty()
+        => YearMonth.IsValid(string.Empty).Should().BeFalse();
+
+    [Test]
+    public void string_null()
+        => YearMonth.IsValid(null).Should().BeFalse();
+
+    [Test]
+    public void whitespace()
+        => YearMonth.IsValid(" ").Should().BeFalse();
+
+    [Test]
+    public void garbage()
+        => YearMonth.IsValid("garbage").Should().BeFalse();
+}
+
+public class Has_constant
+{
+    [Test]
+    public void Min_value_represent_0001_January()
+        => YearMonth.MinValue.Should().Be(new(year: 0001, month: 01));
+    [Test]
+    public void Max_value_represent_9999_december()
+        => YearMonth.MaxValue.Should().Be(new(year: 9999, month: 12));
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.YearMonth.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.YearMonth.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.YearMonth.Equals(new YearMonth(2000, 09)).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.YearMonth.Equals(YearMonth.Parse("2017-06")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Svo.YearMonth == YearMonth.Parse("2017-06")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Svo.YearMonth == new YearMonth(2000, 09)).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Svo.YearMonth != YearMonth.Parse("2017-06")).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Svo.YearMonth != new YearMonth(2000, 09)).Should().BeTrue();
+
+    [TestCase("2000-09", 665643119)]
+    [TestCase("2017-06", 665643862)]
+    public void hash_code_is_value_based(YearMonth svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
+public class Can_not_be_parsed
+{
+    [Test]
+    public void from_nully()
+        => YearMonth.TryParse(null).Should().BeNull();
+
+    [Test]
+    public void from_empty_string()
+        => YearMonth.TryParse(string.Empty).Should().BeNull();
+}
+
+public class Can_be_parsed
+{
+    [TestCase("en", "2017-06")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            YearMonth.Parse(input).Should().Be(Svo.YearMonth);
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Func<YearMonth> parse = () => YearMonth.Parse("invalid input");
+            parse.Should().Throw<FormatException>()
+                .WithMessage("Not a valid year-month.");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => (YearMonth.TryParse("invalid input", out _)).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => YearMonth.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => YearMonth.TryParse("2017-06").Should().Be(Svo.YearMonth);
+}
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.YearMonth.ToString().Should().Be("2017-06");
+        }
+    }
+
+    [Test]
+    public void with_null_pattern_equal_to_default()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.YearMonth.ToString().Should().Be(Svo.YearMonth.ToString(default(string)));
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.YearMonth.ToString().Should().Be(Svo.YearMonth.ToString(string.Empty));
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.Es_EC.Scoped())
+        {
+            Svo.YearMonth.ToString(FormatProvider.Empty).Should().Be("2017-06");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.YearMonth.ToString("yyyy MMM", FormatProvider.CustomFormatter);
+        Assert.AreEqual("Unit Test Formatter, value: '2017 Jun', format: 'yyyy MMM'", formatted);
+    }
+
+    [TestCase("en-GB", "yyyy MMMM", "2017-06", "2017 June")]
+    [TestCase("nl-BE", "MMMM yyyy", "2017-06", "juni 2017")]
+    public void culture_dependent(CultureInfo culture, string format, YearMonth svo, string expected)
+    {
+        using (culture.Scoped())
+        {
+            Assert.AreEqual(expected, svo.ToString(format));
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(
+            culture: TestCultures.Nl_NL,
+            cultureUI: TestCultures.En_GB))
+        {
+            Assert.AreEqual("2017-06", Svo.YearMonth.ToString(provider: null));
+        }
+    }
+}
+
+public class Is_comparable
+{
+    [Test]
+    public void to_null() => Svo.YearMonth.CompareTo(null).Should().Be(1);
+
+    [Test]
+    public void to_YearMonth_as_object()
+    {
+        object obj = Svo.YearMonth;
+        Svo.YearMonth.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_YearMonth_only()
+        => Assert.Throws<ArgumentException>(() => Svo.YearMonth.CompareTo(new object()));
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            YearMonth.MinValue,
+            YearMonth.MinValue,
+            new YearMonth(2017, 05),
+            new YearMonth(2017, 06),
+            new YearMonth(2017, 07),
+            YearMonth.MaxValue,
+        };
+
+        var list = new List<YearMonth> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        var smaller = new YearMonth(2017, 06);
+        var bigger = new YearMonth(2017, 07);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        var left = new YearMonth(2017, 06);
+        var right = new YearMonth(2017, 06);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
+}
+
+public class Casts
+{
+//    [Test]
+//    public void explicitly_from_int()
+//    {
+//        var casted = (YearMonth)null;
+//        casted.Should().Be(Svo.YearMonth);
+//    }
+
+//    [Test]
+//    public void explicitly_to_int()
+//    {
+//        var casted = (int)Svo.YearMonth;
+//        casted.Should().Be(null);
+//    }
+}
+
+public class Supports_type_conversion
+{
+    [Test]
+    public void via_TypeConverter_registered_with_attribute()
+        => typeof(YearMonth).Should().HaveTypeConverterDefined();
+
+    [Test]
+    public void from_null_string()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Converting.From<string>(null).To<YearMonth>().Should().Be(default);
+        }
+    }
+
+    [Test]
+    public void from_string()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Converting.From("2017-06").To<YearMonth>().Should().Be(Svo.YearMonth);
+        }
+    }
+
+    [Test]
+    public void to_string()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Converting.ToString().From(Svo.YearMonth).Should().Be("2017-06");
+        }
+    }
+}
+
+public class Supports_JSON_serialization
+{
+    [TestCase("2017-06", "2017-06")]
+    public void convention_based_deserialization(YearMonth svo, object json)
+        => JsonTester.Read<YearMonth>(json).Should().Be(svo);
+
+    [TestCase("2017-06", "2017-06")]
+    public void convention_based_serialization(object json, YearMonth svo)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase("2017.15", typeof(FormatException))]
+    [TestCase(5L, typeof(InvalidOperationException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+    {
+        Func<YearMonth> read = () => JsonTester.Read<YearMonth>(json);
+        read.Should().Throw<Exception>().Subject.Single().Should().BeOfType(exceptionType);
+    }
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.YearMonth);
+        xml.Should().Be("2017-06");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<YearMonth>("2017-06");
+        svo.Should().Be(Svo.YearMonth);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.YearMonth);
+        Svo.YearMonth.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.YearMonth);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.YearMonth;
+        Assert.IsNull(obj.GetSchema());
+    }
+}
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(YearMonth))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType: typeof(YearMonth),
+           description: "Date notation with month precision.",
+           example: "2017-06",
+           type: "string",
+           format: "year-month",
+           pattern: "[0-9]{4}-[01][0-9]"));
+}
+
+public class Supports_binary_serialization
+{
+    [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
+    public void using_BinaryFormatter()
+    {
+        var round_tripped = SerializeDeserialize.Binary(Svo.YearMonth);
+        Svo.YearMonth.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void storing_int_in_SerializationInfo()
+    {
+        var info = Serialize.GetInfo(Svo.YearMonth);
+        info.GetInt32("Value").Should().Be(24197);
+    }
+}
+
+public class Debugger
+{
+    [TestCase("2017-06", "2017-06")]
+    public void has_custom_display(object display, YearMonth svo)
+        => svo.Should().HaveDebuggerDisplay(display);
+}

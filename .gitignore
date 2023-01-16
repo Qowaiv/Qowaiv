@@ -231,3 +231,4 @@ artifacts
 *.js.map
 launchSettings.json
 *.opencover.xml
+coverage.*.info

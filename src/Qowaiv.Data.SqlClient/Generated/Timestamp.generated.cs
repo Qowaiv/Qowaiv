@@ -239,6 +239,7 @@ public partial struct Timestamp
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
+    [ExcludeFromCodeCoverage]
     [Obsolete("Use the SVO itself instead. Will be dropped when the next major version is released.")]
     public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
@@ -250,6 +251,7 @@ public partial struct Timestamp
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
+    [ExcludeFromCodeCoverage]
     [Obsolete("Use the SVO itself instead. Will be dropped when the next major version is released.")]
     public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)

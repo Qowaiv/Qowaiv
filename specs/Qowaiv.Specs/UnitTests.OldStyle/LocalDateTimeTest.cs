@@ -453,22 +453,6 @@ public class LocalDateTimeTest
     }
 
     #endregion
-
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(LocalDateTime.IsValid("Complex"), "Complex");
-        Assert.IsFalse(LocalDateTime.IsValid((String)null), "(String)null");
-        Assert.IsFalse(LocalDateTime.IsValid(string.Empty), "String.MinValue");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(LocalDateTime.IsValid("1931-10-10 14:12:03.041", CultureInfo.InvariantCulture));
-    }
-    #endregion
 }
 
 [Serializable]

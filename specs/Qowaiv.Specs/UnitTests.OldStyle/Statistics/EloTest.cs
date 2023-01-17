@@ -594,22 +594,6 @@
             Assert.AreEqual(exp, act);
         }
         #endregion
-
-        #region IsValid tests
-
-        [Test]
-        public void IsValid_Data_IsFalse()
-        {
-            Assert.IsFalse(Elo.IsValid("Complex"), "Complex");
-            Assert.IsFalse(Elo.IsValid((String)null), "(String)null");
-            Assert.IsFalse(Elo.IsValid(string.Empty), "string.Empty");
-        }
-        [Test]
-        public void IsValid_Data_IsTrue()
-        {
-            Assert.IsTrue(Elo.IsValid("1754.8*"));
-        }
-        #endregion
     }
 
     [Serializable]

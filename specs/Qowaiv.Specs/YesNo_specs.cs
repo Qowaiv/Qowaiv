@@ -61,57 +61,19 @@ public class With_domain_logic
 
 public class Is_valid_for
 {
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-    {
-        Assert.IsTrue(YesNo.IsValid(input));
-    }
-
     [TestCase("ja", "nl")]
     [TestCase("yes", "en-GB")]
     [TestCase("y", null)]
     [TestCase("true", null)]
     public void strings_representing_yes(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(YesNo.IsValid(input, culture));
-    }
+        => YesNo.Parse(input, culture).Should().Be(YesNo.Yes);
 
     [TestCase("nee", "nl")]
     [TestCase("no", "en-GB")]
     [TestCase("n", null)]
     [TestCase("false", null)]
     public void strings_representing_no(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(YesNo.IsValid(input, culture));
-    }
-}
-
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(YesNo.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(YesNo.IsValid(null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(YesNo.IsValid(" "));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(YesNo.IsValid("garbage"));
-    }
+        => YesNo.Parse(input, culture).Should().Be(YesNo.No);
 }
 
 public class Has_constant

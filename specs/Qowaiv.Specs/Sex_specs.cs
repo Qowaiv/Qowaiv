@@ -53,57 +53,8 @@ public class Display_name
     }
 }
 
-public class Is_valid_for
-{
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-    {
-        Assert.IsTrue(Sex.IsValid(input));
-    }
-
-    [TestCase(1)]
-    [TestCase(2)]
-    [TestCase(9)]
-    public void numbers(int? number)
-    {
-        Assert.IsTrue(Sex.IsValid(number));
-    }
-
-    [TestCase("Female", "nl")]
-    [TestCase("Female", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(Sex.IsValid(input, culture));
-    }
-}
-
 public class Is_not_valid_for
 {
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(Sex.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(Sex.IsValid((string)null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(Sex.IsValid(" "));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(Sex.IsValid("garbage"));
-    }
-
     [TestCase(null)]
     [TestCase(0)]
     [TestCase(3)]

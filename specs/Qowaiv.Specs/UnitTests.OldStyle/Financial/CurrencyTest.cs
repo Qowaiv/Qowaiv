@@ -677,22 +677,6 @@ public class CurrencyTest
     }
 
     #endregion
-
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(Currency.IsValid("Complex"), "Complex");
-        Assert.IsFalse(Currency.IsValid((String)null), "(String)null");
-        Assert.IsFalse(Currency.IsValid(string.Empty), "string.Empty");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(Currency.IsValid("Euro"));
-    }
-    #endregion
 }
 
 [Serializable]

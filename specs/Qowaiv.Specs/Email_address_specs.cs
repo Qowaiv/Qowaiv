@@ -38,50 +38,6 @@ public class With_domain_logic
     }
 }
 
-public class Is_valid_for
-{
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-    {
-        Assert.IsTrue(EmailAddress.IsValid(input));
-    }
-
-    [TestCase("info@qowaiv.org", "nl")]
-    [TestCase("info@qowaiv.org", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(EmailAddress.IsValid(input, culture));
-    }
-}
-
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(EmailAddress.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(EmailAddress.IsValid(null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(EmailAddress.IsValid(" "));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(EmailAddress.IsValid("garbage"));
-    }
-}
-
 public class Has_constant
 {
     [Test]

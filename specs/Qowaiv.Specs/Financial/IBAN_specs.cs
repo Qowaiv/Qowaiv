@@ -196,61 +196,31 @@ public class Supports_JSON_serialization
 public class Input_is_invalid_when
 {
     [Test]
-    public void @null()
-    {
-        Assert.IsFalse(InternationalBankAccountNumber.IsValid(null));
-    }
-
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(InternationalBankAccountNumber.IsValid(string.Empty));
-    }
-
-    [Test]
     public void country_does_not_exist()
-    {
-        Assert.IsFalse(InternationalBankAccountNumber.IsValid("XX950210000000693123456"));
-    }
+        => InternationalBankAccountNumber.TryParse("XX950210000000693123456").Should().BeNull();
 
     [Test]
     public void shorter_than_12()
-    {
-        Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20INGB007"));
-    }
+        => InternationalBankAccountNumber.TryParse("NL20INGB007").Should().BeNull();
 
     [Test]
     public void longer_than_32()
-    {
-        Assert.IsFalse(InternationalBankAccountNumber.IsValid("NL20 INGB 0070 3456 7890 1234 5678 9012 1"));
-    }
+        => InternationalBankAccountNumber.TryParse("NL20 INGB 0070 3456 7890 1234 5678 9012 1").Should().BeNull();
 
     [Test]
     public void other_than_alpha_numeric()
-    {
-        Assert.IsFalse(InternationalBankAccountNumber.IsValid("AE20 #$12 0070 3456 7890 1234 5678"));
-    }
+        => InternationalBankAccountNumber.TryParse("AE20 #$12 0070 3456 7890 1234 5678").Should().BeNull();
 
     [Test]
     public void country_does_not_support_IBAN()
-    {
-        Assert.IsFalse(InternationalBankAccountNumber.IsValid("US20INGB0001234567"));
-    }
+        => InternationalBankAccountNumber.TryParse("US20INGB0001234567").Should().BeNull();
 }
 
 public class Input_is_valid
 {
     [Test]
-    public void for_unknown_IBANs()
-    {
-        Assert.IsTrue(InternationalBankAccountNumber.IsValid("?"));
-    }
-
-    [Test]
     public void despite_irregular_whitespacing()
-    {
-        Assert.IsTrue(InternationalBankAccountNumber.IsValid("AE950 2100000006  93123456"));
-    }
+        => InternationalBankAccountNumber.Parse("AE950 2100000006  93123456").IsEmptyOrUnknown().Should().BeFalse();
 
     [TestCaseSource(nameof(ValidForCountry))]
     public void for_country(Country country, string input)

@@ -3,9 +3,11 @@ using FluentAssertions.Execution;
 using FluentAssertions.Reflection;
 using System.Reflection;
 
-namespace FluentAssertions;
+namespace Qowaiv.TestTools.FluentAssertions;
 
 /// <summary>Extensions on <see cref="AssemblyAssertions"/>.</summary>
+[ExcludeFromCodeCoverage]
+[Obsolete("Use QowaivAssemblyAssertions from the FluentAssertions namespace instead.")]
 public static class QowaivAssemblyAssertions
 {
     /// <summary>Asserts the <see cref="Assembly"/> to have a specific public key.</summary>

@@ -251,7 +251,7 @@ public class Comments
     public void not_nested()
         => Email.ShouldBeInvalid("in( nested(extra) )fo@qowaiv.org");
 
-    [TestCase("inf(o@qowaiv.org", Ignore = "Crashes. Fix in separate ")]
+    [TestCase("inf(o@qowaiv.org")]
     [TestCase("info)@qowaiv.org")]
     [TestCase("in)wrong order(fo@qowaiv.org")]
     public void not_matching(string notMatching)

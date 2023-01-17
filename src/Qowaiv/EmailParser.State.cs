@@ -46,7 +46,9 @@ internal static partial class EmailParser
                 ch = Next();
                 if (ch.IsCommentStart()) { return default; }
             }
-            return NextNoComment();
+            return Input.Length == 0
+                ? default 
+                : NextNoComment();
         }
 
         [Impure]

@@ -11,6 +11,17 @@ public class Computed
     }
 }
 
+public class Not_computed
+{
+    [Test]
+    public void from_null_input()
+    {
+        var algorithm = MD5.Create();
+        var seed = algorithm.ComputeCryptographicSeed(null);
+        seed.IsEmpty().Should().BeTrue();
+    }
+}
+
 public class With_domain_logic
 {
     [TestCase(false, "Qowaiv==")]

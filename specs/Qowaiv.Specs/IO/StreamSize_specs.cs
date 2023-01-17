@@ -102,10 +102,14 @@ public class Has_humanizer_creators
     public void GiB_from_double() => 17.4.GiB().Should().Be(StreamSize.FromGibibytes(17.4));
 }
 
-public class Created_from_IO
+public class Created_from
 {
     [Test]
-    public void Directory_info()
+    public void byte_array()
+        => new byte[42].GetStreamSize().Should().Be(42.Bytes());
+
+    [Test]
+    public void IO_Directory_info()
     {
         using var dir = new TemporaryDirectory();
 
@@ -120,7 +124,7 @@ public class Created_from_IO
     }
 
     [Test]
-    public void File_info()
+    public void IO_File_info()
     {
         using var dir = new TemporaryDirectory();
         var file = dir.CreateFile($"text.md");

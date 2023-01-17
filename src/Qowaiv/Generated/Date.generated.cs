@@ -231,7 +231,7 @@ public partial struct Date
     /// </param>
     [Pure]
     [ExcludeFromCodeCoverage]
-    [Obsolete("Use the SVO itself instead. Will be dropped when the next major version is released.")]
+    [Obsolete("Use Date.TryParse(str) is { } instead. Will be dropped when the next major version is released.")]
     public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid date.</summary>
@@ -243,7 +243,7 @@ public partial struct Date
     /// </param>
     [Pure]
     [ExcludeFromCodeCoverage]
-    [Obsolete("Use the SVO itself instead. Will be dropped when the next major version is released.")]
+    [Obsolete("Use Date.TryParse(str, formatProvider) is { } instead. Will be dropped when the next major version is released.")]
     public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);

@@ -17,15 +17,15 @@ public static class QowaivDebuggerDisplayAssertions
         string because = "",
         params object[] becauseArgs)
     {
-        var prop = DebuggerDisplay(Guard.NotNull(assertions, nameof(assertions)).Subject?.GetType());
+        var prop = DebuggerDisplay(Guard.NotNull(assertions, nameof(assertions)).Subject.GetType());
 
         if (Execute.Assertion
-            .ForCondition(prop is not null)
-            .FailWith($"'{assertions.Subject?.GetType()}' has no DebuggerDisplay defined"))
+            .ForCondition(prop is { })
+            .FailWith($"'{assertions.Subject.GetType()}' has no DebuggerDisplay defined."))
         {
-            return prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
+            prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
         }
-        else return new AndConstraint<ObjectAssertions>(assertions);
+        return new AndConstraint<ObjectAssertions>(assertions);
     }
 
     /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute"/> of a certain <see cref="object"/>.</summary>
@@ -37,23 +37,22 @@ public static class QowaivDebuggerDisplayAssertions
         string because = "",
         params object[] becauseArgs)
     {
-        var prop = DebuggerDisplay(Guard.NotNull(assertions, nameof(assertions)).Subject?.GetType());
+        var prop = DebuggerDisplay(Guard.NotNull(assertions, nameof(assertions)).Subject.GetType());
 
         if (Execute.Assertion
-            .ForCondition(prop is not null)
-            .FailWith($"'{assertions.Subject?.GetType()}' has no DebuggerDisplay defined"))
+            .ForCondition(prop is { })
+            .FailWith($"'{assertions.Subject.GetType()}' has no DebuggerDisplay defined"))
         {
            prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
         }
         return new AndConstraint<ComparableTypeAssertions<T>>(assertions);
     }
 
-
     [Pure]
-    private static PropertyInfo? DebuggerDisplay(Type? type)
+    private static PropertyInfo? DebuggerDisplay(Type type)
     {
-        var prop = type?.GetProperty(nameof(DebuggerDisplay), NonPublicInstance);
-        return prop is null && type?.BaseType is not null
+        var prop = type.GetProperty(nameof(DebuggerDisplay), NonPublicInstance);
+        return prop is null && type.BaseType is { }
             ? DebuggerDisplay(type.BaseType)
             : prop;
     }

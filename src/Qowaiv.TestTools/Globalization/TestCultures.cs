@@ -9,8 +9,8 @@ public static class TestCultures
     [Pure]
     public static CultureInfo Select(string name)
         => typeof(TestCultures).GetProperties(BindingFlags.Public | BindingFlags.Static)
-        .Select(prop => (CultureInfo?)prop.GetValue(null))
-        .FirstOrDefault(culture => culture?.Name == name) ?? new CultureInfo(name);
+        .Select(prop => (CultureInfo)prop.GetValue(null)!)
+        .FirstOrDefault(culture => culture.Name == name) ?? new CultureInfo(name);
 
     /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo De_DE => new("de-DE");

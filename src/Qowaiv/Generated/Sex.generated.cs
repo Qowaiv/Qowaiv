@@ -223,7 +223,7 @@ public partial struct Sex
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out Sex result) => TryParse(s, null, out result);
 }
 

@@ -217,7 +217,7 @@ public partial struct Uuid
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out Uuid result) => TryParse(s, null, out result);
 }
 

@@ -223,7 +223,7 @@ public partial struct Month
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out Month result) => TryParse(s, null, out result);
 }
 

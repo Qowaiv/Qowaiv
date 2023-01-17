@@ -214,7 +214,7 @@ public partial struct DateSpan
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out DateSpan result) => TryParse(s, null, out result);
 }
 

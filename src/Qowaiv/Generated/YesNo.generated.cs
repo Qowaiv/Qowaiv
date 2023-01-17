@@ -223,7 +223,7 @@ public partial struct YesNo
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out YesNo result) => TryParse(s, null, out result);
 }
 

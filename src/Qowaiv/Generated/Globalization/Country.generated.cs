@@ -223,7 +223,7 @@ public partial struct Country
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out Country result) => TryParse(s, null, out result);
 }
 

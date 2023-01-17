@@ -237,7 +237,7 @@ public partial struct HouseNumber
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out HouseNumber result) => TryParse(s, null, out result);
 }
 

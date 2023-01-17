@@ -228,7 +228,7 @@ public partial struct MonthSpan
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out MonthSpan result) => TryParse(s, null, out result);
 }
 

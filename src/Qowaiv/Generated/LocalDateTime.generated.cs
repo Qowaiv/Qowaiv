@@ -219,7 +219,7 @@ public partial struct LocalDateTime
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out LocalDateTime result) => TryParse(s, null, out result);
 }
 

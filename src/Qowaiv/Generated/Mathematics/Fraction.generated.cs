@@ -187,7 +187,7 @@ public partial struct Fraction
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out Fraction result) => TryParse(s, null, out result);
 }
 

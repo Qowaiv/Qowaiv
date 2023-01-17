@@ -890,24 +890,6 @@ public class MoneyTest
     }
 
     #endregion
-
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(Money.IsValid("Complex"), "Complex");
-        Assert.IsFalse(Money.IsValid((String)null), "(String)null");
-        Assert.IsFalse(Money.IsValid(string.Empty), "string.Empty");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(Money.IsValid("USD -12,345.789", CultureInfo.InvariantCulture));
-        Assert.IsTrue(Money.IsValid("USD +12,345.789", CultureInfo.InvariantCulture));
-        Assert.IsTrue(Money.IsValid("€ 12,345.789", CultureInfo.InvariantCulture));
-    }
-    #endregion
 }
 
 [Serializable]

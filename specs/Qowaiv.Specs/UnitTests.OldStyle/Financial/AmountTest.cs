@@ -848,25 +848,6 @@ namespace Qowaiv.Financial.UnitTests
             var rounded = amount.RoundToMultiple(0.25m);
             Assert.AreEqual((Amount)123.75m, rounded);
         }
-
-        #region IsValid tests
-
-        [Test]
-        public void IsValid_Data_IsFalse()
-        {
-            Assert.IsFalse(Amount.IsValid("Complex"), "Complex");
-            Assert.IsFalse(Amount.IsValid((String)null), "(String)null");
-            Assert.IsFalse(Amount.IsValid(string.Empty), "string.Empty");
-        }
-        [Test]
-        public void IsValid_Data_IsTrue()
-        {
-            using (TestCultures.En_GB.Scoped())
-            {
-                Assert.IsTrue(Amount.IsValid("15.48"));
-            }
-        }
-        #endregion
     }
 
     [Serializable]

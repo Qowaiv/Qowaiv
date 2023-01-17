@@ -350,22 +350,6 @@ public class MonthSpanTest
         var act = (int)TestStruct;
         Assert.AreEqual(exp, act);
     }
-
-    [TestCase(null)]
-    [TestCase("")]
-    [TestCase("Complex")]
-    public void IsInvalid_String(string str)
-    {
-        Assert.IsFalse(MonthSpan.IsValid(str));
-    }
-
-    [TestCase("-30Y+50M+2D")]
-    [TestCase("+2Y+0M")]
-    [TestCase("69")]
-    public void IsValid_String(string str)
-    {
-        Assert.IsTrue(MonthSpan.IsValid(str));
-    }
 }
 
 [Serializable]

@@ -895,22 +895,6 @@ public class CountryTest
 
     #endregion
 
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(Country.IsValid("Complex"), "Complex");
-        Assert.IsFalse(Country.IsValid((String)null), "(String)null");
-        Assert.IsFalse(Country.IsValid(string.Empty), "string.Empty");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(Country.IsValid("China", null));
-    }
-    #endregion
-
     #region Collection tests
 
     [Test]

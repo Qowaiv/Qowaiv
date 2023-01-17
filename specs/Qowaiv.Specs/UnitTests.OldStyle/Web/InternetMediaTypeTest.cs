@@ -752,23 +752,6 @@ namespace Qowaiv.UnitTests.Web
         }
 
         #endregion
-
-        #region IsValid tests
-
-        [Test]
-        public void IsValid_Data_IsFalse()
-        {
-            Assert.IsFalse(InternetMediaType.IsValid("test/d"), "Complex");
-            Assert.IsFalse(InternetMediaType.IsValid((String)null), "(String)null");
-            Assert.IsFalse(InternetMediaType.IsValid(string.Empty), "string.Empty");
-        }
-        [Test]
-        public void IsValid_Data_IsTrue()
-        {
-            Assert.IsTrue(InternetMediaType.IsValid("application/x-chess-pgn"));
-            Assert.IsTrue(InternetMediaType.IsValid("VIDEO/Mp3"));
-        }
-        #endregion
     }
 
     [Serializable]

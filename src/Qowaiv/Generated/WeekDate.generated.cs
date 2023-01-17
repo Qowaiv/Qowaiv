@@ -201,7 +201,7 @@ public partial struct WeekDate
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    [Pure]
+    [Impure]
     public static bool TryParse(string? s, out WeekDate result) => TryParse(s, null, out result);
 }
 
@@ -212,6 +212,8 @@ public partial struct WeekDate
     /// The <see cref="string"/> to validate.
     /// </param>
     [Pure]
+    [ExcludeFromCodeCoverage]
+    [Obsolete("Use WeekDate.TryParse(str) is { } instead. Will be dropped when the next major version is released.")]
     public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
 
     /// <summary>Returns true if the value represents a valid week date.</summary>
@@ -222,6 +224,8 @@ public partial struct WeekDate
     /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
     /// </param>
     [Pure]
+    [ExcludeFromCodeCoverage]
+    [Obsolete("Use WeekDate.TryParse(str, formatProvider) is { } instead. Will be dropped when the next major version is released.")]
     public static bool IsValid(string? val, IFormatProvider? formatProvider)
         => !string.IsNullOrWhiteSpace(val)
         && TryParse(val, formatProvider, out _);

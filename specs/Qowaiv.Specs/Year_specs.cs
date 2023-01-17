@@ -68,50 +68,6 @@ public class Is_leap_year
     }
 }
 
-public class Is_valid_for
-{
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-    {
-        Assert.IsTrue(Year.IsValid(input));
-    }
-
-    [TestCase("1979", "nl")]
-    [TestCase("1979", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(Year.IsValid(input, culture));
-    }
-}
-
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(Year.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(Year.IsValid((string)null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(Year.IsValid(" "));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(Year.IsValid("garbage"));
-    }
-}
-
 public class Has_constant
 {
     [Test]

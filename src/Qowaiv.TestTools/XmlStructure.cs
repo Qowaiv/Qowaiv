@@ -22,7 +22,7 @@ public sealed class XmlStructure<TSvo>
     public TSvo Svo { get; set; }
 
     /// <summary>Gets and sets a date (time) property.</summary>
-    public DateTime Date { get; set; } = new DateTime(2017, 06, 10);
+    public DateTime Date { get; set; } = new DateTime(2017, 06, 11);
 
     /// <inheritdoc />
     [Pure]
@@ -43,5 +43,5 @@ public sealed class XmlStructure<TSvo>
 
     /// <inheritdoc />
     [Pure]
-    public override string ToString() => $"ID: {Id}, SVO: {Svo}, Date: {Date}";
+    public override string ToString() => $"ID: {Id}, SVO: {Svo}, Date: {Date:O}";
 }

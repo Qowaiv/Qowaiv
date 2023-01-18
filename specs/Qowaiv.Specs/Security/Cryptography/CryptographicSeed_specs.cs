@@ -77,6 +77,19 @@ public class Hashing
         .Should().Throw<HashingNotSupported>();
 }
 
+public class ToByteArray
+{
+    [Test]
+    public void from_empty_is_empty_array()
+        => CryptographicSeed.Empty
+        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
+
+    [Test]
+    public void from_empty_array_stays_empty_array()
+        => CryptographicSeed.Create(Array.Empty<byte>())
+        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
+}
+
 public class Can_be_parsed
 {
     [Test]

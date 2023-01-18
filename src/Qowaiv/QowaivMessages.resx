@@ -58,7 +58,7 @@
     <value>Not a valid country</value>
   </data>
   <data name="FormatExceptionCryptographicSeed" xml:space="preserve">
-    <value>No a valid cryptographic seed</value>
+    <value>Not a valid cryptographic seed</value>
   </data>
   <data name="FormatExceptionCurrency" xml:space="preserve">
     <value>Not a valid currency</value>
@@ -197,5 +197,8 @@
   </data>
   <data name="ArgumentOutOfRangeException_AddDateSpan" xml:space="preserve">
     <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
+  </data>
+  <data name="FormatExceptionYearMonth" xml:space="preserve">
+    <value>Not a valid year-month.</value>
   </data>
 </root>

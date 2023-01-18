@@ -116,6 +116,15 @@ public class Can_be_parsed
     }
 }
 
+public class Can_not_be_parsed
+{
+    [Test]
+    public void from_non_base64_string()
+        => "s&&".Invoking(CryptographicSeed.Parse)
+        .Should().Throw<FormatException>()
+        .WithMessage("Not a valid cryptographic seed");
+}
+
 public class Supports_type_conversion_from
 {
     [Test]

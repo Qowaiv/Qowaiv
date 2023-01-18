@@ -112,6 +112,9 @@ dotnet_diagnostic.S1067.severity = warning
 # S1144: Unused private types or members should be removed
 dotnet_diagnostic.S1144.severity = warning
 
+# S1172: Unused method parameters should be removed
+dotnet_diagnostic.S1172.severity = warning
+
 # S1185: Overriding members should do more than simply call the same member in the base class
 dotnet_diagnostic.S1185.severity = warning
 

@@ -1,5 +1,27 @@
 ﻿namespace Date_span_specs;
 
+public class Is_valid
+{
+    [TestCase("23Y+0M+0D", "Without starting sign")]
+    [TestCase("+9998Y+0M+0D", "A lot of years")]
+    [TestCase("-9998Y+0M+0D", "A lot of years")]
+    [TestCase("0Y+100000M+1D", "A lot of months")]
+    [TestCase("0Y-100000M+1D", "A lot of months")]
+    [TestCase("0Y+0M+3650000D", "A lot of days")]
+    [TestCase("0Y+0M-3650000D", "A lot of days")]
+    public void For(string str, string because)
+        => DateSpan.TryParse(str).Should().NotBeNull(because);
+}
+public class Is_invalid
+{
+    [TestCase("+9999Y+0M+0D", "Years out of reach")]
+    [TestCase("-9999Y+0M+0D", "Years out of reach")]
+    [TestCase("0Y+0M+4650000D", "Days out of reach")]
+    [TestCase("0Y+0M-4650000D", "Days out of reach")]
+    public void For(string str, string because)
+        => DateSpan.TryParse(str).Should().BeNull(because);
+}
+
 public class Supports_type_conversion
 {
     [Test]

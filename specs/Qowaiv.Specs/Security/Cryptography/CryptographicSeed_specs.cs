@@ -11,6 +11,17 @@ public class Computed
     }
 }
 
+public class Not_computed
+{
+    [Test]
+    public void from_null_input()
+    {
+        var algorithm = MD5.Create();
+        var seed = algorithm.ComputeCryptographicSeed(null);
+        seed.IsEmpty().Should().BeTrue();
+    }
+}
+
 public class With_domain_logic
 {
     [TestCase(false, "Qowaiv==")]
@@ -56,13 +67,27 @@ public class equality_is_limited_to_empty
     [Test]
     public void equal_to_for_two_empties()
         => CryptographicSeed.Empty.Equals(CryptographicSeed.Empty).Should().BeTrue();
+}
+
+public class Hashing
+{
+    [Test]
+    public void is_not_supported()
+        => Svo.CryptographicSeed.Invoking(x => x.GetHashCode())
+        .Should().Throw<HashingNotSupported>();
+}
+
+public class ToByteArray
+{
+    [Test]
+    public void from_empty_is_empty_array()
+        => CryptographicSeed.Empty
+        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
 
     [Test]
-    public void hash_code_is_value_based()
-    {
-        Func<int> hash = () => Svo.CryptographicSeed.GetHashCode();
-        hash.Should().Throw<HashingNotSupported>();
-    }
+    public void from_empty_array_stays_empty_array()
+        => CryptographicSeed.Create(Array.Empty<byte>())
+        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
 }
 
 public class Can_be_parsed
@@ -91,6 +116,15 @@ public class Can_be_parsed
     }
 }
 
+public class Can_not_be_parsed
+{
+    [Test]
+    public void from_non_base64_string()
+        => "s&&".Invoking(CryptographicSeed.Parse)
+        .Should().Throw<FormatException>()
+        .WithMessage("Not a valid cryptographic seed");
+}
+
 public class Supports_type_conversion_from
 {
     [Test]
@@ -108,6 +142,11 @@ public class Supports_type_conversion_from
     [Test]
     public void @string()
         => Converting.From("Qowaiv==").To<CryptographicSeed>().Value()
+        .Should().Be("Qowaig==");
+
+    [Test]
+    public void byte_array()
+        => Converting.From(new byte[] { 0x42, 0x8C, 0x1A, 0x8A }).To<CryptographicSeed>().Value()
         .Should().Be("Qowaig==");
 }
 

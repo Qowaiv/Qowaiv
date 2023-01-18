@@ -57,17 +57,6 @@ public class Remove
         Assert.AreEqual("tt", buffer);
     }
 
-    [TestCase('\t')]
-    [TestCase(' ')]
-    [TestCase('\r')]
-    [TestCase('\n')]
-    [TestCase((char)0160)]
-    public void WhiteSpace_removes_all_white_space_chars(char ch)
-    {
-        var buffer = $"{ch} Hello.{ch}world!  ".Buffer().RemoveWhiteSpace();
-        Assert.AreEqual("Hello.world!", buffer);
-    }
-
     [TestCase('.')]
     [TestCase('-')]
     [TestCase('_')]
@@ -141,20 +130,6 @@ public class Count
 public class IndexOf
 {
     [Test]
-    public void Returns_index_of_char()
-    {
-        var buffer = " 0123456777   ".Buffer().Trim();
-        buffer.IndexOf('7').Should().Be(7);
-    }
-
-    [Test]
-    public void Returns_minus_one_if_not_found()
-    {
-        var buffer = " 0123456777   ".Buffer().Trim();
-        buffer.IndexOf('A').Should().Be(-1);
-    }
-
-    [Test]
     public void Last_returns_last_index_of_char()
     {
         var buffer = " 7123456789   ".Buffer().Trim();
@@ -168,28 +143,28 @@ public class StartsWith_String
     public void Longer_then_buffer_is_false()
     {
         var buffer = " test".Buffer().RemoveFromEnd(1);
-        Assert.IsFalse(buffer.StartsWith("testx"));
+        Assert.IsFalse(buffer.StartsWithCaseInsensitve("testx"));
     }
 
     [Test]
     public void That_matches_buffer_but_not_al_visible_is_false()
     {
         var buffer = " test".Buffer().Trim().RemoveFromEnd(1);
-        Assert.IsFalse(buffer.StartsWith("test"));
+        Assert.IsFalse(buffer.StartsWithCaseInsensitve("test"));
     }
 
     [Test]
     public void Not_matching_buffer_is_false()
     {
         var buffer = " test".Buffer().Trim();
-        Assert.IsFalse(buffer.StartsWith("xe"));
+        Assert.IsFalse(buffer.StartsWithCaseInsensitve("xe"));
     }
 
     [Test]
     public void Matching_buffer_is_true()
     {
         var buffer = " test".Buffer().Trim();
-        Assert.IsTrue(buffer.StartsWith("tes"));
+        Assert.IsTrue(buffer.StartsWithCaseInsensitve("tes"));
     }
 }
 
@@ -201,13 +176,6 @@ public class Substring
         var buffer = " test ".Buffer().Trim();
         Assert.AreEqual("st", buffer.Substring(2));
     }
-
-    [Test]
-    public void With_start_index_and_length_returns_substring()
-    {
-        var buffer = " test ".Buffer().Trim();
-        Assert.AreEqual("es", buffer.Substring(1, 2));
-    }
 }
 
 public class IsEmpty
@@ -217,22 +185,5 @@ public class IsEmpty
     {
         var buffer = "   ".Buffer().Trim();
         Assert.IsTrue(buffer.IsEmpty());
-    }
-}
-
-public class IsUnknown
-{
-    [Test]
-    public void Is_true_when_the_ToString_represents_an_unknown_value()
-    {
-        var buffer = "?".Buffer();
-        Assert.IsTrue(buffer.IsUnknown(CultureInfo.InvariantCulture));
-    }
-
-    [Test]
-    public void Is_false_when_the_ToString_does_not_represent_an_unknown_value()
-    {
-        var buffer = "some value".Buffer();
-        Assert.IsFalse(buffer.IsUnknown(CultureInfo.InvariantCulture));
     }
 }

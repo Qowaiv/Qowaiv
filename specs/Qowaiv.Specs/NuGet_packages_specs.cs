@@ -1,10 +1,4 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Qowaiv.TestTools.FluentAssertions;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace NuGet_packages_specs
+﻿namespace NuGet_packages_specs
 {
     public class All_NuGet_Packages
     {

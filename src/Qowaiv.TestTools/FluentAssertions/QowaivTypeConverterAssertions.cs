@@ -17,7 +17,7 @@ public static class QowaivTypeConverterAssertions
 
         Execute.Assertion
            .BecauseOf(because, becauseArgs)
-           .ForCondition(converter is not null && converter.GetType() != typeof(TypeConverter))
+           .ForCondition(converter.GetType() != typeof(TypeConverter))
            .FailWith($"There is no type converter defined for '{assertions.Subject}'.");
 
         return new AndConstraint<TypeAssertions>(assertions);

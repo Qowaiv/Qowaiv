@@ -14,7 +14,7 @@ public static class QowaivHashAlgorithmExtensions
     /// The input to compute the cryptographic seed for.
     /// </param>
     [Pure]
-    public static CryptographicSeed ComputeCryptographicSeed(this HashAlgorithm algorithm, byte[] buffer)
+    public static CryptographicSeed ComputeCryptographicSeed(this HashAlgorithm algorithm, byte[]? buffer)
         => buffer is { }
         ? CryptographicSeed.Create(Guard.NotNull(algorithm, nameof(algorithm)).ComputeHash(buffer))
         : CryptographicSeed.Empty;

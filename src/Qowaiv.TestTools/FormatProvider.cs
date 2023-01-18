@@ -24,7 +24,7 @@ public static class FormatProvider
     }
 
     /// <summary>Represents the unit test format provider.</summary>
-    private sealed class CustomFormatProvider: IFormatProvider, ICustomFormatter
+    private sealed class CustomFormatProvider : IFormatProvider, ICustomFormatter
     {
         /// <summary>Returns an object that provides formatting services for the specified type.</summary>
         /// <param name="formatType">
@@ -35,7 +35,7 @@ public static class FormatProvider
         /// </remarks>
         [Pure]
         public object? GetFormat(Type? formatType)
-            => (typeof(ICustomFormatter).IsAssignableFrom(formatType)) ? this : null;
+            => typeof(ICustomFormatter).IsAssignableFrom(formatType) ? this : null;
 
         /// <summary>Formats the object as String.</summary>
         /// <param name="format">

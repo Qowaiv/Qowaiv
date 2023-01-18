@@ -143,6 +143,11 @@ public class Supports_type_conversion_from
     public void @string()
         => Converting.From("Qowaiv==").To<CryptographicSeed>().Value()
         .Should().Be("Qowaig==");
+
+    [Test]
+    public void byte_array()
+        => Converting.From(new byte[] { 0x42, 0x8C, 0x1A, 0x8A }).To<CryptographicSeed>().Value()
+        .Should().Be("Qowaig==");
 }
 
 public class Does_not_support_type_converstion_to

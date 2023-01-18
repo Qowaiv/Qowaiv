@@ -109,7 +109,7 @@ internal static partial class EmailParser
     [FluentSyntax]
     private static State MailTo(this State state)
     {
-        if (state.Input.StartsWith("MAILTO:", ignoreCase: true))
+        if (state.Input.StartsWithCaseInsensitve("MAILTO:"))
         {
             state.Input.RemoveFromStart(7);
         }
@@ -251,7 +251,7 @@ internal static partial class EmailParser
             }
             else return state.Invalid();
         }
-        var isIp6 = state.Input.StartsWith("IPv6:", ignoreCase: true);
+        var isIp6 = state.Input.StartsWithCaseInsensitve("IPv6:");
         if (isIp6) { state.Input.RemoveFromStart(6); }
 
         state.Buffer.Add(state.Input);

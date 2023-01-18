@@ -20,8 +20,7 @@ internal partial class CharBuffer
     [FluentSyntax]
     public CharBuffer Add(string str)
     {
-        var s = str ?? string.Empty;
-        foreach (var ch in s)
+        foreach (var ch in str)
         {
             Add(ch);
         }
@@ -75,10 +74,6 @@ internal partial class CharBuffer
         end -= length;
         return this;
     }
-
-    /// <summary>Removes all white space from the buffer.</summary>
-    [FluentSyntax]
-    public CharBuffer RemoveWhiteSpace() => ClearChars(IsWhiteSpace);
 
     /// <summary>Removes all markup (spacing, dots, dashes, underscores) from the buffer.</summary>
     [FluentSyntax]

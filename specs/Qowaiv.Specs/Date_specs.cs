@@ -231,17 +231,17 @@ public class Is_Open_API_data_type
 public class Casts_with_dotnet_6_0
 {
     [Test]
-    public void implictly_from_Date()
+    public void explictly_from_DateOnly()
     {
-        Date casted = Svo.Date;
+        var casted = (Date)Svo.DateOnly;
         casted.Should().Be(new Date(2017, 06, 11));
     }
 
     [Test]
-    public void explicitly_to_Date()
+    public void implictly_to_DateOnly()
     {
-        var casted = (Date)new Date(2017,06,11);
-        casted.Should().Be(Svo.Date);
+        DateOnly casted = Svo.DateOnly;
+        casted.Should().Be(new DateOnly(2017, 06, 11));
     }
 }
 #endif

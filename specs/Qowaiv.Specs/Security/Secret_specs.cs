@@ -59,13 +59,14 @@ public class equality_is_limited_to_empty
     [Test]
     public void equal_to_for_two_empties()
         => Secret.Empty.Equals(Secret.Empty).Should().BeTrue();
+}
 
+public class Hashing
+{
     [Test]
-    public void hash_code_is_value_based()
-    {
-        Func<int> hash = () => Svo.Secret.GetHashCode();
-        hash.Should().Throw<HashingNotSupported>();
-    }
+    public void is_not_supported()
+        => Svo.Secret.Invoking(x => x.GetHashCode())
+        .Should().Throw<HashingNotSupported>();
 }
 
 public class Can_be_parsed

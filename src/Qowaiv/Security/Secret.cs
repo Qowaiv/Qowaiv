@@ -49,6 +49,9 @@ public readonly struct Secret : IEquatable<Secret>
 
     /// <inheritdoc />
     [Pure]
+#if NET5_0_OR_GREATER
+    [DoesNotReturn]
+#endif
     public override int GetHashCode() => Hash.NotSupportedBy<Secret>();
 
     /// <summary>Represents the secret as "*****".</summary>

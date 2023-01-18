@@ -30,6 +30,9 @@ public readonly struct Hash : IEquatable<Hash>
     /// <summary>Throws a <see cref="HashingNotSupported" />.</summary>
     [Pure]
     [EditorBrowsable(EditorBrowsableState.Never)]
+#if NET5_0_OR_GREATER
+    [DoesNotReturn]
+#endif
     public override int GetHashCode() => NotSupportedBy<Hash>();
 
     /// <summary>extends the hash with the added item.</summary>
@@ -58,6 +61,9 @@ public readonly struct Hash : IEquatable<Hash>
 
     /// <summary>Indicates that hashing is not supported by the type.</summary>
     [Pure]
+#if NET5_0_OR_GREATER
+    [DoesNotReturn]
+#endif
     public static int NotSupportedBy<T>()
         => throw new HashingNotSupported(string.Format(QowaivMessages.HashingNotSupported, typeof(T)));
 

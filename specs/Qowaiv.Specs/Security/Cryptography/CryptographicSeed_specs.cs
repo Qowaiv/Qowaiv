@@ -67,13 +67,14 @@ public class equality_is_limited_to_empty
     [Test]
     public void equal_to_for_two_empties()
         => CryptographicSeed.Empty.Equals(CryptographicSeed.Empty).Should().BeTrue();
+}
 
+public class Hashing
+{
     [Test]
-    public void hash_code_is_value_based()
-    {
-        Func<int> hash = () => Svo.CryptographicSeed.GetHashCode();
-        hash.Should().Throw<HashingNotSupported>();
-    }
+    public void is_not_supported()
+        => Svo.CryptographicSeed.Invoking(x => x.GetHashCode())
+        .Should().Throw<HashingNotSupported>();
 }
 
 public class Can_be_parsed

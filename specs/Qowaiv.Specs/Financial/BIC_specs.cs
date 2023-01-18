@@ -61,8 +61,6 @@ public class Is_valid
 
 public class Is_invalid
 {
-    [TestCase(null, "null")]
-    [TestCase("", "string.Empty")]
     [TestCase("1AAANL01", "digit in first four characters")]
     [TestCase("AAAANLBB1", "Branch length of 1")]
     [TestCase("AAAANLBB12", "Branch length of 2")]

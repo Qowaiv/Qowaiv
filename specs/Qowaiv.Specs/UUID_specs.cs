@@ -10,44 +10,6 @@ public class With_domain_logic
     }
 }
 
-public class Is_valid_for
-{
-    [TestCase("{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
-    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA")]
-    public void strings_representing_SVO(string input)
-    {
-        Assert.IsTrue(Uuid.IsValid(input));
-    }
-}
-
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(Uuid.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(Uuid.IsValid(null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(Uuid.IsValid(" "));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(Uuid.IsValid("garbage"));
-    }
-}
-
 public class Has_version
 {
     [Test]

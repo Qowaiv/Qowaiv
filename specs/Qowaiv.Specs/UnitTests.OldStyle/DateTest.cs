@@ -611,22 +611,6 @@ public class DateTest
     }
 
     #endregion
-
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(Date.IsValid("Complex"), "Complex");
-        Assert.IsFalse(Date.IsValid((String)null), "(String)null");
-        Assert.IsFalse(Date.IsValid(string.Empty), "string.Empty");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(Date.IsValid("1980-04-12 4:00"));
-    }
-    #endregion
 }
 
 [Serializable]

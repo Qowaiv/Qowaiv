@@ -246,7 +246,7 @@ public class Supports_JSON_serialization
 {
 #if NET6_0_OR_GREATER
     [TestCase(4L, "4/1")]
-    [TestCase(3d, "3/1")]
+    [TestCase(0.25d, "1/4")]
     [TestCase("13%", "13/100")]
     [TestCase("14/42", "1/3")]
     public void System_Text_JSON_deserialization(object json, Fraction svo)

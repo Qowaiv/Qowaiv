@@ -2,33 +2,12 @@
 
 public class With_domain_logic
 {
-   
-}
-
-public class Is_valid_for
-{
-    [TestCase("2017-06", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-        => YearMonth.IsValid(input, culture).Should().BeTrue();
-}
-
-public class Is_not_valid_for
-{
     [Test]
-    public void string_empty()
-        => YearMonth.IsValid(string.Empty).Should().BeFalse();
+    public void with_Year_property() => Svo.YearMonth.Year.Should().Be(2017);
+
 
     [Test]
-    public void string_null()
-        => YearMonth.IsValid(null).Should().BeFalse();
-
-    [Test]
-    public void whitespace()
-        => YearMonth.IsValid(" ").Should().BeFalse();
-
-    [Test]
-    public void garbage()
-        => YearMonth.IsValid("garbage").Should().BeFalse();
+    public void with_Month_property() => Svo.YearMonth.Month.Should().Be(06);
 }
 
 public class Has_constant
@@ -84,6 +63,25 @@ public class Is_equal_by_value
             svo.GetHashCode().Should().Be(hash);
         }
     }
+}
+
+public class Can_not_be_created
+{
+    [TestCase(0)]
+    [TestCase(10000)]
+    public void for_year_before_1_or_after_9999(int year)
+        => year.Invoking(y => new YearMonth(y, 06))
+        .Should().Throw<ArgumentOutOfRangeException>()
+        .WithMessage("Year, and Month parameters describe an un-representable year-month.*")
+        .And.ParamName.Should().Be("year");
+
+    [TestCase(0)]
+    [TestCase(13)]
+    public void for_month_smaller_than_1_or_bigger_than_12(int month)
+        => month.Invoking(m => new YearMonth(2017, m))
+        .Should().Throw<ArgumentOutOfRangeException>()
+        .WithMessage("Year, and Month parameters describe an un-representable year-month.*")
+        .And.ParamName.Should().Be("month");
 }
 
 public class Can_not_be_parsed
@@ -311,6 +309,16 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
+    [TestCase("2017-06", "2017-06")]
+    public void System_Text_JSON_deserialization(object json, YearMonth svo)
+        => JsonTester.Read_System_Text_JSON<YearMonth>(json).Should().Be(svo);
+
+    [TestCase("2017-06", "2017-06")]
+    public void System_Text_JSON_serialization(YearMonth svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
+
     [TestCase("2017-06", "2017-06")]
     public void convention_based_deserialization(YearMonth svo, object json)
         => JsonTester.Read<YearMonth>(json).Should().Be(svo);

@@ -231,25 +231,3 @@ public partial struct YearMonth
     [Pure]
     public static bool TryParse(string? s, out YearMonth result) => TryParse(s, null, out result);
 }
-
-public partial struct YearMonth
-{
-    /// <summary>Returns true if the value represents a valid year-month.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
-
-    /// <summary>Returns true if the value represents a valid year-month.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
-}

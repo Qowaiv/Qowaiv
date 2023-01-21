@@ -40,6 +40,16 @@ public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFor
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:yyyy-MM}");
 
+    /// <summary>
+    /// Returns a date that is set to a date with the year and month of this
+    /// year-month and the specified day.
+    /// </summary>
+    /// <param name="day">
+    /// The day of the date.
+    /// </param>
+    [Pure]
+    public Date ToDate(int day) => new(Year, Month, day);
+
     /// <summary>Returns a formatted <see cref="string" /> that represents the year-month.</summary>
     /// <param name="format">
     /// The format that this describes the formatting.
@@ -67,6 +77,28 @@ public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFor
     /// </returns>
     [Pure]
     public string ToJson() => ToString(CultureInfo.InvariantCulture);
+
+    #region (Explicit) casting
+
+    /// <summary>Casts a year-month to a date.</summary>
+    public static explicit operator Date(YearMonth val) => val.ToDate(01);
+
+    /// <summary>Casts a year-month to a date time.</summary>
+    public static explicit operator DateTime(YearMonth val) => val.ToDate(01);
+
+    /// <summary>Casts a year-month to a local date time.</summary>
+    public static explicit operator LocalDateTime(YearMonth val) => (LocalDateTime)val.ToDate(01);
+
+    /// <summary>Casts a week date to a year-month.</summary>
+    public static explicit operator YearMonth(Date val) => new(val.Year, val.Month);
+
+    /// <summary>Casts a date time to a year-month.</summary>
+    public static explicit operator YearMonth(DateTime val) => new(val.Year, val.Month);
+
+    /// <summary>Casts a local date time to a year-month.</summary>
+    public static explicit operator YearMonth(LocalDateTime val) => new(val.Year, val.Month);
+
+    #endregion
 
     /// <summary>Converts the string to a 
     /// A return value indicates whether the conversion succeeded.

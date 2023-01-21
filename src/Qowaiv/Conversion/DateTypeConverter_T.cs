@@ -53,12 +53,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
         {
             var date = Guard.IsInstanceOf<T>(value);
             var type = QowaivType.GetNotNullableType(destinationType);
-
-            if (type == typeof(DateTime)) return ToDateTime(date);
-            else if (type == typeof(DateTimeOffset)) return ToDateTimeOffset(date);
-            else if (type == typeof(LocalDateTime)) return ToLocalDateTime(date);
-            else if (type == typeof(Date)) return ToDate(date);
-            else if (type == typeof(WeekDate)) return ToWeekDate(date);
+            return ConvertTos[type](this, date);
         }
         return base.ConvertTo(context, culture, value, destinationType);
     }
@@ -87,6 +82,10 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     [Pure]
     protected abstract T FromWeekDate(WeekDate weekDate);
 
+    /// <summary>Converts from <see cref="YearMonth"/>.</summary>
+    [Pure]
+    protected abstract T FromYearMonth(YearMonth yearMonth);
+
     /// <summary>Converts to <see cref="DateTime"/>.</summary>
     [Pure]
     protected abstract DateTime ToDateTime(T date);
@@ -107,8 +106,22 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     [Pure]
     protected abstract WeekDate ToWeekDate(T date);
 
+    /// <summary>Converts to <see cref="YearMonth"/>.</summary>
+    [Pure]
+    protected abstract YearMonth ToYearMonth(T date);
+
     [Pure]
     private static bool IsConvertable(Type type)
         => type != typeof(T)
         && (type == typeof(string) || QowaivType.IsDate(type));
+
+    private static readonly Dictionary<Type, Func<DateTypeConverter<T>, T, object>> ConvertTos = new()
+    {
+        [typeof(DateTime)] /*      */ = (c, d) => c.ToDateTime(d),
+        [typeof(DateTimeOffset)] /**/ = (c, d) => c.ToDateTimeOffset(d),
+        [typeof(LocalDateTime)] /* */ = (c, d) => c.ToLocalDateTime(d),
+        [typeof(Date)] /*          */ = (c, d) => c.ToDate(d),
+        [typeof(WeekDate)] /*      */ = (c, d) => c.ToWeekDate(d),
+        [typeof(YearMonth)] /*     */ = (c, d) => c.ToYearMonth(d),
+    };
 }

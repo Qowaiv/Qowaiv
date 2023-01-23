@@ -23,6 +23,10 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
     [Pure]
+#if NET5_0_OR_GREATER
+    [DoesNotReturn]
+#endif
+    [WillBeSealed]
     protected override LocalDateTime FromLocalDateTime(LocalDateTime local) => throw new NotSupportedException();
 
     /// <inheritdoc />
@@ -41,6 +45,10 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
     [Pure]
+#if NET5_0_OR_GREATER
+    [DoesNotReturn]
+#endif
+    [WillBeSealed]
     protected override LocalDateTime ToLocalDateTime(LocalDateTime date) => throw new NotSupportedException();
 
     /// <inheritdoc />

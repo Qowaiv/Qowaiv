@@ -33,6 +33,7 @@ public readonly struct Hash : IEquatable<Hash>
 #if NET5_0_OR_GREATER
     [DoesNotReturn]
 #endif
+    [WillBeSealed]
     public override int GetHashCode() => NotSupportedBy<Hash>();
 
     /// <summary>extends the hash with the added item.</summary>

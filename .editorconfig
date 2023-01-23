@@ -85,6 +85,12 @@ dotnet_diagnostic.CA2249.severity = warning
 # CA2254: Template should be a static expression
 dotnet_diagnostic.CA2254.severity = warning
 
+# CS8763 A method marked [DoesNotReturn] should not return.
+dotnet_diagnostic.CS8763.severity = warning
+
+# CS8770 Method lacks [DoesNotReturn] annotation to match implemented or overridden member.
+dotnet_diagnostic.CS8770.severity = warning
+
 # QW0003: Decorate Pure functions
 dotnet_diagnostic.QW0003.severity = warning
 

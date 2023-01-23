@@ -29,9 +29,6 @@ public abstract class IdentifierBehavior : TypeConverter, IIdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-#if NET5_0_OR_GREATER
-    [DoesNotReturn]
-#endif
     public virtual object? FromJson(long obj) => throw new NotSupportedException();
 
     /// <inheritdoc/>
@@ -40,9 +37,6 @@ public abstract class IdentifierBehavior : TypeConverter, IIdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-#if NET5_0_OR_GREATER
-    [DoesNotReturn]
-#endif
     public virtual object Next() => throw new NotSupportedException();
 
     /// <inheritdoc/>

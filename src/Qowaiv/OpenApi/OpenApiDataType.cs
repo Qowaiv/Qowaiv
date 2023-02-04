@@ -17,7 +17,11 @@ public sealed record OpenApiDataType
        object? example,
        string? format = null,
        bool nullable = false,
-       string? pattern = null,
+#if NET7_0_OR_GREATER
+        [StringSyntax(StringSyntaxAttribute.Regex)] string? pattern = null,
+#else
+        string? pattern = null,
+#endif
        IReadOnlyCollection<string>? @enum = null)
 #pragma warning restore S107 // Methods should not have too many parameters
     {

@@ -15,7 +15,11 @@ public sealed class OpenApiDataTypeAttribute : Attribute
         object example,
         string? format = null,
         bool nullable = false,
+#if NET7_0_OR_GREATER
+        [StringSyntax(StringSyntaxAttribute.Regex)] string? pattern = null,
+#else
         string? pattern = null,
+#endif
         string? @enum = null)
     {
         Description = Guard.NotNullOrEmpty(description, nameof(description));

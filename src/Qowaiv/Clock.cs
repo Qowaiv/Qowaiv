@@ -153,7 +153,7 @@ public static class Clock
 #pragma warning disable S6354 // Use a testable (date) time provider instead
     // This is the testable time provider.
     private static Func<DateTime> globalUtcNow = () => DateTime.UtcNow;
-#pragma warning restore S6354 // UUse a testable (date) time provider instead
+#pragma warning restore S6354 // Use a testable (date) time provider instead
     private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
     private readonly static AsyncLocal<Func<DateTime>?> threadUtcNow = new();

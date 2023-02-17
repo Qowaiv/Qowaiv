@@ -1,4 +1,6 @@
-﻿namespace Qowaiv;
+﻿using System.Threading;
+
+namespace Qowaiv;
 
 /// <summary>Qowaiv Clock is lightweight solution for having changeable behaviour
 /// on getting the current time of today, and derived logic.
@@ -36,14 +38,14 @@ public static class Clock
     [Pure]
     public static DateTime UtcNow()
     {
-        var utcNow = (threadUtcNow ?? globalUtcNow).Invoke();
+        var utcNow = (threadUtcNow.Value ?? globalUtcNow).Invoke();
         return utcNow.Kind == DateTimeKind.Utc
             ? utcNow
             : new DateTime(utcNow.Ticks, DateTimeKind.Utc);
     }
 
     /// <summary>Gets the time zone of the <see cref="Clock"/>.</summary>
-    public static TimeZoneInfo TimeZone => threadTimeZone ?? globalTimeZone;
+    public static TimeZoneInfo TimeZone => threadTimeZone.Value ?? globalTimeZone;
 
     /// <summary>Gets the current <see cref="LocalDateTime"/>.</summary>
     [Pure]
@@ -133,8 +135,8 @@ public static class Clock
 
     #region private members
 
-    private static void SetThreadUtcNow(Func<DateTime>? time) => threadUtcNow = time;
-    private static void SetThreadTimeZone(TimeZoneInfo? timeZone) => threadTimeZone = timeZone;
+    private static void SetThreadUtcNow(Func<DateTime>? time) => threadUtcNow.Value = time;
+    private static void SetThreadTimeZone(TimeZoneInfo? timeZone) => threadTimeZone.Value = timeZone;
 
 #pragma warning disable QW0001 // Use a testable Time Provider
     // This is the testable time provider.
@@ -142,17 +144,15 @@ public static class Clock
 #pragma warning restore QW0001 // Use a testable Time Provider
     private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
-    [ThreadStatic]
-    private static Func<DateTime>? threadUtcNow;
-    [ThreadStatic]
-    private static TimeZoneInfo? threadTimeZone;
+    static AsyncLocal<Func<DateTime>?> threadUtcNow = new();
+    static AsyncLocal<TimeZoneInfo?> threadTimeZone = new();
 
     /// <summary>Class to scope a time function.</summary>
     private sealed class TimeScope : IDisposable
     {
         public TimeScope(Func<DateTime> time)
         {
-            _func = threadUtcNow;
+            _func = threadUtcNow.Value;
             SetThreadUtcNow(Guard.NotNull(time, nameof(time)));
         }
         private readonly Func<DateTime>? _func;
@@ -164,7 +164,7 @@ public static class Clock
     {
         public TimeZoneScope(TimeZoneInfo timeZone)
         {
-            _zone = threadTimeZone;
+            _zone = threadTimeZone.Value;
             SetThreadTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }
         private readonly TimeZoneInfo? _zone;
@@ -177,8 +177,8 @@ public static class Clock
     {
         public ClockScope(Func<DateTime> time, TimeZoneInfo timeZone)
         {
-            _func = threadUtcNow;
-            _zone = threadTimeZone;
+            _func = threadUtcNow.Value;
+            _zone = threadTimeZone.Value;
             SetThreadUtcNow(Guard.NotNull(time, nameof(time)));
             SetThreadTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }

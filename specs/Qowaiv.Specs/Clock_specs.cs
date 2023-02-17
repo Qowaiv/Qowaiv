@@ -1,4 +1,7 @@
-﻿namespace Clock_specs;
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Clock_specs;
 
 public class Default_behaviour
 {
@@ -100,6 +103,24 @@ public class For_current_thread_and_scope
         }
         Clock.UtcNow().Should().NotBe(Svo.DateTime);
         Clock.TimeZone.Should().NotBe(Svo.TimeZone);
+    }
+
+    [Test]
+    public async Task can_run_in_parallel_without_interference()
+    {
+        var tasks = Enumerable.Range(1900, 2000).Select(Test).ToArray();
+        var executionContexts = await Task.WhenAll(tasks);
+        executionContexts.Should().OnlyHaveUniqueItems();
+
+        async Task<int> Test(int year)
+        {
+            using (Clock.SetTimeForCurrentThread(() => new DateTime(year, 06, 11, 16, 15, 00)))
+            {
+                await Task.Delay(10);
+                Clock.UtcNow().Should().Be(new DateTime(year, 06, 11, 16, 15, 00));
+                return ExecutionContext.Capture()?.GetHashCode() ?? 0;
+            }
+        }
     }
 }
 

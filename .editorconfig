@@ -85,6 +85,9 @@ dotnet_diagnostic.CA2249.severity = warning
 # CA2254: Template should be a static expression
 dotnet_diagnostic.CA2254.severity = warning
 
+# QW0001: Use a testable Time Provider
+dotnet_diagnostic.QW0001.severity = none
+
 # QW0003: Decorate Pure functions
 dotnet_diagnostic.QW0003.severity = warning
 
@@ -178,3 +181,6 @@ dotnet_diagnostic.S3900.severity = warning
 
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none
+
+# S6354: Use a testable (date) time provider instead
+dotnet_diagnostic.S6354.severity = warning

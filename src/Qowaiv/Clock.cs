@@ -17,7 +17,7 @@ namespace Qowaiv;
 /// [Test]
 /// public void TestSomething()
 /// {
-///     using(Clock.SetTimeForCurrentThread(() => new DateTime(2017, 06, 11))
+///     using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11))
 ///     {
 ///         // test code.
 ///     }
@@ -120,32 +120,44 @@ public static class Clock
 
     /// <summary>Sets the <see cref="TimeZoneInfo"/> function globally (for the full Application Domain).</summary>
     /// <remarks>
-    /// For test purposes use <see cref="SetTimeZoneForCurrentThread(TimeZoneInfo)"/>.
+    /// For test purposes use <see cref="SetTimeZoneForCurrentContext(TimeZoneInfo)"/>.
     /// </remarks>
     public static void SetTimeZone(TimeZoneInfo timeZone) => globalTimeZone = Guard.NotNull(timeZone, nameof(timeZone));
 
+    /// <summary>Sets the <see cref="DateTime"/> function for current (execution) context only.</summary>
+    public static IDisposable SetTimeForCurrentContext(Func<DateTime> time) => new TimeScope(time);
+
+    /// <summary>Sets the <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    public static IDisposable SetTimeZoneForCurrentContext(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
+
+    /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
+
     /// <summary>Sets the <see cref="DateTime"/> function for current thread only.</summary>
-    public static IDisposable SetTimeForCurrentThread(Func<DateTime> time) => new TimeScope(time);
+    [Obsolete("Use SetTimeForCurrentContext(time) instead.")]
+    public static IDisposable SetTimeForCurrentThread(Func<DateTime> time) => SetTimeForCurrentContext(time);
 
     /// <summary>Sets the <see cref="TimeZoneInfo"/> for current thread only.</summary>
-    public static IDisposable SetTimeZoneForCurrentThread(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
+    [Obsolete("Use SetTimeZoneForCurrentContext(timeZone) instead.")]
+    public static IDisposable SetTimeZoneForCurrentThread(TimeZoneInfo timeZone) => SetTimeZoneForCurrentContext(timeZone);
 
     /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current thread only.</summary>
-    public static IDisposable SetTimeAndTimeZoneForCurrentThread(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
+    [Obsolete("Use SetTimeAndTimeZoneForCurrentContext(time, timeZone) instead.")]
+    public static IDisposable SetTimeAndTimeZoneForCurrentThread(Func<DateTime> time, TimeZoneInfo timeZone) => SetTimeAndTimeZoneForCurrentContext(time, timeZone);
 
     #region private members
 
     private static void SetThreadUtcNow(Func<DateTime>? time) => threadUtcNow.Value = time;
     private static void SetThreadTimeZone(TimeZoneInfo? timeZone) => threadTimeZone.Value = timeZone;
 
-#pragma warning disable QW0001 // Use a testable Time Provider
+#pragma warning disable S6354 // Use a testable (date) time provider instead
     // This is the testable time provider.
     private static Func<DateTime> globalUtcNow = () => DateTime.UtcNow;
-#pragma warning restore QW0001 // Use a testable Time Provider
+#pragma warning restore S6354 // UUse a testable (date) time provider instead
     private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
-    static AsyncLocal<Func<DateTime>?> threadUtcNow = new();
-    static AsyncLocal<TimeZoneInfo?> threadTimeZone = new();
+    private readonly static AsyncLocal<Func<DateTime>?> threadUtcNow = new();
+    private readonly static AsyncLocal<TimeZoneInfo?> threadTimeZone = new();
 
     /// <summary>Class to scope a time function.</summary>
     private sealed class TimeScope : IDisposable
@@ -191,5 +203,6 @@ public static class Clock
             SetThreadTimeZone(_zone);
         }
     }
+    
     #endregion
 }

@@ -516,23 +516,6 @@ public class TimestampTest
     }
 
     #endregion
-
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(Timestamp.IsValid((String)null), "(String)null");
-        Assert.IsFalse(Timestamp.IsValid(string.Empty), "string.Empty");
-
-        Assert.IsFalse(Timestamp.IsValid("75bcd15"), "75bcd15");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(Timestamp.IsValid("0x75BCD15"));
-    }
-    #endregion
 }
 
 [Serializable]

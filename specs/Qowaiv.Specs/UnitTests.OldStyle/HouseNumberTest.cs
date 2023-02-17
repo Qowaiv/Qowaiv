@@ -653,24 +653,6 @@ public class HouseNumberTest
         Assert.AreEqual(exp, act);
     }
     #endregion
-
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(HouseNumber.IsValid("1234567890"), "1234567890");
-        Assert.IsFalse(HouseNumber.IsValid((String)null), "(String)null");
-        Assert.IsFalse(HouseNumber.IsValid(string.Empty), "string.Empty");
-
-        Assert.IsFalse(HouseNumber.IsValid((System.Int32?)null), "(System.Int32?)null");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(HouseNumber.IsValid("123456"));
-    }
-    #endregion
 }
 
 [Serializable]

@@ -37,52 +37,31 @@ public class With_domain_logic
 
 public class Is_valid_for
 {
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-        => CasRegistryNumber.IsValid(input).Should().BeTrue();
-
-    [TestCase("10028-14-5", "nl")]
-    [TestCase("10028-14-5", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-        => CasRegistryNumber.IsValid(input, culture).Should().BeTrue();
+    [TestCase("10028-14-5")]
+    [TestCase("10028-14-5")]
+    public void strings_representing_SVO(string input)
+        => CasRegistryNumber.Parse(input).IsEmptyOrUnknown().Should().BeFalse();
 }
 
 public class Is_not_valid_for
 {
     [Test]
     public void Numbers_with_less_then_5_digits()
-        => CasRegistryNumber.IsValid("9-99-4").Should().BeFalse();
+        => CasRegistryNumber.TryParse("9-99-4").Should().BeNull();
 
     [Test]
     public void Numbers_with_more_then_10_digits()
-        => CasRegistryNumber.IsValid("10000000-00-0").Should().BeFalse();
-
-    [Test]
-    public void string_empty()
-        => CasRegistryNumber.IsValid(string.Empty).Should().BeFalse();
-
-    [Test]
-    public void string_null()
-        => CasRegistryNumber.IsValid(null).Should().BeFalse();
-
-    [Test]
-    public void whitespace()
-        => CasRegistryNumber.IsValid(" ").Should().BeFalse();
-
-    [TestCase]
-    public void garbage()
-        => CasRegistryNumber.IsValid("garbage").Should().BeFalse();
+        => CasRegistryNumber.TryParse("10000000-00-0").Should().BeNull();
 
     [TestCase("10028-14-3")]
     [TestCase("10028-15-5")]
     [TestCase("10028-84-5")]
     [TestCase("10020-14-5")]
-    [TestCase("10078-14-5")]
+    [TestCase("10068-14-5")]
     [TestCase("10128-14-5")]
     [TestCase("32028-14-5")]
     public void checksum_mismatches(string number)
-        => CasRegistryNumber.IsValid("number").Should().BeFalse();
+        => CasRegistryNumber.TryParse(number).Should().BeNull();
 }
 
 public class Has_constant

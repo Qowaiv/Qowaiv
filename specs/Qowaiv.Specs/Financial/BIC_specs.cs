@@ -43,6 +43,32 @@ public class Supports_type_conversion
     }
 }
 
+public class Is_valid
+{
+    [TestCase("PSTBNL21")]
+    [TestCase("ABNANL2A")]
+    [TestCase("BACBBEBB")]
+    [TestCase("GEBABEBB36A")]
+    [TestCase("DEUTDEFF")]
+    [TestCase("NEDSZAJJ")]
+    [TestCase("DABADKKK")]
+    [TestCase("UNCRIT2B912")]
+    [TestCase("DSBACNBXSHA")]
+    [TestCase("AAAANLBË")]
+    public void For(string str) 
+        => BusinessIdentifierCode.Parse(str).IsEmptyOrUnknown().Should().BeFalse();
+}
+
+public class Is_invalid
+{
+    [TestCase("1AAANL01", "digit in first four characters")]
+    [TestCase("AAAANLBB1", "Branch length of 1")]
+    [TestCase("AAAANLBB12", "Branch length of 2")]
+    [TestCase("ABCDXX01", "Not existing country")]
+    public void For(string str, string because)
+        => BusinessIdentifierCode.TryParse(str).Should().BeNull(because);
+}
+
 public class Supports_JSON_serialization
 {
 #if NET6_0_OR_GREATER

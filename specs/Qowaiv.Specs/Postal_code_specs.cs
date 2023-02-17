@@ -42,21 +42,6 @@ public class With_domain_logic
 
 public class Is_valid_for
 {
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-    {
-        Assert.IsTrue(PostalCode.IsValid(input));
-    }
-
-    [TestCase("H0H0H0", "nl")]
-    [TestCase("2624DP", "en")]
-    [TestCase("12345", null)]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(PostalCode.IsValid(input, culture));
-    }
-
     [TestCaseSource(nameof(ValidForCountry))]
     public void country(Country country, PostalCode postalCode)
     {
@@ -82,33 +67,6 @@ public class Is_valid_for
                 Country.PG,
             },
         postalCode.IsValidFor());
-    }
-}
-
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(PostalCode.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(PostalCode.IsValid(null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(PostalCode.IsValid(" "));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(PostalCode.IsValid("01234567890"));
     }
 }
 

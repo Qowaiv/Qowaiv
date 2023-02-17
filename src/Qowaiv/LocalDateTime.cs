@@ -203,8 +203,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
 
     #endregion
 
-    #region Methods
-
     /// <summary>Adds one day to the local date time.</summary>
     [Pure]
     internal LocalDateTime Increment() => AddDays(+1);
@@ -248,7 +246,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// than <see cref="MaxValue"/>.
     /// </exception>
     [Pure]
-    public LocalDateTime Add(DateSpan value) => Add(value, false);
+    public LocalDateTime Add(DateSpan value) => Add(value, DateSpanSettings.Default);
 
     /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>
     /// to the value of this instance.
@@ -284,6 +282,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// The resulting date is less than <see cref="MinValue"/> or greater
     /// than <see cref="MaxValue"/>.
     /// </exception>
+    [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
     [Pure]
     public LocalDateTime Add(DateSpan value, bool daysFirst)
     {
@@ -291,6 +290,35 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
             ? AddDays(value.Days).AddMonths(value.TotalMonths)
             : AddMonths(value.TotalMonths).AddDays(value.Days);
     }
+
+
+    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// to the value of this instance.
+    /// </summary>
+    /// <param name="value">
+    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// </param>
+    /// <param name="settings">
+    /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.
+    /// </param>
+    /// <returns>
+    /// A new date whose value is the sum of the date represented
+    /// by this instance and the time interval represented by value.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="MinValue"/> or greater
+    /// than <see cref="MaxValue"/>.
+    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
+    /// </exception>
+    [Pure]
+    public LocalDateTime Add(DateSpan value, DateSpanSettings settings) => settings switch
+    {
+        DateSpanSettings.DaysFirst => AddDays(value.Days).AddMonths(value.TotalMonths),
+        DateSpanSettings.Default => AddMonths(value.TotalMonths).AddDays(value.Days),
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
+    };
 
     /// <summary>Subtracts the specified local date time and time from this instance.</summary>
     /// <param name="value">
@@ -494,7 +522,19 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
         return new LocalDateTime(m_Value.AddMilliseconds(value));
     }
 
-    #endregion
+    /// <summary>Returns true if the local date time is in the specified month, otherwise false.</summary>
+    /// <param name="month">
+    /// The <see cref="Qowaiv.Month"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
+
+    /// <summary>Returns true if the local date time is in the specified year, otherwise false.</summary>
+    /// <param name="year">
+    /// The <see cref="Qowaiv.Year"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
 
     /// <summary>Deserializes the local date time from a JSON number.</summary>
     /// <param name="json">

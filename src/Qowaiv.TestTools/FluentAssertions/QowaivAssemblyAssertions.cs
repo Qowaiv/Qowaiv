@@ -3,7 +3,7 @@ using FluentAssertions.Execution;
 using FluentAssertions.Reflection;
 using System.Reflection;
 
-namespace Qowaiv.TestTools.FluentAssertions;
+namespace FluentAssertions;
 
 /// <summary>Extensions on <see cref="AssemblyAssertions"/>.</summary>
 public static class QowaivAssemblyAssertions

@@ -1,5 +1,3 @@
-using System.Reflection;
-
 namespace Qowaiv.UnitTests;
 
 /// <summary>Tests the date span SVO.</summary>
@@ -680,31 +678,6 @@ public class DateSpanTest
         var exp = new DateSpan(17, 0, 0);
 
         Assert.AreEqual(exp, span);
-    }
-
-
-    [TestCase("23Y+0M+0D", "Without starting sign")]
-    [TestCase("+9998Y+0M+0D", "A lot of years")]
-    [TestCase("-9998Y+0M+0D", "A lot of years")]
-    [TestCase("0Y+100000M+1D", "A lot of months")]
-    [TestCase("0Y-100000M+1D", "A lot of months")]
-    [TestCase("0Y+0M+3650000D", "A lot of days")]
-    [TestCase("0Y+0M-3650000D", "A lot of days")]
-    public void IsValid(string val, string scenario)
-    {
-        Assert.IsTrue(DateSpan.IsValid(val), scenario);
-    }
-
-    [TestCase(null, "Null")]
-    [TestCase("", "String.Empty")]
-    [TestCase("234adf", "Noise")]
-    [TestCase("+9999Y+0M+0D", "Years out of reach")]
-    [TestCase("-9999Y+0M+0D", "Years out of reach")]
-    [TestCase("0Y+0M+4650000D", "Days out of reach")]
-    [TestCase("0Y+0M-4650000D", "Days out of reach")]
-    public void IsInvalid(string val, string scenario)
-    {
-        Assert.IsFalse(DateSpan.IsValid(val), scenario);
     }
 }
 

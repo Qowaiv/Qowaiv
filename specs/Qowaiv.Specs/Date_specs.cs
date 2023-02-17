@@ -54,6 +54,68 @@ public class Is_equal_by_value
     }
 }
 
+public class Can_be_adjusted_with
+{
+    [Test]
+    public void Date_span_with_months_first()
+        => new Date(2017, 06, 11).Add(new DateSpan(2, 20)).Should().Be(new Date(2017, 08, 31));
+
+    [Test]
+    public void Date_span_with_days_first()
+        => new Date(2017, 06, 11).Add(new DateSpan(2, 20), DateSpanSettings.DaysFirst).Should().Be(new Date(2017, 09, 01));
+
+    [Test]
+    public void Month_span()
+        => new Date(2017, 06, 11).Add(MonthSpan.FromMonths(3)).Should().Be(new Date(2017, 09, 11));
+}
+
+public class Can_not_be_adjusted_with
+{
+    [TestCase(DateSpanSettings.WithoutMonths)]
+    [TestCase(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
+    public void Date_span_with(DateSpanSettings settings)
+        => new Date(2017, 06, 11).Invoking(d => d.Add(new DateSpan(2, 20), settings))
+        .Should().Throw<ArgumentOutOfRangeException>().WithMessage("Adding a date span only supports 'Default' and 'DaysFirst'.*");
+}
+
+public class Can_be_related_to
+{
+    [Test]
+    public void matching_month()
+        => new Date(2017, 06, 11).IsIn(Month.June).Should().BeTrue();
+
+    [Test]
+    public void none_matching_month()
+       => new Date(2017, 06, 11).IsIn(Month.February).Should().BeFalse();
+
+    [Test]
+    public void matching_year()
+        => new Date(2017, 06, 11).IsIn(2017.CE()).Should().BeTrue();
+
+    [Test]
+    public void none_matching_year()
+       => new Date(2017, 06, 11).IsIn(2018.CE()).Should().BeFalse();
+}
+
+public class Can_not_be_related_to
+{
+    [Test]
+    public void month_empty()
+        => new Date(2017, 06, 11).IsIn(Month.Empty).Should().BeFalse();
+
+    [Test]
+    public void month_unknown()
+       => new Date(2017, 06, 11).IsIn(Month.Unknown).Should().BeFalse();
+
+    [Test]
+    public void year_empty()
+        => new Date(2017, 06, 11).IsIn(Year.Empty).Should().BeFalse();
+
+    [Test]
+    public void year_unknown()
+       => new Date(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
+}
+
 public class Supports_type_conversion
 {
     [Test]
@@ -169,17 +231,17 @@ public class Is_Open_API_data_type
 public class Casts_with_dotnet_6_0
 {
     [Test]
-    public void implictly_from_DateOnly()
+    public void explictly_from_DateOnly()
     {
-        DateOnly casted = Svo.Date;
-        casted.Should().Be(new DateOnly(2017, 06, 11));
+        var casted = (Date)Svo.DateOnly;
+        casted.Should().Be(new Date(2017, 06, 11));
     }
 
     [Test]
-    public void explicitly_to_DateOnly()
+    public void implictly_to_DateOnly()
     {
-        var casted = (Date)new DateOnly(2017,06,11);
-        casted.Should().Be(Svo.Date);
+        DateOnly casted = Svo.DateOnly;
+        casted.Should().Be(new DateOnly(2017, 06, 11));
     }
 }
 #endif

@@ -25,7 +25,10 @@ public static class Svo
 
     /// <summary>2017-06-11</summary>
     public static readonly Date Date = new(2017, 06, 11);
-    
+#if NET6_0_OR_GREATER
+    /// <summary>2017-06-11</summary>
+    public static readonly DateOnly DateOnly = new(2017, 06, 11);
+#endif
     /// <summary>10Y+3M-5D</summary>
     public static readonly DateSpan DateSpan = new(10, 3, -5);
 

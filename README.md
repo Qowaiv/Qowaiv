@@ -8,9 +8,9 @@
 
 | version                                                                       | package                                                                     |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-6.3.1-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
-|![v](https://img.shields.io/badge/version-6.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
-|![v](https://img.shields.io/badge/version-6.3.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
+|![v](https://img.shields.io/badge/version-6.4.0-blue.svg?cacheSeconds=3600)    |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                             |
+|![v](https://img.shields.io/badge/version-6.4.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)|
+|![v](https://img.shields.io/badge/version-6.4.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)         |
 
 # Qowaiv
 
@@ -150,6 +150,9 @@ feb.ToString("f", new CultureInfo("nl-NL")); // februari
 feb.ToString("s"); // Feb
 feb.ToString("M"); // 02
 feb.ToString("m"); // 2
+
+// Querying on date (time) models.
+new DateTime(2014, 02, 14).IsIn(feb); // true
 ```
 
 ### Month span
@@ -236,10 +239,13 @@ Year year = 2017.CE(); // Extention, Common Era
 bool isLeap = year.IsLeapYear;
 
 // behavior similar to double.NaN
-Assert.IsFalse(Year.Empty < (Year)2000);
-Assert.IsFalse(Year.Empty > (Year)2000);
-Assert.IsFalse(Year.Unknown < (Year)2000);
-Assert.IsFalse(Year.Unknown > (Year)2000);
+(Year.Empty < 2000.CE()).Should().BeFalse();
+(Year.Empty > 2000.CE()).Should().BeFalse();
+(Year.Unknown < 2000.CE()).Should().BeFalse();
+(Year.Unknown > 2000.CE()).Should().BeFalse();
+
+// Querying on date (time) models.
+new DateTime(2017, 02, 14).IsIn(year); // true
 ```
 
 ### Yes-no

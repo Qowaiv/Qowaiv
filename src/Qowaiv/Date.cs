@@ -97,8 +97,6 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <summary>The inner value of the date.</summary>
     private readonly DateTime m_Value;
 
-    #region Methods
-
     /// <summary>Adds one day to the date.</summary>
     [Pure]
     internal Date Increment() => AddDays(+1);
@@ -139,7 +137,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// than <see cref="MaxValue"/>.
     /// </exception>
     [Pure]
-    public Date Add(DateSpan value) => Add(value, false);
+    public Date Add(DateSpan value) => Add(value, DateSpanSettings.Default);
 
     /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
@@ -159,13 +157,39 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// than <see cref="MaxValue"/>.
     /// </exception>
     [Pure]
-    public Date Add(DateSpan value, bool daysFirst)
+    [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
+    public Date Add(DateSpan value, bool daysFirst) 
+        => daysFirst
+        ? AddDays(value.Days).AddMonths(value.TotalMonths)
+        : AddMonths(value.TotalMonths).AddDays(value.Days);
+
+    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
+    /// to the value of this instance.
+    /// </summary>
+    /// <param name="value">
+    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// </param>
+    /// <param name="settings">
+    /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.
+    /// </param>
+    /// <returns>
+    /// A new date whose value is the sum of the date represented
+    /// by this instance and the time interval represented by value.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="MinValue"/> or greater
+    /// than <see cref="MaxValue"/>.
+    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
+    /// </exception>
+    [Pure]
+    public Date Add(DateSpan value, DateSpanSettings settings) => settings switch
     {
-        return daysFirst
-            ? AddDays(value.Days).AddMonths(value.TotalMonths)
-            : AddMonths(value.TotalMonths).AddDays(value.Days)
-        ;
-    }
+        DateSpanSettings.DaysFirst => AddDays(value.Days).AddMonths(value.TotalMonths),
+        DateSpanSettings.Default => AddMonths(value.TotalMonths).AddDays(value.Days),
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
+    };
 
     /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan"/>
     /// to the value of this instance.
@@ -370,7 +394,19 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     [Pure]
     public Date AddMilliseconds(double value) => new(m_Value.AddMilliseconds(value));
 
-    #endregion
+    /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
+    /// <param name="month">
+    /// The <see cref="Qowaiv.Month"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
+
+    /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
+    /// <param name="year">
+    /// The <see cref="Qowaiv.Year"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
 
     /// <summary>Deserializes the date from a JSON number.</summary>
     /// <param name="json">

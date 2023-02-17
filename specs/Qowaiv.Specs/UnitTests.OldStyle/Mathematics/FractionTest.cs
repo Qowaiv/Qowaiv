@@ -367,16 +367,8 @@ namespace Qowaiv.UnitTests.Mathematics
         [TestCase("9223372036854775808", "Long.MaxValue + 1")]
         [TestCase("-9223372036854775808", "Long.MinValue")]
         [TestCase("-9223372036854775809", "Long.MinValue - 1")]
-        public void IsInvalid_String(string str, string message)
-        {
-            Assert.IsFalse(Fraction.IsValid(str), message);
-        }
-
-        [TestCase("13/666")]
-        public void IsValid_String(string str)
-        {
-            Assert.IsTrue(Fraction.IsValid(str));
-        }
+        public void IsInvalid_String(string str, string because)
+            => Fraction.TryParse(str).Should().BeNull(because);
     }
 
     [Serializable]

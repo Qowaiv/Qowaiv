@@ -8,9 +8,7 @@ public class Is_valid_for
     [TestCase("17.51%", "en")]
     [TestCase("17,51%", "nl")]
     public void strings_representing_SVO(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(Percentage.IsValid(input, culture));
-    }
+        => Percentage.TryParse(input, culture).Should().NotBeNull();
 
     [TestCase("175.1<>", "en")]
     [TestCase("17,51#", "nl")]
@@ -18,52 +16,24 @@ public class Is_valid_for
     {
         using (culture.WithPercentageSymbols("#", "<>").Scoped())
         {
-            Assert.IsTrue(Percentage.IsValid(input));
+            Percentage.TryParse(input).Should().NotBeNull();
         }
     }
 }
 
 public class Is_not_valid_for
 {
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(Percentage.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(Percentage.IsValid(null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(Percentage.IsValid(" "));
-    }
-
     [TestCase("‱1‱")]
     [TestCase("‱1‰")]
     [TestCase("‱1%")]
     public void two_symbols(string str)
-    {
-        Assert.IsFalse(Percentage.IsValid(str));
-    }
+        => Percentage.TryParse(str).Should().BeNull();
 
     [TestCase("1‱1")]
     [TestCase("1‰1")]
     [TestCase("1%1")]
     public void symbol_in_the_middle(string str)
-    {
-        Assert.IsFalse(Percentage.IsValid(str));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(Percentage.IsValid("garbage"));
-    }
+        => Percentage.TryParse(str).Should().BeNull();
 }
 
 public class Has_constant

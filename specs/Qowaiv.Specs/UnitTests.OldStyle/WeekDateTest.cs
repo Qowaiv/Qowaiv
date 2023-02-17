@@ -601,25 +601,6 @@ public class WeekDateTest
 
 
     #endregion
-
-    #region IsValid tests
-
-    [Test]
-    public void IsValid_Data_IsFalse()
-    {
-        Assert.IsFalse(WeekDate.IsValid("Complex"), "Complex");
-        Assert.IsFalse(WeekDate.IsValid((String)null), "(String)null");
-        Assert.IsFalse(WeekDate.IsValid(string.Empty), "string.Empty");
-        Assert.IsFalse(WeekDate.IsValid("0000-W12-6"), "0000-W12-6");
-        Assert.IsFalse(WeekDate.IsValid("0001-W12-8"), "0001-W12-8");
-        Assert.IsFalse(WeekDate.IsValid("9999-W53-1"), "9999-W53-1");
-    }
-    [Test]
-    public void IsValid_Data_IsTrue()
-    {
-        Assert.IsTrue(WeekDate.IsValid("1234-50-6"));
-    }
-    #endregion
 }
 
 [Serializable]

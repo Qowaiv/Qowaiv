@@ -31,17 +31,11 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     public bool NotEmpty() => Length > 0;
 
     [Pure]
-    public char First() => m_Value[Start];
-
-    [Pure]
     public CharSpan Last(out char ch)
     {
         ch = m_Value[End - 1];
         return  new(m_Value, Start, End - 1);
     }
-
-    [Pure]
-    public CharSpan TrimLeft() => TrimLeft(char.IsWhiteSpace, out _);
 
     [Pure]
     public CharSpan TrimLeft(Func<char, bool> predicate, out CharSpan trimmed)
@@ -102,11 +96,13 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     public bool Equals(string? other) => Equals(other.CharSpan());
 
     [Pure]
+    [ExcludeFromCodeCoverage]
     public override int GetHashCode() => Hash.Code(ToString());
 
     [Pure]
     public IEnumerator<char> GetEnumerator() => m_Value.Skip(Start).Take(Length).GetEnumerator();
     
     [Pure]
+    [ExcludeFromCodeCoverage]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

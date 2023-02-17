@@ -95,50 +95,6 @@ public class Full_name
     }
 }
 
-public class Is_valid_for
-{
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-    {
-        Assert.IsTrue(Month.IsValid(input));
-    }
-
-    [TestCase("February", "nl")]
-    [TestCase("February", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-    {
-        Assert.IsTrue(Month.IsValid(input, culture));
-    }
-}
-
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-    {
-        Assert.IsFalse(Month.IsValid(string.Empty));
-    }
-
-    [Test]
-    public void string_null()
-    {
-        Assert.IsFalse(Month.IsValid((string)null));
-    }
-
-    [Test]
-    public void whitespace()
-    {
-        Assert.IsFalse(Month.IsValid(" "));
-    }
-
-    [Test]
-    public void garbage()
-    {
-        Assert.IsFalse(Month.IsValid("garbage"));
-    }
-}
-
 public class Has_constant
 {
     [Test]

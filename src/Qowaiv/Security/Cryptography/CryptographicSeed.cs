@@ -52,6 +52,9 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
 
     /// <inheritdoc />
     [Pure]
+#if NET5_0_OR_GREATER
+    [DoesNotReturn]
+#endif
     public override int GetHashCode() => Hash.NotSupportedBy<CryptographicSeed>();
 
     /// <summary>Represents the cryptographic seed as "*****".</summary>

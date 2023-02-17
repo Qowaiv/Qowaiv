@@ -24,6 +24,34 @@ public class Will_be_dropped
         Percentage casted = 0.1751m;
         casted.Should().Be(Svo.Percentage);
     }
+    
+    [Test]
+    public void Clock_SetTimeForCurrentThread()
+    {
+        using (Clock.SetTimeForCurrentThread(() => Svo.DateTime))
+        {
+            Clock.UtcNow().Should().Be(Svo.DateTime);
+        }
+    }
+
+    [Test]
+    public void Clock_SetTimeZoneForCurrentThread()
+    {
+        using (Clock.SetTimeZoneForCurrentThread(Svo.TimeZone))
+        {
+            Clock.TimeZone.Should().Be(Svo.TimeZone);
+        }
+    }
+
+    [Test]
+    public void Clock_SetTimeAndTimeZoneForCurrentThread()
+    {
+        using (Clock.SetTimeAndTimeZoneForCurrentThread(() => Svo.DateTime, Svo.TimeZone))
+        {
+            Clock.UtcNow().Should().Be(Svo.DateTime);
+            Clock.TimeZone.Should().Be(Svo.TimeZone);
+        }
+    }
 
     [TestCase("1999-01-30", "1999-02-28", 1, +0, false)]
     [TestCase("2000-01-30", "2000-02-29", 1, +0, false)]

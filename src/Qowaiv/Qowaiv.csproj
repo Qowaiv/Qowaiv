@@ -5,8 +5,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.4.0</Version>
+    <Version>6.4.1</Version>
     <PackageReleaseNotes>
+v6.4.1
+- Clock.SetTimeForCurrentContext supports async. #304
+- Fix issue with not closed comment in parsing email adresses. #298
+- Decorate string arguments representing regexes with [StringSyntax(StringSyntaxAttribute.Regex)]. #301 
+- Decorate methods that always throw with [DoesNotReturn] attribute. #300 
+- Mark all static IsValid(string) methods obsolete. #297
 v6.4.0
 - Support .NET 7.0. #261
 - Added DateSpan to a date (time) providing DateSpanSettings. #291

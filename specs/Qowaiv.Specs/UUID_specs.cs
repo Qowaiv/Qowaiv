@@ -192,7 +192,7 @@ public class Can_be_created_sequential
     [Test]
     public void from_1_Jan_1970_on()
     {
-        using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01).AddTicks(-1)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01).AddTicks(-1)))
         {
             Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
         }
@@ -201,7 +201,7 @@ public class Can_be_created_sequential
     [Test]
     public void until_3_Dec_9276()
     {
-        using (Clock.SetTimeForCurrentThread(() => new DateTime(9276, 12, 04)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(9276, 12, 04)))
         {
             Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
         }
@@ -210,7 +210,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_date_first_6_bytes_are_0_for_default()
     {
-        using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01)))
         {
             AssertPattern(Uuid.NewSequential(),
 
@@ -224,7 +224,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_date_last_6_bytes_are_0_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentThread(() => new DateTime(1970, 01, 01)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01)))
         {
             AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
 
@@ -238,7 +238,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_date_first_6_bytes_are_255_for_default()
     {
-        using (Clock.SetTimeForCurrentThread(() => MaxDate))
+        using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
             AssertPattern(Uuid.NewSequential(),
 
@@ -252,7 +252,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_date_last_6_bytes_are_255_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentThread(() => MaxDate))
+        using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
             AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
 
@@ -282,7 +282,7 @@ public class Can_be_created_sequential
 
         foreach (var date in GetTimes().Take(MultipleCount))
         {
-            using (Clock.SetTimeForCurrentThread(() => date))
+            using (Clock.SetTimeForCurrentContext(() => date))
             {
                 ids.Add(Uuid.NewSequential(comparer));
             }

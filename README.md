@@ -1085,12 +1085,14 @@ public class Clock : IClock
 However, providing an IClock all the time when there is time related logic is
 not that elegant at all. The Qowaiv `Clock` helps to overcome this. In code
 you just call `Clock.UtcNow()` or one of its derived methods. In a test you
-change the behaviour, in most cases just for the scope of your current threat:
+change the behaviour, in most cases just for the scope of your current 
+(execution) context:
+
 ``` CSharp
 [Test]
 public void TestSomething()
 {
-    using(Clock.SetTimeForCurrentThread(() => new DateTime(2017, 06, 11))
+    using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11))
     {
         // test code.
     }

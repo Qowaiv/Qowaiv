@@ -1,4 +1,6 @@
-﻿namespace Qowaiv;
+﻿using System.Threading;
+
+namespace Qowaiv;
 
 /// <summary>Qowaiv Clock is lightweight solution for having changeable behaviour
 /// on getting the current time of today, and derived logic.
@@ -15,7 +17,7 @@
 /// [Test]
 /// public void TestSomething()
 /// {
-///     using(Clock.SetTimeForCurrentThread(() => new DateTime(2017, 06, 11))
+///     using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11))
 ///     {
 ///         // test code.
 ///     }
@@ -36,14 +38,14 @@ public static class Clock
     [Pure]
     public static DateTime UtcNow()
     {
-        var utcNow = (threadUtcNow ?? globalUtcNow).Invoke();
+        var utcNow = (threadUtcNow.Value ?? globalUtcNow).Invoke();
         return utcNow.Kind == DateTimeKind.Utc
             ? utcNow
             : new DateTime(utcNow.Ticks, DateTimeKind.Utc);
     }
 
     /// <summary>Gets the time zone of the <see cref="Clock"/>.</summary>
-    public static TimeZoneInfo TimeZone => threadTimeZone ?? globalTimeZone;
+    public static TimeZoneInfo TimeZone => threadTimeZone.Value ?? globalTimeZone;
 
     /// <summary>Gets the current <see cref="LocalDateTime"/>.</summary>
     [Pure]
@@ -118,41 +120,51 @@ public static class Clock
 
     /// <summary>Sets the <see cref="TimeZoneInfo"/> function globally (for the full Application Domain).</summary>
     /// <remarks>
-    /// For test purposes use <see cref="SetTimeZoneForCurrentThread(TimeZoneInfo)"/>.
+    /// For test purposes use <see cref="SetTimeZoneForCurrentContext(TimeZoneInfo)"/>.
     /// </remarks>
     public static void SetTimeZone(TimeZoneInfo timeZone) => globalTimeZone = Guard.NotNull(timeZone, nameof(timeZone));
 
+    /// <summary>Sets the <see cref="DateTime"/> function for current (execution) context only.</summary>
+    public static IDisposable SetTimeForCurrentContext(Func<DateTime> time) => new TimeScope(time);
+
+    /// <summary>Sets the <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    public static IDisposable SetTimeZoneForCurrentContext(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
+
+    /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
+
     /// <summary>Sets the <see cref="DateTime"/> function for current thread only.</summary>
-    public static IDisposable SetTimeForCurrentThread(Func<DateTime> time) => new TimeScope(time);
+    [Obsolete("Use SetTimeForCurrentContext(time) instead.")]
+    public static IDisposable SetTimeForCurrentThread(Func<DateTime> time) => SetTimeForCurrentContext(time);
 
     /// <summary>Sets the <see cref="TimeZoneInfo"/> for current thread only.</summary>
-    public static IDisposable SetTimeZoneForCurrentThread(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
+    [Obsolete("Use SetTimeZoneForCurrentContext(timeZone) instead.")]
+    public static IDisposable SetTimeZoneForCurrentThread(TimeZoneInfo timeZone) => SetTimeZoneForCurrentContext(timeZone);
 
     /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current thread only.</summary>
-    public static IDisposable SetTimeAndTimeZoneForCurrentThread(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
+    [Obsolete("Use SetTimeAndTimeZoneForCurrentContext(time, timeZone) instead.")]
+    public static IDisposable SetTimeAndTimeZoneForCurrentThread(Func<DateTime> time, TimeZoneInfo timeZone) => SetTimeAndTimeZoneForCurrentContext(time, timeZone);
 
     #region private members
 
-    private static void SetThreadUtcNow(Func<DateTime>? time) => threadUtcNow = time;
-    private static void SetThreadTimeZone(TimeZoneInfo? timeZone) => threadTimeZone = timeZone;
+    private static void SetThreadUtcNow(Func<DateTime>? time) => threadUtcNow.Value = time;
+    private static void SetThreadTimeZone(TimeZoneInfo? timeZone) => threadTimeZone.Value = timeZone;
 
-#pragma warning disable QW0001 // Use a testable Time Provider
+#pragma warning disable S6354 // Use a testable (date) time provider instead
     // This is the testable time provider.
     private static Func<DateTime> globalUtcNow = () => DateTime.UtcNow;
-#pragma warning restore QW0001 // Use a testable Time Provider
+#pragma warning restore S6354 // Use a testable (date) time provider instead
     private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
-    [ThreadStatic]
-    private static Func<DateTime>? threadUtcNow;
-    [ThreadStatic]
-    private static TimeZoneInfo? threadTimeZone;
+    private readonly static AsyncLocal<Func<DateTime>?> threadUtcNow = new();
+    private readonly static AsyncLocal<TimeZoneInfo?> threadTimeZone = new();
 
     /// <summary>Class to scope a time function.</summary>
     private sealed class TimeScope : IDisposable
     {
         public TimeScope(Func<DateTime> time)
         {
-            _func = threadUtcNow;
+            _func = threadUtcNow.Value;
             SetThreadUtcNow(Guard.NotNull(time, nameof(time)));
         }
         private readonly Func<DateTime>? _func;
@@ -164,7 +176,7 @@ public static class Clock
     {
         public TimeZoneScope(TimeZoneInfo timeZone)
         {
-            _zone = threadTimeZone;
+            _zone = threadTimeZone.Value;
             SetThreadTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }
         private readonly TimeZoneInfo? _zone;
@@ -177,8 +189,8 @@ public static class Clock
     {
         public ClockScope(Func<DateTime> time, TimeZoneInfo timeZone)
         {
-            _func = threadUtcNow;
-            _zone = threadTimeZone;
+            _func = threadUtcNow.Value;
+            _zone = threadTimeZone.Value;
             SetThreadUtcNow(Guard.NotNull(time, nameof(time)));
             SetThreadTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }
@@ -191,5 +203,6 @@ public static class Clock
             SetThreadTimeZone(_zone);
         }
     }
+    
     #endregion
 }

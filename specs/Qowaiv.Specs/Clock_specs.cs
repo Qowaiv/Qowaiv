@@ -72,7 +72,7 @@ public class Date_time_kind
     }
 }
 
-public class For_current_thread_and_scope
+public class For_current_execution_context_and_scope
 {
     [Test]
     public void UtcNow_can_be_set()

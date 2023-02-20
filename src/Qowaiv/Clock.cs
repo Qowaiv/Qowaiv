@@ -38,14 +38,14 @@ public static class Clock
     [Pure]
     public static DateTime UtcNow()
     {
-        var utcNow = (threadUtcNow.Value ?? globalUtcNow).Invoke();
+        var utcNow = (localUtcNow.Value ?? globalUtcNow).Invoke();
         return utcNow.Kind == DateTimeKind.Utc
             ? utcNow
             : new DateTime(utcNow.Ticks, DateTimeKind.Utc);
     }
 
     /// <summary>Gets the time zone of the <see cref="Clock"/>.</summary>
-    public static TimeZoneInfo TimeZone => threadTimeZone.Value ?? globalTimeZone;
+    public static TimeZoneInfo TimeZone => localTimeZone.Value ?? globalTimeZone;
 
     /// <summary>Gets the current <see cref="LocalDateTime"/>.</summary>
     [Pure]
@@ -114,7 +114,7 @@ public static class Clock
 
     /// <summary>Sets the <see cref="DateTime"/> function globally (for the full Application Domain).</summary>
     /// <remarks>
-    /// For test purposes use <see cref="SetThreadUtcNow(Func{DateTime})"/>.
+    /// For test purposes use <see cref="SetLocalUtcNow(Func{DateTime})"/>.
     /// </remarks>
     public static void SetTime(Func<DateTime> time) => globalUtcNow = Guard.NotNull(time, nameof(time));
 
@@ -147,8 +147,8 @@ public static class Clock
 
     #region private members
 
-    private static void SetThreadUtcNow(Func<DateTime>? time) => threadUtcNow.Value = time;
-    private static void SetThreadTimeZone(TimeZoneInfo? timeZone) => threadTimeZone.Value = timeZone;
+    private static void SetLocalUtcNow(Func<DateTime>? time) => localUtcNow.Value = time;
+    private static void SetLocalTimeZone(TimeZoneInfo? timeZone) => localTimeZone.Value = timeZone;
 
 #pragma warning disable S6354 // Use a testable (date) time provider instead
     // This is the testable time provider.
@@ -156,19 +156,19 @@ public static class Clock
 #pragma warning restore S6354 // Use a testable (date) time provider instead
     private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
-    private readonly static AsyncLocal<Func<DateTime>?> threadUtcNow = new();
-    private readonly static AsyncLocal<TimeZoneInfo?> threadTimeZone = new();
+    private readonly static AsyncLocal<Func<DateTime>?> localUtcNow = new();
+    private readonly static AsyncLocal<TimeZoneInfo?> localTimeZone = new();
 
     /// <summary>Class to scope a time function.</summary>
     private sealed class TimeScope : IDisposable
     {
         public TimeScope(Func<DateTime> time)
         {
-            _func = threadUtcNow.Value;
-            SetThreadUtcNow(Guard.NotNull(time, nameof(time)));
+            _func = localUtcNow.Value;
+            SetLocalUtcNow(Guard.NotNull(time, nameof(time)));
         }
         private readonly Func<DateTime>? _func;
-        public void Dispose() => SetThreadUtcNow(_func);
+        public void Dispose() => SetLocalUtcNow(_func);
     }
 
     /// <summary>Class to scope a time zone.</summary>
@@ -176,12 +176,12 @@ public static class Clock
     {
         public TimeZoneScope(TimeZoneInfo timeZone)
         {
-            _zone = threadTimeZone.Value;
-            SetThreadTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
+            _zone = localTimeZone.Value;
+            SetLocalTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }
         private readonly TimeZoneInfo? _zone;
 
-        public void Dispose() => SetThreadTimeZone(_zone);
+        public void Dispose() => SetLocalTimeZone(_zone);
     }
 
     /// <summary>Class to scope time and a time zone.</summary>
@@ -189,18 +189,18 @@ public static class Clock
     {
         public ClockScope(Func<DateTime> time, TimeZoneInfo timeZone)
         {
-            _func = threadUtcNow.Value;
-            _zone = threadTimeZone.Value;
-            SetThreadUtcNow(Guard.NotNull(time, nameof(time)));
-            SetThreadTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
+            _func = localUtcNow.Value;
+            _zone = localTimeZone.Value;
+            SetLocalUtcNow(Guard.NotNull(time, nameof(time)));
+            SetLocalTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }
         private readonly Func<DateTime>? _func;
         private readonly TimeZoneInfo? _zone;
 
         public void Dispose()
         {
-            SetThreadUtcNow(_func);
-            SetThreadTimeZone(_zone);
+            SetLocalUtcNow(_func);
+            SetLocalTimeZone(_zone);
         }
     }
     

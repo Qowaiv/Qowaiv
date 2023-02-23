@@ -11,7 +11,7 @@
     <Owners>Qowaiv community</Owners>
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
-    <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
+    <Copyright>Copyright © Qowaiv community 2013--$([System.DateTime]::UtcNow.ToString(yyyy))</Copyright>
     <LangVersion>11.0</LangVersion>
     <!-- We ship package version for obsolete versions too -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>

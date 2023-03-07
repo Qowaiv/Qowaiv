@@ -110,12 +110,12 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     }
 
     /// <summary>Returns a new date span whose value is the subtraction of the specified date span and this instance.</summary>
-    ///<param name="other">
+    /// <param name="other">
     /// The date span to subtract.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan Subtract(DateSpan other)
     {
@@ -125,39 +125,39 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     }
 
     /// <summary>Returns a new date span whose value is the sum of the days to add this instance.</summary>
-    ///<param name="days">
+    /// <param name="days">
     /// The days to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan AddDays(int days) => Mutate(TotalMonths, Days + (long)days);
 
     /// <summary>Returns a new date span whose value is the sum of the months to add this instance.</summary>
-    ///<param name="months">
+    /// <param name="months">
     /// The months to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan AddMonths(int months) => Mutate(TotalMonths + (long)months, Days);
 
     /// <summary>Returns a new date span whose value is the sum of the years to add this instance.</summary>
-    ///<param name="years">
+    /// <param name="years">
     /// The years to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan AddYears(int years) => Mutate(TotalMonths + years * (long)MonthsPerYear, Days);
 
     /// <summary>Mutates the months and days.</summary>
-    ///<exception cref="OverflowException">
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     private static DateSpan Mutate(long months, long days)
     {

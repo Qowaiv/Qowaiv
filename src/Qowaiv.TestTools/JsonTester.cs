@@ -25,6 +25,7 @@ public static class JsonTester
             };
 
     }
+
     /// <summary>Writes the JSON using System.Text.Json.</summary>
     /// <remarks>
     /// <see cref="JsonSerializer.SerializeToElement(object?, Type, JsonSerializerOptions?)"/> is only available in .NET 6.0.

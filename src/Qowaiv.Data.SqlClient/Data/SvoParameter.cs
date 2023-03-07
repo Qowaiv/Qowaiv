@@ -13,7 +13,7 @@ public static class SvoParameter
     /// An <see cref="object"/>that is the value of the <see cref="SqlParameter"/>.
     /// </param>
     /// <returns>
-    /// A <see cref="SqlParameter"/> with a converted value if the value is a 
+    /// A <see cref="SqlParameter"/> with a converted value if the value is a
     /// single value object, otherwise with a non-converted value.
     /// </returns>
     [Pure]

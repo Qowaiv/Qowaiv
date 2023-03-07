@@ -44,7 +44,7 @@ internal static class FractionParser
         return Vulgars.TryGetValue(ch, out fraction)
             ? next : null;
     }
-    
+
     private static CharSpan? Regular(CharSpan span, IFormatProvider? provider, out Fraction fraction)
     {
         fraction = default;
@@ -57,14 +57,14 @@ internal static class FractionParser
         }
         else return null;
     }
-    
+
     private static CharSpan? Denominator(CharSpan span, IFormatProvider? provider, out long denominator)
     {
-        var next = Integer(span, provider, out denominator) 
+        var next = Integer(span, provider, out denominator)
             ?? Integer(span, Fraction.Formatting.SubScript, out denominator);
         return denominator > 0 ? next : null;
     }
-    
+
     private static CharSpan? Numerator(CharSpan span, IFormatProvider? provider, out long numerator)
         => Integer(span, provider, out numerator)
         ?? Integer(span, Fraction.Formatting.SuperScript, out numerator);
@@ -80,7 +80,7 @@ internal static class FractionParser
     {
         var next = span.TrimRight(ch => digits.Contains(ch), out var trimmed);
         integer = 0;
-        foreach(var ch in trimmed)
+        foreach (var ch in trimmed)
         {
             integer *= 10;
             integer += digits.IndexOf(ch);
@@ -99,7 +99,7 @@ internal static class FractionParser
         return long.TryParse(trimmed.ToString(), IntegerStyle, provider, out integer)
             ? next : null;
     }
-    
+
     public static bool Sign(CharSpan span, IFormatProvider? provider, out int sign)
     {
         sign = span.Equals(provider.NegativeSign()) ? -1 : +1;
@@ -119,7 +119,7 @@ internal static class FractionParser
             return false;
         }
     }
- 
+
     /// <summary>Parse the fraction, using <see cref="long.Parse(string)"/>, <see cref="decimal.Parse(string)"/>, and <see cref="Percentage.Parse(string)"/>.</summary>
     [Pure]
     private static Fraction? External(string s, IFormatProvider? formatInfo)
@@ -155,35 +155,35 @@ internal static class FractionParser
 
     private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
     private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;
-    
+
     private static readonly Dictionary<char, Fraction> Vulgars = new()
     {
-        { '½', 1.DividedBy(2) },
+        ['½'] = 1.DividedBy(2),
 
-        { '⅓', 1.DividedBy(3) },
-        { '⅔', 2.DividedBy(3) },
+        ['⅓'] = 1.DividedBy(3),
+        ['⅔'] = 2.DividedBy(3),
 
-        { '¼', 1.DividedBy(4) },
-        { '¾', 3.DividedBy(4) },
+        ['¼'] = 1.DividedBy(4),
+        ['¾'] = 3.DividedBy(4),
 
-        { '⅕', 1.DividedBy(5) },
-        { '⅖', 2.DividedBy(5) },
-        { '⅗', 3.DividedBy(5) },
-        { '⅘', 4.DividedBy(5) },
+        ['⅕'] = 1.DividedBy(5),
+        ['⅖'] = 2.DividedBy(5),
+        ['⅗'] = 3.DividedBy(5),
+        ['⅘'] = 4.DividedBy(5),
 
-        { '⅙', 1.DividedBy(6) },
-        { '⅚', 5.DividedBy(6) },
+        ['⅙'] = 1.DividedBy(6),
+        ['⅚'] = 5.DividedBy(6),
 
-        { '⅐', 1.DividedBy(7) },
+        ['⅐'] = 1.DividedBy(7),
 
-        { '⅛', 1.DividedBy(8) },
-        { '⅜', 3.DividedBy(8) },
-        { '⅝', 5.DividedBy(8) },
-        { '⅞', 7.DividedBy(8) },
+        ['⅛'] = 1.DividedBy(8),
+        ['⅜'] = 3.DividedBy(8),
+        ['⅝'] = 5.DividedBy(8),
+        ['⅞'] = 7.DividedBy(8),
 
-        { '⅑', 1.DividedBy(9) },
-        { '⅒', 1.DividedBy(10) },
+        ['⅑'] = 1.DividedBy(9),
+        ['⅒'] = 1.DividedBy(10),
 
-        { '↉', Fraction.Zero },
+        ['↉'] = Fraction.Zero,
     };
 }

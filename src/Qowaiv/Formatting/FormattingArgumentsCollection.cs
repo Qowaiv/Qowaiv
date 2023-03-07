@@ -22,7 +22,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// </param>
     public FormattingArgumentsCollection(IFormatProvider? formatProvider, FormattingArgumentsCollection? parent)
     {
-        FormatProvider = formatProvider?? CultureInfo.CurrentCulture;
+        FormatProvider = formatProvider ?? CultureInfo.CurrentCulture;
 
         if (parent is not null)
         {

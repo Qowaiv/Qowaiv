@@ -9,7 +9,9 @@ public static class QowaivSystemExtensions
     /// <param name="str">
     /// The string to convert to uppercase.
     /// </param>
-    /// <param name="provider"></param>
+    /// <param name="provider">
+    /// The format provider to apply.
+    /// </param>
     /// <returns>
     /// The uppercase equivalent of the current string.
     /// </returns>
@@ -26,10 +28,11 @@ public static class QowaivSystemExtensions
 
     /// <summary>Converts the specified string to title case (except for words that are entirely
     /// in uppercase, which are considered to be acronyms).
-    /// 
     /// </summary>
     /// <param name="str">The string to convert to title case.</param>
-    /// <param name="provider"></param>
+    /// <param name="provider">
+    /// The format provider to apply.
+    /// </param>
     /// <returns>
     /// The specified string converted to title case.
     /// </returns>

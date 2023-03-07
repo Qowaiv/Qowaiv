@@ -86,10 +86,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <summary>Gets a (approximate) value to sort the date spans by.</summary>
     internal double TotalDays => Days + TotalMonths * DaysPerMonth;
 
-    #region Operations
-
     /// <summary>Unary plus the date span.</summary>
-    /// <returns></returns>
     [Pure]
     internal DateSpan Plus() => this;
 
@@ -98,12 +95,12 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     public DateSpan Negate() => new(AsUInt64(-TotalMonths, -Days));
 
     /// <summary>Returns a new date span whose value is the sum of the specified date span and this instance.</summary>
-    ///<param name="other">
+    /// <param name="other">
     /// The date span to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan Add(DateSpan other)
     {
@@ -172,8 +169,6 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
         }
         return new DateSpan(AsUInt64(months, days));
     }
-
-    #endregion
 
     /// <summary>Deserializes the date span from a JSON number.</summary>
     /// <param name="json">

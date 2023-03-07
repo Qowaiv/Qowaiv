@@ -66,13 +66,13 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     }
 
     /// <summary>Keeps only the distinct set of email addresses in the collection.</summary>
-    /// <returns>
-    /// The current (cleaned) instance of the collection.
-    /// </returns>
     public void AddRange(IEnumerable<EmailAddress> emails)
     {
         Guard.NotNull(emails, nameof(emails));
-        foreach (var email in emails) { Add(email); }
+        foreach (var email in emails)
+        {
+            Add(email);
+        }
     }
 
     #endregion
@@ -178,8 +178,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
 
     #endregion
 
-    #region Serialization
-
     /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
@@ -238,7 +236,8 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
 
     /// <summary>Writes the email address to an <see href="XmlWriter"/>.</summary>
     /// <param name="writer">An XML writer.</param>
-    void IXmlSerializable.WriteXml(XmlWriter writer) { WriteXml(writer); }
+    void IXmlSerializable.WriteXml(XmlWriter writer) => WriteXml(writer);
+
     /// <summary>Writes the email address to an <see href="XmlWriter"/>.</summary>
     /// <remarks>
     /// this is used by IXmlSerializable.WriteXml() so that it can be
@@ -266,8 +265,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </returns>
     [Pure]
     public virtual string? ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
-
-    #endregion
 
     #region IFormattable / ToString
 

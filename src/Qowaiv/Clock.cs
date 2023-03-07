@@ -145,9 +145,8 @@ public static class Clock
     [Obsolete("Use SetTimeAndTimeZoneForCurrentContext(time, timeZone) instead.")]
     public static IDisposable SetTimeAndTimeZoneForCurrentThread(Func<DateTime> time, TimeZoneInfo timeZone) => SetTimeAndTimeZoneForCurrentContext(time, timeZone);
 
-    #region private members
-
     private static void SetLocalContextUtcNow(Func<DateTime>? time) => localContextUtcNow.Value = time;
+
     private static void SetLocalContextTimeZone(TimeZoneInfo? timeZone) => localContextTimeZone.Value = timeZone;
 
 #pragma warning disable S6354 // Use a testable (date) time provider instead
@@ -156,8 +155,9 @@ public static class Clock
 #pragma warning restore S6354 // Use a testable (date) time provider instead
     private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
-    private readonly static AsyncLocal<Func<DateTime>?> localContextUtcNow = new();
-    private readonly static AsyncLocal<TimeZoneInfo?> localContextTimeZone = new();
+    private static readonly AsyncLocal<Func<DateTime>?> localContextUtcNow = new();
+
+    private static readonly AsyncLocal<TimeZoneInfo?> localContextTimeZone = new();
 
     /// <summary>Class to scope a time function.</summary>
     private sealed class TimeScope : IDisposable
@@ -167,7 +167,9 @@ public static class Clock
             _func = localContextUtcNow.Value;
             SetLocalContextUtcNow(Guard.NotNull(time, nameof(time)));
         }
+
         private readonly Func<DateTime>? _func;
+
         public void Dispose() => SetLocalContextUtcNow(_func);
     }
 
@@ -179,6 +181,7 @@ public static class Clock
             _zone = localContextTimeZone.Value;
             SetLocalContextTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }
+
         private readonly TimeZoneInfo? _zone;
 
         public void Dispose() => SetLocalContextTimeZone(_zone);
@@ -194,7 +197,9 @@ public static class Clock
             SetLocalContextUtcNow(Guard.NotNull(time, nameof(time)));
             SetLocalContextTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
         }
+
         private readonly Func<DateTime>? _func;
+
         private readonly TimeZoneInfo? _zone;
 
         public void Dispose()
@@ -203,6 +208,4 @@ public static class Clock
             SetLocalContextTimeZone(_zone);
         }
     }
-    
-    #endregion
 }

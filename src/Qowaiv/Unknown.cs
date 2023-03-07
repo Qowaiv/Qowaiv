@@ -91,9 +91,11 @@ public static class Unknown
 
     /// <summary>The resource manager managing the culture based string values.</summary>
     private static readonly ResourceManager ResourceManager = new("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
-    private readonly static Dictionary<CultureInfo, string[]> Strings = new()
+
+    private static readonly Dictionary<CultureInfo, string[]> Strings = new()
     {
         { CultureInfo.InvariantCulture, new[] { "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
     };
+
     private static readonly object addCulture = new();
 }

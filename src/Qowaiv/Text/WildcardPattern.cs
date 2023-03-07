@@ -283,12 +283,18 @@ public class WildcardPattern : ISerializable
             Value = str;
             Position = pos;
         }
+
         public readonly int Position;
+        
         public readonly string Value;
+        
         public char Ch => Value[Position];
+        
         public int Left => Value.Length - Position;
+        
         [Pure]
         public bool IsEnd() => Position >= Value.Length;
+        
         [Pure]
         public Substring Next() => new(Value, Position + 1);
     }

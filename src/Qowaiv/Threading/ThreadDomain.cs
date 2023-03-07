@@ -29,6 +29,7 @@ public class ThreadDomain
             return s_Current;
         }
     }
+
     [ThreadStatic]
     private static ThreadDomain? s_Current;
 
@@ -60,6 +61,7 @@ public class ThreadDomain
 
         Creators.TryAdd(type, creator);
     }
+
     private static readonly ConcurrentDictionary<Type, Func<Thread, object>> Creators = new();
 
     /// <summary>Initializes a new instance of the <see cref="ThreadDomain"/> class.</summary>

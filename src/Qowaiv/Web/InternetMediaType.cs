@@ -204,5 +204,6 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
         var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
         return string.IsNullOrEmpty(str) ? Unknown : new InternetMediaType(str);
     }
+
     internal readonly static ResourceManager ResourceManager = new("Qowaiv.Web.InternetMediaType.FromFile", typeof(InternetMediaType).Assembly);
 }

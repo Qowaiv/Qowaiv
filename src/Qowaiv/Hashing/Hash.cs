@@ -141,6 +141,8 @@ public readonly struct Hash : IEquatable<Hash>
             Current = Randomized;
             Randomized = 20170611;
         }
+
+        /// <inheritdoc />
         public void Dispose() => Randomized = Current;
     }
 }

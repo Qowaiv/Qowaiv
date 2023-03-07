@@ -158,7 +158,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
         { 's', (svo, _) => svo.Symbol },
         { '$', (svo, _) => svo.Symbol },
         { 'e', (svo, _) => svo.EnglishName },
-        
+
     };
 
 
@@ -303,6 +303,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
             return rm;
         }
     }
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private static ResourceManager? rm;
 

@@ -94,8 +94,11 @@ public readonly partial struct Fraction
     private ref struct DecimalFraction
     {
         public decimal Numerator;
+
         public decimal Denominator;
+
         public long Value => (long)(Numerator / Denominator);
+
         public bool OneOrMore => Numerator >= Denominator;
     }
 }

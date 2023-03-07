@@ -172,7 +172,9 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
 
         return new Guid(bytes);
     }
+
     private const long TicksYear1970 = 0x89F_7FF5_F7B5_8000;
+
     private const long MaxTicks = 0x1FFF_FFFF_FFFF_FFFF;
 
     /// <summary>Converts the string to a UUID.

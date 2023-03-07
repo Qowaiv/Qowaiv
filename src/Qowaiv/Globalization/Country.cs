@@ -365,6 +365,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
             return rm;
         }
     }
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private static ResourceManager? rm;
 

@@ -20,7 +20,7 @@ public readonly partial struct Percentage
 
     internal readonly struct FormatInfo
     {
-        private static readonly string[] Befores = new [] { "fr-FR", "fa-IR" };
+        private static readonly string[] Befores = new[] { "fr-FR", "fa-IR" };
 
         public FormatInfo(string format, NumberFormatInfo provider, Symbol symbol, Position position)
         {
@@ -31,8 +31,11 @@ public readonly partial struct Percentage
         }
 
         public string Format { get; }
+
         public NumberFormatInfo Provider { get; }
+
         public Symbol Symbol { get; }
+
         public Position Position { get; }
 
         public decimal Factor => Symbol switch
@@ -79,11 +82,11 @@ public readonly partial struct Percentage
 #pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
         {
             format = WithDefault(format, formatProvider as CultureInfo);
-            
+
             var position = Position.None;
             var symbol = Symbol.None;
             var provider = NumberFormat(formatProvider);
-            
+
             Scan(ref format, ref position, ref symbol, provider, Symbol.Percent);
             Scan(ref format, ref position, ref symbol, provider, Symbol.PerMille);
             Scan(ref format, ref position, ref symbol, provider, Symbol.PerTenThousand);

@@ -30,7 +30,7 @@
       year
     </PackageTags>
     <Company>Qowaiv community</Company>
-    <Copyright>Copyright © Qowaiv community 2013--$([System.DateTime]::UtcNow.ToString(yyyy))</Copyright>
+    <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
     <LangVersion>11.0</LangVersion>
     <!-- We ship package version for obsolete versions too -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>

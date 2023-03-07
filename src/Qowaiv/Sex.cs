@@ -280,25 +280,26 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// </remarks>
     private static readonly Dictionary<byte, string?> SexLabels = new()
     {
-        { 0, null },
-        { 1, "NotKnown" },
-        { 2, "Male" },
-        { 4, "Female" },
-        { 18, "NotApplicable" }
+        [00] = null,
+        [01] = "NotKnown",
+        [02] = "Male",
+        [04] = "Female",
+        [18] = "NotApplicable",
     };
 
     private static readonly SexValues ParseValues = new();
 
     private sealed class SexValues : LocalizedValues<byte>
     {
-        public SexValues() : base(new Dictionary<string, byte>
-        {
-            { "", 0 },
-            { "0", 1 },  { "?", 1 },  { "NOTKNOWN", 1 }, { "UNKNOWN", 1 },
-            { "1", 2 },  { "M", 2 },  { "♂", 2 },{ "MALE", 2 },
-            { "2", 4 },  { "F", 4 },  { "♀", 4 },{ "FEMALE", 4 },
-            { "9", 18 }, { "X", 18 }, { "NOTAPPLICABLE", 18 },
-        }) { }
+        public SexValues()
+            : base(new()
+            {
+                { string.Empty, 0 },
+                { "0", 1 },  { "?", 1 },  { "NOTKNOWN", 1 }, { "UNKNOWN", 1 },
+                { "1", 2 },  { "M", 2 },  { "♂", 2 }, { "MALE", 2 },
+                { "2", 4 },  { "F", 4 },  { "♀", 4 }, { "FEMALE", 4 },
+                { "9", 18 }, { "X", 18 }, { "NOTAPPLICABLE", 18 },
+            }) { }
 
         protected override void AddCulture(CultureInfo culture)
         {

@@ -238,7 +238,7 @@ internal static class DecimalRound
             1000000,
             10000000,
             100000000,
-            1000000000
+            1000000000,
         };
 
     /// <summary>Gets a (thread static) instance of <see cref="Random"/>.</summary>

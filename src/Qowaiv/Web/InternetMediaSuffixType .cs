@@ -24,5 +24,5 @@ public enum InternetMediaSuffixType
     /// <summary>ZIP (compression)</summary>
     zip,
     /// <summary>CBOR (Concise Binary Object Representation)</summary>
-    cbor
+    cbor,
 }

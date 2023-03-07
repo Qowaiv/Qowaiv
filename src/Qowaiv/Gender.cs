@@ -290,11 +290,11 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// </remarks>
     private static readonly Dictionary<byte, string?> GenderLabels = new()
     {
-        { 0, null },
-        { 1, "NotKnown" },
-        { 2, "Male" },
-        { 4, "Female" },
-        { 18, "NotApplicable" }
+        [00] = null,
+        [01] = "NotKnown",
+        [02] = "Male",
+        [04] = "Female",
+        [18] = "NotApplicable",
     };
 
     /// <summary>Adds a culture to the parsings.</summary>
@@ -323,30 +323,27 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <summary>Represents the parsing keys.</summary>
     private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new()
     {
+        [CultureInfo.InvariantCulture] = new()
         {
-            CultureInfo.InvariantCulture,
-            new()
-            {
-                { "", 0 },
-                { "0", 1 },
-                { "1", 2 },
-                { "2", 4 },
-                { "9", 18 },
-                { "?", 1 },
-                { "M", 2 },
-                { "F", 4 },
-                { "X", 18 },
-                { "♂", 2 },
-                { "♀", 4 },
-                { "NOTKNOWN", 1 },
-                { "NOT KNOWN", 1 },
-                { "UNKNOWN", 1 },
-                { "MALE", 2 },
-                { "FEMALE", 4 },
-                { "NOTAPPLICABLE", 18 },
-                { "NOT APPLICABLE", 18 }
-            }
-        }
+            [string.Empty] = 0,
+            ["0"] = 1,
+            ["1"] = 2,
+            ["2"] = 4,
+            ["9"] = 18,
+            ["?"] = 1,
+            ["M"] = 2,
+            ["F"] = 4,
+            ["X"] = 18,
+            ["♂"] = 2,
+            ["♀"] = 4,
+            ["NOTKNOWN"] = 1,
+            ["NOT KNOWN"] = 1,
+            ["UNKNOWN"] = 1,
+            ["MALE"] = 2,
+            ["FEMALE"] = 4,
+            ["NOTAPPLICABLE"] = 18,
+            ["NOT APPLICABLE"] = 18,
+        },
     };
 
     /// <summary>The locker for adding a culture.</summary>

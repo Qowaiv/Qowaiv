@@ -55,7 +55,7 @@ public static class QowaivDateOnlyExtensions
     {
         DateSpanSettings.DaysFirst => d.AddDays(value.Days).AddMonths(value.TotalMonths),
         DateSpanSettings.Default => d.AddMonths(value.TotalMonths).AddDays(value.Days),
-        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan),
     };
 
     /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan"/>

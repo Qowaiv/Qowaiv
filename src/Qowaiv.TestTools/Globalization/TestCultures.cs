@@ -53,21 +53,20 @@ public static class TestCultures
             var culture = new CultureInfo("nl-BE");
             culture.DateTimeFormat.AbbreviatedMonthNames = new[]
             {
-                    "jan.",
-                    "feb.",
-                    "mrt.",
-                    "apr.",
-                    "mei",
-                    "juni",
-                    "juli",
-                    "aug.",
-                    "sep.",
-                    "okt.",
-                    "nov.",
-                    "dec.",
-                    ""
-                };
-
+                "jan.",
+                "feb.",
+                "mrt.",
+                "apr.",
+                "mei",
+                "juni",
+                "juli",
+                "aug.",
+                "sep.",
+                "okt.",
+                "nov.",
+                "dec.",
+                string.Empty,
+            };
             return culture;
         }
     }

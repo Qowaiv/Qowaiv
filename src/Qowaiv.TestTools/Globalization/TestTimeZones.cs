@@ -51,7 +51,7 @@ public static class TestTimeZones
                 standardDisplayName,
                 daylightDisplayName,
                 adjustmentRules,
-                disableDaylightSavingTime
+                disableDaylightSavingTime,
             };
             if (ctor.GetParameters().Length == 8) { args.Add(true); }
 

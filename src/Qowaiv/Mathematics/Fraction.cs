@@ -69,14 +69,14 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         /// </remarks>
         public static readonly string FractionBars = new(new[]
         {
-                Slash,
-                Colon,
-                DivisionSign,
-                FractionSlash,
-                DivisionSlash,
-                ShortSlash,
-                LongSlash
-            });
+            Slash,
+            Colon,
+            DivisionSign,
+            FractionSlash,
+            DivisionSlash,
+            ShortSlash,
+            LongSlash,
+        });
 
         public static readonly Regex Pattern = new(
             @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", 

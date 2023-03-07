@@ -39,7 +39,7 @@ public readonly partial struct Percentage
         {
             Symbol.PerMille => 0.001m,
             Symbol.PerTenThousand => 0.0001m,
-            _ => 0.01m
+            _ => 0.01m,
         };
 
         [Pure]

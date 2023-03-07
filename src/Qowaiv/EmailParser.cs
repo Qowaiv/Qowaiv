@@ -94,9 +94,8 @@ internal static partial class EmailParser
                 }
             }
             return state.Invalid();
-
         }
-        else { return state; }
+        else return state;
     }
 
     [FluentSyntax]

@@ -31,8 +31,10 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 {
     /// <summary>Represents an Amount of zero.</summary>
     public static readonly Money Zero;
+
     /// <summary>Represents the smallest possible value of <see cref="Money"/>.</summary>
     public static readonly Money MinValue = decimal.MinValue + Currency.Empty;
+
     /// <summary>Represents the biggest possible value of <see cref="Money"/>.</summary>
     public static readonly Money MaxValue = decimal.MaxValue + Currency.Empty;
 
@@ -332,11 +334,13 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Increases the money with one (of the current currency).</summary>
     public static Money operator ++(Money money) => money.Increment();
+
     /// <summary>Decreases the money with one (of the current currency).</summary>
     public static Money operator --(Money money) => money.Decrement();
 
     /// <summary>Unitary plusses the money.</summary>
     public static Money operator +(Money money) => money.Plus();
+
     /// <summary>Negates the money.</summary>
     public static Money operator -(Money money) => money.Negate();
 
@@ -376,36 +380,44 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// <summary>Multiplies the money with the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator *(Money money, ulong factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator *(Money money, uint factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator *(Money money, ushort factor) => money.Multiply(factor);
 
-
     /// <summary>Divides the money by the percentage.</summary>
     public static Money operator /(Money money, Percentage p) => money.Divide(p);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, decimal factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, double factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, float factor) => money.Divide(factor);
 
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, long factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, int factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, short factor) => money.Divide(factor);
 
     /// <summary>Divides the money by the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator /(Money money, ulong factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator /(Money money, uint factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator /(Money money, ushort factor) => money.Divide(factor);

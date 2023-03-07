@@ -96,6 +96,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
         else return behavior.Compare(m_Value, other.m_Value);
     }
 #endif
+
     /// <inheritdoc />
     [Pure]
     public override bool Equals(object? obj) => obj is Svo<TSvoBehavior> other && Equals(other);

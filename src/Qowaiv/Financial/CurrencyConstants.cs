@@ -706,5 +706,4 @@ public readonly partial struct Currency
     /// <summary>Describes the currency Zimbabwe dollar (ZWR).</summary>
     /// <remarks>End date is 2009-02-02.</remarks>
     public static readonly Currency ZWR = new("ZWR");
-
 }

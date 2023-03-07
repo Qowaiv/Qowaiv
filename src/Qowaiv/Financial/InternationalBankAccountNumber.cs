@@ -89,6 +89,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
             return m_Value;
         }
     }
+
     /// <summary>Formats the IBAN without spaces as lowercase.</summary>
     [Pure]
     private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();

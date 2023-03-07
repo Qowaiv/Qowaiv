@@ -118,6 +118,7 @@ dotnet_diagnostic.SA1636.severity = none # The file header should contain match 
 dotnet_diagnostic.SA1637.severity = none # The file header should contain file name.
 dotnet_diagnostic.SA1640.severity = none # The copyright tag should contain a non-empty company attribute.
 
+dotnet_diagnostic.SA1515.severity = suggestion # Single-line comment should be preceded by blank line.
 dotnet_diagnostic.SA1649.severity = suggestion # File name should match first type name.
 
 # S100: Properties should be named in PascalCase

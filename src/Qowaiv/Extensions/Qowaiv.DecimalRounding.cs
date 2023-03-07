@@ -12,5 +12,4 @@ public static class DecimalRoundingExtensions
     [Pure]
     public static bool IsNearestRounding(this DecimalRounding mode)
         => mode >= DecimalRounding.ToEven && mode <= DecimalRounding.RandomTieBreaking;
-
 }

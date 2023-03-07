@@ -17,6 +17,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// According to RFC 6068: http://tools.ietf.org/html/rfc6068.
     /// </remarks>
     public const string Separator = ",";
+
     /// <summary>The separators used for parsing.</summary>
     /// <remarks>
     /// Both comma and semicolon are supported.

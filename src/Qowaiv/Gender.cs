@@ -62,7 +62,6 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <param name="culture">
     /// The culture of the display name.
     /// </param>
-    /// <returns></returns>
     [Pure]
     public string GetDisplayName(CultureInfo? culture) => GetResourceString(string.Empty, culture);
 

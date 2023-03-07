@@ -50,7 +50,6 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     #region Operations
 
     /// <summary>Unary plus the month span.</summary>
-    /// <returns></returns>
     [Pure]
     internal MonthSpan Plus() => this;
 

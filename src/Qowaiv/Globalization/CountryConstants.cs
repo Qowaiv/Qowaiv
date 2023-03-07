@@ -795,5 +795,4 @@ public readonly partial struct Country
 
     /// <summary>Describes the country Kosovo (XK).</summary>
     public static readonly Country XK = new("XK");
-
 }

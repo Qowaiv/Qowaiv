@@ -80,7 +80,6 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// <param name="culture">
     /// The culture of the display name.
     /// </param>
-    /// <returns></returns>
     [Pure]
     public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
 
@@ -158,9 +157,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
         { 's', (svo, _) => svo.Symbol },
         { '$', (svo, _) => svo.Symbol },
         { 'e', (svo, _) => svo.EnglishName },
-
     };
-
 
     /// <summary>Gets an XML string representation of the currency.</summary>
     [Pure]

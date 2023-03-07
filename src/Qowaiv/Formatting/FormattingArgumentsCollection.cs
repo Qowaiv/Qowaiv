@@ -66,7 +66,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
         : obj?.ToString();
 
     /// <summary>Replaces the format item in a specified string with the string representation
-    /// of a corresponding object in a specified array. 
+    /// of a corresponding object in a specified array.
     /// </summary>
     /// <param name="format">
     /// A composite format string.
@@ -126,8 +126,6 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 pos++;
                 if (ch == '}')
                 {
-
-
                     if (pos < len && format[pos] == '}') // Treat as escape character for }}
                         pos++;
                     else
@@ -160,7 +158,9 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 if (pos == len) FormatError();
                 ch = format[pos];
             } while (ch >= '0' && ch <= '9' && index < 1000000);
-            if (index >= args.Length) FormatErrorIndexOutOfRange();
+
+            if (index >= args.Length) { FormatErrorIndexOutOfRange(); }
+
             while (pos < len && (ch = format[pos]) == ' ') pos++;
             bool leftJustify = false;
             int width = 0;
@@ -185,11 +185,12 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                     pos++;
                     if (pos == len) FormatError();
                     ch = format[pos];
-                } while (ch >= '0' && ch <= '9' && width < 1000000);
+                }
+                while (ch >= '0' && ch <= '9' && width < 1000000);
             }
 
             while (pos < len && (ch = format[pos]) == ' ') pos++;
-            Object arg = args[index];
+            object arg = args[index];
             StringBuilder fmt = null;
             if (ch == ':')
             {
@@ -507,7 +508,10 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments collection for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
-        => string.Format(CultureInfo.InvariantCulture,
-            "FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count);
+        => string.Format(
+            CultureInfo.InvariantCulture,
+            "FormattingArgumentsCollection: '{0}', Items: {1}",
+            FormatProvider,
+            Count);
 
 }

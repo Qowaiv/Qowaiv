@@ -61,8 +61,8 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
 
     /// <summary>Returns true if the conversion is supported.</summary>
     [Pure]
-    protected virtual bool IsConvertable(Type? type) 
-        => type is not null 
-        && type != typeof(TSvo) 
+    protected virtual bool IsConvertable(Type? type)
+        => type is not null
+        && type != typeof(TSvo)
         && QowaivType.IsNumeric(type);
 }

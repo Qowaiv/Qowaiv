@@ -11,18 +11,19 @@ public sealed record OpenApiDataType
     /// <summary>Initializes a new instance of the <see cref="OpenApiDataType"/> class.</summary>
 #pragma warning disable S107 // Methods should not have too many parameters
     // To overcome the lack of the init key word in netstandard2.0.
-    public OpenApiDataType(Type dataType,
-       string description,
-       string type,
-       object? example,
-       string? format = null,
-       bool nullable = false,
+    public OpenApiDataType(
+        Type dataType,
+        string description,
+        string type,
+        object? example,
+        string? format = null,
+        bool nullable = false,
 #if NET7_0_OR_GREATER
         [StringSyntax(StringSyntaxAttribute.Regex)] string? pattern = null,
 #else
         string? pattern = null,
 #endif
-       IReadOnlyCollection<string>? @enum = null)
+        IReadOnlyCollection<string>? @enum = null)
 #pragma warning restore S107 // Methods should not have too many parameters
     {
         DataType = Guard.NotNull(dataType, nameof(dataType));
@@ -140,6 +141,6 @@ public sealed record OpenApiDataType
       : null;
 
     [Pure]
-    private static bool HasPublicParameterlessCtor(Type type) 
+    private static bool HasPublicParameterlessCtor(Type type)
         => type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
 }

@@ -74,7 +74,6 @@ public readonly partial struct Percentage
                 _ => string.Empty,
             };
 
-
         [Pure]
 #pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members
         // This is the only proper name for this function.

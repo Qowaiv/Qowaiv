@@ -63,7 +63,7 @@ public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFo
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) 
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : ToString(Country.TryParse(format) ?? default);

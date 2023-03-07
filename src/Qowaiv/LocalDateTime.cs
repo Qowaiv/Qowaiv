@@ -280,7 +280,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
             : AddMonths(value.TotalMonths).AddDays(value.Days);
     }
 
-
     /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
     /// </summary>

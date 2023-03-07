@@ -56,14 +56,14 @@ public readonly struct Secret : IEquatable<Secret>
 
     /// <summary>Represents the secret as "*****".</summary>
     /// <remarks>
-    /// To prevent unintended exposure. 
+    /// To prevent unintended exposure.
     /// </remarks>
     [Pure]
     public override string ToString() => m_Value is null ? string.Empty : "*****";
 
     /// <summary>Converts the secret to a JSON null node.</summary>
     /// <remarks>
-    /// To prevent unintended exposure. 
+    /// To prevent unintended exposure.
     /// </remarks>
     [Pure]
 #pragma warning disable CA1822 // part of the contract

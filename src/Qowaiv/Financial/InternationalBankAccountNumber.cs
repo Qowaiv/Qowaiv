@@ -132,7 +132,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// u: as unformatted lowercase.
     /// U: as unformatted uppercase.
     /// f: as formatted lowercase.
@@ -188,7 +188,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
         else if (str.Length.IsInRange(12, 32)
             && str.Matches(Pattern)
             && ValidForCountry(str)
-            && (Mod97(str)))
+            && Mod97(str))
         {
             result = new InternationalBankAccountNumber(str);
             return true;

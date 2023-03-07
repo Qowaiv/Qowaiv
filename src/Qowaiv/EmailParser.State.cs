@@ -47,7 +47,7 @@ internal static partial class EmailParser
                 if (ch.IsCommentStart()) { return default; }
             }
             return Input.Length == 0
-                ? default 
+                ? default
                 : NextNoComment();
         }
 

@@ -3,7 +3,7 @@
 /// <summary> is a group of similar binary-to-text encoding schemes that
 /// represent binary data in an ASCII string format by translating it into
 /// a radix-64 representation. The term Base64 originates from MIME.
-/// (RFC 1341, since made obsolete by RFC 2045). 
+/// (RFC 1341, since made obsolete by RFC 2045).
 /// </summary>
 public static class Base64
 {

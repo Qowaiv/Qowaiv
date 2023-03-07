@@ -134,7 +134,7 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// f: as full name.
     /// s: as short name.
     /// M: as number with leading zero.

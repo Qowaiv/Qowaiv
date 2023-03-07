@@ -11,7 +11,7 @@
 /// contains a whole number of weeks (20871). In every cycle there are 71
 /// years with an additional 53rd week. An average year is exactly 52.1775
 /// weeks long, months average at 4.348125 weeks.
-/// 
+///
 /// An ISO week-numbering year (also called ISO year informally) has 52 or
 /// 53 full weeks. That is 364 or 371 days instead of the usual 365 or 366
 /// days. The extra week is referred to here as a leap week, although
@@ -19,7 +19,7 @@
 /// of a year is the week that contains the first Thursday (and, hence,
 /// 4 January) of the year. ISO week year numbering therefore slightly
 /// deviates from the Gregorian for some days close to 1 January.
-/// 
+///
 /// A date is specified by the ISO week-numbering year in the format YYYY,
 /// a week number in the format ww prefixed by the letter 'W', and the
 /// weekday number, a digit d from 1 through 7, beginning with Monday and

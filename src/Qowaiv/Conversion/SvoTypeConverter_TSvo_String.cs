@@ -3,7 +3,7 @@
 /// <summary>Provides a conversion for Single Value Objects.</summary>
 /// <remarks>
 /// The SVO Type Converter supports conversion from and to <see cref="string"/>.
-/// 
+///
 /// The conversion to <see cref="string"/> is handled by its base class,
 /// for conversion from <see cref="string"/> the <see cref="FromString(string, CultureInfo)"/>
 /// method has to be implemented.

@@ -8,12 +8,12 @@ namespace Qowaiv;
 
 /// <summary>Represents a Sex.</summary>
 /// <remarks>
-/// Defines a representation of human sexes through a language-neutral 
+/// Defines a representation of human sexes through a language-neutral
 /// single-digit code. International standard ISO 5218, titled Information
 /// technology - Codes for the representation of human sexes.
-/// 
+///
 /// It can be used in information systems such as database applications.
-/// 
+///
 /// The four codes specified in ISO/IEC 5218 are:
 /// 0 = not known,
 /// 1 = male,
@@ -118,7 +118,7 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// i: as integer.
     /// c: as single character.
     /// h: as Honorific.
@@ -138,7 +138,7 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
         { 'c', (svo, provider) => svo.GetResourceString("char_", provider) },
         { 'h', (svo, provider) => svo.GetResourceString("honorific_", provider) },
         { 's', (svo, provider) => svo.GetResourceString("symbol_", provider) },
-        { 'f', (svo, provider) => svo.GetResourceString("", provider) },
+        { 'f', (svo, provider) => svo.GetResourceString(string.Empty, provider) },
     };
 
     /// <summary>Gets an XML string representation of the sex.</summary>
@@ -305,7 +305,7 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
         {
             foreach (var sex in All)
             {
-                var full = sex.ToString("", culture).Unify();
+                var full = sex.ToString(string.Empty, culture).Unify();
                 var shrt = sex.ToString("c", culture).Unify();
                 this[culture][full] = sex.m_Value;
                 this[culture][shrt] = sex.m_Value;

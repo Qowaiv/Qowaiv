@@ -157,7 +157,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// </exception>
     [Pure]
     [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
-    public Date Add(DateSpan value, bool daysFirst) 
+    public Date Add(DateSpan value, bool daysFirst)
         => daysFirst
         ? AddDays(value.Days).AddMonths(value.TotalMonths)
         : AddMonths(value.TotalMonths).AddDays(value.Days);
@@ -441,7 +441,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
         // We don't want to see hh:mm pop up.
         format = format.WithDefault("d");
         return StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
-            ? formatted 
+            ? formatted
             : m_Value.ToString(format, formatProvider);
     }
 
@@ -490,7 +490,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
 
     #endregion
 
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a date. 
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -508,7 +508,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Date result)
         => TryParse(s, formatProvider, DateTimeStyles.None, out result);
 
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a date. 
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

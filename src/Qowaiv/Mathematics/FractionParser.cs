@@ -5,7 +5,7 @@ internal static class FractionParser
     /// <summary>Parses a faction.</summary>
     /// <remarks>
     /// Fraction Grammar
-    /// 
+    ///
     /// parse       => [external] | [complex]
     /// external    => long.Parse() | decimal.Parse() | Percentage.Parse()
     /// complex     => [sign] [integer]? [fraction]

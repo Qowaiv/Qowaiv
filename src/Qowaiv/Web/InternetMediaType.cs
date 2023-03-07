@@ -15,24 +15,24 @@ namespace Qowaiv.Web;
 /// email clients use them to identify attachment files, web browsers use them
 /// to determine how to display or output files that are not in HTML format,
 /// search engines use them to classify data files on the web.
-/// 
+///
 /// A media type is composed of a type, a subtype, and zero or more optional
 /// parameters. As an example, an HTML file might be designated text/html;
 /// charset=UTF-8.
-/// 
+///
 /// In this example text is the type, html is the subtype, and charset=UTF-8
 /// is an optional parameter indicating the character encoding.
-/// 
+///
 /// IANA manages the official registry of media types.
 /// The identifiers were originally defined in RFC 2046, and were called MIME
 /// types because they referred to the non-ASCII parts of email messages that
 /// were composed using the MIME (Multipurpose Internet Mail Extensions)
 /// specification. They are also sometimes referred to as Content-types.
-/// 
+///
 /// Their use has expanded from email sent through SMTP, to other protocols
 /// such as HTTP, RTP and SIP.
 /// New media types can be created with the procedures outlined in RFC 6838.
-/// 
+///
 /// See http://tools.ietf.org/html/rfc2046
 /// See http://tools.ietf.org/html/rfc6838.
 /// </remarks>

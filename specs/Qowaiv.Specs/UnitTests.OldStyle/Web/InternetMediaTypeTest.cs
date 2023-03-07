@@ -429,7 +429,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
-            var act = TestStruct.ToString("");
+            var act = TestStruct.ToString(string.Empty);
             var exp = "application/x-chess-pgn";
             Assert.AreEqual(exp, act);
         }

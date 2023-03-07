@@ -296,12 +296,12 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     [Pure]
     public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
     {
-        if ((settings & (DateSpanSettings.DaysOnly)) == DateSpanSettings.DaysOnly)
+        if (settings.HasFlag(DateSpanSettings.DaysOnly))
         {
             return FromDays((int)(d1 - d2).TotalDays);
         }
-        else return d1 < d2 
-            ? Subtraction(d2, d1, settings).Negate() 
+        else return d1 < d2
+            ? Subtraction(d2, d1, settings).Negate()
             : Subtraction(d1, d2, settings);
     }
 
@@ -345,8 +345,6 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
         }
         return new DateSpan(years, 0, days);
     }
-
-    
 
     /// <summary>Converts the string to a date span.
     /// A return value indicates whether the conversion succeeded.
@@ -404,7 +402,6 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
         => IsOutOfRange(months, days, days + months * DaysPerMonth)
         ? throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception?)null)
         : AsUInt64(months, days);
-
 
     /// <summary>Returns true if the combination of months and days can not be processed.</summary>
     [Pure]

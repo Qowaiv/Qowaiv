@@ -10,9 +10,9 @@ namespace Qowaiv;
 /// <code>
 /// DateTime now = Clock.UtcNow();
 /// </code>
-/// 
+///
 /// Controlling the behaviour in a test could look like:
-/// 
+///
 /// <code>
 /// [Test]
 /// public void TestSomething()
@@ -28,10 +28,10 @@ public static class Clock
 {
     /// <summary>Gets the UTC (Coordinated Universal Time) zone of the clock.</summary>
     /// <remarks>
-    /// To be able to stub the clock, this simple class can be used. 
-    /// 
+    /// To be able to stub the clock, this simple class can be used.
+    ///
     /// The core if this clock it UTC, see: https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
-    /// 
+    ///
     /// To prevent unexpected behaviour, the result is always converted to
     /// <see cref="DateTimeKind.Utc"/> if needed.
     /// </remarks>

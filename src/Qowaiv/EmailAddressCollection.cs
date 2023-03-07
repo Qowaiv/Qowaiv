@@ -26,10 +26,10 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
 
     /// <summary>The underlying hash set.</summary>
     /// <remarks>
-    /// The only proper way to block the adding of empty and unknown 
+    /// The only proper way to block the adding of empty and unknown
     /// email addresses was by overriding Add, which is not allowed if
     /// derived from HasSet&lt;EmailAddress&gt;.
-    /// 
+    ///
     /// So this construction is required.
     /// </remarks>
     private readonly HashSet<EmailAddress> hashset = new();
@@ -51,8 +51,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     public EmailAddressCollection(IEnumerable<EmailAddress> emails)
         : this() => AddRange(emails);
 
-    #region Methods
-
     /// <summary>Adds an email address to the current collection and returns
     /// a value to indicate if the email address was successfully added.
     /// </summary>
@@ -61,10 +59,8 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </param>
     [CollectionMutation]
     public bool Add(EmailAddress item)
-    {
-        if (item.IsEmptyOrUnknown()) { return false; }
-        return hashset.Add(item);
-    }
+        => !item.IsEmptyOrUnknown()
+        && hashset.Add(item);
 
     /// <summary>Keeps only the distinct set of email addresses in the collection.</summary>
     public void AddRange(IEnumerable<EmailAddress> emails)
@@ -75,8 +71,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
             Add(email);
         }
     }
-
-    #endregion
 
     #region ICollection
 
@@ -285,7 +279,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
+    public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
     /// <param name="format">

@@ -99,6 +99,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
             return string.IsNullOrEmpty(val) ? null : (Date?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
         }
     }
+
     /// <summary>Gets the display name for a specified culture.</summary>
     /// <param name="culture">
     /// The culture of the display name.
@@ -146,8 +147,11 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         }
         catch
         {
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
-                QowaivMessages.NotSupportedExceptionCountryToRegionInfo, EnglishName, IsoAlpha2Code));
+            throw new NotSupportedException(string.Format(
+                CultureInfo.InvariantCulture,
+                QowaivMessages.NotSupportedExceptionCountryToRegionInfo,
+                EnglishName,
+                IsoAlpha2Code));
         }
     }
 
@@ -181,7 +185,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// n: as Name.
     /// 0: as ISO Numeric.
     /// 2: as ISO Alpha-2.

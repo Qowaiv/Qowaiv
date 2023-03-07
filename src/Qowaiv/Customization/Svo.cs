@@ -72,9 +72,9 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     [Pure]
     public int CompareTo(object? obj)
     {
-        if (obj is null) { return 1; }
-        else if (obj is Svo<TSvoBehavior> other) { return CompareTo(other); }
-        else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
+        if (obj is null) return 1;
+        else if (obj is Svo<TSvoBehavior> other) return CompareTo(other);
+        else throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
     }
 
     /// <inheritdoc />

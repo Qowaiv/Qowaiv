@@ -6,12 +6,12 @@ namespace Qowaiv;
 
 /// <summary>Represents a Gender.</summary>
 /// <remarks>
-/// Defines a representation of human sexes through a language-neutral 
+/// Defines a representation of human sexes through a language-neutral
 /// single-digit code. International standard ISO 5218, titled Information
 /// technology - Codes for the representation of human sexes.
-/// 
+///
 /// It can be used in information systems such as database applications.
-/// 
+///
 /// The four codes specified in ISO/IEC 5218 are:
 /// 0 = not known,
 /// 1 = male,
@@ -35,10 +35,13 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
 
     /// <summary>Represents a not known/unknown gender.</summary>
     public static readonly Gender Unknown = new(1);
+
     /// <summary>Represents a male.</summary>
     public static readonly Gender Male = new(2);
+
     /// <summary>Represents a female.</summary>
     public static readonly Gender Female = new(4);
+
     /// <summary>Represents a not applicable gender.</summary>
     public static readonly Gender NotApplicable = new(18);
 
@@ -115,7 +118,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// i: as integer.
     /// c: as single character.
     /// h: as Honorific.
@@ -135,7 +138,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
         { 'c', (svo, provider) => svo.GetResourceString("char_", provider) },
         { 'h', (svo, provider) => svo.GetResourceString("honorific_", provider) },
         { 's', (svo, provider) => svo.GetResourceString("symbol_", provider) },
-        { 'f', (svo, provider) => svo.GetResourceString("", provider) },
+        { 'f', (svo, provider) => svo.GetResourceString(string.Empty, provider) },
     };
 
     /// <summary>Gets an XML string representation of the gender.</summary>
@@ -304,13 +307,13 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     {
         lock (Locker)
         {
-            if (Parsings.ContainsKey(culture)) { return; }
+            if (Parsings.ContainsKey(culture)) return;
 
             Parsings[culture] = new Dictionary<string, byte>();
 
             foreach (var gender in All)
             {
-                var longname = gender.ToString("", culture).ToUpper(culture);
+                var longname = gender.ToString(string.Empty, culture).ToUpper(culture);
                 var shortname = gender.ToString("c", culture).ToUpper(culture);
 
                 Parsings[culture][longname] = gender.m_Value;

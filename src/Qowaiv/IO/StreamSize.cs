@@ -5,7 +5,7 @@ namespace Qowaiv.IO;
 
 /// <summary>Represents a stream size.</summary>
 /// <remarks>
-/// A stream size measures the size of a computer file or stream. Typically it is 
+/// A stream size measures the size of a computer file or stream. Typically it is
 /// measured in bytes with an SI prefix. The actual amount of disk space consumed by
 /// the file depends on the file system. The maximum stream size a file system
 /// supports depends on the number of bits reserved to store size information
@@ -535,7 +535,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     }
 
     [FluentSyntax]
-    private static StringBuilder AppendExtension(StringBuilder sb, string streamSizeMarker, int order) 
+    private static StringBuilder AppendExtension(StringBuilder sb, string streamSizeMarker, int order)
         => streamSizeMarker switch
         {
             "s" => sb.Append(ShortLabels[order].ToLowerInvariant()),
@@ -600,7 +600,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
         if (string.IsNullOrEmpty(s)) return false;
         else
         {
-
             var streamSizeMarker = GetStreamSizeMarker(s);
             var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
             var factor = GetMultiplier(streamSizeMarker);

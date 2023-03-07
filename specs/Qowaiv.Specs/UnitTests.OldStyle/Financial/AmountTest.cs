@@ -282,7 +282,7 @@ namespace Qowaiv.Financial.UnitTests
         [Test]
         public void ToString_TestStruct_ComplexPattern()
         {
-            var act = TestStruct.ToString("", CultureInfo.InvariantCulture);
+            var act = TestStruct.ToString(string.Empty, CultureInfo.InvariantCulture);
             var exp = "42.17";
             Assert.AreEqual(exp, act);
         }

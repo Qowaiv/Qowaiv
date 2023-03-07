@@ -58,7 +58,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture));
 
     /// <summary>Gets the symbol for a currency.</summary>
-    public string Symbol => m_Value == default ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture);
+    public string Symbol => m_Value == default ? string.Empty : GetResourceString("Symbol", CultureInfo.InvariantCulture);
 
     /// <summary>Gets the number of after the decimal separator.</summary>
     public int Digits => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture));
@@ -133,7 +133,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// n: as Name.
     /// i: as ISO Code.
     /// 0: as ISO Numeric.
@@ -171,7 +171,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
     /// <remarks>
-    /// Because the options for formatting and parsing currencies as provided 
+    /// Because the options for formatting and parsing currencies as provided
     /// by the .NET framework are not sufficient, internally we use number
     /// settings. For parsing and formatting however we like to use the
     /// currency properties of the <see cref="NumberFormatInfo"/> instead of

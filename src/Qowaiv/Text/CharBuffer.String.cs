@@ -48,7 +48,7 @@ internal partial class CharBuffer
             return true;
         }
     }
-      
+
     /// <summary>Retrieves a substring from the buffer..</summary>
     [Pure]
     public string Substring(int startIndex) => new(buffer, startIndex + start, Length - startIndex);

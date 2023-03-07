@@ -12,7 +12,7 @@ public sealed class IdJsonConverter : JsonConverterFactory
 {
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvert(Type typeToConvert) 
+    public override bool CanConvert(Type typeToConvert)
         => Behavior(typeToConvert) is { };
 
     /// <inheritdoc />

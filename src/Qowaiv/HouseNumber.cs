@@ -105,7 +105,6 @@ public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IF
         else return m_Value.ToString(format, formatProvider);
     }
 
-
     /// <summary>Gets an XML string representation of the house number.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
@@ -150,8 +149,8 @@ public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IF
             result = Unknown;
             return true;
         }
-        else if (int.TryParse(s, NumberStyles.None, culture, out var number) 
-            && number >= MinValue.m_Value 
+        else if (int.TryParse(s, NumberStyles.None, culture, out var number)
+            && number >= MinValue.m_Value
             && number <= MaxValue.m_Value)
         {
             result = new(number);

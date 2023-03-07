@@ -208,7 +208,7 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// F: as 0Y+0M.
     /// All others format the total months.
     /// </remarks>

@@ -93,7 +93,6 @@ public class WildcardPattern : ISerializable
         return pattern;
     }
 
-
     /// <summary>Adds the underlying property of a wild card pattern to the serialization info.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
@@ -135,12 +134,12 @@ public class WildcardPattern : ISerializable
     /// </remarks>
     protected bool IsCultureIndependent
         => ComparisonType == StringComparison.InvariantCultureIgnoreCase;
-        // || ComparisonType == StringComparison.InvariantCulture
-      
+    // || ComparisonType == StringComparison.InvariantCulture
+
     /// <summary>Returns true if the case should be ignored, otherwise false.</summary>
     protected bool IgnoreCase
-        => ComparisonType == StringComparison.CurrentCultureIgnoreCase 
-        || ComparisonType == StringComparison.InvariantCultureIgnoreCase 
+        => ComparisonType == StringComparison.CurrentCultureIgnoreCase
+        || ComparisonType == StringComparison.InvariantCultureIgnoreCase
         || ComparisonType == StringComparison.OrdinalIgnoreCase;
 
     /// <summary>Indicates whether the wildcard pattern finds a match in the specified input string.</summary>
@@ -159,7 +158,6 @@ public class WildcardPattern : ISerializable
         Guard.NotNull(input, nameof(input));
         return Match(new(Pattern), new(input));
     }
-
 
     /// <summary>Indicates whether the specified wildcard pattern finds a match in the specified input string.</summary>
     /// <param name="pattern">
@@ -203,7 +201,6 @@ public class WildcardPattern : ISerializable
         var wildcard = new WildcardPattern(pattern, options, comparisonType);
         return wildcard.IsMatch(input);
     }
-
 
     /// <summary>Handles the actual matching.</summary>
     [Pure]
@@ -285,16 +282,16 @@ public class WildcardPattern : ISerializable
         }
 
         public readonly int Position;
-        
+
         public readonly string Value;
-        
+
         public char Ch => Value[Position];
-        
+
         public int Left => Value.Length - Position;
-        
+
         [Pure]
         public bool IsEnd() => Position >= Value.Length;
-        
+
         [Pure]
         public Substring Next() => new(Value, Position + 1);
     }

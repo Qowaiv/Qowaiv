@@ -5,7 +5,7 @@ namespace System;
 /// <summary>Extensions on <see cref="string"/>.</summary>
 public static class QowaivSystemExtensions
 {
-    /// <summary>Converts the specified string to an uppercase string.</summary> 
+    /// <summary>Converts the specified string to an uppercase string.</summary>
     /// <param name="str">
     /// The string to convert to uppercase.
     /// </param>

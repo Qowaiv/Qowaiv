@@ -33,7 +33,7 @@ public class ThreadDomain
     [ThreadStatic]
     private static ThreadDomain? s_Current;
 
-    /// <summary>Registers a creator function for the type that can create 
+    /// <summary>Registers a creator function for the type that can create
     /// an instance of type based on a thread.
     /// </summary>
     /// <param name="type">

@@ -140,7 +140,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     [Pure]
     public Money Multiply(float factor) => Multiply((decimal)factor);
 
-
     /// <summary>Multiplies the money with a specified factor.
     /// </summary>
     /// <param name="factor">
@@ -164,7 +163,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// </param>
     [Pure]
     public Money Multiply(short factor) => Multiply((decimal)factor);
-
 
     /// <summary>Multiplies the money with a specified factor.
     /// </summary>
@@ -247,7 +245,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// </param>
     [Pure]
     public Money Divide(short factor) => Divide((decimal)factor);
-
 
     /// <summary>Divides the money by a specified factor.
     /// </summary>
@@ -477,7 +474,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
+    public string ToJson() => Currency.Name + m_Value.ToString(string.Empty, CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current Money for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -500,7 +497,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Gets an XML string representation of the money.</summary>
     [Pure]
-    private string ToXmlString() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
+    private string ToXmlString() => Currency.Name + m_Value.ToString(string.Empty, CultureInfo.InvariantCulture);
 
     /// <summary>Returns true if this instance and the other <see cref="Money"/> are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Money"/> to compare with.</param>
@@ -593,7 +590,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
     /// <remarks>
-    /// Because the options for formatting and parsing currencies as provided 
+    /// Because the options for formatting and parsing currencies as provided
     /// by the .NET framework are not sufficient, internally we use number
     /// settings. For parsing and formatting however we like to use the
     /// currency properties of the <see cref="NumberFormatInfo"/> instead of

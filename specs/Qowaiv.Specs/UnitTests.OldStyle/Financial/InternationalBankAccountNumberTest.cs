@@ -284,7 +284,7 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void ToString_Unknown_IsStringEmpty()
     {
-        var act = InternationalBankAccountNumber.Unknown.ToString("", null);
+        var act = InternationalBankAccountNumber.Unknown.ToString(string.Empty, null);
         var exp = "?";
         Assert.AreEqual(exp, act);
     }

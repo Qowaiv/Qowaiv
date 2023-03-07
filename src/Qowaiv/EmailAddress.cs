@@ -106,7 +106,7 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// f: as formatted email address.
     /// U: as full email address uppercased.
     /// l: as local name.

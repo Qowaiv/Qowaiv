@@ -5,7 +5,7 @@ public static class Converting
 {
     /// <summary>Initializes a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
     [Pure]
-    public static ConvertFrom<From> From<From>(From subject) => new(subject);
+    public static ConvertFrom<TFrom> From<TFrom>(TFrom subject) => new(subject);
 
     /// <summary>Initializes a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
     [Pure]

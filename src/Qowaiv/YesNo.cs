@@ -212,7 +212,7 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
     {
         public YesNoValues() : base(new Dictionary<string, byte>
         {
-            { "", 0 },
+            { string.Empty, 0 },
             { "0", 1 }, { "N", 1 }, { "NO", 1 }, { "FALSE", 1 },
             { "1", 2 }, { "Y", 2 }, { "YES", 2 },{ "TRUE", 2 },
         }) { }
@@ -221,7 +221,7 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
         {
             foreach (var value in YesAndNo)
             {
-                var label = value.ToString("", culture).Unify();
+                var label = value.ToString(string.Empty, culture).Unify();
                 var @char = value.ToString("c", culture).Unify();
                 var @bool = value.ToString("b", culture).Unify();
 

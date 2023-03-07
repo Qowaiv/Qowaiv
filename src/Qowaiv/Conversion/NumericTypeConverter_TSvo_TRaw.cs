@@ -3,6 +3,12 @@
 namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for numeric types.</summary>
+/// <typeparam name="TSvo">
+/// The type of the SVO.
+/// </typeparam>
+/// <typeparam name="TRaw">
+/// The type that represents the raw (primitive) value of the SVO.
+/// </typeparam>
 public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, TRaw>
     where TSvo : struct, IFormattable
     where TRaw : struct, IFormattable

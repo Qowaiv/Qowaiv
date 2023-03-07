@@ -7,6 +7,9 @@ using Qowaiv.Conversion.Customization;
 namespace Qowaiv.Customization;
 
 /// <summary>Represents a Single Value Object.</summary>
+/// <typeparam name="TSvoBehavior">
+/// The type that implements the SVO behavior.
+/// </typeparam>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]

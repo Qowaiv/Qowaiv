@@ -609,8 +609,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
 
     #endregion
 
-    #region (JSON) (De)serialization
-
     /// <summary>Deserializes the percentage from a JSON number.</summary>
     /// <param name="json">
     /// The JSON number to deserialize.
@@ -627,8 +625,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// </returns>
     [Pure]
     public string ToJson() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
-
-    #endregion
 
     #region IFormattable / ToString
 

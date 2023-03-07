@@ -228,18 +228,19 @@ internal static class DecimalRound
     private const int MaxInt32Scale = 9;
 
     /// <summary>Fast access for 10^n where n is 0-19.</summary>
-    private static readonly uint[] Powers10 = new uint[] {
-            1,
-            10,
-            100,
-            1000,
-            10000,
-            100000,
-            1000000,
-            10000000,
-            100000000,
-            1000000000,
-        };
+    private static readonly uint[] Powers10 = new uint[]
+    {
+        1,
+        10,
+        100,
+        1000,
+        10000,
+        100000,
+        1000000,
+        10000000,
+        100000000,
+        1000000000,
+    };
 
     /// <summary>Gets a (thread static) instance of <see cref="Random"/>.</summary>
     /// <remarks>

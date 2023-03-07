@@ -47,19 +47,19 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
     /// <summary>Represents all months (January till December).</summary>
     public static readonly IReadOnlyList<Month> All = new[]
     {
-            January,
-            February,
-            March,
-            April,
-            May,
-            June,
-            July,
-            August,
-            September,
-            October,
-            November,
-            December,
-        };
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December,
+    };
 
     /// <summary>Gets the full name of the month.</summary>
     public string FullName => GetFullName(formatProvider: null);

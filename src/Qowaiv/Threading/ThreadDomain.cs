@@ -13,8 +13,8 @@ public class ThreadDomain
     /// <summary>Initializes static members of the <see cref="ThreadDomain"/> class.</summary>
     static ThreadDomain()
     {
-        Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
-        Register(typeof(Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Clock.Today()));
+        Register(typeof(Country), (thread) => Country.Create(thread.CurrentCulture));
+        Register(typeof(Currency), (thread) => thread.GetValue<Country>().GetCurrency(Clock.Today()));
     }
 
     /// <summary>Gets the current thread domain.</summary>

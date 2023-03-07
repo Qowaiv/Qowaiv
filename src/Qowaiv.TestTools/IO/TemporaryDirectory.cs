@@ -5,7 +5,7 @@ namespace Qowaiv.TestTools.IO;
 /// <summary>Represents a directory that lives during the lifetime of its scope.</summary>
 /// <remarks>
 /// Should always been used with a using statement.
-/// 
+///
 /// <code>
 /// using(var directory = new TemporaryDirectory()
 /// {

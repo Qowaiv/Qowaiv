@@ -30,7 +30,7 @@ public readonly struct Secret : IEquatable<Secret>
 
     /// <summary>Computes a <see cref="CryptographicSeed"/> for the secret.</summary>
     /// <param name="algorithm">
-    /// The algorithm to 
+    /// The algorithm to hash with.
     /// </param>
     [Pure]
     public CryptographicSeed ComputeHash(HashAlgorithm algorithm)

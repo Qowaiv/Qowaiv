@@ -18,7 +18,7 @@ internal static class FractionParser
     /// bar         => /|:|÷|..
     /// super       => ⁰|¹|²|³|⁴|⁵|⁶|⁷|⁸|⁹
     /// sub         => ₀|₁|₂|₃|₄|₅|₆|₇|₈|₉
-    /// integer     => long.Parse()
+    /// integer     => long.Parse().
     /// </remarks>
     [Pure]
     public static Fraction? Parse(string s, IFormatProvider? provider)

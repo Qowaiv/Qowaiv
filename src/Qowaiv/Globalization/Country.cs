@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Qowaiv.Globalization;
 
-/// <summary>Represents a </summary>
+/// <summary>Represents a country.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
@@ -21,10 +21,10 @@ namespace Qowaiv.Globalization;
 #endif
 public readonly partial struct Country : ISerializable, IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
 {
-    /// <summary>Represents an empty/not set </summary>
+    /// <summary>Represents an empty/not set country.</summary>
     public static readonly Country Empty;
 
-    /// <summary>Represents an unknown (but set) </summary>
+    /// <summary>Represents an unknown (but set) country.</summary>
     public static readonly Country Unknown = new("ZZ");
 
     /// <summary>Gets a country based on the current thread.</summary>
@@ -172,7 +172,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:e (2/3)}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
+    /// <summary>Returns a formatted <see cref="string"/> that represents the current country.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -197,7 +197,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
 
     /// <summary>Gets an XML string representation of the country.</summary>
     [Pure]
-    private string ToXmlString() => m_Value ?? String.Empty;
+    private string ToXmlString() => m_Value ?? string.Empty;
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new()
@@ -210,7 +210,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
     };
 
-    /// <summary>Casts a System.Globalization.RegionInfo to a </summary>
+    /// <summary>Casts a <see cref="RegionInfo"/> to a country.</summary>
     public static implicit operator Country(RegionInfo region) => Create(region);
 
     /// <summary>Casts a Country to a System.Globalization.RegionInf.</summary>

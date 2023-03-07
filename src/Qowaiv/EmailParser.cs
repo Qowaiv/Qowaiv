@@ -21,7 +21,7 @@ namespace Qowaiv;
 /// d          => _- [a-z][0-9] [non-ASCII]
 /// ip         => [ip4] | [ip6]
 /// ip4        => IpAdress.TryParse() &amp;&amp; 3 dots &amp;&amp; Ip4mask
-/// ip6        => (IPv6:)? IpAdress.TryParse() &amp;&amp; Ip6mask
+/// ip6        => (IPv6:)? IpAdress.TryParse() &amp;&amp; Ip6mask.
 /// </summary>
 internal static partial class EmailParser
 {

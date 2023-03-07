@@ -10,7 +10,7 @@ public readonly partial struct Fraction
     /// The allowed error.
     /// </param>
     /// <remarks>
-    /// Inspired by "Sjaak", see: https://stackoverflow.com/a/45314258/2266405
+    /// Inspired by "Sjaak", see: https://stackoverflow.com/a/45314258/2266405.
     /// </remarks>
     [Pure]
     public static Fraction Create(decimal number, decimal error)

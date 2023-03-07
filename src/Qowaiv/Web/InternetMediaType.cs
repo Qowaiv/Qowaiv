@@ -34,7 +34,7 @@ namespace Qowaiv.Web;
 /// New media types can be created with the procedures outlined in RFC 6838.
 /// 
 /// See http://tools.ietf.org/html/rfc2046
-/// See http://tools.ietf.org/html/rfc6838
+/// See http://tools.ietf.org/html/rfc6838.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]

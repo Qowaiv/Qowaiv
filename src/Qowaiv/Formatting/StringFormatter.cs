@@ -99,7 +99,7 @@ public static class StringFormatter
 
     /// <summary>Tries to apply the custom formatter to format the object.</summary>
     /// <param name="format">
-    /// The format to apply
+    /// The format to apply.
     /// </param>
     /// <param name="obj">
     /// The object to format.

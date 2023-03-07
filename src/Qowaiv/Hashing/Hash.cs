@@ -2,7 +2,7 @@
 
 /// <summary>Helper struct for getting randomized hashcodes.</summary>
 /// <remarks>
-/// Inspired by https://rehansaeed.com/gethashcode-made-easy
+/// Inspired by https://rehansaeed.com/gethashcode-made-easy.
 /// </remarks>
 public readonly struct Hash : IEquatable<Hash>
 {
@@ -74,7 +74,7 @@ public readonly struct Hash : IEquatable<Hash>
     /// </remarks>
     public static IDisposable WithoutRandomizer() => new Scope();
 
-    /// <summary>Combines two hashes with <code>((h1 &lt;&lt; 5) + h1) ^ h2</code>.</summary>
+    /// <summary>Combines two hashes with `((h1 &lt;&lt; 5) + h1) ^ h2`.</summary>
     [Pure]
     private static int Combine(int h1, int h2) => unchecked(((h1 << 5) + h1) ^ h2);
 

@@ -32,7 +32,7 @@ namespace Qowaiv.Financial;
 public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
 {
     /// <remarks>
-    /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
+    /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx.
     /// </remarks>
     private static readonly Regex Pattern = new(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegOptions.IgnoreCase, RegOptions.Timeout);
 

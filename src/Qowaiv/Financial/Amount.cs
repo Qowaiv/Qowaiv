@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Financial;
 
-/// <summary>Represents an </summary>
+/// <summary>Represents an amount.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
@@ -254,7 +254,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     [Pure]
     public Amount Divide(ushort factor) => Divide((decimal)factor);
 
-    /// <summary>Rounds the amount value to the 0 decimal places</summary>
+    /// <summary>Rounds the amount value to zero decimal places.</summary>
     [Pure]
     public Amount Round() => Round(0);
 
@@ -393,13 +393,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("¤{0:0.00########}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-    /// <param name="format">
-    /// The format that describes the formatting.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The format provider.
-    /// </param>
+    /// <inheritdoc />
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider) 
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)

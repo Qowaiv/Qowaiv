@@ -288,20 +288,20 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
 
     private sealed class MonthValues : LocalizedValues<byte>
     {
-        public MonthValues() : base(new Dictionary<string, byte>
+        public MonthValues() : base(new()
         {
-            {"JAN", 1},  {"JANUARY", 1},
-            {"FEB", 2},  {"FEBRUARY", 2},
-            {"MAR", 3},  {"MARCH", 3},
-            {"APR", 4},  {"APRIL", 4},
-            {"MAY", 5},
-            {"JUN", 6},  {"JUNE", 6},
-            {"JUL", 7},  {"JULY", 7},
-            {"AUG", 8},  {"AUGUST", 8},
-            {"SEP", 9},  {"SEPTEMBER", 9},
-            {"OCT", 10}, {"OCTOBER", 10},
-            {"NOV", 11}, {"NOVEMBER", 11},
-            {"DEC", 12}, {"DECEMBER", 12},
+            { "JAN", 01 }, { "JANUARY", 1 },
+            { "FEB", 02 }, { "FEBRUARY", 2 },
+            { "MAR", 03 }, { "MARCH", 3 },
+            { "APR", 04 }, { "APRIL", 4 },
+            { "MAY", 05 },
+            { "JUN", 06 }, { "JUNE", 6 },
+            { "JUL", 07 }, { "JULY", 7 },
+            { "AUG", 08 }, { "AUGUST", 8 },
+            { "SEP", 09 }, { "SEPTEMBER", 9 },
+            { "OCT", 10 }, { "OCTOBER", 10 },
+            { "NOV", 11 }, { "NOVEMBER", 11 },
+            { "DEC", 12 }, { "DECEMBER", 12 },
         }) { }
 
         protected override void AddCulture(CultureInfo culture)

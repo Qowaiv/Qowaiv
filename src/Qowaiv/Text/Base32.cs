@@ -81,7 +81,7 @@ public static class Base32
 
     /// <summary>Gets the bytes for a given Base32 string. </summary>
     /// <param name="s">
-    /// The Base32 string
+    /// The Base32 string.
     /// </param>
     /// <returns>
     /// A byte array representation of the Base32 string.

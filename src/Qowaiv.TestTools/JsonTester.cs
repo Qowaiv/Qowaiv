@@ -72,7 +72,7 @@ public static class JsonTester
         }
     }
 
-    /// <summary>Applies <code>ToJson()</code>.</summary>
+    /// <summary>Applies `ToJson()`.</summary>
     [Pure]
     public static object? Write<T>(T val)
     {

@@ -19,7 +19,7 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
 {
     /// <summary>An email address must not exceed 254 characters.</summary>
     /// <remarks>
-    /// https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+    /// https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address.
     /// </remarks>
     public const int MaxLength = 254;
 

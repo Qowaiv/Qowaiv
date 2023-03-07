@@ -31,9 +31,9 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 {
     /// <summary>Represents an Amount of zero.</summary>
     public static readonly Money Zero;
-    /// <summary>Represents the smallest possible value of an </summary>
+    /// <summary>Represents the smallest possible value of <see cref="Money"/>.</summary>
     public static readonly Money MinValue = decimal.MinValue + Currency.Empty;
-    /// <summary>Represents the biggest possible value of an </summary>
+    /// <summary>Represents the biggest possible value of <see cref="Money"/>.</summary>
     public static readonly Money MaxValue = decimal.MaxValue + Currency.Empty;
 
     private Money(decimal val, Currency currency)
@@ -42,8 +42,10 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         m_Currency = currency;
     }
 
-    /// <summary>The inner value of the </summary>
+    /// <summary>The inner value of the <see cref="Money"/>.</summary>
     private readonly decimal m_Value;
+
+    /// <summary>The inner value of the <see cref="Currency"/>.</summary>
     private readonly Currency m_Currency;
 
     /// <summary>Gets the amount of the money.</summary>
@@ -51,7 +53,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Gets the currency of the money.</summary>
     public Currency Currency => m_Currency;
-
 
     /// <summary>Gets the sign of the value of the money.</summary>
     [Pure]
@@ -341,7 +342,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Adds money.</summary>
     /// <param name="l">The left operand.</param>
-    /// <param name="r">The right operand</param>
+    /// <param name="r">The right operand.</param>
     public static Money operator +(Money l, Money r) => l.Add(r);
 
     /// <summary>Adds the percentage to the money.</summary>
@@ -349,7 +350,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Adds money.</summary>
     /// <param name="l">The left operand.</param>
-    /// <param name="r">The right operand</param>
+    /// <param name="r">The right operand.</param>
     public static Money operator -(Money l, Money r) => l.Subtract(r);
 
     /// <summary>Subtracts the percentage from the money.</summary>
@@ -470,13 +471,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-    /// <param name="format">
-    /// The format that describes the formatting.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The format provider.
-    /// </param>
+    /// <inheritdoc />
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
@@ -500,24 +495,11 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     [Pure]
     public bool Equals(Money other) => m_Value == other.m_Value && m_Currency == other.m_Currency;
 
-    /// <summary>Returns the hash code for this </summary>
-    /// <returns>
-    /// A 32-bit signed integer hash code.
-    /// </returns>
+    /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => m_Value.GetHashCode() ^ m_Currency.GetHashCode();
 
-    /// <summary>Compares this instance with a specified Money and indicates
-    /// whether this instance precedes, follows, or appears in the same position
-    /// in the sort order as the specified 
-    /// </summary>
-    /// <param name="other">
-    /// The Money to compare with this instance.
-    /// </param>
-    /// <returns>
-    /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-    /// or appears in the same position in the sort order as the value parameter.
-    /// </returns>
+    /// <inheritdoc />
     [Pure]
     public int CompareTo(Money other)
         => m_Currency.CompareTo(other.m_Currency) is var compare && compare == 0
@@ -559,7 +541,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         var currency = Currency.Empty;
         var signs = formatProvider.NegativeSign() + formatProvider.PositiveSign();
         var span = s.CharSpan().TrimLeft(ch => CandidateCurrency(ch, signs), out var candidate);
-        
+
         if (candidate.IsEmpty())
         {
             span = span.TrimRight(ch => CandidateCurrency(ch, signs), out candidate);

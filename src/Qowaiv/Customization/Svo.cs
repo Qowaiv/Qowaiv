@@ -108,12 +108,12 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator ==(Svo<TSvoBehavior> left, Svo<TSvoBehavior> right) => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator !=(Svo<TSvoBehavior> left, Svo<TSvoBehavior> right) => !(left == right);
 
     /// <summary>Returns a <see cref="string" /> that represents the Single Value Object for DEBUG purposes.</summary>

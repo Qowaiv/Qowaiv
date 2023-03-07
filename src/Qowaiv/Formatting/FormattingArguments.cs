@@ -125,14 +125,14 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     [Pure]
     public static bool operator ==(FormattingArguments left, FormattingArguments right)
         => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator !=(FormattingArguments left, FormattingArguments right)
     {
         return !(left == right);

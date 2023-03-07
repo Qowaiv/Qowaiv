@@ -448,10 +448,10 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// There are basically two ways to format the stream size. The first one is
     /// automatic. Based on the size the extension is chosen (byte, kB, MB, GB, ect.).
     /// This can be specified by a s/S (short notation) and a f/F (full notation).
-    /// 
+    ///
     /// The other option is to specify the extension explicitly. So Megabyte,
     /// kB, ect. No extension is also possible.
-    /// 
+    ///
     /// Short notation:
     /// 8900.ToString("s") => 8900b
     /// 238900.ToString("s") => 238.9kb
@@ -462,12 +462,12 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// 8900.ToString("0.0 f") => 8900.0 byte
     /// 238900.ToString("0 f") => 234 kilobyte
     /// 1238900.ToString("0.00 F") => 1.24 Megabyte
-    /// 
+    ///
     /// Custom:
     /// 8900.ToString("0.0 kb") => 8.9 kb
     /// 238900.ToString("0.0 MB") => 0.2 MB
     /// 1238900.ToString("#,##0.00 Kilobyte") => 1,239.00 Kilobyte
-    /// 1238900.ToString("#,##0") => 1,238,900
+    /// 1238900.ToString("#,##0") => 1,238,900.
     /// </remarks>
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)

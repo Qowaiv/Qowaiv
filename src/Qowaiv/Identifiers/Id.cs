@@ -97,12 +97,12 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator !=(Id<TIdentifier> left, Id<TIdentifier> right) => !(left == right);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator ==(Id<TIdentifier> left, Id<TIdentifier> right) => left.Equals(right);
 
     /// <summary>Returns a <see cref="string"/> that represents the identifier for DEBUG purposes.</summary>

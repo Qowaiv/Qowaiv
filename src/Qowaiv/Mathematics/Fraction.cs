@@ -57,7 +57,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
         /// <summary>The different supported fraction bar characters.</summary>
         /// <remarks>
-        /// name           | c | code 
+        /// name           | c | code
         /// ---------------|---|------
         /// slash          | / |   5C
         /// colon          | : |   3A
@@ -65,7 +65,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         /// fraction slash | ⁄ | 2044
         /// division slash | ∕ | 2215
         /// short slash    | ̷  |  337
-        /// long slash     | ̸  |  338
+        /// long slash     | ̸  |  338.
         /// </remarks>
         public static readonly string FractionBars = new(new[]
         {
@@ -655,7 +655,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Initializes a new instance of the <see cref="Fraction"/> class.</summary>
     /// <exception cref="OverflowException">
-    /// If the numerator is <see cref="long.MinValue"/>
+    /// If the numerator is <see cref="long.MinValue"/>.
     /// </exception>
     /// <remarks>
     /// This pseudo constructor differs from the public constructor that it
@@ -677,7 +677,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Gets the Greatest Common Divisor.</summary>
     /// <remarks>
-    /// See: https://en.wikipedia.org/wiki/Greatest_common_divisor
+    /// See: https://en.wikipedia.org/wiki/Greatest_common_divisor.
     /// </remarks>
     [Pure]
     private static long Gcd(long a, long b)

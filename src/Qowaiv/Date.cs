@@ -424,13 +424,11 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     [Pure]
     public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
-    #region IFormattable / ToString
-
     /// <summary>Returns a <see cref="string"/> that represents the current Date for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay($"{{0:{SerializableFormat}}}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
+    /// <summary>Returns a formatted <see cref="string"/> that represents the current.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -450,8 +448,6 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <summary>Gets an XML string representation of the date.</summary>
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
-
-    #endregion
 
     #region (Explicit) casting
 

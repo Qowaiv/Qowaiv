@@ -4,7 +4,7 @@ namespace Qowaiv.Json;
 
 /// <summary>Describes how a type should be described as OpenAPI Data Type.</summary>
 /// <remarks>
-/// See: https://swagger.io/docs/specification/data-models/data-types/
+/// See: https://swagger.io/docs/specification/data-models/data-types/.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 [DebuggerDisplay("{DebuggerDisplay}")]

@@ -51,16 +51,16 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// </returns>
     public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the code defined in ISO 4217 for the currency.</summary>
+    /// <summary>Gets the code defined in ISO 4217 for the currency.</summary>
     public string IsoCode => GetResourceString("ISO", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
+    /// <summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
     public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture));
 
-    ///<summary>Gets the symbol for a currency.</summary>
+    /// <summary>Gets the symbol for a currency.</summary>
     public string Symbol => m_Value == default ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the number of after the decimal separator.</summary>
+    /// <summary>Gets the number of after the decimal separator.</summary>
     public int Digits => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture));
 
     /// <summary>Gets the start date from witch the currency exists.</summary>

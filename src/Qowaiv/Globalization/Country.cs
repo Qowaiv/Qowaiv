@@ -47,19 +47,19 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// </returns>
     public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the two-letter code defined in ISO 3166-1 for the country.</summary>
+    /// <summary>Gets the two-letter code defined in ISO 3166-1 for the country.</summary>
     /// <returns>
     /// The two-letter code defined in ISO 3166-1 for the country.
     /// </returns>
     public string IsoAlpha2Code => GetResourceString("ISO2", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
+    /// <summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
     /// <returns>
     /// The three-letter code defined in ISO 3166-1 for the country.
     /// </returns>
     public string IsoAlpha3Code => GetResourceString("ISO3", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
+    /// <summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
     /// <returns>
     /// The numeric code defined in ISO 3166-1 for the country/region.
     /// </returns>
@@ -71,7 +71,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// </remarks>
     public string CallingCode => GetResourceString("CallingCode", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
+    /// <summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
     public bool RegionInfoExists
     {
         get

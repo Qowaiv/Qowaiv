@@ -7,7 +7,7 @@ using Qowaiv.Globalization;
 
 namespace Qowaiv.Financial;
 
-///<summary>The International Bank Account Number (IBAN) is an international standard
+/// <summary>The International Bank Account Number (IBAN) is an international standard
 /// for identifying bank accounts across national borders with a minimal risk
 /// of propagating transcription errors. It was originally adopted by the European
 /// Committee for Banking Standards (ECBS), and was later adopted as an international

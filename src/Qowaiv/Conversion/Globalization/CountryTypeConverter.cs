@@ -10,4 +10,3 @@ public class CountryTypeConverter : SvoTypeConverter<Country>
     [Pure]
     protected override Country FromString(string? str, CultureInfo? culture) => Country.Parse(str, culture);
 }
-

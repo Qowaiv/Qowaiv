@@ -18,4 +18,3 @@ public class AmountTypeConverter : NumericTypeConverter<Amount, decimal>
     [Pure]
     protected override decimal ToRaw(Amount svo) => (decimal)svo;
 }
-

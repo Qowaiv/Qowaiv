@@ -16,4 +16,3 @@ public class HouseNumberTypeConverter : NumericTypeConverter<HouseNumber, int>
     [Pure]
     protected override int ToRaw(HouseNumber svo) => (int)svo;
 }
-

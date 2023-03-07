@@ -19,4 +19,3 @@ public static class NumberToFractionExtensions
     [Pure]
     public static Fraction Fraction(this double number) => Qowaiv.Mathematics.Fraction.Create(number);
 }
-

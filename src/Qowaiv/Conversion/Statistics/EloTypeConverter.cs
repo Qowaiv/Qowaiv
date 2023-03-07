@@ -18,4 +18,3 @@ public class EloTypeConverter : NumericTypeConverter<Elo, double>
     [Pure]
     protected override double ToRaw(Elo svo) => (double)svo;
 }
-

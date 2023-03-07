@@ -8,4 +8,3 @@ public class GenderTypeConverter : SvoTypeConverter<Gender>
     [Pure]
     protected override Gender FromString(string? str, CultureInfo? culture) => Gender.Parse(str, culture);
 }
-

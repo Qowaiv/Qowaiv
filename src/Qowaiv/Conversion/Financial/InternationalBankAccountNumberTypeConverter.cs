@@ -10,4 +10,3 @@ public class InternationalBankAccountNumberTypeConverter : SvoTypeConverter<Inte
     [Pure]
     protected override InternationalBankAccountNumber FromString(string? str, CultureInfo? culture) => InternationalBankAccountNumber.Parse(str, culture);
 }
-

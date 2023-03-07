@@ -49,10 +49,10 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <summary>Represents the maximum value of the week date.</summary>
     public static readonly WeekDate MaxValue = new(Date.MaxValue);
 
-    /// <summary>Creates a date based on Week Year, week number, and day of the week.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on Week Year, week number, and day of the week.</summary>
     public WeekDate(int year, int week, int day) : this(Create(year, week, day)) { }
 
-    /// <summary>Creates a date based on a <see cref="Qowaiv.Date"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on a <see cref="Qowaiv.Date"/>.</summary>
     private WeekDate(Date date) => m_Value = date;
 
     #region Properties
@@ -144,9 +144,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
 
     #endregion
 
-    #region (De)serialization
-
-    /// <summary>Initializes a new instance of week date based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private WeekDate(SerializationInfo info, StreamingContext context)
@@ -170,8 +168,6 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// </returns>
     [Pure]
     public string ToJson() => ToString(CultureInfo.InvariantCulture);
-
-    #endregion
 
     /// <summary>Returns a <see cref="string"/> that represents the current week date for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

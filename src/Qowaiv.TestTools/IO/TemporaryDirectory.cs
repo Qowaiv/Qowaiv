@@ -15,7 +15,7 @@ namespace Qowaiv.TestTools.IO;
 /// </remarks>
 public sealed class TemporaryDirectory : IDisposable
 {
-    /// <summary>Creates a temporary directory.</summary>
+    /// <summary>Initializes a new instance of the <see cref="TemporaryDirectory"/> class.</summary>
     public TemporaryDirectory()
     {
         Root = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Uuid.NewUuid().ToString()));

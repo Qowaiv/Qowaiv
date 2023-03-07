@@ -8,7 +8,7 @@ namespace Qowaiv.OpenApi;
 [DebuggerDisplay("{DebuggerDisplay}")]
 public sealed record OpenApiDataType
 {
-    /// <summary>Creates a new instance of the <see cref="OpenApiDataType"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="OpenApiDataType"/> class.</summary>
 #pragma warning disable S107 // Methods should not have too many parameters
     // To overcome the lack of the init key word in netstandard2.0.
     public OpenApiDataType(Type dataType,

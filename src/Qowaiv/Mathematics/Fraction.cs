@@ -94,7 +94,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly long denominator;
 
-    /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
     /// <param name="numerator">
     /// The numerator part of the fraction.
     /// </param>
@@ -112,7 +112,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     public Fraction(long numerator, long denominator) 
         : this(new Data(numerator, denominator).Guard().Simplify()) { }
 
-    /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
     private Fraction(Data data)
     {
         numerator = data.numerator;
@@ -498,9 +498,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
     #endregion
 
-    #region Serialization
-
-    /// <summary>Initializes a new instance of the fraction based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Fraction(SerializationInfo info, StreamingContext context)
@@ -555,8 +553,6 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// </returns>
     [Pure]
     public static Fraction FromJson(long json) => New(json, 1);
-
-    #endregion
 
     #region (Explicit) casting
 
@@ -657,7 +653,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     [Pure]
     public static Fraction Create(long number) => number == 0 ? Zero : New(number, 1);
 
-    /// <summary>Creates a new instance of the <see cref="Fraction"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> class.</summary>
     /// <exception cref="OverflowException">
     /// If the numerator is <see cref="long.MinValue"/>
     /// </exception>

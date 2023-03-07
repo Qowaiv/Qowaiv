@@ -419,7 +419,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         ? l.Currency
         : throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
 
-    /// <summary>Initializes a new instance of Money based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Money"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Money(SerializationInfo info, StreamingContext context)

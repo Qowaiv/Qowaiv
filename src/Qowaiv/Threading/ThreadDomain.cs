@@ -10,7 +10,7 @@ namespace Qowaiv.Threading;
 /// </summary>
 public class ThreadDomain
 {
-    /// <summary>Initializes creators.</summary>
+    /// <summary>Initializes static members of the <see cref="ThreadDomain"/> class.</summary>
     static ThreadDomain()
     {
         Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
@@ -62,7 +62,7 @@ public class ThreadDomain
     }
     private static readonly ConcurrentDictionary<Type, Func<Thread, object>> Creators = new();
 
-    /// <summary>Constructor.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ThreadDomain"/> class.</summary>
     /// <remarks>
     /// No public accessor.
     /// </remarks>

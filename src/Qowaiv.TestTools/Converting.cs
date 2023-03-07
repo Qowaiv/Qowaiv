@@ -3,15 +3,15 @@
 /// <summary>Helper method to convert objects using <see cref="TypeConverter"/>s.</summary>
 public static class Converting
 {
-    /// <summary>Creates a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
     [Pure]
     public static ConvertFrom<From> From<From>(From subject) => new(subject);
 
-    /// <summary>Creates a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
     [Pure]
     public static ConvertTo<To> To<To>() => new();
 
-    /// <summary>Creates a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
     [Pure]
     public static new ConvertTo<string> ToString() => new();
 }

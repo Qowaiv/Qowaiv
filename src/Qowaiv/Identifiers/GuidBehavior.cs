@@ -6,7 +6,7 @@ public class GuidBehavior : IdentifierBehavior
 {
     internal static readonly GuidBehavior Instance = new();
 
-    /// <summary>Creates a new instance of the <see cref="GuidBehavior"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="GuidBehavior"/> class.</summary>
     protected GuidBehavior() { }
 
     /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>

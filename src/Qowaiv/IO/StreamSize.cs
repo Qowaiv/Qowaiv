@@ -79,7 +79,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <summary>Represents the maximum stream size that can be represented.</summary>
     public static readonly StreamSize MaxValue = new(long.MaxValue);
 
-    /// <summary>Initializes a new instance of a stream size.</summary>
+    /// <summary>Initializes a new instance of the <see cref="StreamSize"/> struct.</summary>
     /// <param name="size">
     /// The number of bytes.
     /// </param>

@@ -37,7 +37,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     [Obsolete("Use Clock.Tomorrow() instead. Will be dropped when the next major version is released.")]
     public static Date Tomorrow => Clock.Tomorrow();
 
-    /// <summary>Initializes a new instance of the date structure to a specified number of ticks.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Date"/> struct to a specified number of ticks.</summary>
     /// <param name="ticks">
     /// A date expressed in 100-nanosecond units.
     /// </param>
@@ -46,7 +46,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// </exception>
     public Date(long ticks) : this(new DateTime(ticks)) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Date"/> struct to the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -66,8 +66,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// </exception>
     public Date(int year, int month, int day) : this(new DateTime(year, month, day)) { }
 
-    /// <summary>Initializes a new instance of the date structure based on a System.DateTime.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="Date"/> struct based on a <see cref="DateTime"/>.</summary>
     /// <param name="dt">
     /// A date and time.
     /// </param>

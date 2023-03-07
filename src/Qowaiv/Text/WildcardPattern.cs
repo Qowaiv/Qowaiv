@@ -4,7 +4,7 @@
 [Serializable, DebuggerDisplay("{DebuggerDisplay}")]
 public class WildcardPattern : ISerializable
 {
-    /// <summary>Initializes a new instance of a wild card pattern.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WildcardPattern"/> class.</summary>
     /// <remarks>
     /// No public constructor without arguments.
     /// </remarks>
@@ -15,7 +15,7 @@ public class WildcardPattern : ISerializable
         Pattern = "*";
     }
 
-    /// <summary>Initializes a new instance of a wild card pattern.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WildcardPattern"/> class.</summary>
     /// <param name="pattern">
     /// The pattern to match on.
     /// </param>
@@ -28,7 +28,7 @@ public class WildcardPattern : ISerializable
     public WildcardPattern(string pattern)
         : this(pattern, WildcardPatternOptions.None, StringComparison.CurrentCulture) { }
 
-    /// <summary>Initializes a new instance of a wild card pattern.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WildcardPattern"/> class.</summary>
     /// <param name="pattern">
     /// The pattern to match on.
     /// </param>
@@ -58,7 +58,7 @@ public class WildcardPattern : ISerializable
         }
     }
 
-    /// <summary>Initializes a new instance of a wild card pattern based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WildcardPattern"/> class.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     protected WildcardPattern(SerializationInfo info, StreamingContext context)

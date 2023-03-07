@@ -5,6 +5,6 @@
 [Conditional("CONTRACTS_FULL")]
 public class InheritableAttribute : Attribute
 {
-    /// <summary>Creates a new instance of the <see cref="InheritableAttribute"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="InheritableAttribute"/> class.</summary>
     public InheritableAttribute(string? message = null) => _ = message;
 }

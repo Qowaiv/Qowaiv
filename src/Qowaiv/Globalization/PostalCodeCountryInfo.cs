@@ -4,7 +4,7 @@
 [DebuggerDisplay("{DebuggerDisplay}")]
 public sealed partial class PostalCodeCountryInfo
 {
-    /// <summary>Constructor.</summary>
+    /// <summary>Initializes a new instance of the <see cref="PostalCodeCountryInfo"/> class.</summary>
     private PostalCodeCountryInfo(
         Country country,
         Regex? validationPattern,

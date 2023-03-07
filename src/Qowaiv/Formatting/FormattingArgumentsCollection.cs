@@ -4,16 +4,16 @@
 [DebuggerDisplay("{DebuggerDisplay}")]
 public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, FormattingArguments>>
 {
-    /// <summary>Initializes a new instance of a formatting arguments collection based on the current culture.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the current culture.</summary>
     public FormattingArgumentsCollection() : this(formatProvider: null) { }
 
-    /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the specified format provider.</summary>
     /// <param name="formatProvider">
     /// The default format provider.
     /// </param>
     public FormattingArgumentsCollection(IFormatProvider? formatProvider) : this(formatProvider, parent: null) { }
 
-    /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the specified format provider.</summary>
     /// <param name="formatProvider">
     /// The default format provider.
     /// </param>

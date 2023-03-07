@@ -4,7 +4,7 @@
 [OpenApi.OpenApiDataType(description: "Int64 based identifier", example: 17, type: "integer", format: "identifier", nullable: true)]
 public class Int64IdBehavior : IdentifierBehavior
 {
-    /// <summary>Creates a new instance of the <see cref="Int64IdBehavior"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Int64IdBehavior"/> class.</summary>
     protected Int64IdBehavior() { }
 
     /// <summary>Returns the type of the underlying value (<see cref="long"/>).</summary>

@@ -10,7 +10,7 @@ namespace Qowaiv.Json;
 [DebuggerDisplay("{DebuggerDisplay}")]
 public sealed class OpenApiDataTypeAttribute : Attribute
 {
-    /// <summary>Creates a new instance of a <see cref="OpenApiDataTypeAttribute"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="OpenApiDataTypeAttribute"/> class.</summary>
     public OpenApiDataTypeAttribute(
         string description,
         string type,

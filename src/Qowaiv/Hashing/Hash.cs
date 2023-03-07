@@ -12,7 +12,7 @@ public readonly struct Hash : IEquatable<Hash>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int Value;
 
-    /// <summary>Creates a new instance of the <see cref="Hash"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Hash"/> struct.</summary>
     private Hash(int val) => Value = val;
 
     /// <inheritdoc />

@@ -25,9 +25,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// <summary>Represents the largest possible value date. This field is read-only.</summary>
     public static readonly LocalDateTime MaxValue = new(DateTime.MaxValue);
 
-    #region Constructors
-
-    /// <summary>Initializes a new instance of the local date time structure to a specified number of ticks.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct to a specified number of ticks.</summary>
     /// <param name="ticks">
     /// A date expressed in 100-nanosecond units.
     /// </param>
@@ -39,8 +37,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
         m_Value = new DateTime(ticks, DateTimeKind.Local);
     }
 
-    /// <summary>Initializes a new instance of the local date time structure based on a System.DateTime.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on a System.DateTime.</summary>
     /// <param name="dt">
     /// A date and time.
     /// </param>
@@ -49,7 +46,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// </remarks>
     private LocalDateTime(DateTime dt) : this(dt.Ticks) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -69,7 +66,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// </exception>
     public LocalDateTime(int year, int month, int day) : this(year, month, day, 0, 0) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -96,7 +93,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     public LocalDateTime(int year, int month, int day, int hour, int minute)
         : this(year, month, day, hour, minute, 0) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -126,7 +123,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     public LocalDateTime(int year, int month, int day, int hour, int minute, int second)
         : this(year, month, day, hour, minute, second, 0) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -158,10 +155,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// </exception>
     public LocalDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond)
         : this(new DateTime(year, month, day, hour, minute, second, millisecond, DateTimeKind.Local)) { }
-
-    #endregion
-
-    #region Properties
 
     /// <summary>Gets the year component of the date represented by this instance.</summary>
     public int Year => m_Value.Year;
@@ -198,8 +191,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
 
     /// <summary>The inner value of the local date time.</summary>
     private readonly DateTime m_Value;
-
-    #endregion
 
     /// <summary>Adds one day to the local date time.</summary>
     [Pure]

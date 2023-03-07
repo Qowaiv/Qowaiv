@@ -33,17 +33,17 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </remarks>
     private readonly HashSet<EmailAddress> hashset = new();
 
-    /// <summary>Initiates a new collection of email addresses.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     public EmailAddressCollection() { }
 
-    /// <summary>Initiates a new collection of email addresses.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="emails">
     /// An array of email addresses.
     /// </param>
     public EmailAddressCollection(params EmailAddress[] emails)
         : this((IEnumerable<EmailAddress>)emails) { }
 
-    /// <summary>Initiates a new collection of email addresses.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="emails">
     /// An enumeration of email addresses.
     /// </param>
@@ -180,7 +180,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
 
     #region Serialization
 
-    /// <summary>Initializes a new instance of email address based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     protected EmailAddressCollection(SerializationInfo info, StreamingContext context)

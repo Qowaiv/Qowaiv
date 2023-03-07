@@ -30,7 +30,7 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <summary>Gets the maximum month span (+9998 years).</summary>
     public static readonly MonthSpan MaxValue = new(+9998 * 12);
 
-    /// <summary>Creates a new instance of the <see cref="MonthSpan"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="MonthSpan"/> struct.</summary>
     /// <param name="years">
     /// The total of years of the month span.</param>
     /// <param name="months">

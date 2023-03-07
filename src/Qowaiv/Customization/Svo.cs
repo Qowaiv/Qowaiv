@@ -28,10 +28,10 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// <summary>Represents an unknown (but set) Single Value Object.</summary>
     public static readonly Svo<TSvoBehavior> Unknown = new(SvoBehavior.unknown);
 
-    /// <summary>Creates a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     private Svo(string? value) => m_Value = value;
 
-    /// <summary>Initializes a new instance of the Single Value Object based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Svo(SerializationInfo info, StreamingContext context)

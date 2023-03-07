@@ -7,15 +7,15 @@
 [Serializable]
 public class HashingNotSupported : NotSupportedException
 {
-    /// <summary>Creates a new instance of the <see cref="HashingNotSupported"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="HashingNotSupported"/> class.</summary>
     public HashingNotSupported() { }
 
-    /// <summary>Creates a new instance of the <see cref="HashingNotSupported"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="HashingNotSupported"/> class.</summary>
     public HashingNotSupported(string message) : base(message) { }
 
-    /// <summary>Creates a new instance of the <see cref="HashingNotSupported"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="HashingNotSupported"/> class.</summary>
     public HashingNotSupported(string message, Exception innerException) : base(message, innerException) { }
 
-    /// <summary>Creates a new instance of the <see cref="HashingNotSupported"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="HashingNotSupported"/> class.</summary>
     protected HashingNotSupported(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }

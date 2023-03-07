@@ -45,7 +45,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <summary>The shift position of the total months in the value.</summary>
     internal const int MonthShift = 32;
 
-    /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DateSpan"/> struct.</summary>
     /// <param name="months">
     /// Number of months.
     /// </param>
@@ -54,7 +54,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// </param>
     public DateSpan(int months, int days) : this(Create(months, days)) { }
 
-    /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DateSpan"/> struct.</summary>
     /// <param name="years">
     /// Number of years.
     /// </param>

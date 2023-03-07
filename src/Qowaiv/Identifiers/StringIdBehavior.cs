@@ -4,7 +4,7 @@
 [OpenApi.OpenApiDataType(description: "String based identifier", example: "Order-UK-2022-215", type: "string", format: "identifier", nullable: true)]
 public class StringIdBehavior : IdentifierBehavior
 {
-    /// <summary>Creates a new instance of the <see cref="StringIdBehavior"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="StringIdBehavior"/> class.</summary>
     protected StringIdBehavior() { }
 
     /// <summary>Returns the type of the underlying value (<see cref="string"/>).</summary>

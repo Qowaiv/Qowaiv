@@ -112,7 +112,8 @@ public class GuidBehavior : IdentifierBehavior
         }
         else if (Uuid.Pattern.IsMatch(str))
         {
-            var bytes = Convert.FromBase64String(str.Replace('-', '+').Replace('_', '/').Substring(0, 22) + "==");
+            var base64 = string.Concat(str.Replace('-', '+').Replace('_', '/').AsSpan(0, 22), "==");
+            var bytes = Convert.FromBase64String(base64);
             id = new Guid(bytes);
 
             if (Guid.Empty.Equals(id))

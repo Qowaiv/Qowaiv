@@ -207,7 +207,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     [Pure]
     private static bool Mod97(string iban)
     {
-        var digits = iban.Substring(4) + iban.Substring(0, 4);
+        var digits = string.Concat(iban.AsSpan(4), iban.AsSpan(0, 4));
         var mod = 0;
         foreach (var digit in digits)
         {

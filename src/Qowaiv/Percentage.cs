@@ -460,8 +460,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     [CLSCompliant(false)]
     public static ushort operator -(ushort d, Percentage p) => d.Subtract(p);
 
-    #region Math-like methods
-
     /// <summary>Returns the larger of two percentages.</summary>
     /// <param name="val1">
     /// The second of the two percentages to compare.
@@ -608,8 +606,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     public Percentage RoundToMultiple(Percentage multipleOf, DecimalRounding mode)
         => new(m_Value.RoundToMultiple((decimal)multipleOf, mode));
 
-    #endregion
-
     /// <summary>Deserializes the percentage from a JSON number.</summary>
     /// <param name="json">
     /// The JSON number to deserialize.
@@ -626,8 +622,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// </returns>
     [Pure]
     public string ToJson() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
-
-    #region IFormattable / ToString
 
     /// <summary>Returns a <see cref="string"/> that represents the current Percentage for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -658,10 +652,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     [Pure]
     private string ToXmlString() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
-    #endregion
-
-    #region (Explicit) casting
-
     /// <summary>Casts a decimal to a Percentage.</summary>
     public static implicit operator Percentage(decimal val) => new(val);
 
@@ -673,8 +663,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
 
     /// <summary>Casts a Percentage to a double.</summary>
     public static explicit operator double(Percentage val) => (double)val.m_Value;
-
-    #endregion
 
     /// <summary>Converts the string to a Percentage.
     /// A return value indicates whether the conversion succeeded.

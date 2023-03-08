@@ -563,8 +563,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
-    #region (Explicit) casting
-
     /// <summary>Casts a local date time to a date time.</summary>
     public static implicit operator DateTime(LocalDateTime val) => val.m_Value;
 
@@ -576,10 +574,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
 
     /// <summary>Casts a week date to a week date.</summary>
     public static implicit operator LocalDateTime(WeekDate val) => (LocalDateTime)val.Date;
-
-    #endregion
-
-    #region Operators
 
     /// <summary>Adds the time span to the local date time.</summary>
     public static LocalDateTime operator +(LocalDateTime d, TimeSpan t) => d.Add(t);
@@ -601,8 +595,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
 
     /// <summary>Subtracts the right local date time from the left date.</summary>
     public static TimeSpan operator -(LocalDateTime l, LocalDateTime r) => l.Subtract(r);
-
-    #endregion
 
     /// <summary>Converts the string to a local date time.
     /// A return value indicates whether the conversion succeeded.

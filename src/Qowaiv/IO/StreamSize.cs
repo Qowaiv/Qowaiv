@@ -89,8 +89,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <summary>The inner value of the stream size.</summary>
     private readonly long m_Value;
 
-    #region StreamSize manipulation
-
     /// <summary>Gets the sign of the stream size.</summary>
     [Pure]
     public int Sign() => m_Value.Sign();
@@ -142,8 +140,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// </param>
     [Pure]
     public StreamSize Subtract(Percentage p) => m_Value.Subtract(p);
-
-    #region Multiply
 
     /// <summary>Multiplies the stream size with a specified factor.</summary>
     /// <param name="factor">
@@ -218,10 +214,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     [Pure]
     public StreamSize Multiply(ushort factor) => Multiply((decimal)factor);
 
-    #endregion
-
-    #region Divide
-
     /// <summary>Divide the stream size by a specified factor.</summary>
     /// <param name="factor">
     /// The factor to multiply with.
@@ -294,8 +286,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     [CLSCompliant(false)]
     [Pure]
     public StreamSize Divide(ushort factor) => Divide((decimal)factor);
-
-    #endregion
 
     /// <summary>Increases the stream size with one byte.</summary>
     public static StreamSize operator ++(StreamSize streamSize) => streamSize.Increment();
@@ -386,8 +376,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <summary>Divides the stream size by the factor.</summary>
     [CLSCompliant(false)]
     public static StreamSize operator /(StreamSize streamSize, ushort factor) => streamSize.Divide(factor);
-
-    #endregion
 
     /// <summary>Deserializes the stream size from a JSON number.</summary>
     /// <param name="json">

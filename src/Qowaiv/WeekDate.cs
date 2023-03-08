@@ -56,8 +56,6 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on a <see cref="Qowaiv.Date"/>.</summary>
     private WeekDate(Date date) => m_Value = date;
 
-    #region Properties
-
     /// <summary>The inner value of the week date.</summary>
     private readonly Date m_Value;
 
@@ -81,10 +79,6 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Gets the date time component of this instance.</summary>
     public Date Date => m_Value;
-
-    #endregion
-
-    #region Methods
 
     /// <summary>Gets the year of week part of the week date.</summary>
     [Pure]
@@ -142,8 +136,6 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
         var adddays = ((int)start.DayOfWeek + 6) % 7;
         return start.AddDays(-adddays);
     }
-
-    #endregion
 
     /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct.</summary>
     /// <param name="info">The serialization info.</param>

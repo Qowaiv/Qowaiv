@@ -450,8 +450,6 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
-    #region (Explicit) casting
-
     /// <summary>Casts a date to a date time.</summary>
     public static implicit operator DateTime(Date val) => val.m_Value;
 
@@ -463,10 +461,6 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
 
     /// <summary>Casts a week date to a date.</summary>
     public static implicit operator Date(WeekDate val) => val.Date;
-
-    #endregion
-
-    #region Operators
 
     /// <summary>Adds the time span to the date.</summary>
     public static Date operator +(Date d, TimeSpan t) => d.Add(t);
@@ -488,8 +482,6 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
 
     /// <summary>Subtracts the right Date from the left date.</summary>
     public static TimeSpan operator -(Date l, Date r) => l.Subtract(r);
-
-    #endregion
 
     /// <summary>Converts the string to a date.
     /// A return value indicates whether the conversion succeeded.

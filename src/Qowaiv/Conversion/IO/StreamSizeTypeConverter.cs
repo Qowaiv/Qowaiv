@@ -18,4 +18,3 @@ public class StreamSizeTypeConverter : NumericTypeConverter<StreamSize, long>
     [Pure]
     protected override long ToRaw(StreamSize svo) => (long)svo;
 }
-

@@ -23,7 +23,8 @@ namespace Qowaiv;
 /// designator "SEX".
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [OpenApi.OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]
@@ -37,10 +38,13 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
 
     /// <summary>Represents a not known/unknown sex.</summary>
     public static readonly Sex Unknown = new(1);
+
     /// <summary>Represents a male.</summary>
     public static readonly Sex Male = new(2);
+
     /// <summary>Represents a female.</summary>
     public static readonly Sex Female = new(4);
+
     /// <summary>Represents a not applicable sex.</summary>
     public static readonly Sex NotApplicable = new(18);
 
@@ -64,7 +68,6 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// <param name="culture">
     /// The culture of the display name.
     /// </param>
-    /// <returns></returns>
     [Pure]
     public string GetDisplayName(CultureInfo? culture) => GetResourceString(string.Empty, culture);
 

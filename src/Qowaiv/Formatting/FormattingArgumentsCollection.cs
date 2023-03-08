@@ -157,7 +157,8 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 pos++;
                 if (pos == len) FormatError();
                 ch = format[pos];
-            } while (ch >= '0' && ch <= '9' && index < 1000000);
+            }
+            while (ch >= '0' && ch <= '9' && index < 1000000);
 
             if (index >= args.Length) { FormatErrorIndexOutOfRange(); }
 
@@ -204,14 +205,14 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                     pos++;
                     if (ch == '{')
                     {
-                        if (pos < len && format[pos] == '{')  // Treat as escape character for {{
+                        if (pos < len && format[pos] == '{') // Treat as escape character for {{
                             pos++;
                         else
                             FormatError();
                     }
                     else if (ch == '}')
                     {
-                        if (pos < len && format[pos] == '}')  // Treat as escape character for }}
+                        if (pos < len && format[pos] == '}') // Treat as escape character for }}
                             pos++;
                         else
                         {
@@ -513,5 +514,4 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
             "FormattingArgumentsCollection: '{0}', Items: {1}",
             FormatProvider,
             Count);
-
 }

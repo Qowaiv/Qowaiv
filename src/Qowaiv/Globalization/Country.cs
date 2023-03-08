@@ -220,7 +220,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// <summary>Casts a Country to a System.Globalization.RegionInf.</summary>
     public static explicit operator RegionInfo(Country val) => val.ToRegionInfo();
 
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a country.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

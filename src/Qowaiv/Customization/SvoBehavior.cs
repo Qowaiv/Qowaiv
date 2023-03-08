@@ -158,7 +158,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         => ToString(value?.ToString(), default, culture);
 
-    /// <summary>Converts the <see cref="string"/> to a SVO. 
+    /// <summary>Converts the <see cref="string"/> to a SVO.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="str">

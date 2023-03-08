@@ -5,7 +5,6 @@ namespace System;
 /// <summary>Extensions on <see cref="Type"/>.</summary>
 public static class QowaivTypeExtensions
 {
-
     /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
     /// <param name="type">
     /// The type to format as C# string.

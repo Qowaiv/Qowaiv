@@ -25,7 +25,6 @@ public static class JsonTester
                 null => "null",
                 _ => val?.ToString() ?? string.Empty,
             };
-
     }
 
     /// <summary>Writes the JSON using System.Text.Json.</summary>

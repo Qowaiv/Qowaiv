@@ -2,7 +2,8 @@
 
 /// <summary>Represents a house number.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
 [OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
 [OpenApi.OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
 [TypeConverter(typeof(HouseNumberTypeConverter))]

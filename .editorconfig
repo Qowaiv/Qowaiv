@@ -125,6 +125,7 @@ dotnet_diagnostic.SA1601.severity = none # Partial elements should be documented
 dotnet_diagnostic.SA1602.severity = none # Enumerations should be documented.
 dotnet_diagnostic.SA1611.severity = none # The documentation for parameter x is missing.
 dotnet_diagnostic.SA1615.severity = none # The documentation return value.
+dotnet_diagnostic.SA1618.severity = none # The documentation type parameter.
 dotnet_diagnostic.SA1623.severity = none # The property's documentation summary text should begin with: 'Gets'.
 dotnet_diagnostic.SA1633.severity = none # The file header is missing or not located at the top of the file.
 dotnet_diagnostic.SA1636.severity = none # The file header should contain match copyright from settings.

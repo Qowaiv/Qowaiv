@@ -315,16 +315,15 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     private string GetResourceString(string postfix, IFormatProvider? formatProvider)
         => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
 
-    #region Money creation operators
-
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(Amount val, Currency currency) => Money.Create((decimal)val, currency);
+
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(decimal val, Currency currency) => Money.Create(val, currency);
+
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(double val, Currency currency) => Money.Create(Cast.ToDecimal<Money>(val), currency);
+
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(int val, Currency currency) => Money.Create(val, currency);
-
-    #endregion
 }

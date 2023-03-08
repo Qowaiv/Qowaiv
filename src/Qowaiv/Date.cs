@@ -2,7 +2,8 @@
 
 /// <summary>Represents a date, so opposed to a date time without time precision.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]
@@ -490,7 +491,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
 
     #endregion
 
-    /// <summary>Converts the string to a date. 
+    /// <summary>Converts the string to a date.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -508,7 +509,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Date result)
         => TryParse(s, formatProvider, DateTimeStyles.None, out result);
 
-    /// <summary>Converts the string to a date. 
+    /// <summary>Converts the string to a date.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

@@ -81,8 +81,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         public static readonly Regex Pattern = new(
             @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$",
             RegOptions.Default,
-            RegOptions.Timeout
-        );
+            RegOptions.Timeout);
 
         /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
         [Pure]

@@ -28,7 +28,8 @@
 /// 2006-W52-7 (extended form) or 2006W527 (compact form).
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
 [OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [TypeConverter(typeof(WeekDateTypeConverter))]
@@ -39,7 +40,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
     private static readonly Regex Pattern = new(
-        @"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", 
+        @"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$",
         RegOptions.IgnoreCase,
         RegOptions.Timeout);
 
@@ -127,7 +128,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <summary>Gets the date of the first day of the first week of the year.</summary>
     /// <remarks>
     /// Source: http://en.wikipedia.org/wiki/ISO_8601
-    /// 
+    ///
     /// There are mutually equivalent descriptions of week 01:
     /// - the week with the year's first Thursday in it (the formal ISO definition),
     /// - the week with 4 January in it,
@@ -182,7 +183,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// y: as year.
     /// w: as week with leading zero.
     /// W: as week without leading zero.

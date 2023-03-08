@@ -44,8 +44,8 @@ public sealed class ConvertTo<To>
 
     /// <summary>Converts the value to the destination type, using the <see cref="TypeConverter"/> of the subject.</summary>
     [Pure]
-    public To? From<From>(From subject) => (To?)Converter<From>().ConvertTo(subject, typeof(To));
+    public To? From<TFrom>(TFrom subject) => (To?)Converter<TFrom>().ConvertTo(subject, typeof(To));
 
     [Pure]
-    private static TypeConverter Converter<From>() => TypeDescriptor.GetConverter(typeof(From));
+    private static TypeConverter Converter<TFrom>() => TypeDescriptor.GetConverter(typeof(TFrom));
 }

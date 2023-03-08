@@ -362,15 +362,19 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, decimal factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, double factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, float factor) => money.Multiply(factor);
 
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, long factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, int factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, short factor) => money.Multiply(factor);
 
@@ -528,7 +532,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     #endregion
 
-    /// <summary>Converts the string to 
+    /// <summary>Converts the string to money.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

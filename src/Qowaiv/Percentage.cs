@@ -2,7 +2,8 @@
 
 /// <summary>Represents a Percentage.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
 [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
 [OpenApi.OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
 [TypeConverter(typeof(PercentageTypeConverter))]

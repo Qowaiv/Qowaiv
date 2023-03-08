@@ -48,11 +48,10 @@ public static class Unknown
                     }
                 }
             }
-            return values.Contains(val.ToUpper(c)) ||
-            (
-                !c.Equals(CultureInfo.InvariantCulture) &&
-                Strings[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant())
-            );
+            return values.Contains(
+                val.ToUpper(c))
+                || (!c.Equals(CultureInfo.InvariantCulture)
+                    && Strings[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant()));
         }
         else return false;
     }

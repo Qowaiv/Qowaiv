@@ -4,7 +4,8 @@ namespace Qowaiv;
 
 /// <summary>Represents a month.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Month(-only) notation.", example: "Jun", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
 [OpenApi.OpenApiDataType(description: "Month(-only) notation.", example: "Jun", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
 [TypeConverter(typeof(MonthTypeConverter))]
@@ -21,26 +22,37 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Represents January (01).</summary>
     public static readonly Month January /*...*/ = new(01);
+
     /// <summary>Represents February (02).</summary>
     public static readonly Month February /*..*/ = new(02);
+
     /// <summary>Represents March (03).</summary>
     public static readonly Month March /*.....*/ = new(03);
+
     /// <summary>Represents April (04).</summary>
     public static readonly Month April /*.....*/ = new(04);
+
     /// <summary>Represents May (05).</summary>
     public static readonly Month May /*.......*/ = new(05);
+
     /// <summary>Represents June (06).</summary>
     public static readonly Month June /*......*/ = new(06);
+
     /// <summary>Represents July (07).</summary>
     public static readonly Month July /*......*/ = new(07);
+
     /// <summary>Represents August (08).</summary>
     public static readonly Month August /*....*/ = new(08);
+
     /// <summary>Represents September (09).</summary>
     public static readonly Month September /*.*/ = new(09);
+
     /// <summary>Represents October (10).</summary>
     public static readonly Month October /*..*/ = new(10);
+
     /// <summary>Represents November (11).</summary>
     public static readonly Month November /*..*/ = new(11);
+
     /// <summary>Represents December (12).</summary>
     public static readonly Month December /*..*/ = new(12);
 

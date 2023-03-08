@@ -55,11 +55,11 @@ public static class QowaivDateTimeExtensions
     /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
     /// </summary>
-    /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
-    /// </param>
     /// <param name="d">
     /// The date time to add a <see cref="MonthSpan"/> to.
+    /// </param>
+    /// <param name="value">
+    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
     /// </param>
     /// <param name="settings">
     /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.

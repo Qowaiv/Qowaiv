@@ -37,7 +37,8 @@ namespace Qowaiv.Web;
 /// See http://tools.ietf.org/html/rfc6838.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
 [OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
@@ -104,9 +105,9 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     /// This is based on a naming convention, not on actual registration.
     /// </remarks>
     public bool IsRegistered
-        => TopLevelType != InternetMediaTopLevelType.None 
-        && TopLevelType != InternetMediaTopLevelType.Unregistered 
-        && !Subtype.StartsWith("x-", StringComparison.Ordinal) 
+        => TopLevelType != InternetMediaTopLevelType.None
+        && TopLevelType != InternetMediaTopLevelType.Unregistered
+        && !Subtype.StartsWith("x-", StringComparison.Ordinal)
         && !Subtype.StartsWith("x.", StringComparison.Ordinal);
 
     /// <summary>Serializes the Internet media type to a JSON node.</summary>
@@ -157,7 +158,7 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     public static bool TryParse(string? s, IFormatProvider? provider, out InternetMediaType result)
     {
         result = default;
-        if (s is not { Length: > 0})
+        if (s is not { Length: > 0 })
         {
             return true;
         }

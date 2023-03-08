@@ -21,7 +21,8 @@ namespace Qowaiv;
 /// designator "SEX".
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", example: "female", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(GenderTypeConverter))]
 #if NET5_0_OR_GREATER

@@ -223,8 +223,6 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
         else return false;
     }
 
-    #region Get currencies
-
     /// <summary>Gets all existing currencies.</summary>
     /// <returns>
     /// A list of existing currencies.
@@ -253,8 +251,6 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
             .Split(';')
             .Select(str => new Currency(str))
             .ToList());
-
-    #endregion
 
     private static readonly CurrencyValues ParseValues = new();
 

@@ -55,8 +55,6 @@ public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattab
         return z;
     }
 
-    #region Elo manipulation
-
     /// <summary>Increases the Elo with one.</summary>
     [Pure]
     public Elo Increment() => Add(1d);
@@ -126,8 +124,6 @@ public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattab
 
     /// <summary>Subtracts the right from the left Elo.</summary>
     public static Elo operator -(Elo l, Elo r) => l.Subtract(r);
-
-    #endregion
 
     /// <summary>Deserializes the Elo from a JSON number.</summary>
     /// <param name="json">

@@ -72,8 +72,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
         }
     }
 
-    #region ICollection
-
     /// <summary>Gets the number of email addresses in the collection.</summary>
     [ExcludeFromCodeCoverage]
     public int Count => hashset.Count;
@@ -116,10 +114,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     [ExcludeFromCodeCoverage]
     [Pure]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-    #endregion
-
-    #region ISet
 
     /// <summary>Removes all elements in the specified collection from the current set.</summary>
     [ExcludeFromCodeCoverage]
@@ -170,8 +164,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </summary>
     [ExcludeFromCodeCoverage]
     public void UnionWith(IEnumerable<EmailAddress> other) => hashset.UnionWith(other);
-
-    #endregion
 
     /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="info">The serialization info.</param>
@@ -261,8 +253,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     [Pure]
     public virtual string? ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
-    #region IFormattable / ToString
-
     /// <summary>Returns a <see cref="string"/> that represents the current email address collection.</summary>
     [Pure]
     public override string ToString() => ToString(CultureInfo.CurrentCulture);
@@ -293,10 +283,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : string.Join(Separator, this.Select(emailaddress => emailaddress.ToString(format, formatProvider)));
-
-    #endregion
-
-    #region Factory methods
 
     /// <summary>Converts the string to an email address collection.</summary>
     /// <param name="s">
@@ -407,6 +393,4 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
         }
         else return true;
     }
-
-    #endregion
 }

@@ -289,8 +289,6 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 
     private static void FormatErrorIndexOutOfRange() => throw new FormatException(QowaivMessages.FormatException_IndexOutOfRange);
 
-    #region Collection/dictionary related
-
     /// <summary>Adds a format for the specified type.</summary>
     /// <param name="type">
     /// The type to specify a format for.
@@ -503,8 +501,6 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 
     /// <summary>Gets the number of formatting arguments in the collection.</summary>
     public int Count => dict.Count;
-
-    #endregion
 
     /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments collection for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

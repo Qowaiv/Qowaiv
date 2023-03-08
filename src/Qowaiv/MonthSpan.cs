@@ -47,8 +47,6 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <summary>Gets the months component of the month span.</summary>
     public int Months => TotalMonths % DateSpan.MonthsPerYear;
 
-    #region Operations
-
     /// <summary>Unary plus the month span.</summary>
     [Pure]
     internal MonthSpan Plus() => this;
@@ -193,8 +191,6 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     /// <summary>Subtracts a month span from the date time.</summary>
     public static DateTime operator -(DateTime dt, MonthSpan span) => dt.Add(-span);
 
-    #endregion
-
     /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
@@ -247,8 +243,6 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
     [Pure]
     public static MonthSpan FromJson(long json) => Cast.Primitive<long, MonthSpan>(TryCreate, json);
 
-    #region (Explicit) casting
-
     /// <summary>Casts the month span to a <see cref = "int"/>.</summary>
     public static explicit operator int(MonthSpan val) => val.m_Value;
 
@@ -260,8 +254,6 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
 
     /// <summary>Casts a <see cref = "DateSpan"/> to a month span.</summary>
     public static explicit operator MonthSpan(DateSpan val) => FromMonths(val.TotalMonths);
-
-    #endregion
 
     /// <summary>Converts the <see cref = "string "/> to <see cref = "MonthSpan"/>.
     /// A return value indicates whether the conversion succeeded.

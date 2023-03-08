@@ -519,8 +519,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         ? m_Value.CompareTo(other.m_Value)
         : compare;
 
-    #region (Explicit) casting
-
     /// <summary>Casts Money to a decimal.</summary>
     public static explicit operator Amount(Money val) => (Amount)val.m_Value;
 
@@ -529,8 +527,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Casts Money to a double.</summary>
     public static explicit operator double(Money val) => (double)val.m_Value;
-
-    #endregion
 
     /// <summary>Converts the string to money.
     /// A return value indicates whether the conversion succeeded.

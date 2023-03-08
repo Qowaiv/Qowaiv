@@ -297,8 +297,6 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         return All.FirstOrDefault(c => c.Name == name);
     }
 
-    #region Get countries
-
     /// <summary>Gets all existing countries.</summary>
     /// <returns>
     /// A list of existing countries.
@@ -325,8 +323,6 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         .Split(';')
         .Select(str => new Country(str))
         .ToList());
-
-    #endregion
 
     private static readonly CountryValues ParseValues = new();
 

@@ -34,7 +34,7 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     public CharSpan Last(out char ch)
     {
         ch = m_Value[End - 1];
-        return  new(m_Value, Start, End - 1);
+        return new(m_Value, Start, End - 1);
     }
 
     [Pure]
@@ -101,7 +101,7 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
 
     [Pure]
     public IEnumerator<char> GetEnumerator() => m_Value.Skip(Start).Take(Length).GetEnumerator();
-    
+
     [Pure]
     [ExcludeFromCodeCoverage]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

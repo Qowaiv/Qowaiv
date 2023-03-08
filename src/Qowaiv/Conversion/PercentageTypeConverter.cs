@@ -16,4 +16,3 @@ public class PercentageTypeConverter : NumericTypeConverter<Percentage, decimal>
     [Pure]
     protected override decimal ToRaw(Percentage svo) => (decimal)svo;
 }
-

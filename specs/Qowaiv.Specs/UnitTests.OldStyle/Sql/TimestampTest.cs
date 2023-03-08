@@ -274,7 +274,7 @@ public class TimestampTest
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
-        var act = TestStruct.ToString("");
+        var act = TestStruct.ToString(string.Empty);
         var exp = "0x00000000075BCD15";
         Assert.AreEqual(exp, act);
     }

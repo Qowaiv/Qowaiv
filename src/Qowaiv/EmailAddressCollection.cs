@@ -17,6 +17,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// According to RFC 6068: http://tools.ietf.org/html/rfc6068.
     /// </remarks>
     public const string Separator = ",";
+
     /// <summary>The separators used for parsing.</summary>
     /// <remarks>
     /// Both comma and semicolon are supported.
@@ -25,32 +26,30 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
 
     /// <summary>The underlying hash set.</summary>
     /// <remarks>
-    /// The only proper way to block the adding of empty and unknown 
+    /// The only proper way to block the adding of empty and unknown
     /// email addresses was by overriding Add, which is not allowed if
     /// derived from HasSet&lt;EmailAddress&gt;.
-    /// 
+    ///
     /// So this construction is required.
     /// </remarks>
     private readonly HashSet<EmailAddress> hashset = new();
 
-    /// <summary>Initiates a new collection of email addresses.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     public EmailAddressCollection() { }
 
-    /// <summary>Initiates a new collection of email addresses.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="emails">
     /// An array of email addresses.
     /// </param>
     public EmailAddressCollection(params EmailAddress[] emails)
         : this((IEnumerable<EmailAddress>)emails) { }
 
-    /// <summary>Initiates a new collection of email addresses.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="emails">
     /// An enumeration of email addresses.
     /// </param>
     public EmailAddressCollection(IEnumerable<EmailAddress> emails)
         : this() => AddRange(emails);
-
-    #region Methods
 
     /// <summary>Adds an email address to the current collection and returns
     /// a value to indicate if the email address was successfully added.
@@ -60,24 +59,18 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </param>
     [CollectionMutation]
     public bool Add(EmailAddress item)
-    {
-        if (item.IsEmptyOrUnknown()) { return false; }
-        return hashset.Add(item);
-    }
+        => !item.IsEmptyOrUnknown()
+        && hashset.Add(item);
 
     /// <summary>Keeps only the distinct set of email addresses in the collection.</summary>
-    /// <returns>
-    /// The current (cleaned) instance of the collection.
-    /// </returns>
     public void AddRange(IEnumerable<EmailAddress> emails)
     {
         Guard.NotNull(emails, nameof(emails));
-        foreach (var email in emails) { Add(email); }
+        foreach (var email in emails)
+        {
+            Add(email);
+        }
     }
-
-    #endregion
-
-    #region ICollection
 
     /// <summary>Gets the number of email addresses in the collection.</summary>
     [ExcludeFromCodeCoverage]
@@ -121,10 +114,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     [ExcludeFromCodeCoverage]
     [Pure]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-    #endregion
-
-    #region ISet
 
     /// <summary>Removes all elements in the specified collection from the current set.</summary>
     [ExcludeFromCodeCoverage]
@@ -176,11 +165,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     [ExcludeFromCodeCoverage]
     public void UnionWith(IEnumerable<EmailAddress> other) => hashset.UnionWith(other);
 
-    #endregion
-
-    #region Serialization
-
-    /// <summary>Initializes a new instance of email address based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     protected EmailAddressCollection(SerializationInfo info, StreamingContext context)
@@ -238,7 +223,8 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
 
     /// <summary>Writes the email address to an <see href="XmlWriter"/>.</summary>
     /// <param name="writer">An XML writer.</param>
-    void IXmlSerializable.WriteXml(XmlWriter writer) { WriteXml(writer); }
+    void IXmlSerializable.WriteXml(XmlWriter writer) => WriteXml(writer);
+
     /// <summary>Writes the email address to an <see href="XmlWriter"/>.</summary>
     /// <remarks>
     /// this is used by IXmlSerializable.WriteXml() so that it can be
@@ -267,10 +253,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     [Pure]
     public virtual string? ToJson() => Count == 0 ? null : ToString(CultureInfo.InvariantCulture);
 
-    #endregion
-
-    #region IFormattable / ToString
-
     /// <summary>Returns a <see cref="string"/> that represents the current email address collection.</summary>
     [Pure]
     public override string ToString() => ToString(CultureInfo.CurrentCulture);
@@ -287,7 +269,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider formatProvider) => ToString("", formatProvider);
+    public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
     /// <param name="format">
@@ -301,10 +283,6 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : string.Join(Separator, this.Select(emailaddress => emailaddress.ToString(format, formatProvider)));
-
-    #endregion
-
-    #region Factory methods
 
     /// <summary>Converts the string to an email address collection.</summary>
     /// <param name="s">
@@ -415,6 +393,4 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
         }
         else return true;
     }
-
-    #endregion
 }

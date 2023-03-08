@@ -7,6 +7,9 @@ using Qowaiv.Conversion.Customization;
 namespace Qowaiv.Customization;
 
 /// <summary>Represents a Single Value Object.</summary>
+/// <typeparam name="TSvoBehavior">
+/// The type that implements the SVO behavior.
+/// </typeparam>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
@@ -28,10 +31,10 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// <summary>Represents an unknown (but set) Single Value Object.</summary>
     public static readonly Svo<TSvoBehavior> Unknown = new(SvoBehavior.unknown);
 
-    /// <summary>Creates a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     private Svo(string? value) => m_Value = value;
 
-    /// <summary>Initializes a new instance of the Single Value Object based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Svo(SerializationInfo info, StreamingContext context)
@@ -69,9 +72,9 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     [Pure]
     public int CompareTo(object? obj)
     {
-        if (obj is null) { return 1; }
-        else if (obj is Svo<TSvoBehavior> other) { return CompareTo(other); }
-        else { throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj)); }
+        if (obj is null) return 1;
+        else if (obj is Svo<TSvoBehavior> other) return CompareTo(other);
+        else throw new ArgumentException($"Argument must be {GetType().Name}.", nameof(obj));
     }
 
     /// <inheritdoc />
@@ -93,6 +96,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
         else return behavior.Compare(m_Value, other.m_Value);
     }
 #endif
+
     /// <inheritdoc />
     [Pure]
     public override bool Equals(object? obj) => obj is Svo<TSvoBehavior> other && Equals(other);
@@ -108,12 +112,12 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator ==(Svo<TSvoBehavior> left, Svo<TSvoBehavior> right) => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator !=(Svo<TSvoBehavior> left, Svo<TSvoBehavior> right) => !(left == right);
 
     /// <summary>Returns a <see cref="string" /> that represents the Single Value Object for DEBUG purposes.</summary>

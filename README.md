@@ -224,7 +224,7 @@ var parsed = Sex.Parse("Male");
 
 sex.ToString("s"); // ♀
 sex.ToString("c"); // f
-sex.ToString("", new CultureInfo("pt")); // Feminino
+sex.ToString(string.Empty, new CultureInfo("pt")); // Feminino
 sex.ToString("h", new CultureInfo("en-GB")); // Mrs.
 ```
 

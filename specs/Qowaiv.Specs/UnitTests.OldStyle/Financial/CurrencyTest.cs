@@ -412,7 +412,7 @@ public class CurrencyTest
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
-        var act = TestStruct.ToString("");
+        var act = TestStruct.ToString(string.Empty);
         var exp = "EUR";
         Assert.AreEqual(exp, act);
     }

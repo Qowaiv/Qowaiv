@@ -28,10 +28,10 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <summary>Represents an empty/not set identifier.</summary>
     public static readonly Id<TIdentifier> Empty;
 
-    /// <summary>Creates a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
     private Id(object? value) => m_Value = value;
 
-    /// <summary>Initializes a new instance of the identifier based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Id(SerializationInfo info, StreamingContext context)
@@ -97,12 +97,12 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator !=(Id<TIdentifier> left, Id<TIdentifier> right) => !(left == right);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator ==(Id<TIdentifier> left, Id<TIdentifier> right) => left.Equals(right);
 
     /// <summary>Returns a <see cref="string"/> that represents the identifier for DEBUG purposes.</summary>

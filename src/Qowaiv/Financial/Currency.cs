@@ -51,16 +51,16 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// </returns>
     public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the code defined in ISO 4217 for the currency.</summary>
+    /// <summary>Gets the code defined in ISO 4217 for the currency.</summary>
     public string IsoCode => GetResourceString("ISO", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
+    /// <summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
     public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture));
 
-    ///<summary>Gets the symbol for a currency.</summary>
-    public string Symbol => m_Value == default ? "" : GetResourceString("Symbol", CultureInfo.InvariantCulture);
+    /// <summary>Gets the symbol for a currency.</summary>
+    public string Symbol => m_Value == default ? string.Empty : GetResourceString("Symbol", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the number of after the decimal separator.</summary>
+    /// <summary>Gets the number of after the decimal separator.</summary>
     public int Digits => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture));
 
     /// <summary>Gets the start date from witch the currency exists.</summary>
@@ -80,7 +80,6 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// <param name="culture">
     /// The culture of the display name.
     /// </param>
-    /// <returns></returns>
     [Pure]
     public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
 
@@ -134,7 +133,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// n: as Name.
     /// i: as ISO Code.
     /// 0: as ISO Numeric.
@@ -158,9 +157,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
         { 's', (svo, _) => svo.Symbol },
         { '$', (svo, _) => svo.Symbol },
         { 'e', (svo, _) => svo.EnglishName },
-        
     };
-
 
     /// <summary>Gets an XML string representation of the currency.</summary>
     [Pure]
@@ -174,7 +171,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
     /// <remarks>
-    /// Because the options for formatting and parsing currencies as provided 
+    /// Because the options for formatting and parsing currencies as provided
     /// by the .NET framework are not sufficient, internally we use number
     /// settings. For parsing and formatting however we like to use the
     /// currency properties of the <see cref="NumberFormatInfo"/> instead of
@@ -226,8 +223,6 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
         else return false;
     }
 
-    #region Get currencies
-
     /// <summary>Gets all existing currencies.</summary>
     /// <returns>
     /// A list of existing currencies.
@@ -256,8 +251,6 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
             .Split(';')
             .Select(str => new Currency(str))
             .ToList());
-
-    #endregion
 
     private static readonly CurrencyValues ParseValues = new();
 
@@ -303,6 +296,7 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
             return rm;
         }
     }
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private static ResourceManager? rm;
 
@@ -317,16 +311,15 @@ public readonly partial struct Currency : ISerializable, IXmlSerializable, IForm
     private string GetResourceString(string postfix, IFormatProvider? formatProvider)
         => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
 
-    #region Money creation operators
-
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(Amount val, Currency currency) => Money.Create((decimal)val, currency);
+
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(decimal val, Currency currency) => Money.Create(val, currency);
+
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(double val, Currency currency) => Money.Create(Cast.ToDecimal<Money>(val), currency);
+
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(int val, Currency currency) => Money.Create(val, currency);
-
-    #endregion
 }

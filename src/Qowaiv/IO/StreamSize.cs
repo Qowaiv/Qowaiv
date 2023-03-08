@@ -5,7 +5,7 @@ namespace Qowaiv.IO;
 
 /// <summary>Represents a stream size.</summary>
 /// <remarks>
-/// A stream size measures the size of a computer file or stream. Typically it is 
+/// A stream size measures the size of a computer file or stream. Typically it is
 /// measured in bytes with an SI prefix. The actual amount of disk space consumed by
 /// the file depends on the file system. The maximum stream size a file system
 /// supports depends on the number of bits reserved to store size information
@@ -13,7 +13,8 @@ namespace Qowaiv.IO;
 /// stream sizes bigger than long.MaxValue.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [OpenApi.OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]
@@ -79,7 +80,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <summary>Represents the maximum stream size that can be represented.</summary>
     public static readonly StreamSize MaxValue = new(long.MaxValue);
 
-    /// <summary>Initializes a new instance of a stream size.</summary>
+    /// <summary>Initializes a new instance of the <see cref="StreamSize"/> struct.</summary>
     /// <param name="size">
     /// The number of bytes.
     /// </param>
@@ -87,8 +88,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
 
     /// <summary>The inner value of the stream size.</summary>
     private readonly long m_Value;
-
-    #region StreamSize manipulation
 
     /// <summary>Gets the sign of the stream size.</summary>
     [Pure]
@@ -141,8 +140,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// </param>
     [Pure]
     public StreamSize Subtract(Percentage p) => m_Value.Subtract(p);
-
-    #region Multiply
 
     /// <summary>Multiplies the stream size with a specified factor.</summary>
     /// <param name="factor">
@@ -217,10 +214,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     [Pure]
     public StreamSize Multiply(ushort factor) => Multiply((decimal)factor);
 
-    #endregion
-
-    #region Divide
-
     /// <summary>Divide the stream size by a specified factor.</summary>
     /// <param name="factor">
     /// The factor to multiply with.
@@ -293,8 +286,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     [CLSCompliant(false)]
     [Pure]
     public StreamSize Divide(ushort factor) => Divide((decimal)factor);
-
-    #endregion
 
     /// <summary>Increases the stream size with one byte.</summary>
     public static StreamSize operator ++(StreamSize streamSize) => streamSize.Increment();
@@ -386,8 +377,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     [CLSCompliant(false)]
     public static StreamSize operator /(StreamSize streamSize, ushort factor) => streamSize.Divide(factor);
 
-    #endregion
-
     /// <summary>Deserializes the stream size from a JSON number.</summary>
     /// <param name="json">
     /// The JSON number to deserialize.
@@ -448,10 +437,10 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// There are basically two ways to format the stream size. The first one is
     /// automatic. Based on the size the extension is chosen (byte, kB, MB, GB, ect.).
     /// This can be specified by a s/S (short notation) and a f/F (full notation).
-    /// 
+    ///
     /// The other option is to specify the extension explicitly. So Megabyte,
     /// kB, ect. No extension is also possible.
-    /// 
+    ///
     /// Short notation:
     /// 8900.ToString("s") => 8900b
     /// 238900.ToString("s") => 238.9kb
@@ -462,12 +451,12 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// 8900.ToString("0.0 f") => 8900.0 byte
     /// 238900.ToString("0 f") => 234 kilobyte
     /// 1238900.ToString("0.00 F") => 1.24 Megabyte
-    /// 
+    ///
     /// Custom:
     /// 8900.ToString("0.0 kb") => 8.9 kb
     /// 238900.ToString("0.0 MB") => 0.2 MB
     /// 1238900.ToString("#,##0.00 Kilobyte") => 1,239.00 Kilobyte
-    /// 1238900.ToString("#,##0") => 1,238,900
+    /// 1238900.ToString("#,##0") => 1,238,900.
     /// </remarks>
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
@@ -535,7 +524,7 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     }
 
     [FluentSyntax]
-    private static StringBuilder AppendExtension(StringBuilder sb, string streamSizeMarker, int order) 
+    private static StringBuilder AppendExtension(StringBuilder sb, string streamSizeMarker, int order)
         => streamSizeMarker switch
         {
             "s" => sb.Append(ShortLabels[order].ToLowerInvariant()),
@@ -600,7 +589,6 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
         if (string.IsNullOrEmpty(s)) return false;
         else
         {
-
             var streamSizeMarker = GetStreamSizeMarker(s);
             var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
             var factor = GetMultiplier(streamSizeMarker);
@@ -736,35 +724,35 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
 
     private static readonly Dictionary<string, long> MultiplierLookup = new()
     {
-        { "KILOBYTE", 1000L },
-        { "MEGABYTE", 1000000L },
-        { "GIGABYTE", 1000000000L },
-        { "TERABYTE", 1000000000000L },
-        { "PETABYTE", 1000000000000000L },
-        { "EXABYTE", 1000000000000000000L },
+        ["KILOBYTE"] = 1000L,
+        ["MEGABYTE"] = 1000000L,
+        ["GIGABYTE"] = 1000000000L,
+        ["TERABYTE"] = 1000000000000L,
+        ["PETABYTE"] = 1000000000000000L,
+        ["EXABYTE"] = 1000000000000000000L,
 
-        { "KB", 1000L },
-        { "MB", 1000000L },
-        { "GB", 1000000000L },
-        { "TB", 1000000000000L },
-        { "PB", 1000000000000000L },
-        { "EB", 1000000000000000000L },
+        ["KB"] = 1000L,
+        ["MB"] = 1000000L,
+        ["GB"] = 1000000000L,
+        ["TB"] = 1000000000000L,
+        ["PB"] = 1000000000000000L,
+        ["EB"] = 1000000000000000000L,
 
-        { "KIBIBYTE", 1L << 10 },
-        { "MEBIBYTE", 1L << 20 },
-        { "GIBIBYTE", 1L << 30 },
-        { "TEBIBYTE", 1L << 40 },
-        { "PEBIBYTE", 1L << 50 },
-        { "EXBIBYTE", 1L << 60 },
+        ["KIBIBYTE"] = 1L << 10,
+        ["MEBIBYTE"] = 1L << 20,
+        ["GIBIBYTE"] = 1L << 30,
+        ["TEBIBYTE"] = 1L << 40,
+        ["PEBIBYTE"] = 1L << 50,
+        ["EXBIBYTE"] = 1L << 60,
 
-        { "KIB", 1L << 10 },
-        { "MIB", 1L << 20 },
-        { "GIB", 1L << 30 },
-        { "TIB", 1L << 40 },
-        { "PIB", 1L << 50 },
-        { "EIB", 1L << 60 },
+        ["KIB"] = 1L << 10,
+        ["MIB"] = 1L << 20,
+        ["GIB"] = 1L << 30,
+        ["TIB"] = 1L << 40,
+        ["PIB"] = 1L << 50,
+        ["EIB"] = 1L << 60,
 
-        { "BYTE", 1 },
-        { "B", 1 },
+        ["BYTE"] = 1,
+        ["B"] = 1,
     };
 }

@@ -18,4 +18,3 @@ public class CasRegistryNumberTypeConverter : NumericTypeConverter<CasRegistryNu
     [Pure]
     protected override long ToRaw(CasRegistryNumber svo) => (long)svo;
 }
-

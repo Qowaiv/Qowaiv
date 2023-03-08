@@ -1,7 +1,4 @@
 ﻿namespace System;
-#pragma warning disable S2225 // "ToString()" method should not return null
-// This is okay here as it only null when the object to apply a ToString() on
-// is null too.
 
 /// <summary>Extensions on <see cref="IFormattable"/>.</summary>
 public static class QowaivFormattableExtensions
@@ -11,7 +8,7 @@ public static class QowaivFormattableExtensions
     /// The object to format.
     /// </param>
     /// <param name="arguments">
-    /// The formatting arguments
+    /// The formatting arguments.
     /// </param>
     /// <returns>
     /// A formatted string representing the object.

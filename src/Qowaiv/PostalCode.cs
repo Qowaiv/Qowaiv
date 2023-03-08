@@ -8,7 +8,8 @@ namespace Qowaiv;
 
 /// <summary>Represents a postal code.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Postal code notation.", example: "2624DP", type: "string", format: "postal-code", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Postal code notation.", example: "2624DP", type: "string", format: "postal-code", nullable: true)]
 [TypeConverter(typeof(PostalCodeTypeConverter))]
@@ -63,7 +64,7 @@ public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFo
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) 
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : ToString(Country.TryParse(format) ?? default);
@@ -74,7 +75,7 @@ public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFo
     /// </param>
     /// <remarks>
     /// If the postal code is not valid for the country,
-    /// or the country does not have special formattings, 
+    /// or the country does not have special formattings,
     /// the unformatted value is returned.
     /// </remarks>
     [Pure]

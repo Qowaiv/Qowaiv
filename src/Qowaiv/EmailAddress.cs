@@ -8,7 +8,8 @@ namespace Qowaiv;
 
 /// <summary>Represents an email address.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Email notation as defined by RFC 5322.", example: "svo@qowaiv.org", type: "string", format: "email", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Email notation as defined by RFC 5322.", example: "svo@qowaiv.org", type: "string", format: "email", nullable: true)]
 [TypeConverter(typeof(EmailAddressTypeConverter))]
@@ -19,7 +20,7 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
 {
     /// <summary>An email address must not exceed 254 characters.</summary>
     /// <remarks>
-    /// https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+    /// https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address.
     /// </remarks>
     public const int MaxLength = 254;
 
@@ -106,7 +107,7 @@ public readonly partial struct EmailAddress : ISerializable, IXmlSerializable, I
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// f: as formatted email address.
     /// U: as full email address uppercased.
     /// l: as local name.

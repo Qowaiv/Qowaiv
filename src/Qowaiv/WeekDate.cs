@@ -11,7 +11,7 @@
 /// contains a whole number of weeks (20871). In every cycle there are 71
 /// years with an additional 53rd week. An average year is exactly 52.1775
 /// weeks long, months average at 4.348125 weeks.
-/// 
+///
 /// An ISO week-numbering year (also called ISO year informally) has 52 or
 /// 53 full weeks. That is 364 or 371 days instead of the usual 365 or 366
 /// days. The extra week is referred to here as a leap week, although
@@ -19,7 +19,7 @@
 /// of a year is the week that contains the first Thursday (and, hence,
 /// 4 January) of the year. ISO week year numbering therefore slightly
 /// deviates from the Gregorian for some days close to 1 January.
-/// 
+///
 /// A date is specified by the ISO week-numbering year in the format YYYY,
 /// a week number in the format ww prefixed by the letter 'W', and the
 /// weekday number, a digit d from 1 through 7, beginning with Monday and
@@ -28,7 +28,8 @@
 /// 2006-W52-7 (extended form) or 2006W527 (compact form).
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
 [OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [TypeConverter(typeof(WeekDateTypeConverter))]
@@ -39,7 +40,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
     private static readonly Regex Pattern = new(
-        @"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", 
+        @"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$",
         RegOptions.IgnoreCase,
         RegOptions.Timeout);
 
@@ -49,13 +50,11 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <summary>Represents the maximum value of the week date.</summary>
     public static readonly WeekDate MaxValue = new(Date.MaxValue);
 
-    /// <summary>Creates a date based on Week Year, week number, and day of the week.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on Week Year, week number, and day of the week.</summary>
     public WeekDate(int year, int week, int day) : this(Create(year, week, day)) { }
 
-    /// <summary>Creates a date based on a <see cref="Qowaiv.Date"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on a <see cref="Qowaiv.Date"/>.</summary>
     private WeekDate(Date date) => m_Value = date;
-
-    #region Properties
 
     /// <summary>The inner value of the week date.</summary>
     private readonly Date m_Value;
@@ -80,10 +79,6 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Gets the date time component of this instance.</summary>
     public Date Date => m_Value;
-
-    #endregion
-
-    #region Methods
 
     /// <summary>Gets the year of week part of the week date.</summary>
     [Pure]
@@ -127,7 +122,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <summary>Gets the date of the first day of the first week of the year.</summary>
     /// <remarks>
     /// Source: http://en.wikipedia.org/wiki/ISO_8601
-    /// 
+    ///
     /// There are mutually equivalent descriptions of week 01:
     /// - the week with the year's first Thursday in it (the formal ISO definition),
     /// - the week with 4 January in it,
@@ -142,11 +137,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
         return start.AddDays(-adddays);
     }
 
-    #endregion
-
-    #region (De)serialization
-
-    /// <summary>Initializes a new instance of week date based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private WeekDate(SerializationInfo info, StreamingContext context)
@@ -171,8 +162,6 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     [Pure]
     public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
-    #endregion
-
     /// <summary>Returns a <see cref="string"/> that represents the current week date for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
@@ -186,7 +175,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// y: as year.
     /// w: as week with leading zero.
     /// W: as week without leading zero.

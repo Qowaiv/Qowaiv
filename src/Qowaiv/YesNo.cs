@@ -14,7 +14,8 @@ namespace Qowaiv;
 /// achieved when modeling a property as <see cref="bool"/> instead of an <see cref="YesNo"/>.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Yes-No notation.", example: "yes", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
 [OpenApi.OpenApiDataType(description: "Yes-No notation.", example: "yes", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
 [TypeConverter(typeof(YesNoTypeConverter))]
@@ -113,7 +114,7 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// i: as integer (note, unknown is a question mark sign).
     /// c/C: as single character (y/n/?) (Upper cased).
     /// f/F: as formatted string (Title cased).
@@ -210,18 +211,18 @@ public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormatt
 
     private sealed class YesNoValues : LocalizedValues<byte>
     {
-        public YesNoValues() : base(new Dictionary<string, byte>
+        public YesNoValues() : base(new()
         {
-            { "", 0 },
-            { "0", 1 }, { "N", 1 }, { "NO", 1 }, { "FALSE", 1 },
-            { "1", 2 }, { "Y", 2 }, { "YES", 2 },{ "TRUE", 2 },
+            [string.Empty] = 0,
+            ["0"] = 1, ["N"] = 1, ["NO"] = 1, ["FALSE"] = 1,
+            ["1"] = 2, ["Y"] = 2, ["YES"] = 2, ["TRUE"] = 2,
         }) { }
 
         protected override void AddCulture(CultureInfo culture)
         {
             foreach (var value in YesAndNo)
             {
-                var label = value.ToString("", culture).Unify();
+                var label = value.ToString(string.Empty, culture).Unify();
                 var @char = value.ToString("c", culture).Unify();
                 var @bool = value.ToString("b", culture).Unify();
 

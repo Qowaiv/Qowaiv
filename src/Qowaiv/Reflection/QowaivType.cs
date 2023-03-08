@@ -36,7 +36,7 @@ public static class QowaivType
     /// * <see cref="DateTimeOffset"/>
     /// * <see cref="LocalDateTime"/>
     /// * <see cref="Date"/>
-    /// * <see cref="WeekDate"/>
+    /// * <see cref="WeekDate"/>.
     /// </remarks>
     [Pure]
     public static bool IsDate(Type? objectType)

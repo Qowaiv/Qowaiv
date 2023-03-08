@@ -1,10 +1,9 @@
-﻿using System.Numerics;
-
-namespace Qowaiv;
+﻿namespace Qowaiv;
 
 /// <summary>Represents a local date time.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
 [OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information.", example: "2017-06-10 15:00", type: "string", format: "local-date-time")]
 [OpenApi.OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information.", example: "2017-06-10 15:00", type: "string", format: "local-date-time")]
 [TypeConverter(typeof(LocalDateTimeTypeConverter))]
@@ -27,9 +26,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// <summary>Represents the largest possible value date. This field is read-only.</summary>
     public static readonly LocalDateTime MaxValue = new(DateTime.MaxValue);
 
-    #region Constructors
-
-    /// <summary>Initializes a new instance of the local date time structure to a specified number of ticks.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct to a specified number of ticks.</summary>
     /// <param name="ticks">
     /// A date expressed in 100-nanosecond units.
     /// </param>
@@ -41,8 +38,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
         m_Value = new DateTime(ticks, DateTimeKind.Local);
     }
 
-    /// <summary>Initializes a new instance of the local date time structure based on a System.DateTime.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on a System.DateTime.</summary>
     /// <param name="dt">
     /// A date and time.
     /// </param>
@@ -51,7 +47,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// </remarks>
     private LocalDateTime(DateTime dt) : this(dt.Ticks) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -71,7 +67,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// </exception>
     public LocalDateTime(int year, int month, int day) : this(year, month, day, 0, 0) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -98,7 +94,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     public LocalDateTime(int year, int month, int day, int hour, int minute)
         : this(year, month, day, hour, minute, 0) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -128,7 +124,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     public LocalDateTime(int year, int month, int day, int hour, int minute, int second)
         : this(year, month, day, hour, minute, second, 0) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -160,10 +156,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     /// </exception>
     public LocalDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond)
         : this(new DateTime(year, month, day, hour, minute, second, millisecond, DateTimeKind.Local)) { }
-
-    #endregion
-
-    #region Properties
 
     /// <summary>Gets the year component of the date represented by this instance.</summary>
     public int Year => m_Value.Year;
@@ -200,8 +192,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
 
     /// <summary>The inner value of the local date time.</summary>
     private readonly DateTime m_Value;
-
-    #endregion
 
     /// <summary>Adds one day to the local date time.</summary>
     [Pure]
@@ -291,7 +281,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
             : AddMonths(value.TotalMonths).AddDays(value.Days);
     }
 
-
     /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
     /// to the value of this instance.
     /// </summary>
@@ -317,7 +306,7 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     {
         DateSpanSettings.DaysFirst => AddDays(value.Days).AddMonths(value.TotalMonths),
         DateSpanSettings.Default => AddMonths(value.TotalMonths).AddDays(value.Days),
-        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan),
     };
 
     /// <summary>Subtracts the specified local date time and time from this instance.</summary>
@@ -574,8 +563,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
-    #region (Explicit) casting
-
     /// <summary>Casts a local date time to a date time.</summary>
     public static implicit operator DateTime(LocalDateTime val) => val.m_Value;
 
@@ -587,10 +574,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
 
     /// <summary>Casts a week date to a week date.</summary>
     public static implicit operator LocalDateTime(WeekDate val) => (LocalDateTime)val.Date;
-
-    #endregion
-
-    #region Operators
 
     /// <summary>Adds the time span to the local date time.</summary>
     public static LocalDateTime operator +(LocalDateTime d, TimeSpan t) => d.Add(t);
@@ -612,8 +595,6 @@ public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, 
 
     /// <summary>Subtracts the right local date time from the left date.</summary>
     public static TimeSpan operator -(LocalDateTime l, LocalDateTime r) => l.Subtract(r);
-
-    #endregion
 
     /// <summary>Converts the string to a local date time.
     /// A return value indicates whether the conversion succeeded.

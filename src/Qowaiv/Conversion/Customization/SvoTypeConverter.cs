@@ -15,7 +15,7 @@ public sealed class SvoTypeConverter : TypeConverter
     /// <summary>The <see cref="SvoBehavior"/> of the underlying value.</summary>
     private readonly SvoBehavior Behavior;
 
-    /// <summary>Creates a new instance of the <see cref="SvoTypeConverter"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SvoTypeConverter"/> class.</summary>
     /// <param name="type">
     /// The type to convert for.
     /// </param>

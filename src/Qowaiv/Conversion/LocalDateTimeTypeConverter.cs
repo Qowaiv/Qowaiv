@@ -39,7 +39,7 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
 
     /// <inheritdoc />
     [Pure]
-    protected override DateTimeOffset ToDateTimeOffset(LocalDateTime date) 
+    protected override DateTimeOffset ToDateTimeOffset(LocalDateTime date)
         => new(new DateTime(date.Ticks, DateTimeKind.Utc), TimeSpan.Zero);
 
     /// <inheritdoc />

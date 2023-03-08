@@ -45,7 +45,7 @@ public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializab
     /// <remarks>
     /// The formats:
     /// f: as formatted.
-    /// 
+    ///
     /// other (not empty) formats are applied on the number (long).
     /// </remarks>
     [Pure]

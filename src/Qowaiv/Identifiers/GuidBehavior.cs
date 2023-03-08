@@ -6,7 +6,7 @@ public class GuidBehavior : IdentifierBehavior
 {
     internal static readonly GuidBehavior Instance = new();
 
-    /// <summary>Creates a new instance of the <see cref="GuidBehavior"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="GuidBehavior"/> class.</summary>
     protected GuidBehavior() { }
 
     /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>
@@ -48,27 +48,27 @@ public class GuidBehavior : IdentifierBehavior
     /// </param>
     /// <remarks>
     /// S => 22 base64 chars:  0123465798aAbBcCdDeE_-
-    /// 
+    ///
     /// H => 26 base32 chars: ABCDEFGHIJKLMNOPQRSTUVWXYZ234567
-    /// 
+    ///
     /// N => 32 digits: 00000000000000000000000000000000
-    /// 
+    ///
     /// D => 32 digits separated by hyphens: 00000000-0000-0000-0000-000000000000
-    /// 
+    ///
     /// B => 32 digits separated by hyphens, enclosed in braces: {00000000-0000-0000-0000-000000000000}
-    /// 
+    ///
     /// P => 32 digits separated by hyphens, enclosed in parentheses: (00000000-0000-0000-0000-000000000000)
-    /// 
-    /// X => Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values 
+    ///
+    /// X => Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values
     ///     that is also enclosed in braces: {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
-    /// 
+    ///
     /// the lowercase formats are lowercase (except the 's').
     /// </remarks>
     [Pure]
     public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
     {
         var id = Id(obj);
-        return id == Guid.Empty 
+        return id == Guid.Empty
             ? string.Empty
             : Tostring(id, format.WithDefault(DefaultFormat), formatProvider);
     }
@@ -100,7 +100,7 @@ public class GuidBehavior : IdentifierBehavior
     [Pure]
     public override bool TryParse(string? str, out object? id)
     {
-        if (str is not { Length: > 0})
+        if (str is not { Length: > 0 })
         {
             id = default;
             return true;

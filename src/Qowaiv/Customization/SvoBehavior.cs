@@ -69,7 +69,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     public virtual string NormalizeInput(string? str, IFormatProvider? formatProvider)
         => str?.Trim() ?? string.Empty;
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the 
+    /// <summary>Returns a formatted <see cref="string" /> that represents the
     /// unknown state of the Single Value Object.
     /// </summary>
     /// <param name="format">
@@ -158,7 +158,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         => ToString(value?.ToString(), default, culture);
 
-    /// <summary>Converts the <see cref="string"/> to a 
+    /// <summary>Converts the <see cref="string"/> to a SVO.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="str">

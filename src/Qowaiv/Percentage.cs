@@ -2,7 +2,8 @@
 
 /// <summary>Represents a Percentage.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
 [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
 [OpenApi.OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
 [TypeConverter(typeof(PercentageTypeConverter))]
@@ -50,8 +51,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
 
     /// <summary>Gets the maximum value of a percentage.</summary>
     public static readonly Percentage MaxValue = new(decimal.MaxValue / 10_000);
-
-    #region Percentage manipulation
 
     /// <summary>Gets the sign of the percentage.</summary>
     [Pure]
@@ -106,8 +105,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// </param>
     [Pure]
     public Percentage Subtract(Percentage p) => new(m_Value - p.m_Value);
-
-    #region Multiply
 
     /// <summary>Multiplies the percentage with a specified factor.
     /// </summary>
@@ -184,10 +181,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     [CLSCompliant(false)]
     public Percentage Multiply(ushort factor) => Multiply((decimal)factor);
 
-    #endregion
-
-    #region Divide
-
     /// <summary>Divide the percentage by a specified factor.
     /// </summary>
     /// <param name="factor">
@@ -236,7 +229,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     [Pure]
     public Percentage Divide(short factor) => Divide((decimal)factor);
 
-
     /// <summary>Divide the percentage by a specified factor.
     /// </summary>
     /// <param name="factor">
@@ -264,178 +256,209 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     [CLSCompliant(false)]
     public Percentage Divide(ushort factor) => Divide((decimal)factor);
 
-    #endregion
-
     /// <summary>Increases the percentage with one percent.</summary>
     public static Percentage operator ++(Percentage p) => p.Increment();
+
     /// <summary>Decreases the percentage with one percent.</summary>
     public static Percentage operator --(Percentage p) => p.Decrement();
 
     /// <summary>Unitary plusses the percentage.</summary>
     public static Percentage operator +(Percentage p) => p.Plus();
+
     /// <summary>Negates the percentage.</summary>
     public static Percentage operator -(Percentage p) => p.Negate();
 
     /// <summary>Multiplies the left and the right percentage.</summary>
     public static Percentage operator *(Percentage l, Percentage r) => l.Multiply(r);
+
     /// <summary>Divides the left by the right percentage.</summary>
     public static Percentage operator /(Percentage l, Percentage r) => l.Divide(r);
+
     /// <summary>Adds the left and the right percentage.</summary>
     public static Percentage operator +(Percentage l, Percentage r) => l.Add(r);
+
     /// <summary>Subtracts the right from the left percentage.</summary>
     public static Percentage operator -(Percentage l, Percentage r) => l.Subtract(r);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
     public static Percentage operator *(Percentage p, decimal factor) => p.Multiply(factor);
+
     /// <summary>Multiplies the percentage with the factor.</summary>
     public static Percentage operator *(Percentage p, double factor) => p.Multiply(factor);
+
     /// <summary>Multiplies the percentage with the factor.</summary>
     public static Percentage operator *(Percentage p, float factor) => p.Multiply(factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
     public static Percentage operator *(Percentage p, long factor) => p.Multiply(factor);
+
     /// <summary>Multiplies the percentage with the factor.</summary>
     public static Percentage operator *(Percentage p, int factor) => p.Multiply(factor);
+
     /// <summary>Multiplies the percentage with the factor.</summary>
     public static Percentage operator *(Percentage p, short factor) => p.Multiply(factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
     [CLSCompliant(false)]
     public static Percentage operator *(Percentage p, ulong factor) => p.Multiply(factor);
+
     /// <summary>Multiplies the percentage with the factor.</summary>
     [CLSCompliant(false)]
     public static Percentage operator *(Percentage p, uint factor) => p.Multiply(factor);
+
     /// <summary>Multiplies the percentage with the factor.</summary>
     [CLSCompliant(false)]
     public static Percentage operator *(Percentage p, ushort factor) => p.Multiply(factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, decimal factor) => p.Divide(factor);
+
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, double factor) => p.Divide(factor);
+
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, float factor) => p.Divide(factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, long factor) => p.Divide(factor);
+
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, int factor) => p.Divide(factor);
+
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, short factor) => p.Divide(factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
     [CLSCompliant(false)]
     public static Percentage operator /(Percentage p, ulong factor) => p.Divide(factor);
+
     /// <summary>Divides the percentage by the factor.</summary>
     [CLSCompliant(false)]
     public static Percentage operator /(Percentage p, uint factor) => p.Divide(factor);
+
     /// <summary>Divides the percentage by the factor.</summary>
     [CLSCompliant(false)]
     public static Percentage operator /(Percentage p, ushort factor) => p.Divide(factor);
 
-    #endregion
-
-    #region Number manipulation
-
     /// <summary>Gets the percentage of the Decimal.</summary>
     public static decimal operator *(decimal d, Percentage p) => d.Multiply(p);
+
     /// <summary>Gets the percentage of the Double.</summary>
     public static double operator *(double d, Percentage p) => d.Multiply(p);
+
     /// <summary>Gets the percentage of the Single.</summary>
     public static float operator *(float d, Percentage p) => d.Multiply(p);
 
     /// <summary>Gets the percentage of the Int64.</summary>
     public static long operator *(long d, Percentage p) => d.Multiply(p);
+
     /// <summary>Gets the percentage of the Int32.</summary>
     public static int operator *(int d, Percentage p) => d.Multiply(p);
+
     /// <summary>Gets the percentage of the Int16.</summary>
     public static short operator *(short d, Percentage p) => d.Multiply(p);
 
     /// <summary>Gets the percentage of the UInt64.</summary>
     [CLSCompliant(false)]
     public static ulong operator *(ulong d, Percentage p) => d.Multiply(p);
+
     /// <summary>Gets the percentage of the UInt32.</summary>
     [CLSCompliant(false)]
     public static uint operator *(uint d, Percentage p) => d.Multiply(p);
+
     /// <summary>Gets the percentage of the UInt16.</summary>
     [CLSCompliant(false)]
     public static ushort operator *(ushort d, Percentage p) => d.Multiply(p);
 
     /// <summary>Divides the Decimal by the percentage.</summary>
     public static decimal operator /(decimal d, Percentage p) => d.Divide(p);
+
     /// <summary>Divides the Double by the percentage.</summary>
     public static double operator /(double d, Percentage p) => d.Divide(p);
+
     /// <summary>Divides the Single by the percentage.</summary>
     public static float operator /(float d, Percentage p) => d.Divide(p);
 
     /// <summary>Divides the Int64 by the percentage.</summary>
     public static long operator /(long d, Percentage p) => d.Divide(p);
+
     /// <summary>Divides the Int32 by the percentage.</summary>
     public static int operator /(int d, Percentage p) => d.Divide(p);
+
     /// <summary>Divides the Int16 by the percentage.</summary>
     public static short operator /(short d, Percentage p) => d.Divide(p);
 
     /// <summary>Divides the UInt64 by the percentage.</summary>
     [CLSCompliant(false)]
     public static ulong operator /(ulong d, Percentage p) => d.Divide(p);
+
     /// <summary>Divides the UInt32 by the percentage.</summary>
     [CLSCompliant(false)]
     public static uint operator /(uint d, Percentage p) => d.Divide(p);
+
     /// <summary>Divides the UInt16 by the percentage.</summary>
     [CLSCompliant(false)]
     public static ushort operator /(ushort d, Percentage p) => d.Divide(p);
 
     /// <summary>Adds the percentage to the Decimal.</summary>
     public static decimal operator +(decimal d, Percentage p) => d.Add(p);
+
     /// <summary>Adds the percentage to the Double.</summary>
     public static double operator +(double d, Percentage p) => d.Add(p);
+
     /// <summary>Adds the percentage to the Single.</summary>
     public static float operator +(float d, Percentage p) => d.Add(p);
 
     /// <summary>Adds the percentage to the Int64.</summary>
     public static long operator +(long d, Percentage p) => d.Add(p);
+
     /// <summary>Adds the percentage to the Int32.</summary>
     public static int operator +(int d, Percentage p) => d.Add(p);
+
     /// <summary>Adds the percentage to the Int16.</summary>
     public static short operator +(short d, Percentage p) => d.Add(p);
 
     /// <summary>Adds the percentage to the UInt64.</summary>
     [CLSCompliant(false)]
     public static ulong operator +(ulong d, Percentage p) => d.Add(p);
+
     /// <summary>Adds the percentage to the UInt32.</summary>
     [CLSCompliant(false)]
     public static uint operator +(uint d, Percentage p) => d.Add(p);
+
     /// <summary>Adds the percentage to the UInt16.</summary>
     [CLSCompliant(false)]
     public static ushort operator +(ushort d, Percentage p) => d.Add(p);
 
     /// <summary>Subtracts the percentage to the Decimal.</summary>
     public static decimal operator -(decimal d, Percentage p) => d.Subtract(p);
+
     /// <summary>Subtracts the percentage to the Double.</summary>
     public static double operator -(double d, Percentage p) => d.Subtract(p);
+
     /// <summary>Subtracts the percentage to the Single.</summary>
     public static float operator -(float d, Percentage p) => d.Subtract(p);
 
     /// <summary>Subtracts the percentage to the Int64.</summary>
     public static long operator -(long d, Percentage p) => d.Subtract(p);
+
     /// <summary>Subtracts the percentage to the Int32.</summary>
     public static int operator -(int d, Percentage p) => d.Subtract(p);
+
     /// <summary>Subtracts the percentage to the Int16.</summary>
     public static short operator -(short d, Percentage p) => d.Subtract(p);
 
     /// <summary>Subtracts the percentage to the UInt64.</summary>
     [CLSCompliant(false)]
     public static ulong operator -(ulong d, Percentage p) => d.Subtract(p);
+
     /// <summary>Subtracts the percentage to the UInt32.</summary>
     [CLSCompliant(false)]
     public static uint operator -(uint d, Percentage p) => d.Subtract(p);
+
     /// <summary>Subtracts the percentage to the UInt16.</summary>
     [CLSCompliant(false)]
     public static ushort operator -(ushort d, Percentage p) => d.Subtract(p);
-
-    #endregion
-
-    #region Math-like methods
 
     /// <summary>Returns the larger of two percentages.</summary>
     /// <param name="val1">
@@ -583,10 +606,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     public Percentage RoundToMultiple(Percentage multipleOf, DecimalRounding mode)
         => new(m_Value.RoundToMultiple((decimal)multipleOf, mode));
 
-    #endregion
-
-    #region (JSON) (De)serialization
-
     /// <summary>Deserializes the percentage from a JSON number.</summary>
     /// <param name="json">
     /// The JSON number to deserialize.
@@ -603,10 +622,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// </returns>
     [Pure]
     public string ToJson() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
-
-    #endregion
-
-    #region IFormattable / ToString
 
     /// <summary>Returns a <see cref="string"/> that represents the current Percentage for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -637,10 +652,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     [Pure]
     private string ToXmlString() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
-    #endregion
-
-    #region (Explicit) casting
-
     /// <summary>Casts a decimal to a Percentage.</summary>
     public static implicit operator Percentage(decimal val) => new(val);
 
@@ -652,8 +663,6 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
 
     /// <summary>Casts a Percentage to a double.</summary>
     public static explicit operator double(Percentage val) => (double)val.m_Value;
-
-    #endregion
 
     /// <summary>Converts the string to a Percentage.
     /// A return value indicates whether the conversion succeeded.

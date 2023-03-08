@@ -10,11 +10,11 @@ namespace Qowaiv.Threading;
 /// </summary>
 public class ThreadDomain
 {
-    /// <summary>Initializes creators.</summary>
+    /// <summary>Initializes static members of the <see cref="ThreadDomain"/> class.</summary>
     static ThreadDomain()
     {
-        Register(typeof(Country), (Thread) => Country.Create(Thread.CurrentCulture));
-        Register(typeof(Currency), (Thread) => Thread.GetValue<Country>().GetCurrency(Clock.Today()));
+        Register(typeof(Country), (thread) => Country.Create(thread.CurrentCulture));
+        Register(typeof(Currency), (thread) => thread.GetValue<Country>().GetCurrency(Clock.Today()));
     }
 
     /// <summary>Gets the current thread domain.</summary>
@@ -29,10 +29,11 @@ public class ThreadDomain
             return s_Current;
         }
     }
+
     [ThreadStatic]
     private static ThreadDomain? s_Current;
 
-    /// <summary>Registers a creator function for the type that can create 
+    /// <summary>Registers a creator function for the type that can create
     /// an instance of type based on a thread.
     /// </summary>
     /// <param name="type">
@@ -60,9 +61,10 @@ public class ThreadDomain
 
         Creators.TryAdd(type, creator);
     }
+
     private static readonly ConcurrentDictionary<Type, Func<Thread, object>> Creators = new();
 
-    /// <summary>Constructor.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ThreadDomain"/> class.</summary>
     /// <remarks>
     /// No public accessor.
     /// </remarks>

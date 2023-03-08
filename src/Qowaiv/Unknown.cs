@@ -8,7 +8,7 @@ namespace Qowaiv;
 /// Not set (yet), this is an unset (default) value, 'unknown' means that the user
 /// has set the value, saying, there must be some value, but I just don't know
 /// which value it should be.
-/// 
+///
 /// Note that not all scenario's that support 'empty' support 'unknown' too.
 /// </remarks>
 public static class Unknown
@@ -48,11 +48,10 @@ public static class Unknown
                     }
                 }
             }
-            return values.Contains(val.ToUpper(c)) ||
-            (
-                !c.Equals(CultureInfo.InvariantCulture) &&
-                Strings[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant())
-            );
+            return values.Contains(
+                val.ToUpper(c))
+                || (!c.Equals(CultureInfo.InvariantCulture)
+                    && Strings[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant()));
         }
         else return false;
     }
@@ -91,9 +90,11 @@ public static class Unknown
 
     /// <summary>The resource manager managing the culture based string values.</summary>
     private static readonly ResourceManager ResourceManager = new("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
-    private readonly static Dictionary<CultureInfo, string[]> Strings = new()
+
+    private static readonly Dictionary<CultureInfo, string[]> Strings = new()
     {
         { CultureInfo.InvariantCulture, new[] { "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
     };
+
     private static readonly object addCulture = new();
 }

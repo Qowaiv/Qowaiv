@@ -4,16 +4,16 @@
 [DebuggerDisplay("{DebuggerDisplay}")]
 public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, FormattingArguments>>
 {
-    /// <summary>Initializes a new instance of a formatting arguments collection based on the current culture.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the current culture.</summary>
     public FormattingArgumentsCollection() : this(formatProvider: null) { }
 
-    /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the specified format provider.</summary>
     /// <param name="formatProvider">
     /// The default format provider.
     /// </param>
     public FormattingArgumentsCollection(IFormatProvider? formatProvider) : this(formatProvider, parent: null) { }
 
-    /// <summary>Initializes a new instance of a formatting arguments collection based on the specified format provider.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the specified format provider.</summary>
     /// <param name="formatProvider">
     /// The default format provider.
     /// </param>
@@ -22,7 +22,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// </param>
     public FormattingArgumentsCollection(IFormatProvider? formatProvider, FormattingArgumentsCollection? parent)
     {
-        FormatProvider = formatProvider?? CultureInfo.CurrentCulture;
+        FormatProvider = formatProvider ?? CultureInfo.CurrentCulture;
 
         if (parent is not null)
         {
@@ -66,7 +66,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
         : obj?.ToString();
 
     /// <summary>Replaces the format item in a specified string with the string representation
-    /// of a corresponding object in a specified array. 
+    /// of a corresponding object in a specified array.
     /// </summary>
     /// <param name="format">
     /// A composite format string.
@@ -126,8 +126,6 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 pos++;
                 if (ch == '}')
                 {
-
-
                     if (pos < len && format[pos] == '}') // Treat as escape character for }}
                         pos++;
                     else
@@ -159,8 +157,11 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 pos++;
                 if (pos == len) FormatError();
                 ch = format[pos];
-            } while (ch >= '0' && ch <= '9' && index < 1000000);
-            if (index >= args.Length) FormatErrorIndexOutOfRange();
+            }
+            while (ch >= '0' && ch <= '9' && index < 1000000);
+
+            if (index >= args.Length) { FormatErrorIndexOutOfRange(); }
+
             while (pos < len && (ch = format[pos]) == ' ') pos++;
             bool leftJustify = false;
             int width = 0;
@@ -185,11 +186,12 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                     pos++;
                     if (pos == len) FormatError();
                     ch = format[pos];
-                } while (ch >= '0' && ch <= '9' && width < 1000000);
+                }
+                while (ch >= '0' && ch <= '9' && width < 1000000);
             }
 
             while (pos < len && (ch = format[pos]) == ' ') pos++;
-            Object arg = args[index];
+            object arg = args[index];
             StringBuilder fmt = null;
             if (ch == ':')
             {
@@ -203,14 +205,14 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                     pos++;
                     if (ch == '{')
                     {
-                        if (pos < len && format[pos] == '{')  // Treat as escape character for {{
+                        if (pos < len && format[pos] == '{') // Treat as escape character for {{
                             pos++;
                         else
                             FormatError();
                     }
                     else if (ch == '}')
                     {
-                        if (pos < len && format[pos] == '}')  // Treat as escape character for }}
+                        if (pos < len && format[pos] == '}') // Treat as escape character for }}
                             pos++;
                         else
                         {
@@ -286,8 +288,6 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     private static void FormatError() => throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
 
     private static void FormatErrorIndexOutOfRange() => throw new FormatException(QowaivMessages.FormatException_IndexOutOfRange);
-
-    #region Collection/dictionary related
 
     /// <summary>Adds a format for the specified type.</summary>
     /// <param name="type">
@@ -502,12 +502,12 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <summary>Gets the number of formatting arguments in the collection.</summary>
     public int Count => dict.Count;
 
-    #endregion
-
     /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments collection for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
-        => string.Format(CultureInfo.InvariantCulture,
-            "FormattingArgumentsCollection: '{0}', Items: {1}", this.FormatProvider, this.Count);
-
+        => string.Format(
+            CultureInfo.InvariantCulture,
+            "FormattingArgumentsCollection: '{0}', Items: {1}",
+            FormatProvider,
+            Count);
 }

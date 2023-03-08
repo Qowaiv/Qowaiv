@@ -282,7 +282,7 @@ public class WeekDateTest
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
-        var act = TestStruct.ToString("");
+        var act = TestStruct.ToString(string.Empty);
         var exp = "1997-W14-6";
         Assert.AreEqual(exp, act);
     }

@@ -5,7 +5,7 @@ namespace Qowaiv.TestTools.IO;
 /// <summary>Represents a directory that lives during the lifetime of its scope.</summary>
 /// <remarks>
 /// Should always been used with a using statement.
-/// 
+///
 /// <code>
 /// using(var directory = new TemporaryDirectory()
 /// {
@@ -15,7 +15,7 @@ namespace Qowaiv.TestTools.IO;
 /// </remarks>
 public sealed class TemporaryDirectory : IDisposable
 {
-    /// <summary>Creates a temporary directory.</summary>
+    /// <summary>Initializes a new instance of the <see cref="TemporaryDirectory"/> class.</summary>
     public TemporaryDirectory()
     {
         Root = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Uuid.NewUuid().ToString()));

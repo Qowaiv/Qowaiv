@@ -14,7 +14,7 @@ namespace Qowaiv.Globalization;
 [DebuggerDisplay("{DebuggerDisplay}")]
 public class CultureInfoScope : IDisposable
 {
-    /// <summary>Creates a new CultureInfo scope.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
     /// <remarks>
     /// No direct access.
     /// </remarks>
@@ -24,7 +24,7 @@ public class CultureInfoScope : IDisposable
         PreviousUI = Thread.CurrentThread.CurrentUICulture;
     }
 
-    /// <summary>Creates a new CultureInfo scope.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
     /// <param name="culture">
     /// The culture.
     /// </param>
@@ -37,26 +37,24 @@ public class CultureInfoScope : IDisposable
         Thread.CurrentThread.CurrentUICulture = Guard.NotNull(cultureUI, nameof(cultureUI));
     }
 
-    /// <summary>Creates a new CultureInfo scope.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
     /// <param name="name">
     /// Name of the culture.
     /// </param>
     /// <param name="nameUI">
     /// Name of the UI culture.
     /// </param>
-    public CultureInfoScope(string name, string nameUI) : this
-    (
+    public CultureInfoScope(string name, string nameUI) : this(
         new CultureInfo(Guard.NotNullOrEmpty(name, nameof(name))),
-        new CultureInfo(Guard.NotNullOrEmpty(nameUI, nameof(nameUI)))
-    ) { }
+        new CultureInfo(Guard.NotNullOrEmpty(nameUI, nameof(nameUI)))) { }
 
-    /// <summary>Creates a new CultureInfo scope.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
     /// <param name="name">
     /// Name of the culture.
     /// </param>
     public CultureInfoScope(string name) : this(name, name) { }
 
-    /// <summary>Creates a new CultureInfo scope.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
     /// <param name="culture">
     /// The culture.
     /// </param>

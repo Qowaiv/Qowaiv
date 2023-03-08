@@ -4,7 +4,8 @@ namespace Qowaiv;
 
 /// <summary>Represents a month.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Month(-only) notation.", example: "Jun", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
 [OpenApi.OpenApiDataType(description: "Month(-only) notation.", example: "Jun", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
 [TypeConverter(typeof(MonthTypeConverter))]
@@ -21,45 +22,56 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Represents January (01).</summary>
     public static readonly Month January /*...*/ = new(01);
+
     /// <summary>Represents February (02).</summary>
     public static readonly Month February /*..*/ = new(02);
+
     /// <summary>Represents March (03).</summary>
     public static readonly Month March /*.....*/ = new(03);
+
     /// <summary>Represents April (04).</summary>
     public static readonly Month April /*.....*/ = new(04);
+
     /// <summary>Represents May (05).</summary>
     public static readonly Month May /*.......*/ = new(05);
+
     /// <summary>Represents June (06).</summary>
     public static readonly Month June /*......*/ = new(06);
+
     /// <summary>Represents July (07).</summary>
     public static readonly Month July /*......*/ = new(07);
+
     /// <summary>Represents August (08).</summary>
     public static readonly Month August /*....*/ = new(08);
+
     /// <summary>Represents September (09).</summary>
     public static readonly Month September /*.*/ = new(09);
+
     /// <summary>Represents October (10).</summary>
     public static readonly Month October /*..*/ = new(10);
+
     /// <summary>Represents November (11).</summary>
     public static readonly Month November /*..*/ = new(11);
+
     /// <summary>Represents December (12).</summary>
     public static readonly Month December /*..*/ = new(12);
 
     /// <summary>Represents all months (January till December).</summary>
     public static readonly IReadOnlyList<Month> All = new[]
     {
-            January,
-            February,
-            March,
-            April,
-            May,
-            June,
-            July,
-            August,
-            September,
-            October,
-            November,
-            December,
-        };
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December,
+    };
 
     /// <summary>Gets the full name of the month.</summary>
     public string FullName => GetFullName(formatProvider: null);
@@ -134,7 +146,7 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// f: as full name.
     /// s: as short name.
     /// M: as number with leading zero.
@@ -288,20 +300,20 @@ public readonly partial struct Month : ISerializable, IXmlSerializable, IFormatt
 
     private sealed class MonthValues : LocalizedValues<byte>
     {
-        public MonthValues() : base(new Dictionary<string, byte>
+        public MonthValues() : base(new()
         {
-            {"JAN", 1},  {"JANUARY", 1},
-            {"FEB", 2},  {"FEBRUARY", 2},
-            {"MAR", 3},  {"MARCH", 3},
-            {"APR", 4},  {"APRIL", 4},
-            {"MAY", 5},
-            {"JUN", 6},  {"JUNE", 6},
-            {"JUL", 7},  {"JULY", 7},
-            {"AUG", 8},  {"AUGUST", 8},
-            {"SEP", 9},  {"SEPTEMBER", 9},
-            {"OCT", 10}, {"OCTOBER", 10},
-            {"NOV", 11}, {"NOVEMBER", 11},
-            {"DEC", 12}, {"DECEMBER", 12},
+            { "JAN", 01 }, { "JANUARY", 1 },
+            { "FEB", 02 }, { "FEBRUARY", 2 },
+            { "MAR", 03 }, { "MARCH", 3 },
+            { "APR", 04 }, { "APRIL", 4 },
+            { "MAY", 05 },
+            { "JUN", 06 }, { "JUNE", 6 },
+            { "JUL", 07 }, { "JULY", 7 },
+            { "AUG", 08 }, { "AUGUST", 8 },
+            { "SEP", 09 }, { "SEPTEMBER", 9 },
+            { "OCT", 10 }, { "OCTOBER", 10 },
+            { "NOV", 11 }, { "NOVEMBER", 11 },
+            { "DEC", 12 }, { "DECEMBER", 12 },
         }) { }
 
         protected override void AddCulture(CultureInfo culture)

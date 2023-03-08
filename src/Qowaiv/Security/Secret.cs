@@ -30,7 +30,7 @@ public readonly struct Secret : IEquatable<Secret>
 
     /// <summary>Computes a <see cref="CryptographicSeed"/> for the secret.</summary>
     /// <param name="algorithm">
-    /// The algorithm to 
+    /// The algorithm to hash with.
     /// </param>
     [Pure]
     public CryptographicSeed ComputeHash(HashAlgorithm algorithm)
@@ -56,14 +56,14 @@ public readonly struct Secret : IEquatable<Secret>
 
     /// <summary>Represents the secret as "*****".</summary>
     /// <remarks>
-    /// To prevent unintended exposure. 
+    /// To prevent unintended exposure.
     /// </remarks>
     [Pure]
     public override string ToString() => m_Value is null ? string.Empty : "*****";
 
     /// <summary>Converts the secret to a JSON null node.</summary>
     /// <remarks>
-    /// To prevent unintended exposure. 
+    /// To prevent unintended exposure.
     /// </remarks>
     [Pure]
 #pragma warning disable CA1822 // part of the contract

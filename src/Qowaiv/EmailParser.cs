@@ -11,17 +11,17 @@ namespace Qowaiv;
 /// mailto     => (mailto:)?
 /// local      => ([quoted] | [localpart]) [at]
 /// quoted     => ".+"
-/// 
+///
 /// localpart  => [l]{1,64} &amp;&amp; not ..
 /// l          => ._- [a-z][0-9] [{}|/%$&amp;#~!?*`'^=+] [non-ASCII]
-/// 
+///
 /// domain     => [domainpart] | [ip]
 /// domainpart => [top]+(\.[d]+)* &amp;&amp; not .. | .- | -.
 /// top        => [a-z] [non-ASCII]
 /// d          => _- [a-z][0-9] [non-ASCII]
 /// ip         => [ip4] | [ip6]
 /// ip4        => IpAdress.TryParse() &amp;&amp; 3 dots &amp;&amp; Ip4mask
-/// ip6        => (IPv6:)? IpAdress.TryParse() &amp;&amp; Ip6mask
+/// ip6        => (IPv6:)? IpAdress.TryParse() &amp;&amp; Ip6mask.
 /// </summary>
 internal static partial class EmailParser
 {
@@ -66,7 +66,7 @@ internal static partial class EmailParser
     [FluentSyntax]
     private static State DisplayName(this State state)
     {
-        if (state.Input.IsEmpty()) { return state.Invalid(); }
+        if (state.Input.IsEmpty()) return state.Invalid();
         else if (state.Input.Last().IsGt())
         {
             var lt = state.Input.LastIndexOf('<');
@@ -86,7 +86,7 @@ internal static partial class EmailParser
             while (state.Input.NotEmpty())
             {
                 var ch = state.Prev();
-                if (ch.IsCommentEnd()) { return state.Invalid(); }
+                if (ch.IsCommentEnd()) return state.Invalid();
                 else if (ch.IsCommentStart())
                 {
                     state.Input.TrimRight();
@@ -94,9 +94,8 @@ internal static partial class EmailParser
                 }
             }
             return state.Invalid();
-
         }
-        else { return state; }
+        else return state;
     }
 
     [FluentSyntax]
@@ -271,7 +270,7 @@ internal static partial class EmailParser
     [FluentSyntax]
     private static State Quoted(this State state)
     {
-        if (!state.Input.First().IsQuote()) { return state; }
+        if (!state.Input.First().IsQuote()) return state;
 
         var escaped = false;
         while (state.Input.NotEmpty())

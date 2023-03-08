@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using FluentAssertions.Execution;
+﻿using FluentAssertions.Execution;
 using FluentAssertions.Reflection;
 using System.Reflection;
 
@@ -16,7 +15,7 @@ public static class QowaivAssemblyAssertions
         Guard.NotNull(assertions, nameof(assertions));
 
         var bytes = assertions.Subject.GetName().GetPublicKey() ?? Array.Empty<byte>();
-        var assemblyKey = BitConverter.ToString(bytes).Replace("-", "");
+        var assemblyKey = BitConverter.ToString(bytes).Replace("-", string.Empty);
 
         Execute.Assertion
             .BecauseOf(because, becauseArgs)

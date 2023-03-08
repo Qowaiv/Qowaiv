@@ -261,7 +261,7 @@ public class DateTest
     {
         using (TestCultures.Nl_BE.Scoped())
         {
-            var act = TestStruct.ToString("");
+            var act = TestStruct.ToString(string.Empty);
             var exp = "14/02/1970";
             Assert.AreEqual(exp, act);
         }

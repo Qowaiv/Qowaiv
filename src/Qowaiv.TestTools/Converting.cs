@@ -3,15 +3,15 @@
 /// <summary>Helper method to convert objects using <see cref="TypeConverter"/>s.</summary>
 public static class Converting
 {
-    /// <summary>Creates a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
     [Pure]
-    public static ConvertFrom<From> From<From>(From subject) => new(subject);
+    public static ConvertFrom<TFrom> From<TFrom>(TFrom subject) => new(subject);
 
-    /// <summary>Creates a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
     [Pure]
     public static ConvertTo<To> To<To>() => new();
 
-    /// <summary>Creates a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
     [Pure]
     public static new ConvertTo<string> ToString() => new();
 }
@@ -44,8 +44,8 @@ public sealed class ConvertTo<To>
 
     /// <summary>Converts the value to the destination type, using the <see cref="TypeConverter"/> of the subject.</summary>
     [Pure]
-    public To? From<From>(From subject) => (To?)Converter<From>().ConvertTo(subject, typeof(To));
+    public To? From<TFrom>(TFrom subject) => (To?)Converter<TFrom>().ConvertTo(subject, typeof(To));
 
     [Pure]
-    private static TypeConverter Converter<From>() => TypeDescriptor.GetConverter(typeof(From));
+    private static TypeConverter Converter<TFrom>() => TypeDescriptor.GetConverter(typeof(TFrom));
 }

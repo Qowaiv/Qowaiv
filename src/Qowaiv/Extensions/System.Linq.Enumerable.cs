@@ -418,7 +418,6 @@ public static class QowaivEnumerableExtensions
     public static StreamSize Average(this IEnumerable<StreamSize> streamSizes)
         => new((long)streamSizes.Average(streamSize => (long)streamSize));
 
-
     /// <summary>Computes the sum of a sequence of <see cref="Amount"/> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
     /// </summary>
@@ -570,9 +569,8 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-       return none ? null : total.Amount();
+        return none ? null : total.Amount();
     }
-
 
     /// <summary>Computes the sum of a sequence of <see cref="Money"/> values that are obtained
     /// by invoking a transform function on each element of the input sequence.

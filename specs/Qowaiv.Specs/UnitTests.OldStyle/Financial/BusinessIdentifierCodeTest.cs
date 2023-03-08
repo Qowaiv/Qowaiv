@@ -355,7 +355,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
-        var act = TestStruct.ToString("");
+        var act = TestStruct.ToString(string.Empty);
         var exp = "AEGONL2UXXX";
         Assert.AreEqual(exp, act);
     }

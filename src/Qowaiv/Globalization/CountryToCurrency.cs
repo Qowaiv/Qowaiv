@@ -15,7 +15,9 @@ internal partial struct CountryToCurrency : IEquatable<CountryToCurrency>
         : this(country, currency, Date.MinValue) { }
 
     public Country Country { get; }
+
     public Currency Currency { get; }
+
     public Date StartDate { get; }
 
     /// <inheritdoc />

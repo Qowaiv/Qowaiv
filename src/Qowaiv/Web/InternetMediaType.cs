@@ -15,29 +15,30 @@ namespace Qowaiv.Web;
 /// email clients use them to identify attachment files, web browsers use them
 /// to determine how to display or output files that are not in HTML format,
 /// search engines use them to classify data files on the web.
-/// 
+///
 /// A media type is composed of a type, a subtype, and zero or more optional
 /// parameters. As an example, an HTML file might be designated text/html;
 /// charset=UTF-8.
-/// 
+///
 /// In this example text is the type, html is the subtype, and charset=UTF-8
 /// is an optional parameter indicating the character encoding.
-/// 
+///
 /// IANA manages the official registry of media types.
 /// The identifiers were originally defined in RFC 2046, and were called MIME
 /// types because they referred to the non-ASCII parts of email messages that
 /// were composed using the MIME (Multipurpose Internet Mail Extensions)
 /// specification. They are also sometimes referred to as Content-types.
-/// 
+///
 /// Their use has expanded from email sent through SMTP, to other protocols
 /// such as HTTP, RTP and SIP.
 /// New media types can be created with the procedures outlined in RFC 6838.
-/// 
+///
 /// See http://tools.ietf.org/html/rfc2046
-/// See http://tools.ietf.org/html/rfc6838
+/// See http://tools.ietf.org/html/rfc6838.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
 [OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
@@ -104,9 +105,9 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     /// This is based on a naming convention, not on actual registration.
     /// </remarks>
     public bool IsRegistered
-        => TopLevelType != InternetMediaTopLevelType.None 
-        && TopLevelType != InternetMediaTopLevelType.Unregistered 
-        && !Subtype.StartsWith("x-", StringComparison.Ordinal) 
+        => TopLevelType != InternetMediaTopLevelType.None
+        && TopLevelType != InternetMediaTopLevelType.Unregistered
+        && !Subtype.StartsWith("x-", StringComparison.Ordinal)
         && !Subtype.StartsWith("x.", StringComparison.Ordinal);
 
     /// <summary>Serializes the Internet media type to a JSON node.</summary>
@@ -157,7 +158,7 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     public static bool TryParse(string? s, IFormatProvider? provider, out InternetMediaType result)
     {
         result = default;
-        if (s is not { Length: > 0})
+        if (s is not { Length: > 0 })
         {
             return true;
         }
@@ -204,5 +205,6 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
         var str = ResourceManager.GetString(Path.GetExtension(filename).ToUpperInvariant());
         return string.IsNullOrEmpty(str) ? Unknown : new InternetMediaType(str);
     }
-    internal readonly static ResourceManager ResourceManager = new("Qowaiv.Web.InternetMediaType.FromFile", typeof(InternetMediaType).Assembly);
+
+    internal static readonly ResourceManager ResourceManager = new("Qowaiv.Web.InternetMediaType.FromFile", typeof(InternetMediaType).Assembly);
 }

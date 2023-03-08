@@ -7,7 +7,7 @@ using Qowaiv.Globalization;
 
 namespace Qowaiv.Financial;
 
-///<summary>The International Bank Account Number (IBAN) is an international standard
+/// <summary>The International Bank Account Number (IBAN) is an international standard
 /// for identifying bank accounts across national borders with a minimal risk
 /// of propagating transcription errors. It was originally adopted by the European
 /// Committee for Banking Standards (ECBS), and was later adopted as an international
@@ -17,7 +17,8 @@ namespace Qowaiv.Financial;
 /// The official IBAN registrar under ISO 13616-2:2007 is SWIFT.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769.", type: "string", format: "iban", nullable: true)]
 [OpenApi.OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769.", type: "string", format: "iban", nullable: true)]
 [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
@@ -89,6 +90,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
             return m_Value;
         }
     }
+
     /// <summary>Formats the IBAN without spaces as lowercase.</summary>
     [Pure]
     private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();
@@ -131,7 +133,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// u: as unformatted lowercase.
     /// U: as unformatted uppercase.
     /// f: as formatted lowercase.
@@ -187,7 +189,7 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
         else if (str.Length.IsInRange(12, 32)
             && str.Matches(Pattern)
             && ValidForCountry(str)
-            && (Mod97(str)))
+            && Mod97(str))
         {
             result = new InternationalBankAccountNumber(str);
             return true;

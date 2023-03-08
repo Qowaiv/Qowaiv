@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Qowaiv.Globalization;
 
-/// <summary>Represents a </summary>
+/// <summary>Represents a country.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
@@ -21,10 +21,10 @@ namespace Qowaiv.Globalization;
 #endif
 public readonly partial struct Country : ISerializable, IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
 {
-    /// <summary>Represents an empty/not set </summary>
+    /// <summary>Represents an empty/not set country.</summary>
     public static readonly Country Empty;
 
-    /// <summary>Represents an unknown (but set) </summary>
+    /// <summary>Represents an unknown (but set) country.</summary>
     public static readonly Country Unknown = new("ZZ");
 
     /// <summary>Gets a country based on the current thread.</summary>
@@ -47,19 +47,19 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// </returns>
     public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the two-letter code defined in ISO 3166-1 for the country.</summary>
+    /// <summary>Gets the two-letter code defined in ISO 3166-1 for the country.</summary>
     /// <returns>
     /// The two-letter code defined in ISO 3166-1 for the country.
     /// </returns>
     public string IsoAlpha2Code => GetResourceString("ISO2", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
+    /// <summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
     /// <returns>
     /// The three-letter code defined in ISO 3166-1 for the country.
     /// </returns>
     public string IsoAlpha3Code => GetResourceString("ISO3", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
+    /// <summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
     /// <returns>
     /// The numeric code defined in ISO 3166-1 for the country/region.
     /// </returns>
@@ -71,7 +71,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// </remarks>
     public string CallingCode => GetResourceString("CallingCode", CultureInfo.InvariantCulture);
 
-    ///<summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
+    /// <summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
     public bool RegionInfoExists
     {
         get
@@ -99,6 +99,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
             return string.IsNullOrEmpty(val) ? null : (Date?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
         }
     }
+
     /// <summary>Gets the display name for a specified culture.</summary>
     /// <param name="culture">
     /// The culture of the display name.
@@ -146,8 +147,11 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         }
         catch
         {
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
-                QowaivMessages.NotSupportedExceptionCountryToRegionInfo, EnglishName, IsoAlpha2Code));
+            throw new NotSupportedException(string.Format(
+                CultureInfo.InvariantCulture,
+                QowaivMessages.NotSupportedExceptionCountryToRegionInfo,
+                EnglishName,
+                IsoAlpha2Code));
         }
     }
 
@@ -172,7 +176,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:e (2/3)}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
+    /// <summary>Returns a formatted <see cref="string"/> that represents the current country.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -181,7 +185,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// n: as Name.
     /// 0: as ISO Numeric.
     /// 2: as ISO Alpha-2.
@@ -197,7 +201,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
 
     /// <summary>Gets an XML string representation of the country.</summary>
     [Pure]
-    private string ToXmlString() => m_Value ?? String.Empty;
+    private string ToXmlString() => m_Value ?? string.Empty;
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<Country, IFormatProvider, string>> FormatTokens = new()
@@ -210,13 +214,13 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
     };
 
-    /// <summary>Casts a System.Globalization.RegionInfo to a </summary>
+    /// <summary>Casts a <see cref="RegionInfo"/> to a country.</summary>
     public static implicit operator Country(RegionInfo region) => Create(region);
 
     /// <summary>Casts a Country to a System.Globalization.RegionInf.</summary>
     public static explicit operator RegionInfo(Country val) => val.ToRegionInfo();
 
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a country.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -293,8 +297,6 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         return All.FirstOrDefault(c => c.Name == name);
     }
 
-    #region Get countries
-
     /// <summary>Gets all existing countries.</summary>
     /// <returns>
     /// A list of existing countries.
@@ -321,8 +323,6 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
         .Split(';')
         .Select(str => new Country(str))
         .ToList());
-
-    #endregion
 
     private static readonly CountryValues ParseValues = new();
 
@@ -365,6 +365,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
             return rm;
         }
     }
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private static ResourceManager? rm;
 

@@ -10,4 +10,3 @@ public class MoneyTypeConverter : SvoTypeConverter<Money>
     [Pure]
     protected override Money FromString(string? str, CultureInfo? culture) => Money.Parse(str, culture);
 }
-

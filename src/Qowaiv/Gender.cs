@@ -6,12 +6,12 @@ namespace Qowaiv;
 
 /// <summary>Represents a Gender.</summary>
 /// <remarks>
-/// Defines a representation of human sexes through a language-neutral 
+/// Defines a representation of human sexes through a language-neutral
 /// single-digit code. International standard ISO 5218, titled Information
 /// technology - Codes for the representation of human sexes.
-/// 
+///
 /// It can be used in information systems such as database applications.
-/// 
+///
 /// The four codes specified in ISO/IEC 5218 are:
 /// 0 = not known,
 /// 1 = male,
@@ -21,7 +21,8 @@ namespace Qowaiv;
 /// designator "SEX".
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Gender as specified by ISO/IEC 5218.", example: "female", type: "string", format: "gender", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(GenderTypeConverter))]
 #if NET5_0_OR_GREATER
@@ -35,10 +36,13 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
 
     /// <summary>Represents a not known/unknown gender.</summary>
     public static readonly Gender Unknown = new(1);
+
     /// <summary>Represents a male.</summary>
     public static readonly Gender Male = new(2);
+
     /// <summary>Represents a female.</summary>
     public static readonly Gender Female = new(4);
+
     /// <summary>Represents a not applicable gender.</summary>
     public static readonly Gender NotApplicable = new(18);
 
@@ -62,7 +66,6 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <param name="culture">
     /// The culture of the display name.
     /// </param>
-    /// <returns></returns>
     [Pure]
     public string GetDisplayName(CultureInfo? culture) => GetResourceString(string.Empty, culture);
 
@@ -116,7 +119,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// i: as integer.
     /// c: as single character.
     /// h: as Honorific.
@@ -136,7 +139,7 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
         { 'c', (svo, provider) => svo.GetResourceString("char_", provider) },
         { 'h', (svo, provider) => svo.GetResourceString("honorific_", provider) },
         { 's', (svo, provider) => svo.GetResourceString("symbol_", provider) },
-        { 'f', (svo, provider) => svo.GetResourceString("", provider) },
+        { 'f', (svo, provider) => svo.GetResourceString(string.Empty, provider) },
     };
 
     /// <summary>Gets an XML string representation of the gender.</summary>
@@ -290,11 +293,11 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// </remarks>
     private static readonly Dictionary<byte, string?> GenderLabels = new()
     {
-        { 0, null },
-        { 1, "NotKnown" },
-        { 2, "Male" },
-        { 4, "Female" },
-        { 18, "NotApplicable" }
+        [00] = null,
+        [01] = "NotKnown",
+        [02] = "Male",
+        [04] = "Female",
+        [18] = "NotApplicable",
     };
 
     /// <summary>Adds a culture to the parsings.</summary>
@@ -305,13 +308,13 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     {
         lock (Locker)
         {
-            if (Parsings.ContainsKey(culture)) { return; }
+            if (Parsings.ContainsKey(culture)) return;
 
             Parsings[culture] = new Dictionary<string, byte>();
 
             foreach (var gender in All)
             {
-                var longname = gender.ToString("", culture).ToUpper(culture);
+                var longname = gender.ToString(string.Empty, culture).ToUpper(culture);
                 var shortname = gender.ToString("c", culture).ToUpper(culture);
 
                 Parsings[culture][longname] = gender.m_Value;
@@ -323,30 +326,27 @@ public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormat
     /// <summary>Represents the parsing keys.</summary>
     private static readonly Dictionary<CultureInfo, Dictionary<string, byte>> Parsings = new()
     {
+        [CultureInfo.InvariantCulture] = new()
         {
-            CultureInfo.InvariantCulture,
-            new()
-            {
-                { "", 0 },
-                { "0", 1 },
-                { "1", 2 },
-                { "2", 4 },
-                { "9", 18 },
-                { "?", 1 },
-                { "M", 2 },
-                { "F", 4 },
-                { "X", 18 },
-                { "♂", 2 },
-                { "♀", 4 },
-                { "NOTKNOWN", 1 },
-                { "NOT KNOWN", 1 },
-                { "UNKNOWN", 1 },
-                { "MALE", 2 },
-                { "FEMALE", 4 },
-                { "NOTAPPLICABLE", 18 },
-                { "NOT APPLICABLE", 18 }
-            }
-        }
+            [string.Empty] = 0,
+            ["0"] = 1,
+            ["1"] = 2,
+            ["2"] = 4,
+            ["9"] = 18,
+            ["?"] = 1,
+            ["M"] = 2,
+            ["F"] = 4,
+            ["X"] = 18,
+            ["♂"] = 2,
+            ["♀"] = 4,
+            ["NOTKNOWN"] = 1,
+            ["NOT KNOWN"] = 1,
+            ["UNKNOWN"] = 1,
+            ["MALE"] = 2,
+            ["FEMALE"] = 4,
+            ["NOTAPPLICABLE"] = 18,
+            ["NOT APPLICABLE"] = 18,
+        },
     };
 
     /// <summary>The locker for adding a culture.</summary>

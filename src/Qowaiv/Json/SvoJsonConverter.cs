@@ -9,7 +9,7 @@ namespace Qowaiv.Json;
 /// <typeparam name="TSvo">
 /// The type of SVO.
 /// </typeparam>
-public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo: struct
+public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : struct
 {
     /// <inheritdoc />
     public sealed override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

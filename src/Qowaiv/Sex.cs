@@ -8,12 +8,12 @@ namespace Qowaiv;
 
 /// <summary>Represents a Sex.</summary>
 /// <remarks>
-/// Defines a representation of human sexes through a language-neutral 
+/// Defines a representation of human sexes through a language-neutral
 /// single-digit code. International standard ISO 5218, titled Information
 /// technology - Codes for the representation of human sexes.
-/// 
+///
 /// It can be used in information systems such as database applications.
-/// 
+///
 /// The four codes specified in ISO/IEC 5218 are:
 /// 0 = not known,
 /// 1 = male,
@@ -23,7 +23,8 @@ namespace Qowaiv;
 /// designator "SEX".
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [OpenApi.OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]
@@ -37,10 +38,13 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
 
     /// <summary>Represents a not known/unknown sex.</summary>
     public static readonly Sex Unknown = new(1);
+
     /// <summary>Represents a male.</summary>
     public static readonly Sex Male = new(2);
+
     /// <summary>Represents a female.</summary>
     public static readonly Sex Female = new(4);
+
     /// <summary>Represents a not applicable sex.</summary>
     public static readonly Sex NotApplicable = new(18);
 
@@ -64,7 +68,6 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// <param name="culture">
     /// The culture of the display name.
     /// </param>
-    /// <returns></returns>
     [Pure]
     public string GetDisplayName(CultureInfo? culture) => GetResourceString(string.Empty, culture);
 
@@ -118,7 +121,7 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// </param>
     /// <remarks>
     /// The formats:
-    /// 
+    ///
     /// i: as integer.
     /// c: as single character.
     /// h: as Honorific.
@@ -138,7 +141,7 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
         { 'c', (svo, provider) => svo.GetResourceString("char_", provider) },
         { 'h', (svo, provider) => svo.GetResourceString("honorific_", provider) },
         { 's', (svo, provider) => svo.GetResourceString("symbol_", provider) },
-        { 'f', (svo, provider) => svo.GetResourceString("", provider) },
+        { 'f', (svo, provider) => svo.GetResourceString(string.Empty, provider) },
     };
 
     /// <summary>Gets an XML string representation of the sex.</summary>
@@ -280,31 +283,32 @@ public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattab
     /// </remarks>
     private static readonly Dictionary<byte, string?> SexLabels = new()
     {
-        { 0, null },
-        { 1, "NotKnown" },
-        { 2, "Male" },
-        { 4, "Female" },
-        { 18, "NotApplicable" }
+        [00] = null,
+        [01] = "NotKnown",
+        [02] = "Male",
+        [04] = "Female",
+        [18] = "NotApplicable",
     };
 
     private static readonly SexValues ParseValues = new();
 
     private sealed class SexValues : LocalizedValues<byte>
     {
-        public SexValues() : base(new Dictionary<string, byte>
-        {
-            { "", 0 },
-            { "0", 1 },  { "?", 1 },  { "NOTKNOWN", 1 }, { "UNKNOWN", 1 },
-            { "1", 2 },  { "M", 2 },  { "♂", 2 },{ "MALE", 2 },
-            { "2", 4 },  { "F", 4 },  { "♀", 4 },{ "FEMALE", 4 },
-            { "9", 18 }, { "X", 18 }, { "NOTAPPLICABLE", 18 },
-        }) { }
+        public SexValues()
+            : base(new()
+            {
+                { string.Empty, 0 },
+                { "0", 1 },  { "?", 1 },  { "NOTKNOWN", 1 }, { "UNKNOWN", 1 },
+                { "1", 2 },  { "M", 2 },  { "♂", 2 }, { "MALE", 2 },
+                { "2", 4 },  { "F", 4 },  { "♀", 4 }, { "FEMALE", 4 },
+                { "9", 18 }, { "X", 18 }, { "NOTAPPLICABLE", 18 },
+            }) { }
 
         protected override void AddCulture(CultureInfo culture)
         {
             foreach (var sex in All)
             {
-                var full = sex.ToString("", culture).Unify();
+                var full = sex.ToString(string.Empty, culture).Unify();
                 var shrt = sex.ToString("c", culture).Unify();
                 this[culture][full] = sex.m_Value;
                 this[culture][shrt] = sex.m_Value;

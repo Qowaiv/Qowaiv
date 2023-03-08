@@ -7,7 +7,7 @@ namespace Qowaiv.Statistics;
 /// The Elo rating system is a method for calculating the relative skill levels
 /// of players in competitor-versus-competitor games such as chess. It is named
 /// after its creator Arpad Elo, a Hungarian-born American physics professor.
-/// 
+///
 /// The Elo system was originally invented as an improved chess rating system
 /// but is also used as a rating system for multiplayer competition in a number
 /// of video games, association football, gridiron football, basketball, Major
@@ -54,8 +54,6 @@ public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattab
 
         return z;
     }
-
-    #region Elo manipulation
 
     /// <summary>Increases the Elo with one.</summary>
     [Pure]
@@ -105,29 +103,27 @@ public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattab
 
     /// <summary>Increases the Elo with one.</summary>
     public static Elo operator ++(Elo elo) => elo.Increment();
-    
+
     /// <summary>Decreases the Elo with one.</summary>
     public static Elo operator --(Elo elo) => elo.Decrement();
 
     /// <summary>Unitary plusses the Elo.</summary>
     public static Elo operator +(Elo elo) => elo.Plus();
-    
+
     /// <summary>Negates the Elo.</summary>
     public static Elo operator -(Elo elo) => elo.Negate();
 
     /// <summary>Multiplies the Elo with the factor.</summary>
     public static Elo operator *(Elo elo, double factor) => elo.Multiply(factor);
-    
+
     /// <summary>Divides the Elo by the factor.</summary>
     public static Elo operator /(Elo elo, double factor) => elo.Divide(factor);
-    
+
     /// <summary>Adds the left and the right Elo.</summary>
     public static Elo operator +(Elo l, Elo r) => l.Add(r);
-    
+
     /// <summary>Subtracts the right from the left Elo.</summary>
     public static Elo operator -(Elo l, Elo r) => l.Subtract(r);
-
-    #endregion
 
     /// <summary>Deserializes the Elo from a JSON number.</summary>
     /// <param name="json">

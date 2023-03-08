@@ -116,8 +116,8 @@ public class FormattingArgumentsCollectionTest
     public void Format_ArrayWithNullItem_String()
     {
         var collection = new FormattingArgumentsCollection();
-
-        var act = collection.Format("Value: '{0}'", null);
+        var args = new object[] { null };
+        var act = collection.Format("Value: '{0}'", args);
         var exp = "Value: ''";
 
         Assert.AreEqual(exp, act);

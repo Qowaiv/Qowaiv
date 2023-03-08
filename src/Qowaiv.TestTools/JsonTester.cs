@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
+
 #if NET6_0_OR_GREATER
 using System.Text.Json;
 #endif
+
 namespace Qowaiv.TestTools;
 
 /// <summary>Helper class for testing JSON conversion.</summary>
@@ -23,11 +25,11 @@ public static class JsonTester
                 null => "null",
                 _ => val?.ToString() ?? string.Empty,
             };
-
     }
+
     /// <summary>Writes the JSON using System.Text.Json.</summary>
     /// <remarks>
-    /// <see cref="JsonSerializer.SerializeToElement(object?, Type, JsonSerializerOptions?)"/> is only available in .NET 6.0 
+    /// <see cref="JsonSerializer.SerializeToElement(object?, Type, JsonSerializerOptions?)"/> is only available in .NET 6.0.
     /// </remarks>
     [Pure]
     public static object? Write_System_Text_JSON(object? svo)
@@ -71,7 +73,7 @@ public static class JsonTester
         }
     }
 
-    /// <summary>Applies <code>ToJson()</code>.</summary>
+    /// <summary>Applies `ToJson()`.</summary>
     [Pure]
     public static object? Write<T>(T val)
     {

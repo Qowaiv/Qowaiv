@@ -2,7 +2,8 @@ namespace Qowaiv;
 
 /// <summary>Represents a date span.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
 [OpenApiDataType(description: "Date span, specified in years, months and days.", example: "1Y+10M+16D", type: "string", format: "date-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D")]
 [OpenApi.OpenApiDataType(description: "Date span, specified in years, months and days.", example: "1Y+10M+16D", type: "string", format: "date-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D")]
 [TypeConverter(typeof(DateSpanTypeConverter))]
@@ -45,7 +46,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <summary>The shift position of the total months in the value.</summary>
     internal const int MonthShift = 32;
 
-    /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DateSpan"/> struct.</summary>
     /// <param name="months">
     /// Number of months.
     /// </param>
@@ -54,7 +55,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// </param>
     public DateSpan(int months, int days) : this(Create(months, days)) { }
 
-    /// <summary>Creates a new instance of a <see cref="DateSpan"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DateSpan"/> struct.</summary>
     /// <param name="years">
     /// Number of years.
     /// </param>
@@ -86,10 +87,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// <summary>Gets a (approximate) value to sort the date spans by.</summary>
     internal double TotalDays => Days + TotalMonths * DaysPerMonth;
 
-    #region Operations
-
     /// <summary>Unary plus the date span.</summary>
-    /// <returns></returns>
     [Pure]
     internal DateSpan Plus() => this;
 
@@ -98,12 +96,12 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     public DateSpan Negate() => new(AsUInt64(-TotalMonths, -Days));
 
     /// <summary>Returns a new date span whose value is the sum of the specified date span and this instance.</summary>
-    ///<param name="other">
+    /// <param name="other">
     /// The date span to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan Add(DateSpan other)
     {
@@ -113,12 +111,12 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     }
 
     /// <summary>Returns a new date span whose value is the subtraction of the specified date span and this instance.</summary>
-    ///<param name="other">
+    /// <param name="other">
     /// The date span to subtract.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan Subtract(DateSpan other)
     {
@@ -128,39 +126,39 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     }
 
     /// <summary>Returns a new date span whose value is the sum of the days to add this instance.</summary>
-    ///<param name="days">
+    /// <param name="days">
     /// The days to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan AddDays(int days) => Mutate(TotalMonths, Days + (long)days);
 
     /// <summary>Returns a new date span whose value is the sum of the months to add this instance.</summary>
-    ///<param name="months">
+    /// <param name="months">
     /// The months to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan AddMonths(int months) => Mutate(TotalMonths + (long)months, Days);
 
     /// <summary>Returns a new date span whose value is the sum of the years to add this instance.</summary>
-    ///<param name="years">
+    /// <param name="years">
     /// The years to add.
-    ///</param>
-    ///<exception cref="OverflowException">
+    /// </param>
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     public DateSpan AddYears(int years) => Mutate(TotalMonths + years * (long)MonthsPerYear, Days);
 
     /// <summary>Mutates the months and days.</summary>
-    ///<exception cref="OverflowException">
+    /// <exception cref="OverflowException">
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
-    ///</exception>
+    /// </exception>
     [Pure]
     private static DateSpan Mutate(long months, long days)
     {
@@ -172,8 +170,6 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
         }
         return new DateSpan(AsUInt64(months, days));
     }
-
-    #endregion
 
     /// <summary>Deserializes the date span from a JSON number.</summary>
     /// <param name="json">
@@ -301,12 +297,12 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     [Pure]
     public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
     {
-        if ((settings & (DateSpanSettings.DaysOnly)) == DateSpanSettings.DaysOnly)
+        if (settings.HasFlag(DateSpanSettings.DaysOnly))
         {
             return FromDays((int)(d1 - d2).TotalDays);
         }
-        else return d1 < d2 
-            ? Subtraction(d2, d1, settings).Negate() 
+        else return d1 < d2
+            ? Subtraction(d2, d1, settings).Negate()
             : Subtraction(d1, d2, settings);
     }
 
@@ -350,8 +346,6 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
         }
         return new DateSpan(years, 0, days);
     }
-
-    
 
     /// <summary>Converts the string to a date span.
     /// A return value indicates whether the conversion succeeded.
@@ -409,7 +403,6 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
         => IsOutOfRange(months, days, days + months * DaysPerMonth)
         ? throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception?)null)
         : AsUInt64(months, days);
-
 
     /// <summary>Returns true if the combination of months and days can not be processed.</summary>
     [Pure]

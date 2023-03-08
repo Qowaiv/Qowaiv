@@ -8,7 +8,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// <summary>Represents empty/not set formatting arguments.</summary>
     public static readonly FormattingArguments None;
 
-    /// <summary>Initializes a new instance of new formatting arguments.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
     /// <param name="format">
     /// The format.
     /// </param>
@@ -21,14 +21,13 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
         FormatProvider = formatProvider;
     }
 
-    /// <summary>Initializes a new instance of new formatting arguments.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
     /// <param name="formatProvider">
     /// The format provider.
     /// </param>
-
     public FormattingArguments(IFormatProvider? formatProvider) : this(format: null, formatProvider) { }
 
-    /// <summary>Initializes a new instance of new formatting arguments.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
     /// <param name="format">
     /// The format.
     /// </param>
@@ -50,7 +49,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     [Pure]
     public string? ToString(IFormattable? obj)
         => obj?.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
-    
+
     /// <summary>Formats the object using the formatting arguments.</summary>
     /// <param name="obj">
     /// The object to get the formatted string representation from.
@@ -67,7 +66,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
         ? ToString(formattable)
         : obj?.ToString();
 
-    /// <summary>Initializes a new instance of formatting arguments based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private FormattingArguments(SerializationInfo info, StreamingContext context)
@@ -126,14 +125,14 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     [Pure]
     public static bool operator ==(FormattingArguments left, FormattingArguments right)
         => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
-    /// <param name="right">The right operand</param>
+    /// <param name="right">The right operand.</param>
     public static bool operator !=(FormattingArguments left, FormattingArguments right)
     {
         return !(left == right);

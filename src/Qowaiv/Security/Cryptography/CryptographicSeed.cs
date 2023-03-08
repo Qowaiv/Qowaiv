@@ -59,14 +59,14 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
 
     /// <summary>Represents the cryptographic seed as "*****".</summary>
     /// <remarks>
-    /// To prevent unintended exposure. 
+    /// To prevent unintended exposure.
     /// </remarks>
     [Pure]
     public override string ToString() => m_Value is null ? string.Empty : "*****";
 
     /// <summary>Converts the cryptographic seed to a JSON null node.</summary>
     /// <remarks>
-    /// To prevent unintended exposure. 
+    /// To prevent unintended exposure.
     /// </remarks>
     [Pure]
 #pragma warning disable CA1822 // part of the contract

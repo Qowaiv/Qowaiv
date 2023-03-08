@@ -9,16 +9,17 @@ namespace Qowaiv;
 
 /// <summary>Represents a UUID (Universally unique identifier) aka GUID (Globally unique identifier).</summary>
 /// <remarks>
-/// The main difference between this UUID and the default System.GUID is 
+/// The main difference between this UUID and the default System.GUID is
 /// the default string representation. For this, that is a 22 char long
 /// Base64 representation.
-/// 
-/// The reason not to call this a GUID but an UUID it just to prevent users of 
-/// Qowaiv to be forced to specify the namespace of there GUID of choice 
+///
+/// The reason not to call this a GUID but an UUID it just to prevent users of
+/// Qowaiv to be forced to specify the namespace of there GUID of choice
 /// everywhere.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
 [OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 [TypeConverter(typeof(UuidTypeConverter))]
@@ -70,31 +71,31 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
     /// S
     /// 22 base64 chars:
     /// 0123465798aAbBcCdDeE_-
-    /// 
+    ///
     /// H
     /// 26 base32 chars:
     /// ABCDEFGHIJKLMNOPQRSTUVWXYZ234567
-    /// 
+    ///
     /// N
     /// 32 digits:
     /// 00000000000000000000000000000000
-    /// 
+    ///
     /// D
     /// 32 digits separated by hyphens:
     /// 00000000-0000-0000-0000-000000000000
-    /// 
+    ///
     /// B
     /// 32 digits separated by hyphens, enclosed in braces:
     /// {00000000-0000-0000-0000-000000000000}
-    /// 
+    ///
     /// P
     /// 32 digits separated by hyphens, enclosed in parentheses:
     /// (00000000-0000-0000-0000-000000000000)
-    /// 
+    ///
     /// X
     /// Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values that is also enclosed in braces:
     /// {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
-    /// 
+    ///
     /// the lowercase formats are lowercase (except the the 's').
     /// </remarks>
     [Pure]
@@ -172,7 +173,9 @@ public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormatta
 
         return new Guid(bytes);
     }
+
     private const long TicksYear1970 = 0x89F_7FF5_F7B5_8000;
+
     private const long MaxTicks = 0x1FFF_FFFF_FFFF_FFFF;
 
     /// <summary>Converts the string to a UUID.

@@ -2,9 +2,10 @@
 
 namespace Qowaiv.Financial;
 
-/// <summary>Represents an </summary>
+/// <summary>Represents an amount.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [OpenApi.OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [TypeConverter(typeof(AmountTypeConverter))]
@@ -30,8 +31,10 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
 {
     /// <summary>Represents an Amount of zero.</summary>
     public static readonly Amount Zero;
+
     /// <summary>Represents the smallest possible value of the amount.</summary>
     public static readonly Amount MinValue = new(decimal.MinValue);
+
     /// <summary>Represents the biggest possible value of the amount.</summary>
     public static readonly Amount MaxValue = new(decimal.MaxValue);
 
@@ -48,7 +51,6 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     internal Amount Plus() => (Amount)(+m_Value);
 
     /// <summary>Negates the amount.</summary>
-
     [Pure]
     internal Amount Negate() => (Amount)(-m_Value);
 
@@ -73,7 +75,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     /// The percentage to add.
     /// </param>
     [Pure]
-    public Amount Add(Percentage p) => (Amount)(m_Value.Add(p));
+    public Amount Add(Percentage p) => (Amount)m_Value.Add(p);
 
     /// <summary>Subtracts a amount from the current amount.</summary>
     /// <param name="amount">
@@ -87,7 +89,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     /// The percentage to add.
     /// </param>
     [Pure]
-    public Amount Subtract(Percentage p) => (Amount)(m_Value.Subtract(p));
+    public Amount Subtract(Percentage p) => (Amount)m_Value.Subtract(p);
 
     /// <summary>Gets a percentage of the current amount.</summary>
     /// <param name="p">
@@ -119,7 +121,6 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     /// </param>
     [Pure]
     public Amount Multiply(float factor) => Multiply((decimal)factor);
-
 
     /// <summary>Multiplies the amount with a specified factor.
     /// </summary>
@@ -254,7 +255,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     [Pure]
     public Amount Divide(ushort factor) => Divide((decimal)factor);
 
-    /// <summary>Rounds the amount value to the 0 decimal places</summary>
+    /// <summary>Rounds the amount value to zero decimal places.</summary>
     [Pure]
     public Amount Round() => Round(0);
 
@@ -318,6 +319,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
 
     /// <summary>Subtracts the right from the left amount.</summary>
     public static Amount operator -(Amount l, Amount r) => l.Subtract(r);
+
     /// <summary>Subtracts the percentage from the amount.</summary>
     public static Amount operator -(Amount amount, Percentage p) => amount.Subtract(p);
 
@@ -326,24 +328,30 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
 
     /// <summary>Multiplies the amount with the factor.</summary>
     public static Amount operator *(Amount amount, decimal factor) => amount.Multiply(factor);
+
     /// <summary>Multiplies the amount with the factor.</summary>
     public static Amount operator *(Amount amount, double factor) => amount.Multiply(factor);
+
     /// <summary>Multiplies the amount with the factor.</summary>
     public static Amount operator *(Amount amount, float factor) => amount.Multiply(factor);
 
     /// <summary>Multiplies the amount with the factor.</summary>
     public static Amount operator *(Amount amount, long factor) => amount.Multiply(factor);
+
     /// <summary>Multiplies the amount with the factor.</summary>
     public static Amount operator *(Amount amount, int factor) => amount.Multiply(factor);
+
     /// <summary>Multiplies the amount with the factor.</summary>
     public static Amount operator *(Amount amount, short factor) => amount.Multiply(factor);
 
     /// <summary>Multiplies the amount with the factor.</summary>
     [CLSCompliant(false)]
     public static Amount operator *(Amount amount, ulong factor) => amount.Multiply(factor);
+
     /// <summary>Multiplies the amount with the factor.</summary>
     [CLSCompliant(false)]
     public static Amount operator *(Amount amount, uint factor) => amount.Multiply(factor);
+
     /// <summary>Multiplies the amount with the factor.</summary>
     [CLSCompliant(false)]
     public static Amount operator *(Amount amount, ushort factor) => amount.Multiply(factor);
@@ -353,26 +361,33 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
 
     /// <summary>Divides the amount by the percentage.</summary>
     public static Amount operator /(Amount amount, Percentage p) => amount.Divide(p);
+
     /// <summary>Divides the amount by the factor.</summary>
     public static Amount operator /(Amount amount, decimal factor) => amount.Divide(factor);
+
     /// <summary>Divides the amount by the factor.</summary>
     public static Amount operator /(Amount amount, double factor) => amount.Divide(factor);
+
     /// <summary>Divides the amount by the factor.</summary>
     public static Amount operator /(Amount amount, float factor) => amount.Divide(factor);
 
     /// <summary>Divides the amount by the factor.</summary>
     public static Amount operator /(Amount amount, long factor) => amount.Divide(factor);
+
     /// <summary>Divides the amount by the factor.</summary>
     public static Amount operator /(Amount amount, int factor) => amount.Divide(factor);
+
     /// <summary>Divides the amount by the factor.</summary>
     public static Amount operator /(Amount amount, short factor) => amount.Divide(factor);
 
     /// <summary>Divides the amount by the factor.</summary>
     [CLSCompliant(false)]
     public static Amount operator /(Amount amount, ulong factor) => amount.Divide(factor);
+
     /// <summary>Divides the amount by the factor.</summary>
     [CLSCompliant(false)]
     public static Amount operator /(Amount amount, uint factor) => amount.Divide(factor);
+
     /// <summary>Divides the amount by the factor.</summary>
     [CLSCompliant(false)]
     public static Amount operator /(Amount amount, ushort factor) => amount.Divide(factor);
@@ -393,15 +408,9 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("¤{0:0.00########}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-    /// <param name="format">
-    /// The format that describes the formatting.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The format provider.
-    /// </param>
+    /// <inheritdoc />
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) 
+    public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
         : m_Value.ToString(format, Money.GetNumberFormatInfo(formatProvider));
@@ -444,10 +453,13 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
 
     /// <summary>Casts an Amount to a decimal.</summary>
     public static explicit operator decimal(Amount val) => val.m_Value;
+
     /// <summary>Casts an Amount to a double.</summary>
     public static explicit operator double(Amount val) => (double)val.m_Value;
+
     /// <summary>Casts an Amount to a long.</summary>
     public static explicit operator long(Amount val) => (long)val.m_Value;
+
     /// <summary>Casts an Amount to an int.</summary>
     public static explicit operator int(Amount val) => (int)val.m_Value;
 
@@ -459,7 +471,7 @@ public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormat
     [Obsolete("Explicitly convert the subtracted value to Percentage or Amount.", false)]
     public static Amount operator -(Amount amount, decimal other) => amount - other.Amount();
 
-    /// <summary>Converts the string to an 
+    /// <summary>Converts the string to an amount.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

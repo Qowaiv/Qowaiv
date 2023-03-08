@@ -252,7 +252,7 @@
         {
             using (new CultureInfoScope(CultureInfo.InvariantCulture))
             {
-                var act = TestStruct.ToString("");
+                var act = TestStruct.ToString(string.Empty);
                 var exp = "1732.4";
                 Assert.AreEqual(exp, act);
             }

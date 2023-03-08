@@ -10,4 +10,3 @@ public class CurrencyTypeConverter : SvoTypeConverter<Currency>
     [Pure]
     protected override Currency FromString(string? str, CultureInfo? culture) => Currency.Parse(str, culture);
 }
-

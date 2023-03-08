@@ -14,7 +14,7 @@ namespace Qowaiv.Financial;
 /// <remarks>
 /// When assigned to a non-financial institution, a code may also be known
 /// as a Business Entity Identifier or BEI.
-/// 
+///
 /// These codes are used when transferring money between banks, particularly
 /// for international wire transfers, and also for the exchange of other
 /// messages between banks. The codes can sometimes be found on account
@@ -32,7 +32,7 @@ namespace Qowaiv.Financial;
 public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
 {
     /// <remarks>
-    /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx
+    /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx.
     /// </remarks>
     private static readonly Regex Pattern = new(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegOptions.IgnoreCase, RegOptions.Timeout);
 
@@ -58,8 +58,10 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
         : Country.Empty;
 
     /// <summary>Gets the location code.</summary>
-    public string Location 
-        => m_Value is { Length: >= 8 } && !IsUnknown()  ? m_Value.Substring(6, 2) : string.Empty;
+    public string Location
+        => m_Value is { Length: >= 8 } && !IsUnknown()
+        ? m_Value.Substring(6, 2)
+        : string.Empty;
 
     /// <summary>Gets the branch code.</summary>
     /// <remarks>
@@ -128,7 +130,7 @@ public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSeria
             result = Unknown;
             return true;
         }
-        else if (Pattern.IsMatch(str) 
+        else if (Pattern.IsMatch(str)
             && Country.TryParse(str.Substring(4, 2), out var country)
             && !country.IsEmptyOrUnknown())
         {

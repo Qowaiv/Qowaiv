@@ -18,7 +18,7 @@ public sealed class IdTypeConverter : TypeConverter
     /// <summary>The <see cref="TypeConverter"/> of the underlying value.</summary>
     private readonly TypeConverter BaseConverter;
 
-    /// <summary>Creates a new instance of the <see cref="IdTypeConverter"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="IdTypeConverter"/> class.</summary>
     /// <param name="type">
     /// The type to convert for.
     /// </param>

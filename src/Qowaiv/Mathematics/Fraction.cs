@@ -57,7 +57,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
         /// <summary>The different supported fraction bar characters.</summary>
         /// <remarks>
-        /// name           | c | code 
+        /// name           | c | code
         /// ---------------|---|------
         /// slash          | / |   5C
         /// colon          | : |   3A
@@ -65,24 +65,23 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         /// fraction slash | ⁄ | 2044
         /// division slash | ∕ | 2215
         /// short slash    | ̷  |  337
-        /// long slash     | ̸  |  338
+        /// long slash     | ̸  |  338.
         /// </remarks>
         public static readonly string FractionBars = new(new[]
         {
-                Slash,
-                Colon,
-                DivisionSign,
-                FractionSlash,
-                DivisionSlash,
-                ShortSlash,
-                LongSlash
-            });
+            Slash,
+            Colon,
+            DivisionSign,
+            FractionSlash,
+            DivisionSlash,
+            ShortSlash,
+            LongSlash,
+        });
 
         public static readonly Regex Pattern = new(
-            @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", 
+            @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$",
             RegOptions.Default,
-            RegOptions.Timeout
-        );
+            RegOptions.Timeout);
 
         /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
         [Pure]
@@ -94,7 +93,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly long denominator;
 
-    /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
     /// <param name="numerator">
     /// The numerator part of the fraction.
     /// </param>
@@ -109,10 +108,10 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// Furthermore, the numerator and denominator are reduced (so 2/4
     /// becomes 1/2).
     /// </remarks>
-    public Fraction(long numerator, long denominator) 
+    public Fraction(long numerator, long denominator)
         : this(new Data(numerator, denominator).Guard().Simplify()) { }
 
-    /// <summary>Creates a new instance of the <see cref="Fraction"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
     private Fraction(Data data)
     {
         numerator = data.numerator;
@@ -325,54 +324,69 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Pluses the fraction.</summary>
     public static Fraction operator +(Fraction fraction) => fraction.Plus();
+
     /// <summary>Negates the fraction.</summary>
     public static Fraction operator -(Fraction fraction) => fraction.Negate();
 
     /// <summary>Multiplies the left and the right fractions.</summary>
     public static Fraction operator *(Fraction left, Fraction right) => left.Multiply(right);
+
     /// <summary>Multiplies the left and the right fractions.</summary>
     public static Fraction operator *(Fraction left, long right) => left.Multiply(right);
+
     /// <summary>Multiplies the left and the right fractions.</summary>
     public static Fraction operator *(Fraction left, int right) => left.Multiply(right);
+
     /// <summary>Multiplies the left and the right fraction.</summary>
     public static Fraction operator *(long left, Fraction right) => right.Multiply(left);
+
     /// <summary>Multiplies the left and the right fraction.</summary>
     public static Fraction operator *(int left, Fraction right) => right.Multiply(left);
 
     /// <summary>Divide the fraction by a specified factor.</summary>
     public static Fraction operator /(Fraction fraction, Fraction factor) => fraction.Divide(factor);
+
     /// <summary>Divide the fraction by a specified factor.</summary>
     public static Fraction operator /(Fraction fraction, long factor) => fraction.Divide(factor);
+
     /// <summary>Divide the fraction by a specified factor.</summary>
     public static Fraction operator /(Fraction fraction, int factor) => fraction.Divide(factor);
+
     /// <summary>Divide the fraction by a specified factor.</summary>
     public static Fraction operator /(long number, Fraction factor) => Create(number).Divide(factor);
+
     /// <summary>Divide the fraction by a specified factor.</summary>
     public static Fraction operator /(int number, Fraction factor) => Create(number).Divide(factor);
 
     /// <summary>Adds the left and the right fraction.</summary>
     public static Fraction operator +(Fraction left, Fraction right) => left.Add(right);
+
     /// <summary>Adds the left and the right fraction.</summary>
     public static Fraction operator +(Fraction left, long right) => left.Add(right);
+
     /// <summary>Adds the left and the right fraction.</summary>
     public static Fraction operator +(Fraction left, int right) => left.Add(right);
+
     /// <summary>Adds the left and the right fraction.</summary>
     public static Fraction operator +(long left, Fraction right) => right.Add(left);
+
     /// <summary>Adds the left and the right fraction.</summary>
     public static Fraction operator +(int left, Fraction right) => right.Add(left);
 
     /// <summary>Subtracts the left from the right fraction.</summary>
     public static Fraction operator -(Fraction left, Fraction right) => left.Subtract(right);
+
     /// <summary>Subtracts the left from the right fraction.</summary>
     public static Fraction operator -(Fraction left, long right) => left.Subtract(right);
+
     /// <summary>Subtracts the left from the right fraction.</summary>
     public static Fraction operator -(Fraction left, int right) => left.Subtract(right);
+
     /// <summary>Subtracts the left from the right fraction.</summary>
     public static Fraction operator -(long left, Fraction right) => Create(left).Subtract(right);
+
     /// <summary>Subtracts the left from the right fraction.</summary>
     public static Fraction operator -(int left, Fraction right) => Create(left).Subtract(right);
-
-    #region Equality & comparability
 
     /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
     /// <param name = "format">
@@ -496,11 +510,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         return self.CompareTo(othr);
     }
 
-    #endregion
-
-    #region Serialization
-
-    /// <summary>Initializes a new instance of the fraction based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Fraction(SerializationInfo info, StreamingContext context)
@@ -556,10 +566,6 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     [Pure]
     public static Fraction FromJson(long json) => New(json, 1);
 
-    #endregion
-
-    #region (Explicit) casting
-
     /// <summary>Casts the fraction to a <see cref="decimal"/>.</summary>
     [Pure]
     private decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
@@ -584,25 +590,27 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Casts a <see cref="decimal"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator Fraction(decimal number) => Cast(number);
+
     /// <summary>Casts a <see cref="decimal"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator decimal(Fraction fraction) => fraction.ToDecimal();
 
     /// <summary>Casts a <see cref="Percentage"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator Fraction(Percentage number) => Cast((decimal)number);
+
     /// <summary>Casts a <see cref="Percentage"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator Percentage(Fraction fraction) => Percentage.Create(fraction.ToDecimal());
 
     /// <summary>Casts a <see cref="double"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator Fraction(double number) => Cast(number);
+
     /// <summary>Casts a <see cref="double"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator double(Fraction fraction) => fraction.ToDouble();
 
     /// <summary>Casts a <see cref="long"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator Fraction(long number) => Create(number);
+
     /// <summary>Casts a <see cref="long"/> to a <see cref="Fraction"/>.</summary>
     public static explicit operator long(Fraction fraction) => fraction.Whole;
-
-    #endregion
 
     /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.
     /// A return value indicates whether the conversion succeeded.
@@ -657,9 +665,9 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     [Pure]
     public static Fraction Create(long number) => number == 0 ? Zero : New(number, 1);
 
-    /// <summary>Creates a new instance of the <see cref="Fraction"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction"/> class.</summary>
     /// <exception cref="OverflowException">
-    /// If the numerator is <see cref="long.MinValue"/>
+    /// If the numerator is <see cref="long.MinValue"/>.
     /// </exception>
     /// <remarks>
     /// This pseudo constructor differs from the public constructor that it
@@ -681,7 +689,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
 
     /// <summary>Gets the Greatest Common Divisor.</summary>
     /// <remarks>
-    /// See: https://en.wikipedia.org/wiki/Greatest_common_divisor
+    /// See: https://en.wikipedia.org/wiki/Greatest_common_divisor.
     /// </remarks>
     [Pure]
     private static long Gcd(long a, long b)
@@ -721,7 +729,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         [FluentSyntax]
         public Data Guard()
         {
-#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one 
+#pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one
             if (numerator == long.MinValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(numerator), QowaivMessages.OverflowException_Fraction);
@@ -730,7 +738,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
             {
                 throw new ArgumentOutOfRangeException(nameof(denominator), QowaivMessages.OverflowException_Fraction);
             }
-#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one 
+#pragma warning restore S3928 // Parameter names used into ArgumentException constructors should match an existing one
             return this;
         }
 
@@ -743,7 +751,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
             denominator = Math.Abs(denominator);
 
             Reduce(ref numerator, ref denominator);
-            
+
             if (negative)
             {
                 numerator = -numerator;

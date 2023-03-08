@@ -8,4 +8,3 @@ public class EmailAddressTypeConverter : SvoTypeConverter<EmailAddress>
     [Pure]
     protected override EmailAddress FromString(string? str, CultureInfo? culture) => EmailAddress.Parse(str, culture);
 }
-

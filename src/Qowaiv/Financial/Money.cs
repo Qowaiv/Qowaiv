@@ -31,9 +31,11 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 {
     /// <summary>Represents an Amount of zero.</summary>
     public static readonly Money Zero;
-    /// <summary>Represents the smallest possible value of an </summary>
+
+    /// <summary>Represents the smallest possible value of <see cref="Money"/>.</summary>
     public static readonly Money MinValue = decimal.MinValue + Currency.Empty;
-    /// <summary>Represents the biggest possible value of an </summary>
+
+    /// <summary>Represents the biggest possible value of <see cref="Money"/>.</summary>
     public static readonly Money MaxValue = decimal.MaxValue + Currency.Empty;
 
     private Money(decimal val, Currency currency)
@@ -42,8 +44,10 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         m_Currency = currency;
     }
 
-    /// <summary>The inner value of the </summary>
+    /// <summary>The inner value of the <see cref="Money"/>.</summary>
     private readonly decimal m_Value;
+
+    /// <summary>The inner value of the <see cref="Currency"/>.</summary>
     private readonly Currency m_Currency;
 
     /// <summary>Gets the amount of the money.</summary>
@@ -51,7 +55,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Gets the currency of the money.</summary>
     public Currency Currency => m_Currency;
-
 
     /// <summary>Gets the sign of the value of the money.</summary>
     [Pure]
@@ -137,7 +140,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     [Pure]
     public Money Multiply(float factor) => Multiply((decimal)factor);
 
-
     /// <summary>Multiplies the money with a specified factor.
     /// </summary>
     /// <param name="factor">
@@ -161,7 +163,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// </param>
     [Pure]
     public Money Multiply(short factor) => Multiply((decimal)factor);
-
 
     /// <summary>Multiplies the money with a specified factor.
     /// </summary>
@@ -244,7 +245,6 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// </param>
     [Pure]
     public Money Divide(short factor) => Divide((decimal)factor);
-
 
     /// <summary>Divides the money by a specified factor.
     /// </summary>
@@ -331,17 +331,19 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Increases the money with one (of the current currency).</summary>
     public static Money operator ++(Money money) => money.Increment();
+
     /// <summary>Decreases the money with one (of the current currency).</summary>
     public static Money operator --(Money money) => money.Decrement();
 
     /// <summary>Unitary plusses the money.</summary>
     public static Money operator +(Money money) => money.Plus();
+
     /// <summary>Negates the money.</summary>
     public static Money operator -(Money money) => money.Negate();
 
     /// <summary>Adds money.</summary>
     /// <param name="l">The left operand.</param>
-    /// <param name="r">The right operand</param>
+    /// <param name="r">The right operand.</param>
     public static Money operator +(Money l, Money r) => l.Add(r);
 
     /// <summary>Adds the percentage to the money.</summary>
@@ -349,7 +351,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Adds money.</summary>
     /// <param name="l">The left operand.</param>
-    /// <param name="r">The right operand</param>
+    /// <param name="r">The right operand.</param>
     public static Money operator -(Money l, Money r) => l.Subtract(r);
 
     /// <summary>Subtracts the percentage from the money.</summary>
@@ -360,51 +362,63 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, decimal factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, double factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, float factor) => money.Multiply(factor);
 
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, long factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, int factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     public static Money operator *(Money money, short factor) => money.Multiply(factor);
 
     /// <summary>Multiplies the money with the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator *(Money money, ulong factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator *(Money money, uint factor) => money.Multiply(factor);
+
     /// <summary>Multiplies the money with the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator *(Money money, ushort factor) => money.Multiply(factor);
 
-
     /// <summary>Divides the money by the percentage.</summary>
     public static Money operator /(Money money, Percentage p) => money.Divide(p);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, decimal factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, double factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, float factor) => money.Divide(factor);
 
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, long factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, int factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     public static Money operator /(Money money, short factor) => money.Divide(factor);
 
     /// <summary>Divides the money by the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator /(Money money, ulong factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator /(Money money, uint factor) => money.Divide(factor);
+
     /// <summary>Divides the money by the factor.</summary>
     [CLSCompliant(false)]
     public static Money operator /(Money money, ushort factor) => money.Divide(factor);
@@ -419,7 +433,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         ? l.Currency
         : throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
 
-    /// <summary>Initializes a new instance of Money based on the serialization info.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Money"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Money(SerializationInfo info, StreamingContext context)
@@ -464,19 +478,13 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string ToJson() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
+    public string ToJson() => Currency.Name + m_Value.ToString(string.Empty, CultureInfo.InvariantCulture);
 
     /// <summary>Returns a <see cref="string"/> that represents the current Money for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
-    /// <param name="format">
-    /// The format that describes the formatting.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The format provider.
-    /// </param>
+    /// <inheritdoc />
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
@@ -493,38 +501,23 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Gets an XML string representation of the money.</summary>
     [Pure]
-    private string ToXmlString() => Currency.Name + m_Value.ToString("", CultureInfo.InvariantCulture);
+    private string ToXmlString() => Currency.Name + m_Value.ToString(string.Empty, CultureInfo.InvariantCulture);
 
     /// <summary>Returns true if this instance and the other <see cref="Money"/> are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Money"/> to compare with.</param>
     [Pure]
     public bool Equals(Money other) => m_Value == other.m_Value && m_Currency == other.m_Currency;
 
-    /// <summary>Returns the hash code for this </summary>
-    /// <returns>
-    /// A 32-bit signed integer hash code.
-    /// </returns>
+    /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => m_Value.GetHashCode() ^ m_Currency.GetHashCode();
 
-    /// <summary>Compares this instance with a specified Money and indicates
-    /// whether this instance precedes, follows, or appears in the same position
-    /// in the sort order as the specified 
-    /// </summary>
-    /// <param name="other">
-    /// The Money to compare with this instance.
-    /// </param>
-    /// <returns>
-    /// A 32-bit signed integer that indicates whether this instance precedes, follows,
-    /// or appears in the same position in the sort order as the value parameter.
-    /// </returns>
+    /// <inheritdoc />
     [Pure]
     public int CompareTo(Money other)
         => m_Currency.CompareTo(other.m_Currency) is var compare && compare == 0
         ? m_Value.CompareTo(other.m_Value)
         : compare;
-
-    #region (Explicit) casting
 
     /// <summary>Casts Money to a decimal.</summary>
     public static explicit operator Amount(Money val) => (Amount)val.m_Value;
@@ -535,9 +528,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// <summary>Casts Money to a double.</summary>
     public static explicit operator double(Money val) => (double)val.m_Value;
 
-    #endregion
-
-    /// <summary>Converts the string to 
+    /// <summary>Converts the string to money.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -559,7 +550,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         var currency = Currency.Empty;
         var signs = formatProvider.NegativeSign() + formatProvider.PositiveSign();
         var span = s.CharSpan().TrimLeft(ch => CandidateCurrency(ch, signs), out var candidate);
-        
+
         if (candidate.IsEmpty())
         {
             span = span.TrimRight(ch => CandidateCurrency(ch, signs), out candidate);
@@ -599,7 +590,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
 
     /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
     /// <remarks>
-    /// Because the options for formatting and parsing currencies as provided 
+    /// Because the options for formatting and parsing currencies as provided
     /// by the .NET framework are not sufficient, internally we use number
     /// settings. For parsing and formatting however we like to use the
     /// currency properties of the <see cref="NumberFormatInfo"/> instead of

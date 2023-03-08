@@ -2,7 +2,8 @@
 
 /// <summary>Represents a date, so opposed to a date time without time precision.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
+[Serializable]
+[SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]
@@ -37,7 +38,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     [Obsolete("Use Clock.Tomorrow() instead. Will be dropped when the next major version is released.")]
     public static Date Tomorrow => Clock.Tomorrow();
 
-    /// <summary>Initializes a new instance of the date structure to a specified number of ticks.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Date"/> struct to a specified number of ticks.</summary>
     /// <param name="ticks">
     /// A date expressed in 100-nanosecond units.
     /// </param>
@@ -46,7 +47,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// </exception>
     public Date(long ticks) : this(new DateTime(ticks)) { }
 
-    /// <summary>Initializes a new instance of the date structure to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Date"/> struct to the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -66,8 +67,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// </exception>
     public Date(int year, int month, int day) : this(new DateTime(year, month, day)) { }
 
-    /// <summary>Initializes a new instance of the date structure based on a System.DateTime.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="Date"/> struct based on a <see cref="DateTime"/>.</summary>
     /// <param name="dt">
     /// A date and time.
     /// </param>
@@ -158,7 +158,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// </exception>
     [Pure]
     [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
-    public Date Add(DateSpan value, bool daysFirst) 
+    public Date Add(DateSpan value, bool daysFirst)
         => daysFirst
         ? AddDays(value.Days).AddMonths(value.TotalMonths)
         : AddMonths(value.TotalMonths).AddDays(value.Days);
@@ -188,7 +188,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     {
         DateSpanSettings.DaysFirst => AddDays(value.Days).AddMonths(value.TotalMonths),
         DateSpanSettings.Default => AddMonths(value.TotalMonths).AddDays(value.Days),
-        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan)
+        _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan),
     };
 
     /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan"/>
@@ -425,13 +425,11 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     [Pure]
     public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
-    #region IFormattable / ToString
-
     /// <summary>Returns a <see cref="string"/> that represents the current Date for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay($"{{0:{SerializableFormat}}}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current </summary>
+    /// <summary>Returns a formatted <see cref="string"/> that represents the current.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -444,17 +442,13 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
         // We don't want to see hh:mm pop up.
         format = format.WithDefault("d");
         return StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
-            ? formatted 
+            ? formatted
             : m_Value.ToString(format, formatProvider);
     }
 
     /// <summary>Gets an XML string representation of the date.</summary>
     [Pure]
     private string ToXmlString() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
-
-    #endregion
-
-    #region (Explicit) casting
 
     /// <summary>Casts a date to a date time.</summary>
     public static implicit operator DateTime(Date val) => val.m_Value;
@@ -467,10 +461,6 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
 
     /// <summary>Casts a week date to a date.</summary>
     public static implicit operator Date(WeekDate val) => val.Date;
-
-    #endregion
-
-    #region Operators
 
     /// <summary>Adds the time span to the date.</summary>
     public static Date operator +(Date d, TimeSpan t) => d.Add(t);
@@ -493,9 +483,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <summary>Subtracts the right Date from the left date.</summary>
     public static TimeSpan operator -(Date l, Date r) => l.Subtract(r);
 
-    #endregion
-
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a date.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -513,7 +501,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out Date result)
         => TryParse(s, formatProvider, DateTimeStyles.None, out result);
 
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a date.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

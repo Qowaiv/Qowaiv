@@ -405,7 +405,7 @@ public class HouseNumberTest
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
-        var act = TestStruct.ToString("");
+        var act = TestStruct.ToString(string.Empty);
         var exp = "123456789";
         Assert.AreEqual(exp, act);
     }

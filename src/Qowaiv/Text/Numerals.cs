@@ -1,10 +1,8 @@
 ﻿namespace Qowaiv.Text;
 
-/// <summary>
-/// 
-/// </summary>
+/// <summary>Provides written numeral words for numbers.</summary>
 /// <remarks>
-/// See: https://en.wikipedia.org/wiki/English_numerals
+/// See: https://en.wikipedia.org/wiki/English_numerals.
 /// </remarks>
 public static class Numerals
 {
@@ -33,6 +31,7 @@ public static class Numerals
         };
     }
 
+    /// <summary>Converts the Integer to written text in Dutch.</summary>
     [Pure]
     private static string Dutch(long number)
     {
@@ -69,9 +68,9 @@ public static class Numerals
         }
     }
 
-    /// <summary>Converts the Integer to written text American English.</summary>
+    /// <summary>Converts the Integer to written text in American English.</summary>
     /// <remarks>
-    /// https://en.wikipedia.org/wiki/English_numerals
+    /// https://en.wikipedia.org/wiki/English_numerals.
     /// </remarks>
     [Pure]
     private static string English(long number, bool british = false)
@@ -158,32 +157,37 @@ public static class Numerals
 
     private static readonly Dictionary<string, string> Zero = new()
     {
-        { NL, "nul" },
-        { EN, "zero" },
+        [NL] = "nul",
+        [EN] = "zero",
     };
+
     private static readonly Dictionary<string, string> Sign = new()
     {
-        { NL, "min " },
-        { EN, "minus " },
+        [NL] = "min ",
+        [EN] = "minus ",
     };
+
     private static readonly Dictionary<string, string> Hundred = new()
     {
-        { NL, "honderd " },
-        { EN, " hundred " },
+        [NL] = "honderd ",
+        [EN] = " hundred ",
     };
+
     private static readonly Dictionary<string, string[]> Multiplier = new()
     {
-        { NL, new []{ "", "duizend ", " miljoen ", " miljard ", " biljoen ", " biljard ", " triljoen ", " triljard " } },
-        { EN, new []{ "", "thousand ", " million ", " billion ", " trillion ", " quadrillion ", " quintillion ", " sextillion " } },
+        [NL] = new[] { string.Empty, "duizend ", " miljoen ", " miljard ", " biljoen ", " biljard ", " triljoen ", " triljard " },
+        [EN] = new[] { string.Empty, "thousand ", " million ", " billion ", " trillion ", " quadrillion ", " quintillion ", " sextillion " },
     };
+
     private static readonly Dictionary<string, string[]> Ten = new()
     {
-        { NL, new []{ "", "", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig" } },
-        { EN, new []{ "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" } },
+        [NL] = new[] { string.Empty, string.Empty, "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig" },
+        [EN] = new[] { string.Empty, string.Empty, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" },
     };
+
     private static readonly Dictionary<string, string[]> Unit = new()
     {
-        { NL, new []{ "", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien" } },
-        { EN, new []{ "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" } },
+        [NL] = new[] { string.Empty, "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien" },
+        [EN] = new[] { string.Empty, "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" },
     };
 }

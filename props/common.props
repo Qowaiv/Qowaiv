@@ -10,7 +10,6 @@
     </Description>
     <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Fons Sonnemans;Jack Kester;Hanif Hafez Nezami;Laura Kramer;Patrick Evers;Vincent Lesierse;Wilko Frieke</Authors>
     <Owners>Qowaiv community</Owners>
-    <PackageTags>qowaiv domain model</PackageTags>
     <PackageTags>
       DDD;
       value object;

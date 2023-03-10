@@ -2,10 +2,32 @@
 <Project>
 
   <PropertyGroup>
-    <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
+    <Title>Qowaiv (Single) Value Object library</Title>
+    <Description>
+      Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
+      Value Objects that can be used in a wide variety of modeling scenarios, both
+      inside and outside a Domain-driven context.
+    </Description>
     <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Fons Sonnemans;Jack Kester;Hanif Hafez Nezami;Laura Kramer;Patrick Evers;Vincent Lesierse;Wilko Frieke</Authors>
     <Owners>Qowaiv community</Owners>
-    <PackageTags>qowaiv domain model</PackageTags>
+    <PackageTags>
+      DDD;
+      value object;
+      SVO;
+      domain;
+      immutable;
+      amount;
+      date only;
+      date span;
+      email address;
+      IBAN
+      money;
+      percentage;
+      postal code;
+      sex;
+      UUID;
+      year
+    </PackageTags>
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
     <LangVersion>11.0</LangVersion>
@@ -14,7 +36,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.*-*">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

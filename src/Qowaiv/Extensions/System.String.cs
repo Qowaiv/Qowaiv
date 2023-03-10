@@ -84,14 +84,4 @@ public static class QowaivSystemExtensions
 
     [Pure]
     internal static CharSpan CharSpan(this string? str) => str is null ? new(string.Empty) : new(str);
-
-#if NETSTANDARD
-    /// <summary>Alias to provide an implantation that works for .NET standard.</summary>
-    [Pure]
-    internal static string AsSpan(this string str, int startIndex) => str.Substring(startIndex);
-
-    /// <summary>Alias to provide an implantation that works for .NET standard.</summary>
-    [Pure]
-    internal static string AsSpan(this string str, int startIndex, int length) => str.Substring(startIndex, length);
-#endif
 }

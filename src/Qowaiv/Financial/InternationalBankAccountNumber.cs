@@ -207,10 +207,10 @@ public readonly partial struct InternationalBankAccountNumber : ISerializable, I
     [Pure]
     private static bool Mod97(string iban)
     {
-        var digits = iban.Substring(4) + iban.Substring(0, 4);
         var mod = 0;
-        foreach (var digit in digits)
+        for (var i = 0; i < iban.Length; i++)
         {
+            var digit = iban[(i + 4) % iban.Length]; // Calculate the first 4 characters (country and checksum) last
             var index = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(digit);
             mod *= index > 9 ? 100 : 10;
             mod += index;

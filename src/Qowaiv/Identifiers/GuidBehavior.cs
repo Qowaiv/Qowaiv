@@ -107,28 +107,17 @@ public class GuidBehavior : IdentifierBehavior
         }
         else if (Guid.TryParse(str, out Guid guid))
         {
-            id = guid == Guid.Empty ? null : guid;
+            id = NullIfEmpty(guid);
             return true;
         }
         else if (Uuid.Pattern.IsMatch(str))
         {
-            var bytes = Convert.FromBase64String(str.Replace('-', '+').Replace('_', '/').Substring(0, 22) + "==");
-            id = new Guid(bytes);
-
-            if (Guid.Empty.Equals(id))
-            {
-                id = null;
-            }
+            id = NullIfEmpty(GuidFromBase64(str));
             return true;
         }
         else if (str.Length == 26 && Base32.TryGetBytes(str, out var b32))
         {
-            id = new Guid(b32);
-
-            if (Guid.Empty.Equals(id))
-            {
-                id = null;
-            }
+            id = NullIfEmpty(new Guid(b32));
             return true;
         }
         else
@@ -136,6 +125,20 @@ public class GuidBehavior : IdentifierBehavior
             id = default;
             return false;
         }
+        
+        static Guid GuidFromBase64(string str)
+        {
+            var base64 = new char[24];
+            for (int i = 0; i < 22; i++)
+            {
+                base64[i] = str[i] switch { '-' => '+', '_' => '/', _ => str[i] };
+            }
+            base64[22] = '=';
+            base64[23] = '=';
+            return new Guid(Convert.FromBase64String(new string(base64)));
+        }
+
+        static object? NullIfEmpty(Guid guid) => guid == Guid.Empty ? null : guid;
     }
 
     /// <inheritdoc/>

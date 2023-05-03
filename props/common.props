@@ -31,12 +31,12 @@
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
     <LangVersion>11.0</LangVersion>
-    <!-- We ship package version for obsolete versions too -->
+    <!-- We ship package versions for obsolete target frameworks too -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.*">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

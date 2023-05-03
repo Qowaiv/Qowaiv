@@ -64,6 +64,6 @@ public class CSharpString
 
     internal static class GenericOf
     {
-        public static TModel Default<TModel>() => default;
+        public static TModel? Default<TModel>() => default;
     }
 }

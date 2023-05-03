@@ -20,11 +20,11 @@ public class Fails_on
 [TypeConverter(typeof(WithConverterTypeConverter))]
 internal readonly struct WithConverter : IFormattable
 {
-    public string ToString(string format, IFormatProvider formatProvider) => 17.ToString(format, formatProvider);
+    public string ToString(string? format, IFormatProvider? formatProvider) => 17.ToString(format, formatProvider);
 }
 
 internal class WithConverterTypeConverter : Qowaiv.Conversion.SvoTypeConverter<WithConverter>
 {
-    protected override WithConverter FromString(string str, CultureInfo culture) => new();
+    protected override WithConverter FromString(string? str, CultureInfo? culture) => new();
 }
 

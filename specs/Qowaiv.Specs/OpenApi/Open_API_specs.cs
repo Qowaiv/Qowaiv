@@ -30,7 +30,7 @@ public class Open_API_data_type
             format: "custom-uuid"));
 
     [Test]
-        public void has_custom_debug_display()
+    public void has_custom_debug_display()
             => new OpenApiDataType(
             dataType: typeof(Date),
             description: "Custom description",
@@ -76,13 +76,13 @@ public class README_md
 
     private sealed record OpenApiDataTypeInfo
     {
-        public string description { get; init; }
-        public object example { get; init; }
-        public string type { get; init; }
-        public string format { get; init; }
-        public string pattern { get; init; }
+        public string? description { get; init; }
+        public object? example { get; init; }
+        public string? type { get; init; }
+        public string? format { get; init; }
+        public string? pattern { get; init; }
         public bool nullabe { get; init; }
-        public string[] @enum { get; init; }
+        public string[] @enum { get; init; } = Array.Empty<string>();
     }
 }
 #endif

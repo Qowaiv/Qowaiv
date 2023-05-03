@@ -5,7 +5,6 @@
 /// See: https://swagger.io/docs/specification/data-models/data-types/.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-[DebuggerDisplay("{DebuggerDisplay}")]
 public sealed class OpenApiDataTypeAttribute : Attribute
 {
     /// <summary>Initializes a new instance of the <see cref="OpenApiDataTypeAttribute"/> class.</summary>

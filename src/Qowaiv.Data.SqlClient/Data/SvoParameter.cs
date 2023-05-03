@@ -17,7 +17,7 @@ public static class SvoParameter
     /// single value object, otherwise with a non-converted value.
     /// </returns>
     [Pure]
-    public static SqlParameter CreateForSql(string parameterName, object value)
+    public static SqlParameter CreateForSql(string parameterName, object? value)
     {
         // If null, return DBNull.
         if (value == null) return new SqlParameter(parameterName, DBNull.Value);

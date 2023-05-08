@@ -11,9 +11,7 @@ public class DateTypeConverter : DateTypeConverter<Date>
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
     [Pure]
-#if NET5_0_OR_GREATER
     [DoesNotReturn]
-#endif
     [WillBeSealed]
     protected override Date FromDate(Date date) => throw new NotSupportedException();
 
@@ -36,9 +34,7 @@ public class DateTypeConverter : DateTypeConverter<Date>
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
     [Pure]
-#if NET5_0_OR_GREATER
     [DoesNotReturn]
-#endif
     [WillBeSealed]
     protected override Date ToDate(Date date) => throw new NotSupportedException();
 

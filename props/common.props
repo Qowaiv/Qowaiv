@@ -36,6 +36,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BackwardsCompatibleFeatures" Version="2.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

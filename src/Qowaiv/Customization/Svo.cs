@@ -84,7 +84,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
 #else
     public int CompareTo(Svo<TSvoBehavior> other)
     {
-        // Comparing with char.max value does not work as accpected in older versions of .NET
+        // Comparing with char.max value does not work as expected in older versions of .NET
         if (IsUnknown() || other.IsUnknown())
         {
             if (IsUnknown())

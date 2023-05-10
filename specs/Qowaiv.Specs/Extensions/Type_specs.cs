@@ -60,6 +60,7 @@ public class CSharpString
     public void With_namespaces_if_specified(Type type, string csharpString)
         => type.ToCSharpString(withNamespace: true).Should().Be(csharpString);
 
+    [EmptyTestClass]
     internal class NestedType { }
 
     internal static class GenericOf

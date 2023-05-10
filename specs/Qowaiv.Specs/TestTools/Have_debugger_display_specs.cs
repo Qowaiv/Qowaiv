@@ -43,4 +43,5 @@ internal class SimpleClass
     private string DebuggerDisplay => $"{GetType().Name} display";
 }
 
+[EmptyTestClass]
 internal sealed class ChildClass : SimpleClass { }

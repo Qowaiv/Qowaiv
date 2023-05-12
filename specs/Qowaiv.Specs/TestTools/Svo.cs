@@ -139,6 +139,11 @@ public sealed class ForInt64 : Int64IdBehavior
     private static bool IsValid(long number) => (number & 1) == 1;
 }
 
+[EmptyTestClass]
 public class ForString : StringIdBehavior { }
+
+[EmptyTestClass]
 public class ForGuid : GuidBehavior { }
+
+[EmptyTestClass]
 public class ForUuid : UuidBehavior { }

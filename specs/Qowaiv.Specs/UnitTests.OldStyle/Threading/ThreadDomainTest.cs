@@ -75,7 +75,6 @@ public class ThreadDomainTest
         var exp0 = (Percentage)0.031418m;
 
         Assert.AreEqual(exp0, act0, "Old");
-
     }
 
     [Test]
@@ -91,4 +90,6 @@ public class ThreadDomainTest
         }
     }
 }
+
+[EmptyTestClass]
 public class NoConverterClass { }

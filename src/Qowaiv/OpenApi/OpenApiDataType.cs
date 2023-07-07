@@ -142,5 +142,5 @@ public sealed record OpenApiDataType
 
     [Pure]
     private static bool HasPublicParameterlessCtor(Type type)
-        => type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
+        => type.GetConstructors().Exists(ctor => ctor.GetParameters().None());
 }

@@ -2,6 +2,11 @@
 <Project>
 
   <PropertyGroup>
+    <DebugType>full</DebugType>
+    <NuGetAudit>true</NuGetAudit>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <Title>Qowaiv (Single) Value Object library</Title>
     <Description>
       Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
@@ -36,19 +41,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BackwardsCompatibleFeatures" Version="2.1.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>compile</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="BackwardsCompatibleFeatures" Version="2.3.0" PrivateAssets="all" IncludeAssets="compile" />
   </ItemGroup>
 
-  <!-- for code coverage an proper debugging -->
-  <PropertyGroup>
-    <DebugType>full</DebugType>
-  </PropertyGroup>
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="AsyncFixer" Version="*" />
+    <PackageReference Include="DotNetProjectFile.Analyzers" Version="*" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+  </ItemGroup>
 
 </Project>

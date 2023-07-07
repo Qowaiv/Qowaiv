@@ -18,4 +18,8 @@
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
   </ItemGroup>
 
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"/>
+  </ItemGroup>
+
 </Project>

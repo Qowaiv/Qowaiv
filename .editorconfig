@@ -44,6 +44,9 @@ dotnet_diagnostic.CA2254.severity = warning # Template should be a static expres
 dotnet_diagnostic.CS8763.severity = warning # A method marked [DoesNotReturn] should not return.
 dotnet_diagnostic.CS8770.severity = warning # Method lacks [DoesNotReturn] annotation to match implemented or overridden member.
 
+dotnet_diagnostic.NUnit1001.severity = none    # The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
+dotnet_diagnostic.NUnit2021.severity = warning # Incompatible types for EqualTo constraint
+
 dotnet_diagnostic.QW0001.severity = none    # Use a testable Time Provider
 dotnet_diagnostic.QW0003.severity = warning # Decorate Pure functions
 
@@ -126,3 +129,5 @@ dotnet_diagnostic.S3776.severity = warning # Cognitive Complexity of methods sho
 dotnet_diagnostic.S3925.severity = warning # "ISerializable" should be implemented correctly
 dotnet_diagnostic.S3900.severity = warning # Arguments of public methods should be validated against null
 dotnet_diagnostic.S6354.severity = warning # Use a testable (date) time provider instead
+
+dotnet_diagnostic.VSSpell001.severity = suggestion # Correct spelling.

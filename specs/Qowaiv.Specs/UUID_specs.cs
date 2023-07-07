@@ -192,7 +192,7 @@ public class Can_be_created_sequential
     [Test]
     public void from_1_Jan_1970_on()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01).AddTicks(-1)))
+        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch.AddTicks(-1)))
         {
             Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
         }
@@ -210,7 +210,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_date_first_6_bytes_are_0_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01)))
+        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
         {
             AssertPattern(Uuid.NewSequential(),
 
@@ -224,7 +224,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_date_last_6_bytes_are_0_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01)))
+        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
         {
             AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
 
@@ -274,7 +274,7 @@ public class Can_be_created_sequential
 
     private const int MultipleCount = 10000;
 
-    private static DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
+    private static DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01, DateTimeKind.Utc).AddTicks(3693920);
 
     private static void AssertIsSorted(UuidComparer comparer)
     {
@@ -338,7 +338,7 @@ Actual:   [{(string.Join(", ", act))}]");
     {
         var i = 17;
 
-        var date = new DateTime(1970, 01, 01);
+        var date = DateTime.UnixEpoch;
 
         while (date < DateTime.MaxValue)
         {
@@ -618,4 +618,3 @@ public class Debugger
     public void has_custom_display(object display, Uuid svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }
-

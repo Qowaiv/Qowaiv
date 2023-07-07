@@ -74,7 +74,7 @@ public static class SvoParameter
         {
             var returnType = attr.DatabaseType ?? attr.UnderlyingType;
             cast = sourceType.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .FirstOrDefault(m =>
+                .Find(m =>
                     m.IsHideBySig &&
                     m.IsSpecialName &&
                     m.GetParameters().Length == 1 &&

@@ -27,7 +27,6 @@
   <ItemGroup Label="Analyzers">
     <PackageReference Include="FluentAssertions.Analyzers" Version="*" />
     <PackageReference Include="NUnit.Analyzers" Version="*" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" />
   </ItemGroup>
 
   <ItemGroup>

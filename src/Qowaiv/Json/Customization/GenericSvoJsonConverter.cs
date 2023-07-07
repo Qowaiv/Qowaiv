@@ -58,7 +58,7 @@ public sealed class GenericSvoJsonConverter : JsonConverterFactory
         /// <inheritdoc />
         public override void Write(Utf8JsonWriter writer, Svo<TBehavior> value, JsonSerializerOptions options)
         {
-            Guard.NotNull(writer, nameof(writer));
+            Guard.NotNull(writer);
 
             if (value.ToJson() is { } json)
             {
@@ -69,17 +69,17 @@ public sealed class GenericSvoJsonConverter : JsonConverterFactory
                 writer.WriteNullValue();
             }
         }
-    }
 
-    [Pure]
-    private static object FromJson(string? str, Type type)
-    {
-        if (!parsers.TryGetValue(type, out var parser))
+        [Pure]
+        private static object FromJson(string? str, Type type)
         {
-            parser = type.GetMethod(nameof(FromJson), BindingFlags.Public | BindingFlags.Static)!;
-            parsers[type] = parser;
+            if (!parsers.TryGetValue(type, out var parser))
+            {
+                parser = type.GetMethod(nameof(FromJson), BindingFlags.Public | BindingFlags.Static)!;
+                parsers[type] = parser;
+            }
+            return parser.Invoke(null, new object?[] { str })!;
         }
-        return parser.Invoke(null, new object?[] { str })!;
     }
 
     private static readonly Dictionary<Type, MethodInfo> parsers = new();

@@ -125,12 +125,15 @@ public static class Clock
     public static void SetTimeZone(TimeZoneInfo timeZone) => globalTimeZone = Guard.NotNull(timeZone, nameof(timeZone));
 
     /// <summary>Sets the <see cref="DateTime"/> function for current (execution) context only.</summary>
+    [Impure]
     public static IDisposable SetTimeForCurrentContext(Func<DateTime> time) => new TimeScope(time);
 
     /// <summary>Sets the <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    [Impure]
     public static IDisposable SetTimeZoneForCurrentContext(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
 
     /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    [Impure]
     public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
 
     /// <summary>Sets the <see cref="DateTime"/> function for current thread only.</summary>

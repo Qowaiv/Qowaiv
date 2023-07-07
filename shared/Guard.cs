@@ -4,6 +4,7 @@
 //    See: https://github.com/Corniel/Grenadiers/blob/master/LICENSE.md
 // </copyright>
 //-----------------------------------------------------------------------
+#nullable enable
 
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -386,7 +387,6 @@ internal static partial class Guard
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
         : parameter;
 
-
     /// <summary>Throws an ArgumentException if the parameter is negative, otherwise the parameter is passed.</summary>
     /// <param name="parameter">The parameter to guard.</param>
     /// <param name="paramName">The name of the parameter.</param>
@@ -409,12 +409,9 @@ internal static partial class Guard
         public const string ArgumentException_NotExists = "Argument '{0}'does not exist.";
         public const string ArgumentException_NullableMustHaveValue = "Nullable argument must have a value.";
         public const string ArgumentException_StringEmpty = "Argument cannot be an empty string.";
-        public const string ArgumentOutOfRangeException_InCollection = "Argument was in the collection of forbidden values. Forbidden are {0}.";
-        public const string ArgumentOutOfRangeException_NotInCollection = "Argument was not in the collection of allowed values. Allowed are {0}.";
         public const string ArgumentOutOfRangeException_DefinedEnum = "Argument {0} is not a defined value of {1}.";
         public const string ArgumentOutOfRangeException_Negative = "Argument should not be negative.";
         public const string ArgumentOutOfRangeException_NotPositive = "Argument should be positive.";
-        public const string ArgumentOutOfRangeException_NoFinite = "Argument should be a finite number.";
     }
 
     /// <summary>Marks the NotNull argument as being validated for not being null, to satisfy the static code analysis.</summary>

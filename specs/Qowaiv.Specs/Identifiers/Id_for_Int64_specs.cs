@@ -73,7 +73,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<Int64Id>().Should().Be(Int64Id.Empty);
+            Converting.FromNull<string>().To<Int64Id>().Should().Be(Int64Id.Empty);
         }
     }
 

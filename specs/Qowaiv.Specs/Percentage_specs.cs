@@ -1058,7 +1058,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<Percentage>().Should().Be(Percentage.Zero);
+            Converting.FromNull<string>().To<Percentage>().Should().Be(Percentage.Zero);
         }
     }
 

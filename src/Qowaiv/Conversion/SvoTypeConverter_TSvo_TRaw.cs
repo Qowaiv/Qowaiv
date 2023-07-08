@@ -39,7 +39,7 @@ public abstract class SvoTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo>
     {
         if (destinationType == typeof(TRaw) || destinationType == typeof(TRaw?))
         {
-            var svo = Guard.IsInstanceOf<TSvo>(value, nameof(value));
+            var svo = Guard.IsInstanceOf<TSvo>(value);
             return ToRaw(svo);
         }
         else return base.ConvertTo(context, culture, value, destinationType);

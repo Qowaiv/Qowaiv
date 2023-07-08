@@ -20,9 +20,9 @@ public sealed class OpenApiDataTypeAttribute : Attribute
         string? pattern = null,
         string? @enum = null)
     {
-        Description = Guard.NotNullOrEmpty(description, nameof(description));
-        Type = Guard.NotNullOrEmpty(type, nameof(type));
-        Example = Guard.NotNull(example, nameof(example));
+        Description = Guard.NotNullOrEmpty(description);
+        Type = Guard.NotNullOrEmpty(type);
+        Example = Guard.NotNull(example);
         Format = format;
         Nullable = nullable;
         Pattern = pattern;
@@ -87,7 +87,7 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     [Pure]
     [Obsolete("Use Qowaiv.OpenApi.OpenApiDataTypes.FromAssemblies() instead.")]
     public static IEnumerable<OpenApiDataTypeAttribute> From(params Assembly[] assemblies)
-        => From(Guard.NotNull(assemblies, nameof(assemblies))
+        => From(Guard.NotNull(assemblies)
             .SelectMany(assembly => assembly.GetTypes()));
 
     /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the
@@ -106,7 +106,7 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     [Pure]
     [Obsolete("Use Qowaiv.OpenApi.OpenApiDataTypes.FromTypes() instead.")]
     public static IEnumerable<OpenApiDataTypeAttribute> From(IEnumerable<Type> types)
-        => Guard.NotNull(types, nameof(types))
+        => Guard.NotNull(types)
         .Where(type => type is not null && type.GetCustomAttributes<OpenApiDataTypeAttribute>().Any())
         .Select(type => type.GetCustomAttribute<OpenApiDataTypeAttribute>()!.WithDataType(type));
 

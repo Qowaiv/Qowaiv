@@ -56,7 +56,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<HouseNumber>().Should().Be(HouseNumber.Empty);
+            Converting.FromNull<string>().To<HouseNumber>().Should().Be(HouseNumber.Empty);
         }
     }
 

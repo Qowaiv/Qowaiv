@@ -68,6 +68,7 @@ public readonly struct Hash : IEquatable<Hash>
     /// <remarks>
     /// This should only be used in tests.
     /// </remarks>
+    [Impure]
     public static IDisposable WithoutRandomizer() => new Scope();
 
     /// <summary>Combines two hashes with `((h1 &lt;&lt; 5) + h1) ^ h2`.</summary>

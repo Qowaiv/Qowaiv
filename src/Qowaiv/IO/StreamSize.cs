@@ -417,14 +417,14 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+    public string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString("0 byte", provider);
+    public string ToString(IFormatProvider? provider) => ToString("0 byte", provider);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
     /// <param name="format">
@@ -675,17 +675,17 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// <summary>Creates a stream size from a file info.</summary>
     [Pure]
     public static StreamSize FromByteArray(byte[] bytes)
-        => new(Guard.NotNull(bytes, nameof(bytes)).Length);
+        => new(Guard.NotNull(bytes).Length);
 
     /// <summary>Creates a stream size from a file info.</summary>
     [Pure]
     public static StreamSize FromFileInfo(FileInfo fileInfo)
-        => new(Guard.NotNull(fileInfo, nameof(fileInfo)).Length);
+        => new(Guard.NotNull(fileInfo).Length);
 
     /// <summary>Creates a stream size from a stream.</summary>
     [Pure]
     public static StreamSize FromStream(Stream stream)
-        => new(Guard.NotNull(stream, nameof(stream)).Length);
+        => new(Guard.NotNull(stream).Length);
 
     [Pure]
     private static string GetStreamSizeMarker(string? input)

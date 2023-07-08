@@ -5,8 +5,7 @@ public class Get_hash_code
     [Test]
     public void Null_String_is_supported()
     {
-        string nil = null;
-        int hash = Hash.Code(nil);
+        int hash = Hash.Code(Nil.String);
         hash.Should().Be(0);
     }
 

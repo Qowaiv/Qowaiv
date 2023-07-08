@@ -127,7 +127,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<Date>().Should().Be(default);
+            Converting.FromNull<string>().To<Date>().Should().Be(default);
         }
     }
 

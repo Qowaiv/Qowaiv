@@ -35,7 +35,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var total = decimal.Zero;
         var count = 0L;
@@ -80,7 +81,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var total = decimal.Zero;
         var count = 0L;
@@ -125,7 +127,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount Average(this IEnumerable<Amount> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var total = decimal.Zero;
         var count = 0L;
@@ -160,7 +162,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount? Average(this IEnumerable<Amount?> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var total = decimal.Zero;
         var count = 0L;
@@ -211,7 +213,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Money> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var currency = Currency.Empty;
         var first = true;
@@ -268,7 +271,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Money?> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var currency = Currency.Empty;
         var first = true;
@@ -325,7 +329,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money Average(this IEnumerable<Money> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var currency = Currency.Empty;
         var first = true;
@@ -373,7 +377,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money? Average(this IEnumerable<Money?> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var currency = Currency.Empty;
         var first = true;
@@ -442,7 +446,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var total = decimal.Zero;
 
@@ -483,7 +488,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var total = decimal.Zero;
         var none = true;
@@ -521,7 +527,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount Sum(this IEnumerable<Amount> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var total = decimal.Zero;
 
@@ -552,7 +558,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Amount? Sum(this IEnumerable<Amount?> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var total = decimal.Zero;
         var none = true;
@@ -596,7 +602,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Money> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var currency = Currency.Empty;
         var first = true;
@@ -648,7 +655,8 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Money?> selector)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
 
         var currency = Currency.Empty;
         var first = true;
@@ -698,7 +706,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money Sum(this IEnumerable<Money> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var currency = Currency.Empty;
         var first = true;
@@ -740,7 +748,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Money? Sum(this IEnumerable<Money?> source)
     {
-        Guard.NotNull(source, nameof(source));
+        Guard.NotNull(source);
 
         var currency = Currency.Empty;
         var first = true;

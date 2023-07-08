@@ -142,7 +142,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <param name="context">The streaming context.</param>
     private WeekDate(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         m_Value = (Date)info.GetDateTime("Value");
     }
 
@@ -151,7 +151,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue("Value", m_Value);
     }
 

@@ -56,7 +56,7 @@ public static class Clock
     /// The specified time zone.
     /// </param>
     [Pure]
-    public static LocalDateTime Now(TimeZoneInfo timeZone) => TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), Guard.NotNull(timeZone, nameof(timeZone)));
+    public static LocalDateTime Now(TimeZoneInfo timeZone) => TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), Guard.NotNull(timeZone));
 
     /// <summary>Gets the current <see cref="DateTimeOffset"/>.</summary>
     [Pure]
@@ -69,7 +69,7 @@ public static class Clock
     [Pure]
     public static DateTimeOffset NowWithOffset(TimeZoneInfo timeZone)
     {
-        Guard.NotNull(timeZone, nameof(timeZone));
+        Guard.NotNull(timeZone);
         var utcNow = UtcNow();
         var now = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZone);
         return new DateTimeOffset(now.Ticks, now - utcNow);
@@ -97,7 +97,7 @@ public static class Clock
     [Pure]
     public static Date Today(TimeZoneInfo timeZone)
     {
-        Guard.NotNull(timeZone, nameof(timeZone));
+        Guard.NotNull(timeZone);
         return (Date)TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), timeZone);
     }
 
@@ -116,21 +116,24 @@ public static class Clock
     /// <remarks>
     /// For test purposes use <see cref="SetLocalContextUtcNow(Func{DateTime})"/>.
     /// </remarks>
-    public static void SetTime(Func<DateTime> time) => globalUtcNow = Guard.NotNull(time, nameof(time));
+    public static void SetTime(Func<DateTime> time) => globalUtcNow = Guard.NotNull(time);
 
     /// <summary>Sets the <see cref="TimeZoneInfo"/> function globally (for the full Application Domain).</summary>
     /// <remarks>
     /// For test purposes use <see cref="SetTimeZoneForCurrentContext(TimeZoneInfo)"/>.
     /// </remarks>
-    public static void SetTimeZone(TimeZoneInfo timeZone) => globalTimeZone = Guard.NotNull(timeZone, nameof(timeZone));
+    public static void SetTimeZone(TimeZoneInfo timeZone) => globalTimeZone = Guard.NotNull(timeZone);
 
     /// <summary>Sets the <see cref="DateTime"/> function for current (execution) context only.</summary>
+    [Impure]
     public static IDisposable SetTimeForCurrentContext(Func<DateTime> time) => new TimeScope(time);
 
     /// <summary>Sets the <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    [Impure]
     public static IDisposable SetTimeZoneForCurrentContext(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
 
     /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    [Impure]
     public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
 
     /// <summary>Sets the <see cref="DateTime"/> function for current thread only.</summary>
@@ -165,7 +168,7 @@ public static class Clock
         public TimeScope(Func<DateTime> time)
         {
             _func = localContextUtcNow.Value;
-            SetLocalContextUtcNow(Guard.NotNull(time, nameof(time)));
+            SetLocalContextUtcNow(Guard.NotNull(time));
         }
 
         private readonly Func<DateTime>? _func;
@@ -179,7 +182,7 @@ public static class Clock
         public TimeZoneScope(TimeZoneInfo timeZone)
         {
             _zone = localContextTimeZone.Value;
-            SetLocalContextTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
+            SetLocalContextTimeZone(Guard.NotNull(timeZone));
         }
 
         private readonly TimeZoneInfo? _zone;
@@ -194,8 +197,8 @@ public static class Clock
         {
             _func = localContextUtcNow.Value;
             _zone = localContextTimeZone.Value;
-            SetLocalContextUtcNow(Guard.NotNull(time, nameof(time)));
-            SetLocalContextTimeZone(Guard.NotNull(timeZone, nameof(timeZone)));
+            SetLocalContextUtcNow(Guard.NotNull(time));
+            SetLocalContextTimeZone(Guard.NotNull(timeZone));
         }
 
         private readonly Func<DateTime>? _func;

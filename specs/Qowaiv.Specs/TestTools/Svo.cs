@@ -94,7 +94,7 @@ public static class Svo
     
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
-        .Select(field => field.GetValue(null));
+        .Select(field => field.GetValue(null)!);
 }
 
 public sealed class WithDefaultBehavior : SvoBehavior { }
@@ -112,10 +112,10 @@ public sealed class ForCustomSvo : SvoBehavior
 
 public sealed class ForInt32 : Int32IdBehavior
 {
-    public override string ToString(object obj, string format, IFormatProvider formatProvider)
+    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
        => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
 
-    public override bool TryParse(string str, out object id)
+    public override bool TryParse(string? str, out object? id)
         => (str ?? "").StartsWith("PREFIX")
         ? base.TryParse(str?.Substring(6), out id)
         : base.TryParse(str, out id);
@@ -123,18 +123,18 @@ public sealed class ForInt32 : Int32IdBehavior
 
 public sealed class ForInt64 : Int64IdBehavior
 {
-    public override string ToString(object obj, string format, IFormatProvider formatProvider)
+    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
        => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
 
-    public override bool TryCreate(object obj, out object id)
+    public override bool TryCreate(object? obj, out object? id)
         => base.TryCreate(obj, out id)
         && id is long number
         && IsValid(number);
 
-    public override bool TryParse(string str, out object id)
+    public override bool TryParse(string? str, out object? id)
         => (str ?? "").StartsWith("PREFIX")
         ? base.TryParse(str?.Substring(6), out id)
-        : base.TryParse(str, out id) && IsValid(id);
+        : base.TryParse(str, out id) && IsValid(id!);
 
     private static bool IsValid(long number) => (number & 1) == 1;
 }

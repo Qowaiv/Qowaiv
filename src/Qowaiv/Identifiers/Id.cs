@@ -36,7 +36,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <param name="context">The streaming context.</param>
     private Id(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         m_Value = info.GetValue("Value", typeof(object));
     }
 
@@ -151,7 +151,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue("Value", m_Value);
     }
 
@@ -166,7 +166,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <param name="reader">An XML reader.</param>
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
-        Guard.NotNull(reader, nameof(reader));
+        Guard.NotNull(reader);
         var xml = reader.ReadElementString();
         System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml);
     }
@@ -175,7 +175,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)
     {
-        Guard.NotNull(writer, nameof(writer));
+        Guard.NotNull(writer);
         writer.WriteString(ToString(CultureInfo.InvariantCulture));
     }
 

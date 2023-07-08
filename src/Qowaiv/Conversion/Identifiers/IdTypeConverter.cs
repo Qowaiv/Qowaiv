@@ -24,7 +24,7 @@ public sealed class IdTypeConverter : TypeConverter
     /// </param>
     public IdTypeConverter(Type type)
     {
-        Guard.NotNull(type, nameof(type));
+        Guard.NotNull(type);
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Id<>) && type.GetGenericArguments().Length == 1)
         {

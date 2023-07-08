@@ -97,7 +97,7 @@ public class Is_not_valid_for
     [Test]
     public void string_null()
     {
-        Assert.IsFalse(Gender.IsValid((string)null));
+        Assert.IsFalse(Gender.IsValid(Nil.String));
     }
 
     [Test]
@@ -487,7 +487,8 @@ public class Supports_XML_serialization
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
 public class Is_Open_API_data_type
 {
-    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Gender)).FirstOrDefault();
+    internal static readonly OpenApiDataTypeAttribute Attribute = OpenApiDataTypeAttribute.From(typeof(Gender)).Single();
+
     [Test]
     public void with_description()
     {

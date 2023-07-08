@@ -26,9 +26,9 @@ public sealed record OpenApiDataType
         IReadOnlyCollection<string>? @enum = null)
 #pragma warning restore S107 // Methods should not have too many parameters
     {
-        DataType = Guard.NotNull(dataType, nameof(dataType));
-        Description = Guard.NotNullOrEmpty(description, nameof(description));
-        Type = Guard.NotNullOrEmpty(type, nameof(type));
+        DataType = Guard.NotNull(dataType);
+        Description = Guard.NotNullOrEmpty(description);
+        Type = Guard.NotNullOrEmpty(type);
         Example = example;
         Format = format;
         Nullable = nullable;
@@ -106,7 +106,7 @@ public sealed record OpenApiDataType
     /// </param>
     [Pure]
     public static OpenApiDataType? FromType(Type type)
-        => Guard.NotNull(type, nameof(type)).GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr
+        => Guard.NotNull(type).GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr
         ? new(
             dataType: AsDataType(type),
             description: attr.Description,
@@ -142,5 +142,5 @@ public sealed record OpenApiDataType
 
     [Pure]
     private static bool HasPublicParameterlessCtor(Type type)
-        => type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
+        => type.GetConstructors().Exists(ctor => ctor.GetParameters().None());
 }

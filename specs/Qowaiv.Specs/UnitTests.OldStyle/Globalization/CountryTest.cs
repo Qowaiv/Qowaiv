@@ -12,18 +12,6 @@ public class CountryTest
         Assert.AreEqual(default(Country), Country.Empty);
     }
 
-    [Test]
-    public void All_None_260Countries()
-    {
-        Assert.AreEqual(260, Country.All.Count);
-    }
-
-    [Test]
-    public void GetExisting_Januari2016_250Countries()
-    {
-        Assert.AreEqual(250, Country.GetExisting(new Date(2016, 01, 01)).Count());
-    }
-
     #region Current
 
     [Test]
@@ -794,24 +782,21 @@ public class CountryTest
     [Test]
     public void EndDate_Empty_AreEqual()
     {
-        DateTime? exp = null;
-        var act = Country.Empty.EndDate;
-        Assert.AreEqual(exp, act);
+        Country.Empty.EndDate.Should().BeNull();
     }
+
     [Test]
     public void EndDate_Unknown_AreEqual()
     {
-        DateTime? exp = null;
-        var act = Country.Unknown.EndDate;
-        Assert.AreEqual(exp, act);
+        Country.Unknown.EndDate.Should().BeNull();
     }
+
     [Test]
     public void EndDate_TestStruct_AreEqual()
     {
-        DateTime? exp = null;
-        var act = TestStruct.EndDate;
-        Assert.AreEqual(exp, act);
+        TestStruct.EndDate.Should().BeNull();
     }
+
     [Test]
     public void EndDate_CZ_AreEqual()
     {

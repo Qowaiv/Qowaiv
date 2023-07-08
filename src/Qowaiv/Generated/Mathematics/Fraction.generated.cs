@@ -104,7 +104,7 @@ public partial struct Fraction : IXmlSerializable
     /// <param name="reader">An XML reader.</param>
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
-        Guard.NotNull(reader, nameof(reader));
+        Guard.NotNull(reader);
         var xml = reader.ReadElementString();
         System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
@@ -115,7 +115,7 @@ public partial struct Fraction : IXmlSerializable
     /// </remarks>
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)
-        => Guard.NotNull(writer, nameof(writer)).WriteString(ToXmlString());
+        => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 
 public partial struct Fraction

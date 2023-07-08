@@ -22,7 +22,7 @@ public static class QowaivTypeExtensions
     [Pure]
     public static string ToCSharpString(this Type type, bool withNamespace)
     {
-        Guard.NotNull(type, nameof(type));
+        Guard.NotNull(type);
         return new StringBuilder().AppendType(type, withNamespace).ToString();
     }
 

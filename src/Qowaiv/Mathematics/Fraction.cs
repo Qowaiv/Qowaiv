@@ -515,7 +515,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// <param name="context">The streaming context.</param>
     private Fraction(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
 
         var n = info.GetInt64(nameof(numerator));
         var d = info.GetInt64(nameof(denominator));
@@ -533,7 +533,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue(nameof(numerator), numerator);
         info.AddValue(nameof(denominator), denominator);
     }

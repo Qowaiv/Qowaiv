@@ -92,7 +92,7 @@ public class Supports_type_conversion_from
 
     [Test]
     public void null_string()
-        => Converting.From<string>(null).To<Secret>().Should().Be(Secret.Empty);
+        => Converting.FromNull<string>().To<Secret>().Should().Be(Secret.Empty);
 
     [Test]
     public void empty_string()

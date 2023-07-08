@@ -17,7 +17,7 @@ public static class QowaivDebuggerDisplayAssertions
         string because = "",
         params object[] becauseArgs)
     {
-        var prop = DebuggerDisplay(Guard.NotNull(assertions, nameof(assertions)).Subject.GetType());
+        var prop = DebuggerDisplay(Guard.NotNull(assertions).Subject.GetType());
 
         if (Execute.Assertion
             .ForCondition(prop is { })
@@ -37,7 +37,7 @@ public static class QowaivDebuggerDisplayAssertions
         string because = "",
         params object[] becauseArgs)
     {
-        var prop = DebuggerDisplay(Guard.NotNull(assertions, nameof(assertions)).Subject.GetType());
+        var prop = DebuggerDisplay(Guard.NotNull(assertions).Subject.GetType());
 
         if (Execute.Assertion
             .ForCondition(prop is { })

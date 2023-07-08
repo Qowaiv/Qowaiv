@@ -192,7 +192,7 @@ public class Can_be_created_sequential
     [Test]
     public void from_1_Jan_1970_on()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01).AddTicks(-1)))
+        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch.AddTicks(-1)))
         {
             Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
         }
@@ -210,10 +210,9 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_date_first_6_bytes_are_0_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01)))
+        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
         {
-            AssertPattern(Uuid.NewSequential(),
-
+            Uuid.NewSequential().Should().HavePattern(
                 0, 0, 0, 0,
                 0, 0, null, 0x60,
                 null, null, null, null,
@@ -224,10 +223,9 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_date_last_6_bytes_are_0_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(1970, 01, 01)))
+        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
         {
-            AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
-
+            Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
                 null, null, null, null,
                 0, null, 0, 0,
@@ -240,8 +238,7 @@ public class Can_be_created_sequential
     {
         using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
-            AssertPattern(Uuid.NewSequential(),
-
+            Uuid.NewSequential().Should().HavePattern(
                 0xFF, 0xFF, 0xFF, 0xFF,
                 0xFF, 0xFF, null, 0x6F,
                 null, null, null, null,
@@ -254,8 +251,7 @@ public class Can_be_created_sequential
     {
         using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
-            AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
-
+            Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
                 null, null, null, null,
                 0xFF, null, 0xFF, 0xFF,
@@ -274,7 +270,7 @@ public class Can_be_created_sequential
 
     private const int MultipleCount = 10000;
 
-    private static DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01).AddTicks(3693920);
+    private static DateTime MaxDate => new DateTime(9276, 12, 03, 18, 42, 01, DateTimeKind.Utc).AddTicks(3693920);
 
     private static void AssertIsSorted(UuidComparer comparer)
     {
@@ -290,55 +286,11 @@ public class Can_be_created_sequential
         CollectionAssert.IsOrdered(ids, comparer);
     }
 
-    private static void AssertPattern(Uuid actual, params byte?[] pattern)
-    {
-        var act = new List<string>();
-        var exp = new List<string>();
-        var fail = false;
-
-        var bytes = actual.ToByteArray();
-
-        for (var i = 0; i < bytes.Length; i++)
-        {
-            var a = bytes[i].ToString("X2");
-
-            if (pattern[i].HasValue)
-            {
-                var e = pattern[i].Value.ToString("X2");
-
-                if (e == a)
-                {
-                    act.Add(a);
-                    exp.Add(e);
-                }
-                else
-                {
-                    act.Add('[' + a + ']');
-                    exp.Add('[' + e + ']');
-                    fail = true;
-                }
-            }
-            else
-            {
-                act.Add(a);
-                exp.Add("..");
-            }
-        }
-
-        if (fail)
-        {
-            Assert.Fail($@"Expected: [{(string.Join(", ", exp))}]
-Actual:   [{(string.Join(", ", act))}]");
-        }
-
-        Assert.AreEqual(UuidVersion.Sequential, actual.Version);
-    }
-
     private static IEnumerable<DateTime> GetTimes()
     {
         var i = 17;
 
-        var date = new DateTime(1970, 01, 01);
+        var date = DateTime.UnixEpoch;
 
         while (date < DateTime.MaxValue)
         {
@@ -463,7 +415,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<Uuid>().Should().Be(default);
+            Converting.FromNull<string>().To<Uuid>().Should().Be(default);
         }
     }
 
@@ -618,4 +570,3 @@ public class Debugger
     public void has_custom_display(object display, Uuid svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }
-

@@ -1058,7 +1058,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<Percentage>().Should().Be(Percentage.Zero);
+            Converting.FromNull<string>().To<Percentage>().Should().Be(Percentage.Zero);
         }
     }
 
@@ -1194,7 +1194,7 @@ public class Is_Open_API_data_type
     [TestCase("-0.1%")]
     [TestCase("31%")]
     public void pattern_matches(string input) 
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage)).Matches(input).Should().BeTrue();
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage))!.Matches(input).Should().BeTrue();
 }
 
 public class Supports_binary_serialization

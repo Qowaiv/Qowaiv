@@ -207,7 +207,7 @@ namespace Qowaiv.UnitTests.Web
         [Test]
         public void FromFile_NullString_Empty()
         {
-            var act = InternetMediaType.FromFile((String)null);
+            var act = InternetMediaType.FromFile(Nil.String);
             var exp = InternetMediaType.Empty;
 
             Assert.AreEqual(exp, act);

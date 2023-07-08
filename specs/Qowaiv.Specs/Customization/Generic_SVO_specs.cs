@@ -324,7 +324,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<CustomSvo>().Should().Be(CustomSvo.Empty);
+            Converting.FromNull<string>().To<CustomSvo>().Should().Be(CustomSvo.Empty);
         }
     }
 

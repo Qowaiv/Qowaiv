@@ -5,6 +5,10 @@ public static class Converting
 {
     /// <summary>Initializes a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
     [Pure]
+    public static ConvertFrom<TFrom> FromNull<TFrom>() where TFrom : class => new(null);
+
+    /// <summary>Initializes a new instance of the <see cref="ConvertFrom{From}"/> class.</summary>
+    [Pure]
     public static ConvertFrom<TFrom> From<TFrom>(TFrom subject) => new(subject);
 
     /// <summary>Initializes a new instance of the <see cref="ConvertTo{To}"/> class.</summary>
@@ -19,10 +23,10 @@ public static class Converting
 /// <summary>Type converter builder to apply <see cref="TypeConverter.ConvertFrom(object)"/>.</summary>
 public sealed class ConvertFrom<TFrom>
 {
-    internal ConvertFrom(TFrom subject) => Subject = subject;
+    internal ConvertFrom(TFrom? subject) => Subject = subject;
 
     /// <summary>The subject that can be converted to a destination type.</summary>
-    public TFrom Subject { get; }
+    public TFrom? Subject { get; }
 
     /// <summary>Converts the value to the destination type, using its <see cref="TypeConverter"/>.</summary>
     [Pure]

@@ -56,7 +56,7 @@ public static class JsonTester
         var parameterType = val?.GetType();
         var fromJson = typeof(T)
             .GetMethods(BindingFlags.Static | BindingFlags.Public)
-            .FirstOrDefault(m => FromJson<T>(m, parameterType));
+            .Find(m => FromJson<T>(m, parameterType));
 
         if (fromJson is null)
         {
@@ -77,9 +77,7 @@ public static class JsonTester
     [Pure]
     public static object? Write<T>(T val)
     {
-        var toJson = typeof(T)
-            .GetMethods(BindingFlags.Instance | BindingFlags.Public)
-            .FirstOrDefault(ToJson);
+        var toJson = typeof(T).GetMethods(BindingFlags.Instance | BindingFlags.Public).Find(ToJson);
 
         return toJson is null
             ? throw new InvalidOperationException($"Could not find {typeof(T).Name}.ToJson().")

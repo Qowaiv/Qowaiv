@@ -65,7 +65,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <summary>Keeps only the distinct set of email addresses in the collection.</summary>
     public void AddRange(IEnumerable<EmailAddress> emails)
     {
-        Guard.NotNull(emails, nameof(emails));
+        Guard.NotNull(emails);
         foreach (var email in emails)
         {
             Add(email);
@@ -171,7 +171,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     protected EmailAddressCollection(SerializationInfo info, StreamingContext context)
         : this()
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         AddRange(Parse(info.GetString("Value"), CultureInfo.InvariantCulture));
     }
 
@@ -186,7 +186,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </remarks>
     protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue("Value", ToString());
     }
 
@@ -215,7 +215,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </remarks>
     protected virtual void ReadXml(XmlReader reader)
     {
-        Guard.NotNull(reader, nameof(reader));
+        Guard.NotNull(reader);
         var s = reader.ReadElementString();
         var val = Parse(s, CultureInfo.InvariantCulture);
         AddRange(val);
@@ -232,7 +232,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </remarks>
     protected virtual void WriteXml(XmlWriter writer)
     {
-        Guard.NotNull(writer, nameof(writer));
+        Guard.NotNull(writer);
         writer.WriteString(ToString(CultureInfo.InvariantCulture));
     }
 
@@ -262,14 +262,14 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+    public string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
     /// <param name="formatProvider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider formatProvider) => ToString(string.Empty, formatProvider);
+    public string ToString(IFormatProvider? formatProvider) => ToString(string.Empty, formatProvider);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current email address collection.</summary>
     /// <param name="format">
@@ -295,7 +295,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// s is not in the correct format.
     /// </exception>
     [Pure]
-    public static EmailAddressCollection Parse(string s) => Parse(s, CultureInfo.CurrentCulture);
+    public static EmailAddressCollection Parse(string? s) => Parse(s, CultureInfo.CurrentCulture);
 
     /// <summary>Converts the string to an email address collection.</summary>
     /// <param name="s">
@@ -330,7 +330,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// The email address if the string was converted successfully, otherwise an empty EmailAddressCollection().
     /// </returns>
     [Pure]
-    public static EmailAddressCollection TryParse(string s)
+    public static EmailAddressCollection TryParse(string? s)
     {
         if (TryParse(s, out EmailAddressCollection val))
         {
@@ -351,7 +351,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string s, out EmailAddressCollection result)
+    public static bool TryParse(string? s, out EmailAddressCollection result)
     {
         return TryParse(s, CultureInfo.CurrentCulture, out result);
     }

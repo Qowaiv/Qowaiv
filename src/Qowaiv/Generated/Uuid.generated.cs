@@ -97,7 +97,7 @@ public partial struct Uuid : ISerializable
     /// <param name="context">The streaming context.</param>
     private Uuid(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         m_Value = info.GetValue("Value", typeof(Guid)) is Guid val ? val : default(Guid);
     }
 
@@ -105,7 +105,7 @@ public partial struct Uuid : ISerializable
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info, nameof(info)).AddValue("Value", m_Value);
+        => Guard.NotNull(info).AddValue("Value", m_Value);
 }
 
 public partial struct Uuid
@@ -134,7 +134,7 @@ public partial struct Uuid : IXmlSerializable
     /// <param name="reader">An XML reader.</param>
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
-        Guard.NotNull(reader, nameof(reader));
+        Guard.NotNull(reader);
         var xml = reader.ReadElementString();
         System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
@@ -145,7 +145,7 @@ public partial struct Uuid : IXmlSerializable
     /// </remarks>
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)
-        => Guard.NotNull(writer, nameof(writer)).WriteString(ToXmlString());
+        => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 
 public partial struct Uuid

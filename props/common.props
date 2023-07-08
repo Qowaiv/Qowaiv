@@ -4,6 +4,7 @@
   <PropertyGroup>
     <DebugType>full</DebugType>
     <NuGetAudit>true</NuGetAudit>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
   
   <PropertyGroup>

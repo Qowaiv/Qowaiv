@@ -17,9 +17,9 @@ public sealed class OpenApiDataTypeAttribute : Attribute
         [StringSyntax(StringSyntaxAttribute.Regex)] string? pattern = null,
         string? @enum = null)
     {
-        Description = Guard.NotNullOrEmpty(description, nameof(description));
-        Type = Guard.NotNullOrEmpty(type, nameof(type));
-        Example = Guard.NotNull(example, nameof(example));
+        Description = Guard.NotNullOrEmpty(description);
+        Type = Guard.NotNullOrEmpty(type);
+        Example = Guard.NotNull(example);
         Format = format;
         Nullable = nullable;
         Pattern = pattern;

@@ -64,7 +64,7 @@ public class WildcardPattern : ISerializable
     /// <param name="context">The streaming context.</param>
     protected WildcardPattern(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         Options = (WildcardPatternOptions)info.GetInt32("Options");
         Pattern = GuardPattern(info.GetString("Pattern"), Options);
         ComparisonType = (StringComparison)info.GetInt32("ComparisonType");
@@ -78,7 +78,7 @@ public class WildcardPattern : ISerializable
 
     private static string GuardPattern(string? pattern, WildcardPatternOptions options)
     {
-        pattern = Guard.NotNullOrEmpty(pattern, nameof(pattern));
+        pattern = Guard.NotNullOrEmpty(pattern);
 
         if (options.HasFlag(WildcardPatternOptions.SqlWildcards))
         {
@@ -108,7 +108,7 @@ public class WildcardPattern : ISerializable
     /// </remarks>
     protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue("Pattern", Pattern);
         info.AddValue("Options", (int)Options);
         info.AddValue("ComparisonType", (int)ComparisonType);
@@ -156,7 +156,7 @@ public class WildcardPattern : ISerializable
     [Pure]
     public bool IsMatch(string input)
     {
-        Guard.NotNull(input, nameof(input));
+        Guard.NotNull(input);
         return Match(new(Pattern), new(input));
     }
 

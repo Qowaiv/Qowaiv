@@ -133,7 +133,7 @@ public class Supports_type_conversion_from
 
     [Test]
     public void null_string()
-        => Converting.From<string>(null).To<CryptographicSeed>().Should().Be(CryptographicSeed.Empty);
+        => Converting.FromNull<string>().To<CryptographicSeed>().Should().Be(CryptographicSeed.Empty);
 
     [Test]
     public void empty_string()

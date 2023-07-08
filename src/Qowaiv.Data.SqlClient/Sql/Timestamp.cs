@@ -153,7 +153,7 @@ public readonly partial struct Timestamp : ISerializable, IXmlSerializable, IFor
     [Pure]
     public static Timestamp Create(byte[] bytes)
     {
-        Guard.HasAny(bytes, nameof(bytes));
+        Guard.HasAny(bytes);
         if (bytes.Length == 8) return Create(BitConverter.ToUInt64(bytes, 0));
         else throw new ArgumentException(QowaivMessages.ArgumentException_TimestampArrayShouldHaveSize8, nameof(bytes));
     }

@@ -45,7 +45,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<Int32Id>().Should().Be(Int32Id.Empty);
+            Converting.FromNull<string>().To<Int32Id>().Should().Be(Int32Id.Empty);
         }
     }
 

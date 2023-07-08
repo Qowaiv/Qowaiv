@@ -385,7 +385,7 @@ public class DateSpanTest
     {
         var date = new Date(2000, 01, 01) - Date.MinValue;
         double daysPerMonth = date.TotalDays / 2000 / 12;
-        var DateSpan_DaysPerMonth = (double)typeof(DateSpan).GetField("DaysPerMonth", (BindingFlags)int.MaxValue).GetValue(null);
+        var DateSpan_DaysPerMonth = (double)typeof(DateSpan).GetField("DaysPerMonth", (BindingFlags)int.MaxValue)!.GetValue(null)!;
         DateSpan_DaysPerMonth.Should().BeApproximately(daysPerMonth, precision: 0.000000001);
     }
 

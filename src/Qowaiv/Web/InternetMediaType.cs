@@ -183,7 +183,7 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     /// Based on the extension of the file.
     /// </remarks>
     [Pure]
-    public static InternetMediaType FromFile(FileInfo file)
+    public static InternetMediaType FromFile(FileInfo? file)
         => file is null
         ? Empty
         : FromFile(file.Name);
@@ -196,7 +196,7 @@ public readonly partial struct InternetMediaType : ISerializable, IXmlSerializab
     /// Based on the extension of the filename.
     /// </remarks>
     [Pure]
-    public static InternetMediaType FromFile(string filename)
+    public static InternetMediaType FromFile(string? filename)
     {
         if (string.IsNullOrEmpty(filename))
         {

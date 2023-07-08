@@ -96,7 +96,7 @@ public class StreamSizeTest
         var info = new SerializationInfo(typeof(StreamSize), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual((Int64)123456789, info.GetInt64("Value"));
+        Assert.AreEqual((long)123456789, info.GetInt64("Value"));
     }
 
     [Test]
@@ -267,7 +267,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_Null_ComplexPattern()
     {
-        var act = TestStruct.ToString((String)null);
+        var act = TestStruct.ToString(Nil.String);
         var exp = "123456789";
         Assert.AreEqual(exp, act);
     }
@@ -637,7 +637,7 @@ public class StreamSizeTest
     public void Explicit_StreamSizeToInt32_AreEqual()
     {
         var exp = 123456789;
-        var act = (Int32)TestStruct;
+        var act = (int)TestStruct;
 
         Assert.AreEqual(exp, act);
     }
@@ -654,7 +654,7 @@ public class StreamSizeTest
     public void Explicit_StreamSizeToInt64_AreEqual()
     {
         var exp = 123456789L;
-        var act = (Int64)TestStruct;
+        var act = (long)TestStruct;
 
         Assert.AreEqual(exp, act);
     }
@@ -671,7 +671,7 @@ public class StreamSizeTest
     public void Explicit_StreamSizeToDouble_AreEqual()
     {
         var exp = 123456789d;
-        var act = (Double)TestStruct;
+        var act = (double)TestStruct;
 
         Assert.AreEqual(exp, act);
     }
@@ -688,7 +688,7 @@ public class StreamSizeTest
     public void Explicit_StreamSizeToDecimal_AreEqual()
     {
         var exp = 123456789m;
-        var act = (Decimal)TestStruct;
+        var act = (decimal)TestStruct;
 
         Assert.AreEqual(exp, act);
     }
@@ -792,7 +792,7 @@ public class StreamSizeTest
     {
         StreamSize act = 81;
         StreamSize exp = 40;
-        act /= (Int16)2;
+        act /= (short)2;
 
         Assert.AreEqual(exp, act);
     }

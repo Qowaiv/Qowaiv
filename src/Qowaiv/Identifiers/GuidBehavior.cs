@@ -125,7 +125,7 @@ public class GuidBehavior : IdentifierBehavior
             id = default;
             return false;
         }
-        
+
         static Guid GuidFromBase64(string str)
         {
             var base64 = new char[24];

@@ -71,7 +71,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// <param name="context">The streaming context.</param>
     private FormattingArguments(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         Format = info.GetString(nameof(Format));
         FormatProvider = (IFormatProvider?)info.GetValue(nameof(FormatProvider), typeof(IFormatProvider));
     }
@@ -81,7 +81,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue(nameof(Format), Format);
         info.AddValue(nameof(FormatProvider), FormatProvider);
     }

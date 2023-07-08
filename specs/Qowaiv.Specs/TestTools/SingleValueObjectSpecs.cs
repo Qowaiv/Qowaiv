@@ -37,10 +37,11 @@
             });
 
         private static bool IsJsonSerializable(Type type)
-            => type.GetMethods(BindingFlags.Static | BindingFlags.Public)
-            .Any(m => m.Name == nameof(Date.FromJson)
-                && m.ReturnType == type
-                && m.GetParameters().Length == 1
-                && m.GetParameters()[0].ParameterType == typeof(string));
+            => type
+                .GetMethods(BindingFlags.Static | BindingFlags.Public)
+                .Exists(m => m.Name == nameof(Date.FromJson)
+                    && m.ReturnType == type
+                    && m.GetParameters().Length == 1
+                    && m.GetParameters()[0].ParameterType == typeof(string));
     }
 }

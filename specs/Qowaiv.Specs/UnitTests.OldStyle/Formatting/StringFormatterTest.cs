@@ -1,66 +1,59 @@
-﻿using NUnit.Framework;
-using Qowaiv.Formatting;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿namespace Qowaiv.UnitTests.Formatting;
 
-namespace Qowaiv.UnitTests.Formatting
+[TestFixture]
+public class StringFormatterTest
 {
-    [TestFixture]
-    public class StringFormatterTest
+    [Test]
+    public void Apply_InvalidFormat_ThrowsFormatException()
     {
-        [Test]
-        public void Apply_InvalidFormat_ThrowsFormatException()
+        Assert.Catch<FormatException>(() =>
         {
-            Assert.Catch<FormatException>(() =>
-            {
-                StringFormatter.Apply(Int32.MinValue, "\\", CultureInfo.InvariantCulture, new Dictionary<char, Func<Int32, IFormatProvider, string>>());
-            },
-            "Input string was not in a correct format.");
-        }
+            StringFormatter.Apply(int.MinValue, "\\", CultureInfo.InvariantCulture, new Dictionary<char, Func<int, IFormatProvider, string>>());
+        },
+        "Input string was not in a correct format.");
+    }
 
-        [Test]
-        public void ToNonDiacritic_Null_AreEqual()
-        {
-            var str = (string)null;
+    [Test]
+    public void ToNonDiacritic_Null_AreEqual()
+    {
+        var str = Nil.String;
 
-            var exp = (string)null;
-            var act = StringFormatter.ToNonDiacritic(str);
+        var exp = Nil.String;
+        var act = StringFormatter.ToNonDiacritic(str);
 
-            Assert.AreEqual(exp, act);
-        }
+        Assert.AreEqual(exp, act);
+    }
 
-        [Test]
-        public void ToNonDiacritic_StringEmpty_AreEqual()
-        {
-            var str = string.Empty;
+    [Test]
+    public void ToNonDiacritic_StringEmpty_AreEqual()
+    {
+        var str = string.Empty;
 
-            var exp = string.Empty;
-            var act = StringFormatter.ToNonDiacritic(str);
+        var exp = string.Empty;
+        var act = StringFormatter.ToNonDiacritic(str);
 
-            Assert.AreEqual(exp, act);
-        }
+        Assert.AreEqual(exp, act);
+    }
 
-        [Test]
-        public void ToNonDiacritic_CafeUndStrasse_AreEqual()
-        {
-            var str = "Café & Straße";
+    [Test]
+    public void ToNonDiacritic_CafeUndStrasse_AreEqual()
+    {
+        var str = "Café & Straße";
 
-            var exp = "Cafe & Strasze";
-            var act = StringFormatter.ToNonDiacritic(str);
+        var exp = "Cafe & Strasze";
+        var act = StringFormatter.ToNonDiacritic(str);
 
-            Assert.AreEqual(exp, act);
-        }
+        Assert.AreEqual(exp, act);
+    }
 
-        [Test]
-        public void ToNonDiacritic_CafeUndStrasseIgnoreE_AreEqual()
-        {
-            var str = "Café & Straße";
+    [Test]
+    public void ToNonDiacritic_CafeUndStrasseIgnoreE_AreEqual()
+    {
+        var str = "Café & Straße";
 
-            var exp = "Café & Strasze";
-            var act = StringFormatter.ToNonDiacritic(str, "é");
+        var exp = "Café & Strasze";
+        var act = StringFormatter.ToNonDiacritic(str, "é");
 
-            Assert.AreEqual(exp, act);
-        }
+        Assert.AreEqual(exp, act);
     }
 }

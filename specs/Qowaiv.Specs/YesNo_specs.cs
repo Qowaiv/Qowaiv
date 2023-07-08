@@ -376,7 +376,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Converting.From<string>(null).To<YesNo>().Should().Be(YesNo.Empty);
+            Converting.FromNull<string>().To<YesNo>().Should().Be(YesNo.Empty);
         }
     }
 

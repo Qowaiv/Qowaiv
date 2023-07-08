@@ -102,8 +102,8 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 
     public string Format(string format, params object[] args)
     {
-        Guard.NotNull(format, nameof(format));
-        Guard.NotNull(args, nameof(args));
+        Guard.NotNull(format);
+        Guard.NotNull(args);
 
         var sb = new StringBuilder();
         int pos = 0;
@@ -364,7 +364,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// </exception>
     public void Add(Type type, FormattingArguments arguments)
     {
-        Guard.ImplementsIFormattable(type, nameof(type));
+        Guard.ImplementsIFormattable(type);
         dict.Add(type, arguments);
     }
 
@@ -431,7 +431,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// </exception>
     public void Set(Type type, FormattingArguments arguments)
     {
-        Guard.ImplementsIFormattable(type, nameof(type));
+        Guard.ImplementsIFormattable(type);
         dict[type] = arguments;
     }
 

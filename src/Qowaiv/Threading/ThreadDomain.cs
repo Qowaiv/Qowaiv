@@ -55,8 +55,8 @@ public class ThreadDomain
     /// </remarks>
     public static void Register(Type type, Func<Thread, object> creator)
     {
-        Qowaiv.Guard.NotNull(type, nameof(type));
-        Qowaiv.Guard.NotNull(creator, nameof(creator));
+        Qowaiv.Guard.NotNull(type);
+        Qowaiv.Guard.NotNull(creator);
         Guard(type, Creators.ContainsKey(type));
 
         Creators.TryAdd(type, creator);
@@ -120,7 +120,7 @@ public class ThreadDomain
     /// </param>
     public void Remove(Type type)
     {
-        Qowaiv.Guard.NotNull(type, nameof(type));
+        Qowaiv.Guard.NotNull(type);
         Values.Remove(type);
     }
 

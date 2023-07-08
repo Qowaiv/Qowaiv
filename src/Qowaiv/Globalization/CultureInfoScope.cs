@@ -33,8 +33,8 @@ public class CultureInfoScope : IDisposable
     /// </param>
     public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI) : this()
     {
-        Thread.CurrentThread.CurrentCulture = Guard.NotNull(culture, nameof(culture));
-        Thread.CurrentThread.CurrentUICulture = Guard.NotNull(cultureUI, nameof(cultureUI));
+        Thread.CurrentThread.CurrentCulture = Guard.NotNull(culture);
+        Thread.CurrentThread.CurrentUICulture = Guard.NotNull(cultureUI);
     }
 
     /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
@@ -45,8 +45,8 @@ public class CultureInfoScope : IDisposable
     /// Name of the UI culture.
     /// </param>
     public CultureInfoScope(string name, string nameUI) : this(
-        new CultureInfo(Guard.NotNullOrEmpty(name, nameof(name))),
-        new CultureInfo(Guard.NotNullOrEmpty(nameUI, nameof(nameUI)))) { }
+        new CultureInfo(Guard.NotNullOrEmpty(name)),
+        new CultureInfo(Guard.NotNullOrEmpty(nameUI))) { }
 
     /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
     /// <param name="name">

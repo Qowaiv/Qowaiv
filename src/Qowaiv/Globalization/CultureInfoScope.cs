@@ -45,8 +45,8 @@ public class CultureInfoScope : IDisposable
     /// Name of the UI culture.
     /// </param>
     public CultureInfoScope(string name, string nameUI) : this(
-        new CultureInfo(Guard.NotNullOrEmpty(name, nameof(name))),
-        new CultureInfo(Guard.NotNullOrEmpty(nameUI, nameof(nameUI)))) { }
+        new CultureInfo(Guard.NotNullOrEmpty(name)),
+        new CultureInfo(Guard.NotNullOrEmpty(nameUI))) { }
 
     /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
     /// <param name="name">

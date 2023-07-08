@@ -78,7 +78,7 @@ public class WildcardPattern : ISerializable
 
     private static string GuardPattern(string? pattern, WildcardPatternOptions options)
     {
-        pattern = Guard.NotNullOrEmpty(pattern, nameof(pattern));
+        pattern = Guard.NotNullOrEmpty(pattern);
 
         if (options.HasFlag(WildcardPatternOptions.SqlWildcards))
         {

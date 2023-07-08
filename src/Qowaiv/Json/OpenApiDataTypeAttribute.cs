@@ -20,8 +20,8 @@ public sealed class OpenApiDataTypeAttribute : Attribute
         string? pattern = null,
         string? @enum = null)
     {
-        Description = Guard.NotNullOrEmpty(description, nameof(description));
-        Type = Guard.NotNullOrEmpty(type, nameof(type));
+        Description = Guard.NotNullOrEmpty(description);
+        Type = Guard.NotNullOrEmpty(type);
         Example = Guard.NotNull(example);
         Format = format;
         Nullable = nullable;

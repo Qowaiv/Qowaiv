@@ -25,7 +25,7 @@ internal static class DecimalRound
     [Pure]
     public static decimal Round(decimal value, int decimals, DecimalRounding mode)
     {
-        Guard.DefinedEnum(mode, nameof(mode));
+        Guard.DefinedEnum(mode);
 
         if ((decimals < -28) || (decimals > 28))
         {

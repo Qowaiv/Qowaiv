@@ -54,8 +54,8 @@ public static class StringFormatter
     [Pure]
     public static string Apply<T>(T obj, string format, IFormatProvider? formatProvider, Dictionary<char, Func<T, IFormatProvider, string>> tokens, char escape)
     {
-        Guard.NotNull((object?)obj, nameof(obj));
-        Guard.NotNullOrEmpty(format, nameof(format));
+        Guard.NotNull((object?)obj);
+        Guard.NotNullOrEmpty(format);
         Guard.NotNull(tokens);
 
         var sb = new StringBuilder();

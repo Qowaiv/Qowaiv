@@ -46,12 +46,12 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
         }
         else if (destinationType == typeof(string))
         {
-            var typed = Guard.IsInstanceOf<T>(value, nameof(value));
+            var typed = Guard.IsInstanceOf<T>(value);
             return typed.ToString(string.Empty, culture);
         }
         else if (IsConvertable(destinationType))
         {
-            var date = Guard.IsInstanceOf<T>(value, nameof(value));
+            var date = Guard.IsInstanceOf<T>(value);
             var type = QowaivType.GetNotNullableType(destinationType);
 
             if (type == typeof(DateTime)) return ToDateTime(date);

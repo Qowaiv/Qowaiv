@@ -82,7 +82,7 @@ public static class QowaivDecimalExtensions
     [Pure]
     public static decimal RoundToMultiple(this decimal value, decimal multipleOf, DecimalRounding mode)
     {
-        Guard.Positive(multipleOf, nameof(multipleOf));
+        Guard.Positive(multipleOf);
         return (value / multipleOf).Round(0, mode) * multipleOf;
     }
 

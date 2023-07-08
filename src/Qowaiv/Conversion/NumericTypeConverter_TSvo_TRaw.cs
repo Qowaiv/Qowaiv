@@ -52,7 +52,7 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
         }
         else if (IsConvertable(destinationType))
         {
-            var svo = Guard.IsInstanceOf<TSvo>(value, nameof(value));
+            var svo = Guard.IsInstanceOf<TSvo>(value);
             var raw = ToRaw(svo);
             return Convert.ChangeType(raw, QowaivType.GetNotNullableType(destinationType));
         }

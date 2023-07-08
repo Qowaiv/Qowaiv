@@ -27,8 +27,8 @@ public sealed record OpenApiDataType
 #pragma warning restore S107 // Methods should not have too many parameters
     {
         DataType = Guard.NotNull(dataType);
-        Description = Guard.NotNullOrEmpty(description, nameof(description));
-        Type = Guard.NotNullOrEmpty(type, nameof(type));
+        Description = Guard.NotNullOrEmpty(description);
+        Type = Guard.NotNullOrEmpty(type);
         Example = example;
         Format = format;
         Nullable = nullable;

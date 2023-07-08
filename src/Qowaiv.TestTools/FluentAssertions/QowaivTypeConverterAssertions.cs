@@ -11,7 +11,7 @@ public static class QowaivTypeConverterAssertions
     [CustomAssertion]
     public static AndConstraint<TypeAssertions> HaveTypeConverterDefined(this TypeAssertions assertions, string because = "", params object[] becauseArgs)
     {
-        Guard.NotNull(assertions, nameof(assertions));
+        Guard.NotNull(assertions);
 
         var converter = TypeDescriptor.GetConverter(assertions.Subject);
 

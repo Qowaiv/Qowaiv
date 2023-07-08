@@ -21,7 +21,7 @@ public static class QowaivSystemExtensions
     [Pure]
     public static string ToUpper(this string str, IFormatProvider provider)
     {
-        Guard.NotNull(provider, nameof(provider));
+        Guard.NotNull(provider);
         var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
         return textInfo.ToUpper(str);
     }
@@ -42,7 +42,7 @@ public static class QowaivSystemExtensions
     [Pure]
     public static string ToTitleCase(this string str, IFormatProvider provider)
     {
-        Guard.NotNull(provider, nameof(provider));
+        Guard.NotNull(provider);
         var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
         return textInfo.ToTitleCase(str);
     }
@@ -58,7 +58,7 @@ public static class QowaivSystemExtensions
     [Pure]
     public static TFormat? GetFormat<TFormat>(this IFormatProvider provider)
     {
-        Guard.NotNull(provider, nameof(provider));
+        Guard.NotNull(provider);
         return (TFormat?)provider.GetFormat(typeof(TFormat));
     }
 

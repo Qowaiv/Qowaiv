@@ -481,7 +481,7 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// The percentage with the largest value.
     /// </returns>
     [Pure]
-    public static Percentage Max(params Percentage[] values) => Guard.NotNull(values, nameof(values)).Max();
+    public static Percentage Max(params Percentage[] values) => Guard.NotNull(values).Max();
 
     /// <summary>Returns the smaller of two percentages.</summary>
     /// <param name="val1">
@@ -504,7 +504,7 @@ public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFo
     /// The percentage with the smallest value.
     /// </returns>
     [Pure]
-    public static Percentage Min(params Percentage[] values) => Guard.NotNull(values, nameof(values)).Min();
+    public static Percentage Min(params Percentage[] values) => Guard.NotNull(values).Min();
 
     /// <summary>Rounds the percentage.</summary>
     /// <returns>

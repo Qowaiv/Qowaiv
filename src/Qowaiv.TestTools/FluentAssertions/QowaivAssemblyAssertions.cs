@@ -12,7 +12,7 @@ public static class QowaivAssemblyAssertions
     [CustomAssertion]
     public static AndConstraint<AssemblyAssertions> HavePublicKey(this AssemblyAssertions assertions, string publicKey, string because = "", params object[] becauseArgs)
     {
-        Guard.NotNull(assertions, nameof(assertions));
+        Guard.NotNull(assertions);
 
         var bytes = assertions.Subject.GetName().GetPublicKey() ?? Array.Empty<byte>();
         var assemblyKey = BitConverter.ToString(bytes).Replace("-", string.Empty);

@@ -19,7 +19,7 @@ public sealed class OpenApiDataTypeAttribute : Attribute
     {
         Description = Guard.NotNullOrEmpty(description, nameof(description));
         Type = Guard.NotNullOrEmpty(type, nameof(type));
-        Example = Guard.NotNull(example, nameof(example));
+        Example = Guard.NotNull(example);
         Format = format;
         Nullable = nullable;
         Pattern = pattern;

@@ -33,8 +33,8 @@ public class CultureInfoScope : IDisposable
     /// </param>
     public CultureInfoScope(CultureInfo culture, CultureInfo cultureUI) : this()
     {
-        Thread.CurrentThread.CurrentCulture = Guard.NotNull(culture, nameof(culture));
-        Thread.CurrentThread.CurrentUICulture = Guard.NotNull(cultureUI, nameof(cultureUI));
+        Thread.CurrentThread.CurrentCulture = Guard.NotNull(culture);
+        Thread.CurrentThread.CurrentUICulture = Guard.NotNull(cultureUI);
     }
 
     /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>

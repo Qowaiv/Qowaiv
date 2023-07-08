@@ -54,7 +54,7 @@ public sealed class IdJsonConverter : JsonConverterFactory
 
         public override void Write(Utf8JsonWriter writer, Id<TBehavior> value, JsonSerializerOptions options)
         {
-            Guard.NotNull(writer, nameof(writer));
+            Guard.NotNull(writer);
 
             object? obj = value.ToJson();
 

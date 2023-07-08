@@ -21,7 +21,7 @@ public sealed class SvoTypeConverter : TypeConverter
     /// </param>
     public SvoTypeConverter(Type type)
     {
-        Guard.NotNull(type, nameof(type));
+        Guard.NotNull(type);
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Svo<>) && type.GetGenericArguments().Length == 1)
         {

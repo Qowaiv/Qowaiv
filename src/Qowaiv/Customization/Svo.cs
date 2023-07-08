@@ -39,7 +39,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// <param name="context">The streaming context.</param>
     private Svo(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         m_Value = Parse(info.GetString("Value")).m_Value;
     }
 
@@ -47,7 +47,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info, nameof(info)).AddValue("Value", m_Value);
+        => Guard.NotNull(info).AddValue("Value", m_Value);
 
     /// <summary>The inner value of the Single Value Object.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -164,7 +164,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// <param name="reader">An XML reader.</param>
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
-        Guard.NotNull(reader, nameof(reader));
+        Guard.NotNull(reader);
         var xml = reader.ReadElementString();
         System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
     }
@@ -175,7 +175,7 @@ public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializab
     /// </remarks>
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)
-        => Guard.NotNull(writer, nameof(writer)).WriteString(ToXmlString());
+        => Guard.NotNull(writer).WriteString(ToXmlString());
 
     /// <summary>Gets an XML string representation of the Single Value Object.</summary>
     [Pure]

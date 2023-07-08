@@ -16,6 +16,6 @@ public static class QowaivHashAlgorithmExtensions
     [Pure]
     public static CryptographicSeed ComputeCryptographicSeed(this HashAlgorithm algorithm, byte[]? buffer)
         => buffer is { }
-        ? CryptographicSeed.Create(Guard.NotNull(algorithm, nameof(algorithm)).ComputeHash(buffer))
+        ? CryptographicSeed.Create(Guard.NotNull(algorithm).ComputeHash(buffer))
         : CryptographicSeed.Empty;
 }

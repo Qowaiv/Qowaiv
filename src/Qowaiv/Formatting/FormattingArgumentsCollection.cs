@@ -102,8 +102,8 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 
     public string Format(string format, params object[] args)
     {
-        Guard.NotNull(format, nameof(format));
-        Guard.NotNull(args, nameof(args));
+        Guard.NotNull(format);
+        Guard.NotNull(args);
 
         var sb = new StringBuilder();
         int pos = 0;

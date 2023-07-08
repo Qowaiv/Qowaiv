@@ -56,7 +56,7 @@ public static class StringFormatter
     {
         Guard.NotNull((object?)obj, nameof(obj));
         Guard.NotNullOrEmpty(format, nameof(format));
-        Guard.NotNull(tokens, nameof(tokens));
+        Guard.NotNull(tokens);
 
         var sb = new StringBuilder();
         var isEscape = false;

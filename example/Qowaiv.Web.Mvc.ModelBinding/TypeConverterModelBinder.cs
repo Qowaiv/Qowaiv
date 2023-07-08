@@ -37,7 +37,7 @@ public class TypeConverterModelBinder : DefaultModelBinder
     /// </param>
     public static void AddAssembly(Assembly assembly)
     {
-        Guard.NotNull(assembly, nameof(assembly));
+        Guard.NotNull(assembly);
         var tps = assembly.GetTypes()
             .Where(tp => tp.GetCustomAttribute<SingleValueObjectAttribute>() != null)
             .ToArray();
@@ -53,7 +53,7 @@ public class TypeConverterModelBinder : DefaultModelBinder
     /// </remarks>
     public static void AddTypes(params Type[] tps)
     {
-        Guard.NotNull(tps, nameof(tps));
+        Guard.NotNull(tps);
         foreach (var tp in tps)
         {
             AddType(tp);
@@ -106,7 +106,7 @@ public class TypeConverterModelBinder : DefaultModelBinder
     /// </remarks>
     public static void RegisterForAll(ModelBinderDictionary binders)
     {
-        Guard.NotNull(binders, nameof(binders));
+        Guard.NotNull(binders);
         foreach (var tp in TypeConverters.Keys)
         {
             binders.Add(tp, Instance);
@@ -128,7 +128,7 @@ public class TypeConverterModelBinder : DefaultModelBinder
     /// <returns>The bound model.</returns>
     public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
     {
-        Guard.NotNull(bindingContext, nameof(bindingContext));
+        Guard.NotNull(bindingContext);
 
         // Get the value result.
         var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);

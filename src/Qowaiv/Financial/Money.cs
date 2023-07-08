@@ -438,7 +438,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// <param name="context">The streaming context.</param>
     private Money(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         m_Value = info.GetDecimal("Value");
         m_Currency = Currency.Parse(info.GetString(nameof(Currency)), CultureInfo.InvariantCulture);
     }
@@ -448,7 +448,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue("Value", m_Value);
         info.AddValue(nameof(Currency), m_Currency.Name);
     }

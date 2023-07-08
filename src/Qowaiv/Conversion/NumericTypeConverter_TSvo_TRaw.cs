@@ -43,7 +43,7 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
     [Pure]
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
-        Guard.NotNull(destinationType, nameof(destinationType));
+        Guard.NotNull(destinationType);
 
         // If the value is null or default value.
         if (QowaivType.IsNullOrDefaultValue(value))

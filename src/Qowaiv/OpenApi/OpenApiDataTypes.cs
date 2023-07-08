@@ -8,7 +8,7 @@ public static class OpenApiDataTypes
     /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s specified in the assemblies.</summary>
     [Pure]
     public static IEnumerable<OpenApiDataType> FromAssemblies(params Assembly[] assemblies)
-        => FromTypes(Guard.NotNull(assemblies, nameof(assemblies))
+        => FromTypes(Guard.NotNull(assemblies)
         .SelectMany(assembly => assembly.GetExportedTypes()));
 
     /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the
@@ -24,7 +24,7 @@ public static class OpenApiDataTypes
     /// </summary>
     [Pure]
     public static IEnumerable<OpenApiDataType> FromTypes(IEnumerable<Type> types)
-        => Guard.NotNull(types, nameof(types))
+        => Guard.NotNull(types)
         .Select(OpenApiDataType.FromType)
         .Where(data => data is { })!;
 }

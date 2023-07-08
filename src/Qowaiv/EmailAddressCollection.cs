@@ -65,7 +65,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <summary>Keeps only the distinct set of email addresses in the collection.</summary>
     public void AddRange(IEnumerable<EmailAddress> emails)
     {
-        Guard.NotNull(emails, nameof(emails));
+        Guard.NotNull(emails);
         foreach (var email in emails)
         {
             Add(email);
@@ -171,7 +171,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     protected EmailAddressCollection(SerializationInfo info, StreamingContext context)
         : this()
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         AddRange(Parse(info.GetString("Value"), CultureInfo.InvariantCulture));
     }
 
@@ -186,7 +186,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </remarks>
     protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        Guard.NotNull(info, nameof(info));
+        Guard.NotNull(info);
         info.AddValue("Value", ToString());
     }
 
@@ -215,7 +215,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </remarks>
     protected virtual void ReadXml(XmlReader reader)
     {
-        Guard.NotNull(reader, nameof(reader));
+        Guard.NotNull(reader);
         var s = reader.ReadElementString();
         var val = Parse(s, CultureInfo.InvariantCulture);
         AddRange(val);
@@ -232,7 +232,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </remarks>
     protected virtual void WriteXml(XmlWriter writer)
     {
-        Guard.NotNull(writer, nameof(writer));
+        Guard.NotNull(writer);
         writer.WriteString(ToString(CultureInfo.InvariantCulture));
     }
 

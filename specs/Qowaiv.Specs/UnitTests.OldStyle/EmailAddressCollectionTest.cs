@@ -335,6 +335,6 @@ public class EmailAddressCollectionTest
 public class EmailAddressCollectionSerializeObject
 {
     public int Id { get; set; }
-    public EmailAddressCollection Obj { get; set; }
+    public EmailAddressCollection? Obj { get; set; }
     public DateTime Date { get; set; }
 }

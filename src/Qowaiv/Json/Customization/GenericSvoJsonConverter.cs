@@ -19,7 +19,7 @@ public sealed class GenericSvoJsonConverter : JsonConverterFactory
     [Pure]
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         => Behavior(typeToConvert) is { } behavior
-        ? (JsonConverter?)Activator.CreateInstance(typeof(GenericSvoConverter<>).MakeGenericType(behavior))
+        ? (JsonConverter?)Activator.CreateInstance(typeof(GenericSvoJsonConverter<>).MakeGenericType(behavior))
         : null;
 
     [Pure]
@@ -28,61 +28,35 @@ public sealed class GenericSvoJsonConverter : JsonConverterFactory
         ? type.GetGenericArguments().Single()
         : null;
 
-    /// <summary>A custom <see cref="JsonConverter{T}"/> for <see cref="Svo{TBehavior}"/>'s.</summary>
-    public sealed class GenericSvoConverter<TBehavior> : JsonConverter<Svo<TBehavior>>
-        where TBehavior : SvoBehavior, new()
+    [Pure]
+    internal static Svo<TBehavior> FromJson<TBehavior>(string? str, Type type) where TBehavior : SvoBehavior, new()
     {
-        /// <inheritdoc />
-        [Pure]
-        public override Svo<TBehavior> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        if (!parsers.TryGetValue(type, out var parser))
         {
-            try
-            {
-                return reader.TokenType switch
-                {
-                    JsonTokenType.String or
-                    JsonTokenType.True or
-                    JsonTokenType.False or
-                    JsonTokenType.Number => (Svo<TBehavior>)FromJson(reader.GetString(), typeToConvert),
-                    JsonTokenType.Null => default,
-                    _ => throw new JsonException($"Unexpected token parsing {typeToConvert.FullName}. {reader.TokenType} is not supported."),
-                };
-            }
-            catch (Exception x)
-            {
-                if (x is JsonException) throw;
-                else throw new JsonException(x.Message, x);
-            }
+            parser = type.GetMethod(nameof(FromJson), BindingFlags.Public | BindingFlags.Static)!;
+            parsers[type] = parser;
         }
-
-        /// <inheritdoc />
-        public override void Write(Utf8JsonWriter writer, Svo<TBehavior> value, JsonSerializerOptions options)
-        {
-            Guard.NotNull(writer);
-
-            if (value.ToJson() is { } json)
-            {
-                writer.WriteStringValue(json);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
-        }
-
-        [Pure]
-        private static object FromJson(string? str, Type type)
-        {
-            if (!parsers.TryGetValue(type, out var parser))
-            {
-                parser = type.GetMethod(nameof(FromJson), BindingFlags.Public | BindingFlags.Static)!;
-                parsers[type] = parser;
-            }
-            return parser.Invoke(null, new object?[] { str })!;
-        }
+        return (Svo<TBehavior>)parser.Invoke(null, new object?[] { str })!;
     }
 
     private static readonly Dictionary<Type, MethodInfo> parsers = new();
+
+    /// <summary>A custom <see cref="JsonConverter{T}"/> for <see cref="Svo{TBehavior}"/>'s.</summary>
+    [Obsolete("Use GenericSvoJson<TBehavior> instead.")]
+    public sealed class GenericSvoConverter<TBehavior> : JsonConverter<Svo<TBehavior>>
+        where TBehavior : SvoBehavior, new()
+    {
+        private readonly GenericSvoJsonConverter<TBehavior> converter = new();
+
+        /// <inheritdoc />
+        [Pure]
+        public override Svo<TBehavior> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            => converter.Read(ref reader, typeToConvert, options);
+
+        /// <inheritdoc />
+        public override void Write(Utf8JsonWriter writer, Svo<TBehavior> value, JsonSerializerOptions options)
+            => converter.Write(writer, value, options);
+    }
 }
 
 #endif

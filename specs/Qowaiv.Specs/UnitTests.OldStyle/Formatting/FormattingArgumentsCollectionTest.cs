@@ -210,7 +210,7 @@ public class FormattingArgumentsCollectionTest
     public void ToString_ObjectNull_IsNull()
     {
         var collection = new FormattingArgumentsCollection();
-        string act = collection.ToString((Object)null);
+        string act = collection.ToString((object)null);
         string exp = null;
 
         Assert.AreEqual(exp, act);
@@ -219,7 +219,7 @@ public class FormattingArgumentsCollectionTest
     public void ToString_TypeInt32_SystemInt32()
     {
         var collection = new FormattingArgumentsCollection();
-        string act = collection.ToString((Object)typeof(Int32));
+        string act = collection.ToString((object)typeof(int));
         string exp = "System.Int32";
 
         Assert.AreEqual(exp, act);
@@ -231,7 +231,7 @@ public class FormattingArgumentsCollectionTest
         {
             { typeof(int), "000" }
         };
-        string act = collection.ToString((Object)7);
+        string act = collection.ToString((object)7);
         string exp = "007";
 
         Assert.AreEqual(exp, act);
@@ -287,7 +287,7 @@ public class FormattingArgumentsCollectionTest
     {
         var collection = new FormattingArgumentsCollection
         {
-            { typeof(Int32), "Int32Format", new CultureInfo("nl-NL") }
+            { typeof(int), "Int32Format", new CultureInfo("nl-NL") }
         };
 
         Assert.AreEqual(1, collection.Count, "Count");
@@ -297,7 +297,7 @@ public class FormattingArgumentsCollectionTest
     public void Set_Int32Format_Contains1Item()
     {
         var collection = new FormattingArgumentsCollection();
-        collection.Set(typeof(Int32), "Int32Format");
+        collection.Set(typeof(int), "Int32Format");
 
         Assert.AreEqual(1, collection.Count, "Count");
     }
@@ -305,7 +305,7 @@ public class FormattingArgumentsCollectionTest
     public void Set_Int32CultureInfo_Contains1Item()
     {
         var collection = new FormattingArgumentsCollection();
-        collection.Set(typeof(Int32), new CultureInfo("nl-NL"));
+        collection.Set(typeof(int), new CultureInfo("nl-NL"));
 
         Assert.AreEqual(1, collection.Count, "Count");
     }
@@ -313,7 +313,7 @@ public class FormattingArgumentsCollectionTest
     public void Set_Int32FormatAndFormatProviderContains1Item()
     {
         var collection = new FormattingArgumentsCollection();
-        collection.Set(typeof(Int32), "Int32Format", new CultureInfo("nl-NL"));
+        collection.Set(typeof(int), "Int32Format", new CultureInfo("nl-NL"));
 
         Assert.AreEqual(1, collection.Count, "Count");
     }
@@ -321,8 +321,8 @@ public class FormattingArgumentsCollectionTest
     public void Set_SameTypeTwice_Contains1Item()
     {
         var collection = new FormattingArgumentsCollection();
-        collection.Set(typeof(Int32), "New");
-        collection.Set(typeof(Int32), "Update");
+        collection.Set(typeof(int), "New");
+        collection.Set(typeof(int), "Update");
 
         Assert.AreEqual(1, collection.Count, "Count");
     }
@@ -331,7 +331,7 @@ public class FormattingArgumentsCollectionTest
     public void Remove_Int32_Unsuccessful()
     {
         var collection = new FormattingArgumentsCollection();
-        var act = collection.Remove(typeof(Int32));
+        var act = collection.Remove(typeof(int));
         var exp = false;
 
         Assert.AreEqual(exp, act);
@@ -343,7 +343,7 @@ public class FormattingArgumentsCollectionTest
         {
             { typeof(int), "Int32Format" }
         };
-        var act = collection.Remove(typeof(Int32));
+        var act = collection.Remove(typeof(int));
         var exp = true;
 
         Assert.AreEqual(exp, act);
@@ -416,7 +416,7 @@ public class FormattingArgumentsCollectionTest
         {
             { typeof(int), "00" }
         };
-        var act = collection.Contains(typeof(Int32));
+        var act = collection.Contains(typeof(int));
         var exp = true;
         Assert.AreEqual(exp, act);
     }
@@ -424,7 +424,7 @@ public class FormattingArgumentsCollectionTest
     public void Contains_EmptyCollectionInt32_IsFalse()
     {
         var collection = new FormattingArgumentsCollection();
-        var act = collection.Contains(typeof(Int32));
+        var act = collection.Contains(typeof(int));
         var exp = false;
         Assert.AreEqual(exp, act);
     }

@@ -27,7 +27,7 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_ObjectNull_IsNull()
         {
-            string act = TestStruct.ToString((Object)null);
+            string act = TestStruct.ToString((object)null);
             string exp = null;
 
             Assert.AreEqual(exp, act);
@@ -35,7 +35,7 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_TypeInt32_SystemInt32()
         {
-            string act = TestStruct.ToString((Object)typeof(Int32));
+            string act = TestStruct.ToString((object)typeof(int));
             string exp = "System.Int32";
 
             Assert.AreEqual(exp, act);
@@ -43,7 +43,7 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void ToString_7_7Comma000()
         {
-            string act = TestStruct.ToString((Object)7);
+            string act = TestStruct.ToString((object)7);
             string exp = "7,000";
 
             Assert.AreEqual(exp, act);
@@ -53,7 +53,7 @@ namespace Qowaiv.UnitTests.Formatting
         {
             using (TestCultures.En_GB.Scoped())
             {
-                string act = new FormattingArguments("0.000").ToString((Object)7);
+                string act = new FormattingArguments("0.000").ToString((object)7);
                 string exp = "7.000";
 
                 Assert.AreEqual(exp, act);
@@ -211,7 +211,7 @@ namespace Qowaiv.UnitTests.Formatting
         [Test]
         public void Format_DefaultValue_StringNull()
         {
-            var exp = (String)null;
+            var exp = Nil.String;
             var act = FormattingArguments.None.Format;
             Assert.AreEqual(exp, act);
         }

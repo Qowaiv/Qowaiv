@@ -111,15 +111,16 @@ public class Created_from
     [Test]
     public void IO_Directory_info()
     {
-        using var dir = new TemporaryDirectory();
+        using var temp = new TemporaryDirectory();
+        DirectoryInfo dir = temp!;
 
         for (var i = 0; i < 10; i++)
         {
-            var file = dir.CreateFile($"text_{i}.md");
+            var file = temp.CreateFile($"text_{i}.md");
             using var writer = file.AppendText();
             writer.Write("Hello, world!");
         }
-        var size = ((DirectoryInfo)dir).GetStreamSize();
+        var size = dir.GetStreamSize();
         size.Should().Be(130.Bytes());
     }
 

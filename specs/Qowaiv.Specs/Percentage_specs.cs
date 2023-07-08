@@ -1194,7 +1194,7 @@ public class Is_Open_API_data_type
     [TestCase("-0.1%")]
     [TestCase("31%")]
     public void pattern_matches(string input) 
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage)).Matches(input).Should().BeTrue();
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage))!.Matches(input).Should().BeTrue();
 }
 
 public class Supports_binary_serialization

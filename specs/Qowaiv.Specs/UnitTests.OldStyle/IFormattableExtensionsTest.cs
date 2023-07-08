@@ -53,7 +53,7 @@ namespace Qowaiv.UnitTests
             using (TestCultures.Es_EC.Scoped())
             {
                 var collection = new FormattingArgumentsCollection();
-                collection.Add(typeof(Decimal), "0.000");
+                collection.Add(typeof(decimal), "0.000");
                 var act = (123.45m).ToString(collection);
                 var exp = "123,450";
 

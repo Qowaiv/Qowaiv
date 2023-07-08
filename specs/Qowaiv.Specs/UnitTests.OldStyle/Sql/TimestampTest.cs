@@ -105,7 +105,7 @@ public class TimestampTest
         var info = new SerializationInfo(typeof(Timestamp), new FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual((Int64)123456789, info.GetInt64("Value"));
+        Assert.AreEqual((long)123456789, info.GetInt64("Value"));
     }
 
     [Test]
@@ -493,7 +493,7 @@ public class TimestampTest
     public void Explicit_TimestampToInt64_AreEqual()
     {
         var exp = 123456789L;
-        var act = (Int64)TestStruct;
+        var act = (long)TestStruct;
 
         Assert.AreEqual(exp, act);
     }
@@ -510,7 +510,7 @@ public class TimestampTest
     public void Explicit_TimestampToUInt64_AreEqual()
     {
         var exp = 123456789UL;
-        var act = (UInt64)TestStruct;
+        var act = (ulong)TestStruct;
 
         Assert.AreEqual(exp, act);
     }

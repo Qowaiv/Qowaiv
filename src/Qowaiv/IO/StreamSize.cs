@@ -417,14 +417,14 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
     /// The format that describes the formatting.
     /// </param>
     [Pure]
-    public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
+    public string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(IFormatProvider provider) => ToString("0 byte", provider);
+    public string ToString(IFormatProvider? provider) => ToString("0 byte", provider);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
     /// <param name="format">

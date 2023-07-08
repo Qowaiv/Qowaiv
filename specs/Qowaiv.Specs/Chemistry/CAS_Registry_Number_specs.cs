@@ -447,7 +447,7 @@ public class Is_Open_API_data_type
     [TestCase("7732-18-5")]
     [TestCase("10028-14-5")]
     public void pattern_matches(string input)
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(CasRegistryNumber)).Matches(input).Should().BeTrue();
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(CasRegistryNumber))!.Matches(input).Should().BeTrue();
 }
 
 public class Supports_binary_serialization

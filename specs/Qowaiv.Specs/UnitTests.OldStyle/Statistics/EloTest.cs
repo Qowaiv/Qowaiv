@@ -17,12 +17,12 @@
         [Test]
         public void MinValue_None_DoubleMinValue()
         {
-            Assert.AreEqual((Elo)Double.MinValue, Elo.MinValue);
+            Assert.AreEqual((Elo)double.MinValue, Elo.MinValue);
         }
         [Test]
         public void MaxValue_None_DoubleMaxValue()
         {
-            Assert.AreEqual((Elo)Double.MaxValue, Elo.MaxValue);
+            Assert.AreEqual((Elo)double.MaxValue, Elo.MaxValue);
         }
 
         #endregion
@@ -453,7 +453,7 @@
         public void Explicit_EloToDouble_AreEqual()
         {
             var exp = 1600.1;
-            var act = (Double)Elo.Create(1600.1);
+            var act = (double)Elo.Create(1600.1);
 
             Assert.AreEqual(exp, act);
         }
@@ -470,7 +470,7 @@
         public void Explicit_EloToDecimal_AreEqual()
         {
             var exp = 1600.1m;
-            var act = (Decimal)Elo.Create(1600.1);
+            var act = (decimal)Elo.Create(1600.1);
 
             Assert.AreEqual(exp, act);
         }
@@ -488,7 +488,7 @@
         public void Explicit_EloToInt32_AreEqual()
         {
             var exp = 1600;
-            var act = (Int32)Elo.Create(1600);
+            var act = (int)Elo.Create(1600);
 
             Assert.AreEqual(exp, act);
         }

@@ -199,7 +199,7 @@ public class HouseNumberTest
     public void TryCreate_Int32MinValue_IsEmpty()
     {
         HouseNumber exp = HouseNumber.Empty;
-        Assert.IsFalse(HouseNumber.TryCreate(Int32.MinValue, out HouseNumber act));
+        Assert.IsFalse(HouseNumber.TryCreate(int.MinValue, out HouseNumber act));
         Assert.AreEqual(exp, act);
     }
 
@@ -207,7 +207,7 @@ public class HouseNumberTest
     public void TryCreate_Int32MinValue_AreEqual()
     {
         var exp = HouseNumber.Empty;
-        var act = HouseNumber.TryCreate(Int32.MinValue);
+        var act = HouseNumber.TryCreate(int.MinValue);
         Assert.AreEqual(exp, act);
     }
     [Test]
@@ -570,7 +570,7 @@ public class HouseNumberTest
     public void Explicit_HouseNumberToInt32_AreEqual()
     {
         var exp = 123456789;
-        var act = (Int32)TestStruct;
+        var act = (int)TestStruct;
 
         Assert.AreEqual(exp, act);
     }

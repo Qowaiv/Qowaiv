@@ -212,8 +212,7 @@ public class Can_be_created_sequential
     {
         using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
         {
-            AssertPattern(Uuid.NewSequential(),
-
+            Uuid.NewSequential().Should().HavePattern(
                 0, 0, 0, 0,
                 0, 0, null, 0x60,
                 null, null, null, null,
@@ -226,8 +225,7 @@ public class Can_be_created_sequential
     {
         using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
         {
-            AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
-
+            Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
                 null, null, null, null,
                 0, null, 0, 0,
@@ -240,8 +238,7 @@ public class Can_be_created_sequential
     {
         using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
-            AssertPattern(Uuid.NewSequential(),
-
+            Uuid.NewSequential().Should().HavePattern(
                 0xFF, 0xFF, 0xFF, 0xFF,
                 0xFF, 0xFF, null, 0x6F,
                 null, null, null, null,
@@ -254,8 +251,7 @@ public class Can_be_created_sequential
     {
         using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
-            AssertPattern(Uuid.NewSequential(UuidComparer.SqlServer),
-
+            Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
                 null, null, null, null,
                 0xFF, null, 0xFF, 0xFF,
@@ -288,50 +284,6 @@ public class Can_be_created_sequential
             }
         }
         CollectionAssert.IsOrdered(ids, comparer);
-    }
-
-    private static void AssertPattern(Uuid actual, params byte?[] pattern)
-    {
-        var act = new List<string>();
-        var exp = new List<string>();
-        var fail = false;
-
-        var bytes = actual.ToByteArray();
-
-        for (var i = 0; i < bytes.Length; i++)
-        {
-            var a = bytes[i].ToString("X2");
-
-            if (pattern[i].HasValue)
-            {
-                var e = pattern[i].Value.ToString("X2");
-
-                if (e == a)
-                {
-                    act.Add(a);
-                    exp.Add(e);
-                }
-                else
-                {
-                    act.Add('[' + a + ']');
-                    exp.Add('[' + e + ']');
-                    fail = true;
-                }
-            }
-            else
-            {
-                act.Add(a);
-                exp.Add("..");
-            }
-        }
-
-        if (fail)
-        {
-            Assert.Fail($@"Expected: [{(string.Join(", ", exp))}]
-Actual:   [{(string.Join(", ", act))}]");
-        }
-
-        Assert.AreEqual(UuidVersion.Sequential, actual.Version);
     }
 
     private static IEnumerable<DateTime> GetTimes()

@@ -20,6 +20,9 @@ namespace Qowaiv.Identifiers;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Identifiers.IdJsonConverter))]
 #endif
 public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
+#if NET7_0_OR_GREATER
+, IEqualityOperators<Id<TIdentifier>, Id<TIdentifier>, bool>
+#endif
     where TIdentifier : IIdentifierBehavior, new()
 {
     /// <summary>An singleton instance that deals with the identifier specific behavior.</summary>

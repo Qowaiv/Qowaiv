@@ -18,7 +18,11 @@ namespace Qowaiv.Customization;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Customization.GenericSvoJsonConverter))]
 #endif
-public readonly partial struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
+public readonly struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
+#if NET7_0_OR_GREATER
+, IEqualityOperators<Svo<TSvoBehavior>, Svo<TSvoBehavior>, bool>
+, IParsable<Svo<TSvoBehavior>>
+#endif
     where TSvoBehavior : SvoBehavior, new()
 {
     /// <summary>An singleton instance that deals with the identifier specific behavior.</summary>

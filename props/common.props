@@ -42,7 +42,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BackwardsCompatibleFeatures" Version="2.3.0" PrivateAssets="all" IncludeAssets="compile" />
+    <PackageReference Include="Polyfill" Version="1.*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">

@@ -5,9 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.4.2</Version>
+    <Version>6.4.3</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+v6.4.3
+- Analyzers should not be included in NuGet packages. #321 (fix)
 V6.4.2
 - Svo&lt;SvoBehavior&gt; and Id&lt;IdBehavior&gt; decorated with IEqualityOperators. #315
 v6.4.1

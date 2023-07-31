@@ -6,6 +6,7 @@
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>6.4.0</Version>
+    <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
 v6.4.0
 - Support .NET 7.0. #261

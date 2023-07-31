@@ -2,8 +2,9 @@
 <Project>
 
   <PropertyGroup>
-    <DebugType>full</DebugType>
+    <IsPublishable>false</IsPublishable>
     <NuGetAudit>true</NuGetAudit>
+    <OutputType>library</OutputType>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
   
@@ -49,6 +50,11 @@
     <PackageReference Include="AsyncFixer" Version="*" />
     <PackageReference Include="DotNetProjectFile.Analyzers" Version="*" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+  </ItemGroup>
+
+  <ItemGroup Label="Additional files">
+    <AdditionalFiles Include="*.csproj" Visible="false" />
+    <AdditionalFiles Include="../../props/common.props" Link="Properties/common.props" />
   </ItemGroup>
 
 </Project>

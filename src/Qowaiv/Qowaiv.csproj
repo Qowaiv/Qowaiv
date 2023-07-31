@@ -6,6 +6,7 @@
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>6.4.2</Version>
+    <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 V6.4.2
 - Svo&lt;SvoBehavior&gt; and Id&lt;IdBehavior&gt; decorated with IEqualityOperators. #315

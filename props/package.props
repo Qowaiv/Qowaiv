@@ -3,17 +3,21 @@
 
   <Import Project="common.props" />
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(CompileConfig)' == 'RELEASE'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package info">
+    <IsPackable>true</IsPackable>
     <PackageIcon>package-icon.png</PackageIcon>
-    <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/Qowaiv/Qowaiv/blob/master/design/package-icon.png</PackageIconUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <Nullable>enable</Nullable>
-    <!-- We ship package version for obsolete versions too -->
-    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Label="Debug Symbols">
@@ -24,6 +28,10 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>    
   </PropertyGroup>
 
+  <ItemGroup Label="Package files">
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
   <PropertyGroup Label="Signing">
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
@@ -33,6 +41,10 @@
   <ItemGroup Label="Analyzers">
     <PackageReference Include="Qowaiv.Analyzers.CSharp" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="StyleCop.Analyzers" Version="*-*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+  </ItemGroup>
+
+  <ItemGroup Label="Additional files">
+    <AdditionalFiles Include="../../props/package.props" Link="Properties/package.props" />
   </ItemGroup>
   
   <ItemGroup>

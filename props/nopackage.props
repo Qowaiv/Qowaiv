@@ -10,4 +10,8 @@
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
+  <ItemGroup Label="Additional files">
+    <AdditionalFiles Include="../../props/nopackage.props" Link="Properties/nopackage.props" />
+  </ItemGroup>
+
 </Project>

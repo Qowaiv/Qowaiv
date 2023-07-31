@@ -6,6 +6,7 @@
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>6.4.2</Version>
+    <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 V6.4.2
 - Svo&lt;SvoBehavior&gt; and Id&lt;IdBehavior&gt; decorated with IEqualityOperators. #315
@@ -71,10 +72,10 @@ v5.1.2
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>

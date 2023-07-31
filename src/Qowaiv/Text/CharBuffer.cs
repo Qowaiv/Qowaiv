@@ -1,7 +1,5 @@
 ﻿#nullable enable
 
-using System.Runtime.CompilerServices;
-
 namespace Qowaiv.Text;
 
 internal sealed partial class CharBuffer : IEnumerable<char>

@@ -1,6 +1,4 @@
-﻿using NUnit.Framework.Interfaces;
-
-namespace MonthSpan_specs;
+﻿namespace MonthSpan_specs;
 
 public class Is_equal_by_value
 {

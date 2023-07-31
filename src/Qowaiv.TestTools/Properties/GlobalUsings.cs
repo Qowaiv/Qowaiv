@@ -1,5 +1,4 @@
 ﻿global using Qowaiv;
-global using Qowaiv.Diagnostics;
 global using Qowaiv.Diagnostics.Contracts;
 global using System;
 global using System.Collections;

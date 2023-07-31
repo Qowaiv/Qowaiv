@@ -221,10 +221,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                         }
                     }
 
-                    if (fmt == null)
-                    {
-                        fmt = new StringBuilder();
-                    }
+                    fmt ??= new StringBuilder();
                     fmt.Append(ch);
                 }
             }
@@ -267,7 +264,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 }
             }
 
-            if (s == null) s = string.Empty;
+            s ??= string.Empty;
             int pad = width - s.Length;
             if (!leftJustify && pad > 0) sb.Append(' ', pad);
             sb.Append(s);

@@ -56,12 +56,9 @@ public static class JsonTester
         var parameterType = val?.GetType();
         var fromJson = typeof(T)
             .GetMethods(BindingFlags.Static | BindingFlags.Public)
-            .Find(m => FromJson<T>(m, parameterType));
+            .Find(m => FromJson<T>(m, parameterType))
+            ?? throw new InvalidOperationException($"Could not find {typeof(T).Name}.FromJson({parameterType?.Name ?? "null"}).");
 
-        if (fromJson is null)
-        {
-            throw new InvalidOperationException($"Could not find {typeof(T).Name}.FromJson({parameterType?.Name ?? "null"}).");
-        }
         try
         {
             return (T?)fromJson.Invoke(null, new[] { val });

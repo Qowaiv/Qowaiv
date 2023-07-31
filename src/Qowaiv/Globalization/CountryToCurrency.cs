@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Globalization;
 
-internal partial struct CountryToCurrency : IEquatable<CountryToCurrency>
+internal readonly partial struct CountryToCurrency : IEquatable<CountryToCurrency>
 {
     public CountryToCurrency(Country country, Currency currency, Date startdate)
     {

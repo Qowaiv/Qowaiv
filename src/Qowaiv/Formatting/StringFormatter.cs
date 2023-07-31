@@ -133,7 +133,7 @@ public static class StringFormatter
     /// The string to remove the diacritics from.
     /// </param>
     [Pure]
-    [return: NotNullIfNotNull("str")]
+    [return: NotNullIfNotNull(nameof(str))]
     public static string? ToNonDiacritic(string? str)
         => ToNonDiacritic(str, string.Empty);
 
@@ -145,7 +145,7 @@ public static class StringFormatter
     /// Diacritics at the ignore, will not be changed.
     /// </param>
     [Pure]
-    [return: NotNullIfNotNull("str")]
+    [return: NotNullIfNotNull(nameof(str))]
     public static string? ToNonDiacritic(string? str, string ignore)
      => string.IsNullOrEmpty(str)
         ? str

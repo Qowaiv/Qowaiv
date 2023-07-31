@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Qowaiv.Globalization;
 
-internal partial struct CountryToCurrency
+internal readonly partial struct CountryToCurrency
 {
     public static readonly ReadOnlyCollection<CountryToCurrency> All = new(new List<CountryToCurrency>
         {

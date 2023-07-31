@@ -17,7 +17,7 @@ namespace Qowaiv;
 /// [Test]
 /// public void TestSomething()
 /// {
-///     using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11))
+///     using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local))
 ///     {
 ///         // test code.
 ///     }

@@ -154,8 +154,8 @@ public class MonthSpanTest
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_MonthSpanSerializeObject_AreEqual()
     {
-        var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-        var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
+        var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
+        var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
@@ -165,8 +165,8 @@ public class MonthSpanTest
     [Test]
     public void XmlSerializeDeserialize_MonthSpanSerializeObject_AreEqual()
     {
-        var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-        var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
+        var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
+        var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
@@ -176,8 +176,8 @@ public class MonthSpanTest
     [Test]
     public void DataContractSerializeDeserialize_MonthSpanSerializeObject_AreEqual()
     {
-        var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
-        var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14), };
+        var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
+        var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.DataContract(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
@@ -188,8 +188,8 @@ public class MonthSpanTest
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
     {
-        var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
-        var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
+        var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
+        var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
@@ -199,8 +199,8 @@ public class MonthSpanTest
     [Test]
     public void XmlSerializeDeserialize_Default_AreEqual()
     {
-        var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
-        var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14), };
+        var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
+        var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
@@ -277,8 +277,8 @@ public class MonthSpanTest
     [Test]
     public void Add_2MonthsToDateTime_2MonthsLater()
     {
-        var added = new DateTime(1979, 12, 31) + MonthSpan.FromMonths(2);
-        Assert.AreEqual(new DateTime(1980, 02, 29), added);
+        var added = new DateTime(1979, 12, 31, 00, 00, 000, DateTimeKind.Local) + MonthSpan.FromMonths(2);
+        added.Should().Be(new DateTime(1980, 02, 29, 00, 00, 000, DateTimeKind.Local));
     }
 
     [Test]
@@ -291,8 +291,8 @@ public class MonthSpanTest
     [Test]
     public void Subtract_9MonthsFromDateTime_9MonthsEarlier()
     {
-        var added = new DateTime(2017, 06, 11) - MonthSpan.FromMonths(9);
-        Assert.AreEqual(new DateTime(2016, 09, 11), added);
+        var added = new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local) - MonthSpan.FromMonths(9);
+        added.Should().Be(new DateTime(2016, 09, 11, 00, 00, 000, DateTimeKind.Local));
     }
 
     [TestCase(0, "2020-04-30", "2020-04-01")]

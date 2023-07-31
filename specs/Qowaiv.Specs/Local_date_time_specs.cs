@@ -53,7 +53,7 @@ public class Can_be_adjusted_with
 
     [Test]
     public void Date_span_with_days_first()
-        => new DateTime(2017, 06, 11).Add(new DateSpan(2, 20), DateSpanSettings.DaysFirst).Should().Be(new LocalDateTime(2017, 09, 01));
+        => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).Add(new DateSpan(2, 20), DateSpanSettings.DaysFirst).Should().Be(new LocalDateTime(2017, 09, 01));
 
     [Test]
     public void Month_span()

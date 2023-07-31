@@ -83,13 +83,13 @@ public class FormattingArgumentsTest
         {
             Id = 17,
             Obj = default,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new FormattableArgumentsSerializeObject
         {
             Id = 17,
             Obj = default,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -103,13 +103,13 @@ public class FormattingArgumentsTest
         {
             Id = 17,
             Obj = FormattingArguments.None,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new FormattableArgumentsSerializeObject
         {
             Id = 17,
             Obj = FormattingArguments.None,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");

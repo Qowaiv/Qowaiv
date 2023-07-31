@@ -221,13 +221,13 @@ public class BusinessIdentifierCodeTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new BusinessIdentifierCodeSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -241,13 +241,13 @@ public class BusinessIdentifierCodeTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new BusinessIdentifierCodeSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -261,13 +261,13 @@ public class BusinessIdentifierCodeTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new BusinessIdentifierCodeSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -283,13 +283,13 @@ public class BusinessIdentifierCodeTest
         {
             Id = 17,
             Obj = BusinessIdentifierCode.Empty,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new BusinessIdentifierCodeSerializeObject
         {
             Id = 17,
             Obj = BusinessIdentifierCode.Empty,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -303,13 +303,13 @@ public class BusinessIdentifierCodeTest
         {
             Id = 17,
             Obj = BusinessIdentifierCode.Empty,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new BusinessIdentifierCodeSerializeObject
         {
             Id = 17,
             Obj = BusinessIdentifierCode.Empty,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");

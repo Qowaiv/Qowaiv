@@ -201,7 +201,7 @@ public class Can_be_created_sequential
     [Test]
     public void until_3_Dec_9276()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(9276, 12, 04)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(9276, 12, 04, 00, 00, 000, DateTimeKind.Utc)))
         {
             Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
         }

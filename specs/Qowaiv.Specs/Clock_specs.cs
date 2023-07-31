@@ -114,10 +114,10 @@ public class For_current_execution_context_and_scope
 
         async Task<int> Test(int year)
         {
-            using (Clock.SetTimeForCurrentContext(() => new DateTime(year, 06, 11, 16, 15, 00)))
+            using (Clock.SetTimeForCurrentContext(() => new DateTime(year, 06, 11, 16, 15, 00, 000, DateTimeKind.Local)))
             {
                 await Task.Delay(10);
-                Clock.UtcNow().Should().Be(new DateTime(year, 06, 11, 16, 15, 00));
+                Clock.UtcNow().Should().Be(new DateTime(year, 06, 11, 16, 15, 00, 000, DateTimeKind.Local));
                 return ExecutionContext.Capture()?.GetHashCode() ?? 0;
             }
         }

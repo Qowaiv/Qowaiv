@@ -25,6 +25,7 @@ public static class Svo
 
     /// <summary>2017-06-11</summary>
     public static readonly Date Date = new(2017, 06, 11);
+
 #if NET6_0_OR_GREATER
     /// <summary>2017-06-11</summary>
     public static readonly DateOnly DateOnly = new(2017, 06, 11);
@@ -33,7 +34,7 @@ public static class Svo
     public static readonly DateSpan DateSpan = new(10, 3, -5);
 
     /// <summary>2017-06-11 06:15:00U</summary>
-    public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00);
+    public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00, 000, DateTimeKind.Local);
     
     /// <summary>2017-06-11 06:15:00 +0:00</summary>
     public static readonly DateTimeOffset DateTimeOffset = new(2017, 06, 11, 06, 15, 00, TimeSpan.Zero);

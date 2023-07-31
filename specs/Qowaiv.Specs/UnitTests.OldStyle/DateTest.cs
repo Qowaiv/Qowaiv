@@ -97,7 +97,7 @@ public class DateTest
         var info = new SerializationInfo(typeof(Date), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual(new DateTime(1970, 02, 14), info.GetDateTime("Value"));
+        Assert.AreEqual(new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), info.GetDateTime("Value"));
     }
 
     [Test]
@@ -141,13 +141,13 @@ public class DateTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new DateSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -161,13 +161,13 @@ public class DateTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new DateSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -181,13 +181,13 @@ public class DateTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new DateSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -203,13 +203,13 @@ public class DateTest
         {
             Id = 17,
             Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new DateSerializeObject
         {
             Id = 17,
             Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -223,13 +223,13 @@ public class DateTest
         {
             Id = 17,
             Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new DateSerializeObject
         {
             Id = 17,
             Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -437,7 +437,7 @@ public class DateTest
     [Test]
     public void Explicit_DateTimeToDate_AreEqual()
     {
-        Date exp = (Date)new DateTime(1970, 02, 14);
+        Date exp = (Date)new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local);
         Date act = TestStruct;
 
         Assert.AreEqual(exp, act);
@@ -446,8 +446,8 @@ public class DateTest
     public void Implicit_DateToDateTime_AreEqual()
     {
         DateTime exp = TestStruct;
-        DateTime act = new(1970, 02, 14);
-
+        DateTime act = new(1970, 02, 14, 00, 00, 000, DateTimeKind.Local);
+        
         Assert.AreEqual(exp, act);
     }
 

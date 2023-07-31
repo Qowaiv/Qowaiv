@@ -60,13 +60,13 @@ public class EmailAddressCollectionTest
         {
             Id = 17,
             Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
             Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -80,13 +80,13 @@ public class EmailAddressCollectionTest
         {
             Id = 17,
             Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
             Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -100,13 +100,13 @@ public class EmailAddressCollectionTest
         {
             Id = 17,
             Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
             Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -122,13 +122,13 @@ public class EmailAddressCollectionTest
         {
             Id = 17,
             Obj = new EmailAddressCollection(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
             Obj = new EmailAddressCollection(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -142,13 +142,13 @@ public class EmailAddressCollectionTest
         {
             Id = 17,
             Obj = new EmailAddressCollection(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
             Obj = new EmailAddressCollection(),
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");

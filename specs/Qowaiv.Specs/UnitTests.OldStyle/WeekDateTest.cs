@@ -151,13 +151,13 @@ public class WeekDateTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new WeekDateSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -171,13 +171,13 @@ public class WeekDateTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new WeekDateSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -191,13 +191,13 @@ public class WeekDateTest
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new WeekDateSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -213,13 +213,13 @@ public class WeekDateTest
         {
             Id = 17,
             Obj = WeekDate.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new WeekDateSerializeObject
         {
             Id = 17,
             Obj = WeekDate.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -233,13 +233,13 @@ public class WeekDateTest
         {
             Id = 17,
             Obj = WeekDate.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new WeekDateSerializeObject
         {
             Id = 17,
             Obj = WeekDate.MinValue,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -504,14 +504,14 @@ public class WeekDateTest
     public void Explicit_Int32ToWeekDate_AreEqual()
     {
         var exp = TestStruct;
-        var act = (WeekDate)new DateTime(1997, 04, 05);
+        var act = (WeekDate)new DateTime(1997, 04, 05, 00, 00, 000, DateTimeKind.Local);
 
         Assert.AreEqual(exp, act);
     }
     [Test]
     public void Explicit_WeekDateToInt32_AreEqual()
     {
-        DateTime exp = new(1997, 04, 05);
+        DateTime exp = new(1997, 04, 05, 00, 00, 000, DateTimeKind.Local);
         DateTime act = TestStruct;
 
         Assert.AreEqual(exp, act);

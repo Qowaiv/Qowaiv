@@ -152,13 +152,13 @@
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -172,13 +172,13 @@
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Xml(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -192,13 +192,13 @@
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = EloTest.TestStruct,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.DataContract(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");
@@ -214,13 +214,13 @@
             {
                 Id = 17,
                 Obj = Elo.Zero,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
                 Obj = Elo.Zero,
-                Date = new DateTime(1970, 02, 14),
+                Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp.Id, act.Id, "Id");

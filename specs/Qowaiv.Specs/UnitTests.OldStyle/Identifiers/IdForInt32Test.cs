@@ -194,7 +194,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -202,7 +202,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -219,7 +219,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -227,7 +227,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -244,7 +244,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -252,7 +252,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -270,7 +270,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = default,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -278,7 +278,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = default,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -295,7 +295,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = default,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;
@@ -303,7 +303,7 @@ public class IdForInt32Test
         {
             Id = 17,
             Obj = default,
-            Date = new DateTime(1970, 02, 14),
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         }
 
         ;

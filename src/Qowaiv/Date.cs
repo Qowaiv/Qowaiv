@@ -45,7 +45,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// <exception cref="ArgumentOutOfRangeException">
     /// ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
     /// </exception>
-    public Date(long ticks) : this(new DateTime(ticks)) { }
+    public Date(long ticks) : this(new DateTime(ticks, DateTimeKind.Unspecified)) { }
 
     /// <summary>Initializes a new instance of the <see cref="Date"/> struct to the specified year, month, and day.</summary>
     /// <param name="year">
@@ -65,7 +65,7 @@ public readonly partial struct Date : ISerializable, IXmlSerializable, IFormatta
     /// The specified parameters evaluate to less than <see cref="MinValue"/> or
     /// more than <see cref="MaxValue"/>.
     /// </exception>
-    public Date(int year, int month, int day) : this(new DateTime(year, month, day)) { }
+    public Date(int year, int month, int day) : this(new DateTime(year, month, day, 00, 00, 000, DateTimeKind.Unspecified)) { }
 
     /// <summary>Initializes a new instance of the <see cref="Date"/> struct based on a <see cref="DateTime"/>.</summary>
     /// <param name="dt">

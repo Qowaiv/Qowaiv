@@ -90,7 +90,7 @@ public class Supports_type_conversion
 
     [Test]
     public void from_DateTime()
-        => Converting.From(new DateTime(2017, 06, 11)).To<WeekDate>().Should().Be(Svo.WeekDate);
+        => Converting.From(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local)).To<WeekDate>().Should().Be(Svo.WeekDate);
 
     [Test]
     public void from_DateTimeOffset()
@@ -106,7 +106,7 @@ public class Supports_type_conversion
 
     [Test]
     public void to_DateTime()
-        => Converting.To<DateTime>().From(Svo.WeekDate).Should().Be(new DateTime(2017, 06, 11));
+        => Converting.To<DateTime>().From(Svo.WeekDate).Should().Be(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local));
 
     [Test]
     public void to_DateTimeOffset()

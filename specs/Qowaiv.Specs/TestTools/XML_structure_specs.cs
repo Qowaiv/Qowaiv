@@ -23,5 +23,5 @@ public class With_debugger_experience
 {
     [Test]
     public void via_ToString()
-        => XmlStructure.New(true).ToString().Should().Be("ID: 17, SVO: True, Date: 2017-06-11T00:00:00.0000000");
+        => XmlStructure.New(true).ToString().Should().Be("ID: 17, SVO: True, Date: 2017-06-11T00:00:00.0000000Z");
 }

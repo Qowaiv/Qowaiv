@@ -22,7 +22,7 @@ public sealed class XmlStructure<TSvo>
     public TSvo Svo { get; set; }
 
     /// <summary>Gets and sets a date (time) property.</summary>
-    public DateTime Date { get; set; } = new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local);
+    public DateTime Date { get; set; } = new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Utc);
 
     /// <inheritdoc />
     [Pure]

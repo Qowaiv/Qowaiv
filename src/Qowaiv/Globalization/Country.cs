@@ -108,7 +108,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// Returns a localized display name.
     /// </returns>
     [Pure]
-    public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
+    public string GetDisplayName(CultureInfo? culture) => GetResourceString("DisplayName", culture);
 
     /// <summary>Returns true if the country exists at the given date, otherwise false.</summary>
     /// <param name="measurement">
@@ -377,6 +377,6 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string postfix, IFormatProvider formatProvider)
+    private string GetResourceString(string postfix, IFormatProvider? formatProvider)
         => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
 }

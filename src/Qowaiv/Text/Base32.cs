@@ -113,7 +113,7 @@ public static class Base32
     [Pure]
     public static bool TryGetBytes(string? s, out byte[] bytes)
     {
-        if (string.IsNullOrEmpty(s))
+        if (s is not { Length: > 0 })
         {
             bytes = Array.Empty<byte>();
             return true;

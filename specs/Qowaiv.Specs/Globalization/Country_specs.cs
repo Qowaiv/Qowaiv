@@ -1,5 +1,44 @@
 ﻿namespace Globalization.Country_specs;
 
+public class Dipslay_name
+{
+    [Test]
+    public void string_empty_for_empty_country()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Country.Empty.DisplayName.Should().Be(string.Empty);
+        }
+    }
+
+    [Test]
+    public void Unknown_for_unknown_country()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Country.Unknown.DisplayName.Should().Be("Unknown");
+        }
+    }
+
+    [Test]
+    public void Culture_dependent()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.Country.DisplayName.Should().Be("Holy See");
+        }
+    }
+
+    [Test]
+    public void with_fallback_to_current_culture()
+    {
+        using (TestCultures.Es_EC.Scoped())
+        {
+            Svo.Country.GetDisplayName(null).Should().Be("Ciudad Del Vaticano");
+        }
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]
@@ -79,5 +118,23 @@ public class Supports_JSON_serialization
     {
         var exception = Assert.Catch(() => JsonTester.Read<Country>(json));
         Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
+
+public class Supports_binary_serialization
+{
+    [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
+    public void using_BinaryFormatter()
+    {
+        var round_tripped = SerializeDeserialize.Binary(Svo.Country);
+        Svo.Country.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void storing_value_in_SerializationInfo()
+    {
+        var info = Serialize.GetInfo(Svo.Country);
+        info.GetString("Value").Should().Be("VA");
     }
 }

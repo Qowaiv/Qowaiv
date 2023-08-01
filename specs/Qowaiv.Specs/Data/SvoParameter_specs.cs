@@ -63,7 +63,7 @@ namespace Data.SvoParameter_specs
     {
         private readonly string val;
         public StructWithoutRequiredCast(string str) => val = str;
-        public override bool Equals(object obj) => obj is StructWithoutRequiredCast svo && Equals(svo);
+        public override bool Equals(object? obj) => obj is StructWithoutRequiredCast svo && Equals(svo);
         public bool Equals(StructWithoutRequiredCast other) => other.val == val;
         public override int GetHashCode() => (val ?? "").GetHashCode();
         public override string ToString() => val;

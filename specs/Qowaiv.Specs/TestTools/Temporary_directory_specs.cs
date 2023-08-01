@@ -13,8 +13,8 @@ public  class Implicitly_converts
     [Test]
     public void To_directory_info_from_null()
     {
-        TemporaryDirectory dir = null;
-        DirectoryInfo casted = dir;
+        TemporaryDirectory? dir = null;
+        DirectoryInfo? casted = dir;
         casted.Should().BeNull();
     }
 }

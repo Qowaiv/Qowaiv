@@ -229,25 +229,6 @@ public class CountryTest
     #region (XML) (De)serialization tests
 
     [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(Country), new System.Runtime.Serialization.FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        Assert.AreEqual("VA", info.GetString("Value"));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = CountryTest.TestStruct;
-        var exp = CountryTest.TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
         var input = CountryTest.TestStruct;
@@ -688,47 +669,6 @@ public class CountryTest
     }
 
     [Test]
-    public void DisplayName_Empty_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "";
-            var act = Country.Empty.DisplayName;
-            Assert.AreEqual(exp, act);
-        }
-    }
-    [Test]
-    public void DisplayName_Unknown_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "Unknown";
-            var act = Country.Unknown.DisplayName;
-            Assert.AreEqual(exp, act);
-        }
-    }
-    [Test]
-    public void DisplayName_TestStruct_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "Holy See";
-            var act = TestStruct.DisplayName;
-            Assert.AreEqual(exp, act);
-        }
-    }
-    [Test]
-    public void GetDisplayName_TestStruct_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "Holy See";
-            var act = TestStruct.GetDisplayName(null);
-            Assert.AreEqual(exp, act);
-        }
-    }
-
-    [Test]
     public void IsoNumericCode_Empty_AreEqual()
     {
         var exp = 0;
@@ -876,30 +816,6 @@ public class CountryTest
         var exp = Currency.EUR;
 
         Assert.AreEqual(act, exp);
-    }
-
-    #endregion
-
-    #region Collection tests
-
-    [Test]
-    public void GetCurrent_1973_0()
-    {
-        var exp = 0;
-
-        // before the ISO standard was introduced.
-        var act = Country.GetExisting(new Date(1973, 12, 31)).ToList();
-
-        Assert.AreEqual(exp, act.Count);
-    }
-
-    [Test]
-    public void GetCurrent_None_250()
-    {
-        var exp = 250;
-        var act = Country.GetExisting().ToList();
-
-        Assert.AreEqual(exp, act.Count);
     }
 
     #endregion

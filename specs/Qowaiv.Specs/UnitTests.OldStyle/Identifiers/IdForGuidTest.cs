@@ -143,32 +143,6 @@ public class IdForGuidTest
     }
 
     [Test]
-    public void GetObjectData_NulSerializationInfo_Throws()
-    {
-        ISerializable obj = TestStruct;
-        Assert.Catch<ArgumentNullException>(() => obj.GetObjectData(null, default));
-    }
-
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(Id<ForGuid>), new FormatterConverter());
-        obj.GetObjectData(info, default);
-        Assert.AreEqual(Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), info.GetValue("Value", typeof(Guid)));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
         var input = TestStruct;

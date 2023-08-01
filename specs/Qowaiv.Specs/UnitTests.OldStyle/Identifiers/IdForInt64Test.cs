@@ -140,7 +140,7 @@ public class IdForInt64Test
     public void GetObjectData_NulSerializationInfo_Throws()
     {
         ISerializable obj = TestStruct;
-        Assert.Catch<ArgumentNullException>(() => obj.GetObjectData(null, default));
+        Assert.Catch<ArgumentNullException>(() => obj.GetObjectData(null!, default));
     }
 
     [Test]

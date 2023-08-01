@@ -6,7 +6,7 @@
 
         public static IEnumerable<Type> AllSvos
             => AppDomain.CurrentDomain.GetAssemblies()
-            .Where(assembly => assembly.FullName.Contains("Qowaiv"))
+            .Where(assembly => assembly.FullName!.Contains("Qowaiv"))
             .SelectMany(assembly => assembly.GetExportedTypes())
             .Where(type 
                 => type.GetCustomAttributes<SingleValueObjectAttribute>().Any() 

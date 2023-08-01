@@ -164,7 +164,7 @@ public class CountryTest
     public void Create_RegionInfoNull_Empty()
     {
         var exp = Country.Empty;
-        var act = Country.Create((RegionInfo)null);
+        var act = Country.Create((RegionInfo?)null);
         Assert.AreEqual(exp, act);
     }
 
@@ -172,7 +172,7 @@ public class CountryTest
     public void Create_CultureInfoNull_Empty()
     {
         var exp = Country.Empty;
-        var act = Country.Create((CultureInfo)null);
+        var act = Country.Create((CultureInfo?)null);
         Assert.AreEqual(exp, act);
     }
 
@@ -521,7 +521,7 @@ public class CountryTest
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(CountryTest.TestStruct.Equals(null));
+        Assert.IsFalse(CountryTest.TestStruct.Equals(Nil.Object));
     }
 
     [Test]

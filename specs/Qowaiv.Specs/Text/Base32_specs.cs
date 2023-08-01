@@ -4,16 +4,12 @@ public class ToString
 {
     [Test]
     public void Null_StringEmpty()
-    {
-        Assert.AreEqual(string.Empty, Base32.ToString(null));
-    }
+        => Base32.ToString(null).Should().Be(string.Empty);
 
     [Test]
     public void EmptyArray_StringEmpty()
-    {
-        Assert.AreEqual(string.Empty, Array.Empty<byte>());
-    }
-
+        => Base32.ToString(Array.Empty<byte>()).Should().Be(string.Empty);
+    
     [TestCase("BQ", 12)]
     [TestCase("BQRA", 12, 34)]
     [TestCase("QOWAI", 131, 172, 4)]
@@ -27,20 +23,17 @@ public class ToString
     [TestCase("BQRDQTS2N55YNEM4U4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167)]
     [TestCase("BQRDQTS2N55YNEM4U6ZA", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167, 178)]
     [TestCase("THEQUICKBROWNFOXJUMBSOVERTHELAZYDOG2345674", 153, 201, 010, 032, 074, 012, 093, 102, 149, 215, 077, 024, 025, 058, 164, 140, 206, 069, 131, 056, 027, 141, 173, 243, 190, 255)]
-    public void bytes(string expected, params int[] data)
+    public void bytes(string base32, params int[] data)
     {
         var bytes = data.Select(v => (byte)v).ToArray();
-
-        var actualString = Base32.ToString(bytes);
-        Assert.AreEqual(expected, actualString);
+        Base32.ToString(bytes).Should().Be(base32);
     }
 
     [Test]
     public void LowerCase()
     {
         var bytes = new byte[] { 153, 201, 010, 032, 074, 012, 093, 102, 149, 215, 077, 024, 025, 058, 164, 140, 206, 069, 131, 056, 027, 141, 173, 243, 190, 255 };
-        var str = Base32.ToString(bytes, true);
-        Assert.AreEqual("thequickbrownfoxjumbsoverthelazydog2345674", str);
+        Base32.ToString(bytes, true).Should().Be("thequickbrownfoxjumbsoverthelazydog2345674");
     }
 }
 

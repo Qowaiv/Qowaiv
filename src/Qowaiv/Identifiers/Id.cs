@@ -310,9 +310,9 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// The <see cref="byte"/> array that represents the underlying value.
     /// </param>
     [Pure]
-    public static Id<TIdentifier> FromBytes(byte[] bytes)
+    public static Id<TIdentifier> FromBytes(byte[]? bytes)
     {
-        return bytes is null || bytes.Length == 0
+        return bytes is not { Length: > 0 }
             ? Empty
             : new Id<TIdentifier>(behavior.FromBytes(bytes));
     }
@@ -325,7 +325,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// if the identifier could not be created from the <see cref="object"/>.
     /// </exception>
     [Pure]
-    public static Id<TIdentifier> Create(object obj)
+    public static Id<TIdentifier> Create(object? obj)
         => TryCreate(obj, out var id)
         ? id
         : throw Exceptions.InvalidCast(obj?.GetType(), typeof(Id<TIdentifier>));
@@ -340,7 +340,7 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <returns>
     /// True if the identifier could be created.
     /// </returns>
-    public static bool TryCreate(object obj, out Id<TIdentifier> id)
+    public static bool TryCreate(object? obj, out Id<TIdentifier> id)
     {
         id = default;
 

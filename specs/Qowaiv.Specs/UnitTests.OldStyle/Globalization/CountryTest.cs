@@ -690,68 +690,6 @@ public class CountryTest
         Assert.AreEqual(exp, act);
     }
 
-    [Test]
-    public void StartDate_Empty_AreEqual()
-    {
-        var exp = Date.MinValue;
-        var act = Country.Empty.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void StartDate_Unknown_AreEqual()
-    {
-        var exp = Date.MinValue;
-        var act = Country.Unknown.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void StartDate_TestStruct_AreEqual()
-    {
-        var exp = new Date(1974, 01, 01);
-        var act = TestStruct.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void StartDate_CZ_AreEqual()
-    {
-        var exp = new Date(1993, 01, 01);
-        var act = Country.CZ.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void EndDate_Empty_AreEqual()
-    {
-        Country.Empty.EndDate.Should().BeNull();
-    }
-
-    [Test]
-    public void EndDate_Unknown_AreEqual()
-    {
-        Country.Unknown.EndDate.Should().BeNull();
-    }
-
-    [Test]
-    public void EndDate_TestStruct_AreEqual()
-    {
-        TestStruct.EndDate.Should().BeNull();
-    }
-
-    [Test]
-    public void EndDate_CZ_AreEqual()
-    {
-        DateTime? exp = null;
-        var act = Country.CZ.EndDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void EndDate_CSHH_AreEqual()
-    {
-        var exp = new Date(1992, 12, 31);
-        var act = Country.CSHH.EndDate;
-        Assert.AreEqual(exp, act);
-    }
-
     #endregion
 
     #region Methods

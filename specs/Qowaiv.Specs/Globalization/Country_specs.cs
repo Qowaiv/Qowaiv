@@ -1,6 +1,6 @@
 ﻿namespace Globalization.Country_specs;
 
-public class Dipslay_name
+public class Dispslay_name
 {
     [Test]
     public void string_empty_for_empty_country()
@@ -37,6 +37,36 @@ public class Dipslay_name
             Svo.Country.GetDisplayName(null).Should().Be("Ciudad Del Vaticano");
         }
     }
+}
+
+public class Start_date
+{
+    [Test]
+    public void min_value_for_empty() => Country.Empty.StartDate.Should().Be(Date.MinValue);
+
+    [Test]
+    public void min_value_for_unknown() => Country.Unknown.StartDate.Should().Be(Date.MinValue);
+
+    [Test]
+    public void set_for_active_from_start() => Svo.Country.StartDate.Should().Be(new Date(1974, 01, 01));
+
+    [Test]
+    public void set_for_counties_established_after_ISO() => Country.CZ.StartDate.Should().Be(new Date(1993, 01, 01));
+}
+
+public class End_date
+{
+    [Test]
+    public void null_for_empty() => Country.Empty.EndDate.Should().BeNull();
+
+    [Test]
+    public void null_for_unkown() => Country.Unknown.EndDate.Should().BeNull();
+
+    [Test]
+    public void null_for_active() => Svo.Country.EndDate.Should().BeNull();
+
+    [Test]
+    public void set_for_inactive() => Country.CSHH.EndDate.Should().Be(new Date(1992, 12, 31));
 }
 
 public class Supports_type_conversion

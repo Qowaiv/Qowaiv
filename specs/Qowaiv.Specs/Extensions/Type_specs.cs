@@ -44,7 +44,7 @@ public class CSharpString
     [Test]
     public void Supports_generic_arguments()
     {
-        var generic = typeof(GenericOf).GetMethod(nameof(GenericOf.Default)).ReturnType;
+        var generic = typeof(GenericOf).GetMethod(nameof(GenericOf.Default))!.ReturnType;
         generic.ToCSharpString().Should().Be("CSharpString.GenericOf.TModel");
     }
 

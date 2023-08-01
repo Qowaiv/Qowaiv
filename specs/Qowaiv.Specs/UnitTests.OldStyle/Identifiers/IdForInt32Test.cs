@@ -137,32 +137,6 @@ public class IdForInt32Test
     }
 
     [Test]
-    public void GetObjectData_NulSerializationInfo_Throws()
-    {
-        ISerializable obj = TestStruct;
-        Assert.Catch<ArgumentNullException>(() => obj.GetObjectData(null, default));
-    }
-
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(Id<ForInt32>), new FormatterConverter());
-        obj.GetObjectData(info, default);
-        Assert.AreEqual(123456789L, info.GetValue("Value", typeof(long)));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
         var input = TestStruct;

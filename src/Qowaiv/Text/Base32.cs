@@ -28,7 +28,7 @@ public static class Base32
     /// Uppercase by default.
     /// </remarks>
     [Pure]
-    public static string ToString(byte[] bytes) => ToString(bytes, false);
+    public static string ToString(byte[]? bytes) => ToString(bytes, false);
 
     /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
     /// <param name="bytes">
@@ -38,7 +38,7 @@ public static class Base32
     /// An indicator to specify lower case or upper case.
     /// </param>
     [Pure]
-    public static string ToString(byte[] bytes, bool lowerCase)
+    public static string ToString(byte[]? bytes, bool lowerCase)
     {
         if (bytes == null || bytes.Length == 0) return string.Empty;
         else
@@ -91,7 +91,7 @@ public static class Base32
     /// If the string is not a valid Base32 string.
     /// </exception>
     [Pure]
-    public static byte[] GetBytes(string s)
+    public static byte[] GetBytes(string? s)
     {
         if (TryGetBytes(s, out byte[] bytes))
         {
@@ -111,9 +111,9 @@ public static class Base32
     /// True if the string is a Base32 string, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryGetBytes(string s, out byte[] bytes)
+    public static bool TryGetBytes(string? s, out byte[] bytes)
     {
-        if (string.IsNullOrEmpty(s))
+        if (s is not { Length: > 0 })
         {
             bytes = Array.Empty<byte>();
             return true;

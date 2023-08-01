@@ -70,23 +70,6 @@ public class FractionTest
     }
 
     [Test]
-    public void GetObjectData_NulSerializationInfo_Throws()
-    {
-        ISerializable obj = TestStruct;
-        Assert.Catch<ArgumentNullException>(() => obj.GetObjectData(null, default));
-    }
-
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(Fraction), new FormatterConverter());
-        obj.GetObjectData(info, default);
-        Assert.AreEqual(-69, info.GetInt64("numerator"));
-        Assert.AreEqual(17, info.GetInt64("denominator"));
-    }
-
-    [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
     {

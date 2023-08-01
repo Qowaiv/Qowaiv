@@ -69,7 +69,7 @@ public class WildcardPatternTest
     [TestCase("ig*ks", "IGeeks", false, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
     [TestCase("Ig*ks", "ıGeeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
     [TestCase("ıg*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
-    public void IsMatch(string pattern, string input, bool isMatch, WildcardPatternOptions options = default, StringComparison comparsionType = default, string culture = null)
+    public void IsMatch(string pattern, string input, bool isMatch, WildcardPatternOptions options = default, StringComparison comparsionType = default, string? culture = null)
     {
         using (culture is null ? CultureInfoScope.NewInvariant() : new CultureInfoScope(culture))
         {

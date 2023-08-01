@@ -95,6 +95,24 @@ public class Supports_type_conversion
         => Converting.To<Uuid>().From(Svo.CustomGuid).Should().Be(Svo.Uuid);
 }
 
+public class Supports_binary_serialization
+{
+    [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
+    public void using_BinaryFormatter()
+    {
+        var round_tripped = SerializeDeserialize.Binary(Svo.CustomGuid);
+        Svo.CustomGuid.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void storing_value_in_SerializationInfo()
+    {
+        var info = Serialize.GetInfo(Svo.CustomGuid);
+        info.GetValue("Value", typeof(Guid)).Should().Be(Guid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420"));
+    }
+}
+
 public class Is_Open_API_data_type
 {
     [Test]

@@ -96,32 +96,6 @@ public class IdForStringTest
     }
 
     [Test]
-    public void GetObjectData_NulSerializationInfo_Throws()
-    {
-        ISerializable obj = TestStruct;
-        Assert.Catch<ArgumentNullException>(() => obj.GetObjectData(null, default));
-    }
-
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(Id<ForString>), new FormatterConverter());
-        obj.GetObjectData(info, default);
-        Assert.AreEqual("Qowaiv-ID", info.GetValue("Value", typeof(string)));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
         var input = TestStruct;

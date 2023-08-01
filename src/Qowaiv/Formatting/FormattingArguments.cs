@@ -47,6 +47,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// A formatted string representing the object.
     /// </returns>
     [Pure]
+    [return: NotNullIfNotNull(nameof(obj))]
     public string? ToString(IFormattable? obj)
         => obj?.ToString(Format, FormatProvider ?? CultureInfo.CurrentCulture);
 
@@ -61,6 +62,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// If the object does not implement IFormattable, the ToString() will be used.
     /// </remarks>
     [Pure]
+    [return: NotNullIfNotNull(nameof(obj))]
     public string? ToString(object? obj)
         => obj is IFormattable formattable
         ? ToString(formattable)

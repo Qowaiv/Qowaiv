@@ -60,7 +60,8 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// If the object does not implement IFormattable, the ToString() will be used.
     /// </remarks>
     [Pure]
-    public string? ToString(object obj)
+    [return: NotNullIfNotNull(nameof(obj))]
+    public string? ToString(object? obj)
         => obj is IFormattable formattable
         ? ToString(formattable)
         : obj?.ToString();

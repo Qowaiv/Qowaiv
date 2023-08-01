@@ -116,7 +116,7 @@ public class FormattingArgumentsCollectionTest
     public void Format_ArrayWithNullItem_String()
     {
         var collection = new FormattingArgumentsCollection();
-        var args = new object[] { null };
+        var args = new object?[] { null };
         var act = collection.Format("Value: '{0}'", args);
         var exp = "Value: ''";
 
@@ -200,21 +200,17 @@ public class FormattingArgumentsCollectionTest
     [Test]
     public void ToString_IFormattableNull_IsNull()
     {
+        IFormattable? obj = null;
         var collection = new FormattingArgumentsCollection();
-        string act = collection.ToString((IFormattable)null);
-        string exp = null;
-
-        Assert.AreEqual(exp, act);
+        collection.ToString(obj)
+            .Should().BeNull();
     }
     [Test]
     public void ToString_ObjectNull_IsNull()
     {
         var collection = new FormattingArgumentsCollection();
-        string act = collection.ToString((object)null);
-        string exp = null;
-
-        Assert.AreEqual(exp, act);
-    }
+        collection.ToString((object?)null)
+            .Should().BeNull();    }
     [Test]
     public void ToString_TypeInt32_SystemInt32()
     {
@@ -231,10 +227,7 @@ public class FormattingArgumentsCollectionTest
         {
             { typeof(int), "000" }
         };
-        string act = collection.ToString((object)7);
-        string exp = "007";
-
-        Assert.AreEqual(exp, act);
+        collection.ToString((object)7).Should().Be("007");
     }
 
     #region Collection manipulation

@@ -9,7 +9,7 @@ public static class Base64
 {
     /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
     [Pure]
-    public static string ToString(byte[] bytes)
+    public static string ToString(byte[]? bytes)
         => bytes == null || bytes.Length == 0
         ? string.Empty
         : Convert.ToBase64String(bytes);
@@ -27,7 +27,7 @@ public static class Base64
     /// <remarks>
     /// If the conversion fails,  bytes is an empty byte array, not null.
     /// </remarks>
-    public static bool TryGetBytes(string s, out byte[] bytes)
+    public static bool TryGetBytes(string? s, out byte[] bytes)
     {
         if (string.IsNullOrEmpty(s))
         {

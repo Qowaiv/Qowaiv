@@ -108,7 +108,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// Returns a localized display name.
     /// </returns>
     [Pure]
-    public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
+    public string GetDisplayName(CultureInfo? culture) => GetResourceString("DisplayName", culture);
 
     /// <summary>Returns true if the country exists at the given date, otherwise false.</summary>
     /// <param name="measurement">
@@ -264,7 +264,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// Returns a country that represents the same region as region info.
     /// </returns>
     [Pure]
-    public static Country Create(RegionInfo region)
+    public static Country Create(RegionInfo? region)
     {
         if (region == null) { return default; }
         // In .NET, Serbia and Montenegro (CS) is still active.
@@ -285,7 +285,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// any, otherwise Empty.
     /// </returns>
     [Pure]
-    public static Country Create(CultureInfo culture)
+    public static Country Create(CultureInfo? culture)
     {
         if (culture == null || culture == CultureInfo.InvariantCulture || culture.IsNeutralCulture)
         {
@@ -377,6 +377,6 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     /// The format provider.
     /// </param>
     [Pure]
-    private string GetResourceString(string postfix, IFormatProvider formatProvider)
+    private string GetResourceString(string postfix, IFormatProvider? formatProvider)
         => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
 }

@@ -1,5 +1,74 @@
 ﻿namespace Globalization.Country_specs;
 
+public class Dispslay_name
+{
+    [Test]
+    public void string_empty_for_empty_country()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Country.Empty.DisplayName.Should().Be(string.Empty);
+        }
+    }
+
+    [Test]
+    public void Unknown_for_unknown_country()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Country.Unknown.DisplayName.Should().Be("Unknown");
+        }
+    }
+
+    [Test]
+    public void Culture_dependent()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.Country.DisplayName.Should().Be("Holy See");
+        }
+    }
+
+    [Test]
+    public void with_fallback_to_current_culture()
+    {
+        using (TestCultures.Es_EC.Scoped())
+        {
+            Svo.Country.GetDisplayName(null).Should().Be("Ciudad Del Vaticano");
+        }
+    }
+}
+
+public class Start_date
+{
+    [Test]
+    public void min_value_for_empty() => Country.Empty.StartDate.Should().Be(Date.MinValue);
+
+    [Test]
+    public void min_value_for_unknown() => Country.Unknown.StartDate.Should().Be(Date.MinValue);
+
+    [Test]
+    public void set_for_active_from_start() => Svo.Country.StartDate.Should().Be(new Date(1974, 01, 01));
+
+    [Test]
+    public void set_for_counties_established_after_ISO() => Country.CZ.StartDate.Should().Be(new Date(1993, 01, 01));
+}
+
+public class End_date
+{
+    [Test]
+    public void null_for_empty() => Country.Empty.EndDate.Should().BeNull();
+
+    [Test]
+    public void null_for_unkown() => Country.Unknown.EndDate.Should().BeNull();
+
+    [Test]
+    public void null_for_active() => Svo.Country.EndDate.Should().BeNull();
+
+    [Test]
+    public void set_for_inactive() => Country.CSHH.EndDate.Should().Be(new Date(1992, 12, 31));
+}
+
 public class Supports_type_conversion
 {
     [Test]
@@ -79,5 +148,23 @@ public class Supports_JSON_serialization
     {
         var exception = Assert.Catch(() => JsonTester.Read<Country>(json));
         Assert.IsInstanceOf(exceptionType, exception);
+    }
+}
+
+public class Supports_binary_serialization
+{
+    [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
+    public void using_BinaryFormatter()
+    {
+        var round_tripped = SerializeDeserialize.Binary(Svo.Country);
+        Svo.Country.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void storing_value_in_SerializationInfo()
+    {
+        var info = Serialize.GetInfo(Svo.Country);
+        info.GetString("Value").Should().Be("VA");
     }
 }

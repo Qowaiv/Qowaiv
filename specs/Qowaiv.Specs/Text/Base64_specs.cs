@@ -4,25 +4,19 @@ public class ToString
 {
     [Test]
     public void Null_StringEmpty()
-    {
-        Assert.AreEqual(string.Empty, Base64.ToString(null));
-    }
+        => Base64.ToString(null).Should().Be(string.Empty);
 
     [Test]
     public void EmptyArray_StringEmpty()
-    {
-        Assert.AreEqual(string.Empty, Array.Empty<byte>());
-    }
+        => Base64.ToString(Array.Empty<byte>()).Should().Be(string.Empty);
 
     [TestCase("Aao=", 1, 170)]
     [TestCase("Cxct", 11, 23, 45)]
     [TestCase("Qowaig==", 66, 140, 26, 138)]
-    public void bytes(string expected, params int[] data)
+    public void bytes(string base64, params int[] data)
     {
         var bytes = data.Select(v => (byte)v).ToArray();
-
-        var actualString = Base64.ToString(bytes);
-        Assert.AreEqual(expected, actualString);
+        Base64.ToString(bytes).Should().Be(base64);
     }
 }
 

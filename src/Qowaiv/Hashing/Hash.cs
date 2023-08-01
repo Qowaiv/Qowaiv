@@ -43,7 +43,7 @@ public readonly struct Hash : IEquatable<Hash>
     /// </param>
     /// <returns>The new hash.</returns>
     [Pure]
-    public Hash And<T>(T item)
+    public Hash And<T>(T? item)
         => Equals(default(T), item)
         ? this
         : new(Combine(Value, HashCode(item)));

@@ -85,6 +85,24 @@ public class Supports_type_conversion
         => Converting.To<int>().From(Svo.Int32Id).Should().Be(17);
 }
 
+public class Supports_binary_serialization
+{
+    [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
+    public void using_BinaryFormatter()
+    {
+        var round_tripped = SerializeDeserialize.Binary(Svo.Int32Id);
+        Svo.Int32Id.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void storing_value_in_SerializationInfo()
+    {
+        var info = Serialize.GetInfo(Svo.Int32Id);
+        info.GetInt32("Value").Should().Be(17);
+    }
+}
+
 public class Is_Open_API_data_type
 {
     [Test]

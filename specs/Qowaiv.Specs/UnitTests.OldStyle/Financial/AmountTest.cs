@@ -31,19 +31,11 @@ public class AmountTest
 
     /// <summary>TryParse null should be valid.</summary>
     [Test]
-    public void TryParse_Null_IsInvalid()
-    {
-        string str = null;
-        Assert.IsFalse(Amount.TryParse(str, out _));
-    }
+    public void TryParse_Null_IsInvalid() => Amount.TryParse(Nil.String, out _).Should().BeFalse();
 
     /// <summary>TryParse string.Empty should be valid.</summary>
     [Test]
-    public void TryParse_StringEmpty_IsInvalid()
-    {
-        string str = string.Empty;
-        Assert.IsFalse(Amount.TryParse(str, out _));
-    }
+    public void TryParse_StringEmpty_IsInvalid() => Amount.TryParse(string.Empty, out _).Should().BeFalse();
 
     /// <summary>TryParse with specified string value should be valid.</summary>
     [Test]

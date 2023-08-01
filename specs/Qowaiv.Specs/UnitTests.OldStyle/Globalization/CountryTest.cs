@@ -164,7 +164,7 @@ public class CountryTest
     public void Create_RegionInfoNull_Empty()
     {
         var exp = Country.Empty;
-        var act = Country.Create((RegionInfo)null);
+        var act = Country.Create((RegionInfo?)null);
         Assert.AreEqual(exp, act);
     }
 
@@ -172,7 +172,7 @@ public class CountryTest
     public void Create_CultureInfoNull_Empty()
     {
         var exp = Country.Empty;
-        var act = Country.Create((CultureInfo)null);
+        var act = Country.Create((CultureInfo?)null);
         Assert.AreEqual(exp, act);
     }
 
@@ -228,25 +228,6 @@ public class CountryTest
 
     #region (XML) (De)serialization tests
 
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(Country), new System.Runtime.Serialization.FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        Assert.AreEqual("VA", info.GetString("Value"));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = CountryTest.TestStruct;
-        var exp = CountryTest.TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
-    }
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -521,7 +502,7 @@ public class CountryTest
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(CountryTest.TestStruct.Equals(null));
+        Assert.IsFalse(CountryTest.TestStruct.Equals(Nil.Object));
     }
 
     [Test]
@@ -688,47 +669,6 @@ public class CountryTest
     }
 
     [Test]
-    public void DisplayName_Empty_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "";
-            var act = Country.Empty.DisplayName;
-            Assert.AreEqual(exp, act);
-        }
-    }
-    [Test]
-    public void DisplayName_Unknown_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "Unknown";
-            var act = Country.Unknown.DisplayName;
-            Assert.AreEqual(exp, act);
-        }
-    }
-    [Test]
-    public void DisplayName_TestStruct_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "Holy See";
-            var act = TestStruct.DisplayName;
-            Assert.AreEqual(exp, act);
-        }
-    }
-    [Test]
-    public void GetDisplayName_TestStruct_AreEqual()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            var exp = "Holy See";
-            var act = TestStruct.GetDisplayName(null);
-            Assert.AreEqual(exp, act);
-        }
-    }
-
-    [Test]
     public void IsoNumericCode_Empty_AreEqual()
     {
         var exp = 0;
@@ -747,68 +687,6 @@ public class CountryTest
     {
         var exp = 336;
         var act = TestStruct.IsoNumericCode;
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void StartDate_Empty_AreEqual()
-    {
-        var exp = Date.MinValue;
-        var act = Country.Empty.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void StartDate_Unknown_AreEqual()
-    {
-        var exp = Date.MinValue;
-        var act = Country.Unknown.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void StartDate_TestStruct_AreEqual()
-    {
-        var exp = new Date(1974, 01, 01);
-        var act = TestStruct.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void StartDate_CZ_AreEqual()
-    {
-        var exp = new Date(1993, 01, 01);
-        var act = Country.CZ.StartDate;
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void EndDate_Empty_AreEqual()
-    {
-        Country.Empty.EndDate.Should().BeNull();
-    }
-
-    [Test]
-    public void EndDate_Unknown_AreEqual()
-    {
-        Country.Unknown.EndDate.Should().BeNull();
-    }
-
-    [Test]
-    public void EndDate_TestStruct_AreEqual()
-    {
-        TestStruct.EndDate.Should().BeNull();
-    }
-
-    [Test]
-    public void EndDate_CZ_AreEqual()
-    {
-        DateTime? exp = null;
-        var act = Country.CZ.EndDate;
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void EndDate_CSHH_AreEqual()
-    {
-        var exp = new Date(1992, 12, 31);
-        var act = Country.CSHH.EndDate;
         Assert.AreEqual(exp, act);
     }
 
@@ -876,30 +754,6 @@ public class CountryTest
         var exp = Currency.EUR;
 
         Assert.AreEqual(act, exp);
-    }
-
-    #endregion
-
-    #region Collection tests
-
-    [Test]
-    public void GetCurrent_1973_0()
-    {
-        var exp = 0;
-
-        // before the ISO standard was introduced.
-        var act = Country.GetExisting(new Date(1973, 12, 31)).ToList();
-
-        Assert.AreEqual(exp, act.Count);
-    }
-
-    [Test]
-    public void GetCurrent_None_250()
-    {
-        var exp = 250;
-        var act = Country.GetExisting().ToList();
-
-        Assert.AreEqual(exp, act.Count);
     }
 
     #endregion

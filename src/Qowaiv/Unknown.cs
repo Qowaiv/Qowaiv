@@ -18,7 +18,7 @@ public static class Unknown
     /// The string value to test.
     /// </param>
     [Pure]
-    public static bool IsUnknown(string val) => IsUnknown(val, null);
+    public static bool IsUnknown(string? val) => IsUnknown(val, null);
 
     /// <summary>Returns true if the string represents unknown, otherwise false.</summary>
     /// <param name="val">
@@ -70,7 +70,7 @@ public static class Unknown
     /// The unknown value is expected to be static field or property of the type with the name "Unknown".
     /// </remarks>
     [Pure]
-    public static object? Value(Type type)
+    public static object? Value(Type? type)
     {
         if (type is not null)
         {

@@ -586,6 +586,19 @@ var p1 = 1500.Elo();
 var z = Elo.GetZScore(p0, p1); // 0.64 
 ```
 
+## Qowaiv sustainability types
+
+### (EU) Energy label
+The energy efficiency of the appliance is rated in terms of a set of energy
+efficiency classes from A++++ to G on the label, A being the most energy
+efficient, G the least efficient.
+
+``` C#
+var a_plusplus = EnergyLabel.A(2);
+var b = EnergyLabel.B;
+var parsed = EnergyLabel.Parse("A++")
+```
+
 ## Qowaiv web types
 
 ### Internet media type
@@ -687,233 +700,242 @@ SVO's. To make this as simple as possible, Qowaiv SVO's are decorated with the
 and if the data type is nullable, all when applicable.
 
 ``` json
-{
-  "Date": {
-    "description": "Full-date notation as defined by RFC 3339, section 5.6.",
-    "example": "2017-06-10",
-    "type": "string",
-    "format": "date",
-    "nullabe": false
-  },
-  "DateSpan": {
-    "description": "Date span, specified in years, months and days.",
-    "example": "1Y+10M+16D",
-    "type": "string",
-    "format": "date-span",
-    "pattern": "[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D",
-    "nullabe": false
-  },
-  "EmailAddress": {
-    "description": "Email notation as defined by RFC 5322.",
-    "example": "svo@qowaiv.org",
-    "type": "string",
-    "format": "email",
-    "nullabe": true
-  },
-  "EmailAddressCollection": {
-    "description": "Comma separated list of email addresses defined by RFC 5322.",
-    "example": "info@qowaiv.org,test@test.com",
-    "type": "string",
-    "format": "email-collection",
-    "nullabe": true
-  },
-  "HouseNumber": {
-    "description": "House number notation.",
-    "example": "13",
-    "type": "string",
-    "format": "house-number",
-    "nullabe": true
-  },
-  "LocalDateTime": {
-    "description": "Date-time notation as defined by RFC 3339, without time zone information.",
-    "example": "2017-06-10 15:00",
-    "type": "string",
-    "format": "local-date-time",
-    "nullabe": false
-  },
-  "Month": {
-    "description": "Month(-only) notation.",
-    "example": "Jun",
-    "type": "string",
-    "format": "month",
-    "nullabe": true,
-    "enum": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"]
-  },
-  "MonthSpan": {
-    "description": "Month span, specified in years and months.",
-    "example": "1Y+10M",
-    "type": "string",
-    "format": "month-span",
-    "pattern": "[+-]?[0-9]+Y[+-][0-9]+M",
-    "nullabe": false
-  },
-  "Percentage": {
-    "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.",
-    "example": "13.76%",
-    "type": "string",
-    "format": "percentage",
-    "pattern": "-?[0-9]+(\\.[0-9]+)?%",
-    "nullabe": false
-  },
-  "PostalCode": {
-    "description": "Postal code notation.",
-    "example": "2624DP",
-    "type": "string",
-    "format": "postal-code",
-    "nullabe": true
-  },
-  "Sex": {
-    "description": "Sex as specified by ISO/IEC 5218.",
-    "example": "female",
-    "type": "string",
-    "format": "sex",
-    "nullabe": true,
-    "enum": ["NotKnown", "Male", "Female", "NotApplicable"]
-  },
-  "Uuid": {
-    "description": "Universally unique identifier, Base64 encoded.",
-    "example": "lmZO_haEOTCwGsCcbIZFFg",
-    "type": "string",
-    "format": "uuid-base64",
-    "nullabe": true
-  },
-  "WeekDate": {
-    "description": "Full-date notation as defined by ISO 8601.",
-    "example": "1997-W14-6",
-    "type": "string",
-    "format": "date-weekbased",
-    "nullabe": false
-  },
-  "Year": {
-    "description": "Year(-only) notation.",
-    "example": 1983,
-    "type": "integer",
-    "format": "year",
-    "nullabe": true
-  },
-  "YesNo": {
-    "description": "Yes-No notation.",
-    "example": "yes",
-    "type": "string",
-    "format": "yes-no",
-    "nullabe": true,
-    "enum": ["yes", "no", "?"]
-  },
-  "Chemistry.CasRegistryNumber": {
-    "description": "CAS Registry Number",
-    "example": "7732-18-5",
-    "type": "string",
-    "format": "cas-nr",
-    "pattern": "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]"
-  },
-  "Financial.Amount": {
-    "description": "Decimal representation of a currency amount.",
-    "example": 15.95,
-    "type": "number",
-    "format": "amount",
-    "nullabe": false
-  },
-  "Financial.BusinessIdentifierCode": {
-    "description": "Business Identifier Code, as defined by ISO 9362.",
-    "example": "DEUTDEFF",
-    "type": "string",
-    "format": "bic",
-    "nullabe": true
-  },
-  "Financial.Currency": {
-    "description": "Currency notation as defined by ISO 4217.",
-    "example": "EUR",
-    "type": "string",
-    "format": "currency",
-    "nullabe": true
-  },
-  "Financial.InternationalBankAccountNumber": {
-    "description": "International Bank Account Number notation as defined by ISO 13616:2007.",
-    "example": "BE71096123456769.",
-    "type": "string",
-    "format": "iban",
-    "nullabe": true
-  },
-  "Financial.Money": {
-    "description": "Combined currency and amount notation as defined by ISO 4217.",
-    "example": "EUR12.47",
-    "type": "string",
-    "format": "money",
-    "pattern": "[A-Z]{3} -?[0-9]+(\\.[0-9]+)?",
-    "nullabe": false
-  },
-  "Globalization.Country": {
-    "description": "Country notation as defined by ISO 3166-1 alpha-2.",
-    "example": "NL",
-    "type": "string",
-    "format": "country",
-    "nullabe": true
-  },
-  "Identifiers.GuidBehavior": {
-    "description": "GUID based identifier",
-    "example": "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
-    "type": "string",
-    "format": "guid",
-    "nullabe": true
-  },
-  "Identifiers.Int32IdBehavior": {
-    "description": "Int32 based identifier",
-    "example": 17,
-    "type": "integer",
-    "format": "identifier",
-    "nullabe": true
-  },
-  "Identifiers.Int64IdBehavior": {
-    "description": "Int64 based identifier",
-    "example": 17,
-    "type": "integer",
-    "format": "identifier",
-    "nullabe": true
-  },
-  "Identifiers.StringIdBehavior": {
-    "description": "String based identifier",
-    "example": "Order-UK-2022-215",
-    "type": "string",
-    "format": "identifier",
-    "nullabe": true
-  },
-  "Identifiers.UuidBehavior": {
-    "description": "UUID based identifier",
-    "example": "lmZO_haEOTCwGsCcbIZFFg",
-    "type": "string",
-    "format": "uuid-base64",
-    "nullabe": true
-  },
-  "IO.StreamSize": {
-    "description": "Stream size notation (in byte).",
-    "example": 1024,
-    "type": "integer",
-    "format": "stream-size",
-    "nullabe": false
-  },
-  "Mathematics.Fraction": {
-    "description": "Faction",
-    "example": "13/42",
-    "type": "string",
-    "format": "faction",
-    "pattern": "-?[0-9]+(/[0-9]+)?",
-    "nullabe": false
-  },
-  "Statistics.Elo": {
-    "description": "Elo rating system notation.",
-    "example": 1600.0,
-    "type": "number",
-    "format": "elo",
-    "nullabe": false
-  },
-  "Web.InternetMediaType": {
-    "description": "Media type notation as defined by RFC 6838.",
-    "example": "text/html",
-    "type": "string",
-    "format": "internet-media-type",
-    "nullabe": true
-  }
-}
+    {
+      "Date": {
+        "description": "Full-date notation as defined by RFC 3339, section 5.6.",
+        "example": "2017-06-10",
+        "type": "string",
+        "format": "date",
+        "nullabe": false
+      },
+      "DateSpan": {
+        "description": "Date span, specified in years, months and days.",
+        "example": "1Y+10M+16D",
+        "type": "string",
+        "format": "date-span",
+        "pattern": "[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D",
+        "nullabe": false
+      },
+      "EmailAddress": {
+        "description": "Email notation as defined by RFC 5322.",
+        "example": "svo@qowaiv.org",
+        "type": "string",
+        "format": "email",
+        "nullabe": true
+      },
+      "EmailAddressCollection": {
+        "description": "Comma separated list of email addresses defined by RFC 5322.",
+        "example": "info@qowaiv.org,test@test.com",
+        "type": "string",
+        "format": "email-collection",
+        "nullabe": true
+      },
+      "HouseNumber": {
+        "description": "House number notation.",
+        "example": "13",
+        "type": "string",
+        "format": "house-number",
+        "nullabe": true
+      },
+      "LocalDateTime": {
+        "description": "Date-time notation as defined by RFC 3339, without time zone information.",
+        "example": "2017-06-10 15:00",
+        "type": "string",
+        "format": "local-date-time",
+        "nullabe": false
+      },
+      "Month": {
+        "description": "Month(-only) notation.",
+        "example": "Jun",
+        "type": "string",
+        "format": "month",
+        "nullabe": true,
+        "enum": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"]
+      },
+      "MonthSpan": {
+        "description": "Month span, specified in years and months.",
+        "example": "1Y+10M",
+        "type": "string",
+        "format": "month-span",
+        "pattern": "[+-]?[0-9]+Y[+-][0-9]+M",
+        "nullabe": false
+      },
+      "Percentage": {
+        "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.",
+        "example": "13.76%",
+        "type": "string",
+        "format": "percentage",
+        "pattern": "-?[0-9]+(\\.[0-9]+)?%",
+        "nullabe": false
+      },
+      "PostalCode": {
+        "description": "Postal code notation.",
+        "example": "2624DP",
+        "type": "string",
+        "format": "postal-code",
+        "nullabe": true
+      },
+      "Sex": {
+        "description": "Sex as specified by ISO/IEC 5218.",
+        "example": "female",
+        "type": "string",
+        "format": "sex",
+        "nullabe": true,
+        "enum": ["NotKnown", "Male", "Female", "NotApplicable"]
+      },
+      "Uuid": {
+        "description": "Universally unique identifier, Base64 encoded.",
+        "example": "lmZO_haEOTCwGsCcbIZFFg",
+        "type": "string",
+        "format": "uuid-base64",
+        "nullabe": true
+      },
+      "WeekDate": {
+        "description": "Full-date notation as defined by ISO 8601.",
+        "example": "1997-W14-6",
+        "type": "string",
+        "format": "date-weekbased",
+        "nullabe": false
+      },
+      "Year": {
+        "description": "Year(-only) notation.",
+        "example": 1983,
+        "type": "integer",
+        "format": "year",
+        "nullabe": true
+      },
+      "YesNo": {
+        "description": "Yes-No notation.",
+        "example": "yes",
+        "type": "string",
+        "format": "yes-no",
+        "nullabe": true,
+        "enum": ["yes", "no", "?"]
+      },
+      "Chemistry.CasRegistryNumber": {
+        "description": "CAS Registry Number",
+        "example": "7732-18-5",
+        "type": "string",
+        "format": "cas-nr",
+        "pattern": "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]",
+        "nullabe": true
+      },
+      "Financial.Amount": {
+        "description": "Decimal representation of a currency amount.",
+        "example": 15.95,
+        "type": "number",
+        "format": "amount",
+        "nullabe": false
+      },
+      "Financial.BusinessIdentifierCode": {
+        "description": "Business Identifier Code, as defined by ISO 9362.",
+        "example": "DEUTDEFF",
+        "type": "string",
+        "format": "bic",
+        "nullabe": true
+      },
+      "Financial.Currency": {
+        "description": "Currency notation as defined by ISO 4217.",
+        "example": "EUR",
+        "type": "string",
+        "format": "currency",
+        "nullabe": true
+      },
+      "Financial.InternationalBankAccountNumber": {
+        "description": "International Bank Account Number notation as defined by ISO 13616:2007.",
+        "example": "BE71096123456769.",
+        "type": "string",
+        "format": "iban",
+        "nullabe": true
+      },
+      "Financial.Money": {
+        "description": "Combined currency and amount notation as defined by ISO 4217.",
+        "example": "EUR12.47",
+        "type": "string",
+        "format": "money",
+        "pattern": "[A-Z]{3} -?[0-9]+(\\.[0-9]+)?",
+        "nullabe": false
+      },
+      "Globalization.Country": {
+        "description": "Country notation as defined by ISO 3166-1 alpha-2.",
+        "example": "NL",
+        "type": "string",
+        "format": "country",
+        "nullabe": true
+      },
+      "Identifiers.GuidBehavior": {
+        "description": "GUID based identifier",
+        "example": "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
+        "type": "string",
+        "format": "guid",
+        "nullabe": true
+      },
+      "Identifiers.Int32IdBehavior": {
+        "description": "Int32 based identifier",
+        "example": 17,
+        "type": "integer",
+        "format": "identifier",
+        "nullabe": true
+      },
+      "Identifiers.Int64IdBehavior": {
+        "description": "Int64 based identifier",
+        "example": 17,
+        "type": "integer",
+        "format": "identifier",
+        "nullabe": true
+      },
+      "Identifiers.StringIdBehavior": {
+        "description": "String based identifier",
+        "example": "Order-UK-2022-215",
+        "type": "string",
+        "format": "identifier",
+        "nullabe": true
+      },
+      "Identifiers.UuidBehavior": {
+        "description": "UUID based identifier",
+        "example": "lmZO_haEOTCwGsCcbIZFFg",
+        "type": "string",
+        "format": "uuid-base64",
+        "nullabe": true
+      },
+      "IO.StreamSize": {
+        "description": "Stream size notation (in byte).",
+        "example": 1024,
+        "type": "integer",
+        "format": "stream-size",
+        "nullabe": false
+      },
+      "Mathematics.Fraction": {
+        "description": "Faction",
+        "example": "13/42",
+        "type": "string",
+        "format": "faction",
+        "pattern": "-?[0-9]+(/[0-9]+)?",
+        "nullabe": false
+      },
+      "Statistics.Elo": {
+        "description": "Elo rating system notation.",
+        "example": 1600.0,
+        "type": "number",
+        "format": "elo",
+        "nullabe": false
+      },
+      "Sustainability.EnergyLabel": {
+        "description": "EU energy label",
+        "example": "A++",
+        "type": "string",
+        "format": "energy-label",
+        "pattern": "[A-H]|A\\+{1,4}",
+        "nullabe": true
+      },
+      "Web.InternetMediaType": {
+        "description": "Media type notation as defined by RFC 6838.",
+        "example": "text/html",
+        "type": "string",
+        "format": "internet-media-type",
+        "nullabe": true
+      }
+    }
 ```
   
 #### Open API using Swagger 

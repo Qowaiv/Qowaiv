@@ -3,14 +3,11 @@
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="ArgumentException_InvalidWildcardPattern" xml:space="preserve">
     <value>The wildcard pattern is invalid.</value>
@@ -23,6 +20,9 @@
   </data>
   <data name="ArgumentException_TimestampArrayShouldHaveSize8" xml:space="preserve">
     <value>The byte array should have size of 8.</value>
+  </data>
+  <data name="ArgumentOutOfRangeException_AddDateSpan" xml:space="preserve">
+    <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
   </data>
   <data name="ArgumentOutOfRange_DecimalRound" xml:space="preserve">
     <value>Decimals can only round to between -28 and 28 digits of precision.</value>
@@ -54,6 +54,9 @@
   <data name="FormatExceptionBusinessIdentifierCode" xml:space="preserve">
     <value>Not a valid BIC</value>
   </data>
+  <data name="FormatExceptionCasRegistryNumber" xml:space="preserve">
+    <value>Not a valid CAS Registry Number</value>
+  </data>
   <data name="FormatExceptionCountry" xml:space="preserve">
     <value>Not a valid country</value>
   </data>
@@ -77,6 +80,9 @@
   </data>
   <data name="FormatExceptionEmailAddressCollection" xml:space="preserve">
     <value>Not valid email addresses</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel" xml:space="preserve">
+    <value>Not a valid energy label</value>
   </data>
   <data name="FormatExceptionFinancialAmount" xml:space="preserve">
     <value>Not a valid amount</value>
@@ -105,6 +111,9 @@
   <data name="FormatExceptionMonth" xml:space="preserve">
     <value>Not a valid month</value>
   </data>
+  <data name="FormatExceptionMonthSpan" xml:space="preserve">
+    <value>Not a valid month span</value>
+  </data>
   <data name="FormatExceptionPercentage" xml:space="preserve">
     <value>Not a valid percentage</value>
   </data>
@@ -113,6 +122,9 @@
   </data>
   <data name="FormatExceptionQGuid" xml:space="preserve">
     <value>Not a valid GUID</value>
+  </data>
+  <data name="FormatExceptionSex" xml:space="preserve">
+    <value>Not a valid sex</value>
   </data>
   <data name="FormatExceptionStreamSize" xml:space="preserve">
     <value>Not a valid stream size</value>
@@ -129,11 +141,20 @@
   <data name="FormatExceptionYear" xml:space="preserve">
     <value>Not a valid year</value>
   </data>
+  <data name="FormatExceptionYearMonth" xml:space="preserve">
+    <value>Not a valid year-month.</value>
+  </data>
   <data name="FormatExceptionYesNo" xml:space="preserve">
     <value>Not a valid yes-no value</value>
   </data>
+  <data name="HashingNotSupported" xml:space="preserve">
+    <value>Hashing is not supported by {0}.</value>
+  </data>
   <data name="InvalidCastException_FromTo" xml:space="preserve">
     <value>Cast from {0} to {1} is not valid.</value>
+  </data>
+  <data name="InvalidOperation_SequentialUUID" xml:space="preserve">
+    <value>Sequential UUID can only be generated between 1970-01-01 and 9276-12-03.</value>
   </data>
   <data name="InvalidOperationException_NoElements" xml:space="preserve">
     <value>Sequence contains no elements.</value>
@@ -179,26 +200,5 @@
   </data>
   <data name="OverflowException_Fraction" xml:space="preserve">
     <value>Value was either too large or too small for a Fraction.</value>
-  </data>
-  <data name="FormatExceptionMonthSpan" xml:space="preserve">
-    <value>Not a valid month span</value>
-  </data>
-  <data name="InvalidOperation_SequentialUUID" xml:space="preserve">
-    <value>Sequential UUID can only be generated between 1970-01-01 and 9276-12-03.</value>
-  </data>
-  <data name="HashingNotSupported" xml:space="preserve">
-    <value>Hashing is not supported by {0}.</value>
-  </data>
-  <data name="FormatExceptionSex" xml:space="preserve">
-    <value>Not a valid sex</value>
-  </data>
-  <data name="FormatExceptionCasRegistryNumber" xml:space="preserve">
-    <value>Not a valid CAS Registry Number</value>
-  </data>
-  <data name="ArgumentOutOfRangeException_AddDateSpan" xml:space="preserve">
-    <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
-  </data>
-  <data name="FormatExceptionYearMonth" xml:space="preserve">
-    <value>Not a valid year-month.</value>
   </data>
 </root>

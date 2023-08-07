@@ -18,11 +18,7 @@ public sealed record OpenApiDataType
         object? example,
         string? format = null,
         bool nullable = false,
-#if NET7_0_OR_GREATER
         [StringSyntax(StringSyntaxAttribute.Regex)] string? pattern = null,
-#else
-        string? pattern = null,
-#endif
         IReadOnlyCollection<string>? @enum = null)
 #pragma warning restore S107 // Methods should not have too many parameters
     {
@@ -58,9 +54,7 @@ public sealed record OpenApiDataType
     public bool Nullable { get; }
 
     /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
-#if NET7_0_OR_GREATER
     [StringSyntax(StringSyntaxAttribute.Regex)]
-#endif
     public string? Pattern { get; }
 
     /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>

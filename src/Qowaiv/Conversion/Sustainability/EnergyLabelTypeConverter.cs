@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Conversion.Sustainability;
 
-/// <summary>Provides a conversion for a Sex.</summary>
+/// <summary>Provides a conversion for an energy label.</summary>
 [Inheritable]
 public class EnergyLabelTypeConverter : SvoTypeConverter<EnergyLabel>
 {

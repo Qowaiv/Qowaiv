@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Chemistry;
 using Qowaiv.Customization;
+using Qowaiv.Sustainability;
 
 namespace Qowaiv.TestTools;
 
@@ -41,8 +42,13 @@ public static class Svo
 
     /// <summary>info@qowaiv.org</summary>
     public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
+
+    /// <summary>1732.4</summary>
     public static readonly Elo Elo = 1732.4;
-    
+
+    /// <summary>A++</summary>
+    public static readonly EnergyLabel EnergyLabel = EnergyLabel.A(2);
+
     /// <summary>-69/17</summary>
     public static readonly Fraction Fraction = -69.DividedBy(17);
 

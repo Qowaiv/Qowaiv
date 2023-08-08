@@ -115,18 +115,22 @@ public static class StringFormatter
     /// </returns>
     public static bool TryApplyCustomFormatter(string? format, object obj, IFormatProvider? formatProvider, out string formatted)
     {
-        var customFormatter = formatProvider?.GetFormat<ICustomFormatter>();
-        if (customFormatter is null)
-        {
-            formatted = string.Empty;
-            return false;
-        }
-        else
+        if (formatProvider.TryGetCustomFormatter() is { } customFormatter)
         {
             formatted = customFormatter.Format(format, obj, formatProvider);
             return true;
         }
+        else
+        {
+            formatted = string.Empty;
+            return false;
+        }
     }
+
+    /// <summary>Returns the <see cref="ICustomFormatter"/> if available.</summary>
+    [Pure]
+    public static ICustomFormatter? TryGetCustomFormatter(this IFormatProvider? formatProvider)
+        => formatProvider?.GetFormat<ICustomFormatter>();
 
     /// <summary>Replaces diacritic characters by non diacritic ones.</summary>
     /// <param name="str">

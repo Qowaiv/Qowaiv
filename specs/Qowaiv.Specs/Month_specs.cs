@@ -376,10 +376,10 @@ public class Is_comparable
     [TestCase("February", "?")]
     public void by_operators_for_empty_or_unknown_always_false(Month l, Month r)
     {
-        Assert.IsFalse(l <= r);
-        Assert.IsFalse(l < r);
-        Assert.IsFalse(l > r);
-        Assert.IsFalse(l >= r);
+        (l < r).Should().BeFalse();
+        (l <= r).Should().BeFalse();
+        (l > r).Should().BeFalse();
+        (l >= r).Should().BeFalse();
     }
 }
 

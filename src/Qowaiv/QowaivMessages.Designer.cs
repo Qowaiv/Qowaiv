@@ -214,7 +214,7 @@ namespace Qowaiv {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No a valid cryptographic seed.
+        ///   Looks up a localized string similar to Not a valid cryptographic seed.
         /// </summary>
         public static string FormatExceptionCryptographicSeed {
             get {
@@ -273,6 +273,15 @@ namespace Qowaiv {
         public static string FormatExceptionEmailAddressCollection {
             get {
                 return ResourceManager.GetString("FormatExceptionEmailAddressCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid energy label.
+        /// </summary>
+        public static string FormatExceptionEnergyLabel {
+            get {
+                return ResourceManager.GetString("FormatExceptionEnergyLabel", resourceCulture);
             }
         }
         
@@ -444,6 +453,15 @@ namespace Qowaiv {
         public static string FormatExceptionYear {
             get {
                 return ResourceManager.GetString("FormatExceptionYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid year-month..
+        /// </summary>
+        public static string FormatExceptionYearMonth {
+            get {
+                return ResourceManager.GetString("FormatExceptionYearMonth", resourceCulture);
             }
         }
         

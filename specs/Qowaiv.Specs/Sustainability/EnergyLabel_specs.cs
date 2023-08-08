@@ -334,11 +334,11 @@ public class Is_comparable
         (left >= right).Should().BeTrue();
     }
 
-    [TestCase("", "A++")]
     [TestCase("?", "A++")]
-    [TestCase("A++", "")]
+    [TestCase("?", "")]
     [TestCase("A++", "?")]
-    public void by_operators_for_empty_or_unknown_always_false(EnergyLabel l, EnergyLabel r)
+    [TestCase("", "?")]
+    public void by_operators_unknown_always_false(EnergyLabel l, EnergyLabel r)
     {
         (l < r).Should().BeFalse();
         (l <= r).Should().BeFalse();

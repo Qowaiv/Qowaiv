@@ -24,17 +24,24 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]
 #endif
-public readonly partial struct EnergyLabel : ISerializable, IXmlSerializable, IFormattable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>
+public readonly partial struct EnergyLabel : ISerializable, IXmlSerializable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>
+#if NET6_0_OR_GREATER
+    , ISpanFormattable
+#else
+    , IFormattable
+#endif
 {
     /// <summary>Represents an empty/not set EU energy label.</summary>
     public static readonly EnergyLabel Empty;
+
+    private const int MaxPlusses = 4;
 
     /// <summary>Represents EU energy label A/A+/A++/...</summary>
     /// <param name="plusses">
     /// The total of '+'s [0, 4].
     /// </param>
     [Pure]
-    public static EnergyLabel A(int plusses = 0) => plusses < 0 || plusses > 4
+    public static EnergyLabel A(int plusses = 0) => plusses < 0 || plusses > MaxPlusses
         ? throw new ArgumentOutOfRangeException(nameof(plusses), QowaivMessages.FormatExceptionEnergyLabel)
         : new(7 + plusses);
 
@@ -87,8 +94,8 @@ public readonly partial struct EnergyLabel : ISerializable, IXmlSerializable, IF
         else if (IsUnknown()) return "?";
         else
         {
-            var str = new char[Length(m_Value)];
-            str[0] = (char)(Char(format) - Delta(m_Value));
+            var str = new char[StringLength()];
+            str[0] = Char(format == "l");
 
             for (var i = 1; i < str.Length; i++)
             {
@@ -97,10 +104,42 @@ public readonly partial struct EnergyLabel : ISerializable, IXmlSerializable, IF
 
             return new(str);
         }
+    }
 
-        static int Length(int value) => value > B.m_Value ? value - B.m_Value : 1;
-        static int Delta(int value) => Math.Min('H' - 'A', value);
-        static char Char(string? format) => format == "l" || format == "L" ? 'h' : 'H';
+#if NET6_0_OR_GREATER
+    /// <inheritdoc />
+    public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+    {
+        if (provider.TryGetCustomFormatter() is null)
+        {
+            if (IsEmpty()) return destination.TryWrite(string.Empty, out charsWritten);
+            else if (IsUnknown()) return destination.TryWrite('?', out charsWritten);
+            else if (StringLength() is { } length && destination.Length >= length)
+            {
+                destination[0] = Char(format.Length == 1 && format[0] == 'l');
+
+                for (var i = 1; i < length; i++)
+                {
+                    destination[i] = '+';
+                }
+                charsWritten = length;
+                return true;
+            }
+        }
+        charsWritten = 0;
+        return false;
+    }
+#endif
+
+    [Pure]
+    private int StringLength() => m_Value > B.m_Value ? m_Value - B.m_Value : 1;
+
+    [Pure]
+    private char Char(bool toLower)
+    {
+        var ch = (char)('H' - m_Value);
+        ch = ch <= 'A' ? 'A' : ch;
+        return toLower ? char.ToLowerInvariant(ch) : ch;
     }
 
     /// <summary>Gets an XML string representation of the EU energy label.</summary>
@@ -178,7 +217,7 @@ public readonly partial struct EnergyLabel : ISerializable, IXmlSerializable, IF
         return false;
 
         static bool IsAPlus(string str)
-            => str.Length <= 5
+            => str.Length <= MaxPlusses + 1
             && str[0] == 'A'
             && str[1..].All(ch => ch == '+');
     }

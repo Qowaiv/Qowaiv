@@ -271,9 +271,39 @@ public class Has_custom_formatting
     [TestCase("U", "B", "B")]
     [TestCase("l", "G", "g")]
     [TestCase("l", "A++", "a++")]
-    [TestCase("L", "A++", "a++")]
-    public void fomrat_dependent(string format, EnergyLabel svo, string formatted)
+    public void format_dependent(string format, EnergyLabel svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
+
+#if NET6_0_OR_GREATER
+
+    public class Span_formatable
+    {
+        [Test]
+        public void Skips_custom_formatters()
+        {
+            Span<char> span = stackalloc char[128];
+            Svo.EnergyLabel.TryFormat(span, out int charsWritten, default, FormatProvider.CustomFormatter).Should().BeFalse();
+            charsWritten.Should().Be(0);
+        }
+
+        [Test]
+        public void formats_empty() => $"{EnergyLabel.Empty}".Should().BeEmpty();
+        
+        [Test]
+        public void formats_unknown() => $"{EnergyLabel.Unknown}".Should().Be("?");
+
+        [Test]
+        public void formats_known() => $"{Svo.EnergyLabel:l}".Should().Be("a++");
+
+        [Test]
+        public void Skips_unsuficient_span_sizes()
+        {
+            Span<char> span = stackalloc char[2];
+            Svo.EnergyLabel.TryFormat(span, out int charsWritten, default, TestCultures.Nl_NL).Should().BeFalse();
+            charsWritten.Should().Be(0);
+        }
+    }
+#endif
 }
 
 public class Is_comparable
@@ -338,6 +368,7 @@ public class Is_comparable
     [TestCase("?", "")]
     [TestCase("A++", "?")]
     [TestCase("", "?")]
+    [TestCase("?", "?")]
     public void by_operators_unknown_always_false(EnergyLabel l, EnergyLabel r)
     {
         (l < r).Should().BeFalse();

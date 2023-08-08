@@ -160,19 +160,19 @@ public readonly partial struct EnergyLabel : ISerializable, IXmlSerializable, IE
     public static explicit operator EnergyLabel(string str) => Parse(str, CultureInfo.CurrentCulture);
 
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-    public static bool operator <(EnergyLabel l, EnergyLabel r) => NotUnknown(l, r) && l.CompareTo(r) < 0;
+    public static bool operator <(EnergyLabel l, EnergyLabel r) => AreKnown(l, r) && l.CompareTo(r) < 0;
 
     /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-    public static bool operator >(EnergyLabel l, EnergyLabel r) => NotUnknown(l, r) && l.CompareTo(r) > 0;
+    public static bool operator >(EnergyLabel l, EnergyLabel r) => AreKnown(l, r) && l.CompareTo(r) > 0;
 
     /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-    public static bool operator <=(EnergyLabel l, EnergyLabel r) => NotUnknown(l, r) && l.CompareTo(r) <= 0;
+    public static bool operator <=(EnergyLabel l, EnergyLabel r) => AreKnown(l, r) && l.CompareTo(r) <= 0;
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-    public static bool operator >=(EnergyLabel l, EnergyLabel r) => NotUnknown(l, r) && l.CompareTo(r) >= 0;
+    public static bool operator >=(EnergyLabel l, EnergyLabel r) => AreKnown(l, r) && l.CompareTo(r) >= 0;
 
     [Pure]
-    private static bool NotUnknown(EnergyLabel l, EnergyLabel r) => !l.IsUnknown() && !r.IsUnknown();
+    private static bool AreKnown(EnergyLabel l, EnergyLabel r) => !l.IsUnknown() && !r.IsUnknown();
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.
     /// A return value indicates whether the conversion succeeded.

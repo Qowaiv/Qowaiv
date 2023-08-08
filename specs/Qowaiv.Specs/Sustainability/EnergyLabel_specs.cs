@@ -276,7 +276,7 @@ public class Has_custom_formatting
 
 #if NET6_0_OR_GREATER
 
-    public class Span_formatable
+    public class Span_formattable
     {
         [Test]
         public void Skips_custom_formatters()

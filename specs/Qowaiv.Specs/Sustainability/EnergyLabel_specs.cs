@@ -296,7 +296,7 @@ public class Has_custom_formatting
         public void formats_known() => $"{Svo.EnergyLabel:l}".Should().Be("a++");
 
         [Test]
-        public void Skips_unsuficient_span_sizes()
+        public void Skips_insufficient_span_sizes()
         {
             Span<char> span = stackalloc char[2];
             Svo.EnergyLabel.TryFormat(span, out int charsWritten, default, TestCultures.Nl_NL).Should().BeFalse();

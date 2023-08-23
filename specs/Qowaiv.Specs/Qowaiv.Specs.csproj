@@ -16,12 +16,12 @@
   </ItemGroup>
 
   <ItemGroup Label="TestTools">
-    <PackageReference Include="coverlet.collector" Version="*" />
-    <PackageReference Include="coverlet.msbuild" Version="*" />
+    <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
+    <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
     <PackageReference Include="FluentAssertions" Version="6.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
     <PackageReference Include="NUnit" Version="3.*" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.*" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.*" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">

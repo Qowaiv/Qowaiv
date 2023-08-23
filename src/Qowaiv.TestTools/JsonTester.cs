@@ -23,7 +23,7 @@ public static class JsonTester
                 bool boolean => boolean ? "true" : "false",
                 IFormattable f => f.ToString(null, CultureInfo.InvariantCulture),
                 null => "null",
-                _ => val?.ToString() ?? string.Empty,
+                _ => val.ToString() ?? string.Empty,
             };
     }
 

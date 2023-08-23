@@ -140,7 +140,7 @@ public class CurrencyTest
 
     /// <summary>TryParse "?" should be valid and the result should be Currency.Unknown.</summary>
     [Test]
-    public void TryParse_Questionmark_IsValid()
+    public void TryParse_question_mark_IsValid()
     {
         string str = "?";
         Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");

@@ -94,7 +94,7 @@ public class Has_operators
     }
 
     [Test]
-    public void to_divide_money_by_money_with_diffrent_currencies_is_not_supported()
+    public void to_divide_money_by_money_with_different_currencies_is_not_supported()
     {
         Func<decimal> division =  () => Svo.Money / (16 + Currency.USD);
         division.Should().Throw<CurrencyMismatchException>();

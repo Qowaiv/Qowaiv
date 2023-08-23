@@ -215,7 +215,7 @@ public class MonthSpanTest
     }
 
     [Test]
-    public void FromsYear_3_36M()
+    public void From_years_3_36M()
     {
         var span = MonthSpan.FromYears(3);
         Assert.AreEqual(MonthSpan.FromMonths(36), span);

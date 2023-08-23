@@ -27,7 +27,7 @@ public class With_domain_logic
         => svo.IsEmpty().Should().Be(result);
 
     [Test]
-    public void value_accessable_via_Value_method()
+    public void value_accessible_via_Value_method()
         => Svo.Secret.Value().Should().Be("Ken sent me!");
 }
 
@@ -104,10 +104,10 @@ public class Supports_type_conversion_from
         .Should().Be("Ken sent me!");
 }
 
-public class Does_not_support_type_converstion_to
+public class Does_not_support_type_conversion_to
 {
     [Test]
-    public void convertered_is_null()
+    public void converted_is_null()
         => Converting.ToString().From(Svo.Secret).Should().BeNull();
 
     [TestCase(typeof(string))]

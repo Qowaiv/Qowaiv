@@ -309,14 +309,14 @@ public class NumericSvoTest
     [TestCase(typeof(Amount), typeof(decimal))]
     [TestCase(typeof(Money), typeof(decimal))]
     [TestCase(typeof(Percentage), typeof(Percentage))]
-    public void RoundToMultiple(Type svo, Type multiplyer)
+    public void RoundToMultiple(Type svo, Type multiplier)
     {
         var methods = svo?
             .GetMethods(PublicInstance)
             .Returns(svo)
             .Where(m => m.Name == nameof(RoundToMultiple))
             .SelectParameters()
-            .Where(pars => pars.Length == 1 && pars[0] == multiplyer)
+            .Where(pars => pars.Length == 1 && pars[0] == multiplier)
             .ToArray();
 
         Assert.IsTrue(methods?.Length == 1, nameof(methods));
@@ -325,14 +325,14 @@ public class NumericSvoTest
     [TestCase(typeof(Amount), typeof(decimal))]
     [TestCase(typeof(Money), typeof(decimal))]
     [TestCase(typeof(Percentage), typeof(Percentage))]
-    public void RoundToMultiple_DecimalRounding(Type svo, Type multiplyer)
+    public void RoundToMultiple_DecimalRounding(Type svo, Type multiplier)
     {
         var methods = svo?
             .GetMethods(PublicInstance)
             .Returns(svo)
             .Where(m => m.Name == nameof(RoundToMultiple))
             .SelectParameters()
-            .Where(pars => pars.Length == 2 && pars[0] == multiplyer && pars[1] == typeof(DecimalRounding))
+            .Where(pars => pars.Length == 2 && pars[0] == multiplier && pars[1] == typeof(DecimalRounding))
             .ToArray();
 
         Assert.IsTrue(methods?.Length == 1, nameof(methods));

@@ -545,7 +545,7 @@ public class DateTest
     }
 
     [Test]
-    public void AddMilliseconds_Arround3Days_AreEqual()
+    public void AddMilliseconds_around3Days_AreEqual()
     {
         var act = TestStruct.AddMilliseconds(3 * 24 * 60 * 60 * 1003);
         var exp = new Date(1970, 02, 17);
@@ -553,7 +553,7 @@ public class DateTest
         Assert.AreEqual(exp, act);
     }
     [Test]
-    public void AddSeconds_Arround3Days_AreEqual()
+    public void AddSeconds_around3Days_AreEqual()
     {
         var act = TestStruct.AddSeconds(3 * 24 * 60 * 64);
         var exp = new Date(1970, 02, 17);

@@ -383,7 +383,7 @@ public class LocalDateTimeTest
     }
 
     [Test]
-    public void AddMilliseconds_Arround3Days_AreEqual()
+    public void AddMilliseconds_around3Days_AreEqual()
     {
         var act = TestStruct.AddMilliseconds(3 * 24 * 60 * 60 * 1003);
         var exp = new LocalDateTime(1988, 06, 16, 22, 23, 02, 601);
@@ -391,7 +391,7 @@ public class LocalDateTimeTest
         Assert.AreEqual(exp, act);
     }
     [Test]
-    public void AddSeconds_Arround3Days_AreEqual()
+    public void AddSeconds_around3Days_AreEqual()
     {
         var act = TestStruct.AddSeconds(3 * 24 * 60 * 64);
         var exp = new LocalDateTime(1988, 06, 17, 02, 58, 05, 001);

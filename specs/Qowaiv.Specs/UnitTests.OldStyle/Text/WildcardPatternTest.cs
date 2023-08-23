@@ -69,12 +69,12 @@ public class WildcardPatternTest
     [TestCase("ig*ks", "IGeeks", false, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
     [TestCase("Ig*ks", "ıGeeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
     [TestCase("ıg*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.OrdinalIgnoreCase, "tr-TR")]
-    public void IsMatch(string pattern, string input, bool isMatch, WildcardPatternOptions options = default, StringComparison comparsionType = default, string? culture = null)
+    public void IsMatch(string pattern, string input, bool isMatch, WildcardPatternOptions options = default, StringComparison comparisonType = default, string? culture = null)
     {
         using (culture is null ? CultureInfoScope.NewInvariant() : new CultureInfoScope(culture))
         {
-            var actual = WildcardPattern.IsMatch(pattern, input, options, comparsionType);
-            Assert.AreEqual(isMatch, actual, "'{0}' should {2} match '{1}', with {3} and {4}.", pattern, input, isMatch ? "" : "not ", options, comparsionType);
+            var actual = WildcardPattern.IsMatch(pattern, input, options, comparisonType);
+            Assert.AreEqual(isMatch, actual, "'{0}' should {2} match '{1}', with {3} and {4}.", pattern, input, isMatch ? "" : "not ", options, comparisonType);
         }
     }
 

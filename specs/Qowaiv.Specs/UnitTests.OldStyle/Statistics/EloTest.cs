@@ -525,7 +525,7 @@
         }
 
         [Test]
-        public void Divde_1600Subtract100_800()
+        public void Divide_1600Subtract100_800()
         {
             Elo act = 1600m;
 
@@ -537,7 +537,7 @@
         }
 
         [Test]
-        public void Divde_1600Subtract100_3200()
+        public void Multiply_3200()
         {
             Elo act = 1600m;
 

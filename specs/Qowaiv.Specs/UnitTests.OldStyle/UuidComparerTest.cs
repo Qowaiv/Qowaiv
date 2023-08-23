@@ -41,7 +41,7 @@ public class UuidComparerTest
     }
 
     [Test]
-    public void Compare_Default_IsOrderComarerGuidDefault()
+    public void Is_ordered_Comparer_Guid_Default()
     {
         var uuids = new List<Guid>();
 

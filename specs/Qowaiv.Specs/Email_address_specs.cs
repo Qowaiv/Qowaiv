@@ -104,7 +104,7 @@ public class Is_equal_by_value
     }
 
     [Test]
-    public void hash_code_is_not_zero_and_reproducable_for_not_empty()
+    public void hash_code_is_not_zero_and_reproducible_for_not_empty()
     {
         var hash = Svo.EmailAddress.GetHashCode();
         Assert.That(hash, Is.Not.EqualTo(0));

@@ -468,7 +468,7 @@ public class Can_be_multiplied_by
     }
 }
 
-public class Can_be_devided_by
+public class Can_be_divided_by
 {
     [Test]
     public void _percentage()

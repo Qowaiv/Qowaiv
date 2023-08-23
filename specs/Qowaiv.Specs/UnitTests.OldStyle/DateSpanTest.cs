@@ -546,7 +546,7 @@ public class DateSpanTest
         Assert.AreEqual(new DateSpan(-10, -3, +5), negated);
     }
     [Test]
-    public void Pluse_TestStruct_Unchanged()
+    public void Plus_TestStruct_Unchanged()
     {
         var negated = +TestStruct;
         Assert.AreEqual(TestStruct, negated);

@@ -16,12 +16,12 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
     /// <inheritdoc />
     [Pure]
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
-        => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
+        => IsConvertible(sourceType) || base.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc />
     [Pure]
     public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
-        => IsConvertable(destinationType) || base.CanConvertTo(context, destinationType);
+        => IsConvertible(destinationType) || base.CanConvertTo(context, destinationType);
 
     /// <inheritdoc />
     [Pure]
@@ -31,7 +31,7 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
         {
             return Activator.CreateInstance<TSvo>();
         }
-        else if (IsConvertable(value.GetType()))
+        else if (IsConvertible(value.GetType()))
         {
             var raw = (TRaw)Convert.ChangeType(value, typeof(TRaw));
             return FromRaw(raw);
@@ -50,7 +50,7 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
         {
             return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
         }
-        else if (IsConvertable(destinationType))
+        else if (IsConvertible(destinationType))
         {
             var svo = Guard.IsInstanceOf<TSvo>(value);
             var raw = ToRaw(svo);
@@ -61,7 +61,13 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
 
     /// <summary>Returns true if the conversion is supported.</summary>
     [Pure]
+    [Obsolete("Use IsConvertible instead.")]
     protected virtual bool IsConvertable(Type? type)
+        => IsConvertible(type);
+
+    /// <summary>Returns true if the conversion is supported.</summary>
+    [Pure]
+    protected virtual bool IsConvertible(Type? type)
         => type is not null
         && type != typeof(TSvo)
         && QowaivType.IsNumeric(type);

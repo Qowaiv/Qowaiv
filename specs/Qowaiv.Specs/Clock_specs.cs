@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Clock_specs;
 
-public class Default_behaviour
+public class Default_behavior
 {
     [Test]
     public void UtcNow_equals_DateTime_UtcNow()

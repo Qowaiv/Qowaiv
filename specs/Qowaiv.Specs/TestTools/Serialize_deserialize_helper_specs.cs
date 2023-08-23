@@ -4,7 +4,7 @@ public class Fails_on
 {
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void binary_roundtrip_null()
+    public void binary_round_trip_null()
     {
         Func<object> roundtrip = () => SerializeDeserialize.Binary<object>(null!);
         roundtrip.Should().Throw<ArgumentNullException>();

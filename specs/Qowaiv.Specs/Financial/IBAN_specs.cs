@@ -219,7 +219,7 @@ public class Input_is_invalid_when
 public class Input_is_valid
 {
     [Test]
-    public void despite_irregular_whitespacing()
+    public void despite_irregular_white_spacing()
         => InternationalBankAccountNumber.Parse("AE950 2100000006  93123456").IsEmptyOrUnknown().Should().BeFalse();
 
     [TestCaseSource(nameof(ValidForCountry))]

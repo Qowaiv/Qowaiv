@@ -38,14 +38,14 @@ public class Is_not_leap_year_when
 
     [TestCase(1979)]
     [TestCase(2017)]
-    public void not_divisable_by_4(Year year)
+    public void not_dividable_by_4(Year year)
     {
         Assert.IsFalse(year.IsLeapYear);
     }
 
     [TestCase(1800)]
     [TestCase(1900)]
-    public void divisiable_by_100_not_by_400(Year year)
+    public void dividable_by_100_not_by_400(Year year)
     {
         Assert.IsFalse(year.IsLeapYear);
     }
@@ -55,14 +55,14 @@ public class Is_leap_year
 {
     [TestCase(1988)]
     [TestCase(2004)]
-    public void divisable_by_4_not_by_100(Year year)
+    public void dividable_by_4_not_by_100(Year year)
     {
         Assert.IsTrue(year.IsLeapYear);
     }
 
     [TestCase(1600)]
     [TestCase(2000)]
-    public void divisable_by_400(Year year)
+    public void dividable_by_400(Year year)
     {
         Assert.IsTrue(year.IsLeapYear);
     }

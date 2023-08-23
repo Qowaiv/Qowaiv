@@ -1,7 +1,6 @@
 ﻿#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
-
 using Qowaiv.Identifiers;
 using System.Security.Cryptography;
 

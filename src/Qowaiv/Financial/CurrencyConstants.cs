@@ -1,7 +1,6 @@
 #pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
-
 namespace Qowaiv.Financial;
 
 public readonly partial struct Currency

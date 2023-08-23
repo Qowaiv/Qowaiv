@@ -90,7 +90,6 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// This implementation is a (tweaked) copy of the implementation of <see cref="string"/>.Format().
     /// </remarks>
     [Pure]
-    // This code is here as reference, so we don't want to touch it.
 #nullable disable
 #pragma warning disable S125 // Sections of code should not be "commented out"
 #pragma warning disable S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
@@ -101,6 +100,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 #pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
 
+    // This code is here as reference, so we don't want to touch it.
     public string Format(string format, params object[] args)
     {
         Guard.NotNull(format);

@@ -66,8 +66,10 @@ public static class Base32
                 {
                     // Make place at the beginning of the buffer.
                     buffer <<= BitPerByte;
+
                     // Add the bits.
                     buffer |= bytes[indexBytes++];
+
                     // Update the overflow.
                     overFlow += BitShift;
                 }
@@ -137,6 +139,7 @@ public static class Base32
                 return false;
             }
             var charValue = CharValues[ch];
+
             // the char is not a valid base32 char, although it is in the lookup.
             if (charValue == byte.MaxValue)
             {
@@ -146,8 +149,10 @@ public static class Base32
 
             // Create 5 bits at the beginning for the new char value.
             buffer <<= BitPerChar;
+
             // Add the new bits.
             buffer |= charValue;
+
             // Update the buffer length.
             bufferLength += BitPerChar;
 

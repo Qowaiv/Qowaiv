@@ -20,7 +20,7 @@ public static class SvoParameter
     public static SqlParameter CreateForSql(string parameterName, object? value)
     {
         // If null, return DBNull.
-        if (value == null) return new SqlParameter(parameterName, DBNull.Value);
+        if (value is null) return new SqlParameter(parameterName, DBNull.Value);
         else
         {
             var sourceType = value.GetType();
@@ -31,8 +31,9 @@ public static class SvoParameter
                 {
                     attr = sourceType.GetCustomAttribute<SingleValueObjectAttribute>();
                 }
+
                 // No attribute, so not supported.
-                if (attr == null)
+                if (attr is null)
                 {
                     Attributes[sourceType] = null;
                     return new SqlParameter(parameterName, value);

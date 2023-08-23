@@ -88,6 +88,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
 
         // Now the week number.
         DateTime startdate = GetFirstDayOfFirstWeekOfYear(year);
+
         // No overflow please.
         DateTime enddate = year < 9999 ? GetFirstDayOfFirstWeekOfYear(year + 1) : DateTime.MaxValue;
 
@@ -97,6 +98,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
             startdate = enddate;
             year++;
         }
+
         // The date is member of a week in the previous year.
         if (m_Value < startdate)
         {
@@ -104,6 +106,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
             year--;
         }
         if (part == DatePartYear) { return year; }
+
         // Day of the week.
         int dayofyear = (m_Value - startdate).Days;
 

@@ -267,6 +267,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     public static Country Create(RegionInfo? region)
     {
         if (region == null) { return default; }
+
         // In .NET, Serbia and Montenegro (CS) is still active.
         if (region.TwoLetterISORegionName == "CS")
         {

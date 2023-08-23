@@ -135,6 +135,7 @@ public class WildcardPattern : ISerializable
     /// </remarks>
     protected bool IsCultureIndependent
         => ComparisonType == StringComparison.InvariantCultureIgnoreCase;
+
     // || ComparisonType == StringComparison.InvariantCulture
 
     /// <summary>Returns true if the case should be ignored, otherwise false.</summary>
@@ -229,6 +230,7 @@ public class WildcardPattern : ISerializable
         {
             return Match(pattern.Next(), input) || Match(pattern, input.Next());
         }
+
         // If the first string contains '?'.
         else if (pattern.Ch == SingleChar)
         {
@@ -236,6 +238,7 @@ public class WildcardPattern : ISerializable
                 ? Match(pattern.Next(), input) || Match(pattern.Next(), input.Next())
                 : Match(pattern.Next(), input.Next());
         }
+
         // If the current characters of both strings match.
         else return Equals(pattern.Ch, input.Ch) && Match(pattern.Next(), input.Next());
     }

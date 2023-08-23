@@ -154,7 +154,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
             int index = 0;
             do
             {
-                index = index * 10 + ch - '0';
+                index = (index * 10) + ch - '0';
                 pos++;
                 if (pos == len) FormatError();
                 ch = format[pos];
@@ -183,7 +183,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                 if (ch < '0' || ch > '9') FormatError();
                 do
                 {
-                    width = width * 10 + ch - '0';
+                    width = (width * 10) + ch - '0';
                     pos++;
                     if (pos == len) FormatError();
                     ch = format[pos];

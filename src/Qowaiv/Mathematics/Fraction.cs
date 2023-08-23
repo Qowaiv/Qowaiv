@@ -277,7 +277,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
                     n1 *= d0;
                 }
 
-                n = n0 * Sign() + n1 * fraction.Sign();
+                n = (n0 * Sign()) + (n1 * fraction.Sign());
 
                 var sign = n.Sign();
                 n = n.Abs();

@@ -47,7 +47,7 @@ public static class Base32
 
             // Determine the string size.
             var bitLength = bytes.Length << 3;
-            var chars = new char[1 + (bitLength - 1) / BitPerChar];
+            var chars = new char[1 + ((bitLength - 1) / BitPerChar)];
 
             var indexChars = 0;
             var indexBytes = 0;

@@ -113,7 +113,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
         if (part == DatePartDayOfYear) { return dayofyear; }
 
         // The week number is not zero based.
-        var week = dayofyear / DaysPerWeek + 1;
+        var week = (dayofyear / DaysPerWeek) + 1;
         return week;
     }
 
@@ -268,7 +268,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
         dt = GetFirstDayOfFirstWeekOfYear(year);
 
         // Zero-based.
-        int dayofyear = (week - 1) * 7 + (day - 1);
+        int dayofyear = ((week - 1) * 7) + (day - 1);
 
         // Set date.
         dt = dt.AddDays(dayofyear);

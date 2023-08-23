@@ -367,7 +367,7 @@ public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFor
 
     [Pure]
     private static int Create(int years, int months)
-        => TryCreate(years * DateSpan.MonthsPerYear + months, out var span)
+        => TryCreate((years * DateSpan.MonthsPerYear) + months, out var span)
         ? span.TotalMonths
         : throw new ArgumentOutOfRangeException(QowaivMessages.FormatExceptionMonthSpan);
 }

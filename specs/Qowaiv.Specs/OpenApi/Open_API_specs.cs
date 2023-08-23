@@ -20,7 +20,7 @@ public class Open_API_data_type
             nullable: true));
 
     [Test]
-    public void IIdentifier_behavior_is_resolved_as_Id_type()
+    public void Identifier_behavior_is_resolved_as_Id_type()
         => OpenApiDataType.FromType(typeof(DecoratedId))
         .Should().Be(new OpenApiDataType(
             dataType: typeof(Id<DecoratedId>),

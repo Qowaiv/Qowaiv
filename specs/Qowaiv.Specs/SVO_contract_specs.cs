@@ -48,7 +48,8 @@ public class Is_decorated_with : SingleValueObjectSpecs
     public void System_Text_Json_JsonConverter(Type type)
     {
         type.Should().BeDecoratedWith<System.Text.Json.Serialization.JsonConverterAttribute>();
-        var converterType = type.GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>().ConverterType;
+        var converterType = type.GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>()?.ConverterType;
+
         typeof(SvoJsonConverter<>).MakeGenericType(type).Should().NotBeAssignableTo(converterType);
     }
 #endif

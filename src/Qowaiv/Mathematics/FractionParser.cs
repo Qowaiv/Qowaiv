@@ -110,7 +110,7 @@ internal static class FractionParser
     {
         try
         {
-            result = checked((integer * denominator + numerator) * sign);
+            result = checked(((integer * denominator) + numerator) * sign);
             return true;
         }
         catch (OverflowException)

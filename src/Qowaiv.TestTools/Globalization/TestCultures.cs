@@ -73,9 +73,9 @@ public static class TestCultures
 
     /// <summary>Updates percentage symbols of the culture.</summary>
     [FluentSyntax]
-    public static CultureInfo WithPercentageSymbols(this CultureInfo culture, string percentSymbol, string perMilleSymbol)
+    public static CultureInfo WithPercentageSymbols(this CultureInfo? culture, string percentSymbol, string perMilleSymbol)
     {
-        culture ??= CultureInfo.CurrentCulture!;
+        culture ??= CultureInfo.CurrentCulture;
         var info = (NumberFormatInfo)culture.NumberFormat.Clone()!;
         var custom = new CultureInfo(culture.Name);
         info.PercentSymbol = percentSymbol;

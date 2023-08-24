@@ -332,7 +332,7 @@ public class Casts
     public void no_implicitly_to_false()
     {
         var result = YesNo.No ? "passed" : "failed";
-        Assert.AreNotEqual("passed", result);
+        result.Should().Be("failed");
     }
 
     [TestCase(null, "")]

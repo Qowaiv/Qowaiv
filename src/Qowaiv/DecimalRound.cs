@@ -117,6 +117,7 @@ internal static class DecimalRound
             DecimalRounding.TowardsZero => false,
             DecimalRounding.Up => isPositive,
             DecimalRounding.Down => !isPositive,
+
             // Pick a 50-50 random.
             DecimalRounding.RandomTieBreaking => (Random().Next() & 1) == 0,
             _ => null,
@@ -144,19 +145,19 @@ internal static class DecimalRound
 
         if (b0 != 0)
         {
-            n = overflow + b0 * f;
+            n = overflow + (b0 * f);
             overflow = n >> 32;
             b0 = (uint)n;
         }
         if (b1 != 0 || overflow != 0)
         {
-            n = overflow + b1 * f;
+            n = overflow + (b1 * f);
             overflow = n >> 32;
             b1 = (uint)n;
         }
         if (b2 != 0 || overflow != 0)
         {
-            n = overflow + b2 * f;
+            n = overflow + (b2 * f);
             overflow = n >> 32;
             b2 = (uint)n;
         }

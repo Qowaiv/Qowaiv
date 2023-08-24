@@ -21,9 +21,9 @@ csharp_prefer_simple_default_expression = true:warning # IDE0034: Simplify 'defa
 dotnet_style_prefer_compound_assignment = true:warning # IDE0054: Use compound assignment
 csharp_style_unused_value_assignment_preference = discard_variable:warning # IDE0059: Unnecessary assignment of a value
 
+dotnet_diagnostic.IDE0079.severity = none    # Unnecessary suppression
 dotnet_diagnostic.IDE1006.severity = none    # Naming Styles
 dotnet_diagnostic.IDE0005.severity = warning # Using directive unnecessary
-dotnet_diagnostic.IDE0079.severity = warning # Unnecessary suppression
 dotnet_diagnostic.IDE0090.severity = warning # Simplify new expression
 
 dotnet_diagnostic.CA1845.severity = none # Use span-based 'string.Concat'

@@ -23,10 +23,10 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     public static readonly DateSpan Zero;
 
     /// <summary>Represents the maximum value of the date span.</summary>
-    public static readonly DateSpan MaxValue = new(AsUInt64(MonthsPerYear * +9998 + 11, +30));
+    public static readonly DateSpan MaxValue = new(AsUInt64((MonthsPerYear * +9998) + 11, +30));
 
     /// <summary>Represents the minimum value of the date span.</summary>
-    public static readonly DateSpan MinValue = new(AsUInt64(MonthsPerYear * -9998 - 11, -30));
+    public static readonly DateSpan MinValue = new(AsUInt64((MonthsPerYear * -9998) - 11, -30));
 
     /// <summary>The average amount of days per month, taken leap years into account.</summary>
     internal const double DaysPerMonth = 30.421625;
@@ -66,7 +66,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// Number of days.
     /// </param>
     public DateSpan(int years, int months, int days)
-        : this(years * MonthsPerYear + months, days) { }
+        : this((years * MonthsPerYear) + months, days) { }
 
     /// <summary>Converts the combination of months and days to a <see cref="ulong"/>.</summary>
     [Pure]
@@ -85,7 +85,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     public int Days => (int)m_Value;
 
     /// <summary>Gets a (approximate) value to sort the date spans by.</summary>
-    internal double TotalDays => Days + TotalMonths * DaysPerMonth;
+    internal double TotalDays => Days + (TotalMonths * DaysPerMonth);
 
     /// <summary>Unary plus the date span.</summary>
     [Pure]
@@ -153,7 +153,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
     /// </exception>
     [Pure]
-    public DateSpan AddYears(int years) => Mutate(TotalMonths + years * (long)MonthsPerYear, Days);
+    public DateSpan AddYears(int years) => Mutate(TotalMonths + (years * (long)MonthsPerYear), Days);
 
     /// <summary>Mutates the months and days.</summary>
     /// <exception cref="OverflowException">
@@ -162,7 +162,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
     [Pure]
     private static DateSpan Mutate(long months, long days)
     {
-        var totalDays = months * DaysPerMonth + days;
+        var totalDays = (months * DaysPerMonth) + days;
 
         if (IsOutOfRange(months, days, totalDays))
         {
@@ -379,8 +379,8 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
             var m = IntFromGroup(match, nameof(Months), formatProvider);
             var d = IntFromGroup(match, nameof(Days), formatProvider);
 
-            var months = y * 12 + m;
-            var totalDays = d + months * DaysPerMonth;
+            var months = (y * 12) + m;
+            var totalDays = d + (months * DaysPerMonth);
 
             if (!IsOutOfRange(months, d, totalDays))
             {
@@ -400,7 +400,7 @@ public readonly partial struct DateSpan : ISerializable, IXmlSerializable, IForm
 
     [Pure]
     private static ulong Create(int months, int days)
-        => IsOutOfRange(months, days, days + months * DaysPerMonth)
+        => IsOutOfRange(months, days, days + (months * DaysPerMonth))
         ? throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRangeException_DateSpan, (Exception?)null)
         : AsUInt64(months, days);
 

@@ -256,12 +256,14 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
                 {
                     d = d0;
                 }
+
                 // d0 is a multiple of d1
                 else if (d0 > d1 && d0 % d1 == 0)
                 {
                     d = d0;
                     n1 *= d0 / d1;
                 }
+
                 // d1 is a multiple of d0
                 else if (d1 % d0 == 0)
                 {
@@ -275,7 +277,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
                     n1 *= d0;
                 }
 
-                n = n0 * Sign() + n1 * fraction.Sign();
+                n = (n0 * Sign()) + (n1 * fraction.Sign());
 
                 var sign = n.Sign();
                 n = n.Abs();
@@ -406,6 +408,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         {
             return ToString(formatProvider, match);
         }
+
         // if no fraction bar character has been provided, format as a decimal.
         else if (!format.WithDefault().Any(ch => Formatting.IsFractionBar(ch)))
         {
@@ -450,6 +453,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
             {
                 sb.Append(formatProvider.NegativeSign());
             }
+
             // use invariant as we want to convert to superscript.
             var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
             sb.Append(super);
@@ -503,6 +507,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         {
             return numerator.CompareTo(other.numerator);
         }
+
         // To prevent overflows, normalize the numerators as double only.
         var self = (double)numerator * other.denominator;
         var othr = (double)other.numerator * denominator;
@@ -696,6 +701,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     {
         var even = 1;
         long remainder;
+
         // while both are even.
         while ((a & 1) == 0 && (b & 1) == 0)
         {

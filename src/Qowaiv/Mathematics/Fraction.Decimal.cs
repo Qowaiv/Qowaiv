@@ -50,8 +50,8 @@ public readonly partial struct Fraction
             else
             {
                 long d = FindDenominator(min, max);
-                long n = (long)(value * d + 0.5m);
-                return New(sign * (integer * d + n), d);
+                long n = (long)((value * d) + 0.5m);
+                return New(sign * ((integer * d) + n), d);
             }
         }
     }
@@ -62,8 +62,8 @@ public readonly partial struct Fraction
         // The two parts of the denominator to find.
         long lo = 1;
         long hi = (long)(1 / maxValue);
-        var min = new DecimalFraction { Numerator = minValue, Denominator = 1 - hi * minValue };
-        var max = new DecimalFraction { Numerator = 1 - hi * maxValue, Denominator = maxValue };
+        var min = new DecimalFraction { Numerator = minValue, Denominator = 1 - (hi * minValue) };
+        var max = new DecimalFraction { Numerator = 1 - (hi * maxValue), Denominator = maxValue };
 
         while (min.OneOrMore)
         {

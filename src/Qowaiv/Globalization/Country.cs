@@ -1,7 +1,6 @@
 ﻿#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
-
 using Qowaiv.Conversion.Globalization;
 using Qowaiv.Financial;
 using System.Collections.ObjectModel;
@@ -267,6 +266,7 @@ public readonly partial struct Country : ISerializable, IXmlSerializable, IForma
     public static Country Create(RegionInfo? region)
     {
         if (region == null) { return default; }
+
         // In .NET, Serbia and Montenegro (CS) is still active.
         if (region.TwoLetterISORegionName == "CS")
         {

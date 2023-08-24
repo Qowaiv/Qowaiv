@@ -74,16 +74,19 @@ public static class StringFormatter
                 sb.Append(ch);
                 isEscape = false;
             }
+
             // Escape char, enable escape.
             else if (ch == escape)
             {
                 isEscape = true;
             }
+
             // If a token match, apply.
             else if (tokens.TryGetValue(ch, out var action))
             {
                 sb.Append(action.Invoke(obj, formatProvider ?? CultureInfo.CurrentCulture));
             }
+
             // Append char.
             else
             {

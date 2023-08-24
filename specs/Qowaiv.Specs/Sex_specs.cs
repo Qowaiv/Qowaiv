@@ -237,16 +237,13 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1()
-    {
-        object obj = null;
-        Assert.AreEqual(1, Svo.Sex.CompareTo(obj));
-    }
+        => Svo.Sex.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Sex_as_object()
     {
         object obj = Svo.Sex;
-        Assert.AreEqual(0, Svo.Sex.CompareTo(obj));
+        Svo.Sex.CompareTo(obj).Should().Be(0);
     }
 
     [Test]

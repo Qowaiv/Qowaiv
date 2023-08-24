@@ -32,7 +32,7 @@ public class Exists
     [Test]
     public void not_outsidescope()
     {
-        DirectoryInfo dir = null;
+        DirectoryInfo? dir = null;
         using (var temp = new TemporaryDirectory())
         {
             dir = temp;

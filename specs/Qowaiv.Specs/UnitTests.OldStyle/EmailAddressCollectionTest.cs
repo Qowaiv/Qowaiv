@@ -210,7 +210,7 @@ public class EmailAddressCollectionTest
     }
 
     [Test]
-    public void ToString_TestStructFormatMailtoF_AreEqual()
+    public void ToString_TestStructFormatMailToF_AreEqual()
     {
         var act = GetTestInstance().ToString(@"mai\lto:f");
         var exp = "mailto:info@qowaiv.org,mailto:test@qowaiv.org";
@@ -317,7 +317,7 @@ public class EmailAddressCollectionTest
     #region Extensions
 
     [Test]
-    public void ToCollection_EnumerartionOfEmailAddresses_EmailAddressCollection()
+    public void ToCollection_enumeration_of_EmailAddresses_EmailAddressCollection()
     {
         var collection = EmailAddressCollection.Parse("mail@qowaiv.org,info@qowaiv.org,test@qowaiv.org").AsEnumerable();
 

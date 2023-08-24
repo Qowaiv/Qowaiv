@@ -30,11 +30,11 @@ public class With_domain_logic
         => svo.IsEmpty().Should().Be(result);
 
     [Test]
-    public void value_accessable_via_Value_method()
+    public void value_accessible_via_Value_method()
         => Svo.CryptographicSeed.Value().Should().Be("Qowaig==");
 
     [Test]
-    public void value_accessable_via_ToByteArray_method()
+    public void value_accessible_via_ToByteArray_method()
         => Svo.CryptographicSeed.ToByteArray()
         .Should().BeEquivalentTo(new byte[] { 0x42, 0x8C, 0x1A, 0x8A });
 }
@@ -150,10 +150,10 @@ public class Supports_type_conversion_from
         .Should().Be("Qowaig==");
 }
 
-public class Does_not_support_type_converstion_to
+public class Does_not_support_type_conversion_to
 {
     [Test]
-    public void convertered_is_null()
+    public void converted_is_null()
         => Converting.ToString().From(Svo.CryptographicSeed).Should().BeNull();
 
     [TestCase(typeof(string))]

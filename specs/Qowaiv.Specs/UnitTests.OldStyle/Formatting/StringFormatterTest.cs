@@ -36,7 +36,7 @@ public class StringFormatterTest
     }
 
     [Test]
-    public void ToNonDiacritic_CafeUndStrasse_AreEqual()
+    public void To_non_diacritic_Cafe_und_Straße_AreEqual()
     {
         var str = "Café & Straße";
 
@@ -47,7 +47,7 @@ public class StringFormatterTest
     }
 
     [Test]
-    public void ToNonDiacritic_CafeUndStrasseIgnoreE_AreEqual()
+    public void To_non_diacritic_Cafe_und_Straße_ignore_e()
     {
         var str = "Café & Straße";
 

@@ -92,7 +92,7 @@ public class CountryTest
 
     /// <summary>TryParse "?" should be valid and the result should be Country.Unknown.</summary>
     [Test]
-    public void TryParse_Questionmark_IsValid()
+    public void TryParse_question_mark_IsValid()
     {
         string str = "?";
         Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
@@ -386,7 +386,7 @@ public class CountryTest
     }
 
     [Test]
-    public void ToString_Unknown_Questionmark()
+    public void ToString_Unknown_question_mark()
     {
         var act = Country.Unknown.ToString();
         var exp = "?";

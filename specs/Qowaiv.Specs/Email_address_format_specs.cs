@@ -61,11 +61,11 @@ public class Local_part
     }
 
     [TestCaseSource(nameof(WithoutLimitations))]
-    public void char_without_limitiations(char ch)
+    public void char_without_limitations(char ch)
         => Email.ShouldBeValid($"{new string(ch, 64)}@qowaiv.org");
 
     [Test]
-    public void dots_can_seperate_parts()
+    public void dots_can_separate_parts()
         => Email.ShouldBeValid("zero.one.two.three.four.five.6.7.8.9@qowaiv.org");
 
     [Test]
@@ -127,11 +127,11 @@ public class Domain_part
     [TestCase("xn--bcher-kva8445foa")]
     [TestCase("xn--eckwd4c7cu47r2wf")]
     [TestCase("xn--3e0b707e")]
-    public void can_be_punycode(string punycode)
-        => Email.ShouldBeValid($"info@qowaiv.{punycode}");
+    public void can_be_puny_code(string punyCode)
+        => Email.ShouldBeValid($"info@qowaiv.{punyCode}");
 
     [Test]
-    public void dots_can_seperate_parts()
+    public void dots_can_separate_parts()
         => Email.ShouldBeValid("info@one.two.three.4.5.qowaiv.org");
 
     [TestCase]
@@ -151,7 +151,7 @@ public class Domain_part
         => Email.ShouldBeInvalid("info@qowaiv..org");
 
     [Test]
-    public void dashes_can_seperate_parts()
+    public void dashes_can_separate_parts()
        => Email.ShouldBeValid("info@one-two-three-4-5-qowaiv.org");
 
     [TestCase("info@-qowaiv.org")]
@@ -377,7 +377,7 @@ public class IP_based
     [TestCase("ab@[188.120.150.10")]
     [TestCase("ab@188.120.150.10]")]
     [TestCase("ab@[188.120.150.10].com")]
-    public void ip_v6_valid_wixthout_brackets(string invalid)
+    public void ip_v6_valid_without_brackets(string invalid)
         => Email.ShouldBeInvalid(invalid);
 }
 

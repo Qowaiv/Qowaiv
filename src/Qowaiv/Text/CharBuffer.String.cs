@@ -36,7 +36,7 @@ internal partial class CharBuffer
 
     /// <summary>Returns true if buffer starts with the specified string.</summary>
     [Pure]
-    public bool StartsWithCaseInsensitve(string str)
+    public bool StartsWithCaseInsensitive(string str)
     {
         if (str.Length > Length) return false;
         else

@@ -6,11 +6,11 @@ public class Amounts
     private static readonly Amount?[] nullables = new Amount?[] { (Amount)1, (Amount)23, (Amount)0, null };
 
     [Test]
-    public void Average_on_collection_is_caluculated()
+    public void Average_on_collection_is_calculated()
         => collection.Average().Should().Be(8.Amount());
 
     [Test]
-    public void Average_on_nullables_can_be_calulated()
+    public void Average_on_nullables_can_be_calculated()
         => nullables.Average().Should().Be(8.Amount());
 
     [Test]
@@ -21,11 +21,11 @@ public class Amounts
     }
 
     [Test]
-    public void Average_on_selected_selected_collection_is_caluculated()
+    public void Average_on_selected_collection_is_calculated()
     => collection.Average(Selection).Should().Be(8.Amount());
 
     [Test]
-    public void Average_on_selected_nullables_can_be_calulated()
+    public void Average_on_selected_nullables_can_be_calculated()
         => nullables.Average(Selection).Should().Be(8.Amount());
 
     [Test]
@@ -44,11 +44,11 @@ public class Amounts
         => Array.Empty<Amount?>().Average().Should().BeNull();
 
     [Test]
-    public void Sum_on_collection_is_caluculated()
+    public void Sum_on_collection_is_calculated()
        => collection.Sum().Should().Be(24.Amount());
 
     [Test]
-    public void Sum_on_nullables_can_be_calulated()
+    public void Sum_on_nullables_can_be_calculated()
         => nullables.Sum().Should().Be(24.Amount());
 
     [Test]
@@ -60,11 +60,11 @@ public class Amounts
         => Array.Empty<Amount?>().Sum().Should().BeNull();
 
     [Test]
-    public void Sum_on_selected_collection_is_caluculated()
+    public void Sum_on_selected_collection_is_calculated()
       => collection.Sum(Selection).Should().Be(24.Amount());
 
     [Test]
-    public void Sum_on_selected_nullables_can_be_calulated()
+    public void Sum_on_selected_nullables_can_be_calculated()
         => nullables.Sum(Selection).Should().Be(24.Amount());
 
     [Test]
@@ -87,11 +87,11 @@ public class Moneys
     private static readonly Money?[] mixedNulables = new Money?[] { 1 + Currency.EUR, 23 + Currency.USD };
 
     [Test]
-    public void Average_on_collection_is_caluculated()
+    public void Average_on_collection_is_calculated()
         => collection.Average().Should().Be(8 + Currency.EUR);
 
     [Test]
-    public void Average_on_nullables_can_be_calulated()
+    public void Average_on_nullables_can_be_calculated()
         => nullables.Average().Should().Be(8 + Currency.EUR);
 
     [Test]
@@ -121,11 +121,11 @@ public class Moneys
 
 
     [Test]
-    public void Average_on_selected_collection_is_caluculated()
+    public void Average_on_selected_collection_is_calculated()
         => collection.Average(Selection).Should().Be(8 + Currency.EUR);
 
     [Test]
-    public void Average_on_selected_nullables_can_be_calulated()
+    public void Average_on_selected_nullables_can_be_calculated()
         => nullables.Average(Selection).Should().Be(8 + Currency.EUR);
 
     [Test]
@@ -154,11 +154,11 @@ public class Moneys
     }
 
     [Test]
-    public void Sum_on_collection_is_caluculated()
+    public void Sum_on_collection_is_calculated()
         => collection.Sum().Should().Be(24 + Currency.EUR);
 
     [Test]
-    public void Sum_on_nullables_can_be_calulated()
+    public void Sum_on_nullables_can_be_calculated()
         => nullables.Sum().Should().Be(24 + Currency.EUR);
 
     [Test]
@@ -184,11 +184,11 @@ public class Moneys
     }
 
     [Test]
-    public void Sum_on_selected_collection_is_caluculated()
+    public void Sum_on_selected_collection_is_calculated()
         => collection.Sum(Selection).Should().Be(24 + Currency.EUR);
 
     [Test]
-    public void Sum_on_selected_nullables_can_be_calulated()
+    public void Sum_on_selected_nullables_can_be_calculated()
         => nullables.Sum(Selection).Should().Be(24 + Currency.EUR);
 
     [Test]

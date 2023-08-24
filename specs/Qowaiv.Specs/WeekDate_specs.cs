@@ -42,7 +42,7 @@ public class Can_not_be_created
     }
 
     [Test]
-    public void for_date_above_week_date_max_with_invalid_week_nuber()
+    public void for_date_above_week_date_max_with_invalid_week_number()
     {
         Func<WeekDate> create = () => new WeekDate(9999, 53, 6);
         create.Should()

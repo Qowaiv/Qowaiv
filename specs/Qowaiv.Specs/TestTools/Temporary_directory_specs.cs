@@ -30,7 +30,7 @@ public class Exists
     }
 
     [Test]
-    public void not_outsidescope()
+    public void not_outside_scope()
     {
         DirectoryInfo? dir = null;
         using (var temp = new TemporaryDirectory())

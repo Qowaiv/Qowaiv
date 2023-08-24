@@ -143,28 +143,28 @@ public class StartsWith_String
     public void Longer_then_buffer_is_false()
     {
         var buffer = " test".Buffer().RemoveFromEnd(1);
-        Assert.IsFalse(buffer.StartsWithCaseInsensitve("testx"));
+        Assert.IsFalse(buffer.StartsWithCaseInsensitive("testx"));
     }
 
     [Test]
     public void That_matches_buffer_but_not_al_visible_is_false()
     {
         var buffer = " test".Buffer().Trim().RemoveFromEnd(1);
-        Assert.IsFalse(buffer.StartsWithCaseInsensitve("test"));
+        Assert.IsFalse(buffer.StartsWithCaseInsensitive("test"));
     }
 
     [Test]
     public void Not_matching_buffer_is_false()
     {
         var buffer = " test".Buffer().Trim();
-        Assert.IsFalse(buffer.StartsWithCaseInsensitve("xe"));
+        Assert.IsFalse(buffer.StartsWithCaseInsensitive("xe"));
     }
 
     [Test]
     public void Matching_buffer_is_true()
     {
         var buffer = " test".Buffer().Trim();
-        Assert.IsTrue(buffer.StartsWithCaseInsensitve("tes"));
+        Assert.IsTrue(buffer.StartsWithCaseInsensitive("tes"));
     }
 }
 
@@ -181,7 +181,7 @@ public class Substring
 public class IsEmpty
 {
     [Test]
-    public void Is_true_for_buffer_without_visable_content()
+    public void Is_true_for_buffer_without_visible_content()
     {
         var buffer = "   ".Buffer().Trim();
         Assert.IsTrue(buffer.IsEmpty());

@@ -78,7 +78,7 @@ public class ThreadDomainTest
     }
 
     [Test]
-    public void Remove_Country_BeforSetAndAfter()
+    public void Remove_Country_before_set_and_after()
     {
         using (TestCultures.Nl_BE.Scoped())
         {

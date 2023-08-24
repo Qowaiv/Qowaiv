@@ -4,11 +4,11 @@ namespace Qowaiv.Globalization;
 
 internal readonly partial struct CountryToCurrency : IEquatable<CountryToCurrency>
 {
-    public CountryToCurrency(Country country, Currency currency, Date startdate)
+    public CountryToCurrency(Country country, Currency currency, Date startDate)
     {
         Country = country;
         Currency = currency;
-        StartDate = startdate;
+        StartDate = startDate;
     }
 
     public CountryToCurrency(Country country, Currency currency)

@@ -653,14 +653,14 @@ public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFo
 
     /// <summary>Creates a stream size based on the size in mebibytes.</summary>
     /// <param name="size">
-    /// The size in megabytes.
+    /// The size in mebibytes.
     /// </param>
     [Pure]
     public static StreamSize FromMebibytes(double size) => MiB * size;
 
-    /// <summary>Creates a stream size based on the size in gigabytes.</summary>
+    /// <summary>Creates a stream size based on the size in gibibytes.</summary>
     /// <param name="size">
-    /// The size in gigabytes.
+    /// The size in gibibytes.
     /// </param>
     [Pure]
     public static StreamSize FromGibibytes(double size) => GiB * size;

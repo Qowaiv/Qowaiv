@@ -27,7 +27,7 @@ public class Fails_on
         .WithMessage(@"Expected x to be ""wrong"", but found ""SimpleClass display"".");
 }
 
-public class can_be_chainged
+public class can_be_changed
 {
     [Test]
     public void with_And_constraint()

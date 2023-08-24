@@ -48,16 +48,16 @@ public class TypeConverterModelBinder : IModelBinderProvider, IModelBinder
     }
 
     /// <summary>Adds the specified types.</summary>
-    /// <param name="tps">
+    /// <param name="types">
     /// Types to add.
     /// </param>
     /// <remarks>
     /// Only adds the types that are supported by the model binder.
     /// </remarks>
-    public TypeConverterModelBinder AddTypes(params Type[] tps)
+    public TypeConverterModelBinder AddTypes(params Type[] types)
     {
-        Guard.NotNull(tps);
-        foreach (var tp in tps)
+        Guard.NotNull(types);
+        foreach (var tp in types)
         {
             AddType(tp);
         }

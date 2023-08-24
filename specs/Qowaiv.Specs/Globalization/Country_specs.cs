@@ -1,6 +1,6 @@
 ﻿namespace Globalization.Country_specs;
 
-public class Dispslay_name
+public class Display_name
 {
     [Test]
     public void string_empty_for_empty_country()
@@ -60,7 +60,7 @@ public class End_date
     public void null_for_empty() => Country.Empty.EndDate.Should().BeNull();
 
     [Test]
-    public void null_for_unkown() => Country.Unknown.EndDate.Should().BeNull();
+    public void null_for_unknown() => Country.Unknown.EndDate.Should().BeNull();
 
     [Test]
     public void null_for_active() => Svo.Country.EndDate.Should().BeNull();

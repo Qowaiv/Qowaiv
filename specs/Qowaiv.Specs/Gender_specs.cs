@@ -386,7 +386,7 @@ public class Casts
 
     [TestCase("Female", 2)]
     [TestCase("", null)]
-    public void implictly_from_nullable_int(Gender casted, int? value)
+    public void implicitly_from_nullable_int(Gender casted, int? value)
     {
         Gender gender = value;
         Assert.AreEqual(casted, gender);
@@ -394,7 +394,7 @@ public class Casts
 
     [TestCase("Female", 2)]
     [TestCase("?", 0)]
-    public void implictly_from_int(Gender casted, int value)
+    public void implicitly_from_int(Gender casted, int value)
     {
         Gender gender = value;
         Assert.AreEqual(casted, gender);

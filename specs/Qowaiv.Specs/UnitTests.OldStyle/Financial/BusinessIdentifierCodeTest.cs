@@ -100,7 +100,7 @@ public class BusinessIdentifierCodeTest
 
     /// <summary>TryParse "?" should be valid and the result should be BusinessIdentifierCode.Unknown.</summary>
     [Test]
-    public void TryParse_Questionmark_IsValid()
+    public void TryParse_question_mark_IsValid()
     {
         string str = "?";
         Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
@@ -550,12 +550,8 @@ public class BusinessIdentifierCodeTest
         Assert.AreEqual(exp, act);
     }
     [Test]
-    public void BusinessCode_TestStruct_AEGO()
-    {
-        var exp = "AEGO";
-        var act = TestStruct.Business;
-        Assert.AreEqual(exp, act);
-    }
+    public void BusinessCode_has_length_of_four()
+        => TestStruct.Business.Should().Be("AEGO");
 
     [Test]
     public void Country_DefaultValue_CountryEmpty()
@@ -623,7 +619,7 @@ public class BusinessIdentifierCodeTest
         Assert.AreEqual(exp, act);
     }
     [Test]
-    public void BranchCode_AEGONL2U_StringEmpty()
+    public void BranchCode_empty_for_BIC_without_one()
     {
         var exp = "";
         var act = BusinessIdentifierCode.Parse("AEGONL2U").Branch;

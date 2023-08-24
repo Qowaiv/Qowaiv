@@ -45,7 +45,7 @@ public class IdCastTest
     }
 
     [Test]
-    public void Cast_FromGuidToGuid_Successfull()
+    public void Cast_FromGuidToGuid_Successful()
     {
         var guid = Guid.Parse("AD38ECD4-020F-475C-9318-DFF2067DA1D4");
         var casted = (Id<ForGuid>)guid;
@@ -54,7 +54,7 @@ public class IdCastTest
     }
 
     [Test]
-    public void Cast_FromGuidToString_Successfull()
+    public void Cast_FromGuidToString_Successful()
     {
         var guid = Guid.Parse("AD38ECD4-020F-475C-9318-DFF2067DA1D4");
         var casted = (Id<ForString>)guid;
@@ -63,7 +63,7 @@ public class IdCastTest
     }
 
     [Test]
-    public void Cast_FromInt64ToInt64_Successfull()
+    public void Cast_FromInt64ToInt64_Successful()
     {
         var number = 12345L;
         var casted = (Id<ForInt64>)number;
@@ -72,7 +72,7 @@ public class IdCastTest
     }
 
     [Test]
-    public void Cast_FromStringToInt64_Successfull()
+    public void Cast_FromStringToInt64_Successful()
     {
         var number = "12345";
         var casted = (Id<ForInt64>)number;
@@ -81,7 +81,7 @@ public class IdCastTest
     }
 
     [Test]
-    public void Cast_FromInt64ToString_Successfull()
+    public void Cast_FromInt64ToString_Successful()
     {
         var number = 12345L;
         var casted = (Id<ForString>)number;
@@ -98,7 +98,7 @@ public class IdCastTest
     }
 
     [Test]
-    public void Cast_FromInt64ToInt64_Trhows()
+    public void Cast_FromInt64ToInt64_Throws()
     {
         var guid = Guid.NewGuid();
         Assert.Throws<InvalidCastException>(() => Void((Id<ForInt64>)guid));
@@ -112,7 +112,7 @@ public class IdCastTest
     }
 
     [Test]
-    public void Cast_FromInt64ToGuid_Trhows()
+    public void Cast_FromInt64ToGuid_Throws()
     {
         var number = 12345L;
         Assert.Throws<InvalidCastException>(() => Void((Id<ForGuid>)number));

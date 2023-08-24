@@ -92,7 +92,7 @@ public class FormattingArgumentsCollectionTest
         "Input string was not in a correct format.");
     }
     [Test]
-    public void Format_UnparsebleIndex_ThrowsFormatException()
+    public void Format_no_parsable_index_ThrowsFormatException()
     {
         Assert.Catch<FormatException>(() =>
         {
@@ -233,7 +233,7 @@ public class FormattingArgumentsCollectionTest
     #region Collection manipulation
 
     [Test]
-    public void Add_NotIFormattebleType_ThrowsArgumentException()
+    public void Add_not_IFormattable_type_throws()
     {
         var collection = new FormattingArgumentsCollection();
         Action add = () => collection.Add(typeof(Type), "");

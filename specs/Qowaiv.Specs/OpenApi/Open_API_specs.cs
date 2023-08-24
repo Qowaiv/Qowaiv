@@ -20,7 +20,7 @@ public class Open_API_data_type
             nullable: true));
 
     [Test]
-    public void IIDentifierBehavior_is_resolved_as_Id_type()
+    public void Identifier_behavior_is_resolved_as_Id_type()
         => OpenApiDataType.FromType(typeof(DecoratedId))
         .Should().Be(new OpenApiDataType(
             dataType: typeof(Id<DecoratedId>),
@@ -62,7 +62,7 @@ public class README_md
                     type = info.Type,
                     format = info.Format,
                     pattern = info.Pattern,
-                    nullabe = info.Nullable,
+                    nullable = info.Nullable,
                     @enum = info.Enum?.ToArray(),
                 });
 #if DEBUG
@@ -81,7 +81,7 @@ public class README_md
         public string? type { get; init; }
         public string? format { get; init; }
         public string? pattern { get; init; }
-        public bool nullabe { get; init; }
+        public bool nullable { get; init; }
         public string[]? @enum { get; init; } = Array.Empty<string>();
     }
 }

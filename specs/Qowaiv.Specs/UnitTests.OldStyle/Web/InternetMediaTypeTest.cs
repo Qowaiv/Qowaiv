@@ -109,7 +109,7 @@ public class InternetMediaTypeTest
 
     /// <summary>TryParse "?" should be valid and the result should be InternetMediaType.Unknown.</summary>
     [Test]
-    public void TryParse_Questionmark_IsValid()
+    public void TryParse_question_mark_IsValid()
     {
         string str = "?";
 

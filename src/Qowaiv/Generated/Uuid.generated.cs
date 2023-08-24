@@ -16,7 +16,12 @@ public partial struct Uuid
     private Uuid(Guid value) => m_Value = value;
 
     /// <summary>The inner value of the UUID.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Guid m_Value;
+
+    /// <summary>False if the UUID is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
 
     /// <summary>Returns true if the UUID is empty, otherwise false.</summary>
     [Pure]

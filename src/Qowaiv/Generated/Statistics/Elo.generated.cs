@@ -16,8 +16,8 @@ public partial struct Elo
     private Elo(double value) => m_Value = value;
 
     /// <summary>The inner value of the elo.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly double m_Value;
-
 }
 
 public partial struct Elo : IEquatable<Elo>

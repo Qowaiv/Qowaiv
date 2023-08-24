@@ -16,14 +16,25 @@ public partial struct YesNo
     private YesNo(byte value) => m_Value = value;
 
     /// <summary>The inner value of the yes-no.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly byte m_Value;
+
+    /// <summary>False if the yes-no is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
+
+    /// <summary>False if the yes-no is empty or unknown, otherwise false.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
     /// <summary>Returns true if the yes-no is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;
+
     /// <summary>Returns true if the yes-no is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
+
     /// <summary>Returns true if the yes-no is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();

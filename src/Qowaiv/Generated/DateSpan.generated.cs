@@ -16,8 +16,8 @@ public partial struct DateSpan
     private DateSpan(ulong value) => m_Value = value;
 
     /// <summary>The inner value of the date span.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly ulong m_Value;
-
 }
 
 public partial struct DateSpan : IEquatable<DateSpan>

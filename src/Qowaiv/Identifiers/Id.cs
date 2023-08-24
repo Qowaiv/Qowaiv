@@ -43,7 +43,12 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     }
 
     /// <summary>The inner value of the identifier.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly object? m_Value;
+
+    /// <summary>False if the identifier is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => !IsEmpty();
 
     /// <summary>Returns true if the identifier is empty, otherwise false.</summary>
     [Pure]

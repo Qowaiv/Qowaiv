@@ -21,7 +21,7 @@ public class Amounts
     }
 
     [Test]
-    public void Average_on_selected_selected_collection_is_calculated()
+    public void Average_on_selected_collection_is_calculated()
     => collection.Average(Selection).Should().Be(8.Amount());
 
     [Test]

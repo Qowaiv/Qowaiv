@@ -1,5 +1,12 @@
 ﻿namespace Identifiers.Id_for_Guid_specs;
 
+public class With_domain_logic
+{
+    [TestCase(true, "33ef5805-c472-4b1f-88bb-2f0723c43889")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, CustomGuid svo) => svo.HasValue.Should().Be(result);
+}
+
 public class Is_comparable
 {
     [Test]

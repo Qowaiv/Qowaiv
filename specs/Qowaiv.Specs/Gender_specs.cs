@@ -3,6 +3,18 @@
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
 public class With_domain_logic
 {
+    [TestCase(true, "Male")]
+    [TestCase(true, "Female")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, Gender svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "Male")]
+    [TestCase(true, "Female")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, Gender svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase(false, "Male")]
     [TestCase(false, "Female")]
     [TestCase(false, "?")]

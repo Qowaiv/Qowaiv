@@ -56,6 +56,14 @@ public readonly struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFor
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
 
+    /// <summary>Returns true if the Single Value Object is set.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value is { };
+
+    /// <summary>False if theSingle Value Object is empty or unknown, otherwise false.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value is { } && m_Value != SvoBehavior.unknown;
+
     /// <summary>Returns true if the Single Value Object is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => m_Value == default;

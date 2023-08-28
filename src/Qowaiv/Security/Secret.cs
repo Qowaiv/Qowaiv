@@ -20,6 +20,10 @@ public readonly struct Secret : IEquatable<Secret>
 
     private Secret(string value) => m_Value = value;
 
+    /// <summary>Returns true if the secret is set.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value is { };
+
     /// <summary>Returns true if the secret is empty/not set.</summary>
     [Pure]
     public bool IsEmpty() => m_Value is null;

@@ -2,6 +2,18 @@
 
 public class With_domain_logic
 {
+    [TestCase(true, "Male")]
+    [TestCase(true, "Female")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, Sex svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "Male")]
+    [TestCase(true, "Female")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, Sex svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase(false, "Male")]
     [TestCase(false, "Female")]
     [TestCase(false, "?")]

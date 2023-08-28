@@ -21,6 +21,16 @@ public class Default_behavior
 
 public class With_domain_logic
 {
+    [TestCase(true, "QOWAIV")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, CustomSvo svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "QOWAIV")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, CustomSvo svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase("")]
     [TestCase("?")]
     public void has_length_zero_for_empty_and_unknown(CustomSvo svo)

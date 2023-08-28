@@ -2,6 +2,10 @@
 
 public class With_domain_logic
 {
+    [TestCase(true, "Qowaiv_SVOLibrary_GUIA")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, Uuid svo) => svo.HasValue.Should().Be(result);
+
     [TestCase(false, "Qowaiv_SVOLibrary_GUIA")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, Uuid svo)

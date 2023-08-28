@@ -2,61 +2,56 @@ namespace YesNo_specs;
 
 public class With_domain_logic
 {
-    [TestCase(false, "yes")]
-    [TestCase(false, "no")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
-    public void IsEmpty_returns(bool result, YesNo svo)
-    {
-        Assert.AreEqual(result, svo.IsEmpty());
-    }
-
-    [TestCase(false, "yes")]
-    [TestCase(false, "no")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
-    public void IsEmptyOrUnknown_returns(bool result, YesNo svo)
-    {
-        Assert.AreEqual(result, svo.IsEmptyOrUnknown());
-    }
-
-    [TestCase(false, "yes")]
-    [TestCase(false, "no")]
+    [TestCase(true, "yes")]
+    [TestCase(true, "no")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
-    public void IsUnknown_returns(bool result, YesNo svo)
-    {
-        Assert.AreEqual(result, svo.IsUnknown());
-    }
+    public void HasValue_is(bool result, YesNo svo) => svo.HasValue.Should().Be(result);
 
     [TestCase(true, "yes")]
     [TestCase(true, "no")]
     [TestCase(false, "?")]
     [TestCase(false, "")]
-    public void IsYesOrNo_returns(bool result, YesNo svo)
-    {
-        Assert.AreEqual(result, svo.IsYesOrNo());
-    }
+    public void IsKnown_is(bool result, YesNo svo) => svo.IsKnown.Should().Be(result);
+
+    [TestCase(false, "yes")]
+    [TestCase(false, "no")]
+    [TestCase(false, "?")]
+    [TestCase(true, "")]
+    public void IsEmpty_returns(bool result, YesNo svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(false, "yes")]
+    [TestCase(false, "no")]
+    [TestCase(true, "?")]
+    [TestCase(true, "")]
+    public void IsEmptyOrUnknown_returns(bool result, YesNo svo) => svo.IsEmptyOrUnknown().Should().Be(result);
+
+    [TestCase(false, "yes")]
+    [TestCase(false, "no")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void IsUnknown_returns(bool result, YesNo svo) => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(true, "yes")]
+    [TestCase(true, "no")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsYesOrNo_returns(bool result, YesNo svo) => svo.IsYesOrNo().Should().Be(result);
+
 
     [TestCase(false, "")]
     [TestCase(false, "N")]
     [TestCase(true, "Y")]
     [TestCase(false, "?")]
 
-    public void IsYes_returns(bool result, YesNo svo)
-    {
-        Assert.AreEqual(result, svo.IsYes());
-    }
+    public void IsYes_returns(bool result, YesNo svo) => svo.IsYes().Should().Be(result);
 
     [TestCase(false, "")]
     [TestCase(true, "N")]
     [TestCase(false, "Y")]
     [TestCase(false, "?")]
 
-    public void IsNo_returns(bool result, YesNo svo)
-    {
-        Assert.AreEqual(result, svo.IsNo());
-    }
+    public void IsNo_returns(bool result, YesNo svo) => svo.IsNo().Should().Be(result);
 }
 
 public class Is_valid_for

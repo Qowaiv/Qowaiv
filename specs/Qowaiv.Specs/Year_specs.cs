@@ -2,6 +2,16 @@
 
 public class With_domain_logic
 {
+    [TestCase(true, 1979)]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, Year svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, 1979)]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, Year svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase(false, 1979)]
     [TestCase(false, "?")]
     [TestCase(true, "")]

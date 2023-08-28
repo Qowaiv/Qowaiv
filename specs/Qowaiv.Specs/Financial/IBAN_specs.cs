@@ -117,6 +117,19 @@ public class Supported
     }
 }
 
+public class With_domain_logic
+{
+    [TestCase(true, "NL20INGB0001234567")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, InternationalBankAccountNumber svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "NL20INGB0001234567")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, InternationalBankAccountNumber svo) => svo.IsKnown.Should().Be(result);
+}
+
 public class Supports_type_conversion
 {
     [Test]

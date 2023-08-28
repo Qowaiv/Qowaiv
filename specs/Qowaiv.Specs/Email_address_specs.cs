@@ -2,17 +2,23 @@
 
 public class With_domain_logic
 {
+    [TestCase(true, "info@qowaiv.org")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, EmailAddress svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "info@qowaiv.org")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, EmailAddress svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase("")]
     [TestCase("?")]
-    public void has_length_zero_for_empty_and_unknown(EmailAddress svo)
-        => svo.Length.Should().Be(0);
+    public void has_length_zero_for_empty_and_unknown(EmailAddress svo) => svo.Length.Should().Be(0);
 
     [TestCase(15, "info@qowaiv.org")]
-    public void has_length(int length, EmailAddress svo)
-    {
-        Assert.AreEqual(length, svo.Length);
-    }
-
+    public void has_length(int length, EmailAddress svo) => svo.Length.Should().Be(length);
+    
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(false, "?")]
     [TestCase(true, "")]

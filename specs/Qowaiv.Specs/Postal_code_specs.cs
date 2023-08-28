@@ -2,6 +2,16 @@
 
 public class With_domain_logic
 {
+    [TestCase(true, "H0H0H0")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, PostalCode svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "H0H0H0")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, PostalCode svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase("")]
     [TestCase("?")]
     public void has_length_zero_for_empty_and_unknown(PostalCode svo)

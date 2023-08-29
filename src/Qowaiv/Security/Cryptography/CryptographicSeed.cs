@@ -18,6 +18,10 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
 
     private CryptographicSeed(byte[] value) => m_Value = value;
 
+    /// <summary>Returns true if the cryptographic seed is set.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value is { };
+
     /// <summary>Returns true if the cryptographic seed is empty/not set.</summary>
     [Pure]
     public bool IsEmpty() => m_Value is null;

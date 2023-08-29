@@ -274,7 +274,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.EnergyLabel.ToString("SomeFormat", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'A++', format: 'SomeFormat'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'A++', format: 'SomeFormat'");
     }
 
     [TestCase(null, "A++", "A++")]
@@ -507,7 +507,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.EnergyLabel;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

@@ -1,5 +1,19 @@
 ﻿namespace HouseNumber_specs;
 
+
+public class With_domain_logic
+{
+    [TestCase(true, 123456789)]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, HouseNumber svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, 123456789)]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, HouseNumber svo) => svo.IsKnown.Should().Be(result);
+}
+
 public class Is_equal_by_value
 {
     [Test]

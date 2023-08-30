@@ -16,8 +16,8 @@ public partial struct Timestamp
     private Timestamp(ulong value) => m_Value = value;
 
     /// <summary>The inner value of the timestamp.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly ulong m_Value;
-
 }
 
 public partial struct Timestamp : IEquatable<Timestamp>

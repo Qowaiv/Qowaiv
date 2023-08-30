@@ -16,8 +16,8 @@ public partial struct Percentage
     private Percentage(decimal value) => m_Value = value;
 
     /// <summary>The inner value of the percentage.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly decimal m_Value;
-
 }
 
 public partial struct Percentage : IEquatable<Percentage>

@@ -16,8 +16,8 @@ public partial struct MonthSpan
     private MonthSpan(int value) => m_Value = value;
 
     /// <summary>The inner value of the month span.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
-
 }
 
 public partial struct MonthSpan : IEquatable<MonthSpan>

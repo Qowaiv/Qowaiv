@@ -4,12 +4,21 @@ namespace Chemistry.CAS_Registry_Number_specs;
 
 public class With_domain_logic
 {
+    [TestCase(true, "73–24–5")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, CasRegistryNumber svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "73–24–5")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, CasRegistryNumber svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase("")]
     [TestCase("?")]
     public void has_length_zero_for_empty_and_unknown(CasRegistryNumber svo)
         => svo.Length.Should().Be(0);
 
-    
     [TestCase(5, "73–24–5")]
     [TestCase(7, "7732-18-5")]
     [TestCase(8, "10028-14-5")]

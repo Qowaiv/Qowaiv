@@ -16,8 +16,8 @@ public partial struct Amount
     private Amount(decimal value) => m_Value = value;
 
     /// <summary>The inner value of the amount.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly decimal m_Value;
-
 }
 
 public partial struct Amount : IEquatable<Amount>

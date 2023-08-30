@@ -5,9 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.4.4</Version>
+    <Version>6.5.0</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+v6.5.0
+- Introduction of HasValue and IsKnown for non-continuous SVO's. #327
 v6.4.4
 - Introduction of EnergyLabel. #324
 v6.4.3

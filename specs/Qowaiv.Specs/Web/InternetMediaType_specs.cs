@@ -1,5 +1,18 @@
 ﻿namespace Web.InternetMediaType_specs;
 
+public class With_domain_logic
+{
+    [TestCase(true, "application/x-chess-pgn")]
+    [TestCase(true, "application/octet-stream")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, InternetMediaType svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "application/x-chess-pgn")]
+    [TestCase(false, "application/octet-stream")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, InternetMediaType svo) => svo.IsKnown.Should().Be(result);
+}
+
 public class Supports_type_conversion
 {
     [Test]

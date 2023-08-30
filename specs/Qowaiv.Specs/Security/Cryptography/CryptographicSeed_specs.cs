@@ -24,6 +24,11 @@ public class Not_computed
 
 public class With_domain_logic
 {
+    [TestCase(true, "Qowaiv==")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, CryptographicSeed svo)
+      => svo.HasValue.Should().Be(result);
+
     [TestCase(false, "Qowaiv==")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, CryptographicSeed svo)

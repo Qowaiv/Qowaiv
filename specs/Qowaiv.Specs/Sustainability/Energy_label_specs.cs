@@ -1,9 +1,19 @@
 ﻿using Qowaiv.Sustainability;
 
-namespace EnergyLabel_specs;
+namespace Energy_label_specs;
 
 public class With_domain_logic
 {
+    [TestCase(true, "A++")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, EnergyLabel svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "A++")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, EnergyLabel svo) => svo.IsKnown.Should().Be(result);
+
     [TestCase(false, "A++")]
     [TestCase(false, "?")]
     [TestCase(true, "")]
@@ -264,7 +274,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.EnergyLabel.ToString("SomeFormat", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'A++', format: 'SomeFormat'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'A++', format: 'SomeFormat'");
     }
 
     [TestCase(null, "A++", "A++")]
@@ -497,7 +507,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.EnergyLabel;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

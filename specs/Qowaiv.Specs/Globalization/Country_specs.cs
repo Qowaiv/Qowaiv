@@ -1,5 +1,18 @@
 ﻿namespace Globalization.Country_specs;
 
+public class With_domain_logic
+{
+    [TestCase(true, "VA")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, Country svo) => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "VA")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsKnown_is(bool result, Country svo) => svo.IsKnown.Should().Be(result);
+}
+
 public class Display_name
 {
     [Test]

@@ -21,6 +21,10 @@ public class Cryptographic_seed_can_be_created
 
 public class With_domain_logic
 {
+    [TestCase(true, "Ken sent me!")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, Secret svo) => svo.HasValue.Should().Be(result);
+
     [TestCase(false, "Ken sent me!")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, Secret svo)

@@ -116,7 +116,7 @@ public sealed class ForCustomSvo : SvoBehavior
     public override int MaxLength => 16;
     public override Regex Pattern => new("^[A-Z]+$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(1));
 
-    public override string NormalizeInput(string str, IFormatProvider formatProvider) 
+    public override string NormalizeInput(string? str, IFormatProvider? formatProvider) 
         => str?.Replace("-", "").ToUpper(formatProvider ?? CultureInfo.InvariantCulture) ?? string.Empty;
 }
 

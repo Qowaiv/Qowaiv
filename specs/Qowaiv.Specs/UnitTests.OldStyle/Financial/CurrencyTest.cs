@@ -124,8 +124,7 @@ public class CurrencyTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-        Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
+        Assert.IsTrue(Currency.TryParse(Nil.String, out Currency val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 

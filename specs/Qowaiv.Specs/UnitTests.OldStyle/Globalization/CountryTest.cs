@@ -76,8 +76,7 @@ public class CountryTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-        Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
+        Assert.IsTrue(Country.TryParse(Nil.String, out Country val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 

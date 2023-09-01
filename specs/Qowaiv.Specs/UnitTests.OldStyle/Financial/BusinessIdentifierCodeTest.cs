@@ -84,8 +84,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-        Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
+        Assert.IsTrue(BusinessIdentifierCode.TryParse(Nil.String, out BusinessIdentifierCode val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 

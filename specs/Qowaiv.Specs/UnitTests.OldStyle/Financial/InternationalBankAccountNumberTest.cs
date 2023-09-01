@@ -40,8 +40,7 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-        Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
+        Assert.IsTrue(InternationalBankAccountNumber.TryParse(Nil.String, out var val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 

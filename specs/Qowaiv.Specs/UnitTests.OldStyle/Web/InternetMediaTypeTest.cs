@@ -90,9 +90,7 @@ public class InternetMediaTypeTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-
-        Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+        Assert.IsTrue(InternetMediaType.TryParse(Nil.String, out var val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 

@@ -6,51 +6,6 @@ public class FormattingArgumentsTest
     /// <summary>The test instance for most tests.</summary>
     public static readonly FormattingArguments TestStruct = new("0.000", new CultureInfo("fr-BE"));
 
-    [Test]
-    public void ToString_IFormattableNull_IsNull()
-    {
-        IFormattable formatter = null;
-        string act = TestStruct.ToString(formatter);
-        string exp = null;
-
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void ToString_ObjectNull_IsNull()
-    {
-        string act = TestStruct.ToString((object)null);
-        string exp = null;
-
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void ToString_TypeInt32_SystemInt32()
-    {
-        string act = TestStruct.ToString((object)typeof(int));
-        string exp = "System.Int32";
-
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void ToString_7_7Comma000()
-    {
-        string act = TestStruct.ToString((object)7);
-        string exp = "7,000";
-
-        Assert.AreEqual(exp, act);
-    }
-    [Test]
-    public void ToString_7_7Dot000()
-    {
-        using (TestCultures.En_GB.Scoped())
-        {
-            string act = new FormattingArguments("0.000").ToString((object)7);
-            string exp = "7.000";
-
-            Assert.AreEqual(exp, act);
-        }
-    }
-
     #region formatting arguments const tests
 
     /// <summary>FormattableArguments.None should be equal to the default of formatting arguments.</summary>

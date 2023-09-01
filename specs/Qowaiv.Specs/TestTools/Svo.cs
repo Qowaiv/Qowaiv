@@ -49,6 +49,9 @@ public static class Svo
     /// <summary>A++</summary>
     public static readonly EnergyLabel EnergyLabel = EnergyLabel.A(2);
 
+    /// <summary>0.000 (fr-BE)</summary>
+    public static readonly FormattingArguments FormattingArguments = new("0.000", new CultureInfo("fr-BE"));
+
     /// <summary>-69/17</summary>
     public static readonly Fraction Fraction = -69.DividedBy(17);
 

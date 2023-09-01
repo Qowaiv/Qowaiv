@@ -49,6 +49,9 @@ public static class Svo
     /// <summary>A++</summary>
     public static readonly EnergyLabel EnergyLabel = EnergyLabel.A(2);
 
+    /// <summary>0.000 (fr-BE)</summary>
+    public static readonly FormattingArguments FormattingArguments = new("0.000", new CultureInfo("fr-BE"));
+
     /// <summary>-69/17</summary>
     public static readonly Fraction Fraction = -69.DividedBy(17);
 
@@ -98,7 +101,7 @@ public static class Svo
     /// <summary>8A1A8C42-D2FF-E254-E26E-B6ABCBF19420</summary>
     public static readonly CustomGuid CustomGuid = CustomGuid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420");
     public static readonly CustomUuid CustomUuid = CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
-    
+
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(field => field.GetValue(null)!);
@@ -113,7 +116,7 @@ public sealed class ForCustomSvo : SvoBehavior
     public override int MaxLength => 16;
     public override Regex Pattern => new("^[A-Z]+$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(1));
 
-    public override string NormalizeInput(string str, IFormatProvider formatProvider) 
+    public override string NormalizeInput(string? str, IFormatProvider? formatProvider) 
         => str?.Replace("-", "").ToUpper(formatProvider ?? CultureInfo.InvariantCulture) ?? string.Empty;
 }
 

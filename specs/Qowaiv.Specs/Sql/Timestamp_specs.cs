@@ -1,5 +1,17 @@
 ﻿namespace Sql.Timestamp_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => Timestamp.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => Timestamp.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage() => Timestamp.TryParse("Not a timestamp").Should().BeNull();
+}
+
 public class Is_equal_by_value
 {
     [Test]
@@ -43,6 +55,12 @@ public class Is_equal_by_value
             svo.GetHashCode().Should().Be(hash);
         }
     }
+}
+
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.Timestamp.CompareTo(Nil.Object).Should().Be(1);
 }
 
 public class Can_be_created

@@ -19,21 +19,6 @@ public class WeekDateTest
 
     #region TryParse tests
 
-    /// <summary>TryParse null should be valid.</summary>
-    [Test]
-    public void TryParse_Null_IsInvalid()
-    {
-        string str = null;
-        Assert.IsFalse(WeekDate.TryParse(str, out _), "Not valid");
-    }
-
-    /// <summary>TryParse string.Empty should be valid.</summary>
-    [Test]
-    public void TryParse_StringEmpty_IsInvalid()
-    {
-        Assert.IsFalse(WeekDate.TryParse(string.Empty, out _), "Not valid");
-    }
-
     /// <summary>TryParse with specified string value should be valid.</summary>
     [Test]
     public void TryParse_StringValue_IsValid()
@@ -41,13 +26,6 @@ public class WeekDateTest
         string str = "1234-W50-6";
         Assert.IsTrue(WeekDate.TryParse(str, out WeekDate val), "Valid");
         Assert.AreEqual(str, val.ToString(), "Value");
-    }
-
-    /// <summary>TryParse with specified string value should be invalid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsNotValid()
-    {
-        Assert.IsFalse(WeekDate.TryParse("string", out _), "Valid");
     }
 
     [Test]
@@ -75,10 +53,6 @@ public class WeekDateTest
             Assert.AreEqual(exp, act);
         }
     }
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => WeekDate.TryParse("invalid input").Should().BeNull();
 
     [Test]
     public void TryParse_Y0000W21D7_DefaultValue()
@@ -428,14 +402,6 @@ public class WeekDateTest
         var act = TestStruct.CompareTo(other);
 
         Assert.AreEqual(exp, act);
-    }
-
-    /// <summary>Compare with null should return 1.</summary>
-    [Test]
-    public void CompareTo_null_1()
-    {
-        object @null = null;
-        Assert.AreEqual(1, TestStruct.CompareTo(@null));
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>

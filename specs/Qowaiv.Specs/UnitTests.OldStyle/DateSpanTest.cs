@@ -35,22 +35,6 @@ public class DateSpanTest
 
     #region TryParse tests
 
-    /// <summary>TryParse null should be valid.</summary>
-    [Test]
-    public void TryParse_Null_IsInvalid()
-    {
-        string str = null;
-        Assert.IsFalse(DateSpan.TryParse(str, out _));
-    }
-
-    /// <summary>TryParse string.Empty should be valid.</summary>
-    [Test]
-    public void TryParse_StringEmpty_IsInvalid()
-    {
-        string str = string.Empty;
-        Assert.IsFalse(DateSpan.TryParse(str, out _));
-    }
-
     /// <summary>TryParse with specified string value should be valid.</summary>
     [Test]
     public void TryParse_StringValue_IsValid()
@@ -58,14 +42,6 @@ public class DateSpanTest
         string str = "5Y+3M+2D";
         Assert.IsTrue(DateSpan.TryParse(str, out DateSpan val), "Valid");
         Assert.AreEqual(str, val.ToString(), "Value");
-    }
-
-    /// <summary>TryParse with specified string value should be invalid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsInvalid()
-    {
-        string str = "InvalidString";
-        Assert.IsFalse(DateSpan.TryParse(str, out _), "Valid");
     }
 
     [Test]
@@ -431,14 +407,6 @@ public class DateSpanTest
         var act = TestStruct.CompareTo(other);
 
         Assert.AreEqual(exp, act);
-    }
-
-    /// <summary>Compare with null should return 1.</summary>
-    [Test]
-    public void CompareTo_null_1()
-    {
-        object @null = null;
-        Assert.AreEqual(1, TestStruct.CompareTo(@null));
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>

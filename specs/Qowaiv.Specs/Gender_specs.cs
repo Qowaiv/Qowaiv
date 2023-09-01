@@ -336,11 +336,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1()
-    {
-        object obj = null;
-        Assert.AreEqual(1, Svo.Gender.CompareTo(obj));
-    }
+    public void to_null_is_1() => Svo.Gender.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Gender_as_object()

@@ -3,7 +3,7 @@
 public class Is_comparable
 {
     [Test]
-    public void to_null() => Svo.Int32Id.CompareTo(null).Should().Be(1);
+    public void to_null_is_1() => Svo.Int32Id.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Int32Id_as_object()

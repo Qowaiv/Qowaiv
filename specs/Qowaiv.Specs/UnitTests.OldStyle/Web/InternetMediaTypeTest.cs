@@ -90,9 +90,7 @@ public class InternetMediaTypeTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-
-        Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+        Assert.IsTrue(InternetMediaType.TryParse(Nil.String, out var val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -177,55 +175,6 @@ public class InternetMediaTypeTest
     [Test]
     public void from_invalid_as_null_with_TryParse()
         => InternetMediaType.TryParse("invalid input").Should().BeNull();
-
-    #endregion
-
-    #region FromFile tests
-
-    [Test]
-    public void FromFile_NullFileInfo_Empty()
-    {
-        var act = InternetMediaType.FromFile((FileInfo)null);
-        var exp = InternetMediaType.Empty;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile_NullString_Empty()
-    {
-        var act = InternetMediaType.FromFile(Nil.String);
-        var exp = InternetMediaType.Empty;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile__StringEmpty_Empty()
-    {
-        var act = InternetMediaType.FromFile(string.Empty);
-        var exp = InternetMediaType.Empty;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile__GamesDotPgn_ApplicationXChessPgn()
-    {
-        var act = InternetMediaType.FromFile(new FileInfo("games.pgn"));
-        var exp = TestStruct;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile__TestDotUnknown_Unknown()
-    {
-        var act = InternetMediaType.FromFile(new FileInfo("test.unknown"));
-        var exp = InternetMediaType.Unknown;
-
-        Assert.AreEqual(exp, act);
-    }
 
     #endregion
 
@@ -552,14 +501,6 @@ public class InternetMediaTypeTest
         var act = TestStruct.CompareTo(other);
 
         Assert.AreEqual(exp, act);
-    }
-
-    /// <summary>Compare with null should return 1.</summary>
-    [Test]
-    public void CompareTo_null_1()
-    {
-        object @null = null;
-        Assert.AreEqual(1, TestStruct.CompareTo(@null));
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>

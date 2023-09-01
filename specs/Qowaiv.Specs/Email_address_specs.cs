@@ -260,10 +260,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null()
-    {
-        Assert.AreEqual(1, Svo.EmailAddress.CompareTo(null));
-    }
+    public void to_null_is_1() => Svo.EmailAddress.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_EmailAddress_as_object()

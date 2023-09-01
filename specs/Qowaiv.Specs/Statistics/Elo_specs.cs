@@ -1,5 +1,17 @@
 ﻿namespace Statistics.Elo_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => Elo.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => Elo.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage() => Elo.TryParse("Not an Elo").Should().BeNull();
+}
+
 public class Is_equal_by_value
 {
     [Test]
@@ -43,6 +55,12 @@ public class Is_equal_by_value
             svo.GetHashCode().Should().Be(hash);
         }
     }
+}
+
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.Elo.CompareTo(Nil.Object).Should().Be(1);
 }
 
 public class Is_Finite_only

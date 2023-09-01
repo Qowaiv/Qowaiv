@@ -76,8 +76,7 @@ public class CountryTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-        Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
+        Assert.IsTrue(Country.TryParse(Nil.String, out Country val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -573,14 +572,6 @@ public class CountryTest
         var act = TestStruct.CompareTo(other);
 
         Assert.AreEqual(exp, act);
-    }
-
-    /// <summary>Compare with null should return 1.</summary>
-    [Test]
-    public void CompareTo_null_1()
-    {
-        object @null = null;
-        Assert.AreEqual(1, TestStruct.CompareTo(@null));
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>

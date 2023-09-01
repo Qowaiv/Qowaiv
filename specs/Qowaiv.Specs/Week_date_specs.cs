@@ -1,4 +1,16 @@
-﻿namespace WeekDate_specs;
+﻿namespace Week_date_specs;
+
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => WeekDate.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => WeekDate.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage() => WeekDate.TryParse("Not a week date").Should().BeNull();
+}
 
 public class Can_not_be_created
 {
@@ -49,6 +61,12 @@ public class Can_not_be_created
             .Throw<ArgumentOutOfRangeException>()
             .WithMessage("Year, Week, and Day parameters describe an un-representable Date.");
     }
+}
+
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.WeekDate.CompareTo(Nil.Object).Should().Be(1);
 }
 
 public class Supports_type_conversion

@@ -1,6 +1,5 @@
 ﻿namespace HouseNumber_specs;
 
-
 public class With_domain_logic
 {
     [TestCase(true, 123456789)]
@@ -59,6 +58,11 @@ public class Is_equal_by_value
     }
 }
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.HouseNumber.CompareTo(Nil.Object).Should().Be(1);
+}
 public class Supports_type_conversion
 {
     [Test]

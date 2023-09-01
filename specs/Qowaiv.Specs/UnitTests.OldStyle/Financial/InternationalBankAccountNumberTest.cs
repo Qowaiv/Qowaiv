@@ -40,8 +40,7 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        string str = null;
-        Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
+        Assert.IsTrue(InternationalBankAccountNumber.TryParse(Nil.String, out var val), "Valid");
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -471,14 +470,6 @@ public class InternationalBankAccountNumberTest
         var act = TestStruct.CompareTo(other);
 
         Assert.AreEqual(exp, act);
-    }
-
-    /// <summary>Compare with null should return 1.</summary>
-    [Test]
-    public void CompareTo_null_1()
-    {
-        object @null = null;
-        Assert.AreEqual(1, TestStruct.CompareTo(@null));
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>

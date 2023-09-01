@@ -1,5 +1,11 @@
 ﻿namespace Financial.Amount_specs;
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.Amount.CompareTo(Nil.Object).Should().Be(1);
+}
+
 public class Supports_type_conversion
 {
     [Test]

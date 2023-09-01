@@ -1,5 +1,11 @@
 ﻿namespace IO.StreamSize_specs;
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.StreamSize.CompareTo(Nil.Object).Should().Be(1);
+}
+
 public class Can_be_parsed
 {
     [TestCase("en", "123456789")]

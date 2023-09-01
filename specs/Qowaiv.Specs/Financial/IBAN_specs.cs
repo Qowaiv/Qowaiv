@@ -130,6 +130,12 @@ public class With_domain_logic
     public void IsKnown_is(bool result, InternationalBankAccountNumber svo) => svo.IsKnown.Should().Be(result);
 }
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.Iban.CompareTo(Nil.Object).Should().Be(1);
+}
+
 public class Supports_type_conversion
 {
     [Test]

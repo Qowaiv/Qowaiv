@@ -42,22 +42,6 @@
 
         #region TryParse tests
 
-        /// <summary>TryParse null should not be valid.</summary>
-        [Test]
-        public void TryParse_Null_IsNotValid()
-        {
-            string str = null;
-            Assert.IsFalse(Elo.TryParse(str, out _), "Valid");
-        }
-
-        /// <summary>TryParse string.Empty should not be valid.</summary>
-        [Test]
-        public void TryParse_StringEmpty_IsNotValid()
-        {
-            string str = string.Empty;
-            Assert.IsFalse(Elo.TryParse(str, out _));
-        }
-
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TryParse_StringValue_IsValid()
@@ -92,10 +76,6 @@
                 Assert.AreEqual(exp, act);
             }
         }
-
-        [Test]
-        public void from_invalid_as_null_with_TryParse()
-            => Elo.TryParse("invalid input").Should().BeNull();
 
         #endregion
 
@@ -369,14 +349,6 @@
             var act = TestStruct.CompareTo(other);
 
             Assert.AreEqual(exp, act);
-        }
-
-        /// <summary>Compare with null should return 1.</summary>
-        [Test]
-        public void CompareTo_null_1()
-        {
-            object @null = null;
-            Assert.AreEqual(1, TestStruct.CompareTo(@null));
         }
 
         /// <summary>Compare with a random object should throw an exception.</summary>

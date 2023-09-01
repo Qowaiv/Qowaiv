@@ -245,10 +245,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null()
-    {
-        Assert.AreEqual(1, Svo.CasRegistryNumber.CompareTo(null));
-    }
+    public void to_null_is_1() => Svo.CasRegistryNumber.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_CasRegistryNumber_as_object()

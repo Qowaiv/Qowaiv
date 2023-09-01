@@ -319,7 +319,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null() => Svo.EnergyLabel.CompareTo(null).Should().Be(1);
+    public void to_null_is_1() => Svo.EnergyLabel.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_EnergyLabel_as_object()

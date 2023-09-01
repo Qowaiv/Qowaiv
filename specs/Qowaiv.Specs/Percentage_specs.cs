@@ -306,10 +306,7 @@ public class Formatting_is_invalid
 public class Is_comparable
 {
     [Test]
-    public void to_null()
-    {
-        Assert.AreEqual(1, Svo.Percentage.CompareTo(null));
-    }
+    public void to_null_is_1() => Svo.Percentage.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Percentage_as_object()

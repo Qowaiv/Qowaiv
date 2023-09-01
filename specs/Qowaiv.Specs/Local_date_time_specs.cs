@@ -1,5 +1,18 @@
 ﻿namespace Local_date_time_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => LocalDateTime.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => LocalDateTime.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage()
+        => DateSpan.TryParse("not a date").Should().BeNull();
+}
+
 public class Is_equal_by_value
 {
     [Test]
@@ -106,6 +119,13 @@ public class Can_not_be_related_to
     public void year_unknown()
        => new LocalDateTime(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
 }
+
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.LocalDateTime.CompareTo(Nil.Object).Should().Be(1);
+}
+
 public class Supports_type_conversion
 {
     [Test]

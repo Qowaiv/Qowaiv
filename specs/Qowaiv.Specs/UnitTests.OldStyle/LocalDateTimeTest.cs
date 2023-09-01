@@ -22,22 +22,6 @@ public class LocalDateTimeTest
 
     #region TryParse tests
 
-    /// <summary>TryParse null should be valid.</summary>
-    [Test]
-    public void TryParse_Null_IsNotValid()
-    {
-        string str = null;
-        Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
-    }
-
-    /// <summary>TryParse string.MinValue should be valid.</summary>
-    [Test]
-    public void TryParse_StringMinValue_IsNotValid()
-    {
-        string str = string.Empty;
-        Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
-    }
-
     /// <summary>TryParse with specified string value should be valid.</summary>
     [Test]
     public void TryParse_StringValue_IsValid()
@@ -48,14 +32,6 @@ public class LocalDateTimeTest
             Assert.IsTrue(LocalDateTime.TryParse(str, out LocalDateTime val), "Valid");
             Assert.AreEqual(new LocalDateTime(2015, 04, 26, 17, 07, 13, 000), val, "Value");
         }
-    }
-
-    /// <summary>TryParse with specified string value should be invalid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsNotValid()
-    {
-        string str = "invalid format";
-        Assert.IsFalse(LocalDateTime.TryParse(str, out _), "Valid");
     }
 
     [Test]

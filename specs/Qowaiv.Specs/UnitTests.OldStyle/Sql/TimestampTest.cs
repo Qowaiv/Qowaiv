@@ -8,26 +8,6 @@ public class TimestampTest
 
     #region TryParse tests
 
-    /// <summary>TryParse null should be valid.</summary>
-    [Test]
-    public void TryParse_Null_IsValid()
-    {
-        string str = null;
-
-        Assert.IsFalse(Timestamp.TryParse(str, out Timestamp val), "Valid");
-        Assert.AreEqual(Timestamp.MinValue, val, "Value");
-    }
-
-    /// <summary>TryParse string.Empty should be valid.</summary>
-    [Test]
-    public void TryParse_StringEmpty_IsValid()
-    {
-        string str = string.Empty;
-
-        Assert.IsFalse(Timestamp.TryParse(str, out Timestamp val), "Valid");
-        Assert.AreEqual(Timestamp.MinValue, val, "Value");
-    }
-
     [Test]
     public void TryParse_0x00000000075BCD15_IsValid()
     {
@@ -36,6 +16,7 @@ public class TimestampTest
         Assert.IsTrue(Timestamp.TryParse(str, out Timestamp val), "Valid");
         Assert.AreEqual(TestStruct, val, "Value");
     }
+
     [Test]
     public void TryParse_123456789_IsValid()
     {
@@ -45,15 +26,6 @@ public class TimestampTest
         Assert.AreEqual(TestStruct, val, "Value");
     }
 
-    /// <summary>TryParse with specified string value should be invalid.</summary>
-    [Test]
-    public void TryParse_invalidTimeStamp_IsNotValid()
-    {
-        string str = "invalidTimeStamp";
-
-        Assert.IsFalse(Timestamp.TryParse(str, out Timestamp val), "Valid");
-        Assert.AreEqual(Timestamp.MinValue, val, "Value");
-    }
     /// <summary>TryParse with specified string value should be invalid.</summary>
     [Test]
     public void TryParse_0xInvalidTimeStamp_IsNotValid()

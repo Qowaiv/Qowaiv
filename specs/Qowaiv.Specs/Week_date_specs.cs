@@ -1,5 +1,17 @@
 ﻿namespace Week_date_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => WeekDate.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => WeekDate.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage() => WeekDate.TryParse("Not a week date").Should().BeNull();
+}
+
 public class Can_not_be_created
 {
     [TestCase(0)]

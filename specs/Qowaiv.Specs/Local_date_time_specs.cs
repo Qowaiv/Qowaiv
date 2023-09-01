@@ -1,5 +1,18 @@
 ﻿namespace Local_date_time_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => LocalDateTime.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => LocalDateTime.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage()
+        => DateSpan.TryParse("not a date").Should().BeNull();
+}
+
 public class Is_equal_by_value
 {
     [Test]

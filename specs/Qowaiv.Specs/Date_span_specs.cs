@@ -20,10 +20,17 @@ public class Is_valid
 }
 public class Is_invalid
 {
+    [Test]
+    public void for_empty_string() => DateSpan.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => DateSpan.TryParse(Nil.String).Should().BeNull();
+
     [TestCase("+9999Y+0M+0D", "Years out of reach")]
     [TestCase("-9999Y+0M+0D", "Years out of reach")]
     [TestCase("0Y+0M+4650000D", "Days out of reach")]
     [TestCase("0Y+0M-4650000D", "Days out of reach")]
+    [TestCase("Not a date span", "Garbage")]
     public void For(string str, string because)
         => DateSpan.TryParse(str).Should().BeNull(because);
 }

@@ -42,22 +42,6 @@
 
         #region TryParse tests
 
-        /// <summary>TryParse null should not be valid.</summary>
-        [Test]
-        public void TryParse_Null_IsNotValid()
-        {
-            string str = null;
-            Assert.IsFalse(Elo.TryParse(str, out _), "Valid");
-        }
-
-        /// <summary>TryParse string.Empty should not be valid.</summary>
-        [Test]
-        public void TryParse_StringEmpty_IsNotValid()
-        {
-            string str = string.Empty;
-            Assert.IsFalse(Elo.TryParse(str, out _));
-        }
-
         /// <summary>TryParse with specified string value should be valid.</summary>
         [Test]
         public void TryParse_StringValue_IsValid()
@@ -92,10 +76,6 @@
                 Assert.AreEqual(exp, act);
             }
         }
-
-        [Test]
-        public void from_invalid_as_null_with_TryParse()
-            => Elo.TryParse("invalid input").Should().BeNull();
 
         #endregion
 

@@ -1,5 +1,13 @@
 ﻿namespace Date_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => Date.TryParse(string.Empty).Should().BeNull();
+    [Test]
+    public void for_null() => Date.TryParse(Nil.String).Should().BeNull();
+}
+
 public class Has_constant
 {
     [Test]
@@ -121,6 +129,7 @@ public class Is_comparable
     [Test]
     public void to_null_is_1() => Svo.Date.CompareTo(Nil.Object).Should().Be(1);
 }
+
 public class Supports_type_conversion
 {
     [Test]

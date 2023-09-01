@@ -1,5 +1,17 @@
 ﻿namespace Sql.Timestamp_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => Timestamp.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => Timestamp.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage() => Timestamp.TryParse("Not a timestamp").Should().BeNull();
+}
+
 public class Is_equal_by_value
 {
     [Test]

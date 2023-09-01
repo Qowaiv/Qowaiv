@@ -1,5 +1,17 @@
 ﻿namespace Statistics.Elo_specs;
 
+public class Is_invalid
+{
+    [Test]
+    public void for_empty_string() => Elo.TryParse(string.Empty).Should().BeNull();
+
+    [Test]
+    public void for_null() => Elo.TryParse(Nil.String).Should().BeNull();
+
+    [Test]
+    public void for_garbage() => Elo.TryParse("Not an Elo").Should().BeNull();
+}
+
 public class Is_equal_by_value
 {
     [Test]

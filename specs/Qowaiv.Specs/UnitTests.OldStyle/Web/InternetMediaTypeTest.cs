@@ -178,55 +178,6 @@ public class InternetMediaTypeTest
 
     #endregion
 
-    #region FromFile tests
-
-    [Test]
-    public void FromFile_NullFileInfo_Empty()
-    {
-        var act = InternetMediaType.FromFile((FileInfo)null);
-        var exp = InternetMediaType.Empty;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile_NullString_Empty()
-    {
-        var act = InternetMediaType.FromFile(Nil.String);
-        var exp = InternetMediaType.Empty;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile__StringEmpty_Empty()
-    {
-        var act = InternetMediaType.FromFile(string.Empty);
-        var exp = InternetMediaType.Empty;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile__GamesDotPgn_ApplicationXChessPgn()
-    {
-        var act = InternetMediaType.FromFile(new FileInfo("games.pgn"));
-        var exp = TestStruct;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void FromFile__TestDotUnknown_Unknown()
-    {
-        var act = InternetMediaType.FromFile(new FileInfo("test.unknown"));
-        var exp = InternetMediaType.Unknown;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    #endregion
-
     #region (XML) (De)serialization tests
 
     [Test]

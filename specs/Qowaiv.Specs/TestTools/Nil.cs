@@ -2,6 +2,8 @@
 
 internal static class Nil
 {
+    public static readonly FileInfo? FileInfo = null;
+
     public static readonly FormattingArgumentsCollection? FormattingArgumentsCollection = null;
 
     public static readonly IFormattable? IFormattable = null;

@@ -1,4 +1,4 @@
-﻿namespace Web.InternetMediaType_specs;
+﻿namespace Web.Internet_media_type_specs;
 
 public class With_domain_logic
 {
@@ -11,6 +11,30 @@ public class With_domain_logic
     [TestCase(false, "application/octet-stream")]
     [TestCase(false, "")]
     public void IsKnown_is(bool result, InternetMediaType svo) => svo.IsKnown.Should().Be(result);
+}
+
+public class Created_from_file
+{
+    [Test]
+    public void IO_File_info() 
+        => InternetMediaType.FromFile(new FileInfo("games.pgn")).Should().Be(Svo.InternetMediaType);
+
+    [TestCase(".unknown")]
+    [TestCase(".other")]
+    public void IO_File_info_with_unknown_extension(string extension)
+       => InternetMediaType.FromFile(new FileInfo($"file{extension}")).Should().Be(InternetMediaType.Unknown);
+
+    [Test]
+    public void null_IO_File_info_is_empty()
+        => InternetMediaType.FromFile(Nil.FileInfo).Should().Be(InternetMediaType.Empty);
+
+    [Test]
+    public void null_string_is_empty()
+        => InternetMediaType.FromFile(Nil.String).Should().Be(InternetMediaType.Empty);
+
+    [Test]
+    public void empty_string_is_empty()
+        => InternetMediaType.FromFile(string.Empty).Should().Be(InternetMediaType.Empty);
 }
 
 public class Supports_type_conversion

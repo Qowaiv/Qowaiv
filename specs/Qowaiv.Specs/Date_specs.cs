@@ -116,6 +116,11 @@ public class Can_not_be_related_to
        => new Date(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
 }
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.Date.CompareTo(Nil.Object).Should().Be(1);
+}
 public class Supports_type_conversion
 {
     [Test]

@@ -290,7 +290,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null()
+    public void to_null_is_1()
     {
         Assert.AreEqual(1, Svo.Year.CompareTo(null));
     }

@@ -10,7 +10,7 @@ public class With_domain_logic
 public class Is_comparable
 {
     [Test]
-    public void to_null() => Svo.CustomGuid.CompareTo(null).Should().Be(1);
+    public void to_null_is_1() => Svo.CustomGuid.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_CustomGuid_as_object()

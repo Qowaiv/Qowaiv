@@ -93,7 +93,7 @@ public class Can_be_transformed
 public class Is_comparable
 {
     [Test]
-    public void to_null() => Svo.MonthSpan.CompareTo(null).Should().Be(1);
+    public void to_null_is_1() => Svo.MonthSpan.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_MonthSpan_as_object()

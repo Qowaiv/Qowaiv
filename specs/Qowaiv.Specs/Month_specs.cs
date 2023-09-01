@@ -323,10 +323,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null()
-    {
-        Assert.AreEqual(1, Svo.Month.CompareTo(null));
-    }
+    public void to_null_is_1() => Svo.Month.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Month_as_object()

@@ -1,5 +1,11 @@
 ﻿namespace Date_span_specs;
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.DateSpan.CompareTo(Nil.Object).Should().Be(1);
+}
+
 public class Is_valid
 {
     [TestCase("23Y+0M+0D", "Without starting sign")]

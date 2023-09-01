@@ -271,10 +271,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null()
-    {
-        Assert.AreEqual(1, Svo.YesNo.CompareTo(null));
-    }
+    public void to_null_is_1() => Svo.YesNo.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_YesNo_as_object()

@@ -142,7 +142,7 @@ public class Can_not_be_created
 public class Is_comparable
 {
     [Test]
-    public void to_null() => Svo.Fraction.CompareTo(null).Should().Be(1);
+    public void to_null_is_1() => Svo.Fraction.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Fraction_as_object()

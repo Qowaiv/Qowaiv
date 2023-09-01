@@ -82,6 +82,11 @@ public class End_date
     public void set_for_inactive() => Country.CSHH.EndDate.Should().Be(new Date(1992, 12, 31));
 }
 
+public class Is_comparable
+{
+    [Test]
+    public void to_null_is_1() => Svo.Country.CompareTo(Nil.Object).Should().Be(1);
+}
 public class Supports_type_conversion
 {
     [Test]

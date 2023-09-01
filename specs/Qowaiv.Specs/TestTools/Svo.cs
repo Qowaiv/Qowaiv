@@ -101,7 +101,7 @@ public static class Svo
     /// <summary>8A1A8C42-D2FF-E254-E26E-B6ABCBF19420</summary>
     public static readonly CustomGuid CustomGuid = CustomGuid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420");
     public static readonly CustomUuid CustomUuid = CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
-    
+
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(field => field.GetValue(null)!);

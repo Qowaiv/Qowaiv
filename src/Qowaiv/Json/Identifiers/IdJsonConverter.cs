@@ -1,6 +1,7 @@
 ﻿#if NET5_0_OR_GREATER
 
 using Qowaiv.Identifiers;
+using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -103,8 +104,8 @@ public sealed class IdJsonConverter : JsonConverterFactory
         return parser.Invoke(null, new object?[] { number })!;
     }
 
-    private static readonly Dictionary<Type, MethodInfo> stringParsers = new();
-    private static readonly Dictionary<Type, MethodInfo> int64Parsers = new();
+    private static readonly ConcurrentDictionary<Type, MethodInfo> stringParsers = new();
+    private static readonly ConcurrentDictionary<Type, MethodInfo> int64Parsers = new();
 }
 
 #endif

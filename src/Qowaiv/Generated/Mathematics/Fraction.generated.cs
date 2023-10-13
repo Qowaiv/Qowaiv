@@ -150,7 +150,9 @@ public partial struct Fraction
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Fraction Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionFraction);
+    public static Fraction Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Fraction>(s, QowaivMessages.FormatExceptionFraction);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">

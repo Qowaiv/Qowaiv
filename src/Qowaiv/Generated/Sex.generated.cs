@@ -23,7 +23,7 @@ public partial struct Sex
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>False if the sex is empty or unknown, otherwise false.</summary>
+    /// <summary>False if the sex is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
@@ -197,7 +197,9 @@ public partial struct Sex
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Sex Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionSex);
+    public static Sex Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Sex>(s, QowaivMessages.FormatExceptionSex);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Sex"/>.</summary>
     /// <param name="s">

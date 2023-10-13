@@ -191,7 +191,9 @@ public partial struct Timestamp
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Timestamp Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionTimestamp);
+    public static Timestamp Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Timestamp>(s, QowaivMessages.FormatExceptionTimestamp);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
     /// <param name="s">

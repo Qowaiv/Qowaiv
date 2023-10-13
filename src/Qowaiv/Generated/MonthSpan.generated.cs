@@ -191,7 +191,9 @@ public partial struct MonthSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static MonthSpan Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionMonthSpan);
+    public static MonthSpan Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<MonthSpan>(s, QowaivMessages.FormatExceptionMonthSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
     /// <param name="s">

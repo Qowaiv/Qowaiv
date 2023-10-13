@@ -150,7 +150,9 @@ public partial struct Money
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Money Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionMoney);
+    public static Money Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Money>(s, QowaivMessages.FormatExceptionMoney);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Money"/>.</summary>
     /// <param name="s">

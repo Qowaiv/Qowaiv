@@ -2,6 +2,7 @@
 global using Qowaiv.Formatting;
 global using Qowaiv.Hashing;
 global using Qowaiv.Json;
+global using Qowaiv.Text;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;

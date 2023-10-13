@@ -185,7 +185,9 @@ public partial struct Uuid
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Uuid Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionUuid);
+    public static Uuid Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Uuid>(s, QowaivMessages.FormatExceptionUuid);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
     /// <param name="s">

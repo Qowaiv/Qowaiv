@@ -23,7 +23,7 @@ public partial struct Country
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>False if the country is empty or unknown, otherwise false.</summary>
+    /// <summary>False if the country is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
@@ -197,7 +197,9 @@ public partial struct Country
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Country Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionCountry);
+    public static Country Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Country>(s, QowaivMessages.FormatExceptionCountry);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
     /// <param name="s">

@@ -23,7 +23,7 @@ public partial struct PostalCode
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>False if the postal code is empty or unknown, otherwise false.</summary>
+    /// <summary>False if the postal code is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
@@ -197,7 +197,9 @@ public partial struct PostalCode
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static PostalCode Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionPostalCode);
+    public static PostalCode Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<PostalCode>(s, QowaivMessages.FormatExceptionPostalCode);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="PostalCode"/>.</summary>
     /// <param name="s">

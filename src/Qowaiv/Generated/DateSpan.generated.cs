@@ -177,7 +177,9 @@ public partial struct DateSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static DateSpan Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDateSpan);
+    public static DateSpan Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<DateSpan>(s, QowaivMessages.FormatExceptionDateSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>
     /// <param name="s">

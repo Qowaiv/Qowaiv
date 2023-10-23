@@ -38,14 +38,18 @@ public class CSharpString
         => definition.ToCSharpString().Should().Be(csharpString);
 
     [TestCase(typeof(NestedType), "CSharpString.NestedType")]
+    [TestCase(typeof(GenericBase<int>.NestedType), "GenericBase<int>.NestedType")]
+    [TestCase(typeof(GenericBase<int>.GenericNested<long>), "GenericBase<int>.GenericNested<long>")]
+    [TestCase(typeof(Nested0<int>.Nested1<long>.Nested2<bool>), "Nested0<int>.Nested1<long>.Nested2<bool>")]
+    [TestCase(typeof(NonGenericBase.GenericNested<int>), "NonGenericBase.GenericNested<int>")]
     public void Supports_nested_types(Type nestedType, string csharpString)
-       => nestedType.ToCSharpString().Should().Be(csharpString);
+        => nestedType.ToCSharpString().Should().Be(csharpString);
 
     [Test]
     public void Supports_generic_arguments()
     {
         var generic = typeof(GenericOf).GetMethod(nameof(GenericOf.Default))!.ReturnType;
-        generic.ToCSharpString().Should().Be("CSharpString.GenericOf.TModel");
+        generic.ToCSharpString().Should().Be("TModel");
     }
 
     [TestCase(typeof(string), "string")]
@@ -66,5 +70,41 @@ public class CSharpString
     internal static class GenericOf
     {
         public static TModel? Default<TModel>() => default;
+    }
+}
+
+internal class GenericBase<T>
+{
+    public T? Model { get; set; }
+
+    [EmptyTestClass]
+    internal class NestedType { }
+
+    internal class GenericNested<T2>
+    {
+        public T2? Model { get; set; }
+    }
+}
+
+internal class Nested0<T0>
+{
+    public T0? Model { get; set; }
+
+    internal class Nested1<T1>
+    {
+        public T1? Model { get; set; }
+
+        internal class Nested2<T2>
+        {
+            public T2? Model { get; set; }
+        }
+    }
+}
+
+internal class NonGenericBase
+{
+    internal class GenericNested<T>
+    {
+        public T? Model { get; set; }
     }
 }

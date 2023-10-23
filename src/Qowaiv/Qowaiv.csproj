@@ -5,9 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.5.1</Version>
+    <Version>6.5.2</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+v6.5.2
+- ToCSharpString() should supported Nested types with generics. #332
 v6.5.1
 - Make JSON ID converters thread-safe. #330
 v6.5.0

@@ -16,7 +16,7 @@ public class Unparsable : FormatException
     public Unparsable(string? message, Exception? innerException) : base(message, innerException) { }
 
     /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
-    protected Unparsable(SerializationInfo info, StreamingContext context) : base(info, context) 
+    protected Unparsable(SerializationInfo info, StreamingContext context) : base(info, context)
     {
         Type = info.GetString(nameof(Type));
         Value = info.GetString(nameof(Value));
@@ -47,10 +47,15 @@ public class Unparsable : FormatException
     /// The exception message.
     /// </param>
     [Pure]
-    public static Unparsable ForValue<TTarget>(string? value, string message)
-        => new(message)
+    public static FormatException ForValue<TTarget>(string? value, string message)
+    {
+        var type = typeof(TTarget).ToCSharpString(withNamespace: true);
+        var inner = new Unparsable(string.Format(QowaivMessages.Unparsable, value, type))
         {
-            Type = typeof(TTarget).ToCSharpString(),
+            Type = type ,
             Value = value,
         };
+
+        return new(message, inner);
+    }
 }

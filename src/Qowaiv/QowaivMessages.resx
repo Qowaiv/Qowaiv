@@ -201,4 +201,7 @@
   <data name="OverflowException_Fraction" xml:space="preserve">
     <value>Value was either too large or too small for a Fraction.</value>
   </data>
+  <data name="Unparsable" xml:space="preserve">
+    <value>Could not parse '{0}' for {1}.</value>
+  </data>
 </root>

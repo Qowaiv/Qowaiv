@@ -48,11 +48,16 @@ public class Unparsable : FormatException
     /// </param>
     [Pure]
     public static FormatException ForValue<TTarget>(string? value, string message)
+        => ForValue(value, message, typeof(TTarget));
+
+    /// <summary>Creates an <see cref="Unparsable"/> </summary>
+    [Pure]
+    internal static FormatException ForValue(string? value, string message, Type type)
     {
-        var type = typeof(TTarget).ToCSharpString(withNamespace: true);
-        var inner = new Unparsable(string.Format(QowaivMessages.Unparsable, value, type))
+        var typed = type.ToCSharpString(withNamespace: true);
+        var inner = new Unparsable(string.Format(QowaivMessages.Unparsable, value, typed))
         {
-            Type = type ,
+            Type = typed,
             Value = value,
         };
 

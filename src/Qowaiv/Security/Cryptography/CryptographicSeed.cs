@@ -87,7 +87,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     public static CryptographicSeed Parse(string? str)
         => TryParse(str, out var seed)
         ? seed
-        : throw new FormatException(QowaivMessages.FormatExceptionCryptographicSeed);
+        : throw Unparsable.ForValue<CryptographicSeed>(str, QowaivMessages.FormatExceptionCryptographicSeed);
 
     /// <summary>Converts the string to a cryptographic seed.
     /// A return value indicates whether the conversion succeeded.

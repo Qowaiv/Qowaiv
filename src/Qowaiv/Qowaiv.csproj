@@ -9,7 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v6.5.3
-- ToCShaprString() supported nested types with generic type definitions. #333
+- ToCShaprString() supports nested types with generic type definitions. #333
 v6.5.2
 - ToCSharpString() supports nested types with generics. #332
 v6.5.1

@@ -45,6 +45,7 @@ public class CSharpString
     [TestCase(typeof(Nested0<int>.Nested1<long>.Nested2<bool>), "Nested0<int>.Nested1<long>.Nested2<bool>")]
     [TestCase(typeof(Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>), "Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>")]
     [TestCase(typeof(NonGenericBase.GenericNested<int>), "NonGenericBase.GenericNested<int>")]
+    [TestCase(typeof(GenericBase<NonGenericBase.GenericNested<int>>.NestedType), "GenericBase<NonGenericBase.GenericNested<int>>.NestedType")]
     public void Supports_nested_types(Type nestedType, string csharpString)
         => nestedType.ToCSharpString().Should().Be(csharpString);
 

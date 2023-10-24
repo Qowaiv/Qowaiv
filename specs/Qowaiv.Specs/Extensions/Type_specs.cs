@@ -28,6 +28,8 @@ public class CSharpString
 
     [TestCase(typeof(Nullable<>), "Nullable<>")]
     [TestCase(typeof(Dictionary<,>), "Dictionary<,>")]
+    [TestCase(typeof(GenericBase<>.NestedType), "GenericBase<>.NestedType")]
+    [TestCase(typeof(Nested0<>.Nested1<>.Nested2<>), "Nested0<>.Nested1<>.Nested2<>")]
     public void Supports_generic_type_definitions(Type definition, string csharpString)
         => definition.ToCSharpString().Should().Be(csharpString);
 
@@ -41,6 +43,7 @@ public class CSharpString
     [TestCase(typeof(GenericBase<int>.NestedType), "GenericBase<int>.NestedType")]
     [TestCase(typeof(GenericBase<int>.GenericNested<long>), "GenericBase<int>.GenericNested<long>")]
     [TestCase(typeof(Nested0<int>.Nested1<long>.Nested2<bool>), "Nested0<int>.Nested1<long>.Nested2<bool>")]
+    [TestCase(typeof(Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>), "Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>")]
     [TestCase(typeof(NonGenericBase.GenericNested<int>), "NonGenericBase.GenericNested<int>")]
     public void Supports_nested_types(Type nestedType, string csharpString)
         => nestedType.ToCSharpString().Should().Be(csharpString);
@@ -97,6 +100,12 @@ internal class Nested0<T0>
         internal class Nested2<T2>
         {
             public T2? Model { get; set; }
+
+            internal class Nested3<T3, T4>
+            {
+                public T3? First { get; set; }
+                public T4? Second { get; set; }
+            }
         }
     }
 }

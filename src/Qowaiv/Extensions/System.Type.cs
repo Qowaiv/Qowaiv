@@ -115,9 +115,13 @@ public static class QowaivTypeExtensions
     [Pure]
     private static TypeInfo? Info([NotNullIfNotNull(nameof(type))] this Type? type) => type is { } ? TypeInfo.New(type) : null;
 
+    [Pure]
+    private static bool IsGenericTypeParameter(this Type type)
+        => type.IsGenericParameter && type.DeclaringMethod is null;
+
     private sealed class TypeInfo
     {
-        private TypeInfo(Type type, IEnumerable<Type> genericArguments, bool isGenericTypeDefinition)
+        private TypeInfo(Type type, IEnumerable<Type> genericArguments)
         {
             Type = type;
             GenericTypeArguments = genericArguments
@@ -126,9 +130,8 @@ public static class QowaivTypeExtensions
                 .OfType<TypeInfo>()
                 .ToArray();
 
-            IsGenericTypeDefinition = isGenericTypeDefinition;
             DeclaringType = IsNestedType && type.DeclaringType is { } declaringType
-                ? new(declaringType, genericArguments, false)
+                ? new(declaringType, genericArguments)
                 : null;
         }
 
@@ -138,7 +141,9 @@ public static class QowaivTypeExtensions
 
         public bool IsArray => Type.IsArray;
 
-        public bool IsGenericTypeDefinition { get; }
+        public bool IsGenericTypeDefinition
+            => GetGenericArguments() is { Count: > 0 } args
+            && args.All(a => a.Type.IsGenericTypeParameter());
 
         /// <summary>A Nested type but not a generic parameter.</summary>
         public bool IsNestedType => Type.IsNested && !Type.IsGenericParameter;
@@ -178,6 +183,6 @@ public static class QowaivTypeExtensions
 
         [Pure]
         public static TypeInfo New(Type type)
-            => new(type, type.GetGenericArguments(), type.IsGenericTypeDefinition);
+            => new(type, type.GetGenericArguments());
     }
 }

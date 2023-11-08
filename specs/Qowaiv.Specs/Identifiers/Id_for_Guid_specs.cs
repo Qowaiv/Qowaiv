@@ -118,9 +118,13 @@ public class Supports_JSON_serialization
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()
     {
-        var dictionary = new Dictionary<CustomGuid, int>() { [Svo.CustomGuid] = 42 };
+        var dictionary = new Dictionary<CustomGuid, int>() 
+        {
+            [default] = 17,
+            [Svo.CustomGuid] = 42,
+        };
         System.Text.Json.JsonSerializer.Serialize(dictionary)
-            .Should().Be(@"{""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}");
+            .Should().Be(@"{"""":17,""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}");
     }
 #endif
 }

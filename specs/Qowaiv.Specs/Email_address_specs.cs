@@ -362,9 +362,13 @@ public class Supports_JSON_serialization
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()
     {
-        var dictionary = new Dictionary<EmailAddress, int>() { [Svo.EmailAddress] = 42 };
+        var dictionary = new Dictionary<EmailAddress, int>()
+        {
+            [default] = 17,
+            [Svo.EmailAddress] = 42,
+        };
         System.Text.Json.JsonSerializer.Serialize(dictionary)
-            .Should().Be(@"{""info@qowaiv.org"":42}");
+            .Should().Be(@"{"""":17,""info@qowaiv.org"":42}");
     }
 #endif
 

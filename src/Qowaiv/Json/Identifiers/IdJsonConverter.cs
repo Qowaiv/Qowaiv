@@ -76,6 +76,18 @@ public sealed class IdJsonConverter : JsonConverterFactory
                 writer.WriteStringValue(obj.ToString());
             }
         }
+
+#if NET6_0_OR_GREATER
+
+        /// <inheritdoc />
+        public override Id<TBehavior> ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            => Id<TBehavior>.FromJson(reader.GetString());
+
+        /// <inheritdoc />
+        public override void WriteAsPropertyName(Utf8JsonWriter writer, Id<TBehavior> value, JsonSerializerOptions options)
+            => writer.WritePropertyName(value.ToJson()?.ToString() ?? string.Empty);
+
+#endif
     }
 
     [Pure]

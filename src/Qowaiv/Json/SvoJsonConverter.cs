@@ -82,6 +82,17 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
         }
     }
 
+#if NET6_0_OR_GREATER
+
+    /// <inheritdoc />
+    public override TSvo ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        => FromJson(reader.GetString());
+
+    /// <inheritdoc />
+    public override void WriteAsPropertyName(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
+        => writer.WritePropertyName(ToJson(value)?.ToString() ?? string.Empty);
+#endif
+
     /// <summary>Represent the SVO as a JSON node.</summary>
     [Pure]
     protected abstract object? ToJson(TSvo svo);

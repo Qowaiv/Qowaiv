@@ -5,9 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.5.3</Version>
+    <Version>6.5.4</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+v6.5.4
+- SVO's can be used as keys when applying JSON serialization.
 v6.5.3
 - ToCShaprString() supports nested types with generic type definitions. #333
 v6.5.2

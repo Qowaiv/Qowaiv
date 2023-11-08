@@ -348,6 +348,28 @@ public class Supports_JSON_serialization
     [TestCase("info@qowaiv.org", "info@qowaiv.org")]
     public void System_Text_JSON_serialization(object json, EmailAddress svo)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [Test]
+    public void System_Text_JSON_deserialization_of_dictionary_keys()
+    {
+        System.Text.Json.JsonSerializer.Deserialize<Dictionary<EmailAddress, int>>(@"{""info@qowaiv.org"":42}")
+            .Should().BeEquivalentTo(new Dictionary<EmailAddress, int>()
+            {
+                [Svo.EmailAddress] = 42,
+            });
+    }
+
+    [Test]
+    public void System_Text_JSON_serialization_of_dictionary_keys()
+    {
+        var dictionary = new Dictionary<EmailAddress, int>()
+        {
+            [default] = 17,
+            [Svo.EmailAddress] = 42,
+        };
+        System.Text.Json.JsonSerializer.Serialize(dictionary)
+            .Should().Be(@"{"""":17,""info@qowaiv.org"":42}");
+    }
 #endif
 
     [TestCase("?", "?")]

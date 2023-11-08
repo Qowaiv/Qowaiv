@@ -8,6 +8,8 @@
     <Version>6.5.4</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+ToBeReleased
+- Detailed information on failing parsing.
 v6.5.4
 - SVO's can be used as keys when applying JSON serialization. #334
 v6.5.3

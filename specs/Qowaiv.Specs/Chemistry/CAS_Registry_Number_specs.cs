@@ -158,15 +158,20 @@ public class Can_be_parsed
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Func<CasRegistryNumber> parse = () => CasRegistryNumber.Parse("invalid input");
-            parse.Should().Throw<FormatException>()
-                .WithMessage("Not a valid CAS Registry Number");
+            "not a CAS registry".Invoking(CasRegistryNumber.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid CAS Registry Number")
+                .And.InnerException.Should().BeEquivalentTo(new
+                {
+                    Type = "Qowaiv.Chemistry.CasRegistryNumber",
+                    Value = "not a CAS registry"
+                });
         }
     }
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-        => (CasRegistryNumber.TryParse("invalid input", out _)).Should().BeFalse();
+        => CasRegistryNumber.TryParse("invalid input", out _).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()

@@ -191,7 +191,9 @@ public partial struct Elo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Elo Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionElo);
+    public static Elo Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Elo>(s, QowaivMessages.FormatExceptionElo);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
     /// <param name="s">

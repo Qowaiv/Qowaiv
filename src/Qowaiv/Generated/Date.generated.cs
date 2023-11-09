@@ -182,7 +182,9 @@ public partial struct Date
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Date Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionDate);
+    public static Date Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Date>(s, QowaivMessages.FormatExceptionDate);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.</summary>
     /// <param name="s">

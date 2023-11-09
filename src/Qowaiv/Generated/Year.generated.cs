@@ -23,7 +23,7 @@ public partial struct Year
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>False if the year is empty or unknown, otherwise false.</summary>
+    /// <summary>False if the year is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
@@ -197,7 +197,9 @@ public partial struct Year
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Year Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionYear);
+    public static Year Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<Year>(s, QowaivMessages.FormatExceptionYear);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Year"/>.</summary>
     /// <param name="s">

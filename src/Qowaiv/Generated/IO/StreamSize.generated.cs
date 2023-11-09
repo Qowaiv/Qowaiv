@@ -161,7 +161,9 @@ public partial struct StreamSize
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static StreamSize Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionStreamSize);
+    public static StreamSize Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<StreamSize>(s, QowaivMessages.FormatExceptionStreamSize);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
     /// <param name="s">

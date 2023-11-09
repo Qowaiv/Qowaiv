@@ -635,5 +635,14 @@ namespace Qowaiv {
                 return ResourceManager.GetString("OverflowException_Fraction", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not parse &apos;{0}&apos; for {1}..
+        /// </summary>
+        public static string Unparsable {
+            get {
+                return ResourceManager.GetString("Unparsable", resourceCulture);
+            }
+        }
     }
 }

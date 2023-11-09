@@ -23,7 +23,7 @@ public partial struct EnergyLabel
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>False if the EU energy label is empty or unknown, otherwise false.</summary>
+    /// <summary>False if the EU energy label is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
@@ -197,7 +197,9 @@ public partial struct EnergyLabel
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EnergyLabel Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionEnergyLabel);
+    public static EnergyLabel Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<EnergyLabel>(s, QowaivMessages.FormatExceptionEnergyLabel);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.</summary>
     /// <param name="s">

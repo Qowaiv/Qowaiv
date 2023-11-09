@@ -245,11 +245,9 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// </exception>
     [Pure]
     public static Id<TIdentifier> Parse(string? s)
-    {
-        return TryParse(s, out Id<TIdentifier> val)
-            ? val
-            : throw new FormatException();
-    }
+        => TryParse(s, out Id<TIdentifier> val)
+        ? val
+        : throw Unparsable.ForValue<Id<TIdentifier>>(s, "Not a valid identifier.");
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Id{TIdentifier}"/>.</summary>
     /// <param name="s">

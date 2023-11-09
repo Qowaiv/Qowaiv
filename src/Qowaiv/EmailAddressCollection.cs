@@ -312,13 +312,9 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </exception>
     [Pure]
     public static EmailAddressCollection Parse(string? s, IFormatProvider? formatProvider)
-    {
-        if (TryParse(s, formatProvider, out EmailAddressCollection val))
-        {
-            return val;
-        }
-        throw new FormatException(QowaivMessages.FormatExceptionEmailAddressCollection);
-    }
+        => TryParse(s, formatProvider, out EmailAddressCollection val)
+        ? val
+        : throw Unparsable.ForValue<EmailAddressCollection>(s, QowaivMessages.FormatExceptionEmailAddressCollection);
 
     /// <summary>Converts the string to an email address collection.
     /// A return value indicates whether the conversion succeeded.

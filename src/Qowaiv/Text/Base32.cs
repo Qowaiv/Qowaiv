@@ -99,7 +99,7 @@ public static class Base32
         {
             return bytes;
         }
-        throw new FormatException(QowaivMessages.FormatExceptionBase32);
+        throw Unparsable.ForValue(s, QowaivMessages.FormatExceptionBase32, typeof(Base32));
     }
 
     /// <summary>Tries to get the corresponding bytes of the Base32 string.</summary>

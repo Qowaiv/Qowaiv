@@ -23,7 +23,7 @@ public partial struct EmailAddress
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>False if the email address is empty or unknown, otherwise false.</summary>
+    /// <summary>False if the email address is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
@@ -197,7 +197,9 @@ public partial struct EmailAddress
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EmailAddress Parse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider) ?? throw new FormatException(QowaivMessages.FormatExceptionEmailAddress);
+    public static EmailAddress Parse(string? s, IFormatProvider? formatProvider) 
+        => TryParse(s, formatProvider) 
+        ?? throw Unparsable.ForValue<EmailAddress>(s, QowaivMessages.FormatExceptionEmailAddress);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>
     /// <param name="s">
